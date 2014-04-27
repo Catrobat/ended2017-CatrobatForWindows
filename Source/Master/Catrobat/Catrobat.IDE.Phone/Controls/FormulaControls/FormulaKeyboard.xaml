@@ -6,7 +6,6 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
     xmlns:formula="clr-namespace:Catrobat.IDE.Phone.Views.Editor.Formula"
-    xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
     xmlns:editor="clr-namespace:Catrobat.IDE.Core.Formulas.Editor;assembly=Catrobat.IDE.Core"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -387,14 +386,14 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                   </Grid.ColumnDefinitions>
-                  <Button Grid.Row="0" Grid.Column="0" Content="abs" DataContext="{StaticResource FormulaEditorKeyAbs}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                  <Button Grid.Row="0" Grid.Column="1" Content="round" DataContext="{StaticResource FormulaEditorKeyRound}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                  <Button  Grid.Row="0" Grid.Column="2" Content="mod" DataContext="{StaticResource FormulaEditorKeyMod}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                  <Button Grid.Row="1" Grid.Column="0" Content="min" DataContext="{StaticResource FormulaEditorKeyMin}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                  <Button Grid.Row="1" Grid.Column="1" Content="max" DataContext="{StaticResource FormulaEditorKeyMax}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                  <Button Grid.Row="1" Grid.Column="2" Content="sqrt" DataContext="{StaticResource FormulaEditorKeySqrt}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                  <Button Grid.Row="2" Grid.Column="0" Content="pi" DataContext="{StaticResource FormulaEditorKeyPi}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                  <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="random" DataContext="{StaticResource FormulaEditorKeyRandom}" 
+                  <Button Grid.Row="0" Grid.Column="0" Content="{Binding Resources.Formula_Function_Abs, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyAbs}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                  <Button Grid.Row="0" Grid.Column="1" Content="{Binding Resources.Formula_Function_Round, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyRound}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                  <Button  Grid.Row="0" Grid.Column="2" Content="{Binding Resources.Formula_Operator_Mod, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyMod}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                  <Button Grid.Row="1" Grid.Column="0" Content="{Binding Resources.Formula_Function_Min, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyMin}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                  <Button Grid.Row="1" Grid.Column="1" Content="{Binding Resources.Formula_Function_Max, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyMax}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                  <Button Grid.Row="1" Grid.Column="2" Content="{Binding Resources.Formula_Function_Sqrt, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeySqrt}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                  <Button Grid.Row="2" Grid.Column="0" Content="π" DataContext="{StaticResource FormulaEditorKeyPi}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                  <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="{Binding Resources.Formula_Function_Random, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyRandom}" 
               Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
                 </Grid>
               </Grid>
@@ -415,16 +414,16 @@
                   <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Row="0" Grid.Column="0" Content="=" DataContext="{StaticResource FormulaEditorKeyEquals}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                <Button Grid.Row="0" Grid.Column="1" Content="&#8800;" DataContext="{StaticResource FormulaEditorKeyNotEquals}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                <Button Grid.Row="0" Grid.Column="2" Content="TRUE" DataContext="{StaticResource FormulaEditorKeyTrue}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                <Button Grid.Row="0" Grid.Column="3" Content="FALSE" DataContext="{StaticResource FormulaEditorKeyFalse}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="≠" DataContext="{StaticResource FormulaEditorKeyNotEquals}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="0" Grid.Column="2" Content="{Binding Resources.Formula_Constant_True, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyTrue}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="0" Grid.Column="3" Content="{Binding Resources.Formula_Constant_False, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyFalse}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
                 <Button Grid.Row="1" Grid.Column="0" Content="&lt;" DataContext="{StaticResource FormulaEditorKeyLess}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                <Button Grid.Row="1" Grid.Column="1" Content="&#8804;" DataContext="{StaticResource FormulaEditorKeyLessEqual}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                <Button Grid.Row="1" Grid.Column="2" Content="&#8805;" DataContext="{StaticResource FormulaEditorKeyGreaterEqual}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="1" Grid.Column="1" Content="≤" DataContext="{StaticResource FormulaEditorKeyLessEqual}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="1" Grid.Column="2" Content="≥" DataContext="{StaticResource FormulaEditorKeyGreaterEqual}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
                 <Button Grid.Row="1" Grid.Column="3" Content="&gt;" DataContext="{StaticResource FormulaEditorKeyGreater}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                <Button Grid.Row="2" Grid.Column="0" Content="AND" DataContext="{StaticResource FormulaEditorKeyAnd}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                <Button Grid.Row="2" Grid.Column="1" Content="OR" DataContext="{StaticResource FormulaEditorKeyOr}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-                <Button Grid.Row="2" Grid.Column="2" Content="NOT" DataContext="{StaticResource FormulaEditorKeyNot}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="2" Grid.Column="0" Content="{Binding Resources.Formula_Operator_And, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyAnd}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="2" Grid.Column="1" Content="{Binding Resources.Formula_Operator_Or, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyOr}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="2" Grid.Column="2" Content="{Binding Resources.Formula_Operator_Not, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyNot}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
               </Grid>
             </Grid>
           </phone:PivotItem>
@@ -470,13 +469,13 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                   </Grid.ColumnDefinitions>
-                  <Button Grid.Row="0" Grid.Column="0" Content="Brightness" DataContext="{StaticResource FormulaEditorKeyBrightness}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
-                  <Button Grid.Row="0" Grid.Column="1" Content="Layer" DataContext="{StaticResource FormulaEditorKeyLayer}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
-                  <Button Grid.Row="1" Grid.Column="0" Content="PositionX" DataContext="{StaticResource FormulaEditorKeyPositionX}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
-                  <Button Grid.Row="1" Grid.Column="1" Content="PositionY" DataContext="{StaticResource FormulaEditorKeyPositionY}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
-                  <Button Grid.Row="2" Grid.Column="0" Content="Rotation" DataContext="{StaticResource FormulaEditorKeyRotation}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
-                  <Button Grid.Row="2" Grid.Column="1" Content="Size" DataContext="{StaticResource FormulaEditorKeySize}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
-                  <Button Grid.Row="3" Grid.Column="0" Content="Transparency" DataContext="{StaticResource FormulaEditorKeyTransparency}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="0" Grid.Column="0" Content="{Binding Resources.Formula_Property_Brightness, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyBrightness}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="0" Grid.Column="1" Content="{Binding Resources.Formula_Property_Layer, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyLayer}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="1" Grid.Column="0" Content="{Binding Resources.Formula_Property_PositionX, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyPositionX}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="1" Grid.Column="1" Content="{Binding Resources.Formula_Property_PositionY, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyPositionY}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="2" Grid.Column="0" Content="{Binding Resources.Formula_Property_Rotation, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyRotation}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="2" Grid.Column="1" Content="{Binding Resources.Formula_Property_Size, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeySize}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="3" Grid.Column="0" Content="{Binding Resources.Formula_Property_Transparency, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyTransparency}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
                 </Grid>
               </Grid>
             </Grid>
@@ -495,13 +494,13 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                   </Grid.ColumnDefinitions>
-                  <Button Grid.Row="0" Grid.Column="0" Content="AccelerationX" DataContext="{StaticResource FormulaEditorKeyAccelerationX}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
-                  <Button Grid.Row="0" Grid.Column="1" Content="AccelerationY" DataContext="{StaticResource FormulaEditorKeyAccelerationY}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
-                  <Button Grid.Row="1" Grid.Column="0" Content="AccelerationZ" DataContext="{StaticResource FormulaEditorKeyAccelerationZ}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
-                  <Button Grid.Row="1" Grid.Column="1" Content="CompassDirection" DataContext="{StaticResource FormulaEditorKeyCompass}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
-                  <Button Grid.Row="2" Grid.Column="0" Content="InclinationX" DataContext="{StaticResource FormulaEditorKeyInclinationX}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
-                  <Button Grid.Row="2" Grid.Column="1" Content="InclinationY" DataContext="{StaticResource FormulaEditorKeyInclinationY}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
-                  <Button Grid.Row="3" Grid.Column="0" Content="Loudness" DataContext="{StaticResource FormulaEditorKeyLoudness}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
+                  <Button Grid.Row="0" Grid.Column="0" Content="{Binding Resources.Formula_Sensor_AccelerationX, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyAccelerationX}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
+                  <Button Grid.Row="0" Grid.Column="1" Content="{Binding Resources.Formula_Sensor_AccelerationY, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyAccelerationY}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
+                  <Button Grid.Row="1" Grid.Column="0" Content="{Binding Resources.Formula_Sensor_AccelerationZ, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyAccelerationZ}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
+                  <Button Grid.Row="1" Grid.Column="1" Content="{Binding Resources.Formula_Sensor_Compass, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyCompass}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
+                  <Button Grid.Row="2" Grid.Column="0" Content="{Binding Resources.Formula_Sensor_InclinationX, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyInclinationX}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
+                  <Button Grid.Row="2" Grid.Column="1" Content="{Binding Resources.Formula_Sensor_InclinationY, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyInclinationY}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
+                  <Button Grid.Row="3" Grid.Column="0" Content="{Binding Resources.Formula_Sensor_Loudness, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyLoudness}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
                 </Grid>
               </Grid>
             </Grid>

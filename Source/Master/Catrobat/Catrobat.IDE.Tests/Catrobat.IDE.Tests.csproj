@@ -141,7 +141,7 @@
     <Compile Include="SampleData\SampleLoader.cs" />
     <Compile Include="Services\NavigationServiceTest.cs" />
     <Compile Include="Services\PictureServiceTest.cs" />
-    <Compile Include="Tests\Data\LocalizationTests.cs" />
+    <Compile Include="Tests\Misc\LocalizationTests.cs" />
     <Compile Include="Tests\Data\CatrobatContextTests.cs" />
     <Compile Include="Tests\Data\CopyTests.cs" />
     <Compile Include="Tests\Data\DataDeletingTests.cs" />

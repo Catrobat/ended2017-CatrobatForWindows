@@ -2,6 +2,7 @@
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Catrobat.IDE.Core.Formulas
         private readonly IDictionary<string, UserVariable> _localVariables;
         private readonly IDictionary<string, UserVariable> _globalVariables;
 
+        [Obsolete("Cache AppResources_Formula, digits, negative sign and decimal separator and refresh when culture changes. ")]
         public FormulaTokenizer(IEnumerable<UserVariable> localVariables, IEnumerable<UserVariable> globalVariable)
         {
             _localVariables = localVariables.ToDictionary(variable => variable.Name);
@@ -67,16 +69,15 @@ namespace Catrobat.IDE.Core.Formulas
             }
         }
 
-        [Obsolete("Translate constants. ")]
         private bool TokenizeConstant(string input, ref int startIndex, ref List<IFormulaToken> tokens)
         {
             var decimalSeparator = ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator;
             return
                 TokenizeDigit(input, ref startIndex, ref tokens) ||
                 Tokenize(input, ref startIndex, decimalSeparator, FormulaTokenFactory.CreateDecimalSeparatorToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "pi", FormulaTokenFactory.CreatePiToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "true", FormulaTokenFactory.CreateTrueToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "false", FormulaTokenFactory.CreateFalseToken, ref tokens);
+                Tokenize(input, ref startIndex, "π", FormulaTokenFactory.CreatePiToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Constant_True, FormulaTokenFactory.CreateTrueToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Constant_False, FormulaTokenFactory.CreateFalseToken, ref tokens);
         }
 
         private bool TokenizeDigit(string input, ref int startIndex, ref List<IFormulaToken> tokens)
@@ -94,7 +95,6 @@ namespace Catrobat.IDE.Core.Formulas
             return false;
         }
 
-        [Obsolete("Translate operators. ")]
         private bool TokenizeOperator(string input, ref int startIndex, ref List<IFormulaToken> tokens)
         {
             var negativeSign = ServiceLocator.CultureService.GetCulture().NumberFormat.NegativeSign;
@@ -117,13 +117,12 @@ namespace Catrobat.IDE.Core.Formulas
                 Tokenize(input, ref startIndex, "≥", FormulaTokenFactory.CreateGreaterEqualToken, ref tokens) ||
                 Tokenize(input, ref startIndex, ">=", FormulaTokenFactory.CreateGreaterEqualToken, ref tokens) ||
                 Tokenize(input, ref startIndex, ">", FormulaTokenFactory.CreateGreaterToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "and", FormulaTokenFactory.CreateAndToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "or", FormulaTokenFactory.CreateOrToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "not", FormulaTokenFactory.CreateNotToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "mod", FormulaTokenFactory.CreateModToken, ref tokens);
+                Tokenize(input, ref startIndex, AppResources.Formula_Operator_And, FormulaTokenFactory.CreateAndToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Operator_Or, FormulaTokenFactory.CreateOrToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Operator_Not, FormulaTokenFactory.CreateNotToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Operator_Mod, FormulaTokenFactory.CreateModToken, ref tokens);
         }
 
-        [Obsolete("Translate functions. ")]
         private bool TokenizeFunction(string input, ref int startIndex, ref List<IFormulaToken> tokens)
         {
             return
@@ -131,18 +130,18 @@ namespace Catrobat.IDE.Core.Formulas
                 Tokenize(input, ref startIndex, "exp", FormulaTokenFactory.CreateExpToken, ref tokens) ||
                 Tokenize(input, ref startIndex, "log", FormulaTokenFactory.CreateLogToken, ref tokens) ||
                 Tokenize(input, ref startIndex, "ln", FormulaTokenFactory.CreateLnToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "min", FormulaTokenFactory.CreateMinToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "max", FormulaTokenFactory.CreateMaxToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Function_Min, FormulaTokenFactory.CreateMinToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Function_Max, FormulaTokenFactory.CreateMaxToken, ref tokens) ||
                 Tokenize(input, ref startIndex, "sin", FormulaTokenFactory.CreateSinToken, ref tokens) ||
                 Tokenize(input, ref startIndex, "cos", FormulaTokenFactory.CreateCosToken, ref tokens) ||
                 Tokenize(input, ref startIndex, "tan", FormulaTokenFactory.CreateTanToken, ref tokens) ||
                 Tokenize(input, ref startIndex, "arcsin", FormulaTokenFactory.CreateArcsinToken, ref tokens) ||
                 Tokenize(input, ref startIndex, "arccos", FormulaTokenFactory.CreateArccosToken, ref tokens) ||
                 Tokenize(input, ref startIndex, "arctan", FormulaTokenFactory.CreateArctanToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "sqrt", FormulaTokenFactory.CreateSqrtToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "abs", FormulaTokenFactory.CreateAbsToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "round", FormulaTokenFactory.CreateRoundToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "random", FormulaTokenFactory.CreateRandomToken, ref tokens);
+                Tokenize(input, ref startIndex, AppResources.Formula_Function_Sqrt, FormulaTokenFactory.CreateSqrtToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Function_Abs, FormulaTokenFactory.CreateAbsToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Function_Round, FormulaTokenFactory.CreateRoundToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Function_Random, FormulaTokenFactory.CreateRandomToken, ref tokens);
         }
 
         private bool TokenizeParameterSeparator(string input, ref int startIndex, ref List<IFormulaToken> tokens)
@@ -154,31 +153,29 @@ namespace Catrobat.IDE.Core.Formulas
             return Tokenize(input, ref startIndex, tokenValue, FormulaTokenFactory.CreateParameterSeparatorToken, ref tokens);
         }
 
-        [Obsolete("Translate sensors. ")]
         private bool TokenizeSensor(string input, ref int startIndex, ref List<IFormulaToken> tokens)
         {
             return
-                Tokenize(input, ref startIndex, "accelerationx", FormulaTokenFactory.CreateAccelerationXToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "accelerationy", FormulaTokenFactory.CreateAccelerationYToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "accelerationz", FormulaTokenFactory.CreateAccelerationZToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "compass", FormulaTokenFactory.CreateCompassToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "inclinationx", FormulaTokenFactory.CreateInclinationXToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "inclinationy", FormulaTokenFactory.CreateInclinationYToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "loudness", FormulaTokenFactory.CreateLoudnessToken, ref tokens);
+                Tokenize(input, ref startIndex, AppResources.Formula_Sensor_AccelerationX, FormulaTokenFactory.CreateAccelerationXToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Sensor_AccelerationY, FormulaTokenFactory.CreateAccelerationYToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Sensor_AccelerationZ, FormulaTokenFactory.CreateAccelerationZToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Sensor_Compass, FormulaTokenFactory.CreateCompassToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Sensor_InclinationX, FormulaTokenFactory.CreateInclinationXToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Sensor_InclinationY, FormulaTokenFactory.CreateInclinationYToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Sensor_Loudness, FormulaTokenFactory.CreateLoudnessToken, ref tokens);
         }
 
 
-        [Obsolete("Translate properties. ")]
         private bool TokenizeProperty(string input, ref int startIndex, ref List<IFormulaToken> tokens)
         {
             return
-                Tokenize(input, ref startIndex, "brightness", FormulaTokenFactory.CreateBrightnessToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "layer", FormulaTokenFactory.CreateLayerToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "positionx", FormulaTokenFactory.CreatePositionXToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "positiony", FormulaTokenFactory.CreatePositionYToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "rotation", FormulaTokenFactory.CreateRotationToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "size", FormulaTokenFactory.CreateSizeToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "transparency", FormulaTokenFactory.CreateTransparencyToken, ref tokens);
+                Tokenize(input, ref startIndex, AppResources.Formula_Property_Brightness, FormulaTokenFactory.CreateBrightnessToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Property_Layer, FormulaTokenFactory.CreateLayerToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Property_PositionX, FormulaTokenFactory.CreatePositionXToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Property_PositionY, FormulaTokenFactory.CreatePositionYToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Property_Rotation, FormulaTokenFactory.CreateRotationToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Property_Size, FormulaTokenFactory.CreateSizeToken, ref tokens) ||
+                Tokenize(input, ref startIndex, AppResources.Formula_Property_Transparency, FormulaTokenFactory.CreateTransparencyToken, ref tokens);
         }
 
         private bool TokenizeBracket(string input, ref int startIndex, ref List<IFormulaToken> tokens)

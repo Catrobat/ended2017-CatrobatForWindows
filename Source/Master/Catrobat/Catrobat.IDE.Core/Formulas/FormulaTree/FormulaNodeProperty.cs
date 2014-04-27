@@ -2,6 +2,7 @@
 using System;
 using System.Text;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Resources.Localization;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
@@ -45,8 +46,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("Brightness");
+            sb.Append(AppResources.Formula_Property_Brightness);
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -70,8 +70,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("Layer");
+            sb.Append(AppResources.Formula_Property_Layer);
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -95,8 +94,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("Transparency");
+            sb.Append(AppResources.Formula_Property_Transparency);
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -120,8 +118,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("PositionX");
+            sb.Append(AppResources.Formula_Property_PositionX);
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -145,8 +142,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("PositionY");
+            sb.Append(AppResources.Formula_Property_PositionY);
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -170,8 +166,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("Rotation");
+            sb.Append(AppResources.Formula_Property_Rotation);
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -195,8 +190,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("Size");
+            sb.Append(AppResources.Formula_Property_Size);
         }
 
         public override XmlFormulaTree ToXmlFormula()

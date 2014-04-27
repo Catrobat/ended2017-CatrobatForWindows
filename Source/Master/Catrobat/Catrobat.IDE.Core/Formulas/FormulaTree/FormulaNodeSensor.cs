@@ -2,6 +2,7 @@
 using System.Text;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 
 // ReSharper disable once CheckNamespace
@@ -45,8 +46,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("AccelerationX");
+            sb.Append(AppResources.Formula_Sensor_AccelerationX);
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -69,8 +69,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("AccelerationY");
+            sb.Append(AppResources.Formula_Sensor_AccelerationY);
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -93,8 +92,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("AccelerationZ");
+            sb.Append(AppResources.Formula_Sensor_AccelerationZ);
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -117,8 +115,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("Compass");
+            sb.Append(AppResources.Formula_Sensor_Compass);
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -141,8 +138,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("InclinationX");
+            sb.Append(AppResources.Formula_Sensor_InclinationX);
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -165,8 +161,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("InclinationY");
+            sb.Append(AppResources.Formula_Sensor_InclinationY);
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -189,8 +184,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("Loudness");
+            sb.Append(AppResources.Formula_Sensor_Loudness);
         }
 
         public override XmlFormulaTree ToXmlFormula()

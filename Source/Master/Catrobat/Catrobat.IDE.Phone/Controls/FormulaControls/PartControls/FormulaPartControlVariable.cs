@@ -10,22 +10,24 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
             var grid = new Grid { DataContext = this };
             grid.Children.Add(new TextBlock
             {
-                Text = GetText() ?? "?",
+                Text = Text,
                 FontSize = fontSize
             });
             return grid;
         }
 
-        private string GetText()
+        private string Text
         {
-            var node = Token as FormulaNodeVariable;
-            return node == null ? null : node.Variable.Name;
+            get
+            {
+                var node = Token as FormulaNodeVariable;
+                return node == null || node.Variable.Name == null ? "" : node.Variable.Name;
+            }
         }
 
         public override int GetCharacterWidth()
         {
-            var text = GetText();
-            return text == null ? 1 : text.Length;
+            return Text.Length;
         }
 
         public override FormulaPartControl Copy()

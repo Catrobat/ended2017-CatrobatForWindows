@@ -40,8 +40,6 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
             if (oldValue != null) oldValue.CollectionChanged -= Tokens_CollectionChanged;
             if (newValue != null) newValue.CollectionChanged += Tokens_CollectionChanged;
-
-            UpdateIsTokensEmpty();
         }
         private void Tokens_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -70,19 +68,6 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
                     UpdateControls();
                     break;
             }
-            UpdateIsTokensEmpty();
-        }
-
-        private static readonly DependencyProperty IsTokensEmptyProperty = DependencyProperty.Register("IsTokensEmpty", typeof(bool), typeof(FormulaViewer), new PropertyMetadata(true));
-        private bool IsTokensEmpty
-        {
-            get { return (bool)GetValue(IsTokensEmptyProperty); }
-            set { SetValue(IsTokensEmptyProperty, value); }
-        }
-
-        private void UpdateIsTokensEmpty()
-        {
-            IsTokensEmpty = Tokens == null || Tokens.Count == 0;
         }
 
         public static readonly DependencyProperty CaretIndexProperty = DependencyProperty.Register(
@@ -260,7 +245,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         #region Events
 
-        public DoubleTap DoubleTap;
+        public new DoubleTap DoubleTap;
         private void RaiseDoubleTap(int index)
         {
             if (DoubleTap != null) DoubleTap.Invoke(index);

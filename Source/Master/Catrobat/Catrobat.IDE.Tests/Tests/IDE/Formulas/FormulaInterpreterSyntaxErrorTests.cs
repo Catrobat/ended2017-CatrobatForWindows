@@ -41,14 +41,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             var message1 = AppResources.FormulaInterpreter_DoubleValue;
             var message2 = AppResources.FormulaInterpreter_Brackets_ArgumentDoubleValue;
 
-            TestParsingError(message1, 1, 0, "1 InclinationX,");
+            TestParsingError(message1, 1, 0, "1 Inclination.X,");
             TestParsingError(message1, 3, 0, "1*2 Transparency)");
             TestParsingError(message1, 4, 0, "sin(1)cos");
             TestParsingError(message1, 1, 0, "1(2-)");
             TestParsingError(message1, 1, 0, "1(2-");
-            TestParsingError(message1, 4, 0, "1*(2 pi)*");
-            TestParsingError(message2, 5, 0, "1*sin(2 pi.)*");
-            TestParsingError(message2, 3, 0, "sin(2 pi,)*");
+            TestParsingError(message1, 4, 0, "1*(2 π)*");
+            TestParsingError(message2, 5, 0, "1*sin(2 π.)*");
+            TestParsingError(message2, 3, 0, "sin(2 π,)*");
         }
 
         #region Number
@@ -71,7 +71,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
             TestParsingError(message, 1, 1, "..,");
             TestParsingError(message, 2, 1, "(..,)");
-            TestParsingError(message, 2, 1, "1..pi");
+            TestParsingError(message, 2, 1, "1..π");
             TestParsingError(message, 2, 1, ".1.2 sin");
             TestParsingError(message, 3, 1, "1.2.3=");
             TestParsingError(message, 4, 1, "1/-..)");
@@ -104,7 +104,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestParsingError(message1, 1, 0, "(");
             TestParsingError(message2, 0, 1, ").");
             TestParsingError(message1, 5, 0, "1/-((");
-            TestParsingError(message1, 7, 0, "(1)*sin(pi");
+            TestParsingError(message1, 7, 0, "(1)*sin(π");
             TestParsingError(message2, 3, 1, "1/-))");
         }
 

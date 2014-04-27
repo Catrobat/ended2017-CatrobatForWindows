@@ -25,8 +25,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         {
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
 
-            // use culture different to CultureInfo.CurrentCulture (in France the decimal separator is the comma)
-            ServiceLocator.CultureService.SetCulture(new CultureInfo("fr-FR"));
+            // use culture different to CultureInfo.CurrentCulture (1.2 vs. 1,2)
+            ServiceLocator.CultureService.SetCulture(new CultureInfo("de"));
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]

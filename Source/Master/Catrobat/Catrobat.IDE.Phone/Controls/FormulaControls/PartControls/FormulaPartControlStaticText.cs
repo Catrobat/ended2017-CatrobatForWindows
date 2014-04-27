@@ -1,11 +1,10 @@
 ﻿using System.Windows.Controls;
-using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 {
-    public class FormulaPartControlStaticLocalizedText : FormulaPartControl
+    public class FormulaPartControlStaticText : FormulaPartControl
     {
-        public string LocalizationKey { get; set; }
+        public string Text { get; set; }
 
         protected override Grid CreateControls(double fontSize, bool isParentSelected, bool isSelected, bool isError)
         {
@@ -21,11 +20,6 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
             return grid;
         }
 
-        public string Text
-        {
-            get { return AppResources.ResourceManager.GetString(LocalizationKey); }
-        }
-
         public override int GetCharacterWidth()
         {
             return Text.Length;
@@ -33,10 +27,10 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 
         public override FormulaPartControl Copy()
         {
-            return new FormulaPartControlStaticLocalizedText
+            return new FormulaPartControlStaticText
             {
                 Style = Style,
-                LocalizationKey = this.LocalizationKey
+                Text = this.Text
             };
         }
     }

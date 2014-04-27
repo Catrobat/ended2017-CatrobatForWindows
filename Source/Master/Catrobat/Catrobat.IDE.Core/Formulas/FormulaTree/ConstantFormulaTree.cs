@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 
 // ReSharper disable once CheckNamespace
@@ -124,8 +125,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("pi");
+            sb.Append("π");
         }
 
         public override bool IsNumber()
@@ -153,8 +153,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("True");
+            sb.Append(AppResources.Formula_Constant_True);
         }
 
         public override bool IsNumber()
@@ -182,8 +181,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("False");
+            sb.Append(AppResources.Formula_Constant_False);
         }
 
         public override bool IsNumber()

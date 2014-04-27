@@ -63,7 +63,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         {
             TestOperator(Range.FromLength(0, 2), "not true", 0);
             TestOperator(Range.FromLength(0, 3), "rotation <= compass", 1);
-            TestOperator(Range.FromLength(0, 3), "inclinationy * positiony", 1);
+            TestOperator(Range.FromLength(0, 3), "inclination.y * position.y", 1);
             TestOperator(Range.FromLength(0, 8), "sin(.)*(+)", 4);
             TestOperator(Range.FromLength(1, 6), ".1.2*.2.", 4);
             TestOperator(Range.FromLength(2, 3), "1-2*3", 3, false);

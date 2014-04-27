@@ -84,7 +84,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb, bool isOpening)
         {
-            // TODO: translate
             sb.Append(isOpening ? "(" : ")");
         }
 

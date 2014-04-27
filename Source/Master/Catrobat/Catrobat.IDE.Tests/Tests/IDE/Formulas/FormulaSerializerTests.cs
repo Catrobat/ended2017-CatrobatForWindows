@@ -2,6 +2,7 @@
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -21,8 +22,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         {
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
 
-            // use culture different to CultureInfo.CurrentCulture (in France the decimal separator is the comma)
-            ServiceLocator.CultureService.SetCulture(new CultureInfo("fr-FR"));
+            // use culture different to CultureInfo.CurrentCulture (1.2 vs. 1,2)
+            ServiceLocator.CultureService.SetCulture(new CultureInfo("de"));
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
@@ -39,10 +40,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestSerializer(
                 expectedValue: x => x.ToString("R", ServiceLocator.CultureService.GetCulture()), 
                 formulaCreator: FormulaTreeFactory.CreateNumberNode);
-            TestSerializer("pi", FormulaTreeFactory.CreatePiNode);
-            TestSerializer("True", FormulaTreeFactory.CreateTrueNode);
-            TestSerializer("False", FormulaTreeFactory.CreateFalseNode);
-            Assert.Inconclusive("Translations");
+            TestSerializer("π", FormulaTreeFactory.CreatePiNode);
+            TestSerializer(AppResources.Formula_Constant_True, FormulaTreeFactory.CreateTrueNode);
+            TestSerializer(AppResources.Formula_Constant_False, FormulaTreeFactory.CreateFalseNode);
         }
 
         private void TestSerializer(Func<double, string> expectedValue, Func<double, ConstantFormulaTree> formulaCreator)
@@ -72,12 +72,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestSerializerN("{0}≤{1}", FormulaTreeFactory.CreateLessEqualNode);
             TestSerializerN("{0}>{1}", FormulaTreeFactory.CreateGreaterNode);
             TestSerializerN("{0}≥{1}", FormulaTreeFactory.CreateGreaterEqualNode);
-            TestSerializerNL("{0} And {1}", FormulaTreeFactory.CreateAndNode);
-            TestSerializerNL("{0} Or {1}", FormulaTreeFactory.CreateOrNode);
-            TestSerializerNL("Not {0}", FormulaTreeFactory.CreateNotNode);
-            TestSerializerN("{0} mod {1}", FormulaTreeFactory.CreateModuloNode);
-
-            Assert.Inconclusive("Translations");
+            TestSerializerNL("{0} " + AppResources.Formula_Operator_And + " {1}", FormulaTreeFactory.CreateAndNode);
+            TestSerializerNL("{0} " + AppResources.Formula_Operator_Or + " {1}", FormulaTreeFactory.CreateOrNode);
+            TestSerializerNL(AppResources.Formula_Operator_Not + " {0}", FormulaTreeFactory.CreateNotNode);
+            TestSerializerN("{0} " + AppResources.Formula_Operator_Mod + " {1}", FormulaTreeFactory.CreateModuloNode);
         }
 
         #endregion
@@ -90,20 +88,18 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestSerializerN("exp({0})", FormulaTreeFactory.CreateExpNode);
             TestSerializerN("log({0})", FormulaTreeFactory.CreateLogNode);
             TestSerializerN("ln({0})", FormulaTreeFactory.CreateLnNode);
-            TestSerializerN("min({0}, {1})", FormulaTreeFactory.CreateMinNode);
-            TestSerializerN("max({0}, {1})", FormulaTreeFactory.CreateMaxNode);
+            TestSerializerN(AppResources.Formula_Function_Min + "({0}, {1})", FormulaTreeFactory.CreateMinNode);
+            TestSerializerN(AppResources.Formula_Function_Max + "({0}, {1})", FormulaTreeFactory.CreateMaxNode);
             TestSerializerN("sin({0})", FormulaTreeFactory.CreateSinNode);
             TestSerializerN("cos({0})", FormulaTreeFactory.CreateCosNode);
             TestSerializerN("tan({0})", FormulaTreeFactory.CreateTanNode);
             TestSerializerN("arcsin({0})", FormulaTreeFactory.CreateArcsinNode);
             TestSerializerN("arccos({0})", FormulaTreeFactory.CreateArccosNode);
             TestSerializerN("arctan({0})", FormulaTreeFactory.CreateArctanNode);
-            TestSerializerN("sqrt({0})", FormulaTreeFactory.CreateSqrtNode);
-            TestSerializerN("abs({0})", FormulaTreeFactory.CreateAbsNode);
-            TestSerializerN("round({0})", FormulaTreeFactory.CreateRoundNode);
-            TestSerializerNL("random({0}, {1})", FormulaTreeFactory.CreateRandomNode);
-
-            Assert.Inconclusive("Translations");
+            TestSerializerN(AppResources.Formula_Function_Sqrt + "({0})", FormulaTreeFactory.CreateSqrtNode);
+            TestSerializerN(AppResources.Formula_Function_Abs + "({0})", FormulaTreeFactory.CreateAbsNode);
+            TestSerializerN(AppResources.Formula_Function_Round + "({0})", FormulaTreeFactory.CreateRoundNode);
+            TestSerializerNL(AppResources.Formula_Function_Random + "({0}, {1})", FormulaTreeFactory.CreateRandomNode);
         }
 
         #endregion
@@ -113,15 +109,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestSensors()
         {
-            TestSerializer("AccelerationX", FormulaTreeFactory.CreateAccelerationXNode);
-            TestSerializer("AccelerationY", FormulaTreeFactory.CreateAccelerationYNode);
-            TestSerializer("AccelerationZ", FormulaTreeFactory.CreateAccelerationZNode);
-            TestSerializer("Compass", FormulaTreeFactory.CreateCompassNode);
-            TestSerializer("InclinationX", FormulaTreeFactory.CreateInclinationXNode);
-            TestSerializer("InclinationY", FormulaTreeFactory.CreateInclinationYNode);
-            TestSerializer("Loudness", FormulaTreeFactory.CreateLoudnessNode);
-
-            Assert.Inconclusive("Translations");
+            TestSerializer(AppResources.Formula_Sensor_AccelerationX, FormulaTreeFactory.CreateAccelerationXNode);
+            TestSerializer(AppResources.Formula_Sensor_AccelerationY, FormulaTreeFactory.CreateAccelerationYNode);
+            TestSerializer(AppResources.Formula_Sensor_AccelerationZ, FormulaTreeFactory.CreateAccelerationZNode);
+            TestSerializer(AppResources.Formula_Sensor_Compass, FormulaTreeFactory.CreateCompassNode);
+            TestSerializer(AppResources.Formula_Sensor_InclinationX, FormulaTreeFactory.CreateInclinationXNode);
+            TestSerializer(AppResources.Formula_Sensor_InclinationY, FormulaTreeFactory.CreateInclinationYNode);
+            TestSerializer(AppResources.Formula_Sensor_Loudness, FormulaTreeFactory.CreateLoudnessNode);
         }
 
         #endregion
@@ -131,16 +125,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestProperties()
         {
-            TestSerializer("Brightness", FormulaTreeFactory.CreateBrightnessNode);
-            TestSerializer("Layer", FormulaTreeFactory.CreateLayerNode);
-            TestSerializer("Transparency", FormulaTreeFactory.CreateTransparencyNode);
-            TestSerializer("PositionX", FormulaTreeFactory.CreatePositionXNode);
-            TestSerializer("PositionY", FormulaTreeFactory.CreatePositionYNode);
-            TestSerializer("Rotation", FormulaTreeFactory.CreateRotationNode);
-            TestSerializer("Size", FormulaTreeFactory.CreateSizeNode);
-            TestSerializer("Transparency", FormulaTreeFactory.CreateTransparencyNode);
-
-            Assert.Inconclusive("Translations");
+            TestSerializer(AppResources.Formula_Property_Brightness, FormulaTreeFactory.CreateBrightnessNode);
+            TestSerializer(AppResources.Formula_Property_Layer, FormulaTreeFactory.CreateLayerNode);
+            TestSerializer(AppResources.Formula_Property_Transparency, FormulaTreeFactory.CreateTransparencyNode);
+            TestSerializer(AppResources.Formula_Property_PositionX, FormulaTreeFactory.CreatePositionXNode);
+            TestSerializer(AppResources.Formula_Property_PositionY, FormulaTreeFactory.CreatePositionYNode);
+            TestSerializer(AppResources.Formula_Property_Rotation, FormulaTreeFactory.CreateRotationNode);
+            TestSerializer(AppResources.Formula_Property_Size, FormulaTreeFactory.CreateSizeNode);
+            TestSerializer(AppResources.Formula_Property_Transparency, FormulaTreeFactory.CreateTransparencyNode);
         }
 
         #endregion
@@ -200,7 +192,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         private void TestSerializerL(string format, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
         {
             var x = _random.NextBool();
-            TestSerializer(string.Format(format, x), formulaCreator.Invoke(FormulaTreeFactory.CreateTruthValueNode(x)));
+            var xString = x ? AppResources.Formula_Constant_True : AppResources.Formula_Constant_False;
+            TestSerializer(string.Format(format, xString), formulaCreator.Invoke(FormulaTreeFactory.CreateTruthValueNode(x)));
             TestSerializer(string.Format(format, " "), formulaCreator.Invoke(null));
         }
 
@@ -227,8 +220,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         {
             var x = _random.NextBool();
             var y = _random.NextBool();
+            var xString = x ? AppResources.Formula_Constant_True : AppResources.Formula_Constant_False;
+            var yString = y ? AppResources.Formula_Constant_True : AppResources.Formula_Constant_False;
             TestSerializer(
-                expectedValue: string.Format(format, x, y), 
+                expectedValue: string.Format(format, xString, yString), 
                 formula: formulaCreator.Invoke(FormulaTreeFactory.CreateTruthValueNode(x), FormulaTreeFactory.CreateTruthValueNode(y)));
             TestSerializer(
                 expectedValue: string.Format(format, " ", " "),

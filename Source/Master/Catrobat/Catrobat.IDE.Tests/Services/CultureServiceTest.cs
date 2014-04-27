@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Tests.Services
@@ -17,6 +18,7 @@ namespace Catrobat.IDE.Tests.Services
         public void SetCulture(CultureInfo culture)
         {
             _culture = culture;
+            AppResources.Culture = culture;
         }
 
         #endregion

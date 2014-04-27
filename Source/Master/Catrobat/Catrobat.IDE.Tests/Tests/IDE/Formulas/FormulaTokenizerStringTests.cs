@@ -4,6 +4,7 @@ using System.Linq;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Extensions;
 using Catrobat.IDE.Tests.Services;
@@ -30,8 +31,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         {
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
 
-            // use culture different to CultureInfo.CurrentCulture (in France the decimal separator is the comma)
-            ServiceLocator.CultureService.SetCulture(new CultureInfo("fr-FR"));
+            // use culture different to CultureInfo.CurrentCulture (1.2 vs. 1,2)
+            ServiceLocator.CultureService.SetCulture(new CultureInfo("de"));
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
@@ -91,10 +92,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestConstants()
         {
-            TestTokenizer(FormulaTokenFactory.CreatePiToken, new[] {"pi"});
-            TestTokenizer(FormulaTokenFactory.CreateTrueToken, new[] {"true"});
-            TestTokenizer(FormulaTokenFactory.CreateFalseToken, new[] {"false"});
-            Assert.Inconclusive("Translations");
+            TestTokenizer(FormulaTokenFactory.CreatePiToken, new[] { "π" });
+            TestTokenizer(FormulaTokenFactory.CreateTrueToken, new[] {AppResources.Formula_Constant_True});
+            TestTokenizer(FormulaTokenFactory.CreateFalseToken, new[] {AppResources.Formula_Constant_False});
         }
 
         #endregion
@@ -115,11 +115,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestTokenizer(FormulaTokenFactory.CreateLessEqualToken, new[] { "≤", "<=" });
             TestTokenizer(FormulaTokenFactory.CreateGreaterToken, ">");
             TestTokenizer(FormulaTokenFactory.CreateGreaterEqualToken, new[] { "≥", ">=" });
-            TestTokenizer(FormulaTokenFactory.CreateAndToken, "and");
-            TestTokenizer(FormulaTokenFactory.CreateOrToken, "or");
-            TestTokenizer(FormulaTokenFactory.CreateNotToken, "not");
-            TestTokenizer(FormulaTokenFactory.CreateModToken, "mod");
-            Assert.Inconclusive("Translations");
+            TestTokenizer(FormulaTokenFactory.CreateAndToken, AppResources.Formula_Operator_And);
+            TestTokenizer(FormulaTokenFactory.CreateOrToken, AppResources.Formula_Operator_Or);
+            TestTokenizer(FormulaTokenFactory.CreateNotToken, AppResources.Formula_Operator_Not);
+            TestTokenizer(FormulaTokenFactory.CreateModToken, AppResources.Formula_Operator_Mod);
         }
 
         #endregion
@@ -134,19 +133,18 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestTokenizer(FormulaTokenFactory.CreateExpToken, "exp");
             TestTokenizer(FormulaTokenFactory.CreateLogToken, "log");
             TestTokenizer(FormulaTokenFactory.CreateLnToken, "ln");
-            TestTokenizer(FormulaTokenFactory.CreateMinToken, "min");
-            TestTokenizer(FormulaTokenFactory.CreateMaxToken, "max");
+            TestTokenizer(FormulaTokenFactory.CreateMinToken, AppResources.Formula_Function_Min);
+            TestTokenizer(FormulaTokenFactory.CreateMaxToken, AppResources.Formula_Function_Max);
             TestTokenizer(FormulaTokenFactory.CreateSinToken, "sin");
             TestTokenizer(FormulaTokenFactory.CreateCosToken, "cos");
             TestTokenizer(FormulaTokenFactory.CreateTanToken, "tan");
             TestTokenizer(FormulaTokenFactory.CreateArcsinToken, "arcsin");
             TestTokenizer(FormulaTokenFactory.CreateArccosToken, "arccos");
             TestTokenizer(FormulaTokenFactory.CreateArctanToken, "arctan");
-            TestTokenizer(FormulaTokenFactory.CreateSqrtToken, "sqrt");
-            TestTokenizer(FormulaTokenFactory.CreateAbsToken, "abs");
-            TestTokenizer(FormulaTokenFactory.CreateRoundToken, "round");
-            TestTokenizer(FormulaTokenFactory.CreateRandomToken, "random");
-            Assert.Inconclusive("Translations");
+            TestTokenizer(FormulaTokenFactory.CreateSqrtToken, AppResources.Formula_Function_Sqrt);
+            TestTokenizer(FormulaTokenFactory.CreateAbsToken, AppResources.Formula_Function_Abs);
+            TestTokenizer(FormulaTokenFactory.CreateRoundToken, AppResources.Formula_Function_Round);
+            TestTokenizer(FormulaTokenFactory.CreateRandomToken, AppResources.Formula_Function_Random);
         }
 
         #endregion
@@ -156,15 +154,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestSensors()
         {
-            TestTokenizer(FormulaTokenFactory.CreateAccelerationXToken, new[] {"AccelerationX"});
-            TestTokenizer(FormulaTokenFactory.CreateAccelerationYToken, new[] {"AccelerationY"});
-            TestTokenizer(FormulaTokenFactory.CreateAccelerationZToken, new[] {"AccelerationZ"});
-            TestTokenizer(FormulaTokenFactory.CreateCompassToken, new[] {"Compass"});
-            TestTokenizer(FormulaTokenFactory.CreateInclinationXToken, new[] {"InclinationX"});
-            TestTokenizer(FormulaTokenFactory.CreateInclinationYToken, new[] {"InclinationY"});
-            TestTokenizer(FormulaTokenFactory.CreateLoudnessToken, new[] {"Loudness"});
-
-            Assert.Inconclusive("Translations");
+            TestTokenizer(FormulaTokenFactory.CreateAccelerationXToken, new[] {AppResources.Formula_Sensor_AccelerationX});
+            TestTokenizer(FormulaTokenFactory.CreateAccelerationYToken, new[] {AppResources.Formula_Sensor_AccelerationY});
+            TestTokenizer(FormulaTokenFactory.CreateAccelerationZToken, new[] {AppResources.Formula_Sensor_AccelerationZ});
+            TestTokenizer(FormulaTokenFactory.CreateCompassToken, new[] {AppResources.Formula_Sensor_Compass});
+            TestTokenizer(FormulaTokenFactory.CreateInclinationXToken, new[] {AppResources.Formula_Sensor_InclinationX});
+            TestTokenizer(FormulaTokenFactory.CreateInclinationYToken, new[] {AppResources.Formula_Sensor_InclinationY});
+            TestTokenizer(FormulaTokenFactory.CreateLoudnessToken, new[] {AppResources.Formula_Sensor_Loudness});
         }
 
         #endregion
@@ -174,15 +170,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestProperties()
         {
-            TestTokenizer(FormulaTokenFactory.CreateBrightnessToken, new[] {"Brightness"});
-            TestTokenizer(FormulaTokenFactory.CreateLayerToken, new[] {"Layer"});
-            TestTokenizer(FormulaTokenFactory.CreatePositionXToken, new[] {"PositionX"});
-            TestTokenizer(FormulaTokenFactory.CreatePositionYToken, new[] {"PositionY"});
-            TestTokenizer(FormulaTokenFactory.CreateRotationToken, new[] {"Rotation"});
-            TestTokenizer(FormulaTokenFactory.CreateSizeToken, new[] {"Size"});
-            TestTokenizer(FormulaTokenFactory.CreateTransparencyToken, new[] {"Transparency"});
-
-            Assert.Inconclusive("Translations");
+            TestTokenizer(FormulaTokenFactory.CreateBrightnessToken, new[] {AppResources.Formula_Property_Brightness});
+            TestTokenizer(FormulaTokenFactory.CreateLayerToken, new[] {AppResources.Formula_Property_Layer});
+            TestTokenizer(FormulaTokenFactory.CreatePositionXToken, new[] {AppResources.Formula_Property_PositionX});
+            TestTokenizer(FormulaTokenFactory.CreatePositionYToken, new[] {AppResources.Formula_Property_PositionY});
+            TestTokenizer(FormulaTokenFactory.CreateRotationToken, new[] {AppResources.Formula_Property_Rotation});
+            TestTokenizer(FormulaTokenFactory.CreateSizeToken, new[] {AppResources.Formula_Property_Size});
+            TestTokenizer(FormulaTokenFactory.CreateTransparencyToken, new[] {AppResources.Formula_Property_Transparency});
         }
 
         #endregion

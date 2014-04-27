@@ -5,6 +5,7 @@ using System.Text;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Resources.Localization;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
@@ -379,8 +380,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append(" And ");
+            sb.Append(" " + AppResources.Formula_Operator_And + " ");
         }
 
         public override bool IsNumber()
@@ -413,8 +413,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append(" Or ");
+            sb.Append(" " + AppResources.Formula_Operator_Or + " ");
         }
 
         public override bool IsNumber()
@@ -442,7 +441,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            sb.Append(" mod ");
+            sb.Append(" " + AppResources.Formula_Operator_Mod + " ");
         }
 
         public override bool IsNumber()

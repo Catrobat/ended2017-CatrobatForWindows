@@ -6,6 +6,7 @@ using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Resources.Localization;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
@@ -35,7 +36,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             sb.Append("(");
             var firstChild = FirstChild as BaseFormulaTree;
             if (firstChild == null) sb.Append(FormulaSerializer.EmptyChild); else firstChild.Serialize(sb);
-            // TODO: translate argument separator
             sb.Append(", ");
             var secondChild = SecondChild as BaseFormulaTree;
             if (secondChild == null) sb.Append(FormulaSerializer.EmptyChild); else secondChild.Serialize(sb);
@@ -70,8 +70,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("min");
+            sb.Append(AppResources.Formula_Function_Min);
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree firstChild, XmlFormulaTree secondChild)
@@ -94,8 +93,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("max");
+            sb.Append(AppResources.Formula_Function_Max);
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree firstChild, XmlFormulaTree secondChild)
@@ -145,8 +143,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("random");
+            sb.Append(AppResources.Formula_Function_Random);
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree firstChild, XmlFormulaTree secondChild)
