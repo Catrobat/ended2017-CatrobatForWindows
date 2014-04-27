@@ -1,4 +1,7 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
@@ -8,11 +11,8 @@ using Catrobat.IDE.Core.VersionConverter;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.SampleData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Catrobat.IDE.Tests.Tests.IDE.Formula
+namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 {
     [TestClass]
     public class XmlFormulaTreeConverterTests
@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestHelper.InitializeTests();
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestCatroidNodes()
         {
             const string directory = "FormulaEditor/";
@@ -83,7 +83,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestXml<FormulaNodeTrue>(directory + "true");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestFormulaTreeNodes()
         {
             var localVariable = new UserVariable
@@ -115,7 +115,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 formulas: nodes);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestXmlFormulaTreeNodes()
         {
             var localVariable = new UserVariable
@@ -146,7 +146,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 formulas: nodes);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestPocketCodeFormulas()
         {
             var documents = Enumerable.Range(1, 16)

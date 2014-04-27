@@ -89,6 +89,7 @@
     <Compile Include="CatrobatObjects\Bricks\BrickList.cs" />
     <Compile Include="Models\Formulas\FormulaToken\BaseFormulaToken.cs" />
     <Compile Include="Models\Formulas\FormulaToken\FormulaTokenParameters.cs" />
+    <Compile Include="Models\Formulas\FormulaToken\IFormulaNumber.cs" />
     <Compile Include="Models\Formulas\FormulaTree\ConstantFormulaTree.cs" />
     <Compile Include="Models\Formulas\FormulaTree\BinaryFormulaTree.cs" />
     <Compile Include="Models\Formulas\FormulaTree\BaseFormulaTree.cs" />

@@ -1,13 +1,13 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using System;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
-namespace Catrobat.IDE.Tests.Tests.IDE.Formula
+namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 {
     [TestClass]
     public class FormulaSerializerTests
@@ -20,13 +20,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestNull()
         {
             Assert.AreEqual(string.Empty, FormulaSerializer.Serialize(null));
         }
         
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestConstants()
         {
             TestSerializer(
@@ -41,7 +41,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("Translations");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestOperators()
         {
             TestSerializerN("{0}+{1}", FormulaTreeFactory.CreateAddNode);
@@ -69,7 +69,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("Translations");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestFunctions()
         {
             TestSerializerN("exp({0})", FormulaTreeFactory.CreateExpNode);
@@ -96,7 +96,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("Translations");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestSensors()
         {
             TestSerializer("AccelerationX", FormulaTreeFactory.CreateAccelerationXNode);
@@ -110,7 +110,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("Translations");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestProperties()
         {
             TestSerializer("Brightness", FormulaTreeFactory.CreateBrightnessNode);
@@ -124,14 +124,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("Translations");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestVariables()
         {
             TestSerializer("{0}", FormulaTreeFactory.CreateLocalVariableNode);
             TestSerializer("{0}", FormulaTreeFactory.CreateGlobalVariableNode);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestParentheses()
         {
             TestSerializer("({0})", FormulaTreeFactory.CreateParenthesesNode);

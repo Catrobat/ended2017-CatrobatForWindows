@@ -1,29 +1,29 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 using Catrobat.IDE.Tests.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
-namespace Catrobat.IDE.Tests.Tests.IDE.Formula
+namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 {
     [TestClass]
     public class FormulaTokenizerTests
     {
         private readonly Random _random = new Random();
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestNull()
         {
             Assert.IsNull(FormulaTokenizer.Tokenize(null));
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestConstants()
         {
             foreach (var value in new[] {0, _random.Next(), -_random.Next(), _random.NextDouble()})
@@ -65,7 +65,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestTokenizer(new[] { FormulaTokenFactory.CreateFalseToken() }, FormulaTreeFactory.CreateFalseNode);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestOperators()
         {
             TestTokenizerN(CreateExpectedTokens(FormulaTokenFactory.CreatePlusToken()), FormulaTreeFactory.CreateAddNode);
@@ -91,7 +91,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestTokenizerN(CreateExpectedTokens(FormulaTokenFactory.CreateModToken()), FormulaTreeFactory.CreateModuloNode);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestFunctions()
         {
             TestTokenizerN(CreateExpectedTokens(FormulaTokenFactory.CreateExpToken()), FormulaTreeFactory.CreateExpNode);
@@ -115,7 +115,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestTokenizerN(CreateExpectedTokens(FormulaTokenFactory.CreateRandomToken()), FormulaTreeFactory.CreateRandomNode);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestSensors()
         {
             TestTokenizer(FormulaTokenFactory.CreateAccelerationXToken, FormulaTreeFactory.CreateAccelerationXNode);
@@ -127,7 +127,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestTokenizer(FormulaTokenFactory.CreateLoudnessToken, FormulaTreeFactory.CreateLoudnessNode);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestProperties()
         {
             TestTokenizer(FormulaTokenFactory.CreateBrightnessToken, FormulaTreeFactory.CreateBrightnessNode);
@@ -139,14 +139,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestTokenizer(FormulaTokenFactory.CreateSizeToken, FormulaTreeFactory.CreateSizeNode);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestVariables()
         {
             TestTokenizer(FormulaTokenFactory.CreateLocalVariableToken, FormulaTreeFactory.CreateLocalVariableNode);
             TestTokenizer(FormulaTokenFactory.CreateGlobalVariableToken, FormulaTreeFactory.CreateGlobalVariableNode);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestParentheses()
         {
             TestTokenizer(

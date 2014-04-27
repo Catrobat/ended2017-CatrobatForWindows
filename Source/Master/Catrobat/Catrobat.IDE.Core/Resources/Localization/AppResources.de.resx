@@ -977,23 +977,23 @@
   <data name="Editor_ButtonChange" xml:space="preserve">
     <value>Umbenennen</value>
   </data>
-  <data name="FormulaInterpreter_Brackets_DoubleValue" xml:space="preserve">
+  <data name="FormulaInterpreter_Brackets_ArgumentDoubleValue" xml:space="preserve">
     <value>Füge einen Beistrich oder ein Malzeichen hinzu. </value>
   </data>
-  <data name="FormulaInterpreter_Brackets_EmptyParameter" xml:space="preserve">
-    <value>Schreibe etwas.</value>
+  <data name="FormulaInterpreter_Brackets_EmptyArgument" xml:space="preserve">
+    <value>Schreibe etwas. </value>
   </data>
   <data name="FormulaInterpreter_Brackets_EmptyParentheses" xml:space="preserve">
-    <value>Schreibe etwas.</value>
+    <value>Schreibe etwas. </value>
   </data>
-  <data name="FormulaInterpreter_Brackets_NonParameterParameterSeparator" xml:space="preserve">
+  <data name="FormulaInterpreter_Brackets_NonArgumentParameterSeparator" xml:space="preserve">
     <value>Entferne den Beistrich. </value>
   </data>
-  <data name="FormulaInterpreter_Brackets_TooFewParameters" xml:space="preserve">
+  <data name="FormulaInterpreter_Brackets_TooFewArguments" xml:space="preserve">
     <value>Füge einen Beistrich hinzu. </value>
   </data>
-  <data name="FormulaInterpreter_Brackets_TooManyParameters" xml:space="preserve">
-    <value>Entferne die überflüssigen Parameter. </value>
+  <data name="FormulaInterpreter_Brackets_TooManyArguments" xml:space="preserve">
+    <value>Entferne die überflüssigen Argumente. </value>
   </data>
   <data name="FormulaInterpreter_Brackets_UnmatchedClosingParenthesis" xml:space="preserve">
     <value>Entferne die alleinstehende geschlossene runde Klammer. </value>
@@ -1004,14 +1004,11 @@
   <data name="FormulaInterpreter_DoubleValue" xml:space="preserve">
     <value>Füge ein Malzeichen hinzu.</value>
   </data>
-  <data name="FormulaInterpreter_Function_EmptyBinaryFunction" xml:space="preserve">
+  <data name="FormulaInterpreter_Function_Empty" xml:space="preserve">
     <value>Füge eine öffnende runde Klammer hinzu.</value>
   </data>
-  <data name="FormulaInterpreter_Function_EmptyUnaryFunction" xml:space="preserve">
-    <value>Füge eine öffnende runde Klammer hinzu. </value>
-  </data>
   <data name="FormulaInterpreter_NullOrEmpty" xml:space="preserve">
-    <value>Schreibe etwas.</value>
+    <value>Schreibe etwas. </value>
   </data>
   <data name="FormulaInterpreter_Number_DoubleDecimalSeparator" xml:space="preserve">
     <value>Entferne das doppelte Dezimalkomma. </value>
@@ -1026,9 +1023,9 @@
     <value>Schreibe etwas. </value>
   </data>
   <data name="FormulaInterpreter_Operator_LeftEmptyInfixOperator" xml:space="preserve">
-    <value>Schreibe etwas.</value>
+    <value>Schreibe etwas. </value>
   </data>
   <data name="FormulaInterpreter_Operator_RightEmptyInfixOperator" xml:space="preserve">
-    <value>Schreibe etwas.</value>
+    <value>Schreibe etwas. </value>
   </data>
 </root>

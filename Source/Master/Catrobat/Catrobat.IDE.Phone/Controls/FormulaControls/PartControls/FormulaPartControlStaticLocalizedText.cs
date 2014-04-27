@@ -7,6 +7,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 {
     public class FormulaPartControlStaticLocalizedText : FormulaPartControl
     {
+        [Obsolete("use AppResources.ResourceManager.GetString() instead. ")]
         private static LocalizedStrings _localizedStrings;
 
         public string LocalizedResourceName { get; set; }

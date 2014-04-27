@@ -1,13 +1,13 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using System;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
-namespace Catrobat.IDE.Tests.Tests.IDE.Formula
+namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 {
     [TestClass]
     public class FormulaEvaluationTests
@@ -20,13 +20,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             ServiceLocator.Register<SensorServiceTest>(TypeCreationMode.Lazy);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestNull()
         {
             Assert.AreEqual(null, FormulaEvaluator.Evaluate(null));
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestConstants()
         {
             TestEvaluator(x => x, FormulaTreeFactory.CreateNumberNode);
@@ -37,7 +37,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestEvaluator(false, FormulaTreeFactory.CreateFalseNode);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestOperators()
         {
             TestEvaluator((x, y) => x + y, FormulaTreeFactory.CreateAddNode);
@@ -71,7 +71,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestEvaluator((x, y) => x % y, FormulaTreeFactory.CreateModuloNode);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestFunctions()
         {
             TestEvaluator(Math.Exp, FormulaTreeFactory.CreateExpNode);
@@ -108,7 +108,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 formulaCreator: FormulaTreeFactory.CreateRandomNode);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestSensors()
         {
             TestEvaluator(0, FormulaTreeFactory.CreateAccelerationXNode);
@@ -139,7 +139,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             // ReSharper restore CompareOfFloatsByEqualityOperator
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestProperites()
         {
             TestEvaluator(100, FormulaTreeFactory.CreateBrightnessNode);
@@ -151,14 +151,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestEvaluator(100, FormulaTreeFactory.CreateSizeNode);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestVariables()
         {
             TestEvaluator(0, FormulaTreeFactory.CreateLocalVariableNode);
             TestEvaluator(0, FormulaTreeFactory.CreateGlobalVariableNode);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestBrackets()
         {
             TestEvaluator((double x) => x, FormulaTreeFactory.CreateParenthesesNode);

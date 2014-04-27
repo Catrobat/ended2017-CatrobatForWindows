@@ -113,9 +113,16 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaToken
         {
             return new FormulaTokenParameterSeparator();
         }
-        internal static FormulaTokenParameters CreateParametersToken(IFormulaTree arg1, IFormulaTree arg2)
+        internal static FormulaTokenUnaryParameter CreateUnaryParameterToken(IFormulaTree arg)
         {
-            return new FormulaTokenParameters
+            return new FormulaTokenUnaryParameter
+            {
+                Parameter = arg,
+            };
+        }
+        internal static FormulaTokenBinaryParameter CreateBinaryParameterToken(IFormulaTree arg1, IFormulaTree arg2)
+        {
+            return new FormulaTokenBinaryParameter
             {
                 FirstParameter = arg1,
                 SecondParameter = arg2
