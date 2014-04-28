@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Resources.Localization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
@@ -28,17 +28,29 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         #endregion
 
-        #region Implements IFormulaSerialization
+        #region Implements IStringBuilderSerializable
 
-        internal override void Serialize(StringBuilder sb)
+        public override void Append(StringBuilder sb)
         {
-            SerializeToken(sb);
+            sb.Append(Serialize());
             sb.Append("(");
-            var firstChild = FirstChild as BaseFormulaTree;
-            if (firstChild == null) sb.Append(FormulaSerializer.EmptyChild); else firstChild.Serialize(sb);
+            if (FirstChild == null)
+            {
+                sb.Append(FormulaSerializer.EmptyChild);
+            }
+            else
+            {
+                FirstChild.Append(sb);
+            }
             sb.Append(", ");
-            var secondChild = SecondChild as BaseFormulaTree;
-            if (secondChild == null) sb.Append(FormulaSerializer.EmptyChild); else secondChild.Serialize(sb);
+            if (SecondChild == null)
+            {
+                sb.Append(FormulaSerializer.EmptyChild);
+            }
+            else
+            {
+                SecondChild.Append(sb);
+            }
             sb.Append(")");
         }
 
@@ -68,9 +80,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Min(FirstChild.EvaluateNumber(), SecondChild.EvaluateNumber());
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Function_Min);
+            return AppResources.Formula_Function_Min;
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree firstChild, XmlFormulaTree secondChild)
@@ -91,9 +103,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Max(FirstChild.EvaluateNumber(), SecondChild.EvaluateNumber());
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Function_Max);
+            return AppResources.Formula_Function_Max;
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree firstChild, XmlFormulaTree secondChild)
@@ -141,9 +153,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return from == to ? from : Random.NextBool();
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Function_Random);
+            return AppResources.Formula_Function_Random;
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree firstChild, XmlFormulaTree secondChild)

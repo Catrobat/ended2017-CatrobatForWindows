@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Resources.Localization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
@@ -23,15 +23,32 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         #endregion
 
-        #region Implements IFormulaSerialization
+        #region Implements IStringBuilderSerializable
 
-        internal override void Serialize(StringBuilder sb)
+        public override void Append(StringBuilder sb)
         {
-            var leftChild = LeftChild as BaseFormulaTree;
-            if (leftChild == null) sb.Append(FormulaSerializer.EmptyChild); else leftChild.Serialize(sb);
-            SerializeToken(sb);
-            var rightChild = RightChild as BaseFormulaTree;
-            if (rightChild == null) sb.Append(FormulaSerializer.EmptyChild); else rightChild.Serialize(sb);
+            if (LeftChild == null)
+            {
+                sb.Append(FormulaSerializer.EmptyChild);
+            }
+            else
+            {
+                LeftChild.Append(sb);
+            }
+            AppendToken(sb);
+            if (RightChild == null)
+            {
+                sb.Append(FormulaSerializer.EmptyChild);
+            }
+            else
+            {
+                RightChild.Append(sb);
+            }
+        }
+
+        protected virtual void AppendToken(StringBuilder sb)
+        {
+            sb.Append(Serialize());
         }
 
         #endregion
@@ -51,9 +68,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return LeftChild.EvaluateNumber() + RightChild.EvaluateNumber();
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("+");
+            return "+";
         }
 
         public override bool IsNumber()
@@ -79,9 +96,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return LeftChild.EvaluateNumber() - RightChild.EvaluateNumber();
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("-");
+            return "-";
         }
 
         public override bool IsNumber()
@@ -107,9 +124,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return LeftChild.EvaluateNumber() * RightChild.EvaluateNumber();
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("*");
+            return "*";
         }
 
         public override bool IsNumber()
@@ -135,9 +152,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return LeftChild.EvaluateNumber() / RightChild.EvaluateNumber();
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("/");
+            return "/";
         }
 
         public override bool IsNumber()
@@ -163,9 +180,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Pow(LeftChild.EvaluateNumber(), RightChild.EvaluateNumber());
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("^");
+            return "^";
         }
 
         public override bool IsNumber()
@@ -198,9 +215,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             }
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("=");
+            return "=";
         }
 
         public override bool IsNumber()
@@ -233,9 +250,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             }
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("≠");
+            return "≠";
         }
 
         public override bool IsNumber()
@@ -261,9 +278,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return LeftChild.EvaluateNumber() > RightChild.EvaluateNumber();
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(">");
+            return ">";
         }
 
         public override bool IsNumber()
@@ -289,9 +306,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return LeftChild.EvaluateNumber() >= RightChild.EvaluateNumber();
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("≥");
+            return "≥";
         }
 
         public override bool IsNumber()
@@ -317,9 +334,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return LeftChild.EvaluateNumber() < RightChild.EvaluateNumber();
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("<");
+            return "<";
         }
 
         public override bool IsNumber()
@@ -345,9 +362,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return LeftChild.EvaluateNumber() <= RightChild.EvaluateNumber();
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("≤");
+            return "≤";
         }
 
         public override bool IsNumber()
@@ -378,9 +395,16 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return LeftChild.EvaluateLogic() && RightChild.EvaluateLogic();
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        protected override void AppendToken(StringBuilder sb)
         {
-            sb.Append(" " + AppResources.Formula_Operator_And + " ");
+            sb.Append(" ");
+            base.AppendToken(sb);
+            sb.Append(" ");
+        }
+
+        public override string Serialize()
+        {
+            return AppResources.Formula_Operator_And;
         }
 
         public override bool IsNumber()
@@ -411,9 +435,16 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return LeftChild.EvaluateLogic() || RightChild.EvaluateLogic();
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        protected override void AppendToken(StringBuilder sb)
         {
-            sb.Append(" " + AppResources.Formula_Operator_Or + " ");
+            sb.Append(" ");
+            base.AppendToken(sb);
+            sb.Append(" ");
+        }
+
+        public override string Serialize()
+        {
+            return AppResources.Formula_Operator_Or;
         }
 
         public override bool IsNumber()
@@ -439,9 +470,16 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return LeftChild.EvaluateNumber() % RightChild.EvaluateNumber();
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        protected override void AppendToken(StringBuilder sb)
         {
-            sb.Append(" " + AppResources.Formula_Operator_Mod + " ");
+            sb.Append(" ");
+            base.AppendToken(sb);
+            sb.Append(" ");
+        }
+
+        public override string Serialize()
+        {
+            return AppResources.Formula_Operator_Mod;
         }
 
         public override bool IsNumber()

@@ -3,7 +3,7 @@
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 {
-    partial interface IFormulaTree : IFormulaTokenizer, IFormulaSerialization, IFormulaInterpreter, IFormulaEvaluation, IXmlFormulaConvertible
+    partial interface IFormulaTree : IFormulaTokenizer, IStringBuilderSerializable, IFormulaInterpreter, IFormulaEvaluation, IXmlFormulaConvertible
     {
     }
 }

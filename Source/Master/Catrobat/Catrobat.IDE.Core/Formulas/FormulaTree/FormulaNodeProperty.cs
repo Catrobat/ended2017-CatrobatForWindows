@@ -1,6 +1,4 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
-using System;
-using System.Text;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Resources.Localization;
 
@@ -9,16 +7,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 {
     abstract partial class FormulaNodeProperty
     {
-        #region Implements IFormulaSerialization
-
-        protected override void SerializeToken(StringBuilder sb)
-        {
-            // not used
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
         #region Implements IFormulaInterpreter
 
         public override bool IsNumber()
@@ -44,9 +32,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return FormulaTokenFactory.CreateBrightnessToken();
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Property_Brightness);
+            return AppResources.Formula_Property_Brightness;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -68,9 +56,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return FormulaTokenFactory.CreateLayerToken();
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Property_Layer);
+            return AppResources.Formula_Property_Layer;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -92,9 +80,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return FormulaTokenFactory.CreateTransparencyToken();
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Property_Transparency);
+            return AppResources.Formula_Property_Transparency;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -116,9 +104,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return FormulaTokenFactory.CreatePositionXToken();
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Property_PositionX);
+            return AppResources.Formula_Property_PositionX;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -140,9 +128,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return FormulaTokenFactory.CreatePositionYToken();
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Property_PositionY);
+            return AppResources.Formula_Property_PositionY;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -164,9 +152,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return FormulaTokenFactory.CreateRotationToken();
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Property_Rotation);
+            return AppResources.Formula_Property_Rotation;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -188,9 +176,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return FormulaTokenFactory.CreateSizeToken();
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Property_Size);
+            return AppResources.Formula_Property_Size;
         }
 
         public override XmlFormulaTree ToXmlFormula()

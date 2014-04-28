@@ -11,9 +11,9 @@ using System.Globalization;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 {
-    /// <summary>Tests <see cref="FormulaSerializer.Serialize" />. </summary>
+    /// <summary>Tests <see cref="FormulaSerializer.Serialize(IFormulaTree)" />. </summary>
     [TestClass]
-    public class FormulaSerializerTests
+    public class FormulaSerializerFormulaTests
     {
         private readonly Random _random = new Random();
 
@@ -37,9 +37,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestConstants()
         {
-            TestSerializer(
-                expectedValue: x => x.ToString("R", ServiceLocator.CultureService.GetCulture()), 
-                formulaCreator: FormulaTreeFactory.CreateNumberNode);
+
+            var culture = ServiceLocator.CultureService.GetCulture();
+            TestSerializer(x => x.ToString("R", culture), FormulaTreeFactory.CreateNumberNode);
             TestSerializer("π", FormulaTreeFactory.CreatePiNode);
             TestSerializer(AppResources.Formula_Constant_True, FormulaTreeFactory.CreateTrueNode);
             TestSerializer(AppResources.Formula_Constant_False, FormulaTreeFactory.CreateFalseNode);
@@ -154,7 +154,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             };
             var y = new UserVariable();
             TestSerializer(string.Format(format, x.Name), formulaCreator.Invoke(x));
-            TestSerializer(string.Format(format, y.Name), formulaCreator.Invoke(y));
+            TestSerializer(string.Format(format, " "), formulaCreator.Invoke(y));
             TestSerializer(string.Format(format, " "), formulaCreator.Invoke(null));
         }
 
@@ -163,7 +163,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         #region Brackets
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
-        public void TestParentheses()
+        public void TestBrackets()
         {
             TestSerializerNL("({0})", FormulaTreeFactory.CreateParenthesesNode);
         }

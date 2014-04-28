@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Catrobat.IDE.Core.Formulas
 {
-    class FormulaParser
+    public class FormulaParser
     {
         private readonly FormulaTokenizer _tokenizer;
 

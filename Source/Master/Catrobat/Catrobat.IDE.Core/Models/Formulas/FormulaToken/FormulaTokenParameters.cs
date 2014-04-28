@@ -2,13 +2,13 @@
 
 namespace Catrobat.IDE.Core.Models.Formulas.FormulaToken
 {
-    internal abstract class FormulaTokenParameter : BaseFormulaToken
+    internal abstract partial class FormulaTokenParameter : BaseFormulaToken
     {
     }
 
     #region Implementations
 
-    internal class FormulaTokenUnaryParameter : FormulaTokenParameter
+    internal partial class FormulaTokenUnaryParameter : FormulaTokenParameter
     {
         public IFormulaTree Parameter { get; set; }
         
@@ -38,7 +38,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaToken
         #endregion
     }
 
-    internal class FormulaTokenBinaryParameter : FormulaTokenParameter
+    internal partial class FormulaTokenBinaryParameter : FormulaTokenParameter
     {
         public IFormulaTree FirstParameter { get; set; }
         public IFormulaTree SecondParameter { get; set; }

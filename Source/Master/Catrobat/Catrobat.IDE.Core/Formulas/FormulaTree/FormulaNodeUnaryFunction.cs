@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Resources.Localization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
@@ -25,14 +25,20 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         #endregion
 
-        #region Implements IFormulaSerialization
+        #region Implements IStringBuilderSerializable
 
-        internal override void Serialize(StringBuilder sb)
+        public override void Append(StringBuilder sb)
         {
-            SerializeToken(sb);
+            sb.Append(Serialize());
             sb.Append("(");
-            var child = Child as BaseFormulaTree;
-            if (child == null) sb.Append(FormulaSerializer.EmptyChild); else child.Serialize(sb);
+            if (Child == null)
+            {
+                sb.Append(FormulaSerializer.EmptyChild);
+            }
+            else
+            {
+                Child.Append(sb);
+            }
             sb.Append(")");
         }
 
@@ -62,9 +68,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Exp(Child.EvaluateNumber());
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("exp");
+            return "exp";
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)
@@ -85,9 +91,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Log10(Child.EvaluateNumber());
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("log");
+            return "log";
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)
@@ -108,9 +114,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Log(Child.EvaluateNumber(), Math.E);
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("ln");
+            return "ln";
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)
@@ -131,9 +137,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Sin(Child.EvaluateNumber());
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("sin");
+            return "sin";
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)
@@ -154,9 +160,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Cos(Child.EvaluateNumber());
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("cos");
+            return "cos";
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)
@@ -177,9 +183,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Tan(Child.EvaluateNumber());
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("tan");
+            return "tan";
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)
@@ -200,9 +206,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Asin(Child.EvaluateNumber());
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("arcsin");
+            return "arcsin";
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)
@@ -223,9 +229,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Acos(Child.EvaluateNumber());
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("arccos");
+            return "arccos";
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)
@@ -246,9 +252,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Atan(Child.EvaluateNumber());
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("arctan");
+            return "arctan";
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)
@@ -269,9 +275,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Abs(Child.EvaluateNumber());
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Function_Abs);
+            return AppResources.Formula_Function_Abs;
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)
@@ -292,9 +298,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Sqrt(Child.EvaluateNumber());
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Function_Sqrt);
+            return AppResources.Formula_Function_Sqrt;
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)
@@ -315,9 +321,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.Round(Child.EvaluateNumber());
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Function_Round);
+            return AppResources.Formula_Function_Round;
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)

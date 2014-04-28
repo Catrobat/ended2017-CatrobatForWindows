@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 
@@ -18,17 +16,13 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         #endregion
 
-        #region Implements IFormulaSerialization
+        #region Implements IStringSerializable
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            // not used
-            throw new NotImplementedException();
-        }
-
-        internal override void Serialize(StringBuilder sb)
-        {
-            sb.Append(Variable == null ? FormulaSerializer.EmptyChild : Variable.Name);
+            return Variable == null || Variable.Name == null
+                ? FormulaSerializer.EmptyChild
+                : Variable.Name;
         }
 
         #endregion

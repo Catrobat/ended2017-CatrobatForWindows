@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace Catrobat.IDE.Core.Formulas
 {
-    class FormulaTokenizer
+    public class FormulaTokenizer
     {
         public static IEnumerable<IFormulaToken> EmptyChild = Enumerable.Empty<IFormulaToken>();
 
@@ -228,18 +228,8 @@ namespace Catrobat.IDE.Core.Formulas
         public static IEnumerable<IFormulaToken> Tokenize(IFormulaTree formula)
         {
             if (formula == null) return null;
-#if DEBUG
+    
             return formula.Tokenize();
-#else
-            try
-            {
-                return formula.Tokenize();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-#endif
         }
 
         #endregion

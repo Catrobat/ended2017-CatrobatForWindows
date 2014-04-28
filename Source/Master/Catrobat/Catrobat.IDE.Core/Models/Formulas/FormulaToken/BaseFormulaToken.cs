@@ -1,6 +1,6 @@
 ﻿namespace Catrobat.IDE.Core.Models.Formulas.FormulaToken
 {
-    public abstract class BaseFormulaToken : IFormulaToken
+    public abstract partial class BaseFormulaToken : IFormulaToken
     {
         #region Overrides Equals
 
@@ -26,7 +26,7 @@
         }
 
         #endregion
-
+    
         #region Implements ICloneable
 
         public virtual object Clone()

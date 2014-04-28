@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core.Formulas
     /// <para>This class internally uses yield return to report early errors first. </para>
     /// <para>Parsing error and token tracking is implemented with local members to improve readability (see <see cref="ParsingError"/> and <see cref="_origin"/>). </para>
     /// </remarks>
-    internal class FormulaInterpreter
+    public class FormulaInterpreter
     {
         #region Static functions
 
