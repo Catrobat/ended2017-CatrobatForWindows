@@ -13,8 +13,7 @@ namespace Catrobat.IDE.Tests.Extensions
         private static readonly IList<Func<Random, IFormulaToken>> TokenCreators = typeof(FormulaTokenFactory).GetMethods()
                 .Where(method => method.IsStatic)
                 .Select<MethodInfo, Func<Random, IFormulaToken>>(method => random => (IFormulaToken) method.Invoke(
-                    obj: null,
-                    parameters: method.GetParameters().Select<ParameterInfo, object>(parameter =>
+                    method.GetParameters().Select<ParameterInfo, object>(parameter =>
                     {
                         if (parameter.ParameterType == typeof(int)) return random.Next();
                         if (parameter.ParameterType == typeof(bool)) return random.NextBool();
@@ -24,14 +23,14 @@ namespace Catrobat.IDE.Tests.Extensions
                     }).ToArray()))
                 .ToArray();
 
-        public static IFormulaToken NextFormulaToken(this Random random)
-        {
-            return random.Next(TokenCreators).Invoke(random);
-        }
-
         public static TElement Next<TElement>(this Random random, IList<TElement> elements)
         {
             return elements[random.Next(0, elements.Count)];
+        }
+
+        public static IFormulaToken NextFormulaToken(this Random random)
+        {
+            return random.Next(TokenCreators).Invoke(random);
         }
     }
 }

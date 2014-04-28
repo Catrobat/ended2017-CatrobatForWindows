@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 
 // ReSharper disable once CheckNamespace
@@ -41,16 +41,17 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             {
                 if (_tokenMappings == null)
                 {
+                    var culture = ServiceLocator.CultureService.GetCulture();
                     _tokenMappings = new List<KeyValuePair<string, Func<IFormulaToken>>>
                     {
                         // add decimal separator mapping
                         new KeyValuePair<string, Func<IFormulaToken>>(
-                            key: CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator,
+                            key: culture.NumberFormat.NumberDecimalSeparator,
                             value: FormulaTokenFactory.CreateDecimalSeparatorToken),
 
                         // add minus sign mapping
                         new KeyValuePair<string, Func<IFormulaToken>>(
-                            key: CultureInfo.InvariantCulture.NumberFormat.NegativeSign,
+                            key: culture.NumberFormat.NegativeSign,
                             value: FormulaTokenFactory.CreateMinusToken)
                     };
 
@@ -59,7 +60,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
                     {
                         var digit = i;
                         _tokenMappings.Add(new KeyValuePair<string, Func<IFormulaToken>>(
-                            key: i.ToString(),
+                            key: i.ToString(culture),
                             value: () => FormulaTokenFactory.CreateDigitToken(digit)));
                     }
                 }
@@ -77,7 +78,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
         {
             // split off tokens from the string representation
             var tokens = new List<IFormulaToken>();
-            var value = Value.ToString("R", CultureInfo.InvariantCulture);
+            var value = Value.ToString("R", ServiceLocator.CultureService.GetCulture());
             while (value.Length != 0)
             {
                 var mapping = TokenMappings.First(kvp => value.StartsWith(kvp.Key));
@@ -124,8 +125,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("pi");
+            sb.Append("π");
         }
 
         public override bool IsNumber()
@@ -153,8 +153,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("True");
+            sb.Append(AppResources.Formula_Constant_True);
         }
 
         public override bool IsNumber()
@@ -182,8 +181,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("False");
+            sb.Append(AppResources.Formula_Constant_False);
         }
 
         public override bool IsNumber()

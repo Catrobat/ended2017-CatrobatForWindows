@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using System.Globalization;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
@@ -7,7 +8,6 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -18,19 +18,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
     public class FormulaInterpreterSyntaxErrorTests
     {
         private readonly Random _random = new Random();
-        private readonly UserVariable[] _localVariables = {new UserVariable {Name = "LocalVariable"}};
-        private readonly UserVariable[] _globalVariables = {new UserVariable {Name = "GlobalVariable"}};
-        private readonly FormulaTokenizer _tokenizer;
-
-        public FormulaInterpreterSyntaxErrorTests()
-        {
-            _tokenizer = new FormulaTokenizer(_localVariables, _globalVariables);
-        }
+        private readonly FormulaTokenizer _tokenizer = new FormulaTokenizer(Enumerable.Empty<UserVariable>(), Enumerable.Empty<UserVariable>());
 
         [TestInitialize]
         public void TestClassInitialize()
         {
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
+            ServiceLocator.CultureService.SetCulture(CultureInfo.InvariantCulture);
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
@@ -47,15 +41,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             var message1 = AppResources.FormulaInterpreter_DoubleValue;
             var message2 = AppResources.FormulaInterpreter_Brackets_ArgumentDoubleValue;
 
-            TestParsingError(message1, 1, 0, "1 InclinationX");
-            TestParsingError(message1, 1, 0, "Transparency 3)");
-            TestParsingError(message1, 3, 0, "1*2 LocalVariable,");
+            TestParsingError(message1, 1, 0, "1 Inclination.X,");
+            TestParsingError(message1, 3, 0, "1*2 Transparency)");
             TestParsingError(message1, 4, 0, "sin(1)cos");
             TestParsingError(message1, 1, 0, "1(2-)");
             TestParsingError(message1, 1, 0, "1(2-");
-            TestParsingError(message1, 4, 0, "1*(2 pi)*");
-            TestParsingError(message2, 5, 0, "1*sin(2 pi.)*");
-            TestParsingError(message2, 3, 0, "sin(2 pi,)*");
+            TestParsingError(message1, 4, 0, "1*(2 π)*");
+            TestParsingError(message2, 5, 0, "1*sin(2 π.)*");
+            TestParsingError(message2, 3, 0, "sin(2 π,)*");
         }
 
         #region Number
@@ -78,7 +71,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
             TestParsingError(message, 1, 1, "..,");
             TestParsingError(message, 2, 1, "(..,)");
-            TestParsingError(message, 2, 1, "1..pi");
+            TestParsingError(message, 2, 1, "1..π");
             TestParsingError(message, 2, 1, ".1.2 sin");
             TestParsingError(message, 3, 1, "1.2.3=");
             TestParsingError(message, 4, 1, "1/-..)");
@@ -111,7 +104,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestParsingError(message1, 1, 0, "(");
             TestParsingError(message2, 0, 1, ").");
             TestParsingError(message1, 5, 0, "1/-((");
-            TestParsingError(message1, 7, 0, "(1)*sin(pi");
+            TestParsingError(message1, 7, 0, "(1)*sin(π");
             TestParsingError(message2, 3, 1, "1/-))");
         }
 
@@ -157,7 +150,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
             TestParsingError(message, 3, 2, "sin(1,.))");
             TestParsingError(message, 5, 2, "random(1, 2,.))");
-            TestParsingError(message, 5, 1, "1+sin(1,))");
+            TestParsingError(message, 5, 1, "1+sin(2,))");
         }
 
         #endregion
@@ -221,9 +214,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         private void TestParsingError(string expectedMessage, int expectedIndex, int expectedLength, string input, bool randomDigits = true)
         {
             // tokenize input
-            IEnumerable<IFormulaToken> tokens;
-            IEnumerable<string> parsingErrors;
-            Assert.IsTrue(_tokenizer.Tokenize(input, out tokens, out parsingErrors));
+            ParsingError parsingError;
+            var tokens = _tokenizer.Tokenize(input, out parsingError);
+            Assert.IsNull(parsingError);
 
             // randomize digits
             if (tokens != null) tokens = tokens.Select(token => randomDigits && token is FormulaNodeNumber

@@ -77,6 +77,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             get { return _editor.Tokens; }
         }
 
+        public bool IsTokensEmpty
+        {
+            get { return _editor.IsTokensEmpty; }
+        }
+
         public int CaretIndex
         {
             get { return _editor.CaretIndex; }
@@ -218,6 +223,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             {
                 if (e.PropertyName == GetPropertyName(() => _editor.Formula)) RaisePropertyChanged(() => Formula);
                 if (e.PropertyName == GetPropertyName(() => _editor.Tokens)) RaisePropertyChanged(() => Tokens);
+                if (e.PropertyName == GetPropertyName(() => _editor.IsTokensEmpty)) RaisePropertyChanged(() => IsTokensEmpty);
                 if (e.PropertyName == GetPropertyName(() => _editor.CaretIndex)) RaisePropertyChanged(() => CaretIndex);
                 if (e.PropertyName == GetPropertyName(() => _editor.SelectionLength)) RaisePropertyChanged(() => SelectionLength);
                 if (e.PropertyName == GetPropertyName(() => _editor.CanUndo)) RaisePropertyChanged(() => CanUndo);

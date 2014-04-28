@@ -1,21 +1,14 @@
-﻿using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Tests.Extensions;
-using Catrobat.IDE.Tests.Misc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Linq;
+using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.IDE.Tests.Extensions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Tests.Tests.Data
+namespace Catrobat.IDE.Tests.Tests.Misc
 {
     [TestClass]
     public class LocalizationTests
     {
-        [ClassInitialize()]
-        public static void TestClassInitialize(TestContext testContext)
-        {
-            TestHelper.InitializeTests();
-        }
-
         [TestMethod, TestCategory("GatedTests")]
         public void TestDe()
         {
@@ -34,7 +27,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             var superfluousTranslations = actualKeys.Except(expectedKeys).ToList();
             Assert.AreEqual(0, superfluousTranslations.Count, "Superfluous translation \"" + superfluousTranslations.FirstOrDefault() + "\" in {" + culture.Name + "}");
 
-            var missingTranslations = actualKeys.Except(expectedKeys).ToList();
+            var missingTranslations = expectedKeys.Except(actualKeys).ToList();
             Assert.AreEqual(0, missingTranslations.Count, "Missing translation \"" + missingTranslations.FirstOrDefault() + "\" in {" + culture.Name + "}");
         }
     }

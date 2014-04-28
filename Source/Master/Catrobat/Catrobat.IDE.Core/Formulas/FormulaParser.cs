@@ -1,13 +1,10 @@
-﻿using System;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 using System.Collections.Generic;
 using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 
 namespace Catrobat.IDE.Core.Formulas
 {
-    [Obsolete("Use FormulaInterpreter instead. ")]
     class FormulaParser
     {
         private readonly FormulaTokenizer _tokenizer;
@@ -17,23 +14,12 @@ namespace Catrobat.IDE.Core.Formulas
             _tokenizer = new FormulaTokenizer(localVariables, globalVariables);
         }
 
-        public bool Parse(string input, out IFormulaTree formula, out ParsingError parsingError)
+        public IFormulaTree Parse(string input, out ParsingError parsingError)
         {
-            formula = null;
-            parsingError = null;
+            var tokens = _tokenizer.Tokenize(input, out parsingError);
+            if (parsingError != null) return null;
 
-            if (string.IsNullOrWhiteSpace(input)) return true;
-
-            IEnumerable<IFormulaToken> tokens;
-            IEnumerable<string> parsingErrors1;
-            if (!_tokenizer.Tokenize(input, out tokens, out parsingErrors1))
-            {
-                parsingError = new ParsingError(parsingErrors1.FirstOrDefault());
-                return false;
-            }
-            formula = FormulaInterpreter.Interpret(tokens.ToList(), out parsingError);
-            return parsingError == null;
+            return tokens == null ? null : FormulaInterpreter.Interpret(tokens.ToList(), out parsingError);
         }
-
     }
 }

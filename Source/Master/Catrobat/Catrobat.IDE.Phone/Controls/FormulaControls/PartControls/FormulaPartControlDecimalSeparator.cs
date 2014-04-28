@@ -1,16 +1,19 @@
-﻿using System;
-using System.Windows.Controls;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+﻿using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Services;
+using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 {
     public class FormulaPartControlDecimalSeparator : FormulaPartControl
     {
-        public string GetText()
+        public string Text
         {
-            return ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator;
+            get
+            {
+                return ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator;
+            }
         }
 
         #region FormulaPartControl
@@ -20,7 +23,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
             var grid = new Grid {DataContext = this};
             var textBlock = new TextBlock
             {
-                Text = GetText(),
+                Text = Text,
                 FontSize = fontSize
             };
             textBlock.Margin = new Thickness(-Math.Floor(textBlock.ActualWidth / 2), 0, -Math.Ceiling(textBlock.ActualWidth / 2), 0);
@@ -31,12 +34,12 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 
         public override int GetCharacterWidth()
         {
-            return GetText().Length;
+            return Text.Length;
         }
 
         public override FormulaPartControl Copy()
         {
-            return new FormulaPartControlNumber
+            return new FormulaPartControlDecimalSeparator
             {
                 Style = Style
             };

@@ -431,179 +431,178 @@
     <!-- ### Functions ##########################################################################################################-->
     <templates:UiFormulaTokenDefinition TokenType="formulaToken:FormulaTokenParameterSeparator">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ParameterSeperator" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticText Text="," Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeRandom">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionRandom" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Function_Random" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeModulo">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionMod" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Operator_Modulo" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeMax">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionMax" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Function_Max" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeMin">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionMin" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Function_Min" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSin">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionSin" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticText Text="sin" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeCos">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionCos" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticText Text="cos" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeTan">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionTan" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticText Text="tan" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLn">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionLn" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticText Text="ln" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLog">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionLog" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticText Text="log" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSqrt">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionSqrt" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Function_Sqrt" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAbs">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionAbs" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Function_Abs" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeRound">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionRound" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Function_Round" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeArcsin">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionArcSin" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticText Text="arcsin" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeArccos">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionArcCos" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticText Text="arccos" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeArctan">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionArcTan" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticText Text="arctan" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeExp">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionExp" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticText Text="exp" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePi">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionPi" Style="{StaticResource PartStyleMath}"/>
+        <partControls:FormulaPartControlStaticText Text="π" Style="{StaticResource PartStyleMath}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeEquals">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
+        <partControls:FormulaPartControlStaticText Text="=" Style="{StaticResource PartStyleOperatorEquality}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeNotEquals">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicNotEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
+        <partControls:FormulaPartControlStaticText Text="≠" Style="{StaticResource PartStyleOperatorEquality}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLess">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicSmaller" Style="{StaticResource PartStyleOperatorEquality}"/>
+        <partControls:FormulaPartControlStaticText Text="&lt;" Style="{StaticResource PartStyleOperatorEquality}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLessEqual">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicSmallerEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
+        <partControls:FormulaPartControlStaticText Text="≤" Style="{StaticResource PartStyleOperatorEquality}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeGreater">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicGreater" Style="{StaticResource PartStyleOperatorEquality}"/>
+        <partControls:FormulaPartControlStaticText Text="&gt;" Style="{StaticResource PartStyleOperatorEquality}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeGreaterEqual">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicGreaterEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
+        <partControls:FormulaPartControlStaticText Text="≥" Style="{StaticResource PartStyleOperatorEquality}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeOr">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicOr" Style="{StaticResource PartStyleOperatorLogic}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Operator_Or" Style="{StaticResource PartStyleOperatorLogic}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
-
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAnd">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicAnd" Style="{StaticResource PartStyleOperatorLogic}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Operator_And" Style="{StaticResource PartStyleOperatorLogic}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
 
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeTrue">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicTrue" Style="{StaticResource PartStyleOperatorLogic}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Constant_True" Style="{StaticResource PartStyleOperatorLogic}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeFalse">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicFalse" Style="{StaticResource PartStyleOperatorLogic}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Constant_False" Style="{StaticResource PartStyleOperatorLogic}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeNot">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicNot" Style="{StaticResource PartStyleOperatorLogic}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Operator_Not" Style="{StaticResource PartStyleOperatorLogic}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAdd">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Plus" Style="{StaticResource PartStyleOperatorLogic}"/>
+        <partControls:FormulaPartControlStaticText Text="+" Style="{StaticResource PartStyleOperatorLogic}"/>
         <!-- TODO: Change Style Resource-->
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSubtract">
       <templates:UiFormulaTokenDefinition.Template>
         <!-- TODO: Change Style Resource-->
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Minus" Style="{StaticResource PartStyleOperatorLogic}"/>
+        <partControls:FormulaPartControlStaticText Text="-" Style="{StaticResource PartStyleOperatorLogic}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeMultiply">
       <templates:UiFormulaTokenDefinition.Template>
         <!-- TODO: Change Style Resource-->
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Mult" Style="{StaticResource PartStyleOperatorLogic}"/>
+        <partControls:FormulaPartControlStaticText Text="*" Style="{StaticResource PartStyleOperatorLogic}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeDivide">
       <templates:UiFormulaTokenDefinition.Template>
         <!-- TODO: Change Style Resource-->
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Divide" Style="{StaticResource PartStyleOperatorLogic}"/>
+        <partControls:FormulaPartControlStaticText Text="/" Style="{StaticResource PartStyleOperatorLogic}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePower">
       <templates:UiFormulaTokenDefinition.Template>
         <!-- TODO: Change Style Resource-->
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Power" Style="{StaticResource PartStyleOperatorLogic}"/>
+        <partControls:FormulaPartControlStaticText Text="^" Style="{StaticResource PartStyleOperatorLogic}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
 
@@ -618,74 +617,74 @@
     <!-- ### Properties ##########################################################################################################-->
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeBrightness">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="BRIGHTNESS" Style="{StaticResource PartStyleObjectVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Property_Brightness" Style="{StaticResource PartStyleObjectVariable}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLayer">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LAYER" Style="{StaticResource PartStyleObjectVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Property_Layer" Style="{StaticResource PartStyleObjectVariable}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeTransparency">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="TRANSPARENCY" Style="{StaticResource PartStyleObjectVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Property_Transparency" Style="{StaticResource PartStyleObjectVariable}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePositionX">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Property_PositionX" Style="{StaticResource PartStyleObjectVariable}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePositionY">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_Y" Style="{StaticResource PartStyleObjectVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Property_PositionY" Style="{StaticResource PartStyleObjectVariable}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeRotation">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="DIRECTION" Style="{StaticResource PartStyleObjectVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Property_Rotation" Style="{StaticResource PartStyleObjectVariable}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSize">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="SIZE" Style="{StaticResource PartStyleObjectVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Property_Size" Style="{StaticResource PartStyleObjectVariable}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
 
     <!-- ### Sensors ##########################################################################################################-->
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAccelerationX">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ACCELERATION_X" Style="{StaticResource PartStyleSensorVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Sensor_AccelerationX" Style="{StaticResource PartStyleSensorVariable}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAccelerationY">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ACCELERATION_Y" Style="{StaticResource PartStyleSensorVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Sensor_AccelerationY" Style="{StaticResource PartStyleSensorVariable}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAccelerationZ">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ACCELERATION_Z" Style="{StaticResource PartStyleSensorVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Sensor_AccelerationZ" Style="{StaticResource PartStyleSensorVariable}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeCompass">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="COMPASSDIRECTION" Style="{StaticResource PartStyleSensorVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Sensor_Compass" Style="{StaticResource PartStyleSensorVariable}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeInclinationX">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="INCLINATION_X" Style="{StaticResource PartStyleSensorVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Sensor_InclinationX" Style="{StaticResource PartStyleSensorVariable}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeInclinationY">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="INCLINATION_Y" Style="{StaticResource PartStyleSensorVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Sensor_InclinationX" Style="{StaticResource PartStyleSensorVariable}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
     <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLoudness">
       <templates:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LOUDNESS" Style="{StaticResource PartStyleSensorVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizationKey="Formula_Sensor_Loudness" Style="{StaticResource PartStyleSensorVariable}"/>
       </templates:UiFormulaTokenDefinition.Template>
     </templates:UiFormulaTokenDefinition>
 

@@ -16,7 +16,7 @@
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
   DataContext="{Binding FormulaEditorViewModel, Source={StaticResource Locator}}"
-  shell:SystemTray.IsVisible="True">
+  shell:SystemTray.IsVisible="True" >
 
   <phone:PhoneApplicationPage.Resources>
 
@@ -41,10 +41,17 @@
         Tokens="{Binding Tokens, Mode=OneWay}" 
         CaretIndex="{Binding CaretIndex, Mode=TwoWay}" 
         SelectionLength="{Binding SelectionLength, Mode=TwoWay}"
-        VerticalAlignment="Top"
-        HorizontalAlignment="Stretch"
-        Height="216" />
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch" />
     </ScrollViewer>
+    <TextBlock Grid.Row="0"
+        Text="{Binding Resources.Editor_TypeSomething, Source={StaticResource LocalizedStrings}}"
+        Visibility="{Binding IsTokensEmpty, Converter={StaticResource BoolVisibilityConverter}}"
+        Style="{StaticResource PhoneTextLargeStyle}"
+        TextWrapping="Wrap"
+        TextAlignment="Center"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Center" />
     <Grid Grid.Row="1">
       <formulaControls:FormulaKeyboard
         Name="FormulaKeyboard" 

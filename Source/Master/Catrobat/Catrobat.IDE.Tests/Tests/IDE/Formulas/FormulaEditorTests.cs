@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
@@ -13,6 +14,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 {
+    /// <summary>Tests <see cref="FormulaEditor" />. </summary>
     [TestClass]
     public class FormulaEditorTests
     {
@@ -20,7 +22,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         public void TestClassInitialize()
         {
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
+
+            // use culture different to CultureInfo.CurrentCulture (1.2 vs. 1,2)
+            ServiceLocator.CultureService.SetCulture(new CultureInfo("de"));
         }
+
+        #region Constants
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestConstants()
@@ -41,6 +48,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestEditor(FormulaTokenFactory.CreateFalseToken, FormulaEditorKey.False);
         }
 
+        #endregion
+
+        #region Operators
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestOperators()
@@ -62,6 +72,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestEditor(FormulaTokenFactory.CreateModToken, FormulaEditorKey.Mod);
         }
 
+        #endregion
+
+        #region Functions
+
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestFunctions()
         {
@@ -82,6 +96,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateRandomToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Random);
         }
 
+        #endregion
+
+        #region Sensors
+
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestSensors()
         {
@@ -93,6 +111,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestEditor(FormulaTokenFactory.CreateInclinationYToken, FormulaEditorKey.InclinationY);
             TestEditor(FormulaTokenFactory.CreateLoudnessToken, FormulaEditorKey.Loudness);
         }
+
+        #endregion
+
+        #region Properties
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestProperties()
@@ -106,6 +128,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestEditor(FormulaTokenFactory.CreateSizeToken, FormulaEditorKey.Size);
         }
 
+        #endregion
+
+        #region Variables
+
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestVariables()
         {
@@ -113,12 +139,18 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestEditor(FormulaTokenFactory.CreateGlobalVariableToken, FormulaEditorKey.GlobalVariable);
         }
 
+        #endregion
+
+        #region Brackets
+
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestBrackets()
         {
             TestEditor(FormulaTokenFactory.CreateParenthesisToken(true), FormulaEditorKey.OpeningParenthesis);
             TestEditor(FormulaTokenFactory.CreateParenthesisToken(false), FormulaEditorKey.ClosingParenthesis);
         }
+
+        #endregion
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestDelete()

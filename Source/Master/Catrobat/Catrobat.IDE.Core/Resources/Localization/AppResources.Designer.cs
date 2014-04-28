@@ -1628,470 +1628,236 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to acceleration_X.
-        /// </summary>
-        public static string Formula_ACCELERATION_X {
-            get {
-                return ResourceManager.GetString("Formula_ACCELERATION_X", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to acceleration_Y.
-        /// </summary>
-        public static string Formula_ACCELERATION_Y {
-            get {
-                return ResourceManager.GetString("Formula_ACCELERATION_Y", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to acceleration_Z.
-        /// </summary>
-        public static string Formula_ACCELERATION_Z {
-            get {
-                return ResourceManager.GetString("Formula_ACCELERATION_Z", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to brightness.
-        /// </summary>
-        public static string Formula_BRIGHTNESS {
-            get {
-                return ResourceManager.GetString("Formula_BRIGHTNESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ).
-        /// </summary>
-        public static string Formula_ClosedBrecket {
-            get {
-                return ResourceManager.GetString("Formula_ClosedBrecket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to compass_direction.
-        /// </summary>
-        public static string Formula_COMPASSDIRECTION {
-            get {
-                return ResourceManager.GetString("Formula_COMPASSDIRECTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ..
-        /// </summary>
-        public static string Formula_DecimalPointCharacter {
-            get {
-                return ResourceManager.GetString("Formula_DecimalPointCharacter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to direction.
-        /// </summary>
-        public static string Formula_DIRECTION {
-            get {
-                return ResourceManager.GetString("Formula_DIRECTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /.
-        /// </summary>
-        public static string Formula_Divide {
-            get {
-                return ResourceManager.GetString("Formula_Divide", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to abs.
-        /// </summary>
-        public static string Formula_FunctionAbs {
-            get {
-                return ResourceManager.GetString("Formula_FunctionAbs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to arccos.
-        /// </summary>
-        public static string Formula_FunctionArcCos {
-            get {
-                return ResourceManager.GetString("Formula_FunctionArcCos", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to arcsin.
-        /// </summary>
-        public static string Formula_FunctionArcSin {
-            get {
-                return ResourceManager.GetString("Formula_FunctionArcSin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to arctan.
-        /// </summary>
-        public static string Formula_FunctionArcTan {
-            get {
-                return ResourceManager.GetString("Formula_FunctionArcTan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to cos.
-        /// </summary>
-        public static string Formula_FunctionCos {
-            get {
-                return ResourceManager.GetString("Formula_FunctionCos", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to exp.
-        /// </summary>
-        public static string Formula_FunctionExp {
-            get {
-                return ResourceManager.GetString("Formula_FunctionExp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ln.
-        /// </summary>
-        public static string Formula_FunctionLn {
-            get {
-                return ResourceManager.GetString("Formula_FunctionLn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to log.
-        /// </summary>
-        public static string Formula_FunctionLog {
-            get {
-                return ResourceManager.GetString("Formula_FunctionLog", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to max.
-        /// </summary>
-        public static string Formula_FunctionMax {
-            get {
-                return ResourceManager.GetString("Formula_FunctionMax", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to min.
-        /// </summary>
-        public static string Formula_FunctionMin {
-            get {
-                return ResourceManager.GetString("Formula_FunctionMin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to mod.
-        /// </summary>
-        public static string Formula_FunctionMod {
-            get {
-                return ResourceManager.GetString("Formula_FunctionMod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to pi.
-        /// </summary>
-        public static string Formula_FunctionPi {
-            get {
-                return ResourceManager.GetString("Formula_FunctionPi", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to random.
-        /// </summary>
-        public static string Formula_FunctionRandom {
-            get {
-                return ResourceManager.GetString("Formula_FunctionRandom", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to round.
-        /// </summary>
-        public static string Formula_FunctionRound {
-            get {
-                return ResourceManager.GetString("Formula_FunctionRound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to sin.
-        /// </summary>
-        public static string Formula_FunctionSin {
-            get {
-                return ResourceManager.GetString("Formula_FunctionSin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to sqrt.
-        /// </summary>
-        public static string Formula_FunctionSqrt {
-            get {
-                return ResourceManager.GetString("Formula_FunctionSqrt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to tan.
-        /// </summary>
-        public static string Formula_FunctionTan {
-            get {
-                return ResourceManager.GetString("Formula_FunctionTan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to inclination_X.
-        /// </summary>
-        public static string Formula_INCLINATION_X {
-            get {
-                return ResourceManager.GetString("Formula_INCLINATION_X", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to inclination_Y.
-        /// </summary>
-        public static string Formula_INCLINATION_Y {
-            get {
-                return ResourceManager.GetString("Formula_INCLINATION_Y", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to layer.
-        /// </summary>
-        public static string Formula_LAYER {
-            get {
-                return ResourceManager.GetString("Formula_LAYER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AND.
-        /// </summary>
-        public static string Formula_LogicAnd {
-            get {
-                return ResourceManager.GetString("Formula_LogicAnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to =.
-        /// </summary>
-        public static string Formula_LogicEqual {
-            get {
-                return ResourceManager.GetString("Formula_LogicEqual", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to FALSE.
         /// </summary>
-        public static string Formula_LogicFalse {
+        public static string Formula_Constant_False {
             get {
-                return ResourceManager.GetString("Formula_LogicFalse", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &gt;.
-        /// </summary>
-        public static string Formula_LogicGreater {
-            get {
-                return ResourceManager.GetString("Formula_LogicGreater", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ≥.
-        /// </summary>
-        public static string Formula_LogicGreaterEqual {
-            get {
-                return ResourceManager.GetString("Formula_LogicGreaterEqual", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to NOT.
-        /// </summary>
-        public static string Formula_LogicNot {
-            get {
-                return ResourceManager.GetString("Formula_LogicNot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ≠.
-        /// </summary>
-        public static string Formula_LogicNotEqual {
-            get {
-                return ResourceManager.GetString("Formula_LogicNotEqual", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to OR.
-        /// </summary>
-        public static string Formula_LogicOr {
-            get {
-                return ResourceManager.GetString("Formula_LogicOr", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;.
-        /// </summary>
-        public static string Formula_LogicSmaller {
-            get {
-                return ResourceManager.GetString("Formula_LogicSmaller", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ≤.
-        /// </summary>
-        public static string Formula_LogicSmallerEqual {
-            get {
-                return ResourceManager.GetString("Formula_LogicSmallerEqual", resourceCulture);
+                return ResourceManager.GetString("Formula_Constant_False", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to TRUE.
         /// </summary>
-        public static string Formula_LogicTrue {
+        public static string Formula_Constant_True {
             get {
-                return ResourceManager.GetString("Formula_LogicTrue", resourceCulture);
+                return ResourceManager.GetString("Formula_Constant_True", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to loudness.
+        ///   Looks up a localized string similar to abs.
         /// </summary>
-        public static string Formula_LOUDNESS {
+        public static string Formula_Function_Abs {
             get {
-                return ResourceManager.GetString("Formula_LOUDNESS", resourceCulture);
+                return ResourceManager.GetString("Formula_Function_Abs", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -.
+        ///   Looks up a localized string similar to max.
         /// </summary>
-        public static string Formula_Minus {
+        public static string Formula_Function_Max {
             get {
-                return ResourceManager.GetString("Formula_Minus", resourceCulture);
+                return ResourceManager.GetString("Formula_Function_Max", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to *.
+        ///   Looks up a localized string similar to min.
         /// </summary>
-        public static string Formula_Mult {
+        public static string Formula_Function_Min {
             get {
-                return ResourceManager.GetString("Formula_Mult", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to object_X.
-        /// </summary>
-        public static string Formula_OBJECT_X {
-            get {
-                return ResourceManager.GetString("Formula_OBJECT_X", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to object_Y.
-        /// </summary>
-        public static string Formula_OBJECT_Y {
-            get {
-                return ResourceManager.GetString("Formula_OBJECT_Y", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to (.
-        /// </summary>
-        public static string Formula_OpenBrecket {
-            get {
-                return ResourceManager.GetString("Formula_OpenBrecket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ,.
-        /// </summary>
-        public static string Formula_ParameterSeperator {
-            get {
-                return ResourceManager.GetString("Formula_ParameterSeperator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to +.
-        /// </summary>
-        public static string Formula_Plus {
-            get {
-                return ResourceManager.GetString("Formula_Plus", resourceCulture);
+                return ResourceManager.GetString("Formula_Function_Min", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to random.
         /// </summary>
-        public static string Formula_Random {
+        public static string Formula_Function_Random {
             get {
-                return ResourceManager.GetString("Formula_Random", resourceCulture);
+                return ResourceManager.GetString("Formula_Function_Random", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to round.
+        /// </summary>
+        public static string Formula_Function_Round {
+            get {
+                return ResourceManager.GetString("Formula_Function_Round", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sqrt.
+        /// </summary>
+        public static string Formula_Function_Sqrt {
+            get {
+                return ResourceManager.GetString("Formula_Function_Sqrt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AND.
+        /// </summary>
+        public static string Formula_Operator_And {
+            get {
+                return ResourceManager.GetString("Formula_Operator_And", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MOD.
+        /// </summary>
+        public static string Formula_Operator_Mod {
+            get {
+                return ResourceManager.GetString("Formula_Operator_Mod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NOT.
+        /// </summary>
+        public static string Formula_Operator_Not {
+            get {
+                return ResourceManager.GetString("Formula_Operator_Not", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OR.
+        /// </summary>
+        public static string Formula_Operator_Or {
+            get {
+                return ResourceManager.GetString("Formula_Operator_Or", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to brightness.
+        /// </summary>
+        public static string Formula_Property_Brightness {
+            get {
+                return ResourceManager.GetString("Formula_Property_Brightness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to layer.
+        /// </summary>
+        public static string Formula_Property_Layer {
+            get {
+                return ResourceManager.GetString("Formula_Property_Layer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to position.X.
+        /// </summary>
+        public static string Formula_Property_PositionX {
+            get {
+                return ResourceManager.GetString("Formula_Property_PositionX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to position.Y.
+        /// </summary>
+        public static string Formula_Property_PositionY {
+            get {
+                return ResourceManager.GetString("Formula_Property_PositionY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rotation.
+        /// </summary>
+        public static string Formula_Property_Rotation {
+            get {
+                return ResourceManager.GetString("Formula_Property_Rotation", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to size.
         /// </summary>
-        public static string Formula_SIZE {
+        public static string Formula_Property_Size {
             get {
-                return ResourceManager.GetString("Formula_SIZE", resourceCulture);
+                return ResourceManager.GetString("Formula_Property_Size", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to transparency.
         /// </summary>
-        public static string Formula_TRANSPARENCY {
+        public static string Formula_Property_Transparency {
             get {
-                return ResourceManager.GetString("Formula_TRANSPARENCY", resourceCulture);
+                return ResourceManager.GetString("Formula_Property_Transparency", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to unknown.
+        ///   Looks up a localized string similar to acceleration.X.
         /// </summary>
-        public static string Formula_Unknown {
+        public static string Formula_Sensor_AccelerationX {
             get {
-                return ResourceManager.GetString("Formula_Unknown", resourceCulture);
+                return ResourceManager.GetString("Formula_Sensor_AccelerationX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to acceleration.Y.
+        /// </summary>
+        public static string Formula_Sensor_AccelerationY {
+            get {
+                return ResourceManager.GetString("Formula_Sensor_AccelerationY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to acceleration.Z.
+        /// </summary>
+        public static string Formula_Sensor_AccelerationZ {
+            get {
+                return ResourceManager.GetString("Formula_Sensor_AccelerationZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to compass.
+        /// </summary>
+        public static string Formula_Sensor_Compass {
+            get {
+                return ResourceManager.GetString("Formula_Sensor_Compass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to inclination.X.
+        /// </summary>
+        public static string Formula_Sensor_InclinationX {
+            get {
+                return ResourceManager.GetString("Formula_Sensor_InclinationX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to inclination.Y.
+        /// </summary>
+        public static string Formula_Sensor_InclinationY {
+            get {
+                return ResourceManager.GetString("Formula_Sensor_InclinationY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to loudness.
+        /// </summary>
+        public static string Formula_Sensor_Loudness {
+            get {
+                return ResourceManager.GetString("Formula_Sensor_Loudness", resourceCulture);
             }
         }
         

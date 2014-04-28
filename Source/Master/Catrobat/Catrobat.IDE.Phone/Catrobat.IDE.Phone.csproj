@@ -176,6 +176,7 @@
     <Compile Include="Content\Images\Misc\ImageGallery.xaml.cs">
       <DependentUpon>ImageGallery.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlStaticText.cs" />
     <Compile Include="Controls\FormulaControls\Templates\UiFormulaTokenDefinitionCollection.cs" />
     <Compile Include="Controls\FormulaControls\Templates\UiFormulaTokenDefinition.cs" />
     <Compile Include="Controls\FormulaControls\FormulaViewer.xaml.cs">

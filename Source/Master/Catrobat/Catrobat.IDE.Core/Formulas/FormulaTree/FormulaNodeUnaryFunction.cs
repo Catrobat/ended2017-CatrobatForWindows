@@ -5,6 +5,7 @@ using System.Text;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Resources.Localization;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
@@ -63,7 +64,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
             sb.Append("exp");
         }
 
@@ -87,7 +87,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
             sb.Append("log");
         }
 
@@ -111,7 +110,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
             sb.Append("ln");
         }
 
@@ -135,7 +133,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
             sb.Append("sin");
         }
 
@@ -159,7 +156,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
             sb.Append("cos");
         }
 
@@ -183,7 +179,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
             sb.Append("tan");
         }
 
@@ -207,7 +202,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
             sb.Append("arcsin");
         }
 
@@ -231,7 +225,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
             sb.Append("arccos");
         }
 
@@ -255,7 +248,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
             sb.Append("arctan");
         }
 
@@ -279,8 +271,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("abs");
+            sb.Append(AppResources.Formula_Function_Abs);
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)
@@ -303,8 +294,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("sqrt");
+            sb.Append(AppResources.Formula_Function_Sqrt);
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)
@@ -327,8 +317,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            // TODO: translate
-            sb.Append("round");
+            sb.Append(AppResources.Formula_Function_Round);
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)

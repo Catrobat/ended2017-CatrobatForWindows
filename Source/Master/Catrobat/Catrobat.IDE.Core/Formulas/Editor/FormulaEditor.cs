@@ -42,12 +42,14 @@ namespace Catrobat.IDE.Core.Formulas.Editor
                 _tokens = value;
                 if (_tokens != null) _tokens.CollectionChanged += Tokens_CollectionChanged;
                 RaisePropertyChanged(() => Tokens);
+                RaisePropertyChanged(() => IsTokensEmpty);
                 InterpretTokens();
             }
         }
         private void Tokens_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             InterpretTokens();
+            RaisePropertyChanged(() => IsTokensEmpty);
         }
 
         private ParsingError _parsingError;
@@ -90,6 +92,11 @@ namespace Catrobat.IDE.Core.Formulas.Editor
 
         #region Properties
 
+        public bool IsTokensEmpty
+        {
+            get { return Tokens == null || Tokens.Count == 0;  }
+        }
+
         public bool CanUndo
         {
             get { return _undoStack.Count != 0; }
@@ -112,8 +119,7 @@ namespace Catrobat.IDE.Core.Formulas.Editor
 
         public bool CanDelete
         {
-            // TODO: change to SelectionLength <> 0 || CaretIndex > 0
-            get { return CaretIndex > 0; }
+            get { return CaretIndex > 0 || SelectionLength != 0; }
         }
 
         public bool HasError

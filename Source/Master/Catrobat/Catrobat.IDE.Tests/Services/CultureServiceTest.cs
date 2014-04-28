@@ -1,19 +1,26 @@
 ﻿using System.Globalization;
-using System.Threading;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Tests.Services
 {
     public class CultureServiceTest : ICultureService
     {
+        private CultureInfo _culture;
+
+        #region Implements ICultureService
+
         public CultureInfo GetCulture()
         {
-            return Thread.CurrentThread.CurrentUICulture;
+            return _culture;
         }
 
         public void SetCulture(CultureInfo culture)
         {
-            Thread.CurrentThread.CurrentUICulture = culture;
+            _culture = culture;
+            AppResources.Culture = culture;
         }
+
+        #endregion
     }
 }
