@@ -1,5 +1,5 @@
-﻿using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Phone.Controls.FormulaControls.PartControls;
+﻿using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Phone.Controls.FormulaControls.Templates;
 using System;
 using System.Collections.Generic;
@@ -19,6 +19,12 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
     public partial class FormulaViewer
     {
+        public new DoubleTap DoubleTap;
+        private void RaiseDoubleTap(int index)
+        {
+            if (DoubleTap != null) DoubleTap.Invoke(index);
+        }
+
         #region DependencyProperties
 
         public static readonly DependencyProperty TokensProperty = DependencyProperty.Register(
@@ -36,7 +42,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             var oldValue = (ObservableCollection<IFormulaToken>)e.OldValue;
             var newValue = (ObservableCollection<IFormulaToken>)e.NewValue;
 
-            UpdateControls();
+            UpdateContainers();
 
             if (oldValue != null) oldValue.CollectionChanged -= Tokens_CollectionChanged;
             if (newValue != null) newValue.CollectionChanged += Tokens_CollectionChanged;
@@ -49,7 +55,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
                     for (var relativeIndex = 0; relativeIndex < e.NewItems.Count; relativeIndex++)
                     {
                         var absoluteIndex = e.NewStartingIndex + relativeIndex;
-                        AddControl((IFormulaToken)e.NewItems[relativeIndex], absoluteIndex);
+                        AddContainer((IFormulaToken)e.NewItems[relativeIndex], absoluteIndex);
                     }
                     UpdateFontSize();
                     UpdateStyles();
@@ -58,14 +64,14 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
                     for (var relativeIndex = 0; relativeIndex < e.OldItems.Count; relativeIndex++)
                     {
                         var absoluteIndex = e.OldStartingIndex + relativeIndex;
-                        RemoveControl(absoluteIndex);
+                        RemoveContainer(absoluteIndex);
                     }
                     UpdateFontSize();
                     UpdateStyles();
                     break;
                 default:
                     Debug.Assert(false, "NotifyCollectionChangedAction \"" + e.Action.ToString() + "\" not implemented. ");
-                    UpdateControls();
+                    UpdateContainers();
                     break;
             }
         }
@@ -90,17 +96,15 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             if (Tokens == null) return;
 
             // CoerceValueCallback in Windows Phone not available (FrameworkPropertyMetadata is not available)
- 
-            MoveCaret((int)e.OldValue, (int)e.NewValue);
+            MoveCaret((int) e.OldValue, (int) e.NewValue);
         }
 
         // TODO: Create SelectionStart property and calculate CaretIndex = SelectionStart + SelectionLength
-
         public static readonly DependencyProperty SelectionLengthProperty = DependencyProperty.Register(
             name: "SelectionLength",
             propertyType: typeof(int),
             ownerType: typeof(FormulaViewer),
-            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer)d).SetSelection()));
+            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer)d).UpdateStyles()));
         public int SelectionLength
         {
             get { return (int)GetValue(SelectionLengthProperty); }
@@ -110,11 +114,12 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             }
         }
 
+        // TODO: delete this property?
         public static readonly DependencyProperty IsEditEnabledProperty = DependencyProperty.Register(
             name: "IsEditEnabled",
             propertyType: typeof(bool),
             ownerType: typeof(FormulaViewer),
-            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer)d).UpdateControls()));
+            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer)d).UpdateContainers()));
         public bool IsEditEnabled
         {
             get { return (bool)GetValue(IsEditEnabledProperty); }
@@ -125,7 +130,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             name: "IsMultiline",
             propertyType: typeof(bool),
             ownerType: typeof(FormulaViewer),
-            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer)d).UpdateControls()));
+            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer)d).UpdateContainers()));
         public bool IsMultiline
         {
             get { return (bool)GetValue(IsMultilineProperty); }
@@ -136,7 +141,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             name: "NormalFontSize",
             propertyType: typeof(double),
             ownerType: typeof(FormulaViewer),
-            typeMetadata: new PropertyMetadata(1.0, (d, e) => ((FormulaViewer)d).UpdateControls()));
+            typeMetadata: new PropertyMetadata(1.0, (d, e) => ((FormulaViewer)d).UpdateFontSize()));
         public double NormalFontSize
         {
             get { return (double)GetValue(NormalFontSizeProperty); }
@@ -147,7 +152,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             name: "MinFontSize",
             propertyType: typeof(double),
             ownerType: typeof(FormulaViewer),
-            typeMetadata: new PropertyMetadata(0.0, (d, e) => ((FormulaViewer)d).UpdateControls()));
+            typeMetadata: new PropertyMetadata(0.0, (d, e) => ((FormulaViewer)d).UpdateFontSize()));
         public double MinFontSize
         {
             get { return (double)GetValue(MinFontSizeProperty); }
@@ -158,7 +163,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             name: "MaxFontSize",
             propertyType: typeof(double),
             ownerType: typeof(FormulaViewer),
-            typeMetadata: new PropertyMetadata(42.0, (d, e) => ((FormulaViewer)d).UpdateControls()));
+            typeMetadata: new PropertyMetadata(42.0, (d, e) => ((FormulaViewer)d).UpdateFontSize()));
         public double MaxFontSize
         {
             get { return (double)GetValue(MaxFontSizeProperty); }
@@ -169,7 +174,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
                 name: "CharactersInOneLineNormalFontSize",
                 propertyType: typeof(int),
                 ownerType: typeof(FormulaViewer),
-                typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer)d).UpdateControls()));
+                typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer)d).UpdateFontSize()));
         public int CharactersInOneLineNormalFontSize
         {
             get { return (int)GetValue(CharactersInOneLineNormalFontSizeProperty); }
@@ -180,7 +185,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             name: "LinesNormalFontSize",
             propertyType: typeof(int),
             ownerType: typeof(FormulaViewer),
-            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer)d).UpdateControls()));
+            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer)d).UpdateFontSize()));
         public int LinesNormalFontSize
         {
             get { return (int)GetValue(LinesNormalFontSizeProperty); }
@@ -191,108 +196,178 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             name: "IsAutoFontSize",
             propertyType: typeof(bool),
             ownerType: typeof(FormulaViewer),
-            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer)d).UpdateControls()));
+            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer)d).UpdateFontSize()));
         public bool IsAutoFontSize
         {
             get { return (bool)GetValue(IsAutoFontSizeProperty); }
-            set
-            {
-                SetValue(IsAutoFontSizeProperty, value);
-            }
+            set { SetValue(IsAutoFontSizeProperty, value); }
         }
 
         #endregion
 
         #region Properties
+        public double ActualFontSize { get; private set; }
 
-        private double _actualFontSize;
-        public double ActualFontSize
-        {
-            get { return _actualFontSize; }
-            private set { _actualFontSize = value; }
-        }
-
-        private static Dictionary<Type, FormulaPartControl> _formulaTokenDefinitions;
-        private static Dictionary<Type, FormulaPartControl> FormulaTokenDefinitions
+        private static IDictionary<Type, FormulaTokenTemplate> _formulaTokenTemplates;
+        private static IDictionary<Type, FormulaTokenTemplate> FormulaTokenTemplates
         {
             get
             {
-                if (_formulaTokenDefinitions == null)
+                if (_formulaTokenTemplates == null)
                 {
-                    var formulaDefinitions = Application.Current.Resources["FormulaTokenDefinitions"] as UiFormulaTokenDefinitionCollection;
-                    if (formulaDefinitions == null) throw new NotImplementedException("Please add FormulaTokenTemaplates.xaml to App resources. ");
-
-                    _formulaTokenDefinitions = formulaDefinitions.ToDictionary(
-                        keySelector: definition => definition.TokenType,
-                        elementSelector: definition => definition.Template);
+                    var formulaTokenTemplates = Application.Current.Resources["FormulaTokenTemplates"] as FormulaTokenTemplateCollection;
+                    if (formulaTokenTemplates == null)
+                    {
+                        Debug.WriteLine("Please add FormulaTokenTemplates.xaml to App resources. ");
+                        _formulaTokenTemplates = new Dictionary<Type, FormulaTokenTemplate>();
+                    }
+                    else
+                    {
+                        _formulaTokenTemplates = formulaTokenTemplates.ToDictionary();
+                    }
                 }
-                return _formulaTokenDefinitions;
+                return _formulaTokenTemplates;
             }
         }
 
-
-        private Panel GetPanel()
+        private Panel Panel
         {
-            return IsMultiline ? (Panel)MultilinePanelContent : SingleLinePanelContent;
+            get { return IsMultiline ? (Panel) MultilinePanelContent : SingleLinePanelContent; }
         }
 
         private UIElementCollection Children
         {
-            get { return GetPanel().Children; }
+            get { return Panel.Children; }
         }
 
-        #endregion
-
-        #region Events
-
-        public new DoubleTap DoubleTap;
-        private void RaiseDoubleTap(int index)
+        private IEnumerable<Grid> Containers
         {
-            if (DoubleTap != null) DoubleTap.Invoke(index);
+            get { return Children.Cast<Grid>().Where(child => child != Caret); }
         }
 
-        #endregion
+        private Grid Caret { get; set; }
 
-        private List<FormulaPartControl> _templates;
+        #endregion
 
         public FormulaViewer()
         {
             InitializeComponent();
         }
 
-        private FormulaPartControl CreateTemplate(IFormulaToken token)
+        public bool IsLoaded { get; private set; }
+        private void FormulaViewer_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            IsLoaded = true;
+
+            Caret = CreateCaret();
+            InitCaret();
+            UpdateContainers();
+        }
+
+        #region Containers
+
+        private Grid CreateContainer(IFormulaToken token)
         {
             // find template in FormulaTokenTemplates.xaml
-            var template = FormulaTokenDefinitions[token.GetType()];
-            return template.CreateUiTokenTemplate(token);
+            FormulaTokenTemplate template;
+            if (!FormulaTokenTemplates.TryGetValue(token.GetType(), out template))
+            {
+                Debug.WriteLine("Please add template for \"" + token.GetType().Name +
+                                "\" to FormulaTokenTemplates.xaml. ");
+                return null;
+            }
+
+            return template.CreateContainer(token);
         }
 
-        private Grid CreateUiControl(FormulaPartControl template)
+        private void InitContainer(Grid container)
         {
-            return template.CreateUiControls(
-                fontSize: ActualFontSize, 
-                isSelected: false, 
-                isParentSelected: false, 
-                isError: false,
-                onTap: (sender, e) => Control_OnTap(sender, e, template), 
-                onDoubleTap: (sender, e) => Control_OnDoubleTap(sender, e, template));
+            container.Tap += (sender, e) => Container_OnTap((Grid)sender, e);
+            container.DoubleTap += (sender, e) => Container_OnDoubleTap((Grid)sender, e);
+            FormulaTokenTemplate.SetStyle(container, false);
+            FormulaTokenTemplate.SetFontSize(container, ActualFontSize);
         }
 
-        private void Control_OnTap(Grid sender, GestureEventArgs e, FormulaPartControl template)
+        private void UpdateContainers()
         {
-            var index = Children.IndexOf(sender);
+            // see FormulaViewer_OnLoaded
+            if (!IsLoaded) return;
+
+            Children.Clear();
+
+            if (Tokens == null)
+            {
+                CaretIndex = 0;
+            }
+            else
+            {
+                Children.AddRange(Tokens.Select(CreateContainer).Where(container => container != null));
+                foreach (var container in Containers)
+                {
+                    InitContainer(container);
+                }
+            }
+
+            UpdateFontSize();
+            UpdateStyles();
+            MoveCaret(-1, CaretIndex);
+        }
+
+        private void AddContainer(IFormulaToken token, int index)
+        {
+            if (index > CaretIndex)
+            {
+                index++;
+            }
+
+            var container = CreateContainer(token);
+            if (container == null) return;
+            Children.Insert(index, container);
+            InitContainer(container);
+
+            if (index <= CaretIndex)
+            {
+                CaretIndex++;
+            }
+        }
+
+        private void RemoveContainer(int index)
+        {
+            if (index >= CaretIndex)
+            {
+                index++;
+            }
+
+            Children.RemoveAt(index);
+
+            if (index < CaretIndex)
+            {
+                CaretIndex--;
+            }
+        }
+
+        #endregion
+
+        #region Event handlers
+
+        private void Container_OnTap(Grid container, GestureEventArgs e)
+        {
+            // find container
+            var index = Containers.IndexOf(container);
             if (index == -1) return;
-            if (CaretIndex < index) index--;
-            if (e.GetPosition(sender).X > sender.ActualWidth/2) index++;
+
+            if (e.GetPosition(container).X > container.ActualWidth / 2) index++;
+
             CaretIndex = index;
             e.Handled = true;
         }
 
-        private void Control_OnDoubleTap(Grid sender, GestureEventArgs e, FormulaPartControl template)
+        private void Container_OnDoubleTap(Grid container, GestureEventArgs e)
         {
-            var index = Children.IndexOf(sender);
+            // find container
+            var index = Containers.IndexOf(container);
             if (index == -1) return;
-            if (CaretIndex < index) index--;
+
             RaiseDoubleTap(index);
             e.Handled = true;
         }
@@ -302,143 +377,75 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             CaretIndex = Tokens.Count;
         }
 
-        private void MoveCaret(int oldIndex, int newIndex)
-        {
-            // already at the right position (see AddControl, RemoveControl)
-            if (0 <= newIndex && newIndex < Children.Count && ((Grid)Children[newIndex]).Name == "Caret") return;
+        #endregion
 
-            Debug.Assert(0 <= oldIndex && oldIndex < Children.Count);
-            var caret = (Grid)Children[oldIndex];
-            Debug.Assert(caret.Name == "Caret");
-            Children.RemoveAt(oldIndex);
+        #region FontSize
 
-            Debug.Assert(0 <= newIndex && newIndex <= Children.Count);
-            Children.Insert(newIndex, CreateCaret(ActualFontSize));
-            Debug.Assert(((Grid)Children[newIndex]).Name == "Caret");
-        }
-
-        private void AddControl(IFormulaToken token, int index)
-        {
-            var template = CreateTemplate(token);
-            _templates.Insert(index, template);
-            if (index > CaretIndex)
-            {
-                index++;
-            }
-            Children.Insert(index, CreateUiControl(template));
-            if (index <= CaretIndex)
-            {
-                CaretIndex++;
-            }
-        }
-
-        private void RemoveControl(int index)
-        {
-            _templates.RemoveAt(index);
-            if (index >= CaretIndex)
-            {
-                index++;
-            }
-            Children.RemoveAt(index);
-            if (index < CaretIndex)
-            {
-                CaretIndex--;
-            }
-        }
-
-        private void UpdateControls()
-        {
-            if (Tokens == null)
-            {
-                Children.Clear();
-                return;
-            }
-
-            _templates = Tokens.Select(CreateTemplate).ToList();
-
-            UpdateActualFontSize();
-
-            Children.Clear();
-            foreach (var child in _templates.Select(CreateUiControl))
-            {
-                Children.Add(child);
-            }
-
-            if (0 <= CaretIndex && CaretIndex <= Children.Count) Children.Insert(CaretIndex, CreateCaret(ActualFontSize));
-
-            UpdateStyles();
-        }
-
-        private void UpdateStyles()
-        {
-            // TODO: set selection
-            SetSelection(CaretIndex, SelectionLength);
-
-            // TODO: set error
-        }
-
-        private void UpdateActualFontSize()
+        private double CalculateFontSize(IList<int> characterWidths)
         {
             var fontSize = NormalFontSize;
-            if (IsAutoFontSize)
+            if (!IsAutoFontSize) return fontSize;
+
+            double oldFontSize;
+            int maxSinglePartWidth;
+            var trials = 0;
+            do
             {
-                double oldFontSize;
-                int maxSinglePartWidth;
-                var trials = 0;
-                do
+                trials++;
+                maxSinglePartWidth = 0;
+                oldFontSize = fontSize;
+
+                var oldMaxLinesUsed = LinesNormalFontSize * (NormalFontSize / fontSize);
+
+                var currentCharactersPerLine = CharactersInOneLineNormalFontSize * (NormalFontSize / fontSize);
+                double linesUsedWithCurrentFontSize = 1;
+                double currentLineCharacters = 0;
+                foreach (var width in characterWidths)
                 {
-                    trials++;
-                    maxSinglePartWidth = 0;
-                    oldFontSize = fontSize;
+                    currentLineCharacters += width;
 
-                    var oldMaxLinesUsed = LinesNormalFontSize * (NormalFontSize / fontSize);
-
-                    var currentCharactersPerLine = CharactersInOneLineNormalFontSize * (NormalFontSize / fontSize);
-                    double linesUsedWithCurrentFontSize = 1;
-                    double currentLineCharacters = 0;
-                    foreach (var template in _templates)
+                    if (currentLineCharacters > currentCharactersPerLine)
                     {
-                        var width = template.GetCharacterWidth();
-
-                        currentLineCharacters += width;
-
-                        if (currentLineCharacters > currentCharactersPerLine)
-                        {
-                            currentLineCharacters = width;
-                            linesUsedWithCurrentFontSize++;
-                        }
-
-                        maxSinglePartWidth = Math.Max(maxSinglePartWidth, width);
+                        currentLineCharacters = width;
+                        linesUsedWithCurrentFontSize++;
                     }
 
-                    fontSize = (0.5) * oldFontSize + 0.5 * (oldFontSize * (oldMaxLinesUsed / linesUsedWithCurrentFontSize));
+                    maxSinglePartWidth = Math.Max(maxSinglePartWidth, width);
+                }
 
-                } while (Math.Abs(fontSize - oldFontSize) > 7.0 && trials < 10);
+                fontSize = (0.5) * oldFontSize + 0.5 * (oldFontSize * (oldMaxLinesUsed / linesUsedWithCurrentFontSize));
 
-                var singleLineFontSize = maxSinglePartWidth == 0 ? MaxFontSize : NormalFontSize * (((double) CharactersInOneLineNormalFontSize) / maxSinglePartWidth);
+            } while (Math.Abs(fontSize - oldFontSize) > 7.0 && trials < 10);
 
-                fontSize = Math.Min(fontSize, singleLineFontSize);
+            var singleLineFontSize = maxSinglePartWidth == 0 ? MaxFontSize : NormalFontSize * (((double) CharactersInOneLineNormalFontSize) / maxSinglePartWidth);
 
-                if (fontSize < MinFontSize) fontSize = MinFontSize;
-                if (fontSize > MaxFontSize) fontSize = MaxFontSize;
-            }
-            ActualFontSize = fontSize;
+            fontSize = Math.Min(fontSize, singleLineFontSize);
+
+            if (fontSize < MinFontSize) fontSize = MinFontSize;
+            if (fontSize > MaxFontSize) fontSize = MaxFontSize;
+            return fontSize;
         }
 
         private void UpdateFontSize()
         {
             var oldFontSize = ActualFontSize;
-            UpdateActualFontSize();
-            if (Math.Abs(ActualFontSize - oldFontSize) <= double.Epsilon) return;
-            UpdateControls();
+            var characterWidths = Children.OfType<Grid>().Select(FormulaTokenTemplate.GetCharacterWidth).ToList();
+            var fontSize = CalculateFontSize(characterWidths);
+            if (Math.Abs(fontSize - oldFontSize) <= 0.1) return;
+            ActualFontSize = fontSize;
+
+            foreach (var container in Containers)
+            {
+                FormulaTokenTemplate.SetFontSize(container, ActualFontSize);
+            }
+            SetCaretFontSize(ActualFontSize);
         }
 
-        public void SetCaretIndex(Grid sender)
-        {
-            CaretIndex = Children.IndexOf(sender);
-        }
+        #endregion
 
-        private void SetSelection()
+        #region Styles
+
+        private void UpdateStyles()
         {
             SetSelection(CaretIndex, SelectionLength);
         }
@@ -446,92 +453,64 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         private void SetSelection(int startIndex, int count)
         {
             var endIndex = startIndex + count;
-            for (var i = 0; i < Children.Count; i++)
+
+            var index = 0;
+            foreach (var container in Containers)
             {
-                var child = (Grid)Children[i];
-                var partControl = child.DataContext as FormulaPartControl;
-                if (partControl == null) continue;
-
-                var styles = partControl.Style;
-                if (styles == null) continue;
-
-                var isSelected = startIndex <= i && i <= endIndex;
-                ApplyStyle(
-                    control: child,
-                    containerStyle: isSelected ? styles.SelectedContainerStyle : styles.ContainerStyle,
-                    textStyle: isSelected ? styles.SelectedTextStyle : styles.TextStyle);
+                var isSelected = startIndex <= index && index < endIndex;
+                FormulaTokenTemplate.SetStyle(container, isSelected);
+                index++;
             }
         }
 
-        private void SetError(int startIndex, int count)
+        #endregion
+
+        #region Caret
+
+        private void MoveCaret(int oldIndex, int newIndex)
         {
-            throw new NotImplementedException();
-            // TODO: create error styles
-            var endIndex = startIndex + count;
-            for (var i = 0; i < Children.Count; i++)
+            // see FormulaViewer_OnLoaded
+            if (!IsLoaded) return;
+
+            if (oldIndex == newIndex) return;
+
+            if (oldIndex != -1)
             {
-                var child = (Grid)Children[i];
-                var partControl = child.DataContext as FormulaPartControl;
-                if (partControl == null) continue;
-
-                var styles = partControl.Style;
-                if (styles == null) continue;
-
-
-                var isError = startIndex <= i && i <= endIndex;
-                //ApplyStyle(
-                //    control: child,
-                //    containerStyle: isError ? styles.ErrorContainerStyle : styles.ContainerStyle,
-                //    textStyle: isError ? styles.ErrorTextStyle : styles.TextStyle);
+                var element = Children.ElementAtOrDefault(newIndex) as FrameworkElement;
+                if (element == Caret) return;
+                if (oldIndex != -1) Children.RemoveAt(oldIndex);
             }
+            Children.Insert(newIndex, Caret);
         }
 
-        internal void ApplyStyle(Grid control, Style containerStyle, Style textStyle)
+        private void SetCaretFontSize(double fontSize)
         {
-            control.Style = containerStyle;
-            foreach (var textBlock in control.Children.OfType<TextBlock>())
-            {
-                textBlock.Style = textStyle;
-            }
+            if (Caret == null) return;
+            var textBlock = (TextBlock) Caret.Children[0];
+            textBlock.FontSize = fontSize;
+
+            // trigger SizeChanged event (see UpdateCaretMargin)
+            Caret.Margin = new Thickness(0);
         }
 
-        #region Caret definition
-
-        private static Storyboard CreateBlinkingEffect(DependencyObject target)
+        private void UpdateCaretMargin()
         {
-            //<Storyboard RepeatBehavior="Forever" AutoReverse="True" Duration="0:0:0.6">
-            //  <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Caret" Storyboard.TargetProperty="TextBlock.Visibility">
-            //    <DiscreteObjectKeyFrame KeyTime="0:0:0.3">
-            //      <DiscreteObjectKeyFrame.Value>
-            //        <Visibility>Collapsed</Visibility>
-            //      </DiscreteObjectKeyFrame.Value>
-            //    </DiscreteObjectKeyFrame>
-            //  </ObjectAnimationUsingKeyFrames>
-            //</Storyboard>
-
-            var storyboard = new Storyboard
-            {
-                RepeatBehavior = RepeatBehavior.Forever,
-                AutoReverse = true,
-                Duration = TimeSpan.FromSeconds(0.6)
-            };
-
-            var animation = new ObjectAnimationUsingKeyFrames();
-            animation.KeyFrames.Add(new DiscreteObjectKeyFrame
-            {
-                KeyTime = TimeSpan.FromSeconds(0.3),
-                Value = Visibility.Collapsed
-            });
-
-            storyboard.Children.Add(animation);
-
-            Storyboard.SetTarget(storyboard, target);
-            Storyboard.SetTargetProperty(storyboard, new PropertyPath(VisibilityProperty));
-
-            return storyboard;
+            var width = Caret.ActualWidth;
+            Caret.Margin = new Thickness(
+                left: -width / 2,
+                top: 0,
+                right: -width / 2,
+                bottom: 0);
         }
 
-        private Grid CreateCaret(double fontSize)
+        private void InitCaret()
+        {
+            Caret.SizeChanged += (sender, e) => UpdateCaretMargin();
+            SetCaretFontSize(ActualFontSize);
+        }
+
+        /// <remarks>Caret cannot be taken from XAML Resources, because it can not be child of Resources and Panel.Children. </remarks>
+        private Grid CreateCaret()
         {
             //<Grid>
             //  <TextBlock Name="Caret" Text="|" Margin="-7,0,-7,0">
@@ -556,10 +535,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             //  </TextBlock>
             //</Grid>
 
-            var container = new Grid
-            {
-                Name = "Caret"
-            };
+            var container = new Grid {Name = "Caret"};
 
             var style = new Style(typeof(TextBlock));
             style.Setters.Add(new Setter(TextBlock.FontFamilyProperty, new FontFamily("Courier New")));
@@ -568,10 +544,8 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             var textBlock = new TextBlock
             {
                 Style = style,
-                FontSize = fontSize,
                 Text = "|"
             };
-            textBlock.Margin = new Thickness(-Math.Ceiling(textBlock.ActualWidth / 2), 0, -Math.Floor(textBlock.ActualWidth / 2), 0);
 
             var storyboard = CreateBlinkingEffect(textBlock);
             textBlock.Loaded += (sender, e) => storyboard.Begin();
@@ -579,6 +553,49 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             container.Children.Add(textBlock);
 
             return container;
+        }
+
+        private static Storyboard CreateBlinkingEffect(DependencyObject target)
+        {
+            //<Storyboard RepeatBehavior="Forever" Duration="0:0:1.2">
+            //  <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Caret" Storyboard.TargetProperty="TextBlock.Visibility">
+            //    <DiscreteObjectKeyFrame KeyTime="0:0:0.0">
+            //      <DiscreteObjectKeyFrame.Value>
+            //        <Visibility>Visible</Visibility>
+            //      </DiscreteObjectKeyFrame.Value>
+            //    </DiscreteObjectKeyFrame>
+            //    <DiscreteObjectKeyFrame KeyTime="0:0:0.6">
+            //      <DiscreteObjectKeyFrame.Value>
+            //        <Visibility>Collapsed</Visibility>
+            //      </DiscreteObjectKeyFrame.Value>
+            //    </DiscreteObjectKeyFrame>
+            //  </ObjectAnimationUsingKeyFrames>
+            //</Storyboard>
+
+            var storyboard = new Storyboard
+            {
+                RepeatBehavior = RepeatBehavior.Forever,
+                Duration = TimeSpan.FromSeconds(1.2)
+            };
+
+            var animation = new ObjectAnimationUsingKeyFrames();
+            animation.KeyFrames.Add(new DiscreteObjectKeyFrame
+            {
+                KeyTime = TimeSpan.FromSeconds(0.0),
+                Value = Visibility.Visible
+            });
+            animation.KeyFrames.Add(new DiscreteObjectKeyFrame
+            {
+                KeyTime = TimeSpan.FromSeconds(0.6),
+                Value = Visibility.Collapsed
+            });
+
+            storyboard.Children.Add(animation);
+
+            Storyboard.SetTarget(storyboard, target);
+            Storyboard.SetTargetProperty(storyboard, new PropertyPath(VisibilityProperty));
+
+            return storyboard;
         }
 
         #endregion

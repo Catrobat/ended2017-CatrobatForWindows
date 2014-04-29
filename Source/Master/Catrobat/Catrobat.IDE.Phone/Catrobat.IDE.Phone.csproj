@@ -176,16 +176,11 @@
     <Compile Include="Content\Images\Misc\ImageGallery.xaml.cs">
       <DependentUpon>ImageGallery.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlStaticText.cs" />
-    <Compile Include="Controls\FormulaControls\Templates\UiFormulaTokenDefinitionCollection.cs" />
-    <Compile Include="Controls\FormulaControls\Templates\UiFormulaTokenDefinition.cs" />
+    <Compile Include="Controls\FormulaControls\Templates\FormulaTokenTemplate.cs" />
+    <Compile Include="Controls\FormulaControls\Templates\FormulaTokenTemplateCollection.cs" />
     <Compile Include="Controls\FormulaControls\FormulaViewer.xaml.cs">
       <DependentUpon>FormulaViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlDecimalSeparator.cs" />
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlNumber.cs" />
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlVariable.cs" />
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlParenthesis.cs" />
     <Compile Include="Converters\NamespaceTypeConverter.cs" />
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
@@ -217,8 +212,6 @@
     <Compile Include="Controls\FormulaControls\FormulaKeyboard.xaml.cs">
       <DependentUpon>FormulaKeyboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControl.cs" />
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlStaticLocalizedText.cs" />
     <Compile Include="Controls\FormulaControls\Templates\FormulaPartStyleCollection.cs" />
     <Compile Include="Controls\FormulaControls\VariableButton.xaml.cs">
       <DependentUpon>VariableButton.xaml</DependentUpon>

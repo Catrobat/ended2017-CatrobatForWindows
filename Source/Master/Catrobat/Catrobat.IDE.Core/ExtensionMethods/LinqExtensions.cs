@@ -81,5 +81,16 @@ namespace Catrobat.IDE.Core.ExtensionMethods
             }
             return default(TSource);
         }
+
+        public static int IndexOf<TSource>(this IEnumerable<TSource> source, TSource element) where TSource : class
+        {
+            var index = 0;
+            foreach (var element2 in source)
+            {
+                if (element == element2) return index;
+                index++;
+            }
+            return -1;
+        }
     }
 }

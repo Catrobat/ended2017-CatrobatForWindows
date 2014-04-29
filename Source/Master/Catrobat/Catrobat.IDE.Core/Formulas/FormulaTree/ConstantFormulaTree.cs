@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
@@ -37,14 +38,15 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
     {
         #region Implements IFormulaTokenizer
 
+        private static CultureInfo _tokenMappingsCulture;
         private static List<KeyValuePair<string, Func<IFormulaToken>>> _tokenMappings;
         protected static IEnumerable<KeyValuePair<string, Func<IFormulaToken>>> TokenMappings
         {
             get
             {
-                if (_tokenMappings == null)
+                var culture = ServiceLocator.CultureService.GetCulture();
+                if (_tokenMappings == null || !Equals(_tokenMappingsCulture, culture))
                 {
-                    var culture = ServiceLocator.CultureService.GetCulture();
                     _tokenMappings = new List<KeyValuePair<string, Func<IFormulaToken>>>
                     {
                         // add decimal separator mapping
@@ -66,6 +68,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
                             key: i.ToString(culture),
                             value: () => FormulaTokenFactory.CreateDigitToken(digit)));
                     }
+                    _tokenMappingsCulture = culture;
                 }
                 return _tokenMappings;
             }
