@@ -141,6 +141,7 @@
     <Compile Include="SampleData\SampleLoader.cs" />
     <Compile Include="Services\NavigationServiceTest.cs" />
     <Compile Include="Services\PictureServiceTest.cs" />
+    <Compile Include="Tests\IDE\Formulas\FormulaSerializerFormulaTests.cs" />
     <Compile Include="Tests\Misc\LocalizationTests.cs" />
     <Compile Include="Tests\Data\CatrobatContextTests.cs" />
     <Compile Include="Tests\Data\CopyTests.cs" />
@@ -169,7 +170,7 @@
     <Compile Include="Tests\IDE\Formulas\FormulaInterpreterInterpretTests.cs" />
     <Compile Include="Tests\IDE\Formulas\FormulaInterpreterSemanticErrorTests.cs" />
     <Compile Include="Tests\IDE\Formulas\FormulaInterpreterSyntaxErrorTests.cs" />
-    <Compile Include="Tests\IDE\Formulas\FormulaSerializerTests.cs" />
+    <Compile Include="Tests\IDE\Formulas\FormulaSerializerTokenTests.cs" />
     <Compile Include="Tests\IDE\Formulas\FormulaTokenizerStringTests.cs" />
     <Compile Include="Tests\IDE\Formulas\FormulaTokenizerTokenTests.cs" />
     <Compile Include="Tests\IDE\Formulas\XmlFormulaTreeConverterTests.cs" />

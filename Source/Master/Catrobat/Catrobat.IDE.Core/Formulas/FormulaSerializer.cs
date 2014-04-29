@@ -1,4 +1,6 @@
-﻿using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+﻿using System.Text;
+using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 
 namespace Catrobat.IDE.Core.Formulas
 {
@@ -9,18 +11,17 @@ namespace Catrobat.IDE.Core.Formulas
         public static string Serialize(IFormulaTree formula)
         {
             if (formula == null) return string.Empty;
-#if DEBUG
-            return formula.Serialize();
-#else
-            try
-            {
-                return formula.Serialize();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-#endif
+
+            var sb = new StringBuilder();
+            formula.Append(sb);
+            return sb.ToString();
+        }
+
+        public static string Serialize(IFormulaToken token)
+        {
+            if (token == null) return string.Empty;
+
+            return token.Serialize();
         }
     }
 }

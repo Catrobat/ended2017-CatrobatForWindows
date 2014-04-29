@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Catrobat.IDE.Core.CatrobatObjects
 {
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    internal struct Range
+    public struct Range
     {
         #region Members
 

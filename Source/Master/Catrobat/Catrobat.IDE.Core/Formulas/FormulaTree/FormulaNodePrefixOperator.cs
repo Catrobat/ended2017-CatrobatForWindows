@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
@@ -22,13 +22,24 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         #endregion
 
-        #region Implements IFormulaSerialization
+        #region Implements IStringBuilderSerializable
 
-        internal override void Serialize(StringBuilder sb)
+        public override void Append(StringBuilder sb)
         {
-            SerializeToken(sb);
-            var child = Child as BaseFormulaTree;
-            if (child == null) sb.Append(FormulaSerializer.EmptyChild); else child.Serialize(sb);
+            AppendToken(sb);
+            if (Child == null)
+            {
+                sb.Append(FormulaSerializer.EmptyChild);
+            }
+            else
+            {
+                Child.Append(sb);
+            }
+        }
+
+        protected virtual void AppendToken(StringBuilder sb)
+        {
+            sb.Append(Serialize());
         }
 
         #endregion
@@ -53,9 +64,15 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return !Child.EvaluateLogic();
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        protected override void AppendToken(StringBuilder sb)
         {
-            sb.Append(AppResources.Formula_Operator_Not + " ");
+            base.AppendToken(sb);
+            sb.Append(" ");
+        }
+
+        public override string Serialize()
+        {
+            return AppResources.Formula_Operator_Not;
         }
 
         public override bool IsNumber()
@@ -81,9 +98,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return -Child.EvaluateNumber();
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(ServiceLocator.CultureService.GetCulture().NumberFormat.NegativeSign);
+            return ServiceLocator.CultureService.GetCulture().NumberFormat.NegativeSign;
         }
 
         public override bool IsNumber()

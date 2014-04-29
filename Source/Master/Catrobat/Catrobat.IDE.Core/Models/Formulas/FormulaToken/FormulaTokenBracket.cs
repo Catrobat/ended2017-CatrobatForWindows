@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Models.Formulas.FormulaToken
 {
-    public abstract class FormulaTokenBracket : BaseFormulaToken
+    public abstract partial class FormulaTokenBracket : BaseFormulaToken
     {
         public virtual bool IsOpening { get; set; }
 
@@ -41,7 +41,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaToken
     #region Implementations
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class FormulaTokenParenthesis : FormulaTokenBracket
+    public partial class FormulaTokenParenthesis : FormulaTokenBracket
     {
         protected string DebuggerDisplay
         {

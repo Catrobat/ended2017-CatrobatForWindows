@@ -1,6 +1,6 @@
 ﻿namespace Catrobat.IDE.Core.Formulas
 {
-    public interface IFormulaSerialization
+    public interface IStringSerializable
     {
         string Serialize();
     }

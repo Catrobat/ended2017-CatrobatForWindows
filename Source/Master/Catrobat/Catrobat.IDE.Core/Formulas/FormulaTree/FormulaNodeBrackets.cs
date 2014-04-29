@@ -44,21 +44,15 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         #endregion
 
-        #region Implements IFormulaSerialization
+        #region Implements IStringSerializable
 
-        protected abstract void SerializeToken(StringBuilder sb, bool isOpening);
-
-        protected override void SerializeToken(StringBuilder sb)
+        /// <remarks>
+        /// The corresponding tokens can be found here: <see cref="FormulaTokenBracket"/>. 
+        /// </remarks>
+        public override string Serialize()
         {
             // not used
             throw new NotImplementedException();
-        }
-
-        internal override void Serialize(StringBuilder sb)
-        {
-            SerializeToken(sb, true);
-            sb.Append(Child == null ? " " : Child.Serialize());
-            SerializeToken(sb, false);
         }
 
         #endregion
@@ -82,9 +76,18 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return FormulaTokenFactory.CreateParenthesisToken(isOpening);
         }
 
-        protected override void SerializeToken(StringBuilder sb, bool isOpening)
+        public override void Append(StringBuilder sb)
         {
-            sb.Append(isOpening ? "(" : ")");
+            sb.Append("(");
+            if (Child == null)
+            {
+                sb.Append(FormulaSerializer.EmptyChild);
+            }
+            else
+            {
+                Child.Append(sb);
+            }
+            sb.Append(")");
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree child)

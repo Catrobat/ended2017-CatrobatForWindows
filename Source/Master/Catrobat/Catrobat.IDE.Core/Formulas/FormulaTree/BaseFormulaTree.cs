@@ -31,21 +31,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 
         #endregion
 
-        #region Implements IFormulaSerialization
-
-        protected abstract void SerializeToken(StringBuilder sb);
-
-        internal abstract void Serialize(StringBuilder sb);
-
-        public string Serialize()
-        {
-            var sb = new StringBuilder();
-            Serialize(sb);
-            return sb.ToString();
-        }
-
-        #endregion
-
         #region Implements IFormulaInterpreter
 
         public abstract bool IsNumber();
@@ -55,6 +40,18 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
         #region Implements IXmlFormulaConvertible
 
         public abstract XmlFormulaTree ToXmlFormula();
+
+        #endregion
+
+        #region Implements IStringBuilderSerializable
+
+        public abstract void Append(StringBuilder sb);
+
+        #endregion
+
+        #region Implements IStringSerializable
+
+        public abstract string Serialize();
 
         #endregion
     }

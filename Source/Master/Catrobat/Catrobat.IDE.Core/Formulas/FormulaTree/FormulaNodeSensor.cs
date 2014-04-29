@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
@@ -10,16 +8,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 {
     abstract partial class FormulaNodeSensor
     {
-        #region Implements IFormulaSerialization
-
-        protected override void SerializeToken(StringBuilder sb)
-        {
-            // not used
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
         #region Implements IFormulaInterpreter
 
         public override bool IsNumber()
@@ -44,9 +32,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return ServiceLocator.SensorService.GetAccelerationX();
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Sensor_AccelerationX);
+            return AppResources.Formula_Sensor_AccelerationX;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -67,9 +55,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return ServiceLocator.SensorService.GetAccelerationY();
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Sensor_AccelerationY);
+            return AppResources.Formula_Sensor_AccelerationY;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -90,9 +78,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return ServiceLocator.SensorService.GetAccelerationZ();
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Sensor_AccelerationZ);
+            return AppResources.Formula_Sensor_AccelerationZ;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -113,9 +101,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return ServiceLocator.SensorService.GetCompass();
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Sensor_Compass);
+            return AppResources.Formula_Sensor_Compass;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -136,9 +124,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return ServiceLocator.SensorService.GetInclinationX();
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Sensor_InclinationX);
+            return AppResources.Formula_Sensor_InclinationX;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -159,9 +147,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return ServiceLocator.SensorService.GetInclinationY();
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Sensor_InclinationY);
+            return AppResources.Formula_Sensor_InclinationY;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -182,9 +170,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return ServiceLocator.SensorService.GetLoudness();
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Sensor_Loudness);
+            return AppResources.Formula_Sensor_Loudness;
         }
 
         public override XmlFormulaTree ToXmlFormula()

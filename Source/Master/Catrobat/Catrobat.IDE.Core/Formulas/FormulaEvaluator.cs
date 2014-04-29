@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Formulas
 {
-    class FormulaEvaluator
+    public class FormulaEvaluator
     {
         public static double EvaluateNumber(IFormulaTree formula)
         {

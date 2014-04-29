@@ -19,10 +19,13 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Enumerable.Repeat(CreateToken(), 1);
         }
 
-        protected override void SerializeToken(StringBuilder sb)
+        #endregion
+
+        #region Implements IStringBuilderSerializable
+
+        public override void Append(StringBuilder sb)
         {
-            // not used
-            throw new NotImplementedException();
+            sb.Append(Serialize());
         }
 
         #endregion
@@ -95,9 +98,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Value;
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(Value.ToString("R", ServiceLocator.CultureService.GetCulture()));
+            return Value.ToString("R", ServiceLocator.CultureService.GetCulture());
         }
 
         public override bool IsNumber()
@@ -123,9 +126,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return Math.PI;
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append("π");
+            return "π";
         }
 
         public override bool IsNumber()
@@ -151,9 +154,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return true;
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Constant_True);
+            return AppResources.Formula_Constant_True;
         }
 
         public override bool IsNumber()
@@ -179,9 +182,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
             return false;
         }
 
-        internal override void Serialize(StringBuilder sb)
+        public override string Serialize()
         {
-            sb.Append(AppResources.Formula_Constant_False);
+            return AppResources.Formula_Constant_False;
         }
 
         public override bool IsNumber()
