@@ -1,8 +1,8 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using System.Globalization;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -16,10 +16,151 @@ namespace Catrobat.IDE.Core.Formulas
 
         #region Tokenize string
 
+        private static CultureInfo _cultureSpecificTokenMappingsCulture;
+        private static Dictionary<string, Func<IFormulaToken>> _cultureSpecificTokenMappings;
+        private static Dictionary<string, Func<IFormulaToken>> _localizationSpecificTokenMappings;
+        private static Dictionary<string, Func<IFormulaToken>> _invariantTokenMappings;
+        private Dictionary<string, Func<IFormulaToken>> _instanceSpecificTokenMappings;
         private readonly IDictionary<string, UserVariable> _localVariables;
         private readonly IDictionary<string, UserVariable> _globalVariables;
 
-        [Obsolete("Cache AppResources_Formula, digits, negative sign and decimal separator and refresh when culture changes. ")]
+        private static void InitCultureSpecificTokenMappings(CultureInfo culture)
+        {
+            _cultureSpecificTokenMappings = new Dictionary<string, Func<IFormulaToken>>();
+
+            // constants
+            AddTokenMapping(_cultureSpecificTokenMappings, FormulaTokenFactory.CreateDecimalSeparatorToken);
+            AddTokenMapping(_cultureSpecificTokenMappings, culture.NumberFormat.NegativeSign, FormulaTokenFactory.CreateMinusToken);
+            foreach (var digit in Enumerable.Range(0, 10))
+            {
+                // access to foreach variable in closure
+                var value = digit;
+                AddTokenMapping(_cultureSpecificTokenMappings, digit.ToString(culture), () => FormulaTokenFactory.CreateDigitToken(value));
+            }
+
+            // functions
+            var parameterSeparatorValue = culture.NumberFormat.NumberDecimalSeparator == "," ? ", " : ",";
+            AddTokenMapping(_cultureSpecificTokenMappings, parameterSeparatorValue, FormulaTokenFactory.CreateParameterSeparatorToken);
+
+            _cultureSpecificTokenMappingsCulture = culture;
+        }
+
+        private static void InitLocalizationSpecificTokenMappings()
+        {
+            _localizationSpecificTokenMappings = new Dictionary<string, Func<IFormulaToken>>();
+
+            // constants
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateTrueToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateFalseToken);
+
+            // operators
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateAndToken);
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateOrToken);
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateNotToken);
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateModToken);
+
+             // functions
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateMinToken);
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateMaxToken);
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateSqrtToken);
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateAbsToken);
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateRoundToken);
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateRandomToken);
+
+            // sensors
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateAccelerationXToken);
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateAccelerationYToken);
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateAccelerationZToken);
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateCompassToken);
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateInclinationXToken);
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateInclinationYToken);
+            AddTokenMapping(_localizationSpecificTokenMappings, FormulaTokenFactory.CreateLoudnessToken);
+
+            // properties
+            AddTokenMapping(_cultureSpecificTokenMappings, FormulaTokenFactory.CreateBrightnessToken);
+            AddTokenMapping(_cultureSpecificTokenMappings, FormulaTokenFactory.CreateLayerToken);
+            AddTokenMapping(_cultureSpecificTokenMappings, FormulaTokenFactory.CreatePositionXToken);
+            AddTokenMapping(_cultureSpecificTokenMappings, FormulaTokenFactory.CreatePositionYToken);
+            AddTokenMapping(_cultureSpecificTokenMappings, FormulaTokenFactory.CreateRotationToken);
+            AddTokenMapping(_cultureSpecificTokenMappings, FormulaTokenFactory.CreateSizeToken);
+            AddTokenMapping(_cultureSpecificTokenMappings, FormulaTokenFactory.CreateTransparencyToken);
+       }
+
+        // Tokenize\(.*, (FormulaTokenFactory.\w+), .*
+
+        private static void InitInvariantTokenMappings()
+        {
+            _invariantTokenMappings = new Dictionary<string, Func<IFormulaToken>>();
+
+            // constants
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreatePiToken);
+
+            // operators
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreatePlusToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateMinusToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateMultiplyToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateDivideToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateCaretToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateEqualsToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateNotEqualsToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateLessToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateLessEqualToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateGreaterToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateGreaterEqualToken);
+
+
+            // functions
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateExpToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateLogToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateLnToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateSinToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateCosToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateTanToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateArcsinToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateArccosToken);
+            AddTokenMapping(_invariantTokenMappings, FormulaTokenFactory.CreateArctanToken);
+
+            // brackets
+            AddTokenMapping(_invariantTokenMappings, () => FormulaTokenFactory.CreateParenthesisToken(true));
+            AddTokenMapping(_invariantTokenMappings, () => FormulaTokenFactory.CreateParenthesisToken(false));
+        }
+
+        private void InitInstanceSpecificTokenMappings()
+        {
+            _instanceSpecificTokenMappings = new Dictionary<string, Func<IFormulaToken>>();
+
+            // variables
+            foreach (var variable in _globalVariables.Select(entry => entry.Value))
+            {
+                var variable1 = variable;
+                AddTokenMapping(_instanceSpecificTokenMappings, () => FormulaTokenFactory.CreateGlobalVariableToken(variable1));
+            }
+            foreach (var variable in _localVariables.Select(entry => entry.Value))
+            {
+                var variable1 = variable;
+                AddTokenMapping(_instanceSpecificTokenMappings, () => FormulaTokenFactory.CreateLocalVariableToken(variable1));
+            }
+        }
+
+        private static void AddTokenMapping(IDictionary<string, Func<IFormulaToken>> tokenMappings, Func<IFormulaToken> tokenCreator)
+        {
+            AddTokenMapping(tokenMappings, FormulaSerializer.Serialize(tokenCreator.Invoke()), tokenCreator);
+        }
+
+        private static void AddTokenMapping(IDictionary<string, Func<IFormulaToken>> tokenMappings, string value, Func<IFormulaToken> tokenCreator)
+        {
+            if (!string.IsNullOrWhiteSpace(value)) tokenMappings[value] = tokenCreator;
+        }
+
+        private void InitTokenMappings(CultureInfo culture)
+        {
+            if (_invariantTokenMappings == null) InitInvariantTokenMappings();
+            if (_instanceSpecificTokenMappings == null) InitInstanceSpecificTokenMappings();
+            var cultureChanged = !Equals(_cultureSpecificTokenMappingsCulture, culture);
+            if (_cultureSpecificTokenMappings == null || cultureChanged) InitCultureSpecificTokenMappings(culture);
+            if (_localizationSpecificTokenMappings == null || cultureChanged) InitLocalizationSpecificTokenMappings();
+        }
+
         public FormulaTokenizer(IEnumerable<UserVariable> localVariables, IEnumerable<UserVariable> globalVariable)
         {
             _localVariables = localVariables.ToDictionary(variable => variable.Name);
@@ -34,17 +175,9 @@ namespace Catrobat.IDE.Core.Formulas
                 return null;
             }
 
-            var tokens2 = new List<IFormulaToken>();
-            Tokenize(input, ref tokens2, out parsingError);
-            if (parsingError != null) return null;
-            
-            return tokens2;
-        }
+            InitTokenMappings(ServiceLocator.CultureService.GetCulture());
 
-        private void Tokenize(string input, ref List<IFormulaToken> tokens, out ParsingError parsingError)
-        {
-            parsingError = null;
-
+            var tokens = new List<IFormulaToken>();
             for (var index = 0; index < input.Length; )
             {
                 // ignore whitespace
@@ -54,171 +187,32 @@ namespace Catrobat.IDE.Core.Formulas
                     continue;
                 }
 
-                if (!TokenizeOperator(input, ref index, ref tokens) &&
-                    !TokenizeFunction(input, ref index, ref tokens) &&
-                    !TokenizeSensor(input, ref index, ref tokens) &&
-                    !TokenizeProperty(input, ref index, ref tokens) &&
-                    !TokenizeBracket(input, ref index, ref tokens) &&
-                    !TokenizeConstant(input, ref index, ref tokens) &&
-                    !TokenizeVariable(input, ref index, ref tokens))
+                var match = Tokenize(_invariantTokenMappings, input, index)
+                            ?? Tokenize(_cultureSpecificTokenMappings, input, index)
+                            ?? Tokenize(_localizationSpecificTokenMappings, input, index)
+                            ?? Tokenize(_instanceSpecificTokenMappings, input, index);
+                if (match == null)
                 {
                     // TODO: translate parsing error
                     parsingError = new ParsingError("Unknown token. ", index, 0);
-                    return;
+                    return null;
                 }
+                tokens.Add(match.Item2);
+                index += match.Item1.Length;
             }
+
+            parsingError = null;
+            return tokens;
         }
 
-        private bool TokenizeConstant(string input, ref int startIndex, ref List<IFormulaToken> tokens)
+        private static Tuple<string, IFormulaToken> Tokenize(IEnumerable<KeyValuePair<string, Func<IFormulaToken>>> tokenMappings, string input, int startIndex)
         {
-            var decimalSeparator = ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator;
-            return
-                TokenizeDigit(input, ref startIndex, ref tokens) ||
-                Tokenize(input, ref startIndex, decimalSeparator, FormulaTokenFactory.CreateDecimalSeparatorToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "π", FormulaTokenFactory.CreatePiToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Constant_True, FormulaTokenFactory.CreateTrueToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Constant_False, FormulaTokenFactory.CreateFalseToken, ref tokens);
-        }
-
-        private bool TokenizeDigit(string input, ref int startIndex, ref List<IFormulaToken> tokens)
-        {
-            var culture = ServiceLocator.CultureService.GetCulture();
-            for (var digit = 0; digit <= 9; digit++)
-            {
-                // access to modified closure
-                var digit2 = digit;
-                if (Tokenize(input, ref startIndex,
-                    tokenValue: digit.ToString(culture), 
-                    token: FormulaTokenFactory.CreateDigitToken(digit2), 
-                    tokens: ref tokens)) return true;
-            }
-            return false;
-        }
-
-        private bool TokenizeOperator(string input, ref int startIndex, ref List<IFormulaToken> tokens)
-        {
-            var negativeSign = ServiceLocator.CultureService.GetCulture().NumberFormat.NegativeSign;
-            return
-                Tokenize(input, ref startIndex, "+", FormulaTokenFactory.CreatePlusToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "-", FormulaTokenFactory.CreateMinusToken, ref tokens) ||
-                Tokenize(input, ref startIndex, negativeSign, FormulaTokenFactory.CreateMinusToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "*", FormulaTokenFactory.CreateMultiplyToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "/", FormulaTokenFactory.CreateDivideToken, ref tokens) ||
-                Tokenize(input, ref startIndex, ":", FormulaTokenFactory.CreateDivideToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "^", FormulaTokenFactory.CreateCaretToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "==", FormulaTokenFactory.CreateEqualsToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "=", FormulaTokenFactory.CreateEqualsToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "≠", FormulaTokenFactory.CreateNotEqualsToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "<>", FormulaTokenFactory.CreateNotEqualsToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "!=", FormulaTokenFactory.CreateNotEqualsToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "≤", FormulaTokenFactory.CreateLessEqualToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "<=", FormulaTokenFactory.CreateLessEqualToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "<", FormulaTokenFactory.CreateLessToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "≥", FormulaTokenFactory.CreateGreaterEqualToken, ref tokens) ||
-                Tokenize(input, ref startIndex, ">=", FormulaTokenFactory.CreateGreaterEqualToken, ref tokens) ||
-                Tokenize(input, ref startIndex, ">", FormulaTokenFactory.CreateGreaterToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Operator_And, FormulaTokenFactory.CreateAndToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Operator_Or, FormulaTokenFactory.CreateOrToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Operator_Not, FormulaTokenFactory.CreateNotToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Operator_Mod, FormulaTokenFactory.CreateModToken, ref tokens);
-        }
-
-        private bool TokenizeFunction(string input, ref int startIndex, ref List<IFormulaToken> tokens)
-        {
-            return
-                TokenizeParameterSeparator(input, ref startIndex, ref tokens) ||
-                Tokenize(input, ref startIndex, "exp", FormulaTokenFactory.CreateExpToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "log", FormulaTokenFactory.CreateLogToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "ln", FormulaTokenFactory.CreateLnToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Function_Min, FormulaTokenFactory.CreateMinToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Function_Max, FormulaTokenFactory.CreateMaxToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "sin", FormulaTokenFactory.CreateSinToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "cos", FormulaTokenFactory.CreateCosToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "tan", FormulaTokenFactory.CreateTanToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "arcsin", FormulaTokenFactory.CreateArcsinToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "arccos", FormulaTokenFactory.CreateArccosToken, ref tokens) ||
-                Tokenize(input, ref startIndex, "arctan", FormulaTokenFactory.CreateArctanToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Function_Sqrt, FormulaTokenFactory.CreateSqrtToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Function_Abs, FormulaTokenFactory.CreateAbsToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Function_Round, FormulaTokenFactory.CreateRoundToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Function_Random, FormulaTokenFactory.CreateRandomToken, ref tokens);
-        }
-
-        private bool TokenizeParameterSeparator(string input, ref int startIndex, ref List<IFormulaToken> tokens)
-        {
-            var culture = ServiceLocator.CultureService.GetCulture();
-            var tokenValue = culture.NumberFormat.NumberDecimalSeparator == ","
-                ? ", "
-                : ",";
-            return Tokenize(input, ref startIndex, tokenValue, FormulaTokenFactory.CreateParameterSeparatorToken, ref tokens);
-        }
-
-        private bool TokenizeSensor(string input, ref int startIndex, ref List<IFormulaToken> tokens)
-        {
-            return
-                Tokenize(input, ref startIndex, AppResources.Formula_Sensor_AccelerationX, FormulaTokenFactory.CreateAccelerationXToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Sensor_AccelerationY, FormulaTokenFactory.CreateAccelerationYToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Sensor_AccelerationZ, FormulaTokenFactory.CreateAccelerationZToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Sensor_Compass, FormulaTokenFactory.CreateCompassToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Sensor_InclinationX, FormulaTokenFactory.CreateInclinationXToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Sensor_InclinationY, FormulaTokenFactory.CreateInclinationYToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Sensor_Loudness, FormulaTokenFactory.CreateLoudnessToken, ref tokens);
-        }
-
-
-        private bool TokenizeProperty(string input, ref int startIndex, ref List<IFormulaToken> tokens)
-        {
-            return
-                Tokenize(input, ref startIndex, AppResources.Formula_Property_Brightness, FormulaTokenFactory.CreateBrightnessToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Property_Layer, FormulaTokenFactory.CreateLayerToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Property_PositionX, FormulaTokenFactory.CreatePositionXToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Property_PositionY, FormulaTokenFactory.CreatePositionYToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Property_Rotation, FormulaTokenFactory.CreateRotationToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Property_Size, FormulaTokenFactory.CreateSizeToken, ref tokens) ||
-                Tokenize(input, ref startIndex, AppResources.Formula_Property_Transparency, FormulaTokenFactory.CreateTransparencyToken, ref tokens);
-        }
-
-        private bool TokenizeBracket(string input, ref int startIndex, ref List<IFormulaToken> tokens)
-        {
-            return
-                Tokenize(input, ref startIndex, "(", FormulaTokenFactory.CreateParenthesisToken(true), ref tokens) ||
-                Tokenize(input, ref startIndex, ")", FormulaTokenFactory.CreateParenthesisToken(false), ref tokens);
-        }
-
-        private bool TokenizeVariable(string input, ref int startIndex, ref List<IFormulaToken> tokens)
-        {
-            foreach (var entry in _localVariables)
-            {
-                // access to modified closure
-                var entry2 = entry;
-                if (Tokenize(input, ref startIndex,
-                    tokenValue: entry.Key,
-                    tokenCreator: () => FormulaTokenFactory.CreateLocalVariableToken(entry2.Value), 
-                    tokens: ref tokens)) return true;
-            }
-            foreach (var entry in _globalVariables)
-            {
-                // access to modified closure
-                var entry2 = entry;
-                if (Tokenize(input, ref startIndex,
-                    tokenValue: entry.Key,
-                    tokenCreator: () => FormulaTokenFactory.CreateGlobalVariableToken(entry2.Value),
-                    tokens: ref tokens)) return true;
-            }
-            return false;
-        }
-
-        private static bool Tokenize(string input, ref int startIndex, string tokenValue, Func<IFormulaToken> tokenCreator, ref List<IFormulaToken> tokens)
-        {
-            return Tokenize(input,ref  startIndex, tokenValue, tokenCreator.Invoke(), ref tokens);
-        }
-
-        private static bool Tokenize(string input, ref int startIndex, string tokenValue, IFormulaToken token, ref List<IFormulaToken> tokens)
-        {
-            if (!input.StartsWith(tokenValue, startIndex, StringComparison.CurrentCultureIgnoreCase)) return false;
-            tokens.Add(token);
-            startIndex += tokenValue.Length;
-            return true;
+            var matches = tokenMappings
+                .Where(entry => input.StartsWith(entry.Key, startIndex, StringComparison.OrdinalIgnoreCase))
+                .Argmax(entry => entry.Key.Length)
+                .Take(1)
+                .ToList();
+            return matches.Count == 0 ? null : Tuple.Create(matches[0].Key, matches[0].Value.Invoke());
         }
 
         #endregion

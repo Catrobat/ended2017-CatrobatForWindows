@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Resources.Localization;
@@ -10,6 +7,9 @@ using Catrobat.IDE.Tests.Extensions;
 using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 {
@@ -58,12 +58,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 {
                     FormulaTokenFactory.CreateDigitToken(4), 
                     FormulaTokenFactory.CreateDigitToken(2), 
-                    FormulaTokenFactory.CreateLessToken(), 
                     FormulaTokenFactory.CreateLessEqualToken(), 
-                    FormulaTokenFactory.CreateLessToken(), 
                     FormulaTokenFactory.CreateParenthesisToken(false), 
                     FormulaTokenFactory.CreateEqualsToken()
-                }, input: "42<<=<)=");
+                }, input: "42≤)=");
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
@@ -71,7 +69,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         {
             TestTokenizer(
                 expectedError: new ParsingError("Unknown token. ", 4, 0),
-                input: "4<=2blub5");
+                input: "42<<blub5");
         }
 
         #region Constants
@@ -107,14 +105,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestTokenizer(FormulaTokenFactory.CreatePlusToken, "+");
             TestTokenizer(FormulaTokenFactory.CreateMinusToken, "-");
             TestTokenizer(FormulaTokenFactory.CreateMultiplyToken, "*");
-            TestTokenizer(FormulaTokenFactory.CreateDivideToken, new[] {"/", ":"});
+            TestTokenizer(FormulaTokenFactory.CreateDivideToken, new[] {"/"});
             TestTokenizer(FormulaTokenFactory.CreateCaretToken, "^");
-            TestTokenizer(FormulaTokenFactory.CreateEqualsToken, new[] { "=", "==" });
-            TestTokenizer(FormulaTokenFactory.CreateNotEqualsToken, new[] { "≠", "<>", "!=" });
+            TestTokenizer(FormulaTokenFactory.CreateEqualsToken, new[] { "=" });
+            TestTokenizer(FormulaTokenFactory.CreateNotEqualsToken, new[] { "≠" });
             TestTokenizer(FormulaTokenFactory.CreateLessToken, "<");
-            TestTokenizer(FormulaTokenFactory.CreateLessEqualToken, new[] { "≤", "<=" });
+            TestTokenizer(FormulaTokenFactory.CreateLessEqualToken, new[] { "≤" });
             TestTokenizer(FormulaTokenFactory.CreateGreaterToken, ">");
-            TestTokenizer(FormulaTokenFactory.CreateGreaterEqualToken, new[] { "≥", ">=" });
+            TestTokenizer(FormulaTokenFactory.CreateGreaterEqualToken, new[] { "≥" });
             TestTokenizer(FormulaTokenFactory.CreateAndToken, AppResources.Formula_Operator_And);
             TestTokenizer(FormulaTokenFactory.CreateOrToken, AppResources.Formula_Operator_Or);
             TestTokenizer(FormulaTokenFactory.CreateNotToken, AppResources.Formula_Operator_Not);

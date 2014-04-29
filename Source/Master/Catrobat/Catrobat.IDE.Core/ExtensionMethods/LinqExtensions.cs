@@ -8,7 +8,8 @@ namespace Catrobat.IDE.Core.ExtensionMethods
     {
 
         /// <see cref="http://code.google.com/p/morelinq/source/browse/MoreLinq/DistinctBy.cs"/>
-        public static IEnumerable<TSource> Distinct<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+        public static IEnumerable<TSource> Distinct<TSource, TKey>(this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector)
         {
             return source.GroupBy(keySelector).Select(group => group.First());
         }
@@ -43,17 +44,18 @@ namespace Catrobat.IDE.Core.ExtensionMethods
         /// Inspired by <see cref="http://stackoverflow.com/a/8760569/1220972"/>. 
         /// </para>
         /// </remarks>
-        public static IEnumerable<TSource[]> WithContext<TSource>(this IEnumerable<TSource> source) where TSource : class
+        public static IEnumerable<TSource[]> WithContext<TSource>(this IEnumerable<TSource> source)
+            where TSource : class
         {
             var previousElement = (TSource) null;
             foreach (var element in source)
             {
-                yield return new[] { previousElement, element };
+                yield return new[] {previousElement, element};
                 previousElement = element;
             }
-            if (previousElement != null) 
+            if (previousElement != null)
             {
-                yield return new[] { previousElement, null };
+                yield return new[] {previousElement, null};
             }
         }
 
@@ -91,6 +93,35 @@ namespace Catrobat.IDE.Core.ExtensionMethods
                 index++;
             }
             return -1;
+        }
+
+        public static IEnumerable<TSource> Argmax<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector) where TKey : IComparable
+        {
+            var result = new List<TSource>();
+            var maxKey = default(TKey);
+            foreach (var element in source)
+            {
+                var key = keySelector(element);
+                var comparison = key.CompareTo(maxKey);
+                if (result.Count == 0)
+                {
+                    result.Add(element);
+                    maxKey = key;
+                }
+                else
+                {
+                    if (comparison > 0)
+                    {
+                        result.Clear();
+                        maxKey = key;
+                    }
+                    if (comparison >= 0)
+                    {
+                        result.Add(element);
+                    }
+                }
+            }
+            return result;
         }
     }
 }
