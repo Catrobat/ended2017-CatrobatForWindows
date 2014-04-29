@@ -106,6 +106,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestParsingError(message1, 5, 0, "1/-((");
             TestParsingError(message1, 7, 0, "(1)*sin(π");
             TestParsingError(message2, 3, 1, "1/-))");
+            TestParsingError(message2, 3, 1, "1+2)");
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
