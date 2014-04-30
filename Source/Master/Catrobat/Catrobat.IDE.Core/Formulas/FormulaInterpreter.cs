@@ -94,11 +94,23 @@ namespace Catrobat.IDE.Core.Formulas
                     message: AppResources.FormulaInterpreter_NullOrEmpty);
                 return null;
             }
-            if (GetOrigin(formula).Length < tokens.Count)
+            var formulaRange = GetOrigin(formula);
+            if (formulaRange.Length < tokens.Count)
             {
-                SetParsingError(
-                    source: Range.Empty(GetOrigin(formula).End), 
-                    message: AppResources.FormulaInterpreter_DoubleValue);
+                var nextIndex = formulaRange.End;
+                var nextParenthesis = tokens2.First(token => GetOrigin(token).Start == nextIndex) as FormulaTokenParenthesis;
+                if (nextParenthesis != null && nextParenthesis.IsClosing)
+                {
+                    SetParsingError(
+                        source: nextParenthesis, 
+                        message: AppResources.FormulaInterpreter_Brackets_UnmatchedClosingParenthesis);
+                }
+                else
+                {
+                    SetParsingError(
+                        source: Range.Empty(GetOrigin(formula).End),
+                        message: AppResources.FormulaInterpreter_DoubleValue);
+                }
                 return null;
             }
 

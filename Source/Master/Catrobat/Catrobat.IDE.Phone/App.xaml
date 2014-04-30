@@ -9,7 +9,7 @@
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Content\Resources.xaml"/>
+        <ResourceDictionary Source="Content/Resources.xaml"/>
         <ResourceDictionary Source="Views/Editor/Scripts/ScriptBrickTemplates.xaml"/>
         <ResourceDictionary Source="Views/Editor/Scripts/ReorderableListBoxStyles.xaml"/>
         <ResourceDictionary Source="Views/Editor/Scripts/ScriptBrickAddData.xaml"/>

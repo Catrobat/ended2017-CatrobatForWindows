@@ -45,6 +45,12 @@ namespace Catrobat.IDE.Core.ExtensionMethods
             source.Insert(index, item);
         }
 
-
+        public static void AddRange<T>(this IList<T> list, IEnumerable<T> items)
+        {
+            foreach (var element in items)
+            {
+                list.Add(element);
+            }
+        }
     }
 }

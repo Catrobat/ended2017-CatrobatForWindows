@@ -14,7 +14,7 @@
     Unloaded="FormulaKeyboard_OnUnloaded"
     d:DesignHeight="480" d:DesignWidth="480"
     x:Name="FormulaKeyboardXaml">
-
+  
   <UserControl.Resources>
     <Style x:Key="StyleButtonNumbers" TargetType="Button" >
       <Style.Setters>
@@ -139,7 +139,8 @@
       </Style.Setters>
     </Style>
 
-    <!-- numbers -->
+
+    <!-- constants -->
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyD0">D0</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyD1">D1</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyD2">D2</editor:FormulaEditorKey>
@@ -151,8 +152,9 @@
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyD8">D8</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyD9">D9</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyDecimalSeparator">DecimalSeparator</editor:FormulaEditorKey>
-    <editor:FormulaEditorKey x:Key="FormulaEditorKeyParameterSeparator">ParameterSeparator</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyPi">Pi</editor:FormulaEditorKey>
+    <editor:FormulaEditorKey x:Key="FormulaEditorKeyTrue">True</editor:FormulaEditorKey>
+    <editor:FormulaEditorKey x:Key="FormulaEditorKeyFalse">False</editor:FormulaEditorKey>
 
     <!-- arithmetic -->
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyPlus">Plus</editor:FormulaEditorKey>
@@ -160,40 +162,29 @@
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyMultiply">Multiply</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyDivide">Divide</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyPower">Caret</editor:FormulaEditorKey>
-
-    <!-- relational operators -->
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyEquals">Equals</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyNotEquals">NotEquals</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyGreater">Greater</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyGreaterEqual">GreaterEqual</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyLess">Less</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyLessEqual">LessEqual</editor:FormulaEditorKey>
-
-    <!-- logic -->
-    <editor:FormulaEditorKey x:Key="FormulaEditorKeyTrue">True</editor:FormulaEditorKey>
-    <editor:FormulaEditorKey x:Key="FormulaEditorKeyFalse">False</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyAnd">And</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyOr">Or</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyNot">Not</editor:FormulaEditorKey>
 
-    <!-- min/max -->
-    <editor:FormulaEditorKey x:Key="FormulaEditorKeyMin">Min</editor:FormulaEditorKey>
-    <editor:FormulaEditorKey x:Key="FormulaEditorKeyMax">Max</editor:FormulaEditorKey>
-
     <!-- exponential functions and logarithms -->
+    <editor:FormulaEditorKey x:Key="FormulaEditorKeyParameterSeparator">ParameterSeparator</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyExp">Exp</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyLog">Log</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyLn">Ln</editor:FormulaEditorKey>
-
-    <!-- trigonometric functions -->
+    <editor:FormulaEditorKey x:Key="FormulaEditorKeyMin">Min</editor:FormulaEditorKey>
+    <editor:FormulaEditorKey x:Key="FormulaEditorKeyMax">Max</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeySin">Sin</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyCos">Cos</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyTan">Tan</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyArcsin">Arcsin</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyArccos">Arccos</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyArctan">Arctan</editor:FormulaEditorKey>
-    
-    <!-- miscellaneous functions -->
     <editor:FormulaEditorKey x:Key="FormulaEditorKeySqrt">Sqrt</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyAbs">Abs</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyMod">Mod</editor:FormulaEditorKey>
@@ -209,7 +200,7 @@
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyInclinationY">InclinationY</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyLoudness">Loudness</editor:FormulaEditorKey>
 
-    <!-- object variables -->
+    <!-- properties -->
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyBrightness">Brightness</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyLayer">Layer</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyTransparency">Transparency</editor:FormulaEditorKey>
@@ -517,6 +508,5 @@
         </Grid>
       </Grid>
     </Grid>
-
   </Grid>
 </UserControl>
