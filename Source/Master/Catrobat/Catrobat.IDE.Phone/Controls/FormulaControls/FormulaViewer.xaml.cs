@@ -42,6 +42,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             var oldValue = (ObservableCollection<IFormulaToken>)e.OldValue;
             var newValue = (ObservableCollection<IFormulaToken>)e.NewValue;
 
+            if (newValue == null) CaretIndex = 0;
             UpdateContainers();
 
             if (oldValue != null) oldValue.CollectionChanged -= Tokens_CollectionChanged;
@@ -70,72 +71,83 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
                     UpdateStyles();
                     break;
                 default:
-                    Debug.Assert(false, "NotifyCollectionChangedAction \"" + e.Action.ToString() + "\" not implemented. ");
-                    UpdateContainers();
+                    Debug.Assert(false, "NotifyCollectionChangedAction \"" + e.Action + "\" not implemented. ");
                     break;
             }
         }
 
         public static readonly DependencyProperty CaretIndexProperty = DependencyProperty.Register(
             name: "CaretIndex",
-            propertyType: typeof(int),
-            ownerType: typeof(FormulaViewer),
-            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer)d).CaretIndexChanged(e)));
+            propertyType: typeof (int),
+            ownerType: typeof (FormulaViewer),
+            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer) d).CaretIndexChanged(e)));
         public int CaretIndex
         {
             get { return (int)GetValue(CaretIndexProperty); }
-            set
-            { 
-                SetValue(CaretIndexProperty, value);
-                SelectionLength = 0;
-            }
+            set {  SetValue(CaretIndexProperty, value); }
         }
-
         private void CaretIndexChanged(DependencyPropertyChangedEventArgs e)
         {
             if (Tokens == null) return;
-
-            // CoerceValueCallback in Windows Phone not available (FrameworkPropertyMetadata is not available)
+            // CoerceValueCallback is not available in Windows Phone (FrameworkPropertyMetadata is not available)
             MoveCaret((int) e.OldValue, (int) e.NewValue);
-        }
-
-        // TODO: Create SelectionStart property and calculate CaretIndex = SelectionStart + SelectionLength
-        public static readonly DependencyProperty SelectionLengthProperty = DependencyProperty.Register(
-            name: "SelectionLength",
-            propertyType: typeof(int),
-            ownerType: typeof(FormulaViewer),
-            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer)d).UpdateStyles()));
-        public int SelectionLength
-        {
-            get { return (int)GetValue(SelectionLengthProperty); }
-            set
+            if (CaretIndex != SelectionEnd)
             {
-                SetValue(SelectionLengthProperty, value);
+                SelectionLength = 0;
+                CaretIndex = (int) e.NewValue;
             }
         }
 
-        // TODO: delete this property?
-        public static readonly DependencyProperty IsEditEnabledProperty = DependencyProperty.Register(
-            name: "IsEditEnabled",
-            propertyType: typeof(bool),
-            ownerType: typeof(FormulaViewer),
-            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer)d).UpdateContainers()));
-        public bool IsEditEnabled
+        public static readonly DependencyProperty SelectionStartProperty = DependencyProperty.Register(
+            name: "SelectionStart",
+            propertyType: typeof (int),
+            ownerType: typeof (FormulaViewer),
+            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer) d).SelectionChanged()));
+        public int SelectionStart
         {
-            get { return (bool)GetValue(IsEditEnabledProperty); }
-            set { SetValue(IsEditEnabledProperty, value); }
+            get { return (int)GetValue(SelectionStartProperty); }
+            set { SetValue(SelectionStartProperty, value); }
         }
 
-        public static readonly DependencyProperty IsMultilineProperty = DependencyProperty.Register(
-            name: "IsMultiline",
-            propertyType: typeof(bool),
-            ownerType: typeof(FormulaViewer),
-            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer)d).UpdateContainers()));
-        public bool IsMultiline
+        public static readonly DependencyProperty SelectionLengthProperty = DependencyProperty.Register(
+            name: "SelectionLength",
+            propertyType: typeof (int),
+            ownerType: typeof (FormulaViewer),
+            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer) d).SelectionChanged()));
+        public int SelectionLength
         {
-            get { return (bool)GetValue(IsMultilineProperty); }
-            set { SetValue(IsMultilineProperty, value); }
+            get { return (int)GetValue(SelectionLengthProperty); }
+            set { SetValue(SelectionLengthProperty, value); }
         }
+        private void SelectionChanged()
+        {
+            if (Tokens == null) return;
+            // CoerceValueCallback is not available in Windows Phone (FrameworkPropertyMetadata is not available)
+            CaretIndex = SelectionEnd;
+            UpdateStyles();
+        }
+
+        //public static readonly DependencyProperty IsEditEnabledProperty = DependencyProperty.Register(
+        //    name: "IsEditEnabled",
+        //    propertyType: typeof(bool),
+        //    ownerType: typeof(FormulaViewer),
+        //    typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer)d).UpdateContainers()));
+        //public bool IsEditEnabled
+        //{
+        //    get { return (bool)GetValue(IsEditEnabledProperty); }
+        //    set { SetValue(IsEditEnabledProperty, value); }
+        //}
+
+        //public static readonly DependencyProperty IsMultilineProperty = DependencyProperty.Register(
+        //    name: "IsMultiline",
+        //    propertyType: typeof(bool),
+        //    ownerType: typeof(FormulaViewer),
+        //    typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer)d).UpdateContainers()));
+        //public bool IsMultiline
+        //{
+        //    get { return (bool)GetValue(IsMultilineProperty); }
+        //    set { SetValue(IsMultilineProperty, value); }
+        //}
 
         public static readonly DependencyProperty NormalFontSizeProperty = DependencyProperty.Register(
             name: "NormalFontSize",
@@ -232,7 +244,8 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         private Panel Panel
         {
-            get { return IsMultiline ? (Panel) MultilinePanelContent : SingleLinePanelContent; }
+            get { return MultilinePanelContent; }
+            //get { return IsMultiline ? (Panel) MultilinePanelContent : SingleLinePanelContent; }
         }
 
         private UIElementCollection Children
@@ -243,6 +256,11 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         private IEnumerable<Grid> Containers
         {
             get { return Children.Cast<Grid>().Where(child => child != Caret); }
+        }
+
+        public int SelectionEnd
+        {
+            get { return SelectionStart + SelectionLength; }
         }
 
         private Grid Caret { get; set; }
@@ -266,7 +284,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         #region Containers
 
-        private Grid CreateContainer(IFormulaToken token)
+        private static Grid CreateContainer(IFormulaToken token)
         {
             // find template in FormulaTokenTemplates.xaml
             FormulaTokenTemplate template;
@@ -294,23 +312,18 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             if (!IsLoaded) return;
 
             Children.Clear();
-
-            if (Tokens == null)
-            {
-                CaretIndex = 0;
-            }
-            else
+            if (Tokens != null)
             {
                 Children.AddRange(Tokens.Select(CreateContainer).Where(container => container != null));
                 foreach (var container in Containers)
                 {
                     InitContainer(container);
                 }
+                UpdateStyles();
             }
+            MoveCaret(-1, CaretIndex);
 
             UpdateFontSize();
-            UpdateStyles();
-            MoveCaret(-1, CaretIndex);
         }
 
         private void AddContainer(IFormulaToken token, int index)
@@ -329,6 +342,10 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             {
                 CaretIndex++;
             }
+            if (SelectionStart <= index && index < SelectionEnd)
+            {
+                SelectionLength++;
+            }
         }
 
         private void RemoveContainer(int index)
@@ -344,6 +361,10 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             {
                 CaretIndex--;
             }
+            if (SelectionStart <= index && index < SelectionEnd)
+            {
+                SelectionLength--;
+            }
         }
 
         #endregion
@@ -355,11 +376,12 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             // find container
             var index = Containers.IndexOf(container);
             if (index == -1) return;
+            e.Handled = true;
 
             if (e.GetPosition(container).X > container.ActualWidth / 2) index++;
 
+            SelectionLength = 0;
             CaretIndex = index;
-            e.Handled = true;
         }
 
         private void Container_OnDoubleTap(Grid container, GestureEventArgs e)
@@ -447,17 +469,10 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         private void UpdateStyles()
         {
-            SetSelection(CaretIndex, SelectionLength);
-        }
-
-        private void SetSelection(int startIndex, int count)
-        {
-            var endIndex = startIndex + count;
-
             var index = 0;
             foreach (var container in Containers)
             {
-                var isSelected = startIndex <= index && index < endIndex;
+                var isSelected = SelectionStart <= index && index < SelectionEnd;
                 FormulaTokenTemplate.SetStyle(container, isSelected);
                 index++;
             }
@@ -476,10 +491,11 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
             if (oldIndex != -1)
             {
-                var element = Children.ElementAtOrDefault(newIndex) as FrameworkElement;
+                var element = Children.ElementAtOrDefault(newIndex);
                 if (element == Caret) return;
                 if (oldIndex != -1) Children.RemoveAt(oldIndex);
             }
+            
             Children.Insert(newIndex, Caret);
         }
 

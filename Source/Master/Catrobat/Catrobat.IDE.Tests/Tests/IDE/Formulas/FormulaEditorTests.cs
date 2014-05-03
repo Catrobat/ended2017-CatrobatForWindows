@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Formulas.Editor;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
@@ -11,6 +7,10 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Extensions;
 using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 {
@@ -79,21 +79,22 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestFunctions()
         {
-            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateExpToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Exp);
-            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateLogToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Log);
-            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateLnToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Ln);
-            TestEditor(new IFormulaToken[] {  FormulaTokenFactory.CreateMinToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Min);
-            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateMaxToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Max);
-            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateSinToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Sin);
-            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateCosToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Cos);
-            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateTanToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Tan);
-            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateArcsinToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Arcsin);
-            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateArccosToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Arccos);
-            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateArctanToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Arctan);
-            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateSqrtToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Sqrt);
-            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateAbsToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Abs);
-            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateRoundToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Round);
-            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateRandomToken(), FormulaTokenFactory.CreateParenthesisToken(true) }, FormulaEditorKey.Random);
+            var openingParenthesis = FormulaTokenFactory.CreateParenthesisToken(true);
+            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateExpToken(), openingParenthesis }, FormulaEditorKey.Exp);
+            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateLogToken(), openingParenthesis }, FormulaEditorKey.Log);
+            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateLnToken(), openingParenthesis }, FormulaEditorKey.Ln);
+            TestEditor(new IFormulaToken[] {  FormulaTokenFactory.CreateMinToken(), openingParenthesis }, FormulaEditorKey.Min);
+            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateMaxToken(), openingParenthesis }, FormulaEditorKey.Max);
+            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateSinToken(), openingParenthesis }, FormulaEditorKey.Sin);
+            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateCosToken(), openingParenthesis }, FormulaEditorKey.Cos);
+            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateTanToken(), openingParenthesis }, FormulaEditorKey.Tan);
+            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateArcsinToken(), openingParenthesis }, FormulaEditorKey.Arcsin);
+            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateArccosToken(), openingParenthesis }, FormulaEditorKey.Arccos);
+            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateArctanToken(), openingParenthesis }, FormulaEditorKey.Arctan);
+            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateSqrtToken(), openingParenthesis }, FormulaEditorKey.Sqrt);
+            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateAbsToken(), openingParenthesis }, FormulaEditorKey.Abs);
+            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateRoundToken(), openingParenthesis }, FormulaEditorKey.Round);
+            TestEditor(new IFormulaToken[] { FormulaTokenFactory.CreateRandomToken(), openingParenthesis }, FormulaEditorKey.Random);
         }
 
         #endregion
@@ -158,8 +159,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             var editor = new FormulaEditor();
             Assert.IsFalse(editor.HandleKey(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Exp));
+            editor.CaretIndex = 2;
             Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Delete));
+            editor.CaretIndex = 1;
             Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Delete));
+            editor.CaretIndex = 0;
             Assert.IsFalse(editor.HandleKey(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Exp));
         }
@@ -171,46 +175,46 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             Assert.IsFalse(editor.CanUndo);
             Assert.IsFalse(editor.CanRedo);
 
-            editor.HandleKey(FormulaEditorKey.D2);
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.D4));
             Assert.IsTrue(editor.CanUndo);
             Assert.IsFalse(editor.CanRedo);
 
-            editor.HandleKey(FormulaEditorKey.Left);
-            Assert.IsTrue(editor.CanUndo);
-            Assert.IsFalse(editor.CanRedo);
-            editor.SelectionLength = 1;
-
-            editor.HandleKey(FormulaEditorKey.D4);
+            editor.CaretIndex = 1;
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.D2));
             Assert.IsTrue(editor.CanUndo);
             Assert.IsFalse(editor.CanRedo);
 
-            editor.HandleKey(FormulaEditorKey.Undo);
-            EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(2) }, editor.Tokens);
-            Assert.AreEqual(0, editor.CaretIndex);
-            Assert.AreEqual(1, editor.SelectionLength);
+            editor.CaretIndex = 0;
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Undo));
+            EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(4) }, editor.Tokens);
+            Assert.AreEqual(1, editor.CaretIndex);
             Assert.IsTrue(editor.CanUndo);
             Assert.IsTrue(editor.CanRedo);
 
-            editor.HandleKey(FormulaEditorKey.Undo);
-            Assert.IsNull(editor.Tokens);
-            Assert.AreEqual(0, editor.CaretIndex);
-            Assert.AreEqual(0, editor.SelectionLength);
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Undo));
+            EnumerableAssert.AreEqual(null, editor.Tokens);
             Assert.IsFalse(editor.CanUndo);
             Assert.IsTrue(editor.CanRedo);
 
-            editor.HandleKey(FormulaEditorKey.Redo);
-            EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(2) }, editor.Tokens);
-            Assert.AreEqual(0, editor.CaretIndex);
-            Assert.AreEqual(1, editor.SelectionLength);
+            editor.HandleKey(FormulaEditorKey.Right);
+            Assert.IsFalse(editor.CanUndo);
+            Assert.IsTrue(editor.CanRedo);
+
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Redo));
+            EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(4) }, editor.Tokens);
             Assert.IsTrue(editor.CanUndo);
             Assert.IsTrue(editor.CanRedo);
 
-            editor.HandleKey(FormulaEditorKey.Redo);
-            EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(4) }, editor.Tokens);
-            Assert.AreEqual(1, editor.CaretIndex);
-            Assert.AreEqual(0, editor.SelectionLength);
+            editor.SelectionStart = 0;
+            editor.SelectionLength = 1;
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.D2));
             Assert.IsTrue(editor.CanUndo);
             Assert.IsFalse(editor.CanRedo);
+
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Undo));
+            EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(4) }, editor.Tokens);
+            Assert.AreEqual(0, editor.SelectionStart);
+            Assert.AreEqual(1, editor.SelectionLength);
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
@@ -221,30 +225,39 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 Formula = FormulaTreeFactory.CreateNumberNode(4)
             };
             EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(4) }, editor.Tokens);
-            editor.HandleKey(FormulaEditorKey.D2);
+            Assert.AreEqual(1, editor.CaretIndex);
+
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.D2));
             Assert.AreEqual(FormulaTreeFactory.CreateNumberNode(42), editor.Formula);
             Assert.IsNull(editor.ParsingError);
-            editor.HandleKey(FormulaEditorKey.Plus);
-            Assert.AreEqual(FormulaTreeFactory.CreateNumberNode(42), editor.Formula);
+
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Plus));
+            Assert.AreEqual(FormulaTreeFactory.CreateAddNode(FormulaTreeFactory.CreateNumberNode(4), FormulaTreeFactory.CreateNumberNode(2)), editor.Formula);
+            Assert.IsNull(editor.ParsingError);
+
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Plus));
+            Assert.AreEqual(FormulaTreeFactory.CreateAddNode(FormulaTreeFactory.CreateNumberNode(4), FormulaTreeFactory.CreateNumberNode(2)), editor.Formula);
             Assert.IsNotNull(editor.ParsingError);
-            editor.HandleKey(FormulaEditorKey.D1);
-            Assert.AreEqual(FormulaTreeFactory.CreateAddNode(FormulaTreeFactory.CreateNumberNode(42), FormulaTreeFactory.CreateNumberNode(1)), editor.Formula);
-            Assert.IsNull(editor.ParsingError);
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestSelection()
         {
-            var editor = new FormulaEditor();
-            editor.HandleKey(FormulaEditorKey.D4);
-            editor.CaretIndex = 0;
+            // ReSharper disable once UseObjectOrCollectionInitializer
+            var editor = new FormulaEditor
+            {
+                Formula = FormulaTreeFactory.CreateNumberNode(1234)
+            };
+
+            editor.SelectionStart = 1;
+            editor.SelectionLength = 3;
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.D5));
+            EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(1), FormulaTokenFactory.CreateDigitToken(5) }, editor.Tokens);
+
+            editor.SelectionStart = 0;
             editor.SelectionLength = 1;
-            editor.HandleKey(FormulaEditorKey.D2);
-            EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(2) }, editor.Tokens);
-            Assert.AreEqual(0, editor.SelectionLength);
-            editor.HandleKey(FormulaEditorKey.D4);
-            EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(2), FormulaTokenFactory.CreateDigitToken(4) }, editor.Tokens);
-            Assert.AreEqual(0, editor.SelectionLength);
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Delete));
+            EnumerableAssert.AreEqual(new IFormulaToken[] { FormulaTokenFactory.CreateDigitToken(5) }, editor.Tokens);
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]

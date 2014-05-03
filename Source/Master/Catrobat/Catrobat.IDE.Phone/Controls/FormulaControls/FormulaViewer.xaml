@@ -15,6 +15,6 @@
     <ScrollViewer Name="ScrollViewerContent" VerticalAlignment="Stretch" Tap="Panel_OnTap">
         <toolkit:WrapPanel Name="MultilinePanelContent"/>
     </ScrollViewer>
-    <StackPanel Name="SingleLinePanelContent" Orientation="Horizontal" Tap="Panel_OnTap"/>
+    <!--<StackPanel Name="SingleLinePanelContent" Orientation="Horizontal" Tap="Panel_OnTap"/>-->
   </Grid>
 </UserControl>
