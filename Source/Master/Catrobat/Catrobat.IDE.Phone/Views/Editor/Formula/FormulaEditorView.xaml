@@ -36,10 +36,9 @@
         MinFontSize="26"
         MaxFontSize="70"
         IsAutoFontSize="True"
-        IsEditEnabled="True"
-        IsMultiline="True"
         Tokens="{Binding Tokens, Mode=OneWay}" 
         CaretIndex="{Binding CaretIndex, Mode=TwoWay}" 
+        SelectionStart="{Binding SelectionStart, Mode=TwoWay}"
         SelectionLength="{Binding SelectionLength, Mode=TwoWay}"
         VerticalAlignment="Stretch"
         HorizontalAlignment="Stretch" />

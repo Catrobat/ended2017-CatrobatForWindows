@@ -115,6 +115,7 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             // XAML bindings are not removed themselves! hopefully this changes in Windows Phone 8.1
             FormulaViewer.ClearValue(FormulaViewer.TokensProperty);
             FormulaViewer.ClearValue(FormulaViewer.CaretIndexProperty);
+            FormulaViewer.ClearValue(FormulaViewer.SelectionStartProperty);
             FormulaViewer.ClearValue(FormulaViewer.SelectionLengthProperty);
             FormulaKeyboard.ClearValue(FormulaKeyboard.CanDeleteProperty);
             FormulaKeyboard.ClearValue(FormulaKeyboard.CanUndoProperty);

@@ -88,6 +88,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             set { _editor.CaretIndex = value; }
         }
 
+        public int SelectionStart
+        {
+            get { return _editor.SelectionStart; }
+            set { _editor.SelectionStart = value; }
+        }
+
         public int SelectionLength
         {
             get { return _editor.SelectionLength; }
@@ -182,7 +188,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         private void CompleteTokenAction(int index)
         {
             var selection = FormulaInterpreter.Complete(Tokens, index);
-            CaretIndex = selection.Start;
+            SelectionStart = selection.Start;
             SelectionLength = selection.Length;
         }
 
@@ -225,6 +231,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 if (e.PropertyName == GetPropertyName(() => _editor.Tokens)) RaisePropertyChanged(() => Tokens);
                 if (e.PropertyName == GetPropertyName(() => _editor.IsTokensEmpty)) RaisePropertyChanged(() => IsTokensEmpty);
                 if (e.PropertyName == GetPropertyName(() => _editor.CaretIndex)) RaisePropertyChanged(() => CaretIndex);
+                if (e.PropertyName == GetPropertyName(() => _editor.SelectionStart)) RaisePropertyChanged(() => SelectionStart);
                 if (e.PropertyName == GetPropertyName(() => _editor.SelectionLength)) RaisePropertyChanged(() => SelectionLength);
                 if (e.PropertyName == GetPropertyName(() => _editor.CanUndo)) RaisePropertyChanged(() => CanUndo);
                 if (e.PropertyName == GetPropertyName(() => _editor.CanRedo)) RaisePropertyChanged(() => CanRedo);
