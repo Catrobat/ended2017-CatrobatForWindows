@@ -105,16 +105,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             get { return _editor.ParsingError; }
         }
 
-        public bool CanLeft
-        {
-            get { return _editor.CanLeft; }
-        }
-
-        public bool CanRight
-        {
-            get { return _editor.CanRight; }
-        }
-
         public bool CanDelete
         {
             get { return _editor.CanDelete; }
@@ -172,6 +162,18 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 timeTillHide: ToastNotificationTime.Medeum);
         }
 
+        public RelayCommand UndoCommand { get; private set; }
+        private void UndoAction()
+        {
+            if (!_editor.Undo()) RaiseKeyError();
+        }
+
+        public RelayCommand RedoCommand { get; private set; }
+        private void RedoAction()
+        {
+            if (!_editor.Redo()) RaiseKeyError();
+        }
+
         public RelayCommand StartSensorsCommand { get; private set; }
         private void StartSensorsAction()
         {
@@ -213,6 +215,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             KeyPressedCommand = new RelayCommand<FormulaKeyEventArgs>(KeyPressedAction);
             EvaluatePressedCommand = new RelayCommand(EvaluatePressedAction);
             ShowErrorPressedCommand = new RelayCommand(ShowErrorPressedAction);
+            UndoCommand = new RelayCommand(UndoAction, () => _editor.CanUndo);
+            RedoCommand = new RelayCommand(RedoAction, () => _editor.CanRedo);
             StartSensorsCommand = new RelayCommand(StartSensorsAction);
             StopSensorsCommand = new RelayCommand(StopSensorsAction);
             CompleteTokenCommand = new RelayCommand<int>(CompleteTokenAction);
@@ -235,8 +239,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 if (e.PropertyName == GetPropertyName(() => _editor.SelectionLength)) RaisePropertyChanged(() => SelectionLength);
                 if (e.PropertyName == GetPropertyName(() => _editor.CanUndo)) RaisePropertyChanged(() => CanUndo);
                 if (e.PropertyName == GetPropertyName(() => _editor.CanRedo)) RaisePropertyChanged(() => CanRedo);
-                if (e.PropertyName == GetPropertyName(() => _editor.CanLeft)) RaisePropertyChanged(() => CanLeft);
-                if (e.PropertyName == GetPropertyName(() => _editor.CanRight)) RaisePropertyChanged(() => CanRight);
                 if (e.PropertyName == GetPropertyName(() => _editor.CanDelete)) RaisePropertyChanged(() => CanDelete);
                 if (e.PropertyName == GetPropertyName(() => _editor.HasError)) RaisePropertyChanged(() => HasError);
                 if (e.PropertyName == GetPropertyName(() => _editor.HasError)) RaisePropertyChanged(() => CanEvaluate);

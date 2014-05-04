@@ -1009,4 +1009,16 @@
   <data name="Main_UploadProjectEmail" xml:space="preserve">
     <value>E-Mail:</value>
   </data>
+  <data name="Editor_Redo" xml:space="preserve">
+    <value>Wiederherstellen</value>
+  </data>
+  <data name="Editor_StartSensors" xml:space="preserve">
+    <value>Sensoren starten</value>
+  </data>
+  <data name="Editor_StopSensors" xml:space="preserve">
+    <value>Sensoren anhalten</value>
+  </data>
+  <data name="Editor_Undo" xml:space="preserve">
+    <value>Rückgängig</value>
+  </data>
 </root>

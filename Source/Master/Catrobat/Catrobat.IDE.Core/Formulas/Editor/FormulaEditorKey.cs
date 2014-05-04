@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Catrobat.IDE.Core.Formulas.Editor
+﻿namespace Catrobat.IDE.Core.Formulas.Editor
 {
     public enum FormulaEditorKey
     {
@@ -82,14 +80,6 @@ namespace Catrobat.IDE.Core.Formulas.Editor
         ClosingParenthesis, 
 
         // Keyboard
-        [Obsolete("Left/Right keys have  been replaced by Tap. ")]
-        Left,
-        [Obsolete("Left/Right keys have  been replaced by Tap. ")]
-        Right, 
-        Delete,
-        [Obsolete("Move to AppBar and Viemodel.UndoCommand. ")]
-        Undo,
-        [Obsolete("Move to AppBar and Viemodel.RedoCommand. ")]
-        Redo
+        Delete
     }
 }

@@ -1322,6 +1322,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Redo.
+        /// </summary>
+        public static string Editor_Redo {
+            get {
+                return ResourceManager.GetString("Editor_Redo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to rename.
         /// </summary>
         public static string Editor_Rename {
@@ -1435,6 +1444,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Editor_StandardLocalVariableName {
             get {
                 return ResourceManager.GetString("Editor_StandardLocalVariableName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start sensors.
+        /// </summary>
+        public static string Editor_StartSensors {
+            get {
+                return ResourceManager.GetString("Editor_StartSensors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop sensors.
+        /// </summary>
+        public static string Editor_StopSensors {
+            get {
+                return ResourceManager.GetString("Editor_StopSensors", resourceCulture);
             }
         }
         
@@ -1606,6 +1633,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Editor_TypeSomething {
             get {
                 return ResourceManager.GetString("Editor_TypeSomething", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo.
+        /// </summary>
+        public static string Editor_Undo {
+            get {
+                return ResourceManager.GetString("Editor_Undo", resourceCulture);
             }
         }
         

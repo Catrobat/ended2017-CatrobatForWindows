@@ -185,22 +185,18 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             Assert.IsFalse(editor.CanRedo);
 
             editor.CaretIndex = 0;
-            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Undo));
+            Assert.IsTrue(editor.Undo());
             EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(4) }, editor.Tokens);
             Assert.AreEqual(1, editor.CaretIndex);
             Assert.IsTrue(editor.CanUndo);
             Assert.IsTrue(editor.CanRedo);
 
-            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Undo));
+            Assert.IsTrue(editor.Undo());
             EnumerableAssert.AreEqual(null, editor.Tokens);
             Assert.IsFalse(editor.CanUndo);
             Assert.IsTrue(editor.CanRedo);
 
-            editor.HandleKey(FormulaEditorKey.Right);
-            Assert.IsFalse(editor.CanUndo);
-            Assert.IsTrue(editor.CanRedo);
-
-            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Redo));
+            Assert.IsTrue(editor.Redo());
             EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(4) }, editor.Tokens);
             Assert.IsTrue(editor.CanUndo);
             Assert.IsTrue(editor.CanRedo);
@@ -211,7 +207,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             Assert.IsTrue(editor.CanUndo);
             Assert.IsFalse(editor.CanRedo);
 
-            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Undo));
+            Assert.IsTrue(editor.Undo());
             EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(4) }, editor.Tokens);
             Assert.AreEqual(0, editor.SelectionStart);
             Assert.AreEqual(1, editor.SelectionLength);
@@ -222,15 +218,15 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         {
             var editor = new FormulaEditor
             {
-                Formula = FormulaTreeFactory.CreateNumberNode(4)
+                Formula = FormulaTreeFactory.CreateNumberNode(2)
             };
-            EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(4) }, editor.Tokens);
-            Assert.AreEqual(1, editor.CaretIndex);
+            EnumerableAssert.AreEqual(new[] { FormulaTokenFactory.CreateDigitToken(2) }, editor.Tokens);
 
-            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.D2));
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.D4));
             Assert.AreEqual(FormulaTreeFactory.CreateNumberNode(42), editor.Formula);
             Assert.IsNull(editor.ParsingError);
 
+            editor.CaretIndex = 1;
             Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Plus));
             Assert.AreEqual(FormulaTreeFactory.CreateAddNode(FormulaTreeFactory.CreateNumberNode(4), FormulaTreeFactory.CreateNumberNode(2)), editor.Formula);
             Assert.IsNull(editor.ParsingError);

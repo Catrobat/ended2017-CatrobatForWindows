@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Core.ExtensionMethods
             }
             else
             {
-                foreach (var element in source)
+                foreach (var element in items)
                 {
                     source.Add(element);
                 }

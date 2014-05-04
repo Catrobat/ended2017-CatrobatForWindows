@@ -27,7 +27,6 @@ namespace Catrobat.IDE.Core.Formulas.Editor
                 Tokens = _formula == null ? 
                     new ObservableCollection<IFormulaToken>() : 
                     new ObservableCollection<IFormulaToken>(FormulaTokenizer.Tokenize(_formula));
-                CaretIndex = Tokens.Count;
             }
         }
 
@@ -43,7 +42,6 @@ namespace Catrobat.IDE.Core.Formulas.Editor
                 if (_tokens != null) _tokens.CollectionChanged += Tokens_CollectionChanged;
                 RaisePropertyChanged(() => Tokens);
                 RaisePropertyChanged(() => IsTokensEmpty);
-                RaisePropertyChanged(() => CanRight);
                 InterpretTokens();
             }
         }
@@ -83,8 +81,6 @@ namespace Catrobat.IDE.Core.Formulas.Editor
                 if (_caretIndex == value) return;
                 _caretIndex = value;
                 RaisePropertyChanged(() => CaretIndex);
-                RaisePropertyChanged(() => CanLeft);
-                RaisePropertyChanged(() => CanRight);
                 RaisePropertyChanged(() => CanDelete);
             }
         }
@@ -133,16 +129,6 @@ namespace Catrobat.IDE.Core.Formulas.Editor
             get { return _redoStack.Count != 0; }
         }
 
-        public bool CanLeft
-        {
-            get { return CaretIndex > 0; }
-        }
-
-        public bool CanRight
-        {
-            get { return CaretIndex < Tokens.Count; }
-        }
-
         public bool CanDelete
         {
             get { return CaretIndex > 0 || SelectionLength != 0; }
@@ -159,30 +145,17 @@ namespace Catrobat.IDE.Core.Formulas.Editor
 
         public bool HandleKey(FormulaEditorKey key, UserVariable variable = null)
         {
-            switch (key)
+            if (key == FormulaEditorKey.Delete)
             {
-                case FormulaEditorKey.Left:
-                    if (CaretIndex < 1) return false;
-                    CaretIndex--;
-                    return true;
-                case FormulaEditorKey.Right:
-                    if (!(Tokens != null && CaretIndex < Tokens.Count)) return false;
-                    CaretIndex++;
-                    return true;
-                case FormulaEditorKey.Delete:
-                    PushUndo();
-                    return Delete();
-                case FormulaEditorKey.Undo:
-                    return Undo();
-                case FormulaEditorKey.Redo:
-                    return Redo();
-                default:
-                    PushUndo();
-                    var token = CreateToken(key, variable);
-                    return Insert((token is IFormulaFunction)
-                        ? new[] {token, FormulaTokenFactory.CreateParenthesisToken(true)}
-                        : new[] {token});
+                PushUndo();
+                return Delete();
             }
+
+            PushUndo();
+            var token = CreateToken(key, variable);
+            return Insert((token is IFormulaFunction)
+                ? new[] {token, FormulaTokenFactory.CreateParenthesisToken(true)}
+                : new[] {token});
         }
 
         private bool Insert(IEnumerable<IFormulaToken> tokens)
@@ -198,7 +171,6 @@ namespace Catrobat.IDE.Core.Formulas.Editor
                 if (!(0 <= CaretIndex && CaretIndex <= Tokens.Count)) return false;
                 Tokens.InsertRange(CaretIndex, tokens);
             }
-            RaisePropertyChanged(() => CanLeft);
             RaisePropertyChanged(() => CanDelete);
             return true;
         }
@@ -218,7 +190,6 @@ namespace Catrobat.IDE.Core.Formulas.Editor
                 if (!(0 <= index && index < Tokens.Count)) return false;
                 Tokens.RemoveAt(index);
             }
-            RaisePropertyChanged(() => CanLeft);
             RaisePropertyChanged(() => CanDelete);
             return true;
         }
@@ -327,7 +298,7 @@ namespace Catrobat.IDE.Core.Formulas.Editor
             public int SelectionStart { get { return CaretIndex - SelectionLength; } }
         }
 
-        private bool Undo()
+        public bool Undo()
         {
             if (_undoStack.Count == 0) return false;
             PushState(_redoStack);
@@ -337,7 +308,7 @@ namespace Catrobat.IDE.Core.Formulas.Editor
             return true;
         }
 
-        private bool Redo()
+        public bool Redo()
         {
             if (_redoStack.Count == 0) return false;
             PushState(_undoStack);
@@ -379,6 +350,9 @@ namespace Catrobat.IDE.Core.Formulas.Editor
             RaisePropertyChanged(() => CanRedo);
             Formula = null;
             RaisePropertyChanged(() => CanDelete);
+            CaretIndex = 0;
+            SelectionStart = 0;
+            SelectionLength = 0;
         }
     }
 }
