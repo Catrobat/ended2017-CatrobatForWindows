@@ -216,11 +216,7 @@
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyClosingParenthesis">ClosingParenthesis</editor:FormulaEditorKey>
 
     <!-- keyboard -->
-    <editor:FormulaEditorKey x:Key="FormulaEditorKeyLeft">Left</editor:FormulaEditorKey>
-    <editor:FormulaEditorKey x:Key="FormulaEditorKeyRight">Right</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyDelete">Delete</editor:FormulaEditorKey>
-    <editor:FormulaEditorKey x:Key="FormulaEditorKeyUndo">Undo</editor:FormulaEditorKey>
-    <editor:FormulaEditorKey x:Key="FormulaEditorKeyRedo">Redo</editor:FormulaEditorKey>
   </UserControl.Resources>
 
   <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
@@ -232,42 +228,37 @@
       <Grid.RowDefinitions>
         <RowDefinition Height="*"/>
         <RowDefinition Height="*"/>
-        <RowDefinition Height="*"/>
         <RowDefinition Height="4*"/>
       </Grid.RowDefinitions>
-      <Grid Column="0" Row="1" Grid.RowSpan="2">
+      <Grid Column="0" Row="0" Grid.RowSpan="2">
         <Grid.RowDefinitions>
           <RowDefinition/>
           <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
           <ColumnDefinition/>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Row="1" Grid.Column="0" Content="+" DataContext="{StaticResource FormulaEditorKeyPlus}" Style="{StaticResource StyleButtonOperators}" Click="KeyButton_OnClick"/>
+        <Button Grid.Row="1" Grid.Column="1" Content="-" DataContext="{StaticResource FormulaEditorKeyMinus}" Style="{StaticResource StyleButtonOperators}" Click="KeyButton_OnClick"/>
+        <Button Grid.Row="1" Grid.Column="2" Content="*" DataContext="{StaticResource FormulaEditorKeyMultiply}" Style="{StaticResource StyleButtonOperators}" Click="KeyButton_OnClick"/>
+      </Grid>
+      <Grid Column="1" Row="0" Grid.RowSpan="2">
+        <Grid.RowDefinitions>
+          <RowDefinition/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
           <ColumnDefinition/>
           <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button Grid.Row="0" Grid.Column="0" Content="(" DataContext="{StaticResource FormulaEditorKeyOpeningParenthesis}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" />
         <Button Grid.Row="0" Grid.Column="1" Content=")" DataContext="{StaticResource FormulaEditorKeyClosingParenthesis}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" />
-        <Button Grid.Row="0" Grid.Column="2" Content="/" DataContext="{StaticResource FormulaEditorKeyDivide}" Style="{StaticResource StyleButtonOperators}" Click="KeyButton_OnClick"/>
-        <Button Grid.Row="1" Grid.Column="0" Content="+" DataContext="{StaticResource FormulaEditorKeyPlus}" Style="{StaticResource StyleButtonOperators}" Click="KeyButton_OnClick"/>
-        <Button Grid.Row="1" Grid.Column="1" Content="-" DataContext="{StaticResource FormulaEditorKeyMinus}" Style="{StaticResource StyleButtonOperators}" Click="KeyButton_OnClick"/>
-        <Button Grid.Row="1" Grid.Column="2" Content="*" DataContext="{StaticResource FormulaEditorKeyMultiply}" Style="{StaticResource StyleButtonOperators}" Click="KeyButton_OnClick"/>
+        <Button Grid.Row="1" Grid.Column="0" Content="/" DataContext="{StaticResource FormulaEditorKeyDivide}" Style="{StaticResource StyleButtonOperators}" Click="KeyButton_OnClick"/>
+        <Button Grid.Row="1" Grid.Column="1" Content="Del" DataContext="{StaticResource FormulaEditorKeyDelete}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanDelete, ElementName=FormulaKeyboardXaml}" />
       </Grid>
-      <Grid Column="1" Row="0" Grid.RowSpan="3">
-        <Grid.RowDefinitions>
-          <RowDefinition/>
-          <RowDefinition/>
-          <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition/>
-          <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="1" Content="Del" DataContext="{StaticResource FormulaEditorKeyDelete}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanDelete, ElementName=FormulaKeyboardXaml}" />
-        <Button Grid.Row="1" Grid.Column="0" Content="&lt;-" DataContext="{StaticResource FormulaEditorKeyUndo}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanUndo, ElementName=FormulaKeyboardXaml}" />
-        <Button Grid.Row="1" Grid.Column="1" Content="-&gt;" DataContext="{StaticResource FormulaEditorKeyRedo}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanRedo, ElementName=FormulaKeyboardXaml}" />
-        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"  Content="Math" Style="{StaticResource StyleButtonAditional}" Click="ButtonMath_OnClick"/>
-      </Grid>
-      <Grid Column="1" Row="3">
+      <Grid Column="1" Row="2">
         <Grid.RowDefinitions>
           <RowDefinition />
           <RowDefinition />
@@ -278,14 +269,13 @@
           <ColumnDefinition/>
           <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Sensors" Style="{StaticResource StyleButtonAditional}" Click="ButtonSensors_OnClick"/>
-        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Variables" Style="{StaticResource StyleButtonAditional}" Click="ButtonVariable_OnClick"/>
-        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="!" Style="{StaticResource StyleButtonEvaluate}" Click ="ButtonError_OnClick" Background="DarkRed" Visibility="{Binding HasError, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />
-        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Evaluate" Style="{StaticResource StyleButtonEvaluate}" Click ="ButtonEvaluate_OnClick" Background="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1.NativeBrush}" Visibility="{Binding CanEvaluate, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />
-        <Button Grid.Row="3" Grid.Column="0" Content="&lt;" DataContext="{StaticResource FormulaEditorKeyLeft}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanLeft, ElementName=FormulaKeyboardXaml}" />
-        <Button Grid.Row="3" Grid.Column="1" Content="&gt;" DataContext="{StaticResource FormulaEditorKeyRight}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanRight, ElementName=FormulaKeyboardXaml}" />
+        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Content="Math" Style="{StaticResource StyleButtonAditional}" Click="ButtonMath_OnClick"/>
+        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Sensors" Style="{StaticResource StyleButtonAditional}" Click="ButtonSensors_OnClick"/>
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Variables" Style="{StaticResource StyleButtonAditional}" Click="ButtonVariable_OnClick"/>
+        <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="!" Style="{StaticResource StyleButtonEvaluate}" Click ="ButtonError_OnClick" Background="DarkRed" Visibility="{Binding HasError, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />
+        <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="Evaluate" Style="{StaticResource StyleButtonEvaluate}" Click ="ButtonEvaluate_OnClick" Background="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1.NativeBrush}" Visibility="{Binding CanEvaluate, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />
       </Grid>
-      <Grid Name="GridNumbers" Column="0" Row="3">
+      <Grid Name="GridNumbers" Column="0" Row="2">
         <Grid.RowDefinitions>
           <RowDefinition/>
           <RowDefinition/>

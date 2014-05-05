@@ -1009,4 +1009,16 @@
   <data name="FormulaInterpreter_Operator_RightEmptyInfixOperator" xml:space="preserve">
     <value>Type something. </value>
   </data>
+  <data name="Editor_Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="Editor_StartSensors" xml:space="preserve">
+    <value>Start sensors</value>
+  </data>
+  <data name="Editor_StopSensors" xml:space="preserve">
+    <value>Stop sensors</value>
+  </data>
+  <data name="Editor_Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
 </root>

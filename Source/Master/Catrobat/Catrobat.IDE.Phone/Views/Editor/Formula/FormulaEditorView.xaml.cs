@@ -118,16 +118,21 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             FormulaViewer.ClearValue(FormulaViewer.SelectionStartProperty);
             FormulaViewer.ClearValue(FormulaViewer.SelectionLengthProperty);
             FormulaKeyboard.ClearValue(FormulaKeyboard.CanDeleteProperty);
-            FormulaKeyboard.ClearValue(FormulaKeyboard.CanUndoProperty);
-            FormulaKeyboard.ClearValue(FormulaKeyboard.CanRedoProperty);
-            FormulaKeyboard.ClearValue(FormulaKeyboard.CanLeftProperty);
-            FormulaKeyboard.ClearValue(FormulaKeyboard.CanRightProperty);
             FormulaKeyboard.ClearValue(FormulaKeyboard.CanEvaluateProperty);
             FormulaKeyboard.ClearValue(FormulaKeyboard.HasErrorProperty);
 
             _viewModel.ErrorOccurred -= ErrorOccurred;
 
             _viewModel.Cleanup();
+        }
+
+        private void ApplicationBarIconButtonUndo_OnClick(object sender, EventArgs e)
+        {
+            _viewModel.UndoCommand.Execute(null);
+        }
+        private void ApplicationBarIconButtonRedo_OnClick(object sender, EventArgs e)
+        {
+            _viewModel.RedoCommand.Execute(null);
         }
 
         private void ApplicationBarMenuItemStart_OnClick(object sender, EventArgs e)

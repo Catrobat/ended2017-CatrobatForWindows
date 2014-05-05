@@ -39,11 +39,10 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         }
         private void TokensPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-            var oldValue = (ObservableCollection<IFormulaToken>)e.OldValue;
-            var newValue = (ObservableCollection<IFormulaToken>)e.NewValue;
+            var oldValue = (ObservableCollection<IFormulaToken>) e.OldValue;
+            var newValue = (ObservableCollection<IFormulaToken>) e.NewValue;
 
-            if (newValue == null) CaretIndex = 0;
-            UpdateContainers();
+            InitContainers();
 
             if (oldValue != null) oldValue.CollectionChanged -= Tokens_CollectionChanged;
             if (newValue != null) newValue.CollectionChanged += Tokens_CollectionChanged;
@@ -279,7 +278,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
             Caret = CreateCaret();
             InitCaret();
-            UpdateContainers();
+            InitContainers();
         }
 
         #region Containers
@@ -306,7 +305,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             FormulaTokenTemplate.SetFontSize(container, ActualFontSize);
         }
 
-        private void UpdateContainers()
+        private void InitContainers()
         {
             // see FormulaViewer_OnLoaded
             if (!IsLoaded) return;
@@ -321,7 +320,10 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
                 }
                 UpdateStyles();
             }
-            MoveCaret(-1, CaretIndex);
+
+            var caretIndex = Tokens == null ? 0 : Tokens.Count;
+            MoveCaret(-1, caretIndex);
+            CaretIndex = caretIndex;
 
             UpdateFontSize();
         }
