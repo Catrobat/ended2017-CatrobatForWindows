@@ -92,14 +92,19 @@ namespace Catrobat.IDE.Core.ViewModel.Service
         {
             ServiceLocator.NavigationService.RemoveBackEntry();
 
-            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_email))
+            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) /*|| string.IsNullOrEmpty(_email)*/)
             {
                 ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
                     AppResources.Main_UploadProjectMissingLoginData, MissingLoginDataCallback, MessageBoxOptions.Ok);
             }
             else
             {
-                CatrobatWebCommunicationService.RegisterOrCheckToken(_username, _password, _email,
+                //CatrobatWebCommunicationService.RegisterOrCheckToken(_username, _password, _email,
+                //                                         ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName,
+                //                                         RegionInfo.CurrentRegion.TwoLetterISORegionName,
+                //                                         UtilTokenHelper.CalculateToken(_username, _password),
+                //                                         RegisterOrCheckTokenCallback);
+                CatrobatWebCommunicationService.LoginOrRegister(_username, _password, _email,
                                                          ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName,
                                                          RegionInfo.CurrentRegion.TwoLetterISORegionName,
                                                          UtilTokenHelper.CalculateToken(_username, _password),
@@ -173,9 +178,12 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             }
         }
 
-        private void RegisterOrCheckTokenCallback(bool registered, string errorCode, string statusMessage)
+        private void RegisterOrCheckTokenCallback(bool registered, string errorCode, string statusMessage, string token)
         {
-            Context.CurrentToken = UtilTokenHelper.CalculateToken(_username, _password);
+            //Context.CurrentToken = UtilTokenHelper.CalculateToken(_username, _password);
+            // TODO store values if everything was sucessfull
+            Context.CurrentToken = token;
+            Context.CurrentUserName = _username;
 
             if (registered)
             {

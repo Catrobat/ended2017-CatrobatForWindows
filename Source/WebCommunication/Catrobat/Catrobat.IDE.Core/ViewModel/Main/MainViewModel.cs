@@ -411,7 +411,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             ServiceLocator.NavigationService.NavigateTo<UploadProjectLoadingViewModel>();
 
             // Determine which page to open
-            Task.Run(() => CatrobatWebCommunicationService.CheckToken(Context.CurrentToken, CheckTokenEvent));
+            Task.Run(() => CatrobatWebCommunicationService.CheckToken(Context.CurrentUserName, Context.CurrentToken, CheckTokenEvent));
         }
 
         protected override void GoBackAction()

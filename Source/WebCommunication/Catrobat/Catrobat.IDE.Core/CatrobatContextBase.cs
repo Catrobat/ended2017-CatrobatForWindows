@@ -70,6 +70,19 @@ namespace Catrobat.IDE.Core
             }
         }
 
+        public string CurrentUserName
+        {
+            get { return LocalSettings.CurrentUsername; }
+
+            set
+            {
+                if (LocalSettings.CurrentUsername == value) return;
+
+                LocalSettings.CurrentUsername = value;
+                RaisePropertyChanged();
+            }
+        }
+
         #endregion
 
         #region PropertyChanged
