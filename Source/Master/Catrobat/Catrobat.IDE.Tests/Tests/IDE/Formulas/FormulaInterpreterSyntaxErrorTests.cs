@@ -132,6 +132,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             var message = AppResources.FormulaInterpreter_Brackets_NonArgumentParameterSeparator;
 
             TestParsingError(message, 0, 1, ",)");
+            TestParsingError(message, 1, 1, "1,)");
             TestParsingError(message, 1, 1, "(,.))");
             TestParsingError(message, 3, 1, "1+(,))");
         }

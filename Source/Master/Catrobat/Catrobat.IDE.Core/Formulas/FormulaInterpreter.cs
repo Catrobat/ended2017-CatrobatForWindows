@@ -98,12 +98,19 @@ namespace Catrobat.IDE.Core.Formulas
             if (formulaRange.Length < tokens.Count)
             {
                 var nextIndex = formulaRange.End;
-                var nextParenthesis = tokens2.First(token => GetOrigin(token).Start == nextIndex) as FormulaTokenParenthesis;
+                var nextToken = tokens2.First(token => GetOrigin(token).Start == nextIndex);
+                var nextParenthesis = nextToken as FormulaTokenParenthesis;
                 if (nextParenthesis != null && nextParenthesis.IsClosing)
                 {
                     SetParsingError(
                         source: nextParenthesis, 
                         message: AppResources.FormulaInterpreter_Brackets_UnmatchedClosingParenthesis);
+                }
+                else if (nextToken is FormulaTokenParameterSeparator)
+                {
+                    SetParsingError(
+                        source: nextToken,
+                        message: AppResources.FormulaInterpreter_Brackets_NonArgumentParameterSeparator);
                 }
                 else
                 {
