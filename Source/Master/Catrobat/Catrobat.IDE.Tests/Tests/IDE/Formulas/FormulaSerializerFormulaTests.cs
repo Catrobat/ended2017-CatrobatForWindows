@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             ServiceLocator.CultureService.SetCulture(new CultureInfo("de"));
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestNull()
         {
             Assert.AreEqual(string.Empty, FormulaSerializer.Serialize(null));
@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Constants
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestConstants()
         {
 
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Operators
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestOperators()
         {
             TestSerializerN("{0}+{1}", FormulaTreeFactory.CreateAddNode);
@@ -82,7 +82,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Functions
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestFunctions()
         {
             TestSerializerN("exp({0})", FormulaTreeFactory.CreateExpNode);
@@ -106,7 +106,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Sensors
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestSensors()
         {
             TestSerializer(AppResources.Formula_Sensor_AccelerationX, FormulaTreeFactory.CreateAccelerationXNode);
@@ -122,7 +122,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Properties
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestProperties()
         {
             TestSerializer(AppResources.Formula_Property_Brightness, FormulaTreeFactory.CreateBrightnessNode);
@@ -139,7 +139,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Variables
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestVariables()
         {
             TestSerializer("{0}", FormulaTreeFactory.CreateLocalVariableNode);
@@ -162,7 +162,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Brackets
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestBrackets()
         {
             TestSerializerNL("({0})", FormulaTreeFactory.CreateParenthesesNode);
