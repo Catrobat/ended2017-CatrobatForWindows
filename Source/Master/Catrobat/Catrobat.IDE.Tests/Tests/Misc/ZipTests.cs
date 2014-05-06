@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Tests.Tests.Misc
             TestHelper.InitializeTests();
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public async Task UnZipSimpleTest()
         {
             TestHelper.InitializeAndClearCatrobatContext();
@@ -62,7 +62,7 @@ namespace Catrobat.IDE.Tests.Tests.Misc
             }
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public async Task ZipSimpleTest()
         {
             TestHelper.InitializeAndClearCatrobatContext();

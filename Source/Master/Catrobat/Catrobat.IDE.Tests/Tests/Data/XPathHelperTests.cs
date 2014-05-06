@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod,TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void GetElement()
         {
             var document = SampleLoader.LoadSampleXDocument("Converter/XPathHelperTestInput");
@@ -35,7 +35,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(destination1, foundElement);
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void GetXPath()
         {
             var document = SampleLoader.LoadSampleXDocument("Converter/XPathHelperTestInput");

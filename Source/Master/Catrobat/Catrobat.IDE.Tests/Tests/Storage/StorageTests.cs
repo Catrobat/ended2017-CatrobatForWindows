@@ -201,7 +201,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
             }
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public async Task LoadImageTest()
         {
             using (IStorage storage = new StorageTest())

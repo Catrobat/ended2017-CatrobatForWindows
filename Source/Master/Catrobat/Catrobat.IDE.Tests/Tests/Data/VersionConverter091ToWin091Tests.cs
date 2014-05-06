@@ -14,56 +14,56 @@ namespace Catrobat.IDE.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void ObjectReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_ObjectReferences");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void SoundReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_SoundReferences");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void LookReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_LookReferences");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void GlobalVariableReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_GlobalVariableReferences");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void LocalVariableReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_LocalVariableReferences");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PointToBrickReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_PointTo");
         }
 
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void ForeverBrickReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_Forever");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void RepeatBrickReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_Repeat");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void IfLoginBeginBrickReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_IfLogicBegin");

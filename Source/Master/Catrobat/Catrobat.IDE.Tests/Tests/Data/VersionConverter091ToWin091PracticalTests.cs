@@ -17,98 +17,98 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
         #region Examples from PocketCode.com
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode01()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test1Input");
         }
 
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode02()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test2Input");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode03()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test3Input");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode04()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test4Input");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode05()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test5Input");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode06()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test6Input");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode07()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test7Input");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode08()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test8Input");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode09()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test9Input");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode10()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test10Input");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode11()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test11Input");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode12()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test12Input");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode13()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test13Input");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode14()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test14Input");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode15()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test15Input");
         }
 
-        [TestMethod, TestCategory("ObsoleteGatedTests")]
+        [TestMethod] //  TestCategory("GatedTests") TODO: Configure TFS
         public void PocketCode16()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test16Input");
