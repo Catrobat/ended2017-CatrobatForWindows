@@ -13,6 +13,9 @@ using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Main;
 using Microsoft.Phone.Controls;
 
+//by Phil
+using System.Diagnostics;
+
 namespace Catrobat.IDE.Phone.Views.Main
 {
     public partial class MainView : PhoneApplicationPage
@@ -20,7 +23,7 @@ namespace Catrobat.IDE.Phone.Views.Main
         private readonly MainViewModel _viewModel =
             ((ViewModelLocator)ServiceLocator.ViewModelLocator).MainViewModel;
 
-        private const int _offsetKnob = 5;
+        private const int _offsetKnob = 4;
 
         public MainView()
         {
@@ -175,20 +178,23 @@ namespace Catrobat.IDE.Phone.Views.Main
             };
         }
 
-        //private void LongListSelectorOnlineProjects_ItemRealized(object sender, ItemRealizationEventArgs e)
-        //{
-        //    // !_viewModel.IsLoading &&
-        //    if (LongListSelectorOnlineProjects.ItemsSource != null && LongListSelectorOnlineProjects.ItemsSource.Count >= _offsetKnob)
-        //    {
-        //        if (e.ItemKind == LongListSelectorItemKind.Item)
-        //        {
-        //            if ((e.Container.Content as OnlineProjectHeader).Equals(LongListSelectorOnlineProjects.ItemsSource[LongListSelectorOnlineProjects.ItemsSource.Count - _offsetKnob]))
-        //            {
-        //                _viewModel.LoadOnlineProjects(true);
-        //            }
-        //        }
-        //    }
-        //}
+        private void LongListSelectorOnlineProjects_ItemRealized(object sender, ItemRealizationEventArgs e)
+        {
+            // implements infinite scrolling
+            if (!_viewModel.IsLoadingOnlineProjects && LongListSelectorOnlineProjects.ItemsSource != null && LongListSelectorOnlineProjects.ItemsSource.Count >= _offsetKnob)
+            {
+                if (e.ItemKind == LongListSelectorItemKind.Item)
+                {
+                    OnlineProjectHeader currentHeader = e.Container.Content as OnlineProjectHeader;
+                    //if ((e.Container.Content as OnlineProjectHeader).Equals(LongListSelectorOnlineProjects.ItemsSource[LongListSelectorOnlineProjects.ItemsSource.Count - _offsetKnob]))
+                    if (LongListSelectorOnlineProjects.ItemsSource.Count - LongListSelectorOnlineProjects.ItemsSource.IndexOf(currentHeader) <= _offsetKnob)
+                    {
+                        Debug.WriteLine("Adding 4 new Projects to " + LongListSelectorOnlineProjects.ItemsSource.Count.ToString() + " existing projects");
+                        _viewModel.LoadOnlineProjects(true);
+                    }
+                }
+            }
+        }
 
         //private void NavigateToCatrobatWebsite_OnClick(object sender, RoutedEventArgs e)
         //{

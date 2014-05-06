@@ -73,49 +73,49 @@ namespace Catrobat.IDE.Phone.Services
         public void DownloadAndSaveProject(string downloadUrl, string projectName,
                                           CatrobatWebCommunicationService.DownloadAndSaveProjectEvent callback)
         {
-            var wc = new WebClient();
-            wc.OpenReadCompleted += (async (s, args) =>
-                {
-                    try
-                    {
-                        //string filename = System.IO.Path.GetFileNameWithoutExtension(downloadUrl);
-                        List<string> folders;
-                        using (var storeage = StorageSystem.GetStorage())
-                        {
-                            folders = storeage.GetDirectoryNames(CatrobatContextBase.ProjectsPath).ToList<string>();
-                        }
-                        var countString = "";
-                        var counter = 1;
-                        while (folders.IndexOf(projectName + countString) >= 0)
-                        {
-                            countString = " " + counter++.ToString(CultureInfo.InvariantCulture);
-                        }
-                        projectName = projectName + countString;
+            //var wc = new WebClient();
+            //wc.OpenReadCompleted += (async (s, args) =>
+            //    {
+            //        try
+            //        {
+            //            //string filename = System.IO.Path.GetFileNameWithoutExtension(downloadUrl);
+            //            List<string> folders;
+            //            using (var storeage = StorageSystem.GetStorage())
+            //            {
+            //                folders = storeage.GetDirectoryNames(CatrobatContextBase.ProjectsPath).ToList<string>();
+            //            }
+            //            var countString = "";
+            //            var counter = 1;
+            //            while (folders.IndexOf(projectName + countString) >= 0)
+            //            {
+            //                countString = " " + counter++.ToString(CultureInfo.InvariantCulture);
+            //            }
+            //            projectName = projectName + countString;
 
 
-                        await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(args.Result,
-                                                                            CatrobatContextBase.ProjectsPath + "/" +
-                                                                            projectName);
+            //            await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(args.Result,
+            //                                                                CatrobatContextBase.ProjectsPath + "/" +
+            //                                                                projectName);
 
-                        var result = await CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, true);
-                        var error = result.Error;
+            //            var result = await CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, true);
+            //            var error = result.Error;
 
 
-                        if (callback != null) //TODO
-                        {
-                            callback(projectName, error);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        if (callback != null)
-                        {
-                            callback("", CatrobatVersionConverter.VersionConverterError.ProjectCodeNotValid);
-                        }
-                    }
-                });
+            //            if (callback != null) //TODO
+            //            {
+            //                callback(projectName, error);
+            //            }
+            //        }
+            //        catch (Exception)
+            //        {
+            //            if (callback != null)
+            //            {
+            //                callback("", CatrobatVersionConverter.VersionConverterError.ProjectCodeNotValid);
+            //            }
+            //        }
+            //    });
 
-            wc.OpenReadAsync(new Uri(downloadUrl, UriKind.RelativeOrAbsolute));
+            //wc.OpenReadAsync(new Uri(downloadUrl, UriKind.RelativeOrAbsolute));
         }
     }
 }

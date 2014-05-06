@@ -18,6 +18,8 @@ namespace Catrobat.IDE.Core
 
         public string CurrentToken { get; set; }
 
+        public string CurrentUsername { get; set; }
+
         public LocalSettings ()
         {
             if (Debugger.IsAttached)

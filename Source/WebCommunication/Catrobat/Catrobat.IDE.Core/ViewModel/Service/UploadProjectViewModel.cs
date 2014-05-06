@@ -5,6 +5,7 @@ using Catrobat.IDE.Core.Resources.Localization;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
+
 namespace Catrobat.IDE.Core.ViewModel.Service
 {
     public class UploadProjectViewModel : ViewModelBase
@@ -110,16 +111,16 @@ namespace Catrobat.IDE.Core.ViewModel.Service
         {
             await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
 
-            CatrobatWebCommunicationService.UploadProject(_projectName, _projectDescription,
-                                              Context.CurrentUserEmail,
+            CatrobatWebCommunicationService.UploadProject(_projectName, _projectDescription, 
+                                              Context.CurrentUserName,
                                               ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName,
                                               Context.CurrentToken, UploadCallback);
 
             var message = new MessageBase();
             Messenger.Default.Send(message, ViewModelMessagingToken.UploadProjectStartedListener);
 
-            ServiceLocator.NavigationService.RemoveBackEntry();
-            base.GoBackAction();
+            //ServiceLocator.NavigationService.RemoveBackEntry();
+            //base.GoBackAction();
         }
 
         private void CancelAction()
@@ -165,6 +166,7 @@ namespace Catrobat.IDE.Core.ViewModel.Service
 
         private void UploadCallback(bool successful)
         {
+            
             if (CatrobatWebCommunicationService.NoUploadsPending())
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
