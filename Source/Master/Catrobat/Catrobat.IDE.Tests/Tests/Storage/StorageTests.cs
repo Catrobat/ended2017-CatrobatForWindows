@@ -201,7 +201,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
             }
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod, TestCategory("GatedTests.Obsolete")]
         public async Task LoadImageTest()
         {
             using (IStorage storage = new StorageTest())

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EB6B4FF2-8CB6-46FB-B50E-D001C863762D}"
 	ProjectSection(SolutionItems) = preProject
@@ -44,6 +44,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.Phone.Standa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.Phone", "Catrobat.Paint.Phone\Catrobat.Paint.Phone.csproj", "{0EE4DAC6-349C-4DB2-ABC2-2FDABFBAC0B3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IDE", "IDE", "{02BFED5A-86D2-4A3E-A4FC-1E5F9C093A55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Player", "Player", "{AF7610B0-B6A6-4185-8054-6494D779962A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Paint", "Paint", "{178606C8-126D-493B-A05D-C488EA6A6EF1}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 18
@@ -51,54 +57,71 @@ Global
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Catrobat.IDE.Tests\\Catrobat.IDE.Tests.csproj
+		SccProjectTopLevelParentUniqueName1 = Catrobat.sln
 		SccProjectName1 = Catrobat.IDE.Tests
 		SccLocalPath1 = Catrobat.IDE.Tests
 		SccProjectUniqueName2 = Catrobat.IDE.Core\\Catrobat.IDE.Core.csproj
+		SccProjectTopLevelParentUniqueName2 = Catrobat.sln
 		SccProjectName2 = Catrobat.IDE.Core
 		SccLocalPath2 = Catrobat.IDE.Core
 		SccProjectUniqueName3 = Catrobat.IDE.Phone\\Catrobat.IDE.Phone.csproj
+		SccProjectTopLevelParentUniqueName3 = Catrobat.sln
 		SccProjectName3 = Catrobat.IDE.Phone
 		SccLocalPath3 = Catrobat.IDE.Phone
 		SccProjectUniqueName4 = Catrobat.IDE.Store\\Catrobat.IDE.Store.csproj
+		SccProjectTopLevelParentUniqueName4 = Catrobat.sln
 		SccProjectName4 = Catrobat.IDE.Store
 		SccLocalPath4 = Catrobat.IDE.Store
 		SccProjectUniqueName5 = Catrobat.IDE.Store.Tests\\Catrobat.IDE.Store.Tests.csproj
+		SccProjectTopLevelParentUniqueName5 = Catrobat.sln
 		SccProjectName5 = Catrobat.IDE.Store.Tests
 		SccLocalPath5 = Catrobat.IDE.Store.Tests
 		SccProjectUniqueName6 = Catrobat.IDE.Store.UITests\\Catrobat.IDE.Store.UITests.csproj
+		SccProjectTopLevelParentUniqueName6 = Catrobat.sln
 		SccProjectName6 = Catrobat.IDE.Store.UITests
 		SccLocalPath6 = Catrobat.IDE.Store.UITests
 		SccProjectUniqueName7 = Catrobat.Player.Store\\Catrobat.Player.Store.vcxproj
+		SccProjectTopLevelParentUniqueName7 = Catrobat.sln
 		SccProjectName7 = Catrobat.Player.Store
 		SccLocalPath7 = Catrobat.Player.Store
 		SccProjectUniqueName8 = Catrobat.Player.Phone.Tests\\Catrobat.Player.Phone.Tests.vcxproj
+		SccProjectTopLevelParentUniqueName8 = Catrobat.sln
 		SccProjectName8 = Catrobat.Player.Phone.Tests
 		SccLocalPath8 = Catrobat.Player.Phone.Tests
 		SccProjectUniqueName9 = Catrobat.Paint.Tests\\Catrobat.Paint.Tests.csproj
+		SccProjectTopLevelParentUniqueName9 = Catrobat.sln
 		SccProjectName9 = Catrobat.Paint.Tests
 		SccLocalPath9 = Catrobat.Paint.Tests
 		SccProjectUniqueName10 = Catrobat.Player.Component\\Catrobat.Player.Component.vcxproj
+		SccProjectTopLevelParentUniqueName10 = Catrobat.sln
 		SccProjectName10 = Catrobat.Player.Component
 		SccLocalPath10 = Catrobat.Player.Component
 		SccProjectUniqueName11 = Catrobat.Player.Phone\\Catrobat.Player.Phone.csproj
+		SccProjectTopLevelParentUniqueName11 = Catrobat.sln
 		SccProjectName11 = Catrobat.Player.Phone
 		SccLocalPath11 = Catrobat.Player.Phone
 		SccProjectUniqueName12 = Catrobat.IDE.Phone.Tests\\Catrobat.IDE.Phone.Tests.csproj
+		SccProjectTopLevelParentUniqueName12 = Catrobat.sln
 		SccProjectName12 = Catrobat.IDE.Phone.Tests
 		SccLocalPath12 = Catrobat.IDE.Phone.Tests
 		SccProjectUniqueName13 = Catrobat.Player.DirectXToolkit\\Catrobat.Player.DirectXToolkit.vcxproj
+		SccProjectTopLevelParentUniqueName13 = Catrobat.sln
 		SccProjectName13 = Catrobat.Player.DirectXToolkit
 		SccLocalPath13 = Catrobat.Player.DirectXToolkit
 		SccProjectUniqueName14 = Catrobat.Paint.Phone.Old\\Catrobat.Paint.Phone.Old.csproj
+		SccProjectTopLevelParentUniqueName14 = Catrobat.sln
 		SccProjectName14 = Catrobat.Paint.Phone.Old
 		SccLocalPath14 = Catrobat.Paint.Phone.Old
 		SccProjectUniqueName15 = Catrobat.Paint.Phone.Old.Standalone\\Catrobat.Paint.Phone.Old.Standalone.csproj
+		SccProjectTopLevelParentUniqueName15 = Catrobat.sln
 		SccProjectName15 = Catrobat.Paint.Phone.Old.Standalone
 		SccLocalPath15 = Catrobat.Paint.Phone.Old.Standalone
 		SccProjectUniqueName16 = Catrobat.Paint.Phone.Standalone\\Catrobat.Paint.Phone.Standalone.csproj
+		SccProjectTopLevelParentUniqueName16 = Catrobat.sln
 		SccProjectName16 = Catrobat.Paint.Phone.Standalone
 		SccLocalPath16 = Catrobat.Paint.Phone.Standalone
 		SccProjectUniqueName17 = Catrobat.Paint.Phone\\Catrobat.Paint.Phone.csproj
+		SccProjectTopLevelParentUniqueName17 = Catrobat.sln
 		SccProjectName17 = Catrobat.Paint.Phone
 		SccLocalPath17 = Catrobat.Paint.Phone
 	EndGlobalSection
@@ -232,6 +255,8 @@ Global
 		{503C2FA2-BF48-48D7-A890-DEA6B8E54229}.Debug|ARM.Build.0 = Debug|ARM
 		{503C2FA2-BF48-48D7-A890-DEA6B8E54229}.Debug|ARM.Deploy.0 = Debug|ARM
 		{503C2FA2-BF48-48D7-A890-DEA6B8E54229}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{503C2FA2-BF48-48D7-A890-DEA6B8E54229}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{503C2FA2-BF48-48D7-A890-DEA6B8E54229}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
 		{503C2FA2-BF48-48D7-A890-DEA6B8E54229}.Debug|Win32.ActiveCfg = Debug|x86
 		{503C2FA2-BF48-48D7-A890-DEA6B8E54229}.Debug|Win32.Build.0 = Debug|x86
 		{503C2FA2-BF48-48D7-A890-DEA6B8E54229}.Debug|Win32.Deploy.0 = Debug|x86
@@ -282,6 +307,7 @@ Global
 		{12D14259-E4F3-4151-8C48-C8B542C67AA6}.Debug|ARM.Build.0 = Debug|ARM
 		{12D14259-E4F3-4151-8C48-C8B542C67AA6}.Debug|ARM.Deploy.0 = Debug|ARM
 		{12D14259-E4F3-4151-8C48-C8B542C67AA6}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{12D14259-E4F3-4151-8C48-C8B542C67AA6}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{12D14259-E4F3-4151-8C48-C8B542C67AA6}.Debug|Win32.ActiveCfg = Debug|x86
 		{12D14259-E4F3-4151-8C48-C8B542C67AA6}.Debug|Win32.Build.0 = Debug|x86
 		{12D14259-E4F3-4151-8C48-C8B542C67AA6}.Debug|Win32.Deploy.0 = Debug|x86
@@ -328,6 +354,7 @@ Global
 		{79F47E26-0AD5-4697-BB26-9094F6DFFEE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79F47E26-0AD5-4697-BB26-9094F6DFFEE6}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{79F47E26-0AD5-4697-BB26-9094F6DFFEE6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{79F47E26-0AD5-4697-BB26-9094F6DFFEE6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{79F47E26-0AD5-4697-BB26-9094F6DFFEE6}.Debug|Win32.ActiveCfg = Debug|Any CPU
 		{79F47E26-0AD5-4697-BB26-9094F6DFFEE6}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{79F47E26-0AD5-4697-BB26-9094F6DFFEE6}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -765,5 +792,24 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{900D7440-4758-495A-A974-081C3BEBA044} = {02BFED5A-86D2-4A3E-A4FC-1E5F9C093A55}
+		{BCA5086E-499A-4507-AA9B-A55D7E534EF7} = {02BFED5A-86D2-4A3E-A4FC-1E5F9C093A55}
+		{6AC4FF1D-1995-4F04-B91D-4644CE964368} = {02BFED5A-86D2-4A3E-A4FC-1E5F9C093A55}
+		{503C2FA2-BF48-48D7-A890-DEA6B8E54229} = {02BFED5A-86D2-4A3E-A4FC-1E5F9C093A55}
+		{12D14259-E4F3-4151-8C48-C8B542C67AA6} = {02BFED5A-86D2-4A3E-A4FC-1E5F9C093A55}
+		{79F47E26-0AD5-4697-BB26-9094F6DFFEE6} = {02BFED5A-86D2-4A3E-A4FC-1E5F9C093A55}
+		{4B3DE03D-5CED-496D-AA42-2AC7ADF0604F} = {AF7610B0-B6A6-4185-8054-6494D779962A}
+		{C0CED763-9E71-4CA7-9DEF-CE037453AD52} = {AF7610B0-B6A6-4185-8054-6494D779962A}
+		{C8B2DF4B-A19C-4B91-969A-C8220D346513} = {178606C8-126D-493B-A05D-C488EA6A6EF1}
+		{D87F8BC3-FCBB-4A74-B175-9BA6554FC94F} = {178606C8-126D-493B-A05D-C488EA6A6EF1}
+		{39B2B796-72DF-4619-B6BA-8C98D809E5E6} = {178606C8-126D-493B-A05D-C488EA6A6EF1}
+		{A1D92942-96B3-455F-BDCC-5D32214804B6} = {AF7610B0-B6A6-4185-8054-6494D779962A}
+		{60C5D6B8-9B12-458F-B1A8-7150F7B396A4} = {AF7610B0-B6A6-4185-8054-6494D779962A}
+		{45D87D93-B00E-403C-8D35-609186BA2376} = {02BFED5A-86D2-4A3E-A4FC-1E5F9C093A55}
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E} = {AF7610B0-B6A6-4185-8054-6494D779962A}
+		{DB78523A-C16E-44DC-881A-3EAE94D0AE91} = {178606C8-126D-493B-A05D-C488EA6A6EF1}
+		{0EE4DAC6-349C-4DB2-ABC2-2FDABFBAC0B3} = {178606C8-126D-493B-A05D-C488EA6A6EF1}
 	EndGlobalSection
 EndGlobal

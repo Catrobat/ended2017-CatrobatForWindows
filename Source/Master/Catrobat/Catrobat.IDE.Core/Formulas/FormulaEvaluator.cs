@@ -18,18 +18,7 @@ namespace Catrobat.IDE.Core.Formulas
         {
             if (formula == null) return null;
 
-#if DEBUG
             return formula.IsNumber() ? (object)formula.EvaluateNumber() : formula.EvaluateLogic();
-#else
-            try
-            {
-                return formula.IsNumber() ? (object)formula.EvaluateNumber() : formula.EvaluateLogic();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-#endif
         }
     }
 }

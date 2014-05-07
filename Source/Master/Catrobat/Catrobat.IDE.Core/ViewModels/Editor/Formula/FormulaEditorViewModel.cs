@@ -153,8 +153,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private void ShowErrorPressedAction()
         {
-            // TODO: pretty up toast notification
-            CaretIndex = ParsingError.Index;
+            SelectionStart = ParsingError.Index;
             SelectionLength = ParsingError.Length;
             ServiceLocator.NotifictionService.ShowToastNotification(
                 title: "",

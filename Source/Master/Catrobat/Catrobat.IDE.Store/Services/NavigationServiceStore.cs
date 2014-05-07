@@ -41,7 +41,7 @@ namespace Catrobat.IDE.Store.Services
                 if (pageType == null)
                 {
                     var viewModelName = type.GetTypeInfo().AssemblyQualifiedName.Split(',').First();
-                    var viewName = viewModelName.Replace("Catrobat.IDE.Core.ViewModel", "Catrobat.IDE.Store.Views");
+                    var viewName = viewModelName.Replace("Catrobat.IDE.Core.ViewModels", "Catrobat.IDE.Store.Views");
                     viewName = viewName.Replace("ViewModel", "View");
                     pageType = Type.GetType(viewName);
                 }

@@ -27,7 +27,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             ServiceLocator.CultureService.SetCulture(CultureInfo.InvariantCulture);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestNullOrEmpty()
         {
             var message = AppResources.FormulaInterpreter_NullOrEmpty;
@@ -35,7 +35,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestParsingError(message, 0, 0, string.Empty);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestDoubleValue()
         {
             var message1 = AppResources.FormulaInterpreter_DoubleValue;
@@ -53,7 +53,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Number
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestNumberSingleDecimalSeparator()
         {
             var message = AppResources.FormulaInterpreter_Number_SingleDecimalSeparator;
@@ -64,7 +64,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestParsingError(message, 2, 1, "exp(.)(.)");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestNumberDoubleDecimalSeparator()
         {
             var message = AppResources.FormulaInterpreter_Number_DoubleDecimalSeparator;
@@ -78,7 +78,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestParsingError(message, 3, 1, "exp(..)(..)");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestNumberOverflow()
         {
             var message = AppResources.FormulaInterpreter_Number_Overflow;
@@ -95,7 +95,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Brackets
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestBracketsUnmatchedParenthesis()
         {
             var message1 = AppResources.FormulaInterpreter_Brackets_UnmatchedOpeningParenthesis;
@@ -109,7 +109,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestParsingError(message2, 3, 1, "1+2)");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestBracketsEmpty()
         {
             var message1 = AppResources.FormulaInterpreter_Brackets_EmptyParentheses;
@@ -126,17 +126,18 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestParsingError(message2, 6, 0, "min(1<log()))");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestBracketsNonParameterParameterSeparator()
         {
             var message = AppResources.FormulaInterpreter_Brackets_NonArgumentParameterSeparator;
 
             TestParsingError(message, 0, 1, ",)");
+            TestParsingError(message, 1, 1, "1,)");
             TestParsingError(message, 1, 1, "(,.))");
             TestParsingError(message, 3, 1, "1+(,))");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestBracketsTooFewArguments()
         {
             var message = AppResources.FormulaInterpreter_Brackets_TooFewArguments;
@@ -144,7 +145,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestParsingError(message, 3, 0, "random(1))");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestBracketsTooManyArguments()
         {
             var message = AppResources.FormulaInterpreter_Brackets_TooManyArguments;
@@ -158,7 +159,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Function
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestFunctionEmpty()
         {
             var message = AppResources.FormulaInterpreter_Function_Empty;
@@ -173,7 +174,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Operator
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestOperatorEmptyPrefixOperator()
         {
             var message = AppResources.FormulaInterpreter_Operator_EmptyPrefixOperator;
@@ -186,7 +187,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestParsingError(message, 3, 0, " 1+-,");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestOperatorLeftEmptyInfixOperator()
         {
             var message = AppResources.FormulaInterpreter_Operator_LeftEmptyInfixOperator;
@@ -197,7 +198,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestParsingError(message, 2, 0, "min(+),");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestOperatorRightEmptyInfixOperator()
         {
             var message = AppResources.FormulaInterpreter_Operator_RightEmptyInfixOperator;

@@ -28,7 +28,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestHelper.InitializeTests();
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests.Obsolete")]
         public void TestCatroidNodes()
         {
             const string directory = "FormulaEditor/";
@@ -85,7 +85,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestConvert<FormulaNodeTrue>(directory + "true");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestXmlFormulaTreeNodes()
         {
             var localVariable = new UserVariable
@@ -116,7 +116,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 formulas: nodes);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests.Obsolete")]
         public void TestPocketCodeFormulas()
         {
             var documents = Enumerable.Range(1, 16)
@@ -151,7 +151,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             }
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestFormulaTreeNodes()
         {
             var localVariable = new UserVariable

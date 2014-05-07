@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             ServiceLocator.CultureService.SetCulture(new CultureInfo("de"));
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestNull()
         {
             Assert.IsNull(FormulaTokenizer.Tokenize(null));
@@ -37,7 +37,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Constants
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestNumbers()
         {
             var culture = ServiceLocator.CultureService.GetCulture();
@@ -75,7 +75,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             }
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestConstants()
         {
             TestTokenizer(FormulaTokenFactory.CreatePiToken, FormulaTreeFactory.CreatePiNode);
@@ -88,7 +88,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Operators
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestOperators()
         {
             TestInfixOperatorN(FormulaTokenFactory.CreatePlusToken, FormulaTreeFactory.CreateAddNode);
@@ -148,7 +148,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Functions
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestFunctions()
         {
             TestUnaryFunctionN(FormulaTokenFactory.CreateExpToken, FormulaTreeFactory.CreateExpNode);
@@ -198,7 +198,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Sensors
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestSensors()
         {
             TestTokenizer(FormulaTokenFactory.CreateAccelerationXToken, FormulaTreeFactory.CreateAccelerationXNode);
@@ -214,7 +214,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Properties
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestProperties()
         {
             TestTokenizer(FormulaTokenFactory.CreateBrightnessToken, FormulaTreeFactory.CreateBrightnessNode);
@@ -230,7 +230,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Variables
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestVariables()
         {
             TestVariable(FormulaTokenFactory.CreateLocalVariableToken, FormulaTreeFactory.CreateLocalVariableNode);
@@ -253,7 +253,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Brackets
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestBrackets()
         {
             TestBracketNL(FormulaTokenFactory.CreateParenthesisToken, FormulaTreeFactory.CreateParenthesesNode);

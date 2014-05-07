@@ -5,6 +5,7 @@ using Catrobat.IDE.Core.Services.Storage;
 using System;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Tests.Misc.Storage;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Tests.Services.Storage
 {
@@ -12,6 +13,7 @@ namespace Catrobat.IDE.Tests.Services.Storage
     {
         private readonly List<Stream> _openedStreams = new List<Stream>();
 
+        [Obsolete("Configure TFS to create temporary test directory. ")]
         public Stream OpenResourceStream(ResourceScope project, string uri)
         {
             string projectPath = "";
@@ -26,8 +28,13 @@ namespace Catrobat.IDE.Tests.Services.Storage
                 case ResourceScope.TestCommon:
                     projectPath = "Catrobat.IDE.Tests/";
 
-                    if (!Directory.Exists(basePath + "/" + projectPath + "/SampleData")) // For testing on Build server
+                    // testing on TFS
+                    if (!Directory.Exists(basePath + "/" + projectPath + "SampleData"))
+                    {
                         projectPath += "Binaries/";
+                        if (!Directory.Exists(basePath + "/" + projectPath + "SampleData"))
+                            Assert.Fail("Directory \"" + basePath + "/" + projectPath + "SampleData" + "\" does not exist"); // for TFS debugging only
+                    }
 
                     break;
                 case ResourceScope.Resources:
