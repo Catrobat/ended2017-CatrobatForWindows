@@ -314,7 +314,7 @@ namespace Catrobat.Paint.Phone.View
                 btnSliderThickness.Content = btnSliderThickness.Content.ToString().Remove(btnSliderThickness.Content.ToString().Length - 1);
             }
 
-            if(btnSliderThickness.Content.ToString() != "")
+          //  if(btnSliderThickness.Content.ToString() != "")
             {
                 checkIfValueIsInRange(false);
             }
@@ -339,23 +339,97 @@ namespace Catrobat.Paint.Phone.View
 
         private void checkIfValueIsInRange(bool pressed_accept)
         {
-            Int32 input = Convert.ToInt32(btnSliderThickness.Content);
-            if (input > 50)
+            if (btnSliderThickness.Content.ToString() == "")
             {
-                btnSliderThickness.Content = "50";
+                btnValue0.IsEnabled = true;
+                btnValue1.IsEnabled = true;
+                btnValue2.IsEnabled = true;
+                btnValue3.IsEnabled = true;
+                btnValue4.IsEnabled = true;
+                btnValue5.IsEnabled = true;
+                btnValue6.IsEnabled = true;
+                btnValue7.IsEnabled = true;
+                btnValue8.IsEnabled = true;
+                btnValue9.IsEnabled = true;
+                btnValue0.IsEnabled = false;
             }
-            else if(input == 0)
+            else
             {
-                btnSliderThickness.Content = "1";
-            }
-            else if (pressed_accept && (btnSliderThickness.Content.ToString() == ""))
-            {
-                btnSliderThickness.Content = "1";
-            }
+                Int32 input = Convert.ToInt32(btnSliderThickness.Content);
+                if(input > 5 && input < 10)
+                {
+                    btnValue0.IsEnabled = false;
+                    btnValue1.IsEnabled = false;
+                    btnValue2.IsEnabled = false;
+                    btnValue3.IsEnabled = false;
+                    btnValue4.IsEnabled = false;
+                    btnValue5.IsEnabled = false;
+                    btnValue6.IsEnabled = false;
+                    btnValue7.IsEnabled = false;
+                    btnValue8.IsEnabled = false;
+                    btnValue9.IsEnabled = false;
+                }
+                else if(input == 5)
+                {
+                    btnValue0.IsEnabled = true;
+                    btnValue1.IsEnabled = false;
+                    btnValue2.IsEnabled = false;
+                    btnValue3.IsEnabled = false;
+                    btnValue4.IsEnabled = false;
+                    btnValue5.IsEnabled = false;
+                    btnValue6.IsEnabled = false;
+                    btnValue7.IsEnabled = false;
+                    btnValue8.IsEnabled = false;
+                    btnValue9.IsEnabled = false;
+                }
+                else if(input < 5 || input == 50)
+                {
+                    btnValue0.IsEnabled = true;
+                    btnValue1.IsEnabled = true;
+                    btnValue2.IsEnabled = true;
+                    btnValue3.IsEnabled = true;
+                    btnValue4.IsEnabled = true;
+                    btnValue5.IsEnabled = true;
+                    btnValue6.IsEnabled = true;
+                    btnValue7.IsEnabled = true;
+                    btnValue8.IsEnabled = true;
+                    btnValue9.IsEnabled = true;
+                }
+                else
+                {
+                    btnValue0.IsEnabled = false;
+                    btnValue1.IsEnabled = true;
+                    btnValue2.IsEnabled = true;
+                    btnValue3.IsEnabled = true;
+                    btnValue4.IsEnabled = true;
+                    btnValue5.IsEnabled = true;
+                    btnValue6.IsEnabled = true;
+                    btnValue7.IsEnabled = true;
+                    btnValue8.IsEnabled = true;
+                    btnValue9.IsEnabled = true;
+                }
 
-            if(btnSliderThickness.Content.ToString() != "")
-            {
-                SliderThickness.Value = Convert.ToInt32(btnSliderThickness.Content);
+                SliderThickness.Value = Convert.ToDouble(input);
+                /*
+                Int32 input = Convert.ToInt32(btnSliderThickness.Content);
+                if (input > 50)
+                {
+                    btnSliderThickness.Content = "50";
+                }
+                else if (pressed_accept && (btnSliderThickness.Content.ToString() == ""))
+                {
+                    btnSliderThickness.Content = "1";
+                }
+
+                if (btnSliderThickness.Content.ToString() != "")
+                {
+                    SliderThickness.Value = Convert.ToInt32(btnSliderThickness.Content);
+                }
+
+                if(btnValue0.IsEnabled == false && btnSliderThickness.Content.ToString().Length < 2)
+                {
+                    btnValue0.IsEnabled = true;
+                }*/
             }
         }
 
@@ -368,6 +442,11 @@ namespace Catrobat.Paint.Phone.View
 
                  if (btnSliderThickness.Content.ToString().Length < 2)
                  {
+                     btnSliderThickness.Content += get_clicked_button_number;
+                 }
+                 else if(btnSliderThickness.Content.ToString().Length == 2)
+                 {
+                     btnSliderThickness.Content = "";
                      btnSliderThickness.Content += get_clicked_button_number;
                  }
                  checkIfValueIsInRange(false);
