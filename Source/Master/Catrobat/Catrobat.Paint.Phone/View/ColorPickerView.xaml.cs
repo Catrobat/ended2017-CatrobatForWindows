@@ -14,8 +14,8 @@ namespace Catrobat.Paint.Phone.View
 
             InitializeComponent();
             Brush fill_color = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
-            //SelectedColorRectangle.Fill = fill_color;
-            //SelectedColorRectangleSlider.Fill = fill_color;
+            double fill_color_opacity = fill_color.Opacity * 255.0;
+            
             PocketPaintApplication.GetInstance().PaintData.ColorChanged += PaintDataOnColorChanged;
 
             if (PocketPaintApplication.GetInstance().PaintData.ColorSelected != null)
@@ -23,30 +23,22 @@ namespace Catrobat.Paint.Phone.View
                 Color selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.ColorSelected).Color;
                 MessageBox.Show("Alpha-Value: " + selected_color.A);
                 int reference_color = (selected_color.R + selected_color.G + selected_color.B) / 3;
-                if (reference_color <= 128 && selected_color.A > 5)
+                if (reference_color <= 128 && (selected_color.A > 5 || fill_color_opacity > 5.0))
                 {
                     BtnSelectedColor.Foreground = new SolidColorBrush(Colors.White);
                     BtnSelectedColorSlider.Foreground = new SolidColorBrush(Colors.White);
-                    BtnSelectedColor.BorderBrush = new SolidColorBrush(Colors.White);
-                    BtnSelectedColorSlider.BorderBrush = new SolidColorBrush(Colors.White);
                 }
                 else
                 {
                     BtnSelectedColor.Foreground = new SolidColorBrush(Colors.Black);
                     BtnSelectedColorSlider.Foreground = new SolidColorBrush(Colors.Black);
-                    BtnSelectedColor.BorderBrush = new SolidColorBrush(Colors.White);
-                    BtnSelectedColorSlider.BorderBrush = new SolidColorBrush(Colors.White);
                 }
 
                 if (selected_color == Colors.Transparent)
                 {
-                    recTransparence.Visibility = Visibility.Visible;
-                    // SelectedColorRectangle.Visibility = Visibility.Collapsed;
                     BtnSelectedColor.Background = new SolidColorBrush(Colors.Transparent);
-
-                    recTransparenceSlider.Visibility = Visibility.Visible;
-                    // SelectedColorRectangleSlider.Visibility = Visibility.Collapsed;
                     BtnSelectedColorSlider.Background = new SolidColorBrush(Colors.Transparent);
+
                     BtnSelectedColor.BorderBrush = new SolidColorBrush(Colors.White);
                     BtnSelectedColorSlider.BorderBrush = new SolidColorBrush(Colors.White);
                 }
@@ -54,65 +46,48 @@ namespace Catrobat.Paint.Phone.View
                 {
                     BtnSelectedColor.Background = new SolidColorBrush(selected_color);
                     BtnSelectedColorSlider.Background = new SolidColorBrush(selected_color);
-
                 }
 
-                changeColorOfCoding4FunColorPicker(selected_color.R, selected_color.G, selected_color.B, selected_color.A);
-                changeValuesOfColourTextboxes(selected_color.R, selected_color.G, selected_color.B, selected_color.A);
-                changeValuesOfColourSliders(selected_color.R, selected_color.G, selected_color.B, selected_color.A);
+                changeColorOfCoding4FunColorPicker(selected_color.R, selected_color.G, selected_color.B, (byte) fill_color_opacity);
+                changeValuesOfColourTextboxes(selected_color.R, selected_color.G, selected_color.B, (byte) fill_color_opacity);
+                changeValuesOfColourSliders(selected_color.R, selected_color.G, selected_color.B, (byte) fill_color_opacity);
+
+                changeOpacityOfColorButtons((byte) fill_color_opacity);
             }            
         }
 
         private void PaintDataOnColorChanged(SolidColorBrush color)
         {
-            //SelectedColorRectangle.Fill = color;
-            //SelectedColorRectangleSlider.Fill = color;
-
             Color current_color = ((SolidColorBrush)color).Color;
             int reference_color = (current_color.R + current_color.G + current_color.B) / 3;
             if (reference_color <= 128 && current_color.A > 5)
             {
                 BtnSelectedColor.Foreground = new SolidColorBrush(Colors.White);
                 BtnSelectedColorSlider.Foreground = new SolidColorBrush(Colors.White);
-                BtnSelectedColor.BorderBrush = new SolidColorBrush(Colors.White);
-                BtnSelectedColorSlider.BorderBrush = new SolidColorBrush(Colors.White);
             }
             else
             {
                 BtnSelectedColor.Foreground = new SolidColorBrush(Colors.Black);
                 BtnSelectedColorSlider.Foreground = new SolidColorBrush(Colors.Black);
-                BtnSelectedColor.BorderBrush = new SolidColorBrush(Colors.White);
-                BtnSelectedColorSlider.BorderBrush = new SolidColorBrush(Colors.White);
             }
 
             if (color.Color == Colors.Transparent)
             {
-                //recTransparence.Visibility = Visibility.Visible;
-                //SelectedColorRectangle.Visibility = Visibility.Collapsed;
                 BtnSelectedColor.Background = new SolidColorBrush(Colors.Transparent);
-
-                //recTransparenceSlider.Visibility = Visibility.Visible;
-                //SelectedColorRectangleSlider.Visibility = Visibility.Collapsed;
                 BtnSelectedColorSlider.Background = new SolidColorBrush(Colors.Transparent);
+
                 BtnSelectedColor.BorderBrush = new SolidColorBrush(Colors.White);
                 BtnSelectedColorSlider.BorderBrush = new SolidColorBrush(Colors.White);
-
             }
             else
             {
                 BtnSelectedColor.Background = color;
-                //recTransparence.Visibility = Visibility.Collapsed;
-                //SelectedColorRectangle.Visibility = Visibility.Visible;
-
                 BtnSelectedColorSlider.Background = color;
-                //recTransparenceSlider.Visibility = Visibility.Collapsed;
-                //SelectedColorRectangleSlider.Visibility = Visibility.Visible;
             }
 
             changeColorOfCoding4FunColorPicker(color.Color.R, color.Color.G, color.Color.B, (byte)sldAlpha.Value);
             changeValuesOfColourTextboxes(color.Color.R, color.Color.G, color.Color.B, (byte)sldAlpha.Value);
             changeValuesOfColourSliders(color.Color.R, color.Color.G, color.Color.B, (byte)sldAlpha.Value);
-
         }
 
 
@@ -122,17 +97,15 @@ namespace Catrobat.Paint.Phone.View
             if ((((Rectangle) sender).Fill) is ImageBrush)
             {
                 colorBrush.Color = Colors.Transparent;
-
             }
             else
             {
                 colorBrush = (SolidColorBrush)((Rectangle)sender).Fill;
-
             }
-            MessageBox.Show("Alpha_in_color_change: " + colorBrush.Color.A);
-            MessageBox.Show("Alpha_in_color_change: " + colorBrush.Opacity.ToString());
+            var colorBrush_Opacity = (colorBrush.Color.A / 255.0);
+            
             PocketPaintApplication.GetInstance().PaintData.ColorSelected = colorBrush;
-
+            PocketPaintApplication.GetInstance().PaintData.ColorSelected.Opacity = colorBrush_Opacity;
         }
 
         private void ColorChanged(object sender, Color color)
@@ -151,13 +124,8 @@ namespace Catrobat.Paint.Phone.View
 
         private void changeOpacityOfColorButtons(byte alpha)
         {
-            //recTransparence.Opacity = ((Double)(alpha)) / 255.0;
-            //SelectedColorRectangle.Opacity = ((Double)(alpha)) / 255.0;
-           // BtnSelectedColor.Background.Opacity = ((Double)(alpha)) / 255.0;
-
-            //recTransparenceSlider.Opacity = ((Double)(alpha)) / 255.0;
-            //SelectedColorRectangleSlider.Opacity = ((Double)(alpha)) / 255.0;
-            //BtnSelectedColorSlider.Background.Opacity = ((Double)(alpha)) / 255.0;
+            BtnSelectedColor.Background.Opacity = ((Double)(alpha)) / 255.0;
+            BtnSelectedColorSlider.Background.Opacity = ((Double)(alpha)) / 255.0;
         }
 
         private void BtnSelectedColor_OnClick(object sender, RoutedEventArgs e)
@@ -176,16 +144,6 @@ namespace Catrobat.Paint.Phone.View
             }
             
             NavigationService.GoBack();
-        }
-
-        private void HeaderTemplate_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void HeaderTemplate_Loaded_1(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void sldRed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -227,7 +185,11 @@ namespace Catrobat.Paint.Phone.View
             Coding4FunColorPicker.Color = new_color;
 
             changeOpacityOfColorButtons(alpha);
+
+            //PocketPaintApplication.GetInstance().PaintData.ColorSelected = new SolidColorBrush(new_color);
+            //PocketPaintApplication.GetInstance().PaintData.ColorSelected.Opacity = ((Double)(alpha)) / 255.0;
         }
+
         private void changeValuesOfColourTextboxes(byte red, byte green, byte blue, byte alpha)
         {
             tbRed.Text = red.ToString();
@@ -235,6 +197,7 @@ namespace Catrobat.Paint.Phone.View
             tbGreen.Text = blue.ToString();
             tbAlpha.Text = ((Int32)((Double)(alpha) / 2.55)).ToString();
         }
+
         private void changeValuesOfColourSliders(byte red, byte green, byte blue, byte alpha)
         {
             sldRed.Value = ((double)red);

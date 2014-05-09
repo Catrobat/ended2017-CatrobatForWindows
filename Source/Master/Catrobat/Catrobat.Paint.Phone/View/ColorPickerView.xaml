@@ -63,7 +63,7 @@
 
 
         <!--Pivot Control-->
-        <phone:Pivot x:Name="HeaderTemplate" Title="{Binding Path=Resources.ColorPickerPageTitle}" Loaded="HeaderTemplate_Loaded_1" >
+        <phone:Pivot x:Name="HeaderTemplate" Title="{Binding Path=Resources.ColorPickerPageTitle}" >
             <!--Pivot item one-->
             <phone:Pivot.HeaderTemplate>
                 <DataTemplate>
@@ -166,14 +166,14 @@
                         </Rectangle>
                     </Button>
 
-                    <Rectangle x:Name="recTransparence" Opacity="1" Visibility="Visible" StrokeThickness="0" Margin="90,552,0,0" 
+                    <Rectangle x:Name="recTransparence" Opacity="1" StrokeThickness="0" Margin="90,552,0,0" 
                                Width="270" Height="66" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
                             </Rectangle.Fill>
                         </Rectangle>
 
-                    <Button x:Name="BtnSelectedColor" Visibility="Visible"  Click="BtnSelectedColor_OnClick" 
+                    <Button x:Name="BtnSelectedColor" Click="BtnSelectedColor_OnClick" 
                             Content="Fertig" Command="{Binding SelectColorDone}" HorizontalAlignment="Left" Margin="78,540,0,-11" 
                             VerticalAlignment="Top" RenderTransformOrigin="-0.208,0.153" Width="294" Height="89" BorderThickness="3"/>
 
@@ -234,14 +234,14 @@
                              Text="%" VerticalAlignment="Top" Width="56" SelectionBackground="{StaticResource TransparentBrush}" 
                              Foreground="White" IsHitTestVisible="True" Background="{x:Null}" BorderThickness="0"/>
 
-                    <Rectangle x:Name="recTransparenceSlider" Opacity="1" Visibility="Visible" StrokeThickness="0" Margin="90,550,0,0" 
+                    <Rectangle x:Name="recTransparenceSlider" Opacity="1" StrokeThickness="0" Margin="90,550,0,0" 
                                Width="270" Height="65" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
                         </Rectangle.Fill>
                     </Rectangle>
 
-                    <Button x:Name="BtnSelectedColorSlider" Background="Transparent" Visibility="Visible" Click="BtnSelectedColor_OnClick" 
+                    <Button x:Name="BtnSelectedColorSlider" Background="Transparent" Click="BtnSelectedColor_OnClick" 
                             Content="Fertig" Command="{Binding SelectColorDone}" HorizontalAlignment="Left" Margin="78,538,0,-13" 
                             VerticalAlignment="Top" RenderTransformOrigin="-0.208,0.153" Width="294" Height="89" BorderThickness="3" />
 
