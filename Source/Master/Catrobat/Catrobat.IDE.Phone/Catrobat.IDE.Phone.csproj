@@ -176,10 +176,21 @@
     <Compile Include="Content\Images\Misc\ImageGallery.xaml.cs">
       <DependentUpon>ImageGallery.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FormulaControls\Templates\FormulaTokenTemplate.cs" />
-    <Compile Include="Controls\FormulaControls\Templates\FormulaTokenTemplateCollection.cs" />
-    <Compile Include="Controls\FormulaControls\FormulaViewer.xaml.cs">
+    <Compile Include="Controls\Formulas\FormulaButton.xaml.cs">
+      <DependentUpon>FormulaButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Formulas\FormulaKeys.cs" />
+    <Compile Include="Controls\Formulas\FormulaKeyboard.xaml.cs">
+      <DependentUpon>FormulaKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Formulas\FormulaViewer.xaml.cs">
       <DependentUpon>FormulaViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Formulas\Templates\FormulaTokenStyleCollection.cs" />
+    <Compile Include="Controls\Formulas\Templates\FormulaTokenTemplate.cs" />
+    <Compile Include="Controls\Formulas\Templates\FormulaTokenTemplateCollection.cs" />
+    <Compile Include="Controls\Formulas\VariableButton.xaml.cs">
+      <DependentUpon>VariableButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\NamespaceTypeConverter.cs" />
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
@@ -206,16 +217,6 @@
     <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
     <Compile Include="Controls\Buttons\SettingsButton.cs" />
     <Compile Include="Controls\DynamicDataTemplates\DataTemplateSelector.cs" />
-    <Compile Include="Controls\FormulaControls\FormulaButton.xaml.cs">
-      <DependentUpon>FormulaButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\FormulaControls\FormulaKeyboard.xaml.cs">
-      <DependentUpon>FormulaKeyboard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\FormulaControls\Templates\FormulaPartStyleCollection.cs" />
-    <Compile Include="Controls\FormulaControls\VariableButton.xaml.cs">
-      <DependentUpon>VariableButton.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
       <DependentUpon>ListPicker.xaml</DependentUpon>
     </Compile>
@@ -428,23 +429,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\FormulaControls\FormulaButton.xaml">
+    <Page Include="Controls\Formulas\FormulaButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\FormulaControls\FormulaKeyboard.xaml">
+    <Page Include="Controls\Formulas\FormulaKeyboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\FormulaControls\FormulaViewer.xaml">
+    <Page Include="Controls\Formulas\FormulaViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\FormulaControls\Templates\FormulaTokenTemplates.xaml">
+    <Page Include="Controls\Formulas\Templates\FormulaTokenTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\FormulaControls\VariableButton.xaml">
+    <Page Include="Controls\Formulas\VariableButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

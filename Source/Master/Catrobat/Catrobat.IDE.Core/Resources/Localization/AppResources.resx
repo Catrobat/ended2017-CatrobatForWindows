@@ -802,25 +802,25 @@
     <value>NEW</value>
   </data>
   <data name="Editor_ButtonAddGlobalVariable" xml:space="preserve">
-    <value>add program variable</value>
+    <value>add global variable</value>
   </data>
   <data name="Editor_ButtonAddLocalVariable" xml:space="preserve">
-    <value>add object variable</value>
+    <value>add local variable</value>
   </data>
-  <data name="Editor_StandardGlobalVariableName" xml:space="preserve">
-    <value>ProgramVariable</value>
+  <data name="Editor_DefaultGlobalVariableName" xml:space="preserve">
+    <value>GlobalVariable</value>
   </data>
-  <data name="Editor_StandardLocalVariableName" xml:space="preserve">
-    <value>ObjectVariable</value>
+  <data name="Editor_DefaultLocalVariableName" xml:space="preserve">
+    <value>LocalVariable</value>
   </data>
   <data name="Editor_TitleChangeVariableName" xml:space="preserve">
     <value>CHANGE VARIABLE NAME</value>
   </data>
   <data name="Editor_TitleChooseGlobalVariableName" xml:space="preserve">
-    <value>CHOOSE PROGRAM VARIABLE NAME</value>
+    <value>CHOOSE GLOBAL VARIABLE NAME</value>
   </data>
   <data name="Editor_TitleChooseLocalVariableName" xml:space="preserve">
-    <value>CHOOSE OBJECT VARIABLE NAME</value>
+    <value>CHOOSE LOCAL VARIABLE NAME</value>
   </data>
   <data name="Editor_VariableName" xml:space="preserve">
     <value>Variable name</value>
@@ -887,13 +887,13 @@
     <value>Press "back" again to close the app?</value>
   </data>
   <data name="Editor_ClickPlusToAddAction" xml:space="preserve">
-    <value>Click '+' to add a new action.</value>
+    <value>Tap '+' to add a new action.</value>
   </data>
   <data name="Editor_ClickPlusToAddCostume" xml:space="preserve">
-    <value>Click '+' to add a new look.</value>
+    <value>Tap '+' to add a new look.</value>
   </data>
   <data name="Editor_ClickPlusToAddSound" xml:space="preserve">
-    <value>Click '+' to add a new sound.</value>
+    <value>Tap '+' to add a new sound.</value>
   </data>
   <data name="Editor_ImageEditingProgram" xml:space="preserve">
     <value>Draw</value>
@@ -938,7 +938,7 @@
     <value>Water</value>
   </data>
   <data name="Editor_ClickPlusToAddSprite" xml:space="preserve">
-    <value>Click '+' to add a new object.</value>
+    <value>Tap '+' to add a new object.</value>
   </data>
   <data name="Main_SetActive" xml:space="preserve">
     <value>Set active</value>
@@ -1020,5 +1020,56 @@
   </data>
   <data name="Editor_Undo" xml:space="preserve">
     <value>Undo</value>
+  </data>
+  <data name="Editor_AddGlobalVariable" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Editor_AddLocalVariable" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="FormulaKeyboard_AddFavorite" xml:space="preserve">
+    <value>Add to favorties</value>
+  </data>
+  <data name="FormulaKeyboard_Constants" xml:space="preserve">
+    <value>Constants</value>
+  </data>
+  <data name="FormulaKeyboard_DeleteVariable" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="FormulaKeyboard_Favorites" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="FormulaKeyboard_FavoritesEmpty" xml:space="preserve">
+    <value>Choose favorites from the other columns. </value>
+  </data>
+  <data name="FormulaKeyboard_Functions" xml:space="preserve">
+    <value>Functions</value>
+  </data>
+  <data name="FormulaKeyboard_GlobalVariables" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="FormulaKeyboard_LocalVariables" xml:space="preserve">
+    <value>Local</value>
+  </data>
+  <data name="FormulaKeyboard_Operators" xml:space="preserve">
+    <value>Operators</value>
+  </data>
+  <data name="FormulaKeyboard_Properties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="FormulaKeyboard_RecentlyUsed" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="FormulaKeyboard_RemoveFavorite" xml:space="preserve">
+    <value>Remove from favorites</value>
+  </data>
+  <data name="FormulaKeyboard_RenameVariable" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="FormulaKeyboard_Sensors" xml:space="preserve">
+    <value>Sensors</value>
+  </data>
+  <data name="FormulaKeyboard_Variables" xml:space="preserve">
+    <value>Variables</value>
   </data>
 </root>

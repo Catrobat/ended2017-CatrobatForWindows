@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Catrobat.IDE.Phone.Controls.FormulaControls.Templates
+namespace Catrobat.IDE.Phone.Controls.Formulas.Templates
 {
     public class FormulaTokenTemplateCollection : List<FormulaTokenTemplate>
     {

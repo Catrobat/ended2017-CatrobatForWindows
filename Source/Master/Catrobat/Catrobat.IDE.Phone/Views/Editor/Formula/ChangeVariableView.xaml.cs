@@ -27,12 +27,6 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             _viewModel.InitializeCommand.Execute(null);
         }
 
-        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            _viewModel.GoBackCommand.Execute(null);
-        }
-
-
         private void TextBoxVariableName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _viewModel.UserVariableName = TextBoxVariableName.Text;

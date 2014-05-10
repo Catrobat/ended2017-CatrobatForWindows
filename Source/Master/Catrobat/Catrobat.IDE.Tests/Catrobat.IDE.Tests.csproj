@@ -142,6 +142,7 @@
     <Compile Include="Services\NavigationServiceTest.cs" />
     <Compile Include="Services\PictureServiceTest.cs" />
     <Compile Include="Tests\IDE\Formulas\FormulaSerializerFormulaTests.cs" />
+    <Compile Include="Tests\IDE\ObservableCollectionTests.cs" />
     <Compile Include="Tests\Misc\LocalizationTests.cs" />
     <Compile Include="Tests\Data\CatrobatContextTests.cs" />
     <Compile Include="Tests\Data\CopyTests.cs" />

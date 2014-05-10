@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Phone.Controls.FormulaControls;
 
 namespace Catrobat.IDE.Phone.Services
 {

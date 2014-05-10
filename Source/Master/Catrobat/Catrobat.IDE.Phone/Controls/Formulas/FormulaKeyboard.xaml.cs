@@ -1,14 +1,12 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Formulas.Editor;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
 
-namespace Catrobat.IDE.Phone.Controls.FormulaControls
+namespace Catrobat.IDE.Phone.Controls.Formulas
 {
     public delegate void KeyPressed(FormulaKeyEventArgs e);
     public delegate void EvaluatePressed();
@@ -16,6 +14,12 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
     public partial class FormulaKeyboard
     {
+        private readonly FormulaKeyboardViewModel _viewModel = ServiceLocator.ViewModelLocator.FormulaKeyboardViewModel;
+        public FormulaKeyboardViewModel ViewModel
+        {
+            get { return _viewModel; }
+        }
+
         #region Dependency properties
 
         public static readonly DependencyProperty ProjectProperty = DependencyProperty.Register(
@@ -125,9 +129,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         {
             if(KeyPressed != null) KeyPressed.Invoke(e);
         }
-        public void RaiseKeyPressed(FormulaEditorKey key, UserVariable  variable = null)
+        public void RaiseKeyPressed(FormulaKey data)
         {
-            RaiseKeyPressed(new FormulaKeyEventArgs(key, variable));
+            RaiseKeyPressed(new FormulaKeyEventArgs(data));
         }
 
         public EvaluatePressed EvaluatePressed;
@@ -144,53 +148,37 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         #endregion
 
-        private readonly VariableConteiner _variableContainer = new VariableConteiner();
-
         public FormulaKeyboard()
         {
             InitializeComponent();
 
             DecimalSeparator = ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator;
-            _variableContainer.PropertyChanged += VariableContainer_OnPropertyChanged;
-            ServiceLocator.ViewModelLocator.VariableSelectionViewModel.SelectedVariableContainer = _variableContainer;
-        }
-        private void FormulaKeyboard_OnUnloaded(object sender, RoutedEventArgs e)
-        {
-            ServiceLocator.ViewModelLocator.VariableSelectionViewModel.SelectedVariableContainer = null;
-            _variableContainer.PropertyChanged -= VariableContainer_OnPropertyChanged;
         }
 
-        private void VariableContainer_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        #region VisualStateManager
+
+        private void ShowMain()
         {
-            var variable = _variableContainer.Variable;
-            if (variable == null) return;
-            ShowMain();
-            RaiseKeyPressed(
-                key: VariableHelper.IsVariableLocal(Project, variable) ? FormulaEditorKey.LocalVariable : FormulaEditorKey.GlobalVariable,
-                variable: variable);
+            GridMain.Visibility = Visibility.Visible;
+            GridMore.Visibility = Visibility.Collapsed;
+            Pivot_OnSelectionChanged(null, null);
         }
 
-        private void ButtonVariable_OnClick(object sender, RoutedEventArgs e)
+        private void ShowMore()
         {
-            ShowVariable();
+            GridMain.Visibility = Visibility.Collapsed;
+            GridMore.Visibility = Visibility.Visible;
+            Pivot_OnSelectionChanged(null, null);
         }
 
-        private void ButtonSensors_OnClick(object sender, RoutedEventArgs e)
-        {
-            ShowSensors();
-        }
+        #endregion
 
-        private void ButtonMath_OnClick(object sender, RoutedEventArgs e)
+        private void BtnMore_OnClick(object sender, RoutedEventArgs e)
         {
-            ShowMath();
+            ShowMore();
         }
-
-        private void ButtonMathBack_Click(object sender, RoutedEventArgs e)
-        {
-            ShowMain();
-        }
-
-        private void ButtonVariablesBack_Click(object sender, RoutedEventArgs e)
+ 
+        private void ButtonMoreBack_Click(object sender, RoutedEventArgs e)
         {
             ShowMain();
         }
@@ -199,21 +187,27 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         {
             var key = (FormulaEditorKey)(uint)((FrameworkElement)sender).DataContext;
             ShowMain();
-            RaiseKeyPressed(key);
+            RaiseKeyPressed(new FormulaKey(key, null));
         }
 
-        private void SensorButton_OnClick(object sender, RoutedEventArgs e)
+        private void ListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var key = (FormulaEditorKey)(uint)((FrameworkElement)sender).DataContext;
+            var source = (Selector) sender;
+            if (source.SelectedItem == null) return;
+            _viewModel.IsAddLocalVariableButtonVisible = false;
+            _viewModel.IsAddGlobalVariableButtonVisible = false;
             ShowMain();
-            RaiseKeyPressed(key);
+            var data = (FormulaKey) source.SelectedItem;
+            RaiseKeyPressed(data);
+            _viewModel.KeyPressedCommand.Execute(data);
+            source.SelectedItem = null;
         }
 
-        private void ObjectButton_OnClick(object sender, RoutedEventArgs e)
+        private void Pivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var key = (FormulaEditorKey)(uint)((FrameworkElement)sender).DataContext;
-            ShowMain();
-            RaiseKeyPressed(key);
+            var parentVisible = GridMore.Visibility == Visibility.Visible && PivotMore.SelectedItem == PivotItemVariables;
+            ViewModel.IsAddLocalVariableButtonVisible = parentVisible && PivotVariables.SelectedItem == PivotItemLocalVariables;
+            ViewModel.IsAddGlobalVariableButtonVisible = parentVisible && PivotVariables.SelectedItem == PivotItemGlobalVariables;
         }
 
         private void ButtonEvaluate_OnClick(object sender, RoutedEventArgs e)
@@ -224,40 +218,6 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         private void ButtonError_OnClick(object sender, RoutedEventArgs e)
         {
             RaiseShowErrorPressed();
-        }
-
-        private void ShowMain()
-        {
-            GridMain.Visibility = Visibility.Visible;
-            GridMath.Visibility = Visibility.Collapsed;
-            GridVariable.Visibility = Visibility.Collapsed;
-            GridSensors.Visibility = Visibility.Collapsed;
-        }
-        private void ShowMath()
-        {
-            GridMain.Visibility = Visibility.Collapsed;
-            GridMath.Visibility = Visibility.Visible;
-            GridVariable.Visibility = Visibility.Collapsed;
-            GridSensors.Visibility = Visibility.Collapsed;
-        }
-
-        private void ShowVariable()
-        {
-            var variableSelectionViewModel = ServiceLocator.ViewModelLocator.VariableSelectionViewModel;
-            variableSelectionViewModel.SelectedLocalVariable = null;
-            variableSelectionViewModel.SelectedGlobalVariable = null;
-            GridMain.Visibility = Visibility.Collapsed;
-            GridMath.Visibility = Visibility.Collapsed;
-            GridVariable.Visibility = Visibility.Visible;
-            GridSensors.Visibility = Visibility.Collapsed;
-        }
-
-        private void ShowSensors()
-        {
-            GridMain.Visibility = Visibility.Collapsed;
-            GridMath.Visibility = Visibility.Collapsed;
-            GridVariable.Visibility = Visibility.Collapsed;
-            GridSensors.Visibility = Visibility.Visible;
         }
     }
 }

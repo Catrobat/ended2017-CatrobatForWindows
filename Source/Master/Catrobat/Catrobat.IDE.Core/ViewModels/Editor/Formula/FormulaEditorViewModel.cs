@@ -37,10 +37,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region Members
 
-        private readonly FormulaEditor _editor = new FormulaEditor();
         private Sprite _selectedSprite;
         private Project _currentProject;
         private VariableConteiner _variableContainer;
+        private readonly FormulaEditor _editor = new FormulaEditor();
+        private FormulaKeyboardViewModel _keyboardViewModel;
         
         #endregion
 
@@ -130,6 +131,16 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             get { return !HasError; }
         }
 
+        public bool IsAddLocalVariableButtonVisible
+        {
+            get { return ServiceLocator.ViewModelLocator.FormulaKeyboardViewModel.IsAddLocalVariableButtonVisible; }
+        }
+
+        public bool IsAddGlobalVariableButtonVisible
+        {
+            get { return ServiceLocator.ViewModelLocator.FormulaKeyboardViewModel.IsAddGlobalVariableButtonVisible; }
+        }
+
         #endregion
 
         #region Commands
@@ -137,7 +148,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         public RelayCommand<FormulaKeyEventArgs> KeyPressedCommand { get; private set; }
         private void KeyPressedAction(FormulaKeyEventArgs e)
         {
-            if (!_editor.HandleKey(e.Key, e.UserVariable)) RaiseKeyError();
+            if (!_editor.HandleKey(e.Data.Key, e.Data.Variable)) RaiseKeyError();
         }
 
         public RelayCommand EvaluatePressedCommand { get; private set; }
@@ -193,6 +204,16 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             SelectionLength = selection.Length;
         }
 
+        public RelayCommand<FormulaKey> AddLocalVariableCommand
+        {
+            get { return _keyboardViewModel.AddLocalVariableCommand; }
+        }
+
+        public RelayCommand<FormulaKey> AddGlobalVariableCommand
+        {
+            get { return _keyboardViewModel.AddGlobalVariableCommand; }
+        }
+
         #endregion
 
         #region MessageActions
@@ -223,11 +244,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Project>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
 
-            InitEditorBindings();
-        }
-
-        private void InitEditorBindings()
-        {
             _editor.PropertyChanged += (sender, e) =>
             {
                 if (e.PropertyName == GetPropertyName(() => _editor.Formula)) RaisePropertyChanged(() => Formula);
@@ -243,6 +259,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 if (e.PropertyName == GetPropertyName(() => _editor.HasError)) RaisePropertyChanged(() => CanEvaluate);
                 if (e.PropertyName == GetPropertyName(() => _editor.ParsingError)) RaisePropertyChanged(() => ParsingError);
             };
+
+            _keyboardViewModel = ServiceLocator.ViewModelLocator.FormulaKeyboardViewModel;
+            _keyboardViewModel.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == GetPropertyName(() => _keyboardViewModel.IsAddLocalVariableButtonVisible)) RaisePropertyChanged(() => IsAddLocalVariableButtonVisible);
+                if (e.PropertyName == GetPropertyName(() => _keyboardViewModel.IsAddGlobalVariableButtonVisible)) RaisePropertyChanged(() => IsAddGlobalVariableButtonVisible);
+            };
         }
 
         public override void Cleanup()
@@ -250,6 +273,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             StopSensorsCommand.Execute(null);
             RaiseReset();
             _editor.ResetViewModel();
+            _keyboardViewModel.ResetViewModel();
             base.Cleanup();
         }
     }

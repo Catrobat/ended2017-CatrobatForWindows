@@ -48,6 +48,7 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<NewBroadcastMessageViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<ScriptBrickCategoryViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<AddNewScriptBrickViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<FormulaKeyboardViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<FormulaEditorViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<PlayerLauncherViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<TileGeneratorViewModel>(TypeCreationMode.Normal);
@@ -332,6 +333,17 @@ namespace Catrobat.IDE.Core.ViewModels
             get
             {
                 return ServiceLocator.GetInstance<FormulaEditorViewModel>();
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public FormulaKeyboardViewModel FormulaKeyboardViewModel
+        {
+            get
+            {
+                return ServiceLocator.GetInstance<FormulaKeyboardViewModel>();
             }
         }
 

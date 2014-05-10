@@ -6,12 +6,13 @@
   xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:formulaControls="clr-namespace:Catrobat.IDE.Phone.Controls.FormulaControls"
   xmlns:abu="clr-namespace:AppBarUtils;assembly=AppBarUtils"
   xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+  xmlns:formulas="clr-namespace:Catrobat.IDE.Phone.Controls.Formulas"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
+  Loaded="FormulaEditorView_OnLoaded"
   Unloaded="FormulaEditorView_OnUnloaded"
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
@@ -25,21 +26,18 @@
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <Grid.RowDefinitions>
       <RowDefinition Height="*" />
-      <RowDefinition Height="400" />
+      <RowDefinition Height="360" />
     </Grid.RowDefinitions>
     <ScrollViewer Grid.Row="0">
-      <formulaControls:FormulaViewer
+      <!-- UserControl Bindings are set in code-behind -->
+      <formulas:FormulaViewer
         Name="FormulaViewer"
         CharactersInOneLineNormalFontSize="15"
-        LinesNormalFontSize="4"
+        LinesNormalFontSize="5"
         NormalFontSize="50"
         MinFontSize="26"
         MaxFontSize="70"
         IsAutoFontSize="True"
-        Tokens="{Binding Tokens, Mode=OneWay}" 
-        CaretIndex="{Binding CaretIndex, Mode=TwoWay}" 
-        SelectionStart="{Binding SelectionStart, Mode=TwoWay}"
-        SelectionLength="{Binding SelectionLength, Mode=TwoWay}"
         VerticalAlignment="Stretch"
         HorizontalAlignment="Stretch" />
     </ScrollViewer>
@@ -52,16 +50,12 @@
         VerticalAlignment="Center"
         HorizontalAlignment="Center" />
     <Grid Grid.Row="1">
-      <formulaControls:FormulaKeyboard
-        Name="FormulaKeyboard" 
-        Project="{Binding CurrentProject}"
-        CanDelete="{Binding CanDelete}"
-        CanEvaluate="{Binding CanEvaluate}"
-        HasError="{Binding HasError}">
-        <formulaControls:FormulaKeyboard.RenderTransform>
+      <!-- UserControl Bindings are set in code-behind -->
+      <formulas:FormulaKeyboard Name="FormulaKeyboard">
+        <formulas:FormulaKeyboard.RenderTransform>
           <TranslateTransform X="0" Y="500" x:Name="Translation" />
-        </formulaControls:FormulaKeyboard.RenderTransform>
-        <formulaControls:FormulaKeyboard.Resources>
+        </formulas:FormulaKeyboard.RenderTransform>
+        <formulas:FormulaKeyboard.Resources>
           <Storyboard x:Name="EnterTransition">
             <DoubleAnimation
               Storyboard.TargetName="Translation"
@@ -84,8 +78,8 @@
               </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
           </Storyboard>
-        </formulaControls:FormulaKeyboard.Resources>
-      </formulaControls:FormulaKeyboard>
+        </formulas:FormulaKeyboard.Resources>
+      </formulas:FormulaKeyboard>
 
       <Grid Name="GridError" Background="Tomato" Opacity="0.0" Height="10" VerticalAlignment="Top">
         <Grid.Resources>
@@ -107,6 +101,8 @@
     <shell:ApplicationBar>
       <shell:ApplicationBarIconButton Text="Undo" IconUri="/Content/Images/ApplicationBar/dark/appbar.basecircle.rest.png" />
       <shell:ApplicationBarIconButton Text="Redo" IconUri="/Content/Images/ApplicationBar/dark/appbar.basecircle.rest.png" />
+      <shell:ApplicationBarIconButton x:Name="ButtonAddLocalVariable" Text="Add local variable" IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png" />
+      <shell:ApplicationBarIconButton x:Name="ButtonAddGlobalVariable" Text="Add global variable" IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png" />
       <shell:ApplicationBar.MenuItems>
         <shell:ApplicationBarMenuItem Text="Start sensors" />
         <shell:ApplicationBarMenuItem Text="Stop sensors" />
@@ -125,6 +121,16 @@
       IsEnabled="{Binding CanRedo}"
       Text="{Binding Resources.Editor_Redo, Source={StaticResource LocalizedStrings}}">
       <i:InvokeCommandAction Command="{Binding RedoCommand}" />
+    </abu:AppBarItemTrigger>
+    <abu:AppBarItemTrigger 
+      Type="Button" Id="Add local variable" 
+      Text="{Binding Resources.Editor_AddLocalVariable, Source={StaticResource LocalizedStrings}}">
+      <i:InvokeCommandAction Command="{Binding AddLocalVariableCommand}" />
+    </abu:AppBarItemTrigger>
+    <abu:AppBarItemTrigger 
+      Type="Button" Id="Add global variable" 
+      Text="{Binding Resources.Editor_AddGlobalVariable, Source={StaticResource LocalizedStrings}}">
+      <i:InvokeCommandAction Command="{Binding AddGlobalVariableCommand}" />
     </abu:AppBarItemTrigger>
     <abu:AppBarItemTrigger 
       Type="MenuItem" Id="Start sensors" 

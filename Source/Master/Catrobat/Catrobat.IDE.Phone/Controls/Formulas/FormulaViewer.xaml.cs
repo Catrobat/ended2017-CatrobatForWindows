@@ -1,7 +1,4 @@
-﻿using Catrobat.IDE.Core.ExtensionMethods;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Phone.Controls.FormulaControls.Templates;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -12,8 +9,11 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+using Catrobat.IDE.Phone.Controls.Formulas.Templates;
 
-namespace Catrobat.IDE.Phone.Controls.FormulaControls
+namespace Catrobat.IDE.Phone.Controls.Formulas
 {
     public delegate void DoubleTap(int index);
 
@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             if (DoubleTap != null) DoubleTap.Invoke(index);
         }
 
-        #region DependencyProperties
+        #region Dependency properties
 
         public static readonly DependencyProperty TokensProperty = DependencyProperty.Register(
             name: "Tokens",
