@@ -14,6 +14,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Storage;
 
 using System.Text;
 using System.Diagnostics;
@@ -48,6 +50,7 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 // TODO move links to ApplicationResources base URL
                 http_client.BaseAddress = new Uri("https://pocketcode.org/api/");
+                //http_client.BaseAddress = new Uri("http://catroid-test.catrob.at/api/");
                 http_client.DefaultRequestHeaders.Accept.Clear();
                 http_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -64,7 +67,8 @@ namespace Catrobat.IDE.Core.Services.Common
                 {
                     // TODO move links to ApplicationResources.OnlineFilterUrl
                     string encoded_filter_text = WebUtility.UrlEncode(filterText);
-                    http_response = await http_client.GetAsync("projects/search.json?query=" + encoded_filter_text + "&limit=3");
+                    //http_response = await http_client.GetAsync("projects/search.json?query=" + encoded_filter_text + "&limit=4");
+                    http_response = await http_client.GetAsync("projects/search.json?query=" + encoded_filter_text + "&limit=4&offset=" + offset.ToString());
                 }
 
                 if (http_response.IsSuccessStatusCode)
@@ -118,12 +122,23 @@ namespace Catrobat.IDE.Core.Services.Common
                 
                 if (http_response.IsSuccessStatusCode)
                 {
-                    // TODO this fails sometimes
-                    //var http_stream = http_response.Content.ReadAsStreamAsync().Result;
-                    //Stream http_stream = await http_response.Content.ReadAsStreamAsync();
-
                     using (Stream http_stream = await http_response.Content.ReadAsStreamAsync())
                     {
+                        List<string> folders;
+                        using (var storage = StorageSystem.GetStorage())
+                        {
+                            var folder_array = await storage.GetDirectoryNamesAsync(CatrobatContextBase.ProjectsPath);
+                            folders = new List<string>(folder_array);
+
+                        }
+                        var countString = "";
+                        var counter = 1;
+                        while (folders.IndexOf(projectName + countString) >= 0)
+                        {
+                            countString = " " + counter.ToString(ServiceLocator.CulureService.GetCulture());
+                            counter++;
+                        }
+                        projectName = projectName + countString;
                         await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(http_stream,
                                                                             CatrobatContextBase.ProjectsPath + "/" +
                                                                             projectName);

@@ -23,13 +23,12 @@ namespace Catrobat.IDE.Phone.Views.Main
         private readonly MainViewModel _viewModel =
             ((ViewModelLocator)ServiceLocator.ViewModelLocator).MainViewModel;
 
-        private const int _offsetKnob = 4;
+        private const int offsetKnob = 4;
+        private bool firstAttempt = true;
 
         public MainView()
         {
             InitializeComponent();
-
-            //LongListSelectorOnlineProjects.ItemRealized += LongListSelectorOnlineProjects_ItemRealized;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -81,9 +80,10 @@ namespace Catrobat.IDE.Phone.Views.Main
 
         private void panoramaMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if ((PanoramaMain.SelectedItem == PanoramaItemOnlineProjects))
+            if ((PanoramaMain.SelectedItem == PanoramaItemOnlineProjects) && firstAttempt)
             {
                 _viewModel.LoadOnlineProjects(false, true);
+                firstAttempt = false;
             }
         }
 
@@ -181,13 +181,13 @@ namespace Catrobat.IDE.Phone.Views.Main
         private void LongListSelectorOnlineProjects_ItemRealized(object sender, ItemRealizationEventArgs e)
         {
             // implements infinite scrolling
-            if (!_viewModel.IsLoadingOnlineProjects && LongListSelectorOnlineProjects.ItemsSource != null && LongListSelectorOnlineProjects.ItemsSource.Count >= _offsetKnob)
+            if (!_viewModel.IsLoadingOnlineProjects && LongListSelectorOnlineProjects.ItemsSource != null && LongListSelectorOnlineProjects.ItemsSource.Count >= offsetKnob)
             {
                 if (e.ItemKind == LongListSelectorItemKind.Item)
                 {
                     OnlineProjectHeader currentHeader = e.Container.Content as OnlineProjectHeader;
-                    //if ((e.Container.Content as OnlineProjectHeader).Equals(LongListSelectorOnlineProjects.ItemsSource[LongListSelectorOnlineProjects.ItemsSource.Count - _offsetKnob]))
-                    if (LongListSelectorOnlineProjects.ItemsSource.Count - LongListSelectorOnlineProjects.ItemsSource.IndexOf(currentHeader) <= _offsetKnob)
+                    //if ((e.Container.Content as OnlineProjectHeader).Equals(LongListSelectorOnlineProjects.ItemsSource[LongListSelectorOnlineProjects.ItemsSource.Count - offsetKnob]))
+                    if (LongListSelectorOnlineProjects.ItemsSource.Count - LongListSelectorOnlineProjects.ItemsSource.IndexOf(currentHeader) <= offsetKnob)
                     {
                         Debug.WriteLine("Adding 4 new Projects to " + LongListSelectorOnlineProjects.ItemsSource.Count.ToString() + " existing projects");
                         _viewModel.LoadOnlineProjects(true);
