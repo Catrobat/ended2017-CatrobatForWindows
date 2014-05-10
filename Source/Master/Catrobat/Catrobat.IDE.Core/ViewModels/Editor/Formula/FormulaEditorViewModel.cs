@@ -1,30 +1,21 @@
-﻿using System.Collections.ObjectModel;
-using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Formulas.Editor;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.UI;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Collections.ObjectModel;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 {
-    public delegate void ErrorOccurred();
     public delegate void Reset();
     public delegate void Evaluated(object value);
 
     public class FormulaEditorViewModel : ViewModelBase
     {
         #region Events
-
-        public event ErrorOccurred ErrorOccurred;
-        private void RaiseKeyError()
-        {
-            if (ErrorOccurred != null)
-                ErrorOccurred.Invoke();
-        }
 
         public event Reset Reset;
         private void RaiseReset()
@@ -39,9 +30,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private Sprite _selectedSprite;
         private Project _currentProject;
-        private VariableConteiner _variableContainer;
         private readonly FormulaEditor _editor = new FormulaEditor();
-        private FormulaKeyboardViewModel _keyboardViewModel;
+        private readonly FormulaKeyboardViewModel _keyboardViewModel;
         
         #endregion
 
@@ -148,7 +138,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         public RelayCommand<FormulaKeyEventArgs> KeyPressedCommand { get; private set; }
         private void KeyPressedAction(FormulaKeyEventArgs e)
         {
-            if (!_editor.HandleKey(e.Data.Key, e.Data.Variable)) RaiseKeyError();
+            _editor.HandleKey(e.Data.Key, e.Data.Variable);
         }
 
         public RelayCommand EvaluatePressedCommand { get; private set; }
@@ -175,13 +165,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         public RelayCommand UndoCommand { get; private set; }
         private void UndoAction()
         {
-            if (!_editor.Undo()) RaiseKeyError();
+            _editor.Undo();
         }
 
         public RelayCommand RedoCommand { get; private set; }
         private void RedoAction()
         {
-            if (!_editor.Redo()) RaiseKeyError();
+            _editor.Redo();
         }
 
         public RelayCommand StartSensorsCommand { get; private set; }

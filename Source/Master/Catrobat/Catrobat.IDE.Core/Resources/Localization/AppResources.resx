@@ -1072,4 +1072,7 @@
   <data name="FormulaKeyboard_Variables" xml:space="preserve">
     <value>Variables</value>
   </data>
+  <data name="Editor_Evaluate" xml:space="preserve">
+    <value>Evaluate</value>
+  </data>
 </root>

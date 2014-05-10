@@ -173,7 +173,7 @@
       <Button Grid.Row="3" Grid.Column="3" Content="(" DataContext="{StaticResource FormulaEditorKeyOpeningParenthesis}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" />
       <Button Grid.Row="3" Grid.Column="4" Content=")" DataContext="{StaticResource FormulaEditorKeyClosingParenthesis}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" />
       <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Content="!" Style="{StaticResource StyleButtonEvaluate}" Click ="ButtonError_OnClick" Background="DarkRed" Visibility="{Binding HasError, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />
-      <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Content="Evaluate" Style="{StaticResource StyleButtonEvaluate}" Background="{Binding SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" Click ="ButtonEvaluate_OnClick" Visibility="{Binding CanEvaluate, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />
+      <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Content="{Binding Resources.Editor_Evaluate, Source={StaticResource LocalizedStrings}}" Style="{StaticResource StyleButtonEvaluate}" Background="{Binding SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" Click ="ButtonEvaluate_OnClick" Visibility="{Binding CanEvaluate, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />
     </Grid>
     <Grid Name="GridMore" Visibility="Collapsed">
       <Grid.ColumnDefinitions>

@@ -980,6 +980,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Evaluate.
+        /// </summary>
+        public static string Editor_Evaluate {
+            get {
+                return ResourceManager.GetString("Editor_Evaluate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Program.
         /// </summary>
         public static string Editor_GlobalVariables {

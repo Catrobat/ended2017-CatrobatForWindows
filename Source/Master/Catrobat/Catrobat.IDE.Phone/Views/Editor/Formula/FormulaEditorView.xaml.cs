@@ -46,7 +46,6 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             FormulaKeyboard.SetBinding(FormulaKeyboard.HasErrorProperty, new Binding("HasError"));
             FormulaKeyboard.SetBinding(FormulaKeyboard.ProjectProperty, new Binding("CurrentProject"));
             
-            _viewModel.ErrorOccurred += ErrorOccurred;
             _viewModel.PropertyChanged += ViewModel_OnPropertyChanged;
         }
 
@@ -62,7 +61,6 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             FormulaKeyboard.ClearValue(FormulaKeyboard.HasErrorProperty);
             FormulaKeyboard.ClearValue(FormulaKeyboard.ProjectProperty);
 
-            _viewModel.ErrorOccurred -= ErrorOccurred;
             _viewModel.PropertyChanged -= ViewModel_OnPropertyChanged;
         }
 
@@ -146,17 +144,6 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
         }
 
         #endregion
-
-        private void ShowKeyErrorAnimation()
-        {
-            KeyErrorAnimation.Stop();
-            KeyErrorAnimation.Begin();
-        }
-
-        private void ErrorOccurred()
-        {
-            ShowKeyErrorAnimation();
-        }
 
         private void FormulaViewer_DoubleTap(int index)
         {
