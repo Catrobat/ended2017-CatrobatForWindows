@@ -19,8 +19,6 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.Windows.Input;
 
-// TODO
-using System.Diagnostics;
 
 namespace Catrobat.IDE.Core.ViewModel.Main
 {
@@ -406,12 +404,30 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject);
         }
 
-        private void UploadCurrentProjectAction()
+        private async void UploadCurrentProjectAction()
         {
             ServiceLocator.NavigationService.NavigateTo<UploadProjectLoadingViewModel>();
 
             // Determine which page to open
-            Task.Run(() => CatrobatWebCommunicationService.CheckToken(Context.CurrentUserName, Context.CurrentToken, CheckTokenEvent));
+            //Task.Run(() => CatrobatWebCommunicationService.CheckToken(Context.CurrentUserName, Context.CurrentToken, CheckTokenEvent));
+            bool registered = await CatrobatWebCommunicationService.AsyncCheckToken(Context.CurrentUserName, Context.CurrentToken);
+
+            if (registered)
+            {
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    ServiceLocator.NavigationService.NavigateTo<UploadProjectViewModel>();
+                    ServiceLocator.NavigationService.RemoveBackEntry();
+                });
+            }
+            else
+            {
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    ServiceLocator.NavigationService.NavigateTo<UploadProjectLoginViewModel>();
+                    ServiceLocator.NavigationService.RemoveBackEntry();
+                });
+            }
         }
 
         protected override void GoBackAction()
@@ -520,26 +536,26 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         #region MessageBoxCallback
 
-        private void LoadOnlineProjectsCallback(string filterText, List<OnlineProjectHeader> projects, bool append)
-        {
-            lock (OnlineProjects)
-            {
-                if (FilterText != filterText && !append)
-                    return;
+        //private void LoadOnlineProjectsCallback(string filterText, List<OnlineProjectHeader> projects, bool append)
+        //{
+        //    lock (OnlineProjects)
+        //    {
+        //        if (FilterText != filterText && !append)
+        //            return;
 
-                if (!append)
-                {
-                    _onlineProjects.Clear();
-                }
+        //        if (!append)
+        //        {
+        //            _onlineProjects.Clear();
+        //        }
 
-                IsLoadingOnlineProjects = false;
+        //        IsLoadingOnlineProjects = false;
 
-                foreach (OnlineProjectHeader header in projects)
-                {
-                    _onlineProjects.Add(header);
-                }
-            }
-        }
+        //        foreach (OnlineProjectHeader header in projects)
+        //        {
+        //            _onlineProjects.Add(header);
+        //        }
+        //    }
+        //}
 
         private async void DeleteProjectMessageCallback(MessageboxResult result)
         {
@@ -592,7 +608,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
         #endregion
 
 
-        public void LoadOnlineProjects(bool isAppend, bool isAuto = false)
+        public async void LoadOnlineProjects(bool isAppend, bool isAuto = false)
         {
             if (isAuto && isAppend)
                 return;
@@ -604,29 +620,47 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
             _previousFilterText = _filterText;
 
-            CatrobatWebCommunicationService.LoadOnlineProjects(isAppend, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
-            
+            //CatrobatWebCommunicationService.LoadOnlineProjects(isAppend, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
+            List<OnlineProjectHeader> projects = await CatrobatWebCommunicationService.AsyncLoadOnlineProjects(isAppend, _filterText, _onlineProjects.Count);
+
+            lock (OnlineProjects)
+            {
+                if (FilterText != _filterText && !isAppend)
+                    return;
+
+                if (!isAppend)
+                {
+                    _onlineProjects.Clear();
+                }
+
+                IsLoadingOnlineProjects = false;
+
+                foreach (OnlineProjectHeader header in projects)
+                {
+                    _onlineProjects.Add(header);
+                }
+            }  
         }
 
-        private void CheckTokenEvent(bool registered)
-        {
-            if (registered)
-            {
-                ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                {
-                    ServiceLocator.NavigationService.NavigateTo<UploadProjectViewModel>();
-                    ServiceLocator.NavigationService.RemoveBackEntry();
-                });
-            }
-            else
-            {
-                ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                {
-                    ServiceLocator.NavigationService.NavigateTo<UploadProjectLoginViewModel>();
-                    ServiceLocator.NavigationService.RemoveBackEntry();
-                });
-            }
-        }
+        //private void CheckTokenEvent(bool registered)
+        //{
+        //    if (registered)
+        //    {
+        //        ServiceLocator.DispatcherService.RunOnMainThread(() =>
+        //        {
+        //            ServiceLocator.NavigationService.NavigateTo<UploadProjectViewModel>();
+        //            ServiceLocator.NavigationService.RemoveBackEntry();
+        //        });
+        //    }
+        //    else
+        //    {
+        //        ServiceLocator.DispatcherService.RunOnMainThread(() =>
+        //        {
+        //            ServiceLocator.NavigationService.NavigateTo<UploadProjectLoginViewModel>();
+        //            ServiceLocator.NavigationService.RemoveBackEntry();
+        //        });
+        //    }
+        //}
 
         #region PropertyChanges
 

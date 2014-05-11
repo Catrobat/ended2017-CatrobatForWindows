@@ -15,11 +15,11 @@ using Catrobat.IDE.Core.VersionConverter;
 
 namespace Catrobat.IDE.Phone.Services
 {
-    public class ServerCommunicationServicePhone : IServerCommunicationService
-    {
-        public void LoadOnlineProjects(bool append, string filterText, int offset,
-                                       CatrobatWebCommunicationService.LoadOnlineProjectsEvent callback)
-        {
+    //public class ServerCommunicationServicePhone : IServerCommunicationService
+    //{
+    //    public void LoadOnlineProjects(bool append, string filterText, int offset,
+    //                                   CatrobatWebCommunicationService.LoadOnlineProjectsEvent callback)
+    //    {
             //var tempUrl = "";
 
             //if (filterText == "")
@@ -68,11 +68,11 @@ namespace Catrobat.IDE.Phone.Services
             //                callback(filterText, list, append);
             //            }
             //        });
-        }
+        //}
 
-        public void DownloadAndSaveProject(string downloadUrl, string projectName,
-                                          CatrobatWebCommunicationService.DownloadAndSaveProjectEvent callback)
-        {
+        //public void DownloadAndSaveProject(string downloadUrl, string projectName,
+        //                                  CatrobatWebCommunicationService.DownloadAndSaveProjectEvent callback)
+        //{
             //var wc = new WebClient();
             //wc.OpenReadCompleted += (async (s, args) =>
             //    {
@@ -116,6 +116,6 @@ namespace Catrobat.IDE.Phone.Services
             //    });
 
             //wc.OpenReadAsync(new Uri(downloadUrl, UriKind.RelativeOrAbsolute));
-        }
-    }
+        //}
+    //}
 }

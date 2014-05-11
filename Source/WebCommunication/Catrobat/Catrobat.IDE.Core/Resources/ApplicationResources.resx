@@ -120,14 +120,8 @@
   <data name="EXTENSION" xml:space="preserve">
     <value>.catrobat</value>
   </data>
-  <data name="FILE_UPLOAD_TAG" xml:space="preserve">
-    <value>upload</value>
-  </data>
   <data name="MIMETYPE" xml:space="preserve">
     <value>application/octet-stream</value>
-  </data>
-  <data name="OnlineImagesBaseUrl" xml:space="preserve">
-    <value>http://catroidtest.ist.tugraz.at/</value>
   </data>
   <data name="ProjectLicenseUrl" xml:space="preserve">
     <value>http://catroid.org/catroid/projectlicense</value>

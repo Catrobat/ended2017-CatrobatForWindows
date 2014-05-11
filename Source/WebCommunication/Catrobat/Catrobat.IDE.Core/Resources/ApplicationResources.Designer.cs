@@ -215,29 +215,11 @@ namespace Catrobat.IDE.Core.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die upload ähnelt.
-        /// </summary>
-        public static string FILE_UPLOAD_TAG {
-            get {
-                return ResourceManager.GetString("FILE_UPLOAD_TAG", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die application/octet-stream ähnelt.
         /// </summary>
         public static string MIMETYPE {
             get {
                 return ResourceManager.GetString("MIMETYPE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die http://catroidtest.ist.tugraz.at/ ähnelt.
-        /// </summary>
-        public static string OnlineImagesBaseUrl {
-            get {
-                return ResourceManager.GetString("OnlineImagesBaseUrl", resourceCulture);
             }
         }
         

@@ -26,19 +26,7 @@ namespace Catrobat.IDE.Core.Utilities.JSON
 
     public class JSONStatusResponse
     {
-        private string _token;
-        public string token
-        {
-            get
-            {
-                return _token;
-            }
-            set
-            {
-                //_token = value.Replace("/", "\\/");
-                _token = value;
-            }
-        }
+        public string token { get; set; }
         public StatusCodes statusCode { get; set; }
         public string answer { get; set; }
         public string preHeaderMessages { get; set; }

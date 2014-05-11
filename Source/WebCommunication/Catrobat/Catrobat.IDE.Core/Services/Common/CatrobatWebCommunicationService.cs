@@ -25,25 +25,25 @@ namespace Catrobat.IDE.Core.Services.Common
 {
     public static class CatrobatWebCommunicationService
     {
-        public delegate void RegisterOrCheckTokenEvent(bool registered, string errorCode, string statusMessage, string token);
+        //public delegate void RegisterOrCheckTokenEvent(bool registered, string errorCode, string statusMessage, string token);
 
-        public delegate void CheckTokenEvent(bool registered);
+        //public delegate void CheckTokenEvent(bool registered);
 
-        public delegate void LoadOnlineProjectsEvent(string filterText, List<OnlineProjectHeader> projects, bool append);
+        //public delegate void LoadOnlineProjectsEvent(string filterText, List<OnlineProjectHeader> projects, bool append);
 
-        public delegate void DownloadAndSaveProjectEvent(string filename, CatrobatVersionConverter.VersionConverterError error);
+        //public delegate void DownloadAndSaveProjectEvent(string filename, CatrobatVersionConverter.VersionConverterError error);
 
-        public delegate void UploadProjectEvent(bool successful);
+        //public delegate void UploadProjectEvent(bool successful);
 
         private static int _uploadCounter = 0;
 
-        public static async void LoadOnlineProjects(bool append, string filterText, int offset, LoadOnlineProjectsEvent callback)
-        {
-            //ServiceLocator.ServerCommunicationService.LoadOnlineProjects(append, filterText, offset, callback);
-            await AsyncLoadOnlineProjects(append, filterText, offset, callback);
-        }
+        //public static async void LoadOnlineProjects(bool append, string filterText, int offset, LoadOnlineProjectsEvent callback)
+        //{
+        //    //ServiceLocator.ServerCommunicationService.LoadOnlineProjects(append, filterText, offset, callback);
+        //    await AsyncLoadOnlineProjects(append, filterText, offset, callback);
+        //}
 
-        public static async Task AsyncLoadOnlineProjects(bool append, string filterText, int offset, LoadOnlineProjectsEvent callback)
+        public static async Task<List<OnlineProjectHeader>> AsyncLoadOnlineProjects(bool append, string filterText, int offset/*, LoadOnlineProjectsEvent callback*/)
         {
             // TODO exception handling
             using (var http_client = new HttpClient())
@@ -82,21 +82,24 @@ namespace Catrobat.IDE.Core.Services.Common
                         Debug.WriteLine(e.Message);
                     }
 
-                    if (callback != null)
-                    {
-                        callback(filterText, recent_projects.CatrobatProjects, append);
-                    }
+                    //if (callback != null)
+                    //{
+                    //    callback(filterText, recent_projects.CatrobatProjects, append);
+                    //}
+                    return recent_projects.CatrobatProjects;
                 }
+                // TODO HTTP Request failed-error
+                return null;
             }
         }
 
-        public static async void DownloadAndSaveProject(string downloadUrl, string projectName, DownloadAndSaveProjectEvent callback)
-        {
-            // ServiceLocator.ServerCommunicationService.DownloadAndSaveProject(downloadUrl, projectName, callback);
-            await AsyncDownloadAndSaveProject(downloadUrl, projectName, callback);
-        }
+        //public static async void DownloadAndSaveProject(string downloadUrl, string projectName, DownloadAndSaveProjectEvent callback)
+        //{
+        //    // ServiceLocator.ServerCommunicationService.DownloadAndSaveProject(downloadUrl, projectName, callback);
+        //    await AsyncDownloadAndSaveProject(downloadUrl, projectName, callback);
+        //}
 
-        public static async Task AsyncDownloadAndSaveProject(string downloadUrl, string projectName, DownloadAndSaveProjectEvent callback)
+        public static async Task<CatrobatVersionConverter.VersionConverterError> AsyncDownloadAndSaveProject(string downloadUrl, string projectName/*, DownloadAndSaveProjectEvent callback*/)
         {
             // TODO exception handling
 
@@ -130,33 +133,34 @@ namespace Catrobat.IDE.Core.Services.Common
                                                                             CatrobatContextBase.ProjectsPath + "/" +
                                                                             projectName);
                     }
-
                     try
                     {
                         var result = await CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, true);
                         var error = result.Error;
 
-                        if (callback != null)
-                        {
-                            callback(projectName, error);
-                        }
+                        //if (callback != null)
+                        //{
+                        //    callback(projectName, error);
+                        //}
+                        return error;
                     }
                     catch (Exception)
                     {
-                        if (callback != null)
-                        {
-                            callback("", CatrobatVersionConverter.VersionConverterError.ProjectCodeNotValid);
-                        }
+                        //if (callback != null)
+                        //{
+                        //    callback("", CatrobatVersionConverter.VersionConverterError.ProjectCodeNotValid);
+                        //}
+                        return CatrobatVersionConverter.VersionConverterError.ProjectCodeNotValid;
                     }
                 }
+                // TODO HTTP Request failed-error
+                return CatrobatVersionConverter.VersionConverterError.ProjectCodePathNotValid;
             }
-
-
         }
 
 
-        public static async void CheckToken(string username, string token, CheckTokenEvent callback)
-        {
+        //public static async void CheckToken(string username, string token, CheckTokenEvent callback)
+        //{
             // Generate post objects
             //var postParameters = new Dictionary<string, object> { { ApplicationResources.TOKEN, token } };
 
@@ -171,11 +175,11 @@ namespace Catrobat.IDE.Core.Services.Common
             //                            callback(response.StatusCode == StatusCodes.ServerResponseTokenOk);
             //                        }
             //                    });
-            await AsyncCheckToken(username, token, callback);
-        }
+        //    await AsyncCheckToken(username, token, callback);
+        //}
 
 
-        public static async Task AsyncCheckToken(string username, string token, CheckTokenEvent callback)
+        public static async Task<bool> AsyncCheckToken(string username, string token/*, CheckTokenEvent callback*/)
         {
             // TODO exception handling
 
@@ -221,19 +225,22 @@ namespace Catrobat.IDE.Core.Services.Common
 
                     Debug.WriteLine("StatusCode: " + status_response.statusCode.ToString());
 
-                    if (callback != null)
-                    {
-                        callback(status_response.statusCode == StatusCodes.ServerResponseTokenOk);
-                    }
+                    //if (callback != null)
+                    //{
+                    //    callback(status_response.statusCode == StatusCodes.ServerResponseTokenOk);
+                    //}
+                    return (status_response.statusCode == StatusCodes.ServerResponseTokenOk);
                 }
+                // TODO HTTP Request failed-error
+                return false;
             }
 
         }
 
 
-        public static async void LoginOrRegister(string username, string password, string userEmail, 
-            string language, string country, string token, RegisterOrCheckTokenEvent callback)
-        {
+        //public static async void LoginOrRegister(string username, string password, string userEmail, 
+        //    string language, string country, string token, RegisterOrCheckTokenEvent callback)
+        //{
             // Generate post objects
             //var postParameters = new Dictionary<string, object>
             //{
@@ -275,11 +282,11 @@ namespace Catrobat.IDE.Core.Services.Common
             //                            }
             //                        }
             //                    });
-            await AsyncLoginOrRegister(username, password, userEmail, language, country, token, callback);
-        }
+        //    await AsyncLoginOrRegister(username, password, userEmail, language, country, token, callback);
+        //}
 
-        public static async Task AsyncLoginOrRegister(string username, string password, string userEmail, 
-                string language, string country, string token, RegisterOrCheckTokenEvent callback)
+        public static async Task<JSONStatusResponse> AsyncLoginOrRegister(string username, string password, string userEmail, 
+                string language, string country/*, string token, RegisterOrCheckTokenEvent callback*/)
         {
             // TODO exception handling
 
@@ -319,29 +326,32 @@ namespace Catrobat.IDE.Core.Services.Common
                     Debug.WriteLine("Token: " + status_response.token);
                     Debug.WriteLine("StatusCode: " + status_response.statusCode.ToString());
 
-                    if (callback != null)
-                    {
-                        if (status_response.statusCode == StatusCodes.ServerResponseTokenOk)
-                        {
-                            callback(false, status_response.statusCode.ToString(), status_response.answer, status_response.token);
-                        }
-                        else if (status_response.statusCode == StatusCodes.ServerResponseRegisterOk)
-                        {
-                            callback(true, status_response.statusCode.ToString(), status_response.answer, status_response.token);
-                        }
-                        else
-                        {
-                            callback(false, status_response.statusCode.ToString(), status_response.answer, status_response.token);
-                        }
-                    }
+                    //if (callback != null)
+                    //{
+                    //    if (status_response.statusCode == StatusCodes.ServerResponseTokenOk)
+                    //    {
+                    //        callback(false, status_response.statusCode.ToString(), status_response.answer, status_response.token);
+                    //    }
+                    //    else if (status_response.statusCode == StatusCodes.ServerResponseRegisterOk)
+                    //    {
+                    //        callback(true, status_response.statusCode.ToString(), status_response.answer, status_response.token);
+                    //    }
+                    //    else
+                    //    {
+                    //        callback(false, status_response.statusCode.ToString(), status_response.answer, status_response.token);
+                    //    }
+                    //}
+                    return status_response;
                 }
+                // TODO HTTP Request failed-error
+                return null;
             }
         }
 
 
-        public static async void UploadProject(string projectName, string projectDescription, string username,
-                string language, string token, UploadProjectEvent callback)
-        {
+        //public static async void UploadProject(string projectName, string projectDescription, string username,
+        //        string language, string token, UploadProjectEvent callback)
+        //{
             // Generate post objects
             //var postParameters = new Dictionary<string, object>
             //{
@@ -383,12 +393,12 @@ namespace Catrobat.IDE.Core.Services.Common
             //                                                              });
             //}
 
-            await AsyncUploadProject(projectName, projectDescription, username, language, token, callback);
-        }
+        //    await AsyncUploadProject(projectName, projectDescription, username, language, token, callback);
+        //}
 
 
-        public static async Task AsyncUploadProject(string projectTitle, string projectDescription, string username,
-                string language, string token, UploadProjectEvent callback)
+        public static async Task<JSONStatusResponse> AsyncUploadProject(string projectTitle, string projectDescription, string username,
+                string language, string token/*, UploadProjectEvent callback*/)
         {
             // TODO exception handling - e.g use language if set (does it has a effect)
             // TODO remove unused parameters
@@ -458,17 +468,20 @@ namespace Catrobat.IDE.Core.Services.Common
                             Debug.WriteLine("Token: " + status_response.token);
                             Debug.WriteLine("Answer: " + status_response.answer);
 
-                            if (callback != null)
-                            {
-                                if (status_response.statusCode == StatusCodes.ServerResponseTokenOk)
-                                {
+                            //if (callback != null)
+                            //{
+                            //    if (status_response.statusCode == StatusCodes.ServerResponseTokenOk)
+                            //    {
                                     // sucessfully uploaded an new token received
-                                    //callback(false, status_response.statusCode.ToString(), status_response.answer, status_response.token);
-                                }
-                            }
+                                    //callback(response.statusCode == StatusCodes.ServerResponseTokenOk);
+                            //    }
+                            //}
+                            return status_response;
                         }
 
                         // TODO _uploadCounter--
+                        // TODO HTTP Request failed-error
+                        return null;
                     }
                 }
             }
@@ -479,7 +492,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
 
 
-        // TODO: additional function maybe displaced
+        // TODO: additional function - is maybe displaced
         public static bool NoUploadsPending()
         {
             return _uploadCounter == 0;
