@@ -701,6 +701,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        public static string Editor_AddGlobalVariable {
+            get {
+                return ResourceManager.GetString("Editor_AddGlobalVariable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        public static string Editor_AddLocalVariable {
+            get {
+                return ResourceManager.GetString("Editor_AddLocalVariable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to add.
         /// </summary>
         public static string Editor_AppbarAdd {
@@ -728,7 +746,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to add program variable.
+        ///   Looks up a localized string similar to add global variable.
         /// </summary>
         public static string Editor_ButtonAddGlobalVariable {
             get {
@@ -737,7 +755,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to add object variable.
+        ///   Looks up a localized string similar to add local variable.
         /// </summary>
         public static string Editor_ButtonAddLocalVariable {
             get {
@@ -872,7 +890,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click &apos;+&apos; to add a new action..
+        ///   Looks up a localized string similar to Tap &apos;+&apos; to add a new action..
         /// </summary>
         public static string Editor_ClickPlusToAddAction {
             get {
@@ -881,7 +899,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click &apos;+&apos; to add a new look..
+        ///   Looks up a localized string similar to Tap &apos;+&apos; to add a new look..
         /// </summary>
         public static string Editor_ClickPlusToAddCostume {
             get {
@@ -890,7 +908,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click &apos;+&apos; to add a new sound..
+        ///   Looks up a localized string similar to Tap &apos;+&apos; to add a new sound..
         /// </summary>
         public static string Editor_ClickPlusToAddSound {
             get {
@@ -899,7 +917,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click &apos;+&apos; to add a new object..
+        ///   Looks up a localized string similar to Tap &apos;+&apos; to add a new object..
         /// </summary>
         public static string Editor_ClickPlusToAddSprite {
             get {
@@ -935,11 +953,38 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to GlobalVariable.
+        /// </summary>
+        public static string Editor_DefaultGlobalVariableName {
+            get {
+                return ResourceManager.GetString("Editor_DefaultGlobalVariableName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LocalVariable.
+        /// </summary>
+        public static string Editor_DefaultLocalVariableName {
+            get {
+                return ResourceManager.GetString("Editor_DefaultLocalVariableName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Editor_Description {
             get {
                 return ResourceManager.GetString("Editor_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Evaluate.
+        /// </summary>
+        public static string Editor_Evaluate {
+            get {
+                return ResourceManager.GetString("Editor_Evaluate", resourceCulture);
             }
         }
         
@@ -1430,24 +1475,6 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ProgramVariable.
-        /// </summary>
-        public static string Editor_StandardGlobalVariableName {
-            get {
-                return ResourceManager.GetString("Editor_StandardGlobalVariableName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ObjectVariable.
-        /// </summary>
-        public static string Editor_StandardLocalVariableName {
-            get {
-                return ResourceManager.GetString("Editor_StandardLocalVariableName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Start sensors.
         /// </summary>
         public static string Editor_StartSensors {
@@ -1529,7 +1556,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CHOOSE PROGRAM VARIABLE NAME.
+        ///   Looks up a localized string similar to CHOOSE GLOBAL VARIABLE NAME.
         /// </summary>
         public static string Editor_TitleChooseGlobalVariableName {
             get {
@@ -1538,7 +1565,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CHOOSE OBJECT VARIABLE NAME.
+        ///   Looks up a localized string similar to CHOOSE LOCAL VARIABLE NAME.
         /// </summary>
         public static string Editor_TitleChooseLocalVariableName {
             get {
@@ -2047,6 +2074,141 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string FormulaInterpreter_Operator_RightEmptyInfixOperator {
             get {
                 return ResourceManager.GetString("FormulaInterpreter_Operator_RightEmptyInfixOperator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add to favorties.
+        /// </summary>
+        public static string FormulaKeyboard_AddFavorite {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_AddFavorite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constants.
+        /// </summary>
+        public static string FormulaKeyboard_Constants {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_Constants", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string FormulaKeyboard_DeleteVariable {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_DeleteVariable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Favorites.
+        /// </summary>
+        public static string FormulaKeyboard_Favorites {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_Favorites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose favorites from the other columns. .
+        /// </summary>
+        public static string FormulaKeyboard_FavoritesEmpty {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_FavoritesEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Functions.
+        /// </summary>
+        public static string FormulaKeyboard_Functions {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_Functions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global.
+        /// </summary>
+        public static string FormulaKeyboard_GlobalVariables {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_GlobalVariables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local.
+        /// </summary>
+        public static string FormulaKeyboard_LocalVariables {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_LocalVariables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operators.
+        /// </summary>
+        public static string FormulaKeyboard_Operators {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_Operators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Properties.
+        /// </summary>
+        public static string FormulaKeyboard_Properties {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_Properties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to History.
+        /// </summary>
+        public static string FormulaKeyboard_RecentlyUsed {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_RecentlyUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove from favorites.
+        /// </summary>
+        public static string FormulaKeyboard_RemoveFavorite {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_RemoveFavorite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename.
+        /// </summary>
+        public static string FormulaKeyboard_RenameVariable {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_RenameVariable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sensors.
+        /// </summary>
+        public static string FormulaKeyboard_Sensors {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_Sensors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variables.
+        /// </summary>
+        public static string FormulaKeyboard_Variables {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_Variables", resourceCulture);
             }
         }
         

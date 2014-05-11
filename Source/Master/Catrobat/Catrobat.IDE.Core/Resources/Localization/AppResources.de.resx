@@ -769,28 +769,28 @@
     <value>NEU</value>
   </data>
   <data name="Editor_ButtonAddLocalVariable" xml:space="preserve">
-    <value>Objektvariable hinzufügen</value>
+    <value>Lokale Variable hinzufügen</value>
   </data>
   <data name="Editor_ButtonAddGlobalVariable" xml:space="preserve">
-    <value>Programmvariable hinzufügen</value>
+    <value>Globale Variable hinzufügen</value>
   </data>
-  <data name="Editor_StandardLocalVariableName" xml:space="preserve">
-    <value>Objektvariable</value>
+  <data name="Editor_DefaultLocalVariableName" xml:space="preserve">
+    <value>LokaleVariable</value>
   </data>
   <data name="Editor_TitleChangeVariableName" xml:space="preserve">
     <value>VARIABLENNAME ÄNDERN</value>
   </data>
-  <data name="Editor_StandardGlobalVariableName" xml:space="preserve">
-    <value>Programmvariable</value>
+  <data name="Editor_DefaultGlobalVariableName" xml:space="preserve">
+    <value>GlobaleVariable</value>
   </data>
   <data name="Editor_VariableName" xml:space="preserve">
     <value>Variablenname</value>
   </data>
   <data name="Editor_TitleChooseLocalVariableName" xml:space="preserve">
-    <value>OBJEKTVARIABLENNAME WÄHLEN</value>
+    <value>NAME DER GLOBALEN VARIABLE WÄHLEN</value>
   </data>
   <data name="Editor_TitleChooseGlobalVariableName" xml:space="preserve">
-    <value>PROGRAMMVARIABLENNAME WÄHLEN</value>
+    <value>NAME DER LOKALEN VARIABLE WÄHLEN</value>
   </data>
   <data name="Main_SelectedProjectNotValidMessage" xml:space="preserve">
     <value>Programm ungültig</value>
@@ -869,13 +869,13 @@
     <value>Erneut auf "zurück" um die App zu schließen?</value>
   </data>
   <data name="Editor_ClickPlusToAddAction" xml:space="preserve">
-    <value>Drücke '+' um eine neue Aktion hinzuzufügen.</value>
+    <value>Tippe auf '+' um eine neue Aktion hinzuzufügen.</value>
   </data>
   <data name="Editor_ClickPlusToAddCostume" xml:space="preserve">
-    <value>Drücke '+' um ein neues Aussehen hinzuzufügen.</value>
+    <value>Tippe auf '+' um ein neues Aussehen hinzuzufügen.</value>
   </data>
   <data name="Editor_ClickPlusToAddSound" xml:space="preserve">
-    <value>Drücke '+' um einen neuen Klang hinzuzufügen.</value>
+    <value>Tippe auf '+' um einen neuen Klang hinzuzufügen.</value>
   </data>
   <data name="Editor_ImageEditingProgram" xml:space="preserve">
     <value>Bildbearbeitungsprogramm</value>
@@ -917,7 +917,7 @@
     <value>Wasser</value>
   </data>
   <data name="Editor_ClickPlusToAddSprite" xml:space="preserve">
-    <value>Drücke '+' um ein neues Objekt hinzuzufügen.</value>
+    <value>Tippe auf '+' um ein neues Objekt hinzuzufügen.</value>
   </data>
   <data name="Main_SetActive" xml:space="preserve">
     <value>Auswählen</value>
@@ -1020,5 +1020,59 @@
   </data>
   <data name="Editor_Undo" xml:space="preserve">
     <value>Rückgängig</value>
+  </data>
+  <data name="Editor_AddGlobalVariable" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="Editor_AddLocalVariable" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="FormulaKeyboard_AddFavorite" xml:space="preserve">
+    <value>Zu Favoriten hinzufügen</value>
+  </data>
+  <data name="FormulaKeyboard_Constants" xml:space="preserve">
+    <value>Konstanten</value>
+  </data>
+  <data name="FormulaKeyboard_DeleteVariable" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="FormulaKeyboard_Favorites" xml:space="preserve">
+    <value>Favoriten</value>
+  </data>
+  <data name="FormulaKeyboard_FavoritesEmpty" xml:space="preserve">
+    <value>Wähle Favoriten aus den anderen Spalten. </value>
+  </data>
+  <data name="FormulaKeyboard_Functions" xml:space="preserve">
+    <value>Funktionen</value>
+  </data>
+  <data name="FormulaKeyboard_GlobalVariables" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="FormulaKeyboard_LocalVariables" xml:space="preserve">
+    <value>Lokal</value>
+  </data>
+  <data name="FormulaKeyboard_Operators" xml:space="preserve">
+    <value>Operatoren</value>
+  </data>
+  <data name="FormulaKeyboard_Properties" xml:space="preserve">
+    <value>Eigenschaften</value>
+  </data>
+  <data name="FormulaKeyboard_RecentlyUsed" xml:space="preserve">
+    <value>Zuletzt</value>
+  </data>
+  <data name="FormulaKeyboard_RemoveFavorite" xml:space="preserve">
+    <value>Aus Favoriten entfernen</value>
+  </data>
+  <data name="FormulaKeyboard_RenameVariable" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
+  <data name="FormulaKeyboard_Sensors" xml:space="preserve">
+    <value>Sensoren</value>
+  </data>
+  <data name="FormulaKeyboard_Variables" xml:space="preserve">
+    <value>Variablen</value>
+  </data>
+  <data name="Editor_Evaluate" xml:space="preserve">
+    <value>Auswerten</value>
   </data>
 </root>

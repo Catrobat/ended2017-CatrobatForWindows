@@ -26,7 +26,7 @@
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
   
 
-  <phone:PhoneApplicationPage.Resources>
+  <!--<phone:PhoneApplicationPage.Resources>
     <Style x:Key="ContinuousListBoxButtonStyle" TargetType="Button">
       <Setter Property="Background" Value="{StaticResource PhoneAccentBrush}"/>
       <Setter Property="BorderBrush" Value="{StaticResource PhoneAccentBrush}"/>
@@ -53,7 +53,7 @@
         </Setter.Value>
       </Setter>
     </Style>
-  </phone:PhoneApplicationPage.Resources>
+  </phone:PhoneApplicationPage.Resources>-->
 
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <!--Panorama control-->

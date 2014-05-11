@@ -13,7 +13,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private Project _currentProject;
         private Sprite _selectedSprite;
-        private string _userVariableName = AppResources.Editor_StandardGlobalVariableName;
+        private string _userVariableName = AppResources.Editor_DefaultGlobalVariableName;
 
         #endregion
 
@@ -116,7 +116,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private void ResetViewModel()
         {
-            UserVariableName = AppResources.Editor_StandardGlobalVariableName;
+            UserVariableName = AppResources.Editor_DefaultGlobalVariableName;
         }
     }
 }

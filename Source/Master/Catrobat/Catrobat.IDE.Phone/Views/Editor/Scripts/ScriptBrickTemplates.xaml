@@ -12,8 +12,8 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:bricks="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Bricks;assembly=Catrobat.IDE.Core"
   xmlns:scripts="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Scripts;assembly=Catrobat.IDE.Core"
-  xmlns:formulaControls="clr-namespace:Catrobat.IDE.Phone.Controls.FormulaControls"
   xmlns:catrobatObjects="clr-namespace:Catrobat.IDE.Core.CatrobatObjects;assembly=Catrobat.IDE.Core"
+  xmlns:formulas="clr-namespace:Catrobat.IDE.Phone.Controls.Formulas"
   mc:Ignorable="d">
 
   <!--<SolidColorBrush x:Key="SoundsBrush" Color="#FFE035D5" />
@@ -190,7 +190,7 @@
                            Text="{Binding Resources.Brick_ChangeXBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
 
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding XMovement, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding XMovement, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}"/>
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" 
                          VerticalAlignment="Center" Text="{Binding XMovement, Mode=TwoWay}" 
                          InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
@@ -216,7 +216,7 @@
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Text="{Binding YMovement, Mode=TwoWay}" InputScope="TelephoneNumber" 
                          IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding YMovement, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding YMovement, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
               </Grid>
             </rlb:NormalBrick>
@@ -253,7 +253,7 @@
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Text="{Binding Steps, Mode=TwoWay}" InputScope="TelephoneNumber" 
                          IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Steps, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Steps, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_GoNStepsBackStepsBack, Source={StaticResource LocalizedStrings}}" 
@@ -294,7 +294,7 @@
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Text="{Binding Steps, Mode=TwoWay}" InputScope="TelephoneNumber" 
                          IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Steps, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Steps, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_MoveNStepsSteps, Source={StaticResource LocalizedStrings}}" 
@@ -322,7 +322,7 @@
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Text="{Binding Degrees, Mode=TwoWay}" InputScope="TelephoneNumber" 
                          IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Degrees, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Degrees, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Degrees, Source={StaticResource LocalizedStrings}}" 
@@ -350,7 +350,7 @@
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" 
                          VerticalAlignment="Center" Text="{Binding Degrees, Mode=TwoWay}"
                          InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Degrees, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Degrees, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Degrees, Source={StaticResource LocalizedStrings}}" 
@@ -377,7 +377,7 @@
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" 
                          VerticalAlignment="Center" Text="{Binding XPosition, Mode=TwoWay}" 
                          InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding XPosition, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding XPosition, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
               </Grid>
             </rlb:NormalBrick>
@@ -401,7 +401,7 @@
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" 
                          VerticalAlignment="Center" Text="{Binding YPosition, Mode=TwoWay}" InputScope="TelephoneNumber"
                          IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding YPosition, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding YPosition, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
               </Grid>
             </rlb:NormalBrick>
@@ -428,10 +428,10 @@
                            Text="{Binding Resources.Brick_PlaceAt, Source={StaticResource LocalizedStrings}}"
                            Margin="10 10 0 10" FontSize="24" />
                 <TextBlock Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Text="X" Margin="10 10 0 10" FontSize="24" />
-                <formulaControls:FormulaButton Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" Formula="{Binding XPosition, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" Formula="{Binding XPosition, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Text="Y" Margin="10 10 0 10" FontSize="24" />
-                <formulaControls:FormulaButton Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Formula="{Binding YPosition, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Formula="{Binding YPosition, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
               </Grid>
             </rlb:NormalBrick>
@@ -451,7 +451,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="auto" />
                   </Grid.ColumnDefinitions>
-                  <formulaControls:FormulaButton Grid.Column="0" Formula="{Binding Degrees, Mode=TwoWay}" 
+                  <formulas:FormulaButton Grid.Column="0" Formula="{Binding Degrees, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                   <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" 
                            Text="{Binding Resources.Brick_Degrees, Source={StaticResource LocalizedStrings}}" />
@@ -496,7 +496,7 @@
 
                   <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" 
                            Margin="10 10 0 10" Text="{Binding Resources.Brick_GlideToGlide, Source={StaticResource LocalizedStrings}}" />
-                  <formulaControls:FormulaButton Grid.Row="0" Grid.Column="2" Formula="{Binding DurationInSeconds, Mode=TwoWay}" 
+                  <formulas:FormulaButton Grid.Row="0" Grid.Column="2" Formula="{Binding DurationInSeconds, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                   <TextBlock Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" FontSize="24" 
                            Margin="10 10 0 10" Text="{Binding Resources.Brick_Seconds, Source={StaticResource LocalizedStrings}}" />
@@ -505,11 +505,11 @@
                            Text="{Binding Resources.Brick_GlideToTo, Source={StaticResource LocalizedStrings}}" />
                   <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" 
                            Text="X" />
-                  <formulaControls:FormulaButton Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Formula="{Binding XDestination, Mode=TwoWay}" 
+                  <formulas:FormulaButton Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Formula="{Binding XDestination, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
 
                   <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="Y" />
-                  <formulaControls:FormulaButton Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Formula="{Binding YDestination, Mode=TwoWay}" 
+                  <formulas:FormulaButton Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Formula="{Binding YDestination, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 </Grid>
 
@@ -538,7 +538,7 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_ChangeVolumeBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Volume, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Volume, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
@@ -589,7 +589,7 @@
                            Margin="10 10 0 10" FontSize="24" />
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Text="{Binding Volume, Mode=TwoWay}" InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Volume, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Volume, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
@@ -634,7 +634,7 @@
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Text="{Binding ChangeBrightness, Mode=TwoWay}" InputScope="TelephoneNumber" 
                          IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding ChangeBrightness, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding ChangeBrightness, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
@@ -660,7 +660,7 @@
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Text="{Binding ChangeGhostEffect, Mode=TwoWay}" InputScope="TelephoneNumber" 
                          IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding ChangeGhostEffect, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding ChangeGhostEffect, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
@@ -685,7 +685,7 @@
                            Margin="10 10 0 10" FontSize="24" />
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Text="{Binding Size, Mode=TwoWay}" InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Size, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Size, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
@@ -765,7 +765,7 @@
                            Margin="10 10 0 10" FontSize="24" />
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Text="{Binding Size, Mode=TwoWay}" InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Size, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Size, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
@@ -790,7 +790,7 @@
                            Margin="10 10 0 10" FontSize="24" />
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Text="{Binding Transparency, Mode=TwoWay}" InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Transparency, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Transparency, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
@@ -815,7 +815,7 @@
                            Margin="10 10 0 10" FontSize="24" />
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Text="{Binding Brightness, Mode=TwoWay}" InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Brightness, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Brightness, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
@@ -892,7 +892,7 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Wait, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding TimeToWaitInSeconds, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding TimeToWaitInSeconds, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Seconds, Source={StaticResource LocalizedStrings}}" 
@@ -920,7 +920,7 @@
                 <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Text="{Binding TimesToRepeat, Mode=TwoWay}" InputScope="TelephoneNumber" 
                          IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding TimesToRepeat, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding TimesToRepeat, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Times, Source={StaticResource LocalizedStrings}}" 
@@ -991,7 +991,7 @@
                   <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                              Text="{Binding Resources.Brick_IfLogicBegin, Source={StaticResource LocalizedStrings}}"
                              Margin="10 10 0 10" FontSize="24" />
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding IfCondition, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding IfCondition, Mode=TwoWay}" 
                                                  IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                              Text="{Binding Resources.Brick_IfLogicBeginTrue, Source={StaticResource LocalizedStrings}}"
@@ -1051,13 +1051,13 @@
                            Text="{Binding Resources.Brick_SetVariable, Source={StaticResource LocalizedStrings}}"
                            Margin="10 10 0 10" FontSize="24" />
 
-                  <formulaControls:VariableButton MinWidth="120" MaxWidth="300" Variable="{Binding UserVariable}" IsEnabled="{Binding IsRealObject}"/>
+                  <formulas:VariableButton MinWidth="120" MaxWidth="300" Variable="{Binding UserVariable}" IsEnabled="{Binding IsRealObject}"/>
                 </StackPanel>
                 
 
                   <TextBlock Text="{Binding Resources.Brick_SetVariableTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <formulaControls:FormulaButton Formula="{Binding VariableFormula, Mode=TwoWay}" 
+                <formulas:FormulaButton Formula="{Binding VariableFormula, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
               </Grid>-->
               <Grid>
@@ -1075,12 +1075,12 @@
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                              Text="{Binding Resources.Brick_SetVariable, Source={StaticResource LocalizedStrings}}"
                              Margin="10 10 0 10" FontSize="24" />
-                <formulaControls:VariableButton Grid.Column="2" Grid.Row="0" MinWidth="120" MaxWidth="300" Variable="{Binding UserVariable}" IsEnabled="{Binding IsRealObject}"/>
+                <formulas:VariableButton Grid.Column="2" Grid.Row="0" MinWidth="120" MaxWidth="300" Variable="{Binding UserVariable}" IsEnabled="{Binding IsRealObject}"/>
 
                 <TextBlock Grid.Column="0" Grid.Row="1"
                            Text="{Binding Resources.Brick_SetVariableTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <formulaControls:FormulaButton Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="1" Formula="{Binding VariableFormula, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="1" Formula="{Binding VariableFormula, Mode=TwoWay}" 
                                                  IsEnabled="{Binding IsRealObject}"/>
               </Grid>
             </rlb:NormalBrick>
@@ -1107,12 +1107,12 @@
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                              Text="{Binding Resources.Brick_ChangeVariable, Source={StaticResource LocalizedStrings}}"
                              Margin="10 10 0 10" FontSize="24" />
-                <formulaControls:VariableButton Grid.Column="2" Grid.Row="0" MinWidth="120" MaxWidth="300" Variable="{Binding UserVariable}" IsEnabled="{Binding IsRealObject}"/>
+                <formulas:VariableButton Grid.Column="2" Grid.Row="0" MinWidth="120" MaxWidth="300" Variable="{Binding UserVariable}" IsEnabled="{Binding IsRealObject}"/>
 
                 <TextBlock Grid.Column="0" Grid.Row="1"
                            Text="{Binding Resources.Brick_ChangeVariableBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <formulaControls:FormulaButton Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="1" Formula="{Binding VariableFormula, Mode=TwoWay}" 
+                <formulas:FormulaButton Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="1" Formula="{Binding VariableFormula, Mode=TwoWay}" 
                                                  IsEnabled="{Binding IsRealObject}"/>
               </Grid>
             </rlb:NormalBrick>

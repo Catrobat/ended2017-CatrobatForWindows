@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Catrobat.IDE.Phone.Controls.FormulaControls.Templates
+namespace Catrobat.IDE.Phone.Controls.Formulas.Templates
 {
     public class FormulaTokenStyleCollection
     {

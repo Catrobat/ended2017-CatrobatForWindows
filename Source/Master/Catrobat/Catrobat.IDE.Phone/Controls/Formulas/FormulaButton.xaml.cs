@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.Services;
-using System.Windows;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
 
-namespace Catrobat.IDE.Phone.Controls.FormulaControls
+namespace Catrobat.IDE.Phone.Controls.Formulas
 {
     public partial class FormulaButton
     {
@@ -33,6 +33,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         private void ButtonFormula_OnClick(object sender, RoutedEventArgs e)
         {
             var viewModel = ServiceLocator.ViewModelLocator.FormulaEditorViewModel;
+            viewModel.Cleanup();
             viewModel.Formula = Formula.FormulaTree2;
             SetFormulaBinding();
             ServiceLocator.NavigationService.NavigateTo(typeof(FormulaEditorViewModel));

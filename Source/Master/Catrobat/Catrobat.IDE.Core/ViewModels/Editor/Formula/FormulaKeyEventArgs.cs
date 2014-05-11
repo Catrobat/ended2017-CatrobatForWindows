@@ -1,6 +1,4 @@
 ﻿using System;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Core.Formulas.Editor;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 {
@@ -8,19 +6,14 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
     {
         #region Members
 
-        private readonly FormulaEditorKey _key;
-        public FormulaEditorKey Key { get { return _key; } }
-
-        private readonly UserVariable _userVariable;
-        public UserVariable UserVariable { get { return _userVariable; } }
+        private readonly FormulaKey _data;
+        public FormulaKey Data { get { return _data; } }
 
         #endregion
 
-        public FormulaKeyEventArgs(FormulaEditorKey key, UserVariable userVariable)
+        public FormulaKeyEventArgs(FormulaKey data)
         {
-            _key = key;
-            _userVariable = userVariable;
+            _data = data;
         }
-
     }
 }

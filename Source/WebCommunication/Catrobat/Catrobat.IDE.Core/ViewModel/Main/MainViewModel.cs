@@ -207,11 +207,11 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             private set;
         }
 
-        public ICommand LazyLoadOnlineProjectsCommand
-        {
-            get;
-            private set;
-        }
+        //public ICommand LazyLoadOnlineProjectsCommand
+        //{
+        //    get;
+        //    private set;
+        //}
 
         public ICommand SetCurrentProjectCommand
         {
@@ -327,10 +327,10 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             ServiceLocator.NavigationService.NavigateTo<ShareProjectServiceSelectionViewModel>();
         }
 
-        private void LazyLoadOnlineProjectsAction()
-        {
-            LoadOnlineProjects(true);
-        }
+        //private void LazyLoadOnlineProjectsAction()
+        //{
+        //    LoadOnlineProjects(true);
+        //}
 
 
         private async void SetCurrentProjectAction(string projectName)
@@ -491,7 +491,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
             PinLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(PinLocalProjectAction);
             ShareLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(ShareLocalProjectAction);
-            LazyLoadOnlineProjectsCommand = new RelayCommand(LazyLoadOnlineProjectsAction);
+            //LazyLoadOnlineProjectsCommand = new RelayCommand(LazyLoadOnlineProjectsAction);
             SetCurrentProjectCommand = new RelayCommand<string>(SetCurrentProjectAction);
             OnlineProjectTapCommand = new RelayCommand<OnlineProjectHeader>(OnlineProjectTapAction);
             SettingsCommand = new RelayCommand(SettingsAction);
@@ -605,6 +605,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             _previousFilterText = _filterText;
 
             CatrobatWebCommunicationService.LoadOnlineProjects(isAppend, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
+            
         }
 
         private void CheckTokenEvent(bool registered)

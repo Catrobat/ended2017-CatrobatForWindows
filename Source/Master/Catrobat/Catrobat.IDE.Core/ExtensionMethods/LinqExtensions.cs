@@ -7,7 +7,7 @@ namespace Catrobat.IDE.Core.ExtensionMethods
     public static class LinqExtensions
     {
 
-        /// <see cref="http://code.google.com/p/morelinq/source/browse/MoreLinq/DistinctBy.cs"/>
+        /// <remarks>Inspired by <see cref="http://code.google.com/p/morelinq/source/browse/MoreLinq/DistinctBy.cs"/>. </remarks>
         public static IEnumerable<TSource> Distinct<TSource, TKey>(this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector)
         {

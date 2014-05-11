@@ -103,5 +103,13 @@ namespace Catrobat.IDE.Core.ExtensionMethods
             source.RemoveRange(index, count);
             source.InsertRange(index, items);
         }
+
+        public static void RemoveAll<T>(this IList<T> source, Func<T, bool> predicate)
+        {
+            for (var index = 0; index < source.Count; index++)
+            {
+                if (predicate(source[index])) source.RemoveAt(index);
+            }
+        }
     }
 }
