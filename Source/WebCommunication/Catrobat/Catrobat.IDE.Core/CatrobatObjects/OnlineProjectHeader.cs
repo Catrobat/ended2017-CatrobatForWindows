@@ -18,7 +18,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects
 
         private string _screenshotBig;
         private string _screenshotSmall;
-        private string _downloadUrl;
 
         public string ProjectId { get; set; }
         public string ProjectName { get; set; }
@@ -55,19 +54,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects
         public string Views { get; set; }
         public string Downloads { get; set; }
         public string ProjectUrl { get; set; }
-        public string DownloadUrl
-        {
-            //get
-            //{
-            //    return _downloadUrl;
-            //}
-            //set 
-            //{
-            //    // TODO switch to ApplicationResources or use BaseUrl from Catrobatinformation-class
-            //    _downloadUrl = "https://pocketcode.org/" + value;
-            //}
-            get;
-            set;
-        }
+        public string DownloadUrl { get; set; }
     }
 }
