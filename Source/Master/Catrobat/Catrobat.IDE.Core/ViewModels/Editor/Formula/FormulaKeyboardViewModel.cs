@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Formulas.Editor;
@@ -10,6 +6,11 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 {
@@ -19,9 +20,33 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region Properties
 
-        private Project Project { get; set; }
+        private Project _project;
+        private Project Project
+        {
+            get { return _project; }
+            set
+            {
+                if (_project == value) return;
+                _project = value;
+                GlobalVariablesSource = Project == null
+                    ? null
+                    : VariableHelper.GetGlobalVariableList(Project);
+            }
+        }
 
-        private Sprite Sprite { get; set; }
+        private Sprite _sprite;
+        private Sprite Sprite
+        {
+            get { return _sprite; }
+            set
+            {
+                if (_sprite == value) return;
+                _sprite = value;
+                LocalVariablesSource = Project == null || Sprite == null
+                    ? null
+                    : VariableHelper.GetLocalVariableList(Project, Sprite);
+            }
+        }
 
         private ObservableCollection<UserVariable> _localVariablesSource;
         private ObservableCollection<UserVariable> LocalVariablesSource
@@ -34,25 +59,27 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 _localVariablesSource = value;
                 if (_localVariablesSource != null) _localVariablesSource.CollectionChanged += LocalVariablesSource_OnCollectionChanged;
 
-                LocalVariables = _localVariablesSource == null ? null : _localVariablesSource.ObservableSelect(
+                if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable);
+                LocalVariables = LocalVariablesSource == null ? null : LocalVariablesSource.ObservableSelect(
                     selector: variable => new FormulaKey(FormulaEditorKey.LocalVariable, variable), 
                     inverseSelector: data => data.Variable);
             }
         }
         private void LocalVariablesSource_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (Favorites == null && RecentlyUsed == null) return;
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Reset:
-                    var variables = e.OldItems.Cast<UserVariable>().ToLookup(variable => variable);
-                    Favorites.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && !variables.Contains(data.Variable));
-                    RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && !variables.Contains(data.Variable));
+                    var variables = LocalVariablesSource.ToSet();
+                    if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && !variables.Contains(data.Variable));
+                    if (RecentlyUsed != null) RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && !variables.Contains(data.Variable));
                     break;
                 case NotifyCollectionChangedAction.Remove:
                 case NotifyCollectionChangedAction.Replace:
-                    var deletedVariables = e.OldItems.Cast<UserVariable>().ToLookup(variable => variable);
-                    Favorites.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && deletedVariables.Contains(data.Variable));
-                    RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && deletedVariables.Contains(data.Variable));
+                    var deletedVariables = e.OldItems.Cast<UserVariable>().ToSet();
+                    if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && deletedVariables.Contains(data.Variable));
+                    if (RecentlyUsed != null) RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && deletedVariables.Contains(data.Variable));
                     break;
             }
         }
@@ -70,42 +97,61 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 _globalVariablesSource = value;
                 if (_globalVariablesSource != null) _globalVariablesSource.CollectionChanged += GlobalVariablesSource_OnCollectionChanged;
 
-                GlobalVariables = _globalVariablesSource.ObservableSelect(
+                if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable);
+                GlobalVariables = GlobalVariablesSource == null ? null : GlobalVariablesSource.ObservableSelect(
                     selector: variable => new FormulaKey(FormulaEditorKey.GlobalVariable, variable),
                     inverseSelector: data => data.Variable);
             }
         }
         private void GlobalVariablesSource_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (Favorites == null && RecentlyUsed == null) return;
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Reset:
-                    var variables = e.OldItems.Cast<UserVariable>().ToLookup(variable => variable);
-                    Favorites.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && !variables.Contains(data.Variable));
-                    RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && !variables.Contains(data.Variable));
+                    var variables = GlobalVariablesSource.ToSet();
+                    if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && !variables.Contains(data.Variable));
+                    if (RecentlyUsed != null) RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && !variables.Contains(data.Variable));
                     break;
                 case NotifyCollectionChangedAction.Remove:
                 case NotifyCollectionChangedAction.Replace:
-                    var deletedVariables = e.OldItems.Cast<UserVariable>().ToLookup(variable => variable);
-                    Favorites.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && deletedVariables.Contains(data.Variable));
-                    RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && deletedVariables.Contains(data.Variable));
+                    var deletedVariables = e.OldItems.Cast<UserVariable>().ToSet();
+                    if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && deletedVariables.Contains(data.Variable));
+                    if (RecentlyUsed != null) RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && deletedVariables.Contains(data.Variable));
                     break;
             }
         }
 
         public IObservableCollection<FormulaKey> GlobalVariables { get; set; }
 
-        private readonly ObservableCollection<FormulaKey> _favorites;
+        private ObservableCollection<FormulaKey> _favorites;
         public ObservableCollection<FormulaKey> Favorites
         {
             get { return _favorites; }
+            private set
+            {
+                if (_favorites == value) return;
+                if (_favorites != null) _favorites.CollectionChanged -= Favorites_OnCollectionChanged;
+                _favorites = value;
+                if (_favorites != null) _favorites.CollectionChanged += Favorites_OnCollectionChanged;
+                RaisePropertyChanged(() => Favorites);
+            }
+        }
+        private void Favorites_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            RaisePropertyChanged(() => IsFavoritesEmpty);
         }
 
-        private readonly ObservableCollection<FormulaKey> _recentlyUsed;
-
+        private ObservableCollection<FormulaKey> _recentlyUsed;
         public ObservableCollection<FormulaKey> RecentlyUsed
         {
             get { return _recentlyUsed; }
+            private set
+            {
+                if (_recentlyUsed == value) return;
+                _recentlyUsed = value;
+                RaisePropertyChanged(() => RecentlyUsed);
+            }
         }
 
         public bool IsFavoritesEmpty
@@ -126,6 +172,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         }
 
         private bool _isAddGlobalVariableButtonVisible;
+
         public bool IsAddGlobalVariableButtonVisible
         {
             get { return _isAddGlobalVariableButtonVisible; }
@@ -205,35 +252,58 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region Messenger
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        private void LoadSettingsAction(LocalSettings settings)
         {
-            Project = message.Content;
-
-            GlobalVariablesSource = Project == null 
-                ? null 
-                : VariableHelper.GetGlobalVariableList(Project);
+            var localVariables = (LocalVariables ?? Enumerable.Empty<FormulaKey>()).ToLookup(variable => variable.Variable == null ? null : variable.Variable.Name);
+            var globalVariables = (GlobalVariables ?? Enumerable.Empty<FormulaKey>()).ToLookup(variable => variable.Variable == null ? null : variable.Variable.Name);
+            RecentlyUsed = (DeserializeFormulaKeyCollection(settings.RecentlyUsed, localVariables, globalVariables) ?? Enumerable.Empty<FormulaKey>()).ToObservableCollection();
+            Favorites = (DeserializeFormulaKeyCollection(settings.Favorites, localVariables, globalVariables) ?? Enumerable.Empty<FormulaKey>()).ToObservableCollection();
         }
 
-        private void CurrentSpriteChangedMesageAction(GenericMessage<Sprite> message)
+        private void SaveSettingsAction(LocalSettings settings)
         {
-            Sprite = message.Content;
+            settings.RecentlyUsed = SerializeFormulaKeyCollection(_recentlyUsed).ToList();
+            settings.Favorites = SerializeFormulaKeyCollection(_favorites).ToList();
+        }
 
-            if (Project == null) return;
+        private static IEnumerable<SerializableTuple<int, string>> SerializeFormulaKeyCollection(IEnumerable<FormulaKey> collection)
+        {
+            return collection == null ? null : collection.Select(data => (SerializableTuple<int, string>) Tuple.Create(
+                item1: (int) data.Key,
+                item2: data.Variable == null ? null : data.Variable.Name));
+        }
 
-            LocalVariablesSource = Project == null || Sprite == null 
-                ? null 
-                : VariableHelper.GetLocalVariableList(Project, Sprite);
-            Favorites.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable);
+        private static IEnumerable<FormulaKey> DeserializeFormulaKeyCollection(
+            IEnumerable<SerializableTuple<int, string>> graph, 
+            ILookup<string, FormulaKey> localVariables, 
+            ILookup<string, FormulaKey> globalVariables)
+        {
+            return graph == null ? null : graph.Select(g => (Tuple<int, string>) g).Select(g =>
+            {
+                var key = (FormulaEditorKey) g.Item1;
+                switch (key)
+                {
+                    case FormulaEditorKey.LocalVariable: return localVariables[g.Item2].FirstOrDefault();
+                    case FormulaEditorKey.GlobalVariable: return globalVariables[g.Item2].FirstOrDefault();
+                    default: return new FormulaKey(key, null);
+                }
+            }).Where(data => data != null);
+        }
+
+        private void CurrentProjectChangedAction(Project project)
+        {
+            Project = project;
+        }
+
+        private void CurrentSpriteChangedAction(Sprite sprite)
+        {
+            Sprite = sprite;
         }
 
         #endregion
 
         public FormulaKeyboardViewModel()
         {
-            // TODO: synchronize with settings
-            _favorites = new ObservableCollection<FormulaKey>();
-            _favorites.CollectionChanged += (sender, e) => RaisePropertyChanged(() => IsFavoritesEmpty);
-            _recentlyUsed = new ObservableCollection<FormulaKey>();
             AddFavoriteCommand = new RelayCommand<FormulaKey>(AddFavoriteAction);
             RemoveFavoriteCommand = new RelayCommand<FormulaKey>(RemoveFavoriteAction);
             KeyPressedCommand = new RelayCommand<FormulaKey>(KeyPressedAction);
@@ -244,8 +314,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             RenameVariableCommand = new RelayCommand<FormulaKey>(RenameVariableAction);
             DeleteVariableCommand = new RelayCommand<FormulaKey>(DeleteVariableAction, DeleteVariableCanExecute);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
-            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMesageAction);
+            Messenger.Default.Register<GenericMessage<LocalSettings>>(this, ViewModelMessagingToken.LoadSettings, message => LoadSettingsAction(message.Content));
+            Messenger.Default.Register<GenericMessage<LocalSettings>>(this, ViewModelMessagingToken.SaveSettings, message => SaveSettingsAction(message.Content));
+            Messenger.Default.Register<GenericMessage<Project>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, message => CurrentProjectChangedAction(message.Content));
+            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, message => CurrentSpriteChangedAction(message.Content));
 
         }
 

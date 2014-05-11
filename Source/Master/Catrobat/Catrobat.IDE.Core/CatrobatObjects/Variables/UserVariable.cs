@@ -1,8 +1,10 @@
-﻿using System.Xml.Linq;
+﻿using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Variables
 {
     /// <summary>Local or global variable</summary>
+    [DebuggerDisplay("{Name}")]
     public class UserVariable : DataObject
     {
         private string _name;

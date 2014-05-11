@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Catrobat.IDE.Core
 {
@@ -17,6 +19,10 @@ namespace Catrobat.IDE.Core
         public string CurrentUserEmail { get; set; }
 
         public string CurrentToken { get; set; }
+
+        public List<SerializableTuple<int, string>> Favorites { get; set; }
+
+        public List<SerializableTuple<int, string>> RecentlyUsed { get; set; } 
 
         public LocalSettings ()
         {

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Formulas.Editor;
 using System.ComponentModel;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 {
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class FormulaKey : INotifyPropertyChanged
     {
         #region Implements INotifyPropertyChanged
@@ -71,6 +73,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         {
             Key = key;
             Variable = variable;
+        }
+
+        protected string DebuggerDisplay
+        {
+            get { return "Key = " + Key + (Variable == null ? string.Empty : ", Variable = " + Variable.Name); }
         }
 
         #region Overrides Equals

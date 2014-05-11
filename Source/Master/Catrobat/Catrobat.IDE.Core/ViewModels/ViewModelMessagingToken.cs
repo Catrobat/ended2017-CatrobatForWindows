@@ -2,6 +2,8 @@
 {
     public enum ViewModelMessagingToken
     {
+        LoadSettings, 
+        SaveSettings, 
         CostumeListener,
         SoundNameListener,
         CurrentSpriteChangedListener,
