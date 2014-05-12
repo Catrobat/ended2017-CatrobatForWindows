@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Core
 
             //_app.InitializeInterfaces();
             //((ViewModelLocator)ServiceLocator.ViewModelLocator).RegisterViewModels();
-            ((ViewModelLocator)ServiceLocator.ViewModelLocator).RaiseAppPropertiesChanged();
+            ServiceLocator.ViewModelLocator.RaiseAppPropertiesChanged();
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -49,9 +49,7 @@ namespace Catrobat.IDE.Core
 
         private static async Task<Project> InitializeFirstTimeUse(CatrobatContextBase context)
         {
-            Project currentProject = null;
             var localSettings = await CatrobatContext.RestoreLocalSettingsStatic();
-
             if (localSettings == null)
             {
                 if (Debugger.IsAttached)
@@ -60,17 +58,14 @@ namespace Catrobat.IDE.Core
                     await loader.LoadSampleProjects();
                 }
 
-                currentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+                var currentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
                 await currentProject.Save();
                 context.LocalSettings = new LocalSettings { CurrentProjectName = currentProject.ProjectHeader.ProgramName };
-            }
-            else
-            {
-                context.LocalSettings = localSettings;
-                currentProject = await CatrobatContext.LoadNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
+                return currentProject;
             }
 
-            return currentProject;
+            context.LocalSettings = localSettings;
+            return await CatrobatContext.LoadNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
         }
 
         private static async Task LoadContext()
@@ -85,7 +80,7 @@ namespace Catrobat.IDE.Core
                 _context.LocalSettings.CurrentLanguageString =
                     ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName;
 
-            var themeChooser = (ThemeChooser)Core.Services.ServiceLocator.ThemeChooser;
+            var themeChooser = ServiceLocator.ThemeChooser;
             if (_context.LocalSettings.CurrentThemeIndex != -1)
                 themeChooser.SelectedThemeIndex = _context.LocalSettings.CurrentThemeIndex;
 
@@ -101,6 +96,9 @@ namespace Catrobat.IDE.Core
 
             var message = new GenericMessage<Project>(currentProject);
             Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectChangedListener);
+
+            // allow viewmodels to load from settings
+            Messenger.Default.Send(new GenericMessage<LocalSettings>(_context.LocalSettings), ViewModelMessagingToken.LoadSettings);
         }
 
         public static async Task SaveContext(Project currentProject)
@@ -108,7 +106,7 @@ namespace Catrobat.IDE.Core
             if (currentProject == null || _context == null)
                 return;
 
-            var themeChooser = (ThemeChooser)ServiceLocator.ThemeChooser;
+            var themeChooser = ServiceLocator.ThemeChooser;
             var settingsViewModel = ServiceLocator.GetInstance<SettingsViewModel>();
 
             if (themeChooser.SelectedTheme != null)
@@ -122,6 +120,9 @@ namespace Catrobat.IDE.Core
             }
 
             _context.LocalSettings.CurrentProjectName = currentProject.ProjectHeader.ProgramName;
+
+            // allow viewmodels to save settings
+            Messenger.Default.Send(new GenericMessage<LocalSettings>(_context.LocalSettings), ViewModelMessagingToken.SaveSettings);
 
             await CatrobatContext.StoreLocalSettingsStatic(_context.LocalSettings);
             await currentProject.Save();

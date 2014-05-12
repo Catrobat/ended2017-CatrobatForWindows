@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Catrobat.IDE.Core.ExtensionMethods
@@ -123,5 +124,16 @@ namespace Catrobat.IDE.Core.ExtensionMethods
             }
             return result;
         }
+
+        public static ObservableCollection<TSource> ToObservableCollection<TSource>(this IEnumerable<TSource> source)
+        {
+            return new ObservableCollection<TSource>(source);
+        }
+
+        public static ISet<TSource> ToSet<TSource>(this IEnumerable<TSource> source)
+        {
+            return new HashSet<TSource>(source);
+        }
+
     }
 }

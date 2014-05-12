@@ -88,7 +88,7 @@ namespace Catrobat.IDE.Core.ViewModel.Service
 
         #region Actions
 
-        private void LoginAction()
+        private async void LoginAction()
         {
             ServiceLocator.NavigationService.RemoveBackEntry();
 
@@ -104,11 +104,40 @@ namespace Catrobat.IDE.Core.ViewModel.Service
                 //                                         RegionInfo.CurrentRegion.TwoLetterISORegionName,
                 //                                         UtilTokenHelper.CalculateToken(_username, _password),
                 //                                         RegisterOrCheckTokenCallback);
-                CatrobatWebCommunicationService.LoginOrRegister(_username, _password, _email,
-                                                         ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName,
-                                                         RegionInfo.CurrentRegion.TwoLetterISORegionName,
-                                                         UtilTokenHelper.CalculateToken(_username, _password),
-                                                         RegisterOrCheckTokenCallback);
+                JSONStatusResponse status_response =  await CatrobatWebCommunicationService.AsyncLoginOrRegister(_username, _password, _email,
+                                                             ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName,
+                                                             RegionInfo.CurrentRegion.TwoLetterISORegionName);
+
+                //Context.CurrentToken = UtilTokenHelper.CalculateToken(_username, _password);
+                // TODO store values if everything was sucessfull --> error handling (evt. include email here)
+                Context.CurrentToken = status_response.token;
+                Context.CurrentUserName = _username;
+
+                if (status_response.statusCode == StatusCodes.ServerResponseRegisterOk)
+                {
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectRegistrationSucessful,
+                        string.Format(AppResources.Main_UploadProjectWelcome, _username), RegistrationSuccessfulCallback, MessageBoxOptions.Ok);
+                }
+                else if (status_response.statusCode == StatusCodes.ServerResponseTokenOk)
+                {
+                    if (NavigationCallback != null)
+                    {
+                        NavigationCallback();
+                    }
+                    else
+                    {
+                        //TODO: Throw error because of navigation callback shouldn't be null
+                        throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
+                    }
+                }
+                else //Unknown error
+                {
+                    var messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
+                                            string.Format(AppResources.Main_UploadProjectLoginError, status_response.answer);
+
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
+                        messageString, WrongLoginDataCallback, MessageBoxOptions.Ok);
+                }
             }
         }
 
@@ -178,39 +207,39 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             }
         }
 
-        private void RegisterOrCheckTokenCallback(bool registered, string errorCode, string statusMessage, string token)
-        {
-            //Context.CurrentToken = UtilTokenHelper.CalculateToken(_username, _password);
-            // TODO store values if everything was sucessfull
-            Context.CurrentToken = token;
-            Context.CurrentUserName = _username;
+        //private void RegisterOrCheckTokenCallback(bool registered, string errorCode, string statusMessage, string token)
+        //{
+        //    //Context.CurrentToken = UtilTokenHelper.CalculateToken(_username, _password);
+        //    // TODO store values if everything was sucessfull --> error handling (evt. include email here)
+        //    Context.CurrentToken = token;
+        //    Context.CurrentUserName = _username;
 
-            if (registered)
-            {
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectRegistrationSucessful,
-                    string.Format(AppResources.Main_UploadProjectWelcome, _username), RegistrationSuccessfulCallback, MessageBoxOptions.Ok);
-            }
-            else if (errorCode == StatusCodes.ServerResponseTokenOk.ToString())
-            {
-                if (NavigationCallback != null)
-                {
-                    NavigationCallback();
-                }
-                else
-                {
-                    //TODO: Throw error because of navigation callback shouldn't be null
-                    throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
-                }
-            }
-            else //Unknown error
-            {
-                var messageString = string.IsNullOrEmpty(statusMessage) ? string.Format(AppResources.Main_UploadProjectUndefinedError, errorCode) :
-                                        string.Format(AppResources.Main_UploadProjectLoginError, statusMessage);
+        //    if (registered)
+        //    {
+        //        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectRegistrationSucessful,
+        //            string.Format(AppResources.Main_UploadProjectWelcome, _username), RegistrationSuccessfulCallback, MessageBoxOptions.Ok);
+        //    }
+        //    else if (errorCode == StatusCodes.ServerResponseTokenOk.ToString())
+        //    {
+        //        if (NavigationCallback != null)
+        //        {
+        //            NavigationCallback();
+        //        }
+        //        else
+        //        {
+        //            //TODO: Throw error because of navigation callback shouldn't be null
+        //            throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
+        //        }
+        //    }
+        //    else //Unknown error
+        //    {
+        //        var messageString = string.IsNullOrEmpty(statusMessage) ? string.Format(AppResources.Main_UploadProjectUndefinedError, errorCode) :
+        //                                string.Format(AppResources.Main_UploadProjectLoginError, statusMessage);
 
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
-                    messageString, WrongLoginDataCallback, MessageBoxOptions.Ok);
-            }
-        }
+        //        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
+        //            messageString, WrongLoginDataCallback, MessageBoxOptions.Ok);
+        //    }
+        //}
 
         #endregion
 

@@ -117,29 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CheckTokenOrRegisterUrl" xml:space="preserve">
-    <value>http://catroidtest.ist.tugraz.at/api/loginOrRegister/loginOrRegister.json</value>
-  </data>
-  <data name="CheckTokenUrl" xml:space="preserve">
-    <value>http://catroidtest.ist.tugraz.at/api/checkToken/check.json</value>
-  </data>
   <data name="EXTENSION" xml:space="preserve">
     <value>.catrobat</value>
   </data>
-  <data name="FILE_UPLOAD_TAG" xml:space="preserve">
-    <value>upload</value>
-  </data>
   <data name="MIMETYPE" xml:space="preserve">
     <value>application/octet-stream</value>
-  </data>
-  <data name="OnlineFilterUrl" xml:space="preserve">
-    <value>http://catroidtest.ist.tugraz.at/api/projects/search.xml?limit=5&amp;offset={0}&amp;query={1}</value>
-  </data>
-  <data name="OnlineRecentUrl" xml:space="preserve">
-    <value>http://catroidtest.ist.tugraz.at/api/projects/recent.xml?limit=5&amp;offset={0}</value>
-  </data>
-  <data name="OnlineImagesBaseUrl" xml:space="preserve">
-    <value>http://catroidtest.ist.tugraz.at/</value>
   </data>
   <data name="ProjectLicenseUrl" xml:space="preserve">
     <value>http://catroid.org/catroid/projectlicense</value>
@@ -153,26 +135,17 @@
   <data name="PROJECT_NAME_TAG" xml:space="preserve">
     <value>projectTitle</value>
   </data>
-  <data name="REG_USER_COUNTRY" xml:space="preserve">
+  <data name="API_PARAM_REG_COUNTRY" xml:space="preserve">
     <value>registrationCountry</value>
   </data>
-  <data name="REG_USER_EMAIL" xml:space="preserve">
+  <data name="API_PARAM_REG_EMAIL" xml:space="preserve">
     <value>registrationEmail</value>
   </data>
-  <data name="REG_USER_LANGUAGE" xml:space="preserve">
-    <value>registrationLanguage</value>
-  </data>
-  <data name="REG_USER_NAME" xml:space="preserve">
+  <data name="API_PARAM_REG_USERNAME" xml:space="preserve">
     <value>registrationUsername</value>
   </data>
-  <data name="REG_USER_PASSWORD" xml:space="preserve">
+  <data name="API_PARAM_REG_PASSWORD" xml:space="preserve">
     <value>registrationPassword</value>
-  </data>
-  <data name="TOKEN" xml:space="preserve">
-    <value>token</value>
-  </data>
-  <data name="UploadFileUrl" xml:space="preserve">
-    <value>http://catroidtest.ist.tugraz.at/api/upload/upload.json</value>
   </data>
   <data name="UserAgent" xml:space="preserve">
     <value>Windows Phone 7 Device</value>
@@ -180,7 +153,43 @@
   <data name="USER_EMAIL" xml:space="preserve">
     <value>userEmail</value>
   </data>
-  <data name="USER_LANGUAGE" xml:space="preserve">
+  <data name="API_PARAM_LANGUAGE" xml:space="preserve">
     <value>userLanguage</value>
+  </data>
+  <data name="API_BASE_ADDRESS" xml:space="preserve">
+    <value>http://catroid-test.catrob.at/api/</value>
+  </data>
+  <data name="API_CHECK_TOKEN" xml:space="preserve">
+    <value>checkToken/check.json</value>
+  </data>
+  <data name="API_LOGIN_REGISTER" xml:space="preserve">
+    <value>loginOrRegister/loginOrRegister.json</value>
+  </data>
+  <data name="API_PARAM_CHECKSUM" xml:space="preserve">
+    <value>fileChecksum</value>
+  </data>
+  <data name="API_PARAM_TOKEN" xml:space="preserve">
+    <value>token</value>
+  </data>
+  <data name="API_PARAM_UPLOAD" xml:space="preserve">
+    <value>upload</value>
+  </data>
+  <data name="API_PARAM_USERNAME" xml:space="preserve">
+    <value>username</value>
+  </data>
+  <data name="API_RECENT_PROJECTS" xml:space="preserve">
+    <value>projects/recent.json?limit={0}&amp;offset={1}</value>
+  </data>
+  <data name="API_REQUEST_LIMIT" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="API_SEARCH_PROJECTS" xml:space="preserve">
+    <value>projects/search.json?query={0}&amp;limit={1}&amp;offset={2}</value>
+  </data>
+  <data name="API_UPLOAD" xml:space="preserve">
+    <value>upload/upload.json</value>
+  </data>
+  <data name="POCEKTCODE_BASE_ADDRESS" xml:space="preserve">
+    <value>https://pocketcode.org/</value>
   </data>
 </root>
