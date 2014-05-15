@@ -142,7 +142,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
       <AdditionalLibraryDirectories>$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -256,7 +256,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_arm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_arm.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
       <AdditionalLibraryDirectories>$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -337,6 +337,7 @@
     <ClInclude Include="lodepng.h" />
     <ClInclude Include="lodepng_util.h" />
     <ClInclude Include="Look.h" />
+    <ClInclude Include="LoudnessCapture.h" />
     <ClInclude Include="NextLookBrick.h" />
     <ClInclude Include="PlaceAtBrick.h" />
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -370,6 +371,7 @@
     <ClInclude Include="UserVariable.h" />
     <ClInclude Include="VariableManagementBrick.h" />
     <ClInclude Include="WaitBrick.h" />
+    <ClInclude Include="WASAPIAudio.h" />
     <ClInclude Include="WhenScript.h" />
     <ClInclude Include="XMLParser.h" />
     <ClInclude Include="PlayerException.h" />
@@ -410,6 +412,7 @@
     <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="lodepng_util.cpp" />
     <ClCompile Include="Look.cpp" />
+    <ClCompile Include="LoudnessCapture.cpp" />
     <ClCompile Include="NextLookBrick.cpp" />
     <ClCompile Include="PlaceAtBrick.cpp" />
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
@@ -444,6 +447,7 @@
     <ClCompile Include="UserVariable.cpp" />
     <ClCompile Include="VariableManagementBrick.cpp" />
     <ClCompile Include="WaitBrick.cpp" />
+    <ClCompile Include="WASAPIAudio.cpp" />
     <ClCompile Include="WhenScript.cpp" />
     <ClCompile Include="XMLParser.cpp" />
     <ClCompile Include="PlayerException.cpp" />

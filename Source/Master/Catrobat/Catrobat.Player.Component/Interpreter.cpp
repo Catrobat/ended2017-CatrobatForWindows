@@ -26,6 +26,9 @@ Interpreter::Interpreter()
 	m_accelerometerProvider = new AccelerometerProvider();
     m_compassProvider = new CompassProvider();
 	m_inclinationProvider = ref new InclinationProvider();
+	m_loudnessProvider = ref new LoudnessCapture();
+
+	//m_loudnessProvider->StartCapture();
 }
 
 double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
@@ -83,26 +86,6 @@ bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree, Object *object)
     else
         return false;
 }
-
-//void Interpreter::ReadAcceleration()
-//{
-//    // Reading Accelerometer Data
-//    if (m_accelerometer != nullptr)
-//    {
-//        try
-//        {
-//            m_accReading = m_accelerometer->GetCurrentReading();
-//            Platform::String ^acceleration = L"Acceleration: " + "X: " + m_accReading->AccelerationX + " Y: " + m_accReading->AccelerationY + " Z: " + m_accReading->AccelerationZ;
-//        }
-//        catch(Platform::Exception^ e)
-//        {
-//            // there is a bug tracking this issue already
-//            // we need to remove this try\catch once the bug # 158858 hits our branch
-//            // For now, to make this App work, catching the exception
-//            // The reverting is tracked by WP8 # 159660
-//        }
-//    }
-//}
 
 float Interpreter::ReadCompass()
 {
@@ -202,7 +185,7 @@ double Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
 		break;
 	case Operator::SMALLER_OR_EQUAL:
 		if (this->TestChilds(tree, Childs::LeftAndRightChild))
-			if (leftValue >= rightValue)
+			if (leftValue <= rightValue)
 				returnValue = 1.0;
 			else
 				returnValue = 0.0;
@@ -348,7 +331,7 @@ double Interpreter::InterpretSensor(FormulaTree *tree, Object *object)
 		returnValue = m_accelerometerProvider->GetZ();
 		break;
 	case Sensor::LOUDNESS:
-		returnValue = 1.0; //TODO: change for reading loudness sensor. 
+		returnValue = m_loudnessProvider->GetLoudness();
 		break;
 	default:
 		returnValue = 0;
