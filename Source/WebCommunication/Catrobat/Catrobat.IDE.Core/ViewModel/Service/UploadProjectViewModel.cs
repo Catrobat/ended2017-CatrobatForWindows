@@ -7,6 +7,8 @@ using GalaSoft.MvvmLight.Messaging;
 using Catrobat.IDE.Core.Utilities.JSON;
 using System.Threading.Tasks;
 
+using Catrobat.IDE.Core.ViewModel.Main;
+
 
 namespace Catrobat.IDE.Core.ViewModel.Service
 {
@@ -18,6 +20,7 @@ namespace Catrobat.IDE.Core.ViewModel.Service
         private string _projectDescription;
         private CatrobatContextBase _context;
         private Project _currentProject;
+        private MessageboxResult _uploadErrorCallbackResult;
 
         #endregion
 
@@ -104,16 +107,24 @@ namespace Catrobat.IDE.Core.ViewModel.Service
         private void InitializeAction()
         {
             if (Context != null)
+            {
                 ProjectName = CurrentProject.ProjectHeader.ProgramName;
+                ProjectDescription = CurrentProject.ProjectHeader.Description;
+            }
             else
+            {
                 ProjectName = "";
+                ProjectDescription = "";
+            }
         }
 
         private async void UploadAction()
         {
             await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
+            CurrentProject.ProjectHeader.Description = ProjectDescription;
+            await App.SaveContext(CurrentProject);
 
-            Task<JSONStatusResponse> upload_task = CatrobatWebCommunicationService.AsyncUploadProject(_projectName, _projectDescription, 
+            Task<JSONStatusResponse> upload_task = CatrobatWebCommunicationService.AsyncUploadProject(ProjectName, _projectDescription, 
                                                           Context.CurrentUserName,
                                                           ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName,
                                                           Context.CurrentToken);
@@ -121,17 +132,18 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             var message = new MessageBase();
             Messenger.Default.Send(message, ViewModelMessagingToken.UploadProjectStartedListener);
 
-            ServiceLocator.NavigationService.RemoveBackEntry();
-            //base.GoBackAction();
-            //TODO Navigation back onto the MainViewModel
+            base.GoBackAction();
 
             JSONStatusResponse status_response = await upload_task;
 
-            // TODO produce correct error message (evt. rollback)
-            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_ProjectNotValid,
-                        status_response.answer, null, MessageBoxOptions.Ok);
+            if (status_response.statusCode != StatusCodes.ServerResponseTokenOk)
+            {
+                string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
+                                       string.Format(AppResources.Main_UploadProjectError, status_response.answer);
 
-
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
+                            messageString, UploadErrorCallback, MessageBoxOptions.Ok);
+            }
             if (CatrobatWebCommunicationService.NoUploadsPending())
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
@@ -141,8 +153,8 @@ namespace Catrobat.IDE.Core.ViewModel.Service
 
         private void CancelAction()
         {
-            ServiceLocator.NavigationService.RemoveBackEntry();
-            base.GoBackAction();
+            ResetViewModel();
+            ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
         }
 
         protected override void GoBackAction()
@@ -179,6 +191,11 @@ namespace Catrobat.IDE.Core.ViewModel.Service
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedChangedAction);
         }
 
+        #region Callbacks
+        private void UploadErrorCallback(MessageboxResult result)
+        {
+            _uploadErrorCallbackResult = result;
+        }
 
         //private void UploadCallback(bool successful)
         //{
@@ -189,6 +206,8 @@ namespace Catrobat.IDE.Core.ViewModel.Service
         //            AppResources.Main_NoUploadsPending, ToastNotificationTime.Short);
         //    }
         //}
+        #endregion
+
 
         public void ResetViewModel()
         {

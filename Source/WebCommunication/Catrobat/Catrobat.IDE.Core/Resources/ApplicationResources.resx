@@ -126,15 +126,6 @@
   <data name="ProjectLicenseUrl" xml:space="preserve">
     <value>http://catroid.org/catroid/projectlicense</value>
   </data>
-  <data name="PROJECT_CHECKSUM_TAG" xml:space="preserve">
-    <value>fileChecksum</value>
-  </data>
-  <data name="PROJECT_DESCRIPTION_TAG" xml:space="preserve">
-    <value>projectDescription</value>
-  </data>
-  <data name="PROJECT_NAME_TAG" xml:space="preserve">
-    <value>projectTitle</value>
-  </data>
   <data name="API_PARAM_REG_COUNTRY" xml:space="preserve">
     <value>registrationCountry</value>
   </data>

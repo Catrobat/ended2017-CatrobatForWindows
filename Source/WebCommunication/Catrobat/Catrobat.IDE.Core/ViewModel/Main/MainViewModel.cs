@@ -635,9 +635,12 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
                 IsLoadingOnlineProjects = false;
 
-                foreach (OnlineProjectHeader header in projects)
+                if (projects != null)
                 {
-                    _onlineProjects.Add(header);
+                    foreach (OnlineProjectHeader header in projects)
+                    {
+                        _onlineProjects.Add(header);
+                    }
                 }
             }  
         }

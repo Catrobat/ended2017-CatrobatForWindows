@@ -322,6 +322,7 @@
     <Compile Include="ViewModel\Main\TileGeneratorViewModel.cs" />
     <Compile Include="ViewModel\Service\OnlineProjectViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectLoadingViewModel.cs" />
+    <Compile Include="ViewModel\Service\UploadProjectRegisterViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectLoginViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectViewModel.cs" />
     <Compile Include="ViewModel\Settings\SettingsBrickViewModel.cs" />

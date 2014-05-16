@@ -233,33 +233,6 @@ namespace Catrobat.IDE.Core.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die fileChecksum ähnelt.
-        /// </summary>
-        public static string PROJECT_CHECKSUM_TAG {
-            get {
-                return ResourceManager.GetString("PROJECT_CHECKSUM_TAG", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die projectDescription ähnelt.
-        /// </summary>
-        public static string PROJECT_DESCRIPTION_TAG {
-            get {
-                return ResourceManager.GetString("PROJECT_DESCRIPTION_TAG", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die projectTitle ähnelt.
-        /// </summary>
-        public static string PROJECT_NAME_TAG {
-            get {
-                return ResourceManager.GetString("PROJECT_NAME_TAG", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die http://catroid.org/catroid/projectlicense ähnelt.
         /// </summary>
         public static string ProjectLicenseUrl {
