@@ -5,6 +5,7 @@
 #include "CompassProvider.h"
 #include "InclinationProvider.h"
 #include "AccelerometerProvider.h"
+#include "LoudnessCapture.h"
 
 class FormulaTree;
 
@@ -61,4 +62,5 @@ private:
     CompassProvider* m_compassProvider;
 	InclinationProvider^ m_inclinationProvider;
 	AccelerometerProvider* m_accelerometerProvider;
+	LoudnessCapture^ m_loudnessProvider;
 };
