@@ -570,8 +570,8 @@
   <data name="Main_ButtonEdit" xml:space="preserve">
     <value>Bearbeiten</value>
   </data>
-  <data name="Main_ButtonLoginRegister" xml:space="preserve">
-    <value>Einloggen / Registrieren</value>
+  <data name="Main_ButtonLogin" xml:space="preserve">
+    <value>Einloggen</value>
   </data>
   <data name="Main_ButtonPasswordForgotten" xml:space="preserve">
     <value>Password vergessen</value>
@@ -694,7 +694,7 @@
     <value>PROGRAMM HOCHLADEN</value>
   </data>
   <data name="Main_TitleUploadProjectLogin" xml:space="preserve">
-    <value>EINLOGGEN ODER REGISTRIEREN</value>
+    <value>EINLOGGEN</value>
   </data>
   <data name="Main_UploadProjectLoginError" xml:space="preserve">
     <value>Login Fehler. {0}</value>
@@ -967,5 +967,20 @@
   </data>
   <data name="Main_Settings" xml:space="preserve">
     <value>Einstellungen</value>
+  </data>
+  <data name="Main_ButtonLoginRegister" xml:space="preserve">
+    <value>Einloggen / Registrieren</value>
+  </data>
+  <data name="Main_ButtonRegister" xml:space="preserve">
+    <value>Registrieren</value>
+  </data>
+  <data name="Main_TitleUploadProjectRegister" xml:space="preserve">
+    <value>REGISTRIEREN</value>
+  </data>
+  <data name="Main_UploadProjectError" xml:space="preserve">
+    <value>Upload Fehler. {0}</value>
+  </data>
+  <data name="Main_UploadProjectErrorCaption" xml:space="preserve">
+    <value>Upload fehlgeschlagen</value>
   </data>
 </root>

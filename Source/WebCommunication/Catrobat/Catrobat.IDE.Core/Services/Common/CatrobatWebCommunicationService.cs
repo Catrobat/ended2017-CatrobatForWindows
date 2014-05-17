@@ -48,7 +48,8 @@ namespace Catrobat.IDE.Core.Services.Common
             // TODO exception handling
             using (var http_client = new HttpClient())
             {
-                http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
+                //http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
+                http_client.BaseAddress = new Uri("https://pocketcode.org/api/");
                 //http_client.DefaultRequestHeaders.Accept.Clear();
                 //http_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -400,7 +401,7 @@ namespace Catrobat.IDE.Core.Services.Common
         public static async Task<JSONStatusResponse> AsyncUploadProject(string projectTitle, string projectDescription, string username,
                 string language, string token/*, UploadProjectEvent callback*/)
         {
-            // TODO exception handling - e.g use language if set (does it has a effect)
+            // TODO exception handling
             // TODO remove unused parameters
 
             var parameters = new List<KeyValuePair<string, string>>() { 
@@ -438,10 +439,11 @@ namespace Catrobat.IDE.Core.Services.Common
                     //{
                     //    FileName = projectTitle + ".catrobat"
                     //};
+                    file_content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/zip");
                     post_parameters.Add(file_content, String.Format("\"{0}\"", ApplicationResources.API_PARAM_UPLOAD), String.Format("\"{0}\"", projectTitle + ApplicationResources.EXTENSION));
 
 
-                    // TODO _uploadCounter++ -concern
+                    _uploadCounter++;
                     using (var http_client = new HttpClient())
                     {
                         http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
@@ -479,7 +481,7 @@ namespace Catrobat.IDE.Core.Services.Common
                             return status_response;
                         }
 
-                        // TODO _uploadCounter--
+                        _uploadCounter--;
                         // TODO HTTP Request failed-error
                         return null;
                     }
@@ -489,15 +491,12 @@ namespace Catrobat.IDE.Core.Services.Common
 
         }
 
-
-
-
-        // TODO: additional function - is maybe displaced
         public static bool NoUploadsPending()
         {
             return _uploadCounter == 0;
         }
 
+        // TODO: additional function - is maybe displaced
         public static DateTime ConvertUnixTimeStamp(double timestamp)
         {
             var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);

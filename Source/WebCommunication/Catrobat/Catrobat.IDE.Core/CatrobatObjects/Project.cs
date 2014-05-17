@@ -170,13 +170,16 @@ namespace Catrobat.IDE.Core.CatrobatObjects
 
         public async Task SetProgramNameAndRenameDirectory(string newProgramName)
         {
-            using (var storage = StorageSystem.GetStorage())
+            if (ProjectHeader.ProgramName != newProgramName)
             {
-                await storage.RenameDirectoryAsync("Projects/" + ProjectHeader.ProgramName, newProgramName);
-            }
+                using (var storage = StorageSystem.GetStorage())
+                {
+                    await storage.RenameDirectoryAsync("Projects/" + ProjectHeader.ProgramName, newProgramName);
+                }
 
-            ProjectHeader.SetProgramName(newProgramName);
-            RaisePropertyChanged(() => ProjectHeader);
+                ProjectHeader.SetProgramName(newProgramName);
+                RaisePropertyChanged(() => ProjectHeader);
+            }
         }
 
         protected override sealed void LoadFromXML(string xml)

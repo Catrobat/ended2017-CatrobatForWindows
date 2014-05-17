@@ -357,6 +357,9 @@
     <Compile Include="Views\Service\OnlineProjectView.xaml.cs">
       <DependentUpon>OnlineProjectView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Service\UploadProjectRegisterView.xaml.cs">
+      <DependentUpon>UploadProjectRegisterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Service\UploadProjectLoginView.xaml.cs">
       <DependentUpon>UploadProjectLoginView.xaml</DependentUpon>
     </Compile>
@@ -611,6 +614,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Service\OnlineProjectView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Service\UploadProjectRegisterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
