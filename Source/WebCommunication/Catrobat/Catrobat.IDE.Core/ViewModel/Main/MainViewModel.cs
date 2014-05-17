@@ -409,7 +409,6 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             ServiceLocator.NavigationService.NavigateTo<UploadProjectLoadingViewModel>();
 
             // Determine which page to open
-            //Task.Run(() => CatrobatWebCommunicationService.CheckToken(Context.CurrentUserName, Context.CurrentToken, CheckTokenEvent));
             bool registered = await CatrobatWebCommunicationService.AsyncCheckToken(Context.CurrentUserName, Context.CurrentToken);
 
             if (registered)
@@ -536,27 +535,6 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         #region MessageBoxCallback
 
-        //private void LoadOnlineProjectsCallback(string filterText, List<OnlineProjectHeader> projects, bool append)
-        //{
-        //    lock (OnlineProjects)
-        //    {
-        //        if (FilterText != filterText && !append)
-        //            return;
-
-        //        if (!append)
-        //        {
-        //            _onlineProjects.Clear();
-        //        }
-
-        //        IsLoadingOnlineProjects = false;
-
-        //        foreach (OnlineProjectHeader header in projects)
-        //        {
-        //            _onlineProjects.Add(header);
-        //        }
-        //    }
-        //}
-
         private async void DeleteProjectMessageCallback(MessageboxResult result)
         {
             _dialogResult = result;
@@ -619,8 +597,6 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                 _onlineProjects.Clear();
 
             _previousFilterText = _filterText;
-
-            //CatrobatWebCommunicationService.LoadOnlineProjects(isAppend, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
             List<OnlineProjectHeader> projects = await CatrobatWebCommunicationService.AsyncLoadOnlineProjects(isAppend, _filterText, _onlineProjects.Count);
 
             lock (OnlineProjects)
@@ -629,10 +605,8 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                     return;
 
                 if (!isAppend)
-                {
                     _onlineProjects.Clear();
-                }
-
+                
                 IsLoadingOnlineProjects = false;
 
                 if (projects != null)
@@ -644,26 +618,6 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                 }
             }  
         }
-
-        //private void CheckTokenEvent(bool registered)
-        //{
-        //    if (registered)
-        //    {
-        //        ServiceLocator.DispatcherService.RunOnMainThread(() =>
-        //        {
-        //            ServiceLocator.NavigationService.NavigateTo<UploadProjectViewModel>();
-        //            ServiceLocator.NavigationService.RemoveBackEntry();
-        //        });
-        //    }
-        //    else
-        //    {
-        //        ServiceLocator.DispatcherService.RunOnMainThread(() =>
-        //        {
-        //            ServiceLocator.NavigationService.NavigateTo<UploadProjectLoginViewModel>();
-        //            ServiceLocator.NavigationService.RemoveBackEntry();
-        //        });
-        //    }
-        //}
 
         #region PropertyChanges
 
