@@ -1,21 +1,10 @@
 ﻿using System;
+using Catrobat.IDE.Core.Resources;
 
 namespace Catrobat.IDE.Core.CatrobatObjects
 {
     public class OnlineProjectHeader
     {
-        //public string ProjectName { get; set; }
-        //public string Author { get; set; }
-        //public string Description { get; set; }
-        //public DateTime Uploaded { get; set; }
-        //public string Version { get; set; }
-        //public int Views { get; set; }
-        //public int Downloads { get; set; }
-        //public string ScreenshotSmallUrl { get; set; }
-        //public string ScreenshotBigUrl { get; set; }
-        //public string ProjectUrl { get; set; }
-        //public string DownloadUrl { get; set; }
-
         private string _screenshotBig;
         private string _screenshotSmall;
 
@@ -30,8 +19,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             }
             set 
             {
-                // TODO switch to ApplicationResources or use BaseUrl from Catrobatinformation-class
-                _screenshotBig = "https://pocketcode.org/" + value;
+                _screenshotBig = ApplicationResources.POCEKTCODE_BASE_ADDRESS + value;
             }
         }
         public string ScreenshotSmall 
@@ -42,8 +30,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             }
             set
             {
-                // TODO switch to ApplicationResources or use BaseUrl from Catrobatinformation-class
-                _screenshotSmall = "https://pocketcode.org/" + value;
+                _screenshotSmall = ApplicationResources.POCEKTCODE_BASE_ADDRESS + value;
             } 
         }
         public string Author { get; set; }

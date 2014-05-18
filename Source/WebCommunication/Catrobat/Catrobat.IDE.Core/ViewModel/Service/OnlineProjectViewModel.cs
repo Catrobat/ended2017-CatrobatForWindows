@@ -130,8 +130,6 @@ namespace Catrobat.IDE.Core.ViewModel.Service
 
         private void OnLoadAction(OnlineProjectHeader dataContext)
         {
-            // TODO move unix time stamp conversion somewhere else
-            //UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectUploadedBy, dataContext.UploadedString);
             UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectUploadedBy, CatrobatWebCommunicationService.ConvertUnixTimeStamp(Convert.ToDouble(dataContext.Uploaded.Split('.')[0])));
             VersionLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectVersion, dataContext.Version);
             ViewsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectViews, dataContext.Views);
@@ -142,7 +140,6 @@ namespace Catrobat.IDE.Core.ViewModel.Service
         private async void DownloadAction(OnlineProjectHeader onlineProjectHeader)
         {
             ButtonDownloadIsEnabled = false;
-            //CatrobatWebCommunicationService.DownloadAndSaveProject(onlineProjectHeader.DownloadUrl, onlineProjectHeader.ProjectName, DownloadCallback);
             Task<CatrobatVersionConverter.VersionConverterError> download_task =  CatrobatWebCommunicationService.AsyncDownloadAndSaveProject(onlineProjectHeader.DownloadUrl, onlineProjectHeader.ProjectName);
 
             var projectChangedMessage = new MessageBase();
@@ -212,34 +209,6 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
-
-
-        //private void DownloadCallback(string filename, CatrobatVersionConverter.VersionConverterError error)
-        //{
-        //    var message = new MessageBase();
-        //    Messenger.Default.Send(message, ViewModelMessagingToken.LocalProjectsChangedListener);
-
-        //    if (error != CatrobatVersionConverter.VersionConverterError.NoError)
-        //    {
-        //        switch (error)
-        //        {
-        //            case CatrobatVersionConverter.VersionConverterError.VersionNotSupported:
-        //                ServiceLocator.NotifictionService.ShowToastNotification(null,
-        //                    AppResources.Main_VersionIsNotSupported, ToastNotificationTime.Medeum);
-
-        //                break;
-        //            case CatrobatVersionConverter.VersionConverterError.ProjectCodeNotValid:
-        //                ServiceLocator.NotifictionService.ShowToastNotification(null,
-        //                    AppResources.Main_ProjectNotValid, ToastNotificationTime.Medeum);
-        //                break;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        ServiceLocator.NotifictionService.ShowToastNotification(null,
-        //            AppResources.Main_NoDownloadsPending, ToastNotificationTime.Short);
-        //    }
-        //}
 
 
         private void ResetViewModel()

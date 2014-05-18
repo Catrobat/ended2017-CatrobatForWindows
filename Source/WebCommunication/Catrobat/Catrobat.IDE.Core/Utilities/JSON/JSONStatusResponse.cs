@@ -10,20 +10,6 @@ namespace Catrobat.IDE.Core.Utilities.JSON
         ServerResponseRegistrationFailed = 602
     };
 
-    //[DataContract]
-    //public class JSONStatusResponse
-    //{
-    //    [DataMember(Name = "statusCode")]
-    //    public StatusCodes StatusCode { get; set; }
-
-    //    [DataMember(Name = "answer")]
-    //    public string StatusMessage { get; set; }
-
-    //    [DataMember(Name = "preHeaderMessages")]
-    //    public string PreHeaderMessage { get; set; }
-    //}
-
-
     public class JSONStatusResponse
     {
         public string token { get; set; }

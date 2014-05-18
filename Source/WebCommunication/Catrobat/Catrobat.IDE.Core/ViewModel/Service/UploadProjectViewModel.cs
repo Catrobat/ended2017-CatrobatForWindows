@@ -6,7 +6,6 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Catrobat.IDE.Core.Utilities.JSON;
 using System.Threading.Tasks;
-
 using Catrobat.IDE.Core.ViewModel.Main;
 
 
@@ -196,16 +195,6 @@ namespace Catrobat.IDE.Core.ViewModel.Service
         {
             _uploadErrorCallbackResult = result;
         }
-
-        //private void UploadCallback(bool successful)
-        //{
-            
-        //    if (CatrobatWebCommunicationService.NoUploadsPending())
-        //    {
-        //        ServiceLocator.NotifictionService.ShowToastNotification(null,
-        //            AppResources.Main_NoUploadsPending, ToastNotificationTime.Short);
-        //    }
-        //}
         #endregion
 
 

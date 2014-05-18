@@ -12,9 +12,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Main;
 using Microsoft.Phone.Controls;
-
-//by Phil
-using System.Diagnostics;
+//using System.Diagnostics;
 
 namespace Catrobat.IDE.Phone.Views.Main
 {
@@ -189,7 +187,7 @@ namespace Catrobat.IDE.Phone.Views.Main
                     //if ((e.Container.Content as OnlineProjectHeader).Equals(LongListSelectorOnlineProjects.ItemsSource[LongListSelectorOnlineProjects.ItemsSource.Count - offsetKnob]))
                     if (LongListSelectorOnlineProjects.ItemsSource.Count - LongListSelectorOnlineProjects.ItemsSource.IndexOf(currentHeader) <= offsetKnob)
                     {
-                        Debug.WriteLine("Adding 4 new Projects to " + LongListSelectorOnlineProjects.ItemsSource.Count.ToString() + " existing projects");
+                        //Debug.WriteLine("Adding 4 new Projects to " + LongListSelectorOnlineProjects.ItemsSource.Count.ToString() + " existing projects");
                         _viewModel.LoadOnlineProjects(true);
                     }
                 }

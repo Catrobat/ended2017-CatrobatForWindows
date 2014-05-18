@@ -58,12 +58,6 @@ namespace Catrobat.IDE.Core.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public static IServerCommunicationService ServerCommunicationService
-        { get { return GetInstance<IServerCommunicationService>(); } }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-        "CA1822:MarkMembersAsStatic",
-        Justification = "This non-static member is needed for data binding purposes.")]
         public static IImageSourceConversionService ImageSourceConversionService
         { get { return GetInstance<IImageSourceConversionService>(); } }
 

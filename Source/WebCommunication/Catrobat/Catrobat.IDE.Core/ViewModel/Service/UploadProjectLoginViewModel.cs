@@ -97,16 +97,10 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             }
             else
             {
-                //CatrobatWebCommunicationService.RegisterOrCheckToken(_username, _password, _email,
-                //                                         ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName,
-                //                                         RegionInfo.CurrentRegion.TwoLetterISORegionName,
-                //                                         UtilTokenHelper.CalculateToken(_username, _password),
-                //                                         RegisterOrCheckTokenCallback);
                 JSONStatusResponse status_response =  await CatrobatWebCommunicationService.AsyncLoginOrRegister(_username, _password, _email,
                                                              ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName,
                                                              RegionInfo.CurrentRegion.TwoLetterISORegionName);
 
-                //Context.CurrentToken = UtilTokenHelper.CalculateToken(_username, _password);
                 // TODO store values if everything was sucessfull --> error handling (evt. include email here)
                 Context.CurrentToken = status_response.token;
                 Context.CurrentUserName = _username;
@@ -205,41 +199,6 @@ namespace Catrobat.IDE.Core.ViewModel.Service
                 }
             }
         }
-
-        //private void RegisterOrCheckTokenCallback(bool registered, string errorCode, string statusMessage, string token)
-        //{
-        //    //Context.CurrentToken = UtilTokenHelper.CalculateToken(_username, _password);
-        //    // TODO store values if everything was sucessfull --> error handling (evt. include email here)
-        //    Context.CurrentToken = token;
-        //    Context.CurrentUserName = _username;
-
-        //    if (registered)
-        //    {
-        //        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectRegistrationSucessful,
-        //            string.Format(AppResources.Main_UploadProjectWelcome, _username), RegistrationSuccessfulCallback, MessageBoxOptions.Ok);
-        //    }
-        //    else if (errorCode == StatusCodes.ServerResponseTokenOk.ToString())
-        //    {
-        //        if (NavigationCallback != null)
-        //        {
-        //            NavigationCallback();
-        //        }
-        //        else
-        //        {
-        //            //TODO: Throw error because of navigation callback shouldn't be null
-        //            throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
-        //        }
-        //    }
-        //    else //Unknown error
-        //    {
-        //        var messageString = string.IsNullOrEmpty(statusMessage) ? string.Format(AppResources.Main_UploadProjectUndefinedError, errorCode) :
-        //                                string.Format(AppResources.Main_UploadProjectLoginError, statusMessage);
-
-        //        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
-        //            messageString, WrongLoginDataCallback, MessageBoxOptions.Ok);
-        //    }
-        //}
-
         #endregion
 
         private void ResetViewModel()

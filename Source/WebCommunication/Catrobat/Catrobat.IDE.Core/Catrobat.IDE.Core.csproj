@@ -234,7 +234,6 @@
     <Compile Include="Resources\Localization\LocalizedStrings.cs" />
     <Compile Include="Resources\SampleProjectLoader.cs" />
     <Compile Include="Services\Common\CatrobatWebCommunicationService.cs" />
-    <Compile Include="Services\Common\CatrobatWebFormUploadService.cs" />
     <Compile Include="Services\Common\CatrobatZipService.cs" />
     <Compile Include="Services\Common\ProjectImporterService.cs" />
     <Compile Include="UI\ImageDimension.cs" />
@@ -250,7 +249,6 @@
     <Compile Include="Services\IPictureService.cs" />
     <Compile Include="Services\IPlayerLauncherService.cs" />
     <Compile Include="Services\IProjectImporterService.cs" />
-    <Compile Include="Services\IServerCommunicationService.cs" />
     <Compile Include="Services\ISoundPlayerService.cs" />
     <Compile Include="Services\ISoundRecorderService.cs" />
     <Compile Include="Services\ISystemInformationService.cs" />
@@ -279,7 +277,6 @@
     <Compile Include="Utilities\Helpers\WaveHeaderHelper.cs" />
     <Compile Include="Utilities\Helpers\XmlParserTempProjectHelper.cs" />
     <Compile Include="Utilities\Helpers\XPathHelper.cs" />
-    <Compile Include="Utilities\JSON\JSONClassDeserializer.cs" />
     <Compile Include="Utilities\JSON\JSONStatusResponse.cs" />
     <Compile Include="Utilities\MD5.cs" />
     <Compile Include="Utilities\UtilToken.cs" />
