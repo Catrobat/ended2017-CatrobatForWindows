@@ -60,33 +60,43 @@ bool LoudnessCapture::StopCapture()
 
 void LoudnessCapture::StartPeriodicCalculationLoudness()
 {
-	//Thread Dummy
-	/*
-	std::shared_ptr<int> sharedVal = std::make_shared<int>(0);
-	*sharedVal = 0;
+	WasapiComp::WASAPIAudio^ wasapi = this->m_wasapiAudio;
 
 	TimeSpan delay;
-	delay.Duration = 10000000;
+	delay.Duration = 10000000 / 2; // 500 milli sec
 
 	m_timer = ThreadPoolTimer::CreatePeriodicTimer(
-		ref new TimerElapsedHandler([this, sharedVal](ThreadPoolTimer^ source)
+		ref new TimerElapsedHandler([this, wasapi](ThreadPoolTimer^ source)
 	{
-		if (*sharedVal == 59)
+		Platform::Array<unsigned char, 1U>^ buffer = ref new Platform::Array<unsigned char, 1U>(0);
+		int size = wasapi->ReadBytes(&buffer);
+
+		long highest = 0;
+		
+		for (int i = 0; i < size; i++)
 		{
-			*sharedVal = 0;
-			this->UpdateLoudness(*sharedVal);
+			long value = buffer[i];
+			value = value << 8;
+			value += buffer[i + 1];
+			
+			if (value < 0)
+				value *= -1;
+
+			if (highest < value)
+				highest = value;
+
+			i++;
 		}
-		else
-		{
-			*sharedVal += 1;
-			this->UpdateLoudness(*sharedVal);
-		}
-	}), delay, 
+
+		this->UpdateLoudness(highest);
+	
+
+	}), delay,
 		ref new TimerDestroyedHandler([&](ThreadPoolTimer ^ source)
 	{
 		this->UpdateLoudness(0);
 	}));
-	*/
+	
 }
 
 void LoudnessCapture::UpdateLoudness(int value)
