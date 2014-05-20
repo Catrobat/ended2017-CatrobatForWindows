@@ -211,12 +211,6 @@
     <ClCompile Include="DeviceInformation.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="LoudnessCapture.cpp">
-      <Filter>Formula</Filter>
-    </ClCompile>
-    <ClCompile Include="WASAPIAudio.cpp">
-      <Filter>Formula</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -437,12 +431,6 @@
     </ClInclude>
     <ClInclude Include="DeviceInformation.h">
       <Filter>Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="LoudnessCapture.h">
-      <Filter>Formula</Filter>
-    </ClInclude>
-    <ClInclude Include="WASAPIAudio.h">
-      <Filter>Formula</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
