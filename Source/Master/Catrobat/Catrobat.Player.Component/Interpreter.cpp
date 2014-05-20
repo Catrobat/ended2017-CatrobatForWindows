@@ -31,6 +31,11 @@ Interpreter::Interpreter()
 	//m_loudnessProvider->StartCapture();
 }
 
+Interpreter::~Interpreter()
+{
+	//m_loudnessProvider->StopCapture();
+}
+
 double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
 {
     Type type = tree->GetType();
