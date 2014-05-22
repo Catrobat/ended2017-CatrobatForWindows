@@ -4,6 +4,7 @@ using System.Reflection;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModels;
 
 namespace Catrobat.IDE.Store.Services
 {
@@ -28,9 +29,9 @@ namespace Catrobat.IDE.Store.Services
 
             Type pageType = null;
 
-            if (type.GetTypeInfo().BaseType == typeof(Core.ViewModel.ViewModelBase))
+            if (type.GetTypeInfo().BaseType == typeof(ViewModelBase))
             {
-                var viewModelInstance = (Core.ViewModel.ViewModelBase)ServiceLocator.GetInstance(type);
+                var viewModelInstance = (ViewModelBase)ServiceLocator.GetInstance(type);
 
                 if (viewModelInstance.SkipAndNavigateTo != null)
                     type = viewModelInstance.SkipAndNavigateTo;
@@ -40,7 +41,7 @@ namespace Catrobat.IDE.Store.Services
                 if (pageType == null)
                 {
                     var viewModelName = type.GetTypeInfo().AssemblyQualifiedName.Split(',').First();
-                    var viewName = viewModelName.Replace("Catrobat.IDE.Core.ViewModel", "Catrobat.IDE.Store.Views");
+                    var viewName = viewModelName.Replace("Catrobat.IDE.Core.ViewModels", "Catrobat.IDE.Store.Views");
                     viewName = viewName.Replace("ViewModel", "View");
                     pageType = Type.GetType(viewName);
                 }

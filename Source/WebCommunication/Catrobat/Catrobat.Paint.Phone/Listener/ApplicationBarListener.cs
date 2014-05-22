@@ -30,7 +30,6 @@ namespace Catrobat.Paint.Phone.Listener
         public void SliderThickness_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             PocketPaintApplication.GetInstance().PaintData.ThicknessSelected = Convert.ToInt32(e.NewValue);
-
         }
 
         public void BtnColBtnSelectedColor_OnClick(object sender, EventArgs e)
@@ -54,5 +53,6 @@ namespace Catrobat.Paint.Phone.Listener
             }
          
         }
+
     }
 }

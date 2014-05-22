@@ -9,12 +9,12 @@ using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
-using Catrobat.IDE.Core.ViewModel.Editor.Scripts;
-using Catrobat.IDE.Core.ViewModel.Editor.Sounds;
-using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using Windows.UI.Xaml.Controls;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModels.Editor.Scripts;
+using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
+using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using GalaSoft.MvvmLight.Messaging;
 
 

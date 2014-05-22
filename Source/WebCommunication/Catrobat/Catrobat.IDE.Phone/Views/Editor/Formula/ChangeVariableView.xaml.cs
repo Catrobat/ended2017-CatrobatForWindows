@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Editor.Formula;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Editor.Formula;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Formula
@@ -26,12 +26,6 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
         {
             _viewModel.InitializeCommand.Execute(null);
         }
-
-        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            _viewModel.GoBackCommand.Execute(null);
-        }
-
 
         private void TextBoxVariableName_OnTextChanged(object sender, TextChangedEventArgs e)
         {

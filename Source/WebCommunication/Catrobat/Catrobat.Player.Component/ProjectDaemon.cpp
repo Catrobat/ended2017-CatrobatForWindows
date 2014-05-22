@@ -79,7 +79,7 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 
 			return folder->GetFileAsync(filename);
 		}
-		catch (Exception^ e)
+		catch (Platform::Exception^ e)
 		{
 			throw new PlayerException(&e, "Specified Path could not be found [" + Helper::ConvertPlatformStringToString(path) + "].");
 		}
@@ -93,7 +93,7 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 			string pathString = Helper::ConvertPlatformStringToString(file->Path);
 			return pathString;
 		}
-		catch (Exception^ e)
+        catch (Platform::Exception^ e)
 		{
 			throw new PlayerException(&e, "Specified file could not be found [" + Constants::Player::xmlFileName + "].");
 		}
@@ -132,7 +132,7 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 		{
 			this->AddDebug(Helper::ConvertStringToPlatformString(e->GetErrorMessage()));
 		}
-		catch (Exception ^e)
+        catch (Platform::Exception ^e)
 		{
 			this->AddDebug(e->Message);
 		}

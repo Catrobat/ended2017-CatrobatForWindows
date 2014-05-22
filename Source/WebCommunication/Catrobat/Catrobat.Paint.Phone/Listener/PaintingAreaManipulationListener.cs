@@ -63,7 +63,9 @@ namespace Catrobat.Paint.Phone.Listener
                case ToolType.Zoom:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(movezoom);
                     break;
-
+               case ToolType.Line:
+                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
+                    break;
 
             }
         }

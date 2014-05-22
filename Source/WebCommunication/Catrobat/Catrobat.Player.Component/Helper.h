@@ -1,14 +1,12 @@
 #pragma once
 #include <string>
 
-using namespace std;
-using namespace Platform;
-
 class Helper
 {
 public:
-    static string ConvertPlatformStringToString(String^ input);
-    static String^ ConvertStringToPlatformString(string input);
-    static string RetrieveClassName(string input);
+    static std::string ConvertPlatformStringToString(Platform::String^ input);
+    static Platform::String^ ConvertStringToPlatformString(std::string input);
+    static std::string RetrieveClassName(std::string input);
+    static bool ConvertStringToDouble(std::string s, double* d);
 };
 

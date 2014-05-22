@@ -701,6 +701,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New ähnelt.
+        /// </summary>
+        public static string Editor_AddGlobalVariable {
+            get {
+                return ResourceManager.GetString("Editor_AddGlobalVariable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New ähnelt.
+        /// </summary>
+        public static string Editor_AddLocalVariable {
+            get {
+                return ResourceManager.GetString("Editor_AddLocalVariable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die add ähnelt.
         /// </summary>
         public static string Editor_AppbarAdd {
@@ -728,7 +746,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die add program variable ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die add global variable ähnelt.
         /// </summary>
         public static string Editor_ButtonAddGlobalVariable {
             get {
@@ -737,7 +755,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die add object variable ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die add local variable ähnelt.
         /// </summary>
         public static string Editor_ButtonAddLocalVariable {
             get {
@@ -787,6 +805,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Editor_ButtonCancel {
             get {
                 return ResourceManager.GetString("Editor_ButtonCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die rename ähnelt.
+        /// </summary>
+        public static string Editor_ButtonChange {
+            get {
+                return ResourceManager.GetString("Editor_ButtonChange", resourceCulture);
             }
         }
         
@@ -863,7 +890,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Click &apos;+&apos; to add a new action. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tap &apos;+&apos; to add a new action. ähnelt.
         /// </summary>
         public static string Editor_ClickPlusToAddAction {
             get {
@@ -872,7 +899,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Click &apos;+&apos; to add a new look. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tap &apos;+&apos; to add a new look. ähnelt.
         /// </summary>
         public static string Editor_ClickPlusToAddCostume {
             get {
@@ -881,7 +908,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Click &apos;+&apos; to add a new sound. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tap &apos;+&apos; to add a new sound. ähnelt.
         /// </summary>
         public static string Editor_ClickPlusToAddSound {
             get {
@@ -890,7 +917,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Click &apos;+&apos; to add a new object. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tap &apos;+&apos; to add a new object. ähnelt.
         /// </summary>
         public static string Editor_ClickPlusToAddSprite {
             get {
@@ -926,11 +953,38 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die GlobalVariable ähnelt.
+        /// </summary>
+        public static string Editor_DefaultGlobalVariableName {
+            get {
+                return ResourceManager.GetString("Editor_DefaultGlobalVariableName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die LocalVariable ähnelt.
+        /// </summary>
+        public static string Editor_DefaultLocalVariableName {
+            get {
+                return ResourceManager.GetString("Editor_DefaultLocalVariableName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Description ähnelt.
         /// </summary>
         public static string Editor_Description {
             get {
                 return ResourceManager.GetString("Editor_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Evaluate ähnelt.
+        /// </summary>
+        public static string Editor_Evaluate {
+            get {
+                return ResourceManager.GetString("Editor_Evaluate", resourceCulture);
             }
         }
         
@@ -1250,6 +1304,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Press &quot;back&quot; again to dismiss your changes? ähnelt.
+        /// </summary>
+        public static string Editor_ReallyDismissFormula {
+            get {
+                return ResourceManager.GetString("Editor_ReallyDismissFormula", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Recorded ähnelt.
         /// </summary>
         public static string Editor_Recorded {
@@ -1300,6 +1363,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Editor_RecorderStop {
             get {
                 return ResourceManager.GetString("Editor_RecorderStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Redo ähnelt.
+        /// </summary>
+        public static string Editor_Redo {
+            get {
+                return ResourceManager.GetString("Editor_Redo", resourceCulture);
             }
         }
         
@@ -1403,20 +1475,20 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ProgramVariable ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Start sensors ähnelt.
         /// </summary>
-        public static string Editor_StandardGlobalVariableName {
+        public static string Editor_StartSensors {
             get {
-                return ResourceManager.GetString("Editor_StandardGlobalVariableName", resourceCulture);
+                return ResourceManager.GetString("Editor_StartSensors", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ObjectVariable ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Stop sensors ähnelt.
         /// </summary>
-        public static string Editor_StandardLocalVariableName {
+        public static string Editor_StopSensors {
             get {
-                return ResourceManager.GetString("Editor_StandardLocalVariableName", resourceCulture);
+                return ResourceManager.GetString("Editor_StopSensors", resourceCulture);
             }
         }
         
@@ -1484,7 +1556,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die CHOOSE PROGRAM VARIABLE NAME ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die CHOOSE GLOBAL VARIABLE NAME ähnelt.
         /// </summary>
         public static string Editor_TitleChooseGlobalVariableName {
             get {
@@ -1493,7 +1565,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die CHOOSE OBJECT VARIABLE NAME ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die CHOOSE LOCAL VARIABLE NAME ähnelt.
         /// </summary>
         public static string Editor_TitleChooseLocalVariableName {
             get {
@@ -1583,6 +1655,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type something ähnelt.
+        /// </summary>
+        public static string Editor_TypeSomething {
+            get {
+                return ResourceManager.GetString("Editor_TypeSomething", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Undo ähnelt.
+        /// </summary>
+        public static string Editor_Undo {
+            get {
+                return ResourceManager.GetString("Editor_Undo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Upload to SkyDrive ähnelt.
         /// </summary>
         public static string Editor_UploadToSkyDrive {
@@ -1601,461 +1691,524 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die acceleration_X ähnelt.
-        /// </summary>
-        public static string Formula_ACCELERATION_X {
-            get {
-                return ResourceManager.GetString("Formula_ACCELERATION_X", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die acceleration_Y ähnelt.
-        /// </summary>
-        public static string Formula_ACCELERATION_Y {
-            get {
-                return ResourceManager.GetString("Formula_ACCELERATION_Y", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die acceleration_Z ähnelt.
-        /// </summary>
-        public static string Formula_ACCELERATION_Z {
-            get {
-                return ResourceManager.GetString("Formula_ACCELERATION_Z", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die brightness ähnelt.
-        /// </summary>
-        public static string Formula_BRIGHTNESS {
-            get {
-                return ResourceManager.GetString("Formula_BRIGHTNESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ) ähnelt.
-        /// </summary>
-        public static string Formula_ClosedBrecket {
-            get {
-                return ResourceManager.GetString("Formula_ClosedBrecket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die compass_direction ähnelt.
-        /// </summary>
-        public static string Formula_COMPASSDIRECTION {
-            get {
-                return ResourceManager.GetString("Formula_COMPASSDIRECTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die . ähnelt.
-        /// </summary>
-        public static string Formula_DecimalPointCharacter {
-            get {
-                return ResourceManager.GetString("Formula_DecimalPointCharacter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die direction ähnelt.
-        /// </summary>
-        public static string Formula_DIRECTION {
-            get {
-                return ResourceManager.GetString("Formula_DIRECTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die / ähnelt.
-        /// </summary>
-        public static string Formula_Divide {
-            get {
-                return ResourceManager.GetString("Formula_Divide", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die abs ähnelt.
-        /// </summary>
-        public static string Formula_FunctionAbs {
-            get {
-                return ResourceManager.GetString("Formula_FunctionAbs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die arccos ähnelt.
-        /// </summary>
-        public static string Formula_FunctionArcCos {
-            get {
-                return ResourceManager.GetString("Formula_FunctionArcCos", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die arcsin ähnelt.
-        /// </summary>
-        public static string Formula_FunctionArcSin {
-            get {
-                return ResourceManager.GetString("Formula_FunctionArcSin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die arctan ähnelt.
-        /// </summary>
-        public static string Formula_FunctionArcTan {
-            get {
-                return ResourceManager.GetString("Formula_FunctionArcTan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die cos ähnelt.
-        /// </summary>
-        public static string Formula_FunctionCos {
-            get {
-                return ResourceManager.GetString("Formula_FunctionCos", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die exp ähnelt.
-        /// </summary>
-        public static string Formula_FunctionExp {
-            get {
-                return ResourceManager.GetString("Formula_FunctionExp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ln ähnelt.
-        /// </summary>
-        public static string Formula_FunctionLn {
-            get {
-                return ResourceManager.GetString("Formula_FunctionLn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die log ähnelt.
-        /// </summary>
-        public static string Formula_FunctionLog {
-            get {
-                return ResourceManager.GetString("Formula_FunctionLog", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die max ähnelt.
-        /// </summary>
-        public static string Formula_FunctionMax {
-            get {
-                return ResourceManager.GetString("Formula_FunctionMax", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die min ähnelt.
-        /// </summary>
-        public static string Formula_FunctionMin {
-            get {
-                return ResourceManager.GetString("Formula_FunctionMin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die mod ähnelt.
-        /// </summary>
-        public static string Formula_FunctionMod {
-            get {
-                return ResourceManager.GetString("Formula_FunctionMod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die pi ähnelt.
-        /// </summary>
-        public static string Formula_FunctionPi {
-            get {
-                return ResourceManager.GetString("Formula_FunctionPi", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die random ähnelt.
-        /// </summary>
-        public static string Formula_FunctionRandom {
-            get {
-                return ResourceManager.GetString("Formula_FunctionRandom", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die round ähnelt.
-        /// </summary>
-        public static string Formula_FunctionRound {
-            get {
-                return ResourceManager.GetString("Formula_FunctionRound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die sin ähnelt.
-        /// </summary>
-        public static string Formula_FunctionSin {
-            get {
-                return ResourceManager.GetString("Formula_FunctionSin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die sqrt ähnelt.
-        /// </summary>
-        public static string Formula_FunctionSqrt {
-            get {
-                return ResourceManager.GetString("Formula_FunctionSqrt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die tan ähnelt.
-        /// </summary>
-        public static string Formula_FunctionTan {
-            get {
-                return ResourceManager.GetString("Formula_FunctionTan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die inclination_X ähnelt.
-        /// </summary>
-        public static string Formula_INCLINATION_X {
-            get {
-                return ResourceManager.GetString("Formula_INCLINATION_X", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die inclination_Y ähnelt.
-        /// </summary>
-        public static string Formula_INCLINATION_Y {
-            get {
-                return ResourceManager.GetString("Formula_INCLINATION_Y", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die layer ähnelt.
-        /// </summary>
-        public static string Formula_LAYER {
-            get {
-                return ResourceManager.GetString("Formula_LAYER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die AND ähnelt.
-        /// </summary>
-        public static string Formula_LogicAnd {
-            get {
-                return ResourceManager.GetString("Formula_LogicAnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die = ähnelt.
-        /// </summary>
-        public static string Formula_LogicEqual {
-            get {
-                return ResourceManager.GetString("Formula_LogicEqual", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die FALSE ähnelt.
         /// </summary>
-        public static string Formula_LogicFalse {
+        public static string Formula_Constant_False {
             get {
-                return ResourceManager.GetString("Formula_LogicFalse", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die &gt; ähnelt.
-        /// </summary>
-        public static string Formula_LogicGreater {
-            get {
-                return ResourceManager.GetString("Formula_LogicGreater", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ≥ ähnelt.
-        /// </summary>
-        public static string Formula_LogicGreaterEqual {
-            get {
-                return ResourceManager.GetString("Formula_LogicGreaterEqual", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die NOT ähnelt.
-        /// </summary>
-        public static string Formula_LogicNot {
-            get {
-                return ResourceManager.GetString("Formula_LogicNot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ≠ ähnelt.
-        /// </summary>
-        public static string Formula_LogicNotEqual {
-            get {
-                return ResourceManager.GetString("Formula_LogicNotEqual", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die OR ähnelt.
-        /// </summary>
-        public static string Formula_LogicOr {
-            get {
-                return ResourceManager.GetString("Formula_LogicOr", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die &lt; ähnelt.
-        /// </summary>
-        public static string Formula_LogicSmaller {
-            get {
-                return ResourceManager.GetString("Formula_LogicSmaller", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ≤ ähnelt.
-        /// </summary>
-        public static string Formula_LogicSmallerEqual {
-            get {
-                return ResourceManager.GetString("Formula_LogicSmallerEqual", resourceCulture);
+                return ResourceManager.GetString("Formula_Constant_False", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die TRUE ähnelt.
         /// </summary>
-        public static string Formula_LogicTrue {
+        public static string Formula_Constant_True {
             get {
-                return ResourceManager.GetString("Formula_LogicTrue", resourceCulture);
+                return ResourceManager.GetString("Formula_Constant_True", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die - ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die abs ähnelt.
         /// </summary>
-        public static string Formula_Minus {
+        public static string Formula_Function_Abs {
             get {
-                return ResourceManager.GetString("Formula_Minus", resourceCulture);
+                return ResourceManager.GetString("Formula_Function_Abs", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die * ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die max ähnelt.
         /// </summary>
-        public static string Formula_Mult {
+        public static string Formula_Function_Max {
             get {
-                return ResourceManager.GetString("Formula_Mult", resourceCulture);
+                return ResourceManager.GetString("Formula_Function_Max", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die object_X ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die min ähnelt.
         /// </summary>
-        public static string Formula_OBJECT_X {
+        public static string Formula_Function_Min {
             get {
-                return ResourceManager.GetString("Formula_OBJECT_X", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die object_Y ähnelt.
-        /// </summary>
-        public static string Formula_OBJECT_Y {
-            get {
-                return ResourceManager.GetString("Formula_OBJECT_Y", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ( ähnelt.
-        /// </summary>
-        public static string Formula_OpenBrecket {
-            get {
-                return ResourceManager.GetString("Formula_OpenBrecket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die , ähnelt.
-        /// </summary>
-        public static string Formula_ParameterSeperator {
-            get {
-                return ResourceManager.GetString("Formula_ParameterSeperator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die + ähnelt.
-        /// </summary>
-        public static string Formula_Plus {
-            get {
-                return ResourceManager.GetString("Formula_Plus", resourceCulture);
+                return ResourceManager.GetString("Formula_Function_Min", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die random ähnelt.
         /// </summary>
-        public static string Formula_Random {
+        public static string Formula_Function_Random {
             get {
-                return ResourceManager.GetString("Formula_Random", resourceCulture);
+                return ResourceManager.GetString("Formula_Function_Random", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die round ähnelt.
+        /// </summary>
+        public static string Formula_Function_Round {
+            get {
+                return ResourceManager.GetString("Formula_Function_Round", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die sqrt ähnelt.
+        /// </summary>
+        public static string Formula_Function_Sqrt {
+            get {
+                return ResourceManager.GetString("Formula_Function_Sqrt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die AND ähnelt.
+        /// </summary>
+        public static string Formula_Operator_And {
+            get {
+                return ResourceManager.GetString("Formula_Operator_And", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die MOD ähnelt.
+        /// </summary>
+        public static string Formula_Operator_Mod {
+            get {
+                return ResourceManager.GetString("Formula_Operator_Mod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die NOT ähnelt.
+        /// </summary>
+        public static string Formula_Operator_Not {
+            get {
+                return ResourceManager.GetString("Formula_Operator_Not", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die OR ähnelt.
+        /// </summary>
+        public static string Formula_Operator_Or {
+            get {
+                return ResourceManager.GetString("Formula_Operator_Or", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die brightness ähnelt.
+        /// </summary>
+        public static string Formula_Property_Brightness {
+            get {
+                return ResourceManager.GetString("Formula_Property_Brightness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die layer ähnelt.
+        /// </summary>
+        public static string Formula_Property_Layer {
+            get {
+                return ResourceManager.GetString("Formula_Property_Layer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die position.X ähnelt.
+        /// </summary>
+        public static string Formula_Property_PositionX {
+            get {
+                return ResourceManager.GetString("Formula_Property_PositionX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die position.Y ähnelt.
+        /// </summary>
+        public static string Formula_Property_PositionY {
+            get {
+                return ResourceManager.GetString("Formula_Property_PositionY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die rotation ähnelt.
+        /// </summary>
+        public static string Formula_Property_Rotation {
+            get {
+                return ResourceManager.GetString("Formula_Property_Rotation", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die size ähnelt.
         /// </summary>
-        public static string Formula_SIZE {
+        public static string Formula_Property_Size {
             get {
-                return ResourceManager.GetString("Formula_SIZE", resourceCulture);
+                return ResourceManager.GetString("Formula_Property_Size", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die transparency ähnelt.
         /// </summary>
-        public static string Formula_TRANSPARENCY {
+        public static string Formula_Property_Transparency {
             get {
-                return ResourceManager.GetString("Formula_TRANSPARENCY", resourceCulture);
+                return ResourceManager.GetString("Formula_Property_Transparency", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die unknown ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die acceleration.X ähnelt.
         /// </summary>
-        public static string Formula_Unknown {
+        public static string Formula_Sensor_AccelerationX {
             get {
-                return ResourceManager.GetString("Formula_Unknown", resourceCulture);
+                return ResourceManager.GetString("Formula_Sensor_AccelerationX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die acceleration.Y ähnelt.
+        /// </summary>
+        public static string Formula_Sensor_AccelerationY {
+            get {
+                return ResourceManager.GetString("Formula_Sensor_AccelerationY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die acceleration.Z ähnelt.
+        /// </summary>
+        public static string Formula_Sensor_AccelerationZ {
+            get {
+                return ResourceManager.GetString("Formula_Sensor_AccelerationZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die compass ähnelt.
+        /// </summary>
+        public static string Formula_Sensor_Compass {
+            get {
+                return ResourceManager.GetString("Formula_Sensor_Compass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die inclination.X ähnelt.
+        /// </summary>
+        public static string Formula_Sensor_InclinationX {
+            get {
+                return ResourceManager.GetString("Formula_Sensor_InclinationX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die inclination.Y ähnelt.
+        /// </summary>
+        public static string Formula_Sensor_InclinationY {
+            get {
+                return ResourceManager.GetString("Formula_Sensor_InclinationY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die loudness ähnelt.
+        /// </summary>
+        public static string Formula_Sensor_Loudness {
+            get {
+                return ResourceManager.GetString("Formula_Sensor_Loudness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add a comma or times sign. ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_ArgumentDoubleValue {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_ArgumentDoubleValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type something.  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_EmptyArgument {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_EmptyArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type something.  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_EmptyParentheses {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_EmptyParentheses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Remove the comma.  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_NonArgumentParameterSeparator {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_NonArgumentParameterSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add a comma.  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_TooFewArguments {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_TooFewArguments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Remove the superfluous argument(s).  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_TooManyArguments {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_TooManyArguments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Remove the unmatched closing parenthesis.  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_UnmatchedClosingParenthesis {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_UnmatchedClosingParenthesis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add the missing closing parenthesis.  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_UnmatchedOpeningParenthesis {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_UnmatchedOpeningParenthesis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add a times sign.  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_DoubleValue {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_DoubleValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add an opening parenthesis. ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Function_Empty {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Function_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type something.  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_NullOrEmpty {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_NullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Remove the double decimal point.  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Number_DoubleDecimalSeparator {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Number_DoubleDecimalSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The number is too large.  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Number_Overflow {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Number_Overflow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Remove the decimal point.  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Number_SingleDecimalSeparator {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Number_SingleDecimalSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type something.  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Operator_EmptyPrefixOperator {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Operator_EmptyPrefixOperator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type something.  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Operator_LeftEmptyInfixOperator {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Operator_LeftEmptyInfixOperator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type something.  ähnelt.
+        /// </summary>
+        public static string FormulaInterpreter_Operator_RightEmptyInfixOperator {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Operator_RightEmptyInfixOperator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add to favorties ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_AddFavorite {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_AddFavorite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Constants ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_Constants {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_Constants", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_DeleteVariable {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_DeleteVariable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Favorites ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_Favorites {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_Favorites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Choose favorites from the other columns.  ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_FavoritesEmpty {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_FavoritesEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Functions ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_Functions {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_Functions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Global ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_GlobalVariables {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_GlobalVariables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Local ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_LocalVariables {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_LocalVariables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Operators ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_Operators {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_Operators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Properties ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_Properties {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_Properties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die History ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_RecentlyUsed {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_RecentlyUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Remove from favorites ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_RemoveFavorite {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_RemoveFavorite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Rename ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_RenameVariable {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_RenameVariable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sensors ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_Sensors {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_Sensors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Variables ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_Variables {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_Variables", resourceCulture);
             }
         }
         

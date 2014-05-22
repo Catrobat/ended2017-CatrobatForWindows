@@ -9,13 +9,13 @@
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Content\Resources.xaml"/>
+        <ResourceDictionary Source="Content/Resources.xaml"/>
         <ResourceDictionary Source="Views/Editor/Scripts/ScriptBrickTemplates.xaml"/>
         <ResourceDictionary Source="Views/Editor/Scripts/ReorderableListBoxStyles.xaml"/>
         <ResourceDictionary Source="Views/Editor/Scripts/ScriptBrickAddData.xaml"/>
         <ResourceDictionary Source="Controls/Buttons/ScreenshotButtonTemplates.xaml"/>
         <ResourceDictionary Source="Controls/Buttons/SettingsButtonTemplates.xaml"/>
-        <ResourceDictionary Source="Controls\FormulaControls\Templates\FormulaTemplates.xaml"/>
+        <ResourceDictionary Source="Controls\Formulas\Templates\FormulaTokenTemplates.xaml"/>
         <ResourceDictionary Source="Converters/ConverterResources.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>

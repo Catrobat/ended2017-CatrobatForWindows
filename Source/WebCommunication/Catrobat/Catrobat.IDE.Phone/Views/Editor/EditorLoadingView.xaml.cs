@@ -2,9 +2,9 @@
 using System.Windows;
 using System.Windows.Navigation;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Editor;
-using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Editor;
+using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDE.Phone.Views.Editor

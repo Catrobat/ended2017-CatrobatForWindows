@@ -1,18 +1,17 @@
 #include "pch.h"
 #include "AccelerometerProvider.h"
 #include "PlayerException.h"
+#include "DeviceInformation.h"
 
 AccelerometerProvider::AccelerometerProvider()
 {
-	if (!Init())
-		throw new PlayerException("init inclination provider failed");
+	if(DeviceInformation::IsRunningOnDevice() && Init() != true)
+		throw new PlayerException("init accelerometer provider failed");
 }
-
 
 AccelerometerProvider::~AccelerometerProvider()
 {
 }
-
 
 bool AccelerometerProvider::Init()
 {

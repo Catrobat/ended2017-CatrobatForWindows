@@ -498,68 +498,47 @@
   <data name="Editor_TitleRecorder" xml:space="preserve">
     <value>RECORD SOUND</value>
   </data>
-  <data name="Formula_ACCELERATION_X" xml:space="preserve">
-    <value>acceleration_X</value>
+  <data name="Formula_Sensor_AccelerationX" xml:space="preserve">
+    <value>acceleration.X</value>
   </data>
-  <data name="Formula_ACCELERATION_Y" xml:space="preserve">
-    <value>acceleration_Y</value>
+  <data name="Formula_Sensor_AccelerationY" xml:space="preserve">
+    <value>acceleration.Y</value>
   </data>
-  <data name="Formula_ACCELERATION_Z" xml:space="preserve">
-    <value>acceleration_Z</value>
+  <data name="Formula_Sensor_AccelerationZ" xml:space="preserve">
+    <value>acceleration.Z</value>
   </data>
-  <data name="Formula_BRIGHTNESS" xml:space="preserve">
+  <data name="Formula_Property_Brightness" xml:space="preserve">
     <value>brightness</value>
   </data>
-  <data name="Formula_ClosedBrecket" xml:space="preserve">
-    <value>)</value>
+  <data name="Formula_Sensor_Compass" xml:space="preserve">
+    <value>compass</value>
   </data>
-  <data name="Formula_COMPASSDIRECTION" xml:space="preserve">
-    <value>compass_direction</value>
+  <data name="Formula_Property_Rotation" xml:space="preserve">
+    <value>rotation</value>
   </data>
-  <data name="Formula_DecimalPointCharacter" xml:space="preserve">
-    <value>.</value>
+  <data name="Formula_Sensor_InclinationX" xml:space="preserve">
+    <value>inclination.X</value>
   </data>
-  <data name="Formula_DIRECTION" xml:space="preserve">
-    <value>direction</value>
+  <data name="Formula_Sensor_InclinationY" xml:space="preserve">
+    <value>inclination.Y</value>
   </data>
-  <data name="Formula_INCLINATION_X" xml:space="preserve">
-    <value>inclination_X</value>
-  </data>
-  <data name="Formula_INCLINATION_Y" xml:space="preserve">
-    <value>inclination_Y</value>
-  </data>
-  <data name="Formula_LAYER" xml:space="preserve">
+  <data name="Formula_Property_Layer" xml:space="preserve">
     <value>layer</value>
   </data>
-  <data name="Formula_LogicEqual" xml:space="preserve">
-    <value>=</value>
-  </data>
-  <data name="Formula_LogicOr" xml:space="preserve">
+  <data name="Formula_Operator_Or" xml:space="preserve">
     <value>OR</value>
   </data>
-  <data name="Formula_OBJECT_X" xml:space="preserve">
-    <value>object_X</value>
+  <data name="Formula_Property_PositionX" xml:space="preserve">
+    <value>position.X</value>
   </data>
-  <data name="Formula_OBJECT_Y" xml:space="preserve">
-    <value>object_Y</value>
+  <data name="Formula_Property_PositionY" xml:space="preserve">
+    <value>position.Y</value>
   </data>
-  <data name="Formula_OpenBrecket" xml:space="preserve">
-    <value>(</value>
-  </data>
-  <data name="Formula_ParameterSeperator" xml:space="preserve">
-    <value>,</value>
-  </data>
-  <data name="Formula_Random" xml:space="preserve">
-    <value>random</value>
-  </data>
-  <data name="Formula_SIZE" xml:space="preserve">
+  <data name="Formula_Property_Size" xml:space="preserve">
     <value>size</value>
   </data>
-  <data name="Formula_TRANSPARENCY" xml:space="preserve">
+  <data name="Formula_Property_Transparency" xml:space="preserve">
     <value>transparency</value>
-  </data>
-  <data name="Formula_Unknown" xml:space="preserve">
-    <value>unknown</value>
   </data>
   <data name="Main_AboutText" xml:space="preserve">
     <value>Pocket Code for Windows Phone is an on-device visual programming system for the Catrobat programming language.</value>
@@ -823,25 +802,25 @@
     <value>NEW</value>
   </data>
   <data name="Editor_ButtonAddGlobalVariable" xml:space="preserve">
-    <value>add program variable</value>
+    <value>add global variable</value>
   </data>
   <data name="Editor_ButtonAddLocalVariable" xml:space="preserve">
-    <value>add object variable</value>
+    <value>add local variable</value>
   </data>
-  <data name="Editor_StandardGlobalVariableName" xml:space="preserve">
-    <value>ProgramVariable</value>
+  <data name="Editor_DefaultGlobalVariableName" xml:space="preserve">
+    <value>GlobalVariable</value>
   </data>
-  <data name="Editor_StandardLocalVariableName" xml:space="preserve">
-    <value>ObjectVariable</value>
+  <data name="Editor_DefaultLocalVariableName" xml:space="preserve">
+    <value>LocalVariable</value>
   </data>
   <data name="Editor_TitleChangeVariableName" xml:space="preserve">
     <value>CHANGE VARIABLE NAME</value>
   </data>
   <data name="Editor_TitleChooseGlobalVariableName" xml:space="preserve">
-    <value>CHOOSE PROGRAM VARIABLE NAME</value>
+    <value>CHOOSE GLOBAL VARIABLE NAME</value>
   </data>
   <data name="Editor_TitleChooseLocalVariableName" xml:space="preserve">
-    <value>CHOOSE OBJECT VARIABLE NAME</value>
+    <value>CHOOSE LOCAL VARIABLE NAME</value>
   </data>
   <data name="Editor_VariableName" xml:space="preserve">
     <value>Variable name</value>
@@ -855,98 +834,39 @@
   <data name="Brick_ForeverLoopEnd" xml:space="preserve">
     <value>end of loop</value>
   </data>
-  <data name="Formula_Divide" xml:space="preserve">
-    <value>/</value>
-    <comment>Alternate: ÷</comment>
-  </data>
-  <data name="Formula_LogicAnd" xml:space="preserve">
+  <data name="Formula_Operator_And" xml:space="preserve">
     <value>AND</value>
   </data>
-  <data name="Formula_LogicFalse" xml:space="preserve">
+  <data name="Formula_Constant_False" xml:space="preserve">
     <value>FALSE</value>
   </data>
-  <data name="Formula_LogicGreater" xml:space="preserve">
-    <value>&gt;</value>
-  </data>
-  <data name="Formula_LogicGreaterEqual" xml:space="preserve">
-    <value>≥</value>
-  </data>
-  <data name="Formula_LogicNot" xml:space="preserve">
+  <data name="Formula_Operator_Not" xml:space="preserve">
     <value>NOT</value>
     <comment>Alternate: ¬</comment>
   </data>
-  <data name="Formula_LogicNotEqual" xml:space="preserve">
-    <value>≠</value>
-  </data>
-  <data name="Formula_LogicSmaller" xml:space="preserve">
-    <value>&lt;</value>
-  </data>
-  <data name="Formula_LogicSmallerEqual" xml:space="preserve">
-    <value>≤</value>
-  </data>
-  <data name="Formula_LogicTrue" xml:space="preserve">
+  <data name="Formula_Constant_True" xml:space="preserve">
     <value>TRUE</value>
   </data>
-  <data name="Formula_Minus" xml:space="preserve">
-    <value>-</value>
-  </data>
-  <data name="Formula_Mult" xml:space="preserve">
-    <value>*</value>
-    <comment>Alternate: •</comment>
-  </data>
-  <data name="Formula_Plus" xml:space="preserve">
-    <value>+</value>
-  </data>
-  <data name="Formula_FunctionAbs" xml:space="preserve">
+  <data name="Formula_Function_Abs" xml:space="preserve">
     <value>abs</value>
   </data>
-  <data name="Formula_FunctionArcCos" xml:space="preserve">
-    <value>arccos</value>
-  </data>
-  <data name="Formula_FunctionArcSin" xml:space="preserve">
-    <value>arcsin</value>
-  </data>
-  <data name="Formula_FunctionArcTan" xml:space="preserve">
-    <value>arctan</value>
-  </data>
-  <data name="Formula_FunctionCos" xml:space="preserve">
-    <value>cos</value>
-  </data>
-  <data name="Formula_FunctionExp" xml:space="preserve">
-    <value>exp</value>
-  </data>
-  <data name="Formula_FunctionLn" xml:space="preserve">
-    <value>ln</value>
-  </data>
-  <data name="Formula_FunctionLog" xml:space="preserve">
-    <value>log</value>
-  </data>
-  <data name="Formula_FunctionMax" xml:space="preserve">
+  <data name="Formula_Function_Max" xml:space="preserve">
     <value>max</value>
   </data>
-  <data name="Formula_FunctionMin" xml:space="preserve">
+  <data name="Formula_Function_Min" xml:space="preserve">
     <value>min</value>
   </data>
-  <data name="Formula_FunctionMod" xml:space="preserve">
-    <value>mod</value>
+  <data name="Formula_Operator_Mod" xml:space="preserve">
+    <value>MOD</value>
   </data>
-  <data name="Formula_FunctionPi" xml:space="preserve">
-    <value>pi</value>
-  </data>
-  <data name="Formula_FunctionRandom" xml:space="preserve">
+  <data name="Formula_Function_Random" xml:space="preserve">
     <value>random</value>
   </data>
-  <data name="Formula_FunctionRound" xml:space="preserve">
+  <data name="Formula_Function_Round" xml:space="preserve">
     <value>round</value>
   </data>
-  <data name="Formula_FunctionSin" xml:space="preserve">
-    <value>sin</value>
-  </data>
-  <data name="Formula_FunctionSqrt" xml:space="preserve">
+  <data name="Formula_Function_Sqrt" xml:space="preserve">
     <value>sqrt</value>
-  </data>
-  <data name="Formula_FunctionTan" xml:space="preserve">
-    <value>tan</value>
   </data>
   <data name="Editor_Rename" xml:space="preserve">
     <value>rename</value>
@@ -967,13 +887,13 @@
     <value>Press "back" again to close the app?</value>
   </data>
   <data name="Editor_ClickPlusToAddAction" xml:space="preserve">
-    <value>Click '+' to add a new action.</value>
+    <value>Tap '+' to add a new action.</value>
   </data>
   <data name="Editor_ClickPlusToAddCostume" xml:space="preserve">
-    <value>Click '+' to add a new look.</value>
+    <value>Tap '+' to add a new look.</value>
   </data>
   <data name="Editor_ClickPlusToAddSound" xml:space="preserve">
-    <value>Click '+' to add a new sound.</value>
+    <value>Tap '+' to add a new sound.</value>
   </data>
   <data name="Editor_ImageEditingProgram" xml:space="preserve">
     <value>Draw</value>
@@ -1018,13 +938,142 @@
     <value>Water</value>
   </data>
   <data name="Editor_ClickPlusToAddSprite" xml:space="preserve">
-    <value>Click '+' to add a new object.</value>
+    <value>Tap '+' to add a new object.</value>
   </data>
   <data name="Main_SetActive" xml:space="preserve">
     <value>Set active</value>
   </data>
   <data name="Main_Settings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Editor_TypeSomething" xml:space="preserve">
+    <value>Type something</value>
+  </data>
+  <data name="Formula_Sensor_Loudness" xml:space="preserve">
+    <value>loudness</value>
+  </data>
+  <data name="Editor_ReallyDismissFormula" xml:space="preserve">
+    <value>Press "back" again to dismiss your changes?</value>
+  </data>
+  <data name="Editor_ButtonChange" xml:space="preserve">
+    <value>rename</value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_ArgumentDoubleValue" xml:space="preserve">
+    <value>Add a comma or times sign.</value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_EmptyArgument" xml:space="preserve">
+    <value>Type something. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_EmptyParentheses" xml:space="preserve">
+    <value>Type something. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_NonArgumentParameterSeparator" xml:space="preserve">
+    <value>Remove the comma. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_TooFewArguments" xml:space="preserve">
+    <value>Add a comma. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_TooManyArguments" xml:space="preserve">
+    <value>Remove the superfluous argument(s). </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_UnmatchedClosingParenthesis" xml:space="preserve">
+    <value>Remove the unmatched closing parenthesis. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_UnmatchedOpeningParenthesis" xml:space="preserve">
+    <value>Add the missing closing parenthesis. </value>
+  </data>
+  <data name="FormulaInterpreter_DoubleValue" xml:space="preserve">
+    <value>Add a times sign. </value>
+  </data>
+  <data name="FormulaInterpreter_Function_Empty" xml:space="preserve">
+    <value>Add an opening parenthesis.</value>
+  </data>
+  <data name="FormulaInterpreter_NullOrEmpty" xml:space="preserve">
+    <value>Type something. </value>
+  </data>
+  <data name="FormulaInterpreter_Number_DoubleDecimalSeparator" xml:space="preserve">
+    <value>Remove the double decimal point. </value>
+  </data>
+  <data name="FormulaInterpreter_Number_Overflow" xml:space="preserve">
+    <value>The number is too large. </value>
+  </data>
+  <data name="FormulaInterpreter_Number_SingleDecimalSeparator" xml:space="preserve">
+    <value>Remove the decimal point. </value>
+  </data>
+  <data name="FormulaInterpreter_Operator_EmptyPrefixOperator" xml:space="preserve">
+    <value>Type something. </value>
+  </data>
+  <data name="FormulaInterpreter_Operator_LeftEmptyInfixOperator" xml:space="preserve">
+    <value>Type something. </value>
+  </data>
+  <data name="FormulaInterpreter_Operator_RightEmptyInfixOperator" xml:space="preserve">
+    <value>Type something. </value>
+  </data>
+  <data name="Editor_Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="Editor_StartSensors" xml:space="preserve">
+    <value>Start sensors</value>
+  </data>
+  <data name="Editor_StopSensors" xml:space="preserve">
+    <value>Stop sensors</value>
+  </data>
+  <data name="Editor_Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="Editor_AddGlobalVariable" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Editor_AddLocalVariable" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="FormulaKeyboard_AddFavorite" xml:space="preserve">
+    <value>Add to favorties</value>
+  </data>
+  <data name="FormulaKeyboard_Constants" xml:space="preserve">
+    <value>Constants</value>
+  </data>
+  <data name="FormulaKeyboard_DeleteVariable" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="FormulaKeyboard_Favorites" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="FormulaKeyboard_FavoritesEmpty" xml:space="preserve">
+    <value>Choose favorites from the other columns. </value>
+  </data>
+  <data name="FormulaKeyboard_Functions" xml:space="preserve">
+    <value>Functions</value>
+  </data>
+  <data name="FormulaKeyboard_GlobalVariables" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="FormulaKeyboard_LocalVariables" xml:space="preserve">
+    <value>Local</value>
+  </data>
+  <data name="FormulaKeyboard_Operators" xml:space="preserve">
+    <value>Operators</value>
+  </data>
+  <data name="FormulaKeyboard_Properties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="FormulaKeyboard_RecentlyUsed" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="FormulaKeyboard_RemoveFavorite" xml:space="preserve">
+    <value>Remove from favorites</value>
+  </data>
+  <data name="FormulaKeyboard_RenameVariable" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="FormulaKeyboard_Sensors" xml:space="preserve">
+    <value>Sensors</value>
+  </data>
+  <data name="FormulaKeyboard_Variables" xml:space="preserve">
+    <value>Variables</value>
+  </data>
+  <data name="Editor_Evaluate" xml:space="preserve">
+    <value>Evaluate</value>
   </data>
   <data name="Main_ButtonLoginRegister" xml:space="preserve">
     <value>Login / Register</value>

@@ -93,7 +93,7 @@ namespace Catrobat.IDE.Core.Services.Common
                         var counter = 1;
                         while (folders.IndexOf(projectName + countString) >= 0)
                         {
-                            countString = " " + counter.ToString(ServiceLocator.CulureService.GetCulture());
+                            countString = " " + counter.ToString(ServiceLocator.CultureService.GetCulture());
                             counter++;
                         }
                         projectName = projectName + countString;

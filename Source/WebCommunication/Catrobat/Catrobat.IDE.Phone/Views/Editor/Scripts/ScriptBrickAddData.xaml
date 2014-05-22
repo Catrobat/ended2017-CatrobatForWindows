@@ -5,22 +5,23 @@
   xmlns:scripts="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Scripts;assembly=Catrobat.IDE.Core"
   xmlns:formulas="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Formulas;assembly=Catrobat.IDE.Core"
   xmlns:bricks="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Bricks;assembly=Catrobat.IDE.Core"
-  xmlns:ui="clr-namespace:Catrobat.IDE.Core.UI;assembly=Catrobat.IDE.Core">
+  xmlns:ui="clr-namespace:Catrobat.IDE.Core.UI;assembly=Catrobat.IDE.Core"
+  xmlns:formulaTree="clr-namespace:Catrobat.IDE.Core.Models.Formulas.FormulaTree;assembly=Catrobat.IDE.Core">
 
   <ui:BrickCollection x:Key="ScriptBrickAddDataMovement">
     <bricks:PlaceAtBrick IsRealObject="False">
       <bricks:PlaceAtBrick.XPosition>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="0" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:PlaceAtBrick.XPosition>
       <bricks:PlaceAtBrick.YPosition>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="0" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:PlaceAtBrick.YPosition>
     </bricks:PlaceAtBrick>
@@ -28,9 +29,9 @@
     <bricks:SetXBrick IsRealObject="False">
       <bricks:SetXBrick.XPosition>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="0" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:SetXBrick.XPosition>
     </bricks:SetXBrick>
@@ -38,9 +39,9 @@
     <bricks:SetYBrick IsRealObject="False">
       <bricks:SetYBrick.YPosition>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="0" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:SetYBrick.YPosition>
     </bricks:SetYBrick>
@@ -48,9 +49,9 @@
     <bricks:ChangeXByBrick IsRealObject="False">
       <bricks:ChangeXByBrick.XMovement>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="0" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:ChangeXByBrick.XMovement>
     </bricks:ChangeXByBrick>
@@ -58,9 +59,9 @@
     <bricks:ChangeYByBrick IsRealObject="False">
       <bricks:ChangeYByBrick.YMovement>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="0" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:ChangeYByBrick.YMovement>
     </bricks:ChangeYByBrick>
@@ -70,9 +71,9 @@
     <bricks:MoveNStepsBrick IsRealObject="False">
       <bricks:MoveNStepsBrick.Steps>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="1" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="1" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:MoveNStepsBrick.Steps>
     </bricks:MoveNStepsBrick>
@@ -80,9 +81,9 @@
     <bricks:TurnLeftBrick IsRealObject="False">
       <bricks:TurnLeftBrick.Degrees>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="15" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="15" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:TurnLeftBrick.Degrees>
     </bricks:TurnLeftBrick>
@@ -90,9 +91,9 @@
     <bricks:TurnRightBrick IsRealObject="False">
       <bricks:TurnRightBrick.Degrees>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="15" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="15" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:TurnRightBrick.Degrees>
     </bricks:TurnRightBrick>
@@ -100,9 +101,9 @@
     <bricks:PointInDirectionBrick IsRealObject="False">
       <bricks:PointInDirectionBrick.Degrees>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="90" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="90" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:PointInDirectionBrick.Degrees>
     </bricks:PointInDirectionBrick>
@@ -112,25 +113,25 @@
     <bricks:GlideToBrick IsRealObject="False">
       <bricks:GlideToBrick.DurationInSeconds>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="3" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="3" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:GlideToBrick.DurationInSeconds>
       
       <bricks:GlideToBrick.XDestination>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="0" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:GlideToBrick.XDestination>
       
       <bricks:GlideToBrick.YDestination>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="0" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:GlideToBrick.YDestination>
     </bricks:GlideToBrick>
@@ -138,9 +139,9 @@
     <bricks:GoNStepsBackBrick IsRealObject="False">
       <bricks:GoNStepsBackBrick.Steps>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="1" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="1" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:GoNStepsBackBrick.Steps>
     </bricks:GoNStepsBackBrick>
@@ -158,9 +159,9 @@
     <bricks:SetVolumeToBrick IsRealObject="False">
       <bricks:SetVolumeToBrick.Volume>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="100" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="100" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:SetVolumeToBrick.Volume>
     </bricks:SetVolumeToBrick>
@@ -168,9 +169,9 @@
     <bricks:ChangeVolumeByBrick IsRealObject="False">
       <bricks:ChangeVolumeByBrick.Volume>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="100" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="100" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:ChangeVolumeByBrick.Volume>
     </bricks:ChangeVolumeByBrick>
@@ -188,9 +189,9 @@
     <bricks:SetSizeToBrick IsRealObject="False">
       <bricks:SetSizeToBrick.Size>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="100" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="100" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:SetSizeToBrick.Size>
     </bricks:SetSizeToBrick>
@@ -198,9 +199,9 @@
     <bricks:ChangeSizeByNBrick IsRealObject="False">
       <bricks:ChangeSizeByNBrick.Size>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="20" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="20" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:ChangeSizeByNBrick.Size>
     </bricks:ChangeSizeByNBrick>
@@ -211,9 +212,9 @@
     <bricks:SetGhostEffectBrick IsRealObject="False">
       <bricks:SetGhostEffectBrick.Transparency>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="0" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:SetGhostEffectBrick.Transparency>
     </bricks:SetGhostEffectBrick>
@@ -221,9 +222,9 @@
     <bricks:ChangeGhostEffectBrick IsRealObject="False">
       <bricks:ChangeGhostEffectBrick.ChangeGhostEffect>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="25" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="25" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:ChangeGhostEffectBrick.ChangeGhostEffect>
     </bricks:ChangeGhostEffectBrick>
@@ -231,9 +232,9 @@
     <bricks:SetBrightnessBrick IsRealObject="False">
       <bricks:SetBrightnessBrick.Brightness>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="0" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:SetBrightnessBrick.Brightness>
     </bricks:SetBrightnessBrick>
@@ -241,9 +242,9 @@
     <bricks:ChangeBrightnessBrick IsRealObject="False">
       <bricks:ChangeBrightnessBrick.ChangeBrightness>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="25" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="25" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:ChangeBrightnessBrick.ChangeBrightness>
     </bricks:ChangeBrightnessBrick>
@@ -260,9 +261,9 @@
     <bricks:WaitBrick IsRealObject="False">
       <bricks:WaitBrick.TimeToWaitInSeconds>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="1" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="1" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:WaitBrick.TimeToWaitInSeconds>
     </bricks:WaitBrick>
@@ -276,9 +277,9 @@
     <bricks:RepeatBrick IsRealObject="False">
       <bricks:RepeatBrick.TimesToRepeat>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="3" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="3" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:RepeatBrick.TimesToRepeat>
     </bricks:RepeatBrick>
@@ -286,9 +287,9 @@
     <bricks:IfLogicBeginBrick IsRealObject="False">
       <bricks:IfLogicBeginBrick.IfCondition>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="1" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="1" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:IfLogicBeginBrick.IfCondition>
     </bricks:IfLogicBeginBrick>
@@ -300,9 +301,9 @@
     <bricks:SetVariableBrick IsRealObject="False">
       <bricks:SetVariableBrick.VariableFormula>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="0.0" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="0" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:SetVariableBrick.VariableFormula>
     </bricks:SetVariableBrick>
@@ -310,9 +311,9 @@
     <bricks:ChangeVariableBrick IsRealObject="False">
       <bricks:ChangeVariableBrick.VariableFormula>
         <formulas:Formula>
-          <formulas:Formula.FormulaTree>
-            <formulas:FormulaTree VariableType="NUMBER" VariableValue="0.0" />
-          </formulas:Formula.FormulaTree>
+          <formulas:Formula.FormulaTree2>
+            <formulaTree:FormulaNodeNumber Value="0" />
+          </formulas:Formula.FormulaTree2>
         </formulas:Formula>
       </bricks:ChangeVariableBrick.VariableFormula>
     </bricks:ChangeVariableBrick>
