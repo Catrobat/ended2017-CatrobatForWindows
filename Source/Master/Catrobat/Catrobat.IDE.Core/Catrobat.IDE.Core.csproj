@@ -88,6 +88,7 @@
     <Compile Include="CatrobatObjects\Bricks\Brick.cs" />
     <Compile Include="CatrobatObjects\Bricks\BrickList.cs" />
     <Compile Include="CatrobatObjects\IObservableCollection.cs" />
+    <Compile Include="CatrobatObjects\OnlineProjectOverview.cs" />
     <Compile Include="CatrobatObjects\ObservableSelectCollection.cs" />
     <Compile Include="CatrobatObjects\SerializableTuple.cs" />
     <Compile Include="ExtensionMethods\ObservableExtensions.cs" />
@@ -228,6 +229,11 @@
     <Compile Include="Formulas\FormulaParser.cs" />
     <Compile Include="Formulas\XmlFormulaTreeConverter.cs" />
     <Compile Include="INativeApp.cs" />
+    <Compile Include="Resources\Localization\AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\Common\ProjectGeneratorDefault.cs" />
     <Compile Include="Services\IDispatcherService.cs" />
     <Compile Include="Services\IProjectGenerator.cs" />
@@ -295,15 +301,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.de.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Localization\AppResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AppResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Resources\Localization\LocalizedStrings.cs" />
     <Compile Include="Resources\SampleProjectLoader.cs" />
     <Compile Include="Services\Common\CatrobatWebCommunicationService.cs" />
-    <Compile Include="Services\Common\CatrobatWebFormUploadService.cs" />
     <Compile Include="Services\Common\CatrobatZipService.cs" />
     <Compile Include="Services\Common\ProjectImporterService.cs" />
     <Compile Include="UI\ImageDimension.cs" />
@@ -319,7 +319,6 @@
     <Compile Include="Services\IPictureService.cs" />
     <Compile Include="Services\IPlayerLauncherService.cs" />
     <Compile Include="Services\IProjectImporterService.cs" />
-    <Compile Include="Services\IServerCommunicationService.cs" />
     <Compile Include="Services\ISoundPlayerService.cs" />
     <Compile Include="Services\ISoundRecorderService.cs" />
     <Compile Include="Services\ISystemInformationService.cs" />
@@ -348,7 +347,6 @@
     <Compile Include="Utilities\Helpers\WaveHeaderHelper.cs" />
     <Compile Include="Utilities\Helpers\XmlParserTempProjectHelper.cs" />
     <Compile Include="Utilities\Helpers\XPathHelper.cs" />
-    <Compile Include="Utilities\JSON\JSONClassDeserializer.cs" />
     <Compile Include="Utilities\JSON\JSONStatusResponse.cs" />
     <Compile Include="Utilities\MD5.cs" />
     <Compile Include="Utilities\UtilToken.cs" />
@@ -394,6 +392,7 @@
     <Compile Include="ViewModels\Main\TileGeneratorViewModel.cs" />
     <Compile Include="ViewModels\Service\OnlineProjectViewModel.cs" />
     <Compile Include="ViewModels\Service\UploadProjectLoadingViewModel.cs" />
+    <Compile Include="ViewModels\Service\UploadProjectRegisterViewModel.cs" />
     <Compile Include="ViewModels\Service\UploadProjectLoginViewModel.cs" />
     <Compile Include="ViewModels\Service\UploadProjectViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsBrickViewModel.cs" />
@@ -422,8 +421,20 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\portable-net45+win8+wp8\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SharpCompress">
       <HintPath>..\packages\sharpcompress.0.10.1.3\lib\portable-net4+sl4+wp7+win8\SharpCompress.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.18\lib\portable-net40+sl4+win8+wp71\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.18\lib\portable-net40+sl4+win8+wp71\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.18\lib\portable-net40+sl4+win8+wp71\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -564,8 +564,8 @@
   <data name="Main_ButtonEdit" xml:space="preserve">
     <value>edit</value>
   </data>
-  <data name="Main_ButtonLoginRegister" xml:space="preserve">
-    <value>Login or Register</value>
+  <data name="Main_ButtonLogin" xml:space="preserve">
+    <value>Login</value>
   </data>
   <data name="Main_ButtonPasswordForgotten" xml:space="preserve">
     <value>Password forgotten</value>
@@ -700,13 +700,13 @@
     <value>UPLOAD PROGRAM</value>
   </data>
   <data name="Main_TitleUploadProjectLogin" xml:space="preserve">
-    <value>LOGIN OR REGISTER</value>
+    <value>LOGIN</value>
   </data>
   <data name="Main_UploadProjectEmail" xml:space="preserve">
     <value>Email:</value>
   </data>
   <data name="Main_UploadProjectLoginError" xml:space="preserve">
-    <value>Login Error. {0}</value>
+    <value>Login error. {0}</value>
   </data>
   <data name="Main_UploadProjectLoginErrorCaption" xml:space="preserve">
     <value>Login failed</value>
@@ -1074,5 +1074,20 @@
   </data>
   <data name="Editor_Evaluate" xml:space="preserve">
     <value>Evaluate</value>
+  </data>
+  <data name="Main_ButtonLoginRegister" xml:space="preserve">
+    <value>Login / Register</value>
+  </data>
+  <data name="Main_ButtonRegister" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Main_TitleUploadProjectRegister" xml:space="preserve">
+    <value>REGISTER</value>
+  </data>
+  <data name="Main_UploadProjectError" xml:space="preserve">
+    <value>Upload error. {0}</value>
+  </data>
+  <data name="Main_UploadProjectErrorCaption" xml:space="preserve">
+    <value>Upload failed</value>
   </data>
 </root>

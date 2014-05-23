@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Globalization;
-using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Utilities.JSON;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Core.Resources.Localization;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Core.ViewModels.Service
 {
-    public class UploadProjectLoginViewModel : ViewModelBase
+    public class UploadProjectRegisterViewModel : ViewModelBase
     {
         public delegate void NavigationCallbackEvent();
 
@@ -80,16 +80,17 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         #region Commands
 
-        public RelayCommand LoginCommand { get; private set; }
-
-        public RelayCommand ForgottenCommand { get; private set; }
+        public RelayCommand RegisterCommand { get; private set; }
 
         #endregion
 
         #region Actions
 
-        private async void LoginAction()
+        private async void RegisterAction()
         {
+            // TODO implement register
+            ServiceLocator.NavigationService.RemoveBackEntry();
+
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) /*|| string.IsNullOrEmpty(_email)*/)
             {
                 ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
@@ -122,20 +123,15 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                         throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
                     }
                 }
-                else
+                else //Unknown error
                 {
-                    string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
+                    var messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
                                             string.Format(AppResources.Main_UploadProjectLoginError, status_response.answer);
 
                     ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
                         messageString, WrongLoginDataCallback, MessageBoxOptions.Ok);
                 }
             }
-        }
-
-        private void ForgottenAction()
-        {
-            // TODO: Implement.
         }
 
         protected override void GoBackAction()
@@ -152,10 +148,10 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             Context = message.Content;
         }
         #endregion
-        public UploadProjectLoginViewModel()
+        public UploadProjectRegisterViewModel()
         {
-            LoginCommand = new RelayCommand(LoginAction);
-            ForgottenCommand = new RelayCommand(ForgottenAction);
+            // Commands
+            RegisterCommand = new RelayCommand(RegisterAction);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedAction);
@@ -167,9 +163,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private void navigationCallback()
         {
-            ResetViewModel();
             ServiceLocator.NavigationService.NavigateTo<UploadProjectViewModel>();
-            ServiceLocator.NavigationService.RemoveBackEntry();
         }
 
         private void MissingLoginDataCallback(MessageboxResult result)
@@ -199,6 +193,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 }
             }
         }
+
         #endregion
 
         private void ResetViewModel()
