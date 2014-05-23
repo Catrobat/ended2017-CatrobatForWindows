@@ -7,10 +7,9 @@ using System.Windows.Navigation;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Phone.Services;
 using Catrobat.IDE.Phone.Utilities;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Main;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 

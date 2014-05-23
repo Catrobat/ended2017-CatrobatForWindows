@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
@@ -14,20 +15,17 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
 
         public static ObservableCollection<UserVariable> GetLocalVariableList(Project project, Sprite sprite)
         {
-            foreach (var entry in project.VariableList.ObjectVariableList.ObjectVariableEntries)
+            var entry = project.VariableList.ObjectVariableList.ObjectVariableEntries.FirstOrDefault(entry2 => entry2.Sprite == sprite);
+            if (entry == null)
             {
-                if (entry.Sprite == sprite)
-                    return entry.VariableList.UserVariables;
-            }
-
-
-            var newEntry = new ObjectVariableEntry
+                entry = new ObjectVariableEntry
                 {
                     Sprite = sprite,
                     VariableList = new UserVariableList()
                 };
-            project.VariableList.ObjectVariableList.ObjectVariableEntries.Add(newEntry);
-            return newEntry.VariableList.UserVariables;
+                project.VariableList.ObjectVariableList.ObjectVariableEntries.Add(entry);
+            }
+            return entry.VariableList.UserVariables;
         }
 
         public static void DeleteGlobalVariable(Project project, UserVariable variable)

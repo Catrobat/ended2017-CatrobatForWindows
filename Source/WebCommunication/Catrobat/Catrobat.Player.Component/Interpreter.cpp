@@ -179,6 +179,34 @@ double Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
 		if (this->TestChilds(tree, Childs::LeftAndRightChild))
 			returnValue = leftValue != rightValue;
 		break;
+	case Operator::GREATER_THAN:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			if (leftValue > rightValue)
+				returnValue = 1.0;
+			else
+				returnValue = 0.0;
+		break;
+	case Operator::GREATER_OR_EQUAL:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			if (leftValue >= rightValue)
+				returnValue = 1.0;
+			else
+				returnValue = 0.0;
+		break;
+	case Operator::SMALLER_THAN:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			if (leftValue < rightValue)
+				returnValue = 1.0;
+			else
+				returnValue = 0.0;
+		break;
+	case Operator::SMALLER_OR_EQUAL:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			if (leftValue >= rightValue)
+				returnValue = 1.0;
+			else
+				returnValue = 0.0;
+		break;
 	default:
 		break;
 	}
@@ -318,6 +346,9 @@ double Interpreter::InterpretSensor(FormulaTree *tree, Object *object)
 		break;
 	case Sensor::Z_ACCELERATION:
 		returnValue = m_accelerometerProvider->GetZ();
+		break;
+	case Sensor::LOUDNESS:
+		returnValue = 1.0; //TODO: change for reading loudness sensor. 
 		break;
 	default:
 		returnValue = 0;

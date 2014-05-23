@@ -9,7 +9,7 @@ using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Phone.Services;
 using Catrobat.IDE.Phone.Services.Storage;
 
@@ -43,6 +43,7 @@ namespace Catrobat.IDE.Phone
             ServiceLocator.Register<PortableUIElementsConvertionServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ActionTemplateServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SoundServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SensorServicePhone>(TypeCreationMode.Lazy);
 
             ServiceLocator.NavigationService = new NavigationServicePhone();
 

@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "CompassProvider.h"
+#include "PlayerException.h"
+#include "DeviceInformation.h"
 
 using namespace Windows::UI::Core;
 using namespace Windows::Devices::Sensors;
@@ -7,7 +9,8 @@ using namespace Windows::Foundation;
 
 CompassProvider::CompassProvider() 
 {
-    Init();
+	if (DeviceInformation::IsRunningOnDevice() && Init() != true)
+		throw new PlayerException("init compass provider failed");
 }
 
 CompassProvider::~CompassProvider()

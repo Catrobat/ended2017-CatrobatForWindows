@@ -5,7 +5,7 @@ using System.Reflection;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModels;
 
 namespace Catrobat.IDE.Core.Services
 {
@@ -19,6 +19,8 @@ namespace Catrobat.IDE.Core.Services
         public static INavigationService NavigationService
         { get; set; }
 
+        #region Service instances
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
@@ -28,7 +30,7 @@ namespace Catrobat.IDE.Core.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public static ICultureService CulureService
+        public static ICultureService CultureService
         { get { return GetInstance<ICultureService>(); } }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
@@ -127,6 +129,13 @@ namespace Catrobat.IDE.Core.Services
         public static ISoundService SoundService
         { get { return GetInstance<ISoundService>(); } }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static ISensorService SensorService
+        { get { return GetInstance<ISensorService>(); } }
+
+        #endregion
 
         public static ViewModelLocator ViewModelLocator { get; set; }
 
@@ -149,7 +158,7 @@ namespace Catrobat.IDE.Core.Services
                 }
                 else if (mode == TypeCreationMode.Normal)
                 {
-                    if (!Instances.ContainsKey(typeof(T)))
+                    if (Instances.ContainsKey(typeof(T)))
                         Instances.Remove(typeof(T));
 
                     Instances.Add(typeof(T), Activator.CreateInstance<T>());

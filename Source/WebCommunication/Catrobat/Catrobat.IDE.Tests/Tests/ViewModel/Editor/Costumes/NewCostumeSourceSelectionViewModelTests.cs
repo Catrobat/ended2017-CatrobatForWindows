@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
 using Catrobat.IDE.Tests.Services;
 using Catrobat.IDE.Tests.Services.Storage;
 using GalaSoft.MvvmLight.Messaging;

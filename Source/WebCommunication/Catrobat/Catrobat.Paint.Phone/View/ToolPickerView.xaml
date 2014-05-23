@@ -78,7 +78,7 @@
                     <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_eraser.png" Stretch="None" AlignmentX="Left"></ImageBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="Flip" IsEnabled="false" Click="Button_OnClick" Content="Spiegeln" HorizontalContentAlignment="Left"  FontSize="20" Padding="45,0, 0, 0" HorizontalAlignment="Left" Margin="3,369,0,0" BorderBrush="Transparent" VerticalAlignment="Top" Width="225" Grid.Row="6" Grid.Column="1">
+            <Button x:Name="Flip"  Click="Button_OnClick" Content="Spiegeln" HorizontalContentAlignment="Left"  FontSize="20" Padding="45,0, 0, 0" HorizontalAlignment="Left" Margin="3,369,0,0" BorderBrush="Transparent" VerticalAlignment="Top" Width="225" Grid.Row="6" Grid.Column="1">
                 <Button.Background>
                     <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_flip_horizontal.png" Stretch="None" AlignmentX="Left"></ImageBrush>
                 </Button.Background>
@@ -93,6 +93,17 @@
                     <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_zoom.png" Stretch="None" AlignmentX="Left"></ImageBrush>
                 </Button.Background>
             </Button>
+            <Button x:Name="Rotate" Content="Drehen" Click="Button_OnClick" HorizontalContentAlignment="Left"  FontSize="20" Padding="45,0, 0, 0" HorizontalAlignment="Left" Margin="228,439,0,0" BorderBrush="Transparent" VerticalAlignment="Top" Width="225" Grid.Row="7" Grid.Column="5">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_rotate_left.png" Stretch="None" AlignmentX="Left"></ImageBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="Line" Content="Linie"  Click="Button_OnClick" HorizontalContentAlignment="Left"  FontSize="20" Padding="45,0, 0, 0" HorizontalAlignment="Left" Margin="3,506,0,0" BorderBrush="Transparent" VerticalAlignment="Top" Width="225" Grid.Row="7" Grid.Column="5">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_straight_line.png" Stretch="None" AlignmentX="Left"></ImageBrush>
+                </Button.Background>
+            </Button>
+
         </Grid>
     </Grid>
 

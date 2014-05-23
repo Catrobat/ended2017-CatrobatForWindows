@@ -7,7 +7,7 @@ using System.Windows;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Core.ViewModel.Editor.Scripts;
+using Catrobat.IDE.Core.ViewModels.Editor.Scripts;
 
 namespace Catrobat.IDE.Phone.Services
 {

@@ -5,12 +5,12 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:localization="clr-namespace:Catrobat.IDE.Core.Resources.Localization;assembly=Catrobat.IDE.Core"
   xmlns:ui="clr-namespace:Catrobat.IDE.Core.UI;assembly=Catrobat.IDE.Core"
-  xmlns:viewModel="clr-namespace:Catrobat.IDE.Core.ViewModel;assembly=Catrobat.IDE.Core"
   xmlns:phone="clr-namespace:Catrobat.IDE.Phone"
+  xmlns:viewModels="clr-namespace:Catrobat.IDE.Core.ViewModels;assembly=Catrobat.IDE.Core"
   mc:Ignorable="d">
   
   <localization:LocalizedStrings x:Key="LocalizedStrings" d:IsDataSource="True"/>
-  <viewModel:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+  <viewModels:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
   <ui:ThemeChooser x:Key="ThemeChooser" d:IsDataSource="True"/>
 
   <phone:AppPhone x:Key="AppPhone" d:IsDataSource="True"/>

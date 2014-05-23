@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
 using System.Xml.Linq;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+using Catrobat.IDE.Core.Formulas;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
 {
@@ -29,6 +31,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
             //  //if (sprite != null)
             //  //  xRoot.Add(sprite.CreateXML());
         }
+
+        [Obsolete("Use overload with converter instead. ", true)]
+        internal new void LoadReference() { base.LoadReference(); }
+
+        /// <param name="converter">Passed to all <see cref="Formula" /> properties. See <see cref="Formula.LoadReference(XmlFormulaTreeConverter)"/>. </param>
+        internal virtual void LoadReference(XmlFormulaTreeConverter converter) { base.LoadReference(); }
 
         public abstract DataObject Copy();
     }

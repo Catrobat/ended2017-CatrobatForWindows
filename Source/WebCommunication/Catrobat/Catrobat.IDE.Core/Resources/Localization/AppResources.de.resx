@@ -501,49 +501,43 @@
   <data name="Editor_TitleRecorder" xml:space="preserve">
     <value>KLANG AUFNEHMEN</value>
   </data>
-  <data name="Formula_ACCELERATION_X" xml:space="preserve">
-    <value>BeschleunigungX</value>
+  <data name="Formula_Sensor_AccelerationX" xml:space="preserve">
+    <value>Beschleunigung.X</value>
   </data>
-  <data name="Formula_ACCELERATION_Y" xml:space="preserve">
-    <value>BeschleunigungY</value>
+  <data name="Formula_Sensor_AccelerationY" xml:space="preserve">
+    <value>Beschleunigung.Y</value>
   </data>
-  <data name="Formula_ACCELERATION_Z" xml:space="preserve">
-    <value>BeschleunigungZ</value>
+  <data name="Formula_Sensor_AccelerationZ" xml:space="preserve">
+    <value>Beschleunigung.Z</value>
   </data>
-  <data name="Formula_BRIGHTNESS" xml:space="preserve">
+  <data name="Formula_Property_Brightness" xml:space="preserve">
     <value>Helligkeit</value>
   </data>
-  <data name="Formula_LogicOr" xml:space="preserve">
+  <data name="Formula_Operator_Or" xml:space="preserve">
     <value>ODER</value>
   </data>
-  <data name="Formula_Random" xml:space="preserve">
-    <value>Zufall</value>
+  <data name="Formula_Sensor_Compass" xml:space="preserve">
+    <value>Kompass</value>
   </data>
-  <data name="Formula_Unknown" xml:space="preserve">
-    <value>Unbekannt</value>
+  <data name="Formula_Sensor_InclinationX" xml:space="preserve">
+    <value>Neigung.X</value>
   </data>
-  <data name="Formula_COMPASSDIRECTION" xml:space="preserve">
-    <value>KompassRichtung</value>
+  <data name="Formula_Sensor_InclinationY" xml:space="preserve">
+    <value>Neigung.Y</value>
   </data>
-  <data name="Formula_INCLINATION_X" xml:space="preserve">
-    <value>NeigungX</value>
-  </data>
-  <data name="Formula_INCLINATION_Y" xml:space="preserve">
-    <value>NeigungY</value>
-  </data>
-  <data name="Formula_LAYER" xml:space="preserve">
+  <data name="Formula_Property_Layer" xml:space="preserve">
     <value>Ebene</value>
   </data>
-  <data name="Formula_OBJECT_X" xml:space="preserve">
-    <value>ObjektX</value>
+  <data name="Formula_Property_PositionX" xml:space="preserve">
+    <value>Position.X</value>
   </data>
-  <data name="Formula_OBJECT_Y" xml:space="preserve">
-    <value>ObjektY</value>
+  <data name="Formula_Property_PositionY" xml:space="preserve">
+    <value>Position.Y</value>
   </data>
-  <data name="Formula_SIZE" xml:space="preserve">
+  <data name="Formula_Property_Size" xml:space="preserve">
     <value>Größe</value>
   </data>
-  <data name="Formula_TRANSPARENCY" xml:space="preserve">
+  <data name="Formula_Property_Transparency" xml:space="preserve">
     <value>Transparenz</value>
   </data>
   <data name="Main_AboutText" xml:space="preserve">
@@ -775,47 +769,44 @@
     <value>NEU</value>
   </data>
   <data name="Editor_ButtonAddLocalVariable" xml:space="preserve">
-    <value>Objektvariable hinzufügen</value>
+    <value>Lokale Variable hinzufügen</value>
   </data>
   <data name="Editor_ButtonAddGlobalVariable" xml:space="preserve">
-    <value>Programmvariable hinzufügen</value>
+    <value>Globale Variable hinzufügen</value>
   </data>
-  <data name="Editor_StandardLocalVariableName" xml:space="preserve">
-    <value>Objektvariable</value>
+  <data name="Editor_DefaultLocalVariableName" xml:space="preserve">
+    <value>LokaleVariable</value>
   </data>
   <data name="Editor_TitleChangeVariableName" xml:space="preserve">
     <value>VARIABLENNAME ÄNDERN</value>
   </data>
-  <data name="Editor_StandardGlobalVariableName" xml:space="preserve">
-    <value>Programmvariable</value>
+  <data name="Editor_DefaultGlobalVariableName" xml:space="preserve">
+    <value>GlobaleVariable</value>
   </data>
   <data name="Editor_VariableName" xml:space="preserve">
     <value>Variablenname</value>
   </data>
   <data name="Editor_TitleChooseLocalVariableName" xml:space="preserve">
-    <value>OBJEKTVARIABLENNAME WÄHLEN</value>
+    <value>NAME DER GLOBALEN VARIABLE WÄHLEN</value>
   </data>
   <data name="Editor_TitleChooseGlobalVariableName" xml:space="preserve">
-    <value>PROGRAMMVARIABLENNAME WÄHLEN</value>
+    <value>NAME DER LOKALEN VARIABLE WÄHLEN</value>
   </data>
   <data name="Main_SelectedProjectNotValidMessage" xml:space="preserve">
     <value>Programm ungültig</value>
   </data>
-  <data name="Formula_LogicAnd" xml:space="preserve">
+  <data name="Formula_Operator_And" xml:space="preserve">
     <value>UND</value>
   </data>
-  <data name="Formula_LogicTrue" xml:space="preserve">
+  <data name="Formula_Constant_True" xml:space="preserve">
     <value>WAHR</value>
   </data>
-  <data name="Formula_LogicNot" xml:space="preserve">
+  <data name="Formula_Operator_Not" xml:space="preserve">
     <value>NICHT</value>
     <comment>Alternate: ¬</comment>
   </data>
-  <data name="Formula_LogicFalse" xml:space="preserve">
+  <data name="Formula_Constant_False" xml:space="preserve">
     <value>FALSCH</value>
-  </data>
-  <data name="Formula_FunctionTan" xml:space="preserve">
-    <value>TAN</value>
   </data>
   <data name="Editor_Rename" xml:space="preserve">
     <value>Umbenennen</value>
@@ -826,60 +817,26 @@
   <data name="Main_UseCurrentProjectAsTemplate" xml:space="preserve">
     <value>Ausgewähltes Programm ({0}) als Vorlage verwenden?</value>
   </data>
-  <data name="Formula_FunctionSqrt" xml:space="preserve">
-    <value>SQRT</value>
+  <data name="Formula_Function_Sqrt" xml:space="preserve">
+    <value>wurzel</value>
   </data>
-  <data name="Formula_FunctionSin" xml:space="preserve">
-    <value>SIN</value>
+  <data name="Formula_Function_Round" xml:space="preserve">
+    <value>runden</value>
   </data>
-  <data name="Formula_FunctionRound" xml:space="preserve">
-    <value>Runden</value>
+  <data name="Formula_Function_Random" xml:space="preserve">
+    <value>zufall</value>
   </data>
-  <data name="Formula_FunctionRandom" xml:space="preserve">
-    <value>Zufall</value>
-  </data>
-  <data name="Formula_FunctionPi" xml:space="preserve">
-    <value>Pi</value>
-  </data>
-  <data name="Formula_FunctionMod" xml:space="preserve">
+  <data name="Formula_Operator_Mod" xml:space="preserve">
     <value>MOD</value>
   </data>
-  <data name="Formula_FunctionMin" xml:space="preserve">
-    <value>MIN</value>
+  <data name="Formula_Function_Min" xml:space="preserve">
+    <value>min</value>
   </data>
-  <data name="Formula_FunctionMax" xml:space="preserve">
-    <value>MAX</value>
+  <data name="Formula_Function_Max" xml:space="preserve">
+    <value>max</value>
   </data>
-  <data name="Formula_FunctionLog" xml:space="preserve">
-    <value>LOG</value>
-  </data>
-  <data name="Formula_FunctionLn" xml:space="preserve">
-    <value>LN</value>
-  </data>
-  <data name="Formula_FunctionCos" xml:space="preserve">
-    <value>COS</value>
-  </data>
-  <data name="Formula_FunctionExp" xml:space="preserve">
-    <value>EXP</value>
-  </data>
-  <data name="Formula_FunctionAbs" xml:space="preserve">
-    <value>ABS</value>
-  </data>
-  <data name="Formula_FunctionArcTan" xml:space="preserve">
-    <value>ARCTAN</value>
-  </data>
-  <data name="Formula_FunctionArcSin" xml:space="preserve">
-    <value>ARCSIN</value>
-  </data>
-  <data name="Formula_FunctionArcCos" xml:space="preserve">
-    <value>ARCCOS</value>
-  </data>
-  <data name="Formula_Mult" xml:space="preserve">
-    <value>*</value>
-    <comment>Alternate: •</comment>
-  </data>
-  <data name="Formula_Minus" xml:space="preserve">
-    <value>-</value>
+  <data name="Formula_Function_Abs" xml:space="preserve">
+    <value>abs</value>
   </data>
   <data name="Main_SelectedProjectNotValidHeader" xml:space="preserve">
     <value>Leider konnte das ausgewählte Programm nicht geöffnet werden.</value>
@@ -912,13 +869,13 @@
     <value>Erneut auf "zurück" um die App zu schließen?</value>
   </data>
   <data name="Editor_ClickPlusToAddAction" xml:space="preserve">
-    <value>Drücke '+' um eine neue Aktion hinzuzufügen.</value>
+    <value>Tippe auf '+' um eine neue Aktion hinzuzufügen.</value>
   </data>
   <data name="Editor_ClickPlusToAddCostume" xml:space="preserve">
-    <value>Drücke '+' um ein neues Aussehen hinzuzufügen.</value>
+    <value>Tippe auf '+' um ein neues Aussehen hinzuzufügen.</value>
   </data>
   <data name="Editor_ClickPlusToAddSound" xml:space="preserve">
-    <value>Drücke '+' um einen neuen Klang hinzuzufügen.</value>
+    <value>Tippe auf '+' um einen neuen Klang hinzuzufügen.</value>
   </data>
   <data name="Editor_ImageEditingProgram" xml:space="preserve">
     <value>Bildbearbeitungsprogramm</value>
@@ -960,13 +917,163 @@
     <value>Wasser</value>
   </data>
   <data name="Editor_ClickPlusToAddSprite" xml:space="preserve">
-    <value>Drücke '+' um ein neues Objekt hinzuzufügen.</value>
+    <value>Tippe auf '+' um ein neues Objekt hinzuzufügen.</value>
   </data>
   <data name="Main_SetActive" xml:space="preserve">
     <value>Auswählen</value>
   </data>
   <data name="Main_Settings" xml:space="preserve">
     <value>Einstellungen</value>
+  </data>
+  <data name="Formula_Sensor_Loudness" xml:space="preserve">
+    <value>Lautstärke</value>
+  </data>
+  <data name="Editor_ReallyDismissFormula" xml:space="preserve">
+    <value>Erneut auf "zurück" um die Änderungen zu verwerfen?</value>
+  </data>
+  <data name="Editor_ButtonChange" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_ArgumentDoubleValue" xml:space="preserve">
+    <value>Füge einen Beistrich oder ein Malzeichen hinzu. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_EmptyArgument" xml:space="preserve">
+    <value>Schreibe etwas. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_EmptyParentheses" xml:space="preserve">
+    <value>Schreibe etwas. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_NonArgumentParameterSeparator" xml:space="preserve">
+    <value>Entferne den Beistrich. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_TooFewArguments" xml:space="preserve">
+    <value>Füge einen Beistrich hinzu. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_TooManyArguments" xml:space="preserve">
+    <value>Entferne die überflüssigen Argumente. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_UnmatchedClosingParenthesis" xml:space="preserve">
+    <value>Entferne die alleinstehende geschlossene runde Klammer. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_UnmatchedOpeningParenthesis" xml:space="preserve">
+    <value>Füge die fehlende schließende runde Klammer hinzu. </value>
+  </data>
+  <data name="FormulaInterpreter_DoubleValue" xml:space="preserve">
+    <value>Füge ein Malzeichen hinzu.</value>
+  </data>
+  <data name="FormulaInterpreter_Function_Empty" xml:space="preserve">
+    <value>Füge eine öffnende runde Klammer hinzu.</value>
+  </data>
+  <data name="FormulaInterpreter_NullOrEmpty" xml:space="preserve">
+    <value>Schreibe etwas. </value>
+  </data>
+  <data name="FormulaInterpreter_Number_DoubleDecimalSeparator" xml:space="preserve">
+    <value>Entferne das doppelte Dezimalkomma. </value>
+  </data>
+  <data name="FormulaInterpreter_Number_Overflow" xml:space="preserve">
+    <value>Die Zahl ist zu groß. </value>
+  </data>
+  <data name="FormulaInterpreter_Number_SingleDecimalSeparator" xml:space="preserve">
+    <value>Entferne das Dezimalkomma.</value>
+  </data>
+  <data name="FormulaInterpreter_Operator_EmptyPrefixOperator" xml:space="preserve">
+    <value>Schreibe etwas. </value>
+  </data>
+  <data name="FormulaInterpreter_Operator_LeftEmptyInfixOperator" xml:space="preserve">
+    <value>Schreibe etwas. </value>
+  </data>
+  <data name="FormulaInterpreter_Operator_RightEmptyInfixOperator" xml:space="preserve">
+    <value>Schreibe etwas. </value>
+  </data>
+  <data name="App_FlowDirection" xml:space="preserve">
+    <value>LeftToRight</value>
+  </data>
+  <data name="Editor_TypeSomething" xml:space="preserve">
+    <value>Schreibe etwas. </value>
+  </data>
+  <data name="Formula_Property_Rotation" xml:space="preserve">
+    <value>Drehung</value>
+  </data>
+  <data name="Main_HeaderDesign" xml:space="preserve">
+    <value>Design</value>
+  </data>
+  <data name="Main_HeaderOnlineProjects" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="Main_ListDesign" xml:space="preserve">
+    <value>Design</value>
+  </data>
+  <data name="Main_MessageBoxInformation" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Main_UploadProjectEmail" xml:space="preserve">
+    <value>E-Mail:</value>
+  </data>
+  <data name="Editor_Redo" xml:space="preserve">
+    <value>Wiederherstellen</value>
+  </data>
+  <data name="Editor_StartSensors" xml:space="preserve">
+    <value>Sensoren starten</value>
+  </data>
+  <data name="Editor_StopSensors" xml:space="preserve">
+    <value>Sensoren anhalten</value>
+  </data>
+  <data name="Editor_Undo" xml:space="preserve">
+    <value>Rückgängig</value>
+  </data>
+  <data name="Editor_AddGlobalVariable" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="Editor_AddLocalVariable" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="FormulaKeyboard_AddFavorite" xml:space="preserve">
+    <value>Zu Favoriten hinzufügen</value>
+  </data>
+  <data name="FormulaKeyboard_Constants" xml:space="preserve">
+    <value>Konstanten</value>
+  </data>
+  <data name="FormulaKeyboard_DeleteVariable" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="FormulaKeyboard_Favorites" xml:space="preserve">
+    <value>Favoriten</value>
+  </data>
+  <data name="FormulaKeyboard_FavoritesEmpty" xml:space="preserve">
+    <value>Wähle Favoriten aus den anderen Spalten. </value>
+  </data>
+  <data name="FormulaKeyboard_Functions" xml:space="preserve">
+    <value>Funktionen</value>
+  </data>
+  <data name="FormulaKeyboard_GlobalVariables" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="FormulaKeyboard_LocalVariables" xml:space="preserve">
+    <value>Lokal</value>
+  </data>
+  <data name="FormulaKeyboard_Operators" xml:space="preserve">
+    <value>Operatoren</value>
+  </data>
+  <data name="FormulaKeyboard_Properties" xml:space="preserve">
+    <value>Eigenschaften</value>
+  </data>
+  <data name="FormulaKeyboard_RecentlyUsed" xml:space="preserve">
+    <value>Zuletzt</value>
+  </data>
+  <data name="FormulaKeyboard_RemoveFavorite" xml:space="preserve">
+    <value>Aus Favoriten entfernen</value>
+  </data>
+  <data name="FormulaKeyboard_RenameVariable" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
+  <data name="FormulaKeyboard_Sensors" xml:space="preserve">
+    <value>Sensoren</value>
+  </data>
+  <data name="FormulaKeyboard_Variables" xml:space="preserve">
+    <value>Variablen</value>
+  </data>
+  <data name="Editor_Evaluate" xml:space="preserve">
+    <value>Auswerten</value>
   </data>
   <data name="Main_ButtonLoginRegister" xml:space="preserve">
     <value>Einloggen / Registrieren</value>

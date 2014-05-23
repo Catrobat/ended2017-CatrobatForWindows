@@ -3,8 +3,8 @@ using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
 using Catrobat.IDE.Tests.Services;
 using Catrobat.IDE.Tests.Services.Storage;
 using GalaSoft.MvvmLight.Messaging;
@@ -24,6 +24,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             ServiceLocator.Register<StorageFactoryTest>(TypeCreationMode.Normal);
             ServiceLocator.Register<StorageTest>(TypeCreationMode.Normal);
             ServiceLocator.Register<ImageResizeServiceTest>(TypeCreationMode.Normal);
+            ServiceLocator.Register<SensorServiceTest>(TypeCreationMode.Normal);
         }
 
         [TestMethod] // , TestCategory("GatedTests") // TODO: fix test takes very long time on server

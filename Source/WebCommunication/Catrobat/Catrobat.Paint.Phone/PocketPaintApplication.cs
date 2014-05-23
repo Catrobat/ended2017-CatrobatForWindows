@@ -26,6 +26,8 @@ namespace Catrobat.Paint.Phone
 
         public Grid PaintingAreaLayoutRoot { get; set; }
 
+        public Grid PaintingAreaContentPanelGrid { get; set; }
+
         public WriteableBitmap Bitmap { get; private set; }
 
         private readonly PaintData _paintData = new PaintData();
@@ -127,6 +129,15 @@ namespace Catrobat.Paint.Phone
                     break;
                 case ToolType.Pipette:
                     ToolCurrent = new PipetteTool();
+                    break;
+                case ToolType.Rotate:
+                    ToolCurrent = new RotateTool();
+                    break;
+                case ToolType.Line:
+                    ToolCurrent = new LineTool();
+                    break;
+                case ToolType.Flip:
+                    ToolCurrent = new FlipTool();
                     break;
                 default:
                     break;

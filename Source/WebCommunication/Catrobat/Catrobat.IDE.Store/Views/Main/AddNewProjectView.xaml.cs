@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Main;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Main;
 
 namespace Catrobat.IDE.Store.Views.Main
 {
