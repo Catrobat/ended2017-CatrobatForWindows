@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Catrobat.IDE.Core.Formulas;
+using Catrobat.IDE.Core.Formulas.Tokens;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Phone.Converters;
 

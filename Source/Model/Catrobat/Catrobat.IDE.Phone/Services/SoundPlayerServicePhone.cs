@@ -1,8 +1,9 @@
 ﻿using System.Threading;
 using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 using Microsoft.Xna.Framework.Audio;
 
 namespace Catrobat.IDE.Phone.Services
@@ -17,7 +18,7 @@ namespace Catrobat.IDE.Phone.Services
         public event SoundStateChanged SoundStateChanged;
         public event SoundFinished SoundFinished;
 
-        public void SetSound(Sound sound, Project currentProject)
+        public void SetSound(XmlSound sound, XmlProject currentProject)
         {
             _currentProjectBasePath = currentProject.BasePath;
 
@@ -28,7 +29,7 @@ namespace Catrobat.IDE.Phone.Services
 
             _previousState = SoundPlayerState.Stopped;
 
-            var path = _currentProjectBasePath + "/" + Project.SoundsPath + "/" +
+            var path = _currentProjectBasePath + "/" + XmlProject.SoundsPath + "/" +
                        sound.FileName;
 
             using (var storage = StorageSystem.GetStorage())

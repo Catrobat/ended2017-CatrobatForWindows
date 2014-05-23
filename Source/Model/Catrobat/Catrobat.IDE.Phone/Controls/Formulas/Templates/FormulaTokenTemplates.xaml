@@ -6,6 +6,7 @@
   xmlns:templates="clr-namespace:Catrobat.IDE.Phone.Controls.Formulas.Templates"
   xmlns:formulaToken="clr-namespace:Catrobat.IDE.Core.Models.Formulas.FormulaToken;assembly=Catrobat.IDE.Core"
   xmlns:formulaTree="clr-namespace:Catrobat.IDE.Core.Models.Formulas.FormulaTree;assembly=Catrobat.IDE.Core"
+  xmlns:formulaTree1="clr-namespace:Catrobat.IDE.Core.Formulas.FormulaTree;assembly=Catrobat.IDE.Core"
   mc:Ignorable="d">
 
   <SolidColorBrush x:Key="FormulaSelectedBackground" Color="Orange" />
@@ -289,16 +290,16 @@
 
   <templates:FormulaTokenTemplateCollection x:Key="FormulaTokenTemplates">
     <!-- ### Constants ##########################################################################################################-->
-    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeNumber" TokenStyle="{StaticResource PartStyleNumber}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree1:FormulaNodeNumber" TokenStyle="{StaticResource PartStyleNumber}" />
     <templates:FormulaTokenTemplate TokenType="formulaToken:FormulaTokenDecimalSeparator" TokenStyle="{StaticResource PartStyleNumber}" RelativeLeftMargin="0.15" RelativeRightMargin="0.15" />
 
 
     <!-- ### Functions ##########################################################################################################-->
     <templates:FormulaTokenTemplate TokenType="formulaToken:FormulaTokenParameterSeparator" TokenStyle="{StaticResource PartStyleMath}" RelativeLeftMargin="0.3" RelativeRightMargin="0.7" />
-    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeRandom" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree1:FormulaNodeRandom" TokenStyle="{StaticResource PartStyleMath}" />
     <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeModulo" TokenStyle="{StaticResource PartStyleMath}" />
-    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeMax" TokenStyle="{StaticResource PartStyleMath}" />
-    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeMin" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree1:FormulaNodeMax" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree1:FormulaNodeMin" TokenStyle="{StaticResource PartStyleMath}" />
     <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeSin" TokenStyle="{StaticResource PartStyleMath}" />
     <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeCos" TokenStyle="{StaticResource PartStyleMath}" />
     <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeTan" TokenStyle="{StaticResource PartStyleMath}" />
@@ -311,7 +312,7 @@
     <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeArccos" TokenStyle="{StaticResource PartStyleMath}" />
     <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeArctan" TokenStyle="{StaticResource PartStyleMath}" />
     <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeExp" TokenStyle="{StaticResource PartStyleMath}" />
-    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodePi" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree1:FormulaNodePi" TokenStyle="{StaticResource PartStyleMath}" />
     <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeEquals" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
     <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeNotEquals" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
     <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeLess" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
@@ -321,8 +322,8 @@
     <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeOr" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
     <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeAnd" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
 
-    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeTrue" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
-    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeFalse" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree1:FormulaNodeTrue" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree1:FormulaNodeFalse" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
     <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeNot" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
 
     <!-- TODO: Change Style Resource-->

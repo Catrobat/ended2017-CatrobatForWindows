@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 
 namespace Catrobat.IDE.Core.Services
 {
@@ -26,9 +27,9 @@ namespace Catrobat.IDE.Core.Services
 
     public interface ISoundService
     {
-        Task<SoundServiceResult> CreateSoundFromRecorder(Sprite sprite);
+        Task<SoundServiceResult> CreateSoundFromRecorder(XmlSprite sprite);
 
-        Task<SoundServiceResult> CreateSoundFromMediaLibrary(Sprite sprite);
+        Task<SoundServiceResult> CreateSoundFromMediaLibrary(XmlSprite sprite);
 
         void Finished(SoundServiceResult result);
     }

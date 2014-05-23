@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Threading.Tasks;
-using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
@@ -38,7 +38,7 @@ namespace Catrobat.IDE.Core
                 var messageContext = new GenericMessage<CatrobatContextBase>(context);
                 Messenger.Default.Send(messageContext, ViewModelMessagingToken.ContextListener);
 
-                var messageCurrentSprite = new GenericMessage<Sprite>(context.CurrentProject.SpriteList.Sprites[0]);
+                var messageCurrentSprite = new GenericMessage<Sprite>(context.CurrentProject2.Sprites[0]);
                 Messenger.Default.Send(messageCurrentSprite, ViewModelMessagingToken.CurrentSpriteChangedListener);
             }
             else
@@ -60,7 +60,7 @@ namespace Catrobat.IDE.Core
 
                 var currentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
                 await currentProject.Save();
-                context.LocalSettings = new LocalSettings { CurrentProjectName = currentProject.ProjectHeader.ProgramName };
+                context.LocalSettings = new LocalSettings { CurrentProjectName = currentProject.Name };
                 return currentProject;
             }
 
@@ -119,7 +119,7 @@ namespace Catrobat.IDE.Core
                 _context.LocalSettings.CurrentLanguageString = settingsViewModel.CurrentCulture.Name;
             }
 
-            _context.LocalSettings.CurrentProjectName = currentProject.ProjectHeader.ProgramName;
+            _context.LocalSettings.CurrentProjectName = currentProject.Name;
 
             // allow viewmodels to save settings
             Messenger.Default.Send(new GenericMessage<LocalSettings>(_context.LocalSettings), ViewModelMessagingToken.SaveSettings);

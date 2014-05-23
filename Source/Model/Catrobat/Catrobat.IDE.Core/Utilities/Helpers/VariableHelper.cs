@@ -1,127 +1,67 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.Models;
 
 namespace Catrobat.IDE.Core.Utilities.Helpers
 {
     public static class VariableHelper
     {
-        public static ObservableCollection<UserVariable> GetGlobalVariableList(Project project)
+        public static ObservableCollection<GlobalVariable> GetGlobalVariableList(Project project)
         {
-            return project.VariableList.ProgramVariableList.UserVariables;
+            return project.GlobalVariables;
         }
 
-        public static ObservableCollection<UserVariable> GetLocalVariableList(Project project, Sprite sprite)
+        public static ObservableCollection<LocalVariable> GetLocalVariableList(Project project, Sprite sprite)
         {
-            var entry = project.VariableList.ObjectVariableList.ObjectVariableEntries.FirstOrDefault(entry2 => entry2.Sprite == sprite);
-            if (entry == null)
-            {
-                entry = new ObjectVariableEntry
-                {
-                    Sprite = sprite,
-                    VariableList = new UserVariableList()
-                };
-                project.VariableList.ObjectVariableList.ObjectVariableEntries.Add(entry);
-            }
-            return entry.VariableList.UserVariables;
+            return sprite.LocalVariables;
         }
 
-        public static void DeleteGlobalVariable(Project project, UserVariable variable)
+        public static void DeleteGlobalVariable(Project project, GlobalVariable variable)
         {
-            project.VariableList.ProgramVariableList.UserVariables.Remove(variable);
+            project.GlobalVariables.Remove(variable);
         }
 
-        public static void DeleteLocalVariable(Project project, Sprite sprite, UserVariable variable)
+        public static void DeleteLocalVariable(Project project, Sprite sprite, LocalVariable variable)
         {
-            foreach (var entry in project.VariableList.ObjectVariableList.ObjectVariableEntries)
-            {
-                if(entry.Sprite == sprite)
-                    entry.VariableList.UserVariables.Remove(variable);
-            }
+            sprite.LocalVariables.Remove(variable);
         }
 
-        public static void AddGlobalVariable(Project project, UserVariable variable)
+        public static void AddGlobalVariable(Project project, GlobalVariable variable)
         {
-            project.VariableList.ProgramVariableList.UserVariables.Add(variable);
+            project.GlobalVariables.Add(variable);
         }
 
-        public static void AddLocalVariable(Project project, Sprite sprite, UserVariable variable)
+        public static void AddLocalVariable(Project project, Sprite sprite, LocalVariable variable)
         {
-            foreach (var entry in project.VariableList.ObjectVariableList.ObjectVariableEntries)
-            {
-                if (entry.Sprite == sprite)
-                {
-                    entry.VariableList.UserVariables.Add(variable);
-                    return;
-                }
-            }
-            project.VariableList.ObjectVariableList.ObjectVariableEntries.Add(new ObjectVariableEntry
-            {
-                Sprite = sprite,
-                VariableList = new UserVariableList
-                {
-                    UserVariables = new ObservableCollection<UserVariable> { variable } 
-                }
-            });
+            sprite.LocalVariables.Add(variable);
         }
 
-        public static bool IsVariableLocal(Project project, UserVariable variable)
+        public static bool IsVariableLocal(Project project, Variable variable)
         {
-            return !project.VariableList.ProgramVariableList.UserVariables.Contains(variable);
+            return variable is LocalVariable;
         }
 
-        public static UserVariable CreateUniqueGlobalVariable()
+        public static GlobalVariable CreateUniqueGlobalVariable()
         {
-            return new UserVariable { Name = "global_" + Guid.NewGuid().ToString() };
+            return new GlobalVariable { Name = "global_" + Guid.NewGuid().ToString() };
         }
 
-        public static UserVariable CreateUniqueLocalVariable(Sprite sprite)
+        public static LocalVariable CreateUniqueLocalVariable(Sprite sprite)
         {
-            return new UserVariable { Name = sprite.Name + "_" + Guid.NewGuid().ToString() };
+            return new LocalVariable { Name = sprite.Name + "_" + Guid.NewGuid().ToString() };
         }
 
         public static bool VariableNameExists(Project project, Sprite sprite, string variableName)
         {
-            foreach (var variable in project.VariableList.ProgramVariableList.UserVariables)
-            {
-                if (variable.Name == variableName)
-                    return true;
-            }
-
-            foreach (var entry in project.VariableList.ObjectVariableList.ObjectVariableEntries)
-            {
-                if (entry.Sprite == sprite)
-                {
-                    foreach (var variable in entry.VariableList.UserVariables)
-                        if (variable.Name == variableName)
-                            return true;
-                }
-            }
-
-            return false;
+            return project.GlobalVariables.Concat<Variable>(sprite.LocalVariables)
+                .Any(variable => variable.Name == variableName);
         }
 
-        public static bool VariableNameExistsCheckSelf(Project project, Sprite sprite, UserVariable self, string variableName)
+        public static bool VariableNameExistsCheckSelf(Project project, Sprite sprite, Variable self, string variableName)
         {
-            foreach (var variable in project.VariableList.ProgramVariableList.UserVariables)
-            {
-                if (variable != self && variable.Name == variableName)
-                    return true;
-            }
-
-            foreach (var entry in project.VariableList.ObjectVariableList.ObjectVariableEntries)
-            {
-                if (entry.Sprite == sprite)
-                {
-                    foreach (var variable in entry.VariableList.UserVariables)
-                        if (variable != self && variable.Name == variableName)
-                            return true;
-                }
-            }
-
-            return false;
+            return project.GlobalVariables.Concat<Variable>(sprite.LocalVariables)
+                .Any(variable => !ReferenceEquals(variable, self) && variable.Name == variableName);
         }
     }
 }

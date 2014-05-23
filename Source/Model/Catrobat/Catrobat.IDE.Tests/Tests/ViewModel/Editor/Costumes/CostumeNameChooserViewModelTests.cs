@@ -5,6 +5,8 @@ using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Tests.Services;
 using Catrobat.IDE.Tests.Services.Storage;
 using GalaSoft.MvvmLight.Messaging;
@@ -43,12 +45,12 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             viewModel.SelectedSize = new ImageSizeEntry { NewHeight = 100, NewWidth = 100};
             viewModel.CostumeName = "TestCostume";
 
-            var project = new Project { ProjectHeader = new ProjectHeader(false) { ProgramName = "TestProject" } };
-            var messageContext = new GenericMessage<Project>(project);
+            var project = new XmlProject { ProjectHeader = new XmlProjectHeader(false) { ProgramName = "TestProject" } };
+            var messageContext = new GenericMessage<XmlProject>(project);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProjectChangedListener);
 
-            var sprite = new Sprite();
-            var messageContext2 = new GenericMessage<Sprite>(sprite);
+            var sprite = new XmlSprite();
+            var messageContext2 = new GenericMessage<XmlSprite>(sprite);
             Messenger.Default.Send(messageContext2, ViewModelMessagingToken.CurrentSpriteChangedListener);
             
             var messageContext3 = new GenericMessage<PortableImage>(new PortableImage());

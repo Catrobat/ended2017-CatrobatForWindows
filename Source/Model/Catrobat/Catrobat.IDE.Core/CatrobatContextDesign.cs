@@ -1,11 +1,14 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Bricks;
-using Catrobat.IDE.Core.CatrobatObjects.Costumes;
-using Catrobat.IDE.Core.CatrobatObjects.Scripts;
-using Catrobat.IDE.Core.CatrobatObjects.Sounds;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.Converter;
+using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes;
+using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
+using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 
 namespace Catrobat.IDE.Core
 {
@@ -13,13 +16,15 @@ namespace Catrobat.IDE.Core
     {
         #region Private members
 
-        private Project _currentProject;
+        private XmlProject _currentProject;
+        private Project _currentProject2;
 
         #endregion
 
         #region Properties
 
-        public Project CurrentProject
+        [Obsolete("Use CurrentProject2 instead. ")]
+        public XmlProject CurrentProject
         {
             get { return _currentProject; }
             set
@@ -27,7 +32,19 @@ namespace Catrobat.IDE.Core
                 if (_currentProject == value) return;
 
                 _currentProject = value;
+                _currentProject2 = new XmlProjectConverter().Convert(_currentProject);
                 RaisePropertyChanged(() => CurrentProject);
+            }
+        }
+
+        public Project CurrentProject2
+        {
+            get { return _currentProject2; }
+            set
+            {
+                if (ReferenceEquals(_currentProject2, value)) return;
+                _currentProject2 = value;
+                RaisePropertyChanged(() => CurrentProject2);
             }
         }
 
@@ -54,9 +71,9 @@ namespace Catrobat.IDE.Core
 
         private void InitCurrentProject()
         {
-            var project = new Project
+            var project = new XmlProject
             {
-                ProjectHeader = new ProjectHeader(false)
+                ProjectHeader = new XmlProjectHeader(false)
                 {
                     ApplicationBuildName = "",
                     ApplicationBuildNumber = 0,
@@ -80,27 +97,27 @@ namespace Catrobat.IDE.Core
                 }
             };
 
-            project.SpriteList = new SpriteList();
+            project.SpriteList = new XmlSpriteList();
 
-            var sprite = new Sprite { Name = "Object 1" };
+            var sprite = new XmlSprite { Name = "Object 1" };
 
-            var costumes = new CostumeList
+            var costumes = new XmlCostumeList
                 {
-                    Costumes = new ObservableCollection<Costume>{new Costume{Name = "Cat"}}
+                    Costumes = new ObservableCollection<XmlCostume>{new XmlCostume{Name = "Cat"}}
                 };
             sprite.Costumes = costumes;
 
-            var sounds = new SoundList
+            var sounds = new XmlSoundList
                 {
-                    Sounds = new ObservableCollection<Sound> {new Sound {Name = "Miau Sound"}}
+                    Sounds = new ObservableCollection<XmlSound> {new XmlSound {Name = "Miau Sound"}}
                 };
             sprite.Sounds = sounds;
 
-            var scripts = new ScriptList();
+            var scripts = new XmlScriptList();
 
-            var script = new StartScript();
+            var script = new XmlStartScript();
 
-            var setCostumeBrick = new SetCostumeBrick
+            var setCostumeBrick = new XmlSetCostumeBrick
                 {
                     Costume = sprite.Costumes.Costumes[0],
                 };
@@ -110,26 +127,26 @@ namespace Catrobat.IDE.Core
             sprite.Scripts = scripts;
             project.SpriteList.Sprites.Add(sprite);
 
-            project.VariableList = new VariableList();
+            project.VariableList = new XmlVariableList();
 
-            var programVariableList = new ProgramVariableList();
-            var globalVariables = new ObservableCollection<UserVariable> 
+            var programVariableList = new XmlProgramVariableList();
+            var globalVariables = new ObservableCollection<XmlUserVariable>
             { 
-                new UserVariable { Name = "GlobalVariable 1" }, 
-                new UserVariable { Name = "GlobalVariable 2" }
+                new XmlUserVariable { Name = "GlobalVariable 1" }, 
+                new XmlUserVariable { Name = "GlobalVariable 2" }
             };
             programVariableList.UserVariables = globalVariables;
 
-            var objectVariableList = new ObjectVariableList();
-            var entries = new ObservableCollection<ObjectVariableEntry>
+            var objectVariableList = new XmlObjectVariableList();
+            var entries = new ObservableCollection<XmlObjectVariableEntry>
                 {
-                    new ObjectVariableEntry
+                    new XmlObjectVariableEntry
                     {
-                        SpriteReference = new SpriteReference{Sprite = sprite},
-                        VariableList = new UserVariableList{UserVariables = new ObservableCollection<UserVariable>
+                        XmlSpriteReference = new XmlSpriteReference{Sprite = sprite},
+                        VariableList = new XmlUserVariableList{UserVariables = new ObservableCollection<XmlUserVariable>
                         {
-                            new UserVariable{Name = "LocalVariable 1"},
-                            new UserVariable{Name = "LocalVariable 2"}
+                            new XmlUserVariable {Name = "LocalVariable 1"},
+                            new XmlUserVariable {Name = "LocalVariable 2"}
                         }}
                     }
                 };

@@ -1,5 +1,7 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.VersionConverter;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.SampleData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -122,7 +124,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, error);
 
             var xml = actualDocument.ToString();
-            var project = new Project(xml); // must not throw an exception
+            var project = new XmlProject(xml); // must not throw an exception
 
             if (output != null)
             {

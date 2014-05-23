@@ -1,4 +1,6 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -9,7 +11,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         #region Private Members
 
         private string _spriteName;
-        private Project _currentProject;
+        private XmlProject _currentProject;
 
         #endregion
 
@@ -30,7 +32,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        public Project CurrentProject
+        public XmlProject CurrentProject
         {
             get { return _currentProject; }
             private set
@@ -63,7 +65,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         private void SaveAction()
         {
-            var sprite = new Sprite { Name = SpriteName };
+            var sprite = new XmlSprite { Name = SpriteName };
             CurrentProject.SpriteList.Sprites.Add(sprite);
 
             ResetViewModel();
@@ -86,7 +88,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region Message Actions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<XmlProject> message)
         {
             CurrentProject = message.Content;
         }
@@ -98,7 +100,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<XmlProject>>(this,
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
         }
 

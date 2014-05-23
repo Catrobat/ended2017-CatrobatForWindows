@@ -7,6 +7,8 @@ using Catrobat.IDE.Core.Services.Common;
 using System;
 using System.IO;
 using System.Xml.Linq;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 
 namespace Catrobat.IDE.Phone.Tests.SampleData
 {
@@ -14,7 +16,7 @@ namespace Catrobat.IDE.Phone.Tests.SampleData
   {
     private static string path = "SampleData/SampleProjects/";
 
-    public static Project LoadSampleXML(string sampleName)
+    public static XmlProject LoadSampleXML(string sampleName)
     {
       String xml = null;
       using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
@@ -28,7 +30,7 @@ namespace Catrobat.IDE.Phone.Tests.SampleData
         stream.Close();
         stream.Dispose();
       }
-      return new Project(xml);
+      return new XmlProject(xml);
     }
 
     public static XDocument LoadSampleXDocument(string sampleName)
@@ -48,7 +50,7 @@ namespace Catrobat.IDE.Phone.Tests.SampleData
       return XDocument.Load(new StringReader(xml));
     }
 
-    public static async Task<Project> LoadSampleProject(string sampleName, string sampleProjectName)
+    public static async Task<XmlProject> LoadSampleProject(string sampleName, string sampleProjectName)
     {
         using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
         {

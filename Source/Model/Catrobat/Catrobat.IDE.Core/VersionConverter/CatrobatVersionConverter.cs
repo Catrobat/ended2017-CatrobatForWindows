@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities;
-using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.VersionConverter.Versions;
 
 namespace Catrobat.IDE.Core.VersionConverter
@@ -124,7 +121,7 @@ namespace Catrobat.IDE.Core.VersionConverter
 
             if (!string.IsNullOrEmpty(projectCodePath))
             {
-                var projectCode = "";
+                string projectCode;
 
                 using (var storage = StorageSystem.GetStorage())
                 {

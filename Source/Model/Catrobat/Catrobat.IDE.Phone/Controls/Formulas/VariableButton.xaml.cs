@@ -6,14 +6,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Catrobat.IDE.Core.Annotations;
-using Catrobat.IDE.Core.CatrobatObjects.Bricks;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.Converters;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
+using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;
+using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 
 namespace Catrobat.IDE.Phone.Controls.Formulas
 {
@@ -21,18 +21,18 @@ namespace Catrobat.IDE.Phone.Controls.Formulas
     {
         #region DependencyProperties
 
-        public UserVariable Variable
+        public XmlUserVariable Variable
         {
-            get { return (UserVariable)GetValue(VariableProperty); }
+            get { return (XmlUserVariable) GetValue(VariableProperty); }
             set { SetValue(VariableProperty, value); }
         }
 
-        public static readonly DependencyProperty VariableProperty = DependencyProperty.Register("Variable", typeof(UserVariable), typeof(VariableButton), new PropertyMetadata(VariableChanged));
+        public static readonly DependencyProperty VariableProperty = DependencyProperty.Register("Variable", typeof(XmlUserVariable), typeof(VariableButton), new PropertyMetadata(VariableChanged));
 
         private static void VariableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((VariableButton)d).RaisePropertyChanged(() => ((VariableButton)d).Variable);
-            ((VariableButton)d).VariableChanged((UserVariable)e.NewValue);
+            ((VariableButton)d).VariableChanged((XmlUserVariable) e.NewValue);
         }
 
         #endregion
@@ -42,20 +42,20 @@ namespace Catrobat.IDE.Phone.Controls.Formulas
             ((VariableButton)d).IsEnabled = (bool)e.NewValue;
         }
 
-        public void VariableChanged(UserVariable newVariable)
+        public void VariableChanged(XmlUserVariable newVariable)
         {
-            var setVariableBrick = DataContext as SetVariableBrick;
+            var setVariableBrick = DataContext as XmlSetVariableBrick;
             if (setVariableBrick != null)
                 setVariableBrick.UserVariable = newVariable;
 
-            var changeVariableBrick = DataContext as ChangeVariableBrick;
+            var changeVariableBrick = DataContext as XmlChangeVariableBrick;
             if (changeVariableBrick != null)
                 changeVariableBrick.UserVariable = newVariable;
 
             var isSelected = newVariable != null;
             var converter = new NullVariableConverter();
 
-            newVariable = (UserVariable)converter.Convert(newVariable, null, null, null);
+            newVariable = (XmlUserVariable) converter.Convert(newVariable, null, null, null);
 
             var viewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).VariableSelectionViewModel;
 

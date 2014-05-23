@@ -1,7 +1,15 @@
 ﻿using System.Windows;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Bricks;
-using Catrobat.IDE.Core.CatrobatObjects.Scripts;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
+using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
+using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes;
+using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Nxt;
+using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
+using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds;
+using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;
+using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
 using Catrobat.IDE.Phone.Controls.DynamicDataTemplates;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Scripts
@@ -120,250 +128,250 @@ namespace Catrobat.IDE.Phone.Views.Editor.Scripts
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            var scriptBrick = item as DataObject;
+            var scriptBrick = item as XmlObject;
             if (scriptBrick != null)
             {
                 // Scripts
 
-                if (scriptBrick is StartScript)
+                if (scriptBrick is XmlStartScript)
                 {
                     return StartScript;
                 }
 
-                if (scriptBrick is WhenScript)
+                if (scriptBrick is XmlWhenScript)
                 {
                     return WhenScript;
                 }
 
-                if (scriptBrick is BroadcastScript)
+                if (scriptBrick is XmlBroadcastScript)
                 {
                     return BroadcastScript;
                 }
 
                 // Bricks
-                if (scriptBrick is BroadcastBrick)
+                if (scriptBrick is XmlBroadcastBrick)
                 {
                     return BroadcastBrick;
                 }
 
-                if (scriptBrick is BroadcastWaitBrick)
+                if (scriptBrick is XmlBroadcastWaitBrick)
                 {
                     return BroadcastWaitBrick;
                 }
 
-                if (scriptBrick is ChangeBrightnessBrick)
+                if (scriptBrick is XmlChangeBrightnessBrick)
                 {
                     return ChangeBrightnessBrick;
                 }
 
-                if (scriptBrick is ChangeGhostEffectBrick)
+                if (scriptBrick is XmlChangeGhostEffectBrick)
                 {
                     return ChangeGhostEffectBrick;
                 }
 
-                if (scriptBrick is ChangeSizeByNBrick)
+                if (scriptBrick is XmlChangeSizeByNBrick)
                 {
                     return ChangeSizeByNBrick;
                 }
 
-                if (scriptBrick is ChangeVolumeByBrick)
+                if (scriptBrick is XmlChangeVolumeByBrick)
                 {
                     return ChangeVolumeByBrick;
                 }
 
-                if (scriptBrick is ChangeXByBrick)
+                if (scriptBrick is XmlChangeXByBrick)
                 {
                     return ChangeXByBrick;
                 }
 
-                if (scriptBrick is ChangeYByBrick)
+                if (scriptBrick is XmlChangeYByBrick)
                 {
                     return ChangeYByBrick;
                 }
 
-                if (scriptBrick is ClearGraphicEffectBrick)
+                if (scriptBrick is XmlClearGraphicEffectBrick)
                 {
                     return ClearGraphicEffectBrick;
                 }
 
-                if (scriptBrick is ComeToFrontBrick)
+                if (scriptBrick is XmlComeToFrontBrick)
                 {
                     return ComeToFrontBrick;
                 }
 
-                if (scriptBrick is ForeverBrick)
+                if (scriptBrick is XmlForeverBrick)
                 {
                     return ForeverBrick;
                 }
 
-                if (scriptBrick is GlideToBrick)
+                if (scriptBrick is XmlGlideToBrick)
                 {
                     return GlideToBrick;
                 }
 
-                if (scriptBrick is GoNStepsBackBrick)
+                if (scriptBrick is XmlGoNStepsBackBrick)
                 {
                     return GoNStepsBackBrick;
                 }
 
-                if (scriptBrick is HideBrick)
+                if (scriptBrick is XmlHideBrick)
                 {
                     return HideBrick;
                 }
 
-                if (scriptBrick is IfOnEdgeBounceBrick)
+                if (scriptBrick is XmlIfOnEdgeBounceBrick)
                 {
                     return IfOnEdgeBounceBrick;
                 }
 
-                if (scriptBrick is ForeverLoopEndBrick)
+                if (scriptBrick is XmlForeverLoopEndBrick)
                 {
                     return ForeverLoopEndBrick;
                 }
 
-                if (scriptBrick is RepeatLoopEndBrick)
+                if (scriptBrick is XmlRepeatLoopEndBrick)
                 {
                     return RepeatLoopEndBrick;
                 }
 
-                if (scriptBrick is MoveNStepsBrick)
+                if (scriptBrick is XmlMoveNStepsBrick)
                 {
                     return MoveNStepsBrick;
                 }
 
-                if (scriptBrick is NextCostumeBrick)
+                if (scriptBrick is XmlNextCostumeBrick)
                 {
                     return NextCostumeBrick;
                 }
 
-                if (scriptBrick is NoteBrick)
+                if (scriptBrick is XmlNoteBrick)
                 {
                     return NoteBrick;
                 }
 
-                if (scriptBrick is NxtMotorActionBrick)
+                if (scriptBrick is XmlNxtMotorActionBrick)
                 {
                     return NxtMotorActionBrick;
                 }
 
-                if (scriptBrick is NxtMotorStopBrick)
+                if (scriptBrick is XmlNxtMotorStopBrick)
                 {
                     return NxtMotorStopBrick;
                 }
 
-                if (scriptBrick is NxtMotorTurnAngleBrick)
+                if (scriptBrick is XmlNxtMotorTurnAngleBrick)
                 {
                     return NxtMotorTurnAngleBrick;
                 }
 
-                if (scriptBrick is NxtPlayToneBrick)
+                if (scriptBrick is XmlNxtPlayToneBrick)
                 {
                     return NxtPlayToneBrick;
                 }
 
-                if (scriptBrick is PlaceAtBrick)
+                if (scriptBrick is XmlPlaceAtBrick)
                 {
                     return PlaceAtBrick;
                 }
 
-                if (scriptBrick is PlaySoundBrick)
+                if (scriptBrick is XmlPlaySoundBrick)
                 {
                     return PlaySoundBrick;
                 }
 
-                if (scriptBrick is PointInDirectionBrick)
+                if (scriptBrick is XmlPointInDirectionBrick)
                 {
                     return PointInDirectionBrick;
                 }
 
-                if (scriptBrick is PointToBrick)
+                if (scriptBrick is XmlPointToBrick)
                 {
                     return PointToBrick;
                 }
 
-                if (scriptBrick is RepeatBrick)
+                if (scriptBrick is XmlRepeatBrick)
                 {
                     return RepeatBrick;
                 }
 
-                if (scriptBrick is SetBrightnessBrick)
+                if (scriptBrick is XmlSetBrightnessBrick)
                 {
                     return SetBrightnessBrick;
                 }
 
-                if (scriptBrick is SetCostumeBrick)
+                if (scriptBrick is XmlSetCostumeBrick)
                 {
                     return SetCostumeBrick;
                 }
 
-                if (scriptBrick is SetGhostEffectBrick)
+                if (scriptBrick is XmlSetGhostEffectBrick)
                 {
                     return SetGhostEffectBrick;
                 }
 
-                if (scriptBrick is SetSizeToBrick)
+                if (scriptBrick is XmlSetSizeToBrick)
                 {
                     return SetSizeToBrick;
                 }
 
-                if (scriptBrick is SetVolumeToBrick)
+                if (scriptBrick is XmlSetVolumeToBrick)
                 {
                     return SetVolumeToBrick;
                 }
 
-                if (scriptBrick is SetXBrick)
+                if (scriptBrick is XmlSetXBrick)
                 {
                     return SetXBrick;
                 }
 
-                if (scriptBrick is SetYBrick)
+                if (scriptBrick is XmlSetYBrick)
                 {
                     return SetYBrick;
                 }
 
-                if (scriptBrick is ShowBrick)
+                if (scriptBrick is XmlShowBrick)
                 {
                     return ShowBrick;
                 }
 
-                if (scriptBrick is SpeakBrick)
+                if (scriptBrick is XmlSpeakBrick)
                 {
                     return SpeakBrick;
                 }
 
-                if (scriptBrick is StopAllSoundsBrick)
+                if (scriptBrick is XmlStopAllSoundsBrick)
                 {
                     return StopAllSoundsBrick;
                 }
 
-                if (scriptBrick is TurnLeftBrick)
+                if (scriptBrick is XmlTurnLeftBrick)
                 {
                     return TurnLeftBrick;
                 }
 
-                if (scriptBrick is TurnRightBrick)
+                if (scriptBrick is XmlTurnRightBrick)
                 {
                     return TurnRightBrick;
                 }
 
-                if (scriptBrick is WaitBrick)
+                if (scriptBrick is XmlWaitBrick)
                 {
                     return WaitBrick;
                 }
 
-                if (scriptBrick is SetVariableBrick)
+                if (scriptBrick is XmlSetVariableBrick)
                     return SetVariableBrick;
 
-                if (scriptBrick is ChangeVariableBrick)
+                if (scriptBrick is XmlChangeVariableBrick)
                     return ChangeVariableBrick;
 
-                if (scriptBrick is IfLogicBeginBrick)
+                if (scriptBrick is XmlIfLogicBeginBrick)
                     return IfLogicBeginBrick;
 
-                if (scriptBrick is IfLogicElseBrick)
+                if (scriptBrick is XmlIfLogicElseBrick)
                     return IfLogicElseBrick;
 
-                if (scriptBrick is IfLogicEndBrick)
+                if (scriptBrick is XmlIfLogicEndBrick)
                     return IfLogicEndBrick;
 
                 if (scriptBrick is EmptyDummyBrick)

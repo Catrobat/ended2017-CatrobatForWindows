@@ -19,9 +19,12 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Bricks;
-using Catrobat.IDE.Core.CatrobatObjects.Scripts;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
+using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
 using Microsoft.Phone.Controls;
 using System.Windows.Controls.Primitives;
 
@@ -249,12 +252,12 @@ namespace Catrobat.IDE.Phone.Controls.ReorderableListbox
 
             // BEGIN Added by Valentin
 
-            if (item is Script)
+            if (item is XmlScript)
             {
                 itemContainer.DragHandleTemplate = (DataTemplate)App.Current.Resources["DragItemTemplateScript"];
 
             }
-            else if (item is Brick)
+            else if (item is XmlBrick)
             {
                 itemContainer.DragHandleTemplate = (DataTemplate)App.Current.Resources["DragItemTemplateBrick"];
             }
@@ -368,12 +371,12 @@ namespace Catrobat.IDE.Phone.Controls.ReorderableListbox
             // Added by valentin
             if (ItemsSource is ScriptBrickCollection)
             {
-                if (_dragItem is Script)
+                if (_dragItem is XmlScript)
                 {
                     bool failed = false;
-                    foreach (DataObject dataObject in ItemsSource)
+                    foreach (XmlObject dataObject in ItemsSource)
                     {
-                        if (dataObject is Brick)
+                        if (dataObject is XmlBrick)
                         {
                             var container = ItemContainerGenerator.ContainerFromItem(dataObject);
 
@@ -387,9 +390,9 @@ namespace Catrobat.IDE.Phone.Controls.ReorderableListbox
 
                     if (failed)
                     {
-                        foreach (DataObject dataObject in ItemsSource)
+                        foreach (XmlObject dataObject in ItemsSource)
                         {
-                            if (dataObject is Brick)
+                            if (dataObject is XmlBrick)
                             {
                                 var container = ItemContainerGenerator.ContainerFromItem(dataObject);
 
@@ -513,10 +516,10 @@ namespace Catrobat.IDE.Phone.Controls.ReorderableListbox
 
             if (ItemsSource is ScriptBrickCollection)
             {
-                if (_dragItem is Script)
-                    foreach (DataObject dataObject in ItemsSource)
+                if (_dragItem is XmlScript)
+                    foreach (XmlObject dataObject in ItemsSource)
                     {
-                        if (dataObject is Brick)
+                        if (dataObject is XmlBrick)
                         {
                             var container = ItemContainerGenerator.ContainerFromItem(dataObject);
 
@@ -562,7 +565,7 @@ namespace Catrobat.IDE.Phone.Controls.ReorderableListbox
                 ((TranslateTransform)_dragIndicator.RenderTransform).Y);
 
 
-            if (delta > 0 && !(_dragItem is Script))
+            if (delta > 0 && !(_dragItem is XmlScript))
             {
                 // Adjust the duration based on the distance, so the speed will be constant.
                 TimeSpan duration = TimeSpan.FromSeconds(0.25 * delta / itemRect.Height);

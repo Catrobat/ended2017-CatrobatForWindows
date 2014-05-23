@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Windows;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
+using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 
 namespace Catrobat.IDE.Phone.Controls.Formulas
 {
@@ -10,13 +10,13 @@ namespace Catrobat.IDE.Phone.Controls.Formulas
     {
         #region DependencyProperties
 
-        public Formula Formula
+        public XmlFormula Formula
         {
-            get { return (Formula)GetValue(FormulaProperty); }
+            get { return (XmlFormula)GetValue(FormulaProperty); }
             set { SetValue(FormulaProperty, value); }
         }
 
-        public static readonly DependencyProperty FormulaProperty = DependencyProperty.Register("Formula", typeof(Formula), typeof(FormulaButton), new PropertyMetadata(null));
+        public static readonly DependencyProperty FormulaProperty = DependencyProperty.Register("Formula", typeof(XmlFormula), typeof(FormulaButton), new PropertyMetadata(null));
 
         #endregion
 

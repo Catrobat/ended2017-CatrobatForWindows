@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Costumes;
-using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 
 namespace Catrobat.IDE.Core.UI
 {
@@ -26,19 +26,19 @@ namespace Catrobat.IDE.Core.UI
 
         if (_sourceCollection != null)
         {
-          if (_sourceCollection is IList<Costume>)
+          if (_sourceCollection is IList<XmlCostume>)
           {
-            NullObject = new Costume { Name = AppResources.Editor_NoCostumeSelected };
+            NullObject = new XmlCostume { Name = AppResources.Editor_NoCostumeSelected };
           }
 
-          if (_sourceCollection is IList<Sound>)
+          if (_sourceCollection is IList<XmlSound>)
           {
-            NullObject = new Sound { Name = AppResources.Editor_NoSoundSelected };
+            NullObject = new XmlSound { Name = AppResources.Editor_NoSoundSelected };
           }
 
-          if (_sourceCollection is IList<Sprite>)
+          if (_sourceCollection is IList<XmlSprite>)
           {
-            NullObject = new Sprite { Name = AppResources.Editor_NoSpriteSelected };
+            NullObject = new XmlSprite { Name = AppResources.Editor_NoSpriteSelected };
           }
 
           if (_sourceCollection is IList<String>)

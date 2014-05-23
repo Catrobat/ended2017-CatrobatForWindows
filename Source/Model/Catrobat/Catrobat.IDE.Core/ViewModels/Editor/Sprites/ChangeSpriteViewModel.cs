@@ -1,4 +1,6 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -8,14 +10,14 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
     {
         #region Private Members
 
-        private Sprite _receivedSprite;
+        private XmlSprite _receivedSprite;
         private string _spriteName;
 
         #endregion
 
         #region Properties
 
-        public Sprite SelectedSprite
+        public XmlSprite SelectedSprite
         {
             get { return _receivedSprite; }
             set
@@ -91,7 +93,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region Message Actions
 
-        private void CurrentSpriteChangedMessageAction(GenericMessage<Sprite> message)
+        private void CurrentSpriteChangedMessageAction(GenericMessage<XmlSprite> message)
         {
             SelectedSprite = message.Content;
             SpriteName = SelectedSprite.Name;
@@ -104,7 +106,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
+            Messenger.Default.Register<GenericMessage<XmlSprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
         }
 
         public void ResetViewModel()

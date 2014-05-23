@@ -1,9 +1,11 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using System;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 
 namespace Catrobat.IDE.Core.Utilities.Helpers
 {
+    [Obsolete("Pfui!")]
     public static class XmlParserTempProjectHelper
     {
-        public static Project Project { get; set; }
+        public static XmlProject Project { get; set; }
     }
 }

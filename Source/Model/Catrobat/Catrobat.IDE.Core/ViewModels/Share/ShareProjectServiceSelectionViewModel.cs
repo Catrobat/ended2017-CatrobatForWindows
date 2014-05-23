@@ -1,6 +1,8 @@
 ﻿using System.Windows.Input;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -10,13 +12,13 @@ namespace Catrobat.IDE.Core.ViewModels.Share
     {
         #region private Members
 
-        private Project _projectToShare;
+        private XmlProject _projectToShare;
 
         #endregion
 
         #region Properties
 
-        public Project ProjectToShare
+        public XmlProject ProjectToShare
         {
             get { return _projectToShare; }
             private set { _projectToShare = value; RaisePropertyChanged(() => ProjectToShare); }
@@ -55,7 +57,7 @@ namespace Catrobat.IDE.Core.ViewModels.Share
 
         #region MessageActions
 
-        private void ProjectToShareChangedMessageAction(GenericMessage<Project> message)
+        private void ProjectToShareChangedMessageAction(GenericMessage<XmlProject> message)
         {
             ProjectToShare = message.Content;
         }
@@ -67,7 +69,7 @@ namespace Catrobat.IDE.Core.ViewModels.Share
             // Commands
             UploadToSkyDriveCommand = new RelayCommand(ShareWithSkydriveAction, ShareWithSkydriveCommand_CanExecute);
  
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<XmlProject>>(this,
                  ViewModelMessagingToken.ShareProjectHeaderListener, ProjectToShareChangedMessageAction);
         }
     }

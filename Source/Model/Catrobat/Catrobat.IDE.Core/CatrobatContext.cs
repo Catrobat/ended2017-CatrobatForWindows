@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.Utilities;
-using Catrobat.IDE.Core.Utilities.Helpers;
-using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Core.Xml.Converter;
+using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 
 namespace Catrobat.IDE.Core
 {
@@ -18,6 +16,11 @@ namespace Catrobat.IDE.Core
         #region Static methods
 
         public static async Task<Project> LoadNewProjectByNameStatic(string projectName)
+        {
+            return new XmlProjectConverter().Convert(await LoadNewXmlProjectByNameStatic(projectName));
+        }
+
+        public static async Task<XmlProject> LoadNewXmlProjectByNameStatic(string projectName)
         {
             if (Debugger.IsAttached)
             {
@@ -36,15 +39,19 @@ namespace Catrobat.IDE.Core
             }
         }
 
-        private static async Task<Project> LoadNewProjectByNameStaticWithoutTryCatch(string projectName)
+        private static async Task<XmlProject> LoadNewProjectByNameStaticWithoutTryCatch(string projectName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
                 var tempPath = Path.Combine(ProjectsPath, projectName, Project.ProjectCodePath);
                 var xml = await storage.ReadTextFileAsync(tempPath);
-                var newProject = new Project(xml);
-                newProject.ProjectHeader.ProgramName = projectName;
-                return newProject;
+                return new XmlProject(xml)
+                {
+                    ProjectHeader =
+                    {
+                        ProgramName = projectName
+                    }
+                };
             }
         }
 
@@ -57,43 +64,43 @@ namespace Catrobat.IDE.Core
 
         public static async Task<Project> CreateEmptyProject(string newProjectName)
         {
-            var newProject = new Project();
+            var newProject = new XmlProject();
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var destinationPath = Path.Combine(CatrobatContextBase.ProjectsPath, newProjectName);
+                var destinationPath = Path.Combine(ProjectsPath, newProjectName);
 
                 var counter = 1;
                 while (await storage.DirectoryExistsAsync(destinationPath))
                 {
                     newProjectName = newProjectName + counter;
-                    destinationPath = Path.Combine(CatrobatContextBase.ProjectsPath, newProjectName);
+                    destinationPath = Path.Combine(ProjectsPath, newProjectName);
                     counter++;
                 }
             }
 
-            newProject.ProjectHeader = new ProjectHeader(true);
-            newProject.SpriteList = new SpriteList();
-            newProject.VariableList.ObjectVariableList = new ObjectVariableList();
-            newProject.VariableList.ProgramVariableList = new ProgramVariableList();
+            newProject.ProjectHeader = new XmlProjectHeader(true);
+            newProject.SpriteList = new XmlSpriteList();
+            newProject.VariableList.ObjectVariableList = new XmlObjectVariableList();
+            newProject.VariableList.ProgramVariableList = new XmlProgramVariableList();
             newProject.ProjectHeader.ProgramName = newProjectName;
             await newProject.Save();
 
-            return newProject;
+            return new XmlProjectConverter().Convert(newProject);
         }
 
         public static async Task<Project> CopyProject(string sourceProjectName, string newProjectName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                var sourcePath = Path.Combine(CatrobatContextBase.ProjectsPath, sourceProjectName);
-                var destinationPath = Path.Combine(CatrobatContextBase.ProjectsPath, newProjectName);
+                var sourcePath = Path.Combine(ProjectsPath, sourceProjectName);
+                var destinationPath = Path.Combine(ProjectsPath, newProjectName);
 
                 var counter = 1;
                 while (await storage.DirectoryExistsAsync(destinationPath))
                 {
                     newProjectName = newProjectName + counter;
-                    destinationPath = Path.Combine(CatrobatContextBase.ProjectsPath, newProjectName);
+                    destinationPath = Path.Combine(ProjectsPath, newProjectName);
                     counter++;
                 }
 
@@ -101,11 +108,11 @@ namespace Catrobat.IDE.Core
 
                 var tempXmlPath = Path.Combine(destinationPath, Project.ProjectCodePath);
                 var xml = await storage.ReadTextFileAsync(tempXmlPath);
-                var newProject = new Project(xml);
+                var newProject = new XmlProject(xml);
                 newProject.ProjectHeader.ProgramName = newProjectName;
                 await newProject.Save();
 
-                return newProject;
+                return new XmlProjectConverter().Convert(newProject);
             }
         }
 

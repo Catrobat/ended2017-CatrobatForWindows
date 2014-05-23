@@ -1,6 +1,8 @@
 ﻿using System.IO;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -10,7 +12,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
     {
         #region Private Members
 
-        private Sprite _receivedSelectedSprite;
+        private XmlSprite _receivedSelectedSprite;
 
         #endregion
 
@@ -30,7 +32,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 
         private async void AudioLibraryAction()
         {
-            var spriteMessage = new GenericMessage<Sprite>(_receivedSelectedSprite);
+            var spriteMessage = new GenericMessage<XmlSprite>(_receivedSelectedSprite);
             Messenger.Default.Send(spriteMessage, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
             var result = await ServiceLocator.SoundService.CreateSoundFromMediaLibrary(_receivedSelectedSprite);
@@ -57,7 +59,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
             }
         }
 
-        private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
+        private void ReceiveSelectedSpriteMessageAction(GenericMessage<XmlSprite> message)
         {
             _receivedSelectedSprite = message.Content;
         }
@@ -74,7 +76,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
             AudioLibraryCommand = new RelayCommand(AudioLibraryAction);
             RecorderCommand = new RelayCommand(RecorderAction);
 
-            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
+            Messenger.Default.Register<GenericMessage<XmlSprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
         }
     }
 }

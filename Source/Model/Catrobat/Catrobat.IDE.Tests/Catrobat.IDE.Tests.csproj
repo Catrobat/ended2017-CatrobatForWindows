@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\EnumerableAssert.cs" />
+    <Compile Include="Extensions\ModelAssert.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\MethodInfoExtensions.cs" />
     <Compile Include="Extensions\ResourceSetExtensions.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Services\PictureServiceTest.cs" />
     <Compile Include="Tests\IDE\Formulas\FormulaSerializerFormulaTests.cs" />
     <Compile Include="Tests\IDE\ObservableCollectionTests.cs" />
+    <Compile Include="Tests\IDE\Xml\XmlFormulaTreeConverterTests.cs" />
     <Compile Include="Tests\Misc\LocalizationTests.cs" />
     <Compile Include="Tests\Data\CatrobatContextTests.cs" />
     <Compile Include="Tests\Data\CopyTests.cs" />
@@ -174,7 +176,7 @@
     <Compile Include="Tests\IDE\Formulas\FormulaSerializerTokenTests.cs" />
     <Compile Include="Tests\IDE\Formulas\FormulaTokenizerStringTests.cs" />
     <Compile Include="Tests\IDE\Formulas\FormulaTokenizerTokenTests.cs" />
-    <Compile Include="Tests\IDE\Formulas\XmlFormulaTreeConverterTests.cs" />
+    <Compile Include="Tests\IDE\Xml\XmlProjectConverterTests.cs" />
     <Compile Include="Tests\IDE\ImageSizeEntryTests.cs" />
     <Compile Include="Tests\IDE\NullItemCollectionTests.cs" />
     <Compile Include="Tests\Misc\FileNameGeneratorTests.cs" />
@@ -280,6 +282,7 @@
     </Content>
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test12Input.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test14Input.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -372,6 +375,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />

@@ -196,6 +196,7 @@
                 <DataTemplate>
                   <TextBlock
                   Text="{Binding MultiBindingProperty, Converter={StaticResource FormulaKeyStringConverter}}"
+                  d:DataContext="{d:DesignInstance formula:FormulaKey}"
                   Style="{StaticResource PhoneTextLargeStyle}">
                   <toolkit:ContextMenuService.ContextMenu>
                     <toolkit:ContextMenu>
@@ -237,6 +238,7 @@
                   <DataTemplate>
                     <TextBlock
                       Text="{Binding MultiBindingProperty, Converter={StaticResource FormulaKeyStringConverter}}"
+                      d:DataContext="{d:DesignInstance formula:FormulaKey}"
                       Style="{StaticResource PhoneTextLargeStyle}">
                     <toolkit:ContextMenuService.ContextMenu>
                       <toolkit:ContextMenu>
@@ -273,6 +275,7 @@
                   <DataTemplate>
                     <TextBlock
                     Text="{Binding MultiBindingProperty, Converter={StaticResource FormulaKeyStringConverter}}"
+                    d:DataContext="{d:DesignInstance formula:FormulaKey}"
                     Style="{StaticResource PhoneTextLargeStyle}">
                     <toolkit:ContextMenuService.ContextMenu>
                       <toolkit:ContextMenu>

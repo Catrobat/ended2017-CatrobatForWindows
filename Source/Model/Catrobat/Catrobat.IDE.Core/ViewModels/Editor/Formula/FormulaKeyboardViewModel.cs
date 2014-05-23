@@ -1,7 +1,7 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Formulas.Editor;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;
@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             get { return _project; }
             set
             {
-                if (_project == value) return;
+                if (ReferenceEquals(_project, value)) return;
                 _project = value;
                 GlobalVariablesSource = Project == null
                     ? null
@@ -40,7 +40,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             get { return _sprite; }
             set
             {
-                if (_sprite == value) return;
+                if (ReferenceEquals(_sprite, value)) return;
                 _sprite = value;
                 LocalVariablesSource = Project == null || Sprite == null
                     ? null
@@ -48,8 +48,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             }
         }
 
-        private ObservableCollection<UserVariable> _localVariablesSource;
-        private ObservableCollection<UserVariable> LocalVariablesSource
+        private ObservableCollection<LocalVariable> _localVariablesSource;
+        private ObservableCollection<LocalVariable> LocalVariablesSource
         {
             get { return _localVariablesSource; }
             set
@@ -62,7 +62,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable);
                 LocalVariables = LocalVariablesSource == null ? null : LocalVariablesSource.ObservableSelect(
                     selector: variable => new FormulaKey(FormulaEditorKey.LocalVariable, variable), 
-                    inverseSelector: data => data.Variable);
+                    inverseSelector: data => data.LocalVariable);
             }
         }
         private void LocalVariablesSource_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -72,22 +72,22 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             {
                 case NotifyCollectionChangedAction.Reset:
                     var variables = LocalVariablesSource.ToSet();
-                    if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && !variables.Contains(data.Variable));
-                    if (RecentlyUsed != null) RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && !variables.Contains(data.Variable));
+                    if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && !variables.Contains(data.LocalVariable));
+                    if (RecentlyUsed != null) RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && !variables.Contains(data.LocalVariable));
                     break;
                 case NotifyCollectionChangedAction.Remove:
                 case NotifyCollectionChangedAction.Replace:
-                    var deletedVariables = e.OldItems.Cast<UserVariable>().ToSet();
-                    if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && deletedVariables.Contains(data.Variable));
-                    if (RecentlyUsed != null) RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && deletedVariables.Contains(data.Variable));
+                    var deletedVariables = e.OldItems.Cast<LocalVariable>().ToSet();
+                    if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && deletedVariables.Contains(data.LocalVariable));
+                    if (RecentlyUsed != null) RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.LocalVariable && deletedVariables.Contains(data.LocalVariable));
                     break;
             }
         }
 
         public IObservableCollection<FormulaKey> LocalVariables { get; private set; }
 
-        private ObservableCollection<UserVariable> _globalVariablesSource;
-        private ObservableCollection<UserVariable> GlobalVariablesSource
+        private ObservableCollection<GlobalVariable> _globalVariablesSource;
+        private ObservableCollection<GlobalVariable> GlobalVariablesSource
         {
             get { return _globalVariablesSource; }
             set
@@ -99,8 +99,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
                 if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable);
                 GlobalVariables = GlobalVariablesSource == null ? null : GlobalVariablesSource.ObservableSelect(
-                    selector: variable => new FormulaKey(FormulaEditorKey.GlobalVariable, variable),
-                    inverseSelector: data => data.Variable);
+                    selector: variable => new FormulaKey(FormulaEditorKey.GlobalVariable, globalVariable: variable),
+                    inverseSelector: data => data.GlobalVariable);
             }
         }
         private void GlobalVariablesSource_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -110,14 +110,14 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             {
                 case NotifyCollectionChangedAction.Reset:
                     var variables = GlobalVariablesSource.ToSet();
-                    if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && !variables.Contains(data.Variable));
-                    if (RecentlyUsed != null) RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && !variables.Contains(data.Variable));
+                    if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && !variables.Contains(data.GlobalVariable));
+                    if (RecentlyUsed != null) RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && !variables.Contains(data.GlobalVariable));
                     break;
                 case NotifyCollectionChangedAction.Remove:
                 case NotifyCollectionChangedAction.Replace:
-                    var deletedVariables = e.OldItems.Cast<UserVariable>().ToSet();
-                    if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && deletedVariables.Contains(data.Variable));
-                    if (RecentlyUsed != null) RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && deletedVariables.Contains(data.Variable));
+                    var deletedVariables = e.OldItems.Cast<GlobalVariable>().ToSet();
+                    if (Favorites != null) Favorites.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && deletedVariables.Contains(data.GlobalVariable));
+                    if (RecentlyUsed != null) RecentlyUsed.RemoveAll(data => data.Key == FormulaEditorKey.GlobalVariable && deletedVariables.Contains(data.GlobalVariable));
                     break;
             }
         }
@@ -223,7 +223,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         public RelayCommand<FormulaKey> RenameVariableCommand { get; private set; }
         private void RenameVariableAction(FormulaKey data)
         {
-            var message = new GenericMessage<UserVariable>(data.Variable);
+            var message = new GenericMessage<Variable>((Variable) data.LocalVariable ?? data.GlobalVariable);
             Messenger.Default.Send(message, ViewModelMessagingToken.SelectedUserVariableChangedListener);
 
             ServiceLocator.NavigationService.NavigateTo<ChangeVariableViewModel>();
@@ -254,8 +254,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private void LoadSettingsAction(LocalSettings settings)
         {
-            var localVariables = (LocalVariables ?? Enumerable.Empty<FormulaKey>()).ToLookup(variable => variable.Variable == null ? null : variable.Variable.Name);
-            var globalVariables = (GlobalVariables ?? Enumerable.Empty<FormulaKey>()).ToLookup(variable => variable.Variable == null ? null : variable.Variable.Name);
+            var localVariables = (LocalVariables ?? Enumerable.Empty<FormulaKey>()).ToLookup(variable => variable.LocalVariable == null ? null : variable.LocalVariable.Name);
+            var globalVariables = (GlobalVariables ?? Enumerable.Empty<FormulaKey>()).ToLookup(variable => variable.GlobalVariable == null ? null : variable.GlobalVariable.Name);
             RecentlyUsed = (DeserializeFormulaKeyCollection(settings.RecentlyUsed, localVariables, globalVariables) ?? Enumerable.Empty<FormulaKey>()).ToObservableCollection();
             Favorites = (DeserializeFormulaKeyCollection(settings.Favorites, localVariables, globalVariables) ?? Enumerable.Empty<FormulaKey>()).ToObservableCollection();
         }
@@ -270,7 +270,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         {
             return collection == null ? null : collection.Select(data => (SerializableTuple<int, string>) Tuple.Create(
                 item1: (int) data.Key,
-                item2: data.Variable == null ? null : data.Variable.Name));
+                item2: data.LocalVariable != null ? data.LocalVariable.Name : data.GlobalVariable != null ? data.GlobalVariable.Name : null));
         }
 
         private static IEnumerable<FormulaKey> DeserializeFormulaKeyCollection(

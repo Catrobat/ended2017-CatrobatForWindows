@@ -1,37 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
+using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities.Helpers;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Bricks;
-using Catrobat.IDE.Core.CatrobatObjects.Costumes;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
-using Catrobat.IDE.Core.CatrobatObjects.Scripts;
-using Catrobat.IDE.Core.CatrobatObjects.Sounds;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using System.IO;
-using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Tests.Extensions;
 
 namespace Catrobat.IDE.Tests.Misc
 {
     public class ProjectGeneratorReflection : ITestProjectGenerator
     {
+        private Random _random;
+        private readonly int? _seed;
+        private readonly DateTime? _now;
+
+        public ProjectGeneratorReflection()
+        {
+            _seed = null;
+            _now = null;
+        }
+
+        public ProjectGeneratorReflection(int seed, DateTime now)
+        {
+            _seed = seed;
+            _now = now;
+        }
+
         // Bricks that must be tested manually
         private static readonly List<Type> ExcludedBricks = new List<Type>
         {
             typeof(ForeverBrick),
-            typeof(ForeverLoopEndBrick),
+            typeof(EndForeverBrick),
             typeof(RepeatBrick),
-            typeof(RepeatLoopEndBrick),
-            typeof(IfLogicBeginBrick),
-            typeof(IfLogicElseBrick),
-            typeof(IfLogicEndBrick),
+            typeof(EndRepeatBrick),
+            typeof(IfBrick),
+            typeof(ElseBrick),
+            typeof(EndIfBrick),
             typeof(EmptyDummyBrick)
         };
 
@@ -42,92 +52,70 @@ namespace Catrobat.IDE.Tests.Misc
 
         public Project GenerateProject()
         {
+            _random = _seed.HasValue ? new Random(_seed.Value) : new Random();
             var project = new Project
             {
-                ProjectHeader = new ProjectHeader
+                Name = "project1",
+                Description = "",
+                UploadHeader = new UploadHeader
                 {
-                    ApplicationBuildName = "",
-                    ApplicationBuildNumber = 0,
-                    ApplicationName = "Pocket Code",
-                    ApplicationVersion = "0.0.1",
-                    CatrobatLanguageVersion = "Win0.08",
-                    DateTimeUpload = DateTime.Now.ToString(CultureInfo.InvariantCulture),
-                    Description = "",
-                    DeviceName = "SampleDevice",
+                    Uploaded = _now.HasValue ? _now.Value : DateTime.Now,
                     MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
-                    Platform = ServiceLocator.SystemInformationService.PlatformName,
-                    PlatformVersion = ServiceLocator.SystemInformationService.PlatformVersion,
                     ProgramLicense = "http://developer.catrobat.org/agpl_v3",
                     RemixOf = "",
-                    ScreenHeight = 480,
-                    ScreenWidth = 800,
-                    Tags = "",
+                    Tags = new ObservableCollection<string>(),
                     Url = "http://pocketcode.org/details/871",
-                    UserHandle = ""
-                }
+                    UserId = ""
+                }, 
+                BroadcastMessages = new ObservableCollection<BroadcastMessage>()
             };
 
-            XmlParserTempProjectHelper.Project = project;
-
-            project.ProjectHeader.SetProgramName("project1");
-
-            project.SpriteList = new SpriteList();
             var sprites = new ObservableCollection<Sprite>();
+            project.Sprites = sprites;
 
-            project.SpriteList.Sprites = sprites;
-
-            for (int i = 0; i < 2; i++)
+            for (var i = 0; i < 2; i++)
             {
-                var sprite = new Sprite
+                sprites.Add(new Sprite
                 {
                     Name = "Object" + i,
-                };
-
-                sprite.Costumes = new CostumeList();
-                sprite.Sounds = new SoundList();
-                sprites.Add(sprite);
+                    Costumes = new ObservableCollection<Costume>(),
+                    Sounds = new ObservableCollection<Sound>(),
+                });
             }
 
-            for (int i = 0; i < 6; i++)
+            for (var i = 0; i < 6; i++)
             {
-                var sprite = sprites[i % 2];
-                sprite.Costumes = new CostumeList();
-                sprite.Costumes.Costumes.Add(GenerateCostume(i, project));
+                sprites[i % 2].Costumes = new ObservableCollection<Costume> {GenerateCostume(i, project)};
             }
 
-            for (int i = 0; i < 6; i++)
+            for (var i = 0; i < 6; i++)
             {
-                var sprite = sprites[i % 2];
-                sprite.Sounds = new SoundList();
-                sprite.Sounds.Sounds.Add(GenerateSound(i, project));
+                sprites[i % 2].Sounds = new ObservableCollection<Sound> {GenerateSound(i, project)};
             }
 
 
-            AddUserVariables(project);
+            AddVariables(project);
 
 
             foreach (var sprite in sprites)
             {
+                sprite.Scripts = new ObservableCollection<Script>();
                 var scripts = ReflectionHelper.GetInstances<Script>(ExcludedScripts);
-
                 foreach (var script in scripts)
                 {
                     FillDummyValues(script, project, sprite);
-                    sprite.Scripts.Scripts.Add(script);
+                    sprite.Scripts.Add(script);
 
                     var bricks = ReflectionHelper.GetInstances<Brick>(ExcludedBricks);
                     foreach (var brick in bricks)
                     {
                         FillDummyValues(brick, project, sprite);
-                        script.Bricks.Bricks.Add(brick);
+                        script.Bricks.Add(brick);
                     }
-                    AddLoopBricks(script.Bricks.Bricks);
-                    AddIfLogicBricks(script.Bricks.Bricks);
+                    AddLoopBricks(script.Bricks);
+                    AddIfLogicBricks(script.Bricks);
                 }
             }
-
-            project.LoadReference();
-            project.LoadBroadcastMessages();
 
             return project;
         }
@@ -146,11 +134,8 @@ namespace Catrobat.IDE.Tests.Misc
             }
         }
 
-        private Random _rand;
         private object CreateDummyValue(Type type, Project project, Sprite sprite)
         {
-            _rand = new Random(42);
-
             if (type == typeof(bool))
             {
                 return true;
@@ -171,85 +156,62 @@ namespace Catrobat.IDE.Tests.Misc
                 return 42.42;
             }
 
-            if (type == typeof (WhenScript.WhenScriptAction))
-            {
-                return WhenScript.WhenScriptAction.Tapped;
-            }
-
-            if (type == typeof(Formula))
+            if (type == typeof(FormulaTree))
             {
                 return GenerateFormula(project, sprite);
             }
 
             if (type == typeof(Sprite))
             {
-                var sprites = project.SpriteList.Sprites;
-                return sprites[_rand.Next(0, sprites.Count - 1)];
+                return _random.Next(project.Sprites);
             }
 
             if (type == typeof(Costume))
             {
-                var costumes = sprite.Costumes.Costumes;
-                return costumes[_rand.Next(0, costumes.Count - 1)];
+                var costumes = sprite.Costumes;
+                return costumes[_random.Next(0, costumes.Count - 1)];
             }
 
             if (type == typeof(Sound))
             {
-                var sounds = sprite.Sounds.Sounds;
-                return sounds[_rand.Next(0, sounds.Count - 1)];
+                var sounds = sprite.Sounds;
+                return sounds[_random.Next(0, sounds.Count - 1)];
             }
 
-            if (type == typeof(UserVariable))
+            if (type == typeof(Variable))
             {
-                foreach (var entry in project.VariableList.ObjectVariableList.ObjectVariableEntries)
-                    if (entry.Sprite == sprite)
-                    {
-                        var userVariables = entry.VariableList.UserVariables;
-                        return userVariables[_rand.Next(0, userVariables.Count - 1)];
-                    }
+                return _random.NextBool()
+                    ? (Variable)_random.Next(sprite.LocalVariables)
+                    : _random.Next(project.GlobalVariables);
             }
 
-            if (type == typeof(IfLogicBeginBrick))
+            if (type == typeof(IfBrick))
             {
-                foreach (var script in sprite.Scripts.Scripts)
-                    foreach (var brick in script.Bricks.Bricks)
-                        if (brick is IfLogicBeginBrick)
-                            return brick;
+                return sprite.Scripts.SelectMany(script => script.Bricks).OfType<IfBrick>().FirstOrDefault();
             }
-
-            if (type == typeof(IfLogicElseBrick))
+            if (type == typeof(ElseBrick))
             {
-                foreach (var script in sprite.Scripts.Scripts)
-                    foreach (var brick in script.Bricks.Bricks)
-                        if (brick is IfLogicElseBrick)
-                            return brick;
+                return sprite.Scripts.SelectMany(script => script.Bricks).OfType<ElseBrick>().FirstOrDefault(); 
             }
-
-            if (type == typeof(IfLogicEndBrick))
+            if (type == typeof(EndIfBrick))
             {
-                foreach (var script in sprite.Scripts.Scripts)
-                    foreach (var brick in script.Bricks.Bricks)
-                        if (brick is IfLogicEndBrick)
-                            return brick;
+                return sprite.Scripts.SelectMany(script => script.Bricks).OfType<EndIfBrick>().FirstOrDefault();
             }
 
-            if (type == typeof (ScriptList))
-                return new ScriptList();
+            if (type == typeof (ObservableCollection<Script>))
+                return new ObservableCollection<Script>();
 
-            if (type == typeof (BrickList))
-                return new BrickList();
+            if (type == typeof(ObservableCollection<Brick>))
+                return new ObservableCollection<Brick>();
 
             return null;
         }
 
-        private Formula GenerateFormula(Project project, Sprite sprite)
+        private FormulaTree GenerateFormula(Project project, Sprite sprite)
         {
-            return new Formula
-            {
-                FormulaTree2 = FormulaTreeFactory.CreateSubtractNode(
+            return FormulaTreeFactory.CreateSubtractNode(
                     leftChild: FormulaTreeFactory.CreateSinNode(FormulaTreeFactory.CreateNumberNode(6)), 
-                    rightChild: FormulaTreeFactory.CreateLocalVariableNode(VariableHelper.GetLocalVariableList(project, sprite).FirstOrDefault())), 
-            };
+                    rightChild: FormulaTreeFactory.CreateLocalVariableNode(VariableHelper.GetLocalVariableList(project, sprite).FirstOrDefault()));
         }
 
         private Costume GenerateCostume(int index, Project project)
@@ -290,48 +252,27 @@ namespace Catrobat.IDE.Tests.Misc
             return sound;
         }
 
-        private void AddUserVariables(Project project)
+        private void AddVariables(Project project)
         {
-            project.VariableList = new VariableList
+            foreach (var sprite in project.Sprites)
+            {
+                sprite.LocalVariables = new ObservableCollection<LocalVariable>
                 {
-                    ObjectVariableList = new ObjectVariableList
-                        {
-                            ObjectVariableEntries = new ObservableCollection<ObjectVariableEntry>()
-                        },
-                    ProgramVariableList = new ProgramVariableList
-                        {
-                            UserVariables = new ObservableCollection<UserVariable>()
-                        }
+                    new LocalVariable
+                    {
+                        Name = "LocalTestVariable"
+                    }
                 };
-
-            foreach (var sprite in project.SpriteList.Sprites)
-            {
-                var entry = new ObjectVariableEntry
-                    {
-                        Sprite = sprite,
-                        VariableList = new UserVariableList
-                            {
-                                UserVariables = new ObservableCollection<UserVariable>
-                                    {
-                                        new UserVariable
-                                            {
-                                                Name = "LocalTestVariable"
-                                            }
-                                    }
-                            }
-                    };
-
-                project.VariableList.ObjectVariableList.ObjectVariableEntries.Add(entry);
             }
 
-            for (int i = 0; i < 3; i++)
+            project.GlobalVariables = new ObservableCollection<GlobalVariable>();
+            for (var i = 0; i < 3; i++)
             {
-                project.VariableList.ProgramVariableList.UserVariables.Add(new UserVariable
-                    {
-                        Name = "GlobalTestVariable" + i
-                    });
+                project.GlobalVariables.Add(new GlobalVariable
+                {
+                    Name = "GlobalTestVariable" + i
+                });
             }
-
         }
 
         private void AddLoopBricks(ObservableCollection<Brick> bricks)
@@ -341,51 +282,45 @@ namespace Catrobat.IDE.Tests.Misc
 
             var repeatBrick = new RepeatBrick
             {
-                TimesToRepeat = new Formula
-                {
-                    FormulaTree2 = FormulaTreeFactory.CreateNumberNode(2)
-                }
+                Count = FormulaTreeFactory.CreateNumberNode(2)
             };
             bricks.Add(repeatBrick);
 
-            var loopEndBrickForever = new ForeverLoopEndBrick();
+            var loopEndBrickForever = new EndForeverBrick();
             bricks.Add(loopEndBrickForever);
 
-            var loopEndBrickRepeat = new RepeatLoopEndBrick();
+            var loopEndBrickRepeat = new EndRepeatBrick();
             bricks.Add(loopEndBrickRepeat);
 
-            foreverBrick.LoopEndBrick = loopEndBrickForever;
-            repeatBrick.LoopEndBrick = loopEndBrickRepeat;
-            loopEndBrickForever.LoopBeginBrick = foreverBrick;
-            loopEndBrickRepeat.LoopBeginBrick = repeatBrick;
+            foreverBrick.End = loopEndBrickForever;
+            repeatBrick.End = loopEndBrickRepeat;
+            loopEndBrickForever.Begin = foreverBrick;
+            loopEndBrickRepeat.Begin = repeatBrick;
         }
 
         private void AddIfLogicBricks(ObservableCollection<Brick> bricks)
         {
-            var ifLogicBeginBrick = new IfLogicBeginBrick
+            var ifLogicBeginBrick = new IfBrick
             {
-                IfCondition = new Formula
-                {
-                    FormulaTree2 = FormulaTreeFactory.CreateTrueNode()
-                }
+                Condition = FormulaTreeFactory.CreateTrueNode()
             };
             bricks.Add(ifLogicBeginBrick);
 
-            var ifLogicElseBrick = new IfLogicElseBrick();
+            var ifLogicElseBrick = new ElseBrick();
             bricks.Add(ifLogicElseBrick);
 
-            var ifLogicEndBrick = new IfLogicEndBrick();
+            var ifLogicEndBrick = new EndIfBrick();
             bricks.Add(ifLogicEndBrick);
 
 
-            ifLogicBeginBrick.IfLogicElseBrick = ifLogicElseBrick;
-            ifLogicBeginBrick.IfLogicEndBrick = ifLogicEndBrick;
+            ifLogicBeginBrick.Else = ifLogicElseBrick;
+            ifLogicBeginBrick.End = ifLogicEndBrick;
 
-            ifLogicElseBrick.IfLogicBeginBrick = ifLogicBeginBrick;
-            ifLogicElseBrick.IfLogicEndBrick = ifLogicEndBrick;
+            ifLogicElseBrick.Begin = ifLogicBeginBrick;
+            ifLogicElseBrick.End = ifLogicEndBrick;
 
-            ifLogicEndBrick.IfLogicBeginBrick = ifLogicBeginBrick;
-            ifLogicEndBrick.IfLogicElseBrick = ifLogicElseBrick;
+            ifLogicEndBrick.Begin = ifLogicBeginBrick;
+            ifLogicEndBrick.Else = ifLogicElseBrick;
         }
 
     }

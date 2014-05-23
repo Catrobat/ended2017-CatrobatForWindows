@@ -9,6 +9,8 @@ using Catrobat.IDE.Core.Services;
 using System.IO;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Phone.Views.Editor.Sounds;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -44,7 +46,7 @@ namespace Catrobat.IDE.Phone.Services
             _semaphore.Release(1);
         }
 
-        public Task<SoundServiceResult> CreateSoundFromRecorder(Sprite sprite)
+        public Task<SoundServiceResult> CreateSoundFromRecorder(XmlSprite sprite)
         {
             var task = Task.Run(() =>
             {
@@ -57,7 +59,7 @@ namespace Catrobat.IDE.Phone.Services
             return task;
         }
 
-        public async Task<SoundServiceResult> CreateSoundFromMediaLibrary(Sprite sprite)
+        public async Task<SoundServiceResult> CreateSoundFromMediaLibrary(XmlSprite sprite)
         {
             throw new NotImplementedException();
         }

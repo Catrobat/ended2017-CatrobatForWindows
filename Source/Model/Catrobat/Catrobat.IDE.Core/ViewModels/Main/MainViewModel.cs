@@ -5,12 +5,12 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.Core.ViewModels.Settings;
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     var designContext = (CatrobatContextDesign)_context;
                     LocalProjects = designContext.LocalProjects;
                     OnlineProjects = designContext.OnlineProjects;
-                    CurrentProject = designContext.CurrentProject;
+                    CurrentProject = designContext.CurrentProject2;
                 }
 
                 RaisePropertyChanged(() => Context);
@@ -72,13 +72,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
             set
             {
-                if (value == _currentProject) return;
+                Set(ref _currentProject, value);
+                if (ReferenceEquals(value, _currentProject)) return;
 
                 _currentProject = value;
 
                 RaisePropertyChanged(() => CurrentProject);
                 UpdateLocalProjects();
-                XmlParserTempProjectHelper.Project = _currentProject;
 
                 var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
                 Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
@@ -259,7 +259,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #endregion
 
-        # region Actions
+        #region Actions
 
         private void RenameLocalProjectAction(ProjectDummyHeader project)
         {
@@ -361,19 +361,17 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
             else
             {
-                XmlParserTempProjectHelper.Project = CurrentProject;
-
                 ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_SelectedProjectNotValidMessage,
-                    String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName), new Action<MessageboxResult>(delegate
+                    String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName), delegate
                     {
                         ServiceLocator.DispatcherService.RunOnMainThread(() =>
                         {
                             IsActivatingLocalProject = false;
                         });
-                    }), MessageBoxOptions.Ok);
+                    }, MessageBoxOptions.Ok);
             }
 
-            await Core.App.SaveContext(CurrentProject);
+            await App.SaveContext(CurrentProject);
         }
 
         private void CreateNewProjectAction()
@@ -548,7 +546,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     await storage.DeleteDirectoryAsync(CatrobatContextBase.ProjectsPath + "/" + _deleteProjectName);
                 }
 
-                if (CurrentProject.ProjectHeader.ProgramName == _deleteProjectName)
+                if (CurrentProject.Name == _deleteProjectName)
                 {
                     if (LocalProjects.Count > 0)
                     {
@@ -565,7 +563,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 _deleteProjectName = null;
             }
 
-            await Core.App.SaveContext(CurrentProject);
+            await App.SaveContext(CurrentProject);
         }
 
         private async void CopyProjectMessageCallback(MessageboxResult result) // TODO: async, should this be awaitable?
@@ -574,11 +572,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             if (_dialogResult == MessageboxResult.Ok)
             {
-                if (_copyProjectName == CurrentProject.ProjectHeader.ProgramName)
+                if (_copyProjectName == CurrentProject.Name)
                     await CurrentProject.Save();
 
-                await CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName,
-                    CurrentProject.ProjectHeader.ProgramName);
+                await CatrobatContext.CopyProject(CurrentProject.Name,
+                    CurrentProject.Name);
 
                 await UpdateLocalProjects();
                 _copyProjectName = null;

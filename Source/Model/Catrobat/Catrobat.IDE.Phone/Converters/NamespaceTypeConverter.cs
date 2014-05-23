@@ -2,8 +2,8 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 
 namespace Catrobat.IDE.Phone.Converters
 {
@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Phone.Converters
         private static Assembly _core;
         private static Assembly Core
         {
-            get { return _core ?? (_core = typeof(IFormulaTree).Assembly); }
+            get { return _core ?? (_core = typeof(FormulaTree).Assembly); }
         }
 
         private static string _nodesNamespace;

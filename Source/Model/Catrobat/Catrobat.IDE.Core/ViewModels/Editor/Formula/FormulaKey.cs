@@ -1,28 +1,14 @@
-﻿using System;
-using System.Diagnostics;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using System.Diagnostics;
 using Catrobat.IDE.Core.Formulas.Editor;
 using System.ComponentModel;
+using Catrobat.IDE.Core.Models;
+using GalaSoft.MvvmLight;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 {
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class FormulaKey : INotifyPropertyChanged
+    public class FormulaKey : ObservableObject
     {
-        #region Implements INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion
-
         #region Members
 
         private FormulaEditorKey _key;
@@ -33,28 +19,44 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             {
                 if (_key == value) return;
                 _key = value;
-                RaisePropertyChanged("Key");
-                RaisePropertyChanged("MultiBindingProperty");
+                RaisePropertyChanged();
+                RaisePropertyChanged(() => MultiBindingProperty);
             }
         }
 
-        private UserVariable _variable;
-        public UserVariable Variable
+        private LocalVariable _localVariable;
+        public LocalVariable LocalVariable
         {
-            get { return _variable; }
+            get { return _localVariable; }
             set
             {
-                if (_variable == value) return;
-                if (_variable != null) _variable.PropertyChanged -= Variable_OnPropertyChanged;
-                _variable = value;
-                if (_variable != null) _variable.PropertyChanged += Variable_OnPropertyChanged;
-                RaisePropertyChanged("Variable");
-                RaisePropertyChanged("MultiBindingProperty");
+                if (ReferenceEquals(_localVariable, value)) return;
+                if (_localVariable != null) _localVariable.PropertyChanged -= Variable_OnPropertyChanged;
+                _localVariable = value;
+                if (_localVariable != null) _localVariable.PropertyChanged += Variable_OnPropertyChanged;
+                RaisePropertyChanged();
+                RaisePropertyChanged(() => MultiBindingProperty);
             }
         }
+
+        private GlobalVariable _globalVariable;
+        public GlobalVariable GlobalVariable
+        {
+            get { return _globalVariable; }
+            set
+            {
+                if (ReferenceEquals(_globalVariable, value)) return;
+                if (_globalVariable != null) _globalVariable.PropertyChanged -= Variable_OnPropertyChanged;
+                _globalVariable = value;
+                if (_globalVariable != null) _globalVariable.PropertyChanged += Variable_OnPropertyChanged;
+                RaisePropertyChanged();
+                RaisePropertyChanged(() => MultiBindingProperty);
+            }
+        }
+
         private void Variable_OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            RaisePropertyChanged("MultiBindingProperty");
+            RaisePropertyChanged(() => MultiBindingProperty);
         }
 
         // workaround because MultiBinding is not supported in Windows Phone (see FormulaKeyboard.xaml) :/
@@ -69,15 +71,21 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         {
         }
 
-        public FormulaKey(FormulaEditorKey key, UserVariable variable)
+        public FormulaKey(FormulaEditorKey key, LocalVariable localVariable = null, GlobalVariable globalVariable = null)
         {
             Key = key;
-            Variable = variable;
+            LocalVariable = localVariable;
+            GlobalVariable = globalVariable;
         }
 
         protected string DebuggerDisplay
         {
-            get { return "Key = " + Key + (Variable == null ? string.Empty : ", Variable = " + Variable.Name); }
+            get
+            {
+                return "Key = " + Key + 
+                    (LocalVariable == null ? string.Empty : ", Variable = " + LocalVariable.Name) +
+                    (GlobalVariable == null ? string.Empty : ", Variable = " + GlobalVariable.Name);
+            }
         }
 
         #region Overrides Equals
@@ -85,25 +93,20 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         public override bool Equals(object obj)
         {
             // auto-implemented by ReSharper
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((FormulaKey)obj);
+            return !ReferenceEquals(null, obj) &&
+                   (ReferenceEquals(this, obj) || obj.GetType() == GetType() && Equals((FormulaKey) obj));
         }
 
         protected bool Equals(FormulaKey other)
         {
             // auto-implemented by ReSharper
-            return Key == other.Key && Equals(Variable, other.Variable);
+            return _key == other._key && Equals(_localVariable, other._localVariable) && Equals(_globalVariable, other._globalVariable);
         }
 
         public override int GetHashCode()
         {
-            // auto-implemented by ReSharper
-            unchecked
-            {
-                return ((int)Key * 397) ^ (Variable != null ? Variable.GetHashCode() : 0);
-            }
+            // no readonly fields
+            return 0;
         }
 
         #endregion

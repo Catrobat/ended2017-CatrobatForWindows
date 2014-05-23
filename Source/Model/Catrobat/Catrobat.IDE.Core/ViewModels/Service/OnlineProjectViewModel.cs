@@ -7,6 +7,8 @@ using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.VersionConverter;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -21,13 +23,13 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _versionLabelText = "";
         private string _viewsLabelText = "";
         private string _downloadsLabelText = "";
-        private Project _currentProject;
+        private XmlProject _currentProject;
 
         #endregion
 
         #region Properties
 
-        public Project CurrentProject
+        public XmlProject CurrentProject
         {
             get { return _currentProject; }
             private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
@@ -166,7 +168,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #endregion
 
         #region MessageActions
-        private void CurrentProjectChangedAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedAction(GenericMessage<XmlProject> message)
         {
             CurrentProject = message.Content;
         }
@@ -180,7 +182,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             ReportCommand = new RelayCommand(ReportAction);
             LicenseCommand = new RelayCommand(LicenseAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<XmlProject>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
 
