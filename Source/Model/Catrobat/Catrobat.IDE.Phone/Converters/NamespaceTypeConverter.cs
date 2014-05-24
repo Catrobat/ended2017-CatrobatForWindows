@@ -2,8 +2,8 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 
 namespace Catrobat.IDE.Phone.Converters
 {
@@ -38,11 +38,11 @@ namespace Catrobat.IDE.Phone.Converters
 
         private static Type GetType(string prefix, string name)
         {
-            if (prefix == "formulaTree")
+            if (prefix == "tree")
             {
                 return Core.GetType(NodesNamespace + "." + name);
             }
-            if (prefix == "formulaToken")
+            if (prefix == "tokens")
             {
                 return Core.GetType(TokensNamespace + "." + name);
             }

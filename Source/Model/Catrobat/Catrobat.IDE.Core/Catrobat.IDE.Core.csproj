@@ -90,6 +90,7 @@
     <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
     <Compile Include="ExtensionMethods\XmlExtensions.cs" />
     <Compile Include="Models\Bricks\AnimatePropertyBrick.cs" />
+    <Compile Include="Models\Bricks\CommentBrick.cs" />
     <Compile Include="Models\Bricks\DelayBrick.cs" />
     <Compile Include="Models\Bricks\CostumeBrick.cs" />
     <Compile Include="Models\Bricks\BlockBrick.cs" />
@@ -103,12 +104,14 @@
     <Compile Include="Models\BroadcastMessage.cs" />
     <Compile Include="Models\CloneSpriteContext.cs" />
     <Compile Include="Models\Formulas\Tree\FormulaTree.cs" />
+    <Compile Include="Models\IBrick.cs" />
     <Compile Include="Models\ITestEquatable.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\UploadHeader.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\AnimatePropertyBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\BroadcastBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\ChangePropertyBrick.cs" />
+    <Compile Include="Xml\Converter\Models\Bricks\CommentBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\CostumeBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\SetPropertyBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\SoundBrick.cs" />
@@ -132,8 +135,12 @@
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Costumes\XmlNextCostumeBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlChangeBrightnessBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlChangeGhostEffectBrick.cs" />
+    <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlClearGraphicEffectBrick.cs" />
+    <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlComeToFrontBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlGlideToBrick.cs" />
+    <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlGoNStepsBackBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlHideBrick.cs" />
+    <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlIfOnEdgeBounceBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlMoveNStepsBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlPlaceAtBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlPointInDirectionBrick.cs" />
@@ -143,7 +150,11 @@
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlShowBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlTurnLeftBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlTurnRightBrick.cs" />
+    <Compile Include="Xml\Converter\XmlObjects\Bricks\Sounds\XmlChangeVolumeByBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Sounds\XmlPlaySoundBrick.cs" />
+    <Compile Include="Xml\Converter\XmlObjects\Bricks\Sounds\XmlSetVolumeToBrick.cs" />
+    <Compile Include="Xml\Converter\XmlObjects\Bricks\Sounds\XmlSpeakBrick.cs" />
+    <Compile Include="Xml\Converter\XmlObjects\Bricks\Sounds\XmlStopAllSoundsBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Variables\XmlChangeVariableBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\XmlBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlChangeSizeByNBrick.cs" />
@@ -158,6 +169,7 @@
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Variables\XmlSetVariableBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlSetXBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlSetYBrick.cs" />
+    <Compile Include="Xml\Converter\XmlObjects\Bricks\XmlNoteBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Formulas\XmlFormula.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Scripts\XmlBroadcastScript.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Scripts\XmlScript.cs" />

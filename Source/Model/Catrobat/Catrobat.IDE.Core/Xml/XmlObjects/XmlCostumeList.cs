@@ -50,14 +50,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             return newCostumeList;
         }
 
-        public async Task Delete()
-        {
-            foreach (XmlCostume costume in Costumes)
-            {
-                await costume.Delete();
-            }
-        }
-
         public override bool Equals(XmlObject other)
         {
             var otherCostumeList = other as XmlCostumeList;

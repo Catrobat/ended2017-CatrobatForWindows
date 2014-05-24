@@ -1,6 +1,7 @@
 ﻿using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
 using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Context = Catrobat.IDE.Core.Xml.Converter.XmlProjectConverter.ConvertBackContext;
 
 // ReSharper disable once CheckNamespace
@@ -12,7 +13,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlWaitBrick
             {
-                TimeToWaitInSeconds = Duration == null ? null : Duration.ToXmlObject()
+                TimeToWaitInSeconds = Duration == null ? new XmlFormula() : Duration.ToXmlObject()
             };
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
+using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Context = Catrobat.IDE.Core.Xml.Converter.XmlProjectConverter.ConvertBackContext;
 
 // ReSharper disable once CheckNamespace
@@ -18,7 +19,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlSetXBrick
             {
-                XPosition = Value == null ? null : Value.ToXmlObject()
+                XPosition = Value == null ? new XmlFormula() : Value.ToXmlObject()
             };
         }
     }
@@ -29,7 +30,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlSetYBrick
             {
-                YPosition = Value == null ? null : Value.ToXmlObject()
+                YPosition = Value == null ? new XmlFormula() : Value.ToXmlObject()
             };
         }
     }
@@ -40,9 +41,17 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlPlaceAtBrick
             {
-                XPosition = ValueX == null ? null : ValueX.ToXmlObject(), 
-                YPosition = ValueY == null ? null : ValueY.ToXmlObject()
+                XPosition = ValueX == null ? new XmlFormula() : ValueX.ToXmlObject(), 
+                YPosition = ValueY == null ? new XmlFormula() : ValueY.ToXmlObject()
             };
+        }
+    }
+
+    partial class BounceBrick
+    {
+        protected internal override XmlBrick ToXmlObject2(Context context)
+        {
+            return new XmlIfOnEdgeBounceBrick();
         }
     }
 
@@ -52,7 +61,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlSetSizeToBrick
             {
-                 Size = Percentage == null ? null : Percentage.ToXmlObject()
+                 Size = Percentage == null ? new XmlFormula() : Percentage.ToXmlObject()
             };
         }
     }
@@ -63,7 +72,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlPointInDirectionBrick
             {
-                Degrees = Value == null ? null : Value.ToXmlObject()
+                Degrees = Value == null ? new XmlFormula() : Value.ToXmlObject()
             };
         }
     }
@@ -85,7 +94,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlSetBrightnessBrick
             {
-                Brightness = Percentage == null ? null : Percentage.ToXmlObject()
+                Brightness = Percentage == null ? new XmlFormula() : Percentage.ToXmlObject()
             };
         }
     }
@@ -96,8 +105,24 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlSetGhostEffectBrick
             {
-                Transparency = Percentage == null ? null : Percentage.ToXmlObject()
+                Transparency = Percentage == null ? new XmlFormula() : Percentage.ToXmlObject()
             };
+        }
+    }
+
+    partial class ResetGraphicPropertiesBrick
+    {
+        protected internal override XmlBrick ToXmlObject2(Context context)
+        {
+            return new XmlClearGraphicEffectBrick();
+        }
+    }
+
+    partial class BringToFrontBrick
+    {
+        protected internal override XmlBrick ToXmlObject2(Context context)
+        {
+            return new XmlComeToFrontBrick();
         }
     }
 

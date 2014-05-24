@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Specialized;
+using System.Linq;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.ExtensionMethods;
@@ -45,7 +47,88 @@ namespace Catrobat.IDE.Core.Models
         public ObservableCollection<Script> Scripts
         {
             get { return _scripts; }
-            set { Set(ref _scripts, value); }
+            set
+            {
+                var oldValue = _scripts;
+                if (!Set(ref _scripts, value)) return;
+                RaisePropertyChanged(() => ActionsCount);
+                if (oldValue != null)
+                {
+                    oldValue.CollectionChanged -= Scripts_OnCollectionChanged;
+                    foreach (var script in oldValue)
+                    {
+                        script.Bricks.CollectionChanged -= Bricks_OnCollectionChanged;
+                    }
+                }
+                if (value != null)
+                {
+                    foreach (var script in value)
+                    {
+                        script.Bricks.CollectionChanged += Bricks_OnCollectionChanged;
+                    }
+                    value.CollectionChanged += Scripts_OnCollectionChanged;
+                }
+            }
+        }
+        private void Scripts_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (Script script in e.NewItems)
+                    {
+                        script.Bricks.CollectionChanged += Bricks_OnCollectionChanged;
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    // Scripts stay the same
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (Script script in e.OldItems)
+                    {
+                        script.Bricks.CollectionChanged -= Bricks_OnCollectionChanged;
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    foreach (Script script in e.OldItems)
+                    {
+                        script.Bricks.CollectionChanged -= Bricks_OnCollectionChanged;
+                    }
+                    foreach (Script script in e.NewItems)
+                    {
+                        script.Bricks.CollectionChanged += Bricks_OnCollectionChanged;
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    // unsubscribing from old bricks not possible
+                    throw new NotImplementedException();
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+        private void Bricks_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            switch (notifyCollectionChangedEventArgs.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                case NotifyCollectionChangedAction.Remove:
+                case NotifyCollectionChangedAction.Reset:
+                    RaisePropertyChanged(() => ActionsCount);
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                case NotifyCollectionChangedAction.Replace:
+                    // Bricks.Count stays the same
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+        public int ActionsCount
+        {
+            get
+            {
+                return _scripts.Sum(script => script.Bricks.Count + 1);
+            }
         }
 
         #endregion

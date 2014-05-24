@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 {
-    public class XmlSpeakBrick : XmlBrick
+    public partial class XmlSpeakBrick : XmlBrick
     {
         protected string _text;
         public string Text

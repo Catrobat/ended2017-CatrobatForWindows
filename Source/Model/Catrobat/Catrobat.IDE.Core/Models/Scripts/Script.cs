@@ -6,11 +6,12 @@ using Catrobat.IDE.Core.Models.Bricks;
 
 namespace Catrobat.IDE.Core.Models.Scripts
 {
-    public abstract partial class Script : Model, ICloneable, ICloneable<CloneSpriteContext>
+    public abstract partial class Script : Model, IBrick
     {
         #region Properties
 
         private ObservableCollection<Brick> _bricks = new ObservableCollection<Brick>();
+
         public ObservableCollection<Brick> Bricks
         {
             get { return _bricks; }
@@ -41,6 +42,7 @@ namespace Catrobat.IDE.Core.Models.Scripts
             result.Bricks = Bricks == null ? null : Bricks
                 .Select(brick => brick.Clone())
                 .ToObservableCollection();
+            result.IsAttached = true;
             return result;
         }
 
@@ -59,5 +61,12 @@ namespace Catrobat.IDE.Core.Models.Scripts
         }
 
         #endregion
+
+        private bool _isAttached = true;
+        public bool IsAttached
+        {
+            get { return _isAttached; }
+            set { _isAttached = value; }
+        }
     }
 }

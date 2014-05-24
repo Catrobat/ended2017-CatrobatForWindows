@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
                 Count = TimesToRepeat == null ? null : TimesToRepeat.ToModel(context)
             };
             context.Bricks[this] = result;
-            result.End = (EndRepeatBrick) LoopEndBrick.ToModel(context);
+            result.End = LoopEndBrick == null ? null : (EndRepeatBrick) LoopEndBrick.ToModel(context);
             return result;
         }
     }

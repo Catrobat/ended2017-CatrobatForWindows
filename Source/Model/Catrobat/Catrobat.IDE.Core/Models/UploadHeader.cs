@@ -10,28 +10,28 @@ namespace Catrobat.IDE.Core.Models
     {
         #region Properties
 
-        private string _mediaLicense;
+        private string _mediaLicense = string.Empty;
         public string MediaLicense
         {
             get { return _mediaLicense; }
             set { Set(ref _mediaLicense, value); }
         }
 
-        private string _programLicense;
+        private string _programLicense = string.Empty;
         public string ProgramLicense
         {
             get { return _programLicense; }
             set { Set(ref _programLicense, value); }
         }
 
-        private string _remixOf;
+        private string _remixOf = string.Empty;
         public string RemixOf
         {
             get { return _remixOf; }
             set { Set(ref _remixOf, value); }
         }
 
-        private ObservableCollection<string> _tags;
+        private ObservableCollection<string> _tags = new ObservableCollection<string>();
         public ObservableCollection<string> Tags
         {
             get { return _tags; }
@@ -53,14 +53,14 @@ namespace Catrobat.IDE.Core.Models
             }
         }
 
-        private string _url;
+        private string _url = string.Empty;
         public string Url
         {
             get { return _url; }
             set { Set(ref _url, value); }
         }
 
-        private string _userId;
+        private string _userId = string.Empty;
         public string UserId
         {
             get { return _userId; }

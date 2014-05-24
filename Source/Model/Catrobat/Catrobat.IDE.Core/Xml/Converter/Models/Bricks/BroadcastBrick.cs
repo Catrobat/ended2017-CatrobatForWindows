@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlBroadcastBrick
             {
-                BroadcastMessage = Message == null ? null : Message.ToXmlObject()
+                BroadcastMessage = Message == null ? string.Empty : Message.ToXmlObject()
             };
         }
     }
@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlBroadcastWaitBrick
             {
-                BroadcastMessage = Message == null ? null : Message.ToXmlObject()
+                BroadcastMessage = Message == null ? string.Empty : Message.ToXmlObject()
             };
         }
     }

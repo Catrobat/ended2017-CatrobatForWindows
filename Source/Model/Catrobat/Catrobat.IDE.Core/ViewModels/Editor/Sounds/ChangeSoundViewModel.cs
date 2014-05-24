@@ -1,5 +1,4 @@
-﻿using Catrobat.IDE.Core.Xml;
-using Catrobat.IDE.Core.Xml.XmlObjects;
+﻿using Catrobat.IDE.Core.Models;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -9,14 +8,14 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
     {
         #region Private Members
 
-        private XmlSound _receivedSound;
+        private Sound _receivedSound;
         private string _soundName;
 
         #endregion
 
         #region Properties
 
-        public XmlSound ReceivedSound
+        public Sound ReceivedSound
         {
             get { return _receivedSound; }
             set
@@ -94,7 +93,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 
         #region MessageActions
 
-        private void ChangeSoundNameMessageAction(GenericMessage<XmlSound> message)
+        private void ChangeSoundNameMessageAction(GenericMessage<Sound> message)
         {
             ReceivedSound = message.Content;
             SoundName = ReceivedSound.Name;
@@ -108,7 +107,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<XmlSound>>(this, ViewModelMessagingToken.SoundNameListener, ChangeSoundNameMessageAction);
+            Messenger.Default.Register<GenericMessage<Sound>>(this, ViewModelMessagingToken.SoundNameListener, ChangeSoundNameMessageAction);
         }
 
         private void ResetViewModel()

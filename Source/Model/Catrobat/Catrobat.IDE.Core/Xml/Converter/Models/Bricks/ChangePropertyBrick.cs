@@ -1,6 +1,7 @@
 ﻿using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
+using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Context = Catrobat.IDE.Core.Xml.Converter.XmlProjectConverter.ConvertBackContext;
 
 // ReSharper disable once CheckNamespace
@@ -18,7 +19,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlChangeXByBrick
             {
-                XMovement = RelativeValue == null ? null : RelativeValue.ToXmlObject()
+                XMovement = RelativeValue == null ? new XmlFormula() : RelativeValue.ToXmlObject()
             };
         }
     }
@@ -29,7 +30,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlChangeYByBrick
             {
-                YMovement = RelativeValue == null ? null : RelativeValue.ToXmlObject()
+                YMovement = RelativeValue == null ? new XmlFormula() : RelativeValue.ToXmlObject()
             };
         }
     }
@@ -40,7 +41,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlMoveNStepsBrick
             {
-                Steps = Steps == null ? null : Steps.ToXmlObject()
+                Steps = Steps == null ? new XmlFormula() : Steps.ToXmlObject()
             };
         }
     }
@@ -51,7 +52,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlChangeSizeByNBrick
             {
-                Size = RelativePercentage == null ? null : RelativePercentage.ToXmlObject()
+                Size = RelativePercentage == null ? new XmlFormula() : RelativePercentage.ToXmlObject()
             };
         }
     }
@@ -66,7 +67,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlTurnLeftBrick
             {
-                Degrees = RelativeValue == null ? null : RelativeValue.ToXmlObject()
+                Degrees = RelativeValue == null ? new XmlFormula() : RelativeValue.ToXmlObject()
             };
         }
     }
@@ -77,7 +78,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlTurnRightBrick
             {
-                Degrees = RelativeValue == null ? null : RelativeValue.ToXmlObject()
+                Degrees = RelativeValue == null ? new XmlFormula() : RelativeValue.ToXmlObject()
             };
         }
     }
@@ -88,7 +89,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlChangeBrightnessBrick
             {
-                ChangeBrightness = RelativePercentage == null ? null : RelativePercentage.ToXmlObject()
+                ChangeBrightness = RelativePercentage == null ? new XmlFormula() : RelativePercentage.ToXmlObject()
             };
         }
     }
@@ -99,7 +100,18 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             return new XmlChangeGhostEffectBrick
             {
-                ChangeGhostEffect = RelativePercentage == null ? null : RelativePercentage.ToXmlObject()
+                ChangeGhostEffect = RelativePercentage == null ? new XmlFormula() : RelativePercentage.ToXmlObject()
+            };
+        }
+    }
+
+    partial class DecreaseZOrderBrick
+    {
+        protected internal override XmlBrick ToXmlObject2(Context context)
+        {
+            return new XmlGoNStepsBackBrick
+            {
+                Steps = RelativeValue == null ? new XmlFormula() : RelativeValue.ToXmlObject()
             };
         }
     }

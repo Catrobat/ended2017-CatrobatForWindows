@@ -1,12 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Formulas.Editor;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
-using Catrobat.IDE.Core.Xml;
-using Catrobat.IDE.Core.Xml.XmlObjects;
 
 namespace Catrobat.IDE.Phone.Controls.Formulas
 {
@@ -26,12 +24,12 @@ namespace Catrobat.IDE.Phone.Controls.Formulas
 
         public static readonly DependencyProperty ProjectProperty = DependencyProperty.Register(
             name: "Project",
-            propertyType: typeof(XmlProject),
+            propertyType: typeof(Project),
             ownerType: typeof(FormulaKeyboard),
             typeMetadata: new PropertyMetadata((d, e) => ((FormulaKeyboard)d).ProjectChanged(e)));
-        public XmlProject Project
+        public Project Project
         {
-            get { return (XmlProject) GetValue(ProjectProperty); }
+            get { return (Project) GetValue(ProjectProperty); }
             set { SetValue(ProjectProperty, value); }
         }
         private void ProjectChanged(DependencyPropertyChangedEventArgs e)

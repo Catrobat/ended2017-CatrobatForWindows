@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
@@ -50,7 +51,7 @@ namespace Catrobat.IDE.Phone.Tests.SampleData
       return XDocument.Load(new StringReader(xml));
     }
 
-    public static async Task<XmlProject> LoadSampleProject(string sampleName, string sampleProjectName)
+    public static async Task<Project> LoadSampleProject(string sampleName, string sampleProjectName)
     {
         using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
         {

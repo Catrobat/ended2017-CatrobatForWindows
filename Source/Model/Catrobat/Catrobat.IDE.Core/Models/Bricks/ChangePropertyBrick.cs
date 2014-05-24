@@ -338,5 +338,51 @@ namespace Catrobat.IDE.Core.Models.Bricks
         #endregion
     }
 
+    public partial class DecreaseZOrderBrick : ChangePropertyBrick
+    {
+        #region Properties
+
+        private FormulaTree _relativeValue;
+        public FormulaTree RelativeValue
+        {
+            get { return _relativeValue; }
+            set { Set(ref _relativeValue, value); }
+        }
+
+        #endregion
+
+        #region Implements ITestEquatable
+
+        protected override bool TestEquals(Brick other)
+        {
+            return base.TestEquals(other) && TestEquals((DecreaseZOrderBrick) other);
+        }
+
+        protected bool TestEquals(DecreaseZOrderBrick other)
+        {
+            return TestEquals(_relativeValue, other._relativeValue);
+        }
+
+        #endregion
+
+        #region Implements ICloneable
+
+        internal override object CloneInstance()
+        {
+            var result = (DecreaseZOrderBrick) base.CloneInstance();
+            CloneMember(ref result._relativeValue);
+            return result;
+        }
+
+        internal override object CloneInstance(CloneSpriteContext context)
+        {
+            var result = (DecreaseZOrderBrick) base.CloneInstance(context);
+            CloneMember(ref result._relativeValue, context);
+            return result;
+        }
+
+        #endregion
+    }
+
     #endregion
 }

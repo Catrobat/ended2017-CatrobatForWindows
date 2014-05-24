@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
 {
-    public class XmlNoteBrick : XmlBrick
+    public partial class XmlNoteBrick : XmlBrick
     {
         protected string _note;
         public string Note

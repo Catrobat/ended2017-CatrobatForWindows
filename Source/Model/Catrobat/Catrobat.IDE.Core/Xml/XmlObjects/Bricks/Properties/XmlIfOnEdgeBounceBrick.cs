@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public class XmlIfOnEdgeBounceBrick : XmlBrick
+    public partial class XmlIfOnEdgeBounceBrick : XmlBrick
     {
         public XmlIfOnEdgeBounceBrick() {}
 

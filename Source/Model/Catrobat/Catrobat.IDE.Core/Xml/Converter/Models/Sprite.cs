@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
@@ -21,18 +22,18 @@ namespace Catrobat.IDE.Core.Models
             }
             if (pointerOnly) return result;
 
-            result.Costumes = context.Costumes == null ? null : new XmlCostumeList
+            result.Costumes = new XmlCostumeList
             {
-                Costumes = context.Costumes.Values.ToObservableCollection()
+                Costumes = context.Costumes == null ? new ObservableCollection<XmlCostume>() : context.Costumes.Values.ToObservableCollection()
             };
-            result.Sounds = context.Sounds == null ? null : new XmlSoundList
+            result.Sounds = new XmlSoundList
             {
-                Sounds = context.Sounds.Values.ToObservableCollection()
+                Sounds = context.Sounds == null ? new ObservableCollection<XmlSound>() : context.Sounds.Values.ToObservableCollection()
             };
             result.Scripts = new XmlScriptList
             {
                 Scripts = Scripts == null
-                    ? null
+                    ? new ObservableCollection<XmlScript>()
                     : Scripts.Select(script => script.ToXmlObject(context)).ToObservableCollection()
             };
             return result;

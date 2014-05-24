@@ -147,22 +147,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             return newCostume;
         }
 
-        public async Task Delete()
-        {
-            var path = XmlParserTempProjectHelper.Project.BasePath + "/" + Project.ImagesPath + "/" + _fileName;
-            try
-            {
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    if (await storage.FileExistsAsync(path))
-                    {
-                        await storage.DeleteImageAsync(path);
-                    }
-                }
-            }
-            catch { }
-        }
-
         public override bool Equals(XmlObject other)
         {
             var otherCostume = other as XmlCostume;

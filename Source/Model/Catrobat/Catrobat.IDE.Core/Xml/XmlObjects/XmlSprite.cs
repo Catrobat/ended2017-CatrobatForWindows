@@ -176,12 +176,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             return newSprite;
         }
 
-        public async Task Delete()
-        {
-            await _costumes.Delete();
-            await _sounds.Delete();
-        }
-
         public override bool Equals(XmlObject other)
         {
             var otherSprite = other as XmlSprite;

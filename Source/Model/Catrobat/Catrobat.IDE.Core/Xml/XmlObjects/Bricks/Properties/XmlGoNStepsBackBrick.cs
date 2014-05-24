@@ -3,7 +3,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public class XmlGoNStepsBackBrick : XmlBrick
+    public partial class XmlGoNStepsBackBrick : XmlBrick
     {
         protected XmlFormula _steps;
         public XmlFormula Steps

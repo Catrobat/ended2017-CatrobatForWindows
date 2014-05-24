@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 {
-    public class XmlStopAllSoundsBrick : XmlBrick
+    public partial class XmlStopAllSoundsBrick : XmlBrick
     {
         public XmlStopAllSoundsBrick() {}
 

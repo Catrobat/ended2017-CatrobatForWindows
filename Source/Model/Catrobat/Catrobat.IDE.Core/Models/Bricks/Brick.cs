@@ -4,8 +4,9 @@ using Catrobat.IDE.Core.Models.Formulas.Tree;
 
 namespace Catrobat.IDE.Core.Models.Bricks
 {
-    public abstract partial class Brick : Model, ICloneable, ICloneable<CloneSpriteContext>
+    public abstract partial class Brick : Model, IBrick
     {
+
         #region Implements ITestEquatable
 
         protected override bool TestEquals(Model other)
@@ -29,7 +30,9 @@ namespace Catrobat.IDE.Core.Models.Bricks
 
         internal virtual object CloneInstance()
         {
-            return MemberwiseClone();
+            var result = (Brick) MemberwiseClone();
+            result.IsAttached = true;
+            return result;
         }
 
         internal void CloneMember(ref FormulaTree member)
@@ -80,5 +83,12 @@ namespace Catrobat.IDE.Core.Models.Bricks
         }
 
         #endregion
+
+        private bool _isAttached = true;
+        public bool IsAttached
+        {
+            get { return _isAttached; }
+            set { _isAttached = value; }
+        }
     }
 }

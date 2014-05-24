@@ -7,7 +7,6 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
-using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 
 namespace Catrobat.IDE.Core
 {
@@ -64,7 +63,16 @@ namespace Catrobat.IDE.Core
 
         public static async Task<Project> CreateEmptyProject(string newProjectName)
         {
-            var newProject = new XmlProject();
+            var newProject = new Project
+            {
+                Name = newProjectName,
+                UploadHeader = new UploadHeader
+                {
+                    MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
+                    ProgramLicense = "http://developer.catrobat.org/agpl_v3",
+                    Url = "http://pocketcode.org/details/871"
+                }
+            };
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -78,15 +86,9 @@ namespace Catrobat.IDE.Core
                     counter++;
                 }
             }
-
-            newProject.ProjectHeader = new XmlProjectHeader(true);
-            newProject.SpriteList = new XmlSpriteList();
-            newProject.VariableList.ObjectVariableList = new XmlObjectVariableList();
-            newProject.VariableList.ProgramVariableList = new XmlProgramVariableList();
-            newProject.ProjectHeader.ProgramName = newProjectName;
             await newProject.Save();
 
-            return new XmlProjectConverter().Convert(newProject);
+            return newProject;
         }
 
         public static async Task<Project> CopyProject(string sourceProjectName, string newProjectName)

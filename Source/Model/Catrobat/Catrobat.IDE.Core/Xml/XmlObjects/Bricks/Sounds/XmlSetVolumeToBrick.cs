@@ -3,7 +3,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 {
-    public class XmlSetVolumeToBrick : XmlBrick
+    public partial class XmlSetVolumeToBrick : XmlBrick
     {
         protected XmlFormula _volume;
         public XmlFormula Volume

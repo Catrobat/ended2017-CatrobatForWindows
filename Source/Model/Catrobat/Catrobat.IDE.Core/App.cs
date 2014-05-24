@@ -38,7 +38,7 @@ namespace Catrobat.IDE.Core
                 var messageContext = new GenericMessage<CatrobatContextBase>(context);
                 Messenger.Default.Send(messageContext, ViewModelMessagingToken.ContextListener);
 
-                var messageCurrentSprite = new GenericMessage<Sprite>(context.CurrentProject2.Sprites[0]);
+                var messageCurrentSprite = new GenericMessage<Sprite>(context.CurrentProject.Sprites[0]);
                 Messenger.Default.Send(messageCurrentSprite, ViewModelMessagingToken.CurrentSpriteChangedListener);
             }
             else

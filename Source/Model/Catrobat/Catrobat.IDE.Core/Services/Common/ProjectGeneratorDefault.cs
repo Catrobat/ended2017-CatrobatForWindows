@@ -2,13 +2,10 @@
 using System.IO;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.Xml.Converter;
-using Catrobat.IDE.Core.Xml.XmlObjects;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
-using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
-using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
@@ -28,12 +25,16 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public async Task<Project> GenerateProject(string twoLetterIsoLanguageCode, bool writeToDisk)
         {
-            var project = new XmlProject
+            var project = new Project
             {
-                ProjectHeader = new XmlProjectHeader()
+                Name = AppResources.Main_DefaultProjectName, 
+                UploadHeader = new UploadHeader
+                {
+                    MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
+                    ProgramLicense = "http://developer.catrobat.org/agpl_v3",
+                    Url = "http://pocketcode.org/details/871"
+                }
             };
-
-            project.ProjectHeader.ProgramName = AppResources.Main_DefaultProjectName;
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -63,7 +64,7 @@ namespace Catrobat.IDE.Core.Services.Common
             if (writeToDisk)
                 await project.Save();
 
-            return new XmlProjectConverter().Convert(project);
+            return project;
         }
 
         private static async Task WriteLooksToDisk(string basePathToLookFiles)
@@ -83,7 +84,7 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
                 {
-                    foreach (string lookFile in lookFiles)
+                    foreach (var lookFile in lookFiles)
                     {
                         var inputStream = await loader.OpenResourceStreamAsync(ResourceScope.IdePhone, // TODO: change resourceScope to suppot phone and store app
                             Path.Combine(ResourcePathToLookFiles, lookFile));
@@ -100,75 +101,75 @@ namespace Catrobat.IDE.Core.Services.Common
             }
         }
 
-        private static void FillSprites(XmlProject project)
+        private static void FillSprites(Project project)
         {
-            var objectBackground = new XmlSprite { Name = AppResources.DefaultProject_Background };
-            var objectCat = new XmlSprite { Name = AppResources.DefaultProject_Cat };
-            var objectRain = new XmlSprite { Name = AppResources.DefaultProject_Rain };
-            var objectSun = new XmlSprite { Name = AppResources.DefaultProject_Sun };
-            var objectWater = new XmlSprite { Name = AppResources.DefaultProject_Water };
-            var objectCloud = new XmlSprite { Name = AppResources.DefaultProject_Cloud };
+            var objectBackground = new Sprite { Name = AppResources.DefaultProject_Background };
+            var objectCat = new Sprite { Name = AppResources.DefaultProject_Cat };
+            var objectRain = new Sprite { Name = AppResources.DefaultProject_Rain };
+            var objectSun = new Sprite { Name = AppResources.DefaultProject_Sun };
+            var objectWater = new Sprite { Name = AppResources.DefaultProject_Water };
+            var objectCloud = new Sprite { Name = AppResources.DefaultProject_Cloud };
 
-            objectBackground.Costumes.Costumes.Add(new XmlCostume
+            objectBackground.Costumes.Add(new Costume
             {
                 Name = AppResources.DefaultProject_Background,
                 FileName = LookFileNameBackground
             });
 
-            objectBackground.Scripts.Scripts.Add(new XmlStartScript());
+            objectBackground.Scripts.Add(new StartScript());
             for (var i = 1; i <= 14; i++)
             {
-                objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new XmlSetYBrick {YPosition = new XmlFormula { FormulaTree = null}});
+                objectBackground.Scripts[0].Bricks.Add(new SetPositionYBrick {Value = null});
             }
 
-            objectBackground.Scripts.Scripts.Add(new XmlWhenScript());
-            objectBackground.Scripts.Scripts.Add(new XmlBroadcastScript());
-            objectBackground.Scripts.Scripts.Add(new XmlStartScript());
+            objectBackground.Scripts.Add(new TappedScript());
+            objectBackground.Scripts.Add(new BroadcastReceivedScript());
+            objectBackground.Scripts.Add(new StartScript());
 
 
-            objectCat.Costumes.Costumes.Add(new XmlCostume
+            objectCat.Costumes.Add(new Costume
             {
                 Name = AppResources.DefaultProject_Cat,
                 FileName = LookFileNameCat
             });
 
-            objectRain.Costumes.Costumes.Add(new XmlCostume
+            objectRain.Costumes.Add(new Costume
             {
                 Name = AppResources.DefaultProject_Rain,
                 FileName = LookFileNameRain
             });
 
-            objectSun.Costumes.Costumes.Add(new XmlCostume
+            objectSun.Costumes.Add(new Costume
             {
                 Name = AppResources.DefaultProject_Sun,
                 FileName = LookFileNameSun
             });
 
-            objectWater.Costumes.Costumes.Add(new XmlCostume
+            objectWater.Costumes.Add(new Costume
             {
                 Name = AppResources.DefaultProject_Water,
                 FileName = LookFileNameWater
             });
 
-            objectCloud.Costumes.Costumes.Add(new XmlCostume
+            objectCloud.Costumes.Add(new Costume
             {
                 Name = AppResources.DefaultProject_Cloud + "1",
                 FileName = LookFileNameCloud1
             });
 
-            objectCloud.Costumes.Costumes.Add(new XmlCostume
+            objectCloud.Costumes.Add(new Costume
             {
                 Name = AppResources.DefaultProject_Cloud + "2",
                 FileName = LookFileNameCloud2
             });
 
 
-            project.SpriteList.Sprites.Add(objectBackground);
-            project.SpriteList.Sprites.Add(objectCat);
-            project.SpriteList.Sprites.Add(objectRain);
-            project.SpriteList.Sprites.Add(objectSun);
-            project.SpriteList.Sprites.Add(objectWater);
-            project.SpriteList.Sprites.Add(objectCloud);
+            project.Sprites.Add(objectBackground);
+            project.Sprites.Add(objectCat);
+            project.Sprites.Add(objectRain);
+            project.Sprites.Add(objectSun);
+            project.Sprites.Add(objectWater);
+            project.Sprites.Add(objectCloud);
         }
     }
 }
