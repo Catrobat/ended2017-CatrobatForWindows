@@ -4,6 +4,9 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Catrobat.IDE.Core.Utilities.JSON;
+using System.Threading.Tasks;
+using Catrobat.IDE.Core.ViewModels.Main;
 
 namespace Catrobat.IDE.Core.ViewModels.Service
 {
@@ -15,6 +18,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _projectDescription;
         private CatrobatContextBase _context;
         private Project _currentProject;
+        private MessageboxResult _uploadErrorCallbackResult;
 
         #endregion
 
@@ -101,31 +105,54 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private void InitializeAction()
         {
             if (Context != null)
+            {
                 ProjectName = CurrentProject.ProjectHeader.ProgramName;
+                ProjectDescription = CurrentProject.ProjectHeader.Description;
+            }
             else
+            {
                 ProjectName = "";
+                ProjectDescription = "";
+        }
         }
 
         private async void UploadAction()
         {
             await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
+            CurrentProject.ProjectHeader.Description = ProjectDescription;
+            await App.SaveContext(CurrentProject);
 
-            CatrobatWebCommunicationService.UploadProject(_projectName, _projectDescription,
-                                              Context.CurrentUserEmail,
-                                              ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName,
-                                              Context.CurrentToken, UploadCallback);
+            Task<JSONStatusResponse> upload_task = CatrobatWebCommunicationService.AsyncUploadProject(ProjectName, _projectDescription, 
+                                                          Context.CurrentUserName,
+                                                          ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName,
+                                                          Context.CurrentToken);
 
             var message = new MessageBase();
             Messenger.Default.Send(message, ViewModelMessagingToken.UploadProjectStartedListener);
 
-            ServiceLocator.NavigationService.RemoveBackEntry();
             base.GoBackAction();
+
+            JSONStatusResponse status_response = await upload_task;
+
+            if (status_response.statusCode != StatusCodes.ServerResponseTokenOk)
+            {
+                string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
+                                       string.Format(AppResources.Main_UploadProjectError, status_response.answer);
+
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
+                            messageString, UploadErrorCallback, MessageBoxOptions.Ok);
+            }
+            if (CatrobatWebCommunicationService.NoUploadsPending())
+            {
+                ServiceLocator.NotifictionService.ShowToastNotification(null,
+                    AppResources.Main_NoUploadsPending, ToastNotificationTime.Short);
+            }
         }
 
         private void CancelAction()
         {
-            ServiceLocator.NavigationService.RemoveBackEntry();
-            base.GoBackAction();
+            ResetViewModel();
+            ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
         }
 
         protected override void GoBackAction()
@@ -162,15 +189,13 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedChangedAction);
         }
 
-
-        private void UploadCallback(bool successful)
-        {
-            if (CatrobatWebCommunicationService.NoUploadsPending())
+        #region Callbacks
+        private void UploadErrorCallback(MessageboxResult result)
             {
-                ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_NoUploadsPending, ToastNotificationTime.Short);
-            }
+            _uploadErrorCallbackResult = result;
         }
+        #endregion
+
 
         public void ResetViewModel()
         {

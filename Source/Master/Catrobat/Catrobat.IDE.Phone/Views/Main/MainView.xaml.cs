@@ -12,6 +12,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Microsoft.Phone.Controls;
+//using System.Diagnostics;
 
 namespace Catrobat.IDE.Phone.Views.Main
 {
@@ -20,13 +21,12 @@ namespace Catrobat.IDE.Phone.Views.Main
         private readonly MainViewModel _viewModel =
             ((ViewModelLocator)ServiceLocator.ViewModelLocator).MainViewModel;
 
-        private const int _offsetKnob = 5;
+        private const int offsetKnob = 4;
+        private bool firstAttempt = true;
 
         public MainView()
         {
             InitializeComponent();
-
-            //LongListSelectorOnlineProjects.ItemRealized += LongListSelectorOnlineProjects_ItemRealized;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -78,9 +78,10 @@ namespace Catrobat.IDE.Phone.Views.Main
 
         private void panoramaMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if ((PanoramaMain.SelectedItem == PanoramaItemOnlineProjects))
+            if ((PanoramaMain.SelectedItem == PanoramaItemOnlineProjects) && firstAttempt)
             {
                 _viewModel.LoadOnlineProjects(false, true);
+                firstAttempt = false;
             }
         }
 
@@ -175,24 +176,27 @@ namespace Catrobat.IDE.Phone.Views.Main
             };
         }
 
-        //private void LongListSelectorOnlineProjects_ItemRealized(object sender, ItemRealizationEventArgs e)
-        //{
-        //    // !_viewModel.IsLoading &&
-        //    if (LongListSelectorOnlineProjects.ItemsSource != null && LongListSelectorOnlineProjects.ItemsSource.Count >= _offsetKnob)
-        //    {
-        //        if (e.ItemKind == LongListSelectorItemKind.Item)
-        //        {
-        //            if ((e.Container.Content as OnlineProjectHeader).Equals(LongListSelectorOnlineProjects.ItemsSource[LongListSelectorOnlineProjects.ItemsSource.Count - _offsetKnob]))
-        //            {
-        //                _viewModel.LoadOnlineProjects(true);
-        //            }
-        //        }
-        //    }
-        //}
-
-        private void NavigateToCatrobatWebsite_OnClick(object sender, RoutedEventArgs e)
+        private void LongListSelectorOnlineProjects_ItemRealized(object sender, ItemRealizationEventArgs e)
         {
-            ServiceLocator.NavigationService.NavigateToWebPage("http://www.pocketcode.org");
+            // implements infinite scrolling
+            if (!_viewModel.IsLoadingOnlineProjects && LongListSelectorOnlineProjects.ItemsSource != null && LongListSelectorOnlineProjects.ItemsSource.Count >= offsetKnob)
+            {
+                if (e.ItemKind == LongListSelectorItemKind.Item)
+                {
+                    OnlineProjectHeader currentHeader = e.Container.Content as OnlineProjectHeader;
+                    //if ((e.Container.Content as OnlineProjectHeader).Equals(LongListSelectorOnlineProjects.ItemsSource[LongListSelectorOnlineProjects.ItemsSource.Count - offsetKnob]))
+                    if (LongListSelectorOnlineProjects.ItemsSource.Count - LongListSelectorOnlineProjects.ItemsSource.IndexOf(currentHeader) <= offsetKnob)
+                    {
+                        //Debug.WriteLine("Adding 4 new Projects to " + LongListSelectorOnlineProjects.ItemsSource.Count.ToString() + " existing projects");
+                        _viewModel.LoadOnlineProjects(true);
+                    }
+                }
+            }
         }
+
+        //private void NavigateToCatrobatWebsite_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    ServiceLocator.NavigationService.NavigateToWebPage("http://www.pocketcode.org");
+        //}
     }
 }

@@ -1,0 +1,368 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:templates="clr-namespace:Catrobat.IDE.Phone.Controls.Formulas.Templates"
+  xmlns:formulaToken="clr-namespace:Catrobat.IDE.Core.Models.Formulas.FormulaToken;assembly=Catrobat.IDE.Core"
+  xmlns:formulaTree="clr-namespace:Catrobat.IDE.Core.Models.Formulas.FormulaTree;assembly=Catrobat.IDE.Core"
+  xmlns:formulaTree1="clr-namespace:Catrobat.IDE.Core.Formulas.FormulaTree;assembly=Catrobat.IDE.Core"
+  mc:Ignorable="d">
+
+  <SolidColorBrush x:Key="FormulaSelectedBackground" Color="Orange" />
+  <SolidColorBrush x:Key="FormulaNotSelectedBackground" Color="Transparent" />
+
+  <!--Styles from this collection will be used if they are not specified in the used collection-->
+  <templates:FormulaTokenStyleCollection x:Key="PartStyleDefault">
+    <templates:FormulaTokenStyleCollection.TextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.TextStyle>
+
+    <templates:FormulaTokenStyleCollection.SelectedTextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.SelectedTextStyle>
+
+    <templates:FormulaTokenStyleCollection.ContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="Transparent"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.ContainerStyle>
+
+    <templates:FormulaTokenStyleCollection.SelectedContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="LightGreen"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.SelectedContainerStyle>
+  </templates:FormulaTokenStyleCollection>
+
+  <templates:FormulaTokenStyleCollection x:Key="PartStyleNumber" DefaultStyle="{StaticResource PartStyleDefault}">
+    <templates:FormulaTokenStyleCollection.TextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.TextStyle>
+
+    <templates:FormulaTokenStyleCollection.SelectedTextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.SelectedTextStyle>
+
+    <templates:FormulaTokenStyleCollection.ContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="Transparent"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.ContainerStyle>
+
+    <templates:FormulaTokenStyleCollection.SelectedContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="LightGreen"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.SelectedContainerStyle>
+  </templates:FormulaTokenStyleCollection>
+
+  <templates:FormulaTokenStyleCollection x:Key="PartStyleMath" DefaultStyle="{StaticResource PartStyleDefault}">
+    <templates:FormulaTokenStyleCollection.TextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.TextStyle>
+
+    <templates:FormulaTokenStyleCollection.SelectedTextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.SelectedTextStyle>
+
+    <templates:FormulaTokenStyleCollection.ContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="Transparent"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.ContainerStyle>
+
+    <templates:FormulaTokenStyleCollection.SelectedContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.SelectedContainerStyle>
+  </templates:FormulaTokenStyleCollection>
+
+  <templates:FormulaTokenStyleCollection x:Key="PartStyleEmpty" DefaultStyle="{StaticResource PartStyleDefault}">
+
+  </templates:FormulaTokenStyleCollection>
+
+  <templates:FormulaTokenStyleCollection x:Key="PartStyleOperatorEquality" DefaultStyle="{StaticResource PartStyleDefault}">
+    <templates:FormulaTokenStyleCollection.TextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.TextStyle>
+
+    <templates:FormulaTokenStyleCollection.SelectedTextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.SelectedTextStyle>
+
+    <templates:FormulaTokenStyleCollection.ContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="Transparent"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.ContainerStyle>
+
+    <templates:FormulaTokenStyleCollection.SelectedContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.SelectedContainerStyle>
+  </templates:FormulaTokenStyleCollection>
+
+  <templates:FormulaTokenStyleCollection x:Key="PartStyleOperatorLogic" DefaultStyle="{StaticResource PartStyleDefault}">
+    <templates:FormulaTokenStyleCollection.TextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.TextStyle>
+
+    <templates:FormulaTokenStyleCollection.SelectedTextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.SelectedTextStyle>
+
+    <templates:FormulaTokenStyleCollection.ContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="Transparent"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.ContainerStyle>
+
+    <templates:FormulaTokenStyleCollection.SelectedContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.SelectedContainerStyle>
+  </templates:FormulaTokenStyleCollection>
+
+  <templates:FormulaTokenStyleCollection x:Key="PartStyleVariable" DefaultStyle="{StaticResource PartStyleDefault}">
+    <templates:FormulaTokenStyleCollection.TextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.TextStyle>
+
+    <templates:FormulaTokenStyleCollection.SelectedTextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.SelectedTextStyle>
+
+    <templates:FormulaTokenStyleCollection.ContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="Transparent"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.ContainerStyle>
+
+    <templates:FormulaTokenStyleCollection.SelectedContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.SelectedContainerStyle>
+  </templates:FormulaTokenStyleCollection>
+
+  <templates:FormulaTokenStyleCollection x:Key="PartStyleSensorVariable" DefaultStyle="{StaticResource PartStyleDefault}">
+    <templates:FormulaTokenStyleCollection.TextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.TextStyle>
+
+    <templates:FormulaTokenStyleCollection.SelectedTextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.SelectedTextStyle>
+
+    <templates:FormulaTokenStyleCollection.ContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="Transparent"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.ContainerStyle>
+
+    <templates:FormulaTokenStyleCollection.SelectedContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
+        </Style.Setters>
+      </Style>
+    </templates:FormulaTokenStyleCollection.SelectedContainerStyle>
+  </templates:FormulaTokenStyleCollection>
+
+  <templates:FormulaTokenStyleCollection x:Key="PartStyleObjectVariable" DefaultStyle="{StaticResource PartStyleDefault}">
+
+  </templates:FormulaTokenStyleCollection>
+
+
+  <templates:FormulaTokenTemplateCollection x:Key="FormulaTokenTemplates">
+    <!-- ### Constants ##########################################################################################################-->
+    <templates:FormulaTokenTemplate TokenType="formulaTree1:FormulaNodeNumber" TokenStyle="{StaticResource PartStyleNumber}" />
+    <templates:FormulaTokenTemplate TokenType="formulaToken:FormulaTokenDecimalSeparator" TokenStyle="{StaticResource PartStyleNumber}" RelativeLeftMargin="0.15" RelativeRightMargin="0.15" />
+
+
+    <!-- ### Functions ##########################################################################################################-->
+    <templates:FormulaTokenTemplate TokenType="formulaToken:FormulaTokenParameterSeparator" TokenStyle="{StaticResource PartStyleMath}" RelativeLeftMargin="0.3" RelativeRightMargin="0.7" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree1:FormulaNodeRandom" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeModulo" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree1:FormulaNodeMax" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree1:FormulaNodeMin" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeSin" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeCos" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeTan" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeLn" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeLog" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeSqrt" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeAbs" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeRound" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeArcsin" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeArccos" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeArctan" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeExp" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree1:FormulaNodePi" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeEquals" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeNotEquals" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeLess" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeLessEqual" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeGreater" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeGreaterEqual" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeOr" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeAnd" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
+
+    <templates:FormulaTokenTemplate TokenType="formulaTree1:FormulaNodeTrue" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree1:FormulaNodeFalse" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeNot" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
+
+    <!-- TODO: Change Style Resource-->
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeAdd" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
+    <!-- TODO: Change Style Resource-->
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeSubtract" TokenStyle="{StaticResource PartStyleOperatorLogic}"/>
+    <!-- TODO: Change Style Resource-->
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeMultiply" TokenStyle="{StaticResource PartStyleOperatorLogic}"/>
+    <!-- TODO: Change Style Resource-->
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeDivide" TokenStyle="{StaticResource PartStyleOperatorLogic}"/>
+    <!-- TODO: Change Style Resource-->
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodePower" TokenStyle="{StaticResource PartStyleOperatorLogic}"/>
+
+    <!-- ### Brackets ##########################################################################################################-->
+    <!-- TODO: Change Style Resource-->
+    <templates:FormulaTokenTemplate TokenType="formulaToken:FormulaTokenParenthesis" TokenStyle="{StaticResource PartStyleOperatorLogic}" RelativeLeftMargin="0.3" RelativeRightMargin="0.3" />
+
+    <!-- ### Properties ##########################################################################################################-->
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeBrightness" TokenStyle="{StaticResource PartStyleObjectVariable}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeLayer" TokenStyle="{StaticResource PartStyleObjectVariable}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeTransparency" TokenStyle="{StaticResource PartStyleObjectVariable}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodePositionX" TokenStyle="{StaticResource PartStyleObjectVariable}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodePositionY" TokenStyle="{StaticResource PartStyleObjectVariable}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeRotation" TokenStyle="{StaticResource PartStyleObjectVariable}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeSize" TokenStyle="{StaticResource PartStyleObjectVariable}" />
+
+    <!-- ### Sensors ##########################################################################################################-->
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeAccelerationX" TokenStyle="{StaticResource PartStyleSensorVariable}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeAccelerationY" TokenStyle="{StaticResource PartStyleSensorVariable}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeAccelerationZ" TokenStyle="{StaticResource PartStyleSensorVariable}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeCompass" TokenStyle="{StaticResource PartStyleSensorVariable}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeInclinationX" TokenStyle="{StaticResource PartStyleSensorVariable}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeInclinationY" TokenStyle="{StaticResource PartStyleSensorVariable}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeLoudness" TokenStyle="{StaticResource PartStyleSensorVariable}" />
+
+
+    <!-- ### Variables ##########################################################################################################-->
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeLocalVariable" TokenStyle="{StaticResource PartStyleVariable}" />
+    <templates:FormulaTokenTemplate TokenType="formulaTree:FormulaNodeGlobalVariable" TokenStyle="{StaticResource PartStyleVariable}" />
+  </templates:FormulaTokenTemplateCollection>
+
+</ResourceDictionary>
