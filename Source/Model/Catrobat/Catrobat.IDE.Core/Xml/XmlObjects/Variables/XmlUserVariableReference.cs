@@ -5,24 +5,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
     public class XmlUserVariableReference : XmlObject
     {
-        internal string _reference;
+        private string _reference;
 
-        private XmlUserVariable _userVariable;
-        public XmlUserVariable UserVariable
-        {
-            get { return _userVariable; }
-            set
-            {
-                if (_userVariable == value)
-                {
-                    return;
-                }
-
-                _userVariable = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlUserVariable UserVariable { get; set; }
 
         public XmlUserVariableReference()
         {
@@ -53,30 +38,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
                 UserVariable = ReferenceHelper.GetReferenceObject(this, _reference) as XmlUserVariable;
             if (string.IsNullOrEmpty(_reference))
                 _reference = ReferenceHelper.GetReferenceString(this);
-        }
-
-        public XmlObject Copy()
-        {
-            var newUserVariableRef = new XmlUserVariableReference();
-            newUserVariableRef.UserVariable = _userVariable;
-
-            return newUserVariableRef;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherReference = other as XmlUserVariableReference;
-
-            if (otherReference == null)
-                return false;
-
-            if (UserVariable.Name != otherReference.UserVariable.Name)
-                return false;
-
-            if (_reference != otherReference._reference)
-                return false;
-
-            return true;
         }
     }
 }

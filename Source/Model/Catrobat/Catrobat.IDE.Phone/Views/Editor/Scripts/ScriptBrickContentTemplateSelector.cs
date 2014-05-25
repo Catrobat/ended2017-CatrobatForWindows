@@ -36,10 +36,10 @@ namespace Catrobat.IDE.Phone.Views.Editor.Scripts
         public DataTemplate MoveBrick { get; set; }
         public DataTemplate NextCostumeBrick { get; set; }
         public DataTemplate CommentBrick { get; set; }
-        //public DataTemplate NxtMotorActionBrick { get; set; }
-        //public DataTemplate NxtMotorStopBrick { get; set; }
-        //public DataTemplate NxtMotorTurnAngleBrick { get; set; }
-        //public DataTemplate NxtPlayToneBrick { get; set; }
+        public DataTemplate SetNxtMotorSpeedBrick { get; set; }
+        public DataTemplate StopNxtMotorBrick { get; set; }
+        public DataTemplate ChangeNxtMotorAngleBrick { get; set; }
+        public DataTemplate PlayNxtToneBrick { get; set; }
         public DataTemplate SetPositionBrick { get; set; }
         public DataTemplate PlaySoundBrick { get; set; }
         public DataTemplate SetRotationBrick { get; set; }
@@ -97,10 +97,10 @@ namespace Catrobat.IDE.Phone.Views.Editor.Scripts
                 if (scriptBrick is MoveBrick) return MoveBrick;
                 if (scriptBrick is NextCostumeBrick) return NextCostumeBrick;
                 if (scriptBrick is CommentBrick) return CommentBrick;
-                //if (scriptBrick is NxtMotorActionBrick) return NxtMotorActionBrick;
-                //if (scriptBrick is NxtMotorStopBrick) return NxtMotorStopBrick;
-                //if (scriptBrick is NxtMotorTurnAngleBrick) return NxtMotorTurnAngleBrick;
-                //if (scriptBrick is NxtPlayToneBrick) return NxtPlayToneBrick;
+                if (scriptBrick is SetNxtMotorSpeedBrick) return SetNxtMotorSpeedBrick;
+                if (scriptBrick is StopNxtMotorBrick) return StopNxtMotorBrick;
+                if (scriptBrick is ChangeNxtMotorAngleBrick) return ChangeNxtMotorAngleBrick;
+                if (scriptBrick is PlayNxtToneBrick) return PlayNxtToneBrick;
                 if (scriptBrick is SetPositionBrick) return SetPositionBrick;
                 if (scriptBrick is PlaySoundBrick) return PlaySoundBrick;
                 if (scriptBrick is SetRotationBrick) return SetRotationBrick;

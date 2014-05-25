@@ -5,24 +5,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
     public class XmlCostumeReference : XmlObject
     {
-        internal string _reference;
+        private string _reference;
 
-        private XmlCostume _costume;
-        public XmlCostume Costume
-        {
-            get { return _costume; }
-            set
-            {
-                if (_costume == value)
-                {
-                    return;
-                }
-
-                _costume = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlCostume Costume { get; set; }
 
         public XmlCostumeReference()
         {
@@ -54,29 +39,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
                 Costume = ReferenceHelper.GetReferenceObject(this, _reference) as XmlCostume;
             if (string.IsNullOrEmpty(_reference))
                 _reference = ReferenceHelper.GetReferenceString(this);
-        }
-
-        public XmlObject Copy()
-        {
-            var newCostumeRef = new XmlCostumeReference();
-            newCostumeRef.Costume = _costume;
-
-            return newCostumeRef;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherReference = other as XmlCostumeReference;
-
-            if (otherReference == null)
-                return false;
-
-            if (Costume.Name != otherReference.Costume.Name)
-                return false;
-            if (_reference != otherReference._reference)
-                return false;
-
-            return true;
         }
     }
 }

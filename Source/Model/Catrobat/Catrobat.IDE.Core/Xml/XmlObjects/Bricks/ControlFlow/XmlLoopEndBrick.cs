@@ -2,42 +2,27 @@
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
-    public abstract partial class XmlLoopEndBrick : XmlBrick
+    public abstract class XmlLoopEndBrick : XmlBrick
     {
-        protected XmlLoopBeginBrickReference _loopBeginBrickReference;
-        internal XmlLoopBeginBrickReference LoopBeginBrickReference
-        {
-            get { return _loopBeginBrickReference; }
-            set
-            {
-                if (_loopBeginBrickReference == value)
-                    return;
-
-                _loopBeginBrickReference = value;
-                RaisePropertyChanged();
-                RaisePropertyChanged(() => LoopBeginBrick);
-            }
-        }
+        protected internal XmlLoopBeginBrickReference LoopBeginBrickReference { get; set; }
 
         public XmlLoopBeginBrick LoopBeginBrick
         {
-            get { return _loopBeginBrickReference.LoopBeginBrick; }
+            get { return LoopBeginBrickReference.LoopBeginBrick; }
             set
             {
-                if (_loopBeginBrickReference == null)
+                if (LoopBeginBrickReference == null)
                 {
-                    _loopBeginBrickReference = new XmlLoopBeginBrickReference();
+                    LoopBeginBrickReference = new XmlLoopBeginBrickReference();
                 }
 
-                if (_loopBeginBrickReference.LoopBeginBrick == value)
+                if (LoopBeginBrickReference.LoopBeginBrick == value)
                     return;
 
-                _loopBeginBrickReference.LoopBeginBrick = value;
+                LoopBeginBrickReference.LoopBeginBrick = value;
 
                 if (value == null)
-                    _loopBeginBrickReference = null;
-
-                RaisePropertyChanged();
+                    LoopBeginBrickReference = null;
             }
         }
 
@@ -53,31 +38,20 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             if (xRoot.Element("loopBeginBrick") != null)
             {
-                _loopBeginBrickReference = new XmlLoopBeginBrickReference(xRoot.Element("loopBeginBrick"));
+                LoopBeginBrickReference = new XmlLoopBeginBrickReference(xRoot.Element("loopBeginBrick"));
             }
         }
 
         protected override void CreateCommonXML(XElement xRoot)
         {
-            xRoot.Add(_loopBeginBrickReference.CreateXml());
+            xRoot.Add(LoopBeginBrickReference.CreateXml());
         }
 
         internal override void LoadReference()
         {
-            if (_loopBeginBrickReference != null)
-                _loopBeginBrickReference.LoadReference();
-        }
-
-        public abstract override XmlObject Copy();
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlLoopEndBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            return LoopBeginBrickReference.Equals(otherBrick.LoopBeginBrickReference);
+            if (LoopBeginBrickReference != null)
+                LoopBeginBrickReference.LoadReference();
         }
     }
 }
+

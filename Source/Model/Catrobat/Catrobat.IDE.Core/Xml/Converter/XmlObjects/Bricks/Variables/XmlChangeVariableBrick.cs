@@ -8,7 +8,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 {
     partial class XmlChangeVariableBrick
     {
-        protected internal override Brick ToModel2(Context context)
+        protected override Brick ToModel2(Context context)
         {
             Variable variable = null;
             if (UserVariable != null) context.Variables.TryGetValue(UserVariable, out variable);

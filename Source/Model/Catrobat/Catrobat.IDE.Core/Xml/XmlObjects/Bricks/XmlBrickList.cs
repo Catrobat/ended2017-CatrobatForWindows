@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes;
@@ -11,16 +11,16 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
 {
     public class XmlBrickList : XmlObject
     {
-        public ObservableCollection<XmlBrick> Bricks { get; set; }
+        public List<XmlBrick> Bricks { get; set; }
 
         public XmlBrickList()
         {
-            Bricks = new ObservableCollection<XmlBrick>();
+            Bricks = new List<XmlBrick>();
         }
 
         public XmlBrickList(XElement xElement)
         {
-            Bricks = new ObservableCollection<XmlBrick>();
+            Bricks = new List<XmlBrick>();
             LoadFromXml(xElement);
         }
 
@@ -242,38 +242,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
             }
 
             return xRoot;
-        }
-
-        public XmlObject Copy()
-        {
-            var newBrickList = new XmlBrickList();
-
-            foreach (XmlBrick brick in Bricks)
-            {
-                newBrickList.Bricks.Add(brick.Copy() as XmlBrick);
-            }
-
-            return newBrickList;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrickList = other as XmlBrickList;
-
-            if (otherBrickList == null)
-                return false;
-
-            var count = Bricks.Count;
-            var otherCount = otherBrickList.Bricks.Count;
-
-            if (count != otherCount)
-                return false;
-
-            for(int i = 0; i < count; i++)
-                if(!Bricks[i].Equals(otherBrickList.Bricks[i]))
-                    return false;
-
-            return true;
         }
     }
 }

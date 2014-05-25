@@ -1,17 +1,17 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
     public class XmlObjectVariableList : XmlObject
     {
-        public ObservableCollection<XmlObjectVariableEntry> ObjectVariableEntries;
+        public List<XmlObjectVariableEntry> ObjectVariableEntries;
 
-        public XmlObjectVariableList() { ObjectVariableEntries = new ObservableCollection<XmlObjectVariableEntry>(); }
+        public XmlObjectVariableList() { ObjectVariableEntries = new List<XmlObjectVariableEntry>(); }
 
         public XmlObjectVariableList(XElement xElement)
         {
-            ObjectVariableEntries = new ObservableCollection<XmlObjectVariableEntry>();
+            ObjectVariableEntries = new List<XmlObjectVariableEntry>();
             LoadFromXml(xElement);
         }
 
@@ -43,36 +43,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
         {
             foreach(var entry in ObjectVariableEntries)
                 entry.LoadReference();
-        }
-
-        public XmlObject Copy()
-        {
-            var newObjectVariableList = new XmlObjectVariableList();
-
-            foreach(var entry in ObjectVariableEntries)
-                newObjectVariableList.ObjectVariableEntries.Add(entry.Copy() as XmlObjectVariableEntry);
-
-            return newObjectVariableList;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherObjectVariableList = other as XmlObjectVariableList;
-
-            if (otherObjectVariableList == null)
-                return false;
-
-            var count = ObjectVariableEntries.Count;
-            var otherCount = otherObjectVariableList.ObjectVariableEntries.Count;
-
-            if (count != otherCount)
-                return false;
-
-            for (int i = 0; i < count; i++)
-                if (!ObjectVariableEntries[i].Equals(otherObjectVariableList.ObjectVariableEntries[i]))
-                    return false;
-
-            return true;
         }
     }
 }

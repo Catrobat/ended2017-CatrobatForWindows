@@ -5,22 +5,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
     public class XmlLoopBeginBrickReference : XmlObject
     {
-        internal string _reference;
+        private string _reference;
 
-        private XmlLoopBeginBrick _loopBeginBrick;
-        public XmlLoopBeginBrick LoopBeginBrick
-        {
-            get { return _loopBeginBrick; }
-            set
-            {
-                if (_loopBeginBrick == value)
-                    return;
-
-                _loopBeginBrick = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlLoopBeginBrick LoopBeginBrick { get; set; }
 
         public XmlLoopBeginBrickReference() 
         {
@@ -51,29 +38,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
                 LoopBeginBrick = ReferenceHelper.GetReferenceObject(this, _reference) as XmlLoopBeginBrick;
             if (string.IsNullOrEmpty(_reference))
                 _reference = ReferenceHelper.GetReferenceString(this);
-        }
-
-        public XmlObject Copy()
-        {
-            var newLoopBeginBrickRef = new XmlLoopBeginBrickReference
-            {
-                LoopBeginBrick = _loopBeginBrick
-            };
-
-            return newLoopBeginBrickRef;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherReference = other as XmlLoopBeginBrickReference;
-
-            if (otherReference == null)
-                return false;
-
-            if (_reference != otherReference._reference)
-                return false;
-
-            return true;
         }
     }
 }

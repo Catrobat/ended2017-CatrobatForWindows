@@ -18,22 +18,5 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 
             return xRoot;
         }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlStopAllSoundsBrick();
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlStopAllSoundsBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            return true;
-        }
     }
 }

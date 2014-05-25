@@ -4,51 +4,35 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
     public class XmlObjectVariableEntry : XmlObject
     {
-        private XmlSpriteReference _xmlSpriteReference;
-        internal XmlSpriteReference XmlSpriteReference
-        {
-            get { return _xmlSpriteReference; }
-            set
-            {
-                if (_xmlSpriteReference == value)
-                {
-                    return;
-                }
-
-                _xmlSpriteReference = value;
-                RaisePropertyChanged();
-            }
-        }
+        internal XmlSpriteReference XmlSpriteReference { get; set; }
 
         public XmlSprite Sprite
         {
             get
             {
-                if (_xmlSpriteReference == null)
+                if (XmlSpriteReference == null)
                 {
                     return null;
                 }
 
-                return _xmlSpriteReference.Sprite;
+                return XmlSpriteReference.Sprite;
             }
             set
             {
-                if (_xmlSpriteReference == null)
-                    _xmlSpriteReference = new XmlSpriteReference();
+                if (XmlSpriteReference == null)
+                    XmlSpriteReference = new XmlSpriteReference();
 
-                if (_xmlSpriteReference.Sprite == value)
+                if (XmlSpriteReference.Sprite == value)
                     return;
 
-                _xmlSpriteReference.Sprite = value;
+                XmlSpriteReference.Sprite = value;
 
                 if (value == null)
-                    _xmlSpriteReference = null;
-
-                RaisePropertyChanged();
+                    XmlSpriteReference = null;
             }
         }
 
-        public XmlUserVariableList VariableList;
+        public XmlUserVariableList VariableList { get; set; }
 
         public XmlObjectVariableEntry() { VariableList = new XmlUserVariableList(); }
 
@@ -67,7 +51,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
         {
             var xRoot = new XElement("entry");
 
-            xRoot.Add(_xmlSpriteReference.CreateXml());
+            xRoot.Add(XmlSpriteReference.CreateXml());
             xRoot.Add(VariableList.CreateXml());
 
             return xRoot;
@@ -75,52 +59,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
         internal override void LoadReference()
         {
-            if(_xmlSpriteReference != null && XmlSpriteReference.Sprite == null)
-                _xmlSpriteReference.LoadReference();
-        }
-
-        public XmlObject Copy(XmlSprite newSprite)
-        {
-            var newObjectVariableEntry = new XmlObjectVariableEntry();
-            newObjectVariableEntry.Sprite = newSprite;
-            newObjectVariableEntry.VariableList = VariableList.Copy() as XmlUserVariableList;
-
-            return newObjectVariableEntry;
-        }
-
-        public XmlObject Copy()
-        {
-            var newObjectVariableEntry = new XmlObjectVariableEntry();
-            newObjectVariableEntry.XmlSpriteReference = XmlSpriteReference.Copy() as XmlSpriteReference;
-            newObjectVariableEntry.VariableList = VariableList.Copy() as XmlUserVariableList;
-
-            return newObjectVariableEntry;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherObjectVariableEntry = other as XmlObjectVariableEntry;
-
-            if (otherObjectVariableEntry == null)
-                return false;
-
-            if (XmlSpriteReference != null && otherObjectVariableEntry.XmlSpriteReference != null)
-            {
-                if (!XmlSpriteReference.Equals(otherObjectVariableEntry.XmlSpriteReference))
-                    return false;
-            }
-            else if (!(XmlSpriteReference == null && otherObjectVariableEntry.XmlSpriteReference == null))
-                return false;
-
-            if (VariableList != null && otherObjectVariableEntry.VariableList != null)
-            {
-                if (!VariableList.Equals(otherObjectVariableEntry.VariableList))
-                    return false;
-            }
-            else if (!(VariableList == null && otherObjectVariableEntry.VariableList == null))
-                return false;
-
-            return true;
+            if(XmlSpriteReference != null && XmlSpriteReference.Sprite == null)
+                XmlSpriteReference.LoadReference();
         }
     }
 }

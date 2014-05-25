@@ -1,8 +1,12 @@
 ﻿using System.Xml.Linq;
+using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Utilities;
-using Catrobat.IDE.Core.VersionConverter;
 using Catrobat.IDE.Core.Xml.Converter;
+using Catrobat.IDE.Core.Xml.Converter.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.IDE.Tests.Extensions;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.SampleData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -41,7 +45,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Xml
 
         private static void TestConvert(XmlProjectConverter converter, XmlProject project)
         {
-            var actual = converter.ConvertBack(converter.Convert(project));
+            var tempProject = converter.Convert(project);
+            ValidProject(tempProject);
+
+            var actual = converter.ConvertBack(tempProject);
 
             var expectedDocument = project.CreateXML();
 
@@ -56,6 +63,66 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Xml
             var actualXml = writer.GetStringBuilder().ToString();
 
             Assert.AreEqual(expectedXml, actualXml);
+        }
+
+        private static void ValidProject(Project project)
+        {
+            foreach (var sprite in project.Sprites)
+            {
+                var objects = sprite.Scripts
+                    .SelectMany(script => Enumerable.Repeat<IBrick>(script, 1)
+                        .Concat(script.Bricks))
+                    .SelectMany(brick => Enumerable.Repeat((Model) brick, 1)
+                        .Concat(brick.GetType().GetPropertiesValues<FormulaTree>(brick)
+                            .SelectMany(tree => tree.AsEnumerable())))
+                    .ToList();
+
+                var broadcastMessages = objects
+                    .SelectMany(obj => obj.GetType().GetPropertiesValues<BroadcastMessage>(obj))
+                    .Where(message => message != null);
+                foreach (var message in broadcastMessages)
+                {
+                    CollectionAssert.Contains(project.BroadcastMessages, message);
+                }
+
+                var variables = objects
+                    .SelectMany(obj => obj.GetType().GetPropertiesValues<Variable>(obj))
+                    .ToList();
+
+                var localVariables = objects
+                    .SelectMany(obj => obj.GetType().GetPropertiesValues<LocalVariable>(obj))
+                    .Concat(variables.OfType<LocalVariable>())
+                    .Where(variable => variable != null);
+                foreach (var variable in localVariables)
+                {
+                    CollectionAssert.Contains(sprite.LocalVariables, variable);
+                }
+
+                var globalVariables = objects
+                    .SelectMany(obj => obj.GetType().GetPropertiesValues<GlobalVariable>(obj))
+                    .Concat(variables.OfType<GlobalVariable>())
+                    .Where(variable => variable != null);
+                foreach (var variable in globalVariables)
+                {
+                    CollectionAssert.Contains(project.GlobalVariables, variable);
+                }
+
+                var sounds = objects
+                    .SelectMany(obj => obj.GetType().GetPropertiesValues<Sound>(obj))
+                    .Where(sound => sound != null);
+                foreach (var sound in sounds)
+                {
+                    CollectionAssert.Contains(sprite.Sounds, sound);
+                }
+
+                var costumes = objects
+                    .SelectMany(obj => obj.GetType().GetPropertiesValues<Costume>(obj))
+                    .Where(costume => costume != null);
+                foreach (var costume in costumes)
+                {
+                    CollectionAssert.Contains(sprite.Costumes, costume);
+                }
+            }
         }
 
         #endregion

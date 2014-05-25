@@ -5,17 +5,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
     public partial class XmlTurnLeftBrick : XmlBrick
     {
-        protected XmlFormula _degrees;
-        public XmlFormula Degrees
-        {
-            get { return _degrees; }
-            set
-            {
-                _degrees = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlFormula Degrees { get; set; }
 
         public XmlTurnLeftBrick() {}
 
@@ -23,7 +13,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            _degrees = new XmlFormula(xRoot.Element("degrees"));
+            Degrees = new XmlFormula(xRoot.Element("degrees"));
         }
 
         internal override XElement CreateXml()
@@ -31,7 +21,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             var xRoot = new XElement("turnLeftBrick");
 
             var xVariable = new XElement("degrees");
-            xVariable.Add(_degrees.CreateXml());
+            xVariable.Add(Degrees.CreateXml());
             xRoot.Add(xVariable);
 
             return xRoot;
@@ -39,26 +29,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadReference()
         {
-            if (_degrees != null)
-                _degrees.LoadReference();
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlTurnLeftBrick();
-            newBrick._degrees = _degrees.Copy() as XmlFormula;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlTurnLeftBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            return Degrees.Equals(otherBrick.Degrees);
+            if (Degrees != null)
+                Degrees.LoadReference();
         }
     }
 }

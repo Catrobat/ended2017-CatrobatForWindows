@@ -5,23 +5,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
     public class XmlSpriteReference : XmlObject
     {
-        internal string _reference;
+        private string _reference;
 
-        private XmlSprite _sprite;
-        public XmlSprite Sprite
-        {
-            get { return _sprite; }
-            set
-            {
-                if (_sprite == value)
-                {
-                    return;
-                }
-
-                _sprite = value;
-                RaisePropertyChanged();
-            }
-        }
+        public XmlSprite Sprite { get; set; }
 
         public XmlSpriteReference()
         {
@@ -53,33 +39,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
                 Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as XmlSprite;
             if (string.IsNullOrEmpty(_reference))
                 _reference = ReferenceHelper.GetReferenceString(this);
-        }
-
-        public XmlObject Copy()
-        {
-            var newSpriteRef = new XmlSpriteReference();
-            newSpriteRef.Sprite = _sprite;
-
-            return newSpriteRef;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherReference = other as XmlSpriteReference;
-
-            if (otherReference == null)
-                return false;
-
-            if (Sprite.Name != otherReference.Sprite.Name)
-                return false;
-            if (Sprite.Costumes.Costumes.Count != otherReference.Sprite.Costumes.Costumes.Count)
-                return false;
-            if (Sprite.Sounds.Sounds.Count != otherReference.Sprite.Sounds.Sounds.Count)
-                return false;
-            if (Sprite.Scripts.Scripts.Count != otherReference.Sprite.Scripts.Scripts.Count)
-                return false;
-
-            return true;
         }
     }
 }

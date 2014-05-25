@@ -1,4 +1,4 @@
-﻿namespace Catrobat.IDE.Core.VersionConverter
+﻿namespace Catrobat.IDE.Core.Xml.Converter.VersionConverter
 {
     public class CatrobatVersionElementRenameEntry
     {

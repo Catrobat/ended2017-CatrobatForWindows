@@ -5,17 +5,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
     public partial class XmlChangeGhostEffectBrick : XmlBrick
     {
-        protected XmlFormula _changeGhostEffect;
-        public XmlFormula ChangeGhostEffect
-        {
-            get { return _changeGhostEffect; }
-            set
-            {
-                _changeGhostEffect = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlFormula ChangeGhostEffect { get; set; }
 
         public XmlChangeGhostEffectBrick() {}
 
@@ -23,7 +13,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            _changeGhostEffect = new XmlFormula(xRoot.Element("changeGhostEffect"));
+            ChangeGhostEffect = new XmlFormula(xRoot.Element("changeGhostEffect"));
         }
 
         internal override XElement CreateXml()
@@ -31,7 +21,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             var xRoot = new XElement("changeGhostEffectByNBrick");
 
             var xVariable = new XElement("changeGhostEffect");
-            xVariable.Add(_changeGhostEffect.CreateXml());
+            xVariable.Add(ChangeGhostEffect.CreateXml());
             xRoot.Add(xVariable);
 
             return xRoot;
@@ -39,26 +29,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadReference()
         {
-            if (_changeGhostEffect != null)
-                _changeGhostEffect.LoadReference();
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlChangeGhostEffectBrick();
-            newBrick._changeGhostEffect = _changeGhostEffect.Copy() as XmlFormula;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlChangeGhostEffectBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            return ChangeGhostEffect.Equals(otherBrick.ChangeGhostEffect);
+            if (ChangeGhostEffect != null)
+                ChangeGhostEffect.LoadReference();
         }
     }
 }

@@ -1,84 +1,24 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using System.Xml.Linq;
-using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
-using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
     public partial class XmlSprite : XmlObject
     {
-        private XmlCostumeList _costumes;
-        public XmlCostumeList Costumes
-        {
-            get { return _costumes; }
-            set
-            {
-                if (_costumes == value)
-                {
-                    return;
-                }
+        public XmlCostumeList Costumes { get; set; }
 
-                _costumes = value;
-                RaisePropertyChanged();
-            }
-        }
+        public string Name { get; set; }
 
-        private string _name;
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (_name == value)
-                {
-                    return;
-                }
+        public XmlScriptList Scripts { get; set; }
 
-                _name = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private XmlScriptList _scripts;
-        public XmlScriptList Scripts
-        {
-            get { return _scripts; }
-            set
-            {
-                if (_scripts == value)
-                {
-                    return;
-                }
-
-                _scripts = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private XmlSoundList _sounds;
-        public XmlSoundList Sounds
-        {
-            get { return _sounds; }
-            set
-            {
-                if (_sounds == value)
-                {
-                    return;
-                }
-
-                _sounds = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlSoundList Sounds { get; set; }
 
         public XmlSprite()
         {
-            _scripts = new XmlScriptList();
-            _costumes = new XmlCostumeList();
-            _sounds = new XmlSoundList();
+            Scripts = new XmlScriptList();
+            Costumes = new XmlCostumeList();
+            Sounds = new XmlSoundList();
         }
 
         public XmlSprite(XElement xElement)
@@ -90,18 +30,18 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             if (xRoot.Element("lookList") != null)
             {
-                _costumes = new XmlCostumeList(xRoot.Element("lookList"));
+                Costumes = new XmlCostumeList(xRoot.Element("lookList"));
             }
 
-            _name = xRoot.Element("name").Value;
+            Name = xRoot.Element("name").Value;
 
             if (xRoot.Element("soundList") != null)
             {
-                _sounds = new XmlSoundList(xRoot.Element("soundList"));
+                Sounds = new XmlSoundList(xRoot.Element("soundList"));
             }
             if (xRoot.Element("scriptList") != null)
             {
-                _scripts = new XmlScriptList(xRoot.Element("scriptList"));
+                Scripts = new XmlScriptList(xRoot.Element("scriptList"));
             }
         }
 
@@ -109,24 +49,24 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             var xRoot = new XElement("object");
 
-            if (_costumes != null)
+            if (Costumes != null)
             {
-                xRoot.Add(_costumes.CreateXml());
+                xRoot.Add(Costumes.CreateXml());
             }
 
             xRoot.Add(new XElement("name")
             {
-                Value = _name
+                Value = Name
             });
 
-            if (_scripts != null)
+            if (Scripts != null)
             {
-                xRoot.Add(_scripts.CreateXml());
+                xRoot.Add(Scripts.CreateXml());
             }
 
-            if (_sounds != null)
+            if (Sounds != null)
             {
-                xRoot.Add(_sounds.CreateXml());
+                xRoot.Add(Sounds.CreateXml());
             }
 
             return xRoot;
@@ -138,79 +78,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             {
                 brick.LoadReference();
             }
-        }
-
-        public async Task<XmlObject> Copy()
-        {
-            var newSprite = new XmlSprite();
-
-            newSprite._name = _name;
-            if (_costumes != null)
-            {
-                newSprite._costumes = await _costumes.Copy() as XmlCostumeList;
-            }
-            if (_sounds != null)
-            {
-                newSprite._sounds = await _sounds.Copy() as XmlSoundList;
-            }
-            if (_scripts != null)
-            {
-                newSprite._scripts = _scripts.Copy() as XmlScriptList;
-            }
-
-
-            var entries = XmlParserTempProjectHelper.Project.VariableList.ObjectVariableList.ObjectVariableEntries;
-            XmlObjectVariableEntry newEntry = null;
-
-            foreach (var entry in entries)
-                if (entry.Sprite == this)
-                {
-                    newEntry = entry.Copy(newSprite) as XmlObjectVariableEntry; //changes Spritereference to new Sprite
-                }
-            if (newEntry != null)
-                entries.Add(newEntry);
-
-
-            ReferenceHelper.UpdateReferencesAfterCopy(this, newSprite);
-
-            return newSprite;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherSprite = other as XmlSprite;
-
-            if (otherSprite == null)
-                return false;
-
-            if (Costumes != null && otherSprite.Costumes != null)
-            {
-                if (!Costumes.Equals(otherSprite.Costumes))
-                    return false;
-            }
-            else if (!(Costumes == null && otherSprite.Costumes == null))
-                return false;
-
-            if (Sounds != null && otherSprite.Sounds != null)
-            {
-                if (!Sounds.Equals(otherSprite.Sounds))
-                    return false;
-            }
-            else if (!(Sounds == null && otherSprite.Sounds == null))
-                return false;
-
-            if (Scripts != null && otherSprite.Scripts != null)
-            {
-                if (!Scripts.Equals(otherSprite.Scripts))
-                    return false;
-            }
-            else if (!(Scripts == null && otherSprite.Scripts == null))
-                return false;
-
-            if (Name != otherSprite.Name)
-                return false;
-
-            return true;
         }
     }
 }

@@ -5,17 +5,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 {
     public partial class XmlSetVolumeToBrick : XmlBrick
     {
-        protected XmlFormula _volume;
-        public XmlFormula Volume
-        {
-            get { return _volume; }
-            set
-            {
-                _volume = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlFormula Volume { get; set; }
 
         public XmlSetVolumeToBrick() {}
 
@@ -23,7 +13,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            _volume = new XmlFormula(xRoot.Element("volume"));
+            Volume = new XmlFormula(xRoot.Element("volume"));
         }
 
         internal override XElement CreateXml()
@@ -31,7 +21,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
             var xRoot = new XElement("setVolumeToBrick");
 
             var xVariable = new XElement("volume");
-            xVariable.Add(_volume.CreateXml());
+            xVariable.Add(Volume.CreateXml());
             xRoot.Add(xVariable);
 
             return xRoot;
@@ -39,26 +29,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 
         internal override void LoadReference()
         {
-            if (_volume != null)
-                _volume.LoadReference();
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlSetVolumeToBrick();
-            newBrick._volume = _volume.Copy() as XmlFormula;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlSetVolumeToBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            return Volume.Equals(otherBrick.Volume);
+            if (Volume != null)
+                Volume.LoadReference();
         }
     }
 }

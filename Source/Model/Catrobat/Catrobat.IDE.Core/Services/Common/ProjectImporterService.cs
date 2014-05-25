@@ -6,7 +6,7 @@ using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.VersionConverter;
+using Catrobat.IDE.Core.Xml.Converter.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 
 namespace Catrobat.IDE.Core.Services.Common

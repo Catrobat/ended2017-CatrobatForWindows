@@ -7,7 +7,7 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources;
-using Catrobat.IDE.Core.VersionConverter;
+using Catrobat.IDE.Core.Xml.Converter.VersionConverter;
 
 namespace Catrobat.IDE.Core.Services.Common
 {

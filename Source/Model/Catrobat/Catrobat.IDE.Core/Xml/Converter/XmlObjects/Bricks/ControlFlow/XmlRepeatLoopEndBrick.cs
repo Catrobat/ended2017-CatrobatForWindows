@@ -7,7 +7,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
     partial class XmlRepeatLoopEndBrick
     {
-        protected internal override Brick ToModel2(Context context)
+        protected override Brick ToModel2(Context context)
         {
             var result = new EndRepeatBrick();
             context.Bricks[this] = result;

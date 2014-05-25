@@ -6,283 +6,43 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
     public partial class XmlProjectHeader : XmlObject
     {
-        private string _applicationBuildName;
+        public string ApplicationBuildName { get; set; }
 
-        public string ApplicationBuildName
-        {
-            get { return _applicationBuildName; }
-            set
-            {
-                if (_applicationBuildName == value)
-                    return;
+        public int ApplicationBuildNumber { get; set; }
 
-                _applicationBuildName = value;
-                RaisePropertyChanged();
-            }
-        }
+        public string ApplicationName { get; set; }
 
-        private int _applicationBuildNumber;
+        public string ApplicationVersion { get; set; }
 
-        public int ApplicationBuildNumber
-        {
-            get { return _applicationBuildNumber; }
-            set
-            {
-                if (_applicationBuildNumber == value)
-                    return;
+        public string CatrobatLanguageVersion { get; set; }
 
-                _applicationBuildNumber = value;
-                RaisePropertyChanged();
-            }
-        }
+        public string DateTimeUpload { get; set; }
 
-        private string _applicationName;
+        public string Description { get; set; }
 
-        public string ApplicationName
-        {
-            get { return _applicationName; }
-            set
-            {
-                if (_applicationName == value)
-                    return;
+        public string DeviceName { get; set; }
 
-                _applicationName = value;
-                RaisePropertyChanged();
-            }
-        }
+        public string MediaLicense { get; set; }
 
-        private string _applicationVersion;
+        public string Platform { get; set; }
 
-        public string ApplicationVersion
-        {
-            get { return _applicationVersion; }
-            set
-            {
-                if (_applicationVersion == value)
-                    return;
+        public string PlatformVersion { get; set; }
 
-                _applicationVersion = value;
-                RaisePropertyChanged();
-            }
-        }
+        public string ProgramLicense { get; set; }
 
-        private string _catrobatLanguageVersion;
+        public string ProgramName { get; set; }
 
-        public string CatrobatLanguageVersion
-        {
-            get { return _catrobatLanguageVersion; }
-            set
-            {
-                if (_catrobatLanguageVersion == value)
-                    return;
+        public string RemixOf { get; set; }
 
-                _catrobatLanguageVersion = value;
-                RaisePropertyChanged();
-            }
-        }
+        public int ScreenHeight { get; set; }
 
-        private string _dateTimeUpload;
+        public int ScreenWidth { get; set; }
 
-        public string DateTimeUpload
-        {
-            get { return _dateTimeUpload; }
-            set
-            {
-                if (_dateTimeUpload == value)
-                    return;
+        public string Tags { get; set; }
 
-                _dateTimeUpload = value;
-                RaisePropertyChanged();
-            }
-        }
+        public string Url { get; set; }
 
-        private string _description;
-
-        public string Description
-        {
-            get { return _description; }
-            set
-            {
-                if (_description == value)
-                    return;
-
-                _description = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _deviceName;
-
-        public string DeviceName
-        {
-            get { return _deviceName; }
-            set
-            {
-                if (_deviceName == value)
-                    return;
-
-                _deviceName = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _mediaLicense;
-
-        public string MediaLicense
-        {
-            get { return _mediaLicense; }
-            set
-            {
-                if (_mediaLicense == value)
-                    return;
-
-                _mediaLicense = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _platform;
-
-        public string Platform
-        {
-            get { return _platform; }
-            set
-            {
-                if (_platform == value)
-                    return;
-
-                _platform = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _platformVersion;
-
-        public string PlatformVersion
-        {
-            get { return _platformVersion; }
-            set
-            {
-                if (_platformVersion == value)
-                    return;
-
-                _platformVersion = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _programLicense;
-
-        public string ProgramLicense
-        {
-            get { return _programLicense; }
-            set
-            {
-                if (_programLicense == value)
-                    return;
-
-                _programLicense = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _programName;
-        public string ProgramName
-        {
-            get { return _programName; }
-            set
-            {
-                if (_programName == value)
-                    return;
-
-                _programName = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _remixOf;
-        public string RemixOf
-        {
-            get { return _remixOf; }
-            set
-            {
-                if (_remixOf == value)
-                    return;
-
-                _remixOf = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private int _screenHeight;
-        public int ScreenHeight
-        {
-            get { return _screenHeight; }
-            set
-            {
-                if (_screenHeight == value)
-                    return;
-
-                _screenHeight = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private int _screenWidth;
-        public int ScreenWidth
-        {
-            get { return _screenWidth; }
-            set
-            {
-                if (_screenWidth == value)
-                    return;
-
-                _screenWidth = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _tags;
-        public string Tags
-        {
-            get { return _tags; }
-            set
-            {
-                if (_tags == value)
-                    return;
-
-                _tags = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _url;
-        public string Url
-        {
-            get { return _url; }
-            set
-            {
-                if (_url == value)
-                    return;
-
-                _url = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _userHandle;
-        public string UserHandle
-        {
-            get { return _userHandle; }
-            set
-            {
-                if (_userHandle == value)
-                    return;
-
-                _userHandle = value;
-                RaisePropertyChanged();
-            }
-        }
+        public string UserHandle { get; set; }
 
         public XmlProjectHeader(bool isAutoFillProperties = true)
         {
@@ -299,7 +59,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             Description = "";
             MediaLicense = "http://developer.catrobat.org/ccbysa_v3";
             ProgramLicense = "http://developer.catrobat.org/agpl_v3";
-            _programName = ""; //otherwise renameDirectory would be executed
+            ProgramName = ""; //otherwise renameDirectory would be executed
             RemixOf = "";
             Tags = "";
             Url = "http://pocketcode.org/details/871";
@@ -327,25 +87,25 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            _applicationBuildName = xRoot.Element("applicationBuildName").Value;
-            _applicationBuildNumber = int.Parse(xRoot.Element("applicationBuildNumber").Value, CultureInfo.InvariantCulture);
-            _applicationName = xRoot.Element("applicationName").Value;
-            _applicationVersion = xRoot.Element("applicationVersion").Value;
-            _catrobatLanguageVersion = xRoot.Element("catrobatLanguageVersion").Value;
-            _dateTimeUpload = xRoot.Element("dateTimeUpload").Value;
-            _description = xRoot.Element("description").Value;
-            _deviceName = xRoot.Element("deviceName").Value;
-            _mediaLicense = xRoot.Element("mediaLicense").Value;
-            _platform = xRoot.Element("platform").Value;
-            _platformVersion = xRoot.Element("platformVersion").Value;
-            _programLicense = xRoot.Element("programLicense").Value;
-            _programName = xRoot.Element("programName").Value;
-            _remixOf = xRoot.Element("remixOf").Value;
-            _screenHeight = int.Parse(xRoot.Element("screenHeight").Value, CultureInfo.InvariantCulture);
-            _screenWidth = int.Parse(xRoot.Element("screenWidth").Value, CultureInfo.InvariantCulture);
-            _tags = xRoot.Element("tags").Value;
-            _url = xRoot.Element("url").Value;
-            _userHandle = xRoot.Element("userHandle").Value;
+            ApplicationBuildName = xRoot.Element("applicationBuildName").Value;
+            ApplicationBuildNumber = int.Parse(xRoot.Element("applicationBuildNumber").Value, CultureInfo.InvariantCulture);
+            ApplicationName = xRoot.Element("applicationName").Value;
+            ApplicationVersion = xRoot.Element("applicationVersion").Value;
+            CatrobatLanguageVersion = xRoot.Element("catrobatLanguageVersion").Value;
+            DateTimeUpload = xRoot.Element("dateTimeUpload").Value;
+            Description = xRoot.Element("description").Value;
+            DeviceName = xRoot.Element("deviceName").Value;
+            MediaLicense = xRoot.Element("mediaLicense").Value;
+            Platform = xRoot.Element("platform").Value;
+            PlatformVersion = xRoot.Element("platformVersion").Value;
+            ProgramLicense = xRoot.Element("programLicense").Value;
+            ProgramName = xRoot.Element("programName").Value;
+            RemixOf = xRoot.Element("remixOf").Value;
+            ScreenHeight = int.Parse(xRoot.Element("screenHeight").Value, CultureInfo.InvariantCulture);
+            ScreenWidth = int.Parse(xRoot.Element("screenWidth").Value, CultureInfo.InvariantCulture);
+            Tags = xRoot.Element("tags").Value;
+            Url = xRoot.Element("url").Value;
+            UserHandle = xRoot.Element("userHandle").Value;
         }
 
         internal override XElement CreateXml()
@@ -356,155 +116,100 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
             xProjectHeader.Add(new XElement("applicationBuildName")
                 {
-                    Value = _applicationBuildName
+                    Value = ApplicationBuildName
                 });
 
             xProjectHeader.Add(new XElement("applicationBuildNumber")
                 {
-                    Value = _applicationBuildNumber.ToString(CultureInfo.InvariantCulture)
+                    Value = ApplicationBuildNumber.ToString(CultureInfo.InvariantCulture)
                 });
 
             xProjectHeader.Add(new XElement("applicationName")
                 {
-                    Value = _applicationName
+                    Value = ApplicationName
                 });
 
             xProjectHeader.Add(new XElement("applicationVersion")
                 {
-                    Value = _applicationVersion
+                    Value = ApplicationVersion
                 });
 
             xProjectHeader.Add(new XElement("catrobatLanguageVersion")
                 {
-                    Value = _catrobatLanguageVersion
+                    Value = CatrobatLanguageVersion
                 });
 
             xProjectHeader.Add(new XElement("dateTimeUpload")
                 {
-                    Value = _dateTimeUpload
+                    Value = DateTimeUpload
                 });
 
             xProjectHeader.Add(new XElement("description")
                 {
-                    Value = _description
+                    Value = Description
                 });
 
             xProjectHeader.Add(new XElement("deviceName")
                 {
-                    Value = _deviceName
+                    Value = DeviceName
                 });
 
             xProjectHeader.Add(new XElement("mediaLicense")
                 {
-                    Value = _mediaLicense
+                    Value = MediaLicense
                 });
 
             xProjectHeader.Add(new XElement("platform")
                 {
-                    Value = _platform
+                    Value = Platform
                 });
 
             xProjectHeader.Add(new XElement("platformVersion")
                 {
-                    Value = _platformVersion
+                    Value = PlatformVersion
                 });
 
             xProjectHeader.Add(new XElement("programLicense")
                 {
-                    Value = _programLicense
+                    Value = ProgramLicense
                 });
 
             xProjectHeader.Add(new XElement("programName")
                 {
-                    Value = _programName
+                    Value = ProgramName
                 });
 
             xProjectHeader.Add(new XElement("remixOf")
                 {
-                    Value = _remixOf
+                    Value = RemixOf
                 });
 
             xProjectHeader.Add(new XElement("screenHeight")
                 {
-                    Value = _screenHeight.ToString(CultureInfo.InvariantCulture)
+                    Value = ScreenHeight.ToString(CultureInfo.InvariantCulture)
                 });
 
             xProjectHeader.Add(new XElement("screenWidth")
                 {
-                    Value = _screenWidth.ToString(CultureInfo.InvariantCulture)
+                    Value = ScreenWidth.ToString(CultureInfo.InvariantCulture)
                 });
 
             xProjectHeader.Add(new XElement("tags")
                 {
-                    Value = _tags
+                    Value = Tags
                 });
 
             xProjectHeader.Add(new XElement("url")
                 {
-                    Value = _url
+                    Value = Url
                 });
 
             xProjectHeader.Add(new XElement("userHandle")
                 {
-                    Value = _userHandle
+                    Value = UserHandle
                 });
 
             return xProjectHeader;
-        }
-
-        public void SetProgramName(string newProgramName)
-        {
-            _programName = newProgramName;
-            RaisePropertyChanged(() => ProgramName);
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherProjectHeader = other as XmlProjectHeader;
-
-            if (otherProjectHeader == null)
-                return false;
-
-            if (ApplicationBuildName != otherProjectHeader.ApplicationBuildName)
-                return false;
-            if (ApplicationBuildNumber != otherProjectHeader.ApplicationBuildNumber)
-                return false;
-            if (ApplicationName != otherProjectHeader.ApplicationName)
-                return false;
-            if (ApplicationVersion != otherProjectHeader.ApplicationVersion)
-                return false;
-            if (CatrobatLanguageVersion != otherProjectHeader.CatrobatLanguageVersion)
-                return false;
-            if (DateTimeUpload != otherProjectHeader.DateTimeUpload)
-                return false;
-            if (Description != otherProjectHeader.Description)
-                return false;
-            if (DeviceName != otherProjectHeader.DeviceName)
-                return false;
-            if (MediaLicense != otherProjectHeader.MediaLicense)
-                return false;
-            if (Platform != otherProjectHeader.Platform)
-                return false;
-            if (PlatformVersion != otherProjectHeader.PlatformVersion)
-                return false;
-            if (ProgramLicense != otherProjectHeader.ProgramLicense)
-                return false;
-            if (ProgramName != otherProjectHeader.ProgramName)
-                return false;
-            if (RemixOf != otherProjectHeader.RemixOf)
-                return false;
-            if(ScreenHeight != otherProjectHeader.ScreenHeight)
-                return false;
-            if (ScreenWidth != otherProjectHeader.ScreenWidth)
-                return false;
-            if (Tags != otherProjectHeader.Tags)
-                return false;
-            if (Url != otherProjectHeader.Url)
-                return false;
-            if (UserHandle != otherProjectHeader.UserHandle)
-                return false;
-
-            return true;
         }
     }
 }

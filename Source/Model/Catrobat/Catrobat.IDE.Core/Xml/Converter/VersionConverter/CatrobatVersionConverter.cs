@@ -6,9 +6,9 @@ using System.Xml.Linq;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities;
-using Catrobat.IDE.Core.VersionConverter.Versions;
+using Catrobat.IDE.Core.Xml.Converter.VersionConverter.Versions;
 
-namespace Catrobat.IDE.Core.VersionConverter
+namespace Catrobat.IDE.Core.Xml.Converter.VersionConverter
 {
     public static class CatrobatVersionConverter
     {

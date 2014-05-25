@@ -4,22 +4,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 {
     public partial class XmlSpeakBrick : XmlBrick
     {
-        protected string _text;
-        public string Text
-        {
-            get { return _text; }
-            set
-            {
-                if (_text == value)
-                {
-                    return;
-                }
-
-                _text = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public string Text { get; set; }
 
         public XmlSpeakBrick() {}
 
@@ -29,7 +14,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
         {
             if (xRoot.Element("text") != null)
             {
-                _text = xRoot.Element("text").Value;
+                Text = xRoot.Element("text").Value;
             }
         }
 
@@ -37,38 +22,17 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
         {
             var xRoot = new XElement("speakBrick");
 
-            if (_text != null)
+            if (Text != null)
             {
                 xRoot.Add(new XElement("text")
                 {
-                    Value = _text
+                    Value = Text
                 });
             }
 
             //CreateCommonXML(xRoot);
 
             return xRoot;
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlSpeakBrick();
-            newBrick._text = _text;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlSpeakBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            if (Text != otherBrick.Text)
-                return false;
-
-            return true;
         }
     }
 }

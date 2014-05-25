@@ -1,4 +1,4 @@
-﻿using Catrobat.IDE.Core.VersionConverter;
+﻿using Catrobat.IDE.Core.Xml.Converter.VersionConverter;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.SampleData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

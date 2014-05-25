@@ -4,52 +4,34 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
     public abstract partial class XmlLoopBeginBrick : XmlBrick
     {
-        protected XmlLoopEndBrickReference _loopEndBrickReference;
-        public XmlLoopEndBrickReference LoopEndBrickReference
-        {
-            get { return _loopEndBrickReference; }
-            set
-            {
-                if (_loopEndBrickReference == value)
-                {
-                    return;
-                }
-
-                _loopEndBrickReference = value;
-                RaisePropertyChanged();
-                RaisePropertyChanged(() => LoopEndBrick);
-            }
-        }
+        public XmlLoopEndBrickReference LoopEndBrickReference { get; set; }
 
         public XmlLoopEndBrick LoopEndBrick
         {
-            get { return _loopEndBrickReference.LoopEndBrick; }
+            get { return LoopEndBrickReference.LoopEndBrick; }
             set
             {
-                if (_loopEndBrickReference == null)
+                if (LoopEndBrickReference == null)
                 {
-                    _loopEndBrickReference = new XmlLoopEndBrickReference();
+                    LoopEndBrickReference = new XmlLoopEndBrickReference();
                     //if (value is XmlRepeatLoopEndBrick)
                     //    _loopEndBrickReference.Class = "loopEndBrick";
                     //else if (value is XmlForeverLoopEndBrick)
                     //    _loopEndBrickReference.Class = "loopEndlessBrick";
                 }
 
-                if (_loopEndBrickReference == null)
-                    _loopEndBrickReference = new XmlLoopEndBrickReference();
+                if (LoopEndBrickReference == null)
+                    LoopEndBrickReference = new XmlLoopEndBrickReference();
 
-                if (_loopEndBrickReference.LoopEndBrick == value)
+                if (LoopEndBrickReference.LoopEndBrick == value)
                     return;
 
-                _loopEndBrickReference.LoopEndBrick = value;
+                LoopEndBrickReference.LoopEndBrick = value;
 
                 if (value == null)
-                    _loopEndBrickReference = null;
-
-                RaisePropertyChanged();
+                    LoopEndBrickReference = null;
             }
         }
-
 
         protected XmlLoopBeginBrick() {}
 
@@ -63,21 +45,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             if (xRoot.Element("loopEndBrick") != null)
             {
-                _loopEndBrickReference = new XmlLoopEndBrickReference(xRoot.Element("loopEndBrick"));
+                LoopEndBrickReference = new XmlLoopEndBrickReference(xRoot.Element("loopEndBrick"));
             }
         }
 
         protected override void CreateCommonXML(XElement xRoot)
         {
-            xRoot.Add(_loopEndBrickReference.CreateXml());
+            xRoot.Add(LoopEndBrickReference.CreateXml());
         }
 
         internal override void LoadReference()
         {
-            if (_loopEndBrickReference != null)
-                _loopEndBrickReference.LoadReference();
+            if (LoopEndBrickReference != null)
+                LoopEndBrickReference.LoadReference();
         }
-
-        public abstract override XmlObject Copy();
     }
 }

@@ -4,51 +4,33 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes
 {
     public partial class XmlSetCostumeBrick : XmlBrick
     {
-        private XmlCostumeReference _xmlCostumeReference;
-        internal XmlCostumeReference XmlCostumeReference
-        {
-            get { return _xmlCostumeReference; }
-            set
-            {
-                if (_xmlCostumeReference == value)
-                {
-                    return;
-                }
-
-                _xmlCostumeReference = value;
-                RaisePropertyChanged();
-                RaisePropertyChanged(() => Costume);
-            }
-        }
+        internal XmlCostumeReference XmlCostumeReference { get; set; }
 
         public XmlCostume Costume
         {
             get
             {
-                if (_xmlCostumeReference == null)
+                if (XmlCostumeReference == null)
                 {
                     return null;
                 }
 
-                return _xmlCostumeReference.Costume;
+                return XmlCostumeReference.Costume;
             }
             set
             {
-                if (_xmlCostumeReference == null)
-                    _xmlCostumeReference = new XmlCostumeReference();
+                if (XmlCostumeReference == null)
+                    XmlCostumeReference = new XmlCostumeReference();
 
-                if (_xmlCostumeReference.Costume == value)
+                if (XmlCostumeReference.Costume == value)
                     return;
 
-                _xmlCostumeReference.Costume = value;
+                XmlCostumeReference.Costume = value;
 
                 if (value == null)
-                    _xmlCostumeReference = null;
-
-                RaisePropertyChanged();
+                    XmlCostumeReference = null;
             }
         }
-
 
         public XmlSetCostumeBrick() { }
 
@@ -58,7 +40,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes
         {
             if (xRoot.Element("look") != null)
             {
-                _xmlCostumeReference = new XmlCostumeReference(xRoot.Element("look"));
+                XmlCostumeReference = new XmlCostumeReference(xRoot.Element("look"));
             }
         }
 
@@ -66,9 +48,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes
         {
             var xRoot = new XElement("setLookBrick");
 
-            if (_xmlCostumeReference != null)
+            if (XmlCostumeReference != null)
             {
-                xRoot.Add(_xmlCostumeReference.CreateXml());
+                xRoot.Add(XmlCostumeReference.CreateXml());
             }
 
             return xRoot;
@@ -76,27 +58,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes
 
         internal override void LoadReference()
         {
-            if(_xmlCostumeReference != null)
-            _xmlCostumeReference.LoadReference();
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlSetCostumeBrick();
-            if (_xmlCostumeReference != null)
-                newBrick._xmlCostumeReference = _xmlCostumeReference.Copy() as XmlCostumeReference;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlSetCostumeBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            return XmlCostumeReference.Equals(otherBrick.XmlCostumeReference);
+            if(XmlCostumeReference != null)
+            XmlCostumeReference.LoadReference();
         }
     }
 }

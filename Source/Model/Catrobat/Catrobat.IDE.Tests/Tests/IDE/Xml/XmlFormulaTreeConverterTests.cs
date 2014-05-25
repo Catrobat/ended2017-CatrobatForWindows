@@ -4,8 +4,8 @@ using System.Linq;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
-using Catrobat.IDE.Core.VersionConverter;
 using Catrobat.IDE.Core.Xml.Converter;
+using Catrobat.IDE.Core.Xml.Converter.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Catrobat.IDE.Tests.Extensions;
@@ -103,16 +103,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Xml
                 var formulas = xmlProject.SpriteList.Sprites
                     .SelectMany(sprite => sprite.Scripts.Scripts
                         .SelectMany(script => script.Bricks.Bricks)
-                        .SelectMany(brick => brick.GetType().GetProperties()
-                            .Where(property => property.PropertyType == typeof (FormulaTree))
-                            .Select(property => (FormulaTree) property.GetValue(brick))));
+                        .SelectMany(brick => brick.GetType().GetPropertiesValues<XmlFormula>(brick)));
                 var formulas2 = xmlProject2.SpriteList.Sprites
                     .SelectMany(sprite => sprite.Scripts.Scripts
                         .SelectMany(script => script.Bricks.Bricks)
-                        .SelectMany(brick => brick.GetType().GetProperties()
-                            .Where(property => property.PropertyType == typeof (FormulaTree))
-                            .Select(property => (FormulaTree) property.GetValue(brick))));
-                EnumerableAssert.AreTestEqual(formulas, formulas2);
+                        .SelectMany(brick => brick.GetType().GetPropertiesValues<XmlFormula>(brick)));
+                EnumerableAssert.AreEqual(formulas, formulas2, new XmlFormulaEqualityComparer());
             }
         }
 
@@ -200,11 +196,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Xml
 
         private static void TestConvert(XmlFormulaConverter converter, IEnumerable<XmlFormula> formulas)
         {
+            var comparer = new XmlFormulaEqualityComparer();
             foreach (var formula in formulas)
             {
-                XmlFormulaTreeComparer.CompareFormulas(
-                    actualFormula: formula.FormulaTree,
-                    expectedFormula: converter.ConvertBack(converter.Convert(formula)).FormulaTree);
+                Assert.IsTrue(comparer.Equals(formula, converter.ConvertBack(converter.Convert(formula))));
             }
         }
 

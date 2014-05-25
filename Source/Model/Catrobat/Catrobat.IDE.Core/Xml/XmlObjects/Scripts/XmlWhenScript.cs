@@ -24,21 +24,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
         };
 
         private string _action;
+
         public WhenScriptAction Action
         {
             get { return StringActionDictionary[_action]; }
-            set
-            {
-                var stringValue = ActionStringDictionary[value];
-
-                if (_action == stringValue)
-                {
-                    return;
-                }
-
-                _action = stringValue;
-                RaisePropertyChanged();
-            }
+            set { _action = ActionStringDictionary[value]; }
         }
 
 
@@ -69,31 +59,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
             }
 
             return xRoot;
-        }
-
-        public override XmlObject Copy()
-        {
-            var newWhenScript = new XmlWhenScript();
-            newWhenScript._action = _action;
-            if (Bricks != null)
-            {
-                newWhenScript.Bricks = Bricks.Copy() as XmlBrickList;
-            }
-
-            return newWhenScript;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherScript = other as XmlWhenScript;
-
-            if (otherScript == null)
-                return false;
-
-            if (Action != otherScript.Action)
-                return false;
-
-            return Bricks.Equals(((XmlScript) otherScript).Bricks);
         }
     }
 }

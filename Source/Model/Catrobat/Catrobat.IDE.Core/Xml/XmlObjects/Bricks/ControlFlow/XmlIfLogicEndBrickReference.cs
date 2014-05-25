@@ -5,22 +5,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
     public class XmlIfLogicEndBrickReference : XmlObject
     {
-        internal string _reference;
+        private string _reference;
 
-        private XmlIfLogicEndBrick _ifLogicEndBrick;
-        public XmlIfLogicEndBrick IfLogicEndBrick
-        {
-            get { return _ifLogicEndBrick; }
-            set
-            {
-                if (_ifLogicEndBrick == value)
-                    return;
-
-                _ifLogicEndBrick = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlIfLogicEndBrick IfLogicEndBrick { get; set; }
 
         public XmlIfLogicEndBrickReference()
         {
@@ -51,27 +38,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
                 IfLogicEndBrick = ReferenceHelper.GetReferenceObject(this, _reference) as XmlIfLogicEndBrick;
             if (string.IsNullOrEmpty(_reference))
                 _reference = ReferenceHelper.GetReferenceString(this);
-        }
-
-        public XmlObject Copy()
-        {
-            var newIfLogicEndBrickRef = new XmlIfLogicEndBrickReference();
-            newIfLogicEndBrickRef.IfLogicEndBrick = _ifLogicEndBrick;
-
-            return newIfLogicEndBrickRef;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherReference = other as XmlIfLogicEndBrickReference;
-
-            if (otherReference == null)
-                return false;
-
-            if (_reference != otherReference._reference)
-                return false;
-
-            return true;
         }
     }
 }

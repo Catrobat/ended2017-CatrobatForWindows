@@ -7,7 +7,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
     partial class XmlChangeYByBrick
     {
-        protected internal override Brick ToModel2(Context context)
+        protected override Brick ToModel2(Context context)
         {
             return new ChangePositionYBrick
             {

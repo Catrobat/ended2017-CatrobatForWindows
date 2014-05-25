@@ -120,6 +120,7 @@
     <Compile Include="Extensions\MethodInfoExtensions.cs" />
     <Compile Include="Extensions\ResourceSetExtensions.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
+    <Compile Include="Misc\XmlFormulaEqualityComparer.cs" />
     <Compile Include="Misc\XmlFormulaTreeComparer.cs" />
     <Compile Include="Misc\ITestProjectGenerator.cs" />
     <Compile Include="Misc\PlatformInformationHelperTests.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="SampleData\SampleLoader.cs" />
     <Compile Include="Services\NavigationServiceTest.cs" />
     <Compile Include="Services\PictureServiceTest.cs" />
+    <Compile Include="Tests\IDE\CloneableTests.cs" />
     <Compile Include="Tests\IDE\Formulas\FormulaSerializerFormulaTests.cs" />
     <Compile Include="Tests\IDE\ObservableCollectionTests.cs" />
     <Compile Include="Tests\IDE\Xml\XmlFormulaTreeConverterTests.cs" />

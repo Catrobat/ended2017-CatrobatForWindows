@@ -3,40 +3,11 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Nxt
 {
-    public class XmlNxtMotorActionBrick : XmlBrick
+    public partial class XmlNxtMotorActionBrick : XmlBrick
     {
-        protected string _motor;
-        public string Motor
-        {
-            get { return _motor; }
-            set
-            {
-                if (_motor == value)
-                {
-                    return;
-                }
+        public string Motor { get; set; }
 
-                _motor = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        protected XmlFormula _speed;
-        public XmlFormula Speed
-        {
-            get { return _speed; }
-            set
-            {
-                if (_speed == value)
-                {
-                    return;
-                }
-
-                _speed = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlFormula Speed { get; set; }
 
         public XmlNxtMotorActionBrick() {}
 
@@ -44,8 +15,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Nxt
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            _motor = xRoot.Element("motor").Value;
-            _speed = new XmlFormula(xRoot.Element("speed"));
+            Motor = xRoot.Element("motor").Value;
+            Speed = new XmlFormula(xRoot.Element("speed"));
         }
 
         internal override XElement CreateXml()
@@ -54,11 +25,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Nxt
 
             xRoot.Add(new XElement("motor")
             {
-                Value = _motor
+                Value = Motor
             });
 
             var xVariable = new XElement("speed");
-            xVariable.Add(_speed.CreateXml());
+            xVariable.Add(Speed.CreateXml());
             xRoot.Add(xVariable);
 
             return xRoot;
@@ -66,30 +37,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Nxt
 
         internal override void LoadReference()
         {
-            if (_speed != null)
-                _speed.LoadReference();
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlNxtMotorActionBrick();
-            newBrick._motor = _motor;
-            newBrick._speed = _speed.Copy() as XmlFormula;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlNxtMotorActionBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            if (Motor != otherBrick.Motor)
-                return false;
-
-            return Speed.Equals(otherBrick.Speed);
+            if (Speed != null)
+                Speed.LoadReference();
         }
     }
 }

@@ -127,8 +127,6 @@ namespace Catrobat.IDE.Core.Models
             set { _projectDummyHeader = value; }
         }
 
-
-
         #endregion
 
         public async Task SetProgramNameAndRenameDirectory(string newProgramName)

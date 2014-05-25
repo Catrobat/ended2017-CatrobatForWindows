@@ -5,17 +5,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
     public partial class XmlChangeXByBrick : XmlBrick
     {
-        protected XmlFormula _xMovement;
-        public XmlFormula XMovement
-        {
-            get { return _xMovement; }
-            set
-            {
-                _xMovement = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlFormula XMovement { get; set; }
 
         public XmlChangeXByBrick() {}
 
@@ -23,7 +13,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            _xMovement = new XmlFormula(xRoot.Element("xMovement"));
+            XMovement = new XmlFormula(xRoot.Element("xMovement"));
         }
 
         internal override XElement CreateXml()
@@ -31,7 +21,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             var xRoot = new XElement("changeXByNBrick");
 
             var xVariable = new XElement("xMovement");
-            xVariable.Add(_xMovement.CreateXml());
+            xVariable.Add(XMovement.CreateXml());
             xRoot.Add(xVariable);
 
             return xRoot;
@@ -39,26 +29,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadReference()
         {
-            if (_xMovement != null)
-                _xMovement.LoadReference();
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlChangeXByBrick();
-            newBrick._xMovement = _xMovement.Copy() as XmlFormula;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlChangeXByBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            return XMovement.Equals(otherBrick.XMovement);
+            if (XMovement != null)
+                XMovement.LoadReference();
         }
     }
 }

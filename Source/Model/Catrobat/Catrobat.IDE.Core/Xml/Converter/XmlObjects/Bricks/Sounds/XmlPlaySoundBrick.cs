@@ -1,4 +1,4 @@
-﻿using Catrobat.IDE.Core.ExtensionMethods;
+﻿using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Bricks;
 using Context = Catrobat.IDE.Core.Xml.Converter.XmlProjectConverter.ConvertContext;
 
@@ -7,11 +7,13 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 {
     partial class XmlPlaySoundBrick
     {
-        protected internal override Brick ToModel2(Context context)
+        protected override Brick ToModel2(Context context)
         {
+            Sound sound = null;
+            if (Sound != null) context.Sounds.TryGetValue(Sound, out sound);
             return new PlaySoundBrick
             {
-                Value = Sound.ToModel()
+                Value = sound
             };
         }
     }

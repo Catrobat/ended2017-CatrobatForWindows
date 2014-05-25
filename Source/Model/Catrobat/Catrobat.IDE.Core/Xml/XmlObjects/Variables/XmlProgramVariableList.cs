@@ -1,17 +1,20 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
     public class XmlProgramVariableList : XmlObject
     {
-        public ObservableCollection<XmlUserVariable> UserVariables;
+        public List<XmlUserVariable> UserVariables;
 
-        public XmlProgramVariableList() { UserVariables = new ObservableCollection<XmlUserVariable>();}
+        public XmlProgramVariableList()
+        {
+            UserVariables = new List<XmlUserVariable>();
+        }
 
         public XmlProgramVariableList(XElement xElement)
         {
-            UserVariables = new ObservableCollection<XmlUserVariable>();
+            UserVariables = new List<XmlUserVariable>();
             LoadFromXml(xElement);
         }
 
@@ -36,36 +39,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
             }
 
             return xRoot;
-        }
-
-        public XmlObject Copy()
-        {
-            var newProgramVariableList = new XmlProgramVariableList();
-
-            foreach (var userVariable in UserVariables)
-                newProgramVariableList.UserVariables.Add(userVariable.Copy() as XmlUserVariable);
-
-            return newProgramVariableList;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherProgramVariableList = other as XmlProgramVariableList;
-
-            if (otherProgramVariableList == null)
-                return false;
-
-            var count = UserVariables.Count;
-            var otherCount = otherProgramVariableList.UserVariables.Count;
-
-            if (count != otherCount)
-                return false;
-
-            for (int i = 0; i < count; i++)
-                if (!UserVariables[i].Equals(otherProgramVariableList.UserVariables[i]))
-                    return false;
-
-            return true;
         }
     }
 }

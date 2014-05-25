@@ -1,12 +1,10 @@
 ﻿using System.Threading.Tasks;
-using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
-using Catrobat.IDE.Core.Xml;
-using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Tests.Services;
 using Catrobat.IDE.Tests.Services.Storage;
 using GalaSoft.MvvmLight.Messaging;
@@ -27,6 +25,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             ServiceLocator.Register<StorageTest>(TypeCreationMode.Normal);
             ServiceLocator.Register<ImageResizeServiceTest>(TypeCreationMode.Normal);
             ServiceLocator.Register<SensorServiceTest>(TypeCreationMode.Normal);
+            ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
         }
 
         [TestMethod] // , TestCategory("GatedTests") // TODO: fix test takes very long time on server
@@ -41,16 +40,18 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
             navigationService.CurrentView = typeof(CostumeNameChooserViewModel);
 
-            var viewModel = new CostumeNameChooserViewModel();
-            viewModel.SelectedSize = new ImageSizeEntry { NewHeight = 100, NewWidth = 100};
-            viewModel.CostumeName = "TestCostume";
+            var viewModel = new CostumeNameChooserViewModel
+            {
+                SelectedSize = new ImageSizeEntry {NewHeight = 100, NewWidth = 100},
+                CostumeName = "TestCostume"
+            };
 
-            var project = new XmlProject { ProjectHeader = new XmlProjectHeader(false) { ProgramName = "TestProject" } };
-            var messageContext = new GenericMessage<XmlProject>(project);
+            var project = new Project {Name = "TestProject"};
+            var messageContext = new GenericMessage<Project>(project);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProjectChangedListener);
 
-            var sprite = new XmlSprite();
-            var messageContext2 = new GenericMessage<XmlSprite>(sprite);
+            var sprite = new Sprite();
+            var messageContext2 = new GenericMessage<Sprite>(sprite);
             Messenger.Default.Send(messageContext2, ViewModelMessagingToken.CurrentSpriteChangedListener);
             
             var messageContext3 = new GenericMessage<PortableImage>(new PortableImage());
@@ -59,8 +60,8 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             await viewModel.SaveCommand.ExecuteAsync(null);
 
             Assert.IsNotNull(_imageToSave);
-            Assert.AreEqual(1, sprite.Costumes.Costumes.Count);
-            Assert.IsNotNull(sprite.Costumes.Costumes[0].Image);
+            Assert.AreEqual(1, sprite.Costumes.Count);
+            Assert.IsNotNull(sprite.Costumes[0].Image);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);

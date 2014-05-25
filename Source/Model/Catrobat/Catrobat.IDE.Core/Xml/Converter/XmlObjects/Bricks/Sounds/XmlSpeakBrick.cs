@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 {
     partial class XmlSpeakBrick
     {
-        protected internal override Brick ToModel2(Context context)
+        protected override Brick ToModel2(Context context)
         {
             return new SpeakBrick
             {

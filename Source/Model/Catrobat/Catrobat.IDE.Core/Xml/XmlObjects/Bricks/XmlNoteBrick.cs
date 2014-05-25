@@ -4,21 +4,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
 {
     public partial class XmlNoteBrick : XmlBrick
     {
-        protected string _note;
-        public string Note
-        {
-            get { return _note; }
-            set
-            {
-                if (_note == value)
-                {
-                    return;
-                }
-
-                _note = value;
-                RaisePropertyChanged();
-            }
-        }
+        public string Note { get; set; }
 
         public XmlNoteBrick() {}
 
@@ -28,7 +14,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
         {
             if (xRoot.Element("note") != null)
             {
-                _note = xRoot.Element("note").Value;
+                Note = xRoot.Element("note").Value;
             }
         }
 
@@ -36,37 +22,16 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
         {
             var xRoot = new XElement("noteBrick");
 
-            if (_note != null)
+            if (Note != null)
             {
                 xRoot.Add(new XElement("note")
                 {
-                    Value = _note
+                    Value = Note
                 });
             }
             //CreateCommonXML(xRoot);
 
             return xRoot;
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlNoteBrick();
-            newBrick._note = _note;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlNoteBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            if (Note != otherBrick.Note)
-                return false;
-
-            return true;
         }
     }
 }

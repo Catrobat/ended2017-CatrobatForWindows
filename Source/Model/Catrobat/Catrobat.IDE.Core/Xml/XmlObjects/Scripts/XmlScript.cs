@@ -5,22 +5,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 {
     public abstract partial class XmlScript : XmlObject
     {
-        private XmlBrickList _bricks;
-        public XmlBrickList Bricks
-        {
-            get { return _bricks; }
-            set
-            {
-                if (_bricks == value)
-                {
-                    return;
-                }
-
-                _bricks = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlBrickList Bricks { get; set; }
 
         protected XmlScript()
         {
@@ -34,7 +19,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
             LoadFromCommonXML(xElement);
             LoadFromXml(xElement);
         }
-
         
         internal abstract override void LoadFromXml(XElement xRoot);
 
@@ -55,7 +39,5 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
                 xRoot.Add(Bricks.CreateXml());
             }
         }
-
-        public abstract XmlObject Copy();
     }
 }

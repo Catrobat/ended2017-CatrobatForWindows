@@ -5,7 +5,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
     public class XmlLoopEndBrickReference : XmlObject
     {
-        internal string _reference;
+        private string _reference;
 
         //protected string _classField;
         //public string Class
@@ -23,20 +23,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         //    }
         //}
 
-        private XmlLoopEndBrick _loopEndBrick;
-        public XmlLoopEndBrick LoopEndBrick
-        {
-            get { return _loopEndBrick; }
-            set
-            {
-                if (_loopEndBrick == value)
-                    return;
-
-                _loopEndBrick = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlLoopEndBrick LoopEndBrick { get; set; }
 
         public XmlLoopEndBrickReference()
         {
@@ -68,28 +55,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
                 LoopEndBrick = ReferenceHelper.GetReferenceObject(this, _reference) as XmlLoopEndBrick;
             if (string.IsNullOrEmpty(_reference))
                 _reference = ReferenceHelper.GetReferenceString(this);
-        }
-
-        public XmlObject Copy()
-        {
-            var newLoopEndBrickRef = new XmlLoopEndBrickReference();
-            //newLoopEndBrickRef.Class = _classField;
-            newLoopEndBrickRef.LoopEndBrick = _loopEndBrick;
-
-            return newLoopEndBrickRef;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherReference = other as XmlLoopEndBrickReference;
-
-            if (otherReference == null)
-                return false;
-
-            if (_reference != otherReference._reference)
-                return false;
-
-            return true;
         }
     }
 }

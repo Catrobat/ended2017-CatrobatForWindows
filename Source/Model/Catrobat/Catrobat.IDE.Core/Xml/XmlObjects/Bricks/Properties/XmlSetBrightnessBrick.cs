@@ -5,25 +5,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
     public partial class XmlSetBrightnessBrick : XmlBrick
     {
-        protected XmlFormula _brightness;
-        public XmlFormula Brightness
+        public XmlFormula Brightness { get; set; }
+
+        public XmlSetBrightnessBrick()
         {
-            get { return _brightness; }
-            set
-            {
-                _brightness = value;
-                RaisePropertyChanged();
-            }
         }
 
-
-        public XmlSetBrightnessBrick() {}
-
-        public XmlSetBrightnessBrick(XElement xElement) : base(xElement) {}
+        public XmlSetBrightnessBrick(XElement xElement) : base(xElement)
+        {
+        }
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            _brightness = new XmlFormula(xRoot.Element("brightness"));
+            Brightness = new XmlFormula(xRoot.Element("brightness"));
         }
 
         internal override XElement CreateXml()
@@ -31,7 +25,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             var xRoot = new XElement("setBrightnessBrick");
 
             var xVariable = new XElement("brightness");
-            xVariable.Add(_brightness.CreateXml());
+            xVariable.Add(Brightness.CreateXml());
             xRoot.Add(xVariable);
 
             return xRoot;
@@ -39,26 +33,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadReference()
         {
-            if (_brightness != null)
-                _brightness.LoadReference();
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlSetBrightnessBrick();
-            newBrick._brightness = _brightness.Copy() as XmlFormula;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlSetBrightnessBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            return Brightness.Equals(otherBrick.Brightness);
+            if (Brightness != null)
+                Brightness.LoadReference();
         }
     }
 }

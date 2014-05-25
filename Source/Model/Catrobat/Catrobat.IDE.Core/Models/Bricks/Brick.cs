@@ -44,16 +44,16 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             // prevent endless loops
             Brick result;
-            if (context.Bricks.TryGetValue(this, out result)) return result;
-
-            result = (Brick) CloneInstance();
-            context.Bricks[this] = result;
-            return result;
+            return context.Bricks.TryGetValue(this, out result) 
+                ? result 
+                : CloneInstance(context);
         }
 
         internal virtual object CloneInstance(CloneSpriteContext context)
         {
-            return MemberwiseClone();
+            var result = (Brick)MemberwiseClone();
+            context.Bricks[this] = result;
+            return result;
         }
 
         internal void CloneMember(ref FormulaTree member, CloneSpriteContext context)

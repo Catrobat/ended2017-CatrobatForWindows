@@ -1,52 +1,34 @@
 ﻿using System.Xml.Linq;
-using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 {
     public partial class XmlPlaySoundBrick : XmlBrick
     {
-        private XmlSoundReference _xmlSoundReference;
-        internal XmlSoundReference XmlSoundReference
-        {
-            get { return _xmlSoundReference; }
-            set
-            {
-                if (_xmlSoundReference == value)
-                {
-                    return;
-                }
-
-                _xmlSoundReference = value;
-                RaisePropertyChanged();
-                RaisePropertyChanged(() => Sound);
-            }
-        }
+        internal XmlSoundReference XmlSoundReference { get; set; }
 
         public XmlSound Sound
         {
             get
             {
-                if (_xmlSoundReference == null)
+                if (XmlSoundReference == null)
                 {
                     return null;
                 }
 
-                return _xmlSoundReference.Sound;
+                return XmlSoundReference.Sound;
             }
             set
             {
-                if (_xmlSoundReference == null)
-                    _xmlSoundReference = new XmlSoundReference();
+                if (XmlSoundReference == null)
+                    XmlSoundReference = new XmlSoundReference();
 
-                if (_xmlSoundReference.Sound == value)
+                if (XmlSoundReference.Sound == value)
                     return;
 
-                _xmlSoundReference.Sound = value;
+                XmlSoundReference.Sound = value;
 
                 if (value == null)
-                    _xmlSoundReference = null;
-
-                RaisePropertyChanged();
+                    XmlSoundReference = null;
             }
         }
 
@@ -59,7 +41,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
         {
             if (xRoot.Element("sound") != null)
             {
-                _xmlSoundReference = new XmlSoundReference(xRoot.Element("sound"));
+                XmlSoundReference = new XmlSoundReference(xRoot.Element("sound"));
             }
         }
 
@@ -67,9 +49,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
         {
             var xRoot = new XElement("playSoundBrick");
 
-            if (_xmlSoundReference != null)
+            if (XmlSoundReference != null)
             {
-                xRoot.Add(_xmlSoundReference.CreateXml());
+                xRoot.Add(XmlSoundReference.CreateXml());
             }
 
             ////CreateCommonXML(xRoot);
@@ -79,28 +61,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 
         internal override void LoadReference()
         {
-            if (_xmlSoundReference != null)
-                _xmlSoundReference.LoadReference();
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlPlaySoundBrick();
-
-            if (_xmlSoundReference != null)
-                newBrick._xmlSoundReference = _xmlSoundReference.Copy() as XmlSoundReference;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlPlaySoundBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            return XmlSoundReference.Equals(otherBrick.XmlSoundReference);
+            if (XmlSoundReference != null)
+                XmlSoundReference.LoadReference();
         }
     }
 }

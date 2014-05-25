@@ -18,10 +18,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
             return result;
         }
 
-        // TODO: make abstract
-        protected internal virtual Brick ToModel2(Context context)
-        {
-            throw new System.NotImplementedException();
-        }
+        protected abstract Brick ToModel2(Context context);
     }
 }

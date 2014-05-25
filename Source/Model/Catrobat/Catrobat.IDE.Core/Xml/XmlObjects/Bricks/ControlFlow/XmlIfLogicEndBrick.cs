@@ -4,88 +4,57 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
     public partial class XmlIfLogicEndBrick : XmlBrick
     {
-        private XmlIfLogicBeginBrickReference _ifLogicBeginBrickReference;
-        internal XmlIfLogicBeginBrickReference IfLogicBeginBrickReference
-        {
-            get { return _ifLogicBeginBrickReference; }
-            set
-            {
-                if (_ifLogicBeginBrickReference == value)
-                    return;
-
-                _ifLogicBeginBrickReference = value;
-                RaisePropertyChanged();
-                RaisePropertyChanged(() => IfLogicBeginBrick);
-            }
-        }
+        internal XmlIfLogicBeginBrickReference IfLogicBeginBrickReference { get; set; }
 
         public XmlIfLogicBeginBrick IfLogicBeginBrick
         {
             get
             {
-                if (_ifLogicBeginBrickReference == null)
+                if (IfLogicBeginBrickReference == null)
                     return null;
 
-                return _ifLogicBeginBrickReference.IfLogicBeginBrick;
+                return IfLogicBeginBrickReference.IfLogicBeginBrick;
             }
             set
             {
-                if (_ifLogicBeginBrickReference == null)
-                    _ifLogicBeginBrickReference = new XmlIfLogicBeginBrickReference();
+                if (IfLogicBeginBrickReference == null)
+                    IfLogicBeginBrickReference = new XmlIfLogicBeginBrickReference();
 
-                if (_ifLogicBeginBrickReference.IfLogicBeginBrick == value)
+                if (IfLogicBeginBrickReference.IfLogicBeginBrick == value)
                     return;
 
-                _ifLogicBeginBrickReference.IfLogicBeginBrick = value;
+                IfLogicBeginBrickReference.IfLogicBeginBrick = value;
 
                 if (value == null)
-                    _ifLogicBeginBrickReference = null;
-
-                RaisePropertyChanged();
+                    IfLogicBeginBrickReference = null;
             }
         }
 
-        private XmlIfLogicElseBrickReference _ifLogicElseBrickReference;
-        internal XmlIfLogicElseBrickReference IfLogicElseBrickReference
-        {
-            get { return _ifLogicElseBrickReference; }
-            set
-            {
-                if (_ifLogicElseBrickReference == value)
-                    return;
-
-                _ifLogicElseBrickReference = value;
-                RaisePropertyChanged();
-                RaisePropertyChanged(() => IfLogicElseBrick);
-            }
-        }
+        internal XmlIfLogicElseBrickReference IfLogicElseBrickReference { get; set; }
 
         public XmlIfLogicElseBrick IfLogicElseBrick
         {
             get
             {
-                if (_ifLogicElseBrickReference == null)
+                if (IfLogicElseBrickReference == null)
                     return null;
 
-                return _ifLogicElseBrickReference.IfLogicElseBrick;
+                return IfLogicElseBrickReference.IfLogicElseBrick;
             }
             set
             {
-                if (_ifLogicElseBrickReference == null)
-                    _ifLogicElseBrickReference = new XmlIfLogicElseBrickReference();
+                if (IfLogicElseBrickReference == null)
+                    IfLogicElseBrickReference = new XmlIfLogicElseBrickReference();
 
-                if (_ifLogicElseBrickReference.IfLogicElseBrick == value)
+                if (IfLogicElseBrickReference.IfLogicElseBrick == value)
                     return;
 
-                _ifLogicElseBrickReference.IfLogicElseBrick = value;
+                IfLogicElseBrickReference.IfLogicElseBrick = value;
 
                 if (value == null)
-                    _ifLogicElseBrickReference = null;
-
-                RaisePropertyChanged();
+                    IfLogicElseBrickReference = null;
             }
         }
-
 
         public XmlIfLogicEndBrick() {}
 
@@ -95,11 +64,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             if (xRoot.Element("ifBeginBrick") != null)
             {
-                _ifLogicBeginBrickReference = new XmlIfLogicBeginBrickReference(xRoot.Element("ifBeginBrick"));
+                IfLogicBeginBrickReference = new XmlIfLogicBeginBrickReference(xRoot.Element("ifBeginBrick"));
             }
             if (xRoot.Element("ifElseBrick") != null)
             {
-                _ifLogicElseBrickReference = new XmlIfLogicElseBrickReference(xRoot.Element("ifElseBrick"));
+                IfLogicElseBrickReference = new XmlIfLogicElseBrickReference(xRoot.Element("ifElseBrick"));
             }
         }
 
@@ -107,47 +76,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             var xRoot = new XElement("ifLogicEndBrick");
 
-                xRoot.Add(_ifLogicBeginBrickReference.CreateXml());
+                xRoot.Add(IfLogicBeginBrickReference.CreateXml());
 
-                xRoot.Add(_ifLogicElseBrickReference.CreateXml());
+                xRoot.Add(IfLogicElseBrickReference.CreateXml());
 
             return xRoot;
         }
 
         internal override void LoadReference()
         {
-            if (_ifLogicBeginBrickReference != null)
-                _ifLogicBeginBrickReference.LoadReference();
-            if(_ifLogicElseBrickReference != null)
-                _ifLogicElseBrickReference.LoadReference();
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlIfLogicEndBrick();
-
-            if(_ifLogicBeginBrickReference != null)
-                newBrick.IfLogicBeginBrickReference = _ifLogicBeginBrickReference.Copy() as XmlIfLogicBeginBrickReference;
-            if(_ifLogicElseBrickReference != null)
-                newBrick.IfLogicElseBrickReference = _ifLogicElseBrickReference.Copy() as XmlIfLogicElseBrickReference;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlIfLogicEndBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            if (!IfLogicBeginBrickReference.Equals(otherBrick.IfLogicBeginBrickReference))
-                return false;
-
-            if (!IfLogicElseBrickReference.Equals(otherBrick.IfLogicElseBrickReference))
-                return false;
-
-            return true;
+            if (IfLogicBeginBrickReference != null)
+                IfLogicBeginBrickReference.LoadReference();
+            if(IfLogicElseBrickReference != null)
+                IfLogicElseBrickReference.LoadReference();
         }
     }
 }

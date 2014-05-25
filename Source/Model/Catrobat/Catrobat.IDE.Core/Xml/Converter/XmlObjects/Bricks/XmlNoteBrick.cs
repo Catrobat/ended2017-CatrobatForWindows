@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
 {
     partial class XmlNoteBrick
     {
-        protected internal override Brick ToModel2(Context context)
+        protected override Brick ToModel2(Context context)
         {
             return new CommentBrick
             {

@@ -18,22 +18,5 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes
 
             return xRoot;
         }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlNextCostumeBrick();
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlNextCostumeBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            return true;
-        }
     }
 }

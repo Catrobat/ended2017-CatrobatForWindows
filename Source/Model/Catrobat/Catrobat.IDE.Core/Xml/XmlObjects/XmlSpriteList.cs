@@ -1,21 +1,20 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
     public class XmlSpriteList : XmlObject
     {
-        public ObservableCollection<XmlSprite> Sprites { get; set; }
-
+        public List<XmlSprite> Sprites { get; set; }
 
         public XmlSpriteList()
         {
-            Sprites = new ObservableCollection<XmlSprite>();
+            Sprites = new List<XmlSprite>();
         }
 
         public XmlSpriteList(XElement xRoot)
         {
-            Sprites = new ObservableCollection<XmlSprite>();
+            Sprites = new List<XmlSprite>();
             LoadFromXml(xRoot);
         }
 
@@ -50,26 +49,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             foreach (var sprite in Sprites)
                 sprite.LoadReference();
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherSpriteList = other as XmlSpriteList;
-
-            if (otherSpriteList == null)
-                return false;
-
-            var count = Sprites.Count;
-            var otherCount = otherSpriteList.Sprites.Count;
-
-            if (count != otherCount)
-                return false;
-
-            for (int i = 0; i < count; i++)
-                if (!Sprites[i].Equals(otherSpriteList.Sprites[i]))
-                    return false;
-
-            return true;
         }
     }
 }

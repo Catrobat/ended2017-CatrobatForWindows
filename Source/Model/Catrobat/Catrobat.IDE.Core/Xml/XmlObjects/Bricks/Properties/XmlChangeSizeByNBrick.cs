@@ -5,17 +5,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
     public partial class XmlChangeSizeByNBrick : XmlBrick
     {
-        protected XmlFormula _size;
-        public XmlFormula Size
-        {
-            get { return _size; }
-            set
-            {
-                _size = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlFormula Size { get; set; }
 
         public XmlChangeSizeByNBrick() {}
 
@@ -23,7 +13,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            _size = new XmlFormula(xRoot.Element("size"));
+            Size = new XmlFormula(xRoot.Element("size"));
         }
 
         internal override XElement CreateXml()
@@ -31,7 +21,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             var xRoot = new XElement("changeSizeByNBrick");
 
             var xVariable = new XElement("size");
-            xVariable.Add(_size.CreateXml());
+            xVariable.Add(Size.CreateXml());
             xRoot.Add(xVariable);
 
             return xRoot;
@@ -39,26 +29,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadReference()
         {
-            if (_size != null)
-                _size.LoadReference();
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlChangeSizeByNBrick();
-            newBrick._size = _size.Copy() as XmlFormula;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlChangeSizeByNBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            return Size.Equals(otherBrick.Size);
+            if (Size != null)
+                Size.LoadReference();
         }
     }
 }

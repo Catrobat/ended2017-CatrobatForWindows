@@ -18,22 +18,5 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
             return xRoot;
         }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlShowBrick();
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlShowBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            return true;
-        }
     }
 }

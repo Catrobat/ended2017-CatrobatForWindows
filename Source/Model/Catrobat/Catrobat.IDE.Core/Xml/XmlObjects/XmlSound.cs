@@ -8,45 +8,16 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
     public partial class XmlSound : XmlObject
     {
-        private string _fileName;
-        public string FileName
-        {
-            get { return _fileName; }
-            set
-            {
-                if (_fileName == value)
-                {
-                    return;
-                }
+        public string FileName { get; set; }
 
-                _fileName = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string _name;
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (_name == value)
-                {
-                    return;
-                }
-
-                _name = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public string Name { get; set; }
 
         public XmlSound() {}
 
         public XmlSound(string name)
         {
-            _name = name;
-            _fileName = FileNameGenerationHelper.Generate() + _name;
+            Name = name;
+            FileName = FileNameGenerationHelper.Generate() + Name;
         }
 
         internal XmlSound(XElement xElement)
@@ -56,50 +27,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            _fileName = xRoot.Element("fileName").Value;
-            _name = xRoot.Element("name").Value;
+            FileName = xRoot.Element("fileName").Value;
+            Name = xRoot.Element("name").Value;
         }
 
         internal override XElement CreateXml()
         {
             var xRoot = new XElement("sound");
 
-            xRoot.Add(new XElement("fileName", _fileName));
+            xRoot.Add(new XElement("fileName", FileName));
 
-            xRoot.Add(new XElement("name", _name));
+            xRoot.Add(new XElement("name", Name));
 
             return xRoot;
-        }
-
-        public async Task<XmlObject> Copy()
-        {
-            var newSoundInfo = new XmlSound(_name);
-
-            var path = XmlParserTempProjectHelper.Project.BasePath + "/" + Project.SoundsPath + "/";
-            var absoluteFileNameOld = path + _fileName;
-            var absoluteFileNameNew = path + newSoundInfo._fileName;
-
-            using (var storage = StorageSystem.GetStorage())
-            {
-                await storage.CopyFileAsync(absoluteFileNameOld, absoluteFileNameNew);
-            }
-
-            return newSoundInfo;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherSound = other as XmlSound;
-
-            if (otherSound == null)
-                return false;
-
-            if (Name != otherSound.Name)
-                return false;
-            if (FileName != otherSound.FileName)
-                return false;
-
-            return true;
         }
     }
 }

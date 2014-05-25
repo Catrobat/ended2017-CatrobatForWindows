@@ -1,14 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using System.Xml.Linq;
-using Catrobat.IDE.Core.Annotations;
-using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public abstract class DataRootObject : INotifyPropertyChanged, IEquatable<DataRootObject>
+    public abstract class DataRootObject
     {
         protected XElement Root;
 
@@ -21,27 +16,5 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         protected abstract void LoadFromXML(String xmlSource);
 
         internal abstract XDocument CreateXML();
-
-
-        public abstract bool Equals(DataRootObject other);
-
-        #region PropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        [NotifyPropertyChangedInvocator]
-
-        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public void RaisePropertyChanged<T>(Expression<Func<T>> selector)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyHelper.GetPropertyName(selector)));
-            }
-        }
-        #endregion
     }
 }

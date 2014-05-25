@@ -20,15 +20,5 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
             return xRoot;
         }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlForeverLoopEndBrick();
-
-            if (_loopBeginBrickReference != null)
-                newBrick.LoopBeginBrickReference = _loopBeginBrickReference.Copy() as XmlLoopBeginBrickReference;
-
-            return newBrick;
-        }
     }
 }

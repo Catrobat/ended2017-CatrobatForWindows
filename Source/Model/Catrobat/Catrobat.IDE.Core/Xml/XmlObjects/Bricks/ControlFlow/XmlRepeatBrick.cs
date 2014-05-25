@@ -5,22 +5,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
     public partial class XmlRepeatBrick : XmlLoopBeginBrick
     {
-        protected XmlFormula _timesToRepeat;
-        public XmlFormula TimesToRepeat
-        {
-            get { return _timesToRepeat; }
-            set
-            {
-                if (_timesToRepeat == value)
-                {
-                    return;
-                }
-
-                _timesToRepeat = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlFormula TimesToRepeat { get; set; }
 
         public XmlRepeatBrick() {}
 
@@ -28,7 +13,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            _timesToRepeat = new XmlFormula(xRoot.Element("timesToRepeat"));
+            TimesToRepeat = new XmlFormula(xRoot.Element("timesToRepeat"));
             base.LoadFromCommonXML(xRoot);
         }
 
@@ -38,7 +23,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
             base.CreateCommonXML(xRoot);
 
             var xVariable = new XElement("timesToRepeat");
-            xVariable.Add(_timesToRepeat.CreateXml());
+            xVariable.Add(TimesToRepeat.CreateXml());
             xRoot.Add(xVariable);
 
             return xRoot;
@@ -48,33 +33,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             base.LoadReference();
 
-            if (_timesToRepeat != null)
-                _timesToRepeat.LoadReference();
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlRepeatBrick();
-
-            if(_timesToRepeat != null)
-                newBrick._timesToRepeat = _timesToRepeat.Copy() as XmlFormula;
-            if(_loopEndBrickReference != null)
-                newBrick.LoopEndBrickReference = _loopEndBrickReference.Copy() as XmlLoopEndBrickReference;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlRepeatBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            if (!TimesToRepeat.Equals(otherBrick.TimesToRepeat))
-                return false;
-
-            return LoopEndBrickReference.Equals(otherBrick.LoopEndBrickReference);
+            if (TimesToRepeat != null)
+                TimesToRepeat.LoadReference();
         }
     }
 }

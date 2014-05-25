@@ -56,7 +56,7 @@ namespace Catrobat.IDE.Core.Models
                 {
                     ProgramVariableList = new XmlProgramVariableList
                     {
-                        UserVariables = GlobalVariables == null ? new ObservableCollection<XmlUserVariable>() : GlobalVariables.Select(variable => globalVariables[variable]).ToObservableCollection()
+                        UserVariables = GlobalVariables == null ? new List<XmlUserVariable>() : GlobalVariables.Select(variable => globalVariables[variable]).ToList()
                     },
                     ObjectVariableList = new XmlObjectVariableList
                     {
@@ -66,15 +66,15 @@ namespace Catrobat.IDE.Core.Models
                             VariableList = new XmlUserVariableList
                             {
                                 UserVariables = sprite.LocalVariables == null 
-                                    ? new ObservableCollection<XmlUserVariable>() 
-                                    : sprite.LocalVariables.Select(variable => localVariables[sprite][variable]).ToObservableCollection()
+                                    ? new List<XmlUserVariable>() 
+                                    : sprite.LocalVariables.Select(variable => localVariables[sprite][variable]).ToList()
                             }
-                        }).ToObservableCollection()
+                        }).ToList()
                     }
                 }, 
                 SpriteList = new XmlSpriteList
                 {
-                    Sprites = Sprites.Select(sprite => sprites[sprite]).ToObservableCollection()
+                    Sprites = Sprites.Select(sprite => sprites[sprite]).ToList()
                 }
             };
 

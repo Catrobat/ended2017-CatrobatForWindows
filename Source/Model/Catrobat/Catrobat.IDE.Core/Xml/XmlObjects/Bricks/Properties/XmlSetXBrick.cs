@@ -5,17 +5,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
     public partial class XmlSetXBrick : XmlBrick
     {
-        protected XmlFormula _xPosition;
-        public XmlFormula XPosition
-        {
-            get { return _xPosition; }
-            set
-            {
-                _xPosition = value;
-                RaisePropertyChanged();
-            }
-        }
-
+        public XmlFormula XPosition { get; set; }
 
         public XmlSetXBrick() {}
 
@@ -23,7 +13,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            _xPosition = new XmlFormula(xRoot.Element("xPosition"));
+            XPosition = new XmlFormula(xRoot.Element("xPosition"));
         }
 
         internal override XElement CreateXml()
@@ -31,7 +21,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             var xRoot = new XElement("setXBrick");
 
             var xVariable = new XElement("xPosition");
-            xVariable.Add(_xPosition.CreateXml());
+            xVariable.Add(XPosition.CreateXml());
             xRoot.Add(xVariable);
 
             return xRoot;
@@ -39,26 +29,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadReference()
         {
-            if (_xPosition != null)
-                _xPosition.LoadReference();
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlSetXBrick();
-            newBrick._xPosition = _xPosition.Copy() as XmlFormula;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlSetXBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            return XPosition.Equals(otherBrick.XPosition);
+            if (XPosition != null)
+                XPosition.LoadReference();
         }
     }
 }

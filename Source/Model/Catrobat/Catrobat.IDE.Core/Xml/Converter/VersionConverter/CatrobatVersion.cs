@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
-namespace Catrobat.IDE.Core.VersionConverter
+namespace Catrobat.IDE.Core.Xml.Converter.VersionConverter
 {
     public abstract class CatrobatVersion
     {

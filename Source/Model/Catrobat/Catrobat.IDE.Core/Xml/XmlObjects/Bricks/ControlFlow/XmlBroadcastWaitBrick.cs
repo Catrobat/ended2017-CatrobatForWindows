@@ -4,21 +4,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
     public partial class XmlBroadcastWaitBrick : XmlBrick
     {
-        protected string _broadcastMessage;
-        public string BroadcastMessage
-        {
-            get { return _broadcastMessage; }
-            set
-            {
-                if (_broadcastMessage == value)
-                {
-                    return;
-                }
-
-                _broadcastMessage = value;
-                RaisePropertyChanged();
-            }
-        }
+        public string BroadcastMessage { get; set; }
 
         public XmlBroadcastWaitBrick() {}
 
@@ -28,7 +14,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             if (xRoot.Element("broadcastMessage") != null)
             {
-                _broadcastMessage = xRoot.Element("broadcastMessage").Value;
+                BroadcastMessage = xRoot.Element("broadcastMessage").Value;
             }
         }
 
@@ -36,38 +22,17 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             var xRoot = new XElement("broadcastWaitBrick");
 
-            if (_broadcastMessage != null)
+            if (BroadcastMessage != null)
             {
                 xRoot.Add(new XElement("broadcastMessage")
                 {
-                    Value = _broadcastMessage
+                    Value = BroadcastMessage
                 });
             }
 
             ////CreateCommonXML(xRoot);
 
             return xRoot;
-        }
-
-        public override XmlObject Copy()
-        {
-            var newBrick = new XmlBroadcastWaitBrick();
-            newBrick._broadcastMessage = _broadcastMessage;
-
-            return newBrick;
-        }
-
-        public override bool Equals(XmlObject other)
-        {
-            var otherBrick = other as XmlBroadcastWaitBrick;
-
-            if (otherBrick == null)
-                return false;
-
-            if (BroadcastMessage != otherBrick.BroadcastMessage)
-                return false;
-
-            return true;
         }
     }
 }

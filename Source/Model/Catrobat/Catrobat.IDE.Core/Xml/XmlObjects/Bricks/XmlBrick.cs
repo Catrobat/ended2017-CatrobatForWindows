@@ -28,7 +28,5 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
             //  //if (sprite != null)
             //  //  xRoot.Add(sprite.CreateXML());
         }
-
-        public abstract XmlObject Copy();
     }
 }
