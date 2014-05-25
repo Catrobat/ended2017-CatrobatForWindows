@@ -11,7 +11,7 @@ namespace Catrobat.IDE.Core.Models.Scripts
         {
             return new XmlBroadcastScript
             {
-                ReceivedMessage = Message == null ? null : Message.ToXmlObject()
+                ReceivedMessage = Message == null ? string.Empty : Message.ToXmlObject()
             };
         }
     }

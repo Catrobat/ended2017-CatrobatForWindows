@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public class XmlComeToFrontBrick : XmlBrick
+    public partial class XmlComeToFrontBrick : XmlBrick
     {
         public XmlComeToFrontBrick() {}
 

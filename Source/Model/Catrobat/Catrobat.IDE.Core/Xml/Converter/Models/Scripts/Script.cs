@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
@@ -15,7 +16,7 @@ namespace Catrobat.IDE.Core.Models.Scripts
             var result = ToXmlObject2(context);
             result.Bricks = new XmlBrickList
             {
-                Bricks = Bricks == null ? null : Bricks.Select(brick => brick.ToXmlObject(context)).ToObservableCollection()
+                Bricks = Bricks == null ? new ObservableCollection<XmlBrick>() : Bricks.Select(brick => brick.ToXmlObject(context)).ToObservableCollection()
             };
             context.Scripts.Add(this, result);
             return result;

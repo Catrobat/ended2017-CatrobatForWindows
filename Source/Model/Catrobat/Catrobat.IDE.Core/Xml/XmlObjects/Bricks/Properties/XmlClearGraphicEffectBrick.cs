@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public class XmlClearGraphicEffectBrick : XmlBrick
+    public partial class XmlClearGraphicEffectBrick : XmlBrick
     {
         public XmlClearGraphicEffectBrick() {}
 

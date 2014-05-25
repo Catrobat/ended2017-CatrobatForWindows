@@ -1,6 +1,7 @@
 ﻿using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;
+using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 using Context = Catrobat.IDE.Core.Xml.Converter.XmlProjectConverter.ConvertBackContext;
 
@@ -22,7 +23,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
             return new XmlSetVariableBrick
             {
                 UserVariable = variable, 
-                VariableFormula = Value == null ? null : Value.ToXmlObject(), 
+                VariableFormula = Value == null ? new XmlFormula() : Value.ToXmlObject(), 
             };
         }
     }
@@ -36,7 +37,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
             return new XmlChangeVariableBrick
             {
                 UserVariable = variable, 
-                VariableFormula = RelativeValue == null ? null : RelativeValue.ToXmlObject(),
+                VariableFormula = RelativeValue == null ? new XmlFormula() : RelativeValue.ToXmlObject(),
             };
         }
     }

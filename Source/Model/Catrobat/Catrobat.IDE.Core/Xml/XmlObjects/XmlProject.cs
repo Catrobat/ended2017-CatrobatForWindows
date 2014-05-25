@@ -162,17 +162,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         }
 
 
-        public async Task SetProgramNameAndRenameDirectory(string newProgramName)
-        {
-            using (var storage = StorageSystem.GetStorage())
-            {
-                await storage.RenameDirectoryAsync("Projects/" + ProjectHeader.ProgramName, newProgramName);
-            }
-
-            ProjectHeader.SetProgramName(newProgramName);
-            RaisePropertyChanged(() => ProjectHeader);
-        }
-
         protected override sealed void LoadFromXML(string xml)
         {
             var document = XDocument.Load(new StringReader(xml));

@@ -56,18 +56,17 @@ namespace Catrobat.IDE.Tests.Misc
             var project = new Project
             {
                 Name = "project1",
-                Description = "",
                 UploadHeader = new UploadHeader
                 {
                     Uploaded = _now.HasValue ? _now.Value : DateTime.Now,
                     MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
                     ProgramLicense = "http://developer.catrobat.org/agpl_v3",
-                    RemixOf = "",
-                    Tags = new ObservableCollection<string>(),
                     Url = "http://pocketcode.org/details/871",
-                    UserId = ""
-                }, 
-                BroadcastMessages = new ObservableCollection<BroadcastMessage>()
+                },
+                BroadcastMessages = new ObservableCollection<BroadcastMessage>
+                {
+                    new BroadcastMessage {Content = "Content"}
+                }
             };
 
             var sprites = new ObservableCollection<Sprite>();
@@ -75,12 +74,7 @@ namespace Catrobat.IDE.Tests.Misc
 
             for (var i = 0; i < 2; i++)
             {
-                sprites.Add(new Sprite
-                {
-                    Name = "Object" + i,
-                    Costumes = new ObservableCollection<Costume>(),
-                    Sounds = new ObservableCollection<Sound>(),
-                });
+                sprites.Add(new Sprite {Name = "Object" + i});
             }
 
             for (var i = 0; i < 6; i++)
@@ -99,7 +93,6 @@ namespace Catrobat.IDE.Tests.Misc
 
             foreach (var sprite in sprites)
             {
-                sprite.Scripts = new ObservableCollection<Script>();
                 var scripts = ReflectionHelper.GetInstances<Script>(ExcludedScripts);
                 foreach (var script in scripts)
                 {
@@ -183,6 +176,11 @@ namespace Catrobat.IDE.Tests.Misc
                 return _random.NextBool()
                     ? (Variable)_random.Next(sprite.LocalVariables)
                     : _random.Next(project.GlobalVariables);
+            }
+
+            if (type == typeof(BroadcastMessage))
+            {
+                return _random.Next(project.BroadcastMessages);
             }
 
             if (type == typeof(IfBrick))

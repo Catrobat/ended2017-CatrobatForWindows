@@ -10,8 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Catrobat.IDE.Core.ExtensionMethods;
-using Catrobat.IDE.Core.Formulas.Tokens;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
 using Catrobat.IDE.Phone.Controls.Formulas.Templates;
 
 namespace Catrobat.IDE.Phone.Controls.Formulas

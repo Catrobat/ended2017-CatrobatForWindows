@@ -23,5 +23,47 @@ namespace Catrobat.IDE.Core.Models.Bricks
         }
     }
 
+
+    partial class SpeakBrick
+    {
+        protected internal override XmlBrick ToXmlObject2(Context context)
+        {
+            return new XmlSpeakBrick
+            {
+                Text = Value
+            };
+        }
+    }
+
+    partial class StopSoundsBrick
+    {
+        protected internal override XmlBrick ToXmlObject2(Context context)
+        {
+            return new XmlStopAllSoundsBrick();
+        }
+    }
+
+    partial class SetVolumeBrick
+    {
+        protected internal override XmlBrick ToXmlObject2(Context context)
+        {
+            return new XmlSetVolumeToBrick
+            {
+                Volume = Percentage == null ? null : Percentage.ToXmlObject()
+            };
+        }
+    }
+
+    partial class ChangeVolumeBrick
+    {
+        protected internal override XmlBrick ToXmlObject2(Context context)
+        {
+            return new XmlChangeVolumeByBrick
+            {
+                Volume = RelativePercentage == null ? null : RelativePercentage.ToXmlObject()
+            };
+        }
+    }
+
     #endregion
 }

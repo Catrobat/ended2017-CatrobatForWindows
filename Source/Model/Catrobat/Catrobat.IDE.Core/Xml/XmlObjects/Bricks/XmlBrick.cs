@@ -1,7 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
-using Catrobat.IDE.Core.Xml.Converter;
-using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+﻿using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
 {

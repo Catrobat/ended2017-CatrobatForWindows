@@ -1,8 +1,6 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.Xml;
-using Catrobat.IDE.Core.Xml.XmlObjects;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
-using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
+﻿using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.Scripts;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -12,14 +10,14 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Scripts
     {
         #region private Members
 
-        private string _broadcastMessage;
-        private XmlObject _broadcastObject;
+        private BroadcastMessage _broadcastMessage;
+        private Model _broadcastObject;
 
         #endregion
 
         #region Properties
 
-        public string BroadcastMessage
+        public BroadcastMessage BroadcastMessage
         {
             get { return _broadcastMessage; }
             set
@@ -48,7 +46,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Scripts
 
         private bool SaveCommand_CanExecute()
         {
-            return BroadcastMessage != null && BroadcastMessage.Length >= 2;
+            return BroadcastMessage != null && BroadcastMessage.Content != null && BroadcastMessage.Content.Length >= 2;
         }
 
         #endregion
@@ -57,26 +55,26 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Scripts
 
         private void SaveAction()
         {
-            var message = new GenericMessage<string>(BroadcastMessage);
-            Messenger.Default.Send<GenericMessage<string>>(message, ViewModelMessagingToken.BroadcastMessageListener);
+            var message = new GenericMessage<BroadcastMessage>(BroadcastMessage);
+            Messenger.Default.Send(message, ViewModelMessagingToken.BroadcastMessageListener);
 
-            if (_broadcastObject is XmlBroadcastScript)
+            if (_broadcastObject is BroadcastReceivedScript)
             {
-                (_broadcastObject as XmlBroadcastScript).ReceivedMessage = BroadcastMessage;
+                (_broadcastObject as BroadcastReceivedScript).Message = BroadcastMessage;
             }
-            if (_broadcastObject is XmlBroadcastBrick)
+            if (_broadcastObject is BroadcastSendBrick)
             {
-                (_broadcastObject as XmlBroadcastBrick).BroadcastMessage = BroadcastMessage;
+                (_broadcastObject as BroadcastSendBrick).Message = BroadcastMessage;
             }
-            if (_broadcastObject is XmlBroadcastWaitBrick)
+            if (_broadcastObject is BroadcastSendBlockingBrick)
             {
-                (_broadcastObject as XmlBroadcastWaitBrick).BroadcastMessage = BroadcastMessage;
+                (_broadcastObject as BroadcastSendBlockingBrick).Message = BroadcastMessage;
             }
 
             base.GoBackAction();
         }
 
-        private void ReceiveBroadcastObjectAction(GenericMessage<XmlObject> message)
+        private void ReceiveBroadcastObjectAction(GenericMessage<Model> message)
         {
             _broadcastObject = message.Content;
         }
@@ -100,12 +98,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Scripts
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<XmlObject>>(this, ViewModelMessagingToken.BroadcastObjectListener, ReceiveBroadcastObjectAction);
+            Messenger.Default.Register<GenericMessage<Model>>(this, ViewModelMessagingToken.BroadcastObjectListener, ReceiveBroadcastObjectAction);
         }
 
         private void ResetViewModel()
         {
-            BroadcastMessage = "";
+            BroadcastMessage = null;
         }
     }
 }

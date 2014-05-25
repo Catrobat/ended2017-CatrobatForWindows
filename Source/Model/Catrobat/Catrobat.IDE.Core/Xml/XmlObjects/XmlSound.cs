@@ -87,19 +87,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             return newSoundInfo;
         }
 
-        public async Task Delete()
-        {
-            var path = XmlParserTempProjectHelper.Project.BasePath + "/" + Project.SoundsPath + "/" + _fileName;
-
-            using (var storage = StorageSystem.GetStorage())
-            {
-                if (await storage.FileExistsAsync(path))
-                {
-                    await storage.DeleteFileAsync(path);
-                }
-            }
-        }
-
         public override bool Equals(XmlObject other)
         {
             var otherSound = other as XmlSound;

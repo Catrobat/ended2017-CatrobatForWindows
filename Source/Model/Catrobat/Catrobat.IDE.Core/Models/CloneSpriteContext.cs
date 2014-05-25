@@ -3,7 +3,7 @@ using Catrobat.IDE.Core.Models.Bricks;
 
 namespace Catrobat.IDE.Core.Models
 {
-    internal class CloneSpriteContext
+    public class CloneSpriteContext
     {
         #region Properties
 

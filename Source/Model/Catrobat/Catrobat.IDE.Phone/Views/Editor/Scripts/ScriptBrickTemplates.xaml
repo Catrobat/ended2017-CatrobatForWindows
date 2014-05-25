@@ -8,15 +8,9 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:formulas="clr-namespace:Catrobat.IDE.Phone.Controls.Formulas"
-  xmlns:xml1="clr-namespace:Catrobat.IDE.Core.Xml;assembly=Catrobat.IDE.Core"
-  xmlns:xmlObjects="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects;assembly=Catrobat.IDE.Core"
-  xmlns:scripts="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Scripts;assembly=Catrobat.IDE.Core"
-  xmlns:properties="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;assembly=Catrobat.IDE.Core"
-  xmlns:sounds="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds;assembly=Catrobat.IDE.Core"
-  xmlns:costumes="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes;assembly=Catrobat.IDE.Core"
-  xmlns:controlFlow="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;assembly=Catrobat.IDE.Core"
-  xmlns:variables="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;assembly=Catrobat.IDE.Core"
-  xmlns:bricks="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Bricks;assembly=Catrobat.IDE.Core"
+  xmlns:models="clr-namespace:Catrobat.IDE.Core.Models;assembly=Catrobat.IDE.Core"
+  xmlns:scripts="clr-namespace:Catrobat.IDE.Core.Models.Scripts;assembly=Catrobat.IDE.Core"
+  xmlns:bricks="clr-namespace:Catrobat.IDE.Core.Models.Bricks;assembly=Catrobat.IDE.Core"
   mc:Ignorable="d">
 
   <!--<SolidColorBrush x:Key="SoundsBrush" Color="#FFE035D5" />
@@ -58,27 +52,27 @@
   </Style>
 
   <DataTemplate x:Key="ListBoxSpriteItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance xmlObjects:XmlSprite}">
+    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Sprite}">
       <TextBlock Text="{Binding Path=Name}" FontSize="24" />
     </StackPanel>
   </DataTemplate>
 
   <DataTemplate x:Key="PageListBoxSpriteItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance xmlObjects:XmlSprite}">
+    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Sprite}">
       <TextBlock Text="{Binding Path=Name}" FontSize="40" />
     </StackPanel>
   </DataTemplate>
 
 
   <DataTemplate x:Key="ListBoxCostumeItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance xmlObjects:XmlCostume}">
+    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Costume}">
       <Image Source="{Binding Path=Image.ImageSource}" Width="24" Height="24" />
       <TextBlock Text="{Binding Path=Name}" FontSize="24" Padding="10,0,0,0" />
     </StackPanel>
   </DataTemplate>
 
   <DataTemplate x:Key="PageListBoxCostumeItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance xmlObjects:XmlCostume}">
+    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Costume}">
       <Image Source="{Binding Path=Image.ImageSource}" Width="40" Height="40" />
       <TextBlock Text="{Binding Path=Name}" FontSize="40" Padding="10,0,0,0" />
     </StackPanel>
@@ -86,13 +80,13 @@
 
   
   <DataTemplate x:Key="ListBoxSoundItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance xmlObjects:XmlSound}">
+    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Sound}">
       <TextBlock Text="{Binding Path=Name}" FontSize="24" />
     </StackPanel>
   </DataTemplate>
 
   <DataTemplate x:Key="PageListBoxSoundItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance xmlObjects:XmlSound}">
+    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Sound}">
       <TextBlock Text="{Binding Path=Name}" FontSize="40" />
     </StackPanel>
   </DataTemplate>
@@ -100,7 +94,7 @@
 
   <DataTemplate x:Key="ListBoxBroadcastItem">
     <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance system:String}">
-      <TextBlock Text="{Binding}" FontSize="24" />
+      <TextBlock Text="{Binding Content}" FontSize="24" d:DataContext="{d:DesignInstance models:BroadcastMessage}" />
     </StackPanel>
   </DataTemplate>
 
@@ -117,7 +111,7 @@
       <!--####### Script Templates #################################################################################################################################################################################-->
       <sb:ScriptBrickContentTemplateSelector.StartScript>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:XmlStartScript}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:StartScript}">
             <rlb:MasterBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <TextBlock VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_WhenProjectStarts, Source={StaticResource LocalizedStrings}}" />
             </rlb:MasterBrick>
@@ -125,19 +119,19 @@
         </DataTemplate>
       </sb:ScriptBrickContentTemplateSelector.StartScript>
 
-      <sb:ScriptBrickContentTemplateSelector.WhenScript>
+      <sb:ScriptBrickContentTemplateSelector.TappedScript>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:XmlWhenScript}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:TappedScript}">
             <rlb:MasterBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <TextBlock VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_WhenTapped, Source={StaticResource LocalizedStrings}}" />
             </rlb:MasterBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.WhenScript>
+      </sb:ScriptBrickContentTemplateSelector.TappedScript>
 
-      <sb:ScriptBrickContentTemplateSelector.BroadcastScript>
+      <sb:ScriptBrickContentTemplateSelector.BroadcastReceivedScript>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:XmlBroadcastScript}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:BroadcastReceivedScript}">
             <rlb:MasterBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.RowDefinitions>
@@ -153,19 +147,19 @@
                            Margin="10 10 0 10" Text="{Binding Resources.Brick_WhenIReceive, Source={StaticResource LocalizedStrings}}" />
                 <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                                      ItemTemplate="{StaticResource ListBoxBroadcastItem}"
-                                     PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" 
+                                     PageItemTemplate="{StaticResource PageListBoxBroadcastItem}"
                                      ItemsSource="{Binding SpriteEditorViewModel.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" 
-                                     SelectedItem="{Binding ReceivedMessage, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" 
+                                     SelectedItem="{Binding Message, Mode=TwoWay}" IsEnabled="{Binding IsAttached}" 
                                      Margin="10 10 0 10" />
                 <Button Grid.Row="1" Grid.Column="1" Width="150" 
                         Content="{Binding Resources.Brick_ButtonNew, Source={StaticResource LocalizedStrings}}" 
                         Command="{Binding SpriteEditorViewModel.AddBroadcastMessageCommand, Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding}" IsEnabled="{Binding IsRealObject}" />
+                        CommandParameter="{Binding}" IsEnabled="{Binding IsAttached}" />
               </Grid>
             </rlb:MasterBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.BroadcastScript>
+      </sb:ScriptBrickContentTemplateSelector.BroadcastReceivedScript>
       <!--####### Brick Templates #################################################################################################################################################################################-->
       <sb:ScriptBrickContentTemplateSelector.UnknownBrick>
         <DataTemplate>
@@ -179,9 +173,9 @@
 
       <!--####### Motion Bricks ###################################################################################################################################################################################-->
 
-      <sb:ScriptBrickContentTemplateSelector.ChangeXByBrick>
+      <sb:ScriptBrickContentTemplateSelector.ChangePositionXBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlChangeXByBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:ChangePositionXBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -193,19 +187,16 @@
                            Text="{Binding Resources.Brick_ChangeXBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
 
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding XMovement, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}"/>
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" 
-                         VerticalAlignment="Center" Text="{Binding XMovement, Mode=TwoWay}" 
-                         InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" IsEnabled="{Binding IsAttached}"/>
               </Grid>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.ChangeXByBrick>
+      </sb:ScriptBrickContentTemplateSelector.ChangePositionXBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.ChangeYByBrick>
+      <sb:ScriptBrickContentTemplateSelector.ChangePositionYBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlChangeYByBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:ChangePositionYBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -216,20 +207,17 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_ChangeYBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding YMovement, Mode=TwoWay}" InputScope="TelephoneNumber" 
-                         IsEnabled="{Binding IsRealObject}" />-->
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding YMovement, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
               </Grid>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.ChangeYByBrick>
+      </sb:ScriptBrickContentTemplateSelector.ChangePositionYBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.ComeToFrontBrick>
+      <sb:ScriptBrickContentTemplateSelector.BringToFrontBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlComeToFrontBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:BringToFrontBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                              BorderBrush="{StaticResource BrickBorderBrush}">
               <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_ComeToFront, Source={StaticResource LocalizedStrings}}" 
@@ -237,11 +225,11 @@
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.ComeToFrontBrick>
+      </sb:ScriptBrickContentTemplateSelector.BringToFrontBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.GoNStepsBackBrick>
+      <sb:ScriptBrickContentTemplateSelector.DecreaseZOrderBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlGoNStepsBackBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:DecreaseZOrderBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -253,11 +241,8 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_GoNStepsBackGo, Source={StaticResource LocalizedStrings}}"
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding Steps, Mode=TwoWay}" InputScope="TelephoneNumber" 
-                         IsEnabled="{Binding IsRealObject}" />-->
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Steps, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_GoNStepsBackStepsBack, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
@@ -265,11 +250,11 @@
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.GoNStepsBackBrick>
+      </sb:ScriptBrickContentTemplateSelector.DecreaseZOrderBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.IfOnEdgeBounceBrick>
+      <sb:ScriptBrickContentTemplateSelector.BounceBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlIfOnEdgeBounceBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:BounceBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                              BorderBrush="{StaticResource BrickBorderBrush}">
               <TextBlock VerticalAlignment="Center" 
@@ -278,11 +263,11 @@
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.IfOnEdgeBounceBrick>
+      </sb:ScriptBrickContentTemplateSelector.BounceBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.MoveNStepsBrick>
+      <sb:ScriptBrickContentTemplateSelector.MoveBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlMoveNStepsBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:MoveBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -294,11 +279,8 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_MoveNStepsMove, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding Steps, Mode=TwoWay}" InputScope="TelephoneNumber" 
-                         IsEnabled="{Binding IsRealObject}" />-->
                 <formulas:FormulaButton Grid.Column="1" Formula="{Binding Steps, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_MoveNStepsSteps, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
@@ -306,11 +288,11 @@
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.MoveNStepsBrick>
+      </sb:ScriptBrickContentTemplateSelector.MoveBrick>
 
       <sb:ScriptBrickContentTemplateSelector.TurnLeftBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlTurnLeftBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:TurnLeftBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -322,11 +304,8 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_TurnLeft, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding Degrees, Mode=TwoWay}" InputScope="TelephoneNumber" 
-                         IsEnabled="{Binding IsRealObject}" />-->
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Degrees, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Degrees, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
@@ -338,7 +317,7 @@
 
       <sb:ScriptBrickContentTemplateSelector.TurnRightBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlTurnRightBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:TurnRightBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -350,11 +329,8 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_TurnRight, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" 
-                         VerticalAlignment="Center" Text="{Binding Degrees, Mode=TwoWay}"
-                         InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Degrees, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Degrees, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
@@ -364,9 +340,9 @@
         </DataTemplate>
       </sb:ScriptBrickContentTemplateSelector.TurnRightBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.SetXBrick>
+      <sb:ScriptBrickContentTemplateSelector.SetPositionXBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlSetXBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:SetPositionXBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -377,20 +353,17 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetXTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" 
-                         VerticalAlignment="Center" Text="{Binding XPosition, Mode=TwoWay}" 
-                         InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding XPosition, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Value, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
               </Grid>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.SetXBrick>
+      </sb:ScriptBrickContentTemplateSelector.SetPositionXBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.SetYBrick>
+      <sb:ScriptBrickContentTemplateSelector.SetPositionYBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlSetYBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:SetPositionYBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -401,20 +374,17 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetYTo, Source={StaticResource LocalizedStrings}}"
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" 
-                         VerticalAlignment="Center" Text="{Binding YPosition, Mode=TwoWay}" InputScope="TelephoneNumber"
-                         IsEnabled="{Binding IsRealObject}" />-->
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding YPosition, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Value, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
               </Grid>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.SetYBrick>
+      </sb:ScriptBrickContentTemplateSelector.SetPositionYBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.PlaceAtBrick>
+      <sb:ScriptBrickContentTemplateSelector.SetPositionBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlPlaceAtBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:SetPositionBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -431,20 +401,20 @@
                            Text="{Binding Resources.Brick_PlaceAt, Source={StaticResource LocalizedStrings}}"
                            Margin="10 10 0 10" FontSize="24" />
                 <TextBlock Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Text="X" Margin="10 10 0 10" FontSize="24" />
-                <formulas:FormulaButton Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" Formula="{Binding XPosition, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" Formula="{Binding ValueX, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Text="Y" Margin="10 10 0 10" FontSize="24" />
-                <formulas:FormulaButton Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Formula="{Binding YPosition, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Formula="{Binding ValueY, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
               </Grid>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.PlaceAtBrick>
+      </sb:ScriptBrickContentTemplateSelector.SetPositionBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.PointInDirectionBrick>
+      <sb:ScriptBrickContentTemplateSelector.SetRotationBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlPointInDirectionBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:SetRotationBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <StackPanel>
                 <TextBlock VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" 
@@ -454,8 +424,8 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="auto" />
                   </Grid.ColumnDefinitions>
-                  <formulas:FormulaButton Grid.Column="0" Formula="{Binding Degrees, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                  <formulas:FormulaButton Grid.Column="0" Formula="{Binding Value, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                   <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" 
                            Text="{Binding Resources.Brick_Degrees, Source={StaticResource LocalizedStrings}}" />
                 </Grid>
@@ -464,24 +434,30 @@
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.PointInDirectionBrick>
+      </sb:ScriptBrickContentTemplateSelector.SetRotationBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.PointToBrick>
+      <sb:ScriptBrickContentTemplateSelector.LookAtBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlPointToBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:LookAtBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <StackPanel>
                 <TextBlock VerticalAlignment="Center"  FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_PointTo, Source={StaticResource LocalizedStrings}}" />
-                <controls:ListPicker ItemTemplate="{StaticResource ListBoxSpriteItem}" PageItemTemplate="{StaticResource PageListBoxSpriteItem}" ItemsSource="{Binding SpriteEditorViewModel.Sprites, Source={StaticResource Locator}, Mode=OneTime}"  SelectedItem="{Binding PointedSprite, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10 10 0 10" />
+                <controls:ListPicker 
+                  ItemTemplate="{StaticResource ListBoxSpriteItem}" 
+                  PageItemTemplate="{StaticResource PageListBoxSpriteItem}" 
+                  ItemsSource="{Binding SpriteEditorViewModel.Sprites, Source={StaticResource Locator}, Mode=OneTime}"  
+                  SelectedItem="{Binding Target, Mode=TwoWay}" 
+                  IsEnabled="{Binding IsAttached}" 
+                  Margin="10 10 0 10" />
               </StackPanel>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.PointToBrick>
+      </sb:ScriptBrickContentTemplateSelector.LookAtBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.GlideToBrick>
+      <sb:ScriptBrickContentTemplateSelector.AnimatePositionBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlGlideToBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:AnimatePositionBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <StackPanel>
                 <Grid>
@@ -499,8 +475,8 @@
 
                   <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" 
                            Margin="10 10 0 10" Text="{Binding Resources.Brick_GlideToGlide, Source={StaticResource LocalizedStrings}}" />
-                  <formulas:FormulaButton Grid.Row="0" Grid.Column="2" Formula="{Binding DurationInSeconds, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                  <formulas:FormulaButton Grid.Row="0" Grid.Column="2" Formula="{Binding Duration, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                   <TextBlock Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" FontSize="24" 
                            Margin="10 10 0 10" Text="{Binding Resources.Brick_Seconds, Source={StaticResource LocalizedStrings}}" />
                   
@@ -508,12 +484,12 @@
                            Text="{Binding Resources.Brick_GlideToTo, Source={StaticResource LocalizedStrings}}" />
                   <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" 
                            Text="X" />
-                  <formulas:FormulaButton Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Formula="{Binding XDestination, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                  <formulas:FormulaButton Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Formula="{Binding ToX, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
 
                   <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="Y" />
-                  <formulas:FormulaButton Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Formula="{Binding YDestination, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                  <formulas:FormulaButton Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Formula="{Binding ToY, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 </Grid>
 
 
@@ -523,13 +499,13 @@
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.GlideToBrick>
+      </sb:ScriptBrickContentTemplateSelector.AnimatePositionBrick>
 
       <!--####### Sound Bricks ####################################################################################################################################################################################-->
 
-      <sb:ScriptBrickContentTemplateSelector.ChangeVolumeByBrick>
+      <sb:ScriptBrickContentTemplateSelector.ChangeVolumeBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance sounds:XmlChangeVolumeByBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:ChangeVolumeBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -541,44 +517,44 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_ChangeVolumeBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Volume, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativePercentage, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.ChangeVolumeByBrick>
+      </sb:ScriptBrickContentTemplateSelector.ChangeVolumeBrick>
 
       <sb:ScriptBrickContentTemplateSelector.SpeakBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance sounds:XmlSpeakBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:SpeakBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <StackPanel Orientation="Vertical">
                 <TextBlock VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Speak, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
                 <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding Text, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" />
+                         Text="{Binding Value, Mode=TwoWay}" IsEnabled="{Binding IsAttached}" />
               </StackPanel>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
       </sb:ScriptBrickContentTemplateSelector.SpeakBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.StopAllSoundsBrick>
+      <sb:ScriptBrickContentTemplateSelector.StopSoundsBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance sounds:XmlStopAllSoundsBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:StopSoundsBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_StopAllSounds, Source={StaticResource LocalizedStrings}}" Margin="10 10 0 10" FontSize="24" />
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.StopAllSoundsBrick>
+      </sb:ScriptBrickContentTemplateSelector.StopSoundsBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.SetVolumeToBrick>
+      <sb:ScriptBrickContentTemplateSelector.SetVolumeBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance sounds:XmlSetVolumeToBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:SetVolumeBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -590,20 +566,18 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetVolumeTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding Volume, Mode=TwoWay}" InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Volume, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Percentage, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.SetVolumeToBrick>
+      </sb:ScriptBrickContentTemplateSelector.SetVolumeBrick>
 
       <sb:ScriptBrickContentTemplateSelector.PlaySoundBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance sounds:XmlPlaySoundBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:PlaySoundBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <StackPanel>
                 <TextBlock TextWrapping="Wrap" FontSize="24" Margin="10 10 0 10" 
@@ -611,7 +585,7 @@
                 <controls:ListPicker ItemTemplate="{StaticResource ListBoxSoundItem}" 
                                      PageItemTemplate="{StaticResource PageListBoxSoundItem}" 
                                      ItemsSource="{Binding SpriteEditorViewModel.Sounds, Source={StaticResource Locator}, Mode=OneTime}" 
-                                     SelectedItem="{Binding Sound, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10 10 0 10" />
+                                     SelectedItem="{Binding Value, Mode=TwoWay}" IsEnabled="{Binding IsAttached}" Margin="10 10 0 10" />
               </StackPanel>
             </rlb:NormalBrick>
           </Grid>
@@ -622,7 +596,7 @@
 
       <sb:ScriptBrickContentTemplateSelector.ChangeBrightnessBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlChangeBrightnessBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:ChangeBrightnessBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -634,11 +608,8 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_ChangeBrightnessBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding ChangeBrightness, Mode=TwoWay}" InputScope="TelephoneNumber" 
-                         IsEnabled="{Binding IsRealObject}" />-->
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding ChangeBrightness, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativePercentage, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
             </rlb:NormalBrick>
@@ -646,9 +617,9 @@
         </DataTemplate>
       </sb:ScriptBrickContentTemplateSelector.ChangeBrightnessBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.ChangeGhostEffectBrick>
+      <sb:ScriptBrickContentTemplateSelector.ChangeTransparencyBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlChangeGhostEffectBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:ChangeTransparencyBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -660,21 +631,18 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_ChangeGhostEffectBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding ChangeGhostEffect, Mode=TwoWay}" InputScope="TelephoneNumber" 
-                         IsEnabled="{Binding IsRealObject}" />-->
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding ChangeGhostEffect, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativePercentage, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.ChangeGhostEffectBrick>
+      </sb:ScriptBrickContentTemplateSelector.ChangeTransparencyBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.ChangeSizeByNBrick>
+      <sb:ScriptBrickContentTemplateSelector.ChangeSizeBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlChangeSizeByNBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:ChangeSizeBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -686,20 +654,18 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_ChangeSizeBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding Size, Mode=TwoWay}" InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Size, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativePercentage, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.ChangeSizeByNBrick>
+      </sb:ScriptBrickContentTemplateSelector.ChangeSizeBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.ClearGraphicEffectBrick>
+      <sb:ScriptBrickContentTemplateSelector.ResetGraphicPropertiesBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlClearGraphicEffectBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:ResetGraphicPropertiesBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_ClearGraphicEffects, Source={StaticResource LocalizedStrings}}" 
@@ -707,11 +673,11 @@
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.ClearGraphicEffectBrick>
+      </sb:ScriptBrickContentTemplateSelector.ResetGraphicPropertiesBrick>
 
       <sb:ScriptBrickContentTemplateSelector.HideBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlHideBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:HideBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_Hide, Source={StaticResource LocalizedStrings}}" Margin="10 10 0 10" FontSize="24" />
             </rlb:NormalBrick>
@@ -721,7 +687,7 @@
 
       <sb:ScriptBrickContentTemplateSelector.ShowBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlShowBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:ShowBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_Show, Source={StaticResource LocalizedStrings}}" Margin="10 10 0 10" FontSize="24" />
             </rlb:NormalBrick>
@@ -731,7 +697,7 @@
 
       <sb:ScriptBrickContentTemplateSelector.NextCostumeBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance costumes:XmlNextCostumeBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:NextCostumeBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_NextCostume, Source={StaticResource LocalizedStrings}}" Margin="10 10 0 10" FontSize="24" />
             </rlb:NormalBrick>
@@ -741,20 +707,26 @@
 
       <sb:ScriptBrickContentTemplateSelector.SetCostumeBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance costumes:XmlSetCostumeBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:SetCostumeBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <StackPanel>
                 <TextBlock TextWrapping="Wrap" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_SetCostume, Source={StaticResource LocalizedStrings}}" />
-                <controls:ListPicker ItemTemplate="{StaticResource ListBoxCostumeItem}" PageItemTemplate="{StaticResource PageListBoxCostumeItem}" ItemsSource="{Binding SpriteEditorViewModel.Costumes, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding Costume, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10 10 0 10" />
+                <controls:ListPicker 
+                  ItemTemplate="{StaticResource ListBoxCostumeItem}" 
+                  PageItemTemplate="{StaticResource PageListBoxCostumeItem}" 
+                  ItemsSource="{Binding SpriteEditorViewModel.Costumes, Source={StaticResource Locator}, Mode=OneTime}" 
+                  SelectedItem="{Binding Value, Mode=TwoWay}" 
+                  IsEnabled="{Binding IsAttached}" 
+                  Margin="10 10 0 10" />
               </StackPanel>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
       </sb:ScriptBrickContentTemplateSelector.SetCostumeBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.SetSizeToBrick>
+      <sb:ScriptBrickContentTemplateSelector.SetSizeBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlSetSizeToBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:SetSizeBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -766,20 +738,18 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetSizeTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding Size, Mode=TwoWay}" InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Size, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Percentage, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.SetSizeToBrick>
+      </sb:ScriptBrickContentTemplateSelector.SetSizeBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.SetGhostEffectBrick>
+      <sb:ScriptBrickContentTemplateSelector.SetTransparencyBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlSetGhostEffectBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:SetTransparencyBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -791,20 +761,18 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetGhostEffectTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding Transparency, Mode=TwoWay}" InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Transparency, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Percentage, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.SetGhostEffectBrick>
+      </sb:ScriptBrickContentTemplateSelector.SetTransparencyBrick>
 
       <sb:ScriptBrickContentTemplateSelector.SetBrightnessBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance properties:XmlSetBrightnessBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:SetBrightnessBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -816,10 +784,8 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetBrightnessTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding Brightness, Mode=TwoWay}" InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Brightness, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Percentage, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
               </Grid>
             </rlb:NormalBrick>
@@ -831,7 +797,7 @@
 
       <sb:ScriptBrickContentTemplateSelector.ForeverBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance controlFlow:XmlForeverBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:ForeverBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_Forever, Source={StaticResource LocalizedStrings}}" 
@@ -841,9 +807,9 @@
         </DataTemplate>
       </sb:ScriptBrickContentTemplateSelector.ForeverBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.RepeatLoopEndBrick>
+      <sb:ScriptBrickContentTemplateSelector.EndRepeatBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance controlFlow:XmlRepeatLoopEndBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:EndRepeatBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_RepeatLoopEnd, Source={StaticResource LocalizedStrings}}" 
@@ -851,11 +817,11 @@
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.RepeatLoopEndBrick>
+      </sb:ScriptBrickContentTemplateSelector.EndRepeatBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.ForeverLoopEndBrick>
+      <sb:ScriptBrickContentTemplateSelector.EndForeverBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance controlFlow:XmlForeverLoopEndBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:EndForeverBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_ForeverLoopEnd, Source={StaticResource LocalizedStrings}}" 
@@ -863,27 +829,27 @@
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.ForeverLoopEndBrick>
+      </sb:ScriptBrickContentTemplateSelector.EndForeverBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.NoteBrick>
+      <sb:ScriptBrickContentTemplateSelector.CommentBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:XmlNoteBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:CommentBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <StackPanel Orientation="Vertical">
                 <TextBlock VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Note, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
                 <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                         Text="{Binding Note, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" />
+                         Text="{Binding Value, Mode=TwoWay}" IsEnabled="{Binding IsAttached}" />
               </StackPanel>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.NoteBrick>
+      </sb:ScriptBrickContentTemplateSelector.CommentBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.WaitBrick>
+      <sb:ScriptBrickContentTemplateSelector.DelayBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance controlFlow:XmlWaitBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:DelayBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -895,8 +861,8 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Wait, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding TimeToWaitInSeconds, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Duration, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Seconds, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
@@ -904,11 +870,11 @@
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.WaitBrick>
+      </sb:ScriptBrickContentTemplateSelector.DelayBrick>
 
       <sb:ScriptBrickContentTemplateSelector.RepeatBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance controlFlow:XmlRepeatBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:RepeatBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -920,11 +886,8 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Repeat, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding TimesToRepeat, Mode=TwoWay}" InputScope="TelephoneNumber" 
-                         IsEnabled="{Binding IsRealObject}" />-->
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding TimesToRepeat, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Count, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Times, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
@@ -934,9 +897,9 @@
         </DataTemplate>
       </sb:ScriptBrickContentTemplateSelector.RepeatBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.BroadcastBrick>
+      <sb:ScriptBrickContentTemplateSelector.BroadcastSendBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance controlFlow:XmlBroadcastBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:BroadcastBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.RowDefinitions>
@@ -948,18 +911,27 @@
                   <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_Broadcast, Source={StaticResource LocalizedStrings}}" />
-                <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" ItemTemplate="{StaticResource ListBoxBroadcastItem}" PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" ItemsSource="{Binding SpriteEditorViewModel.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding BroadcastMessage, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10 10 0 10" />
-                <Button Grid.Row="1" Grid.Column="1" Width="150" Content="{Binding Resources.Brick_ButtonNew, Source={StaticResource LocalizedStrings}}" Command="{Binding SpriteEditorViewModel.AddBroadcastMessageCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" IsEnabled="{Binding IsRealObject}" />
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" 
+                           Text="{Binding Resources.Brick_Broadcast, Source={StaticResource LocalizedStrings}}" />
+                <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                                     ItemTemplate="{StaticResource ListBoxBroadcastItem}" 
+                                     PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" 
+                                     ItemsSource="{Binding SpriteEditorViewModel.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" 
+                                     SelectedItem="{Binding Message, Mode=TwoWay}" 
+                                     IsEnabled="{Binding IsAttached}" Margin="10 10 0 10" />
+                <Button Grid.Row="1" Grid.Column="1" Width="150" 
+                        Content="{Binding Resources.Brick_ButtonNew, Source={StaticResource LocalizedStrings}}" 
+                        Command="{Binding SpriteEditorViewModel.AddBroadcastMessageCommand, Source={StaticResource Locator}}" 
+                        CommandParameter="{Binding}" IsEnabled="{Binding IsAttached}" />
               </Grid>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.BroadcastBrick>
+      </sb:ScriptBrickContentTemplateSelector.BroadcastSendBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.BroadcastWaitBrick>
+      <sb:ScriptBrickContentTemplateSelector.BroadcastSendBlockingBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance controlFlow:XmlBroadcastWaitBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:BroadcastSendBlockingBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.RowDefinitions>
@@ -971,18 +943,27 @@
                   <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_BroadcastWait, Source={StaticResource LocalizedStrings}}" />
-                <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" ItemTemplate="{StaticResource ListBoxBroadcastItem}" PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" ItemsSource="{Binding SpriteEditorViewModel.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding BroadcastMessage, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10 10 0 10" />
-                <Button Grid.Row="1" Grid.Column="1" Width="150" Content="{Binding Resources.Brick_ButtonNew, Source={StaticResource LocalizedStrings}}" Command="{Binding SpriteEditorViewModel.AddBroadcastMessageCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" IsEnabled="{Binding IsRealObject}" />
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" 
+                           Text="{Binding Resources.Brick_BroadcastWait, Source={StaticResource LocalizedStrings}}" />
+                <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                                     ItemTemplate="{StaticResource ListBoxBroadcastItem}" 
+                                     PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" 
+                                     ItemsSource="{Binding SpriteEditorViewModel.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" 
+                                     SelectedItem="{Binding Message, Mode=TwoWay}" 
+                                     IsEnabled="{Binding IsAttached}" Margin="10 10 0 10" />
+                <Button Grid.Row="1" Grid.Column="1" Width="150" 
+                        Content="{Binding Resources.Brick_ButtonNew, Source={StaticResource LocalizedStrings}}" 
+                        Command="{Binding SpriteEditorViewModel.AddBroadcastMessageCommand, Source={StaticResource Locator}}" 
+                        CommandParameter="{Binding}" IsEnabled="{Binding IsAttached}" />
               </Grid>
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.BroadcastWaitBrick>
+      </sb:ScriptBrickContentTemplateSelector.BroadcastSendBlockingBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.IfLogicBeginBrick>
+      <sb:ScriptBrickContentTemplateSelector.IfBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance controlFlow:XmlIfLogicBeginBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:IfBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -994,8 +975,8 @@
                   <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                              Text="{Binding Resources.Brick_IfLogicBegin, Source={StaticResource LocalizedStrings}}"
                              Margin="10 10 0 10" FontSize="24" />
-                <formulas:FormulaButton Grid.Column="1" Formula="{Binding IfCondition, Mode=TwoWay}" 
-                                                 IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="1" Formula="{Binding Condition, Mode=TwoWay}" 
+                                                 IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                              Text="{Binding Resources.Brick_IfLogicBeginTrue, Source={StaticResource LocalizedStrings}}"
                              Margin="10 10 0 10" FontSize="24" />
@@ -1003,11 +984,11 @@
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.IfLogicBeginBrick>
+      </sb:ScriptBrickContentTemplateSelector.IfBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.IfLogicElseBrick>
+      <sb:ScriptBrickContentTemplateSelector.ElseBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance controlFlow:XmlIfLogicElseBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:ElseBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                   <TextBlock VerticalAlignment="Center" 
@@ -1017,11 +998,11 @@
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.IfLogicElseBrick>
+      </sb:ScriptBrickContentTemplateSelector.ElseBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.IfLogicEndBrick>
+      <sb:ScriptBrickContentTemplateSelector.EndIfBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance controlFlow:XmlIfLogicEndBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:EndIfBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <TextBlock VerticalAlignment="Center" 
@@ -1031,13 +1012,13 @@
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.IfLogicEndBrick>
+      </sb:ScriptBrickContentTemplateSelector.EndIfBrick>
 
       <!--####### Variable Bricks ####################################################################################################################################################################################-->
       
       <sb:ScriptBrickContentTemplateSelector.SetVariableBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance variables:XmlSetVariableBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:SetVariableBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.VariableBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <!--<Grid>
                 <Grid.RowDefinitions>
@@ -1054,14 +1035,14 @@
                            Text="{Binding Resources.Brick_SetVariable, Source={StaticResource LocalizedStrings}}"
                            Margin="10 10 0 10" FontSize="24" />
 
-                  <formulas:VariableButton MinWidth="120" MaxWidth="300" Variable="{Binding UserVariable}" IsEnabled="{Binding IsRealObject}"/>
+                  <formulas:VariableButton MinWidth="120" MaxWidth="300" Variable="{Binding UserVariable}" IsEnabled="{Binding IsAttached}"/>
                 </StackPanel>
                 
 
                   <TextBlock Text="{Binding Resources.Brick_SetVariableTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
                 <formulas:FormulaButton Formula="{Binding VariableFormula, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                                               IsEnabled="{Binding IsAttached}"/>
               </Grid>-->
               <Grid>
                 <Grid.RowDefinitions>
@@ -1078,13 +1059,13 @@
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                              Text="{Binding Resources.Brick_SetVariable, Source={StaticResource LocalizedStrings}}"
                              Margin="10 10 0 10" FontSize="24" />
-                <formulas:VariableButton Grid.Column="2" Grid.Row="0" MinWidth="120" MaxWidth="300" Variable="{Binding UserVariable}" IsEnabled="{Binding IsRealObject}"/>
+                <formulas:VariableButton Grid.Column="2" Grid.Row="0" MinWidth="120" MaxWidth="300" Variable="{Binding Variable}" IsEnabled="{Binding IsAttached}"/>
 
                 <TextBlock Grid.Column="0" Grid.Row="1"
                            Text="{Binding Resources.Brick_SetVariableTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <formulas:FormulaButton Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="1" Formula="{Binding VariableFormula, Mode=TwoWay}" 
-                                                 IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="2" Grid.Row="1" Formula="{Binding Value, Mode=TwoWay}" 
+                                                 IsEnabled="{Binding IsAttached}"/>
               </Grid>
             </rlb:NormalBrick>
           </Grid>
@@ -1093,7 +1074,7 @@
 
       <sb:ScriptBrickContentTemplateSelector.ChangeVariableBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance variables:XmlChangeVariableBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:ChangeVariableBrick}">
             <rlb:NormalBrick Background="{Binding StaticTheme.VariableBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <Grid>
                 <Grid.RowDefinitions>
@@ -1110,13 +1091,13 @@
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                              Text="{Binding Resources.Brick_ChangeVariable, Source={StaticResource LocalizedStrings}}"
                              Margin="10 10 0 10" FontSize="24" />
-                <formulas:VariableButton Grid.Column="2" Grid.Row="0" MinWidth="120" MaxWidth="300" Variable="{Binding UserVariable}" IsEnabled="{Binding IsRealObject}"/>
+                <formulas:VariableButton Grid.Column="2" Grid.Row="0" MinWidth="120" MaxWidth="300" Variable="{Binding Variable}" IsEnabled="{Binding IsAttached}"/>
 
                 <TextBlock Grid.Column="0" Grid.Row="1"
                            Text="{Binding Resources.Brick_ChangeVariableBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                <formulas:FormulaButton Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="1" Formula="{Binding VariableFormula, Mode=TwoWay}" 
-                                                 IsEnabled="{Binding IsRealObject}"/>
+                <formulas:FormulaButton Grid.Column="2" Grid.Row="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
+                                                 IsEnabled="{Binding IsAttached}"/>
               </Grid>
             </rlb:NormalBrick>
           </Grid>

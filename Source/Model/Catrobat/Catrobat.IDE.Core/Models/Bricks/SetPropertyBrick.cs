@@ -156,6 +156,10 @@ namespace Catrobat.IDE.Core.Models.Bricks
         #endregion
     }
 
+    public partial class BounceBrick : SetPropertyBrick
+    {
+    }
+
     public partial class SetSizeBrick : SetPropertyBrick
     {
         #region Properties
@@ -367,6 +371,14 @@ namespace Catrobat.IDE.Core.Models.Bricks
         }
 
         #endregion
+    }
+
+    public partial class ResetGraphicPropertiesBrick : SetPropertyBrick
+    {
+    }
+
+    public partial class BringToFrontBrick : SetPropertyBrick
+    {
     }
 
     #endregion

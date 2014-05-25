@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     var designContext = (CatrobatContextDesign)_context;
                     LocalProjects = designContext.LocalProjects;
                     OnlineProjects = designContext.OnlineProjects;
-                    CurrentProject = designContext.CurrentProject2;
+                    CurrentProject = designContext.CurrentProject;
                 }
 
                 RaisePropertyChanged(() => Context);

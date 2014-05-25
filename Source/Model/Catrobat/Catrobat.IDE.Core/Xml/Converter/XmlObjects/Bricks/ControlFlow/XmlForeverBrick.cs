@@ -11,7 +11,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             var result = new ForeverBrick();
             context.Bricks[this] = result;
-            result.End = (EndForeverBrick) LoopEndBrick.ToModel(context);
+            result.End = LoopEndBrick == null ? null : (EndForeverBrick) LoopEndBrick.ToModel(context);
             return result;
         }
     }

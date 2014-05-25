@@ -49,12 +49,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             return newSoundList;
         }
 
-        public async Task Delete()
-        {
-            foreach (XmlSound sound in Sounds)
-                await sound.Delete();
-        }
-
         public override bool Equals(XmlObject other)
         {
             var otherSoundList = other as XmlSoundList;

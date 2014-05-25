@@ -1,329 +1,211 @@
 ﻿<ResourceDictionary
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:formulaTree="clr-namespace:Catrobat.IDE.Core.Models.Formulas.FormulaTree;assembly=Catrobat.IDE.Core"
   xmlns:ui="clr-namespace:Catrobat.IDE.Core.UI;assembly=Catrobat.IDE.Core"
-  xmlns:xml1="clr-namespace:Catrobat.IDE.Core.Xml;assembly=Catrobat.IDE.Core"
-  xmlns:properties="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;assembly=Catrobat.IDE.Core"
-  xmlns:formulas="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Formulas;assembly=Catrobat.IDE.Core"
-  xmlns:sounds="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds;assembly=Catrobat.IDE.Core"
-  xmlns:costumes="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes;assembly=Catrobat.IDE.Core"
-  xmlns:scripts="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Scripts;assembly=Catrobat.IDE.Core"
-  xmlns:controlFlow="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;assembly=Catrobat.IDE.Core"
-  xmlns:variables="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;assembly=Catrobat.IDE.Core"
-  xmlns:bricks="clr-namespace:Catrobat.IDE.Core.Xml.XmlObjects.Bricks;assembly=Catrobat.IDE.Core"
   xmlns:models="clr-namespace:Catrobat.IDE.Core.Models;assembly=Catrobat.IDE.Core"
-  xmlns:formulaTree1="clr-namespace:Catrobat.IDE.Core.Formulas.FormulaTree;assembly=Catrobat.IDE.Core">
+  xmlns:tree="clr-namespace:Catrobat.IDE.Core.Models.Formulas.Tree;assembly=Catrobat.IDE.Core"
+  xmlns:bricks="clr-namespace:Catrobat.IDE.Core.Models.Bricks;assembly=Catrobat.IDE.Core"
+  xmlns:scripts="clr-namespace:Catrobat.IDE.Core.Models.Scripts;assembly=Catrobat.IDE.Core">
 
   <ui:BrickCollection x:Key="ScriptBrickAddDataMovement">
-    <properties:XmlPlaceAtBrick IsRealObject="False">
-      <properties:XmlPlaceAtBrick.XPosition>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="0" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlPlaceAtBrick.XPosition>
-      <properties:XmlPlaceAtBrick.YPosition>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="0" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlPlaceAtBrick.YPosition>
-    </properties:XmlPlaceAtBrick>
+    <bricks:SetPositionBrick IsAttached="False">
+      <bricks:SetPositionBrick.ValueX>
+        <tree:FormulaNodeNumber Value="0" />
+      </bricks:SetPositionBrick.ValueX>
+      <bricks:SetPositionBrick.ValueY>
+        <tree:FormulaNodeNumber Value="0" />
+      </bricks:SetPositionBrick.ValueY>
+    </bricks:SetPositionBrick>
     
-    <properties:XmlSetXBrick IsRealObject="False">
-      <properties:XmlSetXBrick.XPosition>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="0" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlSetXBrick.XPosition>
-    </properties:XmlSetXBrick>
+    <bricks:SetPositionXBrick IsAttached="False">
+      <bricks:SetPositionXBrick.Value>
+        <tree:FormulaNodeNumber Value="0" />
+      </bricks:SetPositionXBrick.Value>
+    </bricks:SetPositionXBrick>
     
-    <properties:XmlSetYBrick IsRealObject="False">
-      <properties:XmlSetYBrick.YPosition>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="0" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlSetYBrick.YPosition>
-    </properties:XmlSetYBrick>
+    <bricks:SetPositionYBrick IsAttached="False">
+      <bricks:SetPositionYBrick.Value>
+        <tree:FormulaNodeNumber Value="0" />
+      </bricks:SetPositionYBrick.Value>
+    </bricks:SetPositionYBrick>
     
-    <properties:XmlChangeXByBrick IsRealObject="False">
-      <properties:XmlChangeXByBrick.XMovement>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="0" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlChangeXByBrick.XMovement>
-    </properties:XmlChangeXByBrick>
+    <bricks:ChangePositionXBrick IsAttached="False">
+      <bricks:ChangePositionXBrick.RelativeValue>
+        <tree:FormulaNodeNumber Value="0" />
+      </bricks:ChangePositionXBrick.RelativeValue>
+    </bricks:ChangePositionXBrick>
     
-    <properties:XmlChangeYByBrick IsRealObject="False">
-      <properties:XmlChangeYByBrick.YMovement>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="0" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlChangeYByBrick.YMovement>
-    </properties:XmlChangeYByBrick>
+    <bricks:ChangePositionYBrick IsAttached="False">
+      <bricks:ChangePositionYBrick.RelativeValue>
+        <tree:FormulaNodeNumber Value="0" />
+      </bricks:ChangePositionYBrick.RelativeValue>
+    </bricks:ChangePositionYBrick>
     
-    <properties:XmlIfOnEdgeBounceBrick IsRealObject="False"></properties:XmlIfOnEdgeBounceBrick>
+    <bricks:BounceBrick IsAttached="False"></bricks:BounceBrick>
     
-    <properties:XmlMoveNStepsBrick IsRealObject="False">
-      <properties:XmlMoveNStepsBrick.Steps>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="1" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlMoveNStepsBrick.Steps>
-    </properties:XmlMoveNStepsBrick>
+    <bricks:MoveBrick IsAttached="False">
+      <bricks:MoveBrick.Steps>
+        <tree:FormulaNodeNumber Value="1" />
+      </bricks:MoveBrick.Steps>
+    </bricks:MoveBrick>
     
-    <properties:XmlTurnLeftBrick IsRealObject="False">
-      <properties:XmlTurnLeftBrick.Degrees>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="15" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlTurnLeftBrick.Degrees>
-    </properties:XmlTurnLeftBrick>
+    <bricks:TurnLeftBrick IsAttached="False">
+      <bricks:TurnLeftBrick.RelativeValue>
+        <tree:FormulaNodeNumber Value="15" />
+      </bricks:TurnLeftBrick.RelativeValue>
+    </bricks:TurnLeftBrick>
     
-    <properties:XmlTurnRightBrick IsRealObject="False">
-      <properties:XmlTurnRightBrick.Degrees>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="15" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlTurnRightBrick.Degrees>
-    </properties:XmlTurnRightBrick>
+    <bricks:TurnRightBrick IsAttached="False">
+      <bricks:TurnRightBrick.RelativeValue>
+        <tree:FormulaNodeNumber Value="15" />
+      </bricks:TurnRightBrick.RelativeValue>
+    </bricks:TurnRightBrick>
     
-    <properties:XmlPointInDirectionBrick IsRealObject="False">
-      <properties:XmlPointInDirectionBrick.Degrees>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="90" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlPointInDirectionBrick.Degrees>
-    </properties:XmlPointInDirectionBrick>
+    <bricks:SetRotationBrick IsAttached="False">
+      <bricks:SetRotationBrick.Value>
+        <tree:FormulaNodeNumber Value="90" />
+      </bricks:SetRotationBrick.Value>
+    </bricks:SetRotationBrick>
     
-    <properties:XmlPointToBrick IsRealObject="False"></properties:XmlPointToBrick>
+    <bricks:LookAtBrick IsAttached="False"></bricks:LookAtBrick>
     
-    <properties:XmlGlideToBrick IsRealObject="False">
-      <properties:XmlGlideToBrick.DurationInSeconds>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="3" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlGlideToBrick.DurationInSeconds>
-      
-      <properties:XmlGlideToBrick.XDestination>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="0" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlGlideToBrick.XDestination>
-      
-      <properties:XmlGlideToBrick.YDestination>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="0" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlGlideToBrick.YDestination>
-    </properties:XmlGlideToBrick>
+    <bricks:AnimatePositionBrick IsAttached="False">
+      <bricks:AnimatePositionBrick.Duration>
+        <tree:FormulaNodeNumber Value="3" />
+      </bricks:AnimatePositionBrick.Duration>
+      <bricks:AnimatePositionBrick.ToX>
+        <tree:FormulaNodeNumber Value="0" />
+      </bricks:AnimatePositionBrick.ToX>
+      <bricks:AnimatePositionBrick.ToY>
+        <tree:FormulaNodeNumber Value="0" />
+      </bricks:AnimatePositionBrick.ToY>
+    </bricks:AnimatePositionBrick>
     
-    <properties:XmlGoNStepsBackBrick IsRealObject="False">
-      <properties:XmlGoNStepsBackBrick.Steps>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="1" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlGoNStepsBackBrick.Steps>
-    </properties:XmlGoNStepsBackBrick>
+    <bricks:DecreaseZOrderBrick IsAttached="False">
+      <bricks:DecreaseZOrderBrick.RelativeValue>
+        <tree:FormulaNodeNumber Value="1" />
+      </bricks:DecreaseZOrderBrick.RelativeValue>
+    </bricks:DecreaseZOrderBrick>
     
-    <properties:XmlComeToFrontBrick IsRealObject="False"></properties:XmlComeToFrontBrick>
+    <bricks:BringToFrontBrick IsAttached="False"></bricks:BringToFrontBrick>
 
     <models:EmptyDummyBrick/>
     
   </ui:BrickCollection>
 
   <ui:BrickCollection x:Key="ScriptBrickAddDataSound">
-    <sounds:XmlPlaySoundBrick IsRealObject="False"></sounds:XmlPlaySoundBrick>
-    <sounds:XmlStopAllSoundsBrick IsRealObject="False"></sounds:XmlStopAllSoundsBrick>
+    <bricks:PlaySoundBrick IsAttached="False"></bricks:PlaySoundBrick>
+    <bricks:StopSoundsBrick IsAttached="False"></bricks:StopSoundsBrick>
     
-    <sounds:XmlSetVolumeToBrick IsRealObject="False">
-      <sounds:XmlSetVolumeToBrick.Volume>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="100" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </sounds:XmlSetVolumeToBrick.Volume>
-    </sounds:XmlSetVolumeToBrick>
+    <bricks:SetVolumeBrick IsAttached="False">
+      <bricks:SetVolumeBrick.Percentage>
+        <tree:FormulaNodeNumber Value="100" />
+      </bricks:SetVolumeBrick.Percentage>
+    </bricks:SetVolumeBrick>
     
-    <sounds:XmlChangeVolumeByBrick IsRealObject="False">
-      <sounds:XmlChangeVolumeByBrick.Volume>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="100" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </sounds:XmlChangeVolumeByBrick.Volume>
-    </sounds:XmlChangeVolumeByBrick>
+    <bricks:ChangeVolumeBrick IsAttached="False">
+      <bricks:ChangeVolumeBrick.RelativePercentage>
+        <tree:FormulaNodeNumber Value="100" />
+      </bricks:ChangeVolumeBrick.RelativePercentage>
+    </bricks:ChangeVolumeBrick>
     
-    <sounds:XmlSpeakBrick Text="" IsRealObject="False"></sounds:XmlSpeakBrick>
+    <bricks:SpeakBrick Value="" IsAttached="False"></bricks:SpeakBrick>
 
     <models:EmptyDummyBrick/>
     
   </ui:BrickCollection>
   
   <ui:BrickCollection x:Key="ScriptBrickAddDataLook">
-    <costumes:XmlSetCostumeBrick IsRealObject="False"></costumes:XmlSetCostumeBrick>
-    <costumes:XmlNextCostumeBrick IsRealObject="False"></costumes:XmlNextCostumeBrick>
+    <bricks:SetCostumeBrick IsAttached="False"></bricks:SetCostumeBrick>
+    <bricks:NextCostumeBrick IsAttached="False"></bricks:NextCostumeBrick>
     
-    <properties:XmlSetSizeToBrick IsRealObject="False">
-      <properties:XmlSetSizeToBrick.Size>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="100" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlSetSizeToBrick.Size>
-    </properties:XmlSetSizeToBrick>
+    <bricks:SetSizeBrick IsAttached="False">
+      <bricks:SetSizeBrick.Percentage>
+        <tree:FormulaNodeNumber Value="100" />
+      </bricks:SetSizeBrick.Percentage>
+    </bricks:SetSizeBrick>
     
-    <properties:XmlChangeSizeByNBrick IsRealObject="False">
-      <properties:XmlChangeSizeByNBrick.Size>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="20" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlChangeSizeByNBrick.Size>
-    </properties:XmlChangeSizeByNBrick>
+    <bricks:ChangeSizeBrick IsAttached="False">
+      <bricks:ChangeSizeBrick.RelativePercentage>
+        <tree:FormulaNodeNumber Value="20" />
+      </bricks:ChangeSizeBrick.RelativePercentage>
+    </bricks:ChangeSizeBrick>
     
-    <properties:XmlHideBrick IsRealObject="False"></properties:XmlHideBrick>
-    <properties:XmlShowBrick IsRealObject="False"></properties:XmlShowBrick>
+    <bricks:HideBrick IsAttached="False"></bricks:HideBrick>
+    <bricks:ShowBrick IsAttached="False"></bricks:ShowBrick>
     
-    <properties:XmlSetGhostEffectBrick IsRealObject="False">
-      <properties:XmlSetGhostEffectBrick.Transparency>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="0" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlSetGhostEffectBrick.Transparency>
-    </properties:XmlSetGhostEffectBrick>
+    <bricks:SetTransparencyBrick IsAttached="False">
+      <bricks:SetTransparencyBrick.Percentage>
+        <tree:FormulaNodeNumber Value="0" />
+      </bricks:SetTransparencyBrick.Percentage>
+    </bricks:SetTransparencyBrick>
     
-    <properties:XmlChangeGhostEffectBrick IsRealObject="False">
-      <properties:XmlChangeGhostEffectBrick.ChangeGhostEffect>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="25" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlChangeGhostEffectBrick.ChangeGhostEffect>
-    </properties:XmlChangeGhostEffectBrick>
+    <bricks:ChangeTransparencyBrick IsAttached="False">
+      <bricks:ChangeTransparencyBrick.RelativePercentage>
+        <tree:FormulaNodeNumber Value="25" />
+      </bricks:ChangeTransparencyBrick.RelativePercentage>
+    </bricks:ChangeTransparencyBrick>
     
-    <properties:XmlSetBrightnessBrick IsRealObject="False">
-      <properties:XmlSetBrightnessBrick.Brightness>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="0" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlSetBrightnessBrick.Brightness>
-    </properties:XmlSetBrightnessBrick>
+    <bricks:SetBrightnessBrick IsAttached="False">
+      <bricks:SetBrightnessBrick.Percentage>
+        <tree:FormulaNodeNumber Value="0" />
+      </bricks:SetBrightnessBrick.Percentage>
+    </bricks:SetBrightnessBrick>
     
-    <properties:XmlChangeBrightnessBrick IsRealObject="False">
-      <properties:XmlChangeBrightnessBrick.ChangeBrightness>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="25" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </properties:XmlChangeBrightnessBrick.ChangeBrightness>
-    </properties:XmlChangeBrightnessBrick>
+    <bricks:ChangeBrightnessBrick IsAttached="False">
+      <bricks:ChangeBrightnessBrick.RelativePercentage>
+        <tree:FormulaNodeNumber Value="25" />
+      </bricks:ChangeBrightnessBrick.RelativePercentage>
+    </bricks:ChangeBrightnessBrick>
     
-    <properties:XmlClearGraphicEffectBrick IsRealObject="False"></properties:XmlClearGraphicEffectBrick>
+    <bricks:ResetGraphicPropertiesBrick IsAttached="False"></bricks:ResetGraphicPropertiesBrick>
 
     <models:EmptyDummyBrick/>
   </ui:BrickCollection>
 
   <ui:BrickCollection x:Key="ScriptBrickAddDataControl">
-    <scripts:XmlStartScript IsRealObject="False"></scripts:XmlStartScript>
-    <scripts:XmlWhenScript Action="Tapped" IsRealObject="False"></scripts:XmlWhenScript>
+    <scripts:StartScript IsAttached="False"></scripts:StartScript>
+    <scripts:TappedScript IsAttached="False"></scripts:TappedScript>
     
-    <controlFlow:XmlWaitBrick IsRealObject="False">
-      <controlFlow:XmlWaitBrick.TimeToWaitInSeconds>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="1" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </controlFlow:XmlWaitBrick.TimeToWaitInSeconds>
-    </controlFlow:XmlWaitBrick>
+    <bricks:DelayBrick IsAttached="False">
+      <bricks:DelayBrick.Duration>
+        <tree:FormulaNodeNumber Value="1" />
+      </bricks:DelayBrick.Duration>
+    </bricks:DelayBrick>
     
-    <scripts:XmlBroadcastScript IsRealObject="False"></scripts:XmlBroadcastScript>
-    <controlFlow:XmlBroadcastBrick IsRealObject="False"></controlFlow:XmlBroadcastBrick>
-    <controlFlow:XmlBroadcastWaitBrick IsRealObject="False"></controlFlow:XmlBroadcastWaitBrick>
-    <bricks:XmlNoteBrick Note="" IsRealObject="False"></bricks:XmlNoteBrick>
-    <controlFlow:XmlForeverBrick IsRealObject="False"></controlFlow:XmlForeverBrick>
+    <scripts:BroadcastReceivedScript IsAttached="False"></scripts:BroadcastReceivedScript>
+    <bricks:BroadcastSendBrick IsAttached="False"></bricks:BroadcastSendBrick>
+    <bricks:BroadcastSendBlockingBrick IsAttached="False"></bricks:BroadcastSendBlockingBrick>
+    <bricks:CommentBrick Value="" IsAttached="False"></bricks:CommentBrick>
+    <bricks:ForeverBrick IsAttached="False"></bricks:ForeverBrick>
     
-    <controlFlow:XmlRepeatBrick IsRealObject="False">
-      <controlFlow:XmlRepeatBrick.TimesToRepeat>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="3" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </controlFlow:XmlRepeatBrick.TimesToRepeat>
-    </controlFlow:XmlRepeatBrick>
+    <bricks:RepeatBrick IsAttached="False">
+      <bricks:RepeatBrick.Count>
+        <tree:FormulaNodeNumber Value="3" />
+      </bricks:RepeatBrick.Count>
+    </bricks:RepeatBrick>
 
-    <controlFlow:XmlIfLogicBeginBrick IsRealObject="False">
-      <controlFlow:XmlIfLogicBeginBrick.IfCondition>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="1" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </controlFlow:XmlIfLogicBeginBrick.IfCondition>
-    </controlFlow:XmlIfLogicBeginBrick>
+    <bricks:IfBrick IsAttached="False">
+      <bricks:IfBrick.Condition>
+        <tree:FormulaNodeTrue />
+      </bricks:IfBrick.Condition>
+    </bricks:IfBrick>
     
     <models:EmptyDummyBrick/>
   </ui:BrickCollection>
 
   <ui:BrickCollection x:Key="ScriptBrickAddDataVariables">
-    <variables:XmlSetVariableBrick IsRealObject="False">
-      <variables:XmlSetVariableBrick.VariableFormula>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="0" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </variables:XmlSetVariableBrick.VariableFormula>
-    </variables:XmlSetVariableBrick>
+    <bricks:SetVariableBrick IsAttached="False">
+      <bricks:SetVariableBrick.Value>
+        <tree:FormulaNodeNumber Value="0" />
+      </bricks:SetVariableBrick.Value>
+    </bricks:SetVariableBrick>
 
-    <variables:XmlChangeVariableBrick IsRealObject="False">
-      <variables:XmlChangeVariableBrick.VariableFormula>
-        <formulas:XmlFormula>
-          <formulas:XmlFormula.FormulaTree2>
-            <formulaTree1:FormulaNodeNumber Value="0" />
-          </formulas:XmlFormula.FormulaTree2>
-        </formulas:XmlFormula>
-      </variables:XmlChangeVariableBrick.VariableFormula>
-    </variables:XmlChangeVariableBrick>
+    <bricks:ChangeVariableBrick IsAttached="False">
+      <bricks:ChangeVariableBrick.RelativeValue>
+        <tree:FormulaNodeNumber Value="0" />
+      </bricks:ChangeVariableBrick.RelativeValue>
+    </bricks:ChangeVariableBrick>
     
     <models:EmptyDummyBrick/>
   </ui:BrickCollection>

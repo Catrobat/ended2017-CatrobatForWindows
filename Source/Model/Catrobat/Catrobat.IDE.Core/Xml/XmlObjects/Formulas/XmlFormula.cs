@@ -35,7 +35,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 
         internal override XElement CreateXml()
         {
-            return _formulaTree.CreateXml();
+            return (_formulaTree ?? new XmlFormulaTree()).CreateXml();
         }
 
         public XmlObject Copy()

@@ -11,8 +11,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             var result = new EndIfBrick();
             context.Bricks[this] = result;
-            result.Begin = (IfBrick) IfLogicBeginBrick.ToModel(context);
-            result.Else = (ElseBrick) IfLogicElseBrick.ToModel(context);
+            result.Begin = IfLogicBeginBrick == null ? null : (IfBrick) IfLogicBeginBrick.ToModel(context);
+            result.Else = IfLogicElseBrick == null ? null : (ElseBrick) IfLogicElseBrick.ToModel(context);
             return result;
         }
     }

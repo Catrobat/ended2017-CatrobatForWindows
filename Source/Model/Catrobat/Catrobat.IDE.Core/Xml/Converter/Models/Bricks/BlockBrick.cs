@@ -1,6 +1,7 @@
 ﻿using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
+using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Context = Catrobat.IDE.Core.Xml.Converter.XmlProjectConverter.ConvertBackContext;
 
 // ReSharper disable once CheckNamespace
@@ -34,7 +35,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             var result =  new XmlForeverBrick();
             context.Bricks[this] = result;
-            result.LoopEndBrick = (XmlForeverLoopEndBrick) End.ToXmlObject(context);
+            result.LoopEndBrick = End == null ? null : (XmlForeverLoopEndBrick) End.ToXmlObject(context);
             return result;
         }
     }
@@ -45,7 +46,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             var result = new XmlForeverLoopEndBrick();
             context.Bricks[this] = result;
-            result.LoopBeginBrick = (XmlForeverBrick) Begin.ToXmlObject(context);
+            result.LoopBeginBrick = Begin == null ? null : (XmlForeverBrick) Begin.ToXmlObject(context);
             return result;
         }
     }
@@ -56,10 +57,10 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             var result = new XmlRepeatBrick
             {
-                TimesToRepeat = Count == null ? null : Count.ToXmlObject()
+                TimesToRepeat = Count == null ? new XmlFormula() : Count.ToXmlObject()
             };
             context.Bricks[this] = result;
-            result.LoopEndBrick = (XmlRepeatLoopEndBrick) End.ToXmlObject(context);
+            result.LoopEndBrick = End == null ? null : (XmlRepeatLoopEndBrick) End.ToXmlObject(context);
             return result;
         }
     }
@@ -70,7 +71,7 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             var result = new XmlRepeatLoopEndBrick();
             context.Bricks[this] = result;
-            result.LoopBeginBrick = (XmlRepeatBrick) Begin.ToXmlObject(context);
+            result.LoopBeginBrick = Begin == null ? null : (XmlRepeatBrick) Begin.ToXmlObject(context);
             return result;
         }
     }
@@ -81,11 +82,11 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             var result = new XmlIfLogicBeginBrick
             {
-                IfCondition = Condition == null ? null : Condition.ToXmlObject()
+                IfCondition = Condition == null ? new XmlFormula() : Condition.ToXmlObject()
             };
             context.Bricks[this] = result;
-            result.IfLogicElseBrick = (XmlIfLogicElseBrick) Else.ToXmlObject(context);
-            result.IfLogicEndBrick = (XmlIfLogicEndBrick) End.ToXmlObject(context);
+            result.IfLogicElseBrick = Else == null ? null : (XmlIfLogicElseBrick) Else.ToXmlObject(context);
+            result.IfLogicEndBrick = End == null ? null : (XmlIfLogicEndBrick) End.ToXmlObject(context);
             return result;
         }
     }
@@ -96,8 +97,8 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             var result = new XmlIfLogicElseBrick();
             context.Bricks[this] = result;
-            result.IfLogicBeginBrick = (XmlIfLogicBeginBrick) Begin.ToXmlObject(context);
-            result.IfLogicEndBrick = (XmlIfLogicEndBrick) End.ToXmlObject(context);
+            result.IfLogicBeginBrick = Begin == null ? null : (XmlIfLogicBeginBrick) Begin.ToXmlObject(context);
+            result.IfLogicEndBrick = End == null ? null : (XmlIfLogicEndBrick) End.ToXmlObject(context);
             return result;
         }
     }
@@ -108,8 +109,8 @@ namespace Catrobat.IDE.Core.Models.Bricks
         {
             var result = new XmlIfLogicEndBrick();
             context.Bricks[this] = result;
-            result.IfLogicBeginBrick = (XmlIfLogicBeginBrick) Begin.ToXmlObject(context);
-            result.IfLogicElseBrick = (XmlIfLogicElseBrick) Else.ToXmlObject(context);
+            result.IfLogicBeginBrick = Begin == null ? null : (XmlIfLogicBeginBrick) Begin.ToXmlObject(context);
+            result.IfLogicElseBrick = Else == null ? null : (XmlIfLogicElseBrick) Else.ToXmlObject(context);
             return result;
         }
     }

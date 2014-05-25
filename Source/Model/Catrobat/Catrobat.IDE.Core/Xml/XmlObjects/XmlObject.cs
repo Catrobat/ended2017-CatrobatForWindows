@@ -10,19 +10,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
     public abstract class XmlObject : INotifyPropertyChanged, IEquatable<XmlObject>
     {
-        protected XmlObject()
-        {
-            IsRealObject = true;
-        }
-
-        public bool IsRealObject { get; set; }
-
-        public virtual bool IsReorderEnabled
-        {
-            get { return true; }
-        }
-
-
         internal abstract void LoadFromXml(XElement xRoot);
 
         internal abstract XElement CreateXml();
