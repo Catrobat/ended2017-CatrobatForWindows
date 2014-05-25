@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Catrobat.IDE.Core.Xml.Converter.VersionConverter
+namespace Catrobat.IDE.Core.Xml.VersionConverter
 {
     public class CatrobatVersionPair : IEquatable<CatrobatVersionPair>
     {

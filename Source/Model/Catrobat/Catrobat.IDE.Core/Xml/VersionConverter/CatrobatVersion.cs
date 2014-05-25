@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace Catrobat.IDE.Core.Xml.Converter.VersionConverter
+namespace Catrobat.IDE.Core.Xml.VersionConverter
 {
     public abstract class CatrobatVersion
     {

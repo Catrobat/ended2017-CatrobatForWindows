@@ -4,7 +4,7 @@ using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Xml.Converter;
-using Catrobat.IDE.Core.Xml.Converter.VersionConverter;
+using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Tests.Extensions;
 using Catrobat.IDE.Tests.Misc;

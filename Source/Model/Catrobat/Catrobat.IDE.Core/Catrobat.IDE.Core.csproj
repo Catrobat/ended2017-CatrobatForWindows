@@ -479,13 +479,13 @@
     <Compile Include="Utilities\MD5.cs" />
     <Compile Include="Utilities\UtilToken.cs" />
     <Compile Include="Utilities\XmlStringWriter.cs" />
-    <Compile Include="Xml\Converter\VersionConverter\CatrobatVersion.cs" />
-    <Compile Include="Xml\Converter\VersionConverter\CatrobatVersionConverter.cs" />
-    <Compile Include="Xml\Converter\VersionConverter\CatrobatVersionElementRenameEntry.cs" />
-    <Compile Include="Xml\Converter\VersionConverter\CatrobatVersionPair.cs" />
-    <Compile Include="Xml\Converter\VersionConverter\CatrobatVersionPropertyRenameEntry.cs" />
-    <Compile Include="Xml\Converter\VersionConverter\VersionConverterResult.cs" />
-    <Compile Include="Xml\Converter\VersionConverter\Versions\CatrobatVersion091ToWin091.cs" />
+    <Compile Include="Xml\VersionConverter\CatrobatVersion.cs" />
+    <Compile Include="Xml\VersionConverter\CatrobatVersionConverter.cs" />
+    <Compile Include="Xml\VersionConverter\CatrobatVersionElementRenameEntry.cs" />
+    <Compile Include="Xml\VersionConverter\CatrobatVersionPair.cs" />
+    <Compile Include="Xml\VersionConverter\CatrobatVersionPropertyRenameEntry.cs" />
+    <Compile Include="Xml\VersionConverter\VersionConverterResult.cs" />
+    <Compile Include="Xml\VersionConverter\Versions\CatrobatVersion091ToWin091.cs" />
     <Compile Include="Utilities\Helpers\XElementExtensions.cs" />
     <Compile Include="ViewModels\AsyncRelayCommand.cs" />
     <Compile Include="ViewModels\Editor\Costumes\ChangeCostumeViewModel.cs" />
@@ -580,15 +580,7 @@
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CatrobatObjects\Bricks\" />
-    <Folder Include="CatrobatObjects\Costumes\" />
-    <Folder Include="CatrobatObjects\Formulas\XmlFormula\" />
-    <Folder Include="CatrobatObjects\Scripts\" />
-    <Folder Include="CatrobatObjects\Sounds\" />
-    <Folder Include="CatrobatObjects\Variables\" />
-    <Folder Include="Content\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />
