@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Bricks;
-using Catrobat.IDE.Core.CatrobatObjects.Scripts;
+using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using GalaSoft.MvvmLight.Command;
@@ -15,14 +16,14 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Scripts
     public class AddNewScriptBrickViewModel : ViewModelBase
     {
 
-        #region private Members
+        #region Private Members
 
         private BrickCategory _selectedBrickCategory;
         private ScriptBrickCollection _receivedScriptBrickCollection;
 
         private BrickCollection _brickCollection;
         private int _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex;
-        private DataObject _selectedBrick;
+        private Model _selectedBrick;
         private bool _isAdding;
         private bool _isControlVisible;
         private bool _isLookVisible;
@@ -110,60 +111,69 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Scripts
 
         #region Actions
 
-        private void AddNewScriptBrickAction(DataObject dataObject)
+        private void AddNewScriptBrickAction(Model model)
         {
             lock (_receivedScriptBrickCollection)
             {
-                if (dataObject is EmptyDummyBrick)
+                if (model is EmptyDummyBrick)
                     return;
 
-
-                if (dataObject == null || _isAdding)
+                if (model == null || _isAdding)
                     return;
 
                 _isAdding = true;
 
-
-                if (dataObject is Brick)
-                    _selectedBrick = (dataObject as Brick).Copy();
-                else if (dataObject is Script)
-                    _selectedBrick = (dataObject as Script).Copy();
-
+                if (model is Brick)
+                    _selectedBrick = (model as Brick).Clone();
+                else if (model is Script)
+                    _selectedBrick = (model as Script).Clone();
 
                 _receivedScriptBrickCollection.AddScriptBrick(_selectedBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex);
 
-
-                if (_selectedBrick is LoopBeginBrick)
+                var foreverBrick = _selectedBrick as ForeverBrick;
+                if (foreverBrick != null)
                 {
-                    LoopEndBrick endBrick;
-                    if (_selectedBrick is ForeverBrick)
-                        endBrick = new ForeverLoopEndBrick { LoopBeginBrick = (LoopBeginBrick)_selectedBrick };
-                    else
-                        endBrick = new RepeatLoopEndBrick { LoopBeginBrick = (LoopBeginBrick)_selectedBrick };
+                    var endBrick = new EndForeverBrick
+                    {
+                        Begin = (ForeverBrick) _selectedBrick
+                    };
 
-                    ((LoopBeginBrick)_selectedBrick).LoopEndBrick = endBrick;
+                    foreverBrick.End = endBrick;
                     _receivedScriptBrickCollection.AddScriptBrick(endBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
                 }
 
-                if (_selectedBrick is IfLogicBeginBrick)
+                var repeatBrick = _selectedBrick as RepeatBrick;
+                if (repeatBrick != null)
                 {
-                    var elseBrick = new IfLogicElseBrick();
-                    var ifEndBrick = new IfLogicEndBrick();
+                    var endBrick = new EndRepeatBrick
+                    {
+                        Begin = (RepeatBrick)_selectedBrick
+                    };
 
-                    elseBrick.IfLogicBeginBrick = (IfLogicBeginBrick)_selectedBrick;
-                    elseBrick.IfLogicEndBrick = ifEndBrick;
-
-                    ifEndBrick.IfLogicBeginBrick = (IfLogicBeginBrick)_selectedBrick;
-                    ifEndBrick.IfLogicElseBrick = elseBrick;
-
-                    ((IfLogicBeginBrick)_selectedBrick).IfLogicElseBrick = elseBrick;
-                    ((IfLogicBeginBrick)_selectedBrick).IfLogicEndBrick = ifEndBrick;
-
-                    _receivedScriptBrickCollection.AddScriptBrick(elseBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
-                    _receivedScriptBrickCollection.AddScriptBrick(ifEndBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 2);
+                    repeatBrick.End = endBrick;
+                    _receivedScriptBrickCollection.AddScriptBrick(endBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
                 }
 
-                var message = new GenericMessage<DataObject>(_selectedBrick);
+                var ifBrick = _selectedBrick as IfBrick;
+                if (ifBrick != null)
+                {
+                    var elseBrick = new ElseBrick();
+                    var endBrick = new EndIfBrick();
+
+                    elseBrick.Begin = ifBrick;
+                    elseBrick.End = endBrick;
+
+                    endBrick.Begin = ifBrick;
+                    endBrick.Else = elseBrick;
+
+                    ifBrick.Else = elseBrick;
+                    ifBrick.End = endBrick;
+
+                    _receivedScriptBrickCollection.AddScriptBrick(elseBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
+                    _receivedScriptBrickCollection.AddScriptBrick(endBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 2);
+                }
+
+                var message = new GenericMessage<Model>(_selectedBrick);
                 Messenger.Default.Send(message, ViewModelMessagingToken.SelectedBrickListener);
 
 
@@ -183,13 +193,14 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Scripts
             var actionsToLoadAsync = new BrickCollection();
             var actionsToLoadImmediately = new BrickCollection();
 
-            int count = 0;
+            var count = 0;
             foreach (var action in actions)
             {
                 if (count <= 6)
                     actionsToLoadImmediately.Add(action);
                 else
                     actionsToLoadAsync.Add(action);
+                count++;
             }
 
             await Task.Run(() => ServiceLocator.DispatcherService.RunOnMainThread(() =>
@@ -233,7 +244,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Scripts
 
         public AddNewScriptBrickViewModel()
         {
-            AddNewScriptBrickCommand = new RelayCommand<DataObject>(AddNewScriptBrickAction);
+            AddNewScriptBrickCommand = new RelayCommand<Model>(AddNewScriptBrickAction);
             OnLoadBrickViewCommand = new RelayCommand(OnLoadBrickViewAction);
 
             Messenger.Default.Register<GenericMessage<List<Object>>>(this, ViewModelMessagingToken.ScriptBrickCollectionListener, ReceiveScriptBrickCollectionMessageAction);

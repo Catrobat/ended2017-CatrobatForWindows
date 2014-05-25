@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
 
@@ -10,13 +10,13 @@ namespace Catrobat.IDE.Phone.Controls.Formulas
     {
         #region DependencyProperties
 
-        public Formula Formula
+        public FormulaTree Formula
         {
-            get { return (Formula)GetValue(FormulaProperty); }
+            get { return (FormulaTree)GetValue(FormulaProperty); }
             set { SetValue(FormulaProperty, value); }
         }
 
-        public static readonly DependencyProperty FormulaProperty = DependencyProperty.Register("Formula", typeof(Formula), typeof(FormulaButton), new PropertyMetadata(null));
+        public static readonly DependencyProperty FormulaProperty = DependencyProperty.Register("Formula", typeof(FormulaTree), typeof(FormulaButton), new PropertyMetadata(null));
 
         #endregion
 
@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Phone.Controls.Formulas
         {
             var viewModel = ServiceLocator.ViewModelLocator.FormulaEditorViewModel;
             viewModel.Cleanup();
-            viewModel.Formula = Formula.FormulaTree2;
+            viewModel.Formula = Formula;
             SetFormulaBinding();
             ServiceLocator.NavigationService.NavigateTo(typeof(FormulaEditorViewModel));
         }
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Phone.Controls.Formulas
         {
             if (arg.PropertyName == "Formula")
             {
-                Formula.FormulaTree2 = ((FormulaEditorViewModel)sender).Formula;
+                Formula = ((FormulaEditorViewModel)sender).Formula;
             }
         }
 

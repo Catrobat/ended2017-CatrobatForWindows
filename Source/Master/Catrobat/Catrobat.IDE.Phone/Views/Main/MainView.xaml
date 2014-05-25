@@ -82,10 +82,10 @@
                Margin="0,0,0,0" HorizontalAlignment="Center" 
                Command="{Binding PlayCurrentProjectCommand}"/>
             <Grid>
-              <Image Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}" />
+              <Image Source="{Binding CurrentProject.Screenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}" />
               <Grid Background="#AA000000" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                 <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                     Text="{Binding CurrentProject.ProjectHeader.ProgramName}" 
+                     Text="{Binding CurrentProject.Name}" 
                      TextAlignment="Center" TextWrapping="Wrap" Margin="5 5 5 10" 
                      Style="{StaticResource PhoneTextTitle2Style}" />
               </Grid>
@@ -151,12 +151,12 @@
                   Source={StaticResource LocalizedStrings}}"
                   Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, 
                   Source={StaticResource Locator}}" 
-                  CommandParameter="{Binding CurrentProject.ProjectHeader.ProgramName}" />
+                  CommandParameter="{Binding CurrentProject.Name}" />
                 <toolkit:MenuItem Header="{Binding Resources.Main_DeleteProject, 
                   Source={StaticResource LocalizedStrings}}"
                   Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, 
                   Source={StaticResource Locator}}" 
-                  CommandParameter="{Binding CurrentProject.ProjectHeader.ProgramName}" />
+                  CommandParameter="{Binding CurrentProject.Name}" />
                 <toolkit:MenuItem Header="{Binding Resources.Main_ChangeProjectNameAndDescription, 
                   Source={StaticResource LocalizedStrings}}" 
                   Command="{Binding MainViewModel.RenameLocalProjectCommand, Mode=OneWay, 
@@ -194,7 +194,7 @@
                   <!--<codung4Fun:RoundButton Margin="0 10 0 0" PressedBrush="Black" Click="LocalProjectControl_OnLocalProjectsBackPressed"
                     ImageSource="/Content/Images/ApplicationBar/dark/appbar.back.rest.png"/>-->
                   <TextBlock Grid.Column="1" VerticalAlignment="Top" Margin="15,5,5,5" TextWrapping="Wrap" 
-                             Text="{Binding CurrentProject.ProjectHeader.ProgramName}" 
+                             Text="{Binding CurrentProject.Name}" 
                              Style="{StaticResource PhoneTextLargeStyle}"/>
                 </Grid>
 
@@ -230,7 +230,7 @@
                         Margin="0,0,0,0" HorizontalAlignment="Center" 
                         Command="{Binding PlayCurrentProjectCommand}"/>
                       <Grid>
-                        <Image Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, 
+                        <Image Source="{Binding CurrentProject.Screenshot.ImageSource, 
                           Converter={StaticResource ImageSquareConverter}}" />
                       </Grid>
                       <buttons:ScreenshotButton VerticalAlignment="Center" HorizontalAlignment="Center"        
@@ -309,7 +309,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
           </Grid.RowDefinitions>
-          <toolkit:PhoneTextBox Hint="{Binding Resources.Main_FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" ActionIcon="../../Resources/Application/Search.png" x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextChanged="FilterTextBox_TextChanged" Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
+          <toolkit:PhoneTextBox Hint="{Binding Resources.Main_FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" ActionIcon="/Content/Images/Application/Search.png" x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextChanged="FilterTextBox_TextChanged" Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
           <phone:LongListSelector Name="LongListSelectorOnlineProjects" Grid.Row="1" 
             ItemsSource="{Binding OnlineProjects}" 
             VerticalAlignment="Stretch" 

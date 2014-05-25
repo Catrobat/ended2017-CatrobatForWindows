@@ -1,5 +1,4 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;
@@ -70,7 +69,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private void SaveAction()
         {
-            VariableHelper.AddGlobalVariable(CurrentProject, new UserVariable { Name = UserVariableName });
+            VariableHelper.AddGlobalVariable(CurrentProject, new GlobalVariable { Name = UserVariableName });
             base.GoBackAction();
         }
 

@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
 using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Formulas;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Extensions;
 using Catrobat.IDE.Tests.Services;
@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         const int Iterations = 1000;
 
         private readonly Random _random = new Random();
-        private readonly FormulaTokenizer _tokenizer = new FormulaTokenizer(Enumerable.Empty<UserVariable>(), Enumerable.Empty<UserVariable>());
+        private readonly FormulaTokenizer _tokenizer = new FormulaTokenizer(Enumerable.Empty<LocalVariable>(), Enumerable.Empty<GlobalVariable>());
 
         [TestInitialize]
         public void TestClassInitialize()
@@ -196,14 +196,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestVariables()
         {
-            TestVariable(FormulaTokenFactory.CreateLocalVariableToken);
-            TestVariable(FormulaTokenFactory.CreateGlobalVariableToken);
+            TestVariable<LocalVariable>(FormulaTokenFactory.CreateLocalVariableToken);
+            TestVariable<GlobalVariable>(FormulaTokenFactory.CreateGlobalVariableToken);
         }
 
-        private void TestVariable(Func<UserVariable, ConstantFormulaTree> tokenCreator)
+        private void TestVariable<TVariable>(Func<TVariable, ConstantFormulaTree> tokenCreator) where TVariable : Variable, new()
         {
-            TestComplete(tokenCreator.Invoke(new UserVariable { Name = "TestVariable" }));
-            TestComplete(tokenCreator.Invoke(new UserVariable()));
+            TestComplete(tokenCreator.Invoke(new TVariable { Name = "TestVariable" }));
+            TestComplete(tokenCreator.Invoke(new TVariable()));
             TestComplete(tokenCreator.Invoke(null));
         }
 

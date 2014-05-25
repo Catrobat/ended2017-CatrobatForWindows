@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Formulas;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Services;
@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
     public class FormulaInterpreterSyntaxErrorTests
     {
         private readonly Random _random = new Random();
-        private readonly FormulaTokenizer _tokenizer = new FormulaTokenizer(Enumerable.Empty<UserVariable>(), Enumerable.Empty<UserVariable>());
+        private readonly FormulaTokenizer _tokenizer = new FormulaTokenizer(Enumerable.Empty<LocalVariable>(), Enumerable.Empty<GlobalVariable>());
 
         [TestInitialize]
         public void TestClassInitialize()

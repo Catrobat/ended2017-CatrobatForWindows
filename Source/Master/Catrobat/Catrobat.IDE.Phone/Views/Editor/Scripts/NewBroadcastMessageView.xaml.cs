@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
-using System.Windows.Navigation;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Scripts;
@@ -10,18 +10,18 @@ namespace Catrobat.IDE.Phone.Views.Editor.Scripts
 {
     public partial class NewBroadcastMessageView : PhoneApplicationPage
     {
-        private readonly NewBroadcastMessageViewModel _viewModel = 
-            ((ViewModelLocator)ServiceLocator.ViewModelLocator).NewBroadcastMessageViewModel;
+        private readonly NewBroadcastMessageViewModel _viewModel =
+            ((ViewModelLocator) ServiceLocator.ViewModelLocator).NewBroadcastMessageViewModel;
 
         public NewBroadcastMessageView()
         {
             InitializeComponent();
 
             Dispatcher.BeginInvoke(() =>
-                {
-                    TextBoxBroadcastMessage.Focus();
-                    TextBoxBroadcastMessage.SelectAll();
-                });
+            {
+                TextBoxBroadcastMessage.Focus();
+                TextBoxBroadcastMessage.SelectAll();
+            });
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)
@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Phone.Views.Editor.Scripts
 
         private void TextBoxBroadcastMessage_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _viewModel.BroadcastMessage = TextBoxBroadcastMessage.Text;
+            _viewModel.BroadcastMessage = new BroadcastMessage {Content = TextBoxBroadcastMessage.Text};
         }
     }
 }

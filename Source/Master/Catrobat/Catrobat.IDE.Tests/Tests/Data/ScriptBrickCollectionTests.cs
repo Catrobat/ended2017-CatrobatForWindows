@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Bricks;
-using Catrobat.IDE.Core.CatrobatObjects.Scripts;
+﻿using System.Collections;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Tests.Misc;
-using Catrobat.IDE.Tests.SampleData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Tests.Tests.Data
@@ -27,8 +25,8 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
 
             {
-                Sprite sprite = project.SpriteList.Sprites[0];
-                ScriptBrickCollection collection = new ScriptBrickCollection();
+                var sprite = project.Sprites[0];
+                var collection = new ScriptBrickCollection();
                 collection.Update(sprite);
                 IEnumerator enumerator = collection.GetEnumerator();
 
@@ -39,8 +37,8 @@ namespace Catrobat.IDE.Tests.Tests.Data
             }
 
             {
-                Sprite sprite = project.SpriteList.Sprites[1];
-                ScriptBrickCollection collection = new ScriptBrickCollection();
+                var sprite = project.Sprites[1];
+                var collection = new ScriptBrickCollection();
                 collection.Update(sprite);
                 IEnumerator enumerator = collection.GetEnumerator();
 
@@ -50,15 +48,15 @@ namespace Catrobat.IDE.Tests.Tests.Data
                 Assert.IsTrue(enumerator.Current is SetCostumeBrick);
 
                 enumerator.MoveNext();
-                Assert.IsTrue(enumerator.Current is WhenScript);
+                Assert.IsTrue(enumerator.Current is TappedScript);
                 enumerator.MoveNext();
                 Assert.IsTrue(enumerator.Current is SetCostumeBrick);
                 enumerator.MoveNext();
-                Assert.IsTrue(enumerator.Current is WaitBrick);
+                Assert.IsTrue(enumerator.Current is DelayBrick);
                 enumerator.MoveNext();
                 Assert.IsTrue(enumerator.Current is SetCostumeBrick);
                 enumerator.MoveNext();
-                Assert.IsTrue(enumerator.Current is WaitBrick);
+                Assert.IsTrue(enumerator.Current is DelayBrick);
                 enumerator.MoveNext();
                 Assert.IsTrue(enumerator.Current is SetCostumeBrick);
 
@@ -75,8 +73,8 @@ namespace Catrobat.IDE.Tests.Tests.Data
             ITestProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
             var project = projectGenerator.GenerateProject();
 
-            Sprite sprite = project.SpriteList.Sprites[1];
-            ScriptBrickCollection collection = new ScriptBrickCollection();
+            var sprite = project.Sprites[1];
+            var collection = new ScriptBrickCollection();
             collection.Update(sprite);
             IEnumerator enumerator = collection.GetEnumerator();
 
@@ -86,15 +84,15 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
 
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WhenScript);
+            Assert.IsTrue(enumerator.Current is TappedScript);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WaitBrick);
+            Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WaitBrick);
+            Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
 
@@ -109,13 +107,13 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
 
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WhenScript);
+            Assert.IsTrue(enumerator.Current is TappedScript);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WaitBrick);
+            Assert.IsTrue(enumerator.Current is DelayBrick);
 
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
@@ -129,14 +127,14 @@ namespace Catrobat.IDE.Tests.Tests.Data
             ITestProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
             var project = projectGenerator.GenerateProject();
 
-            Sprite sprite = project.SpriteList.Sprites[1];
-            ScriptBrickCollection collection = new ScriptBrickCollection();
+            var sprite = project.Sprites[1];
+            var collection = new ScriptBrickCollection();
             collection.Update(sprite);
             IEnumerator enumerator = collection.GetEnumerator();
 
-            Brick newBrick1 = new ChangeGhostEffectBrick();
+            Brick newBrick1 = new ChangeTransparencyBrick();
             collection.Insert(4, newBrick1);
-            Brick newBrick2 = new ChangeXByBrick();
+            Brick newBrick2 = new ChangePositionXBrick();
             collection.Insert(4, newBrick2);
 
             //Script newScript1 = new BroadcastScript(); // TODO: test adding scripts
@@ -148,19 +146,19 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
 
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WhenScript);
+            Assert.IsTrue(enumerator.Current is TappedScript);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is ChangeXByBrick);
+            Assert.IsTrue(enumerator.Current is ChangePositionXBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is ChangeGhostEffectBrick);
+            Assert.IsTrue(enumerator.Current is ChangeTransparencyBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WaitBrick);
+            Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WaitBrick);
+            Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
 
@@ -176,19 +174,19 @@ namespace Catrobat.IDE.Tests.Tests.Data
             ITestProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
             var project = projectGenerator.GenerateProject();
 
-            Sprite sprite = project.SpriteList.Sprites[1];
-            ScriptBrickCollection collection = new ScriptBrickCollection();
+            var sprite = project.Sprites[1];
+            var collection = new ScriptBrickCollection();
             collection.Update(sprite);
 
-            Script newScript1 = new BroadcastScript();
+            Script newScript1 = new BroadcastReceivedScript();
             collection.Add(newScript1);
 
-            Brick newBrick1 = new ChangeGhostEffectBrick();
+            Brick newBrick1 = new ChangeTransparencyBrick();
             collection.Add(newBrick1);
-            Brick newBrick2 = new ChangeXByBrick();
+            Brick newBrick2 = new ChangePositionXBrick();
             collection.Add(newBrick2);
 
-            Script newScript2 = new WhenScript();
+            Script newScript2 = new TappedScript();
             collection.Add(newScript2);
 
             IEnumerator enumerator = collection.GetEnumerator();
@@ -199,25 +197,25 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
 
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WhenScript);
+            Assert.IsTrue(enumerator.Current is TappedScript);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WaitBrick);
+            Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WaitBrick);
+            Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is BroadcastScript);
+            Assert.IsTrue(enumerator.Current is BroadcastReceivedScript);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is ChangeGhostEffectBrick);
+            Assert.IsTrue(enumerator.Current is ChangeTransparencyBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is ChangeXByBrick);
+            Assert.IsTrue(enumerator.Current is ChangePositionXBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WhenScript);
+            Assert.IsTrue(enumerator.Current is TappedScript);
 
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
@@ -231,8 +229,8 @@ namespace Catrobat.IDE.Tests.Tests.Data
             ITestProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
             var project = projectGenerator.GenerateProject();
 
-            Sprite sprite = project.SpriteList.Sprites[1];
-            ScriptBrickCollection collection = new ScriptBrickCollection();
+            var sprite = project.Sprites[1];
+            var collection = new ScriptBrickCollection();
             collection.Update(sprite);
             IEnumerator enumerator = collection.GetEnumerator();
 
@@ -240,10 +238,10 @@ namespace Catrobat.IDE.Tests.Tests.Data
                 if (!(enumerator.Current is EmptyDummyBrick))
                     Assert.IsTrue(collection.Contains(enumerator.Current));
 
-            Brick notContainedBrick = new BroadcastBrick();
+            Brick notContainedBrick = new BroadcastSendBrick();
             Assert.IsFalse(collection.Contains(notContainedBrick));
 
-            Script notContainedScript = new BroadcastScript();
+            Script notContainedScript = new BroadcastReceivedScript();
             Assert.IsFalse(collection.Contains(notContainedScript));
         }
 
@@ -253,12 +251,12 @@ namespace Catrobat.IDE.Tests.Tests.Data
             ITestProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
             var project = projectGenerator.GenerateProject();
 
-            Sprite sprite = project.SpriteList.Sprites[1];
-            ScriptBrickCollection collection = new ScriptBrickCollection();
+            var sprite = project.Sprites[1];
+            var collection = new ScriptBrickCollection();
             collection.Update(sprite);
             IEnumerator enumerator = collection.GetEnumerator();
 
-            int referenceIndex = 0;
+            var referenceIndex = 0;
             while (enumerator.MoveNext())
             {
                 if (!(enumerator.Current is EmptyDummyBrick))
@@ -267,10 +265,10 @@ namespace Catrobat.IDE.Tests.Tests.Data
                 referenceIndex++;
             }
 
-            Brick notContainedBrick = new BroadcastBrick();
+            Brick notContainedBrick = new BroadcastSendBrick();
             Assert.AreEqual(-1, collection.IndexOf(notContainedBrick));
 
-            Script notContainedScript = new BroadcastScript();
+            Script notContainedScript = new BroadcastReceivedScript();
             Assert.AreEqual(-1, collection.IndexOf(notContainedScript));
         }
 
@@ -280,13 +278,13 @@ namespace Catrobat.IDE.Tests.Tests.Data
             ITestProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
             var project = projectGenerator.GenerateProject();
 
-            Sprite sprite = project.SpriteList.Sprites[1];
-            ScriptBrickCollection collection = new ScriptBrickCollection();
+            var sprite = project.Sprites[1];
+            var collection = new ScriptBrickCollection();
             collection.Update(sprite);
 
 
             Brick insertedBrick1 = new ChangeBrightnessBrick();
-            Brick insertedBrick2 = new MoveNStepsBrick();
+            Brick insertedBrick2 = new MoveBrick();
             collection.AddScriptBrick(insertedBrick1, 4, 8);
             collection.AddScriptBrick(insertedBrick2, 1, 6);
 
@@ -301,22 +299,22 @@ namespace Catrobat.IDE.Tests.Tests.Data
             //Assert.IsTrue(enumerator.Current is MoveNStepsBrick);
 
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WhenScript);
+            Assert.IsTrue(enumerator.Current is TappedScript);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WaitBrick);
+            Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is WaitBrick);
+            Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is ChangeBrightnessBrick);
 
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is MoveNStepsBrick);
+            Assert.IsTrue(enumerator.Current is MoveBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
 
