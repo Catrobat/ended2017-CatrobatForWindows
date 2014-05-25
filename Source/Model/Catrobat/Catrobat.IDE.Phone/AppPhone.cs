@@ -30,7 +30,7 @@ namespace Catrobat.IDE.Phone
             ServiceLocator.Register<PlayerLauncherServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ResourceLoaderFactoryPhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<StorageFactoryPhone>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<ServerCommunicationServicePhone>(TypeCreationMode.Lazy);
+            //ServiceLocator.Register<ServerCommunicationServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ImageSourceConversionServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ProjectImporterServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SoundPlayerServicePhone>(TypeCreationMode.Lazy);

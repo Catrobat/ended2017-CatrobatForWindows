@@ -13,7 +13,7 @@ namespace Catrobat.IDE.Core.Formulas.Editor
 {
     public class FormulaEditor : ViewModelBase
     {
- 
+
         #region Members
 
         private FormulaTree _formula;
@@ -24,8 +24,8 @@ namespace Catrobat.IDE.Core.Formulas.Editor
             {
                 _formula = value;
                 RaisePropertyChanged(() => Formula);
-                Tokens = _formula == null ? 
-                    new ObservableCollection<IFormulaToken>() : 
+                Tokens = _formula == null ?
+                    new ObservableCollection<IFormulaToken>() :
                     new ObservableCollection<IFormulaToken>(FormulaTokenizer.Tokenize(_formula));
             }
         }
@@ -116,7 +116,7 @@ namespace Catrobat.IDE.Core.Formulas.Editor
 
         public bool IsTokensEmpty
         {
-            get { return Tokens == null || Tokens.Count == 0;  }
+            get { return Tokens == null || Tokens.Count == 0; }
         }
 
         public bool CanUndo
@@ -154,8 +154,8 @@ namespace Catrobat.IDE.Core.Formulas.Editor
             PushUndo();
             var token = CreateToken(key, localVariable, globalVariable);
             return Insert((token is IFormulaFunction)
-                ? new[] {token, FormulaTokenFactory.CreateParenthesisToken(true)}
-                : new[] {token});
+                ? new[] { token, FormulaTokenFactory.CreateParenthesisToken(true) }
+                : new[] { token });
         }
 
         private bool Insert(IEnumerable<IFormulaToken> tokens)

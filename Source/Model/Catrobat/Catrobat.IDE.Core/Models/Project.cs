@@ -131,6 +131,7 @@ namespace Catrobat.IDE.Core.Models
 
         public async Task SetProgramNameAndRenameDirectory(string newProgramName)
         {
+            if (newProgramName == Name) return;
             using (var storage = StorageSystem.GetStorage())
             {
                 await storage.RenameDirectoryAsync(BasePath, newProgramName);
