@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Bricks;
-using Catrobat.IDE.Core.CatrobatObjects.Scripts;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.Scripts;
 
 namespace Catrobat.IDE.Core.UI
 {
@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Core.UI
                     return new ObservableCollection<Script>();
                 }
 
-                return _selectedSprite.Scripts.Scripts;
+                return _selectedSprite.Scripts;
             }
         }
         private Sprite _selectedSprite;
@@ -31,7 +31,7 @@ namespace Catrobat.IDE.Core.UI
 
         public int LastDeletedIndex { get; private set; }
 
-        public DataObject PreventIsertOfNext { get; set; }
+        public Model PreventIsertOfNext { get; set; }
 
         public void Update(Sprite selectedSprite)
         {
@@ -39,23 +39,23 @@ namespace Catrobat.IDE.Core.UI
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
-        public void AddScriptBrick(DataObject scriptBrick, int firstViewIndex, int lastViewIndex)
+        public void AddScriptBrick(Model scriptBrick, int firstViewIndex, int lastViewIndex)
         {
             //if (this.Count == lastViewIndex + 1 && GetAtIndex(lastViewIndex) is Script && )
             //{
             //  lastViewIndex++;
             //}
 
-            if (scriptBrick is Brick) // Add brick at last visible end of a script
+            if (scriptBrick is Brick) // Add brick at last visible end of a Script
             {
                 var brick = scriptBrick as Brick;
 
                 var scriptEndIndex = -1;
                 Script lastFullScript = null;
-                foreach (Script script in Scripts)
+                foreach (var script in Scripts)
                 {
                     var scriptBeginIndex = scriptEndIndex + 1;
-                    scriptEndIndex += script.Bricks.Bricks.Count + 1;
+                    scriptEndIndex += script.Bricks.Count + 1;
 
                     // what does that do?
                     //if (scriptEndIndex > lastViewIndex && scriptBeginIndex >= firstViewIndex)
@@ -75,12 +75,12 @@ namespace Catrobat.IDE.Core.UI
                     OnScriptAdded(startScript, IndexOf(startScript));
                 }
 
-                lastFullScript.Bricks.Bricks.Add(brick);
+                lastFullScript.Bricks.Add(brick);
 
                 //OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)); // TODO: make faster and use method below instead
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, scriptBrick, IndexOf(scriptBrick)));
             }
-            else if (scriptBrick is Script) // Add script at end of all
+            else if (scriptBrick is Script) // Add Script at end of all
             {
                 var script = scriptBrick as Script;
                 Scripts.Add(script);
@@ -141,7 +141,7 @@ namespace Catrobat.IDE.Core.UI
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, script, index));
 
             var brickIndex = index;
-            foreach (Brick brick in script.Bricks.Bricks)
+            foreach (var brick in script.Bricks)
             {
                 brickIndex++;
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, brick, brickIndex));
@@ -153,7 +153,7 @@ namespace Catrobat.IDE.Core.UI
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, script, index));
 
             var brickIndex = index;
-            foreach (Brick brick in script.Bricks.Bricks)
+            foreach (var brick in script.Bricks)
             {
                 //brickIndex++;
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, brick, brickIndex));
@@ -166,7 +166,7 @@ namespace Catrobat.IDE.Core.UI
             Brick brickToRemove = null;
 
             var count = 0;
-            foreach (Script script in Scripts)
+            foreach (var script in Scripts)
             {
                 if (count == index)
                 {
@@ -175,7 +175,7 @@ namespace Catrobat.IDE.Core.UI
                 }
 
                 count++;
-                foreach (Brick brick in script.Bricks.Bricks)
+                foreach (var brick in script.Bricks)
                 {
                     if (count == index)
                     {
@@ -205,11 +205,8 @@ namespace Catrobat.IDE.Core.UI
             }
             else
             {
-                if (scriptToRemove != null)
-                {
-                    scriptToRemove.Bricks.Bricks.Remove(brickToRemove);
-                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, brickToRemove, index));
-                }
+                scriptToRemove.Bricks.Remove(brickToRemove);
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, brickToRemove, index));
             }
         }
 
@@ -222,7 +219,7 @@ namespace Catrobat.IDE.Core.UI
         {
             get
             {
-                return Scripts.Sum(script => script.Bricks.Bricks.Count + 1) + 1;
+                return Scripts.Sum(script => script.Bricks.Count + 1) + 1;
             }
         }
 
@@ -231,7 +228,7 @@ namespace Catrobat.IDE.Core.UI
             get { return false; }
         }
 
-        public bool Remove(DataObject item)
+        public bool Remove(Model item)
         {
             if (item != null)
             {
@@ -242,14 +239,14 @@ namespace Catrobat.IDE.Core.UI
             return false;
         }
 
-        public IEnumerator<DataObject> GetEnumerator()
+        public IEnumerator<Model> GetEnumerator()
         {
-            return new ScriptBrickIterator(Scripts) as IEnumerator<DataObject>;
+            return new ScriptBrickIterator(Scripts);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return new ScriptBrickIterator(Scripts) as IEnumerator<DataObject>;
+            return GetEnumerator();
         }
 
         public int Add(object value)
@@ -261,7 +258,7 @@ namespace Catrobat.IDE.Core.UI
 
             if (value is Brick)
             {
-                Scripts[Scripts.Count - 1].Bricks.Bricks.Add((Brick) value);
+                Scripts[Scripts.Count - 1].Bricks.Add((Brick) value);
             }
 
             return 1; // TODO: should probably not be 1 ?
@@ -275,9 +272,9 @@ namespace Catrobat.IDE.Core.UI
             }
             else
             {
-                foreach (Script script in Scripts)
+                foreach (var script in Scripts)
                 {
-                    if (script.Bricks.Bricks.Contains(value as Brick))
+                    if (script.Bricks.Contains(value as Brick))
                     {
                         return true;
                     }
@@ -294,30 +291,6 @@ namespace Catrobat.IDE.Core.UI
 
         public int IndexOf(object value)
         {
-            //int counter = 0;
-            //foreach (Script script in scripts)
-            //{
-            //  counter++;
-
-            //  if (value is Brick)
-            //  {
-            //    if (script.Bricks.Bricks.Contains((Brick)value))
-            //    {
-            //      counter += script.Bricks.Bricks.IndexOf((Brick)value);
-            //      return counter;
-            //    }
-            //  }
-            //  else
-            //  {
-            //    if (value == script)
-            //      return counter;
-
-            //    counter += script.Bricks.Bricks.Count;
-            //  }
-            //}
-
-            //return -1;
-
             var enumerator = GetEnumerator();
 
             var count = 0;
@@ -351,14 +324,14 @@ namespace Catrobat.IDE.Core.UI
             {
                 var scriptIndex = 0;
 
-                foreach (Script script in Scripts)
+                foreach (var script in Scripts)
                 {
                     if (count > index)
                     {
                         break;
                     }
 
-                    count += script.Bricks.Bricks.Count + 1;
+                    count += script.Bricks.Count + 1;
                     scriptIndex++;
                 }
 
@@ -377,14 +350,14 @@ namespace Catrobat.IDE.Core.UI
                     index = 1;
                 }
 
-                foreach (Script script in Scripts)
+                foreach (var script in Scripts)
                 {
                     count++;
-                    foreach (Brick brick in script.Bricks.Bricks)
+                    foreach (var brick in script.Bricks)
                     {
                         if (count == index)
                         {
-                            script.Bricks.Bricks.Insert(brickCount, (Brick) value);
+                            script.Bricks.Insert(brickCount, (Brick) value);
                             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, value, index));
                             return;
                         }
@@ -395,7 +368,7 @@ namespace Catrobat.IDE.Core.UI
 
                     if (count == index)
                     {
-                        script.Bricks.Bricks.Insert(brickCount, (Brick) value);
+                        script.Bricks.Insert(brickCount, (Brick) value);
                         OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, value, index));
                         return;
                     }
@@ -426,11 +399,11 @@ namespace Catrobat.IDE.Core.UI
             }
             else if (value is Brick)
             {
-                foreach (Script script in Scripts)
+                foreach (var script in Scripts)
                 {
-                    if (script.Bricks.Bricks.Contains(value as Brick))
+                    if (script.Bricks.Contains(value as Brick))
                     {
-                        script.Bricks.Bricks.Remove(value as Brick);
+                        script.Bricks.Remove(value as Brick);
                         OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, value, index));
                     }
                 }

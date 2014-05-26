@@ -15,7 +15,7 @@
         <StackPanel>
           <TextBlock FontSize="30">
             <TextBlock.Text>
-              <Binding Path="Parent.Formula.FormulaTree2" 
+              <Binding Path="Parent.Formula"
                        Converter="{StaticResource FormulaStringConverter}"
                        ElementName="LayoutRoot">
               </Binding>

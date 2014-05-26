@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.Utilities;
-using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 
 namespace Catrobat.IDE.Core.Resources
 {
@@ -56,7 +56,7 @@ namespace Catrobat.IDE.Core.Resources
                             var textFilePath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.ProjectCodePath);
                             var xml = await storage.ReadTextFileAsync(textFilePath);
 
-                            var project = new Project(xml);
+                            var project = new XmlProject(xml);
                             project.ProjectHeader.ProgramName = projectName;
 
                             await project.Save();

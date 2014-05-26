@@ -1,16 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.Models;
 
 namespace Catrobat.IDE.Core.UI
 {
     [Obsolete("Replace with binding. ")]
     public class VariableConteiner : INotifyPropertyChanged
     {
-        private UserVariable _variable;
+        private Variable _variable;
 
-        public UserVariable Variable
+        public Variable Variable
         {
             get { return _variable; }
             set

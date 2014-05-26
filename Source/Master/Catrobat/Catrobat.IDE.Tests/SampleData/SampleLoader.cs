@@ -1,13 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.Utilities;
-using Catrobat.IDE.Core.CatrobatObjects;
 using System.IO;
 using System.Xml.Linq;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Tests.Misc.Storage;
 
 namespace Catrobat.IDE.Tests.SampleData
@@ -43,6 +42,18 @@ namespace Catrobat.IDE.Tests.SampleData
                 stream.Dispose();
             }
             return await CatrobatContext.LoadNewProjectByNameStatic(sampleProjectName);
+        }
+
+        public static async Task<XmlProject> LoadSampleXmlProject(string sampleName, string sampleProjectName)
+        {
+            using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
+            {
+                var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, Path + sampleName);
+                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
+                stream.Close();
+                stream.Dispose();
+            }
+            return await CatrobatContext.LoadNewXmlProjectByNameStatic(sampleProjectName);
         }
     }
 }

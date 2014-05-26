@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Formulas;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Extensions;
 using Catrobat.IDE.Tests.Services;
@@ -14,7 +14,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 {
-    /// <summary>Tests <see cref="FormulaTokenizer.Tokenize(IFormulaTree)" />. </summary>
+    /// <summary>Tests <see cref="FormulaTokenizer.Tokenize(FormulaTree)" />. </summary>
     [TestClass]
     public class FormulaTokenizerTokenTests
     {
@@ -115,21 +115,21 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         }
 
         // ReSharper disable once InconsistentNaming
-        private void TestPrefixOperatorNL(Func<FormulaNodePrefixOperator> tokenCreator, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
+        private void TestPrefixOperatorNL(Func<FormulaNodePrefixOperator> tokenCreator, Func<FormulaTree, UnaryFormulaTree> formulaCreator)
         {
             TestTokenizerNL(
                 expectedTokens: x => Enumerable.Repeat(tokenCreator.Invoke(), 1).Concat(x),
                 formulaCreator: formulaCreator);
         }
 
-        private void TestPrefixOperatorN(Func<FormulaNodeInfixOperator> tokenCreator, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
+        private void TestPrefixOperatorN(Func<FormulaNodeInfixOperator> tokenCreator, Func<FormulaTree, UnaryFormulaTree> formulaCreator)
         {
             TestTokenizerN(
                 expectedTokens: x => Enumerable.Repeat(tokenCreator.Invoke(), 1).Concat(x),
                 formulaCreator: formulaCreator);
         }
 
-        private void TestInfixOperatorN(Func<FormulaNodeInfixOperator> tokenCreator, Func<IFormulaTree, IFormulaTree, FormulaNodeInfixOperator> formulaCreator)
+        private void TestInfixOperatorN(Func<FormulaNodeInfixOperator> tokenCreator, Func<FormulaTree, FormulaTree, FormulaNodeInfixOperator> formulaCreator)
         {
             TestTokenizerN(
                 expectedTokens: (x, y) => x.Concat(Enumerable.Repeat(tokenCreator.Invoke(), 1)).Concat(y),
@@ -137,7 +137,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         }
 
         // ReSharper disable once InconsistentNaming
-        private void TestInfixOperatorNL(Func<FormulaNodeInfixOperator> tokenCreator, Func<IFormulaTree, IFormulaTree, FormulaNodeInfixOperator> formulaCreator)
+        private void TestInfixOperatorNL(Func<FormulaNodeInfixOperator> tokenCreator, Func<FormulaTree, FormulaTree, FormulaNodeInfixOperator> formulaCreator)
         {
             TestTokenizerNL(
                 expectedTokens: (x, y) => x.Concat(Enumerable.Repeat(tokenCreator.Invoke(), 1)).Concat(y),
@@ -172,7 +172,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestBinaryFunctionN(FormulaTokenFactory.CreateRandomToken, FormulaTreeFactory.CreateRandomNode);
         }
 
-        private void TestUnaryFunctionN(Func<FormulaNodeUnaryFunction> tokenCreator, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
+        private void TestUnaryFunctionN(Func<FormulaNodeUnaryFunction> tokenCreator, Func<FormulaTree, UnaryFormulaTree> formulaCreator)
         {
             TestTokenizerN(
                 expectedTokens: x => Enumerable.Repeat<IFormulaToken>(tokenCreator.Invoke(), 1)
@@ -182,7 +182,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 formulaCreator: formulaCreator);
         }
 
-        private void TestBinaryFunctionN(Func<FormulaNodeBinaryFunction> tokenCreator, Func<IFormulaTree, IFormulaTree, FormulaNodeBinaryFunction> formulaCreator)
+        private void TestBinaryFunctionN(Func<FormulaNodeBinaryFunction> tokenCreator, Func<FormulaTree, FormulaTree, FormulaNodeBinaryFunction> formulaCreator)
         {
             TestTokenizerN(
                 expectedTokens: (x, y) => Enumerable.Repeat<IFormulaToken>(tokenCreator.Invoke(), 1)
@@ -233,17 +233,17 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestVariables()
         {
-            TestVariable(FormulaTokenFactory.CreateLocalVariableToken, FormulaTreeFactory.CreateLocalVariableNode);
-            TestVariable(FormulaTokenFactory.CreateGlobalVariableToken, FormulaTreeFactory.CreateGlobalVariableNode);
+            TestVariable<LocalVariable>(FormulaTokenFactory.CreateLocalVariableToken, FormulaTreeFactory.CreateLocalVariableNode);
+            TestVariable<GlobalVariable>(FormulaTokenFactory.CreateGlobalVariableToken, FormulaTreeFactory.CreateGlobalVariableNode);
         }
 
-        private void TestVariable(Func<UserVariable, IFormulaToken> expectedToken, Func<UserVariable, ConstantFormulaTree> formulaCreator)
+        private void TestVariable<TVariable>(Func<TVariable, IFormulaToken> expectedToken, Func<TVariable, ConstantFormulaTree> formulaCreator) where TVariable : Variable, new()
         {
-            var x = new UserVariable
+            var x = new TVariable
             {
                 Name = "TestVariable"
             };
-            var y = new UserVariable();
+            var y = new TVariable();
             TestTokenizer(Enumerable.Repeat(expectedToken.Invoke(x), 1), formulaCreator.Invoke(x));
             TestTokenizer(Enumerable.Repeat(expectedToken.Invoke(y), 1), formulaCreator.Invoke(y));
             TestTokenizer(Enumerable.Repeat(expectedToken.Invoke(null), 1), formulaCreator.Invoke(null));
@@ -260,7 +260,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         }
 
         // ReSharper disable once InconsistentNaming
-        private void TestBracketNL(Func<bool, FormulaTokenBracket> expectedToken, Func<IFormulaTree, FormulaNodeBrackets> formulaCreator)
+        private void TestBracketNL(Func<bool, FormulaTokenBracket> expectedToken, Func<FormulaTree, FormulaNodeBrackets> formulaCreator)
         {
             TestTokenizerNL(
                 expectedTokens: x => Enumerable.Repeat(expectedToken.Invoke(true), 1)
@@ -274,22 +274,22 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Helpers
 
-        private void TestTokenizer(IEnumerable<IFormulaToken> expectedTokens, IFormulaTree formula)
+        private void TestTokenizer(IEnumerable<IFormulaToken> expectedTokens, FormulaTree formula)
         {
-            EnumerableAssert.AreEqual(expectedTokens, FormulaTokenizer.Tokenize(formula));
+            EnumerableAssert.AreTestEqual(expectedTokens, FormulaTokenizer.Tokenize(formula));
         }
 
-        private void TestTokenizer(IFormulaToken expectedToken, IFormulaTree formula)
+        private void TestTokenizer(IFormulaToken expectedToken, FormulaTree formula)
         {
             TestTokenizer(Enumerable.Repeat(expectedToken, 1), formula);
         }
 
-        private void TestTokenizer(Func<IFormulaToken> tokenCreator, Func<IFormulaTree> formulaCreator)
+        private void TestTokenizer(Func<IFormulaToken> tokenCreator, Func<FormulaTree> formulaCreator)
         {
             TestTokenizer(tokenCreator.Invoke(), formulaCreator.Invoke());
         }
 
-        private void TestTokenizerN(Func<IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>> expectedTokens, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
+        private void TestTokenizerN(Func<IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>> expectedTokens, Func<FormulaTree, UnaryFormulaTree> formulaCreator)
         {
             var x = _random.Next();
             TestTokenizer(
@@ -302,7 +302,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 formula: formulaCreator.Invoke(null));
         }
 
-        private void TestTokenizerL(Func<IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>> expectedTokens, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
+        private void TestTokenizerL(Func<IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>> expectedTokens, Func<FormulaTree, UnaryFormulaTree> formulaCreator)
         {
             var x = _random.NextBool();
             TestTokenizer(
@@ -316,13 +316,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         }
 
         // ReSharper disable once InconsistentNaming
-        private void TestTokenizerNL(Func<IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>> expectedTokens, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
+        private void TestTokenizerNL(Func<IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>> expectedTokens, Func<FormulaTree, UnaryFormulaTree> formulaCreator)
         {
             TestTokenizerL(expectedTokens, formulaCreator);
             TestTokenizerN(expectedTokens, formulaCreator);
         }
 
-        private void TestTokenizerN(Func<IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>> expectedTokens, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        private void TestTokenizerN(Func<IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>> expectedTokens, Func<FormulaTree, FormulaTree, BinaryFormulaTree> formulaCreator)
         {
             var x = _random.Next();
             var y = _random.Next();
@@ -334,7 +334,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 formula: formulaCreator.Invoke(null, null));
         }
 
-        private void TestTokenizerL(Func<IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>> expectedTokens, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        private void TestTokenizerL(Func<IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>> expectedTokens, Func<FormulaTree, FormulaTree, BinaryFormulaTree> formulaCreator)
         {
             var x = _random.Next();
             var y = _random.Next();
@@ -347,7 +347,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         }
 
         // ReSharper disable once InconsistentNaming
-        private void TestTokenizerNL(Func<IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>> expectedTokens, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        private void TestTokenizerNL(Func<IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>, IEnumerable<IFormulaToken>> expectedTokens, Func<FormulaTree, FormulaTree, BinaryFormulaTree> formulaCreator)
         {
             TestTokenizerN(expectedTokens, formulaCreator);
             TestTokenizerL(expectedTokens, formulaCreator);

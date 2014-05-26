@@ -1,14 +1,14 @@
 ﻿using System;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 
 namespace Catrobat.IDE.Core.Formulas
 {
     [Obsolete("Don't throw exceptions in FormulaInterpreter. ")]
     internal class SemanticsErrorException : Exception
     {
-        public IFormulaTree Node { get; private set; }
+        public FormulaTree Node { get; private set; }
 
-        public SemanticsErrorException(IFormulaTree node, string message) : base(message)
+        public SemanticsErrorException(FormulaTree node, string message) : base(message)
         {
             Node = node;
         }

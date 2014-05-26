@@ -1,8 +1,8 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Core.ExtensionMethods;
+﻿using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Formulas;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Tests.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -93,11 +93,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             var xNode = FormulaTreeFactory.CreateNumberNode(x);
             var yNode = FormulaTreeFactory.CreateNumberNode(y);
             var zNode = FormulaTreeFactory.CreateNumberNode(z);
-            Func<IFormulaTree, IFormulaTree, IFormulaTree> createAddNode = FormulaTreeFactory.CreateAddNode;
-            Func<IFormulaTree, IFormulaTree, IFormulaTree> createMultiplyNode = FormulaTreeFactory.CreateMultiplyNode;
-            Func<IFormulaTree, IFormulaTree, IFormulaTree> createEqualsNode = FormulaTreeFactory.CreateEqualsNode;
-            Func<IFormulaTree, IFormulaTree, IFormulaTree> createLessNode = FormulaTreeFactory.CreateLessNode;
-            Func<IFormulaTree, IFormulaTree> createNotNode = FormulaTreeFactory.CreateNotNode;
+            Func<FormulaTree, FormulaTree, FormulaTree> createAddNode = FormulaTreeFactory.CreateAddNode;
+            Func<FormulaTree, FormulaTree, FormulaTree> createMultiplyNode = FormulaTreeFactory.CreateMultiplyNode;
+            Func<FormulaTree, FormulaTree, FormulaTree> createEqualsNode = FormulaTreeFactory.CreateEqualsNode;
+            Func<FormulaTree, FormulaTree, FormulaTree> createLessNode = FormulaTreeFactory.CreateLessNode;
+            Func<FormulaTree, FormulaTree> createNotNode = FormulaTreeFactory.CreateNotNode;
 
             TestInterpret(
                 expected: createAddNode(xNode, createMultiplyNode(yNode, zNode)),
@@ -185,8 +185,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestVariables()
         {
-            TestVariable(FormulaTreeFactory.CreateLocalVariableNode, FormulaTokenFactory.CreateLocalVariableToken);
-            TestVariable(FormulaTreeFactory.CreateGlobalVariableNode, FormulaTokenFactory.CreateGlobalVariableToken);
+            TestVariable<LocalVariable>(FormulaTreeFactory.CreateLocalVariableNode, FormulaTokenFactory.CreateLocalVariableToken);
+            TestVariable<GlobalVariable>(FormulaTreeFactory.CreateGlobalVariableNode, FormulaTokenFactory.CreateGlobalVariableToken);
         }
 
         #endregion
@@ -209,7 +209,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             var xNode = FormulaTreeFactory.CreateNumberNode(x);
             var yNode = FormulaTreeFactory.CreateNumberNode(y);
             var zNode = FormulaTreeFactory.CreateNumberNode(z);
-            Func<IFormulaTree, IFormulaTree> createParenthesesNode = FormulaTreeFactory.CreateParenthesesNode;
+            Func<FormulaTree, FormulaTree> createParenthesesNode = FormulaTreeFactory.CreateParenthesesNode;
 
             // (x)
             TestInterpret(
@@ -243,7 +243,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             var closingToken = FormulaTokenFactory.CreateParenthesisToken(false);
             var xNode = FormulaTreeFactory.CreateNumberNode(x);
             var yNode = FormulaTreeFactory.CreateNumberNode(y);
-            Func<IFormulaTree, IFormulaTree> createParenthesesNode = FormulaTreeFactory.CreateParenthesesNode;
+            Func<FormulaTree, FormulaTree> createParenthesesNode = FormulaTreeFactory.CreateParenthesesNode;
 
             // ((x))
             TestInterpret(
@@ -295,10 +295,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Helpers
 
-        private void TestInterpret(IFormulaTree expected, IList<IFormulaToken> tokens)
+        private void TestInterpret(FormulaTree expected, IList<IFormulaToken> tokens)
         {
             ParsingError parsingError;
-            Assert.AreEqual(expected, FormulaInterpreter.Interpret(tokens, out parsingError));
+            ModelAssert.AreTestEqual(expected, FormulaInterpreter.Interpret(tokens, out parsingError));
             Assert.IsNull(parsingError);
         }
 
@@ -309,7 +309,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 tokens: new[] {token.Invoke()});
         }
 
-        private void TestBoolPrefixOperator(Func<IFormulaTree, FormulaNodePrefixOperator> expected, Func<IFormulaToken> token)
+        private void TestBoolPrefixOperator(Func<FormulaTree, FormulaNodePrefixOperator> expected, Func<IFormulaToken> token)
         {
             var x = _random.NextBool();
             TestInterpret(
@@ -317,7 +317,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 tokens: new[] { token.Invoke(), FormulaTokenFactory.CreateTruthValueToken(x) });
         }
 
-        private void TestDoublePrefixOperator(Func<IFormulaTree, FormulaNodePrefixOperator> expected, Func<IFormulaToken> token)
+        private void TestDoublePrefixOperator(Func<FormulaTree, FormulaNodePrefixOperator> expected, Func<IFormulaToken> token)
         {
             var x = _random.Next(0, 10);
             TestInterpret(
@@ -325,7 +325,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 tokens: new[] { token.Invoke(), FormulaTokenFactory.CreateDigitToken(x) });
         }
 
-        private void TestBoolInfixOperator(Func<IFormulaTree, IFormulaTree, FormulaNodeInfixOperator> expected, Func<IFormulaToken> token)
+        private void TestBoolInfixOperator(Func<FormulaTree, FormulaTree, FormulaNodeInfixOperator> expected, Func<IFormulaToken> token)
         {
             var x = _random.NextBool();
             var y = _random.NextBool();
@@ -334,7 +334,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 tokens: new[] { FormulaTokenFactory.CreateTruthValueToken(x), token.Invoke(), FormulaTokenFactory.CreateTruthValueToken(y) });
         }
 
-        private void TestDoubleInfixOperator(Func<IFormulaTree, IFormulaTree, FormulaNodeInfixOperator> expected, Func<IFormulaToken> token)
+        private void TestDoubleInfixOperator(Func<FormulaTree, FormulaTree, FormulaNodeInfixOperator> expected, Func<IFormulaToken> token)
         {
             var x = _random.Next(0, 10);
             var y = _random.Next(0, 10);
@@ -343,7 +343,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 tokens: new[] {FormulaTokenFactory.CreateDigitToken(x), token.Invoke(), FormulaTokenFactory.CreateDigitToken(y)});
         }
 
-        private void TestDoubleUnaryFunction(Func<IFormulaTree, FormulaNodeUnaryFunction> expected, Func<IFormulaToken> token)
+        private void TestDoubleUnaryFunction(Func<FormulaTree, FormulaNodeUnaryFunction> expected, Func<IFormulaToken> token)
         {
             var x = _random.Next(0, 10);
             TestInterpret(
@@ -351,7 +351,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 tokens: new[] { token.Invoke(), FormulaTokenFactory.CreateParenthesisToken(true), FormulaTokenFactory.CreateDigitToken(x), FormulaTokenFactory.CreateParenthesisToken(false) });
         }
 
-        private void TestDoubleBinaryFunction(Func<IFormulaTree, IFormulaTree, FormulaNodeBinaryFunction> expected, Func<IFormulaToken> token)
+        private void TestDoubleBinaryFunction(Func<FormulaTree, FormulaTree, FormulaNodeBinaryFunction> expected, Func<IFormulaToken> token)
         {
             var x = _random.Next(0, 10);
             var y = _random.Next(0, 10);
@@ -360,13 +360,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 tokens: new[] { token.Invoke(), FormulaTokenFactory.CreateParenthesisToken(true), FormulaTokenFactory.CreateDigitToken(x), FormulaTokenFactory.CreateParameterSeparatorToken(), FormulaTokenFactory.CreateDigitToken(y), FormulaTokenFactory.CreateParenthesisToken(false) });
         }
 
-        private void TestVariable(Func<UserVariable, FormulaNodeVariable> expected, Func<UserVariable, IFormulaToken> token)
+        private void TestVariable<TVariable>(Func<TVariable, FormulaNodeVariable> expected, Func<TVariable, IFormulaToken> token) where TVariable : Variable, new()
         {
-            var x = new UserVariable
+            var x = new TVariable
             {
                 Name = "TestVariable"
             };
-            var y = new UserVariable();
+            var y = new TVariable();
             TestInterpret(
                 expected: expected.Invoke(x),
                 tokens: new[] { token.Invoke(x) });

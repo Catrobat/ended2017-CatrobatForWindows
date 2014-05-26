@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
 
 namespace Catrobat.IDE.Core.Formulas
 {
