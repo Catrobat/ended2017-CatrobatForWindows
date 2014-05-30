@@ -23,63 +23,64 @@ namespace Catrobat.IDE.Core.Services.Common
     {
         private static int _uploadCounter = 0;
 
-        public static async Task<List<OnlineProjectHeader>> AsyncLoadOnlineProjects(bool append, string filterText, int offset)
+        public static async Task<List<OnlineProjectHeader>> AsyncLoadOnlineProjects(string filterText, int offset)
         {
-            // TODO exception handling
             using (var http_client = new HttpClient())
             {
                 //http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
                 http_client.BaseAddress = new Uri("https://pocketcode.org/api/");
                 //http_client.DefaultRequestHeaders.Accept.Clear();
                 //http_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                HttpResponseMessage http_response = null;
-
-                if (filterText == "")
+                try
                 {
-                    http_response = await http_client.GetAsync(String.Format(ApplicationResources.API_RECENT_PROJECTS, ApplicationResources.API_REQUEST_LIMIT, offset));
-                }
-                else
-                {
-                    string encoded_filter_text = WebUtility.UrlEncode(filterText);
-                    http_response = await http_client.GetAsync(String.Format(ApplicationResources.API_SEARCH_PROJECTS, encoded_filter_text, ApplicationResources.API_REQUEST_LIMIT, offset));
-                }
+                    HttpResponseMessage http_response = null;
 
-                if (http_response.IsSuccessStatusCode)
-                {
+                    if (filterText == "")
+                    {
+                        http_response = await http_client.GetAsync(String.Format(ApplicationResources.API_RECENT_PROJECTS, ApplicationResources.API_REQUEST_LIMIT, offset));
+                    }
+                    else
+                    {
+                        string encoded_filter_text = WebUtility.UrlEncode(filterText);
+                        http_response = await http_client.GetAsync(String.Format(ApplicationResources.API_SEARCH_PROJECTS, encoded_filter_text, ApplicationResources.API_REQUEST_LIMIT, offset));
+                    }
+                    http_response.EnsureSuccessStatusCode();
+
                     string json_result = await http_response.Content.ReadAsStringAsync();
                     OnlineProjectOverview recent_projects = null;
 
-                    try
-                    {
-                        //List<OnlineProjectOverview> projects = JsonConvert.DeserializeObject<List<OnlineProjectOverview>>(json_result);
-                        recent_projects = JsonConvert.DeserializeObject<OnlineProjectOverview>(json_result);
-                    }
-                    catch (Newtonsoft.Json.JsonSerializationException)
-                    {
-                        //TODO Message to do on this error
-                        //Debug.WriteLine(e.Message);
-                    }
+                    //List<OnlineProjectOverview> projects = JsonConvert.DeserializeObject<List<OnlineProjectOverview>>(json_result);
+                    recent_projects = JsonConvert.DeserializeObject<OnlineProjectOverview>(json_result);
+                    
                     return recent_projects.CatrobatProjects;
                 }
-                // TODO HTTP Request failed-error
-                return null;
+                catch (HttpRequestException)
+                {
+                    return null;
+                }
+                catch (Newtonsoft.Json.JsonSerializationException)
+                {
+                    return null;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
             }
         }
 
 
         public static async Task<CatrobatVersionConverter.VersionConverterError> AsyncDownloadAndSaveProject(string downloadUrl, string projectName)
         {
-            // TODO exception handling
             using (var http_client = new HttpClient())
             {
                 http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
-
-                // trigger to header-read to avoid timeouts
-                HttpResponseMessage http_response = await http_client.GetAsync(downloadUrl/*, HttpCompletionOption.ResponseHeadersRead*/);
-                
-                if (http_response.IsSuccessStatusCode)
+                try
                 {
+                    // trigger to header-read to avoid timeouts
+                    HttpResponseMessage http_response = await http_client.GetAsync(downloadUrl/*, HttpCompletionOption.ResponseHeadersRead*/);
+                    http_response.EnsureSuccessStatusCode();
+
                     using (Stream http_stream = await http_response.Content.ReadAsStreamAsync())
                     {
                         List<string> folders;
@@ -89,8 +90,8 @@ namespace Catrobat.IDE.Core.Services.Common
                             folders = new List<string>(folder_array);
 
                         }
-                        var countString = "";
-                        var counter = 1;
+                        string countString = "";
+                        int counter = 1;
                         while (folders.IndexOf(projectName + countString) >= 0)
                         {
                             countString = " " + counter.ToString(ServiceLocator.CultureService.GetCulture());
@@ -101,178 +102,176 @@ namespace Catrobat.IDE.Core.Services.Common
                                                                             CatrobatContextBase.ProjectsPath + "/" +
                                                                             projectName);
                     }
-                    try
-                    {
-                        var result = await CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, true);
-                        var error = result.Error;
-                        return error;
-                    }
-                    catch (Exception)
-                    {
-                        return CatrobatVersionConverter.VersionConverterError.ProjectCodeNotValid;
-                    }
+                    var result = await CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, true);
+                    CatrobatVersionConverter.VersionConverterError error = result.Error;
+                    return error;
+                    
                 }
-                // TODO HTTP Request failed-error
-                return CatrobatVersionConverter.VersionConverterError.ProjectCodePathNotValid;
+                catch (HttpRequestException)
+                {
+                    return CatrobatVersionConverter.VersionConverterError.ProjectCodePathNotValid;
+                }
+                catch (Exception)
+                {
+                    return CatrobatVersionConverter.VersionConverterError.ProjectCodePathNotValid;
+                }
             }
         }
 
 
-        public static async Task<bool> AsyncCheckToken(string username, string token)
-        {
-            // TODO exception handling
-            if (token == null)
-            {
-                token = "";
-            }
-            if (username == null)
-            {
-                username = "";
-            }
-            
+        public static async Task<JSONStatusResponse> AsyncCheckToken(string username, string token, string language = "en")
+        {    
             var parameters = new List<KeyValuePair<string, string>>() { 
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_USERNAME, username),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_TOKEN, token)
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_USERNAME, ((username == null) ? "" : username)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_TOKEN, ((token == null) ? "" : token)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
             };
              
             HttpContent post_parameters = new FormUrlEncodedContent(parameters);
             using (var http_client = new HttpClient())
             {
                 http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
-                HttpResponseMessage http_response = await http_client.PostAsync(ApplicationResources.API_CHECK_TOKEN, post_parameters);
-                
-                if (http_response.IsSuccessStatusCode)
+                JSONStatusResponse status_response = null;
+                try
                 {
-                    string json_result = await http_response.Content.ReadAsStringAsync();
-                    JSONStatusResponse status_response = null;
+                    HttpResponseMessage http_response = await http_client.PostAsync(ApplicationResources.API_CHECK_TOKEN, post_parameters);
+                    http_response.EnsureSuccessStatusCode();
 
-                    try
-                    {
-                        status_response = JsonConvert.DeserializeObject<JSONStatusResponse>(json_result);
-                    }
-                    catch (Newtonsoft.Json.JsonSerializationException)
-                    {
-                        //TODO Message to do on this error
-                        //Debug.WriteLine(e.Message);
-                    }
-                    return (status_response.statusCode == StatusCodes.ServerResponseTokenOk);
+                    string json_result = await http_response.Content.ReadAsStringAsync();
+                    status_response = JsonConvert.DeserializeObject<JSONStatusResponse>(json_result);  
                 }
-                // TODO HTTP Request failed-error
-                return false;
+                catch (HttpRequestException)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.HTTPRequestFailed;
+                }
+                catch (Newtonsoft.Json.JsonSerializationException)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.JSONSerializationFailed;
+                }
+                catch (Exception)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.UnknownError;
+                }
+                return status_response;
             }
 
         }
 
         public static async Task<JSONStatusResponse> AsyncLoginOrRegister(string username, string password, string userEmail, 
-                string language, string country)
+                string language = "en", string country = "AT")
         {
-            // TODO exception handling
             var parameters = new List<KeyValuePair<string, string>>() { 
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_REG_USERNAME, username),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_REG_PASSWORD, password),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_REG_EMAIL, userEmail),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_REG_COUNTRY, country),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, language)
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_REG_USERNAME, ((username == null) ? "" : username)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_REG_PASSWORD, ((password == null) ? "" : password)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_REG_EMAIL, ((userEmail == null) ? "" : userEmail)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_REG_COUNTRY, ((country == null) ? "" : country)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
             };
 
             HttpContent post_parameters = new FormUrlEncodedContent(parameters);
-
             using (var http_client = new HttpClient())
             {
                 http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
-                HttpResponseMessage http_response = await http_client.PostAsync(ApplicationResources.API_LOGIN_REGISTER, post_parameters);
-
-                if (http_response.IsSuccessStatusCode)
+                JSONStatusResponse status_response = null;
+                try
                 {
-                    string json_result = await http_response.Content.ReadAsStringAsync();
+                    HttpResponseMessage http_response = await http_client.PostAsync(ApplicationResources.API_LOGIN_REGISTER, post_parameters);
+                    http_response.EnsureSuccessStatusCode();
 
-                    JSONStatusResponse status_response = null;
-                    try
-                    {
-                        status_response = JsonConvert.DeserializeObject<JSONStatusResponse>(json_result);
-                    }
-                    catch (Newtonsoft.Json.JsonSerializationException)
-                    {
-                        //TODO Message to do on this error
-                        //Debug.WriteLine(e.Message);
-                    }
-                    return status_response;
+                    string json_result = await http_response.Content.ReadAsStringAsync();
+                    status_response = JsonConvert.DeserializeObject<JSONStatusResponse>(json_result);
                 }
-                // TODO HTTP Request failed-error
-                return null;
+                catch (HttpRequestException)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.HTTPRequestFailed;
+                }
+                catch (Newtonsoft.Json.JsonSerializationException)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.JSONSerializationFailed;
+                }
+                catch (Exception)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.UnknownError;
+                }
+                return status_response;
             }
         }
 
 
-        public static async Task<JSONStatusResponse> AsyncUploadProject(string projectTitle, string projectDescription, string username,
-                string language, string token)
+        public static async Task<JSONStatusResponse> AsyncUploadProject(string projectTitle, string username, string token,
+                string language = "en")
         {
-            // TODO exception handling
             var parameters = new List<KeyValuePair<string, string>>() { 
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_USERNAME, username),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_TOKEN, token),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, language)
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_USERNAME, ((username == null) ? "" : username)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_TOKEN, ((token == null) ? "" : token)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
             };
 
             using (MultipartFormDataContent post_parameters = new MultipartFormDataContent())
             {
                 using (MemoryStream stream = new MemoryStream())
                 {
-                    await CatrobatZipService.ZipCatrobatPackage(stream, CatrobatContextBase.ProjectsPath + "/" + projectTitle);
-                    Byte[] project_data = stream.ToArray();
-
-                    parameters.Add(new KeyValuePair<string, string>(ApplicationResources.API_PARAM_CHECKSUM, UtilTokenHelper.ToHex(MD5Core.GetHash(project_data))));
-
-                    // store parameters as MultipartFormDataContent
-                    StringContent content = null;
-                    foreach (var keyValuePair in parameters)
+                    JSONStatusResponse status_response = null;
+                    try
                     {
-                        content = new StringContent(keyValuePair.Value);
-                        content.Headers.Remove("Content-Type");
-                        post_parameters.Add(content, String.Format("\"{0}\"", keyValuePair.Key));
+                        await CatrobatZipService.ZipCatrobatPackage(stream, CatrobatContextBase.ProjectsPath + "/" + projectTitle);
+                        Byte[] project_data = stream.ToArray();
 
-                    }
+                        parameters.Add(new KeyValuePair<string, string>(ApplicationResources.API_PARAM_CHECKSUM, UtilTokenHelper.ToHex(MD5Core.GetHash(project_data))));
 
-                    ByteArrayContent file_content = new ByteArrayContent(project_data);
-                    //fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                    //{
-                    //    FileName = projectTitle + ".catrobat"
-                    //};
-                    file_content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/zip");
-                    post_parameters.Add(file_content, String.Format("\"{0}\"", ApplicationResources.API_PARAM_UPLOAD), String.Format("\"{0}\"", projectTitle + ApplicationResources.EXTENSION));
-
-
-                    _uploadCounter++;
-                    using (var http_client = new HttpClient())
-                    {
-                        http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
-                        HttpResponseMessage http_response = await http_client.PostAsync(ApplicationResources.API_UPLOAD, post_parameters);
-
-                        if (http_response.IsSuccessStatusCode)
+                        // store parameters as MultipartFormDataContent
+                        StringContent content = null;
+                        foreach (var keyValuePair in parameters)
                         {
-                            string json_result = await http_response.Content.ReadAsStringAsync();
-
-                            JSONStatusResponse status_response = null;
-                            try
-                            {
-                                status_response = JsonConvert.DeserializeObject<JSONStatusResponse>(json_result);
-                            }
-                            catch (Newtonsoft.Json.JsonSerializationException)
-                            {
-                                //TODO Message to do on this error
-                                //Debug.WriteLine(e.Message);
-                            }
-                            return status_response;
+                            content = new StringContent(keyValuePair.Value);
+                            content.Headers.Remove("Content-Type");
+                            post_parameters.Add(content, String.Format("\"{0}\"", keyValuePair.Key));
                         }
 
+                        ByteArrayContent file_content = new ByteArrayContent(project_data);
+                        //fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                        //{
+                        //    FileName = projectTitle + ".catrobat"
+                        //};
+                        file_content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/zip");
+                        post_parameters.Add(file_content, String.Format("\"{0}\"", ApplicationResources.API_PARAM_UPLOAD), String.Format("\"{0}\"", projectTitle + ApplicationResources.EXTENSION));
+
+                        _uploadCounter++;
+                        using (var http_client = new HttpClient())
+                        {
+                            http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
+                            HttpResponseMessage http_response = await http_client.PostAsync(ApplicationResources.API_UPLOAD, post_parameters);
+                            http_response.EnsureSuccessStatusCode();
+                            string json_result = await http_response.Content.ReadAsStringAsync();
+
+                            status_response = JsonConvert.DeserializeObject<JSONStatusResponse>(json_result);                           
+                        }
                         _uploadCounter--;
-                        // TODO HTTP Request failed-error
-                        return null;
                     }
+                    catch (HttpRequestException)
+                    {
+                        status_response = new JSONStatusResponse();
+                        status_response.statusCode = StatusCodes.HTTPRequestFailed;
+                    }
+                    catch (Newtonsoft.Json.JsonSerializationException)
+                    {
+                        status_response = new JSONStatusResponse();
+                        status_response.statusCode = StatusCodes.JSONSerializationFailed;
+                    }
+                    catch (Exception)
+                    {
+                        status_response = new JSONStatusResponse();
+                        status_response.statusCode = StatusCodes.UnknownError;
+                    }
+                    return status_response;
                 }
             }
-
-
         }
 
         public static bool NoUploadsPending()

@@ -1090,4 +1090,7 @@
   <data name="Main_UploadProjectErrorCaption" xml:space="preserve">
     <value>Upload fehlgeschlagen</value>
   </data>
+  <data name="Main_NoInternetConnection" xml:space="preserve">
+    <value>Keine Internetverbindung verfügbar.</value>
+  </data>
 </root>

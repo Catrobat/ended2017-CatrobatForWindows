@@ -2537,6 +2537,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No internet connection available. ähnelt.
+        /// </summary>
+        public static string Main_NoInternetConnection {
+            get {
+                return ResourceManager.GetString("Main_NoInternetConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die All uploads finished. ähnelt.
         /// </summary>
         public static string Main_NoUploadsPending {
