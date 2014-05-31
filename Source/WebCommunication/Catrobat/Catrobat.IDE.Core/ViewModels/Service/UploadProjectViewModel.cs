@@ -89,6 +89,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public RelayCommand CancelCommand { get; private set; }
 
+        public RelayCommand ChangeUserCommand { get; private set; }
+
         #endregion
 
         #region CommandCanExecute
@@ -164,6 +166,16 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
         }
 
+        private void ChangeUserAction()
+        {
+            ResetViewModel();
+            Context.CurrentToken = "";
+            Context.CurrentUserName = "";
+            Context.CurrentUserEmail = "";
+            ServiceLocator.NavigationService.NavigateTo<UploadProjectLoginViewModel>();
+            ServiceLocator.NavigationService.RemoveBackEntry();
+        }
+
         protected override void GoBackAction()
         {
             ResetViewModel();
@@ -190,6 +202,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             InitializeCommand = new RelayCommand(InitializeAction);
             UploadCommand = new RelayCommand(UploadAction, UploadCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
+            ChangeUserCommand = new RelayCommand(ChangeUserAction);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedAction);

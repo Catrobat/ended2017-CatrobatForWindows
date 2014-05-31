@@ -45,6 +45,9 @@
           <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.upload.rest.png" 
                               Text="{Binding Resources.Main_ButtonUpload, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding UploadCommand}" />
+          <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.sync.rest.png" 
+                              Text="{Binding Resources.Main_ButtonChangeUser, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding ChangeUserCommand}" />
           <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" 
                               Text="{Binding Resources.Main_ButtonCancel, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding CancelCommand}"/>

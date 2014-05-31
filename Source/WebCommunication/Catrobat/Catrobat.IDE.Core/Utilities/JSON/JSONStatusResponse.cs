@@ -9,8 +9,9 @@ namespace Catrobat.IDE.Core.Utilities.JSON
         UnknownError = 13,
         ServerResponseTokenOk = 200,
         ServerResponseRegisterOk = 201,
-        ServerResponseTokenInvalid = 601,
-        ServerResponseRegistrationFailed = 602
+        ServerResponseLoginFailed = 601,
+        ServerResponseRegistrationFailed = 602,
+        ServerResponseMissingEmail = 765
     };
 
     public class JSONStatusResponse
