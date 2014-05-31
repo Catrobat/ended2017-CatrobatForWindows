@@ -4,6 +4,9 @@ namespace Catrobat.IDE.Core.Utilities.JSON
 {
     public enum StatusCodes
     {
+        HTTPRequestFailed = 11,
+        JSONSerializationFailed = 12,
+        UnknownError = 13,
         ServerResponseTokenOk = 200,
         ServerResponseRegisterOk = 201,
         ServerResponseTokenInvalid = 601,
@@ -12,6 +15,13 @@ namespace Catrobat.IDE.Core.Utilities.JSON
 
     public class JSONStatusResponse
     {
+        public JSONStatusResponse() { }
+ 
+        public JSONStatusResponse(StatusCodes status)
+        {
+            statusCode = status;
+        }
+              
         public string token { get; set; }
         public StatusCodes statusCode { get; set; }
         public string answer { get; set; }

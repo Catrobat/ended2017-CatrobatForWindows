@@ -122,10 +122,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             CurrentProject.ProjectHeader.Description = ProjectDescription;
             await App.SaveContext(CurrentProject);
 
-            Task<JSONStatusResponse> upload_task = CatrobatWebCommunicationService.AsyncUploadProject(ProjectName, _projectDescription, 
-                                                          Context.CurrentUserName,
-                                                          ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName,
-                                                          Context.CurrentToken);
+            Task<JSONStatusResponse> upload_task = CatrobatWebCommunicationService.AsyncUploadProject(ProjectName, Context.CurrentUserName,
+                                                          Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
             var message = new MessageBase();
             Messenger.Default.Send(message, ViewModelMessagingToken.UploadProjectStartedListener);
@@ -134,14 +132,25 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
             JSONStatusResponse status_response = await upload_task;
 
-            if (status_response.statusCode != StatusCodes.ServerResponseTokenOk)
-            {
-                string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
-                                       string.Format(AppResources.Main_UploadProjectError, status_response.answer);
+            switch (status_response.statusCode)
+            { 
+                case StatusCodes.ServerResponseTokenOk:
+                    break;
 
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
-                            messageString, UploadErrorCallback, MessageBoxOptions.Ok);
+                case StatusCodes.HTTPRequestFailed:
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
+                            AppResources.Main_NoInternetConnection, UploadErrorCallback, MessageBoxOptions.Ok);                        
+                    break;
+
+                default:
+                    string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
+                                           string.Format(AppResources.Main_UploadProjectError, status_response.answer);
+
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
+                                messageString, UploadErrorCallback, MessageBoxOptions.Ok);
+                    break;
             }
+
             if (CatrobatWebCommunicationService.NoUploadsPending())
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(null,

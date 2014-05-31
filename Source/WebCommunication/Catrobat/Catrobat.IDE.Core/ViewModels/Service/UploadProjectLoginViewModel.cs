@@ -101,34 +101,40 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                                                              ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName,
                                                              RegionInfo.CurrentRegion.TwoLetterISORegionName);
 
-                // TODO store values if everything was sucessfull --> error handling (evt. include email here)
                 Context.CurrentToken = status_response.token;
                 Context.CurrentUserName = _username;
+                Context.CurrentUserEmail = _email;
 
-                if (status_response.statusCode == StatusCodes.ServerResponseRegisterOk)
+                switch (status_response.statusCode)
                 {
-                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectRegistrationSucessful,
-                        string.Format(AppResources.Main_UploadProjectWelcome, _username), RegistrationSuccessfulCallback, MessageBoxOptions.Ok);
-                }
-                else if (status_response.statusCode == StatusCodes.ServerResponseTokenOk)
-                {
-                    if (NavigationCallback != null)
-                    {
-                        NavigationCallback();
-                    }
-                    else
-                    {
-                        //TODO: Throw error because of navigation callback shouldn't be null
-                        throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
-                    }
-                }
-                else
-                {
-                    string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
-                                            string.Format(AppResources.Main_UploadProjectLoginError, status_response.answer);
+                    case StatusCodes.ServerResponseRegisterOk:
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectRegistrationSucessful,
+                            string.Format(AppResources.Main_UploadProjectWelcome, _username), RegistrationSuccessfulCallback, MessageBoxOptions.Ok);
+                        break;
 
-                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
-                        messageString, WrongLoginDataCallback, MessageBoxOptions.Ok);
+                    case StatusCodes.ServerResponseTokenOk:
+                        if (NavigationCallback != null)
+                        {
+                            NavigationCallback();
+                        }
+                        else
+                        {
+                            //TODO: Throw error because of navigation callback shouldn't be null
+                            throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
+                        }
+                        break;
+
+                    case StatusCodes.HTTPRequestFailed:
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
+                            AppResources.Main_NoInternetConnection, WrongLoginDataCallback, MessageBoxOptions.Ok);                        
+                        break;
+
+                    default:
+                        string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
+                                                string.Format(AppResources.Main_UploadProjectLoginError, status_response.answer);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
+                            messageString, WrongLoginDataCallback, MessageBoxOptions.Ok);
+                        break;
                 }
             }
         }

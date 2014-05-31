@@ -11,6 +11,7 @@ using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.Core.ViewModels.Settings;
@@ -407,9 +408,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.NavigationService.NavigateTo<UploadProjectLoadingViewModel>();
 
             // Determine which page to open
-            bool registered = await CatrobatWebCommunicationService.AsyncCheckToken(Context.CurrentUserName, Context.CurrentToken);
+            JSONStatusResponse status_response = await CatrobatWebCommunicationService.AsyncCheckToken(Context.CurrentUserName, Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
-            if (registered)
+            if (status_response.statusCode == StatusCodes.ServerResponseTokenOk)
             {
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
@@ -596,7 +597,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             if (isAuto == true)
                 offset = 0;
 
-            List<OnlineProjectHeader> projects = await CatrobatWebCommunicationService.AsyncLoadOnlineProjects(isAppend, _filterText, offset);
+            List<OnlineProjectHeader> projects = await CatrobatWebCommunicationService.AsyncLoadOnlineProjects(_filterText, offset);
 
             lock (OnlineProjects)
             {
