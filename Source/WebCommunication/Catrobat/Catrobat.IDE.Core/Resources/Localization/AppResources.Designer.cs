@@ -2249,6 +2249,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Change user ähnelt.
+        /// </summary>
+        public static string Main_ButtonChangeUser {
+            get {
+                return ResourceManager.GetString("Main_ButtonChangeUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die copy ähnelt.
         /// </summary>
         public static string Main_ButtonCopy {
@@ -2888,6 +2897,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invalid username or password. ähnelt.
+        /// </summary>
+        public static string Main_UploadProjectLoginErrorStatic {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectLoginErrorStatic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Username does not exist. ähnelt.
+        /// </summary>
+        public static string Main_UploadProjectLoginNonExistingUser {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectLoginNonExistingUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Login- or registrationdata is incomplete. ähnelt.
         /// </summary>
         public static string Main_UploadProjectMissingLoginData {
@@ -2920,6 +2947,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_UploadProjectProjectName {
             get {
                 return ResourceManager.GetString("Main_UploadProjectProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Username already exists. ähnelt.
+        /// </summary>
+        public static string Main_UploadProjectRegisterExistingUser {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectRegisterExistingUser", resourceCulture);
             }
         }
         

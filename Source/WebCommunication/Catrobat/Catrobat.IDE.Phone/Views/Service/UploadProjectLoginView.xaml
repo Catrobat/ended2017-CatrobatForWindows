@@ -35,9 +35,6 @@
      
       <TextBlock Margin="0" Text="{Binding Resources.Main_UploadProjectPassword, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
       <PasswordBox Margin="-10 0 10 0" HorizontalAlignment="Stretch" Password="{Binding Password, Mode=TwoWay}" PasswordChanged="PasswordBox_PasswordChanged" />
-
-      <TextBlock Margin="0" Text="{Binding Resources.Main_UploadProjectEmail, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
-      <TextBox Margin="-10 0 10 0" HorizontalAlignment="Stretch" Text="{Binding Email, Mode=TwoWay}" TextChanged="TextBox_TextChanged" />
     </StackPanel>
   </Grid>
 
@@ -46,14 +43,14 @@
       <abu:SwitchAppBarAction>
         <abu:AppBar Id="0">
           <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.check.rest.png" 
-                              Text="{Binding Resources.Main_ButtonLoginRegister, Source={StaticResource LocalizedStrings}}"
+                              Text="{Binding Resources.Main_ButtonLogin, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding LoginCommand}" />
           <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.questionmark.rest.png" 
                               Text="{Binding Resources.Main_ButtonPasswordForgotten, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding ForgottenCommand}" />
-          <!--<abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.new.rest.png" 
+          <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.new.rest.png" 
                               Text="{Binding Resources.Main_ButtonRegister, Source={StaticResource LocalizedStrings}}"
-                              Command="{Binding ForgottenCommand}" />-->
+                              Command="{Binding RegisterCommand}" />
         </abu:AppBar>
       </abu:SwitchAppBarAction>
     </abu:StateChangedTrigger>

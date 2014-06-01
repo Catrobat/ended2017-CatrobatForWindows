@@ -84,13 +84,15 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public RelayCommand ForgottenCommand { get; private set; }
 
+        public RelayCommand RegisterCommand { get; private set; }
+
         #endregion
 
         #region Actions
 
         private async void LoginAction()
         {
-            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) /*|| string.IsNullOrEmpty(_email)*/)
+            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
             {
                 ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
                     AppResources.Main_UploadProjectMissingLoginData, MissingLoginDataCallback, MessageBoxOptions.Ok);
@@ -103,15 +105,9 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
                 Context.CurrentToken = status_response.token;
                 Context.CurrentUserName = _username;
-                Context.CurrentUserEmail = _email;
 
                 switch (status_response.statusCode)
                 {
-                    case StatusCodes.ServerResponseRegisterOk:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectRegistrationSucessful,
-                            string.Format(AppResources.Main_UploadProjectWelcome, _username), RegistrationSuccessfulCallback, MessageBoxOptions.Ok);
-                        break;
-
                     case StatusCodes.ServerResponseTokenOk:
                         if (NavigationCallback != null)
                         {
@@ -122,6 +118,17 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                             //TODO: Throw error because of navigation callback shouldn't be null
                             throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
                         }
+                        break;
+
+                    case StatusCodes.ServerResponseLoginFailed:
+                    case StatusCodes.ServerResponseRegistrationFailed:
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
+                            AppResources.Main_UploadProjectLoginErrorStatic, WrongLoginDataCallback, MessageBoxOptions.Ok);
+                        break;
+
+                    case StatusCodes.ServerResponseMissingEmail:
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
+                            AppResources.Main_UploadProjectLoginNonExistingUser, WrongLoginDataCallback, MessageBoxOptions.Ok);
                         break;
 
                     case StatusCodes.HTTPRequestFailed:
@@ -144,6 +151,12 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             // TODO: Implement.
         }
 
+        private void RegisterAction()
+        {
+            ResetViewModel();
+            ServiceLocator.NavigationService.NavigateTo<UploadProjectRegisterViewModel>();
+        }
+
         protected override void GoBackAction()
         {
             ResetViewModel();
@@ -162,6 +175,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         {
             LoginCommand = new RelayCommand(LoginAction);
             ForgottenCommand = new RelayCommand(ForgottenAction);
+            RegisterCommand = new RelayCommand(RegisterAction);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedAction);
@@ -186,24 +200,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private void WrongLoginDataCallback(MessageboxResult result)
         {
             _wrongLoginDataCallbackResult = result;
-        }
-
-        private void RegistrationSuccessfulCallback(MessageboxResult result)
-        {
-            _registrationSuccessfulCallbackResult = result;
-
-            if (result == MessageboxResult.Ok)
-            {
-                if (NavigationCallback != null)
-                {
-                    NavigationCallback();
-                }
-                else
-                {
-                    //TODO: Throw error because of navigation callback shouldn't be null
-                    throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
-                }
-            }
         }
         #endregion
 
