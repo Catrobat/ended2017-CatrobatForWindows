@@ -28,12 +28,12 @@ Interpreter::Interpreter()
 	m_inclinationProvider = ref new InclinationProvider();
 	m_loudnessProvider = ref new LoudnessCapture();
 
-	//m_loudnessProvider->StartCapture();
+	m_loudnessProvider->StartCapture();
 }
 
 Interpreter::~Interpreter()
 {
-	//m_loudnessProvider->StopCapture();
+	m_loudnessProvider->StopCapture();
 }
 
 double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
@@ -336,6 +336,7 @@ double Interpreter::InterpretSensor(FormulaTree *tree, Object *object)
 		returnValue = m_accelerometerProvider->GetZ();
 		break;
 	case Sensor::LOUDNESS:
+		//m_loudnessProvider->StartCapture();
 		returnValue = m_loudnessProvider->GetLoudness();
 		break;
 	default:
