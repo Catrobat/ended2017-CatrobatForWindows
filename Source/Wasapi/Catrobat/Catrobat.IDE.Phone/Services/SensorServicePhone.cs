@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Catrobat.IDE.Core.Services;
 using Microsoft.Devices.Sensors;
+using Microsoft.Xna.Framework;
 
 namespace Catrobat.IDE.Phone.Services
 {
@@ -29,11 +30,8 @@ namespace Catrobat.IDE.Phone.Services
                 try { _motion.Start(); }
                 catch (Exception) { Debugger.Break(); }
             }
-            //if (Microphone2.IsSupported)
-            {
-                try { _microphone.Start(); }
-                catch (Exception) { Debugger.Break(); }
-            }
+            try { _microphone.Start(); }
+            catch (Exception) { Debugger.Break(); }
         }
 
         public void Stop()
@@ -66,12 +64,12 @@ namespace Catrobat.IDE.Phone.Services
 
         public double GetInclinationX()
         {
-            return _motion.IsDataValid ? _motion.CurrentValue.Attitude.Roll : 0;
+            return _motion.IsDataValid ? -MathHelper.ToDegrees(_motion.CurrentValue.Attitude.Roll) : 0;
         }
 
         public double GetInclinationY()
         {
-            return _motion.IsDataValid ? _motion.CurrentValue.Attitude.Pitch : 0;
+            return _motion.IsDataValid ? MathHelper.ToDegrees(_motion.CurrentValue.Attitude.Pitch) : 0;
         }
 
         public double GetLoudness()
