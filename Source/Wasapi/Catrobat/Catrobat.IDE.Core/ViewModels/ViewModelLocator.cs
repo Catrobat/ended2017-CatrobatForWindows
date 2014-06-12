@@ -31,6 +31,7 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<UploadProjectViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<UploadProjectLoadingViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<UploadProjectLoginViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<UploadProjectRegisterViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SoundRecorderViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SettingsViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SettingsBrickViewModel>(TypeCreationMode.Normal);
@@ -135,6 +136,17 @@ namespace Catrobat.IDE.Core.ViewModels
             get
             {
                 return ServiceLocator.GetInstance<UploadProjectLoginViewModel>();
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public UploadProjectRegisterViewModel UploadProjectRegisterViewModel
+        {
+            get
+            {
+                return ServiceLocator.GetInstance<UploadProjectRegisterViewModel>();
             }
         }
 

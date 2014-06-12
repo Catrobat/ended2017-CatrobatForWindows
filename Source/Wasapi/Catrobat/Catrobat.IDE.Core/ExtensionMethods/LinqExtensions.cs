@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Catrobat.IDE.Core.ExtensionMethods
 {
@@ -125,15 +126,110 @@ namespace Catrobat.IDE.Core.ExtensionMethods
             return result;
         }
 
+        /// <summary>Creates a <see cref="System.Collections.ObjectModel.ReadOnlyDictionary{TKey,TValue}" /> 
+        /// from an <see cref="System.Collections.Generic.IEnumerable{T}" /> 
+        /// according to a specified key selector function, a comparer, and an element selector function. </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>. </typeparam>
+        /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>. </typeparam>
+        /// <typeparam name="TElement">The type of the value returned by <paramref name="elementSelector"/>. </typeparam>
+        /// <param name="source">An <see cref="System.Collections.Generic.IEnumerable{T}" /> 
+        /// to create a <see cref="System.Collections.Generic.Dictionary{TKey,TValue}" /> from. </param>
+        /// <param name="keySelector">A function to extract a key from each element. </param>
+        /// <param name="elementSelector">A transform function to produce a result element value from each element. </param>
+        /// <returns>A <see cref="System.Collections.Generic.Dictionary{TKey,TValue}" /> 
+        /// that contains values of type <typeparamref name="TElement"/> selected from the input sequence. </returns>
+        /// <exception cref="System.ArgumentNullException"><paramref name="source"/> 
+        /// or <paramref name="keySelector"/> 
+        /// or <paramref name="elementSelector"/> is null.
+        /// -or-<paramref name="keySelector"/> produces a key that is null. </exception>
+        /// <exception cref="System.ArgumentException"><paramref name="keySelector"/> produces duplicate keys for two elements. </exception>
+        public static ReadOnlyDictionary<TKey, TElement> ToReadOnlyDictionary<TSource, TKey, TElement>(
+            this IEnumerable<TSource> source, 
+            Func<TSource, TKey> keySelector, 
+            Func<TSource, TElement> elementSelector)
+        {
+            return new ReadOnlyDictionary<TKey, TElement>(source.ToDictionary(keySelector, elementSelector));
+        }
+
+        /// <summary>Creates a <see cref="System.Collections.ObjectModel.ReadOnlyDictionary{TKey,TValue}" /> 
+        /// from an <see cref="System.Collections.Generic.IEnumerable{T}" /> 
+        /// according to a specified key selector function, a comparer, and an element selector function. </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>. </typeparam>
+        /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>. </typeparam>
+        /// <typeparam name="TElement">The type of the value returned by <paramref name="elementSelector"/>. </typeparam>
+        /// <param name="source">An <see cref="System.Collections.Generic.IEnumerable{T}" /> 
+        /// to create a <see cref="System.Collections.Generic.Dictionary{TKey,TValue}" /> from. </param>
+        /// <param name="keySelector">A function to extract a key from each element. </param>
+        /// <param name="elementSelector">A transform function to produce a result element value from each element. </param>
+        /// <returns>A <see cref="System.Collections.Generic.Dictionary{TKey,TValue}" /> 
+        /// that contains values of type <typeparamref name="TElement"/> selected from the input sequence. </returns>
+        /// <exception cref="System.ArgumentNullException"><paramref name="source"/> 
+        /// or <paramref name="keySelector"/> 
+        /// or <paramref name="elementSelector"/> is null.
+        /// -or-<paramref name="keySelector"/> produces a key that is null. </exception>
+        /// <exception cref="System.ArgumentException"><paramref name="keySelector"/> produces duplicate keys for two elements. </exception>
+        public static async Task<ReadOnlyDictionary<TKey, TElement>> ToReadOnlyDictionaryAsync<TSource, TKey, TElement>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, Task<TElement>> elementSelector)
+        {
+            return new ReadOnlyDictionary<TKey, TElement>(await source.ToDictionaryAsync(keySelector, elementSelector));
+        }
+
+        /// <summary>Creates a <see cref="System.Collections.Generic.Dictionary{TKey,TValue}" /> 
+        /// from an <see cref="System.Collections.Generic.IEnumerable{T}" /> 
+        /// according to a specified key selector function, a comparer, and an element selector function. </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>. </typeparam>
+        /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>. </typeparam>
+        /// <typeparam name="TElement">The type of the value returned by <paramref name="elementSelector"/>. </typeparam>
+        /// <param name="source">An <see cref="System.Collections.Generic.IEnumerable{T}" /> 
+        /// to create a <see cref="System.Collections.Generic.Dictionary{TKey,TValue}" /> from. </param>
+        /// <param name="keySelector">A function to extract a key from each element. </param>
+        /// <param name="elementSelector">A transform function to produce a result element value from each element. </param>
+        /// <returns>A <see cref="System.Collections.Generic.Dictionary{TKey,TValue}" /> 
+        /// that contains values of type <typeparamref name="TElement"/> selected from the input sequence. </returns>
+        /// <exception cref="System.ArgumentNullException"><paramref name="source"/> 
+        /// or <paramref name="keySelector"/> 
+        /// or <paramref name="elementSelector"/> is null.
+        /// -or-<paramref name="keySelector"/> produces a key that is null. </exception>
+        /// <exception cref="System.ArgumentException"><paramref name="keySelector"/> produces duplicate keys for two elements. </exception>
+        public static async Task<Dictionary<TKey, TElement>> ToDictionaryAsync<TSource, TKey, TElement>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, Task<TElement>> elementSelector)
+        {
+            var result = new Dictionary<TKey, TElement>();
+            foreach (var element in source)
+            {
+                result.Add(keySelector(element), await elementSelector(element));
+            }
+            return result;
+        }
+
+        /// <summary>Creates a <see cref="System.Collections.ObjectModel.ObservableCollection{TSource}" /> 
+        /// from an <see cref="System.Collections.Generic.IEnumerable{T}" />. </summary>
         public static ObservableCollection<TSource> ToObservableCollection<TSource>(this IEnumerable<TSource> source)
         {
             return new ObservableCollection<TSource>(source);
         }
 
+        /// <summary>Creates a <see cref="System.Collections.ObjectModel.ObservableCollection{TSource}" /> 
+        /// from an <see cref="System.Collections.Generic.IEnumerable{T}" />. </summary>
+        public static async Task<ObservableCollection<TSource>> ToObservableCollectionAsync<TSource>(this IEnumerable<Task<TSource>> source)
+        {
+            var result = new ObservableCollection<TSource>();
+            foreach (var element in source)
+            {
+                result.Add(await element);
+            }
+            return result;
+        }
+
+        /// <summary>Creates a <see cref="System.Collections.Generic.HashSet{TSource}" /> 
+        /// from an <see cref="System.Collections.Generic.IEnumerable{T}" />. </summary>
         public static ISet<TSource> ToSet<TSource>(this IEnumerable<TSource> source)
         {
             return new HashSet<TSource>(source);
         }
-
     }
 }

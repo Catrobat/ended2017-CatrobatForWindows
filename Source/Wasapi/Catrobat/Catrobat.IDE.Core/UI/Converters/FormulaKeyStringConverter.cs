@@ -77,10 +77,8 @@ namespace Catrobat.IDE.Core.UI.Converters
                 case FormulaEditorKey.PositionY: return AppResources.Formula_Property_PositionY;
                 case FormulaEditorKey.Rotation: return AppResources.Formula_Property_Rotation;
                 case FormulaEditorKey.Size: return AppResources.Formula_Property_Size;
-                case FormulaEditorKey.LocalVariable:
-                case FormulaEditorKey.GlobalVariable:
-                    var variable = value.Variable;
-                    return variable == null || variable.Name == null ? string.Empty : variable.Name;
+                case FormulaEditorKey.LocalVariable: return value.LocalVariable == null || value.LocalVariable.Name == null ? string.Empty : value.LocalVariable.Name;
+                case FormulaEditorKey.GlobalVariable: return value.GlobalVariable == null || value.GlobalVariable.Name == null ? string.Empty : value.GlobalVariable.Name;
                 case FormulaEditorKey.OpeningParenthesis: return "(";
                 case FormulaEditorKey.ClosingParenthesis: return ")";
                 default: throw new ArgumentOutOfRangeException("value");

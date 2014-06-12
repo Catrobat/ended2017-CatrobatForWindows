@@ -1,5 +1,6 @@
-﻿using Catrobat.IDE.Core.Utilities.Helpers;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using System.Linq;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Utilities.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Tests.Misc;
 
@@ -33,7 +34,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
 
-            foreach (var sprite in project1.SpriteList.Sprites)
+            foreach (var sprite in project1.Sprites)
             {
                 var localVariableList = VariableHelper.GetLocalVariableList(project1, sprite);
                 Assert.AreEqual(1, localVariableList.Count);
@@ -64,7 +65,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
 
-            foreach (var sprite in project1.SpriteList.Sprites)
+            foreach (var sprite in project1.Sprites)
             {
                 var localVariableList = VariableHelper.GetLocalVariableList(project1, sprite);
 
@@ -82,7 +83,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
 
-            var newUserVariable = new UserVariable
+            var newUserVariable = new GlobalVariable
                 {
                     Name = "NewUserVariable"
                 };
@@ -98,9 +99,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
             ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
 
-            foreach (var sprite in project1.SpriteList.Sprites)
+            foreach (var sprite in project1.Sprites)
             {
-                var newUserVariable = new UserVariable
+                var newUserVariable = new LocalVariable
                     {
                         Name = "NewUserVariable"
                     };
@@ -116,7 +117,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         {
             ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
-            var localVariable = project1.VariableList.ObjectVariableList.ObjectVariableEntries[0].VariableList.UserVariables[0];
+            var localVariable = project1.Sprites.SelectMany(sprite => sprite.LocalVariables).First();
 
             Assert.IsNotNull(localVariable);
             Assert.IsTrue(VariableHelper.IsVariableLocal(project1, localVariable));
@@ -144,7 +145,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         {
             ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
-            var sprite1 = project1.SpriteList.Sprites[0];
+            var sprite1 = project1.Sprites[0];
 
             for (int i = 0; i < 20; i++)
             {
@@ -165,12 +166,12 @@ namespace Catrobat.IDE.Tests.Tests.Data
             var existingGlobalVariableName = "GlobalTestVariable1";
             var notExistingGlobalVariableName = "test2";
 
-            var sprite1 = project1.SpriteList.Sprites[0];
+            var sprite1 = project1.Sprites[0];
             Assert.IsTrue(VariableHelper.VariableNameExists(project1, sprite1, existingGlobalVariableName));
             Assert.IsFalse(VariableHelper.VariableNameExists(project1, sprite1, notExistingGlobalVariableName));
 
             var notExistingLocalVariableName = "test1";
-            foreach (var sprite in project1.SpriteList.Sprites)
+            foreach (var sprite in project1.Sprites)
             {
                 var existingLocalVariableName = "LocalTestVariable";
 
@@ -189,13 +190,13 @@ namespace Catrobat.IDE.Tests.Tests.Data
             var existingGlobalVariableName = "GlobalTestVariable1";
             var notExistingGlobalVariableName = "test2";
 
-            var sprite1 = project1.SpriteList.Sprites[0];
+            var sprite1 = project1.Sprites[0];
             Assert.IsTrue(VariableHelper.VariableNameExistsCheckSelf(project1, sprite1, globalVariable, existingGlobalVariableName));
             Assert.IsFalse(VariableHelper.VariableNameExistsCheckSelf(project1, sprite1, globalVariable, notExistingGlobalVariableName));
             Assert.IsFalse(VariableHelper.VariableNameExistsCheckSelf(project1, sprite1, globalVariable, sameGlobalVariableName));
 
             var notExistingLocalVariableName = "test1";
-            foreach (var sprite in project1.SpriteList.Sprites)
+            foreach (var sprite in project1.Sprites)
             {
                 foreach (var localVariable in VariableHelper.GetLocalVariableList(project1, sprite))
                 {

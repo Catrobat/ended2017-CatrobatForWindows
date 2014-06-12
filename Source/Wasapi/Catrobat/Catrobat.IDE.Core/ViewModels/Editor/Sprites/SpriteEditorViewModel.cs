@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Bricks;
-using Catrobat.IDE.Core.CatrobatObjects.Costumes;
-using Catrobat.IDE.Core.CatrobatObjects.Scripts;
-using Catrobat.IDE.Core.CatrobatObjects.Sounds;
+using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
@@ -26,7 +25,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         private Project _currentProject;
         private Sprite _selectedSprite;
-        private readonly ScriptBrickCollection _scriptBricks;
+        private readonly ScriptBrickCollection _bricks;
         private Sound _sound;
         private PortableListBoxViewPort _listBoxViewPort;
 
@@ -35,13 +34,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private int _numberOfSoundsSelected;
         private int _numberOfObjectsSelected;
         private ObservableCollection<Costume> _selectedCostumes;
-        private ObservableCollection<DataObject> _SelectedActions;
+        private ObservableCollection<Model> _selectedActions;
         private ObservableCollection<Sound> _selectedSounds;
         private int _selectedTabIndex;
 
         #endregion
 
-        # region Properties
+        #region Properties
 
         public int SelectedTabIndex
         {
@@ -63,7 +62,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             get
             {
-                return CurrentProject.SpriteList.Sprites;
+                return CurrentProject.Sprites;
             }
         }
 
@@ -75,7 +74,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 if (IsInDesignModeStatic)
                 {
                     var sprite = new Sprite();
-                    sprite.Scripts = new ScriptList{ Scripts = new ObservableCollection<Script>()};
+                    sprite.Scripts = new ObservableCollection<Script>();
                 }
 
                 return _selectedSprite;
@@ -99,11 +98,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 //if (_scriptBricks != null && _scriptBricks.Count == 0 && ListBoxViewPort == null)
                 ListBoxViewPort = new PortableListBoxViewPort(0, 0);
 
-                if (_scriptBricks != null)
+                if (_bricks != null)
                 {
-                    _scriptBricks.Update(_selectedSprite);
+                    _bricks.Update(_selectedSprite);
 
-                    if (_scriptBricks.Count > 0 &&
+                    if (_bricks.Count > 0 &&
                         ListBoxViewPort.FirstVisibleIndex == 0 &&
                         ListBoxViewPort.LastVisibleIndex == 0)
                         ListBoxViewPort = new PortableListBoxViewPort(1, 2);
@@ -120,7 +119,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             get
             {
-                return _scriptBricks;
+                return _bricks;
             }
         }
 
@@ -128,9 +127,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             get
             {
-                if (_scriptBricks == null)
+                if (_bricks == null)
                     return true;
-                return _scriptBricks.Count <= 1;
+                return _bricks.Count <= 1;
             }
         }
 
@@ -139,7 +138,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             get
             {
                 if (_selectedSprite != null)
-                    return _selectedSprite.Sounds.Sounds;
+                    return _selectedSprite.Sounds;
 
                 return null;
             }
@@ -149,9 +148,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             get
             {
-                if (_selectedSprite == null || _selectedSprite.Sounds.Sounds == null)
+                if (_selectedSprite == null || _selectedSprite.Sounds == null)
                     return true;
-                return _selectedSprite.Sounds.Sounds.Count == 0;
+                return _selectedSprite.Sounds.Count == 0;
             }
         }
 
@@ -160,7 +159,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             get
             {
                 if (_selectedSprite != null)
-                    return _selectedSprite.Costumes.Costumes;
+                    return _selectedSprite.Costumes;
 
                 return null;
             }
@@ -170,9 +169,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             get
             {
-                if (_selectedSprite == null || _selectedSprite.Costumes.Costumes == null)
+                if (_selectedSprite == null || _selectedSprite.Costumes == null)
                     return true;
-                return _selectedSprite.Costumes.Costumes.Count == 0;
+                return _selectedSprite.Costumes.Count == 0;
             }
         }
 
@@ -187,9 +186,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        public DataObject SelectedBrick { get; set; }
+        public Model SelectedBrick { get; set; }
 
-        public ObservableCollection<string> BroadcastMessages
+        public ObservableCollection<BroadcastMessage> BroadcastMessages
         {
             get { return CurrentProject.BroadcastMessages; }
         }
@@ -251,12 +250,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        public ObservableCollection<DataObject> SelectedActions
+        public ObservableCollection<Model> SelectedActions
         {
-            get { return _SelectedActions; }
+            get { return _selectedActions; }
             set
             {
-                _SelectedActions = value;
+                _selectedActions = value;
                 RaisePropertyChanged(() => SelectedActions);
             }
         }
@@ -293,7 +292,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             private set;
         }
 
-        public RelayCommand<DataObject> AddBroadcastMessageCommand
+        public RelayCommand<Model> AddBroadcastMessageCommand
         {
             get;
             private set;
@@ -516,13 +515,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 {
                     if (scriptBrick is Script)
                     {
-                        DataObject copy = (scriptBrick as Script).Copy();
+                        Model copy = (scriptBrick as Script).Clone();
                         ScriptBricks.Insert(ScriptBricks.ScriptIndexOf((Script)scriptBrick) + 1, copy);
                     }
 
                     if (scriptBrick is Brick)
                     {
-                        DataObject copy = (scriptBrick as Brick).Copy();
+                        Model copy = (scriptBrick as Brick).Clone();
                         ScriptBricks.Insert(ScriptBricks.IndexOf(scriptBrick) + 1, copy);
                     }
                 }
@@ -536,35 +535,35 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
             foreach (var scriptBrick in SelectedActions)
             {
-                DataObject beginBrick = null;
-                DataObject endBrick = null;
+                Model beginBrick = null;
+                Model endBrick = null;
 
-                if (scriptBrick is LoopBeginBrick)
+                if (scriptBrick is IfBrick)
                 {
                     beginBrick = scriptBrick;
-                    endBrick = (scriptBrick as LoopBeginBrick).LoopEndBrick;
+                    endBrick = (scriptBrick as IfBrick).End;
                 }
-                if (scriptBrick is LoopEndBrick)
+                else if (scriptBrick is ElseBrick)
                 {
-                    beginBrick = (scriptBrick as LoopEndBrick).LoopBeginBrick;
+                    beginBrick = (scriptBrick as ElseBrick).Begin;
+                    endBrick = (scriptBrick as ElseBrick).End;
+                }
+                else if (scriptBrick is EndIfBrick)
+                {
+                    beginBrick = (scriptBrick as EndIfBrick).Begin;
+                    endBrick = scriptBrick;
+                }
+                else if (scriptBrick is BlockBeginBrick)
+                {
+                    beginBrick = scriptBrick;
+                    endBrick = (scriptBrick as BlockBeginBrick).End;
+                }
+                else if (scriptBrick is BlockEndBrick)
+                {
+                    beginBrick = (scriptBrick as BlockEndBrick).Begin;
                     endBrick = scriptBrick;
                 }
 
-                if (scriptBrick is IfLogicBeginBrick)
-                {
-                    beginBrick = scriptBrick;
-                    endBrick = (scriptBrick as IfLogicBeginBrick).IfLogicEndBrick;
-                }
-                if (scriptBrick is IfLogicElseBrick)
-                {
-                    beginBrick = (scriptBrick as IfLogicElseBrick).IfLogicBeginBrick;
-                    endBrick = (scriptBrick as IfLogicElseBrick).IfLogicEndBrick;
-                }
-                if (scriptBrick is IfLogicEndBrick)
-                {
-                    beginBrick = (scriptBrick as IfLogicEndBrick).IfLogicBeginBrick;
-                    endBrick = scriptBrick;
-                }
 
                 if (scriptBrick is Script && !scriptsToRemove.Contains(scriptBrick as Script))
                     scriptsToRemove.Add(scriptBrick as Script);
@@ -602,9 +601,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         }
 
 
-        private void AddBroadcastMessageAction(DataObject broadcastObject)
+        private void AddBroadcastMessageAction(Model broadcastObject)
         {
-            var message = new GenericMessage<DataObject>(broadcastObject);
+            var message = new GenericMessage<Model>(broadcastObject);
             Messenger.Default.Send(message, ViewModelMessagingToken.BroadcastObjectListener);
 
             ServiceLocator.NavigationService.NavigateTo<NewBroadcastMessageViewModel>();
@@ -663,7 +662,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             foreach (var costume in SelectedCostumes)
             {
-                var newCostume = await costume.Copy() as Costume;
+                var newCostume = await costume.CloneAsync(CurrentProject);
                 if (newCostume != null)
                     Costumes.Insert(Costumes.IndexOf(costume) + 1, newCostume);
             }
@@ -766,29 +765,25 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private void NothingItemHackAction(object attachedObject)
         {
             // Pretty hack-y, but oh well...
-            if (attachedObject is BroadcastScript)
+            if (attachedObject is BroadcastReceivedScript)
             {
-                ((BroadcastScript)attachedObject).ReceivedMessage = null;
+                ((BroadcastReceivedScript) attachedObject).Message = null;
             }
-            else if (attachedObject is PointToBrick)
+            else if (attachedObject is LookAtBrick)
             {
-                ((PointToBrick)attachedObject).PointedSprite = null;
+                ((LookAtBrick) attachedObject).Target = null;
             }
             else if (attachedObject is PlaySoundBrick)
             {
-                ((PlaySoundBrick)attachedObject).Sound = null;
+                ((PlaySoundBrick) attachedObject).Value = null;
             }
             else if (attachedObject is SetCostumeBrick)
             {
-                ((SetCostumeBrick)attachedObject).Costume = null;
+                ((SetCostumeBrick) attachedObject).Value = null;
             }
             else if (attachedObject is BroadcastBrick)
             {
-                ((BroadcastBrick)attachedObject).BroadcastMessage = null;
-            }
-            else if (attachedObject is BroadcastWaitBrick)
-            {
-                ((BroadcastWaitBrick)attachedObject).BroadcastMessage = null;
+                ((BroadcastBrick) attachedObject).Message = null;
             }
         }
 
@@ -837,7 +832,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             SelectedSprite = message.Content;
         }
 
-        private void ReceiveNewBroadcastMessageAction(GenericMessage<string> message)
+        private void ReceiveNewBroadcastMessageAction(GenericMessage<BroadcastMessage> message)
         {
             if (!CurrentProject.BroadcastMessages.Contains(message.Content))
             {
@@ -846,7 +841,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        private void ReceiveSelectedBrickMessageAction(GenericMessage<DataObject> message)
+        private void ReceiveSelectedBrickMessageAction(GenericMessage<Model> message)
         {
             SelectedBrick = message.Content;
             RaisePropertyChanged(() => SelectedBrick);
@@ -855,7 +850,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         public SpriteEditorViewModel()
         {
-            SelectedActions = new ObservableCollection<DataObject>();
+            SelectedActions = new ObservableCollection<Model>();
             SelectedActions.CollectionChanged += SelectedActionsOnCollectionChanged;
             SelectedCostumes = new ObservableCollection<Costume>();
             SelectedCostumes.CollectionChanged += SelectedCostumesOnCollectionChanged;
@@ -864,7 +859,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
             RenameSpriteCommand = new RelayCommand(RenameSpriteAction);
 
-            AddBroadcastMessageCommand = new RelayCommand<DataObject>(AddBroadcastMessageAction);
+            AddBroadcastMessageCommand = new RelayCommand<Model>(AddBroadcastMessageAction);
 
             AddNewScriptBrickCommand = new RelayCommand(AddNewScriptBrickAction);
             CopyScriptBrickCommand = new RelayCommand(CopyScriptBrickAction, CanExecuteCopyActionCommand);
@@ -896,7 +891,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             NothingItemHackCommand = new RelayCommand<object>(NothingItemHackAction);
             SoundsPlayStateChangedCommand = new RelayCommand<PlayPauseCommandArguments>(SoundsPlayStateChangedAction);
 
-            _scriptBricks = new ScriptBrickCollection();
+            _bricks = new ScriptBrickCollection();
 
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
@@ -904,9 +899,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
 
-            Messenger.Default.Register<GenericMessage<string>>(this,
+            Messenger.Default.Register<GenericMessage<BroadcastMessage>>(this,
                 ViewModelMessagingToken.BroadcastMessageListener, ReceiveNewBroadcastMessageAction);
-            Messenger.Default.Register<GenericMessage<DataObject>>(this,
+            Messenger.Default.Register<GenericMessage<Model>>(this,
                 ViewModelMessagingToken.SelectedBrickListener, ReceiveSelectedBrickMessageAction);
         }
 
@@ -954,9 +949,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
                 foreach (var costume in costumesToRemove)
                 {
-                    ReferenceHelper.CleanUpReferencesAfterDelete(costume, SelectedSprite);
+                    ReferenceHelper.CleanUpCostumeReferences(costume, SelectedSprite);
 
-                    await costume.Delete();
+                    await costume.Delete(CurrentProject);
                     Costumes.Remove(costume);
                 }
             }
@@ -970,9 +965,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
                 foreach (var sound in soundsToRemove)
                 {
-                    ReferenceHelper.CleanUpReferencesAfterDelete(sound, SelectedSprite);
+                    ReferenceHelper.CleanUpSoundReferences(sound, SelectedSprite);
 
-                    await sound.Delete();
+                    await sound.Delete(CurrentProject);
                     Sounds.Remove(sound);
                 }
             }

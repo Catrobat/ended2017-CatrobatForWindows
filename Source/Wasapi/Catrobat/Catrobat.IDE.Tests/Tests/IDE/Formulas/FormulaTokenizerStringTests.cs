@@ -1,6 +1,6 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Core.Formulas;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+﻿using Catrobat.IDE.Core.Formulas;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Extensions;
@@ -17,8 +17,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
     [TestClass]
     public class FormulaTokenizerStringTests
     {
-        private readonly UserVariable[] _localVariables = {new UserVariable {Name = "Variable1"}, new UserVariable {Name = "Variable2"}};
-        private readonly UserVariable[] _globalVariables = {new UserVariable {Name = "Variable2"}, new UserVariable {Name = "Variable3"}};
+        private readonly LocalVariable[] _localVariables = {new LocalVariable{Name = "Variable1"}, new LocalVariable{Name = "Variable2"}};
+        private readonly GlobalVariable[] _globalVariables = {new GlobalVariable{Name = "Variable2"}, new GlobalVariable{Name = "Variable3"}};
         private readonly FormulaTokenizer _tokenizer;
 
         public FormulaTokenizerStringTests()
@@ -240,7 +240,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             foreach (var casedInput in casedInputs)
             {
                 ParsingError parsingError;
-                EnumerableAssert.AreEqual(expectedTokens, _tokenizer.Tokenize(casedInput, out parsingError));
+                EnumerableAssert.AreTestEqual(expectedTokens, _tokenizer.Tokenize(casedInput, out parsingError));
                 Assert.IsNull(parsingError);
             }
         }

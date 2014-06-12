@@ -1,7 +1,7 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Core.ExtensionMethods;
+﻿using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Formulas;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -155,8 +155,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestVariables()
         {
-            TestEvaluator(0, FormulaTreeFactory.CreateLocalVariableNode);
-            TestEvaluator(0, FormulaTreeFactory.CreateGlobalVariableNode);
+            TestEvaluator<LocalVariable>(0, FormulaTreeFactory.CreateLocalVariableNode);
+            TestEvaluator<GlobalVariable>(0, FormulaTreeFactory.CreateGlobalVariableNode);
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
@@ -168,26 +168,26 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Helpers
 
-        private void TestEvaluator(double expectedValue, IFormulaTree formula)
+        private void TestEvaluator(double expectedValue, FormulaTree formula)
         {
             Assert.AreEqual(
                 expected: expectedValue,
                 actual: FormulaEvaluator.Evaluate(formula));
         }
 
-        private void TestEvaluator(bool expectedValue, IFormulaTree formula)
+        private void TestEvaluator(bool expectedValue, FormulaTree formula)
         {
             Assert.AreEqual(
                 expected: expectedValue,
                 actual: FormulaEvaluator.EvaluateLogic(formula));
         }
 
-        private void TestEvaluator(Func<double, bool> condition, IFormulaTree formula)
+        private void TestEvaluator(Func<double, bool> condition, FormulaTree formula)
         {
             Assert.IsTrue(condition(FormulaEvaluator.EvaluateNumber(formula)));
         }
 
-        private void TestEvaluator(Func<bool, bool> condition, IFormulaTree formula)
+        private void TestEvaluator(Func<bool, bool> condition, FormulaTree formula)
         {
             Assert.IsTrue(condition(FormulaEvaluator.EvaluateLogic(formula)));
         }
@@ -197,16 +197,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestEvaluator(condition, formulaCreator.Invoke());
         }
 
-        private void TestEvaluator(double expectedValue, Func<UserVariable, ConstantFormulaTree> formulaCreator)
+        private void TestEvaluator<TVariable>(double expectedValue, Func<TVariable, ConstantFormulaTree> formulaCreator) where TVariable : Variable, new()
         {
-            var x = new UserVariable
+            var x = new TVariable
             {
                 Name = "TestVariable"
             };
             TestEvaluator(expectedValue, formulaCreator.Invoke(x));
         }
 
-        private void TestEvaluator(Func<double, double, double, bool> condition, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        private void TestEvaluator(Func<double, double, double, bool> condition, Func<FormulaTree, FormulaTree, BinaryFormulaTree> formulaCreator)
         {
             foreach (var x in new[] { _random.NextDouble(), 0, _random.NextDouble(-1, 0) })
             {
@@ -221,7 +221,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             }
         }
 
-        private void TestEvaluator(Func<bool, bool, bool, bool> condition, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        private void TestEvaluator(Func<bool, bool, bool, bool> condition, Func<FormulaTree, FormulaTree, BinaryFormulaTree> formulaCreator)
         {
             foreach (var x in new[] { true, false })
             {
@@ -246,7 +246,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestEvaluator(expectedValue, formulaCreator.Invoke());
         }
 
-        private void TestEvaluator(Func<double, double> expectedValue, Func<double, IFormulaTree> formulaCreator)
+        private void TestEvaluator(Func<double, double> expectedValue, Func<double, FormulaTree> formulaCreator)
         {
             foreach (var x in new[] { _random.NextDouble(), 0, _random.NextDouble(-1, 0) })
             {
@@ -256,7 +256,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             }
         }
 
-        private void TestEvaluator(Func<double, double> expectedValue, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
+        private void TestEvaluator(Func<double, double> expectedValue, Func<FormulaTree, UnaryFormulaTree> formulaCreator)
         {
             foreach (var x in new[] {_random.NextDouble(), 0, _random.NextDouble(-1, 0)})
             {
@@ -266,7 +266,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             }
         }
 
-        private void TestEvaluator(Func<bool, bool> expectedValue, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
+        private void TestEvaluator(Func<bool, bool> expectedValue, Func<FormulaTree, UnaryFormulaTree> formulaCreator)
         {
             var x = _random.NextBool();
             TestEvaluator(
@@ -274,7 +274,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 formula: formulaCreator.Invoke(FormulaTreeFactory.CreateTruthValueNode(x)));
         }
 
-        private void TestEvaluator(Func<double, double, double> expectedValue, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        private void TestEvaluator(Func<double, double, double> expectedValue, Func<FormulaTree, FormulaTree, BinaryFormulaTree> formulaCreator)
         {
             foreach (var x in new[] {_random.NextDouble(), 0, _random.NextDouble(-1, 0)})
             {
@@ -289,7 +289,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             }
         }
 
-        private void TestEvaluator(Func<double, double, bool> expectedValue, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        private void TestEvaluator(Func<double, double, bool> expectedValue, Func<FormulaTree, FormulaTree, BinaryFormulaTree> formulaCreator)
         {
             foreach (var x in new[] {_random.NextDouble(), 0, _random.NextDouble(-1, 0)})
             {
@@ -302,7 +302,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             }
         }
 
-        private void TestEvaluator(Func<bool, bool, bool> expectedValue, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        private void TestEvaluator(Func<bool, bool, bool> expectedValue, Func<FormulaTree, FormulaTree, BinaryFormulaTree> formulaCreator)
         {
             var x = _random.NextBool();
             var y = _random.NextBool();

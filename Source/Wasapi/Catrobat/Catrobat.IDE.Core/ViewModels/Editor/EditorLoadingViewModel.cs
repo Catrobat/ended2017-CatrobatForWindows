@@ -1,5 +1,7 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
+using Catrobat.IDE.Core.Xml;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor
@@ -8,13 +10,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor
     {
         #region Private Members
 
-        private Project _currentProject;
+        private XmlProject _currentProject;
 
         #endregion
 
         #region Properties
 
-        public Project CurrentProject
+        public XmlProject CurrentProject
         {
             get { return _currentProject; }
             set
@@ -48,7 +50,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor
 
         #region Message Actions
 
-        private void CurrentProjectChangedAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedAction(GenericMessage<XmlProject> message)
         {
             CurrentProject = message.Content;
         }
@@ -59,7 +61,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor
         {
             SkipAndNavigateTo = typeof (SpritesViewModel);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<XmlProject>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
     }

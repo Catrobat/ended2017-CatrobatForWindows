@@ -1,6 +1,6 @@
 ﻿using System.Text;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 
 namespace Catrobat.IDE.Core.Formulas
 {
@@ -8,7 +8,7 @@ namespace Catrobat.IDE.Core.Formulas
     {
         public const string EmptyChild = " ";
 
-        public static string Serialize(IFormulaTree formula)
+        public static string Serialize(FormulaTree formula)
         {
             if (formula == null) return string.Empty;
 

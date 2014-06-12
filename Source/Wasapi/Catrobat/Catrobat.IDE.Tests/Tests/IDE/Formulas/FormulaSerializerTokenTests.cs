@@ -1,7 +1,7 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Core.Formulas;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+﻿using Catrobat.IDE.Core.Formulas;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Services;
@@ -141,17 +141,17 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestVariables()
         {
-            TestSerializer(FormulaTokenFactory.CreateLocalVariableToken);
-            TestSerializer(FormulaTokenFactory.CreateGlobalVariableToken);
+            TestSerializer<LocalVariable>(FormulaTokenFactory.CreateLocalVariableToken);
+            TestSerializer<GlobalVariable>(FormulaTokenFactory.CreateGlobalVariableToken);
         }
 
-        private void TestSerializer(Func<UserVariable, ConstantFormulaTree> formulaCreator)
+        private void TestSerializer<TVariable>(Func<TVariable, ConstantFormulaTree> formulaCreator) where TVariable : Variable, new()
         {
-            var x = new UserVariable
+            var x = new TVariable
             {
                 Name = "TestVariable"
             };
-            var y = new UserVariable();
+            var y = new TVariable();
             TestSerializer(x.Name, formulaCreator.Invoke(x));
             TestSerializer(" ", formulaCreator.Invoke(y));
         }

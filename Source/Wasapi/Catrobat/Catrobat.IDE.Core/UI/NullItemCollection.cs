@@ -5,9 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Catrobat.IDE.Core.Annotations;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Costumes;
-using Catrobat.IDE.Core.CatrobatObjects.Sounds;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core.UI
@@ -41,9 +39,9 @@ namespace Catrobat.IDE.Core.UI
             NullObject = new Sprite { Name = AppResources.Editor_NoSpriteSelected };
           }
 
-          if (_sourceCollection is IList<String>)
+          if (_sourceCollection is IList<BroadcastMessage>)
           {
-            NullObject = AppResources.Editor_NoMessageSelected;
+              NullObject = new BroadcastMessage { Content = AppResources.Editor_NoMessageSelected };
           }
         }
       }

@@ -27,7 +27,7 @@
       </Grid.RowDefinitions>
 
       <Grid Margin="10 5 10 25">
-        <TextBlock Text="{Binding CurrentProject.ProjectHeader.ProgramName}" FontSize="36">
+        <TextBlock Text="{Binding CurrentProject.Name}" FontSize="36">
 
         </TextBlock>
       </Grid>
@@ -70,11 +70,11 @@
                   <TextBlock VerticalAlignment="Center" FontSize="28" Margin="5 5 5 5" Text="{Binding Name}" />
 
                   <StackPanel Margin="5 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock FontSize="16" Margin="0" Text="{Binding Scripts.ActionCount}" />
+                    <TextBlock FontSize="16" Margin="0" Text="{Binding ActionsCount}" />
                     <TextBlock FontSize="16" Margin="0" Text="/" />
-                    <TextBlock FontSize="16" Margin="0" Text="{Binding Costumes.Costumes.Count}" />
+                    <TextBlock FontSize="16" Margin="0" Text="{Binding Costumes.Count}" />
                     <TextBlock FontSize="16" Margin="0" Text="/" />
-                    <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Sounds.Count}" />
+                    <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Count}" />
                   </StackPanel>
                 </StackPanel>
               </Grid>
@@ -90,11 +90,11 @@
                     <ColumnDefinition Width="Auto"/>
                   </Grid.ColumnDefinitions>
                   <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes.Costumes[0].Image.ImageSource}" />
+                         Source="{Binding Costumes[0].Image.ImageSource}" />
                   <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes.Costumes[1].Image.ImageSource}" />
+                         Source="{Binding Costumes[1].Image.ImageSource}" />
                   <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes.Costumes[2].Image.ImageSource}" />
+                         Source="{Binding Costumes[2].Image.ImageSource}" />
                 </Grid>
 
               </Grid>

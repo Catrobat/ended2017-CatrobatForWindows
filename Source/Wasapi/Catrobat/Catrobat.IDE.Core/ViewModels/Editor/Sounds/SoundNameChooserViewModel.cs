@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Sounds;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
@@ -103,7 +102,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
                 }
             }
 
-            _receivedSelectedSprite.Sounds.Sounds.Add(sound);
+            _receivedSelectedSprite.Sounds.Add(sound);
 
             ResetViewModel();
             ServiceLocator.NavigationService.RemoveBackEntryForPlatform(NavigationPlatform.WindowsPhone);

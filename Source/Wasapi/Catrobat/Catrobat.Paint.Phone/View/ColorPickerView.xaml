@@ -168,10 +168,10 @@
 
                     <Rectangle x:Name="recTransparence" Opacity="1" StrokeThickness="0" Margin="90,552,0,0" 
                                Width="270" Height="66" HorizontalAlignment="Left" VerticalAlignment="Top">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
 
                     <Button x:Name="BtnSelectedColor" Click="BtnSelectedColor_OnClick" 
                             Content="Fertig" Command="{Binding SelectColorDone}" HorizontalAlignment="Left" Margin="78,540,0,-11" 
@@ -198,41 +198,45 @@
                     <Slider x:Name="sldAlpha" HorizontalAlignment="Left" Margin="66,486,0,-24" VerticalAlignment="Top" 
                             Width="287" Height="85" Foreground="White" Maximum="255" ValueChanged="sldAlpha_ValueChanged" Background="Black"/>
 
-                    <TextBox HorizontalAlignment="Left" Height="63" Margin="-10,349,0,0" TextWrapping="Wrap" Text="Rot" 
+                    <TextBox x:Name="tbRedText" HorizontalAlignment="Left" Height="63" Margin="-10,349,0,0" TextWrapping="Wrap" Text="Rot" 
                              VerticalAlignment="Top" Width="73" SelectionBackground="{StaticResource TransparentBrush}" 
-                             Foreground="Red" IsHitTestVisible="True" Background="{x:Null}" BorderThickness="0"/>
+                             Foreground="Red" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-                    <TextBox HorizontalAlignment="Left" Height="63" Margin="-10,440,0,0" TextWrapping="Wrap" Text="Blau" 
+                    <TextBox x:Name="tbBlueText" HorizontalAlignment="Left" Height="63" Margin="-10,440,0,0" TextWrapping="Wrap" Text="Blau" 
                              VerticalAlignment="Top" Width="88" SelectionBackground="{StaticResource TransparentBrush}" 
-                             Foreground="#FF0046FF" IsHitTestVisible="True" Background="{x:Null}" BorderThickness="0"/>
+                             Foreground="#FF0046FF" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
+                        <TextBox.RenderTransform>
+                            <CompositeTransform SkewX="1.762" TranslateX="0.969"/>
+                        </TextBox.RenderTransform>
+                    </TextBox>
 
-                    <TextBox HorizontalAlignment="Left" Height="63" Margin="-10,393,0,0" TextWrapping="Wrap" Text="Grün" 
+                    <TextBox x:Name="tbGreenText" HorizontalAlignment="Left" Height="63" Margin="-10,393,0,0" TextWrapping="Wrap" Text="Grün" 
                              VerticalAlignment="Top" Width="88" SelectionBackground="{StaticResource TransparentBrush}" 
-                             Foreground="#FF23FF00" IsHitTestVisible="True" Background="{x:Null}" BorderThickness="0"/>
+                             Foreground="#FF23FF00" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-                    <TextBox HorizontalAlignment="Left" Height="63" Margin="-10,483,0,0" TextWrapping="Wrap" Text="Alpha" 
+                    <TextBox x:Name="tbAlphaValue" HorizontalAlignment="Left" Height="63" Margin="350,479,0,0" TextWrapping="Wrap" Text="0" 
                              VerticalAlignment="Top" Width="97" SelectionBackground="{StaticResource TransparentBrush}" 
-                             Foreground="White" IsHitTestVisible="True" Background="{x:Null}" BorderThickness="0"/>
+                             Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-                    <TextBox x:Name="tbAlpha" HorizontalAlignment="Left" Height="63" Margin="350,479,0,0" TextWrapping="Wrap" 
-                             Text="0" VerticalAlignment="Top" Width="74" SelectionBackground="{StaticResource TransparentBrush}" 
-                             Foreground="White" IsHitTestVisible="True" Background="{x:Null}" BorderThickness="0"/>
+                    <TextBox x:Name="tbAlpha" HorizontalAlignment="Left" Height="63" Margin="-10,483,0,0" TextWrapping="Wrap" 
+                             Text="Alpha" VerticalAlignment="Top" Width="108" SelectionBackground="{StaticResource TransparentBrush}" 
+                             Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-                    <TextBox x:Name="tbBlue" HorizontalAlignment="Left" Height="63" Margin="350,434,0,0" TextWrapping="Wrap" 
+                    <TextBox x:Name="tbBlueValue" HorizontalAlignment="Left" Height="63" Margin="350,434,0,0" TextWrapping="Wrap" 
                              Text="0" VerticalAlignment="Top" Width="97" SelectionBackground="{StaticResource TransparentBrush}" 
-                             Foreground="White" IsHitTestVisible="True" Background="{x:Null}" BorderThickness="0"/>
+                             Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-                    <TextBox x:Name="tbGreen" HorizontalAlignment="Left" Height="63" Margin="350,389,0,0" TextWrapping="Wrap" 
+                    <TextBox x:Name="tbGreenValue" HorizontalAlignment="Left" Height="63" Margin="350,389,0,0" TextWrapping="Wrap" 
                              Text="0" VerticalAlignment="Top" Width="97" SelectionBackground="{StaticResource TransparentBrush}" 
-                             Foreground="White" IsHitTestVisible="True" Background="{x:Null}" BorderThickness="0"/>
+                             Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-                    <TextBox x:Name="tbRed" HorizontalAlignment="Left" Height="63" Margin="350,343,0,0" TextWrapping="Wrap" 
+                    <TextBox x:Name="tbRedValue" HorizontalAlignment="Left" Height="63" Margin="350,343,0,0" TextWrapping="Wrap" 
                              Text="0" VerticalAlignment="Top" Width="97" SelectionBackground="{StaticResource TransparentBrush}" 
-                             Foreground="White" IsHitTestVisible="True" Background="{x:Null}" BorderThickness="0"/>
+                             Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-                    <TextBox x:Name="tbAlpha_Copy" HorizontalAlignment="Left" Height="63" Margin="400,479,0,0" TextWrapping="Wrap" 
+                    <TextBox x:Name="tbPercentCharacter" HorizontalAlignment="Left" Height="63" Margin="400,479,0,0" TextWrapping="Wrap" 
                              Text="%" VerticalAlignment="Top" Width="56" SelectionBackground="{StaticResource TransparentBrush}" 
-                             Foreground="White" IsHitTestVisible="True" Background="{x:Null}" BorderThickness="0"/>
+                             Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
                     <Rectangle x:Name="recTransparenceSlider" Opacity="1" StrokeThickness="0" Margin="90,550,0,0" 
                                Width="270" Height="65" HorizontalAlignment="Left" VerticalAlignment="Top">

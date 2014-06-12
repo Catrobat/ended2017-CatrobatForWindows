@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Tests.Extensions;
 using Catrobat.IDE.Tests.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,7 +8,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
     [TestClass]
     public class DataEqualsTests
     {
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
         {
             TestHelper.InitializeTests();
@@ -23,11 +19,11 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod] // , TestCategory("GatedTests")
         public void EqualsProjectTest()
         {
-            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection(42, DateTime.Now);
             var project1 = projectgenerator.GenerateProject();
             var project2 = projectgenerator.GenerateProject();
 
-            Assert.IsTrue(project1.Equals(project2));
+            ModelAssert.AreTestEqual(project1, project2);
         }
     }
 }
