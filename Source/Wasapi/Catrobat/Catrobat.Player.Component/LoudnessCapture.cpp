@@ -7,6 +7,7 @@
 #include <string.h>
 #include <sstream>
 #include <math.h>
+
 using namespace std;
 
 using namespace WasapiComp;
@@ -20,6 +21,7 @@ LoudnessCapture::LoudnessCapture()
 	m_wasapiAudio = ref new WASAPIAudio();
 	m_isRecording = false;
 	m_loudness = 0.0;
+	m_timeLastQuery = clock();
 }
 
 double LoudnessCapture::GetLoudness()
@@ -37,6 +39,7 @@ bool LoudnessCapture::StartCapture()
 			{
 				m_isRecording = true;
 				m_loudness = 0;
+				m_timeLastQuery = clock();
 
 				StartPeriodicCalculationLoudness();
 				return true;
@@ -78,33 +81,8 @@ void LoudnessCapture::StartPeriodicCalculationLoudness()
 	m_timer = ThreadPoolTimer::CreatePeriodicTimer(
 		ref new TimerElapsedHandler([this, wasapi](ThreadPoolTimer^ source)
 	{
-		Platform::Array<byte>^ buffer = ref new Platform::Array<byte>(0); //TODO: change to byte array
+		Platform::Array<byte>^ buffer = ref new Platform::Array<byte>(0); 
 		int size = wasapi->ReadBytes(&buffer);
-
-		/*
-		long highest = 0;
-		
-		for (int i = 0; i < size; )
-		{
-			unsigned long value1 = 0;
-			unsigned long value2 = 0;
-			unsigned long valuex = 0;
-
-			valuex = buffer[i + 1];
-			value1 = valuex << 8;
-			value2 = buffer[i];
-
-			unsigned long value = value1 + value2;
-			
-			if (value < 0)
-				value *= -1;
-
-			if (highest < value)
-				highest = value;
-
-			i += 2;
-		}
-		*/
 
 		double rms = 0;
 		unsigned short byte1 = 0;
@@ -126,10 +104,16 @@ void LoudnessCapture::StartPeriodicCalculationLoudness()
 
 		this->UpdateLoudness(volume);
 
+		// stops recording thread if last query takes place longer than 15 secounds
+		if (this->GetTimeSinceLastQuery() > 15)
+		{
+			this->StopCapture();
+		}
+
 	}), delay,
 		ref new TimerDestroyedHandler([&](ThreadPoolTimer ^ source)
 	{
-		//this->UpdateLoudness(0);
+		this->UpdateLoudness(0);
 	}));
 	
 }
@@ -138,3 +122,9 @@ void LoudnessCapture::UpdateLoudness(int value)
 {
 	this->m_loudness = value;
 }
+
+double LoudnessCapture::GetTimeSinceLastQuery()
+{
+	return (double)(clock() - this->m_timeLastQuery) / CLOCKS_PER_SEC;
+}
+
