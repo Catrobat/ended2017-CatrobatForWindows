@@ -111,7 +111,7 @@
       <CompileAsWinRT>true</CompileAsWinRT>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
       <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\WindowsPhone\lib;$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -141,7 +141,7 @@
       <CompileAsWinRT>true</CompileAsWinRT>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
       <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\WindowsPhone\lib;$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -152,11 +152,11 @@
       <PreprocessorDefinitions>PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\DirectXTK\Inc;$(ProjectDir)\..\FMOD\inc;$(ProjectDir)\..\FMOD\lib;$(VCInstallDir)UnitTest\WindowsPhone\include;$(ProjectDir);$(IntermediateOutputPath);$(ProjectDir)\..\DirectXTK\Inc;$(ProjectDir)\..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\Catrobat.Player.DirectXToolkit\Inc;$(ProjectDir)\..\FMOD\inc;$(ProjectDir)\..\FMOD\lib;$(VCInstallDir)UnitTest\WindowsPhone\include;$(ProjectDir);$(IntermediateOutputPath);$(ProjectDir)\..\Catrobat.Player.Component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAsWinRT>true</CompileAsWinRT>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
       <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\WindowsPhone\lib;$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -258,6 +258,7 @@
     <ClInclude Include="..\Catrobat.Player.Component\lodepng.h" />
     <ClInclude Include="..\Catrobat.Player.Component\lodepng_util.h" />
     <ClInclude Include="..\Catrobat.Player.Component\Look.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\LoudnessCapture.h" />
     <ClInclude Include="..\Catrobat.Player.Component\NextLookBrick.h" />
     <ClInclude Include="..\Catrobat.Player.Component\Object.h" />
     <ClInclude Include="..\Catrobat.Player.Component\ObjectList.h" />
@@ -290,6 +291,7 @@
     <ClInclude Include="..\Catrobat.Player.Component\UserVariable.h" />
     <ClInclude Include="..\Catrobat.Player.Component\VariableManagementBrick.h" />
     <ClInclude Include="..\Catrobat.Player.Component\WaitBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\WASAPIAudio.h" />
     <ClInclude Include="..\Catrobat.Player.Component\WhenScript.h" />
     <ClInclude Include="..\Catrobat.Player.Component\XMLParser.h" />
     <ClInclude Include="..\Catrobat.Player.Component\XMLParserException.h" />
@@ -333,6 +335,7 @@
     <ClCompile Include="..\Catrobat.Player.Component\lodepng.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\lodepng_util.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\Look.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\LoudnessCapture.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\NextLookBrick.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\Object.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\ObjectList.cpp" />
@@ -364,6 +367,7 @@
     <ClCompile Include="..\Catrobat.Player.Component\UserVariable.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\VariableManagementBrick.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\WaitBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\WASAPIAudio.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\WhenScript.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\XMLParser.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\XMLParserException.cpp" />
