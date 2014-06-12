@@ -29,8 +29,11 @@ namespace Catrobat.IDE.Phone.Services
                 try { _motion.Start(); }
                 catch (Exception) { Debugger.Break(); }
             }
-            try { _microphone.Start(); }
-            catch (Exception) { Debugger.Break(); }
+            //if (Microphone2.IsSupported)
+            {
+                try { _microphone.Start(); }
+                catch (Exception) { Debugger.Break(); }
+            }
         }
 
         public void Stop()
