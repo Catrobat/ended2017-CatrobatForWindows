@@ -1,7 +1,7 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 
 namespace Catrobat.IDE.Core.Formulas
 {
@@ -9,12 +9,12 @@ namespace Catrobat.IDE.Core.Formulas
     {
         private readonly FormulaTokenizer _tokenizer;
 
-        public FormulaParser(IEnumerable<UserVariable> localVariables, IEnumerable<UserVariable> globalVariables)
+        public FormulaParser(IEnumerable<LocalVariable> localVariables, IEnumerable<GlobalVariable> globalVariables)
         {
             _tokenizer = new FormulaTokenizer(localVariables, globalVariables);
         }
 
-        public IFormulaTree Parse(string input, out ParsingError parsingError)
+        public FormulaTree Parse(string input, out ParsingError parsingError)
         {
             var tokens = _tokenizer.Tokenize(input, out parsingError);
             if (parsingError != null) return null;

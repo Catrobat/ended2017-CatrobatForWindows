@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Globalization;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
+
 namespace Catrobat.IDE.Core.UI.Converters
 {
     public class VariableButtonVisibilityConverter : IPortableValueConverter
@@ -11,10 +12,10 @@ namespace Catrobat.IDE.Core.UI.Converters
         {
             var variableSelectionViewModel = ServiceLocator.ViewModelLocator.VariableSelectionViewModel;
 
-            var variable = (UserVariable)value;
+            var variable = (Variable) value;
             var invert = (bool)parameter;
-            bool visible = variableSelectionViewModel.SelectedGlobalVariable == variable ||
-                           variableSelectionViewModel.SelectedLocalVariable == variable;
+            var visible = ReferenceEquals(variableSelectionViewModel.SelectedGlobalVariable, variable) ||
+                           ReferenceEquals(variableSelectionViewModel.SelectedLocalVariable, variable);
 
             if (invert)
                 visible = !visible;

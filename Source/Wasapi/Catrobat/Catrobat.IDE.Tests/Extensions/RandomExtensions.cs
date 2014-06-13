@@ -1,10 +1,10 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Core.ExtensionMethods;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+﻿using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
 
 namespace Catrobat.IDE.Tests.Extensions
 {
@@ -15,10 +15,10 @@ namespace Catrobat.IDE.Tests.Extensions
                 .Select<MethodInfo, Func<Random, IFormulaToken>>(method => random => (IFormulaToken) method.Invoke(
                     method.GetParameters().Select<ParameterInfo, object>(parameter =>
                     {
-                        if (parameter.ParameterType == typeof(int)) return random.Next();
-                        if (parameter.ParameterType == typeof(bool)) return random.NextBool();
-                        if (parameter.ParameterType == typeof(UserVariable) && method.Name.ToLower().Contains("local")) return new UserVariable {Name = "LocalVariable" + random.Next()};
-                        if (parameter.ParameterType == typeof (UserVariable) && method.Name.ToLower().Contains("global")) return new UserVariable {Name = "GlobalVariable" + random.Next()};
+                        if (parameter.ParameterType == typeof (int)) return random.Next();
+                        if (parameter.ParameterType == typeof (bool)) return random.NextBool();
+                        if (parameter.ParameterType == typeof (LocalVariable)) return new LocalVariable {Name = "LocalVariable" + random.Next()};
+                        if (parameter.ParameterType == typeof (GlobalVariable)) return new GlobalVariable {Name = "GlobalVariable" + random.Next()};
                         throw new NotImplementedException();
                     }).ToArray()))
                 .ToArray();

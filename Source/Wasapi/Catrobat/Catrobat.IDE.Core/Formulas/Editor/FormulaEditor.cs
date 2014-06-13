@@ -3,29 +3,29 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.ExtensionMethods;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 using Catrobat.IDE.Core.ViewModels;
 
 namespace Catrobat.IDE.Core.Formulas.Editor
 {
     public class FormulaEditor : ViewModelBase
     {
- 
+
         #region Members
 
-        private IFormulaTree _formula;
-        public IFormulaTree Formula
+        private FormulaTree _formula;
+        public FormulaTree Formula
         {
             get { return _formula; }
             set
             {
                 _formula = value;
                 RaisePropertyChanged(() => Formula);
-                Tokens = _formula == null ? 
-                    new ObservableCollection<IFormulaToken>() : 
+                Tokens = _formula == null ?
+                    new ObservableCollection<IFormulaToken>() :
                     new ObservableCollection<IFormulaToken>(FormulaTokenizer.Tokenize(_formula));
             }
         }
@@ -116,7 +116,7 @@ namespace Catrobat.IDE.Core.Formulas.Editor
 
         public bool IsTokensEmpty
         {
-            get { return Tokens == null || Tokens.Count == 0;  }
+            get { return Tokens == null || Tokens.Count == 0; }
         }
 
         public bool CanUndo
@@ -143,7 +143,7 @@ namespace Catrobat.IDE.Core.Formulas.Editor
 
         #region Key handler
 
-        public bool HandleKey(FormulaEditorKey key, UserVariable variable = null)
+        public bool HandleKey(FormulaEditorKey key, LocalVariable localVariable = null, GlobalVariable globalVariable = null)
         {
             if (key == FormulaEditorKey.Delete)
             {
@@ -152,10 +152,10 @@ namespace Catrobat.IDE.Core.Formulas.Editor
             }
 
             PushUndo();
-            var token = CreateToken(key, variable);
+            var token = CreateToken(key, localVariable, globalVariable);
             return Insert((token is IFormulaFunction)
-                ? new[] {token, FormulaTokenFactory.CreateParenthesisToken(true)}
-                : new[] {token});
+                ? new[] { token, FormulaTokenFactory.CreateParenthesisToken(true) }
+                : new[] { token });
         }
 
         private bool Insert(IEnumerable<IFormulaToken> tokens)
@@ -194,7 +194,7 @@ namespace Catrobat.IDE.Core.Formulas.Editor
             return true;
         }
 
-        private static IFormulaToken CreateToken(FormulaEditorKey key, UserVariable variable)
+        private static IFormulaToken CreateToken(FormulaEditorKey key, LocalVariable localVariable, GlobalVariable globalVariable)
         {
             switch (key)
             {
@@ -268,8 +268,8 @@ namespace Catrobat.IDE.Core.Formulas.Editor
                 case FormulaEditorKey.Size: return FormulaTokenFactory.CreateSizeToken();
 
                 // Variables
-                case FormulaEditorKey.LocalVariable: return FormulaTokenFactory.CreateLocalVariableToken(variable);
-                case FormulaEditorKey.GlobalVariable: return FormulaTokenFactory.CreateGlobalVariableToken(variable);
+                case FormulaEditorKey.LocalVariable: return FormulaTokenFactory.CreateLocalVariableToken(localVariable);
+                case FormulaEditorKey.GlobalVariable: return FormulaTokenFactory.CreateGlobalVariableToken(globalVariable);
 
                 // brackets
                 case FormulaEditorKey.OpeningParenthesis: return FormulaTokenFactory.CreateParenthesisToken(true);

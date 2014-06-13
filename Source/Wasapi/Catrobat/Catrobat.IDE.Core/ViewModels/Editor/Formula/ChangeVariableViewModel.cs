@@ -1,5 +1,4 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -12,7 +11,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private Project _currentProject;
         private Sprite _selectedSprite;
-        private UserVariable _userVariable;
+        private Variable _userVariable;
         private string _userVariableName;
 
         #endregion
@@ -35,7 +34,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             }
         }
 
-        public UserVariable UserVariable
+        public Variable UserVariable
         {
             get { return _userVariable; }
             set 
@@ -117,7 +116,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             SelectedSprite = message.Content;
         }
 
-        private void SelectedUserVariableChangedMessageAction(GenericMessage<UserVariable> message)
+        private void SelectedUserVariableChangedMessageAction(GenericMessage<Variable> message)
         {
             UserVariable = message.Content;
         }
@@ -134,7 +133,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
-            Messenger.Default.Register<GenericMessage<UserVariable>>(this,
+            Messenger.Default.Register<GenericMessage<Variable>>(this,
                 ViewModelMessagingToken.SelectedUserVariableChangedListener, SelectedUserVariableChangedMessageAction);
         }
 

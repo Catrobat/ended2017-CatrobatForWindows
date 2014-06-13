@@ -5,12 +5,12 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.Core.ViewModels.Settings;
@@ -78,7 +78,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                 RaisePropertyChanged(() => CurrentProject);
                 UpdateLocalProjects();
-                XmlParserTempProjectHelper.Project = _currentProject;
 
                 var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
                 Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
@@ -203,11 +202,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             private set;
         }
 
-        public ICommand LazyLoadOnlineProjectsCommand
-        {
-            get;
-            private set;
-        }
+        //public ICommand LazyLoadOnlineProjectsCommand
+        //{
+        //    get;
+        //    private set;
+        //}
 
         public ICommand SetCurrentProjectCommand
         {
@@ -259,7 +258,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #endregion
 
-        # region Actions
+        #region Actions
 
         private void RenameLocalProjectAction(ProjectDummyHeader project)
         {
@@ -323,10 +322,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.NavigationService.NavigateTo<ShareProjectServiceSelectionViewModel>();
         }
 
-        private void LazyLoadOnlineProjectsAction()
-        {
-            LoadOnlineProjects(true);
-        }
+        //private void LazyLoadOnlineProjectsAction()
+        //{
+        //    LoadOnlineProjects(true);
+        //}
 
 
         private async void SetCurrentProjectAction(string projectName)
@@ -361,19 +360,17 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
             else
             {
-                XmlParserTempProjectHelper.Project = CurrentProject;
-
                 ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_SelectedProjectNotValidMessage,
-                    String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName), new Action<MessageboxResult>(delegate
+                    String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName), delegate
                     {
                         ServiceLocator.DispatcherService.RunOnMainThread(() =>
                         {
                             IsActivatingLocalProject = false;
                         });
-                    }), MessageBoxOptions.Ok);
+                    }, MessageBoxOptions.Ok);
             }
 
-            await Core.App.SaveContext(CurrentProject);
+            await App.SaveContext(CurrentProject);
         }
 
         private void CreateNewProjectAction()
@@ -402,12 +399,29 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject);
         }
 
-        private void UploadCurrentProjectAction()
+        private async void UploadCurrentProjectAction()
         {
             ServiceLocator.NavigationService.NavigateTo<UploadProjectLoadingViewModel>();
 
             // Determine which page to open
-            Task.Run(() => CatrobatWebCommunicationService.CheckToken(Context.CurrentToken, CheckTokenEvent));
+            bool registered = await CatrobatWebCommunicationService.AsyncCheckToken(Context.CurrentUserName, Context.CurrentToken);
+
+            if (registered)
+            {
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    ServiceLocator.NavigationService.NavigateTo<UploadProjectViewModel>();
+                    ServiceLocator.NavigationService.RemoveBackEntry();
+                });
+            }
+            else
+            {
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    ServiceLocator.NavigationService.NavigateTo<UploadProjectLoginViewModel>();
+                    ServiceLocator.NavigationService.RemoveBackEntry();
+                });
+            }
         }
 
         protected override void GoBackAction()
@@ -487,7 +501,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
             PinLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(PinLocalProjectAction);
             ShareLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(ShareLocalProjectAction);
-            LazyLoadOnlineProjectsCommand = new RelayCommand(LazyLoadOnlineProjectsAction);
+            //LazyLoadOnlineProjectsCommand = new RelayCommand(LazyLoadOnlineProjectsAction);
             SetCurrentProjectCommand = new RelayCommand<string>(SetCurrentProjectAction);
             OnlineProjectTapCommand = new RelayCommand<OnlineProjectHeader>(OnlineProjectTapAction);
             SettingsCommand = new RelayCommand(SettingsAction);
@@ -516,27 +530,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region MessageBoxCallback
 
-        private void LoadOnlineProjectsCallback(string filterText, List<OnlineProjectHeader> projects, bool append)
-        {
-            lock (OnlineProjects)
-            {
-                if (FilterText != filterText && !append)
-                    return;
-
-                if (!append)
-                {
-                    _onlineProjects.Clear();
-                }
-
-                IsLoadingOnlineProjects = false;
-
-                foreach (OnlineProjectHeader header in projects)
-                {
-                    _onlineProjects.Add(header);
-                }
-            }
-        }
-
         private async void DeleteProjectMessageCallback(MessageboxResult result)
         {
             _dialogResult = result;
@@ -548,7 +541,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     await storage.DeleteDirectoryAsync(CatrobatContextBase.ProjectsPath + "/" + _deleteProjectName);
                 }
 
-                if (CurrentProject.ProjectHeader.ProgramName == _deleteProjectName)
+                if (CurrentProject.Name == _deleteProjectName)
                 {
                     if (LocalProjects.Count > 0)
                     {
@@ -565,7 +558,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 _deleteProjectName = null;
             }
 
-            await Core.App.SaveContext(CurrentProject);
+            await App.SaveContext(CurrentProject);
         }
 
         private async void CopyProjectMessageCallback(MessageboxResult result) // TODO: async, should this be awaitable?
@@ -574,11 +567,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             if (_dialogResult == MessageboxResult.Ok)
             {
-                if (_copyProjectName == CurrentProject.ProjectHeader.ProgramName)
+                if (_copyProjectName == CurrentProject.Name)
                     await CurrentProject.Save();
 
-                await CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName,
-                    CurrentProject.ProjectHeader.ProgramName);
+                await CatrobatContext.CopyProject(CurrentProject.Name,
+                    CurrentProject.Name);
 
                 await UpdateLocalProjects();
                 _copyProjectName = null;
@@ -588,38 +581,37 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         #endregion
 
 
-        public void LoadOnlineProjects(bool isAppend, bool isAuto = false)
+        public async void LoadOnlineProjects(bool isAppend, bool isAuto = false)
         {
-            if (isAuto && isAppend)
-                return;
-
             IsLoadingOnlineProjects = true;
 
             if (!isAppend && _previousFilterText != _filterText)
                 _onlineProjects.Clear();
 
             _previousFilterText = _filterText;
+            int offset = _onlineProjects.Count;
+            if (isAuto == true)
+                offset = 0;
 
-            CatrobatWebCommunicationService.LoadOnlineProjects(isAppend, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
-        }
+            List<OnlineProjectHeader> projects = await CatrobatWebCommunicationService.AsyncLoadOnlineProjects(isAppend, _filterText, offset);
 
-        private void CheckTokenEvent(bool registered)
-        {
-            if (registered)
+            lock (OnlineProjects)
             {
-                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                if (FilterText != _filterText && !isAppend)
+                    return;
+
+                if (!isAppend)
+                    _onlineProjects.Clear();
+
+                IsLoadingOnlineProjects = false;
+
+                if (projects != null)
                 {
-                    ServiceLocator.NavigationService.NavigateTo<UploadProjectViewModel>();
-                    ServiceLocator.NavigationService.RemoveBackEntry();
-                });
-            }
-            else
-            {
-                ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                {
-                    ServiceLocator.NavigationService.NavigateTo<UploadProjectLoginViewModel>();
-                    ServiceLocator.NavigationService.RemoveBackEntry();
-                });
+                    foreach (OnlineProjectHeader header in projects)
+                    {
+                        _onlineProjects.Add(header);
+                    }
+                }
             }
         }
 

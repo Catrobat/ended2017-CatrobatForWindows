@@ -3,16 +3,18 @@ using System.IO;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.VersionConverter;
+using Catrobat.IDE.Core.Xml.VersionConverter;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
     public class ProjectImporterService
     {
         private ProjectDummyHeader _tempProjectHeader;
-        private Project _project;
+        private XmlProject _project;
 
         public async Task<ProjectDummyHeader> ImportProject(Stream projectZipStream)
         {
@@ -39,7 +41,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
                 //TODO: error handling
 
-                _project = new Project(projectCode);
+                _project = new XmlProject(projectCode);
                 await _project.Save();
 
                 _tempProjectHeader = new ProjectDummyHeader

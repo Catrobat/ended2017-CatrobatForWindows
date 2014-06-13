@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Formulas;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,8 +16,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
     public class FormulaInterpreterSemanticErrorTests
     {
         private readonly Random _random = new Random();
-        private readonly UserVariable[] _localVariables = {new UserVariable {Name = "LocalVariable"}};
-        private readonly UserVariable[] _globalVariables = {new UserVariable {Name = "GlobalVariable"}};
+        private readonly LocalVariable[] _localVariables = {new LocalVariable{Name = "LocalVariable"}};
+        private readonly GlobalVariable[] _globalVariables = {new GlobalVariable{Name = "GlobalVariable"}};
         private readonly FormulaTokenizer _tokenizer;
 
         public FormulaInterpreterSemanticErrorTests()

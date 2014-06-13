@@ -18,9 +18,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Bricks;
-using Catrobat.IDE.Core.CatrobatObjects.Scripts;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.UI;
 using Microsoft.Phone.Controls;
 using System.Windows.Controls.Primitives;
@@ -371,7 +371,7 @@ namespace Catrobat.IDE.Phone.Controls.ReorderableListbox
                 if (_dragItem is Script)
                 {
                     bool failed = false;
-                    foreach (DataObject dataObject in ItemsSource)
+                    foreach (Model dataObject in ItemsSource)
                     {
                         if (dataObject is Brick)
                         {
@@ -387,7 +387,7 @@ namespace Catrobat.IDE.Phone.Controls.ReorderableListbox
 
                     if (failed)
                     {
-                        foreach (DataObject dataObject in ItemsSource)
+                        foreach (Model dataObject in ItemsSource)
                         {
                             if (dataObject is Brick)
                             {
@@ -514,7 +514,7 @@ namespace Catrobat.IDE.Phone.Controls.ReorderableListbox
             if (ItemsSource is ScriptBrickCollection)
             {
                 if (_dragItem is Script)
-                    foreach (DataObject dataObject in ItemsSource)
+                    foreach (Model dataObject in ItemsSource)
                     {
                         if (dataObject is Brick)
                         {

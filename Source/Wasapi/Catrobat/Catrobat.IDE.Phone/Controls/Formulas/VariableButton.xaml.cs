@@ -6,8 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Catrobat.IDE.Core.Annotations;
-using Catrobat.IDE.Core.CatrobatObjects.Bricks;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.Converters;
@@ -21,18 +21,18 @@ namespace Catrobat.IDE.Phone.Controls.Formulas
     {
         #region DependencyProperties
 
-        public UserVariable Variable
+        public Variable Variable
         {
-            get { return (UserVariable)GetValue(VariableProperty); }
+            get { return (Variable) GetValue(VariableProperty); }
             set { SetValue(VariableProperty, value); }
         }
 
-        public static readonly DependencyProperty VariableProperty = DependencyProperty.Register("Variable", typeof(UserVariable), typeof(VariableButton), new PropertyMetadata(VariableChanged));
+        public static readonly DependencyProperty VariableProperty = DependencyProperty.Register("Variable", typeof(Variable), typeof(VariableButton), new PropertyMetadata(VariableChanged));
 
         private static void VariableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((VariableButton)d).RaisePropertyChanged(() => ((VariableButton)d).Variable);
-            ((VariableButton)d).VariableChanged((UserVariable)e.NewValue);
+            ((VariableButton)d).VariableChanged((Variable) e.NewValue);
         }
 
         #endregion
@@ -42,20 +42,20 @@ namespace Catrobat.IDE.Phone.Controls.Formulas
             ((VariableButton)d).IsEnabled = (bool)e.NewValue;
         }
 
-        public void VariableChanged(UserVariable newVariable)
+        public void VariableChanged(Variable newVariable)
         {
             var setVariableBrick = DataContext as SetVariableBrick;
             if (setVariableBrick != null)
-                setVariableBrick.UserVariable = newVariable;
+                setVariableBrick.Variable = newVariable;
 
             var changeVariableBrick = DataContext as ChangeVariableBrick;
             if (changeVariableBrick != null)
-                changeVariableBrick.UserVariable = newVariable;
+                changeVariableBrick.Variable = newVariable;
 
             var isSelected = newVariable != null;
             var converter = new NullVariableConverter();
 
-            newVariable = (UserVariable)converter.Convert(newVariable, null, null, null);
+            newVariable = (Variable) converter.Convert(newVariable, null, null, null);
 
             var viewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).VariableSelectionViewModel;
 

@@ -2285,7 +2285,16 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login or Register.
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string Main_ButtonLogin {
+            get {
+                return ResourceManager.GetString("Main_ButtonLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login / Register.
         /// </summary>
         public static string Main_ButtonLoginRegister {
             get {
@@ -2299,6 +2308,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_ButtonPasswordForgotten {
             get {
                 return ResourceManager.GetString("Main_ButtonPasswordForgotten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string Main_ButtonRegister {
+            get {
+                return ResourceManager.GetString("Main_ButtonRegister", resourceCulture);
             }
         }
         
@@ -2789,11 +2807,20 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LOGIN OR REGISTER.
+        ///   Looks up a localized string similar to LOGIN.
         /// </summary>
         public static string Main_TitleUploadProjectLogin {
             get {
                 return ResourceManager.GetString("Main_TitleUploadProjectLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to REGISTER.
+        /// </summary>
+        public static string Main_TitleUploadProjectRegister {
+            get {
+                return ResourceManager.GetString("Main_TitleUploadProjectRegister", resourceCulture);
             }
         }
         
@@ -2807,6 +2834,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upload error. {0}.
+        /// </summary>
+        public static string Main_UploadProjectError {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload failed.
+        /// </summary>
+        public static string Main_UploadProjectErrorCaption {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectErrorCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please wait while your login state is beeing checked!.
         /// </summary>
         public static string Main_UploadProjectLoadingMessage {
@@ -2816,7 +2861,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login Error. {0}.
+        ///   Looks up a localized string similar to Login error. {0}.
         /// </summary>
         public static string Main_UploadProjectLoginError {
             get {

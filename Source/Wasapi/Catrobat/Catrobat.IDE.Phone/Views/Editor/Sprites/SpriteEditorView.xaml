@@ -10,6 +10,7 @@
   xmlns:buttons="clr-namespace:Catrobat.IDE.Phone.Controls.Buttons"
   mc:Ignorable="d"
   xmlns:appBar="clr-namespace:Catrobat.IDE.Phone.Controls.AppBar"
+  xmlns:models="clr-namespace:Catrobat.IDE.Core.Models;assembly=Catrobat.IDE.Core"
   d:DesignWidth="480"
   d:DesignHeight="768"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -157,7 +158,7 @@
                                          Grid.Column="0" Height="80" Width="80" />
                     <Grid Grid.Column="1" Margin="5">
                       <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
-                               VerticalAlignment="Center" />
+                               VerticalAlignment="Center" d:DataContext="{d:DesignInstance models:Sound}" />
                     </Grid>
                   </Grid>
                 </DataTemplate>

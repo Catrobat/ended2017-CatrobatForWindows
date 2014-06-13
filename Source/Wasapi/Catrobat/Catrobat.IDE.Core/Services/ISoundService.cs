@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
-using Catrobat.IDE.Core.Annotations;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Sounds;
-using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Core.Models;
 
 namespace Catrobat.IDE.Core.Services
 {

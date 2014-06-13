@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Costumes;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModels;
@@ -83,7 +82,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             var messageContext = new GenericMessage<Costume>(costume);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.CostumeListener);
 
-            var project = new Project { ProjectHeader = new ProjectHeader(false) { ProgramName = "TestProject" } };
+            var project = new Project { Name = "TestProject" };
             var messageContext2 = new GenericMessage<Project>(project);
             Messenger.Default.Send(messageContext2, ViewModelMessagingToken.CurrentProjectChangedListener);
 
