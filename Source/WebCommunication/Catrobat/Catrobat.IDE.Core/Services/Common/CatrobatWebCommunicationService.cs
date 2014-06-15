@@ -15,7 +15,7 @@ using Newtonsoft.Json;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 //using System.Diagnostics;
-
+using System.Threading;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
@@ -23,12 +23,12 @@ namespace Catrobat.IDE.Core.Services.Common
     {
         private static int _uploadCounter = 0;
 
-        public static async Task<List<OnlineProjectHeader>> AsyncLoadOnlineProjects(string filterText, int offset)
+        public static async Task<List<OnlineProjectHeader>> AsyncLoadOnlineProjects(string filterText, int offset, CancellationToken taskCancellationToken)
         {
             using (var http_client = new HttpClient())
             {
-                //http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
-                http_client.BaseAddress = new Uri("https://pocketcode.org/api/");
+                http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
+                //http_client.BaseAddress = new Uri("https://pocketcode.org/api/");
                 //http_client.DefaultRequestHeaders.Accept.Clear();
                 //http_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
@@ -37,12 +37,12 @@ namespace Catrobat.IDE.Core.Services.Common
 
                     if (filterText == "")
                     {
-                        http_response = await http_client.GetAsync(String.Format(ApplicationResources.API_RECENT_PROJECTS, ApplicationResources.API_REQUEST_LIMIT, offset));
+                        http_response = await http_client.GetAsync(String.Format(ApplicationResources.API_RECENT_PROJECTS, ApplicationResources.API_REQUEST_LIMIT, offset), taskCancellationToken);
                     }
                     else
                     {
                         string encoded_filter_text = WebUtility.UrlEncode(filterText);
-                        http_response = await http_client.GetAsync(String.Format(ApplicationResources.API_SEARCH_PROJECTS, encoded_filter_text, ApplicationResources.API_REQUEST_LIMIT, offset));
+                        http_response = await http_client.GetAsync(String.Format(ApplicationResources.API_SEARCH_PROJECTS, encoded_filter_text, ApplicationResources.API_REQUEST_LIMIT, offset), taskCancellationToken);
                     }
                     http_response.EnsureSuccessStatusCode();
 
