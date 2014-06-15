@@ -6,6 +6,7 @@
   xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
@@ -28,18 +29,21 @@
                  Style="{StaticResource PhoneTextTitle1Style}"/>
     </StackPanel>
 
-    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10 0 0 15">
+    <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="10 0 0 15">
       <ListBox Margin="0 0 0 15" ItemsSource="{Binding AvailableCultures}" 
                SelectedItem="{Binding CurrentCulture, Mode=TwoWay}">
         <ItemsControl.ItemTemplate>
           <DataTemplate>
-            <Grid>
+            <Grid d:DataContext="{d:DesignInstance globalization:CultureInfo}">
               <TextBlock Margin="0 0 10 10" Text="{Binding NativeName}" 
                          FontSize="{StaticResource PhoneFontSizeLarge}" />
             </Grid>
           </DataTemplate>
         </ItemsControl.ItemTemplate>
       </ListBox>
-    </Grid>
+      <TextBlock Margin="20" 
+                 Text="{Binding Resources.Main_ApplicationRequiresRestart, Source={StaticResource LocalizedStrings}}" 
+                 Style="{StaticResource PhoneTextSmallStyle}" TextWrapping="Wrap" />
+    </StackPanel>
   </Grid>
 </phone:PhoneApplicationPage>

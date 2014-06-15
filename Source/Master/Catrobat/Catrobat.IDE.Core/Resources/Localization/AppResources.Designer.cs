@@ -2240,6 +2240,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The application requires a restart to apply the changes..
+        /// </summary>
+        public static string Main_ApplicationRequiresRestart {
+            get {
+                return ResourceManager.GetString("Main_ApplicationRequiresRestart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to cancel.
         /// </summary>
         public static string Main_ButtonCancel {
