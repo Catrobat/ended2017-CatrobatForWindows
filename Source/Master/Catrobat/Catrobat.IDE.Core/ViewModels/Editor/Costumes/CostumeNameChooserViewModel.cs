@@ -180,8 +180,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
             ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
                 _receivedSelectedSprite.Costumes.Add(costume);
-                ServiceLocator.NavigationService.RemoveBackEntryForPlatform(NavigationPlatform.WindowsPhone);
-                ServiceLocator.NavigationService.RemoveBackEntryForPlatform(NavigationPlatform.WindowsPhone);
+                //ServiceLocator.NavigationService.RemoveBackEntryForPlatform(NavigationPlatform.WindowsPhone);
+                //ServiceLocator.NavigationService.RemoveBackEntryForPlatform(NavigationPlatform.WindowsPhone);
                 ResetViewModel();
                 //ServiceLocator.NavigationService.NavigateBack(
                 //    new List<NavigationPlatform>{NavigationPlatform.WindowsStore});
