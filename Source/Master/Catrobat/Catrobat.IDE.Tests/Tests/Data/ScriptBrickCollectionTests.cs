@@ -60,8 +60,8 @@ namespace Catrobat.IDE.Tests.Tests.Data
                 enumerator.MoveNext();
                 Assert.IsTrue(enumerator.Current is SetCostumeBrick);
 
-                enumerator.MoveNext();
-                Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
+                //enumerator.MoveNext();
+                //Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
 
                 Assert.IsFalse(enumerator.MoveNext());
             }
@@ -115,8 +115,8 @@ namespace Catrobat.IDE.Tests.Tests.Data
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is DelayBrick);
 
-            enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
+            //enumerator.MoveNext();
+            //Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
 
             Assert.IsFalse(enumerator.MoveNext());
         }
@@ -162,8 +162,8 @@ namespace Catrobat.IDE.Tests.Tests.Data
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
 
-            enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
+            //enumerator.MoveNext();
+            //Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
 
             Assert.IsFalse(enumerator.MoveNext());
         }
@@ -217,8 +217,8 @@ namespace Catrobat.IDE.Tests.Tests.Data
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is TappedScript);
 
-            enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
+            //enumerator.MoveNext();
+            //Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
 
             Assert.IsFalse(enumerator.MoveNext());
         }
@@ -315,8 +315,8 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is MoveBrick);
-            enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
+            //enumerator.MoveNext();
+            //Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
 
             Assert.IsFalse(enumerator.MoveNext());
         }
