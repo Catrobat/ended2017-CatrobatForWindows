@@ -19,10 +19,6 @@
   DataContext="{Binding FormulaEditorViewModel, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="True" >
 
-  <phone:PhoneApplicationPage.Resources>
-
-  </phone:PhoneApplicationPage.Resources>
-
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <Grid.RowDefinitions>
       <RowDefinition Height="*" />
@@ -85,8 +81,8 @@
   
   <phone:PhoneApplicationPage.ApplicationBar>
     <shell:ApplicationBar>
-      <shell:ApplicationBarIconButton Text="Undo" IconUri="/Content/Images/ApplicationBar/dark/appbar.basecircle.rest.png" />
-      <shell:ApplicationBarIconButton Text="Redo" IconUri="/Content/Images/ApplicationBar/dark/appbar.basecircle.rest.png" />
+      <shell:ApplicationBarIconButton Text="Undo" IconUri="/Content/Images/LicensedIcons/ModernUIIcons/dark/appbar.undo.png" />
+      <shell:ApplicationBarIconButton Text="Redo" IconUri="/Content/Images/LicensedIcons/ModernUIIcons/dark/appbar.redo.png" />
       <shell:ApplicationBarIconButton x:Name="ButtonAddLocalVariable" Text="Add local variable" IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png" />
       <shell:ApplicationBarIconButton x:Name="ButtonAddGlobalVariable" Text="Add global variable" IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png" />
       <shell:ApplicationBar.MenuItems>
