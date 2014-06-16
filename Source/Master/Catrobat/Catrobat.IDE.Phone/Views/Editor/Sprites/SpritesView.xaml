@@ -36,7 +36,7 @@
       <reorderableListbox:ReorderListBox
           x:Name="ReorderListBoxSprites"
           Grid.Row="1"
-          Margin="10"
+          Margin="10 0"
           SelectionMode="Single"
           VerticalAlignment="Stretch"
           IsReorderEnabled="True"

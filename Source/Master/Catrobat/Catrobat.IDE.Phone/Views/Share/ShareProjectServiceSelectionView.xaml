@@ -12,7 +12,7 @@
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
   DataContext="{Binding ShareProjectServiceSelectionViewModel, Source={StaticResource Locator}}"
-  shell:SystemTray.IsVisible="True">
+  shell:SystemTray.IsVisible="False">
 
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <Grid.RowDefinitions>
