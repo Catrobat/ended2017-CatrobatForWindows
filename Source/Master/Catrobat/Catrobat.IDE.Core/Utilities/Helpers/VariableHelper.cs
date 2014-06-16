@@ -14,7 +14,8 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
 
         public static ObservableCollection<LocalVariable> GetLocalVariableList(Project project, Sprite sprite)
         {
-            return sprite.LocalVariables;
+            return sprite != null ? sprite.LocalVariables : 
+                new ObservableCollection<LocalVariable>();
         }
 
         public static void DeleteGlobalVariable(Project project, GlobalVariable variable)

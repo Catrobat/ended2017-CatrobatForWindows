@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Catrobat.IDE.Core.CatrobatObjects;
@@ -39,6 +40,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private CatrobatContextBase _context;
         private ObservableCollection<OnlineProjectHeader> _onlineProjects;
         private ProjectDummyHeader _selectdLocalProject;
+        private CancellationTokenSource _taskCancellation;
 
         #endregion
 
@@ -357,8 +359,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 //Thread.Sleep(minWaitingTimeRemaining);
 
                 IsActivatingLocalProject = false;
-
-
             }
             else
             {
@@ -530,6 +530,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+
+            _taskCancellation = new CancellationTokenSource();
         }
 
         #region MessageBoxCallback
@@ -590,14 +592,22 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             IsLoadingOnlineProjects = true;
 
             if (!isAppend && _previousFilterText != _filterText)
+            {
                 _onlineProjects.Clear();
+                // cancel previous uncompleted AsyncLoadOnlineProjects-Tasks
+                if (_taskCancellation != null)
+                {
+                    _taskCancellation.Cancel();
+                    _taskCancellation = new CancellationTokenSource();
+                }
+            }
 
             _previousFilterText = _filterText;
             int offset = _onlineProjects.Count;
             if (isAuto == true)
                 offset = 0;
 
-            List<OnlineProjectHeader> projects = await CatrobatWebCommunicationService.AsyncLoadOnlineProjects(_filterText, offset);
+            List<OnlineProjectHeader> projects = await Task.Run(() => CatrobatWebCommunicationService.AsyncLoadOnlineProjects(_filterText, offset, _taskCancellation.Token));
 
             lock (OnlineProjects)
             {

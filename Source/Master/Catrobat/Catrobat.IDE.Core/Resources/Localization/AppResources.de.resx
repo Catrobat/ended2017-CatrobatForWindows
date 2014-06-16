@@ -1090,4 +1090,7 @@
   <data name="Main_UploadProjectErrorCaption" xml:space="preserve">
     <value>Upload fehlgeschlagen</value>
   </data>
+  <data name="Main_ApplicationRequiresRestart" xml:space="preserve">
+    <value>Die Anwendung benötigt einen Neustart um die Änderungen zu verwirklichen.</value>
+  </data>
 </root>

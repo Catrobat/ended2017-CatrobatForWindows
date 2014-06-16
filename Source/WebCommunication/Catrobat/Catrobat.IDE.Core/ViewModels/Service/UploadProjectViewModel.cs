@@ -132,7 +132,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
             base.GoBackAction();
 
-            JSONStatusResponse status_response = await upload_task;
+            JSONStatusResponse status_response = await Task.Run(() => upload_task);
 
             switch (status_response.statusCode)
             { 

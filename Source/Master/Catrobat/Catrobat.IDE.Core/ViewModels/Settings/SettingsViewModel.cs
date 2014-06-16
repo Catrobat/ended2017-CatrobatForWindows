@@ -41,10 +41,6 @@ namespace Catrobat.IDE.Core.ViewModels.Settings
                 }
 
                 ServiceLocator.CultureService.SetCulture(value);
-                //Thread.CurrentThread.CurrentUICulture = value;
-
-                // todo: portable
-                ((LocalizedStrings)ServiceLocator.LocalizedStrings).Reset();
                 RaisePropertyChanged(() => CurrentCulture);
             }
         }
