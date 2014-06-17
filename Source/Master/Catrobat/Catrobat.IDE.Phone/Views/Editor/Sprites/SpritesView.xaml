@@ -15,7 +15,7 @@
   Foreground="{StaticResource PhoneForegroundBrush}"
   SupportedOrientations="Portrait"
   Orientation="Portrait"
-  shell:SystemTray.IsVisible="True"
+  shell:SystemTray.IsVisible="False"
   DataContext="{Binding SpritesViewModel, Source={StaticResource Locator}}">
 
   <Grid x:Name="LayoutRoot">
@@ -36,7 +36,7 @@
       <reorderableListbox:ReorderListBox
           x:Name="ReorderListBoxSprites"
           Grid.Row="1"
-          Margin="10"
+          Margin="10 0"
           SelectionMode="Single"
           VerticalAlignment="Stretch"
           IsReorderEnabled="True"

@@ -16,7 +16,7 @@
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d"
   DataContext="{Binding SoundRecorderViewModel, Source={StaticResource Locator}}"
-  shell:SystemTray.IsVisible="True">
+  shell:SystemTray.IsVisible="False">
 
   <phone:PhoneApplicationPage.Resources>
     <system:String x:Key="TimeFormat">0.0</system:String>

@@ -17,6 +17,7 @@
         <ResourceDictionary Source="Controls/Buttons/SettingsButtonTemplates.xaml"/>
         <ResourceDictionary Source="Controls\Formulas\Templates\FormulaTokenTemplates.xaml"/>
         <ResourceDictionary Source="Converters/ConverterResources.xaml"/>
+        <ResourceDictionary Source="Content/Images/LicensedIcons/ModernUIIcons/Icons.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

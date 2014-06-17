@@ -139,9 +139,41 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         private void KeyPressedAction(FormulaKeyEventArgs e)
         {
             _editor.HandleKey(e.Data.Key, e.Data.LocalVariable, e.Data.GlobalVariable);
+            SendEvaluation();
         }
 
+        private void SendEvaluation()
+        {
+            FormulaEvaluationResult result;
+
+            if (ParsingError != null)
+            {
+                SelectionStart = ParsingError.Index;
+                SelectionLength = ParsingError.Length;
+                var errorMessage = ParsingError.Message;
+
+                result = new FormulaEvaluationResult
+                {
+                    Error = errorMessage
+                };
+            }
+            else
+            {
+                var value = FormulaEvaluator.Evaluate(Formula);
+                var stringValue = value == null ? string.Empty : value.ToString();
+
+                result = new FormulaEvaluationResult
+                {
+                    Value = stringValue,
+                };
+            }
+
+            Messenger.Default.Send(result, ViewModelMessagingToken.FormulaEvaluated);
+        }
+
+
         public RelayCommand EvaluatePressedCommand { get; private set; }
+        
 
         private void EvaluatePressedAction()
         {
