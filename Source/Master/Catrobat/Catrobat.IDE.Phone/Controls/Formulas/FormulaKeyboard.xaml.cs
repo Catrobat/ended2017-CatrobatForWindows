@@ -1,10 +1,12 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using Catrobat.IDE.Core.Formulas.Editor;
+﻿using Catrobat.IDE.Core.Formulas.Editor;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
+using GalaSoft.MvvmLight.Messaging;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace Catrobat.IDE.Phone.Controls.Formulas
 {
@@ -153,6 +155,14 @@ namespace Catrobat.IDE.Phone.Controls.Formulas
             InitializeComponent();
 
             DecimalSeparator = ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator;
+
+            Messenger.Default.Register<FormulaEvaluationResult>(this, ViewModelMessagingToken.FormulaEvaluated, FormulaChangedMessageAction);
+        }
+
+        private void FormulaChangedMessageAction(FormulaEvaluationResult result)
+        {
+            TextBlockEvaluationValue.Text = result.Value;
+            TextBlockEvaluationError.Text = result.Error;
         }
 
         #region VisualStateManager
