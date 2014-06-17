@@ -2105,6 +2105,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ,.
+        /// </summary>
+        public static string FormulaKeyboard_DigitSeparator {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_DigitSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Favorites.
         /// </summary>
         public static string FormulaKeyboard_Favorites {
@@ -2155,6 +2164,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string FormulaKeyboard_Operators {
             get {
                 return ResourceManager.GetString("FormulaKeyboard_Operators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ;.
+        /// </summary>
+        public static string FormulaKeyboard_ParameterSeparator {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_ParameterSeparator", resourceCulture);
             }
         }
         
