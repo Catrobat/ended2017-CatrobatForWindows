@@ -10,31 +10,30 @@ using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.VersionConverter;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
-//using System.Diagnostics;
-using System.Threading;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
     public static class CatrobatWebCommunicationService
     {
         private static int _uploadCounter = 0;
-
+        
         public static async Task<List<OnlineProjectHeader>> AsyncLoadOnlineProjects(string filterText, int offset, CancellationToken taskCancellationToken)
         {
             using (var http_client = new HttpClient())
             {
-                http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
-                //http_client.BaseAddress = new Uri("https://pocketcode.org/api/");
+                //http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
+                http_client.BaseAddress = new Uri("https://pocketcode.org/api/");
                 //http_client.DefaultRequestHeaders.Accept.Clear();
                 //http_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
                 {
                     HttpResponseMessage http_response = null;
-
+                    
                     if (filterText == "")
                     {
                         http_response = await http_client.GetAsync(String.Format(ApplicationResources.API_RECENT_PROJECTS, ApplicationResources.API_REQUEST_LIMIT, offset), taskCancellationToken);
@@ -48,9 +47,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
                     string json_result = await http_response.Content.ReadAsStringAsync();
                     OnlineProjectOverview recent_projects = null;
-
+                    
                     //List<OnlineProjectOverview> projects = JsonConvert.DeserializeObject<List<OnlineProjectOverview>>(json_result);
-                    recent_projects = JsonConvert.DeserializeObject<OnlineProjectOverview>(json_result);
+                    recent_projects = await Task.Run(() => JsonConvert.DeserializeObject<OnlineProjectOverview>(json_result));
                     
                     return recent_projects.CatrobatProjects;
                 }

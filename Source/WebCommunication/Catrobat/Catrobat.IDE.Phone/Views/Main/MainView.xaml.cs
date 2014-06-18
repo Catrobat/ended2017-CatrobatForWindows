@@ -76,6 +76,14 @@ namespace Catrobat.IDE.Phone.Views.Main
             }
         }
 
+        private void FilterTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                _viewModel.LoadOnlineProjects(false);
+            }
+        }
+
         private void panoramaMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if ((PanoramaMain.SelectedItem == PanoramaItemOnlineProjects) && firstAttempt)

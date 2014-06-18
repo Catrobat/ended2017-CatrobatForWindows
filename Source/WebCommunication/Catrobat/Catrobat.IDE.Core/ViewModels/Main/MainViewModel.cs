@@ -147,7 +147,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 if (_filterText != value)
                 {
                     _filterText = value;
-                    LoadOnlineProjects(false);
+                    //LoadOnlineProjects(false);
                     RaisePropertyChanged(() => FilterText);
                 }
             }
