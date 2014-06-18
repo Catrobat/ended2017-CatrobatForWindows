@@ -143,7 +143,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private async void DownloadAction(OnlineProjectHeader onlineProjectHeader)
         {
             ButtonDownloadIsEnabled = false;
-            Task<CatrobatVersionConverter.VersionConverterError> download_task =  CatrobatWebCommunicationService.AsyncDownloadAndSaveProject(onlineProjectHeader.DownloadUrl, onlineProjectHeader.ProjectName);
+            Task<CatrobatVersionConverter.VersionConverterError> download_task =  Task.Run(() => CatrobatWebCommunicationService.AsyncDownloadAndSaveProject(onlineProjectHeader.DownloadUrl, onlineProjectHeader.ProjectName));
 
             var projectChangedMessage = new MessageBase();
             Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.DownloadProjectStartedListener);

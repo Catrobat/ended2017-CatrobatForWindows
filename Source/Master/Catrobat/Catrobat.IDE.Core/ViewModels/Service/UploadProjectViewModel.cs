@@ -89,6 +89,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public RelayCommand CancelCommand { get; private set; }
 
+        public RelayCommand ChangeUserCommand { get; private set; }
+
         #endregion
 
         #region CommandCanExecute
@@ -122,26 +124,35 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             CurrentProject.Description = ProjectDescription;
             await App.SaveContext(CurrentProject);
 
-            Task<JSONStatusResponse> upload_task = CatrobatWebCommunicationService.AsyncUploadProject(ProjectName, _projectDescription, 
-                                                          Context.CurrentUserName,
-                                              ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName,
-                                                          Context.CurrentToken);
+            Task<JSONStatusResponse> upload_task = CatrobatWebCommunicationService.AsyncUploadProject(ProjectName, Context.CurrentUserName,
+                                                          Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
             var message = new MessageBase();
             Messenger.Default.Send(message, ViewModelMessagingToken.UploadProjectStartedListener);
 
             base.GoBackAction();
 
-            JSONStatusResponse status_response = await upload_task;
+            JSONStatusResponse status_response = await Task.Run(() => upload_task);
 
-            if (status_response.statusCode != StatusCodes.ServerResponseTokenOk)
+            switch (status_response.statusCode)
             {
+                case StatusCodes.ServerResponseTokenOk:
+                    break;
+
+                case StatusCodes.HTTPRequestFailed:
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
+                            AppResources.Main_NoInternetConnection, UploadErrorCallback, MessageBoxOptions.Ok);                        
+                    break;
+
+                default:
                 string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
                                        string.Format(AppResources.Main_UploadProjectError, status_response.answer);
 
                 ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
                             messageString, UploadErrorCallback, MessageBoxOptions.Ok);
+                    break;
             }
+
             if (CatrobatWebCommunicationService.NoUploadsPending())
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
@@ -153,6 +164,16 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         {
             ResetViewModel();
             ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
+        }
+
+        private void ChangeUserAction()
+        {
+            ResetViewModel();
+            Context.CurrentToken = "";
+            Context.CurrentUserName = "";
+            Context.CurrentUserEmail = "";
+            ServiceLocator.NavigationService.NavigateTo<UploadProjectLoginViewModel>();
+            ServiceLocator.NavigationService.RemoveBackEntry();
         }
 
         protected override void GoBackAction()
@@ -181,6 +202,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             InitializeCommand = new RelayCommand(InitializeAction);
             UploadCommand = new RelayCommand(UploadAction, UploadCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
+            ChangeUserCommand = new RelayCommand(ChangeUserAction);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedAction);

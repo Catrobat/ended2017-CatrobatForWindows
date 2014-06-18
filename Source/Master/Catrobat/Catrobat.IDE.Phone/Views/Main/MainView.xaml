@@ -309,7 +309,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
           </Grid.RowDefinitions>
-          <toolkit:PhoneTextBox Hint="{Binding Resources.Main_FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" ActionIcon="/Content/Images/Application/Search.png" x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextChanged="FilterTextBox_TextChanged" Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
+          <toolkit:PhoneTextBox Hint="{Binding Resources.Main_FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" InputScope="Url" ActionIcon="../../Resources/Application/Search.png" x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextChanged="FilterTextBox_TextChanged" KeyDown="FilterTextBox_KeyDown" Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
           <phone:LongListSelector Name="LongListSelectorOnlineProjects" Grid.Row="1" 
             ItemsSource="{Binding OnlineProjects}" 
             VerticalAlignment="Stretch" 

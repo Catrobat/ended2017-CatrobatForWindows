@@ -1090,6 +1090,21 @@
   <data name="Main_UploadProjectErrorCaption" xml:space="preserve">
     <value>Upload fehlgeschlagen</value>
   </data>
+  <data name="Main_NoInternetConnection" xml:space="preserve">
+    <value>Keine Internetverbindung verfügbar.</value>
+  </data>
+  <data name="Main_ButtonChangeUser" xml:space="preserve">
+    <value>Benutzer wechseln</value>
+  </data>
+  <data name="Main_UploadProjectLoginErrorStatic" xml:space="preserve">
+    <value>Benutzername oder Passwort falsch.</value>
+  </data>
+  <data name="Main_UploadProjectLoginNonExistingUser" xml:space="preserve">
+    <value>Benutzername existiert nicht.</value>
+  </data>
+  <data name="Main_UploadProjectRegisterExistingUser" xml:space="preserve">
+    <value>Benutzername existiert bereits.</value>
+  </data>
   <data name="Main_ApplicationRequiresRestart" xml:space="preserve">
     <value>Die Anwendung benötigt einen Neustart um die Änderungen zu verwirklichen.</value>
   </data>

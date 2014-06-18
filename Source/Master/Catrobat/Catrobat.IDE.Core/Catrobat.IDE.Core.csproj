@@ -108,6 +108,11 @@
     <Compile Include="Models\ITestEquatable.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\UploadHeader.cs" />
+    <Compile Include="Resources\ApplicationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Localization\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -420,11 +425,6 @@
     <Compile Include="LocalSettings.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\ApplicationResources.Designer.cs">
-      <DependentUpon>ApplicationResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Resources\Localization\AppResources.de.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -575,10 +575,12 @@
     <EmbeddedResource Include="Resources\Localization\AppResources.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Localization\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
