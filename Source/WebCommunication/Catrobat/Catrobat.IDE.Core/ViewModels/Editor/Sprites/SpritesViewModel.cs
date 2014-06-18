@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
@@ -22,7 +22,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #endregion
 
-        # region Properties
+        #region Properties
 
         public Project CurrentProject
         {
@@ -46,7 +46,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             get
             {
-                return CurrentProject.SpriteList.Sprites;
+                return CurrentProject.Sprites;
             }
         }
 
@@ -68,7 +68,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
             set
             {
-                if (_selectedSprite == value)
+                if (ReferenceEquals(_selectedSprite, value))
                     return;
 
                 _selectedSprite = value;
@@ -80,7 +80,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 DeleteSpriteCommand.RaiseCanExecuteChanged();
 
                 var spriteChangedMessage = new GenericMessage<Sprite>(SelectedSprite);
-                Messenger.Default.Send<GenericMessage<Sprite>>(spriteChangedMessage, ViewModelMessagingToken.CurrentSpriteChangedListener);
+                Messenger.Default.Send(spriteChangedMessage, ViewModelMessagingToken.CurrentSpriteChangedListener);
             }
         }
 
@@ -192,7 +192,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             var originalIndex = Sprites.IndexOf(SelectedSprite);
 
-            var newSprite = (Sprite) await SelectedSprite.Copy();
+            var newSprite = await SelectedSprite.CloneAsync(CurrentProject);
             var newIndex = originalIndex + 1;
 
             Sprites.Insert(newIndex, newSprite);
@@ -255,22 +255,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             if (result == MessageboxResult.Ok)
             {
-                var userVariableEntries = CurrentProject.VariableList.ObjectVariableList.ObjectVariableEntries;
-                ObjectVariableEntry entryToRemove = null;
-                foreach (var entry in userVariableEntries)
-                {
-                    if (entry.Sprite == SelectedSprite)
-                    {
-                        entryToRemove = entry;
-                    }
-                }
+                // SelectedSprite.LocalVariables.Clear();
 
-                if (entryToRemove != null)
-                    userVariableEntries.Remove(entryToRemove);
+                ReferenceHelper.CleanUpSpriteReferences(SelectedSprite, CurrentProject);
 
-                ReferenceHelper.CleanUpReferencesAfterDelete(SelectedSprite, SelectedSprite);
-
-                SelectedSprite.Delete();
+                SelectedSprite.Delete(CurrentProject);
                 Sprites.Remove(SelectedSprite);
 
                 SelectedSprite = null;

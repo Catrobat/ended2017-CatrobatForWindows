@@ -1,4 +1,4 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
@@ -108,8 +108,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         {
             if (Context != null)
             {
-                ProjectName = CurrentProject.ProjectHeader.ProgramName;
-                ProjectDescription = CurrentProject.ProjectHeader.Description;
+                ProjectName = CurrentProject.Name;
+                ProjectDescription = CurrentProject.Description;
             }
             else
             {
@@ -121,7 +121,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private async void UploadAction()
         {
             await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
-            CurrentProject.ProjectHeader.Description = ProjectDescription;
+            CurrentProject.Description = ProjectDescription;
             await App.SaveContext(CurrentProject);
 
             Task<JSONStatusResponse> upload_task = CatrobatWebCommunicationService.AsyncUploadProject(ProjectName, Context.CurrentUserName,
@@ -135,7 +135,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             JSONStatusResponse status_response = await Task.Run(() => upload_task);
 
             switch (status_response.statusCode)
-            { 
+            {
                 case StatusCodes.ServerResponseTokenOk:
                     break;
 
@@ -145,11 +145,11 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     break;
 
                 default:
-                    string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
-                                           string.Format(AppResources.Main_UploadProjectError, status_response.answer);
+                string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
+                                       string.Format(AppResources.Main_UploadProjectError, status_response.answer);
 
-                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
-                                messageString, UploadErrorCallback, MessageBoxOptions.Ok);
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
+                            messageString, UploadErrorCallback, MessageBoxOptions.Ok);
                     break;
             }
 

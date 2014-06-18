@@ -14,4 +14,9 @@
   <ui:ThemeChooser x:Key="ThemeChooser" d:IsDataSource="True"/>
 
   <phone:AppPhone x:Key="AppPhone" d:IsDataSource="True"/>
+  
+  <!--XAML Icons-->
+  
+  
+  
 </ResourceDictionary>

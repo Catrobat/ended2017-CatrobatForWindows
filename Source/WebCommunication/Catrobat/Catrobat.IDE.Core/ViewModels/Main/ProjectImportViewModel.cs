@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
 using GalaSoft.MvvmLight.Command;
@@ -196,7 +196,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                     if (CheckBoxMakeActiveIsChecked)
                     {
-                        var newProject = await Catrobat.IDE.Core.CatrobatContext.LoadNewProjectByNameStatic(newProjectName);
+                        var newProject = await CatrobatContext.LoadNewProjectByNameStatic(newProjectName);
 
                         var projectChangedMessage = new GenericMessage<Project>(newProject);
                         Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);

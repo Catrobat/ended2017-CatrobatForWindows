@@ -1,8 +1,8 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.Formulas;
+﻿using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Formulas.Editor;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             }
         }
 
-        public IFormulaTree Formula
+        public FormulaTree Formula
         {
             get { return _editor.Formula; }
             set { _editor.Formula = value; }
@@ -138,11 +138,45 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         public RelayCommand<FormulaKeyEventArgs> KeyPressedCommand { get; private set; }
         private void KeyPressedAction(FormulaKeyEventArgs e)
         {
-            _editor.HandleKey(e.Data.Key, e.Data.Variable);
+            _editor.HandleKey(e.Data.Key, e.Data.LocalVariable, e.Data.GlobalVariable);
+            SendEvaluation(e.Data.Key, e.Data.LocalVariable, e.Data.GlobalVariable);
         }
 
-        public RelayCommand EvaluatePressedCommand { get; private set; }
+        private void SendEvaluation(FormulaEditorKey key, LocalVariable localVariable = null, GlobalVariable globalVariable = null)
+        {
+            FormulaEvaluationResult result;
 
+            if (ParsingError != null)
+            {
+                if (key != FormulaEditorKey.Delete)
+                {
+                    SelectionStart = ParsingError.Index;
+                    SelectionLength = ParsingError.Length;
+                }
+
+                var errorMessage = ParsingError.Message;
+
+                result = new FormulaEvaluationResult
+                {
+                    Error = errorMessage
+                };
+            }
+            else
+            {
+                var value = FormulaEvaluator.Evaluate(Formula);
+                var stringValue = value == null ? string.Empty : value.ToString();
+
+                result = new FormulaEvaluationResult
+                {
+                    Value = stringValue,
+                };
+            }
+
+            Messenger.Default.Send(result, ViewModelMessagingToken.FormulaEvaluated);
+        }
+
+
+        public RelayCommand EvaluatePressedCommand { get; private set; }
         private void EvaluatePressedAction()
         {
             var value = FormulaEvaluator.Evaluate(Formula);
@@ -151,7 +185,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         }
 
         public RelayCommand ShowErrorPressedCommand { get; private set; }
-
         private void ShowErrorPressedAction()
         {
             SelectionStart = ParsingError.Index;

@@ -1,7 +1,7 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.ExtensionMethods;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Resources.Localization;
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ namespace Catrobat.IDE.Core.Formulas
     {
         #region Static functions
 
-        public static IFormulaTree Interpret(IList<IFormulaToken> tokens, out ParsingError parsingError)
+        public static FormulaTree Interpret(IList<IFormulaToken> tokens, out ParsingError parsingError)
         {
             // TODO: split to InterpretNumber and InterpretLogic
 
@@ -65,7 +65,7 @@ namespace Catrobat.IDE.Core.Formulas
         #endregion
 
         /// <remarks>See <see cref="http://stackoverflow.com/questions/160118/static-and-instance-methods-with-the-same-name" />. </remarks>
-        private IFormulaTree Interpret2(IList<IFormulaToken> tokens)
+        private FormulaTree Interpret2(IList<IFormulaToken> tokens)
         {
             // valid tokens
             if (tokens == null)
@@ -83,7 +83,7 @@ namespace Catrobat.IDE.Core.Formulas
             tokens3 = InterpretFunctions(tokens3);
             tokens3 = InterpretMinusTokenForward(tokens3);
             tokens3 = InterpretOperators(tokens3, tokens2);
-            var formula = tokens3.Cast<IFormulaTree>().FirstOrDefault();
+            var formula = tokens3.Cast<FormulaTree>().FirstOrDefault();
             if (IsCancellationRequested) return null;
 
             // valid formula
@@ -94,6 +94,8 @@ namespace Catrobat.IDE.Core.Formulas
                     message: AppResources.FormulaInterpreter_NullOrEmpty);
                 return null;
             }
+
+            // special case *) should find parsing error at *
             var formulaRange = GetOrigin(formula);
             if (formulaRange.Length < tokens.Count)
             {
@@ -154,7 +156,7 @@ namespace Catrobat.IDE.Core.Formulas
         #region Members
 
         /// <summary>Tracks the origin indices of interpreted tokens</summary>
-        private readonly Dictionary<IFormulaToken, Range> _origin = new Dictionary<IFormulaToken, Range>(new ReferenceEqualityComparer<IFormulaToken>());
+        private readonly Dictionary<IFormulaToken, Range> _origin = new Dictionary<IFormulaToken, Range>();
         private Range GetOrigin(IFormulaToken token)
         {
             return _origin[token];
@@ -191,7 +193,7 @@ namespace Catrobat.IDE.Core.Formulas
             {
                 var token = tokens[index];
                 // clones tokens because _origin depends on unique tokens
-                token = (IFormulaToken) token.Clone();
+                token = token.Clone();
                 SetOrigin(token, Range.Single(index));
                 yield return token;
             }
@@ -270,7 +272,7 @@ namespace Catrobat.IDE.Core.Formulas
 
                 // yield common number of value tokens
                 if (nextToken is IFormulaNumber) continue;
-                IFormulaTree commonToken;
+                FormulaTree commonToken;
                 if (numberTokens.Count == 1)
                 {
                     if (containsDecimalSeparator)
@@ -278,7 +280,7 @@ namespace Catrobat.IDE.Core.Formulas
                         SetParsingError(numberTokens[0], AppResources.FormulaInterpreter_Number_SingleDecimalSeparator);
                         yield break;
                     }
-                    commonToken = (IFormulaTree) numberTokens[0];
+                    commonToken = (FormulaTree) numberTokens[0];
                 }
                 else
                 {
@@ -391,7 +393,7 @@ namespace Catrobat.IDE.Core.Formulas
         #region Brackets
 
         /// <summary>
-        /// Maps all opening and closing parentheses and packs them with their interpreted children into <see cref="FormulaNodeParentheses"/> or <see cref="FormulaTokenParameter"/>. 
+        /// Maps all opening and closing parentheses and packs them with their interpreted children into <see cref="FormulaTokenParameter"/>. 
         /// </summary>
         private IEnumerable<IFormulaToken> InterpretBrackets(IEnumerable<IFormulaToken> tokens)
         {
@@ -582,7 +584,7 @@ namespace Catrobat.IDE.Core.Formulas
                 interpretedChildren = InterpretMinusTokenForward(interpretedChildren);
                 interpretedChildren = InterpretOperators(interpretedChildren, lookAhead: children);
                 interpretedChildren = InterpretParameters(interpretedChildren);
-                var parameters = interpretedChildren.Cast<IFormulaTree>().Take(parametersCount).ToList();
+                var parameters = interpretedChildren.Cast<FormulaTree>().Take(parametersCount).ToList();
 
                 // valid parameters
                 if (IsCancellationRequested) return;
@@ -642,7 +644,7 @@ namespace Catrobat.IDE.Core.Formulas
                 interpretedChildren = InterpretFunctions(interpretedChildren);
                 interpretedChildren = InterpretMinusTokenForward(interpretedChildren);
                 interpretedChildren = InterpretOperators(interpretedChildren, lookAhead: children);
-                var child = (IFormulaTree) interpretedChildren.FirstOrDefault();
+                var child = (FormulaTree) interpretedChildren.FirstOrDefault();
 
                 // valid child
                 if (IsCancellationRequested) return;
@@ -668,7 +670,7 @@ namespace Catrobat.IDE.Core.Formulas
 
         }
 
-        private static IFormulaTree RemoveParentheses(IFormulaTree node)
+        private static FormulaTree RemoveParentheses(FormulaTree node)
         {
             while (true)
             {
@@ -930,7 +932,7 @@ namespace Catrobat.IDE.Core.Formulas
         /// </summary>
         private IEnumerable<IFormulaToken> InterpretOperators(IEnumerable<IFormulaToken> tokens, IEnumerable<IFormulaToken> lookAhead)
         {
-            var pending = new Stack<IFormulaTree>();
+            var pending = new Stack<FormulaTree>();
             lookAhead = InterpretMinusTokenForward(lookAhead);
             var lookAhead2 = lookAhead.GetEnumerator();
             foreach (var context in tokens.WithContext())
@@ -946,7 +948,7 @@ namespace Catrobat.IDE.Core.Formulas
                     yield return token;
                     continue;
                 }
-                var token2 = (IFormulaTree) token;
+                var token2 = (FormulaTree) token;
                 var operatorToken = token2 as IFormulaOperator;
 
                 // advance lookAhead parallel to tokens

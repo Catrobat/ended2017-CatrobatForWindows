@@ -1105,4 +1105,13 @@
   <data name="Main_UploadProjectRegisterExistingUser" xml:space="preserve">
     <value>Username already exists.</value>
   </data>
+  <data name="Main_ApplicationRequiresRestart" xml:space="preserve">
+    <value>The application requires a restart to apply the changes.</value>
+  </data>
+  <data name="FormulaKeyboard_DigitSeparator" xml:space="preserve">
+    <value>,</value>
+  </data>
+  <data name="FormulaKeyboard_ParameterSeparator" xml:space="preserve">
+    <value>;</value>
+  </data>
 </root>

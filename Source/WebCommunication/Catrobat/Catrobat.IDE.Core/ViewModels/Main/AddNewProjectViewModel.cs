@@ -1,5 +1,5 @@
 ﻿using System;
-using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -8,7 +8,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 {
     public class AddNewProjectViewModel : ViewModelBase
     {
-        #region private Members
+        #region Private Members
 
         private Project _currentProject;
         private string _projectName;
@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public string TextCopyCurrentProjectAsTemplate
         {
-            get { return String.Format(AppResources.Main_UseCurrentProjectAsTemplate, CurrentProject.ProjectHeader.ProgramName); }
+            get { return String.Format(AppResources.Main_UseCurrentProjectAsTemplate, CurrentProject.Name); }
         }
 
         public string ProjectName
@@ -80,7 +80,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             await CurrentProject.Save();
 
             CurrentProject = CopyCurrentProjectAsTemplate ?
-                await CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName, _projectName) :
+                await CatrobatContext.CopyProject(CurrentProject.Name, _projectName) :
                 await CatrobatContext.CreateEmptyProject(_projectName);
 
             if (CurrentProject != null)

@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Xml.Converter;
+using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.IDE.Tests.Extensions;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.Services.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -32,8 +34,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
                 xml1 = storage.ReadTextFile(savePath);
             }
 
-            var project2 = new Project(xml1);
-            Assert.IsTrue(project1.Equals(project2));
+            var project2 = new XmlProjectConverter().Convert(new XmlProject(xml1));
+
+            ModelAssert.AreTestEqual(project1, project2);
         }
 
         

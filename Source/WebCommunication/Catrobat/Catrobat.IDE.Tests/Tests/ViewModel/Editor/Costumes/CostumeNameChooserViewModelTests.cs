@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.PortableUI;
@@ -25,6 +25,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             ServiceLocator.Register<StorageTest>(TypeCreationMode.Normal);
             ServiceLocator.Register<ImageResizeServiceTest>(TypeCreationMode.Normal);
             ServiceLocator.Register<SensorServiceTest>(TypeCreationMode.Normal);
+            ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
         }
 
         [TestMethod] // , TestCategory("GatedTests") // TODO: fix test takes very long time on server
@@ -39,11 +40,13 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
             navigationService.CurrentView = typeof(CostumeNameChooserViewModel);
 
-            var viewModel = new CostumeNameChooserViewModel();
-            viewModel.SelectedSize = new ImageSizeEntry { NewHeight = 100, NewWidth = 100};
-            viewModel.CostumeName = "TestCostume";
+            var viewModel = new CostumeNameChooserViewModel
+            {
+                SelectedSize = new ImageSizeEntry {NewHeight = 100, NewWidth = 100},
+                CostumeName = "TestCostume"
+            };
 
-            var project = new Project { ProjectHeader = new ProjectHeader(false) { ProgramName = "TestProject" } };
+            var project = new Project {Name = "TestProject"};
             var messageContext = new GenericMessage<Project>(project);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProjectChangedListener);
 
@@ -57,8 +60,8 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             await viewModel.SaveCommand.ExecuteAsync(null);
 
             Assert.IsNotNull(_imageToSave);
-            Assert.AreEqual(1, sprite.Costumes.Costumes.Count);
-            Assert.IsNotNull(sprite.Costumes.Costumes[0].Image);
+            Assert.AreEqual(1, sprite.Costumes.Count);
+            Assert.IsNotNull(sprite.Costumes[0].Image);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);

@@ -1,7 +1,7 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Core.ExtensionMethods;
+﻿using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Formulas;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Services;
@@ -11,7 +11,7 @@ using System.Globalization;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 {
-    /// <summary>Tests <see cref="FormulaSerializer.Serialize(IFormulaTree)" />. </summary>
+    /// <summary>Tests <see cref="FormulaSerializer.Serialize(FormulaTree)" />. </summary>
     [TestClass]
     public class FormulaSerializerFormulaTests
     {
@@ -142,17 +142,17 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
         public void TestVariables()
         {
-            TestSerializer("{0}", FormulaTreeFactory.CreateLocalVariableNode);
-            TestSerializer("{0}", FormulaTreeFactory.CreateGlobalVariableNode);
+            TestSerializer<LocalVariable>("{0}", FormulaTreeFactory.CreateLocalVariableNode);
+            TestSerializer<GlobalVariable>("{0}", FormulaTreeFactory.CreateGlobalVariableNode);
         }
 
-        private void TestSerializer(string format, Func<UserVariable, ConstantFormulaTree> formulaCreator)
+        private void TestSerializer<TVariable>(string format, Func<TVariable, ConstantFormulaTree> formulaCreator) where TVariable : Variable, new()
         {
-            var x = new UserVariable
+            var x = new TVariable
             {
                 Name = "TestVariable"
             };
-            var y = new UserVariable();
+            var y = new TVariable();
             TestSerializer(string.Format(format, x.Name), formulaCreator.Invoke(x));
             TestSerializer(string.Format(format, " "), formulaCreator.Invoke(y));
             TestSerializer(string.Format(format, " "), formulaCreator.Invoke(null));
@@ -172,24 +172,24 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #region Helpers
 
-        private void TestSerializer(string expectedValue, IFormulaTree formula)
+        private void TestSerializer(string expectedValue, FormulaTree formula)
         {
             Assert.AreEqual(expectedValue, FormulaSerializer.Serialize(formula));
         }
 
-        private void TestSerializer(string expectedValue, Func<IFormulaTree> formulaCreator)
+        private void TestSerializer(string expectedValue, Func<FormulaTree> formulaCreator)
         {
             TestSerializer(expectedValue, formulaCreator.Invoke());
         }
 
-        private void TestSerializerN(string format, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
+        private void TestSerializerN(string format, Func<FormulaTree, UnaryFormulaTree> formulaCreator)
         {
             var x = _random.Next();
             TestSerializer(string.Format(format, x), formulaCreator.Invoke(FormulaTreeFactory.CreateNumberNode(x)));
             TestSerializer(string.Format(format, " "), formulaCreator.Invoke(null));
         }
 
-        private void TestSerializerL(string format, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
+        private void TestSerializerL(string format, Func<FormulaTree, UnaryFormulaTree> formulaCreator)
         {
             var x = _random.NextBool();
             var xString = x ? AppResources.Formula_Constant_True : AppResources.Formula_Constant_False;
@@ -198,13 +198,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         }
 
         // ReSharper disable once InconsistentNaming
-        private void TestSerializerNL(string format, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
+        private void TestSerializerNL(string format, Func<FormulaTree, UnaryFormulaTree> formulaCreator)
         {
             TestSerializerL(format, formulaCreator);
             TestSerializerN(format, formulaCreator);
         }
 
-        private void TestSerializerN(string format, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        private void TestSerializerN(string format, Func<FormulaTree, FormulaTree, BinaryFormulaTree> formulaCreator)
         {
             var x = _random.Next();
             var y = _random.Next();
@@ -216,7 +216,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
                 formula: formulaCreator.Invoke(null, null));
         }
 
-        private void TestSerializerL(string format, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        private void TestSerializerL(string format, Func<FormulaTree, FormulaTree, BinaryFormulaTree> formulaCreator)
         {
             var x = _random.NextBool();
             var y = _random.NextBool();
@@ -231,7 +231,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         }
 
         // ReSharper disable once InconsistentNaming
-        private void TestSerializerNL(string format, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        private void TestSerializerNL(string format, Func<FormulaTree, FormulaTree, BinaryFormulaTree> formulaCreator)
         {
             TestSerializerN(format, formulaCreator);
             TestSerializerL(format, formulaCreator);

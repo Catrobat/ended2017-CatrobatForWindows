@@ -1,26 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Bricks;
-using Catrobat.IDE.Core.CatrobatObjects.Scripts;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.Scripts;
 
 namespace Catrobat.IDE.Core.UI
 {
-    public class ScriptBrickIterator : IEnumerator<DataObject>
+    [Obsolete("Replace with Scripts.SelectMany(script => Enumerable.Repeat<Model>(script, 1).Concat(script.Bricks)). ")]
+    public class ScriptBrickIterator : IEnumerator<Model>
     {
-        private ObservableCollection<Script> _scripts;
         private readonly IEnumerator<Script> _scriptEnumerator;
         private IEnumerator<Brick> _brickEnumerator;
 
-        public ScriptBrickIterator(ObservableCollection<Script> scripts)
+        public ScriptBrickIterator(IEnumerable<Script> scripts)
         {
             // TODO: check synchronization
-            this._scripts = scripts;
             _scriptEnumerator = scripts.GetEnumerator();
         }
 
-        public DataObject Current
+        public Model Current
         {
             get
             {
@@ -32,8 +31,8 @@ namespace Catrobat.IDE.Core.UI
                 {
                     var script = _scriptEnumerator.Current;
 
-                    if (script == null)
-                        return new EmptyDummyBrick();
+                    //if (script == null)
+                    //    return new EmptyDummyBrick();
 
 
                     return script;
@@ -59,8 +58,8 @@ namespace Catrobat.IDE.Core.UI
                 {
                     var script = _scriptEnumerator.Current;
 
-                    if (script == null)
-                        return new EmptyDummyBrick();
+                    //if (script == null)
+                    //    return new EmptyDummyBrick();
 
 
                     return script;
@@ -81,24 +80,21 @@ namespace Catrobat.IDE.Core.UI
                     _scriptEnumerator.MoveNext();
 
                     if (_scriptEnumerator.Current != null)
-                        _brickEnumerator = _scriptEnumerator.Current.Bricks.Bricks.GetEnumerator();
+                        _brickEnumerator = _scriptEnumerator.Current.Bricks.GetEnumerator();
 
                     if (_scriptEnumerator.Current == null)
                     {
-                        bool isLastEmpty = !_wasEmptyItem;
+                        //var isLastEmpty = !WasEmptyItem;
 
-                        if (isLastEmpty)
-                        {
-                            _wasEmptyItem = true;
-                            return true;
-                        }
+                        //if (isLastEmpty)
+                        //{
+                        //    WasEmptyItem = true;
+                        //    return true;
+                        //}
 
                         return false;
                     }
-                    else
-                    {
-                        _brickEnumerator = _scriptEnumerator.Current.Bricks.Bricks.GetEnumerator();
-                    }
+                    _brickEnumerator = _scriptEnumerator.Current.Bricks.GetEnumerator();
                 }
             }
             else
@@ -107,7 +103,7 @@ namespace Catrobat.IDE.Core.UI
 
                 if (_scriptEnumerator.Current != null)
                 {
-                    _brickEnumerator = _scriptEnumerator.Current.Bricks.Bricks.GetEnumerator();
+                    _brickEnumerator = _scriptEnumerator.Current.Bricks.GetEnumerator();
                 }
             }
 
@@ -121,6 +117,6 @@ namespace Catrobat.IDE.Core.UI
             _brickEnumerator = null;
         }
 
-        public bool _wasEmptyItem { get; set; }
+        //public bool WasEmptyItem { get; set; }
     }
 }

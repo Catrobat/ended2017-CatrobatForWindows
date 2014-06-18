@@ -391,6 +391,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Content\Images\LicensedIcons\ModernUIIcons\Icons.xaml">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Content\Images\Misc\AudioRecorder.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -653,6 +657,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\dark\appbar.clear.reflect.horizontal.png" />
+    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\dark\appbar.redo.png" />
+    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\dark\appbar.undo.png" />
+    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\light\appbar.clear.reflect.horizontal.png" />
+    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\light\appbar.redo.png" />
+    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\light\appbar.undo.png" />
+    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\license.txt" />
     <Content Include="Content\Images\Screenshot\NoScreenshotSquare.png" />
     <Content Include="Content\Images\Share\skydrive.jpg" />
     <Content Include="Content\Programs\Default\automatic_screenshot.png" />
@@ -886,7 +897,6 @@
   <ItemGroup>
     <Folder Include="Content\Libs\" />
     <Folder Include="Content\Programs\Default\Sounds\" />
-    <Folder Include="Services\LocalServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

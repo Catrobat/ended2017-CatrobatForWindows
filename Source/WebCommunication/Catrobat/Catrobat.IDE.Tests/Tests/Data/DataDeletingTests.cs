@@ -2,11 +2,8 @@
 using System.IO;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.Utilities.Helpers;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Costumes;
-using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Tests.Misc;
 
@@ -38,9 +35,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
             using (IStorage storage = StorageSystem.GetStorage())
             {
-                foreach (var sprite in project.SpriteList.Sprites)
+                foreach (var sprite in project.Sprites)
                 {
-                    foreach (var costume in sprite.Costumes.Costumes)
+                    foreach (var costume in sprite.Costumes)
                     {
                         //Projects/DataDeletingTests.DeleteSprite/images/
                         var stream = storage.OpenFile(Path.Combine(project.BasePath, Project.ImagesPath , costume.FileName), 
@@ -48,7 +45,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
                         stream.Close();
                     }
 
-                    foreach (var sound in sprite.Sounds.Sounds)
+                    foreach (var sound in sprite.Sounds)
                     {
                         var stream = storage.OpenFile(Path.Combine(project.BasePath, Project.SoundsPath, sound.FileName),
                             StorageFileMode.Create, StorageFileAccess.Write);
@@ -68,20 +65,20 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
             using (IStorage storage = StorageSystem.GetStorage())
             {
-                foreach (var sprite in project.SpriteList.Sprites)
+                foreach (var sprite in project.Sprites)
                 {
-                    foreach (var costume in sprite.Costumes.Costumes)
+                    foreach (var costume in sprite.Costumes)
                     {
                         costumes.Add(costume);
                         Assert.IsTrue(storage.FileExists(pathCostumes + costume.FileName));
                     }
-                    foreach (var sound in sprite.Sounds.Sounds)
+                    foreach (var sound in sprite.Sounds)
                     {
                         sounds.Add(sound);
                         Assert.IsTrue(storage.FileExists(pathSounds + sound.FileName));
                     }
 
-                    await sprite.Delete();
+                    await sprite.Delete(project);
                 }
 
                 foreach (var costume in costumes)

@@ -10,6 +10,7 @@
   xmlns:buttons="clr-namespace:Catrobat.IDE.Phone.Controls.Buttons"
   mc:Ignorable="d"
   xmlns:appBar="clr-namespace:Catrobat.IDE.Phone.Controls.AppBar"
+  xmlns:models="clr-namespace:Catrobat.IDE.Core.Models;assembly=Catrobat.IDE.Core"
   d:DesignWidth="480"
   d:DesignHeight="768"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -17,7 +18,7 @@
   Foreground="{StaticResource PhoneForegroundBrush}"
   SupportedOrientations="Portrait"
   Orientation="Portrait"
-  shell:SystemTray.IsVisible="True"
+  shell:SystemTray.IsVisible="False"
   DataContext="{Binding SpriteEditorViewModel, Source={StaticResource Locator}}">
 
   <phone:PhoneApplicationPage.Resources>
@@ -38,7 +39,7 @@
           <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding SelectedSprite.Name}" 
-                     Grid.Column="0"
+                     Grid.Column="0" FontSize="36"
                      Style="{StaticResource PhoneTextNormalStyle}" />
         <HyperlinkButton Grid.Column="1" HorizontalAlignment="Right"
                          Content="{Binding Resources.Editor_Rename, Source={StaticResource LocalizedStrings}}"
@@ -58,10 +59,10 @@
       </Grid>-->
 
       <controls:Pivot 
-        Name="PivotMain" Grid.Row="1"
+        Name="PivotMain" Grid.Row="1" Margin="0 -30 0 0" 
         SelectedIndex="{Binding SelectedPivotIndex, Mode=TwoWay}">
         <!--Pivot item scripts-->
-        <controls:PivotItem Name="PivotScripts" 
+        <controls:PivotItem Name="PivotScripts"
           Header="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}">
           <Grid DataContext="{Binding}">
             <reorderableListbox:ReorderListBox
@@ -157,7 +158,7 @@
                                          Grid.Column="0" Height="80" Width="80" />
                     <Grid Grid.Column="1" Margin="5">
                       <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
-                               VerticalAlignment="Center" />
+                               VerticalAlignment="Center" d:DataContext="{d:DesignInstance models:Sound}" />
                     </Grid>
                   </Grid>
                 </DataTemplate>
