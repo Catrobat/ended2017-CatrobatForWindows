@@ -139,17 +139,21 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         private void KeyPressedAction(FormulaKeyEventArgs e)
         {
             _editor.HandleKey(e.Data.Key, e.Data.LocalVariable, e.Data.GlobalVariable);
-            SendEvaluation();
+            SendEvaluation(e.Data.Key, e.Data.LocalVariable, e.Data.GlobalVariable);
         }
 
-        private void SendEvaluation()
+        private void SendEvaluation(FormulaEditorKey key, LocalVariable localVariable = null, GlobalVariable globalVariable = null)
         {
             FormulaEvaluationResult result;
 
             if (ParsingError != null)
             {
-                SelectionStart = ParsingError.Index;
-                SelectionLength = ParsingError.Length;
+                if (key != FormulaEditorKey.Delete)
+                {
+                    SelectionStart = ParsingError.Index;
+                    SelectionLength = ParsingError.Length;
+                }
+
                 var errorMessage = ParsingError.Message;
 
                 result = new FormulaEvaluationResult
@@ -173,8 +177,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
 
         public RelayCommand EvaluatePressedCommand { get; private set; }
-        
-
         private void EvaluatePressedAction()
         {
             var value = FormulaEvaluator.Evaluate(Formula);
@@ -183,7 +185,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         }
 
         public RelayCommand ShowErrorPressedCommand { get; private set; }
-
         private void ShowErrorPressedAction()
         {
             SelectionStart = ParsingError.Index;

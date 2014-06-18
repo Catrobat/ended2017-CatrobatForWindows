@@ -944,10 +944,10 @@
     <value>Schreibe etwas. </value>
   </data>
   <data name="FormulaInterpreter_Brackets_NonArgumentParameterSeparator" xml:space="preserve">
-    <value>Entferne den Beistrich. </value>
+    <value>Entferne den Strichpunkt. </value>
   </data>
   <data name="FormulaInterpreter_Brackets_TooFewArguments" xml:space="preserve">
-    <value>Füge einen Beistrich hinzu. </value>
+    <value>Füge einen Strichpunkt hinzu. </value>
   </data>
   <data name="FormulaInterpreter_Brackets_TooManyArguments" xml:space="preserve">
     <value>Entferne die überflüssigen Argumente. </value>
@@ -1092,5 +1092,11 @@
   </data>
   <data name="Main_ApplicationRequiresRestart" xml:space="preserve">
     <value>Die Anwendung benötigt einen Neustart um die Änderungen zu verwirklichen.</value>
+  </data>
+  <data name="FormulaKeyboard_DigitSeparator" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="FormulaKeyboard_ParameterSeparator" xml:space="preserve">
+    <value>,</value>
   </data>
 </root>

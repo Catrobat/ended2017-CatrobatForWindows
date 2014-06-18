@@ -390,7 +390,8 @@
           <appBarUtils:SelectedPanoItemChangedTrigger.SelectionMappings>
             <appBarUtils:SelectionMapping SourceIndex="0" TargetIndex="0"/>
             <appBarUtils:SelectionMapping SourceIndex="1" TargetIndex="1"/>
-            <appBarUtils:SelectionMapping SourceIndex="2" TargetIndex="1"/>
+            <appBarUtils:SelectionMapping SourceIndex="2" TargetIndex="2"/>
+            <appBarUtils:SelectionMapping SourceIndex="3" TargetIndex="2"/>
             <!--<appBarUtils:SelectionMapping SourceIndex="3" TargetIndex="1"/>-->
           </appBarUtils:SelectedPanoItemChangedTrigger.SelectionMappings>
           <appBarUtils:SwitchAppBarAction>
@@ -398,10 +399,6 @@
               <appBarUtils:AppBar.MenuItems>
                 <appBarUtils:AppBarMenuItem Text="{Binding Resources.Main_Settings, Source={StaticResource LocalizedStrings}}" Command="{Binding SettingsCommand}"/>
               </appBarUtils:AppBar.MenuItems>
-
-              <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png"
-                Text="{Binding Resources.Main_ButtonCreate, Source={StaticResource LocalizedStrings}}"
-                Command="{Binding CreateNewProjectCommand}" />
 
               <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.edit.rest.png"
                 Text="{Binding Resources.Main_ButtonEdit, Source={StaticResource LocalizedStrings}}"
@@ -412,7 +409,17 @@
                 Command="{Binding UploadCurrentProjectCommand}" />
 
             </appBarUtils:AppBar>
-            <appBarUtils:AppBar Id="1" Mode="Minimized">
+            <appBarUtils:AppBar Id="1">
+              <appBarUtils:AppBar.MenuItems>
+                <appBarUtils:AppBarMenuItem Text="{Binding Resources.Main_Settings, Source={StaticResource LocalizedStrings}}" Command="{Binding SettingsCommand}"/>
+              </appBarUtils:AppBar.MenuItems>
+
+              <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png"
+                Text="{Binding Resources.Main_ButtonCreate, Source={StaticResource LocalizedStrings}}"
+                Command="{Binding CreateNewProjectCommand}" />
+            </appBarUtils:AppBar>
+
+            <appBarUtils:AppBar Id="2" Mode="Minimized">
               <appBarUtils:AppBar.MenuItems>
                 <appBarUtils:AppBarMenuItem Text="{Binding Resources.Main_Settings, Source={StaticResource LocalizedStrings}}" Command="{Binding SettingsCommand}"/>
               </appBarUtils:AppBar.MenuItems>

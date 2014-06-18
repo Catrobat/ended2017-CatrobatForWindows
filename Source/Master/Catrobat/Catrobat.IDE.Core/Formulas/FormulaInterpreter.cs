@@ -94,6 +94,8 @@ namespace Catrobat.IDE.Core.Formulas
                     message: AppResources.FormulaInterpreter_NullOrEmpty);
                 return null;
             }
+
+            // special case *) should find parsing error at *
             var formulaRange = GetOrigin(formula);
             if (formulaRange.Length < tokens.Count)
             {
@@ -222,7 +224,7 @@ namespace Catrobat.IDE.Core.Formulas
         #region Numbers
 
         /// <summary>
-        /// Merges <see cref="Models.Formulas.FormulaToken.IFormulaNumber" /> to <see cref="FormulaTreeFactory.CreateNumberNode" />. 
+        /// Merges <see cref="IFormulaNumber" /> to <see cref="FormulaTreeFactory.CreateNumberNode" />. 
         /// </summary>
         private IEnumerable<IFormulaToken> InterpretNumbers(IEnumerable<IFormulaToken> tokens, IEnumerable<IFormulaToken> lookAhead)
         {
@@ -391,7 +393,7 @@ namespace Catrobat.IDE.Core.Formulas
         #region Brackets
 
         /// <summary>
-        /// Maps all opening and closing parentheses and packs them with their interpreted children into <see cref="FormulaNodeParentheses"/> or <see cref="Models.Formulas.FormulaToken.FormulaTokenParameter"/>. 
+        /// Maps all opening and closing parentheses and packs them with their interpreted children into <see cref="FormulaTokenParameter"/>. 
         /// </summary>
         private IEnumerable<IFormulaToken> InterpretBrackets(IEnumerable<IFormulaToken> tokens)
         {
