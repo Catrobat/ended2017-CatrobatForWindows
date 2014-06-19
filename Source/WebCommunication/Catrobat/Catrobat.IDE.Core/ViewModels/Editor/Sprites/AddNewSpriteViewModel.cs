@@ -1,4 +1,4 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.Models;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -64,7 +64,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private void SaveAction()
         {
             var sprite = new Sprite { Name = SpriteName };
-            CurrentProject.SpriteList.Sprites.Add(sprite);
+            CurrentProject.Sprites.Add(sprite);
 
             ResetViewModel();
             base.GoBackAction();

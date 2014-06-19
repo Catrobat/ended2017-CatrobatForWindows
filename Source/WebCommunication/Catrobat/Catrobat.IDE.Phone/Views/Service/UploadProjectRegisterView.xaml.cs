@@ -11,7 +11,7 @@ namespace Catrobat.IDE.Phone.Views.Service
 {
     public partial class UploadProjectRegisterView : PhoneApplicationPage
     {
-        private readonly UploadProjectRegisterViewModel _viewModel = 
+        private readonly UploadProjectRegisterViewModel _viewModel =
             ((ViewModelLocator)ServiceLocator.ViewModelLocator).UploadProjectRegisterViewModel;
 
         public UploadProjectRegisterView()

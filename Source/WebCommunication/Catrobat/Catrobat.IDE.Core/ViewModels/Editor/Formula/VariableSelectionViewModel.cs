@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.Utilities.Helpers;
@@ -15,10 +14,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private Project _currentProject;
         private Sprite _currentSprite;
-        private ObservableCollection<UserVariable> _localVariables;
-        private ObservableCollection<UserVariable> _globalVariables;
-        private UserVariable _selectedLocalVariable;
-        private UserVariable _selectedGlobalVariable;
+        private ObservableCollection<LocalVariable> _localVariables;
+        private ObservableCollection<GlobalVariable> _globalVariables;
+        private LocalVariable _selectedLocalVariable;
+        private GlobalVariable _selectedGlobalVariable;
         private VariableConteiner _selectedVariableContainer;
         private bool _isLocalView;
 
@@ -54,7 +53,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             }
         }
 
-        public ObservableCollection<UserVariable> LocalVariables
+        public ObservableCollection<LocalVariable> LocalVariables
         {
             get { return _localVariables; }
             set
@@ -64,7 +63,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             }
         }
 
-        public ObservableCollection<UserVariable> GlobalVariables
+        public ObservableCollection<GlobalVariable> GlobalVariables
         {
             get { return _globalVariables; }
             set
@@ -74,7 +73,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             }
         }
 
-        public UserVariable SelectedLocalVariable
+        public LocalVariable SelectedLocalVariable
         {
             get { return _selectedLocalVariable; }
             set
@@ -82,15 +81,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 if (value == _selectedLocalVariable)
                     return;
 
-                var oldSelectedVariable = _selectedLocalVariable;
-
                 _selectedLocalVariable = value;
-
-                var selectedLocalVariable = _selectedLocalVariable;
-                ReaddLocalVariable(_selectedLocalVariable);
-                _selectedLocalVariable = selectedLocalVariable;
-
-                ReaddLocalVariable(oldSelectedVariable);
 
                 if (_selectedLocalVariable != null)
                 {
@@ -107,7 +98,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             }
         }
 
-        public UserVariable SelectedGlobalVariable
+        public GlobalVariable SelectedGlobalVariable
         {
             get { return _selectedGlobalVariable; }
             set
@@ -115,15 +106,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 if (value == _selectedGlobalVariable)
                     return;
 
-                var oldSelectedVariable = _selectedGlobalVariable;
-
                 _selectedGlobalVariable = value;
-
-                var selectedGlobalVariable = _selectedGlobalVariable;
-                ReaddGlobalVariable(_selectedGlobalVariable);
-                _selectedGlobalVariable = selectedGlobalVariable;
-
-                ReaddGlobalVariable(oldSelectedVariable);
 
                 if (_selectedGlobalVariable != null)
                 {
@@ -151,9 +134,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 if (_selectedVariableContainer != null && _selectedVariableContainer.Variable != null)
                 {
                     if (VariableHelper.IsVariableLocal(CurrentProject, _selectedVariableContainer.Variable))
-                        SelectedLocalVariable = _selectedVariableContainer.Variable;
+                        SelectedLocalVariable = (LocalVariable) _selectedVariableContainer.Variable;
                     else
-                        SelectedGlobalVariable = _selectedVariableContainer.Variable;
+                        SelectedGlobalVariable = (GlobalVariable) _selectedVariableContainer.Variable;
                 }
                 else
                 {
@@ -210,13 +193,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         {
             if (SelectedVariableContainer == null)
             {
-                var selectedVariable = SelectedLocalVariable ?? SelectedGlobalVariable;
-                var message = new GenericMessage<UserVariable>(selectedVariable);
+                var selectedVariable = (Variable) SelectedLocalVariable ?? SelectedGlobalVariable;
+                var message = new GenericMessage<Variable>(selectedVariable);
                 Messenger.Default.Send(message, ViewModelMessagingToken.SelectedUserVariableChangedListener);
             }
             else
             {
-                SelectedVariableContainer.Variable = SelectedGlobalVariable ?? SelectedLocalVariable;
+                SelectedVariableContainer.Variable = (Variable) SelectedGlobalVariable ?? SelectedLocalVariable;
             }
 
             ResetViewModel();
@@ -242,13 +225,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private void EditVariableAction()
         {
-            UserVariable selectedVariable;
+            Variable selectedVariable;
             if (IsLocalView)
                 selectedVariable = SelectedLocalVariable;
             else
                 selectedVariable = SelectedGlobalVariable;
 
-            var message = new GenericMessage<UserVariable>(selectedVariable);
+            var message = new GenericMessage<Variable>(selectedVariable);
             Messenger.Default.Send(message, ViewModelMessagingToken.SelectedUserVariableChangedListener);
 
             ServiceLocator.NavigationService.NavigateTo<ChangeVariableViewModel>();
@@ -297,32 +280,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMesageAction);
-        }
-
-        public void ReaddLocalVariable(UserVariable variable)
-        {
-            if (variable != null)
-            {
-                var index = LocalVariables.IndexOf(variable);
-
-                if (index < 0) return;
-
-                LocalVariables.RemoveAt(index);
-                LocalVariables.Insert(index, variable);
-            }
-        }
-
-        public void ReaddGlobalVariable(UserVariable variable)
-        {
-            if (variable != null)
-            {
-                var index = GlobalVariables.IndexOf(variable);
-
-                if (index < 0) return;
-
-                GlobalVariables.RemoveAt(index);
-                GlobalVariables.Insert(index, variable);
-            }
         }
 
         private void ResetViewModel()

@@ -1,4 +1,5 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Models;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -33,10 +34,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             get { return _selectedProject; }
             set
             {
-                if (value == _selectedProject)
-                {
-                    return;
-                }
+                if (ReferenceEquals(value, _selectedProject)) return;
                 _selectedProject = value;
                 RaisePropertyChanged(() => SelectedProject);
             }
@@ -106,13 +104,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             {
                 CurrentProject.ProjectDummyHeader.ProjectName = ProjectName;
                 await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
-                CurrentProject.ProjectHeader.Description = ProjectDescription;
+                CurrentProject.Description = ProjectDescription;
             }
             else
             {
                 SelectedProjectHeader.ProjectName = ProjectName;
                 await SelectedProject.SetProgramNameAndRenameDirectory(ProjectName);
-                SelectedProject.ProjectHeader.Description = ProjectDescription;
+                SelectedProject.Description = ProjectDescription;
                 await SelectedProject.Save();
             }
 
@@ -146,8 +144,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             SelectedProjectHeader = message.Content;
 
             SelectedProject = await CatrobatContext.LoadNewProjectByNameStatic(SelectedProjectHeader.ProjectName);
-            ProjectName = SelectedProject.ProjectHeader.ProgramName;
-            ProjectDescription = SelectedProject.ProjectHeader.Description;
+            ProjectName = SelectedProject.Name;
+            ProjectDescription = SelectedProject.Description;
         }
 
         #endregion

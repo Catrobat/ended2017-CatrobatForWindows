@@ -15,7 +15,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     DataContext="{Binding ProjectImportViewModel, Source={StaticResource Locator}}"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="False">
   
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <Grid.RowDefinitions>

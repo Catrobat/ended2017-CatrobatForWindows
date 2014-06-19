@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Scripts;
@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Phone.Views.Editor.Scripts
 
         private void reorderListBoxScriptBricks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _viewModel.AddNewScriptBrickCommand.Execute(((ListBox) sender).SelectedItem as DataObject);
+            _viewModel.AddNewScriptBrickCommand.Execute(((ListBox) sender).SelectedItem as Model);
         }
     }
 }

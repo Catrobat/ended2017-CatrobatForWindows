@@ -2,8 +2,8 @@
 {
     public enum ViewModelMessagingToken
     {
-        LoadSettings, 
-        SaveSettings, 
+        LoadSettings,
+        SaveSettings,
         CostumeListener,
         SoundNameListener,
         CurrentSpriteChangedListener,
@@ -29,6 +29,7 @@
         ScriptBrickCategoryListener,
         SoundStreamListener,
         PlayProjectNameListener,
-        IsPlayerStartFromTileListener
+        IsPlayerStartFromTileListener,
+        FormulaEvaluated
     }
 }

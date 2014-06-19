@@ -1,12 +1,12 @@
-﻿using System.Globalization;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.ExtensionMethods;
-using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
-using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 using Catrobat.IDE.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 
 namespace Catrobat.IDE.Core.Formulas
 {
@@ -21,8 +21,8 @@ namespace Catrobat.IDE.Core.Formulas
         private static Dictionary<string, Func<IFormulaToken>> _localizationSpecificTokenMappings;
         private static Dictionary<string, Func<IFormulaToken>> _invariantTokenMappings;
         private Dictionary<string, Func<IFormulaToken>> _instanceSpecificTokenMappings;
-        private readonly IDictionary<string, UserVariable> _localVariables;
-        private readonly IDictionary<string, UserVariable> _globalVariables;
+        private readonly IDictionary<string, LocalVariable> _localVariables;
+        private readonly IDictionary<string, GlobalVariable> _globalVariables;
 
         private static void InitCultureSpecificTokenMappings(CultureInfo culture)
         {
@@ -161,7 +161,7 @@ namespace Catrobat.IDE.Core.Formulas
             if (_localizationSpecificTokenMappings == null || cultureChanged) InitLocalizationSpecificTokenMappings();
         }
 
-        public FormulaTokenizer(IEnumerable<UserVariable> localVariables, IEnumerable<UserVariable> globalVariable)
+        public FormulaTokenizer(IEnumerable<LocalVariable> localVariables, IEnumerable<GlobalVariable> globalVariable)
         {
             _localVariables = localVariables.ToDictionary(variable => variable.Name);
             _globalVariables = globalVariable.ToDictionary(variable => variable.Name);
@@ -219,7 +219,7 @@ namespace Catrobat.IDE.Core.Formulas
 
         #region Tokenize formula
 
-        public static IEnumerable<IFormulaToken> Tokenize(IFormulaTree formula)
+        public static IEnumerable<IFormulaToken> Tokenize(FormulaTree formula)
         {
             if (formula == null) return null;
     

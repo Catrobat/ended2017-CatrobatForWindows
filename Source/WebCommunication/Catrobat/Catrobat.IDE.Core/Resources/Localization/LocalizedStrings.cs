@@ -17,11 +17,6 @@ namespace Catrobat.IDE.Core.Resources.Localization
             }
         }
 
-        public void Reset()
-        {
-            RaisePropertyChanged(() => Resources);
-        }
-
         #region INotifyPropertyChanged region
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -13,7 +13,7 @@
   Foreground="{StaticResource PhoneForegroundBrush}"
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-  shell:SystemTray.IsVisible="True"
+  shell:SystemTray.IsVisible="False"
   DataContext="{Binding NewBroadcastMessageViewModel, Source={StaticResource Locator}}">
 
   <!--LayoutRoot is the root grid where all page content is placed-->
@@ -29,7 +29,7 @@
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
       <TextBlock Margin="0" Text="{Binding Resources.Editor_BroadcastMessage, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
-      <TextBox Margin="-10 0 10 0" Name="TextBoxBroadcastMessage" Text="{Binding BroadcastMessage}" HorizontalAlignment="Stretch" TextChanged="TextBoxBroadcastMessage_TextChanged" />
+      <TextBox Margin="-10 0 10 0" Name="TextBoxBroadcastMessage" Text="{Binding BroadcastMessage.Content}" HorizontalAlignment="Stretch" TextChanged="TextBoxBroadcastMessage_TextChanged" />
     </StackPanel>
 
     <i:Interaction.Triggers>

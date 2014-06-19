@@ -1,4 +1,4 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.Models;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -94,7 +94,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private void CurrentSpriteChangedMessageAction(GenericMessage<Sprite> message)
         {
             SelectedSprite = message.Content;
-            SpriteName = SelectedSprite.Name;
+            SpriteName = SelectedSprite != null ? SelectedSprite.Name : "";
         }
 
         #endregion

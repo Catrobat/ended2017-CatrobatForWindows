@@ -14,7 +14,7 @@
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d"
   DataContext="{Binding VariableSelectionViewModel, Source={StaticResource Locator}}"
-  shell:SystemTray.IsVisible="True">
+  shell:SystemTray.IsVisible="False">
 
   <!--LayoutRoot is the root grid where all page content is placed-->
   <Grid x:Name="LayoutRoot" Background="Transparent">

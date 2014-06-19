@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Costumes;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;
@@ -35,7 +34,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
             get { return _receivedCostume; }
             set
             {
-                if (value == _receivedCostume)
+                if (ReferenceEquals(value, _receivedCostume))
                 {
                     return;
                 }

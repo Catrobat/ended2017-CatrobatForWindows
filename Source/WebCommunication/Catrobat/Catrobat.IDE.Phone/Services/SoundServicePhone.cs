@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using System.IO;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
-using Catrobat.IDE.Phone.Views.Editor.Sounds;
-using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Phone.Services
 {

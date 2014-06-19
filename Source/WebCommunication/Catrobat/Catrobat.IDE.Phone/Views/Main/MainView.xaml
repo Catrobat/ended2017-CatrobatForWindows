@@ -82,10 +82,10 @@
                Margin="0,0,0,0" HorizontalAlignment="Center" 
                Command="{Binding PlayCurrentProjectCommand}"/>
             <Grid>
-              <Image Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}" />
+              <Image Source="{Binding CurrentProject.Screenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}" />
               <Grid Background="#AA000000" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                 <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                     Text="{Binding CurrentProject.ProjectHeader.ProgramName}" 
+                     Text="{Binding CurrentProject.Name}" 
                      TextAlignment="Center" TextWrapping="Wrap" Margin="5 5 5 10" 
                      Style="{StaticResource PhoneTextTitle2Style}" />
               </Grid>
@@ -151,12 +151,12 @@
                   Source={StaticResource LocalizedStrings}}"
                   Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, 
                   Source={StaticResource Locator}}" 
-                  CommandParameter="{Binding CurrentProject.ProjectHeader.ProgramName}" />
+                  CommandParameter="{Binding CurrentProject.Name}" />
                 <toolkit:MenuItem Header="{Binding Resources.Main_DeleteProject, 
                   Source={StaticResource LocalizedStrings}}"
                   Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, 
                   Source={StaticResource Locator}}" 
-                  CommandParameter="{Binding CurrentProject.ProjectHeader.ProgramName}" />
+                  CommandParameter="{Binding CurrentProject.Name}" />
                 <toolkit:MenuItem Header="{Binding Resources.Main_ChangeProjectNameAndDescription, 
                   Source={StaticResource LocalizedStrings}}" 
                   Command="{Binding MainViewModel.RenameLocalProjectCommand, Mode=OneWay, 
@@ -194,7 +194,7 @@
                   <!--<codung4Fun:RoundButton Margin="0 10 0 0" PressedBrush="Black" Click="LocalProjectControl_OnLocalProjectsBackPressed"
                     ImageSource="/Content/Images/ApplicationBar/dark/appbar.back.rest.png"/>-->
                   <TextBlock Grid.Column="1" VerticalAlignment="Top" Margin="15,5,5,5" TextWrapping="Wrap" 
-                             Text="{Binding CurrentProject.ProjectHeader.ProgramName}" 
+                             Text="{Binding CurrentProject.Name}" 
                              Style="{StaticResource PhoneTextLargeStyle}"/>
                 </Grid>
 
@@ -230,7 +230,7 @@
                         Margin="0,0,0,0" HorizontalAlignment="Center" 
                         Command="{Binding PlayCurrentProjectCommand}"/>
                       <Grid>
-                        <Image Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, 
+                        <Image Source="{Binding CurrentProject.Screenshot.ImageSource, 
                           Converter={StaticResource ImageSquareConverter}}" />
                       </Grid>
                       <buttons:ScreenshotButton VerticalAlignment="Center" HorizontalAlignment="Center"        
@@ -309,7 +309,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
           </Grid.RowDefinitions>
-          <toolkit:PhoneTextBox Hint="{Binding Resources.Main_FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" ActionIcon="../../Resources/Application/Search.png" x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextChanged="FilterTextBox_TextChanged" Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
+          <toolkit:PhoneTextBox Hint="{Binding Resources.Main_FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" InputScope="Url" ActionIcon="../../Resources/Application/Search.png" x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextChanged="FilterTextBox_TextChanged" KeyDown="FilterTextBox_KeyDown" Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
           <phone:LongListSelector Name="LongListSelectorOnlineProjects" Grid.Row="1" 
             ItemsSource="{Binding OnlineProjects}" 
             VerticalAlignment="Stretch" 
@@ -390,7 +390,8 @@
           <appBarUtils:SelectedPanoItemChangedTrigger.SelectionMappings>
             <appBarUtils:SelectionMapping SourceIndex="0" TargetIndex="0"/>
             <appBarUtils:SelectionMapping SourceIndex="1" TargetIndex="1"/>
-            <appBarUtils:SelectionMapping SourceIndex="2" TargetIndex="1"/>
+            <appBarUtils:SelectionMapping SourceIndex="2" TargetIndex="2"/>
+            <appBarUtils:SelectionMapping SourceIndex="3" TargetIndex="2"/>
             <!--<appBarUtils:SelectionMapping SourceIndex="3" TargetIndex="1"/>-->
           </appBarUtils:SelectedPanoItemChangedTrigger.SelectionMappings>
           <appBarUtils:SwitchAppBarAction>
@@ -398,10 +399,6 @@
               <appBarUtils:AppBar.MenuItems>
                 <appBarUtils:AppBarMenuItem Text="{Binding Resources.Main_Settings, Source={StaticResource LocalizedStrings}}" Command="{Binding SettingsCommand}"/>
               </appBarUtils:AppBar.MenuItems>
-
-              <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png"
-                Text="{Binding Resources.Main_ButtonCreate, Source={StaticResource LocalizedStrings}}"
-                Command="{Binding CreateNewProjectCommand}" />
 
               <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.edit.rest.png"
                 Text="{Binding Resources.Main_ButtonEdit, Source={StaticResource LocalizedStrings}}"
@@ -412,7 +409,17 @@
                 Command="{Binding UploadCurrentProjectCommand}" />
 
             </appBarUtils:AppBar>
-            <appBarUtils:AppBar Id="1" Mode="Minimized">
+            <appBarUtils:AppBar Id="1">
+              <appBarUtils:AppBar.MenuItems>
+                <appBarUtils:AppBarMenuItem Text="{Binding Resources.Main_Settings, Source={StaticResource LocalizedStrings}}" Command="{Binding SettingsCommand}"/>
+              </appBarUtils:AppBar.MenuItems>
+
+              <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png"
+                Text="{Binding Resources.Main_ButtonCreate, Source={StaticResource LocalizedStrings}}"
+                Command="{Binding CreateNewProjectCommand}" />
+            </appBarUtils:AppBar>
+
+            <appBarUtils:AppBar Id="2" Mode="Minimized">
               <appBarUtils:AppBar.MenuItems>
                 <appBarUtils:AppBarMenuItem Text="{Binding Resources.Main_Settings, Source={StaticResource LocalizedStrings}}" Command="{Binding SettingsCommand}"/>
               </appBarUtils:AppBar.MenuItems>
