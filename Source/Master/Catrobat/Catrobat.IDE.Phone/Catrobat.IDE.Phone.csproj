@@ -192,6 +192,8 @@
     <Compile Include="Controls\Formulas\VariableButton.xaml.cs">
       <DependentUpon>VariableButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ReorderableListbox\ReorderableListBox.cs" />
+    <Compile Include="Controls\ReorderableListbox\ReorderableListBoxItem.cs" />
     <Compile Include="Converters\NamespaceTypeConverter.cs" />
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
@@ -231,8 +233,6 @@
     </Compile>
     <Compile Include="Controls\ReorderableListbox\NegativeValueConverter.cs" />
     <Compile Include="Controls\ReorderableListbox\PullDownToRefreshPanel.cs" />
-    <Compile Include="Controls\ReorderableListbox\ReorderListBox.cs" />
-    <Compile Include="Controls\ReorderableListbox\ReorderListBoxItem.cs" />
     <Compile Include="Controls\StatusIcons\ProcessIcon.xaml.cs">
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>

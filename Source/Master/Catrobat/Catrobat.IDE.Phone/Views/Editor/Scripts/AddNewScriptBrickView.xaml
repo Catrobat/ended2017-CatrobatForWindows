@@ -31,7 +31,19 @@
     <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10 0 0 15" VerticalAlignment="Top"
           >
       <!--<controls:PivotItem Name="pivotScripts" Header="Aktionen">-->
-        <reorderableListbox:ReorderListBox
+            <reorderableListbox:ReorderableListBox
+              VerticalItemMargin="10"
+              Margin="-10 0 10 10"
+              VerticalAlignment="Top"
+              Height="690"
+              ItemTemplate="{StaticResource ScriptsBrickTemplate}"
+              ItemsSourcePerformance="{Binding BrickCollection}"
+              SelectionChanged="reorderListBoxScriptBricks_SelectionChanged"
+              ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}" IsReorderEnabled="False">
+     
+            </reorderableListbox:ReorderableListBox>
+
+            <!--<reorderableListbox:ReorderListBox
           Margin="-10 0 10 10"
           IsReorderEnabled="False"
           VerticalAlignment="Top"
@@ -40,7 +52,7 @@
           ItemsSource="{Binding BrickCollection}"
           SelectionChanged="reorderListBoxScriptBricks_SelectionChanged"
           ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleAddNewScriptBrick}">
-        </reorderableListbox:ReorderListBox>
+        </reorderableListbox:ReorderListBox>-->
 
       <!--<reorderableListbox:ReorderListBox
         Visibility="{Binding IsLookVisible, Converter={StaticResource BoolVisibilityConverter} }"
