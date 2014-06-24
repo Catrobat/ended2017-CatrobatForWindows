@@ -118,6 +118,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Common\ProjectGeneratorWhackAMole.cs" />
     <Compile Include="ViewModels\Editor\Formula\FormulaEvaluationResult.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\AnimatePropertyBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\BroadcastBrick.cs" />

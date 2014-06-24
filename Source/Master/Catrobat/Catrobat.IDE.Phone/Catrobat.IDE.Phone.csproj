@@ -688,6 +688,17 @@
     <Content Include="Content\Programs\Default\Looks\e8b139ca83c443159b464c26d8483bae_cloud1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Programs\WhackAMole\automatic_screenshot.png" />
+    <Content Include="Content\Programs\WhackAMole\Looks\1D687270C999067F2DDFCB8CA59046E7_whack-a-mole-BG.png" />
+    <Content Include="Content\Programs\WhackAMole\Looks\4137DB0956BAA9780A087C874900B5EB_whack-a-mole-BG.png" />
+    <Content Include="Content\Programs\WhackAMole\Looks\4871A26C832F7C63CB7F11E84F41338D_mole.png" />
+    <Content Include="Content\Programs\WhackAMole\Looks\A44CC0D6B30B16AF796243A6D7BA8AC5_mole.png" />
+    <Content Include="Content\Programs\WhackAMole\Looks\D6E92825145EC9CA2BF9CF9ACC21D68A_mole.png" />
+    <Content Include="Content\Programs\WhackAMole\manual_screenshot.png" />
+    <Content Include="Content\Programs\WhackAMole\Sounds\060830B7BF0AE16166C15748387F9021_record.mp3" />
+    <Content Include="Content\Programs\WhackAMole\Sounds\0B12E691684C552746E9FC164BE4D592_record.mp3" />
+    <Content Include="Content\Programs\WhackAMole\Sounds\C006F161E41ACB98A9EB7B1E22405971_record.mp3" />
+    <Content Include="Content\Programs\WhackAMole\Sounds\C03622EC424461AB47259339AB71CF1C_record.mp3" />
     <Content Include="Content\Resources\DesignTime\screenshot.png" />
     <Content Include="Content\Tiles\FlipCycleTileLarge.png" />
     <Content Include="Content\Tiles\FlipCycleTileMedium.png" />
