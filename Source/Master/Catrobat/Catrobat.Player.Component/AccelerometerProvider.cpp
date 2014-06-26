@@ -5,8 +5,10 @@
 
 AccelerometerProvider::AccelerometerProvider()
 {
-	if(DeviceInformation::IsRunningOnDevice() && Init() != true)
-		throw new PlayerException("init accelerometer provider failed");
+	if (DeviceInformation::IsRunningOnDevice() && Init() == true)
+		m_sensorIsRunningOnDevice = true;
+	else
+		m_sensorIsRunningOnDevice = false;
 }
 
 AccelerometerProvider::~AccelerometerProvider()
@@ -27,28 +29,43 @@ bool AccelerometerProvider::Init()
 
 double AccelerometerProvider::GetX()
 {
-	AccelerometerReading^ reading = m_accelerometer->GetCurrentReading(); 
+	if (m_sensorIsRunningOnDevice)
+	{
+		AccelerometerReading^ reading = m_accelerometer->GetCurrentReading();
 
-	if (reading == nullptr)
-		return 0;
-	return reading->AccelerationX;
+		if (reading == nullptr)
+			return 0;
+		return reading->AccelerationX;
+	}
+
+	return 0;
 }
 
 double AccelerometerProvider::GetY()
 {
-	AccelerometerReading^ reading = m_accelerometer->GetCurrentReading(); 
+	if (m_sensorIsRunningOnDevice)
+	{
+		AccelerometerReading^ reading = m_accelerometer->GetCurrentReading();
 
-	if (reading == nullptr)
-		return 0;
-	return reading->AccelerationY;
+		if (reading == nullptr)
+			return 0;
+		return reading->AccelerationY;
+	}
+
+	return 0;
 }
 
 double AccelerometerProvider::GetZ()
 {
-	AccelerometerReading^ reading = m_accelerometer->GetCurrentReading(); 
+	if (m_sensorIsRunningOnDevice)
+	{
+		AccelerometerReading^ reading = m_accelerometer->GetCurrentReading();
 
-	if (reading == nullptr)
-		return 0;
-	return reading->AccelerationZ;
+		if (reading == nullptr)
+			return 0;
+		return reading->AccelerationZ;
+	}
+
+	return 0;
 }
 

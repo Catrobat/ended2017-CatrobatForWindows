@@ -447,9 +447,11 @@ namespace Catrobat.IDE.Phone.Controls.ReorderableListbox
             ScrollIntoView(Items[_actItemIndexOfTransfered]);
             UpdateLayout();
             PrepareStartDrag(_actItemIndexOfTransfered);
-
-            double viewport = CalcViewPort(0, _actItemIndexOfTransfered) - _scrollViewer.VerticalOffset;
-            SetYPositionTo(viewport - _dragRolbi.OrigHeigth / 2);
+            if (_dragRolbi != null)
+            {
+                double viewport = CalcViewPort(0, _actItemIndexOfTransfered) - _scrollViewer.VerticalOffset;
+                SetYPositionTo(viewport - _dragRolbi.OrigHeigth/2);
+            }
         }
 
         private int Transfer(IList source, IList target)
