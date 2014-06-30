@@ -359,14 +359,14 @@
       <controls:PanoramaItem Name="PanoramaItemHelp" Header="{Binding Resources.Main_HeaderAbout, Source={StaticResource LocalizedStrings}}">
         <Grid Margin="0 -20 0 0">
           <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
           </Grid.RowDefinitions>
           <TextBlock FontSize="24" TextWrapping="Wrap" 
                      Text="{Binding Resources.Main_AboutText, Source={StaticResource LocalizedStrings}}" 
-                     Margin="10 0 0 15" />
+                     Margin="10 0 10 15" />
           <HyperlinkButton Grid.Row="1" Content="Pocket Code Source Code License" Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" NavigateUri="" />
           <HyperlinkButton Grid.Row="2" Content="About Catrobat" Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" NavigateUri="" />
 
@@ -397,7 +397,7 @@
             <!--<abu:SelectionMapping SourceIndex="0" TargetIndex="0"/>-->
             <abu:SelectionMapping SourceIndex="0" TargetIndex="0"/>
             <abu:SelectionMapping SourceIndex="1" TargetIndex="1"/>
-            <abu:SelectionMapping SourceIndex="2" TargetIndex="1"/>
+            <abu:SelectionMapping SourceIndex="2" TargetIndex="2"/>
             <!--<appBarUtils:SelectionMapping SourceIndex="3" TargetIndex="1"/>-->
           </abu:SelectedPanoItemChangedTrigger.SelectionMappings>
           <abu:SwitchAppBarAction>
@@ -426,6 +426,12 @@
               <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.upload.rest.png"
                 Text="{Binding Resources.Main_ButtonUpload, Source={StaticResource LocalizedStrings}}"
                 Command="{Binding UploadCurrentProjectCommand}" />
+            </abu:AppBar>
+
+            <abu:AppBar Id="2" BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, Source={StaticResource ThemeChooser}}">
+              <abu:AppBar.MenuItems>
+                <abu:AppBarMenuItem Text="{Binding Resources.Main_Settings, Source={StaticResource LocalizedStrings}}" Command="{Binding SettingsCommand}"/>
+              </abu:AppBar.MenuItems>
             </abu:AppBar>
           </abu:SwitchAppBarAction>
         </abu:SelectedPanoItemChangedTrigger>
