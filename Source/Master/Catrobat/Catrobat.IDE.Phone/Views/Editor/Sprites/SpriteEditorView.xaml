@@ -25,7 +25,9 @@
     <buttons:PlayPauseButtonGroup x:Key="PlayPauseButtonGroupSounds" Command="{Binding SoundsPlayStateChangedCommand}" />
   </phone:PhoneApplicationPage.Resources>
 
-  <Grid x:Name="LayoutRoot">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>

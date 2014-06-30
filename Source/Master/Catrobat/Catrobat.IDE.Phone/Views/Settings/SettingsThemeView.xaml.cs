@@ -31,7 +31,7 @@ namespace Catrobat.IDE.Phone.Views.Settings
             var frameworkElement = sender as FrameworkElement;
             if (frameworkElement != null)
             {
-                var theme = frameworkElement.DataContext as Theme;
+                var theme = frameworkElement.DataContext as Catrobat.IDE.Core.UI.Theme;
                 _viewModel.ActiveThemeChangedCommand.Execute(theme);
             }
         }

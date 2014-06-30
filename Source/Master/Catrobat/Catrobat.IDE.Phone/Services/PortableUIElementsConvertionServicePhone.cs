@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
@@ -26,6 +27,61 @@ namespace Catrobat.IDE.Phone.Services
                     return Visibility.Visible;
                 else
                     return Visibility.Collapsed;
+            }
+
+            if (portableUIElement is PortableFontStyle)
+            {
+                var portableStyle = ((PortableFontStyle) portableUIElement);
+                int fontSize;
+                string fontFamily;
+                Brush brush;
+
+
+                switch (portableStyle.FontSize)
+                {
+                    case PortibleFontSize.VerySmall:
+                        fontSize = 20;
+                        break;
+                    case PortibleFontSize.Small:
+                        fontSize = 30;
+                        break;
+                    case PortibleFontSize.Medium:
+                        fontSize = 40;
+                        break;
+                    case PortibleFontSize.Large:
+                        fontSize = 50;
+                        break;
+                    case PortibleFontSize.ExtraLarge:
+                        fontSize = 60;
+                        break;
+                    case PortibleFontSize.UltraLarge:
+                        fontSize = 80;
+                        break;
+                    default:
+                        fontSize = 20;
+                        break;
+                }
+
+                switch (portableStyle.FontFamily)
+                {
+                    case PortibleFontFamily.Default:
+                        fontFamily = "Arial";
+                        break;
+                    case PortibleFontFamily.Arial:
+                        fontFamily = "Arial";
+                        break;
+                    default:
+                        fontFamily = "Arial";
+                        break;
+                }
+
+                brush = (Brush)portableStyle.FontColor.NativeBrush;
+                var style = new Style(typeof (TextBlock));
+                style.Setters.Add(new Setter(TextBlock.FontFamilyProperty, fontFamily));
+                style.Setters.Add(new Setter(TextBlock.FontSizeProperty, fontSize));
+                style.Setters.Add(new Setter(TextBlock.ForegroundProperty, brush));
+
+                portableUIElement = style;
             }
 
             return portableUIElement;

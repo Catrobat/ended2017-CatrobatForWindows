@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using System.Diagnostics;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
@@ -47,7 +48,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region Properties
 
-        public bool IsMemoryMonitorEnabled { get { return Context.LocalSettings.IsInDevelopingMode; } }
+        public bool IsMemoryMonitorEnabled
+        {
+            get
+            {
+                return Debugger.IsAttached; // TODO: check why memory monitor is not workin if not in debug mode and use this:  Context.LocalSettings.IsInDevelopingMode;
+            }
+        }
 
         public CatrobatContextBase Context
         {

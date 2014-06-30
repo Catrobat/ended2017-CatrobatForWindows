@@ -12,5 +12,7 @@ namespace Catrobat.IDE.Core.Services
         object ConvertToLocalSolidColorBrush(PortableSolidColorBrush portableSolidColorBrush);
 
         PortableSolidColorBrush ConvertFromLocalSolidColorBrush(object localSolidColorBrush);
+
+        object ConvertToLocalSolidColor(PortableSolidColorBrush portableSolidColor);
     }
 }

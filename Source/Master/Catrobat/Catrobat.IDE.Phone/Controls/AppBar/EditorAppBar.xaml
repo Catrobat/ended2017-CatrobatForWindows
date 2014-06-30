@@ -8,22 +8,21 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="130" d:DesignWidth="480">
+    d:DesignHeight="150" d:DesignWidth="480">
 
-  <Grid x:Name="LayoutRoot" Height="130" Background="{Binding Path=SelectedTheme.AppBarColor, Source={StaticResource ThemeChooser}}">
+  <Grid x:Name="LayoutRoot" Height="150" Background="{Binding Path=SelectedTheme.AppBarBackgroundBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="90"/>
       <ColumnDefinition/>
       <ColumnDefinition Width="110"/>
     </Grid.ColumnDefinitions>
 
-    <Grid Grid.Column="0">
-      <StackPanel Grid.Column="0" Margin="5 15 0 0" Grid.RowSpan="2">
-        <coding4FunControls:RoundButton Name="ButtonNew" Margin="0 0 0 -13" 
+    <Grid Grid.Column="0" Margin="5 25 0 0">
+      <coding4FunControls:RoundButton Name="ButtonNew" Margin="0 0 0 0" FontSize="20"
+          Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+          BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
           ImageSource="/Content/Images/ApplicationBar/dark/appbar.new.rest.png"/>
-        <TextBlock Margin="0" Name="TextBlockAdd" HorizontalAlignment="Center" TextAlignment="Center" 
-          TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}">new costume</TextBlock>
-      </StackPanel>
+      <TextBlock Name="TextBlockNew" Text="New Costume" TextAlignment="Center" FontSize="20" Margin="0 50 0 0" HorizontalAlignment="Center" FontWeight="SemiBold" TextWrapping="Wrap" Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}" />
     </Grid>
     <Grid Grid.Column="1">
       <Grid.RowDefinitions>
@@ -39,16 +38,16 @@
         <StackPanel Orientation="Horizontal" Margin="30 0 0 0" Height="50" HorizontalAlignment="Left">
           <StackPanel Name="StackPanelNew" Orientation="Horizontal"
                     HorizontalAlignment="Left" Margin="0 0 0 0" Width="100">
-            <TextBlock Name="TextBlockNumberOfSelectedItemsNumber" VerticalAlignment="Center" 
+            <TextBlock Name="TextBlockNumberOfSelectedItemsNumber" VerticalAlignment="Center" Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
                        FontSize="25" TextAlignment="Right" MinWidth="30" Margin="0 0 7 0">0</TextBlock>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
-              <TextBlock Name="TextBlockNumberOfSelectedItemsText" TextWrapping="Wrap" FontSize="12" VerticalAlignment="Center" 
+              <TextBlock Name="TextBlockNumberOfSelectedItemsText" TextWrapping="Wrap" FontSize="12" VerticalAlignment="Center" Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
                        >OBJECTS</TextBlock>
-              <TextBlock TextWrapping="Wrap" FontSize="12" VerticalAlignment="Center"
+              <TextBlock TextWrapping="Wrap" FontSize="12" VerticalAlignment="Center" Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
                          Text="{Binding Resources.Editor_Selected, Source={StaticResource LocalizedStrings}}" />
             </StackPanel>
           </StackPanel>
-          <HyperlinkButton FontSize="16" Margin="0 10 0 15" Name="ButtonClearSelection" VerticalAlignment="Center"
+          <HyperlinkButton FontSize="16" Margin="0 10 0 15" Name="ButtonClearSelection" VerticalAlignment="Center" Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
                            Content="{Binding Resources.Editor_ClearSelection, Source={StaticResource LocalizedStrings}}" />
         </StackPanel>
 
@@ -60,126 +59,128 @@
           </Grid.ColumnDefinitions>
 
           <StackPanel Grid.Column="0" Name="StackPanelCopy">
-            <coding4FunControls:RoundButton Name="ButtonCopy" Margin="0 0 0 -13" 
-                                            ImageSource="/Content/Images/ApplicationBar/dark/appbar.copy.rest.png"/>
-            <TextBlock Margin="0" HorizontalAlignment="Center" TextAlignment="Center" 
-                       TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}"
-                       Text="{Binding Resources.Editor_ButtonCopy, Source={StaticResource LocalizedStrings}}" />
+            <coding4FunControls:RoundButton Name="ButtonCopy" Margin="0 0 0 0" FontSize="20"
+                                            ImageSource="/Content/Images/ApplicationBar/dark/appbar.copy.rest.png"
+                                            Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+                                            BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+                                            Label="{Binding Resources.Editor_ButtonCopy, Source={StaticResource LocalizedStrings}}"/>
           </StackPanel>
 
           <StackPanel Grid.Column="1" Name="StackPanelEdit">
-            <coding4FunControls:RoundButton Name="ButtonEdit" Margin="0 0 0 -13" 
-                                            ImageSource="/Content/Images/ApplicationBar/dark/appbar.edit.rest.png"/>
-            <TextBlock Margin="0" HorizontalAlignment="Center" TextAlignment="Center" 
-                       TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}"
-                       Text="{Binding Resources.Editor_ButtonEdit, Source={StaticResource LocalizedStrings}}"/>
+            <coding4FunControls:RoundButton Name="ButtonEdit" Margin="0 0 0 0" FontSize="20"
+                                            ImageSource="/Content/Images/ApplicationBar/dark/appbar.edit.rest.png"
+                                            Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+                                            BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+                                            Label="{Binding Resources.Editor_ButtonEdit, Source={StaticResource LocalizedStrings}}"/>
           </StackPanel>
 
           <StackPanel Grid.Column="2" Name="StackPanelDelete">
-            <coding4FunControls:RoundButton Name="ButtonDelete" Margin="0 0 0 -13" 
-                                            ImageSource="/Content/Images/ApplicationBar/dark/appbar.delete.rest.png"/>
-            <TextBlock Margin="0" HorizontalAlignment="Center" TextAlignment="Center" 
-                       TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}" 
-                       Text="{Binding Resources.Editor_ButtonDelete, Source={StaticResource LocalizedStrings}}"/>
+            <coding4FunControls:RoundButton Name="ButtonDelete" Margin="0 0 0 0"  FontSize="20"
+                                            ImageSource="/Content/Images/ApplicationBar/dark/appbar.delete.rest.png"
+                                            Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+                                            BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+                                            Label="{Binding Resources.Editor_ButtonDelete, Source={StaticResource LocalizedStrings}}"/>
           </StackPanel>
         </Grid>
       </Grid>
     </Grid>
 
-    <Grid Grid.Column="2" Margin="0 10 0 0">
-      <Grid.RowDefinitions>
-        <RowDefinition />
-        <RowDefinition Height="Auto" />
-      </Grid.RowDefinitions>
-        <Button Grid.Row="0"  Name="ButtonPlay" Width="90" Height="90" Visibility="Visible"
+
+    <Button  Grid.Column="2"  Name="ButtonPlay" Visibility="Visible"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 BorderBrush="Transparent" BorderThickness="0" Padding="0">
-          <Button.Template>
-            <ControlTemplate>
-              <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <VisualStateManager.VisualStateGroups>
-                  <VisualStateGroup x:Name="CommonStates">
-                    <VisualState x:Name="Normal"/>
-                    <VisualState x:Name="MouseOver">
-                      <Storyboard >
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="EllipseBorder" 
+        <Button.Template>
+          <ControlTemplate>
+            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+              <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                  <VisualState x:Name="Normal"/>
+                  <VisualState x:Name="MouseOver">
+                    <Storyboard >
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="EllipseBorder" 
                                                        Storyboard.TargetProperty="Fill" Duration="0">
-                          <DiscreteObjectKeyFrame KeyTime="0:00:00" Value="{StaticResource PhoneAccentBrush}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaySymbol" 
+                        <DiscreteObjectKeyFrame KeyTime="0:00:00" 
+                                                Value="{StaticResource TransparentBrush}"/>
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaySymbol" 
                                                        Storyboard.TargetProperty="Fill" Duration="0">
-                          <DiscreteObjectKeyFrame KeyTime="0:00:00" Value="{StaticResource PhoneBorderBrush}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                      </Storyboard>
-                    </VisualState>
-                    <VisualState x:Name="Pressed">
-                      <Storyboard >
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="EllipseBorder" 
+                        <DiscreteObjectKeyFrame KeyTime="0:00:00" Value="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"/>
+                      </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState>
+                  <VisualState x:Name="Pressed">
+                    <Storyboard >
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="EllipseBorder" 
                                                        Storyboard.TargetProperty="Fill" Duration="0">
-                          <DiscreteObjectKeyFrame KeyTime="0:00:00" Value="{StaticResource PhoneAccentBrush}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaySymbol" 
+                        <DiscreteObjectKeyFrame KeyTime="0:00:00" Value="{StaticResource PhoneAccentBrush}"/>
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaySymbol" 
                                                        Storyboard.TargetProperty="Fill" Duration="0">
-                          <DiscreteObjectKeyFrame KeyTime="0:00:00" Value="{StaticResource PhoneBorderBrush}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                      </Storyboard>
-                    </VisualState>
-                    <VisualState x:Name="Disabled">
-                      <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" 
-                                                       Storyboard.TargetName="gridPlay">
-                          <DiscreteObjectKeyFrame KeyTime="0">
-                            <DiscreteObjectKeyFrame.Value>
-                              <Visibility>Collapsed</Visibility>
-                            </DiscreteObjectKeyFrame.Value>
-                          </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                      </Storyboard>
-                    </VisualState>
-                  </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-                <Grid Name="gridMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                  <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Grid.RowDefinitions>
-                      <RowDefinition Height="0.5*"/>
-                      <RowDefinition Height="9*"/>
-                      <RowDefinition Height="0.5*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="0.5*"/>
-                      <ColumnDefinition Width="9*"/>
-                      <ColumnDefinition Width="0.5*"/>
-                    </Grid.ColumnDefinitions>
-                    <Ellipse Name="EllipseBorder"  Grid.Row="1" Grid.Column="1" Fill="#00F4F4F5" Stroke="White" 
-                             StrokeThickness="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                  </Grid>
-                  <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Grid.RowDefinitions>
-                      <RowDefinition Height="1*"/>
-                      <RowDefinition Height="2*"/>
-                      <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="1.5*"/>
-                      <ColumnDefinition Width="2*"/>
-                      <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                      <Path  Name="PlaySymbol"  Data="M211,328 L254,359.5 L211,392 z"  Fill="{StaticResource PhoneAccentBrush}" 
-                             Stretch="Fill" Stroke="Black" UseLayoutRounding="False" 
+                        <DiscreteObjectKeyFrame KeyTime="0:00:00" Value="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"/>
+                      </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState>
+                  <VisualState x:Name="Disabled">
+                    <Storyboard>
+                    <Storyboard >
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlockDescription" 
+                                                       Storyboard.TargetProperty="Foreground" Duration="0">
+                        <DiscreteObjectKeyFrame KeyTime="0:00:00" Value="{StaticResource PhoneDisabledBrush}"/>
+                      </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </Storyboard>
+                  </VisualState>
+                </VisualStateGroup>
+              </VisualStateManager.VisualStateGroups>
+            <Grid Margin="0 10 0 0">
+              <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+              </Grid.RowDefinitions>
+              <Grid Name="gridMain" Width="90" Height="90" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="9*"/>
+                    <RowDefinition Height="0.5*"/>
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="9*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                  </Grid.ColumnDefinitions>
+                  <Ellipse Name="EllipseBorder" Grid.Row="1" Grid.Column="1" Stroke="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                           StrokeThickness="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                </Grid>
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                  </Grid.ColumnDefinitions>
+                  <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Path  Name="PlaySymbol"  Data="M211,328 L254,359.5 L211,392 z"  Fill="{StaticResource PhoneAccentBrush}" 
+                             Stretch="Fill" UseLayoutRounding="False" 
                              VerticalAlignment="Center" HorizontalAlignment="Center" 
                              StrokeThickness="0" />
-                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-            </ControlTemplate>
-          </Button.Template>
-        </Button>
-      <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="5 -7 5 8"
-                   VerticalAlignment="Center" 
-                   Style="{StaticResource PhoneTextSmallStyle}"
+              <TextBlock x:Name="TextBlockDescription" Grid.Row="1" HorizontalAlignment="Center" Margin="5 -7 5 8"
+                   VerticalAlignment="Center"
+                   Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+                   FontSize="20"
                    Text="{Binding Resources.Editor_ButtonPlayProject, Source={StaticResource LocalizedStrings}}"/>
-    </Grid>
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+        </Button.Template>
+      </Button>
+
   </Grid>
 </UserControl>

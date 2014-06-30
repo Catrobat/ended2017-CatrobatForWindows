@@ -19,7 +19,9 @@
   DataContext="{Binding FormulaEditorViewModel, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="False" >
 
-  <Grid x:Name="LayoutRoot" Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="*" />
       <RowDefinition Height="360" />
