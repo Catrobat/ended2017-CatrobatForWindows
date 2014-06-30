@@ -700,12 +700,27 @@
     <Content Include="Content\Programs\WhackAMole\Sounds\C006F161E41ACB98A9EB7B1E22405971_record.mp3" />
     <Content Include="Content\Programs\WhackAMole\Sounds\C03622EC424461AB47259339AB71CF1C_record.mp3" />
     <Content Include="Content\Resources\DesignTime\screenshot.png" />
+    <Content Include="Content\Tiles\ApplicationIcon.png" />
+    <Content Include="Content\Tiles\FileLarge.png" />
+    <Content Include="Content\Tiles\FileMedium.png" />
+    <Content Include="Content\Tiles\FileSmall.png" />
     <Content Include="Content\Tiles\FlipCycleTileLarge.png" />
     <Content Include="Content\Tiles\FlipCycleTileMedium.png" />
     <Content Include="Content\Tiles\FlipCycleTileSmall.png" />
-    <Content Include="Content\Tiles\IconicTileMediumLarge.png" />
-    <Content Include="Content\Tiles\IconicTileSmall.png" />
-    <Content Include="Content\Tiles\ApplicationIcon.png" />
+    <Content Include="Content\Tiles\Lens.Screen-720p.png" />
+    <Content Include="Content\Tiles\Lens.Screen-WVGA.png" />
+    <Content Include="Content\Tiles\Lens.Screen-WXGA.png" />
+    <Content Include="Content\Tiles\LockScreenNotification.png" />
+    <Content Include="Content\Tiles\SplashScreenImage.Screen-720p.jpg" />
+    <Content Include="Content\Tiles\SplashScreenImage.Screen-WVGA.jpg" />
+    <Content Include="Content\Tiles\SplashScreenImage.Screen-WXGA.jpg" />
+    <Content Include="Content\Tiles\StoreIcon.png" />
+    <Content Include="Content\Tiles_old\FlipCycleTileLarge.png" />
+    <Content Include="Content\Tiles_old\FlipCycleTileMedium.png" />
+    <Content Include="Content\Tiles_old\FlipCycleTileSmall.png" />
+    <Content Include="Content\Tiles_old\IconicTileMediumLarge.png" />
+    <Content Include="Content\Tiles_old\IconicTileSmall.png" />
+    <Content Include="Content\Tiles_old\ApplicationIcon.png" />
     <Content Include="fmodex_arm.dll" />
     <Content Include="fmodex_x86.dll" />
     <None Include="app.config" />
@@ -719,9 +734,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\FileTypeAssociation\large-176x176.png" />
-    <Content Include="Content\FileTypeAssociation\medium-69x69.png" />
-    <Content Include="Content\FileTypeAssociation\small-33x33.png" />
+    <Content Include="Content\Tiles_old\FileTypeAssociation\large-176x176.png" />
+    <Content Include="Content\Tiles_old\FileTypeAssociation\medium-69x69.png" />
+    <Content Include="Content\Tiles_old\FileTypeAssociation\small-33x33.png" />
     <Content Include="Content\Images\ApplicationBar\dark\appbar.add.rest.png" />
     <Content Include="Content\Images\ApplicationBar\dark\appbar.back.rest.png" />
     <Content Include="Content\Images\ApplicationBar\dark\appbar.basecircle.rest.png" />

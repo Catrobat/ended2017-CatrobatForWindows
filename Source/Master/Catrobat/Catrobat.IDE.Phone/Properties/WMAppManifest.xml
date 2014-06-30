@@ -20,29 +20,33 @@
     <Tokens>
       <PrimaryToken TokenID="Catrobat.IDE.PhoneToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Content\Tiles\ApplicationIcon.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">Content\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Content\Tiles\ApplicationIcon.png</BackgroundImageURI>
-          <Title>Pocket Code</Title>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Content\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
+          <Title>
+          </Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>
           </BackBackgroundImageURI>
           <BackTitle>
           </BackTitle>
+          <LargeBackgroundImageURI IsRelative="true" IsResource="false">Content\Tiles\FlipCycleTileLarge.png</LargeBackgroundImageURI>
+          <LargeBackContent />
+          <LargeBackBackgroundImageURI IsRelative="true" IsResource="false">
+          </LargeBackBackgroundImageURI>
           <DeviceLockImageURI>
           </DeviceLockImageURI>
-          <HasLarge>
-          </HasLarge>
+          <HasLarge>True</HasLarge>
         </TemplateFlip>
       </PrimaryToken>
     </Tokens>
-	    <Extensions>
+    <Extensions>
       <FileTypeAssociation Name="Windows Phone SDK test file type" TaskID="_default" NavUriFragment="fileToken=%s">
         <Logos>
-          <Logo Size="small" IsRelative="true">Content/FileTypeAssociation/small-33x33.png</Logo>
-          <Logo Size="medium" IsRelative="true">Content/FileTypeAssociation/medium-69x69.png</Logo>
-          <Logo Size="large" IsRelative="true">Content/FileTypeAssociation/large-176x176.png</Logo>
+          <Logo Size="small" IsRelative="true">Content/Tiles/FileSmall.png</Logo>
+          <Logo Size="medium" IsRelative="true">Content/Tiles/FileMedium.png</Logo>
+          <Logo Size="large" IsRelative="true">Content/Tiles/FileLarge.png</Logo>
         </Logos>
         <SupportedFileTypes>
           <FileType ContentType="application/sdk">.catroid</FileType>
