@@ -32,7 +32,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public string GetProjectName(string twoLetterIsoLanguageCode)
         {
-            return AppResources.Main_DefaultProjectName;
+            return "Whack A Mole"; // TODO: localize
         }
 
         public async Task<Project> GenerateProject(bool writeToDisk)
@@ -507,7 +507,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public string GetProjectName()
         {
-            return AppResources.Main_DefaultProjectName;
+            return "Whack A Mole"; // TODO: localize
         }
 
         public int GetOrderId()

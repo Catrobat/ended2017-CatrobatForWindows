@@ -56,7 +56,7 @@ namespace Catrobat.IDE.Core
 
         public static async Task<Project> RestoreDefaultProjectStatic(string projectName)
         {
-            IProjectGenerator projectGenerator = new ProjectGeneratorWhackAMole();
+            IProjectGenerator projectGenerator = new ProjectGeneratorDefault();
 
             return await projectGenerator.GenerateProject(true);
         }
