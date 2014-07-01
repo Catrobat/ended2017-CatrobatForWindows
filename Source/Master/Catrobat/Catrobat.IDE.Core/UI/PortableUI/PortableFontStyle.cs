@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Catrobat.IDE.Core.Services;
+﻿using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Core.UI.PortableUI
 {
-    public enum PortibleFontSize { VerySmall, Small, Medium, Large, ExtraLarge, UltraLarge }
-    public enum PortibleFontFamily { Default, Arial }
+    public enum PortableFontSize { Normal, Small, Medium, Large, ExtraLarge, ExtraExtraLarge }
+    public enum PortableFontFamily { Normal, SemiLight, SemiBold }
 
     public class PortableFontStyle
     {
-        public PortibleFontSize FontSize { get; set; }
-        public PortibleFontFamily FontFamily { get; set; }
+        public PortableFontSize FontSize { get; set; }
+        public PortableFontFamily FontFamily { get; set; }
         public PortableBrush FontColor { get; set; }
 
         public object NativeStyle

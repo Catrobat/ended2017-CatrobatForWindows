@@ -10,53 +10,122 @@ namespace Catrobat.IDE.Core.UI
     public class StaticTheme
     {
         // Application colors
-        public PortableSolidColorBrush ApplicationBackgroundBrush { get { return new PortableSolidColorBrush("#FFFFFFFF"); } } // Use this instead of the default background (light and dark)
+        public PortableSolidColorBrush ApplicationBackgroundBrush { get { return new PortableSolidColorBrush("#FF000000"); } } // Use this instead of the default background (light and dark)
         public PortableSolidColorBrush AppBarBorderBrush { get { return new PortableSolidColorBrush("#FF000000"); } }
-        public PortableSolidColorBrush ActionsBrush { get { return new PortableSolidColorBrush("#FFEBB613"); } }
         public PortableSolidColorBrush ButtonBorderBrush { get { return new PortableSolidColorBrush("#FFFFFFFF"); } }
 
-        // Font styles
-        public PortableFontStyle TitleFontStyleLarge
+        public PortableSolidColorBrush TextForegroundBrush { get { return new PortableSolidColorBrush("#FFFFFFFF"); } }
+
+        public PortableSolidColorBrush TextSubtleBrush { get { return new PortableSolidColorBrush("#FF222222"); } }
+
+        public PortableSolidColorBrush ActionsBrush { get { return new PortableSolidColorBrush("#FFEBB613"); } }
+
+        // Text styles
+        public PortableFontStyle TextTitle1Style
         {
             get
             {
                 return new PortableFontStyle
                 {
-                    FontSize = PortibleFontSize.Large,
-                    FontColor = new PortableSolidColorBrush("#FF000000"),
-                    FontFamily = PortibleFontFamily.Default
+                    FontFamily = PortableFontFamily.SemiLight,
+                    FontSize = PortableFontSize.ExtraExtraLarge,
+                    FontColor = TextForegroundBrush,
                 };
             }
         }
 
-
-
-        public PortableFontStyle TitleFontStyleMedium
+        public PortableFontStyle TextTitle2Style
         {
             get
             {
                 return new PortableFontStyle
                 {
-                    FontSize = PortibleFontSize.Medium,
-                    FontColor = new PortableSolidColorBrush("#FF000000"),
-                    FontFamily = PortibleFontFamily.Default
+                    FontFamily = PortableFontFamily.SemiLight,
+                    FontSize = PortableFontSize.Large,
+                    FontColor = TextForegroundBrush,
                 };
             }
         }
 
-        public PortableFontStyle TitleFontStyleSmall
+        public PortableFontStyle TextTitle3Style
         {
             get
             {
                 return new PortableFontStyle
                 {
-                    FontSize = PortibleFontSize.Small,
-                    FontColor = new PortableSolidColorBrush("#FF000000"),
-                    FontFamily = PortibleFontFamily.Default
+                    FontFamily = PortableFontFamily.SemiLight,
+                    FontSize = PortableFontSize.Medium,
+                    FontColor = TextForegroundBrush,
                 };
             }
         }
 
+        public PortableFontStyle TextSubtleStyle
+
+        {
+            get
+            {
+                return new PortableFontStyle
+                {
+                    FontFamily = PortableFontFamily.Normal,
+                    FontSize = PortableFontSize.Normal,
+                    FontColor = TextSubtleBrush,
+                };
+            }
+        }
+
+
+        public PortableFontStyle TextSmallStyle
+        {
+            get
+            {
+                return new PortableFontStyle
+                {
+                    FontFamily = PortableFontFamily.Normal,
+                    FontSize = PortableFontSize.Small,
+                    FontColor = TextSubtleBrush
+                };
+            }
+        }
+
+        public PortableFontStyle TextNormalStyle
+        {
+            get
+            {
+                return new PortableFontStyle
+                {
+                    FontFamily = PortableFontFamily.Normal,
+                    FontSize = PortableFontSize.Normal,
+                    FontColor = TextForegroundBrush
+                };
+            }
+        }
+
+        public PortableFontStyle TextLargeStyleStyle
+        {
+            get
+            {
+                return new PortableFontStyle
+                {
+                    FontFamily = PortableFontFamily.SemiLight,
+                    FontSize = PortableFontSize.Large,
+                    FontColor = TextForegroundBrush
+                };
+            }
+        }
+
+        public PortableFontStyle TextExtraLargeStyle
+        {
+            get
+            {
+                return new PortableFontStyle
+                {
+                    FontFamily = PortableFontFamily.SemiLight,
+                    FontSize = PortableFontSize.ExtraExtraLarge,
+                    FontColor = TextForegroundBrush
+                };
+            }
+        }
 
         // Object colors
         public PortableSolidColorBrush SoundsBrush { get { return new PortableSolidColorBrush("#FF87778D"); } }

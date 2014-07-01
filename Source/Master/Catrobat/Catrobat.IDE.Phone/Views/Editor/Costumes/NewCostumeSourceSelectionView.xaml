@@ -25,7 +25,7 @@
     <StackPanel>
       <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
         <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleNewCostume, Source={StaticResource LocalizedStrings}}" 
-                   Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+                   Name="Headline" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
       </StackPanel>
 
       <StackPanel Grid.Row="1" Margin="10 20 0 15">
@@ -42,7 +42,7 @@
                 <misc:ImageGallery ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
                 <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_ImageGallery, Source={StaticResource LocalizedStrings}}" 
-                           Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                           Name="tbGallery" Style="{Binding StaticTheme.TextExtraLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
               </Grid>
             </ControlTemplate>
           </Button.Template>
@@ -61,7 +61,7 @@
                 <misc:Camera ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
                 <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_Camera, Source={StaticResource LocalizedStrings}}" 
-                           Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                           Style="{Binding StaticTheme.TextExtraLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
               </Grid>
             </ControlTemplate>
           </Button.Template>
@@ -83,7 +83,7 @@
                            Text="{Binding Resources.Editor_ImageEditingProgram, Source={StaticResource LocalizedStrings}}" 
                            TextAlignment="Left"
                            TextWrapping="Wrap"
-                           Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                           Name="tbGallery" Style="{Binding StaticTheme.TextExtraLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
               </Grid>
             </ControlTemplate>
           </Button.Template>

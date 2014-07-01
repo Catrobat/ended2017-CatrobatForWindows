@@ -53,7 +53,7 @@
       <TextBlock Grid.Row="1"
               Text ="{Binding Resources.Editor_ClickPlusToAddSprite, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsSpritesEmpty, Converter={StaticResource BoolVisibilityConverter}}"
-              Style="{StaticResource PhoneTextLargeStyle}"
+              Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
               TextWrapping="Wrap"
               TextAlignment="Center"
               VerticalAlignment="Center"

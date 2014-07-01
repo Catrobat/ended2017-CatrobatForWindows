@@ -50,7 +50,7 @@
     <StackPanel Grid.Row="0" Margin="12,17,0,28">
       <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
                  Text="{Binding Resources.Editor_TitleRecorder, Source={StaticResource LocalizedStrings}}" 
-                 Name="Headline" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+                 Name="Headline" Margin="9,-7,0,0" Style="{Binding StaticTheme.TextTitle1Style, Source={StaticResource ThemeChooser}}"/>
     </StackPanel>
 
     <!--ContentPanel - place additional content here-->
@@ -88,7 +88,7 @@
                      Text="{Binding Resources.Editor_Recorded, Source={StaticResource LocalizedStrings}}" 
                      Margin="0 0 5 0" 
                      VerticalAlignment="Top" 
-                     Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
+                     Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"></TextBlock>
           <Grid Grid.Column="2" Margin="0 0 0 0" VerticalAlignment="Top">
             <Grid.RowDefinitions>
               <RowDefinition/>
@@ -102,13 +102,13 @@
                        HorizontalAlignment="Right" 
                        TextAlignment="Right" 
                        FontWeight="Bold" Foreground="YellowGreen" 
-                       Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
+                       Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"></TextBlock>
             <TextBlock Grid.Row="1" Text="{Binding PlayingTime, Mode=OneWay, Converter={StaticResource DoubleStringConverter}, ConverterParameter={StaticResource TimeFormat}}" 
                        Visibility="{Binding IsPlaying, Converter={StaticResource BoolVisibilityConverter}}"
                        FontSize="30" FontFamily="Cordia New"  Margin="0 0 12 0" 
                        VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Right"
                        FontWeight="ExtraBlack" Foreground="DarkRed" 
-                       Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
+                       Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"></TextBlock>
           </Grid>
 
           <TextBlock Grid.Column="3" 
@@ -117,7 +117,7 @@
                      VerticalAlignment="Top" 
                      TextWrapping="Wrap"
                      TextAlignment="Center"
-                     FontWeight="ExtraBlack" Style="{StaticResource PhoneTextLargeStyle}"/>
+                     FontWeight="ExtraBlack" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
           <c:PlayPauseButton Grid.Column="4" x:Name="PlayButton" 
                              State="{Binding IsPlaying, Mode=OneWay, Converter={StaticResource BoolPlayButtonStateConverter}}" 
                              Click="PlayButton_OnClick" 
@@ -148,7 +148,7 @@
                          Grid.Column="0" Fill="White" StrokeThickness="0" 
                          Width="40" Height="40" 
                          VerticalAlignment="Center" HorizontalAlignment="Center"/>
-              <TextBlock Grid.Column="1" Text="{Binding RecordButtonHeader, Mode=OneWay}" VerticalAlignment="Center"  HorizontalAlignment="Left" Style="{StaticResource PhoneTextExtraLargeStyle}"></TextBlock>
+              <TextBlock Grid.Column="1" Text="{Binding RecordButtonHeader, Mode=OneWay}" VerticalAlignment="Center"  HorizontalAlignment="Left" Style="{Binding StaticTheme.TextExtraLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"></TextBlock>
             </Grid>
             <Grid Row="1">
               <TextBlock Text="{Binding RecordButtonText, Mode=OneWay}" TextAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="25 6 25 0"></TextBlock>

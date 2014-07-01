@@ -25,11 +25,11 @@
     </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleChangeSoundName, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleChangeSoundName, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
-      <TextBlock Margin="0" Text="{Binding Resources.Editor_SoundName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_SoundName, Source={StaticResource LocalizedStrings}}" Style="{Binding StaticTheme.TextSmallStyle, Source={StaticResource ThemeChooser}}" />
       <TextBox Margin="-10 0 10 0" Name="TextBoxSoundName" Text="{Binding SoundName}" HorizontalAlignment="Stretch" TextChanged="TextBoxSoundName_OnTextChanged" />
     </StackPanel>
 

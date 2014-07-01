@@ -42,7 +42,7 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding SelectedSprite.Name}" 
                      Grid.Column="0" FontSize="36"
-                     Style="{StaticResource PhoneTextNormalStyle}" />
+                     Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
         <HyperlinkButton Grid.Column="1" HorizontalAlignment="Right"
                          Content="{Binding Resources.Editor_Rename, Source={StaticResource LocalizedStrings}}"
                          Command="{Binding RenameSpriteCommand}"/>
@@ -85,7 +85,7 @@
             <TextBlock 
               Text ="{Binding Resources.Editor_ClickPlusToAddAction, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsScirptBricksEmpty, Converter={StaticResource BoolVisibilityConverter}}"
-              Style="{StaticResource PhoneTextLargeStyle}"
+              Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
               TextWrapping="Wrap"
               TextAlignment="Center"
               VerticalAlignment="Center"
@@ -110,7 +110,7 @@
                         <TextBlock 
               Text ="{Binding Resources.Editor_ClickPlusToAddCostume, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsCostumesEmpty, Converter={StaticResource BoolVisibilityConverter}}"
-              Style="{StaticResource PhoneTextLargeStyle}"
+              Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
               TextWrapping="Wrap"
               TextAlignment="Center"
               VerticalAlignment="Center"
@@ -152,7 +152,7 @@
             <TextBlock 
               Text ="{Binding Resources.Editor_ClickPlusToAddSound, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsSoundsEmpty, Converter={StaticResource BoolVisibilityConverter}}"
-              Style="{StaticResource PhoneTextLargeStyle}"
+              Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
               TextWrapping="Wrap"
               TextAlignment="Center"
               VerticalAlignment="Center"

@@ -16,16 +16,18 @@
     mc:Ignorable="d"
     DataContext="{Binding ProjectImportViewModel, Source={StaticResource Locator}}"
     shell:SystemTray.IsVisible="False">
-  
-  <Grid x:Name="LayoutRoot" Background="Transparent">
+
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
     <StackPanel Grid.Row="0" Margin="12,17,0,28">
-      <TextBlock Text="IMPORT" Style="{StaticResource PhoneTextNormalStyle}"/>
-      <TextBlock Text="{Binding ProjectName}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+      <TextBlock Text="IMPORT" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
+      <TextBlock Text="{Binding ProjectName}" Margin="9,-7,0,0" Style="{Binding StaticTheme.TextTitle1Style, Source={StaticResource ThemeChooser}}"/>
     </StackPanel>
 
     <Grid Grid.Row="1">
@@ -41,15 +43,15 @@
           <RowDefinition/>
         </Grid.RowDefinitions>
         <ProgressBar Grid.Row="0" Name="ProgressBarLoading" IsIndeterminate="{Binding ProgressBarLoadingIsIndeterminate}"></ProgressBar>
-        <TextBlock Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" 
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" 
                    Text="Please wait while we try to load the new project. This can take some time."></TextBlock>
       </Grid>
       
       <Grid x:Name="ErrorPanel" Grid.Row="1" Background="Red" Visibility="{Binding ErrorPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,170">
         <StackPanel>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" 
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" 
                    Text="Sorry!  The project is not valid or it's version is not compatible to the current version of this IDE."></TextBlock>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" 
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" 
                    Text="Please look for updates in your Windows Phone store."></TextBlock>
         </StackPanel>
       </Grid>

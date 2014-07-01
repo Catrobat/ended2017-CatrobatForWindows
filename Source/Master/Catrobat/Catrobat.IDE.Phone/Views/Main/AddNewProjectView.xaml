@@ -16,19 +16,21 @@
     shell:SystemTray.IsVisible="False"
     DataContext="{Binding AddNewProjectViewModel, Source={StaticResource Locator}}">
 
-  <Grid x:Name="LayoutRoot" Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Resources.Main_TitleNewProject, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Main_TitleNewProject, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
       <StackPanel>
-        <TextBlock Margin="0" Text="{Binding Resources.Main_ProjectName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+        <TextBlock Margin="0" Text="{Binding Resources.Main_ProjectName, Source={StaticResource LocalizedStrings}}" Style="{Binding StaticTheme.TextSmallStyle, Source={StaticResource ThemeChooser}}" />
         <TextBox Name="TextBoxProjectName" Margin="-10 0 10 0" HorizontalAlignment="Stretch" TextChanged="TextBoxProjectName_OnTextChanged" Text="{Binding Path=ProjectName, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
       </StackPanel>
       <StackPanel>

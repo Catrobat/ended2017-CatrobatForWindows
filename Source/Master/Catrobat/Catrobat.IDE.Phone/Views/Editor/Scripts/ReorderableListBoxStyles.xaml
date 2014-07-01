@@ -56,7 +56,7 @@
                             Opacity="1"
                             VerticalAlignment="Stretch"
                             HorizontalAlignment="Stretch"
-                            Visibility="Visible" Background="#60FFFFFF"/>
+                            Visibility="Visible" Background="#60000000"/>
                         <Canvas
                             x:Name="DragCanvas"
                             Grid.Column="1"
