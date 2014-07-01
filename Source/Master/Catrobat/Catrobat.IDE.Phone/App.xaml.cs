@@ -63,7 +63,7 @@ namespace Catrobat.IDE.Phone
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
-            ThemeManager.ToLightTheme();
+            //ThemeManager.ToLightTheme();
         }
 
         // Code to execute when the application is launching (eg, from Start)
