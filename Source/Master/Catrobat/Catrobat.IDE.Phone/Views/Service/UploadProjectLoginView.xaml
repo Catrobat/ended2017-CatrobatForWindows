@@ -41,7 +41,7 @@
   <i:Interaction.Triggers>
     <abu:StateChangedTrigger State="false">
       <abu:SwitchAppBarAction>
-        <abu:AppBar Id="0">
+        <abu:AppBar Id="0" BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, Source={StaticResource ThemeChooser}}">
           <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.check.rest.png" 
                               Text="{Binding Resources.Main_ButtonLogin, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding LoginCommand}" />

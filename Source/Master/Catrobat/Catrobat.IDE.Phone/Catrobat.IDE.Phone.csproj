@@ -657,6 +657,41 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\ApplicationBar\light\appbar.add.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.back.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.basecircle.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.cancel.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.check.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.close.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.copy.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.delete.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.download.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.edit.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.favs.addto.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.favs.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.camera.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.email.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.search.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.settings.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.video.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.folder.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.home.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.minus.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.new.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.next.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.overflowdots.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.questionmark.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.refresh.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.save.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.share.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.stop.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.sync.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.transport.ff.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.transport.pause.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.transport.play.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.transport.rew.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.upload.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\LightIcons.dll" />
     <Content Include="Content\Images\LicensedIcons\ModernUIIcons\dark\appbar.clear.reflect.horizontal.png" />
     <Content Include="Content\Images\LicensedIcons\ModernUIIcons\dark\appbar.redo.png" />
     <Content Include="Content\Images\LicensedIcons\ModernUIIcons\dark\appbar.undo.png" />
@@ -700,12 +735,27 @@
     <Content Include="Content\Programs\WhackAMole\Sounds\C006F161E41ACB98A9EB7B1E22405971_record.mp3" />
     <Content Include="Content\Programs\WhackAMole\Sounds\C03622EC424461AB47259339AB71CF1C_record.mp3" />
     <Content Include="Content\Resources\DesignTime\screenshot.png" />
+    <Content Include="Content\Tiles\ApplicationIcon.png" />
+    <Content Include="Content\Tiles\FileLarge.png" />
+    <Content Include="Content\Tiles\FileMedium.png" />
+    <Content Include="Content\Tiles\FileSmall.png" />
     <Content Include="Content\Tiles\FlipCycleTileLarge.png" />
     <Content Include="Content\Tiles\FlipCycleTileMedium.png" />
     <Content Include="Content\Tiles\FlipCycleTileSmall.png" />
-    <Content Include="Content\Tiles\IconicTileMediumLarge.png" />
-    <Content Include="Content\Tiles\IconicTileSmall.png" />
-    <Content Include="Content\Tiles\ApplicationIcon.png" />
+    <Content Include="Content\Tiles\Lens.Screen-720p.png" />
+    <Content Include="Content\Tiles\Lens.Screen-WVGA.png" />
+    <Content Include="Content\Tiles\Lens.Screen-WXGA.png" />
+    <Content Include="Content\Tiles\LockScreenNotification.png" />
+    <Content Include="Content\Tiles\SplashScreenImage.Screen-720p.jpg" />
+    <Content Include="Content\Tiles\SplashScreenImage.Screen-WVGA.jpg" />
+    <Content Include="Content\Tiles\SplashScreenImage.Screen-WXGA.jpg" />
+    <Content Include="Content\Tiles\StoreIcon.png" />
+    <Content Include="Content\Tiles_old\FlipCycleTileLarge.png" />
+    <Content Include="Content\Tiles_old\FlipCycleTileMedium.png" />
+    <Content Include="Content\Tiles_old\FlipCycleTileSmall.png" />
+    <Content Include="Content\Tiles_old\IconicTileMediumLarge.png" />
+    <Content Include="Content\Tiles_old\IconicTileSmall.png" />
+    <Content Include="Content\Tiles_old\ApplicationIcon.png" />
     <Content Include="fmodex_arm.dll" />
     <Content Include="fmodex_x86.dll" />
     <None Include="app.config" />
@@ -719,9 +769,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\FileTypeAssociation\large-176x176.png" />
-    <Content Include="Content\FileTypeAssociation\medium-69x69.png" />
-    <Content Include="Content\FileTypeAssociation\small-33x33.png" />
+    <Content Include="Content\Tiles_old\FileTypeAssociation\large-176x176.png" />
+    <Content Include="Content\Tiles_old\FileTypeAssociation\medium-69x69.png" />
+    <Content Include="Content\Tiles_old\FileTypeAssociation\small-33x33.png" />
     <Content Include="Content\Images\ApplicationBar\dark\appbar.add.rest.png" />
     <Content Include="Content\Images\ApplicationBar\dark\appbar.back.rest.png" />
     <Content Include="Content\Images\ApplicationBar\dark\appbar.basecircle.rest.png" />
@@ -757,41 +807,6 @@
     <Content Include="Content\Images\ApplicationBar\dark\appbar.transport.rew.rest.png" />
     <Content Include="Content\Images\ApplicationBar\dark\appbar.upload.rest.png" />
     <Content Include="Content\Images\ApplicationBar\dark\DarkIcons.dll" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.add.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.back.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.basecircle.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.cancel.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.check.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.close.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.copy.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.delete.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.download.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.edit.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.favs.addto.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.favs.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.camera.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.email.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.search.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.settings.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.video.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.folder.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.home.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.minus.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.new.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.next.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.overflowdots.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.questionmark.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.refresh.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.save.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.share.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.stop.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.sync.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.transport.ff.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.transport.pause.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.transport.play.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.transport.rew.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\appbar.upload.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\light\LightIcons.dll" />
     <Content Include="Content\Images\Application\ApplicationIcon.png" />
     <Content Include="Content\Images\Application\Background.png" />
     <Content Include="Content\Images\Application\Indicators\check.png" />
@@ -847,6 +862,9 @@
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Platform.WP8">
       <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\wp8\GalaSoft.MvvmLight.Platform.WP8.dll</HintPath>
+    </Reference>
+    <Reference Include="JeffWilcox.PhoneThemeManager">
+      <HintPath>..\packages\PhoneThemeManager.2.0\lib\windowsphone8\JeffWilcox.PhoneThemeManager.dll</HintPath>
     </Reference>
     <Reference Include="LiveSDKAsync.WP8">
       <HintPath>..\packages\AsyncLiveConnectSDK.1.0.5\lib\wp8\LiveSDKAsync.WP8.dll</HintPath>

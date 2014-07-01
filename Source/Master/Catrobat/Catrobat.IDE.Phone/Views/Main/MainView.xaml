@@ -13,7 +13,7 @@
   xmlns:codung4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
   xmlns:application="clr-namespace:Catrobat.IDE.Phone.Content.Images.Application"
   xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-  xmlns:appBarUtils="clr-namespace:AppBarUtils;assembly=AppBarUtils"
+  xmlns:abu="clr-namespace:AppBarUtils;assembly=AppBarUtils"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
@@ -56,23 +56,27 @@
   </phone:PhoneApplicationPage.Resources>-->
 
   <Grid x:Name="LayoutRoot" Background="Transparent">
-    <!--Panorama control-->
-    <controls:Panorama Name="PanoramaMain" SelectionChanged="panoramaMain_SelectionChanged">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition/>
+    </Grid.RowDefinitions>
+    <application:Logo Grid.Row="0" Margin="10 10 0 0" HorizontalAlignment="Left" ScaleFactor="0.65" TextVisibility="Visible"/>
+    <controls:Panorama Grid.Row="1" Name="PanoramaMain" SelectionChanged="panoramaMain_SelectionChanged">
       <controls:Panorama.Background>
         <ImageBrush ImageSource="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.Background.ImageSource}" />
       </controls:Panorama.Background>
 
       <!-- Active Projects panorama item-->
       
-      <controls:PanoramaItem Name="PanoramaItemCurrentProject" HorizontalAlignment="Left" Header="{Binding Resources.Main_HeaderCurrentProject, Source={StaticResource LocalizedStrings}}">
+      <!--<controls:PanoramaItem Name="PanoramaItemCurrentProject" HorizontalAlignment="Left" Header="{Binding Resources.Main_HeaderCurrentProject, Source={StaticResource LocalizedStrings}}">
         <Grid VerticalAlignment="Top">
-        <!--<Grid Height="570" VerticalAlignment="Top">-->
+        --><!--<Grid Height="570" VerticalAlignment="Top">--><!--
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <!--
+            --><!--
             <RowDefinition/>
-            <RowDefinition Height="Auto"/>-->
+            <RowDefinition Height="Auto"/>--><!--
           </Grid.RowDefinitions>
           
           <Grid Grid.Row="1" Width="280" VerticalAlignment="Center"
@@ -85,7 +89,7 @@
               <Image Source="{Binding CurrentProject.Screenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}" />
               <Grid Background="#AA000000" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                 <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                     Text="{Binding CurrentProject.Name}" 
+                     Text="{Binding CurrentProject.Name}" Foreground="White"
                      TextAlignment="Center" TextWrapping="Wrap" Margin="5 5 5 10" 
                      Style="{StaticResource PhoneTextTitle2Style}" />
               </Grid>
@@ -96,7 +100,7 @@
           </Grid>
 
 
-          <!--
+          --><!--
           <Grid Grid.Row="2">
             <Image Name="ImageCurrentProjectScreenshot" Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}" />
           </Grid>-->
@@ -132,10 +136,10 @@
                   TextWrapping="Wrap" Text="{Binding Resources.Main_ButtonUpload, 
                   Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
             </StackPanel>
-          </Grid>-->
+          </Grid>--><!--
         </Grid> 
           
-      </controls:PanoramaItem>
+      </controls:PanoramaItem>-->
 
       <!--Local Projects panorama item-->
       <controls:PanoramaItem Name="PanoramaItemLocalProjects" Header="{Binding Resources.Main_HeaderLocalProjects, Source={StaticResource LocalizedStrings}}">
@@ -194,7 +198,7 @@
                   <!--<codung4Fun:RoundButton Margin="0 10 0 0" PressedBrush="Black" Click="LocalProjectControl_OnLocalProjectsBackPressed"
                     ImageSource="/Content/Images/ApplicationBar/dark/appbar.back.rest.png"/>-->
                   <TextBlock Grid.Column="1" VerticalAlignment="Top" Margin="15,5,5,5" TextWrapping="Wrap" 
-                             Text="{Binding CurrentProject.Name}" 
+                             Text="{Binding CurrentProject.Name}" Foreground="White"
                              Style="{StaticResource PhoneTextLargeStyle}"/>
                 </Grid>
 
@@ -210,13 +214,13 @@
                     <statusIcons:ProcessIcon Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                              Width="30" Height="30" Margin="5" IsProcessing="True" />
                     <TextBlock Opacity="0.5" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}" 
-                               VerticalAlignment="Center" Grid.Column="1"
+                               VerticalAlignment="Center" Grid.Column="1" Foreground="White"
                                Text="{Binding Resources.Main_ProjectGettingActivated, Source={StaticResource LocalizedStrings}}" />
                   </Grid>
 
                   <TextBlock Grid.Column="0" Opacity="0.9" Margin="10 0 10 0" TextWrapping="Wrap" TextAlignment="Center" 
                              Visibility="{Binding IsActivatingLocalProject, Converter={StaticResource BoolVisibilityNegativeConverter}}"
-                             VerticalAlignment="Center" HorizontalAlignment="Left"
+                             VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White"
                              Text="{Binding Resources.Main_ActiveProject, Source={StaticResource LocalizedStrings}}" />
                 </Grid>
               </Grid>
@@ -331,8 +335,8 @@
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="0" Source="{Binding ScreenshotSmall}" Width="60" Height="100" Margin="5" />
                     <StackPanel Grid.Column="1">
-                      <TextBlock Margin="15 0 0 5" Text="{Binding ProjectName}" TextTrimming="WordEllipsis" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" />
-                      <TextBlock Margin="15 0 0 5" Text="{Binding Description}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}" />
+                      <TextBlock Margin="15 0 0 5" Text="{Binding ProjectName}" TextTrimming="WordEllipsis" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" Foreground="White"/>
+                      <TextBlock Margin="15 0 0 5" Text="{Binding Description}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}" Foreground="White"/>
                     </StackPanel>
                   </Grid>
                 </Grid>
@@ -343,7 +347,7 @@
               <Grid Margin="12 5 12 5" Background="{StaticResource PhoneAccentBrush}" Height="35" Opacity="{Binding IsLoadingOnlineProjects, Converter={StaticResource BoolOpacityConverter}}">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                   <statusIcons:ProcessIcon IsProcessing="{Binding IsLoadingOnlineProjects}" Margin="0 0 5 0" />
-                  <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Resources.Main_OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" />
+                  <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Resources.Main_OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" Foreground="White" />
                 </StackPanel>
               </Grid>
             </phone:LongListSelector.ListFooter>
@@ -353,83 +357,85 @@
 
       <!--About panorama item-->
       <controls:PanoramaItem Name="PanoramaItemHelp" Header="{Binding Resources.Main_HeaderAbout, Source={StaticResource LocalizedStrings}}">
-        <StackPanel Margin="0 -20 0 0">
-          <application:Logo Margin="0 0 0 15" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                            TextVisibility="Visible" ScaleFactor="0.6"/>
+        <Grid Margin="0 -20 0 0">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
           <TextBlock FontSize="24" TextWrapping="Wrap" 
                      Text="{Binding Resources.Main_AboutText, Source={StaticResource LocalizedStrings}}" 
-                     Margin="10 0 0 15" />
-          <Grid>
+                     Margin="10 0 10 15" />
+          <HyperlinkButton Grid.Row="1" Content="Pocket Code Source Code License" Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" NavigateUri="" />
+          <HyperlinkButton Grid.Row="2" Content="About Catrobat" Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" NavigateUri="" />
+
+          <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <!--<buttons:SettingsButton Grid.Column="0" VerticalAlignment="Center"
-              Template="{StaticResource SettingsButtonControlTemplate}" 
-              Command="{Binding SettingsCommand}"  
-              Margin="0 0 0 0" />-->
-            <StackPanel Grid.Column="1" HorizontalAlignment="Left" Orientation="Vertical">
+            <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Vertical">
               <TextBlock Style="{StaticResource PhoneTextNormalStyle}" 
                        Text="{Binding ApplicationVersionName}" 
-                       Margin="30" TextWrapping="Wrap" />
-              <StackPanel Orientation="Horizontal" Margin="50 0 0 0" 
+                       Margin="10 10 0 10" TextWrapping="Wrap"  />
+              <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0" 
                 Visibility="{Binding IsMemoryMonitorEnabled, 
                 Converter={StaticResource BoolVisibilityConverter}}" >
-                <TextBlock Text="used memory:" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <codung4Fun:MemoryCounter VerticalAlignment="Center" />
+                <TextBlock Text="used memory:" VerticalAlignment="Center" Margin="0 0 -10 8"/>
+                <codung4Fun:MemoryCounter VerticalAlignment="Center" IsEnabled="True" Margin="12 0 0 0" />
               </StackPanel>
 
             </StackPanel>
           </Grid>
-
-        </StackPanel>
+        </Grid>
       </controls:PanoramaItem>
 
       <i:Interaction.Triggers>
-        <appBarUtils:SelectedPanoItemChangedTrigger>
-          <appBarUtils:SelectedPanoItemChangedTrigger.SelectionMappings>
-            <appBarUtils:SelectionMapping SourceIndex="0" TargetIndex="0"/>
-            <appBarUtils:SelectionMapping SourceIndex="1" TargetIndex="1"/>
-            <appBarUtils:SelectionMapping SourceIndex="2" TargetIndex="2"/>
-            <appBarUtils:SelectionMapping SourceIndex="3" TargetIndex="2"/>
+        <abu:SelectedPanoItemChangedTrigger>
+          <abu:SelectedPanoItemChangedTrigger.SelectionMappings>
+            <!--<abu:SelectionMapping SourceIndex="0" TargetIndex="0"/>-->
+            <abu:SelectionMapping SourceIndex="0" TargetIndex="0"/>
+            <abu:SelectionMapping SourceIndex="1" TargetIndex="1"/>
+            <abu:SelectionMapping SourceIndex="2" TargetIndex="2"/>
             <!--<appBarUtils:SelectionMapping SourceIndex="3" TargetIndex="1"/>-->
-          </appBarUtils:SelectedPanoItemChangedTrigger.SelectionMappings>
-          <appBarUtils:SwitchAppBarAction>
-            <appBarUtils:AppBar Id="0">
-              <appBarUtils:AppBar.MenuItems>
-                <appBarUtils:AppBarMenuItem Text="{Binding Resources.Main_Settings, Source={StaticResource LocalizedStrings}}" Command="{Binding SettingsCommand}"/>
-              </appBarUtils:AppBar.MenuItems>
+          </abu:SelectedPanoItemChangedTrigger.SelectionMappings>
+          <abu:SwitchAppBarAction>
+            <abu:AppBar Id="0" BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, Source={StaticResource ThemeChooser}}">
+              <abu:AppBar.MenuItems>
+                <abu:AppBarMenuItem Text="{Binding Resources.Main_Settings, Source={StaticResource LocalizedStrings}}" Command="{Binding SettingsCommand}"/>
+              </abu:AppBar.MenuItems>
 
-              <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.edit.rest.png"
-                Text="{Binding Resources.Main_ButtonEdit, Source={StaticResource LocalizedStrings}}"
-                Command="{Binding EditCurrentProjectCommand}" />
-
-              <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.upload.rest.png"
-                Text="{Binding Resources.Main_ButtonUpload, Source={StaticResource LocalizedStrings}}"
-                Command="{Binding UploadCurrentProjectCommand}" />
-
-            </appBarUtils:AppBar>
-            <appBarUtils:AppBar Id="1">
-              <appBarUtils:AppBar.MenuItems>
-                <appBarUtils:AppBarMenuItem Text="{Binding Resources.Main_Settings, Source={StaticResource LocalizedStrings}}" Command="{Binding SettingsCommand}"/>
-              </appBarUtils:AppBar.MenuItems>
-
-              <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png"
+              <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png"
                 Text="{Binding Resources.Main_ButtonCreate, Source={StaticResource LocalizedStrings}}"
                 Command="{Binding CreateNewProjectCommand}" />
-            </appBarUtils:AppBar>
 
-            <appBarUtils:AppBar Id="2" Mode="Minimized">
-              <appBarUtils:AppBar.MenuItems>
-                <appBarUtils:AppBarMenuItem Text="{Binding Resources.Main_Settings, Source={StaticResource LocalizedStrings}}" Command="{Binding SettingsCommand}"/>
-              </appBarUtils:AppBar.MenuItems>
-            </appBarUtils:AppBar>
-          </appBarUtils:SwitchAppBarAction>
-        </appBarUtils:SelectedPanoItemChangedTrigger>
+              <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.edit.rest.png"
+                Text="{Binding Resources.Main_ButtonEdit, Source={StaticResource LocalizedStrings}}"
+                Command="{Binding EditCurrentProjectCommand}" />
+            </abu:AppBar>
+            <!--<abu:AppBar Id="1" BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, Source={StaticResource ThemeChooser}}">
+
+            </abu:AppBar>-->
+
+            <abu:AppBar Id="1" BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, Source={StaticResource ThemeChooser}}">
+              <abu:AppBar.MenuItems>
+                <abu:AppBarMenuItem Text="{Binding Resources.Main_Settings, Source={StaticResource LocalizedStrings}}" Command="{Binding SettingsCommand}"/>
+              </abu:AppBar.MenuItems>
+
+              <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.upload.rest.png"
+                Text="{Binding Resources.Main_ButtonUpload, Source={StaticResource LocalizedStrings}}"
+                Command="{Binding UploadCurrentProjectCommand}" />
+            </abu:AppBar>
+
+            <abu:AppBar Id="2" BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, Source={StaticResource ThemeChooser}}">
+              <abu:AppBar.MenuItems>
+                <abu:AppBarMenuItem Text="{Binding Resources.Main_Settings, Source={StaticResource LocalizedStrings}}" Command="{Binding SettingsCommand}"/>
+              </abu:AppBar.MenuItems>
+            </abu:AppBar>
+          </abu:SwitchAppBarAction>
+        </abu:SelectedPanoItemChangedTrigger>
       </i:Interaction.Triggers>
     </controls:Panorama>
-
-
-
   </Grid>
 </phone:PhoneApplicationPage>

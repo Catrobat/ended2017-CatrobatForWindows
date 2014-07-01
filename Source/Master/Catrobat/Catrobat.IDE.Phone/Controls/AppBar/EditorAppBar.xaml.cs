@@ -213,7 +213,7 @@ namespace Catrobat.IDE.Phone.Controls.AppBar
                     break;
             }
 
-            TextBlockAdd.Text =  text;
+            TextBlockNew.Text =  text;
         }
     }
 }

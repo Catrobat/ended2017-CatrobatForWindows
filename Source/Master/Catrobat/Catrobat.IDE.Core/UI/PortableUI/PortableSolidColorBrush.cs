@@ -55,5 +55,20 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                 B = brush.B;
             }
         }
+    
+        public override object NativeColor
+        {
+            get
+            {
+                try
+                {
+                    return ServiceLocator.ColorConversionService.ConvertToLocalSolidColor(this);
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

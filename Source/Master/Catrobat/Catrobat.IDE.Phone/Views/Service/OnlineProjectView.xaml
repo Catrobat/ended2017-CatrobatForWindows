@@ -56,7 +56,7 @@
     <i:Interaction.Triggers>
       <abu:StateChangedTrigger State="false">
         <abu:SwitchAppBarAction>
-          <abu:AppBar Id="0">
+          <abu:AppBar Id="0" BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, Source={StaticResource ThemeChooser}}">
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.download.rest.png" 
                               Text="{Binding Resources.Main_OnlineProjectDownloadButton, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding OnlineProjectViewModel.DownloadCommand, Source={StaticResource Locator}}"

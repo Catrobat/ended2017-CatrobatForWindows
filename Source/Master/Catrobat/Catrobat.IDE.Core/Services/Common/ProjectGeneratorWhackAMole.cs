@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
+using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
+
 namespace Catrobat.IDE.Core.Services.Common
 {
     public class ProjectGeneratorWhackAMole : IProjectGenerator
@@ -156,17 +159,18 @@ namespace Catrobat.IDE.Core.Services.Common
 
         private static void FillSprites(Project project)
         {
-            var objectBackground = new Sprite { Name = AppResources.DefaultProject_Background }; // TODO: use right localizations
-            var objectMole1 = new Sprite { Name = AppResources.DefaultProject_Background };
-            var objectMole2 = new Sprite { Name = AppResources.DefaultProject_Background };
-            var objectMole3 = new Sprite { Name = AppResources.DefaultProject_Background };
-            var objectMole4 = new Sprite { Name = AppResources.DefaultProject_Background };
+            var objectBackground = new Sprite { Name = "Background" }; //AppResources.DefaultProject_Background }; // TODO: use right localizations
+            var objectMole1 = new Sprite { Name = "Mole1" }; //AppResources.DefaultProject_Background };
+            var objectMole2 = new Sprite { Name = "Mole2" }; //AppResources.DefaultProject_Background };
+            var objectMole3 = new Sprite { Name = "Mole3" }; //AppResources.DefaultProject_Background };
+            var objectMole4 = new Sprite { Name = "Mole4" }; //AppResources.DefaultProject_Background };
 
-            objectBackground.Costumes.Add(new Costume
+            Costume back = new Costume
             {
                 Name = AppResources.DefaultProject_Background,
                 FileName = LookFileNameBackground
-            });
+            };
+            objectBackground.Costumes.Add(back);
 
             objectBackground.Costumes.Add(new Costume
             {
@@ -176,11 +180,317 @@ namespace Catrobat.IDE.Core.Services.Common
 
             objectBackground.Scripts.Add(new StartScript());
 
+            #region mole1
 
-            // TODO: implement me
+            objectMole1.Costumes.Add(new Costume { Name = "moving mole", FileName = LookFileNameMole1 });
+            objectMole1.Costumes.Add(new Costume { Name = "dizzy mole", FileName = LookFileNameMole2 });
+            objectMole1.Costumes.Add(new Costume { Name = "mole", FileName = LookFileNameMole3 });
 
+            StartScript startScriptMole1 = new StartScript();
+            {
+                SetSizeBrick sizeBrick = new SetSizeBrick();
+                sizeBrick.Percentage = FormulaTreeFactory.CreateNumberNode(30);
+                startScriptMole1.Bricks.Add(sizeBrick);
+            }
+            startScriptMole1.Bricks.Add(new ForeverBrick());
+            {
+                SetPositionBrick pos = new SetPositionBrick();
+                pos.ValueX = FormulaTreeFactory.CreateNumberNode(-135);
+                pos.ValueY = FormulaTreeFactory.CreateNumberNode(-100);
+                startScriptMole1.Bricks.Add(pos);
+            }
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateRandomNode(
+                    firstChild: FormulaTreeFactory.CreateNumberNode(1), 
+                    secondChild: FormulaTreeFactory.CreateNumberNode(2));
+                startScriptMole1.Bricks.Add(wait);
+            }
+            startScriptMole1.Bricks.Add(new ShowBrick());
+            {
+                SetCostumeBrick costume = new SetCostumeBrick();
+                costume.Value = objectMole1.Costumes[0];
+                startScriptMole1.Bricks.Add(costume);
+            }
+            {
+                AnimatePositionBrick slide = new AnimatePositionBrick();
+                slide.Duration = FormulaTreeFactory.CreateNumberNode(0.1);
+                slide.ToX = FormulaTreeFactory.CreateNumberNode(0);
+                slide.ToY = FormulaTreeFactory.CreateNumberNode(10);
+                startScriptMole1.Bricks.Add(slide);
+            }
+            {
+                SetCostumeBrick costume = new SetCostumeBrick();
+                costume.Value = objectMole1.Costumes[2];
+                startScriptMole1.Bricks.Add(costume);
+            }
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateRandomNode(
+                    firstChild: FormulaTreeFactory.CreateNumberNode(1),
+                    secondChild: FormulaTreeFactory.CreateNumberNode(5));  
+                startScriptMole1.Bricks.Add(wait);
+            }
+            startScriptMole1.Bricks.Add(new HideBrick());
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateRandomNode(
+                    firstChild: FormulaTreeFactory.CreateNumberNode(1),
+                    secondChild: FormulaTreeFactory.CreateNumberNode(5));  
+                startScriptMole1.Bricks.Add(wait);
+            }
+            startScriptMole1.Bricks.Add(new EndForeverBrick());
+            objectMole1.Scripts.Add(startScriptMole1);
 
+            TappedScript tappedScriptMole1 = new TappedScript();
+            {
+                SetCostumeBrick costume = new SetCostumeBrick();
+                costume.Value = objectMole1.Costumes[1];
+                tappedScriptMole1.Bricks.Add(costume);
+            }
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateNumberNode(1.5);
+                tappedScriptMole1.Bricks.Add(wait);     
+            }
+            tappedScriptMole1.Bricks.Add(new HideBrick());
+            objectMole1.Scripts.Add(tappedScriptMole1);
 
+            #endregion
+
+            #region mole2
+
+            objectMole2.Costumes.Add(new Costume { Name = "moving mole", FileName = LookFileNameMole1 });
+            objectMole2.Costumes.Add(new Costume { Name = "dizzy mole", FileName = LookFileNameMole2 });
+            objectMole2.Costumes.Add(new Costume { Name = "mole", FileName = LookFileNameMole3 });
+
+            StartScript startScriptMole2 = new StartScript();
+            {
+                SetSizeBrick sizeBrick = new SetSizeBrick();
+                sizeBrick.Percentage = FormulaTreeFactory.CreateNumberNode(30);
+                startScriptMole2.Bricks.Add(sizeBrick);
+            }
+            startScriptMole2.Bricks.Add(new ForeverBrick());
+            {
+                SetPositionBrick pos = new SetPositionBrick();
+                pos.ValueX = FormulaTreeFactory.CreateNumberNode(135);
+                pos.ValueY = FormulaTreeFactory.CreateNumberNode(-100);
+                startScriptMole2.Bricks.Add(pos);
+            }
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateRandomNode(
+                    firstChild: FormulaTreeFactory.CreateNumberNode(1),
+                    secondChild: FormulaTreeFactory.CreateNumberNode(2));
+                startScriptMole2.Bricks.Add(wait);
+            }
+            startScriptMole2.Bricks.Add(new ShowBrick());
+            {
+                SetCostumeBrick costume = new SetCostumeBrick();
+                costume.Value = objectMole2.Costumes[0];
+                startScriptMole2.Bricks.Add(costume);
+            }
+            {
+                AnimatePositionBrick slide = new AnimatePositionBrick();
+                slide.Duration = FormulaTreeFactory.CreateNumberNode(0.1);
+                slide.ToX = FormulaTreeFactory.CreateNumberNode(0);
+                slide.ToY = FormulaTreeFactory.CreateNumberNode(10);
+                startScriptMole2.Bricks.Add(slide);
+            }
+            {
+                SetCostumeBrick costume = new SetCostumeBrick();
+                costume.Value = objectMole2.Costumes[2];
+                startScriptMole2.Bricks.Add(costume);
+            }
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateRandomNode(
+                    firstChild: FormulaTreeFactory.CreateNumberNode(1),
+                    secondChild: FormulaTreeFactory.CreateNumberNode(5));
+                startScriptMole2.Bricks.Add(wait);
+            }
+            startScriptMole2.Bricks.Add(new HideBrick());
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateRandomNode(
+                    firstChild: FormulaTreeFactory.CreateNumberNode(1),
+                    secondChild: FormulaTreeFactory.CreateNumberNode(5));
+                startScriptMole2.Bricks.Add(wait);
+            }
+            startScriptMole2.Bricks.Add(new EndForeverBrick());
+            objectMole2.Scripts.Add(startScriptMole2);
+
+            TappedScript tappedScriptMole2 = new TappedScript();
+            {
+                SetCostumeBrick costume = new SetCostumeBrick();
+                costume.Value = objectMole2.Costumes[1];
+                tappedScriptMole2.Bricks.Add(costume);
+            }
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateNumberNode(1.5);
+                tappedScriptMole2.Bricks.Add(wait);
+            }
+            tappedScriptMole2.Bricks.Add(new HideBrick());
+            objectMole2.Scripts.Add(tappedScriptMole2);
+
+            #endregion
+
+            #region mole3
+
+            objectMole3.Costumes.Add(new Costume { Name = "moving mole", FileName = LookFileNameMole1 });
+            objectMole3.Costumes.Add(new Costume { Name = "dizzy mole", FileName = LookFileNameMole2 });
+            objectMole3.Costumes.Add(new Costume { Name = "mole", FileName = LookFileNameMole3 });
+
+            StartScript startScriptMole3 = new StartScript();
+            {
+                SetSizeBrick sizeBrick = new SetSizeBrick();
+                sizeBrick.Percentage = FormulaTreeFactory.CreateNumberNode(30);
+                startScriptMole3.Bricks.Add(sizeBrick);
+            }
+            startScriptMole3.Bricks.Add(new ForeverBrick());
+            {
+                SetPositionBrick pos = new SetPositionBrick();
+                pos.ValueX = FormulaTreeFactory.CreateNumberNode(-135);
+                pos.ValueY = FormulaTreeFactory.CreateNumberNode(-255);
+                startScriptMole3.Bricks.Add(pos);
+            }
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateRandomNode(
+                    firstChild: FormulaTreeFactory.CreateNumberNode(1),
+                    secondChild: FormulaTreeFactory.CreateNumberNode(2));
+                startScriptMole3.Bricks.Add(wait);
+            }
+            startScriptMole3.Bricks.Add(new ShowBrick());
+            {
+                SetCostumeBrick costume = new SetCostumeBrick();
+                costume.Value = objectMole3.Costumes[0];
+                startScriptMole3.Bricks.Add(costume);
+            }
+            {
+                AnimatePositionBrick slide = new AnimatePositionBrick();
+                slide.Duration = FormulaTreeFactory.CreateNumberNode(0.1);
+                slide.ToX = FormulaTreeFactory.CreateNumberNode(0);
+                slide.ToY = FormulaTreeFactory.CreateNumberNode(10);
+                startScriptMole3.Bricks.Add(slide);
+            }
+            {
+                SetCostumeBrick costume = new SetCostumeBrick();
+                costume.Value = objectMole3.Costumes[2];
+                startScriptMole3.Bricks.Add(costume);
+            }
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateRandomNode(
+                    firstChild: FormulaTreeFactory.CreateNumberNode(1),
+                    secondChild: FormulaTreeFactory.CreateNumberNode(5));
+                startScriptMole3.Bricks.Add(wait);
+            }
+            startScriptMole3.Bricks.Add(new HideBrick());
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateRandomNode(
+                    firstChild: FormulaTreeFactory.CreateNumberNode(1),
+                    secondChild: FormulaTreeFactory.CreateNumberNode(5));
+                startScriptMole3.Bricks.Add(wait);
+            }
+            startScriptMole3.Bricks.Add(new EndForeverBrick());
+            objectMole3.Scripts.Add(startScriptMole3);
+
+            TappedScript tappedScriptMole3 = new TappedScript();
+            {
+                SetCostumeBrick costume = new SetCostumeBrick();
+                costume.Value = objectMole3.Costumes[1];
+                tappedScriptMole3.Bricks.Add(costume);
+            }
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateNumberNode(1.5);
+                tappedScriptMole3.Bricks.Add(wait);
+            }
+            tappedScriptMole3.Bricks.Add(new HideBrick());
+            objectMole3.Scripts.Add(tappedScriptMole3);
+
+            #endregion
+
+            #region mole4
+
+            objectMole4.Costumes.Add(new Costume { Name = "moving mole", FileName = LookFileNameMole1 });
+            objectMole4.Costumes.Add(new Costume { Name = "dizzy mole", FileName = LookFileNameMole2 });
+            objectMole4.Costumes.Add(new Costume { Name = "mole", FileName = LookFileNameMole3 });
+
+            StartScript startScriptMole4 = new StartScript();
+            {
+                SetSizeBrick sizeBrick = new SetSizeBrick();
+                sizeBrick.Percentage = FormulaTreeFactory.CreateNumberNode(30);
+                startScriptMole4.Bricks.Add(sizeBrick);
+            }
+            startScriptMole4.Bricks.Add(new ForeverBrick());
+            {
+                SetPositionBrick pos = new SetPositionBrick();
+                pos.ValueX = FormulaTreeFactory.CreateNumberNode(135);
+                pos.ValueY = FormulaTreeFactory.CreateNumberNode(-255);
+                startScriptMole4.Bricks.Add(pos);
+            }
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateRandomNode(
+                    firstChild: FormulaTreeFactory.CreateNumberNode(1),
+                    secondChild: FormulaTreeFactory.CreateNumberNode(2));
+                startScriptMole4.Bricks.Add(wait);
+            }
+            startScriptMole4.Bricks.Add(new ShowBrick());
+            {
+                SetCostumeBrick costume = new SetCostumeBrick();
+                costume.Value = objectMole4.Costumes[0];
+                startScriptMole4.Bricks.Add(costume);
+            }
+            {
+                AnimatePositionBrick slide = new AnimatePositionBrick();
+                slide.Duration = FormulaTreeFactory.CreateNumberNode(0.1);
+                slide.ToX = FormulaTreeFactory.CreateNumberNode(0);
+                slide.ToY = FormulaTreeFactory.CreateNumberNode(10);
+                startScriptMole4.Bricks.Add(slide);
+            }
+            {
+                SetCostumeBrick costume = new SetCostumeBrick();
+                costume.Value = objectMole4.Costumes[2];
+                startScriptMole4.Bricks.Add(costume);
+            }
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateRandomNode(
+                    firstChild: FormulaTreeFactory.CreateNumberNode(1),
+                    secondChild: FormulaTreeFactory.CreateNumberNode(5));
+                startScriptMole4.Bricks.Add(wait);
+            }
+            startScriptMole4.Bricks.Add(new HideBrick());
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateRandomNode(
+                    firstChild: FormulaTreeFactory.CreateNumberNode(1),
+                    secondChild: FormulaTreeFactory.CreateNumberNode(5));
+                startScriptMole4.Bricks.Add(wait);
+            }
+            startScriptMole4.Bricks.Add(new EndForeverBrick());
+            objectMole4.Scripts.Add(startScriptMole4);
+
+            TappedScript tappedScriptMole4 = new TappedScript();
+            {
+                SetCostumeBrick costume = new SetCostumeBrick();
+                costume.Value = objectMole4.Costumes[1];
+                tappedScriptMole4.Bricks.Add(costume);
+            }
+            {
+                DelayBrick wait = new DelayBrick();
+                wait.Duration = FormulaTreeFactory.CreateNumberNode(1.5);
+                tappedScriptMole4.Bricks.Add(wait);
+            }
+            tappedScriptMole4.Bricks.Add(new HideBrick());
+            objectMole4.Scripts.Add(tappedScriptMole4);
+
+            #endregion
 
             project.Sprites.Add(objectBackground);
             project.Sprites.Add(objectMole1);
