@@ -30,7 +30,12 @@ namespace Catrobat.IDE.Core.Services.Common
         private const string SoundFileName3 = "C006F161E41ACB98A9EB7B1E22405971_record.mp3";
         private const string SoundFileName4 = "C03622EC424461AB47259339AB71CF1C_record.mp3";
 
-        public async Task<Project> GenerateProject(string twoLetterIsoLanguageCode, bool writeToDisk)
+        public string GetProjectName(string twoLetterIsoLanguageCode)
+        {
+            return AppResources.Main_DefaultProjectName;
+        }
+
+        public async Task<Project> GenerateProject(bool writeToDisk)
         {
             var project = new Project
             {
@@ -497,6 +502,17 @@ namespace Catrobat.IDE.Core.Services.Common
             project.Sprites.Add(objectMole2);
             project.Sprites.Add(objectMole3);
             project.Sprites.Add(objectMole4);
+        }
+
+
+        public string GetProjectName()
+        {
+            return AppResources.Main_DefaultProjectName;
+        }
+
+        public int GetOrderId()
+        {
+            return 1;
         }
     }
 }

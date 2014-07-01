@@ -5,6 +5,10 @@ namespace Catrobat.IDE.Core.Services
 {
     public interface IProjectGenerator
     {
-        Task<Project> GenerateProject(string twoLetterIsoLanguageCode, bool writeToDisk);
+        Task<Project> GenerateProject(bool writeToDisk);
+
+        string GetProjectName();
+
+        int GetOrderId();
     }
 }

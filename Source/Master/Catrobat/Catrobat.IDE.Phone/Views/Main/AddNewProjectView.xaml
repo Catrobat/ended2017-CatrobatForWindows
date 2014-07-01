@@ -16,7 +16,6 @@
     shell:SystemTray.IsVisible="False"
     DataContext="{Binding AddNewProjectViewModel, Source={StaticResource Locator}}">
 
-  <!--LayoutRoot is the root grid where all page content is placed-->
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
@@ -33,13 +32,39 @@
         <TextBox Name="TextBoxProjectName" Margin="-10 0 10 0" HorizontalAlignment="Stretch" TextChanged="TextBoxProjectName_OnTextChanged" Text="{Binding Path=ProjectName, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
       </StackPanel>
       <StackPanel>
-        <CheckBox IsChecked="{Binding CopyCurrentProjectAsTemplate, Mode=TwoWay}" >
-          <TextBlock TextWrapping="Wrap" Text="{Binding TextCopyCurrentProjectAsTemplate }"></TextBlock>
-        </CheckBox>
+        <TextBlock Text="{Binding Resources.Main_SelectProjectCreationOption, Source={StaticResource LocalizedStrings}}"></TextBlock>
+        <RadioButton Margin="0 -5 0 -10" IsChecked="{Binding CreateEmptyProject, Mode=TwoWay}" GroupName="CreationOption" >
+          <RadioButton.ContentTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding Resources.Main_CreateEmptyProject, Source={StaticResource LocalizedStrings}}" FontSize="20" TextWrapping="Wrap"/>
+            </DataTemplate>
+          </RadioButton.ContentTemplate>
+        </RadioButton>
+        <RadioButton Margin="0 -5 0 -10" IsChecked="{Binding CreateCopyOfCurrentProject, Mode=TwoWay}" GroupName="CreationOption" >
+          <RadioButton.ContentTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding AddNewProjectViewModel.TextCopyCurrentProjectAsTemplate, Source={StaticResource Locator}}" FontSize="20" TextWrapping="Wrap"/>
+            </DataTemplate>
+          </RadioButton.ContentTemplate>
+        </RadioButton>
+        <RadioButton Margin="0 -5 0 -10" IsChecked="{Binding CreateTemplateProject, Mode=TwoWay}" GroupName="CreationOption" >
+          <RadioButton.ContentTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding Resources.Main_CreateProjectBasedOnTemplate, Source={StaticResource LocalizedStrings}}" FontSize="20" TextWrapping="Wrap"/>
+            </DataTemplate>
+          </RadioButton.ContentTemplate>
+        </RadioButton>
       </StackPanel>
+      <ListBox Margin="10" IsEnabled="{Binding CreateTemplateProject}" ItemsSource="{Binding TemplateOptions}" SelectedItem="{Binding SelectedTemplateOption}" >
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Grid>
+              <TextBlock FontSize="40" Text="{Binding Name}"></TextBlock>
+            </Grid>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
     </StackPanel>
-
-
 
     <i:Interaction.Triggers>
       <abu:StateChangedTrigger State="false">
