@@ -32,7 +32,12 @@
       <RowDefinition Height="Auto"/>
       <RowDefinition/>
     </Grid.RowDefinitions>
-    <application:Logo Grid.Row="0" Margin="10 10 0 0" HorizontalAlignment="Left" ScaleFactor="0.65" TextVisibility="Visible"/>
+    
+      <StackPanel Orientation="Horizontal" Margin="8 -4 0 -20">
+        <TextBlock Text="POCKET" Foreground="#14a5b8" FontSize="52" FontFamily="Arial Black" FontWeight="ExtraBlack" CharacterSpacing="-20" />
+        <TextBlock Text="CODE" Foreground="#ee761b" FontSize="52" FontFamily="Arial Black" FontWeight="ExtraBlack" CharacterSpacing="-20" />
+      </StackPanel>
+
     <controls:Panorama Grid.Row="1" Name="PanoramaMain" 
                        Foreground="{Binding StaticTheme.TextForegroundBrush.NativeBrush, 
                        Source={StaticResource ThemeChooser}}" 
@@ -266,7 +271,7 @@
 
       <!--Online Projects panorama item-->
       <controls:PanoramaItem Name="PanoramaItemOnlineProjects" Header="{Binding Resources.Main_HeaderOnlineProjects, Source={StaticResource LocalizedStrings}}">
-        <Grid>
+        <Grid Margin="0 -20 0 0">
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
