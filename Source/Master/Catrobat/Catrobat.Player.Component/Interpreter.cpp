@@ -32,6 +32,8 @@ Interpreter::Interpreter()
 Interpreter::~Interpreter()
 {
 	m_loudnessProvider->StopCapture();
+	delete m_accelerometerProvider;
+	delete m_compassProvider;
 }
 
 double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
