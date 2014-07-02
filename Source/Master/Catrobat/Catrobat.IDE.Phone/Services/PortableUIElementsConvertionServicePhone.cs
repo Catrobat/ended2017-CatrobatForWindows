@@ -32,30 +32,29 @@ namespace Catrobat.IDE.Phone.Services
             if (portableUIElement is PortableFontStyle)
             {
                 var portableStyle = ((PortableFontStyle) portableUIElement);
-                int fontSize;
+                double fontSize;
                 string fontFamily;
                 Brush brush;
 
-
                 switch (portableStyle.FontSize)
                 {
-                    case PortibleFontSize.VerySmall:
+                    case PortableFontSize.Normal:
                         fontSize = 20;
                         break;
-                    case PortibleFontSize.Small:
-                        fontSize = 30;
+                    case PortableFontSize.Small:
+                        fontSize = 18.667;
                         break;
-                    case PortibleFontSize.Medium:
-                        fontSize = 40;
+                    case PortableFontSize.Medium:
+                        fontSize = 22.667;
                         break;
-                    case PortibleFontSize.Large:
-                        fontSize = 50;
+                    case PortableFontSize.Large:
+                        fontSize = 32;
                         break;
-                    case PortibleFontSize.ExtraLarge:
-                        fontSize = 60;
+                    case PortableFontSize.ExtraLarge:
+                        fontSize = 42.667;
                         break;
-                    case PortibleFontSize.UltraLarge:
-                        fontSize = 80;
+                    case PortableFontSize.ExtraExtraLarge:
+                        fontSize = 72;
                         break;
                     default:
                         fontSize = 20;
@@ -64,14 +63,17 @@ namespace Catrobat.IDE.Phone.Services
 
                 switch (portableStyle.FontFamily)
                 {
-                    case PortibleFontFamily.Default:
-                        fontFamily = "Arial";
+                    case PortableFontFamily.Normal:
+                        fontFamily = "Segoe WP Light";
                         break;
-                    case PortibleFontFamily.Arial:
-                        fontFamily = "Arial";
+                    case PortableFontFamily.SemiLight:
+                        fontFamily = "Segoe WP Semilight";
+                        break;
+                    case PortableFontFamily.SemiBold:
+                        fontFamily = "Segoe WP Semibold ";
                         break;
                     default:
-                        fontFamily = "Arial";
+                        fontFamily = "Segoe WP Light";
                         break;
                 }
 

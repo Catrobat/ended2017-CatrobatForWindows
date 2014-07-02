@@ -23,7 +23,12 @@ namespace Catrobat.IDE.Core.Services.Common
         private const string LookFileNameCloud1 = "e8b139ca83c443159b464c26d8483bae_cloud1.png";
         private const string LookFileNameCloud2 = "c96b5d3adc1d4b199fc76fc518deae86_cloud2.png";
 
-        public async Task<Project> GenerateProject(string twoLetterIsoLanguageCode, bool writeToDisk)
+        public string GetProjectName()
+        {
+            return AppResources.Main_DefaultProjectName;
+        }
+
+        public async Task<Project> GenerateProject(bool writeToDisk)
         {
             var project = new Project
             {
@@ -170,6 +175,12 @@ namespace Catrobat.IDE.Core.Services.Common
             project.Sprites.Add(objectSun);
             project.Sprites.Add(objectWater);
             project.Sprites.Add(objectCloud);
+        }
+
+
+        public int GetOrderId()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

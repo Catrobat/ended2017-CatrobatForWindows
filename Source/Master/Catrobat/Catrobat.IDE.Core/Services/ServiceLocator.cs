@@ -6,6 +6,7 @@ using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Share;
 
 namespace Catrobat.IDE.Core.Services
 {
@@ -143,8 +144,6 @@ namespace Catrobat.IDE.Core.Services
 
         public static LocalizedStrings LocalizedStrings { get; set; }
 
-
-
         private static readonly Dictionary<Type, object> Instances = new Dictionary<Type, object>();
 
         public static void Register<T>(TypeCreationMode mode)
@@ -215,6 +214,19 @@ namespace Catrobat.IDE.Core.Services
 
                 return instance;
             }
+        }
+
+        public static IEnumerable<T> CreateImplementations<T>()
+        {
+            var currentAssembly = typeof(T).GetTypeInfo().Assembly;
+            var typesInAssemblies = currentAssembly.DefinedTypes;
+
+            var inAssemblies = typesInAssemblies as TypeInfo[] ?? typesInAssemblies.ToArray();
+
+            var instances = (from typeInfo in inAssemblies 
+                          where typeInfo.ImplementedInterfaces.Contains(typeof (T)) select (T) Activator.CreateInstance(typeInfo.AsType())).ToList();
+
+            return instances;
         }
 
         public static T GetInstance<T>()

@@ -14,7 +14,9 @@
   DataContext="{Binding ShareProjectServiceSelectionViewModel, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="False">
 
-  <Grid x:Name="LayoutRoot" Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
@@ -40,7 +42,7 @@
                 <Image Source="/Content/Images/Share/skydrive.jpg" Width="160" Margin="15 5 5 5"></Image>
                 <TextBlock Grid.Column="1" TextWrapping="Wrap" Margin="25 10 10 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_UploadToSkyDrive, Source={StaticResource LocalizedStrings}}" 
-                           Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                           Name="tbGallery" Style="{Binding StaticTheme.TextExtraLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
               </Grid>
             </ControlTemplate>
           </Button.Template>

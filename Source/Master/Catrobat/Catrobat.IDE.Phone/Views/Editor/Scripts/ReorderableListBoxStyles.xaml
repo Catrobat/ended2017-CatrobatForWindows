@@ -45,7 +45,7 @@
                             HorizontalScrollBarVisibility="Disabled"
                             VerticalScrollBarVisibility="Visible"
                             Background="{TemplateBinding Background}" IsEnabled="True">
-                            <Border x:Name="BorderItems" >
+                            <Border x:Name="BorderItems">
                                 <ItemsPresenter  />
                             </Border>
 
@@ -56,7 +56,7 @@
                             Opacity="1"
                             VerticalAlignment="Stretch"
                             HorizontalAlignment="Stretch"
-                            Visibility="Visible" Background="#90000000"/>
+                            Visibility="Visible" Background="#60000000"/>
                         <Canvas
                             x:Name="DragCanvas"
                             Grid.Column="1"
@@ -106,7 +106,7 @@
                                 </Grid.ColumnDefinitions>
                                 <ContentControl
                                     x:Name="ContentContainer"
-                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                     Content="{TemplateBinding Content}"
@@ -213,7 +213,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="1" Margin="0 0 0 5" HorizontalAlignment="Right" >
+                <Grid Grid.Row="1" Margin="0,0,60,5" HorizontalAlignment="Right" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
