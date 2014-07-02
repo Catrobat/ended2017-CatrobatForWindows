@@ -398,7 +398,11 @@ double Interpreter::CalculateRand(double value1, double value2)
 
     double diff = max - min;
 
-    srand (static_cast<unsigned>(time(nullptr)));
+	SYSTEMTIME time;
+	GetSystemTime(&time);
+	//TODO:better possibility for randomness???
+	double* randomHack = &max;
+	srand((unsigned)(time.wMilliseconds + randomHack));
 	double percentOfMaxValue = static_cast<double>(rand()) / RAND_MAX;
     double random_num = min + percentOfMaxValue * diff;
     return random_num;
