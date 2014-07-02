@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -50,22 +51,35 @@ namespace Catrobat.IDE.Core
         private static async Task<Project> InitializeFirstTimeUse(CatrobatContextBase context)
         {
             var localSettings = await CatrobatContext.RestoreLocalSettingsStatic();
-            if (localSettings == null)
-            {
-                if (Debugger.IsAttached)
-                {
-                    var loader = new SampleProjectLoader();
-                    await loader.LoadSampleProjects();
-                }
 
-                var currentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
-                await currentProject.Save();
-                context.LocalSettings = new LocalSettings { CurrentProjectName = currentProject.Name };
-                return currentProject;
+            if(localSettings != null)
+            {
+                try
+                {
+                    context.LocalSettings = localSettings;
+                    var project = await CatrobatContext.LoadNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
+                    return project;
+                }
+                catch (Exception)
+                {
+                    
+                }
             }
 
-            context.LocalSettings = localSettings;
-            return await CatrobatContext.LoadNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
+            if (localSettings == null && Debugger.IsAttached)
+            {
+                var loader = new SampleProjectLoader();
+                await loader.LoadSampleProjects();
+            }
+
+            var currentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+            await currentProject.Save();
+
+            if(localSettings == null)
+                context.LocalSettings = new LocalSettings ();
+
+            context.LocalSettings.CurrentProjectName = currentProject.Name;
+            return currentProject;
         }
 
         private static async Task LoadContext()
