@@ -133,11 +133,12 @@ namespace Catrobat.IDE.Core.UI
         public PortableSolidColorBrush ObjectsBrush{ get { return new PortableSolidColorBrush("#FF891D1D"); } }
 
         // Brick colors
-        public PortableSolidColorBrush LooksBrickBrush{ get { return new PortableSolidColorBrush("#FF6F9263"); } }
-        public PortableSolidColorBrush MotionBrickBrush{ get { return new PortableSolidColorBrush("#FF0091C3"); } }
-        public PortableSolidColorBrush SoundBrickBrush{ get { return new PortableSolidColorBrush("#FF87778D"); } }
-        public PortableSolidColorBrush ControlBrickBrush{ get { return new PortableSolidColorBrush("#FFF29263"); } }
-        public PortableSolidColorBrush VariableBrickBrush{ get { return new PortableSolidColorBrush("#FFE84F50"); } }
-        public PortableSolidColorBrush BrickBorderBrush{ get { return new PortableSolidColorBrush("#FFFFFFFF"); } }
+        public PortableSolidColorBrush LooksBrickBrush { get { return new PortableSolidColorBrush(255, 111, 146, 66); } }
+        public PortableSolidColorBrush MotionBrickBrush { get { return new PortableSolidColorBrush(255, 0, 145, 195); } }
+        public PortableSolidColorBrush SoundBrickBrush { get { return new PortableSolidColorBrush(255, 135, 77, 141); } }
+        public PortableSolidColorBrush ControlBrickBrush { get { return new PortableSolidColorBrush(255, 242, 146, 96); } }
+        public PortableSolidColorBrush VariableBrickBrush { get { return new PortableSolidColorBrush(255, 232, 79, 80); } }
+
+        public PortableSolidColorBrush BrickBorderBrush { get { return new PortableSolidColorBrush(255, 255, 255, 255); } }
     }
 }

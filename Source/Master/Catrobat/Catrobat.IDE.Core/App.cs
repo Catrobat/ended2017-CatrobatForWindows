@@ -58,7 +58,8 @@ namespace Catrobat.IDE.Core
                 {
                     context.LocalSettings = localSettings;
                     var project = await CatrobatContext.LoadNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
-                    return project;
+                    if(project != null)
+                        return project;
                 }
                 catch (Exception)
                 {
