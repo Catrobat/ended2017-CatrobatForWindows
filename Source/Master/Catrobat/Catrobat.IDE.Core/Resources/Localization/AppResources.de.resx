@@ -1126,4 +1126,16 @@
   <data name="Main_SelectProjectCreationOption" xml:space="preserve">
     <value>How to create the new project?</value>
   </data>
+  <data name="Main_WhackAMoleName" xml:space="preserve">
+    <value>Schlag den Maulwurf</value>
+  </data>
+  <data name="WhackAMole_DizzyMole" xml:space="preserve">
+    <value>Benommener Maulwurf</value>
+  </data>
+  <data name="WhackAMole_Mole" xml:space="preserve">
+    <value>Maulwurf</value>
+  </data>
+  <data name="WhackAMole_MovingMole" xml:space="preserve">
+    <value>Bewegender Maulwurf</value>
+  </data>
 </root>

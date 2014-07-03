@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             var project = new Project
             {
-                Name = programName, 
+                Name = AppResources.Main_WhackAMoleName, 
                 UploadHeader = new UploadHeader
                 {
                     MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
@@ -159,44 +159,54 @@ namespace Catrobat.IDE.Core.Services.Common
 
         private static void FillSprites(Project project)
         {
-            var objectBackground = new Sprite { Name = "Background" }; //AppResources.DefaultProject_Background }; // TODO: use right localizations
-            var objectMole1 = new Sprite { Name = "Mole1" }; //AppResources.DefaultProject_Background };
-            var objectMole2 = new Sprite { Name = "Mole2" }; //AppResources.DefaultProject_Background };
-            var objectMole3 = new Sprite { Name = "Mole3" }; //AppResources.DefaultProject_Background };
-            var objectMole4 = new Sprite { Name = "Mole4" }; //AppResources.DefaultProject_Background };
+            var objectBackground = new Sprite { Name = AppResources.DefaultProject_Background }; 
+            var objectMole1 = new Sprite { Name = AppResources.WhackAMole_Mole + " 1" };
+            var objectMole2 = new Sprite { Name = AppResources.WhackAMole_Mole + " 2" };
+            var objectMole3 = new Sprite { Name = AppResources.WhackAMole_Mole + " 3" };
+            var objectMole4 = new Sprite { Name = AppResources.WhackAMole_Mole + " 4" };
 
-            Costume back = new Costume
+            #region Background
+
+            objectBackground.Costumes.Add(new Costume { Name = AppResources.DefaultProject_Background, FileName = LookFileNameBackground });
+            objectBackground.Costumes.Add(new Costume { Name = AppResources.DefaultProject_Background + "End", FileName = LookFileNameBackgroundFinished });
+
+            StartScript startScriptBackground = new StartScript();
             {
-                Name = AppResources.DefaultProject_Background,
-                FileName = LookFileNameBackground
-            };
-            objectBackground.Costumes.Add(back);
-
-            objectBackground.Costumes.Add(new Costume
+                SetCostumeBrick costume = new SetCostumeBrick();
+                costume.Value = objectBackground.Costumes[0];
+                startScriptBackground.Bricks.Add(costume);
+            }
             {
-                Name = AppResources.DefaultProject_Background,
-                FileName = LookFileNameBackgroundFinished
-            });
+                SetSizeBrick sizeBack = new SetSizeBrick();
+                sizeBack.Percentage = FormulaTreeFactory.CreateNumberNode(75);
+                startScriptBackground.Bricks.Add(sizeBack);
+            }
+            objectBackground.Scripts.Add(startScriptBackground);
 
-            objectBackground.Scripts.Add(new StartScript());
+            #endregion
 
             #region mole1
 
-            objectMole1.Costumes.Add(new Costume { Name = "moving mole", FileName = LookFileNameMole1 });
-            objectMole1.Costumes.Add(new Costume { Name = "dizzy mole", FileName = LookFileNameMole2 });
-            objectMole1.Costumes.Add(new Costume { Name = "mole", FileName = LookFileNameMole3 });
+            objectMole1.Costumes.Add(new Costume { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
+            objectMole1.Costumes.Add(new Costume { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
+            objectMole1.Costumes.Add(new Costume { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
 
             StartScript startScriptMole1 = new StartScript();
             {
                 SetSizeBrick sizeBrick = new SetSizeBrick();
-                sizeBrick.Percentage = FormulaTreeFactory.CreateNumberNode(30);
+                sizeBrick.Percentage = FormulaTreeFactory.CreateNumberNode(20);
                 startScriptMole1.Bricks.Add(sizeBrick);
             }
-            startScriptMole1.Bricks.Add(new ForeverBrick());
+            ForeverBrick startForeverBrick1 = new ForeverBrick();
+            EndForeverBrick endForeverBrick1 = new EndForeverBrick();
+            startForeverBrick1.End = endForeverBrick1;
+            endForeverBrick1.Begin = startForeverBrick1;
+
+            startScriptMole1.Bricks.Add(startForeverBrick1);  
             {
                 SetPositionBrick pos = new SetPositionBrick();
-                pos.ValueX = FormulaTreeFactory.CreateNumberNode(-135);
-                pos.ValueY = FormulaTreeFactory.CreateNumberNode(-100);
+                pos.ValueX = FormulaTreeFactory.CreateNumberNode(-115);
+                pos.ValueY = FormulaTreeFactory.CreateNumberNode(-80);
                 startScriptMole1.Bricks.Add(pos);
             }
             {
@@ -239,7 +249,7 @@ namespace Catrobat.IDE.Core.Services.Common
                     secondChild: FormulaTreeFactory.CreateNumberNode(5));  
                 startScriptMole1.Bricks.Add(wait);
             }
-            startScriptMole1.Bricks.Add(new EndForeverBrick());
+            startScriptMole1.Bricks.Add(endForeverBrick1); 
             objectMole1.Scripts.Add(startScriptMole1);
 
             TappedScript tappedScriptMole1 = new TappedScript();
@@ -260,21 +270,26 @@ namespace Catrobat.IDE.Core.Services.Common
 
             #region mole2
 
-            objectMole2.Costumes.Add(new Costume { Name = "moving mole", FileName = LookFileNameMole1 });
-            objectMole2.Costumes.Add(new Costume { Name = "dizzy mole", FileName = LookFileNameMole2 });
-            objectMole2.Costumes.Add(new Costume { Name = "mole", FileName = LookFileNameMole3 });
+            objectMole2.Costumes.Add(new Costume { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
+            objectMole2.Costumes.Add(new Costume { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
+            objectMole2.Costumes.Add(new Costume { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
 
             StartScript startScriptMole2 = new StartScript();
             {
                 SetSizeBrick sizeBrick = new SetSizeBrick();
-                sizeBrick.Percentage = FormulaTreeFactory.CreateNumberNode(30);
+                sizeBrick.Percentage = FormulaTreeFactory.CreateNumberNode(20);
                 startScriptMole2.Bricks.Add(sizeBrick);
             }
-            startScriptMole2.Bricks.Add(new ForeverBrick());
+            ForeverBrick startForeverBrick2 = new ForeverBrick();
+            EndForeverBrick endForeverBrick2 = new EndForeverBrick();
+            startForeverBrick2.End = endForeverBrick2;
+            endForeverBrick2.Begin = startForeverBrick2;
+
+            startScriptMole2.Bricks.Add(startForeverBrick2);
             {
                 SetPositionBrick pos = new SetPositionBrick();
-                pos.ValueX = FormulaTreeFactory.CreateNumberNode(135);
-                pos.ValueY = FormulaTreeFactory.CreateNumberNode(-100);
+                pos.ValueX = FormulaTreeFactory.CreateNumberNode(115);
+                pos.ValueY = FormulaTreeFactory.CreateNumberNode(-80);
                 startScriptMole2.Bricks.Add(pos);
             }
             {
@@ -317,7 +332,7 @@ namespace Catrobat.IDE.Core.Services.Common
                     secondChild: FormulaTreeFactory.CreateNumberNode(5));
                 startScriptMole2.Bricks.Add(wait);
             }
-            startScriptMole2.Bricks.Add(new EndForeverBrick());
+            startScriptMole2.Bricks.Add(endForeverBrick2);
             objectMole2.Scripts.Add(startScriptMole2);
 
             TappedScript tappedScriptMole2 = new TappedScript();
@@ -338,21 +353,26 @@ namespace Catrobat.IDE.Core.Services.Common
 
             #region mole3
 
-            objectMole3.Costumes.Add(new Costume { Name = "moving mole", FileName = LookFileNameMole1 });
-            objectMole3.Costumes.Add(new Costume { Name = "dizzy mole", FileName = LookFileNameMole2 });
-            objectMole3.Costumes.Add(new Costume { Name = "mole", FileName = LookFileNameMole3 });
+            objectMole3.Costumes.Add(new Costume { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
+            objectMole3.Costumes.Add(new Costume { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
+            objectMole3.Costumes.Add(new Costume { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
 
             StartScript startScriptMole3 = new StartScript();
             {
                 SetSizeBrick sizeBrick = new SetSizeBrick();
-                sizeBrick.Percentage = FormulaTreeFactory.CreateNumberNode(30);
+                sizeBrick.Percentage = FormulaTreeFactory.CreateNumberNode(20);
                 startScriptMole3.Bricks.Add(sizeBrick);
             }
-            startScriptMole3.Bricks.Add(new ForeverBrick());
+            ForeverBrick startForeverBrick3 = new ForeverBrick();
+            EndForeverBrick endForeverBrick3 = new EndForeverBrick();
+            startForeverBrick3.End = endForeverBrick3;
+            endForeverBrick3.Begin = startForeverBrick3;
+
+            startScriptMole3.Bricks.Add(startForeverBrick3);
             {
                 SetPositionBrick pos = new SetPositionBrick();
-                pos.ValueX = FormulaTreeFactory.CreateNumberNode(-135);
-                pos.ValueY = FormulaTreeFactory.CreateNumberNode(-255);
+                pos.ValueX = FormulaTreeFactory.CreateNumberNode(-115);
+                pos.ValueY = FormulaTreeFactory.CreateNumberNode(-215);
                 startScriptMole3.Bricks.Add(pos);
             }
             {
@@ -395,7 +415,7 @@ namespace Catrobat.IDE.Core.Services.Common
                     secondChild: FormulaTreeFactory.CreateNumberNode(5));
                 startScriptMole3.Bricks.Add(wait);
             }
-            startScriptMole3.Bricks.Add(new EndForeverBrick());
+            startScriptMole3.Bricks.Add(endForeverBrick3);
             objectMole3.Scripts.Add(startScriptMole3);
 
             TappedScript tappedScriptMole3 = new TappedScript();
@@ -416,21 +436,26 @@ namespace Catrobat.IDE.Core.Services.Common
 
             #region mole4
 
-            objectMole4.Costumes.Add(new Costume { Name = "moving mole", FileName = LookFileNameMole1 });
-            objectMole4.Costumes.Add(new Costume { Name = "dizzy mole", FileName = LookFileNameMole2 });
-            objectMole4.Costumes.Add(new Costume { Name = "mole", FileName = LookFileNameMole3 });
+            objectMole4.Costumes.Add(new Costume { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
+            objectMole4.Costumes.Add(new Costume { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
+            objectMole4.Costumes.Add(new Costume { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
 
             StartScript startScriptMole4 = new StartScript();
             {
                 SetSizeBrick sizeBrick = new SetSizeBrick();
-                sizeBrick.Percentage = FormulaTreeFactory.CreateNumberNode(30);
+                sizeBrick.Percentage = FormulaTreeFactory.CreateNumberNode(20);
                 startScriptMole4.Bricks.Add(sizeBrick);
             }
-            startScriptMole4.Bricks.Add(new ForeverBrick());
+            ForeverBrick startForeverBrick4 = new ForeverBrick();
+            EndForeverBrick endForeverBrick4 = new EndForeverBrick();
+            startForeverBrick4.End = endForeverBrick4;
+            endForeverBrick4.Begin = startForeverBrick4;
+
+            startScriptMole4.Bricks.Add(startForeverBrick4);
             {
                 SetPositionBrick pos = new SetPositionBrick();
-                pos.ValueX = FormulaTreeFactory.CreateNumberNode(135);
-                pos.ValueY = FormulaTreeFactory.CreateNumberNode(-255);
+                pos.ValueX = FormulaTreeFactory.CreateNumberNode(115);
+                pos.ValueY = FormulaTreeFactory.CreateNumberNode(-215);
                 startScriptMole4.Bricks.Add(pos);
             }
             {
@@ -473,7 +498,7 @@ namespace Catrobat.IDE.Core.Services.Common
                     secondChild: FormulaTreeFactory.CreateNumberNode(5));
                 startScriptMole4.Bricks.Add(wait);
             }
-            startScriptMole4.Bricks.Add(new EndForeverBrick());
+            startScriptMole4.Bricks.Add(startForeverBrick4);
             objectMole4.Scripts.Add(startScriptMole4);
 
             TappedScript tappedScriptMole4 = new TappedScript();
@@ -502,7 +527,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public string GetProjectDefaultName()
         {
-            return "Whack A Mole"; // TODO: localize
+            return AppResources.Main_WhackAMoleName;
         }
 
         public int GetOrderId()
