@@ -13,7 +13,7 @@ namespace Catrobat.IDE.Core.Models
         {
             get
             {
-                return ProjectGenerator == null ? "" : ProjectGenerator.GetProjectName();
+                return ProjectGenerator == null ? "" : ProjectGenerator.GetProjectDefaultName();
             }
         }
 

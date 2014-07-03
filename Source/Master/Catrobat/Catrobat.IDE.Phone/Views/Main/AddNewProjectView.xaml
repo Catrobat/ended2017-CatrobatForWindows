@@ -57,7 +57,7 @@
           </RadioButton.ContentTemplate>
         </RadioButton>
       </StackPanel>
-      <ListBox Margin="10" IsEnabled="{Binding CreateTemplateProject}" ItemsSource="{Binding TemplateOptions}" SelectedItem="{Binding SelectedTemplateOption}" >
+      <ListBox Margin="10" IsEnabled="{Binding CreateTemplateProject}" ItemsSource="{Binding TemplateOptions}" SelectedItem="{Binding SelectedTemplateOption, Mode=TwoWay}" >
         <ListBox.ItemTemplate>
           <DataTemplate>
             <Grid>

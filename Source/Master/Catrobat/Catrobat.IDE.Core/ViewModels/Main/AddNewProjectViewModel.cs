@@ -155,7 +155,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
             else if (CreateTemplateProject)
             {
-                await SelectedTemplateOption.ProjectGenerator.GenerateProject(true);
+                CurrentProject = await SelectedTemplateOption.ProjectGenerator.GenerateProject(ProjectName, true);
             }
 
             if (CurrentProject != null)

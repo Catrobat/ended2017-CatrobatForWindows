@@ -23,16 +23,16 @@ namespace Catrobat.IDE.Core.Services.Common
         private const string LookFileNameCloud1 = "e8b139ca83c443159b464c26d8483bae_cloud1.png";
         private const string LookFileNameCloud2 = "c96b5d3adc1d4b199fc76fc518deae86_cloud2.png";
 
-        public string GetProjectName()
+        public string GetProjectDefaultName()
         {
             return AppResources.Main_DefaultProjectName;
         }
 
-        public async Task<Project> GenerateProject(bool writeToDisk)
+        public async Task<Project> GenerateProject(string programName, bool writeToDisk)
         {
             var project = new Project
             {
-                Name = AppResources.Main_DefaultProjectName, 
+                Name = programName,
                 UploadHeader = new UploadHeader
                 {
                     MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
@@ -46,7 +46,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
                 {
                     var inputStream =
-                        await loader.OpenResourceStreamAsync(ResourceScope.IdePhone, 
+                        await loader.OpenResourceStreamAsync(ResourceScope.IdePhone,
                         Path.Combine(ResourcePathToScreenshot, ScreenshotFilename));
 
                     var outputStream = await storage.OpenFileAsync(
@@ -124,7 +124,7 @@ namespace Catrobat.IDE.Core.Services.Common
             objectBackground.Scripts.Add(new StartScript());
             for (var i = 1; i <= 14; i++)
             {
-                objectBackground.Scripts[0].Bricks.Add(new SetPositionYBrick {Value = null});
+                objectBackground.Scripts[0].Bricks.Add(new SetPositionYBrick { Value = null });
             }
 
             objectBackground.Scripts.Add(new TappedScript());
@@ -180,7 +180,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public int GetOrderId()
         {
-            throw new System.NotImplementedException();
+            return 2;
         }
     }
 }

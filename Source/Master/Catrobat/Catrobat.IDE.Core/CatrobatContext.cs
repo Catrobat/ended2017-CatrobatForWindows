@@ -1,4 +1,5 @@
 ﻿using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
@@ -58,7 +59,7 @@ namespace Catrobat.IDE.Core
         {
             IProjectGenerator projectGenerator = new ProjectGeneratorDefault();
 
-            return await projectGenerator.GenerateProject(true);
+            return await projectGenerator.GenerateProject(AppResources.Main_DefaultProjectName ,true);
         }
 
         public static async Task<Project> CreateEmptyProject(string newProjectName)

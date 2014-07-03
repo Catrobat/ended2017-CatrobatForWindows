@@ -30,16 +30,11 @@ namespace Catrobat.IDE.Core.Services.Common
         private const string SoundFileName3 = "C006F161E41ACB98A9EB7B1E22405971_record.mp3";
         private const string SoundFileName4 = "C03622EC424461AB47259339AB71CF1C_record.mp3";
 
-        public string GetProjectName(string twoLetterIsoLanguageCode)
-        {
-            return "Whack A Mole"; // TODO: localize
-        }
-
-        public async Task<Project> GenerateProject(bool writeToDisk)
+        public async Task<Project> GenerateProject(string programName, bool writeToDisk)
         {
             var project = new Project
             {
-                Name = AppResources.Main_DefaultProjectName, 
+                Name = programName, 
                 UploadHeader = new UploadHeader
                 {
                     MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
@@ -505,7 +500,7 @@ namespace Catrobat.IDE.Core.Services.Common
         }
 
 
-        public string GetProjectName()
+        public string GetProjectDefaultName()
         {
             return "Whack A Mole"; // TODO: localize
         }
