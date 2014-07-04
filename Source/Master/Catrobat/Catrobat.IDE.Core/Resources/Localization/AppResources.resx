@@ -1126,4 +1126,16 @@
   <data name="Main_SelectProjectCreationOption" xml:space="preserve">
     <value>Wie soll das neue Projekt erstellt werden?</value>
   </data>
+  <data name="Main_WhackAMoleName" xml:space="preserve">
+    <value>Whack a mole</value>
+  </data>
+  <data name="WhackAMole_DizzyMole" xml:space="preserve">
+    <value>dizzy mole</value>
+  </data>
+  <data name="WhackAMole_Mole" xml:space="preserve">
+    <value>mole</value>
+  </data>
+  <data name="WhackAMole_MovingMole" xml:space="preserve">
+    <value>moving mole</value>
+  </data>
 </root>

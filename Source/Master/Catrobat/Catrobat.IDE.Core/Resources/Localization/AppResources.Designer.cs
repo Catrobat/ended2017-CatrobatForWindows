@@ -3084,5 +3084,41 @@ namespace Catrobat.IDE.Core.Resources.Localization {
                 return ResourceManager.GetString("Main_VersionIsNotSupported", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whack a mole.
+        /// </summary>
+        public static string Main_WhackAMoleName {
+            get {
+                return ResourceManager.GetString("Main_WhackAMoleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dizzy mole.
+        /// </summary>
+        public static string WhackAMole_DizzyMole {
+            get {
+                return ResourceManager.GetString("WhackAMole_DizzyMole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mole.
+        /// </summary>
+        public static string WhackAMole_Mole {
+            get {
+                return ResourceManager.GetString("WhackAMole_Mole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to moving mole.
+        /// </summary>
+        public static string WhackAMole_MovingMole {
+            get {
+                return ResourceManager.GetString("WhackAMole_MovingMole", resourceCulture);
+            }
+        }
     }
 }
