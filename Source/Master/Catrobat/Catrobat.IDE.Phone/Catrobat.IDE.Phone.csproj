@@ -697,28 +697,6 @@
     <Content Include="Content\Images\LicensedIcons\ModernUIIcons\license.txt" />
     <Content Include="Content\Images\Screenshot\NoScreenshotSquare.png" />
     <Content Include="Content\Images\Share\skydrive.jpg" />
-    <Content Include="Content\Programs\Default\automatic_screenshot.png" />
-    <Content Include="Content\Programs\Default\Looks\28226cf909b0e5deb2d275b73a96fbec_rain.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Programs\Default\Looks\52fb8540d8d751880ab012e26c86e1f5_background.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Programs\Default\Looks\5c8b67f427443c1bb5c50a4aeb007949_sun.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Programs\Default\Looks\7fe260ebb6c78fa3f0d6afaffb5a7759_water.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Programs\Default\Looks\c96b5d3adc1d4b199fc76fc518deae86_cloud2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Programs\Default\Looks\cd8435e8bf34b6be6c0fdf700f03e01e_cat.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Programs\Default\Looks\e8b139ca83c443159b464c26d8483bae_cloud1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\Programs\WhackAMole\automatic_screenshot.png" />
     <Content Include="Content\Programs\WhackAMole\Looks\1D687270C999067F2DDFCB8CA59046E7_whack-a-mole-BG.png" />
     <Content Include="Content\Programs\WhackAMole\Looks\4137DB0956BAA9780A087C874900B5EB_whack-a-mole-BG.png" />
@@ -755,7 +733,6 @@
     <Content Include="fmodex_arm.dll" />
     <Content Include="fmodex_x86.dll" />
     <None Include="app.config" />
-    <Content Include="Content\Resources\SampleProjects\stick.catrobat" />
     <Content Include="italic.spritefont" />
     <None Include="Fonts\LiveSymbol.ttf" />
     <None Include="packages.config" />
@@ -921,7 +898,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Libs\" />
-    <Folder Include="Content\Programs\Default\Sounds\" />
+    <Folder Include="Content\Resources\SampleProjects\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
