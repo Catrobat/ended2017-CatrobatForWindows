@@ -5,7 +5,8 @@
 #include "CompassProvider.h"
 #include "string"
 #include <sstream>
-//#include <cmath>
+#include <random>
+#include <cmath>
 #include <ctime>
 #include <math.h>
 
@@ -398,16 +399,35 @@ double Interpreter::CalculateRand(double value1, double value2)
     double min = this->CalculateMin(value1, value2);
     double max = this->CalculateMax(value1, value2);
 
-    double diff = max - min;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	if (OnlyIntegerValues(value1, value2))
+	{
+		std::uniform_int_distribution<> dis(min, max);
+		return dis(gen);
+	}
+	else
+	{
+		std::uniform_real_distribution<> dis(min, max);
+		return dis(gen);
+	}
+}
 
-	SYSTEMTIME time;
-	GetSystemTime(&time);
-	//TODO:better possibility for randomness???
-	double* randomHack = &max;
-	srand((unsigned)(time.wMilliseconds + randomHack));
-	double percentOfMaxValue = static_cast<double>(rand()) / RAND_MAX;
-    double random_num = min + percentOfMaxValue * diff;
-    return random_num;
+//compatibility method (pocket code for android)
+bool Interpreter::OnlyIntegerValues(double value1, double value2)
+{
+	int int1 = abs(static_cast<int>(value1));
+	int int2 = abs(static_cast<int>(value2));
+
+	value1 -= int1;
+	value2 -= int2;
+
+	if (value1 > 0.0 || value2 > 0.0)
+	{
+		return false;
+	}
+
+	return true;
 }
 
 double Interpreter::CalculateModulo(double dividend, double divisor)
