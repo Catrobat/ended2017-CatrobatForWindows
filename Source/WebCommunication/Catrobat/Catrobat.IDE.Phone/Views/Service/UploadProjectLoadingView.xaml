@@ -13,8 +13,9 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="False">
 
-  <!--LayoutRoot is the root grid where all page content is placed-->
-  <Grid x:Name="LayoutRoot" Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
@@ -25,7 +26,7 @@
       <StackPanel>
       <ProgressBar Name="ProgressBarProgress" IsIndeterminate="True"></ProgressBar>
       <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Resources.Main_UploadProjectLoadingMessage, 
-        Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextLargeStyle}"/>
+        Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
       </StackPanel>
     </Grid>
   </Grid>

@@ -15,12 +15,14 @@
     shell:SystemTray.IsVisible="False">
 
 
-  <Grid x:Name="LayoutRoot" Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
       <Image Source="{Binding Image.ImageSource}" Width="300" Height="300"></Image>
       <ProgressBar IsIndeterminate="True"></ProgressBar>
       <TextBlock Text="{Binding Resources.Editor_SavingImage, Source={StaticResource LocalizedStrings}}"
-                 TextAlignment="Center" Margin="0 15 0 0" Style="{StaticResource PhoneTextLargeStyle}"/>
+                 TextAlignment="Center" Margin="0 15 0 0" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
     </StackPanel>
   </Grid>
 </phone:PhoneApplicationPage>

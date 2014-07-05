@@ -58,6 +58,7 @@ private:
     double CalculateModulo(double dividend, double divisor);
     double CalculateCosinus(double degree);
     double RoundDoubleToInt(double value);
+	bool OnlyIntegerValues(double value1, double value2);
 
     CompassProvider* m_compassProvider;
 	InclinationProvider^ m_inclinationProvider;

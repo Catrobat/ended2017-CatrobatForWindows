@@ -192,6 +192,8 @@
     <Compile Include="Controls\Formulas\VariableButton.xaml.cs">
       <DependentUpon>VariableButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ReorderableListbox\ReorderableListBox.cs" />
+    <Compile Include="Controls\ReorderableListbox\ReorderableListBoxItem.cs" />
     <Compile Include="Converters\NamespaceTypeConverter.cs" />
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
@@ -231,8 +233,6 @@
     </Compile>
     <Compile Include="Controls\ReorderableListbox\NegativeValueConverter.cs" />
     <Compile Include="Controls\ReorderableListbox\PullDownToRefreshPanel.cs" />
-    <Compile Include="Controls\ReorderableListbox\ReorderListBox.cs" />
-    <Compile Include="Controls\ReorderableListbox\ReorderListBoxItem.cs" />
     <Compile Include="Controls\StatusIcons\ProcessIcon.xaml.cs">
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
@@ -487,10 +487,6 @@
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\Editor\Costumes\ChangeCostumeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -657,95 +653,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\dark\appbar.clear.reflect.horizontal.png" />
-    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\dark\appbar.redo.png" />
-    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\dark\appbar.undo.png" />
-    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\light\appbar.clear.reflect.horizontal.png" />
-    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\light\appbar.redo.png" />
-    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\light\appbar.undo.png" />
-    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\license.txt" />
-    <Content Include="Content\Images\Screenshot\NoScreenshotSquare.png" />
-    <Content Include="Content\Images\Share\skydrive.jpg" />
-    <Content Include="Content\Programs\Default\automatic_screenshot.png" />
-    <Content Include="Content\Programs\Default\Looks\28226cf909b0e5deb2d275b73a96fbec_rain.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Programs\Default\Looks\52fb8540d8d751880ab012e26c86e1f5_background.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Programs\Default\Looks\5c8b67f427443c1bb5c50a4aeb007949_sun.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Programs\Default\Looks\7fe260ebb6c78fa3f0d6afaffb5a7759_water.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Programs\Default\Looks\c96b5d3adc1d4b199fc76fc518deae86_cloud2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Programs\Default\Looks\cd8435e8bf34b6be6c0fdf700f03e01e_cat.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Programs\Default\Looks\e8b139ca83c443159b464c26d8483bae_cloud1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Resources\DesignTime\screenshot.png" />
-    <Content Include="Content\Tiles\FlipCycleTileLarge.png" />
-    <Content Include="Content\Tiles\FlipCycleTileMedium.png" />
-    <Content Include="Content\Tiles\FlipCycleTileSmall.png" />
-    <Content Include="Content\Tiles\IconicTileMediumLarge.png" />
-    <Content Include="Content\Tiles\IconicTileSmall.png" />
-    <Content Include="Content\Tiles\ApplicationIcon.png" />
-    <Content Include="fmodex_arm.dll" />
-    <Content Include="fmodex_x86.dll" />
-    <None Include="app.config" />
-    <Content Include="Content\Resources\SampleProjects\stick.catrobat" />
-    <Content Include="italic.spritefont" />
-    <None Include="Fonts\LiveSymbol.ttf" />
-    <None Include="packages.config" />
-    <None Include="Properties\AppManifest.xml" />
-    <None Include="Properties\WMAppManifest.xml">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\FileTypeAssociation\large-176x176.png" />
-    <Content Include="Content\FileTypeAssociation\medium-69x69.png" />
-    <Content Include="Content\FileTypeAssociation\small-33x33.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.add.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.back.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.basecircle.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.cancel.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.check.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.close.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.copy.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.delete.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.download.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.edit.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.favs.addto.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.favs.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.camera.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.email.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.search.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.settings.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.video.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.folder.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.home.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.minus.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.new.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.next.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.overflowdots.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.questionmark.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.refresh.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.save.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.share.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.stop.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.sync.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.transport.ff.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.transport.pause.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.transport.play.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.transport.rew.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\appbar.upload.rest.png" />
-    <Content Include="Content\Images\ApplicationBar\dark\DarkIcons.dll" />
     <Content Include="Content\Images\ApplicationBar\light\appbar.add.rest.png" />
     <Content Include="Content\Images\ApplicationBar\light\appbar.back.rest.png" />
     <Content Include="Content\Images\ApplicationBar\light\appbar.basecircle.rest.png" />
@@ -781,6 +688,98 @@
     <Content Include="Content\Images\ApplicationBar\light\appbar.transport.rew.rest.png" />
     <Content Include="Content\Images\ApplicationBar\light\appbar.upload.rest.png" />
     <Content Include="Content\Images\ApplicationBar\light\LightIcons.dll" />
+    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\dark\appbar.clear.reflect.horizontal.png" />
+    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\dark\appbar.redo.png" />
+    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\dark\appbar.undo.png" />
+    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\light\appbar.clear.reflect.horizontal.png" />
+    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\light\appbar.redo.png" />
+    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\light\appbar.undo.png" />
+    <Content Include="Content\Images\LicensedIcons\ModernUIIcons\license.txt" />
+    <Content Include="Content\Images\Screenshot\NoScreenshotSquare.png" />
+    <Content Include="Content\Images\Share\skydrive.jpg" />
+    <Content Include="Content\Programs\WhackAMole\automatic_screenshot.png" />
+    <Content Include="Content\Programs\WhackAMole\Looks\1D687270C999067F2DDFCB8CA59046E7_whack-a-mole-BG.png" />
+    <Content Include="Content\Programs\WhackAMole\Looks\4137DB0956BAA9780A087C874900B5EB_whack-a-mole-BG.png" />
+    <Content Include="Content\Programs\WhackAMole\Looks\4871A26C832F7C63CB7F11E84F41338D_mole.png" />
+    <Content Include="Content\Programs\WhackAMole\Looks\A44CC0D6B30B16AF796243A6D7BA8AC5_mole.png" />
+    <Content Include="Content\Programs\WhackAMole\Looks\D6E92825145EC9CA2BF9CF9ACC21D68A_mole.png" />
+    <Content Include="Content\Programs\WhackAMole\manual_screenshot.png" />
+    <Content Include="Content\Programs\WhackAMole\Sounds\060830B7BF0AE16166C15748387F9021_record.mp3" />
+    <Content Include="Content\Programs\WhackAMole\Sounds\0B12E691684C552746E9FC164BE4D592_record.mp3" />
+    <Content Include="Content\Programs\WhackAMole\Sounds\C006F161E41ACB98A9EB7B1E22405971_record.mp3" />
+    <Content Include="Content\Programs\WhackAMole\Sounds\C03622EC424461AB47259339AB71CF1C_record.mp3" />
+    <Content Include="Content\Resources\DesignTime\screenshot.png" />
+    <Content Include="Content\Tiles\ApplicationIcon.png" />
+    <Content Include="Content\Tiles\FileLarge.png" />
+    <Content Include="Content\Tiles\FileMedium.png" />
+    <Content Include="Content\Tiles\FileSmall.png" />
+    <Content Include="Content\Tiles\FlipCycleTileLarge.png" />
+    <Content Include="Content\Tiles\FlipCycleTileMedium.png" />
+    <Content Include="Content\Tiles\FlipCycleTileSmall.png" />
+    <Content Include="Content\Tiles\Lens.Screen-720p.png" />
+    <Content Include="Content\Tiles\Lens.Screen-WVGA.png" />
+    <Content Include="Content\Tiles\Lens.Screen-WXGA.png" />
+    <Content Include="Content\Tiles\LockScreenNotification.png" />
+    <Content Include="Content\Tiles\SplashScreenImage.Screen-720p.jpg" />
+    <Content Include="Content\Tiles\SplashScreenImage.Screen-WVGA.jpg" />
+    <Content Include="Content\Tiles\SplashScreenImage.Screen-WXGA.jpg" />
+    <Content Include="Content\Tiles\StoreIcon.png" />
+    <Content Include="Content\Tiles_old\FlipCycleTileLarge.png" />
+    <Content Include="Content\Tiles_old\FlipCycleTileMedium.png" />
+    <Content Include="Content\Tiles_old\FlipCycleTileSmall.png" />
+    <Content Include="Content\Tiles_old\IconicTileMediumLarge.png" />
+    <Content Include="Content\Tiles_old\IconicTileSmall.png" />
+    <Content Include="Content\Tiles_old\ApplicationIcon.png" />
+    <Content Include="fmodex_arm.dll" />
+    <Content Include="fmodex_x86.dll" />
+    <None Include="app.config" />
+    <Content Include="italic.spritefont" />
+    <None Include="Fonts\LiveSymbol.ttf" />
+    <None Include="packages.config" />
+    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Tiles_old\FileTypeAssociation\large-176x176.png" />
+    <Content Include="Content\Tiles_old\FileTypeAssociation\medium-69x69.png" />
+    <Content Include="Content\Tiles_old\FileTypeAssociation\small-33x33.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.add.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.back.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.basecircle.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.cancel.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.check.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.close.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.copy.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.delete.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.download.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.edit.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.favs.addto.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.favs.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.camera.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.email.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.search.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.settings.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.video.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.folder.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.home.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.minus.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.new.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.next.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.overflowdots.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.questionmark.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.refresh.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.save.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.share.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.stop.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.sync.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.transport.ff.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.transport.pause.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.transport.play.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.transport.rew.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.upload.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\DarkIcons.dll" />
     <Content Include="Content\Images\Application\ApplicationIcon.png" />
     <Content Include="Content\Images\Application\Background.png" />
     <Content Include="Content\Images\Application\Indicators\check.png" />
@@ -836,6 +835,9 @@
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Platform.WP8">
       <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\wp8\GalaSoft.MvvmLight.Platform.WP8.dll</HintPath>
+    </Reference>
+    <Reference Include="JeffWilcox.PhoneThemeManager">
+      <HintPath>..\packages\PhoneThemeManager.2.0\lib\windowsphone8\JeffWilcox.PhoneThemeManager.dll</HintPath>
     </Reference>
     <Reference Include="LiveSDKAsync.WP8">
       <HintPath>..\packages\AsyncLiveConnectSDK.1.0.5\lib\wp8\LiveSDKAsync.WP8.dll</HintPath>
@@ -896,7 +898,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Libs\" />
-    <Folder Include="Content\Programs\Default\Sounds\" />
+    <Folder Include="Content\Resources\SampleProjects\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

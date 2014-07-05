@@ -66,9 +66,10 @@ namespace Catrobat.IDE.Core.UI
                 AccentColor1 = new PortableSolidColorBrush(255, 128, 0, 128),
                 AccentColor2 = new PortableSolidColorBrush(255, 0, 128, 0),
                 AccentColor3 = new PortableSolidColorBrush(255, 155, 165, 0),
-                AppBarColor = new PortableSolidColorBrush(255, 0xEE, 0x76, 0x21)
+                AppBarBackgroundBrush = new PortableSolidColorBrush("#FF333333"),
+                AppBarButtonBrush = new PortableSolidColorBrush("#FFFFFFFF"),
+                AppBarButtonClickBrush = new PortableSolidColorBrush("#FFFFFFFF"),
             };
-
 
             var theme2 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_blue.png",
                                    "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/MainViewPanorama_cats_blue_small.png")
@@ -76,7 +77,7 @@ namespace Catrobat.IDE.Core.UI
                 AccentColor1 = new PortableSolidColorBrush(255, 128, 0, 128),
                 AccentColor2 = new PortableSolidColorBrush(255, 0, 128, 0),
                 AccentColor3 = new PortableSolidColorBrush(255, 155, 165, 0),
-                AppBarColor = new PortableSolidColorBrush(255, 50, 50, 50)
+                AppBarBackgroundBrush = new PortableSolidColorBrush(255, 50, 50, 50)
             };
 
             var theme3 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_pink.png",
@@ -85,7 +86,7 @@ namespace Catrobat.IDE.Core.UI
                 AccentColor1 = new PortableSolidColorBrush(255, 128, 0, 128),
                 AccentColor2 = new PortableSolidColorBrush(255, 0, 128, 0),
                 AccentColor3 = new PortableSolidColorBrush(255, 155, 165, 0),
-                AppBarColor = new PortableSolidColorBrush(255, 50, 50, 50)
+                AppBarBackgroundBrush = new PortableSolidColorBrush(255, 50, 50, 50)
             };
 
 

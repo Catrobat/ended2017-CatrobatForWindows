@@ -17,8 +17,9 @@
     DataContext="{Binding ChangeCostumeViewModel, Source={StaticResource Locator}}"
     shell:SystemTray.IsVisible="False">
 
-  <!--LayoutRoot is the root grid where all page content is placed-->
-  <Grid x:Name="LayoutRoot" Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
@@ -26,32 +27,44 @@
     </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleChangeCostumeName, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock Margin="0" 
+                 Text="{Binding Resources.Editor_TitleChangeCostumeName, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
-      <TextBlock Margin="0" Text="{Binding Resources.Editor_CostumeName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
-      <TextBox Margin="-10 0 10 0" Name="TextBoxCostumeName" Text="{Binding CostumeName, Mode=TwoWay}" HorizontalAlignment="Stretch" TextChanged="TextBoxCostumeName_OnTextChanged" />
+      <TextBlock Margin="0" 
+                 Text="{Binding Resources.Editor_CostumeName, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Style="{Binding StaticTheme.TextSmallStyle,
+                 Source={StaticResource ThemeChooser}}" />
+      <TextBox Margin="-10 0 10 0" Name="TextBoxCostumeName" 
+               Text="{Binding CostumeName, Mode=TwoWay}" 
+               HorizontalAlignment="Stretch" 
+               TextChanged="TextBoxCostumeName_OnTextChanged" />
     </StackPanel>
     <Button Grid.Row="2" Margin="0 0 10 10" 
             Command="{Binding EditCostumeCommand}" 
             VerticalAlignment="Top">
       <Button.Template>
         <ControlTemplate>
-          <Grid Background="{Binding Path=SelectedTheme.AccentColor3.NativeBrush, Source={StaticResource ThemeChooser}}" 
-                    HorizontalAlignment="Stretch" 
-                    Height="140">
+          <Grid Background="{Binding Path=SelectedTheme.AccentColor3.NativeBrush, 
+                Source={StaticResource ThemeChooser}}" 
+                HorizontalAlignment="Stretch" 
+                Height="140">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="Auto"/>
               <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <misc:EditImage ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
             <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" 
-                           HorizontalAlignment="Left" 
-                           Text="{Binding Resources.Editor_ImageEditingProgram, Source={StaticResource LocalizedStrings}}" 
-                           TextAlignment="Left"
-                           TextWrapping="Wrap"
-                           Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                       HorizontalAlignment="Left" 
+                       Text="{Binding Resources.Editor_ImageEditingProgram, Source={StaticResource LocalizedStrings}}" 
+                       TextAlignment="Left"
+                       TextWrapping="Wrap"
+                       Style="{Binding StaticTheme.TextExtraLargeStyle.NativeStyle, 
+                       Source={StaticResource ThemeChooser}}"/>
           </Grid>
         </ControlTemplate>
       </Button.Template>
@@ -60,7 +73,9 @@
     <i:Interaction.Triggers>
       <abu:StateChangedTrigger State="false">
         <abu:SwitchAppBarAction>
-          <abu:AppBar Id="0">
+          <abu:AppBar Id="0" 
+            BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, 
+            Source={StaticResource ThemeChooser}}">
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.save.rest.png" 
                               Text="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding SaveCommand}" />

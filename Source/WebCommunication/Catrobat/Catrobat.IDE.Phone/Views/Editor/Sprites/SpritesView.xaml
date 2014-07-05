@@ -18,7 +18,9 @@
   shell:SystemTray.IsVisible="False"
   DataContext="{Binding SpritesViewModel, Source={StaticResource Locator}}">
 
-  <Grid x:Name="LayoutRoot">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
@@ -27,93 +29,38 @@
       </Grid.RowDefinitions>
 
       <Grid Margin="10 5 10 25">
-        <TextBlock Text="{Binding CurrentProject.Name}" FontSize="36">
-
+        <TextBlock Text="{Binding CurrentProject.Name}" 
+                   Style="{Binding StaticTheme.TitleFontStyleLarge.NativeStyle, Source={StaticResource ThemeChooser}}">
         </TextBlock>
       </Grid>
 
       <!--Pivot item sprites-->
-      <reorderableListbox:ReorderListBox
-          x:Name="ReorderListBoxSprites"
-          Grid.Row="1"
-          Margin="10 0"
-          SelectionMode="Single"
-          VerticalAlignment="Stretch"
-          IsReorderEnabled="True"
-          ItemsSource="{Binding Sprites}"
-          SelectedItem="{Binding SelectedSprite, Mode=TwoWay}"
-          ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleNormal}"
-          Foreground="White" >
-        <reorderableListbox:ReorderListBox.ItemTemplate>
-          <DataTemplate>
-            <Grid Background="{Binding StaticTheme.ObjectsBrush.NativeBrush, Source={StaticResource ThemeChooser}}" Margin="0 5 0 5" Height="90">
-              <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-              </Grid.RowDefinitions>
-              <!--<i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Tap">
-                      <command:EventToCommand 
-                        Command="{Binding SpriteEditorViewModel.SelectedSpriteChangedCommand, 
-                        Source={StaticResource Locator}}"
-                        CommandParameter="{Binding}" />
-                    </i:EventTrigger>
-                  </i:Interaction.Triggers>-->
 
-              <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="3*" />
-                  <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Column="0"  Orientation="Horizontal" VerticalAlignment="Center">
-                  <TextBlock VerticalAlignment="Center" FontSize="28" Margin="5 5 5 5" Text="{Binding Name}" />
-
-                  <StackPanel Margin="5 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock FontSize="16" Margin="0" Text="{Binding ActionsCount}" />
-                    <TextBlock FontSize="16" Margin="0" Text="/" />
-                    <TextBlock FontSize="16" Margin="0" Text="{Binding Costumes.Count}" />
-                    <TextBlock FontSize="16" Margin="0" Text="/" />
-                    <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Count}" />
-                  </StackPanel>
-                </StackPanel>
-              </Grid>
-              <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                  <RowDefinition Height="Auto"/>
-                  <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="1" Margin="0 0 0 5" HorizontalAlignment="Right" >
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                  </Grid.ColumnDefinitions>
-                  <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes[0].Image.ImageSource}" />
-                  <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes[1].Image.ImageSource}" />
-                  <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes[2].Image.ImageSource}" />
-                </Grid>
-
-              </Grid>
-            </Grid>
-          </DataTemplate>
-        </reorderableListbox:ReorderListBox.ItemTemplate>
-      </reorderableListbox:ReorderListBox>
+      <reorderableListbox:ReorderableListBox 
+                x:Name="ReorderableListBoxSprites"
+                Grid.Row="1"
+                Margin="10"
+                SelectionMode="Single"
+                VerticalAlignment="Stretch"
+                IsReorderEnabled="True"
+                ItemsSourcePerformance="{Binding Sprites}"
+                SelectedItem="{Binding SelectedSprite, Mode=TwoWay}"
+                ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
+                Foreground="White"
+                ItemTemplate="{StaticResource SpritesViewTemplate}">
+      </reorderableListbox:ReorderableListBox>
 
       <TextBlock Grid.Row="1"
               Text ="{Binding Resources.Editor_ClickPlusToAddSprite, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsSpritesEmpty, Converter={StaticResource BoolVisibilityConverter}}"
-              Style="{StaticResource PhoneTextLargeStyle}"
+              Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
               TextWrapping="Wrap"
               TextAlignment="Center"
               VerticalAlignment="Center"
               HorizontalAlignment="Center" />
 
-      
-    <appBar:EditorAppBar Grid.Row="2"
+
+      <appBar:EditorAppBar Grid.Row="2"
       VerticalAlignment="Bottom"
       TargetType="Object"
       ClearSelectionCommand="{Binding ClearObjectsSelectionCommand}"

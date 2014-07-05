@@ -16,8 +16,9 @@
     shell:SystemTray.IsVisible="False" Loaded="PhoneApplicationPage_Loaded"
     DataContext="{Binding MainViewModel.SelectedOnlineProject, Source={StaticResource Locator}}">
 
-  <!--LayoutRoot is the root grid where all page content is placed-->
-  <Grid x:Name="LayoutRoot" Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
@@ -25,8 +26,8 @@
 
     <!--TitlePanel contains the name of the application and page title-->
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-      <TextBlock x:Name="ApplicationTitle" Text="{Binding Author}" Style="{StaticResource PhoneTextNormalStyle}"/>
-      <TextBlock x:Name="PageTitle" Text="{Binding ProjectName}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+      <TextBlock x:Name="ApplicationTitle" Text="{Binding Author}" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
+      <TextBlock x:Name="PageTitle" Text="{Binding ProjectName}" Margin="9,-7,0,0" Style="{Binding StaticTheme.TextTitle1Style, Source={StaticResource ThemeChooser}}"/>
     </StackPanel>
 
     <!--ContentPanel - place additional content here-->
@@ -56,7 +57,7 @@
     <i:Interaction.Triggers>
       <abu:StateChangedTrigger State="false">
         <abu:SwitchAppBarAction>
-          <abu:AppBar Id="0">
+          <abu:AppBar Id="0" BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, Source={StaticResource ThemeChooser}}">
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.download.rest.png" 
                               Text="{Binding Resources.Main_OnlineProjectDownloadButton, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding OnlineProjectViewModel.DownloadCommand, Source={StaticResource Locator}}"

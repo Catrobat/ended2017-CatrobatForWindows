@@ -21,5 +21,11 @@ namespace Catrobat.IDE.Phone.Services
             var b = (SolidColorBrush)localSolidColorBrush;
             return new PortableSolidColorBrush { A = b.Color.A, R = b.Color.R, G = b.Color.G, B = b.Color.B };
         }
+
+
+        public object ConvertToLocalSolidColor(PortableSolidColorBrush b)
+        {
+            return new Color {A = b.A, R = b.R, G = b.G, B = b.B};
+        }
     }
 }

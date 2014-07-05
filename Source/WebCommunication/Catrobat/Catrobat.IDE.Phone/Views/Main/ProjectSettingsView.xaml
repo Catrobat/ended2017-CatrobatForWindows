@@ -18,8 +18,9 @@
   shell:SystemTray.IsVisible="False"
   DataContext="{Binding ProjectSettingsViewModel, Source={StaticResource Locator}}">
 
-  <Grid x:Name="LayoutRoot"
-          Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
@@ -28,19 +29,19 @@
 
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
       <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleProjectSettings, 
-               Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+               Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
       <TextBlock Margin="0" Text="{Binding Resources.Editor_ProjectName, 
-               Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+               Source={StaticResource LocalizedStrings}}" Style="{Binding StaticTheme.TextSmallStyle, Source={StaticResource ThemeChooser}}" />
       <TextBox Margin="-10 0 10 0" Name="TextBoxProjectName" HorizontalAlignment="Stretch" 
                Text="{Binding ProjectName, Mode=TwoWay}" TextChanged="TextBoxProjectName_OnTextChanged" />
     </StackPanel>
     
     <StackPanel Grid.Row="2" Margin="10 0 0 15">
       <TextBlock Margin="0" Text="{Binding Resources.Editor_Description, Source={StaticResource LocalizedStrings}}" 
-               Style="{StaticResource PhoneTextSmallStyle}" />
+               Style="{Binding StaticTheme.TextSmallStyle, Source={StaticResource ThemeChooser}}" />
       <TextBox Margin="-10 0 10 0" Name="TextBoxProjectDescription" Height="200" TextWrapping="Wrap" 
                HorizontalAlignment="Stretch" Text="{Binding ProjectDescription, Mode=TwoWay}" 
                TextChanged="TextBoxProjectDescription_OnTextChanged" />
@@ -49,7 +50,7 @@
     <i:Interaction.Triggers>
       <abu:StateChangedTrigger State="false">
         <abu:SwitchAppBarAction>
-          <abu:AppBar Id="0">
+          <abu:AppBar Id="0" BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, Source={StaticResource ThemeChooser}}">
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.save.rest.png" 
                               Text="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding SaveCommand}" />

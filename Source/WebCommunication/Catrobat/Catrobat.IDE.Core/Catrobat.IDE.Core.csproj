@@ -107,6 +107,7 @@
     <Compile Include="Models\IBrick.cs" />
     <Compile Include="Models\ITestEquatable.cs" />
     <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\ProjectTemplateEntry.cs" />
     <Compile Include="Models\UploadHeader.cs" />
     <Compile Include="Resources\ApplicationResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -118,6 +119,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Common\ProjectGeneratorWhackAMole.cs" />
+    <Compile Include="UI\PortableUI\PortableFontStyle.cs" />
     <Compile Include="ViewModels\Editor\Formula\FormulaEvaluationResult.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\AnimatePropertyBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\BroadcastBrick.cs" />
@@ -375,7 +378,6 @@
     <Compile Include="INativeApp.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Sprite.cs" />
-    <Compile Include="Services\Common\ProjectGeneratorDefault.cs" />
     <Compile Include="Services\IDispatcherService.cs" />
     <Compile Include="Services\IProjectGenerator.cs" />
     <Compile Include="Services\IShareService.cs" />

@@ -15,8 +15,9 @@
     shell:SystemTray.IsVisible="False"
     DataContext="{Binding ScriptBrickCategoryViewModel, Source={StaticResource Locator}}">
 
-  <!--LayoutRoot is the root grid where all page content is placed-->
-  <Grid x:Name="LayoutRoot" Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
@@ -25,7 +26,7 @@
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 0 20">
       <TextBlock x:Name="Headline" Margin="0" 
                  Text="{Binding Resources.Editor_TitleChooseCategory, Source={StaticResource LocalizedStrings}}" 
-                 Style="{StaticResource PhoneTextNormalStyle}" />
+                 Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 0 10 15">

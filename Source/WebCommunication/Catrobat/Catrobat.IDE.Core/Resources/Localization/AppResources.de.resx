@@ -814,9 +814,6 @@
   <data name="Editor_AppbarAdd" xml:space="preserve">
     <value>Hinzufügen</value>
   </data>
-  <data name="Main_UseCurrentProjectAsTemplate" xml:space="preserve">
-    <value>Ausgewähltes Programm ({0}) als Vorlage verwenden?</value>
-  </data>
   <data name="Formula_Function_Sqrt" xml:space="preserve">
     <value>wurzel</value>
   </data>
@@ -1113,5 +1110,32 @@
   </data>
   <data name="FormulaKeyboard_ParameterSeparator" xml:space="preserve">
     <value>,</value>
+  </data>
+  <data name="Main_UseTemplateText" xml:space="preserve">
+    <value>Eines der unten aufgelisteten projekte als vorlage verwenden.</value>
+  </data>
+  <data name="Main_CreateEmptyProject" xml:space="preserve">
+    <value>Leeres Projekt</value>
+  </data>
+  <data name="Main_CreateProjectBasedOnCurrentProject" xml:space="preserve">
+    <value>Verwende aktuelles Projekt ({0}) als Vorlage</value>
+  </data>
+  <data name="Main_CreateProjectBasedOnTemplate" xml:space="preserve">
+    <value>Verwende eine der folgenden Vorlagen</value>
+  </data>
+  <data name="Main_SelectProjectCreationOption" xml:space="preserve">
+    <value>How to create the new project?</value>
+  </data>
+  <data name="Main_WhackAMoleName" xml:space="preserve">
+    <value>Schlag den Maulwurf</value>
+  </data>
+  <data name="WhackAMole_DizzyMole" xml:space="preserve">
+    <value>Benommener Maulwurf</value>
+  </data>
+  <data name="WhackAMole_Mole" xml:space="preserve">
+    <value>Maulwurf</value>
+  </data>
+  <data name="WhackAMole_MovingMole" xml:space="preserve">
+    <value>Bewegender Maulwurf</value>
   </data>
 </root>

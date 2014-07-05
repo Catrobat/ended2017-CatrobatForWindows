@@ -16,8 +16,9 @@
     shell:SystemTray.IsVisible="False"
     DataContext="{Binding UploadProjectRegisterViewModel, Source={StaticResource Locator}}">
 
-  <!--LayoutRoot is the root grid where all page content is placed-->
-  <Grid x:Name="LayoutRoot" Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
@@ -25,18 +26,18 @@
 
     <!--TitlePanel contains the name of the application and page title-->
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-      <TextBlock x:Name="ApplicationTitle" Text="{Binding Resources.Main_TitleUploadProject, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
-      <TextBlock x:Name="PageTitle" Text="{Binding Resources.Main_TitleUploadProjectRegister, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+      <TextBlock x:Name="ApplicationTitle" Text="{Binding Resources.Main_TitleUploadProject, Source={StaticResource LocalizedStrings}}" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
+      <TextBlock x:Name="PageTitle" Text="{Binding Resources.Main_TitleUploadProjectRegister, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{Binding StaticTheme.TextTitle1Style, Source={StaticResource ThemeChooser}}"/>
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="12 0 12 15">
-      <TextBlock Margin="0" Text="{Binding Resources.Main_UploadProjectUsername, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Main_UploadProjectUsername, Source={StaticResource LocalizedStrings}}" Style="{Binding StaticTheme.TextSmallStyle, Source={StaticResource ThemeChooser}}" />
       <TextBox Margin="-10 0 10 0" HorizontalAlignment="Stretch" Text="{Binding Username, Mode=TwoWay}" TextChanged="TextBox_TextChanged" />
 
-      <TextBlock Margin="0" Text="{Binding Resources.Main_UploadProjectPassword, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Main_UploadProjectPassword, Source={StaticResource LocalizedStrings}}" Style="{Binding StaticTheme.TextSmallStyle, Source={StaticResource ThemeChooser}}" />
       <PasswordBox Margin="-10 0 10 0" HorizontalAlignment="Stretch" Password="{Binding Password, Mode=TwoWay}" PasswordChanged="PasswordBox_PasswordChanged" />
 
-      <TextBlock Margin="0" Text="{Binding Resources.Main_UploadProjectEmail, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Main_UploadProjectEmail, Source={StaticResource LocalizedStrings}}" Style="{Binding StaticTheme.TextSmallStyle, Source={StaticResource ThemeChooser}}" />
       <TextBox Margin="-10 0 10 0" HorizontalAlignment="Stretch" Text="{Binding Email, Mode=TwoWay}" TextChanged="TextBox_TextChanged" />
     </StackPanel>
   </Grid>
@@ -44,7 +45,7 @@
   <i:Interaction.Triggers>
     <abu:StateChangedTrigger State="false">
       <abu:SwitchAppBarAction>
-        <abu:AppBar Id="0">
+        <abu:AppBar Id="0" BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, Source={StaticResource ThemeChooser}}">
           <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.check.rest.png" 
                               Text="{Binding Resources.Main_ButtonRegister, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding RegisterCommand}" />
