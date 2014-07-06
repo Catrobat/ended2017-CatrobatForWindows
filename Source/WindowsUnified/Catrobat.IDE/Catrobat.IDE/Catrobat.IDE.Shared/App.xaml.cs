@@ -7,6 +7,8 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Provider;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -133,5 +135,67 @@ namespace Catrobat.IDE
             // TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
+
+
+
+
+
+
+        // TODO: remove sample code below
+
+        protected override void OnCachedFileUpdaterActivated(CachedFileUpdaterActivatedEventArgs args)
+        {
+            args.CachedFileUpdaterUI.FileUpdateRequested
+                 += OnCachedFileUpdaterUIFileUpdateRequested;
+            base.OnCachedFileUpdaterActivated(args);
+
+            //do not forget this
+            Window.Current.Activate();
+
+            var msgDialog = new MessageDialog("file changed");
+
+            //OK Button
+            var okBtn = new UICommand("OK");
+            //okBtn.Invoked = OkBtnClick;
+            msgDialog.Commands.Add(okBtn);
+
+            //Cancel Button
+            UICommand cancelBtn = new UICommand("Cancel");
+            //cancelBtn.Invoked = CancelBtnClick;
+            msgDialog.Commands.Add(cancelBtn);
+
+            //Show message
+            msgDialog.ShowAsync();
+        }
+
+        void OnCachedFileUpdaterUIFileUpdateRequested(CachedFileUpdaterUI sender,
+                FileUpdateRequestedEventArgs args)
+        {
+            var text = args.Request.File.Name;
+
+
+  
+
+
+
+
+
+            // var deferral = args.Request.GetDeferral();
+ 
+            // var theContentId = args.Request.ContentId;
+            // var theTargetFile = args.Request.File;
+ 
+            // //Do something to the file
+ 
+            // //If the local file have to be updated, call do this :
+            // //StorageFile upToDateFile=null;
+            // //fill upToDateFile with the correct data
+            // //args.Request.UpdateLocalFile(upToDateFile);
+
+            //args.Request.Status = FileUpdateStatus.Complete;
+            // deferral.Complete();
+        }
+
     }
 }
