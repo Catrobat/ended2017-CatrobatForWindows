@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<program>
+  <header>
+    <applicationBuildName/>
+    <applicationBuildNumber>0</applicationBuildNumber>
+    <applicationName>Pocket Code</applicationName>
+    <applicationVersion>0.9.4</applicationVersion>
+    <catrobatLanguageVersion>0.91</catrobatLanguageVersion>
+    <dateTimeUpload/>
+    <description/>
+    <deviceName>GT-S6500</deviceName>
+    <mediaLicense>http://developer.catrobat.org/ccbysa_v3</mediaLicense>
+    <platform>Android</platform>
+    <platformVersion>10</platformVersion>
+    <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
+    <programName>Timer</programName>
+    <remixOf/>
+    <screenHeight>800</screenHeight>
+    <screenWidth>480</screenWidth>
+    <tags/>
+    <url>http://pocketcode.org/details/1003</url>
+    <userHandle>lucius1202</userHandle>
+  </header>
+  <objectList>
+    <object>
+      <costumeDataList>
+        <costumeData>
+          <fileName>3F3C722FCCBBD45ACF1211E3155FD5C6_background</fileName>
+          <name>background</name>
+        </costumeData>
+      </costumeDataList>
+      <name>Background</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setLookBrick>
+              <costumeData reference="../../../../../costumeDataList/costumeData" />
+            </setLookBrick>
+          </brickList>
+        </startScript>
+      </scriptList>
+      <soundList />
+    </object>
+    <object>
+      <costumeDataList>
+        <costumeData>
+          <fileName>C3F37BB1E4B17CCC6D3FA0578DDBC164_normalCat</fileName>
+          <name>normalCat</name>
+        </costumeData>
+        <costumeData>
+          <fileName>A5E10E13DDC4ED4B188DA2A5D0B61CF9_banzaiCat</fileName>
+          <name>banzaiCat</name>
+        </costumeData>
+        <costumeData>
+          <fileName>E64E017A63AFB9EC687B76E02376B1D9_cheshireCat</fileName>
+          <name>cheshireCat</name>
+        </costumeData>
+      </costumeDataList>
+      <name>Catroid</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setLookBrick>
+              <costumeData reference="../../../../../costumeDataList/costumeData" />
+            </setLookBrick>
+          </brickList>
+        </startScript>
+        <whenScript>
+          <brickList>
+            <setLookBrick>
+              <costumeData reference="../../../../../costumeDataList/costumeData[2]" />
+            </setLookBrick>
+            <waitBrick>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>500</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setLookBrick>
+              <costumeData reference="../../../../../costumeDataList/costumeData[3]" />
+            </setLookBrick>
+            <waitBrick>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>500</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setLookBrick>
+              <costumeData reference="../../../../../costumeDataList/costumeData" />
+            </setLookBrick>
+          </brickList>
+          <action>Tapped</action>
+        </whenScript>
+      </scriptList>
+      <soundList />
+    </object>
+  </objectList>
+  <variables>
+    <objectVariableList>
+    </objectVariableList>
+    <programVariableList>
+    </programVariableList>
+  </variables>
+</program>

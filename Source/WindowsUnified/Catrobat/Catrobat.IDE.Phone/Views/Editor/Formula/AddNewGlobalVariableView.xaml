@@ -1,0 +1,61 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Catrobat.IDE.Phone.Views.Editor.Formula.AddNewGlobalVariableView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:abu="clr-namespace:AppBarUtils;assembly=AppBarUtils"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False"
+    DataContext="{Binding AddNewGlobalVariableViewModel, Source={StaticResource Locator}}">
+
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
+    <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+          <TextBlock Text="{Binding Resources.Editor_TitleChooseGlobalVariableName, Source={StaticResource LocalizedStrings}}" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+          <StackPanel Margin="10,0,0,15">
+            <TextBlock Margin="0 10 0 10" Text="{Binding Resources.Editor_VariableName, 
+                  Source={StaticResource LocalizedStrings}}" 
+                   Style="{Binding StaticTheme.TextSmallStyle, Source={StaticResource ThemeChooser}}" />
+            <TextBox Margin="-10 0 10 0" Name="TextBoxVariableName" Text="{Binding UserVariableName, Mode=TwoWay}" 
+                   HorizontalAlignment="Stretch" 
+                   TextChanged="TextBoxVariableName_OnTextChanged" />
+          </StackPanel>
+      </Grid>
+
+    <i:Interaction.Triggers>
+      <abu:StateChangedTrigger State="false">
+        <abu:SwitchAppBarAction>
+          <abu:AppBar Id="0" BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, Source={StaticResource ThemeChooser}}">
+            <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.save.rest.png" 
+                              Text="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding SaveCommand}" />
+            <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" 
+                              Text="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding CancelCommand}"/>
+          </abu:AppBar>
+        </abu:SwitchAppBarAction>
+      </abu:StateChangedTrigger>
+    </i:Interaction.Triggers>
+      
+  </Grid>
+
+</phone:PhoneApplicationPage>
