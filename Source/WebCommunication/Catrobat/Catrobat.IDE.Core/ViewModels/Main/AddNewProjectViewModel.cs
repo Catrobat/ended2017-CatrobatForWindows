@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Common;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -26,7 +31,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public string TextCopyCurrentProjectAsTemplate
         {
-            get { return String.Format(AppResources.Main_UseCurrentProjectAsTemplate, CurrentProject.Name); }
+            get { return String.Format(AppResources.Main_CreateProjectBasedOnCurrentProject, CurrentProject.Name); }
         }
 
         public string ProjectName
@@ -44,13 +49,73 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        public bool CopyCurrentProjectAsTemplate
+        private ProjectTemplateEntry _selectedTemplateOption;
+        public ProjectTemplateEntry SelectedTemplateOption
         {
-            get { return _copyCurrentProjectAsTemplate; }
+            get { return _selectedTemplateOption; }
             set
             {
-                _copyCurrentProjectAsTemplate = value;
-                RaisePropertyChanged(() => CopyCurrentProjectAsTemplate);
+                _selectedTemplateOption = value;
+                RaisePropertyChanged(()=>SelectedTemplateOption);
+            }
+        }
+
+        private ObservableCollection<ProjectTemplateEntry> _templateOptions;
+        public ObservableCollection<ProjectTemplateEntry> TemplateOptions
+        {
+            get
+            {
+                if (_templateOptions != null) return _templateOptions;
+
+
+                var projectGenerators = ServiceLocator.CreateImplementations<IProjectGenerator>();
+                var availableTemplates = projectGenerators.Select(projectGenerator => 
+                    new ProjectTemplateEntry(projectGenerator)).ToList();
+
+                availableTemplates.Sort();
+                _templateOptions = 
+                    new ObservableCollection<ProjectTemplateEntry>(availableTemplates);
+
+                if (_templateOptions != null) 
+                    SelectedTemplateOption = _templateOptions[0];
+
+                return _templateOptions;
+            }
+        }
+
+        private bool _createEmptyProject;
+        public bool CreateEmptyProject
+        {
+            get { return _createEmptyProject; }
+
+            set
+            {
+                _createEmptyProject = value;
+                RaisePropertyChanged(()=>CreateEmptyProject);
+            }
+        }
+
+        private bool _createCopyOfCurrentProject;
+        public bool CreateCopyOfCurrentProject
+        {
+            get { return _createCopyOfCurrentProject; }
+
+            set
+            {
+                _createCopyOfCurrentProject = value;
+                RaisePropertyChanged(() => CreateCopyOfCurrentProject);
+            }
+        }
+
+        private bool _createTemplateProject;
+        public bool CreateTemplateProject
+        {
+            get { return _createTemplateProject; }
+
+            set
+            {
+                _createTemplateProject = value;
+                RaisePropertyChanged(() => CreateTemplateProject);
             }
         }
 
@@ -79,9 +144,19 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             await CurrentProject.Save();
 
-            CurrentProject = CopyCurrentProjectAsTemplate ?
-                await CatrobatContext.CopyProject(CurrentProject.Name, _projectName) :
-                await CatrobatContext.CreateEmptyProject(_projectName);
+            if (CreateEmptyProject)
+            {
+                CurrentProject = await CatrobatContext.CreateEmptyProject(_projectName);
+            }
+            else if (CreateCopyOfCurrentProject)
+            {
+                await CurrentProject.Save();
+                CurrentProject = await CatrobatContext.CopyProject(CurrentProject.Name, _projectName);
+            }
+            else if (CreateTemplateProject)
+            {
+                CurrentProject = await SelectedTemplateOption.ProjectGenerator.GenerateProject(ProjectName, true);
+            }
 
             if (CurrentProject != null)
             {
@@ -118,6 +193,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public AddNewProjectViewModel()
         {
+            CreateEmptyProject = true;
+
             // Commands
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
@@ -129,7 +206,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         public void ResetViewModel()
         {
             ProjectName = "";
-            CopyCurrentProjectAsTemplate = false;
+            CreateEmptyProject = true;
+            CreateCopyOfCurrentProject = false;
+            CreateTemplateProject = false;
         }
     }
 }

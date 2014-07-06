@@ -874,9 +874,6 @@
   <data name="Editor_AppbarAdd" xml:space="preserve">
     <value>add</value>
   </data>
-  <data name="Main_UseCurrentProjectAsTemplate" xml:space="preserve">
-    <value>Use current program ({0}) as template?</value>
-  </data>
   <data name="Editor_PreparingProject" xml:space="preserve">
     <value>preparing program</value>
   </data>
@@ -1113,5 +1110,32 @@
   </data>
   <data name="FormulaKeyboard_ParameterSeparator" xml:space="preserve">
     <value>;</value>
+  </data>
+  <data name="Main_UseTemplateText" xml:space="preserve">
+    <value>Use the selected project below as a template for the new project.</value>
+  </data>
+  <data name="Main_CreateEmptyProject" xml:space="preserve">
+    <value>Empty project</value>
+  </data>
+  <data name="Main_CreateProjectBasedOnCurrentProject" xml:space="preserve">
+    <value>Use current project ({0}) as a atemplate</value>
+  </data>
+  <data name="Main_CreateProjectBasedOnTemplate" xml:space="preserve">
+    <value>Use template below</value>
+  </data>
+  <data name="Main_SelectProjectCreationOption" xml:space="preserve">
+    <value>Wie soll das neue Projekt erstellt werden?</value>
+  </data>
+  <data name="Main_WhackAMoleName" xml:space="preserve">
+    <value>Whack a mole</value>
+  </data>
+  <data name="WhackAMole_DizzyMole" xml:space="preserve">
+    <value>dizzy mole</value>
+  </data>
+  <data name="WhackAMole_Mole" xml:space="preserve">
+    <value>mole</value>
+  </data>
+  <data name="WhackAMole_MovingMole" xml:space="preserve">
+    <value>moving mole</value>
   </data>
 </root>

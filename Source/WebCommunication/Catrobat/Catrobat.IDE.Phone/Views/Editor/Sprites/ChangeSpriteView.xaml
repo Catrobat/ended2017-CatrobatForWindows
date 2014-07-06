@@ -16,26 +16,27 @@
     DataContext="{Binding ChangeSpriteViewModel, Source={StaticResource Locator}}"
     shell:SystemTray.IsVisible="False">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleChangeSpriteName, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleChangeSpriteName, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
     </StackPanel>
       
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
-      <TextBlock Margin="0" Text="{Binding Resources.Editor_SpriteName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_SpriteName, Source={StaticResource LocalizedStrings}}" Style="{Binding StaticTheme.TextSmallStyle, Source={StaticResource ThemeChooser}}" />
       <TextBox Margin="-10 0 10 0" Name="TextBoxSpriteName" Text="{Binding SpriteName, Mode=TwoWay}" HorizontalAlignment="Stretch" TextChanged="TextBoxSpriteName_OnTextChanged" />
     </StackPanel>
 
     <i:Interaction.Triggers>
       <abu:StateChangedTrigger State="false">
         <abu:SwitchAppBarAction>
-          <abu:AppBar Id="0">
+          <abu:AppBar Id="0" BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, Source={StaticResource ThemeChooser}}">
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.save.rest.png" 
                               Text="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding SaveCommand}" />

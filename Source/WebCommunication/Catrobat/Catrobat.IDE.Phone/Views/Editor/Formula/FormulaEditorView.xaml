@@ -19,7 +19,9 @@
   DataContext="{Binding FormulaEditorViewModel, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="False" >
 
-  <Grid x:Name="LayoutRoot" Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="*" />
       <RowDefinition Height="360" />
@@ -40,7 +42,7 @@
     <TextBlock Grid.Row="0"
         Text="{Binding Resources.Editor_TypeSomething, Source={StaticResource LocalizedStrings}}"
         Visibility="{Binding IsTokensEmpty, Converter={StaticResource BoolVisibilityConverter}}"
-        Style="{StaticResource PhoneTextLargeStyle}"
+        Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
         TextWrapping="Wrap"
         TextAlignment="Center"
         VerticalAlignment="Center"

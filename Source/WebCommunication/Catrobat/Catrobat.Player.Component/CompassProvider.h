@@ -14,5 +14,7 @@ private:
     Compass^ m_compass;
     bool Init();
 
+	bool m_sensorIsRunningOnDevice;
+
 };
 

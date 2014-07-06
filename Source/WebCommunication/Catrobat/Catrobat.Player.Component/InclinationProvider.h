@@ -23,5 +23,7 @@ private:
 	Inclinometer^ m_inclinometer;
 	bool Init();
 
+	bool m_sensorIsRunningOnDevice;
+
 };
 

@@ -17,8 +17,9 @@
     shell:SystemTray.IsVisible="False"
     DataContext="{Binding CostumeNameChooserViewModel, Source={StaticResource Locator}}">
 
-  <!--LayoutRoot is the root grid where all page content is placed-->
-  <Grid x:Name="LayoutRoot" Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
@@ -28,13 +29,13 @@
 
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 40">
       <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleChooseCostumeName, Source={StaticResource LocalizedStrings}}" 
-                 Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+                 Name="Headline" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10,0,0,15">
       <TextBlock Margin="0 10 0 10" Text="{Binding Resources.Editor_CostumeName, 
-              Source={StaticResource LocalizedStrings}}" 
-               Style="{StaticResource PhoneTextSmallStyle}" />
+                 Source={StaticResource LocalizedStrings}}" 
+                 Style="{Binding StaticTheme.TextSmallStyle, Source={StaticResource ThemeChooser}}" />
       <TextBox Margin="-10 0 10 0" Name="TextBoxCostumeName" 
                Text="{Binding CostumeName, Mode=TwoWay}" 
                HorizontalAlignment="Stretch" 
@@ -48,7 +49,7 @@
       </Grid.RowDefinitions>
       <TextBlock Grid.Row="0" Margin="10 0 10 0" 
                  Text="{Binding Resources.Editor_ResizeImage, Source={StaticResource LocalizedStrings}}"
-                 Style="{StaticResource PhoneTextSmallStyle}" />
+                 Style="{Binding StaticTheme.TextSmallStyle, Source={StaticResource ThemeChooser}}" />
       <ListBox Grid.Row="1"  Margin="30 0 30 0" SelectionMode="Extended"
                ItemsSource="{Binding ImageSizes}" 
                SelectedItem="{Binding SelectedSize, Mode=TwoWay}">
@@ -129,7 +130,7 @@
     <i:Interaction.Triggers>
       <abu:StateChangedTrigger State="false">
         <abu:SwitchAppBarAction>
-          <abu:AppBar Id="0">
+          <abu:AppBar Id="0" BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, Source={StaticResource ThemeChooser}}">
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.save.rest.png" 
                               Text="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding SaveCommand}" />

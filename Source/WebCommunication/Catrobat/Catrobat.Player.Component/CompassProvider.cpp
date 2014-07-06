@@ -9,8 +9,10 @@ using namespace Windows::Foundation;
 
 CompassProvider::CompassProvider() 
 {
-	if (DeviceInformation::IsRunningOnDevice() && Init() != true)
-		throw new PlayerException("init compass provider failed");
+	if (DeviceInformation::IsRunningOnDevice() && Init() == true)
+		m_sensorIsRunningOnDevice = true;
+	else
+		m_sensorIsRunningOnDevice = false;
 }
 
 CompassProvider::~CompassProvider()
@@ -38,6 +40,10 @@ bool CompassProvider::Init()
 
 float CompassProvider::GetDirection()
 {
-    float retVal = 360.0f - static_cast<float>(m_compass->GetCurrentReading()->HeadingMagneticNorth);
+	float retVal = 0;
+	
+	if (m_sensorIsRunningOnDevice)
+		retVal = 360.0f - static_cast<float>(m_compass->GetCurrentReading()->HeadingMagneticNorth);
+
     return retVal;
 }

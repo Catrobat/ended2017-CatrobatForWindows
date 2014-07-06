@@ -34,7 +34,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 if (_currentProject != null)
                 {
                     Sprites.CollectionChanged -= SpritesCollectionChanged;
-
                     Sprites.CollectionChanged += SpritesCollectionChanged;
                 }
                 
@@ -230,6 +229,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         protected override void GoBackAction()
         {
+            SelectedSprite = null;
             base.GoBackAction();
         }
 
@@ -240,6 +240,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private void CurrentProjectChangedAction(GenericMessage<Project> message)
         {
             CurrentProject = message.Content;
+            SelectedSprite = null;
         }
 
         private void CurrentSpriteChangedMessageAction(GenericMessage<Sprite> message)

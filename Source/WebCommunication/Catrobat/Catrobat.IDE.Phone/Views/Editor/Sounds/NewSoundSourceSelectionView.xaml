@@ -15,15 +15,16 @@
   DataContext="{Binding NewSoundSourceSelectionViewModel, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="False">
 
-  <Grid x:Name="LayoutRoot"
-          Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleNewSound, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleNewSound, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 20 0 15">
@@ -36,7 +37,7 @@
                 <ColumnDefinition/>
               </Grid.ColumnDefinitions>
               <misc:AudioLibrary ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
-              <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Resources.Editor_MediaLibrary, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+              <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Resources.Editor_MediaLibrary, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{Binding StaticTheme.TextExtraLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
             </Grid>
           </ControlTemplate>
         </Button.Template>
@@ -57,7 +58,7 @@
                          VerticalAlignment="Center" 
                          HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_Recorder, Source={StaticResource LocalizedStrings}}" 
-                           Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                           Style="{Binding StaticTheme.TextExtraLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
             </Grid>
           </ControlTemplate>
         </Button.Template>

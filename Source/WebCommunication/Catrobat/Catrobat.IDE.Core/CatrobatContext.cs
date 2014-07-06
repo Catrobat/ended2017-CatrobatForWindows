@@ -1,12 +1,13 @@
-﻿using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
-using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Services.Storage;
+﻿using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
+using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Catrobat.IDE.Core
 {
@@ -56,9 +57,9 @@ namespace Catrobat.IDE.Core
 
         public static async Task<Project> RestoreDefaultProjectStatic(string projectName)
         {
-            IProjectGenerator projectGenerator = new ProjectGeneratorDefault();
+            IProjectGenerator projectGenerator = new ProjectGeneratorWhackAMole(); 
 
-            return await projectGenerator.GenerateProject(ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName, true);
+            return await projectGenerator.GenerateProject(AppResources.Main_DefaultProjectName ,true);
         }
 
         public static async Task<Project> CreateEmptyProject(string newProjectName)

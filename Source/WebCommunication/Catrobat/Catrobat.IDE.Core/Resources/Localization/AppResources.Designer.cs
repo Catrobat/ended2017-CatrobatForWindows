@@ -2105,6 +2105,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die , ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_DigitSeparator {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_DigitSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Favorites ähnelt.
         /// </summary>
         public static string FormulaKeyboard_Favorites {
@@ -2155,6 +2164,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string FormulaKeyboard_Operators {
             get {
                 return ResourceManager.GetString("FormulaKeyboard_Operators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ; ähnelt.
+        /// </summary>
+        public static string FormulaKeyboard_ParameterSeparator {
+            get {
+                return ResourceManager.GetString("FormulaKeyboard_ParameterSeparator", resourceCulture);
             }
         }
         
@@ -2236,6 +2254,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_ApplicationNameAndVersion {
             get {
                 return ResourceManager.GetString("Main_ApplicationNameAndVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The application requires a restart to apply the changes. ähnelt.
+        /// </summary>
+        public static string Main_ApplicationRequiresRestart {
+            get {
+                return ResourceManager.GetString("Main_ApplicationRequiresRestart", resourceCulture);
             }
         }
         
@@ -2362,6 +2389,33 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_CopyProject {
             get {
                 return ResourceManager.GetString("Main_CopyProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Empty project ähnelt.
+        /// </summary>
+        public static string Main_CreateEmptyProject {
+            get {
+                return ResourceManager.GetString("Main_CreateEmptyProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Use current project ({0}) as a atemplate ähnelt.
+        /// </summary>
+        public static string Main_CreateProjectBasedOnCurrentProject {
+            get {
+                return ResourceManager.GetString("Main_CreateProjectBasedOnCurrentProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Use template below ähnelt.
+        /// </summary>
+        public static string Main_CreateProjectBasedOnTemplate {
+            get {
+                return ResourceManager.GetString("Main_CreateProjectBasedOnTemplate", resourceCulture);
             }
         }
         
@@ -2744,6 +2798,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wie soll das neue Projekt erstellt werden? ähnelt.
+        /// </summary>
+        public static string Main_SelectProjectCreationOption {
+            get {
+                return ResourceManager.GetString("Main_SelectProjectCreationOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Set active ähnelt.
         /// </summary>
         public static string Main_SetActive {
@@ -3005,11 +3068,11 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Use current program ({0}) as template? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Use the selected project below as a template for the new project. ähnelt.
         /// </summary>
-        public static string Main_UseCurrentProjectAsTemplate {
+        public static string Main_UseTemplateText {
             get {
-                return ResourceManager.GetString("Main_UseCurrentProjectAsTemplate", resourceCulture);
+                return ResourceManager.GetString("Main_UseTemplateText", resourceCulture);
             }
         }
         
@@ -3019,6 +3082,42 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_VersionIsNotSupported {
             get {
                 return ResourceManager.GetString("Main_VersionIsNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Whack a mole ähnelt.
+        /// </summary>
+        public static string Main_WhackAMoleName {
+            get {
+                return ResourceManager.GetString("Main_WhackAMoleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die dizzy mole ähnelt.
+        /// </summary>
+        public static string WhackAMole_DizzyMole {
+            get {
+                return ResourceManager.GetString("WhackAMole_DizzyMole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die mole ähnelt.
+        /// </summary>
+        public static string WhackAMole_Mole {
+            get {
+                return ResourceManager.GetString("WhackAMole_Mole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die moving mole ähnelt.
+        /// </summary>
+        public static string WhackAMole_MovingMole {
+            get {
+                return ResourceManager.GetString("WhackAMole_MovingMole", resourceCulture);
             }
         }
     }

@@ -16,8 +16,9 @@
   DataContext="{Binding VariableSelectionViewModel, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="False">
 
-  <!--LayoutRoot is the root grid where all page content is placed-->
-  <Grid x:Name="LayoutRoot" Background="Transparent">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
@@ -25,7 +26,7 @@
 
     <!--TitlePanel contains the name of the application and page title-->
     <StackPanel Grid.Row="0" Margin="12,17,0,0">
-      <TextBlock Text="{Binding Resources.Editor_SelectVariablesViewHeader, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+      <TextBlock Text="{Binding Resources.Editor_SelectVariablesViewHeader, Source={StaticResource LocalizedStrings}}" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
     </StackPanel>
 
     <phone:Pivot Grid.Row="1" SelectedIndex="{Binding IsLocalView, 

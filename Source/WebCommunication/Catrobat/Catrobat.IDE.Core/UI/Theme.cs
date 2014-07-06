@@ -38,7 +38,6 @@ namespace Catrobat.IDE.Core.UI
         }
 
         private PortableImage _croppedBackground;
-        private PortableSolidColorBrush _appBarColor;
 
         public PortableImage CroppedBackground
         {
@@ -63,17 +62,11 @@ namespace Catrobat.IDE.Core.UI
         public PortableSolidColorBrush AccentColor2 { get; set; }
         public PortableSolidColorBrush AccentColor3 { get; set; }
 
-        public PortableSolidColorBrush AppBarColor
-        {
-            get
-            {
-                return _appBarColor;
-            }
-            set
-            {
-                _appBarColor = value;
-            }
-        }
+        public PortableSolidColorBrush AppBarBackgroundBrush { get; set; }
+
+        public PortableSolidColorBrush AppBarButtonBrush { get; set; }
+
+        public PortableSolidColorBrush AppBarButtonClickBrush { get; set; }
 
         public Theme(string backgroundPath, string croppedPath)
         {

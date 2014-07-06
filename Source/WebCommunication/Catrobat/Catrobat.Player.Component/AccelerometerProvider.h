@@ -16,5 +16,7 @@ private:
 
 	bool Init();
 
+	bool m_sensorIsRunningOnDevice;
+
 };
 
