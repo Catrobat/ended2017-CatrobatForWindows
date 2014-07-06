@@ -7,6 +7,8 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -45,8 +47,11 @@ namespace Catrobat.Paint
         /// search results, and so forth.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            var messageDialog1 = new MessageDialog("S1");
+            await messageDialog1.ShowAsync();
+
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -132,6 +137,65 @@ namespace Catrobat.Paint
 
             // TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+
+
+
+
+        // TODO: remove sample code below
+        //protected override void OnActivated(IActivatedEventArgs args)
+        //{
+        //    if (args.Kind == ActivationKind.Protocol)
+        //    {
+        //        var eventArgs = args as ProtocolActivatedEventArgs;
+
+        //        // TODO: Handle URI activation
+        //        // The received URI is eventArgs.Uri.AbsoluteUri
+        //    }
+        //}
+
+        protected async override void OnFileActivated(FileActivatedEventArgs args)
+        {
+
+            //var messageDialog1 = new MessageDialog("1");
+            //await messageDialog1.ShowAsync();
+
+
+            try
+            {
+                const string appendContent = "Changed";
+
+                // TODO: Handle file activation
+
+                // The number of files received is args.Files.Size
+                // The first file is args.Files[0].Name
+
+                var file = (StorageFile)args.Files[0];
+
+                //var messageDialog2 = new MessageDialog("Files count: " + args.Files.Count); 
+                //await messageDialog2.ShowAsync();
+
+                var stream = await file.OpenStreamForWriteAsync();
+                using (var sw = new StreamWriter(stream))
+                {
+                    await sw.WriteAsync(appendContent);
+                }
+                stream.Dispose();
+
+                //var messageDialog3 = new MessageDialog("Finished");
+                //messageDialog3.ShowAsync();
+
+                Window.Current.Activate();
+            }
+            catch (Exception exc)
+            {
+                //var messageDialog4 = new MessageDialog(exc.Message);
+                //messageDialog4.ShowAsync();
+            }
+
+
+
         }
     }
 }
