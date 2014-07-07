@@ -260,6 +260,24 @@ namespace Catrobat.IDE.Core.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die http://developer.catrobat.org/licenses ähnelt.
+        /// </summary>
+        public static string CATROBAT_LICENSES_URL {
+            get {
+                return ResourceManager.GetString("CATROBAT_LICENSES_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die http://www.catrobat.org/ ähnelt.
+        /// </summary>
+        public static string CATROBAT_URL {
+            get {
+                return ResourceManager.GetString("CATROBAT_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die passwordrecovery/changeMyPasswordRequest.json ähnelt.
         /// </summary>
         public static string CATROWEB_CHANGE_PWD {
@@ -305,6 +323,15 @@ namespace Catrobat.IDE.Core.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die http://opensource.org/licenses/MS-RL ähnelt.
+        /// </summary>
+        public static string MS_RL_LICENSE_URL {
+            get {
+                return ResourceManager.GetString("MS_RL_LICENSE_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die https://pocketcode.org/ ähnelt.
         /// </summary>
         public static string POCEKTCODE_BASE_ADDRESS {
@@ -316,9 +343,9 @@ namespace Catrobat.IDE.Core.Resources {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die https://pocketcode.org/licenseToPlay ähnelt.
         /// </summary>
-        public static string ProjectLicenseUrl {
+        public static string PROJECT_LICENSE_URL {
             get {
-                return ResourceManager.GetString("ProjectLicenseUrl", resourceCulture);
+                return ResourceManager.GetString("PROJECT_LICENSE_URL", resourceCulture);
             }
         }
         

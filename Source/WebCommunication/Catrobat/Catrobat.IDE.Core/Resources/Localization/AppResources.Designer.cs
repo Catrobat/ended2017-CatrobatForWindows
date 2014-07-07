@@ -2231,6 +2231,33 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die About Catrobat ähnelt.
+        /// </summary>
+        public static string Main_AboutCatrobat {
+            get {
+                return ResourceManager.GetString("Main_AboutCatrobat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Licenses of the Catrobat system ähnelt.
+        /// </summary>
+        public static string Main_AboutLicense {
+            get {
+                return ResourceManager.GetString("Main_AboutLicense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Microsoft Reciprocal License ähnelt.
+        /// </summary>
+        public static string Main_AboutMSRL {
+            get {
+                return ResourceManager.GetString("Main_AboutMSRL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Pocket Code for Windows Phone is an on-device visual programming system for the Catrobat programming language. ähnelt.
         /// </summary>
         public static string Main_AboutText {
@@ -2699,7 +2726,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Report as unappropriate ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Report as inappropriate ähnelt.
         /// </summary>
         public static string Main_OnlineProjectReportButton {
             get {
@@ -2929,6 +2956,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_ShareProject {
             get {
                 return ResourceManager.GetString("Main_ShareProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 60 ähnelt.
+        /// </summary>
+        public static string Main_TextBoxLimit {
+            get {
+                return ResourceManager.GetString("Main_TextBoxLimit", resourceCulture);
             }
         }
         

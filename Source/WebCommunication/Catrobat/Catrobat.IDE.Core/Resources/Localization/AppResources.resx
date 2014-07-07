@@ -652,7 +652,7 @@
     <value>program:</value>
   </data>
   <data name="Main_OnlineProjectReportButton" xml:space="preserve">
-    <value>Report as unappropriate</value>
+    <value>Report as inappropriate</value>
   </data>
   <data name="Main_OnlineProjectStatistics" xml:space="preserve">
     <value>statistics:</value>
@@ -1182,5 +1182,17 @@
   </data>
   <data name="Main_ReportMissingData" xml:space="preserve">
     <value>Please enter a reason for your report.</value>
+  </data>
+  <data name="Main_AboutCatrobat" xml:space="preserve">
+    <value>About Catrobat</value>
+  </data>
+  <data name="Main_AboutLicense" xml:space="preserve">
+    <value>Licenses of the Catrobat system</value>
+  </data>
+  <data name="Main_AboutMSRL" xml:space="preserve">
+    <value>Microsoft Reciprocal License</value>
+  </data>
+  <data name="Main_TextBoxLimit" xml:space="preserve">
+    <value>60</value>
   </data>
 </root>

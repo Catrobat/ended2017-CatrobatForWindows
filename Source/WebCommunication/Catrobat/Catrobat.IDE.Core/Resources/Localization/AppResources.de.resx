@@ -1183,4 +1183,16 @@
   <data name="Main_ReportMissingData" xml:space="preserve">
     <value>Bitte eine Begründung für die Meldung angeben.</value>
   </data>
+  <data name="Main_AboutCatrobat" xml:space="preserve">
+    <value>Über Catrobat</value>
+  </data>
+  <data name="Main_AboutLicense" xml:space="preserve">
+    <value>Lizenzen des Catrobat-Systems</value>
+  </data>
+  <data name="Main_AboutMSRL" xml:space="preserve">
+    <value>Microsoft Reciprocal License</value>
+  </data>
+  <data name="Main_TextBoxLimit" xml:space="preserve">
+    <value>60</value>
+  </data>
 </root>

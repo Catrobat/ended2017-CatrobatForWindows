@@ -324,15 +324,17 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition Height="Auto"/>
           </Grid.RowDefinitions>
           <TextBlock FontSize="24" TextWrapping="Wrap" MinHeight="350"
                      Text="{Binding Resources.Main_AboutText, Source={StaticResource LocalizedStrings}}" 
                      Margin="10 0 10 15" />
-          <HyperlinkButton Grid.Row="1" Content="Pocket Code Source Code License" Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" NavigateUri="" />
-          <HyperlinkButton Grid.Row="2" Content="About Catrobat" Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" NavigateUri="" />
+          <HyperlinkButton Grid.Row="1" Content="{Binding Resources.Main_AboutLicense, Source={StaticResource LocalizedStrings}}" Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" NavigateUri="" Command="{Binding LicenseCommand}"/>
+          <HyperlinkButton Grid.Row="2" Content="{Binding Resources.Main_AboutCatrobat, Source={StaticResource LocalizedStrings}}" Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" NavigateUri="" Command="{Binding AboutCommand}"/>
+          <HyperlinkButton Grid.Row="3" Content="{Binding Resources.Main_AboutMSRL, Source={StaticResource LocalizedStrings}}" Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" NavigateUri="" Command="{Binding MSRLCommand}"/>
 
-          <Grid Grid.Row="3">
+          <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />

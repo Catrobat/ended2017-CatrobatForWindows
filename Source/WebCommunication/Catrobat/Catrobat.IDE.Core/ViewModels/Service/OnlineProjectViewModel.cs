@@ -184,7 +184,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private void LicenseAction()
         {
-            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.ProjectLicenseUrl);
+            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.PROJECT_LICENSE_URL);
         }
 
         protected override void GoBackAction()
