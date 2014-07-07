@@ -403,7 +403,7 @@ double Interpreter::CalculateRand(double value1, double value2)
 	std::mt19937 gen(rd());
 	if (OnlyIntegerValues(value1, value2))
 	{
-		std::uniform_int_distribution<> dis(min, max);
+		std::uniform_int_distribution<> dis(static_cast<int>(min), static_cast<int>(max));
 		return dis(gen);
 	}
 	else
