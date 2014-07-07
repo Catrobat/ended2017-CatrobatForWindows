@@ -29,6 +29,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.IDE.Windows.TestsU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.IDE.Core.Tests", "Catrobat.IDE.Core\Catrobat.IDE.Core.Tests\Catrobat.IDE.Core.Tests.csproj", "{37893166-9D6C-46FB-A2C9-85E31834AEEB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{84F32905-FF38-45B8-9D25-A8F6E13CED6F}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Catrobat.IDE.Windows\Catrobat.IDE.Shared\Catrobat.IDE.Shared.projitems*{d26523cd-4f73-4859-9abb-13040567005c}*SharedItemsImports = 4

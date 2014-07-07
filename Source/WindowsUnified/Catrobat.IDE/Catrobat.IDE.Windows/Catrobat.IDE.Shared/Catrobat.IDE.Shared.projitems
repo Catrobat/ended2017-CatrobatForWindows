@@ -22,5 +22,25 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ColorConversionServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CultureServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\DispatcherServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ImageResizeServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ImageSourceConversionServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\NavigationServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\NotificationServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\PictureServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\PlayerLauncherServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\PortableUIElementsConvertionServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ProjectImporterServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ShareServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SoundPlayerServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SoundRecorderServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SoundServiceStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Storage\ResourceLoaderFactoryStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Storage\ResourcesStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Storage\StorageFactoryStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Storage\StorageStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SystemInformationServiceStore.cs" />
   </ItemGroup>
 </Project>
