@@ -7,7 +7,7 @@ namespace Catrobat.IDE.Core.UI.Converters
 {
     public class NullVariableConverter : IPortableValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (value != null)
                 return value;
@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.UI.Converters
             return new GlobalVariable {Name = AppResources.Editor_NoVariableSelected};
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             // Not Needed.
             return null;

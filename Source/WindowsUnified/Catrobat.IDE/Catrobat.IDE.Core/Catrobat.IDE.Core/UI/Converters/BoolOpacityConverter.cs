@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Core.UI.Converters
 {
     public class BoolOpacityConverter : IPortableValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (value == null || !(value is bool))
                 return PortableVisibility.Collapsed;
@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Core.UI.Converters
             return visible ? 1.0 : 0.0;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             // Not Needed.
             return null;

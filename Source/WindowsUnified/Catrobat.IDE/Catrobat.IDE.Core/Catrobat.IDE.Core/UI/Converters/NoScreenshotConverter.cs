@@ -8,7 +8,7 @@ namespace Catrobat.IDE.Core.UI.Converters
 {
     public class NoScreenshotConverter : IPortableValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (value != null)
             {
@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Core.UI.Converters
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             // not used
             return null;

@@ -9,13 +9,14 @@ namespace Catrobat.IDE.Core.UI.Converters
 {
     public class FormulaKeyStringConverter : IPortableValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return Convert((FormulaKey) value, culture);
+            return Convert((FormulaKey)value, language);
         }
 
-        public string Convert(FormulaKey value, CultureInfo culture)
+        public string Convert(FormulaKey value, string language)
         {
+            var culture = new CultureInfo(language);
             switch (value.Key)
             {
                 case FormulaEditorKey.D0: return 0.ToString(culture);
@@ -85,7 +86,7 @@ namespace Catrobat.IDE.Core.UI.Converters
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             // not supported
             return null;

@@ -7,12 +7,12 @@ namespace Catrobat.IDE.Core.UI.Converters
 {
     public class SecondStringMillisecondConverter : IPortableValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, string language)
         {
             return StringFormatHelper.ConvertDouble(((int) value)/1000f);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             try
             {

@@ -7,7 +7,7 @@ namespace Catrobat.IDE.Core.UI.Converters
 {
     public class DoubleStringConverter : IPortableValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (parameter != null)
             {
@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.UI.Converters
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             try
             {

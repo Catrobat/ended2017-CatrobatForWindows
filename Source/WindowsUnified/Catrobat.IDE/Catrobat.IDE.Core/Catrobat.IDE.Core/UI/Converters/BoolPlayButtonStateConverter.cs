@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Core.UI.Converters
 {
     public class BoolPlayButtonStateConverter : IPortableValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (!(value is bool))
                 return PlayPauseButtonState.Pause;
@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Core.UI.Converters
             return isPlaying ? PlayPauseButtonState.Play : PlayPauseButtonState.Pause;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             if (!(value is PlayPauseButtonState))
                 return false;

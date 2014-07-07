@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Core.UI.Converters
 {
     public class ActiveThemeBrushConverter : IPortableValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, string language)
         {
             var settingsViewModel = ServiceLocator.ViewModelLocator.SettingsViewModel;
 
@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core.UI.Converters
             return null;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             // Not Needed.
             return null;
