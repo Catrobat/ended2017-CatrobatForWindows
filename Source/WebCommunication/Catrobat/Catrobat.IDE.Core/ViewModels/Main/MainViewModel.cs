@@ -415,7 +415,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             // Determine which page to open
             JSONStatusResponse status_response = await CatrobatWebCommunicationService.AsyncCheckToken(Context.CurrentUserName, Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
-            if (status_response.statusCode == StatusCodes.ServerResponseTokenOk)
+            if (status_response.statusCode == StatusCodes.ServerResponseOk)
             {
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {

@@ -108,7 +108,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
                 switch (status_response.statusCode)
                 {
-                    case StatusCodes.ServerResponseTokenOk:
+                    case StatusCodes.ServerResponseOk:
                         if (NavigationCallback != null)
                         {
                             NavigationCallback();
