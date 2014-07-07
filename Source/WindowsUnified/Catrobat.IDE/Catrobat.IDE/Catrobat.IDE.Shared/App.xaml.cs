@@ -144,29 +144,23 @@ namespace Catrobat.IDE
 
         // TODO: remove sample code below
 
-        protected override void OnCachedFileUpdaterActivated(CachedFileUpdaterActivatedEventArgs args)
+        protected async override void OnCachedFileUpdaterActivated(CachedFileUpdaterActivatedEventArgs args)
         {
+            var messageDialog1 = new MessageDialog("OnCachedFileUpdaterActivated");
+            await messageDialog1.ShowAsync();
+
+
             args.CachedFileUpdaterUI.FileUpdateRequested
                  += OnCachedFileUpdaterUIFileUpdateRequested;
             base.OnCachedFileUpdaterActivated(args);
 
+
+
             //do not forget this
             Window.Current.Activate();
 
-            var msgDialog = new MessageDialog("file changed");
 
-            //OK Button
-            var okBtn = new UICommand("OK");
-            //okBtn.Invoked = OkBtnClick;
-            msgDialog.Commands.Add(okBtn);
 
-            //Cancel Button
-            UICommand cancelBtn = new UICommand("Cancel");
-            //cancelBtn.Invoked = CancelBtnClick;
-            msgDialog.Commands.Add(cancelBtn);
-
-            //Show message
-            msgDialog.ShowAsync();
         }
 
         void OnCachedFileUpdaterUIFileUpdateRequested(CachedFileUpdaterUI sender,

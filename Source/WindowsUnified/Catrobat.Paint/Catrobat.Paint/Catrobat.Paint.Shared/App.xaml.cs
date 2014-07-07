@@ -8,6 +8,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.Storage.Provider;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -49,9 +50,6 @@ namespace Catrobat.Paint
         /// <param name="e">Details about the launch request and process.</param>
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            var messageDialog1 = new MessageDialog("S1");
-            await messageDialog1.ShowAsync();
-
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -139,61 +137,91 @@ namespace Catrobat.Paint
             deferral.Complete();
         }
 
-
-
-
-
-        // TODO: remove sample code below
-        //protected override void OnActivated(IActivatedEventArgs args)
-        //{
-        //    if (args.Kind == ActivationKind.Protocol)
-        //    {
-        //        var eventArgs = args as ProtocolActivatedEventArgs;
-
-        //        // TODO: Handle URI activation
-        //        // The received URI is eventArgs.Uri.AbsoluteUri
-        //    }
-        //}
-
-        protected async override void OnFileActivated(FileActivatedEventArgs args)
+   
+        protected async override void OnFileActivated(FileActivatedEventArgs e)
         {
-
-            //var messageDialog1 = new MessageDialog("1");
-            //await messageDialog1.ShowAsync();
-
-
             try
             {
-                const string appendContent = "Changed";
+                var file = (StorageFile)e.Files[0];
 
-                // TODO: Handle file activation
+                CachedFileManager.DeferUpdates(file);
+                await FileIO.WriteTextAsync(file, "TestValueChanged");
+                var status = await CachedFileManager.CompleteUpdatesAsync(file);
 
-                // The number of files received is args.Files.Size
-                // The first file is args.Files[0].Name
-
-                var file = (StorageFile)args.Files[0];
-
-                //var messageDialog2 = new MessageDialog("Files count: " + args.Files.Count); 
-                //await messageDialog2.ShowAsync();
-
-                var stream = await file.OpenStreamForWriteAsync();
-                using (var sw = new StreamWriter(stream))
-                {
-                    await sw.WriteAsync(appendContent);
-                }
-                stream.Dispose();
-
-                //var messageDialog3 = new MessageDialog("Finished");
-                //messageDialog3.ShowAsync();
+                var messageDialog1 = new MessageDialog("Finished changing the file!: " + status);
+                messageDialog1.ShowAsync();
 
                 Window.Current.Activate();
             }
             catch (Exception exc)
             {
-                //var messageDialog4 = new MessageDialog(exc.Message);
-                //messageDialog4.ShowAsync();
+                var messageDialog2 = new MessageDialog(exc.Message);
+                messageDialog2.ShowAsync();
             }
 
+
+
+
+
+
+
+
+#if DEBUG
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                this.DebugSettings.EnableFrameRateCounter = true;
+            }
+#endif
+
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
+            if (rootFrame == null)
+            {
+                // Create a Frame to act as the navigation context and navigate to the first page
+                rootFrame = new Frame();
+
+                // TODO: change this value to a cache size that is appropriate for your application
+                rootFrame.CacheSize = 1;
+
+                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                {
+                    // TODO: Load state from previously suspended application
+                }
+
+                // Place the frame in the current Window
+                Window.Current.Content = rootFrame;
+            }
+
+            if (rootFrame.Content == null)
+            {
+#if WINDOWS_PHONE_APP
+                // Removes the turnstile navigation for startup.
+                if (rootFrame.ContentTransitions != null)
+                {
+                    this.transitions = new TransitionCollection();
+                    foreach (var c in rootFrame.ContentTransitions)
+                    {
+                        this.transitions.Add(c);
+                    }
+                }
+
+                rootFrame.ContentTransitions = null;
+                rootFrame.Navigated += this.RootFrame_FirstNavigated;
+#endif
+
+                // When the navigation stack isn't restored navigate to the first page,
+                // configuring the new page by passing required information as a navigation
+                // parameter
+                if (!rootFrame.Navigate(typeof(MainPage)))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
+            }
+
+            // Ensure the current window is active
+            Window.Current.Activate();
 
 
         }

@@ -25,7 +25,7 @@ namespace Catrobat.IDE
         private const string InitialFileContent = "TestValue";
         private const string ChangedFileContent = "TestValueChanged";
 
-        private readonly StorageFolder _localFolder = ApplicationData.Current.TemporaryFolder;
+        private readonly StorageFolder _localFolder = ApplicationData.Current.TemporaryFolder; // 
 
         private bool _fileWasShared = false;
 
@@ -35,7 +35,7 @@ namespace Catrobat.IDE
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
-            TextBlockContent.Text = InitialFileContent;
+            //TextBlockContent.Text = InitialFileContent;
         }
 
         /// <summary>
@@ -52,6 +52,11 @@ namespace Catrobat.IDE
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+
+
+
+
+
 
             if (_fileWasShared)
             {
@@ -96,10 +101,11 @@ namespace Catrobat.IDE
         {
             var file = await _localFolder.CreateFileAsync(CatrobatImageFileName, CreationCollisionOption.ReplaceExisting);
 
+            // Set update info for the file
             CachedFileUpdater.SetUpdateInformation(file, "CatrobatImageFileActivated",
-                                        ReadActivationMode.NotNeeded,
+                                        ReadActivationMode.BeforeAccess,
                                         WriteActivationMode.AfterWrite,
-                                        CachedFileOptions.None);
+                                        CachedFileOptions.RequireUpdateOnAccess);
 
             var stream = await file.OpenStreamForWriteAsync();
             using (var sw = new StreamWriter(stream))
@@ -155,6 +161,19 @@ namespace Catrobat.IDE
             //{
             //    // URI launch failed
             //}
+        }
+
+        private async void UpdateFileContent_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var file = await _localFolder.GetFileAsync(CatrobatFileName);
+                TextBlockContent.Text = await FileIO.ReadTextAsync(file);
+            }
+            catch (Exception)
+            {
+                TextBlockContent.Text = "File not found!";
+            }
         }
     }
 }

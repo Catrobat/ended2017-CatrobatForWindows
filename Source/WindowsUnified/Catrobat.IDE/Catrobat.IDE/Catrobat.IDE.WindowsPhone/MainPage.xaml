@@ -12,5 +12,6 @@
     <Button HorizontalAlignment="Center" Click="OpenPlayer_OnClick" Content="Open Player"/>
     <Button HorizontalAlignment="Center" Click="OpenPaint_OnClick" Content="Open Paint"/>
     <TextBlock Name="TextBlockContent" HorizontalAlignment="Center" Margin="0 50 0 0"></TextBlock>
+    <Button HorizontalAlignment="Center" Click="UpdateFileContent_OnClick" Content="Read file"/>
   </StackPanel>
 </Page>
