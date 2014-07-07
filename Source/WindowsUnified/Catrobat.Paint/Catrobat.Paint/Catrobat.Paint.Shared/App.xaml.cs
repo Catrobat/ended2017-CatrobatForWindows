@@ -137,28 +137,55 @@ namespace Catrobat.Paint
             deferral.Complete();
         }
 
-   
+
+        private const string LocalFileName = "image.catrobat_ide_png";
+
         protected async override void OnFileActivated(FileActivatedEventArgs e)
         {
             try
             {
                 var file = (StorageFile)e.Files[0];
+                var fileContent = await FileIO.ReadTextAsync(file);
 
-                CachedFileManager.DeferUpdates(file);
-                await FileIO.WriteTextAsync(file, "TestValueChanged");
-                var status = await CachedFileManager.CompleteUpdatesAsync(file);
 
-                var messageDialog1 = new MessageDialog("Finished changing the file!: " + status);
-                messageDialog1.ShowAsync();
+                var localFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(
+                    LocalFileName,CreationCollisionOption.ReplaceExisting);
+                
+                
 
-                Window.Current.Activate();
+                //CachedFileManager.DeferUpdates(file);
+                await FileIO.WriteTextAsync(localFile, fileContent + "_Changed");
+                //var status = await CachedFileManager.CompleteUpdatesAsync(file);
+
+                //var messageDialog1 = new MessageDialog("Finished changing the file!: " + status);
+                //messageDialog1.ShowAsync();
+
+
+
+
+
+
+
+
+
+                var options = new Windows.System.LauncherOptions { DisplayApplicationPicker = false };
+
+                // Launch the retrieved file
+                bool success = await Windows.System.Launcher.LaunchFileAsync(localFile, options);
+                if (success)
+                {
+                    // File launch succeded
+                }
+                else
+                {
+                    // File launch failed
+                }
             }
             catch (Exception exc)
             {
                 var messageDialog2 = new MessageDialog(exc.Message);
                 messageDialog2.ShowAsync();
             }
-
 
 
 
@@ -224,6 +251,9 @@ namespace Catrobat.Paint
             Window.Current.Activate();
 
 
+
+
+            Application.Current.Exit();
         }
     }
 }

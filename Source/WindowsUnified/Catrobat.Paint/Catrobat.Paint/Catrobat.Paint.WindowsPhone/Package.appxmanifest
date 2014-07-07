@@ -28,8 +28,8 @@
             <SupportedFileTypes>
               <FileType ContentType="image/png">.png</FileType>
               <FileType ContentType="image/jpeg">.jpg</FileType>
-              <FileType ContentType="image/png">.catrobat_png</FileType>
-              <FileType ContentType="image/jpeg">.catrobat_jpeg</FileType>
+              <FileType ContentType="image/png">.catrobat_paint_png</FileType>
+              <FileType ContentType="image/jpeg">.catrobat_paint_jpeg</FileType>
             </SupportedFileTypes>
           </FileTypeAssociation>
         </Extension>

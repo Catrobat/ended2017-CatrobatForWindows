@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.Storage.Provider;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -191,5 +192,24 @@ namespace Catrobat.IDE
             // deferral.Complete();
         }
 
+
+
+        protected override async void OnFileActivated(FileActivatedEventArgs e)
+        {
+            try
+            {
+                var file = (StorageFile) e.Files[0];
+                var content = await FileIO.ReadTextAsync(file);
+
+                var localFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(
+                    MainPage.CatrobatImageFileName, CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(localFile, content);
+            }
+            catch (Exception exc)
+            {
+                var messageDialog1 = new MessageDialog("Cannot read recieved file: " + exc.Message);
+                messageDialog1.ShowAsync();
+            }
+        }
     }
 }

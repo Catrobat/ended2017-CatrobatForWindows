@@ -23,6 +23,13 @@
       </m3:VisualElements>
       <Extensions>
         <Extension Category="windows.cachedFileUpdater" />
+        <Extension Category="windows.fileTypeAssociation">
+          <FileTypeAssociation Name="1">
+            <SupportedFileTypes>
+              <FileType ContentType="image/png">.catrobat_ide_png</FileType>
+            </SupportedFileTypes>
+          </FileTypeAssociation>
+        </Extension>
       </Extensions>
     </Application>
   </Applications>

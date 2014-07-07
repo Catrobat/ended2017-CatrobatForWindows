@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using Windows.Storage;
-using Windows.Storage.Provider;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -19,13 +17,9 @@ namespace Catrobat.IDE
         //private const string ProtocolName = "catrobat";
 
         private const string CatrobatFileName = "program.catrobat_play";
+        public const string CatrobatImageFileName = "program.catrobat_paint_png";
 
-
-        private const string CatrobatImageFileName = "program.catrobat_png";
-        private const string InitialFileContent = "TestValue";
-        private const string ChangedFileContent = "TestValueChanged";
-
-        private readonly StorageFolder _localFolder = ApplicationData.Current.TemporaryFolder; // 
+        private readonly StorageFolder _localFolder = ApplicationData.Current.TemporaryFolder;
 
         private bool _fileWasShared = false;
 
@@ -52,24 +46,6 @@ namespace Catrobat.IDE
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
-
-
-
-
-
-
-            if (_fileWasShared)
-            {
-                var changedFile = await _localFolder.OpenStreamForReadAsync(CatrobatFileName);
-                var inputStream = changedFile.AsInputStream();
-                var reader = new StreamReader(inputStream.AsStreamForRead());
-                var changedContent = await reader.ReadLineAsync();
-
-                if (changedContent == ChangedFileContent)
-                    Debugger.Break(); // Success
-                else
-                    Debugger.Break(); // Error
-            }
         }
 
         private async void OpenPlayer_OnClick(object sender, RoutedEventArgs e)
@@ -79,13 +55,12 @@ namespace Catrobat.IDE
             var stream = await file.OpenStreamForWriteAsync();
             using (var sw = new StreamWriter(stream))
             {
-                await sw.WriteAsync(InitialFileContent);
+                await sw.WriteAsync("Content");
             }
             stream.Dispose();
 
             var options = new Windows.System.LauncherOptions { DisplayApplicationPicker = true };
 
-            // Launch the retrieved file
             bool success = await Windows.System.Launcher.LaunchFileAsync(file, options);
             if (success)
             {
@@ -101,22 +76,13 @@ namespace Catrobat.IDE
         {
             var file = await _localFolder.CreateFileAsync(CatrobatImageFileName, CreationCollisionOption.ReplaceExisting);
 
-            // Set update info for the file
-            CachedFileUpdater.SetUpdateInformation(file, "CatrobatImageFileActivated",
-                                        ReadActivationMode.BeforeAccess,
-                                        WriteActivationMode.AfterWrite,
-                                        CachedFileOptions.RequireUpdateOnAccess);
+            var content = TextBlockContent.Text;
+            if (content == "") content = "Content";
 
-            var stream = await file.OpenStreamForWriteAsync();
-            using (var sw = new StreamWriter(stream))
-            {
-                await sw.WriteAsync(InitialFileContent);
-            }
-            stream.Dispose();
+            await FileIO.WriteTextAsync(file, content);
 
-            var options = new Windows.System.LauncherOptions { DisplayApplicationPicker = true };
+            var options = new Windows.System.LauncherOptions { DisplayApplicationPicker = false, PreferredApplicationPackageFamilyName = "f53a5122-9a9c-486b-86cf-3a3e60e0fd2f_bcp11qa1rfadr" };
 
-            // Launch the retrieved file
             bool success = await Windows.System.Launcher.LaunchFileAsync(file, options);
             if (success)
             {
@@ -126,48 +92,13 @@ namespace Catrobat.IDE
             {
                 // File launch failed
             }
-
-
-
-
-
-
-
-
-
-
-
-            //var file = await _localFolder.CreateFileAsync(CatrobatFileName, CreationCollisionOption.ReplaceExisting);
-
-            //var stream = await file.OpenStreamForWriteAsync();
-            //using (var sw = new StreamWriter(stream))
-            //{
-            //    await sw.WriteLineAsync(InitialFileContent);
-            //}
-
-            //// open URI
-   
-            //// Set the option to show a warning
-            //var options = new Windows.System.LauncherOptions {TreatAsUntrusted = true,};
-
-            //// Launch the URI with a warning prompt
-            //var success = await Windows.System.Launcher.LaunchUriAsync(new Uri(ProtocolName + "://"), options);
-
-            //if (success)
-            //{
-            //    // URI launched
-            //}
-            //else
-            //{
-            //    // URI launch failed
-            //}
         }
 
         private async void UpdateFileContent_OnClick(object sender, RoutedEventArgs e)
         {
             try
             {
-                var file = await _localFolder.GetFileAsync(CatrobatFileName);
+                var file = await _localFolder.GetFileAsync(CatrobatImageFileName);
                 TextBlockContent.Text = await FileIO.ReadTextAsync(file);
             }
             catch (Exception)
