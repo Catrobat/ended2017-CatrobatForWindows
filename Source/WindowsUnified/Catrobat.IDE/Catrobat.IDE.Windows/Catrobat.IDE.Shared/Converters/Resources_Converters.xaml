@@ -1,17 +1,8 @@
 ﻿<ResourceDictionary
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- 
-  xmlns:system="using:System"
-  xmlns:converters="using:Catrobat.IDE.WindowsShared.Converters"
-  xmlns:nativeConverters="using:Catrobat.IDE.WindowsShared.Converters.NativeConverters"
-
-  mc:Ignorable="d">
-  
-  <!--<system:Boolean x:Key="BooleanFalse">False</system:Boolean>
-  <system:Boolean x:Key="BooleanTrue">True</system:Boolean>-->
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:Catrobat.IDE.WindowsShared.Converters"
+    xmlns:nativeConverters="using:Catrobat.IDE.WindowsShared.Converters.NativeConverters">
 
   <converters:NoScreenshotConverterBootstrap x:Key="NoScreenshotConverter" />
   <converters:BoolVisibilityConverterBootstrap x:Key="BoolVisibilityConverter"/>
@@ -34,5 +25,4 @@
   <converters:VariableButtonVisibilityConverterBootstrap x:Key="VariableButtonVisibilityConverter"/>
 
   <nativeConverters:NativeImageSquareConverter x:Key="ImageSquareConverter" />
-
 </ResourceDictionary>

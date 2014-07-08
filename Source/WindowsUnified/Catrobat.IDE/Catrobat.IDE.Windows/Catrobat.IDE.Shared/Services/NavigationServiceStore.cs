@@ -41,10 +41,14 @@ namespace Catrobat.IDE.WindowsShared.Services
                 if (pageType == null)
                 {
                     var viewModelName = type.GetTypeInfo().AssemblyQualifiedName.Split(',').First();
-                    var viewName = viewModelName.Replace("Catrobat.IDE.Core.ViewModels", "Catrobat.IDE.WindowsShared.Views");
+                    var viewName = viewModelName.Replace("Catrobat.IDE.Core.ViewModels", "Catrobat.IDE.WindowsPhone.Views");
                     viewName = viewName.Replace("ViewModel", "View");
                     pageType = Type.GetType(viewName);
                 }
+            }
+            else if (type.GetTypeInfo().BaseType == typeof (Page))
+            {
+                pageType = type;
             }
 
             if (pageType.GetTypeInfo().BaseType == typeof(Page)) // this is not true for flyouts (UserControls)

@@ -94,11 +94,13 @@
     <Page Include="$(MSBuildThisFileDirectory)Content\Images\Misc\ImageGallery.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Content\Resources.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Converters\Resources_Converters.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Converters\ConverterResources.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Resources.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

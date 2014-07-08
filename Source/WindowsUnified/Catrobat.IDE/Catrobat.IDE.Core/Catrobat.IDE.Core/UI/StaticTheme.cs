@@ -101,7 +101,7 @@ namespace Catrobat.IDE.Core.UI
             }
         }
 
-        public PortableFontStyle TextLargeStyleStyle
+        public PortableFontStyle TextLargeStyle
         {
             get
             {

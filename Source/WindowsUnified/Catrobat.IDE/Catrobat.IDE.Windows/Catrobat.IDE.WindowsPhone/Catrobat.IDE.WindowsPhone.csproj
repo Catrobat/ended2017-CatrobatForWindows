@@ -93,10 +93,61 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\NavigationHelper.cs" />
+    <Compile Include="Common\ObservableDictionary.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Controls\AppBar\EditorAppBar.xaml.cs">
+      <DependentUpon>EditorAppBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Bricks\MasterBrick.cs" />
+    <Compile Include="Controls\Bricks\NormalBrick.cs" />
+    <Compile Include="Controls\Buttons\PlayPauseButton.xaml.cs">
+      <DependentUpon>PlayPauseButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Buttons\PlayPauseButtonGroup.cs" />
+    <Compile Include="Controls\DynamicDataTemplates\DataTemplateSelector.cs" />
+    <Compile Include="Controls\Formulas\FormulaButton.xaml.cs">
+      <DependentUpon>FormulaButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Formulas\FormulaKeyboard.xaml.cs">
+      <DependentUpon>FormulaKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Formulas\FormulaKeys.cs" />
+    <Compile Include="Controls\Formulas\FormulaViewer.xaml.cs">
+      <DependentUpon>FormulaViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Formulas\Templates\FormulaTokenStyleCollection.cs" />
+    <Compile Include="Controls\Formulas\Templates\FormulaTokenTemplate.cs" />
+    <Compile Include="Controls\Formulas\Templates\FormulaTokenTemplateCollection.cs" />
+    <Compile Include="Controls\Formulas\VariableButton.xaml.cs">
+      <DependentUpon>VariableButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
+      <DependentUpon>ListPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ListPicker\ListPickerPage.xaml.cs">
+      <DependentUpon>ListPickerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Misc\ImageSizeIcon.xaml.cs">
+      <DependentUpon>ImageSizeIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Projects\LocalProjectControl.xaml.cs">
+      <DependentUpon>LocalProjectControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StatusIcons\ProcessIcon.xaml.cs">
+      <DependentUpon>ProcessIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Main\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -112,27 +163,83 @@
     <Content Include="Assets\WideLogo.scale-240.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\AppBar\EditorAppBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Buttons\PlayPauseButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Formulas\FormulaButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Formulas\FormulaKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Formulas\FormulaViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Formulas\Templates\FormulaTokenTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Formulas\VariableButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ListPicker\ListPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ListPicker\ListPickerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Misc\ImageSizeIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Projects\LocalProjectControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SplashScreen\SplashScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\StatusIcons\ProcessIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="GalaSoft.MvvmLight, Version=4.4.32.18939, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GalaSoft.MvvmLight, Version=4.4.32.26491, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\MvvmLightLibs.4.4.32.1\lib\wpa81\GalaSoft.MvvmLight.dll</HintPath>
+      <HintPath>..\..\packages\Portable.MvvmLightLibs.4.4.32.1\lib\wpa81\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras, Version=4.4.32.18940, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=4.4.32.26494, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\MvvmLightLibs.4.4.32.1\lib\wpa81\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <HintPath>..\..\packages\Portable.MvvmLightLibs.4.4.32.1\lib\wpa81\GalaSoft.MvvmLight.Extras.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Platform, Version=4.4.32.18940, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=4.4.32.26491, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\MvvmLightLibs.4.4.32.1\lib\wpa81\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <HintPath>..\..\packages\Portable.MvvmLightLibs.4.4.32.1\lib\wpa81\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\MvvmLightLibs.4.4.32.1\lib\wpa81\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>..\..\packages\Portable.MvvmLightLibs.4.4.32.1\lib\wpa81\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="WriteableBitmapEx.WinRT">
       <HintPath>..\..\packages\WriteableBitmapEx.1.0.12.0\lib\wpa81\WriteableBitmapEx.WinRT.dll</HintPath>
@@ -141,9 +248,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

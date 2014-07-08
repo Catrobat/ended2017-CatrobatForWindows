@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Resources
     {
         private readonly Dictionary<string, string> _sampleProjectNames = new Dictionary<string, string>
         {
-            {"stick.catrobat", "stick"}
+            //{"stick.catrobat", "stick"}
         };
 
         public async Task LoadSampleProjects()

@@ -47,9 +47,13 @@ namespace Catrobat.IDE.WindowsShared
             ServiceLocator.ThemeChooser = new ThemeChooser();
             ServiceLocator.LocalizedStrings = new LocalizedStrings();
 
-            Application.Current.Resources["Locator"] = ServiceLocator.ViewModelLocator;
-            Application.Current.Resources["ThemeChooser"] = ServiceLocator.ThemeChooser;
-            Application.Current.Resources["LocalizedStrings"] = ServiceLocator.LocalizedStrings;
+
+            if (!ViewModelBase.IsInDesignModeStatic)
+            {
+                Application.Current.Resources["Locator"] = ServiceLocator.ViewModelLocator;
+                Application.Current.Resources["ThemeChooser"] = ServiceLocator.ThemeChooser;
+                Application.Current.Resources["LocalizedStrings"] = ServiceLocator.LocalizedStrings;
+            }
 
             if (!ViewModelBase.IsInDesignModeStatic)
                 InitPresenters();
