@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services;
 
-namespace Catrobat.IDE.Phone.Utilities
+namespace Catrobat.IDE.WindowsShared.Utilities
 {
     public class AsyncRunner
     {

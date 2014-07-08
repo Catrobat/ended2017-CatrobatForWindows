@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 
-namespace Catrobat.IDE.Phone.Utilities
+namespace Catrobat.IDE.WindowsShared.Utilities
 {
     public abstract class BWaitHandle
     {

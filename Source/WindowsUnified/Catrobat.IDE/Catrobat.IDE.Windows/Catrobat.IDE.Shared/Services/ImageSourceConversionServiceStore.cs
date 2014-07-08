@@ -9,47 +9,45 @@ namespace Catrobat.IDE.WindowsShared.Services
     {
         public object ConvertToLocalImageSource(byte[] data, int width, int height)
         {
-            throw new NotImplementedException();
-            //if (data == null)
-            //    return null;
+            if (data == null)
+                return null;
 
-            //try
-            //{
-            //    var bitmap = new WriteableBitmap(width, height);
-            //    bitmap.FromByteArray(data);
+            try
+            {
+                var bitmap = new WriteableBitmap(width, height);
+                bitmap.FromByteArray(data);
 
-            //    return bitmap;
-            //}
-            //catch
-            //{
-            //    return null;
-            //}
+                return bitmap;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public void ConvertToBytes(object inputImage, out byte[] outputData, out int outputWidth, out int outputHeight)
         {
-            throw new NotImplementedException();
-            //WriteableBitmap writableBitmap = null;
+            WriteableBitmap writableBitmap = null;
 
-            //if (inputImage is BitmapImage)
-            //{
-            //    var image = (BitmapImage)inputImage;
+            if (inputImage is BitmapImage)
+            {
+                var image = (BitmapImage)inputImage;
 
-            //    writableBitmap = new WriteableBitmap(image.PixelWidth, image.PixelHeight);
-            //    throw new NotImplementedException();
-            //}
-            //else if (inputImage is WriteableBitmap)
-            //{
-            //    writableBitmap = (WriteableBitmap)inputImage;
-            //}
-            //else
-            //{
-            //    throw new ArgumentException("data must be of type WritableBitmap or BitmaoImage");
-            //}
+                writableBitmap = new WriteableBitmap(image.PixelWidth, image.PixelHeight);
+                throw new NotImplementedException();
+            }
+            else if (inputImage is WriteableBitmap)
+            {
+                writableBitmap = (WriteableBitmap)inputImage;
+            }
+            else
+            {
+                throw new ArgumentException("data must be of type WritableBitmap or BitmaoImage");
+            }
 
-            //outputData = writableBitmap.ToByteArray();
-            //outputWidth = writableBitmap.PixelWidth;
-            //outputHeight = writableBitmap.PixelHeight;
+            outputData = writableBitmap.ToByteArray();
+            outputWidth = writableBitmap.PixelWidth;
+            outputHeight = writableBitmap.PixelHeight;
         }
 
 

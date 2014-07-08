@@ -44,7 +44,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public async Task<PortableImage> ResizeImage(PortableImage image, int newWidth, int newHeight)
         {
-            return image; // TODO: fix resize code and reove this
+            return image; // TODO: fix resize code and remove this
 
 
             //// hard coded image location

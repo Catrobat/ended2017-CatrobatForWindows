@@ -5,7 +5,7 @@ using System.Reflection;
 using Catrobat.IDE.Core.Models.Formulas.Tokens;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
 
-//namespace Catrobat.IDE.Phone.Converters
+//namespace Catrobat.IDE.WindowsShared.Converters
 //{
 //    /// <summary>
 //    /// <p>Workaround <see cref="TypeConverter"/> to reference classes in other namespaces in XAML. </p>
