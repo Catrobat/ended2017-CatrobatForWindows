@@ -32,40 +32,40 @@ namespace Catrobat.IDE.Core.Services.Common
                 //http_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
                 {
-                HttpResponseMessage http_response = null;
+                    HttpResponseMessage http_response = null;
 
-                if (filterText == "")
-                {
-                        http_response = await http_client.GetAsync(String.Format(ApplicationResources.API_RECENT_PROJECTS, ApplicationResources.API_REQUEST_LIMIT, offset), taskCancellationToken);
-                }
-                else
-                {
-                    string encoded_filter_text = WebUtility.UrlEncode(filterText);
+                    if (filterText == "")
+                    {
+                         http_response = await http_client.GetAsync(String.Format(ApplicationResources.API_RECENT_PROJECTS, ApplicationResources.API_REQUEST_LIMIT, offset), taskCancellationToken);
+                    }
+                    else
+                    {
+                        string encoded_filter_text = WebUtility.UrlEncode(filterText);
                         http_response = await http_client.GetAsync(String.Format(ApplicationResources.API_SEARCH_PROJECTS, encoded_filter_text, ApplicationResources.API_REQUEST_LIMIT, offset), taskCancellationToken);
-                }
+                    }
                     http_response.EnsureSuccessStatusCode();
 
                     string json_result = await http_response.Content.ReadAsStringAsync();
                     OnlineProjectOverview recent_projects = null;
 
-                        //List<OnlineProjectOverview> projects = JsonConvert.DeserializeObject<List<OnlineProjectOverview>>(json_result);
+                    //List<OnlineProjectOverview> projects = JsonConvert.DeserializeObject<List<OnlineProjectOverview>>(json_result);
                     recent_projects = await Task.Run(() => JsonConvert.DeserializeObject<OnlineProjectOverview>(json_result));
                     
                     return recent_projects.CatrobatProjects;
-                    }
+                }
                 catch (HttpRequestException)
                 {
                     return null;
                 }
-                    catch (Newtonsoft.Json.JsonSerializationException)
-                    {
+                catch (Newtonsoft.Json.JsonSerializationException)
+                {
                     return null;
-                    }
+                }
                 catch (Exception)
                 {
-                return null;
+                    return null;
+                }
             }
-        }
         }
 
 
@@ -76,8 +76,8 @@ namespace Catrobat.IDE.Core.Services.Common
                 http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
                 try
                 {
-                // trigger to header-read to avoid timeouts
-                HttpResponseMessage http_response = await http_client.GetAsync(downloadUrl/*, HttpCompletionOption.ResponseHeadersRead*/);
+                    // trigger to header-read to avoid timeouts
+                    HttpResponseMessage http_response = await http_client.GetAsync(downloadUrl/*, HttpCompletionOption.ResponseHeadersRead*/);
                     http_response.EnsureSuccessStatusCode();
                 
                     using (Stream http_stream = await http_response.Content.ReadAsStreamAsync())
@@ -101,20 +101,20 @@ namespace Catrobat.IDE.Core.Services.Common
                                                                             CatrobatContextBase.ProjectsPath + "/" +
                                                                             projectName);
                     }
-                        var result = await CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, true);
+                    var result = await CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, true);
                     CatrobatVersionConverter.VersionConverterError error = result.Error;
-                        return error;
+                    return error;
                     
-                    }
+                }
                 catch (HttpRequestException)
-                    {
+                {
                     return CatrobatVersionConverter.VersionConverterError.ProjectCodePathNotValid;
-                    }
+                }
                 catch (Exception)
                 {
-                return CatrobatVersionConverter.VersionConverterError.ProjectCodePathNotValid;
+                    return CatrobatVersionConverter.VersionConverterError.ProjectCodePathNotValid;
+                }
             }
-        }
         }
 
 
@@ -130,25 +130,25 @@ namespace Catrobat.IDE.Core.Services.Common
             using (var http_client = new HttpClient())
             {
                 http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
-                    JSONStatusResponse status_response = null;
-                    try
-                    {
+                JSONStatusResponse status_response = null;
+                try
+                {
                     HttpResponseMessage http_response = await http_client.PostAsync(ApplicationResources.API_CHECK_TOKEN, post_parameters);
                     http_response.EnsureSuccessStatusCode();
 
                     string json_result = await http_response.Content.ReadAsStringAsync();
-                        status_response = JsonConvert.DeserializeObject<JSONStatusResponse>(json_result);
-                    }
+                    status_response = JsonConvert.DeserializeObject<JSONStatusResponse>(json_result);
+                }
                 catch (HttpRequestException)
                 {
                     status_response = new JSONStatusResponse();
                     status_response.statusCode = StatusCodes.HTTPRequestFailed;
                 }
-                    catch (Newtonsoft.Json.JsonSerializationException)
-                    {
+                catch (Newtonsoft.Json.JsonSerializationException)
+                {
                     status_response = new JSONStatusResponse();
                     status_response.statusCode = StatusCodes.JSONSerializationFailed;
-                    }
+                }
                 catch (Exception)
                 {
                     status_response = new JSONStatusResponse();
@@ -156,7 +156,6 @@ namespace Catrobat.IDE.Core.Services.Common
                 }
                 return status_response;
             }
-
         }
 
         public static async Task<JSONStatusResponse> AsyncLoginOrRegister(string username, string password, string userEmail, 
@@ -177,19 +176,19 @@ namespace Catrobat.IDE.Core.Services.Common
                 JSONStatusResponse status_response = null;
                 try
                 {
-                HttpResponseMessage http_response = await http_client.PostAsync(ApplicationResources.API_LOGIN_REGISTER, post_parameters);
+                    HttpResponseMessage http_response = await http_client.PostAsync(ApplicationResources.API_LOGIN_REGISTER, post_parameters);
                     http_response.EnsureSuccessStatusCode();
 
                     string json_result = await http_response.Content.ReadAsStringAsync();
                     status_response = JsonConvert.DeserializeObject<JSONStatusResponse>(json_result);
                 }
                 catch (HttpRequestException)
-                    {
+                {
                     status_response = new JSONStatusResponse();
                     status_response.statusCode = StatusCodes.HTTPRequestFailed;
-                    }
-                    catch (Newtonsoft.Json.JsonSerializationException)
-                    {
+                }
+                catch (Newtonsoft.Json.JsonSerializationException)
+                {
                     status_response = new JSONStatusResponse();
                     status_response.statusCode = StatusCodes.JSONSerializationFailed;
                 }
@@ -197,9 +196,9 @@ namespace Catrobat.IDE.Core.Services.Common
                 {
                     status_response = new JSONStatusResponse();
                     status_response.statusCode = StatusCodes.UnknownError;
-                    }
-                    return status_response;
                 }
+                return status_response;
+            }
         }
 
 
@@ -219,33 +218,33 @@ namespace Catrobat.IDE.Core.Services.Common
                     JSONStatusResponse status_response = null;
                     try
                     {
-                    await CatrobatZipService.ZipCatrobatPackage(stream, CatrobatContextBase.ProjectsPath + "/" + projectTitle);
-                    Byte[] project_data = stream.ToArray();
+                        await CatrobatZipService.ZipCatrobatPackage(stream, CatrobatContextBase.ProjectsPath + "/" + projectTitle);
+                        Byte[] project_data = stream.ToArray();
 
-                    parameters.Add(new KeyValuePair<string, string>(ApplicationResources.API_PARAM_CHECKSUM, UtilTokenHelper.ToHex(MD5Core.GetHash(project_data))));
+                        parameters.Add(new KeyValuePair<string, string>(ApplicationResources.API_PARAM_CHECKSUM, UtilTokenHelper.ToHex(MD5Core.GetHash(project_data))));
 
-                    // store parameters as MultipartFormDataContent
-                    StringContent content = null;
-                    foreach (var keyValuePair in parameters)
-                    {
-                        content = new StringContent(keyValuePair.Value);
-                        content.Headers.Remove("Content-Type");
-                        post_parameters.Add(content, String.Format("\"{0}\"", keyValuePair.Key));
-                    }
+                        // store parameters as MultipartFormDataContent
+                        StringContent content = null;
+                        foreach (var keyValuePair in parameters)
+                        {
+                            content = new StringContent(keyValuePair.Value);
+                            content.Headers.Remove("Content-Type");
+                            post_parameters.Add(content, String.Format("\"{0}\"", keyValuePair.Key));
+                        }
 
-                    ByteArrayContent file_content = new ByteArrayContent(project_data);
-                    //fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                    //{
-                    //    FileName = projectTitle + ".catrobat"
-                    //};
-                    file_content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/zip");
-                    post_parameters.Add(file_content, String.Format("\"{0}\"", ApplicationResources.API_PARAM_UPLOAD), String.Format("\"{0}\"", projectTitle + ApplicationResources.EXTENSION));
+                        ByteArrayContent file_content = new ByteArrayContent(project_data);
+                        //fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                        //{
+                        //    FileName = projectTitle + ".catrobat"
+                        //};
+                        file_content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/zip");
+                        post_parameters.Add(file_content, String.Format("\"{0}\"", ApplicationResources.API_PARAM_UPLOAD), String.Format("\"{0}\"", projectTitle + ApplicationResources.EXTENSION));
 
-                    _uploadCounter++;
-                    using (var http_client = new HttpClient())
-                    {
-                        http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
-                        HttpResponseMessage http_response = await http_client.PostAsync(ApplicationResources.API_UPLOAD, post_parameters);
+                        _uploadCounter++;
+                        using (var http_client = new HttpClient())
+                        {
+                            http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
+                            HttpResponseMessage http_response = await http_client.PostAsync(ApplicationResources.API_UPLOAD, post_parameters);
                             http_response.EnsureSuccessStatusCode();
                             string json_result = await http_response.Content.ReadAsStringAsync();
 
@@ -254,12 +253,12 @@ namespace Catrobat.IDE.Core.Services.Common
                         _uploadCounter--;
                     }
                     catch (HttpRequestException)
-                            {
+                    {
                         status_response = new JSONStatusResponse();
                         status_response.statusCode = StatusCodes.HTTPRequestFailed;
-                            }
-                            catch (Newtonsoft.Json.JsonSerializationException)
-                            {
+                    }
+                    catch (Newtonsoft.Json.JsonSerializationException)
+                    {
                         status_response = new JSONStatusResponse();
                         status_response.statusCode = StatusCodes.JSONSerializationFailed;
                     }
@@ -267,11 +266,135 @@ namespace Catrobat.IDE.Core.Services.Common
                     {
                         status_response = new JSONStatusResponse();
                         status_response.statusCode = StatusCodes.UnknownError;
-                            }
-                            return status_response;
-                        }
+                    }
+                    return status_response;
+                }
             }
         }
+
+
+        public static async Task<JSONStatusResponse> AsyncReportAsInappropriate(string projectId, string flagReason)
+        {
+            var parameters = new List<KeyValuePair<string, string>>() { 
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_PROJECTID, ((projectId == null) ? "" : projectId)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_FLAG_REASON, ((flagReason == null) ? "" : flagReason))
+            };
+
+            HttpContent post_parameters = new FormUrlEncodedContent(parameters);
+            using (var http_client = new HttpClient())
+            {
+                //http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
+                JSONStatusResponse status_response = null;
+                try
+                {
+                    HttpResponseMessage http_response = await http_client.PostAsync(ApplicationResources.CATROWEB_REPORT_AS_INAPPROPRIATE, post_parameters);
+                    http_response.EnsureSuccessStatusCode();
+
+                    string json_result = await http_response.Content.ReadAsStringAsync();
+                    status_response = JsonConvert.DeserializeObject<JSONStatusResponse>(json_result);
+                }
+                catch (HttpRequestException)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.HTTPRequestFailed;
+                }
+                catch (Newtonsoft.Json.JsonSerializationException)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.JSONSerializationFailed;
+                }
+                catch (Exception)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.UnknownError;
+                }
+                return status_response;
+            }
+        }
+
+
+        public static async Task<JSONStatusResponse> AsyncRecoverPassword(string recoveryUserData)
+        {
+            var parameters = new List<KeyValuePair<string, string>>() { 
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_RECOVER_PWD, ((recoveryUserData == null) ? "" : recoveryUserData))
+            };
+
+            HttpContent post_parameters = new FormUrlEncodedContent(parameters);
+            using (var http_client = new HttpClient())
+            {
+                //http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
+                JSONStatusResponse status_response = null;
+                try
+                {
+                    HttpResponseMessage http_response = await http_client.PostAsync(ApplicationResources.CATROWEB_RECOVER_PWD, post_parameters);
+                    http_response.EnsureSuccessStatusCode();
+
+                    string json_result = await http_response.Content.ReadAsStringAsync();
+                    status_response = JsonConvert.DeserializeObject<JSONStatusResponse>(json_result);
+                }
+                catch (HttpRequestException)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.HTTPRequestFailed;
+                }
+                catch (Newtonsoft.Json.JsonSerializationException)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.JSONSerializationFailed;
+                }
+                catch (Exception)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.UnknownError;
+                }
+                return status_response;
+            }
+        }
+
+
+        public static async Task<JSONStatusResponse> AsyncChangePassword(string newPassword, string newPasswortRepeated, string hash)
+        {
+            var parameters = new List<KeyValuePair<string, string>>() { 
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_HASH, ((hash == null) ? "" : hash)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_NEW_PWD, ((newPassword == null) ? "" : newPassword)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_NEW_PWD_REPEAT, ((newPasswortRepeated == null) ? "" : newPasswortRepeated))
+            };
+
+            HttpContent post_parameters = new FormUrlEncodedContent(parameters);
+            using (var http_client = new HttpClient())
+            {
+                //http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
+                JSONStatusResponse status_response = null;
+                try
+                {
+                    HttpResponseMessage http_response = await http_client.PostAsync(ApplicationResources.CATROWEB_CHANGE_PWD, post_parameters);
+                    http_response.EnsureSuccessStatusCode();
+
+                    string json_result = await http_response.Content.ReadAsStringAsync();
+                    status_response = JsonConvert.DeserializeObject<JSONStatusResponse>(json_result);
+                }
+                catch (HttpRequestException)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.HTTPRequestFailed;
+                }
+                catch (Newtonsoft.Json.JsonSerializationException)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.JSONSerializationFailed;
+                }
+                catch (Exception)
+                {
+                    status_response = new JSONStatusResponse();
+                    status_response.statusCode = StatusCodes.UnknownError;
+                }
+                return status_response;
+            }
+        }
+
 
         public static bool NoUploadsPending()
         {

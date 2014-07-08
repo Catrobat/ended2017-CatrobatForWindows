@@ -130,13 +130,13 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             var message = new MessageBase();
             Messenger.Default.Send(message, ViewModelMessagingToken.UploadProjectStartedListener);
 
-            base.GoBackAction();
+            GoBackAction();
 
             JSONStatusResponse status_response = await Task.Run(() => upload_task);
 
             switch (status_response.statusCode)
             {
-                case StatusCodes.ServerResponseTokenOk:
+                case StatusCodes.ServerResponseOk:
                     break;
 
                 case StatusCodes.HTTPRequestFailed:

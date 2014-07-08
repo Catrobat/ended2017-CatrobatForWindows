@@ -2231,6 +2231,33 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die About Catrobat ähnelt.
+        /// </summary>
+        public static string Main_AboutCatrobat {
+            get {
+                return ResourceManager.GetString("Main_AboutCatrobat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Licenses of the Catrobat system ähnelt.
+        /// </summary>
+        public static string Main_AboutLicense {
+            get {
+                return ResourceManager.GetString("Main_AboutLicense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Microsoft Reciprocal License ähnelt.
+        /// </summary>
+        public static string Main_AboutMSRL {
+            get {
+                return ResourceManager.GetString("Main_AboutMSRL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Pocket Code for Windows Phone is an on-device visual programming system for the Catrobat programming language. ähnelt.
         /// </summary>
         public static string Main_AboutText {
@@ -2272,6 +2299,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_ButtonCancel {
             get {
                 return ResourceManager.GetString("Main_ButtonCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die change password ähnelt.
+        /// </summary>
+        public static string Main_ButtonChangePassword {
+            get {
+                return ResourceManager.GetString("Main_ButtonChangePassword", resourceCulture);
             }
         }
         
@@ -2353,6 +2389,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_ButtonRegister {
             get {
                 return ResourceManager.GetString("Main_ButtonRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die report ähnelt.
+        /// </summary>
+        public static string Main_ButtonReport {
+            get {
+                return ResourceManager.GetString("Main_ButtonReport", resourceCulture);
             }
         }
         
@@ -2618,6 +2663,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Author: ähnelt.
+        /// </summary>
+        public static string Main_OnlineProjectAuthor {
+            get {
+                return ResourceManager.GetString("Main_OnlineProjectAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die description: ähnelt.
         /// </summary>
         public static string Main_OnlineProjectDescription {
@@ -2672,7 +2726,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Report as unappropriate ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Report as inappropriate ähnelt.
         /// </summary>
         public static string Main_OnlineProjectReportButton {
             get {
@@ -2780,6 +2834,51 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Thank you for your contribution. ähnelt.
+        /// </summary>
+        public static string Main_ReportContribution {
+            get {
+                return ResourceManager.GetString("Main_ReportContribution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Report error. {0} ähnelt.
+        /// </summary>
+        public static string Main_ReportError {
+            get {
+                return ResourceManager.GetString("Main_ReportError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Report failed ähnelt.
+        /// </summary>
+        public static string Main_ReportErrorCaption {
+            get {
+                return ResourceManager.GetString("Main_ReportErrorCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please enter a reason for your report. ähnelt.
+        /// </summary>
+        public static string Main_ReportMissingData {
+            get {
+                return ResourceManager.GetString("Main_ReportMissingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Why is this project inappropriate? ähnelt.
+        /// </summary>
+        public static string Main_ReportReason {
+            get {
+                return ResourceManager.GetString("Main_ReportReason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Sorry! The selected program could not be opened. ähnelt.
         /// </summary>
         public static string Main_SelectedProjectNotValidHeader {
@@ -2861,11 +2960,56 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 60 ähnelt.
+        /// </summary>
+        public static string Main_TextBoxLimit {
+            get {
+                return ResourceManager.GetString("Main_TextBoxLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die NEW PASSWORD ähnelt.
+        /// </summary>
+        public static string Main_TitleNewPassword {
+            get {
+                return ResourceManager.GetString("Main_TitleNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die NEW PROGRAM ähnelt.
         /// </summary>
         public static string Main_TitleNewProject {
             get {
                 return ResourceManager.GetString("Main_TitleNewProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ONLINE-PROJECT ähnelt.
+        /// </summary>
+        public static string Main_TitleOnlineProject {
+            get {
+                return ResourceManager.GetString("Main_TitleOnlineProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die RECOVER PASSWORD ähnelt.
+        /// </summary>
+        public static string Main_TitleRecoverPassword {
+            get {
+                return ResourceManager.GetString("Main_TitleRecoverPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die REPORT PROJECT ähnelt.
+        /// </summary>
+        public static string Main_TitleReportProject {
+            get {
+                return ResourceManager.GetString("Main_TitleReportProject", resourceCulture);
             }
         }
         
@@ -2987,6 +3131,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New password: ähnelt.
+        /// </summary>
+        public static string Main_UploadProjectNewPassword {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Password: ähnelt.
         /// </summary>
         public static string Main_UploadProjectPassword {
@@ -3032,6 +3185,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Repeat password: ähnelt.
+        /// </summary>
+        public static string Main_UploadProjectRepeatPassword {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectRepeatPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Undefined error. Error code {0} ähnelt.
         /// </summary>
         public static string Main_UploadProjectUndefinedError {
@@ -3046,6 +3208,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_UploadProjectUsername {
             get {
                 return ResourceManager.GetString("Main_UploadProjectUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Username or e-mail: ähnelt.
+        /// </summary>
+        public static string Main_UploadProjectUserOrMail {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectUserOrMail", resourceCulture);
             }
         }
         

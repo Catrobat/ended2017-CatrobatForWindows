@@ -176,14 +176,15 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
         }
 
-        private void ReportAction()
+        private void ReportAction(OnlineProjectHeader onlineProjectHeader)
         {
-            // TODO: Implement.
+            ResetViewModel();
+            ServiceLocator.NavigationService.NavigateTo<OnlineProjectReportViewModel>();
         }
 
         private void LicenseAction()
         {
-            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.ProjectLicenseUrl);
+            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.PROJECT_LICENSE_URL);
         }
 
         protected override void GoBackAction()
@@ -206,7 +207,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             // Commands
             OnLoadCommand = new RelayCommand<OnlineProjectHeader>(OnLoadAction);
             DownloadCommand = new RelayCommand<OnlineProjectHeader>(DownloadAction, DownloadCommand_CanExecute);
-            ReportCommand = new RelayCommand(ReportAction);
+            ReportCommand = new RelayCommand<OnlineProjectHeader>(ReportAction);
             LicenseCommand = new RelayCommand(LicenseAction);
 
             Messenger.Default.Register<GenericMessage<XmlProject>>(this,

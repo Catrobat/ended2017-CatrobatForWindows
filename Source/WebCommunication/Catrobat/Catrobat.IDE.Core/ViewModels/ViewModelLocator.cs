@@ -46,6 +46,7 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<ProjectSettingsViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<ProjectImportViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<OnlineProjectViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<OnlineProjectReportViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<NewBroadcastMessageViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<ScriptBrickCategoryViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<AddNewScriptBrickViewModel>(TypeCreationMode.Normal);
@@ -301,6 +302,17 @@ namespace Catrobat.IDE.Core.ViewModels
             get
             {
                 return ServiceLocator.GetInstance<OnlineProjectViewModel>();
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public OnlineProjectReportViewModel OnlineProjectReportViewModel
+        {
+            get
+            {
+                return ServiceLocator.GetInstance<OnlineProjectReportViewModel>();
             }
         }
 

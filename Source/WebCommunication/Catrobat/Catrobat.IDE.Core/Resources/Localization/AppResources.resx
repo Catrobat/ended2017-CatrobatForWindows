@@ -652,7 +652,7 @@
     <value>program:</value>
   </data>
   <data name="Main_OnlineProjectReportButton" xml:space="preserve">
-    <value>Report as unappropriate</value>
+    <value>Report as inappropriate</value>
   </data>
   <data name="Main_OnlineProjectStatistics" xml:space="preserve">
     <value>statistics:</value>
@@ -1137,5 +1137,62 @@
   </data>
   <data name="WhackAMole_MovingMole" xml:space="preserve">
     <value>moving mole</value>
+  </data>
+  <data name="Main_ButtonChangePassword" xml:space="preserve">
+    <value>change password</value>
+  </data>
+  <data name="Main_ButtonReport" xml:space="preserve">
+    <value>report</value>
+  </data>
+  <data name="Main_OnlineProjectAuthor" xml:space="preserve">
+    <value>Author:</value>
+  </data>
+  <data name="Main_ReportContribution" xml:space="preserve">
+    <value>Thank you for your contribution.</value>
+  </data>
+  <data name="Main_ReportReason" xml:space="preserve">
+    <value>Why is this project inappropriate?</value>
+  </data>
+  <data name="Main_TitleNewPassword" xml:space="preserve">
+    <value>NEW PASSWORD</value>
+  </data>
+  <data name="Main_TitleOnlineProject" xml:space="preserve">
+    <value>ONLINE-PROJECT</value>
+  </data>
+  <data name="Main_TitleRecoverPassword" xml:space="preserve">
+    <value>RECOVER PASSWORD</value>
+  </data>
+  <data name="Main_TitleReportProject" xml:space="preserve">
+    <value>REPORT PROJECT</value>
+  </data>
+  <data name="Main_UploadProjectNewPassword" xml:space="preserve">
+    <value>New password:</value>
+  </data>
+  <data name="Main_UploadProjectRepeatPassword" xml:space="preserve">
+    <value>Repeat password:</value>
+  </data>
+  <data name="Main_UploadProjectUserOrMail" xml:space="preserve">
+    <value>Username or e-mail:</value>
+  </data>
+  <data name="Main_ReportError" xml:space="preserve">
+    <value>Report error. {0}</value>
+  </data>
+  <data name="Main_ReportErrorCaption" xml:space="preserve">
+    <value>Report failed</value>
+  </data>
+  <data name="Main_ReportMissingData" xml:space="preserve">
+    <value>Please enter a reason for your report.</value>
+  </data>
+  <data name="Main_AboutCatrobat" xml:space="preserve">
+    <value>About Catrobat</value>
+  </data>
+  <data name="Main_AboutLicense" xml:space="preserve">
+    <value>Licenses of the Catrobat system</value>
+  </data>
+  <data name="Main_AboutMSRL" xml:space="preserve">
+    <value>Microsoft Reciprocal License</value>
+  </data>
+  <data name="Main_TextBoxLimit" xml:space="preserve">
+    <value>60</value>
   </data>
 </root>
