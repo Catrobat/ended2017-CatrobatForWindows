@@ -1,8 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using Catrobat.IDE.Core.Annotations;
+using Catrobat.IDE.Core.UI.PortableUI;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Catrobat.IDE.Core.Annotations;
-using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Core.UI
 {
@@ -88,7 +88,6 @@ namespace Catrobat.IDE.Core.UI
                 AccentColor3 = new PortableSolidColorBrush(255, 155, 165, 0),
                 AppBarBackgroundBrush = new PortableSolidColorBrush(255, 50, 50, 50)
             };
-
 
             _themes = new ObservableCollection<Theme>() {theme1, theme2, theme3};
 

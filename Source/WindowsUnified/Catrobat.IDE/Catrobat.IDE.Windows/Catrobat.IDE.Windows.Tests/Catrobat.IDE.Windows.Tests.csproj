@@ -139,12 +139,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Catrobat.IDE.Windows\Catrobat.IDE.Windows.csproj">
-      <Project>{d26523cd-4f73-4859-9abb-13040567005c}</Project>
-      <Name>Catrobat.IDE.Windows</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
