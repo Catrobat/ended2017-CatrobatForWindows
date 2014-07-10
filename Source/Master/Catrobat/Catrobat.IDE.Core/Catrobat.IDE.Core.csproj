@@ -122,6 +122,9 @@
     <Compile Include="Services\Common\ProjectGeneratorWhackAMole.cs" />
     <Compile Include="UI\PortableUI\PortableFontStyle.cs" />
     <Compile Include="ViewModels\Editor\Formula\FormulaEvaluationResult.cs" />
+    <Compile Include="ViewModels\Service\UploadProjectNewPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Service\UploadProjectForgotPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Service\OnlineProjectReportViewModel.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\AnimatePropertyBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\BroadcastBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\ChangePropertyBrick.cs" />

@@ -123,8 +123,8 @@
   <data name="MIMETYPE" xml:space="preserve">
     <value>application/octet-stream</value>
   </data>
-  <data name="ProjectLicenseUrl" xml:space="preserve">
-    <value>http://catroid.org/catroid/projectlicense</value>
+  <data name="PROJECT_LICENSE_URL" xml:space="preserve">
+    <value>https://pocketcode.org/licenseToPlay</value>
   </data>
   <data name="API_PARAM_REG_COUNTRY" xml:space="preserve">
     <value>registrationCountry</value>
@@ -138,9 +138,6 @@
   <data name="API_PARAM_REG_PASSWORD" xml:space="preserve">
     <value>registrationPassword</value>
   </data>
-  <data name="UserAgent" xml:space="preserve">
-    <value>Windows Phone 7 Device</value>
-  </data>
   <data name="USER_EMAIL" xml:space="preserve">
     <value>userEmail</value>
   </data>
@@ -148,7 +145,7 @@
     <value>userLanguage</value>
   </data>
   <data name="API_BASE_ADDRESS" xml:space="preserve">
-    <value>http://catroid-test.catrob.at/api/</value>
+    <value>https://pocketcode.org/api/</value>
   </data>
   <data name="API_CHECK_TOKEN" xml:space="preserve">
     <value>checkToken/check.json</value>
@@ -182,5 +179,41 @@
   </data>
   <data name="POCEKTCODE_BASE_ADDRESS" xml:space="preserve">
     <value>https://pocketcode.org/</value>
+  </data>
+  <data name="API_PARAM_FLAG_REASON" xml:space="preserve">
+    <value>flagReason</value>
+  </data>
+  <data name="API_PARAM_HASH" xml:space="preserve">
+    <value>c</value>
+  </data>
+  <data name="API_PARAM_NEW_PWD" xml:space="preserve">
+    <value>passwordSavePassword</value>
+  </data>
+  <data name="API_PARAM_NEW_PWD_REPEAT" xml:space="preserve">
+    <value>passwordSavePassword2</value>
+  </data>
+  <data name="API_PARAM_PROJECTID" xml:space="preserve">
+    <value>projectId</value>
+  </data>
+  <data name="API_PARAM_RECOVER_PWD" xml:space="preserve">
+    <value>passwordRecoveryUserdata</value>
+  </data>
+  <data name="CATROWEB_CHANGE_PWD" xml:space="preserve">
+    <value>passwordrecovery/changeMyPasswordRequest.json</value>
+  </data>
+  <data name="CATROWEB_RECOVER_PWD" xml:space="preserve">
+    <value>passwordrecovery/sendMailRequest.json</value>
+  </data>
+  <data name="CATROWEB_REPORT_AS_INAPPROPRIATE" xml:space="preserve">
+    <value>flagInappropriate/flag.json</value>
+  </data>
+  <data name="CATROBAT_LICENSES_URL" xml:space="preserve">
+    <value>http://developer.catrobat.org/licenses</value>
+  </data>
+  <data name="CATROBAT_URL" xml:space="preserve">
+    <value>http://www.catrobat.org/</value>
+  </data>
+  <data name="MS_RL_LICENSE_URL" xml:space="preserve">
+    <value>http://opensource.org/licenses/MS-RL</value>
   </data>
 </root>

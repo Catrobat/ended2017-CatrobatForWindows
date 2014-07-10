@@ -130,13 +130,13 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             var message = new MessageBase();
             Messenger.Default.Send(message, ViewModelMessagingToken.UploadProjectStartedListener);
 
-            base.GoBackAction();
+            GoBackAction();
 
             JSONStatusResponse status_response = await Task.Run(() => upload_task);
 
             switch (status_response.statusCode)
             {
-                case StatusCodes.ServerResponseTokenOk:
+                case StatusCodes.ServerResponseOk:
                     break;
 
                 case StatusCodes.HTTPRequestFailed:
@@ -145,11 +145,10 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     break;
 
                 default:
-                string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
-                                       string.Format(AppResources.Main_UploadProjectError, status_response.answer);
-
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
-                            messageString, UploadErrorCallback, MessageBoxOptions.Ok);
+                    string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
+                                           string.Format(AppResources.Main_UploadProjectError, status_response.answer);
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
+                                messageString, UploadErrorCallback, MessageBoxOptions.Ok);
                     break;
             }
 
