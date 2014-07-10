@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Catrobat.IDE.Core.Services.Storage;
 //using SharpCompress.Archive.Zip;
 //using SharpCompress.Common;
 //using SharpCompress.Reader;
