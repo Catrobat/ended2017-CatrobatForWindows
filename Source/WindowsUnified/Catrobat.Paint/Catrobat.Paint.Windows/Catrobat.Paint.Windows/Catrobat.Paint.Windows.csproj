@@ -7,8 +7,8 @@
     <ProjectGuid>{309ED267-E457-43FF-926E-40776CF5909A}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Catrobat.Paint</RootNamespace>
-    <AssemblyName>Catrobat.Paint.Windows</AssemblyName>
+    <RootNamespace>Catrobat.Paint.Windows</RootNamespace>
+    <AssemblyName>Pocket Paint</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>

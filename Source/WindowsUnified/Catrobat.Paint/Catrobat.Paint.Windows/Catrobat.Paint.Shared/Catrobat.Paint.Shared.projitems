@@ -13,7 +13,7 @@
     <SharedGUID>4f1f10f4-5c60-45b2-b406-cdb2c6c27d92</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Catrobat.Paint</Import_RootNamespace>
+    <Import_RootNamespace>Catrobat.Paint.WindowsShared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
