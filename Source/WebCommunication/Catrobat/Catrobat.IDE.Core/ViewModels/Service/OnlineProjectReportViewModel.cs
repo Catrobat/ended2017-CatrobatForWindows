@@ -63,7 +63,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
             else
             {
-                JSONStatusResponse status_response = await CatrobatWebCommunicationService.AsyncReportAsInappropriate(onlineproject.ProjectId, _reason);
+                JSONStatusResponse status_response = await CatrobatWebCommunicationService.AsyncReportAsInappropriate(onlineproject.ProjectId, _reason, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
                 switch (status_response.statusCode)
                 {

@@ -28,6 +28,7 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 //http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
                 http_client.BaseAddress = new Uri("https://pocketcode.org/api/");
+                //https://catroid-test.catrob.at/api/
                 //http_client.DefaultRequestHeaders.Accept.Clear();
                 //http_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
@@ -273,18 +274,19 @@ namespace Catrobat.IDE.Core.Services.Common
         }
 
 
-        public static async Task<JSONStatusResponse> AsyncReportAsInappropriate(string projectId, string flagReason)
+        public static async Task<JSONStatusResponse> AsyncReportAsInappropriate(string projectId, string flagReason, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_PROJECTID, ((projectId == null) ? "" : projectId)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_FLAG_REASON, ((flagReason == null) ? "" : flagReason))
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_FLAG_REASON, ((flagReason == null) ? "" : flagReason)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
             };
 
             HttpContent post_parameters = new FormUrlEncodedContent(parameters);
             using (var http_client = new HttpClient())
             {
-                //http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
-                http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
+                http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                //http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
                 JSONStatusResponse status_response = null;
                 try
                 {
@@ -314,17 +316,18 @@ namespace Catrobat.IDE.Core.Services.Common
         }
 
 
-        public static async Task<JSONStatusResponse> AsyncRecoverPassword(string recoveryUserData)
+        public static async Task<JSONStatusResponse> AsyncRecoverPassword(string recoveryUserData, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_RECOVER_PWD, ((recoveryUserData == null) ? "" : recoveryUserData))
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_RECOVER_PWD, ((recoveryUserData == null) ? "" : recoveryUserData)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
             };
 
             HttpContent post_parameters = new FormUrlEncodedContent(parameters);
             using (var http_client = new HttpClient())
             {
-                //http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
-                http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
+                http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                //http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
                 JSONStatusResponse status_response = null;
                 try
                 {
@@ -354,19 +357,20 @@ namespace Catrobat.IDE.Core.Services.Common
         }
 
 
-        public static async Task<JSONStatusResponse> AsyncChangePassword(string newPassword, string newPasswortRepeated, string hash)
+        public static async Task<JSONStatusResponse> AsyncChangePassword(string newPassword, string newPasswortRepeated, string hash, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_HASH, ((hash == null) ? "" : hash)),
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_NEW_PWD, ((newPassword == null) ? "" : newPassword)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_NEW_PWD_REPEAT, ((newPasswortRepeated == null) ? "" : newPasswortRepeated))
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_NEW_PWD_REPEAT, ((newPasswortRepeated == null) ? "" : newPasswortRepeated)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
             };
 
             HttpContent post_parameters = new FormUrlEncodedContent(parameters);
             using (var http_client = new HttpClient())
             {
-                //http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
-                http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
+                http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                //http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
                 JSONStatusResponse status_response = null;
                 try
                 {

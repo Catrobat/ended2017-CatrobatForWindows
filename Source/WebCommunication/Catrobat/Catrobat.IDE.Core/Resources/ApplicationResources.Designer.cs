@@ -62,7 +62,7 @@ namespace Catrobat.IDE.Core.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die https://catroid-test.catrob.at/api/ ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die https://pocketcode.org/api/ ähnelt.
         /// </summary>
         public static string API_BASE_ADDRESS {
             get {

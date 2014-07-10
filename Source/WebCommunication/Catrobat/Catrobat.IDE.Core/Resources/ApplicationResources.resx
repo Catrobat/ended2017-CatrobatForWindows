@@ -145,7 +145,7 @@
     <value>userLanguage</value>
   </data>
   <data name="API_BASE_ADDRESS" xml:space="preserve">
-    <value>https://catroid-test.catrob.at/api/</value>
+    <value>https://pocketcode.org/api/</value>
   </data>
   <data name="API_CHECK_TOKEN" xml:space="preserve">
     <value>checkToken/check.json</value>

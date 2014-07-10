@@ -2312,7 +2312,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Change user ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die change user ähnelt.
         /// </summary>
         public static string Main_ButtonChangeUser {
             get {
@@ -2357,7 +2357,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Login ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die login ähnelt.
         /// </summary>
         public static string Main_ButtonLogin {
             get {
@@ -2375,7 +2375,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Password forgotten ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die password forgotten ähnelt.
         /// </summary>
         public static string Main_ButtonPasswordForgotten {
             get {
@@ -2384,7 +2384,16 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Register ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die recover ähnelt.
+        /// </summary>
+        public static string Main_ButtonPasswordRecover {
+            get {
+                return ResourceManager.GetString("Main_ButtonPasswordRecover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die register ähnelt.
         /// </summary>
         public static string Main_ButtonRegister {
             get {
@@ -3131,6 +3140,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please enter password. ähnelt.
+        /// </summary>
+        public static string Main_UploadProjectMissingPassword {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectMissingPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please enter username or e-mail.  ähnelt.
+        /// </summary>
+        public static string Main_UploadProjectMissingRecoveryData {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectMissingRecoveryData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die New password: ähnelt.
         /// </summary>
         public static string Main_UploadProjectNewPassword {
@@ -3149,6 +3176,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sucessfully changed password. ähnelt.
+        /// </summary>
+        public static string Main_UploadProjectPasswordChangeSucess {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectPasswordChangeSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Recovery failed ähnelt.
+        /// </summary>
+        public static string Main_UploadProjectPasswordRecoveryErrorCaption {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectPasswordRecoveryErrorCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Description: ähnelt.
         /// </summary>
         public static string Main_UploadProjectProjectDescription {
@@ -3163,6 +3208,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_UploadProjectProjectName {
             get {
                 return ResourceManager.GetString("Main_UploadProjectProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Recovery hash was not found. ähnelt.
+        /// </summary>
+        public static string Main_UploadProjectRecoveryHashError {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectRecoveryHashError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Passwords do not match. ähnelt.
+        /// </summary>
+        public static string Main_UploadProjectRecoveryPasswordMatchError {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectRecoveryPasswordMatchError", resourceCulture);
             }
         }
         

@@ -1142,7 +1142,7 @@
     <value>Passwort ändern</value>
   </data>
   <data name="Main_ButtonReport" xml:space="preserve">
-    <value>melden</value>
+    <value>Melden</value>
   </data>
   <data name="Main_OnlineProjectAuthor" xml:space="preserve">
     <value>Autor:</value>
@@ -1194,5 +1194,26 @@
   </data>
   <data name="Main_TextBoxLimit" xml:space="preserve">
     <value>60</value>
+  </data>
+  <data name="Main_ButtonPasswordRecover" xml:space="preserve">
+    <value>wiederherstellen</value>
+  </data>
+  <data name="Main_UploadProjectMissingRecoveryData" xml:space="preserve">
+    <value>Bitte Benutzerame oder E-Mail angeben.</value>
+  </data>
+  <data name="Main_UploadProjectPasswordRecoveryErrorCaption" xml:space="preserve">
+    <value>Wiederherstellung fehlgeschlagen</value>
+  </data>
+  <data name="Main_UploadProjectMissingPassword" xml:space="preserve">
+    <value>Bitte Passwort angeben.</value>
+  </data>
+  <data name="Main_UploadProjectRecoveryHashError" xml:space="preserve">
+    <value>Hash für Wiederherstellung konnte nicht gefunden werden.</value>
+  </data>
+  <data name="Main_UploadProjectRecoveryPasswordMatchError" xml:space="preserve">
+    <value>Passwörter stimmen nicht überein.</value>
+  </data>
+  <data name="Main_UploadProjectPasswordChangeSucess" xml:space="preserve">
+    <value>Passwort erfolgreich geändert.</value>
   </data>
 </root>
