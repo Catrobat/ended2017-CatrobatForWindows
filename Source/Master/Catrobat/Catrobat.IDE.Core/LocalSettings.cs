@@ -22,6 +22,8 @@ namespace Catrobat.IDE.Core
 
         public string CurrentUsername { get; set; }
 
+        public string CurrentUserRecoveryHash { get; set; }
+
         public List<SerializableTuple<int, string>> Favorites { get; set; }
 
         public List<SerializableTuple<int, string>> RecentlyUsed { get; set; } 

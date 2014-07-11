@@ -148,7 +148,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private void ForgottenAction()
         {
-            // TODO: Implement.
+            ResetViewModel();
+            ServiceLocator.NavigationService.NavigateTo<UploadProjectForgotPasswordViewModel>();
         }
 
         private void RegisterAction()

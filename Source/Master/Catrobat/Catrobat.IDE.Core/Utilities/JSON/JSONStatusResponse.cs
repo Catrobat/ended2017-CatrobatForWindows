@@ -7,11 +7,16 @@ namespace Catrobat.IDE.Core.Utilities.JSON
         HTTPRequestFailed = 11,
         JSONSerializationFailed = 12,
         UnknownError = 13,
-        ServerResponseTokenOk = 200,
+        ServerResponseOk = 200,
         ServerResponseRegisterOk = 201,
         ServerResponseLoginFailed = 601,
         ServerResponseRegistrationFailed = 602,
-        ServerResponseMissingEmail = 765
+        ServerResponsePasswordInvalid = 753,
+        ServerResponseMissingEmail = 765,
+        ServerResponseMissingUsernameOrEmail = 769,
+        ServerResponseUserDoesNotExist = 770,
+        ServerResponseRecoveryHashNotFound = 772,
+        ServerResponsePasswordMatchFailed = 774
     };
 
     public class JSONStatusResponse

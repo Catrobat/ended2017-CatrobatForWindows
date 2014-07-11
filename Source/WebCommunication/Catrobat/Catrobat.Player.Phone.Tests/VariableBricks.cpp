@@ -38,11 +38,7 @@ namespace PlayerWindowsPhone8Test
 
         TEST_METHOD_CLEANUP(TestCleanup)
         {
-            //delete m_script;
-            //delete m_object;
-            //delete m_variable;
-            //if (m_formulaTree != NULL)
-            //    delete m_formulaTree;
+         
         }
 
 

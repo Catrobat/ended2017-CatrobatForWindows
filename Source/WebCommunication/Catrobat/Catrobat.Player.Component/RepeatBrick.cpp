@@ -21,7 +21,7 @@ void RepeatBrick::Execute()
 	int global = 0;
 	int times = Interpreter::Instance()->EvaluateFormulaToInt(m_timesToRepeat, GetParent()->GetParent());
 
-	while (global < times)
+	while (m_brickList->size() > 0 && global < times)
 	{
 		GetBrick(i)->Execute();
 		i++;

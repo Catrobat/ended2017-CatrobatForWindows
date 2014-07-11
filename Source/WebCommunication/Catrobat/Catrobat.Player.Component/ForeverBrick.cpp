@@ -18,7 +18,7 @@ void ForeverBrick::Execute()
 {
 	// Synchronously execute all subsequent blocks
 	unsigned int i = 0;
-	while (true)
+	while (m_brickList->size() > 0)
 	{
 		GetBrick(i)->Execute();
 		i++;
@@ -35,7 +35,7 @@ void ForeverBrick::AddBrick(Brick *brick)
 }
 
 Brick *ForeverBrick::GetBrick(int index)
-{
+{		
 	list<Brick*>::iterator it = m_brickList->begin();
 	advance(it, index);
 	return *it;

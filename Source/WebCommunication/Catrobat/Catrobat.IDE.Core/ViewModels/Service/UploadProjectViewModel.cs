@@ -145,11 +145,10 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     break;
 
                 default:
-                string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
-                                       string.Format(AppResources.Main_UploadProjectError, status_response.answer);
-
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
-                            messageString, UploadErrorCallback, MessageBoxOptions.Ok);
+                    string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
+                                           string.Format(AppResources.Main_UploadProjectError, status_response.answer);
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
+                                messageString, UploadErrorCallback, MessageBoxOptions.Ok);
                     break;
             }
 

@@ -32,6 +32,8 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<UploadProjectLoadingViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<UploadProjectLoginViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<UploadProjectRegisterViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<UploadProjectForgotPasswordViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<UploadProjectNewPasswordViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SoundRecorderViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SettingsViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SettingsBrickViewModel>(TypeCreationMode.Normal);
@@ -148,6 +150,28 @@ namespace Catrobat.IDE.Core.ViewModels
             get
             {
                 return ServiceLocator.GetInstance<UploadProjectRegisterViewModel>();
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public UploadProjectForgotPasswordViewModel UploadProjectForgotPasswordViewModel
+        {
+            get
+            {
+                return ServiceLocator.GetInstance<UploadProjectForgotPasswordViewModel>();
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public UploadProjectNewPasswordViewModel UploadProjectNewPasswordViewModel
+        {
+            get
+            {
+                return ServiceLocator.GetInstance<UploadProjectNewPasswordViewModel>();
             }
         }
 

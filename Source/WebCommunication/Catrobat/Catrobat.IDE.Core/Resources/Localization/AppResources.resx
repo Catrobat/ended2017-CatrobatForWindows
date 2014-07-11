@@ -565,10 +565,10 @@
     <value>edit</value>
   </data>
   <data name="Main_ButtonLogin" xml:space="preserve">
-    <value>Login</value>
+    <value>login</value>
   </data>
   <data name="Main_ButtonPasswordForgotten" xml:space="preserve">
-    <value>Password forgotten</value>
+    <value>password forgotten</value>
   </data>
   <data name="Main_ButtonSave" xml:space="preserve">
     <value>save</value>
@@ -1076,7 +1076,7 @@
     <value>Login / Register</value>
   </data>
   <data name="Main_ButtonRegister" xml:space="preserve">
-    <value>Register</value>
+    <value>register</value>
   </data>
   <data name="Main_TitleUploadProjectRegister" xml:space="preserve">
     <value>REGISTER</value>
@@ -1091,7 +1091,7 @@
     <value>No internet connection available.</value>
   </data>
   <data name="Main_ButtonChangeUser" xml:space="preserve">
-    <value>Change user</value>
+    <value>change user</value>
   </data>
   <data name="Main_UploadProjectLoginErrorStatic" xml:space="preserve">
     <value>Invalid username or password.</value>
@@ -1194,5 +1194,26 @@
   </data>
   <data name="Main_TextBoxLimit" xml:space="preserve">
     <value>60</value>
+  </data>
+  <data name="Main_ButtonPasswordRecover" xml:space="preserve">
+    <value>recover</value>
+  </data>
+  <data name="Main_UploadProjectMissingRecoveryData" xml:space="preserve">
+    <value>Please enter username or e-mail. </value>
+  </data>
+  <data name="Main_UploadProjectPasswordRecoveryErrorCaption" xml:space="preserve">
+    <value>Recovery failed</value>
+  </data>
+  <data name="Main_UploadProjectMissingPassword" xml:space="preserve">
+    <value>Please enter password.</value>
+  </data>
+  <data name="Main_UploadProjectRecoveryHashError" xml:space="preserve">
+    <value>Recovery hash was not found.</value>
+  </data>
+  <data name="Main_UploadProjectRecoveryPasswordMatchError" xml:space="preserve">
+    <value>Passwords do not match.</value>
+  </data>
+  <data name="Main_UploadProjectPasswordChangeSucess" xml:space="preserve">
+    <value>Sucessfully changed password.</value>
   </data>
 </root>
