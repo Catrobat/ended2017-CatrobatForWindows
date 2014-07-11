@@ -74,14 +74,12 @@ namespace PhoneDirect3DXamlAppComponent
             return;
         }
 
+        bool objectFound = false;
+
         for (int i = objects->GetSize() - 1; i >= 0; i--)
         {
             try
             {
-                Bounds bounds = objects->GetObject(i)->GetBounds();
-                bounds.x += ProjectDaemon::Instance()->GetProject()->GetScreenWidth() / 2.0f;
-                bounds.y += ProjectDaemon::Instance()->GetProject()->GetScreenHeight() / 2.0f;
-
                 float resolutionScaleFactor;
 
                 switch (DisplayProperties::ResolutionScale)
@@ -97,23 +95,22 @@ namespace PhoneDirect3DXamlAppComponent
                     break;
                 }
 
-                float actualX = args->CurrentPoint->Position.X;
-                float actualY = args->CurrentPoint->Position.Y;
+                double actualX = args->CurrentPoint->Position.X;
+                double actualY = args->CurrentPoint->Position.Y;
 
                 double factorX = abs(ProjectDaemon::Instance()->GetProject()->GetScreenWidth() / (m_originalWindowsBounds.X / resolutionScaleFactor));
                 double factorY = abs(ProjectDaemon::Instance()->GetProject()->GetScreenHeight() / (m_originalWindowsBounds.Y / resolutionScaleFactor));
 
-                double normalizedX = factorX * actualX;
-                double normalizedY = factorY * actualY;
+                double normalizedX = actualX * ((int)DisplayProperties::ResolutionScale) / 100.0;
+                double normalizedY = actualY * ((int)DisplayProperties::ResolutionScale) / 100.0;
 
-                if (bounds.x <= normalizedX &&
-                    bounds.y <= normalizedY &&
-                    (bounds.x + bounds.width) >= normalizedX && 
-                    (bounds.y + bounds.height) >= normalizedY)
+                auto current = objects->GetObject(i);
+
+                if (current->IsTapPointHitting(m_context, m_device, actualX, actualY, (double)((int)DisplayProperties::ResolutionScale) / 100.0))
                 {
-                    for (int j = 0; j < objects->GetObject(i)->GetScriptListSize(); j++)
+                    for (int j = 0; j < current->GetScriptListSize(); j++)
                     {
-                        Script *script = objects->GetObject(i)->GetScript(j);
+                        Script *script = current->GetScript(j);
 
                         if (script->GetType() == Script::TypeOfScript::WhenScript)
                         {
@@ -123,12 +120,15 @@ namespace PhoneDirect3DXamlAppComponent
                             {
                                 m_lastTappedWhenScript = whenScript;
                                 whenScript->Execute();
+                                objectFound = true;
+                                break;
                             }
                         }
-
                     }
-                    break;
                 }
+
+                if (objectFound)
+                    break;
             }
             catch (PlayerException *e) //TODO: Exception handling
             {
@@ -148,6 +148,7 @@ namespace PhoneDirect3DXamlAppComponent
         // Initialize Renderer
         m_renderer = ref new Renderer();
         m_renderer->Initialize(device);
+        m_device = device;
 
         // Initialize Sound
         SoundManager::Instance()->Initialize();
@@ -171,6 +172,7 @@ namespace PhoneDirect3DXamlAppComponent
 
     void Direct3DBackground::Disconnect()
     {
+        //TODO: do a clean disconnect
         m_renderer = nullptr;
         m_projectRenderer = nullptr;
     }
@@ -195,6 +197,8 @@ namespace PhoneDirect3DXamlAppComponent
 
     HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
     {
+        m_context = context;
+
         if (!ProjectDaemon::Instance()->FinishedLoading() || m_renderingErrorOccured)
         {
             // Render Loading Screen

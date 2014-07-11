@@ -311,6 +311,7 @@
     <ClInclude Include="BroadcastBrick.h" />
     <ClInclude Include="BroadcastMessageDaemon.h" />
     <ClInclude Include="BroadcastScript.h" />
+    <ClInclude Include="CatrobatTexture.h" />
     <ClInclude Include="ChangeGhostEffectByBrick.h" />
     <ClInclude Include="ChangeSizeByBrick.h" />
     <ClInclude Include="ChangeVariableBrick.h" />
@@ -387,6 +388,7 @@
     <ClCompile Include="BroadcastBrick.cpp" />
     <ClCompile Include="BroadcastMessageDaemon.cpp" />
     <ClCompile Include="BroadcastScript.cpp" />
+    <ClCompile Include="CatrobatTexture.cpp" />
     <ClCompile Include="ChangeGhostEffectByBrick.cpp" />
     <ClCompile Include="ChangeSizeByBrick.cpp" />
     <ClCompile Include="ChangeVariableBrick.cpp" />

@@ -232,6 +232,7 @@
     <ClInclude Include="..\Catrobat.Player.Component\BroadcastMessageListener.h" />
     <ClInclude Include="..\Catrobat.Player.Component\BroadcastMessageSender.h" />
     <ClInclude Include="..\Catrobat.Player.Component\BroadcastScript.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\CatrobatTexture.h" />
     <ClInclude Include="..\Catrobat.Player.Component\ChangeGhostEffectByBrick.h" />
     <ClInclude Include="..\Catrobat.Player.Component\ChangeSizeByBrick.h" />
     <ClInclude Include="..\Catrobat.Player.Component\ChangeVariableBrick.h" />
@@ -311,6 +312,7 @@
     <ClCompile Include="..\Catrobat.Player.Component\BroadcastMessageListener.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\BroadcastMessageSender.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\BroadcastScript.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\CatrobatTexture.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\ChangeGhostEffectByBrick.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\ChangeSizeByBrick.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\ChangeVariableBrick.cpp" />

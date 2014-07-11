@@ -13,6 +13,6 @@ ChangeXByBrick::ChangeXByBrick(FormulaTree *offsetX, Script *parent) :
 void ChangeXByBrick::Execute()
 {
 	float currentX, currentY;
-	m_parent->GetParent()->GetPosition(currentX, currentY);
-	m_parent->GetParent()->SetPosition(currentX + Interpreter::Instance()->EvaluateFormulaToFloat(m_offsetX, m_parent->GetParent()), currentY);
+	m_parent->GetParent()->GetTranslation(currentX, currentY);
+	m_parent->GetParent()->SetTranslation(currentX + Interpreter::Instance()->EvaluateFormulaToFloat(m_offsetX, m_parent->GetParent()), currentY);
 }

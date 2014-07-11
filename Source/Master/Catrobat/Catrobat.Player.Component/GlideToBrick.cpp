@@ -23,8 +23,8 @@ void GlideToBrick::Execute()
 	for (int i = 0; i < steps; i++)
 	{
 		float currentX, currentY;
-		m_parent->GetParent()->GetPosition(currentX, currentY);
-		m_parent->GetParent()->SetPosition(currentX + x_movement, currentY - y_movement);
+		m_parent->GetParent()->GetTranslation(currentX, currentY);
+        m_parent->GetParent()->SetTranslation(currentX + x_movement, currentY - y_movement);
 
 		Concurrency::wait(20); // 50 Hz
 	}

@@ -48,8 +48,9 @@ void TextureDaemon::LoadTexture(ID3D11Device *d3dDevice, CatrobatTexture **textu
 
     if (existingTexture == m_textures->end() && currentFileSize != oldFileSize || existingTexture->second == NULL)
 	{
+        //TODO: Check if this needs a copy constructor for already existing textures
 		CatrobatTexture *newTexture = new CatrobatTexture();
-        DDSLoader::LoadTexture(d3dDevice, path, &(newTexture->texture), &(newTexture->width), &(newTexture->height));
+        DDSLoader::LoadTexture(d3dDevice, path, &(newTexture->texture), &(newTexture->resourceView), &(newTexture->width), &(newTexture->height));
         newTexture->fileSize = currentFileSize;
 		m_textures->insert(pair<string, CatrobatTexture*>(textureKey, newTexture));
 		*texture = newTexture;

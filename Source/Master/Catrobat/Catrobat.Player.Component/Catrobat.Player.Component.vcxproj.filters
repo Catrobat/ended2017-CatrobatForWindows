@@ -217,6 +217,9 @@
     <ClCompile Include="LoudnessCapture.cpp">
       <Filter>Formula</Filter>
     </ClCompile>
+    <ClCompile Include="CatrobatTexture.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -443,6 +446,9 @@
     </ClInclude>
     <ClInclude Include="LoudnessCapture.h">
       <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="CatrobatTexture.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

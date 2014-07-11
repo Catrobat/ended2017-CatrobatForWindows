@@ -47,11 +47,20 @@ void Look::LoadTexture(ID3D11Device* d3dDevice)
 	TextureDaemon::Instance()->LoadTexture(d3dDevice, &m_texture, m_filename);
 }
 
-ID3D11ShaderResourceView *Look::GetTexture()
+ID3D11ShaderResourceView *Look::GetResourceView()
 {
 	if (m_texture == NULL)
 	{
-		throw new PlayerException("Look::GetTexture called with no texture defined.");
+		throw new PlayerException("Look::GetResourceView called with no texture defined.");
 	}
-	return m_texture->texture;
+	return m_texture->resourceView;
+}
+
+ID3D11Resource *Look::GetTexture()
+{
+    if (m_texture == NULL)
+    {
+        throw new PlayerException("Look::GetTexture called with no texture defined.");
+    }
+    return m_texture->texture;
 }

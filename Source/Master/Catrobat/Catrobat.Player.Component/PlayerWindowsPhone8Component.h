@@ -53,6 +53,8 @@ private:
 	bool m_renderingErrorOccured;
     bool m_initialized;
     WhenScript* m_lastTappedWhenScript;
+    ID3D11DeviceContext1* m_context;
+    ID3D11Device1* m_device;
 };
 
 }

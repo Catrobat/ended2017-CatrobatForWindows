@@ -19,5 +19,6 @@ protected:
 	BaseObject(float scaleX = 1, float scaleY = 1);
 
 	XMFLOAT2 m_position;
+    XMFLOAT2 m_translation;
 	XMFLOAT2 m_objectScale;
 };

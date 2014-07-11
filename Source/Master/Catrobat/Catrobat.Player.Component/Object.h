@@ -46,9 +46,9 @@ public:
 	int GetLookCount();
 	Look* GetCurrentLook();
 
-	void SetPosition(float x, float y);
+	void SetTranslation(float x, float y);
 	void GetPosition(float &x, float &y);
-
+    void GetTranslation(float &x, float &y);
 	Bounds GetBounds();
 
 	void SetTransparency(float transparency);
@@ -58,7 +58,8 @@ public:
 	void SetScale(float scale);
 	float GetScale();
 
-    bool IsTapPointHitting(int xPosition, int yPosition, int xNormalized, int yNormalized);
+    bool IsTapPointHitting(ID3D11DeviceContext1* context, ID3D11Device* device, double xNormalized, double yNormalized, double resolutionFactor);
+    XMMATRIX GetWorldMatrix();
 
 private:
 	Look *m_look;
@@ -69,4 +70,6 @@ private:
 	string m_name;
 	float m_opacity;
 	float m_rotation;
+    XMFLOAT2 m_origin;
+    XMMATRIX m_transformationMatrix;
 };

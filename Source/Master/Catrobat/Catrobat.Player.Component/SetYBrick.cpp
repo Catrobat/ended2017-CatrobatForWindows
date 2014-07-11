@@ -13,7 +13,7 @@ SetYBrick::SetYBrick(FormulaTree *positionY, Script *parent) :
 void SetYBrick::Execute()
 {
 	float currentX, currentY;
-	m_parent->GetParent()->GetPosition(currentX, currentY);
+    m_parent->GetParent()->GetTranslation(currentX, currentY);
     auto newYPosition = Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY, m_parent->GetParent());
-	m_parent->GetParent()->SetPosition(currentX, newYPosition * (-1));
+    m_parent->GetParent()->SetTranslation(currentX, newYPosition * (-1));
 }
