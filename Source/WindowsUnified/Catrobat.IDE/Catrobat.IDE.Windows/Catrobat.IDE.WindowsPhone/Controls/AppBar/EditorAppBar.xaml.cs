@@ -20,7 +20,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.AppBar
         }
 
         public static readonly DependencyProperty TargetTypeProperty = 
-            DependencyProperty.Register("TargetType", typeof(AppBarTargetType), typeof(EditorAppBar), new PropertyMetadata(null, TargetTypeChanged));
+            DependencyProperty.Register("TargetType", typeof(AppBarTargetType), typeof(EditorAppBar), new PropertyMetadata(AppBarTargetType.Costume, TargetTypeChanged));
 
         private static void TargetTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -221,7 +221,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.AppBar
                     break;
             }
 
-            TextBlockNew.Text =  text;
+            ButtonNew.Label =  text;
         }
     }
 }

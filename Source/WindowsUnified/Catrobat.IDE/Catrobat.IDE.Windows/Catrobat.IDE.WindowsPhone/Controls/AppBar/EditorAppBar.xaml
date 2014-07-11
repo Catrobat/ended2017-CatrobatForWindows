@@ -14,14 +14,9 @@
     </Grid.ColumnDefinitions>
 
     <Grid Grid.Column="0" Margin="5 25 0 0">
-      <Button Name="ButtonNew" 
+      <AppBarButton Name="ButtonNew" Icon="Add" Label="New"
           Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
           BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"/>
-      <!--<coding4FunControls:RoundButton Name="ButtonNew" Margin="0 0 0 0" FontSize="20"
-          Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-          BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-          ImageSource="/Content/Images/ApplicationBar/dark/appbar.new.rest.png"/>-->
-      <TextBlock Name="TextBlockNew" Text="New Costume" TextAlignment="Center" FontSize="16" Margin="0 50 0 0" HorizontalAlignment="Center" FontWeight="SemiBold" TextWrapping="Wrap" Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}" />
     </Grid>
     <Grid Grid.Column="1">
       <Grid.RowDefinitions>
@@ -58,38 +53,33 @@
           </Grid.ColumnDefinitions>
 
           <StackPanel Grid.Column="0" Name="StackPanelCopy">
-            <Button Name="ButtonCopy"
-                    Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-                    BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-                    Content="{Binding Resources.Editor_ButtonCopy, Source={StaticResource LocalizedStrings}}"/>
-            <!--<coding4FunControls:RoundButton Name="ButtonCopy" Margin="0 0 0 0" FontSize="16"
-                                            ImageSource="/Content/Images/ApplicationBar/dark/appbar.copy.rest.png"
-                                            Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-                                            BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-                                            Label="{Binding Resources.Editor_ButtonCopy, Source={StaticResource LocalizedStrings}}"/>-->
+            <AppBarButton Name="ButtonCopy" Icon="Copy" 
+                    Label="{Binding Resources.Editor_ButtonCopy, 
+                    Source={StaticResource LocalizedStrings}}"
+                    Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
+                    Source={StaticResource ThemeChooser}}"
+                    BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
+                    Source={StaticResource ThemeChooser}}"
+                    Content="{Binding Resources.Editor_ButtonCopy, 
+                    Source={StaticResource LocalizedStrings}}"/>
           </StackPanel>
 
           <StackPanel Grid.Column="1" Name="StackPanelEdit">
-            <Button Name="ButtonEdit"
+            <AppBarButton Name="ButtonEdit" Icon="Edit"
+                    Label="{Binding Resources.Editor_ButtonEdit, Source={StaticResource LocalizedStrings}}"
                     Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
                     BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-                    Content="{Binding Resources.Editor_ButtonEdit, Source={StaticResource LocalizedStrings}}"/>
-            <!--<coding4FunControls:RoundButton Name="ButtonEdit" Margin="0 0 0 0" FontSize="16"
-                                            ImageSource="/Content/Images/ApplicationBar/dark/appbar.edit.rest.png"
-                                            Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-                                            BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-                                            Label="{Binding Resources.Editor_ButtonEdit, Source={StaticResource LocalizedStrings}}"/>-->
+                    />
           </StackPanel>
 
           <StackPanel Grid.Column="2" Name="StackPanelDelete">
-            <Button Name="ButtonDelete" Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-                    BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-                    Content="{Binding Resources.Editor_ButtonDelete, Source={StaticResource LocalizedStrings}}"/>
-            <!--<coding4FunControls:RoundButton Name="ButtonDelete" Margin="0 0 0 0"  FontSize="16"
-                                            ImageSource="/Content/Images/ApplicationBar/dark/appbar.delete.rest.png"
-                                            Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-                                            BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-                                            Label="{Binding Resources.Editor_ButtonDelete, Source={StaticResource LocalizedStrings}}"/>-->
+            <AppBarButton Name="ButtonDelete" Icon="Delete" 
+                    Label="{Binding Resources.Editor_ButtonDelete, 
+                    Source={StaticResource LocalizedStrings}}"
+                    Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
+                    Source={StaticResource ThemeChooser}}"
+                    BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
+                    Source={StaticResource ThemeChooser}}"/>
           </StackPanel>
         </Grid>
       </Grid>

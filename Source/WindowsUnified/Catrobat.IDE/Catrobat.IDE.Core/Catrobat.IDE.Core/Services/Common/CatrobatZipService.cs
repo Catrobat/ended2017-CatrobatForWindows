@@ -1,9 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-//using SharpCompress.Archive.Zip;
+﻿//using SharpCompress.Archive.Zip;
 //using SharpCompress.Common;
 //using SharpCompress.Reader;
+using Catrobat.IDE.Core.Services.Storage;
+using System;
+using System.IO;
+using System.IO.Compression;
+using System.Threading.Tasks;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
@@ -45,41 +47,54 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public static async Task ZipCatrobatPackage(Stream zipStream, string localStoragePath)
         {
-            throw new NotImplementedException();
-            //using (var storage = StorageSystem.GetStorage())
-            //{
-            //    using (var archive = ZipArchive.Create())
-            //    {
-            //        await WriteFilesRecursiveToZip(archive, storage, localStoragePath, "");
-            //        archive.SaveTo(zipStream, CompressionType.None);
-            //    }
-            //}
+            using (var storage = StorageSystem.GetStorage())
+            {
+                using (var archive = new ZipArchive(zipStream, ZipArchiveMode.Create))
+                {
+                    await WriteFilesRecursiveToZip(archive, storage, localStoragePath, "");
+                }
+            }
         }
 
-        //private static async Task WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage, 
-        //    string sourceBasePath, string destinationBasePath)
-        //{
-        //    var searchPattern = sourceBasePath;
-        //    var fileNames = await storage.GetFileNamesAsync(searchPattern);
+        private static async Task WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage,
+            string sourceBasePath, string destinationBasePath)
+        {
+            try
+            {
+                var searchPattern = sourceBasePath;
+                var fileNames = await storage.GetFileNamesAsync(searchPattern);
 
-        //    foreach (string fileName in fileNames)
-        //    {
-        //        if (fileName.EndsWith(CatrobatContextBase.ImageThumbnailExtension))
-        //            continue;
+                foreach (string fileName in fileNames)
+                {
+                    if (fileName.EndsWith(CatrobatContextBase.ImageThumbnailExtension))
+                        continue;
 
-        //        var tempPath = Path.Combine(sourceBasePath, fileName);
-        //        var fileStream = await storage.OpenFileAsync(tempPath, StorageFileMode.Open, StorageFileAccess.Read);
-        //        var destinationPath = Path.Combine(destinationBasePath, fileName);
-        //        archive.AddEntry(destinationPath, fileStream);
-        //    }
+                    var tempPath = Path.Combine(sourceBasePath, fileName);
+                    using (var fileStream = await storage.OpenFileAsync(tempPath,
+                        StorageFileMode.Open, StorageFileAccess.Read))
+                    {
+                        var destinationPath = Path.Combine(destinationBasePath, fileName);
+                        var newEntry = archive.CreateEntry(destinationPath);
+                        using (var stream = newEntry.Open())
+                        {
+                            await fileStream.CopyToAsync(stream);
+                        }
+                    }
+                }
 
-        //    var directrryNames = await storage.GetDirectoryNamesAsync(searchPattern);
-        //    foreach (string directoryName in directrryNames)
-        //    {
-        //        var tempZipPath = Path.Combine(sourceBasePath, directoryName);
-        //        var nextDestinationBasePath = Path.Combine(destinationBasePath, directoryName);
-        //        await WriteFilesRecursiveToZip(archive, storage, tempZipPath, nextDestinationBasePath);
-        //    }
-        //}
+                var directrryNames = await storage.GetDirectoryNamesAsync(searchPattern);
+                foreach (string directoryName in directrryNames)
+                {
+                    var tempZipPath = Path.Combine(sourceBasePath, directoryName);
+                    var nextDestinationBasePath = Path.Combine(destinationBasePath, directoryName);
+                    await WriteFilesRecursiveToZip(archive, storage, tempZipPath, nextDestinationBasePath);
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }
