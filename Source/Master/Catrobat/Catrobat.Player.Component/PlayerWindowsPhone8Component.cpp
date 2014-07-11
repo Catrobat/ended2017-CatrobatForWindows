@@ -69,7 +69,7 @@ namespace PhoneDirect3DXamlAppComponent
         Project* project = ProjectDaemon::Instance()->GetProject();
         ObjectList* objects = project->GetObjectList();
 
-        if (objects == NULL || (m_lastTappedWhenScript != NULL && m_lastTappedWhenScript->IsRunning()))
+        if (objects == NULL)
         {
             return;
         }
@@ -114,14 +114,21 @@ namespace PhoneDirect3DXamlAppComponent
 
                         if (script->GetType() == Script::TypeOfScript::WhenScript)
                         {
-                            WhenScript *whenScript = (WhenScript *)script;
-
-                            if (whenScript->GetAction() == WhenScript::Action::Tapped)
+                            if (current->GetWhenScript() != NULL && current->GetWhenScript()->IsRunning())
                             {
-                                m_lastTappedWhenScript = whenScript;
-                                whenScript->Execute();
-                                objectFound = true;
-                                break;
+                                return;
+                            }
+                            else
+                            {
+                                WhenScript *whenScript = (WhenScript *)script;
+
+                                if (whenScript->GetAction() == WhenScript::Action::Tapped)
+                                {
+                                    current->SetWhenScript(whenScript);
+                                    whenScript->Execute();
+                                    objectFound = true;
+                                    break;
+                                }
                             }
                         }
                     }

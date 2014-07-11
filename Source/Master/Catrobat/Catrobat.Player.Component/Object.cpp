@@ -291,6 +291,16 @@ UserVariable* Object::GetVariable(string name)
     return NULL;
 }
 
+void Object::SetWhenScript(WhenScript* whenScript)
+{
+    m_whenScript = whenScript;
+}
+
+WhenScript* Object::GetWhenScript()
+{
+    return m_whenScript;
+}
+
 bool Object::IsTapPointHitting(ID3D11DeviceContext1* context, ID3D11Device* device, double xPosition, double yPosition, double resolutionFactor)
 {
     bool isHitting = false;
@@ -364,8 +374,11 @@ bool Object::IsTapPointHitting(ID3D11DeviceContext1* context, ID3D11Device* devi
                 {
                     HRESULT result = device->CreateTexture2D(&stagingTextureDescription, NULL, &pOurStagingTexture);
                     auto currentLook = GetCurrentLook();
+
+                    //TODO: Delete this - is just for debug reasons
                     float width = currentLook->GetWidth();
                     float height = currentLook->GetHeight();
+                    //------------------
 
                     if (FAILED(result) || newPos.x < 0 || newPos.y < 0 || newPos.x + 1 > currentLook->GetWidth() || newPos.y + 1 > currentLook->GetHeight())
                     {

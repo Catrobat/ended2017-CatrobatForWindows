@@ -7,6 +7,7 @@
 #include "Script.h"
 #include "SoundInfo.h"
 #include "UserVariable.h"
+#include "WhenScript.h"
 
 using namespace std;
 
@@ -61,6 +62,9 @@ public:
     bool IsTapPointHitting(ID3D11DeviceContext1* context, ID3D11Device* device, double xNormalized, double yNormalized, double resolutionFactor);
     XMMATRIX GetWorldMatrix();
 
+    void SetWhenScript(WhenScript* whenScript);
+    WhenScript* GetWhenScript();
+
 private:
 	Look *m_look;
 	list<Look*> *m_lookList;
@@ -72,4 +76,5 @@ private:
 	float m_rotation;
     XMFLOAT2 m_origin;
     XMMATRIX m_transformationMatrix;
+    WhenScript* m_whenScript;
 };
