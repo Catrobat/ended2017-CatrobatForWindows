@@ -70,16 +70,16 @@ Script *Object::GetScript(int index)
 
 void Object::LoadTextures(ID3D11Device* d3dDevice)
 {
-    m_position.x = 0;
-    m_position.y = 0;
+    SetTranslation(0.f, 0.f);
 
     for (int i = 0; i < GetLookDataListSize(); i++) //TODO: implement dummy texture if there is no texture found
     {
-        auto look = GetLook(i);
+        m_look = GetLook(i);
 
-        if (look != NULL)
+        if (m_look != NULL)
         {
-            GetLook(i)->LoadTexture(d3dDevice);
+            m_look->LoadTexture(d3dDevice);
+            m_origin = XMFLOAT2(((float)m_look->GetWidth()) / 2.0f, ((float)m_look->GetHeight()) / 2.0f);
         }
     }
 }
@@ -99,16 +99,23 @@ void Object::Draw(SpriteBatch *spriteBatch)
         return;
     }
 
+    if (m_look != NULL)
+    {
+        spriteBatch->Draw(m_look->GetResourceView(), m_position, nullptr,
+            Colors::White * m_opacity, (float)radians(m_rotation), m_origin, m_objectScale, SpriteEffects_None, 0.0f);
+    }
+}
+
+XMMATRIX Object::GetWorldMatrix()
+{
     XMFLOAT2 position;
     position.x = ProjectDaemon::Instance()->GetProject()->GetScreenWidth() / 2.0f + m_position.x;
     position.y = ProjectDaemon::Instance()->GetProject()->GetScreenHeight() / 2.0f + m_position.y;
 
-    if (m_look != NULL)
-    {
-        spriteBatch->Draw(m_look->GetTexture(), position, nullptr,
-            Colors::White * m_opacity, (float)radians(m_rotation), XMFLOAT2(((float)m_look->GetWidth()) / 2.0f,
-            ((float)m_look->GetHeight()) / 2.0f), m_objectScale, SpriteEffects_None, 0.0f);
-    }
+    XMMATRIX translation = XMMatrixTranslation(position.x, position.y, 0.0f);
+    XMMATRIX rotation = XMMatrixRotationZ(m_rotation);
+    XMMATRIX scale = XMMatrixScaling(m_objectScale.x, m_objectScale.y, 1.0f);
+    return translation * rotation * scale;
 }
 
 void Object::SetLook(int index)
@@ -191,10 +198,20 @@ void Object::StartUp()
     }
 }
 
-void Object::SetPosition(float x, float y)
+void Object::SetTranslation(float x, float y)
 {
-    m_position.x = x;
-    m_position.y = y;
+    m_translation.x = x;
+    m_translation.y = y;
+
+    //TODO: right positioning
+    m_position.x = ProjectDaemon::Instance()->GetProject()->GetScreenWidth() / 2.0f + x;
+    m_position.y = ProjectDaemon::Instance()->GetProject()->GetScreenHeight() / 2.0f + y;
+}
+
+void Object::GetTranslation(float &x, float &y)
+{
+    x = m_translation.x;
+    y = m_translation.y;
 }
 
 void Object::GetPosition(float &x, float &y)
@@ -274,17 +291,170 @@ UserVariable* Object::GetVariable(string name)
     return NULL;
 }
 
-bool Object::IsTapPointHitting(int xPosition, int yPosition, int xNormalized, int yNormalized)
+void Object::SetWhenScript(WhenScript* whenScript)
 {
+    m_whenScript = whenScript;
+}
+
+WhenScript* Object::GetWhenScript()
+{
+    return m_whenScript;
+}
+
+bool Object::IsTapPointHitting(ID3D11DeviceContext1* context, ID3D11Device* device, double xPosition, double yPosition, double resolutionFactor)
+{
+    bool isHitting = false;
+
     auto bounds = GetBounds();
 
-    if (bounds.x <= xNormalized &&
-        bounds.y <= yNormalized &&
-        (bounds.x + bounds.width) >= xNormalized &&
-        (bounds.y + bounds.height) >= yNormalized)
+    if (context == NULL || device == NULL)
+        return false;
+
+    if (m_opacity > 0)
     {
-        return true;
+        XMVECTOR sourcePosition = XMVectorSet((float)xPosition, (float)yPosition, 0.f, 0.f);
+        FXMVECTOR scale = XMVectorSet(m_objectScale.x, m_objectScale.x, 0.0f, 0.0f);
+        FXMVECTOR rotationOrigin = XMVectorSet(m_position.x, m_position.y, 0.0f, 0.0f);
+        FXMVECTOR translation = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+
+        XMMATRIX matrix = XMMatrixTransformation2D(rotationOrigin, 0.0f, scale, rotationOrigin, (float)radians(m_rotation), translation);
+        XMVECTOR *determinant = nullptr;
+        matrix = XMMatrixInverse(determinant, matrix);
+        XMVECTOR newPosition = XMVector2TransformCoord(sourcePosition, matrix);
+
+        //Store to XMLFLOAT2 because of compatibility issues when switching between ARM and Win32
+        XMFLOAT2 newPos;
+        XMStoreFloat2(&newPos, newPosition);
+
+        //Set the position back because sprites were placed at texture width / 2.0 and texture height / 2.0 before
+        newPos.x -= bounds.x;
+        newPos.y -= bounds.y;
+
+        D3D11_SHADER_RESOURCE_VIEW_DESC pDesc;
+
+        //if (bounds.x <= xNormalized &&
+        //    bounds.y <= yNormalized &&
+        //    (bounds.x + bounds.width) >= xNormalized &&
+        //    (bounds.y + bounds.height) >= yNormalized)
+        //{
+        //    //TODO: Calculate bounding box accordingly to the transformation and check if tap point is in between the borders
+        //}
+        //else
+        {
+            if (m_look->GetResourceView() == NULL)
+            {
+                //TODO: throw exception
+                isHitting = false;
+            }
+            else
+            {
+                m_look->GetResourceView()->GetDesc(&pDesc);
+                ID3D11Texture2D* pOurStagingTexture;
+
+                D3D11_TEXTURE2D_DESC stagingTextureDescription;
+                stagingTextureDescription.Width = 1;
+                stagingTextureDescription.Height = 1;
+                stagingTextureDescription.MipLevels = 1;
+                stagingTextureDescription.ArraySize = 1;
+                stagingTextureDescription.SampleDesc.Count = 1;
+                stagingTextureDescription.SampleDesc.Quality = 0;
+                stagingTextureDescription.Format = pDesc.Format;
+
+                //D3D11_USAGE_STAGING = a resource that supports data transfer (copy) from the GPU to the CPU.
+                stagingTextureDescription.Usage = D3D11_USAGE_STAGING;
+                stagingTextureDescription.BindFlags = 0;
+
+                //D3D11_CPU_ACCESS_READ = The resource is to be mappable so that the CPU can read its contents.
+                //Resources created with this flag cannot be set as either inputs or outputs to the pipeline
+                //and must be created with staging usage.
+                stagingTextureDescription.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+                stagingTextureDescription.MiscFlags = 0;
+
+                try
+                {
+                    HRESULT result = device->CreateTexture2D(&stagingTextureDescription, NULL, &pOurStagingTexture);
+                    auto currentLook = GetCurrentLook();
+
+                    //TODO: Delete this - is just for debug reasons
+                    float width = currentLook->GetWidth();
+                    float height = currentLook->GetHeight();
+                    //------------------
+
+                    if (FAILED(result) || newPos.x < 0 || newPos.y < 0 || newPos.x + 1 > currentLook->GetWidth() || newPos.y + 1 > currentLook->GetHeight())
+                    {
+                        //TODO: Error handling and check if newPos.x + 1 can't exceed the width and height of the texture
+                        isHitting = false;
+                        if (pOurStagingTexture != NULL)
+                            pOurStagingTexture->Release();
+                    }
+                    else
+                    {
+                        //TODO: Check srcBox size according to texture bounds (see above)
+                        D3D11_BOX srcBox;
+                        srcBox.left = newPos.x;
+                        srcBox.right = srcBox.left + 1;
+                        srcBox.top = newPos.y;
+                        srcBox.bottom = srcBox.top + 1;
+                        srcBox.front = 0;
+                        srcBox.back = 1;
+
+                        if (m_look->GetTexture() == NULL || pOurStagingTexture == NULL)
+                        {
+                            //TODO: Error handling
+                            isHitting = false;
+                            if (pOurStagingTexture != NULL)
+                                pOurStagingTexture->Release();
+                        }
+                        else
+                        {
+                            context->CopySubresourceRegion(pOurStagingTexture, 0, 0, 0, 0, m_look->GetTexture(), 0, &srcBox);
+
+                            if (pOurStagingTexture == NULL)
+                            {
+                                //TODO: Error handling
+                                isHitting = false;
+                            }
+                            else
+                            {
+                                D3D11_MAPPED_SUBRESOURCE msr;
+                                result = context->Map(pOurStagingTexture, 0, D3D11_MAP_READ, 0, &msr);
+                                BYTE *pixel = (BYTE*)msr.pData;
+
+                                if (FAILED(result) || msr.pData == NULL)
+                                {
+                                    //TODO: Error handling
+                                    //auto bla = device->GetDeviceRemovedReason();
+                                    isHitting = false;
+                                    if (pOurStagingTexture != NULL)
+                                        context->Unmap(pOurStagingTexture, 0);
+                                }
+                                else
+                                {
+                                    //TODO: Delete unnecessary rgb pixels. Just keep alpha in release version
+                                    // copy data
+                                    BYTE p1 = pixel[0];
+                                    BYTE p2 = pixel[1];
+                                    BYTE p3 = pixel[2];
+                                    BYTE p4 = pixel[3];
+
+                                    if (pOurStagingTexture != NULL)
+                                        context->Unmap(pOurStagingTexture, 0);
+                                    isHitting = p4 > 0;
+                                }
+
+                                if (pOurStagingTexture != NULL)
+                                    pOurStagingTexture->Release();
+                            }
+                        }
+                    }
+                }
+                catch (exception e)
+                {
+                    //TODO: Error handling
+                }
+            }
+        }
     }
 
-    return false;
+    return isHitting;
 }

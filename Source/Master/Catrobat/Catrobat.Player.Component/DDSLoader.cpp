@@ -123,7 +123,7 @@ void DDSLoader::WriteDWord(BYTE *stream, int *byteIndex, DWORD dword)
 	stream[(*byteIndex)++] = data1;
 }
 
-void DDSLoader::LoadTexture(ID3D11Device* d3dDevice, string filename, ID3D11ShaderResourceView** texture, unsigned int *width, unsigned int *height)
+void DDSLoader::LoadTexture(ID3D11Device* d3dDevice, string filename, ID3D11Resource** texture, ID3D11ShaderResourceView** shaderResourceView, unsigned int *width, unsigned int *height)
 {
 	std::vector<unsigned char> image; //the raw pixels
 	unsigned error = lodepng::decode(image, *width, *height, filename);
@@ -135,7 +135,7 @@ void DDSLoader::LoadTexture(ID3D11Device* d3dDevice, string filename, ID3D11Shad
 			BYTE *stream = nullptr;
 			unsigned int streamSize;
 			ConvertToDDS(image, *width, *height, &stream, &streamSize);
-            HRESULT hr = CreateDDSTextureFromMemory(d3dDevice, stream, streamSize, nullptr, texture, MAXSIZE_T);
+            HRESULT hr = CreateDDSTextureFromMemory(d3dDevice, stream, streamSize, texture, shaderResourceView, MAXSIZE_T);
             
             if (hr != S_OK)
             {

@@ -54,15 +54,15 @@ namespace PlayerWindowsPhone8Test
             float x = 0;
             float y = 0;
 
-            m_object->SetPosition(old_x, old_y);
+            m_object->SetTranslation(old_x, old_y);
 
             m_brick->Execute();
-            m_object->GetPosition(x, y);
+            m_object->GetTranslation(x, y);
 			Assert::AreEqual(x, old_x + 42);
             Assert::AreEqual(y, old_y);
 
             m_brick->Execute();
-            m_object->GetPosition(x, y);
+            m_object->SetTranslation(x, y);
 			Assert::AreEqual(x, old_x + 84);
             Assert::AreEqual(y, old_y);
         }
@@ -77,15 +77,15 @@ namespace PlayerWindowsPhone8Test
             float x = 0;
             float y = 0;
 
-			m_object->SetPosition(old_x, old_y);
+			m_object->SetTranslation(old_x, old_y);
 
             m_brick->Execute();
-			m_object->GetPosition(x, y);
+			m_object->GetTranslation(x, y);
 			Assert::AreEqual(x, old_x - 42);
             Assert::AreEqual(y, old_y);
 
             m_brick->Execute();
-			m_object->GetPosition(x, y);
+            m_object->GetTranslation(x, y);
 			Assert::AreEqual(x, old_x - 84);
             Assert::AreEqual(y, old_y);
         }
@@ -100,15 +100,15 @@ namespace PlayerWindowsPhone8Test
             float x = 0;
             float y = 0;
 
-            m_object->SetPosition(old_x, old_y);
+            m_object->SetTranslation(old_x, old_y);
 
             m_brick->Execute();
-            m_object->GetPosition(x, y);
+            m_object->GetTranslation(x, y);
 			Assert::AreEqual(x, old_x);
             Assert::AreEqual(y, old_y);
 
             m_brick->Execute();
-            m_object->GetPosition(x, y);
+            m_object->GetTranslation(x, y);
 			Assert::AreEqual(x, old_x);
             Assert::AreEqual(y, old_y);
         }
@@ -123,15 +123,15 @@ namespace PlayerWindowsPhone8Test
             float x = 0;
             float y = 0;
 
-            m_object->SetPosition(old_x, old_y);
+            m_object->SetTranslation(old_x, old_y);
 
             m_brick->Execute();
-            m_object->GetPosition(x, y);
+            m_object->GetTranslation(x, y);
             Assert::AreEqual(x, old_x);
 			Assert::AreEqual(y, old_y - 42);
 
             m_brick->Execute();
-            m_object->GetPosition(x, y);
+            m_object->GetTranslation(x, y);
             Assert::AreEqual(x, old_x);
 			Assert::AreEqual(y, old_y - 84);
         }
@@ -146,15 +146,15 @@ namespace PlayerWindowsPhone8Test
             float x = 0;
             float y = 0;
 
-            m_object->SetPosition(old_x, old_y);
+            m_object->SetTranslation(old_x, old_y);
 
             m_brick->Execute();
-            m_object->GetPosition(x, y);
+            m_object->GetTranslation(x, y);
             Assert::AreEqual(x, old_x);
 			Assert::AreEqual(y, old_y + 42);
 
             m_brick->Execute();
-            m_object->GetPosition(x, y);
+            m_object->GetTranslation(x, y);
             Assert::AreEqual(x, old_x);
 			Assert::AreEqual(y, old_y + 84);
         }
@@ -169,15 +169,15 @@ namespace PlayerWindowsPhone8Test
             float x = 0;
             float y = 0;
 
-            m_object->SetPosition(old_x, old_y);
+            m_object->SetTranslation(old_x, old_y);
 
             m_brick->Execute();
-            m_object->GetPosition(x, y);
+            m_object->GetTranslation(x, y);
             Assert::AreEqual(x, old_x);
 			Assert::AreEqual(y, old_y);
 
             m_brick->Execute();
-            m_object->GetPosition(x, y);
+            m_object->GetTranslation(x, y);
             Assert::AreEqual(x, old_x);
 			Assert::AreEqual(y, old_y);
         }

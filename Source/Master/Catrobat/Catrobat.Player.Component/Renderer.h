@@ -30,7 +30,7 @@ private:
 	std::unique_ptr<SpriteBatch> m_spriteBatch;
 	std::unique_ptr<SpriteFont> m_spriteFont; 
 
-	// Use this scale if you calucalte positions on the screen
+	// Use this scale if you calculate positions on the screen
 	float m_scale;
 
 	void StartUpTasks();

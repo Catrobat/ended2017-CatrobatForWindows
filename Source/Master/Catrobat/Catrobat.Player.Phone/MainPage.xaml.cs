@@ -38,6 +38,8 @@ namespace Catrobat.Player.Phone
                 (float)Math.Floor(Application.Current.Host.Content.ActualHeight * Application.Current.Host.Content.ScaleFactor / 100.0f + 0.5f)
                 );
 
+            m_d3dBackground.ProjectName = "Default";            
+            
             // Set render resolution to the full native resolution
             m_d3dBackground.RenderResolution = m_d3dBackground.NativeResolution;
 

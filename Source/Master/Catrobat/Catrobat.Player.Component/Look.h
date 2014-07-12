@@ -15,8 +15,8 @@ public:
 	~Look();
 
 	void LoadTexture(ID3D11Device* d3dDevice);
-	ID3D11ShaderResourceView *GetTexture();
-
+	ID3D11ShaderResourceView *GetResourceView();
+    ID3D11Resource* GetTexture();
 	string GetFileName();
 	string GetName();
 

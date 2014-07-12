@@ -1,12 +1,14 @@
 ﻿using Windows.UI.Xaml;
 using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModels;
-using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.WindowsShared.Services;
 using Catrobat.IDE.WindowsShared.Services.Storage;
+using GalaSoft.MvvmLight.Messaging;
 using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;
 
 namespace Catrobat.IDE.WindowsShared
@@ -47,25 +49,22 @@ namespace Catrobat.IDE.WindowsShared
             ServiceLocator.ThemeChooser = new ThemeChooser();
             ServiceLocator.LocalizedStrings = new LocalizedStrings();
 
-
-            if (!ViewModelBase.IsInDesignModeStatic)
-            {
-                Application.Current.Resources["Locator"] = ServiceLocator.ViewModelLocator;
-                Application.Current.Resources["ThemeChooser"] = ServiceLocator.ThemeChooser;
-                Application.Current.Resources["LocalizedStrings"] = ServiceLocator.LocalizedStrings;
-            }
+            Application.Current.Resources["Locator"] = ServiceLocator.ViewModelLocator;
+            Application.Current.Resources["ThemeChooser"] = ServiceLocator.ThemeChooser;
+            Application.Current.Resources["LocalizedStrings"] = ServiceLocator.LocalizedStrings;
+ 
 
             if (!ViewModelBase.IsInDesignModeStatic)
                 InitPresenters();
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                //var task = new ProjectGeneratorDefault().GenerateProject("de", false);
-                //task.Wait();
+                var task = new ProjectGeneratorWhackAMole().GenerateProject("de", false);
+                task.Wait();
 
-                //var defaultProject = task.Result;
-                //var projectChangedMessage = new GenericMessage<Project>(defaultProject);
-                //Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                var defaultProject = task.Result;
+                var projectChangedMessage = new GenericMessage<Project>(defaultProject);
+                Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
             }
         }
 

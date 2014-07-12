@@ -288,6 +288,9 @@
     <ClCompile Include="..\Catrobat.Player.Component\LoudnessCapture.cpp">
       <Filter>Catrobat.Player.Phone - Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Catrobat.Player.Component\CatrobatTexture.cpp">
+      <Filter>Catrobat.Player.Phone - Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestHelper.h" />
@@ -518,6 +521,9 @@
       <Filter>Catrobat.Player.Phone - Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Catrobat.Player.Component\LoudnessCapture.h">
+      <Filter>Catrobat.Player.Phone - Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Catrobat.Player.Component\CatrobatTexture.h">
       <Filter>Catrobat.Player.Phone - Files</Filter>
     </ClInclude>
   </ItemGroup>

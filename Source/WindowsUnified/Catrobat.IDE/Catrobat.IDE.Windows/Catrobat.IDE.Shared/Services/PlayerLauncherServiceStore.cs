@@ -5,13 +5,12 @@ using Windows.Storage;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
-using Catrobat.IDE.Core.ViewModels.Main;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
     public class PlayerLauncherServiceStore : IPlayerLauncherService
     {
-        private const string TempProjectName = "TempProject.catrobat";
+        private const string TempProjectName = "TempProject.catrobat_play";
 
         public async Task LaunchPlayer(Project project, bool isLaunchedFromTile)
         {
@@ -19,7 +18,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             var file = await tempFolder.CreateFileAsync(TempProjectName, CreationCollisionOption.ReplaceExisting);
             var stream = await file.OpenStreamForWriteAsync();
 
-            await CatrobatZipService.ZipCatrobatPackage(stream, TempProjectName);
+            await CatrobatZipService.ZipCatrobatPackage(stream, project.BasePath);
 
             var options = new Windows.System.LauncherOptions { DisplayApplicationPicker = false };
 
