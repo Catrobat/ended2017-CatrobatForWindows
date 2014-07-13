@@ -105,9 +105,27 @@ namespace Catrobat.IDE.WindowsShared.Services
             //}
         }
 
-        public Task<PictureServiceResult> DrawPictureAsync(PortableImage imageToEdit = null)
+        public async Task<PictureServiceResult> DrawPictureAsync(PortableImage imageToEdit = null)
         {
-            throw new NotImplementedException();
+            const string catrobatImageFileName = "program.catrobat_paint_png";
+            var localFolder = ApplicationData.Current.TemporaryFolder;
+
+            var file = await localFolder.CreateFileAsync(catrobatImageFileName, CreationCollisionOption.ReplaceExisting);
+
+            var options = new Windows.System.LauncherOptions { DisplayApplicationPicker = false, 
+                PreferredApplicationPackageFamilyName = "f53a5122-9a9c-486b-86cf-3a3e60e0fd2f_bcp11qa1rfadr" };
+
+            bool success = await Windows.System.Launcher.LaunchFileAsync(file, options);
+            if (success)
+            {
+                // File launch OK
+            }
+            else
+            {
+                // File launch failed
+            }
+
+            return new PictureServiceResult(); // TODO: get file from app launch
         }
 
     }
