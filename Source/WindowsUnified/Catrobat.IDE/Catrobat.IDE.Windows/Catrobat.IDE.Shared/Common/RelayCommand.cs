@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Catrobat.IDE.WindowsPhone.Common
+namespace Catrobat.IDE.WindowsShared.Common
 {
     /// <summary>
     /// A command whose sole purpose is to relay its functionality 

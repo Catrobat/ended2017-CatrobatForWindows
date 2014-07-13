@@ -6,7 +6,7 @@ using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
-    public class SystemInformationServiceStore : ISystemInformationService
+    public class SystemInformationServiceWindowsShared : ISystemInformationService
     {
 
         public string PlatformName

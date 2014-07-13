@@ -9,7 +9,7 @@ using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
-    public class ImageResizeServiceStore : IImageResizeService
+    public class ImageResizeServiceWindowsShared : IImageResizeService
     {
         public async Task<PortableImage> ResizeImage(PortableImage image, int maxWidthHeight)
         {

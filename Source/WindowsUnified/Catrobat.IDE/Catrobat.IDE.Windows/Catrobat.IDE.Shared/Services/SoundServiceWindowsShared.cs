@@ -10,7 +10,7 @@ using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
-    public class SoundServiceStore : ISoundService
+    public class SoundServiceWindowsShared : ISoundService
     {
         private static readonly List<string> SupportedFileNames = new List<string>
         {

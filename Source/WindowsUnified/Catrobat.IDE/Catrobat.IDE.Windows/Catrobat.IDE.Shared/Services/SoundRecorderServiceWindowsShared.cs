@@ -4,7 +4,7 @@ using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
-    public class SoundRecorderServiceStore : ISoundRecorderService
+    public class SoundRecorderServiceWindowsShared : ISoundRecorderService
     {
 
         public SoundRecorderState State

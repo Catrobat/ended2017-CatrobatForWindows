@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using Windows.Phone.UI.Input;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
@@ -20,6 +21,13 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
                 TextBoxSpriteName.Focus(FocusState.Keyboard);
                 TextBoxSpriteName.SelectAll();
             });
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            _viewModel.GoBackCommand.Execute(null);
+            e.Handled = true;
         }
 
         //protected override void OnBackKeyPress(CancelEventArgs e)

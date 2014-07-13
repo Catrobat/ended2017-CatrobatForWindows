@@ -7,7 +7,7 @@ using Windows.Globalization;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
-    public class CultureServiceStore : ICultureService
+    public class CultureServiceWindowsShared : ICultureService
     {
         public CultureInfo GetCulture()
         {

@@ -8,7 +8,7 @@ using Catrobat.IDE.Core.Services.Common;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
-    public class PlayerLauncherServiceStore : IPlayerLauncherService
+    public class PlayerLauncherServiceWindowsShared : IPlayerLauncherService
     {
         private const string TempProjectName = "TempProject.catrobat_play";
 

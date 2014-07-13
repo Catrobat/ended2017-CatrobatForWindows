@@ -23,14 +23,14 @@ namespace Catrobat.IDE.WindowsShared.Converters
         {
             var portableConvertedUIElement = _coreConverter.Convert(value, targetType, parameter, language);
 
-            var converter = new PortableUIElementsConvertionServiceStore();
+            var converter = new PortableUIElementsConvertionServiceWindowsShared();
             var nativeUIElement = converter.ConvertToNativeUIElement(portableConvertedUIElement);
             return nativeUIElement;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            var converter = new PortableUIElementsConvertionServiceStore();
+            var converter = new PortableUIElementsConvertionServiceWindowsShared();
 
             var portableValue = converter.ConvertToPortableUIElement(value);
 

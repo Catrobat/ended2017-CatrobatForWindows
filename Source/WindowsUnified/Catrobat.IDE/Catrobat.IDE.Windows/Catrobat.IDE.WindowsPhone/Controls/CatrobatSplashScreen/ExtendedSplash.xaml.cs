@@ -1,9 +1,9 @@
 ﻿using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModels;
-using Catrobat.IDE.WindowsPhone.Common;
 using Catrobat.IDE.WindowsPhone.Views.Main;
 using Catrobat.IDE.WindowsShared;
+using Catrobat.IDE.WindowsShared.Common;
 using Catrobat.IDE.WindowsShared.Services;
 using System;
 using System.Threading.Tasks;
@@ -104,7 +104,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.CatrobatSplashScreen
                 Core.App.SetNativeApp(Application.Current.Resources["App"]
                     as AppWindowsShared);
                 await Core.App.Initialize();
-                ServiceLocator.Register(new DispatcherServiceStore(Dispatcher));
+                ServiceLocator.Register(new DispatcherServiceWindowsShared(Dispatcher));
 
                 var width = ServiceLocator.SystemInformationService.ScreenWidth; // preload width
                 var height = ServiceLocator.SystemInformationService.ScreenHeight; // preload height
@@ -117,7 +117,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.CatrobatSplashScreen
                 ManualImageCache.NoScreenshotImage = image;
 
                 Window.Current.Content = _rootFrame;
-                ServiceLocator.NavigationService = new NavigationServiceStore(_rootFrame);
+                ServiceLocator.NavigationService = new NavigationServiceWindowsShared(_rootFrame);
             }
 
             _rootFrame.Navigate(typeof(MainView));

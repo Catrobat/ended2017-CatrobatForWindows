@@ -2,18 +2,20 @@
 using System.Linq;
 using System.Reflection;
 using Windows.System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.WindowsShared.Common;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
-    public class NavigationServiceStore : INavigationService
+    public class NavigationServiceWindowsShared : INavigationService
     {
         private Frame _frame;
         private int _removedBackEntryCount;
 
-        public NavigationServiceStore(Frame frame)
+        public NavigationServiceWindowsShared(Frame frame)
         {
             _frame = frame;
         }
@@ -83,6 +85,9 @@ namespace Catrobat.IDE.WindowsShared.Services
                 _removedBackEntryCount--;
                 if (CanGoBack)
                     _frame.GoBack();
+                else
+                    Application.Current.Exit(); // TODO: remove this
+                
             }
         }
 

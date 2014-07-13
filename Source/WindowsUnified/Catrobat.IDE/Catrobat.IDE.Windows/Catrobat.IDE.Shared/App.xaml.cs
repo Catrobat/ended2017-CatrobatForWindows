@@ -1,12 +1,12 @@
 ﻿using Windows.Storage;
 using Windows.UI.Popups;
-using Catrobat.IDE.WindowsPhone.Common;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using Catrobat.IDE.WindowsPhone.Controls.CatrobatSplashScreen;
+using Catrobat.IDE.WindowsShared.Common;
 
 namespace Catrobat.IDE
 {

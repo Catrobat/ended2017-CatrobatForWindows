@@ -23,25 +23,25 @@ namespace Catrobat.IDE.WindowsShared
         public void InitializeInterfaces()
         {
             if(ViewModelBase.IsInDesignModeStatic)
-                ServiceLocator.Register(new DispatcherServiceStore(null));
+                ServiceLocator.Register(new DispatcherServiceWindowsShared(null));
 
-            ServiceLocator.Register<NavigationServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<SystemInformationServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<CultureServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<ImageResizeServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<PlayerLauncherServiceStore>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<NavigationServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SystemInformationServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<CultureServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ImageResizeServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<PlayerLauncherServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ResourceLoaderFactoryStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<StorageFactoryStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<ImageSourceConversionServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<ProjectImporterServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<SoundPlayerServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<SoundRecorderServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<PictureServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<NotificationServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<ColorConversionServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<ShareServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<PortableUIElementsConvertionServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<SoundServiceStore>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ImageSourceConversionServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ProjectImporterServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SoundPlayerServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SoundRecorderServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<PictureServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<NotificationServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ColorConversionServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ShareServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<PortableUIElementsConvertionServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SoundServiceWindowsShared>(TypeCreationMode.Lazy);
 
             ServiceLocator.ViewModelLocator = new ViewModelLocator();
             ServiceLocator.ViewModelLocator.RegisterViewModels();

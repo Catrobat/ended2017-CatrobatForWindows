@@ -6,7 +6,7 @@ using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
-    public class PortableUIElementsConvertionServiceStore : IPortableUIElementConversionService
+    public class PortableUIElementsConvertionServiceWindowsShared : IPortableUIElementConversionService
     {
         public object ConvertToNativeUIElement(object portableUIElement)
         {

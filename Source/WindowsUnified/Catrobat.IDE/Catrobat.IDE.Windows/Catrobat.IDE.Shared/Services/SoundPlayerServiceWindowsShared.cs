@@ -3,7 +3,7 @@ using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
-    public class SoundPlayerServiceStore : ISoundPlayerService
+    public class SoundPlayerServiceWindowsShared : ISoundPlayerService
     {
         public event SoundStateChanged SoundStateChanged;
 

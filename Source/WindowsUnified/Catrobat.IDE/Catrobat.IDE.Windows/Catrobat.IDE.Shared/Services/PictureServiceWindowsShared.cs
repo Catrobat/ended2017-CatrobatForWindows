@@ -11,7 +11,7 @@ using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
-    public class PictureServiceStore : IPictureService
+    public class PictureServiceWindowsShared : IPictureService
     {
         private static readonly List<string> SupportedFileNames = new List<string>
         {

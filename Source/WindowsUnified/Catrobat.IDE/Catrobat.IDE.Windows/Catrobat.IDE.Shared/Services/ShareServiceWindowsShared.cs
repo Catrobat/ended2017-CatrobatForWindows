@@ -7,7 +7,7 @@ using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
-    public class ShareServiceStore : IShareService
+    public class ShareServiceWindowsShared : IShareService
     {
         private const string TempUploadFolderPath = "/TempUpload";
         private const string CatrobatFileExtension = ".catrobat";

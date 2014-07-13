@@ -1,12 +1,9 @@
-﻿using Windows.System;
-using Windows.UI.Core;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.Services;
+﻿using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Windows.Phone.UI.Input;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Service
 {
@@ -19,9 +16,15 @@ namespace Catrobat.IDE.WindowsPhone.Views.Service
         {
             InitializeComponent();
         }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)

@@ -12,11 +12,11 @@ namespace Catrobat.IDE.WindowsShared.Services
         ErrorMessage
     };
 
-    public class NotificationServiceStore : INotificationService
+    public class NotificationServiceWindowsShared : INotificationService
     {
         private Page _rootPage;
 
-        //public NotificationServiceStore(Page rootPage)
+        //public NotificationServiceWindowsShared(Page rootPage)
         //{
         //    _rootPage = rootPage;
         //}
