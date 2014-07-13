@@ -44,7 +44,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             get { return _context; }
             set
             {
-                _context = value; 
+                _context = value;
                 RaisePropertyChanged(() => Context);
             }
         }
@@ -115,7 +115,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             {
                 ProjectName = "";
                 ProjectDescription = "";
-        }
+            }
         }
 
         private async void UploadAction()
@@ -130,26 +130,25 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             var message = new MessageBase();
             Messenger.Default.Send(message, ViewModelMessagingToken.UploadProjectStartedListener);
 
-            base.GoBackAction();
+            GoBackAction();
 
             JSONStatusResponse status_response = await Task.Run(() => upload_task);
 
             switch (status_response.statusCode)
             {
-                case StatusCodes.ServerResponseTokenOk:
+                case StatusCodes.ServerResponseOk:
                     break;
 
                 case StatusCodes.HTTPRequestFailed:
                     ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
-                            AppResources.Main_NoInternetConnection, UploadErrorCallback, MessageBoxOptions.Ok);                        
+                            AppResources.Main_NoInternetConnection, UploadErrorCallback, MessageBoxOptions.Ok);
                     break;
 
                 default:
-                string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
-                                       string.Format(AppResources.Main_UploadProjectError, status_response.answer);
-
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
-                            messageString, UploadErrorCallback, MessageBoxOptions.Ok);
+                    string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
+                                           string.Format(AppResources.Main_UploadProjectError, status_response.answer);
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
+                                messageString, UploadErrorCallback, MessageBoxOptions.Ok);
                     break;
             }
 
@@ -213,7 +212,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         #region Callbacks
         private void UploadErrorCallback(MessageboxResult result)
-            {
+        {
             _uploadErrorCallbackResult = result;
         }
         #endregion

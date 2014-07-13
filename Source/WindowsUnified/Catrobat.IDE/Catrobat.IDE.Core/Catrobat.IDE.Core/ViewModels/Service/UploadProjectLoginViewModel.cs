@@ -99,7 +99,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
             else
             {
-                JSONStatusResponse status_response =  await CatrobatWebCommunicationService.AsyncLoginOrRegister(_username, _password, _email,
+                JSONStatusResponse status_response = await CatrobatWebCommunicationService.AsyncLoginOrRegister(_username, _password, _email,
                                                              ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName,
                                                              RegionInfo.CurrentRegion.TwoLetterISORegionName);
 
@@ -108,7 +108,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
                 switch (status_response.statusCode)
                 {
-                    case StatusCodes.ServerResponseTokenOk:
+                    case StatusCodes.ServerResponseOk:
                         if (NavigationCallback != null)
                         {
                             NavigationCallback();
@@ -133,7 +133,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
                     case StatusCodes.HTTPRequestFailed:
                         ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
-                            AppResources.Main_NoInternetConnection, WrongLoginDataCallback, MessageBoxOptions.Ok);                        
+                            AppResources.Main_NoInternetConnection, WrongLoginDataCallback, MessageBoxOptions.Ok);
                         break;
 
                     default:
@@ -148,7 +148,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private void ForgottenAction()
         {
-            // TODO: Implement.
+            ResetViewModel();
+            ServiceLocator.NavigationService.NavigateTo<UploadProjectForgotPasswordViewModel>();
         }
 
         private void RegisterAction()

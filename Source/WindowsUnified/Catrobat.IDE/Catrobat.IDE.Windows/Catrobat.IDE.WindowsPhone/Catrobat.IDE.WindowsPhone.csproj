@@ -161,6 +161,18 @@
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Service\UploadProjectLoadingView.xaml.cs">
+      <DependentUpon>UploadProjectLoadingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Service\UploadProjectLoginView.xaml.cs">
+      <DependentUpon>UploadProjectLoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Service\UploadProjectNewPasswordView.xaml.cs">
+      <DependentUpon>UploadProjectNewPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Service\UploadProjectRegisterView.xaml.cs">
+      <DependentUpon>UploadProjectRegisterView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -266,6 +278,22 @@
     <Page Include="Views\Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Service\UploadProjectLoadingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Service\UploadProjectLoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Service\UploadProjectNewPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Service\UploadProjectRegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

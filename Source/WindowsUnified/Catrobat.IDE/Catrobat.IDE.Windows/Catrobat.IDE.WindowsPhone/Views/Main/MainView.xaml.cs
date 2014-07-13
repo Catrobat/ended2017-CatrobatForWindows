@@ -20,6 +20,13 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         public MainView()
         {
             InitializeComponent();
+
+            // Set the background color of the status bar, and DON'T FORGET to set the opacity!
+            //var statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+            //statusBar.BackgroundColor = Windows.UI.Colors.Red;
+            //statusBar.BackgroundOpacity = 1;
+            //statusBar.ProgressIndicator.Text = "My cool app";
+            //statusBar.ProgressIndicator.ShowAsync();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

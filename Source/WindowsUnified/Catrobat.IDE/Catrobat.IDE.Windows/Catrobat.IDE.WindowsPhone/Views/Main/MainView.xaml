@@ -175,7 +175,7 @@
                         CommandParameter="{Binding}" />
                       </toolkit:ContextMenu>
                     </toolkit:ContextMenuService.ContextMenu>-->
-                      <projects:LocalProjectControl Width="130" Height="130" Margin="5" Project="{Binding}" />
+                      <!--<projects:LocalProjectControl Width="130" Height="130" Margin="5" Project="{Binding}" />-->
                     </Grid>
                   </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -301,15 +301,18 @@
   <Page.BottomAppBar>
     <CommandBar>
       <CommandBar.PrimaryCommands>
-        <AppBarButton Icon="Add" 
-                      Label="{Binding Resources.Main_ButtonCreate, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding CreateNewProjectCommand}"/>
         <AppBarButton Icon="Edit" 
                       Label="{Binding Resources.Main_ButtonEdit, 
                       Source={StaticResource LocalizedStrings}}"
                       Command="{Binding EditCurrentProjectCommand}"/>
-
+        <AppBarButton Icon="Add" 
+                      Label="{Binding Resources.Main_ButtonCreate, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding CreateNewProjectCommand}"/>
+        <AppBarButton Icon="Upload" 
+                      Label="{Binding Resources.Main_ButtonUpload, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding UploadCurrentProjectCommand}"/>      
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
         <AppBarButton Label="{Binding Resources.Main_Settings, 

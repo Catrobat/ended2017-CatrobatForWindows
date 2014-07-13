@@ -21,6 +21,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Catrobat.IDE.Core.Resources;
 
 namespace Catrobat.IDE.Core.ViewModels.Main
 {
@@ -267,6 +268,24 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             private set;
         }
 
+        public ICommand LicenseCommand
+        {
+            get;
+            private set;
+        }
+
+        public ICommand AboutCommand
+        {
+            get;
+            private set;
+        }
+
+        public ICommand MSRLCommand
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
         #region Actions
@@ -415,7 +434,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             // Determine which page to open
             JSONStatusResponse status_response = await CatrobatWebCommunicationService.AsyncCheckToken(Context.CurrentUserName, Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
-            if (status_response.statusCode == StatusCodes.ServerResponseTokenOk)
+            if (status_response.statusCode == StatusCodes.ServerResponseOk)
             {
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
@@ -431,6 +450,21 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     ServiceLocator.NavigationService.RemoveBackEntry();
                 });
             }
+        }
+
+        private void LicenseAction()
+        {
+            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.CATROBAT_LICENSES_URL);
+        }
+
+        private void AboutAction()
+        {
+            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.CATROBAT_URL);
+        }
+
+        private void MSRLAction()
+        {
+            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.MS_RL_LICENSE_URL);
         }
 
         protected override void GoBackAction()
@@ -519,6 +553,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             PlayCurrentProjectCommand = new RelayCommand(PlayCurrentProjectAction);
             UploadCurrentProjectCommand = new RelayCommand(UploadCurrentProjectAction);
             ShowMessagesCommand = new RelayCommand(ShowMessagesAction);
+            LicenseCommand = new RelayCommand(LicenseAction);
+            AboutCommand = new RelayCommand(AboutAction);
+            MSRLCommand = new RelayCommand(MSRLAction);
 
 
             Messenger.Default.Register<MessageBase>(this,
