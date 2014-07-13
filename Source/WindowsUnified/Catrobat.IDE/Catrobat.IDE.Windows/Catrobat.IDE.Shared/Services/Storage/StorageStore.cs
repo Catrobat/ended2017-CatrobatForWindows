@@ -341,9 +341,17 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                 case StorageFileMode.Create:
                 case StorageFileMode.CreateNew:
                     {
-                        var folder = await CreateFolderPath(Path.GetDirectoryName(path));
-                        //var folder = await GetFolderAsync(folderPath);
-                        file = await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
+                        try
+                        {
+                            var folder = await CreateFolderPath(Path.GetDirectoryName(path));
+                            //var folder = await GetFolderAsync(folderPath);
+                            file = await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
                         break;
                     }
                 default:

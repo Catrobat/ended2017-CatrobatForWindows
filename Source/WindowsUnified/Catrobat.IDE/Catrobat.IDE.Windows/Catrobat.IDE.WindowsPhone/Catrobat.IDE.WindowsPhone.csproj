@@ -106,6 +106,9 @@
       <DependentUpon>PlayPauseButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Buttons\PlayPauseButtonGroup.cs" />
+    <Compile Include="Controls\CatrobatSplashScreen\ExtendedSplash.xaml.cs">
+      <DependentUpon>ExtendedSplash.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DynamicDataTemplates\DataTemplateSelector.cs" />
     <Compile Include="Controls\Formulas\FormulaButton.xaml.cs">
       <DependentUpon>FormulaButton.xaml</DependentUpon>
@@ -135,9 +138,6 @@
     </Compile>
     <Compile Include="Controls\Projects\LocalProjectControl.xaml.cs">
       <DependentUpon>LocalProjectControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
-      <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\StatusIcons\ProcessIcon.xaml.cs">
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
@@ -199,6 +199,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\CatrobatSplashScreen\ExtendedSplash.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Formulas\FormulaButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -234,10 +238,6 @@
     <Page Include="Controls\Projects\LocalProjectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\SplashScreen\SplashScreen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\StatusIcons\ProcessIcon.xaml">
       <Generator>MSBuild:Compile</Generator>

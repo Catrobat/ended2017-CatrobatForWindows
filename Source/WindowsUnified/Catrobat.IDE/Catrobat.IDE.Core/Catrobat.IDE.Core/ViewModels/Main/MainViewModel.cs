@@ -444,7 +444,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             if (_showDownloadMessage)
             {
                 var portbleImage = new PortableImage();
-                await portbleImage.LoadFromResources(ResourceScope.IdePhone,
+                await portbleImage.LoadFromResources(ResourceScope.Ide,
                     "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
 
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
@@ -455,7 +455,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             if (_showUploadMessage)
             {
                 var portbleImage = new PortableImage();
-                await portbleImage.LoadFromResources(ResourceScope.IdePhone,
+                await portbleImage.LoadFromResources(ResourceScope.Ide,
                     "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
 
                 ServiceLocator.NotifictionService.ShowToastNotification(null,

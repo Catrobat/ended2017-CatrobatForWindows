@@ -29,12 +29,14 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                         //_openedStreams.Add(stream);
                         //return stream;
                     }
-                case ResourceScope.IdePhone:
+                case ResourceScope.Ide:
                     {
                         try
                         {
+                            uri = uri.Replace("\\", "/");
                             const string prefix = "ms-appx:///";
-                            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(Path.Combine(prefix, uri), UriKind.Absolute));
+                            var file = await StorageFile.GetFileFromApplicationUriAsync(
+                                new Uri(Path.Combine(prefix, uri), UriKind.Absolute));
                             var randomAccessStream = await file.OpenReadAsync();
                             var stream = randomAccessStream.AsStream();
                             _openedStreams.Add(stream);

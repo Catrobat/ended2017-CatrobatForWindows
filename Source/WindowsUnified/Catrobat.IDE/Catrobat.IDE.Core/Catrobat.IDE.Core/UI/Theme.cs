@@ -28,7 +28,7 @@ namespace Catrobat.IDE.Core.UI
 
                     Task.Run(async () =>
                     {
-                        await _background.LoadFromResources(ResourceScope.IdePhone, _backgroundPath);
+                        await _background.LoadFromResources(ResourceScope.Ide, _backgroundPath);
                         ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CroppedBackground));
                     });
                 }
@@ -49,7 +49,7 @@ namespace Catrobat.IDE.Core.UI
 
                     Task.Run(async () =>
                     {
-                        await _croppedBackground.LoadFromResources(ResourceScope.IdePhone, _croppedPath);
+                        await _croppedBackground.LoadFromResources(ResourceScope.Ide, _croppedPath);
                         ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(()=> CroppedBackground));
                     });
                 }
