@@ -13,10 +13,12 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Main
 {
-    public partial class MainView : Page
+    public partial class MainView
     {
         private readonly MainViewModel _viewModel =
-            ((ViewModelLocator)ServiceLocator.ViewModelLocator).MainViewModel;
+            ServiceLocator.ViewModelLocator.MainViewModel;
+
+        protected override ViewModelBase GetViewModel() { return _viewModel; }
 
         private const int offsetKnob = 4;
         private bool firstAttempt = true;
@@ -32,6 +34,8 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             //statusBar.ProgressIndicator.Text = "My cool app";
             //statusBar.ProgressIndicator.ShowAsync();
         }
+
+
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {

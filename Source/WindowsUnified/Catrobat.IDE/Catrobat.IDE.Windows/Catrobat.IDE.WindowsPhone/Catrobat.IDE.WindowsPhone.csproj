@@ -166,6 +166,7 @@
     <Compile Include="Views\Service\UploadProjectRegisterView.xaml.cs">
       <DependentUpon>UploadProjectRegisterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ViewPageBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

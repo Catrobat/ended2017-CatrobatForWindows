@@ -1,4 +1,4 @@
-﻿<Page x:Class="Catrobat.IDE.WindowsPhone.Views.Editor.Sprites.SpriteEditorView"
+﻿<views:ViewPageBase x:Class="Catrobat.IDE.WindowsPhone.Views.Editor.Sprites.SpriteEditorView"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,6 +7,7 @@
   xmlns:models="using:Catrobat.IDE.Core.Models"
   xmlns:appBar="using:Catrobat.IDE.WindowsPhone.Controls.AppBar"
   xmlns:bindableListView="using:Catrobat.IDE.WindowsPhone.Controls.BindableListView"
+  xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
   DataContext="{Binding SpriteEditorViewModel, Source={StaticResource Locator}}">
 
@@ -206,4 +207,4 @@
       </CommandBar.Content>
     </CommandBar>
   </Page.BottomAppBar>
-</Page>
+</views:ViewPageBase>

@@ -6,13 +6,14 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.WindowsPhone.Views;
 using Catrobat.IDE.WindowsShared.Common;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
     public class NavigationServiceWindowsShared : INavigationService
     {
-        private Frame _frame;
+        private readonly Frame _frame;
         private int _removedBackEntryCount;
 
         public NavigationServiceWindowsShared(Frame frame)
@@ -48,12 +49,12 @@ namespace Catrobat.IDE.WindowsShared.Services
                     pageType = Type.GetType(viewName);
                 }
             }
-            else if (type.GetTypeInfo().BaseType == typeof (Page))
+            else if (type.GetTypeInfo().BaseType == typeof (ViewPageBase))
             {
                 pageType = type;
             }
 
-            if (pageType.GetTypeInfo().BaseType == typeof(Page)) // this is not true for flyouts (UserControls)
+            if (pageType.GetTypeInfo().BaseType == typeof(ViewPageBase)) // this is not true for flyouts (UserControls)
                 _frame.Navigate(pageType);
         }
 
