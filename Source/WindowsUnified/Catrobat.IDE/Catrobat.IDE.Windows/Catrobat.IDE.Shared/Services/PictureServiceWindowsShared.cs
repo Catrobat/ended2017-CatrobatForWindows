@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using Windows.Media.Capture;
@@ -29,7 +30,20 @@ namespace Catrobat.IDE.WindowsShared.Services
             foreach (var extension in SupportedFileNames)
                 openPicker.FileTypeFilter.Add(extension);
 
-            StorageFile file = await openPicker.PickSingleFileAsync();
+            StorageFile file;
+
+            try
+            {
+                file = await openPicker.PickSingleFileAsync(); 
+                // TODO: use that instead: PickSingleFileAndContinue
+                // Use this for more information: http://channel9.msdn.com/Events/Build/2014/2-520
+            }
+            catch (Exception)
+            {
+                Debugger.Break();
+                throw;
+            }
+
 
             if (file != null)
             {

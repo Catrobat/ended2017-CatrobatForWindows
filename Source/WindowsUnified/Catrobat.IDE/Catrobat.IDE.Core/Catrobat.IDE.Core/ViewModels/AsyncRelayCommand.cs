@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -47,10 +48,20 @@ namespace Catrobat.IDE.Core.ViewModels
                 {
                     if(_executeWithParameter != null)
                         await _executeWithParameter(parameter);
-                    
-                    if(_execute != null)
-                    await _execute();
 
+                    if (_execute != null)
+                    {
+                        try
+                        {
+                            await _execute();
+                        }
+                        catch (Exception exc)
+                        {
+                            if(Debugger.IsAttached)
+                                Debugger.Break();
+                        }
+                    }
+                    
                     _finished.Invoke();
                 });
             }

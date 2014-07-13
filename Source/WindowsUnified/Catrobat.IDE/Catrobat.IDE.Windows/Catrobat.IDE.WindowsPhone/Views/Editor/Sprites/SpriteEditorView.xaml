@@ -8,24 +8,48 @@
   xmlns:appBar="using:Catrobat.IDE.WindowsPhone.Controls.AppBar"
   xmlns:bindableListView="using:Catrobat.IDE.WindowsPhone.Controls.BindableListView"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
-  mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+  mc:Ignorable="d" 
   DataContext="{Binding SpriteEditorViewModel, Source={StaticResource Locator}}">
 
   <Page.Resources>
     <buttons:PlayPauseButtonGroup x:Key="PlayPauseButtonGroupSounds" Command="{Binding SoundsPlayStateChangedCommand}" />
 
-    <DataTemplate x:Key="CostumeItemTemplate">
-      <Grid Background="{Binding StaticTheme.CostumesBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
-                        Margin="0 5 0 5" Height="90" DataContext="{Binding}">
+    <DataTemplate x:Key="LookItemTemplate">
+      <Grid Margin="5 5 5 5" Height="90" Width="430"
+            Background="{Binding StaticTheme.CostumesBrush.NativeBrush, 
+            Source={StaticResource ThemeChooser}}" 
+            DataContext="{Binding}"
+            d:DataContext="{d:DesignInstance models:Costume}">
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="1*" />
           <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Image Grid.Column="0" Source="{Binding Image.ImageSource}" 
-                       MaxWidth="120" MaxHeight="120" Margin="10 10 5 10" VerticalAlignment="Stretch" />
+               MaxWidth="120" MaxHeight="120" Margin="10 10 5 10" 
+               VerticalAlignment="Stretch" />
         <Grid Grid.Column="1" Margin="5">
           <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
                              VerticalAlignment="Center" />
+        </Grid>
+      </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SoundItemTemplate">
+      <Grid Margin="5 5 5 5" Height="90" Width="430"
+            Background="{Binding StaticTheme.SoundsBrush.NativeBrush, 
+            Source={StaticResource ThemeChooser}}"
+            DataContext="{Binding}"
+            d:DataContext="{d:DesignInstance models:Sound}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="1*" />
+          <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <buttons:PlayPauseButton Group="{StaticResource PlayPauseButtonGroupSounds}" 
+                                RoundBorderThickness="6" Margin="0 12 0 12"
+                                Grid.Column="0" Height="80" Width="80" />
+        <Grid Grid.Column="1" Margin="5">
+          <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
+                                           VerticalAlignment="Center" />
         </Grid>
       </Grid>
     </DataTemplate>
@@ -35,53 +59,27 @@
   <Grid x:Name="LayoutRoot" 
         Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
         Source={StaticResource ThemeChooser}}">
-    <Grid>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition/>
-        <RowDefinition Height="Auto"/>
-      </Grid.RowDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
 
-      <Grid Grid.Row="0" Margin="10 0 10 10">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition />
-          <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <TextBlock Text="{Binding SelectedSprite.Name}" 
-                     Grid.Column="0" FontSize="36"
-                     Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
-        <HyperlinkButton Grid.Column="1" HorizontalAlignment="Right"
-                         Content="{Binding Resources.Editor_Rename, Source={StaticResource LocalizedStrings}}"
-                         Command="{Binding RenameSpriteCommand}"/>
-      </Grid>
-
-      <!--<Grid Grid.Row="0">
-        <Grid Margin="15" >
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="Auto"/>
-          </Grid.ColumnDefinitions>
-          <TextBlock Grid.Column="0" FontSize="35" Text="{Binding SelectedSprite.Name}"/>
-          <HyperlinkButton Grid.Column="1" Content="{Binding Resources.Editor_Camera_Rename, Source={StaticResource LocalizedStrings}}"
-                           Command="{Binding RenameSpriteCommand}"/>
-        </Grid>
-      </Grid>-->
-
-      <Pivot 
+    <Pivot 
         Name="PivotMain" Grid.Row="1" Margin="0 -30 0 0" 
         SelectedIndex="{Binding SelectedPivotIndex, Mode=TwoWay}">
-        <!--Pivot item scripts-->
-        <PivotItem Name="PivotScripts"
-          Header="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}">
-          <Grid DataContext="{Binding}">
+      <!--Pivot item scripts-->
+      <PivotItem Name="PivotScripts" Margin="0 -15 0 0"
+                 Header="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}">
+        <Grid DataContext="{Binding}">
 
 
 
-            <ListView
+          <ListView
                 x:Name="ReorderListBoxScriptBricks"
                 Visibility="Visible"
                 SelectionMode="Multiple"/>
-            <!--  
+          <!--  
                ItemTemplate="{StaticResource ScriptsBrickTemplate}"
                ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}" 
                ItemsSourcePerformance="{Binding ScriptBricks}"
@@ -89,7 +87,7 @@
                VerticalItemMargin="-10"-->
 
 
-            <TextBlock 
+          <TextBlock 
               Text ="{Binding Resources.Editor_ClickPlusToAddAction, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsScirptBricksEmpty, Converter={StaticResource BoolVisibilityConverter}}"
               Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
@@ -97,22 +95,22 @@
               TextAlignment="Center"
               VerticalAlignment="Center"
               HorizontalAlignment="Center" />
-          </Grid>
-        </PivotItem>
+        </Grid>
+      </PivotItem>
 
-        <!--Pivot item costume-->
-        <PivotItem Name="PivotCostumes"
+      <!--Pivot item costume-->
+      <PivotItem Name="PivotCostumes" Margin="0 -15 0 0"
           Header="{Binding Resources.Editor_PivotCostumes, 
           Source={StaticResource LocalizedStrings}}">
-          <Grid DataContext="{Binding}">
-            <bindableListView:BindableListBox
+        <Grid DataContext="{Binding}">
+          <bindableListView:BindableListBox
               ItemsSource="{Binding Costumes}"
               BindableSelectedItems="{Binding SelectedCostumes}"
-              ItemTemplate="{StaticResource CostumeItemTemplate}"
+              ItemTemplate="{StaticResource LookItemTemplate}"
               SelectionMode="Extended"
             />
 
-            <TextBlock 
+          <TextBlock 
               Text ="{Binding Resources.Editor_ClickPlusToAddCostume, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsCostumesEmpty, Converter={StaticResource BoolVisibilityConverter}}"
               Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
@@ -120,38 +118,22 @@
               TextAlignment="Center"
               VerticalAlignment="Center"
               HorizontalAlignment="Center" />
-          </Grid>
-        </PivotItem>
+        </Grid>
+      </PivotItem>
 
-        <!--Pivot item sounds-->
-        <PivotItem Name="PivotSounds" 
-                            Header="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}">
-          <Grid DataContext="{Binding}">
-            <bindableListView:BindableListBox
+      <!--Pivot item sounds-->
+      <PivotItem Name="PivotSounds" Margin="0 -15 0 0"
+                 Header="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}">
+        <Grid DataContext="{Binding}">
+          <bindableListView:BindableListBox
                 x:Name="ReorderListBoxSounds"
                 Visibility="Visible"
                 SelectionMode="Multiple"
-                BindableSelectedItems="{Binding Sounds}">
-              <ListView.ItemTemplate>
-                <DataTemplate>
-                  <Grid Background="{Binding StaticTheme.SoundsBrush.NativeBrush, Source={StaticResource ThemeChooser}}" Margin="0 5 0 5">
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="1*" />
-                      <ColumnDefinition Width="3*" />
-                    </Grid.ColumnDefinitions>
-                    <!--<buttons:PlayPauseButton Group="{StaticResource PlayPauseButtonGroupSounds}" 
-                                RoundBorderThickness="6" Margin="0 12 0 12"
-                                Grid.Column="0" Height="80" Width="80" />-->
-                    <Grid Grid.Column="1" Margin="5">
-                      <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
-                                           VerticalAlignment="Center" d:DataContext="{d:DesignInstance models:Sound}" />
-                    </Grid>
-                  </Grid>
-                </DataTemplate>
-              </ListView.ItemTemplate>
-            </bindableListView:BindableListBox>
+                BindableSelectedItems="{Binding Sounds}"
+                ItemTemplate="{StaticResource SoundItemTemplate}">
+          </bindableListView:BindableListBox>
 
-            <TextBlock 
+          <TextBlock 
               Text ="{Binding Resources.Editor_ClickPlusToAddSound, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsSoundsEmpty, Converter={StaticResource BoolVisibilityConverter}}"
               Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
@@ -159,19 +141,25 @@
               TextAlignment="Center"
               VerticalAlignment="Center"
               HorizontalAlignment="Center" />
-          </Grid>
-        </PivotItem>
-      </Pivot>
+        </Grid>
+      </PivotItem>
+    </Pivot>
+
+    <Grid Grid.Row="0" Margin="10 0 10 10">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <TextBlock Text="{Binding SelectedSprite.Name}" 
+                     Grid.Column="0" FontSize="36"
+                     Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
+      <HyperlinkButton Grid.Column="1" HorizontalAlignment="Right" 
+                         Content="{Binding Resources.Editor_Rename, Source={StaticResource LocalizedStrings}}"
+                         Command="{Binding RenameSpriteCommand}"/>
     </Grid>
-  </Grid>
-
-
-  <Page.BottomAppBar>
-    <CommandBar>
-      <CommandBar.Content>
-        <Grid>
-          <StackPanel>
-            <appBar:EditorAppBar
+    <Grid Grid.Row="2">
+      <StackPanel>
+        <appBar:EditorAppBar
               Visibility="{Binding IsVisibleScripts, Converter={StaticResource BoolVisibilityConverter}}" 
               VerticalAlignment="Bottom"
               TargetType="Script"
@@ -181,7 +169,7 @@
               PlayCommand="{Binding StartPlayerCommand}"
               NewCommand="{Binding AddNewScriptBrickCommand}"
               NumberOfSelectedItems="{Binding SelectedActions.Count}"/>
-            <appBar:EditorAppBar
+        <appBar:EditorAppBar
               Visibility="{Binding IsVisibleCostumes, Converter={StaticResource BoolVisibilityConverter}}" 
               VerticalAlignment="Bottom"
               TargetType="Costume"
@@ -192,7 +180,7 @@
               PlayCommand="{Binding StartPlayerCommand}"
               NewCommand="{Binding AddNewCostumeCommand}"
               NumberOfSelectedItems="{Binding SelectedCostumes.Count}"/>
-            <appBar:EditorAppBar
+        <appBar:EditorAppBar
               Visibility="{Binding IsVisibleSounds, Converter={StaticResource BoolVisibilityConverter}}" 
               VerticalAlignment="Bottom"
               TargetType="Sound"
@@ -202,9 +190,7 @@
               PlayCommand="{Binding StartPlayerCommand}"
               NewCommand="{Binding AddNewSoundCommand}"
               NumberOfSelectedItems="{Binding SelectedSounds.Count}"/>
-          </StackPanel>
-        </Grid>
-      </CommandBar.Content>
-    </CommandBar>
-  </Page.BottomAppBar>
+      </StackPanel>
+    </Grid>
+  </Grid>
 </views:ViewPageBase>

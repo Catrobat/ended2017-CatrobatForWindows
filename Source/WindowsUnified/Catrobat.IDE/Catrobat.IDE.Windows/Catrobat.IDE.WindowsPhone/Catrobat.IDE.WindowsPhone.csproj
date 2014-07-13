@@ -139,6 +139,18 @@
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Editor\Costumes\ChangeCostumeView.xaml.cs">
+      <DependentUpon>ChangeCostumeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Costumes\CostumeNameChooserView.xaml.cs">
+      <DependentUpon>CostumeNameChooserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Costumes\CostumeSavingView.xaml.cs">
+      <DependentUpon>CostumeSavingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml.cs">
+      <DependentUpon>NewCostumeSourceSelectionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Editor\Sprites\AddNewSpriteView.xaml.cs">
       <DependentUpon>AddNewSpriteView.xaml</DependentUpon>
     </Compile>
@@ -246,6 +258,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\StatusIcons\ProcessIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Costumes\ChangeCostumeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Costumes\CostumeNameChooserView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Costumes\CostumeSavingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

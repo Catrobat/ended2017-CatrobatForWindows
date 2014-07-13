@@ -63,7 +63,8 @@ namespace Catrobat.IDE.WindowsShared.Services
         {
             get
             {
-                var fileAssemblyVersion = this.GetType().GetTypeInfo().Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
+                var fileAssemblyVersion = this.GetType().GetTypeInfo().Assembly.
+                    GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
                 return fileAssemblyVersion;
             }
         }
