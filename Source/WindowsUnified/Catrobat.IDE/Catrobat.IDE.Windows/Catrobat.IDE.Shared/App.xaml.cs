@@ -78,11 +78,14 @@ namespace Catrobat.IDE
             try
             {
                 var file = (StorageFile)e.Files[0];
-                var content = await FileIO.ReadTextAsync(file);
 
-                var localFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(
-                    MainPage.CatrobatImageFileName, CreationCollisionOption.ReplaceExisting);
-                await FileIO.WriteTextAsync(localFile, content);
+                // todo navigate to picture chooser UI
+
+                //var content = await FileIO.ReadTextAsync(file);
+
+                //var localFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(
+                //    MainPage.CatrobatImageFileName, CreationCollisionOption.ReplaceExisting);
+                //await FileIO.WriteTextAsync(localFile, content);
             }
             catch (Exception exc)
             {

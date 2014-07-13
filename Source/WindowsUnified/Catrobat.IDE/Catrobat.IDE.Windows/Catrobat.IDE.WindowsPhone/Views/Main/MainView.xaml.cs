@@ -1,11 +1,15 @@
-﻿using Windows.System;
-using Windows.UI.Core;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Main;
+using Windows.System;
+using Windows.UI.Core;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Navigation;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Main
 {
@@ -38,7 +42,23 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             base.OnNavigatedTo(e);
         }
 
-        private bool _firstBackPressed = true;
+        private async void LocalProgram_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            var localProject = ((ProjectDummyHeader) ((FrameworkElement)sender).DataContext);
+
+            var menu = new PopupMenu();
+            menu.Commands.Add(new UICommand(AppResources.Main_CopyProject, (command) => 
+                _viewModel.CopyLocalProjectCommand.Execute(localProject)));
+            menu.Commands.Add(new UICommand(AppResources.Main_DeleteProject, (command) => 
+                _viewModel.DeleteLocalProjectCommand.Execute(localProject)));
+            menu.Commands.Add(new UICommand(AppResources.Main_ChangeProjectNameAndDescription, (command) => 
+                _viewModel.RenameLocalProjectCommand.Execute(localProject)));
+            menu.Commands.Add(new UICommand(AppResources.Main_PinProjectToStart, (command) => 
+                _viewModel.PinLocalProjectCommand.Execute(localProject)));
+            menu.Commands.Add(new UICommand(AppResources.Main_ShareProject, (command) => 
+                _viewModel.ShareLocalProjectCommand.Execute(localProject)));
+        }
+
 
         //protected override void OnBackKeyPress(CancelEventArgs e)
         //{

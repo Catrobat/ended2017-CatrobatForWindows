@@ -10,29 +10,27 @@ namespace Catrobat.IDE.WindowsShared.Converters.NativeConverters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            throw new NotImplementedException();
+            if (!(value is WriteableBitmap))
+                return null;
 
-            //if (!(value is WriteableBitmap))
-            //    return null;
+            try
+            {
+                var writeableBitmap = (WriteableBitmap)value;
 
-            //try
-            //{
-            //    var writeableBitmap = (WriteableBitmap)value;
+                var croppedScreenshot = (ImageSource)writeableBitmap.Crop(new Rect(
+                new Point(0, (writeableBitmap.PixelHeight - writeableBitmap.PixelWidth) / 2.0),
+                new Size(writeableBitmap.PixelWidth, writeableBitmap.PixelWidth)));
 
-            //    var croppedScreenshot = (ImageSource)writeableBitmap.Crop(new Rect(
-            //    new Point(0, (writeableBitmap.PixelHeight - writeableBitmap.PixelWidth) / 2.0),
-            //    new Size(writeableBitmap.PixelWidth, writeableBitmap.PixelWidth)));
+                var noScreenshotConverter = new NoScreenshotConverterBootstrap();
 
-            //    var noScreenshotConverter = new NoScreenshotConverterBootstrap();
+                croppedScreenshot = (BitmapSource)noScreenshotConverter.Convert(croppedScreenshot, null, null, "");
 
-            //    croppedScreenshot = (BitmapSource)noScreenshotConverter.Convert(croppedScreenshot, null, null, "");
-
-            //    return croppedScreenshot;
-            //}
-            //catch (Exception)
-            //{
-            //    return null;
-            //}
+                return croppedScreenshot;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

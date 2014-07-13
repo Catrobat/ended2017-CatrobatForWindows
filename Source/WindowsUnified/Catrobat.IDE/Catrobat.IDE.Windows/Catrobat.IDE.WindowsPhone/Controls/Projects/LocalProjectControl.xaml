@@ -9,7 +9,7 @@
     d:DesignHeight="200"
     d:DesignWidth="200">
 
-  <Grid d:DataContext="{d:DesignData catrobatObjects:ProjectDummyHeader}">
+  <Grid Background="White" d:DataContext="{d:DesignData catrobatObjects:ProjectDummyHeader}">
     <Border BorderThickness="0" BorderBrush="White">
       <!--<i:Interaction.Triggers>
         <i:EventTrigger EventName="Tap">
