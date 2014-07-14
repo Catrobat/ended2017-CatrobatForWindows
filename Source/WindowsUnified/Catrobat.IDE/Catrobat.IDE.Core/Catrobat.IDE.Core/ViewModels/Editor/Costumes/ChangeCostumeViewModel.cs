@@ -94,17 +94,18 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
 
         private async Task EditCostumeAction()
         {
-            var result = await ServiceLocator.PictureService.DrawPictureAsync(ReceivedCostume.Image);
+            ServiceLocator.PictureService.DrawPictureAsync(ReceivedCostume.Image);
+            //var result = await ServiceLocator.PictureService.DrawPictureAsync(ReceivedCostume.Image);
 
-            if (result.Status == PictureServiceStatus.Success)
-            {
-                await CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, result.Image);
+            //if (result.Status == PictureServiceStatus.Success)
+            //{
+            //    await CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, result.Image);
 
-                ServiceLocator.DispatcherService.RunOnMainThread(() => {
-                    ServiceLocator.NavigationService.RemoveBackEntry();
-                    base.GoBackAction();
-                });
-            }
+            //    ServiceLocator.DispatcherService.RunOnMainThread(() => {
+            //        ServiceLocator.NavigationService.RemoveBackEntry();
+            //        base.GoBackAction();
+            //    });
+            //}
         }
 
         protected override void GoBackAction()

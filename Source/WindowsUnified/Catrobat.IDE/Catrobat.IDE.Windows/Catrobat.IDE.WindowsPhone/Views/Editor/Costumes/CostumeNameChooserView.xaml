@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="using:Catrobat.IDE.WindowsPhone.Views" >
+    xmlns:views="using:Catrobat.IDE.WindowsPhone.Views" 
+    DataContext="{Binding CostumeNameChooserViewModel, Source={StaticResource Locator}}">
 
   <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
         Source={StaticResource ThemeChooser}}">
@@ -45,7 +46,7 @@
 
         <GridView.ItemTemplate>
           <DataTemplate>
-            <Grid Margin="10" Width="155" Height="135" 
+            <Grid Margin="10" Width="135" Height="115" 
                   Visibility="{Binding IsVisible, Converter={StaticResource BoolVisibilityConverter}}" 
                   Background="Transparent">
               <Grid.RowDefinitions>

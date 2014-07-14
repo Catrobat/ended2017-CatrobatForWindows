@@ -1,4 +1,7 @@
-﻿using Windows.Storage;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Windows.Storage;
 using Windows.UI.Popups;
 using System;
 using Windows.ApplicationModel;
@@ -6,6 +9,10 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
+using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.WindowsPhone.Controls.CatrobatSplashScreen;
 using Catrobat.IDE.WindowsShared.Common;
 
@@ -70,31 +77,45 @@ namespace Catrobat.IDE
         }
 
 
-
-
-
-
-
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            if (args is FileOpenPickerContinuationEventArgs)
+            {
+                ServiceLocator.PictureService.RecievedFiles(
+                    (args as FileOpenPickerContinuationEventArgs).Files);
+            }
+        }
 
 
         protected override async void OnFileActivated(FileActivatedEventArgs e)
         {
             try
             {
-                var file = (StorageFile)e.Files[0];
+                if (e.PreviousExecutionState != ApplicationExecutionState.Terminated)
+                {
+                    var imageFiles = (from StorageFile file in e.Files
+                                      from imageExtension in
+                                          ServiceLocator.PictureService.SupportedFileExtensions
+                                      where file.Name.EndsWith(
+                                      ServiceLocator.PictureService.ImageFileExtensionPrefix + imageExtension)
+                                      select file).ToList();
 
-                // todo navigate to picture chooser UI
+                    ServiceLocator.PictureService.RecievedFiles(imageFiles);
+                }
 
-                //var content = await FileIO.ReadTextAsync(file);
+                if (e.Files.Count == 1 &&
+                    Constants.CatrobatFileNames.Contains(Path.GetExtension(e.Files[0].Name)))
+                {
+                    // TODO: send message to ProjectImportViewModel that includes the new zip file
 
-                //var localFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(
-                //    MainPage.CatrobatImageFileName, CreationCollisionOption.ReplaceExisting);
-                //await FileIO.WriteTextAsync(localFile, content);
+                    ServiceLocator.NavigationService.NavigateTo<ProjectImportViewModel>();
+                }
             }
             catch (Exception exc)
             {
-                var messageDialog1 = new MessageDialog("Cannot read recieved file: " + exc.Message);
-                messageDialog1.ShowAsync();
+                // TODO: Handle error
+                //var messageDialog1 = new MessageDialog("Cannot read recieved file: " + exc.Message);
+                //messageDialog1.ShowAsync();
             }
         }
     }
