@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
     mc:Ignorable="d"
-    DataContext="{Binding MainViewModel.SelectedOnlineProject, Source={StaticResource Locator}}">
+    DataContext="{Binding MainViewModel.SelectedOnlineProject, Source={StaticResource Locator}}" Loaded="ViewPageBase_Loaded">
 
   <Grid x:Name="LayoutRoot" 
         Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
@@ -32,7 +32,6 @@
     </StackPanel>
 
     <Grid Grid.Row="1" Margin="10 0 10 15">
-
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="200" />
         <ColumnDefinition Width="*" />

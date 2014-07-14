@@ -1,6 +1,7 @@
 ﻿using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Service;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Windows.UI.Xaml.Controls;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Service
@@ -16,5 +17,11 @@ namespace Catrobat.IDE.WindowsPhone.Views.Service
         {
             InitializeComponent();
         }
+
+        private void ViewPageBase_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            _viewModel.OnLoadCommand.Execute((OnlineProjectHeader)DataContext);
+        }
+
     }
 }

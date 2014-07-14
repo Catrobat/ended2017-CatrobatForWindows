@@ -108,6 +108,20 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             }
         }
 
+        private void Hub_SectionsInViewChanged(object sender, SectionsInViewChangedEventArgs e)
+        {
+            if ((MainHub.SectionsInView[0] == HubSectionOnlineProjects) && firstAttempt)
+            {
+                _viewModel.LoadOnlineProjects(false, true);
+                firstAttempt = false;
+            }
+        }
+
+        private void ListViewOnlineProjects_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            _viewModel.OnlineProjectTapCommand.Execute(e.ClickedItem);
+        }
+
         //private void panoramaMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //{
         //    if ((PanoramaMain.SelectedItem == PanoramaItemOnlineProjects) && firstAttempt)
