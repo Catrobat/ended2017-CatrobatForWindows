@@ -178,6 +178,15 @@
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Editor\Scripts\AddNewScriptBrickView.xaml.cs">
+      <DependentUpon>AddNewScriptBrickView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Scripts\NewBroadcastMessageView.xaml.cs">
+      <DependentUpon>NewBroadcastMessageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Scripts\ScriptBrickCategoryView.xaml.cs">
+      <DependentUpon>ScriptBrickCategoryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Service\UploadProjectLoadingView.xaml.cs">
       <DependentUpon>UploadProjectLoadingView.xaml</DependentUpon>
     </Compile>
@@ -201,6 +210,12 @@
     </Compile>
     <Compile Include="Views\Service\UploadProjectRegisterView.xaml.cs">
       <DependentUpon>UploadProjectRegisterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsLanguageView.xaml.cs">
+      <DependentUpon>SettingsLanguageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewPageBase.cs" />
   </ItemGroup>
@@ -337,6 +352,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Editor\Scripts\AddNewScriptBrickView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Scripts\NewBroadcastMessageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Scripts\ScriptBrickCategoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Service\UploadProjectLoadingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -368,6 +395,14 @@
     <Page Include="Views\Service\UploadProjectRegisterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\SettingsLanguageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\SettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

@@ -72,13 +72,12 @@
       <PivotItem Name="PivotScripts" Margin="0 -15 0 0"
                  Header="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
-
-
-
-          <ListView
-                x:Name="ReorderListBoxScriptBricks"
-                Visibility="Visible"
-                SelectionMode="Multiple"/>
+          <bindableListView:BindableListView x:Name="ReorderListBoxScriptBricks"
+            Visibility="Visible"
+            SelectionMode="Multiple"
+            ItemsSource="{Binding Actions}"
+            BindableSelectedItems="{Binding SelectedActions, Mode=TwoWay}"
+            ItemTemplateSelector="{StaticResource ActionTemplateSelector}" />
           <!--  
                ItemTemplate="{StaticResource ScriptsBrickTemplate}"
                ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}" 
@@ -103,11 +102,11 @@
           Header="{Binding Resources.Editor_PivotCostumes, 
           Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
-          <bindableListView:BindableListBox
+          <bindableListView:BindableListView
               ItemsSource="{Binding Costumes}"
-              BindableSelectedItems="{Binding SelectedCostumes}"
+              BindableSelectedItems="{Binding SelectedCostumes, Mode=TwoWay}"
               ItemTemplate="{StaticResource LookItemTemplate}"
-              SelectionMode="Extended"
+              SelectionMode="Multiple"
             />
 
           <TextBlock 
@@ -125,13 +124,13 @@
       <PivotItem Name="PivotSounds" Margin="0 -15 0 0"
                  Header="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
-          <bindableListView:BindableListBox
+          <bindableListView:BindableListView
                 x:Name="ReorderListBoxSounds"
                 Visibility="Visible"
                 SelectionMode="Multiple"
-                BindableSelectedItems="{Binding Sounds}"
+                BindableSelectedItems="{Binding Sounds, Mode=TwoWay}"
                 ItemTemplate="{StaticResource SoundItemTemplate}">
-          </bindableListView:BindableListBox>
+          </bindableListView:BindableListView>
 
           <TextBlock 
               Text ="{Binding Resources.Editor_ClickPlusToAddSound, Source={StaticResource LocalizedStrings}}"
@@ -140,7 +139,7 @@
               TextWrapping="Wrap"
               TextAlignment="Center"
               VerticalAlignment="Center"
-              HorizontalAlignment="Center" />
+              HorizontalAlignment="Center"/>
         </Grid>
       </PivotItem>
     </Pivot>

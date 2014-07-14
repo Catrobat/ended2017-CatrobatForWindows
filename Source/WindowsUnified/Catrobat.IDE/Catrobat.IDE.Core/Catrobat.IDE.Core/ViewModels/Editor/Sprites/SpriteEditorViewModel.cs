@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         private Project _currentProject;
         private Sprite _selectedSprite;
-        private readonly ScriptBrickCollection _bricks;
+        private readonly SctionsCollection _bricks;
         private Sound _sound;
         private PortableListBoxViewPort _listBoxViewPort;
 
@@ -88,11 +88,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 {
                     Costumes.CollectionChanged -= CostumesCollectionChanged;
                     Sounds.CollectionChanged -= SoundsCollectionChanged;
-                    ScriptBricks.CollectionChanged -= ScriptBricksCollectionChanged;
+                    Actions.CollectionChanged -= ScriptBricksCollectionChanged;
 
                     Costumes.CollectionChanged += CostumesCollectionChanged;
                     Sounds.CollectionChanged += SoundsCollectionChanged;
-                    ScriptBricks.CollectionChanged += ScriptBricksCollectionChanged;
+                    Actions.CollectionChanged += ScriptBricksCollectionChanged;
                 }
 
                 //if (_scriptBricks != null && _scriptBricks.Count == 0 && ListBoxViewPort == null)
@@ -111,11 +111,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 RaisePropertyChanged(() => SelectedSprite);
                 RaisePropertyChanged(() => Sounds);
                 RaisePropertyChanged(() => Costumes);
-                RaisePropertyChanged(() => ScriptBricks);
+                RaisePropertyChanged(() => Actions);
             }
         }
 
-        public ScriptBrickCollection ScriptBricks
+        public SctionsCollection Actions
         {
             get
             {
@@ -499,7 +499,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         private void AddNewScriptBrickAction()
         {
-            var objects = new List<object> { ScriptBricks, ListBoxViewPort };
+            var objects = new List<object> { Actions, ListBoxViewPort };
 
             var message = new GenericMessage<List<Object>>(objects);
             Messenger.Default.Send(message, ViewModelMessagingToken.ScriptBrickCollectionListener);
@@ -516,13 +516,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                     if (scriptBrick is Script)
                     {
                         Model copy = (scriptBrick as Script).Clone();
-                        ScriptBricks.Insert(ScriptBricks.ScriptIndexOf((Script)scriptBrick) + 1, copy);
+                        Actions.Insert(Actions.ScriptIndexOf((Script)scriptBrick) + 1, copy);
                     }
 
                     if (scriptBrick is Brick)
                     {
                         Model copy = (scriptBrick as Brick).Clone();
-                        ScriptBricks.Insert(ScriptBricks.IndexOf(scriptBrick) + 1, copy);
+                        Actions.Insert(Actions.IndexOf(scriptBrick) + 1, copy);
                     }
                 }
             }
@@ -574,7 +574,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 if (beginBrick != null)
                 {
                     var isToDelete = false;
-                    foreach (var scriptBrickToRemove in ScriptBricks)
+                    foreach (var scriptBrickToRemove in Actions)
                     {
                         if (scriptBrickToRemove == beginBrick)
                             isToDelete = true;
@@ -593,10 +593,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             SelectedActions.Clear();
 
             foreach (var brick in bricksToRemove)
-                ScriptBricks.Remove(brick);
+                Actions.Remove(brick);
 
             foreach (var script in scriptsToRemove)
-                ScriptBricks.Remove(script);
+                Actions.Remove(script);
 
         }
 
@@ -891,7 +891,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             NothingItemHackCommand = new RelayCommand<object>(NothingItemHackAction);
             SoundsPlayStateChangedCommand = new RelayCommand<PlayPauseCommandArguments>(SoundsPlayStateChangedAction);
 
-            _bricks = new ScriptBrickCollection();
+            _bricks = new SctionsCollection();
 
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
