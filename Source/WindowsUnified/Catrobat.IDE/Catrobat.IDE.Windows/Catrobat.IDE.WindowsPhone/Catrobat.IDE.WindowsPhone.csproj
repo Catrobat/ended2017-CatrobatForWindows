@@ -151,6 +151,18 @@
     <Compile Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml.cs">
       <DependentUpon>NewCostumeSourceSelectionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Editor\Sounds\ChangeSoundView.xaml.cs">
+      <DependentUpon>ChangeSoundView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sounds\NewSoundSourceSelectionView.xaml.cs">
+      <DependentUpon>NewSoundSourceSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sounds\SoundNameChooserView.xaml.cs">
+      <DependentUpon>SoundNameChooserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sounds\SoundRecorderView.xaml.cs">
+      <DependentUpon>SoundRecorderView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Editor\Sprites\AddNewSpriteView.xaml.cs">
       <DependentUpon>AddNewSpriteView.xaml</DependentUpon>
     </Compile>
@@ -274,6 +286,22 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\ChangeSoundView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\NewSoundSourceSelectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\SoundNameChooserView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\SoundRecorderView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
