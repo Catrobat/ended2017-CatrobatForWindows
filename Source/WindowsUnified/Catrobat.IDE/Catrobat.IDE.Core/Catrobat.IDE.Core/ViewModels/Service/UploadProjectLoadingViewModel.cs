@@ -38,7 +38,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public UploadProjectLoadingViewModel()
         {
-            //SkipAndNavigateTo = typeof(MainViewModel);
+            SkipAndNavigateTo = typeof(MainViewModel);
         }
     }
 }

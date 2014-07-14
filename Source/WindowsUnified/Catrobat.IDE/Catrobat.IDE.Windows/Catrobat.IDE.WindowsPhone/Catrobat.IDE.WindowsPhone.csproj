@@ -181,6 +181,18 @@
     <Compile Include="Views\Service\UploadProjectLoadingView.xaml.cs">
       <DependentUpon>UploadProjectLoadingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Service\UploadProjectForgotPasswordView.xaml.cs">
+      <DependentUpon>UploadProjectForgotPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Service\OnlineProjectReportView.xaml.cs">
+      <DependentUpon>OnlineProjectReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Service\OnlineProjectView.xaml.cs">
+      <DependentUpon>OnlineProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Service\UploadProjectView.xaml.cs">
+      <DependentUpon>UploadProjectView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Service\UploadProjectLoginView.xaml.cs">
       <DependentUpon>UploadProjectLoginView.xaml</DependentUpon>
     </Compile>
@@ -326,6 +338,22 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Service\UploadProjectLoadingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Service\UploadProjectForgotPasswordView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Service\OnlineProjectReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Service\OnlineProjectView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Service\UploadProjectView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
