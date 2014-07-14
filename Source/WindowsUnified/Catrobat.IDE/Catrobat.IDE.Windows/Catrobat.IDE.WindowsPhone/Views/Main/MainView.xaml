@@ -1,10 +1,11 @@
-﻿<Page x:Class="Catrobat.IDE.WindowsPhone.Views.Main.MainView"
+﻿<views:ViewPageBase x:Class="Catrobat.IDE.WindowsPhone.Views.Main.MainView"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:statusIcons="using:Catrobat.IDE.WindowsPhone.Controls.StatusIcons"
   xmlns:projects="using:Catrobat.IDE.WindowsPhone.Controls.Projects"
+  xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   mc:Ignorable="d"
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
 
@@ -37,149 +38,52 @@
         <HubSection.ContentTemplate>
           <DataTemplate>
             <Grid Margin="0 -20 0 0">
-              <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
-              </Grid.RowDefinitions>
-              <Border BorderThickness="0" BorderBrush="{StaticResource PhoneForegroundBrush}" Margin="0 5 0 10" Height="130" Width="412">
-                <!--<toolkit:ContextMenuService.ContextMenu>
-                <toolkit:ContextMenu>
-                  <toolkit:MenuItem Header="{Binding Resources.Main_CopyProject, 
-                  Source={StaticResource LocalizedStrings}}"
-                  Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, 
-                  Source={StaticResource Locator}}" 
-                  CommandParameter="{Binding CurrentProject.Name}" />
-                  <toolkit:MenuItem Header="{Binding Resources.Main_DeleteProject, 
-                  Source={StaticResource LocalizedStrings}}"
-                  Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, 
-                  Source={StaticResource Locator}}" 
-                  CommandParameter="{Binding CurrentProject.Name}" />
-                  <toolkit:MenuItem Header="{Binding Resources.Main_ChangeProjectNameAndDescription, 
-                  Source={StaticResource LocalizedStrings}}" 
-                  Command="{Binding MainViewModel.RenameLocalProjectCommand, Mode=OneWay, 
-                  Source={StaticResource Locator}}"
-                  CommandParameter="{Binding CurrentProject.ProjectDummyHeader}" />
-                  <toolkit:MenuItem Header="{Binding Resources.Main_PinProjectToStart, 
-                  Source={StaticResource LocalizedStrings}}"
-                  Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, 
-                  Source={StaticResource Locator}}" 
-                  CommandParameter="{Binding CurrentProject.ProjectDummyHeader}" />
-                  <toolkit:MenuItem Header="{Binding Resources.Main_ShareProject, 
-                        Source={StaticResource LocalizedStrings}}"
-                        Command="{Binding MainViewModel.ShareLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding CurrentProject.ProjectDummyHeader}" />
-                </toolkit:ContextMenu>
-              </toolkit:ContextMenuService.ContextMenu>-->
-                <Grid Background="{StaticResource PhoneAccentBrush}">
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                  </Grid.ColumnDefinitions>
-
-                  <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                      <RowDefinition Height="Auto" />
-                      <RowDefinition  />
-                    </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="0">
-                      <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"  />
-                        <ColumnDefinition />
-                      </Grid.ColumnDefinitions>
-                      <TextBlock Grid.Column="1" VerticalAlignment="Top" Margin="15,5,5,5" TextWrapping="Wrap" 
-                             Text="{Binding CurrentProject.Name}" Foreground="White"
-                             Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
-                    </Grid>
-
-                    <Grid Grid.Row="1">
-                      <Grid
-                    Visibility="{Binding IsActivatingLocalProject, 
-                    Converter={StaticResource BoolVisibilityConverter}}"
-                    Margin="0 0 10 0">
-                        <Grid.ColumnDefinitions>
-                          <ColumnDefinition Width="Auto"/>
-                          <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <!--<statusIcons:ProcessIcon Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                             Width="30" Height="30" Margin="5" IsProcessing="True" />-->
-                        <TextBlock Opacity="0.5" TextWrapping="Wrap" Style="{Binding StaticTheme.TextSmallStyle, Source={StaticResource ThemeChooser}}" 
-                               VerticalAlignment="Center" Grid.Column="1" Foreground="White"
-                               Text="{Binding Resources.Main_ProjectGettingActivated, Source={StaticResource LocalizedStrings}}" />
-                      </Grid>
-
-                      <TextBlock Grid.Column="0" Opacity="0.9" Margin="10 0 10 0" TextWrapping="Wrap" TextAlignment="Center" 
-                             Visibility="{Binding IsActivatingLocalProject, Converter={StaticResource BoolVisibilityNegativeConverter}}"
-                             VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White"
-                             Text="{Binding Resources.Main_ActiveProject, Source={StaticResource LocalizedStrings}}" />
-                    </Grid>
-                  </Grid>
-                  <Grid Grid.Column="1">
-                    <Border BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="0 0 0 0">
-                      <Grid HorizontalAlignment="Right">
-
-                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                          <!--<buttons:ScreenshotButton VerticalAlignment="Center" 
-                        Template="{StaticResource ScreenshotButtonControlTemplate}" 
-                        Margin="0,0,0,0" HorizontalAlignment="Center" 
-                        Command="{Binding PlayCurrentProjectCommand}"/>
-                        <Grid>
-                          <Image Source="{Binding CurrentProject.Screenshot.ImageSource, 
-                          Converter={StaticResource ImageSquareConverter}}" />
-                        </Grid>
-                        <buttons:ScreenshotButton VerticalAlignment="Center" HorizontalAlignment="Center"        
-                        Template="{StaticResource ScreenshotButtonControlTemplate}"
-                        Margin="0,0,0,0" Command="{Binding PlayCurrentProjectCommand}" />-->
-                        </Grid>
-                      </Grid>
-                    </Border>
-                  </Grid>
-                </Grid>
-              </Border>
-              <ListBox Grid.Row="1" Name="ListBoxLocalProjects" ItemsSource="{Binding LocalProjects}" SelectedItem="{Binding CurrentProject}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <!--<ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                  <toolkit:WrapPanel/>
-                </ItemsPanelTemplate>
-              </ListBox.ItemsPanel>-->
-                <ListBox.ItemTemplate>
+              <GridView Name="ListBoxLocalProjects" ItemsSource="{Binding LocalProjects}" 
+                        SelectedItem="{Binding CurrentProject}" 
+                        VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch">
+                <GridView.ItemTemplate>
                   <DataTemplate>
-                    <Grid>
-                      <!--<toolkit:ContextMenuService.ContextMenu>
-                      <toolkit:ContextMenu>
-                        <toolkit:MenuItem Header="{Binding Resources.Main_CopyProject, 
-                        Source={StaticResource LocalizedStrings}}"
-                        Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding ProjectName}" />
-                        <toolkit:MenuItem Header="{Binding Resources.Main_DeleteProject, 
-                        Source={StaticResource LocalizedStrings}}"
-                        Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding ProjectName}" />
-                        <toolkit:MenuItem Header="{Binding Resources.Main_ChangeProjectNameAndDescription, 
-                        Source={StaticResource LocalizedStrings}}" 
-                        Command="{Binding MainViewModel.RenameLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}"
-                        CommandParameter="{Binding}" />
-                        <toolkit:MenuItem Header="{Binding Resources.Main_PinProjectToStart, 
-                        Source={StaticResource LocalizedStrings}}"
-                        Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding}" />
-                        <toolkit:MenuItem Header="{Binding Resources.Main_ShareProject, 
-                        Source={StaticResource LocalizedStrings}}"
-                        Command="{Binding MainViewModel.ShareLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding}" />
-                      </toolkit:ContextMenu>
-                    </toolkit:ContextMenuService.ContextMenu>-->
-                      <projects:LocalProjectControl Width="130" Height="130" Margin="5" Project="{Binding}" />
-                    </Grid>
+                    <Button Padding="0 0 0 0" BorderThickness="0">
+                      <Button.Flyout>
+                        <MenuFlyout>
+                          <MenuFlyoutItem Text="{Binding Resources.Main_CopyProject, 
+                              Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, 
+                              Source={StaticResource Locator}}" 
+                                    CommandParameter="{Binding ProjectName}"/>
+                          <MenuFlyoutItem Text="{Binding Resources.Main_DeleteProject, 
+                              Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, 
+                              Source={StaticResource Locator}}" 
+                                    CommandParameter="{Binding ProjectName}"/>
+                          <MenuFlyoutItem Text="{Binding Resources.Main_ChangeProjectNameAndDescription, 
+                              Source={StaticResource LocalizedStrings}}" 
+                              Command="{Binding MainViewModel.RenameLocalProjectCommand, Mode=OneWay, 
+                              Source={StaticResource Locator}}"
+                                    CommandParameter="{Binding}"/>
+                          <MenuFlyoutSeparator/>
+                          <MenuFlyoutItem Text="{Binding Resources.Main_PinProjectToStart, 
+                              Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, 
+                              Source={StaticResource Locator}}" 
+                                    CommandParameter="{Binding}"/>
+                          <MenuFlyoutItem Text="{Binding Resources.Main_ShareProject, 
+                              Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding MainViewModel.ShareLocalProjectCommand, Mode=OneWay, 
+                              Source={StaticResource Locator}}" 
+                              CommandParameter="{Binding}" />
+                        </MenuFlyout>
+                      </Button.Flyout>
+                      <Button.ContentTemplate>
+                        <DataTemplate>
+                          <projects:LocalProjectControl Width="150" Height="150" Margin="5" Project="{Binding}" />
+                        </DataTemplate>
+                      </Button.ContentTemplate>
+                    </Button>
                   </DataTemplate>
-                </ListBox.ItemTemplate>
-              </ListBox>
+                </GridView.ItemTemplate>
+              </GridView>
             </Grid>
           </DataTemplate>
         </HubSection.ContentTemplate>
@@ -301,15 +205,18 @@
   <Page.BottomAppBar>
     <CommandBar>
       <CommandBar.PrimaryCommands>
-        <AppBarButton Icon="Add" 
-                      Label="{Binding Resources.Main_ButtonCreate, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding CreateNewProjectCommand}"/>
         <AppBarButton Icon="Edit" 
                       Label="{Binding Resources.Main_ButtonEdit, 
                       Source={StaticResource LocalizedStrings}}"
                       Command="{Binding EditCurrentProjectCommand}"/>
-
+        <AppBarButton Icon="Add" 
+                      Label="{Binding Resources.Main_ButtonCreate, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding CreateNewProjectCommand}"/>
+        <AppBarButton Icon="Upload" 
+                      Label="{Binding Resources.Main_ButtonUpload, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding UploadCurrentProjectCommand}"/>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
         <AppBarButton Label="{Binding Resources.Main_Settings, 
@@ -318,4 +225,4 @@
       </CommandBar.SecondaryCommands>
     </CommandBar>
   </Page.BottomAppBar>
-</Page>
+</views:ViewPageBase>

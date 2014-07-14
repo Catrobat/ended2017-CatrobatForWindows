@@ -4,9 +4,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="50" d:DesignWidth="50" 
     Width="200" Height="200">
   
@@ -22,16 +19,18 @@
                 <VisualState x:Name="MouseOver"/>
                 <VisualState x:Name="Pressed">
                   <Storyboard >
-                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GridMain" 
-                                                   Storyboard.TargetProperty="Opacity" Duration="0">
+                    <DoubleAnimationUsingKeyFrames 
+                      Storyboard.TargetName="GridMain" 
+                      Storyboard.TargetProperty="Opacity" Duration="0">
                       <DiscreteDoubleKeyFrame KeyTime="0:00:00" Value="1.0"/>
                     </DoubleAnimationUsingKeyFrames>
                   </Storyboard>
                 </VisualState>
                 <VisualState x:Name="Disabled">
                   <Storyboard>
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" 
-                                                   Storyboard.TargetName="gridPlay">
+                    <ObjectAnimationUsingKeyFrames 
+                      Storyboard.TargetProperty="(UIElement.Visibility)" 
+                      Storyboard.TargetName="gridPlay">
                       <DiscreteObjectKeyFrame KeyTime="0">
                         <DiscreteObjectKeyFrame.Value>
                           <Visibility>Collapsed</Visibility>
@@ -42,7 +41,8 @@
                 </VisualState>
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Grid Name="GridMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid Name="GridMain" HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch">
               <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                   <RowDefinition Height="0.5*"/>
@@ -54,11 +54,12 @@
                   <ColumnDefinition Width="9*"/>
                   <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
-                <Ellipse Name="EllipsePlay"  Grid.Row="1" Grid.Column="1" 
-                         Fill="#00F4F4F5" Stroke="White" 
-                         StrokeThickness="{Binding RelativeSource={RelativeSource TemplatedParent},
-                         Path=BorderThickness.Left}" 
-                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                <Ellipse 
+                  Name="EllipsePlay"  Grid.Row="1" Grid.Column="1" 
+                  Fill="#00F4F4F5" Stroke="White" 
+                  StrokeThickness="{Binding RelativeSource={RelativeSource TemplatedParent},
+                  Path=BorderThickness.Left}" 
+                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
               </Grid>
               <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
@@ -105,8 +106,9 @@
                 </VisualState>
                 <VisualState x:Name="Disabled">
                   <Storyboard>
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" 
-                                                   Storyboard.TargetName="gridPlay">
+                    <ObjectAnimationUsingKeyFrames 
+                      Storyboard.TargetProperty="(UIElement.Visibility)"           
+                      Storyboard.TargetName="gridPlay">
                       <DiscreteObjectKeyFrame KeyTime="0">
                         <DiscreteObjectKeyFrame.Value>
                           <Visibility>Collapsed</Visibility>
@@ -147,8 +149,10 @@
                   <ColumnDefinition Width="2*"/>
                   <ColumnDefinition Width="1.5*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                  <Rectangle Width="10" StrokeThickness="0" HorizontalAlignment="Right" Fill="White"/>
+                <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Stretch">
+                  <Rectangle Width="10" StrokeThickness="0" HorizontalAlignment="Right" 
+                             Fill="White"/>
                   <Rectangle Width="10" Stroke="#FFDE0F0F"  StrokeThickness="0" 
                              HorizontalAlignment="Left"  Fill="White"/>
                 </Grid>

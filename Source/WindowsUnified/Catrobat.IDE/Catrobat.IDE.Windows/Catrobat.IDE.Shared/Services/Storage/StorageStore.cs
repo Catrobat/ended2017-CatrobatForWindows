@@ -341,9 +341,17 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                 case StorageFileMode.Create:
                 case StorageFileMode.CreateNew:
                     {
-                        var folder = await CreateFolderPath(Path.GetDirectoryName(path));
-                        //var folder = await GetFolderAsync(folderPath);
-                        file = await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
+                        try
+                        {
+                            var folder = await CreateFolderPath(Path.GetDirectoryName(path));
+                            //var folder = await GetFolderAsync(folderPath);
+                            file = await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
                         break;
                     }
                 default:
@@ -417,60 +425,59 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
 
         public async Task<PortableImage> LoadImageThumbnailAsync(string pathToImage)
         {
-            throw new NotImplementedException();
-            //pathToImage = pathToImage.Replace("\\", "/");
+            pathToImage = pathToImage.Replace("\\", "/");
 
-            //PortableImage retVal = null;
-            //var withoutExtension = Path.GetFileNameWithoutExtension(pathToImage);
-            //var imageBasePath = Path.GetDirectoryName(pathToImage);
+            PortableImage retVal = null;
+            var withoutExtension = Path.GetFileNameWithoutExtension(pathToImage);
+            var imageBasePath = Path.GetDirectoryName(pathToImage);
 
-            //if (imageBasePath != null)
-            //{
-            //    var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}",
-            //        withoutExtension, CatrobatContextBase.ImageThumbnailExtension));
+            if (imageBasePath != null)
+            {
+                var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}",
+                    withoutExtension, CatrobatContextBase.ImageThumbnailExtension));
 
-            //    if (await FileExistsAsync(thumbnailPath))
-            //    {
-            //        retVal = await LoadImageAsync(thumbnailPath);
-            //    }
-            //    else
-            //    {
-            //        var fullSizePortableImage = await LoadImageAsync(pathToImage);
+                if (await FileExistsAsync(thumbnailPath))
+                {
+                    retVal = await LoadImageAsync(thumbnailPath);
+                }
+                else
+                {
+                    var fullSizePortableImage = await LoadImageAsync(pathToImage);
 
-            //        if (fullSizePortableImage != null)
-            //        {
-            //            var thumbnailImage = await ServiceLocator.ImageResizeService.ResizeImage(fullSizePortableImage,
-            //                _imageThumbnailDefaultMaxWidthHeight);
-            //            retVal = thumbnailImage;
+                    if (fullSizePortableImage != null)
+                    {
+                        var thumbnailImage = await ServiceLocator.ImageResizeService.ResizeImage(fullSizePortableImage,
+                            _imageThumbnailDefaultMaxWidthHeight);
+                        retVal = thumbnailImage;
 
-            //            try
-            //            {
-            //                var bitmap = ((WriteableBitmap)thumbnailImage.ImageSource);
-            //                var resolution = 100;
+                        try
+                        {
+                            var bitmap = ((WriteableBitmap)thumbnailImage.ImageSource);
+                            const int resolution = 100;
 
-            //                var fileStream = await OpenFileAsync(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
+                            var fileStream = await OpenFileAsync(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
 
-            //                var encoderId = BitmapEncoder.PngEncoderId;
-            //                var encoder = await BitmapEncoder.CreateAsync(encoderId, fileStream.AsRandomAccessStream());
-            //                encoder.SetPixelData(BitmapPixelFormat.Bgra8,
-            //                                                     BitmapAlphaMode.Straight,
-            //                                                     (uint)bitmap.PixelWidth,
-            //                                                     (uint)bitmap.PixelHeight,
-            //                                                     resolution,
-            //                                                     resolution,
-            //                                                     bitmap.ToByteArray());
-            //                await encoder.FlushAsync();
-            //            }
+                            var encoderId = BitmapEncoder.PngEncoderId;
+                            var encoder = await BitmapEncoder.CreateAsync(encoderId, fileStream.AsRandomAccessStream());
+                            encoder.SetPixelData(BitmapPixelFormat.Bgra8,
+                                                                 BitmapAlphaMode.Straight,
+                                                                 (uint)bitmap.PixelWidth,
+                                                                 (uint)bitmap.PixelHeight,
+                                                                 resolution,
+                                                                 resolution,
+                                                                 bitmap.ToByteArray());
+                            await encoder.FlushAsync();
+                        }
 
-            //            catch
-            //            {
-            //                retVal = null;
-            //            }
-            //        }
-            //    }
-            //}
+                        catch
+                        {
+                            retVal = null;
+                        }
+                    }
+                }
+            }
 
-            //return retVal;
+            return retVal;
         }
 
         public async Task<PortableImage> CreateThumbnailAsync(PortableImage image)

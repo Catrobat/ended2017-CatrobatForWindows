@@ -1,127 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using Windows.Storage;
+using Windows.UI.Popups;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Storage;
-using Windows.Storage.Provider;
-using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
-using Catrobat.IDE.WindowsPhone.Views.Main;
+using Catrobat.IDE.WindowsPhone.Controls.CatrobatSplashScreen;
+using Catrobat.IDE.WindowsShared.Common;
 
 namespace Catrobat.IDE
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : Application
+    sealed partial class App : Application
     {
-#if WINDOWS_PHONE_APP
-        private TransitionCollection transitions;
-#endif
-
         /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
+        /// Initializes the singleton Application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += this.OnSuspending;
+            this.Suspending += OnSuspending;
         }
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used when the application is launched to open a specific file, to display
-        /// search results, and so forth.
+        /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
+            StatusBar statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+            await statusBar.HideAsync();
+
+            if (e.PreviousExecutionState != ApplicationExecutionState.Running)
             {
-                this.DebugSettings.EnableFrameRateCounter = true;
-            }
-#endif
-
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active
-            if (rootFrame == null)
-            {
-                // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
-
-                // TODO: change this value to a cache size that is appropriate for your application
-                rootFrame.CacheSize = 1;
-
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    // TODO: Load state from previously suspended application
-                }
-
-                // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
+                var extendedSplash = new ExtendedSplash(e.SplashScreen, e.PreviousExecutionState);
+                Window.Current.Content = extendedSplash;
             }
 
-            if (rootFrame.Content == null)
-            {
-#if WINDOWS_PHONE_APP
-                // Removes the turnstile navigation for startup.
-                if (rootFrame.ContentTransitions != null)
-                {
-                    this.transitions = new TransitionCollection();
-                    foreach (var c in rootFrame.ContentTransitions)
-                    {
-                        this.transitions.Add(c);
-                    }
-                }
-
-                rootFrame.ContentTransitions = null;
-                rootFrame.Navigated += this.RootFrame_FirstNavigated;
-#endif
-
-                // When the navigation stack isn't restored navigate to the first page,
-                // configuring the new page by passing required information as a navigation
-                // parameter
-                if (!rootFrame.Navigate(typeof(WindowsPhone.Controls.SplashScreen.SplashScreen), e.Arguments))
-                {
-                    throw new Exception("Failed to create initial page");
-                }
-            }
-
-            // Ensure the current window is active
             Window.Current.Activate();
         }
 
-#if WINDOWS_PHONE_APP
         /// <summary>
-        /// Restores the content transitions after the app has launched.
+        /// Invoked when Navigation to a certain page fails
         /// </summary>
-        /// <param name="sender">The object where the handler is attached.</param>
-        /// <param name="e">Details about the navigation event.</param>
-        private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
+        /// <param name="sender">The Frame which failed navigation</param>
+        /// <param name="e">Details about the navigation failure</param>
+        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            var rootFrame = sender as Frame;
-            rootFrame.ContentTransitions = this.transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
-            rootFrame.Navigated -= this.RootFrame_FirstNavigated;
+            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
-#endif
 
         /// <summary>
         /// Invoked when application execution is being suspended.  Application state is saved
@@ -130,11 +62,10 @@ namespace Catrobat.IDE
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-
-            // TODO: Save application state and stop any background activity
+            await SuspensionManager.SaveAsync();
             deferral.Complete();
         }
 
@@ -144,67 +75,21 @@ namespace Catrobat.IDE
 
 
 
-        // TODO: remove sample code below
-
-        protected async override void OnCachedFileUpdaterActivated(CachedFileUpdaterActivatedEventArgs args)
-        {
-            var messageDialog1 = new MessageDialog("OnCachedFileUpdaterActivated");
-            await messageDialog1.ShowAsync();
-
-
-            args.CachedFileUpdaterUI.FileUpdateRequested
-                 += OnCachedFileUpdaterUIFileUpdateRequested;
-            base.OnCachedFileUpdaterActivated(args);
-
-
-
-            //do not forget this
-            Window.Current.Activate();
-
-
-
-        }
-
-        void OnCachedFileUpdaterUIFileUpdateRequested(CachedFileUpdaterUI sender,
-                FileUpdateRequestedEventArgs args)
-        {
-            var text = args.Request.File.Name;
-
-
-  
-
-
-
-
-
-            // var deferral = args.Request.GetDeferral();
- 
-            // var theContentId = args.Request.ContentId;
-            // var theTargetFile = args.Request.File;
- 
-            // //Do something to the file
- 
-            // //If the local file have to be updated, call do this :
-            // //StorageFile upToDateFile=null;
-            // //fill upToDateFile with the correct data
-            // //args.Request.UpdateLocalFile(upToDateFile);
-
-            //args.Request.Status = FileUpdateStatus.Complete;
-            // deferral.Complete();
-        }
-
 
 
         protected override async void OnFileActivated(FileActivatedEventArgs e)
         {
             try
             {
-                var file = (StorageFile) e.Files[0];
-                var content = await FileIO.ReadTextAsync(file);
+                var file = (StorageFile)e.Files[0];
 
-                var localFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(
-                    MainPage.CatrobatImageFileName, CreationCollisionOption.ReplaceExisting);
-                await FileIO.WriteTextAsync(localFile, content);
+                // todo navigate to picture chooser UI
+
+                //var content = await FileIO.ReadTextAsync(file);
+
+                //var localFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(
+                //    MainPage.CatrobatImageFileName, CreationCollisionOption.ReplaceExisting);
+                //await FileIO.WriteTextAsync(localFile, content);
             }
             catch (Exception exc)
             {
@@ -214,3 +99,11 @@ namespace Catrobat.IDE
         }
     }
 }
+
+
+
+
+
+
+
+

@@ -67,11 +67,11 @@ namespace Catrobat.IDE.Core
                 }
             }
 
-            if (localSettings == null && Debugger.IsAttached)
-            {
-                var loader = new SampleProjectLoader();
-                await loader.LoadSampleProjects();
-            }
+            //if (localSettings == null && Debugger.IsAttached)
+            //{
+            //    var loader = new SampleProjectLoader();
+            //    await loader.LoadSampleProjects();
+            //}
 
             var currentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
             await currentProject.Save();

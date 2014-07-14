@@ -1,13 +1,12 @@
 ﻿using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-
-using Catrobat.IDE.Core.Models.Bricks;
-using Catrobat.IDE.Core.Models.Formulas.Tree;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
@@ -64,8 +63,7 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
                 {
-                    var inputStream =
-                        await loader.OpenResourceStreamAsync(ResourceScope.IdePhone,
+                    var inputStream = await loader.OpenResourceStreamAsync(ResourceScope.Ide,
                         Path.Combine(ResourcePathToScreenshot, AutomatedScreenshotFilename));
 
                     var outputStream = await storage.OpenFileAsync(
@@ -78,7 +76,7 @@ namespace Catrobat.IDE.Core.Services.Common
                     outputStream.Dispose();
 
                     var inputStream2 =
-                        await loader.OpenResourceStreamAsync(ResourceScope.IdePhone,
+                        await loader.OpenResourceStreamAsync(ResourceScope.Ide,
                         Path.Combine(ResourcePathToScreenshot, ManualScreenshotFilename));
 
                     var outputStream2 = await storage.OpenFileAsync(
@@ -110,7 +108,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 {
                     foreach (var lookFile in lookFiles)
                     {
-                        var inputStream = await loader.OpenResourceStreamAsync(ResourceScope.IdePhone, // TODO: change resourceScope to suppot phone and store app  (after 8.1 upgrade)
+                        var inputStream = await loader.OpenResourceStreamAsync(ResourceScope.Ide, // TODO: change resourceScope to suppot phone and store app  (after 8.1 upgrade)
                             Path.Combine(ResourcePathToLookFiles, lookFile));
 
                         var outputStream = await storage.OpenFileAsync(Path.Combine(basePathToLookFiles, lookFile),
@@ -141,7 +139,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 {
                     foreach (var soundFile in soundFiles)
                     {
-                        var inputStream = await loader.OpenResourceStreamAsync(ResourceScope.IdePhone, // TODO: change resourceScope to suppot phone and store app (after 8.1 upgrade)
+                        var inputStream = await loader.OpenResourceStreamAsync(ResourceScope.Ide, // TODO: change resourceScope to suppot phone and store app (after 8.1 upgrade)
                             Path.Combine(ResourcePathToSoundFiles, soundFile));
 
                         var outputStream = await storage.OpenFileAsync(Path.Combine(basePathToSoundFiles, soundFile),

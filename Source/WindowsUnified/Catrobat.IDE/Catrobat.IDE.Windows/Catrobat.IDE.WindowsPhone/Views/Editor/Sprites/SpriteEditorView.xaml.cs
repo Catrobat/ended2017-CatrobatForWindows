@@ -1,28 +1,20 @@
-﻿using System.ComponentModel;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Catrobat.IDE.Core.Services;
+﻿using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
+using Windows.UI.Xaml;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 {
-    public partial class SpriteEditorView : Page
+    public partial class SpriteEditorView
     {
         private readonly SpriteEditorViewModel _viewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).SpriteEditorViewModel;
 
+        protected override ViewModelBase GetViewModel() { return _viewModel; }
 
         public SpriteEditorView()
         {
             InitializeComponent();
         }
-
-        //protected override void OnBackKeyPress(CancelEventArgs e)
-        //{
-        //    _viewModel.GoBackCommand.Execute(null);
-        //    e.Cancel = true;
-        //    base.OnBackKeyPress(e);
-        //}
 
         private void reorderListBoxScriptBricks_Loaded(object sender, RoutedEventArgs e)
         {

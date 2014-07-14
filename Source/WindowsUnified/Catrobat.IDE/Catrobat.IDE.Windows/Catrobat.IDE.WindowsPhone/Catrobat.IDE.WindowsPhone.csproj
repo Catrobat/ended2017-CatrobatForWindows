@@ -93,10 +93,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\NavigationHelper.cs" />
-    <Compile Include="Common\ObservableDictionary.cs" />
-    <Compile Include="Common\RelayCommand.cs" />
-    <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Controls\AppBar\EditorAppBar.xaml.cs">
       <DependentUpon>EditorAppBar.xaml</DependentUpon>
     </Compile>
@@ -106,6 +102,9 @@
       <DependentUpon>PlayPauseButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Buttons\PlayPauseButtonGroup.cs" />
+    <Compile Include="Controls\CatrobatSplashScreen\ExtendedSplash.xaml.cs">
+      <DependentUpon>ExtendedSplash.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DynamicDataTemplates\DataTemplateSelector.cs" />
     <Compile Include="Controls\Formulas\FormulaButton.xaml.cs">
       <DependentUpon>FormulaButton.xaml</DependentUpon>
@@ -136,16 +135,34 @@
     <Compile Include="Controls\Projects\LocalProjectControl.xaml.cs">
       <DependentUpon>LocalProjectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
-      <DependentUpon>SplashScreen.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\StatusIcons\ProcessIcon.xaml.cs">
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Editor\Costumes\ChangeCostumeView.xaml.cs">
+      <DependentUpon>ChangeCostumeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Costumes\CostumeNameChooserView.xaml.cs">
+      <DependentUpon>CostumeNameChooserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Costumes\CostumeSavingView.xaml.cs">
+      <DependentUpon>CostumeSavingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml.cs">
+      <DependentUpon>NewCostumeSourceSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sounds\ChangeSoundView.xaml.cs">
+      <DependentUpon>ChangeSoundView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sounds\NewSoundSourceSelectionView.xaml.cs">
+      <DependentUpon>NewSoundSourceSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sounds\SoundNameChooserView.xaml.cs">
+      <DependentUpon>SoundNameChooserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sounds\SoundRecorderView.xaml.cs">
+      <DependentUpon>SoundRecorderView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Editor\Sprites\AddNewSpriteView.xaml.cs">
       <DependentUpon>AddNewSpriteView.xaml</DependentUpon>
     </Compile>
@@ -161,6 +178,19 @@
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Service\UploadProjectLoadingView.xaml.cs">
+      <DependentUpon>UploadProjectLoadingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Service\UploadProjectLoginView.xaml.cs">
+      <DependentUpon>UploadProjectLoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Service\UploadProjectNewPasswordView.xaml.cs">
+      <DependentUpon>UploadProjectNewPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Service\UploadProjectRegisterView.xaml.cs">
+      <DependentUpon>UploadProjectRegisterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewPageBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -196,6 +226,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Buttons\PlayPauseButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CatrobatSplashScreen\ExtendedSplash.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -235,15 +269,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SplashScreen\SplashScreen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\StatusIcons\ProcessIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="Views\Editor\Costumes\ChangeCostumeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Costumes\CostumeNameChooserView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Costumes\CostumeSavingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\ChangeSoundView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\NewSoundSourceSelectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\SoundNameChooserView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\SoundRecorderView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -266,6 +324,22 @@
     <Page Include="Views\Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Service\UploadProjectLoadingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Service\UploadProjectLoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Service\UploadProjectNewPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Service\UploadProjectRegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

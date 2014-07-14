@@ -3,8 +3,7 @@
     public enum ResourceScope
     {
         Core,
-        IdePhone,
-        IdeStore,
+        Ide,
         TestsPhone,
         TestsStore,
         TestCommon,

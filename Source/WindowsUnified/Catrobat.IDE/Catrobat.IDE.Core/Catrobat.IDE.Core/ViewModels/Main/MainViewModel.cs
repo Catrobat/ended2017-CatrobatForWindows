@@ -1,12 +1,10 @@
-﻿using System.Diagnostics;
-using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModels.Service;
@@ -17,10 +15,12 @@ using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Catrobat.IDE.Core.Resources;
 
 namespace Catrobat.IDE.Core.ViewModels.Main
 {
@@ -267,6 +267,24 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             private set;
         }
 
+        public ICommand LicenseCommand
+        {
+            get;
+            private set;
+        }
+
+        public ICommand AboutCommand
+        {
+            get;
+            private set;
+        }
+
+        public ICommand MSRLCommand
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
         #region Actions
@@ -415,7 +433,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             // Determine which page to open
             JSONStatusResponse status_response = await CatrobatWebCommunicationService.AsyncCheckToken(Context.CurrentUserName, Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
-            if (status_response.statusCode == StatusCodes.ServerResponseTokenOk)
+            if (status_response.statusCode == StatusCodes.ServerResponseOk)
             {
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
@@ -433,6 +451,21 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
+        private void LicenseAction()
+        {
+            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.CATROBAT_LICENSES_URL);
+        }
+
+        private void AboutAction()
+        {
+            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.CATROBAT_URL);
+        }
+
+        private void MSRLAction()
+        {
+            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.MS_RL_LICENSE_URL);
+        }
+
         protected override void GoBackAction()
         {
             ResetViewModel();
@@ -444,7 +477,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             if (_showDownloadMessage)
             {
                 var portbleImage = new PortableImage();
-                await portbleImage.LoadFromResources(ResourceScope.IdePhone,
+                await portbleImage.LoadFromResources(ResourceScope.Ide,
                     "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
 
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
@@ -455,7 +488,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             if (_showUploadMessage)
             {
                 var portbleImage = new PortableImage();
-                await portbleImage.LoadFromResources(ResourceScope.IdePhone,
+                await portbleImage.LoadFromResources(ResourceScope.Ide,
                     "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
 
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
@@ -519,6 +552,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             PlayCurrentProjectCommand = new RelayCommand(PlayCurrentProjectAction);
             UploadCurrentProjectCommand = new RelayCommand(UploadCurrentProjectAction);
             ShowMessagesCommand = new RelayCommand(ShowMessagesAction);
+            LicenseCommand = new RelayCommand(LicenseAction);
+            AboutCommand = new RelayCommand(AboutAction);
+            MSRLCommand = new RelayCommand(MSRLAction);
 
 
             Messenger.Default.Register<MessageBase>(this,
@@ -706,7 +742,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                             exists = true;
                     }
 
-                    if (!exists && projectName != CurrentProject.ProjectDummyHeader.ProjectName)
+                    if (!exists) // && projectName != CurrentProject.ProjectDummyHeader.ProjectName
                     {
                         var manualScreenshotPath = Path.Combine(
                             CatrobatContextBase.ProjectsPath, projectName, Project.ScreenshotPath);
