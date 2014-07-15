@@ -64,7 +64,7 @@
                               CommandParameter="{Binding}"/>
             <abu:AppBar.MenuItems>
               <abu:AppBarMenuItem Text="{Binding Resources.Main_OnlineProjectReportButton, Source={StaticResource LocalizedStrings}}" 
-                                  Command="{Binding OnlineProjectViewModel.ReportCommand, Source={StaticResource Locator}}" />
+                                  Command="{Binding OnlineProjectViewModel.ReportCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}"/>
               <abu:AppBarMenuItem Text="{Binding Resources.Main_OnlineProjectLicenseButton, Source={StaticResource LocalizedStrings}}" 
                                   Command="{Binding OnlineProjectViewModel.LicenseCommand, Source={StaticResource Locator}}" />
             </abu:AppBar.MenuItems>
