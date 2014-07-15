@@ -1,0 +1,107 @@
+﻿<views:ViewPageBase
+    x:Class="Catrobat.IDE.WindowsPhone.Views.Editor.Scripts.ScriptBrickCategoryView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+    xmlns:bricks="using:Catrobat.IDE.WindowsPhone.Controls.Bricks"
+    mc:Ignorable="d"
+    DataContext="{Binding ScriptBrickCategoryViewModel, Source={StaticResource Locator}}">
+
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 0 20">
+      <TextBlock x:Name="Headline" Margin="0" 
+        Text="{Binding Resources.Editor_TitleChooseCategory, 
+        Source={StaticResource LocalizedStrings}}" 
+        Style="{Binding StaticTheme.TextTitle3Style.NativeStyle, 
+        Source={StaticResource ThemeChooser}}" />
+    </StackPanel>
+
+    <StackPanel Grid.Row="1" Margin="10 0 10 15">
+      <Button BorderThickness="0" HorizontalAlignment="Stretch"
+              Command="{Binding MovementCommand}">
+        <Button.Template>
+          <ControlTemplate>
+            <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                          BorderBrush="{StaticResource BrickBorderBrush}" 
+                          Margin="10 0 10 0">
+              <TextBlock VerticalAlignment="Center" 
+                   Text="{Binding Resources.Brick_CategoryMotion, Source={StaticResource LocalizedStrings}}" 
+                   Margin="10" FontSize="24" />
+            </bricks:NormalBrick>
+          </ControlTemplate>
+        </Button.Template>
+      </Button>
+
+      <Button BorderThickness="0" HorizontalAlignment="Stretch"
+              Command="{Binding LooksCommand}">
+        <Button.Template>
+          <ControlTemplate>
+            <bricks:NormalBrick Grid.Row="1" Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                          BorderBrush="{StaticResource BrickBorderBrush}" 
+                          Margin="10 10 10 0">
+          <TextBlock VerticalAlignment="Center" 
+                   Text="{Binding Resources.Brick_CategoryLooks, Source={StaticResource LocalizedStrings}}" 
+                   Margin="10" FontSize="24" />
+        </bricks:NormalBrick>
+          </ControlTemplate>
+        </Button.Template>
+      </Button>
+
+      <Button BorderThickness="0" HorizontalAlignment="Stretch"
+              Command="{Binding SoundCommand}">
+        <Button.Template>
+          <ControlTemplate>
+            <bricks:NormalBrick Grid.Row="2" Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                          BorderBrush="{StaticResource BrickBorderBrush}" 
+                          Margin="10 10 10 0">
+          <TextBlock VerticalAlignment="Center" 
+                   Text="{Binding Resources.Brick_CategorySound, Source={StaticResource LocalizedStrings}}" 
+                   Margin="10" FontSize="24" />
+            </bricks:NormalBrick>
+          </ControlTemplate>
+        </Button.Template>
+      </Button>
+
+      <Button BorderThickness="0" HorizontalAlignment="Stretch"
+              Command="{Binding ControlCommand}">
+        <Button.Template>
+          <ControlTemplate>
+            <bricks:NormalBrick Grid.Row="3" Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                          BorderBrush="{StaticResource BrickBorderBrush}" 
+                          Margin="10 10 10 0">
+          <TextBlock VerticalAlignment="Center" 
+                   Text="{Binding Resources.Brick_CategoryControl, Source={StaticResource LocalizedStrings}}" 
+                   Margin="10" 
+                   FontSize="24" />
+            </bricks:NormalBrick>
+          </ControlTemplate>
+        </Button.Template>
+      </Button>
+
+      <Button BorderThickness="0" HorizontalAlignment="Stretch"
+              Command="{Binding VariablesCommand}">
+        <Button.Template>
+          <ControlTemplate>
+            <bricks:NormalBrick Grid.Row="4" Background="{Binding StaticTheme.VariableBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                            BorderBrush="{StaticResource BrickBorderBrush}" 
+                            Margin="10 10 10 0">
+          <TextBlock VerticalAlignment="Center" 
+                     Text="{Binding Resources.Brick_CategoryVariables, Source={StaticResource LocalizedStrings}}" 
+                     Margin="10" FontSize="24" />
+            </bricks:NormalBrick>
+          </ControlTemplate>
+        </Button.Template>
+      </Button>
+    </StackPanel>
+  </Grid>
+
+</views:ViewPageBase>

@@ -1,8 +1,5 @@
-﻿using System.Threading.Tasks;
-using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.UI.PortableUI;
-using GalaSoft.MvvmLight.Messaging;
+﻿using Catrobat.IDE.Core.Services;
+using System.Threading.Tasks;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
 {
@@ -37,33 +34,36 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
 
         public async Task OpenGalleryAction()
         {
-            var result = await ServiceLocator.PictureService.ChoosePictureFromLibraryAsync();
-            if (result.Status == PictureServiceStatus.Success)
-                PictureSuccess(result.Image);
-            else if (result.Status == PictureServiceStatus.Error)
-                PictureError();
+            ServiceLocator.PictureService.ChoosePictureFromLibraryAsync();
+            //var result = await ServiceLocator.PictureService.ChoosePictureFromLibraryAsync();
+            //if (result.Status == PictureServiceStatus.Success)
+            //    PictureSuccess(result.Image);
+            //else if (result.Status == PictureServiceStatus.Error)
+            //    PictureError();
         }
 
         public async Task OpenCameraAction()
         {
-            var result = await ServiceLocator.PictureService.TakePictureAsync();
-            if (result.Status == PictureServiceStatus.Success)
-                PictureSuccess(result.Image);
-            else if (result.Status == PictureServiceStatus.Error)
-                PictureError();
+            ServiceLocator.PictureService.TakePictureAsync();
+            //var result = await ServiceLocator.PictureService.TakePictureAsync();
+            //if (result.Status == PictureServiceStatus.Success)
+            //    PictureSuccess(result.Image);
+            //else if (result.Status == PictureServiceStatus.Error)
+            //    PictureError();
         }
 
         private async Task OpenPaintAction()
         {
-            var result = await ServiceLocator.PictureService.DrawPictureAsync();
+            await ServiceLocator.PictureService.DrawPictureAsync();
+            //var result = await ServiceLocator.PictureService.DrawPictureAsync();
 
-            ServiceLocator.DispatcherService.RunOnMainThread(() => 
-                ServiceLocator.NavigationService.RemoveBackEntry());
+            //ServiceLocator.DispatcherService.RunOnMainThread(() => 
+            //    ServiceLocator.NavigationService.RemoveBackEntry());
             
-            if (result.Status == PictureServiceStatus.Success)
-                PictureSuccess(result.Image);
-            else if (result.Status == PictureServiceStatus.Error)
-                PictureError();
+            //if (result.Status == PictureServiceStatus.Success)
+            //    PictureSuccess(result.Image);
+            //else if (result.Status == PictureServiceStatus.Error)
+            //    PictureError();
 
             
         }
@@ -84,26 +84,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
 
 
         #region ImageFunctions
-
-        private static void PictureSuccess(PortableImage image)
-        {
-            var message = new GenericMessage<PortableImage>(image);
-            Messenger.Default.Send(message, ViewModelMessagingToken.CostumeImageListener);
-
-            ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                ServiceLocator.NavigationService.NavigateTo<CostumeNameChooserViewModel>());
-        }
-
-        private void PictureError()
-        {
-            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Editor_MessageBoxWrongImageFormatHeader,
-                AppResources.Editor_MessageBoxWrongImageFormatText, WrongImageFormatResult, MessageBoxOptions.Ok);
-        }
-
-        private void WrongImageFormatResult(MessageboxResult result)
-        {
-            base.GoBackAction();
-        }
 
         #endregion
     }

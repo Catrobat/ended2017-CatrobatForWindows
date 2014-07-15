@@ -100,7 +100,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public void RemoveBackEntryForPlatform(NavigationPlatform platform)
         {
-            if (platform == NavigationPlatform.WindowsStore)
+            //if (platform == NavigationPlatform.WindowsStore)
                 _removedBackEntryCount++;
         }
 

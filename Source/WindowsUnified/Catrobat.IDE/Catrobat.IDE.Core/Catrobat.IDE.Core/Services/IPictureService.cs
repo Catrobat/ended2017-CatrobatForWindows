@@ -1,28 +1,21 @@
-﻿using System;
+﻿using Catrobat.IDE.Core.UI.PortableUI;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Core.Services
 {
-    public enum PictureServiceStatus
-    {
-        Success,
-        Cancelled,
-        Error
-    }
-
-    public class PictureServiceResult
-    {
-        public PictureServiceStatus Status { get; set; }
-        public PortableImage Image { get; set; }
-    }
-
     public interface IPictureService
     {
-        Task<PictureServiceResult> ChoosePictureFromLibraryAsync();
+        void ChoosePictureFromLibraryAsync();
 
-        Task<PictureServiceResult> TakePictureAsync();
+        void TakePictureAsync();
 
-        Task<PictureServiceResult> DrawPictureAsync(PortableImage imageToEdit = null);
+        Task DrawPictureAsync(PortableImage imageToEdit = null);
+
+        void RecievedFiles(IEnumerable<object> files);
+
+        IEnumerable<string> SupportedFileExtensions { get; }
+
+        string ImageFileExtensionPrefix { get; }
     }
 }

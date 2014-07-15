@@ -23,11 +23,12 @@
         <m3:SplashScreen Image="Assets\SplashScreen.png" />
       </m3:VisualElements>
       <Extensions>
-        <Extension Category="windows.cachedFileUpdater" />
         <Extension Category="windows.fileTypeAssociation">
           <FileTypeAssociation Name="1">
             <SupportedFileTypes>
               <FileType ContentType="image/png">.catrobat_ide_png</FileType>
+              <FileType ContentType="image/jpg">.catrobat_ide_jpg</FileType>
+              <FileType>.catrobat</FileType>
             </SupportedFileTypes>
           </FileTypeAssociation>
         </Extension>

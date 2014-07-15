@@ -1,8 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using System.Globalization;
-using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Core.Services;
+﻿using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
+using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace Catrobat.IDE.Core.ViewModels.Settings
 {
@@ -32,6 +31,8 @@ namespace Catrobat.IDE.Core.ViewModels.Settings
 
                 ServiceLocator.CultureService.SetCulture(value);
                 RaisePropertyChanged(() => CurrentCulture);
+
+                ServiceLocator.NavigationService.RemoveBackEntry();
             }
         }
 
@@ -42,11 +43,6 @@ namespace Catrobat.IDE.Core.ViewModels.Settings
         #endregion
 
         #region Actions
-
-        protected override void GoBackAction()
-        {
-            base.GoBackAction();
-        }
 
         #endregion
 

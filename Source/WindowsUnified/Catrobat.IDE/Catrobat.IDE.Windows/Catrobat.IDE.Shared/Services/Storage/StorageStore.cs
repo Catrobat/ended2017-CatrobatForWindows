@@ -12,6 +12,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
 //using ToolStackPNGWriterLib;
+using ToolStackPNGWriterLib;
 
 namespace Catrobat.IDE.WindowsShared.Services.Storage
 {
@@ -493,49 +494,48 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
 
         public async Task SaveImageAsync(string path, PortableImage image, bool deleteExisting, ImageFormat format)
         {
-            throw new NotImplementedException();
-            //var withoutExtension = Path.GetFileNameWithoutExtension(path);
-            //var thumbnailPath = string.Format("{0}{1}", withoutExtension, CatrobatContextBase.ImageThumbnailExtension);
+            var withoutExtension = Path.GetFileNameWithoutExtension(path);
+            var thumbnailPath = string.Format("{0}{1}", withoutExtension, CatrobatContextBase.ImageThumbnailExtension);
 
-            //if (deleteExisting)
-            //{
-            //    if (await FileExistsAsync(path))
-            //        await DeleteFileAsync(path);
+            if (deleteExisting)
+            {
+                if (await FileExistsAsync(path))
+                    await DeleteFileAsync(path);
 
-            //    if (await FileExistsAsync(thumbnailPath))
-            //        await DeleteFileAsync(thumbnailPath);
-            //}
+                if (await FileExistsAsync(thumbnailPath))
+                    await DeleteFileAsync(thumbnailPath);
+            }
 
-            //Stream stream = null;
+            Stream stream = null;
 
-            //try
-            //{
-            //    stream = await OpenFileAsync(path, StorageFileMode.CreateNew, StorageFileAccess.Write);
+            try
+            {
+                stream = await OpenFileAsync(path, StorageFileMode.CreateNew, StorageFileAccess.Write);
 
-            //    switch (format)
-            //    {
-            //        case ImageFormat.Png:
-            //            if (image.EncodedData != null)
-            //                await image.EncodedData.CopyToAsync(stream);
-            //            else
-            //                PNGWriter.WritePNG((WriteableBitmap)image.ImageSource, stream, 95);
-            //            break;
-            //        case ImageFormat.Jpg:
-            //            throw new NotImplementedException();
-            //            //((WriteableBitmap)image.ImageSource).SaveJpeg(stream, image.Width, image.Height, 0, 95);
-            //            break;
-            //        default:
-            //            throw new ArgumentOutOfRangeException("format");
-            //    }
-            //}
-            //finally
-            //{
-            //    if (stream != null)
-            //    {
-            //        stream.Flush();
-            //        stream.Dispose();
-            //    }
-            //}
+                switch (format)
+                {
+                    case ImageFormat.Png:
+                        if (image.EncodedData != null)
+                            await image.EncodedData.CopyToAsync(stream);
+                        else
+                            PNGWriter.WritePNG((WriteableBitmap)image.ImageSource, stream, 95);
+                        break;
+                    case ImageFormat.Jpg:
+                        throw new NotImplementedException();
+                        //((WriteableBitmap)image.ImageSource).SaveJpeg(stream, image.Width, image.Height, 0, 95);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException("format");
+                }
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Flush();
+                    stream.Dispose();
+                }
+            }
         }
 
         public async Task<string> ReadTextFileAsync(string path)

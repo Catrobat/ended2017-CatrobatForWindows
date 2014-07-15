@@ -44,7 +44,7 @@
           </Button.Template>
         </Button>
 
-        <Button Margin="0 0 0 10" HorizontalAlignment="Stretch"
+        <!--<Button Margin="0 0 0 10" HorizontalAlignment="Stretch"
                 Command="{Binding OpenCameraCommand}">
           <Button.Template>
             <ControlTemplate>
@@ -56,13 +56,13 @@
                   <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <misc:Camera ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
-                <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                <TextBlock Grid.Column="1" FontSize="50" Margin="20 10 10 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_Camera, Source={StaticResource LocalizedStrings}}" 
                            Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
               </Grid>
             </ControlTemplate>
           </Button.Template>
-        </Button>
+        </Button>-->
 
         <Button Margin="0 0 0 10" HorizontalAlignment="Stretch"
                 Command="{Binding OpenPaintCommand}">

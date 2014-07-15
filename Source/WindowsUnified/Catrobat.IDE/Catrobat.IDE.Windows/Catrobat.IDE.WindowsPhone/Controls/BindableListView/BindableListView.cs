@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Catrobat.IDE.WindowsPhone.Controls.BindableListView
 {
-    public class BindableListBox : ListView
+    public class BindableListView : ListView
     {
         public new IList ItemsSource
         {
@@ -18,11 +18,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls.BindableListView
         }
 
         public new static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
-            "ItemsSource", typeof(IList), typeof(BindableListBox), new PropertyMetadata(null, ItemsSourceChanged));
+            "ItemsSource", typeof(IList), typeof(BindableListView), new PropertyMetadata(null, ItemsSourceChanged));
 
         private static void ItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((BindableListBox)d).ItemsSource = (IList) e.NewValue;
+            ((BindableListView)d).ItemsSource = (IList) e.NewValue;
         }
 
 
@@ -34,7 +34,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.BindableListView
         }
 
         public static readonly DependencyProperty BindableSelectedItemsProperty = DependencyProperty.Register(
-            "BindableSelectedItems", typeof(IList), typeof(BindableListBox),
+            "BindableSelectedItems", typeof(IList), typeof(BindableListView),
             new PropertyMetadata(default(ObservableCollection<object>), SelectedItemsChanged));
 
         private static void SelectedItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -43,17 +43,13 @@ namespace Catrobat.IDE.WindowsPhone.Controls.BindableListView
             var newBindableSelectedItems = ((INotifyCollectionChanged)e.NewValue);
 
             if (oldBindableSelectedItems != null)
-                oldBindableSelectedItems.CollectionChanged -= ((BindableListBox)d).SelectedItemsOnCollectionChanged;
+                oldBindableSelectedItems.CollectionChanged -= ((BindableListView)d).SelectedItemsOnCollectionChanged;
 
 
             if (newBindableSelectedItems != null)
-                newBindableSelectedItems.CollectionChanged += ((BindableListBox)d).SelectedItemsOnCollectionChanged;
+                newBindableSelectedItems.CollectionChanged += ((BindableListView)d).SelectedItemsOnCollectionChanged;
         }
 
-        public BindableListBox()
-        {
-            
-        }
 
         private void SelectedItemsOnCollectionChanged(object sender,
             NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)

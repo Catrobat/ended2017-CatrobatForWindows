@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Catrobat.IDE.Core
 {
@@ -30,5 +26,8 @@ namespace Catrobat.IDE.Core
         {
             "DE", "EN"
         };
+
+        public static List<string> CatrobatFileNames = 
+            new List<string>{ "catrobat", "pocketcode" };
     }
 }

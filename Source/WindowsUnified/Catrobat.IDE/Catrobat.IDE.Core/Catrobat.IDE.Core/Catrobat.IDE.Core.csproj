@@ -408,7 +408,7 @@
     <Compile Include="UI\PortableListBoxViewPort.cs" />
     <Compile Include="Services\IPortableUIElementConversionService.cs" />
     <Compile Include="UI\PortableUI\PortableVisibility.cs" />
-    <Compile Include="UI\ScriptBrickCollection.cs" />
+    <Compile Include="UI\ActionsCollection.cs" />
     <Compile Include="UI\ScriptBrickIterator.cs" />
     <Compile Include="Xml\XmlObjects\Scripts\XmlScriptList.cs" />
     <Compile Include="Xml\XmlObjects\Scripts\XmlStartScript.cs" />

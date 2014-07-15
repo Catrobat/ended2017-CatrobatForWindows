@@ -42,6 +42,7 @@ namespace Catrobat.IDE.WindowsShared
             ServiceLocator.Register<ShareServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<PortableUIElementsConvertionServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SoundServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ActionTemplateServiceWindowsShared>(TypeCreationMode.Lazy);
 
             ServiceLocator.ViewModelLocator = new ViewModelLocator();
             ServiceLocator.ViewModelLocator.RegisterViewModels();
