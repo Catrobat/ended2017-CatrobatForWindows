@@ -4,12 +4,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="50" d:DesignWidth="50" 
-    Width="200" Height="200">
+    d:DesignHeight="110" d:DesignWidth="110" >
   
-  <Grid x:Name="LayoutRoot" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+  <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Button Name="ButtonPlay" Visibility="Visible" Margin="0" BorderBrush="Transparent" 
-            BorderThickness="0" Padding="0" Click="ButtonPlay_Click">
+            BorderThickness="0" Padding="0"
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            Click="ButtonPlay_Click" >
       <Button.Template>
         <ControlTemplate TargetType="Button">
           <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -41,8 +42,7 @@
                 </VisualState>
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Grid Name="GridMain" HorizontalAlignment="Stretch" 
-                  VerticalAlignment="Stretch">
+            <Grid Name="GridMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
               <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                   <RowDefinition Height="0.5*"/>
@@ -86,7 +86,8 @@
       </Button.Template>
     </Button>
     <Button Name="ButtonPause" Visibility="Collapsed"  Margin="0" 
-            BorderBrush="Transparent" BorderThickness="0" Padding="0" 
+            BorderBrush="Transparent" BorderThickness="0" Padding="0"
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
             Click="ButtonPause_Click">
       <Button.Template>
         <ControlTemplate TargetType="Button">

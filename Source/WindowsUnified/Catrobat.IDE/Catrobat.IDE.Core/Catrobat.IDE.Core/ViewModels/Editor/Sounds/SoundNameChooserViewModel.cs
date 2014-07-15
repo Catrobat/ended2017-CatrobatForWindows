@@ -1,11 +1,11 @@
-﻿using System.Diagnostics;
-using System.IO;
-using Catrobat.IDE.Core.Models;
+﻿using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Diagnostics;
+using System.IO;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 {
@@ -77,37 +77,30 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
         private async void SaveAction()
         {
             var sound = new Sound(SoundName);
-            var path = CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
+            var path = Path.Combine(CurrentProject.BasePath, Project.SoundsPath, sound.FileName);
 
             using (var storage = StorageSystem.GetStorage())
             {
                 using (var stream = await storage.OpenFileAsync(path, StorageFileMode.Create, StorageFileAccess.Write))
                 {
                     if(SoundStream != null)
-                        SoundStream.CopyTo(stream);
+                        await SoundStream.CopyToAsync(stream);
                     else
                     {
-                        if(Debugger.IsAttached)
+                        if (Debugger.IsAttached)
                             Debugger.Break();
+                        // TODO: Show error message
                     }
-                    //else
-                    //{
-                    //    var writer = new BinaryWriter(stream);
-                    //    WaveHeaderHelper.WriteHeader(writer.BaseStream, ServiceLocator.SoundRecorderService.SampleRate);
-                    //    var dataBuffer = ServiceLocator.SoundRecorderService.GetSoundAsStream().ToArray();
-                    //    writer.Write(dataBuffer, 0, (int)ServiceLocator.SoundRecorderService.GetSoundAsStream().Length);
-                    //    writer.Flush();
-                    //    writer.Dispose();
-                    //}
                 }
             }
 
-            _receivedSelectedSprite.Sounds.Add(sound);
-
             ResetViewModel();
-            ServiceLocator.NavigationService.RemoveBackEntryForPlatform(NavigationPlatform.WindowsPhone);
-            //ServiceLocator.NavigationService.RemoveBackEntry();
-            base.GoBackAction();
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                _receivedSelectedSprite.Sounds.Add(sound);
+                ServiceLocator.NavigationService.RemoveBackEntry();
+                ServiceLocator.NavigationService.NavigateBack();
+            });
         }
 
         private void CancelAction()
