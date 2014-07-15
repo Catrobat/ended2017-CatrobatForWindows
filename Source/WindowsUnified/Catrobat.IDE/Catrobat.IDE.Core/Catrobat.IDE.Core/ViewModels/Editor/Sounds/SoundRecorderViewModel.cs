@@ -312,11 +312,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 
         private void SaveAction()
         {
-            ServiceLocator.SoundService.Finished( new SoundServiceResult
-            {
-                Status = SoundServiceStatus.Success,
-                Result = ServiceLocator.SoundRecorderService.GetSoundAsStream()
-            });
+            //ServiceLocator.SoundService.Finished( new SoundServiceResult
+            //{
+            //    Status = SoundServiceStatus.Success,
+            //    Result = ServiceLocator.SoundRecorderService.GetSoundAsStream()
+            //});
 
             ResetViewModel();
             //ServiceLocator.NavigationService.NavigateTo<SoundNameChooserViewModel>();
@@ -324,17 +324,17 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 
         private void CancelAction()
         {
-            ServiceLocator.SoundRecorderService.StopPlayingRecordedSound();
-            ServiceLocator.SoundRecorderService.StopRecording();
+            //ServiceLocator.SoundRecorderService.StopPlayingRecordedSound();
+            //ServiceLocator.SoundRecorderService.StopRecording();
 
-            ServiceLocator.SoundService.Finished(new SoundServiceResult
-            {
-                Status = SoundServiceStatus.Cancelled,
-                Result = null
-            });
+            //ServiceLocator.SoundService.Finished(new SoundServiceResult
+            //{
+            //    Status = SoundServiceStatus.Cancelled,
+            //    Result = null
+            //});
 
-            ResetViewModel();
-            base.GoBackAction();
+            //ResetViewModel();
+            //base.GoBackAction();
         }
 
         protected override void GoBackAction()

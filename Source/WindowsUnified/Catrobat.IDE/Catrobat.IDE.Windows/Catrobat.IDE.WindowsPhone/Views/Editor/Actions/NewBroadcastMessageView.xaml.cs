@@ -1,10 +1,10 @@
 ﻿using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
-using Catrobat.IDE.Core.ViewModels.Editor.Scripts;
+using Catrobat.IDE.Core.ViewModels.Editor.Actions;
 using Windows.UI.Xaml.Controls;
 
-namespace Catrobat.IDE.WindowsPhone.Views.Editor.Scripts
+namespace Catrobat.IDE.WindowsPhone.Views.Editor.Actions
 {
     public partial class NewBroadcastMessageView
     {

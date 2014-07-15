@@ -196,13 +196,13 @@
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Scripts\AddNewScriptBrickView.xaml.cs">
+    <Compile Include="Views\Editor\Actions\AddNewScriptBrickView.xaml.cs">
       <DependentUpon>AddNewScriptBrickView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Scripts\NewBroadcastMessageView.xaml.cs">
+    <Compile Include="Views\Editor\Actions\NewBroadcastMessageView.xaml.cs">
       <DependentUpon>NewBroadcastMessageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Scripts\ScriptBrickCategoryView.xaml.cs">
+    <Compile Include="Views\Editor\Actions\ScriptBrickCategoryView.xaml.cs">
       <DependentUpon>ScriptBrickCategoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\ProjectImportView.xaml.cs">
@@ -400,15 +400,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Scripts\AddNewScriptBrickView.xaml">
+    <Page Include="Views\Editor\Actions\AddNewScriptBrickView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Scripts\NewBroadcastMessageView.xaml">
+    <Page Include="Views\Editor\Actions\NewBroadcastMessageView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Scripts\ScriptBrickCategoryView.xaml">
+    <Page Include="Views\Editor\Actions\ScriptBrickCategoryView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

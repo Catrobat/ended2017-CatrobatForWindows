@@ -33,7 +33,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             get { return "catrobat_ide_"; }
         }
 
-        public IEnumerable<string> SupportedFileExtensions
+        public IEnumerable<string> SupportedFileTypes
         {
             get
             {

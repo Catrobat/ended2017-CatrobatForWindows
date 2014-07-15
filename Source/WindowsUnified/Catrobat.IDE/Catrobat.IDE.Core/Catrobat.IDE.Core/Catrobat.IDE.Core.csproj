@@ -503,9 +503,9 @@
     <Compile Include="ViewModels\Editor\Formula\FormulaKeyEventArgs.cs" />
     <Compile Include="ViewModels\Editor\Formula\VariableSelectionViewModel.cs" />
     <Compile Include="ViewModels\Main\ProjectSettingsViewModel.cs" />
-    <Compile Include="ViewModels\Editor\Scripts\AddNewScriptBrickViewModel.cs" />
-    <Compile Include="ViewModels\Editor\Scripts\NewBroadcastMessageViewModel.cs" />
-    <Compile Include="ViewModels\Editor\Scripts\ScriptBrickCategoryViewModel.cs" />
+    <Compile Include="ViewModels\Editor\Actions\AddNewScriptBrickViewModel.cs" />
+    <Compile Include="ViewModels\Editor\Actions\NewBroadcastMessageViewModel.cs" />
+    <Compile Include="ViewModels\Editor\Actions\ScriptBrickCategoryViewModel.cs" />
     <Compile Include="ViewModels\Editor\Sounds\ChangeSoundViewModel.cs" />
     <Compile Include="ViewModels\Editor\Sounds\NewSoundSourceSelectionViewModel.cs" />
     <Compile Include="ViewModels\Editor\Sounds\SoundNameChooserViewModel.cs" />

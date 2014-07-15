@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Core.ViewModels.Editor.Scripts;
+using Catrobat.IDE.Core.ViewModels.Editor.Actions;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
