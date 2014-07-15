@@ -86,14 +86,14 @@ namespace Catrobat.IDE
 
                 if (files.Count == 1)
                 {
-                    if (ServiceLocator.SoundService.SupportedFileTypes.
+                    if (ServiceLocator.PictureService.SupportedFileTypes.
                         Contains(Path.GetExtension(files[0].Name)))
                     {
                         ServiceLocator.PictureService.RecievedFiles(
                             (args as FileOpenPickerContinuationEventArgs).Files);
                     }
 
-                    if (ServiceLocator.PictureService.SupportedFileTypes.
+                    if (ServiceLocator.SoundService.SupportedFileTypes.
                         Contains(Path.GetExtension(files[0].Name)))
                     {
                         ServiceLocator.SoundService.RecievedFiles(

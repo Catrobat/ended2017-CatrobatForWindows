@@ -17,7 +17,7 @@ namespace Catrobat.IDE.WindowsShared.Services
     {
         public List<string> SupportedFileTypes
         {
-            get { return new List<string> { "mp3", "wma", "aac" }; }
+            get { return new List<string> { ".mp3", ".wma", ".aac" }; }
         }
 
 
@@ -35,7 +35,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             };
 
             foreach (var extension in SupportedFileTypes)
-                openPicker.FileTypeFilter.Add("." + extension);
+                openPicker.FileTypeFilter.Add(extension);
 
             openPicker.PickSingleFileAndContinue();
         }
