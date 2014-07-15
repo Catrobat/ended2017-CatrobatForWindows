@@ -190,6 +190,9 @@
     <Compile Include="Views\Editor\Sprites\SpritesView.xaml.cs">
       <DependentUpon>SpritesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Main\AddNewProjectView.xaml.cs">
+      <DependentUpon>AddNewProjectView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -201,6 +204,12 @@
     </Compile>
     <Compile Include="Views\Editor\Scripts\ScriptBrickCategoryView.xaml.cs">
       <DependentUpon>ScriptBrickCategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\ProjectImportView.xaml.cs">
+      <DependentUpon>ProjectImportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\ProjectSettingsView.xaml.cs">
+      <DependentUpon>ProjectSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Service\UploadProjectLoadingView.xaml.cs">
       <DependentUpon>UploadProjectLoadingView.xaml</DependentUpon>
@@ -383,6 +392,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Main\AddNewProjectView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -396,6 +409,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Editor\Scripts\ScriptBrickCategoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\ProjectImportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\ProjectSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

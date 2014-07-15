@@ -6,7 +6,9 @@
     mc:Ignorable="d"
     d:DesignHeight="150" d:DesignWidth="480">
 
-  <Grid x:Name="LayoutRoot" Height="150" Background="{Binding Path=SelectedTheme.AppBarBackgroundBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
+  <Grid x:Name="LayoutRoot" Height="150" 
+        Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="90"/>
       <ColumnDefinition/>
