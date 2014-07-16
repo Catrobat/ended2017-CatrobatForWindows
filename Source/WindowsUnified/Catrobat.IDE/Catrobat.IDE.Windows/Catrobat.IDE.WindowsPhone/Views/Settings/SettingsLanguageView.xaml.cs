@@ -9,7 +9,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Settings
         private readonly SettingsLanguageViewModel _viewModel =
             ServiceLocator.ViewModelLocator.SettingsLanguageViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public SettingsLanguageView()
         {

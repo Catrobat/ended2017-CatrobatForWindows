@@ -10,7 +10,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Service
         private readonly UploadProjectNewPasswordViewModel _viewModel =
             ((ViewModelLocator)ServiceLocator.ViewModelLocator).UploadProjectNewPasswordViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public UploadProjectNewPasswordView()
         {

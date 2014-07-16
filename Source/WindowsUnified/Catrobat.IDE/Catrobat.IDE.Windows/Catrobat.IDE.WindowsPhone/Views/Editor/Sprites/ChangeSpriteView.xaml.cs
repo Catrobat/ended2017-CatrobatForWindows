@@ -11,7 +11,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         private readonly ChangeSpriteViewModel _viewModel = 
             ((ViewModelLocator)ServiceLocator.ViewModelLocator).ChangeSpriteViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public ChangeSpriteView()
         {

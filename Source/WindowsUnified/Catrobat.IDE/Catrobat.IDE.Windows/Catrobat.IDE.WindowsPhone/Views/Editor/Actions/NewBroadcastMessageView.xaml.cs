@@ -11,7 +11,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Actions
         private readonly NewBroadcastMessageViewModel _viewModel =
             ServiceLocator.ViewModelLocator.NewBroadcastMessageViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public NewBroadcastMessageView()
         {

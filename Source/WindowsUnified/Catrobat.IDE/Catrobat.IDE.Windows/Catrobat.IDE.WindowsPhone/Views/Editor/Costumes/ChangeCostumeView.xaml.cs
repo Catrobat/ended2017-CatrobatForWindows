@@ -9,7 +9,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Costumes
     {
         private readonly ChangeCostumeViewModel _viewModel = 
             (ServiceLocator.ViewModelLocator).ChangeCostumeViewModel;
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public ChangeCostumeView()
         {

@@ -9,8 +9,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Settings
         private readonly SettingsViewModel _viewModel = 
             ServiceLocator.ViewModelLocator.SettingsViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
-
         public SettingsView()
         {
             InitializeComponent();

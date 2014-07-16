@@ -10,7 +10,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Service
         private readonly UploadProjectLoginViewModel _viewModel =
             ((ViewModelLocator)ServiceLocator.ViewModelLocator).UploadProjectLoginViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public UploadProjectLoginView()
         {

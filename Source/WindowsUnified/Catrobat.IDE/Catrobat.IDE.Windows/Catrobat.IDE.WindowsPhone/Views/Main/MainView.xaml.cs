@@ -18,8 +18,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         private readonly MainViewModel _viewModel =
             ServiceLocator.ViewModelLocator.MainViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
-
         private const int offsetKnob = 4;
         private bool firstAttempt = true;
 

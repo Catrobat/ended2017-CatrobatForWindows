@@ -9,7 +9,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         private readonly ProjectImportViewModel _viewModel = 
             ServiceLocator.ViewModelLocator.ProjectImportViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public ProjectImportView()
         {

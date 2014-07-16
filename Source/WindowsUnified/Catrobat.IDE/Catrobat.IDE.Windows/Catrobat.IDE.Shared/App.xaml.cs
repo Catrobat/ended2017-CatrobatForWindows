@@ -28,7 +28,7 @@ namespace Catrobat.IDE.WindowsShared
 
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            StatusBar statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+            StatusBar statusBar = StatusBar.GetForCurrentView();
             await statusBar.HideAsync();
 
             if (e.PreviousExecutionState != ApplicationExecutionState.Running)

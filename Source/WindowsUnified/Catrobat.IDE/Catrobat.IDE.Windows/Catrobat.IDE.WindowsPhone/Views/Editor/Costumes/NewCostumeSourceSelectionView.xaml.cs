@@ -8,7 +8,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Costumes
     {
         private readonly NewCostumeSourceSelectionViewModel _viewModel =
             ((ViewModelLocator)ServiceLocator.ViewModelLocator).NewCostumeSourceSelectionViewModel;
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public NewCostumeSourceSelectionView()
         {
