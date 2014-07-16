@@ -2,7 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace Catrobat.IDE.Core.ViewModels.Editor.Scripts
+namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
 {
     public enum BrickCategory
     {

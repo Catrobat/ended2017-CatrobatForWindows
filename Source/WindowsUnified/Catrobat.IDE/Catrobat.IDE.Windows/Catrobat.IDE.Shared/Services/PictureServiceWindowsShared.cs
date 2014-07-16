@@ -23,23 +23,19 @@ namespace Catrobat.IDE.WindowsShared.Services
 
     public class PictureServiceWindowsShared : IPictureService
     {
-        private static readonly List<string> SupportedFileNames = new List<string>
+        public IEnumerable<string> SupportedFileTypes
         {
-            "jpg", "jpeg", "png"
-        };
+            get
+            {
+                return new List<string>{ ".jpg", ".jpeg", ".png" };
+            }
+        }
 
         public string ImageFileExtensionPrefix
         {
             get { return "catrobat_ide_"; }
         }
 
-        public IEnumerable<string> SupportedFileExtensions
-        {
-            get
-            {
-                return SupportedFileNames;
-            }
-        }
 
 
         public void ChoosePictureFromLibraryAsync()
@@ -50,7 +46,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                 SuggestedStartLocation = PickerLocationId.PicturesLibrary
             };
 
-            foreach (var extension in SupportedFileNames)
+            foreach (var extension in SupportedFileTypes)
                 openPicker.FileTypeFilter.Add("." + extension);
 
             StorageFile file;

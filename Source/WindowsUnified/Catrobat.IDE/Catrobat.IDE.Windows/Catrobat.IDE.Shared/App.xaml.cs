@@ -81,8 +81,28 @@ namespace Catrobat.IDE
         {
             if (args is FileOpenPickerContinuationEventArgs)
             {
-                ServiceLocator.PictureService.RecievedFiles(
-                    (args as FileOpenPickerContinuationEventArgs).Files);
+                var pickerArgs = (FileOpenPickerContinuationEventArgs) args;
+                var files = pickerArgs.Files;
+
+                if (files.Count == 1)
+                {
+                    if (ServiceLocator.PictureService.SupportedFileTypes.
+                        Contains(Path.GetExtension(files[0].Name)))
+                    {
+                        ServiceLocator.PictureService.RecievedFiles(
+                            (args as FileOpenPickerContinuationEventArgs).Files);
+                    }
+
+                    if (ServiceLocator.SoundService.SupportedFileTypes.
+                        Contains(Path.GetExtension(files[0].Name)))
+                    {
+                        ServiceLocator.SoundService.RecievedFiles(
+                            (args as FileOpenPickerContinuationEventArgs).Files);
+                    }
+
+
+                }
+
             }
         }
 
@@ -95,7 +115,7 @@ namespace Catrobat.IDE
                 {
                     var imageFiles = (from StorageFile file in e.Files
                                       from imageExtension in
-                                          ServiceLocator.PictureService.SupportedFileExtensions
+                                          ServiceLocator.PictureService.SupportedFileTypes
                                       where file.Name.EndsWith(
                                       ServiceLocator.PictureService.ImageFileExtensionPrefix + imageExtension)
                                       select file).ToList();

@@ -94,14 +94,16 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public void RemoveBackEntry()
         {
-            _removedBackEntryCount++;
+            _frame.BackStack.RemoveAt(_frame.BackStack.Count - 1);
+            //_removedBackEntryCount++;
         }
 
 
         public void RemoveBackEntryForPlatform(NavigationPlatform platform)
         {
             //if (platform == NavigationPlatform.WindowsStore)
-                _removedBackEntryCount++;
+            _frame.BackStack.RemoveAt(_frame.BackStack.Count - 1);
+                //_removedBackEntryCount++;
         }
 
 

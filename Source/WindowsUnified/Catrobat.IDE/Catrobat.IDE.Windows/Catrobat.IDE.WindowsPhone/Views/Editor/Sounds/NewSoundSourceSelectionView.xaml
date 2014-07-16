@@ -48,7 +48,7 @@
         </Button.Template>
       </Button>
       
-      <Button Margin="0 0 10 0" Command="{Binding RecorderCommand}"
+      <!--<Button Margin="0 0 10 0" Command="{Binding RecorderCommand}"
               HorizontalAlignment="Stretch">
         <Button.Template>
           <ControlTemplate>
@@ -72,7 +72,7 @@
             </Grid>
           </ControlTemplate>
         </Button.Template>
-      </Button>
+      </Button>-->
     </StackPanel>
   </Grid>
 </views:ViewPageBase>

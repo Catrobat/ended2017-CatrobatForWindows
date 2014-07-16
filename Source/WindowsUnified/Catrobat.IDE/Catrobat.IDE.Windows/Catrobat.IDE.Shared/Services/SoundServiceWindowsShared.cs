@@ -1,125 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
     public class SoundServiceWindowsShared : ISoundService
     {
-        private static readonly List<string> SupportedFileNames = new List<string>
+        public List<string> SupportedFileTypes
         {
-            ".mp3", ".wma"
-        };
-
-        public async Task<SoundServiceResult> CreateSoundFromRecorder(Sprite sprite)
-        {
-            //string imageFile = @"images\test.png";
-
-           //var file = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(imageFile);
-
-           // using (var storage = StorageSystem.GetStorage())
-           // {
-           //     storage.OpenFile("test.mp3", StorageFileMode.Create, StorageFileAccess.Write);
-
-           // }
-
-           // var folder = ApplicationData.Current.LocalFolder;
-           // var file = await folder.CreateFileAsync("temp_test.mp3", CreationCollisionOption.OpenIfExists);
-
-
-
-           //if (file != null)
-           //{
-           //   // Set the option to show the picker
-           //   var options = new Windows.System.LauncherOptions
-           //   {
-
-           //       DisplayApplicationPicker = true
-           //   };
-
-           //   // Launch the retrieved file
-           //   bool success = await Windows.System.Launcher.LaunchFileAsync(file, options);
-           //   if (success)
-           //   {
-           //      // File launched
-           //   }
-           //   else
-           //   {
-           //      // File launch failed
-           //   }
-           //}
-           //else
-           //{
-           //   // Could not find file
-           //}
-
-            //var mediaCaptureMgr = new MediaCapture();
-            //await mediaCaptureMgr.InitializeAsync();
-
-
-            //var devices = await DeviceInformation.FindAllAsync(DeviceClass.AudioRender);
-
-            //if(devices.Count == 0)
-            //    Debugger.Break();
-
-            //var captureInitSettings = new MediaCaptureInitializationSettings
-            //{
-            //    AudioDeviceId = devices.ElementAt(0).Id,
-            //    VideoDeviceId = "",
-            //    StreamingCaptureMode = StreamingCaptureMode.Audio,
-            //    PhotoCaptureSource = PhotoCaptureSource.VideoPreview
-            //};
-
-            //var folder = ApplicationData.Current.LocalFolder;
-            //var file = await folder.CreateFileAsync("temp_test.mp3", CreationCollisionOption.OpenIfExists);
-
-            //var mediaCapture = new Windows.Media.Capture.MediaCapture();
-
-            throw new NotImplementedException();
+            get { return new List<string> { ".mp3", ".wma", ".aac" }; }
         }
 
-        public async Task<SoundServiceResult> CreateSoundFromMediaLibrary(Sprite sprite)
+
+        public void CreateSoundFromRecorder(Sprite sprite)
+        {
+            // TODO: open external sound recorder
+        }
+
+        public void CreateSoundFromMediaLibrary(Sprite sprite)
         {
             var openPicker = new FileOpenPicker
             {
-                ViewMode = PickerViewMode.Thumbnail,
-                SuggestedStartLocation = PickerLocationId.PicturesLibrary
+                ViewMode = PickerViewMode.List,
+                SuggestedStartLocation = PickerLocationId.MusicLibrary
             };
 
-            foreach (var extension in SupportedFileNames)
+            foreach (var extension in SupportedFileTypes)
                 openPicker.FileTypeFilter.Add(extension);
 
-            StorageFile file = await openPicker.PickSingleFileAsync();
-
-            if (file != null)
-            {
-                var filestream = await file.OpenAsync(FileAccessMode.Read);
-
-                return new SoundServiceResult
-                {
-                    Status = SoundServiceStatus.Success,
-                    Result = filestream.AsStream()
-                };
-            }
-            else
-            {
-                return new SoundServiceResult
-                {
-                    Status = SoundServiceStatus.Error,
-                    Result = null
-                };
-            }
+            openPicker.PickSingleFileAndContinue();
         }
 
-        public void Finished(SoundServiceResult result)
+
+        public async void RecievedFiles(IEnumerable<object> files)
         {
-            throw new NotImplementedException("Not used in for Windows Store");
+            var fileArray = files as object[] ?? files.ToArray();
+
+            if (fileArray.Length == 0)
+            {
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                    ServiceLocator.NavigationService.NavigateTo<NewSoundSourceSelectionViewModel>());
+            }
+
+            var file = (StorageFile)fileArray[0];
+            var memoryStream = new MemoryStream();
+            var inputStream = await file.OpenReadAsync();
+            inputStream.AsStream().CopyTo(memoryStream);
+            memoryStream.Seek(0, SeekOrigin.Begin);
+
+            var message = new GenericMessage<Stream>(memoryStream);
+            Messenger.Default.Send(message, ViewModelMessagingToken.SoundStreamListener);
+
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                    ServiceLocator.NavigationService.NavigateTo<SoundNameChooserViewModel>());
         }
     }
 }

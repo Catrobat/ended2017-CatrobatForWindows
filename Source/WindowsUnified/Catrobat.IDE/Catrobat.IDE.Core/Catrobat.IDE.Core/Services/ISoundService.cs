@@ -1,6 +1,6 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using Catrobat.IDE.Core.Models;
+﻿using Catrobat.IDE.Core.Models;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Catrobat.IDE.Core.Services
 {
@@ -19,10 +19,12 @@ namespace Catrobat.IDE.Core.Services
 
     public interface ISoundService
     {
-        Task<SoundServiceResult> CreateSoundFromRecorder(Sprite sprite);
+        List<string> SupportedFileTypes { get; }
 
-        Task<SoundServiceResult> CreateSoundFromMediaLibrary(Sprite sprite);
+        void CreateSoundFromRecorder(Sprite sprite);
 
-        void Finished(SoundServiceResult result);
+        void CreateSoundFromMediaLibrary(Sprite sprite);
+
+        void RecievedFiles(IEnumerable<object> files);
     }
 }

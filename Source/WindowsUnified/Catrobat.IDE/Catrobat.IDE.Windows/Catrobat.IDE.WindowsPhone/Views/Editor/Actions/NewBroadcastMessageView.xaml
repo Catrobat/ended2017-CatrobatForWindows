@@ -1,5 +1,5 @@
 ﻿<views:ViewPageBase
-  x:Class="Catrobat.IDE.WindowsPhone.Views.Editor.Scripts.NewBroadcastMessageView"
+  x:Class="Catrobat.IDE.WindowsPhone.Views.Editor.Actions.NewBroadcastMessageView"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -31,7 +31,7 @@
   </Grid>
   
   <Page.BottomAppBar>
-    <CommandBar>
+    <CommandBar Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Save" 
                       Label="{Binding Resources.Editor_ButtonSave, 

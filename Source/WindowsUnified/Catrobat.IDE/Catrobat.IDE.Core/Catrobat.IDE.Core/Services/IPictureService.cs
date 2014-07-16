@@ -6,6 +6,11 @@ namespace Catrobat.IDE.Core.Services
 {
     public interface IPictureService
     {
+        IEnumerable<string> SupportedFileTypes { get; }
+
+        string ImageFileExtensionPrefix { get; }
+
+
         void ChoosePictureFromLibraryAsync();
 
         void TakePictureAsync();
@@ -13,9 +18,5 @@ namespace Catrobat.IDE.Core.Services
         Task DrawPictureAsync(PortableImage imageToEdit = null);
 
         void RecievedFiles(IEnumerable<object> files);
-
-        IEnumerable<string> SupportedFileExtensions { get; }
-
-        string ImageFileExtensionPrefix { get; }
     }
 }

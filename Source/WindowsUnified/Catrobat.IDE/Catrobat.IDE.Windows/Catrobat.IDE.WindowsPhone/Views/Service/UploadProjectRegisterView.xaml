@@ -72,7 +72,7 @@
   </Grid>
 
   <Page.BottomAppBar>
-    <CommandBar>
+    <CommandBar Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Accept" 
                       Label="{Binding Resources.Main_ButtonRegister, 

@@ -33,28 +33,28 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
             var spriteMessage = new GenericMessage<Sprite>(_receivedSelectedSprite);
             Messenger.Default.Send(spriteMessage, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
-            var result = await ServiceLocator.SoundService.CreateSoundFromMediaLibrary(_receivedSelectedSprite);
+            ServiceLocator.SoundService.CreateSoundFromMediaLibrary(_receivedSelectedSprite);
 
-            if (result.Status == SoundServiceStatus.Success)
-            {
-                var message = new GenericMessage<Stream>(result.Result);
-                Messenger.Default.Send(message, ViewModelMessagingToken.SoundStreamListener);
+            //if (result.Status == SoundServiceStatus.Success)
+            //{
+            //    var message = new GenericMessage<Stream>(result.Result);
+            //    Messenger.Default.Send(message, ViewModelMessagingToken.SoundStreamListener);
 
-                ServiceLocator.NavigationService.NavigateTo<SoundNameChooserViewModel>();
-            }
+            //    ServiceLocator.NavigationService.NavigateTo<SoundNameChooserViewModel>();
+            //}
         }
 
         private async void RecorderAction()
         {
-            var result = await ServiceLocator.SoundService.CreateSoundFromRecorder(_receivedSelectedSprite);
+            ServiceLocator.SoundService.CreateSoundFromRecorder(_receivedSelectedSprite);
 
-            if (result.Status == SoundServiceStatus.Success)
-            {
-                var message = new GenericMessage<Stream>(result.Result);
-                Messenger.Default.Send(message, ViewModelMessagingToken.SoundStreamListener);
+            //if (result.Status == SoundServiceStatus.Success)
+            //{
+            //    var message = new GenericMessage<Stream>(result.Result);
+            //    Messenger.Default.Send(message, ViewModelMessagingToken.SoundStreamListener);
             
-                ServiceLocator.NavigationService.NavigateTo<SoundNameChooserViewModel>();
-            }
+            //    ServiceLocator.NavigationService.NavigateTo<SoundNameChooserViewModel>();
+            //}
         }
 
         private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
