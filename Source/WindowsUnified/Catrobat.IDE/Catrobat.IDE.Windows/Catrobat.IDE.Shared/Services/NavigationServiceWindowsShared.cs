@@ -7,7 +7,6 @@ using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.WindowsPhone.Views;
-using Catrobat.IDE.WindowsShared.Common;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
@@ -20,11 +19,12 @@ namespace Catrobat.IDE.WindowsShared.Services
             _frame = frame;
         }
 
+
         public void NavigateTo<T>()
         {
             NavigateTo(typeof(T));
         }
-
+        
         public void NavigateTo(Type type)
         {
             Type pageType = null;
@@ -55,44 +55,34 @@ namespace Catrobat.IDE.WindowsShared.Services
                 _frame.Navigate(pageType);
         }
 
-        public void NavigateBack(object navigationObject)
+
+        public void NavigateBack<T>()
         {
-            var flyout = navigationObject as Flyout;
-            if (flyout != null)
-                flyout.Hide();
-            else
-            {
-                NavigateBack();
-            }
+            NavigateBack(typeof(T));
         }
 
-        public void NavigateBackForPlatform(NavigationPlatform platform)
+        public void NavigateBack(Type viewModelType)
         {
-            if (platform == NavigationPlatform.WindowsStore)
+            if (viewModelType.GetTypeInfo().BaseType != typeof(ViewModelBase))
             {
-                NavigateBack();
+                throw new Exception("The type has to have 'ViewModelBase' as it's base type.");
             }
+
+            var viewModel = (ViewModelBase)ServiceLocator.GetInstance(viewModelType);
+            var navigationObject = viewModel.NavigationObject;
+
+
+            if (navigationObject == null)
+                throw new Exception("The navigation object cannot be null.");
+
+            navigationObject.OnNavigateBack();
         }
 
-        private void NavigateBack()
-        {
-            if (CanGoBack)
-              _frame.GoBack();
-            else
-              Application.Current.Exit(); // TODO: remove this????
-        }
 
         public void RemoveBackEntry()
         {
             _frame.BackStack.RemoveAt(_frame.BackStack.Count - 1);
         }
-
-
-        public void RemoveBackEntryForPlatform(NavigationPlatform platform)
-        {
-            _frame.BackStack.RemoveAt(_frame.BackStack.Count - 1);
-        }
-
 
         public bool CanGoBack
         {

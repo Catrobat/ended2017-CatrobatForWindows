@@ -99,7 +99,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
             {
                 _receivedSelectedSprite.Sounds.Add(sound);
                 ServiceLocator.NavigationService.RemoveBackEntry();
-                ServiceLocator.NavigationService.NavigateBack();
+                ServiceLocator.NavigationService.NavigateBack(this.GetType());
             });
         }
 

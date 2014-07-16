@@ -138,6 +138,7 @@
     <Compile Include="Controls\StatusIcons\ProcessIcon.xaml.cs">
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Navigation\NavigationObjectPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Editor\Costumes\ChangeCostumeView.xaml.cs">
       <DependentUpon>ChangeCostumeView.xaml</DependentUpon>

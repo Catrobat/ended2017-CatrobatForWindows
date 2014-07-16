@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Catrobat.IDE.Core.Services
 {
@@ -10,17 +6,16 @@ namespace Catrobat.IDE.Core.Services
 
     public interface INavigationService
     {
-        void NavigateTo(Type type);
+        void NavigateTo(Type viewModelType);
 
         void NavigateTo<T>();
 
-        void NavigateBack(object navigationObject = null);
+        void NavigateBack(Type viewModelType);
 
-        void NavigateBackForPlatform(NavigationPlatform platform);
+        void NavigateBack<T>();
+
 
         void RemoveBackEntry();
-
-        void RemoveBackEntryForPlatform(NavigationPlatform platform);
 
         bool CanGoBack { get; }
 
