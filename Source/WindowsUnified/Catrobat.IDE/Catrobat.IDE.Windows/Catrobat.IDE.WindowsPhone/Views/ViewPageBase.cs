@@ -42,7 +42,8 @@ namespace Catrobat.IDE.WindowsPhone.Views
 
         protected ViewPageBase()
         {
-            ViewModel.NavigationObject = new NavigationObjectPage(this);
+            if (!ViewModelBase.IsInDesignModeStatic)
+                ViewModel.NavigationObject = new NavigationObjectPage(this);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
