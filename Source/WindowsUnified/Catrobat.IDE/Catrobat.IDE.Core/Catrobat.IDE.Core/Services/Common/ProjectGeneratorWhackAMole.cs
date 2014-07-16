@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             var project = new Project
             {
-                Name = AppResources.Main_WhackAMoleName, 
+                Name = programName, 
                 UploadHeader = new UploadHeader
                 {
                     MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
