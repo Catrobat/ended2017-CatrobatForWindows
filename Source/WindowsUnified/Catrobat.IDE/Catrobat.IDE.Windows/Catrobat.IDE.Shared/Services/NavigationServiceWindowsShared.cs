@@ -14,7 +14,6 @@ namespace Catrobat.IDE.WindowsShared.Services
     public class NavigationServiceWindowsShared : INavigationService
     {
         private readonly Frame _frame;
-        private int _removedBackEntryCount;
 
         public NavigationServiceWindowsShared(Frame frame)
         {
@@ -28,8 +27,6 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public void NavigateTo(Type type)
         {
-            NavigateBack();
-
             Type pageType = null;
 
             if (type.GetTypeInfo().BaseType == typeof(ViewModelBase))
@@ -65,7 +62,6 @@ namespace Catrobat.IDE.WindowsShared.Services
                 flyout.Hide();
             else
             {
-                _removedBackEntryCount++;
                 NavigateBack();
             }
         }
@@ -74,42 +70,33 @@ namespace Catrobat.IDE.WindowsShared.Services
         {
             if (platform == NavigationPlatform.WindowsStore)
             {
-                _removedBackEntryCount++;
                 NavigateBack();
             }
         }
 
         private void NavigateBack()
         {
-            while (_removedBackEntryCount > 0)
-            {
-                _removedBackEntryCount--;
-                if (CanGoBack)
-                    _frame.GoBack();
-                else
-                    Application.Current.Exit(); // TODO: remove this
-                
-            }
+            if (CanGoBack)
+              _frame.GoBack();
+            else
+              Application.Current.Exit(); // TODO: remove this????
         }
 
         public void RemoveBackEntry()
         {
             _frame.BackStack.RemoveAt(_frame.BackStack.Count - 1);
-            //_removedBackEntryCount++;
         }
 
 
         public void RemoveBackEntryForPlatform(NavigationPlatform platform)
         {
-            //if (platform == NavigationPlatform.WindowsStore)
             _frame.BackStack.RemoveAt(_frame.BackStack.Count - 1);
-                //_removedBackEntryCount++;
         }
 
 
         public bool CanGoBack
         {
-            get { return _frame.CanGoBack; }
+            get { return _frame != null && _frame.CanGoBack; }
         }
 
         public void NavigateToWebPage(string uri)

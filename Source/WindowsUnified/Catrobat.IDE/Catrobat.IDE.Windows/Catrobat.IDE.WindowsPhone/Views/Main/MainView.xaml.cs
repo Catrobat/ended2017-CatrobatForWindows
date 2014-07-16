@@ -39,7 +39,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (ServiceLocator.NavigationService.CanGoBack)
+            while (ServiceLocator.NavigationService.CanGoBack)
                 ServiceLocator.NavigationService.RemoveBackEntry();
 
             _viewModel.ShowMessagesCommand.Execute(null);
