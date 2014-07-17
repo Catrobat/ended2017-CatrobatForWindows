@@ -9,6 +9,7 @@
   xmlns:bindableListView="using:Catrobat.IDE.WindowsPhone.Controls.BindableListView"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   mc:Ignorable="d" 
+  NavigationCacheMode="Required"
   DataContext="{Binding SpriteEditorViewModel, Source={StaticResource Locator}}">
 
   <Page.Resources>
