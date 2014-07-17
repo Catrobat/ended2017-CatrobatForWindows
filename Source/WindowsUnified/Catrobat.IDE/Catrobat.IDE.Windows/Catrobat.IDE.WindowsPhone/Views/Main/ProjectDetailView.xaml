@@ -51,6 +51,10 @@
                       Label="{Binding Resources.Main_ButtonUpload, 
                       Source={StaticResource LocalizedStrings}}"
                       Command="{Binding UploadCurrentProjectCommand}"/>
+        <AppBarButton Icon="Play" 
+                      Label="{Binding Resources.Editor_ButtonPlayProject, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding PlayCurrentProjectCommand}"/>
         <!--TODO: Add pin and share buttons here-->
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>

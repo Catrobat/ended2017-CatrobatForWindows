@@ -67,6 +67,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public ICommand UploadCurrentProjectCommand { get; private set; }
 
+        public ICommand PlayCurrentProjectCommand { get; private set; }
+
         public ICommand PinLocalProjectCommand { get; private set; }
 
         public ICommand ShareLocalProjectCommand { get; private set; }
@@ -111,6 +113,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
+        private void PlayCurrentProjectAction()
+        {
+            ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject);
+        }
+
         private void PinLocalProjectAction()
         {
             var message = new GenericMessage<ProjectDummyHeader>(CurrentProject.ProjectDummyHeader);
@@ -132,11 +139,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private void RenameProjectAction()
         {
             ServiceLocator.NavigationService.NavigateTo<ProjectSettingsViewModel>();
-        }
-
-        private void CancelAction()
-        {
-            base.GoBackAction();
         }
 
         #endregion
@@ -162,9 +164,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             EditCurrentProjectCommand = new RelayCommand(EditCurrentProjectAction);
             UploadCurrentProjectCommand = new RelayCommand(UploadCurrentProjectAction);
+            PlayCurrentProjectCommand = new RelayCommand(PlayCurrentProjectAction);
+            RenameProjectCommand = new RelayCommand(RenameProjectAction);
             PinLocalProjectCommand = new RelayCommand(PinLocalProjectAction);
             ShareLocalProjectCommand = new RelayCommand(ShareLocalProjectAction);
-            RenameProjectCommand = new RelayCommand(RenameProjectAction);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                 ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);

@@ -6,7 +6,6 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.Core.ViewModels.Settings;
 using GalaSoft.MvvmLight.Command;
@@ -206,12 +205,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         //    private set;
         //}
 
-        //public ICommand SetCurrentProjectCommand
-        //{
-        //    get;
-        //    private set;
-        //}
-
         public ICommand CreateNewProjectCommand
         {
             get;
@@ -225,12 +218,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         }
 
         public ICommand OnlineProjectTapCommand
-        {
-            get;
-            private set;
-        }
-
-        public ICommand PlayCurrentProjectCommand
         {
             get;
             private set;
@@ -362,11 +349,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.NavigationService.NavigateTo<OnlineProjectViewModel>();
         }
 
-        private void PlayCurrentProjectAction()
-        {
-            ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject);
-        }
-
         private void LicenseAction()
         {
             ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.CATROBAT_LICENSES_URL);
@@ -458,11 +440,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProjectAction);
             CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
             //LazyLoadOnlineProjectsCommand = new RelayCommand(LazyLoadOnlineProjectsAction);
-            //SetCurrentProjectCommand = new RelayCommand<string>(SetCurrentProjectAction);
             OnlineProjectTapCommand = new RelayCommand<OnlineProjectHeader>(OnlineProjectTapAction);
             SettingsCommand = new RelayCommand(SettingsAction);
             CreateNewProjectCommand = new RelayCommand(CreateNewProjectAction);
-            PlayCurrentProjectCommand = new RelayCommand(PlayCurrentProjectAction);
             ShowMessagesCommand = new RelayCommand(ShowMessagesAction);
             LicenseCommand = new RelayCommand(LicenseAction);
             AboutCommand = new RelayCommand(AboutAction);
