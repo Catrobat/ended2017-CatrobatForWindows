@@ -46,8 +46,11 @@
                         HorizontalAlignment="Stretch">
                 <GridView.ItemTemplate>
                   <DataTemplate>
-                    <Button Padding="0 0 0 0" BorderThickness="0">
-                      <Button.Flyout>
+                    <Button Padding="0 0 0 0" BorderThickness="0" 
+                            Command="{Binding MainViewModel.OpenProjectCommand, 
+                            Source={StaticResource Locator}}"
+                            CommandParameter="{Binding}">
+                      <!--<Button.Flyout>
                         <MenuFlyout>
                           <MenuFlyoutItem Text="{Binding Resources.Main_CopyProject, 
                               Source={StaticResource LocalizedStrings}}"
@@ -76,7 +79,7 @@
                               Source={StaticResource Locator}}" 
                               CommandParameter="{Binding}" />
                         </MenuFlyout>
-                      </Button.Flyout>
+                      </Button.Flyout>-->
                       <Button.ContentTemplate>
                         <DataTemplate>
                           <projects:LocalProjectControl Width="150" Height="150" Margin="5" Project="{Binding}" />
@@ -92,11 +95,10 @@
 
       </HubSection>
 
-      <HubSection Name="HubSectionOnlineProjects" Header="{Binding Resources.Main_HeaderOnlineProjects, 
-        Source={StaticResource LocalizedStrings}}">
+      <HubSection Name="HubSectionOnlineProjects">
         <HubSection.HeaderTemplate>
           <DataTemplate>
-            <TextBlock Text="{Binding Resources.Main_HeaderLocalProjects, 
+            <TextBlock Text="{Binding Resources.Main_HeaderOnlineProjects, 
                        Source={StaticResource LocalizedStrings}}" 
                        Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
                        Source={StaticResource ThemeChooser}}"/>
@@ -178,20 +180,22 @@
         </HubSection.ContentTemplate>
       </HubSection>
 
-      <HubSection Name="HubSectionHelp">
+      <HubSection Name="HubSectionAbout">
         <HubSection.Header>
-          <TextBlock Text="{Binding Resources.Main_HeaderLocalProjects, 
+          <TextBlock Text="{Binding Resources.Main_HeaderAbout, 
                        Source={StaticResource LocalizedStrings}}" 
                        Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
                        Source={StaticResource ThemeChooser}}"/>
         </HubSection.Header>
         <HubSection.ContentTemplate>
           <DataTemplate>
-            <Grid Margin="0 -20 0 0">
+            <Grid Margin="0 -20 0 50">
               <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto" MinHeight="52"/>
+                <RowDefinition Height="Auto" MinHeight="52"/>
+                <RowDefinition Height="Auto" MinHeight="52"/>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
               </Grid.RowDefinitions>
@@ -199,26 +203,26 @@
                 Text="{Binding Resources.Main_AboutText, 
                 Source={StaticResource LocalizedStrings}}" 
                  Margin="10 0 10 15" />
-              <HyperlinkButton Grid.Row="1" 
+              <HyperlinkButton Grid.Row="2" FontSize="20"
                 Content="{Binding Resources.Main_AboutLicense, 
                 Source={StaticResource LocalizedStrings}}" 
                 Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, 
                 Source={StaticResource ThemeChooser}}" NavigateUri="" 
                 Command="{Binding LicenseCommand}"/>
-              <HyperlinkButton Grid.Row="2" 
+              <HyperlinkButton Grid.Row="3" FontSize="20"
                 Content="{Binding Resources.Main_AboutCatrobat, 
                 Source={StaticResource LocalizedStrings}}" 
                 Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, 
                 Source={StaticResource ThemeChooser}}" NavigateUri="" 
                 Command="{Binding AboutCommand}"/>
-              <HyperlinkButton Grid.Row="3" 
+              <HyperlinkButton Grid.Row="4" FontSize="20"
                 Content="{Binding Resources.Main_AboutMSRL, 
                 Source={StaticResource LocalizedStrings}}"
                 Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, 
                 Source={StaticResource ThemeChooser}}" NavigateUri="" 
                 Command="{Binding MSRLCommand}"/>
 
-              <Grid Grid.Row="4">
+              <Grid Grid.Row="6">
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="Auto" />
                   <ColumnDefinition Width="*" />
@@ -243,18 +247,10 @@
       Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
       Source={StaticResource ThemeChooser}}">
       <CommandBar.PrimaryCommands>
-        <AppBarButton Icon="Edit" 
-                      Label="{Binding Resources.Main_ButtonEdit, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding EditCurrentProjectCommand}"/>
         <AppBarButton Icon="Add" 
                       Label="{Binding Resources.Main_ButtonCreate, 
                       Source={StaticResource LocalizedStrings}}"
                       Command="{Binding CreateNewProjectCommand}"/>
-        <AppBarButton Icon="Upload" 
-                      Label="{Binding Resources.Main_ButtonUpload, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding UploadCurrentProjectCommand}"/>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
         <AppBarButton Label="{Binding Resources.Main_Settings, 

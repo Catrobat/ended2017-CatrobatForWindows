@@ -17,7 +17,9 @@
 
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
       <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleProjectSettings, 
-               Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
+               Source={StaticResource LocalizedStrings}}" 
+               Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+               Source={StaticResource ThemeChooser}}" />
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">

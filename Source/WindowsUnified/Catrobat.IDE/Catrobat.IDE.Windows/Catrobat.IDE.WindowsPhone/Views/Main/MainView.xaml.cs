@@ -44,23 +44,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             base.OnNavigatedTo(e);
         }
 
-        private async void LocalProgram_RightTapped(object sender, RightTappedRoutedEventArgs e)
-        {
-            var localProject = ((ProjectDummyHeader) ((FrameworkElement)sender).DataContext);
-
-            var menu = new PopupMenu();
-            menu.Commands.Add(new UICommand(AppResources.Main_CopyProject, (command) => 
-                _viewModel.CopyLocalProjectCommand.Execute(localProject)));
-            menu.Commands.Add(new UICommand(AppResources.Main_DeleteProject, (command) => 
-                _viewModel.DeleteLocalProjectCommand.Execute(localProject)));
-            menu.Commands.Add(new UICommand(AppResources.Main_ChangeProjectNameAndDescription, (command) => 
-                _viewModel.RenameLocalProjectCommand.Execute(localProject)));
-            menu.Commands.Add(new UICommand(AppResources.Main_PinProjectToStart, (command) => 
-                _viewModel.PinLocalProjectCommand.Execute(localProject)));
-            menu.Commands.Add(new UICommand(AppResources.Main_ShareProject, (command) => 
-                _viewModel.ShareLocalProjectCommand.Execute(localProject)));
-        }
-
 
         //protected override void OnBackKeyPress(CancelEventArgs e)
         //{

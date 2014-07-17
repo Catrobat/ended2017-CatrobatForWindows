@@ -23,7 +23,7 @@
         UploadProjectStartedListener,
         SelectedUserVariableChangedListener,
         ShareProjectHeaderListener,
-        ChangeLocalProjectListener,
+        CurrentProjectHeaderChangedListener,
         CostumeImageListener,
         CostumeImageToSaveListener,
         ScriptBrickCategoryListener,

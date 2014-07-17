@@ -156,7 +156,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<ProjectDummyHeader>>(this, 
-                ViewModelMessagingToken.ChangeLocalProjectListener, ChangeProjectNameMessageAction);
+                ViewModelMessagingToken.CurrentProjectHeaderChangedListener, ChangeProjectNameMessageAction);
             Messenger.Default.Register<GenericMessage<Project>>(this, 
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
         }

@@ -118,6 +118,7 @@
     <Compile Include="UI\PortableUI\PortableFontStyle.cs" />
     <Compile Include="ViewModels\Editor\Formula\FormulaEvaluationResult.cs" />
     <Compile Include="Navigation\NavigationObject.cs" />
+    <Compile Include="ViewModels\Main\ProjectDetailViewModel.cs" />
     <Compile Include="ViewModels\Service\UploadProjectNewPasswordViewModel.cs" />
     <Compile Include="ViewModels\Service\OnlineProjectReportViewModel.cs" />
     <Compile Include="ViewModels\Service\UploadProjectForgotPasswordViewModel.cs" />
