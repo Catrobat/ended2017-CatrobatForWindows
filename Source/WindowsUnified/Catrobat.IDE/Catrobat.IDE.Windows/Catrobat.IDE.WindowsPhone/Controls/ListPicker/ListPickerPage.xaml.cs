@@ -1,19 +1,19 @@
-﻿using System;
-using System.Diagnostics;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using Catrobat.IDE.Core.Models;
+﻿using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Editor.Actions;
 using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
 using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using GalaSoft.MvvmLight.Command;
+using System;
+using System.Diagnostics;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 
 namespace Catrobat.IDE.WindowsPhone.Controls.ListPicker
 {
-    public partial class ListPickerPage : Page
+    public partial class ListPickerPage : Page // TODO: Meke me a ViewModel and change my type to ViewPageBase
     {
         public static ListPicker ListPicker
         {

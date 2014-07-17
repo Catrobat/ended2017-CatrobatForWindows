@@ -46,12 +46,13 @@ namespace Catrobat.IDE.WindowsShared.Services
                     pageType = Type.GetType(viewName);
                 }
             }
-            else if (type.GetTypeInfo().BaseType == typeof (ViewPageBase))
+            else if (type.GetTypeInfo().BaseType == typeof (Page))
             {
                 pageType = type;
             }
 
-            if (pageType.GetTypeInfo().BaseType == typeof(ViewPageBase)) // this is not true for flyouts (UserControls)
+            if (pageType.GetTypeInfo().BaseType == typeof(Page) || 
+                pageType.GetTypeInfo().BaseType == typeof(ViewPageBase))
                 _frame.Navigate(pageType);
         }
 
@@ -63,21 +64,23 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public void NavigateBack(Type viewModelType)
         {
-            if (viewModelType.GetTypeInfo().BaseType != typeof(ViewModelBase))
+            if (viewModelType.GetTypeInfo().BaseType == typeof(ViewModelBase))
             {
-                throw new Exception("The type has to have 'ViewModelBase' as it's base type.");
+                var viewModel = (ViewModelBase)ServiceLocator.GetInstance(viewModelType);
+                var navigationObject = viewModel.NavigationObject;
+
+
+                if (navigationObject == null)
+                    throw new Exception("The navigation object cannot be null.");
+
+                navigationObject.OnNavigateBack();
             }
-
-            var viewModel = (ViewModelBase)ServiceLocator.GetInstance(viewModelType);
-            var navigationObject = viewModel.NavigationObject;
-
-
-            if (navigationObject == null)
-                throw new Exception("The navigation object cannot be null.");
-
-            navigationObject.OnNavigateBack();
+            else
+            {
+                //throw new Exception("The type has to have 'ViewModelBase' as it's base type.");
+                _frame.GoBack();
+            }
         }
-
 
         public void RemoveBackEntry()
         {
