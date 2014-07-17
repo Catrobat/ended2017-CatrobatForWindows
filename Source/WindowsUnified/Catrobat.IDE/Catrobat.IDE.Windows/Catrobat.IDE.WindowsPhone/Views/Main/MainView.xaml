@@ -46,46 +46,56 @@
                         HorizontalAlignment="Stretch">
                 <GridView.ItemTemplate>
                   <DataTemplate>
-                    <Button Padding="0 0 0 0" BorderThickness="0" 
+                    <Grid>
+                      <Button Padding="0" BorderThickness="0" 
                             Command="{Binding MainViewModel.OpenProjectCommand, 
                             Source={StaticResource Locator}}"
                             CommandParameter="{Binding}">
-                      <!--<Button.Flyout>
-                        <MenuFlyout>
-                          <MenuFlyoutItem Text="{Binding Resources.Main_CopyProject, 
-                              Source={StaticResource LocalizedStrings}}"
-                              Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, 
-                              Source={StaticResource Locator}}" 
-                                    CommandParameter="{Binding ProjectName}"/>
-                          <MenuFlyoutItem Text="{Binding Resources.Main_DeleteProject, 
-                              Source={StaticResource LocalizedStrings}}"
-                              Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, 
-                              Source={StaticResource Locator}}" 
-                                    CommandParameter="{Binding ProjectName}"/>
-                          <MenuFlyoutItem Text="{Binding Resources.Main_ChangeProjectNameAndDescription, 
-                              Source={StaticResource LocalizedStrings}}" 
-                              Command="{Binding MainViewModel.RenameLocalProjectCommand, Mode=OneWay, 
-                              Source={StaticResource Locator}}"
-                                    CommandParameter="{Binding}"/>
-                          <MenuFlyoutSeparator/>
-                          <MenuFlyoutItem Text="{Binding Resources.Main_PinProjectToStart, 
-                              Source={StaticResource LocalizedStrings}}"
-                              Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, 
-                              Source={StaticResource Locator}}" 
-                                    CommandParameter="{Binding}"/>
-                          <MenuFlyoutItem Text="{Binding Resources.Main_ShareProject, 
-                              Source={StaticResource LocalizedStrings}}"
-                              Command="{Binding MainViewModel.ShareLocalProjectCommand, Mode=OneWay, 
-                              Source={StaticResource Locator}}" 
-                              CommandParameter="{Binding}" />
-                        </MenuFlyout>
-                      </Button.Flyout>-->
-                      <Button.ContentTemplate>
-                        <DataTemplate>
+                        <Grid  Width="150" Height="150">
                           <projects:LocalProjectControl Width="150" Height="150" Margin="5" Project="{Binding}" />
-                        </DataTemplate>
-                      </Button.ContentTemplate>
-                    </Button>
+                          <Button MinWidth="50" MinHeight="50"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                            Padding="0 5 0 5" Margin="5 5 4 -4"
+                            BorderThickness="0">
+                            <Button.Flyout>
+                              <MenuFlyout>
+                                <MenuFlyoutItem Text="{Binding Resources.Main_CopyProject, 
+                                  Source={StaticResource LocalizedStrings}}"
+                                  Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, 
+                                  Source={StaticResource Locator}}" 
+                                  CommandParameter="{Binding ProjectName}"/>
+                                <MenuFlyoutItem Text="{Binding Resources.Main_DeleteProject, 
+                                  Source={StaticResource LocalizedStrings}}"
+                                  Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, 
+                                  Source={StaticResource Locator}}" 
+                                  CommandParameter="{Binding ProjectName}"/>
+                              </MenuFlyout>
+                            </Button.Flyout>
+                            <Grid Height="40" Width="40">
+                              <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1*"/>
+                              </Grid.RowDefinitions>
+                              <Grid Grid.Row="0" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalAlignment="Stretch" 
+                                Background="White"/>
+                              <Grid Grid.Row="2" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalAlignment="Stretch" 
+                                Background="White"/>
+                              <Grid Grid.Row="4" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalAlignment="Stretch" 
+                                Background="White"/>
+                            </Grid>
+                          </Button>
+                        </Grid>
+                      </Button>
+                    </Grid>
                   </DataTemplate>
                 </GridView.ItemTemplate>
               </GridView>
