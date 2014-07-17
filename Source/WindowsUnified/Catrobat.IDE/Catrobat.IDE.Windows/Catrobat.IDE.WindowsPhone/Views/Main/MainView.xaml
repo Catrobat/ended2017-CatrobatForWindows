@@ -199,7 +199,7 @@
         </HubSection.Header>
         <HubSection.ContentTemplate>
           <DataTemplate>
-            <Grid Margin="0 -20 0 50">
+            <Grid Margin="0 -20 0 5">
               <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
