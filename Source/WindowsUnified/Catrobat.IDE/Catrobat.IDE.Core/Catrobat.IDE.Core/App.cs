@@ -1,14 +1,11 @@
-using System;
-using System.Diagnostics;
-using System.Globalization;
-using System.Threading.Tasks;
 using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Settings;
 using GalaSoft.MvvmLight.Messaging;
+using System.Globalization;
+using System.Threading.Tasks;
 using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;
 
 namespace Catrobat.IDE.Core
@@ -48,48 +45,62 @@ namespace Catrobat.IDE.Core
             }
         }
 
-        private static async Task<Project> InitializeFirstTimeUse(CatrobatContextBase context)
-        {
-            var localSettings = await CatrobatContext.RestoreLocalSettingsStatic();
+        //private static async Task<Project> Initialize(CatrobatContextBase context)
+        //{
+            
 
-            if(localSettings != null)
-            {
-                try
-                {
-                    context.LocalSettings = localSettings;
-                    var project = await CatrobatContext.LoadNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
-                    if(project != null)
-                        return project;
-                }
-                catch (Exception)
-                {
+        //    //if(localSettings != null)
+        //    //{
+        //    //    try
+        //    //    {
+        //    //        context.LocalSettings = localSettings;
+        //    //        var project = await CatrobatContext.LoadNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
+        //    //        if(project != null)
+        //    //            return project;
+        //    //    }
+        //    //    catch (Exception)
+        //    //    {
                     
-                }
-            }
+        //    //    }
+        //    //}
 
-            //if (localSettings == null && Debugger.IsAttached)
-            //{
-            //    var loader = new SampleProjectLoader();
-            //    await loader.LoadSampleProjects();
-            //}
+        //    //if (localSettings == null && Debugger.IsAttached)
+        //    //{
+        //    //    var loader = new SampleProjectLoader();
+        //    //    await loader.LoadSampleProjects();
+        //    //}
 
-            var currentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
-            await currentProject.Save();
+        //    //var localSettings = await CatrobatContext.RestoreLocalSettingsStatic();
 
-            if(localSettings == null)
-                context.LocalSettings = new LocalSettings ();
+        //    //if (localSettings == null)
+        //    //{
+        //    //    context.LocalSettings = new LocalSettings();
 
-            context.LocalSettings.CurrentProjectName = currentProject.Name;
-            return currentProject;
-        }
+        //    //    var currentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+        //    //    context.LocalSettings.CurrentProjectName = currentProject.Name;
+        //    //    await currentProject.Save();
+
+        //    //    return currentProject;
+        //    //}
+
+        //    //return null;
+        //}
 
         private static async Task LoadContext()
         {
             _context = new CatrobatContext();
-            var currentProject = await InitializeFirstTimeUse(_context);
 
-            if (currentProject == null)
-                await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+            var localSettings = await CatrobatContext.RestoreLocalSettingsStatic();
+            _context.LocalSettings = localSettings;
+
+            if (localSettings == null)
+            {
+                _context.LocalSettings = new LocalSettings();
+
+                var defaultProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+                _context.LocalSettings.CurrentProjectName = defaultProject.Name;
+                await defaultProject.Save();
+            }
 
             if (_context.LocalSettings.CurrentLanguageString == null)
                 _context.LocalSettings.CurrentLanguageString =
@@ -103,14 +114,17 @@ namespace Catrobat.IDE.Core
                 ServiceLocator.GetInstance<SettingsViewModel>().CurrentCulture =
                     new CultureInfo(_context.LocalSettings.CurrentLanguageString);
 
-            var message1 = new GenericMessage<ThemeChooser>(themeChooser);
-            Messenger.Default.Send(message1, ViewModelMessagingToken.ThemeChooserListener);
+            var themeChooserChangedMessage = new GenericMessage<ThemeChooser>(themeChooser);
+            Messenger.Default.Send(themeChooserChangedMessage, ViewModelMessagingToken.ThemeChooserListener);
 
-            var message2 = new GenericMessage<CatrobatContextBase>(_context);
-            Messenger.Default.Send(message2, ViewModelMessagingToken.ContextListener);
+            var contextChangedMessage = new GenericMessage<CatrobatContextBase>(_context);
+            Messenger.Default.Send(contextChangedMessage, ViewModelMessagingToken.ContextListener);
 
-            var message = new GenericMessage<Project>(currentProject);
-            Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectChangedListener);
+            var localProjectsChangedMessage = new MessageBase();
+            Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
+
+            //var message = new GenericMessage<Project>(currentProject);
+            //Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectChangedListener);
 
             // allow viewmodels to load from settings
             Messenger.Default.Send(new GenericMessage<LocalSettings>(_context.LocalSettings), ViewModelMessagingToken.LoadSettings);

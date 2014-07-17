@@ -518,7 +518,6 @@
     <Compile Include="ViewModels\Editor\Sprites\SpritesViewModel.cs" />
     <Compile Include="ViewModels\Main\AddNewProjectViewModel.cs" />
     <Compile Include="ViewModels\Main\MainViewModel.cs" />
-    <Compile Include="ViewModels\Main\PlayerLauncherViewModel.cs" />
     <Compile Include="ViewModels\Main\ProjectImportViewModel.cs" />
     <Compile Include="ViewModels\Main\TileGeneratorViewModel.cs" />
     <Compile Include="ViewModels\Service\OnlineProjectViewModel.cs" />

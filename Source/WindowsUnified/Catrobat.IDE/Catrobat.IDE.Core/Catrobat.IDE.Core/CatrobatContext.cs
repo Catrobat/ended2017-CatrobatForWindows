@@ -15,19 +15,19 @@ namespace Catrobat.IDE.Core
     {
         #region Static methods
 
-        public static async Task<Project> LoadNewProjectByNameStatic(string projectName)
+        public static async Task<Project> LoadProjectByNameStatic(string projectName)
         {
-            return new XmlProjectConverter().Convert(await LoadNewXmlProjectByNameStatic(projectName));
+            return new XmlProjectConverter().Convert(await LoadXmlProjectByNameStatic(projectName));
         }
 
-        public static async Task<XmlProject> LoadNewXmlProjectByNameStatic(string projectName)
+        public static async Task<XmlProject> LoadXmlProjectByNameStatic(string projectName)
         {
-            if (Debugger.IsAttached)
-            {
-                return await LoadNewProjectByNameStaticWithoutTryCatch(projectName);
-            }
-            else
-            {
+            //if (Debugger.IsAttached)
+            //{
+            //    return await LoadNewProjectByNameStaticWithoutTryCatch(projectName);
+            //}
+            //else
+            //{
                 try
                 {
                     return await LoadNewProjectByNameStaticWithoutTryCatch(projectName);
@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Core
                 {
                     return null;
                 }
-            }
+            //}
         }
 
         private static async Task<XmlProject> LoadNewProjectByNameStaticWithoutTryCatch(string projectName)
@@ -137,7 +137,8 @@ namespace Catrobat.IDE.Core
                 {
                     if (await storage.FileExistsAsync(LocalSettingsFilePath))
                     {
-                        localSettings = await storage.ReadSerializableObjectAsync(LocalSettingsFilePath, typeof(LocalSettings)) as LocalSettings;
+                        localSettings = await storage.ReadSerializableObjectAsync(
+                            LocalSettingsFilePath, typeof(LocalSettings)) as LocalSettings;
                     }
 
                     return localSettings;

@@ -30,7 +30,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private string _filterText = "";
         private string _previousFilterText = "";
         private bool _isLoadingOnlineProjects;
-        private bool _isActivatingLocalProject;
         private MessageboxResult _dialogResult;
         private string _deleteProjectName;
         private string _copyProjectName;
@@ -85,13 +84,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 _currentProject = value;
 
                 RaisePropertyChanged(() => CurrentProject);
-                UpdateLocalProjects();
-
-                var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
-                Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
-
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
             }
         }
 
@@ -163,89 +155,32 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             set { _isLoadingOnlineProjects = value; RaisePropertyChanged(() => IsLoadingOnlineProjects); }
         }
 
-        public bool IsActivatingLocalProject
-        {
-            get
-            {
-                return _isActivatingLocalProject;
-            }
-            set
-            {
-                _isActivatingLocalProject = value;
-                RaisePropertyChanged(() => IsActivatingLocalProject);
-            }
-        }
-
         #endregion
 
         #region Commands
 
-        public ICommand OpenProjectCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand OpenProjectCommand { get; private set; }
 
-        public ICommand DeleteLocalProjectCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand DeleteLocalProjectCommand { get; private set; }
 
-        public ICommand CopyLocalProjectCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand CopyLocalProjectCommand { get; private set; }
 
 
-        //public ICommand LazyLoadOnlineProjectsCommand
-        //{
-        //    get;
-        //    private set;
-        //}
+        //public ICommand LazyLoadOnlineProjectsCommand { get; private set; }
 
-        public ICommand CreateNewProjectCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand CreateNewProjectCommand { get; private set; }
 
-        public ICommand SettingsCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand SettingsCommand { get; private set; }
 
-        public ICommand OnlineProjectTapCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand OnlineProjectTapCommand { get; private set; }
 
-        public ICommand ShowMessagesCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand ShowMessagesCommand { get; private set; }
 
-        public ICommand LicenseCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand LicenseCommand { get; private set; }
 
-        public ICommand AboutCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand AboutCommand { get; private set; }
 
-        public ICommand MSRLCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand MSRLCommand { get; private set; }
 
         #endregion
 
@@ -427,7 +362,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
         {
-            CurrentProject = message.Content;
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                CurrentProject = message.Content;
+            });
         }
 
         #endregion
@@ -482,16 +420,19 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                 if (CurrentProject.Name == _deleteProjectName)
                 {
-                    if (LocalProjects.Count > 0)
-                    {
-                        var projectName = LocalProjects[0].ProjectName;
-                        CurrentProject = await CatrobatContext.LoadNewProjectByNameStatic(projectName);
-                    }
-                    else
-                        CurrentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+                    var projectChangedMessage = new GenericMessage<Project>(null);
+                    Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+
+                    //if (LocalProjects.Count > 0)
+                    //{
+                    //    var projectName = LocalProjects[0].ProjectName;
+                    //    CurrentProject = await CatrobatContext.LoadNewProjectByNameStatic(projectName);
+                    //}
+                    //else
+                    //    CurrentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
                 }
-                else
-                    await UpdateLocalProjects();
+
+                await UpdateLocalProjects();
 
 
                 _deleteProjectName = null;
@@ -578,11 +519,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private async Task UpdateLocalProjects()
         {
             if (IsInDesignMode) return;
-
-            if (CurrentProject == null)
-            {
-                return;
-            }
 
             if (_localProjects == null)
             {

@@ -51,7 +51,7 @@
             </DataTemplate>
           </RadioButton.ContentTemplate>
         </RadioButton>
-        <RadioButton Margin="0 -5 0 -10" GroupName="CreationOption" 
+        <!--<RadioButton Margin="0 -5 0 -10" GroupName="CreationOption" 
                      IsChecked="{Binding CreateCopyOfCurrentProject, Mode=TwoWay}" >
           <RadioButton.ContentTemplate>
             <DataTemplate>
@@ -59,7 +59,7 @@
                 Source={StaticResource Locator}}" FontSize="20" TextWrapping="Wrap"/>
             </DataTemplate>
           </RadioButton.ContentTemplate>
-        </RadioButton>
+        </RadioButton>-->
         <RadioButton Margin="0 -5 0 -10" IsChecked="{Binding CreateTemplateProject, Mode=TwoWay}" 
                      GroupName="CreationOption" >
           <RadioButton.ContentTemplate>

@@ -137,7 +137,10 @@ namespace Catrobat.IDE.WindowsShared.Services
                     throw new ArgumentOutOfRangeException("options");
             }
 
-            await messageDialog.ShowAsync();
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                messageDialog.ShowAsync();
+            });
         }
 
         private void CommandInvokedHandler(IUICommand command)
