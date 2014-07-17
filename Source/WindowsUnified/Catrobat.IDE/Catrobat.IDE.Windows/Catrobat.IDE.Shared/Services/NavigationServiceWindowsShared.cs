@@ -73,7 +73,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                 if (navigationObject == null)
                     throw new Exception("The navigation object cannot be null.");
 
-                navigationObject.OnNavigateBack();
+                navigationObject.NavigateBack();
             }
             else
             {

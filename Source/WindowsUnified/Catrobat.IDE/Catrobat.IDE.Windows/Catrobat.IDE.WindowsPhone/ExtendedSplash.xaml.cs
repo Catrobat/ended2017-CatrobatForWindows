@@ -19,7 +19,7 @@ namespace Catrobat.IDE.WindowsPhone
 {
     partial class ExtendedSplash
     {
-        private static readonly TimeSpan MinimalLoadingTime = new TimeSpan(0, 0, 0, 2, 500);
+        private static readonly TimeSpan MinimalLoadingTime = new TimeSpan(0, 0, 0, 1, 200);
 
         private Rect _splashImageRect; // Rect to store splash screen image coordinates.
         private bool _dismissed = false; // Variable to track splash screen dismissal status.

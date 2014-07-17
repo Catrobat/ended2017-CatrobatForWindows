@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using Catrobat.IDE.Core.ExtensionMethods;
+﻿using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Models.Scripts;
@@ -16,6 +12,10 @@ using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
 using Catrobat.IDE.Core.ViewModels.Main;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 {
@@ -55,7 +55,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         public Project CurrentProject
         {
             get { return _currentProject; }
-            private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+            private set 
+            { 
+                _currentProject = value; 
+                ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                    RaisePropertyChanged(() => CurrentProject)); 
+            }
         }
 
         public ObservableCollection<Sprite> Sprites

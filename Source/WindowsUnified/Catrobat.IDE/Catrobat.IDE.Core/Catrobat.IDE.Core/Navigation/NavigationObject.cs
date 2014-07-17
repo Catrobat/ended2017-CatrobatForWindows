@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace Catrobat.IDE.Core.Navigation
 {
+    public delegate void GoBackRequested();
+
     public delegate void LoadState(Dictionary<string, object> loadData);
     public delegate void SaveState(Dictionary<string, object> loadData);
 
@@ -11,6 +13,13 @@ namespace Catrobat.IDE.Core.Navigation
 
     public abstract class NavigationObject
     {
+        public event GoBackRequested GoBackRequested;
+        protected virtual void RaiseGoBackRequested()
+        {
+            GoBackRequested handler = GoBackRequested;
+            if (handler != null) handler();
+        }
+
         public event LoadState LoadState;
         protected virtual void RaiseLoadState(Dictionary<string, object> loaddata)
         {
@@ -28,18 +37,18 @@ namespace Catrobat.IDE.Core.Navigation
         public event NavigateTo NavigateTo;
         public event NavigateFrom NavigateFrom;
 
-        public abstract void OnNavigateBack();
+        public abstract void NavigateBack();
 
-        public abstract void OnNavigateTo();
-
-        public void OnNavigatedTo(object args)
+        public void RaiseNavigatedTo()
         {
-            NavigateTo.Invoke();
+            if(NavigateTo != null)
+                NavigateTo.Invoke();
         }
 
-        public void OnNavigatedFrom(object args)
+        public void RaiseNavigatedFrom()
         {
-            NavigateFrom.Invoke();
+            if (NavigateFrom != null)
+                NavigateFrom.Invoke();
         }
     }
 }
