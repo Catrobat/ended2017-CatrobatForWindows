@@ -86,7 +86,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListPicker
             }
 
             ListPicker.SelectedItem = ListBoxItems.SelectedItem;
-            ServiceLocator.NavigationService.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack(this.GetType());
         }
     }
 

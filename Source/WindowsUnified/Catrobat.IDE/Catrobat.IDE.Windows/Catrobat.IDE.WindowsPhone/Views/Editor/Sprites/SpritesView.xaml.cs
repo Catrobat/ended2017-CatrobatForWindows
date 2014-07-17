@@ -9,7 +9,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         private readonly SpritesViewModel _viewModel =
             ((ViewModelLocator) ServiceLocator.ViewModelLocator).SpritesViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public SpritesView()
         {

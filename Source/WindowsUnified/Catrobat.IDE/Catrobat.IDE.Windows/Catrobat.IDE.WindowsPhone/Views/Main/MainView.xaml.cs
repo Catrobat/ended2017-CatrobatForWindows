@@ -18,8 +18,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         private readonly MainViewModel _viewModel =
             ServiceLocator.ViewModelLocator.MainViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
-
         private const int offsetKnob = 4;
         private bool firstAttempt = true;
 
@@ -39,7 +37,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (ServiceLocator.NavigationService.CanGoBack)
+            while (ServiceLocator.NavigationService.CanGoBack)
                 ServiceLocator.NavigationService.RemoveBackEntry();
 
             _viewModel.ShowMessagesCommand.Execute(null);

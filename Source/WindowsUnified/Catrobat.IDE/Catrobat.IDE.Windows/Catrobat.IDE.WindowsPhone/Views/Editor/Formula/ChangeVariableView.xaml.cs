@@ -12,7 +12,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
         private readonly ChangeVariableViewModel _viewModel = 
             ServiceLocator.ViewModelLocator.ChangeVariableViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public ChangeVariableView()
         {

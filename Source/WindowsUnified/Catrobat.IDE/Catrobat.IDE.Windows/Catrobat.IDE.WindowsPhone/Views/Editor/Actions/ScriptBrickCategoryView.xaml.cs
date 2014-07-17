@@ -9,7 +9,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Actions
         private readonly ScriptBrickCategoryViewModel _viewModel =
             ServiceLocator.ViewModelLocator.ScriptBrickCategoryViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public ScriptBrickCategoryView()
         {

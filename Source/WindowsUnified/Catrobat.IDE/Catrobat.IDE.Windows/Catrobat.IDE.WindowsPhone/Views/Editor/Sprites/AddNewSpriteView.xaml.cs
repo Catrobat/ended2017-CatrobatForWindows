@@ -11,8 +11,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         private readonly AddNewSpriteViewModel _viewModel = 
             (ServiceLocator.ViewModelLocator).AddNewSpriteViewModel;
 
-        protected override ViewModelBase GetViewModel(){ return _viewModel; }
-
         public AddNewSpriteView()
         {
             InitializeComponent();

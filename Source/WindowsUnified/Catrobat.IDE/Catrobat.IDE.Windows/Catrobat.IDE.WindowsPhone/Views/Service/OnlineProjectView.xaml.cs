@@ -11,7 +11,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Service
         private readonly OnlineProjectViewModel _viewModel =
             ((ViewModelLocator)ServiceLocator.ViewModelLocator).OnlineProjectViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public OnlineProjectView()
         {

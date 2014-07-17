@@ -18,7 +18,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
         private readonly FormulaEditorViewModel _viewModel = 
             ServiceLocator.ViewModelLocator.FormulaEditorViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public FormulaEditorView()
         {

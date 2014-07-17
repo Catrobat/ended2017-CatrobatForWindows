@@ -9,7 +9,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sounds
         private readonly NewSoundSourceSelectionViewModel _viewModel =
             ((ViewModelLocator)ServiceLocator.ViewModelLocator).NewSoundSourceSelectionViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public NewSoundSourceSelectionView()
         {

@@ -148,19 +148,24 @@ namespace Catrobat.IDE.Core.Services
 
         public static void Register<T>(TypeCreationMode mode)
         {
+            RegisterByType(typeof (T), mode);
+        }
+
+        public static void RegisterByType(Type type, TypeCreationMode mode)
+        {
             lock (Instances)
             {
                 if (mode == TypeCreationMode.Lazy)
                 {
-                    if (!Instances.ContainsKey(typeof(T)))
-                        Instances.Add(typeof(T), null);
+                    if (!Instances.ContainsKey(type))
+                        Instances.Add(type, null);
                 }
                 else if (mode == TypeCreationMode.Normal)
                 {
-                    if (Instances.ContainsKey(typeof(T)))
-                        Instances.Remove(typeof(T));
+                    if (Instances.ContainsKey(type))
+                        Instances.Remove(type);
 
-                    Instances.Add(typeof(T), Activator.CreateInstance<T>());
+                    Instances.Add(type, Activator.CreateInstance(type));
                 }
             }
         }

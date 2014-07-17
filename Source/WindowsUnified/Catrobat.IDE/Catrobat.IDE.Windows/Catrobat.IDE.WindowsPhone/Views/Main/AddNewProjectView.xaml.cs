@@ -10,7 +10,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         private readonly AddNewProjectViewModel _viewModel = 
             ServiceLocator.ViewModelLocator.AddNewProjectViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public AddNewProjectView()
         {

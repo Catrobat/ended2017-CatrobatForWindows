@@ -14,7 +14,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.CatrobatSplashScreen
+namespace Catrobat.IDE.WindowsPhone
 {
     partial class ExtendedSplash
     {

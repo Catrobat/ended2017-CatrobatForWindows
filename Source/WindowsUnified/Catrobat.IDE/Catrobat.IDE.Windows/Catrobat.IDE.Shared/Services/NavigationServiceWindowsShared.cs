@@ -7,29 +7,26 @@ using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.WindowsPhone.Views;
-using Catrobat.IDE.WindowsShared.Common;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
     public class NavigationServiceWindowsShared : INavigationService
     {
         private readonly Frame _frame;
-        private int _removedBackEntryCount;
 
         public NavigationServiceWindowsShared(Frame frame)
         {
             _frame = frame;
         }
 
+
         public void NavigateTo<T>()
         {
             NavigateTo(typeof(T));
         }
-
+        
         public void NavigateTo(Type type)
         {
-            NavigateBack();
-
             Type pageType = null;
 
             if (type.GetTypeInfo().BaseType == typeof(ViewModelBase))
@@ -58,58 +55,38 @@ namespace Catrobat.IDE.WindowsShared.Services
                 _frame.Navigate(pageType);
         }
 
-        public void NavigateBack(object navigationObject)
+
+        public void NavigateBack<T>()
         {
-            var flyout = navigationObject as Flyout;
-            if (flyout != null)
-                flyout.Hide();
-            else
-            {
-                _removedBackEntryCount++;
-                NavigateBack();
-            }
+            NavigateBack(typeof(T));
         }
 
-        public void NavigateBackForPlatform(NavigationPlatform platform)
+        public void NavigateBack(Type viewModelType)
         {
-            if (platform == NavigationPlatform.WindowsStore)
+            if (viewModelType.GetTypeInfo().BaseType != typeof(ViewModelBase))
             {
-                _removedBackEntryCount++;
-                NavigateBack();
+                throw new Exception("The type has to have 'ViewModelBase' as it's base type.");
             }
+
+            var viewModel = (ViewModelBase)ServiceLocator.GetInstance(viewModelType);
+            var navigationObject = viewModel.NavigationObject;
+
+
+            if (navigationObject == null)
+                throw new Exception("The navigation object cannot be null.");
+
+            navigationObject.OnNavigateBack();
         }
 
-        private void NavigateBack()
-        {
-            while (_removedBackEntryCount > 0)
-            {
-                _removedBackEntryCount--;
-                if (CanGoBack)
-                    _frame.GoBack();
-                else
-                    Application.Current.Exit(); // TODO: remove this
-                
-            }
-        }
 
         public void RemoveBackEntry()
         {
             _frame.BackStack.RemoveAt(_frame.BackStack.Count - 1);
-            //_removedBackEntryCount++;
         }
-
-
-        public void RemoveBackEntryForPlatform(NavigationPlatform platform)
-        {
-            //if (platform == NavigationPlatform.WindowsStore)
-            _frame.BackStack.RemoveAt(_frame.BackStack.Count - 1);
-                //_removedBackEntryCount++;
-        }
-
 
         public bool CanGoBack
         {
-            get { return _frame.CanGoBack; }
+            get { return _frame != null && _frame.CanGoBack; }
         }
 
         public void NavigateToWebPage(string uri)

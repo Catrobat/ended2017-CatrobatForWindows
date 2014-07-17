@@ -10,7 +10,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
         private readonly AddNewGlobalVariableViewModel _viewModel = 
             ServiceLocator.ViewModelLocator.AddNewGlobalVariableViewModel;
 
-        protected override ViewModelBase GetViewModel() { return _viewModel; }
+        
 
         public AddNewGlobalVariableView()
         {

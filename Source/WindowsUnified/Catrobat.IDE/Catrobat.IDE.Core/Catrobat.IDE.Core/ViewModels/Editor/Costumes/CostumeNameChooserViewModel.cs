@@ -162,8 +162,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
 
             ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
-                ServiceLocator.NavigationService.RemoveBackEntryForPlatform(NavigationPlatform.WindowsPhone);
-                ServiceLocator.NavigationService.NavigateBack();
+                ServiceLocator.NavigationService.RemoveBackEntry();
+                ServiceLocator.NavigationService.NavigateBack(this.GetType());
             });
 
             //ServiceLocator.DispatcherService.RunOnMainThread(() =>

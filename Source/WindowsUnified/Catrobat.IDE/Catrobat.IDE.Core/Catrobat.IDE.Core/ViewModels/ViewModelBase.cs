@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Catrobat.IDE.Core.Navigation;
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
+using System;
+using System.Collections.Generic;
 
 namespace Catrobat.IDE.Core.ViewModels
 {
@@ -8,7 +10,28 @@ namespace Catrobat.IDE.Core.ViewModels
     {
         #region Private Members
 
-        public object NavigationObject { protected get; set; }
+        private NavigationObject _navigationObject;
+
+        public NavigationObject NavigationObject
+        {
+            get { return _navigationObject; }
+            set
+            {
+                if (_navigationObject != null)
+                {
+                    _navigationObject.NavigateTo -= NavigateTo;
+                    _navigationObject.NavigateFrom -= NavigateFrom;
+                }
+
+                _navigationObject = value;
+
+                if (_navigationObject != null)
+                {
+                    _navigationObject.NavigateTo += NavigateTo;
+                    _navigationObject.NavigateFrom += NavigateFrom;
+                }
+            }
+        }
 
         public Type SkipAndNavigateTo { get; set; }
 
@@ -30,7 +53,7 @@ namespace Catrobat.IDE.Core.ViewModels
 
         protected virtual void GoBackAction()
         {
-            ServiceLocator.NavigationService.NavigateBack(NavigationObject);
+            ServiceLocator.NavigationService.NavigateBack(this.GetType());
         }
 
         #endregion
@@ -40,12 +63,22 @@ namespace Catrobat.IDE.Core.ViewModels
             GoBackCommand = new RelayCommand(GoBackAction);
         }
 
-        public void SaveState(System.Collections.Generic.Dictionary<string, object> pageState)
+        public virtual void SaveState(Dictionary<string, object> pageState)
         {
             /* implemented in ViewModels */
         }
 
-        public void LoadState(System.Collections.Generic.Dictionary<string, object> pageState)
+        public virtual void LoadState(Dictionary<string, object> pageState)
+        {
+            /* implemented in ViewModels */
+        }
+
+        public virtual void NavigateTo()
+        {
+            /* implemented in ViewModels */
+        }
+
+        public virtual void NavigateFrom()
         {
             /* implemented in ViewModels */
         }

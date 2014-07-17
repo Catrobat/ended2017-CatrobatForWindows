@@ -9,14 +9,15 @@
     DataContext="{Binding AddNewProjectViewModel, Source={StaticResource Locator}}">
 
   <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+        Source={StaticResource ThemeChooser}}" >
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
-    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Resources.Main_TitleNewProject, 
+    <StackPanel Grid.Row="0" Margin="10 5 10 20">
+      <TextBlock Margin="0" 
+        Text="{Binding Resources.Main_TitleNewProject, 
         Source={StaticResource LocalizedStrings}}"
         Style="{Binding StaticTheme.TextTitle3Style.NativeStyle, 
         Source={StaticResource ThemeChooser}}" />
@@ -24,26 +25,29 @@
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
       <StackPanel>
-        <TextBlock Margin="0" Text="{Binding Resources.Main_ProjectName, 
-          Source={StaticResource LocalizedStrings}}" 
-                   Style="{Binding StaticTheme.TextSmallStyle.NativeStyle, 
+        <TextBlock Margin="0 5 5 5" 
+          Text="{Binding Resources.Main_ProjectName, 
+          Source={StaticResource LocalizedStrings}}"
+          Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
           Source={StaticResource ThemeChooser}}" />
-        <TextBox Name="TextBoxProjectName" Margin="-10 0 10 0" 
+        <TextBox Name="TextBoxProjectName" Margin="0 0 10 0" 
                  HorizontalAlignment="Stretch" 
                  TextChanged="TextBoxProjectName_OnTextChanged" 
                  Text="{Binding Path=ProjectName, 
                  Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
       </StackPanel>
-      <StackPanel>
+      <StackPanel Margin="0 20 0 0">
         <TextBlock Text="{Binding Resources.Main_SelectProjectCreationOption, 
-          Source={StaticResource LocalizedStrings}}"></TextBlock>
+          Source={StaticResource LocalizedStrings}}"
+          Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+          Source={StaticResource ThemeChooser}}"/>
         <RadioButton Margin="0 -5 0 -10" GroupName="CreationOption"
-                     IsChecked="{Binding CreateEmptyProject, Mode=TwoWay}"  >
+                     IsChecked="{Binding CreateEmptyProject, Mode=TwoWay}">
           <RadioButton.ContentTemplate>
             <DataTemplate>
               <TextBlock FontSize="20" TextWrapping="Wrap"
-                         Text="{Binding Resources.Main_CreateEmptyProject, 
-                         Source={StaticResource LocalizedStrings}}" />
+                Text="{Binding Resources.Main_CreateEmptyProject, 
+                Source={StaticResource LocalizedStrings}}" />
             </DataTemplate>
           </RadioButton.ContentTemplate>
         </RadioButton>
