@@ -2,12 +2,14 @@
 using System.IO;
 using System.Linq;
 using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
@@ -15,6 +17,7 @@ using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.WindowsPhone;
 using Catrobat.IDE.WindowsShared.Common;
+using GalaSoft.MvvmLight.Threading;
 
 namespace Catrobat.IDE.WindowsShared
 {
@@ -33,11 +36,24 @@ namespace Catrobat.IDE.WindowsShared
 
             if (e.PreviousExecutionState != ApplicationExecutionState.Running)
             {
-                var extendedSplash = new ExtendedSplash(e.SplashScreen, e.PreviousExecutionState);
+                var file = await StorageFile.GetFileFromApplicationUriAsync(
+                    new Uri("ms-appx:///Assets/SplashScreen.png", UriKind.Absolute));
+                var randomAccessStream = await file.OpenReadAsync();
+
+                var splashImage = new BitmapImage()
+                {
+                    CreateOptions = BitmapCreateOptions.None
+                };
+                await splashImage.SetSourceAsync(randomAccessStream);
+
+
+                var extendedSplash = new ExtendedSplash(e.SplashScreen, e.PreviousExecutionState, splashImage);
                 Window.Current.Content = extendedSplash;
+
+                Window.Current.Activate();
             }
 
-            Window.Current.Activate();
+
         }
 
         private async void OnSuspending(object sender, SuspendingEventArgs e)
@@ -53,7 +69,7 @@ namespace Catrobat.IDE.WindowsShared
         {
             if (args is FileOpenPickerContinuationEventArgs)
             {
-                var pickerArgs = (FileOpenPickerContinuationEventArgs) args;
+                var pickerArgs = (FileOpenPickerContinuationEventArgs)args;
                 var files = pickerArgs.Files;
 
                 if (files.Count == 1)
