@@ -507,12 +507,11 @@ void XMLParser::ParseBrickList(xml_node<> *baseNode, Script *script)
         throw new XMLParserException("<brickList> element missing.");
     }
 
-    xml_node<> *node = brickListNode->first_node();
+    auto node = brickListNode->first_node();
 
     while(node)
     {
-        Brick *current = NULL;
-        bool isContainerBrick = false;
+        Brick *current = nullptr;
 
         if (strcmp(node->name(), Constants::XMLParser::Brick::SetLookBrick.c_str()) == 0)
         {
@@ -557,7 +556,6 @@ void XMLParser::ParseBrickList(xml_node<> *baseNode, Script *script)
         else if(strcmp(node->name(), Constants::XMLParser::Brick::IfLogicBeginBrick.c_str()) == 0)
         {
             current = ParseIfLogicBeginBrick(node, script);
-            isContainerBrick = true;
         }
         else if(strcmp(node->name(), Constants::XMLParser::Brick::IfLogicElseBrick.c_str()) == 0)
         {
@@ -570,7 +568,6 @@ void XMLParser::ParseBrickList(xml_node<> *baseNode, Script *script)
         else if(strcmp(node->name(), Constants::XMLParser::Brick::ForeverBrick.c_str()) == 0)
         {
             current = ParseForeverBrick(node, script);
-            isContainerBrick = true;
         }
         else if(strcmp(node->name(), Constants::XMLParser::Brick::LoopEndlessBrick.c_str()) == 0)
         {
@@ -579,7 +576,6 @@ void XMLParser::ParseBrickList(xml_node<> *baseNode, Script *script)
         else if(strcmp(node->name(), Constants::XMLParser::Brick::RepeatBrick.c_str()) == 0)
         {
             current = ParseRepeatBrick(node, script);
-            isContainerBrick = true;
         }
         else if(strcmp(node->name(), Constants::XMLParser::Brick::LoopEndBrick.c_str()) == 0)
         {
@@ -638,18 +634,24 @@ void XMLParser::ParseBrickList(xml_node<> *baseNode, Script *script)
             current = ParseTurnRightBrick(node, script);
         }
 
-        if (current != NULL)
+        if (current)
         {
-            if (m_containerStack->size() == 0 || isContainerBrick)
+			if (m_containerStack->empty())
+			{
+				// Add to script
+				script->AddBrick(current);
+			}
+			else
             {
-                // Add to script
-                script->AddBrick(current);
-            }
-            else
-            {
-                // Add to If-Brick
+                // Add to container
                 m_containerStack->back()->AddBrick(current);
             }
+
+			if (current->GetBrickType() == Brick::ContainerBrick)
+			{
+				//smash containers into the container stack
+				m_containerStack->push_back(dynamic_cast<ContainerBrick*>(current));
+			}
         }
 
         node = node->next_sibling();
@@ -700,35 +702,29 @@ Brick *XMLParser::ParseShowBrick(xml_node<> *baseNode, Script *script)
 
 Brick *XMLParser::ParseIfLogicBeginBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::IfCondition.c_str());
+    auto node = baseNode->first_node(Constants::XMLParser::Brick::IfCondition.c_str());
 
     if (!node)
     {
         throw new XMLParserException("<ifLogicBeginBrick><ifCondition></ifLogicBeginBrick> element missing.");
     }
 
-    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
-    FormulaTree *condition = NULL;
+    auto formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
+    FormulaTree *condition = nullptr;
 
     if (formulaTreeNode)
     {
         condition = ParseFormulaTree(formulaTreeNode);
     }
 
-    IfBrick *brick = new IfBrick(condition, script);
-
-    // Add to stack
-    m_containerStack->push_back(brick);
+    auto brick = new IfBrick(condition, script);
 
     return brick;
 }
 
 Brick *XMLParser::ParseForeverBrick(xml_node<> *baseNode, Script *script)
 {
-    ForeverBrick *brick = new ForeverBrick(script);
-
-    // Add to stack
-    m_containerStack->push_back(brick);
+    auto brick = new ForeverBrick(script);
 
     return brick;
 }
@@ -744,25 +740,22 @@ void XMLParser::ParseForeverEndBrick(xml_node<> *baseNode, Script *script)
 
 Brick *XMLParser::ParseRepeatBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::TimesToRepeat.c_str());
+    auto node = baseNode->first_node(Constants::XMLParser::Brick::TimesToRepeat.c_str());
 
     if (!node)
     {
         throw new XMLParserException("<repeatBrick><timesToRepeat></repeatBrick> element missing.");
     }
 
-    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
-    FormulaTree *times = NULL;
+    auto formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
+    FormulaTree *times = nullptr;
 
     if (formulaTreeNode)
     {
         times = ParseFormulaTree(formulaTreeNode);
     }
 
-    RepeatBrick *brick = new RepeatBrick(times, script);
-
-    // Add to stack
-    m_containerStack->push_back(brick);
+    auto brick = new RepeatBrick(times, script);
 
     return brick;
 }
@@ -781,7 +774,7 @@ void XMLParser::ParseIfLogicElseBrick(xml_node<> *baseNode, Script *script)
     if (m_containerStack->size() > 0)
     {
         // Change mode
-        ((IfBrick*) (m_containerStack->back()))->SetCurrentAddMode(IfBranchType::Else);
+        (dynamic_cast<IfBrick*>(m_containerStack->back()))->SetCurrentAddMode(IfBranchType::Else);
     }
 }
 

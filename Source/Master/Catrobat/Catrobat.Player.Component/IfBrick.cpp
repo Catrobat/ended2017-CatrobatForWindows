@@ -3,7 +3,7 @@
 #include "Interpreter.h"
 
 IfBrick::IfBrick(FormulaTree *condition, Script *parent) :
-	ContainerBrick(TypeOfBrick::IfBrick, parent), m_condition(condition)
+	ContainerBrick(TypeOfBrick::ContainerBrick, parent), m_condition(condition)
 {
 	m_ifList = new list<Brick*>();
 	m_elseList = new list<Brick*>();
