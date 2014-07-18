@@ -19,6 +19,7 @@
 
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Xaml.Media.Imaging;
 using ToolStackCRCLib;
@@ -151,7 +152,7 @@ namespace ToolStackPNGWriterLib
             }
 
             // Create a 3x1 WriteableBitmap to write RGB colors to.
-            WriteableBitmap TestWB = new WriteableBitmap(3, 1);
+            var TestWB = new WriteableBitmap(3, 1);
 
             //// Create the red 1 pixel rectangle.
             //var redRectangle = new Rectangle();
@@ -247,9 +248,9 @@ namespace ToolStackPNGWriterLib
         /// </summary>
         /// <param name="image">The WriteableBitmap to work on.</param>
         /// <param name="stream">The destination file stream.</param>
-        public static void WritePNG(WriteableBitmap image, System.IO.Stream stream)
+        public async static Task WritePNG(WriteableBitmap image, System.IO.Stream stream)
         {
-            WritePNG(image, stream, -1);
+            await WritePNG(image, stream, -1);
         }
 
         /// <summary>
@@ -258,7 +259,7 @@ namespace ToolStackPNGWriterLib
         /// <param name="image">The WriteableBitmap to work on.</param>
         /// <param name="stream">The destination file stream.</param>
         /// <param name="compression">Level of compression to use (-1=auto, 0=none, 1-100 is percentage).</param>
-        public static void WritePNG(WriteableBitmap image, System.IO.Stream stream, int compression)
+        public async static Task WritePNG(WriteableBitmap image, System.IO.Stream stream, int compression)
         {
             // Set the global class variables for the image and stream.
             _image = image;
@@ -273,47 +274,49 @@ namespace ToolStackPNGWriterLib
                 }, 0, 8);
 
             // Set the PNG header values for this image.
-            PngHeader header = new PngHeader();
-            header.Width = image.PixelWidth;
-            header.Height = image.PixelHeight;
-            header.ColorType = 6;
-            header.BitDepth = 8;
-            header.FilterMethod = 0;
-            header.CompressionMethod = 0;
-            header.InterlaceMethod = 0;
+            var header = new PngHeader
+            {
+                Width = image.PixelWidth,
+                Height = image.PixelHeight,
+                ColorType = 6,
+                BitDepth = 8,
+                FilterMethod = 0,
+                CompressionMethod = 0,
+                InterlaceMethod = 0
+            };
 
             // Write out the header.
-            WriteHeaderChunk(header);
+            await WriteHeaderChunk(header);
             // Write out the rest of the mandatory fields to the PNG.
-            WritePhysicsChunk();
-            WriteGammaChunk();
+            await WritePhysicsChunk();
+            await WriteGammaChunk();
 
             // Currently only uncompressed PNG's are supported, so this if statement really doesn't do anything ;).
             if (compression == -1)
             {
                 // Autodetect compression setting
-                WriteDataChunksUncompressed();
+                await WriteDataChunksUncompressed();
             }
             else if (compression == 0)
             {
                 // Write PNG without any compression
-                WriteDataChunksUncompressed();
+                await WriteDataChunksUncompressed();
             }
             else
             {
                 // Write the PNG with a desired compression level
-                WriteDataChunks(compression);
+                await WriteDataChunks(compression);
             }
 
             // Write out the end of the PNG.
-            WriteEndChunk();
+            await WriteEndChunk();
 
             // Flush the stream to make sure it's all written.
-            stream.Flush();
+            await stream.FlushAsync();
         }
 
 
-        private static void WritePhysicsChunk()
+        private async static Task WritePhysicsChunk()
         {
             int dpmX = (int)Math.Round(DefaultDensityX * 39.3700787d);
             int dpmY = (int)Math.Round(DefaultDensityY * 39.3700787d);
@@ -325,10 +328,10 @@ namespace ToolStackPNGWriterLib
 
             chunkData[8] = 1;
 
-            WriteChunk(PngChunkTypes.Physical, chunkData);
+            await WriteChunk(PngChunkTypes.Physical, chunkData);
         }
 
-        private static void WriteGammaChunk()
+        private async static Task WriteGammaChunk()
         {
             if (IsWritingGamma)
             {
@@ -339,17 +342,17 @@ namespace ToolStackPNGWriterLib
                 byte[] size = BitConverter.GetBytes(gammeValue);
                 fourByteData[0] = size[3]; fourByteData[1] = size[2]; fourByteData[2] = size[1]; fourByteData[3] = size[0];
 
-                WriteChunk(PngChunkTypes.Gamma, fourByteData);
+                await WriteChunk(PngChunkTypes.Gamma, fourByteData);
             }
         }
 
         // Currently only uncompressed PNG are supported, so just call the uncompressed method.
-        private static void WriteDataChunks(int compression)
+        private async static Task WriteDataChunks(int compression)
         {
-            WriteDataChunksUncompressed();
+            await WriteDataChunksUncompressed();
         }
 
-        private static void WriteDataChunksUncompressed()
+        private async static Task WriteDataChunksUncompressed()
         {
             // First setup some variables we're going to use later on so we can calculate how big of byte[] we need 
             // to store the entire PNG file in so we only keep a single copy of the data in memory.
@@ -570,17 +573,17 @@ namespace ToolStackPNGWriterLib
             // but we're done with it now so I'm not going to bother ;)
 
             // Write the entire PNG data chunk out to the file stream.
-            WriteChunk(PngChunkTypes.Data, data, 0, pngLength);
+            await WriteChunk(PngChunkTypes.Data, data, 0, pngLength);
         }
 
-        private static void WriteEndChunk()
+        private async static Task WriteEndChunk()
         {
-            WriteChunk(PngChunkTypes.End, null);
+            await WriteChunk(PngChunkTypes.End, null);
         }
 
-        private static void WriteHeaderChunk(PngHeader header)
+        private async static Task WriteHeaderChunk(PngHeader header)
         {
-            byte[] chunkData = new byte[13];
+            var chunkData = new byte[13];
 
             WriteInteger(chunkData, 0, header.Width);
             WriteInteger(chunkData, 4, header.Height);
@@ -591,18 +594,18 @@ namespace ToolStackPNGWriterLib
             chunkData[11] = header.FilterMethod;
             chunkData[12] = header.InterlaceMethod;
 
-            WriteChunk(PngChunkTypes.Header, chunkData);
+            await WriteChunk(PngChunkTypes.Header, chunkData);
         }
 
-        private static void WriteChunk(string type, byte[] data)
+        private async static Task WriteChunk(string type, byte[] data)
         {
-            WriteChunk(type, data, 0, data != null ? data.Length : 0);
+            await WriteChunk(type, data, 0, data != null ? data.Length : 0);
         }
 
-        private static void WriteChunk(string type, byte[] data, int offset, int length)
+        private async static Task WriteChunk(string type, byte[] data, int offset, int length)
         {
             // Write out the length to the PNG.
-            WriteInteger(_stream, length);
+            await WriteInteger(_stream, length);
 
             // Write the chunck type out to the PNG.
             byte[] typeArray = new byte[4];
@@ -611,12 +614,12 @@ namespace ToolStackPNGWriterLib
             typeArray[2] = (byte)type[2];
             typeArray[3] = (byte)type[3];
 
-            _stream.Write(typeArray, 0, 4);
+            await _stream.WriteAsync(typeArray, 0, 4);
 
             // If we have some data to write out (some chunk types don't), the do so.
             if (data != null)
             {
-                _stream.Write(data, offset, length);
+                await _stream.WriteAsync(data, offset, length);
             }
 
             // All chunk types need to have a CRC32 value at their end to make sure they haven't been currupted.
@@ -628,7 +631,7 @@ namespace ToolStackPNGWriterLib
                 crcCode.addToCRC(data, length, (UInt32)offset);
             }
 
-            WriteInteger(_stream, (uint)crcCode.crc());
+            await WriteInteger(_stream, (uint)crcCode.crc());
         }
 
         private static void WriteInteger(byte[] data, int offset, int value)
@@ -639,22 +642,22 @@ namespace ToolStackPNGWriterLib
             Array.Copy(buffer, 0, data, offset, 4);
         }
 
-        private static void WriteInteger(Stream stream, int value)
+        private async static Task WriteInteger(Stream stream, int value)
         {
             byte[] buffer = BitConverter.GetBytes(value);
 
             Array.Reverse(buffer);
 
-            stream.Write(buffer, 0, 4);
+            await _stream.WriteAsync(buffer, 0, 4);
         }
 
-        private static void WriteInteger(Stream stream, uint value)
+        private async static Task WriteInteger(Stream stream, uint value)
         {
             byte[] buffer = BitConverter.GetBytes(value);
 
             Array.Reverse(buffer);
 
-            stream.Write(buffer, 0, 4);
+            await _stream.WriteAsync(buffer, 0, 4);
         }
     }
 }

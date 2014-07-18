@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Catrobat.IDE.Core.Annotations;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.Utilities.Helpers;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Catrobat.IDE.Core.Annotations;
-using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.UI.PortableUI
 {
@@ -16,9 +16,9 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         private int _width;
         private int _height;
         private object _nativeImageSource;
-        private MemoryStream _encodedData;
+        private Stream _encodedData;
 
-        public MemoryStream EncodedData
+        public Stream EncodedData
         {
             get { return _encodedData; }
             set
@@ -53,7 +53,7 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                     return ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStream(null);
 
                 if (EncodedData != null && _nativeImageSource == null)
-                    _nativeImageSource = ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStream(EncodedData);
+                    _nativeImageSource = ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStream((MemoryStream)EncodedData);
 
                 if (_nativeImageSource != null)
                     return _nativeImageSource;

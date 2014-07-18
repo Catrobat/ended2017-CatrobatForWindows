@@ -44,10 +44,10 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public async Task<PortableImage> ResizeImage(PortableImage image, int newWidth, int newHeight)
         {
-            BitmapDecoder decoder = await BitmapDecoder.CreateAsync(image.EncodedData.AsRandomAccessStream());
+            BitmapDecoder decoder = await BitmapDecoder.CreateAsync(((Stream)image.EncodedData).AsRandomAccessStream());
 
-            var memoryStream = new InMemoryRandomAccessStream();
-            BitmapEncoder encoder = await BitmapEncoder.CreateForTranscodingAsync(memoryStream, decoder);
+            var memoryRandomAccessStream = new InMemoryRandomAccessStream();
+            BitmapEncoder encoder = await BitmapEncoder.CreateForTranscodingAsync(memoryRandomAccessStream, decoder);
 
             encoder.BitmapTransform.ScaledHeight = (uint)newHeight;
             encoder.BitmapTransform.ScaledWidth = (uint)newWidth;
@@ -75,12 +75,14 @@ namespace Catrobat.IDE.WindowsShared.Services
             }
 
             var writeableBitmap = new WriteableBitmap(newWidth, newHeight);
-            writeableBitmap.SetSourceAsync(memoryStream);
+            writeableBitmap.SetSourceAsync(memoryRandomAccessStream);
+            memoryRandomAccessStream.Seek(0);
 
             return new PortableImage(writeableBitmap)
             {
                 Width = newWidth,
-                Height = newHeight
+                Height = newHeight,
+                EncodedData = memoryRandomAccessStream.AsStream()
             };
         }
     }
