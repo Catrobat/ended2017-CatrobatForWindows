@@ -22,12 +22,12 @@ namespace Catrobat.IDE.Core
 
         public static async Task<XmlProject> LoadXmlProjectByNameStatic(string projectName)
         {
-            if (Debugger.IsAttached)
-            {
-                return await LoadNewProjectByNameStaticWithoutTryCatch(projectName);
-            }
-            else
-            {
+            //if (Debugger.IsAttached)
+            //{
+            //    return await LoadNewProjectByNameStaticWithoutTryCatch(projectName);
+            //}
+            //else
+            //{
                 try
                 {
                     return await LoadNewProjectByNameStaticWithoutTryCatch(projectName);
@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Core
                 {
                     return null;
                 }
-            }
+            //}
         }
 
         private static async Task<XmlProject> LoadNewProjectByNameStaticWithoutTryCatch(string projectName)
