@@ -13,7 +13,6 @@ using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -37,20 +36,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private ObservableCollection<ProjectDummyHeader> _localProjects;
         private CatrobatContextBase _context;
         private ObservableCollection<OnlineProjectHeader> _onlineProjects;
-        private ProjectDummyHeader _selectdLocalProject;
         private CancellationTokenSource _taskCancellation;
 
         #endregion
 
         #region Properties
-
-        public bool IsMemoryMonitorEnabled
-        {
-            get
-            {
-                return Debugger.IsAttached; // TODO: check why memory monitor is not workin if not in debug mode and use this:  Context.LocalSettings.IsInDevelopingMode;
-            }
-        }
 
         public CatrobatContextBase Context
         {
@@ -87,11 +77,14 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        public ProjectDummyHeader PinProjectHeader { get; set; }
 
+        private bool first = true;
         public ObservableCollection<ProjectDummyHeader> LocalProjects
         {
-            get { return _localProjects; }
+            get
+            {
+                    return _localProjects;
+            }
             set
             {
                 _localProjects = value;
@@ -100,17 +93,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         }
 
         public OnlineProjectHeader SelectedOnlineProject { get; set; }
-
-        public ProjectDummyHeader SelectedLocalProject
-        {
-            get { return _selectdLocalProject; }
-            set
-            {
-                _selectdLocalProject = value;
-                RaisePropertyChanged(() => SelectedLocalProject);
-            }
-        }
-
 
         public ObservableCollection<OnlineProjectHeader> OnlineProjects
         {
@@ -188,9 +170,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void OpenProjectCommandAction(ProjectDummyHeader project)
         {
-            if (project == null)
-                project = SelectedLocalProject;
-
             var message = new GenericMessage<ProjectDummyHeader>(project);
             Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
 
@@ -199,9 +178,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void DeleteLocalProjectAction(string projectName)
         {
-            if (projectName == null)
-                projectName = SelectedLocalProject.ProjectName;
-
             _deleteProjectName = projectName;
 
             ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_MainDeleteProjectDialogTitle,
@@ -210,63 +186,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void CopyLocalProjectAction(string projectName)
         {
-            if (projectName == null)
-                projectName = SelectedLocalProject.ProjectName;
-
             _copyProjectName = projectName;
 
             ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_MainCopyProjectDialogTitle,
                 String.Format(AppResources.Main_MainCopyProjectDialogMessage, projectName), CopyProjectMessageCallback, MessageBoxOptions.OkCancel);
         }
-
-        //private void LazyLoadOnlineProjectsAction()
-        //{
-        //    LoadOnlineProjects(true);
-        //}
-
-
-        //private async void SetCurrentProjectAction(string projectName)
-        //{
-        //    lock (CurrentProject)
-        //    {
-        //        if (IsActivatingLocalProject)
-        //            return;
-
-        //        IsActivatingLocalProject = true;
-        //    }
-
-        //    var minLoadingTime = new TimeSpan(0, 0, 0, 0, 500);
-        //    DateTime startTime = DateTime.UtcNow;
-
-        //    await CurrentProject.Save();
-        //    var newProject = await CatrobatContext.LoadNewProjectByNameStatic(projectName);
-
-        //    if (newProject != null)
-        //    {
-        //        CurrentProject = newProject;
-
-        //        var minWaitingTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
-
-        //        if (minWaitingTimeRemaining >= new TimeSpan(0))
-        //            Task.Delay(minWaitingTimeRemaining).Wait();
-        //        //Thread.Sleep(minWaitingTimeRemaining);
-
-        //        IsActivatingLocalProject = false;
-        //    }
-        //    else
-        //    {
-        //        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_SelectedProjectNotValidMessage,
-        //            String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName), delegate
-        //            {
-        //                ServiceLocator.DispatcherService.RunOnMainThread(() =>
-        //                {
-        //                    IsActivatingLocalProject = false;
-        //                });
-        //            }, MessageBoxOptions.Ok);
-        //    }
-
-        //    await App.SaveContext(CurrentProject);
-        //}
 
         private void CreateNewProjectAction()
         {
@@ -570,7 +494,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                             exists = true;
                     }
 
-                    if (!exists) // && projectName != CurrentProject.ProjectDummyHeader.ProjectName
+                    if (!exists)
                     {
                         var manualScreenshotPath = Path.Combine(
                             CatrobatContextBase.ProjectsPath, projectName, Project.ScreenshotPath);
@@ -596,36 +520,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 {
                     _localProjects.Insert(0, project);
                 }
-
-                //foreach (string projectName in projectNames)
-                //{
-                //    if (projectName != CurrentProject.ProjectHeader.ProgramName)
-                //    {
-                //        var manualScreenshotPath = Path.Combine(
-                //            CatrobatContextBase.ProjectsPath, projectName, Project.ScreenshotPath);
-                //        var automaticProjectScreenshotPath = Path.Combine(
-                //            CatrobatContextBase.ProjectsPath, projectName, Project.AutomaticScreenshotPath);
-
-                //        var projectScreenshot = new PortableImage();
-                //        projectScreenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);
-
-
-                //        var projectHeader = new ProjectDummyHeader
-                //        {
-                //            ProjectName = projectName,
-                //            Screenshot = projectScreenshot
-                //        };
-                //        projects.Add(projectHeader);
-                //    }
-                //}
-                //projects.Sort();
-                //foreach (ProjectDummyHeader header in projects)
-                //{
-                //    _localProjects.Add(header);
-                //}
             }
-
-            RaisePropertyChanged(() => LocalProjects);
         }
     }
 }

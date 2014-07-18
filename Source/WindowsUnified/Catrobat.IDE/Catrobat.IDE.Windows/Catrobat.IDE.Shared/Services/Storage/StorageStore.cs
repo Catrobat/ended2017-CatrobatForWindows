@@ -18,7 +18,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
 {
     public class StorageStore : IStorage
     {
-        private static int _imageThumbnailDefaultMaxWidthHeight = 400;
+        private static int _imageThumbnailDefaultMaxWidthHeight = 200;
         private readonly List<Stream> _openedStreams = new List<Stream>();
 
         #region Synchron
@@ -448,32 +448,33 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                     if (fullSizePortableImage != null)
                     {
                         var thumbnailImage = await ServiceLocator.ImageResizeService.ResizeImage(fullSizePortableImage,
-                            _imageThumbnailDefaultMaxWidthHeight);
+                          _imageThumbnailDefaultMaxWidthHeight);
                         retVal = thumbnailImage;
 
-                        try
-                        {
-                            var bitmap = ((WriteableBitmap)thumbnailImage.ImageSource);
-                            const int resolution = 100;
+                        await thumbnailImage.WriteAsPng(thumbnailPath);
 
-                            var fileStream = await OpenFileAsync(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
+                        //try
+                        //{
+                        //    var bitmap = ((WriteableBitmap)thumbnailImage.ImageSource);
+                        //    const int resolution = 100;
 
-                            var encoderId = BitmapEncoder.PngEncoderId;
-                            var encoder = await BitmapEncoder.CreateAsync(encoderId, fileStream.AsRandomAccessStream());
-                            encoder.SetPixelData(BitmapPixelFormat.Bgra8,
-                                                                 BitmapAlphaMode.Straight,
-                                                                 (uint)bitmap.PixelWidth,
-                                                                 (uint)bitmap.PixelHeight,
-                                                                 resolution,
-                                                                 resolution,
-                                                                 bitmap.ToByteArray());
-                            await encoder.FlushAsync();
-                        }
+                        //    var fileStream = await OpenFileAsync(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
 
-                        catch
-                        {
-                            retVal = null;
-                        }
+                        //    var encoderId = BitmapEncoder.PngEncoderId;
+                        //    var encoder = await BitmapEncoder.CreateAsync(encoderId, fileStream.AsRandomAccessStream());
+                        //    encoder.SetPixelData(BitmapPixelFormat.Bgra8,
+                        //                         BitmapAlphaMode.Straight,
+                        //                         (uint)bitmap.PixelWidth,
+                        //                         (uint)bitmap.PixelHeight,
+                        //                         resolution,
+                        //                         resolution,
+                        //                         bitmap.ToByteArray());
+                        //    await encoder.FlushAsync();
+                        //}
+                        //catch
+                        //{
+                        //    retVal = null;
+                        //}
                     }
                 }
             }
@@ -518,15 +519,23 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                         if (image.EncodedData != null)
                             await image.EncodedData.CopyToAsync(stream);
                         else
-                            PNGWriter.WritePNG((WriteableBitmap)image.ImageSource, stream, 95);
+                            await ((WriteableBitmap)image.ImageSource).ToStreamAsJpeg(stream.AsRandomAccessStream());
+                            //throw new NotImplementedException();
+                            //PNGWriter.WritePNG((WriteableBitmap) image.ImageSource, stream, 95);
                         break;
                     case ImageFormat.Jpg:
-                        throw new NotImplementedException();
+                        await ((WriteableBitmap) image.ImageSource).ToStreamAsJpeg(stream.AsRandomAccessStream());
                         //((WriteableBitmap)image.ImageSource).SaveJpeg(stream, image.Width, image.Height, 0, 95);
+                        //throw new NotImplementedException();
+                        
                         break;
                     default:
                         throw new ArgumentOutOfRangeException("format");
                 }
+            }
+            catch (Exception exc)
+            {
+                throw;
             }
             finally
             {

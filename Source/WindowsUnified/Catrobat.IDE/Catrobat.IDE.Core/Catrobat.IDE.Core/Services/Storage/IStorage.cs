@@ -30,53 +30,53 @@ namespace Catrobat.IDE.Core.Services.Storage
 
     public interface IStorage : IDisposable
     {
-        #region Synchron
+        //#region Synchron
 
-        void CreateDirectory(string path);
+        //void CreateDirectory(string path);
 
-        bool DirectoryExists(string path);
+        //bool DirectoryExists(string path);
 
-        bool FileExists(string path);
+        //bool FileExists(string path);
 
-        string[] GetDirectoryNames(string path);
+        //string[] GetDirectoryNames(string path);
 
-        string[] GetFileNames(string path);
+        //string[] GetFileNames(string path);
 
-        void DeleteDirectory(string path);
+        //void DeleteDirectory(string path);
 
-        void DeleteFile(string path);
+        //void DeleteFile(string path);
 
-        void CopyDirectory(string sourcePath, string destinationPath);
+        //void CopyDirectory(string sourcePath, string destinationPath);
 
-        void MoveDirectory(string sourcePath, string destinationPath);
+        //void MoveDirectory(string sourcePath, string destinationPath);
 
-        void CopyFile(string sourcePath, string destinationPath);
+        //void CopyFile(string sourcePath, string destinationPath);
 
-        void MoveFile(string sourcePath, string destinationPath);
+        //void MoveFile(string sourcePath, string destinationPath);
 
-        Stream OpenFile(string path, StorageFileMode mode, StorageFileAccess access);
+        //Stream OpenFile(string path, StorageFileMode mode, StorageFileAccess access);
 
-        void RenameDirectory(string directoryPath, string newDirectoryName);
+        //void RenameDirectory(string directoryPath, string newDirectoryName);
 
-        PortableImage LoadImage(string pathToImage);
+        //PortableImage LoadImage(string pathToImage);
 
-        PortableImage LoadImageThumbnail(string pathToImage);
+        //PortableImage LoadImageThumbnail(string pathToImage);
 
-        PortableImage CreateThumbnail(PortableImage image);
+        //PortableImage CreateThumbnail(PortableImage image);
 
-        void DeleteImage(string pathToImage);
+        //void DeleteImage(string pathToImage);
 
-        void SaveImage(string path, PortableImage image, bool deleteExisting, ImageFormat format);
+        //void SaveImage(string path, PortableImage image, bool deleteExisting, ImageFormat format);
 
-        string ReadTextFile(string path);
+        //string ReadTextFile(string path);
 
-        void WriteTextFile(string path, string content);
+        //void WriteTextFile(string path, string content);
 
-        object ReadSerializableObject(string path, Type type);
+        //object ReadSerializableObject(string path, Type type);
 
-        void WriteSerializableObject(string path, object serializableObject);
+        //void WriteSerializableObject(string path, object serializableObject);
 
-        #endregion
+        //#endregion
 
         #region Async
 

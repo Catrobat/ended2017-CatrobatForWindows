@@ -15,15 +15,15 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
 
             if (minDimension <= 700)
             {
-                storage.SetImageMaxThumbnailWidthHeight(300);
+                storage.SetImageMaxThumbnailWidthHeight(200);
             }
             else if (minDimension <= 1400)
             {
-                storage.SetImageMaxThumbnailWidthHeight(500);
+                storage.SetImageMaxThumbnailWidthHeight(400);
             }
             else
             {
-                storage.SetImageMaxThumbnailWidthHeight(700);
+                storage.SetImageMaxThumbnailWidthHeight(600);
             }
 
             return storage;
