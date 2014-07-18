@@ -4,17 +4,12 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      mc:Ignorable="d" 
-      d:DesignWidth="480" d:DesignHeight="768">
+      mc:Ignorable="d">
 
-  <Grid.RowDefinitions>
-    <RowDefinition/>
-    <RowDefinition Height="180"/>
-  </Grid.RowDefinitions>
-
-  <Viewbox Grid.Row="0" Grid.RowSpan="2" Stretch="Uniform">
-    <Image x:Name="ExtendedSplashImage" Source="/Assets/SplashScreen.png"/>
-  </Viewbox>
+  <Image x:Name="ExtendedSplashImage"/>
+  <!--<Viewbox Grid.Row="0" Stretch="Uniform">
+    
+  </Viewbox>-->
   <ProgressRing Background="Transparent" Grid.Row="0" Margin="0 380 0 0" IsActive="True" Width="40" Height="40" 
                 VerticalAlignment="Center" HorizontalAlignment="Center"/>
 </Grid>

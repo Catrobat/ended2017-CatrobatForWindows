@@ -6,11 +6,8 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.Utilities.JSON;
-using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.Core.ViewModels.Settings;
-using Catrobat.IDE.Core.ViewModels.Share;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
@@ -33,7 +30,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private string _filterText = "";
         private string _previousFilterText = "";
         private bool _isLoadingOnlineProjects;
-        private bool _isActivatingLocalProject;
         private MessageboxResult _dialogResult;
         private string _deleteProjectName;
         private string _copyProjectName;
@@ -88,13 +84,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 _currentProject = value;
 
                 RaisePropertyChanged(() => CurrentProject);
-                UpdateLocalProjects();
-
-                var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
-                Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
-
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
             }
         }
 
@@ -166,138 +155,46 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             set { _isLoadingOnlineProjects = value; RaisePropertyChanged(() => IsLoadingOnlineProjects); }
         }
 
-        public bool IsActivatingLocalProject
-        {
-            get
-            {
-                return _isActivatingLocalProject;
-            }
-            set
-            {
-                _isActivatingLocalProject = value;
-                RaisePropertyChanged(() => IsActivatingLocalProject);
-            }
-        }
-
         #endregion
 
         #region Commands
 
-        public ICommand RenameLocalProjectCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand OpenProjectCommand { get; private set; }
 
-        public ICommand DeleteLocalProjectCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand DeleteLocalProjectCommand { get; private set; }
 
-        public ICommand CopyLocalProjectCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand CopyLocalProjectCommand { get; private set; }
 
-        public ICommand PinLocalProjectCommand
-        {
-            get;
-            private set;
-        }
 
-        public ICommand ShareLocalProjectCommand
-        {
-            get;
-            private set;
-        }
+        //public ICommand LazyLoadOnlineProjectsCommand { get; private set; }
 
-        //public ICommand LazyLoadOnlineProjectsCommand
-        //{
-        //    get;
-        //    private set;
-        //}
+        public ICommand CreateNewProjectCommand { get; private set; }
 
-        public ICommand SetCurrentProjectCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand SettingsCommand { get; private set; }
 
-        public ICommand CreateNewProjectCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand OnlineProjectTapCommand { get; private set; }
 
-        public ICommand EditCurrentProjectCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand ShowMessagesCommand { get; private set; }
 
-        public ICommand SettingsCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand LicenseCommand { get; private set; }
 
-        public ICommand OnlineProjectTapCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand AboutCommand { get; private set; }
 
-        public ICommand PlayCurrentProjectCommand
-        {
-            get;
-            private set;
-        }
-
-        public ICommand UploadCurrentProjectCommand
-        {
-            get;
-            private set;
-        }
-
-        public ICommand ShowMessagesCommand
-        {
-            get;
-            private set;
-        }
-
-        public ICommand LicenseCommand
-        {
-            get;
-            private set;
-        }
-
-        public ICommand AboutCommand
-        {
-            get;
-            private set;
-        }
-
-        public ICommand MSRLCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand MSRLCommand { get; private set; }
 
         #endregion
 
         #region Actions
 
-        private void RenameLocalProjectAction(ProjectDummyHeader project)
+        private void OpenProjectCommandAction(ProjectDummyHeader project)
         {
             if (project == null)
                 project = SelectedLocalProject;
 
             var message = new GenericMessage<ProjectDummyHeader>(project);
-            Messenger.Default.Send(message, ViewModelMessagingToken.ChangeLocalProjectListener);
+            Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo<ProjectSettingsViewModel>();
+            ServiceLocator.NavigationService.NavigateTo<ProjectDetailViewModel>();
         }
 
         private void DeleteLocalProjectAction(string projectName)
@@ -322,92 +219,58 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 String.Format(AppResources.Main_MainCopyProjectDialogMessage, projectName), CopyProjectMessageCallback, MessageBoxOptions.OkCancel);
         }
 
-        private void PinLocalProjectAction(ProjectDummyHeader project)
-        {
-            if (project == null)
-                project = SelectedLocalProject;
-
-            PinProjectHeader = project;
-
-            var message = new GenericMessage<ProjectDummyHeader>(PinProjectHeader);
-            Messenger.Default.Send(message, ViewModelMessagingToken.PinProjectHeaderListener);
-
-            ServiceLocator.NavigationService.NavigateTo<TileGeneratorViewModel>();
-        }
-
-        private async void ShareLocalProjectAction(ProjectDummyHeader project)
-        {
-            if (project == null)
-                project = SelectedLocalProject;
-
-            if (CurrentProject.ProjectDummyHeader == project)
-                await CurrentProject.Save();
-
-            PinProjectHeader = project;
-
-            var message = new GenericMessage<ProjectDummyHeader>(PinProjectHeader);
-            Messenger.Default.Send(message, ViewModelMessagingToken.ShareProjectHeaderListener);
-
-            ServiceLocator.NavigationService.NavigateTo<ShareProjectServiceSelectionViewModel>();
-        }
-
         //private void LazyLoadOnlineProjectsAction()
         //{
         //    LoadOnlineProjects(true);
         //}
 
 
-        private async void SetCurrentProjectAction(string projectName)
-        {
-            lock (CurrentProject)
-            {
-                if (IsActivatingLocalProject)
-                    return;
+        //private async void SetCurrentProjectAction(string projectName)
+        //{
+        //    lock (CurrentProject)
+        //    {
+        //        if (IsActivatingLocalProject)
+        //            return;
 
-                IsActivatingLocalProject = true;
-            }
+        //        IsActivatingLocalProject = true;
+        //    }
 
-            var minLoadingTime = new TimeSpan(0, 0, 0, 0, 500);
-            DateTime startTime = DateTime.UtcNow;
+        //    var minLoadingTime = new TimeSpan(0, 0, 0, 0, 500);
+        //    DateTime startTime = DateTime.UtcNow;
 
-            await CurrentProject.Save();
-            var newProject = await CatrobatContext.LoadNewProjectByNameStatic(projectName);
+        //    await CurrentProject.Save();
+        //    var newProject = await CatrobatContext.LoadNewProjectByNameStatic(projectName);
 
-            if (newProject != null)
-            {
-                CurrentProject = newProject;
+        //    if (newProject != null)
+        //    {
+        //        CurrentProject = newProject;
 
-                var minWaitingTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
+        //        var minWaitingTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
 
-                if (minWaitingTimeRemaining >= new TimeSpan(0))
-                    Task.Delay(minWaitingTimeRemaining).Wait();
-                //Thread.Sleep(minWaitingTimeRemaining);
+        //        if (minWaitingTimeRemaining >= new TimeSpan(0))
+        //            Task.Delay(minWaitingTimeRemaining).Wait();
+        //        //Thread.Sleep(minWaitingTimeRemaining);
 
-                IsActivatingLocalProject = false;
-            }
-            else
-            {
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_SelectedProjectNotValidMessage,
-                    String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName), delegate
-                    {
-                        ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                        {
-                            IsActivatingLocalProject = false;
-                        });
-                    }, MessageBoxOptions.Ok);
-            }
+        //        IsActivatingLocalProject = false;
+        //    }
+        //    else
+        //    {
+        //        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_SelectedProjectNotValidMessage,
+        //            String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName), delegate
+        //            {
+        //                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+        //                {
+        //                    IsActivatingLocalProject = false;
+        //                });
+        //            }, MessageBoxOptions.Ok);
+        //    }
 
-            await App.SaveContext(CurrentProject);
-        }
+        //    await App.SaveContext(CurrentProject);
+        //}
 
         private void CreateNewProjectAction()
         {
             ServiceLocator.NavigationService.NavigateTo<AddNewProjectViewModel>();
-        }
-
-        private void EditCurrentProjectAction()
-        {
-            ServiceLocator.NavigationService.NavigateTo<SpritesViewModel>();
         }
 
         private void SettingsAction()
@@ -419,36 +282,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             SelectedOnlineProject = project;
             ServiceLocator.NavigationService.NavigateTo<OnlineProjectViewModel>();
-        }
-
-        private void PlayCurrentProjectAction()
-        {
-            ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject);
-        }
-
-        private async void UploadCurrentProjectAction()
-        {
-            ServiceLocator.NavigationService.NavigateTo<UploadProjectLoadingViewModel>();
-
-            // Determine which page to open
-            JSONStatusResponse status_response = await CatrobatWebCommunicationService.AsyncCheckToken(Context.CurrentUserName, Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
-
-            if (status_response.statusCode == StatusCodes.ServerResponseOk)
-            {
-                ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                {
-                    ServiceLocator.NavigationService.NavigateTo<UploadProjectViewModel>();
-                    ServiceLocator.NavigationService.RemoveBackEntry();
-                });
-            }
-            else
-            {
-                ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                {
-                    ServiceLocator.NavigationService.NavigateTo<UploadProjectLoginViewModel>();
-                    ServiceLocator.NavigationService.RemoveBackEntry();
-                });
-            }
         }
 
         private void LicenseAction()
@@ -517,7 +350,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             _showUploadMessage = true;
         }
 
-        private void ContextChangedAction(GenericMessage<CatrobatContextBase> message)
+        private void ContextChangedMessageAction(GenericMessage<CatrobatContextBase> message)
         {
             Context = message.Content;
             if (Context is CatrobatContextDesign)
@@ -529,7 +362,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
         {
-            CurrentProject = message.Content;
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                CurrentProject = message.Content;
+            });
         }
 
         #endregion
@@ -538,19 +374,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             _onlineProjects = new ObservableCollection<OnlineProjectHeader>();
 
-            RenameLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(RenameLocalProjectAction);
+            OpenProjectCommand = new RelayCommand<ProjectDummyHeader>(OpenProjectCommandAction);
             DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProjectAction);
             CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
-            PinLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(PinLocalProjectAction);
-            ShareLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(ShareLocalProjectAction);
             //LazyLoadOnlineProjectsCommand = new RelayCommand(LazyLoadOnlineProjectsAction);
-            SetCurrentProjectCommand = new RelayCommand<string>(SetCurrentProjectAction);
             OnlineProjectTapCommand = new RelayCommand<OnlineProjectHeader>(OnlineProjectTapAction);
             SettingsCommand = new RelayCommand(SettingsAction);
             CreateNewProjectCommand = new RelayCommand(CreateNewProjectAction);
-            EditCurrentProjectCommand = new RelayCommand(EditCurrentProjectAction);
-            PlayCurrentProjectCommand = new RelayCommand(PlayCurrentProjectAction);
-            UploadCurrentProjectCommand = new RelayCommand(UploadCurrentProjectAction);
             ShowMessagesCommand = new RelayCommand(ShowMessagesAction);
             LicenseCommand = new RelayCommand(LicenseAction);
             AboutCommand = new RelayCommand(AboutAction);
@@ -567,7 +397,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                ViewModelMessagingToken.UploadProjectStartedListener, UploadProjectStartedMessageAction);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
-               ViewModelMessagingToken.ContextListener, ContextChangedAction);
+               ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
@@ -590,16 +420,19 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                 if (CurrentProject.Name == _deleteProjectName)
                 {
-                    if (LocalProjects.Count > 0)
-                    {
-                        var projectName = LocalProjects[0].ProjectName;
-                        CurrentProject = await CatrobatContext.LoadNewProjectByNameStatic(projectName);
-                    }
-                    else
-                        CurrentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+                    var projectChangedMessage = new GenericMessage<Project>(null);
+                    Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+
+                    //if (LocalProjects.Count > 0)
+                    //{
+                    //    var projectName = LocalProjects[0].ProjectName;
+                    //    CurrentProject = await CatrobatContext.LoadNewProjectByNameStatic(projectName);
+                    //}
+                    //else
+                    //    CurrentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
                 }
-                else
-                    await UpdateLocalProjects();
+
+                await UpdateLocalProjects();
 
 
                 _deleteProjectName = null;
@@ -686,11 +519,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private async Task UpdateLocalProjects()
         {
             if (IsInDesignMode) return;
-
-            if (CurrentProject == null)
-            {
-                return;
-            }
 
             if (_localProjects == null)
             {

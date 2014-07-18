@@ -1,0 +1,35 @@
+﻿namespace Catrobat.IDE.Core.ViewModels
+{
+    public enum ViewModelMessagingToken
+    {
+        LoadSettings,
+        SaveSettings,
+        CostumeListener,
+        SoundNameListener,
+        CurrentSpriteChangedListener,
+        SpriteNameListener,
+        //SpriteListListener,
+        //ProjectNameListener,
+        BroadcastObjectListener,
+        BroadcastMessageListener,
+        ScriptBrickCollectionListener,
+        SelectedBrickListener,
+        CurrentProjectChangedListener,
+        LocalProjectsChangedListener,
+        ContextListener,
+        ThemeChooserListener,
+        PinProjectHeaderListener,
+        DownloadProjectStartedListener,
+        UploadProjectStartedListener,
+        SelectedUserVariableChangedListener,
+        ShareProjectHeaderListener,
+        ChangeLocalProjectListener,
+        CostumeImageListener,
+        CostumeImageToSaveListener,
+        ScriptBrickCategoryListener,
+        SoundStreamListener,
+        PlayProjectNameListener,
+        IsPlayerStartFromTileListener,
+        FormulaEvaluated
+    }
+}

@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="TFSBuild|ARM">
+      <Configuration>TFSBuild</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="TFSBuild|Win32">
+      <Configuration>TFSBuild</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{c0ced763-9e71-4ca7-9def-ce037453ad52}</ProjectGuid>
+    <RootNamespace>PlayerWindowsPhone8Test</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <XapOutputs>true</XapOutputs>
+    <XapFilename>PlayerWindowsPhone8Test_$(Configuration)_$(Platform).xap</XapFilename>
+    <WinMDAssembly>true</WinMDAssembly>
+    <TestApplication>true</TestApplication>
+    <SccProjectName>SAK</SccProjectName>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccProvider>SAK</SccProvider>
+    <ProjectName>Catrobat.Player.Phone.Tests</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110_wp80</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TFSBuild|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110_wp80</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110_wp80</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TFSBuild|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110_wp80</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110_wp80</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110_wp80</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\Catrobat.Player.DirectXToolkit\Inc;$(ProjectDir)\..\FMOD\inc;$(ProjectDir)\..\FMOD\lib;$(VCInstallDir)UnitTest\WindowsPhone\include;$(ProjectDir);$(IntermediateOutputPath);$(ProjectDir)\..\Catrobat.Player.Component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAsWinRT>true</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\WindowsPhone\lib;$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='TFSBuild|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\Catrobat.Player.DirectXToolkit\Inc;$(ProjectDir)\..\FMOD\inc;$(ProjectDir)\..\FMOD\lib;$(VCInstallDir)UnitTest\WindowsPhone\include;$(ProjectDir);$(IntermediateOutputPath);$(ProjectDir)\..\Catrobat.Player.Component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAsWinRT>true</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\WindowsPhone\lib;$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\Catrobat.Player.DirectXToolkit\Inc;$(ProjectDir)\..\FMOD\inc;$(ProjectDir)\..\FMOD\lib;$(VCInstallDir)UnitTest\WindowsPhone\include;$(ProjectDir);$(IntermediateOutputPath);$(ProjectDir)\..\Catrobat.Player.Component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAsWinRT>true</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\WindowsPhone\lib;$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <ClCompile>
+      <PreprocessorDefinitions>PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\Catrobat.Player.DirectXToolkit\Inc;$(ProjectDir)\..\FMOD\inc;$(ProjectDir)\..\FMOD\lib;$(VCInstallDir)UnitTest\WindowsPhone\include;$(ProjectDir);$(IntermediateOutputPath);$(ProjectDir)\..\Catrobat.Player.Component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAsWinRT>true</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\WindowsPhone\lib;$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='TFSBuild|ARM'">
+    <ClCompile>
+      <PreprocessorDefinitions>PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\Catrobat.Player.DirectXToolkit\Inc;$(ProjectDir)\..\FMOD\inc;$(ProjectDir)\..\FMOD\lib;$(VCInstallDir)UnitTest\WindowsPhone\include;$(ProjectDir);$(IntermediateOutputPath);$(ProjectDir)\..\Catrobat.Player.Component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAsWinRT>true</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\WindowsPhone\lib;$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <PreprocessorDefinitions>PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\WindowsPhone\include;$(ProjectDir);$(IntermediateOutputPath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAsWinRT>true</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\WindowsPhone\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="platform.winmd">
+      <IsWinMDFile>true</IsWinMDFile>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\ApplicationIcon.png" />
+    <Image Include="Assets\AlignmentGrid.png" />
+    <Image Include="Assets\Tiles\FlipCycleTileLarge.png" />
+    <Image Include="Assets\Tiles\FlipCycleTileMedium.png" />
+    <Image Include="Assets\Tiles\FlipCycleTileSmall.png" />
+    <Image Include="Assets\Tiles\IconicTileMediumLarge.png" />
+    <Image Include="Assets\Tiles\IconicTileSmall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="testFiles\BroadcastTest.xml" />
+    <Xml Include="testFiles\HeaderTest.xml" />
+    <Xml Include="testFiles\ObjectListTest1.xml" />
+    <Xml Include="testFiles\ObjectListTest2.xml" />
+    <Xml Include="testFiles\CompassTest.xml" />
+    <Xml Include="testFiles\ForeverTest.xml" />
+    <Xml Include="testFiles\GlobalVariableReferencesTest.xml" />
+    <Xml Include="testFiles\IfLogicBeginTest.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="testFiles\LocalVariableReferencesTest.xml" />
+    <Xml Include="testFiles\LookReferencesTest.xml" />
+    <Xml Include="testFiles\ObjectReferencesTest.xml" />
+    <Xml Include="testFiles\PointToTest.xml" />
+    <Xml Include="testFiles\RepeatTest.xml" />
+    <Xml Include="testFiles\SoundReferencesTest.xml" />
+    <Xml Include="WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <None Include="TestApp.dll">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="AppManifest.xaml">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Catrobat.Player.Component\AccelerometerProvider.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\BaseException.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\BaseObject.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\BasicTimer.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\Brick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\BroadcastBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\BroadcastMessageDaemon.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\BroadcastMessageListener.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\BroadcastMessageSender.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\BroadcastScript.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\CatrobatTexture.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\ChangeGhostEffectByBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\ChangeSizeByBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\ChangeVariableBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\ChangeXByBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\ChangeYByBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\CompassProvider.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\Constants.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\ContainerBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\CostumeBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\DDSLoader.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\DeviceInformation.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\Direct3DBase.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\Direct3DContentProvider.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\DirectXHelper.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\ExceptionLogger.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\ForeverBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\FormulaTree.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\FormulaTreeException.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\FormulaTreeFatalException.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\GlideToBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\Helper.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\HideBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\IfBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\InclinationProvider.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\Interpreter.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\lodepng.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\lodepng_util.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\Look.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\LoudnessCapture.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\NextLookBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\Object.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\ObjectList.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\pch.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\PlaceAtBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\PlayerException.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\PlayerWindowsPhone8Component.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\PlaySoundBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\PointToBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\Project.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\ProjectDaemon.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\ProjectRenderer.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\Renderer.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\RepeatBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\Script.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\ScriptHandler.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\SetGhostEffectBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\SetSizeToBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\SetVariableBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\SetXBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\SetYBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\ShowBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\Sound.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\SoundInfo.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\SoundManager.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\StartScript.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\TextureDaemon.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\TurnLeftBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\TurnRightBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\UserVariable.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\VariableManagementBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\WaitBrick.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\WASAPIAudio.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\WhenScript.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\XMLParser.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\XMLParserException.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\XMLParserFatalException.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\XMLParserSevereException.h" />
+    <ClInclude Include="TestHelper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Catrobat.Player.Component\AccelerometerProvider.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\BaseException.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\BaseObject.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\Brick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\BroadcastBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\BroadcastMessageDaemon.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\BroadcastMessageListener.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\BroadcastMessageSender.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\BroadcastScript.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\CatrobatTexture.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\ChangeGhostEffectByBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\ChangeSizeByBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\ChangeVariableBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\ChangeXByBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\ChangeYByBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\CompassProvider.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\ContainerBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\CostumeBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\DDSLoader.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\DeviceInformation.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\Direct3DBase.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\Direct3DContentProvider.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\ExceptionLogger.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\ForeverBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\FormulaTree.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\FormulaTreeException.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\FormulaTreeFatalException.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\GlideToBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\Helper.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\HideBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\IfBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\InclinationProvider.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\Interpreter.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\lodepng.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\lodepng_util.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\Look.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\LoudnessCapture.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\NextLookBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\Object.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\ObjectList.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\PlaceAtBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\PlayerException.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\PlayerWindowsPhone8Component.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\PlaySoundBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\PointToBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\Project.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\ProjectDaemon.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\ProjectRenderer.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\Renderer.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\RepeatBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\Script.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\ScriptHandler.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\SetGhostEffectBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\SetSizeToBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\SetVariableBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\SetXBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\SetYBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\ShowBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\Sound.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\SoundInfo.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\SoundManager.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\StartScript.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\TextureDaemon.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\TurnLeftBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\TurnRightBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\UserVariable.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\VariableManagementBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\WaitBrick.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\WASAPIAudio.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\WhenScript.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\XMLParser.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\XMLParserException.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\XMLParserFatalException.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\XMLParserSevereException.cpp" />
+    <ClCompile Include="BasicArithmeticalOperations.cpp" />
+    <ClCompile Include="FormulaTreeTests.cpp" />
+    <ClCompile Include="FormulaFunctionTests.cpp" />
+    <ClCompile Include="IfLogicBeginBrick.cpp" />
+    <ClCompile Include="LogicOperations.cpp" />
+    <ClCompile Include="LookBricks.cpp" />
+    <ClCompile Include="MovementBricks.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TestHelper.cpp" />
+    <ClCompile Include="VariableBricks.cpp" />
+    <ClCompile Include="Variables.cpp" />
+    <ClCompile Include="XMLParserTests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="CppUnitTestFramework, Version=11.0" />
+    <SDKReference Include="TestPlatform, Version=11.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Catrobat.Player.DirectXToolkit\Catrobat.Player.DirectXToolkit.vcxproj">
+      <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
+      <Private>true</Private>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsPhone\v$(TargetPlatformVersion)\Microsoft.Cpp.WindowsPhone.$(TargetPlatformVersion).targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

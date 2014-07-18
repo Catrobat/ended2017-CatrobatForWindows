@@ -47,7 +47,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             };
 
             foreach (var extension in SupportedFileTypes)
-                openPicker.FileTypeFilter.Add("." + extension);
+                openPicker.FileTypeFilter.Add(extension);
 
             StorageFile file;
 

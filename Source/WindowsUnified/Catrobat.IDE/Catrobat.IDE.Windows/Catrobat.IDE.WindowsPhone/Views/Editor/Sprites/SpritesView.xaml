@@ -5,7 +5,8 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:appBar="using:Catrobat.IDE.WindowsPhone.Controls.AppBar"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
-  mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+  mc:Ignorable="d"
+  NavigationCacheMode="Enabled"
   DataContext="{Binding SpritesViewModel, Source={StaticResource Locator}}">
 
   <Page.Resources>

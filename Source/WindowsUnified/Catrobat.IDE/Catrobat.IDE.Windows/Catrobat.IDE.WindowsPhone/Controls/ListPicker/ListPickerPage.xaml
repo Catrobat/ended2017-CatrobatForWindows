@@ -14,25 +14,24 @@
     <listPicker:ListPickerDummyViewModel x:Key="ListPickerPageDummy"/>
   </Page.Resources>
   
-  <!--LayoutRoot is the root grid where all page content is placed-->
-  <Grid x:Name="LayoutRoot" Background="Transparent">
-    <Grid x:Name="ContentPanel" Margin="16,10,16,0">
-      <ListBox Name="ListBoxItems" SelectionChanged="ListBoxItems_SelectionChanged" >
-      </ListBox>
+  <Grid Background="Transparent">
+    <Grid Margin="16,10,16,0">
+      <ListView Name="ListBoxItems" SelectionChanged="ListBoxItems_SelectionChanged" >
+      </ListView>
     </Grid>
   </Grid>
 
-
-  <!--<i:Interaction.Triggers>
-    <appBarUtils:StateChangedTrigger State="false">
-      <appBarUtils:SwitchAppBarAction>
-        <appBarUtils:AppBar Id="0">
-          <appBarUtils:AppBarButton 
-            IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png" 
-            Text="{Binding Resources.Editor_AppbarAdd, Source={StaticResource LocalizedStrings}}"
-            Command="{Binding ShowAddViewCommand, Source={StaticResource ListPickerPageDummy}}"/>
-        </appBarUtils:AppBar>
-      </appBarUtils:SwitchAppBarAction>
-    </appBarUtils:StateChangedTrigger>
-  </i:Interaction.Triggers>-->
+  <Page.BottomAppBar>
+    <CommandBar 
+      Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
+      Source={StaticResource ThemeChooser}}">
+      <CommandBar.PrimaryCommands>
+        <AppBarButton Icon="Add" 
+          Label="{Binding Resources.Editor_AppbarAdd, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding ShowAddViewCommand, 
+          Source={StaticResource ListPickerPageDummy}}"/>
+      </CommandBar.PrimaryCommands>
+    </CommandBar>
+  </Page.BottomAppBar>
 </Page>

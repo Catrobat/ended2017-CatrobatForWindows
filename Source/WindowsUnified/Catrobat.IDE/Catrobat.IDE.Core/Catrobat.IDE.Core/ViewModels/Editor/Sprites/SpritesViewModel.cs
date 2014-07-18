@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using Catrobat.IDE.Core.ExtensionMethods;
+﻿using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 {
@@ -36,8 +36,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                     Sprites.CollectionChanged -= SpritesCollectionChanged;
                     Sprites.CollectionChanged += SpritesCollectionChanged;
                 }
-                
-                RaisePropertyChanged(() => CurrentProject); 
+
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    RaisePropertyChanged(() => Sprites);
+                    RaisePropertyChanged(() => CurrentProject);
+                });
+
             }
         }
 

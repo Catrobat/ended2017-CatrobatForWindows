@@ -1,6 +1,5 @@
 ﻿using Catrobat.IDE.Core.Navigation;
 using Catrobat.IDE.WindowsShared.Common;
-using System.Reflection;
 using Windows.UI.Xaml.Controls;
 
 namespace Catrobat.IDE.WindowsPhone.Navigation
@@ -16,6 +15,12 @@ namespace Catrobat.IDE.WindowsPhone.Navigation
             _navigationHelper = new NavigationHelper(page);
             _navigationHelper.LoadState += NavigationHelperOnLoadState;
             _navigationHelper.SaveState += NavigationHelperOnSaveState;
+            _navigationHelper.OnGoBack += NavigationHelperOnOnGoBack;
+        }
+
+        private void NavigationHelperOnOnGoBack()
+        {
+            RaiseGoBackRequested();
         }
 
         private void NavigationHelperOnSaveState(object sender, SaveStateEventArgs args)
@@ -28,14 +33,10 @@ namespace Catrobat.IDE.WindowsPhone.Navigation
             RaiseLoadState(args.PageState);
         }
 
-        public override void OnNavigateBack()
+        public override void NavigateBack()
         {
-            _navigationHelper.GoBackCommand.Execute(null);
-        }
-
-        public override void OnNavigateTo()
-        {
-            _page.Frame.Navigate(_page.GetType().GetTypeInfo().BaseType.GetTypeInfo().BaseType);
+            _navigationHelper.GoBack();
+            RaiseNavigatedFrom();
         }
     }
 }

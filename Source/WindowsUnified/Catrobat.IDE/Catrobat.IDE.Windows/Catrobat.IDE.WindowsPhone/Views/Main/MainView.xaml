@@ -46,43 +46,56 @@
                         HorizontalAlignment="Stretch">
                 <GridView.ItemTemplate>
                   <DataTemplate>
-                    <Button Padding="0 0 0 0" BorderThickness="0">
-                      <Button.Flyout>
-                        <MenuFlyout>
-                          <MenuFlyoutItem Text="{Binding Resources.Main_CopyProject, 
-                              Source={StaticResource LocalizedStrings}}"
-                              Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, 
-                              Source={StaticResource Locator}}" 
-                                    CommandParameter="{Binding ProjectName}"/>
-                          <MenuFlyoutItem Text="{Binding Resources.Main_DeleteProject, 
-                              Source={StaticResource LocalizedStrings}}"
-                              Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, 
-                              Source={StaticResource Locator}}" 
-                                    CommandParameter="{Binding ProjectName}"/>
-                          <MenuFlyoutItem Text="{Binding Resources.Main_ChangeProjectNameAndDescription, 
-                              Source={StaticResource LocalizedStrings}}" 
-                              Command="{Binding MainViewModel.RenameLocalProjectCommand, Mode=OneWay, 
-                              Source={StaticResource Locator}}"
-                                    CommandParameter="{Binding}"/>
-                          <MenuFlyoutSeparator/>
-                          <MenuFlyoutItem Text="{Binding Resources.Main_PinProjectToStart, 
-                              Source={StaticResource LocalizedStrings}}"
-                              Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, 
-                              Source={StaticResource Locator}}" 
-                                    CommandParameter="{Binding}"/>
-                          <MenuFlyoutItem Text="{Binding Resources.Main_ShareProject, 
-                              Source={StaticResource LocalizedStrings}}"
-                              Command="{Binding MainViewModel.ShareLocalProjectCommand, Mode=OneWay, 
-                              Source={StaticResource Locator}}" 
-                              CommandParameter="{Binding}" />
-                        </MenuFlyout>
-                      </Button.Flyout>
-                      <Button.ContentTemplate>
-                        <DataTemplate>
+                    <Grid>
+                      <Button Padding="0" BorderThickness="0" 
+                            Command="{Binding MainViewModel.OpenProjectCommand, 
+                            Source={StaticResource Locator}}"
+                            CommandParameter="{Binding}">
+                        <Grid  Width="150" Height="150">
                           <projects:LocalProjectControl Width="150" Height="150" Margin="5" Project="{Binding}" />
-                        </DataTemplate>
-                      </Button.ContentTemplate>
-                    </Button>
+                          <Button MinWidth="50" MinHeight="50"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                            Padding="0 5 0 5" Margin="5 5 4 -4"
+                            BorderThickness="0">
+                            <Button.Flyout>
+                              <MenuFlyout>
+                                <MenuFlyoutItem Text="{Binding Resources.Main_CopyProject, 
+                                  Source={StaticResource LocalizedStrings}}"
+                                  Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, 
+                                  Source={StaticResource Locator}}" 
+                                  CommandParameter="{Binding ProjectName}"/>
+                                <MenuFlyoutItem Text="{Binding Resources.Main_DeleteProject, 
+                                  Source={StaticResource LocalizedStrings}}"
+                                  Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, 
+                                  Source={StaticResource Locator}}" 
+                                  CommandParameter="{Binding ProjectName}"/>
+                              </MenuFlyout>
+                            </Button.Flyout>
+                            <Grid Height="40" Width="40">
+                              <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1*"/>
+                              </Grid.RowDefinitions>
+                              <Grid Grid.Row="0" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalAlignment="Stretch" 
+                                Background="White"/>
+                              <Grid Grid.Row="2" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalAlignment="Stretch" 
+                                Background="White"/>
+                              <Grid Grid.Row="4" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalAlignment="Stretch" 
+                                Background="White"/>
+                            </Grid>
+                          </Button>
+                        </Grid>
+                      </Button>
+                    </Grid>
                   </DataTemplate>
                 </GridView.ItemTemplate>
               </GridView>
@@ -92,11 +105,10 @@
 
       </HubSection>
 
-      <HubSection Name="HubSectionOnlineProjects" Header="{Binding Resources.Main_HeaderOnlineProjects, 
-        Source={StaticResource LocalizedStrings}}">
+      <HubSection Name="HubSectionOnlineProjects">
         <HubSection.HeaderTemplate>
           <DataTemplate>
-            <TextBlock Text="{Binding Resources.Main_HeaderLocalProjects, 
+            <TextBlock Text="{Binding Resources.Main_HeaderOnlineProjects, 
                        Source={StaticResource LocalizedStrings}}" 
                        Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
                        Source={StaticResource ThemeChooser}}"/>
@@ -178,20 +190,22 @@
         </HubSection.ContentTemplate>
       </HubSection>
 
-      <HubSection Name="HubSectionHelp">
+      <HubSection Name="HubSectionAbout">
         <HubSection.Header>
-          <TextBlock Text="{Binding Resources.Main_HeaderLocalProjects, 
+          <TextBlock Text="{Binding Resources.Main_HeaderAbout, 
                        Source={StaticResource LocalizedStrings}}" 
                        Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
                        Source={StaticResource ThemeChooser}}"/>
         </HubSection.Header>
         <HubSection.ContentTemplate>
           <DataTemplate>
-            <Grid Margin="0 -20 0 0">
+            <Grid Margin="0 -20 0 5">
               <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto" MinHeight="52"/>
+                <RowDefinition Height="Auto" MinHeight="52"/>
+                <RowDefinition Height="Auto" MinHeight="52"/>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
               </Grid.RowDefinitions>
@@ -199,26 +213,26 @@
                 Text="{Binding Resources.Main_AboutText, 
                 Source={StaticResource LocalizedStrings}}" 
                  Margin="10 0 10 15" />
-              <HyperlinkButton Grid.Row="1" 
+              <HyperlinkButton Grid.Row="2" FontSize="20"
                 Content="{Binding Resources.Main_AboutLicense, 
                 Source={StaticResource LocalizedStrings}}" 
                 Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, 
                 Source={StaticResource ThemeChooser}}" NavigateUri="" 
                 Command="{Binding LicenseCommand}"/>
-              <HyperlinkButton Grid.Row="2" 
+              <HyperlinkButton Grid.Row="3" FontSize="20"
                 Content="{Binding Resources.Main_AboutCatrobat, 
                 Source={StaticResource LocalizedStrings}}" 
                 Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, 
                 Source={StaticResource ThemeChooser}}" NavigateUri="" 
                 Command="{Binding AboutCommand}"/>
-              <HyperlinkButton Grid.Row="3" 
+              <HyperlinkButton Grid.Row="4" FontSize="20"
                 Content="{Binding Resources.Main_AboutMSRL, 
                 Source={StaticResource LocalizedStrings}}"
                 Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, 
                 Source={StaticResource ThemeChooser}}" NavigateUri="" 
                 Command="{Binding MSRLCommand}"/>
 
-              <Grid Grid.Row="4">
+              <Grid Grid.Row="6">
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="Auto" />
                   <ColumnDefinition Width="*" />
@@ -243,18 +257,10 @@
       Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
       Source={StaticResource ThemeChooser}}">
       <CommandBar.PrimaryCommands>
-        <AppBarButton Icon="Edit" 
-                      Label="{Binding Resources.Main_ButtonEdit, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding EditCurrentProjectCommand}"/>
         <AppBarButton Icon="Add" 
                       Label="{Binding Resources.Main_ButtonCreate, 
                       Source={StaticResource LocalizedStrings}}"
                       Command="{Binding CreateNewProjectCommand}"/>
-        <AppBarButton Icon="Upload" 
-                      Label="{Binding Resources.Main_ButtonUpload, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding UploadCurrentProjectCommand}"/>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
         <AppBarButton Label="{Binding Resources.Main_Settings, 

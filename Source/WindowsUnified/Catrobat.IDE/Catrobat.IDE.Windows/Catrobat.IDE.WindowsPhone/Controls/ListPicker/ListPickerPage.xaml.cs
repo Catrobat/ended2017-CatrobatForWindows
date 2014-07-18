@@ -1,20 +1,29 @@
-﻿using System;
-using System.Diagnostics;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using Catrobat.IDE.Core.Models;
+﻿using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Editor.Actions;
 using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
 using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
+using Catrobat.IDE.WindowsShared.Common;
 using GalaSoft.MvvmLight.Command;
+using System;
+using System.Diagnostics;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 
 namespace Catrobat.IDE.WindowsPhone.Controls.ListPicker
 {
-    public partial class ListPickerPage : Page
+    public partial class ListPickerPage
     {
+
+        private readonly NavigationHelper _navigationHelper;
+        public NavigationHelper NavigationHelper
+        {
+            get { return this._navigationHelper; }
+        }
+
+
         public static ListPicker ListPicker
         {
             get { return _listPicker; }
@@ -60,10 +69,14 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListPicker
         public ListPickerPage()
         {
             InitializeComponent();
+
+            this._navigationHelper = new NavigationHelper(this);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            this._navigationHelper.OnNavigatedTo(e);
+
             _firstSelectionChanged = true;
             ListBoxItems.ItemTemplate = ListPicker.PageItemTemplate;
             ListBoxItems.ItemsSource = null;
@@ -73,6 +86,13 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListPicker
 
             base.OnNavigatedTo(e);
         }
+
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            this._navigationHelper.OnNavigatedFrom(e);
+        }
+
 
         private bool _firstSelectionChanged = true;
         private static ListPicker _listPicker;

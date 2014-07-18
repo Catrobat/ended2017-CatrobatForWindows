@@ -29,17 +29,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        public Project SelectedProject
-        {
-            get { return _selectedProject; }
-            set
-            {
-                if (ReferenceEquals(value, _selectedProject)) return;
-                _selectedProject = value;
-                RaisePropertyChanged(() => SelectedProject);
-            }
-        }
-
         public ProjectDummyHeader SelectedProjectHeader
         {
             get { return _selectedProjectHeader; }
@@ -109,9 +98,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             else
             {
                 SelectedProjectHeader.ProjectName = ProjectName;
-                await SelectedProject.SetProgramNameAndRenameDirectory(ProjectName);
-                SelectedProject.Description = ProjectDescription;
-                await SelectedProject.Save();
+                await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
+                CurrentProject.Description = ProjectDescription;
+                await CurrentProject.Save();
             }
 
             base.GoBackAction();
@@ -137,15 +126,15 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
         {
             CurrentProject = message.Content;
+            ProjectName = CurrentProject.Name;
+            ProjectDescription = CurrentProject.Description;
         }
 
-        private async void ChangeProjectNameMessageAction(GenericMessage<ProjectDummyHeader> message)
+        private async void CurrentProjectHeaderChangedMessageAction(GenericMessage<ProjectDummyHeader> message)
         {
             SelectedProjectHeader = message.Content;
 
-            SelectedProject = await CatrobatContext.LoadNewProjectByNameStatic(SelectedProjectHeader.ProjectName);
-            ProjectName = SelectedProject.Name;
-            ProjectDescription = SelectedProject.Description;
+            //SelectedProject = await CatrobatContext.LoadProjectByNameStatic(SelectedProjectHeader.ProjectName);
         }
 
         #endregion
@@ -156,7 +145,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<ProjectDummyHeader>>(this, 
-                ViewModelMessagingToken.ChangeLocalProjectListener, ChangeProjectNameMessageAction);
+                ViewModelMessagingToken.CurrentProjectHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Project>>(this, 
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
         }

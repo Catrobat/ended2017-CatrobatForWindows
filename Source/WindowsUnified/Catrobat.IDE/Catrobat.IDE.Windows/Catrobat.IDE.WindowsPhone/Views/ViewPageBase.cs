@@ -48,12 +48,12 @@ namespace Catrobat.IDE.WindowsPhone.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel.NavigationObject.OnNavigatedTo(e);
+            ViewModel.NavigationObject.RaiseNavigatedTo();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            ViewModel.NavigationObject.OnNavigatedFrom(e);
+            ViewModel.NavigationObject.RaiseNavigatedFrom();
         }
     }
 }

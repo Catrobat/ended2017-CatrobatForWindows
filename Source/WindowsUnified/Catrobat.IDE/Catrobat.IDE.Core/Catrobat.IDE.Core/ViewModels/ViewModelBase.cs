@@ -21,6 +21,7 @@ namespace Catrobat.IDE.Core.ViewModels
                 {
                     _navigationObject.NavigateTo -= NavigateTo;
                     _navigationObject.NavigateFrom -= NavigateFrom;
+                    _navigationObject.GoBackRequested -= NavigationObjectOnGoBackRequested;
                 }
 
                 _navigationObject = value;
@@ -29,8 +30,14 @@ namespace Catrobat.IDE.Core.ViewModels
                 {
                     _navigationObject.NavigateTo += NavigateTo;
                     _navigationObject.NavigateFrom += NavigateFrom;
+                    _navigationObject.GoBackRequested += NavigationObjectOnGoBackRequested;
                 }
             }
+        }
+
+        private void NavigationObjectOnGoBackRequested()
+        {
+            GoBackAction();
         }
 
         public Type SkipAndNavigateTo { get; set; }

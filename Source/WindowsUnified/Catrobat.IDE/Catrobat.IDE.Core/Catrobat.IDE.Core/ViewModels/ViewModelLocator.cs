@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-using Catrobat.IDE.Core.Services;
+﻿using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Editor;
 using Catrobat.IDE.Core.ViewModels.Editor.Actions;
 using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
@@ -12,6 +9,9 @@ using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.Core.ViewModels.Settings;
 using Catrobat.IDE.Core.ViewModels.Share;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 
 namespace Catrobat.IDE.Core.ViewModels
 {
@@ -54,7 +54,6 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<AddNewScriptBrickViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<FormulaKeyboardViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<FormulaEditorViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<PlayerLauncherViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<TileGeneratorViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<VariableSelectionViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<AddNewGlobalVariableViewModel>(TypeCreationMode.Normal);
@@ -68,6 +67,7 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<CostumeSavingViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<EditorLoadingViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<CostumeNameChooserViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<ProjectDetailViewModel>(TypeCreationMode.Normal);
             }
 
         }
@@ -398,17 +398,6 @@ namespace Catrobat.IDE.Core.ViewModels
         [SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public PlayerLauncherViewModel PlayerLauncherViewModel
-        {
-            get
-            {
-                return ServiceLocator.GetInstance<PlayerLauncherViewModel>();
-            }
-        }
-
-        [SuppressMessage("Microsoft.Performance",
-        "CA1822:MarkMembersAsStatic",
-        Justification = "This non-static member is needed for data binding purposes.")]
         public TileGeneratorViewModel TileGeneratorViewModel
         {
             get
@@ -536,6 +525,17 @@ namespace Catrobat.IDE.Core.ViewModels
             get
             {
                 return ServiceLocator.GetInstance<EditorLoadingViewModel>();
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance",
+           "CA1822:MarkMembersAsStatic",
+           Justification = "This non-static member is needed for data binding purposes.")]
+        public ProjectDetailViewModel ProjectDetailViewModel
+        {
+            get
+            {
+                return ServiceLocator.GetInstance<ProjectDetailViewModel>();
             }
         }
 

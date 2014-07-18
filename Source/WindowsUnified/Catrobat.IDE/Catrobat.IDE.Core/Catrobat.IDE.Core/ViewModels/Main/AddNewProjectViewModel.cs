@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Resources.Localization;
+﻿using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Common;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Catrobat.IDE.Core.ViewModels.Main
 {
@@ -26,13 +22,19 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         public Project CurrentProject
         {
             get { return _currentProject; }
-            set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+            set
+            {
+                _currentProject = value;
+
+                ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                    RaisePropertyChanged(() => CurrentProject));
+            }
         }
 
-        public string TextCopyCurrentProjectAsTemplate
-        {
-            get { return String.Format(AppResources.Main_CreateProjectBasedOnCurrentProject, CurrentProject.Name); }
-        }
+        //public string TextCopyCurrentProjectAsTemplate
+        //{
+        //    get { return String.Format(AppResources.Main_CreateProjectBasedOnCurrentProject, CurrentProject.Name); }
+        //}
 
         public string ProjectName
         {
@@ -56,7 +58,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             set
             {
                 _selectedTemplateOption = value;
-                RaisePropertyChanged(()=>SelectedTemplateOption);
+                RaisePropertyChanged(() => SelectedTemplateOption);
             }
         }
 
@@ -69,14 +71,14 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
 
                 var projectGenerators = ServiceLocator.CreateImplementations<IProjectGenerator>();
-                var availableTemplates = projectGenerators.Select(projectGenerator => 
+                var availableTemplates = projectGenerators.Select(projectGenerator =>
                     new ProjectTemplateEntry(projectGenerator)).ToList();
 
                 availableTemplates.Sort();
-                _templateOptions = 
+                _templateOptions =
                     new ObservableCollection<ProjectTemplateEntry>(availableTemplates);
 
-                if (_templateOptions != null) 
+                if (_templateOptions != null)
                     SelectedTemplateOption = _templateOptions[0];
 
                 return _templateOptions;
@@ -91,7 +93,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             set
             {
                 _createEmptyProject = value;
-                RaisePropertyChanged(()=>CreateEmptyProject);
+                RaisePropertyChanged(() => CreateEmptyProject);
             }
         }
 
@@ -142,7 +144,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void SaveAction()
         {
-            await CurrentProject.Save();
+            if (CurrentProject != null)
+                await CurrentProject.Save();
 
             if (CreateEmptyProject)
             {
@@ -150,12 +153,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
             else if (CreateCopyOfCurrentProject)
             {
-                await CurrentProject.Save();
                 CurrentProject = await CatrobatContext.CopyProject(CurrentProject.Name, _projectName);
             }
             else if (CreateTemplateProject)
             {
-                await CurrentProject.Save();
                 CurrentProject = await SelectedTemplateOption.ProjectGenerator.GenerateProject(ProjectName, true);
             }
 
@@ -166,6 +167,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
                 Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
             }
+
+            var localProjectsChangedMessage = new MessageBase();
+            Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
 
             GoBackAction();
         }

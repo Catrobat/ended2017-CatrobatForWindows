@@ -1,0 +1,94 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Catrobat.IDE.Phone.Views.Main.ProjectImportView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="clr-namespace:Catrobat.IDE.Phone.Converters"
+    xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    DataContext="{Binding ProjectImportViewModel, Source={StaticResource Locator}}"
+    shell:SystemTray.IsVisible="False">
+
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <StackPanel Grid.Row="0" Margin="12,17,0,28">
+      <TextBlock Text="IMPORT" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
+      <TextBlock Text="{Binding ProjectName}" Margin="9,-7,0,0" Style="{Binding StaticTheme.TextTitle1Style, Source={StaticResource ThemeChooser}}"/>
+    </StackPanel>
+
+    <Grid Grid.Row="1">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      
+      <Grid x:Name="LoadingPanel" Grid.Row="0" Visibility="{Binding LoadingPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,170">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ProgressBar Grid.Row="0" Name="ProgressBarLoading" IsIndeterminate="{Binding ProgressBarLoadingIsIndeterminate}"></ProgressBar>
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" 
+                   Text="Please wait while we try to load the new project. This can take some time."></TextBlock>
+      </Grid>
+      
+      <Grid x:Name="ErrorPanel" Grid.Row="1" Background="Red" Visibility="{Binding ErrorPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,170">
+        <StackPanel>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" 
+                   Text="Sorry!  The project is not valid or it's version is not compatible to the current version of this IDE."></TextBlock>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" 
+                   Text="Please look for updates in your Windows Phone store."></TextBlock>
+        </StackPanel>
+      </Grid>
+      
+      <Grid x:Name="ContentPanel" Grid.Row="1" Visibility="{Binding ContentPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,0">
+        <Grid.RowDefinitions>
+          <RowDefinition/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" 
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"
+               Width="400"
+               Height="400"
+               Name="ImageProjectScreenshot"
+               Stretch="Uniform"
+               Source="{Binding ScreenshotImageSource, 
+               Converter={StaticResource NoScreenshotConverter}}"/>
+        <CheckBox Grid.Row="1" Margin="0 15 0 30" Name="CheckBoxMakeActive" IsChecked="{Binding CheckBoxMakeActiveIsChecked}">Make new Project active</CheckBox>
+      </Grid>
+    </Grid>
+
+    <i:Interaction.Triggers>
+      <abu:StateChangedTrigger State="false">
+        <abu:SwitchAppBarAction>
+          <abu:AppBar Id="0" BackgroundColor="{Binding SelectedTheme.AppBarBackgroundBrush.NativeColor, Source={StaticResource ThemeChooser}}">
+            <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png" 
+                              Text="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding AddCommand}" />
+            <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" 
+                              Text="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding CancelCommand}"/>
+          </abu:AppBar>
+        </abu:SwitchAppBarAction>
+      </abu:StateChangedTrigger>
+    </i:Interaction.Triggers>
+
+  </Grid>
+
+</phone:PhoneApplicationPage>
