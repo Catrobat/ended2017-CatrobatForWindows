@@ -1,4 +1,5 @@
 ﻿using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -36,7 +37,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             private set
             {
                 _currentProject = value;
-                RaisePropertyChanged(() => CurrentProject);
+
+                ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                    RaisePropertyChanged(() => CurrentProject));
             }
         }
 

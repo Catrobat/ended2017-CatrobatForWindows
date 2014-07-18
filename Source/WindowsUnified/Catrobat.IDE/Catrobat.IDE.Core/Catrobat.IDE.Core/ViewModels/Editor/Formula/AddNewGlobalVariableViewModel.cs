@@ -1,5 +1,6 @@
 ﻿using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -21,7 +22,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         public Project CurrentProject
         {
             get { return _currentProject; }
-            private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+            private set 
+            { 
+                _currentProject = value;
+              
+                ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                    RaisePropertyChanged(() => CurrentProject)); 
+            }
         }
 
         public Sprite SelectedSprite

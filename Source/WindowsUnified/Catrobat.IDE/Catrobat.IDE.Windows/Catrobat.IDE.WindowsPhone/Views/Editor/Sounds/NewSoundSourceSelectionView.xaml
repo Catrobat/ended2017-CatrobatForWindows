@@ -22,14 +22,13 @@
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 20 0 15">
-      <Button Margin="0 0 10 0" Command="{Binding AudioLibraryCommand}" 
-              HorizontalAlignment="Stretch">
-        <Button.Template>
-          <ControlTemplate>
-            <Grid Margin="0 0 0 10" 
-                  Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, 
-                  Source={StaticResource ThemeChooser}}" 
-                  HorizontalAlignment="Stretch" Height="140">
+      <Button Margin="0" Padding="0" BorderThickness="0"
+              Command="{Binding AudioLibraryCommand}" >
+        <Button.ContentTemplate>
+          <DataTemplate>
+            <Grid Margin="0" Height="140" Width="380"
+              Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, 
+              Source={StaticResource ThemeChooser}}" >
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -44,10 +43,10 @@
                 Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
                 Source={StaticResource ThemeChooser}}" />
             </Grid>
-          </ControlTemplate>
-        </Button.Template>
+          </DataTemplate>
+        </Button.ContentTemplate>
       </Button>
-      
+
       <!--<Button Margin="0 0 10 0" Command="{Binding RecorderCommand}"
               HorizontalAlignment="Stretch">
         <Button.Template>

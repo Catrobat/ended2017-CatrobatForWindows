@@ -53,7 +53,8 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                     return ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStream(null);
 
                 if (EncodedData != null && _nativeImageSource == null)
-                    _nativeImageSource = ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStream((MemoryStream)EncodedData);
+                    _nativeImageSource = ServiceLocator.ImageSourceConversionService.
+                        ConvertFromEncodedStream(EncodedData);
 
                 if (_nativeImageSource != null)
                     return _nativeImageSource;

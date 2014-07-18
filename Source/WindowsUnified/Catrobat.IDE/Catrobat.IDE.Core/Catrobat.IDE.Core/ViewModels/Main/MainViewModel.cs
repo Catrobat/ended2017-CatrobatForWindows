@@ -73,7 +73,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                 _currentProject = value;
 
-                RaisePropertyChanged(() => CurrentProject);
+                                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
             }
         }
 

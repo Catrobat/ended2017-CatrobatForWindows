@@ -43,7 +43,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             private set
             {
                 _currentProject = value; 
-                RaisePropertyChanged(() => CurrentProject);
+                                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
             }
         }
 

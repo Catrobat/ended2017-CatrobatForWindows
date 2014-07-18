@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
             set
             {
                 _currentProject = value;
-                RaisePropertyChanged(() => CurrentProject);
+                                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
             }
         }
 

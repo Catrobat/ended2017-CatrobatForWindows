@@ -74,11 +74,12 @@ namespace Catrobat.IDE.WindowsShared.Services
                 throw new Exception(message);
             }
 
-            var writeableBitmap = new WriteableBitmap(newWidth, newHeight);
-            writeableBitmap.SetSourceAsync(memoryRandomAccessStream);
+            //var writeableBitmap = new WriteableBitmap(newWidth, newHeight);
+            //writeableBitmap.SetSourceAsync(memoryRandomAccessStream);
+
             memoryRandomAccessStream.Seek(0);
 
-            return new PortableImage(writeableBitmap)
+            return new PortableImage
             {
                 Width = newWidth,
                 Height = newHeight,

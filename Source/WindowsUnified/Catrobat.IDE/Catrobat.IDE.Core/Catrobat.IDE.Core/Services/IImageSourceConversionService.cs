@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Catrobat.IDE.Core.Annotations;
+﻿using System.IO;
 
 namespace Catrobat.IDE.Core.Services
 {
@@ -14,6 +8,6 @@ namespace Catrobat.IDE.Core.Services
 
         void ConvertToBytes(object inputData, out byte[] outputData, out int outputWidth, out int outputHeight);
 
-        object ConvertFromEncodedStream(MemoryStream encodedStream);
+        object ConvertFromEncodedStream(Stream encodedStream);
     }
 }

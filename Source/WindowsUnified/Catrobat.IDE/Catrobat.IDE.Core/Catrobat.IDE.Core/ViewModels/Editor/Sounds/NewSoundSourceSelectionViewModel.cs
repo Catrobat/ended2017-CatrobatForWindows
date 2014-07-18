@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Catrobat.IDE.Core.Models;
+﻿using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -28,10 +27,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 
         #region Actions
 
-        private async void AudioLibraryAction()
+        private void AudioLibraryAction()
         {
-            var spriteMessage = new GenericMessage<Sprite>(_receivedSelectedSprite);
-            Messenger.Default.Send(spriteMessage, ViewModelMessagingToken.CurrentSpriteChangedListener);
+            //var spriteMessage = new GenericMessage<Sprite>(_receivedSelectedSprite);
+            //Messenger.Default.Send(spriteMessage, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
             ServiceLocator.SoundService.CreateSoundFromMediaLibrary(_receivedSelectedSprite);
 
@@ -44,7 +43,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
             //}
         }
 
-        private async void RecorderAction()
+        private void RecorderAction()
         {
             ServiceLocator.SoundService.CreateSoundFromRecorder(_receivedSelectedSprite);
 
@@ -60,11 +59,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
         private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
         {
             _receivedSelectedSprite = message.Content;
-        }
-
-        protected override void GoBackAction()
-        {
-            base.GoBackAction();
         }
 
         #endregion

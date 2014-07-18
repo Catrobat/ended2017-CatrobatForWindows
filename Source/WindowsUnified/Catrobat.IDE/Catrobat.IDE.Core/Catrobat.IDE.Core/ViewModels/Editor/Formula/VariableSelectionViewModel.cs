@@ -40,7 +40,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         public Project CurrentProject
         {
             get { return _currentProject; }
-            set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+            set { _currentProject = value;                 ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject)); }
         }
 
         public Sprite CurrentSprite

@@ -40,7 +40,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
                     RaisePropertyChanged(() => Sprites);
-                    RaisePropertyChanged(() => CurrentProject);
+                                    ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
                 });
 
             }

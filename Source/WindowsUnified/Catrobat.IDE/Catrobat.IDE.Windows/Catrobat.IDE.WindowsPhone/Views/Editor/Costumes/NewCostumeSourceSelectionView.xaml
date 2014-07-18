@@ -17,31 +17,30 @@
     </Grid.RowDefinitions>
     <StackPanel>
       <StackPanel Margin="10 0 10 20">
-        <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleNewCostume, Source={StaticResource LocalizedStrings}}" 
-                   FontSize="50"
-                   Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
+        <TextBlock Margin="0" 
+          Text="{Binding Resources.Editor_TitleNewCostume, 
+          Source={StaticResource LocalizedStrings}}" 
+          FontSize="50"
+          Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+          Source={StaticResource ThemeChooser}}" />
       </StackPanel>
 
       <StackPanel Margin="10 10 10 10">
-        <Button Margin="0 0 0 10" HorizontalAlignment="Stretch" 
-                Command="{Binding OpenGalleryCommand}">
-          <Button.Template>
-            <ControlTemplate>
-              <Grid Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" 
-                    HorizontalAlignment="Stretch" 
-                    Height="140">
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="Auto"/>
-                  <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <misc:ImageGallery ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
-                <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
+        <Button Margin="0" Padding="0" BorderThickness="0"
+          Command="{Binding OpenGalleryCommand}" >
+          <Grid Margin="0" Height="140" Width="380"
+                Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, 
+                Source={StaticResource ThemeChooser}}" >
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <misc:ImageGallery ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
+            <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_ImageGallery, Source={StaticResource LocalizedStrings}}" 
                            Name="tbGallery" FontSize="50"
                            Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
-              </Grid>
-            </ControlTemplate>
-          </Button.Template>
+          </Grid>
         </Button>
 
         <!--<Button Margin="0 0 0 10" HorizontalAlignment="Stretch"
@@ -64,31 +63,29 @@
           </Button.Template>
         </Button>-->
 
-        <Button Margin="0 0 0 10" HorizontalAlignment="Stretch"
-                Command="{Binding OpenPaintCommand}">
-          <Button.Template>
-            <ControlTemplate>
-              <Grid Background="{Binding Path=SelectedTheme.AccentColor3.NativeBrush, Source={StaticResource ThemeChooser}}" 
-                    HorizontalAlignment="Stretch" 
-                    Height="140">
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="Auto"/>
-                  <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <misc:EditImage ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
-                <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" 
-                           HorizontalAlignment="Left" 
-                           Text="{Binding Resources.Editor_ImageEditingProgram, Source={StaticResource LocalizedStrings}}" 
-                           TextAlignment="Left"
-                           TextWrapping="Wrap"
-                           Name="tbGallery" FontSize="50" 
-                           Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
-              </Grid>
-            </ControlTemplate>
-          </Button.Template>
+        <Button Margin="0" Padding="0" BorderThickness="0"
+          Command="{Binding OpenPaintCommand}" >
+          <Grid Margin="0" Height="140" Width="380"
+            Background="{Binding Path=SelectedTheme.AccentColor3.NativeBrush, 
+            Source={StaticResource ThemeChooser}}" >
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <misc:EditImage ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
+            <TextBlock Grid.Column="1" Margin="20 10 10 10" 
+                       VerticalAlignment="Center" 
+              HorizontalAlignment="Left" 
+              Text="{Binding Resources.Editor_ImageEditingProgram, 
+              Source={StaticResource LocalizedStrings}}" 
+              TextAlignment="Left"
+              TextWrapping="Wrap"
+              FontSize="50" 
+              Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
+              Source={StaticResource ThemeChooser}}" />
+          </Grid>
         </Button>
       </StackPanel>
     </StackPanel>
   </Grid>
-
 </views:ViewPageBase>
