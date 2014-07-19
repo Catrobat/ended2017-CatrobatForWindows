@@ -18,6 +18,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     {
         #region Private Members
 
+        private object _loadingLock = new object();
 
         #endregion
 
@@ -41,7 +42,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             set
             {
                 _currentProject = value;
-                ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
                     RaisePropertyChanged(() => CurrentProject));
             }
         }
@@ -72,13 +73,17 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             set
             {
                 _isActivatingLocalProject = value;
-                RaisePropertyChanged(() => IsActivatingLocalProject);
-                EditCurrentProjectCommand.RaiseCanExecuteChanged();
-                UploadCurrentProjectCommand.RaiseCanExecuteChanged();
-                PlayCurrentProjectCommand.RaiseCanExecuteChanged();
-                PinLocalProjectCommand.RaiseCanExecuteChanged();
-                ShareLocalProjectCommand.RaiseCanExecuteChanged();
-                RenameProjectCommand.RaiseCanExecuteChanged();
+
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    RaisePropertyChanged(() => IsActivatingLocalProject);
+                    EditCurrentProjectCommand.RaiseCanExecuteChanged();
+                    UploadCurrentProjectCommand.RaiseCanExecuteChanged();
+                    PlayCurrentProjectCommand.RaiseCanExecuteChanged();
+                    PinLocalProjectCommand.RaiseCanExecuteChanged();
+                    ShareLocalProjectCommand.RaiseCanExecuteChanged();
+                    RenameProjectCommand.RaiseCanExecuteChanged();
+                });
             }
         }
 
@@ -204,44 +209,37 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             {
                 if (CurrentProject == null || CurrentProject.Name != CurrentProjectHeader.ProjectName)
                 {
-                    lock (CurrentProjectHeader)
+                    lock (_loadingLock)
                     {
                         if (IsActivatingLocalProject)
                             return;
 
-                        ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                        {
-                            IsActivatingLocalProject = true;
-                        });
+                        IsActivatingLocalProject = true;
                     }
+
 
                     if (CurrentProject != null)
                         await CurrentProject.Save();
-
-                    var newProject = await CatrobatContext.LoadProjectByNameStatic(CurrentProjectHeader.ProjectName);
+                    
+                    Project newProject = await CatrobatContext.LoadProjectByNameStatic(CurrentProjectHeader.ProjectName);
 
                     if (newProject != null)
                     {
-                        ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                        {
-                            CurrentProject = newProject;
-                            IsActivatingLocalProject = false;
-                        });
+                        CurrentProject = newProject;
+                        IsActivatingLocalProject = false;
 
                         var projectChangedMessage = new GenericMessage<Project>(newProject);
                         Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
 
-                        ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                        {
-                            IsActivatingLocalProject = false;
-                        });
+                        IsActivatingLocalProject = false;
                     }
                     else
                     {
+                        IsActivatingLocalProject = false;
+
                         ServiceLocator.DispatcherService.RunOnMainThread(() =>
                         {
                             ServiceLocator.NavigationService.NavigateBack(this.GetType());
-                            IsActivatingLocalProject = false;
 
                             ServiceLocator.NotifictionService.ShowMessageBox(
                                 AppResources.Main_SelectedProjectNotValidMessage,

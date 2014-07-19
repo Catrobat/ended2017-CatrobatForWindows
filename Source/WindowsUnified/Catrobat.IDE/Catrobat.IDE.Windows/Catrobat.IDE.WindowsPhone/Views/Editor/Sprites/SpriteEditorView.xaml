@@ -9,11 +9,12 @@
   xmlns:bindableListView="using:Catrobat.IDE.WindowsPhone.Controls.BindableListView"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   mc:Ignorable="d" 
-  NavigationCacheMode="Required"
+  NavigationCacheMode="Enabled"
   DataContext="{Binding SpriteEditorViewModel, Source={StaticResource Locator}}">
 
   <Page.Resources>
-    <buttons:PlayPauseButtonGroup x:Key="PlayPauseButtonGroupSounds" Command="{Binding SoundsPlayStateChangedCommand}" />
+    <buttons:PlayPauseButtonGroup x:Key="PlayPauseButtonGroupSounds" 
+      Command="{Binding SoundsPlayStateChangedCommand}" />
 
     <DataTemplate x:Key="LookItemTemplate">
       <Grid Margin="5 5 5 5" Height="90" Width="430"
@@ -29,8 +30,9 @@
                MaxWidth="120" MaxHeight="120" Margin="10 10 5 10" 
                VerticalAlignment="Stretch" />
         <Grid Grid.Column="1" Margin="5">
-          <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
-                             VerticalAlignment="Center" />
+          <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" 
+            Text="{Binding Name}" 
+            VerticalAlignment="Center" />
         </Grid>
       </Grid>
     </DataTemplate>
@@ -50,16 +52,15 @@
           RoundBorderThickness="6" Margin="0"
           Grid.Column="0" Height="110" Width="110" />
         <Grid Grid.Column="1" Margin="5">
-          <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
-                                           VerticalAlignment="Center" />
+          <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" 
+            Text="{Binding Name}" VerticalAlignment="Center" />
         </Grid>
       </Grid>
     </DataTemplate>
 
   </Page.Resources>
 
-  <Grid x:Name="LayoutRoot" 
-        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
         Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
@@ -67,12 +68,11 @@
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
-    <Pivot 
-        Name="PivotMain" Grid.Row="1" Margin="0 -30 0 0" 
+    <Pivot Grid.Row="1" Margin="0 -57 0 0" 
         SelectedIndex="{Binding SelectedPivotIndex, Mode=TwoWay}">
-      <!--Pivot item scripts-->
       <PivotItem Name="PivotScripts" Margin="0 -15 0 0"
-                 Header="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}">
+        Header="{Binding Resources.Editor_PivotActions, 
+        Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
           <bindableListView:BindableListView x:Name="ReorderListBoxScriptBricks"
             Visibility="Visible"
@@ -89,17 +89,19 @@
 
 
           <TextBlock 
-              Text ="{Binding Resources.Editor_ClickPlusToAddAction, Source={StaticResource LocalizedStrings}}"
-              Visibility="{Binding IsScirptBricksEmpty, Converter={StaticResource BoolVisibilityConverter}}"
-              Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
-              TextWrapping="Wrap"
-              TextAlignment="Center"
-              VerticalAlignment="Center"
-              HorizontalAlignment="Center" />
+            Text ="{Binding Resources.Editor_ClickPlusToAddAction, 
+            Source={StaticResource LocalizedStrings}}"
+            Visibility="{Binding IsScirptBricksEmpty, 
+            Converter={StaticResource BoolVisibilityConverter}}"
+            Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
+            Source={StaticResource ThemeChooser}}"
+            TextWrapping="Wrap"
+            TextAlignment="Center"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center" />
         </Grid>
       </PivotItem>
 
-      <!--Pivot item costume-->
       <PivotItem Name="PivotCostumes" Margin="0 -15 0 0"
           Header="{Binding Resources.Editor_PivotCostumes, 
           Source={StaticResource LocalizedStrings}}">
@@ -108,31 +110,30 @@
               ItemsSource="{Binding Costumes}"
               BindableSelectedItems="{Binding SelectedCostumes, Mode=TwoWay}"
               ItemTemplate="{StaticResource LookItemTemplate}"
-              SelectionMode="Multiple"
-            />
+              SelectionMode="Multiple" />
 
           <TextBlock 
-              Text ="{Binding Resources.Editor_ClickPlusToAddCostume, Source={StaticResource LocalizedStrings}}"
-              Visibility="{Binding IsCostumesEmpty, Converter={StaticResource BoolVisibilityConverter}}"
-              Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
-              TextWrapping="Wrap"
-              TextAlignment="Center"
-              VerticalAlignment="Center"
-              HorizontalAlignment="Center" />
+            Text ="{Binding Resources.Editor_ClickPlusToAddCostume, 
+            Source={StaticResource LocalizedStrings}}"
+            Visibility="{Binding IsCostumesEmpty, 
+            Converter={StaticResource BoolVisibilityConverter}}"
+            Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
+            Source={StaticResource ThemeChooser}}"
+            TextWrapping="Wrap"
+            TextAlignment="Center"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center" />
         </Grid>
       </PivotItem>
 
-      <!--Pivot item sounds-->
       <PivotItem Name="PivotSounds" Margin="0 -15 0 0"
                  Header="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
           <bindableListView:BindableListView
-            x:Name="ListBoxSounds"
             ItemsSource="{Binding Sounds}"
-            BindableSelectedItems="{Binding Sounds, Mode=TwoWay}"
-            Visibility="Visible"
-            SelectionMode="Multiple"
-            ItemTemplate="{StaticResource SoundItemTemplate}">
+            BindableSelectedItems="{Binding SelectedSounds, Mode=TwoWay}"
+            ItemTemplate="{StaticResource SoundItemTemplate}"
+            SelectionMode="Multiple">
           </bindableListView:BindableListView>
 
           <TextBlock 
@@ -153,45 +154,50 @@
         <ColumnDefinition />
       </Grid.ColumnDefinitions>
       <TextBlock Text="{Binding SelectedSprite.Name}" 
-                     Grid.Column="0" FontSize="36"
-                     Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
+        Grid.Column="0" FontSize="36"
+        Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+        Source={StaticResource ThemeChooser}}" />
       <HyperlinkButton Grid.Column="1" HorizontalAlignment="Right" 
-                         Content="{Binding Resources.Editor_Rename, Source={StaticResource LocalizedStrings}}"
-                         Command="{Binding RenameSpriteCommand}"/>
+        Content="{Binding Resources.Editor_Rename, 
+        Source={StaticResource LocalizedStrings}}"
+        Command="{Binding RenameSpriteCommand}"/>
     </Grid>
     <Grid Grid.Row="2">
       <StackPanel>
         <appBar:EditorAppBar
-              Visibility="{Binding IsVisibleScripts, Converter={StaticResource BoolVisibilityConverter}}" 
-              VerticalAlignment="Bottom"
-              TargetType="Script"
-              ClearSelectionCommand="{Binding ClearScriptsSelectionCommand}"
-              CopyCommand="{Binding CopyScriptBrickCommand}"
-              DeleteCommand="{Binding DeleteScriptBrickCommand}"
-              PlayCommand="{Binding StartPlayerCommand}"
-              NewCommand="{Binding AddNewScriptBrickCommand}"
-              NumberOfSelectedItems="{Binding SelectedActions.Count}"/>
+          Visibility="{Binding IsVisibleScripts, 
+          Converter={StaticResource BoolVisibilityConverter}}" 
+          VerticalAlignment="Bottom"
+          TargetType="Script"
+          ClearSelectionCommand="{Binding ClearScriptsSelectionCommand}"
+          CopyCommand="{Binding CopyScriptBrickCommand}"
+          DeleteCommand="{Binding DeleteScriptBrickCommand}"
+          PlayCommand="{Binding StartPlayerCommand}"
+          NewCommand="{Binding AddNewScriptBrickCommand}"
+          NumberOfSelectedItems="{Binding SelectedActions.Count}"/>
         <appBar:EditorAppBar
-              Visibility="{Binding IsVisibleCostumes, Converter={StaticResource BoolVisibilityConverter}}" 
-              VerticalAlignment="Bottom"
-              TargetType="Costume"
-              ClearSelectionCommand="{Binding ClearCostumesSelectionCommand}"
-              CopyCommand="{Binding CopyCostumeCommand}"
-              DeleteCommand="{Binding DeleteCostumeCommand}"
-              EditCommand="{Binding EditCostumeCommand}"
-              PlayCommand="{Binding StartPlayerCommand}"
-              NewCommand="{Binding AddNewCostumeCommand}"
-              NumberOfSelectedItems="{Binding SelectedCostumes.Count}"/>
+          Visibility="{Binding IsVisibleCostumes, 
+          Converter={StaticResource BoolVisibilityConverter}}" 
+          VerticalAlignment="Bottom"
+          TargetType="Costume"
+          ClearSelectionCommand="{Binding ClearCostumesSelectionCommand}"
+          CopyCommand="{Binding CopyCostumeCommand}"
+          DeleteCommand="{Binding DeleteCostumeCommand}"
+          EditCommand="{Binding EditCostumeCommand}"
+          PlayCommand="{Binding StartPlayerCommand}"
+          NewCommand="{Binding AddNewCostumeCommand}"
+          NumberOfSelectedItems="{Binding SelectedCostumes.Count}"/>
         <appBar:EditorAppBar
-              Visibility="{Binding IsVisibleSounds, Converter={StaticResource BoolVisibilityConverter}}" 
-              VerticalAlignment="Bottom"
-              TargetType="Sound"
-              ClearSelectionCommand="{Binding ClearSoundsSelectionCommand}"
-              DeleteCommand="{Binding DeleteSoundCommand}"
-              EditCommand="{Binding EditSoundCommand}"
-              PlayCommand="{Binding StartPlayerCommand}"
-              NewCommand="{Binding AddNewSoundCommand}"
-              NumberOfSelectedItems="{Binding SelectedSounds.Count}"/>
+          Visibility="{Binding IsVisibleSounds, 
+          Converter={StaticResource BoolVisibilityConverter}}" 
+          VerticalAlignment="Bottom"
+          TargetType="Sound"
+          ClearSelectionCommand="{Binding ClearSoundsSelectionCommand}"
+          DeleteCommand="{Binding DeleteSoundCommand}"
+          EditCommand="{Binding EditSoundCommand}"
+          PlayCommand="{Binding StartPlayerCommand}"
+          NewCommand="{Binding AddNewSoundCommand}"
+          NumberOfSelectedItems="{Binding SelectedSounds.Count}"/>
       </StackPanel>
     </Grid>
   </Grid>

@@ -34,14 +34,11 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
         {
             var path = Path.Combine(project.BasePath, Project.ImagesPath, costume.FileName);
 
-            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            using (var storage = StorageSystem.GetStorage())
             {
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    storage.SaveImage(path, newImage, true, ImageFormat.Png);
-                    costume.Image = storage.CreateThumbnail(newImage);
-                }
-            });
+                await storage.SaveImageAsync(path, newImage, true, ImageFormat.Png);
+                costume.Image = await storage.CreateThumbnailAsync(newImage);
+            }
         }
     }
 }

@@ -1,8 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Models.Scripts;
+using Catrobat.IDE.Core.Services;
+using System.Collections.ObjectModel;
 
 namespace Catrobat.IDE.Core
 {
@@ -23,7 +24,9 @@ namespace Catrobat.IDE.Core
             {
                 if (ReferenceEquals(_currentProject, value)) return;
                 _currentProject = value;
-                RaisePropertyChanged(() => CurrentProject);
+
+                ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                    RaisePropertyChanged(() => CurrentProject));
             }
         }
 

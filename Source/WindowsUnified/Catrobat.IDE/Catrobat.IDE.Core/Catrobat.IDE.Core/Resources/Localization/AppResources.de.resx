@@ -319,7 +319,7 @@
     <value>Kamera</value>
   </data>
   <data name="Editor_ClearSelection" xml:space="preserve">
-    <value>Auswahl aufheben</value>
+    <value>Ausw. löschen</value>
   </data>
   <data name="Editor_CostumeName" xml:space="preserve">
     <value>Name</value>

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Windows.UI.Xaml;
@@ -9,6 +8,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls.BindableListView
 {
     public class BindableListView : ListView
     {
+        public BindableListView()
+        {
+            this.SelectionChanged += OnSelectionChanged;
+        }
+
         public new IList ItemsSource
         {
             get { return (IList)GetValue(ItemsSourceProperty); }
@@ -52,64 +56,84 @@ namespace Catrobat.IDE.WindowsPhone.Controls.BindableListView
 
 
         private void SelectedItemsOnCollectionChanged(object sender,
-            NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+            NotifyCollectionChangedEventArgs args)
         {
             if (BindableSelectedItems == null)
                 return;
 
-            var list = BindableSelectedItems as IList;
-
-            var itemsToRemove = new List<object>();
-
-            foreach (var item in BindableSelectedItems)
+            if (args.Action == NotifyCollectionChangedAction.Reset)
             {
-                if (!list.Contains(item))
-                    itemsToRemove.Add(item);
+                SelectedItems.Clear();
+                return;
             }
 
-            foreach (var item in itemsToRemove)
-            {
-                SelectionChanged -= OnSelectionChanged;
-                BindableSelectedItems.Remove(item);
-                SelectionChanged += OnSelectionChanged;
-            }
 
-            foreach (var item in list)
-            {
-                if (!BindableSelectedItems.Contains(item))
+            if (args.OldItems != null)
+                foreach (var item in args.OldItems)
                 {
-                    var index = list.IndexOf(item);
-                    BindableSelectedItems.Insert(index, item);
+                    if (BindableSelectedItems.Contains(item))
+                        BindableSelectedItems.Remove(item);
                 }
-            }
+
+            if (args.NewItems != null)
+                foreach (var item in args.NewItems)
+                {
+                    if (!BindableSelectedItems.Contains(item))
+                    {
+                        var index = SelectedItems.IndexOf(item);
+                        BindableSelectedItems.Insert(index, item);
+                    }
+                }
+
+
+
+            //if (BindableSelectedItems == null)
+            //    return;
+
+            //var list = args.NewItems;
+
+            //var itemsToRemove = new List<object>();
+
+            //foreach (var item in BindableSelectedItems)
+            //{
+            //    if (!list.Contains(item))
+            //        itemsToRemove.Add(item);
+            //}
+
+            //foreach (var item in itemsToRemove)
+            //{
+            //    SelectionChanged -= OnSelectionChanged;
+            //    BindableSelectedItems.Remove(item);
+            //    SelectionChanged += OnSelectionChanged;
+            //}
+
+            //foreach (var item in list)
+            //{
+            //    if (!BindableSelectedItems.Contains(item))
+            //    {
+            //        var index = list.IndexOf(item);
+            //        BindableSelectedItems.Insert(index, item);
+            //    }
+            //}
         }
 
-        private void OnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs args)
         {
             if (BindableSelectedItems == null)
                 return;
 
-            var list = BindableSelectedItems as IList;
+            foreach (var item in args.RemovedItems)
+            {
+                if (BindableSelectedItems.Contains(item))
+                    BindableSelectedItems.Remove(item);
+            }
 
-            var itemsToRemove = new List<object>();
-
-            foreach (var item in list)
+            foreach (var item in args.AddedItems)
             {
                 if (!BindableSelectedItems.Contains(item))
-                    itemsToRemove.Add(item);
-            }
-
-            foreach (var item in itemsToRemove)
-            {
-                list.Remove(item);
-            }
-
-            foreach (var item in BindableSelectedItems)
-            {
-                if (!list.Contains(item))
                 {
-                    var index = BindableSelectedItems.IndexOf(item);
-                    list.Insert(index, item);
+                    var index = SelectedItems.IndexOf(item);
+                    BindableSelectedItems.Insert(index, item);
                 }
             }
         }

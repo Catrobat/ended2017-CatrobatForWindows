@@ -25,7 +25,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
         public Project CurrentProject
         {
             get { return _currentProject; }
-            private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+            private set { 
+                _currentProject = value; 
+
+                ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                    RaisePropertyChanged(() => CurrentProject));
+            }
         }
 
         public string SoundName

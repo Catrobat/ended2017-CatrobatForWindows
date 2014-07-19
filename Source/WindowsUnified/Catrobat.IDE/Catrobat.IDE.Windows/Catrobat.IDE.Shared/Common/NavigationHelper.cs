@@ -54,7 +54,7 @@ namespace Catrobat.IDE.WindowsShared.Common
     public class NavigationHelper : DependencyObject
     {
         public delegate void GoBackEvent();
-        
+
         public event GoBackEvent OnGoBack;
 
 
@@ -207,13 +207,17 @@ namespace Catrobat.IDE.WindowsShared.Common
         /// <param name="e">Event data describing the conditions that led to the event.</param>
         private void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
         {
-            e.Handled = true;
+            if (this.GoBackCommand.CanExecute(null))
+            {
+                e.Handled = true;
+                //this.GoBackCommand.Execute(null);
 
-            OnGoBack.Invoke();
-            //if (this.GoBackCommand.CanExecute(null))
-            //{
-            //    this.GoBackCommand.Execute(null);
-            //}
+                if (OnGoBack != null)
+                    OnGoBack.Invoke();
+                else
+                    if (CanGoBack())
+                        GoBack();
+            }
         }
 #else
         /// <summary>

@@ -15,10 +15,10 @@ namespace Catrobat.IDE.WindowsPhone.Navigation
             _navigationHelper = new NavigationHelper(page);
             _navigationHelper.LoadState += NavigationHelperOnLoadState;
             _navigationHelper.SaveState += NavigationHelperOnSaveState;
-            _navigationHelper.OnGoBack += NavigationHelperOnOnGoBack;
+            _navigationHelper.OnGoBack += NavigationHelperOnGoBack;
         }
 
-        private void NavigationHelperOnOnGoBack()
+        private void NavigationHelperOnGoBack()
         {
             RaiseGoBackRequested();
         }
@@ -35,8 +35,10 @@ namespace Catrobat.IDE.WindowsPhone.Navigation
 
         public override void NavigateBack()
         {
-            _navigationHelper.GoBack();
-            RaiseNavigatedFrom();
+            if (_navigationHelper.GoBackCommand.CanExecute(null))
+            {
+                _navigationHelper.GoBackCommand.Execute(null);
+            }
         }
     }
 }

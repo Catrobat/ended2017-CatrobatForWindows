@@ -51,18 +51,21 @@ namespace Catrobat.IDE.WindowsShared.Services
         }
 
 
-        public object ConvertFromEncodedStream(System.IO.MemoryStream encodedStream)
+        public object ConvertFromEncodedStream(Stream encodedStream)
         {
             if (encodedStream == null)
                 return null;
 
             var image = new BitmapImage();
+            encodedStream.Seek(0, SeekOrigin.Begin);
             image.SetSource(encodedStream.AsRandomAccessStream());
             image.CreateOptions = BitmapCreateOptions.None;
 
-            var writeableImage = new WriteableBitmap(image.PixelWidth, image.PixelHeight);
-            image.SetSource(encodedStream.AsRandomAccessStream());
-            return writeableImage;
+            return image;
+
+            //var writeableImage = new WriteableBitmap(image.PixelWidth, image.PixelHeight);
+            //image.SetSource(encodedStream.AsRandomAccessStream());
+            //return writeableImage;
         }
     }
 }

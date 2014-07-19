@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             {
                 if (value == _currentProject) return;
                 _currentProject = value;
-                RaisePropertyChanged(() => CurrentProject);
+                                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
             }
         }
 

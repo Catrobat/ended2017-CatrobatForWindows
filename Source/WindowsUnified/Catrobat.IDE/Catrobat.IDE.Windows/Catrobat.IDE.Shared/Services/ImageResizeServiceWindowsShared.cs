@@ -44,84 +44,47 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public async Task<PortableImage> ResizeImage(PortableImage image, int newWidth, int newHeight)
         {
-            return image; // TODO: fix resize code and remove this
+            BitmapDecoder decoder = await BitmapDecoder.CreateAsync(((Stream)image.EncodedData).AsRandomAccessStream());
+
+            var memoryRandomAccessStream = new InMemoryRandomAccessStream();
+            BitmapEncoder encoder = await BitmapEncoder.CreateForTranscodingAsync(memoryRandomAccessStream, decoder);
+
+            encoder.BitmapTransform.ScaledHeight = (uint)newHeight;
+            encoder.BitmapTransform.ScaledWidth = (uint)newWidth;
 
 
-            //// hard coded image location
-            //string filePath = "C:\\Users\\Public\\Pictures\\Sample Pictures\\fantasy-dragons-wallpaper.jpg";
-
-            //StorageFile file = await StorageFile.GetFileFromPathAsync(filePath);
-            //if (file == null)
-            //    return;
-
-            //// create a stream from the file and decode the image
-            //var fileStream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
-            //BitmapDecoder decoder = await BitmapDecoder.CreateAsync(fileStream);
-
-            if(image.EncodedData == null)
-                throw new ArgumentException("Property 'EncodedData' of parameter 'image' must not be null!");
-
-            var decoder = await BitmapDecoder.CreateAsync(image.EncodedData.AsRandomAccessStream());
-
-
-            // create a new stream and encoder for the new image
-            var ras = new InMemoryRandomAccessStream();
-            BitmapEncoder enc = await BitmapEncoder.CreateForTranscodingAsync(ras, decoder);
-
-            // convert the entire bitmap to a 100px by 100px bitmap
-            enc.BitmapTransform.ScaledHeight = (uint) newWidth;
-            enc.BitmapTransform.ScaledWidth = (uint) newHeight;
-
-
-            //var bounds = new BitmapBounds
-            //{
-            //    Height = 50, Width = 50, X = 50, Y = 50
-            //};
-
+            //var bounds = new BitmapBounds();
+            //bounds.Height = 50;
+            //bounds.Width = 50;
+            //bounds.X = 50;
+            //bounds.Y = 50;
             //enc.BitmapTransform.Bounds = bounds;
 
-            // write out to the stream
             try
             {
-                await enc.FlushAsync();
+                await encoder.FlushAsync();
             }
-            catch (Exception ex)
+            catch (Exception exc)
             {
-                string s = ex.ToString();
+                var message = "Error on resizing the image: ";
+
+                if (exc.Message != null)
+                    message += exc.Message;
+
+                throw new Exception(message);
             }
 
-            // render the stream to the screen
-            //var bitmap = new BitmapImage();
-            //bitmap.SetSource(ras);
+            //var writeableBitmap = new WriteableBitmap(newWidth, newHeight);
+            //writeableBitmap.SetSourceAsync(memoryRandomAccessStream);
 
-            var memoryStream = new MemoryStream();
-            ras.AsStream().CopyTo(memoryStream);
+            memoryRandomAccessStream.Seek(0);
 
-
-            return new PortableImage()
+            return new PortableImage
             {
-                EncodedData = memoryStream,
-                //Width = bitmap.PixelWidth,
-                //Height = bitmap.PixelHeight
+                Width = newWidth,
+                Height = newHeight,
+                EncodedData = memoryRandomAccessStream.AsStream()
             };
-
-
-
-            //if (!(image.ImageSource is WriteableBitmap))
-            //    throw new ArgumentException("image.ImageSource must be of type WriteableBitmap");
-
-            //var bitmap = ((WriteableBitmap) image.ImageSource).Clone();
-            //var resizedImage = bitmap.Resize(newWidth, newHeight, WriteableBitmapExtensions.Interpolation.Bilinear);
-
-            //var resizedPortableImage = new PortableImage(resizedImage);
-
-            //return resizedPortableImage;
         }
-
-        //private async Task<PortableImage> ResizeImage(PortableImage image, int maxWidthHeight)
-        //{
-
-        //    //return image.Resize(width, height, WriteableBitmapExtensions.Interpolation.Bilinear);
-        //}
     }
 }
