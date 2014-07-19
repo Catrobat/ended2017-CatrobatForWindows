@@ -72,9 +72,10 @@
               <ColumnDefinition Width="Auto"/>
               <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <misc:EditImage ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
+            <misc:EditImage Grid.Column="0" 
+             ScaleFactor="0.2" Margin="30 15 15 15" />
             <TextBlock Grid.Column="1" Margin="20 10 10 10" 
-                       VerticalAlignment="Center" 
+              VerticalAlignment="Center" 
               HorizontalAlignment="Left" 
               Text="{Binding Resources.Editor_ImageEditingProgram, 
               Source={StaticResource LocalizedStrings}}" 

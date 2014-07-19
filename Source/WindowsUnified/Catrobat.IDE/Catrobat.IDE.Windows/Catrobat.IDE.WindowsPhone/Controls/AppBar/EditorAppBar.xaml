@@ -33,11 +33,12 @@
           <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Margin="-18 3 -30 0" 
+        <StackPanel Orientation="Horizontal" Margin="-4 3 -30 0" 
                     Height="35" HorizontalAlignment="Stretch" >
           <StackPanel Name="StackPanelNew" Orientation="Horizontal"
                     HorizontalAlignment="Left" Margin="0 0 0 0" >
-            <TextBlock Name="TextBlockNumberOfSelectedItemsNumber" VerticalAlignment="Center" 
+            <TextBlock Name="TextBlockNumberOfSelectedItemsNumber" 
+              VerticalAlignment="Center" 
               Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
               Source={StaticResource ThemeChooser}}"
               FontSize="24" TextAlignment="Right" MinWidth="30" 
