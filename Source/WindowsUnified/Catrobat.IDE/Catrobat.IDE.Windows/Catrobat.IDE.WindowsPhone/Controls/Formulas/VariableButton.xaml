@@ -7,11 +7,9 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="80" d:DesignWidth="200">
 
-  <Grid x:Name="LayoutRoot">
-    <Button Name="ButtonFormula" Click="ButtonFormula_OnClick">
-      <Grid>
-        <TextBlock Name="TextBlockVariableName" Text="" ></TextBlock>
-      </Grid>
-    </Button>
-  </Grid>
+  <Button Margin="7 0 7 0" Click="ButtonFormula_OnClick">
+    <Grid>
+      <TextBlock Name="TextBlockVariableName" Text="" ></TextBlock>
+    </Grid>
+  </Button>
 </UserControl>

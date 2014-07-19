@@ -34,6 +34,9 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
             this.FormulaKeyboard.KeyPressed += KeyPressed;
             this.FormulaKeyboard.EvaluatePressed += EvaluatePressed;
             this.FormulaKeyboard.ShowErrorPressed += ShowErrorPressed;
+
+            Loaded += FormulaEditorView_OnLoaded;
+            Unloaded += FormulaEditorView_OnUnloaded;
         }
 
         private void FormulaEditorView_OnLoaded(object sender, RoutedEventArgs e)

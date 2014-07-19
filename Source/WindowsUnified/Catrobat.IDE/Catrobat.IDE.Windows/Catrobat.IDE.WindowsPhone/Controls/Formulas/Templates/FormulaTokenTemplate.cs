@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Catrobat.IDE.WindowsPhone.Controls.Formulas.Templates
 {
-    public class FormulaTokenTemplate
+    public abstract class FormulaTokenTemplate
     {
         #region Members
 

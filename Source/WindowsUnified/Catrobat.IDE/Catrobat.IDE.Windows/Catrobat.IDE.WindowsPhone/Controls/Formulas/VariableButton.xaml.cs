@@ -1,12 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
-using Catrobat.IDE.Core.Annotations;
+﻿using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Services;
@@ -15,6 +7,14 @@ using Catrobat.IDE.Core.UI.Converters;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
+using System;
+using System.ComponentModel;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
 {
@@ -28,7 +28,9 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
             set { SetValue(VariableProperty, value); }
         }
 
-        public static readonly DependencyProperty VariableProperty = DependencyProperty.Register("Variable", typeof(Variable), typeof(VariableButton), new PropertyMetadata(null, VariableChanged));
+        public static readonly DependencyProperty VariableProperty = 
+            DependencyProperty.Register("Variable", typeof(Variable), 
+            typeof(VariableButton), new PropertyMetadata(null, VariableChanged));
 
         private static void VariableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -83,11 +85,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
         {
             var viewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).VariableSelectionViewModel;
 
-            var container = new VariableConteiner { Variable = Variable };
+            var container = new VariableConteiner {Variable = Variable};
             container.PropertyChanged += ContainerOnPropertyChanged;
             viewModel.SelectedVariableContainer = container;
 
-            Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.NavigateTo<VariableSelectionViewModel>();
+            ServiceLocator.NavigationService.NavigateTo<VariableSelectionViewModel>();
         }
 
         private void ContainerOnPropertyChanged(object sender, PropertyChangedEventArgs args)

@@ -1,12 +1,12 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Catrobat.IDE.Core.Formulas.Editor;
+﻿using Catrobat.IDE.Core.Formulas.Editor;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
 using GalaSoft.MvvmLight.Messaging;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
 {
@@ -161,8 +161,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
 
         private void FormulaChangedMessageAction(FormulaEvaluationResult result)
         {
-            TextBlockEvaluationValue.Text = result.Value;
-            TextBlockEvaluationError.Text = result.Error;
+            TextBlockEvaluationValue.Text = result.Value ?? "";
+            TextBlockEvaluationError.Text = result.Error ?? "";
         }
 
         #region VisualStateManager
@@ -195,7 +195,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
 
         private void KeyButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var key = (FormulaEditorKey)(uint)((FrameworkElement)sender).DataContext;
+            var key = (FormulaEditorKey)(int)((FrameworkElement)sender).DataContext;
             ShowMain();
             RaiseKeyPressed(new FormulaKey(key, null));
         }

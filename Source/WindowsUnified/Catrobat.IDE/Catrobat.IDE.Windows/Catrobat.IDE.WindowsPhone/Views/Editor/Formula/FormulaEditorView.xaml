@@ -9,8 +9,7 @@
   mc:Ignorable="d"
   DataContext="{Binding FormulaEditorViewModel, Source={StaticResource Locator}}">
 
-  <Grid x:Name="LayoutRoot" 
-        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
         Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="*" />
@@ -30,16 +29,17 @@
         HorizontalAlignment="Stretch" />
     </ScrollViewer>
     <TextBlock Grid.Row="0"
-        Text="{Binding Resources.Editor_TypeSomething, Source={StaticResource LocalizedStrings}}"
-        Visibility="{Binding IsTokensEmpty, Converter={StaticResource BoolVisibilityConverter}}"
-        Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
-        TextWrapping="Wrap"
-        TextAlignment="Center"
-        VerticalAlignment="Center"
-        HorizontalAlignment="Center" />
+      Text="{Binding Resources.Editor_TypeSomething, 
+      Source={StaticResource LocalizedStrings}}"
+      Visibility="{Binding IsTokensEmpty, Converter={StaticResource BoolVisibilityConverter}}"
+      Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
+      TextWrapping="Wrap"
+      TextAlignment="Center"
+      VerticalAlignment="Center"
+      HorizontalAlignment="Center" />
     <Grid Grid.Row="1">
       <!-- UserControl Bindings are set in code-behind -->
-      <formulas:FormulaKeyboard x:Name="FormulaKeyboard">
+      <formulas:FormulaKeyboard x:Name="FormulaKeyboard" Height="320">
         <formulas:FormulaKeyboard.RenderTransform>
           <TranslateTransform X="0" Y="500" x:Name="Translation" />
         </formulas:FormulaKeyboard.RenderTransform>
