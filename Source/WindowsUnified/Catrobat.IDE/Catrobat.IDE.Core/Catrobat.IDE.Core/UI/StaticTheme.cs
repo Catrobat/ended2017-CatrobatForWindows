@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Core.UI
                 return new PortableFontStyle
                 {
                     FontFamily = PortableFontFamily.SemiLight,
-                    FontSize = PortableFontSize.ExtraExtraLarge,
+                    FontSize = PortableFontSize.ExtraLarge,
                     FontColor = TextForegroundBrush,
                 };
             }

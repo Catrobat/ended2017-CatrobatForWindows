@@ -16,18 +16,29 @@
         </Grid.RowDefinitions>
 
     <StackPanel Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleChangeSpriteName, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
+      <TextBlock Margin="0" 
+        Text="{Binding Resources.Editor_TitleChangeSpriteName, 
+        Source={StaticResource LocalizedStrings}}"
+        Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+        Source={StaticResource ThemeChooser}}" />
     </StackPanel>
       
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
-      <TextBlock Margin="0" Text="{Binding Resources.Editor_SpriteName, Source={StaticResource LocalizedStrings}}" Style="{Binding StaticTheme.TextSmallStyle, Source={StaticResource ThemeChooser}}" />
-      <TextBox Margin="-10 0 10 0" Name="TextBoxSpriteName" Text="{Binding SpriteName, Mode=TwoWay}" HorizontalAlignment="Stretch" TextChanged="TextBoxSpriteName_OnTextChanged" />
+      <TextBlock Margin="0" 
+        Text="{Binding Resources.Editor_SpriteName, 
+        Source={StaticResource LocalizedStrings}}" 
+        Style="{Binding StaticTheme.TextSmallStyle, 
+        Source={StaticResource ThemeChooser}}" />
+      <TextBox Margin="-10 0 10 0" Name="TextBoxSpriteName" 
+        Text="{Binding SpriteName, Mode=TwoWay}" HorizontalAlignment="Stretch" 
+        TextChanged="TextBoxSpriteName_OnTextChanged" />
     </StackPanel>      
   </Grid>
 
   <Page.BottomAppBar>
     <CommandBar RequestedTheme="Dark" 
-                Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
+      Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
+      Source={StaticResource ThemeChooser}}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Save" 
                       Label="{Binding Resources.Editor_ButtonSave, 

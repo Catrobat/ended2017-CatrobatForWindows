@@ -42,19 +42,19 @@ namespace Catrobat.IDE.WindowsShared.Services
                         fontSize = 20;
                         break;
                     case PortableFontSize.Small:
-                        fontSize = 16;
+                        fontSize = 14;
                         break;
                     case PortableFontSize.Medium:
-                        fontSize = 22.667;
+                        fontSize = 22;
                         break;
                     case PortableFontSize.Large:
-                        fontSize = 32;
+                        fontSize = 26;
                         break;
                     case PortableFontSize.ExtraLarge:
-                        fontSize = 42.667;
+                        fontSize = 36;
                         break;
                     case PortableFontSize.ExtraExtraLarge:
-                        fontSize = 72;
+                        fontSize = 48;
                         break;
                     default:
                         fontSize = 20;

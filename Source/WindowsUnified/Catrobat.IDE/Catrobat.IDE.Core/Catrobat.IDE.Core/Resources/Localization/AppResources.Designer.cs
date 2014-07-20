@@ -2681,7 +2681,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to description:.
+        ///   Looks up a localized string similar to description.
         /// </summary>
         public static string Main_OnlineProjectDescription {
             get {
@@ -3194,7 +3194,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description:.
+        ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Main_UploadProjectProjectDescription {
             get {
