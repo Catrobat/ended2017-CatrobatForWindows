@@ -41,7 +41,7 @@
   </Grid>
 
   <Page.BottomAppBar>
-    <CommandBar 
+    <CommandBar RequestedTheme="Dark"
       Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
       Source={StaticResource ThemeChooser}}">
       <CommandBar.PrimaryCommands>

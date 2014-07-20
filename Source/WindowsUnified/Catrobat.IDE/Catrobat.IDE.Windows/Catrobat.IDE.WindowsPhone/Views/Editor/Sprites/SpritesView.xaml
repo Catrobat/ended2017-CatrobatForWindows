@@ -99,7 +99,8 @@
               TextAlignment="Center"
               VerticalAlignment="Center"
               HorizontalAlignment="Center" />
-      <appBar:EditorAppBar Grid.Row="2"
+      <appBar:EditorAppBar Grid.Row="2" 
+        RequestedTheme="Dark"
         VerticalAlignment="Bottom"
         TargetType="Object"
         ClearSelectionCommand="{Binding ClearObjectsSelectionCommand}"

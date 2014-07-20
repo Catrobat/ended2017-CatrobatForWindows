@@ -163,7 +163,7 @@
         Command="{Binding RenameSpriteCommand}"/>
     </Grid>
     <Grid Grid.Row="2">
-      <StackPanel>
+      <StackPanel RequestedTheme="Dark">
         <appBar:EditorAppBar
           Visibility="{Binding IsVisibleScripts, 
           Converter={StaticResource BoolVisibilityConverter}}" 

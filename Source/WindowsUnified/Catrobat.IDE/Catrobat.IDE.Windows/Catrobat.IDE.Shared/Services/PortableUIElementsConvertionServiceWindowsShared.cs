@@ -42,7 +42,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                         fontSize = 20;
                         break;
                     case PortableFontSize.Small:
-                        fontSize = 18.667;
+                        fontSize = 16;
                         break;
                     case PortableFontSize.Medium:
                         fontSize = 22.667;

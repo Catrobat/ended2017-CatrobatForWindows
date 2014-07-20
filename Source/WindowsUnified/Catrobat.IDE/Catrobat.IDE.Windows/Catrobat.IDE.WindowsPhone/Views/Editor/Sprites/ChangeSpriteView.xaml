@@ -5,18 +5,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    mc:Ignorable="d"
     DataContext="{Binding ChangeSpriteViewModel, Source={StaticResource Locator}}">
 
-  <Grid x:Name="LayoutRoot" 
-        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
         Source={StaticResource ThemeChooser}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
+    <StackPanel Grid.Row="0" Margin="10 0 10 20">
       <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleChangeSpriteName, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
     </StackPanel>
       
@@ -27,7 +26,8 @@
   </Grid>
 
   <Page.BottomAppBar>
-    <CommandBar Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
+    <CommandBar RequestedTheme="Dark" 
+                Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Save" 
                       Label="{Binding Resources.Editor_ButtonSave, 
