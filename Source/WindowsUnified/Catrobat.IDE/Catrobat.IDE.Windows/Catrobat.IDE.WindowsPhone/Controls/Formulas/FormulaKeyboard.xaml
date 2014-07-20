@@ -130,7 +130,7 @@
   </UserControl.Resources>
 
   <Grid Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
-    <Grid Grid.Row="0" Name="GridMain" Margin="0 8 0 0" Visibility="Collapsed">
+    <Grid Grid.Row="0" Name="GridMain" Margin="0 8 0 0" Visibility="Visible">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
         <RowDefinition/>
@@ -201,7 +201,7 @@
     </Grid>
     
     
-    <Grid Name="GridMore" Visibility="Visible" Margin="0 0 0 0">
+    <Grid Name="GridMore" Visibility="Collapsed" Margin="0 0 0 0">
       <Grid Grid.Column="0" Margin="-5,0,0,0">
         <AppBarButton Icon="Back" Click="ButtonMoreBack_Click" Margin="0 0 0 0"
            HorizontalAlignment="Left" VerticalAlignment="Top"/>

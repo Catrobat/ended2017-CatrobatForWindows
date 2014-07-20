@@ -6,11 +6,16 @@
   xmlns:controls="using:WinRTXamlToolkit.Controls"
   mc:Ignorable="d"
   Loaded="FormulaViewer_OnLoaded"
-  d:DesignHeight="80" d:DesignWidth="480">
+  d:DesignHeight="100" d:DesignWidth="480">
 
   <Grid VerticalAlignment="Stretch">
-    <ScrollViewer Name="ScrollViewerContent" VerticalAlignment="Stretch" Tapped="Panel_OnTap">
-      <controls:WrapPanel Name="MultilinePanelContent" Orientation="Horizontal"/>
+    <ScrollViewer Name="ScrollViewerContent" 
+      VerticalAlignment="Stretch"
+      Tapped="Panel_OnTap">
+      <controls:WrapPanel Name="MultilinePanelContent" 
+        VerticalAlignment="Top"
+        Orientation="Horizontal" 
+        SizeChanged="MultilinePanelContent_OnSizeChanged"/>
     </ScrollViewer>
     <StackPanel Name="SingleLinePanelContent" Orientation="Horizontal" Tapped="Panel_OnTap"/>
   </Grid>

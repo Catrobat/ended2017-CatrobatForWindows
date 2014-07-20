@@ -19,6 +19,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
 
     public partial class FormulaViewer
     {
+        public bool _lastContainerAdded;
+
         public new DoubleTap DoubleTap;
         private void RaiseDoubleTap(int index)
         {
@@ -57,7 +59,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
                         var absoluteIndex = e.NewStartingIndex + relativeIndex;
                         AddContainer((IFormulaToken)e.NewItems[relativeIndex], absoluteIndex);
                     }
-                    UpdateFontSize();
+                    //UpdateFontSize();
                     UpdateStyles();
                     break;
                 case NotifyCollectionChangedAction.Remove:
@@ -66,7 +68,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
                         var absoluteIndex = e.OldStartingIndex + relativeIndex;
                         RemoveContainer(absoluteIndex);
                     }
-                    UpdateFontSize();
+                    //UpdateFontSize();
                     UpdateStyles();
                     break;
                 default:
@@ -274,6 +276,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
         public bool IsLoaded { get; private set; }
         private void FormulaViewer_OnLoaded(object sender, RoutedEventArgs e)
         {
+            ActualFontSize = 42.0;
+
             IsLoaded = true;
 
             Caret = CreateCaret();
@@ -318,7 +322,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
                 {
                     InitContainer(container);
                 }
-                UpdateStyles();
+                //UpdateStyles();
             }
 
             var caretIndex = Tokens == null ? 0 : Tokens.Count;
@@ -330,6 +334,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
 
         private void AddContainer(IFormulaToken token, int index)
         {
+            _lastContainerAdded = true;
+
             if (index > CaretIndex)
             {
                 index++;
@@ -352,6 +358,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
 
         private void RemoveContainer(int index)
         {
+            _lastContainerAdded = false;
+
             if (index >= CaretIndex)
             {
                 index++;
@@ -403,62 +411,100 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
             CaretIndex = Tokens.Count;
         }
 
+        private void MultilinePanelContent_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            const double decreaseMultiplyer = 0.95;
+            const double increaseMultiplyer = 1.05;
+
+            var decreaseOffset = ActualFontSize * 1.0;
+            var increaseOffset = ActualFontSize*2.2;
+
+            if (_lastContainerAdded)
+            {
+                if (MultilinePanelContent.ActualHeight > ScrollViewerContent.ActualHeight - decreaseOffset)
+                {
+                    if (ActualFontSize > MinFontSize)
+                    {
+                        ActualFontSize *= decreaseMultiplyer;
+                        UpdateFontSize();
+                    }
+                    else
+                    {
+                        ScrollViewerContent.ScrollToVerticalOffset(100000);
+                    }
+                }
+            }
+            else
+            {
+                if (MultilinePanelContent.ActualHeight < ScrollViewerContent.ActualHeight - increaseOffset)
+                {
+                    if (ActualFontSize < MaxFontSize)
+                    {
+                        ActualFontSize *= increaseMultiplyer;
+                        UpdateFontSize();
+                    }
+
+                }
+            }
+        }
+
         #endregion
 
         #region FontSize
 
-        private double CalculateFontSize(IList<int> characterWidths)
-        {
-            var fontSize = NormalFontSize;
-            if (!IsAutoFontSize) return fontSize;
+        //private double CalculateFontSize(IList<int> characterWidths)
+        //{
+        //    var fontSize = NormalFontSize;
+        //    if (!IsAutoFontSize) return fontSize;
 
-            double oldFontSize;
-            int maxSinglePartWidth;
-            var trials = 0;
-            do
-            {
-                trials++;
-                maxSinglePartWidth = 0;
-                oldFontSize = fontSize;
+        //    double oldFontSize;
+        //    int maxSinglePartWidth;
+        //    var trials = 0;
+        //    do
+        //    {
+        //        trials++;
+        //        maxSinglePartWidth = 0;
+        //        oldFontSize = fontSize;
 
-                var oldMaxLinesUsed = LinesNormalFontSize * (NormalFontSize / fontSize);
+        //        var oldMaxLinesUsed = LinesNormalFontSize * (NormalFontSize / fontSize);
 
-                var currentCharactersPerLine = CharactersInOneLineNormalFontSize * (NormalFontSize / fontSize);
-                double linesUsedWithCurrentFontSize = 1;
-                double currentLineCharacters = 0;
-                foreach (var width in characterWidths)
-                {
-                    currentLineCharacters += width;
+        //        var currentCharactersPerLine = CharactersInOneLineNormalFontSize * (NormalFontSize / fontSize);
+        //        double linesUsedWithCurrentFontSize = 1;
+        //        double currentLineCharacters = 0;
+        //        foreach (var width in characterWidths)
+        //        {
+        //            currentLineCharacters += width;
 
-                    if (currentLineCharacters > currentCharactersPerLine)
-                    {
-                        currentLineCharacters = width;
-                        linesUsedWithCurrentFontSize++;
-                    }
+        //            if (currentLineCharacters > currentCharactersPerLine)
+        //            {
+        //                currentLineCharacters = width;
+        //                linesUsedWithCurrentFontSize++;
+        //            }
 
-                    maxSinglePartWidth = Math.Max(maxSinglePartWidth, width);
-                }
+        //            maxSinglePartWidth = Math.Max(maxSinglePartWidth, width);
+        //        }
 
-                fontSize = (0.5) * oldFontSize + 0.5 * (oldFontSize * (oldMaxLinesUsed / linesUsedWithCurrentFontSize));
+        //        fontSize = (0.5) * oldFontSize + 0.5 * (oldFontSize * (oldMaxLinesUsed / linesUsedWithCurrentFontSize));
 
-            } while (Math.Abs(fontSize - oldFontSize) > 7.0 && trials < 10);
+        //    } while (Math.Abs(fontSize - oldFontSize) > 7.0 && trials < 10);
 
-            var singleLineFontSize = maxSinglePartWidth == 0 ? MaxFontSize : NormalFontSize * (((double) CharactersInOneLineNormalFontSize) / maxSinglePartWidth);
+        //    var singleLineFontSize = maxSinglePartWidth == 0 ? MaxFontSize : NormalFontSize * (((double) CharactersInOneLineNormalFontSize) / maxSinglePartWidth);
 
-            fontSize = Math.Min(fontSize, singleLineFontSize);
+        //    fontSize = Math.Min(fontSize, singleLineFontSize);
 
-            if (fontSize < MinFontSize) fontSize = MinFontSize;
-            if (fontSize > MaxFontSize) fontSize = MaxFontSize;
-            return fontSize;
-        }
+        //    if (fontSize < MinFontSize) fontSize = MinFontSize;
+        //    if (fontSize > MaxFontSize) fontSize = MaxFontSize;
+        //    return fontSize;
+        //}
+
 
         private void UpdateFontSize()
         {
-            var oldFontSize = ActualFontSize;
-            var characterWidths = Children.OfType<Grid>().Select(FormulaTokenTemplate.GetCharacterWidth).ToList();
-            var fontSize = CalculateFontSize(characterWidths);
-            if (Math.Abs(fontSize - oldFontSize) <= 0.1) return;
-            ActualFontSize = fontSize;
+            //var oldFontSize = ActualFontSize;
+            //var characterWidths = Children.OfType<Grid>().Select(FormulaTokenTemplate.GetCharacterWidth).ToList();
+            //var fontSize = CalculateFontSize(characterWidths);
+            //if (Math.Abs(fontSize - oldFontSize) <= 0.1) return;
+            //ActualFontSize = fontSize;
 
             foreach (var container in Containers)
             {
@@ -466,6 +512,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
             }
             SetCaretFontSize(ActualFontSize);
         }
+
+
 
         #endregion
 
