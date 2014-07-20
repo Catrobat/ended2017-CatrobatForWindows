@@ -9,16 +9,15 @@
   mc:Ignorable="d"
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
 
-  <Grid x:Name="LayoutRoot" 
-        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+    Source={StaticResource ThemeChooser}}">
 
     <Hub Name="MainHub"
-         Foreground="{Binding StaticTheme.TextForegroundBrush.NativeBrush, 
-         Source={StaticResource ThemeChooser}}"
-         Background="{Binding Source={StaticResource ThemeChooser}, 
-         Path=SelectedTheme.Background.ImageSource}" 
-         SectionsInViewChanged="Hub_SectionsInViewChanged" >
+      Foreground="{Binding StaticTheme.TextForegroundBrush.NativeBrush, 
+      Source={StaticResource ThemeChooser}}"
+      Background="{Binding Source={StaticResource ThemeChooser}, 
+      Path=SelectedTheme.Background.ImageSource}" 
+      SectionsInViewChanged="Hub_SectionsInViewChanged" >
       <Hub.Header>
         <StackPanel Orientation="Horizontal" Margin="12 12 12 -20">
           <TextBlock Text="POCKET" Foreground="#14a5b8" FontSize="52" FontFamily="Arial Black" 
@@ -73,24 +72,24 @@
                 <RowDefinition />
               </Grid.RowDefinitions>
               <!--<toolkit:PhoneTextBox Hint="{Binding Resources.Main_FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" 
-                                    InputScope="Url" ActionIcon="../../Resources/Application/Search.png" 
-                                    x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
-                                    TextChanged="FilterTextBox_TextChanged" KeyDown="FilterTextBox_KeyDown" 
-                                    Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />-->
+                InputScope="Url" ActionIcon="../../Resources/Application/Search.png" 
+                x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                TextChanged="FilterTextBox_TextChanged" KeyDown="FilterTextBox_KeyDown" 
+                Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />-->
               <ListView Name="ListViewOnlineProjects"
-                        ItemsSource="{Binding OnlineProjects}" 
-                        Grid.Row="1"
-                        VerticalAlignment="Stretch" 
-                        HorizontalAlignment="Stretch" 
-                        SelectedItem="{Binding SelectedOnlineProject, Mode=TwoWay}" 
-                        SelectionMode="None"
-                        IsItemClickEnabled="true" 
-                        ItemClick="ListViewOnlineProjects_ItemClick">
+                ItemsSource="{Binding OnlineProjects}" 
+                Grid.Row="1"
+                VerticalAlignment="Stretch" 
+                HorizontalAlignment="Stretch" 
+                SelectedItem="{Binding SelectedOnlineProject, Mode=TwoWay}" 
+                SelectionMode="None"
+                IsItemClickEnabled="true" 
+                ItemClick="ListViewOnlineProjects_ItemClick">
                 <ListView.ItemTemplate>
                   <DataTemplate>
                     <Grid Margin="10 5 10 5"  
-                          Background="{StaticResource PhoneAccentBrush}"
-                          DataContext="{Binding}">
+                      Background="{StaticResource PhoneAccentBrush}"
+                      DataContext="{Binding}">
                       <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
@@ -197,11 +196,11 @@
                   <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Right" 
-                            VerticalAlignment="Bottom" Orientation="Vertical">
+                  VerticalAlignment="Bottom" Orientation="Vertical">
                   <TextBlock Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
                     Source={StaticResource ThemeChooser}}" 
-                       Text="{Binding ApplicationVersionName}" 
-                       Margin="10 10 0 10" TextWrapping="Wrap"  />
+                    Text="{Binding ApplicationVersionName}" 
+                    Margin="10 10 0 10" TextWrapping="Wrap"  />
                 </StackPanel>
               </Grid>
             </Grid>
@@ -212,18 +211,19 @@
   </Grid>
 
   <Page.BottomAppBar>
-    <CommandBar RequestedTheme="Dark" Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
+    <CommandBar RequestedTheme="Dark" 
+      Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
       Source={StaticResource ThemeChooser}}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Add" 
-                      Label="{Binding Resources.Main_ButtonCreate, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding CreateNewProjectCommand}"/>
+          Label="{Binding Resources.Main_ButtonCreate, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding CreateNewProjectCommand}"/>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
         <AppBarButton Label="{Binding Resources.Main_Settings, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding SettingsCommand}"/>
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding SettingsCommand}"/>
       </CommandBar.SecondaryCommands>
     </CommandBar>
   </Page.BottomAppBar>

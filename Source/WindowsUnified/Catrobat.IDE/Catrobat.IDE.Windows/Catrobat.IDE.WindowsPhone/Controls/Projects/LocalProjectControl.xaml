@@ -5,7 +5,7 @@
     xmlns:local="using:Catrobat.IDE.WindowsPhone.Controls.Projects"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+    mc:Ignorable="d" RequestedTheme="Light"
     d:DesignHeight="150"
     d:DesignWidth="150">
 	<UserControl.Resources>
@@ -57,10 +57,10 @@
 									<VisualState x:Name="PointerOver"/>
 									<VisualState x:Name="Pressed">
 										<Storyboard>
-											<PointerDownThemeAnimation Storyboard.TargetName="Grid"/>
-											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+											<!--<PointerDownThemeAnimation Storyboard.TargetName="Grid"/>-->
+											<!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
 												<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonPressedForegroundThemeBrush}"/>
-											</ObjectAnimationUsingKeyFrames>
+											</ObjectAnimationUsingKeyFrames>-->
 										</Storyboard>
 									</VisualState>
 									<VisualState x:Name="Disabled">
@@ -126,12 +126,27 @@
             </Grid>
           </Border>
         </Grid>
-        <Button MinWidth="50" MinHeight="50"
+        <Button MinWidth="0" MinHeight="0" Height="50" Width="50"
           VerticalAlignment="Bottom" HorizontalAlignment="Right"
-          Padding="0 5 0 5" Margin="5 5 4 -4"
+          Padding="0 -10 0 -10" Margin="0 0 -10 -10"
           BorderThickness="0"
           Click="OptionsButton_OnClick" Style="{StaticResource OptionsButtonStyle}">
-          <Grid Height="40" Width="40">
+          <Grid Height="50" Width="50">
+            <Path Margin="0 0 5 5" Height="40" Width="40" 
+                  VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+              Data="M-10,10 C10,-10 10,-10 10,-10 L10,10" 
+              Fill="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+              Source={StaticResource ThemeChooser}}" Stretch="Fill" 
+              UseLayoutRounding="False" RenderTransformOrigin="0,0"/>
+            <Path VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+              Data="M-10,10 C10,-10 10,-10 10,-10 L10,10" Margin="0 0 10 10"
+              Fill="GhostWhite" Stretch="Fill" Height="30" Width="30"
+              UseLayoutRounding="False" RenderTransformOrigin="0,0"/>
+            <TextBlock Text="..." FontSize="30" Margin="0 0 10 5"
+              VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+          </Grid>
+    
+          <!--<Grid Height="40" Width="40">
             <Grid.RowDefinitions>
               <RowDefinition Height="1*"/>
               <RowDefinition Height="2*"/>
@@ -151,9 +166,10 @@
                                 VerticalAlignment="Stretch" 
                                 HorizontalAlignment="Stretch" 
                                 Background="White"/>
-          </Grid>
+          </Grid>-->
         </Button>
       </Grid>
     </Button>
+    <Path Data="M151.528,124.028" Fill="Blue" HorizontalAlignment="Left" Height="0" Margin="151.528,124.028,-15.528,0" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="0"/>
   </Grid>
 </UserControl>
