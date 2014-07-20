@@ -9,6 +9,7 @@
         <ResourceDictionary Source="ms-appx:///Converters/Resources_Converters.xaml"/>
         <ResourceDictionary Source="ms-appx:///Content/Templates/ActionTemplates.xaml"/>
         <ResourceDictionary Source="ms-appx:///Content/Templates/ActionAddData.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Controls/Formulas/Templates/FormulaTokenTemplates.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

@@ -1,9 +1,9 @@
-﻿using System.ComponentModel;
-using System.Windows;
-using Windows.UI.Xaml;
-using Catrobat.IDE.Core.Models.Formulas.Tree;
+﻿using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
+using System.ComponentModel;
+using Windows.UI.Xaml;
+using Catrobat.IDE.WindowsShared.Converters;
 
 namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
 {
@@ -17,7 +17,19 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
             set { SetValue(FormulaProperty, value); }
         }
 
-        public static readonly DependencyProperty FormulaProperty = DependencyProperty.Register("Formula", typeof(FormulaTree), typeof(FormulaButton), new PropertyMetadata(null));
+        public static readonly DependencyProperty FormulaProperty = 
+            DependencyProperty.Register("Formula", 
+            typeof(FormulaTree), typeof(FormulaButton), new PropertyMetadata(null, FormulaChangedCallback));
+
+        private static void FormulaChangedCallback(DependencyObject d, 
+            DependencyPropertyChangedEventArgs args)
+        {
+            var formulaStringConverter = new FormulaStringConverterBootstrap();
+
+            ((FormulaButton) d).TextBlockFormula.Text = (string)
+                formulaStringConverter.Convert(args.NewValue, typeof(FormulaButton), null, "");
+            //throw new NotImplementedException();
+        }
 
         #endregion
 

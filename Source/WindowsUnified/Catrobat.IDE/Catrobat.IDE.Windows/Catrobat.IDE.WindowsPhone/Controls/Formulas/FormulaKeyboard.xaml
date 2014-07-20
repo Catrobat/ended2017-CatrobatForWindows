@@ -14,8 +14,9 @@
   <UserControl.Resources>
     <Style x:Key="StyleButton" TargetType="Button">
       <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="MinWidth" Value="0" />
       <Setter Property="Padding" Value="0" />
-      <Setter Property="Margin" Value="-5" />
+      <Setter Property="Margin" Value="5 -5 5 -5" />
       <Setter Property="FontSize" Value="30" />
       <Setter Property="FontWeight" Value="Bold" />
       <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -128,10 +129,8 @@
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyDelete">Delete</editor:FormulaEditorKey>
   </UserControl.Resources>
 
-  <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
-
-
-    <Grid Grid.Row="0" Name="GridMain" Margin="0 8 0 0" Visibility="Visible">
+  <Grid Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
+    <Grid Grid.Row="0" Name="GridMain" Margin="0 8 0 0" Visibility="Collapsed">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
         <RowDefinition/>
@@ -164,7 +163,10 @@
           <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Grid.Column="3" Content="{ Binding Resources.FormulaKeyboard_ParameterSeparator, Source={StaticResource LocalizedStrings}}" DataContext="{StaticResource FormulaEditorKeyParameterSeparator}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+        <Button Grid.Row="0" Grid.Column="3"
+                Content="{ Binding Resources.FormulaKeyboard_ParameterSeparator, Source={StaticResource LocalizedStrings}}" 
+                DataContext="{StaticResource FormulaEditorKeyParameterSeparator}" 
+                Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
         <Button Grid.Row="0" Grid.Column="4" Content="X" DataContext="{StaticResource FormulaEditorKeyDelete}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanDelete, ElementName=FormulaKeyboardXaml}" >
           <Button.ContentTemplate>
             <DataTemplate>
@@ -191,35 +193,30 @@
         <Button Grid.Row="2" Grid.Column="3" Content="*" DataContext="{StaticResource FormulaEditorKeyMultiply}" Style="{StaticResource StyleButtonOperators}" Click="KeyButton_OnClick"/>
         <Button Grid.Row="2" Grid.Column="4" Content="/" DataContext="{StaticResource FormulaEditorKeyDivide}" Style="{StaticResource StyleButtonOperators}" Click="KeyButton_OnClick"/>
         <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource StyleButtonAdditional}" Click="BtnMore_OnClick">
-        <Image Source="/Content/Images/ApplicationBar/dark/appbar.next.rest.png" />
+          <Image Source="/Content/Images/ApplicationBar/dark/appbar.next.rest.png" />
         </Button>
         <Button Grid.Row="3" Grid.Column="3" Content="(" DataContext="{StaticResource FormulaEditorKeyOpeningParenthesis}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" />
         <Button Grid.Row="3" Grid.Column="4" Content=")" DataContext="{StaticResource FormulaEditorKeyClosingParenthesis}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" />
       </Grid>
     </Grid>
-    <Grid Name="GridMore" Visibility="Collapsed">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto" />
-        <ColumnDefinition />
-      </Grid.ColumnDefinitions>
-      <Grid Grid.Column="0" Margin="10,0,0,0">
-        <!--<coding4Fun:RoundButton
-          HorizontalAlignment="Left" 
-          VerticalAlignment="Bottom"
-          Click="ButtonMoreBack_Click"
-          ImageSource="/Content/Images/ApplicationBar/dark/appbar.back.rest.png"/>-->
+    
+    
+    <Grid Name="GridMore" Visibility="Visible" Margin="0 0 0 0">
+      <Grid Grid.Column="0" Margin="-5,0,0,0">
+        <AppBarButton Icon="Back" Click="ButtonMoreBack_Click" Margin="0 0 0 0"
+           HorizontalAlignment="Left" VerticalAlignment="Top"/>
       </Grid>
-      <Pivot Name="PivotMore" Grid.Column="1" Margin="0,5,0,0" Padding="0,-30,0,0" SelectionChanged="Pivot_OnSelectionChanged">
+      <Pivot Name="PivotMore" Margin="0 50 0 0" Padding="0 -35 0 0" SelectionChanged="Pivot_OnSelectionChanged">
         <Pivot.Resources>
-          <Style TargetType="ListBox">
-            <Setter Property="Padding" Value="-10,0,0,0" />
+          <Style TargetType="ListView">
+            <Setter Property="Padding" Value="0 0 0 0" />
             <Setter Property="ItemTemplate">
               <Setter.Value>
                 <DataTemplate>
                   <TextBlock
                   Text="{Binding MultiBindingProperty, Converter={StaticResource FormulaKeyStringConverter}}"
                   d:DataContext="{d:DesignInstance formula:FormulaKey}"
-                  Style="{Binding StaticTheme.TextLargeStyle,Source={StaticResource ThemeChooser}}">
+                  Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}">
                   <!--<toolkit:ContextMenuService.ContextMenu>
                     <toolkit:ContextMenu>
                       <toolkit:MenuItem Header="{Binding Resources.FormulaKeyboard_AddFavorite, Source={StaticResource LocalizedStrings}}" Command="{Binding ViewModel.AddFavoriteCommand, ElementName=FormulaKeyboardXaml}" CommandParameter="{Binding}"/>
@@ -233,27 +230,26 @@
         </Pivot.Resources>
         <Pivot.HeaderTemplate>
           <DataTemplate>
-            <TextBlock Margin="-10,0,0,0" Style="{Binding StaticTheme.TextLargeStyle,Source={StaticResource ThemeChooser}}" Text="{Binding}" />
+            <TextBlock Margin="0 0 0 0" FontSize="42" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle,
+              Source={StaticResource ThemeChooser}}" Text="{Binding}" />
           </DataTemplate>
         </Pivot.HeaderTemplate>
-        <PivotItem Header="{Binding Resources.FormulaKeyboard_Functions, Source={StaticResource LocalizedStrings}}">
-          <ListBox ItemsSource="{StaticResource KeysFunctions}"  SelectionChanged="ListBox_OnSelectionChanged" />
+        <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Functions, Source={StaticResource LocalizedStrings}}">
+          <ListView ItemsSource="{StaticResource KeysFunctions}"  SelectionChanged="ListBox_OnSelectionChanged" />
         </PivotItem>
-        <PivotItem Header="{Binding Resources.FormulaKeyboard_Operators, Source={StaticResource LocalizedStrings}}">
-          <ListBox ItemsSource="{StaticResource KeysOperators}"  SelectionChanged="ListBox_OnSelectionChanged" />
+        <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Operators, Source={StaticResource LocalizedStrings}}"/>
+        <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Constants, Source={StaticResource LocalizedStrings}}">
+          <ListView ItemsSource="{StaticResource KeysConstants}"  SelectionChanged="ListBox_OnSelectionChanged" />
         </PivotItem>
-        <PivotItem Header="{Binding Resources.FormulaKeyboard_Constants, Source={StaticResource LocalizedStrings}}">
-          <ListBox ItemsSource="{StaticResource KeysConstants}"  SelectionChanged="ListBox_OnSelectionChanged" />
+        <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Sensors, Source={StaticResource LocalizedStrings}}">
+          <ListView ItemsSource="{StaticResource KeysSensors}"  SelectionChanged="ListBox_OnSelectionChanged" />
         </PivotItem>
-        <PivotItem Header="{Binding Resources.FormulaKeyboard_Sensors, Source={StaticResource LocalizedStrings}}">
-          <ListBox ItemsSource="{StaticResource KeysSensors}"  SelectionChanged="ListBox_OnSelectionChanged" />
+        <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Properties, Source={StaticResource LocalizedStrings}}">
+          <ListView ItemsSource="{StaticResource KeysProperties}"  SelectionChanged="ListBox_OnSelectionChanged" />
         </PivotItem>
-        <PivotItem Header="{Binding Resources.FormulaKeyboard_Properties, Source={StaticResource LocalizedStrings}}">
-          <ListBox ItemsSource="{StaticResource KeysProperties}"  SelectionChanged="ListBox_OnSelectionChanged" />
-        </PivotItem>
-        <PivotItem Name="PivotItemVariables" Header="{Binding Resources.FormulaKeyboard_Variables, Source={StaticResource LocalizedStrings}}">
+        <PivotItem Margin="5 -5 5 5" Name="PivotItemVariables" Header="{Binding Resources.FormulaKeyboard_Variables, Source={StaticResource LocalizedStrings}}">
           <PivotItem.Resources>
-            <Style TargetType="ListBox">
+            <Style TargetType="ListView">
               <Setter Property="Padding" Value="-11,2,0,0" />
               <Setter Property="ItemTemplate">
                 <Setter.Value>
@@ -261,7 +257,7 @@
                     <TextBlock
                       Text="{Binding MultiBindingProperty, Converter={StaticResource FormulaKeyStringConverter}}"
                       d:DataContext="{d:DesignInstance formula:FormulaKey}"
-                      Style="{Binding StaticTheme.TextLargeStyle,Source={StaticResource ThemeChooser}}">
+                      Style="{Binding StaticTheme.TextLargeStyle.NativeStyle,Source={StaticResource ThemeChooser}}">
                     <!--<toolkit:ContextMenuService.ContextMenu>
                       <toolkit:ContextMenu>
                         <toolkit:MenuItem Header="{Binding Resources.FormulaKeyboard_AddFavorite, Source={StaticResource LocalizedStrings}}" Command="{Binding ViewModel.AddFavoriteCommand, ElementName=FormulaKeyboardXaml}" CommandParameter="{Binding}"/>
@@ -278,27 +274,31 @@
           <Pivot Name="PivotVariables" Margin="-12,-10,0,0" Padding="0,-35,0,0" SelectionChanged="Pivot_OnSelectionChanged">
             <Pivot.HeaderTemplate>
               <DataTemplate>
-                <TextBlock Margin="-10,0,0,0" Style="{Binding StaticTheme.TextLargeStyle,Source={StaticResource ThemeChooser}}" Text="{Binding}" />
+                <TextBlock Margin="-10,0,0,0" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle,
+                  Source={StaticResource ThemeChooser}}" Text="{Binding}" />
               </DataTemplate>
             </Pivot.HeaderTemplate>
-            <PivotItem Name="PivotItemLocalVariables" Header="{Binding Resources.FormulaKeyboard_LocalVariables, Source={StaticResource LocalizedStrings}}">
-              <ListBox ItemsSource="{Binding ViewModel.LocalVariables, ElementName=FormulaKeyboardXaml}"  SelectionChanged="ListBox_OnSelectionChanged" />
+            <PivotItem Name="PivotItemLocalVariables" Header="{Binding Resources.FormulaKeyboard_LocalVariables, 
+              Source={StaticResource LocalizedStrings}}">
+              <ListView ItemsSource="{Binding ViewModel.LocalVariables, ElementName=FormulaKeyboardXaml}"
+                        SelectionChanged="ListBox_OnSelectionChanged" />
             </PivotItem>
-            <PivotItem Name="PivotItemGlobalVariables" Header="{Binding Resources.FormulaKeyboard_GlobalVariables, Source={StaticResource LocalizedStrings}}">
-              <ListBox ItemsSource="{Binding ViewModel.GlobalVariables, ElementName=FormulaKeyboardXaml}"  SelectionChanged="ListBox_OnSelectionChanged" />
+            <PivotItem Name="PivotItemGlobalVariables" 
+              Header="{Binding Resources.FormulaKeyboard_GlobalVariables, Source={StaticResource LocalizedStrings}}">
+              <ListView ItemsSource="{Binding ViewModel.GlobalVariables, ElementName=FormulaKeyboardXaml}"  
+                SelectionChanged="ListBox_OnSelectionChanged" />
             </PivotItem>
           </Pivot>
         </PivotItem>
-        <PivotItem Header="{Binding Resources.FormulaKeyboard_Favorites, Source={StaticResource LocalizedStrings}}">
+        <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Favorites, Source={StaticResource LocalizedStrings}}">
           <PivotItem.Resources>
-            <Style TargetType="ListBox">
+            <Style TargetType="ListView">
               <Setter Property="ItemTemplate">
                 <Setter.Value>
                   <DataTemplate>
-                    <TextBlock
-                    Text="{Binding MultiBindingProperty, Converter={StaticResource FormulaKeyStringConverter}}"
-                    d:DataContext="{d:DesignInstance formula:FormulaKey}"
-                    Style="{Binding StaticTheme.TextLargeStyle,Source={StaticResource ThemeChooser}}">
+                    <TextBlock Text="{Binding MultiBindingProperty, Converter={StaticResource FormulaKeyStringConverter}}"
+                      d:DataContext="{d:DesignInstance formula:FormulaKey}"
+                      Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}">
                     <!--<toolkit:ContextMenuService.ContextMenu>
                       <toolkit:ContextMenu>
                         <toolkit:MenuItem Header="{Binding Resources.FormulaKeyboard_RemoveFavorite, Source={StaticResource LocalizedStrings}}" Command="{Binding ViewModel.RemoveFavoriteCommand, ElementName=FormulaKeyboardXaml}" CommandParameter="{Binding}"/>
@@ -311,7 +311,7 @@
             </Style>
           </PivotItem.Resources>
           <Grid>
-            <ListBox ItemsSource="{Binding ViewModel.Favorites, ElementName=FormulaKeyboardXaml}"  SelectionChanged="ListBox_OnSelectionChanged" />
+            <ListView ItemsSource="{Binding ViewModel.Favorites, ElementName=FormulaKeyboardXaml}"  SelectionChanged="ListBox_OnSelectionChanged" />
             <TextBlock 
               Text="{Binding Resources.FormulaKeyboard_FavoritesEmpty, Source={StaticResource LocalizedStrings}}" 
               TextWrapping="Wrap"
@@ -319,10 +319,12 @@
               VerticalAlignment="Center" HorizontalAlignment="Center" />
           </Grid>
         </PivotItem>
-        <PivotItem Header="{Binding Resources.FormulaKeyboard_RecentlyUsed, Source={StaticResource LocalizedStrings}}">
-          <ListBox ItemsSource="{Binding ViewModel.RecentlyUsed, ElementName=FormulaKeyboardXaml}"  SelectionChanged="ListBox_OnSelectionChanged" />
+        <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_RecentlyUsed, Source={StaticResource LocalizedStrings}}">
+          <ListView ItemsSource="{Binding ViewModel.RecentlyUsed, ElementName=FormulaKeyboardXaml}"  
+                    SelectionChanged="ListBox_OnSelectionChanged" />
         </PivotItem>
       </Pivot>
+
     </Grid>
   </Grid>
 </UserControl>

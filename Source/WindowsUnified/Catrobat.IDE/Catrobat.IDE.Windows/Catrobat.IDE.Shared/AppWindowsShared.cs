@@ -1,4 +1,6 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
@@ -43,6 +45,7 @@ namespace Catrobat.IDE.WindowsShared
             ServiceLocator.Register<PortableUIElementsConvertionServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SoundServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ActionTemplateServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SensorServiceWindowsShared>(TypeCreationMode.Lazy);
 
             ServiceLocator.ViewModelLocator = new ViewModelLocator();
             ServiceLocator.ViewModelLocator.RegisterViewModels();
@@ -53,19 +56,18 @@ namespace Catrobat.IDE.WindowsShared
             Application.Current.Resources["Locator"] = ServiceLocator.ViewModelLocator;
             Application.Current.Resources["ThemeChooser"] = ServiceLocator.ThemeChooser;
             Application.Current.Resources["LocalizedStrings"] = ServiceLocator.LocalizedStrings;
- 
 
             if (!ViewModelBase.IsInDesignModeStatic)
                 InitPresenters();
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                var task = new ProjectGeneratorWhackAMole().GenerateProject("de", false);
-                task.Wait();
-
-                var defaultProject = task.Result;
-                var projectChangedMessage = new GenericMessage<Project>(defaultProject);
-                Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                Task.Run(async () =>
+                {
+                    var defaultProject = await new ProjectGeneratorWhackAMole().GenerateProject("de", false);
+                    var projectChangedMessage = new GenericMessage<Project>(defaultProject);
+                    Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                });
             }
         }
 

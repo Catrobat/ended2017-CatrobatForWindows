@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
+using Catrobat.IDE.WindowsPhone.Controls.Formulas.Templates;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -6,11 +9,9 @@ using System.Diagnostics;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
-using Catrobat.IDE.Core.ExtensionMethods;
-using Catrobat.IDE.Core.Models.Formulas.Tokens;
-using Catrobat.IDE.WindowsPhone.Controls.Formulas.Templates;
 
 namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
 {
@@ -228,7 +229,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
                     var formulaTokenTemplates = Application.Current.Resources["FormulaTokenTemplates"] as FormulaTokenTemplateCollection;
                     if (formulaTokenTemplates == null)
                     {
-                        Debug.WriteLine("Please add FormulaTokenTemplates.xaml to App resources. ");
+                        Debug.WriteLine("Please add FormulaTokenTemplates.xaml to App resources.");
                         _formulaTokenTemplates = new Dictionary<Type, FormulaTokenTemplate>();
                     }
                     else
@@ -372,33 +373,33 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
 
         #region Event handlers
 
-        private void Container_OnTap(Grid container, RoutedEventArgs e)
+        private void Container_OnTap(Grid container, TappedRoutedEventArgs e)
         {
-            // TODO: 8.1
-            //// find container
-            //var index = Containers.IndexOf(container);
-            //if (index == -1) return;
-            //e.Handled = true;
+            // find container
+            var index = Containers.IndexOf(container);
+            if (index == -1) return;
+            e.Handled = true;
 
-            //if (e.GetPosition(container).X > container.ActualWidth / 2) index++;
+            if (e.GetPosition(container).X > container.ActualWidth / 2) index++;
 
-            //SelectionLength = 0;
-            //CaretIndex = index;
+            SelectionLength = 0;
+            CaretIndex = index;
         }
 
-        private void Container_OnDoubleTap(Grid container, RoutedEventArgs e)
+        private void Container_OnDoubleTap(Grid container, DoubleTappedRoutedEventArgs e)
         {
-            // TODO: 8.1
-            //// find container
-            //var index = Containers.IndexOf(container);
-            //if (index == -1) return;
+            // find container
+            var index = Containers.IndexOf(container);
+            if (index == -1) return;
 
-            //RaiseDoubleTap(index);
-            //e.Handled = true;
+            RaiseDoubleTap(index);
+            e.Handled = true;
         }
 
         private void Panel_OnTap(object sender, RoutedEventArgs e)
         {
+            if (Tokens == null) return;
+
             CaretIndex = Tokens.Count;
         }
 
@@ -491,14 +492,14 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
             if (!IsLoaded) return;
 
             if (oldIndex == newIndex) return;
-
+            
             if (oldIndex != -1)
             {
                 var element = Children.ElementAtOrDefault(newIndex);
                 if (element == Caret) return;
                 if (oldIndex != -1) Children.RemoveAt(oldIndex);
             }
-            
+
             Children.Insert(newIndex, Caret);
         }
 
@@ -531,29 +532,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
         /// <remarks>Caret cannot be taken from XAML Resources, because it can not be child of Resources and Panel.Children. </remarks>
         private Grid CreateCaret()
         {
-            //<Grid>
-            //  <TextBlock Name="Caret" Text="|" Margin="-7,0,-7,0">
-            //    <TextBlock.Style>
-            //      <Style TargetType="TextBlock">
-            //        <Style.Setters>
-            //          <Setter Property="FontFamily" Value="Courier New"/>
-            //          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-            //        </Style.Setters>
-            //      </Style>
-            //    </TextBlock.Style>
-            //    <!-- blinking effect -->
-            //    <TextBlock.Triggers>
-            //      <EventTrigger RoutedEvent="TextBlock.Loaded">
-            //        <EventTrigger.Actions>
-            //          <BeginStoryboard>
-            //            ...
-            //          </BeginStoryboard>
-            //        </EventTrigger.Actions>
-            //      </EventTrigger>
-            //    </TextBlock.Triggers>
-            //  </TextBlock>
-            //</Grid>
-
             var container = new Grid {Name = "Caret"};
 
             var style = new Style(typeof(TextBlock));
@@ -566,8 +544,9 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
                 Text = "|"
             };
 
+            // TODO: 8.1
             var storyboard = CreateBlinkingEffect(textBlock);
-            textBlock.Loaded += (sender, e) => storyboard.Begin();
+            textBlock.Loaded += (sender, e) => storyboard.Begin(); 
 
             container.Children.Add(textBlock);
 
@@ -576,21 +555,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
 
         private static Storyboard CreateBlinkingEffect(DependencyObject target)
         {
-            //<Storyboard RepeatBehavior="Forever" Duration="0:0:1.2">
-            //  <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Caret" Storyboard.TargetProperty="TextBlock.Visibility">
-            //    <DiscreteObjectKeyFrame KeyTime="0:0:0.0">
-            //      <DiscreteObjectKeyFrame.Value>
-            //        <Visibility>Visible</Visibility>
-            //      </DiscreteObjectKeyFrame.Value>
-            //    </DiscreteObjectKeyFrame>
-            //    <DiscreteObjectKeyFrame KeyTime="0:0:0.6">
-            //      <DiscreteObjectKeyFrame.Value>
-            //        <Visibility>Collapsed</Visibility>
-            //      </DiscreteObjectKeyFrame.Value>
-            //    </DiscreteObjectKeyFrame>
-            //  </ObjectAnimationUsingKeyFrames>
-            //</Storyboard>
-
             var storyboard = new Storyboard
             {
                 RepeatBehavior = RepeatBehavior.Forever,
@@ -601,18 +565,18 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
             animation.KeyFrames.Add(new DiscreteObjectKeyFrame
             {
                 KeyTime = TimeSpan.FromSeconds(0.0),
-                Value = Visibility.Visible
+                Value = 0.0
             });
             animation.KeyFrames.Add(new DiscreteObjectKeyFrame
             {
                 KeyTime = TimeSpan.FromSeconds(0.6),
-                Value = Visibility.Collapsed
+                Value = 1.0
             });
 
             storyboard.Children.Add(animation);
 
             Storyboard.SetTarget(storyboard, target);
-            //Storyboard.SetTargetProperty(storyboard, new PropertyPath(VisibilityProperty)); // TODO 8.1
+            Storyboard.SetTargetProperty(storyboard, "Opacity");
 
             return storyboard;
         }

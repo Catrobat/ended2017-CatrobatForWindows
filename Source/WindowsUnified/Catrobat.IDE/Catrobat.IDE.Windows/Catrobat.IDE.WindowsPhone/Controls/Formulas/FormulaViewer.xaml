@@ -8,10 +8,9 @@
   Loaded="FormulaViewer_OnLoaded"
   d:DesignHeight="80" d:DesignWidth="480">
 
-  <Grid x:Name="LayoutRoot" VerticalAlignment="Stretch">
+  <Grid VerticalAlignment="Stretch">
     <ScrollViewer Name="ScrollViewerContent" VerticalAlignment="Stretch" Tapped="Panel_OnTap">
-      <StackPanel Name="MultilinePanelContent"/>
-      <!--<toolkit:WrapPanel Name="MultilinePanelContent"/>-->
+      <StackPanel Name="MultilinePanelContent" Orientation="Horizontal"/>
     </ScrollViewer>
     <StackPanel Name="SingleLinePanelContent" Orientation="Horizontal" Tapped="Panel_OnTap"/>
   </Grid>

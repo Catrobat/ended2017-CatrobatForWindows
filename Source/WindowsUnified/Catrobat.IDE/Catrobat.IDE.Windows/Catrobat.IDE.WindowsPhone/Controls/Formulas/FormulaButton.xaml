@@ -4,20 +4,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="80" d:DesignWidth="200">
   
   <Grid>
-    <Button Name="ButtonFormula" Click="ButtonFormula_OnClick">
+    <Button Click="ButtonFormula_OnClick">
       <Grid>
         <StackPanel>
-          <TextBlock FontSize="30">
-            <TextBlock.Text>
+          <TextBlock x:Name="TextBlockFormula" FontSize="30">
+            <!--<TextBlock.Text>
               <Binding Path="Parent.Formula"
                        Converter="{StaticResource FormulaStringConverter}"
                        ElementName="LayoutRoot">
               </Binding>
-            </TextBlock.Text>
+            </TextBlock.Text>-->
           </TextBlock>
         </StackPanel>
         <Grid Name="GridTapPreventer" Background="Transparent"/>

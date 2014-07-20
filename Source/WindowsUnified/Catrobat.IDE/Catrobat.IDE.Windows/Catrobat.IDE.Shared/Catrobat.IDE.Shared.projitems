@@ -47,6 +47,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Templates\ActionTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NamespaceTypeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NamespaceTypeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NativeColorOpacityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NativeGridViewExVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NativeImageSquareConverter.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\PlayerLauncherServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\PortableUIElementsConvertionServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ProjectImporterServiceWindowsShared.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SensorServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ShareServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SoundPlayerServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SoundRecorderServiceWindowsShared.cs" />

@@ -105,6 +105,7 @@
       <DependentUpon>PlayPauseButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Buttons\PlayPauseButtonGroup.cs" />
+    <Compile Include="Controls\Formulas\Templates\FormulaTokenTemplateWindowsShared.cs" />
     <Compile Include="ExtendedSplash.xaml.cs">
       <DependentUpon>ExtendedSplash.xaml</DependentUpon>
     </Compile>
