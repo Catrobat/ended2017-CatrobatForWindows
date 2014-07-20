@@ -324,7 +324,6 @@
                     SelectionChanged="ListBox_OnSelectionChanged" />
         </PivotItem>
       </Pivot>
-
     </Grid>
   </Grid>
 </UserControl>
