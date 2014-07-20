@@ -127,10 +127,71 @@
 
     <!-- keyboard -->
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyDelete">Delete</editor:FormulaEditorKey>
+    <Thickness x:Key="PivotPortraitThemePadding">19,38,0,0</Thickness>
+    <Thickness x:Key="PivotLandscapeThemePadding">19,25,0,0</Thickness>
+    <Style x:Key="PivotMoreStyle" TargetType="Pivot">
+    	<Setter Property="Margin" Value="0"/>
+    	<Setter Property="Padding" Value="0"/>
+    	<Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}"/>
+    	<Setter Property="Background" Value="Transparent"/>
+    	<Setter Property="ItemsPanel">
+    		<Setter.Value>
+    			<ItemsPanelTemplate>
+    				<Grid/>
+    			</ItemsPanelTemplate>
+    		</Setter.Value>
+    	</Setter>
+    	<Setter Property="Template">
+    		<Setter.Value>
+    			<ControlTemplate TargetType="Pivot">
+    				<Grid x:Name="RootElement" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+    					<Grid.RowDefinitions>
+    						<RowDefinition Height="Auto"/>
+    						<RowDefinition Height="*"/>
+    					</Grid.RowDefinitions>
+    					<VisualStateManager.VisualStateGroups>
+    						<VisualStateGroup x:Name="Orientation">
+    							<VisualState x:Name="Portrait">
+    								<Storyboard>
+    									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TitleContentControl">
+    										<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotPortraitThemePadding}"/>
+    									</ObjectAnimationUsingKeyFrames>
+    								</Storyboard>
+    							</VisualState>
+    							<VisualState x:Name="Landscape">
+    								<Storyboard>
+    									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TitleContentControl">
+    										<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotLandscapeThemePadding}"/>
+    									</ObjectAnimationUsingKeyFrames>
+    								</Storyboard>
+    							</VisualState>
+    						</VisualStateGroup>
+    					</VisualStateManager.VisualStateGroups>
+    					<ContentControl x:Name="TitleContentControl" ContentTemplate="{TemplateBinding TitleTemplate}" Content="{TemplateBinding Title}" Style="{StaticResource PivotTitleContentControlStyle}"/>
+    					<ScrollViewer x:Name="ScrollViewer" HorizontalSnapPointsAlignment="Center" HorizontalSnapPointsType="MandatorySingle" HorizontalScrollBarVisibility="Hidden" Margin="{TemplateBinding Padding}" Grid.Row="1" Template="{StaticResource ScrollViewerScrollBarlessTemplate}" VerticalSnapPointsType="None" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled" VerticalContentAlignment="Stretch" ZoomMode="Disabled">
+    						<PivotPanel x:Name="Panel" VerticalAlignment="Stretch">
+    							<PivotHeaderPanel x:Name="Header" Margin="35,0,0,0">
+    								<PivotHeaderPanel.RenderTransform>
+    									<CompositeTransform x:Name="HeaderTranslateTransform" TranslateX="0"/>
+    								</PivotHeaderPanel.RenderTransform>
+    							</PivotHeaderPanel>
+    							<ItemsPresenter x:Name="PivotItemPresenter">
+    								<ItemsPresenter.RenderTransform>
+    									<TranslateTransform x:Name="ItemsPresenterTranslateTransform" X="0"/>
+    								</ItemsPresenter.RenderTransform>
+    							</ItemsPresenter>
+    						</PivotPanel>
+    					</ScrollViewer>
+    				</Grid>
+    			</ControlTemplate>
+    		</Setter.Value>
+    	</Setter>
+    </Style>
   </UserControl.Resources>
 
-  <Grid Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
-    <Grid Grid.Row="0" Name="GridMain" Margin="0 8 0 0" Visibility="Visible">
+  <Grid Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
+    Source={StaticResource ThemeChooser}}">
+    <Grid Grid.Row="0" Name="GridMain" Margin="0 8 0 0" Visibility="Collapsed">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
         <RowDefinition/>
@@ -201,12 +262,8 @@
     </Grid>
     
     
-    <Grid Name="GridMore" Visibility="Collapsed" Margin="0 0 0 0">
-      <Grid Grid.Column="0" Margin="-5,0,0,0">
-        <AppBarButton Icon="Back" Click="ButtonMoreBack_Click" Margin="0 0 0 0"
-           HorizontalAlignment="Left" VerticalAlignment="Top"/>
-      </Grid>
-      <Pivot Name="PivotMore" Margin="0 50 0 0" Padding="0 -35 0 0" SelectionChanged="Pivot_OnSelectionChanged">
+    <Grid Name="GridMore" Visibility="Visible" Margin="0 0 0 0">
+      <Pivot Name="PivotMore" Margin="20 3 0 0" Padding="0 -35 0 0" SelectionChanged="Pivot_OnSelectionChanged">
         <Pivot.Resources>
           <Style TargetType="ListView">
             <Setter Property="Padding" Value="0 0 0 0" />
@@ -228,6 +285,9 @@
             </Setter>
           </Style>
         </Pivot.Resources>
+      	<Pivot.Style>
+      		<StaticResource ResourceKey="PivotMoreStyle"/>
+      	</Pivot.Style>
         <Pivot.HeaderTemplate>
           <DataTemplate>
             <TextBlock Margin="0 0 0 0" FontSize="42" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle,
@@ -324,6 +384,12 @@
                     SelectionChanged="ListBox_OnSelectionChanged" />
         </PivotItem>
       </Pivot>
+      <Grid Grid.Column="0" Margin="-5 0 0 0" VerticalAlignment="Top" HorizontalAlignment="Left"
+        Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}" >
+        <AppBarButton Icon="Back" Click="ButtonMoreBack_Click" Margin="0 0 -20 -22"
+           HorizontalAlignment="Left" VerticalAlignment="Top"/>
+      </Grid>
     </Grid>
   </Grid>
 </UserControl>
