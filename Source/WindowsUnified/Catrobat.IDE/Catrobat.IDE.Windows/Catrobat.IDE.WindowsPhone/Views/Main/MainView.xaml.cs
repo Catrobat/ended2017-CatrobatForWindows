@@ -48,8 +48,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
 
         private void FilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //_viewModel.OnlineProjects.FilterText = ((TextBox) sender).Text;
-
             var textBox = sender as TextBox;
             if (textBox != null)
             {
@@ -67,11 +65,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             }
         }
 
-        private async void FilterTextBox_OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            //await _viewModel.OnlineProjects.LoadFirstPrograms();
-        }
-
         private void Hub_SectionsInViewChanged(object sender, SectionsInViewChangedEventArgs e)
         {
             if ((MainHub.SectionsInView[0] == HubSectionOnlineProjects) && firstAttempt)
@@ -80,7 +73,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
 
                 if(_viewModel.OnlineProjects == null)
                     _viewModel.OnlineProjects = new OnlineProgramsCollectionWindowsShared();
-                //_viewModel.OnlineProjects.IsLoadingEnabled = true;
             }
         }
 

@@ -79,7 +79,6 @@
                 Text="{Binding OnlineProjects.FilterText, Mode=TwoWay}"
                 TextChanged="FilterTextBox_TextChanged" 
                 KeyDown="FilterTextBox_KeyDown"
-                LostFocus="FilterTextBox_OnLostFocus"
                 />
               
               

@@ -18,7 +18,8 @@ using Catrobat.IDE.Core.Services.Storage;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
-    public static class CatrobatWebCommunicationService
+    public static class CatrobatWebCommunicationService // TODO: remove static keyword and make me a real Service!
+                                                        // see ServiceLocator
     {
         private static int _uploadCounter = 0;
 
