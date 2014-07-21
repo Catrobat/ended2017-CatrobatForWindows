@@ -10,23 +10,25 @@
         Source={StaticResource ThemeChooser}}">
     <StackPanel Orientation="Vertical">
       <Grid>
-        <TextBlock Margin="10" 
+        <TextBlock Margin="10 20 10 0" 
           Text="{Binding CurrentProject.Name}"
-          Style="{Binding StaticTheme.TextTitle2Style.NativeStyle, 
+          Style="{Binding StaticTheme.TextTitle1Style.NativeStyle, 
           Source={StaticResource ThemeChooser}}" TextWrapping="Wrap"/>
       </Grid>
       <Grid>
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="200" />
+          <ColumnDefinition Width="Auto" />
           <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Image Grid.Column="0"
-          Width="200" Height="200" Stretch="UniformToFill"
-          VerticalAlignment="Top" 
+        <Image Grid.Column="0" Margin="10"
+          MaxWidth="150"
+          Stretch="UniformToFill"
+          VerticalAlignment="Top"
+          HorizontalAlignment="Stretch"
           Source="{Binding CurrentProjectHeader.Screenshot.ImageSource}" />
 
-        <StackPanel Grid.Column="1" Margin="15 0 5 0">
-          <TextBlock Margin="0 10 0 0" 
+        <StackPanel Grid.Column="1" Margin="0 0 8 0">
+          <TextBlock Margin="0 0 0 0" 
             Text="{Binding Resources.Main_OnlineProjectDescription, 
             Source={StaticResource LocalizedStrings}}" 
             Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
@@ -34,6 +36,7 @@
           <TextBlock Text="{Binding CurrentProject.Description, Mode=OneWay}" 
             Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
             Source={StaticResource ThemeChooser}}"
+            TextAlignment="Justify"
             TextWrapping="Wrap" />
         </StackPanel>
       </Grid>
@@ -41,7 +44,7 @@
   </Grid>
 
   <Page.BottomAppBar>
-    <CommandBar 
+    <CommandBar RequestedTheme="Dark"
       Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
       Source={StaticResource ThemeChooser}}">
       <CommandBar.PrimaryCommands>
@@ -60,9 +63,10 @@
         <!--TODO: Add pin and share buttons here-->
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
-        <AppBarButton Label="{Binding Resources.Main_ChangeProjectNameAndDescription, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding RenameProjectCommand}"/>
+        <AppBarButton 
+          Label="{Binding Resources.Main_ChangeProjectNameAndDescription, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding RenameProjectCommand}"/>
       </CommandBar.SecondaryCommands>
     </CommandBar>
   </Page.BottomAppBar>

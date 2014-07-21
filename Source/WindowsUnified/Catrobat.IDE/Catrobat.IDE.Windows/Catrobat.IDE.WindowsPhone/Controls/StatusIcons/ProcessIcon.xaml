@@ -15,10 +15,10 @@
     </Storyboard>
   </UserControl.Resources>
   
-  
-  <Grid Width="30" Height="30" x:Name="LayoutRoot">
-    <Image Source="/Content/Images/Misc/InProcess.png" Width="20" Height="20"
-            Margin="0" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+  <Grid Width="30" Height="30">
+    <Image  Name="ImageInProcess" Source="/Content/Images/Misc/InProcess.png" 
+      Width="20" Height="20" Margin="0"
+      VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
       <Image.RenderTransform>
         <CompositeTransform CenterX="10" CenterY="10" Rotation="0"></CompositeTransform>
       </Image.RenderTransform>

@@ -76,7 +76,7 @@
 
       <Grid Margin="10 5 10 25">
         <TextBlock Text="{Binding CurrentProject.Name}" 
-                   Style="{Binding StaticTheme.TextTitle3Style.NativeStyle, 
+                   Style="{Binding StaticTheme.TextTitle1Style.NativeStyle, 
                    Source={StaticResource ThemeChooser}}">
         </TextBlock>
       </Grid>
@@ -99,7 +99,8 @@
               TextAlignment="Center"
               VerticalAlignment="Center"
               HorizontalAlignment="Center" />
-      <appBar:EditorAppBar Grid.Row="2"
+      <appBar:EditorAppBar Grid.Row="2" 
+        RequestedTheme="Dark"
         VerticalAlignment="Bottom"
         TargetType="Object"
         ClearSelectionCommand="{Binding ClearObjectsSelectionCommand}"

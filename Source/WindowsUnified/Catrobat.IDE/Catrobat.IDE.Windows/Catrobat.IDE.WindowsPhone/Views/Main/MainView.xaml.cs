@@ -44,46 +44,20 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             base.OnNavigatedTo(e);
         }
 
-
-        //protected override void OnBackKeyPress(CancelEventArgs e)
-        //{
-        //    while (NavigationService.CanGoBack)
-        //        ServiceLocator.NavigationService.RemoveBackEntry();
-
-        //    if (_firstBackPressed == false)
-        //    {
-        //        _viewModel.GoBackCommand.Execute(null);
-        //    }
-        //    else
-        //    {
-        //        e.Cancel = true;
-        //        _firstBackPressed = false;
-
-        //        var timeToAct = new TimeSpan(0, 0, 0, 0, 1000);
-
-        //        ServiceLocator.NotifictionService.ShowToastNotification("", // AppResources.Main_ReallyCloseApplicationCaption
-        //            AppResources.Main_ReallyCloseApplicationText, timeToAct);
-
-        //        Task.Run(async () =>
-        //        {
-        //            await Task.Delay(timeToAct);
-        //            _firstBackPressed = true;
-        //        });
-        //    }
-        //}
-
         private void FilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var textBox = sender as TextBox;
             if (textBox != null)
             {
-                textBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                var bindingExpression = textBox.GetBindingExpression(TextBox.TextProperty);
+                if (bindingExpression != null)
+                    bindingExpression.UpdateSource();
             }
         }
 
-        private void FilterTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void FilterTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (e.VirtualKey == VirtualKey.Enter)
+            if (e.Key == VirtualKey.Enter)
             {
                 _viewModel.LoadOnlineProjects(false);
             }
@@ -103,24 +77,15 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             _viewModel.OnlineProjectTapCommand.Execute(e.ClickedItem);
         }
 
-        //private void panoramaMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if ((PanoramaMain.SelectedItem == PanoramaItemOnlineProjects) && firstAttempt)
-        //    {
-        //        _viewModel.LoadOnlineProjects(false, true);
-        //        firstAttempt = false;
-        //    }
-        //}
-
 
         //private void LocalProjectControl_OnLocalProjectsBackPressed(object sender, EventArgs e)
         //{
         //    SlideLeft(PanoramaMain);
         //}
 
-        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
-        {
-            base.OnNavigatingFrom(e);
-        }
+        //protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        //{
+        //    base.OnNavigatingFrom(e);
+        //}
     }
 }

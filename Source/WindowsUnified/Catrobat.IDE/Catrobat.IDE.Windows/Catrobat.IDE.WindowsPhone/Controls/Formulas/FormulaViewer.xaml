@@ -3,14 +3,19 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+  xmlns:controls="using:WinRTXamlToolkit.Controls"
   mc:Ignorable="d"
   Loaded="FormulaViewer_OnLoaded"
-  d:DesignHeight="80" d:DesignWidth="480">
+  d:DesignHeight="100" d:DesignWidth="480">
 
   <Grid VerticalAlignment="Stretch">
-    <ScrollViewer Name="ScrollViewerContent" VerticalAlignment="Stretch" Tapped="Panel_OnTap">
-      <StackPanel Name="MultilinePanelContent" Orientation="Horizontal"/>
+    <ScrollViewer Name="ScrollViewerContent" 
+      VerticalAlignment="Stretch"
+      Tapped="Panel_OnTap">
+      <controls:WrapPanel Name="MultilinePanelContent" 
+        VerticalAlignment="Top"
+        Orientation="Horizontal" 
+        SizeChanged="MultilinePanelContent_OnSizeChanged"/>
     </ScrollViewer>
     <StackPanel Name="SingleLinePanelContent" Orientation="Horizontal" Tapped="Panel_OnTap"/>
   </Grid>

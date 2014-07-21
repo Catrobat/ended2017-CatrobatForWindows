@@ -634,7 +634,7 @@
     <value>All uploads finished.</value>
   </data>
   <data name="Main_OnlineProjectDescription" xml:space="preserve">
-    <value>description:</value>
+    <value>description</value>
   </data>
   <data name="Main_OnlineProjectDownloadButton" xml:space="preserve">
     <value>Download</value>
@@ -718,7 +718,7 @@
     <value>Password:</value>
   </data>
   <data name="Main_UploadProjectProjectDescription" xml:space="preserve">
-    <value>Description:</value>
+    <value>Description</value>
   </data>
   <data name="Main_UploadProjectProjectName" xml:space="preserve">
     <value>Program:</value>

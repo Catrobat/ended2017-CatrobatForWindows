@@ -6,19 +6,19 @@
   xmlns:statusIcons="using:Catrobat.IDE.WindowsPhone.Controls.StatusIcons"
   xmlns:projects="using:Catrobat.IDE.WindowsPhone.Controls.Projects"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+  xmlns:controls="using:WinRTXamlToolkit.Controls"
   mc:Ignorable="d"
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
 
-  <Grid x:Name="LayoutRoot" 
-        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+    Source={StaticResource ThemeChooser}}">
 
     <Hub Name="MainHub"
-         Foreground="{Binding StaticTheme.TextForegroundBrush.NativeBrush, 
-         Source={StaticResource ThemeChooser}}"
-         Background="{Binding Source={StaticResource ThemeChooser}, 
-         Path=SelectedTheme.Background.ImageSource}" 
-         SectionsInViewChanged="Hub_SectionsInViewChanged" >
+      Foreground="{Binding StaticTheme.TextForegroundBrush.NativeBrush, 
+      Source={StaticResource ThemeChooser}}"
+      Background="{Binding Source={StaticResource ThemeChooser}, 
+      Path=SelectedTheme.Background.ImageSource}" 
+      SectionsInViewChanged="Hub_SectionsInViewChanged" >
       <Hub.Header>
         <StackPanel Orientation="Horizontal" Margin="12 12 12 -20">
           <TextBlock Text="POCKET" Foreground="#14a5b8" FontSize="52" FontFamily="Arial Black" 
@@ -40,61 +40,13 @@
         <HubSection.ContentTemplate>
           <DataTemplate>
             <Grid Margin="0 -20 0 0">
-              <GridView Name="ListBoxLocalProjects" ItemsSource="{Binding LocalProjects}" 
-                        VerticalAlignment="Stretch" 
-                        HorizontalAlignment="Stretch">
+              <GridView Name="ListBoxLocalProjects" 
+                ItemsSource="{Binding LocalProjects}" 
+                VerticalAlignment="Stretch" 
+                HorizontalAlignment="Stretch">
                 <GridView.ItemTemplate>
                   <DataTemplate>
-                    <Grid>
-                      <Button Padding="0" BorderThickness="0" 
-                            Command="{Binding MainViewModel.OpenProjectCommand, 
-                            Source={StaticResource Locator}}"
-                            CommandParameter="{Binding}">
-                        <Grid  Width="150" Height="150">
-                          <projects:LocalProjectControl Width="150" Height="150" Margin="5" Project="{Binding}" />
-                          <Button MinWidth="50" MinHeight="50"
-                            VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                            Padding="0 5 0 5" Margin="5 5 4 -4"
-                            BorderThickness="0">
-                            <Button.Flyout>
-                              <MenuFlyout>
-                                <MenuFlyoutItem Text="{Binding Resources.Main_CopyProject, 
-                                  Source={StaticResource LocalizedStrings}}"
-                                  Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, 
-                                  Source={StaticResource Locator}}" 
-                                  CommandParameter="{Binding ProjectName}"/>
-                                <MenuFlyoutItem Text="{Binding Resources.Main_DeleteProject, 
-                                  Source={StaticResource LocalizedStrings}}"
-                                  Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, 
-                                  Source={StaticResource Locator}}" 
-                                  CommandParameter="{Binding ProjectName}"/>
-                              </MenuFlyout>
-                            </Button.Flyout>
-                            <Grid Height="40" Width="40">
-                              <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="2*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="2*"/>
-                                <RowDefinition Height="1*"/>
-                              </Grid.RowDefinitions>
-                              <Grid Grid.Row="0" 
-                                VerticalAlignment="Stretch" 
-                                HorizontalAlignment="Stretch" 
-                                Background="White"/>
-                              <Grid Grid.Row="2" 
-                                VerticalAlignment="Stretch" 
-                                HorizontalAlignment="Stretch" 
-                                Background="White"/>
-                              <Grid Grid.Row="4" 
-                                VerticalAlignment="Stretch" 
-                                HorizontalAlignment="Stretch" 
-                                Background="White"/>
-                            </Grid>
-                          </Button>
-                        </Grid>
-                      </Button>
-                    </Grid>
+                    <projects:LocalProjectControl/>
                   </DataTemplate>
                 </GridView.ItemTemplate>
               </GridView>
@@ -120,66 +72,77 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
               </Grid.RowDefinitions>
-              <!--<toolkit:PhoneTextBox Hint="{Binding Resources.Main_FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" 
-                                    InputScope="Url" ActionIcon="../../Resources/Application/Search.png" 
-                                    x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
-                                    TextChanged="FilterTextBox_TextChanged" KeyDown="FilterTextBox_KeyDown" 
-                                    Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />-->
-              <ListView Name="ListViewOnlineProjects"
-                        ItemsSource="{Binding OnlineProjects}" 
-                        Grid.Row="1"
-                        VerticalAlignment="Stretch" 
-                        HorizontalAlignment="Stretch" 
-                        SelectedItem="{Binding SelectedOnlineProject, Mode=TwoWay}" 
-                        SelectionMode="None"
-                        IsItemClickEnabled="true" 
-                        ItemClick="ListViewOnlineProjects_ItemClick">
+              <!--controls:WatermarkTextBox WatermarkText="{Binding Resources.Main_FilterTextBoxHint, 
+                Source={StaticResource LocalizedStrings}}" -->
+              <TextBox Grid.Row="0"
+                HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                TextChanged="FilterTextBox_TextChanged" 
+                KeyDown="FilterTextBox_KeyDown" 
+                Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
+              <ListView Name="ListViewOnlineProjects" Grid.Row="1"
+                ItemsSource="{Binding OnlineProjects}" 
+                VerticalAlignment="Stretch" 
+                HorizontalAlignment="Stretch" 
+                SelectedItem="{Binding SelectedOnlineProject, Mode=TwoWay}" 
+                SelectionMode="None"
+                IsItemClickEnabled="true" 
+                ItemClick="ListViewOnlineProjects_ItemClick">
                 <ListView.ItemTemplate>
                   <DataTemplate>
                     <Grid Margin="10 5 10 5"  
-                          Background="{StaticResource PhoneAccentBrush}"
-                          DataContext="{Binding}">
-                      <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition />
-                      </Grid.ColumnDefinitions>
-                      <Image Margin="10 5 5 5"
-                             Grid.Column="0" 
-                             Source="{Binding ScreenshotSmall}"
-                             Width="66" Height="110" />
-                      <StackPanel Grid.Column="1" >
-                        <TextBlock Margin="15 0 5 0"
-                                   Text="{Binding ProjectName}"  
-                                   Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-                                   Source={StaticResource ThemeChooser}}" Foreground="White"/>
-                        <TextBlock Margin="15 0 5 0" 
-                                   Text="{Binding Description}"  
-                                   Style="{Binding StaticTheme.TextSmallStyle, 
-                                   Source={StaticResource ThemeChooser}}" Foreground="White"/>
-                      </StackPanel>
+                      Background="#FF99AACC"
+                      DataContext="{Binding}">
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                      </Grid.RowDefinitions>
+                      <TextBlock Grid.Row="0" Margin="15 0 5 0"
+                        Text="{Binding ProjectName}"
+                        FontSize="32"
+                        Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
+                        Source={StaticResource ThemeChooser}}" Foreground="White"/>
+                      <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="10 5 5 5"
+                          Grid.Column="0" 
+                          Source="{Binding ScreenshotSmall}"
+                          VerticalAlignment="Stretch"
+                          Stretch="UniformToFill"
+                          MaxWidth="100" />
+                        <TextBlock Grid.Column="1" Margin="15 0 5 0" 
+                          Text="{Binding Description}"
+                          Style="{Binding StaticTheme.TextSubtleStyle.NativeStyle, 
+                          Source={StaticResource ThemeChooser}}" 
+                          Foreground="#FFEEEEEE"/>
+                      </Grid>
                     </Grid>
                   </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.ItemContainerStyle>
                   <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    <Setter Property="HorizontalContentAlignment" 
+                      Value="Stretch"></Setter>
                   </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.Footer>
-                  <Grid Margin="10 5 10 5" 
-                        Background="{StaticResource PhoneAccentBrush}" 
-                        Height="35" 
-                        Opacity="{Binding IsLoadingOnlineProjects, 
-                        Converter={StaticResource BoolOpacityConverter}}">
+                  <Grid Margin="10 5 10 5" Height="35" 
+                    Background="#FF667799"
+                    Opacity="{Binding IsLoadingOnlineProjects, 
+                    Converter={StaticResource BoolOpacityConverter}}">
                     <StackPanel Orientation="Horizontal" 
-                                VerticalAlignment="Center" 
-                                HorizontalAlignment="Center">
-                      <!--<statusIcons:ProcessIcon IsProcessing="{Binding IsLoadingOnlineProjects}" Margin="0 0 5 0" />-->
-                      <TextBlock VerticalAlignment="Center" 
-                                 HorizontalAlignment="Center" 
-                                 Text="{Binding Resources.Main_OnlineProjectListBoxLoadMore, 
-                                 Source={StaticResource LocalizedStrings}}" 
-                                 Foreground="White" />
+                      VerticalAlignment="Center" 
+                      HorizontalAlignment="Center">
+                      <statusIcons:ProcessIcon Margin="0 0 5 0" 
+                        IsProcessing="{Binding IsLoadingOnlineProjects}" />
+                      <TextBlock Foreground="White" 
+                        VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        Text="{Binding Resources.Main_OnlineProjectListBoxLoadMore, 
+                        Source={StaticResource LocalizedStrings}}" 
+                        Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+                        Source={StaticResource ThemeChooser}}" />
                     </StackPanel>
                   </Grid>
                 </ListView.Footer>
@@ -237,11 +200,11 @@
                   <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Right" 
-                            VerticalAlignment="Bottom" Orientation="Vertical">
+                  VerticalAlignment="Bottom" Orientation="Vertical">
                   <TextBlock Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
                     Source={StaticResource ThemeChooser}}" 
-                       Text="{Binding ApplicationVersionName}" 
-                       Margin="10 10 0 10" TextWrapping="Wrap"  />
+                    Text="{Binding ApplicationVersionName}" 
+                    Margin="10 10 0 10" TextWrapping="Wrap"  />
                 </StackPanel>
               </Grid>
             </Grid>
@@ -252,19 +215,19 @@
   </Grid>
 
   <Page.BottomAppBar>
-    <CommandBar 
+    <CommandBar RequestedTheme="Dark" 
       Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
       Source={StaticResource ThemeChooser}}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Add" 
-                      Label="{Binding Resources.Main_ButtonCreate, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding CreateNewProjectCommand}"/>
+          Label="{Binding Resources.Main_ButtonCreate, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding CreateNewProjectCommand}"/>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
         <AppBarButton Label="{Binding Resources.Main_Settings, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding SettingsCommand}"/>
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding SettingsCommand}"/>
       </CommandBar.SecondaryCommands>
     </CommandBar>
   </Page.BottomAppBar>

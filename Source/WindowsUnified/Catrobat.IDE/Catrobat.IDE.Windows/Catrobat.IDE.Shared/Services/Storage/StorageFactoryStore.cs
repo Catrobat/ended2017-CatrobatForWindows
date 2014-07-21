@@ -13,11 +13,11 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             var minDimension = Math.Min(ServiceLocator.SystemInformationService.ScreenHeight,
                 ServiceLocator.SystemInformationService.ScreenWidth);
 
-            if (minDimension <= 700)
+            if (minDimension < 400)
             {
                 storage.SetImageMaxThumbnailWidthHeight(200);
             }
-            else if (minDimension <= 1400)
+            else if (minDimension <= 700)
             {
                 storage.SetImageMaxThumbnailWidthHeight(400);
             }

@@ -42,5 +42,10 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Projects
         {
             this.InitializeComponent();
         }
+
+        private void OptionsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MenuFlyoutLocalProjectOptions.ShowAt(this);
+        }
     }
 }

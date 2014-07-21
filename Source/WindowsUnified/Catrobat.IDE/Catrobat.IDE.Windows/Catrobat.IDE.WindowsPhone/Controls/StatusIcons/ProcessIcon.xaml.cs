@@ -19,7 +19,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.StatusIcons
         }
 
         public static readonly DependencyProperty IsProcessingProperty =
-            DependencyProperty.Register("IsProcessing", typeof(bool), typeof(ProcessIcon), new PropertyMetadata(null, IsProcessingChanged));
+            DependencyProperty.Register("IsProcessing", typeof(bool), 
+            typeof(ProcessIcon), new PropertyMetadata(true, IsProcessingChanged));
 
         private static void IsProcessingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -40,20 +41,19 @@ namespace Catrobat.IDE.WindowsPhone.Controls.StatusIcons
 
         private void ProcessingStateChanged(bool isProcessing)
         {
-            // TODO: 8.1
-            //Dispatcher.BeginInvoke(() =>
-            //{
-            //    if (isProcessing)
-            //    {
-            //        ImageInProcess.Visibility = Visibility.Visible;
-            //        StartTransformationThread();
-            //    }
-            //    else
-            //    {
-            //        ImageInProcess.Visibility = Visibility.Collapsed;
-            //        StopTransformationThread();
-            //    }
-            //});
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                if (isProcessing)
+                {
+                    ImageInProcess.Visibility = Visibility.Visible;
+                    StartTransformationThread();
+                }
+                else
+                {
+                    ImageInProcess.Visibility = Visibility.Collapsed;
+                    StopTransformationThread();
+                }
+            });
         }
 
         #region TransformationThread
