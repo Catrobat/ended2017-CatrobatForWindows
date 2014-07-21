@@ -10,7 +10,7 @@
         Source={StaticResource ThemeChooser}}">
     <StackPanel Orientation="Vertical">
       <Grid>
-        <TextBlock Margin="10" 
+        <TextBlock Margin="10 20 10 0" 
           Text="{Binding CurrentProject.Name}"
           Style="{Binding StaticTheme.TextTitle1Style.NativeStyle, 
           Source={StaticResource ThemeChooser}}" TextWrapping="Wrap"/>

@@ -6,6 +6,7 @@
   xmlns:statusIcons="using:Catrobat.IDE.WindowsPhone.Controls.StatusIcons"
   xmlns:projects="using:Catrobat.IDE.WindowsPhone.Controls.Projects"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+  xmlns:controls="using:WinRTXamlToolkit.Controls"
   mc:Ignorable="d"
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
 
@@ -71,14 +72,15 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
               </Grid.RowDefinitions>
-              <!--<toolkit:PhoneTextBox Hint="{Binding Resources.Main_FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" 
-                InputScope="Url" ActionIcon="../../Resources/Application/Search.png" 
-                x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
-                TextChanged="FilterTextBox_TextChanged" KeyDown="FilterTextBox_KeyDown" 
-                Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />-->
-              <ListView Name="ListViewOnlineProjects"
+              <!--controls:WatermarkTextBox WatermarkText="{Binding Resources.Main_FilterTextBoxHint, 
+                Source={StaticResource LocalizedStrings}}" -->
+              <TextBox Grid.Row="0"
+                HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                TextChanged="FilterTextBox_TextChanged" 
+                KeyDown="FilterTextBox_KeyDown" 
+                Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
+              <ListView Name="ListViewOnlineProjects" Grid.Row="1"
                 ItemsSource="{Binding OnlineProjects}" 
-                Grid.Row="1"
                 VerticalAlignment="Stretch" 
                 HorizontalAlignment="Stretch" 
                 SelectedItem="{Binding SelectedOnlineProject, Mode=TwoWay}" 
@@ -88,7 +90,7 @@
                 <ListView.ItemTemplate>
                   <DataTemplate>
                     <Grid Margin="10 5 10 5"  
-                      Background="{StaticResource PhoneAccentBrush}"
+                      Background="#FF99AACC"
                       DataContext="{Binding}">
                       <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -121,24 +123,26 @@
                 </ListView.ItemTemplate>
                 <ListView.ItemContainerStyle>
                   <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    <Setter Property="HorizontalContentAlignment" 
+                      Value="Stretch"></Setter>
                   </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.Footer>
                   <Grid Margin="10 5 10 5" Height="35" 
-                    Background="{StaticResource PhoneAccentBrush}" 
+                    Background="#FF667799"
                     Opacity="{Binding IsLoadingOnlineProjects, 
                     Converter={StaticResource BoolOpacityConverter}}">
                     <StackPanel Orientation="Horizontal" 
                       VerticalAlignment="Center" 
                       HorizontalAlignment="Center">
-                      <!--<statusIcons:ProcessIcon IsProcessing="{Binding IsLoadingOnlineProjects}" Margin="0 0 5 0" />-->
-                      <TextBlock Foreground="White"
-                        VerticalAlignment="Center" 
-                        HorizontalAlignment="Center" 
+                      <statusIcons:ProcessIcon Margin="0 0 5 0" 
+                        IsProcessing="{Binding IsLoadingOnlineProjects}" />
+                      <TextBlock Foreground="White" 
+                        VerticalAlignment="Center" HorizontalAlignment="Center" 
                         Text="{Binding Resources.Main_OnlineProjectListBoxLoadMore, 
                         Source={StaticResource LocalizedStrings}}" 
-                         />
+                        Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+                        Source={StaticResource ThemeChooser}}" />
                     </StackPanel>
                   </Grid>
                 </ListView.Footer>
