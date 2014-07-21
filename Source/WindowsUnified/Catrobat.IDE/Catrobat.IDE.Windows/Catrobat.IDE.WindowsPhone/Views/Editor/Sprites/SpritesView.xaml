@@ -74,7 +74,7 @@
         <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
 
-      <Grid Margin="10 5 10 25">
+      <Grid Margin="10 10 10 0">
         <TextBlock Text="{Binding CurrentProject.Name}" 
                    Style="{Binding StaticTheme.TextTitle1Style.NativeStyle, 
                    Source={StaticResource ThemeChooser}}">
@@ -82,7 +82,7 @@
       </Grid>
 
       <ListView Grid.Row="1"
-                Margin="10"
+                Margin="10 0 10 0"
                 SelectionMode="Single"
                 ItemsSource="{Binding Sprites}"
                 SelectedItem="{Binding SelectedSprite, Mode=TwoWay}"
