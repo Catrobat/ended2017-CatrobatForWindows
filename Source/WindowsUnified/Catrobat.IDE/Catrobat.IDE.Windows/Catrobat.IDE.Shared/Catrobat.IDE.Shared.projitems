@@ -47,11 +47,13 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Templates\ActionTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NamespaceTypeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NullVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NativeColorOpacityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NativeGridViewExVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NativeImageSquareConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\PortableConverters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\PortableValueConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Misc\OnlineProgramsCollectionWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ActionTemplateServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ColorConversionServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CultureServiceWindowsShared.cs" />

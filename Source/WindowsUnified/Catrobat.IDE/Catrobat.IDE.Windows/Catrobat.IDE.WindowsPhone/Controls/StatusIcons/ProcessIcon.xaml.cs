@@ -8,8 +8,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.StatusIcons
 {
     public partial class ProcessIcon : INotifyPropertyChanged
     {
-        private const bool TransformationIsRunning = false;
-
         #region Properties
 
         public bool IsProcessing
@@ -65,15 +63,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.StatusIcons
 
         public void StopTransformationThread()
         {
-            ServiceLocator.DispatcherService.RunOnMainThread(() => StoryboardAnimation.Begin());
-        }
-
-        public void UpdateTransformation()
-        {
-            while (TransformationIsRunning)
-            {
-                ServiceLocator.DispatcherService.RunOnMainThread(() => StoryboardAnimation.Begin());
-            }
+            ServiceLocator.DispatcherService.RunOnMainThread(() => StoryboardAnimation.Stop());
         }
 
         #endregion

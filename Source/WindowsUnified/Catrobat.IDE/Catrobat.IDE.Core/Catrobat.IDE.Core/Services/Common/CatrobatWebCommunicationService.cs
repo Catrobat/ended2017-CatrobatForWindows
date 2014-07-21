@@ -22,7 +22,9 @@ namespace Catrobat.IDE.Core.Services.Common
     {
         private static int _uploadCounter = 0;
 
-        public static async Task<List<OnlineProjectHeader>> AsyncLoadOnlineProjects(string filterText, int offset, CancellationToken taskCancellationToken)
+        public static async Task<List<OnlineProjectHeader>> AsyncLoadOnlineProjects(
+            string filterText, int offset, int count,
+            CancellationToken taskCancellationToken)
         {
             using (var http_client = new HttpClient())
             {
@@ -37,12 +39,16 @@ namespace Catrobat.IDE.Core.Services.Common
 
                     if (filterText == "")
                     {
-                        http_response = await http_client.GetAsync(String.Format(ApplicationResources.API_RECENT_PROJECTS, ApplicationResources.API_REQUEST_LIMIT, offset), taskCancellationToken);
+                        http_response = await http_client.GetAsync(
+                            String.Format(ApplicationResources.API_RECENT_PROJECTS, 
+                            count, offset), taskCancellationToken);
                     }
                     else
                     {
                         string encoded_filter_text = WebUtility.UrlEncode(filterText);
-                        http_response = await http_client.GetAsync(String.Format(ApplicationResources.API_SEARCH_PROJECTS, encoded_filter_text, ApplicationResources.API_REQUEST_LIMIT, offset), taskCancellationToken);
+                        http_response = await http_client.GetAsync(String.Format(
+                            ApplicationResources.API_SEARCH_PROJECTS, encoded_filter_text,
+                            count, offset), taskCancellationToken);
                     }
                     http_response.EnsureSuccessStatusCode();
 

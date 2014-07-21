@@ -6,10 +6,9 @@
   xmlns:statusIcons="using:Catrobat.IDE.WindowsPhone.Controls.StatusIcons"
   xmlns:projects="using:Catrobat.IDE.WindowsPhone.Controls.Projects"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
-  xmlns:controls="using:WinRTXamlToolkit.Controls"
   mc:Ignorable="d"
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
-
+  
   <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
     Source={StaticResource ThemeChooser}}">
 
@@ -76,9 +75,16 @@
                 Source={StaticResource LocalizedStrings}}" -->
               <TextBox Grid.Row="0"
                 HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                InputScope="Search"
+                Text="{Binding OnlineProjects.FilterText, Mode=TwoWay}"
                 TextChanged="FilterTextBox_TextChanged" 
-                KeyDown="FilterTextBox_KeyDown" 
-                Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
+                KeyDown="FilterTextBox_KeyDown"
+                LostFocus="FilterTextBox_OnLostFocus"
+                />
+              
+              
+
+
               <ListView Name="ListViewOnlineProjects" Grid.Row="1"
                 ItemsSource="{Binding OnlineProjects}" 
                 VerticalAlignment="Stretch" 
@@ -86,7 +92,8 @@
                 SelectedItem="{Binding SelectedOnlineProject, Mode=TwoWay}" 
                 SelectionMode="None"
                 IsItemClickEnabled="true" 
-                ItemClick="ListViewOnlineProjects_ItemClick">
+                ItemClick="ListViewOnlineProjects_ItemClick"
+                >
                 <ListView.ItemTemplate>
                   <DataTemplate>
                     <Grid Margin="10 5 10 5"  
@@ -111,7 +118,7 @@
                           Source="{Binding ScreenshotSmall}"
                           VerticalAlignment="Stretch"
                           Stretch="UniformToFill"
-                          MaxWidth="100" />
+                          Width="100" Height="100" />
                         <TextBlock Grid.Column="1" Margin="15 0 5 0" 
                           Text="{Binding Description}"
                           Style="{Binding StaticTheme.TextSubtleStyle.NativeStyle, 
@@ -130,20 +137,38 @@
                 <ListView.Footer>
                   <Grid Margin="10 5 10 5" Height="35" 
                     Background="#FF667799"
-                    Opacity="{Binding IsLoadingOnlineProjects, 
-                    Converter={StaticResource BoolOpacityConverter}}">
+                    Visibility="{Binding OnlineProjects, 
+                    Converter={StaticResource NullVisibilityConverter}}"
+                    >
                     <StackPanel Orientation="Horizontal" 
                       VerticalAlignment="Center" 
-                      HorizontalAlignment="Center">
+                      HorizontalAlignment="Center"
+                      Visibility="{Binding OnlineProjects.IsLoading, 
+                      Converter={StaticResource BoolVisibilityConverter}}">
+                      <!--Opacity="{Binding OnlineProjects.IsLoading, 
+                      Converter={StaticResource BoolOpacityConverter}}"-->
+                      
+                      
                       <statusIcons:ProcessIcon Margin="0 0 5 0" 
-                        IsProcessing="{Binding IsLoadingOnlineProjects}" />
-                      <TextBlock Foreground="White" 
+                        IsProcessing="{Binding OnlineProjects.IsLoading}" />
+                      <TextBlock Foreground="White"
                         VerticalAlignment="Center" HorizontalAlignment="Center" 
                         Text="{Binding Resources.Main_OnlineProjectListBoxLoadMore, 
                         Source={StaticResource LocalizedStrings}}" 
                         Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
                         Source={StaticResource ThemeChooser}}" />
                     </StackPanel>
+                    <Grid VerticalAlignment="Center" 
+                      HorizontalAlignment="Center"
+                      Visibility="{Binding OnlineProjects.HasMoreItems, 
+                      Converter={StaticResource NegativeBoolVisibilityConverter}}">
+                      <TextBlock Foreground="White"
+                        VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        Text="{Binding Resources.Main_OnlineProjectListBoxNoMoreItems, 
+                        Source={StaticResource LocalizedStrings}}" 
+                        Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+                        Source={StaticResource ThemeChooser}}" />
+                    </Grid>
                   </Grid>
                 </ListView.Footer>
               </ListView>

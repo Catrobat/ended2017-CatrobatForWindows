@@ -5,6 +5,7 @@ using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.Core.ViewModels.Settings;
@@ -35,8 +36,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private Project _currentProject;
         private ObservableCollection<ProjectDummyHeader> _localProjects;
         private CatrobatContextBase _context;
-        private ObservableCollection<OnlineProjectHeader> _onlineProjects;
-        private CancellationTokenSource _taskCancellation;
+        private OnlineProgramsCollection _onlineProjects;
+        //private CancellationTokenSource _taskCancellation;
 
         #endregion
 
@@ -94,7 +95,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public OnlineProjectHeader SelectedOnlineProject { get; set; }
 
-        public ObservableCollection<OnlineProjectHeader> OnlineProjects
+        public OnlineProgramsCollection OnlineProjects
         {
             get { return _onlineProjects; }
             set
@@ -114,22 +115,22 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        public String FilterText
-        {
-            get
-            {
-                return _filterText;
-            }
-            set
-            {
-                if (_filterText != value)
-                {
-                    _filterText = value;
-                    //LoadOnlineProjects(false);
-                    RaisePropertyChanged(() => FilterText);
-                }
-            }
-        }
+        //public String FilterText
+        //{
+        //    get
+        //    {
+        //        return _filterText;
+        //    }
+        //    set
+        //    {
+        //        if (_filterText != value)
+        //        {
+        //            _filterText = value;
+        //            //LoadOnlineProjects(false);
+        //            RaisePropertyChanged(() => FilterText);
+        //        }
+        //    }
+        //}
 
         public bool IsLoadingOnlineProjects
         {
@@ -296,8 +297,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public MainViewModel()
         {
-            _onlineProjects = new ObservableCollection<OnlineProjectHeader>();
-
             OpenProjectCommand = new RelayCommand<ProjectDummyHeader>(OpenProjectCommandAction);
             DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProjectAction);
             CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
@@ -326,7 +325,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
 
-            _taskCancellation = new CancellationTokenSource();
+            //_taskCancellation = new CancellationTokenSource();
         }
 
         #region MessageBoxCallback
@@ -384,47 +383,47 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         #endregion
 
 
-        public async void LoadOnlineProjects(bool isAppend, bool isAuto = false)
-        {
-            IsLoadingOnlineProjects = true;
+        //public async void LoadOnlineProjects(bool isAppend, bool isAuto = false)
+        //{
+        //    IsLoadingOnlineProjects = true;
 
-            if (!isAppend && _previousFilterText != _filterText)
-            {
-                _onlineProjects.Clear();
-                // cancel previous uncompleted AsyncLoadOnlineProjects-Tasks
-                if (_taskCancellation != null)
-                {
-                    _taskCancellation.Cancel();
-                    _taskCancellation = new CancellationTokenSource();
-                }
-            }
+        //    if (!isAppend && _previousFilterText != _filterText)
+        //    {
+        //        _onlineProjects.Clear();
+        //        // cancel previous uncompleted AsyncLoadOnlineProjects-Tasks
+        //        if (_taskCancellation != null)
+        //        {
+        //            _taskCancellation.Cancel();
+        //            _taskCancellation = new CancellationTokenSource();
+        //        }
+        //    }
 
-            _previousFilterText = _filterText;
-            int offset = _onlineProjects.Count;
-            if (isAuto == true)
-                offset = 0;
+        //    _previousFilterText = _filterText;
+        //    int offset = _onlineProjects.Count;
+        //    if (isAuto == true)
+        //        offset = 0;
 
-            List<OnlineProjectHeader> projects = await Task.Run(() => CatrobatWebCommunicationService.AsyncLoadOnlineProjects(_filterText, offset, _taskCancellation.Token));
+        //    List<OnlineProjectHeader> projects = await Task.Run(() => CatrobatWebCommunicationService.AsyncLoadOnlineProjects(_filterText, offset, _taskCancellation.Token));
 
-            lock (OnlineProjects)
-            {
-                if (FilterText != _filterText && !isAppend)
-                    return;
+        //    lock (OnlineProjects)
+        //    {
+        //        if (FilterText != _filterText && !isAppend)
+        //            return;
 
-                if (!isAppend)
-                    _onlineProjects.Clear();
+        //        if (!isAppend)
+        //            _onlineProjects.Clear();
 
-                IsLoadingOnlineProjects = false;
+        //        IsLoadingOnlineProjects = false;
 
-                if (projects != null)
-                {
-                    foreach (OnlineProjectHeader header in projects)
-                    {
-                        _onlineProjects.Add(header);
-                    }
-                }
-            }
-        }
+        //        if (projects != null)
+        //        {
+        //            foreach (OnlineProjectHeader header in projects)
+        //            {
+        //                _onlineProjects.Add(header);
+        //            }
+        //        }
+        //    }
+        //}
 
         #region PropertyChanges
 

@@ -2726,6 +2726,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No more programs.
+        /// </summary>
+        public static string Main_OnlineProjectListBoxNoMoreItems {
+            get {
+                return ResourceManager.GetString("Main_OnlineProjectListBoxNoMoreItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to program:.
         /// </summary>
         public static string Main_OnlineProjectProject {

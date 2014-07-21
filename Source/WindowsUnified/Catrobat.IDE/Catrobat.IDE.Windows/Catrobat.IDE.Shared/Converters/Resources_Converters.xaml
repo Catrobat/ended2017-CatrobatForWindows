@@ -25,4 +25,5 @@
   <converters:VariableButtonVisibilityConverterBootstrap x:Key="VariableButtonVisibilityConverter"/>
 
   <nativeConverters:NativeImageSquareConverter x:Key="ImageSquareConverter" />
+  <nativeConverters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
 </ResourceDictionary>
