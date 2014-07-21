@@ -10,7 +10,7 @@ using Catrobat.IDE.Core.Models.Scripts;
 
 namespace Catrobat.IDE.Core.UI
 {
-    public class SctionsCollection : IList, INotifyCollectionChanged
+    public class ActionsCollection : IList, INotifyCollectionChanged
     {
         private ObservableCollection<Script> Scripts
         {
