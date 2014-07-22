@@ -4,6 +4,7 @@ using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.Services;
 using System.Collections.ObjectModel;
+using Catrobat.IDE.Core.UI;
 
 namespace Catrobat.IDE.Core
 {
@@ -31,7 +32,7 @@ namespace Catrobat.IDE.Core
         }
 
         public ObservableCollection<ProjectDummyHeader> LocalProjects { get; private set; }
-        public ObservableCollection<OnlineProjectHeader> OnlineProjects { get; private set; }
+        public OnlineProgramsCollection OnlineProjects { get; private set; }
 
         #endregion
 
@@ -131,7 +132,7 @@ namespace Catrobat.IDE.Core
 
         private void InitOnlineProjects()
         {
-            OnlineProjects = new ObservableCollection<OnlineProjectHeader>();
+            OnlineProjects = new OnlineProgramsCollection();
 
             var project1 = new OnlineProjectHeader
             {

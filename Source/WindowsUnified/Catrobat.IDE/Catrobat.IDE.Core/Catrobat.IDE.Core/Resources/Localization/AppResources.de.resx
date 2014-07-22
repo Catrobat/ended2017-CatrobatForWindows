@@ -1216,4 +1216,7 @@
   <data name="Main_UploadProjectPasswordChangeSucess" xml:space="preserve">
     <value>Passwort erfolgreich geändert.</value>
   </data>
+  <data name="Main_OnlineProjectListBoxNoMoreItems" xml:space="preserve">
+    <value>Keine weiteren programme</value>
+  </data>
 </root>

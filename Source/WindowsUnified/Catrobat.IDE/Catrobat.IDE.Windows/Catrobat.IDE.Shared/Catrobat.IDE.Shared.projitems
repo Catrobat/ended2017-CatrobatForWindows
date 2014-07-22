@@ -47,11 +47,13 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Templates\ActionTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NamespaceTypeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NullVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NativeColorOpacityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NativeGridViewExVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NativeImageSquareConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\PortableConverters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\PortableValueConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Misc\OnlineProgramsCollectionWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ActionTemplateServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ColorConversionServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CultureServiceWindowsShared.cs" />
@@ -118,74 +120,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.add.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.back.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.basecircle.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.cancel.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.check.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.close.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.copy.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.delete.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.download.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.edit.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.favs.addto.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.favs.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.feature.camera.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.feature.email.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.feature.search.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.feature.settings.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.feature.video.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.folder.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.home.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.minus.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.new.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.next.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.overflowdots.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.questionmark.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.refresh.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.save.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.share.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.stop.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.sync.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.transport.ff.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.transport.pause.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.transport.play.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.transport.rew.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\appbar.upload.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.add.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.back.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.basecircle.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.cancel.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.check.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.close.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.copy.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.delete.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.download.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.edit.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.favs.addto.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.favs.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.feature.camera.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.feature.email.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.feature.search.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.feature.settings.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.feature.video.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.folder.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.home.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.minus.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.new.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.next.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.overflowdots.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.questionmark.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.refresh.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.save.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.share.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.stop.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.sync.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.transport.ff.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.transport.pause.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.transport.play.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.transport.rew.rest.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\appbar.upload.rest.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Images\Application\ApplicationIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Images\Application\Background.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Images\Application\Indicators\check.png" />
@@ -256,10 +190,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\SplashScreenImage.Screen-WVGA.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\SplashScreenImage.Screen-WXGA.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\StoreIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\dark\DarkIcons.dll" />
-    <None Include="$(MSBuildThisFileDirectory)Content\Images\ApplicationBar\light\LightIcons.dll" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\Libs\" />

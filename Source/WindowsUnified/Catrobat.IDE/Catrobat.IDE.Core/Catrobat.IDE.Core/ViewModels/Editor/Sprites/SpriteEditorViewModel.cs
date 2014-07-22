@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         private Project _currentProject;
         private Sprite _selectedSprite;
-        private readonly SctionsCollection _bricks;
+        private readonly ActionsCollection _bricks;
         private Sound _sound;
         private PortableListBoxViewPort _listBoxViewPort;
 
@@ -120,7 +120,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        public SctionsCollection Actions
+        public ActionsCollection Actions
         {
             get
             {
@@ -896,7 +896,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             NothingItemHackCommand = new RelayCommand<object>(NothingItemHackAction);
             SoundsPlayStateChangedCommand = new RelayCommand<PlayPauseCommandArguments>(SoundsPlayStateChangedAction);
 
-            _bricks = new SctionsCollection();
+            _bricks = new ActionsCollection();
 
 
             Messenger.Default.Register<GenericMessage<Project>>(this,

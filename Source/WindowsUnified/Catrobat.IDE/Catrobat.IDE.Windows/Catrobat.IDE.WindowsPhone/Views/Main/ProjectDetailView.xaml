@@ -49,21 +49,29 @@
       Source={StaticResource ThemeChooser}}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Edit" 
-                      Label="{Binding Resources.Main_ButtonEdit, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding EditCurrentProjectCommand}"/>
-        <AppBarButton Icon="Upload" 
-                      Label="{Binding Resources.Main_ButtonUpload, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding UploadCurrentProjectCommand}"/>
+          Label="{Binding Resources.Main_ButtonEdit, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding EditCurrentProjectCommand}"/>
         <AppBarButton Icon="Play" 
-                      Label="{Binding Resources.Editor_ButtonPlayProject, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding PlayCurrentProjectCommand}"/>
+          Label="{Binding Resources.Editor_ButtonPlayProject, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding PlayCurrentProjectCommand}"/>
         <!--TODO: Add pin and share buttons here-->
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
-        <AppBarButton 
+        <AppBarButton Icon="Upload" 
+          Label="{Binding Resources.Main_ButtonUpload, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding UploadCurrentProjectCommand}"/>
+        <!--<AppBarButton Icon="ReShare" 
+          Label="{Binding Resources.Main_ShareProject, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding ShareLocalProjectCommand}"/>
+        <AppBarButton Icon="Pin" 
+          Label="{Binding Resources.Main_PinProjectToStart, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding PinLocalProjectCommand}"/>-->
+        <AppBarButton Icon="Setting" 
           Label="{Binding Resources.Main_ChangeProjectNameAndDescription, 
           Source={StaticResource LocalizedStrings}}"
           Command="{Binding RenameProjectCommand}"/>

@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
         #region Private Members
 
         private BrickCategory _selectedBrickCategory;
-        private SctionsCollection _receivedScriptBrickCollection;
+        private ActionsCollection _receivedScriptBrickCollection;
 
         private BrickCollection _brickCollection;
         private int _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex;
@@ -230,7 +230,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
 
         private void ReceiveScriptBrickCollectionMessageAction(GenericMessage<List<Object>> message)
         {
-            _receivedScriptBrickCollection = message.Content[0] as SctionsCollection;
+            _receivedScriptBrickCollection = message.Content[0] as ActionsCollection;
             _firstVisibleScriptBrickIndex = ((PortableListBoxViewPort)message.Content[1]).FirstVisibleIndex;
             _lastVisibleScriptBrickIndex = ((PortableListBoxViewPort)message.Content[1]).LastVisibleIndex;
         }

@@ -76,16 +76,16 @@ namespace Catrobat.IDE.Core.ViewModels.Share
 
         private void UploadToSkyDriveAction(object arguments)
         {
-            ServiceLocator.DispatcherService.RunOnMainThread(() =>
-            {
-                IsUploading = true;
-                IsUploadSuccess = false;
-                IsUploadError = false;
-            });
+            //ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            //{
+            //    IsUploading = true;
+            //    IsUploadSuccess = false;
+            //    IsUploadError = false;
+            //});
 
-            Task.Run(
-                () => ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                    ServiceLocator.ShareService.UploadProjectToSkydrive(arguments, ProjectToShare, Success, Error)));
+            //Task.Run(
+            //    () => ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            //        ServiceLocator.ShareService.UploadProjectToSkydrive(arguments, ProjectToShare, Success, Error)));
         }
 
         protected override void GoBackAction()

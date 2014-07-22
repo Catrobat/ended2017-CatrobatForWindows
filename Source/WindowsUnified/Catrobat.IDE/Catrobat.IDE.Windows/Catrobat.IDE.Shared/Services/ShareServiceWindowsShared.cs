@@ -1,93 +1,69 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
+using Windows.Storage;
 using Windows.Storage.Streams;
+using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Core.Services.Storage;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
     public class ShareServiceWindowsShared : IShareService
     {
-        private const string TempUploadFolderPath = "/TempUpload";
+        private const string TempUploadFolderPath = "TempShare";
         private const string CatrobatFileExtension = ".catrobat";
 
-        //private LiveConnectClient _client;
-
-        public async void ShareProjectWithMail(string projectName, string mailTo, string subject, string message)
+        private string _projectName;
+        public void ShateProject(string projectName) // TODO: this code should probably work, but no UI is showing, maybe bug in WP8.1 preview
         {
-            var mailto = new Uri("mailto:?to=recipient@example.com&subject=The subject of an email&body=Hello from a Windows 8 Metro app.");
-            await Windows.System.Launcher.LaunchUriAsync(mailto);
-
-            //var emailcomposer = new EmailComposeTask();
-            //emailcomposer.To = mailTo;
-            //emailcomposer.Subject = subject;
-            //emailcomposer.Body = message;
-            //emailcomposer.Show();
-        }
-
-
-        private string _shareProgramName;
-        private void ShareProgram(string programName)
-        {
-            _shareProgramName = programName;
+            _projectName = projectName;
 
             DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
-            dataTransferManager.DataRequested += new TypedEventHandler<DataTransferManager,
-                DataRequestedEventArgs>(this.ShareHtmlHandler);
+            dataTransferManager.DataRequested += ShareStorageItemsHandler;
+
+            DataTransferManager.ShowShareUI();
         }
 
-        private void ShareHtmlHandler(DataTransferManager sender, DataRequestedEventArgs e)
+        private async void ShareStorageItemsHandler(DataTransferManager sender,
+            DataRequestedEventArgs e)
         {
-            DataRequest request = e.Request;
-            request.Data.Properties.Title = _shareProgramName;
-            request.Data.Properties.Description =
-                "Demonstrates how to share an HTML fragment with a local image.";
+            var request = e.Request;
+            request.Data.Properties.Title = "Share Catrobat file";
+            request.Data.Properties.Description = "";
+            var deferral = request.GetDeferral();
 
-            string localImage = "ms-appx:///Assets/Logo.png";
-            string htmlExample = "<p>Here is a local image: <img src=\"" + localImage + "\">.</p>";
-            string htmlFormat = HtmlFormatHelper.CreateHtmlFormat(htmlExample);
-            request.Data.SetHtmlFormat(htmlFormat);
+            try
+            {
+                var projectFolderPath = Path.Combine(CatrobatContextBase.ProjectsPath, _projectName);
+                string fileName = _projectName + CatrobatFileExtension;
 
-            // Because the HTML contains a local image, we need to add it to the ResourceMap.
-            RandomAccessStreamReference streamRef =
-                 RandomAccessStreamReference.CreateFromUri(new Uri(localImage));
-            request.Data.ResourceMap[localImage] = streamRef;
-        }
+                var rootFolder = ApplicationData.Current.TemporaryFolder;
+                var tempShareFolder = await rootFolder.CreateFolderAsync(TempUploadFolderPath,
+                    CreationCollisionOption.OpenIfExists);
+                var shareTempFile = await tempShareFolder.CreateFileAsync(fileName,
+                    CreationCollisionOption.ReplaceExisting);
 
-        public async void UploadProjectToSkydrive(object client, ProjectDummyHeader project,
-            Action success, Action error)
-        {
-            //try
-            //{
-            //    using (var storage = StorageSystem.GetStorage())
-            //    {
-            //        if (storage.FileExists(TempUploadFolderPath))
-            //            storage.DeleteFile(TempUploadFolderPath);
+                var stream = await shareTempFile.OpenAsync(FileAccessMode.ReadWrite);
 
-            //        storage.CreateDirectory(TempUploadFolderPath);
-
-            //        var projectPath = Path.Combine(CatrobatContextBase.ProjectsPath, project.ProjectName);
-
-            //        string fileName = project.ProjectName + CatrobatFileExtension;
-            //        var stream = new MemoryStream();
+                await CatrobatZipService.ZipCatrobatPackage(stream.AsStreamForWrite(),
+                    projectFolderPath);
 
 
-            //            CatrobatZipService.ZipCatrobatPackage(stream, projectPath);
+                var shareTempFile2 = await tempShareFolder.GetFileAsync(fileName);
 
-            //            stream.Seek(0, SeekOrigin.Begin);
-
-
-            //            await ((LiveConnectClient)client).Upload("me/skydrive", fileName, stream, OverwriteOption.Rename);
-
-            //            success();
-                    
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    error();
-            //}
+                var storageItems = new List<IStorageItem> { shareTempFile2 };
+                request.Data.SetStorageItems(storageItems);
+            }
+            finally
+            {
+                deferral.Complete();
+            }
         }
     }
 }

@@ -161,7 +161,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             var message = new GenericMessage<ProjectDummyHeader>(CurrentProject.ProjectDummyHeader);
             Messenger.Default.Send(message, ViewModelMessagingToken.ShareProjectHeaderListener);
 
-            ServiceLocator.NavigationService.NavigateTo<ShareProjectServiceSelectionViewModel>();
+            ServiceLocator.ShareService.ShateProject(CurrentProject.Name);
+            //ServiceLocator.NavigationService.NavigateTo<ShareProjectServiceSelectionViewModel>();
         }
 
         private void RenameProjectAction()

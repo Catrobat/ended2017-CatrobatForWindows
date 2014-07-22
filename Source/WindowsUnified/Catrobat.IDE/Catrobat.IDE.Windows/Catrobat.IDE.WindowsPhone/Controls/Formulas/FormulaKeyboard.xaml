@@ -7,7 +7,7 @@
   xmlns:editor="using:Catrobat.IDE.Core.Formulas.Editor"
   xmlns:formulas="using:Catrobat.IDE.WindowsPhone.Controls.Formulas"
   xmlns:formula="using:Catrobat.IDE.Core.ViewModels.Editor.Formula"
-  mc:Ignorable="d"
+  mc:Ignorable="d" RequestedTheme="Dark" 
   d:DesignHeight="320" d:DesignWidth="480"
   x:Name="FormulaKeyboardXaml">
 
@@ -273,6 +273,7 @@
                   <TextBlock
                   Text="{Binding MultiBindingProperty, Converter={StaticResource FormulaKeyStringConverter}}"
                   d:DataContext="{d:DesignInstance formula:FormulaKey}"
+                  Foreground="White"
                   Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}">
                   <!--<toolkit:ContextMenuService.ContextMenu>
                     <toolkit:ContextMenu>
@@ -290,7 +291,7 @@
       	</Pivot.Style>
         <Pivot.HeaderTemplate>
           <DataTemplate>
-            <TextBlock Margin="0 0 0 0" FontSize="42" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle,
+            <TextBlock Margin="0 0 0 0" FontSize="42" Foreground="White" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle,
               Source={StaticResource ThemeChooser}}" Text="{Binding}" />
           </DataTemplate>
         </Pivot.HeaderTemplate>
@@ -317,7 +318,8 @@
                     <TextBlock
                       Text="{Binding MultiBindingProperty, Converter={StaticResource FormulaKeyStringConverter}}"
                       d:DataContext="{d:DesignInstance formula:FormulaKey}"
-                      Style="{Binding StaticTheme.TextLargeStyle.NativeStyle,Source={StaticResource ThemeChooser}}">
+                      Foreground="White"
+                      Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}">
                     <!--<toolkit:ContextMenuService.ContextMenu>
                       <toolkit:ContextMenu>
                         <toolkit:MenuItem Header="{Binding Resources.FormulaKeyboard_AddFavorite, Source={StaticResource LocalizedStrings}}" Command="{Binding ViewModel.AddFavoriteCommand, ElementName=FormulaKeyboardXaml}" CommandParameter="{Binding}"/>
@@ -334,7 +336,8 @@
           <Pivot Name="PivotVariables" Margin="-12,-10,0,0" Padding="0,-35,0,0" SelectionChanged="Pivot_OnSelectionChanged">
             <Pivot.HeaderTemplate>
               <DataTemplate>
-                <TextBlock Margin="-10,0,0,0" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle,
+                <TextBlock Margin="-10,0,0,0" Foreground="White"
+                  Style="{Binding StaticTheme.TextLargeStyle.NativeStyle,
                   Source={StaticResource ThemeChooser}}" Text="{Binding}" />
               </DataTemplate>
             </Pivot.HeaderTemplate>
@@ -358,6 +361,7 @@
                   <DataTemplate>
                     <TextBlock Text="{Binding MultiBindingProperty, Converter={StaticResource FormulaKeyStringConverter}}"
                       d:DataContext="{d:DesignInstance formula:FormulaKey}"
+                      Foreground="White"
                       Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}">
                     <!--<toolkit:ContextMenuService.ContextMenu>
                       <toolkit:ContextMenu>

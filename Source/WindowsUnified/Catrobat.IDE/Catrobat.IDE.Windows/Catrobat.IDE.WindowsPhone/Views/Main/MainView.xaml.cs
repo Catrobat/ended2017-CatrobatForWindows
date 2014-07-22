@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using System.Threading;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
@@ -10,6 +11,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
+using Catrobat.IDE.WindowsShared.Misc;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Main
 {
@@ -55,11 +57,11 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             }
         }
 
-        private void FilterTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        private async void FilterTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == VirtualKey.Enter)
             {
-                _viewModel.LoadOnlineProjects(false);
+                await _viewModel.OnlineProjects.ResetAndLoadFirstPrograms();
             }
         }
 
@@ -67,8 +69,10 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         {
             if ((MainHub.SectionsInView[0] == HubSectionOnlineProjects) && firstAttempt)
             {
-                _viewModel.LoadOnlineProjects(false, true);
                 firstAttempt = false;
+
+                if(_viewModel.OnlineProjects == null)
+                    _viewModel.OnlineProjects = new OnlineProgramsCollectionWindowsShared();
             }
         }
 
@@ -76,16 +80,5 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         {
             _viewModel.OnlineProjectTapCommand.Execute(e.ClickedItem);
         }
-
-
-        //private void LocalProjectControl_OnLocalProjectsBackPressed(object sender, EventArgs e)
-        //{
-        //    SlideLeft(PanoramaMain);
-        //}
-
-        //protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
-        //{
-        //    base.OnNavigatingFrom(e);
-        //}
     }
 }
