@@ -5,8 +5,6 @@ using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Tests.Misc;
-using Catrobat.IDE.Core.Xml.VersionConverter;
-using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Formula = Catrobat.IDE.Core.ViewModels.Editor.Formula;
 

@@ -474,6 +474,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Catrobat.Data">
+      <HintPath>..\..\..\Catrobat.Data\Catrobat.Data\bin\Release\Catrobat.Data.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=4.4.32.26491, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Portable.MvvmLightLibs.4.4.32.1\lib\wpa81\GalaSoft.MvvmLight.dll</HintPath>

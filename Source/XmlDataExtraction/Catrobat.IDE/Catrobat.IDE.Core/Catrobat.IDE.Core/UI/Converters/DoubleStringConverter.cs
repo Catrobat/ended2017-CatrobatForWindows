@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 

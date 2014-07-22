@@ -6,7 +6,6 @@ using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModels.Service;
-using Catrobat.IDE.Core.ViewModels.Share;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;

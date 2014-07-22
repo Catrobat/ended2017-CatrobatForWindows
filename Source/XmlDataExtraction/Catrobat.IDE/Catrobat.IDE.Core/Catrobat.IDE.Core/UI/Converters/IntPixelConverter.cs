@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Core.UI.Converters

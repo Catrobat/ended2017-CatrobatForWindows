@@ -1,5 +1,5 @@
 ﻿using System;
-using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.Data.Xml.XmlObjects;
 
 namespace Catrobat.IDE.Core.Utilities.Helpers
 {

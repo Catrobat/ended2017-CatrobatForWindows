@@ -1,14 +1,14 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
+using Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow;
+using Catrobat.Data.Xml.XmlObjects.Bricks.Costumes;
+using Catrobat.Data.Xml.XmlObjects.Bricks.Properties;
+using Catrobat.Data.Xml.XmlObjects.Bricks.Sounds;
+using Catrobat.Data.Xml.XmlObjects.Bricks.Variables;
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Tests.Misc;
 using Catrobat.IDE.Core.Tests.SampleData;
 using Catrobat.IDE.Core.Utilities.Helpers;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Core.Tests.Tests.Data

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Catrobat.Data.Xml.VersionConverter;
+using Catrobat.Data.Xml.XmlObjects;
+using Catrobat.Data.Xml.XmlObjects.Formulas;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
@@ -8,9 +11,6 @@ using Catrobat.IDE.Core.Tests.Extensions;
 using Catrobat.IDE.Core.Tests.Misc;
 using Catrobat.IDE.Core.Tests.SampleData;
 using Catrobat.IDE.Core.Xml.Converter;
-using Catrobat.IDE.Core.Xml.VersionConverter;
-using Catrobat.IDE.Core.Xml.XmlObjects;
-using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Core.Tests.Tests.IDE.Xml

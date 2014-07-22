@@ -1,13 +1,16 @@
-﻿using Catrobat.IDE.Core.Models;
+﻿using System;
+using System.Xml.Linq;
+using Catrobat.Data.Utilities;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.Xml.Converter;
-using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.Data.Xml.XmlObjects;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using Catrobat.IDE.Core.Xml.Converter;
 
 namespace Catrobat.IDE.Core
 {
@@ -113,7 +116,7 @@ namespace Catrobat.IDE.Core
                 var xml = await storage.ReadTextFileAsync(tempXmlPath);
                 var newProject = new XmlProject(xml);
                 newProject.ProjectHeader.ProgramName = newProjectName;
-                await newProject.Save();
+                await CatrobatContext.SaveProject(newProject);
 
                 return new XmlProjectConverter().Convert(newProject);
             }
@@ -147,6 +150,50 @@ namespace Catrobat.IDE.Core
             catch
             {
                 return null;
+            }
+        }
+
+        public static string GetBasePathOfProject(string projectName)
+        {
+            return CatrobatContextBase.ProjectsPath + "/" + projectName;
+        }
+
+
+        public static async Task SaveProject(XmlProject project, string path = null)
+        {
+            if (path == null)
+            {
+                path = Path.Combine(GetBasePathOfProject(project.ProjectHeader.ProgramName), 
+                    Project.ProjectCodePath);
+            }
+
+            if (Debugger.IsAttached)
+            {
+                await SaveInternal(project, path);
+            }
+            else
+            {
+                try
+                {
+                    await SaveInternal(project, path);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Cannot write Project", ex);
+                }
+            }
+        }
+
+        private static async Task SaveInternal(XmlProject project, string path)
+        {
+            using (var storage = StorageSystem.GetStorage())
+            {
+                var writer = new XmlStringWriter();
+                var document = project.CreateXML();
+                document.Save(writer, SaveOptions.None);
+
+                var xml = writer.GetStringBuilder().ToString();
+                await storage.WriteTextFileAsync(path, xml);
             }
         }
 

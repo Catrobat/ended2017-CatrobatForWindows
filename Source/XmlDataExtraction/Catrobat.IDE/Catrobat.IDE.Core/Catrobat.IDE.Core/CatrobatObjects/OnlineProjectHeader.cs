@@ -1,5 +1,4 @@
-﻿using System;
-using Catrobat.IDE.Core.Resources;
+﻿using Catrobat.IDE.Core.Resources;
 
 namespace Catrobat.IDE.Core.CatrobatObjects
 {

@@ -9,7 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace Catrobat.IDE.Core.Resources.Localization {
-    using System;
     using System.Reflection;
     
     

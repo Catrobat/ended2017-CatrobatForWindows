@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Catrobat.IDE.Core.CatrobatObjects;
-
-namespace Catrobat.IDE.Core.Services
+﻿namespace Catrobat.IDE.Core.Services
 {
     public interface IShareService
     {

@@ -9,7 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace Catrobat.IDE.Core.Resources {
-    using System;
     using System.Reflection;
     
     

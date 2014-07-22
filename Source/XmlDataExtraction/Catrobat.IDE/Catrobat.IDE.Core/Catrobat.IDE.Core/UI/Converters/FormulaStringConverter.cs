@@ -2,8 +2,6 @@
 using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.UI.PortableUI;
 using System;
-using System.Globalization;
-using Catrobat.IDE.Core.Models.Formulas.Tree;
 
 namespace Catrobat.IDE.Core.UI.Converters
 {

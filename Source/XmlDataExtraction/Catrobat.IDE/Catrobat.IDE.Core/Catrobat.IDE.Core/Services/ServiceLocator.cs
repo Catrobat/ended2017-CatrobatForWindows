@@ -6,7 +6,6 @@ using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModels;
-using Catrobat.IDE.Core.ViewModels.Share;
 
 namespace Catrobat.IDE.Core.Services
 {

@@ -36,7 +36,9 @@ namespace Catrobat.IDE.Core.Models
                     try
                     {
                         _image = new PortableImage();
-                        var fileName = XmlParserTempProjectHelper.Project.BasePath + "/" + Project.ImagesPath + "/" + _fileName;
+                        var fileName = CatrobatContext.GetBasePathOfProject(
+                            XmlParserTempProjectHelper.Project.ProjectHeader.ProgramName)
+                            + "/" + Project.ImagesPath + "/" + _fileName;
                         _image.LoadAsync(fileName, null, false);
 
                         //using (var storage = StorageSystem.GetStorage())

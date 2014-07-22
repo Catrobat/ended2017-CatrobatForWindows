@@ -6,8 +6,8 @@ using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.Xml.VersionConverter;
-using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.Data.Xml.VersionConverter;
+using Catrobat.Data.Xml.XmlObjects;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
@@ -42,7 +42,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 //TODO: error handling
 
                 _project = new XmlProject(projectCode);
-                await _project.Save();
+                await CatrobatContext.SaveProject(_project);
 
                 _tempProjectHeader = new ProjectDummyHeader
                 {
@@ -110,8 +110,10 @@ namespace Catrobat.IDE.Core.Services.Common
                 {
                     newProjectName = _tempProjectHeader.ProjectName + counter;
                     _project.ProjectHeader.ProgramName = newProjectName;
-                    var saveToPath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
-                    await _project.Save(saveToPath);
+                    var saveToPath = Path.Combine(
+                        CatrobatContextBase.TempProjectImportPath, 
+                        Project.ProjectCodePath);
+                    await CatrobatContext.SaveProject(_project, saveToPath);
                 }
             }
 

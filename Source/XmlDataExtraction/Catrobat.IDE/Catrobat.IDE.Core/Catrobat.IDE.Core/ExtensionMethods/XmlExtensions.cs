@@ -25,7 +25,8 @@ namespace Catrobat.IDE.Core.ExtensionMethods
             return xmlObject.ToModel();
         }
 
-        internal static TModel ToModel<TModel, TContext>(this IModelConvertible<TModel, TContext> xmlObject, TContext context) where TModel : Model
+        internal static TModel ToModel<TModel, TContext>(this IModelConvertible<TModel, 
+            TContext> xmlObject, TContext context) where TModel : Model
         {
             return xmlObject.ToModel(context);
         }

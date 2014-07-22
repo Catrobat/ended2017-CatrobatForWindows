@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using Catrobat.IDE.Core.Utilities;
-using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources;
@@ -11,9 +10,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using Catrobat.IDE.Core.Xml.VersionConverter;
+using Catrobat.Data.Xml.VersionConverter;
 using Newtonsoft.Json;
-using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 
 namespace Catrobat.IDE.Core.Services.Common
@@ -106,12 +104,12 @@ namespace Catrobat.IDE.Core.Services.Common
                         }
                         projectName = projectName + countString;
                         await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(http_stream,
-                                                                            CatrobatContextBase.ProjectsPath + "/" +
-                                                                            projectName);
+                            CatrobatContextBase.ProjectsPath + "/" + projectName);
                     }
-                    var result = await CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, true);
-                    CatrobatVersionConverter.VersionConverterError error = result.Error;
-                    return error;
+                    throw new NotImplementedException("**DataPort");
+                    //var result = await CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, true);
+                    //CatrobatVersionConverter.VersionConverterError error = result.Error;
+                    //return error;
 
                 }
                 catch (HttpRequestException)

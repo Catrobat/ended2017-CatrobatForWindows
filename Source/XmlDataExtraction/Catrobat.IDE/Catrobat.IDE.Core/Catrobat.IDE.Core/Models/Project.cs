@@ -4,9 +4,9 @@ using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.Xml.Converter;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
+using Catrobat.IDE.Core.Xml.Converter;
 
 namespace Catrobat.IDE.Core.Models
 {
@@ -142,7 +142,7 @@ namespace Catrobat.IDE.Core.Models
         public async Task Save(string path = null)
         {
             var xmlProject = new XmlProjectConverter().ConvertBack(this);
-            await xmlProject.Save(path);
+            await CatrobatContext.SaveProject(xmlProject, path);
         }
 
         public void Undo()

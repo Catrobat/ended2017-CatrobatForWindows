@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat.Data.Xml.XmlObjects.Formulas;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Core.Tests.Misc

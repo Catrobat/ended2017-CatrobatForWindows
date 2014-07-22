@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Catrobat.Data.Xml.XmlObjects;
+using Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow;
+using Catrobat.Data.Xml.XmlObjects.Variables;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Bricks;
-using Catrobat.IDE.Core.Xml.XmlObjects;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;
-using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
+using Catrobat.Data.Xml.XmlObjects.Bricks;
+using Catrobat.Data.Xml.XmlObjects.Bricks.Costumes;
+using Catrobat.Data.Xml.XmlObjects.Bricks.Properties;
+using Catrobat.Data.Xml.XmlObjects.Bricks.Sounds;
+using Catrobat.Data.Xml.XmlObjects.Bricks.Variables;
 
 namespace Catrobat.IDE.Core.Utilities.Helpers
 {

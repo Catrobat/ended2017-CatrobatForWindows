@@ -1,13 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Dynamic;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Utilities.Helpers;
-using Catrobat.IDE.Core.CatrobatObjects;
 
 namespace Catrobat.IDE.Core
 {

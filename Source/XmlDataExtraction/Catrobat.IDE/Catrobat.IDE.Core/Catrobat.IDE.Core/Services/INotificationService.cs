@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Core.Services

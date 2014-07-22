@@ -1,8 +1,6 @@
 ﻿using System.Windows.Input;
-using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Xml;
-using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.Data.Xml.XmlObjects;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 

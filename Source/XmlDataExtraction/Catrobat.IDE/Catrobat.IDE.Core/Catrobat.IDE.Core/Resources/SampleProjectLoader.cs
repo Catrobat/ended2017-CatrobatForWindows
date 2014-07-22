@@ -7,7 +7,7 @@ using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
-using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.Data.Xml.XmlObjects;
 
 namespace Catrobat.IDE.Core.Resources
 {
@@ -59,7 +59,7 @@ namespace Catrobat.IDE.Core.Resources
                             var project = new XmlProject(xml);
                             project.ProjectHeader.ProgramName = projectName;
 
-                            await project.Save();
+                            await CatrobatContext.SaveProject(project);
                         }
                     }
                 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat.Data.Xml.XmlObjects.Formulas;
 
 namespace Catrobat.IDE.Core.Tests.Misc
 {
