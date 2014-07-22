@@ -547,7 +547,7 @@
     <value>AKTIV</value>
   </data>
   <data name="Main_ApplicationNameAndVersion" xml:space="preserve">
-    <value>Catrobat für Windows v{0}</value>
+    <value>Catrobat für Windows {0}</value>
   </data>
   <data name="Main_ButtonCancel" xml:space="preserve">
     <value>Abbrechen</value>

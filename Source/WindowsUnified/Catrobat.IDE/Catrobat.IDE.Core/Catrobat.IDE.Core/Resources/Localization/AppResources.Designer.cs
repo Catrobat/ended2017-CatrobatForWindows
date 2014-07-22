@@ -2276,7 +2276,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pocket Code for Windows v{0}.
+        ///   Looks up a localized string similar to Pocket Code for Windows {0}.
         /// </summary>
         public static string Main_ApplicationNameAndVersion {
             get {

@@ -19,7 +19,7 @@
       Path=SelectedTheme.Background.ImageSource}" 
       SectionsInViewChanged="Hub_SectionsInViewChanged" >
       <Hub.Header>
-        <StackPanel Orientation="Horizontal" Margin="12 12 12 -20">
+        <StackPanel Orientation="Horizontal" Margin="6 6 6 -10">
           <TextBlock Text="POCKET" Foreground="#14a5b8" FontSize="52" FontFamily="Arial Black" 
                        FontWeight="ExtraBlack" CharacterSpacing="-20" />
           <TextBlock Text="CODE" Foreground="#ee761b" FontSize="52" FontFamily="Arial Black" 
@@ -38,7 +38,7 @@
         </HubSection.HeaderTemplate>
         <HubSection.ContentTemplate>
           <DataTemplate>
-            <Grid Margin="0 -20 0 0">
+            <Grid Margin="0 -26 0 0">
               <GridView Name="ListBoxLocalProjects" 
                 ItemsSource="{Binding LocalProjects}" 
                 VerticalAlignment="Stretch" 
@@ -66,7 +66,7 @@
         </HubSection.HeaderTemplate>
         <HubSection.ContentTemplate>
           <DataTemplate>
-            <Grid Margin="0 -20 0 0">
+            <Grid Margin="0 -26 0 0">
               <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
@@ -179,13 +179,13 @@
       <HubSection Name="HubSectionAbout">
         <HubSection.Header>
           <TextBlock Text="{Binding Resources.Main_HeaderAbout, 
-                       Source={StaticResource LocalizedStrings}}" 
-                       Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-                       Source={StaticResource ThemeChooser}}"/>
+            Source={StaticResource LocalizedStrings}}" 
+            Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
+            Source={StaticResource ThemeChooser}}"/>
         </HubSection.Header>
         <HubSection.ContentTemplate>
           <DataTemplate>
-            <Grid Margin="0 -20 0 5">
+            <Grid Margin="0 -26 0 0">
               <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
@@ -195,10 +195,11 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
               </Grid.RowDefinitions>
-              <TextBlock FontSize="24" TextWrapping="Wrap"
+              <TextBlock FontSize="20" Margin="0 0 0 0" 
+                TextWrapping="Wrap" TextAlignment="Justify"
                 Text="{Binding Resources.Main_AboutText, 
                 Source={StaticResource LocalizedStrings}}" 
-                 Margin="10 0 10 15" />
+                />
               <HyperlinkButton Grid.Row="2" FontSize="20"
                 Content="{Binding Resources.Main_AboutLicense, 
                 Source={StaticResource LocalizedStrings}}" 
@@ -225,7 +226,7 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Right" 
                   VerticalAlignment="Bottom" Orientation="Vertical">
-                  <TextBlock Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+                  <TextBlock Style="{Binding StaticTheme.TextSubtleStyle.NativeStyle, 
                     Source={StaticResource ThemeChooser}}" 
                     Text="{Binding ApplicationVersionName}" 
                     Margin="10 10 0 10" TextWrapping="Wrap"  />

@@ -547,7 +547,7 @@
     <value>ACTIVE</value>
   </data>
   <data name="Main_ApplicationNameAndVersion" xml:space="preserve">
-    <value>Pocket Code for Windows v{0}</value>
+    <value>Pocket Code for Windows {0}</value>
   </data>
   <data name="Main_ButtonCancel" xml:space="preserve">
     <value>cancel</value>

@@ -32,7 +32,7 @@
               Converter={StaticResource NullVisibilityConverter}}">
               <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
                 TextAlignment="Center" TextWrapping="Wrap"
-                FontSize="28"
+                FontSize="28" Foreground="DarkGray"
                 Text="{Binding Resources.Main_NoScreenshot, 
                 Source={StaticResource LocalizedStrings}}"
                 Visibility="{Binding CurrentProject.Screenshot.IsEmpty, 
