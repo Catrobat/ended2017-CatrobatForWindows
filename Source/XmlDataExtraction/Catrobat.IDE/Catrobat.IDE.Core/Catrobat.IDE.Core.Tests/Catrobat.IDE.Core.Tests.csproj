@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{37893166-9D6C-46FB-A2C9-85E31834AEEB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Catrobat.IDE.Core.Tests</RootNamespace>
+    <AssemblyName>Catrobat.IDE.Core.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight">
+      <HintPath>..\..\packages\Portable.MvvmLightLibs.4.2.30.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras">
+      <HintPath>..\..\packages\Portable.MvvmLightLibs.4.2.30.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform">
+      <HintPath>..\..\packages\Portable.MvvmLightLibs.4.2.30.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unofficial.Blend.Interactivity.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\packages\Portable.CommonServiceLocator.1.2.2\lib\net35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Mutzl.MvvmLight">
+      <HintPath>..\..\packages\Mutzl.Mvvm.DependentRelayCommand.0.9.1.1\lib\Mutzl.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unofficial.Blend.Interactivity.1.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="Extensions\EnumerableAssert.cs" />
+    <Compile Include="Extensions\MethodInfoExtensions.cs" />
+    <Compile Include="Extensions\ModelAssert.cs" />
+    <Compile Include="Extensions\RandomExtensions.cs" />
+    <Compile Include="Extensions\ResourceSetExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Misc\ITestProjectGenerator.cs" />
+    <Compile Include="Misc\PlatformInformationHelperTests.cs" />
+    <Compile Include="Misc\ProjectGeneratorForReferenceHelperTests.cs" />
+    <Compile Include="Misc\ProjectGeneratorForScriptBrickCollectionTests.cs" />
+    <Compile Include="Misc\ProjectGeneratorReflection.cs" />
+    <Compile Include="Misc\Storage\BasePathHelper.cs" />
+    <Compile Include="Misc\TestHelper.cs" />
+    <Compile Include="Misc\XmlDocumentComparer.cs" />
+    <Compile Include="Misc\XmlFormulaEqualityComparer.cs" />
+    <Compile Include="Misc\XmlFormulaTreeComparer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleData\SampleLoader.cs" />
+    <Compile Include="Services\CultureServiceTest.cs" />
+    <Compile Include="Services\DispatcherServiceTest.cs" />
+    <Compile Include="Services\ImageResizeServiceTest.cs" />
+    <Compile Include="Services\NavigationServiceTest.cs" />
+    <Compile Include="Services\PictureServiceTest.cs" />
+    <Compile Include="Services\SensorServiceTest.cs" />
+    <Compile Include="Services\Storage\NotificationServiceTest.cs" />
+    <Compile Include="Services\Storage\ResourceLoaderFactoryTest.cs" />
+    <Compile Include="Services\Storage\ResourcesTest.cs" />
+    <Compile Include="Services\Storage\StorageFactoryTest.cs" />
+    <Compile Include="Services\Storage\StorageTest.cs" />
+    <Compile Include="Tests\Data\CatrobatContextTests.cs" />
+    <Compile Include="Tests\Data\CopyTests.cs" />
+    <Compile Include="Tests\Data\DataDeletingTests.cs" />
+    <Compile Include="Tests\Data\DataEqualsTests.cs" />
+    <Compile Include="Tests\Data\DataReflectionTests.cs" />
+    <Compile Include="Tests\Data\ProjectTests.cs" />
+    <Compile Include="Tests\Data\ReferenceHelperTests.cs" />
+    <Compile Include="Tests\Data\ScriptBrickCollectionTests.cs" />
+    <Compile Include="Tests\Data\VariableHelperTests.cs" />
+    <Compile Include="Tests\Data\VersionConverter091ToWin091PracticalTests.cs" />
+    <Compile Include="Tests\Data\VersionConverter091ToWin091Tests.cs" />
+    <Compile Include="Tests\Data\XPathHelperTests.cs" />
+    <Compile Include="Tests\IDE\CloneableTests.cs" />
+    <Compile Include="Tests\IDE\Converter\BoolPlayButtonStateConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\BoolVisibilityConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\BoolVisibilityNegativeConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\DoubleStringConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\FloatStringConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\IntStringConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\NoScreenshotConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\NullIntCountConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\SecondStringMillisecondConverterTests.cs" />
+    <Compile Include="Tests\IDE\Formulas\FormulaEditorTests.cs" />
+    <Compile Include="Tests\IDE\Formulas\FormulaEvaluationTests.cs" />
+    <Compile Include="Tests\IDE\Formulas\FormulaInterpreterCompleteTests.cs" />
+    <Compile Include="Tests\IDE\Formulas\FormulaInterpreterInterpretTests.cs" />
+    <Compile Include="Tests\IDE\Formulas\FormulaInterpreterSemanticErrorTests.cs" />
+    <Compile Include="Tests\IDE\Formulas\FormulaInterpreterSyntaxErrorTests.cs" />
+    <Compile Include="Tests\IDE\Formulas\FormulaSerializerFormulaTests.cs" />
+    <Compile Include="Tests\IDE\Formulas\FormulaSerializerTokenTests.cs" />
+    <Compile Include="Tests\IDE\Formulas\FormulaTokenizerStringTests.cs" />
+    <Compile Include="Tests\IDE\Formulas\FormulaTokenizerTokenTests.cs" />
+    <Compile Include="Tests\IDE\Formulas\XmlFormulaTreeConverterTests.cs" />
+    <Compile Include="Tests\IDE\ImageSizeEntryTests.cs" />
+    <Compile Include="Tests\IDE\NullItemCollectionTests.cs" />
+    <Compile Include="Tests\IDE\ObservableCollectionTests.cs" />
+    <Compile Include="Tests\IDE\Xml\XmlFormulaTreeConverterTests.cs" />
+    <Compile Include="Tests\IDE\Xml\XmlProjectConverterTests.cs" />
+    <Compile Include="Tests\Misc\FileNameGeneratorTests.cs" />
+    <Compile Include="Tests\Misc\LocalizationTests.cs" />
+    <Compile Include="Tests\Misc\ZipTests.cs" />
+    <Compile Include="Tests\Storage\StorageTests.cs" />
+    <Compile Include="Tests\ViewModel\Editor\Costumes\ChangeCostumeViewModelTests.cs" />
+    <Compile Include="Tests\ViewModel\Editor\Costumes\CostumeNameChooserViewModelTests.cs" />
+    <Compile Include="Tests\ViewModel\Editor\Costumes\NewCostumeSourceSelectionViewModelTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Catrobat.IDE.Core\Catrobat.IDE.Core.csproj">
+      <Project>{bca5086e-499a-4507-aa9b-a55d7e534ef7}</Project>
+      <Name>Catrobat.IDE.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="SampleData\SampleProjects\default.catroid" />
+    <None Include="SampleData\SampleProjects\test.catroid" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test10Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test11Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test12Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test13Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test14Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test15Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test16Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test1Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test2Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test3Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test4Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test5Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test6Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test7Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test8Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test9Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Forever_Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Forever_Output.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_GlobalVariableReferences_Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_GlobalVariableReferences_Output.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_IfLogicBegin_Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_IfLogicBegin_Output.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_LocalVariableReferences_Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_LocalVariableReferences_Output.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_LookReferences_Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_LookReferences_Output.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_ObjectReferences_Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_ObjectReferences_Output.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_PointTo_Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_PointTo_Output.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Repeat_Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Repeat_Output.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_SoundReferences_Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_SoundReferences_Output.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\XPathHelperTestInput.xml" />
+    <Content Include="SampleData\SampleProjects\DataReadingTests\testCatrobat091.xml" />
+    <Content Include="SampleData\SampleProjects\DataReadingTests\test_code1.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\abs.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\accelerationx.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\accelerationy.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\accelerationz.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\add.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\and.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\arccos.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\arcsin.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\arctan.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\brightness.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\compass.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\cos.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\divide.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\equals.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\exp.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\false.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\globalvariable.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\greater.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\greaterequal.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\inclinationx.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\inclinationy.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\layer.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\less.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\lessequal.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\ln.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\localvariable.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\log.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\loudness.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\max.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\min.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\mod.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\multiply.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\negativesign.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\not.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\notequals.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\number.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\or.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\parentheses.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\pi.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\positionx.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\positiony.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\random.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\rotation.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\round.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\sin.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\size.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\sqrt.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\subtract.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\tan.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\transparency.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\true.xml" />
+    <Content Include="SampleData\SampleProjects\simple.xml" />
+    <Content Include="SampleData\screenshot.png" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

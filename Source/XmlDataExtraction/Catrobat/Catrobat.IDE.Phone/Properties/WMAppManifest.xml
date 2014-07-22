@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
+  <DefaultLanguage xmlns="" code="en-US" />
+  <Languages xmlns="">
+    <Language code="de" />
+  </Languages>
+  <App xmlns="" ProductID="{6ac4ff1d-1995-4f04-b91d-4644ce964368}" Title="Pocket Code" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Catrobat.IDE.Phone author" Description="" Publisher="Catrobat.IDE.Phone" PublisherID="{1e7996de-4b31-4984-b9e3-b26d555a715f}">
+    <IconPath IsRelative="true" IsResource="false">Content\Tiles\ApplicationIcon.png</IconPath>
+    <Capabilities>
+      <Capability Name="ID_CAP_NETWORKING" />
+      <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
+      <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
+      <Capability Name="ID_CAP_SENSORS" />
+      <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+      <Capability Name="ID_CAP_MICROPHONE" />
+    </Capabilities>
+    <Tasks>
+      <DefaultTask Name="_default" NavigationPage="/Controls/SplashScreen/SplashScreen.xaml" />
+    </Tasks>
+    <Tokens>
+      <PrimaryToken TokenID="Catrobat.IDE.PhoneToken" TaskName="_default">
+        <TemplateFlip>
+          <SmallImageURI IsRelative="true" IsResource="false">Content\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <Count>0</Count>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Content\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
+          <Title>
+          </Title>
+          <BackContent>
+          </BackContent>
+          <BackBackgroundImageURI>
+          </BackBackgroundImageURI>
+          <BackTitle>
+          </BackTitle>
+          <LargeBackgroundImageURI IsRelative="true" IsResource="false">Content\Tiles\FlipCycleTileLarge.png</LargeBackgroundImageURI>
+          <LargeBackContent />
+          <LargeBackBackgroundImageURI IsRelative="true" IsResource="false">
+          </LargeBackBackgroundImageURI>
+          <DeviceLockImageURI>
+          </DeviceLockImageURI>
+          <HasLarge>True</HasLarge>
+        </TemplateFlip>
+      </PrimaryToken>
+    </Tokens>
+    <Extensions>
+      <FileTypeAssociation Name="Windows Phone SDK test file type" TaskID="_default" NavUriFragment="fileToken=%s">
+        <Logos>
+          <Logo Size="small" IsRelative="true">Content/Tiles/FileSmall.png</Logo>
+          <Logo Size="medium" IsRelative="true">Content/Tiles/FileMedium.png</Logo>
+          <Logo Size="large" IsRelative="true">Content/Tiles/FileLarge.png</Logo>
+        </Logos>
+        <SupportedFileTypes>
+          <FileType ContentType="application/sdk">.catroid</FileType>
+          <FileType ContentType="application/sdk">.catrobat</FileType>
+        </SupportedFileTypes>
+      </FileTypeAssociation>
+    </Extensions>
+    <ScreenResolutions>
+      <ScreenResolution Name="ID_RESOLUTION_WVGA" />
+      <ScreenResolution Name="ID_RESOLUTION_WXGA" />
+      <ScreenResolution Name="ID_RESOLUTION_HD720P" />
+    </ScreenResolutions>
+  </App>
+</Deployment>

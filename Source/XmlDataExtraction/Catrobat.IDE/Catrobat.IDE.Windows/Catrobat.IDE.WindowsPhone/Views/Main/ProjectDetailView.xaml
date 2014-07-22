@@ -1,0 +1,94 @@
+﻿<views:ViewPageBase x:Class="Catrobat.IDE.WindowsPhone.Views.Main.ProjectDetailView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+  DataContext="{Binding ProjectDetailViewModel, Source={StaticResource Locator}}">
+
+  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
+    <StackPanel Orientation="Vertical">
+      <Grid>
+        <TextBlock Margin="10 20 10 0" 
+          Text="{Binding CurrentProjectHeader.ProjectName}"
+          Style="{Binding StaticTheme.TextTitle1Style.NativeStyle, 
+          Source={StaticResource ThemeChooser}}" TextWrapping="Wrap"/>
+      </Grid>
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid  Width="160" Height="160" Margin="10">
+          <Grid Background="LightGray">
+            <Image Grid.Column="0" Margin="5"
+              Stretch="UniformToFill"
+              VerticalAlignment="Stretch"
+              HorizontalAlignment="Stretch"
+              Source="{Binding CurrentProject.Screenshot.ImageSource}" />
+            <Grid
+              Visibility="{Binding CurrentProject, 
+              Converter={StaticResource NullVisibilityConverter}}">
+              <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
+                TextAlignment="Center" TextWrapping="Wrap"
+                FontSize="28" Foreground="DarkGray"
+                Text="{Binding Resources.Main_NoScreenshot, 
+                Source={StaticResource LocalizedStrings}}"
+                Visibility="{Binding CurrentProject.Screenshot.IsEmpty, 
+                Converter={StaticResource BoolVisibilityConverter}}"/>
+            </Grid>
+          </Grid>
+        </Grid>
+       
+        <StackPanel Grid.Column="1" Margin="0 0 8 0">
+          <TextBlock Margin="0 0 0 0" 
+            Text="{Binding Resources.Main_OnlineProjectDescription, 
+            Source={StaticResource LocalizedStrings}}" 
+            Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
+            Source={StaticResource ThemeChooser}}" />
+          <TextBlock Text="{Binding CurrentProject.Description, Mode=OneWay}" 
+            Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+            Source={StaticResource ThemeChooser}}"
+            TextAlignment="Justify"
+            TextWrapping="Wrap" />
+        </StackPanel>
+      </Grid>
+    </StackPanel>
+  </Grid>
+
+  <Page.BottomAppBar>
+    <CommandBar RequestedTheme="Dark"
+      Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
+      Source={StaticResource ThemeChooser}}">
+      <CommandBar.PrimaryCommands>
+        <AppBarButton Icon="Edit" 
+          Label="{Binding Resources.Main_ButtonEdit, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding EditCurrentProjectCommand}"/>
+        <AppBarButton Icon="Play" 
+          Label="{Binding Resources.Editor_ButtonPlayProject, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding PlayCurrentProjectCommand}"/>
+      </CommandBar.PrimaryCommands>
+      <CommandBar.SecondaryCommands>
+        <AppBarButton Icon="Upload" 
+          Label="{Binding Resources.Main_ButtonUpload, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding UploadCurrentProjectCommand}"/>
+        <!--<AppBarButton Icon="ReShare" 
+          Label="{Binding Resources.Main_ShareProject, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding ShareLocalProjectCommand}"/>
+        <AppBarButton Icon="Pin" 
+          Label="{Binding Resources.Main_PinProjectToStart, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding PinLocalProjectCommand}"/>-->
+        <AppBarButton Icon="Setting" 
+          Label="{Binding Resources.Main_ChangeProjectNameAndDescription, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding RenameProjectCommand}"/>
+      </CommandBar.SecondaryCommands>
+    </CommandBar>
+  </Page.BottomAppBar>
+</views:ViewPageBase>
