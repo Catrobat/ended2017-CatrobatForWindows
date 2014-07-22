@@ -249,12 +249,21 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
         {
-            CurrentProject = message.Content;
-            GlobalVariables = VariableHelper.GetGlobalVariableList(CurrentProject);
+            if (CurrentProject != null)
+            {
+                CurrentProject = message.Content;
+                GlobalVariables = VariableHelper.GetGlobalVariableList(CurrentProject);
 
-            if (CurrentSprite == null) return;
+                if (CurrentSprite == null) return;
 
-            LocalVariables = VariableHelper.GetLocalVariableList(CurrentProject, CurrentSprite);
+                LocalVariables = VariableHelper.GetLocalVariableList(CurrentProject, CurrentSprite);
+            }
+            else
+            {
+                GlobalVariables = null;
+                LocalVariables = null;
+            }
+
         }
 
         private void CurrentSpriteChangedMesageAction(GenericMessage<Sprite> message)
