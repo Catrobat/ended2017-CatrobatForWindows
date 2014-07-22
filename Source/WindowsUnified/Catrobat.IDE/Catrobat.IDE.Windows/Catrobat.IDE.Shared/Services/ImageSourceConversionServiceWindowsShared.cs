@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 
@@ -51,15 +52,14 @@ namespace Catrobat.IDE.WindowsShared.Services
         }
 
 
-        public object ConvertFromEncodedStream(Stream encodedStream)
+        public async Task<object> ConvertFromEncodedStream(Stream encodedStream, int width, int height)
         {
             if (encodedStream == null)
                 return null;
 
-            var image = new BitmapImage();
+            var image = new WriteableBitmap(width, height);
             encodedStream.Seek(0, SeekOrigin.Begin);
-            image.SetSource(encodedStream.AsRandomAccessStream());
-            image.CreateOptions = BitmapCreateOptions.None;
+            await image.SetSourceAsync(encodedStream.AsRandomAccessStream());
 
             return image;
 

@@ -50,11 +50,11 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                     IsLoaded = true;
 
                 if (!IsLoaded)
-                    return ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStream(null);
+                    return ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStream(null, 0, 0);
 
-                if (EncodedData != null && _nativeImageSource == null)
-                    _nativeImageSource = ServiceLocator.ImageSourceConversionService.
-                        ConvertFromEncodedStream(EncodedData);
+                //if (EncodedData != null && _nativeImageSource == null)
+                //    _nativeImageSource = ServiceLocator.ImageSourceConversionService.
+                //        ConvertFromEncodedStream(EncodedData);
 
                 if (_nativeImageSource != null)
                     return _nativeImageSource;
@@ -117,13 +117,23 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                 IsLoaded = true;
                 IsLoading = false;
 
+   
+
                 if (image != null)
                 {
                     EncodedData = image.EncodedData;
-                    //Data = image.Data;
                     Width = image.Width;
                     Height = image.Height;
-                    _nativeImageSource = image._nativeImageSource;
+
+                    if (image._nativeImageSource != null)
+                    {
+                        _nativeImageSource = image._nativeImageSource;
+                    }
+                    else
+                    {
+                        _nativeImageSource = await ServiceLocator.ImageSourceConversionService.
+                            ConvertFromEncodedStream(EncodedData, Width, Height);
+                    }
                 }
 
                 RaisePropertyChanged(() => ImageSource);

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 
 namespace Catrobat.IDE.Core.Services
 {
@@ -8,6 +9,6 @@ namespace Catrobat.IDE.Core.Services
 
         void ConvertToBytes(object inputData, out byte[] outputData, out int outputWidth, out int outputHeight);
 
-        object ConvertFromEncodedStream(Stream encodedStream);
+        Task<object> ConvertFromEncodedStream(Stream encodedStream, int width, int height);
     }
 }
