@@ -1219,4 +1219,7 @@
   <data name="Main_OnlineProjectListBoxNoMoreItems" xml:space="preserve">
     <value>No more programs</value>
   </data>
+  <data name="Main_NoScreenshot" xml:space="preserve">
+    <value>No screenshot</value>
+  </data>
 </root>

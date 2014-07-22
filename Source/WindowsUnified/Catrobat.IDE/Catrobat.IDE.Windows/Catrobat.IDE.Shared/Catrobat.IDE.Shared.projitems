@@ -47,6 +47,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Templates\ActionTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NamespaceTypeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NegativeNullVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NullVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NativeColorOpacityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NativeGridViewExVisibilityConverter.cs" />

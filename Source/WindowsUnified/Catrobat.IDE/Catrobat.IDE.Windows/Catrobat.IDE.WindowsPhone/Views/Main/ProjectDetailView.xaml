@@ -20,13 +20,25 @@
           <ColumnDefinition Width="Auto" />
           <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Image Grid.Column="0" Margin="10"
-          MaxWidth="150"
-          Stretch="UniformToFill"
-          VerticalAlignment="Top"
-          HorizontalAlignment="Stretch"
-          Source="{Binding CurrentProjectHeader.Screenshot.ImageSource}" />
-
+        <Grid  Width="160" Height="160" Margin="10">
+          <Grid Background="LightGray">
+            <Image Grid.Column="0" Margin="5"
+              Stretch="UniformToFill"
+              VerticalAlignment="Stretch"
+              HorizontalAlignment="Stretch"
+              Source="{Binding CurrentProject.Screenshot.ImageSource}" />
+            <Grid
+              Visibility="{Binding CurrentProject.Screenshot.IsEmpty, 
+              Converter={StaticResource BoolVisibilityConverter}}">
+              <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
+                TextAlignment="Center" TextWrapping="Wrap"
+                FontSize="28"
+                Text="{Binding Resources.Main_NoScreenshot, 
+                Source={StaticResource LocalizedStrings}}"/>
+            </Grid>
+          </Grid>
+        </Grid>
+       
         <StackPanel Grid.Column="1" Margin="0 0 8 0">
           <TextBlock Margin="0 0 0 0" 
             Text="{Binding Resources.Main_OnlineProjectDescription, 

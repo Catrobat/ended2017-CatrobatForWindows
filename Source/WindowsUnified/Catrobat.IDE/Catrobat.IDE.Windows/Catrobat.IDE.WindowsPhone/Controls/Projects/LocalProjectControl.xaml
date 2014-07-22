@@ -108,7 +108,7 @@
       <Grid>
         <Grid Background="White" d:DataContext="{d:DesignData catrobatObjects:ProjectDummyHeader}">
           <Border BorderThickness="0" BorderBrush="White">
-            <Grid Width="140" Height="140">
+            <Grid Width="140" Height="140" Background="LightGray">
               <Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                Source="{Binding Screenshot.ImageSource, 
                Converter={StaticResource ImageSquareConverter}}" />
@@ -121,6 +121,14 @@
                   <TextBlock Grid.Row="0" Text="{Binding ProjectName}" Foreground="White" TextWrapping="Wrap" 
                     TextAlignment="Center" HorizontalAlignment="Stretch" 
                     VerticalAlignment="Center" Margin="7" FontSize="14"/>
+                </Grid>
+                <Grid Grid.Row="1"
+                  Visibility="{Binding Screenshot.IsEmpty, 
+                  Converter={StaticResource BoolVisibilityConverter}}">
+                  <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
+                    TextAlignment="Center" TextWrapping="Wrap" 
+                    Text="{Binding Resources.Main_NoScreenshot, 
+                    Source={StaticResource LocalizedStrings}}"/>
                 </Grid>
               </Grid>
             </Grid>

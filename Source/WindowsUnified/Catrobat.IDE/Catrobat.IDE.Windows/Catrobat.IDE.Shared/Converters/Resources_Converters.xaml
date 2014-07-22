@@ -26,4 +26,5 @@
 
   <nativeConverters:NativeImageSquareConverter x:Key="ImageSquareConverter" />
   <nativeConverters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+  <nativeConverters:NegativeNullVisibilityConverter x:Key="NegativeNullVisibilityConverter" />
 </ResourceDictionary>

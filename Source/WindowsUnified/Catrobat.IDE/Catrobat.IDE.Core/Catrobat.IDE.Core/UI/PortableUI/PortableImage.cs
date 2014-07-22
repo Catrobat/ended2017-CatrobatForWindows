@@ -17,6 +17,7 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         private int _height;
         private object _nativeImageSource;
         private Stream _encodedData;
+        private bool _isEmpty= false;
 
         public Stream EncodedData
         {
@@ -28,6 +29,12 @@ namespace Catrobat.IDE.Core.UI.PortableUI
 
                 _encodedData = value;
             }
+        }
+
+        public bool IsEmpty
+        {
+            get { return _isEmpty; }
+            set { _isEmpty = value; }
         }
 
         public int Width
@@ -117,8 +124,6 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                 IsLoaded = true;
                 IsLoading = false;
 
-   
-
                 if (image != null)
                 {
                     EncodedData = image.EncodedData;
@@ -136,8 +141,10 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                     }
                 }
 
+                _isEmpty = _encodedData == null && _nativeImageSource == null;
+
                 RaisePropertyChanged(() => ImageSource);
-                //RaisePropertyChanged(() => Data);
+                RaisePropertyChanged(() => IsEmpty);
                 RaisePropertyChanged(() => Width);
                 RaisePropertyChanged(() => Height);
                 RaisePropertyChanged(() => IsLoaded);
