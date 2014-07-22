@@ -11,7 +11,7 @@
     <StackPanel Orientation="Vertical">
       <Grid>
         <TextBlock Margin="10 20 10 0" 
-          Text="{Binding CurrentProject.Name}"
+          Text="{Binding CurrentProjectHeader.ProjectName}"
           Style="{Binding StaticTheme.TextTitle1Style.NativeStyle, 
           Source={StaticResource ThemeChooser}}" TextWrapping="Wrap"/>
       </Grid>
@@ -28,13 +28,15 @@
               HorizontalAlignment="Stretch"
               Source="{Binding CurrentProject.Screenshot.ImageSource}" />
             <Grid
-              Visibility="{Binding CurrentProject.Screenshot.IsEmpty, 
-              Converter={StaticResource BoolVisibilityConverter}}">
+              Visibility="{Binding CurrentProject, 
+              Converter={StaticResource NullVisibilityConverter}}">
               <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
                 TextAlignment="Center" TextWrapping="Wrap"
                 FontSize="28"
                 Text="{Binding Resources.Main_NoScreenshot, 
-                Source={StaticResource LocalizedStrings}}"/>
+                Source={StaticResource LocalizedStrings}}"
+                Visibility="{Binding CurrentProject.Screenshot.IsEmpty, 
+                Converter={StaticResource BoolVisibilityConverter}}"/>
             </Grid>
           </Grid>
         </Grid>
@@ -68,7 +70,6 @@
           Label="{Binding Resources.Editor_ButtonPlayProject, 
           Source={StaticResource LocalizedStrings}}"
           Command="{Binding PlayCurrentProjectCommand}"/>
-        <!--TODO: Add pin and share buttons here-->
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
         <AppBarButton Icon="Upload" 
