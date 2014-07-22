@@ -15,14 +15,14 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Properties
 
         public XmlGlideToBrick(XElement xElement) : base(xElement) {}
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             DurationInSeconds = new XmlFormula(xRoot.Element("durationInSeconds"));
             XDestination = new XmlFormula(xRoot.Element("xDestination"));
             YDestination = new XmlFormula(xRoot.Element("yDestination"));
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("glideToBrick");
 
@@ -41,7 +41,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Properties
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (DurationInSeconds != null)
                 DurationInSeconds.LoadReference();

@@ -37,13 +37,13 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Properties
 
         public XmlPointToBrick(XElement xElement) : base(xElement) {}
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             if (xRoot.Element("object") != null)
                 PointedXmlSpriteReference = new XmlSpriteReference(xRoot.Element("object"));
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("pointToBrick");
 
@@ -53,7 +53,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Properties
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (PointedXmlSpriteReference != null && PointedXmlSpriteReference.Sprite == null)
                 PointedXmlSpriteReference.LoadReference();

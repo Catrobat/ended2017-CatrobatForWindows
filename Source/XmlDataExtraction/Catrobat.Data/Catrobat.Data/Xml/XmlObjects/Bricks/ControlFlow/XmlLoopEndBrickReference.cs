@@ -34,13 +34,13 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             //_classField = xRoot.Attribute("class").Value;
             _reference = xRoot.Attribute("reference").Value;
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("loopEndBrick");
             //xRoot.Add(new XAttribute("class", _classField));
@@ -49,7 +49,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(LoopEndBrick == null)
                 LoopEndBrick = ReferenceHelper.GetReferenceObject(this, _reference) as XmlLoopEndBrick;

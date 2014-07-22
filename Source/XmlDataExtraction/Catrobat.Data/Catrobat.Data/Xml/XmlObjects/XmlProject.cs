@@ -13,7 +13,7 @@ using Catrobat.Data.Xml.XmlObjects.Variables;
 
 namespace Catrobat.Data.Xml.XmlObjects
 {
-    public partial class XmlProject : DataRootObject
+    public partial class XmlProject : XmlRootObject
     {
         #region Properties
 
@@ -62,7 +62,7 @@ namespace Catrobat.Data.Xml.XmlObjects
             LoadBroadcastMessages();
         }
 
-        internal override XDocument CreateXML()
+        public override XDocument CreateXML()
         {
             var document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
 
@@ -77,13 +77,13 @@ namespace Catrobat.Data.Xml.XmlObjects
             return document;
         }
 
-        internal void LoadReference()
+        public void LoadReference()
         {
             VariableList.LoadReference();
             SpriteList.LoadReference();
         }          
 
-        internal void LoadBroadcastMessages()
+        public void LoadBroadcastMessages()
         {
             foreach (XmlSprite sprite in SpriteList.Sprites)
             {

@@ -15,7 +15,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Variables
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             if (xRoot == null)
                 return;
@@ -26,7 +26,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Variables
             }
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("list");
 

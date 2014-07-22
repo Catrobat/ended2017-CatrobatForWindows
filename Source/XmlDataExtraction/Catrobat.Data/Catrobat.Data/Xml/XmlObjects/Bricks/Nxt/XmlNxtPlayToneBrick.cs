@@ -13,13 +13,13 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Nxt
 
         public XmlNxtPlayToneBrick(XElement xElement) : base(xElement) {}
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             DurationInSeconds = new XmlFormula(xRoot.Element("durationInSeconds"));
             Frequency = new XmlFormula(xRoot.Element("frequency"));
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("legoNxtPlayToneBrick");
 
@@ -34,7 +34,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Nxt
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (DurationInSeconds != null)
                 DurationInSeconds.LoadReference();

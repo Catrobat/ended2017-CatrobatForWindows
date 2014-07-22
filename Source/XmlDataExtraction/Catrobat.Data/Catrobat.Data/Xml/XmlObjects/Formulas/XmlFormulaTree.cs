@@ -21,7 +21,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Formulas
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             if(xRoot.Element("leftChild") != null)
                 LeftChild = new XmlFormulaTree(xRoot.Element("leftChild"));
@@ -34,7 +34,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Formulas
             VariableValue = xRoot.Element("value").Value;
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("formulaTree");
 
@@ -50,7 +50,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Formulas
             return xRoot;
         }
 
-        internal XElement CreateXML(string childName)
+        public XElement CreateXML(string childName)
         {
             var xRoot = new XElement(childName);
 

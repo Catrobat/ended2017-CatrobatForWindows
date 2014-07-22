@@ -11,13 +11,13 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
 
         public XmlRepeatBrick(XElement xElement) : base(xElement) {}
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             TimesToRepeat = new XmlFormula(xRoot.Element("timesToRepeat"));
             base.LoadFromCommonXML(xRoot);
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("repeatBrick");
             base.CreateCommonXML(xRoot);
@@ -29,7 +29,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             base.LoadReference();
 

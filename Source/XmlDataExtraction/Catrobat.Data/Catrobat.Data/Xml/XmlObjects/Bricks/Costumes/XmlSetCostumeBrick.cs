@@ -4,7 +4,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Costumes
 {
     public partial class XmlSetCostumeBrick : XmlBrick
     {
-        internal XmlCostumeReference XmlCostumeReference { get; set; }
+        public XmlCostumeReference XmlCostumeReference { get; set; }
 
         public XmlCostume Costume
         {
@@ -36,7 +36,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Costumes
 
         public XmlSetCostumeBrick(XElement xElement) : base(xElement) { }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             if (xRoot.Element("look") != null)
             {
@@ -44,7 +44,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Costumes
             }
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("setLookBrick");
 
@@ -56,7 +56,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Costumes
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(XmlCostumeReference != null)
             XmlCostumeReference.LoadReference();

@@ -4,7 +4,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Sounds
 {
     public partial class XmlPlaySoundBrick : XmlBrick
     {
-        internal XmlSoundReference XmlSoundReference { get; set; }
+        public XmlSoundReference XmlSoundReference { get; set; }
 
         public XmlSound Sound
         {
@@ -37,7 +37,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Sounds
 
         public XmlPlaySoundBrick(XElement xElement) : base(xElement) { }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             if (xRoot.Element("sound") != null)
             {
@@ -45,7 +45,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Sounds
             }
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("playSoundBrick");
 
@@ -59,7 +59,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Sounds
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (XmlSoundReference != null)
                 XmlSoundReference.LoadReference();

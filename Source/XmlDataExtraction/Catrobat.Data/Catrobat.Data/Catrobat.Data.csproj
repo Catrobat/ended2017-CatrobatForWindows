@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Folder Include="Xml\Converter\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ProgramParser\IProgramParser.cs" />
@@ -52,8 +53,6 @@
     <Compile Include="Utilities\Helpers\XElementExtensions.cs" />
     <Compile Include="Utilities\Helpers\XmlParserTempProjectHelper.cs" />
     <Compile Include="Utilities\Helpers\XPathHelper.cs" />
-    <Compile Include="Utilities\MD5.cs" />
-    <Compile Include="Utilities\UtilToken.cs" />
     <Compile Include="Utilities\XmlStringWriter.cs" />
     <Compile Include="Xml\XmlVersionConverter\XmlCatrobatVersion.cs" />
     <Compile Include="Xml\XmlVersionConverter\XmlCatrobatVersionConverter.cs" />
@@ -119,7 +118,7 @@
     <Compile Include="Xml\XmlObjects\Bricks\XmlBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\XmlBrickList.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\XmlNoteBrick.cs" />
-    <Compile Include="Xml\XmlObjects\DataRootObject.cs" />
+    <Compile Include="Xml\XmlObjects\XmlRootObject.cs" />
     <Compile Include="Xml\XmlObjects\Formulas\XmlFormula.cs" />
     <Compile Include="Xml\XmlObjects\Formulas\XmlFormulaTree.cs" />
     <Compile Include="Xml\XmlObjects\Formulas\XmlFormulaTreeFactory.cs" />

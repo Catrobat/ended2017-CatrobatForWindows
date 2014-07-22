@@ -17,18 +17,18 @@ namespace Catrobat.Data.Xml.XmlObjects
             FileName = FileNameGenerationHelper.Generate() + "_" +  Name;
         }
 
-        internal XmlSound(XElement xElement)
+        public XmlSound(XElement xElement)
         {
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             FileName = xRoot.Element("fileName").Value;
             Name = xRoot.Element("name").Value;
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("sound");
 

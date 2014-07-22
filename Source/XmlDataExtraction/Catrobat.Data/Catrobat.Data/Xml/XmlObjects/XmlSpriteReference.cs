@@ -18,13 +18,13 @@ namespace Catrobat.Data.Xml.XmlObjects
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
             //Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as Sprite;
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("object");
 
@@ -33,7 +33,7 @@ namespace Catrobat.Data.Xml.XmlObjects
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(Sprite == null)
                 Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as XmlSprite;

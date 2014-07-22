@@ -20,7 +20,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Scripts
             LoadFromXml(xElement);
         }
         
-        internal abstract override void LoadFromXml(XElement xRoot);
+        public abstract override void LoadFromXml(XElement xRoot);
 
         private void LoadFromCommonXML(XElement xRoot)
         {
@@ -30,7 +30,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Scripts
             }
         }
 
-        internal abstract override XElement CreateXml();
+        public abstract override XElement CreateXml();
 
         protected void CreateCommonXML(XElement xRoot)
         {

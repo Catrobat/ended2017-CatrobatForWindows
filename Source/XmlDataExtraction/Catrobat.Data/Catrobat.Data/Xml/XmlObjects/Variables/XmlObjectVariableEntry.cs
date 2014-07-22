@@ -4,7 +4,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Variables
 {
     public class XmlObjectVariableEntry : XmlObject
     {
-        internal XmlSpriteReference XmlSpriteReference { get; set; }
+        public XmlSpriteReference XmlSpriteReference { get; set; }
 
         public XmlSprite Sprite
         {
@@ -41,13 +41,13 @@ namespace Catrobat.Data.Xml.XmlObjects.Variables
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             XmlSpriteReference = new XmlSpriteReference(xRoot.Element("object"));
             VariableList = new XmlUserVariableList(xRoot.Element("list"));
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("entry");
 
@@ -57,7 +57,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Variables
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(XmlSpriteReference != null && XmlSpriteReference.Sprite == null)
                 XmlSpriteReference.LoadReference();

@@ -15,7 +15,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Formulas
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             if (xRoot.Element("formulaTree") != null)
             {
@@ -23,7 +23,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Formulas
             }
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             return (FormulaTree ?? new XmlFormulaTree()).CreateXml();
         }

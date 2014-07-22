@@ -13,13 +13,13 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Properties
 
         public XmlPlaceAtBrick(XElement xElement) : base(xElement) {}
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             XPosition = new XmlFormula(xRoot.Element("xPosition"));
             YPosition = new XmlFormula(xRoot.Element("yPosition"));
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("placeAtBrick");
 
@@ -34,7 +34,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Properties
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (XPosition != null)
                 XPosition.LoadReference();

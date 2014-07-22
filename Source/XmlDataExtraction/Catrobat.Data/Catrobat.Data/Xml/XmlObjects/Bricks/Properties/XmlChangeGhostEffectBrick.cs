@@ -11,12 +11,12 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Properties
 
         public XmlChangeGhostEffectBrick(XElement xElement) : base(xElement) {}
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             ChangeGhostEffect = new XmlFormula(xRoot.Element("changeGhostEffect"));
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("changeGhostEffectByNBrick");
 
@@ -27,7 +27,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Properties
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (ChangeGhostEffect != null)
                 ChangeGhostEffect.LoadReference();

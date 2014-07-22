@@ -18,12 +18,12 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("ifElseBrick");
 
@@ -32,7 +32,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(IfLogicElseBrick == null)
                 IfLogicElseBrick = ReferenceHelper.GetReferenceObject(this, _reference) as XmlIfLogicElseBrick;

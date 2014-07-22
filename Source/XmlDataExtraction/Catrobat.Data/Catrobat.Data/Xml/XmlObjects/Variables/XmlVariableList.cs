@@ -19,13 +19,13 @@ namespace Catrobat.Data.Xml.XmlObjects.Variables
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             ObjectVariableList = new XmlObjectVariableList(xRoot.Element("objectVariableList"));
             ProgramVariableList = new XmlProgramVariableList(xRoot.Element("programVariableList"));
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("variables");
             xRoot.Add(ObjectVariableList.CreateXml());
@@ -34,7 +34,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Variables
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             ObjectVariableList.LoadReference();
         }

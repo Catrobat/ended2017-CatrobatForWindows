@@ -18,7 +18,7 @@ namespace Catrobat.Data.Xml.XmlObjects
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             Sounds = new List<XmlSound>();
             foreach (XElement element in xRoot.Elements())
@@ -27,7 +27,7 @@ namespace Catrobat.Data.Xml.XmlObjects
             }
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("soundList");
 

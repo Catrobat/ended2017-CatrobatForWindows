@@ -24,7 +24,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             foreach (XElement element in xRoot.Elements())
             {
@@ -232,7 +232,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks
             }
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("brickList");
 

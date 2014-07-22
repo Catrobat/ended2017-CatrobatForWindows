@@ -11,12 +11,12 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Properties
 
         public XmlPointInDirectionBrick(XElement xElement) : base(xElement) {}
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             Degrees = new XmlFormula(xRoot.Element("degrees"));
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("pointInDirectionBrick");
 
@@ -27,7 +27,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Properties
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (Degrees != null)
                 Degrees.LoadReference();

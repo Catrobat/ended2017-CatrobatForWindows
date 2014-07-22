@@ -3,18 +3,18 @@ using System.Xml.Linq;
 
 namespace Catrobat.Data.Xml.XmlObjects
 {
-    public abstract class DataRootObject
+    public abstract class XmlRootObject
     {
         protected XElement Root;
 
-        public DataRootObject() {}
+        public XmlRootObject() {}
 
-        public DataRootObject(String xml)
+        public XmlRootObject(String xml)
         {
         }
 
         protected abstract void LoadFromXML(String xmlSource);
 
-        internal abstract XDocument CreateXML();
+        public abstract XDocument CreateXML();
     }
 }

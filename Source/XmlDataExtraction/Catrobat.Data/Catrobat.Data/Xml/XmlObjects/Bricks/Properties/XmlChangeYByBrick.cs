@@ -11,12 +11,12 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Properties
 
         public XmlChangeYByBrick(XElement xElement) : base(xElement) {}
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             YMovement = new XmlFormula(xRoot.Element("yMovement"));
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("changeYByNBrick");
 
@@ -27,7 +27,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Properties
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (YMovement != null)
                 YMovement.LoadReference();

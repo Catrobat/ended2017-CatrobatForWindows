@@ -8,12 +8,12 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
 
         public XmlRepeatLoopEndBrick(XElement xElement) : base(xElement) { }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             base.LoadFromCommonXML(xRoot);
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("loopEndBrick");
             base.CreateCommonXML(xRoot);

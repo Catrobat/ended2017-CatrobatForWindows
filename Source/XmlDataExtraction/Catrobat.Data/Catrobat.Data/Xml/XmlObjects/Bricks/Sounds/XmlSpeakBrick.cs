@@ -10,7 +10,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Sounds
 
         public XmlSpeakBrick(XElement xElement) : base(xElement) {}
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             if (xRoot.Element("text") != null)
             {
@@ -18,7 +18,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Sounds
             }
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("speakBrick");
 

@@ -36,7 +36,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Scripts
 
         public XmlWhenScript(XElement xElement) : base(xElement) {}
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             if (xRoot.Element("action") != null)
             {
@@ -44,7 +44,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Scripts
             }
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("whenScript");
 

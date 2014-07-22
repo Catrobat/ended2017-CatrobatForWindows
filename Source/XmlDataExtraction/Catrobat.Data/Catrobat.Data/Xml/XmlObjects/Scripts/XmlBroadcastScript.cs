@@ -10,7 +10,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Scripts
 
         public XmlBroadcastScript(XElement xElement) : base(xElement) {}
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             if (xRoot.Element("receivedMessage") != null)
             {
@@ -18,7 +18,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Scripts
             }
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("broadcastScript");
 

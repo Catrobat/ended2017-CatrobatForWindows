@@ -84,7 +84,7 @@ namespace Catrobat.Data.Xml.XmlObjects
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             ApplicationBuildName = xRoot.Element("applicationBuildName").Value;
             ApplicationBuildNumber = int.Parse(xRoot.Element("applicationBuildNumber").Value, CultureInfo.InvariantCulture);
@@ -107,7 +107,7 @@ namespace Catrobat.Data.Xml.XmlObjects
             UserHandle = xRoot.Element("userHandle").Value;
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             UpdateSystemInformation();
 

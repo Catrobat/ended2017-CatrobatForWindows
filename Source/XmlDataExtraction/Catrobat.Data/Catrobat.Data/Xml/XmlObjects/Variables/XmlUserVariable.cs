@@ -13,12 +13,12 @@ namespace Catrobat.Data.Xml.XmlObjects.Variables
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             Name = xRoot.Element("name").Value;
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("userVariable");
 

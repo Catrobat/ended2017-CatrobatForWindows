@@ -18,7 +18,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Scripts
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             foreach (XElement element in xRoot.Elements())
             {
@@ -37,7 +37,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Scripts
             }
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("scriptList");
 

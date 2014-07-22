@@ -11,12 +11,12 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
 
         public XmlWaitBrick(XElement xElement) : base(xElement) {}
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             TimeToWaitInSeconds = new XmlFormula(xRoot.Element("timeToWaitInSeconds"));
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("waitBrick");
 
@@ -27,7 +27,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (TimeToWaitInSeconds != null)
                 TimeToWaitInSeconds.LoadReference();

@@ -18,13 +18,13 @@ namespace Catrobat.Data.Xml.XmlObjects
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
             //Sound = ReferenceHelper.GetReferenceObject(this, _reference) as Sound;
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("sound");
 
@@ -33,7 +33,7 @@ namespace Catrobat.Data.Xml.XmlObjects
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(Sound == null)
                 Sound = ReferenceHelper.GetReferenceObject(this, _reference) as XmlSound;

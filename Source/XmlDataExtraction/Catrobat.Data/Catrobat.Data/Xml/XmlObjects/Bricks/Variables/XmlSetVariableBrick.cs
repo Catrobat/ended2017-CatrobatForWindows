@@ -6,7 +6,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Variables
 {
     public partial class XmlSetVariableBrick : XmlBrick
     {
-        internal XmlUserVariableReference UserVariableReference { get; set; }
+        public XmlUserVariableReference UserVariableReference { get; set; }
 
         public XmlUserVariable UserVariable
         {
@@ -40,7 +40,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Variables
 
 
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             if (xRoot.Element("userVariable") != null)
                 UserVariableReference = new XmlUserVariableReference(xRoot.Element("userVariable"));
@@ -49,7 +49,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Variables
                 VariableFormula = new XmlFormula(xRoot.Element("variableFormula"));
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("setVariableBrick");
 
@@ -63,7 +63,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Variables
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(UserVariableReference != null)
                 UserVariableReference.LoadReference();

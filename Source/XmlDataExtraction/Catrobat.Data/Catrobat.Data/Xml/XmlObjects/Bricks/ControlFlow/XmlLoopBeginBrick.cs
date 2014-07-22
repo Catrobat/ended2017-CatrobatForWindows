@@ -37,9 +37,9 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
 
         protected XmlLoopBeginBrick(XElement xElement) : base(xElement) {}
 
-        internal abstract override void LoadFromXml(XElement xRoot);
+        public abstract override void LoadFromXml(XElement xRoot);
 
-        internal abstract override XElement CreateXml();
+        public abstract override XElement CreateXml();
 
         protected override void LoadFromCommonXML(XElement xRoot)
         {
@@ -54,7 +54,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
             xRoot.Add(LoopEndBrickReference.CreateXml());
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (LoopEndBrickReference != null)
                 LoopEndBrickReference.LoadReference();

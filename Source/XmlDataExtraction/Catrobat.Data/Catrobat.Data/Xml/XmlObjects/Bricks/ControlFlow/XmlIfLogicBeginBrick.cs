@@ -7,7 +7,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
     {
         public XmlFormula IfCondition { get; set; }
 
-        internal XmlIfLogicElseBrickReference IfLogicElseBrickReference { get; set; }
+        public XmlIfLogicElseBrickReference IfLogicElseBrickReference { get; set; }
 
         public XmlIfLogicElseBrick IfLogicElseBrick
         {
@@ -33,7 +33,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
             }
         }
 
-        internal XmlIfLogicEndBrickReference IfLogicEndBrickReference { get; set; }
+        public XmlIfLogicEndBrickReference IfLogicEndBrickReference { get; set; }
 
         public XmlIfLogicEndBrick IfLogicEndBrick
         {
@@ -63,7 +63,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
 
         public XmlIfLogicBeginBrick(XElement xElement) : base(xElement) { }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             if (xRoot.Element("ifCondition") != null)
             {
@@ -79,7 +79,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
             }
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("ifLogicBeginBrick");
 
@@ -97,7 +97,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.ControlFlow
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (IfLogicElseBrickReference != null)
                 IfLogicElseBrickReference.LoadReference();

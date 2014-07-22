@@ -13,13 +13,13 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Nxt
 
         public XmlNxtMotorActionBrick(XElement xElement) : base(xElement) {}
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             Motor = xRoot.Element("motor").Value;
             Speed = new XmlFormula(xRoot.Element("speed"));
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("legoNxtMotorActionBrick");
 
@@ -35,7 +35,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks.Nxt
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (Speed != null)
                 Speed.LoadReference();

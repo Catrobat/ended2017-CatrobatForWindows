@@ -13,7 +13,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks
             //LoadFromCommonXML(xElement); 
         }
 
-        internal abstract override void LoadFromXml(XElement xRoot);
+        public abstract override void LoadFromXml(XElement xRoot);
 
         protected virtual void LoadFromCommonXML(XElement xRoot)
         {
@@ -21,7 +21,7 @@ namespace Catrobat.Data.Xml.XmlObjects.Bricks
             //    sprite = new SpriteReference(xRoot.Element("object"));
         }
 
-        internal abstract override XElement CreateXml();
+        public abstract override XElement CreateXml();
 
         protected virtual void CreateCommonXML(XElement xRoot)
         {

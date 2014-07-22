@@ -26,7 +26,7 @@ namespace Catrobat.Data.Xml.XmlObjects
             LoadFromXml(xElement);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             if (xRoot.Element("lookList") != null)
             {
@@ -45,7 +45,7 @@ namespace Catrobat.Data.Xml.XmlObjects
             }
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("object");
 
@@ -72,7 +72,7 @@ namespace Catrobat.Data.Xml.XmlObjects
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             foreach (var brick in Scripts.Scripts.SelectMany(script => script.Bricks.Bricks))
             {

@@ -4,11 +4,11 @@ namespace Catrobat.Data.Xml.XmlObjects
 {
     public abstract class XmlObject
     {
-        internal abstract void LoadFromXml(XElement xRoot);
+        public abstract void LoadFromXml(XElement xRoot);
 
-        internal abstract XElement CreateXml();
+        public abstract XElement CreateXml();
 
-        internal virtual void LoadReference()
+        public virtual void LoadReference()
         {
         }
     }

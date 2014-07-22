@@ -18,7 +18,7 @@ namespace Catrobat.Data.Xml.XmlObjects
             LoadFromXml(xRoot);
         }
 
-        internal override void LoadFromXml(XElement xRoot)
+        public override void LoadFromXml(XElement xRoot)
         {
             foreach (XElement xSprite in xRoot.Elements("object"))
             {
@@ -33,7 +33,7 @@ namespace Catrobat.Data.Xml.XmlObjects
             }
         }
 
-        internal override XElement CreateXml()
+        public override XElement CreateXml()
         {
             var xRoot = new XElement("objectList");
 
@@ -45,7 +45,7 @@ namespace Catrobat.Data.Xml.XmlObjects
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             foreach (var sprite in Sprites)
                 sprite.LoadReference();
