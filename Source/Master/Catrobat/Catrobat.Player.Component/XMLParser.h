@@ -74,6 +74,7 @@ private:
 	Brick*						ParsePointInDirectionBrick		(xml_node<> *baseNode, Script *script);
 	Brick*						ParseTurnLeftBrick				(xml_node<> *baseNode, Script *script);
 	Brick*						ParseTurnRightBrick				(xml_node<> *baseNode, Script *script);
+	Brick*						ParseMoveNStepsBrick			(xml_node<> *baseNode, Script *script);
 
 	FormulaTree*				ParseFormulaTree				(xml_node<> *baseNode);
 

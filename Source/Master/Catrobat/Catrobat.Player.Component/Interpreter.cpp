@@ -419,8 +419,8 @@ bool Interpreter::OnlyIntegerValues(double value1, double value2)
 	int int1 = abs(static_cast<int>(value1));
 	int int2 = abs(static_cast<int>(value2));
 
-	value1 -= int1;
-	value2 -= int2;
+	value1 = abs(value1) - int1;
+	value2 = abs(value2) - int2;
 
 	if (value1 > 0.0 || value2 > 0.0)
 	{

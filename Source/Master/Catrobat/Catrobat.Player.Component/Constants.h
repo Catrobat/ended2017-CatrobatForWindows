@@ -110,6 +110,7 @@ namespace Constants
             static const string PointInDirectionBrick       =       "pointInDirectionBrick";
             static const string TurnLeftBrick               =       "turnLeftBrick";
             static const string TurnRightBrick              =       "turnRightBrick";
+			static const string MoveNStepsBrick				=		"moveNStepsBrick";
             static const string ChangeGhostEffect           =       "changeGhostEffect";
             static const string TimeToWaitInSeconds         =       "timeToWaitInSeconds";
             static const string Size                        =       "size";
@@ -118,9 +119,10 @@ namespace Constants
             static const string XMovement                   =       "xMovement";
             static const string YMovement                   =       "yMovement";
             static const string Degrees                     =       "degrees";
+			static const string Steps						=		"steps";
             static const string XDestination                =       "xDestination";
             static const string YDestination                =       "yDestination";
-            static const string DurationInSeconds      =            "durationInSeconds";
+            static const string DurationInSeconds			=		"durationInSeconds";
             static const string Transparency                =       "transparency";
             static const string BroadcastMessage            =       "broadcastMessage";
             static const string Sound                       =       "sound";

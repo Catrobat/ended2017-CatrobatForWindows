@@ -34,6 +34,7 @@
 #include "ExceptionLogger.h"
 #include "Constants.h"
 #include "XMLParserFatalException.h"
+#include "MoveNStepsBrick.h"
 
 #include <time.h>
 #include <iostream>
@@ -500,7 +501,7 @@ Script *XMLParser::ParseWhenScript(xml_node<> *baseNode, Object *object)
 
 void XMLParser::ParseBrickList(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *brickListNode = baseNode->first_node(Constants::XMLParser::Object::BrickList.c_str());
+    auto brickListNode = baseNode->first_node(Constants::XMLParser::Object::BrickList.c_str());
 
     if (!brickListNode)
     {
@@ -633,6 +634,10 @@ void XMLParser::ParseBrickList(xml_node<> *baseNode, Script *script)
         {
             current = ParseTurnRightBrick(node, script);
         }
+		else if (strcmp(node->name(), Constants::XMLParser::Brick::MoveNStepsBrick.c_str()) == 0)
+		{
+			current = ParseMoveNStepsBrick(node, script);
+		}
 
         if (current)
         {
@@ -1282,6 +1287,26 @@ Brick *XMLParser::ParseChangeVariableBrick(xml_node<> *baseNode, Script *script)
     VariableManagementBrick *newBrick = new ChangeVariableBrick(variableFormula, script);
     m_pendingVariables->insert(pair<VariableManagementBrick*, string>(newBrick, name));
     return newBrick;
+}
+
+Brick *XMLParser::ParseMoveNStepsBrick(xml_node<> *baseNode, Script *script)
+{
+	auto node = baseNode->first_node(Constants::XMLParser::Brick::Steps.c_str());
+
+	if (!node)
+	{
+		throw new XMLParserException("<moveNStepsBrick><steps></moveNStepsBrick> element missing.");
+	}
+
+	auto *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
+	FormulaTree *steps = nullptr;
+
+	if (formulaTreeNode)
+	{
+		steps = ParseFormulaTree(formulaTreeNode);
+	}
+
+	return new MoveNStepsBrick(steps, script);
 }
 
 FormulaTree *XMLParser::ParseFormulaTree(xml_node<> *baseNode)
