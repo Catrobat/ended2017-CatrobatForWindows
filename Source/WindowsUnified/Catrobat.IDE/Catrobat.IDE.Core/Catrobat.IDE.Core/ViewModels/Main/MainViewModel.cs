@@ -336,27 +336,18 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             if (_dialogResult == MessageboxResult.Ok)
             {
+                if (CurrentProject != null && CurrentProject.ProjectDummyHeader.ProjectName == _deleteProjectName)
+                {
+                    var projectChangedMessage = new GenericMessage<Project>(null);
+                    Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                }
+
                 using (var storage = StorageSystem.GetStorage())
                 {
                     await storage.DeleteDirectoryAsync(CatrobatContextBase.ProjectsPath + "/" + _deleteProjectName);
                 }
 
-                if (CurrentProject.Name == _deleteProjectName)
-                {
-                    var projectChangedMessage = new GenericMessage<Project>(null);
-                    Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
-
-                    //if (LocalProjects.Count > 0)
-                    //{
-                    //    var projectName = LocalProjects[0].ProjectName;
-                    //    CurrentProject = await CatrobatContext.LoadNewProjectByNameStatic(projectName);
-                    //}
-                    //else
-                    //    CurrentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
-                }
-
                 await UpdateLocalProjects();
-
 
                 _deleteProjectName = null;
             }
@@ -469,11 +460,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         projectsToRemove.Add(header);
                 }
 
-                foreach (var header in _localProjects)
-                {
-                    if (header.ProjectName == CurrentProject.ProjectDummyHeader.ProjectName)
-                        projectsToRemove.Add(header);
-                }
+                //foreach (var header in _localProjects)
+                //{
+                //    if (header.ProjectName == CurrentProject.ProjectDummyHeader.ProjectName)
+                //        projectsToRemove.Add(header);
+                //}
 
                 foreach (var project in projectsToRemove)
                 {

@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Data", "Catrobat.Data\Catrobat.Data.csproj", "{5138FE06-21EC-4A6A-986E-E0184F754DED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Data.Tests", "Catrobat.Data.Tests\Catrobat.Data.Tests.csproj", "{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Catrobat.Data\\Catrobat.Data.csproj
+		SccProjectName1 = Catrobat.Data
+		SccLocalPath1 = Catrobat.Data
+		SccProjectUniqueName2 = Catrobat.Data.Tests\\Catrobat.Data.Tests.csproj
+		SccProjectName2 = Catrobat.Data.Tests
+		SccLocalPath2 = Catrobat.Data.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

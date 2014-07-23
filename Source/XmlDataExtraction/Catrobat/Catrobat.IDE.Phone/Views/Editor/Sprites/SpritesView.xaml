@@ -1,0 +1,75 @@
+﻿<phone:PhoneApplicationPage x:Class="Catrobat.IDE.Phone.Views.Editor.Sprites.SpritesView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+  xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:reorderableListbox="clr-namespace:Catrobat.IDE.Phone.Controls.ReorderableListbox"
+  mc:Ignorable="d"
+  xmlns:appBar="clr-namespace:Catrobat.IDE.Phone.Controls.AppBar"
+  d:DesignWidth="480"
+  d:DesignHeight="768"
+  FontFamily="{StaticResource PhoneFontFamilyNormal}"
+  FontSize="{StaticResource PhoneFontSizeNormal}"
+  Foreground="{StaticResource PhoneForegroundBrush}"
+  SupportedOrientations="Portrait"
+  Orientation="Portrait"
+  shell:SystemTray.IsVisible="False"
+  DataContext="{Binding SpritesViewModel, Source={StaticResource Locator}}">
+
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <Grid Margin="10 5 10 25">
+        <TextBlock Text="{Binding CurrentProject.Name}" 
+                   Style="{Binding StaticTheme.TitleFontStyleLarge.NativeStyle, Source={StaticResource ThemeChooser}}">
+        </TextBlock>
+      </Grid>
+
+      <!--Pivot item sprites-->
+
+      <reorderableListbox:ReorderableListBox 
+                x:Name="ReorderableListBoxSprites"
+                Grid.Row="1"
+                Margin="10"
+                SelectionMode="Single"
+                VerticalAlignment="Stretch"
+                IsReorderEnabled="True"
+                ItemsSourcePerformance="{Binding Sprites}"
+                SelectedItem="{Binding SelectedSprite, Mode=TwoWay}"
+                ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
+                Foreground="White"
+                ItemTemplate="{StaticResource SpritesViewTemplate}">
+      </reorderableListbox:ReorderableListBox>
+
+      <TextBlock Grid.Row="1"
+              Text ="{Binding Resources.Editor_ClickPlusToAddSprite, Source={StaticResource LocalizedStrings}}"
+              Visibility="{Binding IsSpritesEmpty, Converter={StaticResource BoolVisibilityConverter}}"
+              Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
+              TextWrapping="Wrap"
+              TextAlignment="Center"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center" />
+
+
+      <appBar:EditorAppBar Grid.Row="2"
+      VerticalAlignment="Bottom"
+      TargetType="Object"
+      ClearSelectionCommand="{Binding ClearObjectsSelectionCommand}"
+      CopyCommand="{Binding CopySpriteCommand}"
+      DeleteCommand="{Binding DeleteSpriteCommand}"
+      EditCommand="{Binding EditSpriteCommand}"
+      PlayCommand="{Binding StartPlayerCommand}"
+      NewCommand="{Binding AddNewSpriteCommand}"
+      NumberOfSelectedItems="{Binding SelectedSprite, Converter={StaticResource NullIntCountConverter}}"/>
+    </Grid>
+  </Grid>
+</phone:PhoneApplicationPage>
