@@ -634,7 +634,7 @@
     <value>All uploads finished.</value>
   </data>
   <data name="Main_OnlineProjectDescription" xml:space="preserve">
-    <value>description</value>
+    <value>description:</value>
   </data>
   <data name="Main_OnlineProjectDownloadButton" xml:space="preserve">
     <value>Download</value>
@@ -658,7 +658,7 @@
     <value>statistics:</value>
   </data>
   <data name="Main_OnlineProjectUploaded" xml:space="preserve">
-    <value>uploaded</value>
+    <value>uploaded:</value>
   </data>
   <data name="Main_OnlineProjectUploadedBy" xml:space="preserve">
     <value>{0} by:</value>

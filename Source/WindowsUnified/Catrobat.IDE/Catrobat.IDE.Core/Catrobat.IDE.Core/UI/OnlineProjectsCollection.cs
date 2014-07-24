@@ -94,7 +94,7 @@ namespace Catrobat.IDE.Core.UI
             }
         }
 
-        public void ClearOnlineProkects()
+        public void ClearOnlineProjects()
         {
             // cancel previous uncompleted AsyncLoadOnlineProjects-Tasks
             if (_downloadTaskCancellation != null)
@@ -149,7 +149,7 @@ namespace Catrobat.IDE.Core.UI
 
         public async Task ResetAndLoadFirstPrograms()
         {
-            ClearOnlineProkects();
+            ClearOnlineProjects();
             //await LoadMoreOnlineProjectsAsync(int.Parse(ApplicationResources.API_REQUEST_LIMIT), _downloadTaskCancellation.Token);
         }
 
