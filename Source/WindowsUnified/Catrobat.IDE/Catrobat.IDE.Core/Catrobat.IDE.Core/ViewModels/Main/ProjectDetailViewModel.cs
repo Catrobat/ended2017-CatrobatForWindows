@@ -128,7 +128,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
                     ServiceLocator.NavigationService.NavigateTo<UploadProjectViewModel>();
-                    //ServiceLocator.NavigationService.RemoveBackEntry();
+                    ServiceLocator.NavigationService.RemoveBackEntry();
                 });
             }
             else
@@ -136,7 +136,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
                     ServiceLocator.NavigationService.NavigateTo<UploadProjectLoginViewModel>();
-                    //ServiceLocator.NavigationService.RemoveBackEntry();
+                    ServiceLocator.NavigationService.RemoveBackEntry();
                 });
             }
         }

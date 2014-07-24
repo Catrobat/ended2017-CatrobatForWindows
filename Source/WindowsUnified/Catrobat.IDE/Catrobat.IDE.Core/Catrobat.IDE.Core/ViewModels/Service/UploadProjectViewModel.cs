@@ -2,6 +2,7 @@
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Core.CatrobatObjects;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Catrobat.IDE.Core.Utilities.JSON;
@@ -18,6 +19,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _projectDescription;
         private CatrobatContextBase _context;
         private Project _currentProject;
+        private ProjectDummyHeader _selectedProjectHeader;
         private MessageboxResult _uploadErrorCallbackResult;
 
         #endregion
@@ -34,10 +36,23 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             {
                 if (value == _currentProject) return;
                 _currentProject = value;
-                                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
+                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
             }
         }
 
+        public ProjectDummyHeader CurrentProjectHeader
+        {
+            get { return _selectedProjectHeader; }
+            set
+            {
+                if (value == _selectedProjectHeader)
+                {
+                    return;
+                }
+                _selectedProjectHeader = value;
+                RaisePropertyChanged(() => CurrentProjectHeader);
+            }
+        }
 
         public CatrobatContextBase Context
         {
@@ -104,19 +119,19 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         #region Actions
 
-        private void InitializeAction()
-        {
-            if (Context != null)
-            {
-                ProjectName = CurrentProject.Name;
-                ProjectDescription = CurrentProject.Description;
-            }
-            else
-            {
-                ProjectName = "";
-                ProjectDescription = "";
-            }
-        }
+        //private void InitializeAction()
+        //{
+        //    if (Context != null)
+        //    {
+        //        ProjectName = CurrentProject.Name;
+        //        ProjectDescription = CurrentProject.Description;
+        //    }
+        //    else
+        //    {
+        //        ProjectName = "";
+        //        ProjectDescription = "";
+        //    }
+        //}
 
         private async void UploadAction()
         {
@@ -184,30 +199,48 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #endregion
 
         #region MessageActions
-        private void ContextChangedAction(GenericMessage<CatrobatContextBase> message)
+        private void ContextChangedMessageAction(GenericMessage<CatrobatContextBase> message)
         {
             Context = message.Content;
         }
 
-        private void CurrentProjectChangedChangedAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedChangedMessageAction(GenericMessage<Project> message)
         {
             CurrentProject = message.Content;
+            if (CurrentProject != null)
+            {
+                ProjectName = CurrentProject.Name;
+                ProjectDescription = CurrentProject.Description;
+            }
+            else
+            {
+                ProjectName = "";
+                ProjectDescription = "";
+            }
+        }
+
+        private void CurrentProjectHeaderChangedMessageAction(GenericMessage<ProjectDummyHeader> message)
+        {
+            CurrentProjectHeader = message.Content;
         }
 
         #endregion
 
         public UploadProjectViewModel()
         {
-            InitializeCommand = new RelayCommand(InitializeAction);
+            //InitializeCommand = new RelayCommand(InitializeAction);
             UploadCommand = new RelayCommand(UploadAction, UploadCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
             ChangeUserCommand = new RelayCommand(ChangeUserAction);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
-                 ViewModelMessagingToken.ContextListener, ContextChangedAction);
+                 ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
-                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedChangedAction);
+                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedChangedMessageAction);
+
+            //Messenger.Default.Register<GenericMessage<ProjectDummyHeader>>(this,
+            //    ViewModelMessagingToken.CurrentProjectHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
         }
 
         #region Callbacks
