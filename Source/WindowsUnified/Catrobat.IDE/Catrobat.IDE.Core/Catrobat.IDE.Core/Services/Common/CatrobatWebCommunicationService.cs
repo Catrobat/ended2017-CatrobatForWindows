@@ -29,8 +29,8 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             using (var http_client = new HttpClient())
             {
-                http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
-                //http_client.BaseAddress = new Uri("https://pocketcode.org/api/");
+                //http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
+                http_client.BaseAddress = new Uri("https://pocketcode.org/api/");
                 //http_client.DefaultRequestHeaders.Accept.Clear();
                 //http_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try

@@ -115,6 +115,16 @@
                           VerticalAlignment="Stretch"
                           Stretch="UniformToFill"
                           Width="100" Height="100" />
+                        <StackPanel Grid.Column="1" Margin="10 0 5 0" 
+                           Visibility="{Binding Description, 
+                           Converter={StaticResource StringVisibilityConverter}}">
+                           <TextBlock Text="{Binding Resources.Main_ProjectNoDescription, 
+                                      Source={StaticResource LocalizedStrings}}" 
+                                      TextTrimming="WordEllipsis" TextWrapping="Wrap"
+                                      Style="{Binding StaticTheme.TextSubtleStyle.NativeStyle, 
+                                      Source={StaticResource ThemeChooser}}" 
+                                      Foreground="#FFEEEEEE"/>
+                        </StackPanel>
                         <TextBlock Grid.Column="1" Margin="10 0 5 0" 
                           Text="{Binding Description}"
                           TextTrimming="WordEllipsis" TextWrapping="Wrap"

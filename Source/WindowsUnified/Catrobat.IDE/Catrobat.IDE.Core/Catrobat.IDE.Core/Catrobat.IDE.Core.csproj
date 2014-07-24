@@ -115,6 +115,7 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\Common\ProjectGeneratorWhackAMole.cs" />
+    <Compile Include="UI\Converters\StringVisibilityConverter.cs" />
     <Compile Include="UI\OnlineProjectsCollection.cs" />
     <Compile Include="UI\PortableUI\PortableFontStyle.cs" />
     <Compile Include="ViewModels\Editor\Formula\FormulaEvaluationResult.cs" />

@@ -2719,7 +2719,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die statistics: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Statistics: ähnelt.
         /// </summary>
         public static string Main_OnlineProjectStatistics {
             get {
@@ -2728,7 +2728,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die uploaded: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Uploaded: ähnelt.
         /// </summary>
         public static string Main_OnlineProjectUploaded {
             get {
@@ -2805,6 +2805,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_ProjectName {
             get {
                 return ResourceManager.GetString("Main_ProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No description available. ähnelt.
+        /// </summary>
+        public static string Main_ProjectNoDescription {
+            get {
+                return ResourceManager.GetString("Main_ProjectNoDescription", resourceCulture);
             }
         }
         

@@ -34,5 +34,7 @@ namespace Catrobat.IDE.WindowsShared.Converters
 
     public class SecondStringMillisecondConverterBootstrap : PortableValueConverterPhone<SecondStringMillisecondConverter> { }
 
+    public class StringVisibilityConverterBootstrap : PortableValueConverterPhone<StringVisibilityConverter> { }
+
     public class VariableButtonVisibilityConverterBootstrap : PortableValueConverterPhone<VariableButtonVisibilityConverter> { }
 }
