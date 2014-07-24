@@ -176,24 +176,5 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\Programs\WhackAMole\Sounds\C006F161E41ACB98A9EB7B1E22405971_record.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Programs\WhackAMole\Sounds\C03622EC424461AB47259339AB71CF1C_record.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Resources\DesignTime\screenshot.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\ApplicationIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\FileLarge.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\FileMedium.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\FileSmall.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\FlipCycleTileLarge.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\FlipCycleTileMedium.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\FlipCycleTileSmall.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\Lens.Screen-720p.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\Lens.Screen-WVGA.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\Lens.Screen-WXGA.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\LockScreenNotification.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\SplashScreenImage.Screen-720p.jpg" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\SplashScreenImage.Screen-WVGA.jpg" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\SplashScreenImage.Screen-WXGA.jpg" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Tiles\StoreIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Content\Libs\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Content\Resources\SampleProjects\" />
   </ItemGroup>
 </Project>

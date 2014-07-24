@@ -136,6 +136,12 @@ namespace Catrobat.IDE.Core.Services
         public static ISensorService SensorService
         { get { return GetInstance<ISensorService>(); } }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IZipService ZipService
+        { get { return GetInstance<IZipService>(); } }
+
         #endregion
 
         public static ViewModelLocator ViewModelLocator { get; set; }

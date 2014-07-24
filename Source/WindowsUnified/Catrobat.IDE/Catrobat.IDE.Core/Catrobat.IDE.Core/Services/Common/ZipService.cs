@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
-    public static class CatrobatZipService
+    public class ZipService : IZipService
     {
-        public static async Task UnzipCatrobatPackageIntoIsolatedStorage(Stream zipStream, string localStoragePath)
+        public async Task UnzipCatrobatPackageIntoIsolatedStorage(Stream zipStream, string localStoragePath)
         {
             using (var storage = StorageSystem.GetStorage())
             {
@@ -75,7 +75,7 @@ namespace Catrobat.IDE.Core.Services.Common
             //}
         }
 
-        public static async Task ZipCatrobatPackage(Stream zipStream, string localStoragePath)
+        public async Task ZipCatrobatPackage(Stream zipStream, string localStoragePath)
         {
             using (var storage = StorageSystem.GetStorage())
             {
@@ -86,7 +86,7 @@ namespace Catrobat.IDE.Core.Services.Common
             }
         }
 
-        private static async Task WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage,
+        private async Task WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage,
             string sourceBasePath, string destinationBasePath)
         {
             try

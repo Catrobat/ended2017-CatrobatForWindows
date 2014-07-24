@@ -20,13 +20,15 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
         [TestMethod, TestCategory("GatedTests.Obsolete")]
         public async Task UnZipSimpleTest()
         {
+            var zipService = new ZipService();
+
             TestHelper.InitializeAndClearCatrobatContext();
             const string path = "SampleData/SampleProjects/test.catroid";
 
             using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
                 var originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path);
-                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(
+                await zipService.UnzipCatrobatPackageIntoIsolatedStorage(
                     originalStream, "Projects/TestProject");
                 originalStream.Dispose();
             }
@@ -64,13 +66,15 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
         [TestMethod, TestCategory("GatedTests.Obsolete")]
         public async Task ZipSimpleTest()
         {
+            var zipService = new ZipService();
+
             TestHelper.InitializeAndClearCatrobatContext();
             const string path = "SampleData/SampleProjects/test.catroid";
 
             using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
                 Stream originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path);
-                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
+                await zipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
                 originalStream.Close();
                 originalStream.Dispose();
             }
@@ -85,7 +89,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
 
                 using (Stream fileStream = storage.OpenFile(writePath, StorageFileMode.Create, StorageFileAccess.Write))
                 {
-                    await CatrobatZipService.ZipCatrobatPackage(fileStream, sourcePath);
+                    await zipService.ZipCatrobatPackage(fileStream, sourcePath);
                     fileStream.Dispose();
                 }
 
@@ -94,7 +98,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
 
 
                 Stream originalStream = storage.OpenFile(newPath, StorageFileMode.Open, StorageFileAccess.Read);
-                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject1");
+                await zipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject1");
                 originalStream.Dispose();
 
 

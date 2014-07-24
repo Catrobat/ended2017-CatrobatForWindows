@@ -33,6 +33,8 @@ namespace Catrobat.IDE.WindowsShared.Services
         private async void ShareStorageItemsHandler(DataTransferManager sender,
             DataRequestedEventArgs e)
         {
+            var zipService = new ZipService();
+
             var request = e.Request;
             request.Data.Properties.Title = "Share Catrobat file";
             request.Data.Properties.Description = "";
@@ -51,7 +53,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
                 var stream = await shareTempFile.OpenAsync(FileAccessMode.ReadWrite);
 
-                await CatrobatZipService.ZipCatrobatPackage(stream.AsStreamForWrite(),
+                await zipService.ZipCatrobatPackage(stream.AsStreamForWrite(),
                     projectFolderPath);
 
 

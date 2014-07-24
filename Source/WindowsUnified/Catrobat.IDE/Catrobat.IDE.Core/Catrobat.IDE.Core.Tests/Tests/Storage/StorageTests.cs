@@ -153,19 +153,16 @@ namespace Catrobat.IDE.Core.Tests.Tests.Storage
                 var fileStream1 = storage.OpenFile("OpenFileTest/file1.txt", StorageFileMode.OpenOrCreate, StorageFileAccess.ReadWrite);
                 Assert.IsTrue(fileStream1.CanRead);
                 Assert.IsTrue(fileStream1.CanWrite);
-                fileStream1.Close();
                 fileStream1.Dispose();
 
                 var fileStream2 = storage.OpenFile("OpenFileTest/file2.txt", StorageFileMode.OpenOrCreate, StorageFileAccess.Read);
                 Assert.IsTrue(fileStream2.CanRead);
                 Assert.IsFalse(fileStream2.CanWrite);
-                fileStream2.Close();
                 fileStream2.Dispose();
 
                 var fileStream3 = storage.OpenFile("OpenFileTest/file2.txt", StorageFileMode.OpenOrCreate, StorageFileAccess.Write);
                 Assert.IsFalse(fileStream3.CanRead);
                 Assert.IsTrue(fileStream3.CanWrite);
-                fileStream3.Close();
                 fileStream3.Dispose();
             }
         }
@@ -203,6 +200,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.Storage
         [TestMethod, TestCategory("GatedTests.Obsolete")]
         public async Task LoadImageTest()
         {
+            var zipService = new ZipService();
+
             using (IStorage storage = new StorageTest())
             {
                 const string basePath = "LoadImageTest/";
@@ -217,8 +216,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Storage
                 {
                     var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon,
                                                                       sampleProjectsPath + "test.catroid");
-                    await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
-                    stream.Close();
+                    await zipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
                     stream.Dispose();
                 }
 

@@ -32,6 +32,8 @@ namespace Catrobat.IDE.Core.Tests.SampleData
 
         public static async Task<Project> LoadSampleProject(string sampleName, string sampleProjectName)
         {
+            var zipService = new ZipService();
+
             using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
                 var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName);
@@ -41,7 +43,7 @@ namespace Catrobat.IDE.Core.Tests.SampleData
                     await storage.DeleteDirectoryAsync(projectPath);
                 }
 
-                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectPath);
+                await zipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectPath);
                 stream.Dispose();
             }
             return await CatrobatContext.LoadProjectByNameStatic(sampleProjectName);
@@ -49,10 +51,12 @@ namespace Catrobat.IDE.Core.Tests.SampleData
 
         public static async Task<XmlProject> LoadSampleXmlProject(string sampleName, string sampleProjectName)
         {
+            var zipService = new ZipService();
+
             using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
                 var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName);
-                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
+                await zipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
                 stream.Dispose();
             }
             return await CatrobatContext.LoadXmlProjectByNameStatic(sampleProjectName);

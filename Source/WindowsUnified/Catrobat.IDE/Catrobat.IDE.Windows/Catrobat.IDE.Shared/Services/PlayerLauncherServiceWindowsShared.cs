@@ -14,11 +14,13 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public async Task LaunchPlayer(Project project, bool isLaunchedFromTile)
         {
+            var zipService = new ZipService();
+
             var tempFolder = ApplicationData.Current.TemporaryFolder;
             var file = await tempFolder.CreateFileAsync(TempProjectName, CreationCollisionOption.ReplaceExisting);
             var stream = await file.OpenStreamForWriteAsync();
 
-            await CatrobatZipService.ZipCatrobatPackage(stream, project.BasePath);
+            await zipService.ZipCatrobatPackage(stream, project.BasePath);
 
             var options = new Windows.System.LauncherOptions { DisplayApplicationPicker = false };
 
