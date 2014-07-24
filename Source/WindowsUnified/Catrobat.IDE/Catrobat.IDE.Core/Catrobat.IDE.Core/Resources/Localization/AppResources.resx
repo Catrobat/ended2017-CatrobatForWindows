@@ -541,7 +541,9 @@
     <value>transparency</value>
   </data>
   <data name="Main_AboutText" xml:space="preserve">
-    <value>Pocket Code for Windows Phone is an on-device visual programming system for the Catrobat programming language.</value>
+    <value>Pocket Code is a programming environment and interpreter for Windows Phone devices for the visual programming language Catrobat.
+
+The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License. For the precise details of the license see the link below.</value>
   </data>
   <data name="Main_ActiveProject" xml:space="preserve">
     <value>ACTIVE</value>
@@ -1187,10 +1189,7 @@
     <value>About Catrobat</value>
   </data>
   <data name="Main_AboutLicense" xml:space="preserve">
-    <value>Licenses of the Catrobat system</value>
-  </data>
-  <data name="Main_AboutMSRL" xml:space="preserve">
-    <value>Microsoft Reciprocal License</value>
+    <value>Pocket Code Source Code License</value>
   </data>
   <data name="Main_TextBoxLimit" xml:space="preserve">
     <value>60</value>
@@ -1221,5 +1220,11 @@
   </data>
   <data name="Main_NoScreenshot" xml:space="preserve">
     <value>No screenshot</value>
+  </data>
+  <data name="Main_TermsOfUse" xml:space="preserve">
+    <value>Terms of Use</value>
+  </data>
+  <data name="Main_TermsOfUseText" xml:space="preserve">
+    <value>In order to be allowed to use Pocket Code and other executables offered by the Catrobat project, you must agree to our Terms of Use and strictly follow them when you use Pocket Code and our other executables. Please see the link below for their precise formulation.</value>
   </data>
 </root>

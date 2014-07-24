@@ -27,8 +27,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private bool _showDownloadMessage;
         private bool _showUploadMessage;
-        private string _filterText = "";
-        private string _previousFilterText = "";
+        //private string _filterText = "";
+        //private string _previousFilterText = "";
         private bool _isLoadingOnlineProjects;
         private MessageboxResult _dialogResult;
         private string _deleteProjectName;
@@ -148,9 +148,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public ICommand CopyLocalProjectCommand { get; private set; }
 
-
-        //public ICommand LazyLoadOnlineProjectsCommand { get; private set; }
-
         public ICommand CreateNewProjectCommand { get; private set; }
 
         public ICommand SettingsCommand { get; private set; }
@@ -163,7 +160,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public ICommand AboutCommand { get; private set; }
 
-        public ICommand MSRLCommand { get; private set; }
+        public ICommand TouCommand { get; private set; }
 
         #endregion
 
@@ -219,9 +216,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.CATROBAT_URL);
         }
 
-        private void MSRLAction()
+        private void TouAction()
         {
-            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.MS_RL_LICENSE_URL);
+            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.CATROBAT_TOU_URL);
         }
 
         protected override void GoBackAction()
@@ -300,14 +297,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             OpenProjectCommand = new RelayCommand<ProjectDummyHeader>(OpenProjectCommandAction);
             DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProjectAction);
             CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
-            //LazyLoadOnlineProjectsCommand = new RelayCommand(LazyLoadOnlineProjectsAction);
             OnlineProjectTapCommand = new RelayCommand<OnlineProjectHeader>(OnlineProjectTapAction);
             SettingsCommand = new RelayCommand(SettingsAction);
             CreateNewProjectCommand = new RelayCommand(CreateNewProjectAction);
             ShowMessagesCommand = new RelayCommand(ShowMessagesAction);
             LicenseCommand = new RelayCommand(LicenseAction);
             AboutCommand = new RelayCommand(AboutAction);
-            MSRLCommand = new RelayCommand(MSRLAction);
+            TouCommand = new RelayCommand(TouAction);
 
 
             Messenger.Default.Register<MessageBase>(this,
@@ -372,49 +368,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         }
 
         #endregion
-
-
-        //public async void LoadOnlineProjects(bool isAppend, bool isAuto = false)
-        //{
-        //    IsLoadingOnlineProjects = true;
-
-        //    if (!isAppend && _previousFilterText != _filterText)
-        //    {
-        //        _onlineProjects.Clear();
-        //        // cancel previous uncompleted AsyncLoadOnlineProjects-Tasks
-        //        if (_taskCancellation != null)
-        //        {
-        //            _taskCancellation.Cancel();
-        //            _taskCancellation = new CancellationTokenSource();
-        //        }
-        //    }
-
-        //    _previousFilterText = _filterText;
-        //    int offset = _onlineProjects.Count;
-        //    if (isAuto == true)
-        //        offset = 0;
-
-        //    List<OnlineProjectHeader> projects = await Task.Run(() => CatrobatWebCommunicationService.AsyncLoadOnlineProjects(_filterText, offset, _taskCancellation.Token));
-
-        //    lock (OnlineProjects)
-        //    {
-        //        if (FilterText != _filterText && !isAppend)
-        //            return;
-
-        //        if (!isAppend)
-        //            _onlineProjects.Clear();
-
-        //        IsLoadingOnlineProjects = false;
-
-        //        if (projects != null)
-        //        {
-        //            foreach (OnlineProjectHeader header in projects)
-        //            {
-        //                _onlineProjects.Add(header);
-        //            }
-        //        }
-        //    }
-        //}
 
         #region PropertyChanges
 

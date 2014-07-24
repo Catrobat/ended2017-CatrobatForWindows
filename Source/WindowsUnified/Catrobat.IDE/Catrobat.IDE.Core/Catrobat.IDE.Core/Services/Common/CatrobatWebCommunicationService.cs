@@ -31,7 +31,6 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 //http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
                 http_client.BaseAddress = new Uri("https://pocketcode.org/api/");
-                //https://catroid-test.catrob.at/api/
                 //http_client.DefaultRequestHeaders.Accept.Clear();
                 //http_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
@@ -292,8 +291,8 @@ namespace Catrobat.IDE.Core.Services.Common
             HttpContent post_parameters = new FormUrlEncodedContent(parameters);
             using (var http_client = new HttpClient())
             {
-                http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
-                //http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
+                //http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
                 JSONStatusResponse status_response = null;
                 try
                 {
@@ -333,8 +332,8 @@ namespace Catrobat.IDE.Core.Services.Common
             HttpContent post_parameters = new FormUrlEncodedContent(parameters);
             using (var http_client = new HttpClient())
             {
-                http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
-                //http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
+                //http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
                 JSONStatusResponse status_response = null;
                 try
                 {
@@ -376,8 +375,8 @@ namespace Catrobat.IDE.Core.Services.Common
             HttpContent post_parameters = new FormUrlEncodedContent(parameters);
             using (var http_client = new HttpClient())
             {
-                http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
-                //http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
+                //http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
                 JSONStatusResponse status_response = null;
                 try
                 {

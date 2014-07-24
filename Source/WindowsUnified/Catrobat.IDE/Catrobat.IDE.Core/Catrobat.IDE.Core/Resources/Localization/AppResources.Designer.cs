@@ -2240,7 +2240,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Licenses of the Catrobat system ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Pocket Code Source Code License ähnelt.
         /// </summary>
         public static string Main_AboutLicense {
             get {
@@ -2249,16 +2249,9 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Microsoft Reciprocal License ähnelt.
-        /// </summary>
-        public static string Main_AboutMSRL {
-            get {
-                return ResourceManager.GetString("Main_AboutMSRL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Pocket Code for Windows Phone is an on-device visual programming system for the Catrobat programming language. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Pocket Code is a programming environment and interpreter for Windows Phone devices for the visual programming language Catrobat.
+        ///
+        ///The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License. For the precise details of the license see the link below. ähnelt.
         /// </summary>
         public static string Main_AboutText {
             get {
@@ -2983,6 +2976,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_ShareProject {
             get {
                 return ResourceManager.GetString("Main_ShareProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Terms of Use ähnelt.
+        /// </summary>
+        public static string Main_TermsOfUse {
+            get {
+                return ResourceManager.GetString("Main_TermsOfUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die In order to be allowed to use Pocket Code and other executables offered by the Catrobat project, you must agree to our Terms of Use and strictly follow them when you use Pocket Code and our other executables. Please see the link below for their precise formulation. ähnelt.
+        /// </summary>
+        public static string Main_TermsOfUseText {
+            get {
+                return ResourceManager.GetString("Main_TermsOfUseText", resourceCulture);
             }
         }
         

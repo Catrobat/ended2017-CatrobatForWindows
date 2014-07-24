@@ -213,7 +213,7 @@
   <data name="CATROBAT_URL" xml:space="preserve">
     <value>http://www.catrobat.org/</value>
   </data>
-  <data name="MS_RL_LICENSE_URL" xml:space="preserve">
-    <value>http://opensource.org/licenses/MS-RL</value>
+  <data name="CATROBAT_TOU_URL" xml:space="preserve">
+    <value>http://catrob.at/tou</value>
   </data>
 </root>
