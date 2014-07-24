@@ -23,12 +23,14 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public void ShowToastNotification(string title, string message, ToastNotificationTime timeTillHide, PortableImage image = null)
         {
-            throw new NotImplementedException();
+            // TODO: implement me
+            //throw new NotImplementedException();
         }
 
         public void ShowToastNotification(string title, string message, TimeSpan timeTillHide, PortableImage image = null)
         {
-            throw new NotImplementedException();
+            // TODO: implement me
+            //throw new NotImplementedException();
         }
 
         //void DisplayTextToastWithStringManipulation(ToastTemplateType templateType)

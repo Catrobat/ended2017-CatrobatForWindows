@@ -120,6 +120,7 @@
     <Compile Include="Tests\Data\ScriptBrickCollectionTests.cs" />
     <Compile Include="Tests\Data\VariableHelperTests.cs" />
     <Compile Include="Tests\Data\VersionConverter091ToWin091PracticalTests.cs" />
+    <Compile Include="Tests\Data\VersionConverter092To091.cs" />
     <Compile Include="Tests\Data\VersionConverter091ToWin091Tests.cs" />
     <Compile Include="Tests\Data\XPathHelperTests.cs" />
     <Compile Include="Tests\IDE\CloneableTests.cs" />
@@ -202,6 +203,8 @@
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Repeat_Output.xml" />
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_SoundReferences_Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_SoundReferences_Output.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\092_091\Test1_Output.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\092_091\Test1_Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\XPathHelperTestInput.xml" />
     <Content Include="SampleData\SampleProjects\DataReadingTests\testCatrobat091.xml" />
     <Content Include="SampleData\SampleProjects\DataReadingTests\test_code1.xml" />
@@ -259,6 +262,7 @@
     <Content Include="SampleData\SampleProjects\simple.xml" />
     <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

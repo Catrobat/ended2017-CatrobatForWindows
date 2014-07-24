@@ -13,7 +13,34 @@ namespace Catrobat.IDE.Core.Services.Common
     {
         public static async Task UnzipCatrobatPackageIntoIsolatedStorage(Stream zipStream, string localStoragePath)
         {
-            throw new NotImplementedException();
+            using (var storage = StorageSystem.GetStorage())
+            {
+                using (var archive = new ZipArchive(zipStream, ZipArchiveMode.Read))
+                {
+                    foreach (var entry in archive.Entries)
+                    {
+                        using (var stream = entry.Open())
+                        {
+                            if (Path.GetExtension(entry.Name) == ".nomedia")
+                                continue;
+
+                            var filePath = Path.Combine(localStoragePath, entry.FullName);
+
+                            var outStream = await storage.OpenFileAsync(filePath, 
+                                StorageFileMode.CreateNew, StorageFileAccess.Write);
+
+                            await stream.CopyToAsync(outStream);
+                            outStream.Dispose();
+                            stream.Dispose();
+                        }
+                    }
+                }
+            }
+
+
+
+
+
             //if (zipStream != null)
             //{
             //    var reader = ReaderFactory.Open(zipStream);

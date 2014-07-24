@@ -7,8 +7,8 @@ namespace Catrobat.IDE.Core.Tests.Misc.Storage
     public static string GetTestBasePathWithBranch()
     {
       string basePath = Assembly.GetExecutingAssembly().CodeBase;
-      int end = basePath.LastIndexOf("Catrobat/", System.StringComparison.Ordinal) + 9;
-      basePath = basePath.Substring(8, end - 8);
+      int end = basePath.LastIndexOf("Catrobat.IDE/", System.StringComparison.Ordinal) + 9;
+      basePath = basePath.Substring(8, end - 5);
 
       return basePath;
     }
