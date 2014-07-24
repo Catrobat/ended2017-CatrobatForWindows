@@ -12,20 +12,19 @@ namespace Catrobat.IDE.Core.Tests.SampleData
 {
     public static class SampleLoader
     {
-        private static readonly string Path = BasePathHelper.GetSampleProjectsPath();
+        private static readonly string path = BasePathHelper.GetSampleProjectsPath();
 
         public static XDocument LoadSampleXDocument(string sampleName)
         {
             string xml = null;
             using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
-                var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, Path + sampleName + ".xml");
+                var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName + ".xml");
                 var reader = new StreamReader(stream);
 
                 xml = reader.ReadToEnd();
                 reader.Close();
                 reader.Dispose();
-                stream.Close();
                 stream.Dispose();
             }
             return XDocument.Load(new StringReader(xml));
@@ -35,9 +34,14 @@ namespace Catrobat.IDE.Core.Tests.SampleData
         {
             using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
-                var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, Path + sampleName);
-                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
-                stream.Close();
+                var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName);
+                var projectPath = Path.Combine(CatrobatContextBase.ProjectsPath, sampleProjectName);
+                using (var storage = StorageSystem.GetStorage())
+                {
+                    await storage.DeleteDirectoryAsync(projectPath);
+                }
+
+                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectPath);
                 stream.Dispose();
             }
             return await CatrobatContext.LoadProjectByNameStatic(sampleProjectName);
@@ -47,9 +51,8 @@ namespace Catrobat.IDE.Core.Tests.SampleData
         {
             using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
-                var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, Path + sampleName);
+                var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName);
                 await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
-                stream.Close();
                 stream.Dispose();
             }
             return await CatrobatContext.LoadXmlProjectByNameStatic(sampleProjectName);

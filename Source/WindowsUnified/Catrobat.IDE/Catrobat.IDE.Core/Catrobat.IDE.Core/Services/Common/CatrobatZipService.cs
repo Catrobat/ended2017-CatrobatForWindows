@@ -26,9 +26,12 @@ namespace Catrobat.IDE.Core.Services.Common
 
                             var filePath = Path.Combine(localStoragePath, entry.FullName);
 
+
+                            if (Path.GetFileName(filePath) == "") continue;
+                            
                             var outStream = await storage.OpenFileAsync(filePath, 
                                 StorageFileMode.CreateNew, StorageFileAccess.Write);
-
+                            
                             await stream.CopyToAsync(outStream);
                             outStream.Dispose();
                             stream.Dispose();
