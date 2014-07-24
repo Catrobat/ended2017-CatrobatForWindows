@@ -971,15 +971,6 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Description ähnelt.
-        /// </summary>
-        public static string Editor_Description {
-            get {
-                return ResourceManager.GetString("Editor_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Evaluate ähnelt.
         /// </summary>
         public static string Editor_Evaluate {
@@ -1291,15 +1282,6 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Editor_PreparingProject {
             get {
                 return ResourceManager.GetString("Editor_PreparingProject", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Program name ähnelt.
-        /// </summary>
-        public static string Editor_ProjectName {
-            get {
-                return ResourceManager.GetString("Editor_ProjectName", resourceCulture);
             }
         }
         
@@ -2683,15 +2665,6 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die description: ähnelt.
-        /// </summary>
-        public static string Main_OnlineProjectDescription {
-            get {
-                return ResourceManager.GetString("Main_OnlineProjectDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Download ähnelt.
         /// </summary>
         public static string Main_OnlineProjectDownloadButton {
@@ -2733,15 +2706,6 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_OnlineProjectListBoxNoMoreItems {
             get {
                 return ResourceManager.GetString("Main_OnlineProjectListBoxNoMoreItems", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die program: ähnelt.
-        /// </summary>
-        public static string Main_OnlineProjectProject {
-            get {
-                return ResourceManager.GetString("Main_OnlineProjectProject", resourceCulture);
             }
         }
         
@@ -2809,6 +2773,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Description: ähnelt.
+        /// </summary>
+        public static string Main_ProjectDescription {
+            get {
+                return ResourceManager.GetString("Main_ProjectDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die program does not exist ähnelt.
         /// </summary>
         public static string Main_ProjectDoesNotExist {
@@ -2827,7 +2800,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Program name ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program name: ähnelt.
         /// </summary>
         public static string Main_ProjectName {
             get {
@@ -2841,6 +2814,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_ProjectNotValid {
             get {
                 return ResourceManager.GetString("Main_ProjectNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program settings ähnelt.
+        /// </summary>
+        public static string Main_ProjectSettings {
+            get {
+                return ResourceManager.GetString("Main_ProjectSettings", resourceCulture);
             }
         }
         
@@ -3003,6 +2985,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_TextBoxLimit {
             get {
                 return ResourceManager.GetString("Main_TextBoxLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ACTIVE PROGRAM ähnelt.
+        /// </summary>
+        public static string Main_TitleCurrentProject {
+            get {
+                return ResourceManager.GetString("Main_TitleCurrentProject", resourceCulture);
             }
         }
         
@@ -3219,24 +3210,6 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_UploadProjectPasswordRecoveryErrorCaption {
             get {
                 return ResourceManager.GetString("Main_UploadProjectPasswordRecoveryErrorCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Description ähnelt.
-        /// </summary>
-        public static string Main_UploadProjectProjectDescription {
-            get {
-                return ResourceManager.GetString("Main_UploadProjectProjectDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Program: ähnelt.
-        /// </summary>
-        public static string Main_UploadProjectProjectName {
-            get {
-                return ResourceManager.GetString("Main_UploadProjectProjectName", resourceCulture);
             }
         }
         

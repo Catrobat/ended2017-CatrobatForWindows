@@ -414,9 +414,6 @@
   <data name="Editor_PivotSounds" xml:space="preserve">
     <value>Sounds</value>
   </data>
-  <data name="Editor_ProjectName" xml:space="preserve">
-    <value>Program name</value>
-  </data>
   <data name="Editor_Recorder" xml:space="preserve">
     <value>Recorder</value>
   </data>
@@ -635,9 +632,6 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_NoUploadsPending" xml:space="preserve">
     <value>All uploads finished.</value>
   </data>
-  <data name="Main_OnlineProjectDescription" xml:space="preserve">
-    <value>description:</value>
-  </data>
   <data name="Main_OnlineProjectDownloadButton" xml:space="preserve">
     <value>Download</value>
   </data>
@@ -649,9 +643,6 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Main_OnlineProjectListBoxLoadMore" xml:space="preserve">
     <value>Load more...</value>
-  </data>
-  <data name="Main_OnlineProjectProject" xml:space="preserve">
-    <value>program:</value>
   </data>
   <data name="Main_OnlineProjectReportButton" xml:space="preserve">
     <value>Report as inappropriate</value>
@@ -675,7 +666,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>program does not exist</value>
   </data>
   <data name="Main_ProjectName" xml:space="preserve">
-    <value>Program name</value>
+    <value>Program name:</value>
   </data>
   <data name="Main_ProjectNotValid" xml:space="preserve">
     <value>Program not valid.</value>
@@ -718,12 +709,6 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Main_UploadProjectPassword" xml:space="preserve">
     <value>Password:</value>
-  </data>
-  <data name="Main_UploadProjectProjectDescription" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="Main_UploadProjectProjectName" xml:space="preserve">
-    <value>Program:</value>
   </data>
   <data name="Main_UploadProjectRegistrationSucessful" xml:space="preserve">
     <value>Registration successful!</value>
@@ -772,9 +757,6 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Brick_IfLogicEnd" xml:space="preserve">
     <value>end if</value>
-  </data>
-  <data name="Editor_Description" xml:space="preserve">
-    <value>Description</value>
   </data>
   <data name="Main_ChangeProjectNameAndDescription" xml:space="preserve">
     <value>change name and description</value>
@@ -1226,5 +1208,14 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Main_TermsOfUseText" xml:space="preserve">
     <value>In order to be allowed to use Pocket Code and other executables offered by the Catrobat project, you must agree to our Terms of Use and strictly follow them when you use Pocket Code and our other executables. Please see the link below for their precise formulation.</value>
+  </data>
+  <data name="Main_ProjectDescription" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="Main_ProjectSettings" xml:space="preserve">
+    <value>Program settings</value>
+  </data>
+  <data name="Main_TitleCurrentProject" xml:space="preserve">
+    <value>ACTIVE PROGRAM</value>
   </data>
 </root>

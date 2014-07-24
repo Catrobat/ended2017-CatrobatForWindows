@@ -33,7 +33,7 @@
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 0 10 15">
-      <TextBlock Text="{Binding Resources.Main_OnlineProjectProject, 
+      <TextBlock Text="{Binding Resources.Main_ProjectName, 
                  Source={StaticResource LocalizedStrings}}" 
                  Style="{Binding StaticTheme.TextNormalStyle, 
                  Source={StaticResource ThemeChooser}}" />
@@ -56,7 +56,8 @@
       <TextBox Margin="0 0 0 0"
                HorizontalAlignment="Stretch"
                Text="{Binding OnlineProjectReportViewModel.Reason, Mode=TwoWay}" 
-               TextChanged="TextBox_TextChanged" 
+               TextChanged="TextBox_TextChanged"
+               TextWrapping="Wrap"
                AcceptsReturn="True" Height="288" MaxLength="1000"/>
     </StackPanel>
   </Grid>

@@ -8,53 +8,94 @@
 
   <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
         Source={StaticResource ThemeChooser}}">
-    <StackPanel Orientation="Vertical">
-      <Grid>
-        <TextBlock Margin="10 20 10 0" 
-          Text="{Binding CurrentProjectHeader.ProjectName}"
-          Style="{Binding StaticTheme.TextTitle1Style.NativeStyle, 
-          Source={StaticResource ThemeChooser}}" TextWrapping="Wrap"/>
-      </Grid>
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid  Width="160" Height="160" Margin="10">
-          <Grid Background="LightGray">
-            <Image Grid.Column="0" Margin="5"
-              Stretch="UniformToFill"
-              VerticalAlignment="Stretch"
-              HorizontalAlignment="Stretch"
-              Source="{Binding CurrentProject.Screenshot.ImageSource}" />
-            <Grid
-              Visibility="{Binding CurrentProject, 
-              Converter={StaticResource NullVisibilityConverter}}">
-              <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
-                TextAlignment="Center" TextWrapping="Wrap"
-                FontSize="28" Foreground="DarkGray"
-                Text="{Binding Resources.Main_NoScreenshot, 
-                Source={StaticResource LocalizedStrings}}"
-                Visibility="{Binding CurrentProject.Screenshot.IsEmpty, 
-                Converter={StaticResource BoolVisibilityConverter}}"/>
-            </Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition />
+    </Grid.RowDefinitions>
+
+    <StackPanel x:Name="TitlePanel" 
+                Grid.Row="0"
+                Margin="10">
+      <TextBlock x:Name="ApplicationTitle" 
+                 Text="{Binding Resources.Main_TitleCurrentProject, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+                 Source={StaticResource ThemeChooser}}"/>
+      <TextBlock x:Name="PageTitle" 
+                 Text="{Binding CurrentProjectHeader.ProjectName}" 
+                 Margin="10 0 0 0" 
+                 Style="{Binding StaticTheme.TextTitle3Style.NativeStyle, 
+                 Source={StaticResource ThemeChooser}}"/>
+    </StackPanel>
+    <Grid Grid.Row="1" Margin="10 0 10 15">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="200" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid Width="200" Height="200" VerticalAlignment="Top">
+        <Grid Background="LightGray">
+          <Image Grid.Column="0" Margin="5"
+                Height="Auto" 
+                Stretch="UniformToFill"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Stretch"
+                Source="{Binding CurrentProject.Screenshot.ImageSource}" />
+          <Grid Visibility="{Binding CurrentProject, 
+                Converter={StaticResource NullVisibilityConverter}}">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
+                  TextAlignment="Center" TextWrapping="Wrap"
+                  FontSize="28" Foreground="DarkGray"
+                  Text="{Binding Resources.Main_NoScreenshot, 
+                  Source={StaticResource LocalizedStrings}}"
+                  Visibility="{Binding CurrentProject.Screenshot.IsEmpty, 
+                  Converter={StaticResource BoolVisibilityConverter}}"/>
           </Grid>
         </Grid>
-       
-        <StackPanel Grid.Column="1" Margin="0 0 8 0">
-          <TextBlock Margin="0 0 0 0" 
-            Text="{Binding Resources.Main_OnlineProjectDescription, 
-            Source={StaticResource LocalizedStrings}}" 
-            Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-            Source={StaticResource ThemeChooser}}" />
-          <TextBlock Text="{Binding CurrentProject.Description, Mode=OneWay}" 
-            Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-            Source={StaticResource ThemeChooser}}"
-            TextAlignment="Justify"
-            TextWrapping="Wrap" />
-        </StackPanel>
       </Grid>
-    </StackPanel>
+      <StackPanel Grid.Column="1" Margin="15 0 5 0">
+        <TextBlock Margin="0 0 0 0" 
+                   Text="{Binding Resources.Main_ProjectName, 
+                   Source={StaticResource LocalizedStrings}}"  
+                   Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+                   Source={StaticResource ThemeChooser}}" />
+        <TextBlock Text="{Binding CurrentProjectHeader.ProjectName, Mode=OneWay}" 
+                   TextWrapping="Wrap" />
+        <TextBlock Margin="0 10 0 0" 
+                   Text="{Binding Resources.Main_ProjectDescription, 
+                   Source={StaticResource LocalizedStrings}}" 
+                   Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+                   Source={StaticResource ThemeChooser}}" />
+        <TextBlock Text="{Binding CurrentProjectHeader.Description, Mode=OneWay}" 
+                   TextWrapping="Wrap" />
+        <!--<TextBlock Margin="0 10 0 0" 
+                   Text="{Binding Resources.Main_OnlineProjectUploaded, 
+                   Source={StaticResource LocalizedStrings}}" 
+                   Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+                   Source={StaticResource ThemeChooser}}" />
+        <TextBlock x:Name="UploadedLabel" 
+                   Text="{Binding OnlineProjectViewModel.UploadedLabelText, 
+                   Source={StaticResource Locator}}" />
+        <TextBlock Text="{Binding Author}" 
+                   TextWrapping="Wrap" />
+        <TextBlock x:Name="VersionLabel" 
+                   Text="{Binding OnlineProjectViewModel.VersionLabelText, 
+                   Source={StaticResource Locator}}" 
+                   TextWrapping="Wrap" />
+        <TextBlock Margin="0 10 0 0"
+                   Text="{Binding Resources.Main_OnlineProjectStatistics, 
+                   Source={StaticResource LocalizedStrings}}" 
+                   Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+                   Source={StaticResource ThemeChooser}}" />
+        <TextBlock x:Name="ViewsLabel" 
+                   Text="{Binding OnlineProjectViewModel.ViewsLabelText, 
+                   Source={StaticResource Locator}}" 
+                   TextWrapping="Wrap" />
+        <TextBlock x:Name="DownloadsLabel" 
+                   Text="{Binding OnlineProjectViewModel.DownloadsLabelText, 
+                   Source={StaticResource Locator}}" 
+                   TextWrapping="Wrap" />-->
+      </StackPanel>
+    </Grid>
   </Grid>
 
   <Page.BottomAppBar>

@@ -19,7 +19,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private CatrobatContextBase _context;
         private MessageboxResult _missingLoginDataCallbackResult;
         private MessageboxResult _wrongLoginDataCallbackResult;
-        private MessageboxResult _registrationSuccessfulCallbackResult;
         private string _username;
         private string _password;
         private string _email;

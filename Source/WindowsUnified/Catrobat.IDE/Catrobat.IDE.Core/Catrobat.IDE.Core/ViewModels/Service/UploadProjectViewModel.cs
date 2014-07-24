@@ -19,7 +19,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _projectDescription;
         private CatrobatContextBase _context;
         private Project _currentProject;
-        private ProjectDummyHeader _selectedProjectHeader;
         private MessageboxResult _uploadErrorCallbackResult;
 
         #endregion
@@ -37,20 +36,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 if (value == _currentProject) return;
                 _currentProject = value;
                 ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
-            }
-        }
-
-        public ProjectDummyHeader CurrentProjectHeader
-        {
-            get { return _selectedProjectHeader; }
-            set
-            {
-                if (value == _selectedProjectHeader)
-                {
-                    return;
-                }
-                _selectedProjectHeader = value;
-                RaisePropertyChanged(() => CurrentProjectHeader);
             }
         }
 
@@ -118,21 +103,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #endregion
 
         #region Actions
-
-        //private void InitializeAction()
-        //{
-        //    if (Context != null)
-        //    {
-        //        ProjectName = CurrentProject.Name;
-        //        ProjectDescription = CurrentProject.Description;
-        //    }
-        //    else
-        //    {
-        //        ProjectName = "";
-        //        ProjectDescription = "";
-        //    }
-        //}
-
         private async void UploadAction()
         {
             await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
@@ -219,16 +189,10 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
         }
 
-        private void CurrentProjectHeaderChangedMessageAction(GenericMessage<ProjectDummyHeader> message)
-        {
-            CurrentProjectHeader = message.Content;
-        }
-
         #endregion
 
         public UploadProjectViewModel()
         {
-            //InitializeCommand = new RelayCommand(InitializeAction);
             UploadCommand = new RelayCommand(UploadAction, UploadCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
             ChangeUserCommand = new RelayCommand(ChangeUserAction);
@@ -238,9 +202,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedChangedMessageAction);
-
-            //Messenger.Default.Register<GenericMessage<ProjectDummyHeader>>(this,
-            //    ViewModelMessagingToken.CurrentProjectHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
         }
 
         #region Callbacks
