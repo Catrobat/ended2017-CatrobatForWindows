@@ -339,6 +339,7 @@
     <ClInclude Include="lodepng_util.h" />
     <ClInclude Include="Look.h" />
     <ClInclude Include="LoudnessCapture.h" />
+    <ClInclude Include="MoveNStepsBrick.h" />
     <ClInclude Include="NextLookBrick.h" />
     <ClInclude Include="PlaceAtBrick.h" />
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -415,6 +416,7 @@
     <ClCompile Include="lodepng_util.cpp" />
     <ClCompile Include="Look.cpp" />
     <ClCompile Include="LoudnessCapture.cpp" />
+    <ClCompile Include="MoveNStepsBrick.cpp" />
     <ClCompile Include="NextLookBrick.cpp" />
     <ClCompile Include="PlaceAtBrick.cpp" />
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />

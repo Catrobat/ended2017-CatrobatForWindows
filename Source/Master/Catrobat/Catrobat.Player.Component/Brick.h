@@ -30,6 +30,7 @@ public:
 		ChangeXByBrick,
 		ChangeYByBrick,
 		GlideToBrick,
+		MoveNStepsBrick,
 		PointToBrick,
 		BroadcastBrick,
 		IfBrick,

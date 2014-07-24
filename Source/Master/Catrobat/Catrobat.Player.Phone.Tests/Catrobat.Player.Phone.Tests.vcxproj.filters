@@ -291,6 +291,9 @@
     <ClCompile Include="..\Catrobat.Player.Component\CatrobatTexture.cpp">
       <Filter>Catrobat.Player.Phone - Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Catrobat.Player.Component\MoveNStepsBrick.cpp">
+      <Filter>Catrobat.Player.Phone - Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestHelper.h" />
@@ -524,6 +527,9 @@
       <Filter>Catrobat.Player.Phone - Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Catrobat.Player.Component\CatrobatTexture.h">
+      <Filter>Catrobat.Player.Phone - Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Catrobat.Player.Component\MoveNStepsBrick.h">
       <Filter>Catrobat.Player.Phone - Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -34,13 +34,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{84F329
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catrobat.Data", "Catrobat.Data", "{A8D133E1-BAD6-4796-82B1-72B41C94F32E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Data", "..\Catrobat.Data\Catrobat.Data\Catrobat.Data.csproj", "{5138FE06-21EC-4A6A-986E-E0184F754DED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8075AFA0-300F-4318-9298-3BB15FD63E26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Data.Tests", "..\Catrobat.Data\Catrobat.Data.Tests\Catrobat.Data.Tests.csproj", "{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Catrobat.IDE.Windows\Catrobat.IDE.Shared\Catrobat.IDE.Shared.projitems*{3b531ab1-3f3f-4488-94a2-ba82130af471}*SharedItemsImports = 4
 		Catrobat.IDE.Windows\Catrobat.IDE.Shared\Catrobat.IDE.Shared.projitems*{468b150b-e23c-49f8-bc4c-4d535169fbbc}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 12
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -80,6 +88,14 @@ Global
 		SccProjectTopLevelParentUniqueName9 = Catrobat.IDE.sln
 		SccProjectName9 = Catrobat.IDE.Core/Catrobat.IDE.Core.Tests
 		SccLocalPath9 = Catrobat.IDE.Core\\Catrobat.IDE.Core.Tests
+		SccProjectUniqueName10 = ..\\Catrobat.Data\\Catrobat.Data\\Catrobat.Data.csproj
+		SccProjectTopLevelParentUniqueName10 = Catrobat.IDE.sln
+		SccProjectName10 = ../Catrobat.Data/Catrobat.Data
+		SccLocalPath10 = ..\\Catrobat.Data\\Catrobat.Data
+		SccProjectUniqueName11 = ..\\Catrobat.Data\\Catrobat.Data.Tests\\Catrobat.Data.Tests.csproj
+		SccProjectTopLevelParentUniqueName11 = Catrobat.IDE.sln
+		SccProjectName11 = ../Catrobat.Data/Catrobat.Data.Tests
+		SccLocalPath11 = ..\\Catrobat.Data\\Catrobat.Data.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -303,6 +319,48 @@ Global
 		{37893166-9D6C-46FB-A2C9-85E31834AEEB}.TFSBuild|Mixed Platforms.Build.0 = Release|Any CPU
 		{37893166-9D6C-46FB-A2C9-85E31834AEEB}.TFSBuild|x64.ActiveCfg = Release|Any CPU
 		{37893166-9D6C-46FB-A2C9-85E31834AEEB}.TFSBuild|x86.ActiveCfg = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Release|x64.ActiveCfg = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.Release|x86.ActiveCfg = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.TFSBuild|Any CPU.ActiveCfg = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.TFSBuild|Any CPU.Build.0 = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.TFSBuild|ARM.ActiveCfg = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.TFSBuild|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.TFSBuild|Mixed Platforms.Build.0 = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.TFSBuild|x64.ActiveCfg = Release|Any CPU
+		{5138FE06-21EC-4A6A-986E-E0184F754DED}.TFSBuild|x86.ActiveCfg = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Release|x64.ActiveCfg = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.Release|x86.ActiveCfg = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.TFSBuild|Any CPU.ActiveCfg = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.TFSBuild|Any CPU.Build.0 = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.TFSBuild|ARM.ActiveCfg = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.TFSBuild|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.TFSBuild|Mixed Platforms.Build.0 = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.TFSBuild|x64.ActiveCfg = Release|Any CPU
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB}.TFSBuild|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -318,5 +376,8 @@ Global
 		{19EE3B04-3515-477A-9CE0-13ABE8085E5D} = {F54071BB-5865-4810-8B74-884A0990223C}
 		{3A72F13F-4375-462F-92FA-8BFBA06C3933} = {F54071BB-5865-4810-8B74-884A0990223C}
 		{37893166-9D6C-46FB-A2C9-85E31834AEEB} = {31B8308F-3B93-4AE9-99CE-8350D49299F1}
+		{5138FE06-21EC-4A6A-986E-E0184F754DED} = {A8D133E1-BAD6-4796-82B1-72B41C94F32E}
+		{8075AFA0-300F-4318-9298-3BB15FD63E26} = {A8D133E1-BAD6-4796-82B1-72B41C94F32E}
+		{5E4AB345-10FB-40AC-9946-786D9EB2B8EB} = {8075AFA0-300F-4318-9298-3BB15FD63E26}
 	EndGlobalSection
 EndGlobal

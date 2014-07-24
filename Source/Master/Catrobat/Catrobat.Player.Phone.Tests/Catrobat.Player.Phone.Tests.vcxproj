@@ -262,6 +262,7 @@
     <ClInclude Include="..\Catrobat.Player.Component\lodepng_util.h" />
     <ClInclude Include="..\Catrobat.Player.Component\Look.h" />
     <ClInclude Include="..\Catrobat.Player.Component\LoudnessCapture.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\MoveNStepsBrick.h" />
     <ClInclude Include="..\Catrobat.Player.Component\NextLookBrick.h" />
     <ClInclude Include="..\Catrobat.Player.Component\Object.h" />
     <ClInclude Include="..\Catrobat.Player.Component\ObjectList.h" />
@@ -340,6 +341,7 @@
     <ClCompile Include="..\Catrobat.Player.Component\lodepng_util.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\Look.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\LoudnessCapture.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\MoveNStepsBrick.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\NextLookBrick.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\Object.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\ObjectList.cpp" />
