@@ -1,5 +1,7 @@
 ﻿using Catrobat.Paint.Phone;
+using Catrobat.Paint.Phone.Tool;
 using Catrobat.Paint.Phone.Ui;
+using Catrobat.Paint.WindowsPhone.Tool;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +10,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,6 +29,7 @@ namespace Catrobat.Paint.WindowsPhone.View
     public sealed partial class PaintingAreaView : Page
     {
         Int32 slider_thickness_textbox_last_value = 1;
+        static string current_appbar = "barStandard";
         public PaintingAreaView()
         {
             this.InitializeComponent();
@@ -52,7 +56,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PaintingAreaCheckeredGrid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
             PaintingAreaCheckeredGrid.ManipulationDelta += PaintingAreaCheckeredGrid_ManipulationDelta;
             PaintingAreaCheckeredGrid.ManipulationCompleted += PaintingAreaCheckeredGrid_ManipulationCompleted;
-            PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += PaintData_ToolCurrentChanged;
+            PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
             // TODO: SliderThickness.ValueChanged += PocketPaintApplication.GetInstance().ApplicationBarListener.SliderThickness_ValueChanged;
             // TODO: SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
             //BtnThickness.Click += BtnThickness_Click;
@@ -63,6 +67,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             //BtnZoomIn.Click += BtnZoomIn_Click;
             //BtnZoomOut.Click += BtnZoomOut_Click;
             // TODO: UndoRedoActionbarManager.GetInstance().ApplicationBarTop = ApplicationBarTopX;
+
+            createAppBarAndSwitchAppBarContent(current_appbar);
         }
 
         void PaintData_ToolCurrentChanged(Phone.Tool.ToolBase tool)
@@ -85,6 +91,197 @@ namespace Catrobat.Paint.WindowsPhone.View
             throw new NotImplementedException();
         }
 
+        public void createAppBarAndSwitchAppBarContent(string type)
+        {
+            CommandBar cmdBar = new CommandBar();
+            if("barStandard" == type)
+            {
+                AppBarButton app_btnBrushThickness = new AppBarButton();
+                AppBarButton app_btnColor = new AppBarButton();
+
+                BitmapIcon thickness_icon = new BitmapIcon();
+                thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute); 
+                app_btnBrushThickness.Icon = thickness_icon;
+
+                BitmapIcon color_icon = new BitmapIcon();
+                color_icon.UriSource = new Uri("ms-resource:/File/Assets/ColorPicker/icon_menu_color_palette.png", UriKind.Absolute);
+                app_btnColor.Icon = color_icon;
+
+                app_btnBrushThickness.Label = "Pinselstärke";
+                app_btnColor.Label = "Farbe";
+
+                app_btnBrushThickness.Click += btnThickness_Click;
+                app_btnColor.Click += btnColor_Click;
+
+                cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
+                cmdBar.PrimaryCommands.Add(app_btnColor);
+           
+            }
+            else if("barPipette" == type)
+            {
+            
+
+            }
+            else if("barEraser" == type)
+            {
+                AppBarButton app_btnBrushThickness = new AppBarButton();
+
+                BitmapIcon thickness_icon = new BitmapIcon();
+                thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
+                app_btnBrushThickness.Icon = thickness_icon;
+               
+                app_btnBrushThickness.Label = "Pinselstärke";
+
+                app_btnBrushThickness.Click += btnThickness_Click;
+
+                cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
+
+            }
+            else if ("barMove" == type)
+            {
+                AppBarButton app_btnZoomIn = new AppBarButton();
+                AppBarButton app_btnZoomOut = new AppBarButton();
+
+                BitmapIcon zoom_in_icon = new BitmapIcon();
+                zoom_in_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_zoom_in.png", UriKind.Absolute);
+                app_btnZoomIn.Icon = zoom_in_icon;
+
+                BitmapIcon zoom_out_icon = new BitmapIcon();
+                zoom_out_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_zoom_out.png", UriKind.Absolute);
+                app_btnZoomOut.Icon = zoom_out_icon;
+
+                app_btnZoomIn.Label = "Vergrößern";
+                app_btnZoomOut.Label = "Verkleinern";
+
+                app_btnZoomIn.Click += BtnZoomIn_Click;
+                app_btnZoomOut.Click += BtnZoomOut_Click;
+
+                cmdBar.PrimaryCommands.Add(app_btnZoomIn);
+                cmdBar.PrimaryCommands.Add(app_btnZoomOut);
+            }
+            else if("barRotate" == type)
+            {
+                AppBarButton app_btnRotate_left = new AppBarButton();
+                AppBarButton app_btnRotate_right = new AppBarButton();
+
+                BitmapIcon rotate_left_icon = new BitmapIcon();
+                rotate_left_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_rotate_left.png", UriKind.Absolute);
+                app_btnRotate_left.Icon = rotate_left_icon;
+                
+                BitmapIcon rotate_right_icon = new BitmapIcon();
+                rotate_right_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_rotate_right.png", UriKind.Absolute);
+                app_btnRotate_right.Icon = rotate_right_icon;
+
+                app_btnRotate_left.Label = "rechts drehen";
+                app_btnRotate_right.Label = "links drehen";
+
+                app_btnRotate_left.Click += BtnLeft_OnClick;
+                app_btnRotate_right.Click += BtnRight_OnClick;
+
+                cmdBar.PrimaryCommands.Add(app_btnRotate_left);
+                cmdBar.PrimaryCommands.Add(app_btnRotate_right);
+            }
+            else if("barFlip" == type)
+            {
+                AppBarButton app_btnHorizontal = new AppBarButton();
+                AppBarButton app_btnVertical = new AppBarButton();
+
+                BitmapIcon horizontal_icon = new BitmapIcon();
+                horizontal_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_flip_horizontal.png", UriKind.Absolute);
+                app_btnHorizontal.Icon = horizontal_icon;
+
+                BitmapIcon vertical_icon = new BitmapIcon();
+                vertical_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_flip_vertical.png", UriKind.Absolute);
+                app_btnVertical.Icon = vertical_icon;
+
+                app_btnHorizontal.Label = "horizontal";
+                app_btnVertical.Label = "vertikal";
+
+                app_btnHorizontal.Click += BtnLeft_OnClick;
+                app_btnVertical.Click += BtnRight_OnClick;
+
+                cmdBar.PrimaryCommands.Add(app_btnHorizontal);
+                cmdBar.PrimaryCommands.Add(app_btnVertical);
+            }
+            else
+            {
+                return;
+            }
+            AppBarButton app_btnTools = new AppBarButton();
+            AppBarButton app_btnSave = new AppBarButton();
+            AppBarButton app_btnSaveCopy = new AppBarButton();
+            AppBarButton app_btnNewPicture = new AppBarButton();
+            AppBarButton app_btnLoad = new AppBarButton();
+            AppBarButton app_btnFullScreen = new AppBarButton();
+            AppBarButton app_btnAbout = new AppBarButton();
+
+            BitmapIcon tools_icon = new BitmapIcon();
+            tools_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/Assets/AppBar/menu_tools_.png", UriKind.Absolute);
+            app_btnTools.Icon = tools_icon;
+            app_btnTools.Label = "Werkzeug";
+            app_btnTools.Click += BtnTools_Click;
+
+            app_btnSave.Label = "Speichern";
+            app_btnSaveCopy.Label = "Kopie speichern";
+            app_btnNewPicture.Label = "New Picture";
+            app_btnLoad.Label = "Laden";
+            app_btnFullScreen.Label = "Vollbild";
+            app_btnAbout.Label = "Über";
+
+            cmdBar.PrimaryCommands.Add(app_btnTools);
+
+            cmdBar.SecondaryCommands.Add(app_btnSave);
+            cmdBar.SecondaryCommands.Add(app_btnSaveCopy);
+            cmdBar.SecondaryCommands.Add(app_btnNewPicture);
+            cmdBar.SecondaryCommands.Add(app_btnLoad);
+            cmdBar.SecondaryCommands.Add(app_btnFullScreen);
+
+            BottomAppBar = cmdBar;
+            current_appbar = type;
+        }
+
+        private void BtnLeft_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rotate)
+            {
+                var rotateTool = (RotateTool)PocketPaintApplication.GetInstance().ToolCurrent;
+                rotateTool.RotateLeft();
+            }
+            else
+                return;
+
+        }
+
+        private void BtnRight_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rotate)
+            {
+                var rotateTool = (RotateTool)PocketPaintApplication.GetInstance().ToolCurrent;
+                rotateTool.RotateRight();
+            }
+            else
+                return;
+        }
+
+        void BtnZoomOut_Click(object sender, RoutedEventArgs e)
+        {
+            MoveZoomTool tool = new MoveZoomTool();
+            ScaleTransform scaletransform = new ScaleTransform();
+            scaletransform.ScaleX = 0.9;
+            scaletransform.ScaleY = 0.9;
+            tool.HandleMove(scaletransform);
+        }
+
+        void BtnZoomIn_Click(object sender, RoutedEventArgs e )
+        {
+
+            MoveZoomTool tool = new MoveZoomTool();
+            ScaleTransform scaletransform = new ScaleTransform();
+            scaletransform.ScaleX = 1.1;
+            scaletransform.ScaleY = 1.1;
+            tool.HandleMove(scaletransform);
+        }
+
         /// <summary>
         /// Wird aufgerufen, wenn diese Seite in einem Frame angezeigt werden soll.
         /// </summary>
@@ -92,6 +289,42 @@ namespace Catrobat.Paint.WindowsPhone.View
         /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void ToolChangedHere(ToolBase tool)
+        {
+            switch (tool.GetToolType())
+            {
+                case ToolType.Brush:
+                case ToolType.Cursor:
+                case ToolType.Line:
+                    createAppBarAndSwitchAppBarContent("barStandard");
+                    break;
+
+                case ToolType.Pipette:
+                    createAppBarAndSwitchAppBarContent("barPipette");
+                    break;
+
+                case ToolType.Eraser:
+                    createAppBarAndSwitchAppBarContent("barEraser");
+                    break;
+
+                case ToolType.Move:
+                case ToolType.Zoom:
+                    createAppBarAndSwitchAppBarContent("barMove");
+                    break;
+
+                case ToolType.Crop:
+                    // TODO: ApplicationBar = (IApplicationBar)this.Resources["barCrop"];
+                    break;
+
+                case ToolType.Rotate:
+                    createAppBarAndSwitchAppBarContent("barRotate");
+                    break;
+                case ToolType.Flip:
+                    createAppBarAndSwitchAppBarContent("barFlip");
+                    break;
+            }
         }
 
         private void btnAccept_Click(object sender, RoutedEventArgs e)
