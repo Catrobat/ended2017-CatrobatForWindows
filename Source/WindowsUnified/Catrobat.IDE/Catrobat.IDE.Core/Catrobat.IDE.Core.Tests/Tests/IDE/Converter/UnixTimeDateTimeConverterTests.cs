@@ -28,7 +28,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void TestFaultyConversion()
+        public void TestFaultyUnixTimeToDateTimeConversion()
         {
             var conv = new UnixTimeDateTimeConverter();
             object output = conv.Convert((object)1395419262f, null, null, null);

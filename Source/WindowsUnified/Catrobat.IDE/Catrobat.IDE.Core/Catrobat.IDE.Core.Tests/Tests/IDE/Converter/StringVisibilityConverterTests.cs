@@ -8,16 +8,16 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
     public class StringVisibilityConverterTests
     {
         [TestMethod, TestCategory("GatedTests")]
-        public void TestConversion()
+        public void TestStringVisibilityConversion()
         {
             var conv = new StringVisibilityConverter();
             object output = conv.Convert("", null, null, null);
             Assert.IsNotNull(output);
-            Assert.AreEqual(PortableVisibility.Collapsed, output);
+            Assert.AreEqual(PortableVisibility.Visible, output);
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void TestBackConversion()
+        public void TestVisibilityStringConversion()
         {
             var conv = new StringVisibilityConverter();
             object output = conv.ConvertBack(PortableVisibility.Visible, null, null, null);
@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void TestFaultyConversion()
+        public void TestFaultyStringVisibilityConversion()
         {
             var conv = new StringVisibilityConverter();
             object output = conv.Convert("NotEmptyString", null, null, null);
