@@ -5,7 +5,7 @@
     xmlns:local="using:Catrobat.Paint.WindowsPhone.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Catrobat.Paint.Phone.Controls.AppBar"
+    xmlns:controls="using:Catrobat.Paint.WindowsPhone.Controls.AppBar"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -89,7 +89,7 @@
         </Grid>
         
         <StackPanel Grid.Row="0" Canvas.ZIndex="10" VerticalAlignment="Top">
-            <controls:ApplicationBarTop></controls:ApplicationBarTop>
+            <controls:AppbarTop></controls:AppbarTop>
         </StackPanel>
     </Grid>
 
