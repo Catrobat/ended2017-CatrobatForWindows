@@ -12,7 +12,10 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
 {
     public static class CatrobatVersionConverter
     {
-        public enum VersionConverterError { NoError, VersionNotSupported, ProjectCodeNotValid, ProjectCodePathNotValid }
+        public enum VersionConverterError
+        {
+            NoError, VersionTooNew, VersionTooOld, ProgramDamaged, ProgramPathNotValid
+        }
 
         private static Dictionary<CatrobatVersionPair, CatrobatVersion> Converters
         {
@@ -95,13 +98,18 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
             var error = VersionConverterError.NoError;
             var versionPair = new CatrobatVersionPair(inputVersion, outputVersion);
 
+            if (double.Parse(inputVersion) < Constants.MinimumCodeVersion)
+            {
+                return VersionConverterError.VersionTooOld;
+            }
+
             if (ConvertersPaths.ContainsKey(versionPair))
             {
                 var path = ConvertersPaths[versionPair];
 
                 if (path.Count == 0)
                 {
-                    error = VersionConverterError.VersionNotSupported;
+                    error = VersionConverterError.VersionTooOld;
                 }
                 else
                 {
@@ -122,13 +130,13 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
                     }
                     catch (Exception)
                     {
-                        error = VersionConverterError.ProjectCodeNotValid;
+                        error = VersionConverterError.ProgramDamaged;
                     }
                 }
             }
             else
             {
-                error = VersionConverterError.ProjectCodeNotValid;
+                error = VersionConverterError.ProgramDamaged;
             }
 
             return error;
@@ -156,7 +164,6 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
         {
             VersionConverterError error;
             var xml = "";
-
 
             if (!string.IsNullOrEmpty(projectCodePath))
             {
@@ -193,24 +200,24 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
                                 }
                                 catch
                                 {
-                                    error = VersionConverterError.ProjectCodeNotValid;
+                                    error = VersionConverterError.ProgramDamaged;
                                 }
                             }
                         }
                     }
                     else
                     {
-                        error = VersionConverterError.VersionNotSupported;
+                        error = VersionConverterError.ProgramDamaged;
                     }
                 }
                 else
                 {
-                    error = VersionConverterError.ProjectCodeNotValid;
+                    error = VersionConverterError.ProgramDamaged;
                 }
             }
             else
             {
-                error = VersionConverterError.ProjectCodePathNotValid;
+                error = VersionConverterError.ProgramPathNotValid;
             }
 
             return new VersionConverterResult { Xml = xml, Error = error };

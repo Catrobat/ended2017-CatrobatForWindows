@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.Models;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
 using GalaSoft.MvvmLight.Command;
@@ -20,41 +21,53 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private bool _checkBoxMakeActiveIsChecked = true;
         private bool _buttonAddIsEnabled = true;
         private bool _buttonCancelIsEnabled = true;
-        private string _projectName = "";
-        private PortableImage _screenshotImageSource = null;
+        //private string _projectName = "";
+        //private PortableImage _screenshotImageSource = null;
         private bool _errorPanelVisibility;
+
 
         #endregion
 
         #region Properties
 
-        public string ProjectName
+        private LocalProjectHeader _projectHeader;
+        public LocalProjectHeader ProjectHeader
         {
-            get { return _projectName; }
+            get { return _projectHeader; }
             set
             {
-                if (value == _projectName)
-                {
-                    return;
-                }
-                _projectName = value;
-                RaisePropertyChanged(() => ProjectName);
+                _projectHeader = value; 
+                RaisePropertyChanged(()=>ProjectHeader);
             }
         }
 
-        public PortableImage ScreenshotImageSource
-        {
-            get { return _screenshotImageSource; }
-            set
-            {
-                if (_screenshotImageSource == value)
-                {
-                    return;
-                }
-                _screenshotImageSource = value;
-                RaisePropertyChanged(() => ScreenshotImageSource);
-            }
-        }
+        //public string ProjectName
+        //{
+        //    get { return _projectName; }
+        //    set
+        //    {
+        //        if (value == _projectName)
+        //        {
+        //            return;
+        //        }
+        //        _projectName = value;
+        //        RaisePropertyChanged(() => ProjectName);
+        //    }
+        //}
+
+        //public PortableImage ScreenshotImageSource
+        //{
+        //    get { return _screenshotImageSource; }
+        //    set
+        //    {
+        //        if (_screenshotImageSource == value)
+        //        {
+        //            return;
+        //        }
+        //        _screenshotImageSource = value;
+        //        RaisePropertyChanged(() => ScreenshotImageSource);
+        //    }
+        //}
 
         public bool ContentPanelVisibility
         {
@@ -194,18 +207,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             {
                 var newProjectName = await ServiceLocator.ProjectImporterService.AcceptTempProject();
 
-                    if (CheckBoxMakeActiveIsChecked)
-                    {
-                        var newProject = await CatrobatContext.LoadProjectByNameStatic(newProjectName);
-
-                        var projectChangedMessage = new GenericMessage<Project>(newProject);
-                        Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
-                    }
-                    else
-                    {
-                        var localProjectsChangedMessage = new MessageBase();
-                        Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
-                    }
+                var localProjectsChangedMessage = new MessageBase();
+                Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
 
                 ServiceLocator.DispatcherService.RunOnMainThread(() => ServiceLocator.NavigationService.NavigateTo<MainViewModel>());
             }
@@ -225,25 +228,25 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void OnLoadAction(string fileToken)
         {
-            _isWorking = true;
-            if (fileToken != null)
-            {
-                var projectHeader = await ServiceLocator.ProjectImporterService.ImportProject(fileToken);
+            //_isWorking = true;
+            //if (fileToken != null)
+            //{
+            //    var projectHeader = await ServiceLocator.ProjectImporterService.ImportProject(fileToken);
 
-                if (projectHeader != null)
-                {
-                    ProjectName = projectHeader.ProjectName;
+            //    if (projectHeader != null)
+            //    {
+            //        ProjectName = projectHeader.ProjectName;
 
-                    ScreenshotImageSource = projectHeader.Screenshot;
+            //        ScreenshotImageSource = projectHeader.Screenshot;
 
-                    ShowPanel(VisiblePanel.Content);
-                }
-                else
-                {
-                    ShowPanel(VisiblePanel.Error);
-                }
-            }
-            _isWorking = false;
+            //        ShowPanel(VisiblePanel.Content);
+            //    }
+            //    else
+            //    {
+            //        ShowPanel(VisiblePanel.Error);
+            //    }
+            //}
+            //_isWorking = false;
         }
 
         protected override void GoBackAction()
@@ -261,6 +264,38 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             AddCommand = new RelayCommand(AddAction, AddCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction, CancelCommand_CanExecute);
             OnLoadCommand = new RelayCommand<string>(OnLoadAction);
+        }
+
+        public async override void NavigateTo()
+        {
+            var importerResult = await ServiceLocator.ProjectImporterService.StartImportProject();
+
+            switch (importerResult.Status)
+            {
+                case ProgramImportStatus.Valid:
+                    ShowPanel(VisiblePanel.Content);
+                    ButtonAddIsEnabled = true;
+                    break;
+                case ProgramImportStatus.Damaged:
+                    // TODO: show right error
+                    ShowPanel(VisiblePanel.Error);
+                    ButtonAddIsEnabled = false;
+                    break;
+                case ProgramImportStatus.VersionTooOld:
+                    // TODO: show right error
+                    ShowPanel(VisiblePanel.Error);
+                    ButtonAddIsEnabled = false;
+                    break;
+                case ProgramImportStatus.VersionTooNew:
+                    // TODO: show right error
+                    ShowPanel(VisiblePanel.Error);
+                    ButtonAddIsEnabled = false;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            base.NavigateTo();
         }
 
         private enum VisiblePanel { Error, Content, Loading }
@@ -310,15 +345,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void ResetViewModel()
         {
-            ProjectName = "";
+            ProjectHeader = null;
             ContentPanelVisibility = false;
             LoadingPanelVisibility = true;
             ProgressBarLoadingIsIndeterminate = true;
             CheckBoxMakeActiveIsChecked = true;
             ButtonAddIsEnabled = true;
             ButtonCancelIsEnabled = true;
-            ProjectName = "";
-            ScreenshotImageSource = null;
         }
     }
 }

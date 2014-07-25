@@ -70,7 +70,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 if (_templateOptions != null) return _templateOptions;
 
 
-                var projectGenerators = ServiceLocator.CreateImplementations<IProjectGenerator>();
+                var projectGenerators = ServiceLocator.CreateImplementations<IProgramGenerator>();
                 var availableTemplates = projectGenerators.Select(projectGenerator =>
                     new ProjectTemplateEntry(projectGenerator)).ToList();
 

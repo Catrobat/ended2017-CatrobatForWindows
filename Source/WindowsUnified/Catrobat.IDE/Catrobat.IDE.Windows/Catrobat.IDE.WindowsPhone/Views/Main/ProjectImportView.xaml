@@ -22,46 +22,53 @@
     </StackPanel>
 
     <Grid Grid.Row="1">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition/>
-      </Grid.RowDefinitions>
-      
-      <Grid x:Name="LoadingPanel" Grid.Row="0" Visibility="{Binding LoadingPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,170">
+      <Grid x:Name="LoadingPanel" Margin="12,0,12,170"
+        Visibility="{Binding LoadingPanelVisibility, 
+        Converter={StaticResource BoolVisibilityConverter}}" >
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto"/>
           <RowDefinition/>
         </Grid.RowDefinitions>
-        <ProgressBar Grid.Row="0" Name="ProgressBarLoading" IsIndeterminate="{Binding ProgressBarLoadingIsIndeterminate}"></ProgressBar>
-        <TextBlock Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" 
+        <ProgressBar Grid.Row="0" Name="ProgressBarLoading" 
+                     IsIndeterminate="{Binding ProgressBarLoadingIsIndeterminate}"></ProgressBar>
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" 
+                   HorizontalAlignment="Center" TextAlignment="Center" 
+                   Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
+                   Source={StaticResource ThemeChooser}}" 
                    Text="Please wait while we try to load the new project. This can take some time."></TextBlock>
       </Grid>
       
-      <Grid x:Name="ErrorPanel" Grid.Row="1" Background="Red" Visibility="{Binding ErrorPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,170">
+      <Grid x:Name="ErrorPanel" Margin="12,0,12,170" 
+        Visibility="{Binding ErrorPanelVisibility, 
+        Converter={StaticResource BoolVisibilityConverter}}" >
         <StackPanel>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" 
+        <TextBlock TextWrapping="Wrap" 
+                   HorizontalAlignment="Center" TextAlignment="Center" 
+                   Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
+                   Source={StaticResource ThemeChooser}}" 
                    Text="Sorry!  The project is not valid or it's version is not compatible to the current version of this IDE."></TextBlock>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" 
-                   Text="Please look for updates in your Windows Phone store."></TextBlock>
+        <TextBlock TextWrapping="Wrap" 
+                   HorizontalAlignment="Center" TextAlignment="Center" 
+                   Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
+                   Source={StaticResource ThemeChooser}}" 
+                   Text="Please look for updates in your Windows Phone store."/>
         </StackPanel>
       </Grid>
-      
-      <Grid x:Name="ContentPanel" Grid.Row="1" Visibility="{Binding ContentPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,0">
+
+      <Grid x:Name="ContentPanel" Margin="12,0,12,0"
+        Visibility="{Binding ContentPanelVisibility, 
+        Converter={StaticResource BoolVisibilityConverter}}" >
         <Grid.RowDefinitions>
           <RowDefinition/>
           <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" 
+        <Image Name="ImageProjectScreenshot" Grid.Row="0" 
+               Width="400" Height="400"
                VerticalAlignment="Center"
                HorizontalAlignment="Center"
-               Width="400"
-               Height="400"
-               Name="ImageProjectScreenshot"
                Stretch="Uniform"
                Source="{Binding ScreenshotImageSource, 
                Converter={StaticResource NoScreenshotConverter}}"/>
-        <CheckBox Grid.Row="1" Margin="0 15 0 30" Name="CheckBoxMakeActive" IsChecked="{Binding CheckBoxMakeActiveIsChecked}">Make new Project active</CheckBox>
       </Grid>
     </Grid>
   </Grid>

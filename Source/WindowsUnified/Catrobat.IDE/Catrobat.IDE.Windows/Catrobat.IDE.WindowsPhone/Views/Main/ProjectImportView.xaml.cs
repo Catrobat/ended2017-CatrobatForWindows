@@ -9,8 +9,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         private readonly ProjectImportViewModel _viewModel = 
             ServiceLocator.ViewModelLocator.ProjectImportViewModel;
 
-        
-
         public ProjectImportView()
         {
             InitializeComponent();

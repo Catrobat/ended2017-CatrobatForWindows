@@ -171,12 +171,12 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             {
                 switch (error)
                 {
-                    case CatrobatVersionConverter.VersionConverterError.VersionNotSupported:
+                    case CatrobatVersionConverter.VersionConverterError.VersionTooOld:
+                    case CatrobatVersionConverter.VersionConverterError.VersionTooNew:
                         ServiceLocator.NotifictionService.ShowToastNotification(null,
                             AppResources.Main_VersionIsNotSupported, ToastNotificationTime.Medeum);
-
                         break;
-                    case CatrobatVersionConverter.VersionConverterError.ProjectCodeNotValid:
+                    case CatrobatVersionConverter.VersionConverterError.ProgramDamaged:
                         ServiceLocator.NotifictionService.ShowToastNotification(null,
                             AppResources.Main_ProjectNotValid, ToastNotificationTime.Medeum);
                         break;

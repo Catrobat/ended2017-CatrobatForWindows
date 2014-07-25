@@ -385,7 +385,7 @@
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Sprite.cs" />
     <Compile Include="Services\IDispatcherService.cs" />
-    <Compile Include="Services\IProjectGenerator.cs" />
+    <Compile Include="Services\IProgramGenerator.cs" />
     <Compile Include="Services\IShareService.cs" />
     <Compile Include="Services\IActionTemplateService.cs" />
     <Compile Include="Services\ISensorService.cs" />
@@ -442,7 +442,7 @@
     <Compile Include="Resources\SampleProjectLoader.cs" />
     <Compile Include="Services\Common\WebCommunicationService.cs" />
     <Compile Include="Services\Common\ZipService.cs" />
-    <Compile Include="Services\Common\ProjectImporterService.cs" />
+    <Compile Include="Services\Common\ProgramImporterService.cs" />
     <Compile Include="UI\ImageDimension.cs" />
     <Compile Include="UI\PortableUI\PortableBrush.cs" />
     <Compile Include="UI\PortableUI\PortableImage.cs" />
@@ -455,7 +455,7 @@
     <Compile Include="Services\INotificationService.cs" />
     <Compile Include="Services\IPictureService.cs" />
     <Compile Include="Services\IPlayerLauncherService.cs" />
-    <Compile Include="Services\IProjectImporterService.cs" />
+    <Compile Include="Services\IProgramImporterService.cs" />
     <Compile Include="Services\ISoundPlayerService.cs" />
     <Compile Include="Services\ISoundRecorderService.cs" />
     <Compile Include="Services\ISystemInformationService.cs" />

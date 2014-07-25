@@ -77,6 +77,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public async Task<CatrobatVersionConverter.VersionConverterError> AsyncDownloadAndSaveProject(string downloadUrl, string projectName)
         {
+            // TODO: use PrjectImporterService instead of ProjectConverter
             using (var httpClient = new HttpClient())
             {
                 httpClient.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
@@ -113,11 +114,11 @@ namespace Catrobat.IDE.Core.Services.Common
                 }
                 catch (HttpRequestException)
                 {
-                    return CatrobatVersionConverter.VersionConverterError.ProjectCodePathNotValid;
+                    return CatrobatVersionConverter.VersionConverterError.ProgramDamaged;
                 }
                 catch (Exception)
                 {
-                    return CatrobatVersionConverter.VersionConverterError.ProjectCodePathNotValid;
+                    return CatrobatVersionConverter.VersionConverterError.ProgramDamaged;
                 }
             }
         }

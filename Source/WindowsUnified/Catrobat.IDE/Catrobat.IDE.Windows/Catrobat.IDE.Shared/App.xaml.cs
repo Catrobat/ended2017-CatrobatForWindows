@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -16,6 +17,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.WindowsPhone;
+using Catrobat.IDE.WindowsPhone.Views.Main;
 using Catrobat.IDE.WindowsShared.Common;
 using GalaSoft.MvvmLight.Threading;
 
@@ -34,26 +36,27 @@ namespace Catrobat.IDE.WindowsShared
             StatusBar statusBar = StatusBar.GetForCurrentView();
             await statusBar.HideAsync();
 
-            if (e.PreviousExecutionState != ApplicationExecutionState.Running)
+            await ShowSplashScreen(e);
+        }
+
+        private async Task ShowSplashScreen(IActivatedEventArgs e)
+        {
+            var file = await StorageFile.GetFileFromApplicationUriAsync(
+                new Uri("ms-appx:///Assets/SplashScreen.png", UriKind.Absolute));
+            var randomAccessStream = await file.OpenReadAsync();
+
+            var splashImage = new BitmapImage()
             {
-                var file = await StorageFile.GetFileFromApplicationUriAsync(
-                    new Uri("ms-appx:///Assets/SplashScreen.png", UriKind.Absolute));
-                var randomAccessStream = await file.OpenReadAsync();
-
-                var splashImage = new BitmapImage()
-                {
-                    CreateOptions = BitmapCreateOptions.None
-                };
-                await splashImage.SetSourceAsync(randomAccessStream);
+                CreateOptions = BitmapCreateOptions.None
+            };
+            await splashImage.SetSourceAsync(randomAccessStream);
 
 
-                var extendedSplash = new ExtendedSplash(e.SplashScreen, e.PreviousExecutionState, splashImage);
-                Window.Current.Content = extendedSplash;
+            var extendedSplash = new ExtendedSplash(e.SplashScreen, 
+                e.PreviousExecutionState, splashImage);
+            Window.Current.Content = extendedSplash;
 
-                Window.Current.Activate();
-            }
-
-
+            Window.Current.Activate();
         }
 
         private async void OnSuspending(object sender, SuspendingEventArgs e)
@@ -87,10 +90,7 @@ namespace Catrobat.IDE.WindowsShared
                         ServiceLocator.SoundService.RecievedFiles(
                             (args as FileOpenPickerContinuationEventArgs).Files);
                     }
-
-
                 }
-
             }
         }
 
@@ -98,6 +98,24 @@ namespace Catrobat.IDE.WindowsShared
         {
             try
             {
+                if (e.Files.Count == 1 && Constants.CatrobatFileNames.Contains(
+                    Path.GetExtension(e.Files[0].Name)))
+                {
+                    if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                    {
+                        await ShowSplashScreen(e);
+                        // TODO: wait for initializatioin and open files
+                    }
+                    else
+                    {
+                        var catrobatFileStream = (await ((StorageFile)e.Files[0]).
+                        OpenReadAsync()).AsStream();
+
+                        ServiceLocator.ProjectImporterService.SetProjectStream(catrobatFileStream);
+                        ServiceLocator.NavigationService.NavigateTo<ProjectImportViewModel>();
+                    }
+                }
+
                 if (e.PreviousExecutionState != ApplicationExecutionState.Terminated)
                 {
                     var imageFiles = (from StorageFile file in e.Files
@@ -107,15 +125,8 @@ namespace Catrobat.IDE.WindowsShared
                                       ServiceLocator.PictureService.ImageFileExtensionPrefix + imageExtension)
                                       select file).ToList();
 
-                    ServiceLocator.PictureService.RecievedFiles(imageFiles);
-                }
-
-                if (e.Files.Count == 1 &&
-                    Constants.CatrobatFileNames.Contains(Path.GetExtension(e.Files[0].Name)))
-                {
-                    // TODO: send message to ProjectImportViewModel that includes the new zip file
-
-                    ServiceLocator.NavigationService.NavigateTo<ProjectImportViewModel>();
+                    if (imageFiles.Count > 0)
+                        ServiceLocator.PictureService.RecievedFiles(imageFiles);
                 }
             }
             catch (Exception exc)
