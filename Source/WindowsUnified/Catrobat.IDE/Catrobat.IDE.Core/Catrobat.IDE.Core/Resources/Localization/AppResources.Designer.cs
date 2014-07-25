@@ -1619,15 +1619,6 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die PROGRAM SETTINGS ähnelt.
-        /// </summary>
-        public static string Editor_TitleProjectSettings {
-            get {
-                return ResourceManager.GetString("Editor_TitleProjectSettings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die RECORD SOUND ähnelt.
         /// </summary>
         public static string Editor_TitleRecorder {
@@ -2827,15 +2818,6 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Program settings ähnelt.
-        /// </summary>
-        public static string Main_ProjectSettings {
-            get {
-                return ResourceManager.GetString("Main_ProjectSettings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Press &quot;back&quot; again to close the app? ähnelt.
         /// </summary>
         public static string Main_ReallyCloseApplicationText {
@@ -3030,6 +3012,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_TitleOnlineProject {
             get {
                 return ResourceManager.GetString("Main_TitleOnlineProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die PROGRAM SETTINGS ähnelt.
+        /// </summary>
+        public static string Main_TitleProjectSettings {
+            get {
+                return ResourceManager.GetString("Main_TitleProjectSettings", resourceCulture);
             }
         }
         

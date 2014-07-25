@@ -63,14 +63,14 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             else
             {
                 ServiceLocator.NavigationService.NavigateTo<UploadProjectLoadingViewModel>();
-                JSONStatusResponse status_response = await CatrobatWebCommunicationService.AsyncRecoverPassword(_passwordRecoveryData, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
+                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.AsyncRecoverPassword(_passwordRecoveryData, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
-                if (status_response.statusCode == StatusCodes.ServerResponseOk)
+                if (statusResponse.statusCode == StatusCodes.ServerResponseOk)
                 {
-                    string recovery_link = status_response.answer;
-                    string hash_marker = "?c=";
-                    int position = recovery_link.LastIndexOf(hash_marker) + hash_marker.Length;
-                    Context.LocalSettings.CurrentUserRecoveryHash = recovery_link.Substring(position, recovery_link.Length - position);
+                    string recoveryLink = statusResponse.answer;
+                    string hashMarker = "?c=";
+                    int position = recoveryLink.LastIndexOf(hashMarker) + hashMarker.Length;
+                    Context.LocalSettings.CurrentUserRecoveryHash = recoveryLink.Substring(position, recoveryLink.Length - position);
                     ServiceLocator.DispatcherService.RunOnMainThread(() =>
                     {
                         ServiceLocator.NavigationService.NavigateTo<UploadProjectNewPasswordViewModel>();
@@ -81,7 +81,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 else
                 {
                     base.GoBackAction();
-                    switch (status_response.statusCode)
+                    switch (statusResponse.statusCode)
                     {
                         case StatusCodes.HTTPRequestFailed:
                             ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectPasswordRecoveryErrorCaption,
@@ -89,8 +89,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                             break;
 
                         default:
-                            string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
-                                                    string.Format(AppResources.Main_UploadProjectLoginError, status_response.answer);
+                            string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, statusResponse.statusCode.ToString()) :
+                                                    string.Format(AppResources.Main_UploadProjectLoginError, statusResponse.answer);
                             ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectPasswordRecoveryErrorCaption,
                                 messageString, MissingRecoveryDataCallback, MessageBoxOptions.Ok);
                             break;

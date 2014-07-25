@@ -14,6 +14,7 @@ using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
@@ -122,8 +123,8 @@ namespace Catrobat.IDE.Core.UI
             if (IsAutoUpdate == true)
                 offset = 0;
 
-            var projects = await 
-                CatrobatWebCommunicationService.AsyncLoadOnlineProjects(
+            var projects = await
+                ServiceLocator.WebCommunicationService.AsyncLoadOnlineProjects(
                 _filterText, offset, count, c);
 
             uint newProgramsCount = 0;

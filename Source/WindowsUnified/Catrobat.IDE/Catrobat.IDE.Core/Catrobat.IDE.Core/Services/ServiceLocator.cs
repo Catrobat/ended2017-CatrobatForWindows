@@ -139,6 +139,12 @@ namespace Catrobat.IDE.Core.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
+        public static IWebCommunicationService WebCommunicationService
+        { get { return GetInstance<IWebCommunicationService>(); } }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
         public static IZipService ZipService
         { get { return GetInstance<IZipService>(); } }
 

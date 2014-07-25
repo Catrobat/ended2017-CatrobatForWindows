@@ -115,6 +115,7 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\Common\ProjectGeneratorWhackAMole.cs" />
+    <Compile Include="Services\IWebCommunicationService.cs" />
     <Compile Include="Services\IZipService.cs" />
     <Compile Include="UI\Converters\StringVisibilityConverter.cs" />
     <Compile Include="UI\OnlineProjectsCollection.cs" />
@@ -438,7 +439,7 @@
     </Compile>
     <Compile Include="Resources\Localization\LocalizedStrings.cs" />
     <Compile Include="Resources\SampleProjectLoader.cs" />
-    <Compile Include="Services\Common\CatrobatWebCommunicationService.cs" />
+    <Compile Include="Services\Common\WebCommunicationService.cs" />
     <Compile Include="Services\Common\ZipService.cs" />
     <Compile Include="Services\Common\ProjectImporterService.cs" />
     <Compile Include="UI\ImageDimension.cs" />

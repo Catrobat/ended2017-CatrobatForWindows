@@ -489,7 +489,7 @@
   <data name="Editor_TitleNewSprite" xml:space="preserve">
     <value>NEW OBJECT</value>
   </data>
-  <data name="Editor_TitleProjectSettings" xml:space="preserve">
+  <data name="Main_TitleProjectSettings" xml:space="preserve">
     <value>PROGRAM SETTINGS</value>
   </data>
   <data name="Editor_TitleRecorder" xml:space="preserve">
@@ -1211,9 +1211,6 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Main_ProjectDescription" xml:space="preserve">
     <value>Description:</value>
-  </data>
-  <data name="Main_ProjectSettings" xml:space="preserve">
-    <value>Program settings</value>
   </data>
   <data name="Main_TitleCurrentProject" xml:space="preserve">
     <value>ACTIVE PROGRAM</value>

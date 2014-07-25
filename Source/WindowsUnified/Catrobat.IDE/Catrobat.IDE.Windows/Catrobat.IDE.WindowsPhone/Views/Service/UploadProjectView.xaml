@@ -25,7 +25,7 @@
                  Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
                  Source={StaticResource ThemeChooser}}"/>
       <TextBlock x:Name="PageTitle" 
-                 Text="{Binding Resources.Main_ProjectSettings, 
+                 Text="{Binding Resources.Main_TitleProjectSettings, 
                  Source={StaticResource LocalizedStrings}}"  
                  Margin="10 0 0 0" 
                  Style="{Binding StaticTheme.TextTitle3Style.NativeStyle, 
