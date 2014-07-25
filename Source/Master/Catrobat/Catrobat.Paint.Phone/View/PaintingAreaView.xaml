@@ -12,7 +12,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True" MouseMove="PhoneApplicationPage_MouseMove">
 
     <phone:PhoneApplicationPage.Resources>
         <Storyboard x:Name="SpinningStoryboard">
@@ -31,7 +31,7 @@
 
 
 
-        <shell:ApplicationBar x:Key="barStandard" IsVisible="True">
+        <shell:ApplicationBar x:Key="barStandard" IsVisible="True" Mode="Minimized">
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Speichern" Click="ApplicationBarMenuItem_OnClick"/>
                 <shell:ApplicationBarMenuItem Text="Kopie speichern"/>
@@ -41,10 +41,12 @@
                 <shell:ApplicationBarMenuItem Text="Über"/>
             </shell:ApplicationBar.MenuItems>
 
-            <shell:ApplicationBarIconButton x:Name="BtnThickness"  IconUri="/Assets/ColorPicker/icon_menu_strokes.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
+            <shell:ApplicationBarIconButton x:Name="BtnThickness"  Click="BtnThickness_Click" IconUri="/Assets/ColorPicker/icon_menu_strokes.png" IsEnabled="True" Text="Thickness" />
             <shell:ApplicationBarIconButton x:Name="BtnColor" IconUri="/Assets/ColorPicker/icon_menu_color_palette.png" IsEnabled="True" Text="color"/>
-            <shell:ApplicationBarIconButton x:Name="BtnTools" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
+            <shell:ApplicationBarIconButton x:Name="BtnTools" IconUri="/Assets/AppBar/menu_tools_.png" Click="BtnTools_Click" IsEnabled="True" Text="tools"/>
         </shell:ApplicationBar>
+        
+        
 
         <shell:ApplicationBar x:Key="barPipette" IsVisible="True">
             <shell:ApplicationBar.MenuItems>
@@ -56,7 +58,7 @@
                 <shell:ApplicationBarMenuItem Text="Über"/>
             </shell:ApplicationBar.MenuItems>
 
-            <shell:ApplicationBarIconButton x:Name="BtnTools2" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
+            <shell:ApplicationBarIconButton x:Name="BtnTools2"  IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools" Click="BtnTools_Click"/>
 
         </shell:ApplicationBar>
 
@@ -71,9 +73,9 @@
                 <shell:ApplicationBarMenuItem Text="Über"/>
             </shell:ApplicationBar.MenuItems>
 
-            <shell:ApplicationBarIconButton x:Name="BtnThickness3"  IconUri="/Assets/ColorPicker/icon_menu_strokes.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
+            <shell:ApplicationBarIconButton x:Name="BtnThickness3"  IconUri="/Assets/ColorPicker/icon_menu_strokes.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_Click" />
 
-            <shell:ApplicationBarIconButton x:Name="BtnTools3" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
+            <shell:ApplicationBarIconButton x:Name="BtnTools3"  IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools" Click="BtnTools_Click"/>
 
         </shell:ApplicationBar>
 
@@ -88,9 +90,9 @@
                 <shell:ApplicationBarMenuItem Text="Über"/>
             </shell:ApplicationBar.MenuItems>
 
-            <shell:ApplicationBarIconButton x:Name="zoomOut"  IconUri="/Assets/AppBar/icon_zoom_out.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
-            <shell:ApplicationBarIconButton x:Name="zoomIn"  IconUri="/Assets/AppBar/icon_zoom_in.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
-            <shell:ApplicationBarIconButton x:Name="BtnTools4" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
+            <shell:ApplicationBarIconButton x:Name="BtnZoomOut"  IconUri="/Assets/AppBar/icon_zoom_out.png" IsEnabled="True" Text="Thickness" Click="BtnZoomOut_Click" />
+            <shell:ApplicationBarIconButton x:Name="BtnZoomIn"  IconUri="/Assets/AppBar/icon_zoom_in.png" IsEnabled="True" Text="Thickness" Click="BtnZoomIn_Click" />
+            <shell:ApplicationBarIconButton x:Name="BtnTools4"  IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools" Click="BtnTools_Click"/>
 
         </shell:ApplicationBar>
 
@@ -104,9 +106,9 @@
                 <shell:ApplicationBarMenuItem Text="Über"/>
             </shell:ApplicationBar.MenuItems>
 
-            <shell:ApplicationBarIconButton x:Name="zoomadjust"  IconUri="/Assets/AppBar/icon_menu_crop_adjust.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
-            <shell:ApplicationBarIconButton x:Name="cut"  IconUri="/Assets/AppBar/icon_menu_crop_cut.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
-            <shell:ApplicationBarIconButton x:Name="BtnTools5" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
+            <shell:ApplicationBarIconButton x:Name="zoomadjust"  IconUri="/Assets/AppBar/icon_menu_crop_adjust.png" IsEnabled="True" Text="Thickness"  />
+            <shell:ApplicationBarIconButton x:Name="cut"  IconUri="/Assets/AppBar/icon_menu_crop_cut.png" IsEnabled="True" Text="Thickness" />
+            <shell:ApplicationBarIconButton x:Name="BtnTools5"  IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools" Click="BtnTools_Click"/>
 
         </shell:ApplicationBar>
 
@@ -122,7 +124,7 @@
 
             <shell:ApplicationBarIconButton x:Name="BtnLeft"  IconUri="/Assets/AppBar/icon_menu_rotate_left.png" IsEnabled="True" Text="Thickness" Click="BtnLeft_OnClick" />
             <shell:ApplicationBarIconButton x:Name="BtnRight"  IconUri="/Assets/AppBar/icon_menu_rotate_right.png" IsEnabled="True" Text="Thickness" Click="BtnRight_OnClick" />
-            <shell:ApplicationBarIconButton x:Name="BtnTools6" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
+            <shell:ApplicationBarIconButton x:Name="BtnTools6"  IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools" Click="BtnTools_Click"/>
 
         </shell:ApplicationBar>
 
@@ -138,7 +140,7 @@
 
             <shell:ApplicationBarIconButton x:Name="BtnHorizontal"  IconUri="/Assets/AppBar/icon_menu_flip_horizontal.png" IsEnabled="True" Text="Thickness" Click="BtnHorizotal_OnClick" />
             <shell:ApplicationBarIconButton x:Name="BtnVertical"  IconUri="/Assets/AppBar/icon_menu_flip_vertical.png" IsEnabled="True" Text="Thickness" Click="BtnVertical_OnClick" />
-            <shell:ApplicationBarIconButton x:Name="BtnTools7" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
+            <shell:ApplicationBarIconButton x:Name="BtnTools7"  IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools" Click="BtnTools_Click"/>
 
         </shell:ApplicationBar>
 
@@ -189,10 +191,9 @@
             <appBar:ApplicationBarTop  x:Name="ApplicationBarTopX" />
 
         </StackPanel>
-
-        <Grid x:Name="PaintingAreaContentPanelGrid" Grid.Row="1" Margin="12,12,12,12" Background="Transparent">
-            <Grid x:Name="PaintingAreaCheckeredGrid" Margin="0" MouseEnter="PaintingAreaCheckeredGrid_MouseEnter">
-                <Grid.RenderTransformOrigin>0.5, 0.5</Grid.RenderTransformOrigin>
+        <!--<Grid x:Name="PaintingAreaContentPanelGrid" Width="auto" Height="auto" Grid.Row="1" Margin="0,0,0,0" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center"> -->
+            <Grid x:Name="PaintingAreaContentPanelGrid" Width="auto" Height="auto" Grid.Row="1" Margin="0,0,0,0" Background="Transparent" >
+            <Grid x:Name="PaintingAreaCheckeredGrid" Width="auto" Height="auto"  MouseEnter="PaintingAreaCheckeredGrid_MouseEnter">
                 <Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
                 </Grid.Background>
@@ -201,59 +202,60 @@
                 <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" >
                 </Canvas>
             </Grid>
+        </Grid>
 
-            <UserControl x:Name="SliderThicknessControl" Height="auto" Width="auto" >
-                <Grid x:Name="SliderThicknessGrid" Background="#1F1F1F" Visibility="Visible" MinHeight="120" VerticalAlignment="Bottom" RenderTransformOrigin="0.502,-0.04">
-                    <Slider x:Name="SliderThickness" Background="Black" Maximum="50"  Minimum="1" Margin="10,1,102,27" ValueChanged="SliderThickness_ValueChanged"/>
-                    <RadioButton x:Name="RoundRadioButton" Content="" HorizontalAlignment="Left"  Margin="23,60,0,-10"  VerticalAlignment="Top" Foreground="Black" Click="RoundRadioButon_OnClick" IsChecked="True" UseLayoutRounding="True" Background="Black" GroupName="BrushStyle"/>
-                    <RadioButton x:Name="SquareRadioButton" Content="" HorizontalAlignment="Left" Margin="172,60,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="SquareRadioButon_OnClick" GroupName="BrushStyle"/>
-                    <RadioButton x:Name="TriangleRadioButton" Content="" HorizontalAlignment="Left" Margin="323,60,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="TriangleRadioButon_OnClick" GroupName="BrushStyle"/>
+        <Grid x:Name="GridUserControl" Grid.Row="1" >
+            <UserControl x:Name="SliderThicknessControl" Height="auto" Width="auto" Visibility="Collapsed" VerticalAlignment="Bottom">
+                <Grid x:Name="SliderThicknessGrid" Background="#1F1F1F"  MinHeight="120">
+                <Slider x:Name="SliderThickness" Background="Black" Maximum="50"  Minimum="1" Margin="10,1,102,27" ValueChanged="SliderThickness_ValueChanged"/>
+                <RadioButton x:Name="RoundRadioButton" Content="" HorizontalAlignment="Left"  Margin="23,60,0,-10"  VerticalAlignment="Top" Foreground="Black" Click="RoundRadioButon_OnClick" IsChecked="True" UseLayoutRounding="True" Background="Black" GroupName="BrushStyle"/>
+                <RadioButton x:Name="SquareRadioButton" Content="" HorizontalAlignment="Left" Margin="172,60,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="SquareRadioButon_OnClick" GroupName="BrushStyle"/>
+                <RadioButton x:Name="TriangleRadioButton" Content="" HorizontalAlignment="Left" Margin="323,60,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="TriangleRadioButon_OnClick" GroupName="BrushStyle"/>
 
-                    <Button x:Name="btnSliderThickness" Content="0" HorizontalAlignment="Left" Height="72" Margin="377,-3,0,0" VerticalAlignment="Top" Width="75" Click="btnSliderThickness_Click"/>
+                <Button x:Name="btnBrushThickness" Content="0" HorizontalAlignment="Left" Height="72" Margin="377,-3,0,0" VerticalAlignment="Top" Width="75"/>
 
-                    <Button x:Name="RoundImage" BorderThickness="0"  HorizontalAlignment="Left" Height="80" Margin="70,57,0,0" VerticalAlignment="Top" Width="80" Click="RoundImage_Click">
-                        <Image Source="/Assets/ToolMenu/icon_menu_ellipse.png" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>
-                    </Button>
-                    <Button x:Name="SquareImage" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="220,57,0,0" VerticalAlignment="Top" Width="80" Click="SquareImage_Click">
-                        <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>
-                    </Button>
-                    <Button x:Name="TriangleImage" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="362,57,0,0" VerticalAlignment="Top" Width="90" Click="TriangleImage_Click">
-                        <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png"  HorizontalAlignment="Left" Height="40" Margin="367,74,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,0.5">
-                            <Image.RenderTransform>
-                                <CompositeTransform Rotation="45"/>
-                            </Image.RenderTransform>
-                        </Image>
-                    </Button>
-                    <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png"  HorizontalAlignment="Left" Height="40" Margin="389,74,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                <Button x:Name="RoundImage" BorderThickness="0"  HorizontalAlignment="Left" Height="80" Margin="70,57,0,0" VerticalAlignment="Top" Width="80" Click="RoundImage_Click">
+                    <Image Source="/Assets/ToolMenu/icon_menu_ellipse.png" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>
+                </Button>
+                <Button x:Name="SquareImage" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="220,57,0,0" VerticalAlignment="Top" Width="80" Click="SquareImage_Click">
+                    <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>
+                </Button>
+                <Button x:Name="TriangleImage" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="362,57,0,0" VerticalAlignment="Top" Width="90" Click="TriangleImage_Click">
+                    <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png"  HorizontalAlignment="Left" Height="40" Margin="367,74,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,0.5">
                         <Image.RenderTransform>
                             <CompositeTransform Rotation="45"/>
                         </Image.RenderTransform>
                     </Image>
-                    <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="58" Margin="23,66,0,0" VerticalAlignment="Top" Width="115"/>
-                    <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="58" Margin="173,66,0,0" VerticalAlignment="Top" Width="115"/>
-                    <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="58" Margin="323,66,0,0" VerticalAlignment="Top" Width="115"/>
-                </Grid>
-            </UserControl>
+                </Button>
+                <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png"  HorizontalAlignment="Left" Height="40" Margin="389,74,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                    <Image.RenderTransform>
+                        <CompositeTransform Rotation="45"/>
+                    </Image.RenderTransform>
+                </Image>
+                <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="58" Margin="23,66,0,0" VerticalAlignment="Top" Width="115"/>
+                <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="58" Margin="173,66,0,0" VerticalAlignment="Top" Width="115"/>
+                <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="58" Margin="323,66,0,0" VerticalAlignment="Top" Width="115"/>
+            </Grid>
+        </UserControl>
 
-            <UserControl x:Name="uctrlOwnKeyboard" Height="auto" Width="auto" Margin="0,10,0,-10" Visibility="Collapsed">
-                <Grid x:Name="grdOwnKeyboard" Background="#1F1F1F"  MinHeight="120" VerticalAlignment="Bottom" RenderTransformOrigin="0.502,-0.04" Height="298">
-                    <Button x:Name="btnValue0" Content="0" HorizontalAlignment="Left" Margin="326,202,0,-4" VerticalAlignment="Top" Height="100" Width="127" Click="ButtonNumbers_Click"/>
-                    <Button x:Name="btnValue1" Content="1" HorizontalAlignment="Left" Margin="10,-3,0,0" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click" />
-                    <Button x:Name="btnValue2" Content="2" HorizontalAlignment="Left" Margin="115,-3,0,0" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
-                    <Button x:Name="btnValue3" Content="3" HorizontalAlignment="Left" Margin="220,-3,0,0" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
-                    <Button x:Name="btnValue4" Content="4" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
-                    <Button x:Name="btnValue5" Content="5" HorizontalAlignment="Left" Margin="115,102,0,0" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
-                    <Button x:Name="btnValue6" Content="6" HorizontalAlignment="Left" Margin="220,102,0,0" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
-                    <Button x:Name="btnValue7" Content="7" HorizontalAlignment="Left" Margin="10,202,0,-4" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
-                    <Button x:Name="btnValue8" Content="8" HorizontalAlignment="Left" Margin="115,202,0,-4" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
-                    <Button x:Name="btnValue9" Content="9" HorizontalAlignment="Left" Margin="221,202,0,-4" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
-                    <Button x:Name="btnDeleteNumbers" Content="DEL" HorizontalAlignment="Left" Margin="325,103,0,0" VerticalAlignment="Top" Height="100" Width="127" Click="btnDeleteNumbers_Click"/>
-                    <Button x:Name="btnAccept" Content="Accept" HorizontalAlignment="Left" Margin="325,-3,0,0" VerticalAlignment="Top" Height="100" Width="127" Click="btnAccept_Click"/>
-                </Grid>
-            </UserControl>
+        <UserControl x:Name="uctrlOwnKeyboard" Height="auto" Width="auto" Margin="0,10,0,-10" Visibility="Collapsed">
+            <Grid x:Name="grdOwnKeyboard" Background="#1F1F1F"  MinHeight="120" VerticalAlignment="Bottom" RenderTransformOrigin="0.502,-0.04" Height="298">
+                <Button x:Name="btnValue0" Content="0" HorizontalAlignment="Left" Margin="326,202,0,-4" VerticalAlignment="Top" Height="100" Width="127" Click="ButtonNumbers_Click"/>
+                <Button x:Name="btnValue1" Content="1" HorizontalAlignment="Left" Margin="10,-3,0,0" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click" />
+                <Button x:Name="btnValue2" Content="2" HorizontalAlignment="Left" Margin="115,-3,0,0" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
+                <Button x:Name="btnValue3" Content="3" HorizontalAlignment="Left" Margin="220,-3,0,0" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
+                <Button x:Name="btnValue4" Content="4" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
+                <Button x:Name="btnValue5" Content="5" HorizontalAlignment="Left" Margin="115,102,0,0" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
+                <Button x:Name="btnValue6" Content="6" HorizontalAlignment="Left" Margin="220,102,0,0" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
+                <Button x:Name="btnValue7" Content="7" HorizontalAlignment="Left" Margin="10,202,0,-4" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
+                <Button x:Name="btnValue8" Content="8" HorizontalAlignment="Left" Margin="115,202,0,-4" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
+                <Button x:Name="btnValue9" Content="9" HorizontalAlignment="Left" Margin="221,202,0,-4" VerticalAlignment="Top" Height="100" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
+                <Button x:Name="btnDeleteNumbers" Content="DEL" HorizontalAlignment="Left" Margin="325,103,0,0" VerticalAlignment="Top" Height="100" Width="127" Click="btnDeleteNumbers_Click"/>
+                <Button x:Name="btnAccept" Content="Accept" HorizontalAlignment="Left" Margin="325,-3,0,0" VerticalAlignment="Top" Height="100" Width="127" Click="btnAccept_Click"/>
+            </Grid>
+        </UserControl>
+
         </Grid>
-
-
 
         <Grid x:Name="SpinnerGrid" Grid.Row="0" Visibility="Collapsed"  Grid.RowSpan="2"  Margin="12,12,12,12" Background="#FFB6B6B6" Opacity="0.7">
             <Image Grid.Row="0" Height="50" Source="/Assets/Spinner.png" Stretch="Uniform" Width="50" Canvas.ZIndex="100" Margin="10,10">

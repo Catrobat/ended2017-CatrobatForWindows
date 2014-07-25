@@ -4,6 +4,9 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Catrobat.Paint.Phone.Tool;
+using ImageTools;
+using System.Windows.Shapes;
+using System.Windows;
 
 namespace Catrobat.Paint.Phone.Controls.AppBar
 {
@@ -18,7 +21,7 @@ namespace Catrobat.Paint.Phone.Controls.AppBar
                 BtnSelectedColor.Background = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
                 PocketPaintApplication.GetInstance().PaintData.ColorChanged += ColorChangedHere;
                 PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
-
+                PocketPaintApplication.GetInstance().ApplicationBarTop = this;
 
                 BtnUndo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnUndo_Click;
                 BtnRedo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnRedo_Click;
@@ -34,7 +37,14 @@ namespace Catrobat.Paint.Phone.Controls.AppBar
         private void ColorChangedHere(SolidColorBrush color)
         {
             // System.Diagnostics.Debug.WriteLine("ColorChangedHere called: " + color.Color.ToString());
-            BtnSelectedColor.Background = color;
+            if(color.Color != Colors.Transparent)
+            {
+                BtnSelectedColor.Background = color;
+            }
+            else
+            {
+                BtnSelectedColor.Background = new SolidColorBrush(Colors.Transparent);
+            }
         }
 
         private void ToolChangedHere(ToolBase tool)
@@ -122,6 +132,23 @@ namespace Catrobat.Paint.Phone.Controls.AppBar
             }
         }
 
+        public void BtnSelectedColorVisible(bool enable)
+        {
+            BtnSelectedColor.IsEnabled = enable;
+            object ellipseTransparence = LayoutRoot.FindName("ellipseTransparence");
+            if(ellipseTransparence != null)
+            {
+                if (enable == true)
+                {
+                    ((Ellipse)ellipseTransparence).Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    ((Ellipse)ellipseTransparence).Visibility = Visibility.Collapsed;
+                };
+            }
+        }
+
         private Uri GetToolImageUri(ToolType tooltype)
         {
             switch (tooltype)
@@ -147,6 +174,9 @@ namespace Catrobat.Paint.Phone.Controls.AppBar
                     return null;
             }
         }
+
+
+ 
 
     }
 }

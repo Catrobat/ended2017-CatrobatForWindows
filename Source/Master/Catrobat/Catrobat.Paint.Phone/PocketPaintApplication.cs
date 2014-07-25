@@ -6,6 +6,7 @@ using Catrobat.Paint.Phone.Command;
 using Catrobat.Paint.Phone.Data;
 using Catrobat.Paint.Phone.Listener;
 using Catrobat.Paint.Phone.Tool;
+using Catrobat.Paint.Phone.View;
 
 namespace Catrobat.Paint.Phone
 {
@@ -26,6 +27,9 @@ namespace Catrobat.Paint.Phone
 
         public Grid PaintingAreaLayoutRoot { get; set; }
 
+        public PaintingAreaView PaintingAreaView { get; set; }
+
+        public Catrobat.Paint.Phone.Controls.AppBar.ApplicationBarTop ApplicationBarTop { get; set; }
         public Grid PaintingAreaContentPanelGrid { get; set; }
 
         public WriteableBitmap Bitmap { get; private set; }

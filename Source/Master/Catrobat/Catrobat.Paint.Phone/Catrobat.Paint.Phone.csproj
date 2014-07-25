@@ -215,6 +215,7 @@
     <Content Include="Assets\ToolMenu\icon_menu_stamp.png" />
     <Content Include="Assets\ToolMenu\icon_menu_straight_line.png" />
     <Content Include="Assets\ToolMenu\icon_menu_zoom.png" />
+    <Content Include="Assets\transparence.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
   </ItemGroup>

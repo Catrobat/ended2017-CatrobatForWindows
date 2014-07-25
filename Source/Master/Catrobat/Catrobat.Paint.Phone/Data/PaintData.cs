@@ -1,5 +1,6 @@
 ﻿using System.Windows.Media;
 using Catrobat.Paint.Phone.Tool;
+using System.Windows;
 
 namespace Catrobat.Paint.Phone.Data
 {
@@ -22,11 +23,11 @@ namespace Catrobat.Paint.Phone.Data
         public event ToolCurrentChangedEventHandler ToolCurrentChanged;
 
         private static SolidColorBrush _colorSelected = new SolidColorBrush(Colors.Black);
-        private int _thicknessSelected = 5;
+        private int _thicknessSelected = 20;
         private PenLineCap _capSelected = PenLineCap.Round;
         private ToolBase _toolCurrentSelected = new BrushTool();
-
-
+        public int max_right_left = 0;
+        public double min_max_resize = 0.0;
         public SolidColorBrush ColorSelected
         {
             get { return _colorSelected; }
@@ -102,5 +103,4 @@ namespace Catrobat.Paint.Phone.Data
             }
         }
     }
-
 }
