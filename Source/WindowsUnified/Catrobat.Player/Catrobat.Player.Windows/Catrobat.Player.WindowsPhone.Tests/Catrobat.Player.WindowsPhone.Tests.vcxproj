@@ -144,12 +144,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="TestHelper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BasicArithmeticalOperations.cpp" />
+    <ClCompile Include="ControlBricks.cpp" />
+    <ClCompile Include="FormulaFunctionTests.cpp" />
+    <ClCompile Include="FormulaSensorTests.cpp" />
+    <ClCompile Include="FormulaTreeTests.cpp" />
+    <ClCompile Include="IfLogicBeginBrick.cpp" />
+    <ClCompile Include="LogicOperations.cpp" />
+    <ClCompile Include="LookBricks.cpp" />
+    <ClCompile Include="MovementBricks.cpp" />
+    <ClCompile Include="TestHelper.cpp" />
     <ClCompile Include="unittest1.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="VariableBricks.cpp" />
+    <ClCompile Include="Variables.cpp" />
+    <ClCompile Include="XMLParserTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="CppUnitTestFramework, Version=12.0" />
