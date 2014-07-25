@@ -1056,9 +1056,6 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   <data name="Editor_Evaluate" xml:space="preserve">
     <value>Auswerten</value>
   </data>
-  <data name="Main_ButtonLoginRegister" xml:space="preserve">
-    <value>Einloggen / Registrieren</value>
-  </data>
   <data name="Main_ButtonRegister" xml:space="preserve">
     <value>Registrieren</value>
   </data>

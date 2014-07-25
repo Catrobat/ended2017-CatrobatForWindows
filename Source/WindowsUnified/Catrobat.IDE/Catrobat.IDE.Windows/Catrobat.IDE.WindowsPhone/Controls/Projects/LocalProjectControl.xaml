@@ -85,7 +85,7 @@
 		</Style>
 	</UserControl.Resources>
 
-  <Grid Margin="7" >
+  <Grid Margin="0 7 7 7" >
     <FlyoutPresenter Visibility="Collapsed">
       <MenuFlyout x:Name="MenuFlyoutLocalProjectOptions">
         <MenuFlyoutItem Text="{Binding Resources.Main_CopyProject, 
