@@ -269,6 +269,15 @@ namespace Catrobat.IDE.Core.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die http://catrob.at/tou ähnelt.
+        /// </summary>
+        public static string CATROBAT_TOU_URL {
+            get {
+                return ResourceManager.GetString("CATROBAT_TOU_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die http://www.catrobat.org/ ähnelt.
         /// </summary>
         public static string CATROBAT_URL {
@@ -319,15 +328,6 @@ namespace Catrobat.IDE.Core.Resources {
         public static string MIMETYPE {
             get {
                 return ResourceManager.GetString("MIMETYPE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die http://opensource.org/licenses/MS-RL ähnelt.
-        /// </summary>
-        public static string MS_RL_LICENSE_URL {
-            get {
-                return ResourceManager.GetString("MS_RL_LICENSE_URL", resourceCulture);
             }
         }
         

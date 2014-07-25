@@ -40,10 +40,16 @@ namespace Catrobat.IDE.Core.Tests.Misc
 
         internal static void InitializeTests()
         {
+            
             ServiceLocator.UnRegisterAll();
             ServiceLocator.Register<PlatformInformationHelperTests>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ResourceLoaderFactoryTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<StorageFactoryTest>(TypeCreationMode.Lazy);
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                storage.DeleteDirectory("");
+            }
         }
     }
 }

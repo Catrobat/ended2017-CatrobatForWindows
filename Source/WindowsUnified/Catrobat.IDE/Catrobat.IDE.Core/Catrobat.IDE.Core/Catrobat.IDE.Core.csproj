@@ -115,6 +115,8 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\Common\ProjectGeneratorWhackAMole.cs" />
+    <Compile Include="Services\IZipService.cs" />
+    <Compile Include="UI\Converters\StringVisibilityConverter.cs" />
     <Compile Include="UI\OnlineProjectsCollection.cs" />
     <Compile Include="UI\PortableUI\PortableFontStyle.cs" />
     <Compile Include="ViewModels\Editor\Formula\FormulaEvaluationResult.cs" />
@@ -201,6 +203,7 @@
     <Compile Include="Xml\Converter\XmlObjects\XmlSound.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlSprite.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlUserVariable.cs" />
+    <Compile Include="Xml\VersionConverter\Versions\CatrobatVersion092ToWin091.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\XmlBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\XmlBrickList.cs" />
     <Compile Include="CatrobatObjects\IAsyncCloneable.cs" />
@@ -436,7 +439,7 @@
     <Compile Include="Resources\Localization\LocalizedStrings.cs" />
     <Compile Include="Resources\SampleProjectLoader.cs" />
     <Compile Include="Services\Common\CatrobatWebCommunicationService.cs" />
-    <Compile Include="Services\Common\CatrobatZipService.cs" />
+    <Compile Include="Services\Common\ZipService.cs" />
     <Compile Include="Services\Common\ProjectImporterService.cs" />
     <Compile Include="UI\ImageDimension.cs" />
     <Compile Include="UI\PortableUI\PortableBrush.cs" />
@@ -489,7 +492,7 @@
     <Compile Include="Xml\VersionConverter\CatrobatVersionPair.cs" />
     <Compile Include="Xml\VersionConverter\CatrobatVersionPropertyRenameEntry.cs" />
     <Compile Include="Xml\VersionConverter\VersionConverterResult.cs" />
-    <Compile Include="Xml\VersionConverter\Versions\CatrobatVersion091ToWin091.cs" />
+    <Compile Include="Xml\VersionConverter\Versions\CatrobatVersion092To091.cs" />
     <Compile Include="Utilities\Helpers\XElementExtensions.cs" />
     <Compile Include="ViewModels\AsyncRelayCommand.cs" />
     <Compile Include="ViewModels\Editor\Costumes\ChangeCostumeViewModel.cs" />

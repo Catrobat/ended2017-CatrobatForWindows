@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             try
             {
-                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(projectZipStream, CatrobatContextBase.TempProjectImportPath);
+                await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(projectZipStream, CatrobatContextBase.TempProjectImportPath);
 
                 PortableImage projectScreenshot = null;
                 string projectCode = "";

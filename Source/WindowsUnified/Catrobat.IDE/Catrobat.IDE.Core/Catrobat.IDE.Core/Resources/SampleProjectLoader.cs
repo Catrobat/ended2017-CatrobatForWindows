@@ -47,7 +47,7 @@ namespace Catrobat.IDE.Core.Resources
                         {
                             if (!await storage.DirectoryExistsAsync(projectFolderPath))
                             {
-                                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContextBase.ProjectsPath + "/" + projectName);
+                                await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContextBase.ProjectsPath + "/" + projectName);
                             }
                         }
 

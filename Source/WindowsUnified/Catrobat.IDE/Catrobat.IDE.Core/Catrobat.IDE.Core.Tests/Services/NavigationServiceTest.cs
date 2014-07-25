@@ -68,12 +68,16 @@ namespace Catrobat.IDE.Core.Tests.Services
 
         public void NavigateBack(Type viewModelType)
         {
-            throw new NotImplementedException();
+            PageStackCount --;
+            CurrentNavigationType = NavigationType.NavigateBack;
+            CurrentView = null;
         }
 
         public void NavigateBack<T>()
         {
-            throw new NotImplementedException();
+            PageStackCount--;
+            CurrentNavigationType = NavigationType.NavigateBack;
+            CurrentView = null;
         }
     }
 }

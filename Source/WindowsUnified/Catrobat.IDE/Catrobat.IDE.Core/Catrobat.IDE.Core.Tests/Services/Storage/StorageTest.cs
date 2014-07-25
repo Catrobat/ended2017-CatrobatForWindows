@@ -29,7 +29,30 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
 
         public void CreateDirectory(string path)
         {
-            Directory.CreateDirectory(BasePath + path);
+            if (path == null)
+                throw new IOException("Path can not be null.");
+
+            if (path.EndsWith("/") || path.EndsWith("\\")) // Remove '/' at the end
+                path = Path.GetDirectoryName(path);
+
+            if (path.StartsWith("/") || path.StartsWith("\\")) // Remove '/' at the end
+                path = path.Substring(1, path.Length - 1);
+
+            var directoryPaths = new List<string>();
+
+            var tempPath = path;
+            while (!string.IsNullOrEmpty(tempPath))
+            {
+                directoryPaths.Add(tempPath);
+                tempPath = Path.GetDirectoryName(tempPath);
+            }
+
+            for (int i = directoryPaths.Count - 1; i >= 0; i--)
+            {
+                var parentPath = directoryPaths[i];
+                if (!Directory.Exists(Path.Combine(BasePath, parentPath)))
+                    Directory.CreateDirectory(Path.Combine(BasePath, parentPath));
+            }
         }
 
         public bool DirectoryExists(string path)
@@ -170,46 +193,46 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
                     break;
             }
 
+            FileStream fileStream = null;
+
             if (access == StorageFileAccess.Write || access == StorageFileAccess.ReadWrite)
                 switch (mode)
                 {
                     case StorageFileMode.Create:
                         {
-                            if (!Directory.Exists(BasePath + GetPath(path)))
-                                Directory.CreateDirectory(BasePath + GetPath(path));
-                            var file = File.Create(BasePath + path);
-                            file.Close();
+                            CreateDirectory(GetPath(path));
+                            fileStream = File.Create(BasePath + path);
                         }
                         break;
                     case StorageFileMode.CreateNew:
                         {
-                            if (!Directory.Exists(BasePath + GetPath(path)))
-                                Directory.CreateDirectory(BasePath + GetPath(path));
+                            CreateDirectory(GetPath(path));
                             if (!File.Exists(BasePath + path))
                             {
-                                var file = File.Create(BasePath + path);
-                                file.Close();
+                                fileStream = File.Create(BasePath + path);
                             }
                             else
-                                throw new IOException();
+                                throw new IOException("A file with the same name already exists");
                         }
                         break;
                     case StorageFileMode.OpenOrCreate:
                         {
-                            if (!Directory.Exists(BasePath + GetPath(path)))
-                                Directory.CreateDirectory(BasePath + GetPath(path));
+                            CreateDirectory(GetPath(path));
                             if (!File.Exists(BasePath + path))
                             {
-                                var file = File.Create(BasePath + path);
-                                file.Close();
+                                fileStream = File.Create(BasePath + path);
                             }
                         }
                         break;
                 }
 
-            var stream = File.Open(BasePath + path, fileMode, fileAccess);
-            _openedStreams.Add(stream);
-            return stream;
+
+            if (fileStream == null)
+                fileStream = File.Open(BasePath + path, fileMode, fileAccess);
+
+            _openedStreams.Add(fileStream);
+
+            return fileStream;
         }
 
         public void RenameDirectory(string directoryPath, string newDirectoryName)
@@ -274,7 +297,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
             }
         }
 
-        
+
 
         private string GetName(string path)
         {
@@ -299,7 +322,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
 
         public async void SaveImage(string path, PortableImage image, bool deleteExisting, ImageFormat format)
         {
-            if(deleteExisting && File.Exists(BasePath + path))
+            if (deleteExisting && File.Exists(BasePath + path))
                 File.Delete(BasePath + path);
 
             switch (format)
@@ -344,114 +367,114 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
         }
 
 
-        public Task CreateDirectoryAsync(string path)
+        public async Task CreateDirectoryAsync(string path)
         {
-            return Task.Run(() => CreateDirectory(path));
+            await Task.Run(() => CreateDirectory(path));
         }
 
-        public Task<bool> DirectoryExistsAsync(string path)
+        public async Task<bool> DirectoryExistsAsync(string path)
         {
-            return Task.Run(() => DirectoryExists(path));
+            return await Task.Run(() => DirectoryExists(path));
         }
 
-        public Task<bool> FileExistsAsync(string path)
+        public async Task<bool> FileExistsAsync(string path)
         {
-            return Task.Run(() => FileExists(path));
+            return await Task.Run(() => FileExists(path));
         }
 
-        public Task<string[]> GetDirectoryNamesAsync(string path)
+        public async Task<string[]> GetDirectoryNamesAsync(string path)
         {
-            return Task.Run(() => GetDirectoryNames(path));
+            return await Task.Run(() => GetDirectoryNames(path));
         }
 
-        public Task<string[]> GetFileNamesAsync(string path)
+        public async Task<string[]> GetFileNamesAsync(string path)
         {
-            return Task.Run(() => GetFileNames(path));
+            return await Task.Run(() => GetFileNames(path));
         }
 
-        public Task DeleteDirectoryAsync(string path)
+        public async Task DeleteDirectoryAsync(string path)
         {
-            return Task.Run(() => DeleteDirectory(path));
+            await Task.Run(() => DeleteDirectory(path));
         }
 
-        public Task DeleteFileAsync(string path)
+        public async Task DeleteFileAsync(string path)
         {
-            return Task.Run(() => DeleteFile(path));
+            await Task.Run(() => DeleteFile(path));
         }
 
-        public Task CopyDirectoryAsync(string sourcePath, string destinationPath)
+        public async Task CopyDirectoryAsync(string sourcePath, string destinationPath)
         {
-            return Task.Run(() => CopyDirectory(sourcePath, destinationPath));
+            await Task.Run(() => CopyDirectory(sourcePath, destinationPath));
         }
 
-        public Task MoveDirectoryAsync(string sourcePath, string destinationPath)
+        public async Task MoveDirectoryAsync(string sourcePath, string destinationPath)
         {
-            return Task.Run(() => MoveDirectory(sourcePath, destinationPath));
+            await Task.Run(() => MoveDirectory(sourcePath, destinationPath));
         }
 
-        public Task CopyFileAsync(string sourcePath, string destinationPath)
+        public async Task CopyFileAsync(string sourcePath, string destinationPath)
         {
-            return Task.Run(() => CopyFile(sourcePath, destinationPath));
+            await Task.Run(() => CopyFile(sourcePath, destinationPath));
         }
 
-        public Task MoveFileAsync(string sourcePath, string destinationPath)
+        public async Task MoveFileAsync(string sourcePath, string destinationPath)
         {
-            return Task.Run(() => MoveFile(sourcePath, destinationPath));
+            await Task.Run(() => MoveFile(sourcePath, destinationPath));
         }
 
-        public Task<Stream> OpenFileAsync(string path, StorageFileMode mode, StorageFileAccess access)
+        public async Task<Stream> OpenFileAsync(string path, StorageFileMode mode, StorageFileAccess access)
         {
-            return Task.Run(() => OpenFile(path, mode, access));
+            return await Task.Run(() => OpenFile(path, mode, access));
         }
 
-        public Task RenameDirectoryAsync(string directoryPath, string newDirectoryName)
+        public async Task RenameDirectoryAsync(string directoryPath, string newDirectoryName)
         {
-            return Task.Run(() => RenameDirectory(directoryPath, newDirectoryName));
+            await Task.Run(() => RenameDirectory(directoryPath, newDirectoryName));
         }
 
-        public Task<PortableImage> LoadImageAsync(string pathToImage)
+        public async Task<PortableImage> LoadImageAsync(string pathToImage)
         {
-            return Task.Run(() => LoadImage(pathToImage));
+            return await Task.Run(() => LoadImage(pathToImage));
         }
 
-        public Task<PortableImage> LoadImageThumbnailAsync(string pathToImage)
+        public async Task<PortableImage> LoadImageThumbnailAsync(string pathToImage)
         {
-            return Task.Run(() => LoadImageThumbnail(pathToImage));
+            return await Task.Run(() => LoadImageThumbnail(pathToImage));
         }
 
-        public Task<PortableImage> CreateThumbnailAsync(PortableImage image)
+        public async Task<PortableImage> CreateThumbnailAsync(PortableImage image)
         {
-            return Task.Run(() => CreateThumbnail(image));
+            return await Task.Run(() => CreateThumbnail(image));
         }
 
-        public Task DeleteImageAsync(string pathToImage)
+        public async Task DeleteImageAsync(string pathToImage)
         {
-            return Task.Run(() => DeleteImage(pathToImage));
+            await Task.Run(() => DeleteImage(pathToImage));
         }
 
-        public Task SaveImageAsync(string path, PortableImage image, bool deleteExisting, ImageFormat format)
+        public async Task SaveImageAsync(string path, PortableImage image, bool deleteExisting, ImageFormat format)
         {
-            return Task.Run(() => SaveImage(path, image, deleteExisting, format));
+            await Task.Run(() => SaveImage(path, image, deleteExisting, format));
         }
 
-        public Task<string> ReadTextFileAsync(string path)
+        public async Task<string> ReadTextFileAsync(string path)
         {
-            return Task.Run(() => ReadTextFile(path));
+            return await Task.Run(() => ReadTextFile(path));
         }
 
-        public Task WriteTextFileAsync(string path, string content)
+        public async Task WriteTextFileAsync(string path, string content)
         {
-            return Task.Run(() => WriteTextFile(path, content));
+            await Task.Run(() => WriteTextFile(path, content));
         }
 
-        public Task<object> ReadSerializableObjectAsync(string path, Type type)
+        public async Task<object> ReadSerializableObjectAsync(string path, Type type)
         {
-            return Task.Run(() => ReadSerializableObject(path, type));
+            return await Task.Run(() => ReadSerializableObject(path, type));
         }
 
-        public Task WriteSerializableObjectAsync(string path, object serializableObject)
+        public async Task WriteSerializableObjectAsync(string path, object serializableObject)
         {
-            return Task.Run(() => WriteSerializableObject(path, serializableObject));
+            await Task.Run(() => WriteSerializableObject(path, serializableObject));
         }
 
         #endregion

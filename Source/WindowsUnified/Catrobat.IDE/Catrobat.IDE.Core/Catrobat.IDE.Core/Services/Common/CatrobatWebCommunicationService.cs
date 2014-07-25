@@ -31,7 +31,6 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 //http_client.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
                 http_client.BaseAddress = new Uri("https://pocketcode.org/api/");
-                //https://catroid-test.catrob.at/api/
                 //http_client.DefaultRequestHeaders.Accept.Clear();
                 //http_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
@@ -105,9 +104,8 @@ namespace Catrobat.IDE.Core.Services.Common
                             counter++;
                         }
                         projectName = projectName + countString;
-                        await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(http_stream,
-                                                                            CatrobatContextBase.ProjectsPath + "/" +
-                                                                            projectName);
+                        await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
+                            http_stream, CatrobatContextBase.ProjectsPath + "/" + projectName);
                     }
                     var result = await CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, true);
                     CatrobatVersionConverter.VersionConverterError error = result.Error;
@@ -219,14 +217,14 @@ namespace Catrobat.IDE.Core.Services.Common
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
             };
 
-            using (MultipartFormDataContent post_parameters = new MultipartFormDataContent())
+            using (var post_parameters = new MultipartFormDataContent())
             {
-                using (MemoryStream stream = new MemoryStream())
+                using (var stream = new MemoryStream())
                 {
                     JSONStatusResponse status_response = null;
                     try
                     {
-                        await CatrobatZipService.ZipCatrobatPackage(stream, CatrobatContextBase.ProjectsPath + "/" + projectTitle);
+                        await ServiceLocator.ZipService.ZipCatrobatPackage(stream, CatrobatContextBase.ProjectsPath + "/" + projectTitle);
                         Byte[] project_data = stream.ToArray();
 
                         parameters.Add(new KeyValuePair<string, string>(ApplicationResources.API_PARAM_CHECKSUM, UtilTokenHelper.ToHex(MD5Core.GetHash(project_data))));
@@ -292,8 +290,8 @@ namespace Catrobat.IDE.Core.Services.Common
             HttpContent post_parameters = new FormUrlEncodedContent(parameters);
             using (var http_client = new HttpClient())
             {
-                http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
-                //http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
+                //http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
                 JSONStatusResponse status_response = null;
                 try
                 {
@@ -333,8 +331,8 @@ namespace Catrobat.IDE.Core.Services.Common
             HttpContent post_parameters = new FormUrlEncodedContent(parameters);
             using (var http_client = new HttpClient())
             {
-                http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
-                //http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
+                //http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
                 JSONStatusResponse status_response = null;
                 try
                 {
@@ -376,8 +374,8 @@ namespace Catrobat.IDE.Core.Services.Common
             HttpContent post_parameters = new FormUrlEncodedContent(parameters);
             using (var http_client = new HttpClient())
             {
-                http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
-                //http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
+                //http_client.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                http_client.BaseAddress = new Uri("https://catroid-test.catrob.at");
                 JSONStatusResponse status_response = null;
                 try
                 {

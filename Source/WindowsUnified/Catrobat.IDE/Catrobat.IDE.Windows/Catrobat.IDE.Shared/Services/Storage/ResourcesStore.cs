@@ -78,6 +78,8 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
 
         public Task<PortableImage> LoadImageAsync(ResourceScope resourceScope, string path)
         {
+            return new Task<PortableImage>(()=> new PortableImage(0,0));
+
             throw new NotImplementedException();
 
             //if (resourceScope != ResourceScope.IdePhone)

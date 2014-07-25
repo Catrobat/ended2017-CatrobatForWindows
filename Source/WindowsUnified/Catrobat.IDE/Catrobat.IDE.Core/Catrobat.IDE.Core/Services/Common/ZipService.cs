@@ -9,11 +9,41 @@ using System.Threading.Tasks;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
-    public static class CatrobatZipService
+    public class ZipService : IZipService
     {
-        public static async Task UnzipCatrobatPackageIntoIsolatedStorage(Stream zipStream, string localStoragePath)
+        public async Task UnzipCatrobatPackageIntoIsolatedStorage(Stream zipStream, string localStoragePath)
         {
-            throw new NotImplementedException();
+            using (var storage = StorageSystem.GetStorage())
+            {
+                using (var archive = new ZipArchive(zipStream, ZipArchiveMode.Read))
+                {
+                    foreach (var entry in archive.Entries)
+                    {
+                        using (var stream = entry.Open())
+                        {
+                            if (Path.GetExtension(entry.Name) == ".nomedia")
+                                continue;
+
+                            var filePath = Path.Combine(localStoragePath, entry.FullName);
+
+
+                            if (Path.GetFileName(filePath) == "") continue;
+                            
+                            var outStream = await storage.OpenFileAsync(filePath, 
+                                StorageFileMode.CreateNew, StorageFileAccess.Write);
+                            
+                            await stream.CopyToAsync(outStream);
+                            outStream.Dispose();
+                            stream.Dispose();
+                        }
+                    }
+                }
+            }
+
+
+
+
+
             //if (zipStream != null)
             //{
             //    var reader = ReaderFactory.Open(zipStream);
@@ -45,7 +75,7 @@ namespace Catrobat.IDE.Core.Services.Common
             //}
         }
 
-        public static async Task ZipCatrobatPackage(Stream zipStream, string localStoragePath)
+        public async Task ZipCatrobatPackage(Stream zipStream, string localStoragePath)
         {
             using (var storage = StorageSystem.GetStorage())
             {
@@ -56,7 +86,7 @@ namespace Catrobat.IDE.Core.Services.Common
             }
         }
 
-        private static async Task WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage,
+        private async Task WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage,
             string sourceBasePath, string destinationBasePath)
         {
             try

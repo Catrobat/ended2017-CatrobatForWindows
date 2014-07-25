@@ -26,14 +26,16 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
                     projectPath = "Core/";
                     break;
                 case ResourceScope.TestCommon:
-                    projectPath = "Catrobat.IDE.Tests/";
+                    projectPath = "Catrobat.IDE.Core/Catrobat.IDE.Core.Tests";
 
+                    var path = Path.Combine(basePath, projectPath, "SampleData");
                     // testing on TFS
-                    if (!Directory.Exists(basePath + "/" + projectPath + "SampleData"))
+                    if (!Directory.Exists(path))
                     {
                         projectPath += "Binaries/";
-                        if (!Directory.Exists(basePath + "/" + projectPath + "SampleData"))
-                            Assert.Fail("Directory \"" + basePath + "/" + projectPath + "SampleData" + "\" does not exist"); // for TFS debugging only
+                        if (!Directory.Exists(Path.Combine(basePath, projectPath, "SampleData")))
+                            Assert.Fail("Directory \"" + basePath + "/" + 
+                                projectPath + "SampleData" + "\" does not exist"); // for TFS debugging only
                     }
 
                     break;
@@ -45,7 +47,8 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
                     throw new ArgumentOutOfRangeException("project");
             }
 
-            Stream stream = File.Open(basePath + projectPath + uri, FileMode.Open, FileAccess.Read);
+            Stream stream = File.Open(Path.Combine(basePath, projectPath, uri), 
+                FileMode.Open, FileAccess.Read);
             _openedStreams.Add(stream);
             return stream;
         }

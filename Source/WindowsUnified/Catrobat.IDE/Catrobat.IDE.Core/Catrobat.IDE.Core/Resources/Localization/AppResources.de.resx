@@ -414,9 +414,6 @@
   <data name="Editor_PivotSounds" xml:space="preserve">
     <value>Klänge</value>
   </data>
-  <data name="Editor_ProjectName" xml:space="preserve">
-    <value>Name des Programms</value>
-  </data>
   <data name="Editor_Recorder" xml:space="preserve">
     <value>Recorder</value>
   </data>
@@ -541,7 +538,9 @@
     <value>Transparenz</value>
   </data>
   <data name="Main_AboutText" xml:space="preserve">
-    <value>Catrobat für Windows ist eine Entwicklungsumgebung für die grafische Programmiersprache Catrobat, inspiriert vom Scratch Projekt des MIT. Es wird am Institut für Software Technologie an der Technischen Universität Graz in Österreich entwickelt. Dieses Programm steht unter der MS-RL Lizenz.</value>
+    <value>Pocket Code ist eine Entwicklungsumgebung und ein Interpreter für Windows Phone Endgeräte für die grafische Programmiersprache Catrobat.
+
+Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz. Genauere Details sind über die nachstehenden Links einsehbar.</value>
   </data>
   <data name="Main_ActiveProject" xml:space="preserve">
     <value>AKTIV</value>
@@ -621,9 +620,6 @@
   <data name="Main_NoUploadsPending" xml:space="preserve">
     <value>Alle Uploads wurden abgeschlossen.</value>
   </data>
-  <data name="Main_OnlineProjectDescription" xml:space="preserve">
-    <value>Beschreibung:</value>
-  </data>
   <data name="Main_OnlineProjectDownloadButton" xml:space="preserve">
     <value>Herunterladen</value>
   </data>
@@ -636,9 +632,6 @@
   <data name="Main_OnlineProjectListBoxLoadMore" xml:space="preserve">
     <value>Mehr laden...</value>
   </data>
-  <data name="Main_OnlineProjectProject" xml:space="preserve">
-    <value>Programm:</value>
-  </data>
   <data name="Main_OnlineProjectReportButton" xml:space="preserve">
     <value>Als unangemessen melden</value>
   </data>
@@ -646,7 +639,7 @@
     <value>Statistiken:</value>
   </data>
   <data name="Main_OnlineProjectUploaded" xml:space="preserve">
-    <value>Hochgeladen</value>
+    <value>Hochgeladen:</value>
   </data>
   <data name="Main_OnlineProjectUploadedBy" xml:space="preserve">
     <value>{0} von:</value>
@@ -661,7 +654,7 @@
     <value>Programm existiert nicht.</value>
   </data>
   <data name="Main_ProjectName" xml:space="preserve">
-    <value>Name des Programms</value>
+    <value>Name des Programms:</value>
   </data>
   <data name="Main_ProjectNotValid" xml:space="preserve">
     <value>Programm ist ungültig.</value>
@@ -701,12 +694,6 @@
   </data>
   <data name="Main_UploadProjectPassword" xml:space="preserve">
     <value>Passwort:</value>
-  </data>
-  <data name="Main_UploadProjectProjectDescription" xml:space="preserve">
-    <value>Beschreibung:</value>
-  </data>
-  <data name="Main_UploadProjectProjectName" xml:space="preserve">
-    <value>Programm:</value>
   </data>
   <data name="Main_UploadProjectRegistrationSucessful" xml:space="preserve">
     <value>Registrierung erfolgreich!</value>
@@ -752,9 +739,6 @@
   </data>
   <data name="Brick_CategoryVariables" xml:space="preserve">
     <value>Variablen</value>
-  </data>
-  <data name="Editor_Description" xml:space="preserve">
-    <value>Beschreibung</value>
   </data>
   <data name="Main_PinProjectToStart" xml:space="preserve">
     <value>An Start anheften</value>
@@ -1187,10 +1171,7 @@
     <value>Über Catrobat</value>
   </data>
   <data name="Main_AboutLicense" xml:space="preserve">
-    <value>Lizenzen des Catrobat-Systems</value>
-  </data>
-  <data name="Main_AboutMSRL" xml:space="preserve">
-    <value>Microsoft Reciprocal License</value>
+    <value>Pocket Code Source Code Lizenzen</value>
   </data>
   <data name="Main_TextBoxLimit" xml:space="preserve">
     <value>60</value>
@@ -1221,5 +1202,23 @@
   </data>
   <data name="Main_NoScreenshot" xml:space="preserve">
     <value>Kein Screenshot</value>
+  </data>
+  <data name="Main_TermsOfUse" xml:space="preserve">
+    <value>Nutzungsbedingungen</value>
+  </data>
+  <data name="Main_TermsOfUseText" xml:space="preserve">
+    <value>Um Pocket Code, und andere Anwendungen die vom Catrobat-Projekt angeboten werden, nutzen zu dürfen, musst du unseren Nutzungsbedingungen zustimmen. Die Nutzungsbedingungen sind strikt zu befolgen, wenn du Pocket Code oder eine unserer anderen Anwendungen verwendest. Die nachstehenden Links verweisen auf die genauen Formulierungen der Nutzungsbedingungen.</value>
+  </data>
+  <data name="Main_ProjectDescription" xml:space="preserve">
+    <value>Beschreibung:</value>
+  </data>
+  <data name="Main_TitleCurrentProject" xml:space="preserve">
+    <value>AKTUELLES PROGRAMM</value>
+  </data>
+  <data name="Main_ProjectSettings" xml:space="preserve">
+    <value>Programm Einstellungen</value>
+  </data>
+  <data name="Main_ProjectNoDescription" xml:space="preserve">
+    <value>Keine Beschreibung verfügbar.</value>
   </data>
 </root>

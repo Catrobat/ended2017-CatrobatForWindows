@@ -80,9 +80,6 @@
                 TextChanged="FilterTextBox_TextChanged" 
                 KeyDown="FilterTextBox_KeyDown"
                 />
-              
-              
-
 
               <ListView Name="ListViewOnlineProjects" Grid.Row="1"
                 ItemsSource="{Binding OnlineProjects}" 
@@ -91,18 +88,18 @@
                 SelectedItem="{Binding SelectedOnlineProject, Mode=TwoWay}" 
                 SelectionMode="None"
                 IsItemClickEnabled="true" 
-                ItemClick="ListViewOnlineProjects_ItemClick"
-                >
+                ItemClick="ListViewOnlineProjects_ItemClick">
+                <!--Margin="5 5 10 5"-->
                 <ListView.ItemTemplate>
                   <DataTemplate>
-                    <Grid Margin="10 5 10 5"  
+                    <Grid Margin="0 5 0 5"  
                       Background="#FF99AACC"
                       DataContext="{Binding}">
                       <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                       </Grid.RowDefinitions>
-                      <TextBlock Grid.Row="0" Margin="15 0 5 0"
+                      <TextBlock Grid.Row="0" Margin="10 0 5 0"
                         Text="{Binding ProjectName}"
                         FontSize="32"
                         Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
@@ -112,14 +109,25 @@
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Image Margin="10 5 5 5"
+                        <Image Margin="10 5 0 10"
                           Grid.Column="0" 
                           Source="{Binding ScreenshotSmall}"
                           VerticalAlignment="Stretch"
                           Stretch="UniformToFill"
                           Width="100" Height="100" />
-                        <TextBlock Grid.Column="1" Margin="15 0 5 0" 
+                        <StackPanel Grid.Column="1" Margin="10 0 5 0" 
+                           Visibility="{Binding Description, 
+                           Converter={StaticResource StringVisibilityConverter}}">
+                           <TextBlock Text="{Binding Resources.Main_ProjectNoDescription, 
+                                      Source={StaticResource LocalizedStrings}}" 
+                                      TextTrimming="WordEllipsis" TextWrapping="Wrap"
+                                      Style="{Binding StaticTheme.TextSubtleStyle.NativeStyle, 
+                                      Source={StaticResource ThemeChooser}}" 
+                                      Foreground="#FFEEEEEE"/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="1" Margin="10 0 5 0" 
                           Text="{Binding Description}"
+                          TextTrimming="WordEllipsis" TextWrapping="Wrap"
                           Style="{Binding StaticTheme.TextSubtleStyle.NativeStyle, 
                           Source={StaticResource ThemeChooser}}" 
                           Foreground="#FFEEEEEE"/>
@@ -134,7 +142,7 @@
                   </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.Footer>
-                  <Grid Margin="10 5 10 5" Height="35" 
+                  <Grid Margin="0 5 0 5" Height="35" 
                     Background="#FF667799"
                     Visibility="{Binding OnlineProjects, 
                     Converter={StaticResource NullVisibilityConverter}}"
@@ -146,8 +154,7 @@
                       Converter={StaticResource BoolVisibilityConverter}}">
                       <!--Opacity="{Binding OnlineProjects.IsLoading, 
                       Converter={StaticResource BoolOpacityConverter}}"-->
-                      
-                      
+                    
                       <statusIcons:ProcessIcon Margin="0 0 5 0" 
                         IsProcessing="{Binding OnlineProjects.IsLoading}" />
                       <TextBlock Foreground="White"
@@ -191,7 +198,6 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto" MinHeight="52"/>
                 <RowDefinition Height="Auto" MinHeight="52"/>
-                <RowDefinition Height="Auto" MinHeight="52"/>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
               </Grid.RowDefinitions>
@@ -212,12 +218,60 @@
                 Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, 
                 Source={StaticResource ThemeChooser}}" NavigateUri="" 
                 Command="{Binding AboutCommand}"/>
-              <HyperlinkButton Grid.Row="4" FontSize="20"
-                Content="{Binding Resources.Main_AboutMSRL, 
-                Source={StaticResource LocalizedStrings}}"
+
+              <Grid Grid.Row="6">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right" 
+                  VerticalAlignment="Bottom" Orientation="Vertical">
+                  <TextBlock Style="{Binding StaticTheme.TextSubtleStyle.NativeStyle, 
+                    Source={StaticResource ThemeChooser}}" 
+                    Text="{Binding ApplicationVersionName}" 
+                    Margin="10 10 0 10" TextWrapping="Wrap"  />
+                </StackPanel>
+              </Grid>
+            </Grid>
+          </DataTemplate>
+        </HubSection.ContentTemplate>
+      </HubSection>
+
+      <HubSection Name="HubSectionTermsOfUse">
+        <HubSection.Header>
+          <TextBlock Text="{Binding Resources.Main_TermsOfUse, 
+            Source={StaticResource LocalizedStrings}}" 
+            Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
+            Source={StaticResource ThemeChooser}}"/>
+        </HubSection.Header>
+        <HubSection.ContentTemplate>
+          <DataTemplate>
+            <Grid Margin="0 -26 0 0">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto" MinHeight="52"/>
+                <RowDefinition Height="Auto" MinHeight="52"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+              </Grid.RowDefinitions>
+              <TextBlock FontSize="20" Margin="0 0 0 0" 
+                TextWrapping="Wrap" TextAlignment="Justify"
+                Text="{Binding Resources.Main_TermsOfUseText, 
+                Source={StaticResource LocalizedStrings}}" 
+                />
+              <HyperlinkButton Grid.Row="2" FontSize="20"
+                Content="{Binding Resources.Main_TermsOfUse, 
+                Source={StaticResource LocalizedStrings}}" 
                 Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, 
                 Source={StaticResource ThemeChooser}}" NavigateUri="" 
-                Command="{Binding MSRLCommand}"/>
+                Command="{Binding TouCommand}"/>
+              <HyperlinkButton Grid.Row="3" FontSize="20"
+                Content="{Binding Resources.Main_AboutCatrobat, 
+                Source={StaticResource LocalizedStrings}}" 
+                Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, 
+                Source={StaticResource ThemeChooser}}" NavigateUri="" 
+                Command="{Binding AboutCommand}"/>
 
               <Grid Grid.Row="6">
                 <Grid.ColumnDefinitions>

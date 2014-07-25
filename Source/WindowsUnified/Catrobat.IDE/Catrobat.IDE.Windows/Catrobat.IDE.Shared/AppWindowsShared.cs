@@ -46,6 +46,7 @@ namespace Catrobat.IDE.WindowsShared
             ServiceLocator.Register<SoundServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ActionTemplateServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SensorServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ZipService>(TypeCreationMode.Lazy);
 
             ServiceLocator.ViewModelLocator = new ViewModelLocator();
             ServiceLocator.ViewModelLocator.RegisterViewModels();

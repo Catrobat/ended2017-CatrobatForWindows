@@ -6,6 +6,7 @@
 
   <converters:NoScreenshotConverterBootstrap x:Key="NoScreenshotConverter" />
   <converters:BoolVisibilityConverterBootstrap x:Key="BoolVisibilityConverter"/>
+  <converters:StringVisibilityConverterBootstrap x:Key="StringVisibilityConverter"/>
   <converters:BoolOpacityConverterBootstrap x:Key="BoolOpacityConverter"/>
   <converters:IntPixelConverterBootstrap x:Key="IntPixelConverter"/>
   <converters:NullIntCountConverterBootstrap x:Key="NullIntCountConverter"/>
