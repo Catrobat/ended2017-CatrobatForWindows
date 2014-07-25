@@ -12,57 +12,54 @@ namespace Catrobat.Paint.Phone.Listener
 {
     class PaintingAreaManipulationListener 
     {
-        public void ManipulationStarted(object sender, ManipulationStartedEventArgs e)
+        public void ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
-            //var point = new Point(Convert.ToInt32(e.Position.X), Convert.ToInt32(e.Position.Y));
+            var point = new Point(Convert.ToInt32(e.Position.X), Convert.ToInt32(e.Position.Y));
             // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
-           // if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive ) // TODO: e.Handled
+            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled )
             {
                 return;
             }
             
-            //PocketPaintApplication.GetInstance().ToolCurrent.HandleDown(point);
+            PocketPaintApplication.GetInstance().ToolCurrent.HandleDown(point);
         }
 
-        public void ManipulationDelta(object sender, ManipulationDelta e)
+        public void ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            var point = new Point(Convert.ToInt32(e.Translation.X), Convert.ToInt32(e.Translation.Y));
+            var point = new Point(Convert.ToInt32(e.Position.X), Convert.ToInt32(e.Position.Y));
 
             // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
-            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive) // TODO: || e.Handled
+            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled) 
             {
                 return;
             }
 
 
             object movezoom;
-            // TODO: if (e.PinchManipulation != null)
+            /* TODO: if (PinchManipulation != null)
             {
 
                 movezoom = new ScaleTransform();
-                // TODO: if (e.DeltaManipulation.Scale.X > 0 && e.DeltaManipulation.Scale.Y > 0)
+                if (e.Delta.Scale > 0)
                 {
-                    // TODO: System.Diagnostics.Debug.WriteLine("Scale.X " + e.DeltaManipulation.Scale.X + " Scale.Y " +
-                    // TODO:                                e.DeltaManipulation.Scale.Y);
-                    // TODO: ((ScaleTransform)movezoom).ScaleX *= e.DeltaManipulation.Scale.X;
-                    // TODO: ((ScaleTransform)movezoom).ScaleY *= e.DeltaManipulation.Scale.Y;
+                    System.Diagnostics.Debug.WriteLine("Scale " + e.Delta.Scale);
+                     ((ScaleTransform)movezoom).ScaleX *= e.Delta.Scale;
+                     ((ScaleTransform)movezoom).ScaleY *= e.Delta.Scale;
                 }
             }
-            // TODO: else
+            else
             {
                 movezoom = new TranslateTransform();
-                // TODO: int right_left = PocketPaintApplication.GetInstance().PaintData.max_right_left;
-                // TODO: int difference = right_left + Convert.ToInt32(e.DeltaManipulation.Translation.X);
+                int right_left = PocketPaintApplication.GetInstance().PaintData.max_right_left;
+                int difference = right_left + Convert.ToInt32(e.Delta.Translation.X);
 
                 bool move_allowed = false;
                 int move_x = 0;
-
-
-
-                    /*((TranslateTransform)movezoom).X += Convert.ToInt32(e.DeltaManipulation.Translation.X);
-                    ((TranslateTransform)movezoom).Y += e.DeltaManipulation.Translation.Y;
-                    PocketPaintApplication.GetInstance().PaintData.max_right_left = PocketPaintApplication.GetInstance().PaintData.max_right_left + Convert.ToInt32(e.DeltaManipulation.Translation.X);*/
-            }
+                
+                ((TranslateTransform)movezoom).X += Convert.ToInt32(e.Delta.Translation.X);
+                ((TranslateTransform)movezoom).Y += e.Delta.Translation.Y;
+                PocketPaintApplication.GetInstance().PaintData.max_right_left = PocketPaintApplication.GetInstance().PaintData.max_right_left + Convert.ToInt32(e.Delta.Translation.X);
+            }*/
 
             switch (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType())
             {
@@ -72,16 +69,16 @@ namespace Catrobat.Paint.Phone.Listener
                     break;
                case ToolType.Move:
                case ToolType.Zoom:
-                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(movezoom);
+                    // TODO: PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(movezoom);
                     break;
                case ToolType.Line:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
                     break;
             }
         }
-       
 
-        public void ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
+
+        public void ManipulationCompleted(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             var point = new Point(Convert.ToInt32(e.Position.X), Convert.ToInt32(e.Position.Y));
 

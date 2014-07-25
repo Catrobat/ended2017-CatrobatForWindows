@@ -49,10 +49,10 @@ namespace Catrobat.Paint.WindowsPhone.View
             Spinner.SpinnerGrid = SpinnerGrid;
             // TODO: Spinner.SpinnerStoryboard = SpinningStoryboard;
 
-            // TODO: PaintingAreaCheckeredGrid.ManipulationStarted += Catrobat.Paint.Phone.Listener.PaintingAreaManipulationListener.ManipulationStarted;
-            // TODO: PaintingAreaCheckeredGrid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
-            // TODO: PaintingAreaCheckeredGrid.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
-            // PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
+            PaintingAreaCheckeredGrid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
+            PaintingAreaCheckeredGrid.ManipulationDelta += PaintingAreaCheckeredGrid_ManipulationDelta;
+            PaintingAreaCheckeredGrid.ManipulationCompleted += PaintingAreaCheckeredGrid_ManipulationCompleted;
+            PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += PaintData_ToolCurrentChanged;
             // TODO: SliderThickness.ValueChanged += PocketPaintApplication.GetInstance().ApplicationBarListener.SliderThickness_ValueChanged;
             // TODO: SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
             //BtnThickness.Click += BtnThickness_Click;
@@ -63,6 +63,26 @@ namespace Catrobat.Paint.WindowsPhone.View
             //BtnZoomIn.Click += BtnZoomIn_Click;
             //BtnZoomOut.Click += BtnZoomOut_Click;
             // TODO: UndoRedoActionbarManager.GetInstance().ApplicationBarTop = ApplicationBarTopX;
+        }
+
+        void PaintData_ToolCurrentChanged(Phone.Tool.ToolBase tool)
+        {
+            throw new NotImplementedException();
+        }
+
+        void PaintingAreaCheckeredGrid_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        void PaintingAreaCheckeredGrid_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        void PaintingAreaCheckeredGrid_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
