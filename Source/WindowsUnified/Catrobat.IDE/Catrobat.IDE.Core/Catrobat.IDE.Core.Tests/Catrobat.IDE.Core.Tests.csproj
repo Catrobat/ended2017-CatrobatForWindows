@@ -125,6 +125,8 @@
     <Compile Include="Tests\Data\XPathHelperTests.cs" />
     <Compile Include="Tests\IDE\CloneableTests.cs" />
     <Compile Include="Tests\IDE\Converter\BoolPlayButtonStateConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\UnixTimeDateTimeConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\StringVisibilityConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\BoolVisibilityConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\BoolVisibilityNegativeConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\DoubleStringConverterTests.cs" />

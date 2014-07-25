@@ -158,7 +158,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #endregion
         public UploadProjectRegisterViewModel()
         {
-            // Commands
             RegisterCommand = new RelayCommand(RegisterAction);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,

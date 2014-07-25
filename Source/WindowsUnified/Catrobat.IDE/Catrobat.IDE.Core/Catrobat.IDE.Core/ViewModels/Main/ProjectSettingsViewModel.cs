@@ -10,7 +10,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     {
         #region Private Members
 
-        private Project _selectedProject;
         private ProjectDummyHeader _selectedProjectHeader;
         private string _projectName;
         private string _projectDescription;
@@ -73,6 +72,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region Commands
 
+        public RelayCommand InitializeCommand { get; private set; }
+
         public RelayCommand SaveCommand { get; private set; }
 
         public RelayCommand CancelCommand { get; private set; }
@@ -89,6 +90,20 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         #endregion
 
         #region Actions
+
+        private void InitializeAction()
+        {
+            if (CurrentProject != null)
+            {
+                ProjectName = CurrentProject.Name;
+                ProjectDescription = CurrentProject.Description;
+            }
+            else
+            {
+                ProjectName = "";
+                ProjectDescription = "";
+            }
+        }
 
         private async void SaveAction()
         {
@@ -152,6 +167,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public ProjectSettingsViewModel()
         {
+            InitializeCommand = new RelayCommand(InitializeAction);
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 

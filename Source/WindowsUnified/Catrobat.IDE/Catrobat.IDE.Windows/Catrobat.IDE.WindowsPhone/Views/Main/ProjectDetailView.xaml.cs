@@ -12,15 +12,5 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         {
             InitializeComponent();
         }
-
-        //private void TextBoxProjectName_OnTextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    _viewModel.ProjectName = TextBoxProjectName.Text;
-        //}
-
-        //private void TextBoxProjectDescription_OnTextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    _viewModel.ProjectDescription = TextBoxProjectDescription.Text;
-        //}
     }
 }

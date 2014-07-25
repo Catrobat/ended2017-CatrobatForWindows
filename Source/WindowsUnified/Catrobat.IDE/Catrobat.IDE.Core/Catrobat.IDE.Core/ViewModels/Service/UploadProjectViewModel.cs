@@ -103,6 +103,20 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #endregion
 
         #region Actions
+        private void InitializeAction()
+        {
+            if (CurrentProject != null)
+            {
+                ProjectName = CurrentProject.Name;
+                ProjectDescription = CurrentProject.Description;
+            }
+            else
+            {
+                ProjectName = "";
+                ProjectDescription = "";
+            }
+        }
+
         private async void UploadAction()
         {
             await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
@@ -193,6 +207,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public UploadProjectViewModel()
         {
+            InitializeCommand = new RelayCommand(InitializeAction);
             UploadCommand = new RelayCommand(UploadAction, UploadCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
             ChangeUserCommand = new RelayCommand(ChangeUserAction);

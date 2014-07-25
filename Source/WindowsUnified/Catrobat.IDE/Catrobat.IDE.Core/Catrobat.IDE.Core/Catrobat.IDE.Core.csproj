@@ -117,6 +117,7 @@
     <Compile Include="Services\Common\ProjectGeneratorWhackAMole.cs" />
     <Compile Include="Services\IWebCommunicationService.cs" />
     <Compile Include="Services\IZipService.cs" />
+    <Compile Include="UI\Converters\UnixTimeDateTimeConverter.cs" />
     <Compile Include="UI\Converters\StringVisibilityConverter.cs" />
     <Compile Include="UI\OnlineProjectsCollection.cs" />
     <Compile Include="UI\PortableUI\PortableFontStyle.cs" />
