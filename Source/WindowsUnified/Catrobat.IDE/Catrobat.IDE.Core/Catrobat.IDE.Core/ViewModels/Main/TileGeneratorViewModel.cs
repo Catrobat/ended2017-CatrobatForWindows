@@ -7,12 +7,12 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     {
         #region private Members
 
-        private ProjectDummyHeader _pinProjectHeader;
+        private LocalProjectHeader _pinProjectHeader;
 
         #endregion
 
         #region Properties
-        public ProjectDummyHeader PinProjectHeader
+        public LocalProjectHeader PinProjectHeader
         {
             get
             {
@@ -47,7 +47,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region MessageActions
 
-        private void PinProjectHeaderChangedAction(GenericMessage<ProjectDummyHeader> message)
+        private void PinProjectHeaderChangedAction(GenericMessage<LocalProjectHeader> message)
         {
             PinProjectHeader = message.Content;
         }
@@ -56,7 +56,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public TileGeneratorViewModel()
         {
-            Messenger.Default.Register<GenericMessage<ProjectDummyHeader>>(this,
+            Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this,
                  ViewModelMessagingToken.PinProjectHeaderListener, PinProjectHeaderChangedAction);
         }
 

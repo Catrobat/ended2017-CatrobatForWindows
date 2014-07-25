@@ -47,8 +47,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        private ProjectDummyHeader _selectedProjectHeader;
-        public ProjectDummyHeader CurrentProjectHeader
+        private LocalProjectHeader _selectedProjectHeader;
+        public LocalProjectHeader CurrentProjectHeader
         {
             get
             {
@@ -148,7 +148,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void PinLocalProjectAction()
         {
-            var message = new GenericMessage<ProjectDummyHeader>(CurrentProject.ProjectDummyHeader);
+            var message = new GenericMessage<LocalProjectHeader>(CurrentProject.ProjectDummyHeader);
             Messenger.Default.Send(message, ViewModelMessagingToken.PinProjectHeaderListener);
 
             ServiceLocator.NavigationService.NavigateTo<TileGeneratorViewModel>();
@@ -158,7 +158,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             await CurrentProject.Save();
 
-            var message = new GenericMessage<ProjectDummyHeader>(CurrentProject.ProjectDummyHeader);
+            var message = new GenericMessage<LocalProjectHeader>(CurrentProject.ProjectDummyHeader);
             Messenger.Default.Send(message, ViewModelMessagingToken.ShareProjectHeaderListener);
 
             ServiceLocator.ShareService.ShateProject(CurrentProject.Name);
@@ -175,7 +175,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         #region Message Actions
 
 
-        private async void CurrentProjectHeaderChangedMessageAction(GenericMessage<ProjectDummyHeader> message)
+        private async void CurrentProjectHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
         {
             CurrentProjectHeader = message.Content;
             //CurrentProject = await CatrobatContext.LoadProjectByNameStatic(CurrentProjectHeader.ProjectName);
@@ -200,7 +200,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                 ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);
 
-            Messenger.Default.Register<GenericMessage<ProjectDummyHeader>>(this,
+            Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this,
                 ViewModelMessagingToken.CurrentProjectHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
         }
 
@@ -218,14 +218,17 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         IsActivatingLocalProject = true;
                     }
 
-
                     if (CurrentProject != null)
                         await CurrentProject.Save();
                     
                     Project newProject = await CatrobatContext.LoadProjectByNameStatic(CurrentProjectHeader.ProjectName);
-
+                    
                     if (newProject != null)
                     {
+                        ServiceLocator.DispatcherService.RunOnMainThread(() => {
+                            CurrentProjectHeader.ValidityState = LocalProjectState.Valid;
+                        });
+
                         CurrentProject = newProject;
                         IsActivatingLocalProject = false;
 
@@ -238,19 +241,16 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     {
                         IsActivatingLocalProject = false;
 
-                        ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                        ServiceLocator.DispatcherService.RunOnMainThread(() => 
                         {
+                            CurrentProjectHeader.ValidityState = LocalProjectState.Damaged;
+                            // TODO: get real ValidityState from "LoadProjectByNameStatic"
+                         
                             ServiceLocator.NavigationService.NavigateBack(this.GetType());
-
-                            ServiceLocator.NotifictionService.ShowMessageBox(
-                                AppResources.Main_SelectedProjectNotValidMessage,
-                            String.Format(AppResources.Main_SelectedProjectNotValidHeader,
-                            CurrentProjectHeader.ProjectName),
-                            delegate { /* no action */ }, MessageBoxOptions.Ok);
 
                             CurrentProject = null;
                             CurrentProjectHeader = null;
-                            var message = new GenericMessage<ProjectDummyHeader>(null);
+                            var message = new GenericMessage<LocalProjectHeader>(null);
                             Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
                         });
                     }

@@ -9,7 +9,7 @@ namespace Catrobat.IDE.WindowsShared.Services
     {
         private readonly ProjectImporterService _importer = new ProjectImporterService();
 
-        public async Task<ProjectDummyHeader> ImportProject(object systemSpeciticObject)
+        public async Task<LocalProjectHeader> ImportProject(object systemSpeciticObject)
         {
             //try
             //{
@@ -49,7 +49,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             //    return null;
             //}
 
-            return new ProjectDummyHeader();
+            return new LocalProjectHeader();
         }
 
         public async Task<string> AcceptTempProject()

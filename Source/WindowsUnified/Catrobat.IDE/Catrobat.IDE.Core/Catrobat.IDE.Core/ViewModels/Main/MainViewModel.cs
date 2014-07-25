@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private string _deleteProjectName;
         private string _copyProjectName;
         private Project _currentProject;
-        private ObservableCollection<ProjectDummyHeader> _localProjects;
+        private ObservableCollection<LocalProjectHeader> _localProjects;
         private CatrobatContextBase _context;
         private OnlineProgramsCollection _onlineProjects;
         //private CancellationTokenSource _taskCancellation;
@@ -80,7 +80,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
 
         private bool first = true;
-        public ObservableCollection<ProjectDummyHeader> LocalProjects
+        public ObservableCollection<LocalProjectHeader> LocalProjects
         {
             get
             {
@@ -166,10 +166,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region Actions
 
-        private void OpenProjectCommandAction(ProjectDummyHeader project)
+        private void OpenProjectCommandAction(LocalProjectHeader project)
         {
-            var message = new GenericMessage<ProjectDummyHeader>(project);
-            Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
+            var message = new GenericMessage<LocalProjectHeader>(project);
+            Messenger.Default.Send(message, 
+                ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
 
             ServiceLocator.NavigationService.NavigateTo<ProjectDetailViewModel>();
         }
@@ -294,7 +295,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public MainViewModel()
         {
-            OpenProjectCommand = new RelayCommand<ProjectDummyHeader>(OpenProjectCommandAction);
+            OpenProjectCommand = new RelayCommand<LocalProjectHeader>(OpenProjectCommandAction);
             DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProjectAction);
             CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
             OnlineProjectTapCommand = new RelayCommand<OnlineProjectHeader>(OnlineProjectTapAction);
@@ -389,7 +390,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             if (_localProjects == null)
             {
-                _localProjects = new ObservableCollection<ProjectDummyHeader>();
+                _localProjects = new ObservableCollection<LocalProjectHeader>();
             }
 
             //_localProjects.Clear();
@@ -400,7 +401,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                 //var projects = new List<ProjectDummyHeader>();
 
-                var projectsToRemove = new List<ProjectDummyHeader>();
+                var projectsToRemove = new List<LocalProjectHeader>();
 
                 foreach (var header in _localProjects)
                 {
@@ -425,7 +426,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 }
 
 
-                var projectsToAdd = new List<ProjectDummyHeader>();
+                var projectsToAdd = new List<LocalProjectHeader>();
 
                 foreach (string projectName in projectNames)
                 {
@@ -447,7 +448,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         var projectScreenshot = new PortableImage();
                         projectScreenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);
 
-                        var projectHeader = new ProjectDummyHeader
+                        var projectHeader = new LocalProjectHeader
                         {
                             ProjectName = projectName,
                             Screenshot = projectScreenshot

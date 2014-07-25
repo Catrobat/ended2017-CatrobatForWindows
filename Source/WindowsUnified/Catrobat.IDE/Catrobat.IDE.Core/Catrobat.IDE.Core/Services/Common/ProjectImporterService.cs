@@ -13,10 +13,10 @@ namespace Catrobat.IDE.Core.Services.Common
 {
     public class ProjectImporterService
     {
-        private ProjectDummyHeader _tempProjectHeader;
+        private LocalProjectHeader _tempProjectHeader;
         private XmlProject _project;
 
-        public async Task<ProjectDummyHeader> ImportProject(Stream projectZipStream)
+        public async Task<LocalProjectHeader> ImportProject(Stream projectZipStream)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 _project = new XmlProject(projectCode);
                 await _project.Save();
 
-                _tempProjectHeader = new ProjectDummyHeader
+                _tempProjectHeader = new LocalProjectHeader
                 {
                     Screenshot = projectScreenshot,
                     ProjectName = _project.ProjectHeader.ProgramName

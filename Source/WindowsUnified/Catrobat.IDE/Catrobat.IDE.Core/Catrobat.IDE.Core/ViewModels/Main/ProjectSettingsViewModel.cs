@@ -10,7 +10,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     {
         #region Private Members
 
-        private ProjectDummyHeader _selectedProjectHeader;
+        private LocalProjectHeader _selectedProjectHeader;
         private string _projectName;
         private string _projectDescription;
         private Project _currentProject;
@@ -31,7 +31,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        public ProjectDummyHeader SelectedProjectHeader
+        public LocalProjectHeader SelectedProjectHeader
         {
             get { return _selectedProjectHeader; }
             set
@@ -156,7 +156,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        private async void CurrentProjectHeaderChangedMessageAction(GenericMessage<ProjectDummyHeader> message)
+        private async void CurrentProjectHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
         {
             SelectedProjectHeader = message.Content;
 
@@ -171,7 +171,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<ProjectDummyHeader>>(this, 
+            Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this, 
                 ViewModelMessagingToken.CurrentProjectHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Project>>(this, 
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
