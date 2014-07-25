@@ -128,6 +128,15 @@
   <ItemGroup>
     <Content Include="Readme.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Catrobat.IDE.Core\Catrobat.IDE.Core\Catrobat.IDE.Core.csproj">
+      <Project>{bca5086e-499a-4507-aa9b-a55d7e534ef7}</Project>
+      <Name>Catrobat.IDE.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tests\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
