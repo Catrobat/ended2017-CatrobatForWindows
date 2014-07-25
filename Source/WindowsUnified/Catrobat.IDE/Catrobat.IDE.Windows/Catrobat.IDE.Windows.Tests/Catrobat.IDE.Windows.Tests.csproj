@@ -125,6 +125,9 @@
     </AppxManifest>
     <None Include="Catrobat.IDE.Windows.Tests_TemporaryKey.pfx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Readme.txt" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
