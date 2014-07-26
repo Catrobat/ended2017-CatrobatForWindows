@@ -158,12 +158,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
         }
 
-        private void CancelAction()
-        {
-            ResetViewModel();
-            ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
-        }
-
         private void ChangeUserAction()
         {
             ResetViewModel();
@@ -173,6 +167,13 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             ServiceLocator.NavigationService.NavigateTo<UploadProjectLoginViewModel>();
             ServiceLocator.NavigationService.RemoveBackEntry();
         }
+
+        private void CancelAction()
+        {
+            ResetViewModel();
+            ServiceLocator.NavigationService.NavigateTo<ProjectDetailViewModel>();
+            ServiceLocator.NavigationService.RemoveBackEntry();
+        } 
 
         protected override void GoBackAction()
         {

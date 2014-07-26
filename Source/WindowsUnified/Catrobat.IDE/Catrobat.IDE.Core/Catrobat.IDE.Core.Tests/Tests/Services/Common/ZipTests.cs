@@ -6,7 +6,7 @@ using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Tests.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Core.Tests.Tests.Misc
+namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
 {
     [TestClass]
     public class ZipTests

@@ -21,7 +21,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private MessageboxResult _wrongLoginDataCallbackResult;
         private string _username;
         private string _password;
-        private string _email;
 
         #endregion
 
@@ -62,19 +61,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
         }
 
-        public string Email
-        {
-            get { return _email; }
-            set
-            {
-                if (_email != value)
-                {
-                    _email = value;
-                    RaisePropertyChanged(() => Email);
-                }
-            }
-        }
-
         #endregion
 
         #region Commands
@@ -98,7 +84,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
             else
             {
-                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.AsyncLoginOrRegister(_username, _password, _email,
+                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.AsyncLoginOrRegister(_username, _password, null,
                                                              ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName,
                                                              RegionInfo.CurrentRegion.TwoLetterISORegionName);
 
@@ -207,7 +193,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         {
             Username = "";
             Password = "";
-            Email = "";
         }
     }
 }

@@ -10,7 +10,7 @@ using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Core.Tests.Tests.ViewModel.Editor.Costumes
+namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Costumes
 {
     [TestClass]
     public class CostumeNameChooserViewModelTests

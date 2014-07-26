@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.CatrobatObjects;
 
-namespace Catrobat.IDE.Core.Tests.Tests.Misc
+namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
 {
     [TestClass]
     public class WebCommunicationTests

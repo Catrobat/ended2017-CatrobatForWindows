@@ -159,7 +159,11 @@
     <Compile Include="Tests\ViewModels\Editor\Costumes\ChangeCostumeViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Costumes\CostumeNameChooserViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Costumes\NewCostumeSourceSelectionViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Main\ProjectSettingsViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Main\ProjectDetailViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProjectViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProjectRegisterViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProjectLoginViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Catrobat.IDE.Core\Catrobat.IDE.Core.csproj">
@@ -267,7 +271,6 @@
     <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Tests\ViewModels\Service\" />
     <Folder Include="Tests\ViewModels\Settings\" />
   </ItemGroup>
   <Choose>

@@ -156,6 +156,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             Context = message.Content;
         }
         #endregion
+
         public UploadProjectRegisterViewModel()
         {
             RegisterCommand = new RelayCommand(RegisterAction);

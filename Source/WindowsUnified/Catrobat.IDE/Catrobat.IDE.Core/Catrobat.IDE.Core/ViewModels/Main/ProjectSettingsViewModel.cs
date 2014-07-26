@@ -128,6 +128,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void CancelAction()
         {
+            ResetViewModel();
             base.GoBackAction();
         }
 
