@@ -47,47 +47,6 @@ namespace Catrobat.IDE.Core
             }
         }
 
-        //private static async Task<Project> Initialize(CatrobatContextBase context)
-        //{
-            
-
-        //    //if(localSettings != null)
-        //    //{
-        //    //    try
-        //    //    {
-        //    //        context.LocalSettings = localSettings;
-        //    //        var project = await CatrobatContext.LoadNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
-        //    //        if(project != null)
-        //    //            return project;
-        //    //    }
-        //    //    catch (Exception)
-        //    //    {
-                    
-        //    //    }
-        //    //}
-
-        //    //if (localSettings == null && Debugger.IsAttached)
-        //    //{
-        //    //    var loader = new SampleProjectLoader();
-        //    //    await loader.LoadSampleProjects();
-        //    //}
-
-        //    //var localSettings = await CatrobatContext.RestoreLocalSettingsStatic();
-
-        //    //if (localSettings == null)
-        //    //{
-        //    //    context.LocalSettings = new LocalSettings();
-
-        //    //    var currentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
-        //    //    context.LocalSettings.CurrentProjectName = currentProject.Name;
-        //    //    await currentProject.Save();
-
-        //    //    return currentProject;
-        //    //}
-
-        //    //return null;
-        //}
-
         private static async Task LoadContext()
         {
             _context = new CatrobatContext();
