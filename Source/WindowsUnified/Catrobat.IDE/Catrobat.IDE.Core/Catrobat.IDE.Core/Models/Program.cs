@@ -79,9 +79,9 @@ namespace Catrobat.IDE.Core.Models
                     var automaticProjectScreenshotPath = Path.Combine(BasePath, AutomaticScreenshotPath);
                     _screenshot = new PortableImage();
                     _screenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);
-                    if (ProjectDummyHeader != null)
+                    if (LocalProgramHeader != null)
                     {
-                        ProjectDummyHeader.Screenshot = _screenshot;
+                        LocalProgramHeader.Screenshot = _screenshot;
                     }
                 }
                 return _screenshot;
@@ -108,7 +108,7 @@ namespace Catrobat.IDE.Core.Models
         #region Strange properties
 
         private LocalProjectHeader _projectDummyHeader;
-        public LocalProjectHeader ProjectDummyHeader
+        public LocalProjectHeader LocalProgramHeader
         {
             get
             {

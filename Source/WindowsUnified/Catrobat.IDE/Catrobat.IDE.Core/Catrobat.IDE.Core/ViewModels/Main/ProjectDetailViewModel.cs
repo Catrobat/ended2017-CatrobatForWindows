@@ -148,7 +148,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void PinLocalProjectAction()
         {
-            var message = new GenericMessage<LocalProjectHeader>(CurrentProject.ProjectDummyHeader);
+            var message = new GenericMessage<LocalProjectHeader>(CurrentProject.LocalProgramHeader);
             Messenger.Default.Send(message, ViewModelMessagingToken.PinProjectHeaderListener);
 
             ServiceLocator.NavigationService.NavigateTo<TileGeneratorViewModel>();
@@ -158,7 +158,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             await CurrentProject.Save();
 
-            var message = new GenericMessage<LocalProjectHeader>(CurrentProject.ProjectDummyHeader);
+            var message = new GenericMessage<LocalProjectHeader>(CurrentProject.LocalProgramHeader);
             Messenger.Default.Send(message, ViewModelMessagingToken.ShareProjectHeaderListener);
 
             ServiceLocator.ShareService.ShateProject(CurrentProject.Name);

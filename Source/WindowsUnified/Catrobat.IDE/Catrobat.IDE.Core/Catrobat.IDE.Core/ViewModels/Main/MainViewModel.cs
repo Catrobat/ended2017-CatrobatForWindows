@@ -333,7 +333,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             if (_dialogResult == MessageboxResult.Ok)
             {
-                if (CurrentProject != null && CurrentProject.ProjectDummyHeader.ProjectName == _deleteProjectName)
+                if (CurrentProject != null && CurrentProject.Name == _deleteProjectName)
                 {
                     var projectChangedMessage = new GenericMessage<Program>(null);
                     Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);

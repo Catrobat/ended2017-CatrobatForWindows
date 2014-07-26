@@ -12,7 +12,7 @@ namespace Catrobat.IDE.WindowsShared.Services
     {
         private const string TempProjectName = "TempProject.catrobat_play";
 
-        public async Task LaunchPlayer(Program project, bool isLaunchedFromTile)
+        public async Task LaunchPlayer(Core.Models.Program project, bool isLaunchedFromTile)
         {
             var zipService = new ZipService();
 

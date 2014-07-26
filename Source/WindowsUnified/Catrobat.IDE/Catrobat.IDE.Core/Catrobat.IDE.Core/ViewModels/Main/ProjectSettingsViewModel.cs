@@ -109,9 +109,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void SaveAction()
         {
-            if (CurrentProject.ProjectDummyHeader == SelectedProjectHeader)
+            if (CurrentProject.LocalProgramHeader == SelectedProjectHeader)
             {
-                CurrentProject.ProjectDummyHeader.ProjectName = ProjectName;
+                CurrentProject.LocalProgramHeader.ProjectName = ProjectName;
                 await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
                 CurrentProject.Description = ProjectDescription;
             }
