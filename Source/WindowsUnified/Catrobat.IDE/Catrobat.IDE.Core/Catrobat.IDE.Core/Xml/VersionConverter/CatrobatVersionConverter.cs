@@ -225,7 +225,7 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
 
         public static async Task<VersionConverterResult> ConvertToXmlVersionByProjectName(string projectName, string targetVersion, bool overwriteProject = false)
         {
-            var projectCodePath = Path.Combine(StorageConstants.ProjectsPath, projectName, Project.ProjectCodePath);
+            var projectCodePath = Path.Combine(StorageConstants.ProjectsPath, projectName, Program.ProjectCodePath);
             var result = await ConvertToXmlVersion(projectCodePath, targetVersion, overwriteProject);
             return result;
         }

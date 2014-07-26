@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         #region Members
 
         private Sprite _selectedSprite;
-        private Project _currentProject;
+        private Program _currentProject;
         private readonly FormulaEditor _editor = new FormulaEditor();
         private readonly FormulaKeyboardViewModel _keyboardViewModel;
         
@@ -37,7 +37,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region Properties
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get { return _currentProject; }
             private set
@@ -241,7 +241,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region MessageActions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
         }
@@ -265,7 +265,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             CompleteTokenCommand = new RelayCommand<int>(CompleteTokenAction);
             
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
-            Messenger.Default.Register<GenericMessage<Project>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+            Messenger.Default.Register<GenericMessage<Program>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
 
             _editor.PropertyChanged += (sender, e) =>
             {

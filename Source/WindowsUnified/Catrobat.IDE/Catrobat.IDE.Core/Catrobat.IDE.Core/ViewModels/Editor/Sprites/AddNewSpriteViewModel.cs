@@ -10,7 +10,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         #region Private Members
 
         private string _spriteName;
-        private Project _currentProject;
+        private Program _currentProject;
 
         #endregion
 
@@ -31,7 +31,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get { return _currentProject; }
             private set
@@ -89,7 +89,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region Message Actions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
         }
@@ -101,7 +101,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<Program>>(this,
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
         }
 

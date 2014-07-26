@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
         #region Private Members
 
         private string _soundName = AppResources.Editor_NameOfSound;
-        private Project _currentProject;
+        private Program _currentProject;
         private Sprite _receivedSelectedSprite;
         private Stream _soundStream;
 
@@ -22,7 +22,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 
         #region Properties
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get { return _currentProject; }
             private set { 
@@ -82,7 +82,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
         private async void SaveAction()
         {
             var sound = new Sound(SoundName);
-            var path = Path.Combine(CurrentProject.BasePath, Project.SoundsPath, sound.FileName);
+            var path = Path.Combine(CurrentProject.BasePath, Program.SoundsPath, sound.FileName);
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -130,7 +130,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
             _receivedSelectedSprite = message.Content;
         }
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
         }
@@ -150,7 +150,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<Stream>>(this,

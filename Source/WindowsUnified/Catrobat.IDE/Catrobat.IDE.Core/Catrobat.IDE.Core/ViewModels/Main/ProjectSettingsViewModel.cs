@@ -13,13 +13,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private LocalProjectHeader _selectedProjectHeader;
         private string _projectName;
         private string _projectDescription;
-        private Project _currentProject;
+        private Program _currentProject;
 
         #endregion
 
         #region Properties
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get { return _currentProject; }
             private set
@@ -143,7 +143,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region Message Actions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
             if (CurrentProject != null)
@@ -175,7 +175,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this, 
                 ViewModelMessagingToken.CurrentProjectHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
-            Messenger.Default.Register<GenericMessage<Project>>(this, 
+            Messenger.Default.Register<GenericMessage<Program>>(this, 
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
         }
 

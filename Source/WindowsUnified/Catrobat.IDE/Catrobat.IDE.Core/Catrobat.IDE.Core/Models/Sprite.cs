@@ -11,7 +11,7 @@ using System.Diagnostics;
 namespace Catrobat.IDE.Core.Models
 {
     [DebuggerDisplay("Name = {Name}")]
-    public partial class Sprite : Model, IAsyncCloneable<Project>
+    public partial class Sprite : Model, IAsyncCloneable<Program>
     {
         #region Properties
 
@@ -133,7 +133,7 @@ namespace Catrobat.IDE.Core.Models
 
         #endregion
 
-        public async Task Delete(Project project)
+        public async Task Delete(Program project)
         {
             foreach (var costume in Costumes)
             {
@@ -165,7 +165,7 @@ namespace Catrobat.IDE.Core.Models
 
         #region Implements IAsyncCloneable
 
-        async Task<object> IAsyncCloneable<Project>.CloneInstance(Project project)
+        async Task<object> IAsyncCloneable<Program>.CloneInstance(Program project)
         {
             var costumes = Costumes == null ? null : await Costumes.ToReadOnlyDictionaryAsync(
                 keySelector: costume => costume, 

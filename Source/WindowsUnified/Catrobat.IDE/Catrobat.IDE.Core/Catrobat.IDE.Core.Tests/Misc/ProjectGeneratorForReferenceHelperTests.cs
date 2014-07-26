@@ -9,9 +9,9 @@ namespace Catrobat.IDE.Core.Tests.Misc
     public class ProjectGeneratorForReferenceHelperTests : ITestProjectGenerator
     {
 
-        public Project GenerateProject()
+        public Program GenerateProject()
         {
-            var project = new Project
+            var project = new Program
             {
                 Name = "program1",
                 Description = "",
@@ -32,7 +32,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
             return project;
         }
 
-        private void AddSprites(Project project)
+        private void AddSprites(Program project)
         {
             var looks1 = new ObservableCollection<Costume>
             {

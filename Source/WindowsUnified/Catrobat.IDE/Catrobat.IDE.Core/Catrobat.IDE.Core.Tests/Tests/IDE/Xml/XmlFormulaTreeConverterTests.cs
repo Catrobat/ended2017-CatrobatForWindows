@@ -96,7 +96,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Xml
                 CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", document);
                 var xml = document.ToString();
 
-                var xmlProject = new XmlProject(xml);
+                var xmlProject = new XmlProgram(xml);
                 var project = new XmlProjectConverter().Convert(xmlProject);
                 var xmlProject2 = new XmlProjectConverter().ConvertBack(project);
 
@@ -182,7 +182,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Xml
             CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", document);
             var xml = document.ToString();
 
-            var xmlProject = new XmlProject(xml);
+            var xmlProject = new XmlProgram(xml);
             var project = new XmlProjectConverter().Convert(xmlProject);
 
             var sprite = project.Sprites.Single();

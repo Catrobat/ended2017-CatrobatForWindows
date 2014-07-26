@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core.Services
         event SoundStateChanged SoundStateChanged;
         event SoundFinished SoundFinished;
 
-        void SetSound(Sound sound, Project currentProject);
+        void SetSound(Sound sound, Program currentProject);
 
         void Play();
 

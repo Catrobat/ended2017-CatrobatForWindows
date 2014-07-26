@@ -18,14 +18,14 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _projectName;
         private string _projectDescription;
         private CatrobatContextBase _context;
-        private Project _currentProject;
+        private Program _currentProject;
         private MessageboxResult _uploadErrorCallbackResult;
 
         #endregion
 
         #region Properties
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get
             {
@@ -191,7 +191,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             Context = message.Content;
         }
 
-        private void CurrentProjectChangedChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
             if (CurrentProject != null)
@@ -218,7 +218,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<Program>>(this,
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedChangedMessageAction);
         }
 

@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private MessageboxResult _dialogResult;
         private string _deleteProjectName;
         private string _copyProjectName;
-        private Project _currentProject;
+        private Program _currentProject;
         private ObservableCollection<LocalProjectHeader> _localProjects;
         private CatrobatContextBase _context;
         private OnlineProgramsCollection _onlineProjects;
@@ -62,7 +62,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get
             {
@@ -283,7 +283,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
@@ -319,7 +319,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
 
             //_taskCancellation = new CancellationTokenSource();
@@ -335,7 +335,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             {
                 if (CurrentProject != null && CurrentProject.ProjectDummyHeader.ProjectName == _deleteProjectName)
                 {
-                    var projectChangedMessage = new GenericMessage<Project>(null);
+                    var projectChangedMessage = new GenericMessage<Program>(null);
                     Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
                 }
 
@@ -361,7 +361,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 if (_copyProjectName == CurrentProject.Name)
                     await CurrentProject.Save();
 
-                await ServiceLocator.ContextService.CopyProject(_copyProjectName, _copyProjectName);
+                await ServiceLocator.ContextService.CopyProgram(_copyProjectName, _copyProjectName);
 
                 await UpdateLocalProjects();
                 _copyProjectName = null;
@@ -441,9 +441,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     if (!exists)
                     {
                         var manualScreenshotPath = Path.Combine(
-                            StorageConstants.ProjectsPath, projectName, Project.ScreenshotPath);
+                            StorageConstants.ProjectsPath, projectName, Program.ScreenshotPath);
                         var automaticProjectScreenshotPath = Path.Combine(
-                            StorageConstants.ProjectsPath, projectName, Project.AutomaticScreenshotPath);
+                            StorageConstants.ProjectsPath, projectName, Program.AutomaticScreenshotPath);
 
                         var projectScreenshot = new PortableImage();
                         projectScreenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);

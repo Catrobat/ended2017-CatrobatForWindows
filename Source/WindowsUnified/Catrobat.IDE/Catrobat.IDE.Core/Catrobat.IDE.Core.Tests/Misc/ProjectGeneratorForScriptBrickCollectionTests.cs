@@ -8,9 +8,9 @@ namespace Catrobat.IDE.Core.Tests.Misc
 {
     public class ProjectGeneratorForScriptBrickCollectionTests : ITestProjectGenerator
     {
-        public Project GenerateProject()
+        public Program GenerateProject()
         {
-            return new Project
+            return new Program
             {
                 Name = "project",
                 Description = "",

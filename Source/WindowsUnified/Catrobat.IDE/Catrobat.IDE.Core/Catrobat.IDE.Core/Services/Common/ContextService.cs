@@ -16,23 +16,23 @@ namespace Catrobat.IDE.Core.Services.Common
 {
     public class ContextService : IContextService
     {
-        public async Task<string> FindUniqueName(string programName)
+        public async Task<string> FindUniqueProgramName(string programName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
                 var counter = 0;
                 while (true)
                 {
-                    var projectPath = Path.Combine(StorageConstants.ProjectsPath,
+                    var programPath = Path.Combine(StorageConstants.ProjectsPath,
                         programName);
 
                     if (counter != 0)
                     {
-                        projectPath = Path.Combine(StorageConstants.ProjectsPath,
+                        programPath = Path.Combine(StorageConstants.ProjectsPath,
                             programName + counter);
                     }
 
-                    if (!await storage.DirectoryExistsAsync(projectPath))
+                    if (!await storage.DirectoryExistsAsync(programPath))
                         break;
 
                     counter++;
@@ -47,55 +47,56 @@ namespace Catrobat.IDE.Core.Services.Common
             }
         }
 
-        public async Task<XmlProjectRenamerResult> RenameProgramFromFile(
-         string projectCodeFilePath, string newProjectName)
+        public async Task<XmlProjectRenamerResult> RenameProgram(
+         string programCodeFilePath, string newProgramName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                var projectCode = await storage.ReadTextFileAsync(projectCodeFilePath);
-                var result = XmlProgramHelper.RenameProgram(projectCode, newProjectName);
+                var projectCode = await storage.ReadTextFileAsync(programCodeFilePath);
+                var result = XmlProgramHelper.RenameProgram(projectCode, newProgramName);
 
                 await storage.WriteTextFileAsync(
-                    projectCodeFilePath, result.NewProjectCode);
+                    programCodeFilePath, result.NewProjectCode);
 
-                result.NewProjectName = newProjectName;
+                result.NewProjectName = newProgramName;
 
                 return result;
             }
         }
 
-        public async Task<Project> LoadProjectByNameStatic(string projectName)
+        public async Task<Program> LoadProgramByName(string programName)
         {
-            return new XmlProjectConverter().Convert(await LoadXmlProjectByNameStatic(projectName));
+            return new XmlProjectConverter().Convert(await LoadXmlProgramByName(programName));
         }
 
-        public async Task<XmlProject> LoadXmlProjectByNameStatic(string projectName)
+        public async Task<XmlProgram> LoadXmlProgramByName(string programName)
         {
-            //if (Debugger.IsAttached)
-            //{
-            //    return await LoadNewProjectByNameStaticWithoutTryCatch(projectName);
-            //}
-            //else
-            //{
-            try
+            if (Debugger.IsAttached)
             {
-                return await LoadNewProjectByNameStaticWithoutTryCatch(projectName);
+                return await LoadNewProgramByNameWithoutTryCatch(programName);
             }
-            catch
+            else
             {
-                if(Debugger.IsAttached)
-                    Debugger.Break();
+                try
+                {
+                    return await LoadNewProgramByNameWithoutTryCatch(programName);
+                }
+                catch
+                {
+                    if (Debugger.IsAttached)
+                        Debugger.Break();
 
-                return null;
+                    return null;
+                }
             }
-            //}
         }
 
-        public async Task<XmlProject> LoadNewProjectByNameStaticWithoutTryCatch(string projectName)
+        private static async Task<XmlProgram> LoadNewProgramByNameWithoutTryCatch(
+            string programName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                var tempPath = Path.Combine(StorageConstants.ProjectsPath, projectName, Project.ProjectCodePath);
+                var tempPath = Path.Combine(StorageConstants.ProjectsPath, programName, Program.ProjectCodePath);
                 var xml = await storage.ReadTextFileAsync(tempPath);
 
                 var programVersion = XmlProgramHelper.GetProgramVersion(xml);
@@ -105,22 +106,24 @@ namespace Catrobat.IDE.Core.Services.Common
                     // TODO: implement me
                 }
 
-                return new XmlProject(xml);
+                return new XmlProgram(xml);
             }
         }
 
-        public async Task<Project> RestoreDefaultProjectStatic(string projectName)
+        public async Task<Program> RestoreDefaultProgram(string programName)
         {
             IProgramGenerator projectGenerator = new ProjectGeneratorWhackAMole();
 
             return await projectGenerator.GenerateProject(AppResources.Main_DefaultProjectName, true);
         }
 
-        public async Task<Project> CreateEmptyProject(string newProjectName)
+        public async Task<Program> CreateEmptyProgram(string newProgramName)
         {
-            var newProject = new Project
+            // TODO: move this code int a ProjectGenerator see ProjectGeneratorWhackAMole
+
+            var newProject = new Program
             {
-                Name = newProjectName,
+                Name = newProgramName,
                 UploadHeader = new UploadHeader
                 {
                     MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
@@ -131,13 +134,13 @@ namespace Catrobat.IDE.Core.Services.Common
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var destinationPath = Path.Combine(StorageConstants.ProjectsPath, newProjectName);
+                var destinationPath = Path.Combine(StorageConstants.ProjectsPath, newProgramName);
 
                 var counter = 1;
                 while (await storage.DirectoryExistsAsync(destinationPath))
                 {
-                    newProjectName = newProjectName + counter;
-                    destinationPath = Path.Combine(StorageConstants.ProjectsPath, newProjectName);
+                    newProgramName = newProgramName + counter;
+                    destinationPath = Path.Combine(StorageConstants.ProjectsPath, newProgramName);
                     counter++;
                 }
             }
@@ -146,42 +149,44 @@ namespace Catrobat.IDE.Core.Services.Common
             return newProject;
         }
 
-        public async Task<Project> CopyProject(string sourceProjectName, string newProjectName)
+        public async Task<Program> CopyProgram(string sourceProgramName, 
+            string newProgramName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                var sourcePath = Path.Combine(StorageConstants.ProjectsPath, sourceProjectName);
-                var destinationPath = Path.Combine(StorageConstants.ProjectsPath, newProjectName);
+                var sourcePath = Path.Combine(StorageConstants.ProjectsPath, sourceProgramName);
+                var destinationPath = Path.Combine(StorageConstants.ProjectsPath, newProgramName);
 
                 var counter = 1;
                 while (await storage.DirectoryExistsAsync(destinationPath))
                 {
-                    newProjectName = newProjectName + counter;
-                    destinationPath = Path.Combine(StorageConstants.ProjectsPath, newProjectName);
+                    newProgramName = newProgramName + counter;
+                    destinationPath = Path.Combine(StorageConstants.ProjectsPath, newProgramName);
                     counter++;
                 }
 
                 await storage.CopyDirectoryAsync(sourcePath, destinationPath);
 
-                var tempXmlPath = Path.Combine(destinationPath, Project.ProjectCodePath);
+                var tempXmlPath = Path.Combine(destinationPath, Program.ProjectCodePath);
                 var xml = await storage.ReadTextFileAsync(tempXmlPath);
-                var newProject = new XmlProject(xml);
-                newProject.ProjectHeader.ProgramName = newProjectName;
+                var newProject = new XmlProgram(xml);
+                newProject.ProjectHeader.ProgramName = newProgramName;
                 await newProject.Save();
 
                 return new XmlProjectConverter().Convert(newProject);
             }
         }
 
-        public async Task StoreLocalSettingsStatic(LocalSettings localSettings)
+        public async Task StoreLocalSettings(LocalSettings localSettings)
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                await storage.WriteSerializableObjectAsync(StorageConstants.LocalSettingsFilePath, localSettings);
+                await storage.WriteSerializableObjectAsync(
+                    StorageConstants.LocalSettingsFilePath, localSettings);
             }
         }
 
-        public async Task<LocalSettings> RestoreLocalSettingsStatic()
+        public async Task<LocalSettings> RestoreLocalSettings()
         {
             try
             {

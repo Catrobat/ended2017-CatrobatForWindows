@@ -11,9 +11,9 @@ using Context = Catrobat.IDE.Core.Xml.Converter.XmlProjectConverter.ConvertBackC
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models
 {
-    partial class Project : IXmlObjectConvertible<XmlProject>
+    partial class Program : IXmlObjectConvertible<XmlProgram>
     {
-        XmlProject IXmlObjectConvertible<XmlProject>.ToXmlObject()
+        XmlProgram IXmlObjectConvertible<XmlProgram>.ToXmlObject()
         {
             var localVariables = Sprites.ToReadOnlyDictionary(
                 keySelector: sprite => sprite,
@@ -49,7 +49,7 @@ namespace Catrobat.IDE.Core.Models
             var header = UploadHeader.ToXmlObject();
             header.ProgramName = Name;
             header.Description = Description;
-            var result = new XmlProject
+            var result = new XmlProgram
             {
                 ProjectHeader = header, 
                 VariableList = new XmlVariableList

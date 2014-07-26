@@ -35,8 +35,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        private Project _currentProject;
-        public Project CurrentProject
+        private Program _currentProject;
+        public Program CurrentProject
         {
             get { return _currentProject; }
             set
@@ -223,7 +223,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         await CurrentProject.Save();
 
                     var newProject = await ServiceLocator.ContextService.
-                        LoadProjectByNameStatic(CurrentProjectHeader.ProjectName);
+                        LoadProgramByName(CurrentProjectHeader.ProjectName);
                     
                     if (newProject != null)
                     {
@@ -234,7 +234,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         CurrentProject = newProject;
                         IsActivatingLocalProject = false;
 
-                        var projectChangedMessage = new GenericMessage<Project>(newProject);
+                        var projectChangedMessage = new GenericMessage<Program>(newProject);
                         Messenger.Default.Send(projectChangedMessage, 
                             ViewModelMessagingToken.CurrentProjectChangedListener);
 

@@ -11,25 +11,23 @@ namespace Catrobat.IDE.Core.Services
 {
     public interface IContextService
     {
-        Task<XmlProjectRenamerResult> RenameProgramFromFile(
+        Task<XmlProjectRenamerResult> RenameProgram(
             string projectCodeFilePath, string newProjectName);
 
-        Task<string> FindUniqueName(string programName);
+        Task<string> FindUniqueProgramName(string programName);
 
-        Task<Project> LoadProjectByNameStatic(string programName);
+        Task<Program> LoadProgramByName(string programName);
 
-        Task<XmlProject> LoadXmlProjectByNameStatic(string programName);
+        Task<XmlProgram> LoadXmlProgramByName(string programName);
 
-        Task<XmlProject> LoadNewProjectByNameStaticWithoutTryCatch(string programName);
+        Task<Program> RestoreDefaultProgram(string programName);
 
-        Task<Project> RestoreDefaultProjectStatic(string programName);
+        Task<Program> CreateEmptyProgram(string newProgramName);
 
-        Task<Project> CreateEmptyProject(string newProgramName);
+        Task<Program> CopyProgram(string sourceProgramName, string newProgramName);
 
-        Task<Project> CopyProject(string sourceProgramName, string newProgramName);
+        Task StoreLocalSettings(LocalSettings localSettings);
 
-        Task StoreLocalSettingsStatic(LocalSettings localSettings);
-
-        Task<LocalSettings> RestoreLocalSettingsStatic();
+        Task<LocalSettings> RestoreLocalSettings();
     }
 }

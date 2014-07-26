@@ -203,7 +203,7 @@
     <Compile Include="Xml\Converter\XmlObjects\Scripts\XmlStartScript.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Scripts\XmlWhenScript.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlCostume.cs" />
-    <Compile Include="Xml\Converter\XmlObjects\XmlProject.cs" />
+    <Compile Include="Xml\Converter\XmlObjects\XmlProgram.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlProjectHeader.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlSound.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlSprite.cs" />
@@ -317,7 +317,7 @@
     <Compile Include="Xml\XmlObjects\Formulas\XmlFormula.cs" />
     <Compile Include="Xml\XmlObjects\Formulas\XmlFormulaTree.cs" />
     <Compile Include="CatrobatObjects\OnlineProjectHeader.cs" />
-    <Compile Include="Xml\XmlObjects\XmlProject.cs" />
+    <Compile Include="Xml\XmlObjects\XmlProgram.cs" />
     <Compile Include="CatrobatObjects\ProjectDummyHeader.cs" />
     <Compile Include="Xml\XmlObjects\XmlProjectHeader.cs" />
     <Compile Include="Xml\XmlObjects\Scripts\XmlBroadcastScript.cs" />

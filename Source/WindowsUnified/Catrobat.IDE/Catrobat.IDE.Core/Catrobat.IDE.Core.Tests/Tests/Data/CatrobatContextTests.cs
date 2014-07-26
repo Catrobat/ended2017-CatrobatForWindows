@@ -48,13 +48,13 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.IsFalse(storage.FileExists(StorageConstants.LocalSettingsFilePath));
         }
 
-        await ServiceLocator.ContextService.StoreLocalSettingsStatic(localSettings);
+        await ServiceLocator.ContextService.StoreLocalSettings(localSettings);
         using (var storage = StorageSystem.GetStorage())
         {
             Assert.IsTrue(storage.FileExists(StorageConstants.LocalSettingsFilePath));
         }
 
-        var newLocalSetting = await ServiceLocator.ContextService.RestoreLocalSettingsStatic();
+        var newLocalSetting = await ServiceLocator.ContextService.RestoreLocalSettings();
         Assert.AreEqual(localSettings.CurrentLanguageString, newLocalSetting.CurrentLanguageString);
         Assert.AreEqual(localSettings.CurrentProjectName, newLocalSetting.CurrentProjectName);
         Assert.AreEqual(localSettings.CurrentThemeIndex, newLocalSetting.CurrentThemeIndex);

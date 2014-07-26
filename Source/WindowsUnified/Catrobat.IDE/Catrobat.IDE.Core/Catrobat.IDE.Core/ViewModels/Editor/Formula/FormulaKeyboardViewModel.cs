@@ -20,8 +20,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region Properties
 
-        private Project _project;
-        private Project Project
+        private Program _project;
+        private Program Project
         {
             get { return _project; }
             set
@@ -290,7 +290,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             }).Where(data => data != null);
         }
 
-        private void CurrentProjectChangedAction(Project project)
+        private void CurrentProjectChangedAction(Program project)
         {
             Project = project;
         }
@@ -316,7 +316,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
             Messenger.Default.Register<GenericMessage<LocalSettings>>(this, ViewModelMessagingToken.LoadSettings, message => LoadSettingsAction(message.Content));
             Messenger.Default.Register<GenericMessage<LocalSettings>>(this, ViewModelMessagingToken.SaveSettings, message => SaveSettingsAction(message.Content));
-            Messenger.Default.Register<GenericMessage<Project>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, message => CurrentProjectChangedAction(message.Content));
+            Messenger.Default.Register<GenericMessage<Program>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, message => CurrentProjectChangedAction(message.Content));
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, message => CurrentSpriteChangedAction(message.Content));
 
         }

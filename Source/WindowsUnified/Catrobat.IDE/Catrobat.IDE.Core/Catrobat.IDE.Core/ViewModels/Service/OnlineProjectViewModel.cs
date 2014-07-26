@@ -27,7 +27,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _versionLabelText = "";
         private string _viewsLabelText = "";
         private string _downloadsLabelText = "";
-        private Project _currentProject;
+        private Program _currentProject;
 
         #endregion
 

@@ -15,7 +15,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public partial class XmlProject : DataRootObject
+    public partial class XmlProgram : DataRootObject
     {
         #region Properties
 
@@ -34,14 +34,14 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         #endregion
 
-        public XmlProject()
+        public XmlProgram()
         {
             SpriteList = new XmlSpriteList();
             BroadcastMessages = new List<string>();
             VariableList = new XmlVariableList();
         }
 
-        public XmlProject(String xmlSource) : base(xmlSource)
+        public XmlProgram(String xmlSource) : base(xmlSource)
         {
             BroadcastMessages = new List<string>();
             LoadFromXML(xmlSource);
@@ -127,7 +127,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             if (path == null)
             {
-                path = BasePath + "/" + Project.ProjectCodePath;
+                path = BasePath + "/" + Program.ProjectCodePath;
             }
 
             if (Debugger.IsAttached)

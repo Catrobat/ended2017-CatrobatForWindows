@@ -39,14 +39,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
                     foreach (var costume in sprite.Costumes)
                     {
                         //Projects/DataDeletingTests.DeleteSprite/images/
-                        var stream = storage.OpenFile(Path.Combine(project.BasePath, Project.ImagesPath , costume.FileName), 
+                        var stream = storage.OpenFile(Path.Combine(project.BasePath, Program.ImagesPath , costume.FileName), 
                             StorageFileMode.Create, StorageFileAccess.Write);
                         stream.Close();
                     }
 
                     foreach (var sound in sprite.Sounds)
                     {
-                        var stream = storage.OpenFile(Path.Combine(project.BasePath, Project.SoundsPath, sound.FileName),
+                        var stream = storage.OpenFile(Path.Combine(project.BasePath, Program.SoundsPath, sound.FileName),
                             StorageFileMode.Create, StorageFileAccess.Write);
                         stream.Close();
                     }
@@ -56,8 +56,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             await project.Save();
 
-            var pathCostumes = project.BasePath + "/" + Project.ImagesPath + "/";
-            var pathSounds = project.BasePath + "/" + Project.SoundsPath + "/";
+            var pathCostumes = project.BasePath + "/" + Program.ImagesPath + "/";
+            var pathSounds = project.BasePath + "/" + Program.SoundsPath + "/";
 
             var costumes = new List<Costume>();
             var sounds = new List<Sound>();

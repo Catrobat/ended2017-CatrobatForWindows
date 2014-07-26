@@ -30,7 +30,7 @@ namespace Catrobat.IDE.Core.Tests.SampleData
             return XDocument.Load(new StringReader(xml));
         }
 
-        public static async Task<Project> LoadSampleProject(string sampleName, string sampleProjectName)
+        public static async Task<Program> LoadSampleProject(string sampleName, string sampleProjectName)
         {
             var zipService = new ZipService();
 
@@ -46,10 +46,10 @@ namespace Catrobat.IDE.Core.Tests.SampleData
                 await zipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectPath);
                 stream.Dispose();
             }
-            return await ServiceLocator.ContextService.LoadProjectByNameStatic(sampleProjectName);
+            return await ServiceLocator.ContextService.LoadProgramByName(sampleProjectName);
         }
 
-        public static async Task<XmlProject> LoadSampleXmlProject(string sampleName, string sampleProjectName)
+        public static async Task<XmlProgram> LoadSampleXmlProject(string sampleName, string sampleProjectName)
         {
             var zipService = new ZipService();
 
@@ -59,7 +59,7 @@ namespace Catrobat.IDE.Core.Tests.SampleData
                 await zipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, StorageConstants.ProjectsPath + "/" + sampleProjectName);
                 stream.Dispose();
             }
-            return await ServiceLocator.ContextService.LoadXmlProjectByNameStatic(sampleProjectName);
+            return await ServiceLocator.ContextService.LoadXmlProgramByName(sampleProjectName);
         }
     }
 }

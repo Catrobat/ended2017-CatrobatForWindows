@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
     {
         #region Private Members
 
-        private Project _currentProject;
+        private Program _currentProject;
         private Sprite _selectedSprite;
         private int _numberOfObjectsSelected;
         private bool _isSpriteSelecting;
@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region Properties
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get { return _currentProject; }
             private set 
@@ -242,7 +242,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region MessageActions
 
-        private void CurrentProjectChangedAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
             SelectedSprite = null;
@@ -288,7 +288,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
             ClearObjectsSelectionCommand = new RelayCommand(ClearObjectSelectionAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,

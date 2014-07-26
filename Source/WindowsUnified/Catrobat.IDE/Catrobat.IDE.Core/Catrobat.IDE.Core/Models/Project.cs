@@ -11,7 +11,7 @@ using System.Collections.ObjectModel;
 namespace Catrobat.IDE.Core.Models
 {
     [DebuggerDisplay("Name = {Name}")]
-    public partial class Project : Model, ITestEquatable<Project>
+    public partial class Program : Model, ITestEquatable<Program>
     {
         public const string ProjectCodePath = "code.xml";
         public const string ScreenshotPath = "manual_screenshot.png‏";
@@ -129,7 +129,7 @@ namespace Catrobat.IDE.Core.Models
 
         #endregion
 
-        public Project()
+        public Program()
         {
             
         }
@@ -166,15 +166,15 @@ namespace Catrobat.IDE.Core.Models
 
         protected override bool TestEquals(Model other)
         {
-            return base.TestEquals(other) && TestEquals((Project) other);
+            return base.TestEquals(other) && TestEquals((Program) other);
         }
 
-        bool ITestEquatable<Project>.TestEquals(Project other)
+        bool ITestEquatable<Program>.TestEquals(Program other)
         {
             return TestEquals(other);
         }
 
-        protected bool TestEquals(Project other)
+        protected bool TestEquals(Program other)
         {
             return
                 string.Equals(_name, other._name) &&

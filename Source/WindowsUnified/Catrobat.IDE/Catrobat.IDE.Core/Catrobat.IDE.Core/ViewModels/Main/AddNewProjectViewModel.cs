@@ -11,7 +11,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     {
         #region Private Members
 
-        private Project _currentProject;
+        private Program _currentProject;
         private string _projectName;
         private bool _copyCurrentProjectAsTemplate;
 
@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region Properties
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get { return _currentProject; }
             set
@@ -149,11 +149,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             if (CreateEmptyProject)
             {
-                CurrentProject = await ServiceLocator.ContextService.CreateEmptyProject(_projectName);
+                CurrentProject = await ServiceLocator.ContextService.CreateEmptyProgram(_projectName);
             }
             else if (CreateCopyOfCurrentProject)
             {
-                CurrentProject = await ServiceLocator.ContextService.CopyProject(CurrentProject.Name, _projectName);
+                CurrentProject = await ServiceLocator.ContextService.CopyProgram(CurrentProject.Name, _projectName);
             }
             else if (CreateTemplateProject)
             {
@@ -164,7 +164,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             {
                 await CurrentProject.Save();
 
-                var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
+                var projectChangedMessage = new GenericMessage<Program>(CurrentProject);
                 Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
             }
 
@@ -189,7 +189,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region MessageActions
 
-        private void CurrentProjectChangedAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
         }
@@ -204,7 +204,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
 

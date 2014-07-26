@@ -90,14 +90,14 @@ namespace Catrobat.IDE.Core
         {
             _context = new CatrobatContext();
 
-            var localSettings = await ServiceLocator.ContextService.RestoreLocalSettingsStatic();
+            var localSettings = await ServiceLocator.ContextService.RestoreLocalSettings();
             _context.LocalSettings = localSettings;
 
             if (localSettings == null)
             {
                 _context.LocalSettings = new LocalSettings();
 
-                var defaultProject = await ServiceLocator.ContextService.RestoreDefaultProjectStatic(StorageConstants.DefaultProjectName);
+                var defaultProject = await ServiceLocator.ContextService.RestoreDefaultProgram(StorageConstants.DefaultProjectName);
                 _context.LocalSettings.CurrentProjectName = defaultProject.Name;
                 await defaultProject.Save();
             }
@@ -130,7 +130,7 @@ namespace Catrobat.IDE.Core
             Messenger.Default.Send(new GenericMessage<LocalSettings>(_context.LocalSettings), ViewModelMessagingToken.LoadSettings);
         }
 
-        public static async Task SaveContext(Project currentProject)
+        public static async Task SaveContext(Program currentProject)
         {
             if (currentProject == null || _context == null)
                 return;
@@ -153,7 +153,7 @@ namespace Catrobat.IDE.Core
             // allow viewmodels to save settings
             Messenger.Default.Send(new GenericMessage<LocalSettings>(_context.LocalSettings), ViewModelMessagingToken.SaveSettings);
 
-            await ServiceLocator.ContextService.StoreLocalSettingsStatic(_context.LocalSettings);
+            await ServiceLocator.ContextService.StoreLocalSettings(_context.LocalSettings);
             await currentProject.Save();
         }
     }

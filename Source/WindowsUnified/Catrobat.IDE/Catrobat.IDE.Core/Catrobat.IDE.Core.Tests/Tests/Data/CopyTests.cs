@@ -32,7 +32,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
 
-            var project2 = new Project();
+            var project2 = new Program();
             project2.Name = project1.Name;
             project2.Description = project1.Description;
             project2.UploadHeader = project1.UploadHeader;

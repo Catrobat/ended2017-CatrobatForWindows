@@ -33,12 +33,12 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         public void InitializeActionFullProjectTest()
         {
             var viewModel = new UploadProjectViewModel();            
-            var project = new Project
+            var project = new Program
             {
                 Name = "TestProject",
                 Description = "TestProjectDescription"
             };
-            var messageContext = new GenericMessage<Project>(project);
+            var messageContext = new GenericMessage<Program>(project);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProjectChangedListener);
             viewModel.InitializeCommand.Execute(null);
 

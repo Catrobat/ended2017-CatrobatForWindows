@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core.Services.Common
         private ExtractProgramResult _extractResult;
         private CheckProgramImportResult _checkResult;
         private OnlineProjectHeader _onlineProjectHeader;
-        private XmlProject _convertedProject;
+        private XmlProgram _convertedProject;
 
         public void SetProjectStream(Stream projectStream)
         {
@@ -80,13 +80,13 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 projectScreenshot =
                     await storage.LoadImageAsync(Path.Combine(
-                    StorageConstants.TempProjectImportPath, Project.ScreenshotPath)) ??
+                    StorageConstants.TempProjectImportPath, Program.ScreenshotPath)) ??
                     await storage.LoadImageAsync(Path.Combine(
-                    StorageConstants.TempProjectImportPath, Project.AutomaticScreenshotPath));
+                    StorageConstants.TempProjectImportPath, Program.AutomaticScreenshotPath));
             }
 
             var projectCodePath = Path.Combine(
-                StorageConstants.TempProjectImportPath, Project.ProjectCodePath);
+                StorageConstants.TempProjectImportPath, Program.ProjectCodePath);
 
             var converterResult = await CatrobatVersionConverter.
                 ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion);
@@ -110,7 +110,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
             try
             {
-                _convertedProject = new XmlProject(converterResult.Xml);
+                _convertedProject = new XmlProgram(converterResult.Xml);
             }
             catch (Exception)
             {
@@ -132,19 +132,19 @@ namespace Catrobat.IDE.Core.Services.Common
         public async Task<string> AcceptTempProject()
         {
             var uniqueProgramName = await ServiceLocator.ContextService.
-                FindUniqueName(_onlineProjectHeader.ProjectName);
+                FindUniqueProgramName(_onlineProjectHeader.ProjectName);
 
 
             if (_convertedProject != null) // if previour conversion was OK
             {
                 await _convertedProject.Save(Path.Combine(
-                    StorageConstants.TempProjectImportPath, Project.ProjectCodePath));
+                    StorageConstants.TempProjectImportPath, Program.ProjectCodePath));
             }
 
             // if previour conversion was not OK
-            var renameResult = await ServiceLocator.ContextService.RenameProgramFromFile(
+            var renameResult = await ServiceLocator.ContextService.RenameProgram(
                 Path.Combine(StorageConstants.TempProjectImportPath,
-                Project.ProjectCodePath),
+                Program.ProjectCodePath),
                 uniqueProgramName);
 
             if (_checkResult != null)
