@@ -156,7 +156,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             if (ServiceLocator.WebCommunicationService.NoUploadsPending())
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_NoUploadsPending, ToastNotificationTime.Short);
+                    AppResources.Main_NoUploadsPending, ToastDisplayDuration.Short);
             }
         }
 

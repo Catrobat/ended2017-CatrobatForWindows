@@ -1,13 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 using Windows.UI.Popups;
-using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
+using NotificationsExtensions.ToastContent;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
@@ -19,61 +20,50 @@ namespace Catrobat.IDE.WindowsShared.Services
 
     public class NotificationServiceWindowsShared : INotificationService
     {
-        private Page _rootPage;
-
-        //public NotificationServiceWindowsShared(Page rootPage)
-        //{
-        //    _rootPage = rootPage;
-        //}
-
         public void ShowToastNotification(string title, string message, 
-            ToastNotificationTime timeTillHide, PortableImage image = null)
+            ToastDisplayDuration displayDuration, PortableImage image = null)
         {
-            // TODO: fix this code!
+            var duration = ToastDuration.Short;
 
-            var durationString = "";
-
-            switch (timeTillHide)
+            switch (displayDuration)
             {
-                case ToastNotificationTime.Short:
-                    durationString = "short";
+                case ToastDisplayDuration.Short:
+                    duration = ToastDuration.Short;
                     break;
-                case ToastNotificationTime.Medeum:
-                    durationString = "medium";
-                    break;
-                case ToastNotificationTime.Long:
-                    durationString = "long";
+                case ToastDisplayDuration.Long:
+                    duration = ToastDuration.Long;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("timeTillHide");
             }
 
-            const ToastTemplateType toastTemplateXml = ToastTemplateType.ToastImageAndText01;
-            var toastXml = ToastNotificationManager.GetTemplateContent(toastTemplateXml);
+            IToastText01 templateContent = ToastContentFactory.CreateToastText01();
+            templateContent.TextBodyWrap.Text = title;
+            templateContent.Duration = duration;
 
-            var toastTextElements = toastXml.GetElementsByTagName("text");
-            toastTextElements[0].AppendChild(toastXml.CreateTextNode(message));
+            templateContent.Audio.Content = ToastAudioContent.Silent;
 
-            var toastNode = toastXml.SelectSingleNode("/toast");
-            ((XmlElement)toastNode).SetAttribute("duration", durationString);
+            const string notShowInNotificationCenterGroup = "NotShowInNC";
+            var toast = templateContent.CreateNotification();
+            toast.Tag = notShowInNotificationCenterGroup;
 
-            var audioElement = toastXml.CreateElement("audio");
-            audioElement.SetAttribute("silent", "true");
-            toastNode.AppendChild(audioElement);
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                ToastNotificationManager.CreateToastNotifier().Show(toast);
 
+                Task.Run(async () =>
+                {
+                    await Task.Delay(new TimeSpan(0, 0, 0, 10));
 
-            ((XmlElement)toastNode).SetAttribute("launch", "{\"type\":\"toast\",\"param1\":\"0\",\"param2\":\"1\"}");
+                    ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                        ToastNotificationManager.History.Remove(notShowInNotificationCenterGroup));
+                });
+            });
 
-
-            var xml = toastXml.GetXml();
- 
-            var toast = new ToastNotification(toastXml);
-
-            ServiceLocator.DispatcherService.RunOnMainThread(()=>
-                ToastNotificationManager.CreateToastNotifier().Show(toast));
         }
 
-        public void ShowToastNotification(string title, string message, TimeSpan timeTillHide, PortableImage image = null)
+        public void ShowToastNotification(string title, string message, 
+            TimeSpan timeTillHide, PortableImage image = null)
         {
             // TODO: implement me
             //throw new NotImplementedException();

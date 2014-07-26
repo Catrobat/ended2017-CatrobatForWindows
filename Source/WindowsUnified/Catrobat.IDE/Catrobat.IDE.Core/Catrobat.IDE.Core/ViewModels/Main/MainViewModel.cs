@@ -237,7 +237,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
 
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_DownloadQueueMessage, ToastNotificationTime.Short, portbleImage);
+                    AppResources.Main_DownloadQueueMessage, ToastDisplayDuration.Short, portbleImage);
 
                 _showDownloadMessage = false;
             }
@@ -248,7 +248,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
 
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_UploadQueueMessage, ToastNotificationTime.Short, portbleImage);
+                    AppResources.Main_UploadQueueMessage, ToastDisplayDuration.Short, portbleImage);
 
                 _showUploadMessage = false;
             }

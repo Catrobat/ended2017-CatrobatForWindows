@@ -11,17 +11,20 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
         public MessageboxResult NextMessageboxResult { get; set; }
         public MessageBoxOptions LastMessageboxOption { get; set; }
 
-        public void ShowToastNotification(string title, string message, ToastNotificationTime timeTillHide, PortableImage image = null)
+        public void ShowToastNotification(string title, string message, 
+            ToastDisplayDuration timeTillHide, PortableImage image = null)
         {
             SentToastNotifications++;
         }
 
-        public void ShowToastNotification(string title, string message, TimeSpan timeTillHide, PortableImage image = null)
+        public void ShowToastNotification(string title, string message, 
+            TimeSpan timeTillHide, PortableImage image = null)
         {
             SentToastNotifications++;
         }
 
-        public void ShowMessageBox(string title, string message, Action<MessageboxResult> callback, MessageBoxOptions options)
+        public void ShowMessageBox(string title, string message, 
+            Action<MessageboxResult> callback, MessageBoxOptions options)
         {
             SentMessageBoxes++;
             LastMessageboxOption = options;

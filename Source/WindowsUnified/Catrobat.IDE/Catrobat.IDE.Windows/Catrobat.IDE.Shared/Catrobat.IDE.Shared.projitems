@@ -54,6 +54,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NativeImageSquareConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\PortableConverters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\PortableValueConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Misc\NotificationExtensions\BadgeContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Misc\NotificationExtensions\Common.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Misc\NotificationExtensions\ContentInterfaces.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Misc\NotificationExtensions\TileContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Misc\NotificationExtensions\ToastContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Misc\OnlineProgramsCollectionWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ActionTemplateServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ColorConversionServiceWindowsShared.cs" />

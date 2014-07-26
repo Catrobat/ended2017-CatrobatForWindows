@@ -164,7 +164,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     ServiceLocator.NotifictionService.ShowToastNotification(
                         "Program added",
                         "Program successfully added to your program list.",
-                        ToastNotificationTime.Medeum); // TODO: localize me
+                        ToastDisplayDuration.Long); // TODO: localize me
 
                     acceptProject = true;
                     break;
@@ -172,7 +172,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     ServiceLocator.NotifictionService.ShowToastNotification(
                         "Program dameged",
                         "Program damaged and cannot be added!",
-                        ToastNotificationTime.Medeum); // TODO: localize me
+                        ToastDisplayDuration.Long); // TODO: localize me
 
                     acceptProject = false;
                     break;
@@ -180,7 +180,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     ServiceLocator.NotifictionService.ShowToastNotification(
                         "Program outdated",
                         "Program is too old and cannot be added!",
-                        ToastNotificationTime.Medeum); // TODO: localize me
+                        ToastDisplayDuration.Long); // TODO: localize me
 
                     acceptProject = false;
                     break;
@@ -188,7 +188,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     ServiceLocator.NotifictionService.ShowToastNotification(
                         "App version too old",
                         "The downloaded program requires a newer version of this App!",
-                        ToastNotificationTime.Medeum); // TODO: localize me
+                        ToastDisplayDuration.Long); // TODO: localize me
 
                     acceptProject = true;
                     break;

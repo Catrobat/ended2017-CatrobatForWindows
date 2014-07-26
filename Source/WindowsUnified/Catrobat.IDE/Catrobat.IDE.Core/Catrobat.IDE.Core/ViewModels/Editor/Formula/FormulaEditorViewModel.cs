@@ -181,7 +181,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         {
             var value = FormulaEvaluator.Evaluate(Formula);
             var message = value == null ? string.Empty : value.ToString();
-            ServiceLocator.NotifictionService.ShowToastNotification("", message, ToastNotificationTime.Medeum);
+            ServiceLocator.NotifictionService.ShowToastNotification(
+                "", message, ToastDisplayDuration.Long);
         }
 
         public RelayCommand ShowErrorPressedCommand { get; private set; }
@@ -192,7 +193,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             ServiceLocator.NotifictionService.ShowToastNotification(
                 title: "",
                 message: ParsingError.Message,
-                timeTillHide: ToastNotificationTime.Medeum);
+                timeTillHide: ToastDisplayDuration.Long);
         }
 
         public RelayCommand UndoCommand { get; private set; }
