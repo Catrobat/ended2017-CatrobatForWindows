@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using GalaSoft.MvvmLight.Messaging;
+﻿using GalaSoft.MvvmLight.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
+using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.ViewModels.Service;
 
@@ -16,6 +16,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         public static void TestClassInitialize(TestContext testContext)
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
+            ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
         }
 
         [TestMethod, TestCategory("GatedTests")]
@@ -23,29 +24,26 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         {
             var viewModel = new UploadProjectViewModel();
             viewModel.InitializeCommand.Execute(null);
+
             Assert.IsTrue(viewModel.ProjectName == "");
             Assert.IsTrue(viewModel.ProjectDescription == "");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("GatedTests")]
         public void InitializeActionFullProjectTest()
         {
+            var viewModel = new UploadProjectViewModel();            
             var project = new Project
             {
                 Name = "TestProject",
                 Description = "TestProjectDescription"
             };
-            //TODO current Project by message - also in ProjectSettingsViewModelTests
+            var messageContext = new GenericMessage<Project>(project);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProjectChangedListener);
+            viewModel.InitializeCommand.Execute(null);
 
-            //var viewModel = new UploadProjectViewModel
-            //{
-            //    CurrentProject = project
-            //};
-            //viewModel.InitializeCommand.Execute(null);
-            //Assert.IsTrue(viewModel.ProjectName == "TestProject");
-            //Assert.IsTrue(viewModel.ProjectDescription == "TestProjectDescription");
-            //Assert.AreEqual(viewModel.ProjectName, "TestProject");
-            Assert.AreEqual(0, "test not implemented");
+            Assert.IsTrue(viewModel.ProjectName == "TestProject");
+            Assert.IsTrue(viewModel.ProjectDescription == "TestProjectDescription");
         }
 
         [TestMethod/*, TestCategory("GatedTests")*/]

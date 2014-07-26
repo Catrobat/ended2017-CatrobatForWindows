@@ -179,7 +179,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private void ReportAction(OnlineProjectHeader onlineProjectHeader)
         {
-
             ServiceLocator.NavigationService.NavigateTo<OnlineProjectReportViewModel>();
         }
 
@@ -190,7 +189,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         protected override void GoBackAction()
         {
-
             base.GoBackAction();
         }
 

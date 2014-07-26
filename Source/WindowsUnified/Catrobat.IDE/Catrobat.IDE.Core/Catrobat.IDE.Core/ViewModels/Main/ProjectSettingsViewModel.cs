@@ -22,10 +22,12 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         public Project CurrentProject
         {
             get { return _currentProject; }
-            set
+            private set
             {
-                _currentProject = value;
-                                
+                if (value == _currentProject)
+                    return;
+
+                _currentProject = value;             
                 ServiceLocator.DispatcherService.RunOnMainThread(() => 
                     RaisePropertyChanged(() => CurrentProject));
             }
@@ -128,8 +130,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void CancelAction()
         {
-            ResetViewModel();
-            base.GoBackAction();
+            GoBackAction();
         }
 
         protected override void GoBackAction()
