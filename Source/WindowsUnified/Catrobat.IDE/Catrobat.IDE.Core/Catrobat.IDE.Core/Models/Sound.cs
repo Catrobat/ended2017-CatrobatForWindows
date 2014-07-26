@@ -41,7 +41,7 @@ namespace Catrobat.IDE.Core.Models
 
         public async Task Delete(Program project)
         {
-            var path = project.BasePath + "/" + Program.SoundsPath + "/" + _fileName;
+            var path = project.BasePath + "/" + StorageConstants.ProgramSoundsPath + "/" + _fileName;
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -72,7 +72,7 @@ namespace Catrobat.IDE.Core.Models
         async Task<object> IAsyncCloneable<Program>.CloneInstance(Program project)
         {
             var result = new Sound(Name);
-            var directory = project.BasePath + "/" + Program.SoundsPath + "/";
+            var directory = project.BasePath + "/" + StorageConstants.ProgramSoundsPath + "/";
             using (var storage = StorageSystem.GetStorage())
             {
                 await storage.CopyFileAsync(directory + FileName, directory + result.FileName);

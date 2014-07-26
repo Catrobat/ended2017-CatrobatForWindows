@@ -127,7 +127,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             if (path == null)
             {
-                path = BasePath + "/" + Program.ProjectCodePath;
+                path = BasePath + "/" + StorageConstants.ProgramCodePath;
             }
 
             if (Debugger.IsAttached)

@@ -13,12 +13,6 @@ namespace Catrobat.IDE.Core.Models
     [DebuggerDisplay("Name = {Name}")]
     public partial class Program : Model, ITestEquatable<Program>
     {
-        public const string ProjectCodePath = "code.xml";
-        public const string ScreenshotPath = "manual_screenshot.png‏";
-        public const string AutomaticScreenshotPath = "automatic_screenshot.png";
-        public const string ImagesPath = "images";
-        public const string SoundsPath = "sounds";
-
         #region Properties
 
         private string _name = string.Empty;
@@ -75,8 +69,8 @@ namespace Catrobat.IDE.Core.Models
             {
                 if (_screenshot == null)
                 {
-                    var manualScreenshotPath = Path.Combine(BasePath, ScreenshotPath);
-                    var automaticProjectScreenshotPath = Path.Combine(BasePath, AutomaticScreenshotPath);
+                    var manualScreenshotPath = Path.Combine(BasePath, StorageConstants.ProgramManualScreenshotPath);
+                    var automaticProjectScreenshotPath = Path.Combine(BasePath, StorageConstants.ProgramAutomaticScreenshotPath);
                     _screenshot = new PortableImage();
                     _screenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);
                     if (LocalProgramHeader != null)

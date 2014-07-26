@@ -441,9 +441,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     if (!exists)
                     {
                         var manualScreenshotPath = Path.Combine(
-                            StorageConstants.ProjectsPath, projectName, Program.ScreenshotPath);
+                            StorageConstants.ProjectsPath, projectName, StorageConstants.ProgramManualScreenshotPath);
                         var automaticProjectScreenshotPath = Path.Combine(
-                            StorageConstants.ProjectsPath, projectName, Program.AutomaticScreenshotPath);
+                            StorageConstants.ProjectsPath, projectName, StorageConstants.ProgramAutomaticScreenshotPath);
 
                         var projectScreenshot = new PortableImage();
                         projectScreenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);

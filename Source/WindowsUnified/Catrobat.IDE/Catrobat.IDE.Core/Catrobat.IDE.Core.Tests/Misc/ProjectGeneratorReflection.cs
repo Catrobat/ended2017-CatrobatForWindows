@@ -219,7 +219,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
                  Name = "Look" + index,
              };
 
-            var absoluteFileName = Path.Combine(project.BasePath, Program.ImagesPath, costume.FileName);
+            var absoluteFileName = Path.Combine(project.BasePath, StorageConstants.ProgramImagesPath, costume.FileName);
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -238,7 +238,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
                     Name = "Sound" + index,
                 };
 
-            var absoluteFileName = Path.Combine(project.BasePath, Program.SoundsPath, sound.FileName);
+            var absoluteFileName = Path.Combine(project.BasePath, StorageConstants.ProgramSoundsPath, sound.FileName);
 
             using (var storage = StorageSystem.GetStorage())
             {

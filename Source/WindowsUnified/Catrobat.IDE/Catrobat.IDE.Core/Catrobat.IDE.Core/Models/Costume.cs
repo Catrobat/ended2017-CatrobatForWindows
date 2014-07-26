@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Core.Models
                     try
                     {
                         _image = new PortableImage();
-                        var fileName = XmlParserTempProjectHelper.Project.BasePath + "/" + Program.ImagesPath + "/" + _fileName;
+                        var fileName = XmlParserTempProjectHelper.Project.BasePath + "/" + StorageConstants.ProgramImagesPath + "/" + _fileName;
                         _image.LoadAsync(fileName, null, false);
 
                         //using (var storage = StorageSystem.GetStorage())
@@ -76,7 +76,7 @@ namespace Catrobat.IDE.Core.Models
 
         public async Task Delete(Program project)
         {
-            var path = project.BasePath + "/" + Program.ImagesPath + "/" + _fileName;
+            var path = project.BasePath + "/" + StorageConstants.ProgramImagesPath + "/" + _fileName;
             try
             {
                 using (var storage = StorageSystem.GetStorage())
@@ -113,7 +113,7 @@ namespace Catrobat.IDE.Core.Models
         async Task<object> IAsyncCloneable<Program>.CloneInstance(Program project)
         {
             var result = new Costume(Name);
-            var directory = project.BasePath + "/" + Program.ImagesPath + "/";
+            var directory = project.BasePath + "/" + StorageConstants.ProgramImagesPath + "/";
             using (var storage = StorageSystem.GetStorage())
             {
                 await storage.CopyFileAsync(directory + FileName, directory + result.FileName);

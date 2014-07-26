@@ -53,7 +53,7 @@ namespace Catrobat.IDE.Core.Resources
 
                         using (var storage = StorageSystem.GetStorage())
                         {
-                            var textFilePath = Path.Combine(StorageConstants.ProjectsPath, projectName, Program.ProjectCodePath);
+                            var textFilePath = Path.Combine(StorageConstants.ProjectsPath, projectName, StorageConstants.ProgramCodePath);
                             var xml = await storage.ReadTextFileAsync(textFilePath);
 
                             var project = new XmlProgram(xml);

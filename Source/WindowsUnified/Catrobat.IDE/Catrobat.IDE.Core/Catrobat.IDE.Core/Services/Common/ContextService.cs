@@ -96,7 +96,7 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                var tempPath = Path.Combine(StorageConstants.ProjectsPath, programName, Program.ProjectCodePath);
+                var tempPath = Path.Combine(StorageConstants.ProjectsPath, programName, StorageConstants.ProgramCodePath);
                 var xml = await storage.ReadTextFileAsync(tempPath);
 
                 var programVersion = XmlProgramHelper.GetProgramVersion(xml);
@@ -167,7 +167,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
                 await storage.CopyDirectoryAsync(sourcePath, destinationPath);
 
-                var tempXmlPath = Path.Combine(destinationPath, Program.ProjectCodePath);
+                var tempXmlPath = Path.Combine(destinationPath, StorageConstants.ProgramCodePath);
                 var xml = await storage.ReadTextFileAsync(tempXmlPath);
                 var newProject = new XmlProgram(xml);
                 newProject.ProjectHeader.ProgramName = newProgramName;

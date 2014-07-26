@@ -82,7 +82,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
         private async void SaveAction()
         {
             var sound = new Sound(SoundName);
-            var path = Path.Combine(CurrentProject.BasePath, Program.SoundsPath, sound.FileName);
+            var path = Path.Combine(CurrentProject.BasePath, StorageConstants.ProgramSoundsPath, sound.FileName);
 
             using (var storage = StorageSystem.GetStorage())
             {
