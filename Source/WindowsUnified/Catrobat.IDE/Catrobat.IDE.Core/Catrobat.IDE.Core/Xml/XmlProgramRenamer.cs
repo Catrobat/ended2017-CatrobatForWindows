@@ -62,50 +62,5 @@ namespace Catrobat.IDE.Core.Xml
 
 
         }
-
-        // TODO: move in other service
-        public static async Task<XmlProjectRenamerResult> RenameProjectFromFile(
-            string projectCodeFilePath, string newProjectName)
-        {
-            using (var storage = StorageSystem.GetStorage())
-            {
-                var counter = 0;
-                while (true)
-                {
-                    var projectPath = Path.Combine(CatrobatContextBase.ProjectsPath,
-                        newProjectName);
-
-                    if (counter != 0)
-                    {
-                        projectPath = Path.Combine(CatrobatContextBase.ProjectsPath,
-                            newProjectName + counter);
-                    }
-
-                    if (!await storage.DirectoryExistsAsync(projectPath))
-                        break;
-
-                    counter++;
-                }
-
-                var newProjectNameUnique = newProjectName;
-
-                if (counter != 0)
-                    newProjectNameUnique = newProjectName + counter;
-
-                var projectCode = await storage.ReadTextFileAsync(projectCodeFilePath);
-                var result = RenameProjectFromCode(projectCode, newProjectNameUnique);
-
-                await storage.WriteTextFileAsync(
-                    projectCodeFilePath, result.NewProjectCode);
-
-                result.NewProjectName = newProjectNameUnique;
-
-               return result;
-            }
-        }
     }
-
-
-
-    // TODO: add all project renaming from CatrobatContext here and make this class a service
 }

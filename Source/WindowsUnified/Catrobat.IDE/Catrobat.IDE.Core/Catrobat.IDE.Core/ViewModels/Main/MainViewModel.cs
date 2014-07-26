@@ -341,7 +341,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    await storage.DeleteDirectoryAsync(CatrobatContextBase.ProjectsPath + "/" + _deleteProjectName);
+                    await storage.DeleteDirectoryAsync(StorageConstants.ProjectsPath + "/" + _deleteProjectName);
                 }
 
                 await UpdateLocalProjects();
@@ -361,7 +361,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 if (_copyProjectName == CurrentProject.Name)
                     await CurrentProject.Save();
 
-                await CatrobatContext.CopyProject(_copyProjectName, _copyProjectName);
+                await ServiceLocator.ContextService.CopyProject(_copyProjectName, _copyProjectName);
 
                 await UpdateLocalProjects();
                 _copyProjectName = null;
@@ -397,7 +397,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var projectNames = await storage.GetDirectoryNamesAsync(CatrobatContextBase.ProjectsPath);
+                var projectNames = await storage.GetDirectoryNamesAsync(StorageConstants.ProjectsPath);
 
                 //var projects = new List<ProjectDummyHeader>();
 
@@ -441,9 +441,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     if (!exists)
                     {
                         var manualScreenshotPath = Path.Combine(
-                            CatrobatContextBase.ProjectsPath, projectName, Project.ScreenshotPath);
+                            StorageConstants.ProjectsPath, projectName, Project.ScreenshotPath);
                         var automaticProjectScreenshotPath = Path.Combine(
-                            CatrobatContextBase.ProjectsPath, projectName, Project.AutomaticScreenshotPath);
+                            StorageConstants.ProjectsPath, projectName, Project.AutomaticScreenshotPath);
 
                         var projectScreenshot = new PortableImage();
                         projectScreenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);

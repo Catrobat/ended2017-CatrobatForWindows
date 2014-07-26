@@ -220,8 +220,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                     if (CurrentProject != null)
                         await CurrentProject.Save();
-                    
-                    Project newProject = await CatrobatContext.LoadProjectByNameStatic(CurrentProjectHeader.ProjectName);
+
+                    Project newProject = await ServiceLocator.ContextService.LoadProjectByNameStatic(CurrentProjectHeader.ProjectName);
                     
                     if (newProject != null)
                     {

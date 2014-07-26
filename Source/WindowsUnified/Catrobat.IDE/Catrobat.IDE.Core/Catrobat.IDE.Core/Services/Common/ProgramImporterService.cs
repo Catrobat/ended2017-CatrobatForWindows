@@ -52,7 +52,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
                
                 await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
-                    _projectStream, CatrobatContextBase.TempProjectImportPath);
+                    _projectStream, StorageConstants.TempProjectImportPath);
             }
             catch (Exception)
             {
@@ -61,9 +61,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             using (var storage = StorageSystem.GetStorage())
             {
-                if (await storage.FileExistsAsync(CatrobatContextBase.TempProjectImportZipPath))
+                if (await storage.FileExistsAsync(StorageConstants.TempProjectImportZipPath))
                 {
-                    await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
+                    await storage.DeleteDirectoryAsync(StorageConstants.TempProjectImportZipPath);
                 }
             }
 
@@ -79,13 +79,13 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 projectScreenshot =
                     await storage.LoadImageAsync(Path.Combine(
-                    CatrobatContextBase.TempProjectImportPath, Project.ScreenshotPath)) ??
+                    StorageConstants.TempProjectImportPath, Project.ScreenshotPath)) ??
                     await storage.LoadImageAsync(Path.Combine(
-                    CatrobatContextBase.TempProjectImportPath, Project.AutomaticScreenshotPath));
+                    StorageConstants.TempProjectImportPath, Project.AutomaticScreenshotPath));
             }
 
             var projectCodePath = Path.Combine(
-                CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
+                StorageConstants.TempProjectImportPath, Project.ProjectCodePath);
 
             var converterResult = await CatrobatVersionConverter.
                 ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion);
@@ -131,8 +131,8 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public async Task<string> AcceptTempProject()
         {
-            var renameResult = await XmlProgramRenamer.RenameProjectFromFile(
-                Path.Combine(CatrobatContextBase.TempProjectImportPath, 
+            var renameResult = await ServiceLocator.ContextService.RenameProjectFromFile(
+                Path.Combine(StorageConstants.TempProjectImportPath, 
                 Project.ProjectCodePath),
                 _checkResult.ProjectHeader.ProjectName);
 
@@ -141,9 +141,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var newPath = Path.Combine(CatrobatContextBase.ProjectsPath, 
+                var newPath = Path.Combine(StorageConstants.ProjectsPath, 
                     renameResult.NewProjectName);
-                await storage.MoveDirectoryAsync(CatrobatContextBase.TempProjectImportPath,
+                await storage.MoveDirectoryAsync(StorageConstants.TempProjectImportPath,
                     newPath);
             }
 

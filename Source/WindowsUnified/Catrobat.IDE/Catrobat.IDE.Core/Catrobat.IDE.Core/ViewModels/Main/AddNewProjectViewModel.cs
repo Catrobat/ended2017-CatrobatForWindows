@@ -149,11 +149,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             if (CreateEmptyProject)
             {
-                CurrentProject = await CatrobatContext.CreateEmptyProject(_projectName);
+                CurrentProject = await ServiceLocator.ContextService.CreateEmptyProject(_projectName);
             }
             else if (CreateCopyOfCurrentProject)
             {
-                CurrentProject = await CatrobatContext.CopyProject(CurrentProject.Name, _projectName);
+                CurrentProject = await ServiceLocator.ContextService.CopyProject(CurrentProject.Name, _projectName);
             }
             else if (CreateTemplateProject)
             {

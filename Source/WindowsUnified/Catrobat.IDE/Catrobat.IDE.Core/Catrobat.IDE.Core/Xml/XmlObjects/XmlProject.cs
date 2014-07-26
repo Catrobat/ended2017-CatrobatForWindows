@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         public string BasePath
         {
-            get { return CatrobatContextBase.ProjectsPath + "/" + ProjectHeader.ProgramName; }
+            get { return StorageConstants.ProjectsPath + "/" + ProjectHeader.ProgramName; }
         }
 
         #endregion

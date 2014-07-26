@@ -339,7 +339,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
         public void DeleteImage(string pathToImage)
         {
             DeleteFile(pathToImage);
-            DeleteFile(pathToImage + CatrobatContextBase.ImageThumbnailExtension);
+            DeleteFile(pathToImage + StorageConstants.ImageThumbnailExtension);
         }
 
         public void MoveDirectory(string sourcePath, string destinationPath)

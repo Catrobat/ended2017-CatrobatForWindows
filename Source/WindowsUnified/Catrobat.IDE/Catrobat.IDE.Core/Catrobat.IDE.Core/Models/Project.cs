@@ -65,7 +65,7 @@ namespace Catrobat.IDE.Core.Models
 
         public string BasePath
         {
-            get { return CatrobatContextBase.ProjectsPath + "/" + Name; }
+            get { return StorageConstants.ProjectsPath + "/" + Name; }
         }
 
         private PortableImage _screenshot;

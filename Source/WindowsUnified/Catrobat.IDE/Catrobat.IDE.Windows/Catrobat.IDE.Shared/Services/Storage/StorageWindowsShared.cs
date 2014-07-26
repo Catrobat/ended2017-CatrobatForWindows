@@ -435,7 +435,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             if (imageBasePath != null)
             {
                 var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}",
-                    withoutExtension, CatrobatContextBase.ImageThumbnailExtension));
+                    withoutExtension, StorageConstants.ImageThumbnailExtension));
 
                 if (await FileExistsAsync(thumbnailPath))
                 {
@@ -467,13 +467,13 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
         public async Task DeleteImageAsync(string pathToImage)
         {
             await DeleteFileAsync(pathToImage);
-            await DeleteFileAsync(pathToImage + CatrobatContextBase.ImageThumbnailExtension);
+            await DeleteFileAsync(pathToImage + StorageConstants.ImageThumbnailExtension);
         }
 
         public async Task SaveImageAsync(string path, PortableImage image, bool deleteExisting, ImageFormat format)
         {
             var withoutExtension = Path.GetFileNameWithoutExtension(path);
-            var thumbnailPath = string.Format("{0}{1}", withoutExtension, CatrobatContextBase.ImageThumbnailExtension);
+            var thumbnailPath = string.Format("{0}{1}", withoutExtension, StorageConstants.ImageThumbnailExtension);
 
             if (deleteExisting)
             {

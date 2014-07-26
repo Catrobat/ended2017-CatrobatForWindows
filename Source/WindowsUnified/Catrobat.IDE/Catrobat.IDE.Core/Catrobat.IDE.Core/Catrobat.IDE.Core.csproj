@@ -81,6 +81,7 @@
     <Compile Include="CatrobatContextBase.cs" />
     <Compile Include="CatrobatContextDesign.cs" />
     <Compile Include="CatrobatObjects\TestEqualityComparer.cs" />
+    <Compile Include="StorageConstants.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
     <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
     <Compile Include="ExtensionMethods\XmlExtensions.cs" />
@@ -114,7 +115,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Common\ContextService.cs" />
     <Compile Include="Services\Common\ProjectGeneratorWhackAMole.cs" />
+    <Compile Include="Services\IContextService.cs" />
     <Compile Include="Services\IWebCommunicationService.cs" />
     <Compile Include="Services\IZipService.cs" />
     <Compile Include="UI\Converters\UnixTimeDateTimeConverter.cs" />

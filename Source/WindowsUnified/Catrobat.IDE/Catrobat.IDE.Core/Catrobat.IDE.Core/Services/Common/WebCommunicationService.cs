@@ -225,7 +225,7 @@ namespace Catrobat.IDE.Core.Services.Common
                     JSONStatusResponse statusResponse = null;
                     try
                     {
-                        await ServiceLocator.ZipService.ZipCatrobatPackage(stream, CatrobatContextBase.ProjectsPath + "/" + projectTitle);
+                        await ServiceLocator.ZipService.ZipCatrobatPackage(stream, StorageConstants.ProjectsPath + "/" + projectTitle);
                         Byte[] project_data = stream.ToArray();
 
                         parameters.Add(new KeyValuePair<string, string>(ApplicationResources.API_PARAM_CHECKSUM, UtilTokenHelper.ToHex(MD5Core.GetHash(project_data))));

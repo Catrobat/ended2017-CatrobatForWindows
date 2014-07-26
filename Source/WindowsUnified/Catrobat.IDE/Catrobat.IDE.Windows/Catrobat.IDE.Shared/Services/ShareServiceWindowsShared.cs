@@ -42,7 +42,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             try
             {
-                var projectFolderPath = Path.Combine(CatrobatContextBase.ProjectsPath, _projectName);
+                var projectFolderPath = Path.Combine(StorageConstants.ProjectsPath, _projectName);
                 string fileName = _projectName + CatrobatFileExtension;
 
                 var rootFolder = ApplicationData.Current.TemporaryFolder;
