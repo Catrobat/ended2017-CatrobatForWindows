@@ -63,7 +63,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             else
             {
                 ServiceLocator.NavigationService.NavigateTo<UploadProjectLoadingViewModel>();
-                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.AsyncRecoverPassword(_passwordRecoveryData, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
+                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.RecoverPasswordAsync(_passwordRecoveryData, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
                 if (statusResponse.statusCode == StatusCodes.ServerResponseOk)
                 {

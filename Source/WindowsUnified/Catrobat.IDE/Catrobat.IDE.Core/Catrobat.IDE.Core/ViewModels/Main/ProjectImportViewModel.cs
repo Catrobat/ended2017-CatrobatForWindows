@@ -1,4 +1,6 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
@@ -13,8 +15,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     {
         #region private Members
 
-        private bool _isWorking = false;
-
+        private CancellationTokenSource _importCancellationToken;
         private bool _contentPanelVisibility = false;
         private bool _loadingPanelVisibility = true;
         private bool _progressBarLoadingIsIndeterminate = true;
@@ -40,34 +41,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 RaisePropertyChanged(()=>ProjectHeader);
             }
         }
-
-        //public string ProjectName
-        //{
-        //    get { return _projectName; }
-        //    set
-        //    {
-        //        if (value == _projectName)
-        //        {
-        //            return;
-        //        }
-        //        _projectName = value;
-        //        RaisePropertyChanged(() => ProjectName);
-        //    }
-        //}
-
-        //public PortableImage ScreenshotImageSource
-        //{
-        //    get { return _screenshotImageSource; }
-        //    set
-        //    {
-        //        if (_screenshotImageSource == value)
-        //        {
-        //            return;
-        //        }
-        //        _screenshotImageSource = value;
-        //        RaisePropertyChanged(() => ScreenshotImageSource);
-        //    }
-        //}
 
         public bool ContentPanelVisibility
         {
@@ -173,8 +146,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public RelayCommand CancelCommand { get; private set; }
 
-        public ICommand OnLoadCommand { get; private set; }
-
         #endregion
 
         #region CommandCanExecute
@@ -195,58 +166,29 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void AddAction()
         {
-            if (_isWorking)
-            {
-                return;
-            }
-
-            _isWorking = true;
-            ShowPanel(VisiblePanel.Loading);
-
             try
             {
-                var newProjectName = await ServiceLocator.ProjectImporterService.AcceptTempProject();
+                ServiceLocator.NavigationService.RemoveBackEntry();
+                ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                    ServiceLocator.NavigationService.NavigateTo<MainViewModel>());
 
+                await ServiceLocator.ProjectImporterService.AcceptTempProject();
                 var localProjectsChangedMessage = new MessageBase();
-                Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
+                Messenger.Default.Send(localProjectsChangedMessage, 
+                    ViewModelMessagingToken.LocalProjectsChangedListener);
 
-                ServiceLocator.DispatcherService.RunOnMainThread(() => ServiceLocator.NavigationService.NavigateTo<MainViewModel>());
+                ResetViewModel();
             }
             catch
             {
-                ShowPanel(VisiblePanel.Error);
+                //ShowPanel(VisiblePanel.Error);
             }
-
-            _isWorking = false;
         }
 
         private static void CancelAction()
         {
             ServiceLocator.ProjectImporterService.CancelImport();
             ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
-        }
-
-        private async void OnLoadAction(string fileToken)
-        {
-            //_isWorking = true;
-            //if (fileToken != null)
-            //{
-            //    var projectHeader = await ServiceLocator.ProjectImporterService.ImportProject(fileToken);
-
-            //    if (projectHeader != null)
-            //    {
-            //        ProjectName = projectHeader.ProjectName;
-
-            //        ScreenshotImageSource = projectHeader.Screenshot;
-
-            //        ShowPanel(VisiblePanel.Content);
-            //    }
-            //    else
-            //    {
-            //        ShowPanel(VisiblePanel.Error);
-            //    }
-            //}
-            //_isWorking = false;
         }
 
         protected override void GoBackAction()
@@ -263,39 +205,60 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             // Commands
             AddCommand = new RelayCommand(AddAction, AddCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction, CancelCommand_CanExecute);
-            OnLoadCommand = new RelayCommand<string>(OnLoadAction);
         }
 
         public async override void NavigateTo()
         {
-            var importerResult = await ServiceLocator.ProjectImporterService.StartImportProject();
+            ShowPanel(VisiblePanel.Loading);
 
-            switch (importerResult.Status)
+            await ImportProject();
+        }
+
+        private async Task ImportProject()
+        {
+            var extracionResult = await ServiceLocator.ProjectImporterService.ExtractProgram();
+
+            if (extracionResult.Status == ExtractProgramStatus.Error)
+            {
+                ShowPanel(VisiblePanel.Error);
+                ButtonAddIsEnabled = false;
+                base.NavigateTo();
+                return;
+            }
+
+            var validateResult = await ServiceLocator.ProjectImporterService.CheckProgram();
+
+            switch (validateResult.Status)
             {
                 case ProgramImportStatus.Valid:
+                    ProjectHeader = validateResult.ProjectHeader;
                     ShowPanel(VisiblePanel.Content);
                     ButtonAddIsEnabled = true;
                     break;
                 case ProgramImportStatus.Damaged:
                     // TODO: show right error
                     ShowPanel(VisiblePanel.Error);
-                    ButtonAddIsEnabled = false;
+                    ButtonAddIsEnabled = true;
                     break;
                 case ProgramImportStatus.VersionTooOld:
                     // TODO: show right error
                     ShowPanel(VisiblePanel.Error);
-                    ButtonAddIsEnabled = false;
+                    ButtonAddIsEnabled = true;
                     break;
                 case ProgramImportStatus.VersionTooNew:
                     // TODO: show right error
                     ShowPanel(VisiblePanel.Error);
-                    ButtonAddIsEnabled = false;
+                    ButtonAddIsEnabled = true;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
 
-            base.NavigateTo();
+        public override void NavigateFrom()
+        {
+            ShowPanel(VisiblePanel.Loading);
+            base.NavigateFrom();
         }
 
         private enum VisiblePanel { Error, Content, Loading }

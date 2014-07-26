@@ -32,8 +32,8 @@ namespace Catrobat.IDE.WindowsShared
             ServiceLocator.Register<CultureServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ImageResizeServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<PlayerLauncherServiceWindowsShared>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<ResourceLoaderFactoryStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<StorageFactoryStore>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ResourceLoaderWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<StorageFactoryWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ImageSourceConversionServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SoundPlayerServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SoundRecorderServiceWindowsShared>(TypeCreationMode.Lazy);

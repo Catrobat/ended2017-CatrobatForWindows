@@ -222,12 +222,12 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
         {
             var zipService = new ZipService();
 
-            using (var resource = (new ResourceLoaderFactoryStore()).CreateResourceLoader())
+            using (var resource = (new ResourceLoaderWindowsShared()).CreateResourceLoader())
             {
                 var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/test.catroid");
                 await zipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
 
-                using (IStorage storage = new StorageStore())
+                using (IStorage storage = new StorageWindowsShared())
                 {
                     var image = storage.LoadImage("TestLoadImage/screenshot.png");
                     Assert.IsNotNull(image);
@@ -239,9 +239,9 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
         public async void SaveImageTest()
         {
             var zipService = new ZipService();
-            IStorage storage = new StorageStore();
+            IStorage storage = new StorageWindowsShared();
 
-            using (var resource = (new ResourceLoaderFactoryStore()).CreateResourceLoader())
+            using (var resource = (new ResourceLoaderWindowsShared()).CreateResourceLoader())
             {
                 var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/test.catroid");
                 await zipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
@@ -261,7 +261,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
         [TestMethod]
         public void ReadWriteTextFileTest()
         {
-            IStorage storage = new StorageStore();
+            IStorage storage = new StorageWindowsShared();
 
             storage.WriteTextFile("test.txt", "test123");
             Assert.AreEqual("test123", storage.ReadTextFile("test.txt"));
@@ -270,7 +270,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
         [TestMethod]
         public void ReadWriteSerializableObjectTest()
         {
-            IStorage storage = new StorageStore();
+            IStorage storage = new StorageWindowsShared();
 
             var settingsWrite = new LocalSettings
             {
@@ -290,7 +290,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             const string folderName2 = "Folder2";
             const string folderName3 = "Folder3";
 
-            var storage = new StorageStore();
+            var storage = new StorageWindowsShared();
             await storage.CreateFolderPath(Path.Combine(folderName1, folderName2, folderName3));
 
             var localFolder = ApplicationData.Current.LocalFolder;
@@ -308,7 +308,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             const string folderName2 = "Folder2";
             const string folderName3 = "Folder3";
 
-            var storage = new StorageStore();
+            var storage = new StorageWindowsShared();
             await storage.CreateFolderPath(Path.Combine(folderName1, folderName2, folderName3));
 
             var localFolder = ApplicationData.Current.LocalFolder;
@@ -323,7 +323,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
         [TestMethod]
         public async void GetFileTest()
         {
-            IStorage storage = new StorageStore();
+            IStorage storage = new StorageWindowsShared();
 
 
         }

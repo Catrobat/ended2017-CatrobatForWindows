@@ -12,21 +12,21 @@ namespace Catrobat.IDE.Core.Services
 {
     public interface IWebCommunicationService
     {
-        Task<List<OnlineProjectHeader>> AsyncLoadOnlineProjects(string filterText, int offset, int count, CancellationToken taskCancellationToken);
+        Task<List<OnlineProjectHeader>> LoadOnlineProjectsAsync(string filterText, int offset, int count, CancellationToken taskCancellationToken);
 
-        Task<CatrobatVersionConverter.VersionConverterError> AsyncDownloadAndSaveProject(string downloadUrl, string projectName);
+        Task<Stream> DownloadAsync(string downloadUrl, string projectName);
 
-        Task<JSONStatusResponse> AsyncCheckToken(string username, string token, string language = "en");
+        Task<JSONStatusResponse> CheckTokenAsync(string username, string token, string language = "en");
 
-        Task<JSONStatusResponse> AsyncLoginOrRegister(string username, string password, string userEmail, string language = "en", string country = "AT");
+        Task<JSONStatusResponse> LoginOrRegisterAsync(string username, string password, string userEmail, string language = "en", string country = "AT");
 
-        Task<JSONStatusResponse> AsyncUploadProject(string projectTitle, string username, string token, string language = "en");
+        Task<JSONStatusResponse> UploadProjectAsync(string projectTitle, string username, string token, string language = "en");
 
-        Task<JSONStatusResponse> AsyncReportAsInappropriate(string projectId, string flagReason, string language = "en");
+        Task<JSONStatusResponse> ReportAsInappropriateAsync(string projectId, string flagReason, string language = "en");
 
-        Task<JSONStatusResponse> AsyncRecoverPassword(string recoveryUserData, string language = "en");
+        Task<JSONStatusResponse> RecoverPasswordAsync(string recoveryUserData, string language = "en");
 
-        Task<JSONStatusResponse> AsyncChangePassword(string newPassword, string newPasswortRepeated, string hash, string language = "en");
+        Task<JSONStatusResponse> ChangePasswordAsync(string newPassword, string newPasswortRepeated, string hash, string language = "en");
 
         bool NoUploadsPending();
 

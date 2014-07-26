@@ -4,11 +4,11 @@ using Catrobat.IDE.Core.Services.Storage;
 
 namespace Catrobat.IDE.WindowsShared.Services.Storage
 {
-    public class StorageFactoryStore : IStorageFactory
+    public class StorageFactoryWindowsShared : IStorageFactory
     {
         public IStorage CreateStorage()
         {
-            var storage = new StorageStore();
+            var storage = new StorageWindowsShared();
 
             var minDimension = Math.Min(ServiceLocator.SystemInformationService.ScreenHeight,
                 ServiceLocator.SystemInformationService.ScreenWidth);

@@ -7,6 +7,7 @@ using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.Xml;
 using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
@@ -31,17 +32,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #endregion
 
         #region Properties
-
-        public Project CurrentProject
-        {
-            get { return _currentProject; }
-            private set 
-            {
-                if (value == _currentProject) return;
-                _currentProject = value;                 
-                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject)); 
-            }
-        }
 
         public bool ButtonDownloadIsEnabled
         {
@@ -152,46 +142,44 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private async void DownloadAction(OnlineProjectHeader onlineProjectHeader)
         {
             ButtonDownloadIsEnabled = false;
-            Task<CatrobatVersionConverter.VersionConverterError> downloadTask = 
-                Task.Run(() =>
-                    ServiceLocator.WebCommunicationService.AsyncDownloadAndSaveProject(
-                    onlineProjectHeader.DownloadUrl, onlineProjectHeader.ProjectName));
 
-            var projectChangedMessage = new MessageBase();
-            Messenger.Default.Send(projectChangedMessage, 
-                ViewModelMessagingToken.DownloadProjectStartedListener);
+            ServiceLocator.ProjectImporterService.SetDownloadHeader(onlineProjectHeader);
+            ServiceLocator.NavigationService.RemoveBackEntry();
+            ServiceLocator.NavigationService.NavigateTo<ProjectImportViewModel>();
 
-            base.GoBackAction();
+            //var projectChangedMessage = new MessageBase();
+            //Messenger.Default.Send(projectChangedMessage, 
+            //    ViewModelMessagingToken.DownloadProjectStartedListener);
 
-            CatrobatVersionConverter.VersionConverterError error = await downloadTask;
-            var message = new MessageBase();
-            Messenger.Default.Send(message, ViewModelMessagingToken.LocalProjectsChangedListener);
+            //CatrobatVersionConverter.VersionConverterError error = await downloadTask;
+            //var message = new MessageBase();
+            //Messenger.Default.Send(message, ViewModelMessagingToken.LocalProjectsChangedListener);
 
-            if (error != CatrobatVersionConverter.VersionConverterError.NoError)
-            {
-                switch (error)
-                {
-                    case CatrobatVersionConverter.VersionConverterError.VersionTooOld:
-                    case CatrobatVersionConverter.VersionConverterError.VersionTooNew:
-                        ServiceLocator.NotifictionService.ShowToastNotification(null,
-                            AppResources.Main_VersionIsNotSupported, ToastNotificationTime.Medeum);
-                        break;
-                    case CatrobatVersionConverter.VersionConverterError.ProgramDamaged:
-                        ServiceLocator.NotifictionService.ShowToastNotification(null,
-                            AppResources.Main_ProjectNotValid, ToastNotificationTime.Medeum);
-                        break;
-                }
-            }
-            else
-            {
-                ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_NoDownloadsPending, ToastNotificationTime.Short);
-            }
+            //if (error != CatrobatVersionConverter.VersionConverterError.NoError)
+            //{
+            //    switch (error)
+            //    {
+            //        case CatrobatVersionConverter.VersionConverterError.VersionTooOld:
+            //        case CatrobatVersionConverter.VersionConverterError.VersionTooNew:
+            //            ServiceLocator.NotifictionService.ShowToastNotification(null,
+            //                AppResources.Main_VersionIsNotSupported, ToastNotificationTime.Medeum);
+            //            break;
+            //        case CatrobatVersionConverter.VersionConverterError.ProgramDamaged:
+            //            ServiceLocator.NotifictionService.ShowToastNotification(null,
+            //                AppResources.Main_ProjectNotValid, ToastNotificationTime.Medeum);
+            //            break;
+            //    }
+            //}
+            //else
+            //{
+            //    ServiceLocator.NotifictionService.ShowToastNotification(null,
+            //        AppResources.Main_NoDownloadsPending, ToastNotificationTime.Short);
+            //}
         }
 
         private void ReportAction(OnlineProjectHeader onlineProjectHeader)
         {
-            ResetViewModel();
+
             ServiceLocator.NavigationService.NavigateTo<OnlineProjectReportViewModel>();
         }
 
@@ -202,17 +190,14 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         protected override void GoBackAction()
         {
-            ResetViewModel();
+
             base.GoBackAction();
         }
 
         #endregion
 
         #region MessageActions
-        private void CurrentProjectChangedAction(GenericMessage<Project> message)
-        {
-            CurrentProject = message.Content;
-        }
+
         #endregion
 
         public OnlineProjectViewModel()
@@ -221,19 +206,16 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             DownloadCommand = new RelayCommand<OnlineProjectHeader>(DownloadAction, DownloadCommand_CanExecute);
             ReportCommand = new RelayCommand<OnlineProjectHeader>(ReportAction);
             LicenseCommand = new RelayCommand(LicenseAction);
-
-            Messenger.Default.Register<GenericMessage<Project>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
 
 
-        private void ResetViewModel()
-        {
-            ButtonDownloadIsEnabled = true;
-            UploadedLabelText = "";
-            VersionLabelText = "";
-            ViewsLabelText = "";
-            DownloadsLabelText = "";
-        }
+        //private void ResetViewModel()
+        //{
+        //    ButtonDownloadIsEnabled = true;
+        //    UploadedLabelText = "";
+        //    VersionLabelText = "";
+        //    ViewsLabelText = "";
+        //    DownloadsLabelText = "";
+        //}
     }
 }

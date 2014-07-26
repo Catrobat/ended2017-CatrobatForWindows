@@ -72,10 +72,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\SoundPlayerServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SoundRecorderServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SoundServiceWindowsShared.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Storage\ResourceLoaderFactoryStore.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Storage\ResourcesStore.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Storage\StorageFactoryStore.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Storage\StorageStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Storage\ResourceLoaderFactoryWindowsShared.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Storage\ResourcesWindowsShared.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Storage\StorageFactoryWindowsShared.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Storage\StorageWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SystemInformationServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\AsyncRunner.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Semaphore.cs" />

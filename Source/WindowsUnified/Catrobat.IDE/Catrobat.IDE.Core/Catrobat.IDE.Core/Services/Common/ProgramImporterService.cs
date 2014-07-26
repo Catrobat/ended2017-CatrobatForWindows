@@ -6,6 +6,7 @@ using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Core.Xml;
 using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 
@@ -13,77 +14,49 @@ namespace Catrobat.IDE.Core.Services.Common
 {
     public class ProgramImporterService : IProgramImporterService
     {
-        private XmlProject _project;
         private Stream _projectStream;
-        private ProgramImportResult _importResult;
+        private ExtractProgramResult _extractResult;
+        private CheckProgramImportResult _checkResult;
+        private OnlineProjectHeader _onlineProjectHeader;
 
         public void SetProjectStream(Stream projectStream)
         {
             _projectStream = projectStream;
         }
 
-        public async Task<ProgramImportResult> StartImportProject()
+        public void SetDownloadHeader(OnlineProjectHeader projectHeader)
         {
-            _importResult = new ProgramImportResult {Status = ProgramImportStatus.Damaged};
+            _onlineProjectHeader = projectHeader;
+        }
+
+        public async Task<ExtractProgramResult> ExtractProgram()
+        {
+            _extractResult = new ExtractProgramResult {Status = ExtractProgramStatus.Success};
             
             try
             {
-                if(_projectStream == null)
-                    throw new Exception(
-                        "SetProjectStream was not called to set the project stream.");
+                var projectName = "";
 
+                if(_projectStream == null && _onlineProjectHeader == null)
+                    throw new Exception(
+                        "SetProjectStream or SetDownloadHeader have to be called before calling StartImportProject.");
+
+                if (_projectStream == null && _onlineProjectHeader == null)
+                    throw new Exception("SetProjectStream and SetDownloadHeader cannot be used together.");
+
+                if (_onlineProjectHeader != null)
+                {
+                    _projectStream = await ServiceLocator.WebCommunicationService.DownloadAsync(
+                        _onlineProjectHeader.DownloadUrl, _onlineProjectHeader.ProjectName);
+                }
+
+               
                 await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
                     _projectStream, CatrobatContextBase.TempProjectImportPath);
-
-                PortableImage projectScreenshot = null;
-                string projectCode = "";
-
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    projectScreenshot = 
-                        await storage.LoadImageAsync(Path.Combine(
-                        CatrobatContextBase.TempProjectImportPath, Project.ScreenshotPath)) ??
-                        await storage.LoadImageAsync(Path.Combine(
-                        CatrobatContextBase.TempProjectImportPath, Project.AutomaticScreenshotPath));
-                }
-                var projectCodePath = Path.Combine(
-                    CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
-                
-                var converterResult = await CatrobatVersionConverter.
-                    ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion);
-
-                if (converterResult.Error != CatrobatVersionConverter.VersionConverterError.NoError)
-                {
-                    switch (converterResult.Error)
-                    {
-                        case CatrobatVersionConverter.VersionConverterError.VersionTooNew:
-                            _importResult.Status = ProgramImportStatus.VersionTooNew;
-                            break;
-                        case CatrobatVersionConverter.VersionConverterError.VersionTooOld:
-                            _importResult.Status = ProgramImportStatus.VersionTooOld;
-                            break;
-                        default:
-                            _importResult.Status = ProgramImportStatus.Damaged;
-                            break;
-                    }
-                    return _importResult;
-                }
-
-                var project = new XmlProject(converterResult.Xml);
-                await project.Save();
-
-                _importResult.ProjectHeader = new LocalProjectHeader
-                {
-                    Screenshot = projectScreenshot,
-                    ProjectName = project.ProjectHeader.ProgramName
-                };
-
-                _importResult.Status = ProgramImportStatus.Valid;
             }
             catch (Exception)
             {
-                _importResult.ProjectHeader = null;
-                _importResult.Status = ProgramImportStatus.Damaged;
+                _extractResult.Status = ExtractProgramStatus.Error;
             }
 
             using (var storage = StorageSystem.GetStorage())
@@ -94,69 +67,103 @@ namespace Catrobat.IDE.Core.Services.Common
                 }
             }
 
-            return _importResult;
+            return _extractResult;
+        }
+
+        public async Task<CheckProgramImportResult> CheckProgram()
+        {
+            _checkResult = new CheckProgramImportResult();
+            PortableImage projectScreenshot = null;
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                projectScreenshot =
+                    await storage.LoadImageAsync(Path.Combine(
+                    CatrobatContextBase.TempProjectImportPath, Project.ScreenshotPath)) ??
+                    await storage.LoadImageAsync(Path.Combine(
+                    CatrobatContextBase.TempProjectImportPath, Project.AutomaticScreenshotPath));
+            }
+
+            var projectCodePath = Path.Combine(
+                CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
+
+            var converterResult = await CatrobatVersionConverter.
+                ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion);
+
+            if (converterResult.Error != CatrobatVersionConverter.VersionConverterError.NoError)
+            {
+                switch (converterResult.Error)
+                {
+                    case CatrobatVersionConverter.VersionConverterError.VersionTooNew:
+                        _checkResult.Status = ProgramImportStatus.VersionTooNew;
+                        break;
+                    case CatrobatVersionConverter.VersionConverterError.VersionTooOld:
+                        _checkResult.Status = ProgramImportStatus.VersionTooOld;
+                        break;
+                    default:
+                        _checkResult.Status = ProgramImportStatus.Damaged;
+                        break;
+                }
+                return _checkResult;
+            }
+
+            try
+            {
+                var project = new XmlProject(converterResult.Xml);
+            }
+            catch (Exception)
+            {
+                _checkResult.Status = ProgramImportStatus.Damaged;
+                _checkResult.ProjectHeader = null;
+                return _checkResult;
+            }
+
+            
+            _checkResult.ProjectHeader = new LocalProjectHeader
+            {
+                Screenshot = projectScreenshot,
+                ProjectName = _onlineProjectHeader.ProjectName
+            };
+
+            _checkResult.Status = ProgramImportStatus.Valid;
+            return _checkResult;
         }
 
         public async Task<string> AcceptTempProject()
         {
-            var newProjectName = "";
+            var renameResult = await XmlProgramRenamer.RenameProjectFromFile(
+                Path.Combine(CatrobatContextBase.TempProjectImportPath, 
+                Project.ProjectCodePath),
+                _checkResult.ProjectHeader.ProjectName);
+
+            if(_checkResult != null)
+                _checkResult.ProjectHeader.ProjectName = renameResult.NewProjectName;
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var counter = 0;
-                while (true)
-                {
-                    var projectPath = Path.Combine(CatrobatContextBase.ProjectsPath, 
-                        _importResult.ProjectHeader.ProjectName);
-
-                    if (counter != 0)
-                    {
-                        projectPath = Path.Combine(CatrobatContextBase.ProjectsPath,
-                            StringExtensions.Concat(_importResult.ProjectHeader.ProjectName, 
-                            counter.ToString()));
-                    }
-
-                    if (!await storage.DirectoryExistsAsync(projectPath))
-                    {
-                        break;
-                    }
-
-                    counter++;
-                }
-
-                newProjectName = _importResult.ProjectHeader.ProjectName;
-
-                if (counter != 0)
-                {
-                    newProjectName = _importResult.ProjectHeader.ProjectName + counter;
-                    _project.ProjectHeader.ProgramName = newProjectName;
-                    var saveToPath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
-                    await _project.Save(saveToPath);
-                }
+                var newPath = Path.Combine(CatrobatContextBase.ProjectsPath, 
+                    renameResult.NewProjectName);
+                await storage.MoveDirectoryAsync(CatrobatContextBase.TempProjectImportPath,
+                    newPath);
             }
 
-            using (var storage = StorageSystem.GetStorage())
-            {
-                var tempPath = Path.Combine(CatrobatContextBase.ProjectsPath, _project.ProjectHeader.ProgramName);
-                await storage.MoveDirectoryAsync(CatrobatContextBase.TempProjectImportPath, tempPath);
-            }
+            _extractResult = null;
+            _checkResult = null;
 
-            _importResult = null;
-            _project = null;
-
-            return newProjectName;
+            return renameResult.NewProjectName;
         }
 
         public async Task CancelImport()
         {
-            _importResult = null;
-            _project = null;
+            // TODO: cancel import
 
-            using (var storage = StorageSystem.GetStorage())
-            {
-                await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportPath);
-                await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
-            }
+            //_extractResult = null;
+
+            //using (var storage = StorageSystem.GetStorage())
+            //{
+            //    await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportPath);
+            //    await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
+            //}
         }
     }
 }

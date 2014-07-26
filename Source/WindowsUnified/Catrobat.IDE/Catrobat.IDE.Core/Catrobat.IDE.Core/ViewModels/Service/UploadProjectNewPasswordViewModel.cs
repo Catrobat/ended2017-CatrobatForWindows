@@ -78,7 +78,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
             else
             {
-                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.AsyncChangePassword(_newPassword, _repeatedPassword, Context.LocalSettings.CurrentUserRecoveryHash, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
+                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.ChangePasswordAsync(_newPassword, _repeatedPassword, Context.LocalSettings.CurrentUserRecoveryHash, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
                 switch (statusResponse.statusCode)
                 {

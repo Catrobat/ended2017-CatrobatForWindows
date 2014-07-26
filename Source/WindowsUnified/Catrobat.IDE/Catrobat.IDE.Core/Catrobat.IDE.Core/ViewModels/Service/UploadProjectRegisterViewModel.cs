@@ -95,7 +95,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
             else
             {
-                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.AsyncLoginOrRegister(_username, _password, _email,
+                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.LoginOrRegisterAsync(_username, _password, _email,
                                                              ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName,
                                                              RegionInfo.CurrentRegion.TwoLetterISORegionName);
 

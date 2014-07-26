@@ -2,11 +2,11 @@
 
 namespace Catrobat.IDE.WindowsShared.Services.Storage
 {
-    public class ResourceLoaderFactoryStore : IResourceLoaderFactory
+    public class ResourceLoaderWindowsShared : IResourceLoaderFactory
     {
         public IResourceLoader CreateResourceLoader()
         {
-            return new ResourcesStore();
+            return new ResourcesWindowsShared();
         }
     }
 }

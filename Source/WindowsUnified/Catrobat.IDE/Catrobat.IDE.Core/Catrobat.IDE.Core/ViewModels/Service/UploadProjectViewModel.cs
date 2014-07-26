@@ -123,7 +123,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             CurrentProject.Description = ProjectDescription;
             await App.SaveContext(CurrentProject);
 
-            Task<JSONStatusResponse> upload_task = ServiceLocator.WebCommunicationService.AsyncUploadProject(ProjectName, Context.CurrentUserName,
+            Task<JSONStatusResponse> upload_task = ServiceLocator.WebCommunicationService.UploadProjectAsync(ProjectName, Context.CurrentUserName,
                                                           Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
             var message = new MessageBase();

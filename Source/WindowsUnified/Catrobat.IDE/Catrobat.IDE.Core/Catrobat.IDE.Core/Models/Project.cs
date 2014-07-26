@@ -129,6 +129,11 @@ namespace Catrobat.IDE.Core.Models
 
         #endregion
 
+        public Project()
+        {
+            
+        }
+
         public async Task SetProgramNameAndRenameDirectory(string newProgramName)
         {
             if (newProgramName == Name) return;

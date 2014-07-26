@@ -121,7 +121,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.NavigationService.NavigateTo<UploadProjectLoadingViewModel>();
 
             // Determine which page to open
-            JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.AsyncCheckToken(Context.CurrentUserName, Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
+            JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.CheckTokenAsync(Context.CurrentUserName, Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
             if (statusResponse.statusCode == StatusCodes.ServerResponseOk)
             {

@@ -18,7 +18,7 @@
 
     <StackPanel Grid.Row="0" Margin="12,17,0,28">
       <TextBlock Text="IMPORT" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
-      <TextBlock Text="{Binding ProjectName}" Margin="9,-7,0,0" Style="{Binding StaticTheme.TextTitle1Style, Source={StaticResource ThemeChooser}}"/>
+      <TextBlock Text="{Binding ProjectHeader.ProjectName}" Margin="9,-7,0,0" Style="{Binding StaticTheme.TextTitle1Style, Source={StaticResource ThemeChooser}}"/>
     </StackPanel>
 
     <Grid Grid.Row="1">
@@ -67,7 +67,7 @@
                VerticalAlignment="Center"
                HorizontalAlignment="Center"
                Stretch="Uniform"
-               Source="{Binding ScreenshotImageSource, 
+               Source="{Binding ProjectHeader.Screenshot, 
                Converter={StaticResource NoScreenshotConverter}}"/>
       </Grid>
     </Grid>

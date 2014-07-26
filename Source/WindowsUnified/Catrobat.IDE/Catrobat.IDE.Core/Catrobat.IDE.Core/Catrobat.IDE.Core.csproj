@@ -205,6 +205,7 @@
     <Compile Include="Xml\Converter\XmlObjects\XmlSound.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlSprite.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlUserVariable.cs" />
+    <Compile Include="Xml\XmlProgramRenamer.cs" />
     <Compile Include="Xml\VersionConverter\Versions\CatrobatVersion092ToWin091.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\XmlBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\XmlBrickList.cs" />
