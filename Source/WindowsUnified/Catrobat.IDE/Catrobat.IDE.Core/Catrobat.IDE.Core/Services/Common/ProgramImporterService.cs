@@ -18,6 +18,7 @@ namespace Catrobat.IDE.Core.Services.Common
         private ExtractProgramResult _extractResult;
         private CheckProgramImportResult _checkResult;
         private OnlineProjectHeader _onlineProjectHeader;
+        private XmlProject _convertedProject;
 
         public void SetProjectStream(Stream projectStream)
         {
@@ -31,13 +32,13 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public async Task<ExtractProgramResult> ExtractProgram()
         {
-            _extractResult = new ExtractProgramResult {Status = ExtractProgramStatus.Success};
-            
+            _extractResult = new ExtractProgramResult { Status = ExtractProgramStatus.Success };
+
             try
             {
                 var projectName = "";
 
-                if(_projectStream == null && _onlineProjectHeader == null)
+                if (_projectStream == null && _onlineProjectHeader == null)
                     throw new Exception(
                         "SetProjectStream or SetDownloadHeader have to be called before calling StartImportProject.");
 
@@ -50,7 +51,7 @@ namespace Catrobat.IDE.Core.Services.Common
                         _onlineProjectHeader.DownloadUrl, _onlineProjectHeader.ProjectName);
                 }
 
-               
+
                 await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
                     _projectStream, StorageConstants.TempProjectImportPath);
             }
@@ -109,7 +110,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
             try
             {
-                var project = new XmlProject(converterResult.Xml);
+                _convertedProject = new XmlProject(converterResult.Xml);
             }
             catch (Exception)
             {
@@ -118,7 +119,6 @@ namespace Catrobat.IDE.Core.Services.Common
                 return _checkResult;
             }
 
-            
             _checkResult.ProjectHeader = new LocalProjectHeader
             {
                 Screenshot = projectScreenshot,
@@ -131,17 +131,28 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public async Task<string> AcceptTempProject()
         {
-            var renameResult = await ServiceLocator.ContextService.RenameProjectFromFile(
-                Path.Combine(StorageConstants.TempProjectImportPath, 
-                Project.ProjectCodePath),
-                _checkResult.ProjectHeader.ProjectName);
+            var uniqueProgramName = await ServiceLocator.ContextService.
+                FindUniqueName(_onlineProjectHeader.ProjectName);
 
-            if(_checkResult != null)
+
+            if (_convertedProject != null) // if previour conversion was OK
+            {
+                await _convertedProject.Save(Path.Combine(
+                    StorageConstants.TempProjectImportPath, Project.ProjectCodePath));
+            }
+
+            // if previour conversion was not OK
+            var renameResult = await ServiceLocator.ContextService.RenameProgramFromFile(
+                Path.Combine(StorageConstants.TempProjectImportPath,
+                Project.ProjectCodePath),
+                uniqueProgramName);
+
+            if (_checkResult != null)
                 _checkResult.ProjectHeader.ProjectName = renameResult.NewProjectName;
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var newPath = Path.Combine(StorageConstants.ProjectsPath, 
+                var newPath = Path.Combine(StorageConstants.ProjectsPath,
                     renameResult.NewProjectName);
                 await storage.MoveDirectoryAsync(StorageConstants.TempProjectImportPath,
                     newPath);

@@ -15,7 +15,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 
 namespace Catrobat.IDE.Core.Xml
 {
-    public enum XmlRenameStatus {Success, Error}
+    public enum XmlRenameStatus { Success, Error }
 
     public class XmlProjectRenamerResult
     {
@@ -26,9 +26,9 @@ namespace Catrobat.IDE.Core.Xml
         public string NewProjectCode { get; set; }
     }
 
-    public class XmlProgramRenamer
+    public class XmlProgramHelper
     {
-        public static XmlProjectRenamerResult RenameProjectFromCode(
+        public static XmlProjectRenamerResult RenameProgram(
             string projectCode, string newProjectName)
         {
             try
@@ -59,8 +59,18 @@ namespace Catrobat.IDE.Core.Xml
                     NewProjectCode = null
                 };
             }
+        }
 
+        public static string GetProgramVersion(
+            string projectCode)
+        {
+            var document = XDocument.Load(new StringReader(projectCode));
+            document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
 
+            var project = document.Element("program");
+            var header = project.Element("header");
+            var programName = header.Element("catrobatLanguageVersion");
+            return programName.Value;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,8 +16,7 @@ namespace Catrobat.IDE.Core.Services.Common
 {
     public class ContextService : IContextService
     {
-        public async Task<XmlProjectRenamerResult> RenameProjectFromFile(
-         string projectCodeFilePath, string newProjectName)
+        public async Task<string> FindUniqueName(string programName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
@@ -24,12 +24,12 @@ namespace Catrobat.IDE.Core.Services.Common
                 while (true)
                 {
                     var projectPath = Path.Combine(StorageConstants.ProjectsPath,
-                        newProjectName);
+                        programName);
 
                     if (counter != 0)
                     {
                         projectPath = Path.Combine(StorageConstants.ProjectsPath,
-                            newProjectName + counter);
+                            programName + counter);
                     }
 
                     if (!await storage.DirectoryExistsAsync(projectPath))
@@ -38,18 +38,27 @@ namespace Catrobat.IDE.Core.Services.Common
                     counter++;
                 }
 
-                var newProjectNameUnique = newProjectName;
+                var programNameUnique = programName;
 
                 if (counter != 0)
-                    newProjectNameUnique = newProjectName + counter;
+                    programNameUnique = programName + counter;
 
+                return programNameUnique;
+            }
+        }
+
+        public async Task<XmlProjectRenamerResult> RenameProgramFromFile(
+         string projectCodeFilePath, string newProjectName)
+        {
+            using (var storage = StorageSystem.GetStorage())
+            {
                 var projectCode = await storage.ReadTextFileAsync(projectCodeFilePath);
-                var result = XmlProgramRenamer.RenameProjectFromCode(projectCode, newProjectNameUnique);
+                var result = XmlProgramHelper.RenameProgram(projectCode, newProjectName);
 
                 await storage.WriteTextFileAsync(
                     projectCodeFilePath, result.NewProjectCode);
 
-                result.NewProjectName = newProjectNameUnique;
+                result.NewProjectName = newProjectName;
 
                 return result;
             }
@@ -74,6 +83,9 @@ namespace Catrobat.IDE.Core.Services.Common
             }
             catch
             {
+                if(Debugger.IsAttached)
+                    Debugger.Break();
+
                 return null;
             }
             //}
@@ -85,13 +97,15 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 var tempPath = Path.Combine(StorageConstants.ProjectsPath, projectName, Project.ProjectCodePath);
                 var xml = await storage.ReadTextFileAsync(tempPath);
-                return new XmlProject(xml)
+
+                var programVersion = XmlProgramHelper.GetProgramVersion(xml);
+                if (programVersion != Constants.TargetIDEVersion)
                 {
-                    ProjectHeader =
-                    {
-                        ProgramName = projectName
-                    }
-                };
+                    // this should happen when the app version was outdated when the program was added
+                    // TODO: implement me
+                }
+
+                return new XmlProject(xml);
             }
         }
 
@@ -189,6 +203,5 @@ namespace Catrobat.IDE.Core.Services.Common
                 return null;
             }
         }
-
     }
 }

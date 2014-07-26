@@ -208,7 +208,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             Task.Run(async () =>
             {
-                if (CurrentProject == null || CurrentProject.Name != CurrentProjectHeader.ProjectName)
+                if (CurrentProject == null || 
+                    CurrentProject.Name != CurrentProjectHeader.ProjectName)
                 {
                     lock (_loadingLock)
                     {
@@ -221,7 +222,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     if (CurrentProject != null)
                         await CurrentProject.Save();
 
-                    Project newProject = await ServiceLocator.ContextService.LoadProjectByNameStatic(CurrentProjectHeader.ProjectName);
+                    var newProject = await ServiceLocator.ContextService.
+                        LoadProjectByNameStatic(CurrentProjectHeader.ProjectName);
                     
                     if (newProject != null)
                     {
@@ -233,7 +235,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         IsActivatingLocalProject = false;
 
                         var projectChangedMessage = new GenericMessage<Project>(newProject);
-                        Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                        Messenger.Default.Send(projectChangedMessage, 
+                            ViewModelMessagingToken.CurrentProjectChangedListener);
 
                         IsActivatingLocalProject = false;
                     }
@@ -251,7 +254,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                             CurrentProject = null;
                             CurrentProjectHeader = null;
                             var message = new GenericMessage<LocalProjectHeader>(null);
-                            Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
+                            Messenger.Default.Send(message, 
+                                ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
                         });
                     }
                 }
