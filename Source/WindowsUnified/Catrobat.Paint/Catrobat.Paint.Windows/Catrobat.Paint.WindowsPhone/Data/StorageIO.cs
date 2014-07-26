@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
+// TODO: using System.Windows.Media.Imaging;
+using Windows.Media;
 using Windows.Storage;
-using ImageTools;
-using ImageTools.IO.Png;
-using Microsoft.Xna.Framework.Media;
+using Windows.UI.Xaml.Media.Imaging;
+// TODO: using ImageTools;
+// TODO: using ImageTools.IO.Png;
+// TODO: using Microsoft.Xna.Framework.Media;
 
 namespace Catrobat.Paint.Phone.Data
 {
@@ -49,7 +51,7 @@ namespace Catrobat.Paint.Phone.Data
                     return false;
                 }
 
-                s.Close();
+                // TODO: s.Close();
             }
 
             return true;
@@ -67,12 +69,12 @@ namespace Catrobat.Paint.Phone.Data
             }
 
 
-            var img = bitmap.ToImage();
-            var encoder = new PngEncoder();
+            // TODO: var img = bitmap.ToImage();
+            // TODO: var encoder = new PngEncoder();
             using (var s = await file.OpenStreamForWriteAsync())
             {
-                encoder.Encode(img, s);
-                s.Close();
+                // TODO: encoder.Encode(img, s);
+               // TODO s.Close();
             }
 
 
@@ -84,10 +86,10 @@ namespace Catrobat.Paint.Phone.Data
         {
             await WriteBitmapToPngFileIsolatedStorage(bitmap, filenameWithEnding);
  
-            var library = new MediaLibrary();
+            // TODO: var library = new MediaLibrary();
             using (var s =  await _pocketPaintFolder.OpenStreamForReadAsync(filenameWithEnding))
             {
-                var pic = library.SavePicture(filenameWithEnding, s);
+                // TODO: var pic = library.SavePicture(filenameWithEnding, s);
             }
 
             return true;
@@ -98,10 +100,11 @@ namespace Catrobat.Paint.Phone.Data
  
             using (var s = await _pocketPaintFolder.OpenStreamForReadAsync(filenameWithEnding))
             {
-                var decoder = new PngDecoder();
-                var img = new ExtendedImage();
-                decoder.Decode(img, s);
-                return new WriteableBitmap(img.ToBitmap());
+                // TODO: var decoder = new PngDecoder();
+                // TODO: var img = new ExtendedImage();
+                // TODO: decoder.Decode(img, s);
+                // TODO: return new WriteableBitmap(img.ToBitmap());
+                return null;
             }
         }
     }

@@ -85,7 +85,7 @@
 		</Style>
 	</UserControl.Resources>
 
-  <Grid Margin="7" >
+  <Grid Margin="0 7 7 7" >
     <FlyoutPresenter Visibility="Collapsed">
       <MenuFlyout x:Name="MenuFlyoutLocalProjectOptions">
         <MenuFlyoutItem Text="{Binding Resources.Main_CopyProject, 
@@ -122,24 +122,39 @@
                     TextAlignment="Center" HorizontalAlignment="Stretch" 
                     VerticalAlignment="Center" Margin="7" FontSize="14"/>
                 </Grid>
-                <Grid Grid.Row="1"
-                  Visibility="{Binding Screenshot.IsEmpty, 
-                  Converter={StaticResource BoolVisibilityConverter}}">
-                  <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
+              </Grid>
+            </Grid>
+          </Border>
+        </Grid>
+        <Grid Visibility="{Binding Screenshot.IsEmpty, 
+              Converter={StaticResource BoolVisibilityConverter}}">
+          <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
                     TextAlignment="Center" TextWrapping="Wrap" 
                     Foreground="DarkGray"
                     Text="{Binding Resources.Main_NoScreenshot, 
                     Source={StaticResource LocalizedStrings}}"/>
-                </Grid>
-              </Grid>
+        </Grid>
+        <Grid>
+          <Button Width="140" Height="140" MinWidth="0" MinHeight="0" BorderThickness="0"
+            HorizontalAlignment="Center"
+            Padding="-0 -10 -0 -10"
+            Margin="0 0 0 0"
+            Click="NotValidButton_OnClick" 
+            Style="{StaticResource OptionsButtonStyle}"
+            Visibility="{Binding IsValid, 
+            Converter={StaticResource NegativeBoolVisibilityConverter}}">
+            <Grid>
+              <TextBlock FontSize="50" Foreground="Crimson" 
+                FontWeight="Bold" Margin="30 0 30 0" Text="!"/>
             </Grid>
-          </Border>
+          </Button>
         </Grid>
         <Button MinWidth="0" MinHeight="0" Height="50" Width="50"
           VerticalAlignment="Bottom" HorizontalAlignment="Right"
           Padding="0 -10 0 -10" Margin="0 0 -10 -10"
           BorderThickness="0"
-          Click="OptionsButton_OnClick" Style="{StaticResource OptionsButtonStyle}">
+          Click="OptionsButton_OnClick" 
+          Style="{StaticResource OptionsButtonStyle}">
           <Grid Height="50" Width="50">
             <Path Margin="0 0 9.5 9.5" Height="31" Width="31" 
                   VerticalAlignment="Bottom" HorizontalAlignment="Right" 
@@ -154,28 +169,6 @@
             <TextBlock Text="..." FontSize="30" Margin="0 0 10 5"
               VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
           </Grid>
-    
-          <!--<Grid Height="40" Width="40">
-            <Grid.RowDefinitions>
-              <RowDefinition Height="1*"/>
-              <RowDefinition Height="2*"/>
-              <RowDefinition Height="1*"/>
-              <RowDefinition Height="2*"/>
-              <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" 
-                                VerticalAlignment="Stretch" 
-                                HorizontalAlignment="Stretch" 
-                                Background="White"/>
-            <Grid Grid.Row="2" 
-                                VerticalAlignment="Stretch" 
-                                HorizontalAlignment="Stretch" 
-                                Background="White"/>
-            <Grid Grid.Row="4" 
-                                VerticalAlignment="Stretch" 
-                                HorizontalAlignment="Stretch" 
-                                Background="White"/>
-          </Grid>-->
         </Button>
       </Grid>
     </Button>

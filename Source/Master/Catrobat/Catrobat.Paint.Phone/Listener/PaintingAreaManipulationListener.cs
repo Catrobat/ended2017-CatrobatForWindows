@@ -49,8 +49,17 @@ namespace Catrobat.Paint.Phone.Listener
             else
             {
                 movezoom = new TranslateTransform();
-                ((TranslateTransform)movezoom).X += e.DeltaManipulation.Translation.X;
-                ((TranslateTransform)movezoom).Y += e.DeltaManipulation.Translation.Y;
+                int right_left = PocketPaintApplication.GetInstance().PaintData.max_right_left;
+                int difference = right_left + Convert.ToInt32(e.DeltaManipulation.Translation.X);
+
+                bool move_allowed = false;
+                int move_x = 0;
+
+
+
+                    ((TranslateTransform)movezoom).X += Convert.ToInt32(e.DeltaManipulation.Translation.X);
+                    ((TranslateTransform)movezoom).Y += e.DeltaManipulation.Translation.Y;
+                    PocketPaintApplication.GetInstance().PaintData.max_right_left = PocketPaintApplication.GetInstance().PaintData.max_right_left + Convert.ToInt32(e.DeltaManipulation.Translation.X);
             }
 
             switch (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType())
@@ -69,6 +78,7 @@ namespace Catrobat.Paint.Phone.Listener
 
             }
         }
+       
 
         public void ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {

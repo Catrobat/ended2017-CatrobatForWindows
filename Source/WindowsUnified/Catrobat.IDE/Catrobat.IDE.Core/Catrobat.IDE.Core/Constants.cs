@@ -16,6 +16,8 @@ namespace Catrobat.IDE.Core
 
         // Vatrobat XML Version
 
+        public const double MinimumCodeVersion = 0.91;
+
         public const string TargetIDEVersion = "Win0.91";
 
         public const string TargetOutputVersion = "0.91";
@@ -28,6 +30,6 @@ namespace Catrobat.IDE.Core
         };
 
         public static List<string> CatrobatFileNames = 
-            new List<string>{ "catrobat", "pocketcode" };
+            new List<string>{ ".catrobat", ".pocketcode" };
     }
 }

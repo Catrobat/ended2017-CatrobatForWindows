@@ -18,22 +18,22 @@
 
     <StackPanel x:Name="TitlePanel" 
                 Grid.Row="0"
-                Margin="10"> 
+                Margin="12"> 
       <TextBlock x:Name="ApplicationTitle" 
                  Text="{Binding Resources.Main_TitleUploadProject, 
                  Source={StaticResource LocalizedStrings}}" 
                  Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
                  Source={StaticResource ThemeChooser}}"/>
       <TextBlock x:Name="PageTitle" 
-                 Text="{Binding Resources.Main_ProjectSettings, 
+                 Text="{Binding Resources.Main_TitleProjectSettings, 
                  Source={StaticResource LocalizedStrings}}"  
-                 Margin="10 0 0 0" 
+                 Margin="12 0 0 0" 
                  Style="{Binding StaticTheme.TextTitle3Style.NativeStyle, 
                  Source={StaticResource ThemeChooser}}"/>
     </StackPanel>
 
-    <StackPanel Grid.Row="1" Margin="10 0 10 15">
-      <TextBlock Margin="0 0 0 5" 
+    <StackPanel Grid.Row="1" Margin="12 0 12 18">
+      <TextBlock Margin="0 0 0 6" 
                  Text="{Binding Resources.Main_ProjectName, 
                  Source={StaticResource LocalizedStrings}}" 
                  Style="{Binding StaticTheme.TextNormalStyle, 
@@ -44,7 +44,7 @@
                TextChanged="TextBox_TextChanged" 
                MaxLength="{Binding Resources.Main_TextBoxLimit, 
                Source={StaticResource LocalizedStrings}}"/>
-      <TextBlock Margin="0 10 0 5" 
+      <TextBlock Margin="0 12 0 6" 
                  Text="{Binding Resources.Main_ProjectDescription, 
                  Source={StaticResource LocalizedStrings}}" 
                  Style="{Binding StaticTheme.TextNormalStyle, 

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Shapes;
-using Catrobat.Paint.Phone.Tool;
+using Catrobat.Paint.WindowsPhone.Tool;
+using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.Phone.Command
 {
@@ -22,17 +22,17 @@ namespace Catrobat.Paint.Phone.Command
 
         public override bool ReDo()
         {
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(Path);
+            // TODO: PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(Path);
             return true;
         }
 
         public override bool UnDo()
         {
-            if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Contains(Path))
+            /* TODO: if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Contains(Path))
             {
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Remove(Path);
                 return true;
-            }
+            }*/
             return false;
         }
     }

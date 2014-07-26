@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Catrobat.Paint.Phone.Tool;
+using System;
 using System.Windows;
-using System.Windows.Media;
+using Windows.UI.Xaml.Media;
 
-namespace Catrobat.Paint.Phone.Tool
+namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class MoveZoomTool : ToolBase
     {
@@ -13,13 +14,13 @@ namespace Catrobat.Paint.Phone.Tool
         {
             ToolType = ToolType.Move;
             ResetCanvas();
-            if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform != null)
+            // TODO: if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform != null)
             {
-                _transforms = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
+                // TODO: _transforms = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
             }
             if (_transforms == null)
             {
-                PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
+                // TODO: PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
             }
         }
         public override void HandleDown(object arg)
@@ -45,11 +46,12 @@ namespace Catrobat.Paint.Phone.Tool
                 //Point point = PocketPaintApplication.GetInstance().PaintData.min_max_resize;
 
                 var fixedaspection = 0.0;
-                double min_max_resize = PocketPaintApplication.GetInstance().PaintData.min_max_resize;
+                // TODO: double min_max_resize = PocketPaintApplication.GetInstance().PaintData.min_max_resize;
+                double min_max_resize = 0.0;
                 double boundary = 5.0;
                 double boundary_zoom_out = -2.5;
 
-                PocketPaintApplication.GetInstance().PaintData.min_max_resize = Math.Round(PocketPaintApplication.GetInstance().PaintData.min_max_resize, 1);
+                // TODO: PocketPaintApplication.GetInstance().PaintData.min_max_resize = Math.Round(PocketPaintApplication.GetInstance().PaintData.min_max_resize, 1);
                 //MessageBox.Show(PocketPaintApplication.GetInstance().PaintData.min_max_resize.ToString());
                 fixedaspection = resize.ScaleX > resize.ScaleY ? resize.ScaleX : resize.ScaleY;
 
@@ -62,11 +64,11 @@ namespace Catrobat.Paint.Phone.Tool
                         {
                             fixedaspection = (boundary - min_max_resize) > 1.0 ?
                                 (boundary - min_max_resize) : 1.0 + (boundary - min_max_resize);
-                            PocketPaintApplication.GetInstance().PaintData.min_max_resize = boundary;
+                            // TODO: PocketPaintApplication.GetInstance().PaintData.min_max_resize = boundary;
                         }
                         else
                         {
-                            PocketPaintApplication.GetInstance().PaintData.min_max_resize += fixedaspection - 1.0;
+                            // TODO: PocketPaintApplication.GetInstance().PaintData.min_max_resize += fixedaspection - 1.0;
                         }
                         scale_allowed = true;
                     }
@@ -82,14 +84,14 @@ namespace Catrobat.Paint.Phone.Tool
                             /*fixedaspection =  result < 1.0 ?
                                 (1 - result) : (1.0 + (-boundary_zoom_out - min_max_resize) * -1);*/
                             fixedaspection = (1 - result);
-                            PocketPaintApplication.GetInstance().PaintData.min_max_resize = boundary_zoom_out;
+                            // TODO: PocketPaintApplication.GetInstance().PaintData.min_max_resize = boundary_zoom_out;
                         }
                         else
                         {
                             double merke = (1.0 - fixedaspection);
                             //double merke_2 = (1.0 + merke);
                             double merke_3 = merke * -1;
-                            PocketPaintApplication.GetInstance().PaintData.min_max_resize += merke_3;
+                            // TODO: PocketPaintApplication.GetInstance().PaintData.min_max_resize += merke_3;
                         }
                         scale_allowed = true;
                     }

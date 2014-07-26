@@ -36,5 +36,7 @@ namespace Catrobat.IDE.WindowsShared.Converters
 
     public class StringVisibilityConverterBootstrap : PortableValueConverterPhone<StringVisibilityConverter> { }
 
+    public class UnixTimeDateTimeConverterBootstrap : PortableValueConverterPhone<UnixTimeDateTimeConverter> { }
+
     public class VariableButtonVisibilityConverterBootstrap : PortableValueConverterPhone<VariableButtonVisibilityConverter> { }
 }

@@ -1,6 +1,7 @@
-﻿using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+﻿using Catrobat.Paint.WindowsPhone.Tool;
+using System.Windows;
+using Windows.Foundation;
+using Windows.UI.Xaml.Media;
 
 namespace Catrobat.Paint.Phone.Tool
 {
@@ -31,7 +32,7 @@ namespace Catrobat.Paint.Phone.Tool
 
             var coordinate = (Point)arg;
 
-            PocketPaintApplication.GetInstance().PaintData.ColorSelected = new SolidColorBrush(PocketPaintApplication.GetInstance().Bitmap.GetPixel((int)coordinate.X, (int)coordinate.Y)); 
+            // TODO: PocketPaintApplication.GetInstance().PaintData.ColorSelected = new SolidColorBrush(PocketPaintApplication.GetInstance().Bitmap.GetPixel((int)coordinate.X, (int)coordinate.Y)); 
         }
 
         public override void HandleMove(object arg)

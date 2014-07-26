@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
-    public class ProjectGeneratorWhackAMole : IProjectGenerator
+    public class ProjectGeneratorWhackAMole : IProgramGenerator
     {
         private const string ResourcePathToLookFiles = "Content/Programs/WhackAMole/looks/";
         private const string ResourcePathToSoundFiles = "Content/Programs/WhackAMole/sounds/";

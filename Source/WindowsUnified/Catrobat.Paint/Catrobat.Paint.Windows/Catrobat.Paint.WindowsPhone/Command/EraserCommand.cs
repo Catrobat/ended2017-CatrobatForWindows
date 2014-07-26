@@ -1,5 +1,6 @@
-﻿using System.Windows.Shapes;
-using Catrobat.Paint.Phone.Tool;
+﻿using Catrobat.Paint.Phone.Tool;
+using Catrobat.Paint.WindowsPhone.Tool;
+using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.Phone.Command
 {

@@ -1,5 +1,5 @@
 ﻿
-namespace Catrobat.Paint.Phone.Tool
+namespace Catrobat.Paint.WindowsPhone.Tool
 {
 
     public enum ToolType

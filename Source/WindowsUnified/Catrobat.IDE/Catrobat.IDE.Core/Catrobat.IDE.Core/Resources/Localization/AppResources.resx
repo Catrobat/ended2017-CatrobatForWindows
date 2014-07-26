@@ -489,7 +489,7 @@
   <data name="Editor_TitleNewSprite" xml:space="preserve">
     <value>NEW OBJECT</value>
   </data>
-  <data name="Editor_TitleProjectSettings" xml:space="preserve">
+  <data name="Main_TitleProjectSettings" xml:space="preserve">
     <value>PROGRAM SETTINGS</value>
   </data>
   <data name="Editor_TitleRecorder" xml:space="preserve">
@@ -588,7 +588,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>About</value>
   </data>
   <data name="Main_HeaderCurrentProject" xml:space="preserve">
-    <value>Active program</value>
+    <value>active program</value>
   </data>
   <data name="Main_HeaderDesign" xml:space="preserve">
     <value>Design</value>
@@ -603,7 +603,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Online</value>
   </data>
   <data name="Main_HeaderSettings" xml:space="preserve">
-    <value>Settings</value>
+    <value>settings</value>
   </data>
   <data name="Main_ListDesign" xml:space="preserve">
     <value>Design</value>
@@ -633,19 +633,19 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>All uploads finished.</value>
   </data>
   <data name="Main_OnlineProjectDownloadButton" xml:space="preserve">
-    <value>Download</value>
+    <value>download</value>
   </data>
   <data name="Main_OnlineProjectDownloads" xml:space="preserve">
     <value>{0} downloads</value>
   </data>
   <data name="Main_OnlineProjectLicenseButton" xml:space="preserve">
-    <value>License</value>
+    <value>license</value>
   </data>
   <data name="Main_OnlineProjectListBoxLoadMore" xml:space="preserve">
-    <value>Load more...</value>
+    <value>load more...</value>
   </data>
   <data name="Main_OnlineProjectReportButton" xml:space="preserve">
-    <value>Report as inappropriate</value>
+    <value>report as inappropriate</value>
   </data>
   <data name="Main_OnlineProjectStatistics" xml:space="preserve">
     <value>Statistics:</value>
@@ -922,10 +922,10 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Tap '+' to add a new object.</value>
   </data>
   <data name="Main_SetActive" xml:space="preserve">
-    <value>Set active</value>
+    <value>set active</value>
   </data>
   <data name="Main_Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>settings</value>
   </data>
   <data name="Editor_TypeSomething" xml:space="preserve">
     <value>Type something</value>
@@ -1056,9 +1056,6 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Editor_Evaluate" xml:space="preserve">
     <value>Evaluate</value>
   </data>
-  <data name="Main_ButtonLoginRegister" xml:space="preserve">
-    <value>Login / Register</value>
-  </data>
   <data name="Main_ButtonRegister" xml:space="preserve">
     <value>register</value>
   </data>
@@ -1156,7 +1153,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Repeat password:</value>
   </data>
   <data name="Main_UploadProjectUserOrMail" xml:space="preserve">
-    <value>Username or e-mail:</value>
+    <value>Username or email:</value>
   </data>
   <data name="Main_ReportError" xml:space="preserve">
     <value>Report error. {0}</value>
@@ -1198,7 +1195,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Sucessfully changed password.</value>
   </data>
   <data name="Main_OnlineProjectListBoxNoMoreItems" xml:space="preserve">
-    <value>No more programs</value>
+    <value>no more programs</value>
   </data>
   <data name="Main_NoScreenshot" xml:space="preserve">
     <value>No screenshot</value>
@@ -1211,9 +1208,6 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Main_ProjectDescription" xml:space="preserve">
     <value>Description:</value>
-  </data>
-  <data name="Main_ProjectSettings" xml:space="preserve">
-    <value>Program settings</value>
   </data>
   <data name="Main_TitleCurrentProject" xml:space="preserve">
     <value>ACTIVE PROGRAM</value>

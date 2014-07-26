@@ -1,4 +1,4 @@
-﻿using Catrobat.Paint.Phone.Tool;
+﻿using Catrobat.Paint.WindowsPhone.Tool;
 
 namespace Catrobat.Paint.Phone.Command
 {

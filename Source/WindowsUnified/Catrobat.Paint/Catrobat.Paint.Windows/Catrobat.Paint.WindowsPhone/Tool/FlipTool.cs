@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media;
+using Windows.UI.Xaml.Media;
+using Catrobat.Paint.WindowsPhone.Tool;
 
 namespace Catrobat.Paint.Phone.Tool
 {
@@ -55,10 +56,10 @@ namespace Catrobat.Paint.Phone.Tool
             }
             renderTransform.CenterY = 295;
 
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = renderTransform;
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
+            // TODO: PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = renderTransform;
+            // TODO: PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
+            // TODO: PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
+            // TODO: PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
         }
 
         public void FlipVertical()
@@ -80,10 +81,10 @@ namespace Catrobat.Paint.Phone.Tool
 
             renderTransform.CenterX = 225;
 
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = renderTransform;
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
+            // TODO: PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = renderTransform;
+            // TODO: PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
+            // TODO: PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
+            // TODO: PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
 
         }
     }

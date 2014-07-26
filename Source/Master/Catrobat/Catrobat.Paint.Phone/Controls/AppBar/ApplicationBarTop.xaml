@@ -10,20 +10,30 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="80" d:DesignWidth="480">
 
-    <Grid x:Name="LayoutRoot" Background="#1F1F1F" >
+    <Grid x:Name="LayoutRoot" Background="#1F1F1F" Height="72">
         <coding4FunControls:RoundButton x:Name="BtnUndo" IsEnabled="False"
-        	ImageSource="/Assets/ApplicationBar/Dark/appbar.undo.curve.png"  HorizontalAlignment="Right" Width="100" Height="60" Margin="0,17,370,3"/>
+        	ImageSource="/Assets/ApplicationBar/Dark/appbar.undo.curve.png"  HorizontalAlignment="Right" Width="100" Height="60" Margin="0,7,370,5"/>
         <coding4FunControls:RoundButton x:Name="BtnRedo" IsEnabled="False"
-        	ImageSource="/Assets/ApplicationBar/Dark/appbar.redo.curve.png" HorizontalAlignment="Right" Width="100" Height="60" Margin="0,17,250,3"/>
+        	ImageSource="/Assets/ApplicationBar/Dark/appbar.redo.curve.png" HorizontalAlignment="Right" Width="100" Height="60" Margin="0,7,250,5"/>
         <coding4FunControls:RoundButton x:Name="BtnMoveScreen"
-        	ImageSource="/Assets/ToolMenu/icon_menu_brush.png"  HorizontalAlignment="Right" Width="100" Height="60" Margin="0,17,10,3">
+        	ImageSource="/Assets/ToolMenu/icon_menu_brush.png"  HorizontalAlignment="Right" Width="100" Height="60" Margin="0,7,10,5">
             <coding4FunControls:RoundButton.Background>
                 <ImageBrush Stretch="Fill" ImageSource="/Assets/ToolMenu/icon_menu_move.png" Opacity="0.2"/>
             </coding4FunControls:RoundButton.Background>
 
         </coding4FunControls:RoundButton>
+
+        <Ellipse x:Name="ellipseTransparence"  HorizontalAlignment="Left" Height="47" Margin="275,6,0,0" Stroke="Black" VerticalAlignment="Top" Width="51" >
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
+            </Ellipse.Fill>
+        </Ellipse>
+
         <coding4FunControls:RoundButton x:Name="BtnSelectedColor" ClickMode="Release" 
-        	  ImageSource="/Assets/AppBar/empty.png" HorizontalAlignment="Right" Width="100" Height="60" Margin="0,17,130,3"/>
-       
+        	  Background="Black" HorizontalAlignment="Right" Width="100" Height="60" Margin="0,6,130,6" Content="" >
+
+        </coding4FunControls:RoundButton>
+
+
     </Grid>
 </UserControl>

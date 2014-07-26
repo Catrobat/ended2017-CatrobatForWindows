@@ -7,6 +7,7 @@
   xmlns:projects="using:Catrobat.IDE.WindowsPhone.Controls.Projects"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   mc:Ignorable="d"
+  NavigationCacheMode="Required"
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
   
   <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
@@ -89,17 +90,16 @@
                 SelectionMode="None"
                 IsItemClickEnabled="true" 
                 ItemClick="ListViewOnlineProjects_ItemClick">
-                <!--Margin="5 5 10 5"-->
                 <ListView.ItemTemplate>
                   <DataTemplate>
-                    <Grid Margin="0 5 0 5"  
+                    <Grid Margin="0 6 0 6"  
                       Background="#FF99AACC"
                       DataContext="{Binding}">
                       <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                       </Grid.RowDefinitions>
-                      <TextBlock Grid.Row="0" Margin="10 0 5 0"
+                      <TextBlock Grid.Row="0" Margin="12 0 6 0"
                         Text="{Binding ProjectName}"
                         FontSize="32"
                         Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
@@ -109,13 +109,13 @@
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Image Margin="10 5 0 10"
+                        <Image Margin="12 6 0 12"
                           Grid.Column="0" 
                           Source="{Binding ScreenshotSmall}"
                           VerticalAlignment="Stretch"
                           Stretch="UniformToFill"
                           Width="100" Height="100" />
-                        <StackPanel Grid.Column="1" Margin="10 0 5 0" 
+                        <StackPanel Grid.Column="1" Margin="12 0 6 0" 
                            Visibility="{Binding Description, 
                            Converter={StaticResource StringVisibilityConverter}}">
                            <TextBlock Text="{Binding Resources.Main_ProjectNoDescription, 
@@ -125,7 +125,7 @@
                                       Source={StaticResource ThemeChooser}}" 
                                       Foreground="#FFEEEEEE"/>
                         </StackPanel>
-                        <TextBlock Grid.Column="1" Margin="10 0 5 0" 
+                        <TextBlock Grid.Column="1" Margin="12 0 6 0" 
                           Text="{Binding Description}"
                           TextTrimming="WordEllipsis" TextWrapping="Wrap"
                           Style="{Binding StaticTheme.TextSubtleStyle.NativeStyle, 
@@ -142,7 +142,7 @@
                   </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.Footer>
-                  <Grid Margin="0 5 0 5" Height="35" 
+                  <Grid Margin="0 6 0 6" Height="35" 
                     Background="#FF667799"
                     Visibility="{Binding OnlineProjects, 
                     Converter={StaticResource NullVisibilityConverter}}"
@@ -155,7 +155,7 @@
                       <!--Opacity="{Binding OnlineProjects.IsLoading, 
                       Converter={StaticResource BoolOpacityConverter}}"-->
                     
-                      <statusIcons:ProcessIcon Margin="0 0 5 0" 
+                      <statusIcons:ProcessIcon Margin="0 0 6 0" 
                         IsProcessing="{Binding OnlineProjects.IsLoading}" />
                       <TextBlock Foreground="White"
                         VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -229,7 +229,7 @@
                   <TextBlock Style="{Binding StaticTheme.TextSubtleStyle.NativeStyle, 
                     Source={StaticResource ThemeChooser}}" 
                     Text="{Binding ApplicationVersionName}" 
-                    Margin="10 10 0 10" TextWrapping="Wrap"  />
+                    Margin="12 12 0 12" TextWrapping="Wrap"  />
                 </StackPanel>
               </Grid>
             </Grid>
@@ -283,7 +283,7 @@
                   <TextBlock Style="{Binding StaticTheme.TextSubtleStyle.NativeStyle, 
                     Source={StaticResource ThemeChooser}}" 
                     Text="{Binding ApplicationVersionName}" 
-                    Margin="10 10 0 10" TextWrapping="Wrap"  />
+                    Margin="12 12 0 12" TextWrapping="Wrap"  />
                 </StackPanel>
               </Grid>
             </Grid>

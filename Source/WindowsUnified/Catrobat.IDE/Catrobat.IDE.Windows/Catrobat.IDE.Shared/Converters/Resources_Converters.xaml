@@ -15,6 +15,7 @@
   <converters:FormulaStringConverterBootstrap x:Key="FormulaStringConverter" />
   <converters:FormulaKeyStringConverterBootstrap x:Key="FormulaKeyStringConverter" />
   <converters:IntStringConverterBootstrap x:Key="IntStringConverter" />
+  <converters:UnixTimeDateTimeConverterBootstrap x:Key="UnixTimeDateTimeConverter" />
   <converters:SecondStringMillisecondConverterBootstrap x:Key="SecondStringMillisecondConverter" />
   <converters:BoolVisibilityNegativeConverterBootstrap x:Key="NegativeBoolVisibilityConverter" />
   <converters:BoolPlayButtonStateConverterBootstrap x:Key="BoolPlayButtonStateConverter" />

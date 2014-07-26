@@ -35,7 +35,6 @@ namespace Catrobat.IDE.WindowsShared
             ServiceLocator.Register<ResourceLoaderFactoryStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<StorageFactoryStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ImageSourceConversionServiceWindowsShared>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<ProjectImporterServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SoundPlayerServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SoundRecorderServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<PictureServiceWindowsShared>(TypeCreationMode.Lazy);
@@ -46,7 +45,9 @@ namespace Catrobat.IDE.WindowsShared
             ServiceLocator.Register<SoundServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ActionTemplateServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SensorServiceWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<WebCommunicationService>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ZipService>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ProgramImporterService>(TypeCreationMode.Lazy);
 
             ServiceLocator.ViewModelLocator = new ViewModelLocator();
             ServiceLocator.ViewModelLocator.RegisterViewModels();

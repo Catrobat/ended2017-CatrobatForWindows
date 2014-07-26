@@ -1,6 +1,7 @@
 ﻿using System.Windows;
-using Catrobat.Paint.Phone.View;
-using Microsoft.Phone.Controls;
+using Catrobat.Paint.WindowsPhone.View;
+using Windows.UI.Xaml.Controls;
+using Catrobat.Paint.WindowsPhone.Tool;
 
 namespace Catrobat.Paint.Phone.Tool
 {
@@ -30,7 +31,8 @@ namespace Catrobat.Paint.Phone.Tool
         protected void ResetCanvas()
         {
             // needs to be on PaintingAreaView to reset properly
-            var currentPage = ((PhoneApplicationFrame)Application.Current.RootVisual).Content;
+            // TODO: var currentPage = ((PhoneApplicationFrame)Application.Current.RootVisual).Content;
+            var currentPage = new PaintingAreaView();
             if (!(currentPage is PaintingAreaView))
             {
                 NeedToResetCanvas = true;
@@ -38,9 +40,9 @@ namespace Catrobat.Paint.Phone.Tool
             }
             NeedToResetCanvas = false;
 
-            PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
-            PocketPaintApplication.GetInstance().SetBitmapAsPaintingAreaCanvasBackground();
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
+            // TODO: PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
+            // TODO: PocketPaintApplication.GetInstance().SetBitmapAsPaintingAreaCanvasBackground();
+            // TODO: PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
         }
 
     }

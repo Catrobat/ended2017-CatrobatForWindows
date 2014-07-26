@@ -2,9 +2,10 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Media.Imaging;
 using Catrobat.Paint.Phone.Tool;
 using Catrobat.Paint.Phone.Ui;
+using Windows.UI.Xaml.Media.Imaging;
+using Catrobat.Paint.WindowsPhone.Tool;
 
 namespace Catrobat.Paint.Phone.Command
 {
@@ -16,8 +17,8 @@ namespace Catrobat.Paint.Phone.Command
         private readonly LinkedList<CommandBase> _redoCommands;
         //private readonly int MAX_COMMANDS = 12;
         private readonly Dictionary<CommandBase, WriteableBitmap> _commandBitmapDict;
-        private readonly BackgroundWorker _backgroundWorkerUndo = new BackgroundWorker();
-        private readonly BackgroundWorker _backgroundWorkerRedo = new BackgroundWorker();
+        // TODO: private readonly BackgroundWorker _backgroundWorkerUndo = new BackgroundWorker();
+        // TODO: private readonly BackgroundWorker _backgroundWorkerRedo = new BackgroundWorker();
 
 
         private CommandManager()
@@ -26,7 +27,7 @@ namespace Catrobat.Paint.Phone.Command
             _redoCommands = new LinkedList<CommandBase>();
             _commandBitmapDict = new Dictionary<CommandBase, WriteableBitmap>();
 
-
+            /* TODO: 
             _backgroundWorkerUndo.WorkerReportsProgress = false;
             _backgroundWorkerUndo.WorkerSupportsCancellation = false;
             _backgroundWorkerUndo.DoWork += BackgroundWorkerUndoDoWork;
@@ -36,6 +37,7 @@ namespace Catrobat.Paint.Phone.Command
             _backgroundWorkerRedo.WorkerSupportsCancellation = false;
             _backgroundWorkerRedo.DoWork += BackgroundWorkerRedoDoWork;
             _backgroundWorkerRedo.RunWorkerCompleted += BackgroundWorkerUndoRunWorkerCompleted;
+            */
         }
 
         public static CommandManager GetInstance()
@@ -61,11 +63,11 @@ namespace Catrobat.Paint.Phone.Command
             System.Diagnostics.Debug.WriteLine("--UNDO--");
             if (HasCommands())
             {
-                if (_backgroundWorkerUndo.IsBusy || _backgroundWorkerRedo.IsBusy)
+                /* TODO: if (_backgroundWorkerUndo.IsBusy || _backgroundWorkerRedo.IsBusy)
                 {
                     return;
                 }
-
+                */
                 Spinner.StartSpinning();
 
                 var command = _undoCommands.Last.Value;
@@ -78,13 +80,13 @@ namespace Catrobat.Paint.Phone.Command
                 UndoRedoActionbarManager.GetInstance().Update(UndoRedoActionbarManager.UndoRedoButtonState.EnableRedo);
 
 
-                _backgroundWorkerUndo.RunWorkerAsync(); //ReDrawAll()
+                // TODO: _backgroundWorkerUndo.RunWorkerAsync(); //ReDrawAll()
             }
         }
 
         private void ReDrawAll()
         {
-                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
+                /* PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
                 PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Children.Clear();
                 //            WriteableBitmap bitmap;
                 //
@@ -97,7 +99,7 @@ namespace Catrobat.Paint.Phone.Command
                 foreach (var command in _undoCommands)
                 {
                     command.ReDo();
-                }
+                } */
         }
 
         public void ReDo()
@@ -106,7 +108,7 @@ namespace Catrobat.Paint.Phone.Command
 
             if (HasNext())
             {
-                if (_backgroundWorkerRedo.IsBusy || _backgroundWorkerUndo.IsBusy)
+                // TODO: if (_backgroundWorkerRedo.IsBusy || _backgroundWorkerUndo.IsBusy)
                 {
                     return;
                 }
@@ -122,7 +124,7 @@ namespace Catrobat.Paint.Phone.Command
                 _undoCommands.AddLast(command);
                 UndoRedoActionbarManager.GetInstance().Update(UndoRedoActionbarManager.UndoRedoButtonState.EnableUndo);
 
-                _backgroundWorkerRedo.RunWorkerAsync(command);
+                // TODO: _backgroundWorkerRedo.RunWorkerAsync(command);
             }
         }
 
@@ -135,8 +137,8 @@ namespace Catrobat.Paint.Phone.Command
         {
             if (_undoCommands.Count == 0)
             {
-                PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
-                _commandBitmapDict.Add(command, new WriteableBitmap(PocketPaintApplication.GetInstance().Bitmap));
+                // TODO: PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
+                // TODO: _commandBitmapDict.Add(command, new WriteableBitmap(PocketPaintApplication.GetInstance().Bitmap));
             }
 
             if (HasNext())
@@ -154,20 +156,23 @@ namespace Catrobat.Paint.Phone.Command
                 if (c.ToolType != ToolType.Eraser)
                 {
                     //PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
-                    _commandBitmapDict.Add(command, new WriteableBitmap(PocketPaintApplication.GetInstance().Bitmap));
+                    // TODO: _commandBitmapDict.Add(command, new WriteableBitmap(PocketPaintApplication.GetInstance().Bitmap));
                 }
 
             }
 
             _undoCommands.AddLast(command);
             UndoRedoActionbarManager.GetInstance().Update(UndoRedoActionbarManager.UndoRedoButtonState.EnableUndo);
-            PocketPaintApplication.GetInstance().UnsavedChangesMade = true;
+            // TODO: PocketPaintApplication.GetInstance().UnsavedChangesMade = true;
 
         }
 
 
         // needs to be dispatched back to UIThread
         // started backgroundworkers to let UIThread show spinner etc. right before calculation starts
+        // TODO: 
+
+        /* TODO:
         private void BackgroundWorkerUndoDoWork(object sender, DoWorkEventArgs e)
         {
             Deployment.Current.Dispatcher.BeginInvoke(ReDrawAll);
@@ -183,10 +188,10 @@ namespace Catrobat.Paint.Phone.Command
                 }
             });
         }
-
+        
         private void BackgroundWorkerUndoRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Spinner.StopSpinning();
-        }
+        }*/
     }
 }

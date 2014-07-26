@@ -13,6 +13,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.Threading.Tasks;
+//using Catrobat.IDE.Core.UI.Converters;
 
 namespace Catrobat.IDE.Core.ViewModels.Service
 {
@@ -25,16 +26,21 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _versionLabelText = "";
         private string _viewsLabelText = "";
         private string _downloadsLabelText = "";
-        private XmlProject _currentProject;
+        private Project _currentProject;
 
         #endregion
 
         #region Properties
 
-        public XmlProject CurrentProject
+        public Project CurrentProject
         {
             get { return _currentProject; }
-            private set { _currentProject = value;                 ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject)); }
+            private set 
+            {
+                if (value == _currentProject) return;
+                _currentProject = value;                 
+                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject)); 
+            }
         }
 
         public bool ButtonDownloadIsEnabled
@@ -133,7 +139,10 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private void OnLoadAction(OnlineProjectHeader dataContext)
         {
-            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectUploadedBy, CatrobatWebCommunicationService.ConvertUnixTimeStamp(Convert.ToDouble(dataContext.Uploaded.Split('.')[0])));
+            //var conv = new UnixTimeDateTimeConverter();
+            //object output = conv.Convert((object)Convert.ToDouble(dataContext.Uploaded.Split('.')[0]), null, null, null);
+            
+            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectUploadedBy, ServiceLocator.WebCommunicationService.ConvertUnixTimeStamp(Convert.ToDouble(dataContext.Uploaded.Split('.')[0])));
             VersionLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectVersion, dataContext.Version);
             ViewsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectViews, dataContext.Views);
             DownloadsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectDownloads, dataContext.Downloads);
@@ -144,8 +153,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         {
             ButtonDownloadIsEnabled = false;
             Task<CatrobatVersionConverter.VersionConverterError> downloadTask = 
-                Task.Run(() => 
-                    CatrobatWebCommunicationService.AsyncDownloadAndSaveProject(
+                Task.Run(() =>
+                    ServiceLocator.WebCommunicationService.AsyncDownloadAndSaveProject(
                     onlineProjectHeader.DownloadUrl, onlineProjectHeader.ProjectName));
 
             var projectChangedMessage = new MessageBase();
@@ -162,12 +171,12 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             {
                 switch (error)
                 {
-                    case CatrobatVersionConverter.VersionConverterError.VersionNotSupported:
+                    case CatrobatVersionConverter.VersionConverterError.VersionTooOld:
+                    case CatrobatVersionConverter.VersionConverterError.VersionTooNew:
                         ServiceLocator.NotifictionService.ShowToastNotification(null,
                             AppResources.Main_VersionIsNotSupported, ToastNotificationTime.Medeum);
-
                         break;
-                    case CatrobatVersionConverter.VersionConverterError.ProjectCodeNotValid:
+                    case CatrobatVersionConverter.VersionConverterError.ProgramDamaged:
                         ServiceLocator.NotifictionService.ShowToastNotification(null,
                             AppResources.Main_ProjectNotValid, ToastNotificationTime.Medeum);
                         break;
@@ -200,7 +209,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #endregion
 
         #region MessageActions
-        private void CurrentProjectChangedAction(GenericMessage<XmlProject> message)
+        private void CurrentProjectChangedAction(GenericMessage<Project> message)
         {
             CurrentProject = message.Content;
         }
@@ -208,13 +217,12 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public OnlineProjectViewModel()
         {
-            // Commands
             OnLoadCommand = new RelayCommand<OnlineProjectHeader>(OnLoadAction);
             DownloadCommand = new RelayCommand<OnlineProjectHeader>(DownloadAction, DownloadCommand_CanExecute);
             ReportCommand = new RelayCommand<OnlineProjectHeader>(ReportAction);
             LicenseCommand = new RelayCommand(LicenseAction);
 
-            Messenger.Default.Register<GenericMessage<XmlProject>>(this,
+            Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
 

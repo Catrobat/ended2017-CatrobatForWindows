@@ -63,9 +63,9 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
             else
             {
-                JSONStatusResponse status_response = await CatrobatWebCommunicationService.AsyncReportAsInappropriate(onlineproject.ProjectId, _reason, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
+                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.AsyncReportAsInappropriate(onlineproject.ProjectId, _reason, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
-                switch (status_response.statusCode)
+                switch (statusResponse.statusCode)
                 {
                     case StatusCodes.ServerResponseOk:
                         ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_TitleReportProject,
@@ -79,8 +79,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                         break;
 
                     default:
-                        string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
-                                                string.Format(AppResources.Main_ReportError, status_response.answer);
+                        string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, statusResponse.statusCode.ToString()) :
+                                                string.Format(AppResources.Main_ReportError, statusResponse.answer);
                         ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_ReportErrorCaption,
                             messageString, MissingReportDataCallback, MessageBoxOptions.Ok);
                         break;

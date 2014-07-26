@@ -78,9 +78,9 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
             else
             {
-                JSONStatusResponse status_response = await CatrobatWebCommunicationService.AsyncChangePassword(_newPassword, _repeatedPassword, Context.LocalSettings.CurrentUserRecoveryHash, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
+                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.AsyncChangePassword(_newPassword, _repeatedPassword, Context.LocalSettings.CurrentUserRecoveryHash, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
-                switch (status_response.statusCode)
+                switch (statusResponse.statusCode)
                 {
                     case StatusCodes.ServerResponseOk:
                         GoBackAction();
@@ -106,7 +106,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                         break;
 
                     default:
-                        string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) : status_response.answer;
+                        string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, statusResponse.statusCode.ToString()) : statusResponse.answer;
                         ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectPasswordRecoveryErrorCaption,
                             messageString, MissingPasswordDataCallback, MessageBoxOptions.Ok);
                         break;

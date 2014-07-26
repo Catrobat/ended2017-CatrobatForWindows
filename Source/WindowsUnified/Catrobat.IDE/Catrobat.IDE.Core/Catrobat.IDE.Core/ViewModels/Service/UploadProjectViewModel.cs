@@ -103,13 +103,27 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #endregion
 
         #region Actions
+        private void InitializeAction()
+        {
+            if (CurrentProject != null)
+            {
+                ProjectName = CurrentProject.Name;
+                ProjectDescription = CurrentProject.Description;
+            }
+            else
+            {
+                ProjectName = "";
+                ProjectDescription = "";
+            }
+        }
+
         private async void UploadAction()
         {
             await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
             CurrentProject.Description = ProjectDescription;
             await App.SaveContext(CurrentProject);
 
-            Task<JSONStatusResponse> upload_task = CatrobatWebCommunicationService.AsyncUploadProject(ProjectName, Context.CurrentUserName,
+            Task<JSONStatusResponse> upload_task = ServiceLocator.WebCommunicationService.AsyncUploadProject(ProjectName, Context.CurrentUserName,
                                                           Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
             var message = new MessageBase();
@@ -117,9 +131,9 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
             GoBackAction();
 
-            JSONStatusResponse status_response = await Task.Run(() => upload_task);
+            JSONStatusResponse statusResponse = await Task.Run(() => upload_task);
 
-            switch (status_response.statusCode)
+            switch (statusResponse.statusCode)
             {
                 case StatusCodes.ServerResponseOk:
                     break;
@@ -130,14 +144,14 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     break;
 
                 default:
-                    string messageString = string.IsNullOrEmpty(status_response.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, status_response.statusCode.ToString()) :
-                                           string.Format(AppResources.Main_UploadProjectError, status_response.answer);
+                    string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, statusResponse.statusCode.ToString()) :
+                                           string.Format(AppResources.Main_UploadProjectError, statusResponse.answer);
                     ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
                                 messageString, UploadErrorCallback, MessageBoxOptions.Ok);
                     break;
             }
 
-            if (CatrobatWebCommunicationService.NoUploadsPending())
+            if (ServiceLocator.WebCommunicationService.NoUploadsPending())
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
                     AppResources.Main_NoUploadsPending, ToastNotificationTime.Short);
@@ -193,6 +207,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public UploadProjectViewModel()
         {
+            InitializeCommand = new RelayCommand(InitializeAction);
             UploadCommand = new RelayCommand(UploadAction, UploadCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
             ChangeUserCommand = new RelayCommand(ChangeUserAction);

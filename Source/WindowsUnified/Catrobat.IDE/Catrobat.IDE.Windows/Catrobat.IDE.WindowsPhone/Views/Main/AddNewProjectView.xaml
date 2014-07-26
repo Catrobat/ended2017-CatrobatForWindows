@@ -15,7 +15,7 @@
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
-    <StackPanel Grid.Row="0" Margin="10 5 10 20">
+    <StackPanel Grid.Row="0" Margin="12">
       <TextBlock Margin="0" 
         Text="{Binding Resources.Main_TitleNewProject, 
         Source={StaticResource LocalizedStrings}}"
@@ -23,25 +23,25 @@
         Source={StaticResource ThemeChooser}}" />
     </StackPanel>
 
-    <StackPanel Grid.Row="1" Margin="10 0 0 15">
+    <StackPanel Grid.Row="1" Margin="12 0 0 18">
       <StackPanel>
-        <TextBlock Margin="0 5 5 5" 
+        <TextBlock Margin="0 6 6 6" 
           Text="{Binding Resources.Main_ProjectName, 
           Source={StaticResource LocalizedStrings}}"
           Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
           Source={StaticResource ThemeChooser}}" />
-        <TextBox Name="TextBoxProjectName" Margin="0 0 10 0" 
+        <TextBox Name="TextBoxProjectName" Margin="0 0 12 0" 
                  HorizontalAlignment="Stretch" 
                  TextChanged="TextBoxProjectName_OnTextChanged" 
                  Text="{Binding Path=ProjectName, 
                  Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
       </StackPanel>
-      <StackPanel Margin="0 20 0 0">
+      <StackPanel Margin="0 24 0 0">
         <TextBlock Text="{Binding Resources.Main_SelectProjectCreationOption, 
           Source={StaticResource LocalizedStrings}}"
           Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
           Source={StaticResource ThemeChooser}}"/>
-        <RadioButton Margin="0 -5 0 -10" GroupName="CreationOption"
+        <RadioButton Margin="0 -6 0 -12" GroupName="CreationOption"
                      IsChecked="{Binding CreateEmptyProject, Mode=TwoWay}">
           <RadioButton.ContentTemplate>
             <DataTemplate>
@@ -60,7 +60,7 @@
             </DataTemplate>
           </RadioButton.ContentTemplate>
         </RadioButton>-->
-        <RadioButton Margin="0 -5 0 -10" IsChecked="{Binding CreateTemplateProject, Mode=TwoWay}" 
+        <RadioButton Margin="0 -6 0 -12" IsChecked="{Binding CreateTemplateProject, Mode=TwoWay}" 
                      GroupName="CreationOption" >
           <RadioButton.ContentTemplate>
             <DataTemplate>
@@ -70,7 +70,7 @@
           </RadioButton.ContentTemplate>
         </RadioButton>
       </StackPanel>
-      <ListView Margin="10" IsEnabled="{Binding CreateTemplateProject}" 
+      <ListView Margin="12" IsEnabled="{Binding CreateTemplateProject}" 
                ItemsSource="{Binding TemplateOptions}" 
                SelectedItem="{Binding SelectedTemplateOption, Mode=TwoWay}" >
         <ListView.ItemTemplate>

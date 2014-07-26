@@ -107,15 +107,15 @@ namespace Catrobat.IDE.Core.Models
 
         #region Strange properties
 
-        private ProjectDummyHeader _projectDummyHeader;
-        public ProjectDummyHeader ProjectDummyHeader
+        private LocalProjectHeader _projectDummyHeader;
+        public LocalProjectHeader ProjectDummyHeader
         {
             get
             {
                 if (_projectDummyHeader != null)
                     return _projectDummyHeader;
 
-                _projectDummyHeader = new ProjectDummyHeader
+                _projectDummyHeader = new LocalProjectHeader
                 {
                     ProjectName = Name, 
                     Screenshot = Screenshot

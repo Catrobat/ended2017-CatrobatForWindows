@@ -13,6 +13,7 @@ namespace Catrobat.Paint.Phone.Command
             Path = path;
         }
 
+
         public override bool ReDo()
         {
             var e = new EraserTool();

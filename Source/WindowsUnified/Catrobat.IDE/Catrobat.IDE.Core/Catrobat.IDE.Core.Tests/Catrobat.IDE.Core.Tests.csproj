@@ -125,6 +125,8 @@
     <Compile Include="Tests\Data\XPathHelperTests.cs" />
     <Compile Include="Tests\IDE\CloneableTests.cs" />
     <Compile Include="Tests\IDE\Converter\BoolPlayButtonStateConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\UnixTimeDateTimeConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\StringVisibilityConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\BoolVisibilityConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\BoolVisibilityNegativeConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\DoubleStringConverterTests.cs" />
@@ -151,6 +153,7 @@
     <Compile Include="Tests\IDE\Xml\XmlProjectConverterTests.cs" />
     <Compile Include="Tests\Misc\FileNameGeneratorTests.cs" />
     <Compile Include="Tests\Misc\LocalizationTests.cs" />
+    <Compile Include="Tests\Misc\WebCommunicationTests.cs" />
     <Compile Include="Tests\Misc\ZipTests.cs" />
     <Compile Include="Tests\Storage\StorageTests.cs" />
     <Compile Include="Tests\ViewModel\Editor\Costumes\ChangeCostumeViewModelTests.cs" />

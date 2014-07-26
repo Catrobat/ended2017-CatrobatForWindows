@@ -6,11 +6,12 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.CatrobatObjects
 {
-    public class ProjectDummyHeader : IComparable<ProjectDummyHeader>, INotifyPropertyChanged
-    {
-        private PortableImage _screenshot;
-        private string _projectName;
+    public enum LocalProjectState { Valid, AppUpdateRequired, Damaged, VersionOutdated }
 
+    public class LocalProjectHeader : 
+        IComparable<LocalProjectHeader>, INotifyPropertyChanged
+    {
+        private string _projectName;
         public string ProjectName
         {
             get { return _projectName; }
@@ -21,6 +22,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             }
         }
 
+        private PortableImage _screenshot;
         public PortableImage Screenshot
         {
             get { return _screenshot; }
@@ -31,7 +33,32 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             }
         }
 
-        public int CompareTo(ProjectDummyHeader other)
+        private LocalProjectState _validityState = LocalProjectState.Valid;
+        public LocalProjectState ValidityState
+        {
+            get
+            {
+                return _validityState;
+            }
+            set
+            {
+                _validityState = value;
+                RaisePropertyChanged(() => IsValid);
+                RaisePropertyChanged(() => ValidityState);
+            }
+        }
+
+        public bool IsValid
+        {
+            get
+            {
+                return _validityState == LocalProjectState.Valid;
+            }
+        }
+
+ 
+
+        public int CompareTo(LocalProjectHeader other)
         {
             return System.String.Compare(ProjectName, other.ProjectName, System.StringComparison.Ordinal);
         }

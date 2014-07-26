@@ -1,6 +1,8 @@
-﻿using System.Windows.Media;
-using Catrobat.Paint.Phone.Tool;
+﻿using Windows.Media;
 using System.Windows;
+using Windows.UI.Xaml.Media;
+using Windows.UI;
+using Catrobat.Paint.Phone.Tool;
 
 namespace Catrobat.Paint.Phone.Data
 {
@@ -59,6 +61,7 @@ namespace Catrobat.Paint.Phone.Data
             }
         }
 
+        
         public ToolBase ToolCurrentSelected
         {
             get { return _toolCurrentSelected; }
@@ -93,7 +96,6 @@ namespace Catrobat.Paint.Phone.Data
                 CapChanged(cap);
             }
         }
-
 
         protected virtual void OnToolCurrentChanged(ToolBase tool)
         {

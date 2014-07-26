@@ -1619,15 +1619,6 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die PROGRAM SETTINGS ähnelt.
-        /// </summary>
-        public static string Editor_TitleProjectSettings {
-            get {
-                return ResourceManager.GetString("Editor_TitleProjectSettings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die RECORD SOUND ähnelt.
         /// </summary>
         public static string Editor_TitleRecorder {
@@ -2341,15 +2332,6 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Login / Register ähnelt.
-        /// </summary>
-        public static string Main_ButtonLoginRegister {
-            get {
-                return ResourceManager.GetString("Main_ButtonLoginRegister", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die password forgotten ähnelt.
         /// </summary>
         public static string Main_ButtonPasswordForgotten {
@@ -2503,7 +2485,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Active program ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die active program ähnelt.
         /// </summary>
         public static string Main_HeaderCurrentProject {
             get {
@@ -2548,7 +2530,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Settings ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die settings ähnelt.
         /// </summary>
         public static string Main_HeaderSettings {
             get {
@@ -2665,7 +2647,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Download ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die download ähnelt.
         /// </summary>
         public static string Main_OnlineProjectDownloadButton {
             get {
@@ -2683,7 +2665,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die License ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die license ähnelt.
         /// </summary>
         public static string Main_OnlineProjectLicenseButton {
             get {
@@ -2692,7 +2674,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Load more... ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die load more... ähnelt.
         /// </summary>
         public static string Main_OnlineProjectListBoxLoadMore {
             get {
@@ -2701,7 +2683,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die No more programs ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die no more programs ähnelt.
         /// </summary>
         public static string Main_OnlineProjectListBoxNoMoreItems {
             get {
@@ -2710,7 +2692,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Report as inappropriate ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die report as inappropriate ähnelt.
         /// </summary>
         public static string Main_OnlineProjectReportButton {
             get {
@@ -2827,15 +2809,6 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Program settings ähnelt.
-        /// </summary>
-        public static string Main_ProjectSettings {
-            get {
-                return ResourceManager.GetString("Main_ProjectSettings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Press &quot;back&quot; again to close the app? ähnelt.
         /// </summary>
         public static string Main_ReallyCloseApplicationText {
@@ -2917,7 +2890,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Set active ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die set active ähnelt.
         /// </summary>
         public static string Main_SetActive {
             get {
@@ -2926,7 +2899,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Settings ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die settings ähnelt.
         /// </summary>
         public static string Main_Settings {
             get {
@@ -3030,6 +3003,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_TitleOnlineProject {
             get {
                 return ResourceManager.GetString("Main_TitleOnlineProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die PROGRAM SETTINGS ähnelt.
+        /// </summary>
+        public static string Main_TitleProjectSettings {
+            get {
+                return ResourceManager.GetString("Main_TitleProjectSettings", resourceCulture);
             }
         }
         
@@ -3286,7 +3268,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Username or e-mail: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Username or email: ähnelt.
         /// </summary>
         public static string Main_UploadProjectUserOrMail {
             get {

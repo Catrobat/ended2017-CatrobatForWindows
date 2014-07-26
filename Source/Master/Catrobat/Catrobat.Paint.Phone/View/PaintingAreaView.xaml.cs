@@ -14,6 +14,7 @@ using Microsoft.Phone.Shell;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 
 namespace Catrobat.Paint.Phone.View
 {
@@ -26,13 +27,22 @@ namespace Catrobat.Paint.Phone.View
         public PaintingAreaView()
         {
             InitializeComponent();
-            PocketPaintApplication.GetInstance();
-
+            
+            int result = 0;
+            result = Convert.ToInt32(Application.Current.RootVisual.RenderSize.Width) % 2;
+            //PaintingAreaContentPanelGrid.Width = Application.Current.RootVisual.RenderSize.Width - result;
+            PaintingAreaContentPanelGrid.Width = Application.Current.RootVisual.RenderSize.Width - result;
+            result = Convert.ToInt32(Application.Current.RootVisual.RenderSize.Height) % 2;
+            //PaintingAreaContentPanelGrid.Height = Application.Current.RootVisual.RenderSize.Height - 200 - result;
+            PaintingAreaContentPanelGrid.Height = Application.Current.RootVisual.RenderSize.Height - 200 - result;
+            //MessageBox.Show(Application.Current.RootVisual.RenderSize.Height.ToString());
+            //MessageBox.Show(Application.Current.RootVisual.RenderSize.Width.ToString());
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
             PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
             PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid = PaintingAreaContentPanelGrid;
+            PocketPaintApplication.GetInstance().PaintingAreaView = this;
 
             Spinner.SpinnerGrid = SpinnerGrid;
             Spinner.SpinnerStoryboard = SpinningStoryboard;
@@ -48,16 +58,64 @@ namespace Catrobat.Paint.Phone.View
                 {
                     btn.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
                 }
+                else if (btn.Text.Contains("tools"))
+                {
+                    btn.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
+                }
             }
-
+            
             SliderThickness.ValueChanged +=
                 PocketPaintApplication.GetInstance().ApplicationBarListener.SliderThickness_ValueChanged;
             SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
-            btnSliderThickness.Content = SliderThickness.Value.ToString();
-
+            //BtnThickness.Click += BtnThickness_Click;
+            btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
+            btnBrushThickness.Content = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
+            //BtnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
+            //BtnTools.Click += BtnTools_Click;
+            //BtnZoomIn.Click += BtnZoomIn_Click;
+            //BtnZoomOut.Click += BtnZoomOut_Click;
             UndoRedoActionbarManager.GetInstance().ApplicationBarTop = ApplicationBarTopX;
 
 
+        }
+
+        void BtnZoomOut_Click(object sender, EventArgs e)
+        {
+            MoveZoomTool tool = new MoveZoomTool();
+            ScaleTransform scaletransform = new ScaleTransform();
+            scaletransform.ScaleX = 0.9;
+            scaletransform.ScaleY = 0.9;
+            tool.HandleMove(scaletransform);
+        }
+
+        void BtnZoomIn_Click(object sender, EventArgs e)
+        {
+            
+            MoveZoomTool tool = new MoveZoomTool();
+            ScaleTransform scaletransform = new ScaleTransform();
+            scaletransform.ScaleX = 1.1;
+            scaletransform.ScaleY = 1.1;
+            tool.HandleMove(scaletransform);
+        }
+
+        void BtnTools_Click(object sender, EventArgs e)
+        {
+
+            var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame; 
+            phoneApplicationFrame.Navigate(new Uri("/Catrobat.Paint.Phone;component/View/ToolPickerView.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        void BtnThickness_Click(object sender, EventArgs e)
+        {
+            if (getVisibilityOFSliderThicknessControl() == Visibility.Collapsed)
+            {
+                setVisibilityOFSliderThicknessControl(Visibility.Visible);
+                setSliderThicknessControlMargin(new Thickness(0.0, 0.0, 0.0, 0.0));
+            }
+            else
+            {
+                setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
+            }
         }
 
         private void ChangeIconBtnColor()
@@ -100,20 +158,6 @@ namespace Catrobat.Paint.Phone.View
             Application.Current.Terminate();
         }
 
-
-        private void BtnThickness_OnClick(object sender, EventArgs e)
-        {
-            SliderThicknessGrid.Visibility = SliderThicknessGrid.Visibility == Visibility.Collapsed
-                ? Visibility.Visible
-                : Visibility.Collapsed;
-
-            foreach (var child in SliderThicknessGrid.Children)
-            {
-                child.Visibility = SliderThicknessGrid.Visibility;
-            }
-
-        }
-
         private void ApplicationBarMenuItem_OnClick(object sender, EventArgs e)
         {
 
@@ -140,11 +184,6 @@ namespace Catrobat.Paint.Phone.View
                 }
                 e.Cancel = true;
             }
-        }
-
-        private void BtnTools_OnClick(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Catrobat.Paint.Phone;component/View/ToolPickerView.xaml", UriKind.RelativeOrAbsolute));
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -177,7 +216,7 @@ namespace Catrobat.Paint.Phone.View
         {
             if (SliderThickness != null)
             {
-                btnSliderThickness.Content = Convert.ToInt32(SliderThickness.Value).ToString();
+                btnBrushThickness.Content = Convert.ToInt32(SliderThickness.Value).ToString();
                 slider_thickness_textbox_last_value = Convert.ToInt32(SliderThickness.Value);
             }
         }
@@ -215,8 +254,7 @@ namespace Catrobat.Paint.Phone.View
                     break;
 
                 case ToolType.Eraser:
-                    ApplicationBar = (IApplicationBar)this.Resources["barStandard"];
-                    //ApplicationBar = (IApplicationBar)this.Resources["barEraser"];
+                    ApplicationBar = (IApplicationBar)this.Resources["barEraser"];;
                     break;
 
                 case ToolType.Move:
@@ -234,9 +272,6 @@ namespace Catrobat.Paint.Phone.View
                 case ToolType.Flip:
                     ApplicationBar = (IApplicationBar)this.Resources["barFlip"];
                     break;
-
-
-
             }
 
 
@@ -309,12 +344,12 @@ namespace Catrobat.Paint.Phone.View
 
         private void btnDeleteNumbers_Click(object sender, RoutedEventArgs e)
         {
-            if (btnSliderThickness.Content.ToString() != "" && Convert.ToInt32(btnSliderThickness.Content.ToString()) > 0)
+            if (btnBrushThickness.Content.ToString() != "" && Convert.ToInt32(btnBrushThickness.Content.ToString()) > 0)
             {
-                btnSliderThickness.Content = btnSliderThickness.Content.ToString().Remove(btnSliderThickness.Content.ToString().Length - 1);
+                btnBrushThickness.Content = btnBrushThickness.Content.ToString().Remove(btnBrushThickness.Content.ToString().Length - 1);
             }
 
-          //  if(btnSliderThickness.Content.ToString() != "")
+          //  if(btnBrushThickness.Content.ToString() != "")
             {
                 checkIfValueIsInRange(false);
             }
@@ -324,22 +359,12 @@ namespace Catrobat.Paint.Phone.View
 
         private void btnSliderThickness_Click(object sender, RoutedEventArgs e)
         {
-            checkIfThicknessWasEntered();
-            if (uctrlOwnKeyboard.Visibility == Visibility.Collapsed)
-            {
-                SliderThicknessControl.Margin = new Thickness(0.0, -324.0, 0.0, 287.0);
-                uctrlOwnKeyboard.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                uctrlOwnKeyboard.Visibility = Visibility.Collapsed;
-                SliderThicknessControl.Margin = new Thickness(0.0, 0.0, 0.0, 0.0);
-            }
+            
         }
 
         private void checkIfValueIsInRange(bool pressed_accept)
         {
-            if (btnSliderThickness.Content.ToString() == "")
+            if (btnBrushThickness.Content.ToString() == "")
             {
                 btnValue0.IsEnabled = true;
                 btnValue1.IsEnabled = true;
@@ -355,7 +380,7 @@ namespace Catrobat.Paint.Phone.View
             }
             else
             {
-                Int32 input = Convert.ToInt32(btnSliderThickness.Content);
+                Int32 input = Convert.ToInt32(btnBrushThickness.Content);
                 if(input > 5 && input < 10)
                 {
                     btnValue0.IsEnabled = false;
@@ -382,7 +407,7 @@ namespace Catrobat.Paint.Phone.View
                     btnValue8.IsEnabled = false;
                     btnValue9.IsEnabled = false;
                 }
-                else if(input < 5 || input == 50)
+                else if(input < 5)
                 {
                     btnValue0.IsEnabled = true;
                     btnValue1.IsEnabled = true;
@@ -440,14 +465,14 @@ namespace Catrobat.Paint.Phone.View
              {
                  string get_clicked_button_number = button.Name.Substring(8);
 
-                 if (btnSliderThickness.Content.ToString().Length < 2)
+                 if (btnBrushThickness.Content.ToString().Length < 2)
                  {
-                     btnSliderThickness.Content += get_clicked_button_number;
+                     btnBrushThickness.Content += get_clicked_button_number;
                  }
-                 else if(btnSliderThickness.Content.ToString().Length == 2)
+                 else if(btnBrushThickness.Content.ToString().Length == 2)
                  {
-                     btnSliderThickness.Content = "";
-                     btnSliderThickness.Content += get_clicked_button_number;
+                     btnBrushThickness.Content = "";
+                     btnBrushThickness.Content += get_clicked_button_number;
                  }
                  checkIfValueIsInRange(false);
              }
@@ -458,11 +483,11 @@ namespace Catrobat.Paint.Phone.View
             checkIfThicknessWasEntered();
         }
 
-        private void checkIfThicknessWasEntered()
+        public void checkIfThicknessWasEntered()
         {
             if (uctrlOwnKeyboard.Visibility == Visibility.Visible)
             {
-                string slider_thickness_text_box_value = btnSliderThickness.Content.ToString();
+                string slider_thickness_text_box_value = btnBrushThickness.Content.ToString();
                 Int32 slider_thickness_text_box_int_value;
 
                 if (!slider_thickness_text_box_value.Equals(""))
@@ -471,7 +496,7 @@ namespace Catrobat.Paint.Phone.View
 
                     if (!(slider_thickness_text_box_int_value >= 1 && slider_thickness_text_box_int_value <= 50))
                     {
-                        btnSliderThickness.Content = slider_thickness_textbox_last_value.ToString();
+                        btnBrushThickness.Content = slider_thickness_textbox_last_value.ToString();
                     }
                     else
                     {
@@ -481,10 +506,48 @@ namespace Catrobat.Paint.Phone.View
                 }
                 else
                 {
-                    btnSliderThickness.Content = slider_thickness_textbox_last_value.ToString();
+                    btnBrushThickness.Content = slider_thickness_textbox_last_value.ToString();
                 }
 
-                btnSliderThickness.Foreground = new SolidColorBrush(Colors.White);
+                btnBrushThickness.Foreground = new SolidColorBrush(Colors.White);
+            }
+        }
+
+        public void setVisibilityOFSliderThicknessControl(Visibility visibility)
+        {
+            SliderThicknessControl.Visibility = visibility;
+            if (Visibility.Collapsed == visibility)
+            {
+                setVisibilityOFThicknessKeyboard(visibility);
+            }
+        }
+
+        public Visibility getVisibilityOFSliderThicknessControl()
+        {
+            return SliderThicknessControl.Visibility;
+        }
+
+        public void setSliderThicknessControlMargin(Thickness margin)
+        {
+            SliderThicknessControl.Margin = margin;
+        }
+
+        public void setVisibilityOFThicknessKeyboard(Visibility visibility)
+        {
+            uctrlOwnKeyboard.Visibility = visibility;
+        }
+
+        public Visibility getVisibilityOFThicknessKeyboard()
+        {
+            return uctrlOwnKeyboard.Visibility;
+        }
+
+        private void PhoneApplicationPage_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Move)
+            {
+                ManipulationStartedEventArgs args = new ManipulationStartedEventArgs();
+                PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted(sender, args);
             }
         }
     }

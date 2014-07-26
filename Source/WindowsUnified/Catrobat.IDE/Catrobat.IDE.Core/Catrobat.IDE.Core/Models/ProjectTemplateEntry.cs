@@ -17,9 +17,9 @@ namespace Catrobat.IDE.Core.Models
             }
         }
 
-        public IProjectGenerator ProjectGenerator { get; set; }
+        public IProgramGenerator ProjectGenerator { get; set; }
 
-        public ProjectTemplateEntry(IProjectGenerator projectGenerator)
+        public ProjectTemplateEntry(IProgramGenerator projectGenerator)
         {
             ProjectGenerator = projectGenerator;
         }

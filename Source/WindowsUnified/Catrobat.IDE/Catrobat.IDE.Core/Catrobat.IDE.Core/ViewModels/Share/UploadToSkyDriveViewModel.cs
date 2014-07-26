@@ -10,7 +10,7 @@ namespace Catrobat.IDE.Core.ViewModels.Share
     {
         #region private Members
 
-        private ProjectDummyHeader _projectToShare;
+        private LocalProjectHeader _projectToShare;
         private bool _isUploading;
         private bool _isUploadSuccess;
         private bool _isUploadError;
@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.ViewModels.Share
 
         #region Properties
 
-        public ProjectDummyHeader ProjectToShare
+        public LocalProjectHeader ProjectToShare
         {
             get { return _projectToShare; }
             private set { _projectToShare = value; RaisePropertyChanged(() => ProjectToShare); }
@@ -97,7 +97,7 @@ namespace Catrobat.IDE.Core.ViewModels.Share
 
         #region MessageActions
 
-        private void ProjectToShareChangedMessageAction(GenericMessage<ProjectDummyHeader> message)
+        private void ProjectToShareChangedMessageAction(GenericMessage<LocalProjectHeader> message)
         {
             ProjectToShare = message.Content;
         }
@@ -109,7 +109,7 @@ namespace Catrobat.IDE.Core.ViewModels.Share
             // Commands
             UploadToSkyDriveCommand = new RelayCommand<object>(UploadToSkyDriveAction, UploadToSkyDrive_CanExecute);
 
-            Messenger.Default.Register<GenericMessage<ProjectDummyHeader>>(this,
+            Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this,
                  ViewModelMessagingToken.ShareProjectHeaderListener, ProjectToShareChangedMessageAction);
         }
 
