@@ -127,54 +127,82 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         #region Actions
 
-        private void OnLoadAction(OnlineProjectHeader dataContext)
+        private void OnLoadAction(OnlineProjectHeader projectHeader)
         {
             //var conv = new UnixTimeDateTimeConverter();
             //object output = conv.Convert((object)Convert.ToDouble(dataContext.Uploaded.Split('.')[0]), null, null, null);
-            
-            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectUploadedBy, ServiceLocator.WebCommunicationService.ConvertUnixTimeStamp(Convert.ToDouble(dataContext.Uploaded.Split('.')[0])));
-            VersionLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectVersion, dataContext.Version);
-            ViewsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectViews, dataContext.Views);
-            DownloadsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectDownloads, dataContext.Downloads);
+
+            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectUploadedBy, ServiceLocator.WebCommunicationService.ConvertUnixTimeStamp(Convert.ToDouble(projectHeader.Uploaded.Split('.')[0])));
+            VersionLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectVersion, projectHeader.Version);
+            ViewsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectViews, projectHeader.Views);
+            DownloadsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectDownloads, projectHeader.Downloads);
             ButtonDownloadIsEnabled = true;
         }
 
-        private async void DownloadAction(OnlineProjectHeader onlineProjectHeader)
+        private async void DownloadAction(OnlineProjectHeader projectHeader)
         {
-            ButtonDownloadIsEnabled = false;
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                ServiceLocator.NavigationService.NavigateBack<OnlineProjectViewModel>());
 
-            ServiceLocator.ProjectImporterService.SetDownloadHeader(onlineProjectHeader);
-            ServiceLocator.NavigationService.RemoveBackEntry();
-            ServiceLocator.NavigationService.NavigateTo<ProjectImportViewModel>();
 
-            //var projectChangedMessage = new MessageBase();
-            //Messenger.Default.Send(projectChangedMessage, 
-            //    ViewModelMessagingToken.DownloadProjectStartedListener);
+            ServiceLocator.ProjectImporterService.SetDownloadHeader(projectHeader);
+            var extracionResult = await ServiceLocator.ProjectImporterService.ExtractProgram();
 
-            //CatrobatVersionConverter.VersionConverterError error = await downloadTask;
-            //var message = new MessageBase();
-            //Messenger.Default.Send(message, ViewModelMessagingToken.LocalProjectsChangedListener);
+            if (extracionResult.Status == ExtractProgramStatus.Error)
+            {
+                // DODO: show error: Project could not be downloaded
+                return;
+            }
 
-            //if (error != CatrobatVersionConverter.VersionConverterError.NoError)
-            //{
-            //    switch (error)
-            //    {
-            //        case CatrobatVersionConverter.VersionConverterError.VersionTooOld:
-            //        case CatrobatVersionConverter.VersionConverterError.VersionTooNew:
-            //            ServiceLocator.NotifictionService.ShowToastNotification(null,
-            //                AppResources.Main_VersionIsNotSupported, ToastNotificationTime.Medeum);
-            //            break;
-            //        case CatrobatVersionConverter.VersionConverterError.ProgramDamaged:
-            //            ServiceLocator.NotifictionService.ShowToastNotification(null,
-            //                AppResources.Main_ProjectNotValid, ToastNotificationTime.Medeum);
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //    ServiceLocator.NotifictionService.ShowToastNotification(null,
-            //        AppResources.Main_NoDownloadsPending, ToastNotificationTime.Short);
-            //}
+            var validateResult = await ServiceLocator.ProjectImporterService.CheckProgram();
+
+            var acceptProject = true;
+
+            switch (validateResult.Status)
+            {
+                case ProgramImportStatus.Valid:
+                    ServiceLocator.NotifictionService.ShowToastNotification(
+                        "Program added",
+                        "Program successfully added to your program list.",
+                        ToastNotificationTime.Medeum); // TODO: localize me
+
+                    acceptProject = true;
+                    break;
+                case ProgramImportStatus.Damaged:
+                    ServiceLocator.NotifictionService.ShowToastNotification(
+                        "Program dameged",
+                        "Program damaged and cannot be added!",
+                        ToastNotificationTime.Medeum); // TODO: localize me
+
+                    acceptProject = false;
+                    break;
+                case ProgramImportStatus.VersionTooOld:
+                    ServiceLocator.NotifictionService.ShowToastNotification(
+                        "Program outdated",
+                        "Program is too old and cannot be added!",
+                        ToastNotificationTime.Medeum); // TODO: localize me
+
+                    acceptProject = false;
+                    break;
+                case ProgramImportStatus.VersionTooNew:
+                    ServiceLocator.NotifictionService.ShowToastNotification(
+                        "App version too old",
+                        "The downloaded program requires a newer version of this App!",
+                        ToastNotificationTime.Medeum); // TODO: localize me
+
+                    acceptProject = true;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            if (acceptProject)
+            {
+                await ServiceLocator.ProjectImporterService.AcceptTempProject();
+                var localProjectsChangedMessage = new MessageBase();
+                Messenger.Default.Send(localProjectsChangedMessage,
+                    ViewModelMessagingToken.LocalProjectsChangedListener);
+            }
         }
 
         private void ReportAction(OnlineProjectHeader onlineProjectHeader)

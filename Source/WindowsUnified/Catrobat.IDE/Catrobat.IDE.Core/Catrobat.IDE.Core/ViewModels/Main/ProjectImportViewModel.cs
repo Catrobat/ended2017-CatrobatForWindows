@@ -13,19 +13,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 {
     public class ProjectImportViewModel : ViewModelBase
     {
+        private enum VisiblePanel { Error, Content, Loading }
+
         #region private Members
-
-        private CancellationTokenSource _importCancellationToken;
-        private bool _contentPanelVisibility = false;
-        private bool _loadingPanelVisibility = true;
-        private bool _progressBarLoadingIsIndeterminate = true;
-        private bool _checkBoxMakeActiveIsChecked = true;
-        private bool _buttonAddIsEnabled = true;
-        private bool _buttonCancelIsEnabled = true;
-        //private string _projectName = "";
-        //private PortableImage _screenshotImageSource = null;
-        private bool _errorPanelVisibility;
-
 
         #endregion
 
@@ -42,20 +32,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        public bool ContentPanelVisibility
-        {
-            get { return _contentPanelVisibility; }
-            set
-            {
-                if (value == _contentPanelVisibility)
-                {
-                    return;
-                }
-                _contentPanelVisibility = value;
-                RaisePropertyChanged(() => ContentPanelVisibility);
-            }
-        }
-
+        private bool _loadingPanelVisibility = true;
         public bool LoadingPanelVisibility
         {
             get { return _loadingPanelVisibility; }
@@ -70,6 +47,22 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
+        private bool _contentPanelVisibility = false;
+        public bool ContentPanelVisibility
+        {
+            get { return _contentPanelVisibility; }
+            set
+            {
+                if (value == _contentPanelVisibility)
+                {
+                    return;
+                }
+                _contentPanelVisibility = value;
+                RaisePropertyChanged(() => ContentPanelVisibility);
+            }
+        }
+
+        private bool _errorPanelVisibility = false;
         public bool ErrorPanelVisibility
         {
             get { return _errorPanelVisibility; }
@@ -80,6 +73,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
+        private bool _progressBarLoadingIsIndeterminate = true;
         public bool ProgressBarLoadingIsIndeterminate
         {
             get { return _progressBarLoadingIsIndeterminate; }
@@ -94,6 +88,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
+        private bool _checkBoxMakeActiveIsChecked = true;
         public bool CheckBoxMakeActiveIsChecked
         {
             get { return _checkBoxMakeActiveIsChecked; }
@@ -108,6 +103,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
+        private bool _buttonAddIsEnabled = true;
         public bool ButtonAddIsEnabled
         {
             get { return _buttonAddIsEnabled; }
@@ -123,6 +119,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
+        private bool _buttonCancelIsEnabled = true;
         public bool ButtonCancelIsEnabled
         {
             get { return _buttonCancelIsEnabled; }
@@ -260,8 +257,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ShowPanel(VisiblePanel.Loading);
             base.NavigateFrom();
         }
-
-        private enum VisiblePanel { Error, Content, Loading }
 
         private void ShowPanel(VisiblePanel panel)
         {

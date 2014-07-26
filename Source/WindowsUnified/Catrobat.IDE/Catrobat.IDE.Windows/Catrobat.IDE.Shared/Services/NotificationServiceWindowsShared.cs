@@ -1,4 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Xml;
+using System.Xml.Linq;
+using Windows.Data.Xml.Dom;
+using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Services;
@@ -21,10 +26,51 @@ namespace Catrobat.IDE.WindowsShared.Services
         //    _rootPage = rootPage;
         //}
 
-        public void ShowToastNotification(string title, string message, ToastNotificationTime timeTillHide, PortableImage image = null)
+        public void ShowToastNotification(string title, string message, 
+            ToastNotificationTime timeTillHide, PortableImage image = null)
         {
-            // TODO: implement me
-            //throw new NotImplementedException();
+            // TODO: fix this code!
+
+            var durationString = "";
+
+            switch (timeTillHide)
+            {
+                case ToastNotificationTime.Short:
+                    durationString = "short";
+                    break;
+                case ToastNotificationTime.Medeum:
+                    durationString = "medium";
+                    break;
+                case ToastNotificationTime.Long:
+                    durationString = "long";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("timeTillHide");
+            }
+
+            const ToastTemplateType toastTemplateXml = ToastTemplateType.ToastImageAndText01;
+            var toastXml = ToastNotificationManager.GetTemplateContent(toastTemplateXml);
+
+            var toastTextElements = toastXml.GetElementsByTagName("text");
+            toastTextElements[0].AppendChild(toastXml.CreateTextNode(message));
+
+            var toastNode = toastXml.SelectSingleNode("/toast");
+            ((XmlElement)toastNode).SetAttribute("duration", durationString);
+
+            var audioElement = toastXml.CreateElement("audio");
+            audioElement.SetAttribute("silent", "true");
+            toastNode.AppendChild(audioElement);
+
+
+            ((XmlElement)toastNode).SetAttribute("launch", "{\"type\":\"toast\",\"param1\":\"0\",\"param2\":\"1\"}");
+
+
+            var xml = toastXml.GetXml();
+ 
+            var toast = new ToastNotification(toastXml);
+
+            ServiceLocator.DispatcherService.RunOnMainThread(()=>
+                ToastNotificationManager.CreateToastNotifier().Show(toast));
         }
 
         public void ShowToastNotification(string title, string message, TimeSpan timeTillHide, PortableImage image = null)
