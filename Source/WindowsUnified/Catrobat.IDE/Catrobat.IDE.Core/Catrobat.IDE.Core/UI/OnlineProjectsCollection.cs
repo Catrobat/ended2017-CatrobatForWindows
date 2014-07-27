@@ -124,7 +124,7 @@ namespace Catrobat.IDE.Core.UI
                 offset = 0;
 
             var projects = await
-                ServiceLocator.WebCommunicationService.AsyncLoadOnlineProjects(
+                ServiceLocator.WebCommunicationService.LoadOnlineProjectsAsync(
                 _filterText, offset, count, c);
 
             uint newProgramsCount = 0;

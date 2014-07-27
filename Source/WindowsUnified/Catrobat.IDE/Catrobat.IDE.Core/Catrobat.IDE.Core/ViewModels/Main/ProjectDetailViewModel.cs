@@ -35,8 +35,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        private Project _currentProject;
-        public Project CurrentProject
+        private Program _currentProject;
+        public Program CurrentProject
         {
             get { return _currentProject; }
             set
@@ -121,7 +121,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.NavigationService.NavigateTo<UploadProjectLoadingViewModel>();
 
             // Determine which page to open
-            JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.AsyncCheckToken(Context.CurrentUserName, Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
+            JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.CheckTokenAsync(Context.CurrentUserName, Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
             if (statusResponse.statusCode == StatusCodes.ServerResponseOk)
             {
@@ -148,7 +148,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void PinLocalProjectAction()
         {
-            var message = new GenericMessage<LocalProjectHeader>(CurrentProject.ProjectDummyHeader);
+            var message = new GenericMessage<LocalProjectHeader>(CurrentProject.LocalProgramHeader);
             Messenger.Default.Send(message, ViewModelMessagingToken.PinProjectHeaderListener);
 
             ServiceLocator.NavigationService.NavigateTo<TileGeneratorViewModel>();
@@ -158,7 +158,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             await CurrentProject.Save();
 
-            var message = new GenericMessage<LocalProjectHeader>(CurrentProject.ProjectDummyHeader);
+            var message = new GenericMessage<LocalProjectHeader>(CurrentProject.LocalProgramHeader);
             Messenger.Default.Send(message, ViewModelMessagingToken.ShareProjectHeaderListener);
 
             ServiceLocator.ShareService.ShateProject(CurrentProject.Name);
@@ -208,7 +208,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             Task.Run(async () =>
             {
-                if (CurrentProject == null || CurrentProject.Name != CurrentProjectHeader.ProjectName)
+                if (CurrentProject == null || 
+                    CurrentProject.Name != CurrentProjectHeader.ProjectName)
                 {
                     lock (_loadingLock)
                     {
@@ -220,8 +221,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                     if (CurrentProject != null)
                         await CurrentProject.Save();
-                    
-                    Project newProject = await CatrobatContext.LoadProjectByNameStatic(CurrentProjectHeader.ProjectName);
+
+                    var newProject = await ServiceLocator.ContextService.
+                        LoadProgramByName(CurrentProjectHeader.ProjectName);
                     
                     if (newProject != null)
                     {
@@ -232,8 +234,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         CurrentProject = newProject;
                         IsActivatingLocalProject = false;
 
-                        var projectChangedMessage = new GenericMessage<Project>(newProject);
-                        Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                        var projectChangedMessage = new GenericMessage<Program>(newProject);
+                        Messenger.Default.Send(projectChangedMessage, 
+                            ViewModelMessagingToken.CurrentProjectChangedListener);
 
                         IsActivatingLocalProject = false;
                     }
@@ -251,7 +254,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                             CurrentProject = null;
                             CurrentProjectHeader = null;
                             var message = new GenericMessage<LocalProjectHeader>(null);
-                            Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
+                            Messenger.Default.Send(message, 
+                                ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
                         });
                     }
                 }

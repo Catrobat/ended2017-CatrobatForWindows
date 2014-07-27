@@ -96,7 +96,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
                 foreach (string fileName in fileNames)
                 {
-                    if (fileName.EndsWith(CatrobatContextBase.ImageThumbnailExtension))
+                    if (fileName.EndsWith(StorageConstants.ImageThumbnailExtension))
                         continue;
 
                     var tempPath = Path.Combine(sourceBasePath, fileName);

@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
     {
         #region private Members
 
-        private Project _currentProject;
+        private Program _currentProject;
         private Sprite _currentSprite;
         private ObservableCollection<LocalVariable> _localVariables;
         private ObservableCollection<GlobalVariable> _globalVariables;
@@ -37,7 +37,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             }
         }
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get { return _currentProject; }
             set { _currentProject = value;                 ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject)); }
@@ -247,7 +247,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region MessageActions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             if (CurrentProject != null)
             {
@@ -284,7 +284,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             DeleteVariableCommand = new RelayCommand(DeleteVariableAction, DeleteVariableCommand_CanExecute);
             EditVariableCommand = new RelayCommand(EditVariableAction, EditVariableCommand_CanExecute);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<Program>>(this,
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,

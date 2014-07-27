@@ -4,6 +4,6 @@ namespace Catrobat.IDE.Core.Tests.Misc
 {
     public interface ITestProjectGenerator
     {
-        Project GenerateProject();
+        Program GenerateProject();
     }
 }

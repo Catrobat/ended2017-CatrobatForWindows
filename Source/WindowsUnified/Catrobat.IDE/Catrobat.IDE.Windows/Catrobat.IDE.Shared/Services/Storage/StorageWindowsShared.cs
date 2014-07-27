@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
+using Windows.Storage.Search;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.IDE.Core;
@@ -15,7 +16,7 @@ using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.WindowsShared.Services.Storage
 {
-    public class StorageStore : IStorage
+    public class StorageWindowsShared : IStorage
     {
         private static int _imageThumbnailDefaultMaxWidthHeight = 200;
         private readonly List<Stream> _openedStreams = new List<Stream>();
@@ -434,7 +435,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             if (imageBasePath != null)
             {
                 var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}",
-                    withoutExtension, CatrobatContextBase.ImageThumbnailExtension));
+                    withoutExtension, StorageConstants.ImageThumbnailExtension));
 
                 if (await FileExistsAsync(thumbnailPath))
                 {
@@ -466,13 +467,13 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
         public async Task DeleteImageAsync(string pathToImage)
         {
             await DeleteFileAsync(pathToImage);
-            await DeleteFileAsync(pathToImage + CatrobatContextBase.ImageThumbnailExtension);
+            await DeleteFileAsync(pathToImage + StorageConstants.ImageThumbnailExtension);
         }
 
         public async Task SaveImageAsync(string path, PortableImage image, bool deleteExisting, ImageFormat format)
         {
             var withoutExtension = Path.GetFileNameWithoutExtension(path);
-            var thumbnailPath = string.Format("{0}{1}", withoutExtension, CatrobatContextBase.ImageThumbnailExtension);
+            var thumbnailPath = string.Format("{0}{1}", withoutExtension, StorageConstants.ImageThumbnailExtension);
 
             if (deleteExisting)
             {

@@ -11,13 +11,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor
     {
         #region Private Members
 
-        private XmlProject _currentProject;
+        private XmlProgram _currentProject;
 
         #endregion
 
         #region Properties
 
-        public XmlProject CurrentProject
+        public XmlProgram CurrentProject
         {
             get { return _currentProject; }
             set
@@ -53,7 +53,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor
 
         #region Message Actions
 
-        private void CurrentProjectChangedAction(GenericMessage<XmlProject> message)
+        private void CurrentProjectChangedAction(GenericMessage<XmlProgram> message)
         {
             CurrentProject = message.Content;
         }
@@ -64,7 +64,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor
         {
             SkipAndNavigateTo = typeof (SpritesViewModel);
 
-            Messenger.Default.Register<GenericMessage<XmlProject>>(this,
+            Messenger.Default.Register<GenericMessage<XmlProgram>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
     }

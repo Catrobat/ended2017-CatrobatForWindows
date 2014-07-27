@@ -81,6 +81,7 @@
     <Compile Include="CatrobatContextBase.cs" />
     <Compile Include="CatrobatContextDesign.cs" />
     <Compile Include="CatrobatObjects\TestEqualityComparer.cs" />
+    <Compile Include="StorageConstants.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
     <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
     <Compile Include="ExtensionMethods\XmlExtensions.cs" />
@@ -114,7 +115,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Common\ContextService.cs" />
     <Compile Include="Services\Common\ProjectGeneratorWhackAMole.cs" />
+    <Compile Include="Services\IContextService.cs" />
     <Compile Include="Services\IWebCommunicationService.cs" />
     <Compile Include="Services\IZipService.cs" />
     <Compile Include="UI\Converters\UnixTimeDateTimeConverter.cs" />
@@ -140,7 +143,7 @@
     <Compile Include="Xml\Converter\Models\BroadcastMessage.cs" />
     <Compile Include="Xml\Converter\Models\Costume.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\BlockBrick.cs" />
-    <Compile Include="Xml\Converter\Models\Project.cs" />
+    <Compile Include="Xml\Converter\Models\Program.cs" />
     <Compile Include="Xml\Converter\Models\Sound.cs" />
     <Compile Include="Xml\Converter\Models\Sprite.cs" />
     <Compile Include="Xml\Converter\Models\UploadHeader.cs" />
@@ -200,11 +203,12 @@
     <Compile Include="Xml\Converter\XmlObjects\Scripts\XmlStartScript.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Scripts\XmlWhenScript.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlCostume.cs" />
-    <Compile Include="Xml\Converter\XmlObjects\XmlProject.cs" />
+    <Compile Include="Xml\Converter\XmlObjects\XmlProgram.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlProjectHeader.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlSound.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlSprite.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlUserVariable.cs" />
+    <Compile Include="Xml\XmlProgramHelper.cs" />
     <Compile Include="Xml\VersionConverter\Versions\CatrobatVersion092ToWin091.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\XmlBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\XmlBrickList.cs" />
@@ -313,7 +317,7 @@
     <Compile Include="Xml\XmlObjects\Formulas\XmlFormula.cs" />
     <Compile Include="Xml\XmlObjects\Formulas\XmlFormulaTree.cs" />
     <Compile Include="CatrobatObjects\OnlineProjectHeader.cs" />
-    <Compile Include="Xml\XmlObjects\XmlProject.cs" />
+    <Compile Include="Xml\XmlObjects\XmlProgram.cs" />
     <Compile Include="CatrobatObjects\ProjectDummyHeader.cs" />
     <Compile Include="Xml\XmlObjects\XmlProjectHeader.cs" />
     <Compile Include="Xml\XmlObjects\Scripts\XmlBroadcastScript.cs" />
@@ -382,7 +386,7 @@
     <Compile Include="Xml\XmlObjects\Variables\XmlVariableList.cs" />
     <Compile Include="Xml\Converter\XmlFormulaConverter.cs" />
     <Compile Include="INativeApp.cs" />
-    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\Program.cs" />
     <Compile Include="Models\Sprite.cs" />
     <Compile Include="Services\IDispatcherService.cs" />
     <Compile Include="Services\IProgramGenerator.cs" />

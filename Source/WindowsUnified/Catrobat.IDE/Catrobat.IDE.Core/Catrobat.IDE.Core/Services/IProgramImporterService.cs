@@ -13,7 +13,11 @@ namespace Catrobat.IDE.Core.Services
     {
         void SetProjectStream(Stream projectStream);
 
-        Task<ProgramImportResult> StartImportProject();
+        void SetDownloadHeader(OnlineProjectHeader projectHeader);
+
+        Task<ExtractProgramResult> ExtractProgram();
+
+        Task<CheckProgramImportResult> CheckProgram();
 
         Task<string> AcceptTempProject();
 
@@ -22,12 +26,17 @@ namespace Catrobat.IDE.Core.Services
 
 
     public enum ProgramImportStatus { Valid, Damaged, VersionTooOld, VersionTooNew }
-
-    public class ProgramImportResult
+    public class CheckProgramImportResult
     {
         public ProgramImportStatus Status { get; set; }
 
         public LocalProjectHeader ProjectHeader { get; set; }
+    }
+
+    public enum ExtractProgramStatus { Success, Error }
+    public class ExtractProgramResult
+    {
+        public ExtractProgramStatus Status { get; set; }
     }
 
 }

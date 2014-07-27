@@ -8,7 +8,7 @@ using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.WindowsShared.Services.Storage
 {
-    public class ResourcesStore : IResourceLoader
+    public class ResourcesWindowsShared : IResourceLoader
     {
         private readonly List<Stream> _openedStreams = new List<Stream>();
 

@@ -13,19 +13,21 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private LocalProjectHeader _selectedProjectHeader;
         private string _projectName;
         private string _projectDescription;
-        private Project _currentProject;
+        private Program _currentProject;
 
         #endregion
 
         #region Properties
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get { return _currentProject; }
-            set
+            private set
             {
-                _currentProject = value;
-                                
+                if (value == _currentProject)
+                    return;
+
+                _currentProject = value;             
                 ServiceLocator.DispatcherService.RunOnMainThread(() => 
                     RaisePropertyChanged(() => CurrentProject));
             }
@@ -107,9 +109,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void SaveAction()
         {
-            if (CurrentProject.ProjectDummyHeader == SelectedProjectHeader)
+            if (CurrentProject.LocalProgramHeader == SelectedProjectHeader)
             {
-                CurrentProject.ProjectDummyHeader.ProjectName = ProjectName;
+                CurrentProject.LocalProgramHeader.ProjectName = ProjectName;
                 await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
                 CurrentProject.Description = ProjectDescription;
             }
@@ -128,7 +130,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void CancelAction()
         {
-            base.GoBackAction();
+            GoBackAction();
         }
 
         protected override void GoBackAction()
@@ -141,7 +143,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region Message Actions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
             if (CurrentProject != null)
@@ -173,7 +175,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this, 
                 ViewModelMessagingToken.CurrentProjectHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
-            Messenger.Default.Register<GenericMessage<Project>>(this, 
+            Messenger.Default.Register<GenericMessage<Program>>(this, 
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
         }
 

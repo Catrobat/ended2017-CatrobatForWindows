@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Xml.Converter
     {
         #region Covert
 
-        public class ConvertContextBase : ContextBase<XmlProject, 
+        public class ConvertContextBase : ContextBase<XmlProgram, 
             XmlUserVariable, GlobalVariable,
             XmlSprite, Sprite,
             XmlScript, Script,
@@ -31,7 +31,7 @@ namespace Catrobat.IDE.Core.Xml.Converter
 
             #endregion
 
-            public ConvertContextBase(XmlProject project, ReadOnlyDictionary<XmlUserVariable, GlobalVariable> globalVariables)
+            public ConvertContextBase(XmlProgram project, ReadOnlyDictionary<XmlUserVariable, GlobalVariable> globalVariables)
                 : base(project, globalVariables)
             {
                 _broadcastMessages = new Dictionary<string, BroadcastMessage>();
@@ -39,7 +39,7 @@ namespace Catrobat.IDE.Core.Xml.Converter
         }
 
         public class ConvertContext : Context<ConvertContextBase, 
-            XmlProject, 
+            XmlProgram, 
             XmlUserVariable, Variable,
             XmlUserVariable, LocalVariable,
             XmlUserVariable, GlobalVariable,
@@ -76,7 +76,7 @@ namespace Catrobat.IDE.Core.Xml.Converter
             }
         }
 
-        public Project Convert(XmlProject project)
+        public Program Convert(XmlProgram project)
         {
             return project == null ? null : project.ToModel();
         }
@@ -86,20 +86,20 @@ namespace Catrobat.IDE.Core.Xml.Converter
         #region ConvertBack
 
         public class ConvertBackContextBase : ContextBase<
-            Project, 
+            Program, 
             GlobalVariable, XmlUserVariable,
             Sprite, XmlSprite,
             Script, XmlScript,
             Brick, XmlBrick>
         {
-            public ConvertBackContextBase(Project project, ReadOnlyDictionary<GlobalVariable, XmlUserVariable> globalVariables)
+            public ConvertBackContextBase(Program project, ReadOnlyDictionary<GlobalVariable, XmlUserVariable> globalVariables)
                 : base(project, globalVariables)
             {
             }
         }
 
         public class ConvertBackContext : Context<ConvertBackContextBase, 
-            Project, 
+            Program, 
             Variable, XmlUserVariable,
             LocalVariable, XmlUserVariable,
             GlobalVariable, XmlUserVariable,
@@ -132,7 +132,7 @@ namespace Catrobat.IDE.Core.Xml.Converter
             }
         }
 
-        public XmlProject ConvertBack(Project project)
+        public XmlProgram ConvertBack(Program project)
         {
             return project == null ? null : project.ToXmlObject();
         }

@@ -11,7 +11,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
     {
         #region Private Members
 
-        private Project _currentProject;
+        private Program _currentProject;
         private Sprite _selectedSprite;
         private string _userVariableName = AppResources.Editor_DefaultGlobalVariableName;
 
@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region Properties
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get { return _currentProject; }
             private set 
@@ -96,7 +96,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region MessageActions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
         }
@@ -113,7 +113,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);

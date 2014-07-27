@@ -12,13 +12,13 @@ namespace Catrobat.IDE.Core
     {
         #region Private members
 
-        private Project _currentProject;
+        private Program _currentProject;
 
         #endregion
 
         #region Properties
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get { return _currentProject; }
             set
@@ -55,7 +55,7 @@ namespace Catrobat.IDE.Core
         private void InitCurrentProject()
         {
             var catCostume = new Costume {Name = "Cat"};
-            CurrentProject = new Project
+            CurrentProject = new Program
             {
                 Name = "Project 1 with very very very very very long name",
                 Description = "Dies ist eine Test Anwendung.",

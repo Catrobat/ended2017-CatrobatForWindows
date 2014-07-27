@@ -13,13 +13,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
 
         private Costume _receivedCostume;
         private string _costumeName;
-        private Project _currentProject;
+        private Program _currentProject;
 
         #endregion
 
         #region Properties
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get { return _currentProject; }
             set
@@ -118,7 +118,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
 
         #region MessageActions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
         }
@@ -137,7 +137,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this, 
+            Messenger.Default.Register<GenericMessage<Program>>(this, 
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Costume>>(this, 
                 ViewModelMessagingToken.CostumeListener, ChangeCostumeNameMessageAction);

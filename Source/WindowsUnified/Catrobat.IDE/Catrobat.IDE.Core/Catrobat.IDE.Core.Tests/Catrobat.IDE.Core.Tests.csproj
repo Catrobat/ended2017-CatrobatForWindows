@@ -153,12 +153,24 @@
     <Compile Include="Tests\IDE\Xml\XmlProjectConverterTests.cs" />
     <Compile Include="Tests\Misc\FileNameGeneratorTests.cs" />
     <Compile Include="Tests\Misc\LocalizationTests.cs" />
-    <Compile Include="Tests\Misc\WebCommunicationTests.cs" />
-    <Compile Include="Tests\Misc\ZipTests.cs" />
-    <Compile Include="Tests\Storage\StorageTests.cs" />
-    <Compile Include="Tests\ViewModel\Editor\Costumes\ChangeCostumeViewModelTests.cs" />
-    <Compile Include="Tests\ViewModel\Editor\Costumes\CostumeNameChooserViewModelTests.cs" />
-    <Compile Include="Tests\ViewModel\Editor\Costumes\NewCostumeSourceSelectionViewModelTests.cs" />
+    <Compile Include="Tests\Services\Common\WebCommunicationTests.cs" />
+    <Compile Include="Tests\Services\Common\ZipTests.cs" />
+    <Compile Include="Tests\Services\Storage\StorageTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Costumes\ChangeCostumeViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Costumes\CostumeNameChooserViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Costumes\NewCostumeSourceSelectionViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Main\MainViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Main\AddNewProjectViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Main\ProjectSettingsViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Main\ProjectDetailViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\OnlineProjectViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\OnlineProjectReportViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProjectNewPasswordViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProjectLoadingViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProjectForgotPasswordViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProjectViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProjectRegisterViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProjectLoginViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Catrobat.IDE.Core\Catrobat.IDE.Core.csproj">
@@ -265,7 +277,9 @@
     <Content Include="SampleData\SampleProjects\simple.xml" />
     <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Tests\ViewModels\Settings\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

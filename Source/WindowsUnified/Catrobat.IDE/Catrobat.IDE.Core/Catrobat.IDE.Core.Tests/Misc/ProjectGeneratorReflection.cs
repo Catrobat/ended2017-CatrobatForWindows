@@ -49,10 +49,10 @@ namespace Catrobat.IDE.Core.Tests.Misc
             typeof(EmptyDummyBrick)
         };
 
-        public Project GenerateProject()
+        public Program GenerateProject()
         {
             _random = _seed.HasValue ? new Random(_seed.Value) : new Random();
-            var project = new Project
+            var project = new Program
             {
                 Name = "project1",
                 UploadHeader = new UploadHeader
@@ -112,7 +112,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
             return project;
         }
 
-        private void FillDummyValues(object o, Project project, Sprite sprite)
+        private void FillDummyValues(object o, Program project, Sprite sprite)
         {
             var type = o.GetType();
 
@@ -126,7 +126,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
             }
         }
 
-        private object CreateDummyValue(Type type, Project project, Sprite sprite)
+        private object CreateDummyValue(Type type, Program project, Sprite sprite)
         {
             if (type == typeof(bool))
             {
@@ -204,14 +204,14 @@ namespace Catrobat.IDE.Core.Tests.Misc
             return null;
         }
 
-        private FormulaTree GenerateFormula(Project project, Sprite sprite)
+        private FormulaTree GenerateFormula(Program project, Sprite sprite)
         {
             return FormulaTreeFactory.CreateSubtractNode(
                     leftChild: FormulaTreeFactory.CreateSinNode(FormulaTreeFactory.CreateNumberNode(6)), 
                     rightChild: FormulaTreeFactory.CreateLocalVariableNode(VariableHelper.GetLocalVariableList(project, sprite).FirstOrDefault()));
         }
 
-        private Costume GenerateCostume(int index, Project project)
+        private Costume GenerateCostume(int index, Program project)
         {
             var costume = new Costume
              {
@@ -219,7 +219,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
                  Name = "Look" + index,
              };
 
-            var absoluteFileName = Path.Combine(project.BasePath, Project.ImagesPath, costume.FileName);
+            var absoluteFileName = Path.Combine(project.BasePath, StorageConstants.ProgramImagesPath, costume.FileName);
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -230,7 +230,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
             return costume;
         }
 
-        private Sound GenerateSound(int index, Project project)
+        private Sound GenerateSound(int index, Program project)
         {
             var sound = new Sound
                 {
@@ -238,7 +238,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
                     Name = "Sound" + index,
                 };
 
-            var absoluteFileName = Path.Combine(project.BasePath, Project.SoundsPath, sound.FileName);
+            var absoluteFileName = Path.Combine(project.BasePath, StorageConstants.ProgramSoundsPath, sound.FileName);
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -249,7 +249,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
             return sound;
         }
 
-        private void AddVariables(Project project)
+        private void AddVariables(Program project)
         {
             foreach (var sprite in project.Sprites)
             {

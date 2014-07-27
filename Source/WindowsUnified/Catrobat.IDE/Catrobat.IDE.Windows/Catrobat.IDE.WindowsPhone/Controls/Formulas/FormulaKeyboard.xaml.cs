@@ -26,12 +26,12 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
 
         public static readonly DependencyProperty ProjectProperty = DependencyProperty.Register(
             name: "Project",
-            propertyType: typeof(Project),
+            propertyType: typeof(Program),
             ownerType: typeof(FormulaKeyboard),
             typeMetadata: new PropertyMetadata(null, (d, e) => ((FormulaKeyboard)d).ProjectChanged(e)));
-        public Project Project
+        public Program Project
         {
-            get { return (Project) GetValue(ProjectProperty); }
+            get { return (Program) GetValue(ProjectProperty); }
             set { SetValue(ProjectProperty, value); }
         }
         private void ProjectChanged(DependencyPropertyChangedEventArgs e)

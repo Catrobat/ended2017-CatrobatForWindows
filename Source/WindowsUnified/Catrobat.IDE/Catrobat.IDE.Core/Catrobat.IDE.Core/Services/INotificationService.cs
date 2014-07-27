@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Core.Services
@@ -15,14 +10,14 @@ namespace Catrobat.IDE.Core.Services
         Ok, OkCancel
     };
 
-    public enum ToastNotificationTime
+    public enum ToastDisplayDuration
     {
-        Short, Medeum, Long
+        Short, Long
     };
 
     public interface INotificationService
     {
-        void ShowToastNotification(string title, string message, ToastNotificationTime timeTillHide, PortableImage image = null);
+        void ShowToastNotification(string title, string message, ToastDisplayDuration timeTillHide, PortableImage image = null);
 
         void ShowToastNotification(string title, string message, TimeSpan timeTillHide, PortableImage image = null);
 

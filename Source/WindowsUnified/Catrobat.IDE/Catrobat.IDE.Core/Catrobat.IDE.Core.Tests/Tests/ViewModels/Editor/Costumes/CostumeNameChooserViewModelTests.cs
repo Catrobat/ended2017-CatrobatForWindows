@@ -10,7 +10,7 @@ using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Core.Tests.Tests.ViewModel.Editor.Costumes
+namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Costumes
 {
     [TestClass]
     public class CostumeNameChooserViewModelTests
@@ -46,8 +46,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModel.Editor.Costumes
                 CostumeName = "TestCostume"
             };
 
-            var project = new Project {Name = "TestProject"};
-            var messageContext = new GenericMessage<Project>(project);
+            var project = new Program {Name = "TestProject"};
+            var messageContext = new GenericMessage<Program>(project);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProjectChangedListener);
 
             var sprite = new Sprite();

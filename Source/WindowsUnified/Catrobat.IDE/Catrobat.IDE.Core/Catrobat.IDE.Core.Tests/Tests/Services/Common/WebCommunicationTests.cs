@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.CatrobatObjects;
 
-namespace Catrobat.IDE.Core.Tests.Tests.Misc
+namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
 {
     [TestClass]
     public class WebCommunicationTests
@@ -27,7 +27,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
             // with "spar1234" password
             string currentToken = "D4RAzWfoHUjOqeUb9CrNO8laN9aK3ykr";
 
-            JSONStatusResponse statusResponse = await webCommunicationService.AsyncCheckToken(currentUserName, currentToken, "de");
+            JSONStatusResponse statusResponse = await webCommunicationService.CheckTokenAsync(currentUserName, currentToken, "de");
             Assert.AreEqual(StatusCodes.ServerResponseOk, statusResponse.statusCode);
         }
     }

@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private MessageboxResult _dialogResult;
         private string _deleteProjectName;
         private string _copyProjectName;
-        private Project _currentProject;
+        private Program _currentProject;
         private ObservableCollection<LocalProjectHeader> _localProjects;
         private CatrobatContextBase _context;
         private OnlineProgramsCollection _onlineProjects;
@@ -62,7 +62,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get
             {
@@ -70,11 +70,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
             set
             {
-                if (value == _currentProject) return;
+                if (value == _currentProject) 
+                    return;
 
                 _currentProject = value;
-
-                                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
+                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
             }
         }
 
@@ -237,7 +237,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
 
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_DownloadQueueMessage, ToastNotificationTime.Short, portbleImage);
+                    AppResources.Main_DownloadQueueMessage, ToastDisplayDuration.Short, portbleImage);
 
                 _showDownloadMessage = false;
             }
@@ -248,7 +248,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
 
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_UploadQueueMessage, ToastNotificationTime.Short, portbleImage);
+                    AppResources.Main_UploadQueueMessage, ToastDisplayDuration.Short, portbleImage);
 
                 _showUploadMessage = false;
             }
@@ -283,7 +283,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
@@ -319,7 +319,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
 
             //_taskCancellation = new CancellationTokenSource();
@@ -333,15 +333,15 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             if (_dialogResult == MessageboxResult.Ok)
             {
-                if (CurrentProject != null && CurrentProject.ProjectDummyHeader.ProjectName == _deleteProjectName)
+                if (CurrentProject != null && CurrentProject.Name == _deleteProjectName)
                 {
-                    var projectChangedMessage = new GenericMessage<Project>(null);
+                    var projectChangedMessage = new GenericMessage<Program>(null);
                     Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
                 }
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    await storage.DeleteDirectoryAsync(CatrobatContextBase.ProjectsPath + "/" + _deleteProjectName);
+                    await storage.DeleteDirectoryAsync(StorageConstants.ProjectsPath + "/" + _deleteProjectName);
                 }
 
                 await UpdateLocalProjects();
@@ -361,7 +361,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 if (_copyProjectName == CurrentProject.Name)
                     await CurrentProject.Save();
 
-                await CatrobatContext.CopyProject(_copyProjectName, _copyProjectName);
+                await ServiceLocator.ContextService.CopyProgram(_copyProjectName, _copyProjectName);
 
                 await UpdateLocalProjects();
                 _copyProjectName = null;
@@ -397,7 +397,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var projectNames = await storage.GetDirectoryNamesAsync(CatrobatContextBase.ProjectsPath);
+                var projectNames = await storage.GetDirectoryNamesAsync(StorageConstants.ProjectsPath);
 
                 //var projects = new List<ProjectDummyHeader>();
 
@@ -441,9 +441,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     if (!exists)
                     {
                         var manualScreenshotPath = Path.Combine(
-                            CatrobatContextBase.ProjectsPath, projectName, Project.ScreenshotPath);
+                            StorageConstants.ProjectsPath, projectName, StorageConstants.ProgramManualScreenshotPath);
                         var automaticProjectScreenshotPath = Path.Combine(
-                            CatrobatContextBase.ProjectsPath, projectName, Project.AutomaticScreenshotPath);
+                            StorageConstants.ProjectsPath, projectName, StorageConstants.ProgramAutomaticScreenshotPath);
 
                         var projectScreenshot = new PortableImage();
                         projectScreenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);

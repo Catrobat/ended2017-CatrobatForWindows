@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Tests.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -43,17 +44,17 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
         using (var storage = StorageSystem.GetStorage())
         {
-            storage.DeleteFile(CatrobatContextBase.LocalSettingsFilePath);
-            Assert.IsFalse(storage.FileExists(CatrobatContextBase.LocalSettingsFilePath));
+            storage.DeleteFile(StorageConstants.LocalSettingsFilePath);
+            Assert.IsFalse(storage.FileExists(StorageConstants.LocalSettingsFilePath));
         }
 
-        await CatrobatContext.StoreLocalSettingsStatic(localSettings);
+        await ServiceLocator.ContextService.StoreLocalSettings(localSettings);
         using (var storage = StorageSystem.GetStorage())
         {
-            Assert.IsTrue(storage.FileExists(CatrobatContextBase.LocalSettingsFilePath));
+            Assert.IsTrue(storage.FileExists(StorageConstants.LocalSettingsFilePath));
         }
 
-        var newLocalSetting = await CatrobatContext.RestoreLocalSettingsStatic();
+        var newLocalSetting = await ServiceLocator.ContextService.RestoreLocalSettings();
         Assert.AreEqual(localSettings.CurrentLanguageString, newLocalSetting.CurrentLanguageString);
         Assert.AreEqual(localSettings.CurrentProjectName, newLocalSetting.CurrentProjectName);
         Assert.AreEqual(localSettings.CurrentThemeIndex, newLocalSetting.CurrentThemeIndex);

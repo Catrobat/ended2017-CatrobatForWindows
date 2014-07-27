@@ -148,6 +148,12 @@ namespace Catrobat.IDE.Core.Services
         public static IZipService ZipService
         { get { return GetInstance<IZipService>(); } }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IContextService ContextService
+        { get { return GetInstance<IContextService>(); } }
+
         #endregion
 
         public static ViewModelLocator ViewModelLocator { get; set; }

@@ -11,7 +11,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
         [TestMethod]
         public void ResourceLoaderTest()
         {
-            var factory = new ResourceLoaderFactoryStore();
+            var factory = new ResourceLoaderWindowsShared();
 
             using (var resourceLoader = factory.CreateResourceLoader())
             {

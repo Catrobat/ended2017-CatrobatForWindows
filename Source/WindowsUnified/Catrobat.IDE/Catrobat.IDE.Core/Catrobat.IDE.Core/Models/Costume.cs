@@ -8,7 +8,7 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 namespace Catrobat.IDE.Core.Models
 {
     [DebuggerDisplay("Name = {Name}")]
-    public partial class Costume : Model, IAsyncCloneable<Project>
+    public partial class Costume : Model, IAsyncCloneable<Program>
     {
         #region Properties
 
@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Core.Models
                     try
                     {
                         _image = new PortableImage();
-                        var fileName = XmlParserTempProjectHelper.Project.BasePath + "/" + Project.ImagesPath + "/" + _fileName;
+                        var fileName = XmlParserTempProjectHelper.Project.BasePath + "/" + StorageConstants.ProgramImagesPath + "/" + _fileName;
                         _image.LoadAsync(fileName, null, false);
 
                         //using (var storage = StorageSystem.GetStorage())
@@ -74,9 +74,9 @@ namespace Catrobat.IDE.Core.Models
             _fileName = FileNameGenerationHelper.Generate() + _name;
         }
 
-        public async Task Delete(Project project)
+        public async Task Delete(Program project)
         {
-            var path = project.BasePath + "/" + Project.ImagesPath + "/" + _fileName;
+            var path = project.BasePath + "/" + StorageConstants.ProgramImagesPath + "/" + _fileName;
             try
             {
                 using (var storage = StorageSystem.GetStorage())
@@ -110,10 +110,10 @@ namespace Catrobat.IDE.Core.Models
 
         #region Implements IAsyncCloneable
 
-        async Task<object> IAsyncCloneable<Project>.CloneInstance(Project project)
+        async Task<object> IAsyncCloneable<Program>.CloneInstance(Program project)
         {
             var result = new Costume(Name);
-            var directory = project.BasePath + "/" + Project.ImagesPath + "/";
+            var directory = project.BasePath + "/" + StorageConstants.ProgramImagesPath + "/";
             using (var storage = StorageSystem.GetStorage())
             {
                 await storage.CopyFileAsync(directory + FileName, directory + result.FileName);

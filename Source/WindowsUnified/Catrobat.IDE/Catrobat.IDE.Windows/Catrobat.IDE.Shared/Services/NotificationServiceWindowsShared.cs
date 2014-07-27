@@ -1,8 +1,14 @@
 ﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
+using Windows.Data.Xml.Dom;
+using Windows.UI.Notifications;
 using Windows.UI.Popups;
-using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
+using NotificationsExtensions.ToastContent;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
@@ -14,20 +20,50 @@ namespace Catrobat.IDE.WindowsShared.Services
 
     public class NotificationServiceWindowsShared : INotificationService
     {
-        private Page _rootPage;
-
-        //public NotificationServiceWindowsShared(Page rootPage)
-        //{
-        //    _rootPage = rootPage;
-        //}
-
-        public void ShowToastNotification(string title, string message, ToastNotificationTime timeTillHide, PortableImage image = null)
+        public void ShowToastNotification(string title, string message, 
+            ToastDisplayDuration displayDuration, PortableImage image = null)
         {
-            // TODO: implement me
-            //throw new NotImplementedException();
+            var duration = ToastDuration.Short;
+
+            switch (displayDuration)
+            {
+                case ToastDisplayDuration.Short:
+                    duration = ToastDuration.Short;
+                    break;
+                case ToastDisplayDuration.Long:
+                    duration = ToastDuration.Long;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("timeTillHide");
+            }
+
+            IToastText01 templateContent = ToastContentFactory.CreateToastText01();
+            templateContent.TextBodyWrap.Text = title;
+            templateContent.Duration = duration;
+
+            templateContent.Audio.Content = ToastAudioContent.Silent;
+
+            const string notShowInNotificationCenterGroup = "NotShowInNC";
+            var toast = templateContent.CreateNotification();
+            toast.Tag = notShowInNotificationCenterGroup;
+
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                ToastNotificationManager.CreateToastNotifier().Show(toast);
+
+                Task.Run(async () =>
+                {
+                    await Task.Delay(new TimeSpan(0, 0, 0, 10));
+
+                    ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                        ToastNotificationManager.History.Remove(notShowInNotificationCenterGroup));
+                });
+            });
+
         }
 
-        public void ShowToastNotification(string title, string message, TimeSpan timeTillHide, PortableImage image = null)
+        public void ShowToastNotification(string title, string message, 
+            TimeSpan timeTillHide, PortableImage image = null)
         {
             // TODO: implement me
             //throw new NotImplementedException();

@@ -122,7 +122,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, error);
 
             var xml = actualDocument.ToString();
-            var project = new XmlProject(xml); // must not throw an exception
+            var project = new XmlProgram(xml); // must not throw an exception
 
             if (output != null)
             {

@@ -20,13 +20,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
         private ImageDimension _dimension;
         private ImageSizeEntry _selectedSize;
         private PortableImage _image;
-        private Project _currentProject;
+        private Program _currentProject;
 
         #endregion
 
         #region Properties
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get { return _currentProject; }
             private set
@@ -210,7 +210,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
             _receivedSelectedSprite = message.Content;
         }
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
         }
@@ -231,7 +231,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<Program>>(this,
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<PortableImage>>(this,

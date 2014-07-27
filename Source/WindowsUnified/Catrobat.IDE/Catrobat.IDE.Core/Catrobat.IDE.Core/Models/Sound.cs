@@ -8,7 +8,7 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 namespace Catrobat.IDE.Core.Models
 {
     [DebuggerDisplay("Name = {Name}")]
-    public partial class Sound : Model, IAsyncCloneable<Project>
+    public partial class Sound : Model, IAsyncCloneable<Program>
     {
         #region Properties
 
@@ -39,9 +39,9 @@ namespace Catrobat.IDE.Core.Models
             _fileName = FileNameGenerationHelper.Generate() + _name;
         }
 
-        public async Task Delete(Project project)
+        public async Task Delete(Program project)
         {
-            var path = project.BasePath + "/" + Project.SoundsPath + "/" + _fileName;
+            var path = project.BasePath + "/" + StorageConstants.ProgramSoundsPath + "/" + _fileName;
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -69,10 +69,10 @@ namespace Catrobat.IDE.Core.Models
 
         #region Implements IAsyncCloneable
 
-        async Task<object> IAsyncCloneable<Project>.CloneInstance(Project project)
+        async Task<object> IAsyncCloneable<Program>.CloneInstance(Program project)
         {
             var result = new Sound(Name);
-            var directory = project.BasePath + "/" + Project.SoundsPath + "/";
+            var directory = project.BasePath + "/" + StorageConstants.ProgramSoundsPath + "/";
             using (var storage = StorageSystem.GetStorage())
             {
                 await storage.CopyFileAsync(directory + FileName, directory + result.FileName);

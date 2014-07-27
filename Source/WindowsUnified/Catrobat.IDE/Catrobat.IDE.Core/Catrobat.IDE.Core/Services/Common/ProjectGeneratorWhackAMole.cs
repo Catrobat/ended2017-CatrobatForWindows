@@ -29,9 +29,9 @@ namespace Catrobat.IDE.Core.Services.Common
         private const string SoundFileName3 = "C006F161E41ACB98A9EB7B1E22405971_record.mp3";
         private const string SoundFileName4 = "C03622EC424461AB47259339AB71CF1C_record.mp3";
 
-        public async Task<Project> GenerateProject(string programName, bool writeToDisk)
+        public async Task<Program> GenerateProject(string programName, bool writeToDisk)
         {
-            var project = new Project
+            var project = new Program
             {
                 Name = programName, 
                 UploadHeader = new UploadHeader
@@ -45,8 +45,8 @@ namespace Catrobat.IDE.Core.Services.Common
             if (writeToDisk)
             {
                 await WriteScreenshotsToDisk(project.BasePath);
-                await WriteLooksToDisk(Path.Combine(project.BasePath, Project.ImagesPath));
-                await WriteSoundsToDisk(Path.Combine(project.BasePath, Project.SoundsPath));
+                await WriteLooksToDisk(Path.Combine(project.BasePath, StorageConstants.ProgramImagesPath));
+                await WriteSoundsToDisk(Path.Combine(project.BasePath, StorageConstants.ProgramSoundsPath));
             }
 
             FillSprites(project);
@@ -155,7 +155,7 @@ namespace Catrobat.IDE.Core.Services.Common
         }
 
 
-        private static void FillSprites(Project project)
+        private static void FillSprites(Program project)
         {
             var objectBackground = new Sprite { Name = AppResources.DefaultProject_Background }; 
             var objectMole1 = new Sprite { Name = AppResources.WhackAMole_Mole + " 1" };

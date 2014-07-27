@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.Xml.VersionConverter;
 using Newtonsoft.Json;
 using Catrobat.IDE.Core.Services;
@@ -22,7 +23,7 @@ namespace Catrobat.IDE.Core.Services.Common
     {
         private static int _uploadCounter = 0;
 
-        public async Task<List<OnlineProjectHeader>> AsyncLoadOnlineProjects(
+        public async Task<List<OnlineProjectHeader>> LoadOnlineProjectsAsync(
             string filterText, int offset, int count,
             CancellationToken taskCancellationToken)
         {
@@ -39,7 +40,7 @@ namespace Catrobat.IDE.Core.Services.Common
                     if (filterText == "")
                     {
                         httpResponse = await httpClient.GetAsync(
-                            String.Format(ApplicationResources.API_RECENT_PROJECTS, 
+                            String.Format(ApplicationResources.API_RECENT_PROJECTS,
                             count, offset), taskCancellationToken);
                     }
                     else
@@ -75,56 +76,56 @@ namespace Catrobat.IDE.Core.Services.Common
         }
 
 
-        public async Task<CatrobatVersionConverter.VersionConverterError> AsyncDownloadAndSaveProject(string downloadUrl, string projectName)
+        public async Task<Stream> DownloadAsync(string downloadUrl, string projectName)
         {
-            // TODO: use PrjectImporterService instead of ProjectConverter
             using (var httpClient = new HttpClient())
             {
                 httpClient.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
                 try
                 {
                     // trigger to header-read to avoid timeouts
-                    HttpResponseMessage httpResponse = await httpClient.GetAsync(downloadUrl/*, HttpCompletionOption.ResponseHeadersRead*/);
+                    var httpResponse = await httpClient.GetAsync(downloadUrl/*, HttpCompletionOption.ResponseHeadersRead*/);
                     httpResponse.EnsureSuccessStatusCode();
 
-                    using (Stream httpStream = await httpResponse.Content.ReadAsStreamAsync())
-                    {
-                        List<string> folders;
-                        using (var storage = StorageSystem.GetStorage())
-                        {
-                            var folder_array = await storage.GetDirectoryNamesAsync(CatrobatContextBase.ProjectsPath);
-                            folders = new List<string>(folder_array);
+                    return await httpResponse.Content.ReadAsStreamAsync();
 
-                        }
-                        string countString = "";
-                        int counter = 1;
-                        while (folders.IndexOf(projectName + countString) >= 0)
-                        {
-                            countString = " " + counter.ToString(ServiceLocator.CultureService.GetCulture());
-                            counter++;
-                        }
-                        projectName = projectName + countString;
-                        await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
-                            httpStream, CatrobatContextBase.ProjectsPath + "/" + projectName);
-                    }
-                    var result = await CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, true);
-                    CatrobatVersionConverter.VersionConverterError error = result.Error;
-                    return error;
+
+                    //List<string> folders;
+                    //using (var storage = StorageSystem.GetStorage())
+                    //{
+                    //    var folder_array = await storage.GetDirectoryNamesAsync(CatrobatContextBase.ProjectsPath);
+                    //    folders = new List<string>(folder_array);
+
+                    //}
+                    //string countString = "";
+                    //int counter = 1;
+                    //while (folders.IndexOf(projectName + countString) >= 0)
+                    //{
+                    //    countString = " " + counter.ToString(ServiceLocator.CultureService.GetCulture());
+                    //    counter++;
+                    //}
+                    //projectName = projectName + countString;
+                    //await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
+                    //    httpStream, CatrobatContextBase.ProjectsPath + "/" + projectName);
+
+                    //var result = await CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, true);
+                    //CatrobatVersionConverter.VersionConverterError error = result.Error;
+                    //return error;
 
                 }
                 catch (HttpRequestException)
                 {
-                    return CatrobatVersionConverter.VersionConverterError.ProgramDamaged;
+                    return null;
                 }
                 catch (Exception)
                 {
-                    return CatrobatVersionConverter.VersionConverterError.ProgramDamaged;
+                    return null;
                 }
             }
         }
 
 
-        public async Task<JSONStatusResponse> AsyncCheckToken(string username, string token, string language = "en")
+        public async Task<JSONStatusResponse> CheckTokenAsync(string username, string token, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_USERNAME, ((username == null) ? "" : username)),
@@ -164,7 +165,7 @@ namespace Catrobat.IDE.Core.Services.Common
             }
         }
 
-        public async Task<JSONStatusResponse> AsyncLoginOrRegister(string username, string password, string userEmail,
+        public async Task<JSONStatusResponse> LoginOrRegisterAsync(string username, string password, string userEmail,
                 string language = "en", string country = "AT")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
@@ -208,7 +209,7 @@ namespace Catrobat.IDE.Core.Services.Common
         }
 
 
-        public async Task<JSONStatusResponse> AsyncUploadProject(string projectTitle, string username, string token,
+        public async Task<JSONStatusResponse> UploadProjectAsync(string projectTitle, string username, string token,
                 string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
@@ -224,7 +225,7 @@ namespace Catrobat.IDE.Core.Services.Common
                     JSONStatusResponse statusResponse = null;
                     try
                     {
-                        await ServiceLocator.ZipService.ZipCatrobatPackage(stream, CatrobatContextBase.ProjectsPath + "/" + projectTitle);
+                        await ServiceLocator.ZipService.ZipCatrobatPackage(stream, StorageConstants.ProjectsPath + "/" + projectTitle);
                         Byte[] project_data = stream.ToArray();
 
                         parameters.Add(new KeyValuePair<string, string>(ApplicationResources.API_PARAM_CHECKSUM, UtilTokenHelper.ToHex(MD5Core.GetHash(project_data))));
@@ -279,7 +280,7 @@ namespace Catrobat.IDE.Core.Services.Common
         }
 
 
-        public async Task<JSONStatusResponse> AsyncReportAsInappropriate(string projectId, string flagReason, string language = "en")
+        public async Task<JSONStatusResponse> ReportAsInappropriateAsync(string projectId, string flagReason, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_PROJECTID, ((projectId == null) ? "" : projectId)),
@@ -321,7 +322,7 @@ namespace Catrobat.IDE.Core.Services.Common
         }
 
 
-        public async Task<JSONStatusResponse> AsyncRecoverPassword(string recoveryUserData, string language = "en")
+        public async Task<JSONStatusResponse> RecoverPasswordAsync(string recoveryUserData, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_RECOVER_PWD, ((recoveryUserData == null) ? "" : recoveryUserData)),
@@ -362,7 +363,7 @@ namespace Catrobat.IDE.Core.Services.Common
         }
 
 
-        public async Task<JSONStatusResponse> AsyncChangePassword(string newPassword, string newPasswortRepeated, string hash, string language = "en")
+        public async Task<JSONStatusResponse> ChangePasswordAsync(string newPassword, string newPasswortRepeated, string hash, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_HASH, ((hash == null) ? "" : hash)),

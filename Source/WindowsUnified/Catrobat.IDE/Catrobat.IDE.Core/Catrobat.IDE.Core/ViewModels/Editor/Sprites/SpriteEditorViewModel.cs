@@ -23,7 +23,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
     {
         #region Private Members
 
-        private Project _currentProject;
+        private Program _currentProject;
         private Sprite _selectedSprite;
         private readonly ActionsCollection _bricks;
         private Sound _sound;
@@ -52,7 +52,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get { return _currentProject; }
             private set 
@@ -750,7 +750,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         private void ProjectSettingsAction()
         {
-            var message = new GenericMessage<Project>(CurrentProject);
+            var message = new GenericMessage<Program>(CurrentProject);
             Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
 
             ServiceLocator.NavigationService.NavigateTo<ProjectSettingsViewModel>();
@@ -827,7 +827,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region MessageActions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
         }
@@ -899,7 +899,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             _bricks = new ActionsCollection();
 
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);

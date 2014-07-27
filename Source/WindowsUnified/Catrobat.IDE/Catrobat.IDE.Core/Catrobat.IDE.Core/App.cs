@@ -1,4 +1,6 @@
 using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Resources;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModels;
@@ -45,59 +47,19 @@ namespace Catrobat.IDE.Core
             }
         }
 
-        //private static async Task<Project> Initialize(CatrobatContextBase context)
-        //{
-            
-
-        //    //if(localSettings != null)
-        //    //{
-        //    //    try
-        //    //    {
-        //    //        context.LocalSettings = localSettings;
-        //    //        var project = await CatrobatContext.LoadNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
-        //    //        if(project != null)
-        //    //            return project;
-        //    //    }
-        //    //    catch (Exception)
-        //    //    {
-                    
-        //    //    }
-        //    //}
-
-        //    //if (localSettings == null && Debugger.IsAttached)
-        //    //{
-        //    //    var loader = new SampleProjectLoader();
-        //    //    await loader.LoadSampleProjects();
-        //    //}
-
-        //    //var localSettings = await CatrobatContext.RestoreLocalSettingsStatic();
-
-        //    //if (localSettings == null)
-        //    //{
-        //    //    context.LocalSettings = new LocalSettings();
-
-        //    //    var currentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
-        //    //    context.LocalSettings.CurrentProjectName = currentProject.Name;
-        //    //    await currentProject.Save();
-
-        //    //    return currentProject;
-        //    //}
-
-        //    //return null;
-        //}
-
         private static async Task LoadContext()
         {
             _context = new CatrobatContext();
 
-            var localSettings = await CatrobatContext.RestoreLocalSettingsStatic();
+            var localSettings = await ServiceLocator.ContextService.RestoreLocalSettings();
             _context.LocalSettings = localSettings;
 
             if (localSettings == null)
             {
                 _context.LocalSettings = new LocalSettings();
 
-                var defaultProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+                var defaultProject = await ServiceLocator.ContextService.
+                    RestoreDefaultProgram(AppResources.Main_DefaultProjectName);
                 _context.LocalSettings.CurrentProjectName = defaultProject.Name;
                 await defaultProject.Save();
             }
@@ -130,7 +92,7 @@ namespace Catrobat.IDE.Core
             Messenger.Default.Send(new GenericMessage<LocalSettings>(_context.LocalSettings), ViewModelMessagingToken.LoadSettings);
         }
 
-        public static async Task SaveContext(Project currentProject)
+        public static async Task SaveContext(Program currentProject)
         {
             if (currentProject == null || _context == null)
                 return;
@@ -153,7 +115,7 @@ namespace Catrobat.IDE.Core
             // allow viewmodels to save settings
             Messenger.Default.Send(new GenericMessage<LocalSettings>(_context.LocalSettings), ViewModelMessagingToken.SaveSettings);
 
-            await CatrobatContext.StoreLocalSettingsStatic(_context.LocalSettings);
+            await ServiceLocator.ContextService.StoreLocalSettings(_context.LocalSettings);
             await currentProject.Save();
         }
     }

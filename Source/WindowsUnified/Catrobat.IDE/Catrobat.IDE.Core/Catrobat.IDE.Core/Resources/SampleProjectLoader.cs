@@ -41,22 +41,22 @@ namespace Catrobat.IDE.Core.Resources
 
                     if (resourceStream != null)
                     {
-                        var projectFolderPath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName);
+                        var projectFolderPath = Path.Combine(StorageConstants.ProjectsPath, projectName);
 
                         using (var storage = StorageSystem.GetStorage())
                         {
                             if (!await storage.DirectoryExistsAsync(projectFolderPath))
                             {
-                                await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContextBase.ProjectsPath + "/" + projectName);
+                                await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, StorageConstants.ProjectsPath + "/" + projectName);
                             }
                         }
 
                         using (var storage = StorageSystem.GetStorage())
                         {
-                            var textFilePath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.ProjectCodePath);
+                            var textFilePath = Path.Combine(StorageConstants.ProjectsPath, projectName, StorageConstants.ProgramCodePath);
                             var xml = await storage.ReadTextFileAsync(textFilePath);
 
-                            var project = new XmlProject(xml);
+                            var project = new XmlProgram(xml);
                             project.ProjectHeader.ProgramName = projectName;
 
                             await project.Save();

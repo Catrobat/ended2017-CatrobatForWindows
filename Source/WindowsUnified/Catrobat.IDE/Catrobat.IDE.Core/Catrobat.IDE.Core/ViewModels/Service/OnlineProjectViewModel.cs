@@ -7,6 +7,7 @@ using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.Xml;
 using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
@@ -26,22 +27,11 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _versionLabelText = "";
         private string _viewsLabelText = "";
         private string _downloadsLabelText = "";
-        private Project _currentProject;
+        private Program _currentProject;
 
         #endregion
 
         #region Properties
-
-        public Project CurrentProject
-        {
-            get { return _currentProject; }
-            private set 
-            {
-                if (value == _currentProject) return;
-                _currentProject = value;                 
-                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject)); 
-            }
-        }
 
         public bool ButtonDownloadIsEnabled
         {
@@ -137,61 +127,86 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         #region Actions
 
-        private void OnLoadAction(OnlineProjectHeader dataContext)
+        private void OnLoadAction(OnlineProjectHeader projectHeader)
         {
             //var conv = new UnixTimeDateTimeConverter();
             //object output = conv.Convert((object)Convert.ToDouble(dataContext.Uploaded.Split('.')[0]), null, null, null);
-            
-            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectUploadedBy, ServiceLocator.WebCommunicationService.ConvertUnixTimeStamp(Convert.ToDouble(dataContext.Uploaded.Split('.')[0])));
-            VersionLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectVersion, dataContext.Version);
-            ViewsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectViews, dataContext.Views);
-            DownloadsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectDownloads, dataContext.Downloads);
+
+            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectUploadedBy, ServiceLocator.WebCommunicationService.ConvertUnixTimeStamp(Convert.ToDouble(projectHeader.Uploaded.Split('.')[0])));
+            VersionLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectVersion, projectHeader.Version);
+            ViewsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectViews, projectHeader.Views);
+            DownloadsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectDownloads, projectHeader.Downloads);
             ButtonDownloadIsEnabled = true;
         }
 
-        private async void DownloadAction(OnlineProjectHeader onlineProjectHeader)
+        private async void DownloadAction(OnlineProjectHeader projectHeader)
         {
-            ButtonDownloadIsEnabled = false;
-            Task<CatrobatVersionConverter.VersionConverterError> downloadTask = 
-                Task.Run(() =>
-                    ServiceLocator.WebCommunicationService.AsyncDownloadAndSaveProject(
-                    onlineProjectHeader.DownloadUrl, onlineProjectHeader.ProjectName));
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                ServiceLocator.NavigationService.NavigateBack<OnlineProjectViewModel>());
 
-            var projectChangedMessage = new MessageBase();
-            Messenger.Default.Send(projectChangedMessage, 
-                ViewModelMessagingToken.DownloadProjectStartedListener);
 
-            base.GoBackAction();
+            ServiceLocator.ProjectImporterService.SetDownloadHeader(projectHeader);
+            var extracionResult = await ServiceLocator.ProjectImporterService.ExtractProgram();
 
-            CatrobatVersionConverter.VersionConverterError error = await downloadTask;
-            var message = new MessageBase();
-            Messenger.Default.Send(message, ViewModelMessagingToken.LocalProjectsChangedListener);
-
-            if (error != CatrobatVersionConverter.VersionConverterError.NoError)
+            if (extracionResult.Status == ExtractProgramStatus.Error)
             {
-                switch (error)
-                {
-                    case CatrobatVersionConverter.VersionConverterError.VersionTooOld:
-                    case CatrobatVersionConverter.VersionConverterError.VersionTooNew:
-                        ServiceLocator.NotifictionService.ShowToastNotification(null,
-                            AppResources.Main_VersionIsNotSupported, ToastNotificationTime.Medeum);
-                        break;
-                    case CatrobatVersionConverter.VersionConverterError.ProgramDamaged:
-                        ServiceLocator.NotifictionService.ShowToastNotification(null,
-                            AppResources.Main_ProjectNotValid, ToastNotificationTime.Medeum);
-                        break;
-                }
+                // DODO: show error: Project could not be downloaded
+                return;
             }
-            else
+
+            var validateResult = await ServiceLocator.ProjectImporterService.CheckProgram();
+
+            var acceptProject = true;
+
+            switch (validateResult.Status)
             {
-                ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_NoDownloadsPending, ToastNotificationTime.Short);
+                case ProgramImportStatus.Valid:
+                    ServiceLocator.NotifictionService.ShowToastNotification(
+                        "Program added",
+                        "Program successfully added to your program list.",
+                        ToastDisplayDuration.Long); // TODO: localize me
+
+                    acceptProject = true;
+                    break;
+                case ProgramImportStatus.Damaged:
+                    ServiceLocator.NotifictionService.ShowToastNotification(
+                        "Program dameged",
+                        "Program damaged and cannot be added!",
+                        ToastDisplayDuration.Long); // TODO: localize me
+
+                    acceptProject = false;
+                    break;
+                case ProgramImportStatus.VersionTooOld:
+                    ServiceLocator.NotifictionService.ShowToastNotification(
+                        "Program outdated",
+                        "Program is too old and cannot be added!",
+                        ToastDisplayDuration.Long); // TODO: localize me
+
+                    acceptProject = false;
+                    break;
+                case ProgramImportStatus.VersionTooNew:
+                    ServiceLocator.NotifictionService.ShowToastNotification(
+                        "App version too old",
+                        "The downloaded program requires a newer version of this App!",
+                        ToastDisplayDuration.Long); // TODO: localize me
+
+                    acceptProject = true;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            if (acceptProject)
+            {
+                await ServiceLocator.ProjectImporterService.AcceptTempProject();
+                var localProjectsChangedMessage = new MessageBase();
+                Messenger.Default.Send(localProjectsChangedMessage,
+                    ViewModelMessagingToken.LocalProjectsChangedListener);
             }
         }
 
         private void ReportAction(OnlineProjectHeader onlineProjectHeader)
         {
-            ResetViewModel();
             ServiceLocator.NavigationService.NavigateTo<OnlineProjectReportViewModel>();
         }
 
@@ -202,17 +217,13 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         protected override void GoBackAction()
         {
-            ResetViewModel();
             base.GoBackAction();
         }
 
         #endregion
 
         #region MessageActions
-        private void CurrentProjectChangedAction(GenericMessage<Project> message)
-        {
-            CurrentProject = message.Content;
-        }
+
         #endregion
 
         public OnlineProjectViewModel()
@@ -221,19 +232,16 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             DownloadCommand = new RelayCommand<OnlineProjectHeader>(DownloadAction, DownloadCommand_CanExecute);
             ReportCommand = new RelayCommand<OnlineProjectHeader>(ReportAction);
             LicenseCommand = new RelayCommand(LicenseAction);
-
-            Messenger.Default.Register<GenericMessage<Project>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
 
 
-        private void ResetViewModel()
-        {
-            ButtonDownloadIsEnabled = true;
-            UploadedLabelText = "";
-            VersionLabelText = "";
-            ViewsLabelText = "";
-            DownloadsLabelText = "";
-        }
+        //private void ResetViewModel()
+        //{
+        //    ButtonDownloadIsEnabled = true;
+        //    UploadedLabelText = "";
+        //    VersionLabelText = "";
+        //    ViewsLabelText = "";
+        //    DownloadsLabelText = "";
+        //}
     }
 }

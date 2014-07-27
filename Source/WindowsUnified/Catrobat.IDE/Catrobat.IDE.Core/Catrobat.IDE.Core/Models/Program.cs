@@ -11,14 +11,8 @@ using System.Collections.ObjectModel;
 namespace Catrobat.IDE.Core.Models
 {
     [DebuggerDisplay("Name = {Name}")]
-    public partial class Project : Model, ITestEquatable<Project>
+    public partial class Program : Model, ITestEquatable<Program>
     {
-        public const string ProjectCodePath = "code.xml";
-        public const string ScreenshotPath = "manual_screenshot.png‏";
-        public const string AutomaticScreenshotPath = "automatic_screenshot.png";
-        public const string ImagesPath = "images";
-        public const string SoundsPath = "sounds";
-
         #region Properties
 
         private string _name = string.Empty;
@@ -65,7 +59,7 @@ namespace Catrobat.IDE.Core.Models
 
         public string BasePath
         {
-            get { return CatrobatContextBase.ProjectsPath + "/" + Name; }
+            get { return StorageConstants.ProjectsPath + "/" + Name; }
         }
 
         private PortableImage _screenshot;
@@ -75,13 +69,13 @@ namespace Catrobat.IDE.Core.Models
             {
                 if (_screenshot == null)
                 {
-                    var manualScreenshotPath = Path.Combine(BasePath, ScreenshotPath);
-                    var automaticProjectScreenshotPath = Path.Combine(BasePath, AutomaticScreenshotPath);
+                    var manualScreenshotPath = Path.Combine(BasePath, StorageConstants.ProgramManualScreenshotPath);
+                    var automaticProjectScreenshotPath = Path.Combine(BasePath, StorageConstants.ProgramAutomaticScreenshotPath);
                     _screenshot = new PortableImage();
                     _screenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);
-                    if (ProjectDummyHeader != null)
+                    if (LocalProgramHeader != null)
                     {
-                        ProjectDummyHeader.Screenshot = _screenshot;
+                        LocalProgramHeader.Screenshot = _screenshot;
                     }
                 }
                 return _screenshot;
@@ -108,7 +102,7 @@ namespace Catrobat.IDE.Core.Models
         #region Strange properties
 
         private LocalProjectHeader _projectDummyHeader;
-        public LocalProjectHeader ProjectDummyHeader
+        public LocalProjectHeader LocalProgramHeader
         {
             get
             {
@@ -128,6 +122,11 @@ namespace Catrobat.IDE.Core.Models
         }
 
         #endregion
+
+        public Program()
+        {
+            
+        }
 
         public async Task SetProgramNameAndRenameDirectory(string newProgramName)
         {
@@ -161,15 +160,15 @@ namespace Catrobat.IDE.Core.Models
 
         protected override bool TestEquals(Model other)
         {
-            return base.TestEquals(other) && TestEquals((Project) other);
+            return base.TestEquals(other) && TestEquals((Program) other);
         }
 
-        bool ITestEquatable<Project>.TestEquals(Project other)
+        bool ITestEquatable<Program>.TestEquals(Program other)
         {
             return TestEquals(other);
         }
 
-        protected bool TestEquals(Project other)
+        protected bool TestEquals(Program other)
         {
             return
                 string.Equals(_name, other._name) &&

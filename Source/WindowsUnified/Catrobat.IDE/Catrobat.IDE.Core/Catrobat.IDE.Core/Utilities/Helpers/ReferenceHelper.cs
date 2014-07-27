@@ -973,7 +973,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             }
         }
 
-        public static void CleanUpSpriteReferences(Sprite deletedSprite, Project currentProject)
+        public static void CleanUpSpriteReferences(Sprite deletedSprite, Program currentProject)
         {
             foreach (var sprite in currentProject.Sprites)
             {

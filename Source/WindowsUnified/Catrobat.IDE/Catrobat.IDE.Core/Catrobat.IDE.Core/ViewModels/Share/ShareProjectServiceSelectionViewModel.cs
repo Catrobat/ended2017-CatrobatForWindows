@@ -12,13 +12,13 @@ namespace Catrobat.IDE.Core.ViewModels.Share
     {
         #region private Members
 
-        private XmlProject _projectToShare;
+        private XmlProgram _projectToShare;
 
         #endregion
 
         #region Properties
 
-        public XmlProject ProjectToShare
+        public XmlProgram ProjectToShare
         {
             get { return _projectToShare; }
             private set { _projectToShare = value; RaisePropertyChanged(() => ProjectToShare); }
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.ViewModels.Share
 
         #region MessageActions
 
-        private void ProjectToShareChangedMessageAction(GenericMessage<XmlProject> message)
+        private void ProjectToShareChangedMessageAction(GenericMessage<XmlProgram> message)
         {
             ProjectToShare = message.Content;
         }
@@ -69,7 +69,7 @@ namespace Catrobat.IDE.Core.ViewModels.Share
             // Commands
             UploadToSkyDriveCommand = new RelayCommand(ShareWithSkydriveAction, ShareWithSkydriveCommand_CanExecute);
  
-            Messenger.Default.Register<GenericMessage<XmlProject>>(this,
+            Messenger.Default.Register<GenericMessage<XmlProgram>>(this,
                  ViewModelMessagingToken.ShareProjectHeaderListener, ProjectToShareChangedMessageAction);
         }
     }

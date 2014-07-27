@@ -32,8 +32,8 @@ namespace Catrobat.IDE.WindowsShared
             ServiceLocator.Register<CultureServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ImageResizeServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<PlayerLauncherServiceWindowsShared>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<ResourceLoaderFactoryStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<StorageFactoryStore>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ResourceLoaderWindowsShared>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<StorageFactoryWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ImageSourceConversionServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SoundPlayerServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SoundRecorderServiceWindowsShared>(TypeCreationMode.Lazy);
@@ -48,6 +48,8 @@ namespace Catrobat.IDE.WindowsShared
             ServiceLocator.Register<WebCommunicationService>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ZipService>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ProgramImporterService>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ContextService>(TypeCreationMode.Lazy);
+
 
             ServiceLocator.ViewModelLocator = new ViewModelLocator();
             ServiceLocator.ViewModelLocator.RegisterViewModels();
@@ -67,7 +69,7 @@ namespace Catrobat.IDE.WindowsShared
                 Task.Run(async () =>
                 {
                     var defaultProject = await new ProjectGeneratorWhackAMole().GenerateProject("de", false);
-                    var projectChangedMessage = new GenericMessage<Project>(defaultProject);
+                    var projectChangedMessage = new GenericMessage<Core.Models.Program>(defaultProject);
                     Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
                 });
             }

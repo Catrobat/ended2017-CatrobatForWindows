@@ -5,7 +5,6 @@ namespace Catrobat.IDE.Core
     public static class Constants
     {
         // Application Info
-
         public const string ApplicationName = "Pocket Code";
 
         public const string CurrentAppVersion = "0.20";
@@ -30,6 +29,6 @@ namespace Catrobat.IDE.Core
         };
 
         public static List<string> CatrobatFileNames = 
-            new List<string>{ ".catrobat", ".pocketcode" };
+            new List<string> { ".catrobat", ".pocketcode" };
     }
 }

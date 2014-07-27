@@ -9,7 +9,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public event SoundFinished SoundFinished;
 
-        public void SetSound(Sound sound, Project currentProject)
+        public void SetSound(Sound sound, Core.Models.Program currentProject)
         {
             throw new System.NotImplementedException();
         }

@@ -18,14 +18,14 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _projectName;
         private string _projectDescription;
         private CatrobatContextBase _context;
-        private Project _currentProject;
+        private Program _currentProject;
         private MessageboxResult _uploadErrorCallbackResult;
 
         #endregion
 
         #region Properties
 
-        public Project CurrentProject
+        public Program CurrentProject
         {
             get
             {
@@ -33,7 +33,9 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
             private set
             {
-                if (value == _currentProject) return;
+                if (value == _currentProject) 
+                    return;
+
                 _currentProject = value;
                 ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
             }
@@ -123,7 +125,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             CurrentProject.Description = ProjectDescription;
             await App.SaveContext(CurrentProject);
 
-            Task<JSONStatusResponse> upload_task = ServiceLocator.WebCommunicationService.AsyncUploadProject(ProjectName, Context.CurrentUserName,
+            Task<JSONStatusResponse> upload_task = ServiceLocator.WebCommunicationService.UploadProjectAsync(ProjectName, Context.CurrentUserName,
                                                           Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
             var message = new MessageBase();
@@ -154,14 +156,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             if (ServiceLocator.WebCommunicationService.NoUploadsPending())
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_NoUploadsPending, ToastNotificationTime.Short);
+                    AppResources.Main_NoUploadsPending, ToastDisplayDuration.Short);
             }
-        }
-
-        private void CancelAction()
-        {
-            ResetViewModel();
-            ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
         }
 
         private void ChangeUserAction()
@@ -173,6 +169,13 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             ServiceLocator.NavigationService.NavigateTo<UploadProjectLoginViewModel>();
             ServiceLocator.NavigationService.RemoveBackEntry();
         }
+
+        private void CancelAction()
+        {
+            ResetViewModel();
+            ServiceLocator.NavigationService.NavigateTo<ProjectDetailViewModel>();
+            ServiceLocator.NavigationService.RemoveBackEntry();
+        } 
 
         protected override void GoBackAction()
         {
@@ -188,7 +191,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             Context = message.Content;
         }
 
-        private void CurrentProjectChangedChangedMessageAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
             if (CurrentProject != null)
@@ -215,7 +218,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
+            Messenger.Default.Register<GenericMessage<Program>>(this,
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedChangedMessageAction);
         }
 
