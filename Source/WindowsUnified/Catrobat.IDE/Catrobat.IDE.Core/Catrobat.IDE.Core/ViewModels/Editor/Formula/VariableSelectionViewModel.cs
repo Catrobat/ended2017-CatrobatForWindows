@@ -40,7 +40,18 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         public Program CurrentProject
         {
             get { return _currentProject; }
-            set { _currentProject = value;                 ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject)); }
+            set
+            {
+                _currentProject = value;
+                _selectedGlobalVariable = null;
+                _selectedLocalVariable = null;
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    RaisePropertyChanged(() => CurrentProject);
+                    RaisePropertyChanged(() => SelectedGlobalVariable);
+                    RaisePropertyChanged(() => SelectedLocalVariable);
+                });
+            }
         }
 
         public Sprite CurrentSprite
@@ -49,27 +60,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             set
             {
                 _currentSprite = value;
-                RaisePropertyChanged(() => CurrentSprite);
-            }
-        }
-
-        public ObservableCollection<LocalVariable> LocalVariables
-        {
-            get { return _localVariables; }
-            set
-            {
-                _localVariables = value;
-                RaisePropertyChanged(() => LocalVariables);
-            }
-        }
-
-        public ObservableCollection<GlobalVariable> GlobalVariables
-        {
-            get { return _globalVariables; }
-            set
-            {
-                _globalVariables = value;
-                RaisePropertyChanged(() => GlobalVariables);
+                _selectedLocalVariable = null;
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    RaisePropertyChanged(() => CurrentSprite);
+                    RaisePropertyChanged(() => SelectedLocalVariable);
+                });
             }
         }
 
@@ -92,7 +88,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 }
 
                 RaisePropertyChanged(() => SelectedLocalVariable);
-                RaisePropertyChanged(() => LocalVariables);
                 EditVariableCommand.RaiseCanExecuteChanged();
                 DeleteVariableCommand.RaiseCanExecuteChanged();
             }
@@ -117,7 +112,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 }
 
                 RaisePropertyChanged(() => SelectedGlobalVariable);
-                RaisePropertyChanged(() => GlobalVariables);
                 EditVariableCommand.RaiseCanExecuteChanged();
                 DeleteVariableCommand.RaiseCanExecuteChanged();
             }
@@ -134,9 +128,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 if (_selectedVariableContainer != null && _selectedVariableContainer.Variable != null)
                 {
                     if (VariableHelper.IsVariableLocal(CurrentProject, _selectedVariableContainer.Variable))
-                        SelectedLocalVariable = (LocalVariable) _selectedVariableContainer.Variable;
+                        SelectedLocalVariable = (LocalVariable)_selectedVariableContainer.Variable;
                     else
-                        SelectedGlobalVariable = (GlobalVariable) _selectedVariableContainer.Variable;
+                        SelectedGlobalVariable = (GlobalVariable)_selectedVariableContainer.Variable;
                 }
                 else
                 {
@@ -193,13 +187,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         {
             if (SelectedVariableContainer == null)
             {
-                var selectedVariable = (Variable) SelectedLocalVariable ?? SelectedGlobalVariable;
+                var selectedVariable = (Variable)SelectedLocalVariable ?? SelectedGlobalVariable;
                 var message = new GenericMessage<Variable>(selectedVariable);
                 Messenger.Default.Send(message, ViewModelMessagingToken.SelectedUserVariableChangedListener);
             }
             else
             {
-                SelectedVariableContainer.Variable = (Variable) SelectedGlobalVariable ?? SelectedLocalVariable;
+                SelectedVariableContainer.Variable = (Variable)SelectedGlobalVariable ?? SelectedLocalVariable;
             }
 
             ResetViewModel();
@@ -249,30 +243,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
-            if (CurrentProject != null)
-            {
-                CurrentProject = message.Content;
-                GlobalVariables = VariableHelper.GetGlobalVariableList(CurrentProject);
-
-                if (CurrentSprite == null) return;
-
-                LocalVariables = VariableHelper.GetLocalVariableList(CurrentProject, CurrentSprite);
-            }
-            else
-            {
-                GlobalVariables = null;
-                LocalVariables = null;
-            }
-
+            CurrentProject = message.Content;
+            CurrentSprite = null;
         }
 
         private void CurrentSpriteChangedMesageAction(GenericMessage<Sprite> message)
         {
             CurrentSprite = message.Content;
-
-            if (CurrentProject == null) return;
-
-            LocalVariables = VariableHelper.GetLocalVariableList(CurrentProject, CurrentSprite);
         }
 
         #endregion
