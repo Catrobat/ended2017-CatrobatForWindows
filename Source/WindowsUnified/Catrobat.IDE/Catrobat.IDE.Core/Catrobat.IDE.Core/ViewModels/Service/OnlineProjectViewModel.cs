@@ -170,7 +170,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     break;
                 case ProgramImportStatus.Damaged:
                     ServiceLocator.NotifictionService.ShowToastNotification(
-                        "Program dameged",
+                        "Program damaged",
                         "Program damaged and cannot be added!",
                         ToastDisplayDuration.Long); // TODO: localize me
 

@@ -199,7 +199,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public ProjectImportViewModel()
         {
-            // Commands
             AddCommand = new RelayCommand(AddAction, AddCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction, CancelCommand_CanExecute);
         }

@@ -2,7 +2,7 @@
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
 
-namespace Catrobat.IDE.Core.Tests.Services.Storage
+namespace Catrobat.IDE.Core.Tests.Services
 {
     public class NotificationServiceTest : INotificationService
     {
