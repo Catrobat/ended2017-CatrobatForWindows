@@ -120,7 +120,8 @@
                 <Grid Background="#AA000000">
                   <TextBlock Grid.Row="0" Text="{Binding ProjectName}" Foreground="White" TextWrapping="Wrap" 
                     TextAlignment="Center" HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Center" Margin="7" FontSize="14"/>
+                    VerticalAlignment="Center" Margin="7" FontSize="14"
+                    MaxLines="3"/>
                 </Grid>
               </Grid>
             </Grid>
