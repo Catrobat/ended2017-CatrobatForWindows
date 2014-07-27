@@ -117,7 +117,7 @@
                   <RowDefinition Height="Auto"/>
                   <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Grid Background="#AA000000">
+                <Grid Background="#AA000000" Name="GridTitle">
                   <TextBlock Grid.Row="0" Text="{Binding ProjectName}" Foreground="White" TextWrapping="Wrap" 
                     TextAlignment="Center" HorizontalAlignment="Stretch" 
                     VerticalAlignment="Center" Margin="7" FontSize="14"
@@ -128,15 +128,26 @@
           </Border>
         </Grid>
         <Grid Visibility="{Binding Screenshot.IsEmpty, 
-              Converter={StaticResource BoolVisibilityConverter}}">
-          <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
-                    TextAlignment="Center" TextWrapping="Wrap" 
-                    Foreground="DarkGray"
-                    Text="{Binding Resources.Main_NoScreenshot, 
-                    Source={StaticResource LocalizedStrings}}"/>
+          Converter={StaticResource BoolVisibilityConverter}}">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding ActualHeight, ElementName=GridTitle}"/>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
+          <TextBlock Grid.Row="1" Margin="5 0 5 10"
+            VerticalAlignment="Top" HorizontalAlignment="Center" 
+            TextAlignment="Center" TextWrapping="Wrap" 
+            Foreground="DarkGray"
+            Text="{Binding Resources.Main_NoScreenshot, 
+            Source={StaticResource LocalizedStrings}}"/>
         </Grid>
         <Grid>
-          <Button Width="140" Height="140" MinWidth="0" MinHeight="0" BorderThickness="0"
+          <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding ActualHeight, ElementName=GridTitle}"/>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
+          
+          <Button Grid.Row="1" Width="140" Height="140" 
+            MinWidth="0" MinHeight="0" BorderThickness="0"
             HorizontalAlignment="Center"
             Padding="-0 -10 -0 -10"
             Margin="0 0 0 0"
@@ -146,7 +157,7 @@
             Converter={StaticResource NegativeBoolVisibilityConverter}}">
             <Grid>
               <TextBlock FontSize="50" Foreground="Crimson" 
-                FontWeight="Bold" Margin="30 0 30 0" Text="!"/>
+                FontWeight="Bold" Margin="30 0 30 20" Text="!"/>
             </Grid>
           </Button>
         </Grid>
