@@ -61,8 +61,7 @@ namespace Catrobat.IDE.Core.Xml
             }
         }
 
-        public static string GetProgramVersion(
-            string projectCode)
+        public static string GetProgramVersion(string projectCode)
         {
             var document = XDocument.Load(new StringReader(projectCode));
             document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
@@ -70,6 +69,17 @@ namespace Catrobat.IDE.Core.Xml
             var project = document.Element("program");
             var header = project.Element("header");
             var programName = header.Element("catrobatLanguageVersion");
+            return programName.Value;
+        }
+
+        public static string GetProgramName(string programCode)
+        {
+            var document = XDocument.Load(new StringReader(programCode));
+            document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
+
+            var project = document.Element("program");
+            var header = project.Element("header");
+            var programName = header.Element("programName");
             return programName.Value;
         }
     }

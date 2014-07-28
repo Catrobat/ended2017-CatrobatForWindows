@@ -22,6 +22,8 @@ namespace Catrobat.IDE.Core.Services
         Task<string> AcceptTempProject();
 
         Task CancelImport();
+
+        Task TryImportWithStatusNotifications();
     }
 
 

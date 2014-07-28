@@ -181,6 +181,15 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
 
                     var inputVersion = GetInputVersion(document);
 
+                    if (double.Parse(inputVersion) < Constants.MinimumCodeVersion)
+                    {
+                        return new VersionConverterResult
+                        {
+                            Error = VersionConverterError.VersionTooOld,
+                            Xml = null
+                        };
+                    }
+
                     error = ConvertVersions(inputVersion, targetVersion, document);
 
                     if (error == VersionConverterError.NoError)

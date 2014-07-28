@@ -146,63 +146,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
 
             ServiceLocator.ProjectImporterService.SetDownloadHeader(projectHeader);
-            var extracionResult = await ServiceLocator.ProjectImporterService.ExtractProgram();
-
-            if (extracionResult.Status == ExtractProgramStatus.Error)
-            {
-                // DODO: show error: Project could not be downloaded
-                return;
-            }
-
-            var validateResult = await ServiceLocator.ProjectImporterService.CheckProgram();
-
-            var acceptProject = true;
-
-            switch (validateResult.Status)
-            {
-                case ProgramImportStatus.Valid:
-                    ServiceLocator.NotifictionService.ShowToastNotification(
-                        "Program added",
-                        "Program successfully added to your program list.",
-                        ToastDisplayDuration.Long); // TODO: localize me
-
-                    acceptProject = true;
-                    break;
-                case ProgramImportStatus.Damaged:
-                    ServiceLocator.NotifictionService.ShowToastNotification(
-                        "Program damaged",
-                        "Program damaged and cannot be added!",
-                        ToastDisplayDuration.Long); // TODO: localize me
-
-                    acceptProject = false;
-                    break;
-                case ProgramImportStatus.VersionTooOld:
-                    ServiceLocator.NotifictionService.ShowToastNotification(
-                        "Program outdated",
-                        "Program is too old and cannot be added!",
-                        ToastDisplayDuration.Long); // TODO: localize me
-
-                    acceptProject = false;
-                    break;
-                case ProgramImportStatus.VersionTooNew:
-                    ServiceLocator.NotifictionService.ShowToastNotification(
-                        "App version too old",
-                        "The downloaded program requires a newer version of this App!",
-                        ToastDisplayDuration.Long); // TODO: localize me
-
-                    acceptProject = true;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            if (acceptProject)
-            {
-                await ServiceLocator.ProjectImporterService.AcceptTempProject();
-                var localProjectsChangedMessage = new MessageBase();
-                Messenger.Default.Send(localProjectsChangedMessage,
-                    ViewModelMessagingToken.LocalProjectsChangedListener);
-            }
+            await ServiceLocator.ProjectImporterService.TryImportWithStatusNotifications();
         }
 
         private void ReportAction(OnlineProjectHeader onlineProjectHeader)
