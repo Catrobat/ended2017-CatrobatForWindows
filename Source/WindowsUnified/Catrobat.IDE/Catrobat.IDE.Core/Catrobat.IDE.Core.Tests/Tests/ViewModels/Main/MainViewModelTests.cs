@@ -9,6 +9,7 @@ using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.Core.ViewModels.Settings;
 using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Tests.SampleData; 
 
 namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 {
@@ -51,7 +52,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         [TestMethod/*, TestCategory("GatedTests")*/]
         public void DeleteLocalProjectActionTest()
         {
-            // unchecked private members and unchecks callback-action result
+            // unchecked private members and unchecked callback-action result
             Assert.AreEqual(0, "result of MessageCallbackAction should be tested - involvs app.savecontext");
 
             var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
@@ -70,7 +71,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         [TestMethod/*, TestCategory("GatedTests")*/]
         public void CopyLocalProjectActionTest()
         {
-            // unchecked private members and unchecks callback-action result
+            // unchecked private members and unchecked callback-action result
             Assert.AreEqual(0, "result of MessageCallbackAction should be tested - involvs app.savecontext");
 
             var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
@@ -126,23 +127,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
             navigationService.CurrentView = typeof(MainViewModel);
 
-            var onlineProjectHeader = new OnlineProjectHeader
-            {
-                ProjectId = "1769",
-                ProjectName = "Radio Fun City",
-                ProjectNameShort = "Radio Fun City",
-                ScreenshotBig = "resources/thumbnails/1769_large.png",
-                ScreenshotSmall = "resources/thumbnails/1769_small.png",
-                Author = "Skater5",
-                Description = "This is my radio channel . Just downlad and listen",
-                Uploaded = "1406382848.5354",
-                UploadedString = "1 Stunde",
-                Version = "0.9.9",
-                Views = "2",
-                Downloads = "5",
-                ProjectUrl = "details/1769",
-                DownloadUrl = "download/1769.catrobat"
-            };
+            var onlineProjectHeader = SampleLoader.GetSampleOnlineProjectHeader();
             var viewModel = new MainViewModel();
             viewModel.OnlineProjectTapCommand.Execute(onlineProjectHeader);
 
@@ -166,7 +151,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             viewModel.LicenseCommand.Execute(null);
 
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateToWebPage, navigationService.CurrentNavigationType);
-            Assert.AreEqual(ApplicationResources.CATROBAT_LICENSES_URL, navigationService.CurrentView);
+            Assert.IsTrue(navigationService.CurrentView == "http://developer.catrobat.org/licenses");
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
@@ -182,7 +167,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             viewModel.AboutCommand.Execute(null);
 
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateToWebPage, navigationService.CurrentNavigationType);
-            Assert.AreEqual(ApplicationResources.CATROBAT_URL, navigationService.CurrentView);
+            Assert.IsTrue(navigationService.CurrentView == "http://www.catrobat.org/");
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
@@ -198,7 +183,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             viewModel.TouCommand.Execute(null);
 
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateToWebPage, navigationService.CurrentNavigationType);
-            Assert.AreEqual(ApplicationResources.CATROBAT_TOU_URL, navigationService.CurrentView);
+            Assert.IsTrue(navigationService.CurrentView == "http://catrob.at/tou");
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 

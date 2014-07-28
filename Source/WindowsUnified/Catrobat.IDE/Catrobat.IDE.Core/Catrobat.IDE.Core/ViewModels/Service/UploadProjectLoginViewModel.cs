@@ -87,7 +87,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.LoginOrRegisterAsync(_username, _password, null,
                                                              ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName,
                                                              RegionInfo.CurrentRegion.TwoLetterISORegionName);
-
                 Context.CurrentToken = statusResponse.token;
                 Context.CurrentUserName = _username;
 

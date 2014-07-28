@@ -1,7 +1,9 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Collections.Generic;
 using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
@@ -60,6 +62,55 @@ namespace Catrobat.IDE.Core.Tests.SampleData
                 stream.Dispose();
             }
             return await ServiceLocator.ContextService.LoadXmlProgramByName(sampleProjectName);
+        }
+
+        public static OnlineProjectHeader GetSampleOnlineProjectHeader()
+        {
+            OnlineProjectHeader onlineProjectHeader = new OnlineProjectHeader
+            {
+                ProjectId = "1769",
+                ProjectName = "Radio Fun City",
+                ProjectNameShort = "Radio Fun City",
+                ScreenshotBig = "resources/thumbnails/1769_large.png",
+                ScreenshotSmall = "resources/thumbnails/1769_small.png",
+                Author = "Skater5",
+                Description = "This is my radio channel . Just downlad and listen",
+                Uploaded = "1406382848.5354",
+                UploadedString = "1 Stunde",
+                Version = "0.9.9",
+                Views = "2",
+                Downloads = "5",
+                ProjectUrl = "details/1769",
+                DownloadUrl = "download/1769.catrobat"
+            };
+            return onlineProjectHeader;
+        }
+
+        public static List<OnlineProjectHeader> GetSampleOnlineProjectHeaderList(int count)
+        {
+            List<OnlineProjectHeader> onlineProjectHeaders = new List<OnlineProjectHeader>();
+            for (int i = 1; i <= count; i++)
+            {
+                OnlineProjectHeader onlineProjectHeader = new OnlineProjectHeader
+                {
+                    ProjectId = i.ToString(),
+                    ProjectName = "Radio Fun City Nr." + i.ToString(),
+                    ProjectNameShort = "Radio Fun City",
+                    ScreenshotBig = "resources/thumbnails/1769_large.png",
+                    ScreenshotSmall = "resources/thumbnails/1769_small.png",
+                    Author = "Skater5",
+                    Description = "This is my radio channel . Just downlad and listen",
+                    Uploaded = "1406382848.5354",
+                    UploadedString = "1 Stunde",
+                    Version = "0.9.9",
+                    Views = "2",
+                    Downloads = "5",
+                    ProjectUrl = "details/1769",
+                    DownloadUrl = "download/1769.catrobat"
+                };
+                onlineProjectHeaders.Add(onlineProjectHeader);
+            }
+            return onlineProjectHeaders;
         }
     }
 }
