@@ -75,27 +75,39 @@
   </ImportGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Link>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_x86)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;DXGI.lib;D3D11.lib;D2D1.lib;DWrite.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_x86)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;DXGI.lib;D3D11.lib;D2D1.lib;DWrite.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\inc;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Link>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_x86)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;DXGI.lib;D3D11.lib;D2D1.lib;DWrite.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_x86)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;DXGI.lib;D3D11.lib;D2D1.lib;DWrite.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\inc;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_arm)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;DXGI.lib;D3D11.lib;D2D1.lib;DWrite.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_arm)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;DXGI.lib;D3D11.lib;D2D1.lib;DWrite.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\inc;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Link>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_arm)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;DXGI.lib;D3D11.lib;D2D1.lib;DWrite.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_arm)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;DXGI.lib;D3D11.lib;D2D1.lib;DWrite.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\inc;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
@@ -113,6 +125,9 @@
     <ClInclude Include="DirectXPage.xaml.h">
       <DependentUpon>DirectXPage.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Player.xaml.h">
+      <DependentUpon>Player.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.xaml.cpp">
@@ -120,6 +135,9 @@
     </ClCompile>
     <ClCompile Include="DirectXPage.xaml.cpp">
       <DependentUpon>DirectXPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Player.xaml.cpp">
+      <DependentUpon>Player.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +150,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="DirectXPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Player.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
