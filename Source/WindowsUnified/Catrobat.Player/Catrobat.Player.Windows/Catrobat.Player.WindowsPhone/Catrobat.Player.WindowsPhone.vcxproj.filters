@@ -11,6 +11,9 @@
     <Filter Include="Content">
       <UniqueIdentifier>d27e2023-b39f-4db3-a5b1-ec3fdc035845</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\Tiles">
+      <UniqueIdentifier>{fb56ff27-c60b-4e14-a3f2-58a8aa1fe698}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
@@ -43,6 +46,51 @@
     </Image>
     <Image Include="Assets\WideLogo.scale-240.png">
       <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\ApplicationIcon.png">
+      <Filter>Assets\Tiles</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\FileLarge.png">
+      <Filter>Assets\Tiles</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\FileMedium.png">
+      <Filter>Assets\Tiles</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\FileSmall.png">
+      <Filter>Assets\Tiles</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\FlipCycleTileLarge.png">
+      <Filter>Assets\Tiles</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\FlipCycleTileMedium.png">
+      <Filter>Assets\Tiles</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\FlipCycleTileSmall.png">
+      <Filter>Assets\Tiles</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\Lens.Screen-720p.png">
+      <Filter>Assets\Tiles</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\Lens.Screen-WVGA.png">
+      <Filter>Assets\Tiles</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\Lens.Screen-WXGA.png">
+      <Filter>Assets\Tiles</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\LockScreenNotification.png">
+      <Filter>Assets\Tiles</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\SplashScreenImage.Screen-720p.jpg">
+      <Filter>Assets\Tiles</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\SplashScreenImage.Screen-WVGA.jpg">
+      <Filter>Assets\Tiles</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\SplashScreenImage.Screen-WXGA.jpg">
+      <Filter>Assets\Tiles</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\StoreIcon.png">
+      <Filter>Assets\Tiles</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
