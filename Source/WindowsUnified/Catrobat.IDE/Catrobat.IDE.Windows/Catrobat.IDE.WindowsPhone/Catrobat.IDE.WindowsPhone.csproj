@@ -99,39 +99,39 @@
     <Compile Include="Controls\EditorAppBar.xaml.cs">
       <DependentUpon>EditorAppBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Actions\MasterBrick.cs" />
-    <Compile Include="Controls\Actions\NormalBrick.cs" />
+    <Compile Include="Controls\ActionsControls\MasterBrick.cs" />
+    <Compile Include="Controls\ActionsControls\NormalBrick.cs" />
     <Compile Include="Controls\SoundControls\SoundPlayButton.xaml.cs">
       <DependentUpon>SoundPlayButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SoundControls\SoundPlayButtonGroup.xaml.cs">
       <DependentUpon>SoundPlayButtonGroup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Formulas\Templates\FormulaTokenTemplateWindowsShared.cs" />
+    <Compile Include="Controls\FormulaControls\Templates\FormulaTokenTemplateWindowsShared.cs" />
     <Compile Include="ExtendedSplash.xaml.cs">
       <DependentUpon>ExtendedSplash.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ListsViewControls\DataTemplateSelector.cs" />
-    <Compile Include="Controls\Formulas\FormulaButton.xaml.cs">
+    <Compile Include="Controls\FormulaControls\FormulaButton.xaml.cs">
       <DependentUpon>FormulaButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Formulas\FormulaKeyboard.xaml.cs">
+    <Compile Include="Controls\FormulaControls\FormulaKeyboard.xaml.cs">
       <DependentUpon>FormulaKeyboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Formulas\FormulaKeys.cs" />
-    <Compile Include="Controls\Formulas\FormulaViewer.xaml.cs">
+    <Compile Include="Controls\FormulaControls\FormulaKeys.cs" />
+    <Compile Include="Controls\FormulaControls\FormulaViewer.xaml.cs">
       <DependentUpon>FormulaViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Formulas\Templates\FormulaTokenStyleCollection.cs" />
-    <Compile Include="Controls\Formulas\Templates\FormulaTokenTemplate.cs" />
-    <Compile Include="Controls\Formulas\Templates\FormulaTokenTemplateCollection.cs" />
-    <Compile Include="Controls\Formulas\VariableButton.xaml.cs">
+    <Compile Include="Controls\FormulaControls\Templates\FormulaTokenStyleCollection.cs" />
+    <Compile Include="Controls\FormulaControls\Templates\FormulaTokenTemplate.cs" />
+    <Compile Include="Controls\FormulaControls\Templates\FormulaTokenTemplateCollection.cs" />
+    <Compile Include="Controls\FormulaControls\VariableButton.xaml.cs">
       <DependentUpon>VariableButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
+    <Compile Include="Controls\ListPickerControl\ListPicker.xaml.cs">
       <DependentUpon>ListPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ListPicker\ListPickerPage.xaml.cs">
+    <Compile Include="Controls\ListPickerControl\ListPickerPage.xaml.cs">
       <DependentUpon>ListPickerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ListsViewControls\BindableListView.cs" />
@@ -298,31 +298,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Formulas\FormulaButton.xaml">
+    <Page Include="Controls\FormulaControls\FormulaButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Formulas\FormulaKeyboard.xaml">
+    <Page Include="Controls\FormulaControls\FormulaKeyboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Formulas\FormulaViewer.xaml">
+    <Page Include="Controls\FormulaControls\FormulaViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Formulas\Templates\FormulaTokenTemplates.xaml">
+    <Page Include="Controls\FormulaControls\Templates\FormulaTokenTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Formulas\VariableButton.xaml">
+    <Page Include="Controls\FormulaControls\VariableButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ListPicker\ListPicker.xaml">
+    <Page Include="Controls\ListPickerControl\ListPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ListPicker\ListPickerPage.xaml">
+    <Page Include="Controls\ListPickerControl\ListPickerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -506,13 +506,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\AppBar\" />
-    <Folder Include="Controls\Buttons\" />
-    <Folder Include="Controls\DynamicDataTemplates\" />
-    <Folder Include="Controls\Misc\" />
-    <Folder Include="Controls\StatusIcons\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
