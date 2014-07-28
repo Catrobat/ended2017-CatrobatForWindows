@@ -4,26 +4,26 @@ using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Core.UI.Converters
 {
-    public class BoolPlayButtonStateConverter : IPortableValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            if (!(value is bool))
-                return PlayPauseButtonState.Pause;
+    //public class BoolPlayButtonStateConverter : IPortableValueConverter
+    //{
+    //    public object Convert(object value, Type targetType, object parameter, string language)
+    //    {
+    //        if (!(value is bool))
+    //            return PlayState.Pause;
 
-            var isPlaying = (bool)value;
+    //        var isPlaying = (bool)value;
 
-            return isPlaying ? PlayPauseButtonState.Play : PlayPauseButtonState.Pause;
-        }
+    //        return isPlaying ? PlayState.Play : PlayState.Pause;
+    //    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            if (!(value is PlayPauseButtonState))
-                return false;
+    //    public object ConvertBack(object value, Type targetType, object parameter, string language)
+    //    {
+    //        if (!(value is PlayState))
+    //            return false;
 
-            var playState = (PlayPauseButtonState)value;
+    //        var playState = (PlayState)value;
 
-            return playState == PlayPauseButtonState.Play;
-        }
-    }
+    //        return playState == PlayState.Play;
+    //    }
+    //}
 }

@@ -6,7 +6,7 @@ namespace Catrobat.IDE.WindowsShared.Converters
 
     public class BoolOpacityConverterBootstrap : PortableValueConverterPhone<BoolOpacityConverter> { }
 
-    public class BoolPlayButtonStateConverterBootstrap : PortableValueConverterPhone<BoolPlayButtonStateConverter> { }
+    //public class BoolPlayButtonStateConverterBootstrap : PortableValueConverterPhone<BoolPlayButtonStateConverter> { }
 
     public class BoolToSelectedPivotItemConverterBootstrap : PortableValueConverterPhone<BoolToSelectedPivotItemConverter> { }
 

@@ -73,30 +73,28 @@ namespace Catrobat.IDE.WindowsShared
 
         protected override void OnActivated(IActivatedEventArgs args)
         {
-            //if(args is )
+            if (args is FileOpenPickerContinuationEventArgs)
+            {
+                var pickerArgs = (FileOpenPickerContinuationEventArgs)args;
+                var files = pickerArgs.Files;
 
-            //if (args is FileOpenPickerContinuationEventArgs)
-            //{
-            //    var pickerArgs = (FileOpenPickerContinuationEventArgs)args;
-            //    var files = pickerArgs.Files;
+                if (files.Count == 1)
+                {
+                    if (ServiceLocator.PictureService.SupportedFileTypes.
+                        Contains(Path.GetExtension(files[0].Name)))
+                    {
+                        ServiceLocator.PictureService.RecievedFiles(
+                            (args as FileOpenPickerContinuationEventArgs).Files);
+                    }
 
-            //    if (files.Count == 1)
-            //    {
-            //        if (ServiceLocator.PictureService.SupportedFileTypes.
-            //            Contains(Path.GetExtension(files[0].Name)))
-            //        {
-            //            ServiceLocator.PictureService.RecievedFiles(
-            //                (args as FileOpenPickerContinuationEventArgs).Files);
-            //        }
-
-            //        if (ServiceLocator.SoundService.SupportedFileTypes.
-            //            Contains(Path.GetExtension(files[0].Name)))
-            //        {
-            //            ServiceLocator.SoundService.RecievedFiles(
-            //                (args as FileOpenPickerContinuationEventArgs).Files);
-            //        }
-            //    }
-            //}
+                    if (ServiceLocator.SoundService.SupportedFileTypes.
+                        Contains(Path.GetExtension(files[0].Name)))
+                    {
+                        ServiceLocator.SoundService.RecievedFiles(
+                            (args as FileOpenPickerContinuationEventArgs).Files);
+                    }
+                }
+            }
         }
 
         protected override async void OnFileActivated(FileActivatedEventArgs e)

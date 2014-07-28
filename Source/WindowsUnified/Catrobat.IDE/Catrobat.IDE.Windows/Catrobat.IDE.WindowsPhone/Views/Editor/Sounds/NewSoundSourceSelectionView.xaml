@@ -23,7 +23,7 @@
 
     <StackPanel Grid.Row="1" Margin="10 20 0 15">
       <Button Margin="0" Padding="0" BorderThickness="0"
-              Command="{Binding AudioLibraryCommand}" >
+              Command="{Binding AudioLibraryCommand}" RequestedTheme="Dark" >
         <Button.ContentTemplate>
           <DataTemplate>
             <Grid Margin="0" Height="140" Width="380"
@@ -39,9 +39,7 @@
                 Text="{Binding Resources.Editor_MediaLibrary, 
                 Source={StaticResource LocalizedStrings}}" 
                 Name="tbGallery" 
-                FontSize="40"
-                Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-                Source={StaticResource ThemeChooser}}" />
+                FontSize="40" />
             </Grid>
           </DataTemplate>
         </Button.ContentTemplate>

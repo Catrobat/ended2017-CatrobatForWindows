@@ -1,16 +1,16 @@
-﻿using Catrobat.IDE.Core.Annotations;
-using Catrobat.IDE.Core.UI;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
+using Catrobat.IDE.Core.Annotations;
+using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.UI;
 
-
-namespace Catrobat.IDE.WindowsPhone.Controls.Buttons
+namespace Catrobat.IDE.WindowsPhone.Controls.SoundControls
 {
-    public delegate void PlayStateChanged(object sender, PlayPauseButtonState state);
+    public delegate void PlayStateChanged(SoundPlayButton button, SoundPlayState state);
 
-    public partial class PlayPauseButton : INotifyPropertyChanged, IPlayPauseButton
+    public partial class SoundPlayButton : INotifyPropertyChanged, IPlayPauseButton
     {
         public event PlayStateChanged PlayStateChanged;
         public event RoutedEventHandler Click;
@@ -18,15 +18,18 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Buttons
 
         #region DependancyProperties
         public static readonly DependencyProperty PlayButtonStateProperty =
-          DependencyProperty.Register("State", typeof(PlayPauseButtonState), typeof(PlayPauseButton),
-          new PropertyMetadata(PlayPauseButtonState.Pause, new PropertyChangedCallback(PlayButtonStatePropertyChanged)));
+          DependencyProperty.Register("State", 
+          typeof(SoundPlayState), 
+          typeof(SoundPlayButton),
+          new PropertyMetadata(SoundPlayState.Paused, 
+              new PropertyChangedCallback(PlayButtonStatePropertyChanged)));
 
         static void PlayButtonStatePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var playButton = (PlayPauseButton)sender;
-            var value = (PlayPauseButtonState)e.NewValue;
+            var playButton = (SoundPlayButton)sender;
+            var value = (SoundPlayState)e.NewValue;
 
-            if (value == PlayPauseButtonState.Play)
+            if (value == SoundPlayState.Playing)
             {
                 playButton.ButtonPause.Visibility = Visibility.Visible;
                 playButton.ButtonPlay.Visibility = Visibility.Collapsed;
@@ -38,9 +41,9 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Buttons
             }
         }
 
-        public PlayPauseButtonState State
+        public SoundPlayState State
         {
-            get { return (PlayPauseButtonState)(GetValue(PlayButtonStateProperty)); }
+            get { return (SoundPlayState)(GetValue(PlayButtonStateProperty)); }
             set { SetValue(PlayButtonStateProperty, value); }
         }
 
@@ -50,37 +53,57 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Buttons
             set { SetValue(RoundBorderThicknessProperty, value); }
         }
 
-        public static readonly DependencyProperty RoundBorderThicknessProperty = DependencyProperty.Register("RoundBorderThickness", typeof(Thickness), typeof(PlayPauseButton), new PropertyMetadata(new Thickness(5), RoundBorderThicknessChanged));
+        public static readonly DependencyProperty RoundBorderThicknessProperty = DependencyProperty.Register("RoundBorderThickness", typeof(Thickness), typeof(SoundPlayButton), new PropertyMetadata(new Thickness(5), RoundBorderThicknessChanged));
 
         private static void RoundBorderThicknessChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((PlayPauseButton) d).ButtonPlay.BorderThickness = (Thickness) e.NewValue;
-            ((PlayPauseButton)d).ButtonPause.BorderThickness = (Thickness) e.NewValue;
+            ((SoundPlayButton) d).ButtonPlay.BorderThickness = (Thickness) e.NewValue;
+            ((SoundPlayButton)d).ButtonPause.BorderThickness = (Thickness) e.NewValue;
         }
 
-        public PlayPauseButtonGroup Group
+        public SoundPlayButtonGroup Group
         {
-            get { return (PlayPauseButtonGroup)GetValue(GroupProperty); }
+            get { return (SoundPlayButtonGroup)GetValue(GroupProperty); }
             set { SetValue(GroupProperty, value); }
         }
 
-        public static readonly DependencyProperty GroupProperty = DependencyProperty.Register("Group", typeof(PlayPauseButtonGroup), typeof(PlayPauseButton), new PropertyMetadata(null, GroupChanged));
+        public static readonly DependencyProperty GroupProperty = 
+            DependencyProperty.Register("Group", 
+            typeof(SoundPlayButtonGroup), 
+            typeof(SoundPlayButton), 
+            new PropertyMetadata(null, GroupChanged));
 
         private static void GroupChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var oldGroup = e.OldValue as PlayPauseButtonGroup;
-            var newGroup = e.NewValue as PlayPauseButtonGroup;
+            var oldGroup = e.OldValue as SoundPlayButtonGroup;
+            var newGroup = e.NewValue as SoundPlayButtonGroup;
 
             if (oldGroup != null)
-                oldGroup.UnRegister(d as PlayPauseButton);
+                oldGroup.UnRegister(d as SoundPlayButton);
 
             if (newGroup != null)
-                newGroup.Register(d as PlayPauseButton);
+                newGroup.Register(d as SoundPlayButton);
         }
+
+        public Sound Sound
+        {
+            get { return (Sound)GetValue(SoundProperty); }
+            set { SetValue(SoundProperty, value); }
+        }
+
+        public static readonly DependencyProperty SoundProperty =
+            DependencyProperty.Register("Sound",
+            typeof(Sound),
+            typeof(SoundPlayButton),
+            new PropertyMetadata(null, SoundChanged));
+
+        private static void SoundChanged(DependencyObject d, 
+            DependencyPropertyChangedEventArgs e)
+        {}
 
         #endregion
 
-        public PlayPauseButton()
+        public SoundPlayButton()
         {
             InitializeComponent();
             ButtonPlay.DataContext = this;
@@ -101,7 +124,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Buttons
         private void ButtonPause_Click(object sender, RoutedEventArgs e)
         {
             if(Group != null)
-                State = PlayPauseButtonState.Pause;
+                State = SoundPlayState.Paused;
 
             if (PlayStateChanged != null)
                 PlayStateChanged.Invoke(this, State);
@@ -113,7 +136,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.Buttons
         private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {
             if (Group != null)
-                State = PlayPauseButtonState.Play;
+                State = SoundPlayState.Playing;
 
             RaisePlayStateChanged();
 

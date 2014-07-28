@@ -96,20 +96,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\AppBar\EditorAppBar.xaml.cs">
+    <Compile Include="Controls\EditorAppBar.xaml.cs">
       <DependentUpon>EditorAppBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Bricks\MasterBrick.cs" />
-    <Compile Include="Controls\Bricks\NormalBrick.cs" />
-    <Compile Include="Controls\Buttons\PlayPauseButton.xaml.cs">
-      <DependentUpon>PlayPauseButton.xaml</DependentUpon>
+    <Compile Include="Controls\Actions\MasterBrick.cs" />
+    <Compile Include="Controls\Actions\NormalBrick.cs" />
+    <Compile Include="Controls\SoundControls\SoundPlayButton.xaml.cs">
+      <DependentUpon>SoundPlayButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Buttons\PlayPauseButtonGroup.cs" />
+    <Compile Include="Controls\SoundControls\SoundPlayButtonGroup.xaml.cs">
+      <DependentUpon>SoundPlayButtonGroup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Formulas\Templates\FormulaTokenTemplateWindowsShared.cs" />
     <Compile Include="ExtendedSplash.xaml.cs">
       <DependentUpon>ExtendedSplash.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DynamicDataTemplates\DataTemplateSelector.cs" />
+    <Compile Include="Controls\ListsViewControls\DataTemplateSelector.cs" />
     <Compile Include="Controls\Formulas\FormulaButton.xaml.cs">
       <DependentUpon>FormulaButton.xaml</DependentUpon>
     </Compile>
@@ -132,14 +134,14 @@
     <Compile Include="Controls\ListPicker\ListPickerPage.xaml.cs">
       <DependentUpon>ListPickerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BindableListView\BindableListView.cs" />
-    <Compile Include="Controls\Misc\ImageSizeIcon.xaml.cs">
+    <Compile Include="Controls\ListsViewControls\BindableListView.cs" />
+    <Compile Include="Controls\ImageSizeIcon.xaml.cs">
       <DependentUpon>ImageSizeIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Projects\LocalProjectControl.xaml.cs">
+    <Compile Include="Controls\LocalProjectControl.xaml.cs">
       <DependentUpon>LocalProjectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\StatusIcons\ProcessIcon.xaml.cs">
+    <Compile Include="Controls\ProcessIcon.xaml.cs">
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Navigation\NavigationObjectPage.cs" />
@@ -280,13 +282,17 @@
     <Content Include="Assets\Wide310x150.Scale-240.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\AppBar\EditorAppBar.xaml">
+    <Page Include="Controls\EditorAppBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Buttons\PlayPauseButton.xaml">
+    <Page Include="Controls\SoundControls\SoundPlayButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SoundControls\SoundPlayButtonGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ExtendedSplash.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -320,15 +326,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Misc\ImageSizeIcon.xaml">
+    <Page Include="Controls\ImageSizeIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Projects\LocalProjectControl.xaml">
+    <Page Include="Controls\LocalProjectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\StatusIcons\ProcessIcon.xaml">
+    <Page Include="Controls\ProcessIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -500,7 +506,13 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\AppBar\" />
+    <Folder Include="Controls\Buttons\" />
+    <Folder Include="Controls\DynamicDataTemplates\" />
+    <Folder Include="Controls\Misc\" />
+    <Folder Include="Controls\StatusIcons\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
