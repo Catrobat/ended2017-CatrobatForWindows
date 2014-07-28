@@ -39,7 +39,7 @@ namespace Catrobat.IDE.Core.Tests.SampleData
             using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
                 var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName);
-                var projectPath = Path.Combine(StorageConstants.ProjectsPath, sampleProjectName);
+                var projectPath = Path.Combine(StorageConstants.ProgramsPath, sampleProjectName);
                 using (var storage = StorageSystem.GetStorage())
                 {
                     await storage.DeleteDirectoryAsync(projectPath);
@@ -58,7 +58,7 @@ namespace Catrobat.IDE.Core.Tests.SampleData
             using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
                 var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName);
-                await zipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, StorageConstants.ProjectsPath + "/" + sampleProjectName);
+                await zipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, StorageConstants.ProgramsPath + "/" + sampleProjectName);
                 stream.Dispose();
             }
             return await ServiceLocator.ContextService.LoadXmlProgramByName(sampleProjectName);

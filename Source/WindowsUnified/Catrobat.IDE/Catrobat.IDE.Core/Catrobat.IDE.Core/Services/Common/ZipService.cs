@@ -1,6 +1,8 @@
 ﻿//using SharpCompress.Archive.Zip;
 //using SharpCompress.Common;
 //using SharpCompress.Reader;
+
+using System.Collections.Generic;
 using Catrobat.IDE.Core.Services.Storage;
 using System;
 using System.IO;
@@ -11,6 +13,17 @@ namespace Catrobat.IDE.Core.Services.Common
 {
     public class ZipService : IZipService
     {
+        private static List<String> SkipedEndings
+        {
+            get
+            {
+                return new List<string>
+                {
+                    ".nomedia", "_thumb#"
+                };
+            }
+        }
+
         public async Task UnzipCatrobatPackageIntoIsolatedStorage(Stream zipStream, string localStoragePath)
         {
             using (var storage = StorageSystem.GetStorage())
@@ -21,17 +34,21 @@ namespace Catrobat.IDE.Core.Services.Common
                     {
                         using (var stream = entry.Open())
                         {
-                            if (Path.GetExtension(entry.Name) == ".nomedia")
+                            var skipFile = false;
+                            foreach (var ending in SkipedEndings)
+                                if (entry.Name.EndsWith(ending)) 
+                                    skipFile = true;
+
+                            if(skipFile) 
                                 continue;
 
                             var filePath = Path.Combine(localStoragePath, entry.FullName);
 
-
                             if (Path.GetFileName(filePath) == "") continue;
-                            
-                            var outStream = await storage.OpenFileAsync(filePath, 
+
+                            var outStream = await storage.OpenFileAsync(filePath,
                                 StorageFileMode.CreateNew, StorageFileAccess.Write);
-                            
+
                             await stream.CopyToAsync(outStream);
                             outStream.Dispose();
                             stream.Dispose();
@@ -39,40 +56,6 @@ namespace Catrobat.IDE.Core.Services.Common
                     }
                 }
             }
-
-
-
-
-
-            //if (zipStream != null)
-            //{
-            //    var reader = ReaderFactory.Open(zipStream);
-
-            //    using (var storage = StorageSystem.GetStorage())
-            //    {
-            //        while (reader.MoveToNextEntry())
-            //        {
-            //            var absolutPath = Path.Combine(localStoragePath, reader.Entry.FilePath);
-            //            absolutPath = absolutPath.Replace("\\", "/");
-
-            //            if (!reader.Entry.IsDirectory)
-            //            {
-            //                if (await storage.FileExistsAsync(absolutPath))
-            //                {
-            //                    await storage.DeleteFileAsync(absolutPath);
-            //                }
-
-            //                var fileStream = await storage.OpenFileAsync(absolutPath,
-            //                                                  StorageFileMode.Create,
-            //                                                  StorageFileAccess.Write);
-            //                reader.WriteEntryTo(fileStream);
-            //                fileStream.Dispose();
-            //            }
-            //        }
-            //    }
-
-            //    reader.Dispose();
-            //}
         }
 
         public async Task ZipCatrobatPackage(Stream zipStream, string localStoragePath)
@@ -89,41 +72,33 @@ namespace Catrobat.IDE.Core.Services.Common
         private async Task WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage,
             string sourceBasePath, string destinationBasePath)
         {
-            try
+            var searchPattern = sourceBasePath;
+            var fileNames = await storage.GetFileNamesAsync(searchPattern);
+
+            foreach (string fileName in fileNames)
             {
-                var searchPattern = sourceBasePath;
-                var fileNames = await storage.GetFileNamesAsync(searchPattern);
+                if (fileName.EndsWith(StorageConstants.ImageThumbnailExtension))
+                    continue;
 
-                foreach (string fileName in fileNames)
+                var tempPath = Path.Combine(sourceBasePath, fileName);
+                using (var fileStream = await storage.OpenFileAsync(tempPath,
+                    StorageFileMode.Open, StorageFileAccess.Read))
                 {
-                    if (fileName.EndsWith(StorageConstants.ImageThumbnailExtension))
-                        continue;
-
-                    var tempPath = Path.Combine(sourceBasePath, fileName);
-                    using (var fileStream = await storage.OpenFileAsync(tempPath,
-                        StorageFileMode.Open, StorageFileAccess.Read))
+                    var destinationPath = Path.Combine(destinationBasePath, fileName);
+                    var newEntry = archive.CreateEntry(destinationPath);
+                    using (var stream = newEntry.Open())
                     {
-                        var destinationPath = Path.Combine(destinationBasePath, fileName);
-                        var newEntry = archive.CreateEntry(destinationPath);
-                        using (var stream = newEntry.Open())
-                        {
-                            await fileStream.CopyToAsync(stream);
-                        }
+                        await fileStream.CopyToAsync(stream);
                     }
                 }
-
-                var directrryNames = await storage.GetDirectoryNamesAsync(searchPattern);
-                foreach (string directoryName in directrryNames)
-                {
-                    var tempZipPath = Path.Combine(sourceBasePath, directoryName);
-                    var nextDestinationBasePath = Path.Combine(destinationBasePath, directoryName);
-                    await WriteFilesRecursiveToZip(archive, storage, tempZipPath, nextDestinationBasePath);
-                }
             }
-            catch (Exception)
+
+            var directrryNames = await storage.GetDirectoryNamesAsync(searchPattern);
+            foreach (string directoryName in directrryNames)
             {
-                
-                throw;
+                var tempZipPath = Path.Combine(sourceBasePath, directoryName);
+                var nextDestinationBasePath = Path.Combine(destinationBasePath, directoryName);
+                await WriteFilesRecursiveToZip(archive, storage, tempZipPath, nextDestinationBasePath);
             }
         }
     }

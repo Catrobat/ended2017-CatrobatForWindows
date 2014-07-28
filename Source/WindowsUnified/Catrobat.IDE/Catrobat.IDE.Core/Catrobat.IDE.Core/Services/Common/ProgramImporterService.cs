@@ -161,11 +161,13 @@ namespace Catrobat.IDE.Core.Services.Common
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var newPath = Path.Combine(StorageConstants.ProjectsPath,
+                var newPath = Path.Combine(StorageConstants.ProgramsPath,
                     renameResult.NewProjectName);
                 await storage.MoveDirectoryAsync(StorageConstants.TempProgramImportPath,
                     newPath);
             }
+
+            await ServiceLocator.ContextService.CreateThumbnailsForLooks(_programName);
 
             _extractResult = null;
             _checkResult = null;

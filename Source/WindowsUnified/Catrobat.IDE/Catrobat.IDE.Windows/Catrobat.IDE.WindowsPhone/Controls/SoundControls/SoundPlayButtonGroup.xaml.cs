@@ -195,7 +195,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.SoundControls
 
             var localFolder = ApplicationData.Current.LocalFolder;
             var projectsFolder = await localFolder.GetFolderAsync(
-                StorageConstants.ProjectsPath);
+                StorageConstants.ProgramsPath);
             var projectFolder = await projectsFolder.GetFolderAsync(
                 Program.Name);
             var soundsFolder = await projectFolder.GetFolderAsync(

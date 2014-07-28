@@ -29,5 +29,7 @@ namespace Catrobat.IDE.Core.Services
         Task StoreLocalSettings(LocalSettings localSettings);
 
         Task<LocalSettings> RestoreLocalSettings();
+
+        Task CreateThumbnailsForLooks(string programName);
     }
 }

@@ -326,11 +326,16 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void DeleteProjectMessageCallback(MessageboxResult result)
         {
+            var deleteProjectName = _deleteProjectName;
+
+            if (deleteProjectName == null)
+                return;
+
             _dialogResult = result;
 
             if (_dialogResult == MessageboxResult.Ok)
             {
-                if (CurrentProject != null && CurrentProject.Name == _deleteProjectName)
+                if (CurrentProject != null && CurrentProject.Name == deleteProjectName)
                 {
                     var projectChangedMessage = new GenericMessage<Program>(null);
                     Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
@@ -338,7 +343,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    await storage.DeleteDirectoryAsync(StorageConstants.ProjectsPath + "/" + _deleteProjectName);
+                    await storage.DeleteDirectoryAsync(StorageConstants.ProgramsPath + "/" + _deleteProjectName);
                 }
 
                 await UpdateLocalProjects();
@@ -394,7 +399,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var projectNames = await storage.GetDirectoryNamesAsync(StorageConstants.ProjectsPath);
+                var projectNames = await storage.GetDirectoryNamesAsync(StorageConstants.ProgramsPath);
 
                 //var projects = new List<ProjectDummyHeader>();
 
@@ -438,9 +443,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     if (!exists)
                     {
                         var manualScreenshotPath = Path.Combine(
-                            StorageConstants.ProjectsPath, projectName, StorageConstants.ProgramManualScreenshotPath);
+                            StorageConstants.ProgramsPath, projectName, StorageConstants.ProgramManualScreenshotPath);
                         var automaticProjectScreenshotPath = Path.Combine(
-                            StorageConstants.ProjectsPath, projectName, StorageConstants.ProgramAutomaticScreenshotPath);
+                            StorageConstants.ProgramsPath, projectName, StorageConstants.ProgramAutomaticScreenshotPath);
 
                         var projectScreenshot = new PortableImage();
                         projectScreenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);

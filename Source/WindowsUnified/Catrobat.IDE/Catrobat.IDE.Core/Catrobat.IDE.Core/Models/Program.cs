@@ -59,7 +59,7 @@ namespace Catrobat.IDE.Core.Models
 
         public string BasePath
         {
-            get { return StorageConstants.ProjectsPath + "/" + Name; }
+            get { return StorageConstants.ProgramsPath + "/" + Name; }
         }
 
         private PortableImage _screenshot;

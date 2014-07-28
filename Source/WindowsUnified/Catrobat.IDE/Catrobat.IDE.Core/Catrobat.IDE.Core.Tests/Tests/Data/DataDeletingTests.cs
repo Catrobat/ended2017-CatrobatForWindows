@@ -24,7 +24,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             using (IStorage storage = StorageSystem.GetStorage())
             {
-                storage.DeleteDirectory(Path.Combine(StorageConstants.ProjectsPath, programName));
+                storage.DeleteDirectory(Path.Combine(
+                    StorageConstants.ProgramsPath, programName));
             }
 
             ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();

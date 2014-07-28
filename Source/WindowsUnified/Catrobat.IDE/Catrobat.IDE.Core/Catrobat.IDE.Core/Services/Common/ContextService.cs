@@ -23,12 +23,12 @@ namespace Catrobat.IDE.Core.Services.Common
                 var counter = 0;
                 while (true)
                 {
-                    var programPath = Path.Combine(StorageConstants.ProjectsPath,
+                    var programPath = Path.Combine(StorageConstants.ProgramsPath,
                         programName);
 
                     if (counter != 0)
                     {
-                        programPath = Path.Combine(StorageConstants.ProjectsPath,
+                        programPath = Path.Combine(StorageConstants.ProgramsPath,
                             programName + counter);
                     }
 
@@ -96,7 +96,7 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                var tempPath = Path.Combine(StorageConstants.ProjectsPath, programName, StorageConstants.ProgramCodePath);
+                var tempPath = Path.Combine(StorageConstants.ProgramsPath, programName, StorageConstants.ProgramCodePath);
                 var xml = await storage.ReadTextFileAsync(tempPath);
 
                 var programVersion = XmlProgramHelper.GetProgramVersion(xml);
@@ -134,13 +134,13 @@ namespace Catrobat.IDE.Core.Services.Common
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var destinationPath = Path.Combine(StorageConstants.ProjectsPath, newProgramName);
+                var destinationPath = Path.Combine(StorageConstants.ProgramsPath, newProgramName);
 
                 var counter = 1;
                 while (await storage.DirectoryExistsAsync(destinationPath))
                 {
                     newProgramName = newProgramName + counter;
-                    destinationPath = Path.Combine(StorageConstants.ProjectsPath, newProgramName);
+                    destinationPath = Path.Combine(StorageConstants.ProgramsPath, newProgramName);
                     counter++;
                 }
             }
@@ -154,14 +154,14 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                var sourcePath = Path.Combine(StorageConstants.ProjectsPath, sourceProgramName);
-                var destinationPath = Path.Combine(StorageConstants.ProjectsPath, newProgramName);
+                var sourcePath = Path.Combine(StorageConstants.ProgramsPath, sourceProgramName);
+                var destinationPath = Path.Combine(StorageConstants.ProgramsPath, newProgramName);
 
                 var counter = 1;
                 while (await storage.DirectoryExistsAsync(destinationPath))
                 {
                     newProgramName = newProgramName + counter;
-                    destinationPath = Path.Combine(StorageConstants.ProjectsPath, newProgramName);
+                    destinationPath = Path.Combine(StorageConstants.ProgramsPath, newProgramName);
                     counter++;
                 }
 
@@ -206,6 +206,23 @@ namespace Catrobat.IDE.Core.Services.Common
             catch
             {
                 return null;
+            }
+        }
+
+        public async Task CreateThumbnailsForLooks(string programName)
+        {
+            var pathToSounds = Path.Combine(StorageConstants.ProgramsPath,
+                programName, StorageConstants.ProgramSoundsPath);
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                var fileNames = await storage.GetFileNamesAsync(pathToSounds);
+
+                foreach (var fileName in fileNames)
+                {
+                    await storage.CreateThumbnailAsync(
+                        Path.Combine(pathToSounds, fileName));
+                }
             }
         }
     }
