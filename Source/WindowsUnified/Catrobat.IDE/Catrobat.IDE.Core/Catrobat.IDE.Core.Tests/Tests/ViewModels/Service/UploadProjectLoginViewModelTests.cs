@@ -1,9 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
 using Catrobat.IDE.Core.Tests.Services.Common;
+using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Service;
 using System.Globalization;
 
@@ -17,6 +17,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.UnRegisterAll();
+            ServiceLocator.Register<NotificationServiceTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<WebCommunicationTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
             ServiceLocator.CultureService.SetCulture(new CultureInfo("en"));
@@ -25,8 +26,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         [TestMethod, TestCategory("GatedTests")]
         public void LoginActionTest()
         {
-            //TODO check message for too few inputs
-            //TODO check messages for different responses - e.g. wrong password
+            //TODO check messages for different responses - e.g. wrong password or http-request failed
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
@@ -35,7 +35,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             var viewModel = new UploadProjectLoginViewModel
             {
                 Username = "TestUser",
-                Password = "TestPassword",
+                Password = "TestPassword"
             };
             var localSettings = new LocalSettings();
             var context = new CatrobatContext
@@ -50,18 +50,59 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
 
             viewModel.LoginCommand.Execute(null);
 
-            Assert.IsTrue(viewModel.Username == "");
-            Assert.IsTrue(viewModel.Password == "");
-            Assert.IsTrue(viewModel.Context.CurrentToken == "TestTokenFromTestSystem_en");
-            Assert.IsTrue(viewModel.Context.CurrentUserName == "TestUser");
-            Assert.IsTrue(viewModel.Context.CurrentUserEmail == "");
-            Assert.IsTrue(viewModel.Context.LocalSettings.CurrentToken == "TestTokenFromTestSystem_en");
-            Assert.IsTrue(viewModel.Context.LocalSettings.CurrentUserName == "TestUser");
-            Assert.IsTrue(viewModel.Context.LocalSettings.CurrentUserEmail == "");
+            Assert.AreEqual("", viewModel.Username);
+            Assert.AreEqual("", viewModel.Password);
+            Assert.AreEqual("TestTokenFromTestSystem_en", viewModel.Context.CurrentToken);
+            Assert.AreEqual("TestUser", viewModel.Context.CurrentUserName);
+            Assert.AreEqual("", viewModel.Context.CurrentUserEmail);
+            Assert.AreEqual("TestTokenFromTestSystem_en", viewModel.Context.LocalSettings.CurrentToken);
+            Assert.AreEqual("TestUser", viewModel.Context.LocalSettings.CurrentUserName);
+            Assert.AreEqual("", viewModel.Context.LocalSettings.CurrentUserEmail);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(UploadProjectViewModel), navigationService.CurrentView);
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
+
+        [TestMethod, TestCategory("GatedTests")]
+        public void LoginActionMissingUsernameTest()
+        {
+            var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
+            notificationService.SentMessageBoxes = 0;
+            notificationService.SentToastNotifications = 0;
+            notificationService.NextMessageboxResult = MessageboxResult.Ok;
+
+            var viewModel = new UploadProjectLoginViewModel
+            {
+                Username = "",
+                Password = "TestPassword"
+            };
+            viewModel.LoginCommand.Execute(null);
+
+            Assert.AreEqual(1, notificationService.SentMessageBoxes);
+            Assert.AreEqual(0, notificationService.SentToastNotifications);
+            Assert.AreEqual("Login failed", notificationService.LastNotificationTitle);
+        }
+
+        [TestMethod, TestCategory("GatedTests")]
+        public void LoginActionMissingPasswordTest()
+        {
+            var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
+            notificationService.SentMessageBoxes = 0;
+            notificationService.SentToastNotifications = 0;
+            notificationService.NextMessageboxResult = MessageboxResult.Ok;
+
+            var viewModel = new UploadProjectLoginViewModel
+            {
+                Username = "TestUsername",
+                Password = ""
+            };
+            viewModel.LoginCommand.Execute(null);
+
+            Assert.AreEqual(1, notificationService.SentMessageBoxes);
+            Assert.AreEqual(0, notificationService.SentToastNotifications);
+            Assert.AreEqual("Login failed", notificationService.LastNotificationTitle);
+        }
+
 
         [TestMethod, TestCategory("GatedTests")]
         public void ForgottenActionTest()
@@ -78,8 +119,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             };
             viewModel.ForgottenCommand.Execute(null);
 
-            Assert.IsTrue(viewModel.Username == "");
-            Assert.IsTrue(viewModel.Password == "");
+            Assert.AreEqual("", viewModel.Username);
+            Assert.AreEqual("", viewModel.Password);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(UploadProjectForgotPasswordViewModel), navigationService.CurrentView);
             Assert.AreEqual(2, navigationService.PageStackCount);
@@ -100,8 +141,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             };
             viewModel.RegisterCommand.Execute(null);
 
-            Assert.IsTrue(viewModel.Username == "");
-            Assert.IsTrue(viewModel.Password == "");
+            Assert.AreEqual("", viewModel.Username);
+            Assert.AreEqual("", viewModel.Password);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(UploadProjectRegisterViewModel), navigationService.CurrentView);
             Assert.AreEqual(2, navigationService.PageStackCount);
@@ -122,8 +163,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             };
             viewModel.GoBackCommand.Execute(null);
 
-            Assert.IsTrue(viewModel.Username == "");
-            Assert.IsTrue(viewModel.Password == "");
+            Assert.AreEqual("", viewModel.Username);
+            Assert.AreEqual("", viewModel.Password);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);

@@ -132,8 +132,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             viewModel.OnlineProjectTapCommand.Execute(onlineProjectHeader);
 
             Assert.AreEqual(viewModel.SelectedOnlineProject, onlineProjectHeader);
-            Assert.IsTrue(viewModel.SelectedOnlineProject.Downloads == "5");
-            Assert.IsTrue(viewModel.SelectedOnlineProject.ScreenshotSmall == ApplicationResources.POCEKTCODE_BASE_ADDRESS + "resources/thumbnails/1769_small.png");
+            Assert.AreEqual("5", viewModel.SelectedOnlineProject.Downloads);
+            Assert.AreEqual(ApplicationResources.POCEKTCODE_BASE_ADDRESS + "resources/thumbnails/1769_small.png", viewModel.SelectedOnlineProject.ScreenshotSmall);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(OnlineProjectViewModel), navigationService.CurrentView);
             Assert.AreEqual(2, navigationService.PageStackCount);
@@ -151,7 +151,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             viewModel.LicenseCommand.Execute(null);
 
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateToWebPage, navigationService.CurrentNavigationType);
-            Assert.IsTrue(navigationService.CurrentView == "http://developer.catrobat.org/licenses");
+            Assert.AreEqual("http://developer.catrobat.org/licenses", navigationService.CurrentView);
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
@@ -167,7 +167,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             viewModel.AboutCommand.Execute(null);
 
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateToWebPage, navigationService.CurrentNavigationType);
-            Assert.IsTrue(navigationService.CurrentView == "http://www.catrobat.org/");
+            Assert.AreEqual("http://www.catrobat.org/", navigationService.CurrentView);
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
@@ -183,7 +183,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             viewModel.TouCommand.Execute(null);
 
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateToWebPage, navigationService.CurrentNavigationType);
-            Assert.IsTrue(navigationService.CurrentView == "http://catrob.at/tou");
+            Assert.AreEqual("http://catrob.at/tou", navigationService.CurrentView);
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
