@@ -17,6 +17,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Catrobat.Player.Windows.Tes
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Catrobat.Player.WindowsPhone.Tests", "Catrobat.Player.Windows\Catrobat.Player.WindowsPhone.Tests\Catrobat.Player.WindowsPhone.Tests.vcxproj", "{C3595601-900B-4796-BEE9-62F5BE4324B4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXTK", "Catrobat.Player.Windows\Catrobat.Player.DirectXTK\DirectXTK_WindowsPhone81.vcxproj", "{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DirectXToolKit", "DirectXToolKit", "{DE4AD67F-E9FA-43BF-BC42-AB96FF2EEDB5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXTK_Windows81", "Catrobat.Player.Windows\Catrobat.Player.DirectXTK\DirectXTK_Windows81.vcxproj", "{6FD3B346-4A51-4E7C-AC65-4591C4B21137}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Catrobat.Player.Windows\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{d27e2023-b39f-4db3-a5b1-ec3fdc035845}*SharedItemsImports = 4
@@ -24,7 +30,7 @@ Global
 		Catrobat.Player.Windows\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{56672ca0-fdbf-4bef-96bc-a7e27110702e}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -48,6 +54,14 @@ Global
 		SccProjectTopLevelParentUniqueName5 = Catrobat.Player.sln
 		SccProjectName5 = Catrobat.Player.Windows/Catrobat.Player.WindowsPhone.Tests
 		SccLocalPath5 = Catrobat.Player.Windows\\Catrobat.Player.WindowsPhone.Tests
+		SccProjectUniqueName6 = Catrobat.Player.Windows\\Catrobat.Player.DirectXTK\\DirectXTK_WindowsPhone81.vcxproj
+		SccProjectTopLevelParentUniqueName6 = Catrobat.Player.sln
+		SccProjectName6 = Catrobat.Player.Windows/Catrobat.Player.DirectXTK
+		SccLocalPath6 = Catrobat.Player.Windows\\Catrobat.Player.DirectXTK
+		SccProjectUniqueName7 = Catrobat.Player.Windows\\Catrobat.Player.DirectXTK\\DirectXTK_Windows81.vcxproj
+		SccProjectTopLevelParentUniqueName7 = Catrobat.Player.sln
+		SccProjectName7 = Catrobat.Player.Windows/Catrobat.Player.DirectXTK
+		SccLocalPath7 = Catrobat.Player.Windows\\Catrobat.Player.DirectXTK
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -56,6 +70,9 @@ Global
 		Release|ARM = Release|ARM
 		Release|Win32 = Release|Win32
 		Release|x64 = Release|x64
+		TFSBuild|ARM = TFSBuild|ARM
+		TFSBuild|Win32 = TFSBuild|Win32
+		TFSBuild|x64 = TFSBuild|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{56672CA0-FDBF-4BEF-96BC-A7E27110702E}.Debug|ARM.ActiveCfg = Debug|ARM
@@ -76,6 +93,15 @@ Global
 		{56672CA0-FDBF-4BEF-96BC-A7E27110702E}.Release|x64.ActiveCfg = Release|x64
 		{56672CA0-FDBF-4BEF-96BC-A7E27110702E}.Release|x64.Build.0 = Release|x64
 		{56672CA0-FDBF-4BEF-96BC-A7E27110702E}.Release|x64.Deploy.0 = Release|x64
+		{56672CA0-FDBF-4BEF-96BC-A7E27110702E}.TFSBuild|ARM.ActiveCfg = Release|ARM
+		{56672CA0-FDBF-4BEF-96BC-A7E27110702E}.TFSBuild|ARM.Build.0 = Release|ARM
+		{56672CA0-FDBF-4BEF-96BC-A7E27110702E}.TFSBuild|ARM.Deploy.0 = Release|ARM
+		{56672CA0-FDBF-4BEF-96BC-A7E27110702E}.TFSBuild|Win32.ActiveCfg = Release|Win32
+		{56672CA0-FDBF-4BEF-96BC-A7E27110702E}.TFSBuild|Win32.Build.0 = Release|Win32
+		{56672CA0-FDBF-4BEF-96BC-A7E27110702E}.TFSBuild|Win32.Deploy.0 = Release|Win32
+		{56672CA0-FDBF-4BEF-96BC-A7E27110702E}.TFSBuild|x64.ActiveCfg = Release|x64
+		{56672CA0-FDBF-4BEF-96BC-A7E27110702E}.TFSBuild|x64.Build.0 = Release|x64
+		{56672CA0-FDBF-4BEF-96BC-A7E27110702E}.TFSBuild|x64.Deploy.0 = Release|x64
 		{D27E2023-B39F-4DB3-A5B1-EC3FDC035845}.Debug|ARM.ActiveCfg = Debug|ARM
 		{D27E2023-B39F-4DB3-A5B1-EC3FDC035845}.Debug|ARM.Build.0 = Debug|ARM
 		{D27E2023-B39F-4DB3-A5B1-EC3FDC035845}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -90,6 +116,13 @@ Global
 		{D27E2023-B39F-4DB3-A5B1-EC3FDC035845}.Release|Win32.Build.0 = Release|Win32
 		{D27E2023-B39F-4DB3-A5B1-EC3FDC035845}.Release|Win32.Deploy.0 = Release|Win32
 		{D27E2023-B39F-4DB3-A5B1-EC3FDC035845}.Release|x64.ActiveCfg = Release|Win32
+		{D27E2023-B39F-4DB3-A5B1-EC3FDC035845}.TFSBuild|ARM.ActiveCfg = Release|ARM
+		{D27E2023-B39F-4DB3-A5B1-EC3FDC035845}.TFSBuild|ARM.Build.0 = Release|ARM
+		{D27E2023-B39F-4DB3-A5B1-EC3FDC035845}.TFSBuild|ARM.Deploy.0 = Release|ARM
+		{D27E2023-B39F-4DB3-A5B1-EC3FDC035845}.TFSBuild|Win32.ActiveCfg = Release|Win32
+		{D27E2023-B39F-4DB3-A5B1-EC3FDC035845}.TFSBuild|Win32.Build.0 = Release|Win32
+		{D27E2023-B39F-4DB3-A5B1-EC3FDC035845}.TFSBuild|Win32.Deploy.0 = Release|Win32
+		{D27E2023-B39F-4DB3-A5B1-EC3FDC035845}.TFSBuild|x64.ActiveCfg = Release|Win32
 		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.Debug|ARM.ActiveCfg = Debug|ARM
 		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.Debug|ARM.Build.0 = Debug|ARM
 		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -108,6 +141,15 @@ Global
 		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.Release|x64.ActiveCfg = Release|x64
 		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.Release|x64.Build.0 = Release|x64
 		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.Release|x64.Deploy.0 = Release|x64
+		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.TFSBuild|ARM.ActiveCfg = Release|ARM
+		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.TFSBuild|ARM.Build.0 = Release|ARM
+		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.TFSBuild|ARM.Deploy.0 = Release|ARM
+		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.TFSBuild|Win32.ActiveCfg = Release|Win32
+		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.TFSBuild|Win32.Build.0 = Release|Win32
+		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.TFSBuild|Win32.Deploy.0 = Release|Win32
+		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.TFSBuild|x64.ActiveCfg = Release|x64
+		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.TFSBuild|x64.Build.0 = Release|x64
+		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE}.TFSBuild|x64.Deploy.0 = Release|x64
 		{C3595601-900B-4796-BEE9-62F5BE4324B4}.Debug|ARM.ActiveCfg = Debug|ARM
 		{C3595601-900B-4796-BEE9-62F5BE4324B4}.Debug|ARM.Build.0 = Debug|ARM
 		{C3595601-900B-4796-BEE9-62F5BE4324B4}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -122,6 +164,46 @@ Global
 		{C3595601-900B-4796-BEE9-62F5BE4324B4}.Release|Win32.Build.0 = Release|Win32
 		{C3595601-900B-4796-BEE9-62F5BE4324B4}.Release|Win32.Deploy.0 = Release|Win32
 		{C3595601-900B-4796-BEE9-62F5BE4324B4}.Release|x64.ActiveCfg = Release|Win32
+		{C3595601-900B-4796-BEE9-62F5BE4324B4}.TFSBuild|ARM.ActiveCfg = Release|ARM
+		{C3595601-900B-4796-BEE9-62F5BE4324B4}.TFSBuild|ARM.Build.0 = Release|ARM
+		{C3595601-900B-4796-BEE9-62F5BE4324B4}.TFSBuild|ARM.Deploy.0 = Release|ARM
+		{C3595601-900B-4796-BEE9-62F5BE4324B4}.TFSBuild|Win32.ActiveCfg = Release|Win32
+		{C3595601-900B-4796-BEE9-62F5BE4324B4}.TFSBuild|Win32.Build.0 = Release|Win32
+		{C3595601-900B-4796-BEE9-62F5BE4324B4}.TFSBuild|Win32.Deploy.0 = Release|Win32
+		{C3595601-900B-4796-BEE9-62F5BE4324B4}.TFSBuild|x64.ActiveCfg = Release|Win32
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Debug|ARM.ActiveCfg = Debug|ARM
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Debug|ARM.Build.0 = Debug|ARM
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Debug|Win32.Build.0 = Debug|Win32
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Debug|x64.ActiveCfg = Debug|Win32
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Release|ARM.ActiveCfg = Release|ARM
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Release|ARM.Build.0 = Release|ARM
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Release|Win32.ActiveCfg = Release|Win32
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Release|Win32.Build.0 = Release|Win32
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Release|x64.ActiveCfg = Release|Win32
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.TFSBuild|ARM.ActiveCfg = Release|ARM
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.TFSBuild|ARM.Build.0 = Release|ARM
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.TFSBuild|Win32.ActiveCfg = Release|Win32
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.TFSBuild|Win32.Build.0 = Release|Win32
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.TFSBuild|x64.ActiveCfg = Release|Win32
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.Debug|ARM.ActiveCfg = Debug|ARM
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.Debug|ARM.Build.0 = Debug|ARM
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.Debug|Win32.Build.0 = Debug|Win32
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.Debug|x64.ActiveCfg = Debug|x64
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.Debug|x64.Build.0 = Debug|x64
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.Release|ARM.ActiveCfg = Release|ARM
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.Release|ARM.Build.0 = Release|ARM
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.Release|Win32.ActiveCfg = Release|Win32
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.Release|Win32.Build.0 = Release|Win32
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.Release|x64.ActiveCfg = Release|x64
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.Release|x64.Build.0 = Release|x64
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.TFSBuild|ARM.ActiveCfg = Release|ARM
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.TFSBuild|ARM.Build.0 = Release|ARM
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.TFSBuild|Win32.ActiveCfg = Release|Win32
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.TFSBuild|Win32.Build.0 = Release|Win32
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.TFSBuild|x64.ActiveCfg = Release|x64
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137}.TFSBuild|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -133,5 +215,8 @@ Global
 		{3873F87C-C2FF-4240-9ACF-398AF8037B46} = {E0BEBBEA-D0DB-40C7-A400-FE8717396BEE}
 		{3647BF8D-9DFA-4079-A07D-353B0DD2AFBE} = {3873F87C-C2FF-4240-9ACF-398AF8037B46}
 		{C3595601-900B-4796-BEE9-62F5BE4324B4} = {3873F87C-C2FF-4240-9ACF-398AF8037B46}
+		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E} = {DE4AD67F-E9FA-43BF-BC42-AB96FF2EEDB5}
+		{DE4AD67F-E9FA-43BF-BC42-AB96FF2EEDB5} = {E0BEBBEA-D0DB-40C7-A400-FE8717396BEE}
+		{6FD3B346-4A51-4E7C-AC65-4591C4B21137} = {DE4AD67F-E9FA-43BF-BC42-AB96FF2EEDB5}
 	EndGlobalSection
 EndGlobal

@@ -75,38 +75,38 @@
   </ImportGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_x86)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_x86)</AdditionalLibraryDirectories>
       <AdditionalDependencies>WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;DXGI.lib;D3D11.lib;D2D1.lib;DWrite.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\inc;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\FMOD\lib;$(ProjectDir)\..\FMOD\inc;$(ProjectDir)\..\Catrobat.Player.DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_x86)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_x86)</AdditionalLibraryDirectories>
       <AdditionalDependencies>WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;DXGI.lib;D3D11.lib;D2D1.lib;DWrite.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\inc;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\FMOD\lib;$(ProjectDir)\..\FMOD\inc;$(ProjectDir)\..\Catrobat.Player.DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_arm)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_arm)</AdditionalLibraryDirectories>
       <AdditionalDependencies>WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;DXGI.lib;D3D11.lib;D2D1.lib;DWrite.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\inc;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\FMOD\lib;$(ProjectDir)\..\FMOD\inc;$(ProjectDir)\..\Catrobat.Player.DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_arm)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories);$(WindowsPhoneSDK_LibraryPath_arm)</AdditionalLibraryDirectories>
       <AdditionalDependencies>WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;DXGI.lib;D3D11.lib;D2D1.lib;DWrite.lib;XAudio2.lib;fmodex_x86.lib;PhoneAudioSes.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\lib;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\FMOD\inc;C:\Users\Christopher\Source\Workspaces\Catrobat\Source\WindowsUnified\Catrobat.Player\Catrobat.Player.Windows\DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\FMOD\lib;$(ProjectDir)\..\FMOD\inc;$(ProjectDir)\..\Catrobat.Player.DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <PropertyGroup Label="UserMacros" />
@@ -155,6 +155,16 @@
     <Page Include="Player.xaml">
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Catrobat.Player.DirectXTK\DirectXTK_WindowsPhone81.vcxproj">
+      <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
+      <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
