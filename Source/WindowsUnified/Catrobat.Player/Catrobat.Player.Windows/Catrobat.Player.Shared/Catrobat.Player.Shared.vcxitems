@@ -18,6 +18,12 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml.cpp">
+      <DependentUpon>$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml.cpp">
+      <DependentUpon>$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml</DependentUpon>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)AccelerometerProvider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)BaseException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)BaseObject.cpp" />
@@ -26,7 +32,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageDaemon.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageListener.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageSender.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Catrobat.PlayerMain.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CatrobatTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ChangeGhostEffectByBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ChangeSizeByBrick.cpp" />
@@ -90,6 +95,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserFatalException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserSevereException.cpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml.h">
+      <DependentUpon>$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml.h">
+      <DependentUpon>$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml</DependentUpon>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)AccelerometerProvider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BaseException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BaseObject.h" />
@@ -99,7 +110,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastMessageDaemon.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastMessageListener.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastMessageSender.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Catrobat.PlayerMain.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CatrobatTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ChangeGhostEffectByBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ChangeSizeByBrick.h" />
@@ -172,5 +182,14 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml">
+      <FileType>Document</FileType>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>

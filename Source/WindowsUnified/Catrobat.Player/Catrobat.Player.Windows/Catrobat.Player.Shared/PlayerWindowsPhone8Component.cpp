@@ -27,16 +27,36 @@ using namespace Windows::Graphics::Display;
 
 namespace PhoneDirect3DXamlAppComponent
 {
-    Direct3DBackground::Direct3DBackground() :
+    Direct3DBackground::Direct3DBackground(Windows::UI::Core::CoreWindow^ coreWindow) :
+        m_coreWindow(coreWindow),
         m_timer(ref new BasicTimer())
     {
         ProjectDaemon::Instance()->ReInit();
         m_initialized = false;
+
+        InitEventHandlers();
     }
 
     Direct3DBackground::~Direct3DBackground()
     {
         m_initialized = false;
+    }
+
+    Direct3DBackground::InitEventHandlers()
+    {
+        m_coreWindow->PointerPressed +=
+            ref new TypedEventHandler<CoreWindow^, PointerEventArgs^>(this, &Direct3DBackground::OnPointerPressed);
+
+        m_coreWindow->PointerMoved +=
+            ref new TypedEventHandler<CoreWindow^, PointerEventArgs^>(this, &Direct3DBackground::OnPointerMoved);
+
+        m_coreWindow->PointerReleased +=
+            ref new TypedEventHandler<CoreWindow^, PointerEventArgs^>(this, &Direct3DBackground::OnPointerReleased);
+
+        m_coreWindow->PointerExited +=
+            ref new TypedEventHandler<CoreWindow^, PointerEventArgs^>(this, &Direct3DBackground::OnPointerExited);
+
+
     }
 
     IDrawingSurfaceBackgroundContentProvider^ Direct3DBackground::CreateContentProvider()
@@ -45,21 +65,11 @@ namespace PhoneDirect3DXamlAppComponent
         return reinterpret_cast<IDrawingSurfaceBackgroundContentProvider^>(provider.Detach());
     }
 
-    // IDrawingSurfaceManipulationHandler
-    void Direct3DBackground::SetManipulationHost(DrawingSurfaceManipulationHost^ manipulationHost)
-    {
-        manipulationHost->PointerPressed +=
-            ref new TypedEventHandler<DrawingSurfaceManipulationHost^, PointerEventArgs^>(this, &Direct3DBackground::OnPointerPressed);
-
-        manipulationHost->PointerMoved +=
-            ref new TypedEventHandler<DrawingSurfaceManipulationHost^, PointerEventArgs^>(this, &Direct3DBackground::OnPointerMoved);
-
-        manipulationHost->PointerReleased +=
-            ref new TypedEventHandler<DrawingSurfaceManipulationHost^, PointerEventArgs^>(this, &Direct3DBackground::OnPointerReleased);
-    }
-
     // Event Handlers
-    void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender, PointerEventArgs^ args)
+    void Direct3DBackground::OnPointerPressed(
+        _In_ CoreWindow^ sender,
+        _In_ PointerEventArgs^ args
+        )
     {
         if (!ProjectDaemon::Instance()->FinishedLoading())
         {
@@ -146,9 +156,29 @@ namespace PhoneDirect3DXamlAppComponent
         }
     }
 
-    void Direct3DBackground::OnPointerMoved(DrawingSurfaceManipulationHost^ sender, PointerEventArgs^ args) { }
+    void Direct3DBackground::OnPointerMoved(
+        _In_ CoreWindow^ sender,
+        _In_ PointerEventArgs^ args
+        ) 
+    { 
+        // TODO: implement me
+    }
 
-    void Direct3DBackground::OnPointerReleased(DrawingSurfaceManipulationHost^ sender, PointerEventArgs^ args) { }
+    void Direct3DBackground::OnPointerReleased(
+        _In_ CoreWindow^ sender,
+        _In_ PointerEventArgs^ args
+        ) 
+    { 
+        // TODO: implement me
+    }
+
+    void Direct3DBackground::OnPointerExited(
+        _In_ CoreWindow^ sender,
+        _In_ PointerEventArgs^ args
+        )
+    {
+       // TODO: implement me
+    }
 
     HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host, _In_ ID3D11Device1* device)
     {

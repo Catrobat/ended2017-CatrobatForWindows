@@ -5,10 +5,20 @@
     xmlns:local="using:Catrobat_Player"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
-    <Grid>
+    <SwapChainPanel x:Name="PlayerSwapChainPanel">
+        
+    </SwapChainPanel>
 
-    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar x:Name="PlayerAppBar"  Height="75" VerticalAlignment="Bottom">
+            <!--<AppBarButton x:Name="Back" Label="Back" Icon="Back" Click="OnResetButtonClicked"/>   -->
+            <AppBarButton x:Name="Restart" Label="Restart" Icon="Refresh" Click="OnRefreshButtonClicked"/>
+            <AppBarButton x:Name="PausePlay" Label="Pause" Icon="Pause" Click="OnPausePlayButtonClicked"/>
+            <AppBarButton x:Name="Screenshot" Label="Screenshot" Icon="Camera" Click="OnScreenshotButtonClicked"/>
+            <AppBarButton x:Name="EnableAxes"  Label="Enable Axes"  Icon="Setting"  Click="OnEnableAxisButtonClicked"/>
+        </CommandBar>
+        
+    </Page.BottomAppBar>
 </Page>

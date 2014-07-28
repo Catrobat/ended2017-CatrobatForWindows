@@ -226,7 +226,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)PlayerWindowsPhone8Component.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Catrobat.PlayerMain.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageDaemon.cpp">
@@ -445,7 +446,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)PlayerWindowsPhone8Component.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Catrobat.PlayerMain.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Constants">
@@ -496,5 +498,11 @@
     <Filter Include="XMLParser">
       <UniqueIdentifier>{90f2f841-0140-45f5-9869-cb6ac81d4406}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml" />
   </ItemGroup>
 </Project>
