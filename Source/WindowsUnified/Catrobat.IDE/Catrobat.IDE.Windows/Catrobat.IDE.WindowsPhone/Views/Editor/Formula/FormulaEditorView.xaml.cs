@@ -9,7 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-using Catrobat.IDE.WindowsPhone.Controls.Formulas;
+using Catrobat.IDE.WindowsPhone.Controls.FormulaControls;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
 {
@@ -46,10 +46,10 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
             this.FormulaViewerMain.SetBinding(FormulaViewer.CaretIndexProperty, new Binding { Path = new PropertyPath("CaretIndex"), Mode = BindingMode.TwoWay });
             this.FormulaViewerMain.SetBinding(FormulaViewer.SelectionStartProperty, new Binding { Path = new PropertyPath("SelectionStart"), Mode = BindingMode.TwoWay });
             this.FormulaViewerMain.SetBinding(FormulaViewer.SelectionLengthProperty, new Binding { Path = new PropertyPath("SelectionLength"), Mode = BindingMode.TwoWay });
-            this.FormulaKeyboard.SetBinding(FormulaKeyboard.CanDeleteProperty, new Binding { Path = new PropertyPath("CanDelete") });
-            this.FormulaKeyboard.SetBinding(FormulaKeyboard.CanEvaluateProperty, new Binding { Path = new PropertyPath("CanEvaluate") });
-            this.FormulaKeyboard.SetBinding(FormulaKeyboard.HasErrorProperty, new Binding { Path = new PropertyPath("HasError") });
-            this.FormulaKeyboard.SetBinding(FormulaKeyboard.ProjectProperty, new Binding { Path = new PropertyPath("CurrentProject") });
+            this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.CanDeleteProperty, new Binding { Path = new PropertyPath("CanDelete") });
+            this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.CanEvaluateProperty, new Binding { Path = new PropertyPath("CanEvaluate") });
+            this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.HasErrorProperty, new Binding { Path = new PropertyPath("HasError") });
+            this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.ProjectProperty, new Binding { Path = new PropertyPath("CurrentProject") });
             
             _viewModel.PropertyChanged += ViewModel_OnPropertyChanged;
         }
@@ -61,10 +61,10 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
             this.FormulaViewerMain.ClearValue(FormulaViewer.CaretIndexProperty);
             this.FormulaViewerMain.ClearValue(FormulaViewer.SelectionStartProperty);
             this.FormulaViewerMain.ClearValue(FormulaViewer.SelectionLengthProperty);
-            this.FormulaKeyboard.ClearValue(FormulaKeyboard.CanDeleteProperty);
-            this.FormulaKeyboard.ClearValue(FormulaKeyboard.CanEvaluateProperty);
-            this.FormulaKeyboard.ClearValue(FormulaKeyboard.HasErrorProperty);
-            this.FormulaKeyboard.ClearValue(FormulaKeyboard.ProjectProperty);
+            this.FormulaKeyboard.ClearValue(Controls.FormulaControls.FormulaKeyboard.CanDeleteProperty);
+            this.FormulaKeyboard.ClearValue(Controls.FormulaControls.FormulaKeyboard.CanEvaluateProperty);
+            this.FormulaKeyboard.ClearValue(Controls.FormulaControls.FormulaKeyboard.HasErrorProperty);
+            this.FormulaKeyboard.ClearValue(Controls.FormulaControls.FormulaKeyboard.ProjectProperty);
 
             _viewModel.PropertyChanged -= ViewModel_OnPropertyChanged;
         }

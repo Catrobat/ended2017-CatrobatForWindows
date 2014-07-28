@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.DynamicDataTemplates
+namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 {
   public class DataTemplateSelector : ContentControl
   {

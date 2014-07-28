@@ -1,12 +1,12 @@
 ﻿<UserControl
-  x:Class="Catrobat.IDE.WindowsPhone.Controls.Formulas.FormulaKeyboard"
+  x:Class="Catrobat.IDE.WindowsPhone.Controls.FormulaControls.FormulaKeyboard"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:editor="using:Catrobat.IDE.Core.Formulas.Editor"
-  xmlns:formulas="using:Catrobat.IDE.WindowsPhone.Controls.Formulas"
   xmlns:formula="using:Catrobat.IDE.Core.ViewModels.Editor.Formula"
+  xmlns:formulaControls="using:Catrobat.IDE.WindowsPhone.Controls.FormulaControls"
   mc:Ignorable="d" RequestedTheme="Dark" 
   d:DesignHeight="320" d:DesignWidth="480"
   x:Name="FormulaKeyboardXaml">
@@ -52,11 +52,11 @@
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyD8">D8</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyD9">D9</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyDecimalSeparator">DecimalSeparator</editor:FormulaEditorKey>
-    <formulas:FormulaKeys x:Key="KeysConstants">
+    <formulaControls:FormulaKeys x:Key="KeysConstants">
       <formula:FormulaKey Key="Pi" />
       <formula:FormulaKey Key="True" />
       <formula:FormulaKey Key="False" />
-    </formulas:FormulaKeys>
+    </formulaControls:FormulaKeys>
 
     <!-- operators -->
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyPlus">Plus</editor:FormulaEditorKey>
@@ -64,7 +64,7 @@
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyMultiply">Multiply</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyDivide">Divide</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyCaret">Caret</editor:FormulaEditorKey>
-    <formulas:FormulaKeys x:Key="KeysOperators">
+    <formulaControls:FormulaKeys x:Key="KeysOperators">
       <formula:FormulaKey Key="Equals" />
       <formula:FormulaKey Key="NotEquals" />
       <formula:FormulaKey Key="Less" />
@@ -75,11 +75,11 @@
       <formula:FormulaKey Key="Or" />
       <formula:FormulaKey Key="Not" />
       <formula:FormulaKey Key="Mod" />
-    </formulas:FormulaKeys>
+    </formulaControls:FormulaKeys>
 
     <!-- functions -->
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyParameterSeparator">ParameterSeparator</editor:FormulaEditorKey>
-    <formulas:FormulaKeys x:Key="KeysFunctions">
+    <formulaControls:FormulaKeys x:Key="KeysFunctions">
       <formula:FormulaKey Key="Exp" />
       <formula:FormulaKey Key="Log" />
       <formula:FormulaKey Key="Ln" />
@@ -95,10 +95,10 @@
       <formula:FormulaKey Key="Abs" />
       <formula:FormulaKey Key="Round" />
       <formula:FormulaKey Key="Random" />
-    </formulas:FormulaKeys>
+    </formulaControls:FormulaKeys>
 
     <!-- sensors -->
-    <formulas:FormulaKeys x:Key="KeysSensors">
+    <formulaControls:FormulaKeys x:Key="KeysSensors">
       <formula:FormulaKey Key="AccelerationX" />
       <formula:FormulaKey Key="AccelerationY" />
       <formula:FormulaKey Key="AccelerationZ" />
@@ -106,10 +106,10 @@
       <formula:FormulaKey Key="InclinationX" />
       <formula:FormulaKey Key="InclinationY" />
       <formula:FormulaKey Key="Loudness" />
-    </formulas:FormulaKeys>
+    </formulaControls:FormulaKeys>
 
     <!-- properties -->
-    <formulas:FormulaKeys x:Key="KeysProperties">
+    <formulaControls:FormulaKeys x:Key="KeysProperties">
       <formula:FormulaKey Key="Brightness" />
       <formula:FormulaKey Key="Layer" />
       <formula:FormulaKey Key="Transparency" />
@@ -117,7 +117,7 @@
       <formula:FormulaKey Key="PositionY" />
       <formula:FormulaKey Key="Rotation" />
       <formula:FormulaKey Key="Size" />
-    </formulas:FormulaKeys>
+    </formulaControls:FormulaKeys>
 
     <!-- user variables -->
 

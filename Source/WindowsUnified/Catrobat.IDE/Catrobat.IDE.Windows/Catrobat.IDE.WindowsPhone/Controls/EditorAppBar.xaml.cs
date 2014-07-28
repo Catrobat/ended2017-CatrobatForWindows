@@ -1,11 +1,11 @@
-﻿using Catrobat.IDE.Core.Resources.Localization;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Catrobat.IDE.Core.Resources.Localization;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.AppBar
+namespace Catrobat.IDE.WindowsPhone.Controls
 {
     public enum AppBarTargetType { Object, Script, Costume, Sound }
 

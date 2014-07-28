@@ -3,11 +3,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:templates="using:Catrobat.IDE.WindowsPhone.Controls.Formulas.Templates"
-  xmlns:tree="using:Catrobat.IDE.Core.Models.Formulas.Tree"
-  xmlns:tokens="using:Catrobat.IDE.Core.Models.Formulas.Tokens"
-  xmlns:interop="using:Windows.UI.Xaml.Interop"
-  xmlns:formulas="using:Catrobat.IDE.WindowsPhone.Controls.Formulas"
+  xmlns:templates="using:Catrobat.IDE.WindowsPhone.Controls.FormulaControls.Templates"
   mc:Ignorable="d">
 
   <SolidColorBrush x:Key="FormulaSelectedBackground" Color="Orange" />
@@ -292,82 +288,82 @@
 
   <templates:FormulaTokenTemplateCollection x:Key="FormulaTokenTemplates">
     <!-- ### Constants ##########################################################################################################-->
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeNumber" 
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeNumber" 
        TokenStyle="{StaticResource PartStyleNumber}" />
-      <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaTokenDecimalSeparator" 
+      <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaTokenDecimalSeparator" 
       TokenStyle="{StaticResource PartStyleNumber}" 
       RelativeLeftMargin="0.15" RelativeRightMargin="0.15" />
 
 
     <!-- ### Functions ##########################################################################################################-->
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaTokenParameterSeparator" TokenStyle="{StaticResource PartStyleMath}" RelativeLeftMargin="0.3" RelativeRightMargin="0.7" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeRandom" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeModulo" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeMax" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeMin" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeSin" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeCos" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeTan" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeLn" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeLog" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeSqrt" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeAbs" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeRound" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeArcsin" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeArccos" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeArctan" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeExp" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodePi" TokenStyle="{StaticResource PartStyleMath}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeEquals" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeNotEquals" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeLess" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeLessEqual" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeGreater" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeGreaterEqual" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeOr" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeAnd" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaTokenParameterSeparator" TokenStyle="{StaticResource PartStyleMath}" RelativeLeftMargin="0.3" RelativeRightMargin="0.7" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeRandom" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeModulo" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeMax" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeMin" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeSin" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeCos" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeTan" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeLn" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeLog" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeSqrt" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeAbs" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeRound" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeArcsin" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeArccos" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeArctan" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeExp" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodePi" TokenStyle="{StaticResource PartStyleMath}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeEquals" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeNotEquals" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeLess" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeLessEqual" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeGreater" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeGreaterEqual" TokenStyle="{StaticResource PartStyleOperatorEquality}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeOr" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeAnd" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
 
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeTrue" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeFalse" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeNot" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeTrue" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeFalse" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeNot" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
 
     <!-- TODO: Change Style Resource-->
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeAdd" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeAdd" TokenStyle="{StaticResource PartStyleOperatorLogic}" />
     <!-- TODO: Change Style Resource-->
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeSubtract" TokenStyle="{StaticResource PartStyleOperatorLogic}"/>
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeSubtract" TokenStyle="{StaticResource PartStyleOperatorLogic}"/>
     <!-- TODO: Change Style Resource-->
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeMultiply" TokenStyle="{StaticResource PartStyleOperatorLogic}"/>
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeMultiply" TokenStyle="{StaticResource PartStyleOperatorLogic}"/>
     <!-- TODO: Change Style Resource-->
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeDivide" TokenStyle="{StaticResource PartStyleOperatorLogic}"/>
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeDivide" TokenStyle="{StaticResource PartStyleOperatorLogic}"/>
     <!-- TODO: Change Style Resource-->
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodePower" TokenStyle="{StaticResource PartStyleOperatorLogic}"/>
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodePower" TokenStyle="{StaticResource PartStyleOperatorLogic}"/>
 
     <!-- ### Brackets ##########################################################################################################-->
     <!-- TODO: Change Style Resource-->
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaTokenParenthesis" TokenStyle="{StaticResource PartStyleOperatorLogic}" 
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaTokenParenthesis" TokenStyle="{StaticResource PartStyleOperatorLogic}" 
     RelativeLeftMargin="0.3" RelativeRightMargin="0.3" />
 
     <!-- ### Properties ##########################################################################################################-->
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeBrightness" TokenStyle="{StaticResource PartStyleObjectVariable}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeLayer" TokenStyle="{StaticResource PartStyleObjectVariable}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeTransparency" TokenStyle="{StaticResource PartStyleObjectVariable}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodePositionX" TokenStyle="{StaticResource PartStyleObjectVariable}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodePositionY" TokenStyle="{StaticResource PartStyleObjectVariable}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeRotation" TokenStyle="{StaticResource PartStyleObjectVariable}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeSize" TokenStyle="{StaticResource PartStyleObjectVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeBrightness" TokenStyle="{StaticResource PartStyleObjectVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeLayer" TokenStyle="{StaticResource PartStyleObjectVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeTransparency" TokenStyle="{StaticResource PartStyleObjectVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodePositionX" TokenStyle="{StaticResource PartStyleObjectVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodePositionY" TokenStyle="{StaticResource PartStyleObjectVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeRotation" TokenStyle="{StaticResource PartStyleObjectVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeSize" TokenStyle="{StaticResource PartStyleObjectVariable}" />
 
     <!-- ### Sensors ##########################################################################################################-->
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeAccelerationX" TokenStyle="{StaticResource PartStyleSensorVariable}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeAccelerationY" TokenStyle="{StaticResource PartStyleSensorVariable}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeAccelerationZ" TokenStyle="{StaticResource PartStyleSensorVariable}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeCompass" TokenStyle="{StaticResource PartStyleSensorVariable}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeInclinationX" TokenStyle="{StaticResource PartStyleSensorVariable}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeInclinationY" TokenStyle="{StaticResource PartStyleSensorVariable}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeLoudness" TokenStyle="{StaticResource PartStyleSensorVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeAccelerationX" TokenStyle="{StaticResource PartStyleSensorVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeAccelerationY" TokenStyle="{StaticResource PartStyleSensorVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeAccelerationZ" TokenStyle="{StaticResource PartStyleSensorVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeCompass" TokenStyle="{StaticResource PartStyleSensorVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeInclinationX" TokenStyle="{StaticResource PartStyleSensorVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeInclinationY" TokenStyle="{StaticResource PartStyleSensorVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeLoudness" TokenStyle="{StaticResource PartStyleSensorVariable}" />
 
   <!-- ### Variables ##########################################################################################################-->
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeLocalVariable" TokenStyle="{StaticResource PartStyleVariable}" />
-    <formulas:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeGlobalVariable" TokenStyle="{StaticResource PartStyleVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeLocalVariable" TokenStyle="{StaticResource PartStyleVariable}" />
+    <templates:FormulaTokenTemplateWindowsShared NativeTokenType="FormulaNodeGlobalVariable" TokenStyle="{StaticResource PartStyleVariable}" />
   </templates:FormulaTokenTemplateCollection>
 
 </ResourceDictionary>

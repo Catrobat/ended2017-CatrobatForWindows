@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.BindableListView
+namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 {
     public class BindableListView : ListView
     {

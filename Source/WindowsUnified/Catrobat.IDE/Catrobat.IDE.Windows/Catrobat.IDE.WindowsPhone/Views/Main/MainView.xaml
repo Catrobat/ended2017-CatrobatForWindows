@@ -3,10 +3,9 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:statusIcons="using:Catrobat.IDE.WindowsPhone.Controls.StatusIcons"
-  xmlns:projects="using:Catrobat.IDE.WindowsPhone.Controls.Projects"
-  xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
-  mc:Ignorable="d"
+                    xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+                    xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
+                    mc:Ignorable="d"
   NavigationCacheMode="Required"
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
   
@@ -46,7 +45,7 @@
                 HorizontalAlignment="Stretch">
                 <GridView.ItemTemplate>
                   <DataTemplate>
-                    <projects:LocalProjectControl/>
+                    <controls:LocalProjectControl/>
                   </DataTemplate>
                 </GridView.ItemTemplate>
               </GridView>
@@ -155,7 +154,7 @@
                       <!--Opacity="{Binding OnlineProjects.IsLoading, 
                       Converter={StaticResource BoolOpacityConverter}}"-->
                     
-                      <statusIcons:ProcessIcon Margin="0 0 6 0" 
+                      <controls:ProcessIcon Margin="0 0 6 0" 
                         IsProcessing="{Binding OnlineProjects.IsLoading}" />
                       <TextBlock Foreground="White"
                         VerticalAlignment="Center" HorizontalAlignment="Center" 

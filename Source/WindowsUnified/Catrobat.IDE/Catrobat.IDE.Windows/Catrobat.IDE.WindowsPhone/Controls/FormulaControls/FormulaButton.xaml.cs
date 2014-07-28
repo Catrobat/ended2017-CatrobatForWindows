@@ -1,11 +1,11 @@
-﻿using Catrobat.IDE.Core.Models.Formulas.Tree;
+﻿using System.ComponentModel;
+using Windows.UI.Xaml;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
-using System.ComponentModel;
-using Windows.UI.Xaml;
 using Catrobat.IDE.WindowsShared.Converters;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
+namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
 {
     public partial class FormulaButton
     {

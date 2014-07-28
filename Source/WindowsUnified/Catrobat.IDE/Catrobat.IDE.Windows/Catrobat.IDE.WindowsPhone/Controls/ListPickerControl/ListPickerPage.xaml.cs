@@ -1,4 +1,8 @@
-﻿using Catrobat.IDE.Core.Models;
+﻿using System;
+using System.Diagnostics;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Editor.Actions;
 using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
@@ -6,13 +10,8 @@ using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.WindowsShared.Common;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Diagnostics;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
-
-namespace Catrobat.IDE.WindowsPhone.Controls.ListPicker
+namespace Catrobat.IDE.WindowsPhone.Controls.ListPickerControl
 {
     public partial class ListPickerPage
     {

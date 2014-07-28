@@ -1,7 +1,6 @@
-﻿using System.Windows;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.Formulas.Templates
+namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls.Templates
 {
     public class FormulaTokenStyleCollection
     {

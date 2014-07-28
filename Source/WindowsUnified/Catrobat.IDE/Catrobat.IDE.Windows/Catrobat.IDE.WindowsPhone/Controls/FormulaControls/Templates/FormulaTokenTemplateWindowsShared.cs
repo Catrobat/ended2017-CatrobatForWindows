@@ -1,9 +1,8 @@
-﻿using Catrobat.IDE.Core.Models.Formulas.Tokens;
+﻿using System;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
-using Catrobat.IDE.WindowsPhone.Controls.Formulas.Templates;
-using System;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
+namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls.Templates
 {
 
     public class FormulaTokenTemplateWindowsShared : FormulaTokenTemplate

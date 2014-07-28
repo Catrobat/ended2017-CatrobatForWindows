@@ -101,6 +101,9 @@
     </Compile>
     <Compile Include="Controls\ActionsControls\MasterBrick.cs" />
     <Compile Include="Controls\ActionsControls\NormalBrick.cs" />
+    <Compile Include="Controls\ProcessIcon.xaml.cs">
+      <DependentUpon>ProcessIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SoundControls\SoundPlayButton.xaml.cs">
       <DependentUpon>SoundPlayButton.xaml</DependentUpon>
     </Compile>
@@ -140,9 +143,6 @@
     </Compile>
     <Compile Include="Controls\LocalProjectControl.xaml.cs">
       <DependentUpon>LocalProjectControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ProcessIcon.xaml.cs">
-      <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Navigation\NavigationObjectPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -286,6 +286,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\ProcessIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\SoundControls\SoundPlayButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -333,10 +337,6 @@
     <Page Include="Controls\LocalProjectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ProcessIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Editor\Costumes\ChangeCostumeView.xaml">
       <Generator>MSBuild:Compile</Generator>

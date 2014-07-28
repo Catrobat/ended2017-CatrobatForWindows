@@ -4,7 +4,7 @@ using Windows.UI.Xaml;
 using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.Services;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.StatusIcons
+namespace Catrobat.IDE.WindowsPhone.Controls
 {
     public partial class ProcessIcon : INotifyPropertyChanged
     {

@@ -1,7 +1,4 @@
-﻿using Catrobat.IDE.Core.ExtensionMethods;
-using Catrobat.IDE.Core.Models.Formulas.Tokens;
-using Catrobat.IDE.WindowsPhone.Controls.Formulas.Templates;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -12,8 +9,11 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
+using Catrobat.IDE.WindowsPhone.Controls.FormulaControls.Templates;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
+namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
 {
     public delegate void DoubleTap(int index);
 

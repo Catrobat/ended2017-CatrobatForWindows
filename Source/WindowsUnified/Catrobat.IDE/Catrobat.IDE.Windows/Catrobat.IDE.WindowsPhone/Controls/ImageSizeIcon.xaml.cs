@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.Misc
+namespace Catrobat.IDE.WindowsPhone.Controls
 {
     public partial class ImageSizeIcon : UserControl
     {

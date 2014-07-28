@@ -5,7 +5,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
-  xmlns:formulas="using:Catrobat.IDE.WindowsPhone.Controls.Formulas"
+  xmlns:formulaControls="using:Catrobat.IDE.WindowsPhone.Controls.FormulaControls"
   mc:Ignorable="d"
   DataContext="{Binding FormulaEditorViewModel, Source={StaticResource Locator}}">
 
@@ -17,7 +17,7 @@
     </Grid.RowDefinitions>
     <ScrollViewer Grid.Row="0">
       <!-- UserControl Bindings are set in code-behind -->
-      <formulas:FormulaViewer
+      <formulaControls:FormulaViewer
         x:Name="FormulaViewerMain"
         CharactersInOneLineNormalFontSize="15"
         LinesNormalFontSize="5"
@@ -39,11 +39,11 @@
       HorizontalAlignment="Center" />
     <Grid Grid.Row="1">
       <!-- UserControl Bindings are set in code-behind -->
-      <formulas:FormulaKeyboard x:Name="FormulaKeyboard" Height="320">
-        <formulas:FormulaKeyboard.RenderTransform>
+      <formulaControls:FormulaKeyboard x:Name="FormulaKeyboard" Height="320">
+        <formulaControls:FormulaKeyboard.RenderTransform>
           <TranslateTransform X="0" Y="500" x:Name="Translation" />
-        </formulas:FormulaKeyboard.RenderTransform>
-        <formulas:FormulaKeyboard.Resources>
+        </formulaControls:FormulaKeyboard.RenderTransform>
+        <formulaControls:FormulaKeyboard.Resources>
           <Storyboard x:Name="EnterTransition">
             <DoubleAnimation
               Storyboard.TargetName="Translation"
@@ -66,8 +66,8 @@
               </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
           </Storyboard>
-        </formulas:FormulaKeyboard.Resources>
-      </formulas:FormulaKeyboard>
+        </formulaControls:FormulaKeyboard.Resources>
+      </formulaControls:FormulaKeyboard>
     </Grid>
   </Grid>
   

@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.Bricks
+namespace Catrobat.IDE.WindowsPhone.Controls.ActionsControls
 {
   public class NormalBrick : ContentControl
   {

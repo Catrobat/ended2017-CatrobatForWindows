@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.Formulas.Templates
+namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls.Templates
 {
     public class FormulaTokenTemplateCollection : List<FormulaTokenTemplateWindowsShared>
     {

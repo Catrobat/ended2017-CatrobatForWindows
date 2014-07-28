@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 
-
-namespace Catrobat.IDE.WindowsPhone.Controls.ListPicker
+namespace Catrobat.IDE.WindowsPhone.Controls.ListPickerControl
 {
     public partial class ListPicker : UserControl
     {

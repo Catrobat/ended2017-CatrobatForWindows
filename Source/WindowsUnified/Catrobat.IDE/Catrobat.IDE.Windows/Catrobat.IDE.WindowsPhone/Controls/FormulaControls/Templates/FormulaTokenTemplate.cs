@@ -1,11 +1,11 @@
-﻿using Catrobat.IDE.Core.Formulas;
-using Catrobat.IDE.Core.Models.Formulas.Tokens;
-using System;
+﻿using System;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Catrobat.IDE.Core.Formulas;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.Formulas.Templates
+namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls.Templates
 {
     public abstract class FormulaTokenTemplate
     {

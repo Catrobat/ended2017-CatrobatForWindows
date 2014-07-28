@@ -4,10 +4,10 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:models="using:Catrobat.IDE.Core.Models"
-  xmlns:appBar="using:Catrobat.IDE.WindowsPhone.Controls.AppBar"
-  xmlns:bindableListView="using:Catrobat.IDE.WindowsPhone.Controls.BindableListView"
-  xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+                    xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   xmlns:soundControls="using:Catrobat.IDE.WindowsPhone.Controls.SoundControls"
+  xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
+  xmlns:listsViewControls="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls"
   mc:Ignorable="d" 
   NavigationCacheMode="Enabled"
   DataContext="{Binding SpriteEditorViewModel, Source={StaticResource Locator}}">
@@ -76,7 +76,7 @@
         Header="{Binding Resources.Editor_PivotActions, 
         Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
-          <bindableListView:BindableListView x:Name="ReorderListBoxScriptBricks"
+          <listsViewControls:BindableListView x:Name="ReorderListBoxScriptBricks"
             Visibility="Visible"
             SelectionMode="Multiple"
             ItemsSource="{Binding Actions}"
@@ -108,7 +108,7 @@
           Header="{Binding Resources.Editor_PivotCostumes, 
           Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
-          <bindableListView:BindableListView
+          <listsViewControls:BindableListView
               ItemsSource="{Binding Costumes}"
               BindableSelectedItems="{Binding SelectedCostumes, Mode=TwoWay}"
               ItemTemplate="{StaticResource LookItemTemplate}"
@@ -131,12 +131,12 @@
       <PivotItem Name="PivotSounds" Margin="0 -15 0 0"
                  Header="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
-          <bindableListView:BindableListView
+          <listsViewControls:BindableListView
             ItemsSource="{Binding Sounds}"
             BindableSelectedItems="{Binding SelectedSounds, Mode=TwoWay}"
             ItemTemplate="{StaticResource SoundItemTemplate}"
             SelectionMode="Multiple">
-          </bindableListView:BindableListView>
+          </listsViewControls:BindableListView>
 
           <TextBlock 
               Text ="{Binding Resources.Editor_ClickPlusToAddSound, Source={StaticResource LocalizedStrings}}"
@@ -168,7 +168,7 @@
     
     <Grid Grid.Row="2">
       <StackPanel RequestedTheme="Dark">
-        <appBar:EditorAppBar
+        <controls:EditorAppBar
           Visibility="{Binding IsVisibleScripts, 
           Converter={StaticResource BoolVisibilityConverter}}" 
           VerticalAlignment="Bottom"
@@ -179,7 +179,7 @@
           PlayCommand="{Binding StartPlayerCommand}"
           NewCommand="{Binding AddNewScriptBrickCommand}"
           NumberOfSelectedItems="{Binding SelectedActions.Count}"/>
-        <appBar:EditorAppBar
+        <controls:EditorAppBar
           Visibility="{Binding IsVisibleCostumes, 
           Converter={StaticResource BoolVisibilityConverter}}" 
           VerticalAlignment="Bottom"
@@ -191,7 +191,7 @@
           PlayCommand="{Binding StartPlayerCommand}"
           NewCommand="{Binding AddNewCostumeCommand}"
           NumberOfSelectedItems="{Binding SelectedCostumes.Count}"/>
-        <appBar:EditorAppBar
+        <controls:EditorAppBar
           Visibility="{Binding IsVisibleSounds, 
           Converter={StaticResource BoolVisibilityConverter}}" 
           VerticalAlignment="Bottom"

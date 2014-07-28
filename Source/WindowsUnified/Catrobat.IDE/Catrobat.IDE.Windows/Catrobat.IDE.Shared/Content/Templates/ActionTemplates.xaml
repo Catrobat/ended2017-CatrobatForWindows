@@ -4,12 +4,13 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:models="using:Catrobat.IDE.Core.Models"
-  xmlns:bricks="using:Catrobat.IDE.WindowsPhone.Controls.Bricks"
   xmlns:templates="using:Catrobat.IDE.WindowsPhone.IDE.Content.Templates"
   xmlns:bricksIde="using:Catrobat.IDE.Core.Models.Bricks"
   xmlns:scripts="using:Catrobat.IDE.Core.Models.Scripts"
   xmlns:listPicker="using:Catrobat.IDE.WindowsPhone.Controls.ListPicker"
-  xmlns:formulas="using:Catrobat.IDE.WindowsPhone.Controls.Formulas"
+  xmlns:listPickerControl="using:Catrobat.IDE.WindowsPhone.Controls.ListPickerControl"
+  xmlns:formulaControls="using:Catrobat.IDE.WindowsPhone.Controls.FormulaControls"
+  xmlns:actionsControls="using:Catrobat.IDE.WindowsPhone.Controls.ActionsControls"
   mc:Ignorable="d">
 
   <!--<SolidColorBrush x:Key="SoundsBrush" Color="#FFE035D5" />
@@ -109,9 +110,9 @@
     <templates:ActionTemplateSelector.StartScript>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:StartScript}">
-          <bricks:MasterBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:MasterBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_WhenProjectStarts, Source={StaticResource LocalizedStrings}}" />
-          </bricks:MasterBrick>
+          </actionsControls:MasterBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.StartScript>
@@ -119,9 +120,9 @@
     <templates:ActionTemplateSelector.TappedScript>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:TappedScript}">
-          <bricks:MasterBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:MasterBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_WhenTapped, Source={StaticResource LocalizedStrings}}" />
-          </bricks:MasterBrick>
+          </actionsControls:MasterBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.TappedScript>
@@ -129,7 +130,7 @@
     <templates:ActionTemplateSelector.BroadcastReceivedScript>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:BroadcastReceivedScript}">
-          <bricks:MasterBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:MasterBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.RowDefinitions>
                 <RowDefinition />
@@ -138,7 +139,7 @@
 
               <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="24" 
                            Margin="10 10 0 10" Text="{Binding Resources.Brick_WhenIReceive, Source={StaticResource LocalizedStrings}}" />
-              <listPicker:ListPicker Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+              <listPickerControl:ListPicker Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                                      ItemTemplate="{StaticResource ListBoxBroadcastItem}"
                                      PageItemTemplate="{StaticResource PageListBoxBroadcastItem}"
                                      ItemsSource="{Binding SpriteEditorViewModel.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" 
@@ -149,7 +150,7 @@
                         Command="{Binding SpriteEditorViewModel.AddBroadcastMessageCommand, Source={StaticResource Locator}}" 
                         CommandParameter="{Binding}" IsEnabled="{Binding IsAttached}" />-->
             </Grid>
-          </bricks:MasterBrick>
+          </actionsControls:MasterBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.BroadcastReceivedScript>
@@ -157,9 +158,9 @@
     <templates:ActionTemplateSelector.UnknownBrick>
       <DataTemplate>
         <Grid Margin="0">
-          <bricks:NormalBrick Background="#FFB4B43E" BorderBrush="White">
+          <actionsControls:NormalBrick Background="#FFB4B43E" BorderBrush="White">
             <TextBlock TextWrapping="Wrap" FontSize="24" Margin="10 10 0 10" Text="Unbekannter Baustein"/>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.UnknownBrick>
@@ -169,7 +170,7 @@
     <templates:ActionTemplateSelector.ChangePositionXBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ChangePositionXBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -180,9 +181,9 @@
                            Text="{Binding Resources.Brick_ChangeXBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
 
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" IsEnabled="{Binding IsAttached}"/>
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" IsEnabled="{Binding IsAttached}"/>
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.ChangePositionXBrick>
@@ -190,7 +191,7 @@
     <templates:ActionTemplateSelector.ChangePositionYBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ChangePositionYBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -200,10 +201,10 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_ChangeYBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.ChangePositionYBrick>
@@ -211,11 +212,11 @@
     <templates:ActionTemplateSelector.BringToFrontBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:BringToFrontBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                              BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_ComeToFront, Source={StaticResource LocalizedStrings}}" 
                          Margin="10 10 0 10" FontSize="24" />
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.BringToFrontBrick>
@@ -223,7 +224,7 @@
     <templates:ActionTemplateSelector.DecreaseZOrderBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:DecreaseZOrderBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -234,13 +235,13 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_GoNStepsBackGo, Source={StaticResource LocalizedStrings}}"
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_GoNStepsBackStepsBack, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.DecreaseZOrderBrick>
@@ -248,12 +249,12 @@
     <templates:ActionTemplateSelector.BounceBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:BounceBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                              BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_IfOnEdgeBounce, Source={StaticResource LocalizedStrings}}"
                          Margin="10 10 0 10" FontSize="24" />
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.BounceBrick>
@@ -261,7 +262,7 @@
     <templates:ActionTemplateSelector.MoveBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:MoveBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -272,13 +273,13 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_MoveNStepsMove, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding Steps, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Steps, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_MoveNStepsSteps, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.MoveBrick>
@@ -286,7 +287,7 @@
     <templates:ActionTemplateSelector.TurnLeftBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:TurnLeftBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -297,13 +298,13 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_TurnLeft, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Degrees, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.TurnLeftBrick>
@@ -311,7 +312,7 @@
     <templates:ActionTemplateSelector.TurnRightBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:TurnRightBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -322,13 +323,13 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_TurnRight, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Degrees, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.TurnRightBrick>
@@ -336,7 +337,7 @@
     <templates:ActionTemplateSelector.SetPositionXBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetPositionXBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -346,10 +347,10 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetXTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding Value, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Value, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.SetPositionXBrick>
@@ -357,7 +358,7 @@
     <templates:ActionTemplateSelector.SetPositionYBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetPositionYBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -367,10 +368,10 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetYTo, Source={StaticResource LocalizedStrings}}"
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding Value, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Value, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.SetPositionYBrick>
@@ -378,7 +379,7 @@
     <templates:ActionTemplateSelector.SetPositionBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetPositionBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -394,13 +395,13 @@
                            Text="{Binding Resources.Brick_PlaceAt, Source={StaticResource LocalizedStrings}}"
                            Margin="10 10 0 10" FontSize="24" />
               <TextBlock Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Text="X" Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" Formula="{Binding ValueX, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" Formula="{Binding ValueX, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Text="Y" Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Formula="{Binding ValueY, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Formula="{Binding ValueY, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.SetPositionBrick>
@@ -408,7 +409,7 @@
     <templates:ActionTemplateSelector.SetRotationBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetRotationBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel>
               <TextBlock VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" 
                            Text="{Binding Resources.Brick_PointInDirection, Source={StaticResource LocalizedStrings}}" />
@@ -417,14 +418,14 @@
                   <ColumnDefinition Width="*" />
                   <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
-                <formulas:FormulaButton Grid.Column="0" Formula="{Binding Value, Mode=TwoWay}" 
+                <formulaControls:FormulaButton Grid.Column="0" Formula="{Binding Value, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" 
                            Text="{Binding Resources.Brick_Degrees, Source={StaticResource LocalizedStrings}}" />
               </Grid>
             </StackPanel>
 
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.SetRotationBrick>
@@ -432,10 +433,10 @@
     <templates:ActionTemplateSelector.LookAtBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:LookAtBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel>
               <TextBlock VerticalAlignment="Center"  FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_PointTo, Source={StaticResource LocalizedStrings}}" />
-              <listPicker:ListPicker 
+              <listPickerControl:ListPicker 
                   ItemTemplate="{StaticResource ListBoxSpriteItem}" 
                   PageItemTemplate="{StaticResource PageListBoxSpriteItem}" 
                   ItemsSource="{Binding SpriteEditorViewModel.Sprites, Source={StaticResource Locator}, Mode=OneTime}"  
@@ -443,7 +444,7 @@
                   IsEnabled="{Binding IsAttached}" 
                   Margin="10 10 0 10" />
             </StackPanel>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.LookAtBrick>
@@ -451,7 +452,7 @@
     <templates:ActionTemplateSelector.AnimatePositionBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:AnimatePositionBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel>
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -468,7 +469,7 @@
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" 
                            Margin="10 10 0 10" Text="{Binding Resources.Brick_GlideToGlide, Source={StaticResource LocalizedStrings}}" />
-                <formulas:FormulaButton Grid.Row="0" Grid.Column="2" Formula="{Binding Duration, Mode=TwoWay}" 
+                <formulaControls:FormulaButton Grid.Row="0" Grid.Column="2" Formula="{Binding Duration, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
                 <TextBlock Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" FontSize="24" 
                            Margin="10 10 0 10" Text="{Binding Resources.Brick_Seconds, Source={StaticResource LocalizedStrings}}" />
@@ -477,11 +478,11 @@
                            Text="{Binding Resources.Brick_GlideToTo, Source={StaticResource LocalizedStrings}}" />
                 <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" 
                            Text="X" />
-                <formulas:FormulaButton Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Formula="{Binding ToX, Mode=TwoWay}" 
+                <formulaControls:FormulaButton Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Formula="{Binding ToX, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
 
                 <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="Y" />
-                <formulas:FormulaButton Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Formula="{Binding ToY, Mode=TwoWay}" 
+                <formulaControls:FormulaButton Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Formula="{Binding ToY, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               </Grid>
 
@@ -489,7 +490,7 @@
             </StackPanel>
 
 
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.AnimatePositionBrick>
@@ -499,7 +500,7 @@
     <templates:ActionTemplateSelector.ChangeVolumeBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ChangeVolumeBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -510,11 +511,11 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_ChangeVolumeBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativePercentage, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding RelativePercentage, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.ChangeVolumeBrick>
@@ -522,7 +523,7 @@
     <templates:ActionTemplateSelector.SpeakBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SpeakBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel Orientation="Vertical">
               <TextBlock VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Speak, Source={StaticResource LocalizedStrings}}" 
@@ -530,7 +531,7 @@
               <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Text="{Binding Value, Mode=TwoWay}" IsEnabled="{Binding IsAttached}" />
             </StackPanel>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.SpeakBrick>
@@ -538,9 +539,9 @@
     <templates:ActionTemplateSelector.StopSoundsBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:StopSoundsBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_StopAllSounds, Source={StaticResource LocalizedStrings}}" Margin="10 10 0 10" FontSize="24" />
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.StopSoundsBrick>
@@ -548,7 +549,7 @@
     <templates:ActionTemplateSelector.SetVolumeBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetVolumeBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -559,11 +560,11 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetVolumeTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding Percentage, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Percentage, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.SetVolumeBrick>
@@ -571,16 +572,16 @@
     <templates:ActionTemplateSelector.PlaySoundBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:PlaySoundBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel>
               <TextBlock TextWrapping="Wrap" FontSize="24" Margin="10 10 0 10" 
                            Text="{Binding Resources.Brick_PlaySound, Source={StaticResource LocalizedStrings}}" />
-              <listPicker:ListPicker ItemTemplate="{StaticResource ListBoxSoundItem}" 
+              <listPickerControl:ListPicker ItemTemplate="{StaticResource ListBoxSoundItem}" 
                                      PageItemTemplate="{StaticResource PageListBoxSoundItem}" 
                                      ItemsSource="{Binding SpriteEditorViewModel.Sounds, Source={StaticResource Locator}, Mode=OneTime}" 
                                      SelectedItem="{Binding Value, Mode=TwoWay}" IsEnabled="{Binding IsAttached}" Margin="10 10 0 10" />
             </StackPanel>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.PlaySoundBrick>
@@ -590,7 +591,7 @@
     <templates:ActionTemplateSelector.ChangeBrightnessBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ChangeBrightnessBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -601,11 +602,11 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_ChangeBrightnessBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativePercentage, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding RelativePercentage, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.ChangeBrightnessBrick>
@@ -613,7 +614,7 @@
     <templates:ActionTemplateSelector.ChangeTransparencyBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ChangeTransparencyBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -624,11 +625,11 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_ChangeGhostEffectBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativePercentage, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding RelativePercentage, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.ChangeTransparencyBrick>
@@ -636,7 +637,7 @@
     <templates:ActionTemplateSelector.ChangeSizeBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ChangeSizeBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -647,11 +648,11 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_ChangeSizeBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding RelativePercentage, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding RelativePercentage, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.ChangeSizeBrick>
@@ -659,11 +660,11 @@
     <templates:ActionTemplateSelector.ResetGraphicPropertiesBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ResetGraphicPropertiesBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_ClearGraphicEffects, Source={StaticResource LocalizedStrings}}" 
                          Margin="10 10 0 10" FontSize="24" />
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.ResetGraphicPropertiesBrick>
@@ -671,9 +672,9 @@
     <templates:ActionTemplateSelector.HideBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:HideBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_Hide, Source={StaticResource LocalizedStrings}}" Margin="10 10 0 10" FontSize="24" />
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.HideBrick>
@@ -681,9 +682,9 @@
     <templates:ActionTemplateSelector.ShowBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ShowBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_Show, Source={StaticResource LocalizedStrings}}" Margin="10 10 0 10" FontSize="24" />
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.ShowBrick>
@@ -691,9 +692,9 @@
     <templates:ActionTemplateSelector.NextCostumeBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:NextCostumeBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_NextCostume, Source={StaticResource LocalizedStrings}}" Margin="10 10 0 10" FontSize="24" />
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.NextCostumeBrick>
@@ -701,10 +702,10 @@
     <templates:ActionTemplateSelector.SetCostumeBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetCostumeBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel>
               <TextBlock TextWrapping="Wrap" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_SetCostume, Source={StaticResource LocalizedStrings}}" />
-              <listPicker:ListPicker 
+              <listPickerControl:ListPicker 
                   ItemTemplate="{StaticResource ListBoxCostumeItem}" 
                   PageItemTemplate="{StaticResource PageListBoxCostumeItem}" 
                   ItemsSource="{Binding SpriteEditorViewModel.Costumes, Source={StaticResource Locator}, Mode=OneTime}" 
@@ -712,7 +713,7 @@
                   IsEnabled="{Binding IsAttached}" 
                   Margin="10 10 0 10" />
             </StackPanel>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.SetCostumeBrick>
@@ -720,7 +721,7 @@
     <templates:ActionTemplateSelector.SetSizeBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetSizeBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -731,11 +732,11 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetSizeTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding Percentage, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Percentage, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.SetSizeBrick>
@@ -743,7 +744,7 @@
     <templates:ActionTemplateSelector.SetTransparencyBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetTransparencyBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -754,11 +755,11 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetGhostEffectTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding Percentage, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Percentage, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.SetTransparencyBrick>
@@ -766,7 +767,7 @@
     <templates:ActionTemplateSelector.SetBrightnessBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetBrightnessBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -777,11 +778,11 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetBrightnessTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding Percentage, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Percentage, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.SetBrightnessBrick>
@@ -791,11 +792,11 @@
     <templates:ActionTemplateSelector.ForeverBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ForeverBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_Forever, Source={StaticResource LocalizedStrings}}" 
                          Margin="10 10 0 10" FontSize="24" />
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.ForeverBrick>
@@ -803,11 +804,11 @@
     <templates:ActionTemplateSelector.EndRepeatBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:EndRepeatBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_RepeatLoopEnd, Source={StaticResource LocalizedStrings}}" 
                          Margin="10 10 0 10" FontSize="24" />
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.EndRepeatBrick>
@@ -815,11 +816,11 @@
     <templates:ActionTemplateSelector.EndForeverBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:EndForeverBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_ForeverLoopEnd, Source={StaticResource LocalizedStrings}}" 
                          Margin="10 10 0 10" FontSize="24" />
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.EndForeverBrick>
@@ -827,7 +828,7 @@
     <templates:ActionTemplateSelector.CommentBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:CommentBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel Orientation="Vertical">
               <TextBlock VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Note, Source={StaticResource LocalizedStrings}}" 
@@ -835,7 +836,7 @@
               <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Center"
                          Text="{Binding Value, Mode=TwoWay}" IsEnabled="{Binding IsAttached}" />
             </StackPanel>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.CommentBrick>
@@ -843,7 +844,7 @@
     <templates:ActionTemplateSelector.DelayBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:DelayBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -854,13 +855,13 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Wait, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding Duration, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Duration, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Seconds, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.DelayBrick>
@@ -868,7 +869,7 @@
     <templates:ActionTemplateSelector.RepeatBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:RepeatBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -879,13 +880,13 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Repeat, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding Count, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Count, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Times, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.RepeatBrick>
@@ -893,7 +894,7 @@
     <templates:ActionTemplateSelector.BroadcastSendBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:BroadcastBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.RowDefinitions>
                 <RowDefinition />
@@ -906,7 +907,7 @@
 
               <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" 
                            Text="{Binding Resources.Brick_Broadcast, Source={StaticResource LocalizedStrings}}" />
-              <listPicker:ListPicker Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+              <listPickerControl:ListPicker Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                                      ItemTemplate="{StaticResource ListBoxBroadcastItem}" 
                                      PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" 
                                      ItemsSource="{Binding SpriteEditorViewModel.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" 
@@ -917,7 +918,7 @@
                         Command="{Binding SpriteEditorViewModel.AddBroadcastMessageCommand, Source={StaticResource Locator}}" 
                         CommandParameter="{Binding}" IsEnabled="{Binding IsAttached}" />-->
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.BroadcastSendBrick>
@@ -925,7 +926,7 @@
     <templates:ActionTemplateSelector.BroadcastSendBlockingBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:BroadcastSendBlockingBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.RowDefinitions>
                 <RowDefinition />
@@ -938,7 +939,7 @@
 
               <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" 
                            Text="{Binding Resources.Brick_BroadcastWait, Source={StaticResource LocalizedStrings}}" />
-              <listPicker:ListPicker Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+              <listPickerControl:ListPicker Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                                      ItemTemplate="{StaticResource ListBoxBroadcastItem}" 
                                      PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" 
                                      ItemsSource="{Binding SpriteEditorViewModel.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" 
@@ -949,7 +950,7 @@
                         Command="{Binding SpriteEditorViewModel.AddBroadcastMessageCommand, Source={StaticResource Locator}}" 
                         CommandParameter="{Binding}" IsEnabled="{Binding IsAttached}" />-->
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.BroadcastSendBlockingBrick>
@@ -957,7 +958,7 @@
     <templates:ActionTemplateSelector.IfBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:IfBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -968,13 +969,13 @@
               <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                              Text="{Binding Resources.Brick_IfLogicBegin, Source={StaticResource LocalizedStrings}}"
                              Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="1" Formula="{Binding Condition, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Condition, Mode=TwoWay}" 
                                                  IsEnabled="{Binding IsAttached}"/>
               <TextBlock Grid.Column="2" VerticalAlignment="Center" 
                              Text="{Binding Resources.Brick_IfLogicBeginTrue, Source={StaticResource LocalizedStrings}}"
                              Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.IfBrick>
@@ -982,13 +983,13 @@
     <templates:ActionTemplateSelector.ElseBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ElseBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <TextBlock VerticalAlignment="Center" 
                              Text="{Binding Resources.Brick_IfLogicElse, Source={StaticResource LocalizedStrings}}"
                              Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.ElseBrick>
@@ -996,13 +997,13 @@
     <templates:ActionTemplateSelector.EndIfBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:EndIfBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <TextBlock VerticalAlignment="Center" 
                              Text="{Binding Resources.Brick_IfLogicEnd, Source={StaticResource LocalizedStrings}}"
                              Margin="10 10 0 10" FontSize="24" />
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.EndIfBrick>
@@ -1012,7 +1013,7 @@
     <templates:ActionTemplateSelector.SetVariableBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetVariableBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.VariableBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.VariableBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <!--<Grid>
                 <Grid.RowDefinitions>
                   <RowDefinition />
@@ -1054,15 +1055,15 @@
               <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                              Text="{Binding Resources.Brick_SetVariable, Source={StaticResource LocalizedStrings}}"
                              Margin="10 10 0 10" FontSize="24" />
-              <formulas:VariableButton Grid.Column="2" Grid.Row="0" MinWidth="120" MaxWidth="300" Variable="{Binding Variable}" IsEnabled="{Binding IsAttached}"/>
+              <formulaControls:VariableButton Grid.Column="2" Grid.Row="0" MinWidth="120" MaxWidth="300" Variable="{Binding Variable}" IsEnabled="{Binding IsAttached}"/>
 
               <TextBlock Grid.Column="0" Grid.Row="1"
                            Text="{Binding Resources.Brick_SetVariableTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="2" Grid.Row="1" Formula="{Binding Value, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="2" Grid.Row="1" Formula="{Binding Value, Mode=TwoWay}" 
                                                  IsEnabled="{Binding IsAttached}"/>
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.SetVariableBrick>
@@ -1070,7 +1071,7 @@
     <templates:ActionTemplateSelector.ChangeVariableBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ChangeVariableBrick}">
-          <bricks:NormalBrick Background="{Binding StaticTheme.VariableBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{Binding StaticTheme.VariableBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.RowDefinitions>
                 <RowDefinition />
@@ -1086,15 +1087,15 @@
               <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                              Text="{Binding Resources.Brick_ChangeVariable, Source={StaticResource LocalizedStrings}}"
                              Margin="10 10 0 10" FontSize="24" />
-              <formulas:VariableButton Grid.Column="2" Grid.Row="0" MinWidth="120" MaxWidth="300" Variable="{Binding Variable}" IsEnabled="{Binding IsAttached}"/>
+              <formulaControls:VariableButton Grid.Column="2" Grid.Row="0" MinWidth="120" MaxWidth="300" Variable="{Binding Variable}" IsEnabled="{Binding IsAttached}"/>
 
               <TextBlock Grid.Column="0" Grid.Row="1"
                            Text="{Binding Resources.Brick_ChangeVariableBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-              <formulas:FormulaButton Grid.Column="2" Grid.Row="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
+              <formulaControls:FormulaButton Grid.Column="2" Grid.Row="1" Formula="{Binding RelativeValue, Mode=TwoWay}" 
                                                  IsEnabled="{Binding IsAttached}"/>
             </Grid>
-          </bricks:NormalBrick>
+          </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
     </templates:ActionTemplateSelector.ChangeVariableBrick>

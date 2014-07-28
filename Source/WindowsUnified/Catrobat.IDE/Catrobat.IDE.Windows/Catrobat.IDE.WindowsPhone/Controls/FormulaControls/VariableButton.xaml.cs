@@ -1,4 +1,12 @@
-﻿using Catrobat.IDE.Core.Annotations;
+﻿using System;
+using System.ComponentModel;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Services;
@@ -7,16 +15,8 @@ using Catrobat.IDE.Core.UI.Converters;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
-using System;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.Formulas
+namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
 {
     public partial class VariableButton : UserControl, INotifyPropertyChanged
     {
