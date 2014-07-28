@@ -24,9 +24,13 @@ using namespace Microsoft::WRL;
 using namespace Windows::Phone::Graphics::Interop;
 using namespace Windows::Phone::Input::Interop;
 using namespace Windows::Graphics::Display;
+using namespace Windows::System::Threading;
+using namespace Windows::Phone::UI::Input;
 
 namespace PhoneDirect3DXamlAppComponent
 {
+    //--------------------------------------------------------------------------------------
+
     Direct3DBackground::Direct3DBackground(Windows::UI::Core::CoreWindow^ coreWindow) :
         m_coreWindow(coreWindow),
         m_timer(ref new BasicTimer())
@@ -35,12 +39,17 @@ namespace PhoneDirect3DXamlAppComponent
         m_initialized = false;
 
         InitEventHandlers();
+        m_renderLoopWorker = nullptr;
     }
+
+    //--------------------------------------------------------------------------------------
 
     Direct3DBackground::~Direct3DBackground()
     {
         m_initialized = false;
     }
+
+    //--------------------------------------------------------------------------------------
 
     Direct3DBackground::InitEventHandlers()
     {
@@ -56,16 +65,115 @@ namespace PhoneDirect3DXamlAppComponent
         m_coreWindow->PointerExited +=
             ref new TypedEventHandler<CoreWindow^, PointerEventArgs^>(this, &Direct3DBackground::OnPointerExited);
 
+        HardwareButtons::BackPressed +=
+            ref new EventHandler<BackPressedEventArgs^>(this, &Direct3DBackground::OnHardwareBackButtonPressed);
+
 
     }
 
-    IDrawingSurfaceBackgroundContentProvider^ Direct3DBackground::CreateContentProvider()
+    //--------------------------------------------------------------------------------------
+
+    void Direct3DBackground::StartRenderLoop()
     {
-        ComPtr<Direct3DContentProvider> provider = Make<Direct3DContentProvider>(this);
-        return reinterpret_cast<IDrawingSurfaceBackgroundContentProvider^>(provider.Detach());
+        // TODO: FIXXME
+
+        // If the animation render loop is already running then do not start another thread.
+        if (m_renderLoopWorker != nullptr && m_renderLoopWorker->Status == Windows::Foundation::AsyncStatus::Started)
+        {
+            return;
+        }
+
+        // Create a task that will be run on a background thread.
+        auto workItemHandler = ref new WorkItemHandler([this](IAsyncAction ^ action)
+        {
+            // Calculate the updated frame and render once per vertical blanking interval.
+            while (action->Status == Windows::Foundation::AsyncStatus::Started)
+            {
+                //critical_section::scoped_lock lock(m_criticalSection);
+                //Update();
+                //m_renderer->Render();
+                //m_deviceResources->Present();
+
+                //if (!m_haveFocus || (m_updateState == UpdateEngineState::TooSmall))
+                //{
+                //    // The app is in an inactive state so stop rendering
+                //    // This optimizes for power and allows the framework to become more queiecent
+                //    break;
+                //}
+            }
+        });
+
+        // Run task on a dedicated high priority background thread.
+        m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
+    }
+
+    //--------------------------------------------------------------------------------------
+
+    void Direct3DBackground::StopRenderLoop()
+    {
+        m_renderLoopWorker->Cancel();
+    }
+
+    //--------------------------------------------------------------------------------------
+
+    void Direct3DBackground::Suspend()
+    {
+        // TODO: implement me
+
+        //// Save application state.
+        //switch (m_updateState)
+        //{
+        //case UpdateEngineState::Dynamics:
+        //    // Game is in the active game play state, Stop Game Timer and Pause play and save state
+        //    m_uiControl->SetAction(GameInfoOverlayCommand::None);
+        //    SetGameInfoOverlay(GameInfoOverlayState::Pause);
+        //    m_updateStateNext = UpdateEngineState::WaitingForPress;
+        //    m_pressResult = PressResultState::ContinueLevel;
+        //    m_game->PauseGame();
+        //    break;
+
+        //case UpdateEngineState::WaitingForResources:
+        //case UpdateEngineState::WaitingForPress:
+        //    m_updateStateNext = m_updateState;
+        //    break;
+
+        //default:
+        //    // any other state don't save as next state as they are trancient states and have already set m_updateStateNext
+        //    break;
+        //}
+        //m_updateState = UpdateEngineState::Suspended;
+
+        //m_controller->Active(false);
+        //m_game->OnSuspending();
+    }
+
+    //--------------------------------------------------------------------------------------
+
+    void Direct3DBackground::Resume()
+    {
+        // TODO: implement me
+
+        //if (m_haveFocus)
+        //{
+        //    m_updateState = m_updateStateNext;
+        //}
+        //else
+        //{
+        //    m_updateState = UpdateEngineState::Deactivated;
+        //}
+
+        //if (m_updateState == UpdateEngineState::WaitingForPress)
+        //{
+        //    m_uiControl->SetAction(GameInfoOverlayCommand::TapToContinue);
+        //    m_controller->WaitForPress();
+        //}
+        //m_game->OnResuming();
+
     }
 
     // Event Handlers
+    //--------------------------------------------------------------------------------------
+
     void Direct3DBackground::OnPointerPressed(
         _In_ CoreWindow^ sender,
         _In_ PointerEventArgs^ args
@@ -156,6 +264,8 @@ namespace PhoneDirect3DXamlAppComponent
         }
     }
 
+    //--------------------------------------------------------------------------------------
+
     void Direct3DBackground::OnPointerMoved(
         _In_ CoreWindow^ sender,
         _In_ PointerEventArgs^ args
@@ -163,6 +273,8 @@ namespace PhoneDirect3DXamlAppComponent
     { 
         // TODO: implement me
     }
+    
+    //--------------------------------------------------------------------------------------
 
     void Direct3DBackground::OnPointerReleased(
         _In_ CoreWindow^ sender,
@@ -172,6 +284,8 @@ namespace PhoneDirect3DXamlAppComponent
         // TODO: implement me
     }
 
+    //--------------------------------------------------------------------------------------
+
     void Direct3DBackground::OnPointerExited(
         _In_ CoreWindow^ sender,
         _In_ PointerEventArgs^ args
@@ -179,6 +293,32 @@ namespace PhoneDirect3DXamlAppComponent
     {
        // TODO: implement me
     }
+
+    //----------------------------------------------------------------------
+
+    void Direct3DBackground::OnHardwareBackButtonPressed(
+        _In_ Platform::Object^ sender,
+        BackPressedEventArgs ^args
+        )
+    {
+        // TODO: implement me
+
+        if (/*m_state == MoveLookControllerState::Active*/)
+        {
+            // The game is currently in active play mode, so hitting the hardware back button
+            // will cause the game to pause.
+            //m_pausePressed = true;
+            args->Handled = false;
+        }
+        else
+        {
+            // The game is not currently in active play mode, so take the default behavior
+            // for the hardware back button.
+            args->Handled = false;
+        }
+    }
+
+    //--------------------------------------------------------------------------------------
 
     HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host, _In_ ID3D11Device1* device)
     {
@@ -207,12 +347,16 @@ namespace PhoneDirect3DXamlAppComponent
         return S_OK;
     }
 
+    //--------------------------------------------------------------------------------------
+
     void Direct3DBackground::Disconnect()
     {
         //TODO: do a clean disconnect
         m_renderer = nullptr;
         m_projectRenderer = nullptr;
     }
+
+    //--------------------------------------------------------------------------------------
 
     HRESULT Direct3DBackground::PrepareResources(_In_ const LARGE_INTEGER* presentTargetTime, _Inout_ DrawingSurfaceSizeF* desiredRenderTargetSize)
     {
@@ -231,6 +375,8 @@ namespace PhoneDirect3DXamlAppComponent
 
         return S_OK;
     }
+
+    //--------------------------------------------------------------------------------------
 
     HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
     {

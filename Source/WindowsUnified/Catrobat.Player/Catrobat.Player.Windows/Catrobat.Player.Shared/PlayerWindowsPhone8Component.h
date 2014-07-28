@@ -19,6 +19,11 @@ public ref class Direct3DBackground sealed
 public:
     Direct3DBackground(Windows::UI::Core::CoreWindow^ coreWindow);
 	virtual ~Direct3DBackground();
+    void StartRenderLoop();
+    void StopRenderLoop();
+    void Suspend();
+    void Resume();
+    Concurrency::critical_section& GetCriticalSection() { return m_criticalSection; }
 
 	event RequestAdditionalFrameHandler^ RequestAdditionalFrame;
 
@@ -47,6 +52,11 @@ protected:
         _In_ Windows::UI::Core::CoreWindow^ sender,
         _In_ Windows::UI::Core::PointerEventArgs^ args
         );
+    // TODO: move this code to phone project
+    void OnHardwareBackButtonPressed(
+        _In_ Platform::Object^ sender,
+        Windows::Phone::UI::Input::BackPressedEventArgs ^args
+        );
 
 internal:
 	HRESULT Connect(_In_ IDrawingSurfaceRuntimeHostNative* host, _In_ ID3D11Device1* device);
@@ -56,16 +66,18 @@ internal:
 	HRESULT Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView);
 
 private:
-	Renderer^ m_renderer;
-	ProjectRenderer^ m_projectRenderer;
-	BasicTimer^ m_timer;
-	Windows::Foundation::Rect m_originalWindowsBounds;
-	bool m_renderingErrorOccured;
-    bool m_initialized;
-    ID3D11DeviceContext1* m_context;
-    ID3D11Device1* m_device;
+	Renderer^                                       m_renderer;
+	ProjectRenderer^                                m_projectRenderer;
+	BasicTimer^                                     m_timer;
+	Windows::Foundation::Rect                       m_originalWindowsBounds;
+	bool                                            m_renderingErrorOccured;
+    bool                                            m_initialized;
+    ID3D11DeviceContext1*                           m_context;
+    ID3D11Device1*                                  m_device;
 
-    Windows::UI::Core::CoreWindow^ m_coreWindow;
+    Windows::UI::Core::CoreWindow^                  m_coreWindow;
+    Concurrency::critical_section                   m_criticalSection;
+    Windows::Foundation::IAsyncAction^              m_renderLoopWorker;
 };
 
 }

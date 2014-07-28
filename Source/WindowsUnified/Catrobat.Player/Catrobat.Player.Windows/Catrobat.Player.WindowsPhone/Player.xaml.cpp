@@ -60,6 +60,33 @@ m_playActive(true)
     m_main->ProjectName = "Default";
 
     m_main->RenderResolution = m_main->NativeResolution;
+
+    m_main->StartRenderLoop();
+}
+
+//----------------------------------------------------------------------
+
+void Player::OnSuspending()
+{
+    //TODO: implement me
+
+    //critical_section::scoped_lock lock(m_main->GetCriticalSection());
+    //m_main->Suspend();
+    //// Stop rendering when the app is suspended.
+    //m_main->StopRenderLoop();
+
+    //m_deviceResources->Trim();
+
+}
+
+//----------------------------------------------------------------------
+
+void Player::OnResuming()
+{
+    //TODO: implement me
+
+    //m_main->Resume();
+    //m_main->StartRenderLoop();
 }
 
 //----------------------------------------------------------------------
