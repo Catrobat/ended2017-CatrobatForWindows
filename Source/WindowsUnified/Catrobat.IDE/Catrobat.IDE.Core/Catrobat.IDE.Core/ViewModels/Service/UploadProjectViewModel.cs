@@ -191,7 +191,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             Context = message.Content;
         }
 
-        private void CurrentProjectChangedChangedMessageAction(GenericMessage<Program> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
             if (CurrentProject != null)
@@ -219,7 +219,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                  ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedChangedMessageAction);
+                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
         }
 
         #region Callbacks

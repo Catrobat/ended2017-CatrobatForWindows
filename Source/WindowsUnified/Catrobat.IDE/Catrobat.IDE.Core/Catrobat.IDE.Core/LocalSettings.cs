@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Core
 
         public string CurrentToken { get; set; }
 
-        public string CurrentUsername { get; set; }
+        public string CurrentUserName { get; set; }
 
         public string CurrentUserRecoveryHash { get; set; }
 

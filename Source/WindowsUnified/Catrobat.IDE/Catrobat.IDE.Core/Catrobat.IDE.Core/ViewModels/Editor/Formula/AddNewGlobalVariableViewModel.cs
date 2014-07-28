@@ -31,13 +31,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             }
         }
 
-        public Sprite SelectedSprite
+        public Sprite CurrentSprite
         {
             get { return _selectedSprite; }
             set
             {
                 _selectedSprite = value;
-                RaisePropertyChanged(() => SelectedSprite);
+                RaisePropertyChanged(() => CurrentSprite);
             }
         }
 
@@ -67,7 +67,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         private bool SaveCommand_CanExecute()
         {
             return !string.IsNullOrEmpty(UserVariableName) &&
-                   !VariableHelper.VariableNameExists(CurrentProject, SelectedSprite, UserVariableName);
+                   !VariableHelper.VariableNameExists(CurrentProject, CurrentSprite, UserVariableName);
         }
 
         #endregion
@@ -76,7 +76,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private void SaveAction()
         {
-            VariableHelper.AddGlobalVariable(CurrentProject, new GlobalVariable { Name = UserVariableName });
+            var newVariable = new GlobalVariable {Name = UserVariableName};
+            CurrentProject.GlobalVariables.Add(newVariable);
             base.GoBackAction();
         }
 
@@ -103,7 +104,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private void SelectedSpriteChangedMessageAction(GenericMessage<Sprite> message)
         {
-            SelectedSprite = message.Content;
+            CurrentSprite = message.Content;
         }
 
         #endregion

@@ -35,7 +35,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             navigationService.CurrentView = typeof(OnlineProjectViewModel);
 
             var viewModel = new OnlineProjectViewModel();
-            viewModel.DownloadCommand.Execute(null);
+            //viewModel.DownloadCommand.Execute(null);
 
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(ProjectImportViewModel), navigationService.CurrentView);

@@ -71,7 +71,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\PictureServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\PlayerLauncherServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\PortableUIElementsConvertionServiceWindowsShared.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ProjectImporterServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SensorServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ShareServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SoundPlayerServiceWindowsShared.cs" />

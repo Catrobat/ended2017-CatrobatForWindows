@@ -105,7 +105,7 @@
     <Compile Include="Services\NavigationServiceTest.cs" />
     <Compile Include="Services\PictureServiceTest.cs" />
     <Compile Include="Services\SensorServiceTest.cs" />
-    <Compile Include="Services\Storage\NotificationServiceTest.cs" />
+    <Compile Include="Services\NotificationServiceTest.cs" />
     <Compile Include="Services\Storage\ResourceLoaderFactoryTest.cs" />
     <Compile Include="Services\Storage\ResourcesTest.cs" />
     <Compile Include="Services\Storage\StorageFactoryTest.cs" />
@@ -161,6 +161,7 @@
     <Compile Include="Tests\ViewModels\Editor\Costumes\NewCostumeSourceSelectionViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Main\MainViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Main\AddNewProjectViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Main\ProjectImportViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Main\ProjectSettingsViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Main\ProjectDetailViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Service\OnlineProjectViewModelTests.cs" />

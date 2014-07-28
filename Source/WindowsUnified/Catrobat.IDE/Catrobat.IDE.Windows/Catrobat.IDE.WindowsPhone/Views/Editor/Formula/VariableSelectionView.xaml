@@ -8,53 +8,81 @@
   mc:Ignorable="d"
   DataContext="{Binding VariableSelectionViewModel, Source={StaticResource Locator}}">
 
-  <Grid x:Name="LayoutRoot" 
-        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
         Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
-    <!--TitlePanel contains the name of the application and page title-->
     <StackPanel Grid.Row="0" Margin="12,17,0,0">
-      <TextBlock Text="{Binding Resources.Editor_SelectVariablesViewHeader, Source={StaticResource LocalizedStrings}}" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
+      <TextBlock 
+        Text="{Binding Resources.Editor_SelectVariablesViewHeader, 
+        Source={StaticResource LocalizedStrings}}" 
+        Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+        Source={StaticResource ThemeChooser}}"/>
     </StackPanel>
 
     <Pivot Grid.Row="1" SelectedIndex="{Binding IsLocalView, 
       Converter={StaticResource BoolToSelectedPivotItemConverter}, 
       ConverterParameter=false, Mode=TwoWay }" Margin="0 -20 0 0" >
-      <!-- Pivot local variables -->
-      <PivotItem Name="PivotLocal" Header="{Binding Resources.Editor_LocalVariables, Source={StaticResource LocalizedStrings}}">
-        <ListBox ItemsSource="{Binding LocalVariables}" SelectionMode="Single" SelectedItem="{Binding SelectedLocalVariable, Mode=TwoWay}">
-          <ListBox.ItemTemplate>
+      <PivotItem Name="PivotLocal" 
+        Header="{Binding Resources.Editor_LocalVariables, 
+        Source={StaticResource LocalizedStrings}}">
+        <ListView ItemsSource="{Binding CurrentSprite.LocalVariables}" 
+          SelectionMode="Single" 
+          SelectedItem="{Binding SelectedLocalVariable, Mode=TwoWay}">
+          <ListView.ItemTemplate>
             <DataTemplate>
               <Grid DataContext="{Binding}">
-                  <TextBlock Grid.Column="0" FontSize="45" Margin="5" 
-                             VerticalAlignment="Center" Text="{Binding Name}"
-                             KeyDown="TextBoxLocalVariableName_KeyDown" />
+                  <TextBlock Grid.Column="0" FontSize="35" Margin="5" 
+                    VerticalAlignment="Center" Text="{Binding Name}"
+                    KeyDown="TextBoxLocalVariableName_KeyDown" />
               </Grid>
             </DataTemplate>
-          </ListBox.ItemTemplate>
-        </ListBox>
+          </ListView.ItemTemplate>
+        </ListView>
       </PivotItem>
 
-      <!-- Pivot global variables -->
-      <PivotItem Name="PivotGlobal" Header="{Binding Resources.Editor_GlobalVariables, Source={StaticResource LocalizedStrings}}">
-        <ListBox ItemsSource="{Binding GlobalVariables}" SelectionMode="Single" SelectedItem="{Binding SelectedGlobalVariable, Mode=TwoWay}">
-          <ListBox.ItemTemplate>
+      <PivotItem Name="PivotGlobal" 
+        Header="{Binding Resources.Editor_GlobalVariables, 
+        Source={StaticResource LocalizedStrings}}">
+        <ListView ItemsSource="{Binding CurrentProject.GlobalVariables}" 
+          SelectionMode="Single" 
+          SelectedItem="{Binding SelectedGlobalVariable, Mode=TwoWay}">
+          <ListView.ItemTemplate>
             <DataTemplate>
               <Grid DataContext="{Binding}">
-                  <TextBlock Grid.Column="0" FontSize="45" Margin="5" 
+                  <TextBlock Grid.Column="0" FontSize="35" Margin="5" 
                              VerticalAlignment="Center" Text="{Binding Name}"
                              KeyDown="TextBoxGlobalVariableName_KeyDown" />
               </Grid>
             </DataTemplate>
-          </ListBox.ItemTemplate>
-        </ListBox>
+          </ListView.ItemTemplate>
+        </ListView>
       </PivotItem>
+    </Pivot>
+  </Grid>
 
-      <!--<i:Interaction.Triggers>
+  <Page.BottomAppBar>
+    <CommandBar RequestedTheme="Dark" Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
+      <CommandBar.PrimaryCommands>
+        <AppBarButton Icon="Add"
+                      Label="{Binding Resources.Editor_ButtonAdd, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding AddVariableCommand}"/>
+        <AppBarButton Icon="Edit" 
+                      Label="{Binding Resources.Editor_ButtonChange, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding EditVariableCommand}"/>
+        <AppBarButton Icon="Delete" 
+                      Label="{Binding Resources.Editor_ButtonDelete, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding DeleteVariableCommand}"/>
+      </CommandBar.PrimaryCommands>
+    </CommandBar>
+  </Page.BottomAppBar>
+  <!--<i:Interaction.Triggers>
         <apu:SelectedPivotItemChangedTrigger>
           <apu:SwitchAppBarAction>
             <apu:AppBar Id="0">
@@ -88,7 +116,4 @@
           </apu:SwitchAppBarAction>
         </apu:SelectedPivotItemChangedTrigger>
       </i:Interaction.Triggers>-->
-
-    </Pivot>
-  </Grid>
 </views:ViewPageBase>

@@ -46,13 +46,13 @@ namespace Catrobat.IDE.Core
 
         public string CurrentUserName
         {
-            get { return LocalSettings.CurrentUsername; }
+            get { return LocalSettings.CurrentUserName; }
 
             set
             {
-                if (LocalSettings.CurrentUsername == value) return;
+                if (LocalSettings.CurrentUserName == value) return;
 
-                LocalSettings.CurrentUsername = value;
+                LocalSettings.CurrentUserName = value;
                 RaisePropertyChanged();
             }
         }

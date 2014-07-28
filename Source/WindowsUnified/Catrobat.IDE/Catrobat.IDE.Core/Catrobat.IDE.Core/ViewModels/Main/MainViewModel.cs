@@ -37,7 +37,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private ObservableCollection<LocalProjectHeader> _localProjects;
         private CatrobatContextBase _context;
         private OnlineProgramsCollection _onlineProjects;
-        //private CancellationTokenSource _taskCancellation;
 
         #endregion
 
@@ -321,8 +320,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
-
-            //_taskCancellation = new CancellationTokenSource();
         }
 
         #region MessageBoxCallback
@@ -352,7 +349,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             await App.SaveContext(CurrentProject);
         }
 
-        private async void CopyProjectMessageCallback(MessageboxResult result) // TODO: async, should this be awaitable?
+        private async void CopyProjectMessageCallback(MessageboxResult result)
         {
             _dialogResult = result;
 

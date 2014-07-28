@@ -174,7 +174,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region Message Actions
 
-
         private async void CurrentProjectHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
         {
             CurrentProjectHeader = message.Content;

@@ -53,11 +53,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("GatedTests")]
         public void ChangeUserActionTest()
         {
-            Assert.AreEqual(0, "also check for context");
-
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
@@ -68,11 +66,28 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
                 ProjectName = "TestProjectName",
                 ProjectDescription = "TestProjectDescription"
             };
+            var localSettings = new LocalSettings();
+            var context = new CatrobatContext
+            {
+                LocalSettings = localSettings,
+                CurrentToken = "TestToken",
+                CurrentUserName = "TestUserName",
+                CurrentUserEmail = "TestUserEmail"
+            };
+            var messageContext = new GenericMessage<CatrobatContextBase>(context);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.ContextListener);
+            
             viewModel.ChangeUserCommand.Execute(null);
 
             Assert.IsTrue(viewModel.ProjectName == "");
             Assert.IsTrue(viewModel.ProjectDescription == "");
-            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
+            Assert.IsTrue(viewModel.Context.CurrentToken == "");
+            Assert.IsTrue(viewModel.Context.CurrentUserName == "");
+            Assert.IsTrue(viewModel.Context.CurrentUserEmail == "");
+            Assert.IsTrue(viewModel.Context.LocalSettings.CurrentToken == "");
+            Assert.IsTrue(viewModel.Context.LocalSettings.CurrentUserName == "");
+            Assert.IsTrue(viewModel.Context.LocalSettings.CurrentUserEmail == "");
+            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(UploadProjectLoginViewModel), navigationService.CurrentView);
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
