@@ -357,7 +357,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         private void checkIfValueIsInRange(bool pressed_accept)
         {
             
-            if (btnBrushThickness.Content.ToString() == "")
+            if (btnBrushThickness.Content == null)
             {
                 btnValue0.IsEnabled = true;
                 btnValue1.IsEnabled = true;
@@ -435,7 +435,11 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             if (uctrlOwnKeyboard.Visibility == Visibility.Visible)
             {
-                string slider_thickness_text_box_value = btnBrushThickness.Content.ToString();
+                string slider_thickness_text_box_value = string.Empty;
+                if(btnBrushThickness.Content != null)
+                {
+                    slider_thickness_text_box_value = btnBrushThickness.Content.ToString();
+                }
                 Int32 slider_thickness_text_box_int_value;
 
                 if (!slider_thickness_text_box_value.Equals(""))
@@ -481,7 +485,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 string get_clicked_button_number = button.Name.Substring(8);
 
-                if (btnBrushThickness.Content.ToString().Length < 2)
+                if (btnBrushThickness.Content == null || btnBrushThickness.Content.ToString().Length < 2)
                 {
                     btnBrushThickness.Content += get_clicked_button_number;
                 }
