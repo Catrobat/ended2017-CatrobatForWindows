@@ -155,8 +155,8 @@ namespace Catrobat.Paint.WindowsPhone.View
         private void changeValuesOfColourTextboxes(byte red, byte green, byte blue, byte alpha)
         {
             tbRedValue.Text = red.ToString();
-            tbBlueValue.Text = green.ToString();
-            tbGreenValue.Text = blue.ToString();
+            tbBlueValue.Text = blue.ToString();
+            tbGreenValue.Text = green.ToString();
             tbAlphaValue.Text = ((Int32)((Double)(alpha) / 2.55)).ToString();
         }
 

@@ -5,6 +5,7 @@ using Catrobat.Paint.Phone.Tool;
 using Catrobat.Paint.WindowsPhone.View;
 using Catrobat.Paint.WindowsPhone.Tool;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Catrobat.Paint.Phone.Listener
 {
@@ -32,10 +33,10 @@ namespace Catrobat.Paint.Phone.Listener
 
 
         // TODO: public void SliderThickness_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        public void SliderThickness_ValueChanged(object sender)
+        /*public void SliderThickness_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            // TODO: PocketPaintApplication.GetInstance().PaintData.ThicknessSelected = Convert.ToInt32(e.NewValue);
-        }
+            
+        }*/
 
         public void BtnColBtnSelectedColor_OnClick(object sender, EventArgs e)
         {

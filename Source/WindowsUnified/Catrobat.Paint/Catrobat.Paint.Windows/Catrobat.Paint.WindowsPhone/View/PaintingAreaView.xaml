@@ -32,8 +32,8 @@
             <Grid x:Name="GridUserControl" Grid.Row="1" >
                 <UserControl x:Name="SliderThicknessControl" Height="auto" Width="auto" Visibility="Collapsed" VerticalAlignment="Bottom">
                     <Grid x:Name="SliderThicknessGrid" Background="#1F1F1F"  MinHeight="120">
-                        <Slider x:Name="SliderThickness" Background="Black" Maximum="50"  Minimum="1" Margin="0,16,140,12" ValueChanged="SliderThickness_ValueChanged"/>
-                        <RadioButton x:Name="RoundRadioButton" Content="" HorizontalAlignment="Left"  Margin="13,66,0,0"  VerticalAlignment="Top" Foreground="Black" Click="RoundRadioButon_OnClick" UseLayoutRounding="True" Background="Black" GroupName="BrushStyle" Width="132"/>
+                        <Slider x:Name="SliderThickness" Background="Black" Maximum="50"  Minimum="1" Margin="0,16,140,12"/>
+                        <RadioButton x:Name="RoundRadioButton" Content="" HorizontalAlignment="Left" IsChecked="True"  Margin="13,66,0,0"  VerticalAlignment="Top" Foreground="Black" Click="RoundRadioButon_OnClick" UseLayoutRounding="True" Background="Black" GroupName="BrushStyle" Width="132"/>
                         <RadioButton x:Name="SquareRadioButton" Content="" HorizontalAlignment="Left" Margin="150,67,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="SquareRadioButon_OnClick" GroupName="BrushStyle"/>
                         <RadioButton x:Name="TriangleRadioButton" Content="" HorizontalAlignment="Left" Margin="283,65,-51,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="TriangleRadioButon_OnClick" GroupName="BrushStyle"/>
 
