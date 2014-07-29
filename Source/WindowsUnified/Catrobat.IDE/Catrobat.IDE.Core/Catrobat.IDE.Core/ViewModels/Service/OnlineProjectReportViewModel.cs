@@ -20,15 +20,32 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private MessageboxResult _missingReportDataCallbackResult;
         private MessageboxResult _reportSuccessfullCallbackResult;
         private string _reason;
+        private OnlineProjectHeader _selectedOnlineProject;
 
         #endregion
 
         #region Properties
 
-        public CatrobatContextBase Context
+        //public CatrobatContextBase Context
+        //{
+        //    get { return _context; }
+        //    set { _context = value; RaisePropertyChanged(() => Context); }
+        //}
+
+        public OnlineProjectHeader SelectedOnlineProject
         {
-            get { return _context; }
-            set { _context = value; RaisePropertyChanged(() => Context); }
+            get
+            {
+                return _selectedOnlineProject;
+            }
+            set
+            {
+                if (ReferenceEquals(_selectedOnlineProject, value))
+                    return;
+
+                _selectedOnlineProject = value;
+                RaisePropertyChanged(() => SelectedOnlineProject);
+            }
         }
 
         public string Reason
@@ -48,13 +65,13 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         #region Commands
 
-        public RelayCommand<OnlineProjectHeader> ReportCommand { get; private set; }
+        public RelayCommand ReportCommand { get; private set; }
 
         #endregion
 
         #region Actions
 
-        private async void ReportAction(OnlineProjectHeader onlineproject)
+        private async void ReportAction()
         {
             if (string.IsNullOrEmpty(_reason))
             {
@@ -63,7 +80,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
             else
             {
-                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.ReportAsInappropriateAsync(onlineproject.ProjectId, _reason, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
+                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.ReportAsInappropriateAsync(_selectedOnlineProject.ProjectId, _reason, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
                 switch (statusResponse.statusCode)
                 {
@@ -97,18 +114,32 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #endregion
 
         #region MessageActions
-        private void ContextChangedAction(GenericMessage<CatrobatContextBase> message)
+        //private void ContextChangedAction(GenericMessage<CatrobatContextBase> message)
+        //{
+        //    Context = message.Content;
+        //}
+
+        private void SelectedOnlineProjectChangedMessageAction(GenericMessage<OnlineProjectHeader> message)
         {
-            Context = message.Content;
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                SelectedOnlineProject = message.Content;
+            });
         }
         #endregion
 
+
+        
+
         public OnlineProjectReportViewModel()
         {
-            ReportCommand = new RelayCommand<OnlineProjectHeader>(ReportAction);
+            ReportCommand = new RelayCommand(ReportAction);
 
-            Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
-                 ViewModelMessagingToken.ContextListener, ContextChangedAction);
+            //Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
+            //     ViewModelMessagingToken.ContextListener, ContextChangedAction);
+
+            Messenger.Default.Register<GenericMessage<OnlineProjectHeader>>(this,
+               ViewModelMessagingToken.SelectedOnlineProjectChangedListener, SelectedOnlineProjectChangedMessageAction);
         }
 
         #region Callbacks

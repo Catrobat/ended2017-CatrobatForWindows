@@ -16,6 +16,7 @@
         SelectedBrickListener,
         CurrentProjectChangedListener,
         LocalProjectsChangedListener,
+        SelectedOnlineProjectChangedListener,
         ContextListener,
         ThemeChooserListener,
         PinProjectHeaderListener,

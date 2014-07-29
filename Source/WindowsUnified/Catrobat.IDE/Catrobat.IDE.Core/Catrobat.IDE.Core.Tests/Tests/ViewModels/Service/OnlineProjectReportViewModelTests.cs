@@ -1,10 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
 using Catrobat.IDE.Core.Tests.Services.Common;
+using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Service;
 using System.Globalization;
 using Catrobat.IDE.Core.Tests.SampleData;
+using Catrobat.IDE.Core.CatrobatObjects;
 
 namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
 {
@@ -16,6 +19,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.UnRegisterAll();
+            ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<NotificationServiceTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<WebCommunicationTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
@@ -41,7 +45,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             {
                 Reason = "TestReason"
             };
-            viewModel.ReportCommand.Execute(onlineProjectHeader);
+            var messageContext = new GenericMessage<OnlineProjectHeader>(onlineProjectHeader);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.SelectedOnlineProjectChangedListener);
+            viewModel.ReportCommand.Execute(null);
 
             Assert.AreEqual("", viewModel.Reason);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);

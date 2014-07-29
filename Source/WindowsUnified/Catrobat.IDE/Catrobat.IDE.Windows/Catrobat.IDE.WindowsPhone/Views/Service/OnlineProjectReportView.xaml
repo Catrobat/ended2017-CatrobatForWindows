@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
     mc:Ignorable="d"
-    DataContext="{Binding MainViewModel.SelectedOnlineProject, Source={StaticResource Locator}}">
+    DataContext="{Binding OnlineProjectReportViewModel, Source={StaticResource Locator}}">
 
   <Grid x:Name="LayoutRoot" 
         Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
@@ -38,7 +38,7 @@
                  Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
                  Source={StaticResource ThemeChooser}}" />
       <TextBlock Margin="12 0 0 0" 
-                 Text="{Binding ProjectName}" 
+                 Text="{Binding SelectedOnlineProject.ProjectName}" 
                  TextWrapping="Wrap" />
       <TextBlock Margin="0 12 0 0" 
                  Text="{Binding Resources.Main_OnlineProjectAuthor, 
@@ -46,7 +46,7 @@
                  Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
                  Source={StaticResource ThemeChooser}}" />
       <TextBlock Margin="12 0 0 0" 
-                 Text="{Binding Author}" 
+                 Text="{Binding SelectedOnlineProject.Author}" 
                  TextWrapping="Wrap" />
       <TextBlock Margin="0 12 0 6" 
                  Text="{Binding Resources.Main_ReportReason, 
@@ -55,7 +55,7 @@
                  Source={StaticResource ThemeChooser}}" />
       <TextBox Margin="0 0 0 0"
                HorizontalAlignment="Stretch"
-               Text="{Binding OnlineProjectReportViewModel.Reason, Mode=TwoWay}" 
+               Text="{Binding Reason, Mode=TwoWay}" 
                TextChanged="TextBox_TextChanged"
                TextWrapping="Wrap"
                AcceptsReturn="True" Height="288" MaxLength="1000"/>
@@ -68,9 +68,7 @@
         <AppBarButton Icon="Accept" 
                       Label="{Binding Resources.Main_ButtonReport, 
                       Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding OnlineProjectReportViewModel.ReportCommand, 
-                      Source={StaticResource Locator}}" 
-                      CommandParameter="{Binding}"/>
+                      Command="{Binding ReportCommand}"/>
       </CommandBar.PrimaryCommands>
     </CommandBar>
   </Page.BottomAppBar>
