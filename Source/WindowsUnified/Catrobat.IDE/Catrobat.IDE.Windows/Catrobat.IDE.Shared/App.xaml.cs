@@ -39,11 +39,42 @@ namespace Catrobat.IDE.WindowsShared
             await ShowSplashScreen(e);
         }
 
-        private async Task ShowSplashScreen(IActivatedEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
-            if (e.PreviousExecutionState == ApplicationExecutionState.Running)
-                return;
+            var deferral = e.SuspendingOperation.GetDeferral();
+            var mainViewModel = ServiceLocator.GetInstance<MainViewModel>();
+            await Core.App.SaveContext(mainViewModel.CurrentProject);
+            await SuspensionManager.SaveAsync();
+            deferral.Complete();
+        }
 
+        private async Task Activated(IActivatedEventArgs e)
+        {
+            switch (e.PreviousExecutionState)
+            {
+                case ApplicationExecutionState.NotRunning:
+                    await ShowSplashScreen(e);
+                    break;
+                case ApplicationExecutionState.Running:
+                    await SkipSplashScreen(e);
+                    break;
+                case ApplicationExecutionState.Suspended:
+                    await SkipSplashScreen(e);
+                    break;
+                case ApplicationExecutionState.Terminated:
+                    await ShowSplashScreen(e);
+                    break;
+                case ApplicationExecutionState.ClosedByUser:
+                    await ShowSplashScreen(e);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+
+        private static async Task ShowSplashScreen(IActivatedEventArgs e)
+        {
             var file = await StorageFile.GetFileFromApplicationUriAsync(
                 new Uri("ms-appx:///Assets/SplashScreen.png", UriKind.Absolute));
             var randomAccessStream = await file.OpenReadAsync();
@@ -55,91 +86,27 @@ namespace Catrobat.IDE.WindowsShared
             await splashImage.SetSourceAsync(randomAccessStream);
 
 
-            var extendedSplash = new ExtendedSplash(e.SplashScreen, 
-                e.PreviousExecutionState, splashImage);
+            var extendedSplash = new ExtendedSplash(e.SplashScreen,
+                e, splashImage);
             Window.Current.Content = extendedSplash;
 
             Window.Current.Activate();
         }
 
-        private async void OnSuspending(object sender, SuspendingEventArgs e)
+
+        private static async Task SkipSplashScreen(IActivatedEventArgs e)
         {
-            var deferral = e.SuspendingOperation.GetDeferral();
-            var mainViewModel = ServiceLocator.GetInstance<MainViewModel>();
-            await Core.App.SaveContext(mainViewModel.CurrentProject);
-            await SuspensionManager.SaveAsync();
-            deferral.Complete();
+            await ExtendedSplash.InitializationFinished(e);
         }
 
-        protected override void OnActivated(IActivatedEventArgs args)
+        protected override async void OnActivated(IActivatedEventArgs e)
         {
-            //if(args is )
-
-            //if (args is FileOpenPickerContinuationEventArgs)
-            //{
-            //    var pickerArgs = (FileOpenPickerContinuationEventArgs)args;
-            //    var files = pickerArgs.Files;
-
-            //    if (files.Count == 1)
-            //    {
-            //        if (ServiceLocator.PictureService.SupportedFileTypes.
-            //            Contains(Path.GetExtension(files[0].Name)))
-            //        {
-            //            ServiceLocator.PictureService.RecievedFiles(
-            //                (args as FileOpenPickerContinuationEventArgs).Files);
-            //        }
-
-            //        if (ServiceLocator.SoundService.SupportedFileTypes.
-            //            Contains(Path.GetExtension(files[0].Name)))
-            //        {
-            //            ServiceLocator.SoundService.RecievedFiles(
-            //                (args as FileOpenPickerContinuationEventArgs).Files);
-            //        }
-            //    }
-            //}
+            await Activated(e);
         }
 
         protected override async void OnFileActivated(FileActivatedEventArgs e)
         {
-            try
-            {
-                if (e.Files.Count == 1 && Constants.CatrobatFileNames.Contains(
-                    Path.GetExtension(e.Files[0].Name)))
-                {
-                    if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                    {
-                        await ShowSplashScreen(e);
-                        // TODO: wait for initializatioin and open files
-                    }
-                    else
-                    {
-                        var catrobatFileStream = (await ((StorageFile)e.Files[0]).
-                        OpenReadAsync()).AsStream();
-
-                        ServiceLocator.ProjectImporterService.SetProjectStream(catrobatFileStream);
-                        ServiceLocator.NavigationService.NavigateTo<ProjectImportViewModel>();
-                    }
-                }
-
-                if (e.PreviousExecutionState != ApplicationExecutionState.Terminated)
-                {
-                    var imageFiles = (from StorageFile file in e.Files
-                                      from imageExtension in
-                                          ServiceLocator.PictureService.SupportedFileTypes
-                                      where file.Name.EndsWith(
-                                      ServiceLocator.PictureService.ImageFileExtensionPrefix + imageExtension)
-                                      select file).ToList();
-
-                    if (imageFiles.Count > 0)
-                        ServiceLocator.PictureService.RecievedFiles(imageFiles);
-                }
-            }
-            catch (Exception exc)
-            {
-                // TODO: Handle error
-                //var messageDialog1 = new MessageDialog("Cannot read recieved file: " + exc.Message);
-                //messageDialog1.ShowAsync();
-            }
+            await Activated(e);
         }
     }
 }

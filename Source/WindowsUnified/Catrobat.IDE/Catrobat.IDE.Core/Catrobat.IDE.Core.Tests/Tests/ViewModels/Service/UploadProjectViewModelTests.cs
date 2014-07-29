@@ -6,17 +6,26 @@ using Catrobat.IDE.Core.Tests.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.ViewModels.Service;
+using Catrobat.IDE.Core.Tests.Services.Common;
+using System.Globalization;
 
 namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
 {
     [TestClass]
     public class UploadProjectViewModelTests
     {
+        private bool _uploadStarted;
+
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
+            ServiceLocator.UnRegisterAll();
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
+            ServiceLocator.Register<NotificationServiceTest>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<WebCommunicationTest>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
+            ServiceLocator.CultureService.SetCulture(new CultureInfo("en"));
         }
 
         [TestMethod, TestCategory("GatedTests")]
@@ -42,15 +51,56 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProjectChangedListener);
             viewModel.InitializeCommand.Execute(null);
 
-            Assert.IsTrue(viewModel.ProjectName == "TestProject");
-            Assert.IsTrue(viewModel.ProjectDescription == "TestProjectDescription");
+            Assert.AreEqual("TestProject", viewModel.ProjectName);
+            Assert.AreEqual("TestProjectDescription", viewModel.ProjectDescription);
         }
 
         [TestMethod/*, TestCategory("GatedTests")*/]
         public void UploadActionTest()
         {
-            //TODO to be tested
-            Assert.AreEqual(0, "test not implemented");
+            //TODO saving of context and renaming of directory not tested
+            //TODO check messages for different responses - e.g. wrong token or http-request failed
+            Assert.AreEqual(0, "test not fully implemented");
+
+            Messenger.Default.Register<MessageBase>(this,
+               ViewModelMessagingToken.UploadProjectStartedListener, UploadProjectStartedMessageAction);
+
+            var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
+            navigationService.PageStackCount = 1;
+            navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
+            navigationService.CurrentView = typeof(UploadProjectViewModel);
+
+            var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
+            notificationService.SentMessageBoxes = 0;
+            notificationService.SentToastNotifications = 0;
+
+            var viewModel = new UploadProjectViewModel
+            {
+                ProjectName = "TestProjectName",
+                ProjectDescription = "TestProjectDescription"
+            };
+            var localSettings = new LocalSettings();
+            var context = new CatrobatContext
+            {
+                LocalSettings = localSettings,
+                CurrentToken = "TestTokenValid",
+                CurrentUserName = "TestUser",
+                CurrentUserEmail = ""
+            };
+            var messageContext = new GenericMessage<CatrobatContextBase>(context);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.ContextListener);
+
+            //viewModel.UploadCommand.Execute(null);
+
+            Assert.IsTrue(_uploadStarted);
+            Assert.AreEqual("", viewModel.ProjectName);
+            Assert.AreEqual("", viewModel.ProjectDescription);
+            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
+            Assert.AreEqual(null, navigationService.CurrentView);
+            Assert.AreEqual(0, navigationService.PageStackCount);
+            Assert.AreEqual(0, notificationService.SentMessageBoxes);
+            Assert.AreEqual(1, notificationService.SentToastNotifications);
+            Assert.IsNull(notificationService.LastNotificationTitle);
         }
 
         [TestMethod, TestCategory("GatedTests")]
@@ -79,14 +129,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             
             viewModel.ChangeUserCommand.Execute(null);
 
-            Assert.IsTrue(viewModel.ProjectName == "");
-            Assert.IsTrue(viewModel.ProjectDescription == "");
-            Assert.IsTrue(viewModel.Context.CurrentToken == "");
-            Assert.IsTrue(viewModel.Context.CurrentUserName == "");
-            Assert.IsTrue(viewModel.Context.CurrentUserEmail == "");
-            Assert.IsTrue(viewModel.Context.LocalSettings.CurrentToken == "");
-            Assert.IsTrue(viewModel.Context.LocalSettings.CurrentUserName == "");
-            Assert.IsTrue(viewModel.Context.LocalSettings.CurrentUserEmail == "");
+            Assert.AreEqual("", viewModel.ProjectName);
+            Assert.AreEqual("", viewModel.ProjectDescription);
+            Assert.AreEqual("", viewModel.Context.CurrentToken);
+            Assert.AreEqual("", viewModel.Context.CurrentUserName);
+            Assert.AreEqual("", viewModel.Context.CurrentUserEmail);
+            Assert.AreEqual("", viewModel.Context.LocalSettings.CurrentToken);
+            Assert.AreEqual("", viewModel.Context.LocalSettings.CurrentUserName);
+            Assert.AreEqual("", viewModel.Context.LocalSettings.CurrentUserEmail);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(UploadProjectLoginViewModel), navigationService.CurrentView);
             Assert.AreEqual(1, navigationService.PageStackCount);
@@ -107,8 +157,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             };
             viewModel.CancelCommand.Execute(null);
 
-            Assert.IsTrue(viewModel.ProjectName == "");
-            Assert.IsTrue(viewModel.ProjectDescription == "");
+            Assert.AreEqual("", viewModel.ProjectName);
+            Assert.AreEqual("", viewModel.ProjectDescription);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(ProjectDetailViewModel), navigationService.CurrentView);
             Assert.AreEqual(1, navigationService.PageStackCount);
@@ -129,11 +179,18 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             };
             viewModel.GoBackCommand.Execute(null);
 
-            Assert.IsTrue(viewModel.ProjectName == "");
-            Assert.IsTrue(viewModel.ProjectDescription == "");
+            Assert.AreEqual("", viewModel.ProjectName);
+            Assert.AreEqual("", viewModel.ProjectDescription);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
+
+        #region MessageActions
+        private void UploadProjectStartedMessageAction(MessageBase message)
+        {
+            _uploadStarted = true;
+        }
+        #endregion
     }
 }

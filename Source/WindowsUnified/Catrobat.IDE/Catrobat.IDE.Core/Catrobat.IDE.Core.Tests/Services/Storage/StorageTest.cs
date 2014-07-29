@@ -354,18 +354,17 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
 
         public PortableImage LoadImageThumbnail(string pathToImage)
         {
-            return null;
+            throw new NotImplementedException();
         }
         #endregion
 
 
         #region Async
 
-        public PortableImage CreateThumbnail(PortableImage image)
+        public Task CreateThumbnailAsync(string file)
         {
-            return new PortableImage();
+            throw new NotImplementedException();
         }
-
 
         public async Task CreateDirectoryAsync(string path)
         {
@@ -444,7 +443,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
 
         public async Task<PortableImage> CreateThumbnailAsync(PortableImage image)
         {
-            return await Task.Run(() => CreateThumbnail(image));
+            throw new NotImplementedException();
         }
 
         public async Task DeleteImageAsync(string pathToImage)

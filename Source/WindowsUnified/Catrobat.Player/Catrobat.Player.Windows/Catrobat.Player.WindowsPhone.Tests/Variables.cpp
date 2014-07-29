@@ -1,7 +1,7 @@
-//#include "pch.h"
-//#include "CppUnitTest.h"
-//#include "TestHelper.h"
-//
+#include "pch.h"
+#include "CppUnitTest.h"
+#include "TestHelper.h"
+
 //#include "Project.h"
 //#include "ProjectDaemon.h"
 //#include "Object.h"
@@ -9,41 +9,41 @@
 //#include "UserVariable.h"
 //
 //#include "ChangeSizeByBrick.h"
-//
-//#include <time.h>
-//
-//using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-//
-//namespace PlayerWindowsPhone8Test
-//{
-//	TEST_CLASS(Variables)
-//	{
-//    private:
-//        #pragma region Local Variables Declaration
-//
-//        string					m_applicationBuildName;
-//        int						m_applicationBuildNumber;
-//        string					m_applicationName;
-//        string					m_applicationVersion;
-//        string					m_catrobatLanguageVersion;
-//        time_t					m_dateTimeUpload;
-//        string					m_description;
-//        string					m_deviceName;
-//        string					m_mediaLicense;
-//        string					m_platform;
-//        int						m_platformVersion;
-//        string					m_programLicense;
-//        string					m_programName;
-//        string					m_remixOf;
-//        int						m_screenHeight;
-//        int						m_screenWidth;
-//        vector<string>*			m_tags;
-//        string					m_url;
-//        string					m_userHandle;
-//
-//        #pragma endregion
-//
-//        Project *m_project;
+
+#include <time.h>
+
+using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
+namespace Catrobat_Player_WindowsPhone_Tests
+{
+	TEST_CLASS(Variables)
+	{
+    private:
+        #pragma region Local Variables Declaration
+
+        //string					m_applicationBuildName;
+        //int						m_applicationBuildNumber;
+        //string					m_applicationName;
+        //string					m_applicationVersion;
+        //string					m_catrobatLanguageVersion;
+        //time_t					m_dateTimeUpload;
+        //string					m_description;
+        //string					m_deviceName;
+        //string					m_mediaLicense;
+        //string					m_platform;
+        //int						m_platformVersion;
+        //string					m_programLicense;
+        //string					m_programName;
+        //string					m_remixOf;
+        //int						m_screenHeight;
+        //int						m_screenWidth;
+        //vector<string>*			m_tags;
+        //string					m_url;
+        //string					m_userHandle;
+
+        //#pragma endregion
+
+        //Project *m_project;
 //
 //        TEST_METHOD_INITIALIZE(TestInitialization)
 //        {
@@ -98,7 +98,7 @@
 //            ProjectDaemon::Instance()->SetProject(m_project);
 //        }
 //
-//	public:
+	public:
 //		
 //		TEST_METHOD(Variables_ObjectVariable_Valid)
 //		{
@@ -167,5 +167,5 @@
 //            brick->Execute();
 //            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
 //		}
-//	};
-//}
+	};
+}

@@ -37,7 +37,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             using (var storage = StorageSystem.GetStorage())
             {
                 await storage.SaveImageAsync(path, newImage, true, ImageFormat.Png);
-                costume.Image = await storage.CreateThumbnailAsync(newImage);
+                costume.Image = await storage.LoadImageThumbnailAsync(path);
             }
         }
     }

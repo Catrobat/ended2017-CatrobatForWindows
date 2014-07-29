@@ -99,6 +99,7 @@
     <Compile Include="Misc\XmlFormulaTreeComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleData\SampleLoader.cs" />
+    <Compile Include="Services\Common\WebCommunicationTest.cs" />
     <Compile Include="Services\CultureServiceTest.cs" />
     <Compile Include="Services\DispatcherServiceTest.cs" />
     <Compile Include="Services\ImageResizeServiceTest.cs" />
@@ -172,6 +173,8 @@
     <Compile Include="Tests\ViewModels\Service\UploadProjectViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Service\UploadProjectRegisterViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Service\UploadProjectLoginViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Settings\SettingsLanguageViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Settings\SettingsViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Catrobat.IDE.Core\Catrobat.IDE.Core.csproj">
@@ -278,9 +281,7 @@
     <Content Include="SampleData\SampleProjects\simple.xml" />
     <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tests\ViewModels\Settings\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

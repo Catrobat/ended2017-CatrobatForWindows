@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
@@ -6,9 +7,11 @@ using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.Xml;
 using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
@@ -19,6 +22,7 @@ namespace Catrobat.IDE.Core.Services.Common
         private CheckProgramImportResult _checkResult;
         private OnlineProjectHeader _onlineProjectHeader;
         private XmlProgram _convertedProject;
+        private string _programName;
 
         public void SetProjectStream(Stream projectStream)
         {
@@ -51,7 +55,6 @@ namespace Catrobat.IDE.Core.Services.Common
                         _onlineProjectHeader.DownloadUrl, _onlineProjectHeader.ProjectName);
                 }
 
-
                 await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
                     _projectStream, StorageConstants.TempProgramImportPath);
             }
@@ -62,7 +65,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
             using (var storage = StorageSystem.GetStorage())
             {
-                if (await storage.FileExistsAsync(StorageConstants.TempProgramImportZipPath))
+                if (await storage.DirectoryExistsAsync(StorageConstants.TempProgramImportZipPath))
                 {
                     await storage.DeleteDirectoryAsync(StorageConstants.TempProgramImportZipPath);
                 }
@@ -80,9 +83,11 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 projectScreenshot =
                     await storage.LoadImageAsync(Path.Combine(
-                    StorageConstants.TempProgramImportPath, StorageConstants.ProgramManualScreenshotPath)) ??
+                    StorageConstants.TempProgramImportPath, 
+                    StorageConstants.ProgramManualScreenshotPath)) ??
                     await storage.LoadImageAsync(Path.Combine(
-                    StorageConstants.TempProgramImportPath, StorageConstants.ProgramAutomaticScreenshotPath));
+                    StorageConstants.TempProgramImportPath, 
+                    StorageConstants.ProgramAutomaticScreenshotPath));
             }
 
             var projectCodePath = Path.Combine(
@@ -119,10 +124,14 @@ namespace Catrobat.IDE.Core.Services.Common
                 return _checkResult;
             }
 
+            _programName = _onlineProjectHeader != null ? 
+                _onlineProjectHeader.ProjectName : 
+                XmlProgramHelper.GetProgramName(converterResult.Xml);
+
             _checkResult.ProjectHeader = new LocalProjectHeader
             {
                 Screenshot = projectScreenshot,
-                ProjectName = _onlineProjectHeader.ProjectName
+                ProjectName = _programName
             };
 
             _checkResult.Status = ProgramImportStatus.Valid;
@@ -132,7 +141,7 @@ namespace Catrobat.IDE.Core.Services.Common
         public async Task<string> AcceptTempProject()
         {
             var uniqueProgramName = await ServiceLocator.ContextService.
-                FindUniqueProgramName(_onlineProjectHeader.ProjectName);
+                FindUniqueProgramName(_programName);
 
 
             if (_convertedProject != null) // if previour conversion was OK
@@ -152,20 +161,23 @@ namespace Catrobat.IDE.Core.Services.Common
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var newPath = Path.Combine(StorageConstants.ProjectsPath,
+                var newPath = Path.Combine(StorageConstants.ProgramsPath,
                     renameResult.NewProjectName);
                 await storage.MoveDirectoryAsync(StorageConstants.TempProgramImportPath,
                     newPath);
             }
 
+            await ServiceLocator.ContextService.CreateThumbnailsForLooks(_programName);
+
             _extractResult = null;
             _checkResult = null;
 
-            return renameResult.NewProjectName;
+            return uniqueProgramName;
         }
 
         public async Task CancelImport()
         {
+            throw new NotImplementedException();
             // TODO: cancel import
 
             //_extractResult = null;
@@ -175,6 +187,71 @@ namespace Catrobat.IDE.Core.Services.Common
             //    await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportPath);
             //    await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
             //}
+        }
+
+
+        public async Task TryImportWithStatusNotifications()
+        {
+            var extracionResult = await ServiceLocator.ProjectImporterService.ExtractProgram();
+
+            if (extracionResult.Status == ExtractProgramStatus.Error)
+            {
+                ServiceLocator.NotifictionService.ShowToastNotification(
+                        "Program damaged",
+                        "The catrobat file is dameged.",
+                        ToastDisplayDuration.Long); // TODO: localize me
+                return;
+            }
+
+            var validateResult = await ServiceLocator.ProjectImporterService.CheckProgram();
+
+            var acceptProject = true;
+
+            switch (validateResult.Status)
+            {
+                case ProgramImportStatus.Valid:
+                    ServiceLocator.NotifictionService.ShowToastNotification(
+                        "Program added",
+                        "Program successfully added to your program list.",
+                        ToastDisplayDuration.Long); // TODO: localize me
+
+                    acceptProject = true;
+                    break;
+                case ProgramImportStatus.Damaged:
+                    ServiceLocator.NotifictionService.ShowToastNotification(
+                        "Program damaged",
+                        "Program damaged and cannot be added!",
+                        ToastDisplayDuration.Long); // TODO: localize me
+
+                    acceptProject = false;
+                    break;
+                case ProgramImportStatus.VersionTooOld:
+                    ServiceLocator.NotifictionService.ShowToastNotification(
+                        "Program outdated",
+                        "Program is too old and cannot be added!",
+                        ToastDisplayDuration.Long); // TODO: localize me
+
+                    acceptProject = false;
+                    break;
+                case ProgramImportStatus.VersionTooNew:
+                    ServiceLocator.NotifictionService.ShowToastNotification(
+                        "App version too old",
+                        "The downloaded program requires a newer version of this App!",
+                        ToastDisplayDuration.Long); // TODO: localize me
+
+                    acceptProject = true;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            if (acceptProject)
+            {
+                await ServiceLocator.ProjectImporterService.AcceptTempProject();
+                var localProjectsChangedMessage = new MessageBase();
+                Messenger.Default.Send(localProjectsChangedMessage,
+                    ViewModelMessagingToken.LocalProjectsChangedListener);
+            }
         }
     }
 }

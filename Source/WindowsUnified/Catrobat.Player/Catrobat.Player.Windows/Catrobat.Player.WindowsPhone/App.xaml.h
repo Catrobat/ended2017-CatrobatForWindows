@@ -6,22 +6,36 @@
 #pragma once
 
 #include "App.g.h"
-#include "DirectXPage.xaml.h"
+#include "Player.xaml.h"
 
 namespace Catrobat_Player
 {
-		/// <summary>
-	/// Provides application-specific behavior to supplement the default Application class.
-	/// </summary>
-	ref class App sealed
-	{
-	public:
-		App();
-		virtual void OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEventArgs^ e) override;
+    [Windows::Foundation::Metadata::WebHostHidden]
+    public ref class App sealed
+    {
+    public:
+        App();
 
-	private:
-		void OnSuspending(Platform::Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e);
-		void OnResuming(Platform::Object ^sender, Platform::Object ^args);
-		DirectXPage^ m_directXPage;
-	};
+        virtual void OnLaunched(
+            _In_ Windows::ApplicationModel::Activation::LaunchActivatedEventArgs^ args
+            ) override;
+
+    private:
+        void OnSuspending(
+            _In_ Platform::Object^ sender,
+            _In_ Windows::ApplicationModel::SuspendingEventArgs^ args
+            );
+
+        void OnResuming(
+            _In_ Platform::Object^ sender,
+            _In_ Platform::Object^ args
+            );
+
+        void OnWindowActivationChanged(
+            _In_ Platform::Object^ sender,
+            _In_ Windows::UI::Core::WindowActivatedEventArgs^ args
+            );
+
+        Player^ m_mainPage;
+    };
 }

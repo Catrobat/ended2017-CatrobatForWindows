@@ -27,7 +27,7 @@
 
       <StackPanel Margin="10 10 10 10">
         <Button Margin="0" Padding="0" BorderThickness="0"
-          Command="{Binding OpenGalleryCommand}" >
+          Command="{Binding OpenGalleryCommand}" RequestedTheme="Dark" >
           <Grid Margin="0" Height="140" Width="380"
                 Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, 
                 Source={StaticResource ThemeChooser}}" >
@@ -35,11 +35,13 @@
               <ColumnDefinition Width="Auto"/>
               <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <misc:ImageGallery ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
-            <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
-                           Text="{Binding Resources.Editor_ImageGallery, Source={StaticResource LocalizedStrings}}" 
-                           Name="tbGallery" FontSize="50"
-                           Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
+            <misc:ImageGallery ScaleFactor="0.2" Grid.Column="0" 
+              Margin="30 15 15 15" />
+            <TextBlock Grid.Column="1" Margin="20 10 10 10" 
+              VerticalAlignment="Center" HorizontalAlignment="Left" 
+              Text="{Binding Resources.Editor_ImageGallery, 
+              Source={StaticResource LocalizedStrings}}" 
+              Name="tbGallery" FontSize="40" />
           </Grid>
         </Button>
 
@@ -64,7 +66,7 @@
         </Button>-->
 
         <Button Margin="0" Padding="0" BorderThickness="0"
-          Command="{Binding OpenPaintCommand}" >
+          Command="{Binding OpenPaintCommand}" RequestedTheme="Dark" >
           <Grid Margin="0" Height="140" Width="380"
             Background="{Binding Path=SelectedTheme.AccentColor3.NativeBrush, 
             Source={StaticResource ThemeChooser}}" >
@@ -81,9 +83,7 @@
               Source={StaticResource LocalizedStrings}}" 
               TextAlignment="Left"
               TextWrapping="Wrap"
-              FontSize="50" 
-              Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-              Source={StaticResource ThemeChooser}}" />
+              FontSize="40" />
           </Grid>
         </Button>
       </StackPanel>

@@ -1,4 +1,4 @@
-//#include "pch.h"
+#include "pch.h"
 //#include "CppUnitTest.h"
 //#include "Object.h"
 //#include "StartScript.h"

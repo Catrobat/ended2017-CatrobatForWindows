@@ -30,9 +30,10 @@
           </FileOpenPicker>
         </Extension>
         <Extension Category="windows.fileTypeAssociation">
-          <FileTypeAssociation Name="1">
+          <FileTypeAssociation Name="catrobat_play">
+            <Logo>Assets\Tiles\FileSmall.png</Logo>
             <SupportedFileTypes>
-              <FileType>.catrobat</FileType>
+              <FileType>.catrobat_play</FileType>
             </SupportedFileTypes>
           </FileTypeAssociation>
         </Extension>

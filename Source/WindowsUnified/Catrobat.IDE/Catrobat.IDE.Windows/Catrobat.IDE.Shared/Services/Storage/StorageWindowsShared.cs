@@ -8,6 +8,7 @@ using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Search;
 using Windows.Storage.Streams;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
@@ -108,13 +109,6 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
         public PortableImage LoadImageThumbnail(string pathToImage)
         {
             var task = LoadImageThumbnailAsync(pathToImage);
-            task.Wait();
-            return task.Result;
-        }
-
-        public PortableImage CreateThumbnail(PortableImage image)
-        {
-            var task = CreateThumbnailAsync(image);
             task.Wait();
             return task.Result;
         }
@@ -405,6 +399,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                     stream.Seek(0);
                     bitmapImage.SetSource(stream);
 
+                    // This is sometimes not working, maybe use BitmapDecoder instead?
                     var writeableBitmap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
                     memoryStream.Seek(0, SeekOrigin.Begin);
                     writeableBitmap.SetSource(memoryStream.AsRandomAccessStream());
@@ -459,9 +454,35 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             return retVal;
         }
 
-        public async Task<PortableImage> CreateThumbnailAsync(PortableImage image)
+        public async Task CreateThumbnailAsync(string filePath)
         {
-            throw new NotImplementedException();
+            var thumbnailPath = filePath + StorageConstants.ImageThumbnailExtension;
+
+            if (!await FileExistsAsync(thumbnailPath))
+            {
+                var fullSizePortableImage = await LoadImageAsync(filePath);
+
+                if (fullSizePortableImage != null)
+                {
+                    var thumbnailImage = await ServiceLocator.
+                        ImageResizeService.ResizeImage(fullSizePortableImage, 
+                        _imageThumbnailDefaultMaxWidthHeight);
+                   
+                    await thumbnailImage.WriteAsPng(thumbnailPath);
+                }
+            }
+        }
+
+
+        public async Task<PortableImage> CreateThumbnailAsync(PortableImage image, string imagePath)
+        {
+            var thumbnailImage = await ServiceLocator.
+                ImageResizeService.ResizeImage(image,
+                _imageThumbnailDefaultMaxWidthHeight);
+
+            await thumbnailImage.WriteAsPng(imagePath);
+
+            return thumbnailImage;
         }
 
         public async Task DeleteImageAsync(string pathToImage)

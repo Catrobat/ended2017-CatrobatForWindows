@@ -18,7 +18,6 @@
   <converters:UnixTimeDateTimeConverterBootstrap x:Key="UnixTimeDateTimeConverter" />
   <converters:SecondStringMillisecondConverterBootstrap x:Key="SecondStringMillisecondConverter" />
   <converters:BoolVisibilityNegativeConverterBootstrap x:Key="NegativeBoolVisibilityConverter" />
-  <converters:BoolPlayButtonStateConverterBootstrap x:Key="BoolPlayButtonStateConverter" />
   <converters:BoolVisibilityNegativeConverterBootstrap x:Key="BoolVisibilityNegativeConverter"/>
   <converters:BoolToSelectedPivotItemConverterBootstrap x:Key="BoolToSelectedPivotItemConverter"/>
   <converters:NullVariableConverterBootstrap x:Key="NullVariableConverter"/>

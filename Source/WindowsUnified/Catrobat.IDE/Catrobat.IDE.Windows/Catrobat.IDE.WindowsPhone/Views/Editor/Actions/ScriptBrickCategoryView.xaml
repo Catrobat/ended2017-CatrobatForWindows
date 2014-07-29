@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
-    xmlns:bricks="using:Catrobat.IDE.WindowsPhone.Controls.Bricks"
+  xmlns:actionsControls="using:Catrobat.IDE.WindowsPhone.Controls.ActionsControls"
     mc:Ignorable="d"
     DataContext="{Binding ScriptBrickCategoryViewModel, Source={StaticResource Locator}}">
 
@@ -30,13 +30,13 @@
               Command="{Binding MovementCommand}">
         <Button.Template>
           <ControlTemplate>
-            <bricks:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+            <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                           BorderBrush="{StaticResource BrickBorderBrush}" 
                           Margin="10 0 10 0">
               <TextBlock VerticalAlignment="Center" 
                    Text="{Binding Resources.Brick_CategoryMotion, Source={StaticResource LocalizedStrings}}" 
                    Margin="10" FontSize="24" />
-            </bricks:NormalBrick>
+            </actionsControls:NormalBrick>
           </ControlTemplate>
         </Button.Template>
       </Button>
@@ -45,13 +45,13 @@
               Command="{Binding LooksCommand}">
         <Button.Template>
           <ControlTemplate>
-            <bricks:NormalBrick Grid.Row="1" Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+            <actionsControls:NormalBrick Grid.Row="1" Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                           BorderBrush="{StaticResource BrickBorderBrush}" 
                           Margin="10 10 10 0">
           <TextBlock VerticalAlignment="Center" 
                    Text="{Binding Resources.Brick_CategoryLooks, Source={StaticResource LocalizedStrings}}" 
                    Margin="10" FontSize="24" />
-        </bricks:NormalBrick>
+        </actionsControls:NormalBrick>
           </ControlTemplate>
         </Button.Template>
       </Button>
@@ -60,13 +60,13 @@
               Command="{Binding SoundCommand}">
         <Button.Template>
           <ControlTemplate>
-            <bricks:NormalBrick Grid.Row="2" Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+            <actionsControls:NormalBrick Grid.Row="2" Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                           BorderBrush="{StaticResource BrickBorderBrush}" 
                           Margin="10 10 10 0">
           <TextBlock VerticalAlignment="Center" 
                    Text="{Binding Resources.Brick_CategorySound, Source={StaticResource LocalizedStrings}}" 
                    Margin="10" FontSize="24" />
-            </bricks:NormalBrick>
+            </actionsControls:NormalBrick>
           </ControlTemplate>
         </Button.Template>
       </Button>
@@ -75,14 +75,14 @@
               Command="{Binding ControlCommand}">
         <Button.Template>
           <ControlTemplate>
-            <bricks:NormalBrick Grid.Row="3" Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+            <actionsControls:NormalBrick Grid.Row="3" Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                           BorderBrush="{StaticResource BrickBorderBrush}" 
                           Margin="10 10 10 0">
           <TextBlock VerticalAlignment="Center" 
                    Text="{Binding Resources.Brick_CategoryControl, Source={StaticResource LocalizedStrings}}" 
                    Margin="10" 
                    FontSize="24" />
-            </bricks:NormalBrick>
+            </actionsControls:NormalBrick>
           </ControlTemplate>
         </Button.Template>
       </Button>
@@ -91,13 +91,13 @@
               Command="{Binding VariablesCommand}">
         <Button.Template>
           <ControlTemplate>
-            <bricks:NormalBrick Grid.Row="4" Background="{Binding StaticTheme.VariableBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+            <actionsControls:NormalBrick Grid.Row="4" Background="{Binding StaticTheme.VariableBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                             BorderBrush="{StaticResource BrickBorderBrush}" 
                             Margin="10 10 10 0">
           <TextBlock VerticalAlignment="Center" 
                      Text="{Binding Resources.Brick_CategoryVariables, Source={StaticResource LocalizedStrings}}" 
                      Margin="10" FontSize="24" />
-            </bricks:NormalBrick>
+            </actionsControls:NormalBrick>
           </ControlTemplate>
         </Button.Template>
       </Button>

@@ -68,7 +68,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             };
             viewModel.GoBackCommand.Execute(null);
 
-            Assert.IsTrue(viewModel.ProjectName == "");
+            Assert.AreEqual("", viewModel.ProjectName);
             Assert.IsTrue(viewModel.CreateEmptyProject);
             Assert.IsFalse(viewModel.CreateCopyOfCurrentProject);
             Assert.IsFalse(viewModel.CreateTemplateProject);

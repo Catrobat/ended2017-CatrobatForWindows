@@ -50,6 +50,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             get
             {
+                if (CurrentProject == null) return null; 
+
                 return CurrentProject.Sprites;
             }
         }

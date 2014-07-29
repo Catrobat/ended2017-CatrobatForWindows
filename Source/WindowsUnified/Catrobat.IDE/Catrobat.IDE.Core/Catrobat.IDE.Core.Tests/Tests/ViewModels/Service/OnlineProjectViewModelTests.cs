@@ -1,9 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
+using Catrobat.IDE.Core.Tests.Services.Common;
 using Catrobat.IDE.Core.Resources;
+using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.ViewModels.Service;
+using System.Globalization;
+using Catrobat.IDE.Core.Tests.SampleData;
 
 namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
 {
@@ -14,13 +18,25 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         public static void TestClassInitialize(TestContext testContext)
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
+            ServiceLocator.UnRegisterAll();
+            ServiceLocator.Register<NotificationServiceTest>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<WebCommunicationTest>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
+            ServiceLocator.CultureService.SetCulture(new CultureInfo("en"));
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("GatedTests")]
         public void OnLoadActionTest()
         {
-            //TODO to be tested
-            Assert.AreEqual(0, "test with context");
+            var onlineProjectHeader = SampleLoader.GetSampleOnlineProjectHeader();
+            var viewModel = new OnlineProjectViewModel();
+            viewModel.OnLoadCommand.Execute(onlineProjectHeader);
+
+            Assert.AreEqual("07/26/2014 13:54:08 by:", viewModel.UploadedLabelText);
+            Assert.AreEqual("(version: 0.9.9)", viewModel.VersionLabelText);
+            Assert.AreEqual("2 views", viewModel.ViewsLabelText);
+            Assert.AreEqual("5 downloads", viewModel.DownloadsLabelText);
+            Assert.IsTrue(viewModel.ButtonDownloadIsEnabled);
         }
 
         [TestMethod/*, TestCategory("GatedTests")*/]

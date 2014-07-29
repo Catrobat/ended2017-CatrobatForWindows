@@ -11,7 +11,7 @@ namespace Catrobat.IDE.Core
         public const string TempPaintImagePath = "Temp/PaintImage";
 
         // Program related constants
-        public const string ProjectsPath = "Projects";
+        public const string ProgramsPath = "Projects";
         public const string ProgramCodePath = "code.xml";
         public const string ProgramManualScreenshotPath = "manual_screenshot.png‏";
         public const string ProgramAutomaticScreenshotPath = "automatic_screenshot.png";

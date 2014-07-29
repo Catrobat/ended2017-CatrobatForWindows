@@ -416,7 +416,7 @@
     <Compile Include="UI\Converters\NullBoolConverter.cs" />
     <Compile Include="UI\PortableUI\IPortableValueConverter.cs" />
     <Compile Include="UI\IPlayPauseButton.cs" />
-    <Compile Include="UI\PlayPauseStateCommandArguments.cs" />
+    <Compile Include="UI\SoundPlayStateChangedNotification.cs" />
     <Compile Include="UI\PortableListBoxViewPort.cs" />
     <Compile Include="Services\IPortableUIElementConversionService.cs" />
     <Compile Include="UI\PortableUI\PortableVisibility.cs" />
@@ -460,7 +460,6 @@
     <Compile Include="Services\IPictureService.cs" />
     <Compile Include="Services\IPlayerLauncherService.cs" />
     <Compile Include="Services\IProgramImporterService.cs" />
-    <Compile Include="Services\ISoundPlayerService.cs" />
     <Compile Include="Services\ISoundRecorderService.cs" />
     <Compile Include="Services\ISystemInformationService.cs" />
     <Compile Include="Services\ServiceLocator.cs" />
