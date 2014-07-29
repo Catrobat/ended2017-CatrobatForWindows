@@ -17,6 +17,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.UnRegisterAll();
+            ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<NotificationServiceTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<WebCommunicationTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
@@ -49,6 +50,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
 
             viewModel.RecoverCommand.Execute(null);
 
+            Assert.AreEqual("", viewModel.RecoveryData);
             Assert.AreEqual("TestHashFromTestSystem", viewModel.Context.LocalSettings.CurrentUserRecoveryHash);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(UploadProjectNewPasswordViewModel), navigationService.CurrentView);

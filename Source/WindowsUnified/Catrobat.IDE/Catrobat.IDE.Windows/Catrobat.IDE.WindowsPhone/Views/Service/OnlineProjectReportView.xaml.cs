@@ -8,9 +8,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Service
     public partial class OnlineProjectReportView : ViewPageBase
     {
         private readonly OnlineProjectReportViewModel _viewModel =
-            ((ViewModelLocator)ServiceLocator.ViewModelLocator).OnlineProjectReportViewModel;
-
-        
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).OnlineProjectReportViewModel;     
 
         public OnlineProjectReportView()
         {

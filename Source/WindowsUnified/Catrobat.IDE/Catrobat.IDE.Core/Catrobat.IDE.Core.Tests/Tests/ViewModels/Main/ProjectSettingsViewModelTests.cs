@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         public static void TestClassInitialize(TestContext testContext)
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
-            ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
+            ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Lazy);
         }
 
         [TestMethod, TestCategory("GatedTests")]

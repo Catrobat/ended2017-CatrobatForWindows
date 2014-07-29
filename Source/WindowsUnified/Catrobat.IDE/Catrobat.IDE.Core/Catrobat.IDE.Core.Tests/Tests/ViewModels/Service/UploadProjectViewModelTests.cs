@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.UnRegisterAll();
-            ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
+            ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<NotificationServiceTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<WebCommunicationTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
