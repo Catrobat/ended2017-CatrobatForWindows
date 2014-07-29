@@ -307,6 +307,12 @@ namespace Catrobat.Paint.WindowsPhone.View
         /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            
+        }
+
+        public void NavigatedTo(Type source_type)
+        {
+            this.Frame.Navigate(source_type);
         }
 
         private void ToolChangedHere(ToolBase tool)

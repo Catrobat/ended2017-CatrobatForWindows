@@ -9,6 +9,7 @@ using Catrobat.Paint.WindowsPhone.View;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.Paint.Phone.Tool;
 using Windows.UI.Xaml.Media;
+using Catrobat.Paint.WindowsPhone.Controls.AppBar;
 
 namespace Catrobat.Paint.Phone
 {
@@ -30,6 +31,8 @@ namespace Catrobat.Paint.Phone
         public Grid PaintingAreaLayoutRoot { get; set; }
 
         public PaintingAreaView PaintingAreaView { get; set; }
+
+        public AppbarTop AppbarTop { get; set; }
 
         // TODO: public Catrobat.Paint.Phone.Controls.AppBar.ApplicationBarTop ApplicationBarTop { get; set; }
         public Grid PaintingAreaContentPanelGrid { get; set; }
