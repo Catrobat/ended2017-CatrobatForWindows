@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
-using Catrobat.IDE.Core.Tests.Services.Common;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
+using Catrobat.IDE.Core.Models;
 
 namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
 {
@@ -42,7 +42,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
 
             var viewModel = new SpritesViewModel
             {
-                SelectedSprite = new Models.Sprite()
+                SelectedSprite = new Sprite()
             };
             viewModel.EditSpriteCommand.Execute(null);
 
@@ -70,7 +70,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
 
             var viewModel = new SpritesViewModel
             {
-                SelectedSprite = new Models.Sprite()
+                SelectedSprite = new Sprite()
             };
             //viewModel.DeleteSpriteCommand.Execute(null);
 
@@ -84,7 +84,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
         {
             var viewModel = new SpritesViewModel
             {
-                SelectedSprite = new Models.Sprite()
+                SelectedSprite = new Sprite()
             };
             viewModel.ClearObjectsSelectionCommand.Execute(null);
 
@@ -122,7 +122,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
 
             var viewModel = new SpritesViewModel
             {
-                SelectedSprite = new Models.Sprite()
+                SelectedSprite = new Sprite()
             };
             viewModel.GoBackCommand.Execute(null);
 

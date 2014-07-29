@@ -85,7 +85,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 switch (statusResponse.statusCode)
                 {
                     case StatusCodes.ServerResponseOk:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_TitleReportProject,
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_ReportProject,
                             AppResources.Main_ReportContribution, ReportSuccessfullCallback, MessageBoxOptions.Ok);
                         GoBackAction();
                         break;

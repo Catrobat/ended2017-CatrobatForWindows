@@ -895,7 +895,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>share</value>
   </data>
   <data name="Main_DefaultProjectName" xml:space="preserve">
-    <value>Default Program</value>
+    <value>Default program</value>
   </data>
   <data name="DefaultProject_Background" xml:space="preserve">
     <value>Background</value>
@@ -1096,16 +1096,16 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Use the selected project below as a template for the new project.</value>
   </data>
   <data name="Main_CreateEmptyProject" xml:space="preserve">
-    <value>Empty project</value>
+    <value>Empty programm</value>
   </data>
   <data name="Main_CreateProjectBasedOnCurrentProject" xml:space="preserve">
-    <value>Use current project ({0}) as a atemplate</value>
+    <value>Use current program ({0}) as a atemplate</value>
   </data>
   <data name="Main_CreateProjectBasedOnTemplate" xml:space="preserve">
     <value>Use template below</value>
   </data>
   <data name="Main_SelectProjectCreationOption" xml:space="preserve">
-    <value>Wie soll das neue Projekt erstellt werden?</value>
+    <value>How to create the new program?</value>
   </data>
   <data name="Main_WhackAMoleName" xml:space="preserve">
     <value>Whack a mole</value>
@@ -1132,19 +1132,19 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Thank you for your contribution.</value>
   </data>
   <data name="Main_ReportReason" xml:space="preserve">
-    <value>Why is this project inappropriate?</value>
+    <value>Why is this program inappropriate?</value>
   </data>
   <data name="Main_TitleNewPassword" xml:space="preserve">
     <value>NEW PASSWORD</value>
   </data>
   <data name="Main_TitleOnlineProject" xml:space="preserve">
-    <value>ONLINE-PROJECT</value>
+    <value>ONLINE-PROGRAM</value>
   </data>
   <data name="Main_TitleRecoverPassword" xml:space="preserve">
     <value>RECOVER PASSWORD</value>
   </data>
   <data name="Main_TitleReportProject" xml:space="preserve">
-    <value>REPORT PROJECT</value>
+    <value>REPORT PROGRAM</value>
   </data>
   <data name="Main_UploadProjectNewPassword" xml:space="preserve">
     <value>New password:</value>
@@ -1217,5 +1217,8 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Editor_ButtonAdd" xml:space="preserve">
     <value>Add</value>
+  </data>
+  <data name="Main_ReportProject" xml:space="preserve">
+    <value>Report program</value>
   </data>
 </root>

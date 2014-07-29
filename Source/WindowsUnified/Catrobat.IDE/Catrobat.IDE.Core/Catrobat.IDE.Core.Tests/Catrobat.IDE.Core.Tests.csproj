@@ -157,6 +157,7 @@
     <Compile Include="Tests\Services\Common\WebCommunicationTests.cs" />
     <Compile Include="Tests\Services\Common\ZipTests.cs" />
     <Compile Include="Tests\Services\Storage\StorageTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Actions\ScriptBrickCategoryViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Costumes\ChangeCostumeViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Costumes\CostumeNameChooserViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Costumes\NewCostumeSourceSelectionViewModelTests.cs" />
@@ -285,7 +286,10 @@
     <Content Include="SampleData\SampleProjects\simple.xml" />
     <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Tests\ViewModels\Editor\Formula\" />
+    <Folder Include="Tests\ViewModels\Editor\Sounds\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

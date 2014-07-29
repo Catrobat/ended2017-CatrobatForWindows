@@ -1093,19 +1093,19 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>,</value>
   </data>
   <data name="Main_UseTemplateText" xml:space="preserve">
-    <value>Eines der unten aufgelisteten projekte als vorlage verwenden.</value>
+    <value>Eines der unten aufgelisteten Programme als Vorlage verwenden.</value>
   </data>
   <data name="Main_CreateEmptyProject" xml:space="preserve">
-    <value>Leeres Projekt</value>
+    <value>Leeres Programm</value>
   </data>
   <data name="Main_CreateProjectBasedOnCurrentProject" xml:space="preserve">
-    <value>Verwende aktuelles Projekt ({0}) als Vorlage</value>
+    <value>Verwende aktuelles Programm ({0}) als Vorlage</value>
   </data>
   <data name="Main_CreateProjectBasedOnTemplate" xml:space="preserve">
     <value>Verwende eine der folgenden Vorlagen</value>
   </data>
   <data name="Main_SelectProjectCreationOption" xml:space="preserve">
-    <value>How to create the new project?</value>
+    <value>Wie soll das neue Programm erstellt werden?</value>
   </data>
   <data name="Main_WhackAMoleName" xml:space="preserve">
     <value>Schlag den Maulwurf</value>
@@ -1132,19 +1132,19 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Danke für deinen Beitrag.</value>
   </data>
   <data name="Main_ReportReason" xml:space="preserve">
-    <value>Warum ist dieses Projekt unpassend?</value>
+    <value>Warum ist dieses Programm unpassend?</value>
   </data>
   <data name="Main_TitleNewPassword" xml:space="preserve">
     <value>NEUES PASSWORT</value>
   </data>
   <data name="Main_TitleOnlineProject" xml:space="preserve">
-    <value>ONLINE-PROJEKT</value>
+    <value>ONLINE-PROGRAMM</value>
   </data>
   <data name="Main_TitleRecoverPassword" xml:space="preserve">
     <value>PASSWORT WIEDERHERSTELLEN</value>
   </data>
   <data name="Main_TitleReportProject" xml:space="preserve">
-    <value>PROJEKT MELDEN</value>
+    <value>PROGRAMM MELDEN</value>
   </data>
   <data name="Main_UploadProjectNewPassword" xml:space="preserve">
     <value>Neues Passwort:</value>
@@ -1217,5 +1217,8 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   </data>
   <data name="Editor_ButtonAdd" xml:space="preserve">
     <value>Neu</value>
+  </data>
+  <data name="Main_ReportProject" xml:space="preserve">
+    <value>Programm melden</value>
   </data>
 </root>

@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
-using Catrobat.IDE.Core.Tests.Services.Common;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
+using Catrobat.IDE.Core.Models;
 
 namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
 {
@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
 
             var viewModel = new ChangeSpriteViewModel
             {
-                SelectedSprite = new Models.Sprite { Name = "TestSpriteName" },
+                SelectedSprite = new Sprite { Name = "TestSpriteName" },
                 SpriteName = "TestNewSpriteName"
             };
             viewModel.SaveCommand.Execute(null);
@@ -35,7 +35,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(viewModel.SelectedSprite.Name, viewModel.SpriteName);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
-            Assert.AreEqual(0, navigationService.PageStackCount); ;
+            Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
         [TestMethod, TestCategory("GatedTests")]
@@ -48,7 +48,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
 
             var viewModel = new ChangeSpriteViewModel
             {
-                SelectedSprite = new Models.Sprite { Name = "TestSpriteName" },
+                SelectedSprite = new Sprite { Name = "TestSpriteName" },
                 SpriteName = ""
             };
             viewModel.CancelCommand.Execute(null);
@@ -69,7 +69,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
 
             var viewModel = new ChangeSpriteViewModel
             {
-                SelectedSprite = new Models.Sprite { Name = "TestSpriteName" },
+                SelectedSprite = new Sprite { Name = "TestSpriteName" },
                 SpriteName = ""
             };
             viewModel.GoBackCommand.Execute(null);
