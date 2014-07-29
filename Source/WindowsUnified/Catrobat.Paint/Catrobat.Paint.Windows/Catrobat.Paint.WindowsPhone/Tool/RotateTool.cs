@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Catrobat.Paint.WindowsPhone.Tool;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,12 +15,12 @@ namespace Catrobat.Paint.Phone.Tool
         private int _angle;
         private RotateTransform _rotateTransform;
 
-        public RotateTool()
+        public RotateTool(ToolType tooltype = ToolType.Rotate)
         {
-            // TODO: this.ToolType = ToolType.Rotate;
+            this.ToolType = tooltype;
             _angle = 0;
             _rotateTransform = new RotateTransform();
-            // TODO: PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = _rotateTransform;
+            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = _rotateTransform;
 
         }
 

@@ -104,7 +104,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnBrushThickness.Icon = thickness_icon;
 
                 BitmapIcon color_icon = new BitmapIcon();
-                color_icon.UriSource = new Uri("ms-resource:/File/Assets/ColorPicker/icon_menu_color_palette.png", UriKind.Absolute);
+                color_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_color_palette.png", UriKind.Absolute);
                 app_btnColor.Icon = color_icon;
 
                 app_btnBrushThickness.Label = "Pinselstärke";
@@ -216,7 +216,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             AppBarButton app_btnAbout = new AppBarButton();
 
             BitmapIcon tools_icon = new BitmapIcon();
-            tools_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/Assets/AppBar/menu_tools_.png", UriKind.Absolute);
+            tools_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/menu_tools_.png", UriKind.Absolute);
             app_btnTools.Icon = tools_icon;
             app_btnTools.Label = "Werkzeug";
             app_btnTools.Click += BtnTools_Click;
