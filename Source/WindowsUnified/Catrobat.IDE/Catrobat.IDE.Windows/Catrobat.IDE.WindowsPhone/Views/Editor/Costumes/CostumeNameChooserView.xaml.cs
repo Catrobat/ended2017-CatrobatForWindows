@@ -8,7 +8,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Costumes
     public partial class CostumeNameChooserView
     {
         private readonly CostumeNameChooserViewModel _viewModel =
-            ((ViewModelLocator)ServiceLocator.ViewModelLocator).CostumeNameChooserViewModel;
+            ServiceLocator.ViewModelLocator.CostumeNameChooserViewModel;
         
 
         public CostumeNameChooserView()

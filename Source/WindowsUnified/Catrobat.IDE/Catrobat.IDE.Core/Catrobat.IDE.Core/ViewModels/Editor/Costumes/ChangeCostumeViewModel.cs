@@ -94,7 +94,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
 
         private async Task EditCostumeAction()
         {
-            ServiceLocator.PictureService.DrawPictureAsync(ReceivedCostume.Image);
+            await ServiceLocator.PictureService.DrawPictureAsync(ReceivedCostume.Image);
             //var result = await ServiceLocator.PictureService.DrawPictureAsync(ReceivedCostume.Image);
 
             //if (result.Status == PictureServiceStatus.Success)
