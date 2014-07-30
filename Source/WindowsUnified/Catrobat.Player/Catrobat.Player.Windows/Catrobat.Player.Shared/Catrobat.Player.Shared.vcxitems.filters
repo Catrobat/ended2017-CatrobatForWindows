@@ -234,6 +234,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastScript.h">
       <Filter>Objects\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ScriptHandler.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ExceptionLogger.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageDaemon.cpp">
@@ -459,6 +465,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastScript.cpp">
       <Filter>Objects\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ScriptHandler.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ExceptionLogger.cpp">
+      <Filter>Exceptions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

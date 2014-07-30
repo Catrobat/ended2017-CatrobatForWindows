@@ -47,6 +47,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DContentProvider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)EventController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ExceptionLogger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ForeverBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FormulaTree.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FormulaTreeException.cpp" />
@@ -75,6 +76,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Renderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)RepeatBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Script.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ScriptHandler.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SetGhostEffectBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SetSizeToBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SetVariableBrick.cpp" />
@@ -129,6 +131,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DContentProvider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DirectXHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)EventController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ExceptionLogger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ForeverBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)FormulaTree.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)FormulaTreeException.h" />
@@ -161,6 +164,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Renderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)RepeatBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Script.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ScriptHandler.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SetGhostEffectBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SetSizeToBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SetVariableBrick.h" />
