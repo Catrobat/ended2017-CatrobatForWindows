@@ -57,11 +57,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         public Program CurrentProgram
         {
             get { return _currentProject; }
-            private set 
-            { 
-                _currentProject = value; 
-                ServiceLocator.DispatcherService.RunOnMainThread(() => 
-                    RaisePropertyChanged(() => CurrentProgram)); 
+            private set
+            {
+                _currentProject = value;
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                    RaisePropertyChanged(() => CurrentProgram));
             }
         }
 
@@ -329,7 +329,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             private set;
         }
 
-        public RelayCommand EditCostumeCommand
+        public RelayCommand<Costume> EditCostumeCommand
         {
             get;
             private set;
@@ -354,7 +354,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             private set;
         }
 
-        public RelayCommand EditSoundCommand
+        public RelayCommand<Sound> EditSoundCommand
         {
             get;
             private set;
@@ -627,15 +627,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             ServiceLocator.NavigationService.NavigateTo<NewSoundSourceSelectionViewModel>();
         }
 
-        private void EditSoundAction()
+        private void EditSoundAction(Sound sound)
         {
-            foreach (var sound in SelectedSounds)
-            {
-                var message = new GenericMessage<Sound>(sound);
-                Messenger.Default.Send(message, ViewModelMessagingToken.SoundNameListener);
+            var message = new GenericMessage<Sound>(sound);
+            Messenger.Default.Send(message, ViewModelMessagingToken.SoundNameListener);
 
-                ServiceLocator.NavigationService.NavigateTo<ChangeSoundViewModel>();
-            }
+            ServiceLocator.NavigationService.NavigateTo<ChangeSoundViewModel>();
         }
 
         private void DeleteSoundAction()
@@ -661,15 +658,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             ServiceLocator.NavigationService.NavigateTo<NewCostumeSourceSelectionViewModel>();
         }
 
-        private void EditCostumeAction()
+        private void EditCostumeAction(Costume costume)
         {
-            foreach (var costume in SelectedCostumes)
-            {
-                var message = new GenericMessage<Costume>(costume);
-                Messenger.Default.Send(message, ViewModelMessagingToken.CostumeListener);
+            var message = new GenericMessage<Costume>(costume);
+            Messenger.Default.Send(message, ViewModelMessagingToken.CostumeListener);
 
-                ServiceLocator.NavigationService.NavigateTo<ChangeCostumeViewModel>();
-            }
+            ServiceLocator.NavigationService.NavigateTo<ChangeCostumeViewModel>();
         }
 
         private async void CopyCostumeAction()
@@ -715,7 +709,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         //{
         //    if (_currentSound != sound)
         //        await ServiceLocator.SoundPlayerService.SetSound(sound, CurrentProject);
-            
+
         //    _currentSound = sound;
 
         //    ServiceLocator.SoundPlayerService.Play();
@@ -760,23 +754,23 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             // Pretty hack-y, but oh well...
             if (attachedObject is BroadcastReceivedScript)
             {
-                ((BroadcastReceivedScript) attachedObject).Message = null;
+                ((BroadcastReceivedScript)attachedObject).Message = null;
             }
             else if (attachedObject is LookAtBrick)
             {
-                ((LookAtBrick) attachedObject).Target = null;
+                ((LookAtBrick)attachedObject).Target = null;
             }
             else if (attachedObject is PlaySoundBrick)
             {
-                ((PlaySoundBrick) attachedObject).Value = null;
+                ((PlaySoundBrick)attachedObject).Value = null;
             }
             else if (attachedObject is SetCostumeBrick)
             {
-                ((SetCostumeBrick) attachedObject).Value = null;
+                ((SetCostumeBrick)attachedObject).Value = null;
             }
             else if (attachedObject is BroadcastBrick)
             {
-                ((BroadcastBrick) attachedObject).Message = null;
+                ((BroadcastBrick)attachedObject).Message = null;
             }
         }
 
@@ -859,12 +853,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             DeleteScriptBrickCommand = new RelayCommand(DeleteScriptBrickAction, CanExecuteDeleteActionCommand);
 
             AddNewCostumeCommand = new RelayCommand(AddNewCostumeAction);
-            EditCostumeCommand = new RelayCommand(EditCostumeAction, CanExecuteEditCostumeCommand);
+            EditCostumeCommand = new RelayCommand<Costume>(EditCostumeAction);
             CopyCostumeCommand = new RelayCommand(CopyCostumeAction, CanExecuteCopyCostumeCommand);
             DeleteCostumeCommand = new RelayCommand(DeleteCostumeAction, CanExecuteDeleteCostumeCommand);
 
             AddNewSoundCommand = new RelayCommand(AddNewSoundAction);
-            EditSoundCommand = new RelayCommand(EditSoundAction, CanExecuteEditSoundCommand);
+            EditSoundCommand = new RelayCommand<Sound>(EditSoundAction);
             DeleteSoundCommand = new RelayCommand(DeleteSoundAction, CanExecuteDeleteSoundCommand);
             CopySoundCommand = new RelayCommand(CopySoundAction, () => false);
 

@@ -19,8 +19,8 @@
               Source={StaticResource Locator}}" CommandParameter="{Binding}">
           <Grid Background="{Binding StaticTheme.ObjectsBrush.NativeBrush, 
             Source={StaticResource ThemeChooser}}"
-              Margin="0 5 0 5" Height="90" HorizontalAlignment="Stretch"
-              Width="440">
+              Margin="0 5 0 5" Height="90" HorizontalAlignment="Stretch" 
+              Width="400">
             <Grid.RowDefinitions>
               <RowDefinition/>
               <RowDefinition/>
