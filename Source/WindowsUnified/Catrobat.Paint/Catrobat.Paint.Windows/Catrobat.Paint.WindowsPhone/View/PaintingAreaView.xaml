@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid ManipulationStarted="PaintingAreaCheckeredGrid_ManipulationStarted_1" ManipulationDelta="PaintingAreaCheckeredGrid_ManipulationDelta_1" ManipulationCompleted="PaintingAreaCheckeredGrid_ManipulationCompleted_1" ManipulationStarting="Grid_ManipulationStarting">
+    <Grid x:Name="main_grid" IsHitTestVisible="True" ManipulationMode="All">
         <!--<Grid x:Name="PaintingAreaContentPanelGrid" Width="auto" Height="auto" Grid.Row="1" Margin="0,0,0,0" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center"> -->
         <Grid x:Name="PaintingAreaContentPanelGrid" Width="auto" Height="auto" Grid.Row="1" Margin="0,0,0,0" Background="Transparent" >
             <Grid x:Name="PaintingAreaCheckeredGrid" Width="auto" Height="auto"  >

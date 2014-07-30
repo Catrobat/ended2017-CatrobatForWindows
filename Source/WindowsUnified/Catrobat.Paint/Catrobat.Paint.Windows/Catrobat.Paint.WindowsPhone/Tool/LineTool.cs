@@ -68,6 +68,7 @@ namespace Catrobat.Paint.Phone.Tool
             _path.InvalidateArrange();
             _path.InvalidateMeasure();
             _lineSegment = new LineSegment();
+            
 
         }
 

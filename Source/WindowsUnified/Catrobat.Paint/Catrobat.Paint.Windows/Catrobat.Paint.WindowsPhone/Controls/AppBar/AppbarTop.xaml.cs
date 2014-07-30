@@ -41,6 +41,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                 btnRedo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnRedo_Click;
                 btnSelectedColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColBtnSelectedColor_OnClick;
                 btnMoveScreen.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreen_OnClick;
+
+                btnUndo.IsEnabled = false;
+                btnRedo.IsEnabled = false;
             }
         }
         private void ColorChangedHere(SolidColorBrush color)
@@ -147,5 +150,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                     return null;
             }
         }
+
+        public bool BtnRedoEnable
+        {
+            get { return btnRedo.IsEnabled; }
+            set { btnRedo.IsEnabled = value; }
+        }
+
+        public bool BtnUndoEnable
+        {
+            get { return btnUndo.IsEnabled; }
+            set { btnUndo.IsEnabled = value; }
+        } 
     }
 }
