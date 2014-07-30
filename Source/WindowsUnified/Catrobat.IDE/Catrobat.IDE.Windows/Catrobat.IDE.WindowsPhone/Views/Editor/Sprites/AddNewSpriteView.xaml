@@ -9,32 +9,43 @@
   NavigationCacheMode="Enabled"
   DataContext="{Binding AddNewSpriteViewModel, Source={StaticResource Locator}}">
 
-  <Grid Margin="10 10 10 0"
-    Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-    Source={StaticResource ThemeChooser}}">
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
-      <RowDefinition Height="*"/>
+      <RowDefinition />
     </Grid.RowDefinitions>
 
-    <StackPanel Grid.Row="0" Margin="0 0 0 20">
-      <TextBlock Margin="0" 
-        Text="{Binding Resources.Editor_TitleNewSprite, 
-        Source={StaticResource LocalizedStrings}}"
-        Style="{Binding StaticTheme.TextTitle3Style.NativeStyle, 
-        Source={StaticResource ThemeChooser}}" />
+    <StackPanel x:Name="TitlePanel" 
+                Grid.Row="0"
+                Margin="12">
+      <TextBlock x:Name="ApplicationTitle" 
+                 Text="{Binding Resources.Editor_TitleNewSprite, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+                 Source={StaticResource ThemeChooser}}"/>
+      <!--<TextBlock x:Name="PageTitle" 
+                 Text="{Binding Resources.Main_TitleRecoverPassword, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Margin="12 0 0 0" 
+                 Style="{Binding StaticTheme.TextTitle3Style.NativeStyle, 
+                 Source={StaticResource ThemeChooser}}"/>-->
     </StackPanel>
 
-    <StackPanel Grid.Row="1" Margin="0 0 0 15">
-      <TextBlock Margin="10 0 10 10" 
-        Text="{Binding Resources.Editor_SpriteName, 
-        Source={StaticResource LocalizedStrings}}" 
-        Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-        Source={StaticResource ThemeChooser}}" />
-      <TextBox Margin="10 0 10 0" Name="TextBoxSpriteName" 
+    <StackPanel Grid.Row="1" Margin="12 0 12 18">
+      <TextBlock Margin="0 0 0 6" 
+                 Text="{Binding Resources.Editor_SpriteName, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
+                 Source={StaticResource ThemeChooser}}" />
+      <TextBox Margin="0 0 0 0"
+               HorizontalAlignment="Stretch"
+               Name="TextBoxSpriteName"
                Text="{Binding SpriteName, Mode=TwoWay}" 
-               HorizontalAlignment="Stretch" 
-               TextChanged="TextBoxSpriteName_OnTextChanged" />
+               TextChanged="TextBoxSpriteName_OnTextChanged" 
+               MaxLength="{Binding Resources.Main_TextBoxLimit, 
+               Source={StaticResource LocalizedStrings}}"/>
     </StackPanel>
   </Grid>
 

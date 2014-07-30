@@ -5,22 +5,25 @@ using Catrobat.Paint.Phone.Tool;
 using Catrobat.Paint.WindowsPhone.View;
 using Catrobat.Paint.WindowsPhone.Tool;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls.Primitives;
+using Catrobat.Paint.Phone.Command;
+using Windows.UI.Xaml.Controls;
 
 namespace Catrobat.Paint.Phone.Listener
 {
     public class ApplicationBarListener
     {
-        public void BtnUndo_Click(object sender, EventArgs e)
+        public void BtnUndo_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: CommandManager.GetInstance().UnDo();
+            CommandManager.GetInstance().UnDo();
         }
 
-        public void BtnRedo_Click(object sender, EventArgs e)
+        public void BtnRedo_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: CommandManager.GetInstance().ReDo();
+            CommandManager.GetInstance().ReDo();
         }
 
-        public void BtnColor_Click(object sender, EventArgs e)
+        public void BtnColor_Click(object sender, RoutedEventArgs e)
         {
             // TODO: var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame;
             // TODO: if (phoneApplicationFrame != null)
@@ -32,18 +35,18 @@ namespace Catrobat.Paint.Phone.Listener
 
 
         // TODO: public void SliderThickness_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        public void SliderThickness_ValueChanged(object sender)
+        /*public void SliderThickness_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            // TODO: PocketPaintApplication.GetInstance().PaintData.ThicknessSelected = Convert.ToInt32(e.NewValue);
-        }
+            
+        }*/
 
-        public void BtnColBtnSelectedColor_OnClick(object sender, EventArgs e)
+        public void BtnColBtnSelectedColor_OnClick(object sender, RoutedEventArgs e)
         {
             // TODO: var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame;
             // TODO: if (phoneApplicationFrame != null)
             {
-                // TODO: PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
-                // TODO: phoneApplicationFrame.Navigate(new Uri("/Catrobat.Paint.Phone;component/View/ColorPickerView.xaml", UriKind.RelativeOrAbsolute));
+                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
+                PocketPaintApplication.GetInstance().PaintingAreaView.NavigatedTo(typeof(ViewColorPicker));
             }
         }
         public void BtnThickness_OnClick(object sender, EventArgs e)
@@ -75,9 +78,9 @@ namespace Catrobat.Paint.Phone.Listener
                 PocketPaintApplication.GetInstance().PaintingAreaView.setSliderThicknessControlMargin(new Thickness(0.0, 0.0, 0.0, 0.0));
             }*/
         }
-        public void BtnMoveScreen_OnClick(object sender, EventArgs e)
+        public void BtnMoveScreen_OnClick(object sender, RoutedEventArgs e)
         {
-            /*
+            
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() != ToolType.Move)
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
@@ -89,7 +92,6 @@ namespace Catrobat.Paint.Phone.Listener
                     return;
                 PocketPaintApplication.GetInstance().SwitchTool(PocketPaintApplication.GetInstance().ToolWhileMoveTool.GetToolType());
             }
-         */
         }
 
         public void BtnTools_OnClick(object sender, EventArgs e)

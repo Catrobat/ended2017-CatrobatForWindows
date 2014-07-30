@@ -7,7 +7,7 @@
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="80" d:DesignWidth="480">
+    d:DesignHeight="80" d:DesignWidth="400">
 
     <Grid x:Name="LayoutRoot" Background="#1F1F1F" Height="72">
         <!-- TODO:  <Coding4Fun:RoundButton x:Name="BtnUndo" IsEnabled="False"
@@ -22,11 +22,32 @@
 
         </coding4FunControls:RoundButton>-->
 
-        <Ellipse x:Name="ellipseTransparence"  HorizontalAlignment="Left" Height="47" Margin="275,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="51" >
+
+
+        <AppBarButton x:Name="btnUndo" Height="72" Margin="15,3,0,-3">
+            <AppBarButton.Icon>
+                <BitmapIcon UriSource="/Assets/ApplicationBar/Dark/appbar.undo.curve.png" HorizontalAlignment="Left" Margin="0,0,0,0.333" Width="38"/>
+            </AppBarButton.Icon>
+        </AppBarButton>
+        <AppBarButton x:Name="btnRedo" Margin="115,3,0,-3">
+            <AppBarButton.Icon>
+                <BitmapIcon UriSource="/Assets/ApplicationBar/Dark/appbar.redo.curve.png"/>
+            </AppBarButton.Icon>
+        </AppBarButton>
+
+        <AppBarButton x:Name="btnSelectedColor" Margin="215,3,0,-3">
+            
+        </AppBarButton>
+        <!--<Ellipse x:Name="ellipseTransparence"  HorizontalAlignment="Left" Height="39" Margin="231,15,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" >
             <Ellipse.Fill>
                 <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
             </Ellipse.Fill>
-        </Ellipse>
+        </Ellipse>-->
+        <AppBarButton x:Name="btnMoveScreen" Margin="310,3,0,-3">
+            <AppBarButton.Icon>
+                <BitmapIcon UriSource="/Assets/ToolMenu/icon_menu_brush.png" Opacity="0.2"/>
+            </AppBarButton.Icon>
+        </AppBarButton>
 
         <!-- TODO:
         <<coding4FunControls:RoundButton x:Name="BtnSelectedColor" ClickMode="Release" 
@@ -36,4 +57,7 @@
         -->
 
     </Grid>
+    
 </UserControl>
+    
+    

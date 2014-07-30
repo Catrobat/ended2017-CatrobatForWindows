@@ -7,7 +7,8 @@
     xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
     xmlns:misc="using:Catrobat.IDE.WindowsShared.Content.Images.Misc">
 
-  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
+  <Grid x:Name="LayoutRoot" 
+        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
         Source={StaticResource ThemeChooser}}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
@@ -15,26 +16,36 @@
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
-    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" 
+    <StackPanel x:Name="TitlePanel" 
+                Grid.Row="0"
+                Margin="12">
+      <TextBlock x:Name="ApplicationTitle" 
                  Text="{Binding Resources.Editor_TitleChangeCostumeName, 
                  Source={StaticResource LocalizedStrings}}" 
                  Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-                 Source={StaticResource ThemeChooser}}" />
+                 Source={StaticResource ThemeChooser}}"/>
+      <!--<TextBlock x:Name="PageTitle" 
+                 Text="{Binding Resources.Main_TitleRecoverPassword, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Margin="12 0 0 0" 
+                 Style="{Binding StaticTheme.TextTitle3Style.NativeStyle, 
+                 Source={StaticResource ThemeChooser}}"/>-->
     </StackPanel>
-
-    <StackPanel Grid.Row="1" Margin="10 0 0 15">
-      <TextBlock Margin="0" 
+    <StackPanel Grid.Row="1" Margin="12 0 12 18">
+      <TextBlock Margin="0 0 0 6" 
                  Text="{Binding Resources.Editor_CostumeName, 
                  Source={StaticResource LocalizedStrings}}" 
-                 Style="{Binding StaticTheme.TextSmallStyle,
+                 Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
                  Source={StaticResource ThemeChooser}}" />
-      <TextBox Margin="-10 0 10 0" Name="TextBoxCostumeName" 
+      <TextBox Margin="0 0 0 0"
+               HorizontalAlignment="Stretch"
+               Name="TextBoxCostumeName"
                Text="{Binding CostumeName, Mode=TwoWay}" 
-               HorizontalAlignment="Stretch" 
-               TextChanged="TextBoxCostumeName_OnTextChanged" />
+               TextChanged="TextBoxCostumeName_OnTextChanged" 
+               MaxLength="{Binding Resources.Main_TextBoxLimit, 
+               Source={StaticResource LocalizedStrings}}"/>
     </StackPanel>
-    <Button Grid.Row="2" Margin="10" 
+    <Button Grid.Row="2" Margin="12" 
             Command="{Binding EditCostumeCommand}" 
             HorizontalAlignment="Stretch"
             VerticalAlignment="Top">

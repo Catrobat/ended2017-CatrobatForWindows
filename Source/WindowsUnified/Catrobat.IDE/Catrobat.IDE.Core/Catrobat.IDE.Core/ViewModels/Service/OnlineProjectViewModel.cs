@@ -178,7 +178,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             LicenseCommand = new RelayCommand(LicenseAction);
         }
 
-
         //private void ResetViewModel()
         //{
         //    ButtonDownloadIsEnabled = true;

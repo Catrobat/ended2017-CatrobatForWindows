@@ -4,8 +4,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
+using Catrobat.IDE.Core.Tests.Services.Common;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModels.Main;
+using Catrobat.IDE.Core.ViewModels.Service;
+using Catrobat.IDE.Core.ViewModels;
+using System.Globalization;
 
 namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 {
@@ -16,6 +20,11 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         public static void TestClassInitialize(TestContext testContext)
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
+            ServiceLocator.UnRegisterAll();
+            ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<WebCommunicationTest>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
+            ServiceLocator.CultureService.SetCulture(new CultureInfo("en"));
         }
 
         [TestMethod, TestCategory("GatedTests")]
@@ -34,11 +43,32 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount); 
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("GatedTests")]
         public void UploadCurrentProjectActionTest()
         {
-            //Upload Test
-            Assert.AreEqual(0, "test not implemented");
+            //TODO check messages for different responses - e.g. wrong password or http-request failed
+            var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
+            navigationService.PageStackCount = 1;
+            navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
+            navigationService.CurrentView = typeof(ProjectDetailViewModel);
+
+            var viewModel = new ProjectDetailViewModel();
+            var localSettings = new LocalSettings();
+            var context = new CatrobatContext
+            {
+                LocalSettings = localSettings,
+                CurrentToken = "TestToken",
+                CurrentUserName = "TestUser",
+                CurrentUserEmail = ""
+            };
+            var messageContext = new GenericMessage<CatrobatContextBase>(context);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.ContextListener);
+
+            viewModel.UploadCurrentProjectCommand.Execute(null);
+            
+            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
+            Assert.AreEqual(typeof(UploadProjectViewModel), navigationService.CurrentView);
+            Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
         [TestMethod/*, TestCategory("GatedTests")*/]

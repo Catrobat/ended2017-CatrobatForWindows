@@ -27,8 +27,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private bool _showDownloadMessage;
         private bool _showUploadMessage;
-        //private string _filterText = "";
-        //private string _previousFilterText = "";
         private bool _isLoadingOnlineProjects;
         private MessageboxResult _dialogResult;
         private string _deleteProjectName;
@@ -37,6 +35,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private ObservableCollection<LocalProjectHeader> _localProjects;
         private CatrobatContextBase _context;
         private OnlineProgramsCollection _onlineProjects;
+        private OnlineProjectHeader _selectedOnlineProject;
 
         #endregion
 
@@ -92,7 +91,24 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        public OnlineProjectHeader SelectedOnlineProject { get; set; }
+        public OnlineProjectHeader SelectedOnlineProject 
+        { 
+            get
+            {
+                return _selectedOnlineProject;
+            }
+            set
+            {
+                if (ReferenceEquals(_selectedOnlineProject, value))
+                    return;
+
+                _selectedOnlineProject = value;
+                RaisePropertyChanged(() => SelectedOnlineProject);
+
+                var selectedOnlineProjectChangedMessage = new GenericMessage<OnlineProjectHeader>(SelectedOnlineProject);
+                Messenger.Default.Send(selectedOnlineProjectChangedMessage, ViewModelMessagingToken.SelectedOnlineProjectChangedListener);
+            }
+        }
 
         public OnlineProgramsCollection OnlineProjects
         {

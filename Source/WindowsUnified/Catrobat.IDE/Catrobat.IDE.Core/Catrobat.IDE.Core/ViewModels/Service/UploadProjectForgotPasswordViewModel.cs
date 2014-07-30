@@ -73,6 +73,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     Context.LocalSettings.CurrentUserRecoveryHash = recoveryLink.Substring(position, recoveryLink.Length - position);
                     ServiceLocator.DispatcherService.RunOnMainThread(() =>
                     {
+                        ResetViewModel();
                         ServiceLocator.NavigationService.NavigateTo<UploadProjectNewPasswordViewModel>();
                         ServiceLocator.NavigationService.RemoveBackEntry();
                         ServiceLocator.NavigationService.RemoveBackEntry();

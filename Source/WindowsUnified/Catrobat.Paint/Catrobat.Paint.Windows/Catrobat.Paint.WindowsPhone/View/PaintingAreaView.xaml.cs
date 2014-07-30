@@ -57,8 +57,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             PaintingAreaCheckeredGrid.ManipulationDelta += PaintingAreaCheckeredGrid_ManipulationDelta;
             PaintingAreaCheckeredGrid.ManipulationCompleted += PaintingAreaCheckeredGrid_ManipulationCompleted;
             PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
-            // TODO: SliderThickness.ValueChanged += PocketPaintApplication.GetInstance().ApplicationBarListener.SliderThickness_ValueChanged;
-            // TODO: SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
+            SliderThickness.ValueChanged += SliderThickness_ValueChanged;
+            SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
             //BtnThickness.Click += BtnThickness_Click;
             // TODO: btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
             // TODO: btnBrushThickness.Content = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
@@ -68,7 +68,25 @@ namespace Catrobat.Paint.WindowsPhone.View
             //BtnZoomOut.Click += BtnZoomOut_Click;
             // TODO: UndoRedoActionbarManager.GetInstance().ApplicationBarTop = ApplicationBarTopX;
 
+
+            checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
             createAppBarAndSwitchAppBarContent(current_appbar);
+        }
+        
+        void checkPenLineCap(PenLineCap pen_line_cap)
+        {
+            if (pen_line_cap == PenLineCap.Round)
+            {
+                RoundRadioButton.IsChecked = true;
+            }
+            else if (pen_line_cap == PenLineCap.Square)
+            {
+                SquareRadioButton.IsChecked = true;
+            }
+            else
+            {
+                TriangleRadioButton.IsChecked = true;
+            }
         }
 
         void PaintData_ToolCurrentChanged(Phone.Tool.ToolBase tool)
@@ -104,7 +122,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnBrushThickness.Icon = thickness_icon;
 
                 BitmapIcon color_icon = new BitmapIcon();
-                color_icon.UriSource = new Uri("ms-resource:/File/Assets/ColorPicker/icon_menu_color_palette.png", UriKind.Absolute);
+                color_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_color_palette.png", UriKind.Absolute);
                 app_btnColor.Icon = color_icon;
 
                 app_btnBrushThickness.Label = "Pinselstärke";
@@ -216,7 +234,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             AppBarButton app_btnAbout = new AppBarButton();
 
             BitmapIcon tools_icon = new BitmapIcon();
-            tools_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/Assets/AppBar/menu_tools_.png", UriKind.Absolute);
+            tools_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/menu_tools_.png", UriKind.Absolute);
             app_btnTools.Icon = tools_icon;
             app_btnTools.Label = "Werkzeug";
             app_btnTools.Click += BtnTools_Click;
@@ -289,6 +307,12 @@ namespace Catrobat.Paint.WindowsPhone.View
         /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            
+        }
+
+        public void NavigatedTo(Type source_type)
+        {
+            this.Frame.Navigate(source_type);
         }
 
         private void ToolChangedHere(ToolBase tool)
@@ -339,7 +363,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         private void checkIfValueIsInRange(bool pressed_accept)
         {
             
-            if (btnBrushThickness.Content.ToString() == "")
+            if (btnBrushThickness.Content == null)
             {
                 btnValue0.IsEnabled = true;
                 btnValue1.IsEnabled = true;
@@ -417,7 +441,11 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             if (uctrlOwnKeyboard.Visibility == Visibility.Visible)
             {
-                string slider_thickness_text_box_value = btnBrushThickness.Content.ToString();
+                string slider_thickness_text_box_value = string.Empty;
+                if(btnBrushThickness.Content != null)
+                {
+                    slider_thickness_text_box_value = btnBrushThickness.Content.ToString();
+                }
                 Int32 slider_thickness_text_box_int_value;
 
                 if (!slider_thickness_text_box_value.Equals(""))
@@ -463,7 +491,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 string get_clicked_button_number = button.Name.Substring(8);
 
-                if (btnBrushThickness.Content.ToString().Length < 2)
+                if (btnBrushThickness.Content == null || btnBrushThickness.Content.ToString().Length < 2)
                 {
                     btnBrushThickness.Content += get_clicked_button_number;
                 }
@@ -515,6 +543,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 btnBrushThickness.Content = Convert.ToInt32(SliderThickness.Value).ToString();
                 slider_thickness_textbox_last_value = Convert.ToInt32(SliderThickness.Value);
+                PocketPaintApplication.GetInstance().PaintData.ThicknessSelected = Convert.ToInt32(SliderThickness.Value);
             }
         }
 
@@ -586,6 +615,11 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 this.Frame.Navigate(typeof(ViewColorPicker));
             }
+        }
+
+        private void SliderThickness_ValueChanged_1(object sender, RangeBaseValueChangedEventArgs e)
+        {
+
         }
 
     }

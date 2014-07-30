@@ -3,13 +3,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
+using Catrobat.IDE.Core.Tests.Services.Storage;
 using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.Core.ViewModels.Settings;
 using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.Tests.SampleData; 
+using Catrobat.IDE.Core.Tests.SampleData;
 
 namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 {
@@ -22,7 +23,11 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         public static void TestClassInitialize(TestContext testContext)
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
+            ServiceLocator.UnRegisterAll();
             ServiceLocator.Register<NotificationServiceTest>(TypeCreationMode.Normal);
+            //ServiceLocator.Register<StorageFactoryTest>(TypeCreationMode.Normal);
+            //ServiceLocator.Register<StorageTest>(TypeCreationMode.Normal);
+            //ServiceLocator.Register<ResourceLoaderFactoryTest>(TypeCreationMode.Normal);
         }
 
         [TestMethod, TestCategory("GatedTests")]
@@ -188,10 +193,41 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         }
 
         [TestMethod/*, TestCategory("GatedTests")*/]
-        public void ShowMessagesActionTest()
+        public void ShowMessagesActionDownloadMessageTest()
         {
-            //TODO to be tested
-            Assert.AreEqual(0, "test not implemented");
+            // TODO issue with portable-Image
+            Assert.AreEqual(0, "issue with portable-Image");
+            var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
+            notificationService.SentMessageBoxes = 0;
+            notificationService.SentToastNotifications = 0;
+
+            var viewModel = new MainViewModel();
+            var messageContext = new MessageBase();
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.DownloadProjectStartedListener);
+
+            //viewModel.ShowMessagesCommand.Execute(null);
+
+            Assert.AreEqual(0, notificationService.SentMessageBoxes);
+            Assert.AreEqual(1, notificationService.SentToastNotifications);
+        }
+
+        [TestMethod/*, TestCategory("GatedTests")*/]
+        public void ShowMessagesActionUploadMessageTest()
+        {
+            // TODO issue with portable-Image
+            Assert.AreEqual(0, "issue with portable-Image");
+            var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
+            notificationService.SentMessageBoxes = 0;
+            notificationService.SentToastNotifications = 0;
+
+            var viewModel = new MainViewModel();
+            var messageContext = new MessageBase();
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.UploadProjectStartedListener);
+
+            //viewModel.ShowMessagesCommand.Execute(null);
+
+            Assert.AreEqual(0, notificationService.SentMessageBoxes);
+            Assert.AreEqual(1, notificationService.SentToastNotifications);
         }
 
         [TestMethod, TestCategory("GatedTests")]
