@@ -78,6 +78,26 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         }
 
         [TestMethod, TestCategory("GatedTests")]
+        public void CancelActionTest()
+        {
+            var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
+            navigationService.PageStackCount = 1;
+            navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
+            navigationService.CurrentView = typeof(OnlineProjectReportViewModel);
+
+            var viewModel = new OnlineProjectReportViewModel
+            {
+                Reason = "TestReason"
+            };
+            viewModel.CancelCommand.Execute(null);
+
+            Assert.AreEqual("", viewModel.Reason);
+            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
+            Assert.AreEqual(null, navigationService.CurrentView);
+            Assert.AreEqual(0, navigationService.PageStackCount);
+        }
+
+        [TestMethod, TestCategory("GatedTests")]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

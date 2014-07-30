@@ -22,6 +22,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private MessageboxResult _recoveryHashNotFoundCallbackResult;
         private string _newPassword;
         private string _repeatedPassword;
+        private bool _isSending;
 
         #endregion
 
@@ -59,6 +60,19 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
         }
 
+        public bool IsSending
+        {
+            get { return _isSending; }
+            set
+            {
+                if (_isSending != value)
+                {
+                    _isSending = value;
+                    RaisePropertyChanged(() => IsSending);
+                }
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -71,6 +85,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private async void NewPasswordAction()
         {
+            IsSending = true;
             if (string.IsNullOrEmpty(_newPassword) || string.IsNullOrEmpty(_repeatedPassword))
             {
                 ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectPasswordRecoveryErrorCaption,
@@ -112,6 +127,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                         break;
                 }
             }
+            IsSending = false;
         }
 
         protected override void GoBackAction()
@@ -132,6 +148,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         public UploadProjectNewPasswordViewModel()
         {
             NewPasswordCommand = new RelayCommand(NewPasswordAction);
+            IsSending = false;
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedAction);

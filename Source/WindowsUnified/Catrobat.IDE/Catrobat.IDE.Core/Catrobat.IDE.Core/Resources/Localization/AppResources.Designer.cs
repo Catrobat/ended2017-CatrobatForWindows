@@ -935,7 +935,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Look name ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Look name: ähnelt.
         /// </summary>
         public static string Editor_CostumeName {
             get {
@@ -1430,7 +1430,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Sound name ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sound name: ähnelt.
         /// </summary>
         public static string Editor_SoundName {
             get {
@@ -1457,7 +1457,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Object name ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Object name: ähnelt.
         /// </summary>
         public static string Editor_SpriteName {
             get {
@@ -2260,7 +2260,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The application requires a restart to apply the changes. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Press &quot;back&quot; to apply the changes. ähnelt.
         /// </summary>
         public static string Main_ApplicationRequiresRestart {
             get {
@@ -2904,6 +2904,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_SelectProjectCreationOption {
             get {
                 return ResourceManager.GetString("Main_SelectProjectCreationOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die sending... ähnelt.
+        /// </summary>
+        public static string Main_Sending {
+            get {
+                return ResourceManager.GetString("Main_Sending", resourceCulture);
             }
         }
         

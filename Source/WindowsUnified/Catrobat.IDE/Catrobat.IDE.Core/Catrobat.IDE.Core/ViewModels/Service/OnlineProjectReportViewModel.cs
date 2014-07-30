@@ -20,6 +20,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private MessageboxResult _missingReportDataCallbackResult;
         private MessageboxResult _reportSuccessfullCallbackResult;
         private string _reason;
+        private bool _isSending;
         private OnlineProjectHeader _selectedOnlineProject;
 
         #endregion
@@ -61,11 +62,26 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
         }
 
+        public bool IsSending
+        {
+            get { return _isSending; }
+            set
+            {
+                if (_isSending != value)
+                {
+                    _isSending = value;
+                    RaisePropertyChanged(() => IsSending);
+                }
+            }
+        }
+
         #endregion
 
         #region Commands
 
         public RelayCommand ReportCommand { get; private set; }
+
+        public RelayCommand CancelCommand { get; private set; }
 
         #endregion
 
@@ -73,6 +89,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private async void ReportAction()
         {
+            IsSending = true;
             if (string.IsNullOrEmpty(_reason))
             {
                 ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_ReportErrorCaption,
@@ -103,6 +120,12 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                         break;
                 }
             }
+            IsSending = false;
+        }
+
+        private void CancelAction()
+        {
+            GoBackAction();
         }
 
         protected override void GoBackAction()
@@ -134,6 +157,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         public OnlineProjectReportViewModel()
         {
             ReportCommand = new RelayCommand(ReportAction);
+            CancelCommand = new RelayCommand(CancelAction);
+            IsSending = false;
 
             //Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
             //     ViewModelMessagingToken.ContextListener, ContextChangedAction);

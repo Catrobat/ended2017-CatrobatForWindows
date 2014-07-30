@@ -322,7 +322,7 @@
     <value>clear sel.</value>
   </data>
   <data name="Editor_CostumeName" xml:space="preserve">
-    <value>Look name</value>
+    <value>Look name:</value>
   </data>
   <data name="Editor_CostumePlural" xml:space="preserve">
     <value>looks</value>
@@ -439,7 +439,7 @@
     <value>loading object</value>
   </data>
   <data name="Editor_SoundName" xml:space="preserve">
-    <value>Sound name</value>
+    <value>Sound name:</value>
   </data>
   <data name="Editor_SoundPlural" xml:space="preserve">
     <value>sounds</value>
@@ -448,7 +448,7 @@
     <value>sound</value>
   </data>
   <data name="Editor_SpriteName" xml:space="preserve">
-    <value>Object name</value>
+    <value>Object name:</value>
   </data>
   <data name="Editor_TitleChangeCostumeName" xml:space="preserve">
     <value>CHANGE LOOK NAME</value>
@@ -1084,7 +1084,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Username already exists.</value>
   </data>
   <data name="Main_ApplicationRequiresRestart" xml:space="preserve">
-    <value>The application requires a restart to apply the changes.</value>
+    <value>Press "back" to apply the changes.</value>
   </data>
   <data name="FormulaKeyboard_DigitSeparator" xml:space="preserve">
     <value>,</value>
@@ -1220,5 +1220,8 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Main_ReportProject" xml:space="preserve">
     <value>Report program</value>
+  </data>
+  <data name="Main_Sending" xml:space="preserve">
+    <value>sending...</value>
   </data>
 </root>

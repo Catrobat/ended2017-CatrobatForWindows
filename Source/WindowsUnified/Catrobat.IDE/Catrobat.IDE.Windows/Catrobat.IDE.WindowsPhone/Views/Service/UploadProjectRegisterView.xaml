@@ -78,6 +78,10 @@
                       Label="{Binding Resources.Main_ButtonRegister, 
                       Source={StaticResource LocalizedStrings}}"
                       Command="{Binding RegisterCommand}"/>
+        <AppBarButton Icon="Cancel" 
+                      Label="{Binding Resources.Main_ButtonCancel, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding CancelCommand}"/>
       </CommandBar.PrimaryCommands>
     </CommandBar>
   </Page.BottomAppBar>

@@ -19,6 +19,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private CatrobatContextBase _context;
         private MessageboxResult _missingRecoveryDataCallbackResult;
         private string _passwordRecoveryData;
+        private bool _isSending;
 
         #endregion
 
@@ -43,6 +44,19 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
         }
 
+        public bool IsSending
+        {
+            get { return _isSending; }
+            set
+            {
+                if (_isSending != value)
+                {
+                    _isSending = value;
+                    RaisePropertyChanged(() => IsSending);
+                }
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -55,6 +69,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private async void RecoverAction()
         {
+            IsSending = true;
             if (string.IsNullOrEmpty(_passwordRecoveryData))
             {
                 ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectPasswordRecoveryErrorCaption,
@@ -62,7 +77,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
             else
             {
-                ServiceLocator.NavigationService.NavigateTo<UploadProjectLoadingViewModel>();
                 JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.RecoverPasswordAsync(_passwordRecoveryData, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
                 if (statusResponse.statusCode == StatusCodes.ServerResponseOk)
@@ -71,17 +85,12 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     string hashMarker = "?c=";
                     int position = recoveryLink.LastIndexOf(hashMarker) + hashMarker.Length;
                     Context.LocalSettings.CurrentUserRecoveryHash = recoveryLink.Substring(position, recoveryLink.Length - position);
-                    ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                    {
-                        ResetViewModel();
-                        ServiceLocator.NavigationService.NavigateTo<UploadProjectNewPasswordViewModel>();
-                        ServiceLocator.NavigationService.RemoveBackEntry();
-                        ServiceLocator.NavigationService.RemoveBackEntry();
-                    });
+                    ResetViewModel();
+                    ServiceLocator.NavigationService.NavigateTo<UploadProjectNewPasswordViewModel>();
+                    ServiceLocator.NavigationService.RemoveBackEntry();
                 }
                 else
                 {
-                    base.GoBackAction();
                     switch (statusResponse.statusCode)
                     {
                         case StatusCodes.HTTPRequestFailed:
@@ -98,6 +107,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     }
                 }
             }
+            IsSending = false;
         }
 
         protected override void GoBackAction()
@@ -119,6 +129,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         {
             RecoverCommand = new RelayCommand(RecoverAction);
 
+            IsSending = false;
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedAction);
         }

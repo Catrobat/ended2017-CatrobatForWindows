@@ -44,7 +44,8 @@
       <StackPanel Grid.Column="1" Margin="12 0 6 0">
         <TextBlock Margin="0 0 0 0" 
                    Text="{Binding Resources.Main_ProjectName, 
-                   Source={StaticResource LocalizedStrings}}"  
+                   Source={StaticResource LocalizedStrings}}"
+                   TextWrapping="Wrap"
                    Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
                    Source={StaticResource ThemeChooser}}" />
         <TextBlock Text="{Binding ProjectName}" 
@@ -57,7 +58,8 @@
         <StackPanel Visibility="{Binding Description, 
                     Converter={StaticResource StringVisibilityConverter}}">
           <TextBlock Text="{Binding Resources.Main_ProjectNoDescription, 
-                     Source={StaticResource LocalizedStrings}}" 
+                     Source={StaticResource LocalizedStrings}}"
+                     TextWrapping="Wrap"
                      Style="{Binding StaticTheme.TextSmallStyle.NativeStyle, 
                      Source={StaticResource ThemeChooser}}" />
         </StackPanel>

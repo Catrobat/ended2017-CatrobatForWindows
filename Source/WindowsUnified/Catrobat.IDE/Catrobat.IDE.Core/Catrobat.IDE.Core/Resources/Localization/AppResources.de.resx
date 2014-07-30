@@ -322,7 +322,7 @@
     <value>Ausw. löschen</value>
   </data>
   <data name="Editor_CostumeName" xml:space="preserve">
-    <value>Name</value>
+    <value>Name:</value>
   </data>
   <data name="Editor_CostumePlural" xml:space="preserve">
     <value>Aussehen</value>
@@ -442,7 +442,7 @@
     <value>lade Objekt</value>
   </data>
   <data name="Editor_SoundName" xml:space="preserve">
-    <value>Klangname</value>
+    <value>Klangname:</value>
   </data>
   <data name="Editor_SoundPlural" xml:space="preserve">
     <value>Klänge</value>
@@ -451,7 +451,7 @@
     <value>Klang</value>
   </data>
   <data name="Editor_SpriteName" xml:space="preserve">
-    <value>Objektname</value>
+    <value>Objektname:</value>
   </data>
   <data name="Editor_TitleChangeCostumeName" xml:space="preserve">
     <value>NAMES DES AUSSEHENS ÄNDERN</value>
@@ -1084,7 +1084,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Benutzername existiert bereits.</value>
   </data>
   <data name="Main_ApplicationRequiresRestart" xml:space="preserve">
-    <value>Die Anwendung benötigt einen Neustart um die Änderungen zu verwirklichen.</value>
+    <value>Verwende den "Back-Button" um die Änderungen zu übernehmen.</value>
   </data>
   <data name="FormulaKeyboard_DigitSeparator" xml:space="preserve">
     <value>.</value>
@@ -1220,5 +1220,8 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   </data>
   <data name="Main_ReportProject" xml:space="preserve">
     <value>Programm melden</value>
+  </data>
+  <data name="Main_Sending" xml:space="preserve">
+    <value>senden...</value>
   </data>
 </root>

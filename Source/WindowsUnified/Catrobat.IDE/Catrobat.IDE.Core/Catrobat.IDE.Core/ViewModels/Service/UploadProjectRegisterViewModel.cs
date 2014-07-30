@@ -82,6 +82,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public RelayCommand RegisterCommand { get; private set; }
 
+        public RelayCommand CancelCommand { get; private set; }
+
         #endregion
 
         #region Actions
@@ -142,6 +144,11 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
         }
 
+        private void CancelAction()
+        {
+            GoBackAction();
+        }
+
         protected override void GoBackAction()
         {
             ResetViewModel();
@@ -160,6 +167,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         public UploadProjectRegisterViewModel()
         {
             RegisterCommand = new RelayCommand(RegisterAction);
+            CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedAction);

@@ -129,6 +129,30 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         }
 
         [TestMethod, TestCategory("GatedTests")]
+        public void CancelActionTest()
+        {
+            var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
+            navigationService.PageStackCount = 1;
+            navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
+            navigationService.CurrentView = typeof(UploadProjectRegisterViewModel);
+
+            var viewModel = new UploadProjectRegisterViewModel
+            {
+                Username = "TestUser",
+                Password = "TestPassword",
+                Email = "TestEmail"
+            };
+            viewModel.CancelCommand.Execute(null);
+
+            Assert.AreEqual("", viewModel.Username);
+            Assert.AreEqual("", viewModel.Password);
+            Assert.AreEqual("", viewModel.Email);
+            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
+            Assert.AreEqual(null, navigationService.CurrentView);
+            Assert.AreEqual(0, navigationService.PageStackCount);
+        }
+
+        [TestMethod, TestCategory("GatedTests")]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
