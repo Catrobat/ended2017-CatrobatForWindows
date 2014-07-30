@@ -1224,4 +1224,16 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_Sending" xml:space="preserve">
     <value>sending...</value>
   </data>
+  <data name="Editor_ButtonClearSelection" xml:space="preserve">
+    <value>clear sel.</value>
+  </data>
+  <data name="Editor_ButtonFinishedReordering" xml:space="preserve">
+    <value>finished</value>
+  </data>
+  <data name="Editor_ButtonSelect" xml:space="preserve">
+    <value>select</value>
+  </data>
+  <data name="Editor_ButtonStartReordering" xml:space="preserve">
+    <value>reorder</value>
+  </data>
 </root>

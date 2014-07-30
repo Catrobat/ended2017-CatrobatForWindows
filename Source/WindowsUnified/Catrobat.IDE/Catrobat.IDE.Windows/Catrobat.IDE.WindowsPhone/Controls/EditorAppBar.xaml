@@ -7,8 +7,8 @@
     d:DesignHeight="100" d:DesignWidth="480">
 
   <Grid x:Name="LayoutRoot" Height="100" 
-        Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+    Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
+    Source={StaticResource ThemeChooser}}">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="90"/>
       <ColumnDefinition/>

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.ObjectModel;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
 using Catrobat.IDE.Core.ViewModels;
@@ -42,7 +43,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
 
             var viewModel = new SpritesViewModel
             {
-                SelectedSprite = new Sprite()
+                SelectedSprites = new ObservableCollection<Sprite>()
             };
             viewModel.EditSpriteCommand.Execute(null);
 
@@ -70,7 +71,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
 
             var viewModel = new SpritesViewModel
             {
-                SelectedSprite = new Sprite()
+                SelectedSprites = new ObservableCollection<Sprite>()
             };
             //viewModel.DeleteSpriteCommand.Execute(null);
 
@@ -84,11 +85,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
         {
             var viewModel = new SpritesViewModel
             {
-                SelectedSprite = new Sprite()
+                SelectedSprites = new ObservableCollection<Sprite>
+                {
+                    new Sprite()
+                }
             };
             viewModel.ClearObjectsSelectionCommand.Execute(null);
 
-            Assert.IsNull(viewModel.SelectedSprite);
+            Assert.AreEqual(0, viewModel.SelectedSprites.Count);
         }
 
         [TestMethod/*, TestCategory("GatedTests")*/]
@@ -122,11 +126,11 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
 
             var viewModel = new SpritesViewModel
             {
-                SelectedSprite = new Sprite()
+                SelectedSprites = new ObservableCollection<Sprite>()
             };
             viewModel.GoBackCommand.Execute(null);
 
-            Assert.IsNull(viewModel.SelectedSprite);
+            Assert.AreEqual(0, viewModel.SelectedSprites.Count);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);
