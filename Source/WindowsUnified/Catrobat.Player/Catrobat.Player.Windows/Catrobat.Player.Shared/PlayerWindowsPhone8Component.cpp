@@ -82,7 +82,7 @@ namespace PhoneDirect3DXamlAppComponent
             {
                 //critical_section::scoped_lock lock(m_criticalSection);
                 //Update();
-                //m_renderer->Render();
+                m_renderer->Render();
                 //m_deviceResources->Present();
 
                 //if (!m_haveFocus || (m_updateState == UpdateEngineState::TooSmall))

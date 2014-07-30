@@ -92,4 +92,7 @@
   <ItemGroup>
     <ClCompile Include="EventControllerXaml.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="StoreManifest.xml" />
+  </ItemGroup>
 </Project>

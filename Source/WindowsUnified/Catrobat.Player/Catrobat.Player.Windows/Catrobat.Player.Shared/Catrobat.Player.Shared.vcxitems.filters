@@ -231,6 +231,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)EventController.h">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastScript.h">
+      <Filter>Objects\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageDaemon.cpp">
@@ -453,6 +456,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)EventController.cpp">
       <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastScript.cpp">
+      <Filter>Objects\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
