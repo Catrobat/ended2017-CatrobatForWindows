@@ -187,7 +187,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             Messenger.Default.Send(message, 
                 ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo<ProjectDetailViewModel>();
+            ServiceLocator.NavigationService.NavigateTo<ProgramDetailViewModel>();
         }
 
         private void DeleteLocalProjectAction(string projectName)
@@ -208,7 +208,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void CreateNewProjectAction()
         {
-            ServiceLocator.NavigationService.NavigateTo<AddNewProjectViewModel>();
+            ServiceLocator.NavigationService.NavigateTo<AddNewProgramViewModel>();
         }
 
         private void SettingsAction()
@@ -219,7 +219,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private void OnlineProjectTapAction(OnlineProjectHeader project)
         {
             SelectedOnlineProject = project;
-            ServiceLocator.NavigationService.NavigateTo<OnlineProjectViewModel>();
+            ServiceLocator.NavigationService.NavigateTo<OnlineProgramViewModel>();
         }
 
         private void LicenseAction()

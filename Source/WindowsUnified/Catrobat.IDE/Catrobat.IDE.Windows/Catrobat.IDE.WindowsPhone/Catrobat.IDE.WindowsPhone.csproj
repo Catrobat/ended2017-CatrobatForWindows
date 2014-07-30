@@ -197,8 +197,8 @@
     <Compile Include="Views\Editor\Sprites\SpritesView.xaml.cs">
       <DependentUpon>SpritesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\AddNewProjectView.xaml.cs">
-      <DependentUpon>AddNewProjectView.xaml</DependentUpon>
+    <Compile Include="Views\Main\AddNewProgramView.xaml.cs">
+      <DependentUpon>AddNewProgramView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -212,38 +212,38 @@
     <Compile Include="Views\Editor\Actions\ScriptBrickCategoryView.xaml.cs">
       <DependentUpon>ScriptBrickCategoryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\ProjectImportView.xaml.cs">
-      <DependentUpon>ProjectImportView.xaml</DependentUpon>
+    <Compile Include="Views\Main\ProgramImportView.xaml.cs">
+      <DependentUpon>ProgramImportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\ProjectDetailView.xaml.cs">
-      <DependentUpon>ProjectDetailView.xaml</DependentUpon>
+    <Compile Include="Views\Main\ProgramDetailView.xaml.cs">
+      <DependentUpon>ProgramDetailView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\ProjectSettingsView.xaml.cs">
-      <DependentUpon>ProjectSettingsView.xaml</DependentUpon>
+    <Compile Include="Views\Main\ProgramSettingsView.xaml.cs">
+      <DependentUpon>ProgramSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Service\UploadProjectLoadingView.xaml.cs">
-      <DependentUpon>UploadProjectLoadingView.xaml</DependentUpon>
+    <Compile Include="Views\Service\UploadProgramLoadingView.xaml.cs">
+      <DependentUpon>UploadProgramLoadingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Service\UploadProjectForgotPasswordView.xaml.cs">
-      <DependentUpon>UploadProjectForgotPasswordView.xaml</DependentUpon>
+    <Compile Include="Views\Service\UploadProgramForgotPasswordView.xaml.cs">
+      <DependentUpon>UploadProgramForgotPasswordView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Service\OnlineProjectReportView.xaml.cs">
-      <DependentUpon>OnlineProjectReportView.xaml</DependentUpon>
+    <Compile Include="Views\Service\OnlineProgramReportView.xaml.cs">
+      <DependentUpon>OnlineProgramReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Service\OnlineProjectView.xaml.cs">
-      <DependentUpon>OnlineProjectView.xaml</DependentUpon>
+    <Compile Include="Views\Service\OnlineProgramView.xaml.cs">
+      <DependentUpon>OnlineProgramView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Service\UploadProjectView.xaml.cs">
-      <DependentUpon>UploadProjectView.xaml</DependentUpon>
+    <Compile Include="Views\Service\UploadProgramView.xaml.cs">
+      <DependentUpon>UploadProgramView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Service\UploadProjectLoginView.xaml.cs">
-      <DependentUpon>UploadProjectLoginView.xaml</DependentUpon>
+    <Compile Include="Views\Service\UploadProgramLoginView.xaml.cs">
+      <DependentUpon>UploadProgramLoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Service\UploadProjectNewPasswordView.xaml.cs">
-      <DependentUpon>UploadProjectNewPasswordView.xaml</DependentUpon>
+    <Compile Include="Views\Service\UploadProgramNewPasswordView.xaml.cs">
+      <DependentUpon>UploadProgramNewPasswordView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Service\UploadProjectRegisterView.xaml.cs">
-      <DependentUpon>UploadProjectRegisterView.xaml</DependentUpon>
+    <Compile Include="Views\Service\UploadProgramRegisterView.xaml.cs">
+      <DependentUpon>UploadProgramRegisterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\SettingsLanguageView.xaml.cs">
       <DependentUpon>SettingsLanguageView.xaml</DependentUpon>
@@ -406,7 +406,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Main\AddNewProjectView.xaml">
+    <Page Include="Views\Main\AddNewProgramView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -426,47 +426,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Main\ProjectImportView.xaml">
+    <Page Include="Views\Main\ProgramImportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Main\ProjectDetailView.xaml">
+    <Page Include="Views\Main\ProgramDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Main\ProjectSettingsView.xaml">
+    <Page Include="Views\Main\ProgramSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Service\UploadProjectLoadingView.xaml">
+    <Page Include="Views\Service\UploadProgramLoadingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Service\UploadProjectForgotPasswordView.xaml">
+    <Page Include="Views\Service\UploadProgramForgotPasswordView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Service\OnlineProjectReportView.xaml">
+    <Page Include="Views\Service\OnlineProgramReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Service\OnlineProjectView.xaml">
+    <Page Include="Views\Service\OnlineProgramView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Service\UploadProjectView.xaml">
+    <Page Include="Views\Service\UploadProgramView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Service\UploadProjectLoginView.xaml">
+    <Page Include="Views\Service\UploadProgramLoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Service\UploadProjectNewPasswordView.xaml">
+    <Page Include="Views\Service\UploadProgramNewPasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Service\UploadProjectRegisterView.xaml">
+    <Page Include="Views\Service\UploadProgramRegisterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

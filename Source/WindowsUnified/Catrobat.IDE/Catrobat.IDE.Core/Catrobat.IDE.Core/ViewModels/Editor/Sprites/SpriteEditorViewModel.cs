@@ -730,7 +730,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             var message = new GenericMessage<Program>(CurrentProgram);
             Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo<ProjectSettingsViewModel>();
+            ServiceLocator.NavigationService.NavigateTo<ProgramSettingsViewModel>();
         }
 
 
