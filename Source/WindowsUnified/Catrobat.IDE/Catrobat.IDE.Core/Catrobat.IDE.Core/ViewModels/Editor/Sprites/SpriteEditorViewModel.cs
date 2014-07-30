@@ -366,6 +366,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             private set;
         }
 
+        public RelayCommand CopySoundCommand
+        {
+            get;
+            private set;
+        }
+
         public RelayCommand<Sound> PlaySoundCommand
         {
             get;
@@ -642,6 +648,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 messageContent, DeleteSoundMessageBoxResult, MessageBoxOptions.OkCancel);
         }
 
+        private void CopySoundAction()
+        {
+            throw new NotImplementedException();
+        }
+
         private void AddNewCostumeAction()
         {
             var message = new GenericMessage<Sprite>(SelectedSprite);
@@ -855,6 +866,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             AddNewSoundCommand = new RelayCommand(AddNewSoundAction);
             EditSoundCommand = new RelayCommand(EditSoundAction, CanExecuteEditSoundCommand);
             DeleteSoundCommand = new RelayCommand(DeleteSoundAction, CanExecuteDeleteSoundCommand);
+            CopySoundCommand = new RelayCommand(CopySoundAction, () => false);
 
             //PlaySoundCommand = new RelayCommand<Sound>(PlaySoundAction);
             //StopSoundCommand = new RelayCommand<Sound>(StopSoundAction);
@@ -957,5 +969,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
 
         #endregion
+
     }
 }

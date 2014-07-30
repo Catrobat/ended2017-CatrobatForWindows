@@ -55,7 +55,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         }
 
         public static readonly DependencyProperty TargetTypeProperty =
-            DependencyProperty.Register("TargetType", typeof(AppBarTargetType), typeof(MultiModeEditorCommandBar), new PropertyMetadata(AppBarTargetType.Costume, TargetTypeChanged));
+            DependencyProperty.Register("TargetType", typeof(AppBarTargetType), typeof(MultiModeEditorCommandBar), new PropertyMetadata(AppBarTargetType.Look, TargetTypeChanged));
 
         private static void TargetTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -248,11 +248,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls
                     text = AppResources.Editor_ButtonAddObject;
                     break;
 
-                case AppBarTargetType.Script:
+                case AppBarTargetType.Action:
                     text = AppResources.Editor_ButtonAddScript;
                     break;
 
-                case AppBarTargetType.Costume:
+                case AppBarTargetType.Look:
                     text = AppResources.Editor_ButtonAddCostume;
                     break;
 

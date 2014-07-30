@@ -7,7 +7,7 @@ using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.WindowsPhone.Controls
 {
-    public enum AppBarTargetType { Object, Script, Costume, Sound }
+    public enum AppBarTargetType { Object, Action, Look, Sound }
 
     public partial class EditorAppBar : UserControl
     {
@@ -20,7 +20,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         }
 
         public static readonly DependencyProperty TargetTypeProperty = 
-            DependencyProperty.Register("TargetType", typeof(AppBarTargetType), typeof(EditorAppBar), new PropertyMetadata(AppBarTargetType.Costume, TargetTypeChanged));
+            DependencyProperty.Register("TargetType", typeof(AppBarTargetType), typeof(EditorAppBar), new PropertyMetadata(AppBarTargetType.Look, TargetTypeChanged));
 
         private static void TargetTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -37,14 +37,14 @@ namespace Catrobat.IDE.WindowsPhone.Controls
                     that.StackPanelDelete.Visibility = Visibility.Visible;
                     break;
 
-                case AppBarTargetType.Script:
+                case AppBarTargetType.Action:
                     that.StackPanelNew.Visibility = Visibility.Visible;
                     that.StackPanelEdit.Visibility = Visibility.Collapsed;
                     that.StackPanelCopy.Visibility = Visibility.Visible;
                     that.StackPanelDelete.Visibility = Visibility.Visible;
                     break;
 
-                case AppBarTargetType.Costume:
+                case AppBarTargetType.Look:
                     that.StackPanelNew.Visibility = Visibility.Visible;
                     that.StackPanelEdit.Visibility = Visibility.Visible;
                     that.StackPanelCopy.Visibility = Visibility.Visible;
@@ -184,11 +184,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls
                     TextBlockNumberOfSelectedItemsText.Text = usePlural ? AppResources.Editor_ObjectPlural : AppResources.Editor_ObjectSingular;
                     break;
 
-                case AppBarTargetType.Script:
+                case AppBarTargetType.Action:
                     TextBlockNumberOfSelectedItemsText.Text = usePlural ? AppResources.Editor_ActionPlural : AppResources.Editor_ActionSingular;
                     break;
 
-                case AppBarTargetType.Costume:
+                case AppBarTargetType.Look:
                     TextBlockNumberOfSelectedItemsText.Text = usePlural ? AppResources.Editor_CostumePlural : AppResources.Editor_CostumeSingular;
                     break;
 
@@ -208,11 +208,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls
                     text = AppResources.Editor_ButtonAddObject;
                     break;
 
-                case AppBarTargetType.Script:
+                case AppBarTargetType.Action:
                     text = AppResources.Editor_ButtonAddScript;
                     break;
 
-                case AppBarTargetType.Costume:
+                case AppBarTargetType.Look:
                     text = AppResources.Editor_ButtonAddCostume;
                     break;
 

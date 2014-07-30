@@ -101,6 +101,7 @@
     </Compile>
     <Compile Include="Controls\ActionsControls\MasterBrick.cs" />
     <Compile Include="Controls\ActionsControls\NormalBrick.cs" />
+    <Compile Include="Controls\MultiCommandBar.cs" />
     <Compile Include="Controls\MultiModeEditorCommandBar.cs" />
     <Compile Include="Controls\ProcessIcon.xaml.cs">
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
