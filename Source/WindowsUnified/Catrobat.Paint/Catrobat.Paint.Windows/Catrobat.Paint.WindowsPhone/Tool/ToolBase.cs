@@ -40,9 +40,9 @@ namespace Catrobat.Paint.Phone.Tool
             }
             NeedToResetCanvas = false;
 
-            // TODO: PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
-            // TODO: PocketPaintApplication.GetInstance().SetBitmapAsPaintingAreaCanvasBackground();
-            // TODO: PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
+            PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
+            PocketPaintApplication.GetInstance().SetBitmapAsPaintingAreaCanvasBackground();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
         }
 
     }

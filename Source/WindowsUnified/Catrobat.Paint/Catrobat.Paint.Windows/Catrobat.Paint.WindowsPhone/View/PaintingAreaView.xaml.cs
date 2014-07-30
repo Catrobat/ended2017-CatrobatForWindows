@@ -51,14 +51,15 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().PaintingAreaView = this;
 
             Spinner.SpinnerGrid = SpinnerGrid;
-            // TODO: Spinner.SpinnerStoryboard = SpinningStoryboard;
+            //Spinner.SpinnerStoryboard = SpinningStoryboard;
 
             PaintingAreaCheckeredGrid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
-            PaintingAreaCheckeredGrid.ManipulationDelta += PaintingAreaCheckeredGrid_ManipulationDelta;
-            PaintingAreaCheckeredGrid.ManipulationCompleted += PaintingAreaCheckeredGrid_ManipulationCompleted;
+            PaintingAreaCheckeredGrid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
+            PaintingAreaCheckeredGrid.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
             PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
             SliderThickness.ValueChanged += SliderThickness_ValueChanged;
             SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
+            PocketPaintApplication.GetInstance().AppbarTop.ToolChangedHere(PocketPaintApplication.GetInstance().ToolCurrent);
             //BtnThickness.Click += BtnThickness_Click;
             // TODO: btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
             // TODO: btnBrushThickness.Content = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
@@ -618,6 +619,26 @@ namespace Catrobat.Paint.WindowsPhone.View
         }
 
         private void SliderThickness_ValueChanged_1(object sender, RangeBaseValueChangedEventArgs e)
+        {
+
+        }
+
+        private void PaintingAreaCheckeredGrid_ManipulationStarted_1(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+
+        }
+
+        private void PaintingAreaCheckeredGrid_ManipulationDelta_1(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+
+        }
+
+        private void PaintingAreaCheckeredGrid_ManipulationCompleted_1(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+
+        }
+
+        private void Grid_ManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
         {
 
         }

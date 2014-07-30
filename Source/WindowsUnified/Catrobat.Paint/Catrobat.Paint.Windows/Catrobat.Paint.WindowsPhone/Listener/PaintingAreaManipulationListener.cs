@@ -8,6 +8,7 @@ using Windows.Foundation;
 using Windows.UI.Xaml.Media;
 using Catrobat.Paint.WindowsPhone.Tool;
 using Windows.UI.Xaml.Input;
+
 namespace Catrobat.Paint.Phone.Listener
 {
     class PaintingAreaManipulationListener 
@@ -36,7 +37,7 @@ namespace Catrobat.Paint.Phone.Listener
 
 
             object movezoom;
-            /* TODO: if (PinchManipulation != null)
+            /*if (PinchManipulation != null)
             {
 
                 movezoom = new ScaleTransform();
@@ -46,8 +47,8 @@ namespace Catrobat.Paint.Phone.Listener
                      ((ScaleTransform)movezoom).ScaleX *= e.Delta.Scale;
                      ((ScaleTransform)movezoom).ScaleY *= e.Delta.Scale;
                 }
-            }
-            else
+            }*/
+            //else
             {
                 movezoom = new TranslateTransform();
                 int right_left = PocketPaintApplication.GetInstance().PaintData.max_right_left;
@@ -59,7 +60,7 @@ namespace Catrobat.Paint.Phone.Listener
                 ((TranslateTransform)movezoom).X += Convert.ToInt32(e.Delta.Translation.X);
                 ((TranslateTransform)movezoom).Y += e.Delta.Translation.Y;
                 PocketPaintApplication.GetInstance().PaintData.max_right_left = PocketPaintApplication.GetInstance().PaintData.max_right_left + Convert.ToInt32(e.Delta.Translation.X);
-            }*/
+            }
 
             switch (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType())
             {
@@ -69,7 +70,7 @@ namespace Catrobat.Paint.Phone.Listener
                     break;
                case ToolType.Move:
                case ToolType.Zoom:
-                    // TODO: PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(movezoom);
+                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(movezoom);
                     break;
                case ToolType.Line:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
@@ -78,12 +79,12 @@ namespace Catrobat.Paint.Phone.Listener
         }
 
 
-        public void ManipulationCompleted(object sender, ManipulationDeltaRoutedEventArgs e)
+        public void ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
             var point = new Point(Convert.ToInt32(e.Position.X), Convert.ToInt32(e.Position.Y));
 
             // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
-            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive) // TODO:|| e.Handled
+            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
             {
                 return;
             }
