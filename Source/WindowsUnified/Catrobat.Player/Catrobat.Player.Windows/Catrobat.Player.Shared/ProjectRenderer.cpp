@@ -31,7 +31,7 @@ void ProjectRenderer::Render()
 
 	if (!m_Initialized)
 	{	
-		ProjectDaemon::Instance()->ApplyDesiredRenderTargetSizeFromProject();
+		//ProjectDaemon::Instance()->ApplyDesiredRenderTargetSizeFromProject();
 		m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_d3dContext.Get()));
 		m_spriteFont = unique_ptr<SpriteFont>(new SpriteFont(m_d3dDevice.Get(), L"italic.spritefont"));
 

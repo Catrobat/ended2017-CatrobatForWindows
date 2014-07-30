@@ -6,15 +6,16 @@
 #include "SoundManager.h"
 #include "ProjectRenderer.h"
 #include "WhenScript.h"
-#include <DrawingSurfaceNative.h>
+#include "EventControllerXaml.h"
+//#include <DrawingSurfaceNative.h>
 
 namespace PhoneDirect3DXamlAppComponent
 {
 
 public delegate void RequestAdditionalFrameHandler();
 
-[Windows::Foundation::Metadata::WebHostHidden]
-public ref class Direct3DBackground sealed
+//[Windows::Foundation::Metadata::WebHostHidden]
+class Direct3DBackground 
 {
 public:
     Direct3DBackground(Windows::UI::Core::CoreWindow^ coreWindow);
@@ -23,49 +24,30 @@ public:
     void StopRenderLoop();
     void Suspend();
     void Resume();
-    Concurrency::critical_section& GetCriticalSection() { return m_criticalSection; }
 
-	event RequestAdditionalFrameHandler^ RequestAdditionalFrame;
+	void SetSwapChainPanel(Windows::UI::Xaml::Controls::SwapChainPanel^ panel);
+	Windows::UI::Xaml::Controls::SwapChainPanel^ GetSwapChainPanel() const { return m_swapChainPanel; }
 
-	property Windows::Foundation::Size WindowBounds;
-	property Windows::Foundation::Size NativeResolution;
-	property Windows::Foundation::Size RenderResolution;
-    property Platform::String^ ProjectName;
+	RequestAdditionalFrameHandler^ RequestAdditionalFrame;
 
-protected:
-	// Event Handlers
-    void InitEventHandlers();
+	Windows::Foundation::Size* WindowBounds;
+	Windows::Foundation::Size* NativeResolution;
+	Windows::Foundation::Size* RenderResolution;
+    Platform::String^ ProjectName;
 
-    void OnPointerPressed(
-        _In_ Windows::UI::Core::CoreWindow^ sender,
-        _In_ Windows::UI::Core::PointerEventArgs^ args
-        );
-    void OnPointerMoved(
-        _In_ Windows::UI::Core::CoreWindow^ sender,
-        _In_ Windows::UI::Core::PointerEventArgs^ args
-        );
-    void OnPointerReleased(
-        _In_ Windows::UI::Core::CoreWindow^ sender,
-        _In_ Windows::UI::Core::PointerEventArgs^ args
-        );
-    void OnPointerExited(
-        _In_ Windows::UI::Core::CoreWindow^ sender,
-        _In_ Windows::UI::Core::PointerEventArgs^ args
-        );
-    // TODO: move this code to phone project
-    void OnHardwareBackButtonPressed(
-        _In_ Platform::Object^ sender,
-        Windows::Phone::UI::Input::BackPressedEventArgs ^args
-        );
+//internal:
+	//HRESULT Connect(_In_ IDrawingSurfaceRuntimeHostNative* host, _In_ ID3D11Device1* device);
+	//void Disconnect();
 
-internal:
-	HRESULT Connect(_In_ IDrawingSurfaceRuntimeHostNative* host, _In_ ID3D11Device1* device);
-	void Disconnect();
-
-	HRESULT PrepareResources(_In_ const LARGE_INTEGER* presentTargetTime, _Inout_ DrawingSurfaceSizeF* desiredRenderTargetSize);
-	HRESULT Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView);
+	//HRESULT PrepareResources(_In_ const LARGE_INTEGER* presentTargetTime, _Inout_ DrawingSurfaceSizeF* desiredRenderTargetSize);
+	//HRESULT Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView);
 
 private:
+	Concurrency::critical_section& GetCriticalSection();
+
+	EventController^								m_eventController;
+	Windows::UI::Xaml::Controls::SwapChainPanel^	m_swapChainPanel;
+
 	Renderer^                                       m_renderer;
 	ProjectRenderer^                                m_projectRenderer;
 	BasicTimer^                                     m_timer;

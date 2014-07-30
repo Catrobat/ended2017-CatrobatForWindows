@@ -44,7 +44,7 @@ m_playActive(true)
 
     // At this point we have access to the device.
     // We can create the device-dependent resources.
-    m_main = std::unique_ptr<Direct3DBackground>(ref new Direct3DBackground(window));
+    m_main = std::unique_ptr<Direct3DBackground>(new Direct3DBackground(window));
 
     m_main->WindowBounds = new Windows::Foundation::Size(
         (float)Window::Current->Bounds.Height,
@@ -60,6 +60,8 @@ m_playActive(true)
     m_main->ProjectName = "Default";
 
     m_main->RenderResolution = m_main->NativeResolution;
+
+	m_main->SetSwapChainPanel(PlayerSwapChainPanel);
 
     m_main->StartRenderLoop();
 }

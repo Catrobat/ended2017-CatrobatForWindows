@@ -45,6 +45,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)DeviceInformation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DContentProvider.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EventController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ForeverBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FormulaTree.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FormulaTreeException.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DContentProvider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DirectXHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EventController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ForeverBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)FormulaTree.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)FormulaTreeException.h" />
