@@ -6,8 +6,7 @@
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   DataContext="{Binding ProgramDetailViewModel, Source={StaticResource Locator}}">
 
-  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+  <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition />
@@ -16,16 +15,15 @@
     <StackPanel x:Name="TitlePanel" 
                 Grid.Row="0"
                 Margin="12">
-      <TextBlock x:Name="ApplicationTitle" 
+      <!--<TextBlock x:Name="ApplicationTitle" 
                  Text="{Binding Resources.Main_TitleCurrentProject, 
                  Source={StaticResource LocalizedStrings}}" 
-                 Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-                 Source={StaticResource ThemeChooser}}"/>
+                 Style="{ThemeResource TextNormalStyle}"/>-->
       <TextBlock x:Name="PageTitle" 
-                 Text="{Binding CurrentProjectHeader.ProjectName}" 
-                 Margin="12 0 0 0" 
-                 Style="{Binding StaticTheme.TextTitle3Style.NativeStyle, 
-                 Source={StaticResource ThemeChooser}}"/>
+                 Text="{Binding Resources.Main_TitleCurrentProject, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Margin="0 0 0 0" 
+                 Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
     <Grid Grid.Row="1" Margin="12 0 12 18">
       <Grid.ColumnDefinitions>
@@ -57,44 +55,40 @@
                    Text="{Binding Resources.Main_ProjectName, 
                    Source={StaticResource LocalizedStrings}}"
                    TextWrapping="Wrap"
-                   Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-                   Source={StaticResource ThemeChooser}}" />
+                   Style="{ThemeResource TextNormalStyle}"/>
         <TextBlock Text="{Binding CurrentProjectHeader.ProjectName, Mode=OneWay}" 
-                   TextWrapping="Wrap" />
+                   TextWrapping="Wrap"
+                   Style="{ThemeResource TextSmallStyle}"/>
         <TextBlock Margin="0 12 0 0" 
                    Text="{Binding Resources.Main_ProjectDescription, 
                    Source={StaticResource LocalizedStrings}}" 
-                   Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-                   Source={StaticResource ThemeChooser}}" />
+                   Style="{ThemeResource TextNormalStyle}"/>
         <StackPanel Visibility="{Binding CurrentProject.Description, 
                     Converter={StaticResource StringVisibilityConverter}}">
           <TextBlock Text="{Binding Resources.Main_ProjectNoDescription, 
-                     Source={StaticResource LocalizedStrings}}" 
-                     Style="{Binding StaticTheme.TextSmallStyle.NativeStyle, 
-                     Source={StaticResource ThemeChooser}}" 
-                     TextWrapping="Wrap"/>
+                     Source={StaticResource LocalizedStrings}}"
+                     TextWrapping="Wrap"
+                     Style="{ThemeResource TextSubtileStyle}"/>
         </StackPanel>
         <TextBlock Text="{Binding CurrentProject.Description, Mode=OneWay}" 
                    TextWrapping="Wrap" />
         <!--<TextBlock Margin="0 12 0 0" 
                    Text="{Binding Resources.Main_OnlineProjectUploaded, 
                    Source={StaticResource LocalizedStrings}}" 
-                   Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-                   Source={StaticResource ThemeChooser}}" />
+                   Style="{ThemeResource TextNormalStyle}"/>
         <TextBlock x:Name="UploadedLabel" 
                    Text="{Binding OnlineProjectViewModel.UploadedLabelText, 
                    Source={StaticResource Locator}}" />
         <TextBlock Text="{Binding Author}" 
-                   TextWrapping="Wrap" />
+                   TextWrapping="Wrap"/>
         <TextBlock x:Name="VersionLabel" 
                    Text="{Binding OnlineProjectViewModel.VersionLabelText, 
                    Source={StaticResource Locator}}" 
-                   TextWrapping="Wrap" />
+                   TextWrapping="Wrap"/>
         <TextBlock Margin="0 12 0 0"
                    Text="{Binding Resources.Main_OnlineProjectStatistics, 
                    Source={StaticResource LocalizedStrings}}" 
-                   Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-                   Source={StaticResource ThemeChooser}}" />
+                   Style="{ThemeResource TextNormalStyle}"/>
         <TextBlock x:Name="ViewsLabel" 
                    Text="{Binding OnlineProjectViewModel.ViewsLabelText, 
                    Source={StaticResource Locator}}" 
@@ -109,8 +103,7 @@
 
   <Page.BottomAppBar>
     <CommandBar RequestedTheme="Dark"
-      Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
-      Source={StaticResource ThemeChooser}}">
+      Background="{ThemeResource AppBarBackgroundBrush}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Edit" 
           Label="{Binding Resources.Main_ButtonEdit, 
