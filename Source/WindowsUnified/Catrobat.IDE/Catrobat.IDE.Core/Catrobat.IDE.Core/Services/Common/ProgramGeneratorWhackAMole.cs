@@ -45,7 +45,7 @@ namespace Catrobat.IDE.Core.Services.Common
             if (writeToDisk)
             {
                 await WriteScreenshotsToDisk(project.BasePath);
-                await WriteLooksToDisk(Path.Combine(project.BasePath, StorageConstants.ProgramImagesPath));
+                await WriteLooksToDisk(Path.Combine(project.BasePath, StorageConstants.ProgramLooksPath));
                 await WriteSoundsToDisk(Path.Combine(project.BasePath, StorageConstants.ProgramSoundsPath));
             }
 

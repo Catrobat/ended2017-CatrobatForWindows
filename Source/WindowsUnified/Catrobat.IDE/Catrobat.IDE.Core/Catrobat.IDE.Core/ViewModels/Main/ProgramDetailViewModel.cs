@@ -42,35 +42,15 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             get { return _currentProgram; }
             set
             {
-                //if (_currentProgram != null && _currentProgram.Screenshot != null)
-                //{
-                //    _currentProgram.Screenshot.PropertyChanged -=
-                //        ProgramScreenshotOnPropertyChanged;
-                //}
-
                 _currentProgram = value;
 
-                //if (_currentProgram != null && _currentProgram.Screenshot != null)
-                //{
-                //    _currentProgram.Screenshot.PropertyChanged +=
-                //        ProgramScreenshotOnPropertyChanged;
-                //}
-
-                ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                {
-                    RaisePropertyChanged(() => CurrentProgram);
-                });
+                ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                    RaisePropertyChanged(() => CurrentProgram));
             }
         }
 
-        //private void ProgramScreenshotOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        //{
-        //    //ServiceLocator.DispatcherService.RunOnMainThread(() =>
-        //    //        RaisePropertyChanged(() => IsLoading));
-        //}
-
         private LocalProjectHeader _selectedProjectHeader;
-        public LocalProjectHeader CurrentProjectHeader
+        public LocalProjectHeader CurrentProgramHeader
         {
             get
             {
@@ -81,7 +61,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 if (value == _selectedProjectHeader) return;
 
                 _selectedProjectHeader = value;
-                RaisePropertyChanged(() => CurrentProjectHeader);
+                RaisePropertyChanged(() => CurrentProgramHeader);
             }
         }
 
@@ -184,7 +164,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             Messenger.Default.Send(message, ViewModelMessagingToken.ShareProjectHeaderListener);
 
             ServiceLocator.ShareService.ShateProject(CurrentProgram.Name);
-            //ServiceLocator.NavigationService.NavigateTo<ShareProjectServiceSelectionViewModel>();
         }
 
         private void RenameProjectAction()
@@ -198,7 +177,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void CurrentProjectHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
         {
-            CurrentProjectHeader = message.Content;
+            CurrentProgramHeader = message.Content;
             //CurrentProject = await CatrobatContext.LoadProjectByNameStatic(CurrentProjectHeader.ProjectName);
         }
 
@@ -225,12 +204,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 ViewModelMessagingToken.CurrentProjectHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
         }
 
-        public override void NavigateTo()
+        public async override void NavigateTo()
         {
-            Task.Run(async () =>
-            {
                 if (CurrentProgram == null ||
-                    CurrentProgram.Name != CurrentProjectHeader.ProjectName)
+                    CurrentProgram.Name != CurrentProgramHeader.ProjectName)
                 {
                     lock (_loadingLock)
                     {
@@ -244,13 +221,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         await CurrentProgram.Save();
 
                     var newProject = await ServiceLocator.ContextService.
-                        LoadProgramByName(CurrentProjectHeader.ProjectName);
+                        LoadProgramByName(CurrentProgramHeader.ProjectName);
 
                     if (newProject != null)
                     {
                         ServiceLocator.DispatcherService.RunOnMainThread(() =>
                         {
-                            CurrentProjectHeader.ValidityState = LocalProjectState.Valid;
+                            CurrentProgramHeader.ValidityState = LocalProjectState.Valid;
                         });
 
                         CurrentProgram = newProject;
@@ -265,13 +242,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     {
                         ServiceLocator.DispatcherService.RunOnMainThread(() =>
                         {
-                            CurrentProjectHeader.ValidityState = LocalProjectState.Damaged;
+                            CurrentProgramHeader.ValidityState = LocalProjectState.Damaged;
                             // TODO: get real ValidityState from "LoadProjectByNameStatic"
 
                             ServiceLocator.NavigationService.NavigateBack(this.GetType());
 
                             CurrentProgram = null;
-                            CurrentProjectHeader = null;
+                            CurrentProgramHeader = null;
                             var message = new GenericMessage<LocalProjectHeader>(null);
                             Messenger.Default.Send(message,
                                 ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
@@ -280,7 +257,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         IsActivatingLocalProject = false;
                     }
                 }
-            });
 
             base.NavigateTo();
         }

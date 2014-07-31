@@ -14,14 +14,14 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                var imagePath = Path.Combine(projectPath, StorageConstants.ProgramImagesPath);
+                var imagePath = Path.Combine(projectPath, StorageConstants.ProgramLooksPath);
                 if (!await storage.DirectoryExistsAsync(imagePath))
                     await storage.CreateDirectoryAsync(imagePath);
             }
 
             var resizedImage = await ServiceLocator.ImageResizeService.ResizeImage(image, dimension.Width, dimension.Height);
             var look = new Look(name);
-            var absoluteFileName = Path.Combine(projectPath, StorageConstants.ProgramImagesPath, look.FileName);
+            var absoluteFileName = Path.Combine(projectPath, StorageConstants.ProgramLooksPath, look.FileName);
 
             await resizedImage.WriteAsPng(absoluteFileName);
 
@@ -32,7 +32,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
 
         public static async Task ReplaceImageInStorage(Program project, Look look, PortableImage newImage)
         {
-            var path = Path.Combine(project.BasePath, StorageConstants.ProgramImagesPath, look.FileName);
+            var path = Path.Combine(project.BasePath, StorageConstants.ProgramLooksPath, look.FileName);
 
             using (var storage = StorageSystem.GetStorage())
             {

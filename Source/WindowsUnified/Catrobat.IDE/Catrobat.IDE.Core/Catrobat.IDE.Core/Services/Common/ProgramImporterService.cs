@@ -143,7 +143,6 @@ namespace Catrobat.IDE.Core.Services.Common
             var uniqueProgramName = await ServiceLocator.ContextService.
                 FindUniqueProgramName(_programName);
 
-
             if (_convertedProject != null) // if previour conversion was OK
             {
                 await _convertedProject.Save(Path.Combine(
@@ -166,6 +165,9 @@ namespace Catrobat.IDE.Core.Services.Common
                 await storage.MoveDirectoryAsync(StorageConstants.TempProgramImportPath,
                     newPath);
             }
+
+            await ServiceLocator.ContextService.
+                CreateThumbnailsForLooks(uniqueProgramName);
 
             _extractResult = null;
             _checkResult = null;
@@ -208,11 +210,6 @@ namespace Catrobat.IDE.Core.Services.Common
             switch (validateResult.Status)
             {
                 case ProgramImportStatus.Valid:
-                    ServiceLocator.NotifictionService.ShowToastNotification(
-                        "Program added",
-                        "Program successfully added to your program list.",
-                        ToastDisplayDuration.Long); // TODO: localize me
-
                     acceptProject = true;
                     break;
                 case ProgramImportStatus.Damaged:
@@ -249,6 +246,11 @@ namespace Catrobat.IDE.Core.Services.Common
                 var localProjectsChangedMessage = new MessageBase();
                 Messenger.Default.Send(localProjectsChangedMessage,
                     ViewModelMessagingToken.LocalProjectsChangedListener);
+
+                ServiceLocator.NotifictionService.ShowToastNotification(
+                    "Program added",
+                    "Program successfully added to your program list.",
+                    ToastDisplayDuration.Long); // TODO: localize me
             }
         }
     }

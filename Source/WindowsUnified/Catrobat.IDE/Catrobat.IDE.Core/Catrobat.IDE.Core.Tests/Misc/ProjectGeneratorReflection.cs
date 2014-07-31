@@ -219,7 +219,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
                  Name = "Look" + index,
              };
 
-            var absoluteFileName = Path.Combine(project.BasePath, StorageConstants.ProgramImagesPath, look.FileName);
+            var absoluteFileName = Path.Combine(project.BasePath, StorageConstants.ProgramLooksPath, look.FileName);
 
             using (var storage = StorageSystem.GetStorage())
             {

@@ -40,7 +40,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
                     foreach (var look in sprite.Looks)
                     {
                         //Projects/DataDeletingTests.DeleteSprite/images/
-                        var stream = storage.OpenFile(Path.Combine(project.BasePath, StorageConstants.ProgramImagesPath , look.FileName), 
+                        var stream = storage.OpenFile(Path.Combine(project.BasePath, StorageConstants.ProgramLooksPath , look.FileName), 
                             StorageFileMode.Create, StorageFileAccess.Write);
                         stream.Close();
                     }
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             await project.Save();
 
-            var pathLooks = project.BasePath + "/" + StorageConstants.ProgramImagesPath + "/";
+            var pathLooks = project.BasePath + "/" + StorageConstants.ProgramLooksPath + "/";
             var pathSounds = project.BasePath + "/" + StorageConstants.ProgramSoundsPath + "/";
 
             var looks = new List<Look>();

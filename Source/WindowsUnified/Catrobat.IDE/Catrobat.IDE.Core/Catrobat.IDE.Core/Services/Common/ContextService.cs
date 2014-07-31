@@ -211,17 +211,17 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public async Task CreateThumbnailsForLooks(string programName)
         {
-            var pathToSounds = Path.Combine(StorageConstants.ProgramsPath,
-                programName, StorageConstants.ProgramSoundsPath);
+            var pathToLooks = Path.Combine(StorageConstants.ProgramsPath,
+                programName, StorageConstants.ProgramLooksPath);
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var fileNames = await storage.GetFileNamesAsync(pathToSounds);
+                var fileNames = await storage.GetFileNamesAsync(pathToLooks);
 
                 foreach (var fileName in fileNames)
                 {
                     await storage.CreateThumbnailAsync(
-                        Path.Combine(pathToSounds, fileName));
+                        Path.Combine(pathToLooks, fileName));
                 }
             }
         }

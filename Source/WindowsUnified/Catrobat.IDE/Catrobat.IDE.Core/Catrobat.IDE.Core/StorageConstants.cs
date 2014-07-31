@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core
         public const string ProgramCodePath = "code.xml";
         public const string ProgramManualScreenshotPath = "manual_screenshot.png‏";
         public const string ProgramAutomaticScreenshotPath = "automatic_screenshot.png";
-        public const string ProgramImagesPath = "images";
+        public const string ProgramLooksPath = "images";
         public const string ProgramSoundsPath = "sounds";
 
         // other constants
