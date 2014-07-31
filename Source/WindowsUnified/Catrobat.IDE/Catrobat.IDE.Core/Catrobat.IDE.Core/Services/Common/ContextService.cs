@@ -209,13 +209,19 @@ namespace Catrobat.IDE.Core.Services.Common
             }
         }
 
-        public async Task CreateThumbnailsForLooks(string programName)
+        public async Task CreateThumbnailsForNewProgram(string programName)
         {
-            var pathToLooks = Path.Combine(StorageConstants.ProgramsPath,
-                programName, StorageConstants.ProgramLooksPath);
+            var programPath = Path.Combine(StorageConstants.ProgramsPath, programName);
+            var pathToLooks = Path.Combine(programPath, StorageConstants.ProgramLooksPath);
 
             using (var storage = StorageSystem.GetStorage())
             {
+                await storage.CreateThumbnailAsync(Path.Combine(programPath, 
+                    StorageConstants.ProgramManualScreenshotPath));
+
+                await storage.CreateThumbnailAsync(Path.Combine(programPath,
+                    StorageConstants.ProgramAutomaticScreenshotPath));
+
                 var fileNames = await storage.GetFileNamesAsync(pathToLooks);
 
                 foreach (var fileName in fileNames)

@@ -164,14 +164,21 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             {
                 await CurrentProject.Save();
 
+                await ServiceLocator.ContextService.
+                    CreateThumbnailsForNewProgram(CurrentProject.Name);
+
                 var projectChangedMessage = new GenericMessage<Program>(CurrentProject);
                 Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
             }
 
+            GoBackAction();
+
+
+
             var localProjectsChangedMessage = new MessageBase();
             Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
 
-            GoBackAction();
+            
         }
 
         private void CancelAction()

@@ -167,7 +167,7 @@ namespace Catrobat.IDE.Core.Services.Common
             }
 
             await ServiceLocator.ContextService.
-                CreateThumbnailsForLooks(uniqueProgramName);
+                CreateThumbnailsForNewProgram(uniqueProgramName);
 
             _extractResult = null;
             _checkResult = null;
