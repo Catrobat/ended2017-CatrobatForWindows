@@ -6,6 +6,7 @@ using Catrobat.Paint.Phone.Tool;
 using Catrobat.Paint.Phone.Ui;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.Paint.WindowsPhone.Tool;
+using System.ComponentModel;
 
 namespace Catrobat.Paint.Phone.Command
 {

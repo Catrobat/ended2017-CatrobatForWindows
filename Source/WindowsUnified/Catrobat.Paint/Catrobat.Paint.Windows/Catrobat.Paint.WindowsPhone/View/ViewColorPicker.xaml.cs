@@ -173,7 +173,10 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void Rectangle_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-                       
+            BitmapImage image = new BitmapImage(new Uri("ms-resource:/File/Assets/ColorPicker/color.jpg"));
+            BitmapImage bitmapImage = (BitmapImage)image;
+            
+            
         }
 
         private void Rectangle_PointerPressed(object sender, PointerRoutedEventArgs e)
