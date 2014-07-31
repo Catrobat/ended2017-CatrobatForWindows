@@ -30,7 +30,7 @@
                  Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
 
-    <StackPanel Grid.Row="1">
+    <StackPanel Grid.Row="1" Margin="12">
       <Button Command="{Binding ShowLanguageSettingsCommand}" 
               BorderThickness="0" HorizontalAlignment="Stretch">
         <Button.Content>

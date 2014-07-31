@@ -116,7 +116,7 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\Common\ContextService.cs" />
-    <Compile Include="Services\Common\ProjectGeneratorWhackAMole.cs" />
+    <Compile Include="Services\Common\ProgramGeneratorWhackAMole.cs" />
     <Compile Include="Services\IContextService.cs" />
     <Compile Include="Services\IWebCommunicationService.cs" />
     <Compile Include="Services\IZipService.cs" />

@@ -112,7 +112,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public async Task<Program> RestoreDefaultProgram(string programName)
         {
-            IProgramGenerator projectGenerator = new ProjectGeneratorWhackAMole();
+            IProgramGenerator projectGenerator = new ProgramGeneratorWhackAMole();
 
             return await projectGenerator.GenerateProject(AppResources.Main_DefaultProjectName, true);
         }

@@ -25,7 +25,7 @@
         Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
 
-    <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="10 0 0 12">
+    <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12">
       <ListBox Margin="0 0 0 12" ItemsSource="{Binding AvailableCultures}" 
                SelectedItem="{Binding CurrentCulture, Mode=TwoWay}">
         <ItemsControl.ItemTemplate>
@@ -40,7 +40,8 @@
       <TextBlock Margin="20" 
         Text="{Binding Resources.Main_ApplicationRequiresRestart, 
         Source={StaticResource LocalizedStrings}}" 
-        Style="{ThemeResource TextNormalStyle}" TextWrapping="Wrap" />
+        Style="{ThemeResource TextNormalStyle}" TextWrapping="Wrap" 
+        TextAlignment="Center"/>
     </StackPanel>
   </Grid>
 </views:ViewPageBase>
