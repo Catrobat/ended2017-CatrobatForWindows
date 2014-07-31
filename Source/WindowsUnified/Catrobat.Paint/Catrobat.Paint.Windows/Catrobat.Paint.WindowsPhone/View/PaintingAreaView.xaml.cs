@@ -33,23 +33,19 @@ namespace Catrobat.Paint.WindowsPhone.View
     {
         Int32 slider_thickness_textbox_last_value = 1;
         static string current_appbar = "barStandard";
+        
         public PaintingAreaView()
         {
             this.InitializeComponent();
 
-           /*TODO: int result = 0;
-            result = Convert.ToInt32(Application.Current.RootVisual.RenderSize.Width) % 2;
-            //PaintingAreaContentPanelGrid.Width = Application.Current.RootVisual.RenderSize.Width - result;
-            PaintingAreaContentPanelGrid.Width = Application.Current.RootVisual.RenderSize.Width - result;
-            result = Convert.ToInt32(Application.Current.RootVisual.RenderSize.Height) % 2;
-            //PaintingAreaContentPanelGrid.Height = Application.Current.RootVisual.RenderSize.Height - 200 - result;
-            PaintingAreaContentPanelGrid.Height = Application.Current.RootVisual.RenderSize.Height - 200 - result;
-            //MessageBox.Show(Application.Current.RootVisual.RenderSize.Height.ToString());
-            //MessageBox.Show(Application.Current.RootVisual.RenderSize.Width.ToString());*/
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
             PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
+            PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
+
+            PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height - 72;
+            PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
             PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid = PaintingAreaContentPanelGrid;
             PocketPaintApplication.GetInstance().PaintingAreaView = this;
 
@@ -66,11 +62,23 @@ namespace Catrobat.Paint.WindowsPhone.View
             main_grid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
             main_grid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
             main_grid.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
+
+            PocketPaintApplication.GetInstance().MainGrid = main_grid;
             UndoRedoActionbarManager.GetInstance().ApplicationBarTop = PocketPaintApplication.GetInstance().AppbarTop;
 
 
             checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
             createAppBarAndSwitchAppBarContent(current_appbar);
+        }
+
+        /// <summary>
+        /// Wird aufgerufen, wenn diese Seite in einem Frame angezeigt werden soll.
+        /// </summary>
+        /// <param name="e">Ereignisdaten, die beschreiben, wie diese Seite erreicht wurde.
+        /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            
         }
         
         void checkPenLineCap(PenLineCap pen_line_cap)
@@ -298,16 +306,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             scaletransform.ScaleX = 1.1;
             scaletransform.ScaleY = 1.1;
             tool.HandleMove(scaletransform);
-        }
-
-        /// <summary>
-        /// Wird aufgerufen, wenn diese Seite in einem Frame angezeigt werden soll.
-        /// </summary>
-        /// <param name="e">Ereignisdaten, die beschreiben, wie diese Seite erreicht wurde.
-        /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            
         }
 
         public void NavigatedTo(Type source_type)
@@ -641,6 +639,22 @@ namespace Catrobat.Paint.WindowsPhone.View
         private void Grid_ManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
         {
 
+        }
+
+        private void main_grid_ManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
+        {
+
+        }
+
+        private void main_grid_ManipulationStarting_1(object sender, ManipulationStartingRoutedEventArgs e)
+        {
+            
+        }
+
+        private void main_grid_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Pointer entered");
+            // msg.ShowAsync();
         }
 
     }

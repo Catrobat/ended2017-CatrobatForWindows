@@ -105,7 +105,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
             if (this.Frame != null)
             {
-                this.Frame.GoBack();
+                this.Frame.Navigate(typeof(PaintingAreaView));
             }
         }
     }
