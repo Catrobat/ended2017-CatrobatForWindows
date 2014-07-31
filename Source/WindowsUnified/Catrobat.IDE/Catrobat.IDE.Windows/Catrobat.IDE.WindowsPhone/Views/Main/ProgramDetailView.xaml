@@ -12,18 +12,10 @@
       <RowDefinition />
     </Grid.RowDefinitions>
 
-    <StackPanel x:Name="TitlePanel" 
-                Grid.Row="0"
-                Margin="12">
-      <!--<TextBlock x:Name="ApplicationTitle" 
-                 Text="{Binding Resources.Main_TitleCurrentProject, 
-                 Source={StaticResource LocalizedStrings}}" 
-                 Style="{ThemeResource TextNormalStyle}"/>-->
-      <TextBlock x:Name="PageTitle" 
-                 Text="{Binding Resources.Main_TitleCurrentProject, 
-                 Source={StaticResource LocalizedStrings}}" 
-                 Margin="0 0 0 0" 
-                 Style="{ThemeResource TextTitleNormalStyle}"/>
+    <StackPanel Grid.Row="0" Margin="12">
+      <TextBlock Text="{Binding Resources.Main_TitleCurrentProgram, 
+        Source={StaticResource LocalizedStrings}}" 
+        Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
     <Grid Grid.Row="1" Margin="12 0 12 18">
       <Grid.ColumnDefinitions>
@@ -37,17 +29,24 @@
                 Stretch="UniformToFill"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Stretch"
-                Source="{Binding CurrentProject.Screenshot.ImageSource}" />
-          <Grid Visibility="{Binding CurrentProject, 
+                Source="{Binding CurrentProgram.Screenshot.ImageSource}" />
+          <Grid Visibility="{Binding CurrentProgram, 
                 Converter={StaticResource NullVisibilityConverter}}">
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
                   TextAlignment="Center" TextWrapping="Wrap"
                   FontSize="28" Foreground="DarkGray"
                   Text="{Binding Resources.Main_NoScreenshot, 
                   Source={StaticResource LocalizedStrings}}"
-                  Visibility="{Binding CurrentProject.Screenshot.IsEmpty, 
+                  Visibility="{Binding CurrentProgram.Screenshot.IsEmpty, 
                   Converter={StaticResource BoolVisibilityConverter}}"/>
           </Grid>
+          <Grid Visibility="{Binding IsActivatoing, 
+                Converter={StaticResource BoolVisibilityConverter}}">
+            <ProgressRing Width="120" Height="120" Background="Transparent"
+                          IsActive="{Binding IsLoading}"
+              VerticalAlignment="Center" HorizontalAlignment="Center"/>
+          </Grid>
+          
         </Grid>
       </Grid>
       <StackPanel Grid.Column="1" Margin="12 0 6 0">
@@ -56,21 +55,21 @@
                    Source={StaticResource LocalizedStrings}}"
                    TextWrapping="Wrap"
                    Style="{ThemeResource TextNormalStyle}"/>
-        <TextBlock Text="{Binding CurrentProjectHeader.ProjectName, Mode=OneWay}" 
+        <TextBlock Text="{Binding CurrentProgramHeader.ProjectName, Mode=OneWay}" 
                    TextWrapping="Wrap"
                    Style="{ThemeResource TextSmallStyle}"/>
         <TextBlock Margin="0 12 0 0" 
                    Text="{Binding Resources.Main_ProjectDescription, 
                    Source={StaticResource LocalizedStrings}}" 
                    Style="{ThemeResource TextNormalStyle}"/>
-        <StackPanel Visibility="{Binding CurrentProject.Description, 
+        <StackPanel Visibility="{Binding CurrentProgram.Description, 
                     Converter={StaticResource StringVisibilityConverter}}">
           <TextBlock Text="{Binding Resources.Main_ProjectNoDescription, 
                      Source={StaticResource LocalizedStrings}}"
                      TextWrapping="Wrap"
                      Style="{ThemeResource TextSubtileStyle}"/>
         </StackPanel>
-        <TextBlock Text="{Binding CurrentProject.Description, Mode=OneWay}" 
+        <TextBlock Text="{Binding CurrentProgram.Description, Mode=OneWay}" 
                    TextWrapping="Wrap" />
         <!--<TextBlock Margin="0 12 0 0" 
                    Text="{Binding Resources.Main_OnlineProjectUploaded, 

@@ -167,8 +167,6 @@ namespace Catrobat.IDE.Core.Services.Common
                     newPath);
             }
 
-            await ServiceLocator.ContextService.CreateThumbnailsForLooks(_programName);
-
             _extractResult = null;
             _checkResult = null;
 

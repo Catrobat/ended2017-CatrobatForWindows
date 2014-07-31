@@ -143,11 +143,14 @@ namespace Catrobat.IDE.Core.UI.PortableUI
 
                 _isEmpty = _encodedData == null && _nativeImageSource == null;
 
-                RaisePropertyChanged(() => ImageSource);
-                RaisePropertyChanged(() => IsEmpty);
-                RaisePropertyChanged(() => Width);
-                RaisePropertyChanged(() => Height);
-                RaisePropertyChanged(() => IsLoaded);
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    RaisePropertyChanged(() => ImageSource);
+                    RaisePropertyChanged(() => IsEmpty);
+                    RaisePropertyChanged(() => Width);
+                    RaisePropertyChanged(() => Height);
+                    RaisePropertyChanged(() => IsLoaded);
+                });
             }
         }
 
