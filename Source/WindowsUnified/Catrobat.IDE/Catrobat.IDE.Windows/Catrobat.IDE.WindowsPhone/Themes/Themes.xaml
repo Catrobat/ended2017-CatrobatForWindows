@@ -20,7 +20,7 @@
       
       <!-- Action Brushes -->
       <SolidColorBrush x:Key="SoundsBrush" Color="#FF87778D" />
-      <SolidColorBrush x:Key="CostumesBrush" Color="#FF6F9263" />
+      <SolidColorBrush x:Key="LooksBrush" Color="#FF6F9263" />
       <SolidColorBrush x:Key="ObjectsBrush" Color="#FF891D1D" />
 
       <SolidColorBrush x:Key="LooksBrickBrush" Color="#FF6F9242" />

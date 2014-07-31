@@ -5,7 +5,7 @@ using Catrobat.IDE.Core.Tests.Misc;
 using Catrobat.IDE.Core.Tests.SampleData;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes;
+using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Looks;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;
@@ -25,15 +25,15 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetCostumeObjectTest()
+        public void GetLookObjectTest()
         {
             var project = ProjectGenerator.GenerateProject();
 
             var sprite = project.Sprites[0];
-            var setCostumeBrick = sprite.Scripts[0].Bricks[0] as SetCostumeBrick;
+            var setLookBrick = sprite.Scripts[0].Bricks[0] as SetLookBrick;
             
-            Assert.IsNotNull(setCostumeBrick);
-            Assert.AreEqual(sprite.Costumes[0], setCostumeBrick.Value);
+            Assert.IsNotNull(setLookBrick);
+            Assert.AreEqual(sprite.Looks[0], setLookBrick.Value);
         }
 
         [TestMethod, TestCategory("GatedTests.Obsolete")]
@@ -188,16 +188,16 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
 
         [TestMethod, TestCategory("GatedTests.Obsolete")]
-        public async Task GetCostumeReferenceStringTest()
+        public async Task GetLookReferenceStringTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var setCostumeBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[0] as XmlSetCostumeBrick;
-            Assert.IsNotNull(setCostumeBrick);
-            var costumeReference = setCostumeBrick.XmlCostumeReference;
+            var setLookBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[0] as XmlSetLookBrick;
+            Assert.IsNotNull(setLookBrick);
+            var lookReference = setLookBrick.XmlLookReference;
 
-            Assert.IsNotNull(costumeReference);
+            Assert.IsNotNull(lookReference);
 
-            var reference = ReferenceHelper.GetReferenceString(costumeReference);
+            var reference = ReferenceHelper.GetReferenceString(lookReference);
 
             Assert.AreEqual("../../../../../lookList/look[1]", reference);
         }

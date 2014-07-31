@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModels.Editor.Looks;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.WindowsPhone;
 using Catrobat.IDE.WindowsPhone.Views.Main;

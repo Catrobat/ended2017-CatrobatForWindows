@@ -165,14 +165,14 @@ namespace Catrobat.IDE.Core.Services.Common
 
             #region Background
 
-            objectBackground.Costumes.Add(new Costume { Name = AppResources.DefaultProject_Background, FileName = LookFileNameBackground });
-            objectBackground.Costumes.Add(new Costume { Name = AppResources.DefaultProject_Background + "End", FileName = LookFileNameBackgroundFinished });
+            objectBackground.Looks.Add(new Look { Name = AppResources.DefaultProject_Background, FileName = LookFileNameBackground });
+            objectBackground.Looks.Add(new Look { Name = AppResources.DefaultProject_Background + "End", FileName = LookFileNameBackgroundFinished });
 
             StartScript startScriptBackground = new StartScript();
             {
-                SetCostumeBrick costume = new SetCostumeBrick();
-                costume.Value = objectBackground.Costumes[0];
-                startScriptBackground.Bricks.Add(costume);
+                SetLookBrick look = new SetLookBrick();
+                look.Value = objectBackground.Looks[0];
+                startScriptBackground.Bricks.Add(look);
             }
             {
                 SetSizeBrick sizeBack = new SetSizeBrick();
@@ -185,9 +185,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             #region mole1
 
-            objectMole1.Costumes.Add(new Costume { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
-            objectMole1.Costumes.Add(new Costume { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
-            objectMole1.Costumes.Add(new Costume { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
+            objectMole1.Looks.Add(new Look { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
+            objectMole1.Looks.Add(new Look { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
+            objectMole1.Looks.Add(new Look { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
 
             StartScript startScriptMole1 = new StartScript();
             {
@@ -216,9 +216,9 @@ namespace Catrobat.IDE.Core.Services.Common
             }
             startScriptMole1.Bricks.Add(new ShowBrick());
             {
-                SetCostumeBrick costume = new SetCostumeBrick();
-                costume.Value = objectMole1.Costumes[0];
-                startScriptMole1.Bricks.Add(costume);
+                SetLookBrick look = new SetLookBrick();
+                look.Value = objectMole1.Looks[0];
+                startScriptMole1.Bricks.Add(look);
             }
             {
                 AnimatePositionBrick slide = new AnimatePositionBrick();
@@ -228,9 +228,9 @@ namespace Catrobat.IDE.Core.Services.Common
                 startScriptMole1.Bricks.Add(slide);
             }
             {
-                SetCostumeBrick costume = new SetCostumeBrick();
-                costume.Value = objectMole1.Costumes[2];
-                startScriptMole1.Bricks.Add(costume);
+                SetLookBrick look = new SetLookBrick();
+                look.Value = objectMole1.Looks[2];
+                startScriptMole1.Bricks.Add(look);
             }
             {
                 DelayBrick wait = new DelayBrick();
@@ -252,9 +252,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             TappedScript tappedScriptMole1 = new TappedScript();
             {
-                SetCostumeBrick costume = new SetCostumeBrick();
-                costume.Value = objectMole1.Costumes[1];
-                tappedScriptMole1.Bricks.Add(costume);
+                SetLookBrick look = new SetLookBrick();
+                look.Value = objectMole1.Looks[1];
+                tappedScriptMole1.Bricks.Add(look);
             }
             {
                 DelayBrick wait = new DelayBrick();
@@ -268,9 +268,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             #region mole2
 
-            objectMole2.Costumes.Add(new Costume { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
-            objectMole2.Costumes.Add(new Costume { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
-            objectMole2.Costumes.Add(new Costume { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
+            objectMole2.Looks.Add(new Look { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
+            objectMole2.Looks.Add(new Look { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
+            objectMole2.Looks.Add(new Look { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
 
             StartScript startScriptMole2 = new StartScript();
             {
@@ -299,9 +299,9 @@ namespace Catrobat.IDE.Core.Services.Common
             }
             startScriptMole2.Bricks.Add(new ShowBrick());
             {
-                SetCostumeBrick costume = new SetCostumeBrick();
-                costume.Value = objectMole2.Costumes[0];
-                startScriptMole2.Bricks.Add(costume);
+                SetLookBrick look = new SetLookBrick();
+                look.Value = objectMole2.Looks[0];
+                startScriptMole2.Bricks.Add(look);
             }
             {
                 AnimatePositionBrick slide = new AnimatePositionBrick();
@@ -311,9 +311,9 @@ namespace Catrobat.IDE.Core.Services.Common
                 startScriptMole2.Bricks.Add(slide);
             }
             {
-                SetCostumeBrick costume = new SetCostumeBrick();
-                costume.Value = objectMole2.Costumes[2];
-                startScriptMole2.Bricks.Add(costume);
+                SetLookBrick look = new SetLookBrick();
+                look.Value = objectMole2.Looks[2];
+                startScriptMole2.Bricks.Add(look);
             }
             {
                 DelayBrick wait = new DelayBrick();
@@ -335,9 +335,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             TappedScript tappedScriptMole2 = new TappedScript();
             {
-                SetCostumeBrick costume = new SetCostumeBrick();
-                costume.Value = objectMole2.Costumes[1];
-                tappedScriptMole2.Bricks.Add(costume);
+                SetLookBrick look = new SetLookBrick();
+                look.Value = objectMole2.Looks[1];
+                tappedScriptMole2.Bricks.Add(look);
             }
             {
                 DelayBrick wait = new DelayBrick();
@@ -351,9 +351,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             #region mole3
 
-            objectMole3.Costumes.Add(new Costume { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
-            objectMole3.Costumes.Add(new Costume { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
-            objectMole3.Costumes.Add(new Costume { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
+            objectMole3.Looks.Add(new Look { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
+            objectMole3.Looks.Add(new Look { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
+            objectMole3.Looks.Add(new Look { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
 
             StartScript startScriptMole3 = new StartScript();
             {
@@ -382,9 +382,9 @@ namespace Catrobat.IDE.Core.Services.Common
             }
             startScriptMole3.Bricks.Add(new ShowBrick());
             {
-                SetCostumeBrick costume = new SetCostumeBrick();
-                costume.Value = objectMole3.Costumes[0];
-                startScriptMole3.Bricks.Add(costume);
+                SetLookBrick look = new SetLookBrick();
+                look.Value = objectMole3.Looks[0];
+                startScriptMole3.Bricks.Add(look);
             }
             {
                 AnimatePositionBrick slide = new AnimatePositionBrick();
@@ -394,9 +394,9 @@ namespace Catrobat.IDE.Core.Services.Common
                 startScriptMole3.Bricks.Add(slide);
             }
             {
-                SetCostumeBrick costume = new SetCostumeBrick();
-                costume.Value = objectMole3.Costumes[2];
-                startScriptMole3.Bricks.Add(costume);
+                SetLookBrick look = new SetLookBrick();
+                look.Value = objectMole3.Looks[2];
+                startScriptMole3.Bricks.Add(look);
             }
             {
                 DelayBrick wait = new DelayBrick();
@@ -418,9 +418,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             TappedScript tappedScriptMole3 = new TappedScript();
             {
-                SetCostumeBrick costume = new SetCostumeBrick();
-                costume.Value = objectMole3.Costumes[1];
-                tappedScriptMole3.Bricks.Add(costume);
+                SetLookBrick look = new SetLookBrick();
+                look.Value = objectMole3.Looks[1];
+                tappedScriptMole3.Bricks.Add(look);
             }
             {
                 DelayBrick wait = new DelayBrick();
@@ -434,9 +434,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             #region mole4
 
-            objectMole4.Costumes.Add(new Costume { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
-            objectMole4.Costumes.Add(new Costume { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
-            objectMole4.Costumes.Add(new Costume { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
+            objectMole4.Looks.Add(new Look { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
+            objectMole4.Looks.Add(new Look { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
+            objectMole4.Looks.Add(new Look { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
 
             StartScript startScriptMole4 = new StartScript();
             {
@@ -465,9 +465,9 @@ namespace Catrobat.IDE.Core.Services.Common
             }
             startScriptMole4.Bricks.Add(new ShowBrick());
             {
-                SetCostumeBrick costume = new SetCostumeBrick();
-                costume.Value = objectMole4.Costumes[0];
-                startScriptMole4.Bricks.Add(costume);
+                SetLookBrick look = new SetLookBrick();
+                look.Value = objectMole4.Looks[0];
+                startScriptMole4.Bricks.Add(look);
             }
             {
                 AnimatePositionBrick slide = new AnimatePositionBrick();
@@ -477,9 +477,9 @@ namespace Catrobat.IDE.Core.Services.Common
                 startScriptMole4.Bricks.Add(slide);
             }
             {
-                SetCostumeBrick costume = new SetCostumeBrick();
-                costume.Value = objectMole4.Costumes[2];
-                startScriptMole4.Bricks.Add(costume);
+                SetLookBrick look = new SetLookBrick();
+                look.Value = objectMole4.Looks[2];
+                startScriptMole4.Bricks.Add(look);
             }
             {
                 DelayBrick wait = new DelayBrick();
@@ -501,9 +501,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             TappedScript tappedScriptMole4 = new TappedScript();
             {
-                SetCostumeBrick costume = new SetCostumeBrick();
-                costume.Value = objectMole4.Costumes[1];
-                tappedScriptMole4.Bricks.Add(costume);
+                SetLookBrick look = new SetLookBrick();
+                look.Value = objectMole4.Looks[1];
+                tappedScriptMole4.Bricks.Add(look);
             }
             {
                 DelayBrick wait = new DelayBrick();

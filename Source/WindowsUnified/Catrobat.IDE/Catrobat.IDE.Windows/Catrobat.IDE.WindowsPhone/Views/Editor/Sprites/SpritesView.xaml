@@ -39,7 +39,7 @@
                 <StackPanel Margin="5 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
                   <TextBlock FontSize="16" Margin="0" Text="{Binding ActionsCount}" />
                   <TextBlock FontSize="16" Margin="0" Text="/" />
-                  <TextBlock FontSize="16" Margin="0" Text="{Binding Costumes.Count}" />
+                  <TextBlock FontSize="16" Margin="0" Text="{Binding Looks.Count}" />
                   <TextBlock FontSize="16" Margin="0" Text="/" />
                   <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Count}" />
                 </StackPanel>
@@ -58,13 +58,13 @@
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       Source="{Binding Costumes[0].Image.ImageSource}" />
+                       Source="{Binding Looks[0].Image.ImageSource}" />
                 <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       Source="{Binding Costumes[1].Image.ImageSource}" />
+                       Source="{Binding Looks[1].Image.ImageSource}" />
                 <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       Source="{Binding Costumes[2].Image.ImageSource}" />
+                       Source="{Binding Looks[2].Image.ImageSource}" />
               </Grid>
             </Grid>
           </Grid>

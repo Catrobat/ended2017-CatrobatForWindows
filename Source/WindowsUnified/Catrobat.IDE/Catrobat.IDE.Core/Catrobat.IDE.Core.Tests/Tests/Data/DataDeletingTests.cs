@@ -31,16 +31,16 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project = projectgenerator.GenerateProject();
             await project.SetProgramNameAndRenameDirectory(programName);
-            // TODO: write dummy costume files to disk
+            // TODO: write dummy look files to disk
 
             using (IStorage storage = StorageSystem.GetStorage())
             {
                 foreach (var sprite in project.Sprites)
                 {
-                    foreach (var costume in sprite.Costumes)
+                    foreach (var look in sprite.Looks)
                     {
                         //Projects/DataDeletingTests.DeleteSprite/images/
-                        var stream = storage.OpenFile(Path.Combine(project.BasePath, StorageConstants.ProgramImagesPath , costume.FileName), 
+                        var stream = storage.OpenFile(Path.Combine(project.BasePath, StorageConstants.ProgramImagesPath , look.FileName), 
                             StorageFileMode.Create, StorageFileAccess.Write);
                         stream.Close();
                     }
@@ -57,20 +57,20 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             await project.Save();
 
-            var pathCostumes = project.BasePath + "/" + StorageConstants.ProgramImagesPath + "/";
+            var pathLooks = project.BasePath + "/" + StorageConstants.ProgramImagesPath + "/";
             var pathSounds = project.BasePath + "/" + StorageConstants.ProgramSoundsPath + "/";
 
-            var costumes = new List<Costume>();
+            var looks = new List<Look>();
             var sounds = new List<Sound>();
 
             using (IStorage storage = StorageSystem.GetStorage())
             {
                 foreach (var sprite in project.Sprites)
                 {
-                    foreach (var costume in sprite.Costumes)
+                    foreach (var look in sprite.Looks)
                     {
-                        costumes.Add(costume);
-                        Assert.IsTrue(storage.FileExists(pathCostumes + costume.FileName));
+                        looks.Add(look);
+                        Assert.IsTrue(storage.FileExists(pathLooks + look.FileName));
                     }
                     foreach (var sound in sprite.Sounds)
                     {
@@ -81,8 +81,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
                     await sprite.Delete(project);
                 }
 
-                foreach (var costume in costumes)
-                    Assert.IsFalse(storage.FileExists(pathCostumes + costume.FileName));
+                foreach (var look in looks)
+                    Assert.IsFalse(storage.FileExists(pathLooks + look.FileName));
                 foreach (var sound in sounds)
                     Assert.IsFalse(storage.FileExists(pathSounds + sound.FileName));
             }

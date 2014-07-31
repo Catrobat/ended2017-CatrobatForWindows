@@ -23,9 +23,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             if (pointerOnly) return result;
 
             var localVariables = context.Project.VariableList.ObjectVariableList.ObjectVariableEntries.FirstOrDefault(entry => entry.Sprite == this);
-            result.Costumes = context.Costumes == null 
-                ? new ObservableCollection<Costume>() 
-                : context.Costumes.Values.ToObservableCollection();
+            result.Looks = context.Looks == null 
+                ? new ObservableCollection<Look>() 
+                : context.Looks.Values.ToObservableCollection();
             result.Sounds = context.Sounds == null 
                 ? new ObservableCollection<Sound>() 
                 : context.Sounds.Values.ToObservableCollection();

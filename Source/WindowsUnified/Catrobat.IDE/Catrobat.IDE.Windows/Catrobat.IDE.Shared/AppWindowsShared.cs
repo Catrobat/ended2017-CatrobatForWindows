@@ -82,8 +82,8 @@ namespace Catrobat.IDE.WindowsShared
             //var spriteEditorViewModel = ServiceLocator.GetInstance<SpriteEditorViewModel>();
             //spriteEditorViewModel.PresenterType = typeof(SpritesPresenter);
 
-            //var costumeSavingViewModel = ServiceLocator.GetInstance<CostumeSavingViewModel>();
-            //costumeSavingViewModel.PresenterType = typeof(SpritesPresenter);
+            //var lookSavingViewModel = ServiceLocator.GetInstance<LookSavingViewModel>();
+            //lookSavingViewModel.PresenterType = typeof(SpritesPresenter);
         }
     }
 }

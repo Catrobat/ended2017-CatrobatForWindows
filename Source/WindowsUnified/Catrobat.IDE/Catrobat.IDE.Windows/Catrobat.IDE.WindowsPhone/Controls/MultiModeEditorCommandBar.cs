@@ -253,7 +253,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
                     break;
 
                 case AppBarTargetType.Look:
-                    text = AppResources.Editor_ButtonAddCostume;
+                    text = AppResources.Editor_ButtonAddLook;
                     break;
 
                 case AppBarTargetType.Sound:

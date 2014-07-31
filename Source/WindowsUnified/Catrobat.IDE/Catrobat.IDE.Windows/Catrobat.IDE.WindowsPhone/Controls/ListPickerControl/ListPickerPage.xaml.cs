@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Navigation;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Editor.Actions;
-using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModels.Editor.Looks;
 using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.WindowsShared.Common;
@@ -43,9 +43,9 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListPickerControl
             {
                 AddViewType = typeof(ScriptBrickCategoryViewModel);
             }
-            else if (nullItem is Costume)
+            else if (nullItem is Look)
             {
-                AddViewType = typeof(NewCostumeSourceSelectionViewModel);
+                AddViewType = typeof(NewLookSourceSelectionViewModel);
             }
             else if (nullItem is Sound)
             {

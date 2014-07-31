@@ -34,11 +34,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
                         localVariables2 = new ReadOnlyDictionary<XmlUserVariable, LocalVariable>(new Dictionary<XmlUserVariable, LocalVariable>());
                     }
                     return sprite.ToModel(new Context(contextBase, sprite,
-                        sprite.Costumes == null || sprite.Costumes.Costumes == null
+                        sprite.Looks == null || sprite.Looks.Looks == null
                             ? null
-                            : sprite.Costumes.Costumes.ToReadOnlyDictionary(
-                                keySelector: costume => costume,
-                                elementSelector: costume => costume.ToModel()),
+                            : sprite.Looks.Looks.ToReadOnlyDictionary(
+                                keySelector: look => look,
+                                elementSelector: look => look.ToModel()),
                         sprite.Sounds == null || sprite.Sounds.Sounds == null
                             ? null
                             : sprite.Sounds.Sounds.ToReadOnlyDictionary(

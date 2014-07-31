@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
     public partial class XmlSprite : XmlObject
     {
-        public XmlCostumeList Costumes { get; set; }
+        public XmlLookList Looks { get; set; }
 
         public string Name { get; set; }
 
@@ -17,7 +17,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         public XmlSprite()
         {
             Scripts = new XmlScriptList();
-            Costumes = new XmlCostumeList();
+            Looks = new XmlLookList();
             Sounds = new XmlSoundList();
         }
 
@@ -30,7 +30,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             if (xRoot.Element("lookList") != null)
             {
-                Costumes = new XmlCostumeList(xRoot.Element("lookList"));
+                Looks = new XmlLookList(xRoot.Element("lookList"));
             }
 
             Name = xRoot.Element("name").Value;
@@ -49,9 +49,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             var xRoot = new XElement("object");
 
-            if (Costumes != null)
+            if (Looks != null)
             {
-                xRoot.Add(Costumes.CreateXml());
+                xRoot.Add(Looks.CreateXml());
             }
 
             xRoot.Add(new XElement("name")

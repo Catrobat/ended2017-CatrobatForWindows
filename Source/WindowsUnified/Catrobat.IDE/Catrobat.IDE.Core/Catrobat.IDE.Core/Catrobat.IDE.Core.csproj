@@ -88,7 +88,7 @@
     <Compile Include="Models\Bricks\AnimatePropertyBrick.cs" />
     <Compile Include="Models\Bricks\CommentBrick.cs" />
     <Compile Include="Models\Bricks\DelayBrick.cs" />
-    <Compile Include="Models\Bricks\CostumeBrick.cs" />
+    <Compile Include="Models\Bricks\LookBrick.cs" />
     <Compile Include="Models\Bricks\BlockBrick.cs" />
     <Compile Include="Models\Bricks\ChangePropertyBrick.cs" />
     <Compile Include="Models\Bricks\BroadcastBrick.cs" />
@@ -134,14 +134,14 @@
     <Compile Include="Xml\Converter\Models\Bricks\BroadcastBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\ChangePropertyBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\CommentBrick.cs" />
-    <Compile Include="Xml\Converter\Models\Bricks\CostumeBrick.cs" />
+    <Compile Include="Xml\Converter\Models\Bricks\LookBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\NxtBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\SetPropertyBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\SoundBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\VariableBrick.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\VisibilityBrick.cs" />
     <Compile Include="Xml\Converter\Models\BroadcastMessage.cs" />
-    <Compile Include="Xml\Converter\Models\Costume.cs" />
+    <Compile Include="Xml\Converter\Models\Look.cs" />
     <Compile Include="Xml\Converter\Models\Bricks\BlockBrick.cs" />
     <Compile Include="Xml\Converter\Models\Program.cs" />
     <Compile Include="Xml\Converter\Models\Sound.cs" />
@@ -155,7 +155,7 @@
     <Compile Include="Xml\Converter\XmlObjects\Bricks\ControlFlow\XmlIfLogicElseBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\ControlFlow\XmlIfLogicEndBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\ControlFlow\XmlWaitBrick.cs" />
-    <Compile Include="Xml\Converter\XmlObjects\Bricks\Costumes\XmlNextCostumeBrick.cs" />
+    <Compile Include="Xml\Converter\XmlObjects\Bricks\Looks\XmlNextLookBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Nxt\XmlNxtMotorActionBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Nxt\XmlNxtMotorStopBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Nxt\XmlNxtMotorTurnAngleBrick.cs" />
@@ -191,7 +191,7 @@
     <Compile Include="Xml\Converter\XmlObjects\Bricks\ControlFlow\XmlForeverLoopEndBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\ControlFlow\XmlRepeatBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\ControlFlow\XmlRepeatLoopEndBrick.cs" />
-    <Compile Include="Xml\Converter\XmlObjects\Bricks\Costumes\XmlSetCostumeBrick.cs" />
+    <Compile Include="Xml\Converter\XmlObjects\Bricks\Looks\XmlSetLookBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlSetSizeToBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Variables\XmlSetVariableBrick.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Bricks\Properties\XmlSetXBrick.cs" />
@@ -202,7 +202,7 @@
     <Compile Include="Xml\Converter\XmlObjects\Scripts\XmlScript.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Scripts\XmlStartScript.cs" />
     <Compile Include="Xml\Converter\XmlObjects\Scripts\XmlWhenScript.cs" />
-    <Compile Include="Xml\Converter\XmlObjects\XmlCostume.cs" />
+    <Compile Include="Xml\Converter\XmlObjects\XmlLook.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlProgram.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlProjectHeader.cs" />
     <Compile Include="Xml\Converter\XmlObjects\XmlSound.cs" />
@@ -283,7 +283,7 @@
     <Compile Include="Xml\XmlObjects\Bricks\ControlFlow\XmlLoopEndBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\ControlFlow\XmlLoopEndBrickReference.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\Properties\XmlMoveNStepsBrick.cs" />
-    <Compile Include="Xml\XmlObjects\Bricks\Costumes\XmlNextCostumeBrick.cs" />
+    <Compile Include="Xml\XmlObjects\Bricks\Looks\XmlNextLookBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\XmlNoteBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\Nxt\XmlNxtMotorActionBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\Nxt\XmlNxtMotorStopBrick.cs" />
@@ -296,7 +296,7 @@
     <Compile Include="Xml\XmlObjects\Bricks\ControlFlow\XmlRepeatBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\ControlFlow\XmlRepeatLoopEndBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\Properties\XmlSetBrightnessBrick.cs" />
-    <Compile Include="Xml\XmlObjects\Bricks\Costumes\XmlSetCostumeBrick.cs" />
+    <Compile Include="Xml\XmlObjects\Bricks\Looks\XmlSetLookBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\Properties\XmlSetGhostEffectBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\Properties\XmlSetSizeToBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\Variables\XmlSetVariableBrick.cs" />
@@ -309,9 +309,9 @@
     <Compile Include="Xml\XmlObjects\Bricks\Properties\XmlTurnLeftBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\Properties\XmlTurnRightBrick.cs" />
     <Compile Include="Xml\XmlObjects\Bricks\ControlFlow\XmlWaitBrick.cs" />
-    <Compile Include="Xml\XmlObjects\XmlCostume.cs" />
-    <Compile Include="Xml\XmlObjects\XmlCostumeList.cs" />
-    <Compile Include="Xml\XmlObjects\XmlCostumeReference.cs" />
+    <Compile Include="Xml\XmlObjects\XmlLook.cs" />
+    <Compile Include="Xml\XmlObjects\XmlLookList.cs" />
+    <Compile Include="Xml\XmlObjects\XmlLookReference.cs" />
     <Compile Include="Xml\XmlObjects\XmlObject.cs" />
     <Compile Include="Xml\XmlObjects\DataRootObject.cs" />
     <Compile Include="Xml\XmlObjects\Formulas\XmlFormula.cs" />
@@ -323,7 +323,7 @@
     <Compile Include="Xml\XmlObjects\Scripts\XmlBroadcastScript.cs" />
     <Compile Include="Xml\XmlObjects\Scripts\XmlScript.cs" />
     <Compile Include="ExtensionMethods\RandomExtensions.cs" />
-    <Compile Include="Models\Costume.cs" />
+    <Compile Include="Models\Look.cs" />
     <Compile Include="Models\Scripts\BroadcastReceivedScript.cs" />
     <Compile Include="Models\Scripts\StartScript.cs" />
     <Compile Include="Models\Scripts\Script.cs" />
@@ -476,7 +476,7 @@
     <Compile Include="UI\Theme.cs" />
     <Compile Include="UI\ThemeChooser.cs" />
     <Compile Include="UI\VariableConteiner.cs" />
-    <Compile Include="Utilities\Helpers\CostumeHelper.cs" />
+    <Compile Include="Utilities\Helpers\LookHelper.cs" />
     <Compile Include="Utilities\Helpers\FileNameGenerationHelper.cs" />
     <Compile Include="Utilities\Helpers\LanguageHelper.cs" />
     <Compile Include="Utilities\Helpers\PropertyHelper.cs" />
@@ -500,10 +500,10 @@
     <Compile Include="Xml\VersionConverter\Versions\CatrobatVersion092To091.cs" />
     <Compile Include="Utilities\Helpers\XElementExtensions.cs" />
     <Compile Include="ViewModels\AsyncRelayCommand.cs" />
-    <Compile Include="ViewModels\Editor\Costumes\ChangeCostumeViewModel.cs" />
-    <Compile Include="ViewModels\Editor\Costumes\CostumeNameChooserViewModel.cs" />
-    <Compile Include="ViewModels\Editor\Costumes\CostumeSavingViewModel.cs" />
-    <Compile Include="ViewModels\Editor\Costumes\NewCostumeSourceSelectionViewModel.cs" />
+    <Compile Include="ViewModels\Editor\Looks\ChangeLookViewModel.cs" />
+    <Compile Include="ViewModels\Editor\Looks\LookNameChooserViewModel.cs" />
+    <Compile Include="ViewModels\Editor\Looks\LookSavingViewModel.cs" />
+    <Compile Include="ViewModels\Editor\Looks\NewLookSourceSelectionViewModel.cs" />
     <Compile Include="ViewModels\Editor\EditorLoadingViewModel.cs" />
     <Compile Include="ViewModels\Editor\Formula\AddNewGlobalVariableViewModel.cs" />
     <Compile Include="ViewModels\Editor\Formula\AddNewLocalVariableViewModel.cs" />

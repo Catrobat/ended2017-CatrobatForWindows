@@ -195,7 +195,7 @@
   <data name="Brick_MoveNStepsSteps" xml:space="preserve">
     <value>Schritte</value>
   </data>
-  <data name="Brick_NextCostume" xml:space="preserve">
+  <data name="Brick_NextLook" xml:space="preserve">
     <value>Nächstes Aussehen</value>
   </data>
   <data name="Brick_Note" xml:space="preserve">
@@ -222,7 +222,7 @@
   <data name="Brick_SetBrightnessTo" xml:space="preserve">
     <value>Setze Helligkeit auf</value>
   </data>
-  <data name="Brick_SetCostume" xml:space="preserve">
+  <data name="Brick_SetLook" xml:space="preserve">
     <value>Setze Aussehen</value>
   </data>
   <data name="Brick_SetGhostEffectTo" xml:space="preserve">
@@ -279,7 +279,7 @@
   <data name="Editor_BroadcastMessage" xml:space="preserve">
     <value>Nachricht</value>
   </data>
-  <data name="Editor_ButtonAddCostume" xml:space="preserve">
+  <data name="Editor_ButtonAddLook" xml:space="preserve">
     <value>Neues Aussehen</value>
   </data>
   <data name="Editor_ButtonAddObject" xml:space="preserve">
@@ -321,13 +321,13 @@
   <data name="Editor_ClearSelection" xml:space="preserve">
     <value>Ausw. löschen</value>
   </data>
-  <data name="Editor_CostumeName" xml:space="preserve">
+  <data name="Editor_LookName" xml:space="preserve">
     <value>Name:</value>
   </data>
-  <data name="Editor_CostumePlural" xml:space="preserve">
+  <data name="Editor_LookPlural" xml:space="preserve">
     <value>Aussehen</value>
   </data>
-  <data name="Editor_CostumeSingular" xml:space="preserve">
+  <data name="Editor_LookSingular" xml:space="preserve">
     <value>Aussehen</value>
   </data>
   <data name="Editor_Image" xml:space="preserve">
@@ -381,7 +381,7 @@
   <data name="Editor_MessageBoxDeleteText" xml:space="preserve">
     <value>{0} {1} ausgewählt. Wirlich löschen?</value>
   </data>
-  <data name="Editor_NoCostumeSelected" xml:space="preserve">
+  <data name="Editor_NoLookSelected" xml:space="preserve">
     <value>Kein Aussehen...</value>
   </data>
   <data name="Editor_NoMessageSelected" xml:space="preserve">
@@ -405,7 +405,7 @@
   <data name="Editor_PivotActions" xml:space="preserve">
     <value>Aktionen</value>
   </data>
-  <data name="Editor_PivotCostumes" xml:space="preserve">
+  <data name="Editor_PivotLooks" xml:space="preserve">
     <value>Aussehen</value>
   </data>
   <data name="Editor_PivotObjects" xml:space="preserve">
@@ -453,7 +453,7 @@
   <data name="Editor_SpriteName" xml:space="preserve">
     <value>Objektname:</value>
   </data>
-  <data name="Editor_TitleChangeCostumeName" xml:space="preserve">
+  <data name="Editor_TitleChangeLookName" xml:space="preserve">
     <value>NAMES DES AUSSEHENS ÄNDERN</value>
   </data>
   <data name="Editor_TitleChangeSoundName" xml:space="preserve">
@@ -468,7 +468,7 @@
   <data name="Editor_TitleChooseCategory" xml:space="preserve">
     <value>KATEGORIE WÄHLEN</value>
   </data>
-  <data name="Editor_TitleChooseCostumeName" xml:space="preserve">
+  <data name="Editor_TitleChooseLookName" xml:space="preserve">
     <value>NAMES DES AUSSEHENS WÄHLEN</value>
   </data>
   <data name="Editor_TitleChooseSound" xml:space="preserve">
@@ -483,7 +483,7 @@
   <data name="Editor_TitleNewBroadcastMessage" xml:space="preserve">
     <value>NEUE NACHRICHT</value>
   </data>
-  <data name="Editor_TitleNewCostume" xml:space="preserve">
+  <data name="Editor_TitleNewLook" xml:space="preserve">
     <value>NEUES AUSSEHEN</value>
   </data>
   <data name="Editor_TitleNewSound" xml:space="preserve">
@@ -852,7 +852,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   <data name="Editor_ClickPlusToAddAction" xml:space="preserve">
     <value>Tippe auf '+' um eine neue Aktion hinzuzufügen.</value>
   </data>
-  <data name="Editor_ClickPlusToAddCostume" xml:space="preserve">
+  <data name="Editor_ClickPlusToAddLook" xml:space="preserve">
     <value>Tippe auf '+' um ein neues Aussehen hinzuzufügen.</value>
   </data>
   <data name="Editor_ClickPlusToAddSound" xml:space="preserve">

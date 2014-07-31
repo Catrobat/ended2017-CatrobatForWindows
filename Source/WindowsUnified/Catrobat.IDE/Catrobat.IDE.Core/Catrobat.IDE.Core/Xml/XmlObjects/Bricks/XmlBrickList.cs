@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes;
+using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Looks;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Nxt;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds;
@@ -131,7 +131,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
                         break;
 
                     case "nextLookBrick":
-                        Bricks.Add(new XmlNextCostumeBrick());
+                        Bricks.Add(new XmlNextLookBrick());
                         break;
 
                     case "noteBrick":
@@ -167,7 +167,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
                         break;
 
                     case "setLookBrick":
-                        Bricks.Add(new XmlSetCostumeBrick());
+                        Bricks.Add(new XmlSetLookBrick());
                         break;
 
                     case "setGhostEffectBrick":

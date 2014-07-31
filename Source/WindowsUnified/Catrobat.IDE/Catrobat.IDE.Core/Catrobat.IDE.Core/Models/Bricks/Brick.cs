@@ -61,9 +61,9 @@ namespace Catrobat.IDE.Core.Models.Bricks
             if (member != null) member = member.Clone(context);
         }
 
-        internal void CloneMember(ref Costume member, CloneSpriteContext context)
+        internal void CloneMember(ref Look member, CloneSpriteContext context)
         {
-            if (member != null) member = context.Costumes[member];
+            if (member != null) member = context.Looks[member];
         }
 
         internal void CloneMember(ref Sound member, CloneSpriteContext context)

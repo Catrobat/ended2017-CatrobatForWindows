@@ -134,7 +134,7 @@ namespace Catrobat.IDE.Core.UI
 
         // Object colors
         public PortableSolidColorBrush SoundsBrush { get { return new PortableSolidColorBrush("#FF87778D"); } }
-        public PortableSolidColorBrush CostumesBrush { get { return new PortableSolidColorBrush("#FF6F9263"); } }
+        public PortableSolidColorBrush LooksBrush { get { return new PortableSolidColorBrush("#FF6F9263"); } }
         public PortableSolidColorBrush ObjectsBrush{ get { return new PortableSolidColorBrush("#FF891D1D"); } }
 
         // Brick colors

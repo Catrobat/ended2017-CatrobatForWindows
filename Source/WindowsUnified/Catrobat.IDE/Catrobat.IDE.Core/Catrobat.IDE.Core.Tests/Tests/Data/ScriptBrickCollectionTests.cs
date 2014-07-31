@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
                 enumerator.MoveNext();
                 Assert.IsTrue(enumerator.Current is StartScript);
                 enumerator.MoveNext();
-                Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+                Assert.IsTrue(enumerator.Current is SetLookBrick);
             }
 
             {
@@ -45,20 +45,20 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
                 enumerator.MoveNext();
                 Assert.IsTrue(enumerator.Current is StartScript);
                 enumerator.MoveNext();
-                Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+                Assert.IsTrue(enumerator.Current is SetLookBrick);
 
                 enumerator.MoveNext();
                 Assert.IsTrue(enumerator.Current is TappedScript);
                 enumerator.MoveNext();
-                Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+                Assert.IsTrue(enumerator.Current is SetLookBrick);
                 enumerator.MoveNext();
                 Assert.IsTrue(enumerator.Current is DelayBrick);
                 enumerator.MoveNext();
-                Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+                Assert.IsTrue(enumerator.Current is SetLookBrick);
                 enumerator.MoveNext();
                 Assert.IsTrue(enumerator.Current is DelayBrick);
                 enumerator.MoveNext();
-                Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+                Assert.IsTrue(enumerator.Current is SetLookBrick);
 
                 //enumerator.MoveNext();
                 //Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
@@ -81,20 +81,20 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is StartScript);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
 
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is TappedScript);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
 
 
             collection.RemoveAt(4);
@@ -104,14 +104,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is StartScript);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
 
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is TappedScript);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is DelayBrick);
 
@@ -143,12 +143,12 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is StartScript);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
 
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is TappedScript);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is ChangePositionXBrick);
             enumerator.MoveNext();
@@ -156,11 +156,11 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
 
             //enumerator.MoveNext();
             //Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
@@ -194,20 +194,20 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is StartScript);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
 
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is TappedScript);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is BroadcastReceivedScript);
             enumerator.MoveNext();
@@ -294,22 +294,22 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is StartScript);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
             //enumerator.MoveNext();
             //Assert.IsTrue(enumerator.Current is MoveNStepsBrick);
 
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is TappedScript);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is DelayBrick);
             enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+            Assert.IsTrue(enumerator.Current is SetLookBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is ChangeBrightnessBrick);
 

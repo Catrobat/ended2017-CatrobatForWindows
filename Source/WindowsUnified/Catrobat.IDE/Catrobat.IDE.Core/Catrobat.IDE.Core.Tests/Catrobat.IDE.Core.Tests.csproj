@@ -158,9 +158,9 @@
     <Compile Include="Tests\Services\Common\ZipTests.cs" />
     <Compile Include="Tests\Services\Storage\StorageTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Actions\ScriptBrickCategoryViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Editor\Costumes\ChangeCostumeViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Editor\Costumes\CostumeNameChooserViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Editor\Costumes\NewCostumeSourceSelectionViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Looks\ChangeLookViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Looks\LookNameChooserViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Looks\NewLookSourceSelectionViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Sounds\ChangeSoundViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Sprites\AddNewSpriteViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Sprites\ChangeSpriteViewModelTests.cs" />
@@ -200,10 +200,14 @@
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test13Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test14Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test15Input.xml" />
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test16Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test16Input.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test1Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test2Input.xml" />
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test3Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test3Input.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test4Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test5Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test6Input.xml" />
@@ -231,7 +235,9 @@
     <Content Include="SampleData\SampleProjects\Converter\092_091\Test1_Output.xml" />
     <Content Include="SampleData\SampleProjects\Converter\092_091\Test1_Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\XPathHelperTestInput.xml" />
-    <Content Include="SampleData\SampleProjects\DataReadingTests\testCatrobat091.xml" />
+    <Content Include="SampleData\SampleProjects\DataReadingTests\testCatrobat091.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="SampleData\SampleProjects\DataReadingTests\test_code1.xml" />
     <Content Include="SampleData\SampleProjects\FormulaEditor\abs.xml" />
     <Content Include="SampleData\SampleProjects\FormulaEditor\accelerationx.xml" />
@@ -284,7 +290,9 @@
     <Content Include="SampleData\SampleProjects\FormulaEditor\tan.xml" />
     <Content Include="SampleData\SampleProjects\FormulaEditor\transparency.xml" />
     <Content Include="SampleData\SampleProjects\FormulaEditor\true.xml" />
-    <Content Include="SampleData\SampleProjects\simple.xml" />
+    <Content Include="SampleData\SampleProjects\simple.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
   <ItemGroup>

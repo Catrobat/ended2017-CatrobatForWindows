@@ -14,7 +14,7 @@
   mc:Ignorable="d">
 
   <!--<SolidColorBrush x:Key="SoundsBrush" Color="#FFE035D5" />
-  <SolidColorBrush x:Key="CostumesBrush" Color="#FF8A018C" />
+  <SolidColorBrush x:Key="LooksBrush" Color="#FF8A018C" />
   <SolidColorBrush x:Key="ObjectsBrush" Color="#FF891D1D" />
 
   <SolidColorBrush x:Key="LooksBrickBrush" Color="#FF8A018C" />
@@ -64,15 +64,15 @@
   </DataTemplate>
 
 
-  <DataTemplate x:Key="ListBoxCostumeItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Costume}">
+  <DataTemplate x:Key="ListBoxLookItem">
+    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Look}">
       <Image Source="{Binding Path=Image.ImageSource}" Width="24" Height="24" />
       <TextBlock Text="{Binding Path=Name}" FontSize="24" Padding="10,0,0,0" />
     </StackPanel>
   </DataTemplate>
 
-  <DataTemplate x:Key="PageListBoxCostumeItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Costume}">
+  <DataTemplate x:Key="PageListBoxLookItem">
+    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Look}">
       <Image Source="{Binding Path=Image.ImageSource}" Width="40" Height="40" />
       <TextBlock Text="{Binding Path=Name}" FontSize="40" Padding="10,0,0,0" />
     </StackPanel>
@@ -689,26 +689,26 @@
       </DataTemplate>
     </templates:ActionTemplateSelector.ShowBrick>
 
-    <templates:ActionTemplateSelector.NextCostumeBrick>
+    <templates:ActionTemplateSelector.NextLookBrick>
       <DataTemplate>
-        <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:NextCostumeBrick}">
+        <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:NextLookBrick}">
           <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
-            <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_NextCostume, Source={StaticResource LocalizedStrings}}" Margin="10 10 0 10" FontSize="24" />
+            <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_NextLook, Source={StaticResource LocalizedStrings}}" Margin="10 10 0 10" FontSize="24" />
           </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
-    </templates:ActionTemplateSelector.NextCostumeBrick>
+    </templates:ActionTemplateSelector.NextLookBrick>
 
-    <templates:ActionTemplateSelector.SetCostumeBrick>
+    <templates:ActionTemplateSelector.SetLookBrick>
       <DataTemplate>
-        <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetCostumeBrick}">
+        <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetLookBrick}">
           <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel>
-              <TextBlock TextWrapping="Wrap" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_SetCostume, Source={StaticResource LocalizedStrings}}" />
+              <TextBlock TextWrapping="Wrap" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_SetLook, Source={StaticResource LocalizedStrings}}" />
               <listPickerControl:ListPicker 
-                  ItemTemplate="{StaticResource ListBoxCostumeItem}" 
-                  PageItemTemplate="{StaticResource PageListBoxCostumeItem}" 
-                  ItemsSource="{Binding SpriteEditorViewModel.Costumes, Source={StaticResource Locator}, Mode=OneTime}" 
+                  ItemTemplate="{StaticResource ListBoxLookItem}" 
+                  PageItemTemplate="{StaticResource PageListBoxLookItem}" 
+                  ItemsSource="{Binding SpriteEditorViewModel.Looks, Source={StaticResource Locator}, Mode=OneTime}" 
                   SelectedItem="{Binding Value, Mode=TwoWay}" 
                   IsEnabled="{Binding IsAttached}" 
                   Margin="10 10 0 10" />
@@ -716,7 +716,7 @@
           </actionsControls:NormalBrick>
         </Grid>
       </DataTemplate>
-    </templates:ActionTemplateSelector.SetCostumeBrick>
+    </templates:ActionTemplateSelector.SetLookBrick>
 
     <templates:ActionTemplateSelector.SetSizeBrick>
       <DataTemplate>

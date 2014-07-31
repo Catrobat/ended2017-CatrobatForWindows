@@ -8,7 +8,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.ViewModels.Editor.Actions;
-using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModels.Editor.Looks;
 using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
 using Catrobat.IDE.Core.ViewModels.Main;
 using GalaSoft.MvvmLight.Command;
@@ -31,10 +31,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private PortableListBoxViewPort _listBoxViewPort;
 
         private int _selectedPivotIndex;
-        private int _numberOfCostumesSelected;
+        private int _numberOfLooksSelected;
         private int _numberOfSoundsSelected;
         private int _numberOfObjectsSelected;
-        private ObservableCollection<Costume> _selectedCostumes;
+        private ObservableCollection<Look> _selectedLooks;
         private ObservableCollection<Model> _selectedActions;
         private ObservableCollection<Sound> _selectedSounds;
         private int _selectedTabIndex;
@@ -93,11 +93,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
                 if (_selectedSprite != null)
                 {
-                    Costumes.CollectionChanged -= CostumesCollectionChanged;
+                    Looks.CollectionChanged -= LooksCollectionChanged;
                     Sounds.CollectionChanged -= SoundsCollectionChanged;
                     Actions.CollectionChanged -= ScriptBricksCollectionChanged;
 
-                    Costumes.CollectionChanged += CostumesCollectionChanged;
+                    Looks.CollectionChanged += LooksCollectionChanged;
                     Sounds.CollectionChanged += SoundsCollectionChanged;
                     Actions.CollectionChanged += ScriptBricksCollectionChanged;
                 }
@@ -117,7 +117,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
                 RaisePropertyChanged(() => SelectedSprite);
                 RaisePropertyChanged(() => Sounds);
-                RaisePropertyChanged(() => Costumes);
+                RaisePropertyChanged(() => Looks);
                 RaisePropertyChanged(() => Actions);
             }
         }
@@ -161,24 +161,24 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        public ObservableCollection<Costume> Costumes
+        public ObservableCollection<Look> Looks
         {
             get
             {
                 if (_selectedSprite != null)
-                    return _selectedSprite.Costumes;
+                    return _selectedSprite.Looks;
 
                 return null;
             }
         }
 
-        public bool IsCostumesEmpty
+        public bool IsLooksEmpty
         {
             get
             {
-                if (_selectedSprite == null || _selectedSprite.Costumes == null)
+                if (_selectedSprite == null || _selectedSprite.Looks == null)
                     return true;
-                return _selectedSprite.Costumes.Count == 0;
+                return _selectedSprite.Looks.Count == 0;
             }
         }
 
@@ -215,23 +215,23 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 RaisePropertyChanged(() => SelectedPivotIndex);
 
                 RaisePropertyChanged(() => IsVisibleScripts);
-                RaisePropertyChanged(() => IsVisibleCostumes);
+                RaisePropertyChanged(() => IsVisibleLooks);
                 RaisePropertyChanged(() => IsVisibleSounds);
             }
         }
 
         public bool IsVisibleScripts { get { return SelectedPivotIndex == 0; } }
-        public bool IsVisibleCostumes { get { return SelectedPivotIndex == 1; } }
+        public bool IsVisibleLooks { get { return SelectedPivotIndex == 1; } }
         public bool IsVisibleSounds { get { return SelectedPivotIndex == 2; } }
 
-        public int NumberOfCostumesSelected
+        public int NumberOfLooksSelected
         {
-            get { return _numberOfCostumesSelected; }
+            get { return _numberOfLooksSelected; }
             set
             {
-                if (value == _numberOfCostumesSelected) return;
-                _numberOfCostumesSelected = value;
-                RaisePropertyChanged(() => NumberOfCostumesSelected);
+                if (value == _numberOfLooksSelected) return;
+                _numberOfLooksSelected = value;
+                RaisePropertyChanged(() => NumberOfLooksSelected);
             }
         }
 
@@ -267,13 +267,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        public ObservableCollection<Costume> SelectedCostumes
+        public ObservableCollection<Look> SelectedLooks
         {
-            get { return _selectedCostumes; }
+            get { return _selectedLooks; }
             set
             {
-                _selectedCostumes = value;
-                RaisePropertyChanged(() => SelectedCostumes);
+                _selectedLooks = value;
+                RaisePropertyChanged(() => SelectedLooks);
             }
         }
 
@@ -323,25 +323,25 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         }
 
 
-        public RelayCommand AddNewCostumeCommand
+        public RelayCommand AddNewLookCommand
         {
             get;
             private set;
         }
 
-        public RelayCommand<Costume> EditCostumeCommand
+        public RelayCommand<Look> EditLookCommand
         {
             get;
             private set;
         }
 
-        public RelayCommand CopyCostumeCommand
+        public RelayCommand CopyLookCommand
         {
             get;
             private set;
         }
 
-        public RelayCommand DeleteCostumeCommand
+        public RelayCommand DeleteLookCommand
         {
             get;
             private set;
@@ -438,7 +438,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             private set;
         }
 
-        public RelayCommand ClearCostumesSelectionCommand
+        public RelayCommand ClearLooksSelectionCommand
         {
             get;
             private set;
@@ -470,17 +470,17 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
 
 
-        private bool CanExecuteDeleteCostumeCommand()
+        private bool CanExecuteDeleteLookCommand()
         {
-            return SelectedCostumes.Count > 0;
+            return SelectedLooks.Count > 0;
         }
-        private bool CanExecuteCopyCostumeCommand()
+        private bool CanExecuteCopyLookCommand()
         {
-            return SelectedCostumes.Count > 0;
+            return SelectedLooks.Count > 0;
         }
-        private bool CanExecuteEditCostumeCommand()
+        private bool CanExecuteEditLookCommand()
         {
-            return SelectedCostumes.Count == 1;
+            return SelectedLooks.Count == 1;
         }
 
 
@@ -650,39 +650,39 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             throw new NotImplementedException();
         }
 
-        private void AddNewCostumeAction()
+        private void AddNewLookAction()
         {
             var message = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo<NewCostumeSourceSelectionViewModel>();
+            ServiceLocator.NavigationService.NavigateTo<NewLookSourceSelectionViewModel>();
         }
 
-        private void EditCostumeAction(Costume costume)
+        private void EditLookAction(Look look)
         {
-            var message = new GenericMessage<Costume>(costume);
-            Messenger.Default.Send(message, ViewModelMessagingToken.CostumeListener);
+            var message = new GenericMessage<Look>(look);
+            Messenger.Default.Send(message, ViewModelMessagingToken.LookListener);
 
-            ServiceLocator.NavigationService.NavigateTo<ChangeCostumeViewModel>();
+            ServiceLocator.NavigationService.NavigateTo<ChangeLookViewModel>();
         }
 
-        private async void CopyCostumeAction()
+        private async void CopyLookAction()
         {
-            foreach (var costume in SelectedCostumes)
+            foreach (var look in SelectedLooks)
             {
-                var newCostume = await costume.CloneAsync(CurrentProgram);
-                if (newCostume != null)
-                    Costumes.Insert(Costumes.IndexOf(costume) + 1, newCostume);
+                var newLook = await look.CloneAsync(CurrentProgram);
+                if (newLook != null)
+                    Looks.Insert(Looks.IndexOf(look) + 1, newLook);
             }
         }
 
-        private void DeleteCostumeAction()
+        private void DeleteLookAction()
         {
-            var costume = SelectedCostumes.Count == 1 ? AppResources.Editor_CostumeSingular : AppResources.Editor_CostumePlural;
-            var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, SelectedCostumes.Count, costume);
-            var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, costume);
+            var look = SelectedLooks.Count == 1 ? AppResources.Editor_LookSingular : AppResources.Editor_LookPlural;
+            var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, SelectedLooks.Count, look);
+            var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, look);
 
-            ServiceLocator.NotifictionService.ShowMessageBox(messageHeader, messageContent, DeleteCostumeMessageBoxResult, MessageBoxOptions.OkCancel);
+            ServiceLocator.NotifictionService.ShowMessageBox(messageHeader, messageContent, DeleteLookMessageBoxResult, MessageBoxOptions.OkCancel);
         }
 
         private void ClearObjectSelectionAction()
@@ -695,9 +695,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             SelectedActions.Clear();
         }
 
-        private void ClearCostumesSelectionAction()
+        private void ClearLooksSelectionAction()
         {
-            SelectedCostumes.Clear();
+            SelectedLooks.Clear();
         }
 
         private void ClearSoundsSelectionAction()
@@ -764,9 +764,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             {
                 ((PlaySoundBrick)attachedObject).Value = null;
             }
-            else if (attachedObject is SetCostumeBrick)
+            else if (attachedObject is SetLookBrick)
             {
-                ((SetCostumeBrick)attachedObject).Value = null;
+                ((SetLookBrick)attachedObject).Value = null;
             }
             else if (attachedObject is BroadcastBrick)
             {
@@ -839,8 +839,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             SelectedActions = new ObservableCollection<Model>();
             SelectedActions.CollectionChanged += SelectedActionsOnCollectionChanged;
-            SelectedCostumes = new ObservableCollection<Costume>();
-            SelectedCostumes.CollectionChanged += SelectedCostumesOnCollectionChanged;
+            SelectedLooks = new ObservableCollection<Look>();
+            SelectedLooks.CollectionChanged += SelectedLooksOnCollectionChanged;
             SelectedSounds = new ObservableCollection<Sound>();
             SelectedSounds.CollectionChanged += SelectedSoundsOnCollectionChanged;
 
@@ -852,10 +852,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             CopyScriptBrickCommand = new RelayCommand(CopyScriptBrickAction, CanExecuteCopyActionCommand);
             DeleteScriptBrickCommand = new RelayCommand(DeleteScriptBrickAction, CanExecuteDeleteActionCommand);
 
-            AddNewCostumeCommand = new RelayCommand(AddNewCostumeAction);
-            EditCostumeCommand = new RelayCommand<Costume>(EditCostumeAction);
-            CopyCostumeCommand = new RelayCommand(CopyCostumeAction, CanExecuteCopyCostumeCommand);
-            DeleteCostumeCommand = new RelayCommand(DeleteCostumeAction, CanExecuteDeleteCostumeCommand);
+            AddNewLookCommand = new RelayCommand(AddNewLookAction);
+            EditLookCommand = new RelayCommand<Look>(EditLookAction);
+            CopyLookCommand = new RelayCommand(CopyLookAction, CanExecuteCopyLookCommand);
+            DeleteLookCommand = new RelayCommand(DeleteLookAction, CanExecuteDeleteLookCommand);
 
             AddNewSoundCommand = new RelayCommand(AddNewSoundAction);
             EditSoundCommand = new RelayCommand<Sound>(EditSoundAction);
@@ -873,7 +873,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
             ClearObjectsSelectionCommand = new RelayCommand(ClearObjectSelectionAction);
             ClearScriptsSelectionCommand = new RelayCommand(ClearScriptsSelectionAction);
-            ClearCostumesSelectionCommand = new RelayCommand(ClearCostumesSelectionAction);
+            ClearLooksSelectionCommand = new RelayCommand(ClearLooksSelectionAction);
             ClearSoundsSelectionCommand = new RelayCommand(ClearSoundsSelectionAction);
 
             NothingItemHackCommand = new RelayCommand<object>(NothingItemHackAction);
@@ -898,9 +898,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             RaisePropertyChanged(() => IsScirptBricksEmpty);
         }
 
-        private void CostumesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void LooksCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            RaisePropertyChanged(() => IsCostumesEmpty);
+            RaisePropertyChanged(() => IsLooksEmpty);
         }
 
         private void SoundsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -914,11 +914,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             DeleteScriptBrickCommand.RaiseCanExecuteChanged();
         }
 
-        private void SelectedCostumesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        private void SelectedLooksOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
-            EditCostumeCommand.RaiseCanExecuteChanged();
-            CopyCostumeCommand.RaiseCanExecuteChanged();
-            DeleteCostumeCommand.RaiseCanExecuteChanged();
+            EditLookCommand.RaiseCanExecuteChanged();
+            CopyLookCommand.RaiseCanExecuteChanged();
+            DeleteLookCommand.RaiseCanExecuteChanged();
         }
 
         private void SelectedSoundsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
@@ -929,18 +929,18 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region MessageBoxResult
 
-        private async void DeleteCostumeMessageBoxResult(MessageboxResult result)
+        private async void DeleteLookMessageBoxResult(MessageboxResult result)
         {
             if (result == MessageboxResult.Ok)
             {
-                var costumesToRemove = new List<Costume>(SelectedCostumes);
+                var looksToRemove = new List<Look>(SelectedLooks);
 
-                foreach (var costume in costumesToRemove)
+                foreach (var look in looksToRemove)
                 {
-                    ReferenceHelper.CleanUpCostumeReferences(costume, SelectedSprite);
+                    ReferenceHelper.CleanUpLookReferences(look, SelectedSprite);
 
-                    await costume.Delete(CurrentProgram);
-                    Costumes.Remove(costume);
+                    await look.Delete(CurrentProgram);
+                    Looks.Remove(look);
                 }
             }
         }
