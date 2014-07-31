@@ -85,34 +85,25 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             if (pen_line_cap == PenLineCap.Round)
             {
-                RoundRadioButton.IsChecked = true;
+                btnRoundImage.BorderBrush = new SolidColorBrush(Colors.White);
+                btnSquareImage.BorderBrush = new SolidColorBrush(Colors.Gray);
+                btnTriangleImage.BorderBrush = new SolidColorBrush(Colors.Gray);
             }
             else if (pen_line_cap == PenLineCap.Square)
             {
-                SquareRadioButton.IsChecked = true;
+                btnRoundImage.BorderBrush = new SolidColorBrush(Colors.Gray);
+                btnSquareImage.BorderBrush = new SolidColorBrush(Colors.White);
+                btnTriangleImage.BorderBrush = new SolidColorBrush(Colors.Gray);
             }
             else
             {
-                TriangleRadioButton.IsChecked = true;
+                btnRoundImage.BorderBrush = new SolidColorBrush(Colors.Gray);
+                btnSquareImage.BorderBrush = new SolidColorBrush(Colors.Gray);
+                btnTriangleImage.BorderBrush = new SolidColorBrush(Colors.White);
             }
         }
 
         void PaintData_ToolCurrentChanged(Phone.Tool.ToolBase tool)
-        {
-            throw new NotImplementedException();
-        }
-
-        void PaintingAreaCheckeredGrid_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        void PaintingAreaCheckeredGrid_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        void PaintingAreaCheckeredGrid_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
             throw new NotImplementedException();
         }
@@ -476,10 +467,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 btnBrushThickness.Content = btnBrushThickness.Content.ToString().Remove(btnBrushThickness.Content.ToString().Length - 1);
             }
 
-            //  if(btnSliderThickness.Content.ToString() != "")
-            {
-                checkIfValueIsInRange(false);
-            }
+            checkIfValueIsInRange(false);
         }
 
         private void ButtonNumbers_Click(object sender, RoutedEventArgs e)
@@ -502,37 +490,22 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        private void TriangleRadioButon_OnClick(object sender, RoutedEventArgs e)
+        private void TriangleButton_OnClick(object sender, RoutedEventArgs e)
         {
             PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Triangle;
+            checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
         }
 
-        public void RoundRadioButon_OnClick(object sender, RoutedEventArgs e)
+        public void RoundButton_OnClick(object sender, RoutedEventArgs e)
         {
             PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Round;
+            checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
         }
 
-        public void SquareRadioButon_OnClick(object sender, RoutedEventArgs e)
+        public void SquareButton_OnClick(object sender, RoutedEventArgs e)
         {
             PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Square;
-        }
-
-        private void RoundImage_Click(object sender, RoutedEventArgs e)
-        {
-            RoundRadioButton.IsChecked = true;
-            RoundRadioButon_OnClick(sender, e);
-        }
-
-        private void SquareImage_Click(object sender, RoutedEventArgs e)
-        {
-            SquareRadioButton.IsChecked = true;
-            SquareRadioButon_OnClick(sender, e);
-        }
-
-        private void TriangleImage_Click(object sender, RoutedEventArgs e)
-        {
-            TriangleRadioButton.IsChecked = true;
-            TriangleRadioButon_OnClick(sender, e);
+            checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
         }
 
         private void SliderThickness_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
@@ -614,48 +587,5 @@ namespace Catrobat.Paint.WindowsPhone.View
                 this.Frame.Navigate(typeof(ViewColorPicker));
             }
         }
-
-        private void SliderThickness_ValueChanged_1(object sender, RangeBaseValueChangedEventArgs e)
-        {
-
-        }
-
-        private void PaintingAreaCheckeredGrid_ManipulationStarted_1(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-
-        }
-
-        private void PaintingAreaCheckeredGrid_ManipulationDelta_1(object sender, ManipulationDeltaRoutedEventArgs e)
-        {
-            MessageDialog msg = new MessageDialog("Hallo!");
-            msg.ShowAsync();
-        }
-
-        private void PaintingAreaCheckeredGrid_ManipulationCompleted_1(object sender, ManipulationCompletedRoutedEventArgs e)
-        {
-
-        }
-
-        private void Grid_ManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
-        {
-
-        }
-
-        private void main_grid_ManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
-        {
-
-        }
-
-        private void main_grid_ManipulationStarting_1(object sender, ManipulationStartingRoutedEventArgs e)
-        {
-            
-        }
-
-        private void main_grid_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            MessageDialog msg = new MessageDialog("Pointer entered");
-            // msg.ShowAsync();
-        }
-
     }
 }

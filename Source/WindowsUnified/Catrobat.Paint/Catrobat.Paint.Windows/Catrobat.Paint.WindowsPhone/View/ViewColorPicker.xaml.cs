@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI;
 using Windows.UI.Xaml.Shapes;
 using Catrobat.Paint.Phone;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Popups;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
 
@@ -167,6 +169,21 @@ namespace Catrobat.Paint.WindowsPhone.View
             sldGreen.Value = ((double)green);
             sldBlue.Value = ((double)blue);
             sldAlpha.Value = (double)alpha;
+        }
+
+        private void Rectangle_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+                       
+        }
+
+        private void Rectangle_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            
+        }
+
+        private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {         
+
         }
 
     }

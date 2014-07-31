@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid x:Name="main_grid" IsHitTestVisible="True" ManipulationMode="All" PointerEntered="main_grid_PointerEntered" >
+    <Grid x:Name="main_grid" IsHitTestVisible="True" ManipulationMode="All">
         <!--<Grid x:Name="PaintingAreaContentPanelGrid" Width="auto" Height="auto" Grid.Row="1" Margin="0,0,0,0" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center"> -->
         <Grid x:Name="PaintingAreaContentPanelGrid" Width="auto" Height="auto" Grid.Row="1" Margin="0,0,0,0" Background="Transparent" >
             <Grid x:Name="PaintingAreaCheckeredGrid" Width="auto" Height="auto"  >
@@ -30,32 +30,28 @@
             </Grid.RowDefinitions>
 
             <Grid x:Name="GridUserControl" Grid.Row="1" >
-                <UserControl x:Name="SliderThicknessControl" Height="auto" Width="auto" Visibility="Collapsed" VerticalAlignment="Bottom">
+                <UserControl x:Name="SliderThicknessControl" Height="auto" Width="auto" Visibility="Visible" VerticalAlignment="Bottom">
                     <Grid x:Name="SliderThicknessGrid" Background="#1F1F1F"  MinHeight="120">
                         <Slider x:Name="SliderThickness" Background="Black" Maximum="50"  Minimum="1" Margin="0,16,140,12"/>
-                        <RadioButton x:Name="RoundRadioButton" Content="" HorizontalAlignment="Left" IsChecked="True"  Margin="13,66,0,0"  VerticalAlignment="Top" Foreground="Black" Click="RoundRadioButon_OnClick" UseLayoutRounding="True" Background="Black" GroupName="BrushStyle" Width="132"/>
-                        <RadioButton x:Name="SquareRadioButton" Content="" HorizontalAlignment="Left" Margin="150,67,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="SquareRadioButon_OnClick" GroupName="BrushStyle"/>
-                        <RadioButton x:Name="TriangleRadioButton" Content="" HorizontalAlignment="Left" Margin="283,65,-51,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="TriangleRadioButon_OnClick" GroupName="BrushStyle"/>
 
-                        <Button x:Name="btnBrushThickness" Content="0" HorizontalAlignment="Stretch" Margin="275,1,12,74" VerticalAlignment="Stretch" Click="btnBrushThickness_Click"/>
+                        <Button x:Name="btnBrushThickness" Content="0" HorizontalAlignment="Stretch" Margin="280,1,12,74" VerticalAlignment="Stretch" Click="btnBrushThickness_Click"/>
 
-                        <Button x:Name="RoundImage" BorderThickness="0"  HorizontalAlignment="Left" Height="80" Margin="26,55,0,0" VerticalAlignment="Top" Width="80" Click="RoundImage_Click">
-                            <Image Source="/Assets/ToolMenu/icon_menu_ellipse.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="49" Width="50"></Image>
+                        <Button x:Name="btnRoundImage" BorderBrush="Yellow" Background="Transparent" BorderThickness="4"  HorizontalAlignment="Left" Height="60" Margin="10,66,0,0" VerticalAlignment="Top" Width="80" Click="RoundButton_OnClick">
+                            <Image Source="/Assets/ToolMenu/icon_menu_ellipse.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="30" ></Image>
                         </Button>
-                        <Button x:Name="SquareImage" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="160,55,0,0" VerticalAlignment="Top" Width="80" Click="SquareImage_Click">
-                            <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="51" Width="51"></Image>
+                        <Button x:Name="btnSquareImage" BorderBrush="White" Background="Transparent" BorderThickness="4"  HorizontalAlignment="Left" Height="60" Margin="145,66,0,0" VerticalAlignment="Top" Width="80" Click="SquareButton_OnClick">
+                            <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="30" ></Image>
                         </Button>
-                        <Button x:Name="TriangleImage" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="315,57,-24,0" VerticalAlignment="Top" Width="90" Click="TriangleImage_Click">
-                            <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png"  HorizontalAlignment="Left" Height="40" Margin="367,74,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,0.5" />
-                        </Button>
-                        <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png"  HorizontalAlignment="Left" Height="40" Margin="336,74,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+
+                        <Button x:Name="btnTriangleImage" BorderBrush="White" Background="Transparent" BorderThickness="4"  HorizontalAlignment="Left" Height="60" Margin="280,66,0,0" VerticalAlignment="Top" Width="80" Click="TriangleButton_OnClick">
+                            <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="30,-10,0,0" Height="30" Width="30" UseLayoutRounding="False" d:LayoutRounding="Auto" >
                             <Image.RenderTransform>
                                 <CompositeTransform Rotation="45"/>
                             </Image.RenderTransform>
-                        </Image>
-                        <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="58" Margin="142,67,0,0" VerticalAlignment="Top" Width="115"/>
-                        <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="58" Margin="275,66,0,0" VerticalAlignment="Top" Width="115"/>
-                        <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="58" Margin="5,67,0,0" VerticalAlignment="Top" Width="115"/>
+                            </Image>
+                        </Button>
+
+
                     </Grid>
                 </UserControl>
 
@@ -87,7 +83,7 @@
                 </Image.RenderTransform>
             </Image>
         </Grid>
-        
+
         <StackPanel Grid.Row="0" Canvas.ZIndex="10" VerticalAlignment="Top">
             <controls:AppbarTop></controls:AppbarTop>
         </StackPanel>

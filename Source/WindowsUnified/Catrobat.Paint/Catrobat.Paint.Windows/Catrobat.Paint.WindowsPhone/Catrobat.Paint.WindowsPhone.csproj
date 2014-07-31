@@ -190,6 +190,7 @@
     <Content Include="Assets\checkeredbgWXGA.png" />
     <Content Include="Assets\ColorPicker\btn_checkeredbg.png" />
     <Content Include="Assets\ColorPicker\checkeredbg.png" />
+    <Content Include="Assets\ColorPicker\color.jpg" />
     <Content Include="Assets\ColorPicker\icon_color_chooser_tab_palette.png" />
     <Content Include="Assets\ColorPicker\icon_color_chooser_tab_rgba.png" />
     <Content Include="Assets\ColorPicker\icon_menu_color_palette.png" />
