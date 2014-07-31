@@ -4,6 +4,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+  NavigationCacheMode="Disabled"
   DataContext="{Binding ProgramDetailViewModel, Source={StaticResource Locator}}">
 
   <Grid Background="{ThemeResource AppBackgroundBrush}">
@@ -24,29 +25,28 @@
       </Grid.ColumnDefinitions>
       <Grid Width="200" Height="200" VerticalAlignment="Top">
         <Grid Background="LightGray">
-          <Image Grid.Column="0" Margin="6"
-                Height="Auto" 
-                Stretch="UniformToFill"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Stretch"
-                Source="{Binding CurrentProgram.Screenshot.ImageSource}" />
-          <Grid Visibility="{Binding CurrentProgram, 
-                Converter={StaticResource NullVisibilityConverter}}">
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
-                  TextAlignment="Center" TextWrapping="Wrap"
-                  FontSize="28" Foreground="DarkGray"
-                  Text="{Binding Resources.Main_NoScreenshot, 
-                  Source={StaticResource LocalizedStrings}}"
-                  Visibility="{Binding CurrentProgram.Screenshot.IsEmpty, 
-                  Converter={StaticResource BoolVisibilityConverter}}"/>
-          </Grid>
-          <Grid Visibility="{Binding IsActivatoing, 
-                Converter={StaticResource BoolVisibilityConverter}}">
+          <Grid>
             <ProgressRing Width="120" Height="120" Background="Transparent"
-                          IsActive="{Binding IsLoading}"
-              VerticalAlignment="Center" HorizontalAlignment="Center"/>
+              IsActive="true" VerticalAlignment="Center" HorizontalAlignment="Center"/>
           </Grid>
-          
+          <Grid Visibility="{Binding CurrentProgram, 
+            Converter={StaticResource NullVisibilityConverter}}">
+            <Grid Background="LightGray" 
+              Visibility="{Binding CurrentProgram.Screenshot.IsEmpty, 
+              Converter={StaticResource BoolVisibilityConverter}}">
+              <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                TextAlignment="Center" TextWrapping="Wrap"
+                FontSize="28" Foreground="DarkGray"
+                Text="{Binding Resources.Main_NoScreenshot, 
+                Source={StaticResource LocalizedStrings}}" />
+            </Grid>
+          </Grid>
+          <Image Grid.Column="0" Margin="6"
+            Height="Auto" 
+            Stretch="UniformToFill"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Stretch"
+            Source="{Binding CurrentProgram.Screenshot.ImageSource}" />
         </Grid>
       </Grid>
       <StackPanel Grid.Column="1" Margin="12 0 6 0">

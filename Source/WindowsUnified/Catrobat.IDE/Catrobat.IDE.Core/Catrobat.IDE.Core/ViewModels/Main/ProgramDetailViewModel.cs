@@ -59,7 +59,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
                     RaisePropertyChanged(() => CurrentProgram);
-                    RaisePropertyChanged(() => IsLoading);
                 });
             }
         }
@@ -100,7 +99,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
                     RaisePropertyChanged(() => IsActivatingLocalProject);
-                    RaisePropertyChanged(() => IsLoading);
                     EditCurrentProjectCommand.RaiseCanExecuteChanged();
                     UploadCurrentProjectCommand.RaiseCanExecuteChanged();
                     PlayCurrentProjectCommand.RaiseCanExecuteChanged();
@@ -108,14 +106,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     ShareLocalProjectCommand.RaiseCanExecuteChanged();
                     RenameProjectCommand.RaiseCanExecuteChanged();
                 });
-            }
-        }
-
-        public bool IsLoading
-        {
-            get
-            {
-                return IsActivatingLocalProject;
             }
         }
 
@@ -264,7 +254,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         });
 
                         CurrentProgram = newProject;
-                        IsActivatingLocalProject = false;
 
                         var projectChangedMessage = new GenericMessage<Program>(newProject);
                         Messenger.Default.Send(projectChangedMessage,
@@ -274,8 +263,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     }
                     else
                     {
-                        IsActivatingLocalProject = false;
-
                         ServiceLocator.DispatcherService.RunOnMainThread(() =>
                         {
                             CurrentProjectHeader.ValidityState = LocalProjectState.Damaged;
@@ -289,17 +276,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                             Messenger.Default.Send(message,
                                 ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
                         });
+
+                        IsActivatingLocalProject = false;
                     }
                 }
             });
 
             base.NavigateTo();
-        }
-
-        public override void NavigateFrom()
-        {
-            IsActivatingLocalProject = true;
-            base.NavigateFrom();
         }
     }
 }
