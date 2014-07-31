@@ -8,8 +8,8 @@
   xmlns:misc="using:Catrobat.IDE.WindowsShared.Content.Images.Misc"
   DataContext="{Binding ChangeLookViewModel, Source={StaticResource Locator}}">
 
-  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+  <Grid x:Name="LayoutRoot" 
+        Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
@@ -18,23 +18,20 @@
     </Grid.RowDefinitions>
 
     <StackPanel Grid.Row="0" Margin="12">
-      <TextBlock Text="{Binding Resources.Editor_TitleChangeLookName, 
+      <!--<TextBlock Text="{Binding Resources.Editor_TitleChangeLookName, 
                  Source={StaticResource LocalizedStrings}}" 
-                 Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-                 Source={StaticResource ThemeChooser}}"/>
-      <!--<TextBlock x:Name="PageTitle" 
-                 Text="{Binding Resources.Main_TitleRecoverPassword, 
+                 Style="{ThemeResource TextNormalStyle}/>-->
+      <TextBlock x:Name="PageTitle" 
+                 Text="{Binding Resources.Editor_TitleChangeLookName, 
                  Source={StaticResource LocalizedStrings}}" 
-                 Margin="12 0 0 0" 
-                 Style="{Binding StaticTheme.TextTitle3Style.NativeStyle, 
-                 Source={StaticResource ThemeChooser}}"/>-->
+                 Margin="0 0 0 0" 
+                Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
     <StackPanel Grid.Row="1" Margin="12 0 12 18">
       <TextBlock Margin="0 0 0 6" 
                  Text="{Binding Resources.Editor_LookName, 
                  Source={StaticResource LocalizedStrings}}" 
-                 Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-                 Source={StaticResource ThemeChooser}}" />
+                 Style="{ThemeResource TextNormalStyle}"/>
       <TextBox Margin="0 0 0 0"
                HorizontalAlignment="Stretch"
                Name="TextBoxLookName"
@@ -44,11 +41,10 @@
                Source={StaticResource LocalizedStrings}}"/>
     </StackPanel>
 
-    <Button Grid.Row="2" Margin="10 10 0 0" Padding="0" BorderThickness="0"
+    <Button Grid.Row="2" Margin="12" Padding="0" BorderThickness="0"
       Command="{Binding EditLookCommand}" RequestedTheme="Dark" >
       <Grid Margin="0" Height="140" Width="380"
-        Background="{Binding Path=SelectedTheme.AccentColor3.NativeBrush, 
-            Source={StaticResource ThemeChooser}}" >
+        Background="{ThemeResource Accent3Brush}">
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="Auto"/>
           <ColumnDefinition/>
@@ -59,15 +55,15 @@
           VerticalAlignment="Center"
           HorizontalAlignment="Left"
           Text="{Binding Resources.Editor_ImageEditingProgram, 
-              Source={StaticResource LocalizedStrings}}"
+          Source={StaticResource LocalizedStrings}}"
           TextAlignment="Left"
           TextWrapping="Wrap"
-          FontSize="40" />
+          Style="{ThemeResource TextExtraLargeStyle}" />
       </Grid>
     </Button>
   </Grid>
   <Page.BottomAppBar>
-    <CommandBar RequestedTheme="Dark" Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
+    <CommandBar RequestedTheme="Dark" Background="{ThemeResource AppBarBackgroundBrush}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Save" 
                       Label="{Binding Resources.Editor_ButtonSave, 

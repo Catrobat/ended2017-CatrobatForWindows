@@ -9,28 +9,32 @@
   DataContext="{Binding NewLookSourceSelectionViewModel, 
   Source={StaticResource Locator}}">
 
-  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+  <Grid x:Name="LayoutRoot" Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
     <StackPanel>
-      <StackPanel Margin="10 0 10 20">
-        <TextBlock Margin="0" 
-          Text="{Binding Resources.Editor_TitleNewLook, 
-          Source={StaticResource LocalizedStrings}}" 
-          FontSize="50"
-          Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-          Source={StaticResource ThemeChooser}}" />
+      <StackPanel x:Name="TitlePanel" 
+                Grid.Row="0"
+                Margin="12">
+        <!--<TextBlock x:Name="ApplicationTitle" 
+                 Text="{Binding Resources.Main_TitleUploadProject, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Style="{ThemeResource TextNormalStyle}" 
+                 />-->
+        <TextBlock x:Name="PageTitle" 
+                 Text="{Binding Resources.Editor_TitleNewLook, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Margin="0 0 0 0" 
+                 Style="{ThemeResource TextTitleNormalStyle}"/>
       </StackPanel>
 
-      <StackPanel Margin="10 10 10 10">
+      <StackPanel Margin="12">
         <Button Margin="0" Padding="0" BorderThickness="0"
           Command="{Binding OpenGalleryCommand}" RequestedTheme="Dark" >
           <Grid Margin="0" Height="140" Width="380"
-                Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, 
-                Source={StaticResource ThemeChooser}}" >
+                Background="{ThemeResource Accent1Brush}">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="Auto"/>
               <ColumnDefinition/>
@@ -41,7 +45,8 @@
               VerticalAlignment="Center" HorizontalAlignment="Left" 
               Text="{Binding Resources.Editor_ImageGallery, 
               Source={StaticResource LocalizedStrings}}" 
-              Name="tbGallery" FontSize="40" />
+              Name="tbGallery" 
+              Style="{ThemeResource TextExtraLargeStyle}"/>
           </Grid>
         </Button>
 
@@ -49,7 +54,7 @@
                 Command="{Binding OpenCameraCommand}">
           <Button.Template>
             <ControlTemplate>
-              <Grid Background="{Binding Path=SelectedTheme.AccentColor2.NativeBrush, Source={StaticResource ThemeChooser}}" 
+              <Grid Background="{Binding Path=SelectedTheme.AccentColor2.NativeBrush, " 
                     HorizontalAlignment="Stretch" 
                     Height="140">
                 <Grid.ColumnDefinitions>
@@ -59,7 +64,7 @@
                 <misc:Camera ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
                 <TextBlock Grid.Column="1" FontSize="50" Margin="20 10 10 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_Camera, Source={StaticResource LocalizedStrings}}" 
-                           Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
+                           Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, " />
               </Grid>
             </ControlTemplate>
           </Button.Template>
@@ -68,8 +73,7 @@
         <Button Margin="0" Padding="0" BorderThickness="0"
           Command="{Binding OpenPaintCommand}" RequestedTheme="Dark" >
           <Grid Margin="0" Height="140" Width="380"
-            Background="{Binding Path=SelectedTheme.AccentColor3.NativeBrush, 
-            Source={StaticResource ThemeChooser}}" >
+            Background="{ThemeResource Accent3Brush}">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="Auto"/>
               <ColumnDefinition/>
@@ -83,7 +87,7 @@
               Source={StaticResource LocalizedStrings}}" 
               TextAlignment="Left"
               TextWrapping="Wrap"
-              FontSize="40" />
+              Style="{ThemeResource TextExtraLargeStyle}" />
           </Grid>
         </Button>
       </StackPanel>

@@ -17,8 +17,7 @@
              Height="90" Margin="0 1 0 1" RequestedTheme="Dark"
        Command="{Binding SpritesViewModel.EditSpriteCommand, 
               Source={StaticResource Locator}}" CommandParameter="{Binding}">
-          <Grid Background="{Binding StaticTheme.ObjectsBrush.NativeBrush, 
-            Source={StaticResource ThemeChooser}}"
+          <Grid Background="{ThemeResource ObjectsBrush}"
               Margin="0 5 0 5" Height="90" HorizontalAlignment="Stretch" 
               Width="400">
             <Grid.RowDefinitions>
@@ -80,8 +79,7 @@
     </DataTemplate>
   </Page.Resources>
   
-  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+  <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
@@ -91,8 +89,7 @@
 
       <Grid Margin="10 10 10 0">
         <TextBlock Text="{Binding CurrentProject.Name}" 
-                   Style="{Binding StaticTheme.TextTitle1Style.NativeStyle, 
-                   Source={StaticResource ThemeChooser}}">
+                   Style="{ThemeResource TextTitleNormalStyle}">
         </TextBlock>
       </Grid>
 
@@ -101,13 +98,12 @@
                 ItemsSource="{Binding Sprites}"
                 BindableSelectedItems="{Binding SelectedSprites, Mode=TwoWay}"
                 ItemTemplate="{StaticResource SpriteItemTemplate}"
-                CanReorderItems="True" AllowDrop="True" SelectionMode="None"
-                />
+                CanReorderItems="True" AllowDrop="True" SelectionMode="None"/>
 
       <TextBlock Grid.Row="1"
               Text ="{Binding Resources.Editor_ClickPlusToAddSprite, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsSpritesEmpty, Converter={StaticResource BoolVisibilityConverter}}"
-              Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
+              Style="{ThemeResource TextNormalStyle}"
               TextWrapping="Wrap"
               TextAlignment="Center"
               VerticalAlignment="Center"

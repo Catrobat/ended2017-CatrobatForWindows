@@ -8,33 +8,30 @@
   DataContext="{Binding SettingsLanguageViewModel, Source={StaticResource Locator}}">
 
   <Grid x:Name="LayoutRoot" 
-        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+        Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
-    <StackPanel Grid.Row="0" Margin="10 0 0 20">
+    <StackPanel Grid.Row="0" Margin="12">
       <TextBlock Margin="0" 
         Text="{Binding Resources.Main_TitleSettings, 
         Source={StaticResource LocalizedStrings}}" 
-        Style="{Binding StaticTheme.TextTitle3Style.NativeStyle, 
-        Source={StaticResource ThemeChooser}}" />
+        Style="{ThemeResource TextTitleNormalStyle}" />
       <TextBlock Margin="0 0 0 0" 
         Text="{Binding Resources.Main_HeaderLanguage, 
         Source={StaticResource LocalizedStrings}}" 
-        Style="{Binding StaticTheme.TextTitle2Style.NativeStyle, 
-        Source={StaticResource ThemeChooser}}"/>
+        Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
 
-    <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="10 0 0 15">
-      <ListBox Margin="0 0 0 15" ItemsSource="{Binding AvailableCultures}" 
+    <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="10 0 0 12">
+      <ListBox Margin="0 0 0 12" ItemsSource="{Binding AvailableCultures}" 
                SelectedItem="{Binding CurrentCulture, Mode=TwoWay}">
         <ItemsControl.ItemTemplate>
           <DataTemplate>
             <Grid Width="370">
-              <TextBlock Margin="0 0 10 10" Text="{Binding NativeName}" 
+              <TextBlock Margin="0 0 12 12" Text="{Binding NativeName}" 
                 FontSize="30" />
             </Grid>
           </DataTemplate>
@@ -43,8 +40,7 @@
       <TextBlock Margin="20" 
         Text="{Binding Resources.Main_ApplicationRequiresRestart, 
         Source={StaticResource LocalizedStrings}}" 
-        Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-        Source={StaticResource ThemeChooser}}" TextWrapping="Wrap" />
+        Style="{ThemeResource TextNormalStyle}" TextWrapping="Wrap" />
     </StackPanel>
   </Grid>
 </views:ViewPageBase>

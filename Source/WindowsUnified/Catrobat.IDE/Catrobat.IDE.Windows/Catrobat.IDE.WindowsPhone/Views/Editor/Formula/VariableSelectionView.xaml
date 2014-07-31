@@ -8,19 +8,17 @@
   mc:Ignorable="d"
   DataContext="{Binding VariableSelectionViewModel, Source={StaticResource Locator}}">
 
-  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+  <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
-    <StackPanel Grid.Row="0" Margin="12,17,0,0">
+    <StackPanel Grid.Row="0" Margin="12">
       <TextBlock 
         Text="{Binding Resources.Editor_SelectVariablesViewHeader, 
         Source={StaticResource LocalizedStrings}}" 
-        Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-        Source={StaticResource ThemeChooser}}"/>
+        Style="{ThemeResource TextNormalStyle}"/>
     </StackPanel>
 
     <Pivot Grid.Row="1" SelectedIndex="{Binding IsLocalView, 
@@ -65,7 +63,7 @@
   </Grid>
 
   <Page.BottomAppBar>
-    <CommandBar RequestedTheme="Dark" Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
+    <CommandBar RequestedTheme="Dark" Background="{ThemeResource AppBarBackgroundBrush}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Add"
                       Label="{Binding Resources.Editor_ButtonAdd, 

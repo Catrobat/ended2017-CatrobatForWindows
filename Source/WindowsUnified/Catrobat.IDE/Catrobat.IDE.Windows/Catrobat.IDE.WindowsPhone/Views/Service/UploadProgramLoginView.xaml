@@ -9,8 +9,7 @@
     DataContext="{Binding UploadProgramLoginViewModel, Source={StaticResource Locator}}">
 
   <Grid x:Name="LayoutRoot" 
-        Background="{ThemeResource AppBackgroundBrush}" 
-        >
+        Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition />

@@ -9,20 +9,29 @@
   DataContext="{Binding AddNewScriptBrickViewModel, Source={StaticResource Locator}}">
 
   <Grid x:Name="LayoutRoot" 
-        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+        Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
-    <!--TitlePanel contains the name of the application and page title-->
-    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 0 20">
-      <TextBlock x:Name="Headline" Margin="0" Text="{Binding Resources.Editor_TitleChooseBrick, Source={StaticResource LocalizedStrings}}" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
+    <StackPanel x:Name="TitlePanel" 
+                Grid.Row="0"
+                Margin="12">
+      <!--<TextBlock x:Name="ApplicationTitle" 
+                 Text="{Binding Resources.Main_TitleUploadProject, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Style="{ThemeResource TextNormalStyle}" 
+                 />-->
+      <TextBlock x:Name="PageTitle" 
+                 Text="{Binding Resources.Editor_TitleChooseBrick, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Margin="0 0 0 0" 
+                 Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
-    
+
     <!--ContentPanel - place additional content here-->
-    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10 0 0 15" VerticalAlignment="Top"
+    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12 0 0 15" VerticalAlignment="Top"
           >
       <!--<controls:PivotItem Name="pivotScripts" Header="Aktionen">-->
       <ListView

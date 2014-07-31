@@ -11,7 +11,8 @@
       
       <SolidColorBrush x:Key="OnlineProjectsBackgroundBrush" Color="#FF99AACC" />
       <SolidColorBrush x:Key="ProcessIconBackgroundBrush" Color="#FF667799" />
-      
+
+      <SolidColorBrush x:Key="BrickBorderBrush" Color="#FFFFFFFF" />
 
       <!-- Accent Colors -->
       <SolidColorBrush x:Key="Accent1Brush" Color="#FF880088" />
@@ -61,6 +62,10 @@
         <Setter Property="Foreground" Value="LightGray"/>
       </Style>
 
+      <Style x:Key="TextExtraLargeStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="40"/>
+      </Style>
+      
       <Style x:Key="TextNormalStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="18"/>
       </Style>

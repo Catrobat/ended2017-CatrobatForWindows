@@ -9,8 +9,7 @@
   mc:Ignorable="d"
   DataContext="{Binding FormulaEditorViewModel, Source={StaticResource Locator}}">
 
-  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+  <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="*" />
       <RowDefinition Height="Auto" />
@@ -32,7 +31,7 @@
       Text="{Binding Resources.Editor_TypeSomething, 
       Source={StaticResource LocalizedStrings}}"
       Visibility="{Binding IsTokensEmpty, Converter={StaticResource BoolVisibilityConverter}}"
-      Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
+      Style="{ThemeResource TextNormalStyle}"
       TextWrapping="Wrap"
       TextAlignment="Center"
       VerticalAlignment="Center"

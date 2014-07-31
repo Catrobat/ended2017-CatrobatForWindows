@@ -9,13 +9,12 @@
     Source={StaticResource Locator}}">
 
 
-  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+  <Grid Background="{ThemeResource AppBackgroundBrush}">
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
       <Image Source="{Binding Image.ImageSource}" Width="300" Height="300"></Image>
       <ProgressBar IsIndeterminate="True"></ProgressBar>
       <TextBlock Text="{Binding Resources.Editor_SavingImage, Source={StaticResource LocalizedStrings}}"
-                 TextAlignment="Center" Margin="0 15 0 0" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
+                 TextAlignment="Center" Margin="0 16 0 0" Style="{ThemeResource TextNormalStyle}"/>
     </StackPanel>
   </Grid>
 </views:ViewPageBase>

@@ -15,8 +15,7 @@
     <listPickerControl:ListPickerDummyViewModel x:Key="ListPickerPageDummy"/>
   </Page.Resources>
 
-  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-    Source={StaticResource ThemeChooser}}" >
+  <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid Margin="16,10,16,0">
       <ListView Name="ListBoxItems" SelectionChanged="ListBoxItems_SelectionChanged" >
       </ListView>
@@ -25,8 +24,7 @@
 
   <Page.BottomAppBar>
     <CommandBar RequestedTheme="Dark"
-      Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
-      Source={StaticResource ThemeChooser}}">
+      Background="{ThemeResource AppBarBackgroundBrush}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Add" 
           Label="{Binding Resources.Editor_AppbarAdd, 

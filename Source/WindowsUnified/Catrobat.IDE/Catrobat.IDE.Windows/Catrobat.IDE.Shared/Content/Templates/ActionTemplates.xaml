@@ -110,7 +110,7 @@
     <templates:ActionTemplateSelector.StartScript>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:StartScript}">
-          <actionsControls:MasterBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:MasterBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_WhenProjectStarts, Source={StaticResource LocalizedStrings}}" />
           </actionsControls:MasterBrick>
         </Grid>
@@ -120,7 +120,7 @@
     <templates:ActionTemplateSelector.TappedScript>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:TappedScript}">
-          <actionsControls:MasterBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:MasterBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_WhenTapped, Source={StaticResource LocalizedStrings}}" />
           </actionsControls:MasterBrick>
         </Grid>
@@ -130,7 +130,7 @@
     <templates:ActionTemplateSelector.BroadcastReceivedScript>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:BroadcastReceivedScript}">
-          <actionsControls:MasterBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:MasterBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.RowDefinitions>
                 <RowDefinition />
@@ -170,7 +170,7 @@
     <templates:ActionTemplateSelector.ChangePositionXBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ChangePositionXBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -191,7 +191,7 @@
     <templates:ActionTemplateSelector.ChangePositionYBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ChangePositionYBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -212,7 +212,7 @@
     <templates:ActionTemplateSelector.BringToFrontBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:BringToFrontBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+          <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" 
                              BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_ComeToFront, Source={StaticResource LocalizedStrings}}" 
                          Margin="10 10 0 10" FontSize="24" />
@@ -224,7 +224,7 @@
     <templates:ActionTemplateSelector.DecreaseZOrderBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:DecreaseZOrderBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -249,7 +249,7 @@
     <templates:ActionTemplateSelector.BounceBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:BounceBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+          <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" 
                              BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_IfOnEdgeBounce, Source={StaticResource LocalizedStrings}}"
@@ -262,7 +262,7 @@
     <templates:ActionTemplateSelector.MoveBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:MoveBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -287,7 +287,7 @@
     <templates:ActionTemplateSelector.TurnLeftBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:TurnLeftBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -312,7 +312,7 @@
     <templates:ActionTemplateSelector.TurnRightBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:TurnRightBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -337,7 +337,7 @@
     <templates:ActionTemplateSelector.SetPositionXBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetPositionXBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -358,7 +358,7 @@
     <templates:ActionTemplateSelector.SetPositionYBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetPositionYBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -379,7 +379,7 @@
     <templates:ActionTemplateSelector.SetPositionBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetPositionBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -409,7 +409,7 @@
     <templates:ActionTemplateSelector.SetRotationBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetRotationBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel>
               <TextBlock VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" 
                            Text="{Binding Resources.Brick_PointInDirection, Source={StaticResource LocalizedStrings}}" />
@@ -433,7 +433,7 @@
     <templates:ActionTemplateSelector.LookAtBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:LookAtBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel>
               <TextBlock VerticalAlignment="Center"  FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_PointTo, Source={StaticResource LocalizedStrings}}" />
               <listPickerControl:ListPicker 
@@ -452,7 +452,7 @@
     <templates:ActionTemplateSelector.AnimatePositionBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:AnimatePositionBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel>
               <Grid>
                 <Grid.ColumnDefinitions>
@@ -500,7 +500,7 @@
     <templates:ActionTemplateSelector.ChangeVolumeBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ChangeVolumeBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource SoundBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -523,7 +523,7 @@
     <templates:ActionTemplateSelector.SpeakBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SpeakBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource SoundBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel Orientation="Vertical">
               <TextBlock VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Speak, Source={StaticResource LocalizedStrings}}" 
@@ -539,7 +539,7 @@
     <templates:ActionTemplateSelector.StopSoundsBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:StopSoundsBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource SoundBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_StopAllSounds, Source={StaticResource LocalizedStrings}}" Margin="10 10 0 10" FontSize="24" />
           </actionsControls:NormalBrick>
         </Grid>
@@ -549,7 +549,7 @@
     <templates:ActionTemplateSelector.SetVolumeBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetVolumeBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource SoundBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -572,7 +572,7 @@
     <templates:ActionTemplateSelector.PlaySoundBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:PlaySoundBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource SoundBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel>
               <TextBlock TextWrapping="Wrap" FontSize="24" Margin="10 10 0 10" 
                            Text="{Binding Resources.Brick_PlaySound, Source={StaticResource LocalizedStrings}}" />
@@ -591,7 +591,7 @@
     <templates:ActionTemplateSelector.ChangeBrightnessBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ChangeBrightnessBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource LooksBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -614,7 +614,7 @@
     <templates:ActionTemplateSelector.ChangeTransparencyBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ChangeTransparencyBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource LooksBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -637,7 +637,7 @@
     <templates:ActionTemplateSelector.ChangeSizeBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ChangeSizeBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource LooksBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -660,7 +660,7 @@
     <templates:ActionTemplateSelector.ResetGraphicPropertiesBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ResetGraphicPropertiesBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource LooksBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_ClearGraphicEffects, Source={StaticResource LocalizedStrings}}" 
                          Margin="10 10 0 10" FontSize="24" />
@@ -672,7 +672,7 @@
     <templates:ActionTemplateSelector.HideBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:HideBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource LooksBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_Hide, Source={StaticResource LocalizedStrings}}" Margin="10 10 0 10" FontSize="24" />
           </actionsControls:NormalBrick>
         </Grid>
@@ -682,7 +682,7 @@
     <templates:ActionTemplateSelector.ShowBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ShowBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource LooksBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_Show, Source={StaticResource LocalizedStrings}}" Margin="10 10 0 10" FontSize="24" />
           </actionsControls:NormalBrick>
         </Grid>
@@ -692,7 +692,7 @@
     <templates:ActionTemplateSelector.NextLookBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:NextLookBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource LooksBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_NextLook, Source={StaticResource LocalizedStrings}}" Margin="10 10 0 10" FontSize="24" />
           </actionsControls:NormalBrick>
         </Grid>
@@ -702,7 +702,7 @@
     <templates:ActionTemplateSelector.SetLookBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetLookBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource LooksBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel>
               <TextBlock TextWrapping="Wrap" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_SetLook, Source={StaticResource LocalizedStrings}}" />
               <listPickerControl:ListPicker 
@@ -721,7 +721,7 @@
     <templates:ActionTemplateSelector.SetSizeBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetSizeBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource LooksBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -744,7 +744,7 @@
     <templates:ActionTemplateSelector.SetTransparencyBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetTransparencyBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource LooksBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -767,7 +767,7 @@
     <templates:ActionTemplateSelector.SetBrightnessBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetBrightnessBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource LooksBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -792,7 +792,7 @@
     <templates:ActionTemplateSelector.ForeverBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ForeverBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_Forever, Source={StaticResource LocalizedStrings}}" 
                          Margin="10 10 0 10" FontSize="24" />
@@ -804,7 +804,7 @@
     <templates:ActionTemplateSelector.EndRepeatBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:EndRepeatBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_RepeatLoopEnd, Source={StaticResource LocalizedStrings}}" 
                          Margin="10 10 0 10" FontSize="24" />
@@ -816,7 +816,7 @@
     <templates:ActionTemplateSelector.EndForeverBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:EndForeverBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_ForeverLoopEnd, Source={StaticResource LocalizedStrings}}" 
                          Margin="10 10 0 10" FontSize="24" />
@@ -828,7 +828,7 @@
     <templates:ActionTemplateSelector.CommentBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:CommentBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <StackPanel Orientation="Vertical">
               <TextBlock VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Note, Source={StaticResource LocalizedStrings}}" 
@@ -844,7 +844,7 @@
     <templates:ActionTemplateSelector.DelayBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:DelayBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -869,7 +869,7 @@
     <templates:ActionTemplateSelector.RepeatBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:RepeatBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -894,7 +894,7 @@
     <templates:ActionTemplateSelector.BroadcastSendBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:BroadcastBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.RowDefinitions>
                 <RowDefinition />
@@ -926,7 +926,7 @@
     <templates:ActionTemplateSelector.BroadcastSendBlockingBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:BroadcastSendBlockingBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.RowDefinitions>
                 <RowDefinition />
@@ -958,7 +958,7 @@
     <templates:ActionTemplateSelector.IfBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:IfBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -983,7 +983,7 @@
     <templates:ActionTemplateSelector.ElseBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ElseBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <TextBlock VerticalAlignment="Center" 
                              Text="{Binding Resources.Brick_IfLogicElse, Source={StaticResource LocalizedStrings}}"
@@ -997,7 +997,7 @@
     <templates:ActionTemplateSelector.EndIfBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:EndIfBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <TextBlock VerticalAlignment="Center" 
                              Text="{Binding Resources.Brick_IfLogicEnd, Source={StaticResource LocalizedStrings}}"
@@ -1013,7 +1013,7 @@
     <templates:ActionTemplateSelector.SetVariableBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:SetVariableBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.VariableBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource VariableBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <!--<Grid>
                 <Grid.RowDefinitions>
                   <RowDefinition />
@@ -1071,7 +1071,7 @@
     <templates:ActionTemplateSelector.ChangeVariableBrick>
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance bricksIde:ChangeVariableBrick}">
-          <actionsControls:NormalBrick Background="{Binding StaticTheme.VariableBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+          <actionsControls:NormalBrick Background="{ThemeResource VariableBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
             <Grid>
               <Grid.RowDefinitions>
                 <RowDefinition />
