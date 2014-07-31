@@ -1,6 +1,8 @@
 ﻿using Catrobat.Paint.Phone;
+using Catrobat.Paint.Phone.Command;
 using Catrobat.Paint.Phone.Tool;
 using Catrobat.Paint.Phone.Ui;
+using Catrobat.Paint.WindowsPhone.Controls.AppBar;
 using Catrobat.Paint.WindowsPhone.Tool;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
@@ -51,22 +54,19 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().PaintingAreaView = this;
 
             Spinner.SpinnerGrid = SpinnerGrid;
-            // TODO: Spinner.SpinnerStoryboard = SpinningStoryboard;
+            Spinner.SpinnerStoryboard = new Storyboard();
 
             PaintingAreaCheckeredGrid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
-            PaintingAreaCheckeredGrid.ManipulationDelta += PaintingAreaCheckeredGrid_ManipulationDelta;
-            PaintingAreaCheckeredGrid.ManipulationCompleted += PaintingAreaCheckeredGrid_ManipulationCompleted;
+            PaintingAreaCheckeredGrid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
+            PaintingAreaCheckeredGrid.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
             PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
             SliderThickness.ValueChanged += SliderThickness_ValueChanged;
             SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
-            //BtnThickness.Click += BtnThickness_Click;
-            // TODO: btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
-            // TODO: btnBrushThickness.Content = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
-            //BtnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
-            //BtnTools.Click += BtnTools_Click;
-            //BtnZoomIn.Click += BtnZoomIn_Click;
-            //BtnZoomOut.Click += BtnZoomOut_Click;
-            // TODO: UndoRedoActionbarManager.GetInstance().ApplicationBarTop = ApplicationBarTopX;
+            PocketPaintApplication.GetInstance().AppbarTop.ToolChangedHere(PocketPaintApplication.GetInstance().ToolCurrent);
+            main_grid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
+            main_grid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
+            main_grid.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
+            UndoRedoActionbarManager.GetInstance().ApplicationBarTop = PocketPaintApplication.GetInstance().AppbarTop;
 
 
             checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
@@ -618,6 +618,27 @@ namespace Catrobat.Paint.WindowsPhone.View
         }
 
         private void SliderThickness_ValueChanged_1(object sender, RangeBaseValueChangedEventArgs e)
+        {
+
+        }
+
+        private void PaintingAreaCheckeredGrid_ManipulationStarted_1(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+
+        }
+
+        private void PaintingAreaCheckeredGrid_ManipulationDelta_1(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Hallo!");
+            msg.ShowAsync();
+        }
+
+        private void PaintingAreaCheckeredGrid_ManipulationCompleted_1(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+
+        }
+
+        private void Grid_ManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
         {
 
         }

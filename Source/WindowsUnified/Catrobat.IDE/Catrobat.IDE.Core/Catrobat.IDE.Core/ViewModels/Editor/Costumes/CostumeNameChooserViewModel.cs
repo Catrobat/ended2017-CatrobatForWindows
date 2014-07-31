@@ -42,9 +42,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Costumes
             set
             {
                 if (value == _costumeName)
-                {
                     return;
-                }
+
                 _costumeName = value;
                 RaisePropertyChanged(() => CostumeName);
                 SaveCommand.RaiseCanExecuteChanged();

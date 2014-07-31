@@ -3,65 +3,80 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
-                    xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
-                    mc:Ignorable="d"
+  xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+  xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
+  xmlns:listsViewControls="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls"
+  mc:Ignorable="d"
   NavigationCacheMode="Enabled"
   DataContext="{Binding SpritesViewModel, Source={StaticResource Locator}}">
 
   <Page.Resources>
     <DataTemplate x:Key="SpriteItemTemplate">
-      <Grid Background="{Binding StaticTheme.ObjectsBrush.NativeBrush, 
-            Source={StaticResource ThemeChooser}}" 
-            Margin="0 5 0 5" Height="90" HorizontalAlignment="Stretch" 
-            Width="440">
-        <Grid.RowDefinitions>
-          <RowDefinition/>
-          <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="Auto" />
-          </Grid.ColumnDefinitions>
+      <Grid Height="90">
+        <Button BorderThickness="0" Padding="0 -10 0 -10"
+             Height="90" Margin="0 1 0 1" RequestedTheme="Dark"
+       Command="{Binding SpritesViewModel.EditSpriteCommand, 
+              Source={StaticResource Locator}}" CommandParameter="{Binding}">
+          <Grid Background="{Binding StaticTheme.ObjectsBrush.NativeBrush, 
+            Source={StaticResource ThemeChooser}}"
+              Margin="0 5 0 5" Height="90" HorizontalAlignment="Stretch" 
+              Width="400">
+            <Grid.RowDefinitions>
+              <RowDefinition/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
 
-          <StackPanel Grid.Column="0"  Orientation="Horizontal" 
-                      VerticalAlignment="Center">
-            <TextBlock VerticalAlignment="Center" FontSize="28" 
-                       Margin="5 5 5 5" Text="{Binding Name}" />
+              <StackPanel Grid.Column="0"  Orientation="Horizontal"
+                          VerticalAlignment="Center">
+                <TextBlock VerticalAlignment="Center" FontSize="28"
+                           Margin="5 5 5 5" Text="{Binding Name}" />
 
-            <StackPanel Margin="5 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
-              <TextBlock FontSize="16" Margin="0" Text="{Binding ActionsCount}" />
-              <TextBlock FontSize="16" Margin="0" Text="/" />
-              <TextBlock FontSize="16" Margin="0" Text="{Binding Costumes.Count}" />
-              <TextBlock FontSize="16" Margin="0" Text="/" />
-              <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Count}" />
-            </StackPanel>
-          </StackPanel>
-        </Grid>
-        <Grid Grid.Row="1">
-          <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-          </Grid.RowDefinitions>
-          <Grid Grid.Row="1" Margin="0,0,60,5" HorizontalAlignment="Right" >
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="Auto"/>
-              <ColumnDefinition Width="Auto"/>
-              <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center" 
-                   HorizontalAlignment="Center" 
-                   Source="{Binding Costumes[0].Image.ImageSource}" />
-            <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center" 
-                   HorizontalAlignment="Center" 
-                   Source="{Binding Costumes[1].Image.ImageSource}" />
-            <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center" 
-                   HorizontalAlignment="Center" 
-                   Source="{Binding Costumes[2].Image.ImageSource}" />
+                <StackPanel Margin="5 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                  <TextBlock FontSize="16" Margin="0" Text="{Binding ActionsCount}" />
+                  <TextBlock FontSize="16" Margin="0" Text="/" />
+                  <TextBlock FontSize="16" Margin="0" Text="{Binding Costumes.Count}" />
+                  <TextBlock FontSize="16" Margin="0" Text="/" />
+                  <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Count}" />
+                </StackPanel>
+              </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+              </Grid.RowDefinitions>
+              <Grid Grid.Row="1" Margin="0,0,60,5" HorizontalAlignment="Right" >
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto"/>
+                  <ColumnDefinition Width="Auto"/>
+                  <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Source="{Binding Costumes[0].Image.ImageSource}" />
+                <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Source="{Binding Costumes[1].Image.ImageSource}" />
+                <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Source="{Binding Costumes[2].Image.ImageSource}" />
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
+        </Button>
+        <Grid Height="92" Background="Transparent"
+              Visibility="{Binding ReorderMode, ElementName=ListViewSprites, 
+              Converter={StaticResource ReorderModeVisibilityConverter}}" />
+        <Grid Height="92" Background="Transparent"
+              Visibility="{Binding SelectionMode, ElementName=ListViewSprites, 
+              Converter={StaticResource SelectionModeVisibilityConverter}}" />
       </Grid>
+     
     </DataTemplate>
   </Page.Resources>
   
@@ -81,14 +96,12 @@
         </TextBlock>
       </Grid>
 
-      <ListView Grid.Row="1"
-                Margin="10 0 10 0"
-                SelectionMode="Single"
+      <listsViewControls:BindableListView Name="ListViewSprites" 
+                Grid.Row="1" Margin="10 0 10 0"
                 ItemsSource="{Binding Sprites}"
-                SelectedItem="{Binding SelectedSprite, Mode=TwoWay}"
+                BindableSelectedItems="{Binding SelectedSprites, Mode=TwoWay}"
                 ItemTemplate="{StaticResource SpriteItemTemplate}"
-                CanReorderItems="True" AllowDrop="True"
-                Foreground="White"
+                CanReorderItems="True" AllowDrop="True" SelectionMode="None"
                 />
 
       <TextBlock Grid.Row="1"
@@ -99,18 +112,16 @@
               TextAlignment="Center"
               VerticalAlignment="Center"
               HorizontalAlignment="Center" />
-      <controls:EditorAppBar Grid.Row="2" 
-        RequestedTheme="Dark"
-        VerticalAlignment="Bottom"
-        TargetType="Object"
-        ClearSelectionCommand="{Binding ClearObjectsSelectionCommand}"
-        CopyCommand="{Binding CopySpriteCommand}"
-        DeleteCommand="{Binding DeleteSpriteCommand}"
-        EditCommand="{Binding EditSpriteCommand}"
-        PlayCommand="{Binding StartPlayerCommand}"
-        NewCommand="{Binding AddNewSpriteCommand}"
-        NumberOfSelectedItems="{Binding SelectedSprite, 
-        Converter={StaticResource NullIntCountConverter}}"/>
+      
     </Grid>
   </Grid>
+  <Page.BottomAppBar>
+    <controls:MultiModeEditorCommandBar RequestedTheme="Dark"
+      ModeChanged="MultiModeEditorCommandBar_OnModeChanged"
+      TargetType="Object"
+      CopyCommand="{Binding CopySpriteCommand}"
+      DeleteCommand="{Binding DeleteSpriteCommand}"
+      PlayCommand="{Binding StartPlayerCommand}"
+      NewCommand="{Binding AddNewSpriteCommand}" />
+  </Page.BottomAppBar>
 </views:ViewPageBase>

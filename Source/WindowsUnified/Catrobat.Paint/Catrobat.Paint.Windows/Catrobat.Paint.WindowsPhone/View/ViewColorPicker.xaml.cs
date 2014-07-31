@@ -124,6 +124,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             PocketPaintApplication.GetInstance().PaintData.ColorSelected = new SolidColorBrush(current_color);
             this.Frame.Navigate(typeof(PaintingAreaView));
+            
         }
 
         private void sldSlidersChanged_ValueChanged(object sender, RoutedEventArgs e)

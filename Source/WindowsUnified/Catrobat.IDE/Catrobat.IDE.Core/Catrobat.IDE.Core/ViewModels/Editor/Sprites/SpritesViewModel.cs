@@ -1,4 +1,6 @@
-﻿using Catrobat.IDE.Core.ExtensionMethods;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
@@ -66,29 +68,54 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        public Sprite SelectedSprite
+
+        private ObservableCollection<Sprite> _selectedSprites;
+        public ObservableCollection<Sprite> SelectedSprites
         {
             get
             {
-                return _selectedSprite;
+                return _selectedSprites;
             }
             set
             {
-                if (ReferenceEquals(_selectedSprite, value))
-                    return;
+                _selectedSprites = value;
 
-                _selectedSprite = value;
+                if(_selectedSprites != null)
+                    _selectedSprites.CollectionChanged += SelectedSpritesOnCollectionChanged;
 
-                RaisePropertyChanged(() => SelectedSprite);
-
-                EditSpriteCommand.RaiseCanExecuteChanged();
+                RaisePropertyChanged(() => SelectedSprites);
                 CopySpriteCommand.RaiseCanExecuteChanged();
                 DeleteSpriteCommand.RaiseCanExecuteChanged();
-
-                var spriteChangedMessage = new GenericMessage<Sprite>(SelectedSprite);
-                Messenger.Default.Send(spriteChangedMessage, ViewModelMessagingToken.CurrentSpriteChangedListener);
             }
         }
+
+        private void SelectedSpritesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            EditSpriteCommand.RaiseCanExecuteChanged();
+            CopySpriteCommand.RaiseCanExecuteChanged();
+            DeleteSpriteCommand.RaiseCanExecuteChanged();
+        }
+
+        //public Sprite SelectedSprite
+        //{
+        //    get
+        //    {
+        //        return _selectedSprite;
+        //    }
+        //    set
+        //    {
+        //        if (ReferenceEquals(_selectedSprite, value))
+        //            return;
+
+        //        _selectedSprite = value;
+
+        //        RaisePropertyChanged(() => SelectedSprite);
+        //        EditSpriteCommand.RaiseCanExecuteChanged();
+
+        //        var spriteChangedMessage = new GenericMessage<Sprite>(SelectedSprite);
+        //        Messenger.Default.Send(spriteChangedMessage, ViewModelMessagingToken.CurrentSpriteChangedListener);
+        //    }
+        //}
 
 
         public bool IsSpriteSelecting
@@ -122,7 +149,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             private set;
         }
 
-        public RelayCommand EditSpriteCommand
+        public RelayCommand<Sprite> EditSpriteCommand
         {
             get;
             private set;
@@ -167,17 +194,15 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         # endregion
 
         #region CanCommandsExecute
+
         private bool CanExecuteDeleteSpriteCommand()
         {
-            return SelectedSprite != null;
+            return SelectedSprites != null && SelectedSprites.Count > 0;
         }
+
         private bool CanExecuteCopySpriteCommand()
         {
-            return SelectedSprite != null;
-        }
-        private bool CanExecuteEditSpriteCommand()
-        {
-            return SelectedSprite != null;
+            return SelectedSprites != null && SelectedSprites.Count > 0;
         }
 
         #endregion
@@ -189,19 +214,27 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             ServiceLocator.NavigationService.NavigateTo<AddNewSpriteViewModel>();
         }
 
-        private static void EditSpriteAction()
+        private static void EditSpriteAction(Sprite sprite)
         {
+            var spriteChangedMessage = new GenericMessage<Sprite>(sprite);
+             Messenger.Default.Send(spriteChangedMessage, ViewModelMessagingToken.CurrentSpriteChangedListener);
+
             ServiceLocator.NavigationService.NavigateTo<SpriteEditorViewModel>();
         }
 
         private async void CopySpriteAction()
         {
-            var originalIndex = Sprites.IndexOf(SelectedSprite);
+            var spritesToCopy = SelectedSprites.ToList();
 
-            var newSprite = await SelectedSprite.CloneAsync(CurrentProject);
-            var newIndex = originalIndex + 1;
+            foreach (var sprite in spritesToCopy)
+            {
+                var originalIndex = Sprites.IndexOf(sprite);
 
-            Sprites.Insert(newIndex, newSprite);
+                var newSprite = await sprite.CloneAsync(CurrentProject);
+                var newIndex = originalIndex + 1;
+
+                Sprites.Insert(newIndex, newSprite);
+            }
         }
 
         private void DeleteSpriteAction()
@@ -216,7 +249,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         private void ClearObjectSelectionAction()
         {
-            SelectedSprite = null;
+            SelectedSprites.Clear();
         }
 
         private void StartPlayerAction()
@@ -236,7 +269,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         protected override void GoBackAction()
         {
-            SelectedSprite = null;
+            //SelectedSprites = new ObservableCollection<Sprite>();
             base.GoBackAction();
         }
 
@@ -247,12 +280,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private void CurrentProjectChangedAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
-            SelectedSprite = null;
-        }
-
-        private void CurrentSpriteChangedMessageAction(GenericMessage<Sprite> message)
-        {
-            SelectedSprite = message.Content;
+            SelectedSprites.Clear();
         }
 
         #endregion
@@ -263,14 +291,15 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         {
             if (result == MessageboxResult.Ok)
             {
-                // SelectedSprite.LocalVariables.Clear();
+                var spritesToDelete = SelectedSprites.ToList();
 
-                ReferenceHelper.CleanUpSpriteReferences(SelectedSprite, CurrentProject);
+                foreach (var sprite in spritesToDelete)
+                {
+                    ReferenceHelper.CleanUpSpriteReferences(sprite, CurrentProject);
 
-                SelectedSprite.Delete(CurrentProject);
-                Sprites.Remove(SelectedSprite);
-
-                SelectedSprite = null;
+                    Sprites.Remove(sprite);
+                    sprite.Delete(CurrentProject);
+                }
             }
         }
 
@@ -279,7 +308,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         public SpritesViewModel()
         {
             AddNewSpriteCommand = new RelayCommand(AddNewSpriteAction);
-            EditSpriteCommand = new RelayCommand(EditSpriteAction, CanExecuteEditSpriteCommand);
+            EditSpriteCommand = new RelayCommand<Sprite>(EditSpriteAction);
             CopySpriteCommand = new RelayCommand(CopySpriteAction, CanExecuteCopySpriteCommand);
             DeleteSpriteCommand = new RelayCommand(DeleteSpriteAction, CanExecuteDeleteSpriteCommand);
 
@@ -290,11 +319,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
             ClearObjectsSelectionCommand = new RelayCommand(ClearObjectSelectionAction);
 
+            SelectedSprites = new ObservableCollection<Sprite>();
+
             Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
-
-            Messenger.Default.Register<GenericMessage<Sprite>>(this,
-                ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
         }
 
         private void SpritesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

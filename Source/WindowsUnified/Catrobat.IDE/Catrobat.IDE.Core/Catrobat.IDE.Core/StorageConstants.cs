@@ -8,7 +8,7 @@ namespace Catrobat.IDE.Core
         // Program temporary paths
         public const string TempProgramImportZipPath = "Temp/ImportProjectZip";
         public const string TempProgramImportPath = "Temp/ImportProject";
-        public const string TempPaintImagePath = "Temp/PaintImage";
+        public const string TempPaintImagePath = "Temp/temp.catrobat_paint_png";
 
         // Program related constants
         public const string ProgramsPath = "Projects";

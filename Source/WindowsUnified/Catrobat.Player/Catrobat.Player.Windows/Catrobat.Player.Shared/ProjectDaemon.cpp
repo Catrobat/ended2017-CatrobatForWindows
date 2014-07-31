@@ -160,16 +160,16 @@ vector<Platform::String^> *ProjectDaemon::GetFileList()
 }
 
 
-void ProjectDaemon::SetDesiredRenderTargetSize(DrawingSurfaceSizeF *desiredRenderTargetSize)
-{
-    m_desiredRenderTargetSize = desiredRenderTargetSize;
-}
-
-void ProjectDaemon::ApplyDesiredRenderTargetSizeFromProject()
-{
-    m_desiredRenderTargetSize->width = (float) m_project->GetScreenWidth();
-    m_desiredRenderTargetSize->height = (float) m_project->GetScreenHeight();
-}
+//void ProjectDaemon::SetDesiredRenderTargetSize(DrawingSurfaceSizeF *desiredRenderTargetSize)
+//{
+//    m_desiredRenderTargetSize = desiredRenderTargetSize;
+//}
+//
+//void ProjectDaemon::ApplyDesiredRenderTargetSizeFromProject()
+//{
+//    m_desiredRenderTargetSize->width = (float) m_project->GetScreenWidth();
+//    m_desiredRenderTargetSize->height = (float) m_project->GetScreenHeight();
+//}
 
 void ProjectDaemon::SetupRenderer(ID3D11Device1 *device, ProjectRenderer^ renderer)
 {

@@ -53,15 +53,18 @@
         <RowDefinition/>
       </Grid.RowDefinitions>
       <TextBlock Grid.Row="0" Margin="10 0 10 0" 
-                 Text="{Binding Resources.Editor_ResizeImage, Source={StaticResource LocalizedStrings}}"
-                 Style="{Binding StaticTheme.TextSmallStyle, Source={StaticResource ThemeChooser}}" />
+                 Text="{Binding Resources.Editor_ResizeImage, 
+                 Source={StaticResource LocalizedStrings}}"
+                 Style="{Binding StaticTheme.TextSmallStyle, 
+                 Source={StaticResource ThemeChooser}}" />
       <GridView Grid.Row="1"  Margin="30 0 30 0" SelectionMode="Extended"
                ItemsSource="{Binding ImageSizes}" 
                SelectedItem="{Binding SelectedSize, Mode=TwoWay}">
         <GridView.ItemTemplate>
           <DataTemplate>
             <Grid Margin="10" Width="135" Height="115" 
-                  Visibility="{Binding IsVisible, Converter={StaticResource BoolVisibilityConverter}}" 
+                  Visibility="{Binding IsVisible, 
+                  Converter={StaticResource BoolVisibilityConverter}}" 
                   Background="Transparent">
               <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -80,7 +83,9 @@
                   <ColumnDefinition Width="3*"/>
                   <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle Grid.Column="0" Grid.Row="0" Margin="7 7 0 0" Fill="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1.NativeBrush}"></Rectangle>
+                <Rectangle Grid.Column="0" Grid.Row="0" Margin="7 7 0 0" 
+                  Fill="{Binding Source={StaticResource ThemeChooser}, 
+                  Path=SelectedTheme.AccentColor1.NativeBrush}"></Rectangle>
 
                 <StackPanel Grid.Row="0" Grid.Column="0"  
                             VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -96,10 +101,10 @@
                 <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" 
                             HorizontalAlignment="Center">
                   <TextBlock Foreground="{StaticResource PhoneForegroundBrush}" 
-                             VerticalAlignment="Center" 
-                             TextAlignment="Center" 
-                             Text="{Binding NewWidth, Converter={StaticResource IntPixelConverter}}" 
-                             FontSize="16" Margin="0 0 3 0" />
+                    VerticalAlignment="Center" 
+                    TextAlignment="Center" 
+                    Text="{Binding NewWidth, Converter={StaticResource IntPixelConverter}}" 
+                    FontSize="16" Margin="0 0 3 0" />
                 </StackPanel>
 
                 <Grid Grid.Column="1" Grid.Row="0">
@@ -108,9 +113,9 @@
                     <RowDefinition/>
                   </Grid.RowDefinitions>
                   <TextBlock Grid.Row="1" FontSize="16" 
-                             Foreground="{StaticResource PhoneForegroundBrush}" 
-                             Text="{Binding NewHeight, Converter={StaticResource IntPixelConverter}}" 
-                             Margin="-0.25,24,0.25,-33" >
+                    Foreground="{StaticResource PhoneForegroundBrush}" 
+                    Text="{Binding NewHeight, Converter={StaticResource IntPixelConverter}}" 
+                    Margin="-0.25,24,0.25,-33" >
                     <TextBlock.RenderTransform>
                       <CompositeTransform Rotation="-90"/>
                     </TextBlock.RenderTransform>

@@ -103,7 +103,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                     // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(true);
                     break;
             }
-
             if (this.Frame != null)
             {
                 this.Frame.GoBack();

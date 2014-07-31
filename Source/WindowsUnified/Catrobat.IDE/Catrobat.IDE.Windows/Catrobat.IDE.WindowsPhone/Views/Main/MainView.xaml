@@ -3,27 +3,23 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
-                    xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
-                    mc:Ignorable="d"
+  xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+  xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
+  mc:Ignorable="d"
   NavigationCacheMode="Required"
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
   
-  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-    Source={StaticResource ThemeChooser}}">
-
-    <Hub Name="MainHub"
-      Foreground="{Binding StaticTheme.TextForegroundBrush.NativeBrush, 
-      Source={StaticResource ThemeChooser}}"
-      Background="{Binding Source={StaticResource ThemeChooser}, 
-      Path=SelectedTheme.Background.ImageSource}" 
+  <Grid Background="{ThemeResource AppBackgroundBrush}">
+    <Hub Name="MainHub" 
       SectionsInViewChanged="Hub_SectionsInViewChanged" >
       <Hub.Header>
         <StackPanel Orientation="Horizontal" Margin="6 6 6 -10">
-          <TextBlock Text="POCKET" Foreground="#14a5b8" FontSize="52" FontFamily="Arial Black" 
-                       FontWeight="ExtraBlack" CharacterSpacing="-20" />
-          <TextBlock Text="CODE" Foreground="#ee761b" FontSize="52" FontFamily="Arial Black" 
-                       FontWeight="ExtraBlack" CharacterSpacing="-20" />
+          <TextBlock Text="POCKET" Foreground="#14a5b8" 
+            FontSize="52" FontFamily="Arial Black" 
+            FontWeight="ExtraBlack" CharacterSpacing="-20" />
+          <TextBlock Text="CODE" Foreground="#ee761b" 
+            FontSize="52" FontFamily="Arial Black" 
+            FontWeight="ExtraBlack" CharacterSpacing="-20" />
         </StackPanel>
       </Hub.Header>
 
@@ -32,8 +28,7 @@
           <DataTemplate>
             <TextBlock Text="{Binding Resources.Main_HeaderLocalProjects, 
                        Source={StaticResource LocalizedStrings}}" 
-                       Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-                       Source={StaticResource ThemeChooser}}"/>
+                       Style="{ThemeResource TextHubHeaderStyle}"/>
           </DataTemplate>
         </HubSection.HeaderTemplate>
         <HubSection.ContentTemplate>
@@ -60,8 +55,7 @@
           <DataTemplate>
             <TextBlock Text="{Binding Resources.Main_HeaderOnlineProjects, 
                        Source={StaticResource LocalizedStrings}}" 
-                       Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-                       Source={StaticResource ThemeChooser}}"/>
+                       Style="{ThemeResource TextHubHeaderStyle}"/>
           </DataTemplate>
         </HubSection.HeaderTemplate>
         <HubSection.ContentTemplate>
@@ -101,8 +95,7 @@
                       <TextBlock Grid.Row="0" Margin="12 0 6 0"
                         Text="{Binding ProjectName}"
                         FontSize="32"
-                        Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-                        Source={StaticResource ThemeChooser}}" Foreground="White"/>
+                        Foreground="White"/>
                       <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
@@ -120,15 +113,13 @@
                            <TextBlock Text="{Binding Resources.Main_ProjectNoDescription, 
                                       Source={StaticResource LocalizedStrings}}" 
                                       TextTrimming="WordEllipsis" TextWrapping="Wrap"
-                                      Style="{Binding StaticTheme.TextSubtleStyle.NativeStyle, 
-                                      Source={StaticResource ThemeChooser}}" 
+                                      Style="{ ThemeResource TextSubtileStyle }" 
                                       Foreground="#FFEEEEEE"/>
                         </StackPanel>
                         <TextBlock Grid.Column="1" Margin="12 0 6 0" 
                           Text="{Binding Description}"
                           TextTrimming="WordEllipsis" TextWrapping="Wrap"
-                          Style="{Binding StaticTheme.TextSubtleStyle.NativeStyle, 
-                          Source={StaticResource ThemeChooser}}" 
+                          Style="{ ThemeResource TextSubtileStyle }" 
                           Foreground="#FFEEEEEE"/>
                       </Grid>
                     </Grid>
@@ -160,8 +151,7 @@
                         VerticalAlignment="Center" HorizontalAlignment="Center" 
                         Text="{Binding Resources.Main_OnlineProjectListBoxLoadMore, 
                         Source={StaticResource LocalizedStrings}}" 
-                        Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-                        Source={StaticResource ThemeChooser}}" />
+                        Style="{ ThemeResource TextNormalStyle }" />
                     </StackPanel>
                     <Grid VerticalAlignment="Center" 
                       HorizontalAlignment="Center"
@@ -171,8 +161,7 @@
                         VerticalAlignment="Center" HorizontalAlignment="Center" 
                         Text="{Binding Resources.Main_OnlineProjectListBoxNoMoreItems, 
                         Source={StaticResource LocalizedStrings}}" 
-                        Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-                        Source={StaticResource ThemeChooser}}" />
+                        Style="{ ThemeResource TextNormalStyle }" />
                     </Grid>
                   </Grid>
                 </ListView.Footer>
@@ -186,8 +175,7 @@
         <HubSection.Header>
           <TextBlock Text="{Binding Resources.Main_HeaderAbout, 
             Source={StaticResource LocalizedStrings}}" 
-            Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-            Source={StaticResource ThemeChooser}}"/>
+            Style="{ThemeResource TextHubHeaderStyle}"/>
         </HubSection.Header>
         <HubSection.ContentTemplate>
           <DataTemplate>
@@ -208,14 +196,12 @@
               <HyperlinkButton Grid.Row="2" FontSize="20"
                 Content="{Binding Resources.Main_AboutLicense, 
                 Source={StaticResource LocalizedStrings}}" 
-                Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, 
-                Source={StaticResource ThemeChooser}}" NavigateUri="" 
+                Foreground="{ThemeResource Accent1Brush}" NavigateUri="" 
                 Command="{Binding LicenseCommand}"/>
               <HyperlinkButton Grid.Row="3" FontSize="20"
                 Content="{Binding Resources.Main_AboutCatrobat, 
                 Source={StaticResource LocalizedStrings}}" 
-                Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, 
-                Source={StaticResource ThemeChooser}}" NavigateUri="" 
+                Foreground="{ThemeResource Accent1Brush}" NavigateUri="" 
                 Command="{Binding AboutCommand}"/>
 
               <Grid Grid.Row="6">
@@ -225,8 +211,7 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Right" 
                   VerticalAlignment="Bottom" Orientation="Vertical">
-                  <TextBlock Style="{Binding StaticTheme.TextSubtleStyle.NativeStyle, 
-                    Source={StaticResource ThemeChooser}}" 
+                  <TextBlock Style="{ThemeResource TextSubtileStyle}" 
                     Text="{Binding ApplicationVersionName}" 
                     Margin="12 12 0 12" TextWrapping="Wrap"  />
                 </StackPanel>
@@ -240,8 +225,7 @@
         <HubSection.Header>
           <TextBlock Text="{Binding Resources.Main_TermsOfUse, 
             Source={StaticResource LocalizedStrings}}" 
-            Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-            Source={StaticResource ThemeChooser}}"/>
+            Style="{ThemeResource TextHubHeaderStyle}"/>
         </HubSection.Header>
         <HubSection.ContentTemplate>
           <DataTemplate>
@@ -262,14 +246,12 @@
               <HyperlinkButton Grid.Row="2" FontSize="20"
                 Content="{Binding Resources.Main_TermsOfUse, 
                 Source={StaticResource LocalizedStrings}}" 
-                Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, 
-                Source={StaticResource ThemeChooser}}" NavigateUri="" 
+                Foreground="{ThemeResource Accent1Brush}" NavigateUri="" 
                 Command="{Binding TouCommand}"/>
               <HyperlinkButton Grid.Row="3" FontSize="20"
                 Content="{Binding Resources.Main_AboutCatrobat, 
                 Source={StaticResource LocalizedStrings}}" 
-                Foreground="{Binding SelectedTheme.AccentColor1.NativeBrush, 
-                Source={StaticResource ThemeChooser}}" NavigateUri="" 
+                Foreground="{ThemeResource Accent1Brush}" NavigateUri="" 
                 Command="{Binding AboutCommand}"/>
 
               <Grid Grid.Row="6">
@@ -279,8 +261,7 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Right" 
                   VerticalAlignment="Bottom" Orientation="Vertical">
-                  <TextBlock Style="{Binding StaticTheme.TextSubtleStyle.NativeStyle, 
-                    Source={StaticResource ThemeChooser}}" 
+                  <TextBlock Style="{ThemeResource TextSubtileStyle}" 
                     Text="{Binding ApplicationVersionName}" 
                     Margin="12 12 0 12" TextWrapping="Wrap"  />
                 </StackPanel>
@@ -294,8 +275,7 @@
 
   <Page.BottomAppBar>
     <CommandBar RequestedTheme="Dark" 
-      Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
-      Source={StaticResource ThemeChooser}}">
+      Background="{ThemeResource AppBarBackgroundBrush}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Add" 
           Label="{Binding Resources.Main_ButtonCreate, 

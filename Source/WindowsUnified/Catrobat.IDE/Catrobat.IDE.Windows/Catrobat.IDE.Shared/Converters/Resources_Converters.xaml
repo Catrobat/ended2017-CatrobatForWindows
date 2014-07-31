@@ -28,4 +28,6 @@
   <nativeConverters:NativeImageSquareConverter x:Key="ImageSquareConverter" />
   <nativeConverters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
   <nativeConverters:NegativeNullVisibilityConverter x:Key="NegativeNullVisibilityConverter" />
+  <nativeConverters:ReorderModeVisibilityConverter x:Key="ReorderModeVisibilityConverter"/>
+  <nativeConverters:SelectionModeVisibilityConverter x:Key="SelectionModeVisibilityConverter"/>
 </ResourceDictionary>

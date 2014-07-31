@@ -1,5 +1,6 @@
 ﻿// TODO: using Catrobat.Paint.Phone.Controls.AppBar;
 
+using Catrobat.Paint.WindowsPhone.Controls.AppBar;
 namespace Catrobat.Paint.Phone.Command
 {
     //Singleton handling the undo and redo button
@@ -12,7 +13,7 @@ namespace Catrobat.Paint.Phone.Command
         }
 
         private static UndoRedoActionbarManager _instance;
-        // TODO: public ApplicationBarTop ApplicationBarTop { get; set; }
+        public AppbarTop ApplicationBarTop { get; set; }
 
         private UndoRedoActionbarManager()
         {
@@ -30,16 +31,16 @@ namespace Catrobat.Paint.Phone.Command
             switch (state)
             {
                 case UndoRedoButtonState.EnableRedo:
-                    // TODO: ApplicationBarTop.BtnRedo.IsEnabled = true;
+                    ApplicationBarTop.BtnRedoEnable = true;
                     break;
                 case UndoRedoButtonState.EnableUndo:
-                    // TODO: ApplicationBarTop.BtnUndo.IsEnabled = true;
+                    ApplicationBarTop.BtnUndoEnable = true;
                     break;
                 case UndoRedoButtonState.DisableRedo:
-                    // TODO: ApplicationBarTop.BtnRedo.IsEnabled = false;
+                    ApplicationBarTop.BtnRedoEnable = false;
                     break;
                 case UndoRedoButtonState.DisableUndo:
-                    // TODO: ApplicationBarTop.BtnUndo.IsEnabled = false;
+                    ApplicationBarTop.BtnUndoEnable = false;
                     break;
                 default:
                     break;

@@ -161,23 +161,24 @@
     <Compile Include="Tests\ViewModels\Editor\Costumes\ChangeCostumeViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Costumes\CostumeNameChooserViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Costumes\NewCostumeSourceSelectionViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Sounds\ChangeSoundViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Sprites\AddNewSpriteViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Sprites\ChangeSpriteViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Sprites\SpritesEditorViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Sprites\SpritesViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Main\MainViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Main\AddNewProjectViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Main\ProjectImportViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Main\ProjectSettingsViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Main\ProjectDetailViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Service\OnlineProjectViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Service\OnlineProjectReportViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Service\UploadProjectNewPasswordViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Service\UploadProjectLoadingViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Service\UploadProjectForgotPasswordViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Service\UploadProjectViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Service\UploadProjectRegisterViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Service\UploadProjectLoginViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Main\AddNewProgramViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Main\ProgramImportViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Main\ProgramSettingsViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Main\ProgramDetailViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\OnlineProgramViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\OnlineProgramReportViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProgramNewPasswordViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProgramLoadingViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProgramForgotPasswordViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProgramViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProgramRegisterViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Service\UploadProgramLoginViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Settings\SettingsLanguageViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Settings\SettingsViewModelTests.cs" />
   </ItemGroup>
@@ -288,7 +289,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests\ViewModels\Editor\Formula\" />
-    <Folder Include="Tests\ViewModels\Editor\Sounds\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

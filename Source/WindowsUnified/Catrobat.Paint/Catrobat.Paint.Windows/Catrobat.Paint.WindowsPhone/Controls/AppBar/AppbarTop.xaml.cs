@@ -41,6 +41,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                 btnRedo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnRedo_Click;
                 btnSelectedColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColBtnSelectedColor_OnClick;
                 btnMoveScreen.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreen_OnClick;
+
+                btnUndo.IsEnabled = false;
+                btnRedo.IsEnabled = false;
             }
         }
         private void ColorChangedHere(SolidColorBrush color)
@@ -56,14 +59,24 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             }
         }
 
-        private void ToolChangedHere(ToolBase tool)
+        public void ToolChangedHere(ToolBase tool)
         {
+            /* TODO: ImageBrush image_brush = new ImageBrush();
+            ImageBrush image_brush_2 = new ImageBrush();
+            if (PocketPaintApplication.GetInstance().ToolWhileMoveTool != null)
+            {
+                image_brush.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Move));
+                //button.Background = image_brush;
+
+                button.Content = new BitmapImage(GetToolImageUri(ToolType.Brush));
+            }*/
             BitmapIcon move_icon = new BitmapIcon();
-            move_icon.Opacity = 0.2;
+           // move_icon.Opacity = 0.2;
             switch (tool.GetToolType())
             {
                 case ToolType.Brush:
                     move_icon.UriSource = GetToolImageUri(ToolType.Brush);
+
                     break;
                 case ToolType.Eraser:
                     move_icon.UriSource = GetToolImageUri(ToolType.Eraser);
@@ -113,7 +126,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
         }
 
         private Uri GetToolImageUri(ToolType tooltype)
-        {
+        { 
             switch (tooltype)
             {
                 case ToolType.Brush:
@@ -137,5 +150,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                     return null;
             }
         }
+
+        public bool BtnRedoEnable
+        {
+            get { return btnRedo.IsEnabled; }
+            set { btnRedo.IsEnabled = value; }
+        }
+
+        public bool BtnUndoEnable
+        {
+            get { return btnUndo.IsEnabled; }
+            set { btnUndo.IsEnabled = value; }
+        } 
     }
 }

@@ -35,19 +35,20 @@
             </AppBarButton.Icon>
         </AppBarButton>
 
-        <AppBarButton x:Name="btnSelectedColor" Margin="215,3,0,-3">
-            
+        <AppBarButton x:Name="btnSelectedColor" Margin="215,3,0,-3" >
         </AppBarButton>
+
+        <AppBarButton x:Name="btnMoveScreen"  Margin="315,3,0,-3">
+            <AppBarButton.Icon>
+                <BitmapIcon  UriSource="/Assets/ToolMenu/icon_menu_brush.png"/>
+            </AppBarButton.Icon>
+        </AppBarButton>
+
         <!--<Ellipse x:Name="ellipseTransparence"  HorizontalAlignment="Left" Height="39" Margin="231,15,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" >
             <Ellipse.Fill>
                 <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
             </Ellipse.Fill>
         </Ellipse>-->
-        <AppBarButton x:Name="btnMoveScreen" Margin="310,3,0,-3">
-            <AppBarButton.Icon>
-                <BitmapIcon UriSource="/Assets/ToolMenu/icon_menu_brush.png" Opacity="0.2"/>
-            </AppBarButton.Icon>
-        </AppBarButton>
 
         <!-- TODO:
         <<coding4FunControls:RoundButton x:Name="BtnSelectedColor" ClickMode="Release" 
@@ -57,7 +58,7 @@
         -->
 
     </Grid>
-    
+
 </UserControl>
     
     

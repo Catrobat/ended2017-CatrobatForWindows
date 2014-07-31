@@ -228,6 +228,18 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EventController.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastScript.h">
+      <Filter>Objects\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ScriptHandler.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ExceptionLogger.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageDaemon.cpp">
@@ -448,6 +460,18 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EventController.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastScript.cpp">
+      <Filter>Objects\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ScriptHandler.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ExceptionLogger.cpp">
+      <Filter>Exceptions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Constants">
@@ -497,6 +521,9 @@
     </Filter>
     <Filter Include="XMLParser">
       <UniqueIdentifier>{90f2f841-0140-45f5-9869-cb6ac81d4406}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{4aeccfa4-9c5f-4fe6-8e6e-a3303d6f518a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

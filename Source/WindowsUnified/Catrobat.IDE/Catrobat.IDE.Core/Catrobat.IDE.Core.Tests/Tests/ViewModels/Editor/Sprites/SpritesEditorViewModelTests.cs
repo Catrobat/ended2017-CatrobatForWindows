@@ -261,7 +261,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual("TestProgram", viewModel.CurrentProgram.Name); // message action test
             Assert.AreEqual("TestProgram", _currentProjectHeader.Name);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
-            Assert.AreEqual(typeof(ProjectSettingsViewModel), navigationService.CurrentView);
+            Assert.AreEqual(typeof(ProgramSettingsViewModel), navigationService.CurrentView);
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 

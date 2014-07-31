@@ -50,7 +50,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 
             Assert.AreEqual(localProjectHeader, _currentProjectHeader);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
-            Assert.AreEqual(typeof(ProjectDetailViewModel), navigationService.CurrentView);
+            Assert.AreEqual(typeof(ProgramDetailViewModel), navigationService.CurrentView);
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
@@ -104,7 +104,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             viewModel.CreateNewProjectCommand.Execute(null);
 
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
-            Assert.AreEqual(typeof(AddNewProjectViewModel), navigationService.CurrentView);
+            Assert.AreEqual(typeof(AddNewProgramViewModel), navigationService.CurrentView);
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
@@ -140,7 +140,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual("5", viewModel.SelectedOnlineProject.Downloads);
             Assert.AreEqual(ApplicationResources.POCEKTCODE_BASE_ADDRESS + "resources/thumbnails/1769_small.png", viewModel.SelectedOnlineProject.ScreenshotSmall);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
-            Assert.AreEqual(typeof(OnlineProjectViewModel), navigationService.CurrentView);
+            Assert.AreEqual(typeof(OnlineProgramViewModel), navigationService.CurrentView);
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 

@@ -42,8 +42,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Costumes
 
             changeCostumeViewModel.SaveCommand.Execute(null);
 
-            Assert.IsTrue(changeCostumeViewModel.CostumeName == "NewCostumeName");
-            Assert.IsFalse(changeCostumeViewModel.CostumeName == "TestCostume");
+            Assert.AreEqual("NewCostumeName", changeCostumeViewModel.CostumeName);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);
@@ -105,7 +104,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Costumes
             changeCostumeViewModel.CostumeName = "NewCostumeName";
             changeCostumeViewModel.GoBackCommand.Execute(null);
 
-            Assert.IsTrue(changeCostumeViewModel.CostumeName == "");
+            Assert.AreEqual("", changeCostumeViewModel.CostumeName);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);

@@ -9,6 +9,7 @@ using Windows.Media.Capture;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Media.Imaging;
+using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
@@ -112,25 +113,54 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public async Task DrawPictureAsync(PortableImage imageToEdit = null)
         {
-            const string catrobatImageFileName = "image.catrobat_paint_png";
-            var localFolder = ApplicationData.Current.TemporaryFolder;
+            var localFolder = ApplicationData.Current.LocalFolder;
 
-            var file = await localFolder.CreateFileAsync(catrobatImageFileName, CreationCollisionOption.ReplaceExisting);
-
-            var options = new Windows.System.LauncherOptions
+            if (imageToEdit != null)
             {
-                DisplayApplicationPicker = false
-            };
-
-            bool success = await Windows.System.Launcher.LaunchFileAsync(file, options);
-            if (success)
-            {
-                // File launch OK
+                await imageToEdit.WriteAsPng(StorageConstants.TempPaintImagePath);
             }
             else
             {
-                // File launch failed
+                throw new NotImplementedException("Create empty image here");
+                // TODO: create empty image with the same dimensions as the devices width and heigt
+
+                var imageWidth = ServiceLocator.SystemInformationService.ScreenWidth;
+                var imageHeight = ServiceLocator.SystemInformationService.ScreenHeight;
             }
+
+            var paintTempFolderPath = Path.GetDirectoryName(StorageConstants.TempPaintImagePath);
+            var paintTempFolderName = Path.GetFileName(StorageConstants.TempPaintImagePath);
+            var paintTempFolder = await localFolder.CreateFolderAsync(paintTempFolderPath, CreationCollisionOption.OpenIfExists);
+            var file = await paintTempFolder.GetFileAsync(paintTempFolderName);
+            
+
+            var options = new Windows.System.LauncherOptions
+            {
+                DisplayApplicationPicker = true
+            };
+
+
+            try
+            {
+                // TODO: why does this line thow an exception???
+                bool success = await Windows.System.Launcher.LaunchFileAsync(file, options);
+                if (success)
+                {
+                    // File launch OK
+                }
+                else
+                {
+                    // File launch failed
+                }
+            }
+            catch (Exception)
+            {
+                if(Debugger.IsAttached)
+                    Debugger.Break();
+            }
+  
+
+
 
 
             //return new PictureServiceResult(); // TODO: get file from app launch

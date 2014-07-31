@@ -27,13 +27,13 @@ namespace Catrobat.IDE.Core.ViewModels
                 IsInitialized = true;
 
                 ServiceLocator.Register<MainViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<AddNewProjectViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<UploadProjectViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<UploadProjectLoadingViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<UploadProjectLoginViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<UploadProjectRegisterViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<UploadProjectForgotPasswordViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<UploadProjectNewPasswordViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<AddNewProgramViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<UploadProgramViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<UploadProgramLoadingViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<UploadProgramLoginViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<UploadProgramRegisterViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<UploadProgramForgotPasswordViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<UploadProgramNewPasswordViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SoundRecorderViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SettingsViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SettingsBrickViewModel>(TypeCreationMode.Normal);
@@ -45,10 +45,10 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<SoundNameChooserViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<AddNewSpriteViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<ChangeSpriteViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<ProjectSettingsViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<ProjectImportViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<OnlineProjectViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<OnlineProjectReportViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<ProgramSettingsViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<ProgramImportViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<OnlineProgramViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<OnlineProgramReportViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<NewBroadcastMessageViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<ScriptBrickCategoryViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<AddNewScriptBrickViewModel>(TypeCreationMode.Normal);
@@ -67,7 +67,7 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<CostumeSavingViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<EditorLoadingViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<CostumeNameChooserViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<ProjectDetailViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<ProgramDetailViewModel>(TypeCreationMode.Normal);
             }
 
         }
@@ -88,11 +88,11 @@ namespace Catrobat.IDE.Core.ViewModels
         [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public AddNewProjectViewModel AddNewProjectViewModel
+        public AddNewProgramViewModel AddNewProgramViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<AddNewProjectViewModel>();
+                return ServiceLocator.GetInstance<AddNewProgramViewModel>();
             }
         }
 
@@ -101,77 +101,77 @@ namespace Catrobat.IDE.Core.ViewModels
         [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public ProjectSettingsViewModel ProjectSettingsViewModel
+        public ProgramSettingsViewModel ProgramSettingsViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<ProjectSettingsViewModel>();
+                return ServiceLocator.GetInstance<ProgramSettingsViewModel>();
             }
         }
 
         [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public UploadProjectViewModel UploadProjectViewModel
+        public UploadProgramViewModel UploadProgramViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<UploadProjectViewModel>();
+                return ServiceLocator.GetInstance<UploadProgramViewModel>();
             }
         }
 
         [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public UploadProjectLoadingViewModel UploadProjectLoadingViewModel
+        public UploadProgramLoadingViewModel UploadProgramLoadingViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<UploadProjectLoadingViewModel>();
+                return ServiceLocator.GetInstance<UploadProgramLoadingViewModel>();
             }
         }
 
         [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public UploadProjectLoginViewModel UploadProjectLoginViewModel
+        public UploadProgramLoginViewModel UploadProgramLoginViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<UploadProjectLoginViewModel>();
+                return ServiceLocator.GetInstance<UploadProgramLoginViewModel>();
             }
         }
 
         [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public UploadProjectRegisterViewModel UploadProjectRegisterViewModel
+        public UploadProgramRegisterViewModel UploadProgramRegisterViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<UploadProjectRegisterViewModel>();
+                return ServiceLocator.GetInstance<UploadProgramRegisterViewModel>();
             }
         }
 
         [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public UploadProjectForgotPasswordViewModel UploadProjectForgotPasswordViewModel
+        public UploadProgramForgotPasswordViewModel UploadProgramForgotPasswordViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<UploadProjectForgotPasswordViewModel>();
+                return ServiceLocator.GetInstance<UploadProgramForgotPasswordViewModel>();
             }
         }
 
         [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public UploadProjectNewPasswordViewModel UploadProjectNewPasswordViewModel
+        public UploadProgramNewPasswordViewModel UploadProgramNewPasswordViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<UploadProjectNewPasswordViewModel>();
+                return ServiceLocator.GetInstance<UploadProgramNewPasswordViewModel>();
             }
         }
 
@@ -310,33 +310,33 @@ namespace Catrobat.IDE.Core.ViewModels
         [SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public ProjectImportViewModel ProjectImportViewModel
+        public ProgramImportViewModel ProgramImportViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<ProjectImportViewModel>();
+                return ServiceLocator.GetInstance<ProgramImportViewModel>();
             }
         }
 
         [SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public OnlineProjectViewModel OnlineProjectViewModel
+        public OnlineProgramViewModel OnlineProgramViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<OnlineProjectViewModel>();
+                return ServiceLocator.GetInstance<OnlineProgramViewModel>();
             }
         }
 
         [SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public OnlineProjectReportViewModel OnlineProjectReportViewModel
+        public OnlineProgramReportViewModel OnlineProgramReportViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<OnlineProjectReportViewModel>();
+                return ServiceLocator.GetInstance<OnlineProgramReportViewModel>();
             }
         }
 
@@ -531,11 +531,11 @@ namespace Catrobat.IDE.Core.ViewModels
         [SuppressMessage("Microsoft.Performance",
            "CA1822:MarkMembersAsStatic",
            Justification = "This non-static member is needed for data binding purposes.")]
-        public ProjectDetailViewModel ProjectDetailViewModel
+        public ProgramDetailViewModel ProgramDetailViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<ProjectDetailViewModel>();
+                return ServiceLocator.GetInstance<ProgramDetailViewModel>();
             }
         }
 

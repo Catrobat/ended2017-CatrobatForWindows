@@ -5,7 +5,7 @@
 #include "ProjectRenderer.h"
 
 #include <vector>
-#include <DrawingSurfaceNative.h>
+//#include <DrawingSurfaceNative.h>
 
 
 
@@ -24,9 +24,9 @@ public:
 	void OpenProject(Platform::String^ projectName);
 	bool FinishedLoading();
 
-	void SetDesiredRenderTargetSize(DrawingSurfaceSizeF *desiredRenderTargetSize);
+	//void SetDesiredRenderTargetSize(DrawingSurfaceSizeF *desiredRenderTargetSize);
 	void SetupRenderer(ID3D11Device1 *device, ProjectRenderer^ renderer);
-	void ApplyDesiredRenderTargetSizeFromProject();
+	//void ApplyDesiredRenderTargetSizeFromProject();
 
     void AddDebug(Platform::String^ info);
 	std::vector<std::string> *GetErrorList();
@@ -47,7 +47,7 @@ private:
 	std::vector<Platform::String ^> *m_files;
 	Platform::String^ m_currentFolder;
 
-	DrawingSurfaceSizeF* m_desiredRenderTargetSize;
+	//DrawingSurfaceSizeF* m_desiredRenderTargetSize;
 	ID3D11Device1 *m_device;
 	ProjectRenderer^ m_renderer;
 

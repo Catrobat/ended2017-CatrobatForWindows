@@ -9,10 +9,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid x:Name="main_grid" IsHitTestVisible="True" ManipulationMode="All">
         <!--<Grid x:Name="PaintingAreaContentPanelGrid" Width="auto" Height="auto" Grid.Row="1" Margin="0,0,0,0" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center"> -->
         <Grid x:Name="PaintingAreaContentPanelGrid" Width="auto" Height="auto" Grid.Row="1" Margin="0,0,0,0" Background="Transparent" >
-            <Grid x:Name="PaintingAreaCheckeredGrid" Width="auto" Height="auto">
+            <Grid x:Name="PaintingAreaCheckeredGrid" Width="auto" Height="auto"  >
                 <Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
                 </Grid.Background>
