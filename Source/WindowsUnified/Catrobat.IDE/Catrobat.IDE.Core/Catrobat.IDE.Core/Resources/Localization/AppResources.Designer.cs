@@ -2249,6 +2249,87 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die App version too old ähnelt.
+        /// </summary>
+        public static string Import_AppTooOld {
+            get {
+                return ResourceManager.GetString("Import_AppTooOld", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The downloaded program requires a newer version of this App. ähnelt.
+        /// </summary>
+        public static string Import_AppTooOldText {
+            get {
+                return ResourceManager.GetString("Import_AppTooOldText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The catrobat file is damaged. ähnelt.
+        /// </summary>
+        public static string Import_CatrobatDamagedText {
+            get {
+                return ResourceManager.GetString("Import_CatrobatDamagedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program added ähnelt.
+        /// </summary>
+        public static string Import_ProgramAdded {
+            get {
+                return ResourceManager.GetString("Import_ProgramAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program successfully added to your program list. ähnelt.
+        /// </summary>
+        public static string Import_ProgramAddedText {
+            get {
+                return ResourceManager.GetString("Import_ProgramAddedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program damaged ähnelt.
+        /// </summary>
+        public static string Import_ProgramDamaged {
+            get {
+                return ResourceManager.GetString("Import_ProgramDamaged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program damaged and cannot be added. ähnelt.
+        /// </summary>
+        public static string Import_ProgramDamagedText {
+            get {
+                return ResourceManager.GetString("Import_ProgramDamagedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program outdated ähnelt.
+        /// </summary>
+        public static string Import_ProgramOutdated {
+            get {
+                return ResourceManager.GetString("Import_ProgramOutdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program is too old and cannot be added. ähnelt.
+        /// </summary>
+        public static string Import_ProgramOutdatedText {
+            get {
+                return ResourceManager.GetString("Import_ProgramOutdatedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die About Catrobat ähnelt.
         /// </summary>
         public static string Main_AboutCatrobat {

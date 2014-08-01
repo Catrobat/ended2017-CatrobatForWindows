@@ -1236,4 +1236,31 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   <data name="Editor_ButtonStartReordering" xml:space="preserve">
     <value>umsortieren</value>
   </data>
+  <data name="Import_AppTooOld" xml:space="preserve">
+    <value>App-Version veraltet</value>
+  </data>
+  <data name="Import_AppTooOldText" xml:space="preserve">
+    <value>Das heruntergeladene Program erfordert eine neuere Version dieser App!</value>
+  </data>
+  <data name="Import_CatrobatDamagedText" xml:space="preserve">
+    <value>Das Catrobat-File ist beschädigt!</value>
+  </data>
+  <data name="Import_ProgramAdded" xml:space="preserve">
+    <value>Programm hinzugefügt</value>
+  </data>
+  <data name="Import_ProgramAddedText" xml:space="preserve">
+    <value>Program wurde erfolgreich zu deiner Programm-Liste hinzugefügt.</value>
+  </data>
+  <data name="Import_ProgramDamaged" xml:space="preserve">
+    <value>Programm beschädigt</value>
+  </data>
+  <data name="Import_ProgramDamagedText" xml:space="preserve">
+    <value>Das Programm ist beschädigt und kann nicht zur Liste hinzugefügt werden.</value>
+  </data>
+  <data name="Import_ProgramOutdated" xml:space="preserve">
+    <value>Programm veraltet</value>
+  </data>
+  <data name="Import_ProgramOutdatedText" xml:space="preserve">
+    <value>Das Programm ist veraltet und kann daher nicht zur Liste hinzugefügt werden.</value>
+  </data>
 </root>
