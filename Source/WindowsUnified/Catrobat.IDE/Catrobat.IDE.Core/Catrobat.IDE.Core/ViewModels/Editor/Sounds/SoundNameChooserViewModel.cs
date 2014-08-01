@@ -99,7 +99,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
                 }
             }
 
-            ResetViewModel();
             ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
                 _receivedSelectedSprite.Sounds.Add(sound);
@@ -112,12 +111,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
         {
             SoundName = null;
 
-            base.GoBackAction();
-        }
-
-        protected override void GoBackAction()
-        {
-            ResetViewModel();
             base.GoBackAction();
         }
 
@@ -147,20 +140,24 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<Sprite>>(this,
-                ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
-
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+                ViewModelMessagingToken.CurrentProjectChangedListener, 
+                CurrentProjectChangedMessageAction);
+
+            Messenger.Default.Register<GenericMessage<Sprite>>(this,
+                ViewModelMessagingToken.CurrentSpriteChangedListener, 
+                ReceiveSelectedSpriteMessageAction);
 
             Messenger.Default.Register<GenericMessage<Stream>>(this,
-                 ViewModelMessagingToken.SoundStreamListener, SoundStreamChangedMessageAction);
+                 ViewModelMessagingToken.SoundStreamListener, 
+                 SoundStreamChangedMessageAction);
             
         }
 
-        private void ResetViewModel()
+        public override void NavigateTo()
         {
-            SoundName = AppResources.Editor_SoundSingular;
+            SoundName = "";
+            base.NavigateTo();
         }
     }
 }
