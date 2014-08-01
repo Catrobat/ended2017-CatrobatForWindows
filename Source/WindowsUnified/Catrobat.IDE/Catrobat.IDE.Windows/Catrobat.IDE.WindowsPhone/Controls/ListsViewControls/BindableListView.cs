@@ -1,8 +1,10 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 {
@@ -12,24 +14,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         {
             this.SelectionChanged += OnSelectionChanged;
         }
-
-        public new IList ItemsSource
-        {
-            get { return (IList)GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value);
-                base.ItemsSource = value;
-            }
-        }
-
-        public new static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
-            "ItemsSource", typeof(IList), typeof(BindableListView), new PropertyMetadata(null, ItemsSourceChanged));
-
-        private static void ItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((BindableListView)d).ItemsSource = (IList) e.NewValue;
-        }
-
-
 
         public IList BindableSelectedItems
         {
@@ -63,7 +47,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
             if (args.Action == NotifyCollectionChangedAction.Reset)
             {
-                SelectedItems.Clear();
+                if (SelectedItems.Count > 0)
+                    SelectedItems.Clear();
                 return;
             }
 
@@ -84,37 +69,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
                         BindableSelectedItems.Insert(index, item);
                     }
                 }
-
-
-
-            //if (BindableSelectedItems == null)
-            //    return;
-
-            //var list = args.NewItems;
-
-            //var itemsToRemove = new List<object>();
-
-            //foreach (var item in BindableSelectedItems)
-            //{
-            //    if (!list.Contains(item))
-            //        itemsToRemove.Add(item);
-            //}
-
-            //foreach (var item in itemsToRemove)
-            //{
-            //    SelectionChanged -= OnSelectionChanged;
-            //    BindableSelectedItems.Remove(item);
-            //    SelectionChanged += OnSelectionChanged;
-            //}
-
-            //foreach (var item in list)
-            //{
-            //    if (!BindableSelectedItems.Contains(item))
-            //    {
-            //        var index = list.IndexOf(item);
-            //        BindableSelectedItems.Insert(index, item);
-            //    }
-            //}
         }
 
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs args)

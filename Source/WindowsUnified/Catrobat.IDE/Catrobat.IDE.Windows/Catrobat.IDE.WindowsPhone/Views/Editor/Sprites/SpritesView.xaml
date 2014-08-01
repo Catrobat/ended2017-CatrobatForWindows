@@ -95,14 +95,15 @@
 
       <listsViewControls:BindableListView Name="ListViewSprites" 
                 Grid.Row="1" Margin="10 0 10 0"
-                ItemsSource="{Binding Sprites}"
+                ItemsSource="{Binding CurrentProject.Sprites}"
                 BindableSelectedItems="{Binding SelectedSprites, Mode=TwoWay}"
                 ItemTemplate="{StaticResource SpriteItemTemplate}"
                 CanReorderItems="True" AllowDrop="True" SelectionMode="None"/>
 
       <TextBlock Grid.Row="1"
               Text ="{Binding Resources.Editor_ClickPlusToAddSprite, Source={StaticResource LocalizedStrings}}"
-              Visibility="{Binding IsSpritesEmpty, Converter={StaticResource BoolVisibilityConverter}}"
+              Visibility="{Binding CurrentProject.Sprites.Count, 
+              Converter={StaticResource NativeIntZeroVisibilityConverter}}"
               Style="{ThemeResource TextNormalStyle}"
               TextWrapping="Wrap"
               TextAlignment="Center"

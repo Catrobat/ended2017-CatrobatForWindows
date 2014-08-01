@@ -61,7 +61,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             {
                 _currentProject = value;
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                    RaisePropertyChanged(() => CurrentProgram));
+                {
+                    RaisePropertyChanged(() => CurrentProgram);
+                    RaisePropertyChanged(() => Sprites);
+                    RaisePropertyChanged(() => SelectedSprite);
+                });
+
             }
         }
 
@@ -73,6 +78,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
+        // This code does probably not work any more
         public Sprite SelectedSprite
         {
             get
