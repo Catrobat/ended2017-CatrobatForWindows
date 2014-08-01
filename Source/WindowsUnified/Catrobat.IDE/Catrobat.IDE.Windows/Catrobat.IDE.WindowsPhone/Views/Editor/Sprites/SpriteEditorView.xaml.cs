@@ -9,6 +9,7 @@ using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Windows.UI.Xaml;
 using Catrobat.IDE.WindowsPhone.Controls;
+using Catrobat.IDE.WindowsPhone.Controls.SoundControls;
 using Catrobat.IDE.WindowsShared.Services;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
@@ -67,6 +68,8 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         {
             //((SoundPlayerServiceWindowsShared) ServiceLocator.SoundPlayerService).
             //    SetMediaElement(MediaElementSound);
+            var playSoundButtonGroup = (SoundPlayButtonGroup) FindName("PlayPauseButtonGroupSounds");
+            if (playSoundButtonGroup != null) playSoundButtonGroup.Stop();
 
             base.OnNavigatedTo(e);
         }
