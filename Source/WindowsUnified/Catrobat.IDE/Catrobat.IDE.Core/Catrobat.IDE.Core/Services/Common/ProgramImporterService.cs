@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Core.Services.Common
         private Stream _projectStream;
         private ExtractProgramResult _extractResult;
         private CheckProgramImportResult _checkResult;
-        private OnlineProjectHeader _onlineProjectHeader;
+        private OnlineProgramHeader _onlineProjectHeader;
         private XmlProgram _convertedProject;
         private string _programName;
 
@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Core.Services.Common
             _projectStream = projectStream;
         }
 
-        public void SetDownloadHeader(OnlineProjectHeader projectHeader)
+        public void SetDownloadHeader(OnlineProgramHeader projectHeader)
         {
             _onlineProjectHeader = projectHeader;
         }
@@ -245,7 +245,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 await ServiceLocator.ProjectImporterService.AcceptTempProject();
                 var localProjectsChangedMessage = new MessageBase();
                 Messenger.Default.Send(localProjectsChangedMessage,
-                    ViewModelMessagingToken.LocalProjectsChangedListener);
+                    ViewModelMessagingToken.LocalProgramsChangedListener);
 
                 ServiceLocator.NotifictionService.ShowToastNotification(
                     "Program added",

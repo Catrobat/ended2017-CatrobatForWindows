@@ -138,7 +138,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Program>>(this, 
-                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Look>>(this, 
                 ViewModelMessagingToken.LookListener, ChangeLookNameMessageAction);
         }

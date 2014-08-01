@@ -29,30 +29,30 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void InitializeActionEmptyProjectTest()
+        public void InitializeActionEmptyProgramTest()
         {
             var viewModel = new UploadProgramViewModel();
             viewModel.InitializeCommand.Execute(null);
 
-            Assert.IsTrue(viewModel.ProjectName == "");
-            Assert.IsTrue(viewModel.ProjectDescription == "");
+            Assert.IsTrue(viewModel.ProgramName == "");
+            Assert.IsTrue(viewModel.ProgramDescription == "");
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void InitializeActionFullProjectTest()
+        public void InitializeActionFullProgramTest()
         {
             var viewModel = new UploadProgramViewModel();            
             var project = new Program
             {
-                Name = "TestProject",
-                Description = "TestProjectDescription"
+                Name = "TestProgram",
+                Description = "TestProgramDescription"
             };
             var messageContext = new GenericMessage<Program>(project);
-            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProjectChangedListener);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProgramChangedListener);
             viewModel.InitializeCommand.Execute(null);
 
-            Assert.AreEqual("TestProject", viewModel.ProjectName);
-            Assert.AreEqual("TestProjectDescription", viewModel.ProjectDescription);
+            Assert.AreEqual("TestProgram", viewModel.ProgramName);
+            Assert.AreEqual("TestProgramDescription", viewModel.ProgramDescription);
         }
 
         [TestMethod/*, TestCategory("GatedTests")*/]
@@ -63,7 +63,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(0, "test not fully implemented");
 
             Messenger.Default.Register<MessageBase>(this,
-               ViewModelMessagingToken.UploadProjectStartedListener, UploadProjectStartedMessageAction);
+               ViewModelMessagingToken.UploadProgramStartedListener, UploadProgramStartedMessageAction);
 
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
@@ -76,8 +76,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
 
             var viewModel = new UploadProgramViewModel
             {
-                ProjectName = "TestProjectName",
-                ProjectDescription = "TestProjectDescription"
+                ProgramName = "TestProgramName",
+                ProgramDescription = "TestProgramDescription"
             };
             var localSettings = new LocalSettings();
             var context = new CatrobatContext
@@ -93,8 +93,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             //viewModel.UploadCommand.Execute(null);
 
             Assert.IsTrue(_uploadStarted);
-            Assert.AreEqual("", viewModel.ProjectName);
-            Assert.AreEqual("", viewModel.ProjectDescription);
+            Assert.AreEqual("", viewModel.ProgramName);
+            Assert.AreEqual("", viewModel.ProgramDescription);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);
@@ -113,8 +113,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
 
             var viewModel = new UploadProgramViewModel
             {
-                ProjectName = "TestProjectName",
-                ProjectDescription = "TestProjectDescription"
+                ProgramName = "TestProgramName",
+                ProgramDescription = "TestProgramDescription"
             };
             var localSettings = new LocalSettings();
             var context = new CatrobatContext
@@ -129,8 +129,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             
             viewModel.ChangeUserCommand.Execute(null);
 
-            Assert.AreEqual("", viewModel.ProjectName);
-            Assert.AreEqual("", viewModel.ProjectDescription);
+            Assert.AreEqual("", viewModel.ProgramName);
+            Assert.AreEqual("", viewModel.ProgramDescription);
             Assert.AreEqual("", viewModel.Context.CurrentToken);
             Assert.AreEqual("", viewModel.Context.CurrentUserName);
             Assert.AreEqual("", viewModel.Context.CurrentUserEmail);
@@ -152,13 +152,13 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
 
             var viewModel = new UploadProgramViewModel
             {
-                ProjectName = "TestProjectName",
-                ProjectDescription = "TestProjectDescription"
+                ProgramName = "TestProgramName",
+                ProgramDescription = "TestProgramDescription"
             };
             viewModel.CancelCommand.Execute(null);
 
-            Assert.AreEqual("", viewModel.ProjectName);
-            Assert.AreEqual("", viewModel.ProjectDescription);
+            Assert.AreEqual("", viewModel.ProgramName);
+            Assert.AreEqual("", viewModel.ProgramDescription);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(ProgramDetailViewModel), navigationService.CurrentView);
             Assert.AreEqual(1, navigationService.PageStackCount);
@@ -174,20 +174,20 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
 
             var viewModel = new UploadProgramViewModel
             {
-                ProjectName = "TestProjectName",
-                ProjectDescription = "TestProjectDescription"
+                ProgramName = "TestProgramName",
+                ProgramDescription = "TestProgramDescription"
             };
             viewModel.GoBackCommand.Execute(null);
 
-            Assert.AreEqual("", viewModel.ProjectName);
-            Assert.AreEqual("", viewModel.ProjectDescription);
+            Assert.AreEqual("", viewModel.ProgramName);
+            Assert.AreEqual("", viewModel.ProgramDescription);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
         #region MessageActions
-        private void UploadProjectStartedMessageAction(MessageBase message)
+        private void UploadProgramStartedMessageAction(MessageBase message)
         {
             _uploadStarted = true;
         }

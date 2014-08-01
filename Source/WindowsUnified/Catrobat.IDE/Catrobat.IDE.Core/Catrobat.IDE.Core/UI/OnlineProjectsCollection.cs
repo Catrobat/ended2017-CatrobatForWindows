@@ -28,7 +28,7 @@ namespace Catrobat.IDE.Core.UI
             public uint ProgramsCount { get; set; }
     }
 
-    public class OnlineProgramsCollection : ObservableCollection<OnlineProjectHeader>
+    public class OnlineProgramsCollection : ObservableCollection<OnlineProgramHeader>
     {
         private CancellationTokenSource _downloadTaskCancellation = new CancellationTokenSource();
         private readonly object _manipulationLock = new object();

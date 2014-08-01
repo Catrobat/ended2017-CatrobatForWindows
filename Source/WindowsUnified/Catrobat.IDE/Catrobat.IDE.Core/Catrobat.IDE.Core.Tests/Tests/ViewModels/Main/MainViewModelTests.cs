@@ -15,9 +15,9 @@ using Catrobat.IDE.Core.Tests.SampleData;
 namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 {
     [TestClass]
-    public class OnlineProjectViewModelTests
+    public class OnlineProgramViewModelTests
     {
-        private LocalProjectHeader _currentProjectHeader;
+        private LocalProjectHeader _currentProgramHeader;
 
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
@@ -31,31 +31,31 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void OpenProjectCommandActionTest()
+        public void OpenProgramCommandActionTest()
         {
             Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this,
-                 ViewModelMessagingToken.CurrentProjectHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
+                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProgramHeaderChangedMessageAction);
             
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
             navigationService.CurrentView = typeof(MainViewModel);
 
-            var localProjectHeader = new LocalProjectHeader
+            var localProgramHeader = new LocalProjectHeader
             {
-                ProjectName = "TestProject"
+                ProjectName = "TestProgram"
             };
             var viewModel = new MainViewModel();
-            viewModel.OpenProjectCommand.Execute(localProjectHeader);
+            viewModel.OpenProgramCommand.Execute(localProgramHeader);
 
-            Assert.AreEqual(localProjectHeader, _currentProjectHeader);
+            Assert.AreEqual(localProgramHeader, _currentProgramHeader);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(ProgramDetailViewModel), navigationService.CurrentView);
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
         [TestMethod/*, TestCategory("GatedTests")*/]
-        public void DeleteLocalProjectActionTest()
+        public void DeleteLocalProgramActionTest()
         {
             // unchecked private members and unchecked callback-action result
             Assert.AreEqual(0, "result of MessageCallbackAction should be tested - involvs app.savecontext");
@@ -66,15 +66,15 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             notificationService.NextMessageboxResult = MessageboxResult.Cancel; //.OK to execute callback
 
             var viewModel = new MainViewModel();
-            string projectName = "TestProject";
-            viewModel.DeleteLocalProjectCommand.Execute(projectName);
+            string projectName = "TestProgram";
+            viewModel.DeleteLocalProgramCommand.Execute(projectName);
 
             Assert.AreEqual(1, notificationService.SentMessageBoxes);
             Assert.AreEqual(0, notificationService.SentToastNotifications);
         }
 
         [TestMethod/*, TestCategory("GatedTests")*/]
-        public void CopyLocalProjectActionTest()
+        public void CopyLocalProgramActionTest()
         {
             // unchecked private members and unchecked callback-action result
             Assert.AreEqual(0, "result of MessageCallbackAction should be tested - involvs app.savecontext");
@@ -85,15 +85,15 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             notificationService.NextMessageboxResult = MessageboxResult.Cancel; //.OK to execute callback
 
             var viewModel = new MainViewModel();
-            string projectName = "TestProject";
-            viewModel.CopyLocalProjectCommand.Execute(projectName);
+            string projectName = "TestProgram";
+            viewModel.CopyLocalProgramCommand.Execute(projectName);
 
             Assert.AreEqual(1, notificationService.SentMessageBoxes);
             Assert.AreEqual(0, notificationService.SentToastNotifications);
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void CreateNewProjectActionTest()
+        public void CreateNewProgramActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
@@ -101,7 +101,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             navigationService.CurrentView = typeof(MainViewModel);
 
             var viewModel = new MainViewModel();
-            viewModel.CreateNewProjectCommand.Execute(null);
+            viewModel.CreateNewProgramCommand.Execute(null);
 
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(AddNewProgramViewModel), navigationService.CurrentView);
@@ -125,20 +125,20 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void OnlineProjectTapActionTest()
+        public void OnlineProgramTapActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
             navigationService.CurrentView = typeof(MainViewModel);
 
-            var onlineProjectHeader = SampleLoader.GetSampleOnlineProjectHeader();
+            var onlineProgramHeader = SampleLoader.GetSampleOnlineProjectHeader();
             var viewModel = new MainViewModel();
-            viewModel.OnlineProjectTapCommand.Execute(onlineProjectHeader);
+            viewModel.OnlineProgramTapCommand.Execute(onlineProgramHeader);
 
-            Assert.AreEqual(viewModel.SelectedOnlineProject, onlineProjectHeader);
-            Assert.AreEqual("5", viewModel.SelectedOnlineProject.Downloads);
-            Assert.AreEqual(ApplicationResources.POCEKTCODE_BASE_ADDRESS + "resources/thumbnails/1769_small.png", viewModel.SelectedOnlineProject.ScreenshotSmall);
+            Assert.AreEqual(viewModel.SelectedOnlineProgram, onlineProgramHeader);
+            Assert.AreEqual("5", viewModel.SelectedOnlineProgram.Downloads);
+            Assert.AreEqual(ApplicationResources.POCEKTCODE_BASE_ADDRESS + "resources/thumbnails/1769_small.png", viewModel.SelectedOnlineProgram.ScreenshotSmall);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(OnlineProgramViewModel), navigationService.CurrentView);
             Assert.AreEqual(2, navigationService.PageStackCount);
@@ -203,7 +203,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 
             var viewModel = new MainViewModel();
             var messageContext = new MessageBase();
-            Messenger.Default.Send(messageContext, ViewModelMessagingToken.DownloadProjectStartedListener);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.DownloadProgramStartedListener);
 
             //viewModel.ShowMessagesCommand.Execute(null);
 
@@ -222,7 +222,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 
             var viewModel = new MainViewModel();
             var messageContext = new MessageBase();
-            Messenger.Default.Send(messageContext, ViewModelMessagingToken.UploadProjectStartedListener);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.UploadProgramStartedListener);
 
             //viewModel.ShowMessagesCommand.Execute(null);
 
@@ -248,9 +248,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 
 
         #region MessageActions
-        private void CurrentProjectHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
+        private void CurrentProgramHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
         {
-            _currentProjectHeader = message.Content;
+            _currentProgramHeader = message.Content;
         }
 
         #endregion

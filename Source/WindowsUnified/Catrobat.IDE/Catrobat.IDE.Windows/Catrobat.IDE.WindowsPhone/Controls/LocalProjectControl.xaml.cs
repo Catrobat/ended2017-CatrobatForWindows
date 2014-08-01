@@ -49,8 +49,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls
             {  
                 case LocalProjectState.Damaged:
                     ServiceLocator.NotifictionService.ShowMessageBox(
-                        AppResources.Main_SelectedProjectNotValidMessage,
-                        String.Format(AppResources.Main_SelectedProjectNotValidHeader,
+                        AppResources.Main_SelectedProgramNotValidMessage,
+                        String.Format(AppResources.Main_SelectedProgramNotValidHeader,
                         projectHeader.ProjectName),
                         delegate { /* no action */ }, MessageBoxOptions.Ok);
                     break;

@@ -3,7 +3,7 @@ using Catrobat.IDE.Core.Resources;
 
 namespace Catrobat.IDE.Core.CatrobatObjects
 {
-    public class OnlineProjectHeader
+    public class OnlineProgramHeader
     {
         private string _screenshotBig;
         private string _screenshotSmall;

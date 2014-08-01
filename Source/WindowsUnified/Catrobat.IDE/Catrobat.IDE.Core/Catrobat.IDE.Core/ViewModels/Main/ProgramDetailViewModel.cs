@@ -65,26 +65,26 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        private bool _isActivatingLocalProject;
-        public bool IsActivatingLocalProject
+        private bool _isActivatingLocalProgram;
+        public bool IsActivatingLocalProgram
         {
             get
             {
-                return _isActivatingLocalProject;
+                return _isActivatingLocalProgram;
             }
             set
             {
-                _isActivatingLocalProject = value;
+                _isActivatingLocalProgram = value;
 
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
-                    RaisePropertyChanged(() => IsActivatingLocalProject);
-                    EditCurrentProjectCommand.RaiseCanExecuteChanged();
-                    UploadCurrentProjectCommand.RaiseCanExecuteChanged();
-                    PlayCurrentProjectCommand.RaiseCanExecuteChanged();
-                    PinLocalProjectCommand.RaiseCanExecuteChanged();
-                    ShareLocalProjectCommand.RaiseCanExecuteChanged();
-                    RenameProjectCommand.RaiseCanExecuteChanged();
+                    RaisePropertyChanged(() => IsActivatingLocalProgram);
+                    EditCurrentProgramCommand.RaiseCanExecuteChanged();
+                    UploadCurrentProgramCommand.RaiseCanExecuteChanged();
+                    PlayCurrentProgramCommand.RaiseCanExecuteChanged();
+                    PinLocalProgramCommand.RaiseCanExecuteChanged();
+                    ShareLocalProgramCommand.RaiseCanExecuteChanged();
+                    RenameProgramCommand.RaiseCanExecuteChanged();
                 });
             }
         }
@@ -93,17 +93,17 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region Commands
 
-        public RelayCommand EditCurrentProjectCommand { get; private set; }
+        public RelayCommand EditCurrentProgramCommand { get; private set; }
 
-        public RelayCommand UploadCurrentProjectCommand { get; private set; }
+        public RelayCommand UploadCurrentProgramCommand { get; private set; }
 
-        public RelayCommand PlayCurrentProjectCommand { get; private set; }
+        public RelayCommand PlayCurrentProgramCommand { get; private set; }
 
-        public RelayCommand PinLocalProjectCommand { get; private set; }
+        public RelayCommand PinLocalProgramCommand { get; private set; }
 
-        public RelayCommand ShareLocalProjectCommand { get; private set; }
+        public RelayCommand ShareLocalProgramCommand { get; private set; }
 
-        public RelayCommand RenameProjectCommand { get; private set; }
+        public RelayCommand RenameProgramCommand { get; private set; }
 
         #endregion
 
@@ -113,12 +113,12 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region Actions
 
-        private void EditCurrentProjectAction()
+        private void EditCurrentProgramAction()
         {
             ServiceLocator.NavigationService.NavigateTo<SpritesViewModel>();
         }
 
-        private async void UploadCurrentProjectAction()
+        private async void UploadCurrentProgramAction()
         {
             ServiceLocator.NavigationService.NavigateTo<UploadProgramLoadingViewModel>();
 
@@ -143,30 +143,30 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        private void PlayCurrentProjectAction()
+        private void PlayCurrentProgramAction()
         {
             ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProgram);
         }
 
-        private void PinLocalProjectAction()
+        private void PinLocalProgramAction()
         {
             var message = new GenericMessage<LocalProjectHeader>(CurrentProgram.LocalProgramHeader);
-            Messenger.Default.Send(message, ViewModelMessagingToken.PinProjectHeaderListener);
+            Messenger.Default.Send(message, ViewModelMessagingToken.PinProgramHeaderListener);
 
             ServiceLocator.NavigationService.NavigateTo<TileGeneratorViewModel>();
         }
 
-        private async void ShareLocalProjectAction()
+        private async void ShareLocalProgramAction()
         {
             await CurrentProgram.Save();
 
             var message = new GenericMessage<LocalProjectHeader>(CurrentProgram.LocalProgramHeader);
-            Messenger.Default.Send(message, ViewModelMessagingToken.ShareProjectHeaderListener);
+            Messenger.Default.Send(message, ViewModelMessagingToken.ShareProgramHeaderListener);
 
             ServiceLocator.ShareService.ShateProject(CurrentProgram.Name);
         }
 
-        private void RenameProjectAction()
+        private void RenameProgramAction()
         {
             ServiceLocator.NavigationService.NavigateTo<ProgramSettingsViewModel>();
         }
@@ -175,10 +175,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region Message Actions
 
-        private async void CurrentProjectHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
+        private async void CurrentProgramHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
         {
             CurrentProgramHeader = message.Content;
-            //CurrentProject = await CatrobatContext.LoadProjectByNameStatic(CurrentProjectHeader.ProjectName);
+            //CurrentProgram = await CatrobatContext.LoadProjectByNameStatic(CurrentProgramHeader.ProjectName);
         }
 
         private void ContextChangedMessageAction(GenericMessage<CatrobatContextBase> message)
@@ -190,18 +190,18 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public ProgramDetailViewModel()
         {
-            EditCurrentProjectCommand = new RelayCommand(EditCurrentProjectAction, () => !IsActivatingLocalProject);
-            UploadCurrentProjectCommand = new RelayCommand(UploadCurrentProjectAction, () => !IsActivatingLocalProject);
-            PlayCurrentProjectCommand = new RelayCommand(PlayCurrentProjectAction, () => !IsActivatingLocalProject);
-            RenameProjectCommand = new RelayCommand(RenameProjectAction, () => !IsActivatingLocalProject);
-            PinLocalProjectCommand = new RelayCommand(PinLocalProjectAction, () => !IsActivatingLocalProject);
-            ShareLocalProjectCommand = new RelayCommand(ShareLocalProjectAction, () => !IsActivatingLocalProject);
+            EditCurrentProgramCommand = new RelayCommand(EditCurrentProgramAction, () => !IsActivatingLocalProgram);
+            UploadCurrentProgramCommand = new RelayCommand(UploadCurrentProgramAction, () => !IsActivatingLocalProgram);
+            PlayCurrentProgramCommand = new RelayCommand(PlayCurrentProgramAction, () => !IsActivatingLocalProgram);
+            RenameProgramCommand = new RelayCommand(RenameProgramAction, () => !IsActivatingLocalProgram);
+            PinLocalProgramCommand = new RelayCommand(PinLocalProgramAction, () => !IsActivatingLocalProgram);
+            ShareLocalProgramCommand = new RelayCommand(ShareLocalProgramAction, () => !IsActivatingLocalProgram);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                 ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this,
-                ViewModelMessagingToken.CurrentProjectHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
+                ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProgramHeaderChangedMessageAction);
         }
 
         public async override void NavigateTo()
@@ -211,32 +211,32 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 {
                     lock (_loadingLock)
                     {
-                        if (IsActivatingLocalProject)
+                        if (IsActivatingLocalProgram)
                             return;
 
-                        IsActivatingLocalProject = true;
+                        IsActivatingLocalProgram = true;
                     }
 
                     if (CurrentProgram != null)
                         await CurrentProgram.Save();
 
-                    var newProject = await ServiceLocator.ContextService.
+                    var newProgram = await ServiceLocator.ContextService.
                         LoadProgramByName(CurrentProgramHeader.ProjectName);
 
-                    if (newProject != null)
+                    if (newProgram != null)
                     {
                         ServiceLocator.DispatcherService.RunOnMainThread(() =>
                         {
                             CurrentProgramHeader.ValidityState = LocalProjectState.Valid;
                         });
 
-                        CurrentProgram = newProject;
+                        CurrentProgram = newProgram;
 
-                        var projectChangedMessage = new GenericMessage<Program>(newProject);
+                        var projectChangedMessage = new GenericMessage<Program>(newProgram);
                         Messenger.Default.Send(projectChangedMessage,
-                            ViewModelMessagingToken.CurrentProjectChangedListener);
+                            ViewModelMessagingToken.CurrentProgramChangedListener);
 
-                        IsActivatingLocalProject = false;
+                        IsActivatingLocalProgram = false;
                     }
                     else
                     {
@@ -251,10 +251,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                             CurrentProgramHeader = null;
                             var message = new GenericMessage<LocalProjectHeader>(null);
                             Messenger.Default.Send(message,
-                                ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
+                                ViewModelMessagingToken.CurrentProgramHeaderChangedListener);
                         });
 
-                        IsActivatingLocalProject = false;
+                        IsActivatingLocalProgram = false;
                     }
                 }
 

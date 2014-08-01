@@ -102,7 +102,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedMessageAction);
         }
 
         private void ResetViewModel()

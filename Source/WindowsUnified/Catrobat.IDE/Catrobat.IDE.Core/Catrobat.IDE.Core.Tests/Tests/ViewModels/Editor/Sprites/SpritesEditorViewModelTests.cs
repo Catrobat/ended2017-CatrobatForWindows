@@ -239,7 +239,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
         public void ProjectSettingsActionTest()
         {
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                 ViewModelMessagingToken.CurrentProjectHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
+                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
 
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
@@ -255,7 +255,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
                 Name = "TestProgram", 
             };
             var messageContext = new GenericMessage<Program>(program);
-            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProjectChangedListener);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProgramChangedListener);
             viewModel.ProjectSettingsCommand.Execute(null);
 
             Assert.AreEqual("TestProgram", viewModel.CurrentProgram.Name); // message action test

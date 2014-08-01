@@ -61,24 +61,24 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         {
             if (e.Key == VirtualKey.Enter)
             {
-                await _viewModel.OnlineProjects.ResetAndLoadFirstPrograms();
+                await _viewModel.OnlinePrograms.ResetAndLoadFirstPrograms();
             }
         }
 
         private void Hub_SectionsInViewChanged(object sender, SectionsInViewChangedEventArgs e)
         {
-            if ((MainHub.SectionsInView[0] == HubSectionOnlineProjects) && firstAttempt)
+            if ((MainHub.SectionsInView[0] == HubSectionOnlinePrograms) && firstAttempt)
             {
                 firstAttempt = false;
 
-                if(_viewModel.OnlineProjects == null)
-                    _viewModel.OnlineProjects = new OnlineProgramsCollectionWindowsShared();
+                if(_viewModel.OnlinePrograms == null)
+                    _viewModel.OnlinePrograms = new OnlineProgramsCollectionWindowsShared();
             }
         }
 
-        private void ListViewOnlineProjects_ItemClick(object sender, ItemClickEventArgs e)
+        private void ListViewOnlinePrograms_ItemClick(object sender, ItemClickEventArgs e)
         {
-            _viewModel.OnlineProjectTapCommand.Execute(e.ClickedItem);
+            _viewModel.OnlineProgramTapCommand.Execute(e.ClickedItem);
         }
     }
 }

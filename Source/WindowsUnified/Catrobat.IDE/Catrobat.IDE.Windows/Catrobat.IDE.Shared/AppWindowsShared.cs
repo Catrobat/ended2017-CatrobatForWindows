@@ -69,7 +69,7 @@ namespace Catrobat.IDE.WindowsShared
                 {
                     var defaultProject = await new ProgramGeneratorWhackAMole().GenerateProject("de", false);
                     var projectChangedMessage = new GenericMessage<Core.Models.Program>(defaultProject);
-                    Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                    Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProgramChangedListener);
                 });
             }
         }

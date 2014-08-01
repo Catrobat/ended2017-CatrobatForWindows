@@ -266,7 +266,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             CompleteTokenCommand = new RelayCommand<int>(CompleteTokenAction);
             
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
-            Messenger.Default.Register<GenericMessage<Program>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+            Messenger.Default.Register<GenericMessage<Program>>(this, ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedMessageAction);
 
             _editor.PropertyChanged += (sender, e) =>
             {

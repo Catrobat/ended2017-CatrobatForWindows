@@ -59,7 +59,7 @@ namespace Catrobat.IDE.Core
                 _context.LocalSettings = new LocalSettings();
 
                 var defaultProject = await ServiceLocator.ContextService.
-                    RestoreDefaultProgram(AppResources.Main_DefaultProjectName);
+                    RestoreDefaultProgram(AppResources.Main_DefaultProgramName);
                 _context.LocalSettings.CurrentProjectName = defaultProject.Name;
                 await defaultProject.Save();
             }
@@ -83,10 +83,10 @@ namespace Catrobat.IDE.Core
             Messenger.Default.Send(contextChangedMessage, ViewModelMessagingToken.ContextListener);
 
             var localProjectsChangedMessage = new MessageBase();
-            Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
+            Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProgramsChangedListener);
 
             //var message = new GenericMessage<Project>(currentProject);
-            //Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectChangedListener);
+            //Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProgramChangedListener);
 
             // allow viewmodels to load from settings
             Messenger.Default.Send(new GenericMessage<LocalSettings>(_context.LocalSettings), ViewModelMessagingToken.LoadSettings);

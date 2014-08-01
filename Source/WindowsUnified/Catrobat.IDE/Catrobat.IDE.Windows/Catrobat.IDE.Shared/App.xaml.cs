@@ -43,7 +43,7 @@ namespace Catrobat.IDE.WindowsShared
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             var mainViewModel = ServiceLocator.GetInstance<MainViewModel>();
-            await Core.App.SaveContext(mainViewModel.CurrentProject);
+            await Core.App.SaveContext(mainViewModel.CurrentProgram);
             await SuspensionManager.SaveAsync();
             deferral.Complete();
         }

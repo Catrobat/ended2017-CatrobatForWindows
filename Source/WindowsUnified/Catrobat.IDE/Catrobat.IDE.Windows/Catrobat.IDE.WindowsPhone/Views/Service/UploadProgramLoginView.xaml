@@ -19,12 +19,12 @@
                 Grid.Row="0"
                 Margin="12"> 
       <!--<TextBlock x:Name="ApplicationTitle" 
-                 Text="{Binding Resources.Main_TitleUploadProject, 
+                 Text="{Binding Resources.Main_TitleUploadProgram, 
                  Source={StaticResource LocalizedStrings}}" 
                  Style="{ThemeResource TextNormalStyle}" 
                  />-->
       <TextBlock x:Name="PageTitle" 
-                 Text="{Binding Resources.Main_TitleUploadProjectLogin, 
+                 Text="{Binding Resources.Main_TitleUploadProgramLogin, 
                  Source={StaticResource LocalizedStrings}}" 
                  Margin="0 0 0 0" 
                  Style="{ThemeResource TextTitleNormalStyle}"/>
@@ -33,7 +33,7 @@
     <StackPanel Grid.Row="1" Margin="12 0 10 18">
       <TextBlock Margin="0 0 0 6" 
                  Name="TextBlockUsername"
-                 Text="{Binding Resources.Main_UploadProjectUsername, 
+                 Text="{Binding Resources.Main_UploadProgramUsername, 
                  Source={StaticResource LocalizedStrings}}" 
                  Style="{ThemeResource TextNormalStyle}"/>
       <TextBox Margin="0 0 0 0"
@@ -45,7 +45,7 @@
                Source={StaticResource LocalizedStrings}}"/>
 
       <TextBlock Margin="0 12 0 6"
-                 Text="{Binding Resources.Main_UploadProjectPassword, 
+                 Text="{Binding Resources.Main_UploadProgramPassword, 
                  Source={StaticResource LocalizedStrings}}" 
                  Style="{ThemeResource TextNormalStyle}"/>
       <PasswordBox Margin="0 0 0 0" 

@@ -15,29 +15,29 @@ namespace Catrobat.IDE.Core.ViewModels.Service
     {
         #region private Members
 
-        private string _projectName;
-        private string _projectDescription;
+        private string _programName;
+        private string _programDescription;
         private CatrobatContextBase _context;
-        private Program _currentProject;
+        private Program _currentProgram;
         private MessageboxResult _uploadErrorCallbackResult;
 
         #endregion
 
         #region Properties
 
-        public Program CurrentProject
+        public Program CurrentProgram
         {
             get
             {
-                return _currentProject;
+                return _currentProgram;
             }
             private set
             {
-                if (value == _currentProject) 
+                if (value == _currentProgram) 
                     return;
 
-                _currentProject = value;
-                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
+                _currentProgram = value;
+                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProgram));
             }
         }
 
@@ -51,32 +51,32 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
         }
 
-        public string ProjectName
+        public string ProgramName
         {
             get
             {
-                return _projectName;
+                return _programName;
             }
             set
             {
-                if (_projectName != value)
+                if (_programName != value)
                 {
-                    _projectName = value;
-                    RaisePropertyChanged(() => ProjectName);
+                    _programName = value;
+                    RaisePropertyChanged(() => ProgramName);
                     UploadCommand.RaiseCanExecuteChanged();
                 }
             }
         }
 
-        public string ProjectDescription
+        public string ProgramDescription
         {
-            get { return _projectDescription; }
+            get { return _programDescription; }
             set
             {
-                if (_projectDescription != value)
+                if (_programDescription != value)
                 {
-                    _projectDescription = value;
-                    RaisePropertyChanged(() => ProjectDescription);
+                    _programDescription = value;
+                    RaisePropertyChanged(() => ProgramDescription);
                 }
             }
         }
@@ -99,7 +99,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private bool UploadCommand_CanExecute()
         {
-            return ProjectName != null && ProjectName.Length >= 2;
+            return ProgramName != null && ProgramName.Length >= 2;
         }
 
         #endregion
@@ -107,29 +107,29 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #region Actions
         private void InitializeAction()
         {
-            if (CurrentProject != null)
+            if (CurrentProgram != null)
             {
-                ProjectName = CurrentProject.Name;
-                ProjectDescription = CurrentProject.Description;
+                ProgramName = CurrentProgram.Name;
+                ProgramDescription = CurrentProgram.Description;
             }
             else
             {
-                ProjectName = "";
-                ProjectDescription = "";
+                ProgramName = "";
+                ProgramDescription = "";
             }
         }
 
         private async void UploadAction()
         {
-            await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
-            CurrentProject.Description = ProjectDescription;
-            await App.SaveContext(CurrentProject);
+            await CurrentProgram.SetProgramNameAndRenameDirectory(ProgramName);
+            CurrentProgram.Description = ProgramDescription;
+            await App.SaveContext(CurrentProgram);
 
-            Task<JSONStatusResponse> upload_task = ServiceLocator.WebCommunicationService.UploadProjectAsync(ProjectName, Context.CurrentUserName,
+            Task<JSONStatusResponse> upload_task = ServiceLocator.WebCommunicationService.UploadProjectAsync(ProgramName, Context.CurrentUserName,
                                                           Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
             var message = new MessageBase();
-            Messenger.Default.Send(message, ViewModelMessagingToken.UploadProjectStartedListener);
+            Messenger.Default.Send(message, ViewModelMessagingToken.UploadProgramStartedListener);
 
             GoBackAction();
 
@@ -141,14 +141,14 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     break;
 
                 case StatusCodes.HTTPRequestFailed:
-                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramErrorCaption,
                             AppResources.Main_NoInternetConnection, UploadErrorCallback, MessageBoxOptions.Ok);
                     break;
 
                 default:
-                    string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, statusResponse.statusCode.ToString()) :
-                                           string.Format(AppResources.Main_UploadProjectError, statusResponse.answer);
-                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectErrorCaption,
+                    string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProgramUndefinedError, statusResponse.statusCode.ToString()) :
+                                           string.Format(AppResources.Main_UploadProgramError, statusResponse.answer);
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramErrorCaption,
                                 messageString, UploadErrorCallback, MessageBoxOptions.Ok);
                     break;
             }
@@ -189,18 +189,18 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             Context = message.Content;
         }
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
+        private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
-            CurrentProject = message.Content;
-            //if (CurrentProject != null)
+            CurrentProgram = message.Content;
+            //if (CurrentProgram != null)
             //{
-            //    ProjectName = CurrentProject.Name;
-            //    ProjectDescription = CurrentProject.Description;
+            //    ProgramName = CurrentProgram.Name;
+            //    ProgramDescription = CurrentProgram.Description;
             //}
             //else
             //{
-            //    ProjectName = "";
-            //    ProjectDescription = "";
+            //    ProgramName = "";
+            //    ProgramDescription = "";
             //}
         }
 
@@ -217,7 +217,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                  ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
         }
 
         #region Callbacks
@@ -230,8 +230,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public void ResetViewModel()
         {
-            ProjectName = "";
-            ProjectDescription = "";
+            ProgramName = "";
+            ProgramDescription = "";
         }
     }
 }

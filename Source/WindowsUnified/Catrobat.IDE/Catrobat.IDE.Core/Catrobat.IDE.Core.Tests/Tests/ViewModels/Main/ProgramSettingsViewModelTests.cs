@@ -20,29 +20,29 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void InitializeActionEmptyProjectTest()
+        public void InitializeActionEmptyProgramTest()
         {
             var viewModel = new ProgramSettingsViewModel();
             viewModel.InitializeCommand.Execute(null);
-            Assert.AreEqual("", viewModel.ProjectName);
-            Assert.AreEqual("", viewModel.ProjectDescription);
+            Assert.AreEqual("", viewModel.ProgramName);
+            Assert.AreEqual("", viewModel.ProgramDescription);
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void InitializeActionFullProjectTest()
+        public void InitializeActionFullProgramTest()
         {
             var viewModel = new ProgramSettingsViewModel();
             var project = new Program
             {
-                Name = "TestProjectName",
-                Description = "TestProjectDescription"
+                Name = "TestProgramName",
+                Description = "TestProgramDescription"
             };
             var messageContext = new GenericMessage<Program>(project);
-            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProjectChangedListener);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProgramChangedListener);
             viewModel.InitializeCommand.Execute(null);
 
-            Assert.AreEqual("TestProjectName", viewModel.ProjectName);
-            Assert.AreEqual("TestProjectDescription", viewModel.ProjectDescription);
+            Assert.AreEqual("TestProgramName", viewModel.ProgramName);
+            Assert.AreEqual("TestProgramDescription", viewModel.ProgramDescription);
         }
 
         [TestMethod/*, TestCategory("GatedTests")*/]
@@ -58,13 +58,13 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 
             var viewModel = new ProgramSettingsViewModel
             {
-                ProjectName = "TestProjectName",
-                ProjectDescription = "TestProjectDescription"
+                ProgramName = "TestProgramName",
+                ProgramDescription = "TestProgramDescription"
             };
             //viewModel.SaveCommand.Execute(null);
 
-            Assert.AreEqual("TestProjectName", viewModel.ProjectName);
-            Assert.AreEqual("TestProjectDescription", viewModel.ProjectDescription);
+            Assert.AreEqual("TestProgramName", viewModel.ProgramName);
+            Assert.AreEqual("TestProgramDescription", viewModel.ProgramDescription);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);
@@ -80,13 +80,13 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 
             var viewModel = new ProgramSettingsViewModel
             {
-                ProjectName = "TestProjectName",
-                ProjectDescription = "TestProjectDescription"
+                ProgramName = "TestProgramName",
+                ProgramDescription = "TestProgramDescription"
             };
             viewModel.CancelCommand.Execute(null);
 
-            Assert.AreEqual("", viewModel.ProjectName);
-            Assert.AreEqual("", viewModel.ProjectDescription);
+            Assert.AreEqual("", viewModel.ProgramName);
+            Assert.AreEqual("", viewModel.ProgramDescription);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);
@@ -102,13 +102,13 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 
             var viewModel = new ProgramSettingsViewModel
             {
-                ProjectName = "TestProjectName",
-                ProjectDescription = "TestProjectDescription"
+                ProgramName = "TestProgramName",
+                ProgramDescription = "TestProgramDescription"
             };
             viewModel.GoBackCommand.Execute(null);
 
-            Assert.AreEqual("", viewModel.ProjectName);
-            Assert.AreEqual("", viewModel.ProjectDescription);
+            Assert.AreEqual("", viewModel.ProgramName);
+            Assert.AreEqual("", viewModel.ProgramDescription);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);

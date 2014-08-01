@@ -264,7 +264,7 @@
   <data name="Brick_WhenIReceive" xml:space="preserve">
     <value>when I receive</value>
   </data>
-  <data name="Brick_WhenProjectStarts" xml:space="preserve">
+  <data name="Brick_WhenProgramStarts" xml:space="preserve">
     <value>when program starts</value>
   </data>
   <data name="Brick_WhenTapped" xml:space="preserve">
@@ -306,7 +306,7 @@
   <data name="Editor_ButtonDelete" xml:space="preserve">
     <value>delete</value>
   </data>
-  <data name="Editor_ButtonPlayProject" xml:space="preserve">
+  <data name="Editor_ButtonPlayProgram" xml:space="preserve">
     <value>play</value>
   </data>
   <data name="Editor_ButtonSave" xml:space="preserve">
@@ -351,7 +351,7 @@
   <data name="Editor_MediaLibrary" xml:space="preserve">
     <value>Media Library</value>
   </data>
-  <data name="Editor_MenuProjectSettings" xml:space="preserve">
+  <data name="Editor_MenuProgramSettings" xml:space="preserve">
     <value>Program settings</value>
   </data>
   <data name="Editor_MenuStartSite" xml:space="preserve">
@@ -489,7 +489,7 @@
   <data name="Editor_TitleNewSprite" xml:space="preserve">
     <value>NEW OBJECT</value>
   </data>
-  <data name="Main_TitleProjectSettings" xml:space="preserve">
+  <data name="Main_TitleProgramSettings" xml:space="preserve">
     <value>PROGRAM SETTINGS</value>
   </data>
   <data name="Editor_TitleRecorder" xml:space="preserve">
@@ -542,7 +542,7 @@
 
 The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License. For the precise details of the license see the link below.</value>
   </data>
-  <data name="Main_ActiveProject" xml:space="preserve">
+  <data name="Main_ActiveProgram" xml:space="preserve">
     <value>ACTIVE</value>
   </data>
   <data name="Main_ApplicationNameAndVersion" xml:space="preserve">
@@ -587,7 +587,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_HeaderAbout" xml:space="preserve">
     <value>About</value>
   </data>
-  <data name="Main_HeaderCurrentProject" xml:space="preserve">
+  <data name="Main_HeaderCurrentProgram" xml:space="preserve">
     <value>active program</value>
   </data>
   <data name="Main_HeaderDesign" xml:space="preserve">
@@ -596,10 +596,10 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_HeaderLanguage" xml:space="preserve">
     <value>Language</value>
   </data>
-  <data name="Main_HeaderLocalProjects" xml:space="preserve">
+  <data name="Main_HeaderLocalPrograms" xml:space="preserve">
     <value>My programs</value>
   </data>
-  <data name="Main_HeaderOnlineProjects" xml:space="preserve">
+  <data name="Main_HeaderOnlinePrograms" xml:space="preserve">
     <value>Online</value>
   </data>
   <data name="Main_HeaderSettings" xml:space="preserve">
@@ -611,16 +611,16 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_ListLanguage" xml:space="preserve">
     <value>Language</value>
   </data>
-  <data name="Main_MainCopyProjectDialogMessage" xml:space="preserve">
+  <data name="Main_MainCopyProgramDialogMessage" xml:space="preserve">
     <value>Are sure you want to copy "{0}"?</value>
   </data>
-  <data name="Main_MainCopyProjectDialogTitle" xml:space="preserve">
+  <data name="Main_MainCopyProgramDialogTitle" xml:space="preserve">
     <value>Copy program?</value>
   </data>
-  <data name="Main_MainDeleteProjectDialogMessage" xml:space="preserve">
+  <data name="Main_MainDeleteProgramDialogMessage" xml:space="preserve">
     <value>Are sure you want to delete "{0}"?</value>
   </data>
-  <data name="Main_MainDeleteProjectDialogTitle" xml:space="preserve">
+  <data name="Main_MainDeleteProgramDialogTitle" xml:space="preserve">
     <value>Delete program?</value>
   </data>
   <data name="Main_MessageBoxInformation" xml:space="preserve">
@@ -632,43 +632,43 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_NoUploadsPending" xml:space="preserve">
     <value>All uploads finished.</value>
   </data>
-  <data name="Main_OnlineProjectDownloadButton" xml:space="preserve">
+  <data name="Main_OnlineProgramDownloadButton" xml:space="preserve">
     <value>download</value>
   </data>
-  <data name="Main_OnlineProjectDownloads" xml:space="preserve">
+  <data name="Main_OnlineProgramDownloads" xml:space="preserve">
     <value>{0} downloads</value>
   </data>
-  <data name="Main_OnlineProjectLicenseButton" xml:space="preserve">
+  <data name="Main_OnlineProgramLicenseButton" xml:space="preserve">
     <value>license</value>
   </data>
-  <data name="Main_OnlineProjectListBoxLoadMore" xml:space="preserve">
+  <data name="Main_OnlineProgramListBoxLoadMore" xml:space="preserve">
     <value>load more...</value>
   </data>
-  <data name="Main_OnlineProjectReportButton" xml:space="preserve">
+  <data name="Main_OnlineProgramReportButton" xml:space="preserve">
     <value>report as inappropriate</value>
   </data>
-  <data name="Main_OnlineProjectStatistics" xml:space="preserve">
+  <data name="Main_OnlineProgramStatistics" xml:space="preserve">
     <value>Statistics:</value>
   </data>
-  <data name="Main_OnlineProjectUploaded" xml:space="preserve">
+  <data name="Main_OnlineProgramUploaded" xml:space="preserve">
     <value>Uploaded:</value>
   </data>
-  <data name="Main_OnlineProjectUploadedBy" xml:space="preserve">
+  <data name="Main_OnlineProgramUploadedBy" xml:space="preserve">
     <value>{0} by:</value>
   </data>
-  <data name="Main_OnlineProjectVersion" xml:space="preserve">
+  <data name="Main_OnlineProgramVersion" xml:space="preserve">
     <value>(version: {0})</value>
   </data>
-  <data name="Main_OnlineProjectViews" xml:space="preserve">
+  <data name="Main_OnlineProgramViews" xml:space="preserve">
     <value>{0} views</value>
   </data>
-  <data name="Main_ProjectDoesNotExist" xml:space="preserve">
+  <data name="Main_ProgramDoesNotExist" xml:space="preserve">
     <value>program does not exist</value>
   </data>
-  <data name="Main_ProjectName" xml:space="preserve">
+  <data name="Main_ProgramName" xml:space="preserve">
     <value>Program name:</value>
   </data>
-  <data name="Main_ProjectNotValid" xml:space="preserve">
+  <data name="Main_ProgramNotValid" xml:space="preserve">
     <value>Program not valid.</value>
   </data>
   <data name="App_ResourceLanguage" xml:space="preserve">
@@ -683,43 +683,43 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_SettingsTheme" xml:space="preserve">
     <value>Theme</value>
   </data>
-  <data name="Main_TitleNewProject" xml:space="preserve">
+  <data name="Main_TitleNewProgram" xml:space="preserve">
     <value>NEW PROGRAM</value>
   </data>
   <data name="Main_TitleSettings" xml:space="preserve">
     <value>SETTINGS</value>
   </data>
-  <data name="Main_TitleUploadProject" xml:space="preserve">
+  <data name="Main_TitleUploadProgram" xml:space="preserve">
     <value>UPLOAD PROGRAM</value>
   </data>
-  <data name="Main_TitleUploadProjectLogin" xml:space="preserve">
+  <data name="Main_TitleUploadProgramLogin" xml:space="preserve">
     <value>LOGIN</value>
   </data>
-  <data name="Main_UploadProjectEmail" xml:space="preserve">
+  <data name="Main_UploadProgramEmail" xml:space="preserve">
     <value>Email:</value>
   </data>
-  <data name="Main_UploadProjectLoginError" xml:space="preserve">
+  <data name="Main_UploadProgramLoginError" xml:space="preserve">
     <value>Login error. {0}</value>
   </data>
-  <data name="Main_UploadProjectLoginErrorCaption" xml:space="preserve">
+  <data name="Main_UploadProgramLoginErrorCaption" xml:space="preserve">
     <value>Login failed</value>
   </data>
-  <data name="Main_UploadProjectMissingLoginData" xml:space="preserve">
+  <data name="Main_UploadProgramMissingLoginData" xml:space="preserve">
     <value>Login- or registrationdata is incomplete.</value>
   </data>
-  <data name="Main_UploadProjectPassword" xml:space="preserve">
+  <data name="Main_UploadProgramPassword" xml:space="preserve">
     <value>Password:</value>
   </data>
-  <data name="Main_UploadProjectRegistrationSucessful" xml:space="preserve">
+  <data name="Main_UploadProgramRegistrationSucessful" xml:space="preserve">
     <value>Registration successful!</value>
   </data>
-  <data name="Main_UploadProjectUndefinedError" xml:space="preserve">
+  <data name="Main_UploadProgramUndefinedError" xml:space="preserve">
     <value>Undefined error. Error code {0}</value>
   </data>
-  <data name="Main_UploadProjectUsername" xml:space="preserve">
+  <data name="Main_UploadProgramUsername" xml:space="preserve">
     <value>Username:</value>
   </data>
-  <data name="Main_UploadProjectWelcome" xml:space="preserve">
+  <data name="Main_UploadProgramWelcome" xml:space="preserve">
     <value>Welcome {0}!</value>
   </data>
   <data name="Main_UploadQueueMessage" xml:space="preserve">
@@ -758,19 +758,19 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Brick_IfLogicEnd" xml:space="preserve">
     <value>end if</value>
   </data>
-  <data name="Main_ChangeProjectNameAndDescription" xml:space="preserve">
+  <data name="Main_ChangeProgramNameAndDescription" xml:space="preserve">
     <value>change name and description</value>
   </data>
-  <data name="Main_CopyProject" xml:space="preserve">
+  <data name="Main_CopyProgram" xml:space="preserve">
     <value>copy</value>
   </data>
-  <data name="Main_DeleteProject" xml:space="preserve">
+  <data name="Main_DeleteProgram" xml:space="preserve">
     <value>delete</value>
   </data>
-  <data name="Main_PinProjectToStart" xml:space="preserve">
+  <data name="Main_PinProgramToStart" xml:space="preserve">
     <value>pin to start</value>
   </data>
-  <data name="Main_UploadProjectLoadingMessage" xml:space="preserve">
+  <data name="Main_UploadProgramLoadingMessage" xml:space="preserve">
     <value>Please wait while your login state is beeing checked!</value>
   </data>
   <data name="Editor_GlobalVariables" xml:space="preserve">
@@ -809,10 +809,10 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Editor_VariableName" xml:space="preserve">
     <value>Variable name</value>
   </data>
-  <data name="Main_SelectedProjectNotValidHeader" xml:space="preserve">
+  <data name="Main_SelectedProgramNotValidHeader" xml:space="preserve">
     <value>Sorry! The selected program could not be opened.</value>
   </data>
-  <data name="Main_SelectedProjectNotValidMessage" xml:space="preserve">
+  <data name="Main_SelectedProgramNotValidMessage" xml:space="preserve">
     <value>Program not valid</value>
   </data>
   <data name="Brick_ForeverLoopEnd" xml:space="preserve">
@@ -858,10 +858,10 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Editor_AppbarAdd" xml:space="preserve">
     <value>add</value>
   </data>
-  <data name="Editor_PreparingProject" xml:space="preserve">
+  <data name="Editor_PreparingProgram" xml:space="preserve">
     <value>preparing program</value>
   </data>
-  <data name="Main_ProjectGettingActivated" xml:space="preserve">
+  <data name="Main_ProgramGettingActivated" xml:space="preserve">
     <value>Please wait, while the program is being activated.</value>
   </data>
   <data name="Main_ReallyCloseApplicationText" xml:space="preserve">
@@ -891,31 +891,31 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Editor_UploadToSkyDrive" xml:space="preserve">
     <value>Upload to SkyDrive</value>
   </data>
-  <data name="Main_ShareProject" xml:space="preserve">
+  <data name="Main_ShareProgram" xml:space="preserve">
     <value>share</value>
   </data>
-  <data name="Main_DefaultProjectName" xml:space="preserve">
+  <data name="Main_DefaultProgramName" xml:space="preserve">
     <value>Default program</value>
   </data>
-  <data name="DefaultProject_Background" xml:space="preserve">
+  <data name="DefaultProgram_Background" xml:space="preserve">
     <value>Background</value>
   </data>
   <data name="Editor_NameOfSound" xml:space="preserve">
     <value>Sound</value>
   </data>
-  <data name="DefaultProject_Cat" xml:space="preserve">
+  <data name="DefaultProgram_Cat" xml:space="preserve">
     <value>Cat</value>
   </data>
-  <data name="DefaultProject_Cloud" xml:space="preserve">
+  <data name="DefaultProgram_Cloud" xml:space="preserve">
     <value>Cloud</value>
   </data>
-  <data name="DefaultProject_Rain" xml:space="preserve">
+  <data name="DefaultProgram_Rain" xml:space="preserve">
     <value>Rain drop</value>
   </data>
-  <data name="DefaultProject_Sun" xml:space="preserve">
+  <data name="DefaultProgram_Sun" xml:space="preserve">
     <value>Sun</value>
   </data>
-  <data name="DefaultProject_Water" xml:space="preserve">
+  <data name="DefaultProgram_Water" xml:space="preserve">
     <value>Water</value>
   </data>
   <data name="Editor_ClickPlusToAddSprite" xml:space="preserve">
@@ -1059,13 +1059,13 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_ButtonRegister" xml:space="preserve">
     <value>register</value>
   </data>
-  <data name="Main_TitleUploadProjectRegister" xml:space="preserve">
+  <data name="Main_TitleUploadProgramRegister" xml:space="preserve">
     <value>REGISTER</value>
   </data>
-  <data name="Main_UploadProjectError" xml:space="preserve">
+  <data name="Main_UploadProgramError" xml:space="preserve">
     <value>Upload error. {0}</value>
   </data>
-  <data name="Main_UploadProjectErrorCaption" xml:space="preserve">
+  <data name="Main_UploadProgramErrorCaption" xml:space="preserve">
     <value>Upload failed</value>
   </data>
   <data name="Main_NoInternetConnection" xml:space="preserve">
@@ -1074,13 +1074,13 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_ButtonChangeUser" xml:space="preserve">
     <value>change user</value>
   </data>
-  <data name="Main_UploadProjectLoginErrorStatic" xml:space="preserve">
+  <data name="Main_UploadProgramLoginErrorStatic" xml:space="preserve">
     <value>Invalid username or password.</value>
   </data>
-  <data name="Main_UploadProjectLoginNonExistingUser" xml:space="preserve">
+  <data name="Main_UploadProgramLoginNonExistingUser" xml:space="preserve">
     <value>Username does not exist.</value>
   </data>
-  <data name="Main_UploadProjectRegisterExistingUser" xml:space="preserve">
+  <data name="Main_UploadProgramRegisterExistingUser" xml:space="preserve">
     <value>Username already exists.</value>
   </data>
   <data name="Main_ApplicationRequiresRestart" xml:space="preserve">
@@ -1095,16 +1095,16 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_UseTemplateText" xml:space="preserve">
     <value>Use the selected project below as a template for the new project.</value>
   </data>
-  <data name="Main_CreateEmptyProject" xml:space="preserve">
+  <data name="Main_CreateEmptyProgram" xml:space="preserve">
     <value>Empty programm</value>
   </data>
-  <data name="Main_CreateProjectBasedOnCurrentProject" xml:space="preserve">
+  <data name="Main_CreateProgramBasedOnCurrentProgram" xml:space="preserve">
     <value>Use current program ({0}) as a atemplate</value>
   </data>
-  <data name="Main_CreateProjectBasedOnTemplate" xml:space="preserve">
+  <data name="Main_CreateProgramBasedOnTemplate" xml:space="preserve">
     <value>Use template below</value>
   </data>
-  <data name="Main_SelectProjectCreationOption" xml:space="preserve">
+  <data name="Main_SelectProgramCreationOption" xml:space="preserve">
     <value>How to create the new program?</value>
   </data>
   <data name="Main_WhackAMoleName" xml:space="preserve">
@@ -1125,7 +1125,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_ButtonReport" xml:space="preserve">
     <value>report</value>
   </data>
-  <data name="Main_OnlineProjectAuthor" xml:space="preserve">
+  <data name="Main_OnlineProgramAuthor" xml:space="preserve">
     <value>Author:</value>
   </data>
   <data name="Main_ReportContribution" xml:space="preserve">
@@ -1137,22 +1137,22 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_TitleNewPassword" xml:space="preserve">
     <value>NEW PASSWORD</value>
   </data>
-  <data name="Main_TitleOnlineProject" xml:space="preserve">
+  <data name="Main_TitleOnlineProgram" xml:space="preserve">
     <value>ONLINE-PROGRAM</value>
   </data>
   <data name="Main_TitleRecoverPassword" xml:space="preserve">
     <value>RECOVER PASSWORD</value>
   </data>
-  <data name="Main_TitleReportProject" xml:space="preserve">
+  <data name="Main_TitleReportProgram" xml:space="preserve">
     <value>REPORT PROGRAM</value>
   </data>
-  <data name="Main_UploadProjectNewPassword" xml:space="preserve">
+  <data name="Main_UploadProgramNewPassword" xml:space="preserve">
     <value>New password:</value>
   </data>
-  <data name="Main_UploadProjectRepeatPassword" xml:space="preserve">
+  <data name="Main_UploadProgramRepeatPassword" xml:space="preserve">
     <value>Repeat password:</value>
   </data>
-  <data name="Main_UploadProjectUserOrMail" xml:space="preserve">
+  <data name="Main_UploadProgramUserOrMail" xml:space="preserve">
     <value>Username or email:</value>
   </data>
   <data name="Main_ReportError" xml:space="preserve">
@@ -1176,25 +1176,25 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_ButtonPasswordRecover" xml:space="preserve">
     <value>recover</value>
   </data>
-  <data name="Main_UploadProjectMissingRecoveryData" xml:space="preserve">
+  <data name="Main_UploadProgramMissingRecoveryData" xml:space="preserve">
     <value>Please enter username or e-mail. </value>
   </data>
-  <data name="Main_UploadProjectPasswordRecoveryErrorCaption" xml:space="preserve">
+  <data name="Main_UploadProgramPasswordRecoveryErrorCaption" xml:space="preserve">
     <value>Recovery failed</value>
   </data>
-  <data name="Main_UploadProjectMissingPassword" xml:space="preserve">
+  <data name="Main_UploadProgramMissingPassword" xml:space="preserve">
     <value>Please enter password.</value>
   </data>
-  <data name="Main_UploadProjectRecoveryHashError" xml:space="preserve">
+  <data name="Main_UploadProgramRecoveryHashError" xml:space="preserve">
     <value>Recovery hash was not found.</value>
   </data>
-  <data name="Main_UploadProjectRecoveryPasswordMatchError" xml:space="preserve">
+  <data name="Main_UploadProgramRecoveryPasswordMatchError" xml:space="preserve">
     <value>Passwords do not match.</value>
   </data>
-  <data name="Main_UploadProjectPasswordChangeSucess" xml:space="preserve">
+  <data name="Main_UploadProgramPasswordChangeSucess" xml:space="preserve">
     <value>Sucessfully changed password.</value>
   </data>
-  <data name="Main_OnlineProjectListBoxNoMoreItems" xml:space="preserve">
+  <data name="Main_OnlineProgramListBoxNoMoreItems" xml:space="preserve">
     <value>no more programs</value>
   </data>
   <data name="Main_NoScreenshot" xml:space="preserve">
@@ -1206,19 +1206,19 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_TermsOfUseText" xml:space="preserve">
     <value>In order to be allowed to use Pocket Code and other executables offered by the Catrobat project, you must agree to our Terms of Use and strictly follow them when you use Pocket Code and our other executables. Please see the link below for their precise formulation.</value>
   </data>
-  <data name="Main_ProjectDescription" xml:space="preserve">
+  <data name="Main_ProgramDescription" xml:space="preserve">
     <value>Description:</value>
   </data>
-  <data name="Main_TitleCurrentProject" xml:space="preserve">
+  <data name="Main_TitleCurrentProgram" xml:space="preserve">
     <value>ACTIVE PROGRAM</value>
   </data>
-  <data name="Main_ProjectNoDescription" xml:space="preserve">
+  <data name="Main_ProgramNoDescription" xml:space="preserve">
     <value>No description available.</value>
   </data>
   <data name="Editor_ButtonAdd" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="Main_ReportProject" xml:space="preserve">
+  <data name="Main_ReportProgram" xml:space="preserve">
     <value>Report program</value>
   </data>
   <data name="Main_Sending" xml:space="preserve">

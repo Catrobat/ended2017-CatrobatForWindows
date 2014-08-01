@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         public TileGeneratorViewModel()
         {
             Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this,
-                 ViewModelMessagingToken.PinProjectHeaderListener, PinProjectHeaderChangedAction);
+                 ViewModelMessagingToken.PinProgramHeaderListener, PinProjectHeaderChangedAction);
         }
 
 

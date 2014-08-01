@@ -35,7 +35,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
                 Name = "TestProgram", 
             };
             var messageContext = new GenericMessage<Program>(program);
-            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProjectChangedListener);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProgramChangedListener);
 
             viewModel.SaveCommand.Execute(null);
 

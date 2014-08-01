@@ -17,7 +17,7 @@
 
     <StackPanel Grid.Row="0" Margin="12">
       <TextBlock Margin="0" 
-        Text="{Binding Resources.Main_TitleNewProject, 
+        Text="{Binding Resources.Main_TitleNewProgram, 
         Source={StaticResource LocalizedStrings}}"
         Style="{ThemeResource TextTitleNormalStyle}" />
     </StackPanel>
@@ -25,49 +25,49 @@
     <StackPanel Grid.Row="1" Margin="12 0 0 18">
       <StackPanel>
         <TextBlock Margin="0 6 6 6" 
-          Text="{Binding Resources.Main_ProjectName, 
+          Text="{Binding Resources.Main_ProgramName, 
           Source={StaticResource LocalizedStrings}}"
           Style="{ThemeResource TextNormalStyle}" />
-        <TextBox Name="TextBoxProjectName" Margin="0 0 12 0" 
+        <TextBox Name="TextBoxProgramName" Margin="0 0 12 0" 
                  HorizontalAlignment="Stretch" 
-                 TextChanged="TextBoxProjectName_OnTextChanged" 
-                 Text="{Binding Path=ProjectName, 
+                 TextChanged="TextBoxProgramName_OnTextChanged" 
+                 Text="{Binding Path=ProgramName, 
                  Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
       </StackPanel>
       <StackPanel Margin="0 24 0 0">
-        <TextBlock Text="{Binding Resources.Main_SelectProjectCreationOption, 
+        <TextBlock Text="{Binding Resources.Main_SelectProgramCreationOption, 
           Source={StaticResource LocalizedStrings}}"
           Style="{ThemeResource TextNormalStyle}"/>
         <RadioButton Margin="0 -6 0 -12" GroupName="CreationOption"
-                     IsChecked="{Binding CreateEmptyProject, Mode=TwoWay}">
+                     IsChecked="{Binding CreateEmptyProgram, Mode=TwoWay}">
           <RadioButton.ContentTemplate>
             <DataTemplate>
               <TextBlock FontSize="20" TextWrapping="Wrap"
-                Text="{Binding Resources.Main_CreateEmptyProject, 
+                Text="{Binding Resources.Main_CreateEmptyProgram, 
                 Source={StaticResource LocalizedStrings}}" />
             </DataTemplate>
           </RadioButton.ContentTemplate>
         </RadioButton>
         <!--<RadioButton Margin="0 -5 0 -10" GroupName="CreationOption" 
-                     IsChecked="{Binding CreateCopyOfCurrentProject, Mode=TwoWay}" >
+                     IsChecked="{Binding CreateCopyOfCurrentProgram, Mode=TwoWay}" >
           <RadioButton.ContentTemplate>
             <DataTemplate>
-              <TextBlock Text="{Binding AddNewProjectViewModel.TextCopyCurrentProjectAsTemplate, 
+              <TextBlock Text="{Binding AddNewProgramViewModel.TextCopyCurrentProgramAsTemplate, 
                 Source={StaticResource Locator}}" FontSize="20" TextWrapping="Wrap"/>
             </DataTemplate>
           </RadioButton.ContentTemplate>
         </RadioButton>-->
-        <RadioButton Margin="0 -6 0 -12" IsChecked="{Binding CreateTemplateProject, Mode=TwoWay}" 
+        <RadioButton Margin="0 -6 0 -12" IsChecked="{Binding CreateTemplateProgram, Mode=TwoWay}" 
                      GroupName="CreationOption" >
           <RadioButton.ContentTemplate>
             <DataTemplate>
-              <TextBlock Text="{Binding Resources.Main_CreateProjectBasedOnTemplate, 
+              <TextBlock Text="{Binding Resources.Main_CreateProgramBasedOnTemplate, 
                 Source={StaticResource LocalizedStrings}}" FontSize="20" TextWrapping="Wrap"/>
             </DataTemplate>
           </RadioButton.ContentTemplate>
         </RadioButton>
       </StackPanel>
-      <ListView Margin="12" IsEnabled="{Binding CreateTemplateProject}" 
+      <ListView Margin="12" IsEnabled="{Binding CreateTemplateProgram}" 
                ItemsSource="{Binding TemplateOptions}" 
                SelectedItem="{Binding SelectedTemplateOption, Mode=TwoWay}" >
         <ListView.ItemTemplate>

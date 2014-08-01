@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Catrobat.IDE.Core.CatrobatObjects
 {
-    public class OnlineProjectOverview
+    public class OnlineProgramOverview
     {
         public string completeTerm { get; set; }
         public Catrobatinformation CatrobatInformation { get; set; }
-        public List<OnlineProjectHeader> CatrobatProjects { get; set; }
+        public List<OnlineProgramHeader> CatrobatProjects { get; set; }
         public string preHeaderMessages { get; set; }
     }
 

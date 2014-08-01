@@ -83,7 +83,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
 
         //    var project = new Project { Name = "TestProject" };
         //    var messageContext2 = new GenericMessage<Project>(project);
-        //    Messenger.Default.Send(messageContext2, ViewModelMessagingToken.CurrentProjectChangedListener);
+        //    Messenger.Default.Send(messageContext2, ViewModelMessagingToken.CurrentProgramChangedListener);
 
         //    await changeLookViewModel.EditLookCommand.ExecuteAsync(null);
 

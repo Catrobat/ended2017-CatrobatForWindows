@@ -136,7 +136,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Variable>>(this,

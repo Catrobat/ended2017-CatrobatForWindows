@@ -10,63 +10,63 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     {
         #region Private Members
 
-        private LocalProjectHeader _selectedProjectHeader;
-        private string _projectName;
-        private string _projectDescription;
-        private Program _currentProject;
+        private LocalProjectHeader _selectedProgramHeader;
+        private string _programName;
+        private string _programDescription;
+        private Program _currentProgram;
 
         #endregion
 
         #region Properties
 
-        public Program CurrentProject
+        public Program CurrentProgram
         {
-            get { return _currentProject; }
+            get { return _currentProgram; }
             private set
             {
-                if (value == _currentProject)
+                if (value == _currentProgram)
                     return;
 
-                _currentProject = value;             
+                _currentProgram = value;             
                 ServiceLocator.DispatcherService.RunOnMainThread(() => 
-                    RaisePropertyChanged(() => CurrentProject));
+                    RaisePropertyChanged(() => CurrentProgram));
             }
         }
 
-        public LocalProjectHeader SelectedProjectHeader
+        public LocalProjectHeader SelectedProgramHeader
         {
-            get { return _selectedProjectHeader; }
+            get { return _selectedProgramHeader; }
             set
             {
-                if (value == _selectedProjectHeader)
+                if (value == _selectedProgramHeader)
                 {
                     return;
                 }
-                _selectedProjectHeader = value;
-                RaisePropertyChanged(() => SelectedProjectHeader);
+                _selectedProgramHeader = value;
+                RaisePropertyChanged(() => SelectedProgramHeader);
             }
         }
 
-        public string ProjectName
+        public string ProgramName
         {
-            get { return _projectName; }
+            get { return _programName; }
             set
             {
-                if (value == _projectName) return;
-                _projectName = value;
-                RaisePropertyChanged(() => ProjectName);
+                if (value == _programName) return;
+                _programName = value;
+                RaisePropertyChanged(() => ProgramName);
                 SaveCommand.RaiseCanExecuteChanged();
             }
         }
 
-        public string ProjectDescription
+        public string ProgramDescription
         {
-            get { return _projectDescription; }
+            get { return _programDescription; }
             set
             {
-                if (value == _projectDescription) return;
-                _projectDescription = value;
-                RaisePropertyChanged(() => ProjectDescription);
+                if (value == _programDescription) return;
+                _programDescription = value;
+                RaisePropertyChanged(() => ProgramDescription);
             }
         }
 
@@ -86,7 +86,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private bool SaveCommand_CanExecute()
         {
-            return ProjectName != null && ProjectName.Length >= 2;
+            return ProgramName != null && ProgramName.Length >= 2;
         }
 
         #endregion
@@ -95,37 +95,37 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void InitializeAction()
         {
-            if (CurrentProject != null)
+            if (CurrentProgram != null)
             {
-                ProjectName = CurrentProject.Name;
-                ProjectDescription = CurrentProject.Description;
+                ProgramName = CurrentProgram.Name;
+                ProgramDescription = CurrentProgram.Description;
             }
             else
             {
-                ProjectName = "";
-                ProjectDescription = "";
+                ProgramName = "";
+                ProgramDescription = "";
             }
         }
 
         private async void SaveAction()
         {
-            if (CurrentProject.LocalProgramHeader == SelectedProjectHeader)
+            if (CurrentProgram.LocalProgramHeader == SelectedProgramHeader)
             {
-                CurrentProject.LocalProgramHeader.ProjectName = ProjectName;
-                await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
-                CurrentProject.Description = ProjectDescription;
+                CurrentProgram.LocalProgramHeader.ProjectName = ProgramName;
+                await CurrentProgram.SetProgramNameAndRenameDirectory(ProgramName);
+                CurrentProgram.Description = ProgramDescription;
             }
             else
             {
-                SelectedProjectHeader.ProjectName = ProjectName;
-                await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
-                CurrentProject.Description = ProjectDescription;
-                await CurrentProject.Save();
+                SelectedProgramHeader.ProjectName = ProgramName;
+                await CurrentProgram.SetProgramNameAndRenameDirectory(ProgramName);
+                CurrentProgram.Description = ProgramDescription;
+                await CurrentProgram.Save();
             }
 
             base.GoBackAction();
 
-            await App.SaveContext(CurrentProject);
+            await App.SaveContext(CurrentProgram);
         }
 
         private void CancelAction()
@@ -143,26 +143,26 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region Message Actions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
+        private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
-            CurrentProject = message.Content;
-            //if (CurrentProject != null)
+            CurrentProgram = message.Content;
+            //if (CurrentProgram != null)
             //{
-            //    ProjectName = CurrentProject.Name;
-            //    ProjectDescription = CurrentProject.Description;  
+            //    ProgramName = CurrentProgram.Name;
+            //    ProgramDescription = CurrentProgram.Description;  
             //}
             //else
             //{
-            //    ProjectName = "";
-            //    ProjectDescription = ""; 
+            //    ProgramName = "";
+            //    ProgramDescription = ""; 
             //}
         }
 
-        private async void CurrentProjectHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
+        private async void CurrentProgramHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
         {
-            SelectedProjectHeader = message.Content;
+            SelectedProgramHeader = message.Content;
 
-            //SelectedProject = await CatrobatContext.LoadProjectByNameStatic(SelectedProjectHeader.ProjectName);
+            //SelectedProgram = await CatrobatContext.LoadProgramByNameStatic(SelectedProgramHeader.ProgramName);
         }
 
         #endregion
@@ -174,15 +174,15 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this, 
-                ViewModelMessagingToken.CurrentProjectHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
+                ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProgramHeaderChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Program>>(this, 
-                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
         }
 
         private void ResetViewModel()
         {
-            ProjectName = "";
-            ProjectDescription = "";
+            ProgramName = "";
+            ProgramDescription = "";
         }
     }
 }

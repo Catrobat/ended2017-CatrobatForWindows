@@ -122,7 +122,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         {
             _playButton = new AppBarButton
             {
-                Label = AppResources.Editor_ButtonPlayProject,
+                Label = AppResources.Editor_ButtonPlayProgram,
                 Icon = new SymbolIcon(Symbol.Play)
             };
 

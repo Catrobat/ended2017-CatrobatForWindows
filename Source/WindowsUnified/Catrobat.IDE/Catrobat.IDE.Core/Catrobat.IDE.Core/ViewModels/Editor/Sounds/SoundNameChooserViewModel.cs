@@ -141,7 +141,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                ViewModelMessagingToken.CurrentProjectChangedListener, 
+                ViewModelMessagingToken.CurrentProgramChangedListener, 
                 CurrentProjectChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,

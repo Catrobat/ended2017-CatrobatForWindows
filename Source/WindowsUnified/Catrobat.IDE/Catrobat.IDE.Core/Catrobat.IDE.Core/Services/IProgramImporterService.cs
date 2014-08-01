@@ -13,7 +13,7 @@ namespace Catrobat.IDE.Core.Services
     {
         void SetProjectStream(Stream projectStream);
 
-        void SetDownloadHeader(OnlineProjectHeader projectHeader);
+        void SetDownloadHeader(OnlineProgramHeader projectHeader);
 
         Task<ExtractProgramResult> ExtractProgram();
 

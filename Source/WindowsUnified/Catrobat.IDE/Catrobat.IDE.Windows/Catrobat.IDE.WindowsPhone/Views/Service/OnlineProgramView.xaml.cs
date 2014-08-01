@@ -18,7 +18,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Service
 
         private void ViewPageBase_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            _viewModel.OnLoadCommand.Execute((OnlineProjectHeader)DataContext);
+            _viewModel.OnLoadCommand.Execute((OnlineProgramHeader)DataContext);
         }
 
     }

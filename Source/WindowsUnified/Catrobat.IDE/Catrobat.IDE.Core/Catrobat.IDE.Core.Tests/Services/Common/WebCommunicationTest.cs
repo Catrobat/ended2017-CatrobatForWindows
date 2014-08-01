@@ -15,11 +15,11 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
     {
         public int UploadsPending { get; set; } 
         
-        public async Task<List<OnlineProjectHeader>> LoadOnlineProjectsAsync(
+        public async Task<List<OnlineProgramHeader>> LoadOnlineProjectsAsync(
             string filterText, int offset, int count,
             CancellationToken taskCancellationToken)
         {
-            List<OnlineProjectHeader> projects = SampleLoader.GetSampleOnlineProjectHeaderList(count);
+            List<OnlineProgramHeader> projects = SampleLoader.GetSampleOnlineProjectHeaderList(count);
             return projects;         
         }
 

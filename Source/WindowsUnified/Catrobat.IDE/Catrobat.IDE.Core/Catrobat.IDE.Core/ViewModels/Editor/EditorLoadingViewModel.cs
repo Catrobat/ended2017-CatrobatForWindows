@@ -65,7 +65,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor
             SkipAndNavigateTo = typeof (SpritesViewModel);
 
             Messenger.Default.Register<GenericMessage<XmlProgram>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
+                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedAction);
         }
     }
 }

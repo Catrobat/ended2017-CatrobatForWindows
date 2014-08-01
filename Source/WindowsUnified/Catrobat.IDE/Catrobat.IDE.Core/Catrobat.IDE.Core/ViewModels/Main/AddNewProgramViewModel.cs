@@ -168,7 +168,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     CreateThumbnailsForNewProgram(CurrentProject.Name);
 
                 var projectChangedMessage = new GenericMessage<Program>(CurrentProject);
-                Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProgramChangedListener);
             }
 
             GoBackAction();
@@ -176,7 +176,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
 
             var localProjectsChangedMessage = new MessageBase();
-            Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
+            Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProgramsChangedListener);
 
             
         }
@@ -212,7 +212,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
+                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedAction);
         }
 
         public void ResetViewModel()

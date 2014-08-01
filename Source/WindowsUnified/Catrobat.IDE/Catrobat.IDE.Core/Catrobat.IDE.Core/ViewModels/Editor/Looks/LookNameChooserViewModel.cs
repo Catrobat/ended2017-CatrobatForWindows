@@ -231,7 +231,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
                 ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<PortableImage>>(this,
                 ViewModelMessagingToken.LookImageListener, LookImageReceivedMessageAction);

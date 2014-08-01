@@ -316,7 +316,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
             Messenger.Default.Register<GenericMessage<LocalSettings>>(this, ViewModelMessagingToken.LoadSettings, message => LoadSettingsAction(message.Content));
             Messenger.Default.Register<GenericMessage<LocalSettings>>(this, ViewModelMessagingToken.SaveSettings, message => SaveSettingsAction(message.Content));
-            Messenger.Default.Register<GenericMessage<Program>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, message => CurrentProjectChangedAction(message.Content));
+            Messenger.Default.Register<GenericMessage<Program>>(this, ViewModelMessagingToken.CurrentProgramChangedListener, message => CurrentProjectChangedAction(message.Content));
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, message => CurrentSpriteChangedAction(message.Content));
 
         }

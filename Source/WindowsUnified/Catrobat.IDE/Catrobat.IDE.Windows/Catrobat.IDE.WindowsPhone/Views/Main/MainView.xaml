@@ -23,10 +23,10 @@
         </StackPanel>
       </Hub.Header>
 
-      <HubSection Name="HubSectionLocalProjects">
+      <HubSection Name="HubSectionLocalPrograms">
         <HubSection.HeaderTemplate>
           <DataTemplate>
-            <TextBlock Text="{Binding Resources.Main_HeaderLocalProjects, 
+            <TextBlock Text="{Binding Resources.Main_HeaderLocalPrograms, 
                        Source={StaticResource LocalizedStrings}}" 
                        Style="{ThemeResource TextHubHeaderStyle}"/>
           </DataTemplate>
@@ -34,7 +34,7 @@
         <HubSection.ContentTemplate>
           <DataTemplate>
             <Grid Margin="0 -26 0 0">
-              <GridView Name="ListBoxLocalProjects" 
+              <GridView Name="ListBoxLocalPrograms" 
                 ItemsSource="{Binding LocalProjects}" 
                 VerticalAlignment="Stretch" 
                 HorizontalAlignment="Stretch">
@@ -50,10 +50,10 @@
 
       </HubSection>
 
-      <HubSection Name="HubSectionOnlineProjects">
+      <HubSection Name="HubSectionOnlinePrograms">
         <HubSection.HeaderTemplate>
           <DataTemplate>
-            <TextBlock Text="{Binding Resources.Main_HeaderOnlineProjects, 
+            <TextBlock Text="{Binding Resources.Main_HeaderOnlinePrograms, 
                        Source={StaticResource LocalizedStrings}}" 
                        Style="{ThemeResource TextHubHeaderStyle}"/>
           </DataTemplate>
@@ -70,23 +70,23 @@
               <TextBox Grid.Row="0"
                 HorizontalAlignment="Stretch" VerticalAlignment="Top" 
                 InputScope="Search"
-                Text="{Binding OnlineProjects.FilterText, Mode=TwoWay}"
+                Text="{Binding OnlinePrograms.FilterText, Mode=TwoWay}"
                 TextChanged="FilterTextBox_TextChanged" 
                 KeyDown="FilterTextBox_KeyDown"
                 />
 
-              <ListView Name="ListViewOnlineProjects" Grid.Row="1"
-                ItemsSource="{Binding OnlineProjects}" 
+              <ListView Name="ListViewOnlinePrograms" Grid.Row="1"
+                ItemsSource="{Binding OnlinePrograms}" 
                 VerticalAlignment="Stretch" 
                 HorizontalAlignment="Stretch" 
-                SelectedItem="{Binding SelectedOnlineProject, Mode=TwoWay}" 
+                SelectedItem="{Binding SelectedOnlineProgram, Mode=TwoWay}" 
                 SelectionMode="None"
                 IsItemClickEnabled="true" 
-                ItemClick="ListViewOnlineProjects_ItemClick">
+                ItemClick="ListViewOnlinePrograms_ItemClick">
                 <ListView.ItemTemplate>
                   <DataTemplate>
                     <Grid Margin="0 6 0 6"  
-                      Background="{ThemeResource OnlineProjectsBackgroundBrush}"
+                      Background="{ThemeResource OnlineProgramsBackgroundBrush}"
                       DataContext="{Binding}">
                       <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -110,7 +110,7 @@
                         <StackPanel Grid.Column="1" Margin="12 0 6 0" 
                            Visibility="{Binding Description, 
                            Converter={StaticResource StringVisibilityConverter}}">
-                          <TextBlock Text="{Binding Resources.Main_ProjectNoDescription, 
+                          <TextBlock Text="{Binding Resources.Main_ProgramNoDescription, 
                                       Source={StaticResource LocalizedStrings}}" 
                                       TextTrimming="WordEllipsis" TextWrapping="Wrap"
                                       Style="{ ThemeResource TextSubtileStyle }" 
@@ -136,30 +136,30 @@
                 <ListView.Footer>
                   <Grid Margin="0 6 0 6" Height="35" 
                     Background="{ThemeResource ProcessIconBackgroundBrush}"
-                    Visibility="{Binding OnlineProjects, 
+                    Visibility="{Binding OnlinePrograms, 
                     Converter={StaticResource NullVisibilityConverter}}">
                     <StackPanel Orientation="Horizontal" 
                       VerticalAlignment="Center" 
                       HorizontalAlignment="Center"
-                      Visibility="{Binding OnlineProjects.IsLoading, 
+                      Visibility="{Binding OnlinePrograms.IsLoading, 
                       Converter={StaticResource BoolVisibilityConverter}}">
-                      <!--Opacity="{Binding OnlineProjects.IsLoading, 
+                      <!--Opacity="{Binding OnlinePrograms.IsLoading, 
                       Converter={StaticResource BoolOpacityConverter}}"-->                
                       <controls:ProcessIcon Margin="0 0 6 0" 
-                        IsProcessing="{Binding OnlineProjects.IsLoading}" />
+                        IsProcessing="{Binding OnlinePrograms.IsLoading}" />
                       <TextBlock Foreground="White"
                         VerticalAlignment="Center" HorizontalAlignment="Center" 
-                        Text="{Binding Resources.Main_OnlineProjectListBoxLoadMore, 
+                        Text="{Binding Resources.Main_OnlineProgramListBoxLoadMore, 
                         Source={StaticResource LocalizedStrings}}" 
                         Style="{ ThemeResource TextNormalStyle }" />
                     </StackPanel>
                     <Grid VerticalAlignment="Center" 
                       HorizontalAlignment="Center"
-                      Visibility="{Binding OnlineProjects.HasMoreItems, 
+                      Visibility="{Binding OnlinePrograms.HasMoreItems, 
                       Converter={StaticResource NegativeBoolVisibilityConverter}}">
                       <TextBlock Foreground="White"
                         VerticalAlignment="Center" HorizontalAlignment="Center" 
-                        Text="{Binding Resources.Main_OnlineProjectListBoxNoMoreItems, 
+                        Text="{Binding Resources.Main_OnlineProgramListBoxNoMoreItems, 
                         Source={StaticResource LocalizedStrings}}" 
                         Style="{ ThemeResource TextNormalStyle }" />
                     </Grid>
@@ -282,7 +282,7 @@
         <AppBarButton Icon="Add" 
           Label="{Binding Resources.Main_ButtonCreate, 
           Source={StaticResource LocalizedStrings}}"
-          Command="{Binding CreateNewProjectCommand}"/>
+          Command="{Binding CreateNewProgramCommand}"/>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
         <AppBarButton Label="{Binding Resources.Main_Settings, 

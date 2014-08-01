@@ -172,7 +172,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 await ServiceLocator.ProjectImporterService.AcceptTempProject();
                 var localProjectsChangedMessage = new MessageBase();
                 Messenger.Default.Send(localProjectsChangedMessage, 
-                    ViewModelMessagingToken.LocalProjectsChangedListener);
+                    ViewModelMessagingToken.LocalProgramsChangedListener);
 
                 ResetViewModel();
             }

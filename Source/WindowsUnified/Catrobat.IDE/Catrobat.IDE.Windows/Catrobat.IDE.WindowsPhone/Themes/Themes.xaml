@@ -9,7 +9,7 @@
       <SolidColorBrush x:Key="AppBackgroundBrush" Color="#FFFFFFFF" />
       <SolidColorBrush x:Key="AppBarBackgroundBrush" Color="#FF111111" />
       
-      <SolidColorBrush x:Key="OnlineProjectsBackgroundBrush" Color="#FF99AACC" />
+      <SolidColorBrush x:Key="OnlineProgramsBackgroundBrush" Color="#FF99AACC" />
       <SolidColorBrush x:Key="ProcessIconBackgroundBrush" Color="#FF667799" />
 
       <SolidColorBrush x:Key="BrickBorderBrush" Color="#FFFFFFFF" />

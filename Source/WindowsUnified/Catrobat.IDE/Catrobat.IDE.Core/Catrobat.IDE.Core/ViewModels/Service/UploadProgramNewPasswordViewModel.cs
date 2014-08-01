@@ -55,6 +55,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 if (_repeatedPassword != value)
                 {
                     _repeatedPassword = value;
+                    NewPasswordCommand.RaiseCanExecuteChanged();
                     RaisePropertyChanged(() => RepeatedPassword);
                 }
             }
@@ -77,7 +78,16 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         #region Commands
 
-        public ICommand NewPasswordCommand { get; private set; }
+        public RelayCommand NewPasswordCommand { get; private set; }
+
+        #endregion
+
+        #region CommandCanExecute
+
+        private bool NewPasswordCommand_CanExecute()
+        {
+            return IsSending == false;
+        }
 
         #endregion
 
@@ -88,8 +98,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             IsSending = true;
             if (string.IsNullOrEmpty(_newPassword) || string.IsNullOrEmpty(_repeatedPassword))
             {
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectPasswordRecoveryErrorCaption,
-                    AppResources.Main_UploadProjectMissingPassword, MissingPasswordDataCallback, MessageBoxOptions.Ok);
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
+                    AppResources.Main_UploadProgramMissingPassword, MissingPasswordDataCallback, MessageBoxOptions.Ok);
             }
             else
             {
@@ -99,30 +109,30 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 {
                     case StatusCodes.ServerResponseOk:
                         GoBackAction();
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectNewPassword,
-                            AppResources.Main_UploadProjectPasswordChangeSucess, PasswordInvalidCallback, MessageBoxOptions.Ok);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramNewPassword,
+                            AppResources.Main_UploadProgramPasswordChangeSucess, PasswordInvalidCallback, MessageBoxOptions.Ok);
                         break;
 
                     // because of typing-error in server-message
                     case StatusCodes.ServerResponseRecoveryHashNotFound:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectPasswordRecoveryErrorCaption,
-                            AppResources.Main_UploadProjectRecoveryHashError, RecoveryHashNotFoundCallback, MessageBoxOptions.Ok);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
+                            AppResources.Main_UploadProgramRecoveryHashError, RecoveryHashNotFoundCallback, MessageBoxOptions.Ok);
                         break;
 
                     // may be checked locally
                     case StatusCodes.ServerResponsePasswordMatchFailed:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectPasswordRecoveryErrorCaption,
-                            AppResources.Main_UploadProjectRecoveryPasswordMatchError, PasswordInvalidCallback, MessageBoxOptions.Ok);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
+                            AppResources.Main_UploadProgramRecoveryPasswordMatchError, PasswordInvalidCallback, MessageBoxOptions.Ok);
                         break;
 
                     case StatusCodes.HTTPRequestFailed:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectPasswordRecoveryErrorCaption,
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
                             AppResources.Main_NoInternetConnection, MissingPasswordDataCallback, MessageBoxOptions.Ok);
                         break;
 
                     default:
-                        string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, statusResponse.statusCode.ToString()) : statusResponse.answer;
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectPasswordRecoveryErrorCaption,
+                        string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProgramUndefinedError, statusResponse.statusCode.ToString()) : statusResponse.answer;
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
                             messageString, MissingPasswordDataCallback, MessageBoxOptions.Ok);
                         break;
                 }
@@ -147,7 +157,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public UploadProgramNewPasswordViewModel()
         {
-            NewPasswordCommand = new RelayCommand(NewPasswordAction);
+            NewPasswordCommand = new RelayCommand(NewPasswordAction, NewPasswordCommand_CanExecute);
             IsSending = false;
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,

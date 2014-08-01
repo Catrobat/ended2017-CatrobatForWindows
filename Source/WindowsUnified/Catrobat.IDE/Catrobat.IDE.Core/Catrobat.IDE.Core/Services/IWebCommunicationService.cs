@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.Services
 {
     public interface IWebCommunicationService
     {
-        Task<List<OnlineProjectHeader>> LoadOnlineProjectsAsync(string filterText, int offset, int count, CancellationToken taskCancellationToken);
+        Task<List<OnlineProgramHeader>> LoadOnlineProjectsAsync(string filterText, int offset, int count, CancellationToken taskCancellationToken);
 
         Task<Stream> DownloadAsync(string downloadUrl, string projectName);
 

@@ -64,9 +64,9 @@ namespace Catrobat.IDE.Core.Tests.SampleData
             return await ServiceLocator.ContextService.LoadXmlProgramByName(sampleProjectName);
         }
 
-        public static OnlineProjectHeader GetSampleOnlineProjectHeader()
+        public static OnlineProgramHeader GetSampleOnlineProjectHeader()
         {
-            OnlineProjectHeader onlineProjectHeader = new OnlineProjectHeader
+            OnlineProgramHeader onlineProjectHeader = new OnlineProgramHeader
             {
                 ProjectId = "1769",
                 ProjectName = "Radio Fun City",
@@ -86,12 +86,12 @@ namespace Catrobat.IDE.Core.Tests.SampleData
             return onlineProjectHeader;
         }
 
-        public static List<OnlineProjectHeader> GetSampleOnlineProjectHeaderList(int count)
+        public static List<OnlineProgramHeader> GetSampleOnlineProjectHeaderList(int count)
         {
-            List<OnlineProjectHeader> onlineProjectHeaders = new List<OnlineProjectHeader>();
+            List<OnlineProgramHeader> onlineProjectHeaders = new List<OnlineProgramHeader>();
             for (int i = 1; i <= count; i++)
             {
-                OnlineProjectHeader onlineProjectHeader = new OnlineProjectHeader
+                OnlineProgramHeader onlineProjectHeader = new OnlineProgramHeader
                 {
                     ProjectId = i.ToString(),
                     ProjectName = "Radio Fun City Nr." + i.ToString(),

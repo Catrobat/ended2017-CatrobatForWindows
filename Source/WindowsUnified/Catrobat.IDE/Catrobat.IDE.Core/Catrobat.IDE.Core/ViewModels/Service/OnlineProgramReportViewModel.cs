@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private MessageboxResult _reportSuccessfullCallbackResult;
         private string _reason;
         private bool _isSending;
-        private OnlineProjectHeader _selectedOnlineProject;
+        private OnlineProgramHeader _selectedOnlineProgram;
 
         #endregion
 
@@ -33,19 +33,19 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         //    set { _context = value; RaisePropertyChanged(() => Context); }
         //}
 
-        public OnlineProjectHeader SelectedOnlineProject
+        public OnlineProgramHeader SelectedOnlineProgram
         {
             get
             {
-                return _selectedOnlineProject;
+                return _selectedOnlineProgram;
             }
             set
             {
-                if (ReferenceEquals(_selectedOnlineProject, value))
+                if (ReferenceEquals(_selectedOnlineProgram, value))
                     return;
 
-                _selectedOnlineProject = value;
-                RaisePropertyChanged(() => SelectedOnlineProject);
+                _selectedOnlineProgram = value;
+                RaisePropertyChanged(() => SelectedOnlineProgram);
             }
         }
 
@@ -70,6 +70,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 if (_isSending != value)
                 {
                     _isSending = value;
+                    ReportCommand.RaiseCanExecuteChanged();
                     RaisePropertyChanged(() => IsSending);
                 }
             }
@@ -85,6 +86,15 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         #endregion
 
+        #region CommandCanExecute
+
+        private bool ReportCommand_CanExecute()
+        {
+            return IsSending == false;
+        }
+
+        #endregion
+
         #region Actions
 
         private async void ReportAction()
@@ -97,12 +107,12 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
             else
             {
-                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.ReportAsInappropriateAsync(_selectedOnlineProject.ProjectId, _reason, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
+                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.ReportAsInappropriateAsync(_selectedOnlineProgram.ProjectId, _reason, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
                 switch (statusResponse.statusCode)
                 {
                     case StatusCodes.ServerResponseOk:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_ReportProject,
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_ReportProgram,
                             AppResources.Main_ReportContribution, ReportSuccessfullCallback, MessageBoxOptions.Ok);
                         GoBackAction();
                         break;
@@ -113,7 +123,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                         break;
 
                     default:
-                        string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, statusResponse.statusCode.ToString()) :
+                        string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProgramUndefinedError, statusResponse.statusCode.ToString()) :
                                                 string.Format(AppResources.Main_ReportError, statusResponse.answer);
                         ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_ReportErrorCaption,
                             messageString, MissingReportDataCallback, MessageBoxOptions.Ok);
@@ -142,29 +152,28 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         //    Context = message.Content;
         //}
 
-        private void SelectedOnlineProjectChangedMessageAction(GenericMessage<OnlineProjectHeader> message)
+        private void SelectedOnlineProgramChangedMessageAction(GenericMessage<OnlineProgramHeader> message)
         {
             ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
-                SelectedOnlineProject = message.Content;
+                SelectedOnlineProgram = message.Content;
             });
         }
         #endregion
 
 
-        
 
         public OnlineProgramReportViewModel()
         {
-            ReportCommand = new RelayCommand(ReportAction);
+            ReportCommand = new RelayCommand(ReportAction, ReportCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
             IsSending = false;
 
             //Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
             //     ViewModelMessagingToken.ContextListener, ContextChangedAction);
 
-            Messenger.Default.Register<GenericMessage<OnlineProjectHeader>>(this,
-               ViewModelMessagingToken.SelectedOnlineProjectChangedListener, SelectedOnlineProjectChangedMessageAction);
+            Messenger.Default.Register<GenericMessage<OnlineProgramHeader>>(this,
+               ViewModelMessagingToken.SelectedOnlineProgramChangedListener, SelectedOnlineProgramChangedMessageAction);
         }
 
         #region Callbacks
