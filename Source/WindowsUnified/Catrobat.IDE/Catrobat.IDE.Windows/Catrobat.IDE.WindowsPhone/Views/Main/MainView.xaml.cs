@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
@@ -37,7 +38,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
 
 
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             while (ServiceLocator.NavigationService.CanGoBack)
                 ServiceLocator.NavigationService.RemoveBackEntry();

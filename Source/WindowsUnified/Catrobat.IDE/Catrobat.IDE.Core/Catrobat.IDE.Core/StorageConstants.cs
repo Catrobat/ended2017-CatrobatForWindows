@@ -1,14 +1,29 @@
 ﻿using System.Collections.Generic;
+using System.Dynamic;
 using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core
 {
     public static class StorageConstants
     {
+        // supported file formats
+        public static string PaintImageExportFileExtension = ".catrobat_paint_png";
+        public static string PaintImageImportFileExtension = ".catrobat_ide_png";
+
+        public static IEnumerable<string> SupportedImageFileTypes
+        {
+            get
+            {
+                return new List<string> { ".jpg", ".jpeg", ".png" };
+            }
+        }
+
+
         // Program temporary paths
         public const string TempProgramImportZipPath = "Temp/ImportProjectZip";
         public const string TempProgramImportPath = "Temp/ImportProject";
-        public const string TempPaintImagePath = "Temp/temp.catrobat_paint_png";
+        public static string TempPaintImagePath
+        { get { return "Temp/temp" + PaintImageExportFileExtension; } }
 
         // Program related constants
         public const string ProgramsPath = "Projects";

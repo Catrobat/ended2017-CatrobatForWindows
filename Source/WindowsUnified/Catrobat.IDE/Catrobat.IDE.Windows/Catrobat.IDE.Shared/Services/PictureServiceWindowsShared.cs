@@ -4,19 +4,18 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Media.Capture;
+using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.IDE.Core;
-using Catrobat.IDE.Core.Annotations;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Looks;
-using Catrobat.IDE.WindowsShared.Content.Images.Misc;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.WindowsShared.Services
@@ -24,20 +23,14 @@ namespace Catrobat.IDE.WindowsShared.Services
 
     public class PictureServiceWindowsShared : IPictureService
     {
-        public IEnumerable<string> SupportedFileTypes
-        {
-            get
-            {
-                return new List<string>{ ".jpg", ".jpeg", ".png" };
-            }
-        }
+
+        private Core.Models.Program _program;
+        private Look _lookToEdit;
 
         public string ImageFileExtensionPrefix
         {
             get { return "catrobat_ide_"; }
         }
-
-
 
         public void ChoosePictureFromLibraryAsync()
         {
@@ -47,7 +40,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                 SuggestedStartLocation = PickerLocationId.PicturesLibrary
             };
 
-            foreach (var extension in SupportedFileTypes)
+            foreach (var extension in SupportedImageFileTypes)
                 openPicker.FileTypeFilter.Add(extension);
 
             StorageFile file;
@@ -111,21 +104,72 @@ namespace Catrobat.IDE.WindowsShared.Services
             //}
         }
 
-        public async Task DrawPictureAsync(PortableImage imageToEdit = null)
+        public IEnumerable<string> SupportedImageFileTypes
         {
+            get
+            {
+                var supportedTypes = new List<string>();
+                supportedTypes.AddRange(StorageConstants.SupportedImageFileTypes);
+                supportedTypes.Add(StorageConstants.PaintImageImportFileExtension);
+                return supportedTypes;
+            }
+        }
+
+        public async Task DrawPictureAsync(Core.Models.Program program = null, Look lookToEdit = null)
+        {
+            _program = program;
+            _lookToEdit = lookToEdit;
+
             var localFolder = ApplicationData.Current.LocalFolder;
 
-            if (imageToEdit != null)
+            if (program != null && lookToEdit != null)
             {
-                await imageToEdit.WriteAsPng(StorageConstants.TempPaintImagePath);
+                using (var storage = StorageSystem.GetStorage())
+                {
+                    if (await storage.FileExistsAsync(StorageConstants.TempPaintImagePath))
+                        await storage.DeleteFileAsync(StorageConstants.TempPaintImagePath);
+
+                    var filePath = Path.Combine(program.BasePath,
+                        StorageConstants.ProgramLooksPath, lookToEdit.FileName);
+
+                    await storage.CopyFileAsync(filePath, 
+                        StorageConstants.TempPaintImagePath);
+                }
             }
             else
             {
-                throw new NotImplementedException("Create empty image here");
+                //throw new NotImplementedException("Create empty image here");
                 // TODO: create empty image with the same dimensions as the devices width and heigt
+
 
                 var imageWidth = ServiceLocator.SystemInformationService.ScreenWidth;
                 var imageHeight = ServiceLocator.SystemInformationService.ScreenHeight;
+                
+                using (var storage = StorageSystem.GetStorage())
+                {
+                    if (await storage.FileExistsAsync(StorageConstants.TempPaintImagePath))
+                        await storage.DeleteFileAsync(StorageConstants.TempPaintImagePath);
+
+                    var stream = await storage.OpenFileAsync(StorageConstants.TempPaintImagePath, 
+                        StorageFileMode.Create, StorageFileAccess.Write);
+
+                    var encoder = await BitmapEncoder.CreateAsync(
+                        BitmapEncoder.PngEncoderId, stream.AsRandomAccessStream());
+
+                    var pixels = new byte[imageWidth*imageHeight*4];
+
+                    for (var pixelStart = 0; pixelStart < pixels.Length; pixelStart +=4)
+                    {
+                        pixels[pixelStart + 0] = 0x00; // Full transparent
+                        pixels[pixelStart + 1] = 0x00;
+                        pixels[pixelStart + 2] = 0x00;
+                        pixels[pixelStart + 3] = 0x00;
+                    }
+
+                    encoder.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Straight,
+                        (uint)imageWidth, (uint)imageHeight, 96, 96, pixels);
+                    await encoder.FlushAsync();
+                }
             }
 
             var paintTempFolderPath = Path.GetDirectoryName(StorageConstants.TempPaintImagePath);
@@ -136,37 +180,31 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             var options = new Windows.System.LauncherOptions
             {
-                DisplayApplicationPicker = true
+                DisplayApplicationPicker = false
             };
 
-
-            try
+            ServiceLocator.DispatcherService.RunOnMainThread(async () =>
             {
-                // TODO: why does this line thow an exception???
-                bool success = await Windows.System.Launcher.LaunchFileAsync(file, options);
-                if (success)
+                try
                 {
-                    // File launch OK
+                    bool success = await Windows.System.Launcher.
+                        LaunchFileAsync(file, options);
+                    if (success)
+                    {
+                        // File launch OK
+                    }
+                    else
+                    {
+                        // File launch failed
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    // File launch failed
+                    if (Debugger.IsAttached)
+                        Debugger.Break();
                 }
-            }
-            catch (Exception)
-            {
-                if(Debugger.IsAttached)
-                    Debugger.Break();
-            }
-  
-
-
-
-
-            //return new PictureServiceResult(); // TODO: get file from app launch
+            });
         }
-
-
 
         public async void RecievedFiles(IEnumerable<object> files)
         {
@@ -188,7 +226,6 @@ namespace Catrobat.IDE.WindowsShared.Services
             await imagetobind.SetSourceAsync(memoryStream.AsRandomAccessStream());
 
             var writeableBitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
-            //var writeableBitmap = new WriteableBitmap(100, 100);
             await writeableBitmap.FromStream(memoryStream.AsRandomAccessStream());
             memoryStream.Seek(0, SeekOrigin.Begin);
             var portableImage = new PortableImage(writeableBitmap)
@@ -198,18 +235,44 @@ namespace Catrobat.IDE.WindowsShared.Services
                 EncodedData = memoryStream
             };
 
-            if (portableImage != null)
+            if (_lookToEdit == null)
             {
-                var message = new GenericMessage<PortableImage>(portableImage);
-                Messenger.Default.Send(message, ViewModelMessagingToken.LookImageListener);
+                if (portableImage != null) // TODO: check if image is ok
+                {
+                    var message = new GenericMessage<PortableImage>(portableImage);
+                    Messenger.Default.Send(message, ViewModelMessagingToken.LookImageListener);
 
-                ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                    ServiceLocator.NavigationService.NavigateTo<LookNameChooserViewModel>());
+                    ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                        ServiceLocator.NavigationService.NavigateTo<LookNameChooserViewModel>());
+                }
+                else
+                {
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Editor_MessageBoxWrongImageFormatHeader,
+                        AppResources.Editor_MessageBoxWrongImageFormatText, delegate { /* no action */ }, MessageBoxOptions.Ok);
+                }
             }
             else
             {
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Editor_MessageBoxWrongImageFormatHeader,
-                    AppResources.Editor_MessageBoxWrongImageFormatText, delegate { /* no action */ }, MessageBoxOptions.Ok);
+                using (var storage = StorageSystem.GetStorage())
+                {
+                    var filePath = Path.Combine(_program.BasePath,
+                        StorageConstants.ProgramLooksPath, _lookToEdit.FileName);
+
+                    await storage.DeleteImageAsync(filePath);
+
+                    var lookFileStream = await storage.OpenFileAsync(filePath,
+                        StorageFileMode.Create, StorageFileAccess.Write);
+
+                    await (await file.OpenReadAsync()).AsStream().CopyToAsync(lookFileStream);
+
+                    lookFileStream.Dispose();
+
+                    await storage.TryCreateThumbnailAsync(filePath);
+
+                    _lookToEdit.Image = await storage.LoadImageThumbnailAsync(filePath);
+                }
+
+                _lookToEdit = null;
             }
         }
     }

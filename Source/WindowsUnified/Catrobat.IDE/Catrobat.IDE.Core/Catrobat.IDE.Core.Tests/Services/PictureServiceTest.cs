@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
 
@@ -7,7 +8,7 @@ namespace Catrobat.IDE.Core.Tests.Services
     public class PictureServiceTest : IPictureService
     {
 
-        public System.Collections.Generic.IEnumerable<string> SupportedFileTypes
+        public System.Collections.Generic.IEnumerable<string> SupportedImageFileTypes
         {
             get { throw new System.NotImplementedException(); }
         }
@@ -27,7 +28,7 @@ namespace Catrobat.IDE.Core.Tests.Services
             throw new System.NotImplementedException();
         }
 
-        public Task DrawPictureAsync(PortableImage imageToEdit = null)
+        public Task DrawPictureAsync(Program program = null, Look lookToEdit = null)
         {
             throw new System.NotImplementedException();
         }
