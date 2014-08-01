@@ -7,10 +7,10 @@ namespace Catrobat.IDE.Core.Models
     {
         #region Properties
 
-        private readonly IReadOnlyDictionary<Costume, Costume> _costumes;
-        public IReadOnlyDictionary<Costume, Costume> Costumes
+        private readonly IReadOnlyDictionary<Look, Look> _looks;
+        public IReadOnlyDictionary<Look, Look> Looks
         {
-            get { return _costumes; }
+            get { return _looks; }
         }
 
         private readonly IReadOnlyDictionary<Sound, Sound> _sounds;
@@ -34,11 +34,11 @@ namespace Catrobat.IDE.Core.Models
         #endregion
 
         public CloneSpriteContext(
-            IReadOnlyDictionary<Costume, Costume> costumes,
+            IReadOnlyDictionary<Look, Look> looks,
             IReadOnlyDictionary<Sound, Sound> sounds, 
             IReadOnlyDictionary<LocalVariable, LocalVariable> localVariables)
         {
-            _costumes = costumes;
+            _looks = looks;
             _sounds = sounds;
             _localVariables = localVariables;
             _bricks = new Dictionary<Brick, Brick>();

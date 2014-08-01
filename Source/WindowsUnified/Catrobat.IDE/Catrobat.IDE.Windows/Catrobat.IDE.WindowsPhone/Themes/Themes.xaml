@@ -9,6 +9,10 @@
       <SolidColorBrush x:Key="AppBackgroundBrush" Color="#FFFFFFFF" />
       <SolidColorBrush x:Key="AppBarBackgroundBrush" Color="#FF111111" />
       
+      <SolidColorBrush x:Key="OnlineProjectsBackgroundBrush" Color="#FF99AACC" />
+      <SolidColorBrush x:Key="ProcessIconBackgroundBrush" Color="#FF667799" />
+
+      <SolidColorBrush x:Key="BrickBorderBrush" Color="#FFFFFFFF" />
 
       <!-- Accent Colors -->
       <SolidColorBrush x:Key="Accent1Brush" Color="#FF880088" />
@@ -17,7 +21,7 @@
       
       <!-- Action Brushes -->
       <SolidColorBrush x:Key="SoundsBrush" Color="#FF87778D" />
-      <SolidColorBrush x:Key="CostumesBrush" Color="#FF6F9263" />
+      <SolidColorBrush x:Key="LooksBrush" Color="#FF6F9263" />
       <SolidColorBrush x:Key="ObjectsBrush" Color="#FF891D1D" />
 
       <SolidColorBrush x:Key="LooksBrickBrush" Color="#FF6F9242" />
@@ -58,8 +62,16 @@
         <Setter Property="Foreground" Value="LightGray"/>
       </Style>
 
+      <Style x:Key="TextExtraLargeStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="40"/>
+      </Style>
+      
       <Style x:Key="TextNormalStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="18"/>
+      </Style>
+
+      <Style x:Key="TextSmallStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="14"/>
       </Style>
 
       <Style x:Key="TextHubHeaderStyle" TargetType="TextBlock">

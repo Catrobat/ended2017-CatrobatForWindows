@@ -6,7 +6,7 @@ using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
-using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Costumes;
+using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Looks;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;
@@ -18,8 +18,8 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
     {
         public static string GetReferenceString(XmlObject referenceObject)
         {
-            if (referenceObject is XmlCostumeReference)
-                return GetCostumeReferenceString((referenceObject as XmlCostumeReference).Costume);
+            if (referenceObject is XmlLookReference)
+                return GetLookReferenceString((referenceObject as XmlLookReference).Look);
             if (referenceObject is XmlSoundReference)
                 return GetSoundReferenceString((referenceObject as XmlSoundReference).Sound);
             if (referenceObject is XmlSpriteReference)
@@ -52,15 +52,15 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return "";
         }
 
-        private static string GetCostumeReferenceString(XmlCostume costume)
+        private static string GetLookReferenceString(XmlLook look)
         {
             foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
             {
                 var count = 0;
-                foreach (var tempCostume in sprite.Costumes.Costumes)
+                foreach (var tempLook in sprite.Looks.Looks)
                 {
                     count++;
-                    if (tempCostume == costume)
+                    if (tempLook == look)
                         return "../../../../../lookList/look[" + count + "]";
                 }
             }
@@ -274,8 +274,8 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             if (reference == null)
                 return null;
 
-            if (xmlObject is XmlCostumeReference)
-                return GetCostumeObject(xmlObject as XmlCostumeReference, reference);
+            if (xmlObject is XmlLookReference)
+                return GetLookObject(xmlObject as XmlLookReference, reference);
             if (xmlObject is XmlSoundReference)
                 return GetSoundObject(xmlObject as XmlSoundReference, reference);
             if (xmlObject is XmlSpriteReference)
@@ -307,16 +307,16 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return null;
         }
 
-        private static XmlObject GetCostumeObject(XmlCostumeReference xmlCostumeReference, string reference)
+        private static XmlObject GetLookObject(XmlLookReference xmlLookReference, string reference)
         {
             foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                     foreach (var brick in script.Bricks.Bricks)
                     {
-                        if (brick is XmlSetCostumeBrick)
+                        if (brick is XmlSetLookBrick)
                         {
-                            var setCostumeBrick = brick as XmlSetCostumeBrick;
-                            if (setCostumeBrick.XmlCostumeReference == xmlCostumeReference)
+                            var setLookBrick = brick as XmlSetLookBrick;
+                            if (setLookBrick.XmlLookReference == xmlLookReference)
                             {
                                 var count = 0;
                                 if (reference.EndsWith("]"))
@@ -326,7 +326,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                                     reference = reference.Split(']')[0];
                                     count = Int32.Parse(reference) - 1;
                                 }
-                                return sprite.Costumes.Costumes[count];
+                                return sprite.Looks.Looks[count];
                             }
                         }
                     }
@@ -681,8 +681,8 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                 {
                     if (brick is XmlChangeVariableBrick || brick is XmlSetVariableBrick)
                         UpdateVariableReference(oldSprite, newSprite, scriptCount, brickCount);
-                    else if (brick is XmlSetCostumeBrick)
-                        UpdateCostumeReference(oldSprite, newSprite, scriptCount, brickCount);
+                    else if (brick is XmlSetLookBrick)
+                        UpdateLookReference(oldSprite, newSprite, scriptCount, brickCount);
                     else if (brick is XmlForeverBrick || brick is XmlRepeatBrick)
                         UpdateLoopEndBrickReference(oldSprite, newSprite, scriptCount, brickCount);
                     else if (brick is XmlIfLogicBeginBrick)
@@ -712,21 +712,21 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             }
         }
 
-        private static void UpdateCostumeReference(XmlSprite oldSprite, XmlSprite newSprite, int scriptCount, int brickCount)
+        private static void UpdateLookReference(XmlSprite oldSprite, XmlSprite newSprite, int scriptCount, int brickCount)
         {
-            var oldCostumeReference = (oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlSetCostumeBrick).XmlCostumeReference;
-            var newCostumeReference = (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlSetCostumeBrick).XmlCostumeReference;
+            var oldLookReference = (oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlSetLookBrick).XmlLookReference;
+            var newLookReference = (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlSetLookBrick).XmlLookReference;
 
-            var costumeCount = 0;
-            foreach (var costume in oldSprite.Costumes.Costumes)
+            var lookCount = 0;
+            foreach (var look in oldSprite.Looks.Looks)
             {
-                if (costume == oldCostumeReference.Costume)
+                if (look == oldLookReference.Look)
                 {
-                    newCostumeReference.Costume = newSprite.Costumes.Costumes[costumeCount];
+                    newLookReference.Look = newSprite.Looks.Looks[lookCount];
                     return;
                 }
 
-                costumeCount++;
+                lookCount++;
             }
         }
 
@@ -941,17 +941,17 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             }
         }
 
-        public static void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite)
+        public static void CleanUpLookReferences(Look deletedLook, Sprite selectedSprite)
         {
             foreach (var script in selectedSprite.Scripts)
             {
                 foreach (var brick in script.Bricks)
                 {
-                    if (brick is SetCostumeBrick)
+                    if (brick is SetLookBrick)
                     {
-                        var setCostumeBrick = brick as SetCostumeBrick;
-                        if(ReferenceEquals(setCostumeBrick.Value, deletedCostume))
-                            setCostumeBrick.Value = null;
+                        var setLookBrick = brick as SetLookBrick;
+                        if(ReferenceEquals(setLookBrick.Value, deletedLook))
+                            setLookBrick.Value = null;
                     }
                 }
             }

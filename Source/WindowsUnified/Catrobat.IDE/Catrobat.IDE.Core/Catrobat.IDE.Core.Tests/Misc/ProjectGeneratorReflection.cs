@@ -78,7 +78,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
 
             for (var i = 0; i < 6; i++)
             {
-                sprites[i % 2].Costumes = new ObservableCollection<Costume> {GenerateCostume(i, project)};
+                sprites[i % 2].Looks = new ObservableCollection<Look> {GenerateLook(i, project)};
             }
 
             for (var i = 0; i < 6; i++)
@@ -158,10 +158,10 @@ namespace Catrobat.IDE.Core.Tests.Misc
                 return project.Sprites[_random.Next(project.Sprites.Count - 1)];
             }
 
-            if (type == typeof(Costume))
+            if (type == typeof(Look))
             {
-                var costumes = sprite.Costumes;
-                return costumes[_random.Next(0, costumes.Count - 1)];
+                var looks = sprite.Looks;
+                return looks[_random.Next(0, looks.Count - 1)];
             }
 
             if (type == typeof(Sound))
@@ -211,15 +211,15 @@ namespace Catrobat.IDE.Core.Tests.Misc
                     rightChild: FormulaTreeFactory.CreateLocalVariableNode(VariableHelper.GetLocalVariableList(project, sprite).FirstOrDefault()));
         }
 
-        private Costume GenerateCostume(int index, Program project)
+        private Look GenerateLook(int index, Program project)
         {
-            var costume = new Costume
+            var look = new Look
              {
                  FileName = "FileName" + index,
                  Name = "Look" + index,
              };
 
-            var absoluteFileName = Path.Combine(project.BasePath, StorageConstants.ProgramImagesPath, costume.FileName);
+            var absoluteFileName = Path.Combine(project.BasePath, StorageConstants.ProgramLooksPath, look.FileName);
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -227,7 +227,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
                 fileStream.Close();
             }
 
-            return costume;
+            return look;
         }
 
         private Sound GenerateSound(int index, Program project)

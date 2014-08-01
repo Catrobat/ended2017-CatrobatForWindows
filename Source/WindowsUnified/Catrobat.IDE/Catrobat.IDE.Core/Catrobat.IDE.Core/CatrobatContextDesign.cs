@@ -54,7 +54,7 @@ namespace Catrobat.IDE.Core
 
         private void InitCurrentProject()
         {
-            var catCostume = new Costume {Name = "Cat"};
+            var catLook = new Look {Name = "Cat"};
             CurrentProject = new Program
             {
                 Name = "Project 1 with very very very very very long name",
@@ -73,7 +73,7 @@ namespace Catrobat.IDE.Core
                     new Sprite
                     {
                         Name = "Object 1",
-                        Costumes = new ObservableCollection<Costume> {catCostume},
+                        Looks = new ObservableCollection<Look> {catLook},
                         Sounds = new ObservableCollection<Sound> {new Sound {Name = "Miau Sound"}},
                         LocalVariables = new ObservableCollection<LocalVariable>
                         {
@@ -86,9 +86,9 @@ namespace Catrobat.IDE.Core
                             {
                                 Bricks = new ObservableCollection<Brick>
                                 {
-                                    new SetCostumeBrick
+                                    new SetLookBrick
                                     {
-                                        Value = catCostume,
+                                        Value = catLook,
                                     }
                                 }
                             }

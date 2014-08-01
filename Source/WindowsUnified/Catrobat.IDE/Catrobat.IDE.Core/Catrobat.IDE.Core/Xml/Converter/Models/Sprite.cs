@@ -22,9 +22,9 @@ namespace Catrobat.IDE.Core.Models
             }
             if (pointerOnly) return result;
 
-            result.Costumes = new XmlCostumeList
+            result.Looks = new XmlLookList
             {
-                Costumes = context.Costumes == null ? new List<XmlCostume>() : context.Costumes.Values.ToList()
+                Looks = context.Looks == null ? new List<XmlLook>() : context.Looks.Values.ToList()
             };
             result.Sounds = new XmlSoundList
             {

@@ -9,8 +9,7 @@
   DataContext="{Binding UploadProgramLoadingViewModel, Source={StaticResource Locator}}">
 
   <Grid x:Name="LayoutRoot" 
-        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+        Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition />
@@ -30,8 +29,7 @@
                    TextWrapping="Wrap" 
                    Text="{Binding Resources.Main_UploadProjectLoadingMessage, 
                    Source={StaticResource LocalizedStrings}}"              
-                   Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, 
-                   Source={StaticResource ThemeChooser}}"/>
+                   Style="{ThemeResource TextNormalStyle}"/>
       </StackPanel>
     </Grid>
   </Grid>

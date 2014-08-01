@@ -19,22 +19,22 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE
         }
 
         [TestMethod, TestCategory("GatedTests.Obsolete")]
-        public async Task CloneSprite_UpdateCostumeTest()
+        public async Task CloneSprite_UpdateLookTest()
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.Sprites[0];
             var newSprite = await oldSprite.CloneAsync(project);
 
-            var oldCostume = oldSprite.Costumes[0];
-            var newCostume = newSprite.Costumes[0];
+            var oldLook = oldSprite.Looks[0];
+            var newLook = newSprite.Looks[0];
 
-            var oldCostumeBrick = oldSprite.Scripts[0].Bricks[0] as SetCostumeBrick;
-            var newCostumeBrick = newSprite.Scripts[0].Bricks[0] as SetCostumeBrick;
-            Assert.IsNotNull(oldCostumeBrick);
-            Assert.IsNotNull(newCostumeBrick);
-            Assert.AreNotEqual(oldCostumeBrick.Value, newCostumeBrick.Value);
-            Assert.AreEqual(oldCostume, oldCostumeBrick.Value);
-            Assert.AreEqual(newCostume, newCostumeBrick.Value);
+            var oldLookBrick = oldSprite.Scripts[0].Bricks[0] as SetLookBrick;
+            var newLookBrick = newSprite.Scripts[0].Bricks[0] as SetLookBrick;
+            Assert.IsNotNull(oldLookBrick);
+            Assert.IsNotNull(newLookBrick);
+            Assert.AreNotEqual(oldLookBrick.Value, newLookBrick.Value);
+            Assert.AreEqual(oldLook, oldLookBrick.Value);
+            Assert.AreEqual(newLook, newLookBrick.Value);
         }
 
         [TestMethod, TestCategory("GatedTests.Obsolete")]

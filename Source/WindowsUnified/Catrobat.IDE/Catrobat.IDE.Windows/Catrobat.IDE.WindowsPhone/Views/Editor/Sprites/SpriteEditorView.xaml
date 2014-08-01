@@ -17,13 +17,12 @@
       <Grid Height="90">
         <Button BorderThickness="0" Padding="0 -10 0 -10"
           Height="90" Margin="0 1 0 1" RequestedTheme="Dark"
-          Command="{Binding SpriteEditorViewModel.EditCostumeCommand, 
+          Command="{Binding SpriteEditorViewModel.EditLookCommand, 
           Source={StaticResource Locator}}" CommandParameter="{Binding}">
           <Grid Margin="5 5 5 5" Height="90" Width="400" RequestedTheme="Dark"
-            Background="{Binding StaticTheme.CostumesBrush.NativeBrush, 
-            Source={StaticResource ThemeChooser}}"
+            Background="{ThemeResource LooksBrush}"
             DataContext="{Binding}"
-            d:DataContext="{d:DesignInstance models:Costume}">
+            d:DataContext="{d:DesignInstance models:Look}">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="1*" />
               <ColumnDefinition Width="3*" />
@@ -54,8 +53,7 @@
           Command="{Binding SpriteEditorViewModel.EditSoundCommand, 
           Source={StaticResource Locator}}" CommandParameter="{Binding}">
           <Grid Margin="5 5 5 5" Height="80" Width="400" RequestedTheme="Dark"
-            Background="{Binding StaticTheme.SoundsBrush.NativeBrush, 
-            Source={StaticResource ThemeChooser}}"
+            Background="{ThemeResource SoundsBrush}"
             DataContext="{Binding}"
             d:DataContext="{d:DesignInstance models:Sound}">
             <Grid.ColumnDefinitions>
@@ -96,17 +94,17 @@
           NewCommand="{Binding AddNewScriptBrickCommand}"
           NumberOfSelectedItems="{Binding SelectedActions.Count}"/>
         <controls:EditorAppBar
-          Visibility="{Binding IsVisibleCostumes, 
+          Visibility="{Binding IsVisibleLooks, 
           Converter={StaticResource BoolVisibilityConverter}}"
           VerticalAlignment="Bottom"
-          TargetType="Costume"
-          ClearSelectionCommand="{Binding ClearCostumesSelectionCommand}"
-          CopyCommand="{Binding CopyCostumeCommand}"
-          DeleteCommand="{Binding DeleteCostumeCommand}"
-          EditCommand="{Binding EditCostumeCommand}"
+          TargetType="Look"
+          ClearSelectionCommand="{Binding ClearLooksSelectionCommand}"
+          CopyCommand="{Binding CopyLookCommand}"
+          DeleteCommand="{Binding DeleteLookCommand}"
+          EditCommand="{Binding EditLookCommand}"
           PlayCommand="{Binding StartPlayerCommand}"
-          NewCommand="{Binding AddNewCostumeCommand}"
-          NumberOfSelectedItems="{Binding SelectedCostumes.Count}"/>
+          NewCommand="{Binding AddNewLookCommand}"
+          NumberOfSelectedItems="{Binding SelectedLooks.Count}"/>
         <controls:EditorAppBar
           Visibility="{Binding IsVisibleSounds, 
           Converter={StaticResource BoolVisibilityConverter}}"
@@ -122,8 +120,7 @@
     </Grid>-->
   </Page.Resources>
 
-  <Grid Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+  <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition/>
@@ -161,8 +158,7 @@
             Source={StaticResource LocalizedStrings}}"
             Visibility="{Binding IsScirptBricksEmpty, 
             Converter={StaticResource BoolVisibilityConverter}}"
-            Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-            Source={StaticResource ThemeChooser}}"
+            Style="{ThemeResource TextNormalStyle}"
             TextWrapping="Wrap"
             TextAlignment="Center"
             VerticalAlignment="Center"
@@ -171,22 +167,21 @@
       </PivotItem>
 
       <PivotItem Name="PivotLooks" Margin="10 -15 0 0"
-          Header="{Binding Resources.Editor_PivotCostumes, 
+          Header="{Binding Resources.Editor_PivotLooks, 
           Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
           <listsViewControls:BindableListView Name="ListViewLooks"
-              ItemsSource="{Binding Costumes}"
-              BindableSelectedItems="{Binding SelectedCostumes, Mode=TwoWay}"
+              ItemsSource="{Binding Looks}"
+              BindableSelectedItems="{Binding SelectedLooks, Mode=TwoWay}"
               ItemTemplate="{StaticResource LookItemTemplate}"
               CanReorderItems="True" AllowDrop="True" SelectionMode="None"
               />
           <TextBlock
-            Text ="{Binding Resources.Editor_ClickPlusToAddCostume, 
+            Text ="{Binding Resources.Editor_ClickPlusToAddLook, 
             Source={StaticResource LocalizedStrings}}"
-            Visibility="{Binding IsCostumesEmpty, 
+            Visibility="{Binding IsLooksEmpty, 
             Converter={StaticResource BoolVisibilityConverter}}"
-            Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-            Source={StaticResource ThemeChooser}}"
+            Style="{ThemeResource TextNormalStyle}"
             TextWrapping="Wrap"
             TextAlignment="Center"
             VerticalAlignment="Center"
@@ -207,7 +202,7 @@
           <TextBlock
               Text ="{Binding Resources.Editor_ClickPlusToAddSound, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsSoundsEmpty, Converter={StaticResource BoolVisibilityConverter}}"
-              Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"
+              Style="{ThemeResource TextNormalStyle}"
               TextWrapping="Wrap"
               TextAlignment="Center"
               VerticalAlignment="Center"
@@ -216,24 +211,25 @@
       </PivotItem>
     </Pivot>
 
-    <Grid Grid.Row="0" Margin="10 0 10 10">
+    <Grid Grid.Row="0" Margin="12 0 12 12">
       <Grid.ColumnDefinitions>
         <ColumnDefinition />
         <ColumnDefinition Width="Auto" />
       </Grid.ColumnDefinitions>
       <TextBlock Text="{Binding SelectedSprite.Name}"
+        Margin="0 6 0 0"
         Grid.Column="0"
-        Style="{Binding StaticTheme.TextTitle1Style.NativeStyle, 
-        Source={StaticResource ThemeChooser}}" />
-      <HyperlinkButton Grid.Column="1" Margin="0 0 10 0"
+        Style="{ThemeResource TextTitleNormalStyle}"/>
+      <HyperlinkButton Grid.Column="1"
         HorizontalAlignment="Right"
         Content="{Binding Resources.Editor_Rename, 
         Source={StaticResource LocalizedStrings}}"
-        Command="{Binding RenameSpriteCommand}"/>
+        Command="{Binding RenameSpriteCommand}"
+        FontSize="22"/>
     </Grid>
   </Grid>
 
-  <Page.BottomAppBar>
+  <!--<Page.BottomAppBar>-->
     <!--<controls:MultiModeEditorCommandBar x:Key="AppBarActions" RequestedTheme="Dark"
       ModeChanged="MultiModeEditorCommandBar_OnModeChanged"
       TargetType="Action"
@@ -258,5 +254,5 @@
       DeleteCommand="{Binding DeleteSoundBrickCommand}"
       PlayCommand="{Binding StartPlayerCommand}" />-->
 
-  </Page.BottomAppBar>
+  <!--</Page.BottomAppBar>-->
 </views:ViewPageBase>

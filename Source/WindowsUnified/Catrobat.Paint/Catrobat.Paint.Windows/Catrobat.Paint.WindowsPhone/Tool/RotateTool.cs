@@ -7,6 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 // using Catrobat.Paint.Phone.Command;
 using System.Windows;
+using Windows.Graphics.Display;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
 namespace Catrobat.Paint.Phone.Tool

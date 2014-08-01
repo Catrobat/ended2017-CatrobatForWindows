@@ -24,9 +24,9 @@ namespace Catrobat.IDE.Core.UI
 
         if (_sourceCollection != null)
         {
-          if (_sourceCollection is IList<Costume>)
+          if (_sourceCollection is IList<Look>)
           {
-            NullObject = new Costume { Name = AppResources.Editor_NoCostumeSelected };
+            NullObject = new Look { Name = AppResources.Editor_NoLookSelected };
           }
 
           if (_sourceCollection is IList<Sound>)

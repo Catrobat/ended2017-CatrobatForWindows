@@ -15,7 +15,7 @@ using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModels;
-using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModels.Editor.Looks;
 using Catrobat.IDE.WindowsShared.Content.Images.Misc;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -175,7 +175,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             if (fileArray.Length == 0)
             {
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                    ServiceLocator.NavigationService.NavigateTo<NewCostumeSourceSelectionViewModel>());
+                    ServiceLocator.NavigationService.NavigateTo<NewLookSourceSelectionViewModel>());
             }
 
             var file = (StorageFile)fileArray[0];
@@ -201,10 +201,10 @@ namespace Catrobat.IDE.WindowsShared.Services
             if (portableImage != null)
             {
                 var message = new GenericMessage<PortableImage>(portableImage);
-                Messenger.Default.Send(message, ViewModelMessagingToken.CostumeImageListener);
+                Messenger.Default.Send(message, ViewModelMessagingToken.LookImageListener);
 
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                    ServiceLocator.NavigationService.NavigateTo<CostumeNameChooserViewModel>());
+                    ServiceLocator.NavigationService.NavigateTo<LookNameChooserViewModel>());
             }
             else
             {

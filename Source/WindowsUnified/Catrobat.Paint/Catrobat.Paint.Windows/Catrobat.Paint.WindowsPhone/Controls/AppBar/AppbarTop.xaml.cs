@@ -43,7 +43,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                 btnMoveScreen.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreen_OnClick;
 
                 btnUndo.IsEnabled = false;
-                btnRedo.IsEnabled = false;
+                btnRedo.IsEnabled = false;              
+                
             }
         }
         private void ColorChangedHere(SolidColorBrush color)

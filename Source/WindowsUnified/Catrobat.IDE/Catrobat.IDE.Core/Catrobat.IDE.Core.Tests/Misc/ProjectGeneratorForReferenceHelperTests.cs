@@ -34,9 +34,9 @@ namespace Catrobat.IDE.Core.Tests.Misc
 
         private void AddSprites(Program project)
         {
-            var looks1 = new ObservableCollection<Costume>
+            var looks1 = new ObservableCollection<Look>
             {
-                new Costume{ Name="background", FileName = "5A71C6F41035979503BA294F78A09336_background" }
+                new Look{ Name="background", FileName = "5A71C6F41035979503BA294F78A09336_background" }
             };
 
             var sounds1 = new ObservableCollection<Sound>
@@ -46,11 +46,11 @@ namespace Catrobat.IDE.Core.Tests.Misc
 
 
 
-            var looks2 = new ObservableCollection<Costume>
+            var looks2 = new ObservableCollection<Look>
             {
-                new Costume{ Name="normalCat", FileName = "34A109A82231694B6FE09C216B390570_normalCat" },
-                new Costume{ Name="banzaiCat", FileName = "395CD6389BD601812BDB299934A0CCB4_banzaiCat" },
-                new Costume{ Name="cheshireCat", FileName = "B4497E87AC34B1329DD9B14C08EEAFF0_cheshireCat" }
+                new Look{ Name="normalCat", FileName = "34A109A82231694B6FE09C216B390570_normalCat" },
+                new Look{ Name="banzaiCat", FileName = "395CD6389BD601812BDB299934A0CCB4_banzaiCat" },
+                new Look{ Name="cheshireCat", FileName = "B4497E87AC34B1329DD9B14C08EEAFF0_cheshireCat" }
             };
 
             var sounds2 = new ObservableCollection<Sound>
@@ -65,7 +65,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
                 {
                     Bricks = new ObservableCollection<Brick>
                     {
-                        new SetCostumeBrick {Value = looks1[0]},
+                        new SetLookBrick {Value = looks1[0]},
                         new SetVariableBrick(), // TODO
                         new IfBrick(),
                         new IfBrick(),
@@ -101,7 +101,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
                 {
                     Bricks = new ObservableCollection<Brick>
                     {
-                        new SetCostumeBrick {Value = looks2[0]},
+                        new SetLookBrick {Value = looks2[0]},
                         new PlaySoundBrick {Value = sounds2[0]},
                         new LookAtBrick(),
                         new ForeverBrick(),
@@ -123,7 +123,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
             {
                 Scripts = scripts1,
                 Sounds = sounds1,
-                Costumes = looks1,
+                Looks = looks1,
                 LocalVariables = new ObservableCollection<LocalVariable>
                 {
                     new LocalVariable {Name = "Variable1"},
@@ -134,7 +134,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
             {
                 Scripts = scripts2,
                 Sounds = sounds2,
-                Costumes = looks2,
+                Looks = looks2,
                 LocalVariables = new ObservableCollection<LocalVariable>
                 {
                     new LocalVariable {Name = "Variable1"},

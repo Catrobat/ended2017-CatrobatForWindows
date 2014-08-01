@@ -172,9 +172,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private void CancelAction()
         {
-            ResetViewModel();
-            ServiceLocator.NavigationService.NavigateTo<ProgramDetailViewModel>();
-            ServiceLocator.NavigationService.RemoveBackEntry();
+            GoBackAction();
         } 
 
         protected override void GoBackAction()
@@ -194,16 +192,16 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
-            if (CurrentProject != null)
-            {
-                ProjectName = CurrentProject.Name;
-                ProjectDescription = CurrentProject.Description;
-            }
-            else
-            {
-                ProjectName = "";
-                ProjectDescription = "";
-            }
+            //if (CurrentProject != null)
+            //{
+            //    ProjectName = CurrentProject.Name;
+            //    ProjectDescription = CurrentProject.Description;
+            //}
+            //else
+            //{
+            //    ProjectName = "";
+            //    ProjectDescription = "";
+            //}
         }
 
         #endregion

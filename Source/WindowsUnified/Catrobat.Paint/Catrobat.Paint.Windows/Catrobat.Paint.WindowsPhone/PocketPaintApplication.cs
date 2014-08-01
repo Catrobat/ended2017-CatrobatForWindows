@@ -37,6 +37,8 @@ namespace Catrobat.Paint.Phone
         // TODO: public Catrobat.Paint.Phone.Controls.AppBar.ApplicationBarTop ApplicationBarTop { get; set; }
         public Grid PaintingAreaContentPanelGrid { get; set; }
 
+        public Grid MainGrid { get; set; }
+
         public WriteableBitmap Bitmap { get; private set; }
 
         private readonly PaintData _paintData = new PaintData();

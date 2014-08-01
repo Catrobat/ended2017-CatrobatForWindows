@@ -43,7 +43,7 @@ namespace Catrobat.IDE.Core.Xml.Converter
             XmlUserVariable, Variable,
             XmlUserVariable, LocalVariable,
             XmlUserVariable, GlobalVariable,
-            XmlCostume, Costume, 
+            XmlLook, Look, 
             XmlSound, Sound,
             XmlSprite, Sprite,
             XmlScript, Script,
@@ -67,10 +67,10 @@ namespace Catrobat.IDE.Core.Xml.Converter
             internal ConvertContext(
                 ConvertContextBase contextBase,
                 XmlSprite sprite,
-                IReadOnlyDictionary<XmlCostume, Costume> costumes,
+                IReadOnlyDictionary<XmlLook, Look> looks,
                 IReadOnlyDictionary<XmlSound, Sound> sounds,
                 IReadOnlyDictionary<XmlUserVariable, LocalVariable> localVariables)
-                : base(contextBase, sprite, costumes, sounds, localVariables)
+                : base(contextBase, sprite, looks, sounds, localVariables)
             {
                 _formulaConverter = new XmlFormulaConverter(LocalVariables.Values, GlobalVariables.Values);
             }
@@ -103,7 +103,7 @@ namespace Catrobat.IDE.Core.Xml.Converter
             Variable, XmlUserVariable,
             LocalVariable, XmlUserVariable,
             GlobalVariable, XmlUserVariable,
-            Costume, XmlCostume, 
+            Look, XmlLook, 
             Sound, XmlSound, 
             Sprite, XmlSprite, 
             Script, XmlScript,
@@ -123,10 +123,10 @@ namespace Catrobat.IDE.Core.Xml.Converter
             internal ConvertBackContext(
                 ConvertBackContextBase contextBase,
                 Sprite sprite,
-                IReadOnlyDictionary<Costume, XmlCostume> costumes, 
+                IReadOnlyDictionary<Look, XmlLook> looks, 
                 IReadOnlyDictionary<Sound, XmlSound> sounds, 
                 IReadOnlyDictionary<LocalVariable, XmlUserVariable> localVariables)
-                : base(contextBase, sprite, costumes, sounds, localVariables)
+                : base(contextBase, sprite, looks, sounds, localVariables)
             {
                 _formulaConverter = new XmlFormulaConverter();
             }
@@ -199,7 +199,7 @@ namespace Catrobat.IDE.Core.Xml.Converter
             TSourceVariable, TTargetVariable,
             TSourceLocalVariable, TTargetLocalVariable,
             TSourceGlobalVariable, TTargetGlobalVariable,
-            TSourceCostume, TTargetCostume,
+            TSourceLook, TTargetLook,
             TSourceSound, TTargetSound,
             TSourceSprite, TTargetSprite,
             TSourceScript, TTargetScript,
@@ -245,10 +245,10 @@ namespace Catrobat.IDE.Core.Xml.Converter
                 get { return _variables; }
             }
 
-            private readonly IReadOnlyDictionary<TSourceCostume, TTargetCostume> _costumes;
-            public IReadOnlyDictionary<TSourceCostume, TTargetCostume> Costumes
+            private readonly IReadOnlyDictionary<TSourceLook, TTargetLook> _looks;
+            public IReadOnlyDictionary<TSourceLook, TTargetLook> Looks
             {
-                get { return _costumes; }
+                get { return _looks; }
             }
 
             private readonly IReadOnlyDictionary<TSourceSound, TTargetSound> _sounds;
@@ -277,13 +277,13 @@ namespace Catrobat.IDE.Core.Xml.Converter
             internal Context(
                 TBaseContext baseContext,
                 TSourceSprite sprite,
-                IReadOnlyDictionary<TSourceCostume, TTargetCostume> costumes,
+                IReadOnlyDictionary<TSourceLook, TTargetLook> looks,
                 IReadOnlyDictionary<TSourceSound, TTargetSound> sounds,
                 IReadOnlyDictionary<TSourceLocalVariable, TTargetLocalVariable> localVariables)
             {
                 BaseContext = baseContext;
                 _sprite = sprite;
-                _costumes = costumes;
+                _looks = looks;
                 _sounds = sounds;
                 _localVariables = localVariables;
                 var variables = new Dictionary<TSourceVariable, TTargetVariable>();

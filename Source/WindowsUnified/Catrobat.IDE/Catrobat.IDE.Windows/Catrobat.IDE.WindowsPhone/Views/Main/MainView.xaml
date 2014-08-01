@@ -86,15 +86,15 @@
                 <ListView.ItemTemplate>
                   <DataTemplate>
                     <Grid Margin="0 6 0 6"  
-                      Background="#FF99AACC"
+                      Background="{ThemeResource OnlineProjectsBackgroundBrush}"
                       DataContext="{Binding}">
                       <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition/>
+                        <RowDefinition />
                       </Grid.RowDefinitions>
                       <TextBlock Grid.Row="0" Margin="12 0 6 0"
                         Text="{Binding ProjectName}"
-                        FontSize="32"
+                        Style="{ThemeResource TextTitleLargeStyle}"
                         Foreground="White"/>
                       <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -110,17 +110,19 @@
                         <StackPanel Grid.Column="1" Margin="12 0 6 0" 
                            Visibility="{Binding Description, 
                            Converter={StaticResource StringVisibilityConverter}}">
-                           <TextBlock Text="{Binding Resources.Main_ProjectNoDescription, 
+                          <TextBlock Text="{Binding Resources.Main_ProjectNoDescription, 
                                       Source={StaticResource LocalizedStrings}}" 
                                       TextTrimming="WordEllipsis" TextWrapping="Wrap"
                                       Style="{ ThemeResource TextSubtileStyle }" 
                                       Foreground="#FFEEEEEE"/>
                         </StackPanel>
-                        <TextBlock Grid.Column="1" Margin="12 0 6 0" 
+                        <TextBlock Grid.Column="1" Margin="12 0 6 6" 
                           Text="{Binding Description}"
                           TextTrimming="WordEllipsis" TextWrapping="Wrap"
                           Style="{ ThemeResource TextSubtileStyle }" 
-                          Foreground="#FFEEEEEE"/>
+                          Foreground="#FFEEEEEE"
+                          MaxHeight="200"
+                          VerticalAlignment="Top"/>
                       </Grid>
                     </Grid>
                   </DataTemplate>
@@ -133,18 +135,16 @@
                 </ListView.ItemContainerStyle>
                 <ListView.Footer>
                   <Grid Margin="0 6 0 6" Height="35" 
-                    Background="#FF667799"
+                    Background="{ThemeResource ProcessIconBackgroundBrush}"
                     Visibility="{Binding OnlineProjects, 
-                    Converter={StaticResource NullVisibilityConverter}}"
-                    >
+                    Converter={StaticResource NullVisibilityConverter}}">
                     <StackPanel Orientation="Horizontal" 
                       VerticalAlignment="Center" 
                       HorizontalAlignment="Center"
                       Visibility="{Binding OnlineProjects.IsLoading, 
                       Converter={StaticResource BoolVisibilityConverter}}">
                       <!--Opacity="{Binding OnlineProjects.IsLoading, 
-                      Converter={StaticResource BoolOpacityConverter}}"-->
-                    
+                      Converter={StaticResource BoolOpacityConverter}}"-->                
                       <controls:ProcessIcon Margin="0 0 6 0" 
                         IsProcessing="{Binding OnlineProjects.IsLoading}" />
                       <TextBlock Foreground="White"
@@ -188,11 +188,12 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
               </Grid.RowDefinitions>
-              <TextBlock FontSize="20" Margin="0 0 0 0" 
+              <TextBlock 
+                Style="{ThemeResource TextNormalStyle}"
+                Margin="0 0 0 0" 
                 TextWrapping="Wrap" TextAlignment="Justify"
                 Text="{Binding Resources.Main_AboutText, 
-                Source={StaticResource LocalizedStrings}}" 
-                />
+                Source={StaticResource LocalizedStrings}}"/>
               <HyperlinkButton Grid.Row="2" FontSize="20"
                 Content="{Binding Resources.Main_AboutLicense, 
                 Source={StaticResource LocalizedStrings}}" 
@@ -238,11 +239,12 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
               </Grid.RowDefinitions>
-              <TextBlock FontSize="20" Margin="0 0 0 0" 
+              <TextBlock 
+                Style="{ThemeResource TextNormalStyle}"
+                Margin="0 0 0 0" 
                 TextWrapping="Wrap" TextAlignment="Justify"
                 Text="{Binding Resources.Main_TermsOfUseText, 
-                Source={StaticResource LocalizedStrings}}" 
-                />
+                Source={StaticResource LocalizedStrings}}"/>
               <HyperlinkButton Grid.Row="2" FontSize="20"
                 Content="{Binding Resources.Main_TermsOfUse, 
                 Source={StaticResource LocalizedStrings}}" 

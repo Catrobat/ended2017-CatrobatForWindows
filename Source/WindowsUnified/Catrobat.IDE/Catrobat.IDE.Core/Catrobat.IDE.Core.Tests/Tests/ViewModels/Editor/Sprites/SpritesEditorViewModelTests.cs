@@ -6,7 +6,7 @@ using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
-using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModels.Editor.Looks;
 using Catrobat.IDE.Core.Models;
 
 namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
@@ -116,10 +116,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
         }
 
         [TestMethod/*, TestCategory("GatedTests")*/]
-        public void AddNewCostumeActionTest()
+        public void AddNewLookActionTest()
         {
             if (_selectedSprite != null)
-                _selectedSprite.Name = "AddNewCostumeActionTest";
+                _selectedSprite.Name = "AddNewLookActionTest";
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                  ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
@@ -133,30 +133,30 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             {
                 SelectedSprite = new Sprite { Name = "TestSpriteName" }
             };
-            viewModel.AddNewCostumeCommand.Execute(null);
+            viewModel.AddNewLookCommand.Execute(null);
 
             Assert.AreEqual("TestSpriteName", _selectedSprite.Name);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
-            Assert.AreEqual(typeof(NewCostumeSourceSelectionViewModel), navigationService.CurrentView);
+            Assert.AreEqual(typeof(NewLookSourceSelectionViewModel), navigationService.CurrentView);
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
         [TestMethod/*, TestCategory("GatedTests")*/]
-        public void EditCostumeActionTest()
+        public void EditLookActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
         [TestMethod/*, TestCategory("GatedTests")*/]
-        public void CopyCostumeActionTest()
+        public void CopyLookActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
         [TestMethod/*, TestCategory("GatedTests")*/]
-        public void DeleteCostumeActionTest()
+        public void DeleteLookActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
@@ -187,16 +187,16 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void ClearCostumesSelectionActionTest()
+        public void ClearLooksSelectionActionTest()
         {
             var viewModel = new SpriteEditorViewModel
             {
                 SelectedSprite = new Sprite { Name = "TestSpriteName" }
             };
-            var costume = new Costume();
-            viewModel.SelectedCostumes.Add(costume);
-            viewModel.ClearCostumesSelectionCommand.Execute(null);
-            Assert.AreEqual(0, viewModel.SelectedCostumes.Count);
+            var look = new Look();
+            viewModel.SelectedLooks.Add(look);
+            viewModel.ClearLooksSelectionCommand.Execute(null);
+            Assert.AreEqual(0, viewModel.SelectedLooks.Count);
         }
 
         [TestMethod, TestCategory("GatedTests")]

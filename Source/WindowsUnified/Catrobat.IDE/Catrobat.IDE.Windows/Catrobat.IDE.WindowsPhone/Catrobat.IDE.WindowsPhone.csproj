@@ -148,17 +148,17 @@
     </Compile>
     <Compile Include="Navigation\NavigationObjectPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Editor\Costumes\ChangeCostumeView.xaml.cs">
-      <DependentUpon>ChangeCostumeView.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Looks\ChangeLookView.xaml.cs">
+      <DependentUpon>ChangeLookView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Costumes\CostumeNameChooserView.xaml.cs">
-      <DependentUpon>CostumeNameChooserView.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Looks\LookNameChooserView.xaml.cs">
+      <DependentUpon>LookNameChooserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Costumes\CostumeSavingView.xaml.cs">
-      <DependentUpon>CostumeSavingView.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Looks\LookSavingView.xaml.cs">
+      <DependentUpon>LookSavingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml.cs">
-      <DependentUpon>NewCostumeSourceSelectionView.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Looks\NewLookSourceSelectionView.xaml.cs">
+      <DependentUpon>NewLookSourceSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Formula\AddNewGlobalVariableView.xaml.cs">
       <DependentUpon>AddNewGlobalVariableView.xaml</DependentUpon>
@@ -345,19 +345,19 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\Editor\Costumes\ChangeCostumeView.xaml">
+    <Page Include="Views\Editor\Looks\ChangeLookView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Costumes\CostumeNameChooserView.xaml">
+    <Page Include="Views\Editor\Looks\LookNameChooserView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Costumes\CostumeSavingView.xaml">
+    <Page Include="Views\Editor\Looks\LookSavingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml">
+    <Page Include="Views\Editor\Looks\NewLookSourceSelectionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

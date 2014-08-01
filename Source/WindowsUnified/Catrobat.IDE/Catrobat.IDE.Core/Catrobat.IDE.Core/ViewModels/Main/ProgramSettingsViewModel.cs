@@ -146,16 +146,16 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
-            if (CurrentProject != null)
-            {
-                ProjectName = CurrentProject.Name;
-                ProjectDescription = CurrentProject.Description;  
-            }
-            else
-            {
-                ProjectName = "";
-                ProjectDescription = ""; 
-            }
+            //if (CurrentProject != null)
+            //{
+            //    ProjectName = CurrentProject.Name;
+            //    ProjectDescription = CurrentProject.Description;  
+            //}
+            //else
+            //{
+            //    ProjectName = "";
+            //    ProjectDescription = ""; 
+            //}
         }
 
         private async void CurrentProjectHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)

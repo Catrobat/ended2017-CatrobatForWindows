@@ -33,38 +33,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             { 
                 _currentProject = value;
 
-                if (_currentProject != null)
-                {
-                    Sprites.CollectionChanged -= SpritesCollectionChanged;
-                    Sprites.CollectionChanged += SpritesCollectionChanged;
-                }
+                SelectedSprites = new ObservableCollection<Sprite>();
 
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
-                    RaisePropertyChanged(() => Sprites);
-                                    ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
+                    RaisePropertyChanged(() => CurrentProject);
                 });
-
-            }
-        }
-
-        public ObservableCollection<Sprite> Sprites
-        {
-            get
-            {
-                if (CurrentProject == null) return null; 
-
-                return CurrentProject.Sprites;
-            }
-        }
-
-        public bool IsSpritesEmpty
-        {
-            get
-            {
-                if (Sprites == null)
-                    return true;
-                return Sprites.Count <= 0;
             }
         }
 
@@ -228,12 +202,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
             foreach (var sprite in spritesToCopy)
             {
-                var originalIndex = Sprites.IndexOf(sprite);
+                var originalIndex = CurrentProject.Sprites.IndexOf(sprite);
 
                 var newSprite = await sprite.CloneAsync(CurrentProject);
                 var newIndex = originalIndex + 1;
 
-                Sprites.Insert(newIndex, newSprite);
+                CurrentProject.Sprites.Insert(newIndex, newSprite);
             }
         }
 
@@ -297,7 +271,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 {
                     ReferenceHelper.CleanUpSpriteReferences(sprite, CurrentProject);
 
-                    Sprites.Remove(sprite);
+                    CurrentProject.Sprites.Remove(sprite);
                     sprite.Delete(CurrentProject);
                 }
             }
@@ -323,11 +297,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
-        }
-
-        private void SpritesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            RaisePropertyChanged(() => IsSpritesEmpty);
         }
     }
 }

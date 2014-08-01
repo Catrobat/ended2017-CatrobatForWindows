@@ -22,11 +22,11 @@ namespace Catrobat.IDE.Core.Models
             set { Set(ref _name, value); }
         }
 
-        private ObservableCollection<Costume> _costumes = new ObservableCollection<Costume>();
-        public ObservableCollection<Costume> Costumes
+        private ObservableCollection<Look> _looks = new ObservableCollection<Look>();
+        public ObservableCollection<Look> Looks
         {
-            get { return _costumes; }
-            set { Set(ref _costumes, value); }
+            get { return _looks; }
+            set { Set(ref _looks, value); }
         }
 
         private ObservableCollection<Sound> _sounds = new ObservableCollection<Sound>();
@@ -135,9 +135,9 @@ namespace Catrobat.IDE.Core.Models
 
         public async Task Delete(Program project)
         {
-            foreach (var costume in Costumes)
+            foreach (var look in Looks)
             {
-                await costume.Delete(project);
+                await look.Delete(project);
             }
             foreach (var sound in Sounds)
             {
@@ -154,7 +154,7 @@ namespace Catrobat.IDE.Core.Models
 
         protected bool TestEquals(Sprite other)
         {
-            return CollectionExtensions.TestEquals(_costumes, other._costumes) &&
+            return CollectionExtensions.TestEquals(_looks, other._looks) &&
                 CollectionExtensions.TestEquals(_localVariables, other._localVariables) && 
                 string.Equals(_name, other._name) &&
                 CollectionExtensions.TestEquals(_scripts, other._scripts) &&
@@ -167,20 +167,20 @@ namespace Catrobat.IDE.Core.Models
 
         async Task<object> IAsyncCloneable<Program>.CloneInstance(Program project)
         {
-            var costumes = Costumes == null ? null : await Costumes.ToReadOnlyDictionaryAsync(
-                keySelector: costume => costume, 
-                elementSelector: costume => costume.CloneAsync(project));
+            var looks = Looks == null ? null : await Looks.ToReadOnlyDictionaryAsync(
+                keySelector: look => look, 
+                elementSelector: look => look.CloneAsync(project));
             var sounds = Sounds == null ? null : await Sounds.ToReadOnlyDictionaryAsync(
                 keySelector: sound => sound,
                 elementSelector: sound => sound.CloneAsync(project));
             var localVariables = LocalVariables == null ? null : LocalVariables.ToReadOnlyDictionary(
                 keySelector: variable => variable,
                 elementSelector: variable => variable.Clone());
-            var context = new CloneSpriteContext(costumes, sounds, localVariables);
+            var context = new CloneSpriteContext(looks, sounds, localVariables);
             return new Sprite
             {
                 Name = Name,
-                Costumes = costumes == null ? null : costumes.Values.ToObservableCollection(),
+                Looks = looks == null ? null : looks.Values.ToObservableCollection(),
                 Sounds = sounds == null ? null : sounds.Values.ToObservableCollection(),
                 LocalVariables = localVariables == null ? null : localVariables.Values.ToObservableCollection(),
                 Scripts = Scripts.Select(script => script.Clone(context)).ToObservableCollection()

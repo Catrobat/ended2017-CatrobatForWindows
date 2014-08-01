@@ -46,9 +46,9 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
             _commandBarLooks = new MultiModeEditorCommandBar
             {
-                CopyCommand = _viewModel.CopyCostumeCommand,
-                DeleteCommand = _viewModel.DeleteCostumeCommand,
-                NewCommand = _viewModel.AddNewCostumeCommand,
+                CopyCommand = _viewModel.CopyLookCommand,
+                DeleteCommand = _viewModel.DeleteLookCommand,
+                NewCommand = _viewModel.AddNewLookCommand,
                 PlayCommand = _viewModel.StartPlayerCommand
             };
             _commandBarLooks.ModeChanged += MultiModeEditorCommandBar_OnModeChanged;

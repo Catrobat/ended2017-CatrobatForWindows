@@ -189,7 +189,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
                     break;
 
                 case AppBarTargetType.Look:
-                    TextBlockNumberOfSelectedItemsText.Text = usePlural ? AppResources.Editor_CostumePlural : AppResources.Editor_CostumeSingular;
+                    TextBlockNumberOfSelectedItemsText.Text = usePlural ? AppResources.Editor_LookPlural : AppResources.Editor_LookSingular;
                     break;
 
                 case AppBarTargetType.Sound:
@@ -213,7 +213,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
                     break;
 
                 case AppBarTargetType.Look:
-                    text = AppResources.Editor_ButtonAddCostume;
+                    text = AppResources.Editor_ButtonAddLook;
                     break;
 
                 case AppBarTargetType.Sound:

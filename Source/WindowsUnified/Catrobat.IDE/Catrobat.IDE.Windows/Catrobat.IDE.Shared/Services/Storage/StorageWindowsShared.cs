@@ -456,7 +456,13 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
 
         public async Task CreateThumbnailAsync(string filePath)
         {
-            var thumbnailPath = filePath + StorageConstants.ImageThumbnailExtension;
+            var withoutExtension = Path.GetFileNameWithoutExtension(filePath);
+            var imageBasePath = Path.GetDirectoryName(filePath);
+
+            var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}",
+                withoutExtension, StorageConstants.ImageThumbnailExtension));
+
+            //var thumbnailPath = filePath + StorageConstants.ImageThumbnailExtension;
 
             if (!await FileExistsAsync(thumbnailPath))
             {

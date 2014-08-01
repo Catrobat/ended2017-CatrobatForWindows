@@ -12,9 +12,7 @@
 
   <Page.Resources>
     <!--<system:String x:Key="TimeFormat">0.0</system:String>-->
-
-    <Storyboard x:Name="RecordingAnimation">
-      
+    <Storyboard x:Name="RecordingAnimation">   
       <DoubleAnimationUsingKeyFrames BeginTime="0:0:0"
           Storyboard.TargetProperty="UIElement.Opacity"
           Storyboard.TargetName="RecordingStatusElement"
@@ -30,23 +28,24 @@
   </Page.Resources>
 
   <Grid x:Name="LayoutRoot" 
-        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+          Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0"  />
-    </StackPanel>
-    <StackPanel Grid.Row="0" Margin="12,17,0,28">
-      <TextBlock 
-        TextWrapping="Wrap" TextAlignment="Center" 
-        Text="{Binding Resources.Editor_TitleRecorder, 
-        Source={StaticResource LocalizedStrings}}" 
-        Name="Headline" Margin="9,-7,0,0" 
-        Style="{Binding StaticTheme.TextTitle1Style, 
-        Source={StaticResource ThemeChooser}}"/>
+    <StackPanel x:Name="TitlePanel" 
+                Grid.Row="0"
+                Margin="12">
+      <!--<TextBlock x:Name="ApplicationTitle" 
+                 Text="{Binding Resources.Main_TitleUploadProject, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Style="{ThemeResource TextNormalStyle}" 
+                 />-->
+      <TextBlock x:Name="PageTitle" 
+                 Text="{Binding Resources.Editor_TitleRecorder, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Margin="0 0 0 0" 
+                 Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
 
     <!--ContentPanel - place additional content here-->
@@ -87,7 +86,7 @@
                      Text="{Binding Resources.Editor_Recorded, Source={StaticResource LocalizedStrings}}" 
                      Margin="0 0 5 0" 
                      VerticalAlignment="Top" 
-                     Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"></TextBlock>
+                     Style="{ThemeResource TextNormalStyle}"></TextBlock>
           <Grid Grid.Column="2" Margin="0 0 0 0" VerticalAlignment="Top">
             <Grid.RowDefinitions>
               <RowDefinition/>
@@ -102,7 +101,8 @@
               HorizontalAlignment="Right" 
               TextAlignment="Right" 
               FontWeight="Bold" Foreground="YellowGreen" 
-              Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"></TextBlock>
+              Style="{ThemeResource TextNormalStyle}">
+            </TextBlock>
             <TextBlock Grid.Row="1" 
               Text="{Binding PlayingTime, Mode=OneWay, 
               Converter={StaticResource DoubleStringConverter}, 
@@ -112,8 +112,8 @@
               FontSize="30" FontFamily="Cordia New"  Margin="0 0 12 0" 
               VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Right"
               FontWeight="ExtraBlack" Foreground="DarkRed" 
-              Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-              Source={StaticResource ThemeChooser}}"></TextBlock>
+              Style="{ThemeResource TextNormalStyle}">
+            </TextBlock>
           </Grid>
 
           <TextBlock Grid.Column="3" 
@@ -123,7 +123,7 @@
             VerticalAlignment="Top" 
             TextWrapping="Wrap"
             TextAlignment="Center"
-            FontWeight="ExtraBlack" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
+            FontWeight="ExtraBlack" Style="{ThemeResource TextNormalStyle}"/>
           <!--<buttons:PlayPauseButton Grid.Column="4"
             State="{Binding IsPlaying, Mode=OneWay, 
             Converter={StaticResource BoolPlayButtonStateConverter}}" 
@@ -138,7 +138,7 @@
       <Grid Grid.Row="2">
         <Button Grid.Column="0" Width="220" Height="220" Name="ButtonRecord" 
                 Command="{Binding StartRecordingCommand}"
-                Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}">
+                Background="{ThemeResource Accent1Brush}">
           <Grid Width="170" Height="170" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
               <RowDefinition/>
@@ -157,7 +157,7 @@
                          Grid.Column="0" Fill="White" StrokeThickness="0" 
                          Width="40" Height="40" 
                          VerticalAlignment="Center" HorizontalAlignment="Center"/>
-              <TextBlock Grid.Column="1" Text="{Binding RecordButtonHeader, Mode=OneWay}" VerticalAlignment="Center"  HorizontalAlignment="Left" Style="{Binding StaticTheme.TextExtraLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"></TextBlock>
+              <TextBlock Grid.Column="1" Text="{Binding RecordButtonHeader, Mode=OneWay}" VerticalAlignment="Center"  HorizontalAlignment="Left" Style="{ThemeResource TextNormalStyle}"></TextBlock>
             </Grid>
             <Grid Row="1">
               <TextBlock Text="{Binding RecordButtonText, Mode=OneWay}" TextAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="25 6 25 0"></TextBlock>
@@ -168,7 +168,7 @@
     </Grid>
   </Grid>
   <Page.BottomAppBar>
-    <CommandBar RequestedTheme="Dark" Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
+    <CommandBar RequestedTheme="Dark" Background="{ThemeResource AppBarBackgroundBrush}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Save" 
                       Label="{Binding Resources.Editor_ButtonSave, 

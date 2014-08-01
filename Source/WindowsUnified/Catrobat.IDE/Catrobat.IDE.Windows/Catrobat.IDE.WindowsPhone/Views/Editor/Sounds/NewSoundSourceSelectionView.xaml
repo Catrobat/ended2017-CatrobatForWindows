@@ -10,25 +10,34 @@
   DataContext="{Binding NewSoundSourceSelectionViewModel, Source={StaticResource Locator}}">
 
   <Grid x:Name="LayoutRoot" 
-        Background="{Binding StaticTheme.ApplicationBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}">
+          Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
-    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleNewSound, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{Binding StaticTheme.TextNormalStyle.NativeStyle, Source={StaticResource ThemeChooser}}" />
+    <StackPanel x:Name="TitlePanel" 
+                Grid.Row="0"
+                Margin="12">
+      <!--<TextBlock x:Name="ApplicationTitle" 
+                 Text="{Binding Resources.Main_TitleUploadProject, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Style="{ThemeResource TextNormalStyle}" 
+                 />-->
+      <TextBlock x:Name="PageTitle" 
+                 Text="{Binding Resources.Editor_TitleNewSound, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Margin="0 0 0 0" 
+                 Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
 
-    <StackPanel Grid.Row="1" Margin="10 20 0 15">
+    <StackPanel Grid.Row="1" Margin="12">
       <Button Margin="0" Padding="0" BorderThickness="0"
               Command="{Binding AudioLibraryCommand}" RequestedTheme="Dark" >
         <Button.ContentTemplate>
           <DataTemplate>
             <Grid Margin="0" Height="140" Width="380"
-              Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, 
-              Source={StaticResource ThemeChooser}}" >
+              Background="{ThemeResource Accent1Brush}">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -39,7 +48,7 @@
                 Text="{Binding Resources.Editor_MediaLibrary, 
                 Source={StaticResource LocalizedStrings}}" 
                 Name="tbGallery" 
-                FontSize="40" />
+                Style="{ThemeResource TextExtraLargeStyle}" />
             </Grid>
           </DataTemplate>
         </Button.ContentTemplate>
@@ -50,7 +59,7 @@
         <Button.Template>
           <ControlTemplate>
             <Grid Background="{Binding Path=SelectedTheme.AccentColor2.NativeBrush, 
-                  Source={StaticResource ThemeChooser}}" 
+                   " 
                   HorizontalAlignment="Stretch" 
                   Height="140">
               <Grid.ColumnDefinitions>
@@ -65,7 +74,7 @@
                 Source={StaticResource LocalizedStrings}}"
                 FontSize="50"
                 Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-                Source={StaticResource ThemeChooser}}" />
+                 " />
             </Grid>
           </ControlTemplate>
         </Button.Template>

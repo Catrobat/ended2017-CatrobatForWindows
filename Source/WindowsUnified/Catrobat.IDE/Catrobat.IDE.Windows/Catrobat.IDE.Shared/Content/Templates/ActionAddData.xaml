@@ -112,8 +112,8 @@
   </ui:BrickCollection>
 
   <ui:BrickCollection x:Key="ActionsAddDataLook">
-    <bricks:SetCostumeBrick IsAttached="False"></bricks:SetCostumeBrick>
-    <bricks:NextCostumeBrick IsAttached="False"></bricks:NextCostumeBrick>
+    <bricks:SetLookBrick IsAttached="False"></bricks:SetLookBrick>
+    <bricks:NextLookBrick IsAttached="False"></bricks:NextLookBrick>
     
     <bricks:SetSizeBrick IsAttached="False">
       <bricks:SetSizeBrick.Percentage>

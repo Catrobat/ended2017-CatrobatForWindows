@@ -22,17 +22,17 @@ namespace Catrobat.Paint.Phone.Tool
 
         public override void HandleDown(object arg)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void HandleMove(object arg)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void HandleUp(object arg)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void Draw(object o)

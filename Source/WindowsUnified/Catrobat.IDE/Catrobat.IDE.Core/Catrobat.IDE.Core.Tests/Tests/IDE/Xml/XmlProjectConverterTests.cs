@@ -114,12 +114,12 @@
 //                    CollectionAssert.Contains(sprite.Sounds, sound);
 //                }
 
-//                var costumes = objects
-//                    .SelectMany(obj => obj.GetType().GetPropertiesValues<Costume>(obj))
-//                    .Where(costume => costume != null);
-//                foreach (var costume in costumes)
+//                var looks = objects
+//                    .SelectMany(obj => obj.GetType().GetPropertiesValues<Look>(obj))
+//                    .Where(look => look != null);
+//                foreach (var look in looks)
 //                {
-//                    CollectionAssert.Contains(sprite.Costumes, costume);
+//                    CollectionAssert.Contains(sprite.Looks, look);
 //                }
 //            }
 //        }

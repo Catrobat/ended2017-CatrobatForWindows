@@ -1,7 +1,7 @@
 ﻿using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Editor;
 using Catrobat.IDE.Core.ViewModels.Editor.Actions;
-using Catrobat.IDE.Core.ViewModels.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModels.Editor.Looks;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
 using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
@@ -39,7 +39,7 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<SettingsBrickViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SettingsLanguageViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SettingsThemeViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<ChangeCostumeViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<ChangeLookViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<NewSoundSourceSelectionViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<ChangeSoundViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SoundNameChooserViewModel>(TypeCreationMode.Normal);
@@ -63,10 +63,10 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<SpriteEditorViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<ShareProjectServiceSelectionViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<UploadToSkyDriveViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<NewCostumeSourceSelectionViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<CostumeSavingViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<NewLookSourceSelectionViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<LookSavingViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<EditorLoadingViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<CostumeNameChooserViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<LookNameChooserViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<ProgramDetailViewModel>(TypeCreationMode.Normal);
             }
 
@@ -233,22 +233,22 @@ namespace Catrobat.IDE.Core.ViewModels
         [SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public CostumeNameChooserViewModel CostumeNameChooserViewModel
+        public LookNameChooserViewModel LookNameChooserViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<CostumeNameChooserViewModel>();
+                return ServiceLocator.GetInstance<LookNameChooserViewModel>();
             }
         }
 
         [SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public ChangeCostumeViewModel ChangeCostumeViewModel
+        public ChangeLookViewModel ChangeLookViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<ChangeCostumeViewModel>();
+                return ServiceLocator.GetInstance<ChangeLookViewModel>();
             }
         }
 
@@ -498,22 +498,22 @@ namespace Catrobat.IDE.Core.ViewModels
         [SuppressMessage("Microsoft.Performance",
            "CA1822:MarkMembersAsStatic",
            Justification = "This non-static member is needed for data binding purposes.")]
-        public NewCostumeSourceSelectionViewModel NewCostumeSourceSelectionViewModel
+        public NewLookSourceSelectionViewModel NewLookSourceSelectionViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<NewCostumeSourceSelectionViewModel>();
+                return ServiceLocator.GetInstance<NewLookSourceSelectionViewModel>();
             }
         }
 
         [SuppressMessage("Microsoft.Performance",
            "CA1822:MarkMembersAsStatic",
            Justification = "This non-static member is needed for data binding purposes.")]
-        public CostumeSavingViewModel CostumeSavingViewModel
+        public LookSavingViewModel LookSavingViewModel
         {
             get
             {
-                return ServiceLocator.GetInstance<CostumeSavingViewModel>();
+                return ServiceLocator.GetInstance<LookSavingViewModel>();
             }
         }
 

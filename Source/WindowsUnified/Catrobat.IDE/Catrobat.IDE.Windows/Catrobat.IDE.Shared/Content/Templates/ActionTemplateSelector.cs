@@ -34,7 +34,7 @@ namespace Catrobat.IDE.WindowsPhone.IDE.Content.Templates
         public DataTemplate EndRepeatBrick { get; set; }
         public DataTemplate EndForeverBrick { get; set; }
         public DataTemplate MoveBrick { get; set; }
-        public DataTemplate NextCostumeBrick { get; set; }
+        public DataTemplate NextLookBrick { get; set; }
         public DataTemplate CommentBrick { get; set; }
         public DataTemplate SetNxtMotorSpeedBrick { get; set; }
         public DataTemplate StopNxtMotorBrick { get; set; }
@@ -46,7 +46,7 @@ namespace Catrobat.IDE.WindowsPhone.IDE.Content.Templates
         public DataTemplate LookAtBrick { get; set; }
         public DataTemplate RepeatBrick { get; set; }
         public DataTemplate SetBrightnessBrick { get; set; }
-        public DataTemplate SetCostumeBrick { get; set; }
+        public DataTemplate SetLookBrick { get; set; }
         public DataTemplate SetTransparencyBrick { get; set; }
         public DataTemplate SetSizeBrick { get; set; }
         public DataTemplate SetVolumeBrick { get; set; }
@@ -95,7 +95,7 @@ namespace Catrobat.IDE.WindowsPhone.IDE.Content.Templates
                 if (scriptBrick is EndForeverBrick) return EndForeverBrick;
                 if (scriptBrick is EndRepeatBrick) return EndRepeatBrick;
                 if (scriptBrick is MoveBrick) return MoveBrick;
-                if (scriptBrick is NextCostumeBrick) return NextCostumeBrick;
+                if (scriptBrick is NextLookBrick) return NextLookBrick;
                 if (scriptBrick is CommentBrick) return CommentBrick;
                 if (scriptBrick is SetNxtMotorSpeedBrick) return SetNxtMotorSpeedBrick;
                 if (scriptBrick is StopNxtMotorBrick) return StopNxtMotorBrick;
@@ -107,7 +107,7 @@ namespace Catrobat.IDE.WindowsPhone.IDE.Content.Templates
                 if (scriptBrick is LookAtBrick) return LookAtBrick;
                 if (scriptBrick is RepeatBrick) return RepeatBrick;
                 if (scriptBrick is SetBrightnessBrick) return SetBrightnessBrick;
-                if (scriptBrick is SetCostumeBrick) return SetCostumeBrick;
+                if (scriptBrick is SetLookBrick) return SetLookBrick;
                 if (scriptBrick is SetTransparencyBrick) return SetTransparencyBrick;
                 if (scriptBrick is SetSizeBrick) return SetSizeBrick;
                 if (scriptBrick is SetVolumeBrick) return SetVolumeBrick;

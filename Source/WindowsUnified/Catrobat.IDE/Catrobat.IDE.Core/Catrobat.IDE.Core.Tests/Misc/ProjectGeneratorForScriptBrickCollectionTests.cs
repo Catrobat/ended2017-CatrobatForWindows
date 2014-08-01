@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
                             {
                                 Bricks = new ObservableCollection<Brick>
                                 {
-                                    new SetCostumeBrick()
+                                    new SetLookBrick()
                                 }
                             }
                         }
@@ -47,18 +47,18 @@ namespace Catrobat.IDE.Core.Tests.Misc
                             {
                                 Bricks = new ObservableCollection<Brick>
                                 {
-                                    new SetCostumeBrick(),
+                                    new SetLookBrick(),
                                 }
                             },
                             new TappedScript
                             {
                                 Bricks = new ObservableCollection<Brick>
                                 {
-                                    new SetCostumeBrick(),
+                                    new SetLookBrick(),
                                     new DelayBrick(),
-                                    new SetCostumeBrick(),
+                                    new SetLookBrick(),
                                     new DelayBrick(),
-                                    new SetCostumeBrick()
+                                    new SetLookBrick()
                                 }
                             }
                         }
