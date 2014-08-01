@@ -38,15 +38,18 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         {
             _commandBarActions = new MultiModeEditorCommandBar
             {
+                TargetType = AppBarTargetType.Action,
                 CopyCommand = _viewModel.CopyScriptBrickCommand,
                 DeleteCommand = _viewModel.DeleteScriptBrickCommand,
                 NewCommand = _viewModel.AddNewScriptBrickCommand,
-                PlayCommand = _viewModel.StartPlayerCommand,
+                PlayCommand = _viewModel.StartPlayerCommand
+                
             };
             _commandBarActions.ModeChanged += MultiModeEditorCommandBar_OnModeChanged;
 
             _commandBarLooks = new MultiModeEditorCommandBar
             {
+                TargetType = AppBarTargetType.Look,
                 CopyCommand = _viewModel.CopyLookCommand,
                 DeleteCommand = _viewModel.DeleteLookCommand,
                 NewCommand = _viewModel.AddNewLookCommand,
@@ -56,6 +59,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
             _commandBarSounds = new MultiModeEditorCommandBar
             {
+                TargetType = AppBarTargetType.Sound,
                 CopyCommand = _viewModel.CopySoundCommand,
                 DeleteCommand = _viewModel.DeleteSoundCommand,
                 NewCommand = _viewModel.AddNewSoundCommand,
