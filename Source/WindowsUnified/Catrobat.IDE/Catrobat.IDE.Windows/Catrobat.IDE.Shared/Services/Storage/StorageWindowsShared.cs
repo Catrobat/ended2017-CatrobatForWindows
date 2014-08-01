@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -454,7 +455,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             return retVal;
         }
 
-        public async Task CreateThumbnailAsync(string filePath)
+        public async Task TryCreateThumbnailAsync(string filePath)
         {
             var withoutExtension = Path.GetFileNameWithoutExtension(filePath);
             var imageBasePath = Path.GetDirectoryName(filePath);
@@ -471,9 +472,9 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                 if (fullSizePortableImage != null)
                 {
                     var thumbnailImage = await ServiceLocator.
-                        ImageResizeService.ResizeImage(fullSizePortableImage, 
+                        ImageResizeService.ResizeImage(fullSizePortableImage,
                         _imageThumbnailDefaultMaxWidthHeight);
-                   
+
                     await thumbnailImage.WriteAsPng(thumbnailPath);
                 }
             }
@@ -550,15 +551,15 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                             //await ((WriteableBitmap)image.ImageSource).ToStreamAsJpeg(stream.AsRandomAccessStream());
                             //await PNGWriter.WritePNG((WriteableBitmap)image.ImageSource, stream, 95);
                         }
-                            
-                            //throw new NotImplementedException();
-                            //
+
+                        //throw new NotImplementedException();
+                        //
                         break;
                     case ImageFormat.Jpg:
                         //await ((WriteableBitmap) image.ImageSource).ToStreamAsJpeg(stream.AsRandomAccessStream());
                         //((WriteableBitmap)image.ImageSource).SaveJpeg(stream, image.Width, image.Height, 0, 95);
                         throw new NotImplementedException();
-                        
+
                         break;
                     default:
                         throw new ArgumentOutOfRangeException("format");

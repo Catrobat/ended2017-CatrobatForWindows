@@ -25,7 +25,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
 
         private void TextBoxProgramName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            _viewModel.ProjectName = TextBoxProgramName.Text;
+            _viewModel.ProgramName = TextBoxProgramName.Text;
         }
     }
 }

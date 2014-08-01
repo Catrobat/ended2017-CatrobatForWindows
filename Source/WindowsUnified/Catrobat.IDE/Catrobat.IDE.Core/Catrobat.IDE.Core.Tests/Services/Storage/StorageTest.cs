@@ -361,7 +361,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
 
         #region Async
 
-        public Task CreateThumbnailAsync(string file)
+        public Task TryCreateThumbnailAsync(string file)
         {
             throw new NotImplementedException();
         }

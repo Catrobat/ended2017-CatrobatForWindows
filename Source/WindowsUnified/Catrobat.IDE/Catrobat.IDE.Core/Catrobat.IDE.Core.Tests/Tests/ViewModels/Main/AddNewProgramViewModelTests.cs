@@ -35,17 +35,17 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 
             var viewModel = new AddNewProgramViewModel
             {
-                ProjectName = "TestProject",
-                CreateEmptyProject = false,
-                CreateCopyOfCurrentProject = true,
-                CreateTemplateProject = true
+                ProgramName = "TestProject",
+                CreateEmptyProgram = false,
+                CreateCopyOfCurrentProgram = true,
+                CreateTemplateProgram = true
             };
             viewModel.CancelCommand.Execute(null);
 
-            Assert.IsTrue(viewModel.ProjectName == "");
-            Assert.IsTrue(viewModel.CreateEmptyProject);
-            Assert.IsFalse(viewModel.CreateCopyOfCurrentProject);
-            Assert.IsFalse(viewModel.CreateTemplateProject);
+            Assert.IsTrue(viewModel.ProgramName == "");
+            Assert.IsTrue(viewModel.CreateEmptyProgram);
+            Assert.IsFalse(viewModel.CreateCopyOfCurrentProgram);
+            Assert.IsFalse(viewModel.CreateTemplateProgram);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);
@@ -61,17 +61,17 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 
             var viewModel = new AddNewProgramViewModel
             {
-                ProjectName = "TestProject",
-                CreateEmptyProject = false,
-                CreateCopyOfCurrentProject = true,
-                CreateTemplateProject = true
+                ProgramName = "TestProject",
+                CreateEmptyProgram = false,
+                CreateCopyOfCurrentProgram = true,
+                CreateTemplateProgram = true
             };
             viewModel.GoBackCommand.Execute(null);
 
-            Assert.AreEqual("", viewModel.ProjectName);
-            Assert.IsTrue(viewModel.CreateEmptyProject);
-            Assert.IsFalse(viewModel.CreateCopyOfCurrentProject);
-            Assert.IsFalse(viewModel.CreateTemplateProject);
+            Assert.AreEqual("", viewModel.ProgramName);
+            Assert.IsTrue(viewModel.CreateEmptyProgram);
+            Assert.IsFalse(viewModel.CreateCopyOfCurrentProgram);
+            Assert.IsFalse(viewModel.CreateTemplateProgram);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);

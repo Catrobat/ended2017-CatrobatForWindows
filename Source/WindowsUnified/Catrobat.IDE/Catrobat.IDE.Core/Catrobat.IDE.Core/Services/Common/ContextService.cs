@@ -216,17 +216,17 @@ namespace Catrobat.IDE.Core.Services.Common
 
             using (var storage = StorageSystem.GetStorage())
             {
-                await storage.CreateThumbnailAsync(Path.Combine(programPath, 
+                await storage.TryCreateThumbnailAsync(Path.Combine(programPath, 
                     StorageConstants.ProgramManualScreenshotPath));
 
-                await storage.CreateThumbnailAsync(Path.Combine(programPath,
+                await storage.TryCreateThumbnailAsync(Path.Combine(programPath,
                     StorageConstants.ProgramAutomaticScreenshotPath));
 
                 var fileNames = await storage.GetFileNamesAsync(pathToLooks);
 
                 foreach (var fileName in fileNames)
                 {
-                    await storage.CreateThumbnailAsync(
+                    await storage.TryCreateThumbnailAsync(
                         Path.Combine(pathToLooks, fileName));
                 }
             }

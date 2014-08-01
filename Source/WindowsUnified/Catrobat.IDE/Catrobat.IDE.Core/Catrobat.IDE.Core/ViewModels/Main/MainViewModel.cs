@@ -1,4 +1,6 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Resources.Localization;
@@ -194,8 +196,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             _deleteProgramName = projectName;
 
-            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_MainDeleteProgramDialogTitle,
-                String.Format(AppResources.Main_MainDeleteProgramDialogMessage, projectName), DeleteProgramMessageCallback, MessageBoxOptions.OkCancel);
+            ServiceLocator.NotifictionService.ShowMessageBox(
+                AppResources.Main_MainDeleteProgramDialogTitle,
+                String.Format(AppResources.Main_MainDeleteProgramDialogMessage, projectName), 
+                DeleteProgramMessageCallback, MessageBoxOptions.OkCancel);
         }
 
         private void CopyLocalProgramAction(string projectName)
@@ -340,10 +344,25 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region MessageBoxCallback
 
+        private readonly List<string> _programsToDelete = new List<string>();
         private async void DeleteProgramMessageCallback(MessageboxResult result)
         {
-            var deleteProgramName = _deleteProgramName;
+            var deleteProgramName = "";
 
+            lock (_programsToDelete)
+            {
+                 deleteProgramName = _deleteProgramName;
+
+                if (_localProjects.Any(program => 
+                    program.ProjectName == deleteProgramName))
+                    return;
+
+                if (_programsToDelete.Contains(deleteProgramName))
+                    return;
+
+                _programsToDelete.Add(deleteProgramName);
+            }
+            
             if (deleteProgramName == null)
                 return;
 
@@ -367,11 +386,26 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 _deleteProgramName = null;
             }
 
-            await App.SaveContext(CurrentProgram);
+            lock (_programsToDelete)
+            {
+                _programsToDelete.Remove(deleteProgramName);
+            }
+
+            //await App.SaveContext(CurrentProgram);
         }
 
+        private bool _isCopying = false;
+        private readonly object _copyLock = new object();
         private async void CopyProgramMessageCallback(MessageboxResult result)
         {
+            lock (_copyLock)
+            {
+                if (_isCopying)
+                    return;
+
+                _isCopying = true;
+            }
+
             _dialogResult = result;
 
             if (_dialogResult == MessageboxResult.Ok)
@@ -383,6 +417,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                 await UpdateLocalPrograms();
                 _copyProgramName = null;
+            }
+
+            lock (_copyLock)
+            {
+                _isCopying = false;
             }
         }
 

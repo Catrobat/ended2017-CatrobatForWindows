@@ -108,7 +108,7 @@ namespace Catrobat.IDE.Core.Services.Storage
 
         Task<PortableImage> LoadImageThumbnailAsync(string pathToImage);
 
-        Task CreateThumbnailAsync(string file);
+        Task TryCreateThumbnailAsync(string file);
 
         Task DeleteImageAsync(string pathToImage);
 
