@@ -1,7 +1,10 @@
-﻿using Catrobat.IDE.Core.Services;
+﻿using System;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Core.ViewModels.Settings
 {
@@ -25,14 +28,10 @@ namespace Catrobat.IDE.Core.ViewModels.Settings
             set
             {
                 if (ServiceLocator.CultureService.GetCulture().Equals(value))
-                {
                     return;
-                }
 
                 ServiceLocator.CultureService.SetCulture(value);
                 RaisePropertyChanged(() => CurrentCulture);
-
-                ServiceLocator.NavigationService.RemoveBackEntry();
             }
         }
 
@@ -40,10 +39,21 @@ namespace Catrobat.IDE.Core.ViewModels.Settings
 
         #region Commands
 
+        public RelayCommand<CultureInfo> SelectCultureCommand { get; set; }
+
         #endregion
 
         #region Actions
+        private void SelectCultureAction(CultureInfo culture)
+        {
+            CurrentCulture = culture;
 
+            var message = new MessageBase();
+            Messenger.Default.Send(message, ViewModelMessagingToken.ClearPageCache);
+
+            //ServiceLocator.NavigationService.NavigateTo(GetType());
+            //ServiceLocator.NavigationService.RemoveBackEntry();
+        }
         #endregion
 
         #region MessageActions
@@ -53,7 +63,7 @@ namespace Catrobat.IDE.Core.ViewModels.Settings
 
         public SettingsLanguageViewModel()
         {
-
+            SelectCultureCommand = new RelayCommand<CultureInfo>(SelectCultureAction);
         }
     }
 }

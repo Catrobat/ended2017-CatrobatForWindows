@@ -75,7 +75,6 @@
               Visibility="{Binding SelectionMode, ElementName=ListViewSprites, 
               Converter={StaticResource SelectionModeVisibilityConverter}}" />
       </Grid>
-     
     </DataTemplate>
   </Page.Resources>
   

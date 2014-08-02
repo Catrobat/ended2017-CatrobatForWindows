@@ -31,6 +31,7 @@
         SoundStreamListener,
         PlayProgramNameListener,
         IsPlayerStartFromTileListener,
-        FormulaEvaluated
+        FormulaEvaluated,
+        ClearPageCache
     }
 }

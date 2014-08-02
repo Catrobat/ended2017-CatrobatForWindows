@@ -6,7 +6,7 @@
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
   mc:Ignorable="d"
-  NavigationCacheMode="Required"
+  NavigationCacheMode="Enabled"
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
   
   <Grid Background="{ThemeResource AppBackgroundBrush}">

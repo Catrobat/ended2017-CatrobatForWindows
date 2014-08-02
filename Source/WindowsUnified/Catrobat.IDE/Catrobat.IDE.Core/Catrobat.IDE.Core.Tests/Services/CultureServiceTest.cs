@@ -10,6 +10,12 @@ namespace Catrobat.IDE.Core.Tests.Services
 
         #region Implements ICultureService
 
+        public CultureInfo GetBestCulture()
+        {
+            return new CultureInfo("en");
+        }
+
+
         public CultureInfo GetCulture()
         {
             return _culture;
