@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             navigationService.CurrentView = typeof(ProgramDetailViewModel);
 
             var viewModel = new ProgramDetailViewModel();
-            viewModel.EditCurrentProjectCommand.Execute(null);
+            viewModel.EditCurrentProgramCommand.Execute(null);
 
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(SpritesViewModel), navigationService.CurrentView);
@@ -64,7 +64,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             var messageContext = new GenericMessage<CatrobatContextBase>(context);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.ContextListener);
 
-            viewModel.UploadCurrentProjectCommand.Execute(null);
+            viewModel.UploadCurrentProgramCommand.Execute(null);
             
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(UploadProgramViewModel), navigationService.CurrentView);
@@ -87,7 +87,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             navigationService.CurrentView = typeof(ProgramDetailViewModel);
 
             var viewModel = new ProgramDetailViewModel();
-            viewModel.RenameProjectCommand.Execute(null);
+            viewModel.RenameProgramCommand.Execute(null);
 
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(ProgramSettingsViewModel), navigationService.CurrentView);

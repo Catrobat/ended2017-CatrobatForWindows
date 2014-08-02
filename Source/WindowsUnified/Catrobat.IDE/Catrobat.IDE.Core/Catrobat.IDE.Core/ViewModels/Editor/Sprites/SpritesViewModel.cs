@@ -296,7 +296,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             SelectedSprites = new ObservableCollection<Sprite>();
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
+                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedAction);
         }
     }
 }

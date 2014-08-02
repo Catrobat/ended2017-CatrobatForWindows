@@ -27,7 +27,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _versionLabelText = "";
         private string _viewsLabelText = "";
         private string _downloadsLabelText = "";
-        private Program _currentProject;
+        private Program _currentProgram;
 
         #endregion
 
@@ -108,7 +108,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public ICommand OnLoadCommand { get; private set; }
 
-        public RelayCommand<OnlineProjectHeader> DownloadCommand { get; private set; }
+        public RelayCommand<OnlineProgramHeader> DownloadCommand { get; private set; }
 
         public ICommand ReportCommand { get; private set; }
 
@@ -118,7 +118,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         #region CommandCanExecute
 
-        private bool DownloadCommand_CanExecute(OnlineProjectHeader dataContext)
+        private bool DownloadCommand_CanExecute(OnlineProgramHeader dataContext)
         {
             return ButtonDownloadIsEnabled;
         }
@@ -127,29 +127,29 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         #region Actions
 
-        private void OnLoadAction(OnlineProjectHeader projectHeader)
+        private void OnLoadAction(OnlineProgramHeader programHeader)
         {
             //var conv = new UnixTimeDateTimeConverter();
             //object output = conv.Convert((object)Convert.ToDouble(dataContext.Uploaded.Split('.')[0]), null, null, null);
 
-            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectUploadedBy, ServiceLocator.WebCommunicationService.ConvertUnixTimeStamp(Convert.ToDouble(projectHeader.Uploaded.Split('.')[0])));
-            VersionLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectVersion, projectHeader.Version);
-            ViewsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectViews, projectHeader.Views);
-            DownloadsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectDownloads, projectHeader.Downloads);
+            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramUploadedBy, ServiceLocator.WebCommunicationService.ConvertUnixTimeStamp(Convert.ToDouble(programHeader.Uploaded.Split('.')[0])));
+            VersionLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramVersion, programHeader.Version);
+            ViewsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramViews, programHeader.Views);
+            DownloadsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramDownloads, programHeader.Downloads);
             ButtonDownloadIsEnabled = true;
         }
 
-        private async void DownloadAction(OnlineProjectHeader projectHeader)
+        private async void DownloadAction(OnlineProgramHeader programHeader)
         {
             ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 ServiceLocator.NavigationService.NavigateBack<OnlineProgramViewModel>());
 
 
-            ServiceLocator.ProjectImporterService.SetDownloadHeader(projectHeader);
+            ServiceLocator.ProjectImporterService.SetDownloadHeader(programHeader);
             await ServiceLocator.ProjectImporterService.TryImportWithStatusNotifications();
         }
 
-        private void ReportAction(OnlineProjectHeader onlineProjectHeader)
+        private void ReportAction(OnlineProgramHeader onlineProgramHeader)
         {
             ServiceLocator.NavigationService.NavigateTo<OnlineProgramReportViewModel>();
         }
@@ -172,9 +172,9 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public OnlineProgramViewModel()
         {
-            OnLoadCommand = new RelayCommand<OnlineProjectHeader>(OnLoadAction);
-            DownloadCommand = new RelayCommand<OnlineProjectHeader>(DownloadAction, DownloadCommand_CanExecute);
-            ReportCommand = new RelayCommand<OnlineProjectHeader>(ReportAction);
+            OnLoadCommand = new RelayCommand<OnlineProgramHeader>(OnLoadAction);
+            DownloadCommand = new RelayCommand<OnlineProgramHeader>(DownloadAction, DownloadCommand_CanExecute);
+            ReportCommand = new RelayCommand<OnlineProgramHeader>(ReportAction);
             LicenseCommand = new RelayCommand(LicenseAction);
         }
 

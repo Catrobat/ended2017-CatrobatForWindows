@@ -21,30 +21,30 @@
                 Grid.Row="0"
                 Margin="12"> 
       <!--<TextBlock x:Name="ApplicationTitle" 
-                 Text="{Binding Resources.Main_TitleOnlineProject, 
+                 Text="{Binding Resources.Main_TitleOnlineProgram, 
                  Source={StaticResource LocalizedStrings}}" 
                  Style="{ThemeResource TextNormalStyle}"/>-->
       <TextBlock x:Name="PageTitle" 
-                 Text="{Binding Resources.Main_TitleReportProject, 
+                 Text="{Binding Resources.Main_TitleReportProgram, 
                  Source={StaticResource LocalizedStrings}}" 
                  Margin="0 0 0 0" 
                  Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="12 0 12 18">
-      <TextBlock Text="{Binding Resources.Main_ProjectName, 
+      <TextBlock Text="{Binding Resources.Main_ProgramName, 
                  Source={StaticResource LocalizedStrings}}" 
                  Style="{ThemeResource TextNormalStyle}"/>
       <TextBlock Margin="12 0 0 0" 
-                 Text="{Binding SelectedOnlineProject.ProjectName}" 
+                 Text="{Binding SelectedOnlineProgram.ProjectName}" 
                  TextWrapping="Wrap"
                  Style="{ThemeResource TextSmallStyle}"/>
       <TextBlock Margin="0 12 0 0" 
-                 Text="{Binding Resources.Main_OnlineProjectAuthor, 
+                 Text="{Binding Resources.Main_OnlineProgramAuthor, 
                  Source={StaticResource LocalizedStrings}}" 
                  Style="{ThemeResource TextNormalStyle}"/>
       <TextBlock Margin="12 0 0 0" 
-                 Text="{Binding SelectedOnlineProject.Author}" 
+                 Text="{Binding SelectedOnlineProgram.Author}" 
                  TextWrapping="Wrap"
                  Style="{ThemeResource TextSmallStyle}"/>
       <TextBlock Margin="0 12 0 6" 

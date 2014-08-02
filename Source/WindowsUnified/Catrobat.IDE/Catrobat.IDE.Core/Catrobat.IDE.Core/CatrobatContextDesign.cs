@@ -134,19 +134,19 @@ namespace Catrobat.IDE.Core
         {
             OnlineProjects = new OnlineProgramsCollection();
 
-            var project1 = new OnlineProjectHeader
+            var project1 = new OnlineProgramHeader
             {
                 ProjectName = "Online Project 1 with very very very very very long name",
                 Description = "That is a nice description of Project 1. That is a nice description of Project 1. That is a nice description of Project 1"
             };
 
-            var project2 = new OnlineProjectHeader
+            var project2 = new OnlineProgramHeader
             {
                 ProjectName = "Online Project 2",
                 Description = "That is a nice description of Project 2."
             };
 
-            var project3 = new OnlineProjectHeader
+            var project3 = new OnlineProgramHeader
             {
                 ProjectName = "Online Project 3",
                 Description = "That is a nice description of Project 3."

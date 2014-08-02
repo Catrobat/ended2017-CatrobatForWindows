@@ -52,6 +52,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 if (_isSending != value)
                 {
                     _isSending = value;
+                    RecoverCommand.RaiseCanExecuteChanged();
                     RaisePropertyChanged(() => IsSending);
                 }
             }
@@ -61,7 +62,16 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         #region Commands
 
-        public ICommand RecoverCommand { get; private set; }
+        public RelayCommand RecoverCommand { get; private set; }
+
+        #endregion
+
+        #region CommandCanExecute
+
+        private bool RecoverCommand_CanExecute()
+        {
+            return IsSending == false;
+        }
 
         #endregion
 
@@ -72,8 +82,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             IsSending = true;
             if (string.IsNullOrEmpty(_passwordRecoveryData))
             {
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectPasswordRecoveryErrorCaption,
-                    AppResources.Main_UploadProjectMissingRecoveryData, MissingRecoveryDataCallback, MessageBoxOptions.Ok);
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
+                    AppResources.Main_UploadProgramMissingRecoveryData, MissingRecoveryDataCallback, MessageBoxOptions.Ok);
             }
             else
             {
@@ -94,14 +104,14 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     switch (statusResponse.statusCode)
                     {
                         case StatusCodes.HTTPRequestFailed:
-                            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectPasswordRecoveryErrorCaption,
+                            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
                                 AppResources.Main_NoInternetConnection, MissingRecoveryDataCallback, MessageBoxOptions.Ok);
                             break;
 
                         default:
-                            string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, statusResponse.statusCode.ToString()) :
-                                                    string.Format(AppResources.Main_UploadProjectLoginError, statusResponse.answer);
-                            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectPasswordRecoveryErrorCaption,
+                            string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProgramUndefinedError, statusResponse.statusCode.ToString()) :
+                                                    string.Format(AppResources.Main_UploadProgramLoginError, statusResponse.answer);
+                            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
                                 messageString, MissingRecoveryDataCallback, MessageBoxOptions.Ok);
                             break;
                     }
@@ -127,9 +137,9 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public UploadProgramForgotPasswordViewModel()
         {
-            RecoverCommand = new RelayCommand(RecoverAction);
-
+            RecoverCommand = new RelayCommand(RecoverAction, RecoverCommand_CanExecute);
             IsSending = false;
+
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedAction);
         }

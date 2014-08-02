@@ -613,9 +613,9 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die when program starts ähnelt.
         /// </summary>
-        public static string Brick_WhenProjectStarts {
+        public static string Brick_WhenProgramStarts {
             get {
-                return ResourceManager.GetString("Brick_WhenProjectStarts", resourceCulture);
+                return ResourceManager.GetString("Brick_WhenProgramStarts", resourceCulture);
             }
         }
         
@@ -631,54 +631,54 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Background ähnelt.
         /// </summary>
-        public static string DefaultProject_Background {
+        public static string DefaultProgram_Background {
             get {
-                return ResourceManager.GetString("DefaultProject_Background", resourceCulture);
+                return ResourceManager.GetString("DefaultProgram_Background", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Cat ähnelt.
         /// </summary>
-        public static string DefaultProject_Cat {
+        public static string DefaultProgram_Cat {
             get {
-                return ResourceManager.GetString("DefaultProject_Cat", resourceCulture);
+                return ResourceManager.GetString("DefaultProgram_Cat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Cloud ähnelt.
         /// </summary>
-        public static string DefaultProject_Cloud {
+        public static string DefaultProgram_Cloud {
             get {
-                return ResourceManager.GetString("DefaultProject_Cloud", resourceCulture);
+                return ResourceManager.GetString("DefaultProgram_Cloud", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Rain drop ähnelt.
         /// </summary>
-        public static string DefaultProject_Rain {
+        public static string DefaultProgram_Rain {
             get {
-                return ResourceManager.GetString("DefaultProject_Rain", resourceCulture);
+                return ResourceManager.GetString("DefaultProgram_Rain", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Sun ähnelt.
         /// </summary>
-        public static string DefaultProject_Sun {
+        public static string DefaultProgram_Sun {
             get {
-                return ResourceManager.GetString("DefaultProject_Sun", resourceCulture);
+                return ResourceManager.GetString("DefaultProgram_Sun", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Water ähnelt.
         /// </summary>
-        public static string DefaultProject_Water {
+        public static string DefaultProgram_Water {
             get {
-                return ResourceManager.GetString("DefaultProject_Water", resourceCulture);
+                return ResourceManager.GetString("DefaultProgram_Water", resourceCulture);
             }
         }
         
@@ -874,9 +874,9 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die play ähnelt.
         /// </summary>
-        public static string Editor_ButtonPlayProject {
+        public static string Editor_ButtonPlayProgram {
             get {
-                return ResourceManager.GetString("Editor_ButtonPlayProject", resourceCulture);
+                return ResourceManager.GetString("Editor_ButtonPlayProgram", resourceCulture);
             }
         }
         
@@ -1117,9 +1117,9 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Program settings ähnelt.
         /// </summary>
-        public static string Editor_MenuProjectSettings {
+        public static string Editor_MenuProgramSettings {
             get {
-                return ResourceManager.GetString("Editor_MenuProjectSettings", resourceCulture);
+                return ResourceManager.GetString("Editor_MenuProgramSettings", resourceCulture);
             }
         }
         
@@ -1324,9 +1324,9 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die preparing program ähnelt.
         /// </summary>
-        public static string Editor_PreparingProject {
+        public static string Editor_PreparingProgram {
             get {
-                return ResourceManager.GetString("Editor_PreparingProject", resourceCulture);
+                return ResourceManager.GetString("Editor_PreparingProgram", resourceCulture);
             }
         }
         
@@ -2249,6 +2249,87 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die App version too old ähnelt.
+        /// </summary>
+        public static string Import_AppTooOld {
+            get {
+                return ResourceManager.GetString("Import_AppTooOld", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The downloaded program requires a newer version of this App. ähnelt.
+        /// </summary>
+        public static string Import_AppTooOldText {
+            get {
+                return ResourceManager.GetString("Import_AppTooOldText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The catrobat file is damaged. ähnelt.
+        /// </summary>
+        public static string Import_CatrobatDamagedText {
+            get {
+                return ResourceManager.GetString("Import_CatrobatDamagedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program added ähnelt.
+        /// </summary>
+        public static string Import_ProgramAdded {
+            get {
+                return ResourceManager.GetString("Import_ProgramAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program successfully added to your program list. ähnelt.
+        /// </summary>
+        public static string Import_ProgramAddedText {
+            get {
+                return ResourceManager.GetString("Import_ProgramAddedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program damaged ähnelt.
+        /// </summary>
+        public static string Import_ProgramDamaged {
+            get {
+                return ResourceManager.GetString("Import_ProgramDamaged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program damaged and cannot be added. ähnelt.
+        /// </summary>
+        public static string Import_ProgramDamagedText {
+            get {
+                return ResourceManager.GetString("Import_ProgramDamagedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program outdated ähnelt.
+        /// </summary>
+        public static string Import_ProgramOutdated {
+            get {
+                return ResourceManager.GetString("Import_ProgramOutdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program is too old and cannot be added. ähnelt.
+        /// </summary>
+        public static string Import_ProgramOutdatedText {
+            get {
+                return ResourceManager.GetString("Import_ProgramOutdatedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die About Catrobat ähnelt.
         /// </summary>
         public static string Main_AboutCatrobat {
@@ -2280,9 +2361,9 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die ACTIVE ähnelt.
         /// </summary>
-        public static string Main_ActiveProject {
+        public static string Main_ActiveProgram {
             get {
-                return ResourceManager.GetString("Main_ActiveProject", resourceCulture);
+                return ResourceManager.GetString("Main_ActiveProgram", resourceCulture);
             }
         }
         
@@ -2433,45 +2514,45 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die change name and description ähnelt.
         /// </summary>
-        public static string Main_ChangeProjectNameAndDescription {
+        public static string Main_ChangeProgramNameAndDescription {
             get {
-                return ResourceManager.GetString("Main_ChangeProjectNameAndDescription", resourceCulture);
+                return ResourceManager.GetString("Main_ChangeProgramNameAndDescription", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die copy ähnelt.
         /// </summary>
-        public static string Main_CopyProject {
+        public static string Main_CopyProgram {
             get {
-                return ResourceManager.GetString("Main_CopyProject", resourceCulture);
+                return ResourceManager.GetString("Main_CopyProgram", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Empty programm ähnelt.
         /// </summary>
-        public static string Main_CreateEmptyProject {
+        public static string Main_CreateEmptyProgram {
             get {
-                return ResourceManager.GetString("Main_CreateEmptyProject", resourceCulture);
+                return ResourceManager.GetString("Main_CreateEmptyProgram", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Use current program ({0}) as a atemplate ähnelt.
         /// </summary>
-        public static string Main_CreateProjectBasedOnCurrentProject {
+        public static string Main_CreateProgramBasedOnCurrentProgram {
             get {
-                return ResourceManager.GetString("Main_CreateProjectBasedOnCurrentProject", resourceCulture);
+                return ResourceManager.GetString("Main_CreateProgramBasedOnCurrentProgram", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Use template below ähnelt.
         /// </summary>
-        public static string Main_CreateProjectBasedOnTemplate {
+        public static string Main_CreateProgramBasedOnTemplate {
             get {
-                return ResourceManager.GetString("Main_CreateProjectBasedOnTemplate", resourceCulture);
+                return ResourceManager.GetString("Main_CreateProgramBasedOnTemplate", resourceCulture);
             }
         }
         
@@ -2487,18 +2568,18 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Default program ähnelt.
         /// </summary>
-        public static string Main_DefaultProjectName {
+        public static string Main_DefaultProgramName {
             get {
-                return ResourceManager.GetString("Main_DefaultProjectName", resourceCulture);
+                return ResourceManager.GetString("Main_DefaultProgramName", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die delete ähnelt.
         /// </summary>
-        public static string Main_DeleteProject {
+        public static string Main_DeleteProgram {
             get {
-                return ResourceManager.GetString("Main_DeleteProject", resourceCulture);
+                return ResourceManager.GetString("Main_DeleteProgram", resourceCulture);
             }
         }
         
@@ -2532,9 +2613,9 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die active program ähnelt.
         /// </summary>
-        public static string Main_HeaderCurrentProject {
+        public static string Main_HeaderCurrentProgram {
             get {
-                return ResourceManager.GetString("Main_HeaderCurrentProject", resourceCulture);
+                return ResourceManager.GetString("Main_HeaderCurrentProgram", resourceCulture);
             }
         }
         
@@ -2559,18 +2640,18 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die My programs ähnelt.
         /// </summary>
-        public static string Main_HeaderLocalProjects {
+        public static string Main_HeaderLocalPrograms {
             get {
-                return ResourceManager.GetString("Main_HeaderLocalProjects", resourceCulture);
+                return ResourceManager.GetString("Main_HeaderLocalPrograms", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Online ähnelt.
         /// </summary>
-        public static string Main_HeaderOnlineProjects {
+        public static string Main_HeaderOnlinePrograms {
             get {
-                return ResourceManager.GetString("Main_HeaderOnlineProjects", resourceCulture);
+                return ResourceManager.GetString("Main_HeaderOnlinePrograms", resourceCulture);
             }
         }
         
@@ -2604,36 +2685,36 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Are sure you want to copy &quot;{0}&quot;? ähnelt.
         /// </summary>
-        public static string Main_MainCopyProjectDialogMessage {
+        public static string Main_MainCopyProgramDialogMessage {
             get {
-                return ResourceManager.GetString("Main_MainCopyProjectDialogMessage", resourceCulture);
+                return ResourceManager.GetString("Main_MainCopyProgramDialogMessage", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Copy program? ähnelt.
         /// </summary>
-        public static string Main_MainCopyProjectDialogTitle {
+        public static string Main_MainCopyProgramDialogTitle {
             get {
-                return ResourceManager.GetString("Main_MainCopyProjectDialogTitle", resourceCulture);
+                return ResourceManager.GetString("Main_MainCopyProgramDialogTitle", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Are sure you want to delete &quot;{0}&quot;? ähnelt.
         /// </summary>
-        public static string Main_MainDeleteProjectDialogMessage {
+        public static string Main_MainDeleteProgramDialogMessage {
             get {
-                return ResourceManager.GetString("Main_MainDeleteProjectDialogMessage", resourceCulture);
+                return ResourceManager.GetString("Main_MainDeleteProgramDialogMessage", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Delete program? ähnelt.
         /// </summary>
-        public static string Main_MainDeleteProjectDialogTitle {
+        public static string Main_MainDeleteProgramDialogTitle {
             get {
-                return ResourceManager.GetString("Main_MainDeleteProjectDialogTitle", resourceCulture);
+                return ResourceManager.GetString("Main_MainDeleteProgramDialogTitle", resourceCulture);
             }
         }
         
@@ -2685,171 +2766,171 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Author: ähnelt.
         /// </summary>
-        public static string Main_OnlineProjectAuthor {
+        public static string Main_OnlineProgramAuthor {
             get {
-                return ResourceManager.GetString("Main_OnlineProjectAuthor", resourceCulture);
+                return ResourceManager.GetString("Main_OnlineProgramAuthor", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die download ähnelt.
         /// </summary>
-        public static string Main_OnlineProjectDownloadButton {
+        public static string Main_OnlineProgramDownloadButton {
             get {
-                return ResourceManager.GetString("Main_OnlineProjectDownloadButton", resourceCulture);
+                return ResourceManager.GetString("Main_OnlineProgramDownloadButton", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die {0} downloads ähnelt.
         /// </summary>
-        public static string Main_OnlineProjectDownloads {
+        public static string Main_OnlineProgramDownloads {
             get {
-                return ResourceManager.GetString("Main_OnlineProjectDownloads", resourceCulture);
+                return ResourceManager.GetString("Main_OnlineProgramDownloads", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die license ähnelt.
         /// </summary>
-        public static string Main_OnlineProjectLicenseButton {
+        public static string Main_OnlineProgramLicenseButton {
             get {
-                return ResourceManager.GetString("Main_OnlineProjectLicenseButton", resourceCulture);
+                return ResourceManager.GetString("Main_OnlineProgramLicenseButton", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die load more... ähnelt.
         /// </summary>
-        public static string Main_OnlineProjectListBoxLoadMore {
+        public static string Main_OnlineProgramListBoxLoadMore {
             get {
-                return ResourceManager.GetString("Main_OnlineProjectListBoxLoadMore", resourceCulture);
+                return ResourceManager.GetString("Main_OnlineProgramListBoxLoadMore", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die no more programs ähnelt.
         /// </summary>
-        public static string Main_OnlineProjectListBoxNoMoreItems {
+        public static string Main_OnlineProgramListBoxNoMoreItems {
             get {
-                return ResourceManager.GetString("Main_OnlineProjectListBoxNoMoreItems", resourceCulture);
+                return ResourceManager.GetString("Main_OnlineProgramListBoxNoMoreItems", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die report as inappropriate ähnelt.
         /// </summary>
-        public static string Main_OnlineProjectReportButton {
+        public static string Main_OnlineProgramReportButton {
             get {
-                return ResourceManager.GetString("Main_OnlineProjectReportButton", resourceCulture);
+                return ResourceManager.GetString("Main_OnlineProgramReportButton", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Statistics: ähnelt.
         /// </summary>
-        public static string Main_OnlineProjectStatistics {
+        public static string Main_OnlineProgramStatistics {
             get {
-                return ResourceManager.GetString("Main_OnlineProjectStatistics", resourceCulture);
+                return ResourceManager.GetString("Main_OnlineProgramStatistics", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Uploaded: ähnelt.
         /// </summary>
-        public static string Main_OnlineProjectUploaded {
+        public static string Main_OnlineProgramUploaded {
             get {
-                return ResourceManager.GetString("Main_OnlineProjectUploaded", resourceCulture);
+                return ResourceManager.GetString("Main_OnlineProgramUploaded", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die {0} by: ähnelt.
         /// </summary>
-        public static string Main_OnlineProjectUploadedBy {
+        public static string Main_OnlineProgramUploadedBy {
             get {
-                return ResourceManager.GetString("Main_OnlineProjectUploadedBy", resourceCulture);
+                return ResourceManager.GetString("Main_OnlineProgramUploadedBy", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die (version: {0}) ähnelt.
         /// </summary>
-        public static string Main_OnlineProjectVersion {
+        public static string Main_OnlineProgramVersion {
             get {
-                return ResourceManager.GetString("Main_OnlineProjectVersion", resourceCulture);
+                return ResourceManager.GetString("Main_OnlineProgramVersion", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die {0} views ähnelt.
         /// </summary>
-        public static string Main_OnlineProjectViews {
+        public static string Main_OnlineProgramViews {
             get {
-                return ResourceManager.GetString("Main_OnlineProjectViews", resourceCulture);
+                return ResourceManager.GetString("Main_OnlineProgramViews", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die pin to start ähnelt.
         /// </summary>
-        public static string Main_PinProjectToStart {
+        public static string Main_PinProgramToStart {
             get {
-                return ResourceManager.GetString("Main_PinProjectToStart", resourceCulture);
+                return ResourceManager.GetString("Main_PinProgramToStart", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Description: ähnelt.
         /// </summary>
-        public static string Main_ProjectDescription {
+        public static string Main_ProgramDescription {
             get {
-                return ResourceManager.GetString("Main_ProjectDescription", resourceCulture);
+                return ResourceManager.GetString("Main_ProgramDescription", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die program does not exist ähnelt.
         /// </summary>
-        public static string Main_ProjectDoesNotExist {
+        public static string Main_ProgramDoesNotExist {
             get {
-                return ResourceManager.GetString("Main_ProjectDoesNotExist", resourceCulture);
+                return ResourceManager.GetString("Main_ProgramDoesNotExist", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Please wait, while the program is being activated. ähnelt.
         /// </summary>
-        public static string Main_ProjectGettingActivated {
+        public static string Main_ProgramGettingActivated {
             get {
-                return ResourceManager.GetString("Main_ProjectGettingActivated", resourceCulture);
+                return ResourceManager.GetString("Main_ProgramGettingActivated", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Program name: ähnelt.
         /// </summary>
-        public static string Main_ProjectName {
+        public static string Main_ProgramName {
             get {
-                return ResourceManager.GetString("Main_ProjectName", resourceCulture);
+                return ResourceManager.GetString("Main_ProgramName", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die No description available. ähnelt.
         /// </summary>
-        public static string Main_ProjectNoDescription {
+        public static string Main_ProgramNoDescription {
             get {
-                return ResourceManager.GetString("Main_ProjectNoDescription", resourceCulture);
+                return ResourceManager.GetString("Main_ProgramNoDescription", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Program not valid. ähnelt.
         /// </summary>
-        public static string Main_ProjectNotValid {
+        public static string Main_ProgramNotValid {
             get {
-                return ResourceManager.GetString("Main_ProjectNotValid", resourceCulture);
+                return ResourceManager.GetString("Main_ProgramNotValid", resourceCulture);
             }
         }
         
@@ -2901,9 +2982,9 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Report program ähnelt.
         /// </summary>
-        public static string Main_ReportProject {
+        public static string Main_ReportProgram {
             get {
-                return ResourceManager.GetString("Main_ReportProject", resourceCulture);
+                return ResourceManager.GetString("Main_ReportProgram", resourceCulture);
             }
         }
         
@@ -2919,27 +3000,27 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Sorry! The selected program could not be opened. ähnelt.
         /// </summary>
-        public static string Main_SelectedProjectNotValidHeader {
+        public static string Main_SelectedProgramNotValidHeader {
             get {
-                return ResourceManager.GetString("Main_SelectedProjectNotValidHeader", resourceCulture);
+                return ResourceManager.GetString("Main_SelectedProgramNotValidHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Program not valid ähnelt.
         /// </summary>
-        public static string Main_SelectedProjectNotValidMessage {
+        public static string Main_SelectedProgramNotValidMessage {
             get {
-                return ResourceManager.GetString("Main_SelectedProjectNotValidMessage", resourceCulture);
+                return ResourceManager.GetString("Main_SelectedProgramNotValidMessage", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die How to create the new program? ähnelt.
         /// </summary>
-        public static string Main_SelectProjectCreationOption {
+        public static string Main_SelectProgramCreationOption {
             get {
-                return ResourceManager.GetString("Main_SelectProjectCreationOption", resourceCulture);
+                return ResourceManager.GetString("Main_SelectProgramCreationOption", resourceCulture);
             }
         }
         
@@ -3000,9 +3081,9 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die share ähnelt.
         /// </summary>
-        public static string Main_ShareProject {
+        public static string Main_ShareProgram {
             get {
-                return ResourceManager.GetString("Main_ShareProject", resourceCulture);
+                return ResourceManager.GetString("Main_ShareProgram", resourceCulture);
             }
         }
         
@@ -3036,9 +3117,9 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die ACTIVE PROGRAM ähnelt.
         /// </summary>
-        public static string Main_TitleCurrentProject {
+        public static string Main_TitleCurrentProgram {
             get {
-                return ResourceManager.GetString("Main_TitleCurrentProject", resourceCulture);
+                return ResourceManager.GetString("Main_TitleCurrentProgram", resourceCulture);
             }
         }
         
@@ -3054,27 +3135,27 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die NEW PROGRAM ähnelt.
         /// </summary>
-        public static string Main_TitleNewProject {
+        public static string Main_TitleNewProgram {
             get {
-                return ResourceManager.GetString("Main_TitleNewProject", resourceCulture);
+                return ResourceManager.GetString("Main_TitleNewProgram", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die ONLINE-PROGRAM ähnelt.
         /// </summary>
-        public static string Main_TitleOnlineProject {
+        public static string Main_TitleOnlineProgram {
             get {
-                return ResourceManager.GetString("Main_TitleOnlineProject", resourceCulture);
+                return ResourceManager.GetString("Main_TitleOnlineProgram", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die PROGRAM SETTINGS ähnelt.
         /// </summary>
-        public static string Main_TitleProjectSettings {
+        public static string Main_TitleProgramSettings {
             get {
-                return ResourceManager.GetString("Main_TitleProjectSettings", resourceCulture);
+                return ResourceManager.GetString("Main_TitleProgramSettings", resourceCulture);
             }
         }
         
@@ -3090,9 +3171,9 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die REPORT PROGRAM ähnelt.
         /// </summary>
-        public static string Main_TitleReportProject {
+        public static string Main_TitleReportProgram {
             get {
-                return ResourceManager.GetString("Main_TitleReportProject", resourceCulture);
+                return ResourceManager.GetString("Main_TitleReportProgram", resourceCulture);
             }
         }
         
@@ -3108,243 +3189,243 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die UPLOAD PROGRAM ähnelt.
         /// </summary>
-        public static string Main_TitleUploadProject {
+        public static string Main_TitleUploadProgram {
             get {
-                return ResourceManager.GetString("Main_TitleUploadProject", resourceCulture);
+                return ResourceManager.GetString("Main_TitleUploadProgram", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die LOGIN ähnelt.
         /// </summary>
-        public static string Main_TitleUploadProjectLogin {
+        public static string Main_TitleUploadProgramLogin {
             get {
-                return ResourceManager.GetString("Main_TitleUploadProjectLogin", resourceCulture);
+                return ResourceManager.GetString("Main_TitleUploadProgramLogin", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die REGISTER ähnelt.
         /// </summary>
-        public static string Main_TitleUploadProjectRegister {
+        public static string Main_TitleUploadProgramRegister {
             get {
-                return ResourceManager.GetString("Main_TitleUploadProjectRegister", resourceCulture);
+                return ResourceManager.GetString("Main_TitleUploadProgramRegister", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Email: ähnelt.
         /// </summary>
-        public static string Main_UploadProjectEmail {
+        public static string Main_UploadProgramEmail {
             get {
-                return ResourceManager.GetString("Main_UploadProjectEmail", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramEmail", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Upload error. {0} ähnelt.
         /// </summary>
-        public static string Main_UploadProjectError {
+        public static string Main_UploadProgramError {
             get {
-                return ResourceManager.GetString("Main_UploadProjectError", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramError", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Upload failed ähnelt.
         /// </summary>
-        public static string Main_UploadProjectErrorCaption {
+        public static string Main_UploadProgramErrorCaption {
             get {
-                return ResourceManager.GetString("Main_UploadProjectErrorCaption", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramErrorCaption", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Please wait while your login state is beeing checked! ähnelt.
         /// </summary>
-        public static string Main_UploadProjectLoadingMessage {
+        public static string Main_UploadProgramLoadingMessage {
             get {
-                return ResourceManager.GetString("Main_UploadProjectLoadingMessage", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramLoadingMessage", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Login error. {0} ähnelt.
         /// </summary>
-        public static string Main_UploadProjectLoginError {
+        public static string Main_UploadProgramLoginError {
             get {
-                return ResourceManager.GetString("Main_UploadProjectLoginError", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramLoginError", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Login failed ähnelt.
         /// </summary>
-        public static string Main_UploadProjectLoginErrorCaption {
+        public static string Main_UploadProgramLoginErrorCaption {
             get {
-                return ResourceManager.GetString("Main_UploadProjectLoginErrorCaption", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramLoginErrorCaption", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Invalid username or password. ähnelt.
         /// </summary>
-        public static string Main_UploadProjectLoginErrorStatic {
+        public static string Main_UploadProgramLoginErrorStatic {
             get {
-                return ResourceManager.GetString("Main_UploadProjectLoginErrorStatic", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramLoginErrorStatic", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Username does not exist. ähnelt.
         /// </summary>
-        public static string Main_UploadProjectLoginNonExistingUser {
+        public static string Main_UploadProgramLoginNonExistingUser {
             get {
-                return ResourceManager.GetString("Main_UploadProjectLoginNonExistingUser", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramLoginNonExistingUser", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Login- or registrationdata is incomplete. ähnelt.
         /// </summary>
-        public static string Main_UploadProjectMissingLoginData {
+        public static string Main_UploadProgramMissingLoginData {
             get {
-                return ResourceManager.GetString("Main_UploadProjectMissingLoginData", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramMissingLoginData", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Please enter password. ähnelt.
         /// </summary>
-        public static string Main_UploadProjectMissingPassword {
+        public static string Main_UploadProgramMissingPassword {
             get {
-                return ResourceManager.GetString("Main_UploadProjectMissingPassword", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramMissingPassword", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Please enter username or e-mail.  ähnelt.
         /// </summary>
-        public static string Main_UploadProjectMissingRecoveryData {
+        public static string Main_UploadProgramMissingRecoveryData {
             get {
-                return ResourceManager.GetString("Main_UploadProjectMissingRecoveryData", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramMissingRecoveryData", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die New password: ähnelt.
         /// </summary>
-        public static string Main_UploadProjectNewPassword {
+        public static string Main_UploadProgramNewPassword {
             get {
-                return ResourceManager.GetString("Main_UploadProjectNewPassword", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramNewPassword", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Password: ähnelt.
         /// </summary>
-        public static string Main_UploadProjectPassword {
+        public static string Main_UploadProgramPassword {
             get {
-                return ResourceManager.GetString("Main_UploadProjectPassword", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramPassword", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Sucessfully changed password. ähnelt.
         /// </summary>
-        public static string Main_UploadProjectPasswordChangeSucess {
+        public static string Main_UploadProgramPasswordChangeSucess {
             get {
-                return ResourceManager.GetString("Main_UploadProjectPasswordChangeSucess", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramPasswordChangeSucess", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Recovery failed ähnelt.
         /// </summary>
-        public static string Main_UploadProjectPasswordRecoveryErrorCaption {
+        public static string Main_UploadProgramPasswordRecoveryErrorCaption {
             get {
-                return ResourceManager.GetString("Main_UploadProjectPasswordRecoveryErrorCaption", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramPasswordRecoveryErrorCaption", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Recovery hash was not found. ähnelt.
         /// </summary>
-        public static string Main_UploadProjectRecoveryHashError {
+        public static string Main_UploadProgramRecoveryHashError {
             get {
-                return ResourceManager.GetString("Main_UploadProjectRecoveryHashError", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramRecoveryHashError", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Passwords do not match. ähnelt.
         /// </summary>
-        public static string Main_UploadProjectRecoveryPasswordMatchError {
+        public static string Main_UploadProgramRecoveryPasswordMatchError {
             get {
-                return ResourceManager.GetString("Main_UploadProjectRecoveryPasswordMatchError", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramRecoveryPasswordMatchError", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Username already exists. ähnelt.
         /// </summary>
-        public static string Main_UploadProjectRegisterExistingUser {
+        public static string Main_UploadProgramRegisterExistingUser {
             get {
-                return ResourceManager.GetString("Main_UploadProjectRegisterExistingUser", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramRegisterExistingUser", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Registration successful! ähnelt.
         /// </summary>
-        public static string Main_UploadProjectRegistrationSucessful {
+        public static string Main_UploadProgramRegistrationSucessful {
             get {
-                return ResourceManager.GetString("Main_UploadProjectRegistrationSucessful", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramRegistrationSucessful", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Repeat password: ähnelt.
         /// </summary>
-        public static string Main_UploadProjectRepeatPassword {
+        public static string Main_UploadProgramRepeatPassword {
             get {
-                return ResourceManager.GetString("Main_UploadProjectRepeatPassword", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramRepeatPassword", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Undefined error. Error code {0} ähnelt.
         /// </summary>
-        public static string Main_UploadProjectUndefinedError {
+        public static string Main_UploadProgramUndefinedError {
             get {
-                return ResourceManager.GetString("Main_UploadProjectUndefinedError", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramUndefinedError", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Username: ähnelt.
         /// </summary>
-        public static string Main_UploadProjectUsername {
+        public static string Main_UploadProgramUsername {
             get {
-                return ResourceManager.GetString("Main_UploadProjectUsername", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramUsername", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Username or email: ähnelt.
         /// </summary>
-        public static string Main_UploadProjectUserOrMail {
+        public static string Main_UploadProgramUserOrMail {
             get {
-                return ResourceManager.GetString("Main_UploadProjectUserOrMail", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramUserOrMail", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Welcome {0}! ähnelt.
         /// </summary>
-        public static string Main_UploadProjectWelcome {
+        public static string Main_UploadProgramWelcome {
             get {
-                return ResourceManager.GetString("Main_UploadProjectWelcome", resourceCulture);
+                return ResourceManager.GetString("Main_UploadProgramWelcome", resourceCulture);
             }
         }
         

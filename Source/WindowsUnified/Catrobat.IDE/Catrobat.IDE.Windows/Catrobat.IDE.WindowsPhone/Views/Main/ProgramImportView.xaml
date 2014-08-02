@@ -16,7 +16,7 @@
 
     <StackPanel Grid.Row="0" Margin="12">
       <TextBlock Text="IMPORT" Style="{ThemeResource TextTitleNormalStyle}" />
-      <TextBlock Text="{Binding ProjectHeader.ProjectName}" Margin="9,-7,0,0" Style="{ThemeResource TextTitleNormalStyle}" />
+      <TextBlock Text="{Binding ProgramHeader.ProgramName}" Margin="9,-7,0,0" Style="{ThemeResource TextTitleNormalStyle}" />
     </StackPanel>
 
     <Grid Grid.Row="1">
@@ -57,12 +57,12 @@
           <RowDefinition/>
           <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Image Name="ImageProjectScreenshot" Grid.Row="0" 
+        <Image Name="ImageProgramScreenshot" Grid.Row="0" 
                Width="200" Height="200"
                VerticalAlignment="Center"
                HorizontalAlignment="Center"
                Stretch="Uniform"
-               Source="{Binding ProjectHeader.Screenshot, 
+               Source="{Binding ProgramHeader.Screenshot, 
                Converter={StaticResource NoScreenshotConverter}}"/>
       </Grid>
     </Grid>

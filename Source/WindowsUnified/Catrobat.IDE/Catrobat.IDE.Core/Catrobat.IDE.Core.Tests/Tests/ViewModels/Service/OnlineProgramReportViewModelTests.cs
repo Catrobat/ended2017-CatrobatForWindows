@@ -45,8 +45,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             {
                 Reason = "TestReason"
             };
-            var messageContext = new GenericMessage<OnlineProjectHeader>(onlineProjectHeader);
-            Messenger.Default.Send(messageContext, ViewModelMessagingToken.SelectedOnlineProjectChangedListener);
+            var messageContext = new GenericMessage<OnlineProgramHeader>(onlineProjectHeader);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.SelectedOnlineProgramChangedListener);
             viewModel.ReportCommand.Execute(null);
 
             Assert.AreEqual("", viewModel.Reason);

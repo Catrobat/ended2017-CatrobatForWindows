@@ -111,7 +111,7 @@
       <DataTemplate>
         <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:StartScript}">
           <actionsControls:MasterBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
-            <TextBlock VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_WhenProjectStarts, Source={StaticResource LocalizedStrings}}" />
+            <TextBlock VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_WhenProgramStarts, Source={StaticResource LocalizedStrings}}" />
           </actionsControls:MasterBrick>
         </Grid>
       </DataTemplate>

@@ -11,24 +11,22 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
     {
         #region Private Members
 
-        private Look _receivedLook;
-        private string _lookName;
-        private Program _currentProject;
-
         #endregion
 
         #region Properties
 
-        public Program CurrentProject
+        private Program _currentProgram;
+        public Program CurrentProgram
         {
-            get { return _currentProject; }
+            get { return _currentProgram; }
             set
             {
-                _currentProject = value;
-                                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
+                _currentProgram = value;
+                                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProgram));
             }
         }
 
+        private Look _receivedLook;
         public Look ReceivedLook
         {
             get { return _receivedLook; }
@@ -43,6 +41,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
             }
         }
 
+        private string _lookName;
         public string LookName
         {
             get { return _lookName; }
@@ -94,18 +93,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
         private async Task EditLookAction()
         {
-            await ServiceLocator.PictureService.DrawPictureAsync(ReceivedLook.Image);
-            //var result = await ServiceLocator.PictureService.DrawPictureAsync(ReceivedLook.Image);
+            await ServiceLocator.PictureService.DrawPictureAsync(
+                CurrentProgram, ReceivedLook);
 
-            //if (result.Status == PictureServiceStatus.Success)
-            //{
-            //    await LookHelper.ReplaceImageInStorage(CurrentProject, ReceivedLook, result.Image);
-
-            //    ServiceLocator.DispatcherService.RunOnMainThread(() => {
-            //        ServiceLocator.NavigationService.RemoveBackEntry();
-            //        base.GoBackAction();
-            //    });
-            //}
+            ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                ServiceLocator.NavigationService.NavigateBack<ChangeLookViewModel>());
         }
 
         protected override void GoBackAction()
@@ -120,7 +112,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
         private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
         {
-            CurrentProject = message.Content;
+            CurrentProgram = message.Content;
         }
 
         private void ChangeLookNameMessageAction(GenericMessage<Look> message)
@@ -138,7 +130,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Program>>(this, 
-                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Look>>(this, 
                 ViewModelMessagingToken.LookListener, ChangeLookNameMessageAction);
         }

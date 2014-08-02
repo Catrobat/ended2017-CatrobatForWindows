@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Input;
 using Windows.UI.Xaml;
@@ -7,8 +8,7 @@ using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.WindowsPhone.Controls
 {
-    public enum AppBarTargetType { Object, Action, Look, Sound }
-
+    [Obsolete("Replaced by MultiModeEditorCommandBar")]
     public partial class EditorAppBar : UserControl
     {
         #region DependancyProperties

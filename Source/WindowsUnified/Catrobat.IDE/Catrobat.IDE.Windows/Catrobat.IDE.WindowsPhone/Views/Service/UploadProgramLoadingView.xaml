@@ -27,7 +27,7 @@
         <TextBlock Margin="0 6 0 0"
                    TextAlignment="Center" 
                    TextWrapping="Wrap" 
-                   Text="{Binding Resources.Main_UploadProjectLoadingMessage, 
+                   Text="{Binding Resources.Main_UploadProgramLoadingMessage, 
                    Source={StaticResource LocalizedStrings}}"              
                    Style="{ThemeResource TextNormalStyle}"/>
       </StackPanel>

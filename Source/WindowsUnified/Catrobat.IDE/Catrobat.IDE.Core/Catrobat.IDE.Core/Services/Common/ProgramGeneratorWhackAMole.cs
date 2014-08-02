@@ -157,7 +157,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
         private static void FillSprites(Program project)
         {
-            var objectBackground = new Sprite { Name = AppResources.DefaultProject_Background }; 
+            var objectBackground = new Sprite { Name = AppResources.DefaultProgram_Background }; 
             var objectMole1 = new Sprite { Name = AppResources.WhackAMole_Mole + " 1" };
             var objectMole2 = new Sprite { Name = AppResources.WhackAMole_Mole + " 2" };
             var objectMole3 = new Sprite { Name = AppResources.WhackAMole_Mole + " 3" };
@@ -165,8 +165,8 @@ namespace Catrobat.IDE.Core.Services.Common
 
             #region Background
 
-            objectBackground.Looks.Add(new Look { Name = AppResources.DefaultProject_Background, FileName = LookFileNameBackground });
-            objectBackground.Looks.Add(new Look { Name = AppResources.DefaultProject_Background + "End", FileName = LookFileNameBackgroundFinished });
+            objectBackground.Looks.Add(new Look { Name = AppResources.DefaultProgram_Background, FileName = LookFileNameBackground });
+            objectBackground.Looks.Add(new Look { Name = AppResources.DefaultProgram_Background + "End", FileName = LookFileNameBackgroundFinished });
 
             StartScript startScriptBackground = new StartScript();
             {

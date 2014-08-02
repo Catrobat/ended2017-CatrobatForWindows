@@ -23,7 +23,7 @@ namespace Catrobat.IDE.Core.Services.Common
     {
         private static int _uploadCounter = 0;
 
-        public async Task<List<OnlineProjectHeader>> LoadOnlineProjectsAsync(
+        public async Task<List<OnlineProgramHeader>> LoadOnlineProjectsAsync(
             string filterText, int offset, int count,
             CancellationToken taskCancellationToken)
         {
@@ -53,10 +53,10 @@ namespace Catrobat.IDE.Core.Services.Common
                     httpResponse.EnsureSuccessStatusCode();
 
                     string jsonResult = await httpResponse.Content.ReadAsStringAsync();
-                    OnlineProjectOverview recent_projects = null;
+                    OnlineProgramOverview recent_projects = null;
 
                     //List<OnlineProjectOverview> projects = JsonConvert.DeserializeObject<List<OnlineProjectOverview>>(jsonResult);
-                    recent_projects = await Task.Run(() => JsonConvert.DeserializeObject<OnlineProjectOverview>(jsonResult));
+                    recent_projects = await Task.Run(() => JsonConvert.DeserializeObject<OnlineProgramOverview>(jsonResult));
 
                     return recent_projects.CatrobatProjects;
                 }

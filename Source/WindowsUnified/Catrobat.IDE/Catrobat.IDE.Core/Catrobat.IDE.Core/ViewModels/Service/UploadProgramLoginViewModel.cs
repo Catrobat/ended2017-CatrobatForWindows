@@ -79,8 +79,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         {
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
             {
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
-                    AppResources.Main_UploadProjectMissingLoginData, MissingLoginDataCallback, MessageBoxOptions.Ok);
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramLoginErrorCaption,
+                    AppResources.Main_UploadProgramMissingLoginData, MissingLoginDataCallback, MessageBoxOptions.Ok);
             }
             else
             {
@@ -106,24 +106,24 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
                     case StatusCodes.ServerResponseLoginFailed:
                     case StatusCodes.ServerResponseRegistrationFailed:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
-                            AppResources.Main_UploadProjectLoginErrorStatic, WrongLoginDataCallback, MessageBoxOptions.Ok);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramLoginErrorCaption,
+                            AppResources.Main_UploadProgramLoginErrorStatic, WrongLoginDataCallback, MessageBoxOptions.Ok);
                         break;
 
                     case StatusCodes.ServerResponseMissingEmail:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
-                            AppResources.Main_UploadProjectLoginNonExistingUser, WrongLoginDataCallback, MessageBoxOptions.Ok);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramLoginErrorCaption,
+                            AppResources.Main_UploadProgramLoginNonExistingUser, WrongLoginDataCallback, MessageBoxOptions.Ok);
                         break;
 
                     case StatusCodes.HTTPRequestFailed:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramLoginErrorCaption,
                             AppResources.Main_NoInternetConnection, WrongLoginDataCallback, MessageBoxOptions.Ok);
                         break;
 
                     default:
-                        string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProjectUndefinedError, statusResponse.statusCode.ToString()) :
-                                                string.Format(AppResources.Main_UploadProjectLoginError, statusResponse.answer);
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
+                        string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProgramUndefinedError, statusResponse.statusCode.ToString()) :
+                                                string.Format(AppResources.Main_UploadProgramLoginError, statusResponse.answer);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramLoginErrorCaption,
                             messageString, WrongLoginDataCallback, MessageBoxOptions.Ok);
                         break;
                 }

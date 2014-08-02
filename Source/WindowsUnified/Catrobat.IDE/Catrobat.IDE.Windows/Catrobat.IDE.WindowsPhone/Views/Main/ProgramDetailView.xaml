@@ -51,7 +51,7 @@
       </Grid>
       <StackPanel Grid.Column="1" Margin="12 0 6 0">
         <TextBlock Margin="0 0 0 0" 
-                   Text="{Binding Resources.Main_ProjectName, 
+                   Text="{Binding Resources.Main_ProgramName, 
                    Source={StaticResource LocalizedStrings}}"
                    TextWrapping="Wrap"
                    Style="{ThemeResource TextNormalStyle}"/>
@@ -59,12 +59,12 @@
                    TextWrapping="Wrap"
                    Style="{ThemeResource TextSmallStyle}"/>
         <TextBlock Margin="0 12 0 0" 
-                   Text="{Binding Resources.Main_ProjectDescription, 
+                   Text="{Binding Resources.Main_ProgramDescription, 
                    Source={StaticResource LocalizedStrings}}" 
                    Style="{ThemeResource TextNormalStyle}"/>
         <StackPanel Visibility="{Binding CurrentProgram.Description, 
                     Converter={StaticResource StringVisibilityConverter}}">
-          <TextBlock Text="{Binding Resources.Main_ProjectNoDescription, 
+          <TextBlock Text="{Binding Resources.Main_ProgramNoDescription, 
                      Source={StaticResource LocalizedStrings}}"
                      TextWrapping="Wrap"
                      Style="{ThemeResource TextSubtileStyle}"/>
@@ -72,28 +72,28 @@
         <TextBlock Text="{Binding CurrentProgram.Description, Mode=OneWay}" 
                    TextWrapping="Wrap" />
         <!--<TextBlock Margin="0 12 0 0" 
-                   Text="{Binding Resources.Main_OnlineProjectUploaded, 
+                   Text="{Binding Resources.Main_OnlineProgramUploaded, 
                    Source={StaticResource LocalizedStrings}}" 
                    Style="{ThemeResource TextNormalStyle}"/>
         <TextBlock x:Name="UploadedLabel" 
-                   Text="{Binding OnlineProjectViewModel.UploadedLabelText, 
+                   Text="{Binding OnlineProgramViewModel.UploadedLabelText, 
                    Source={StaticResource Locator}}" />
         <TextBlock Text="{Binding Author}" 
                    TextWrapping="Wrap"/>
         <TextBlock x:Name="VersionLabel" 
-                   Text="{Binding OnlineProjectViewModel.VersionLabelText, 
+                   Text="{Binding OnlineProgramViewModel.VersionLabelText, 
                    Source={StaticResource Locator}}" 
                    TextWrapping="Wrap"/>
         <TextBlock Margin="0 12 0 0"
-                   Text="{Binding Resources.Main_OnlineProjectStatistics, 
+                   Text="{Binding Resources.Main_OnlineProgramStatistics, 
                    Source={StaticResource LocalizedStrings}}" 
                    Style="{ThemeResource TextNormalStyle}"/>
         <TextBlock x:Name="ViewsLabel" 
-                   Text="{Binding OnlineProjectViewModel.ViewsLabelText, 
+                   Text="{Binding OnlineProgramViewModel.ViewsLabelText, 
                    Source={StaticResource Locator}}" 
                    TextWrapping="Wrap" />
         <TextBlock x:Name="DownloadsLabel" 
-                   Text="{Binding OnlineProjectViewModel.DownloadsLabelText, 
+                   Text="{Binding OnlineProgramViewModel.DownloadsLabelText, 
                    Source={StaticResource Locator}}" 
                    TextWrapping="Wrap" />-->
       </StackPanel>
@@ -107,29 +107,29 @@
         <AppBarButton Icon="Edit" 
           Label="{Binding Resources.Main_ButtonEdit, 
           Source={StaticResource LocalizedStrings}}"
-          Command="{Binding EditCurrentProjectCommand}"/>
+          Command="{Binding EditCurrentProgramCommand}"/>
         <AppBarButton Icon="Play" 
-          Label="{Binding Resources.Editor_ButtonPlayProject, 
+          Label="{Binding Resources.Editor_ButtonPlayProgram, 
           Source={StaticResource LocalizedStrings}}"
-          Command="{Binding PlayCurrentProjectCommand}"/>
+          Command="{Binding PlayCurrentProgramCommand}"/>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
         <AppBarButton Icon="Upload" 
           Label="{Binding Resources.Main_ButtonUpload, 
           Source={StaticResource LocalizedStrings}}"
-          Command="{Binding UploadCurrentProjectCommand}"/>
+          Command="{Binding UploadCurrentProgramCommand}"/>
         <!--<AppBarButton Icon="ReShare" 
-          Label="{Binding Resources.Main_ShareProject, 
+          Label="{Binding Resources.Main_ShareProgram, 
           Source={StaticResource LocalizedStrings}}"
-          Command="{Binding ShareLocalProjectCommand}"/>
+          Command="{Binding ShareLocalProgramCommand}"/>
         <AppBarButton Icon="Pin" 
-          Label="{Binding Resources.Main_PinProjectToStart, 
+          Label="{Binding Resources.Main_PinProgramToStart, 
           Source={StaticResource LocalizedStrings}}"
-          Command="{Binding PinLocalProjectCommand}"/>-->
+          Command="{Binding PinLocalProgramCommand}"/>-->
         <AppBarButton Icon="Setting" 
-          Label="{Binding Resources.Main_ChangeProjectNameAndDescription, 
+          Label="{Binding Resources.Main_ChangeProgramNameAndDescription, 
           Source={StaticResource LocalizedStrings}}"
-          Command="{Binding RenameProjectCommand}"/>
+          Command="{Binding RenameProgramCommand}"/>
       </CommandBar.SecondaryCommands>
     </CommandBar>
   </Page.BottomAppBar>

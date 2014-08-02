@@ -12,6 +12,7 @@ using Catrobat.IDE.Core.Xml;
 using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using GalaSoft.MvvmLight.Messaging;
+using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
@@ -20,7 +21,7 @@ namespace Catrobat.IDE.Core.Services.Common
         private Stream _projectStream;
         private ExtractProgramResult _extractResult;
         private CheckProgramImportResult _checkResult;
-        private OnlineProjectHeader _onlineProjectHeader;
+        private OnlineProgramHeader _onlineProjectHeader;
         private XmlProgram _convertedProject;
         private string _programName;
 
@@ -29,7 +30,7 @@ namespace Catrobat.IDE.Core.Services.Common
             _projectStream = projectStream;
         }
 
-        public void SetDownloadHeader(OnlineProjectHeader projectHeader)
+        public void SetDownloadHeader(OnlineProgramHeader projectHeader)
         {
             _onlineProjectHeader = projectHeader;
         }
@@ -197,9 +198,9 @@ namespace Catrobat.IDE.Core.Services.Common
             if (extracionResult.Status == ExtractProgramStatus.Error)
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(
-                        "Program damaged",
-                        "The catrobat file is dameged.",
-                        ToastDisplayDuration.Long); // TODO: localize me
+                        AppResources.Import_ProgramDamaged,
+                        AppResources.Import_CatrobatDamagedText,
+                        ToastDisplayDuration.Long);
                 return;
             }
 
@@ -214,25 +215,25 @@ namespace Catrobat.IDE.Core.Services.Common
                     break;
                 case ProgramImportStatus.Damaged:
                     ServiceLocator.NotifictionService.ShowToastNotification(
-                        "Program damaged",
-                        "Program damaged and cannot be added!",
-                        ToastDisplayDuration.Long); // TODO: localize me
+                        AppResources.Import_ProgramDamaged,
+                        AppResources.Import_ProgramDamagedText,
+                        ToastDisplayDuration.Long);
 
                     acceptProject = false;
                     break;
                 case ProgramImportStatus.VersionTooOld:
                     ServiceLocator.NotifictionService.ShowToastNotification(
-                        "Program outdated",
-                        "Program is too old and cannot be added!",
-                        ToastDisplayDuration.Long); // TODO: localize me
+                        AppResources.Import_ProgramOutdated,
+                        AppResources.Import_ProgramOutdatedText,
+                        ToastDisplayDuration.Long);
 
                     acceptProject = false;
                     break;
                 case ProgramImportStatus.VersionTooNew:
                     ServiceLocator.NotifictionService.ShowToastNotification(
-                        "App version too old",
-                        "The downloaded program requires a newer version of this App!",
-                        ToastDisplayDuration.Long); // TODO: localize me
+                        AppResources.Import_AppTooOld,
+                        AppResources.Import_AppTooOldText,
+                        ToastDisplayDuration.Long);
 
                     acceptProject = true;
                     break;
@@ -245,12 +246,12 @@ namespace Catrobat.IDE.Core.Services.Common
                 await ServiceLocator.ProjectImporterService.AcceptTempProject();
                 var localProjectsChangedMessage = new MessageBase();
                 Messenger.Default.Send(localProjectsChangedMessage,
-                    ViewModelMessagingToken.LocalProjectsChangedListener);
+                    ViewModelMessagingToken.LocalProgramsChangedListener);
 
                 ServiceLocator.NotifictionService.ShowToastNotification(
-                    "Program added",
-                    "Program successfully added to your program list.",
-                    ToastDisplayDuration.Long); // TODO: localize me
+                    AppResources.Import_ProgramAdded,
+                    AppResources.Import_ProgramAddedText,
+                    ToastDisplayDuration.Long);
             }
         }
     }

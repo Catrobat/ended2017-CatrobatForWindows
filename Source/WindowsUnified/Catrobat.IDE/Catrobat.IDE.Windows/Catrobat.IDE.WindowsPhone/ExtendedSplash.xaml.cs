@@ -144,7 +144,7 @@ namespace Catrobat.IDE.WindowsPhone
 
                 if (files.Count == 1)
                 {
-                    if (ServiceLocator.PictureService.SupportedFileTypes.
+                    if (ServiceLocator.PictureService.SupportedImageFileTypes.
                         Contains(Path.GetExtension(files[0].Name)))
                     {
                         ServiceLocator.PictureService.RecievedFiles(
@@ -177,12 +177,11 @@ namespace Catrobat.IDE.WindowsPhone
                     }
 
 
-                    var imageFiles = (from StorageFile file in activationArgs.Files
-                                      from imageExtension in
-                                          ServiceLocator.PictureService.SupportedFileTypes
-                                      where file.Name.EndsWith(
-                                      ServiceLocator.PictureService.ImageFileExtensionPrefix + imageExtension)
-                                      select file).ToList();
+                    var imageFiles = 
+                        (from StorageFile file in activationArgs.Files
+                        where  ServiceLocator.PictureService.
+                        SupportedImageFileTypes.Contains(Path.GetExtension(file.Name))
+                        select file).ToList();
 
                     if (imageFiles.Count > 0)
                         ServiceLocator.PictureService.RecievedFiles(imageFiles);

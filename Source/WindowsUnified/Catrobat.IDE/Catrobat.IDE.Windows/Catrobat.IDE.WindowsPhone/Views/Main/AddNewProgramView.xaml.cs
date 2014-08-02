@@ -19,13 +19,13 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
                 //TextBoxProjectName.Focus(FocusState.Keyboard);
-                TextBoxProjectName.SelectAll();
+                TextBoxProgramName.SelectAll();
             });
         }
 
-        private void TextBoxProjectName_OnTextChanged(object sender, TextChangedEventArgs e)
+        private void TextBoxProgramName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            _viewModel.ProjectName = TextBoxProjectName.Text;
+            _viewModel.ProgramName = TextBoxProgramName.Text;
         }
     }
 }

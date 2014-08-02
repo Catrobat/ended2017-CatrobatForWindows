@@ -87,25 +87,25 @@
   <Grid Margin="0 7 7 7" >
     <FlyoutPresenter Visibility="Collapsed">
       <MenuFlyout x:Name="MenuFlyoutLocalProjectOptions">
-        <MenuFlyoutItem Text="{Binding Resources.Main_CopyProject, 
+        <MenuFlyoutItem Text="{Binding Resources.Main_CopyProgram, 
                                 Source={StaticResource LocalizedStrings}}"
-                                Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, 
+                                Command="{Binding MainViewModel.CopyLocalProgramCommand, Mode=OneWay, 
                                 Source={StaticResource Locator}}" 
                                 CommandParameter="{Binding ProjectName}"/>
-        <MenuFlyoutItem Text="{Binding Resources.Main_DeleteProject, 
+        <MenuFlyoutItem Text="{Binding Resources.Main_DeleteProgram, 
                                 Source={StaticResource LocalizedStrings}}"
-                                Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, 
+                                Command="{Binding MainViewModel.DeleteLocalProgramCommand, Mode=OneWay, 
                                 Source={StaticResource Locator}}" 
                                 CommandParameter="{Binding ProjectName}"/>
       </MenuFlyout>
     </FlyoutPresenter>
 
     <Button Padding="0 -8 0 -8" BorderThickness="0" 
-      Command="{Binding MainViewModel.OpenProjectCommand, 
+      Command="{Binding MainViewModel.OpenProgramCommand, 
       Source={StaticResource Locator}}"
       CommandParameter="{Binding}">
       <Grid>
-        <Grid Background="White" d:DataContext="{d:DesignData catrobatObjects:ProjectDummyHeader}">
+        <Grid Background="White" d:DataContext="{d:DesignData catrobatObjects:ProgramDummyHeader}">
           <Border BorderThickness="0" BorderBrush="White">
             <Grid Width="140" Height="140" Background="LightGray">
               <Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 

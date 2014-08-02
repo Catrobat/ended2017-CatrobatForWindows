@@ -739,7 +739,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private void ProjectSettingsAction()
         {
             var message = new GenericMessage<Program>(CurrentProgram);
-            Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectHeaderChangedListener);
+            Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProgramHeaderChangedListener);
 
             ServiceLocator.NavigationService.NavigateTo<ProgramSettingsViewModel>();
         }
@@ -889,7 +889,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
 

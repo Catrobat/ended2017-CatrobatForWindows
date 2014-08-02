@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
     mc:Ignorable="d"
-    DataContext="{Binding MainViewModel.SelectedOnlineProject, Source={StaticResource Locator}}" Loaded="ViewPageBase_Loaded">
+    DataContext="{Binding MainViewModel.SelectedOnlineProgram, Source={StaticResource Locator}}" Loaded="ViewPageBase_Loaded">
 
   <Grid x:Name="LayoutRoot" 
         Background="{ThemeResource AppBackgroundBrush}">
@@ -19,11 +19,11 @@
                 Grid.Row="0"
                 Margin="12"> 
       <!--<TextBlock x:Name="ApplicationTitle" 
-                 Text="{Binding Resources.Main_TitleOnlineProject, 
+                 Text="{Binding Resources.Main_TitleOnlineProgram, 
                  Source={StaticResource LocalizedStrings}}" 
                  Style="{ThemeResource TextNormalStyle}"/>-->
       <TextBlock x:Name="PageTitle" 
-                 Text="{Binding Resources.Main_TitleOnlineProject, 
+                 Text="{Binding Resources.Main_TitleOnlineProgram, 
                  Source={StaticResource LocalizedStrings}}" 
                  Margin="0 0 0 0" 
                  Style="{ThemeResource TextTitleNormalStyle}"/>
@@ -41,7 +41,7 @@
 
       <StackPanel Grid.Column="1" Margin="12 0 6 0">
         <TextBlock Margin="0 0 0 0" 
-                   Text="{Binding Resources.Main_ProjectName, 
+                   Text="{Binding Resources.Main_ProgramName, 
                    Source={StaticResource LocalizedStrings}}"
                    TextWrapping="Wrap"
                    Style="{ThemeResource TextNormalStyle}"/>
@@ -49,12 +49,12 @@
                    TextWrapping="Wrap"
                    Style="{ThemeResource TextSmallStyle}"/>
         <TextBlock Margin="0 12 0 0" 
-                   Text="{Binding Resources.Main_ProjectDescription, 
+                   Text="{Binding Resources.Main_ProgramDescription, 
                    Source={StaticResource LocalizedStrings}}" 
                    Style="{ThemeResource TextNormalStyle}"/>
         <StackPanel Visibility="{Binding Description, 
                     Converter={StaticResource StringVisibilityConverter}}">
-          <TextBlock Text="{Binding Resources.Main_ProjectNoDescription, 
+          <TextBlock Text="{Binding Resources.Main_ProgramNoDescription, 
                      Source={StaticResource LocalizedStrings}}"
                      TextWrapping="Wrap"
                      Style="{ThemeResource TextSubtileStyle}"/>
@@ -63,7 +63,7 @@
                    TextWrapping="Wrap"
                    Style="{ThemeResource TextSmallStyle}"/>
         <TextBlock Margin="0 12 0 0" 
-                   Text="{Binding Resources.Main_OnlineProjectUploaded, 
+                   Text="{Binding Resources.Main_OnlineProgramUploaded, 
                    Source={StaticResource LocalizedStrings}}" 
                    Style="{ThemeResource TextNormalStyle}"/>
         <TextBlock x:Name="UploadedLabel" 
@@ -79,7 +79,7 @@
                    TextWrapping="Wrap"
                    Style="{ThemeResource TextSmallStyle}"/>
         <TextBlock Margin="0 12 0 0"
-                   Text="{Binding Resources.Main_OnlineProjectStatistics, 
+                   Text="{Binding Resources.Main_OnlineProgramStatistics, 
                    Source={StaticResource LocalizedStrings}}" 
                    Style="{ThemeResource TextNormalStyle}"/>
         <TextBlock x:Name="ViewsLabel" 
@@ -100,19 +100,19 @@
     <CommandBar RequestedTheme="Dark" Background="{ThemeResource AppBarBackgroundBrush}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Download" 
-                      Label="{Binding Resources.Main_OnlineProjectDownloadButton, 
+                      Label="{Binding Resources.Main_OnlineProgramDownloadButton, 
                       Source={StaticResource LocalizedStrings}}"
                       Command="{Binding OnlineProgramViewModel.DownloadCommand, 
                       Source={StaticResource Locator}}" 
                       CommandParameter="{Binding}"/>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
-        <AppBarButton Label="{Binding Resources.Main_OnlineProjectReportButton, 
+        <AppBarButton Label="{Binding Resources.Main_OnlineProgramReportButton, 
                       Source={StaticResource LocalizedStrings}}"
                       Command="{Binding OnlineProgramViewModel.ReportCommand, 
                       Source={StaticResource Locator}}" 
                       CommandParameter="{Binding}"/>
-        <AppBarButton Label="{Binding Resources.Main_OnlineProjectLicenseButton, 
+        <AppBarButton Label="{Binding Resources.Main_OnlineProgramLicenseButton, 
                       Source={StaticResource LocalizedStrings}}"
                       Command="{Binding OnlineProgramViewModel.LicenseCommand, 
                       Source={StaticResource Locator}}" />

@@ -9,6 +9,7 @@ using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Windows.UI.Xaml;
 using Catrobat.IDE.WindowsPhone.Controls;
+using Catrobat.IDE.WindowsPhone.Controls.SoundControls;
 using Catrobat.IDE.WindowsShared.Services;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
@@ -37,15 +38,18 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         {
             _commandBarActions = new MultiModeEditorCommandBar
             {
+                TargetType = AppBarTargetType.Action,
                 CopyCommand = _viewModel.CopyScriptBrickCommand,
                 DeleteCommand = _viewModel.DeleteScriptBrickCommand,
                 NewCommand = _viewModel.AddNewScriptBrickCommand,
-                PlayCommand = _viewModel.StartPlayerCommand,
+                PlayCommand = _viewModel.StartPlayerCommand
+                
             };
             _commandBarActions.ModeChanged += MultiModeEditorCommandBar_OnModeChanged;
 
             _commandBarLooks = new MultiModeEditorCommandBar
             {
+                TargetType = AppBarTargetType.Look,
                 CopyCommand = _viewModel.CopyLookCommand,
                 DeleteCommand = _viewModel.DeleteLookCommand,
                 NewCommand = _viewModel.AddNewLookCommand,
@@ -55,6 +59,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
             _commandBarSounds = new MultiModeEditorCommandBar
             {
+                TargetType = AppBarTargetType.Sound,
                 CopyCommand = _viewModel.CopySoundCommand,
                 DeleteCommand = _viewModel.DeleteSoundCommand,
                 NewCommand = _viewModel.AddNewSoundCommand,
@@ -67,6 +72,8 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         {
             //((SoundPlayerServiceWindowsShared) ServiceLocator.SoundPlayerService).
             //    SetMediaElement(MediaElementSound);
+            var playSoundButtonGroup = (SoundPlayButtonGroup) FindName("PlayPauseButtonGroupSounds");
+            if (playSoundButtonGroup != null) playSoundButtonGroup.Stop();
 
             base.OnNavigatedTo(e);
         }

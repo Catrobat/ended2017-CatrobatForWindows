@@ -12,6 +12,8 @@ using Catrobat.IDE.WindowsPhone.Controls.ActionsControls;
 
 namespace Catrobat.IDE.WindowsPhone.Controls
 {
+    public enum AppBarTargetType { Object, Action, Look, Sound }
+
     public enum MultiModeEditorCommandBarMode {Normal, Reorder, Select }
 
     public delegate void MultiModeEditorCommandBarModeChanged(MultiModeEditorCommandBarMode mode);
@@ -120,9 +122,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 
         public MultiModeEditorCommandBar()
         {
+            this.RequestedTheme =ElementTheme.Dark;
+
             _playButton = new AppBarButton
             {
-                Label = AppResources.Editor_ButtonPlayProject,
+                Label = AppResources.Editor_ButtonPlayProgram,
                 Icon = new SymbolIcon(Symbol.Play)
             };
 

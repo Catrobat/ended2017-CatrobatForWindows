@@ -214,7 +214,7 @@
     <Compile Include="Xml\XmlObjects\Bricks\XmlBrickList.cs" />
     <Compile Include="CatrobatObjects\IAsyncCloneable.cs" />
     <Compile Include="CatrobatObjects\IObservableCollection.cs" />
-    <Compile Include="CatrobatObjects\OnlineProjectOverview.cs" />
+    <Compile Include="CatrobatObjects\OnlineProgramOverview.cs" />
     <Compile Include="CatrobatObjects\ObservableSelectCollection.cs" />
     <Compile Include="CatrobatObjects\SerializableTuple.cs" />
     <Compile Include="ExtensionMethods\CloneableExtensions.cs" />
@@ -316,9 +316,9 @@
     <Compile Include="Xml\XmlObjects\DataRootObject.cs" />
     <Compile Include="Xml\XmlObjects\Formulas\XmlFormula.cs" />
     <Compile Include="Xml\XmlObjects\Formulas\XmlFormulaTree.cs" />
-    <Compile Include="CatrobatObjects\OnlineProjectHeader.cs" />
+    <Compile Include="CatrobatObjects\OnlineProgramHeader.cs" />
     <Compile Include="Xml\XmlObjects\XmlProgram.cs" />
-    <Compile Include="CatrobatObjects\ProjectDummyHeader.cs" />
+    <Compile Include="CatrobatObjects\ProgramDummyHeader.cs" />
     <Compile Include="Xml\XmlObjects\XmlProjectHeader.cs" />
     <Compile Include="Xml\XmlObjects\Scripts\XmlBroadcastScript.cs" />
     <Compile Include="Xml\XmlObjects\Scripts\XmlScript.cs" />

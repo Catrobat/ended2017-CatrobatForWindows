@@ -262,7 +262,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             EditVariableCommand = new RelayCommand(EditVariableAction, EditVariableCommand_CanExecute);
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMesageAction);

@@ -48,7 +48,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
 
             var project = new Program {Name = "TestProject"};
             var messageContext = new GenericMessage<Program>(project);
-            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProjectChangedListener);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProgramChangedListener);
 
             var sprite = new Sprite();
             var messageContext2 = new GenericMessage<Sprite>(sprite);

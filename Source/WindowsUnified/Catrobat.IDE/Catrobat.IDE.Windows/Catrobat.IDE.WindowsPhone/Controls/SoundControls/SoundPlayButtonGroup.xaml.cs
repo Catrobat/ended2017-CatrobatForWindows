@@ -131,7 +131,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.SoundControls
             else
             {
                 activeButton.State = SoundPlayState.Paused;
-                Pause();
+                Stop();
             }
 
             if (Command != null)
@@ -208,16 +208,19 @@ namespace Catrobat.IDE.WindowsPhone.Controls.SoundControls
 
         public void Play()
         {
+            _mediaElement.AutoPlay = true;
             _mediaElement.Play();
         }
 
         public void Pause()
         {
+            _mediaElement.AutoPlay = false;
             _mediaElement.Pause();
         }
 
         public void Stop()
         {
+            _mediaElement.AutoPlay = false;
             _mediaElement.Stop();
         }
 

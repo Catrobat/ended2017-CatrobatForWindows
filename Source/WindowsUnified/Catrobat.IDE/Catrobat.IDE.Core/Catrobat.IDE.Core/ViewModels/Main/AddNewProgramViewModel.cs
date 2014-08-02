@@ -11,41 +11,35 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     {
         #region Private Members
 
-        private Program _currentProject;
-        private string _projectName;
-        private bool _copyCurrentProjectAsTemplate;
-
         #endregion
 
         #region Properties
 
-        public Program CurrentProject
+
+        private Program _currentProgram;
+        public Program CurrentProgram
         {
-            get { return _currentProject; }
+            get { return _currentProgram; }
             set
             {
-                _currentProject = value;
+                _currentProgram = value;
 
                 ServiceLocator.DispatcherService.RunOnMainThread(() => 
-                    RaisePropertyChanged(() => CurrentProject));
+                    RaisePropertyChanged(() => CurrentProgram));
             }
         }
 
-        //public string TextCopyCurrentProjectAsTemplate
-        //{
-        //    get { return String.Format(AppResources.Main_CreateProjectBasedOnCurrentProject, CurrentProject.Name); }
-        //}
-
-        public string ProjectName
+        private string _programName;
+        public string ProgramName
         {
-            get { return _projectName; }
+            get { return _programName; }
             set
             {
-                if (_projectName != value)
+                if (_programName != value)
                 {
-                    _projectName = value;
+                    _programName = value;
 
-                    RaisePropertyChanged(() => ProjectName);
+                    RaisePropertyChanged(() => ProgramName);
                     SaveCommand.RaiseCanExecuteChanged();
                 }
             }
@@ -70,9 +64,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 if (_templateOptions != null) return _templateOptions;
 
 
-                var projectGenerators = ServiceLocator.CreateImplementations<IProgramGenerator>();
-                var availableTemplates = projectGenerators.Select(projectGenerator =>
-                    new ProjectTemplateEntry(projectGenerator)).ToList();
+                var programGenerators = ServiceLocator.CreateImplementations<IProgramGenerator>();
+                var availableTemplates = programGenerators.Select(programGenerator =>
+                    new ProjectTemplateEntry(programGenerator)).ToList();
 
                 availableTemplates.Sort();
                 _templateOptions =
@@ -85,39 +79,39 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        private bool _createEmptyProject;
-        public bool CreateEmptyProject
+        private bool _createEmptyProgram;
+        public bool CreateEmptyProgram
         {
-            get { return _createEmptyProject; }
+            get { return _createEmptyProgram; }
 
             set
             {
-                _createEmptyProject = value;
-                RaisePropertyChanged(() => CreateEmptyProject);
+                _createEmptyProgram = value;
+                RaisePropertyChanged(() => CreateEmptyProgram);
             }
         }
 
-        private bool _createCopyOfCurrentProject;
-        public bool CreateCopyOfCurrentProject
+        private bool _createCopyOfCurrentProgram;
+        public bool CreateCopyOfCurrentProgram
         {
-            get { return _createCopyOfCurrentProject; }
+            get { return _createCopyOfCurrentProgram; }
 
             set
             {
-                _createCopyOfCurrentProject = value;
-                RaisePropertyChanged(() => CreateCopyOfCurrentProject);
+                _createCopyOfCurrentProgram = value;
+                RaisePropertyChanged(() => CreateCopyOfCurrentProgram);
             }
         }
 
-        private bool _createTemplateProject;
-        public bool CreateTemplateProject
+        private bool _createTemplateProgram;
+        public bool CreateTemplateProgram
         {
-            get { return _createTemplateProject; }
+            get { return _createTemplateProgram; }
 
             set
             {
-                _createTemplateProject = value;
-                RaisePropertyChanged(() => CreateTemplateProject);
+                _createTemplateProgram = value;
+                RaisePropertyChanged(() => CreateTemplateProgram);
             }
         }
 
@@ -135,7 +129,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private bool SaveCommand_CanExecute()
         {
-            return ProjectName != null && ProjectName.Length >= 2;
+            return ProgramName != null && ProgramName.Length >= 2;
         }
 
         #endregion
@@ -144,39 +138,39 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void SaveAction()
         {
-            if (CurrentProject != null)
-                await CurrentProject.Save();
+            if (CurrentProgram != null)
+                await CurrentProgram.Save();
 
-            if (CreateEmptyProject)
+            if (CreateEmptyProgram)
             {
-                CurrentProject = await ServiceLocator.ContextService.CreateEmptyProgram(_projectName);
+                CurrentProgram = await ServiceLocator.ContextService.CreateEmptyProgram(_programName);
             }
-            else if (CreateCopyOfCurrentProject)
+            else if (CreateCopyOfCurrentProgram)
             {
-                CurrentProject = await ServiceLocator.ContextService.CopyProgram(CurrentProject.Name, _projectName);
+                CurrentProgram = await ServiceLocator.ContextService.CopyProgram(CurrentProgram.Name, _programName);
             }
-            else if (CreateTemplateProject)
+            else if (CreateTemplateProgram)
             {
-                CurrentProject = await SelectedTemplateOption.ProjectGenerator.GenerateProject(ProjectName, true);
+                CurrentProgram = await SelectedTemplateOption.ProjectGenerator.GenerateProject(ProgramName, true);
             }
 
-            if (CurrentProject != null)
+            if (CurrentProgram != null)
             {
-                await CurrentProject.Save();
+                await CurrentProgram.Save();
 
                 await ServiceLocator.ContextService.
-                    CreateThumbnailsForNewProgram(CurrentProject.Name);
+                    CreateThumbnailsForNewProgram(CurrentProgram.Name);
 
-                var projectChangedMessage = new GenericMessage<Program>(CurrentProject);
-                Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                var programChangedMessage = new GenericMessage<Program>(CurrentProgram);
+                Messenger.Default.Send(programChangedMessage, ViewModelMessagingToken.CurrentProgramChangedListener);
             }
 
             GoBackAction();
 
 
 
-            var localProjectsChangedMessage = new MessageBase();
-            Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
+            var localProgramsChangedMessage = new MessageBase();
+            Messenger.Default.Send(localProgramsChangedMessage, ViewModelMessagingToken.LocalProgramsChangedListener);
 
             
         }
@@ -196,31 +190,31 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region MessageActions
 
-        private void CurrentProjectChangedAction(GenericMessage<Program> message)
+        private void CurrentProgramChangedAction(GenericMessage<Program> message)
         {
-            CurrentProject = message.Content;
+            CurrentProgram = message.Content;
         }
 
         #endregion
 
         public AddNewProgramViewModel()
         {
-            CreateEmptyProject = true;
+            CreateEmptyProgram = true;
 
             // Commands
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
+                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedAction);
         }
 
         public void ResetViewModel()
         {
-            ProjectName = "";
-            CreateEmptyProject = true;
-            CreateCopyOfCurrentProject = false;
-            CreateTemplateProject = false;
+            ProgramName = "";
+            CreateEmptyProgram = true;
+            CreateCopyOfCurrentProgram = false;
+            CreateTemplateProgram = false;
         }
     }
 }

@@ -70,7 +70,7 @@ namespace Catrobat.IDE.Core.ViewModels.Share
             UploadToSkyDriveCommand = new RelayCommand(ShareWithSkydriveAction, ShareWithSkydriveCommand_CanExecute);
  
             Messenger.Default.Register<GenericMessage<XmlProgram>>(this,
-                 ViewModelMessagingToken.ShareProjectHeaderListener, ProjectToShareChangedMessageAction);
+                 ViewModelMessagingToken.ShareProgramHeaderListener, ProjectToShareChangedMessageAction);
         }
     }
 }

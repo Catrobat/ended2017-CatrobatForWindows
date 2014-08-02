@@ -19,7 +19,7 @@
           Height="90" Margin="0 1 0 1" RequestedTheme="Dark"
           Command="{Binding SpriteEditorViewModel.EditLookCommand, 
           Source={StaticResource Locator}}" CommandParameter="{Binding}">
-          <Grid Margin="5 5 5 5" Height="90" Width="400" RequestedTheme="Dark"
+          <Grid Margin="0 5 0 5" Height="90" Width="400" RequestedTheme="Dark"
             Background="{ThemeResource LooksBrush}"
             DataContext="{Binding}"
             d:DataContext="{d:DesignInstance models:Look}">
@@ -47,77 +47,38 @@
     </DataTemplate>
 
     <DataTemplate x:Key="SoundItemTemplate">
-      <Grid Height="80">
-        <Button BorderThickness="0" Padding="0 -10 0 -10"
-          Height="80" Margin="0 1 0 1" RequestedTheme="Dark"
+      <Grid Margin="0 5 0 5">
+        <Button HorizontalAlignment="Left" BorderThickness="0" Padding="0 -10 0 -10"
+          Height="85" Width="350" Margin="0 1 0 1" RequestedTheme="Dark"
           Command="{Binding SpriteEditorViewModel.EditSoundCommand, 
           Source={StaticResource Locator}}" CommandParameter="{Binding}">
-          <Grid Margin="5 5 5 5" Height="80" Width="400" RequestedTheme="Dark"
-            Background="{ThemeResource SoundsBrush}"
+          <Grid Width="350" Height="85" VerticalAlignment="Center" Background="{ThemeResource SoundsBrush}"
             DataContext="{Binding}"
             d:DataContext="{d:DesignInstance models:Sound}">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="3*" />
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <soundControls:SoundPlayButton
               Group="{Binding ElementName=PlayPauseButtonGroupSounds}"
               Sound="{Binding}"
-              RoundBorderThickness="6" Margin="0"
-              Grid.Column="0" Height="70" Width="70" />
-            <Grid Grid.Column="1" Margin="5">
-              <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5"
+              VerticalAlignment="Center"
+              RoundBorderThickness="5" Margin="10 0 0 0"
+              Grid.Column="0" Height="65" Width="65" />
+            <Grid Grid.Column="1" Margin="15 5 5 5">
+              <TextBlock Grid.Row="0" FontSize="32" 
                 Text="{Binding Name}" VerticalAlignment="Center" />
             </Grid>
           </Grid>
         </Button>
-        <Grid Height="82" Background="Transparent"
+        <Grid Height="87" Background="Transparent"
               Visibility="{Binding ReorderMode, ElementName=ListViewSounds, 
               Converter={StaticResource ReorderModeVisibilityConverter}}" />
-        <Grid Height="82" Background="Transparent"
+        <Grid Height="87" Background="Transparent"
               Visibility="{Binding SelectionMode, ElementName=ListViewSounds, 
               Converter={StaticResource SelectionModeVisibilityConverter}}" />
       </Grid>
     </DataTemplate>
-
-    <!--<Grid Grid.Row="2">
-      <StackPanel RequestedTheme="Dark">
-        <controls:EditorAppBar
-          Visibility="{Binding IsVisibleScripts, 
-          Converter={StaticResource BoolVisibilityConverter}}"
-          VerticalAlignment="Bottom"
-          TargetType="Script"
-          ClearSelectionCommand="{Binding ClearScriptsSelectionCommand}"
-          CopyCommand="{Binding CopyScriptBrickCommand}"
-          DeleteCommand="{Binding DeleteScriptBrickCommand}"
-          PlayCommand="{Binding StartPlayerCommand}"
-          NewCommand="{Binding AddNewScriptBrickCommand}"
-          NumberOfSelectedItems="{Binding SelectedActions.Count}"/>
-        <controls:EditorAppBar
-          Visibility="{Binding IsVisibleLooks, 
-          Converter={StaticResource BoolVisibilityConverter}}"
-          VerticalAlignment="Bottom"
-          TargetType="Look"
-          ClearSelectionCommand="{Binding ClearLooksSelectionCommand}"
-          CopyCommand="{Binding CopyLookCommand}"
-          DeleteCommand="{Binding DeleteLookCommand}"
-          EditCommand="{Binding EditLookCommand}"
-          PlayCommand="{Binding StartPlayerCommand}"
-          NewCommand="{Binding AddNewLookCommand}"
-          NumberOfSelectedItems="{Binding SelectedLooks.Count}"/>
-        <controls:EditorAppBar
-          Visibility="{Binding IsVisibleSounds, 
-          Converter={StaticResource BoolVisibilityConverter}}"
-          VerticalAlignment="Bottom"
-          TargetType="Sound"
-          ClearSelectionCommand="{Binding ClearSoundsSelectionCommand}"
-          DeleteCommand="{Binding DeleteSoundCommand}"
-          EditCommand="{Binding EditSoundCommand}"
-          PlayCommand="{Binding StartPlayerCommand}"
-          NewCommand="{Binding AddNewSoundCommand}"
-          NumberOfSelectedItems="{Binding SelectedSounds.Count}"/>
-      </StackPanel>
-    </Grid>-->
   </Page.Resources>
 
   <Grid Background="{ThemeResource AppBackgroundBrush}">

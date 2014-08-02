@@ -37,7 +37,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
             int offset = 0;
             int count = 5;
             CancellationTokenSource taskCancellation = new CancellationTokenSource();
-            List<OnlineProjectHeader> projects = await webCommunicationService.LoadOnlineProjectsAsync(filterText, offset, count, taskCancellation.Token);
+            List<OnlineProgramHeader> projects = await webCommunicationService.LoadOnlineProjectsAsync(filterText, offset, count, taskCancellation.Token);
             Assert.AreEqual(count, projects.Count);
         }
 
