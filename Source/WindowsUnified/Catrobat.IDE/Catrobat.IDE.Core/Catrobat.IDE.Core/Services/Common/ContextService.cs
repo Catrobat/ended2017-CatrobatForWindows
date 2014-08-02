@@ -149,7 +149,7 @@ namespace Catrobat.IDE.Core.Services.Common
             return newProject;
         }
 
-        public async Task<Program> CopyProgram(string sourceProgramName, 
+        public async Task<Program> CopyProgram(string sourceProgramName,
             string newProgramName)
         {
             using (var storage = StorageSystem.GetStorage())
@@ -211,24 +211,37 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public async Task CreateThumbnailsForNewProgram(string programName)
         {
+
             var programPath = Path.Combine(StorageConstants.ProgramsPath, programName);
             var pathToLooks = Path.Combine(programPath, StorageConstants.ProgramLooksPath);
 
-            using (var storage = StorageSystem.GetStorage())
+            try
             {
-                await storage.TryCreateThumbnailAsync(Path.Combine(programPath, 
-                    StorageConstants.ProgramManualScreenshotPath));
 
-                await storage.TryCreateThumbnailAsync(Path.Combine(programPath,
-                    StorageConstants.ProgramAutomaticScreenshotPath));
-
-                var fileNames = await storage.GetFileNamesAsync(pathToLooks);
-
-                foreach (var fileName in fileNames)
+                using (var storage = StorageSystem.GetStorage())
                 {
-                    await storage.TryCreateThumbnailAsync(
-                        Path.Combine(pathToLooks, fileName));
+                    await storage.TryCreateThumbnailAsync(Path.Combine(programPath,
+                        StorageConstants.ProgramManualScreenshotPath));
+
+                    await storage.TryCreateThumbnailAsync(Path.Combine(programPath,
+                        StorageConstants.ProgramAutomaticScreenshotPath));
+
+                    if (await storage.DirectoryExistsAsync(pathToLooks))
+                    {
+                        var fileNames = await storage.GetFileNamesAsync(pathToLooks);
+
+                        foreach (var fileName in fileNames)
+                        {
+                            await storage.TryCreateThumbnailAsync(
+                                Path.Combine(pathToLooks, fileName));
+                        }  
+                    }
                 }
+            }
+            catch
+            {
+                if(Debugger.IsAttached)
+                    Debugger.Break();
             }
         }
     }

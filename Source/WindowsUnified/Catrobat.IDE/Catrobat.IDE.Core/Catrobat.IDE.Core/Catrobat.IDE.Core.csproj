@@ -318,7 +318,7 @@
     <Compile Include="Xml\XmlObjects\Formulas\XmlFormulaTree.cs" />
     <Compile Include="CatrobatObjects\OnlineProgramHeader.cs" />
     <Compile Include="Xml\XmlObjects\XmlProgram.cs" />
-    <Compile Include="CatrobatObjects\ProgramDummyHeader.cs" />
+    <Compile Include="CatrobatObjects\LocalProjectHeader.cs" />
     <Compile Include="Xml\XmlObjects\XmlProjectHeader.cs" />
     <Compile Include="Xml\XmlObjects\Scripts\XmlBroadcastScript.cs" />
     <Compile Include="Xml\XmlObjects\Scripts\XmlScript.cs" />
