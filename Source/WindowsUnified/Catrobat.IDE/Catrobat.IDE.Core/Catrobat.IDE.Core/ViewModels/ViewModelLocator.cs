@@ -61,7 +61,7 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<ChangeVariableViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SpritesViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SpriteEditorViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<ShareProjectServiceSelectionViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<ShareProgramServiceSelectionViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<UploadToSkyDriveViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<NewLookSourceSelectionViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<LookSavingViewModel>(TypeCreationMode.Normal);
@@ -473,16 +473,16 @@ namespace Catrobat.IDE.Core.ViewModels
         }
 
 
-        [SuppressMessage("Microsoft.Performance",
-        "CA1822:MarkMembersAsStatic",
-        Justification = "This non-static member is needed for data binding purposes.")]
-        public ShareProjectServiceSelectionViewModel ShareProjectServiceSelectionViewModel
-        {
-            get
-            {
-                return ServiceLocator.GetInstance<ShareProjectServiceSelectionViewModel>();
-            }
-        }
+        //[SuppressMessage("Microsoft.Performance",
+        //"CA1822:MarkMembersAsStatic",
+        //Justification = "This non-static member is needed for data binding purposes.")]
+        //public ShareProgramServiceSelectionViewModel ShareProgramServiceSelectionViewModel
+        //{
+        //    get
+        //    {
+        //        return ServiceLocator.GetInstance<ShareProgramServiceSelectionViewModel>();
+        //    }
+        //}
 
         [SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",

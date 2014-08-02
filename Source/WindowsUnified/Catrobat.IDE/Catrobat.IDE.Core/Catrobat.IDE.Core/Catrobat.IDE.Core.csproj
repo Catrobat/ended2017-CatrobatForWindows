@@ -538,7 +538,7 @@
     <Compile Include="ViewModels\Settings\SettingsLanguageViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsThemeViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsViewModel.cs" />
-    <Compile Include="ViewModels\Share\ShareProjectServiceSelectionViewModel.cs" />
+    <Compile Include="ViewModels\Share\ShareProgramServiceSelectionViewModel.cs" />
     <Compile Include="ViewModels\Share\UploadToSkyDriveViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />

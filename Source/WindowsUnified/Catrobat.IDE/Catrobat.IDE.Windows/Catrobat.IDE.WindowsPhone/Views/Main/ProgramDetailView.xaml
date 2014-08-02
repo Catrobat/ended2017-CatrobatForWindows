@@ -118,11 +118,11 @@
           Label="{Binding Resources.Main_ButtonUpload, 
           Source={StaticResource LocalizedStrings}}"
           Command="{Binding UploadCurrentProgramCommand}"/>
-        <!--<AppBarButton Icon="ReShare" 
+        <AppBarButton Icon="ReShare" 
           Label="{Binding Resources.Main_ShareProgram, 
           Source={StaticResource LocalizedStrings}}"
           Command="{Binding ShareLocalProgramCommand}"/>
-        <AppBarButton Icon="Pin" 
+        <!--<AppBarButton Icon="Pin" 
           Label="{Binding Resources.Main_PinProgramToStart, 
           Source={StaticResource LocalizedStrings}}"
           Command="{Binding PinLocalProgramCommand}"/>-->

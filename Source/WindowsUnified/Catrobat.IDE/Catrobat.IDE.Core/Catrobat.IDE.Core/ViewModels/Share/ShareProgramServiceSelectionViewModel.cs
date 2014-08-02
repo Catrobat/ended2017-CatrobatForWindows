@@ -8,7 +8,7 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Core.ViewModels.Share
 {
-    public class ShareProjectServiceSelectionViewModel : ViewModelBase
+    public class ShareProgramServiceSelectionViewModel : ViewModelBase
     {
         #region private Members
 
@@ -64,7 +64,7 @@ namespace Catrobat.IDE.Core.ViewModels.Share
 
         #endregion
 
-        public ShareProjectServiceSelectionViewModel()
+        public ShareProgramServiceSelectionViewModel()
         {
             // Commands
             UploadToSkyDriveCommand = new RelayCommand(ShareWithSkydriveAction, ShareWithSkydriveCommand_CanExecute);
