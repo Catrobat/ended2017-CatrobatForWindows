@@ -126,6 +126,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void SaveAction()
         {
+            GoBackAction();
+
             if (CurrentProgram != null)
                 await CurrentProgram.Save();
 
@@ -152,21 +154,14 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 Messenger.Default.Send(programChangedMessage, ViewModelMessagingToken.CurrentProgramChangedListener);
             }
 
-            GoBackAction();
-
             var localProgramsChangedMessage = new MessageBase();
-            Messenger.Default.Send(localProgramsChangedMessage, ViewModelMessagingToken.LocalProgramsChangedListener);
+            Messenger.Default.Send(localProgramsChangedMessage, 
+                ViewModelMessagingToken.LocalProgramsChangedListener);
         }
 
         private void CancelAction()
         {
             GoBackAction();
-        }
-
-        protected override void GoBackAction()
-        {
-            ResetViewModel();
-            base.GoBackAction();
         }
 
         #endregion
@@ -192,11 +187,12 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                  ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedAction);
         }
 
-        public void ResetViewModel()
+        public override void NavigateTo()
         {
             ProgramName = "";
             CreateEmptyProgram = true;
             CreateTemplateProgram = false;
+            base.NavigateTo();
         }
     }
 }
