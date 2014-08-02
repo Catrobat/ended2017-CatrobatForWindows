@@ -8,7 +8,6 @@ using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.Core.ViewModels.Settings;
-using Catrobat.IDE.Core.ViewModels.Share;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
@@ -61,8 +60,6 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<ChangeVariableViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SpritesViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SpriteEditorViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<ShareProgramServiceSelectionViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<UploadToSkyDriveViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<NewLookSourceSelectionViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<LookSavingViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<EditorLoadingViewModel>(TypeCreationMode.Normal);
@@ -469,29 +466,6 @@ namespace Catrobat.IDE.Core.ViewModels
             get
             {
                 return ServiceLocator.GetInstance<SpriteEditorViewModel>();
-            }
-        }
-
-
-        //[SuppressMessage("Microsoft.Performance",
-        //"CA1822:MarkMembersAsStatic",
-        //Justification = "This non-static member is needed for data binding purposes.")]
-        //public ShareProgramServiceSelectionViewModel ShareProgramServiceSelectionViewModel
-        //{
-        //    get
-        //    {
-        //        return ServiceLocator.GetInstance<ShareProgramServiceSelectionViewModel>();
-        //    }
-        //}
-
-        [SuppressMessage("Microsoft.Performance",
-        "CA1822:MarkMembersAsStatic",
-        Justification = "This non-static member is needed for data binding purposes.")]
-        public UploadToSkyDriveViewModel UploadToSkyDriveViewModel
-        {
-            get
-            {
-                return ServiceLocator.GetInstance<UploadToSkyDriveViewModel>();
             }
         }
 

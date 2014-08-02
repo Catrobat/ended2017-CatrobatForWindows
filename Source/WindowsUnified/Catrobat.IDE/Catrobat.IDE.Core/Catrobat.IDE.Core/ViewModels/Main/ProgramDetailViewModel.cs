@@ -1,17 +1,11 @@
-﻿using System.ComponentModel;
-using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModels.Service;
-using Catrobat.IDE.Core.ViewModels.Share;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using System;
-using System.Threading.Tasks;
 
 namespace Catrobat.IDE.Core.ViewModels.Main
 {
