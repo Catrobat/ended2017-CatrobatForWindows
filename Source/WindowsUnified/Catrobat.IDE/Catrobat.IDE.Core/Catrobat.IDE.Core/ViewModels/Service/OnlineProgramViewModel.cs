@@ -6,15 +6,8 @@ using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Common;
-using Catrobat.IDE.Core.ViewModels.Main;
-using Catrobat.IDE.Core.Xml;
-using Catrobat.IDE.Core.Xml.VersionConverter;
-using Catrobat.IDE.Core.Xml.XmlObjects;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
-using System.Threading.Tasks;
-//using Catrobat.IDE.Core.UI.Converters;
+
 
 namespace Catrobat.IDE.Core.ViewModels.Service
 {
@@ -139,14 +132,38 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             ButtonDownloadIsEnabled = true;
         }
 
+        private readonly object _importLock = new object();
+        private bool _isImporting = false;
         private async void DownloadAction(OnlineProgramHeader programHeader)
         {
-            ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                ServiceLocator.NavigationService.NavigateBack<OnlineProgramViewModel>());
+            lock (_importLock)
+            {
+                if (_isImporting)
+                {
+                    ServiceLocator.NotifictionService.ShowMessageBox(
+                        "Wait for other download", 
+                        "Please wait while the current program has finished downloading",
+                        (r)=>{/* no action */}, MessageBoxOptions.Ok); // TODO: localize
+                    return;
+                }
 
+                _isImporting = true;
+            }
 
-            ServiceLocator.ProjectImporterService.SetDownloadHeader(programHeader);
-            await ServiceLocator.ProjectImporterService.TryImportWithStatusNotifications();
+            try
+            {
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                    ServiceLocator.NavigationService.NavigateBack<OnlineProgramViewModel>());
+
+                ServiceLocator.ProjectImporterService.SetDownloadHeader(programHeader);
+                await ServiceLocator.ProjectImporterService.TryImportWithStatusNotifications();
+
+            }
+            finally
+            {
+                lock (_importLock) { _isImporting = false; }
+
+            }
         }
 
         private void ReportAction(OnlineProgramHeader onlineProgramHeader)
@@ -157,11 +174,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private void LicenseAction()
         {
             ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.PROJECT_LICENSE_URL);
-        }
-
-        protected override void GoBackAction()
-        {
-            base.GoBackAction();
         }
 
         #endregion
@@ -177,14 +189,5 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             ReportCommand = new RelayCommand<OnlineProgramHeader>(ReportAction);
             LicenseCommand = new RelayCommand(LicenseAction);
         }
-
-        //private void ResetViewModel()
-        //{
-        //    ButtonDownloadIsEnabled = true;
-        //    UploadedLabelText = "";
-        //    VersionLabelText = "";
-        //    ViewsLabelText = "";
-        //    DownloadsLabelText = "";
-        //}
     }
 }
