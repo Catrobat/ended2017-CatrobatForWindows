@@ -147,7 +147,5 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Actions
         }
 
         #endregion
-
-
     }
 }
