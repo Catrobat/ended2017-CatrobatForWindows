@@ -12,8 +12,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
     [TestClass]
     public class UploadProgramForgotPasswordViewModelTests
     {
-        [TestInitialize]
-        public void TestClassInitialize()
+        [ClassInitialize]
+        public static void TestClassInitialize(TestContext testContext)
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.UnRegisterAll();
@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             ServiceLocator.CultureService.SetCulture(new CultureInfo("en"));
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void RecoverActionTest()
         {
             //TODO check messages for different responses - e.g. wrong recoverydata or http-request failed
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void RecoverActionMissingReasonTest()
         {
             var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
@@ -76,7 +76,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual("Recovery failed", notificationService.LastNotificationTitle);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

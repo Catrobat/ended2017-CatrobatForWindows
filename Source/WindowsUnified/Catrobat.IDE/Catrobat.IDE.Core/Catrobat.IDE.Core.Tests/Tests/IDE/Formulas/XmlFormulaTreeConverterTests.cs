@@ -82,7 +82,7 @@ using Formula = Catrobat.IDE.Core.ViewModels.Editor.Formula;
 //            TestConvert<FormulaNodeTrue>(directory + "true");
 //        }
 
-//        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
+//        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
 //        public void TestXmlFormulaTreeNodes()
 //        {
 //            var localVariable = new UserVariable
@@ -148,7 +148,7 @@ using Formula = Catrobat.IDE.Core.ViewModels.Editor.Formula;
 //            }
 //        }
 
-//        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests")]
+//        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
 //        public void TestFormulaTreeNodes()
 //        {
 //            var localVariable = new UserVariable

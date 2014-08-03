@@ -18,14 +18,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             ServiceLocator.NavigationService = new NavigationServiceTest();
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void SaveActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -49,7 +49,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

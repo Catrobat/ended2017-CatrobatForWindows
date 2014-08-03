@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
 
         // TODO: test has timing problems that are probably related to image loading
-        [TestMethod] // , TestCategory("GatedTests")
+        [TestMethod] // 
         public void EqualsProjectTest()
         {
             ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection(42, DateTime.Now);

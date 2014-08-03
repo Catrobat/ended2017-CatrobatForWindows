@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void GetLookObjectTest()
         {
             var project = ProjectGenerator.GenerateProject();

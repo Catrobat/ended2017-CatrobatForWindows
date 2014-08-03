@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
     [TestClass]
     public class IntStringConverterTests
     {
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void TestStringToIntConversion()
         {
             var conv = new IntStringConverter();
@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
             Assert.AreEqual(12, (int)output);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void TestIntToStringConversion()
         {
             var conv = new IntStringConverter();
@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
             Assert.AreEqual("42", (string)output);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void TestFaultyStringToIntConversion()
         {
             var conv = new IntStringConverter();

@@ -8,7 +8,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
     [TestClass]
     public class LocalizationTests
     {
-        //[TestMethod, TestCategory("GatedTests")]
+        //[TestMethod]
         //public void TestDe()
         //{
         //    TestCulture(new CultureInfo("de"));

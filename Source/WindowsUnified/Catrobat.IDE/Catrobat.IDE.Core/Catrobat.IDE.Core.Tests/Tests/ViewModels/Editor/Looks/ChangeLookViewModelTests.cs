@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
         }
 
-        [TestMethod] // , TestCategory("GatedTests") // TODO: fix test takes very long time on server
+        [TestMethod, TestCategory("ExcludeGated")]
         public void SaveActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -48,7 +48,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod] // , TestCategory("GatedTests") // TODO: fix test takes very long time on server
+        [TestMethod, TestCategory("ExcludeGated")]
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -64,7 +64,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        //[TestMethod] // , TestCategory("GatedTests") // TODO: fix test takes very long time on server
+        //[TestMethod, TestCategory("ExcludeGated")]
         //public async Task EditLookActionTest()
         //{
         //    var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -92,7 +92,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
         //    Assert.AreEqual(0, navigationService.PageStackCount);
         //}
 
-        [TestMethod] // , TestCategory("GatedTests") // TODO: fix test takes very long time on server
+        [TestMethod]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

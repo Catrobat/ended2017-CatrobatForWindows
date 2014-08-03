@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Actions
             ServiceLocator.NavigationService = new NavigationServiceTest();
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void MovementActionTest()
         {
             _selectedBrickCategory = BrickCategory.Control;
@@ -40,7 +40,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Actions
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void LooksActionTest()
         {
             _selectedBrickCategory = BrickCategory.Control;
@@ -61,7 +61,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Actions
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void SoundActionTest()
         {
             _selectedBrickCategory = BrickCategory.Control;
@@ -82,7 +82,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Actions
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void ControlActionTest()
         {
             _selectedBrickCategory = BrickCategory.Looks;
@@ -103,7 +103,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Actions
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void VariablesActionTest()
         {
             _selectedBrickCategory = BrickCategory.Control;
@@ -124,7 +124,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Actions
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

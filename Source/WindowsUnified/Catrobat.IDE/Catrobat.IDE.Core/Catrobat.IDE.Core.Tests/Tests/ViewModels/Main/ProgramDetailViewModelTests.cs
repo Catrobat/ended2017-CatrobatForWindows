@@ -27,7 +27,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             ServiceLocator.CultureService.SetCulture(new CultureInfo("en"));
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void EditCurrentProjectActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -43,7 +43,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount); 
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void UploadCurrentProjectActionTest()
         {
             //TODO check messages for different responses - e.g. wrong password or http-request failed
@@ -71,14 +71,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void PlayCurrentProjectActionTest()
         {
             //Launch Player
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void RenameProjectActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -94,13 +94,13 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount);  
         }
 
-        //[TestMethod, TestCategory("GatedTests")]
+        //[TestMethod]
         //public void PinLocalProjectActionTest()
         //{
         //    // currently not in use
         //}
 
-        //[TestMethod, TestCategory("GatedTests")]
+        //[TestMethod]
         //public void ShareLocalProjectActionTest()
         //{
         //    // currently not in use

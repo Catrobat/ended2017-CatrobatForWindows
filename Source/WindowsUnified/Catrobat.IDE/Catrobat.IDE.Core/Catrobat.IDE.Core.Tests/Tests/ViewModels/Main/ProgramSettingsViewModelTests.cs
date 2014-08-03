@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Lazy);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void NavigateToEmptyProgramTest()
         {
             var viewModel = new ProgramSettingsViewModel();
@@ -28,7 +28,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual("", viewModel.ProgramDescription);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void NavigateToFullProgramTest()
         {
             var viewModel = new ProgramSettingsViewModel();
@@ -45,7 +45,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual("TestProgramDescription", viewModel.ProgramDescription);
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void SaveActionTest()
         {
             //TODO refactor this test
@@ -70,7 +70,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -92,7 +92,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

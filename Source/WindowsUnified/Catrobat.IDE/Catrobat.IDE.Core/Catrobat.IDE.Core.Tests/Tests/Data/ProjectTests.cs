@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        //[TestMethod, TestCategory("GatedTests")]
+        //[TestMethod]
         //public void CreateNewProjectTest()
         //{
         //    CatrobatContext.SetContextHolder(new ContextHolderTests(new CatrobatContext()));
@@ -32,7 +32,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         //    CatrobatContext.SetContextHolder(null);
         //}
 
-        //[TestMethod, TestCategory("GatedTests")]
+        //[TestMethod]
         //public void DeleteProjectTest()
         //{
         //    TestHelper.InitializeAndClearCatrobatContext();
@@ -61,7 +61,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         //    CatrobatContext.SetContextHolder(null);
         //}
 
-        //[TestMethod, TestCategory("GatedTests")]
+        //[TestMethod]
         //public void DeleteCurrentProjectTest()
         //{
         //    TestHelper.InitializeAndClearCatrobatContext();
@@ -93,7 +93,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         //    CatrobatContext.SetContextHolder(null);
         //}
 
-        //[TestMethod, TestCategory("GatedTests")]
+        //[TestMethod]
         //public void SetCurrentProjectTest()
         //{
         //    TestHelper.InitializeAndClearCatrobatContext();
@@ -111,7 +111,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         //    CatrobatContext.SetContextHolder(null);
         //}
 
-        //[TestMethod, TestCategory("GatedTests")]
+        //[TestMethod]
         //public void RenameProjectTest()
         //{
         //    TestHelper.InitializeAndClearCatrobatContext();
@@ -133,7 +133,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         //    CatrobatContext.SetContextHolder(null);
         //}
 
-        //[TestMethod, TestCategory("GatedTests")]
+        //[TestMethod]
         //public void UpdateLocalProjectsTest()
         //{
         //    TestHelper.InitializeAndClearCatrobatContext();
@@ -166,7 +166,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         //    CatrobatContext.SetContextHolder(null);
         //}
 
-        //[TestMethod, TestCategory("GatedTests")]
+        //[TestMethod]
         //public void CopyProjectTest()
         //{
         //    TestHelper.InitializeAndClearCatrobatContext();

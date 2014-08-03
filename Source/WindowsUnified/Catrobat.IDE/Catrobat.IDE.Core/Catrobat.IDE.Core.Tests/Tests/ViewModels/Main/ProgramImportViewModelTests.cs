@@ -19,14 +19,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Lazy);
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void AddActionTest()
         {
             //TODO to be tested
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void CancelActionTest()
         {
             //TODO to be tested
@@ -45,7 +45,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void GoBackActionTest()
         {
             //TODO to be tested

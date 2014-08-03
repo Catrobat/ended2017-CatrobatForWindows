@@ -23,7 +23,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
 
         [Obsolete("This test adds cloned sprites to both projects (useless)!")]
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public async Task CopySprite()
         {
             const string savePath1 = "/CopyTest1/project.xml";

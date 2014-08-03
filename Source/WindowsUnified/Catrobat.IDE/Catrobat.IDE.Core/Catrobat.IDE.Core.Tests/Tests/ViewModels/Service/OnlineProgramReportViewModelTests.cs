@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             ServiceLocator.CultureService.SetCulture(new CultureInfo("en"));
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void ReportActionTest()
         {
             //TODO check messages for different responses - e.g. http-request failed
@@ -58,7 +58,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual("Report program", notificationService.LastNotificationTitle);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void ReportActionMissingReasonTest()
         {
             var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
@@ -77,7 +77,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual("Report failed", notificationService.LastNotificationTitle);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -97,7 +97,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

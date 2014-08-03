@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
     [TestClass]
     public class NullIntCountConverterTests
     {
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void TestConversion1()
         {
             var conv = new NullIntCountConverter();
@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
             Assert.AreEqual(0, output);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void TestConversion2()
         {
             var conv = new NullIntCountConverter();
@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
             Assert.AreEqual(1, output);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void TestBackConversion()
         {
             var conv = new NullIntCountConverter();

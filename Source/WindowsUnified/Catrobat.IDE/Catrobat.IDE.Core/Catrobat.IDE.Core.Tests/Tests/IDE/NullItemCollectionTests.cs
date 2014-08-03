@@ -7,7 +7,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE
   [TestClass]
   public class NullItemCollectionTests
   {
-    [TestMethod, TestCategory("GatedTests")]
+    [TestMethod]
     public void CountTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2" };
@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE
       Assert.AreEqual(3, collection.Count);
     }
 
-    [TestMethod, TestCategory("GatedTests")]
+    [TestMethod]
     public void AddTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2" };
@@ -31,7 +31,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE
       Assert.AreEqual(newObject, sourceCollection[2]);
     }
 
-    [TestMethod, TestCategory("GatedTests")]
+    [TestMethod]
     public void ClearTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2" };
@@ -43,7 +43,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE
       Assert.AreEqual(0, sourceCollection.Count);
     }
 
-    [TestMethod, TestCategory("GatedTests")]
+    [TestMethod]
     public void ContainsTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2" };
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE
       Assert.IsTrue(collection.Contains(sourceCollection[1]));
     }
 
-    [TestMethod, TestCategory("GatedTests")]
+    [TestMethod]
     public void IndexOfTest()
     {
       var sourceCollection = new ObservableCollection<string> {"Item1", "Item2"};
@@ -70,7 +70,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE
       Assert.AreEqual(2, collection.IndexOf(sourceCollection[1]));
     }
 
-    [TestMethod, TestCategory("GatedTests")]
+    [TestMethod]
     public void InsertTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2" };
@@ -87,7 +87,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE
       Assert.AreEqual(3, sourceCollection.IndexOf(newObject2));
     }
 
-    [TestMethod, TestCategory("GatedTests")]
+    [TestMethod]
     public void RemoveTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2", "Item3" };
@@ -104,7 +104,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE
       Assert.IsFalse(sourceCollection.Contains(item4));
     }
 
-    [TestMethod, TestCategory("GatedTests")]
+    [TestMethod]
     public void RemoveAtTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2", "Item3" };
@@ -121,7 +121,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE
       Assert.IsFalse(sourceCollection.Contains(item4));
     }
 
-    [TestMethod, TestCategory("GatedTests")]
+    [TestMethod]
     public void IndexOperatorTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2", "Item3" };
