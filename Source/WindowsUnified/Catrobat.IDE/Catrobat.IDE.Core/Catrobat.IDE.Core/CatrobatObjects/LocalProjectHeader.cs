@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
@@ -8,6 +9,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
 {
     public enum LocalProjectState { Valid, AppUpdateRequired, Damaged, VersionOutdated }
 
+    [DebuggerDisplay("Name = {Name}")]
     public class LocalProjectHeader : 
         IComparable<LocalProjectHeader>, INotifyPropertyChanged
     {

@@ -37,14 +37,12 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             {
                 ProgramName = "TestProject",
                 CreateEmptyProgram = false,
-                CreateCopyOfCurrentProgram = true,
                 CreateTemplateProgram = true
             };
             viewModel.CancelCommand.Execute(null);
 
             Assert.IsTrue(viewModel.ProgramName == "");
             Assert.IsTrue(viewModel.CreateEmptyProgram);
-            Assert.IsFalse(viewModel.CreateCopyOfCurrentProgram);
             Assert.IsFalse(viewModel.CreateTemplateProgram);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
@@ -63,14 +61,12 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             {
                 ProgramName = "TestProject",
                 CreateEmptyProgram = false,
-                CreateCopyOfCurrentProgram = true,
                 CreateTemplateProgram = true
             };
             viewModel.GoBackCommand.Execute(null);
 
             Assert.AreEqual("", viewModel.ProgramName);
             Assert.IsTrue(viewModel.CreateEmptyProgram);
-            Assert.IsFalse(viewModel.CreateCopyOfCurrentProgram);
             Assert.IsFalse(viewModel.CreateTemplateProgram);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);

@@ -7,7 +7,7 @@ using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.WindowsPhone.Controls
 {
-    public sealed partial class LocalProjectControl : UserControl
+    public sealed partial class LocalProgramControl : UserControl
     {
         #region Dependancy properties
 
@@ -20,18 +20,18 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         public static readonly DependencyProperty ProjectProperty =
             DependencyProperty.Register("Project",
             typeof(LocalProjectHeader),
-            typeof(LocalProjectControl),
+            typeof(LocalProgramControl),
             new PropertyMetadata(null, ProjectChanged));
 
         private static void ProjectChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var localProjectControl = d as LocalProjectControl;
+            var localProjectControl = d as LocalProgramControl;
             if (localProjectControl != null) localProjectControl.DataContext = e.NewValue;
         }
 
         #endregion
 
-        public LocalProjectControl()
+        public LocalProgramControl()
         {
             this.InitializeComponent();
         }

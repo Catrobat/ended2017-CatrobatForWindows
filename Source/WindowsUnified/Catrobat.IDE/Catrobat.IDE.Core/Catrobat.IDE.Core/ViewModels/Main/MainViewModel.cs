@@ -70,7 +70,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
             set
             {
-                if (value == _currentProgram) 
+                if (value == _currentProgram)
                     return;
 
                 _currentProgram = value;
@@ -84,7 +84,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             get
             {
-                    return _localProjects;
+                return _localProjects;
             }
             set
             {
@@ -93,8 +93,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        public OnlineProgramHeader SelectedOnlineProgram 
-        { 
+        public OnlineProgramHeader SelectedOnlineProgram
+        {
             get
             {
                 return _selectedOnlineProgram;
@@ -186,7 +186,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private void OpenProgramCommandAction(LocalProjectHeader project)
         {
             var message = new GenericMessage<LocalProjectHeader>(project);
-            Messenger.Default.Send(message, 
+            Messenger.Default.Send(message,
                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener);
 
             ServiceLocator.NavigationService.NavigateTo<ProgramDetailViewModel>();
@@ -198,7 +198,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             ServiceLocator.NotifictionService.ShowMessageBox(
                 AppResources.Main_MainDeleteProgramDialogTitle,
-                String.Format(AppResources.Main_MainDeleteProgramDialogMessage, projectName), 
+                String.Format(AppResources.Main_MainDeleteProgramDialogMessage, projectName),
                 DeleteProgramMessageCallback, MessageBoxOptions.OkCancel);
         }
 
@@ -347,29 +347,30 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private readonly List<string> _programsToDelete = new List<string>();
         private async void DeleteProgramMessageCallback(MessageboxResult result)
         {
-            var deleteProgramName = "";
-
-            lock (_programsToDelete)
-            {
-                 deleteProgramName = _deleteProgramName;
-
-                if (_localProjects.Any(program => 
-                    program.ProjectName == deleteProgramName))
-                    return;
-
-                if (_programsToDelete.Contains(deleteProgramName))
-                    return;
-
-                _programsToDelete.Add(deleteProgramName);
-            }
-            
-            if (deleteProgramName == null)
-                return;
-
-            _dialogResult = result;
-
             if (_dialogResult == MessageboxResult.Ok)
             {
+                var deleteProgramName = "";
+
+                lock (_programsToDelete)
+                {
+                    deleteProgramName = _deleteProgramName;
+
+                    if (_localProjects.All(program =>
+                        program.ProjectName != deleteProgramName))
+                        return;
+
+                    if (_programsToDelete.Contains(deleteProgramName))
+                        return;
+
+                    _programsToDelete.Add(deleteProgramName);
+                }
+
+                if (deleteProgramName == null)
+                    return;
+
+                _dialogResult = result;
+
+
                 if (CurrentProgram != null && CurrentProgram.Name == deleteProgramName)
                 {
                     var projectChangedMessage = new GenericMessage<Program>(null);
@@ -378,17 +379,19 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    await storage.DeleteDirectoryAsync(StorageConstants.ProgramsPath + "/" + _deleteProgramName);
+                    await storage.DeleteDirectoryAsync(Path.Combine(
+                        StorageConstants.ProgramsPath, _deleteProgramName));
                 }
 
                 await UpdateLocalPrograms();
 
                 _deleteProgramName = null;
-            }
 
-            lock (_programsToDelete)
-            {
-                _programsToDelete.Remove(deleteProgramName);
+                lock (_programsToDelete)
+                {
+                    _programsToDelete.Remove(deleteProgramName);
+                }
+
             }
 
             //await App.SaveContext(CurrentProgram);
@@ -410,10 +413,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             if (_dialogResult == MessageboxResult.Ok)
             {
-                if (_copyProgramName == CurrentProgram.Name)
+                if (CurrentProgram != null && _copyProgramName == CurrentProgram.Name)
                     await CurrentProgram.Save();
 
-                await ServiceLocator.ContextService.CopyProgram(_copyProgramName, _copyProgramName);
+                await ServiceLocator.ContextService.CopyProgram(
+                    _copyProgramName, _copyProgramName);
 
                 await UpdateLocalPrograms();
                 _copyProgramName = null;

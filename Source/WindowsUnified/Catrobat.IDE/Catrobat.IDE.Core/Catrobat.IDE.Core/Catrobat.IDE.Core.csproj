@@ -318,7 +318,7 @@
     <Compile Include="Xml\XmlObjects\Formulas\XmlFormulaTree.cs" />
     <Compile Include="CatrobatObjects\OnlineProgramHeader.cs" />
     <Compile Include="Xml\XmlObjects\XmlProgram.cs" />
-    <Compile Include="CatrobatObjects\ProgramDummyHeader.cs" />
+    <Compile Include="CatrobatObjects\LocalProjectHeader.cs" />
     <Compile Include="Xml\XmlObjects\XmlProjectHeader.cs" />
     <Compile Include="Xml\XmlObjects\Scripts\XmlBroadcastScript.cs" />
     <Compile Include="Xml\XmlObjects\Scripts\XmlScript.cs" />
@@ -538,8 +538,6 @@
     <Compile Include="ViewModels\Settings\SettingsLanguageViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsThemeViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsViewModel.cs" />
-    <Compile Include="ViewModels\Share\ShareProjectServiceSelectionViewModel.cs" />
-    <Compile Include="ViewModels\Share\UploadToSkyDriveViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\ViewModelMessagingToken.cs" />

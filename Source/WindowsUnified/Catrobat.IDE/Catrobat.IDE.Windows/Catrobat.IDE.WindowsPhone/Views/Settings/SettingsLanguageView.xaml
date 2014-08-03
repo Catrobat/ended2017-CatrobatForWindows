@@ -7,8 +7,7 @@
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   DataContext="{Binding SettingsLanguageViewModel, Source={StaticResource Locator}}">
 
-  <Grid x:Name="LayoutRoot" 
-        Background="{ThemeResource AppBackgroundBrush}">
+  <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
@@ -25,23 +24,29 @@
         Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
 
-    <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12">
+    <StackPanel Grid.Row="1" Margin="12">
       <ListBox Margin="0 0 0 12" ItemsSource="{Binding AvailableCultures}" 
-               SelectedItem="{Binding CurrentCulture, Mode=TwoWay}">
+        SelectedItem="{Binding CurrentCulture}" SelectionMode="Single">
         <ItemsControl.ItemTemplate>
           <DataTemplate>
-            <Grid Width="370">
-              <TextBlock Margin="0 0 12 12" Text="{Binding NativeName}" 
-                FontSize="30" />
+            <Grid Width="370" Margin="0 5 0 5" Tapped="Culture_OnTapped">
+              <TextBlock Margin="12 10 0 10" Text="{Binding NativeName}"
+                FontSize="28" />
             </Grid>
+            <!--<Button BorderThickness="0" Padding="0 -10 0 -10"
+              Height="90" Margin="0 1 0 1"
+              Command="{Binding SettingsLanguageViewModel.SelectCultureCommand, 
+              Source={StaticResource Locator}}" CommandParameter="{Binding}">
+              
+            </Button>-->
           </DataTemplate>
         </ItemsControl.ItemTemplate>
       </ListBox>
-      <TextBlock Margin="20" 
+      <!--<TextBlock Margin="20" 
         Text="{Binding Resources.Main_ApplicationRequiresRestart, 
         Source={StaticResource LocalizedStrings}}" 
         Style="{ThemeResource TextNormalStyle}" TextWrapping="Wrap" 
-        TextAlignment="Center"/>
+        TextAlignment="Center"/>-->
     </StackPanel>
   </Grid>
 </views:ViewPageBase>

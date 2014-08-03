@@ -1,15 +1,23 @@
-﻿using Catrobat.IDE.Core.Services;
+﻿using System.Collections.Generic;
+using System.Dynamic;
+using Windows.UI.Xaml;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.WindowsPhone.Navigation;
 using System;
 using System.Reflection;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Catrobat.IDE.WindowsShared.Common;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.WindowsPhone.Views
 {
     public abstract class ViewPageBase : Page
     {
+        protected NavigationCacheMode PageCacheMode {get; set;}
+
+
         private ViewModelBase _viewModel;
         protected ViewModelBase ViewModel
         {
@@ -44,11 +52,24 @@ namespace Catrobat.IDE.WindowsPhone.Views
         {
             if (!ViewModelBase.IsInDesignModeStatic)
                 ViewModel.NavigationObject = new NavigationObjectPage(this);
+
+            PageCacheMode = NavigationCacheMode.Enabled;
+
+            Messenger.Default.Register<MessageBase>(this,
+              ViewModelMessagingToken.ClearPageCache,
+              CrearPageCacheMessageAction);
+        }
+
+        protected void CrearPageCacheMessageAction(MessageBase message)
+        {
+            this.NavigationCacheMode = NavigationCacheMode.Disabled;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             ViewModel.NavigationObject.RaiseNavigatedTo();
+
+            NavigationCacheMode = PageCacheMode;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

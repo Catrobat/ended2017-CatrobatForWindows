@@ -247,8 +247,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
             AddNewScriptBrickCommand = new RelayCommand<Model>(AddNewScriptBrickAction);
             OnLoadBrickViewCommand = new RelayCommand(OnLoadBrickViewAction);
 
-            Messenger.Default.Register<GenericMessage<List<Object>>>(this, ViewModelMessagingToken.ScriptBrickCollectionListener, ReceiveScriptBrickCollectionMessageAction);
-            Messenger.Default.Register<GenericMessage<BrickCategory>>(this, ViewModelMessagingToken.ScriptBrickCategoryListener, ScriptBrickCategoryReceivedMessageAction);
+            Messenger.Default.Register<GenericMessage<List<Object>>>(this, 
+                ViewModelMessagingToken.ScriptBrickCollectionListener, 
+                ReceiveScriptBrickCollectionMessageAction);
+            Messenger.Default.Register<GenericMessage<BrickCategory>>(this, 
+                ViewModelMessagingToken.ScriptBrickCategoryListener, 
+                ScriptBrickCategoryReceivedMessageAction);
 
             if (IsInDesignMode)
                 IsLookVisible = true;

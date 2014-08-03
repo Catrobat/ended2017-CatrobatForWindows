@@ -6,9 +6,6 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Windows.System;
-using Windows.UI.Core;
-using Windows.UI.Popups;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
@@ -35,8 +32,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             //statusBar.ProgressIndicator.Text = "My cool app";
             //statusBar.ProgressIndicator.ShowAsync();
         }
-
-
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {

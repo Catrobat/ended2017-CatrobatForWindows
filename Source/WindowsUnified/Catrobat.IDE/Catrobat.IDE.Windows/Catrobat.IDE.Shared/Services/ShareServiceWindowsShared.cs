@@ -27,7 +27,9 @@ namespace Catrobat.IDE.WindowsShared.Services
             DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
             dataTransferManager.DataRequested += ShareStorageItemsHandler;
 
-            DataTransferManager.ShowShareUI();
+            ServiceLocator.DispatcherService.RunOnMainThread(
+                DataTransferManager.ShowShareUI);
+            
         }
 
         private async void ShareStorageItemsHandler(DataTransferManager sender,
@@ -36,8 +38,8 @@ namespace Catrobat.IDE.WindowsShared.Services
             var zipService = new ZipService();
 
             var request = e.Request;
-            request.Data.Properties.Title = "Share Catrobat file";
-            request.Data.Properties.Description = "";
+            request.Data.Properties.Title = "Share Catrobat file"; // TODO: localize
+            request.Data.Properties.Description = ""; // TODO: localize
             var deferral = request.GetDeferral();
 
             try

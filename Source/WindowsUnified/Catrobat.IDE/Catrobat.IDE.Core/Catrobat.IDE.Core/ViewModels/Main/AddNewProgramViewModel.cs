@@ -91,18 +91,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        private bool _createCopyOfCurrentProgram;
-        public bool CreateCopyOfCurrentProgram
-        {
-            get { return _createCopyOfCurrentProgram; }
-
-            set
-            {
-                _createCopyOfCurrentProgram = value;
-                RaisePropertyChanged(() => CreateCopyOfCurrentProgram);
-            }
-        }
-
         private bool _createTemplateProgram;
         public bool CreateTemplateProgram
         {
@@ -138,20 +126,21 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void SaveAction()
         {
+            GoBackAction();
+
             if (CurrentProgram != null)
                 await CurrentProgram.Save();
 
+            var uniqueName = await ServiceLocator.ContextService.
+                FindUniqueProgramName(ProgramName);
+
             if (CreateEmptyProgram)
             {
-                CurrentProgram = await ServiceLocator.ContextService.CreateEmptyProgram(_programName);
-            }
-            else if (CreateCopyOfCurrentProgram)
-            {
-                CurrentProgram = await ServiceLocator.ContextService.CopyProgram(CurrentProgram.Name, _programName);
+                CurrentProgram = await ServiceLocator.ContextService.CreateEmptyProgram(uniqueName);
             }
             else if (CreateTemplateProgram)
             {
-                CurrentProgram = await SelectedTemplateOption.ProjectGenerator.GenerateProject(ProgramName, true);
+                CurrentProgram = await SelectedTemplateOption.ProjectGenerator.GenerateProject(uniqueName, true);
             }
 
             if (CurrentProgram != null)
@@ -165,25 +154,14 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 Messenger.Default.Send(programChangedMessage, ViewModelMessagingToken.CurrentProgramChangedListener);
             }
 
-            GoBackAction();
-
-
-
             var localProgramsChangedMessage = new MessageBase();
-            Messenger.Default.Send(localProgramsChangedMessage, ViewModelMessagingToken.LocalProgramsChangedListener);
-
-            
+            Messenger.Default.Send(localProgramsChangedMessage, 
+                ViewModelMessagingToken.LocalProgramsChangedListener);
         }
 
         private void CancelAction()
         {
             GoBackAction();
-        }
-
-        protected override void GoBackAction()
-        {
-            ResetViewModel();
-            base.GoBackAction();
         }
 
         #endregion
@@ -209,12 +187,12 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                  ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedAction);
         }
 
-        public void ResetViewModel()
+        public override void NavigateTo()
         {
             ProgramName = "";
             CreateEmptyProgram = true;
-            CreateCopyOfCurrentProgram = false;
             CreateTemplateProgram = false;
+            base.NavigateTo();
         }
     }
 }
