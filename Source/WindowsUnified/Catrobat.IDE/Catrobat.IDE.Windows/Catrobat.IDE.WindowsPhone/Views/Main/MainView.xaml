@@ -197,12 +197,12 @@
               <HyperlinkButton Grid.Row="2" FontSize="20"
                 Content="{Binding Resources.Main_AboutLicense, 
                 Source={StaticResource LocalizedStrings}}" 
-                Foreground="{ThemeResource Accent1Brush}" NavigateUri="" 
+                Style="{ThemeResource HyperLinkNormalStyle}"
                 Command="{Binding LicenseCommand}"/>
               <HyperlinkButton Grid.Row="3" FontSize="20"
                 Content="{Binding Resources.Main_AboutCatrobat, 
                 Source={StaticResource LocalizedStrings}}" 
-                Foreground="{ThemeResource Accent1Brush}" NavigateUri="" 
+                Style="{ThemeResource HyperLinkNormalStyle}"
                 Command="{Binding AboutCommand}"/>
 
               <Grid Grid.Row="6">
@@ -248,12 +248,12 @@
               <HyperlinkButton Grid.Row="2" FontSize="20"
                 Content="{Binding Resources.Main_TermsOfUse, 
                 Source={StaticResource LocalizedStrings}}" 
-                Foreground="{ThemeResource Accent1Brush}" NavigateUri="" 
+                Style="{ThemeResource HyperLinkNormalStyle}"
                 Command="{Binding TouCommand}"/>
               <HyperlinkButton Grid.Row="3" FontSize="20"
                 Content="{Binding Resources.Main_AboutCatrobat, 
                 Source={StaticResource LocalizedStrings}}" 
-                Foreground="{ThemeResource Accent1Brush}" NavigateUri="" 
+                Style="{ThemeResource HyperLinkNormalStyle}" 
                 Command="{Binding AboutCommand}"/>
 
               <Grid Grid.Row="6">

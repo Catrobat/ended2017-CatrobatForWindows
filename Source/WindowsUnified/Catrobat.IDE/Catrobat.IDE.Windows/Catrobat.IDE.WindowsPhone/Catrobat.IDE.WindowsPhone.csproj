@@ -101,6 +101,9 @@
     </Compile>
     <Compile Include="Controls\ActionsControls\MasterBrick.cs" />
     <Compile Include="Controls\ActionsControls\NormalBrick.cs" />
+    <Compile Include="Controls\LargeImageButton.xaml.cs">
+      <DependentUpon>LargeImageButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MultiModeEditorCommandBar.cs" />
     <Compile Include="Controls\ProcessIcon.xaml.cs">
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
@@ -286,6 +289,10 @@
     <Page Include="Controls\EditorAppBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\LargeImageButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ProcessIcon.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -6,6 +6,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   xmlns:misc="using:Catrobat.IDE.WindowsShared.Content.Images.Misc"
+  xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
   DataContext="{Binding NewLookSourceSelectionViewModel, 
   Source={StaticResource Locator}}">
 
@@ -31,65 +32,38 @@
       </StackPanel>
 
       <StackPanel Margin="12">
-        <Button Margin="0" Padding="0" BorderThickness="0"
-          Command="{Binding OpenGalleryCommand}" RequestedTheme="Dark" >
-          <Grid Margin="0" Height="140" Width="380"
-                Background="{ThemeResource Accent1Brush}">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="Auto"/>
-              <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <misc:ImageGallery ScaleFactor="0.2" Grid.Column="0" 
-              Margin="30 15 15 15" />
-            <TextBlock Grid.Column="1" Margin="20 10 10 10" 
-              VerticalAlignment="Center" HorizontalAlignment="Left" 
-              Text="{Binding Resources.Editor_ImageGallery, 
-              Source={StaticResource LocalizedStrings}}" 
-              Name="tbGallery" 
-              Style="{ThemeResource TextExtraLargeStyle}"/>
-          </Grid>
-        </Button>
+        <controls:LargeImageButton
+          Command="{Binding OpenGalleryCommand}"
+          Text="{Binding Resources.Editor_ImageGallery, 
+          Source={StaticResource LocalizedStrings}}" >
+          <controls:LargeImageButton.ImageTemplate>
+            <DataTemplate>
+            <misc:ImageGallery ScaleFactor="0.17" />
+            </DataTemplate>
+          </controls:LargeImageButton.ImageTemplate>
+        </controls:LargeImageButton>
 
-        <!--<Button Margin="0 0 0 10" HorizontalAlignment="Stretch"
-                Command="{Binding OpenCameraCommand}">
-          <Button.Template>
-            <ControlTemplate>
-              <Grid Background="{Binding Path=SelectedTheme.AccentColor2.NativeBrush, " 
-                    HorizontalAlignment="Stretch" 
-                    Height="140">
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="Auto"/>
-                  <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <misc:Camera ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
-                <TextBlock Grid.Column="1" FontSize="50" Margin="20 10 10 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
-                           Text="{Binding Resources.Editor_Camera, Source={StaticResource LocalizedStrings}}" 
-                           Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, " />
-              </Grid>
-            </ControlTemplate>
-          </Button.Template>
-        </Button>-->
-
-        <Button Margin="0" Padding="0" BorderThickness="0"
-          Command="{Binding OpenPaintCommand}" RequestedTheme="Dark" >
-          <Grid Margin="0" Height="140" Width="380"
-            Background="{ThemeResource Accent3Brush}">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="Auto"/>
-              <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <misc:EditImage Grid.Column="0" 
-             ScaleFactor="0.2" Margin="30 15 15 15" />
-            <TextBlock Grid.Column="1" Margin="20 10 10 10" 
-              VerticalAlignment="Center" 
-              HorizontalAlignment="Left" 
-              Text="{Binding Resources.Editor_ImageEditingProgram, 
-              Source={StaticResource LocalizedStrings}}" 
-              TextAlignment="Left"
-              TextWrapping="Wrap"
-              Style="{ThemeResource TextExtraLargeStyle}" />
-          </Grid>
-        </Button>
+        <!--<controls:LargeImageButton
+          Command="{Binding OpenCameraCommand}"
+          Text="{Binding Resources.Editor_Camera, 
+          Source={StaticResource LocalizedStrings}}" >
+          <controls:LargeImageButton.ImageTemplate>
+            <DataTemplate>
+              <misc:Camera ScaleFactor="0.17"/>
+            </DataTemplate>
+          </controls:LargeImageButton.ImageTemplate>
+        </controls:LargeImageButton>-->
+        
+        <controls:LargeImageButton Margin="0 10 0 0"
+          Command="{Binding OpenPaintCommand}"
+          Text="{Binding Resources.Editor_ImageEditingProgram, 
+          Source={StaticResource LocalizedStrings}}" >
+          <controls:LargeImageButton.ImageTemplate>
+            <DataTemplate>
+              <misc:EditImage ScaleFactor="0.17" />
+            </DataTemplate>
+          </controls:LargeImageButton.ImageTemplate>
+        </controls:LargeImageButton>
       </StackPanel>
     </StackPanel>
   </Grid>

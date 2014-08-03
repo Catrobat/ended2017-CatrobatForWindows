@@ -12,7 +12,7 @@
 
   <Page.Resources>
     <DataTemplate x:Key="SpriteItemTemplate">
-      <Grid Height="90" Width="380" Margin="0 5 0 5" >
+      <Grid Height="90" Width="325" Margin="0 5 5 5" >
         <Grid Background="{ThemeResource ObjectsBrush}" RequestedTheme="Dark"
               Tapped="SpriteItem_OnTapped">
           <Grid.RowDefinitions>

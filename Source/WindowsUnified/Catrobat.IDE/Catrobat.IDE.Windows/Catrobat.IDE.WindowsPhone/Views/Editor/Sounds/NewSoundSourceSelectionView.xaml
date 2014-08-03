@@ -6,6 +6,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   xmlns:misc="using:Catrobat.IDE.WindowsShared.Content.Images.Misc"
+  xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
   mc:Ignorable="d" 
   DataContext="{Binding NewSoundSourceSelectionViewModel, Source={StaticResource Locator}}">
 
@@ -16,69 +17,35 @@
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
-    <StackPanel x:Name="TitlePanel" 
-                Grid.Row="0"
-                Margin="12">
-      <!--<TextBlock x:Name="ApplicationTitle" 
-                 Text="{Binding Resources.Main_TitleUploadProject, 
-                 Source={StaticResource LocalizedStrings}}" 
-                 Style="{ThemeResource TextNormalStyle}" 
-                 />-->
-      <TextBlock x:Name="PageTitle" 
-                 Text="{Binding Resources.Editor_TitleNewSound, 
+    <StackPanel Grid.Row="0" Margin="12">
+      <TextBlock Text="{Binding Resources.Editor_TitleNewSound, 
                  Source={StaticResource LocalizedStrings}}" 
                  Margin="0 0 0 0" 
                  Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="12">
-      <Button Margin="0" Padding="0" BorderThickness="0"
-              Command="{Binding AudioLibraryCommand}" RequestedTheme="Dark" >
-        <Button.ContentTemplate>
+      <controls:LargeImageButton Margin="0 10 0 0"
+          Command="{Binding AudioLibraryCommand}"
+          Text="{Binding Resources.Editor_MediaLibrary, 
+          Source={StaticResource LocalizedStrings}}" >
+        <controls:LargeImageButton.ImageTemplate>
           <DataTemplate>
-            <Grid Margin="0" Height="140" Width="380"
-              Background="{ThemeResource Accent1Brush}">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
-              </Grid.ColumnDefinitions>
-              <misc:AudioLibrary ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
-              <TextBlock Grid.Column="1" Margin="20" TextWrapping="Wrap"
-                VerticalAlignment="Center" HorizontalAlignment="Left" 
-                Text="{Binding Resources.Editor_MediaLibrary, 
-                Source={StaticResource LocalizedStrings}}" 
-                Name="tbGallery" 
-                Style="{ThemeResource TextExtraLargeStyle}" />
-            </Grid>
+            <misc:AudioLibrary ScaleFactor="0.17" />
           </DataTemplate>
-        </Button.ContentTemplate>
-      </Button>
+        </controls:LargeImageButton.ImageTemplate>
+      </controls:LargeImageButton>
 
-      <!--<Button Margin="0 0 10 0" Command="{Binding RecorderCommand}"
-              HorizontalAlignment="Stretch">
-        <Button.Template>
-          <ControlTemplate>
-            <Grid Background="{Binding Path=SelectedTheme.AccentColor2.NativeBrush, 
-                   " 
-                  HorizontalAlignment="Stretch" 
-                  Height="140">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
-              </Grid.ColumnDefinitions>
-              <misc:AudioRecorder ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
-              <TextBlock Grid.Column="1" Margin="10" 
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Left" 
-                Text="{Binding Resources.Editor_Recorder, 
-                Source={StaticResource LocalizedStrings}}"
-                FontSize="50"
-                Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, 
-                 " />
-            </Grid>
-          </ControlTemplate>
-        </Button.Template>
-      </Button>-->
+      <!--<controls:LargeImageButton Margin="0 10 0 0"
+          Command="{Binding RecorderCommand}"
+          Text="{Binding Resources.Editor_Recorder, 
+          Source={StaticResource LocalizedStrings}}" >
+        <controls:LargeImageButton.ImageTemplate>
+          <DataTemplate>
+            <misc:AudioRecorder ScaleFactor="0.17" />
+          </DataTemplate>
+        </controls:LargeImageButton.ImageTemplate>
+      </controls:LargeImageButton>-->
     </StackPanel>
   </Grid>
 </views:ViewPageBase>

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Navigation;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
@@ -18,6 +19,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         public SpritesView()
         {
             InitializeComponent();
+            PageCacheMode = NavigationCacheMode.Enabled;
         }
         
         //private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs args)

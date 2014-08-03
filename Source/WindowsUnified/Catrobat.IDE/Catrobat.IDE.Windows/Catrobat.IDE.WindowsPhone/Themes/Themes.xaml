@@ -6,20 +6,29 @@
   <ResourceDictionary.ThemeDictionaries>
     <ResourceDictionary x:Key="Default">
       <!-- Brushes -->
-      <SolidColorBrush x:Key="AppBackgroundBrush" Color="#FFFFFFFF" />
-      <SolidColorBrush x:Key="AppBarBackgroundBrush" Color="#FF111111" />
-      
-      <SolidColorBrush x:Key="OnlineProgramsBackgroundBrush" Color="#FF99AACC" />
-      <SolidColorBrush x:Key="ProcessIconBackgroundBrush" Color="#FF667799" />
+      <Color x:Key="AppBackgroundColor">#FFFFFFFF</Color>
+      <SolidColorBrush x:Key="AppBackgroundBrush" Color="{ThemeResource AppBackgroundColor}" />
 
-      <SolidColorBrush x:Key="BrickBorderBrush" Color="#FFFFFFFF" />
+      <Color x:Key="AppBarBackgroundColor">#FF111111</Color>
+      <SolidColorBrush x:Key="AppBarBackgroundBrush" Color="{ThemeResource AppBarBackgroundColor}" />
 
+      <Color x:Key="OnlineProgramsBackgroundColor">#FF99AACC</Color>
+      <SolidColorBrush x:Key="OnlineProgramsBackgroundBrush" Color="{ThemeResource OnlineProgramsBackgroundColor}" />
+
+      <Color x:Key="ProcessIconBackgroundColor">#FF667799</Color>
+      <SolidColorBrush x:Key="ProcessIconBackgroundBrush" Color="{ThemeResource ProcessIconBackgroundColor}" />
+
+      <Color x:Key="BrickBorderColor">#FF333355</Color>
+      <SolidColorBrush x:Key="BrickBorderBrush" Color="{ThemeResource BrickBorderColor}" />
+
+
+      <Color x:Key="HyperLinkForegroundColor">#FF6666CC</Color>
+      <SolidColorBrush x:Key="HyperLinkForegroundBrush" Color="{ThemeResource BrickBorderColor}" />
       <!-- Accent Colors -->
 
       <Color x:Key="Accent1Color">#FF880088</Color>
       <Color x:Key="Accent2Color">#FF008888</Color>
       <Color x:Key="Accent3Color">#FF888800</Color>
-
 
       <SolidColorBrush x:Key="Accent1Brush" Color="{ThemeResource Accent1Color}" />
       <SolidColorBrush x:Key="Accent2Brush" Color="{ThemeResource Accent2Color}" />
@@ -64,22 +73,32 @@
 
       <!--Text Styles-->
       <Style x:Key="TextSubtileStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="Foreground" Value="LightGray"/>
-      </Style>
-
-      <Style x:Key="TextExtraLargeStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="40"/>
-      </Style>
-      
-      <Style x:Key="TextNormalStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="18"/>
       </Style>
 
       <Style x:Key="TextSmallStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="14"/>
       </Style>
 
+      <Style x:Key="TextNormalStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18"/>
+      </Style>
+
+      <Style x:Key="TextLargerStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="22"/>
+      </Style>
+
+      <Style x:Key="TextLargeStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="28"/>
+      </Style>
+
+      <Style x:Key="TextExtraLargeStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="40"/>
+      </Style>
+      
+      
+      
       <Style x:Key="TextHubHeaderStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="30"/>
       </Style>
@@ -87,8 +106,11 @@
       <Style x:Key="TextPivotHeaderStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="30"/>
       </Style>
- 
-      
+
+      <Style x:Key="HyperLinkNormalStyle" TargetType="HyperlinkButton">
+        <Setter Property="Foreground" Value="{ThemeResource HyperLinkForegroundBrush}"/>
+        <Setter Property="FontSize" Value="24"/>
+      </Style>
 
     </ResourceDictionary>
   </ResourceDictionary.ThemeDictionaries>
