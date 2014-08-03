@@ -15,9 +15,15 @@
       <SolidColorBrush x:Key="BrickBorderBrush" Color="#FFFFFFFF" />
 
       <!-- Accent Colors -->
-      <SolidColorBrush x:Key="Accent1Brush" Color="#FF880088" />
-      <SolidColorBrush x:Key="Accent2Brush" Color="#FF008888" />
-      <SolidColorBrush x:Key="Accent3Brush" Color="#FF888800" />
+
+      <Color x:Key="Accent1Color">#FF880088</Color>
+      <Color x:Key="Accent2Color">#FF008888</Color>
+      <Color x:Key="Accent3Color">#FF888800</Color>
+
+
+      <SolidColorBrush x:Key="Accent1Brush" Color="{ThemeResource Accent1Color}" />
+      <SolidColorBrush x:Key="Accent2Brush" Color="{ThemeResource Accent2Color}" />
+      <SolidColorBrush x:Key="Accent3Brush" Color="{ThemeResource Accent3Color}" />
       
       <!-- Action Brushes -->
       <SolidColorBrush x:Key="SoundsBrush" Color="#FF87778D" />
