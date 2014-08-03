@@ -20,16 +20,16 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void InitializeActionEmptyProgramTest()
+        public void NavigateToEmptyProgramTest()
         {
             var viewModel = new ProgramSettingsViewModel();
-            viewModel.InitializeCommand.Execute(null);
+            viewModel.NavigateTo();
             Assert.AreEqual("", viewModel.ProgramName);
             Assert.AreEqual("", viewModel.ProgramDescription);
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void InitializeActionFullProgramTest()
+        public void NavigateToFullProgramTest()
         {
             var viewModel = new ProgramSettingsViewModel();
             var project = new Program
@@ -39,7 +39,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             };
             var messageContext = new GenericMessage<Program>(project);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProgramChangedListener);
-            viewModel.InitializeCommand.Execute(null);
+            viewModel.NavigateTo();
 
             Assert.AreEqual("TestProgramName", viewModel.ProgramName);
             Assert.AreEqual("TestProgramDescription", viewModel.ProgramDescription);

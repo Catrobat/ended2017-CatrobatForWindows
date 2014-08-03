@@ -29,10 +29,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         //CatrobatContext.SetContextHolder(null);
     }
 
-    [TestMethod, TestCategory("GatedTests")]
+    [TestMethod/*, TestCategory("GatedTests")*/]
     public async Task StoreLocalSettingsTest()
     {
-        // TODO: fix test
+        Assert.AreEqual(0, "ContextServiceTest has to be implemented");
         var localSettings = new LocalSettings
             {
                 CurrentLanguageString = "de-DE",

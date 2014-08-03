@@ -146,7 +146,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private void CancelAction()
         {
-            GoBackAction();
+            ResetViewModel();
+            base.GoBackAction();
         }
 
         protected override void GoBackAction()

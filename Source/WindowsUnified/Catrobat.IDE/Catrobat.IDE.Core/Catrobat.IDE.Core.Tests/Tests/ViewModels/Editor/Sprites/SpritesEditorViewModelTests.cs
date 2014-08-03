@@ -17,8 +17,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
         private Sprite _selectedSprite;
         private Program _currentProjectHeader; // TODO Program <-> Project-Header issue in Project Settings Action
 
-        [ClassInitialize]
-        public static void TestClassInitialize(TestContext testContext)
+        [TestInitialize]
+        public void TestClassInitialize()
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);

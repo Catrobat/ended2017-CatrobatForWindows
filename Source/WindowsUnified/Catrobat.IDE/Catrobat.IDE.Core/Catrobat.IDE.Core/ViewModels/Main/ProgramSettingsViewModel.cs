@@ -74,8 +74,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region Commands
 
-        public RelayCommand InitializeCommand { get; private set; }
-
         public RelayCommand SaveCommand { get; private set; }
 
         public RelayCommand CancelCommand { get; private set; }
@@ -92,20 +90,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         #endregion
 
         #region Actions
-
-        private void InitializeAction()
-        {
-            if (CurrentProgram != null)
-            {
-                ProgramName = CurrentProgram.Name;
-                ProgramDescription = CurrentProgram.Description;
-            }
-            else
-            {
-                ProgramName = "";
-                ProgramDescription = "";
-            }
-        }
 
         private async void SaveAction()
         {
@@ -130,7 +114,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void CancelAction()
         {
-            GoBackAction();
+            ResetViewModel();
+            base.GoBackAction();
         }
 
         protected override void GoBackAction()
@@ -146,16 +131,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProgram = message.Content;
-            //if (CurrentProgram != null)
-            //{
-            //    ProgramName = CurrentProgram.Name;
-            //    ProgramDescription = CurrentProgram.Description;  
-            //}
-            //else
-            //{
-            //    ProgramName = "";
-            //    ProgramDescription = ""; 
-            //}
         }
 
         private async void CurrentProgramHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
@@ -169,7 +144,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public ProgramSettingsViewModel()
         {
-            InitializeCommand = new RelayCommand(InitializeAction);
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
@@ -177,6 +151,21 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProgramHeaderChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Program>>(this, 
                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
+        }
+
+        public override void NavigateTo()
+        {
+            if (CurrentProgram != null)
+            {
+                ProgramName = CurrentProgram.Name;
+                ProgramDescription = CurrentProgram.Description;
+            }
+            else
+            {
+                ProgramName = "";
+                ProgramDescription = "";
+            }
+            base.NavigateTo();
         }
 
         private void ResetViewModel()

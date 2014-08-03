@@ -85,8 +85,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         #region Commands
 
-        public RelayCommand InitializeCommand { get; private set; }
-
         public RelayCommand UploadCommand { get; private set; }
 
         public RelayCommand CancelCommand { get; private set; }
@@ -105,19 +103,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #endregion
 
         #region Actions
-        private void InitializeAction()
-        {
-            if (CurrentProgram != null)
-            {
-                ProgramName = CurrentProgram.Name;
-                ProgramDescription = CurrentProgram.Description;
-            }
-            else
-            {
-                ProgramName = "";
-                ProgramDescription = "";
-            }
-        }
 
         private async void UploadAction()
         {
@@ -131,7 +116,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             var message = new MessageBase();
             Messenger.Default.Send(message, ViewModelMessagingToken.UploadProgramStartedListener);
 
-            GoBackAction();
+            this.GoBackAction();
 
             JSONStatusResponse statusResponse = await Task.Run(() => upload_task);
 
@@ -172,7 +157,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private void CancelAction()
         {
-            GoBackAction();
+            ResetViewModel();
+            base.GoBackAction();
         } 
 
         protected override void GoBackAction()
@@ -192,23 +178,12 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProgram = message.Content;
-            //if (CurrentProgram != null)
-            //{
-            //    ProgramName = CurrentProgram.Name;
-            //    ProgramDescription = CurrentProgram.Description;
-            //}
-            //else
-            //{
-            //    ProgramName = "";
-            //    ProgramDescription = "";
-            //}
         }
 
         #endregion
 
         public UploadProgramViewModel()
         {
-            InitializeCommand = new RelayCommand(InitializeAction);
             UploadCommand = new RelayCommand(UploadAction, UploadCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
             ChangeUserCommand = new RelayCommand(ChangeUserAction);
@@ -218,6 +193,21 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
+        }
+
+        public override void NavigateTo()
+        {
+            if (CurrentProgram != null)
+            {
+                ProgramName = CurrentProgram.Name;
+                ProgramDescription = CurrentProgram.Description;
+            }
+            else
+            {
+                ProgramName = "";
+                ProgramDescription = "";
+            }
+            base.NavigateTo();
         }
 
         #region Callbacks

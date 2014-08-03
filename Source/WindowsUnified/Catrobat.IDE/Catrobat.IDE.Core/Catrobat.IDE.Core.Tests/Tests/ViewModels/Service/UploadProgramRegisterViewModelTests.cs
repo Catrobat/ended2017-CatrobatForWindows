@@ -12,8 +12,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
     [TestClass]
     public class UploadProgramRegisterViewModelTests
     {
-        [ClassInitialize]
-        public static void TestClassInitialize(TestContext testContext)
+        [TestInitialize]
+        public void TestClassInitialize()
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.UnRegisterAll();

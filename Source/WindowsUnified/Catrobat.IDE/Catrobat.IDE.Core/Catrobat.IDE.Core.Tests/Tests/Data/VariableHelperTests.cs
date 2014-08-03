@@ -9,8 +9,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
     [TestClass]
     public class VariableHelperTests
     {
-        [ClassInitialize]
-        public static void TestClassInitialize(TestContext testContext)
+        [TestInitialize]
+        public void TestClassInitialize()
         {
             TestHelper.InitializeTests();
         }

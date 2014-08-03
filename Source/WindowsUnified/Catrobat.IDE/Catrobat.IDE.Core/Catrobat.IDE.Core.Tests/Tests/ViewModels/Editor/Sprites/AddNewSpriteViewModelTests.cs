@@ -11,8 +11,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
     [TestClass]
     public class AddNewSpriteViewModelTests
     {
-        [ClassInitialize]
-        public static void TestClassInitialize(TestContext testContext)
+        [TestInitialize]
+        public void TestClassInitialize()
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
