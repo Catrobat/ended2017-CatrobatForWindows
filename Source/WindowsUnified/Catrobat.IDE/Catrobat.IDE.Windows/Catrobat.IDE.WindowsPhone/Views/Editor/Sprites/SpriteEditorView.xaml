@@ -9,74 +9,54 @@
   xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
   xmlns:listsViewControls="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls"
   mc:Ignorable="d"
-  NavigationCacheMode="Enabled"
   DataContext="{Binding SpriteEditorViewModel, Source={StaticResource Locator}}">
 
   <Page.Resources>
     <DataTemplate x:Key="LookItemTemplate">
-      <Grid Height="90">
-        <Button BorderThickness="0" Padding="0 -10 0 -10"
-          Height="90" Margin="0 1 0 1" RequestedTheme="Dark"
-          Command="{Binding SpriteEditorViewModel.EditLookCommand, 
-          Source={StaticResource Locator}}" CommandParameter="{Binding}">
-          <Grid Margin="0 5 0 5" Height="90" Width="400" RequestedTheme="Dark"
-            Background="{ThemeResource LooksBrush}"
+      <Grid Height="90" Width="380" Margin="0 5 0 5"
             DataContext="{Binding}"
             d:DataContext="{d:DesignInstance models:Look}">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="{Binding Image.ImageSource}"
+        <Grid RequestedTheme="Dark"
+          Background="{ThemeResource LooksBrush}"
+          Tapped="LookItem_OnTapped">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
+          </Grid.ColumnDefinitions>
+          <Image Grid.Column="0" Source="{Binding Image.ImageSource}"
                    MaxWidth="120" MaxHeight="120" Margin="10 10 5 10"
                    VerticalAlignment="Stretch" />
-            <Grid Grid.Column="1" Margin="5">
-              <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5"
-                Text="{Binding Name}"
+          <Grid Grid.Column="1" Margin="5">
+            <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5"
+                Text="{Binding Name}" TextWrapping="Wrap" MaxLines="2"
                 VerticalAlignment="Center" />
-            </Grid>
           </Grid>
-        </Button>
-        <Grid Height="92" Background="Transparent"
-              Visibility="{Binding ReorderMode, ElementName=ListViewLooks, 
-              Converter={StaticResource ReorderModeVisibilityConverter}}" />
-        <Grid Height="92" Background="Transparent"
-              Visibility="{Binding SelectionMode, ElementName=ListViewLooks, 
-              Converter={StaticResource SelectionModeVisibilityConverter}}" />
+        </Grid>
       </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="SoundItemTemplate">
-      <Grid Margin="0 5 0 5">
-        <Button HorizontalAlignment="Left" BorderThickness="0" Padding="0 -10 0 -10"
-          Height="85" Width="350" Margin="0 1 0 1" RequestedTheme="Dark"
-          Command="{Binding SpriteEditorViewModel.EditSoundCommand, 
-          Source={StaticResource Locator}}" CommandParameter="{Binding}">
-          <Grid Width="350" Height="85" VerticalAlignment="Center" Background="{ThemeResource SoundsBrush}"
+      <Grid Margin="0 5 0 5" Height="85" Width="380" 
             DataContext="{Binding}"
             d:DataContext="{d:DesignInstance models:Sound}">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="Auto" />
-              <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <soundControls:SoundPlayButton
+        <Grid RequestedTheme="Dark"
+            Background="{ThemeResource SoundsBrush}"
+            Tapped="SoundItem_OnTapped">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+          </Grid.ColumnDefinitions>
+          <soundControls:SoundPlayButton
               Group="{Binding ElementName=PlayPauseButtonGroupSounds}"
               Sound="{Binding}"
               VerticalAlignment="Center"
               RoundBorderThickness="5" Margin="10 0 0 0"
               Grid.Column="0" Height="65" Width="65" />
-            <Grid Grid.Column="1" Margin="15 5 5 5">
-              <TextBlock Grid.Row="0" FontSize="32" 
+          <Grid Grid.Column="1" Margin="15 5 5 5">
+            <TextBlock Grid.Row="0" FontSize="28" TextWrapping="Wrap" MaxLines="2"
                 Text="{Binding Name}" VerticalAlignment="Center" />
-            </Grid>
           </Grid>
-        </Button>
-        <Grid Height="87" Background="Transparent"
-              Visibility="{Binding ReorderMode, ElementName=ListViewSounds, 
-              Converter={StaticResource ReorderModeVisibilityConverter}}" />
-        <Grid Height="87" Background="Transparent"
-              Visibility="{Binding SelectionMode, ElementName=ListViewSounds, 
-              Converter={StaticResource SelectionModeVisibilityConverter}}" />
+        </Grid>
       </Grid>
     </DataTemplate>
   </Page.Resources>
@@ -87,7 +67,7 @@
       <RowDefinition/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
-    <soundControls:SoundPlayButtonGroup Name="PlayPauseButtonGroupSounds"
+    <soundControls:SoundPlayButtonGroup x:Name="PlayPauseButtonGroupSounds"
       Command="{Binding SoundsPlayStateChangedCommand}"
       Program="{Binding CurrentProgram}" />
 
@@ -131,7 +111,7 @@
           Header="{Binding Resources.Editor_PivotLooks, 
           Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
-          <listsViewControls:BindableListView Name="ListViewLooks"
+          <listsViewControls:BindableListView x:Name="ListViewLooks"
               ItemsSource="{Binding Looks}"
               BindableSelectedItems="{Binding SelectedLooks, Mode=TwoWay}"
               ItemTemplate="{StaticResource LookItemTemplate}"
@@ -153,7 +133,7 @@
       <PivotItem Name="PivotSounds" Margin="10 -15 0 0"
                  Header="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
-          <listsViewControls:BindableListView Name="ListViewSounds"
+          <listsViewControls:BindableListView x:Name="ListViewSounds"
             ItemsSource="{Binding Sounds}"
             BindableSelectedItems="{Binding SelectedSounds, Mode=TwoWay}"
             ItemTemplate="{StaticResource SoundItemTemplate}"

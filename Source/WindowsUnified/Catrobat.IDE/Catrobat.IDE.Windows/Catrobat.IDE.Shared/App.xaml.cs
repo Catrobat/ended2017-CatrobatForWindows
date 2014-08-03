@@ -33,9 +33,6 @@ namespace Catrobat.IDE.WindowsShared
 
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            StatusBar statusBar = StatusBar.GetForCurrentView();
-            await statusBar.HideAsync();
-
             await ShowSplashScreen(e);
         }
 
@@ -75,6 +72,9 @@ namespace Catrobat.IDE.WindowsShared
 
         private static async Task ShowSplashScreen(IActivatedEventArgs e)
         {
+            StatusBar statusBar = StatusBar.GetForCurrentView();
+            await statusBar.HideAsync();
+
             var file = await StorageFile.GetFileFromApplicationUriAsync(
                 new Uri("ms-appx:///Assets/SplashScreen.png", UriKind.Absolute));
             var randomAccessStream = await file.OpenReadAsync();
@@ -96,6 +96,9 @@ namespace Catrobat.IDE.WindowsShared
 
         private static async Task SkipSplashScreen(IActivatedEventArgs e)
         {
+            StatusBar statusBar = StatusBar.GetForCurrentView();
+            await statusBar.HideAsync();
+
             await ExtendedSplash.InitializationFinished(e);
         }
 

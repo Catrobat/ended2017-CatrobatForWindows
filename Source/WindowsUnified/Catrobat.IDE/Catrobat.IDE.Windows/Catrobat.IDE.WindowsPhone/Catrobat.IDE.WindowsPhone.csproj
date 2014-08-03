@@ -142,7 +142,7 @@
     <Compile Include="Controls\ImageSizeIcon.xaml.cs">
       <DependentUpon>ImageSizeIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LocalProgramControl.xaml.cs">
+    <Compile Include="Controls\ItemControls\LocalProgramControl.xaml.cs">
       <DependentUpon>LocalProgramControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Navigation\NavigationObjectPage.cs" />
@@ -335,7 +335,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\LocalProgramControl.xaml">
+    <Page Include="Controls\ItemControls\LocalProgramControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
