@@ -859,7 +859,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Tippe auf '+' um einen neuen Klang hinzuzufügen.</value>
   </data>
   <data name="Editor_ImageEditingProgram" xml:space="preserve">
-    <value>Bildbearbeitungsprogramm</value>
+    <value>Bildbearbeitungs- programm</value>
   </data>
   <data name="Editor_Recorded" xml:space="preserve">
     <value>Aufnahme</value>

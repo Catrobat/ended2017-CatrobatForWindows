@@ -5,6 +5,17 @@
 
   <ResourceDictionary.ThemeDictionaries>
     <ResourceDictionary x:Key="Default">
+      <!-- Accent colors and brushes -->
+      <Color x:Key="Accent1Color">#FF880088</Color>
+      <Color x:Key="Accent2Color">#FF008888</Color>
+      <Color x:Key="Accent3Color">#FF888800</Color>
+
+      <SolidColorBrush x:Key="Accent1Brush" Color="{ThemeResource Accent1Color}" />
+      <SolidColorBrush x:Key="Accent2Brush" Color="{ThemeResource Accent2Color}" />
+      <SolidColorBrush x:Key="Accent3Brush" Color="{ThemeResource Accent3Color}" />
+
+
+
       <!-- Brushes -->
       <Color x:Key="AppBackgroundColor">#FFFFFFFF</Color>
       <SolidColorBrush x:Key="AppBackgroundBrush" Color="{ThemeResource AppBackgroundColor}" />
@@ -21,18 +32,8 @@
       <Color x:Key="BrickBorderColor">#FF333355</Color>
       <SolidColorBrush x:Key="BrickBorderBrush" Color="{ThemeResource BrickBorderColor}" />
 
+      <SolidColorBrush x:Key="HyperLinkForegroundBrush" Color="{ThemeResource Accent1Color}" />
 
-      <Color x:Key="HyperLinkForegroundColor">#FF6666CC</Color>
-      <SolidColorBrush x:Key="HyperLinkForegroundBrush" Color="{ThemeResource BrickBorderColor}" />
-      <!-- Accent Colors -->
-
-      <Color x:Key="Accent1Color">#FF880088</Color>
-      <Color x:Key="Accent2Color">#FF008888</Color>
-      <Color x:Key="Accent3Color">#FF888800</Color>
-
-      <SolidColorBrush x:Key="Accent1Brush" Color="{ThemeResource Accent1Color}" />
-      <SolidColorBrush x:Key="Accent2Brush" Color="{ThemeResource Accent2Color}" />
-      <SolidColorBrush x:Key="Accent3Brush" Color="{ThemeResource Accent3Color}" />
       
       <!-- Action Brushes -->
       <SolidColorBrush x:Key="SoundsBrush" Color="#FF87778D" />

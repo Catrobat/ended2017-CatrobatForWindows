@@ -106,7 +106,7 @@
     <Grid Margin="5 5 5 5" 
           VerticalAlignment="Stretch" 
           RequestedTheme="Dark" 
-          Background="#FF9999BB">
+          Background="{ThemeResource Accent2Brush}">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="1*"/>
         <ColumnDefinition Width="2.2*"/>
@@ -120,11 +120,18 @@
                Visibility="Collapsed"/>
       </Grid>
 
-      <TextBlock Name="TextBlockTextRight" Grid.Column="1" 
-      Margin="5 5 5 5"
-      Style="{ThemeResource TextExtraLargeStyle}"
-      TextWrapping="Wrap" MaxLines="2"
-      VerticalAlignment="Center"/>
+      <ScrollViewer Name="ScrollViewerText" Grid.Column="1" 
+                    HorizontalScrollMode="Enabled" VerticalScrollMode="Enabled">
+    
+          <TextBlock Name="TextBlockTextRight"  SizeChanged="Text_OnSizeChanged" VerticalAlignment="Center" HorizontalAlignment="Left"
+        Margin="5 5 5 5"
+        FontSize="50"
+        TextWrapping="WrapWholeWords" MaxLines="2"
+        />
+
+        
+      </ScrollViewer>
+
     </Grid>
   </Button>
 </UserControl>

@@ -6,6 +6,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   xmlns:misc="using:Catrobat.IDE.WindowsShared.Content.Images.Misc"
+  xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
   DataContext="{Binding ChangeLookViewModel, Source={StaticResource Locator}}">
 
   <Grid x:Name="LayoutRoot" 
@@ -41,26 +42,18 @@
                Source={StaticResource LocalizedStrings}}"/>
     </StackPanel>
 
-    <Button Grid.Row="2" Margin="12" Padding="0" BorderThickness="0"
-      Command="{Binding EditLookCommand}" RequestedTheme="Dark" >
-      <Grid Margin="0" Height="140" Width="380"
-        Background="{ThemeResource Accent3Brush}">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto"/>
-          <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <misc:EditImage Grid.Column="0"
-         ScaleFactor="0.2" Margin="30 15 15 15" />
-        <TextBlock Grid.Column="1" Margin="20 10 10 10"
-          VerticalAlignment="Center"
-          HorizontalAlignment="Left"
+    <StackPanel Grid.Row="2" Margin="12">
+      <controls:LargeImageButton
+          Command="{Binding EditLookCommand}"
           Text="{Binding Resources.Editor_ImageEditingProgram, 
-          Source={StaticResource LocalizedStrings}}"
-          TextAlignment="Left"
-          TextWrapping="Wrap"
-          Style="{ThemeResource TextExtraLargeStyle}" />
-      </Grid>
-    </Button>
+          Source={StaticResource LocalizedStrings}}" >
+        <controls:LargeImageButton.ImageTemplate>
+          <DataTemplate>
+            <misc:EditImage ScaleFactor="0.17" />
+          </DataTemplate>
+        </controls:LargeImageButton.ImageTemplate>
+      </controls:LargeImageButton>
+    </StackPanel>
   </Grid>
   <Page.BottomAppBar>
     <CommandBar RequestedTheme="Dark" Background="{ThemeResource AppBarBackgroundBrush}">

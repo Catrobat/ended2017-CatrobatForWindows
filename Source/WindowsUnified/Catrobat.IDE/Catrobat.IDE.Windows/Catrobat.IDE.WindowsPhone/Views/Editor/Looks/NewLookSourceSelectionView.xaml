@@ -10,21 +10,14 @@
   DataContext="{Binding NewLookSourceSelectionViewModel, 
   Source={StaticResource Locator}}">
 
-  <Grid x:Name="LayoutRoot" Background="{ThemeResource AppBackgroundBrush}">
+  <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
     <StackPanel>
-      <StackPanel x:Name="TitlePanel" 
-                Grid.Row="0"
-                Margin="12">
-        <!--<TextBlock x:Name="ApplicationTitle" 
-                 Text="{Binding Resources.Main_TitleUploadProject, 
-                 Source={StaticResource LocalizedStrings}}" 
-                 Style="{ThemeResource TextNormalStyle}" 
-                 />-->
-        <TextBlock x:Name="PageTitle" 
+      <StackPanel Margin="12">
+        <TextBlock 
                  Text="{Binding Resources.Editor_TitleNewLook, 
                  Source={StaticResource LocalizedStrings}}" 
                  Margin="0 0 0 0" 

@@ -116,10 +116,20 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 
         #endregion
 
-
         public LargeImageButton()
         {
             this.InitializeComponent();
+        }
+
+        private void Text_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var element = (FrameworkElement)sender;
+
+            if (element.ActualHeight > ScrollViewerText.ActualHeight ||
+                element.ActualWidth > ScrollViewerText.ActualWidth - 10)
+            {
+                TextBlockTextRight.FontSize *= 0.9;
+            }
         }
     }
 }
