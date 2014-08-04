@@ -4,6 +4,6 @@
     {
         public string Xml { get; set; }
 
-        public CatrobatVersionConverter.VersionConverterError Error { get; set; }
+        public CatrobatVersionConverter.VersionConverterStatus Error { get; set; }
     }
 }

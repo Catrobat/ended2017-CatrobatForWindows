@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
 {
     public static class CatrobatVersionConverter
     {
-        public enum VersionConverterError
+        public enum VersionConverterStatus
         {
             NoError, VersionTooNew, VersionTooOld, ProgramDamaged, ProgramPathNotValid
         }
@@ -93,14 +93,20 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
             }
         }
 
-        public static VersionConverterError ConvertVersions(string inputVersion, string outputVersion, XDocument document)
+        public static VersionConverterStatus ConvertVersions(string inputVersion, string outputVersion, XDocument document)
         {
-            var error = VersionConverterError.NoError;
+            if (inputVersion == outputVersion)
+            {
+                return VersionConverterStatus.NoError;
+            }
+
+
+            var error = VersionConverterStatus.NoError;
             var versionPair = new CatrobatVersionPair(inputVersion, outputVersion);
 
             if (double.Parse(inputVersion) < Constants.MinimumCodeVersion)
             {
-                return VersionConverterError.VersionTooOld;
+                return VersionConverterStatus.VersionTooOld;
             }
 
             if (ConvertersPaths.ContainsKey(versionPair))
@@ -109,7 +115,7 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
 
                 if (path.Count == 0)
                 {
-                    error = VersionConverterError.VersionTooOld;
+                    error = VersionConverterStatus.VersionTooOld;
                 }
                 else
                 {
@@ -130,13 +136,13 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
                     }
                     catch (Exception)
                     {
-                        error = VersionConverterError.ProgramDamaged;
+                        error = VersionConverterStatus.ProgramDamaged;
                     }
                 }
             }
             else
             {
-                error = VersionConverterError.ProgramDamaged;
+                error = VersionConverterStatus.ProgramDamaged;
             }
 
             return error;
@@ -162,7 +168,7 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
 
         public static async Task<VersionConverterResult> ConvertToXmlVersion(string projectCodePath, string targetVersion, bool overwriteProject = false)
         {
-            VersionConverterError error;
+            VersionConverterStatus error;
             var xml = "";
 
             if (!string.IsNullOrEmpty(projectCodePath))
@@ -181,18 +187,27 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
 
                     var inputVersion = GetInputVersion(document);
 
+                    if (inputVersion == Constants.TargetIDEVersion)
+                    {
+                        return new VersionConverterResult
+                        {
+                            Error = VersionConverterStatus.NoError,
+                            Xml = projectCode
+                        };
+                    }
+
                     if (double.Parse(inputVersion) < Constants.MinimumCodeVersion)
                     {
                         return new VersionConverterResult
                         {
-                            Error = VersionConverterError.VersionTooOld,
+                            Error = VersionConverterStatus.VersionTooOld,
                             Xml = null
                         };
                     }
 
                     error = ConvertVersions(inputVersion, targetVersion, document);
 
-                    if (error == VersionConverterError.NoError)
+                    if (error == VersionConverterStatus.NoError)
                     {
                         var writer = new XmlStringWriter();
                         document.Save(writer, SaveOptions.None);
@@ -209,24 +224,24 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
                                 }
                                 catch
                                 {
-                                    error = VersionConverterError.ProgramDamaged;
+                                    error = VersionConverterStatus.ProgramDamaged;
                                 }
                             }
                         }
                     }
                     else
                     {
-                        error = VersionConverterError.ProgramDamaged;
+                        error = VersionConverterStatus.ProgramDamaged;
                     }
                 }
                 else
                 {
-                    error = VersionConverterError.ProgramDamaged;
+                    error = VersionConverterStatus.ProgramDamaged;
                 }
             }
             else
             {
-                error = VersionConverterError.ProgramPathNotValid;
+                error = VersionConverterStatus.ProgramPathNotValid;
             }
 
             return new VersionConverterResult { Xml = xml, Error = error };

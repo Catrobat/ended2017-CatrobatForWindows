@@ -65,6 +65,7 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<EditorLoadingViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<LookNameChooserViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<ProgramDetailViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<ProgramExportViewModel>(TypeCreationMode.Normal);
             }
 
         }
@@ -510,6 +511,17 @@ namespace Catrobat.IDE.Core.ViewModels
             get
             {
                 return ServiceLocator.GetInstance<ProgramDetailViewModel>();
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance",
+           "CA1822:MarkMembersAsStatic",
+           Justification = "This non-static member is needed for data binding purposes.")]
+        public ProgramExportViewModel ProgramExportViewModel
+        {
+            get
+            {
+                return ServiceLocator.GetInstance<ProgramExportViewModel>();
             }
         }
 

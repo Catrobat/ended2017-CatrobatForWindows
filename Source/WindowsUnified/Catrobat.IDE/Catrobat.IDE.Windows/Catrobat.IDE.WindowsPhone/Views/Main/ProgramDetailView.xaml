@@ -111,20 +111,20 @@
           Label="{Binding Resources.Main_ButtonEdit, 
           Source={StaticResource LocalizedStrings}}"
           Command="{Binding EditCurrentProgramCommand}"/>
+        <AppBarButton Icon="ReShare" 
+          Label="{Binding Resources.Main_ShareProgram, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding ShareLocalProgramCommand}"/>
         <AppBarButton Icon="Play" 
           Label="{Binding Resources.Editor_ButtonPlayProgram, 
           Source={StaticResource LocalizedStrings}}"
           Command="{Binding PlayCurrentProgramCommand}"/>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
-        <AppBarButton Icon="Upload" 
+        <!--<AppBarButton Icon="Upload" 
           Label="{Binding Resources.Main_ButtonUpload, 
           Source={StaticResource LocalizedStrings}}"
-          Command="{Binding UploadCurrentProgramCommand}"/>
-        <AppBarButton Icon="ReShare" 
-          Label="{Binding Resources.Main_ShareProgram, 
-          Source={StaticResource LocalizedStrings}}"
-          Command="{Binding ShareLocalProgramCommand}"/>
+          Command="{Binding UploadCurrentProgramCommand}"/>-->
         <!--<AppBarButton Icon="Pin" 
           Label="{Binding Resources.Main_PinProgramToStart, 
           Source={StaticResource LocalizedStrings}}"

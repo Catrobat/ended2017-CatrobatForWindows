@@ -216,6 +216,9 @@
     <Compile Include="Views\Editor\Actions\ScriptBrickCategoryView.xaml.cs">
       <DependentUpon>ScriptBrickCategoryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Main\ProgramExportView.xaml.cs">
+      <DependentUpon>ProgramExportView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\ProgramImportView.xaml.cs">
       <DependentUpon>ProgramImportView.xaml</DependentUpon>
     </Compile>
@@ -436,6 +439,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Editor\Actions\ScriptBrickCategoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\ProgramExportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

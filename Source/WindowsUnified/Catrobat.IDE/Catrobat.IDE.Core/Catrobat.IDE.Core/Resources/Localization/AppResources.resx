@@ -1263,4 +1263,10 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Import_ProgramOutdatedText" xml:space="preserve">
     <value>Program is too old and cannot be added.</value>
   </data>
+  <data name="Main_ShareWithOtherApp" xml:space="preserve">
+    <value>Share wit an app</value>
+  </data>
+  <data name="Main_UploadToPocketCodeOrg" xml:space="preserve">
+    <value>Upload to pocketcode.org</value>
+  </data>
 </root>

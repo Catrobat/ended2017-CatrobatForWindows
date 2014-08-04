@@ -36,10 +36,10 @@ namespace Catrobat.IDE.Core.Services.Common
                         {
                             var skipFile = false;
                             foreach (var ending in SkipedEndings)
-                                if (entry.Name.EndsWith(ending)) 
+                                if (entry.Name.EndsWith(ending))
                                     skipFile = true;
 
-                            if(skipFile) 
+                            if (skipFile)
                                 continue;
 
                             var filePath = Path.Combine(localStoragePath, entry.FullName);
@@ -62,10 +62,9 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                using (var archive = new ZipArchive(zipStream, ZipArchiveMode.Create))
-                {
-                    await WriteFilesRecursiveToZip(archive, storage, localStoragePath, "");
-                }
+                var archive = new ZipArchive(zipStream, ZipArchiveMode.Create);
+                await WriteFilesRecursiveToZip(archive, storage, localStoragePath, "");
+                await zipStream.FlushAsync();
             }
         }
 

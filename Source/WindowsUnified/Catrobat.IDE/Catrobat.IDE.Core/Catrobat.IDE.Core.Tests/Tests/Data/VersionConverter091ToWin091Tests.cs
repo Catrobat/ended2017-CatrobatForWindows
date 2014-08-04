@@ -75,7 +75,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             var expectedDocument = SampleLoader.LoadSampleXDocument(path + "_Output");
 
             var error = CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
-            Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, error);
+            Assert.AreEqual(CatrobatVersionConverter.VersionConverterStatus.NoError, error);
 
             XmlDocumentComparer.Compare(expectedDocument, actualDocument);
         }

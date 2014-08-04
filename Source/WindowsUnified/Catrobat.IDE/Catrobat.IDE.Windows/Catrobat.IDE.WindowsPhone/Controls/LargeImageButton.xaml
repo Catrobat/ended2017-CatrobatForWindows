@@ -126,7 +126,7 @@
           <TextBlock Name="TextBlockTextRight"  SizeChanged="Text_OnSizeChanged" VerticalAlignment="Center" HorizontalAlignment="Left"
         Margin="5 5 5 5"
         FontSize="50"
-        TextWrapping="WrapWholeWords" MaxLines="2"
+        TextWrapping="WrapWholeWords"
         />
 
         

@@ -32,6 +32,7 @@
         PlayProgramNameListener,
         IsPlayerStartFromTileListener,
         FormulaEvaluated,
-        ClearPageCache
+        ClearPageCache,
+        ExportStreamChanged
     }
 }

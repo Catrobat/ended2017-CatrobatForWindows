@@ -81,6 +81,9 @@
     <Compile Include="CatrobatContextBase.cs" />
     <Compile Include="CatrobatContextDesign.cs" />
     <Compile Include="CatrobatObjects\TestEqualityComparer.cs" />
+    <Compile Include="Services\Common\ProgramExportService.cs" />
+    <Compile Include="Services\Common\ProgramImporterService.cs" />
+    <Compile Include="Services\IProgramExportService.cs" />
     <Compile Include="StorageConstants.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
     <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
@@ -127,6 +130,7 @@
     <Compile Include="ViewModels\Editor\Formula\FormulaEvaluationResult.cs" />
     <Compile Include="Navigation\NavigationObject.cs" />
     <Compile Include="ViewModels\Main\ProgramDetailViewModel.cs" />
+    <Compile Include="ViewModels\Main\ProgramExportViewModel.cs" />
     <Compile Include="ViewModels\Service\UploadProgramNewPasswordViewModel.cs" />
     <Compile Include="ViewModels\Service\OnlineProgramReportViewModel.cs" />
     <Compile Include="ViewModels\Service\UploadProgramForgotPasswordViewModel.cs" />
@@ -446,7 +450,6 @@
     <Compile Include="Resources\SampleProjectLoader.cs" />
     <Compile Include="Services\Common\WebCommunicationService.cs" />
     <Compile Include="Services\Common\ZipService.cs" />
-    <Compile Include="Services\Common\ProgramImporterService.cs" />
     <Compile Include="UI\ImageDimension.cs" />
     <Compile Include="UI\PortableUI\PortableBrush.cs" />
     <Compile Include="UI\PortableUI\PortableImage.cs" />

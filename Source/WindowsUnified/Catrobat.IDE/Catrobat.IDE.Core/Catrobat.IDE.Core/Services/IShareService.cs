@@ -14,6 +14,6 @@ namespace Catrobat.IDE.Core.Services
         //void UploadProjectToSkydrive(object liveConnectSessionChangedEventArgs, ProjectDummyHeader project,
         //    Action success, Action error);
 
-        void ShateProject(string projectName);
+        Task ShareFile(string fileToShare);
     }
 }

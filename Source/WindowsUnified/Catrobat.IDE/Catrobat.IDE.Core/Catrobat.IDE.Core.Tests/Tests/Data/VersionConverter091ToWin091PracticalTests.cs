@@ -119,7 +119,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             var actualDocument = SampleLoader.LoadSampleXDocument(input);
 
             var error = CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
-            Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, error);
+            Assert.AreEqual(CatrobatVersionConverter.VersionConverterStatus.NoError, error);
 
             var xml = actualDocument.ToString();
             var project = new XmlProgram(xml); // must not throw an exception

@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             var error = CatrobatVersionConverter.ConvertVersions(
                 "0.92", "0.91", actualDocument);
-            Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, 
+            Assert.AreEqual(CatrobatVersionConverter.VersionConverterStatus.NoError, 
                 error);
 
             XmlDocumentComparer.Compare(expectedDocument, actualDocument);
