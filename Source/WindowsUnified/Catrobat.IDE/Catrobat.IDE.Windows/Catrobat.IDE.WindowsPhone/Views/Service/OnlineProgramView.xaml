@@ -13,11 +13,12 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition />
+      <RowDefinition Height="5"/>
     </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" 
                 Grid.Row="0"
-                Margin="12"> 
+                Margin="12">
       <!--<TextBlock x:Name="ApplicationTitle" 
                  Text="{Binding Resources.Main_TitleOnlineProgram, 
                  Source={StaticResource LocalizedStrings}}" 
@@ -39,60 +40,62 @@
              VerticalAlignment="Top" 
              Source="{Binding ScreenshotBig}" />
 
-      <StackPanel Grid.Column="1" Margin="12 0 6 0">
-        <TextBlock Margin="0 0 0 0" 
+      <ScrollViewer Grid.Column="1">
+        <StackPanel Grid.Column="1" Margin="12 0 6 0">
+          <TextBlock Margin="0 0 0 0" 
                    Text="{Binding Resources.Main_ProgramName, 
                    Source={StaticResource LocalizedStrings}}"
                    TextWrapping="Wrap"
                    Style="{ThemeResource TextNormalStyle}"/>
-        <TextBlock Text="{Binding ProjectName}" 
+          <TextBlock Text="{Binding ProjectName}" 
                    TextWrapping="Wrap"
                    Style="{ThemeResource TextSmallStyle}"/>
-        <TextBlock Margin="0 12 0 0" 
+          <TextBlock Margin="0 12 0 0" 
                    Text="{Binding Resources.Main_ProgramDescription, 
                    Source={StaticResource LocalizedStrings}}" 
                    Style="{ThemeResource TextNormalStyle}"/>
-        <StackPanel Visibility="{Binding Description, 
+          <StackPanel Visibility="{Binding Description, 
                     Converter={StaticResource StringVisibilityConverter}}">
-          <TextBlock Text="{Binding Resources.Main_ProgramNoDescription, 
+            <TextBlock Text="{Binding Resources.Main_ProgramNoDescription, 
                      Source={StaticResource LocalizedStrings}}"
                      TextWrapping="Wrap"
                      Style="{ThemeResource TextSubtileStyle}"/>
+          </StackPanel>
+          <TextBlock Text="{Binding Description}" 
+                  TextWrapping="Wrap"
+                  Style="{ThemeResource TextSmallStyle}"/>
+          <TextBlock Margin="0 12 0 0" 
+                  Text="{Binding Resources.Main_OnlineProgramUploaded, 
+                  Source={StaticResource LocalizedStrings}}" 
+                  Style="{ThemeResource TextNormalStyle}"/>
+          <TextBlock x:Name="UploadedLabel" 
+                  Text="{Binding OnlineProgramViewModel.UploadedLabelText, 
+                  Source={StaticResource Locator}}"
+                  Style="{ThemeResource TextSmallStyle}"/>
+          <TextBlock Text="{Binding Author}" 
+                  TextWrapping="Wrap"
+                  Style="{ThemeResource TextSmallStyle}"/>
+          <TextBlock x:Name="VersionLabel" 
+                  Text="{Binding OnlineProgramViewModel.VersionLabelText, 
+                  Source={StaticResource Locator}}" 
+                  TextWrapping="Wrap"
+                  Style="{ThemeResource TextSmallStyle}"/>
+          <TextBlock Margin="0 12 0 0"
+                  Text="{Binding Resources.Main_OnlineProgramStatistics, 
+                  Source={StaticResource LocalizedStrings}}" 
+                  Style="{ThemeResource TextNormalStyle}"/>
+          <TextBlock x:Name="ViewsLabel" 
+                  Text="{Binding OnlineProgramViewModel.ViewsLabelText, 
+                  Source={StaticResource Locator}}" 
+                  TextWrapping="Wrap"
+                  Style="{ThemeResource TextSmallStyle}"/>
+          <TextBlock x:Name="DownloadsLabel" 
+                  Text="{Binding OnlineProgramViewModel.DownloadsLabelText, 
+                  Source={StaticResource Locator}}" 
+                  TextWrapping="Wrap"
+                  Style="{ThemeResource TextSmallStyle}"/>
         </StackPanel>
-        <TextBlock Text="{Binding Description}" 
-                   TextWrapping="Wrap"
-                   Style="{ThemeResource TextSmallStyle}"/>
-        <TextBlock Margin="0 12 0 0" 
-                   Text="{Binding Resources.Main_OnlineProgramUploaded, 
-                   Source={StaticResource LocalizedStrings}}" 
-                   Style="{ThemeResource TextNormalStyle}"/>
-        <TextBlock x:Name="UploadedLabel" 
-                   Text="{Binding OnlineProgramViewModel.UploadedLabelText, 
-                   Source={StaticResource Locator}}"
-                   Style="{ThemeResource TextSmallStyle}"/>
-        <TextBlock Text="{Binding Author}" 
-                   TextWrapping="Wrap"
-                   Style="{ThemeResource TextSmallStyle}"/>
-        <TextBlock x:Name="VersionLabel" 
-                   Text="{Binding OnlineProgramViewModel.VersionLabelText, 
-                   Source={StaticResource Locator}}" 
-                   TextWrapping="Wrap"
-                   Style="{ThemeResource TextSmallStyle}"/>
-        <TextBlock Margin="0 12 0 0"
-                   Text="{Binding Resources.Main_OnlineProgramStatistics, 
-                   Source={StaticResource LocalizedStrings}}" 
-                   Style="{ThemeResource TextNormalStyle}"/>
-        <TextBlock x:Name="ViewsLabel" 
-                   Text="{Binding OnlineProgramViewModel.ViewsLabelText, 
-                   Source={StaticResource Locator}}" 
-                   TextWrapping="Wrap"
-                   Style="{ThemeResource TextSmallStyle}"/>
-        <TextBlock x:Name="DownloadsLabel" 
-                   Text="{Binding OnlineProgramViewModel.DownloadsLabelText, 
-                   Source={StaticResource Locator}}" 
-                   TextWrapping="Wrap"
-                   Style="{ThemeResource TextSmallStyle}"/>
-      </StackPanel>
+      </ScrollViewer>
     </Grid>
   </Grid>
 

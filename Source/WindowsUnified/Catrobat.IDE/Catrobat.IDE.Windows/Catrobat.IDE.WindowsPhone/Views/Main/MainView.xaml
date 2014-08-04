@@ -72,8 +72,7 @@
                 InputScope="Search"
                 Text="{Binding OnlinePrograms.FilterText, Mode=TwoWay}"
                 TextChanged="FilterTextBox_TextChanged" 
-                KeyDown="FilterTextBox_KeyDown"
-                />
+                KeyDown="FilterTextBox_KeyDown"/>
 
               <ListView Name="ListViewOnlinePrograms" Grid.Row="1"
                 ItemsSource="{Binding OnlinePrograms}" 
