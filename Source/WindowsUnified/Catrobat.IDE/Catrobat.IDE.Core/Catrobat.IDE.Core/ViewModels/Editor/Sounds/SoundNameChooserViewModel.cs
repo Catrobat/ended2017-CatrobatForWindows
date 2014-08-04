@@ -109,8 +109,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 
         private void CancelAction()
         {
-            SoundName = null;
-
+            SoundName = "";
             base.GoBackAction();
         }
 

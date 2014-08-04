@@ -30,7 +30,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             //ServiceLocator.Register<ResourceLoaderFactoryTest>(TypeCreationMode.Normal);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void OpenProgramCommandActionTest()
         {
             Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this,
@@ -54,7 +54,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
         public void DeleteLocalProgramActionTest()
         {
             // unchecked private members and unchecked callback-action result
@@ -73,7 +73,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(0, notificationService.SentToastNotifications);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
         public void CopyLocalProgramActionTest()
         {
             // unchecked private members and unchecked callback-action result
@@ -92,7 +92,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(0, notificationService.SentToastNotifications);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void CreateNewProgramActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -108,7 +108,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void SettingsActionTest()
         {      
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -124,7 +124,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void OnlineProgramTapActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -144,7 +144,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void LicenseActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -160,7 +160,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void AboutActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -176,7 +176,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void TouAction()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -192,7 +192,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
         public void ShowMessagesActionDownloadMessageTest()
         {
             // TODO issue with portable-Image
@@ -211,7 +211,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(1, notificationService.SentToastNotifications);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
         public void ShowMessagesActionUploadMessageTest()
         {
             // TODO issue with portable-Image
@@ -230,7 +230,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(1, notificationService.SentToastNotifications);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

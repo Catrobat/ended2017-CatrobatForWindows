@@ -30,7 +30,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
             ServiceLocator.CultureService.SetCulture(CultureInfo.InvariantCulture);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestNullOrEmpty()
         {
             TestComplete((IFormulaToken[]) null);
@@ -39,7 +39,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Constants
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestConstants()
         {
             for (var digit = 0; digit <= 9; digit++)
@@ -58,7 +58,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Operators
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestOperators()
         {
             TestOperator(Range.FromLength(0, 2), "not true", 0);
@@ -100,7 +100,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Functions
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestEmptyFunction()
         {
             TestFunction(functionToken =>
@@ -117,7 +117,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
             });
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestFunctionWithUnfinishedArgument()
         {
             TestFunction(functionToken =>
@@ -134,7 +134,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
             });
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestFunctionWithArgument()
         {
             TestFunction(functionToken =>
@@ -173,7 +173,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Sensors
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestSensors()
         {
             TestComplete<FormulaNodeSensor>();
@@ -183,7 +183,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Properties
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestProperty()
         {
             TestComplete<FormulaNodeProperty>();
@@ -193,7 +193,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Variables
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestVariables()
         {
             TestVariable<LocalVariable>(FormulaTokenFactory.CreateLocalVariableToken);
@@ -211,7 +211,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Brackets
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestClosedBracket()
         {
             for (var iteration = 1; iteration <= Iterations; iteration++)
@@ -234,7 +234,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
             }
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestLeftOpenBracket()
         {
             for (var iteration = 1; iteration <= Iterations; iteration++)
@@ -251,7 +251,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
             }
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestRightOpenBracket()
         {
             for (var iteration = 1; iteration <= Iterations; iteration++)
@@ -270,7 +270,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #endregion
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void MonkeyTest()
         {
             const int minLength = 1;

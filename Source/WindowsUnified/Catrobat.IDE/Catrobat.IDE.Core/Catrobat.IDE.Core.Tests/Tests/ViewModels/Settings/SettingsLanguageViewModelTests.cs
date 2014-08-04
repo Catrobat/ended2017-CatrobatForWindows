@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Settings
             ServiceLocator.NavigationService = new NavigationServiceTest();
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Settings"), TestCategory("ExcludeGated")]
         public void CultureTest()
         {
             // test culture info

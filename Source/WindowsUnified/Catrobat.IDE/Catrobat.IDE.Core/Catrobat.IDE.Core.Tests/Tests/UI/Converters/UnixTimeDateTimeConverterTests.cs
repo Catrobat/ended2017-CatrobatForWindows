@@ -8,7 +8,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.UI.Converters
     [TestClass]
     public class UnixTimeDateTimeConverterTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("UI.Converters")]
         public void TestUnixTimeToDateTimeConversion()
         {
             var conv = new UnixTimeDateTimeConverter();
@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.UI.Converters
             Assert.AreEqual(date, output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UI.Converters")]
         public void TestDateTimeToUnixTimeConversion()
         {
             var conv = new UnixTimeDateTimeConverter();
@@ -27,7 +27,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.UI.Converters
             Assert.AreEqual(null, output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UI.Converters")]
         public void TestFaultyUnixTimeToDateTimeConversion()
         {
             var conv = new UnixTimeDateTimeConverter();

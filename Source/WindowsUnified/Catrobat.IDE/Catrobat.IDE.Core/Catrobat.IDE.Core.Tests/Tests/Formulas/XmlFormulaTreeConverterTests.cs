@@ -25,7 +25,7 @@ using Formula = Catrobat.IDE.Core.ViewModels.Editor.Formula;
 //            TestHelper.InitializeTests();
 //        }
 
-//        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests.Obsolete")]
+//        [TestMethod, TestCategory("Formulas"), TestCategory("ExcludeGated")]
 //        public void TestCatroidNodes()
 //        {
 //            const string directory = "FormulaEditor/";
@@ -82,7 +82,7 @@ using Formula = Catrobat.IDE.Core.ViewModels.Editor.Formula;
 //            TestConvert<FormulaNodeTrue>(directory + "true");
 //        }
 
-//        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+//        [TestMethod, TestCategory("Formulas")]
 //        public void TestXmlFormulaTreeNodes()
 //        {
 //            var localVariable = new UserVariable
@@ -113,7 +113,7 @@ using Formula = Catrobat.IDE.Core.ViewModels.Editor.Formula;
 //                formulas: nodes);
 //        }
 
-//        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("GatedTests.Obsolete")]
+//        [TestMethod, TestCategory("Formulas"), TestCategory("ExcludeGated")]
 //        public void TestPocketCodeFormulas()
 //        {
 //            var documents = Enumerable.Range(1, 16)
@@ -148,7 +148,7 @@ using Formula = Catrobat.IDE.Core.ViewModels.Editor.Formula;
 //            }
 //        }
 
-//        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+//        [TestMethod, TestCategory("Formulas")]
 //        public void TestFormulaTreeNodes()
 //        {
 //            var localVariable = new UserVariable

@@ -7,7 +7,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.UI.Converters
     [TestClass]
     public class BoolPlayButtonStateConverterTests
     {
-        //[TestMethod]
+        //[TestMethod, TestCategory("UI.Converters")]
         //public void TestConversion()
         //{
         //    var conv = new BoolPlayButtonStateConverter();
@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.UI.Converters
         //    Assert.AreEqual(PlayState.Pause, output);
         //}
 
-        //[TestMethod]
+        //[TestMethod, TestCategory("UI.Converters")]
         //public void TestBackConversion()
         //{
         //    var conv = new BoolPlayButtonStateConverter();
@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.UI.Converters
         //    Assert.AreEqual(true, output);
         //}
 
-        //[TestMethod]
+        //[TestMethod, TestCategory("UI.Converters")]
         //public void TestFaultyConversion()
         //{
         //    var conv = new BoolPlayButtonStateConverter();

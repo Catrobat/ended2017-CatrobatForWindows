@@ -7,7 +7,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.UI.Converters
     {
         // TODO: comment in and fix this tests
 
-        //[TestMethod]
+        //[TestMethod, TestCategory("UI.Converters")]
         //public void TestConversion()
         //{
         //    var conv = new NoScreenshotConverter();
@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.UI.Converters
         //    Assert.IsInstanceOfType(output, typeof(PortableImage));
         //}
 
-        //[TestMethod]
+        //[TestMethod, TestCategory("UI.Converters")]
         //public void TestBackConversion()
         //{
         //    var image = new PortableImage();
@@ -27,7 +27,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.UI.Converters
         //    Assert.AreEqual(image, output);
         //}
 
-        //[TestMethod]
+        //[TestMethod, TestCategory("UI.Converters")]
         //public void TestFaultyConversion()
         //{
         //    var conv = new NoScreenshotConverter();

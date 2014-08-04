@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.UI.Converters
     [TestClass]
     public class NullIntCountConverterTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("UI.Converters")]
         public void TestConversion1()
         {
             var conv = new NullIntCountConverter();
@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.UI.Converters
             Assert.AreEqual(0, output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UI.Converters")]
         public void TestConversion2()
         {
             var conv = new NullIntCountConverter();
@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.UI.Converters
             Assert.AreEqual(1, output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UI.Converters")]
         public void TestBackConversion()
         {
             var conv = new NullIntCountConverter();

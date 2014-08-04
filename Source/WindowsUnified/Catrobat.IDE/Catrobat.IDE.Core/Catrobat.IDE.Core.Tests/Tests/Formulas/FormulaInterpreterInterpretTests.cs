@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Constants
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestConstants()
         {
             for (var digit = 0; digit <= 9; digit++)
@@ -46,7 +46,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Operators
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestOperators()
         {
             TestDoubleInfixOperator(FormulaTreeFactory.CreateAddNode, FormulaTokenFactory.CreatePlusToken);
@@ -74,7 +74,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
             TestDoubleInfixOperator(FormulaTreeFactory.CreateModuloNode, FormulaTokenFactory.CreateModToken);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestOperatorOrder()
         {
             var x = _random.Next();
@@ -126,7 +126,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Functions
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestFunctions()
         {
             TestDoubleUnaryFunction(FormulaTreeFactory.CreateExpNode, FormulaTokenFactory.CreateExpToken);
@@ -150,7 +150,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Sensors
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestSensors()
         {
             TestConstant(FormulaTreeFactory.CreateAccelerationXNode, FormulaTokenFactory.CreateAccelerationXToken);
@@ -166,7 +166,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Properties
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestProperties()
         {
             TestConstant(FormulaTreeFactory.CreateBrightnessNode, FormulaTokenFactory.CreateBrightnessToken);
@@ -182,7 +182,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Variables
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestVariables()
         {
             TestVariable<LocalVariable>(FormulaTreeFactory.CreateLocalVariableNode, FormulaTokenFactory.CreateLocalVariableToken);
@@ -193,7 +193,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Brackets
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestBrackets()
         {
             var x = _random.Next();
@@ -230,7 +230,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
                     FormulaTokenFactory.CreateMultiplyToken(), zToken
                 });
         }
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestRedundantBrackets()
         {
             var x = _random.Next();
@@ -273,7 +273,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #endregion
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void MonkeyTest()
         {
             const int iterations = 100000;

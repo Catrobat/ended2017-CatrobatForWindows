@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.UI
     [TestClass]
     public class ImageSizeEntrytests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("UI")]
         public void GetNewImageWidthTest()
         {
             Assert.AreEqual(400, ImageSizeEntry.GetNewImageWidth(ImageSize.Small, 900, 600));
@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.UI
             Assert.AreEqual(3600, ImageSizeEntry.GetNewImageWidth(ImageSize.FullSize, 3600, 900));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UI")]
         public void GetNewImageHeightTest()
         {
             Assert.AreEqual(222, ImageSizeEntry.GetNewImageHeight(ImageSize.Small, 900, 500));

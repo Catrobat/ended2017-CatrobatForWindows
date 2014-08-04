@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             ServiceLocator.CultureService.SetCulture(new CultureInfo("en"));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Service")]
         public void RecoverActionTest()
         {
             //TODO check messages for different responses - e.g. wrong recoverydata or http-request failed
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Service")]
         public void RecoverActionMissingReasonTest()
         {
             var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
@@ -76,7 +76,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual("Recovery failed", notificationService.LastNotificationTitle);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Service")]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

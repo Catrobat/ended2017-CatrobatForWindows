@@ -150,6 +150,9 @@
     <Compile Include="Tests\UI\ImageSizeEntryTests.cs" />
     <Compile Include="Tests\UI\NullItemCollectionTests.cs" />
     <Compile Include="Tests\Misc\ObservableCollectionTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Actions\AddNewScriptBrickViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Sounds\NewSoundSourceSelectionViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Sounds\SoundNameChooserViewModelTests.cs" />
     <Compile Include="Tests\Xml\Converter\XmlFormulaTreeConverterTests.cs" />
     <Compile Include="Tests\Xml\Converter\XmlProjectConverterTests.cs" />
     <Compile Include="Tests\Misc\FileNameGeneratorTests.cs" />
@@ -296,7 +299,6 @@
     <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Tests\IDE\" />
     <Folder Include="Tests\ViewModels\Editor\Formula\" />
   </ItemGroup>
   <Choose>

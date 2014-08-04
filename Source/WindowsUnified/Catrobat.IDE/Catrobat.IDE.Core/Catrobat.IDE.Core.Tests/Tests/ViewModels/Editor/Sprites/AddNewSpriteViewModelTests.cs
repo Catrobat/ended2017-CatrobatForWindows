@@ -17,8 +17,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
         }
-        
-        [TestMethod]
+
+        [TestMethod, TestCategory("ViewModels.Editor")]
         public void SaveActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -47,7 +47,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Editor")]
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -67,7 +67,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Editor")]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

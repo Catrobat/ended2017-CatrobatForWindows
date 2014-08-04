@@ -1,16 +1,15 @@
-﻿//using System.Threading.Tasks;
-//using GalaSoft.MvvmLight.Messaging;
+﻿using GalaSoft.MvvmLight.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
 using Catrobat.IDE.Core.ViewModels;
-using Catrobat.IDE.Core.ViewModels.Main;
+using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
+using Catrobat.IDE.Core.Models;
 
-namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
+namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sounds
 {
     [TestClass]
-    public class AddNewProgramViewModelTests
+    public class SoundNameChooserViewModelTests
     {
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
@@ -18,56 +17,56 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             ServiceLocator.NavigationService = new NavigationServiceTest();
         }
 
-        [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Editor")]
+        public void NavigateToTest()
+        {
+            var viewModel = new SoundNameChooserViewModel
+            {
+                SoundName = "TestSoundName"
+            };
+            viewModel.NavigateTo();
+
+            Assert.AreEqual("", viewModel.SoundName);
+        }
+
+        [TestMethod, TestCategory("ViewModels.Editor"), TestCategory("ExcludeGated")]
         public void SaveActionTest()
         {
-            //TODO refactor this test
+            //TODO
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod, TestCategory("ViewModels.Main")]
+        [TestMethod, TestCategory("ViewModels.Editor")]
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
-            navigationService.CurrentView = typeof(AddNewProgramViewModel);
+            navigationService.CurrentView = typeof(SoundNameChooserViewModel);
 
-            var viewModel = new AddNewProgramViewModel
+            var viewModel = new SoundNameChooserViewModel
             {
-                ProgramName = "TestProject",
-                CreateEmptyProgram = false,
-                CreateTemplateProgram = true
+                SoundName = "TestSoundName"
             };
             viewModel.CancelCommand.Execute(null);
 
-            //Assert.IsTrue(viewModel.ProgramName == ""); TODO check in NavigateTo
-            //Assert.IsTrue(viewModel.CreateEmptyProgram);
-            //Assert.IsFalse(viewModel.CreateTemplateProgram);
+            Assert.AreEqual("", viewModel.SoundName);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("ViewModels.Main")]
+        [TestMethod, TestCategory("ViewModels.Editor")]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
-            navigationService.CurrentView = typeof(AddNewProgramViewModel);
+            navigationService.CurrentView = typeof(SoundNameChooserViewModel);
 
-            var viewModel = new AddNewProgramViewModel
-            {
-                ProgramName = "TestProject",
-                CreateEmptyProgram = false,
-                CreateTemplateProgram = true
-            };
-            viewModel.GoBackCommand.Execute(null);
+            var viewModel = new SoundNameChooserViewModel();
+            viewModel.CancelCommand.Execute(null);
 
-            //Assert.AreEqual("", viewModel.ProgramName); TODO check in NavigateTo
-            //Assert.IsTrue(viewModel.CreateEmptyProgram);
-            //Assert.IsFalse(viewModel.CreateTemplateProgram);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);

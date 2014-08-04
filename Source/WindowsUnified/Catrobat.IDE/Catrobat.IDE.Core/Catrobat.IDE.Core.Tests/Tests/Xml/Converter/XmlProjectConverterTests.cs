@@ -24,7 +24,7 @@
 //            TestHelper.InitializeTests();
 //        }
 
-//        [TestMethod, TestCategory("Catrobat.IDE.Core.Xml"), TestCategory("GatedTests.Obsolete")]
+//        [TestMethod, TestCategory("Xml.Converter"), TestCategory("ExcludeGated")]
 //        public void TestPocketCodeProjects()
 //        {
 //            var documents = Enumerable.Range(1, 16)

@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Constants
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestConstants()
         {
             TestEditor(FormulaTokenFactory.CreateDigitToken(0), FormulaEditorKey.D0);
@@ -52,7 +52,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Operators
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestOperators()
         {
             TestEditor(FormulaTokenFactory.CreatePlusToken, FormulaEditorKey.Plus);
@@ -76,7 +76,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Functions
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestFunctions()
         {
             var openingParenthesis = FormulaTokenFactory.CreateParenthesisToken(true);
@@ -101,7 +101,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Sensors
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestSensors()
         {
             TestEditor(FormulaTokenFactory.CreateAccelerationXToken, FormulaEditorKey.AccelerationX);
@@ -117,7 +117,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Properties
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestProperties()
         {
             TestEditor(FormulaTokenFactory.CreateBrightnessToken, FormulaEditorKey.Brightness);
@@ -133,7 +133,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Variables
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestVariables()
         {
             TestEditor<LocalVariable>(FormulaTokenFactory.CreateLocalVariableToken, FormulaEditorKey.LocalVariable);
@@ -144,7 +144,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #region Brackets
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestBrackets()
         {
             TestEditor(FormulaTokenFactory.CreateParenthesisToken(true), FormulaEditorKey.OpeningParenthesis);
@@ -153,7 +153,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
 
         #endregion
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestDelete()
         {
             var editor = new FormulaEditor();
@@ -168,7 +168,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
             Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Exp));
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestUndoRedo()
         {
             var editor = new FormulaEditor();
@@ -213,7 +213,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
             Assert.AreEqual(1, editor.SelectionLength);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestBindings()
         {
             var editor = new FormulaEditor
@@ -236,7 +236,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
             Assert.IsNotNull(editor.ParsingError);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void TestSelection()
         {
             // ReSharper disable once UseObjectOrCollectionInitializer
@@ -256,7 +256,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
             EnumerableAssert.AreTestEqual(new IFormulaToken[] { FormulaTokenFactory.CreateDigitToken(5) }, editor.Tokens);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        [TestMethod, TestCategory("Formulas")]
         public void MonkeyTest()
         {
             const int iterations = 1000;

@@ -32,7 +32,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
             ServiceLocator.CultureService.SetCulture(CultureInfo.InvariantCulture);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas"), TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Formulas"), TestCategory("ExcludeGated")]
         public void TestSemanticError()
         {
             TestParsingError("Child must be number", 0, 4, "sin(True)");

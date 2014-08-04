@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void ObjectReferences()
         {
             TestSampleData("Converter/092_091/Test1");
