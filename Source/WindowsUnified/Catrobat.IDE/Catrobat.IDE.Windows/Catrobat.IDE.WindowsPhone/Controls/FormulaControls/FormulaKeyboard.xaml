@@ -36,7 +36,7 @@
       <!--<Style.Setters>
         <Setter 
           Property="Background" 
-          Value="{Binding SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" />
+          Value="{ThemeResource Accent1Brush}" />
       </Style.Setters>-->
     </Style>
 
@@ -189,8 +189,7 @@
     </Style>
   </UserControl.Resources>
 
-  <Grid Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
-    Source={StaticResource ThemeChooser}}">
+  <Grid Background="{ThemeResource AppBarBackgroundBrush}">
     <Grid Grid.Row="0" Name="GridMain" Margin="0 8 0 0" Visibility="Collapsed">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
@@ -202,7 +201,7 @@
           <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>-->
         <!--<Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Content="!" Style="{StaticResource StyleButtonEvaluate}" Click ="ButtonError_OnClick" Background="DarkRed" Visibility="{Binding HasError, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />
-        <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Content="{Binding Resources.Editor_Evaluate, Source={StaticResource LocalizedStrings}}" Style="{StaticResource StyleButtonEvaluate}" Background="{Binding SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" Click ="ButtonEvaluate_OnClick" Visibility="{Binding CanEvaluate, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />-->
+        <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Content="{Binding Resources.Editor_Evaluate, Source={StaticResource LocalizedStrings}}" Style="{StaticResource StyleButtonEvaluate}" Background="{Binding SelectedTheme.AccentColor1.NativeBrush, }" Click ="ButtonEvaluate_OnClick" Visibility="{Binding CanEvaluate, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />-->
 
         <TextBlock FontSize="28" TextWrapping="Wrap" VerticalAlignment="Center" 
                    HorizontalAlignment="Center" Foreground="SpringGreen"  x:Name="TextBlockEvaluationValue" />
@@ -274,7 +273,7 @@
                   Text="{Binding MultiBindingProperty, Converter={StaticResource FormulaKeyStringConverter}}"
                   d:DataContext="{d:DesignInstance formula:FormulaKey}"
                   Foreground="White"
-                  Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}">
+                  Style="{ThemeResource TextLargeStyle}">
                   <!--<toolkit:ContextMenuService.ContextMenu>
                     <toolkit:ContextMenu>
                       <toolkit:MenuItem Header="{Binding Resources.FormulaKeyboard_AddFavorite, Source={StaticResource LocalizedStrings}}" Command="{Binding ViewModel.AddFavoriteCommand, ElementName=FormulaKeyboardXaml}" CommandParameter="{Binding}"/>
@@ -291,8 +290,7 @@
       	</Pivot.Style>
         <Pivot.HeaderTemplate>
           <DataTemplate>
-            <TextBlock Margin="0 0 0 0" FontSize="42" Foreground="White" Style="{Binding StaticTheme.TextLargeStyle.NativeStyle,
-              Source={StaticResource ThemeChooser}}" Text="{Binding}" />
+            <TextBlock Margin="0 0 0 0" FontSize="42" Foreground="White" Style="{ThemeResource TextLargeStyle}" Text="{Binding}" />
           </DataTemplate>
         </Pivot.HeaderTemplate>
         <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Functions, Source={StaticResource LocalizedStrings}}">
@@ -319,7 +317,7 @@
                       Text="{Binding MultiBindingProperty, Converter={StaticResource FormulaKeyStringConverter}}"
                       d:DataContext="{d:DesignInstance formula:FormulaKey}"
                       Foreground="White"
-                      Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}">
+                      Style="{ThemeResource TextLargeStyle}">
                     <!--<toolkit:ContextMenuService.ContextMenu>
                       <toolkit:ContextMenu>
                         <toolkit:MenuItem Header="{Binding Resources.FormulaKeyboard_AddFavorite, Source={StaticResource LocalizedStrings}}" Command="{Binding ViewModel.AddFavoriteCommand, ElementName=FormulaKeyboardXaml}" CommandParameter="{Binding}"/>
@@ -337,8 +335,7 @@
             <Pivot.HeaderTemplate>
               <DataTemplate>
                 <TextBlock Margin="-10,0,0,0" Foreground="White"
-                  Style="{Binding StaticTheme.TextLargeStyle.NativeStyle,
-                  Source={StaticResource ThemeChooser}}" Text="{Binding}" />
+                  Style="{ThemeResource TextLargeStyle}" Text="{Binding}" />
               </DataTemplate>
             </Pivot.HeaderTemplate>
             <PivotItem Name="PivotItemLocalVariables" Header="{Binding Resources.FormulaKeyboard_LocalVariables, 
@@ -362,7 +359,7 @@
                     <TextBlock Text="{Binding MultiBindingProperty, Converter={StaticResource FormulaKeyStringConverter}}"
                       d:DataContext="{d:DesignInstance formula:FormulaKey}"
                       Foreground="White"
-                      Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}">
+                      Style="{ThemeResource TextLargeStyle}">
                     <!--<toolkit:ContextMenuService.ContextMenu>
                       <toolkit:ContextMenu>
                         <toolkit:MenuItem Header="{Binding Resources.FormulaKeyboard_RemoveFavorite, Source={StaticResource LocalizedStrings}}" Command="{Binding ViewModel.RemoveFavoriteCommand, ElementName=FormulaKeyboardXaml}" CommandParameter="{Binding}"/>
@@ -389,8 +386,7 @@
         </PivotItem>
       </Pivot>
       <Grid Grid.Column="0" Margin="-5 0 0 0" VerticalAlignment="Top" HorizontalAlignment="Left"
-        Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}" >
+        Background="{ThemeResource AppBarBackgroundBrush}" >
         <AppBarButton Icon="Back" Click="ButtonMoreBack_Click" Margin="0 0 -20 -22"
            HorizontalAlignment="Left" VerticalAlignment="Top"/>
       </Grid>
