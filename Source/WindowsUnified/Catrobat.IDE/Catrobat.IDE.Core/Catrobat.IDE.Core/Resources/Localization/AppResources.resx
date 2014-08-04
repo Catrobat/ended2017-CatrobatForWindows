@@ -1269,4 +1269,10 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_UploadToPocketCodeOrg" xml:space="preserve">
     <value>Upload to pocketcode.org</value>
   </data>
+  <data name="Main_CatrobatInformation" xml:space="preserve">
+    <value>Information about Catrobat</value>
+  </data>
+  <data name="Main_AboutLicenseShort" xml:space="preserve">
+    <value>License</value>
+  </data>
 </root>

@@ -1269,4 +1269,10 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   <data name="Main_UploadToPocketCodeOrg" xml:space="preserve">
     <value>Hochladen auf pocketcode.org</value>
   </data>
+  <data name="Main_AboutLicenseShort" xml:space="preserve">
+    <value>Lizenz</value>
+  </data>
+  <data name="Main_CatrobatInformation" xml:space="preserve">
+    <value>Informationen über Catrobat</value>
+  </data>
 </root>

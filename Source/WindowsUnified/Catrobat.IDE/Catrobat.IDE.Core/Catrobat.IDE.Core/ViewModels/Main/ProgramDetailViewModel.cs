@@ -76,7 +76,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     EditCurrentProgramCommand.RaiseCanExecuteChanged();
                     UploadCurrentProgramCommand.RaiseCanExecuteChanged();
                     PlayCurrentProgramCommand.RaiseCanExecuteChanged();
-                    PinLocalProgramCommand.RaiseCanExecuteChanged();
                     ShareLocalProgramCommand.RaiseCanExecuteChanged();
                     RenameProgramCommand.RaiseCanExecuteChanged();
                 });
@@ -142,14 +141,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProgram);
         }
 
-        private void PinLocalProgramAction()
-        {
-            var message = new GenericMessage<LocalProjectHeader>(CurrentProgram.LocalProgramHeader);
-            Messenger.Default.Send(message, ViewModelMessagingToken.PinProgramHeaderListener);
-
-            ServiceLocator.NavigationService.NavigateTo<TileGeneratorViewModel>();
-        }
-
         private async void ShareLocalProgramAction()
         {
             await CurrentProgram.Save();
@@ -190,7 +181,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             UploadCurrentProgramCommand = new RelayCommand(UploadCurrentProgramAction, () => !IsActivatingLocalProgram);
             PlayCurrentProgramCommand = new RelayCommand(PlayCurrentProgramAction, () => !IsActivatingLocalProgram);
             RenameProgramCommand = new RelayCommand(RenameProgramAction, () => !IsActivatingLocalProgram);
-            PinLocalProgramCommand = new RelayCommand(PinLocalProgramAction, () => !IsActivatingLocalProgram);
             ShareLocalProgramCommand = new RelayCommand(ShareLocalProgramAction, () => !IsActivatingLocalProgram);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,

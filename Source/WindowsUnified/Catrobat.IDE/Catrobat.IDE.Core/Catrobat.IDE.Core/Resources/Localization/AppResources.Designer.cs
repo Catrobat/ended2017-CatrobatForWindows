@@ -2348,6 +2348,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to License.
+        /// </summary>
+        public static string Main_AboutLicenseShort {
+            get {
+                return ResourceManager.GetString("Main_AboutLicenseShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pocket Code is a programming environment and interpreter for Windows Phone devices for the visual programming language Catrobat.
         ///
         ///The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License. For the precise details of the license see the link below..
@@ -2508,6 +2517,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_ButtonUpload {
             get {
                 return ResourceManager.GetString("Main_ButtonUpload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information about Catrobat.
+        /// </summary>
+        public static string Main_CatrobatInformation {
+            get {
+                return ResourceManager.GetString("Main_CatrobatInformation", resourceCulture);
             }
         }
         
