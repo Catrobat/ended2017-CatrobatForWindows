@@ -2024,6 +2024,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to invalid formula.
+        /// </summary>
+        public static string FormulaInterpreter_Error {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add an opening parenthesis..
         /// </summary>
         public static string FormulaInterpreter_Function_Empty {

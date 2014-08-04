@@ -1275,4 +1275,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_AboutLicenseShort" xml:space="preserve">
     <value>License</value>
   </data>
+  <data name="FormulaInterpreter_Error" xml:space="preserve">
+    <value>invalid formula</value>
+  </data>
 </root>

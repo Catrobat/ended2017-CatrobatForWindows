@@ -158,7 +158,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                 StorageConstants.ProgramCodePath),
                 uniqueProgramName);
 
-            // TODO: set the program's header information to the the device's info
+            // TODO: Task set the program's header information to the the device's info
 
             if (_checkResult != null)
                 _checkResult.ProjectHeader.ProjectName = renameResult.NewProjectName;

@@ -291,7 +291,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             const string folderName3 = "Folder3";
 
             var storage = new StorageWindowsShared();
-            await storage.CreateFolderPath(Path.Combine(folderName1, folderName2, folderName3));
+            await storage.CreateFolderPathAsync(Path.Combine(folderName1, folderName2, folderName3));
 
             var localFolder = ApplicationData.Current.LocalFolder;
             var folder1 = await localFolder.GetFolderAsync(folderName1);
@@ -309,7 +309,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             const string folderName3 = "Folder3";
 
             var storage = new StorageWindowsShared();
-            await storage.CreateFolderPath(Path.Combine(folderName1, folderName2, folderName3));
+            await storage.CreateFolderPathAsync(Path.Combine(folderName1, folderName2, folderName3));
 
             var localFolder = ApplicationData.Current.LocalFolder;
             await localFolder.CreateFolderAsync(folderName1);
