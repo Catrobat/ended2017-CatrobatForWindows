@@ -22,24 +22,24 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.UnRegisterAll();
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<NotificationServiceTest>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<NotificationServiceTest>(TypeCreationMode.Normal);
             ServiceLocator.Register<WebCommunicationTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
             ServiceLocator.CultureService.SetCulture(new CultureInfo("en"));
         }
 
-        [TestMethod, TestCategory("GatedTests")]
-        public void InitializeActionEmptyProgramTest()
+        [TestMethod]
+        public void NavigateToEmptyProgramTest()
         {
             var viewModel = new UploadProgramViewModel();
-            viewModel.InitializeCommand.Execute(null);
+            viewModel.NavigateTo();
 
             Assert.IsTrue(viewModel.ProgramName == "");
             Assert.IsTrue(viewModel.ProgramDescription == "");
         }
 
-        [TestMethod, TestCategory("GatedTests")]
-        public void InitializeActionFullProgramTest()
+        [TestMethod]
+        public void NavigatToFullProgramTest()
         {
             var viewModel = new UploadProgramViewModel();            
             var project = new Program
@@ -49,13 +49,13 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             };
             var messageContext = new GenericMessage<Program>(project);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProgramChangedListener);
-            viewModel.InitializeCommand.Execute(null);
+            viewModel.NavigateTo();
 
             Assert.AreEqual("TestProgram", viewModel.ProgramName);
             Assert.AreEqual("TestProgramDescription", viewModel.ProgramDescription);
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void UploadActionTest()
         {
             //TODO saving of context and renaming of directory not tested
@@ -103,7 +103,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.IsNull(notificationService.LastNotificationTitle);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void ChangeUserActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -142,7 +142,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -159,12 +159,12 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
 
             Assert.AreEqual("", viewModel.ProgramName);
             Assert.AreEqual("", viewModel.ProgramDescription);
-            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
-            Assert.AreEqual(typeof(ProgramDetailViewModel), navigationService.CurrentView);
-            Assert.AreEqual(1, navigationService.PageStackCount);
+            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
+            Assert.AreEqual(null, navigationService.CurrentView);
+            Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

@@ -7,7 +7,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
     [TestClass]
     public class StringVisibilityConverterTests
     {
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void TestStringVisibilityConversion()
         {
             var conv = new StringVisibilityConverter();
@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
             Assert.AreEqual(PortableVisibility.Visible, output);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void TestVisibilityStringConversion()
         {
             var conv = new StringVisibilityConverter();
@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
             Assert.AreEqual(null, output);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void TestFaultyStringVisibilityConversion()
         {
             var conv = new StringVisibilityConverter();

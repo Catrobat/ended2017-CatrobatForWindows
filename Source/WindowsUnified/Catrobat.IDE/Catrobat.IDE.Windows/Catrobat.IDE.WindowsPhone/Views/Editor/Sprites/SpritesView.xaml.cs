@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Navigation;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
@@ -16,6 +19,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         public SpritesView()
         {
             InitializeComponent();
+            PageCacheMode = NavigationCacheMode.Enabled;
         }
         
         //private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs args)
@@ -29,9 +33,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         //}
         private void MultiModeEditorCommandBar_OnModeChanged(MultiModeEditorCommandBarMode mode)
         {
-            var listView = (ListView)this.FindName("ListViewSprites"); // Hack
-
-            Debug.Assert(listView != null, "listView != null");
+            var listView = ListViewSprites;
 
             switch (mode)
             {
@@ -50,6 +52,16 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
                 default:
                     throw new ArgumentOutOfRangeException("mode");
             }
+        }
+
+        private void SpriteItem_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var isClickEnabled = ListViewSprites.ReorderMode == ListViewReorderMode.Disabled &&
+                                 ListViewSprites.SelectionMode == ListViewSelectionMode.None;
+
+            if (isClickEnabled)
+                if( _viewModel.EditSpriteCommand.CanExecute(((FrameworkElement)sender).DataContext))
+                _viewModel.EditSpriteCommand.Execute(((FrameworkElement)sender).DataContext);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
       
     }
 
-    [TestMethod,TestCategory("GatedTests")]
+    [TestMethod]
     public void GenerateValidFileName()
     {
       string fileName1 = FileNameGenerationHelper.Generate();

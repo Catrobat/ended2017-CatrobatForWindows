@@ -17,14 +17,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
         private Sprite _selectedSprite;
         private Program _currentProjectHeader; // TODO Program <-> Project-Header issue in Project Settings Action
 
-        [ClassInitialize]
-        public static void TestClassInitialize(TestContext testContext)
+        [TestInitialize]
+        public void TestClassInitialize()
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void RenameSpriteActionTest()
         {
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
@@ -47,35 +47,35 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void AddNewScriptBrickActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void CopyScriptBrickActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void DeleteScriptBrickActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void AddBroadcastMessageActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void AddNewSoundActionTest()
         {
             if (_selectedSprite != null)
@@ -101,21 +101,21 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void EditSoundActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void DeleteSoundActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void AddNewLookActionTest()
         {
             if (_selectedSprite != null)
@@ -141,28 +141,28 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void EditLookActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void CopyLookActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void DeleteLookActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void ClearObjectSelectionActionTest()
         {
             var viewModel = new SpriteEditorViewModel
@@ -173,7 +173,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.IsNull(viewModel.SelectedSprite);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void ClearScriptsSelectionActionTest()
         {
             var viewModel = new SpriteEditorViewModel
@@ -186,7 +186,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(0, viewModel.SelectedActions.Count);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void ClearLooksSelectionActionTest()
         {
             var viewModel = new SpriteEditorViewModel
@@ -199,7 +199,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(0, viewModel.SelectedLooks.Count);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void ClearSoundsSelectionActionTest()
         {
             var viewModel = new SpriteEditorViewModel
@@ -212,14 +212,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(0, viewModel.SelectedSounds.Count);
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void StartPlayerActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void GoToMainViewActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -235,7 +235,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(2, navigationService.PageStackCount); ;
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void ProjectSettingsActionTest()
         {
             Messenger.Default.Register<GenericMessage<Program>>(this,
@@ -265,28 +265,28 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void UndoActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void RedoActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void NothingItemHackActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

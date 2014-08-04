@@ -11,14 +11,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
     [TestClass]
     public class AddNewSpriteViewModelTests
     {
-        [ClassInitialize]
-        public static void TestClassInitialize(TestContext testContext)
+        [TestInitialize]
+        public void TestClassInitialize()
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
         }
         
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void SaveActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -47,7 +47,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -67,7 +67,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

@@ -65,8 +65,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region Commands
 
-        public RelayCommand InitializeCommand { get; private set; }
-
         public RelayCommand SaveCommand { get; private set; }
 
         public RelayCommand CancelCommand { get; private set; }
@@ -84,11 +82,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         #endregion
 
         #region Actions
-
-        private void InitializeAction()
-        {
-            UserVariableName = UserVariable.Name;
-        }
 
         private void SaveAction()
         {
@@ -131,7 +124,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         public ChangeVariableViewModel()
         {
-            InitializeCommand = new RelayCommand(InitializeAction);
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
@@ -141,6 +133,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Variable>>(this,
                 ViewModelMessagingToken.SelectedUserVariableChangedListener, SelectedUserVariableChangedMessageAction);
+        }
+
+        public override void NavigateTo()
+        {
+            UserVariableName = UserVariable.Name;
+            base.NavigateTo();
         }
 
 

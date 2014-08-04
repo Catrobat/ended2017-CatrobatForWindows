@@ -12,68 +12,56 @@
 
   <Page.Resources>
     <DataTemplate x:Key="SpriteItemTemplate">
-      <Grid Height="90">
-        <Button BorderThickness="0" Padding="0 -10 0 -10"
-             Height="90" Margin="0 1 0 1" RequestedTheme="Dark"
-       Command="{Binding SpritesViewModel.EditSpriteCommand, 
-              Source={StaticResource Locator}}" CommandParameter="{Binding}">
-          <Grid Background="{ThemeResource ObjectsBrush}"
-              Margin="0 5 0 5" Height="90" HorizontalAlignment="Stretch" 
-              Width="400">
-            <Grid.RowDefinitions>
-              <RowDefinition/>
-              <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="Auto" />
-              </Grid.ColumnDefinitions>
+      <Grid Height="90" Width="325" Margin="0 5 5 5" >
+        <Grid Background="{ThemeResource ObjectsBrush}" RequestedTheme="Dark"
+              Tapped="SpriteItem_OnTapped">
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
+          <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="3*" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-              <StackPanel Grid.Column="0"  Orientation="Horizontal"
+            <StackPanel Grid.Column="0"  Orientation="Horizontal"
                           VerticalAlignment="Center">
-                <TextBlock VerticalAlignment="Center" FontSize="28"
+              <TextBlock VerticalAlignment="Center" FontSize="28"
                            Margin="5 5 5 5" Text="{Binding Name}" />
 
-                <StackPanel Margin="5 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
-                  <TextBlock FontSize="16" Margin="0" Text="{Binding ActionsCount}" />
-                  <TextBlock FontSize="16" Margin="0" Text="/" />
-                  <TextBlock FontSize="16" Margin="0" Text="{Binding Looks.Count}" />
-                  <TextBlock FontSize="16" Margin="0" Text="/" />
-                  <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Count}" />
-                </StackPanel>
+              <StackPanel Margin="5 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock FontSize="16" Margin="0" Text="{Binding ActionsCount}" />
+                <TextBlock FontSize="16" Margin="0" Text="/" />
+                <TextBlock FontSize="16" Margin="0" Text="{Binding Looks.Count}" />
+                <TextBlock FontSize="16" Margin="0" Text="/" />
+                <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Count}" />
               </StackPanel>
-            </Grid>
-            <Grid Grid.Row="1">
-              <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-              </Grid.RowDefinitions>
-              <Grid Grid.Row="1" Margin="0,0,60,5" HorizontalAlignment="Right" >
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="Auto"/>
-                  <ColumnDefinition Width="Auto"/>
-                  <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center"
+            </StackPanel>
+          </Grid>
+          <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1" Margin="0,0,10,5" HorizontalAlignment="Right" >
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+              </Grid.ColumnDefinitions>
+              <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Source="{Binding Looks[0].Image.ImageSource}" />
-                <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center"
+              <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Source="{Binding Looks[1].Image.ImageSource}" />
-                <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center"
+              <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Source="{Binding Looks[2].Image.ImageSource}" />
-              </Grid>
             </Grid>
           </Grid>
-        </Button>
-        <Grid Height="92" Background="Transparent"
-              Visibility="{Binding ReorderMode, ElementName=ListViewSprites, 
-              Converter={StaticResource ReorderModeVisibilityConverter}}" />
-        <Grid Height="92" Background="Transparent"
-              Visibility="{Binding SelectionMode, ElementName=ListViewSprites, 
-              Converter={StaticResource SelectionModeVisibilityConverter}}" />
+        </Grid>
       </Grid>
     </DataTemplate>
   </Page.Resources>
@@ -92,7 +80,7 @@
         </TextBlock>
       </Grid>
 
-      <listsViewControls:BindableListView Name="ListViewSprites" 
+      <listsViewControls:BindableListView x:Name="ListViewSprites" 
                 Grid.Row="1" Margin="10 0 10 0"
                 ItemsSource="{Binding CurrentProject.Sprites}"
                 BindableSelectedItems="{Binding SelectedSprites, Mode=TwoWay}"

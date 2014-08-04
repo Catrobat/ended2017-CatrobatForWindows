@@ -7,7 +7,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
     [TestClass]
     public class BoolVisibilityNegativeConverterTests
     {
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void TestConversion()
         {
             var conv = new BoolVisibilityNegativeConverter();
@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
             Assert.AreEqual(PortableVisibility.Visible, output);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void TestBackConversion()
         {
             var conv = new BoolVisibilityNegativeConverter();
@@ -23,7 +23,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE.Converter
             Assert.AreEqual(null, output);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void TestFaultyConversion()
         {
             var conv = new BoolVisibilityNegativeConverter();

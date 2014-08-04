@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             ServiceLocator.NavigationService = new NavigationServiceTest();
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

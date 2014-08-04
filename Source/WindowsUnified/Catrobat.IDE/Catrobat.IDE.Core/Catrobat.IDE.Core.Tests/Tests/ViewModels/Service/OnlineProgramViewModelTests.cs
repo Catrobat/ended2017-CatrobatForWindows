@@ -21,12 +21,12 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             ServiceLocator.UnRegisterAll();
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<NotificationServiceTest>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<WebCommunicationTest>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<WebCommunicationTest>(TypeCreationMode.Normal);
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
             ServiceLocator.CultureService.SetCulture(new CultureInfo("en"));
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void OnLoadActionTest()
         {
             var onlineProjectHeader = SampleLoader.GetSampleOnlineProjectHeader();
@@ -40,7 +40,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.IsTrue(viewModel.ButtonDownloadIsEnabled);
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void DownloadActionTest()
         {
             //TODO to be tested
@@ -59,7 +59,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void ReportActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -75,7 +75,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void LicenseActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -91,7 +91,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

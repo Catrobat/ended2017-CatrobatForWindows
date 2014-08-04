@@ -17,7 +17,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             ServiceLocator.NavigationService = new NavigationServiceTest();
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void AddNewSpriteActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void EditSpriteActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -52,14 +52,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void CopySpriteActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void DeleteSpriteActionTest()
         {
             //TODO test deleting sprites from collection
@@ -80,7 +80,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual("Delete object", notificationService.LastNotificationTitle);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void ClearObjectSelectionActionTest()
         {
             var viewModel = new SpritesViewModel
@@ -95,28 +95,28 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             Assert.AreEqual(0, viewModel.SelectedSprites.Count);
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void StartPlayerActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void UndoActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod/*, TestCategory("GatedTests")*/]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void RedoActionTest()
         {
             //TODO refactor this test
             Assert.AreEqual(0, "test not implemented");
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

@@ -25,12 +25,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
             });
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            _viewModel.InitializeCommand.Execute(null);
-            base.OnNavigatedTo(e);
-        }
-
         private void TextBoxVariableName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _viewModel.UserVariableName = TextBoxVariableName.Text;

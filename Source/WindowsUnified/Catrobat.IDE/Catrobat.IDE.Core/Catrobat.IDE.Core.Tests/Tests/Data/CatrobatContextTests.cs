@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
       TestHelper.InitializeTests();
     }
 
-    [TestMethod, TestCategory("GatedTests")]
+    [TestMethod]
     public void InitializeCatrobatContextTest()
     {
         //TestHelper.InitializeAndClearCatrobatContext();
@@ -29,10 +29,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         //CatrobatContext.SetContextHolder(null);
     }
 
-    [TestMethod, TestCategory("GatedTests")]
+    [TestMethod, TestCategory("ExcludeGated")]
     public async Task StoreLocalSettingsTest()
     {
-        // TODO: fix test
+        Assert.AreEqual(0, "ContextServiceTest has to be implemented");
         var localSettings = new LocalSettings
             {
                 CurrentLanguageString = "de-DE",

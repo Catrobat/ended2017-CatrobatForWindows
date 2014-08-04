@@ -16,11 +16,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            _viewModel.InitializeCommand.Execute(null);
-        }
-
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             (sender as TextBox).GetBindingExpression(TextBox.TextProperty).UpdateSource();

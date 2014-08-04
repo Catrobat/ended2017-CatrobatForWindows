@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
@@ -72,7 +73,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         {
             //((SoundPlayerServiceWindowsShared) ServiceLocator.SoundPlayerService).
             //    SetMediaElement(MediaElementSound);
-            var playSoundButtonGroup = (SoundPlayButtonGroup) FindName("PlayPauseButtonGroupSounds");
+            var playSoundButtonGroup = PlayPauseButtonGroupSounds;
             if (playSoundButtonGroup != null) playSoundButtonGroup.Stop();
 
             base.OnNavigatedTo(e);
@@ -124,11 +125,11 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             ListView listView = null;
 
             if (PivotMain.SelectedItem == PivotActions)
-                listView = (ListView)this.FindName("ListViewActions");
+                listView = ListViewActions;
             else if (PivotMain.SelectedItem == PivotLooks)
-                listView = (ListView)this.FindName("ListViewLooks");
+                listView = ListViewLooks;
             else if (PivotMain.SelectedItem == PivotSounds)
-                listView = (ListView)this.FindName("ListViewSounds");
+                listView = ListViewSounds;
 
             Debug.Assert(listView != null, "listView != null");
 
@@ -149,6 +150,26 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
                 default:
                     throw new ArgumentOutOfRangeException("mode");
             }
+        }
+
+        private void LookItem_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var isClickEnabled = ListViewLooks.ReorderMode == ListViewReorderMode.Disabled &&
+                                 ListViewLooks.SelectionMode == ListViewSelectionMode.None;
+
+            if (isClickEnabled)
+                if( _viewModel.EditLookCommand.CanExecute(((FrameworkElement)sender).DataContext))
+                    _viewModel.EditLookCommand.Execute(((FrameworkElement)sender).DataContext);
+        }
+
+        private void SoundItem_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var isClickEnabled = ListViewSounds.ReorderMode == ListViewReorderMode.Disabled &&
+                                 ListViewSounds.SelectionMode == ListViewSelectionMode.None;
+
+            if (isClickEnabled)
+                if (_viewModel.EditSoundCommand.CanExecute(((FrameworkElement)sender).DataContext))
+                    _viewModel.EditSoundCommand.Execute(((FrameworkElement)sender).DataContext);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.IDE
     [TestClass]
     public class ObservableCollectionTests
     {
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod]
         public void TestSelect()
         {
             var source = new ObservableCollection<int>(Enumerable.Range(1, 3).ToList());
