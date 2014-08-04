@@ -7,7 +7,7 @@
     <ResourceDictionary x:Key="Default">
       <!-- Accent colors and brushes -->
       <Color x:Key="Accent1Color">#FF880088</Color>
-      <Color x:Key="Accent2Color">#FF008888</Color>
+      <Color x:Key="Accent2Color">#FF8899AA</Color>
       <Color x:Key="Accent3Color">#FF888800</Color>
 
       <SolidColorBrush x:Key="Accent1Brush" Color="{ThemeResource Accent1Color}" />
