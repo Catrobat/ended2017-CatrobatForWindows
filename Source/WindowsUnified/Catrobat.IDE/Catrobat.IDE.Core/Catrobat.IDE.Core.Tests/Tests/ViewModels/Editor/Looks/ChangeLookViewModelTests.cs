@@ -39,7 +39,6 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.LookListener);
             changeLookViewModel.LookName = "NewLookName";
 
-
             changeLookViewModel.SaveCommand.Execute(null);
 
             Assert.AreEqual("NewLookName", changeLookViewModel.LookName);

@@ -807,7 +807,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>CHOOSE LOCAL VARIABLE NAME</value>
   </data>
   <data name="Editor_VariableName" xml:space="preserve">
-    <value>Variable name</value>
+    <value>Variable name:</value>
   </data>
   <data name="Main_SelectedProgramNotValidHeader" xml:space="preserve">
     <value>Sorry! The selected program could not be opened.</value>

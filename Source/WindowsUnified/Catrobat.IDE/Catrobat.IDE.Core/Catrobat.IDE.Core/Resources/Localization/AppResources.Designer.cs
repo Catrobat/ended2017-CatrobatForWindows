@@ -1700,7 +1700,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Variable name ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Variable name: ähnelt.
         /// </summary>
         public static string Editor_VariableName {
             get {

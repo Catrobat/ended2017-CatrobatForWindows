@@ -22,9 +22,6 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.UnRegisterAll();
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<WebCommunicationTest>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
-            ServiceLocator.CultureService.SetCulture(new CultureInfo("en"));
         }
 
         [TestMethod, TestCategory("ViewModels.Main")]
@@ -43,39 +40,42 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount); 
         }
 
-        [TestMethod, TestCategory("ViewModels.Main")]
-        public void UploadCurrentProjectActionTest()
-        {
-            //TODO check messages for different responses - e.g. wrong password or http-request failed
-            var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
-            navigationService.PageStackCount = 1;
-            navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
-            navigationService.CurrentView = typeof(ProgramDetailViewModel);
-
-            var viewModel = new ProgramDetailViewModel();
-            var localSettings = new LocalSettings();
-            var context = new CatrobatContext
-            {
-                LocalSettings = localSettings,
-                CurrentToken = "TestToken",
-                CurrentUserName = "TestUser",
-                CurrentUserEmail = ""
-            };
-            var messageContext = new GenericMessage<CatrobatContextBase>(context);
-            Messenger.Default.Send(messageContext, ViewModelMessagingToken.ContextListener);
-
-            viewModel.UploadCurrentProgramCommand.Execute(null);
-            
-            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
-            Assert.AreEqual(typeof(UploadProgramViewModel), navigationService.CurrentView);
-            Assert.AreEqual(2, navigationService.PageStackCount);
-        }
+        //[TestMethod, TestCategory("ViewModels.Main")]
+        //public void UploadCurrentProjectActionTest()
+        //{
+        //    // not in use
+        //}
 
         [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
         public void PlayCurrentProjectActionTest()
         {
             //Launch Player
             Assert.AreEqual(0, "test not implemented");
+        }
+
+
+        [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
+        public void ShareLocalProjectActionTest()
+        {
+            Assert.AreEqual(0, "Test also saving of current project");
+            var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
+            navigationService.PageStackCount = 1;
+            navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
+            navigationService.CurrentView = typeof(ProgramDetailViewModel);
+
+            var program = new Program
+            {
+                Name = "TestProgram"
+            };
+            var viewModel = new ProgramDetailViewModel
+            {
+                CurrentProgram = program
+            };
+            viewModel.ShareLocalProgramCommand.Execute(null);
+            
+            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
+            Assert.AreEqual(typeof(ProgramExportViewModel), navigationService.CurrentView);
+            Assert.AreEqual(2, navigationService.PageStackCount);    
         }
 
         [TestMethod, TestCategory("ViewModels.Main")]
@@ -100,10 +100,6 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         //    // currently not in use
         //}
 
-        //[TestMethod, TestCategory("ViewModels.Main")]
-        //public void ShareLocalProjectActionTest()
-        //{
-        //    // currently not in use
-        //}
+        
     }
 }

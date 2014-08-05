@@ -151,8 +151,11 @@
     <Compile Include="Tests\UI\NullItemCollectionTests.cs" />
     <Compile Include="Tests\Misc\ObservableCollectionTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Actions\AddNewScriptBrickViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Formula\AddNewGlobalVariableViewTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Sounds\NewSoundSourceSelectionViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Sounds\SoundNameChooserViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Main\InformationViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Main\ProgramExportViewModelTests.cs" />
     <Compile Include="Tests\Xml\Converter\XmlFormulaTreeConverterTests.cs" />
     <Compile Include="Tests\Xml\Converter\XmlProjectConverterTests.cs" />
     <Compile Include="Tests\Misc\FileNameGeneratorTests.cs" />
@@ -298,9 +301,7 @@
     </Content>
     <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tests\ViewModels\Editor\Formula\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
