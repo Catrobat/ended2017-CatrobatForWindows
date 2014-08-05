@@ -2,13 +2,14 @@
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Models
 {
     [DebuggerDisplay("Name = {Name}")]
-    public partial class Look : Model, IAsyncCloneable<Program>
+    public partial class Look : Model, IAsyncCloneable<Program>, ISelectable
     {
         #region Properties
 
@@ -58,6 +59,17 @@ namespace Catrobat.IDE.Core.Models
             {
                 _image = value;
                 RaisePropertyChanged(() => Image);
+            }
+        }
+
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                _isSelected = value;
+                RaisePropertyChanged(() => IsSelected);
             }
         }
 

@@ -8,6 +8,7 @@
   xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
   xmlns:listPicker="using:Catrobat.IDE.WindowsPhone.Controls.ListPicker"
   xmlns:listPickerControl="using:Catrobat.IDE.WindowsPhone.Controls.ListPickerControl"
+  xmlns:listsViewControls="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls"
   RequestedTheme="Light"
   mc:Ignorable="d"> 
 
@@ -17,8 +18,9 @@
 
   <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid Margin="16,10,16,0">
-      <ListView Name="ListBoxItems" SelectionChanged="ListBoxItems_SelectionChanged" >
-      </ListView>
+      <listsViewControls:SelectableListView x:Name="ListBoxItems" 
+        SelectionChanged="ListBoxItems_SelectionChanged" >
+      </listsViewControls:SelectableListView>
     </Grid>
   </Grid>
 

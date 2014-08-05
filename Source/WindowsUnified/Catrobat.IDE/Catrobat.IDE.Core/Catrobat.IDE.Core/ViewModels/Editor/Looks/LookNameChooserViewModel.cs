@@ -15,6 +15,15 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
     {
         #region Private Members
 
+        private static ObservableCollection<ImageSizeEntry> _allImageSizes =
+            new ObservableCollection<ImageSizeEntry>
+            {
+                new ImageSizeEntry {Size = ImageSize.Small},
+                new ImageSizeEntry {Size = ImageSize.Medium},
+                new ImageSizeEntry {Size = ImageSize.Large},
+                new ImageSizeEntry {Size = ImageSize.FullSize}
+            };
+
         private string _lookName = AppResources.Editor_Image;
         private Sprite _receivedSelectedSprite;
         private ImageDimension _dimension;
@@ -46,7 +55,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
                 _lookName = value;
                 RaisePropertyChanged(() => LookName);
-                SaveCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -69,12 +77,14 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
                 _dimension = value;
 
                 int visibleCounter = 0;
-                foreach (var size in AllImageSizes)
+                foreach (var size in _allImageSizes)
                 {
                     size.Dimension = Dimension;
                     if (size.IsVisible)
                         visibleCounter++;
                 }
+
+                UpdateAvailableImageSizes();
 
                 //switch (visibleCounter)
                 //{
@@ -110,25 +120,27 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
             set
             {
                 _selectedSize = value;
+
                 RaisePropertyChanged(() => SelectedSize);
                 SaveCommand.RaiseCanExecuteChanged();
             }
         }
 
+        private ObservableCollection<ImageSizeEntry> _imageSizes;
         public ObservableCollection<ImageSizeEntry> ImageSizes
         {
-            get
-            {
-                var availableSizes = new ObservableCollection<ImageSizeEntry>();
-                foreach (var entry in AllImageSizes)
-                    if (entry.IsVisible)
-                        availableSizes.Add(entry);
-
-                return availableSizes;
-            }
+            get { return _imageSizes; }
         }
 
-        public ObservableCollection<ImageSizeEntry> AllImageSizes { get; set; }
+        public void UpdateAvailableImageSizes()
+        {
+            var availableSizes = new ObservableCollection<ImageSizeEntry>();
+            foreach (var entry in _allImageSizes)
+                if (entry.IsVisible)
+                    availableSizes.Add(entry);
+
+            _imageSizes = availableSizes;
+        }
 
         #endregion
 
@@ -248,13 +260,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
         private void InitImageSizes()
         {
-            AllImageSizes = new ObservableCollection<ImageSizeEntry>
-            {
-                new ImageSizeEntry {Size = ImageSize.Small},
-                new ImageSizeEntry {Size = ImageSize.Medium},
-                new ImageSizeEntry {Size = ImageSize.Large},
-                new ImageSizeEntry {Size = ImageSize.FullSize}
-            };
 
             //Dimension = new ImageDimension { Width = 0, Height = 0 };
         }

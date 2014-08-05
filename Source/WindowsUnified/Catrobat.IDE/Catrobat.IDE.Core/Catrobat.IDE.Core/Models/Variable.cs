@@ -1,10 +1,12 @@
 ﻿using System.Diagnostics;
 using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.UI;
 
 namespace Catrobat.IDE.Core.Models
 {
     [DebuggerDisplay("Name = {Name}")]
-    public abstract partial class Variable : Model
+    public abstract partial class Variable : Model, ISelectable
     {
         #region Properties
 
@@ -13,6 +15,17 @@ namespace Catrobat.IDE.Core.Models
         {
             get { return _name; }
             set { Set(ref _name, value); }
+        }
+
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                _isSelected = value;
+                RaisePropertyChanged(() => IsSelected);
+            }
         }
 
         #endregion
@@ -30,6 +43,7 @@ namespace Catrobat.IDE.Core.Models
         }
 
         #endregion
+
     }
 
     #region Implementations

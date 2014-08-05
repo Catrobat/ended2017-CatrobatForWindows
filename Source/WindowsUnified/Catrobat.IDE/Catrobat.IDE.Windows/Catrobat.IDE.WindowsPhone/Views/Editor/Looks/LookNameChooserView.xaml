@@ -4,11 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="using:Catrobat.IDE.WindowsPhone.Views" 
+    xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+    xmlns:listsViewControls="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls"
+    xmlns:nativeConverters="using:Catrobat.IDE.WindowsShared.Converters.NativeConverters"
     DataContext="{Binding LookNameChooserViewModel, Source={StaticResource Locator}}">
   
-  <Grid x:Name="LayoutRoot" 
-        Background="{ThemeResource AppBackgroundBrush}">
+  <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
@@ -16,16 +17,9 @@
       <RowDefinition />
     </Grid.RowDefinitions>
     
-    <StackPanel x:Name="TitlePanel" 
-                Grid.Row="0"
-                Margin="12">
-      <!--<TextBlock x:Name="ApplicationTitle" 
-                 Text="{Binding Resources.Editor_TitleChooseLookName, 
-                 Source={StaticResource LocalizedStrings}}" 
-                 Style="{ThemeResource TextNormalStyle}" 
-                 "/>-->
-      <TextBlock x:Name="PageTitle" 
-                 Text="{Binding Resources.Editor_TitleChooseLookName, 
+    <StackPanel Margin="12">
+
+      <TextBlock Text="{Binding Resources.Editor_TitleChooseLookName, 
                  Source={StaticResource LocalizedStrings}}" 
                  Margin="0 0 0 0" 
                  Style="{ThemeResource TextTitleNormalStyle}"/>
@@ -53,12 +47,13 @@
                  Text="{Binding Resources.Editor_ResizeImage, 
                  Source={StaticResource LocalizedStrings}}"
                  Style="{ThemeResource TextSmallStyle}"/>
-      <GridView Grid.Row="1"  Margin="30 0 30 0" SelectionMode="Extended"
-               ItemsSource="{Binding ImageSizes}" 
-               SelectedItem="{Binding SelectedSize, Mode=TwoWay}">
+      <listsViewControls:SelectableGridView Grid.Row="1"  Margin="30 0 30 0" 
+        SelectionMode="Single"
+        ItemsSource="{Binding ImageSizes}" 
+        SelectedItem="{Binding SelectedSize, Mode=TwoWay}">
         <GridView.ItemTemplate>
           <DataTemplate>
-            <Grid Margin="10" Width="135" Height="115" 
+            <Grid Margin="5" Width="135" Height="115" 
                   Visibility="{Binding IsVisible, 
                   Converter={StaticResource BoolVisibilityConverter}}" 
                   Background="Transparent">
@@ -66,10 +61,12 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
               </Grid.RowDefinitions>
-              <TextBlock Grid.Row="0" Text="{Binding SizeName}" 
-                         HorizontalAlignment="Center" 
-                         VerticalAlignment="Center" 
-                         FontSize="20" Margin="5 0 33 0"/>
+              <TextBlock Name="TextBlockHeader"  Grid.Row="0" Text="{Binding SizeName}"
+                Foreground="{Binding IsSelected, 
+                Converter={StaticResource SelectedBrushConverter}}"      
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                FontSize="20" Margin="5 0 33 0"/>
               <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                   <RowDefinition Height="3*"/>
@@ -82,20 +79,19 @@
                 <Rectangle Grid.Column="0" Grid.Row="0" Margin="7 7 0 0" 
                   Fill="{ThemeResource Accent1Brush}"></Rectangle>
 
-                <StackPanel Grid.Row="0" Grid.Column="0"  
-                            VerticalAlignment="Center" HorizontalAlignment="Center" 
+                <StackPanel Grid.Row="0" Grid.Column="0" 
+                            RequestedTheme="Dark"
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Center" 
                             Margin="6 0 0 0" Orientation="Horizontal">
                   <TextBlock Text="{Binding Percentage}" 
-                             Foreground="{StaticResource PhoneForegroundBrush}" 
                              FontSize="27" Margin="0 0 2 0"></TextBlock>
-                  <TextBlock Text="%" 
-                             Foreground="{StaticResource PhoneForegroundBrush}" 
-                             FontSize="27"></TextBlock>
+                  <TextBlock Text="%" FontSize="27"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" 
                             HorizontalAlignment="Center">
-                  <TextBlock Foreground="{StaticResource PhoneForegroundBrush}" 
+                  <TextBlock
                     VerticalAlignment="Center" 
                     TextAlignment="Center" 
                     Text="{Binding NewWidth, Converter={StaticResource IntPixelConverter}}" 
@@ -107,8 +103,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                   </Grid.RowDefinitions>
-                  <TextBlock Grid.Row="1" FontSize="16" 
-                    Foreground="{StaticResource PhoneForegroundBrush}" 
+                  <TextBlock Grid.Row="1" FontSize="16"
                     Text="{Binding NewHeight, Converter={StaticResource IntPixelConverter}}" 
                     Margin="-0.25,24,0.25,-33" >
                     <TextBlock.RenderTransform>
@@ -120,7 +115,7 @@
             </Grid>
           </DataTemplate>
         </GridView.ItemTemplate>
-      </GridView>
+      </listsViewControls:SelectableGridView>
     </Grid>
   </Grid>
   <Page.BottomAppBar>

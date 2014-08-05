@@ -49,6 +49,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NamespaceTypeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NativeIntZeroVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NegativeNullVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\SelectedBrushConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\SelectionModeVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\ReorderModeVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NullVisibilityConverter.cs" />

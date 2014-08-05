@@ -59,7 +59,6 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<SpritesViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<SpriteEditorViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<NewLookSourceSelectionViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<LookSavingViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<EditorLoadingViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<LookNameChooserViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<ProgramDetailViewModel>(TypeCreationMode.Normal);
@@ -455,17 +454,6 @@ namespace Catrobat.IDE.Core.ViewModels
             get
             {
                 return ServiceLocator.GetInstance<NewLookSourceSelectionViewModel>();
-            }
-        }
-
-        [SuppressMessage("Microsoft.Performance",
-           "CA1822:MarkMembersAsStatic",
-           Justification = "This non-static member is needed for data binding purposes.")]
-        public LookSavingViewModel LookSavingViewModel
-        {
-            get
-            {
-                return ServiceLocator.GetInstance<LookSavingViewModel>();
             }
         }
 
