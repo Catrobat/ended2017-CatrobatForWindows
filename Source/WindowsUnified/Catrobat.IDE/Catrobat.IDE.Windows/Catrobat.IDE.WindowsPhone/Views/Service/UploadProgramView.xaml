@@ -30,28 +30,48 @@
                  Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
 
+    <ScrollViewer Grid.Row="1">
     <StackPanel Grid.Row="1" Margin="12 0 12 18">
       <TextBlock Margin="0 0 0 6" 
                  Text="{Binding Resources.Main_ProgramName, 
                  Source={StaticResource LocalizedStrings}}" 
                  Style="{ThemeResource TextNormalStyle}"/>
-      <TextBox Margin="0 0 0 0"
+        <TextBlock Text="{Binding CurrentProgram.Name, Mode=OneWay}" 
+                     TextWrapping="Wrap"
+                     Style="{ThemeResource TextSmallStyle}"/>
+        <!--<TextBox Margin="0 0 0 0"
                HorizontalAlignment="Stretch"
                Text="{Binding ProgramName, Mode=TwoWay}" 
                TextChanged="TextBox_TextChanged" 
                MaxLength="{Binding Resources.Main_TextBoxLimit, 
-               Source={StaticResource LocalizedStrings}}"/>
-      <TextBlock Margin="0 12 0 6" 
-                 Text="{Binding Resources.Main_ProgramDescription, 
-                 Source={StaticResource LocalizedStrings}}" 
-                 Style="{ThemeResource TextNormalStyle}"/>
-      <TextBox Margin="0 0 0 0"
+               Source={StaticResource LocalizedStrings}}"/>-->
+        <TextBlock Margin="0 12 0 6" 
+                   Text="{Binding Resources.Main_ProgramDescription, 
+                   Source={StaticResource LocalizedStrings}}" 
+                   Style="{ThemeResource TextNormalStyle}"/>
+        <StackPanel Visibility="{Binding CurrentProgram.Description, 
+                      Converter={StaticResource StringVisibilityConverter}}">
+          <TextBlock Text="{Binding Resources.Main_ProgramNoDescription, 
+                        Source={StaticResource LocalizedStrings}}"
+                        TextWrapping="Wrap"
+                        Style="{ThemeResource TextSubtileStyle}"/>
+        </StackPanel>
+        <TextBlock Text="{Binding CurrentProgram.Description, Mode=OneWay}" 
+                      TextWrapping="Wrap"
+                      Style="{ThemeResource TextSmallStyle}"/>
+        <!--<TextBox Margin="0 0 0 0"
                HorizontalAlignment="Stretch"
                Text="{Binding ProgramDescription, Mode=TwoWay}" 
                TextChanged="TextBox_TextChanged"
                TextWrapping="Wrap"
-               AcceptsReturn="True" Height="288" MaxLength="1000"/>
-    </StackPanel>
+               AcceptsReturn="True" Height="288" MaxLength="1000"/>-->
+        <Image Margin="0 12 0 0"
+            Stretch="UniformToFill"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Stretch"
+            Source="{Binding CurrentProgram.Screenshot.ImageSource}" />
+      </StackPanel>
+    </ScrollViewer>
   </Grid>
 
   <Page.BottomAppBar>

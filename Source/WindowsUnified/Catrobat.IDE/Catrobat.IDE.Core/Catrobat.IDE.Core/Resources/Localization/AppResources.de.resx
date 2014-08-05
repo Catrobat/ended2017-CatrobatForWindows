@@ -1278,4 +1278,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   <data name="FormulaInterpreter_Error" xml:space="preserve">
     <value>ungültige formel</value>
   </data>
+  <data name="Main_TitleShareProgram" xml:space="preserve">
+    <value>TEILEN</value>
+  </data>
 </root>
