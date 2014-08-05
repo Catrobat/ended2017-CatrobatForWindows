@@ -65,7 +65,7 @@ namespace Catrobat.IDE.Core
             }
 
             if (_context.LocalSettings.CurrentLanguageString == null)
-                _context.LocalSettings.CurrentLanguageString = "en";
+                _context.LocalSettings.CurrentLanguageString = "de";
                     //ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName;
 
             var themeChooser = ServiceLocator.ThemeChooser;

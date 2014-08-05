@@ -677,7 +677,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
 
         public async Task<StorageFolder> GetFolderAsync(string path)
         {
-            await CreateFolderPathAsync(path);
+            //await CreateFolderPathAsync(path);
 
             if (path == "")
                 return ApplicationData.Current.LocalFolder;
