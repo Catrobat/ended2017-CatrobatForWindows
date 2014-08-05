@@ -214,7 +214,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private void DeleteSpriteAction()
         {
             var sprite = AppResources.Editor_ObjectSingular;
-            var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, "1", sprite);
+            var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, 
+                SelectedSprites.Count, sprite);
             var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, sprite);
 
             ServiceLocator.NotifictionService.ShowMessageBox(messageHeader,

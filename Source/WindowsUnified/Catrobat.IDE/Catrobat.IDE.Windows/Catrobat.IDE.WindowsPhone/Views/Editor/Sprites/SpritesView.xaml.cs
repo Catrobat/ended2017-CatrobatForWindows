@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -21,7 +23,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             InitializeComponent();
             PageCacheMode = NavigationCacheMode.Enabled;
         }
-        
+
         //private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs args)
         //{
         //    if (args.PropertyName == PropertyNameHelper.GetPropertyNameFromExpression(() => _viewModel.SelectedSprite))

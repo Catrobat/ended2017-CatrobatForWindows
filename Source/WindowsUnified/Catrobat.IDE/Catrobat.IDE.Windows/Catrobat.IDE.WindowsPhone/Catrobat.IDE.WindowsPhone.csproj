@@ -101,9 +101,19 @@
     </Compile>
     <Compile Include="Controls\ActionsControls\MasterBrick.cs" />
     <Compile Include="Controls\ActionsControls\NormalBrick.cs" />
+    <Compile Include="Controls\ItemControls\SoundItemControl.xaml.cs">
+      <DependentUpon>SoundItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ItemControls\LookItemControl.xaml.cs">
+      <DependentUpon>LookItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ItemControls\SpriteItemControl.xaml.cs">
+      <DependentUpon>SpriteItemControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LargeImageButton.xaml.cs">
       <DependentUpon>LargeImageButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ListsViewControls\BindableGridView.cs" />
     <Compile Include="Controls\ListsViewControls\SelectableGridView.cs" />
     <Compile Include="Controls\ListsViewControls\SelectableListView.cs" />
     <Compile Include="Controls\MultiModeEditorCommandBar.cs" />
@@ -292,9 +302,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\ItemControls\SoundItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ItemControls\LookItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ItemControls\SpriteItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\LargeImageButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ListsViewControls\BidableGridViewDefaultTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Controls\ProcessIcon.xaml">
       <Generator>MSBuild:Compile</Generator>

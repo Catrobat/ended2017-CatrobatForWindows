@@ -11,57 +11,6 @@
   mc:Ignorable="d"
   DataContext="{Binding SpriteEditorViewModel, Source={StaticResource Locator}}">
 
-  <Page.Resources>
-    <DataTemplate x:Key="LookItemTemplate">
-      <Grid Height="90" Width="325" Margin="0 5 5 5"
-            DataContext="{Binding}"
-            d:DataContext="{d:DesignInstance models:Look}">
-        <Grid RequestedTheme="Dark"
-          Background="{ThemeResource LooksBrush}"
-          HorizontalAlignment="Stretch"
-          Tapped="LookItem_OnTapped">
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="90" />
-            <ColumnDefinition />
-          </Grid.ColumnDefinitions>
-          <Image Grid.Column="0" Source="{Binding Image.ImageSource}"
-                   MaxWidth="90" MaxHeight="90" Margin="6 6 0 6"
-                   HorizontalAlignment="Stretch" Stretch="UniformToFill" />
-          <Grid Grid.Column="1" Margin="5">
-            <TextBlock Grid.Row="0" FontSize="28" Margin="10 5 5 5"
-                Text="{Binding Name}" TextWrapping="Wrap" MaxLines="2"
-                VerticalAlignment="Center" />
-          </Grid>
-        </Grid>
-      </Grid>
-    </DataTemplate>
-
-    <DataTemplate x:Key="SoundItemTemplate">
-      <Grid Height="80" Width="325" Margin="0 5 5 5"
-            DataContext="{Binding}"
-            d:DataContext="{d:DesignInstance models:Sound}">
-        <Grid RequestedTheme="Dark"
-            Background="{ThemeResource SoundsBrush}"
-            Tapped="SoundItem_OnTapped">
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition />
-          </Grid.ColumnDefinitions>
-          <soundControls:SoundPlayButton
-              Group="{Binding ElementName=PlayPauseButtonGroupSounds}"
-              Sound="{Binding}"
-              VerticalAlignment="Center"
-              RoundBorderThickness="5" Margin="10 0 0 0"
-              Grid.Column="0" Height="70" Width="70" />
-          <Grid Grid.Column="1" Margin="15 5 5 5">
-            <TextBlock Grid.Row="0" FontSize="28" TextWrapping="Wrap" MaxLines="2"
-                Text="{Binding Name}" VerticalAlignment="Center" />
-          </Grid>
-        </Grid>
-      </Grid>
-    </DataTemplate>
-  </Page.Resources>
-
   <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
@@ -115,9 +64,13 @@
           <listsViewControls:BindableListView x:Name="ListViewLooks"
               ItemsSource="{Binding Looks}"
               BindableSelectedItems="{Binding SelectedLooks, Mode=TwoWay}"
-              ItemTemplate="{StaticResource LookItemTemplate}"
-              CanReorderItems="True" AllowDrop="True" SelectionMode="None"
-              />
+              CanReorderItems="True" AllowDrop="True" SelectionMode="None">
+            <listsViewControls:BindableListView.ItemTemplate>
+              <DataTemplate>
+                <controls:LookItemControl Look="{Binding}" Tapped="SoundItem_OnTapped" />
+              </DataTemplate>
+            </listsViewControls:BindableListView.ItemTemplate>
+          </listsViewControls:BindableListView>
           <TextBlock
             Text ="{Binding Resources.Editor_ClickPlusToAddLook, 
             Source={StaticResource LocalizedStrings}}"
@@ -137,8 +90,12 @@
           <listsViewControls:BindableListView x:Name="ListViewSounds"
             ItemsSource="{Binding Sounds}"
             BindableSelectedItems="{Binding SelectedSounds, Mode=TwoWay}"
-            ItemTemplate="{StaticResource SoundItemTemplate}"
             CanReorderItems="True" AllowDrop="True" SelectionMode="None">
+            <listsViewControls:BindableListView.ItemTemplate>
+              <DataTemplate>
+                <controls:SoundItemControl Sound="{Binding}" Tapped="SoundItem_OnTapped" />
+              </DataTemplate>
+            </listsViewControls:BindableListView.ItemTemplate>
           </listsViewControls:BindableListView>
 
           <TextBlock
@@ -171,31 +128,4 @@
         FontSize="22"/>
     </Grid>
   </Grid>
-
-  <!--<Page.BottomAppBar>-->
-    <!--<controls:MultiModeEditorCommandBar x:Key="AppBarActions" RequestedTheme="Dark"
-      ModeChanged="MultiModeEditorCommandBar_OnModeChanged"
-      TargetType="Action"
-      NewCommand="{Binding AddNewScriptBrickCommand}"
-      CopyCommand="{Binding CopyScriptBrickCommand}"
-      DeleteCommand="{Binding DeleteScriptBrickCommand}"
-      PlayCommand="{Binding StartPlayerCommand}" />
-
-    <controls:MultiModeEditorCommandBar x:Key="AppBarLooks" RequestedTheme="Dark"
-      ModeChanged="MultiModeEditorCommandBar_OnModeChanged"
-      TargetType="Look"
-      NewCommand="{Binding AddNewLookBrickCommand}"
-      CopyCommand="{Binding CopyLookBrickCommand}"
-      DeleteCommand="{Binding DeleteLookBrickCommand}"
-      PlayCommand="{Binding StartPlayerCommand}" />
-
-    <controls:MultiModeEditorCommandBar x:Key="AppBarSounds" RequestedTheme="Dark"
-      ModeChanged="MultiModeEditorCommandBar_OnModeChanged"
-      TargetType="Sound"
-      NewCommand="{Binding AddNewSoundBrickCommand}"
-      CopyCommand="{Binding CopySoundBrickCommand}"
-      DeleteCommand="{Binding DeleteSoundBrickCommand}"
-      PlayCommand="{Binding StartPlayerCommand}" />-->
-
-  <!--</Page.BottomAppBar>-->
 </views:ViewPageBase>
