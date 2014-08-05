@@ -209,8 +209,8 @@ namespace Catrobat.IDE.Core.Services.Common
         }
 
 
-        public async Task<JSONStatusResponse> UploadProjectAsync(string projectTitle, string username, string token,
-                string language = "en")
+        public async Task<JSONStatusResponse> UploadProjectAsync(string projectTitle, 
+            string username, string token, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_USERNAME, ((username == null) ? "" : username)),
@@ -220,15 +220,20 @@ namespace Catrobat.IDE.Core.Services.Common
 
             using (var postParameters = new MultipartFormDataContent())
             {
-                using (var stream = new MemoryStream())
+                using (var storage = StorageSystem.GetStorage())
                 {
                     JSONStatusResponse statusResponse = null;
                     try
                     {
-                        await ServiceLocator.ZipService.ZipCatrobatPackage(stream, StorageConstants.ProgramsPath + "/" + projectTitle);
-                        Byte[] project_data = stream.ToArray();
+                        var stream = await storage.OpenFileAsync(StorageConstants.TempProgramExportZipPath,
+                            StorageFileMode.Open, StorageFileAccess.Read);
+                        //await ServiceLocator.ZipService.ZipCatrobatPackage(stream, StorageConstants.ProgramsPath + "/" + projectTitle);
+                        var memoryStream = new MemoryStream();
+                        await stream.CopyToAsync(memoryStream);
 
-                        parameters.Add(new KeyValuePair<string, string>(ApplicationResources.API_PARAM_CHECKSUM, UtilTokenHelper.ToHex(MD5Core.GetHash(project_data))));
+                        var projectData = memoryStream.ToArray();
+
+                        parameters.Add(new KeyValuePair<string, string>(ApplicationResources.API_PARAM_CHECKSUM, UtilTokenHelper.ToHex(MD5Core.GetHash(projectData))));
 
                         // store parameters as MultipartFormDataContent
                         StringContent content = null;
@@ -239,7 +244,7 @@ namespace Catrobat.IDE.Core.Services.Common
                             postParameters.Add(content, String.Format("\"{0}\"", keyValuePair.Key));
                         }
 
-                        ByteArrayContent fileContent = new ByteArrayContent(project_data);
+                        ByteArrayContent fileContent = new ByteArrayContent(projectData);
                         //fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
                         //{
                         //    FileName = projectTitle + ".catrobat"

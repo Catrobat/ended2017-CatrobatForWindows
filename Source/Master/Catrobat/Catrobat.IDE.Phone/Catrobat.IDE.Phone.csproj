@@ -674,7 +674,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.axis.png" />
     <Content Include="Content\Images\ApplicationBar\light\appbar.add.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.axis.png" />
     <Content Include="Content\Images\ApplicationBar\light\appbar.back.rest.png" />
     <Content Include="Content\Images\ApplicationBar\light\appbar.basecircle.rest.png" />
     <Content Include="Content\Images\ApplicationBar\light\appbar.cancel.rest.png" />

@@ -30,7 +30,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             //ServiceLocator.Register<ResourceLoaderFactoryTest>(TypeCreationMode.Normal);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void OpenProgramCommandActionTest()
         {
             Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this,
@@ -54,7 +54,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
         public void DeleteLocalProgramActionTest()
         {
             // unchecked private members and unchecked callback-action result
@@ -73,7 +73,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(0, notificationService.SentToastNotifications);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
         public void CopyLocalProgramActionTest()
         {
             // unchecked private members and unchecked callback-action result
@@ -92,7 +92,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(0, notificationService.SentToastNotifications);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void CreateNewProgramActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -108,7 +108,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void SettingsActionTest()
         {      
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -124,7 +124,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void OnlineProgramTapActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -144,7 +144,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void LicenseActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -155,12 +155,29 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             var viewModel = new MainViewModel();
             viewModel.LicenseCommand.Execute(null);
 
-            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateToWebPage, navigationService.CurrentNavigationType);
-            Assert.AreEqual("http://developer.catrobat.org/licenses", navigationService.CurrentView);
-            Assert.AreEqual(1, navigationService.PageStackCount);
+            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
+            Assert.AreEqual(typeof(InformationViewModel), navigationService.CurrentView);
+            Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        // TODO: move to InformationViewModelTests
+        //[TestMethod, TestCategory("ViewModels.Main")]
+        //public void LicenseActionTest()
+        //{
+        //    var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
+        //    navigationService.PageStackCount = 1;
+        //    navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
+        //    navigationService.CurrentView = typeof(MainViewModel);
+
+        //    var viewModel = new MainViewModel();
+        //    viewModel.LicenseCommand.Execute(null);
+
+        //    Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateToWebPage, navigationService.CurrentNavigationType);
+        //    Assert.AreEqual("http://developer.catrobat.org/licenses", navigationService.CurrentView);
+        //    Assert.AreEqual(1, navigationService.PageStackCount);
+        //}
+
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void AboutActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -176,23 +193,24 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
-        [TestMethod]
-        public void TouAction()
-        {
-            var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
-            navigationService.PageStackCount = 1;
-            navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
-            navigationService.CurrentView = typeof(MainViewModel);
+        // TODO: move to InformationViewModelTests
+        //[TestMethod, TestCategory("ViewModels.Main")]
+        //public void TouAction()
+        //{
+        //    var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
+        //    navigationService.PageStackCount = 1;
+        //    navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
+        //    navigationService.CurrentView = typeof(MainViewModel);
 
-            var viewModel = new MainViewModel();
-            viewModel.TouCommand.Execute(null);
+        //    var viewModel = new MainViewModel();
+        //    viewModel.TouCommand.Execute(null);
 
-            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateToWebPage, navigationService.CurrentNavigationType);
-            Assert.AreEqual("http://catrob.at/tou", navigationService.CurrentView);
-            Assert.AreEqual(1, navigationService.PageStackCount);
-        }
+        //    Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateToWebPage, navigationService.CurrentNavigationType);
+        //    Assert.AreEqual("http://catrob.at/tou", navigationService.CurrentView);
+        //    Assert.AreEqual(1, navigationService.PageStackCount);
+        //}
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
         public void ShowMessagesActionDownloadMessageTest()
         {
             // TODO issue with portable-Image
@@ -211,7 +229,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(1, notificationService.SentToastNotifications);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
         public void ShowMessagesActionUploadMessageTest()
         {
             // TODO issue with portable-Image
@@ -230,7 +248,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(1, notificationService.SentToastNotifications);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

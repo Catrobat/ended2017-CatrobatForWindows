@@ -102,7 +102,8 @@
 		</Style>
 	</UserControl.Resources>
 
-  <Button Height="120" HorizontalAlignment="Stretch" Name="ButtonMain" Style="{StaticResource ButtonStyle}">
+  <Button Height="120" HorizontalAlignment="Stretch" Name="ButtonMain" 
+    Style="{StaticResource ButtonStyle}">
     <Grid Margin="5 5 5 5" 
           VerticalAlignment="Stretch" 
           RequestedTheme="Dark" 
@@ -121,17 +122,16 @@
       </Grid>
 
       <ScrollViewer Name="ScrollViewerText" Grid.Column="1" 
-                    HorizontalScrollMode="Enabled" VerticalScrollMode="Enabled">
-    
-          <TextBlock Name="TextBlockTextRight"  SizeChanged="Text_OnSizeChanged" VerticalAlignment="Center" HorizontalAlignment="Left"
-        Margin="5 5 5 5"
-        FontSize="50"
-        TextWrapping="WrapWholeWords" MaxLines="2"
-        />
+        HorizontalScrollMode="Enabled" VerticalScrollMode="Enabled">
 
-        
+        <TextBlock Name="TextBlockTextRight"  
+            SizeChanged="Text_OnSizeChanged" 
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Left"
+            Margin="5 5 5 5"
+            FontSize="50"
+            TextWrapping="WrapWholeWords"/>
       </ScrollViewer>
-
     </Grid>
   </Button>
 </UserControl>

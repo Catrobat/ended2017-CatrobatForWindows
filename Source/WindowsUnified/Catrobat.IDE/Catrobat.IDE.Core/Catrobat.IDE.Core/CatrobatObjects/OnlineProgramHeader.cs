@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Catrobat.IDE.Core.Resources;
 
 namespace Catrobat.IDE.Core.CatrobatObjects
@@ -7,6 +8,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
     {
         private string _screenshotBig;
         private string _screenshotSmall;
+        private string _description;
 
         public string ProjectId { get; set; }
         public string ProjectName { get; set; }
@@ -34,7 +36,19 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             } 
         }
         public string Author { get; set; }
-        public string Description { get; set; }
+        public string Description 
+        { 
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                string userDescription = value;
+                userDescription = Regex.Replace(userDescription, @"<[^>]+>|&nbsp;", "").Trim();
+                _description = Regex.Replace(userDescription, @"(\s)\s+", "$1");
+            }
+        }
         public string Uploaded { get; set; }
         public string UploadedString { get; set; }
         public string Version { get; set; }

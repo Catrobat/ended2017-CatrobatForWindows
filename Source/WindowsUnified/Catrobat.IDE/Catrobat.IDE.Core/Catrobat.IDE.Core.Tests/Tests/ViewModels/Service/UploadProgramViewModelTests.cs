@@ -28,7 +28,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             ServiceLocator.CultureService.SetCulture(new CultureInfo("en"));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Service")]
         public void NavigateToEmptyProgramTest()
         {
             var viewModel = new UploadProgramViewModel();
@@ -38,7 +38,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.IsTrue(viewModel.ProgramDescription == "");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Service")]
         public void NavigatToFullProgramTest()
         {
             var viewModel = new UploadProgramViewModel();            
@@ -55,7 +55,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual("TestProgramDescription", viewModel.ProgramDescription);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Service"), TestCategory("ExcludeGated")]
         public void UploadActionTest()
         {
             //TODO saving of context and renaming of directory not tested
@@ -103,7 +103,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.IsNull(notificationService.LastNotificationTitle);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Service")]
         public void ChangeUserActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -142,7 +142,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Service")]
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -164,7 +164,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Service")]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

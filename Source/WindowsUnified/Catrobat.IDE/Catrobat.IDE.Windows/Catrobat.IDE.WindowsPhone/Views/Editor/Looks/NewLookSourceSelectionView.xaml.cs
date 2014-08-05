@@ -7,7 +7,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Looks
     public partial class NewLookSourceSelectionView
     {
         private readonly NewLookSourceSelectionViewModel _viewModel =
-            ((ViewModelLocator)ServiceLocator.ViewModelLocator).NewLookSourceSelectionViewModel;
+            ServiceLocator.ViewModelLocator.NewLookSourceSelectionViewModel;
         
 
         public NewLookSourceSelectionView()

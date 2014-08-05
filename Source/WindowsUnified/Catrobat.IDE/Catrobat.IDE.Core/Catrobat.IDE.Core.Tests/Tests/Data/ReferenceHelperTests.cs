@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Looks[0], setLookBrick.Value);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetSoundObjectTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -47,7 +47,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Sounds.Sounds[0], playSoundBrick.Sound);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetSpriteObjectTest()
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -58,7 +58,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(project.Sprites[1], pointToBrick.Target);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetUserVariableObjectTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -77,7 +77,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(project.VariableList.ProgramVariableList.UserVariables[0], changeVariableBrick.UserVariable);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetForeverBrickObjectTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -88,7 +88,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[3], foreverBrick.LoopBeginBrick);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetRepeatBrickObjectTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -99,7 +99,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[5], repeatBrick.LoopBeginBrick);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetForeverLoopEndBrickObjectTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -110,7 +110,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[4], foreverBrick.LoopEndBrick);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetRepeatLoopEndBrickObjectTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -121,7 +121,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[6], repeatBrick.LoopEndBrick);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetLoopEndBrickObjectTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -132,7 +132,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[3], loopEndBrick.LoopBeginBrick);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetIfLogicBeginBrickObjectTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -150,7 +150,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[5], ifLogicBeginBrick2.IfLogicEndBrick);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetIfLogicElseBrickObjectTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -168,7 +168,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[7], ifLogicElseBrick2.IfLogicEndBrick);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetIfLogicEndBrickObjectTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -187,7 +187,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetLookReferenceStringTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -202,7 +202,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../../../../lookList/look[1]", reference);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetSoundReferenceStringTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -217,7 +217,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../../../../soundList/sound[1]", reference);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetSpriteReferenceStringTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -232,7 +232,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../../../../../object[2]", reference);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetVariableReferenceStringTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -257,7 +257,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../../../../variables/programVariableList/userVariable[1]", reference);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetForeverBrickReferenceStringTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -272,7 +272,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../foreverBrick[1]", reference);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetRepeatBrickReferenceStringTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -287,7 +287,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../repeatBrick[1]", reference);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetForeverLoopEndBrickReferenceStringTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -302,7 +302,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../loopEndlessBrick[1]", reference);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetRepeatLoopEndBrickReferenceStringTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -317,7 +317,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../loopEndBrick[1]", reference);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetIfLogicBeginBrickReferenceStringTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -351,7 +351,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../ifLogicBeginBrick[1]", reference);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetIfLogicElseBrickReferenceStringTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
@@ -385,7 +385,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../ifLogicElseBrick[2]", reference);
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public async Task GetIfLogicEndBrickReferenceStringTest()
         {
             var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");

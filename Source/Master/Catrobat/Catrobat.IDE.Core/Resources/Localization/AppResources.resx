@@ -1216,4 +1216,22 @@
   <data name="Main_UploadProjectPasswordChangeSucess" xml:space="preserve">
     <value>Sucessfully changed password.</value>
   </data>
+  <data name="Player_AxisOff" xml:space="preserve">
+    <value>axis off</value>
+  </data>
+  <data name="Player_AxisOn" xml:space="preserve">
+    <value>axis on</value>
+  </data>
+  <data name="Player_Back" xml:space="preserve">
+    <value>back</value>
+  </data>
+  <data name="Player_Restart" xml:space="preserve">
+    <value>restart</value>
+  </data>
+  <data name="Player_Resume" xml:space="preserve">
+    <value>resume</value>
+  </data>
+  <data name="Player_TakeScreenshot" xml:space="preserve">
+    <value>screenshot</value>
+  </data>
 </root>

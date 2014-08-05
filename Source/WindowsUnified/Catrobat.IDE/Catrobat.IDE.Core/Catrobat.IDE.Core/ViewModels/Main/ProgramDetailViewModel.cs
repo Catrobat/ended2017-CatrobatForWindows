@@ -76,7 +76,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     EditCurrentProgramCommand.RaiseCanExecuteChanged();
                     UploadCurrentProgramCommand.RaiseCanExecuteChanged();
                     PlayCurrentProgramCommand.RaiseCanExecuteChanged();
-                    PinLocalProgramCommand.RaiseCanExecuteChanged();
                     ShareLocalProgramCommand.RaiseCanExecuteChanged();
                     RenameProgramCommand.RaiseCanExecuteChanged();
                 });
@@ -114,27 +113,27 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void UploadCurrentProgramAction()
         {
-            ServiceLocator.NavigationService.NavigateTo<UploadProgramLoadingViewModel>();
+            //ServiceLocator.NavigationService.NavigateTo<UploadProgramLoadingViewModel>();
 
-            // Determine which page to open
-            JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.CheckTokenAsync(Context.CurrentUserName, Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
+            //// Determine which page to open
+            //JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.CheckTokenAsync(Context.CurrentUserName, Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
-            if (statusResponse.statusCode == StatusCodes.ServerResponseOk)
-            {
-                ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                {
-                    ServiceLocator.NavigationService.NavigateTo<UploadProgramViewModel>();
-                    ServiceLocator.NavigationService.RemoveBackEntry();
-                });
-            }
-            else
-            {
-                ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                {
-                    ServiceLocator.NavigationService.NavigateTo<UploadProgramLoginViewModel>();
-                    ServiceLocator.NavigationService.RemoveBackEntry();
-                });
-            }
+            //if (statusResponse.statusCode == StatusCodes.ServerResponseOk)
+            //{
+            //    ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            //    {
+            //        ServiceLocator.NavigationService.NavigateTo<UploadProgramViewModel>();
+            //        ServiceLocator.NavigationService.RemoveBackEntry();
+            //    });
+            //}
+            //else
+            //{
+            //    ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            //    {
+            //        ServiceLocator.NavigationService.NavigateTo<UploadProgramLoginViewModel>();
+            //        ServiceLocator.NavigationService.RemoveBackEntry();
+            //    });
+            //}
         }
 
         private void PlayCurrentProgramAction()
@@ -142,22 +141,16 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProgram);
         }
 
-        private void PinLocalProgramAction()
-        {
-            var message = new GenericMessage<LocalProjectHeader>(CurrentProgram.LocalProgramHeader);
-            Messenger.Default.Send(message, ViewModelMessagingToken.PinProgramHeaderListener);
-
-            ServiceLocator.NavigationService.NavigateTo<TileGeneratorViewModel>();
-        }
-
         private async void ShareLocalProgramAction()
         {
             await CurrentProgram.Save();
 
-            var message = new GenericMessage<LocalProjectHeader>(CurrentProgram.LocalProgramHeader);
-            Messenger.Default.Send(message, ViewModelMessagingToken.ShareProgramHeaderListener);
+            //var message = new GenericMessage<LocalProjectHeader>(CurrentProgram.LocalProgramHeader);
+            //Messenger.Default.Send(message, ViewModelMessagingToken.ShareProgramHeaderListener);
 
-            ServiceLocator.ShareService.ShateProject(CurrentProgram.Name);
+            ServiceLocator.NavigationService.NavigateTo<ProgramExportViewModel>();
+
+            //ServiceLocator.ShareService.ShateProject(CurrentProgram.Name);
         }
 
         private void RenameProgramAction()
@@ -188,7 +181,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             UploadCurrentProgramCommand = new RelayCommand(UploadCurrentProgramAction, () => !IsActivatingLocalProgram);
             PlayCurrentProgramCommand = new RelayCommand(PlayCurrentProgramAction, () => !IsActivatingLocalProgram);
             RenameProgramCommand = new RelayCommand(RenameProgramAction, () => !IsActivatingLocalProgram);
-            PinLocalProgramCommand = new RelayCommand(PinLocalProgramAction, () => !IsActivatingLocalProgram);
             ShareLocalProgramCommand = new RelayCommand(ShareLocalProgramAction, () => !IsActivatingLocalProgram);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,

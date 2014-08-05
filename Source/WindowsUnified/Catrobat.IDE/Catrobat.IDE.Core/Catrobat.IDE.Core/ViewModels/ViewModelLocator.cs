@@ -45,7 +45,6 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<AddNewSpriteViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<ChangeSpriteViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<ProgramSettingsViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<ProgramImportViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<OnlineProgramViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<OnlineProgramReportViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<NewBroadcastMessageViewModel>(TypeCreationMode.Normal);
@@ -53,7 +52,6 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<AddNewScriptBrickViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<FormulaKeyboardViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<FormulaEditorViewModel>(TypeCreationMode.Normal);
-                ServiceLocator.Register<TileGeneratorViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<VariableSelectionViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<AddNewGlobalVariableViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<AddNewLocalVariableViewModel>(TypeCreationMode.Normal);
@@ -65,6 +63,8 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<EditorLoadingViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<LookNameChooserViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<ProgramDetailViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<ProgramExportViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<InformationViewModel>(TypeCreationMode.Normal);
             }
 
         }
@@ -307,17 +307,6 @@ namespace Catrobat.IDE.Core.ViewModels
         [SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public ProgramImportViewModel ProgramImportViewModel
-        {
-            get
-            {
-                return ServiceLocator.GetInstance<ProgramImportViewModel>();
-            }
-        }
-
-        [SuppressMessage("Microsoft.Performance",
-        "CA1822:MarkMembersAsStatic",
-        Justification = "This non-static member is needed for data binding purposes.")]
         public OnlineProgramViewModel OnlineProgramViewModel
         {
             get
@@ -389,17 +378,6 @@ namespace Catrobat.IDE.Core.ViewModels
             get
             {
                 return ServiceLocator.GetInstance<FormulaKeyboardViewModel>();
-            }
-        }
-
-        [SuppressMessage("Microsoft.Performance",
-        "CA1822:MarkMembersAsStatic",
-        Justification = "This non-static member is needed for data binding purposes.")]
-        public TileGeneratorViewModel TileGeneratorViewModel
-        {
-            get
-            {
-                return ServiceLocator.GetInstance<TileGeneratorViewModel>();
             }
         }
 
@@ -510,6 +488,28 @@ namespace Catrobat.IDE.Core.ViewModels
             get
             {
                 return ServiceLocator.GetInstance<ProgramDetailViewModel>();
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance",
+           "CA1822:MarkMembersAsStatic",
+           Justification = "This non-static member is needed for data binding purposes.")]
+        public ProgramExportViewModel ProgramExportViewModel
+        {
+            get
+            {
+                return ServiceLocator.GetInstance<ProgramExportViewModel>();
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance",
+           "CA1822:MarkMembersAsStatic",
+           Justification = "This non-static member is needed for data binding purposes.")]
+        public InformationViewModel InformationViewModel
+        {
+            get
+            {
+                return ServiceLocator.GetInstance<InformationViewModel>();
             }
         }
 

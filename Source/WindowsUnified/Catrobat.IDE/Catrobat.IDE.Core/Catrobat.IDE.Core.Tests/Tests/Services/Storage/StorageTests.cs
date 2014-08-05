@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Storage
         }
 
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void DeleteDirectoryTest()
         {
             using (IStorage storage = new StorageTest())
@@ -48,7 +48,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Storage
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void DeleteFileTest()
         {
             using (IStorage storage = new StorageTest())
@@ -74,7 +74,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Storage
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void CopyDirectoryTest()
         {
             using (IStorage storage = new StorageTest())
@@ -104,7 +104,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Storage
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void CopyFileTest()
         {
             using (IStorage storage = new StorageTest())
@@ -135,7 +135,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Storage
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void OpenFileTest()
         {
             using (IStorage storage = new StorageTest())
@@ -167,7 +167,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Storage
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void RenameDirectoryTest()
         {
             using (IStorage storage = new StorageTest())
@@ -197,7 +197,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Storage
             }
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("Services"), TestCategory("ExcludeGated")]
         public async Task LoadImageTest()
         {
             var zipService = new ZipService();
@@ -225,7 +225,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Storage
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void ReadWriteTextFileTest()
         {
             using (IStorage storage = new StorageTest())
@@ -241,7 +241,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Storage
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public async Task ReadWriteSerializableObjectTest()
         {
             using (var storage = StorageSystem.GetStorage())

@@ -7,8 +7,7 @@
     d:DesignHeight="100" d:DesignWidth="480">
 
   <Grid x:Name="LayoutRoot" Height="100" 
-    Background="{Binding SelectedTheme.AppBarBackgroundBrush.NativeBrush, 
-    Source={StaticResource ThemeChooser}}">
+    Background="{ThemeResource AppBarBackgroundBrush}">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="90"/>
       <ColumnDefinition/>
@@ -17,10 +16,8 @@
 
     <Grid Grid.Column="0" Margin="5 5 0 0">
       <AppBarButton Name="ButtonNew" Icon="Add" Label="New"
-        Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}"
-        BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-        Source={StaticResource ThemeChooser}}"/>
+        Foreground="{ThemeResource AppBackgroundBrush}"
+        BorderBrush="{ThemeResource AppBackgroundBrush}"/>
     </Grid>
     <Grid Grid.Column="1">
       <Grid.RowDefinitions>
@@ -39,26 +36,22 @@
                     HorizontalAlignment="Left" Margin="0 0 0 0" >
             <TextBlock Name="TextBlockNumberOfSelectedItemsNumber" 
               VerticalAlignment="Center" 
-              Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-              Source={StaticResource ThemeChooser}}"
+              Foreground="{ThemeResource AppBackgroundBrush}"
               FontSize="24" TextAlignment="Right" MinWidth="30" 
               Margin="0 0 8 0">0</TextBlock>
             <StackPanel Orientation="Horizontal" 
               VerticalAlignment="Center" HorizontalAlignment="Right">
               <TextBlock Name="TextBlockNumberOfSelectedItemsText" 
                 TextWrapping="Wrap" FontSize="12" VerticalAlignment="Center" 
-                Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-                Source={StaticResource ThemeChooser}}">OBJECTS</TextBlock>
+                Foreground="{ThemeResource AppBackgroundBrush}">OBJECTS</TextBlock>
               <TextBlock TextWrapping="Wrap" FontSize="12" Margin="7 0 0 0"
                 VerticalAlignment="Center" 
-                Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-                Source={StaticResource ThemeChooser}}"
+                Foreground="{ThemeResource AppBackgroundBrush}"
                 Text="{Binding Resources.Editor_Selected, 
                 Source={StaticResource LocalizedStrings}}" />
               <HyperlinkButton Name="ButtonClearSelection" FontSize="16" Margin="20 0 0 4" 
                 VerticalAlignment="Center" 
-                Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-                Source={StaticResource ThemeChooser}}"
+                Foreground="{ThemeResource AppBackgroundBrush}"
                 Content="{Binding Resources.Editor_ClearSelection, 
                 Source={StaticResource LocalizedStrings}}" />
             </StackPanel>
@@ -77,10 +70,8 @@
             <!--Label="{Binding Resources.Editor_ButtonCopy, 
                     Source={StaticResource LocalizedStrings}}"-->
             <AppBarButton Name="ButtonCopy" Icon="Copy" 
-                    Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-                    Source={StaticResource ThemeChooser}}"
-                    BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-                    Source={StaticResource ThemeChooser}}"
+                    Foreground="{ThemeResource AppBackgroundBrush}"
+                    BorderBrush="{ThemeResource AppBackgroundBrush}"
                     Content="{Binding Resources.Editor_ButtonCopy, 
                     Source={StaticResource LocalizedStrings}}"/>
           </StackPanel>
@@ -89,20 +80,16 @@
             <!--Label="{Binding Resources.Editor_ButtonEdit, 
               Source={StaticResource LocalizedStrings}}"-->
             <AppBarButton Name="ButtonEdit" Icon="Edit"
-              Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-              Source={StaticResource ThemeChooser}}"
-              BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-              Source={StaticResource ThemeChooser}}" />
+              Foreground="{ThemeResource AppBackgroundBrush}"
+              BorderBrush="{ThemeResource AppBackgroundBrush}" />
           </StackPanel>
 
           <StackPanel Grid.Column="2" Name="StackPanelDelete">
             <!--Label="{Binding Resources.Editor_ButtonDelete, 
                     Source={StaticResource LocalizedStrings}}"-->
             <AppBarButton Name="ButtonDelete" Icon="Delete" 
-                    Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-                    Source={StaticResource ThemeChooser}}"
-                    BorderBrush="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-                    Source={StaticResource ThemeChooser}}" />
+                    Foreground="{ThemeResource AppBackgroundBrush}"
+                    BorderBrush="{ThemeResource AppBackgroundBrush}" />
           </StackPanel>
         </Grid>
       </Grid>
@@ -128,8 +115,7 @@
                     <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaySymbol"
                       Storyboard.TargetProperty="Fill" Duration="0">
                       <DiscreteObjectKeyFrame KeyTime="0:00:00"
-                        Value="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-                        Source={StaticResource ThemeChooser}}"/>
+                        Value="{ThemeResource AppBackgroundBrush}"/>
                     </ObjectAnimationUsingKeyFrames>
                   </Storyboard>
                 </VisualState>
@@ -143,8 +129,7 @@
                     <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaySymbol" 
                       Storyboard.TargetProperty="Fill" Duration="0">
                       <DiscreteObjectKeyFrame KeyTime="0:00:00"
-                        Value="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-                        Source={StaticResource ThemeChooser}}"/>
+                        Value="{ThemeResource AppBackgroundBrush}"/>
                     </ObjectAnimationUsingKeyFrames>
                   </Storyboard>
                 </VisualState>
@@ -181,8 +166,7 @@
                     <ColumnDefinition Width="0.5*"/>
                   </Grid.ColumnDefinitions>
                   <Ellipse Name="EllipseBorder" Grid.Row="1" Grid.Column="1" 
-                    Stroke="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-                    Source={StaticResource ThemeChooser}}" 
+                    Stroke="{ThemeResource AppBackgroundBrush}" 
                     StrokeThickness="3" 
                     VerticalAlignment="Stretch" 
                     HorizontalAlignment="Stretch"/>
@@ -201,8 +185,7 @@
                   <Grid Grid.Row="1" Grid.Column="1" 
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Path  Name="PlaySymbol"  Data="M211,328 L254,359.5 L211,392 z"  
-                      Fill="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-                      Source={StaticResource ThemeChooser}}" 
+                      Fill="{ThemeResource AppBackgroundBrush}" 
                       Stretch="Fill" UseLayoutRounding="False" 
                       VerticalAlignment="Center" HorizontalAlignment="Center" 
                       StrokeThickness="0" />
@@ -212,8 +195,7 @@
               <TextBlock x:Name="TextBlockDescription" Grid.Row="1" Margin="5 -2 5 8"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Foreground="{Binding SelectedTheme.AppBarButtonBrush.NativeBrush, 
-                Source={StaticResource ThemeChooser}}"
+                Foreground="{ThemeResource AppBackgroundBrush}"
                 FontSize="16"
                 Text="{Binding Resources.Editor_ButtonPlayProject, 
                 Source={StaticResource LocalizedStrings}}"/>

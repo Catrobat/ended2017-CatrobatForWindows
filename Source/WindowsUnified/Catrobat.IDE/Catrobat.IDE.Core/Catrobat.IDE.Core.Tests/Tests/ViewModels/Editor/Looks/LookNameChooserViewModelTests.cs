@@ -28,7 +28,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Editor"), TestCategory("ExcludeGated")]
         public async Task SaveActionTest()
         {
             _imageToSave = null;
@@ -67,7 +67,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Editor"), TestCategory("ExcludeGated")]
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -84,7 +84,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Editor"), TestCategory("ExcludeGated")]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

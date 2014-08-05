@@ -23,7 +23,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             ServiceLocator.CultureService.SetCulture(new CultureInfo("en"));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Service")]
         public void RegisterActionTest()
         {
             //TODO check messages for different responses - e.g. wrong password or http-request failed
@@ -65,7 +65,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Service")]
         public void RegisterActionMissingUsernameTest()
         {
             var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
@@ -86,7 +86,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual("Login failed", notificationService.LastNotificationTitle);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Service")]
         public void RegisterActionMissingPasswordTest()
         {
             var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
@@ -107,7 +107,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual("Login failed", notificationService.LastNotificationTitle);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Service")]
         public void RegisterActionMissingEmailTest()
         {
             var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
@@ -128,7 +128,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual("Login failed", notificationService.LastNotificationTitle);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Service")]
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -152,7 +152,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Service")]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

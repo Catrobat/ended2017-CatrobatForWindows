@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("ExcludeGated")]
         public void ObjectReferences()
         {
             TestSampleData("Converter/092_091/Test1");
@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             var error = CatrobatVersionConverter.ConvertVersions(
                 "0.92", "0.91", actualDocument);
-            Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, 
+            Assert.AreEqual(CatrobatVersionConverter.VersionConverterStatus.NoError, 
                 error);
 
             XmlDocumentComparer.Compare(expectedDocument, actualDocument);

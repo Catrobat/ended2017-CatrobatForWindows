@@ -173,11 +173,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public ICommand ShowMessagesCommand { get; private set; }
 
-        public ICommand LicenseCommand { get; private set; }
-
         public ICommand AboutCommand { get; private set; }
 
-        public ICommand TouCommand { get; private set; }
+        public ICommand LicenseCommand { get; private set; }
 
         #endregion
 
@@ -226,19 +224,15 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.NavigationService.NavigateTo<OnlineProgramViewModel>();
         }
 
-        private void LicenseAction()
-        {
-            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.CATROBAT_LICENSES_URL);
-        }
-
         private void AboutAction()
         {
-            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.CATROBAT_URL);
+            ServiceLocator.NavigationService.NavigateToWebPage(
+                ApplicationResources.CATROBAT_URL);
         }
 
-        private void TouAction()
+        private void LicenseAction()
         {
-            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.CATROBAT_TOU_URL);
+            ServiceLocator.NavigationService.NavigateTo<InformationViewModel>();
         }
 
         protected override void GoBackAction()
@@ -321,10 +315,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             SettingsCommand = new RelayCommand(SettingsAction);
             CreateNewProgramCommand = new RelayCommand(CreateNewProgramAction);
             ShowMessagesCommand = new RelayCommand(ShowMessagesAction);
-            LicenseCommand = new RelayCommand(LicenseAction);
             AboutCommand = new RelayCommand(AboutAction);
-            TouCommand = new RelayCommand(TouAction);
-
+            LicenseCommand = new RelayCommand(LicenseAction);
 
             Messenger.Default.Register<MessageBase>(this,
                 ViewModelMessagingToken.LocalProgramsChangedListener, LocalProgramsChangedMessageAction);

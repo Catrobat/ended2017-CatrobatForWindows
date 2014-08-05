@@ -18,10 +18,21 @@ namespace Catrobat.IDE.Core
             }
         }
 
+        public static IEnumerable<string> SupportedCatrobatFileTypes
+        { // first one is used for export
+            get
+            {
+                return new List<string> { ".catrobat", ".pocketcode"};
+            }
+        }
+
 
         // Program temporary paths
-        public const string TempProgramImportZipPath = "Temp/ImportProjectZip";
-        public const string TempProgramImportPath = "Temp/ImportProject";
+        public const string TempProgramImportZipPath = "Temp/ImportProgramZip";
+        public const string TempProgramImportPath = "Temp/ImportProgram";
+        public const string TempProgramExportZipPath = "Temp/ExportProgramZip";
+        public const string TempProgramExportPath = "Temp/ExportProgram";
+
         public static string TempPaintImagePath
         { get { return "Temp/temp" + PaintImageExportFileExtension; } }
 

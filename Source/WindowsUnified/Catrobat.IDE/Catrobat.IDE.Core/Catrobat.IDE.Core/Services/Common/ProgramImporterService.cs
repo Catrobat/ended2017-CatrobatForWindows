@@ -2,9 +2,11 @@
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModels;
@@ -14,7 +16,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects;
 using GalaSoft.MvvmLight.Messaging;
 using Catrobat.IDE.Core.Resources.Localization;
 
-namespace Catrobat.IDE.Core.Services.Common
+namespace Catrobat.IDE.WindowsShared.Services
 {
     public class ProgramImporterService : IProgramImporterService
     {
@@ -97,14 +99,14 @@ namespace Catrobat.IDE.Core.Services.Common
             var converterResult = await CatrobatVersionConverter.
                 ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion);
 
-            if (converterResult.Error != CatrobatVersionConverter.VersionConverterError.NoError)
+            if (converterResult.Error != CatrobatVersionConverter.VersionConverterStatus.NoError)
             {
                 switch (converterResult.Error)
                 {
-                    case CatrobatVersionConverter.VersionConverterError.VersionTooNew:
+                    case CatrobatVersionConverter.VersionConverterStatus.VersionTooNew:
                         _checkResult.Status = ProgramImportStatus.VersionTooNew;
                         break;
-                    case CatrobatVersionConverter.VersionConverterError.VersionTooOld:
+                    case CatrobatVersionConverter.VersionConverterStatus.VersionTooOld:
                         _checkResult.Status = ProgramImportStatus.VersionTooOld;
                         break;
                     default:
@@ -155,6 +157,8 @@ namespace Catrobat.IDE.Core.Services.Common
                 Path.Combine(StorageConstants.TempProgramImportPath,
                 StorageConstants.ProgramCodePath),
                 uniqueProgramName);
+
+            // TODO: Task set the program's header information to the the device's info
 
             if (_checkResult != null)
                 _checkResult.ProjectHeader.ProjectName = renameResult.NewProjectName;

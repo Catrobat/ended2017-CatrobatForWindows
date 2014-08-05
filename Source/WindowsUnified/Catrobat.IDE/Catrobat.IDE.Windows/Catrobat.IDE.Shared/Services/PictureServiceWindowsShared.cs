@@ -132,7 +132,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                     var filePath = Path.Combine(program.BasePath,
                         StorageConstants.ProgramLooksPath, lookToEdit.FileName);
 
-                    await storage.CopyFileAsync(filePath, 
+                    await storage.CopyFileAsync(filePath,
                         StorageConstants.TempPaintImagePath);
                 }
             }
@@ -144,21 +144,21 @@ namespace Catrobat.IDE.WindowsShared.Services
 
                 var imageWidth = ServiceLocator.SystemInformationService.ScreenWidth;
                 var imageHeight = ServiceLocator.SystemInformationService.ScreenHeight;
-                
+
                 using (var storage = StorageSystem.GetStorage())
                 {
                     if (await storage.FileExistsAsync(StorageConstants.TempPaintImagePath))
                         await storage.DeleteFileAsync(StorageConstants.TempPaintImagePath);
 
-                    var stream = await storage.OpenFileAsync(StorageConstants.TempPaintImagePath, 
+                    var stream = await storage.OpenFileAsync(StorageConstants.TempPaintImagePath,
                         StorageFileMode.Create, StorageFileAccess.Write);
 
                     var encoder = await BitmapEncoder.CreateAsync(
                         BitmapEncoder.PngEncoderId, stream.AsRandomAccessStream());
 
-                    var pixels = new byte[imageWidth*imageHeight*4];
+                    var pixels = new byte[imageWidth * imageHeight * 4];
 
-                    for (var pixelStart = 0; pixelStart < pixels.Length; pixelStart +=4)
+                    for (var pixelStart = 0; pixelStart < pixels.Length; pixelStart += 4)
                     {
                         pixels[pixelStart + 0] = 0x00; // Full transparent
                         pixels[pixelStart + 1] = 0x00;
@@ -176,34 +176,31 @@ namespace Catrobat.IDE.WindowsShared.Services
             var paintTempFolderName = Path.GetFileName(StorageConstants.TempPaintImagePath);
             var paintTempFolder = await localFolder.CreateFolderAsync(paintTempFolderPath, CreationCollisionOption.OpenIfExists);
             var file = await paintTempFolder.GetFileAsync(paintTempFolderName);
-            
+
 
             var options = new Windows.System.LauncherOptions
             {
                 DisplayApplicationPicker = false
             };
 
-            ServiceLocator.DispatcherService.RunOnMainThread(async () =>
+            try
             {
-                try
+                bool success = await Windows.System.Launcher.
+                    LaunchFileAsync(file, options);
+                if (success)
                 {
-                    bool success = await Windows.System.Launcher.
-                        LaunchFileAsync(file, options);
-                    if (success)
-                    {
-                        // File launch OK
-                    }
-                    else
-                    {
-                        // File launch failed
-                    }
+                    // File launch OK
                 }
-                catch (Exception)
+                else
                 {
-                    if (Debugger.IsAttached)
-                        Debugger.Break();
+                    // File launch failed
                 }
-            });
+            }
+            catch (Exception)
+            {
+                if (Debugger.IsAttached)
+                    Debugger.Break();
+            }
         }
 
         public async void RecievedFiles(IEnumerable<object> files)

@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.Models;
+﻿using System.IO;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
@@ -110,15 +111,17 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             CurrentProgram.Description = ProgramDescription;
             await App.SaveContext(CurrentProgram);
 
-            Task<JSONStatusResponse> upload_task = ServiceLocator.WebCommunicationService.UploadProjectAsync(ProgramName, Context.CurrentUserName,
-                                                          Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
+            Task<JSONStatusResponse> uploadTask = 
+                ServiceLocator.WebCommunicationService.UploadProjectAsync(
+                ProgramName, Context.CurrentUserName, Context.CurrentToken, 
+                ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
             var message = new MessageBase();
             Messenger.Default.Send(message, ViewModelMessagingToken.UploadProgramStartedListener);
 
             this.GoBackAction();
 
-            JSONStatusResponse statusResponse = await Task.Run(() => upload_task);
+            JSONStatusResponse statusResponse = await Task.Run(() => uploadTask);
 
             switch (statusResponse.statusCode)
             {
@@ -192,7 +195,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                  ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
+                ViewModelMessagingToken.CurrentProgramChangedListener, 
+                CurrentProgramChangedMessageAction);
         }
 
         public override void NavigateTo()

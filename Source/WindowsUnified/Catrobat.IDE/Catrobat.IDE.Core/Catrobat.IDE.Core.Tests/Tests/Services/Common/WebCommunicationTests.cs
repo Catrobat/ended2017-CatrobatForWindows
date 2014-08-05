@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
 
         // Tests API that is specified in ApplicationResources.API_BASE_ADRESS
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Services"), TestCategory("ExcludeGated")]
         public async Task LoadOnlineProjectsAsyncTest()
         {
             var webCommunicationService = new WebCommunicationService();
@@ -41,7 +41,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
             Assert.AreEqual(count, projects.Count);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Services"), TestCategory("ExcludeGated")]
         public async Task AsyncCheckTokenAsyncTest()
         {
             var webCommunicationService = new WebCommunicationService();
@@ -50,7 +50,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
             Assert.AreEqual(StatusCodes.ServerResponseOk, statusResponse.statusCode);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Services"), TestCategory("ExcludeGated")]
         public async Task LoginAsyncTest()
         {
             var webCommunicationService = new WebCommunicationService();

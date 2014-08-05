@@ -5,6 +5,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
+  xmlns:controls1="using:WinRTXamlToolkit.Controls"
   mc:Ignorable="d"
   NavigationCacheMode="Enabled"
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
@@ -72,8 +73,7 @@
                 InputScope="Search"
                 Text="{Binding OnlinePrograms.FilterText, Mode=TwoWay}"
                 TextChanged="FilterTextBox_TextChanged" 
-                KeyDown="FilterTextBox_KeyDown"
-                />
+                KeyDown="FilterTextBox_KeyDown"/>
 
               <ListView Name="ListViewOnlinePrograms" Grid.Row="1"
                 ItemsSource="{Binding OnlinePrograms}" 
@@ -194,67 +194,23 @@
                 TextWrapping="Wrap" TextAlignment="Justify"
                 Text="{Binding Resources.Main_AboutText, 
                 Source={StaticResource LocalizedStrings}}"/>
-              <HyperlinkButton Grid.Row="2" FontSize="20"
-                Content="{Binding Resources.Main_AboutLicense, 
+              <StackPanel Grid.Row="2"
+                Orientation="Horizontal" 
+                HorizontalAlignment="Center">
+                
+                <HyperlinkButton Margin="0 15 40 0"
+                Content="{Binding Resources.Main_AboutCatrobat, 
+                Source={StaticResource LocalizedStrings}}" 
+                Style="{ThemeResource HyperLinkNormalStyle}"
+                Command="{Binding AboutCommand}"/>
+
+                <HyperlinkButton Margin="0 15 0 0"
+                Content="{Binding Resources.Main_AboutLicenseShort, 
                 Source={StaticResource LocalizedStrings}}" 
                 Style="{ThemeResource HyperLinkNormalStyle}"
                 Command="{Binding LicenseCommand}"/>
-              <HyperlinkButton Grid.Row="3" FontSize="20"
-                Content="{Binding Resources.Main_AboutCatrobat, 
-                Source={StaticResource LocalizedStrings}}" 
-                Style="{ThemeResource HyperLinkNormalStyle}"
-                Command="{Binding AboutCommand}"/>
-
-              <Grid Grid.Row="6">
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="Auto" />
-                  <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="1" HorizontalAlignment="Right" 
-                  VerticalAlignment="Bottom" Orientation="Vertical">
-                  <TextBlock Style="{ThemeResource TextSubtileStyle}" 
-                    Text="{Binding ApplicationVersionName}" 
-                    Margin="12 12 0 12" TextWrapping="Wrap"  />
-                </StackPanel>
-              </Grid>
-            </Grid>
-          </DataTemplate>
-        </HubSection.ContentTemplate>
-      </HubSection>
-
-      <HubSection Name="HubSectionTermsOfUse">
-        <HubSection.Header>
-          <TextBlock Text="{Binding Resources.Main_TermsOfUse, 
-            Source={StaticResource LocalizedStrings}}" 
-            Style="{ThemeResource TextHubHeaderStyle}"/>
-        </HubSection.Header>
-        <HubSection.ContentTemplate>
-          <DataTemplate>
-            <Grid Margin="0 -26 0 0">
-              <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-                <RowDefinition Height="Auto" MinHeight="52"/>
-                <RowDefinition Height="Auto" MinHeight="52"/>
-                <RowDefinition/>
-                <RowDefinition Height="Auto"/>
-              </Grid.RowDefinitions>
-              <TextBlock 
-                Style="{ThemeResource TextNormalStyle}"
-                Margin="0 0 0 0" 
-                TextWrapping="Wrap" TextAlignment="Justify"
-                Text="{Binding Resources.Main_TermsOfUseText, 
-                Source={StaticResource LocalizedStrings}}"/>
-              <HyperlinkButton Grid.Row="2" FontSize="20"
-                Content="{Binding Resources.Main_TermsOfUse, 
-                Source={StaticResource LocalizedStrings}}" 
-                Style="{ThemeResource HyperLinkNormalStyle}"
-                Command="{Binding TouCommand}"/>
-              <HyperlinkButton Grid.Row="3" FontSize="20"
-                Content="{Binding Resources.Main_AboutCatrobat, 
-                Source={StaticResource LocalizedStrings}}" 
-                Style="{ThemeResource HyperLinkNormalStyle}" 
-                Command="{Binding AboutCommand}"/>
+              </StackPanel>
+              
 
               <Grid Grid.Row="6">
                 <Grid.ColumnDefinitions>

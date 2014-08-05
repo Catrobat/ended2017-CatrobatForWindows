@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
             TestHelper.InitializeTests();
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("Services"), TestCategory("ExcludeGated")]
         public async Task UnZipSimpleTest()
         {
             var zipService = new ZipService();
@@ -69,7 +69,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
             }
         }
 
-        [TestMethod, TestCategory("GatedTests.Obsolete")]
+        [TestMethod, TestCategory("Services"), TestCategory("ExcludeGated")]
         public async Task ZipSimpleTest()
         {
             var zipService = new ZipService();

@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core
 
         public const string TargetIDEVersion = "Win0.91";
 
-        public const string TargetOutputVersion = "0.91";
+        public const string TargetOutputVersion = "0.92";
 
         // Languages
 

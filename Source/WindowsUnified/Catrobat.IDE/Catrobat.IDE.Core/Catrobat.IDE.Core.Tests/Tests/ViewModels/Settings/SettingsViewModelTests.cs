@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Settings
             ServiceLocator.NavigationService = new NavigationServiceTest();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Settings")]
         public void ShowDesignSettingsActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -31,7 +31,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Settings
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Settings")]
         public void ShowBrickSettingsActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -47,7 +47,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Settings
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Settings")]
         public void ShowLanguageSettingsActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -64,7 +64,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Settings
         }
 
 
-        [TestMethod]
+        [TestMethod, TestCategory("ViewModels.Settings")]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

@@ -16,10 +16,10 @@
       <ColumnDefinition Width="3*"/>
       <ColumnDefinition/>
     </Grid.ColumnDefinitions>
-    <Rectangle Grid.Column="0" Grid.Row="0" Margin="7 7 0 0" Fill="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1.NativeBrush}"></Rectangle>
+    <Rectangle Grid.Column="0" Grid.Row="0" Margin="7 7 0 0" Fill="{ThemeResource Accent1Brush}"></Rectangle>
     <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-      <TextBlock Foreground="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor2.NativeBrush}" VerticalAlignment="Center" TextAlignment="Center" Text="100" />
-      <TextBlock Text="px"  Foreground="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor2.NativeBrush}" VerticalAlignment="Center" TextAlignment="Center" />
+      <TextBlock Foreground="{ThemeResource Accent2Brush}" VerticalAlignment="Center" TextAlignment="Center" Text="100" />
+      <TextBlock Text="px"  Foreground="{ThemeResource Accent2Brush}" VerticalAlignment="Center" TextAlignment="Center" />
     </StackPanel>
 
     <Grid Grid.Column="1" Grid.Row="0">
@@ -27,12 +27,12 @@
         <RowDefinition/>
         <RowDefinition/>
       </Grid.RowDefinitions>
-      <TextBlock Grid.Row="1" Text="px"  Foreground="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor2.NativeBrush}" Margin="-1.75,1.25,1.75,-2.25" >
+      <TextBlock Grid.Row="1" Text="px"  Foreground="{ThemeResource Accent2Brush}" Margin="-1.75,1.25,1.75,-2.25" >
         <TextBlock.RenderTransform>
           <CompositeTransform Rotation="-90"/>
         </TextBlock.RenderTransform>
       </TextBlock>
-      <TextBlock Grid.Row="1" Foreground="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor2.NativeBrush}" Text="100" Margin="-0.25,33,0.25,-33" >
+      <TextBlock Grid.Row="1" Foreground="{ThemeResource Accent2Brush}" Text="100" Margin="-0.25,33,0.25,-33" >
         <TextBlock.RenderTransform>
           <CompositeTransform Rotation="-90"/>
         </TextBlock.RenderTransform>

@@ -55,7 +55,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
             //    ServiceLocator.NavigationService.NavigateTo<SoundNameChooserViewModel>();
             //}
         }
+        #endregion
 
+        #region Message Actions
         private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
         {
             _receivedSelectedSprite = message.Content;

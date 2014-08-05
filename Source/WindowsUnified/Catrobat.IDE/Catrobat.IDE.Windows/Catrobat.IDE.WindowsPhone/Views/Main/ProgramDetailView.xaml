@@ -49,54 +49,57 @@
             Source="{Binding CurrentProgram.Screenshot.ImageSource}" />
         </Grid>
       </Grid>
-      <StackPanel Grid.Column="1" Margin="12 0 6 0">
-        <TextBlock Margin="0 0 0 0" 
-                   Text="{Binding Resources.Main_ProgramName, 
-                   Source={StaticResource LocalizedStrings}}"
-                   TextWrapping="Wrap"
-                   Style="{ThemeResource TextNormalStyle}"/>
-        <TextBlock Text="{Binding CurrentProgramHeader.ProjectName, Mode=OneWay}" 
-                   TextWrapping="Wrap"
-                   Style="{ThemeResource TextSmallStyle}"/>
-        <TextBlock Margin="0 12 0 0" 
-                   Text="{Binding Resources.Main_ProgramDescription, 
-                   Source={StaticResource LocalizedStrings}}" 
-                   Style="{ThemeResource TextNormalStyle}"/>
-        <StackPanel Visibility="{Binding CurrentProgram.Description, 
-                    Converter={StaticResource StringVisibilityConverter}}">
-          <TextBlock Text="{Binding Resources.Main_ProgramNoDescription, 
+      <ScrollViewer Grid.Column="1">
+        <StackPanel Grid.Column="1" Margin="12 0 6 0">
+          <TextBlock Margin="0 0 0 0" 
+                     Text="{Binding Resources.Main_ProgramName, 
                      Source={StaticResource LocalizedStrings}}"
                      TextWrapping="Wrap"
-                     Style="{ThemeResource TextSubtileStyle}"/>
+                     Style="{ThemeResource TextNormalStyle}"/>
+          <TextBlock Text="{Binding CurrentProgramHeader.ProjectName, Mode=OneWay}" 
+                     TextWrapping="Wrap"
+                     Style="{ThemeResource TextSmallStyle}"/>
+          <TextBlock Margin="0 12 0 0" 
+                     Text="{Binding Resources.Main_ProgramDescription, 
+                     Source={StaticResource LocalizedStrings}}" 
+                     Style="{ThemeResource TextNormalStyle}"/>
+          <StackPanel Visibility="{Binding CurrentProgram.Description, 
+                      Converter={StaticResource StringVisibilityConverter}}">
+            <TextBlock Text="{Binding Resources.Main_ProgramNoDescription, 
+                       Source={StaticResource LocalizedStrings}}"
+                       TextWrapping="Wrap"
+                       Style="{ThemeResource TextSubtileStyle}"/>
+          </StackPanel>
+          <TextBlock Text="{Binding CurrentProgram.Description, Mode=OneWay}" 
+                     TextWrapping="Wrap"
+                     Style="{ThemeResource TextSmallStyle}"/>
+          <!--<TextBlock Margin="0 12 0 0" 
+                     Text="{Binding Resources.Main_OnlineProgramUploaded, 
+                     Source={StaticResource LocalizedStrings}}" 
+                     Style="{ThemeResource TextNormalStyle}"/>
+          <TextBlock x:Name="UploadedLabel" 
+                     Text="{Binding OnlineProgramViewModel.UploadedLabelText, 
+                     Source={StaticResource Locator}}" />
+          <TextBlock Text="{Binding Author}" 
+                     TextWrapping="Wrap"/>
+          <TextBlock x:Name="VersionLabel" 
+                     Text="{Binding OnlineProgramViewModel.VersionLabelText, 
+                     Source={StaticResource Locator}}" 
+                     TextWrapping="Wrap"/>
+          <TextBlock Margin="0 12 0 0"
+                     Text="{Binding Resources.Main_OnlineProgramStatistics, 
+                     Source={StaticResource LocalizedStrings}}" 
+                     Style="{ThemeResource TextNormalStyle}"/>
+          <TextBlock x:Name="ViewsLabel" 
+                     Text="{Binding OnlineProgramViewModel.ViewsLabelText, 
+                     Source={StaticResource Locator}}" 
+                     TextWrapping="Wrap" />
+          <TextBlock x:Name="DownloadsLabel" 
+                     Text="{Binding OnlineProgramViewModel.DownloadsLabelText, 
+                     Source={StaticResource Locator}}" 
+                     TextWrapping="Wrap" />-->
         </StackPanel>
-        <TextBlock Text="{Binding CurrentProgram.Description, Mode=OneWay}" 
-                   TextWrapping="Wrap" />
-        <!--<TextBlock Margin="0 12 0 0" 
-                   Text="{Binding Resources.Main_OnlineProgramUploaded, 
-                   Source={StaticResource LocalizedStrings}}" 
-                   Style="{ThemeResource TextNormalStyle}"/>
-        <TextBlock x:Name="UploadedLabel" 
-                   Text="{Binding OnlineProgramViewModel.UploadedLabelText, 
-                   Source={StaticResource Locator}}" />
-        <TextBlock Text="{Binding Author}" 
-                   TextWrapping="Wrap"/>
-        <TextBlock x:Name="VersionLabel" 
-                   Text="{Binding OnlineProgramViewModel.VersionLabelText, 
-                   Source={StaticResource Locator}}" 
-                   TextWrapping="Wrap"/>
-        <TextBlock Margin="0 12 0 0"
-                   Text="{Binding Resources.Main_OnlineProgramStatistics, 
-                   Source={StaticResource LocalizedStrings}}" 
-                   Style="{ThemeResource TextNormalStyle}"/>
-        <TextBlock x:Name="ViewsLabel" 
-                   Text="{Binding OnlineProgramViewModel.ViewsLabelText, 
-                   Source={StaticResource Locator}}" 
-                   TextWrapping="Wrap" />
-        <TextBlock x:Name="DownloadsLabel" 
-                   Text="{Binding OnlineProgramViewModel.DownloadsLabelText, 
-                   Source={StaticResource Locator}}" 
-                   TextWrapping="Wrap" />-->
-      </StackPanel>
+      </ScrollViewer>
     </Grid>
   </Grid>
 
@@ -108,20 +111,20 @@
           Label="{Binding Resources.Main_ButtonEdit, 
           Source={StaticResource LocalizedStrings}}"
           Command="{Binding EditCurrentProgramCommand}"/>
+        <AppBarButton Icon="ReShare" 
+          Label="{Binding Resources.Main_ShareProgram, 
+          Source={StaticResource LocalizedStrings}}"
+          Command="{Binding ShareLocalProgramCommand}"/>
         <AppBarButton Icon="Play" 
           Label="{Binding Resources.Editor_ButtonPlayProgram, 
           Source={StaticResource LocalizedStrings}}"
           Command="{Binding PlayCurrentProgramCommand}"/>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
-        <AppBarButton Icon="Upload" 
+        <!--<AppBarButton Icon="Upload" 
           Label="{Binding Resources.Main_ButtonUpload, 
           Source={StaticResource LocalizedStrings}}"
-          Command="{Binding UploadCurrentProgramCommand}"/>
-        <AppBarButton Icon="ReShare" 
-          Label="{Binding Resources.Main_ShareProgram, 
-          Source={StaticResource LocalizedStrings}}"
-          Command="{Binding ShareLocalProgramCommand}"/>
+          Command="{Binding UploadCurrentProgramCommand}"/>-->
         <!--<AppBarButton Icon="Pin" 
           Label="{Binding Resources.Main_PinProgramToStart, 
           Source={StaticResource LocalizedStrings}}"

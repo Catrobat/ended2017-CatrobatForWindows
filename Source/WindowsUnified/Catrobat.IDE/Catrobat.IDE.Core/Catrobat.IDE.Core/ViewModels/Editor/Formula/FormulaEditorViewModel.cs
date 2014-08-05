@@ -3,6 +3,7 @@ using Catrobat.IDE.Core.Formulas.Editor;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Formulas.Tokens;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -148,18 +149,23 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
             if (ParsingError != null)
             {
-                if (key != FormulaEditorKey.Delete)
-                {
-                    SelectionStart = ParsingError.Index;
-                    SelectionLength = ParsingError.Length;
-                }
-
-                var errorMessage = ParsingError.Message;
-
                 result = new FormulaEvaluationResult
                 {
-                    Error = errorMessage
+                    Error = AppResources.FormulaInterpreter_Error
                 };
+
+                //if (key != FormulaEditorKey.Delete)
+                //{
+                //    SelectionStart = ParsingError.Index;
+                //    SelectionLength = ParsingError.Length;
+                //}
+
+                //var errorMessage = ParsingError.Message;
+
+                //result = new FormulaEvaluationResult
+                //{
+                //    Error = errorMessage
+                //};
             }
             else
             {

@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
         }
 
-        //[TestMethod] //  // TODO: fix test takes very long time on server
+        //[TestMethod, TestCategory("ViewModels.Editor")] //  // TODO: fix test takes very long time on server
         //public async Task OpenGalleryActionTest()
         //{
         //    Messenger.Default.Register<GenericMessage<PortableImage>>(this,
@@ -75,7 +75,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
         //    Assert.AreEqual(0, navigationService.PageStackCount);
         //}
 
-        //[TestMethod] //  // TODO: fix test takes very long time on server
+        //[TestMethod, TestCategory("ViewModels.Editor")] //  // TODO: fix test takes very long time on server
         //public async Task OpenCameraActionTest()
         //{
         //    Messenger.Default.Register<GenericMessage<PortableImage>>(this,
@@ -126,7 +126,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
         //    Assert.AreEqual(0, navigationService.PageStackCount);
         //}
 
-        //[TestMethod] //  // TODO: fix test takes very long time on server
+        //[TestMethod, TestCategory("ViewModels.Editor")] //  // TODO: fix test takes very long time on server
         //public async Task OpenPaintActionTest()
         //{
         //    Messenger.Default.Register<GenericMessage<PortableImage>>(this,

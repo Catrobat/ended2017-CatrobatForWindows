@@ -70,7 +70,7 @@
 
                 <TextBlock Margin="10 0 0 0" Grid.Row="0" 
                            Text="{ Binding Resources.Main_SettingsTheme, Source={StaticResource LocalizedStrings}}" 
-                           Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, Source={StaticResource ThemeChooser}}"/>
+                           Style="{Binding StaticTheme.TextLargeStyle.NativeStyle, }"/>
 
                 <Grid Grid.Row="1" Margin="10">
                   <Grid Margin="0">

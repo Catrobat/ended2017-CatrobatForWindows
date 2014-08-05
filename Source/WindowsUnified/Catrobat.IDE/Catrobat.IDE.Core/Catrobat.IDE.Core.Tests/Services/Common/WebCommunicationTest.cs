@@ -13,14 +13,14 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
 {
     public class WebCommunicationTest : IWebCommunicationService
     {
-        public int UploadsPending { get; set; } 
-        
+        public int UploadsPending { get; set; }
+
         public async Task<List<OnlineProgramHeader>> LoadOnlineProjectsAsync(
             string filterText, int offset, int count,
             CancellationToken taskCancellationToken)
         {
             List<OnlineProgramHeader> projects = SampleLoader.GetSampleOnlineProjectHeaderList(count);
-            return projects;         
+            return projects;
         }
 
 
@@ -31,7 +31,8 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
             return null;
         }
 
-        public async Task<JSONStatusResponse> CheckTokenAsync(string username, string token, string language = "en")
+        public async Task<JSONStatusResponse> CheckTokenAsync(string username, 
+            string token, string language = "en")
         {
             JSONStatusResponse statusResponse = new JSONStatusResponse
             {
@@ -42,7 +43,8 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
             return statusResponse;
         }
 
-        public async Task<JSONStatusResponse> LoginOrRegisterAsync(string username, string password, string userEmail,
+        public async Task<JSONStatusResponse> LoginOrRegisterAsync(string username, 
+            string password, string userEmail,
                 string language = "en", string country = "AT")
         {
             JSONStatusResponse statusResponse = new JSONStatusResponse
@@ -55,8 +57,8 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
             return statusResponse;
         }
 
-        public async Task<JSONStatusResponse> UploadProjectAsync(string projectTitle, string username, string token,
-                string language = "en")
+        public async Task<JSONStatusResponse> UploadProjectAsync(string projectTitle, 
+            string username, string token, string language = "en")
         {
             JSONStatusResponse statusResponse = new JSONStatusResponse
             {
@@ -67,7 +69,8 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
             return statusResponse;
         }
 
-        public async Task<JSONStatusResponse> ReportAsInappropriateAsync(string projectId, string flagReason, string language = "en")
+        public async Task<JSONStatusResponse> ReportAsInappropriateAsync(string projectId, 
+            string flagReason, string language = "en")
         {
             JSONStatusResponse statusResponse = new JSONStatusResponse
             {
@@ -78,7 +81,8 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
             return statusResponse;
         }
 
-        public async Task<JSONStatusResponse> RecoverPasswordAsync(string recoveryUserData, string language = "en")
+        public async Task<JSONStatusResponse> RecoverPasswordAsync(
+            string recoveryUserData, string language = "en")
         {
             JSONStatusResponse statusResponse = new JSONStatusResponse
             {
@@ -89,7 +93,8 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
             return statusResponse;
         }
 
-        public async Task<JSONStatusResponse> ChangePasswordAsync(string newPassword, string newPasswortRepeated, string hash, string language = "en")
+        public async Task<JSONStatusResponse> ChangePasswordAsync(string newPassword, 
+            string newPasswortRepeated, string hash, string language = "en")
         {
             JSONStatusResponse statusResponse = new JSONStatusResponse
             {
