@@ -1234,7 +1234,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Selektieren</value>
   </data>
   <data name="Editor_ButtonStartReordering" xml:space="preserve">
-    <value>umsortieren</value>
+    <value>Umsortie- ren</value>
   </data>
   <data name="Import_AppTooOld" xml:space="preserve">
     <value>App-Version veraltet</value>
