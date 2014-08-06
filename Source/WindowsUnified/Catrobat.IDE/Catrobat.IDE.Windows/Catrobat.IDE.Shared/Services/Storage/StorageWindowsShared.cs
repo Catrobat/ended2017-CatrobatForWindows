@@ -332,7 +332,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                 case StorageFileMode.Open:
                 case StorageFileMode.OpenOrCreate:
                 case StorageFileMode.Truncate:
-                    file = await GetFileAsync(path);
+                    file = await GetFileAsync(path, false);
                     break;
                 case StorageFileMode.Create:
                 case StorageFileMode.CreateNew:
