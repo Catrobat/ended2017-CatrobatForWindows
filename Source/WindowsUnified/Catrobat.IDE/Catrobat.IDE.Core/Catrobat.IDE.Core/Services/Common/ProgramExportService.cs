@@ -33,7 +33,8 @@ namespace Catrobat.IDE.Core.Services.Common
             }
 
             var zipService = new ZipService();
-            await zipService.ZipCatrobatPackage(streamResult, programFolderPath);
+            //await zipService.ZipCatrobatPackage(streamResult, programFolderPath);
+            await zipService.ZipCatrobatPackage(streamResult, tempPath);
             streamResult.Seek(0, SeekOrigin.Begin);
             return streamResult;
         }
