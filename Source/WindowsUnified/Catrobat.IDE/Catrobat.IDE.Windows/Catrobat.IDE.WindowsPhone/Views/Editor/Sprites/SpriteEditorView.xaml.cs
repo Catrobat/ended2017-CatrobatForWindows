@@ -122,7 +122,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         private void MultiModeEditorCommandBar_OnModeChanged(MultiModeEditorCommandBarMode mode)
         {
-            ListView listView = null;
+            ListViewBase listView = null;
 
             if (PivotMain.SelectedItem == PivotActions)
                 listView = ListViewActions;

@@ -12,11 +12,17 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         public BindableGridView()
         {
             this.SelectionChanged += OnSelectionChanged;
+
+            this.Style = (Style)Application.Current.
+                Resources["BindableGridViewGridViewStyle"];
+
             this.ItemContainerStyle = (Style)Application.Current.
                 Resources["BindableGridViewGridViewItemStyle"];
 
             this.ItemsPanel = (ItemsPanelTemplate)Application.Current.
                 Resources["BindableGridViewItemsPanelTemplate"];
+
+            
 
             Window.Current.SizeChanged += WindowOnSizeChanged;
         }
