@@ -5,6 +5,23 @@
   </Configuration>
   <InitializeActions />
   <ExecuteActions>
+    <AssertAction UIObjectName="UIMap.UIPocketCodeIDEWindow.UIMainHubHub.UIHubSectionLocalProgrHubSection">
+      <ParameterName />
+      <PropertyName>AutomationId</PropertyName>
+      <ExpectedValue>HubSectionLocalPrograms</ExpectedValue>
+      <MessageOnValidationFailure>Navigated to the wrong hubsection</MessageOnValidationFailure>
+      <Type>String</Type>
+      <PropertyCondition>AreEqual</PropertyCondition>
+    </AssertAction>
+    <TestStepMarkerAction Comment="" MarkerInformation="AssertNavigateToLocalProgramsHubSection">
+      <ParameterName />
+      <StepId>-1</StepId>
+      <Direction>Start</Direction>
+      <Outcome />
+      <Disabled>false</Disabled>
+      <WorkItemId>0</WorkItemId>
+      <MarkerRegionType>Assertion</MarkerRegionType>
+    </TestStepMarkerAction>
     <AssertAction UIObjectName="UIMap.UIPocketCodeIDEWindow.UINEWPROGRAMText">
       <ParameterName />
       <PropertyName>DisplayText</PropertyName>
@@ -22,32 +39,15 @@
       <WorkItemId>0</WorkItemId>
       <MarkerRegionType>Assertion</MarkerRegionType>
     </TestStepMarkerAction>
-    <AssertAction UIObjectName="UIMap.UIPocketCodeIDEWindow.UIMainHubHub.UIHubSectionOnlineProjHubSection">
+    <AssertAction UIObjectName="UIMap.UIPocketCodeIDEWindow.UIMainHubHub.UIHubSectionOnlineProgHubSection">
       <ParameterName />
       <PropertyName>AutomationId</PropertyName>
-      <ExpectedValue>HubSectionOnlineProjects</ExpectedValue>
-      <MessageOnValidationFailure>Navigated to the wrong HubSection</MessageOnValidationFailure>
+      <ExpectedValue>HubSectionOnlinePrograms</ExpectedValue>
+      <MessageOnValidationFailure>Navigated to the wrong hubsection</MessageOnValidationFailure>
       <Type>String</Type>
       <PropertyCondition>AreEqual</PropertyCondition>
     </AssertAction>
-    <TestStepMarkerAction Comment="" MarkerInformation="AssertNavigateToOnlineProjectHub">
-      <ParameterName />
-      <StepId>-1</StepId>
-      <Direction>Start</Direction>
-      <Outcome />
-      <Disabled>false</Disabled>
-      <WorkItemId>0</WorkItemId>
-      <MarkerRegionType>Assertion</MarkerRegionType>
-    </TestStepMarkerAction>
-    <AssertAction UIObjectName="UIMap.UIPocketCodeIDEWindow.UIMainHubHub.UIHubSectionLocalProjeHubSection">
-      <ParameterName />
-      <PropertyName>AutomationId</PropertyName>
-      <ExpectedValue>HubSectionLocalProjects</ExpectedValue>
-      <MessageOnValidationFailure>Navigated to wrong HubSection</MessageOnValidationFailure>
-      <Type>String</Type>
-      <PropertyCondition>AreEqual</PropertyCondition>
-    </AssertAction>
-    <TestStepMarkerAction Comment="" MarkerInformation="AssertNavigateToLocalProjectHub">
+    <TestStepMarkerAction Comment="" MarkerInformation="AssertNavigateToOnlineProgramsHubSection">
       <ParameterName />
       <StepId>-1</StepId>
       <Direction>Start</Direction>
@@ -115,24 +115,24 @@
               </AndCondition>
               <SupportLevel>0</SupportLevel>
               <Descendants>
-                <UIObject ControlType="HubSection" Id="UIHubSectionOnlineProjHubSection" FriendlyName="HubSectionOnlineProjects" SpecialControlType="None">
+                <UIObject ControlType="HubSection" Id="UIHubSectionOnlineProgHubSection" FriendlyName="HubSectionOnlinePrograms" SpecialControlType="None">
                   <TechnologyName>UIA</TechnologyName>
                   <WindowTitles />
                   <AndCondition>
                     <PropertyCondition Name="FrameworkId">XAML</PropertyCondition>
                     <PropertyCondition Name="ControlType">HubSection</PropertyCondition>
-                    <PropertyCondition Name="AutomationId">HubSectionOnlineProjects</PropertyCondition>
+                    <PropertyCondition Name="AutomationId">HubSectionOnlinePrograms</PropertyCondition>
                   </AndCondition>
                   <SupportLevel>0</SupportLevel>
                   <Descendants />
                 </UIObject>
-                <UIObject ControlType="HubSection" Id="UIHubSectionLocalProjeHubSection" FriendlyName="HubSectionLocalProjects" SpecialControlType="None">
+                <UIObject ControlType="HubSection" Id="UIHubSectionLocalProgrHubSection" FriendlyName="HubSectionLocalPrograms" SpecialControlType="None">
                   <TechnologyName>UIA</TechnologyName>
                   <WindowTitles />
                   <AndCondition>
                     <PropertyCondition Name="FrameworkId">XAML</PropertyCondition>
                     <PropertyCondition Name="ControlType">HubSection</PropertyCondition>
-                    <PropertyCondition Name="AutomationId">HubSectionLocalProjects</PropertyCondition>
+                    <PropertyCondition Name="AutomationId">HubSectionLocalPrograms</PropertyCondition>
                   </AndCondition>
                   <SupportLevel>0</SupportLevel>
                   <Descendants />

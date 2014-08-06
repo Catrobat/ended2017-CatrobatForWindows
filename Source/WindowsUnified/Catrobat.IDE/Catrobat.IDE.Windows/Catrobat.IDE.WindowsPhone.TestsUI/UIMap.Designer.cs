@@ -26,6 +26,19 @@ namespace Catrobat.IDE.WindowsPhone.TestsUI
     {
         
         /// <summary>
+        /// AssertNavigateToLocalProgramsHubSection - Verwenden Sie "AssertNavigateToLocalProgramsHubSectionExpectedValues", um Parameter an diese Methode zu übergeben.
+        /// </summary>
+        public void AssertNavigateToLocalProgramsHubSection()
+        {
+            #region Variable Declarations
+            XamlHubSection uIHubSectionLocalProgrHubSection = this.UIPocketCodeIDEWindow.UIMainHubHub.UIHubSectionLocalProgrHubSection;
+            #endregion
+
+            // Sicherstellen, dass die Eigenschaft 'AutomationId' von "HubSectionLocalPrograms" Hubabschnitt ist gleich 'HubSectionLocalPrograms'
+            Assert.AreEqual(this.AssertNavigateToLocalProgramsHubSectionExpectedValues.UIHubSectionLocalProgrHubSectionAutomationId, uIHubSectionLocalProgrHubSection.AutomationId, "Navigated to the wrong hubsection");
+        }
+        
+        /// <summary>
         /// AssertNavigateToNewProgramm - Verwenden Sie "AssertNavigateToNewProgrammExpectedValues", um Parameter an diese Methode zu übergeben.
         /// </summary>
         public void AssertNavigateToNewProgramm()
@@ -39,32 +52,31 @@ namespace Catrobat.IDE.WindowsPhone.TestsUI
         }
         
         /// <summary>
-        /// AssertNavigateToOnlineProjectHub - Verwenden Sie "AssertNavigateToOnlineProjectHubExpectedValues", um Parameter an diese Methode zu übergeben.
+        /// AssertNavigateToOnlineProgramsHubSection - Verwenden Sie "AssertNavigateToOnlineProgramsHubSectionExpectedValues", um Parameter an diese Methode zu übergeben.
         /// </summary>
-        public void AssertNavigateToOnlineProjectHub()
+        public void AssertNavigateToOnlineProgramsHubSection()
         {
             #region Variable Declarations
-            XamlHubSection uIHubSectionOnlineProjHubSection = this.UIPocketCodeIDEWindow.UIMainHubHub.UIHubSectionOnlineProjHubSection;
+            XamlHubSection uIHubSectionOnlineProgHubSection = this.UIPocketCodeIDEWindow.UIMainHubHub.UIHubSectionOnlineProgHubSection;
             #endregion
 
-            // Sicherstellen, dass die Eigenschaft 'AutomationId' von "HubSectionOnlineProjects" Hubabschnitt ist gleich 'HubSectionOnlineProjects'
-            Assert.AreEqual(this.AssertNavigateToOnlineProjectHubExpectedValues.UIHubSectionOnlineProjHubSectionAutomationId, uIHubSectionOnlineProjHubSection.AutomationId, "Navigated to the wrong HubSection");
-        }
-        
-        /// <summary>
-        /// AssertNavigateToLocalProjectHub - Verwenden Sie "AssertNavigateToLocalProjectHubExpectedValues", um Parameter an diese Methode zu übergeben.
-        /// </summary>
-        public void AssertNavigateToLocalProjectHub()
-        {
-            #region Variable Declarations
-            XamlHubSection uIHubSectionLocalProjeHubSection = this.UIPocketCodeIDEWindow.UIMainHubHub.UIHubSectionLocalProjeHubSection;
-            #endregion
-
-            // Sicherstellen, dass die Eigenschaft 'AutomationId' von "HubSectionLocalProjects" Hubabschnitt ist gleich 'HubSectionLocalProjects'
-            Assert.AreEqual(this.AssertNavigateToLocalProjectHubExpectedValues.UIHubSectionLocalProjeHubSectionAutomationId, uIHubSectionLocalProjeHubSection.AutomationId, "Navigated to wrong HubSection");
+            // Sicherstellen, dass die Eigenschaft 'AutomationId' von "HubSectionOnlinePrograms" Hubabschnitt ist gleich 'HubSectionOnlinePrograms'
+            Assert.AreEqual(this.AssertNavigateToOnlineProgramsHubSectionExpectedValues.UIHubSectionOnlineProgHubSectionAutomationId, uIHubSectionOnlineProgHubSection.AutomationId, "Navigated to the wrong hubsection");
         }
         
         #region Properties
+        public virtual AssertNavigateToLocalProgramsHubSectionExpectedValues AssertNavigateToLocalProgramsHubSectionExpectedValues
+        {
+            get
+            {
+                if ((this.mAssertNavigateToLocalProgramsHubSectionExpectedValues == null))
+                {
+                    this.mAssertNavigateToLocalProgramsHubSectionExpectedValues = new AssertNavigateToLocalProgramsHubSectionExpectedValues();
+                }
+                return this.mAssertNavigateToLocalProgramsHubSectionExpectedValues;
+            }
+        }
+        
         public virtual AssertNavigateToNewProgrammExpectedValues AssertNavigateToNewProgrammExpectedValues
         {
             get
@@ -77,27 +89,15 @@ namespace Catrobat.IDE.WindowsPhone.TestsUI
             }
         }
         
-        public virtual AssertNavigateToOnlineProjectHubExpectedValues AssertNavigateToOnlineProjectHubExpectedValues
+        public virtual AssertNavigateToOnlineProgramsHubSectionExpectedValues AssertNavigateToOnlineProgramsHubSectionExpectedValues
         {
             get
             {
-                if ((this.mAssertNavigateToOnlineProjectHubExpectedValues == null))
+                if ((this.mAssertNavigateToOnlineProgramsHubSectionExpectedValues == null))
                 {
-                    this.mAssertNavigateToOnlineProjectHubExpectedValues = new AssertNavigateToOnlineProjectHubExpectedValues();
+                    this.mAssertNavigateToOnlineProgramsHubSectionExpectedValues = new AssertNavigateToOnlineProgramsHubSectionExpectedValues();
                 }
-                return this.mAssertNavigateToOnlineProjectHubExpectedValues;
-            }
-        }
-        
-        public virtual AssertNavigateToLocalProjectHubExpectedValues AssertNavigateToLocalProjectHubExpectedValues
-        {
-            get
-            {
-                if ((this.mAssertNavigateToLocalProjectHubExpectedValues == null))
-                {
-                    this.mAssertNavigateToLocalProjectHubExpectedValues = new AssertNavigateToLocalProjectHubExpectedValues();
-                }
-                return this.mAssertNavigateToLocalProjectHubExpectedValues;
+                return this.mAssertNavigateToOnlineProgramsHubSectionExpectedValues;
             }
         }
         
@@ -127,15 +127,30 @@ namespace Catrobat.IDE.WindowsPhone.TestsUI
         #endregion
         
         #region Fields
+        private AssertNavigateToLocalProgramsHubSectionExpectedValues mAssertNavigateToLocalProgramsHubSectionExpectedValues;
+        
         private AssertNavigateToNewProgrammExpectedValues mAssertNavigateToNewProgrammExpectedValues;
         
-        private AssertNavigateToOnlineProjectHubExpectedValues mAssertNavigateToOnlineProjectHubExpectedValues;
-        
-        private AssertNavigateToLocalProjectHubExpectedValues mAssertNavigateToLocalProjectHubExpectedValues;
+        private AssertNavigateToOnlineProgramsHubSectionExpectedValues mAssertNavigateToOnlineProgramsHubSectionExpectedValues;
         
         private UIItemWindow mUIItemWindow;
         
         private UIPocketCodeIDEWindow mUIPocketCodeIDEWindow;
+        #endregion
+    }
+    
+    /// <summary>
+    /// An "AssertNavigateToLocalProgramsHubSection" zu übergebende Parameter
+    /// </summary>
+    [GeneratedCode("Coded UI-Test-Generator", "12.0.30501.0")]
+    public class AssertNavigateToLocalProgramsHubSectionExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Sicherstellen, dass die Eigenschaft 'AutomationId' von "HubSectionLocalPrograms" Hubabschnitt ist gleich 'HubSectionLocalPrograms'
+        /// </summary>
+        public string UIHubSectionLocalProgrHubSectionAutomationId = "HubSectionLocalPrograms";
         #endregion
     }
     
@@ -155,32 +170,17 @@ namespace Catrobat.IDE.WindowsPhone.TestsUI
     }
     
     /// <summary>
-    /// An "AssertNavigateToOnlineProjectHub" zu übergebende Parameter
+    /// An "AssertNavigateToOnlineProgramsHubSection" zu übergebende Parameter
     /// </summary>
     [GeneratedCode("Coded UI-Test-Generator", "12.0.30501.0")]
-    public class AssertNavigateToOnlineProjectHubExpectedValues
+    public class AssertNavigateToOnlineProgramsHubSectionExpectedValues
     {
         
         #region Fields
         /// <summary>
-        /// Sicherstellen, dass die Eigenschaft 'AutomationId' von "HubSectionOnlineProjects" Hubabschnitt ist gleich 'HubSectionOnlineProjects'
+        /// Sicherstellen, dass die Eigenschaft 'AutomationId' von "HubSectionOnlinePrograms" Hubabschnitt ist gleich 'HubSectionOnlinePrograms'
         /// </summary>
-        public string UIHubSectionOnlineProjHubSectionAutomationId = "HubSectionOnlineProjects";
-        #endregion
-    }
-    
-    /// <summary>
-    /// An "AssertNavigateToLocalProjectHub" zu übergebende Parameter
-    /// </summary>
-    [GeneratedCode("Coded UI-Test-Generator", "12.0.30501.0")]
-    public class AssertNavigateToLocalProjectHubExpectedValues
-    {
-        
-        #region Fields
-        /// <summary>
-        /// Sicherstellen, dass die Eigenschaft 'AutomationId' von "HubSectionLocalProjects" Hubabschnitt ist gleich 'HubSectionLocalProjects'
-        /// </summary>
-        public string UIHubSectionLocalProjeHubSectionAutomationId = "HubSectionLocalProjects";
+        public string UIHubSectionOnlineProgHubSectionAutomationId = "HubSectionOnlinePrograms";
         #endregion
     }
     
@@ -282,41 +282,41 @@ namespace Catrobat.IDE.WindowsPhone.TestsUI
         }
         
         #region Properties
-        public XamlHubSection UIHubSectionOnlineProjHubSection
+        public XamlHubSection UIHubSectionOnlineProgHubSection
         {
             get
             {
-                if ((this.mUIHubSectionOnlineProjHubSection == null))
+                if ((this.mUIHubSectionOnlineProgHubSection == null))
                 {
-                    this.mUIHubSectionOnlineProjHubSection = new XamlHubSection(this);
+                    this.mUIHubSectionOnlineProgHubSection = new XamlHubSection(this);
                     #region Suchkriterien
-                    this.mUIHubSectionOnlineProjHubSection.SearchProperties[XamlHubSection.PropertyNames.AutomationId] = "HubSectionOnlineProjects";
+                    this.mUIHubSectionOnlineProgHubSection.SearchProperties[XamlHubSection.PropertyNames.AutomationId] = "HubSectionOnlinePrograms";
                     #endregion
                 }
-                return this.mUIHubSectionOnlineProjHubSection;
+                return this.mUIHubSectionOnlineProgHubSection;
             }
         }
         
-        public XamlHubSection UIHubSectionLocalProjeHubSection
+        public XamlHubSection UIHubSectionLocalProgrHubSection
         {
             get
             {
-                if ((this.mUIHubSectionLocalProjeHubSection == null))
+                if ((this.mUIHubSectionLocalProgrHubSection == null))
                 {
-                    this.mUIHubSectionLocalProjeHubSection = new XamlHubSection(this);
+                    this.mUIHubSectionLocalProgrHubSection = new XamlHubSection(this);
                     #region Suchkriterien
-                    this.mUIHubSectionLocalProjeHubSection.SearchProperties[XamlHubSection.PropertyNames.AutomationId] = "HubSectionLocalProjects";
+                    this.mUIHubSectionLocalProgrHubSection.SearchProperties[XamlHubSection.PropertyNames.AutomationId] = "HubSectionLocalPrograms";
                     #endregion
                 }
-                return this.mUIHubSectionLocalProjeHubSection;
+                return this.mUIHubSectionLocalProgrHubSection;
             }
         }
         #endregion
         
         #region Fields
-        private XamlHubSection mUIHubSectionOnlineProjHubSection;
+        private XamlHubSection mUIHubSectionOnlineProgHubSection;
         
-        private XamlHubSection mUIHubSectionLocalProjeHubSection;
+        private XamlHubSection mUIHubSectionLocalProgrHubSection;
         #endregion
     }
 }

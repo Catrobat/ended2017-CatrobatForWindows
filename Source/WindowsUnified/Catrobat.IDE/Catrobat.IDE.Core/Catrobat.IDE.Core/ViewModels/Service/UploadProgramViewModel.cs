@@ -107,9 +107,9 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private async void UploadAction()
         {
-            await CurrentProgram.SetProgramNameAndRenameDirectory(ProgramName);
-            CurrentProgram.Description = ProgramDescription;
-            await App.SaveContext(CurrentProgram);
+            //await CurrentProgram.SetProgramNameAndRenameDirectory(ProgramName);
+            //CurrentProgram.Description = ProgramDescription;
+            //await App.SaveContext(CurrentProgram);
 
             Task<JSONStatusResponse> uploadTask = 
                 ServiceLocator.WebCommunicationService.UploadProjectAsync(

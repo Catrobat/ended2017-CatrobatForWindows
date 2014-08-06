@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.UI
 {
     public enum ImageSize {Small, Medium, Large, FullSize}
 
-    public sealed class ImageSizeEntry
+    public sealed class ImageSizeEntry : ISelectable
     {
         private static readonly Dictionary<ImageSize, int> MaxWidthHeights = new Dictionary<ImageSize, int>
         {
@@ -71,7 +74,7 @@ namespace Catrobat.IDE.Core.UI
             set
             {
                 _size = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged(() => Size);
             }
         }
 
@@ -86,7 +89,7 @@ namespace Catrobat.IDE.Core.UI
                 Percentage = GetNewImagePercentage(Size, Dimension.Width, Dimension.Height);
                 UpdateVisibility();
 
-                RaisePropertyChanged();
+                RaisePropertyChanged(() => Dimension);
             }
         }
 
@@ -104,7 +107,7 @@ namespace Catrobat.IDE.Core.UI
             set
             {
                 _newWidth = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged(() => NewWidth);
             }
         }
 
@@ -113,8 +116,8 @@ namespace Catrobat.IDE.Core.UI
             get { return _newHeight; }
             set
             {
-                _newHeight = value; 
-                RaisePropertyChanged();
+                _newHeight = value;
+                RaisePropertyChanged(() => NewHeight);
             }
         }
 
@@ -124,7 +127,7 @@ namespace Catrobat.IDE.Core.UI
             set
             {
                 _percentage = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged(() => Percentage);
             }
         }
 
@@ -134,7 +137,7 @@ namespace Catrobat.IDE.Core.UI
             set
             {
                 _isVisible = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged(() => IsVisible);
             }
         }
 
@@ -158,17 +161,32 @@ namespace Catrobat.IDE.Core.UI
             }
         }
 
-        #region PropertyChanged
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                _isSelected = value;
+                ServiceLocator.DispatcherService.RunOnMainThread(()=>
+                    RaisePropertyChanged(() => IsSelected));
+                
+            }
+        }
+
+        #region INotifyPropertyChanged region
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
-        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        public void RaisePropertyChanged<T>(Expression<Func<T>> selector)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(
+                    PropertyHelper.GetPropertyName(selector)));
+            }
         }
 
-        # endregion
+        #endregion
     }
 }

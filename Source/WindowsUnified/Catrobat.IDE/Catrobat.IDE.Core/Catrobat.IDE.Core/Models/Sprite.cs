@@ -7,11 +7,12 @@ using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models.Scripts;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Catrobat.IDE.Core.UI;
 
 namespace Catrobat.IDE.Core.Models
 {
     [DebuggerDisplay("Name = {Name}")]
-    public partial class Sprite : Model, IAsyncCloneable<Program>
+    public partial class Sprite : Model, IAsyncCloneable<Program>, ISelectable
     {
         #region Properties
 
@@ -128,6 +129,17 @@ namespace Catrobat.IDE.Core.Models
             get
             {
                 return _scripts.Sum(script => script.Bricks.Count + 1);
+            }
+        }
+
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                _isSelected = value;
+                RaisePropertyChanged(() => IsSelected);
             }
         }
 

@@ -4,12 +4,13 @@ using System.IO;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Models
 {
     [DebuggerDisplay("Name = {Name}")]
-    public partial class Sound : Model, IAsyncCloneable<Program>
+    public partial class Sound : Model, IAsyncCloneable<Program>, ISelectable
     {
         #region Properties
 
@@ -25,6 +26,17 @@ namespace Catrobat.IDE.Core.Models
         {
             get { return _fileName; }
             set { Set(ref _fileName, value); }
+        }
+
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                _isSelected = value;
+                RaisePropertyChanged(() => IsSelected);
+            }
         }
 
         #endregion

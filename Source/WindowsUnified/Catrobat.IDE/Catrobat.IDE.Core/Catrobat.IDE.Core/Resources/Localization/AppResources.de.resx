@@ -768,7 +768,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>GlobaleVariable</value>
   </data>
   <data name="Editor_VariableName" xml:space="preserve">
-    <value>Variablenname</value>
+    <value>Variablenname:</value>
   </data>
   <data name="Editor_TitleChooseLocalVariableName" xml:space="preserve">
     <value>NAME DER GLOBALEN VARIABLE WÄHLEN</value>
@@ -913,7 +913,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Erneut auf "zurück" um die Änderungen zu verwerfen?</value>
   </data>
   <data name="Editor_ButtonChange" xml:space="preserve">
-    <value>Umbenennen</value>
+    <value>Umbenen- nen</value>
   </data>
   <data name="FormulaInterpreter_Brackets_ArgumentDoubleValue" xml:space="preserve">
     <value>Füge einen Beistrich oder ein Malzeichen hinzu. </value>
@@ -1225,7 +1225,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>senden...</value>
   </data>
   <data name="Editor_ButtonClearSelection" xml:space="preserve">
-    <value>Sel. aufheben</value>
+    <value>Auswahl aufheben</value>
   </data>
   <data name="Editor_ButtonFinishedReordering" xml:space="preserve">
     <value>Fertig</value>
@@ -1234,7 +1234,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Selektieren</value>
   </data>
   <data name="Editor_ButtonStartReordering" xml:space="preserve">
-    <value>umsortieren</value>
+    <value>Umsortie- ren</value>
   </data>
   <data name="Import_AppTooOld" xml:space="preserve">
     <value>App-Version veraltet</value>
@@ -1277,5 +1277,8 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   </data>
   <data name="FormulaInterpreter_Error" xml:space="preserve">
     <value>ungültige formel</value>
+  </data>
+  <data name="Main_TitleShareProgram" xml:space="preserve">
+    <value>TEILEN</value>
   </data>
 </root>

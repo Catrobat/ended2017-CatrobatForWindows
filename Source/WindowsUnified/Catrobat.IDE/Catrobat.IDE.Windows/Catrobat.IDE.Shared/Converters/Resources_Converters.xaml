@@ -31,6 +31,7 @@
   <nativeConverters:ReorderModeVisibilityConverter x:Key="ReorderModeVisibilityConverter"/>
   <nativeConverters:SelectionModeVisibilityConverter x:Key="SelectionModeVisibilityConverter"/>
   <nativeConverters:NativeIntZeroVisibilityConverter x:Key="NativeIntZeroVisibilityConverter"/>
+  <nativeConverters:SelectedBrushConverter x:Key="SelectedBrushConverter"/>
   
 
 

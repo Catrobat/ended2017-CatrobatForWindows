@@ -1,0 +1,36 @@
+﻿<UserControl
+    x:Class="Catrobat.IDE.WindowsPhone.Controls.SoundItemControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:soundControls="using:Catrobat.IDE.WindowsPhone.Controls.SoundControls"
+    xmlns:models="using:Catrobat.IDE.Core.Models"
+    mc:Ignorable="d" RequestedTheme="Light"
+    d:DesignHeight="100"
+    d:DesignWidth="360">
+
+  <Grid x:Name="GridRoot" Height="90" 
+    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+    DataContext="{Binding}"
+    d:DataContext="{d:DesignInstance models:Sound}">
+    <Grid RequestedTheme="Dark"
+            Background="{ThemeResource SoundsBrush}">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <soundControls:SoundPlayButton
+              Group="{Binding ElementName=PlayPauseButtonGroupSounds}"
+              Sound="{Binding}"
+              VerticalAlignment="Center"
+              RoundBorderThickness="5" Margin="10 0 0 0"
+              Grid.Column="0" Height="70" Width="70" />
+      <Grid Grid.Column="1" Margin="15 5 5 5">
+        <TextBlock Grid.Row="0" FontSize="28" 
+                TextWrapping="Wrap" MaxLines="2"
+                Text="{Binding Name}" VerticalAlignment="Center" />
+      </Grid>
+    </Grid>
+  </Grid>
+</UserControl>

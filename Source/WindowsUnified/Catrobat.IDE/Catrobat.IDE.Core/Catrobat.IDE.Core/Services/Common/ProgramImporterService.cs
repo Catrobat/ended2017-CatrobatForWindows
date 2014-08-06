@@ -54,8 +54,8 @@ namespace Catrobat.IDE.WindowsShared.Services
 
                 if (_onlineProjectHeader != null)
                 {
-                    _projectStream = await ServiceLocator.WebCommunicationService.DownloadAsync(
-                        _onlineProjectHeader.DownloadUrl, _onlineProjectHeader.ProjectName);
+                    _projectStream = await Task.Run(() => ServiceLocator.WebCommunicationService.DownloadAsync(
+                        _onlineProjectHeader.DownloadUrl, _onlineProjectHeader.ProjectName)); 
                 }
 
                 await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(

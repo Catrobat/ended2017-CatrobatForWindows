@@ -125,6 +125,7 @@
     <Compile Include="Services\IZipService.cs" />
     <Compile Include="UI\Converters\UnixTimeDateTimeConverter.cs" />
     <Compile Include="UI\Converters\StringVisibilityConverter.cs" />
+    <Compile Include="UI\ISelectable.cs" />
     <Compile Include="UI\OnlineProjectsCollection.cs" />
     <Compile Include="UI\PortableUI\PortableFontStyle.cs" />
     <Compile Include="ViewModels\Editor\Formula\FormulaEvaluationResult.cs" />
@@ -506,7 +507,6 @@
     <Compile Include="ViewModels\AsyncRelayCommand.cs" />
     <Compile Include="ViewModels\Editor\Looks\ChangeLookViewModel.cs" />
     <Compile Include="ViewModels\Editor\Looks\LookNameChooserViewModel.cs" />
-    <Compile Include="ViewModels\Editor\Looks\LookSavingViewModel.cs" />
     <Compile Include="ViewModels\Editor\Looks\NewLookSourceSelectionViewModel.cs" />
     <Compile Include="ViewModels\Editor\EditorLoadingViewModel.cs" />
     <Compile Include="ViewModels\Editor\Formula\AddNewGlobalVariableViewModel.cs" />

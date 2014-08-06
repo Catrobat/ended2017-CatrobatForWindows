@@ -139,13 +139,15 @@ namespace Catrobat.IDE.WindowsPhone.Controls
             _selectButton = new AppBarButton
             {
                 Label = AppResources.Editor_ButtonSelect,
-                Icon = new SymbolIcon(Symbol.SelectAll) // TODO: find better icon
+                Icon = new SymbolIcon(Symbol.SelectAll)
             };
 
             _reorderButton = new AppBarButton
             {
                 Label = AppResources.Editor_ButtonStartReordering,
-                Icon = new SymbolIcon(Symbol.Bullets) // TODO: find better icon
+                //Icon = new SymbolIcon(Symbol.Bullets)
+                //Icon = new SymbolIcon(Symbol.ShowResults)
+                Icon = new SymbolIcon(Symbol.Sort)
             };
 
             _selectButton.Click += (sender, args) => 
@@ -178,7 +180,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
             _cancelSelectionButton = new AppBarButton
             {
                 Label = AppResources.Editor_ButtonClearSelection,
-                Icon = new SymbolIcon(Symbol.Accept)
+                Icon = new SymbolIcon(Symbol.ClearSelection)
             };
 
             _cancelSelectionButton.Click += (sender, args) =>

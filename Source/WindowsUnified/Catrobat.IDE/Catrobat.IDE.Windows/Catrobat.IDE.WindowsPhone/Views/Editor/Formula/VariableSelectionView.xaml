@@ -5,6 +5,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+  xmlns:listsViewControls="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls"
   mc:Ignorable="d"
   DataContext="{Binding VariableSelectionViewModel, Source={StaticResource Locator}}">
 
@@ -27,37 +28,42 @@
       <PivotItem Name="PivotLocal" 
         Header="{Binding Resources.Editor_LocalVariables, 
         Source={StaticResource LocalizedStrings}}">
-        <ListView ItemsSource="{Binding CurrentSprite.LocalVariables}" 
-          SelectionMode="Single" 
+        <listsViewControls:SelectableListView ItemsSource="{Binding CurrentSprite.LocalVariables}" 
+          SelectionMode="Single"
           SelectedItem="{Binding SelectedLocalVariable, Mode=TwoWay}">
           <ListView.ItemTemplate>
             <DataTemplate>
               <Grid DataContext="{Binding}">
                   <TextBlock Grid.Column="0" FontSize="35" Margin="5" 
                     VerticalAlignment="Center" Text="{Binding Name}"
+                    Foreground="{Binding IsSelected, 
+                    Converter={StaticResource SelectedBrushConverter}}"
                     KeyDown="TextBoxLocalVariableName_KeyDown" />
               </Grid>
             </DataTemplate>
           </ListView.ItemTemplate>
-        </ListView>
+        </listsViewControls:SelectableListView>
       </PivotItem>
 
       <PivotItem Name="PivotGlobal" 
         Header="{Binding Resources.Editor_GlobalVariables, 
         Source={StaticResource LocalizedStrings}}">
-        <ListView ItemsSource="{Binding CurrentProject.GlobalVariables}" 
+        <listsViewControls:SelectableListView 
+          ItemsSource="{Binding CurrentProject.GlobalVariables}" 
           SelectionMode="Single" 
           SelectedItem="{Binding SelectedGlobalVariable, Mode=TwoWay}">
           <ListView.ItemTemplate>
             <DataTemplate>
               <Grid DataContext="{Binding}">
-                  <TextBlock Grid.Column="0" FontSize="35" Margin="5" 
-                             VerticalAlignment="Center" Text="{Binding Name}"
-                             KeyDown="TextBoxGlobalVariableName_KeyDown" />
+                  <TextBlock Grid.Column="0" FontSize="35" Margin="5"
+                    Foreground="{Binding IsSelected, 
+                    Converter={StaticResource SelectedBrushConverter}}"
+                    VerticalAlignment="Center" Text="{Binding Name}"
+                    KeyDown="TextBoxGlobalVariableName_KeyDown" />
               </Grid>
             </DataTemplate>
           </ListView.ItemTemplate>
-        </ListView>
+        </listsViewControls:SelectableListView>
       </PivotItem>
     </Pivot>
   </Grid>
