@@ -20,17 +20,17 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region Properties
 
-        private Program _project;
-        private Program Project
+        private Program _program;
+        private Program Program
         {
-            get { return _project; }
+            get { return _program; }
             set
             {
-                if (ReferenceEquals(_project, value)) return;
-                _project = value;
-                GlobalVariablesSource = Project == null
+                if (ReferenceEquals(_program, value)) return;
+                _program = value;
+                GlobalVariablesSource = Program == null
                     ? null
-                    : VariableHelper.GetGlobalVariableList(Project);
+                    : VariableHelper.GetGlobalVariableList(Program);
             }
         }
 
@@ -42,9 +42,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             {
                 if (ReferenceEquals(_sprite, value)) return;
                 _sprite = value;
-                LocalVariablesSource = Project == null || Sprite == null
+                LocalVariablesSource = Program == null || Sprite == null
                     ? null
-                    : VariableHelper.GetLocalVariableList(Project, Sprite);
+                    : VariableHelper.GetLocalVariableList(Program, Sprite);
             }
         }
 
@@ -290,9 +290,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             }).Where(data => data != null);
         }
 
-        private void CurrentProjectChangedAction(Program project)
+        private void CurrentProgramChangedAction(Program program)
         {
-            Project = project;
+            Program = program;
         }
 
         private void CurrentSpriteChangedAction(Sprite sprite)
@@ -316,7 +316,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
             Messenger.Default.Register<GenericMessage<LocalSettings>>(this, ViewModelMessagingToken.LoadSettings, message => LoadSettingsAction(message.Content));
             Messenger.Default.Register<GenericMessage<LocalSettings>>(this, ViewModelMessagingToken.SaveSettings, message => SaveSettingsAction(message.Content));
-            Messenger.Default.Register<GenericMessage<Program>>(this, ViewModelMessagingToken.CurrentProgramChangedListener, message => CurrentProjectChangedAction(message.Content));
+            Messenger.Default.Register<GenericMessage<Program>>(this, ViewModelMessagingToken.CurrentProgramChangedListener, message => CurrentProgramChangedAction(message.Content));
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, message => CurrentSpriteChangedAction(message.Content));
 
         }

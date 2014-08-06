@@ -10,7 +10,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
     {
         #region Private Members
 
-        private Program _currentProject;
+        private Program _currentProgram;
         private Sprite _selectedSprite;
         private Variable _userVariable;
         private string _userVariableName;
@@ -19,14 +19,14 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region Properties
 
-        public Program CurrentProject
+        public Program CurrentProgram
         {
-            get { return _currentProject; }
+            get { return _currentProgram; }
             private set 
             { 
-                _currentProject = value;                 
+                _currentProgram = value;                 
                 ServiceLocator.DispatcherService.RunOnMainThread(() => 
-                    RaisePropertyChanged(() => CurrentProject)); 
+                    RaisePropertyChanged(() => CurrentProgram)); 
             }
         }
 
@@ -76,7 +76,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         private bool SaveCommand_CanExecute()
         {
             return !string.IsNullOrEmpty(UserVariableName) &&
-                   !VariableHelper.VariableNameExistsCheckSelf(CurrentProject, SelectedSprite, UserVariable, UserVariableName);
+                   !VariableHelper.VariableNameExistsCheckSelf(CurrentProgram, SelectedSprite, UserVariable, UserVariableName);
         }
 
         #endregion
@@ -105,9 +105,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region MessageActions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
+        private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
-            CurrentProject = message.Content;
+            CurrentProgram = message.Content;
         }
 
         private void SelectedSpriteChangedMessageAction(GenericMessage<Sprite> message)
@@ -128,7 +128,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedMessageAction);
+                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Variable>>(this,
@@ -144,7 +144,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private void ResetViewModel()
         {
-            
+            UserVariableName = "";
         }
     }
 }

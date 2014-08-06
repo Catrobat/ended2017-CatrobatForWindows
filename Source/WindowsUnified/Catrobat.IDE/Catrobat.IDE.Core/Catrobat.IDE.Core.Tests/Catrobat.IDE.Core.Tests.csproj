@@ -151,7 +151,11 @@
     <Compile Include="Tests\UI\NullItemCollectionTests.cs" />
     <Compile Include="Tests\Misc\ObservableCollectionTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Actions\AddNewScriptBrickViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Editor\Formula\AddNewGlobalVariableViewTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Formula\VariableSelectionViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Formula\FormulaEditorViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Formula\ChangeVariableViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Formula\AddNewLocalVariableViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\Editor\Formula\AddNewGlobalVariableViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Sounds\NewSoundSourceSelectionViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Sounds\SoundNameChooserViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Main\InformationViewModelTests.cs" />

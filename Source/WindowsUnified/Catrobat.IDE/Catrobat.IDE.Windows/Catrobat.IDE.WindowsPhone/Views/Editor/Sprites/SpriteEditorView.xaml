@@ -67,7 +67,7 @@
               CanReorderItems="True" AllowDrop="True" SelectionMode="None">
             <listsViewControls:BindableGridView.ItemTemplate>
               <DataTemplate>
-                <controls:LookItemControl Look="{Binding}" Tapped="SoundItem_OnTapped" />
+                <controls:LookItemControl Look="{Binding}" Tapped="LookItem_OnTapped" />
               </DataTemplate>
             </listsViewControls:BindableGridView.ItemTemplate>
           </listsViewControls:BindableGridView>
