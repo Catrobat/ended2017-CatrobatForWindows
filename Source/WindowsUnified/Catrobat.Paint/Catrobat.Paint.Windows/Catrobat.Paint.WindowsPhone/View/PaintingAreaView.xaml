@@ -9,27 +9,30 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid x:Name="main_grid" IsHitTestVisible="True" ManipulationMode="All">
-        <!--<Grid x:Name="PaintingAreaContentPanelGrid" Width="auto" Height="auto" Grid.Row="1" Margin="0,0,0,0" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center"> -->
-        <Grid x:Name="PaintingAreaContentPanelGrid" Width="auto" Height="auto" Grid.Row="1" Margin="0,0,0,0" Background="Transparent" >
-            <Grid x:Name="PaintingAreaCheckeredGrid" Width="auto" Height="auto"  >
+    <Grid x:Name="LayoutRoot"  IsHitTestVisible="True"  ManipulationMode="TranslateX, TranslateY" ManipulationStarted="LayoutRoot_ManipulationStarted_1" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
+        </Grid.Background>
+
+         <Grid x:Name="PaintingAreaContentPanelGrid" IsHitTestVisible="True"  ManipulationMode="TranslateX, TranslateY" Width="auto" Height="auto" Grid.Row="1" Margin="0,0,0,0" Background="Transparent" >
+            <Grid x:Name="PaintingAreaCheckeredGrid" IsHitTestVisible="True"  ManipulationMode="TranslateX, TranslateY" Width="auto" Height="auto"  >
                 <Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
                 </Grid.Background>
-
+                
                 <Canvas x:Name="PaintingAreaCanvasUnderlaying"  Background="Transparent"/>
                 <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" >
                 </Canvas>
+        
             </Grid>
         </Grid>
 
-        <Grid x:Name="LayoutRoot" Background="Transparent" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Grid x:Name="GridUserControl" Grid.Row="1" >
+        <Grid x:Name="GridUserControl" Grid.Row="1" >
                 <UserControl x:Name="SliderThicknessControl" Height="auto" Width="auto" Visibility="Visible" VerticalAlignment="Bottom">
                     <Grid x:Name="SliderThicknessGrid" Background="#1F1F1F"  MinHeight="120">
                         <Slider x:Name="SliderThickness" Background="Black" Maximum="50"  Minimum="1" Margin="0,16,140,12"/>
@@ -73,7 +76,7 @@
                 </UserControl>
 
             </Grid>
-        </Grid>
+        
         <Grid x:Name="SpinnerGrid" Grid.Row="0" Visibility="Collapsed"  Grid.RowSpan="2"  Margin="12,12,12,12" Background="#FFB6B6B6" Opacity="0.7">
             <Image Grid.Row="0" Height="50" Source="/Assets/Spinner.png" Stretch="Uniform" Width="50" Canvas.ZIndex="100" Margin="10,10">
                 <Image.RenderTransform>
@@ -86,7 +89,7 @@
 
         <StackPanel Grid.Row="0" Canvas.ZIndex="10" VerticalAlignment="Top">
             <controls:AppbarTop></controls:AppbarTop>
-        </StackPanel>
+        </StackPanel> 
     </Grid>
 
     <Page.BottomAppBar>

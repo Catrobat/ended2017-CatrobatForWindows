@@ -37,8 +37,10 @@ namespace Catrobat.Paint.WindowsPhone.View
         public PaintingAreaView()
         {
             this.InitializeComponent();
-
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
+            PaintingAreaCanvas = PocketPaintApplication.GetInstance().PaintingAreaCanvas;
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
+            
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
             PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
@@ -52,18 +54,19 @@ namespace Catrobat.Paint.WindowsPhone.View
             Spinner.SpinnerGrid = SpinnerGrid;
             Spinner.SpinnerStoryboard = new Storyboard();
 
-            PaintingAreaCheckeredGrid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
-            PaintingAreaCheckeredGrid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
+            // TODO:PaintingAreaCheckeredGrid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
+            /*PaintingAreaCheckeredGrid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
             PaintingAreaCheckeredGrid.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
+            */
             PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
             SliderThickness.ValueChanged += SliderThickness_ValueChanged;
             SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
             PocketPaintApplication.GetInstance().AppbarTop.ToolChangedHere(PocketPaintApplication.GetInstance().ToolCurrent);
-            main_grid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
-            main_grid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
-            main_grid.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
-
-            PocketPaintApplication.GetInstance().MainGrid = main_grid;
+            LayoutRoot.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
+            LayoutRoot.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
+            LayoutRoot.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
+            LayoutRoot.ManipulationStarting += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarting;
+            PocketPaintApplication.GetInstance().MainGrid = LayoutRoot;
             UndoRedoActionbarManager.GetInstance().ApplicationBarTop = PocketPaintApplication.GetInstance().AppbarTop;
 
 
@@ -102,7 +105,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 btnTriangleImage.BorderBrush = new SolidColorBrush(Colors.White);
             }
         }
-
+        
         void PaintData_ToolCurrentChanged(Phone.Tool.ToolBase tool)
         {
             throw new NotImplementedException();
@@ -128,7 +131,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnColor.Label = "Farbe";
 
                 app_btnBrushThickness.Click += btnThickness_Click;
-                app_btnColor.Click += btnColor_Click;
+                app_btnColor.Click += btnColor_Click; 
 
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
                 cmdBar.PrimaryCommands.Add(app_btnColor);
@@ -518,18 +521,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        private void btnThickness_Click(object sender, RoutedEventArgs e)
-        {
-            if (getVisibilityOFSliderThicknessControl() == Visibility.Collapsed)
-            {
-                setVisibilityOFSliderThicknessControl(Visibility.Visible);
-                setSliderThicknessControlMargin(new Thickness(0.0, 0.0, 0.0, 0.0));
-            }
-            else
-            {
-                setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
-            }
-        }
+        
 
         public Visibility getVisibilityOFSliderThicknessControl()
         {
@@ -572,6 +564,17 @@ namespace Catrobat.Paint.WindowsPhone.View
             return uctrlOwnKeyboard.Visibility;
         }
 
+        
+
+        private void main_grid_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            
+        }
+        
+        private void LayoutRoot_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+
+        }
         private void BtnTools_Click(object sender, RoutedEventArgs e)
         {
             if (this.Frame != null)
@@ -586,6 +589,23 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 this.Frame.Navigate(typeof(ViewColorPicker));
             }
+        }
+        private void btnThickness_Click(object sender, RoutedEventArgs e)
+        {
+            if (getVisibilityOFSliderThicknessControl() == Visibility.Collapsed)
+            {
+                setVisibilityOFSliderThicknessControl(Visibility.Visible);
+                setSliderThicknessControlMargin(new Thickness(0.0, 0.0, 0.0, 0.0));
+            }
+            else
+            {
+                setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
+            }
+        }
+
+        private void LayoutRoot_ManipulationStarted_1(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+
         }
     }
 }

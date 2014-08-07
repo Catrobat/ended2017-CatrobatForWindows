@@ -45,7 +45,7 @@ namespace Catrobat.Paint.Phone.Listener
             // TODO: var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame;
             // TODO: if (phoneApplicationFrame != null)
             {
-                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
+                // TODO: PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
                 PocketPaintApplication.GetInstance().PaintingAreaView.NavigatedTo(typeof(ViewColorPicker));
             }
         }

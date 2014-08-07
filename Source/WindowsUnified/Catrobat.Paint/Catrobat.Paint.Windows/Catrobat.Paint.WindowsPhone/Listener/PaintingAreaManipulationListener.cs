@@ -16,16 +16,19 @@ namespace Catrobat.Paint.Phone.Listener
     {
         public void ManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
         {
+            
         }
+        
         public void ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
             var point = new Point(Convert.ToInt32(e.Position.X), Convert.ToInt32(e.Position.Y));
+
             // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
-            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled )
+            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
             {
                 return;
             }
-            
+
             PocketPaintApplication.GetInstance().ToolCurrent.HandleDown(point);
         }
 
@@ -55,15 +58,9 @@ namespace Catrobat.Paint.Phone.Listener
             //else
             {
                 movezoom = new TranslateTransform();
-                int right_left = PocketPaintApplication.GetInstance().PaintData.max_right_left;
-                int difference = right_left + Convert.ToInt32(e.Delta.Translation.X);
-
-                bool move_allowed = false;
-                int move_x = 0;
                 
                 ((TranslateTransform)movezoom).X += e.Delta.Translation.X;
                 ((TranslateTransform)movezoom).Y += e.Delta.Translation.Y;
-                PocketPaintApplication.GetInstance().PaintData.max_right_left = PocketPaintApplication.GetInstance().PaintData.max_right_left + Convert.ToInt32(e.Delta.Translation.X);
             }
 
             switch (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType())
