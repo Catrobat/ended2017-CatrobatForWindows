@@ -16,7 +16,7 @@ using Catrobat.IDE.Core.Xml.VersionConverter;
 using Newtonsoft.Json;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
-using System.Diagnostics;
+
 namespace Catrobat.IDE.Core.Services.Common
 {
     public class WebCommunicationService : IWebCommunicationService

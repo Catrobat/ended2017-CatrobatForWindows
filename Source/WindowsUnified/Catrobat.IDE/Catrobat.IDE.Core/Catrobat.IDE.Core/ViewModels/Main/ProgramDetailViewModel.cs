@@ -6,6 +6,7 @@ using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModels.Service;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Diagnostics;
 
 namespace Catrobat.IDE.Core.ViewModels.Main
 {
@@ -14,6 +15,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         #region Private Members
 
         private object _loadingLock = new object();
+
+        private bool _performedExport = false;
 
         #endregion
 
@@ -149,8 +152,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             //Messenger.Default.Send(message, ViewModelMessagingToken.ShareProgramHeaderListener);
 
             ServiceLocator.NavigationService.NavigateTo<ProgramExportViewModel>();
-
-            //ServiceLocator.ShareService.ShateProject(CurrentProgram.Name);
+            _performedExport = true;
         }
 
         private void RenameProgramAction()
@@ -192,57 +194,62 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public async override void NavigateTo()
         {
-                if (CurrentProgram == null ||
-                    CurrentProgram.Name != CurrentProgramHeader.ProjectName)
+            if (CurrentProgram == null ||
+                CurrentProgram.Name != CurrentProgramHeader.ProjectName)
+            {
+                lock (_loadingLock)
                 {
-                    lock (_loadingLock)
-                    {
-                        if (IsActivatingLocalProgram)
-                            return;
+                    if (IsActivatingLocalProgram)
+                        return;
 
-                        IsActivatingLocalProgram = true;
-                    }
-
-                    if (CurrentProgram != null)
-                        await CurrentProgram.Save();
-
-                    var newProgram = await ServiceLocator.ContextService.
-                        LoadProgramByName(CurrentProgramHeader.ProjectName);
-
-                    if (newProgram != null)
-                    {
-                        ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                        {
-                            CurrentProgramHeader.ValidityState = LocalProjectState.Valid;
-                        });
-
-                        CurrentProgram = newProgram;
-
-                        var projectChangedMessage = new GenericMessage<Program>(newProgram);
-                        Messenger.Default.Send(projectChangedMessage,
-                            ViewModelMessagingToken.CurrentProgramChangedListener);
-
-                        IsActivatingLocalProgram = false;
-                    }
-                    else
-                    {
-                        ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                        {
-                            CurrentProgramHeader.ValidityState = LocalProjectState.Damaged;
-                            // TODO: get real ValidityState from "LoadProjectByNameStatic"
-
-                            ServiceLocator.NavigationService.NavigateBack(this.GetType());
-
-                            CurrentProgram = null;
-                            CurrentProgramHeader = null;
-                            var message = new GenericMessage<LocalProjectHeader>(null);
-                            Messenger.Default.Send(message,
-                                ViewModelMessagingToken.CurrentProgramHeaderChangedListener);
-                        });
-
-                        IsActivatingLocalProgram = false;
-                    }
+                    IsActivatingLocalProgram = true;
                 }
+
+                if (CurrentProgram != null)
+                    await CurrentProgram.Save();
+
+                var newProgram = await ServiceLocator.ContextService.
+                    LoadProgramByName(CurrentProgramHeader.ProjectName);
+
+                if (newProgram != null)
+                {
+                    ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                    {
+                        CurrentProgramHeader.ValidityState = LocalProjectState.Valid;
+                    });
+
+                    CurrentProgram = newProgram;
+
+                    var projectChangedMessage = new GenericMessage<Program>(newProgram);
+                    Messenger.Default.Send(projectChangedMessage,
+                        ViewModelMessagingToken.CurrentProgramChangedListener);
+
+                    IsActivatingLocalProgram = false;
+                }
+                else
+                {
+                    ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                    {
+                        CurrentProgramHeader.ValidityState = LocalProjectState.Damaged;
+                        // TODO: get real ValidityState from "LoadProjectByNameStatic"
+
+                        ServiceLocator.NavigationService.NavigateBack(this.GetType());
+
+                        CurrentProgram = null;
+                        CurrentProgramHeader = null;
+                        var message = new GenericMessage<LocalProjectHeader>(null);
+                        Messenger.Default.Send(message,
+                            ViewModelMessagingToken.CurrentProgramHeaderChangedListener);
+                    });
+
+                    IsActivatingLocalProgram = false;
+                }
+            }
+            if (_performedExport)
+            {
+                await ServiceLocator.ProgramExportService.CleanUpExport();
+                _performedExport = false;
+            }
 
             base.NavigateTo();
         }

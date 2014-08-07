@@ -241,6 +241,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
 
         public async Task CopyDirectoryAsync(string sourcePath, string destinationPath)
         {
+            await CreateFolderPathAsync(destinationPath); // here because the line is not used in GetFolderAsync anymore
             var directory = await GetFolderAsync(sourcePath);
 
             foreach (var folder in await directory.GetFoldersAsync())
@@ -269,7 +270,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             }
             catch (Exception)
             {
-                throw new Exception(string.Format("Cannot coppy {0} to {1}", sourceFilePath, destinationFilePath));
+                throw new Exception(string.Format("Cannot copy {0} to {1}", sourceFilePath, destinationFilePath));
             }
         }
 
@@ -283,7 +284,9 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
 
         public async Task CopyFileAsync(string sourcePath, string destinationPath)
         {
-            var file = await GetFileAsync(sourcePath);
+            var file = await GetFileAsync(sourcePath, false); 
+            // false required - source path does already contain the required folders
+
             var destinationFolderPath = Path.GetDirectoryName(destinationPath);
             var destinationFolder = await GetFolderAsync(destinationFolderPath);
 

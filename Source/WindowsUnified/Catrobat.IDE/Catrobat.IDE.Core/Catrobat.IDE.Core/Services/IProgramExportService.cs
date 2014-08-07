@@ -10,5 +10,7 @@ namespace Catrobat.IDE.Core.Services
     public interface IProgramExportService
     {
         Task<Stream> CreateProgramPackageForExport(string programName);
+
+        Task CleanUpExport();
     }
 }
