@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Core.Services.Common
         private const string SoundFileName3 = "C006F161E41ACB98A9EB7B1E22405971_record.mp3";
         private const string SoundFileName4 = "C03622EC424461AB47259339AB71CF1C_record.mp3";
 
-        public async Task<Program> GenerateProject(string programName, bool writeToDisk)
+        public async Task<Program> GenerateProgram(string programName, bool writeToDisk)
         {
             var project = new Program
             {
@@ -523,7 +523,7 @@ namespace Catrobat.IDE.Core.Services.Common
         }
 
 
-        public string GetProjectDefaultName()
+        public string GetProgramDefaultName()
         {
             return AppResources.Main_WhackAMoleName;
         }

@@ -126,7 +126,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                 foreach (var tempUserVariable in entry.VariableList.UserVariables)
                 {
                     userVariableCount++;
-                    if (tempUserVariable == userVariable)
+                    if (tempUserVariable == userVariable) // here is "../../" misig Bug 511
                         return "../../../../../variables/objectVariableList/entry[" + entryCount +
                                "]/list/userVariable[" + userVariableCount + "]";
                 }
@@ -136,7 +136,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             foreach (var tempUserVariable in XmlParserTempProjectHelper.Project.VariableList.ProgramVariableList.UserVariables)
             {
                 count++;
-                if (tempUserVariable == userVariable)
+                if (tempUserVariable == userVariable) // here is "../../" misig Bug 511
                     return "../../../../../variables/programVariableList/userVariable[" + count + "]";
             }
 

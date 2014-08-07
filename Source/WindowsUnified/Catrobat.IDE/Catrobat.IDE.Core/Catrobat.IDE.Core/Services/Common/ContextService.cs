@@ -114,7 +114,7 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             IProgramGenerator projectGenerator = new ProgramGeneratorWhackAMole();
 
-            return await projectGenerator.GenerateProject(AppResources.Main_DefaultProgramName, true);
+            return await projectGenerator.GenerateProgram(AppResources.Main_DefaultProgramName, true);
         }
 
         public async Task<Program> CreateEmptyProgram(string newProgramName)

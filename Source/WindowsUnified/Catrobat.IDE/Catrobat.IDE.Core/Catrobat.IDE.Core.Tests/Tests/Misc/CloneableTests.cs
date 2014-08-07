@@ -10,7 +10,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
     [TestClass]
     public class CloneableTests
     {
-        public static ITestProjectGenerator ProjectGenerator = new ProjectGeneratorForReferenceHelperTests();
+        public static ITestProgramGenerator ProjectGenerator = new ProjectGeneratorForReferenceHelperTests();
 
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)

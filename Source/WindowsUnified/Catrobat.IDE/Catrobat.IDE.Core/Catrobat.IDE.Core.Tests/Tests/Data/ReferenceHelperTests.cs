@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
     [TestClass]
     public class ReferenceHelperTests
     {
-        public static ITestProjectGenerator ProjectGenerator = new ProjectGeneratorForReferenceHelperTests();
+        public static ITestProgramGenerator ProjectGenerator = new ProjectGeneratorForReferenceHelperTests();
 
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
@@ -27,7 +27,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         [TestMethod]
         public void GetLookObjectTest()
         {
-            var project = ProjectGenerator.GenerateProject();
+            var project = ProjectGenerator.GenerateProgram();
 
             var sprite = project.Sprites[0];
             var setLookBrick = sprite.Scripts[0].Bricks[0] as SetLookBrick;
