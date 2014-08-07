@@ -58,19 +58,21 @@
       </PivotItem>
 
       <PivotItem Name="PivotLooks" Margin="10 -10 0 0"
-          Header="{Binding Resources.Editor_PivotLooks, 
-          Source={StaticResource LocalizedStrings}}">
+        Header="{Binding Resources.Editor_PivotLooks, 
+        Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
-          <listsViewControls:BindableGridView x:Name="ListViewLooks"
+          <ScrollViewer VerticalScrollMode="Enabled">
+            <listsViewControls:BindableGridView x:Name="ListViewLooks"
               ItemsSource="{Binding Looks}"
               BindableSelectedItems="{Binding SelectedLooks, Mode=TwoWay}"
               CanReorderItems="True" AllowDrop="True" SelectionMode="None">
-            <listsViewControls:BindableGridView.ItemTemplate>
-              <DataTemplate>
-                <controls:LookItemControl Look="{Binding}" Tapped="LookItem_OnTapped" />
-              </DataTemplate>
-            </listsViewControls:BindableGridView.ItemTemplate>
-          </listsViewControls:BindableGridView>
+              <listsViewControls:BindableGridView.ItemTemplate>
+                <DataTemplate>
+                  <controls:LookItemControl Look="{Binding}" Tapped="LookItem_OnTapped" />
+                </DataTemplate>
+              </listsViewControls:BindableGridView.ItemTemplate>
+            </listsViewControls:BindableGridView>
+          </ScrollViewer>
           <TextBlock
             Text ="{Binding Resources.Editor_ClickPlusToAddLook, 
             Source={StaticResource LocalizedStrings}}"
@@ -87,17 +89,20 @@
       <PivotItem Name="PivotSounds" Margin="10 -10 0 0"
                  Header="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
-          <listsViewControls:BindableGridView x:Name="ListViewSounds"
+          <ScrollViewer VerticalScrollMode="Enabled">
+            <listsViewControls:BindableGridView x:Name="ListViewSounds"
             ItemsSource="{Binding Sounds}"
             BindableSelectedItems="{Binding SelectedSounds, Mode=TwoWay}"
             CanReorderItems="True" AllowDrop="True" SelectionMode="None">
-            <listsViewControls:BindableGridView.ItemTemplate>
-              <DataTemplate>
-                <controls:SoundItemControl Sound="{Binding}" Tapped="SoundItem_OnTapped" />
-              </DataTemplate>
-            </listsViewControls:BindableGridView.ItemTemplate>
-          </listsViewControls:BindableGridView>
-
+              <listsViewControls:BindableGridView.ItemTemplate>
+                <DataTemplate>
+                  <controls:SoundItemControl Sound="{Binding}"
+                    Group="{Binding ElementName=PlayPauseButtonGroupSounds}"
+                    RightTapped="SoundItem_OnTapped" />
+                </DataTemplate>
+              </listsViewControls:BindableGridView.ItemTemplate>
+            </listsViewControls:BindableGridView>
+          </ScrollViewer>
           <TextBlock
               Text ="{Binding Resources.Editor_ClickPlusToAddSound, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsSoundsEmpty, Converter={StaticResource BoolVisibilityConverter}}"

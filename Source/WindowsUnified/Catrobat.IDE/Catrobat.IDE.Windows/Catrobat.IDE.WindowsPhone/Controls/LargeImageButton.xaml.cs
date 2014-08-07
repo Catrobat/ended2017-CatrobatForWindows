@@ -10,10 +10,8 @@ using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -125,8 +123,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         {
             var element = (FrameworkElement)sender;
 
-            if (element.ActualHeight > ScrollViewerText.ActualHeight ||
-                element.ActualWidth > ScrollViewerText.ActualWidth - 10)
+            if (element.ActualHeight > ScrollViewerText.ActualHeight - 10 ||
+                element.ActualWidth > ScrollViewerText.ActualWidth - 20)
             {
                 TextBlockTextRight.FontSize *= 0.9;
             }

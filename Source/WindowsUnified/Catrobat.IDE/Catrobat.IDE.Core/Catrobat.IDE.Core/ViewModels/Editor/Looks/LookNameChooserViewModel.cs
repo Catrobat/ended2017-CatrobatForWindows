@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
                 new ImageSizeEntry {Size = ImageSize.FullSize}
             };
 
-        private string _lookName = AppResources.Editor_Image;
+        private string _lookName = "";
         private Sprite _receivedSelectedSprite;
         private ImageDimension _dimension;
         private ImageSizeEntry _selectedSize;

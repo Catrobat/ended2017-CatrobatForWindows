@@ -15,20 +15,19 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sounds
         public SoundNameChooserView()
         {
             InitializeComponent();
+            Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            TextBoxSoundName.Focus(FocusState.Keyboard);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //TextBoxSoundName.Focus(FocusState.Keyboard);
-            //TextBoxSoundName.SelectAll();
-
+            TextBoxSoundName.Focus(FocusState.Keyboard);
             base.OnNavigatedTo(e);
         }
-
-        //protected override void OnNavigatedFrom(NavigationEventArgs e)
-        //{
-        //    _viewModel.GoBackCommand.Execute(null);
-        //}
 
         private void TextBoxSoundName_OnTextChanged(object sender, TextChangedEventArgs e)
         {

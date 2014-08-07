@@ -8,7 +8,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Looks
     public partial class ChangeLookView
     {
         private readonly ChangeLookViewModel _viewModel = 
-            (ServiceLocator.ViewModelLocator).ChangeLookViewModel;
+            ServiceLocator.ViewModelLocator.ChangeLookViewModel;
         
 
         public ChangeLookView()

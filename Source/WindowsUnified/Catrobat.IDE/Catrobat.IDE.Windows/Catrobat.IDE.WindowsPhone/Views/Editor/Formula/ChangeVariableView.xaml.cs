@@ -18,11 +18,20 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
         {
             InitializeComponent();
 
-            ServiceLocator.DispatcherService.RunOnMainThread(() =>
-            {
-                //TextBoxVariableName.Focus(FocusState.Keyboard);
-                TextBoxVariableName.SelectAll();
-            });
+            Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            TextBoxVariableName.SelectAll();
+            TextBoxVariableName.Focus(FocusState.Keyboard);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            TextBoxVariableName.SelectAll();
+            TextBoxVariableName.Focus(FocusState.Keyboard);
+            base.OnNavigatedTo(e);
         }
 
         private void TextBoxVariableName_OnTextChanged(object sender, TextChangedEventArgs e)

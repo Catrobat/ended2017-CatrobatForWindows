@@ -23,18 +23,20 @@
         </TextBlock>
       </Grid>
 
-      <listsViewControls:BindableGridView x:Name="ListViewSprites" 
-        Grid.Row="1" Margin="10 0 10 0"
-        ItemsSource="{Binding CurrentProject.Sprites}"
-        BindableSelectedItems="{Binding SelectedSprites, Mode=TwoWay}"
-        CanReorderItems="True" AllowDrop="True" SelectionMode="None">
-        <listsViewControls:BindableGridView.ItemTemplate>
-          <DataTemplate>
-            <controls:SpriteItemControl Sprite="{Binding}"
-              Tapped="SpriteItem_OnTapped" />
-          </DataTemplate>
-        </listsViewControls:BindableGridView.ItemTemplate>
+      <ScrollViewer x:Name="ScrollViewerSprites" Grid.Row="1" VerticalScrollMode="Enabled">
+        <listsViewControls:BindableGridView x:Name="ListViewSprites" 
+            Margin="10 0 10 0"
+            ItemsSource="{Binding CurrentProject.Sprites}"
+            BindableSelectedItems="{Binding SelectedSprites, Mode=TwoWay}"
+            CanReorderItems="False" AllowDrop="True" SelectionMode="None">
+          <listsViewControls:BindableGridView.ItemTemplate>
+            <DataTemplate>
+              <controls:SpriteItemControl Sprite="{Binding}"
+                  Tapped="SpriteItem_OnTapped" />
+            </DataTemplate>
+          </listsViewControls:BindableGridView.ItemTemplate>
         </listsViewControls:BindableGridView>
+      </ScrollViewer>
 
       <TextBlock Grid.Row="1"
               Text ="{Binding Resources.Editor_ClickPlusToAddSprite, Source={StaticResource LocalizedStrings}}"
@@ -45,7 +47,7 @@
               TextAlignment="Center"
               VerticalAlignment="Center"
               HorizontalAlignment="Center" />
-      
+
     </Grid>
   </Grid>
   <Page.BottomAppBar>
