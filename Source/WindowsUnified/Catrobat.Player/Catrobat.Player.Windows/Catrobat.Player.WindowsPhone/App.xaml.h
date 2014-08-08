@@ -11,7 +11,7 @@
 
 #include "App.g.h"
 #include "Player.xaml.h"
-#include "Test01.xaml.h"
+//#include "Test01.xaml.h"
 
 namespace Catrobat_Player
 {

@@ -25,20 +25,26 @@ using namespace Microsoft::WRL;
 //using namespace Windows::Phone::Input::Interop;
 using namespace Windows::Graphics::Display;
 using namespace Windows::System::Threading;
+using namespace Platform;
+
 
 namespace PhoneDirect3DXamlAppComponent
 {
     //--------------------------------------------------------------------------------------
 
-    Direct3DBackground::Direct3DBackground(Windows::UI::Core::CoreWindow^ coreWindow) :
+	Direct3DBackground::Direct3DBackground(Windows::UI::Core::CoreWindow^ coreWindow, Windows::UI::Xaml::Controls::SwapChainPanel^ panel) :
         m_coreWindow(coreWindow),
 		m_renderLoopWorker(nullptr), 
 		m_initialized(false), 
-        m_timer(ref new BasicTimer())
+        m_timer(ref new BasicTimer()), 
+		m_swapChainPanel(panel)
     {
         ProjectDaemon::Instance()->ReInit();
 
 		m_eventController = EventControllerXaml::Create(m_coreWindow, m_swapChainPanel->Dispatcher);
+
+		m_deviceResources = std::make_shared<DX::DeviceResources>();
+		m_deviceResources->SetSwapChainPanel(panel);
     }
 
     //--------------------------------------------------------------------------------------
@@ -90,8 +96,11 @@ namespace PhoneDirect3DXamlAppComponent
                 //critical_section::scoped_lock lock(m_criticalSection);
                 //Update();
 				
-                m_renderer->Render();
+                //m_renderer->Render();
                 //m_deviceResources->Present();
+
+				//Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
+				Draw(GetDevice(), GetContext(), nullptr /* GetRenderTargetView() */ );
 
                 //if (!m_haveFocus || (m_updateState == UpdateEngineState::TooSmall))
                 //{
@@ -230,53 +239,53 @@ namespace PhoneDirect3DXamlAppComponent
 
     //--------------------------------------------------------------------------------------
 
-    //HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
-    //{
-    //    m_context = context;
+    HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
+    {
+        //m_context = context;
 
-    //    if (!ProjectDaemon::Instance()->FinishedLoading() || m_renderingErrorOccured)
-    //    {
-    //        // Render Loading Screen
-    //        m_renderer->UpdateDevice(device, context, renderTargetView);
-    //        m_renderer->Render();
-    //    }
-    //    else
-    //    {
-    //        // Render Project
-    //        try
-    //        {
-    //            m_projectRenderer->UpdateDevice(device, context, renderTargetView);
-    //        }
-    //        catch (PlayerException *e)
-    //        {
-    //            m_renderingErrorOccured = true;
-    //            ProjectDaemon::Instance()->AddDebug(L"Error Updating Device.");
-    //        }
-    //        catch (Platform::Exception^ e)
-    //        {
-    //            m_renderingErrorOccured = true;
-    //            ProjectDaemon::Instance()->AddDebug(L"Error Updating Device.");
-    //        }
+        if (!ProjectDaemon::Instance()->FinishedLoading() || m_renderingErrorOccured)
+        {
+            // Render Loading Screen
+            m_renderer->UpdateDevice(device, context, renderTargetView);
+            m_renderer->Render();
+        }
+        else
+        {
+            // Render Project
+            try
+            {
+                m_projectRenderer->UpdateDevice(device, context, renderTargetView);
+            }
+            catch (PlayerException *e)
+            {
+                m_renderingErrorOccured = true;
+                ProjectDaemon::Instance()->AddDebug(L"Error Updating Device.");
+            }
+            catch (Platform::Exception^ e)
+            {
+                m_renderingErrorOccured = true;
+                ProjectDaemon::Instance()->AddDebug(L"Error Updating Device.");
+            }
 
-    //        try
-    //        {
-    //            m_projectRenderer->Render();
-    //        }
-    //        catch (PlayerException *e)
-    //        {
-    //            m_renderingErrorOccured = true;
-    //            ProjectDaemon::Instance()->AddDebug(L"Rendering not possible.");
-    //        }
-    //        catch (Platform::Exception^ e)
-    //        {
-    //            m_renderingErrorOccured = true;
-    //            ProjectDaemon::Instance()->AddDebug(L"Rendering not possible.");
-    //        }
-    //    }
+            try
+            {
+                m_projectRenderer->Render();
+            }
+            catch (PlayerException *e)
+            {
+                m_renderingErrorOccured = true;
+                ProjectDaemon::Instance()->AddDebug(L"Rendering not possible.");
+            }
+            catch (Platform::Exception^ e)
+            {
+                m_renderingErrorOccured = true;
+                ProjectDaemon::Instance()->AddDebug(L"Rendering not possible.");
+            }
+        }
 
-    //    RequestAdditionalFrame();
+        RequestAdditionalFrame();
 
-    //    return S_OK;
-    //}
+        return S_OK;
+    }
 
 }

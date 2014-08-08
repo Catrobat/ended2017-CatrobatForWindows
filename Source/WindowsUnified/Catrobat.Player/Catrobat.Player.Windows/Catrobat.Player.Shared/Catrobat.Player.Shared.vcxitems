@@ -44,6 +44,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CostumeBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)DDSLoader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)DeviceInformation.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DeviceResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DContentProvider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)EventController.cpp" />
@@ -127,6 +128,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CostumeBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DDSLoader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DeviceInformation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DContentProvider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DirectXHelper.h" />
