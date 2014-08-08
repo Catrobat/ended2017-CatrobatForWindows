@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Data")]
         public async Task ReflectionWriteReadTest1()
         {
             const string savePath = "/ReflectionWriteReadTest1/project.xml";

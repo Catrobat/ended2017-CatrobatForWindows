@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Data")]
         public void GetLookObjectTest()
         {
             var program = CreateProgram();
@@ -45,7 +45,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Looks.Looks[0], setLookBrick.Look);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetSoundObjectTest()
         {
             var program = CreateProgram();
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Sounds.Sounds[0], playSoundBrick.Sound);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetSpriteObjectTest()
         {
             var program = CreateProgram().ToModel();
@@ -68,7 +68,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(program.Sprites[1], pointToBrick.Target);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetUserVariableObjectTest()
         {
             var program = CreateProgram();
@@ -87,7 +87,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(program.VariableList.ProgramVariableList.UserVariables[0], changeVariableBrick.UserVariable);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetForeverBrickObjectTest()
         {
             var program = CreateProgram();
@@ -98,7 +98,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[3], foreverBrick.LoopBeginBrick);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetRepeatBrickObjectTest()
         {
             var program = CreateProgram();
@@ -109,7 +109,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[5], repeatBrick.LoopBeginBrick);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetForeverLoopEndBrickObjectTest()
         {
             var program = CreateProgram();
@@ -120,7 +120,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[4], foreverBrick.LoopEndBrick);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetRepeatLoopEndBrickObjectTest()
         {
             var program = CreateProgram();
@@ -131,7 +131,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[6], repeatBrick.LoopEndBrick);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetLoopEndBrickObjectTest()
         {
             var program = CreateProgram();
@@ -142,7 +142,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[3], loopEndBrick.LoopBeginBrick);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetIfLogicBeginBrickObjectTest()
         {
             var program = CreateProgram();
@@ -160,7 +160,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[5], ifLogicBeginBrick2.IfLogicEndBrick);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetIfLogicElseBrickObjectTest()
         {
             var program = CreateProgram();
@@ -178,7 +178,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[7], ifLogicElseBrick2.IfLogicEndBrick);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetIfLogicEndBrickObjectTest()
         {
             var program = CreateProgram();
@@ -197,7 +197,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetLookReferenceStringTest()
         {
             var program = CreateProgram();
@@ -212,7 +212,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../../../../lookList/look[1]", reference);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetSoundReferenceStringTest()
         {
             var program = CreateProgram();
@@ -227,7 +227,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../../../../soundList/sound[1]", reference);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetSpriteReferenceStringTest()
         {
             var program = CreateProgram();
@@ -242,7 +242,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../../../../../object[2]", reference);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetVariableReferenceStringTest()
         {
             var program = CreateProgram();
@@ -267,7 +267,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../../../../../../variables/programVariableList/userVariable[1]", reference);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetForeverBrickReferenceStringTest()
         {
             var program = CreateProgram();
@@ -282,7 +282,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../foreverBrick[1]", reference);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetRepeatBrickReferenceStringTest()
         {
             var program = CreateProgram();
@@ -297,7 +297,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../repeatBrick[1]", reference);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetForeverLoopEndBrickReferenceStringTest()
         {
             var program = CreateProgram();
@@ -312,7 +312,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../loopEndlessBrick[1]", reference);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetRepeatLoopEndBrickReferenceStringTest()
         {
             var program = CreateProgram();
@@ -327,7 +327,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../loopEndBrick[1]", reference);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetIfLogicBeginBrickReferenceStringTest()
         {
             var program = CreateProgram();
@@ -361,7 +361,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../ifLogicBeginBrick[1]", reference);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetIfLogicElseBrickReferenceStringTest()
         {
             var program = CreateProgram();
@@ -395,7 +395,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../ifLogicElseBrick[2]", reference);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetIfLogicEndBrickReferenceStringTest()
         {
             var program = CreateProgram();
@@ -428,43 +428,6 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             reference = ReferenceHelper.GetReferenceString(ifLogicEndBrickReference);
             Assert.AreEqual("../../ifLogicEndBrick[2]", reference);
         }
-
-
-        //[TestMethod] // Test for Bug 511
-        //public void VariableReferenceTest()
-        //{
-        //    var programGenerator = new ProgramGeneratorTestSimple();
-
-        //    var program = programGenerator.GenerateProgram();
-
-        //    var globatVariable = new GlobalVariable { Name = "GlobalVariable1" };
-        //    var localVariable = new LocalVariable { Name = "LocalVariable1" };
-        //    program.GlobalVariables.Add(globatVariable);
-        //    program.Sprites[0].LocalVariables.Add(localVariable);
-
-        //    var startScript = new StartScript();
-        //    var localSetVariableBrick = new SetVariableBrick { Value = new FormulaNodeNumber { Value = 0.0 }, Variable = localVariable };
-        //    var globalSetVariableBrick = new SetVariableBrick { Value = new FormulaNodeNumber { Value = 0.0 }, Variable = globatVariable };
-        //    startScript.Bricks.Add(localSetVariableBrick);
-        //    startScript.Bricks.Add(globalSetVariableBrick);
-
-        //    program.Sprites[0].Scripts.Add(startScript);
-
-
-        //    var xmlString = program.ToXmlObject().ToXmlString();
-
-        //    var document = XDocument.Load(new StringReader(xmlString));
-
-        //    var localVariableElement = document.Descendants("userVariable").ElementAt(0);
-        //    var localVariablePath = localVariableElement.Attributes("reference").ElementAt(0).Value;
-        //    Assert.AreEqual("../../../../../../../variables/objectVariableList/entry[1]/list/userVariable[1]", localVariablePath);
-
-
-        //    var globalVariableElement = document.Descendants("userVariable").ElementAt(1);
-        //    var globalVariablePath = globalVariableElement.Attributes("reference").ElementAt(0).Value;
-        //    Assert.AreEqual("../../../../../../../variables/programVariableList/userVariable[1]", globalVariablePath);
-
-        //}
 
         private static XmlProgram CreateProgram()
         {

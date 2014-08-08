@@ -112,8 +112,6 @@
     <Compile Include="Services\Storage\ResourcesTest.cs" />
     <Compile Include="Services\Storage\StorageFactoryTest.cs" />
     <Compile Include="Services\Storage\StorageTest.cs" />
-    <Compile Include="Tests\Data\CatrobatContextTests.cs" />
-    <Compile Include="Tests\Data\CopyTests.cs" />
     <Compile Include="Tests\Data\DataDeletingTests.cs" />
     <Compile Include="Tests\Data\DataEqualsTests.cs" />
     <Compile Include="Tests\Data\DataReflectionTests.cs" />
@@ -128,6 +126,7 @@
     <Compile Include="Tests\Data\VersionConverter\VersionConverter091ToWin091Tests.cs" />
     <Compile Include="Tests\Data\XPathHelperTests.cs" />
     <Compile Include="Tests\Misc\CloneableTests.cs" />
+    <Compile Include="Tests\Services\Common\ContextServiceTests.cs" />
     <Compile Include="Tests\UI\Converters\BoolPlayButtonStateConverterTests.cs" />
     <Compile Include="Tests\UI\Converters\UnixTimeDateTimeConverterTests.cs" />
     <Compile Include="Tests\UI\Converters\StringVisibilityConverterTests.cs" />
@@ -168,7 +167,7 @@
     <Compile Include="Tests\Misc\FileNameGeneratorTests.cs" />
     <Compile Include="Tests\Misc\LocalizationTests.cs" />
     <Compile Include="Tests\Services\Common\WebCommunicationTests.cs" />
-    <Compile Include="Tests\Services\Common\ZipTests.cs" />
+    <Compile Include="Tests\Services\Common\ZipServiceTests.cs" />
     <Compile Include="Tests\Services\Storage\StorageTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Actions\ScriptBrickCategoryViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Looks\ChangeLookViewModelTests.cs" />

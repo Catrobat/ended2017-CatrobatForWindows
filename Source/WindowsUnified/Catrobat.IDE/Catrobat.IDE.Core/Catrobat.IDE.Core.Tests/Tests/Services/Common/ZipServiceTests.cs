@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
 {
     [TestClass]
-    public class ZipTests
+    public class ZipServiceTests
     {
         private const string ThumbnailExtension = "_thumb#";
 

@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using System;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
@@ -23,14 +24,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Actions
         public void AddNewScriptBrickActionTest()
         {
             //TODO
-            Assert.AreEqual(0, "test not implemented");
+            throw new NotImplementedException("Test not yet implemented");
         }
 
         [TestMethod, TestCategory("ViewModels.Editor"), TestCategory("ExcludeGated")]
         public void OnLoadBrickViewActionTest()
         {
             //TODO
-            Assert.AreEqual(0, "test not implemented");
+            throw new NotImplementedException("Test not yet implemented");
         }
         
         [TestMethod, TestCategory("ViewModels.Editor")]

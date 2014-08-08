@@ -1,5 +1,6 @@
 ﻿using System.IO.IsolatedStorage;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Tests.Services.Storage;
 
@@ -45,6 +46,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
             ServiceLocator.Register<PlatformInformationHelperTests>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ResourceLoaderFactoryTest>(TypeCreationMode.Lazy);
             ServiceLocator.Register<StorageFactoryTest>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ContextService>(TypeCreationMode.Lazy);
 
             using (var storage = StorageSystem.GetStorage())
             {

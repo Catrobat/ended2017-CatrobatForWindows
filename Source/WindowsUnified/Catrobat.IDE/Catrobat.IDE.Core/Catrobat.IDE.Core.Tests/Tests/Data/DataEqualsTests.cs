@@ -15,9 +15,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-
-        // TODO: test has timing problems that are probably related to image loading
-        [TestMethod] // 
+        [TestMethod, TestCategory("Data")]
         public void EqualsProjectTest()
         {
             ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection(42, DateTime.Now);

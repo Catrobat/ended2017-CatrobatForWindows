@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
             TestHelper.InitializeTests();
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_UpdateLookTest()
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -38,7 +38,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
             Assert.AreEqual(newLook, newLookBrick.Value);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_UpdateSoundTest()
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
             Assert.AreEqual(newSound, newPlaySoundBrick.Value);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_CopyVariableOnSpriteCopyTest()
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -91,7 +91,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
             Assert.AreSame(globalVariable, newBrick2.Variable);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_UpdateLoopBeginBrickTest()
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -122,7 +122,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
             Assert.AreEqual(newBlockBeginBrick, newBrick2.Begin);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_UpdateBlockEndBrickTest()
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -153,7 +153,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
             Assert.AreEqual(newEndBlockBrick, newBrick2.End);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_UpdateIfBrickTest()
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -201,7 +201,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
             Assert.AreEqual(newIfBrick1, newEndIfBrick1.Begin);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_UpdateElseBrickTest()
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -249,7 +249,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
             Assert.AreEqual(newElseBrick1, newEndIfBrick1.Else);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_UpdateEndIfBrickTest()
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");

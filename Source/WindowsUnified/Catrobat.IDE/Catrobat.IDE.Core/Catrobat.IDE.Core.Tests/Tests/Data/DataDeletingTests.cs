@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Data")]
         public async Task DeleteSprite()
         {
             const string programName = "DataDeletingTests.DeleteSprite";

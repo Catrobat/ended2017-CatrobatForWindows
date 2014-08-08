@@ -31,6 +31,11 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
             return null;
         }
 
+        public Task DownloadAsyncAlternativ(string downloadUrl, string projectName)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<JSONStatusResponse> CheckTokenAsync(string username, 
             string token, string language = "en")
         {

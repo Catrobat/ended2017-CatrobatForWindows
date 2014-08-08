@@ -14,56 +14,56 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void ObjectReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_ObjectReferences");
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void SoundReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_SoundReferences");
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void LookReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_LookReferences");
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GlobalVariableReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_GlobalVariableReferences");
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void LocalVariableReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_LocalVariableReferences");
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void PointToBrickReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_PointTo");
         }
 
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void ForeverBrickReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_Forever");
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void RepeatBrickReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_Repeat");
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void IfLoginBeginBrickReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_IfLogicBegin");
