@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Tests.Misc;
 using Catrobat.IDE.Core.Tests.SampleData;
+using Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Looks;
@@ -16,7 +17,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
     [TestClass]
     public class ReferenceHelperTests
     {
-        public static ITestProgramGenerator ProjectGenerator = new ProjectGeneratorForReferenceHelperTests();
+        public static ITestProgramGenerator ProjectGenerator = new ProgramGeneratorForReferenceHelperTests();
 
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)

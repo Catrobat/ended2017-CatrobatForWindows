@@ -4,9 +4,9 @@ using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Models.Scripts;
 
-namespace Catrobat.IDE.Core.Tests.Misc
+namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
 {
-    public class ProjectGeneratorForScriptBrickCollectionTests : ITestProgramGenerator
+    public class ProgramGeneratorForScriptBrickCollectionTests : ITestProgramGenerator
     {
         public Program GenerateProgram()
         {

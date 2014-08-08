@@ -7,6 +7,7 @@ using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Tests.Misc;
+using Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators;
 using Catrobat.IDE.Core.Tests.Services.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -29,7 +30,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             const string savePath1 = "/CopyTest1/project.xml";
             const string savePath2 = "/CopyTest1/project.xml";
 
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
             var project1 = projectgenerator.GenerateProgram();
 
             var project2 = new Program();

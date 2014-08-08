@@ -11,21 +11,21 @@ using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities.Helpers;
 
-namespace Catrobat.IDE.Core.Tests.Misc
+namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
 {
-    public class ProjectGeneratorReflection : ITestProgramGenerator
+    public class ProgramGeneratorReflection : ITestProgramGenerator
     {
         private Random _random;
         private readonly int? _seed;
         private readonly DateTime? _now;
 
-        public ProjectGeneratorReflection()
+        public ProgramGeneratorReflection()
         {
             _seed = null;
             _now = null;
         }
 
-        public ProjectGeneratorReflection(int seed, DateTime now)
+        public ProgramGeneratorReflection(int seed, DateTime now)
         {
             _seed = seed;
             _now = now;

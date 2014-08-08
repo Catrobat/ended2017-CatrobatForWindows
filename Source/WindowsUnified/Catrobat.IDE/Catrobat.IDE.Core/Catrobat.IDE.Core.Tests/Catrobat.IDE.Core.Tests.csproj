@@ -89,9 +89,9 @@
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="SampleData\ProgramGenerators\ITestProgramGenerator.cs" />
     <Compile Include="Misc\PlatformInformationHelperTests.cs" />
-    <Compile Include="SampleData\ProgramGenerators\ProjectGeneratorForReferenceHelperTests.cs" />
-    <Compile Include="SampleData\ProgramGenerators\ProjectGeneratorForScriptBrickCollectionTests.cs" />
-    <Compile Include="SampleData\ProgramGenerators\ProjectGeneratorReflection.cs" />
+    <Compile Include="SampleData\ProgramGenerators\ProgramGeneratorForReferenceHelperTests.cs" />
+    <Compile Include="SampleData\ProgramGenerators\ProgramGeneratorForScriptBrickCollectionTests.cs" />
+    <Compile Include="SampleData\ProgramGenerators\ProgramGeneratorReflection.cs" />
     <Compile Include="Misc\Storage\BasePathHelper.cs" />
     <Compile Include="Misc\TestHelper.cs" />
     <Compile Include="Misc\XmlDocumentComparer.cs" />
@@ -204,7 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="SampleData\SampleProjects\default.catroid" />
+    <Content Include="SampleData\SampleProjects\default.catroid" />
     <None Include="SampleData\SampleProjects\test.catroid" />
   </ItemGroup>
   <ItemGroup>

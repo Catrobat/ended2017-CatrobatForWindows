@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Tests.Misc;
@@ -32,7 +33,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
     [TestMethod, TestCategory("ExcludeGated")]
     public async Task StoreLocalSettingsTest()
     {
-        Assert.AreEqual(0, "ContextServiceTest has to be implemented");
+        throw new NotImplementedException("ContextServiceTest has to be implemented");
         var localSettings = new LocalSettings
             {
                 CurrentLanguageString = "de-DE",

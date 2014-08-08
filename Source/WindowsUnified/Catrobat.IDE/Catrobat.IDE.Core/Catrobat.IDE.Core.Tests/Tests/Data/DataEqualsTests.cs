@@ -1,6 +1,7 @@
 ﻿using System;
 using Catrobat.IDE.Core.Tests.Extensions;
 using Catrobat.IDE.Core.Tests.Misc;
+using Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Core.Tests.Tests.Data
@@ -19,7 +20,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         [TestMethod] // 
         public void EqualsProjectTest()
         {
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection(42, DateTime.Now);
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection(42, DateTime.Now);
             var project1 = projectgenerator.GenerateProgram();
             var project2 = projectgenerator.GenerateProgram();
 

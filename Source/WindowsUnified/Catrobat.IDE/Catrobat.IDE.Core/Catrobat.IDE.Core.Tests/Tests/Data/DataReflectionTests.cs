@@ -2,6 +2,7 @@
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Tests.Extensions;
 using Catrobat.IDE.Core.Tests.Misc;
+using Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators;
 using Catrobat.IDE.Core.Tests.Services.Storage;
 using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
@@ -23,7 +24,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         {
             const string savePath = "/ReflectionWriteReadTest1/project.xml";
 
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
             var project1 = projectgenerator.GenerateProgram();
 
             await project1.Save(savePath);

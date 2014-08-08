@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Tests.Misc;
+using Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Core.Tests.Tests.Data
@@ -28,7 +29,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
                     StorageConstants.ProgramsPath, programName));
             }
 
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
             var project = projectgenerator.GenerateProgram();
             await project.SetProgramNameAndRenameDirectory(programName);
             // TODO: write dummy look files to disk

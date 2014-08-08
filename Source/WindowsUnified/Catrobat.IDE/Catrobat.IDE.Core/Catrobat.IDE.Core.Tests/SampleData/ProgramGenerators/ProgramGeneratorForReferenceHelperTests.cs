@@ -3,10 +3,11 @@ using System.Collections.ObjectModel;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Models.Scripts;
+using Catrobat.IDE.Core.Tests.Misc;
 
-namespace Catrobat.IDE.Core.Tests.Misc
+namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
 {
-    public class ProjectGeneratorForReferenceHelperTests : ITestProgramGenerator
+    public class ProgramGeneratorForReferenceHelperTests : ITestProgramGenerator
     {
 
         public Program GenerateProgram()

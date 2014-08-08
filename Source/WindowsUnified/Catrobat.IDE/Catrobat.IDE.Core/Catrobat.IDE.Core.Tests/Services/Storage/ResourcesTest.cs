@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
                     projectPath = "Core/";
                     break;
                 case ResourceScope.TestCommon:
-                    projectPath = "Catrobat.IDE.Core/Catrobat.IDE.Core.Tests";
+                    projectPath = "Catrobat.IDE.Core\\Catrobat.IDE.Core.Tests";
 
                     var path = Path.Combine(basePath, projectPath, "SampleData");
                     // testing on TFS

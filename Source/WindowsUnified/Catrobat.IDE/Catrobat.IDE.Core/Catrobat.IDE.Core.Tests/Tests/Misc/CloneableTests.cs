@@ -3,6 +3,7 @@ using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Tests.Misc;
 using Catrobat.IDE.Core.Tests.SampleData;
+using Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Core.Tests.Tests.Misc
@@ -10,7 +11,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
     [TestClass]
     public class CloneableTests
     {
-        public static ITestProgramGenerator ProjectGenerator = new ProjectGeneratorForReferenceHelperTests();
+        public static ITestProgramGenerator ProjectGenerator = new ProgramGeneratorForReferenceHelperTests();
 
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
