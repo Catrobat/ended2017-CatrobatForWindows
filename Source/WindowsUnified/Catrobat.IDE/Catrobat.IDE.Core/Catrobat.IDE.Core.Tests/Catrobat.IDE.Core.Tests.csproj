@@ -122,9 +122,11 @@
     <Compile Include="Tests\Data\ReferenceHelperTests.cs" />
     <Compile Include="Tests\Data\ScriptBrickCollectionTests.cs" />
     <Compile Include="Tests\Data\VariableHelperTests.cs" />
-    <Compile Include="Tests\Data\VersionConverter091ToWin091PracticalTests.cs" />
-    <Compile Include="Tests\Data\VersionConverter092To091.cs" />
-    <Compile Include="Tests\Data\VersionConverter091ToWin091Tests.cs" />
+    <Compile Include="Tests\Data\VersionConverter\VersionConverter091To092.cs" />
+    <Compile Include="Tests\Data\VersionConverter\VersionConverter091ToWin091PracticalTests.cs" />
+    <Compile Include="Tests\Data\VersionConverter\VersionConverterWin091To091Tests.cs" />
+    <Compile Include="Tests\Data\VersionConverter\VersionConverter092To091.cs" />
+    <Compile Include="Tests\Data\VersionConverter\VersionConverter091ToWin091Tests.cs" />
     <Compile Include="Tests\Data\XPathHelperTests.cs" />
     <Compile Include="Tests\Misc\CloneableTests.cs" />
     <Compile Include="Tests\UI\Converters\BoolPlayButtonStateConverterTests.cs" />

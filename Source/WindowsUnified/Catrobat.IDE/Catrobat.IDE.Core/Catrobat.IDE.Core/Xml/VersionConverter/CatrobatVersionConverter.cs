@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -104,7 +105,7 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
             var error = VersionConverterStatus.NoError;
             var versionPair = new CatrobatVersionPair(inputVersion, outputVersion);
 
-            if (double.Parse(inputVersion) < Constants.MinimumCodeVersion)
+            if (double.Parse(inputVersion, NumberStyles.Any) < Constants.MinimumCodeVersion)
             {
                 return VersionConverterStatus.VersionTooOld;
             }
