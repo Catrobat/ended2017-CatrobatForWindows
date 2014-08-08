@@ -50,6 +50,13 @@ namespace PhoneDirect3DXamlAppComponent
 
 	//--------------------------------------------------------------------------------------
 
+	/*void Direct3DBackground::Render()
+	{
+		StartRenderLoop();
+	}*/
+
+	//--------------------------------------------------------------------------------------
+
 	void Direct3DBackground::SetSwapChainPanel(Windows::UI::Xaml::Controls::SwapChainPanel^ panel)
 	{
 		m_swapChainPanel = panel;
@@ -82,6 +89,7 @@ namespace PhoneDirect3DXamlAppComponent
             {
                 //critical_section::scoped_lock lock(m_criticalSection);
                 //Update();
+				
                 m_renderer->Render();
                 //m_deviceResources->Present();
 

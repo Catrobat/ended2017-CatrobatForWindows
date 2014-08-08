@@ -240,6 +240,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ExceptionLogger.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Test01.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageDaemon.cpp">
@@ -472,6 +473,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ExceptionLogger.cpp">
       <Filter>Exceptions</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Test01.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Constants">
@@ -527,9 +529,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml" />
+    <Page Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml" />
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml" />
   </ItemGroup>
 </Project>

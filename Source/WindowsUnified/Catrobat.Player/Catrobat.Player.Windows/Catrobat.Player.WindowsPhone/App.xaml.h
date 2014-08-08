@@ -5,8 +5,13 @@
 
 #pragma once
 
+#if defined(_DEBUG)
+#define DISABLE_XAML_GENERATED_BREAK_ON_UNHANDLED_EXCEPTION 1
+#endif
+
 #include "App.g.h"
 #include "Player.xaml.h"
+#include "Test01.xaml.h"
 
 namespace Catrobat_Player
 {
@@ -37,5 +42,6 @@ namespace Catrobat_Player
             );
 
         Player^ m_mainPage;
+		//Test01^ m_mainPage;
     };
 }

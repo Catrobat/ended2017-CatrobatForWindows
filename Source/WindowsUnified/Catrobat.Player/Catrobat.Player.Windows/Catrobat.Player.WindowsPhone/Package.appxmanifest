@@ -24,23 +24,6 @@
           <m3:Rotation Preference="portrait" />
         </m3:InitialRotationPreference>
       </m3:VisualElements>
-      <Extensions>
-        <Extension Category="windows.fileOpenPicker">
-          <FileOpenPicker>
-            <SupportedFileTypes>
-              <FileType>.catrobat_play</FileType>
-            </SupportedFileTypes>
-          </FileOpenPicker>
-        </Extension>
-        <Extension Category="windows.fileTypeAssociation">
-          <FileTypeAssociation Name="catrobat_play">
-            <Logo>Assets\Tiles\FileSmall.png</Logo>
-            <SupportedFileTypes>
-              <FileType>.catrobat_play</FileType>
-            </SupportedFileTypes>
-          </FileTypeAssociation>
-        </Extension>
-      </Extensions>
     </Application>
   </Applications>
   <Capabilities>

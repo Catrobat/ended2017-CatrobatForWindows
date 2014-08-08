@@ -37,6 +37,7 @@ App::App()
 void App::OnLaunched(_In_ LaunchActivatedEventArgs^ /* args */)
 {
     m_mainPage = ref new Player();
+	//m_mainPage = ref new Test01();
 
     Window::Current->Content = m_mainPage;
     Window::Current->Activate();

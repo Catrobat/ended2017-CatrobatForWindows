@@ -8,6 +8,7 @@
 #include "WhenScript.h"
 #include "EventControllerXaml.h"
 //#include <DrawingSurfaceNative.h>
+#include "Direct3DBase.h"
 
 namespace PhoneDirect3DXamlAppComponent
 {
@@ -15,7 +16,7 @@ namespace PhoneDirect3DXamlAppComponent
 public delegate void RequestAdditionalFrameHandler();
 
 //[Windows::Foundation::Metadata::WebHostHidden]
-class Direct3DBackground 
+ref class Direct3DBackground //: public Direct3DBase
 {
 public:
     Direct3DBackground(Windows::UI::Core::CoreWindow^ coreWindow);
@@ -24,6 +25,7 @@ public:
     void StopRenderLoop();
     void Suspend();
     void Resume();
+	//virtual void Render() override;
 
 	void SetSwapChainPanel(Windows::UI::Xaml::Controls::SwapChainPanel^ panel);
 	Windows::UI::Xaml::Controls::SwapChainPanel^ GetSwapChainPanel() const { return m_swapChainPanel; }
