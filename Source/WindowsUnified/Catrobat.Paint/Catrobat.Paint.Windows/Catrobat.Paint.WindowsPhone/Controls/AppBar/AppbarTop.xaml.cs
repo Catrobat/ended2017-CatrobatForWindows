@@ -40,8 +40,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                 btnUndo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnUndo_Click;
                 btnRedo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnRedo_Click;
                 btnSelectedColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColBtnSelectedColor_OnClick;
-                btnMoveScreen.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreen_OnClick;
-
+                //btnMoveScreen.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreen_OnClick;
+                ellipseTool.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
+                ellipseTool_Copy.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
                 btnUndo.IsEnabled = false;
                 btnRedo.IsEnabled = false;               
                 
@@ -72,33 +73,41 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                 button.Content = new BitmapImage(GetToolImageUri(ToolType.Brush));
             }*/
             BitmapIcon move_icon = new BitmapIcon();
+            move_icon.Height = 20;
+            move_icon.Width = 25;
+
+            ImageBrush img_front = new ImageBrush();
+            ImageBrush img_behind = new ImageBrush();
+            img_behind.ImageSource = new BitmapImage(
+                   new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_move.png", UriKind.Absolute));
            // move_icon.Opacity = 0.2;
             switch (tool.GetToolType())
             {
                 case ToolType.Brush:
-                    move_icon.UriSource = GetToolImageUri(ToolType.Brush);
-
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Brush));                  
                     break;
                 case ToolType.Eraser:
-                    move_icon.UriSource = GetToolImageUri(ToolType.Eraser);
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Eraser));
                     break;
                 case ToolType.Move:
-                    move_icon.UriSource = GetToolImageUri(ToolType.Move);
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Move));
+                    img_behind.ImageSource = new BitmapImage(
+                     GetToolImageUri(PocketPaintApplication.GetInstance().ToolWhileMoveTool.GetToolType()));
                     break;
                 case ToolType.Zoom:
-                    move_icon.UriSource = GetToolImageUri(ToolType.Zoom);
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Zoom));
                     break;
                 case ToolType.Pipette:
-                    move_icon.UriSource = GetToolImageUri(ToolType.Pipette);
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Pipette));
                     break;
                 case ToolType.Rotate:
-                    move_icon.UriSource = GetToolImageUri(ToolType.Rotate);
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Rotate));
                     break;
                 case ToolType.Line:
-                    move_icon.UriSource = GetToolImageUri(ToolType.Line);
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Line));
                     break;
                 case ToolType.Flip:
-                    move_icon.UriSource = GetToolImageUri(ToolType.Flip);
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Flip));
                     break;
                 default:
                     // TODO: BtnMoveScreen.ImageSource = null;
@@ -106,7 +115,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                     break;
             }
 
-            btnMoveScreen.Icon = move_icon;
+            ellipseTool.Opacity = 0.1;
+            
+            //ellipseTool.Visibility = Visibility.Collapsed;
+            //btnMoveScreen.Icon = move_icon;
+            ellipseTool.Fill = img_behind;
+            ellipseTool_Copy.Fill = img_front;
+            ellipseTool_Copy.Height = 20;
+            ellipseTool_Copy.Width = 25;
         }
 
         public void BtnSelectedColorVisible(bool enable)
@@ -162,6 +178,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
         {
             get { return btnUndo.IsEnabled; }
             set { btnUndo.IsEnabled = value; }
+        }
+
+        private void ellipseTool_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+
         } 
     }
 }
