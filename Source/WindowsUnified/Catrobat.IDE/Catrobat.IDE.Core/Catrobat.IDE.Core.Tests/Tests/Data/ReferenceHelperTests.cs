@@ -1,10 +1,18 @@
 ﻿using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
+using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.Tests.Misc;
 using Catrobat.IDE.Core.Tests.SampleData;
 using Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators;
 using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Looks;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
@@ -28,20 +36,21 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         [TestMethod]
         public void GetLookObjectTest()
         {
-            var project = ProjectGenerator.GenerateProgram();
+            var program = CreateProgram();
 
-            var sprite = project.Sprites[0];
-            var setLookBrick = sprite.Scripts[0].Bricks[0] as SetLookBrick;
+            var sprite = program.SpriteList.Sprites[0];
+            var setLookBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[0] as XmlSetLookBrick;
             
             Assert.IsNotNull(setLookBrick);
-            Assert.AreEqual(sprite.Looks[0], setLookBrick.Value);
+            Assert.AreEqual(sprite.Looks.Looks[0], setLookBrick.Look);
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetSoundObjectTest()
+        public void GetSoundObjectTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var sprite = project.SpriteList.Sprites[1];
+            var program = CreateProgram();
+
+            var sprite = program.SpriteList.Sprites[1];
             var playSoundBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[1] as XmlPlaySoundBrick;
 
             Assert.IsNotNull(playSoundBrick);
@@ -49,40 +58,40 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetSpriteObjectTest()
+        public void GetSpriteObjectTest()
         {
-            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
-            var sprite = project.Sprites[1];
+            var program = CreateProgram().ToModel();
+            var sprite = program.Sprites[1];
             var pointToBrick = sprite.Scripts[0].Bricks[2] as LookAtBrick;
 
             Assert.IsNotNull(pointToBrick);
-            Assert.AreEqual(project.Sprites[1], pointToBrick.Target);
+            Assert.AreEqual(program.Sprites[1], pointToBrick.Target);
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetUserVariableObjectTest()
+        public void GetUserVariableObjectTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var sprite1 = project.SpriteList.Sprites[0];
+            var program = CreateProgram();
+            var sprite1 = program.SpriteList.Sprites[0];
             var setVariableBrick = sprite1.Scripts.Scripts[0].Bricks.Bricks[1] as XmlSetVariableBrick;
 
-            var entries = project.VariableList.ObjectVariableList.ObjectVariableEntries;
+            var entries = program.VariableList.ObjectVariableList.ObjectVariableEntries;
 
             Assert.IsNotNull(setVariableBrick);
             Assert.AreEqual(entries[0].VariableList.UserVariables[0], setVariableBrick.UserVariable);
 
-            var sprite2 = project.SpriteList.Sprites[1];
-            var changeVariableBrick = sprite2.Scripts.Scripts[1].Bricks.Bricks[5] as XmlChangeVariableBrick;
+            var sprite2 = program.SpriteList.Sprites[1];
+            var changeVariableBrick = sprite2.Scripts.Scripts[1].Bricks.Bricks[1] as XmlChangeVariableBrick;
 
             Assert.IsNotNull(changeVariableBrick);
-            Assert.AreEqual(project.VariableList.ProgramVariableList.UserVariables[0], changeVariableBrick.UserVariable);
+            Assert.AreEqual(program.VariableList.ProgramVariableList.UserVariables[0], changeVariableBrick.UserVariable);
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetForeverBrickObjectTest()
+        public void GetForeverBrickObjectTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var sprite = project.SpriteList.Sprites[1];
+            var program = CreateProgram();
+            var sprite = program.SpriteList.Sprites[1];
             var foreverBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[4] as XmlForeverLoopEndBrick;
 
             Assert.IsNotNull(foreverBrick);
@@ -90,10 +99,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetRepeatBrickObjectTest()
+        public void GetRepeatBrickObjectTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var sprite = project.SpriteList.Sprites[1];
+            var program = CreateProgram();
+            var sprite = program.SpriteList.Sprites[1];
             var repeatBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[6] as XmlRepeatLoopEndBrick;
 
             Assert.IsNotNull(repeatBrick);
@@ -101,10 +110,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetForeverLoopEndBrickObjectTest()
+        public void GetForeverLoopEndBrickObjectTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var sprite = project.SpriteList.Sprites[1];
+            var program = CreateProgram();
+            var sprite = program.SpriteList.Sprites[1];
             var foreverBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[3] as XmlForeverBrick;
 
             Assert.IsNotNull(foreverBrick);
@@ -112,10 +121,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetRepeatLoopEndBrickObjectTest()
+        public void GetRepeatLoopEndBrickObjectTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var sprite = project.SpriteList.Sprites[1];
+            var program = CreateProgram();
+            var sprite = program.SpriteList.Sprites[1];
             var repeatBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[5] as XmlRepeatBrick;
 
             Assert.IsNotNull(repeatBrick);
@@ -123,10 +132,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetLoopEndBrickObjectTest()
+        public void GetLoopEndBrickObjectTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var sprite = project.SpriteList.Sprites[1];
+            var program = CreateProgram();
+            var sprite = program.SpriteList.Sprites[1];
             var loopEndBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[4] as XmlLoopEndBrick;
 
             Assert.IsNotNull(loopEndBrick);
@@ -134,10 +143,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetIfLogicBeginBrickObjectTest()
+        public void GetIfLogicBeginBrickObjectTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var sprite = project.SpriteList.Sprites[0];
+            var program = CreateProgram();
+            var sprite = program.SpriteList.Sprites[0];
             var ifLogicBeginBrick1 = sprite.Scripts.Scripts[0].Bricks.Bricks[2] as XmlIfLogicBeginBrick;
 
             Assert.IsNotNull(ifLogicBeginBrick1);
@@ -152,10 +161,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetIfLogicElseBrickObjectTest()
+        public void GetIfLogicElseBrickObjectTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var sprite = project.SpriteList.Sprites[0];
+            var program = CreateProgram();
+            var sprite = program.SpriteList.Sprites[0];
             var ifLogicElseBrick1 = sprite.Scripts.Scripts[0].Bricks.Bricks[4] as XmlIfLogicElseBrick;
 
             Assert.IsNotNull(ifLogicElseBrick1);
@@ -170,10 +179,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetIfLogicEndBrickObjectTest()
+        public void GetIfLogicEndBrickObjectTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var sprite = project.SpriteList.Sprites[0];
+            var program = CreateProgram();
+            var sprite = program.SpriteList.Sprites[0];
             var ifLogicEndBrick1 = sprite.Scripts.Scripts[0].Bricks.Bricks[5] as XmlIfLogicEndBrick;
 
             Assert.IsNotNull(ifLogicEndBrick1);
@@ -189,10 +198,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetLookReferenceStringTest()
+        public void GetLookReferenceStringTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var setLookBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[0] as XmlSetLookBrick;
+            var program = CreateProgram();
+            var setLookBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[0] as XmlSetLookBrick;
             Assert.IsNotNull(setLookBrick);
             var lookReference = setLookBrick.XmlLookReference;
 
@@ -204,10 +213,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetSoundReferenceStringTest()
+        public void GetSoundReferenceStringTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var playSoundBrick = project.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[1] as XmlPlaySoundBrick;
+            var program = CreateProgram();
+            var playSoundBrick = program.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[1] as XmlPlaySoundBrick;
             Debug.Assert(playSoundBrick != null);
             var soundReference = playSoundBrick.XmlSoundReference;
 
@@ -219,10 +228,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetSpriteReferenceStringTest()
+        public void GetSpriteReferenceStringTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var pointToBrick = project.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[2] as XmlPointToBrick;
+            var program = CreateProgram();
+            var pointToBrick = program.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[2] as XmlPointToBrick;
             Debug.Assert(pointToBrick != null);
             var pointedSpriteReference = pointToBrick.PointedXmlSpriteReference;
 
@@ -234,10 +243,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetVariableReferenceStringTest()
+        public void GetVariableReferenceStringTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var setVariableBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[1] as XmlSetVariableBrick;
+            var program = CreateProgram();
+            var setVariableBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[1] as XmlSetVariableBrick;
             Debug.Assert(setVariableBrick != null);
             var userVariableReference = setVariableBrick.UserVariableReference;
 
@@ -245,9 +254,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             var reference = ReferenceHelper.GetReferenceString(userVariableReference);
 
-            Assert.AreEqual("../../../../../variables/objectVariableList/entry[1]/list/userVariable[1]", reference);
+            Assert.AreEqual("../../../../../../../variables/objectVariableList/entry[1]/list/userVariable[1]", reference);
 
-            var changeVariableBrick = project.SpriteList.Sprites[1].Scripts.Scripts[1].Bricks.Bricks[5] as XmlChangeVariableBrick;
+            var changeVariableBrick = program.SpriteList.Sprites[1].Scripts.Scripts[1].Bricks.Bricks[1] as XmlChangeVariableBrick;
             Debug.Assert(changeVariableBrick != null);
             userVariableReference = changeVariableBrick.UserVariableReference;
 
@@ -255,14 +264,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             reference = ReferenceHelper.GetReferenceString(userVariableReference);
 
-            Assert.AreEqual("../../../../../variables/programVariableList/userVariable[1]", reference);
+            Assert.AreEqual("../../../../../../../variables/programVariableList/userVariable[1]", reference);
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetForeverBrickReferenceStringTest()
+        public void GetForeverBrickReferenceStringTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var loopEndBrick = project.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[4] as XmlLoopEndBrick;
+            var program = CreateProgram();
+            var loopEndBrick = program.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[4] as XmlLoopEndBrick;
             Debug.Assert(loopEndBrick != null);
             var loopBeginBrickReference = loopEndBrick.LoopBeginBrickReference;
 
@@ -274,10 +283,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetRepeatBrickReferenceStringTest()
+        public void GetRepeatBrickReferenceStringTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var loopEndBrick = project.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[6] as XmlLoopEndBrick;
+            var program = CreateProgram();
+            var loopEndBrick = program.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[6] as XmlLoopEndBrick;
             Debug.Assert(loopEndBrick != null);
             var loopBeginBrickReference = loopEndBrick.LoopBeginBrickReference;
 
@@ -289,10 +298,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetForeverLoopEndBrickReferenceStringTest()
+        public void GetForeverLoopEndBrickReferenceStringTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var foreverBrick = project.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[3] as XmlForeverBrick;
+            var program = CreateProgram();
+            var foreverBrick = program.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[3] as XmlForeverBrick;
             Debug.Assert(foreverBrick != null);
             var loopEndBrickReference = foreverBrick.LoopEndBrickReference;
 
@@ -304,10 +313,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetRepeatLoopEndBrickReferenceStringTest()
+        public void GetRepeatLoopEndBrickReferenceStringTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
-            var repeatBrick = project.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[5] as XmlRepeatBrick;
+            var program = CreateProgram();
+            var repeatBrick = program.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[5] as XmlRepeatBrick;
             Debug.Assert(repeatBrick != null);
             var loopEndBrickReference = repeatBrick.LoopEndBrickReference;
 
@@ -319,32 +328,32 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetIfLogicBeginBrickReferenceStringTest()
+        public void GetIfLogicBeginBrickReferenceStringTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
+            var program = CreateProgram();
 
-            var ifLogicElseBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[4] as XmlIfLogicElseBrick;
+            var ifLogicElseBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[4] as XmlIfLogicElseBrick;
             Debug.Assert(ifLogicElseBrick != null);
             var ifLogicBeginBrickReference = ifLogicElseBrick.IfLogicBeginBrickReference;
             Assert.IsNotNull(ifLogicBeginBrickReference);
             var reference = ReferenceHelper.GetReferenceString(ifLogicBeginBrickReference);
             Assert.AreEqual("../../ifLogicBeginBrick[2]", reference);
 
-            var ifLogicEndBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[5] as XmlIfLogicEndBrick;
+            var ifLogicEndBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[5] as XmlIfLogicEndBrick;
             Debug.Assert(ifLogicEndBrick != null);
             ifLogicBeginBrickReference = ifLogicEndBrick.IfLogicBeginBrickReference;
             Assert.IsNotNull(ifLogicBeginBrickReference);
             reference = ReferenceHelper.GetReferenceString(ifLogicBeginBrickReference);
             Assert.AreEqual("../../ifLogicBeginBrick[2]", reference);
 
-            ifLogicElseBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[6] as XmlIfLogicElseBrick;
+            ifLogicElseBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[6] as XmlIfLogicElseBrick;
             Debug.Assert(ifLogicElseBrick != null);
             ifLogicBeginBrickReference = ifLogicElseBrick.IfLogicBeginBrickReference;
             Assert.IsNotNull(ifLogicBeginBrickReference);
             reference = ReferenceHelper.GetReferenceString(ifLogicBeginBrickReference);
             Assert.AreEqual("../../ifLogicBeginBrick[1]", reference);
 
-            ifLogicEndBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[7] as XmlIfLogicEndBrick;
+            ifLogicEndBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[7] as XmlIfLogicEndBrick;
             Debug.Assert(ifLogicEndBrick != null);
             ifLogicBeginBrickReference = ifLogicEndBrick.IfLogicBeginBrickReference;
             Assert.IsNotNull(ifLogicBeginBrickReference);
@@ -353,32 +362,32 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetIfLogicElseBrickReferenceStringTest()
+        public void GetIfLogicElseBrickReferenceStringTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
+            var program = CreateProgram();
 
-            var ifLogicBeginBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[2] as XmlIfLogicBeginBrick;
+            var ifLogicBeginBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[2] as XmlIfLogicBeginBrick;
             Debug.Assert(ifLogicBeginBrick != null);
             var ifLogicElseBrickReference = ifLogicBeginBrick.IfLogicElseBrickReference;
             Assert.IsNotNull(ifLogicElseBrickReference);
             var reference = ReferenceHelper.GetReferenceString(ifLogicElseBrickReference);
             Assert.AreEqual("../../ifLogicElseBrick[2]", reference);
 
-            var ifLogicEndBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[5] as XmlIfLogicEndBrick;
+            var ifLogicEndBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[5] as XmlIfLogicEndBrick;
             Debug.Assert(ifLogicEndBrick != null);
             ifLogicElseBrickReference = ifLogicEndBrick.IfLogicElseBrickReference;
             Assert.IsNotNull(ifLogicElseBrickReference);
             reference = ReferenceHelper.GetReferenceString(ifLogicElseBrickReference);
             Assert.AreEqual("../../ifLogicElseBrick[1]", reference);
 
-            ifLogicBeginBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[3] as XmlIfLogicBeginBrick;
+            ifLogicBeginBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[3] as XmlIfLogicBeginBrick;
             Debug.Assert(ifLogicBeginBrick != null);
             ifLogicElseBrickReference = ifLogicBeginBrick.IfLogicElseBrickReference;
             Assert.IsNotNull(ifLogicElseBrickReference);
             reference = ReferenceHelper.GetReferenceString(ifLogicElseBrickReference);
             Assert.AreEqual("../../ifLogicElseBrick[1]", reference);
 
-            ifLogicEndBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[7] as XmlIfLogicEndBrick;
+            ifLogicEndBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[7] as XmlIfLogicEndBrick;
             Debug.Assert(ifLogicEndBrick != null);
             ifLogicElseBrickReference = ifLogicEndBrick.IfLogicElseBrickReference;
             Assert.IsNotNull(ifLogicElseBrickReference);
@@ -387,32 +396,32 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public async Task GetIfLogicEndBrickReferenceStringTest()
+        public void GetIfLogicEndBrickReferenceStringTest()
         {
-            var project = await SampleLoader.LoadSampleXmlProject("default.catroid", "default");
+            var program = CreateProgram();
 
-            var ifLogicBeginBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[2] as XmlIfLogicBeginBrick;
+            var ifLogicBeginBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[2] as XmlIfLogicBeginBrick;
             Debug.Assert(ifLogicBeginBrick != null);
             var ifLogicEndBrickReference = ifLogicBeginBrick.IfLogicEndBrickReference;
             Assert.IsNotNull(ifLogicEndBrickReference);
             var reference = ReferenceHelper.GetReferenceString(ifLogicEndBrickReference);
             Assert.AreEqual("../../ifLogicEndBrick[2]", reference);
 
-            var ifLogicElseBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[4] as XmlIfLogicElseBrick;
+            var ifLogicElseBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[4] as XmlIfLogicElseBrick;
             Debug.Assert(ifLogicElseBrick != null);
             ifLogicEndBrickReference = ifLogicElseBrick.IfLogicEndBrickReference;
             Assert.IsNotNull(ifLogicEndBrickReference);
             reference = ReferenceHelper.GetReferenceString(ifLogicEndBrickReference);
             Assert.AreEqual("../../ifLogicEndBrick[1]", reference);
 
-            ifLogicBeginBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[3] as XmlIfLogicBeginBrick;
+            ifLogicBeginBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[3] as XmlIfLogicBeginBrick;
             Debug.Assert(ifLogicBeginBrick != null);
             ifLogicEndBrickReference = ifLogicBeginBrick.IfLogicEndBrickReference;
             Assert.IsNotNull(ifLogicEndBrickReference);
             reference = ReferenceHelper.GetReferenceString(ifLogicEndBrickReference);
             Assert.AreEqual("../../ifLogicEndBrick[1]", reference);
 
-            ifLogicElseBrick = project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[6] as XmlIfLogicElseBrick;
+            ifLogicElseBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[6] as XmlIfLogicElseBrick;
             Debug.Assert(ifLogicElseBrick != null);
             ifLogicEndBrickReference = ifLogicElseBrick.IfLogicEndBrickReference;
             Assert.IsNotNull(ifLogicEndBrickReference);
@@ -420,5 +429,48 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual("../../ifLogicEndBrick[2]", reference);
         }
 
+
+        //[TestMethod] // Test for Bug 511
+        //public void VariableReferenceTest()
+        //{
+        //    var programGenerator = new ProgramGeneratorTestSimple();
+
+        //    var program = programGenerator.GenerateProgram();
+
+        //    var globatVariable = new GlobalVariable { Name = "GlobalVariable1" };
+        //    var localVariable = new LocalVariable { Name = "LocalVariable1" };
+        //    program.GlobalVariables.Add(globatVariable);
+        //    program.Sprites[0].LocalVariables.Add(localVariable);
+
+        //    var startScript = new StartScript();
+        //    var localSetVariableBrick = new SetVariableBrick { Value = new FormulaNodeNumber { Value = 0.0 }, Variable = localVariable };
+        //    var globalSetVariableBrick = new SetVariableBrick { Value = new FormulaNodeNumber { Value = 0.0 }, Variable = globatVariable };
+        //    startScript.Bricks.Add(localSetVariableBrick);
+        //    startScript.Bricks.Add(globalSetVariableBrick);
+
+        //    program.Sprites[0].Scripts.Add(startScript);
+
+
+        //    var xmlString = program.ToXmlObject().ToXmlString();
+
+        //    var document = XDocument.Load(new StringReader(xmlString));
+
+        //    var localVariableElement = document.Descendants("userVariable").ElementAt(0);
+        //    var localVariablePath = localVariableElement.Attributes("reference").ElementAt(0).Value;
+        //    Assert.AreEqual("../../../../../../../variables/objectVariableList/entry[1]/list/userVariable[1]", localVariablePath);
+
+
+        //    var globalVariableElement = document.Descendants("userVariable").ElementAt(1);
+        //    var globalVariablePath = globalVariableElement.Attributes("reference").ElementAt(0).Value;
+        //    Assert.AreEqual("../../../../../../../variables/programVariableList/userVariable[1]", globalVariablePath);
+
+        //}
+
+        private static XmlProgram CreateProgram()
+        {
+            var originalProgram = ProjectGenerator.GenerateProgram();
+            var projectString = originalProgram.ToXmlObject().ToXmlString();
+            return new XmlProgram(projectString);
+        }
     }
 }

@@ -114,7 +114,6 @@
     <Compile Include="Services\Storage\StorageTest.cs" />
     <Compile Include="Tests\Data\CatrobatContextTests.cs" />
     <Compile Include="Tests\Data\CopyTests.cs" />
-    <Compile Include="Tests\Data\DataWritingTests.cs" />
     <Compile Include="Tests\Data\DataDeletingTests.cs" />
     <Compile Include="Tests\Data\DataEqualsTests.cs" />
     <Compile Include="Tests\Data\DataReflectionTests.cs" />

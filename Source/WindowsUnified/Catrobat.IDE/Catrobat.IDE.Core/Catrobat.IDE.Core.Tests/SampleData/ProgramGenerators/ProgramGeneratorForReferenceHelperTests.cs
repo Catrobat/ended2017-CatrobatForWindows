@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.Tests.Misc;
 
@@ -33,7 +34,7 @@ namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
             return project;
         }
 
-        private void AddSprites(Program project)
+        private void AddSprites(Program program)
         {
             var looks1 = new ObservableCollection<Look>
             {
@@ -59,6 +60,8 @@ namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
                 new Sound{ Name = "StarlightGameOver", FileName = "FD7B62A7B84AAE3F11F76868D0C2159A_StarlightGameOver"}
             };
 
+            var object1Variable1 = new LocalVariable {Name = "LocalVariable1"};
+            var globalVariable1 = new GlobalVariable {Name = "GlobalVariable1"};
 
             var scripts1 = new ObservableCollection<Script>
             {
@@ -67,7 +70,7 @@ namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
                     Bricks = new ObservableCollection<Brick>
                     {
                         new SetLookBrick {Value = looks1[0]},
-                        new SetVariableBrick(), // TODO
+                        new SetVariableBrick{Value = new FormulaNodeNumber{Value = 500},Variable = object1Variable1},
                         new IfBrick(),
                         new IfBrick(),
                         new ElseBrick(),
@@ -110,6 +113,16 @@ namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
                         new RepeatBrick(),
                         new EndRepeatBrick()
                     }
+                },
+                new TappedScript
+                {
+                    Bricks = new ObservableCollection<Brick>
+                    {
+                        new SetLookBrick {Value = looks2[0]},
+                        new ChangeVariableBrick() {
+                            RelativeValue = new FormulaNodeNumber{Value = 5},
+                            Variable = globalVariable1}
+                    }
                 }
             };
 
@@ -122,38 +135,38 @@ namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
 
             var object1 = new Sprite
             {
+                Name = "Object1",
                 Scripts = scripts1,
                 Sounds = sounds1,
                 Looks = looks1,
                 LocalVariables = new ObservableCollection<LocalVariable>
                 {
-                    new LocalVariable {Name = "Variable1"},
+                    object1Variable1,
                 }
             };
 
             var object2 = new Sprite
             {
+                Name = "Object1",
                 Scripts = scripts2,
                 Sounds = sounds2,
                 Looks = looks2,
                 LocalVariables = new ObservableCollection<LocalVariable>
-                {
-                    new LocalVariable {Name = "Variable1"},
-                }
+                {}
             };
 
             ((LookAtBrick)scripts2[0].Bricks[2]).Target = object2;
 
-            project.Sprites = new ObservableCollection<Sprite>
+            program.Sprites = new ObservableCollection<Sprite>
             {
                 object1,
                 object2
             };
 
 
-            project.GlobalVariables = new ObservableCollection<GlobalVariable>
+            program.GlobalVariables = new ObservableCollection<GlobalVariable>
             {
-                new GlobalVariable {Name = "Variable2"}
+                globalVariable1
             };
             ((SetVariableBrick) scripts1[0].Bricks[1]).Variable = object1.LocalVariables[0];
         }
