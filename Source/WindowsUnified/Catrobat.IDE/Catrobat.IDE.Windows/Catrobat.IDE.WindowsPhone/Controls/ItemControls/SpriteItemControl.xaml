@@ -9,7 +9,7 @@
     d:DesignWidth="360">
 
   <Grid x:Name="GridRoot" Height="90" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-    <Grid Background="{ThemeResource ObjectsBrush}" RequestedTheme="Dark">
+    <Grid Background="{ThemeResource ObjectsBrush}"  Margin="0 4 7 4" RequestedTheme="Dark">
       <Grid.RowDefinitions>
         <RowDefinition/>
         <RowDefinition/>

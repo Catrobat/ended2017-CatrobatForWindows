@@ -11,8 +11,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 {
     public sealed partial class SoundItemControl : UserControl
     {
-        private const double ItemWidthPortrait = 360.0;
-        private const double ItemWidthLandscape = 270.0;
+        private const double ItemWidthPortrait = 365.0;
+        private const double ItemWidthLandscape = 450.0;
         private const double ItemHeightPortrait = 90.0;
         private const double ItemHeightLandscape = 90.0;
 

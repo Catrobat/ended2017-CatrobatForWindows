@@ -25,7 +25,7 @@
     <Pivot Name="PivotMain" Grid.Row="1" Margin="0 -57 0 0"
         SelectedIndex="{Binding SelectedPivotIndex, Mode=TwoWay}"
         SelectionChanged="Pivot_OnSelectionChanged">
-      <PivotItem Name="PivotActions" Margin="10 -10 0 0"
+      <PivotItem Name="PivotActions" Margin="10 -5 0 0"
         Header="{Binding Resources.Editor_PivotActions, 
         Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
@@ -57,22 +57,22 @@
         </Grid>
       </PivotItem>
 
-      <PivotItem Name="PivotLooks" Margin="10 -10 0 0"
+      <PivotItem Name="PivotLooks" Margin="10 -5 0 0"
         Header="{Binding Resources.Editor_PivotLooks, 
         Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
-          <ScrollViewer VerticalScrollMode="Enabled">
-            <listsViewControls:BindableGridView x:Name="ListViewLooks"
+            <listsViewControls:BindableListView x:Name="ListViewLooks"
+              HorizontalAlignment="Center"
               ItemsSource="{Binding Looks}"
               BindableSelectedItems="{Binding SelectedLooks, Mode=TwoWay}"
               CanReorderItems="True" AllowDrop="True" SelectionMode="None">
-              <listsViewControls:BindableGridView.ItemTemplate>
+              <ListViewBase.ItemTemplate>
                 <DataTemplate>
-                  <controls:LookItemControl Look="{Binding}" Tapped="LookItem_OnTapped" />
+                  <controls:LookItemControl Look="{Binding}"
+                    Tapped="LookItem_OnTapped" />
                 </DataTemplate>
-              </listsViewControls:BindableGridView.ItemTemplate>
-            </listsViewControls:BindableGridView>
-          </ScrollViewer>
+              </ListViewBase.ItemTemplate>
+            </listsViewControls:BindableListView>
           <TextBlock
             Text ="{Binding Resources.Editor_ClickPlusToAddLook, 
             Source={StaticResource LocalizedStrings}}"
@@ -86,23 +86,23 @@
         </Grid>
       </PivotItem>
 
-      <PivotItem Name="PivotSounds" Margin="10 -10 0 0"
-                 Header="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}">
+      <PivotItem Name="PivotSounds" Margin="10 -5 0 0"
+        Header="{Binding Resources.Editor_PivotSounds, 
+        Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
-          <ScrollViewer VerticalScrollMode="Enabled">
-            <listsViewControls:BindableGridView x:Name="ListViewSounds"
-            ItemsSource="{Binding Sounds}"
-            BindableSelectedItems="{Binding SelectedSounds, Mode=TwoWay}"
-            CanReorderItems="True" AllowDrop="True" SelectionMode="None">
-              <listsViewControls:BindableGridView.ItemTemplate>
-                <DataTemplate>
-                  <controls:SoundItemControl Sound="{Binding}"
+          <listsViewControls:BindableListView x:Name="ListViewSounds"
+              HorizontalAlignment="Center"
+              ItemsSource="{Binding Sounds}"
+              BindableSelectedItems="{Binding SelectedSounds, Mode=TwoWay}"
+              CanReorderItems="True" AllowDrop="True" SelectionMode="None">
+            <ListViewBase.ItemTemplate>
+              <DataTemplate>
+                <controls:SoundItemControl Sound="{Binding}"
                     Group="{Binding ElementName=PlayPauseButtonGroupSounds}"
                     RightTapped="SoundItem_OnTapped" />
-                </DataTemplate>
-              </listsViewControls:BindableGridView.ItemTemplate>
-            </listsViewControls:BindableGridView>
-          </ScrollViewer>
+              </DataTemplate>
+            </ListViewBase.ItemTemplate>
+          </listsViewControls:BindableListView>
           <TextBlock
               Text ="{Binding Resources.Editor_ClickPlusToAddSound, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsSoundsEmpty, Converter={StaticResource BoolVisibilityConverter}}"

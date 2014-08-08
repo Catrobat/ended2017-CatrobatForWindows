@@ -14,7 +14,7 @@
     VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
     DataContext="{Binding}"
     d:DataContext="{d:DesignInstance models:Sound}">
-    <Grid RequestedTheme="Dark"
+    <Grid RequestedTheme="Dark" Margin="0 4 7 4"
             Background="{ThemeResource SoundsBrush}">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" />
