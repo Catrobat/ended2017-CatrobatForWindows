@@ -33,9 +33,26 @@ namespace Catrobat.IDE.Core.Services.Common
             }
 
             var zipService = new ZipService();
-            await zipService.ZipCatrobatPackage(streamResult, programFolderPath);
+            await zipService.ZipCatrobatPackage(streamResult, tempPath);
             streamResult.Seek(0, SeekOrigin.Begin);
             return streamResult;
+        }
+
+        public async Task CleanUpExport()
+        {
+            using (var storage = StorageSystem.GetStorage())
+            {
+                bool exists = await storage.DirectoryExistsAsync(StorageConstants.TempProgramExportPath);
+                if (exists)
+                {
+                    await storage.DeleteDirectoryAsync(StorageConstants.TempProgramExportPath);
+                }
+                exists = await storage.DirectoryExistsAsync(StorageConstants.TempProgramExportZipPath);
+                if (exists)
+                {
+                    await storage.DeleteDirectoryAsync(StorageConstants.TempProgramExportZipPath);
+                }
+            }
         }
     }
 }

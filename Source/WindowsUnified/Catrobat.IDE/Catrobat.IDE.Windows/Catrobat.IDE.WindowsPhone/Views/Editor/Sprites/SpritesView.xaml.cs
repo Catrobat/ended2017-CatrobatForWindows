@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -24,15 +25,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             PageCacheMode = NavigationCacheMode.Enabled;
         }
 
-        //private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs args)
-        //{
-        //    if (args.PropertyName == PropertyNameHelper.GetPropertyNameFromExpression(() => _viewModel.SelectedSprite))
-        //    {
-        //        var selectedSprite = _viewModel.SelectedSprite;
-
-        //        ReorderListBoxSprites.SelectedItem = selectedSprite;
-        //    }
-        //}
         private void MultiModeEditorCommandBar_OnModeChanged(MultiModeEditorCommandBarMode mode)
         {
             var listView = ListViewSprites;
@@ -62,8 +54,8 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
                                  ListViewSprites.SelectionMode == ListViewSelectionMode.None;
 
             if (isClickEnabled)
-                if( _viewModel.EditSpriteCommand.CanExecute(((FrameworkElement)sender).DataContext))
-                _viewModel.EditSpriteCommand.Execute(((FrameworkElement)sender).DataContext);
+                if (_viewModel.EditSpriteCommand.CanExecute(((FrameworkElement)sender).DataContext))
+                    _viewModel.EditSpriteCommand.Execute(((FrameworkElement)sender).DataContext);
         }
     }
 }

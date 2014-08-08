@@ -85,7 +85,7 @@
                 ItemClick="ListViewOnlinePrograms_ItemClick">
                 <ListView.ItemTemplate>
                   <DataTemplate>
-                    <Grid Margin="0 6 0 6"  
+                    <Grid Margin="0 6 0 6" Height="140"
                       Background="{ThemeResource OnlineProgramsBackgroundBrush}"
                       DataContext="{Binding}">
                       <Grid.RowDefinitions>

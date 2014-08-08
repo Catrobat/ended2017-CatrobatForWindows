@@ -61,6 +61,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         {
             this.InitializeComponent();
             Window.Current.SizeChanged += OnSizeChanged;
+            this.LayoutUpdated += (sender, o) => UpdatedSize();
             UpdatedSize();
         }
 

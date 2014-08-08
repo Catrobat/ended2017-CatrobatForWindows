@@ -35,7 +35,7 @@
             </AppBarButton.Icon>
         </AppBarButton>
 
-        <AppBarButton x:Name="btnSelectedColor" Margin="215,3,0,-3" >
+        <AppBarButton x:Name="btnSelectedColor" Background="White" Margin="215,3,0,-3" >#
         </AppBarButton>
 
         <AppBarButton x:Name="btnMoveScreen"  Margin="315,3,0,-3">

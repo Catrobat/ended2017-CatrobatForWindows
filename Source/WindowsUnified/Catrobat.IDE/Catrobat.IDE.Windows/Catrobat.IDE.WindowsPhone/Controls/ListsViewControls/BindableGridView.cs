@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using WinRTXamlToolkit.Controls;
 
 namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 {
@@ -12,6 +15,10 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         public BindableGridView()
         {
             this.SelectionChanged += OnSelectionChanged;
+
+            this.Style = (Style)Application.Current.
+                Resources["BindableGridViewGridViewStyle"];
+
             this.ItemContainerStyle = (Style)Application.Current.
                 Resources["BindableGridViewGridViewItemStyle"];
 
@@ -19,11 +26,40 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
                 Resources["BindableGridViewItemsPanelTemplate"];
 
             Window.Current.SizeChanged += WindowOnSizeChanged;
+            this.LayoutUpdated += (sender, o) => AdaptLayout();
         }
 
         private void WindowOnSizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
-            this.UpdateLayout();
+            AdaptLayout();
+        }
+
+        private void AdaptLayout()
+        {
+            var currentViewState = ApplicationView.GetForCurrentView().Orientation;
+            var isLandscape = currentViewState == ApplicationViewOrientation.Landscape;
+
+            UpdateWrapPanel(isLandscape);
+        }
+
+        private void UpdateWrapPanel(bool isLandscape)
+        {
+            if (!(ItemsSource is ICollection)) return;
+
+            var itemsWrapGrid = (ItemsWrapGrid)this.ItemsPanelRoot;
+            if (itemsWrapGrid != null)
+            {
+                if (isLandscape)
+                {
+                    var maxColumns = Math.Round(((ICollection)ItemsSource).Count / 2.0, MidpointRounding.AwayFromZero);
+                itemsWrapGrid.MaximumRowsOrColumns = (int)maxColumns;
+                }
+                else
+                {
+                    itemsWrapGrid.MaximumRowsOrColumns = int.MaxValue;
+                }
+            }
+
         }
 
         public IList BindableSelectedItems

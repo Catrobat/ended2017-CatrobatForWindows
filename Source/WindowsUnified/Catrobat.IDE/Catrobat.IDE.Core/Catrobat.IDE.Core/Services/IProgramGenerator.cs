@@ -5,9 +5,9 @@ namespace Catrobat.IDE.Core.Services
 {
     public interface IProgramGenerator
     {
-        Task<Program> GenerateProject(string projectName, bool writeToDisk);
+        Task<Program> GenerateProgram(string projectName, bool writeToDisk);
 
-        string GetProjectDefaultName();
+        string GetProgramDefaultName();
 
         int GetOrderId();
     }

@@ -39,24 +39,22 @@ namespace Catrobat.Paint.Phone.Tool
 
             _path = new Path();
             _pathGeometry = new PathGeometry();
-            _path.StrokeLineJoin = PenLineJoin.Round;
+            _pathFigureCollection = new PathFigureCollection();
+            _pathFigure = new PathFigure();
+            _pathSegmentCollection = new PathSegmentCollection();
 
+            _path.StrokeLineJoin = PenLineJoin.Round;
             _path.Stroke = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
             _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
             _path.StrokeStartLineCap = PocketPaintApplication.GetInstance().PaintData.CapSelected;
             _path.StrokeEndLineCap = PocketPaintApplication.GetInstance().PaintData.CapSelected;
 
-            _path.Data = _pathGeometry;
-            _pathFigureCollection = new PathFigureCollection();
-            _pathGeometry.Figures = _pathFigureCollection;
-            _pathFigure = new PathFigure();
-
-            _pathFigureCollection.Add(_pathFigure);
-            _lastPoint = coordinate;
             _pathFigure.StartPoint = coordinate;
-            _pathSegmentCollection = new PathSegmentCollection();
             _pathFigure.Segments = _pathSegmentCollection;
-
+            _pathFigureCollection.Add(_pathFigure);
+            _pathGeometry.Figures = _pathFigureCollection;
+            _lastPoint = coordinate;
+            _path.Data = _pathGeometry;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
 
             // var transform = PocketPaintApplication.GetInstance().PaintingAreaCanvas.TransformToVisual(PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot);

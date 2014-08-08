@@ -19,9 +19,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         [TestMethod] // 
         public void EqualsProjectTest()
         {
-            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection(42, DateTime.Now);
-            var project1 = projectgenerator.GenerateProject();
-            var project2 = projectgenerator.GenerateProject();
+            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection(42, DateTime.Now);
+            var project1 = projectgenerator.GenerateProgram();
+            var project2 = projectgenerator.GenerateProgram();
 
             ModelAssert.AreTestEqual(project1, project2);
         }

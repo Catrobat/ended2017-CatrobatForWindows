@@ -140,7 +140,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
             else if (CreateTemplateProgram)
             {
-                CurrentProgram = await SelectedTemplateOption.ProjectGenerator.GenerateProject(uniqueName, true);
+                CurrentProgram = await SelectedTemplateOption.ProjectGenerator.GenerateProgram(uniqueName, true);
             }
 
             if (CurrentProgram != null)

@@ -13,7 +13,7 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Tests.Misc
 {
-    public class ProjectGeneratorReflection : ITestProjectGenerator
+    public class ProjectGeneratorReflection : ITestProgramGenerator
     {
         private Random _random;
         private readonly int? _seed;
@@ -49,7 +49,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
             typeof(EmptyDummyBrick)
         };
 
-        public Program GenerateProject()
+        public Program GenerateProgram()
         {
             _random = _seed.HasValue ? new Random(_seed.Value) : new Random();
             var project = new Program

@@ -103,7 +103,7 @@
 	</UserControl.Resources>
 
   <Button Height="120" HorizontalAlignment="Stretch" Name="ButtonMain" 
-    Style="{StaticResource ButtonStyle}">
+    Style="{StaticResource ButtonStyle}" Width="370">
     <Grid Margin="5 5 5 5" 
           VerticalAlignment="Stretch" 
           RequestedTheme="Dark" 

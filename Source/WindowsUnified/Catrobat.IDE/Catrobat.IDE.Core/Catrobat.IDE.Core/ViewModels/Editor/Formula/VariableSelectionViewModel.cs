@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
     {
         #region private Members
 
-        private Program _currentProject;
+        private Program _currentProgram;
         private Sprite _currentSprite;
         private ObservableCollection<LocalVariable> _localVariables;
         private ObservableCollection<GlobalVariable> _globalVariables;
@@ -37,17 +37,17 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             }
         }
 
-        public Program CurrentProject
+        public Program CurrentProgram
         {
-            get { return _currentProject; }
+            get { return _currentProgram; }
             set
             {
-                _currentProject = value;
+                _currentProgram = value;
                 _selectedGlobalVariable = null;
                 _selectedLocalVariable = null;
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
-                    RaisePropertyChanged(() => CurrentProject);
+                    RaisePropertyChanged(() => CurrentProgram);
                     RaisePropertyChanged(() => SelectedGlobalVariable);
                     RaisePropertyChanged(() => SelectedLocalVariable);
                 });
@@ -127,7 +127,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
                 if (_selectedVariableContainer != null && _selectedVariableContainer.Variable != null)
                 {
-                    if (VariableHelper.IsVariableLocal(CurrentProject, _selectedVariableContainer.Variable))
+                    if (VariableHelper.IsVariableLocal(CurrentProgram, _selectedVariableContainer.Variable))
                         SelectedLocalVariable = (LocalVariable)_selectedVariableContainer.Variable;
                     else
                         SelectedGlobalVariable = (GlobalVariable)_selectedVariableContainer.Variable;
@@ -211,10 +211,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         private void DeleteVariableAction()
         {
             if (SelectedGlobalVariable != null)
-                VariableHelper.DeleteGlobalVariable(CurrentProject, SelectedGlobalVariable);
+                VariableHelper.DeleteGlobalVariable(CurrentProgram, SelectedGlobalVariable);
 
             if (SelectedLocalVariable != null)
-                VariableHelper.DeleteLocalVariable(CurrentProject, CurrentSprite, SelectedLocalVariable);
+                VariableHelper.DeleteLocalVariable(CurrentProgram, CurrentSprite, SelectedLocalVariable);
         }
 
         private void EditVariableAction()
@@ -241,9 +241,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region MessageActions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
+        private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
-            CurrentProject = message.Content;
+            CurrentProgram = message.Content;
             CurrentSprite = null;
         }
 
@@ -262,7 +262,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             EditVariableCommand = new RelayCommand(EditVariableAction, EditVariableCommand_CanExecute);
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedMessageAction);
+                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMesageAction);

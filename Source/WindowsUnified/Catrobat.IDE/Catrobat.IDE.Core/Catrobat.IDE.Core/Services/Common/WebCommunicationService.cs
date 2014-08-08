@@ -88,30 +88,6 @@ namespace Catrobat.IDE.Core.Services.Common
                     httpResponse.EnsureSuccessStatusCode();
 
                     return await httpResponse.Content.ReadAsStreamAsync();
-
-
-                    //List<string> folders;
-                    //using (var storage = StorageSystem.GetStorage())
-                    //{
-                    //    var folder_array = await storage.GetDirectoryNamesAsync(CatrobatContextBase.ProjectsPath);
-                    //    folders = new List<string>(folder_array);
-
-                    //}
-                    //string countString = "";
-                    //int counter = 1;
-                    //while (folders.IndexOf(projectName + countString) >= 0)
-                    //{
-                    //    countString = " " + counter.ToString(ServiceLocator.CultureService.GetCulture());
-                    //    counter++;
-                    //}
-                    //projectName = projectName + countString;
-                    //await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
-                    //    httpStream, CatrobatContextBase.ProjectsPath + "/" + projectName);
-
-                    //var result = await CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, true);
-                    //CatrobatVersionConverter.VersionConverterError error = result.Error;
-                    //return error;
-
                 }
                 catch (HttpRequestException)
                 {
@@ -225,15 +201,16 @@ namespace Catrobat.IDE.Core.Services.Common
                     JSONStatusResponse statusResponse = null;
                     try
                     {
-                        var stream = await storage.OpenFileAsync(StorageConstants.TempProgramExportZipPath,
+                        // TODO check if file exists - do not rely on try-catch
+                        var stream = await storage.OpenFileAsync(Path.Combine(StorageConstants.TempProgramExportZipPath, projectTitle + ApplicationResources.EXTENSION),
                             StorageFileMode.Open, StorageFileAccess.Read);
-                        //await ServiceLocator.ZipService.ZipCatrobatPackage(stream, StorageConstants.ProgramsPath + "/" + projectTitle);
                         var memoryStream = new MemoryStream();
                         await stream.CopyToAsync(memoryStream);
 
                         var projectData = memoryStream.ToArray();
 
                         parameters.Add(new KeyValuePair<string, string>(ApplicationResources.API_PARAM_CHECKSUM, UtilTokenHelper.ToHex(MD5Core.GetHash(projectData))));
+                        string sum = UtilTokenHelper.ToHex(MD5Core.GetHash(projectData));
 
                         // store parameters as MultipartFormDataContent
                         StringContent content = null;
@@ -274,7 +251,7 @@ namespace Catrobat.IDE.Core.Services.Common
                         statusResponse = new JSONStatusResponse();
                         statusResponse.statusCode = StatusCodes.JSONSerializationFailed;
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
                         statusResponse = new JSONStatusResponse();
                         statusResponse.statusCode = StatusCodes.UnknownError;

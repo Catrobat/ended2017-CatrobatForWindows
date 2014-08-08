@@ -6,9 +6,9 @@ using Catrobat.IDE.Core.Models.Scripts;
 
 namespace Catrobat.IDE.Core.Tests.Misc
 {
-    public class ProjectGeneratorForScriptBrickCollectionTests : ITestProjectGenerator
+    public class ProjectGeneratorForScriptBrickCollectionTests : ITestProgramGenerator
     {
-        public Program GenerateProject()
+        public Program GenerateProgram()
         {
             return new Program
             {

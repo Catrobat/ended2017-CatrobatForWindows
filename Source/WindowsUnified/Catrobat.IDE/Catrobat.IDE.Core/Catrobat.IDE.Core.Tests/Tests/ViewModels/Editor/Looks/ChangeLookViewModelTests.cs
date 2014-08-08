@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Catrobat.IDE.Core.Models;
+﻿using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
 using Catrobat.IDE.Core.Tests.Services.Storage;

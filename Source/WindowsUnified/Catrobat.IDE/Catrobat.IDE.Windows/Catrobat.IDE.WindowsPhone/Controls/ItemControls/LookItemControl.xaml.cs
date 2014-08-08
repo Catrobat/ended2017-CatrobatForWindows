@@ -9,7 +9,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 {
     public sealed partial class LookItemControl : UserControl
     {
-        private const double ItemWidthPortrait = 270.0;
+        private const double ItemWidthPortrait = 360.0;
         private const double ItemWidthLandscape = 270.0;
         private const double ItemHeightPortrait = 90.0;
         private const double ItemHeightLandscape = 90.0;
@@ -61,6 +61,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         {
             this.InitializeComponent();
             Window.Current.SizeChanged += OnSizeChanged;
+            this.LayoutUpdated += (sender, o) => UpdatedSize();
             UpdatedSize();
         }
 

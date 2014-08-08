@@ -159,5 +159,15 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
                 await storage.WriteTextFileAsync(path, xml);
             }
         }
+
+
+        public string ToXmlString()
+        {
+            var writer = new XmlStringWriter();
+            var document = CreateXML();
+            document.Save(writer, SaveOptions.None);
+            return writer.ToString();
+        }
+
     }
 }

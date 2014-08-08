@@ -6,10 +6,10 @@ using Catrobat.IDE.Core.Models.Scripts;
 
 namespace Catrobat.IDE.Core.Tests.Misc
 {
-    public class ProjectGeneratorForReferenceHelperTests : ITestProjectGenerator
+    public class ProjectGeneratorForReferenceHelperTests : ITestProgramGenerator
     {
 
-        public Program GenerateProject()
+        public Program GenerateProgram()
         {
             var project = new Program
             {

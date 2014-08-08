@@ -30,7 +30,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         #region Members
 
         private Sprite _selectedSprite;
-        private Program _currentProject;
+        private Program _currentProgram;
         private readonly FormulaEditor _editor = new FormulaEditor();
         private readonly FormulaKeyboardViewModel _keyboardViewModel;
         
@@ -38,13 +38,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region Properties
 
-        public Program CurrentProject
+        public Program CurrentProgram
         {
-            get { return _currentProject; }
+            get { return _currentProgram; }
             private set
             {
-                _currentProject = value; 
-                                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
+                _currentProgram = value; 
+                                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProgram));
             }
         }
 
@@ -248,9 +248,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region MessageActions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
+        private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
-            CurrentProject = message.Content;
+            CurrentProgram = message.Content;
         }
 
         private void SelectedSpriteChangedMessageAction(GenericMessage<Sprite> message)
@@ -272,7 +272,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             CompleteTokenCommand = new RelayCommand<int>(CompleteTokenAction);
             
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
-            Messenger.Default.Register<GenericMessage<Program>>(this, ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedMessageAction);
+            Messenger.Default.Register<GenericMessage<Program>>(this, ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
 
             _editor.PropertyChanged += (sender, e) =>
             {

@@ -62,10 +62,13 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                var archive = new ZipArchive(zipStream, ZipArchiveMode.Create);
-                await WriteFilesRecursiveToZip(archive, storage, localStoragePath, "");
-                await zipStream.FlushAsync();
+                using(var archive = new ZipArchive(zipStream, ZipArchiveMode.Create, true))
+                {
+                    await WriteFilesRecursiveToZip(archive, storage, localStoragePath, "");
+                    await zipStream.FlushAsync();
+                }
             }
+            //ZipFile.CreateFromDirectory(localStoragePath, zipPath, CompressionLevel.Fastest, true);
         }
 
         private async Task WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage,

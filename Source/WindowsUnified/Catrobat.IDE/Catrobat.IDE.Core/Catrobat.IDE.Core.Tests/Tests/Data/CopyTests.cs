@@ -29,8 +29,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             const string savePath1 = "/CopyTest1/project.xml";
             const string savePath2 = "/CopyTest1/project.xml";
 
-            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
-            var project1 = projectgenerator.GenerateProject();
+            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            var project1 = projectgenerator.GenerateProgram();
 
             var project2 = new Program();
             project2.Name = project1.Name;
