@@ -9,6 +9,7 @@ using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.WindowsShared.Services;
+using Catrobat.IDE.WindowsShared.Services.Common;
 using Catrobat.IDE.WindowsShared.Services.Storage;
 using GalaSoft.MvvmLight.Messaging;
 using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;

@@ -16,6 +16,8 @@ namespace Catrobat.IDE.Core.Services
 
         Task<Stream> DownloadAsync(string downloadUrl, string projectName);
 
+        Task DownloadAsyncAlternativ(string downloadUrl, string projectName);
+
         Task<JSONStatusResponse> CheckTokenAsync(string username, string token, string language = "en");
 
         Task<JSONStatusResponse> LoginOrRegisterAsync(string username, string password, string userEmail, string language = "en", string country = "AT");

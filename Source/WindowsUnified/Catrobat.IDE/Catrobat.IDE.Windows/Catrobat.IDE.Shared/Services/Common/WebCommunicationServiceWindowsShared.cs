@@ -14,14 +14,22 @@ using System.Threading.Tasks;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.Xml.VersionConverter;
 using Newtonsoft.Json;
+using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 
-namespace Catrobat.IDE.Core.Services.Common
+using Windows.Networking.BackgroundTransfer;
+using Windows.Storage;
+
+namespace Catrobat.IDE.WindowsShared.Services.Common
 {
-    public class WebCommunicationService : IWebCommunicationService
+    public class WebCommunicationServiceWindowsShared : IWebCommunicationService
     {
         private static int _uploadCounter = 0;
+
+        private List<DownloadOperation> _activeDownloadOperationList;
+        private CancellationTokenSource _cancellationTokenSource;
+        private Action<DownloadOperation> _progressHandler;
 
         public async Task<List<OnlineProgramHeader>> LoadOnlineProjectsAsync(
             string filterText, int offset, int count,
@@ -102,8 +110,59 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public async Task DownloadAsyncAlternativ(string downloadUrl, string projectName)
         {
-            throw new NotImplementedException();
+            // TODO to be done somewhere else e.g WebCommunication.InitDownloads();
+            _activeDownloadOperationList = new List<DownloadOperation>();
+            _cancellationTokenSource = new CancellationTokenSource();
+            try
+            {
+                Uri downloadSource = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS + downloadUrl);
+                string downloadDestination = Path.Combine(StorageConstants.TempProgramImportZipPath, projectName + ApplicationResources.EXTENSION);
+
+                StorageFile destinationFile = await GetFileAsync(downloadDestination); // Mehtods copied from StorageWindowsShared
+
+                BackgroundDownloader backgroundDownloader = new BackgroundDownloader();
+                DownloadOperation downloadOperation = backgroundDownloader.CreateDownload(downloadSource, destinationFile);
+                ManageDownloadsAsync(downloadOperation, true);
+            }
+            catch (Exception ex) //TODO add error Handling
+            {
+                //Error
+            }
         }
+
+        private async void ManageDownloadsAsync(DownloadOperation downloadOperation, bool start)
+        {
+            try
+            {
+                _activeDownloadOperationList.Add(downloadOperation);
+                
+                //TODO can a Handler in OnlineProgramView.xaml.cs be used
+                Progress<DownloadOperation> downloadProgressCallback = new Progress<DownloadOperation>(/*ProgressHandler*/); 
+                if (start)
+                {
+                    await downloadOperation.StartAsync().AsTask(_cancellationTokenSource.Token, downloadProgressCallback);
+                }
+                //else
+                //{
+                //    // downlaod was already running on app-start
+                //    await downloadOperation.AttachAsync().AsTask(_cancellationTokenSource.Token, downloadProgressCallback);
+                //}
+                // TODO report that download with ID: downloadOperation.Guid has finished
+            }
+            catch (TaskCanceledException)
+            {
+                // Download Canceled
+            }
+            catch (Exception ex)
+            {
+                // TODO add error Handling
+            }
+            finally
+            {
+                _activeDownloadOperationList.Remove(downloadOperation);
+            }
+        }
+
 
 
         public async Task<JSONStatusResponse> CheckTokenAsync(string username, string token, string language = "en")
@@ -403,5 +462,106 @@ namespace Catrobat.IDE.Core.Services.Common
             var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             return origin.AddSeconds(timestamp);
         }
+
+
+        // TODO Use Helpers from StorageWindowsShared - move to separate Helper-class
+        #region Helpers
+        public async Task<StorageFolder> CreateFolderPathAsync(string path)
+        {
+            if (path == "")
+                return ApplicationData.Current.LocalFolder;
+
+            var subPath = Path.GetDirectoryName(path);
+
+            var parentFolder = await CreateFolderPathAsync(subPath);
+
+            if (parentFolder == null)
+                return null;
+
+            var folderName = Path.GetFileName(path);
+
+            try
+            {
+                var folder = await parentFolder.GetFolderAsync(folderName);
+                return folder;
+            }
+            catch { }
+
+
+            var folders = await parentFolder.GetFoldersAsync();
+
+            foreach (var folder in folders)
+            {
+
+            }
+
+            await parentFolder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
+            var newFolder = await parentFolder.GetFolderAsync(folderName);
+            return newFolder;
+
+            //var subPath = Path.GetDirectoryName(path);
+
+            //if (subPath == "")
+            //    return;
+
+            //await CreateFolderPath(subPath);
+
+            //var folder = await GetFolderAsync(subPath);
+            //var fileName = Path.GetFileName(path);
+            //if (folder != null)
+            //{
+            //    folder.CreateFolderAsync(fileName);
+            //}
+
+            //path = subPath;
+        }
+
+        public async Task<StorageFolder> GetFolderAsync(string path)
+        {
+            //await CreateFolderPathAsync(path);
+
+            if (path == "")
+                return ApplicationData.Current.LocalFolder;
+
+            var subPath = Path.GetDirectoryName(path);
+
+            var parentFolder = await GetFolderAsync(subPath);
+
+            if (parentFolder == null)
+                return null;
+
+            var folderName = Path.GetFileName(path);
+
+            try
+            {
+                var folder = await parentFolder.GetFolderAsync(folderName);
+                return folder;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<StorageFile> GetFileAsync(string path, bool createIfNotExists = true)
+        {
+            var fileName = Path.GetFileName(path);
+            var directoryName = Path.GetDirectoryName(path);
+
+            if (createIfNotExists)
+                await CreateFolderPathAsync(directoryName);
+
+            var folder = await GetFolderAsync(directoryName);
+
+            if (folder == null)
+                return null;
+
+            if (createIfNotExists)
+                return await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
+
+            return await folder.GetFileAsync(fileName);
+        }
+        #endregion
+
     }
 }

@@ -55,8 +55,20 @@ namespace Catrobat.IDE.WindowsShared.Services
                 if (_onlineProjectHeader != null)
                 {
                     _projectStream = await Task.Run(() => ServiceLocator.WebCommunicationService.DownloadAsync(
-                        _onlineProjectHeader.DownloadUrl, _onlineProjectHeader.ProjectName)); 
+                        _onlineProjectHeader.DownloadUrl, _onlineProjectHeader.ProjectName));
                 }
+                //if (_onlineProjectHeader != null)
+                //{
+                //    await Task.Run(() => ServiceLocator.WebCommunicationService.DownloadAsyncAlternativ(
+                //        _onlineProjectHeader.DownloadUrl, _onlineProjectHeader.ProjectName));
+                //}
+                //using (var storage = StorageSystem.GetStorage())
+                //{
+                //    var stream = await storage.OpenFileAsync(Path.Combine(StorageConstants.TempProgramImportZipPath, _onlineProjectHeader.ProjectName + ".catrobat"),
+                //            StorageFileMode.Open, StorageFileAccess.Read); // TODO move to resources
+                //    await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
+                //       stream, StorageConstants.TempProgramImportPath);
+                //}
 
                 await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
                     _projectStream, StorageConstants.TempProgramImportPath);

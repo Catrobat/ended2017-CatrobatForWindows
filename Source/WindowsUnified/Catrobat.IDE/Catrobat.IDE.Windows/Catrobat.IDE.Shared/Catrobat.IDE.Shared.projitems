@@ -66,6 +66,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Misc\OnlineProgramsCollectionWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ActionTemplateServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ColorConversionServiceWindowsShared.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Common\WebCommunicationServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CultureServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DispatcherServiceWindowsShared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ImageResizeServiceWindowsShared.cs" />
