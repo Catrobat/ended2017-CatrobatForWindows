@@ -1,16 +1,6 @@
-﻿using System;
-using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Models.Bricks;
-using Catrobat.IDE.Core.Models.Formulas.Tree;
-using Catrobat.IDE.Core.Models.Scripts;
-using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Core.Services.Storage;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using Catrobat.IDE.Core.Tests.Misc;
+﻿using Catrobat.IDE.Core.Models;
 
-namespace Catrobat.IDE.Core.Services.Common
+namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
 {
     public class ProgramGeneratorTestSimple : ITestProgramGenerator
     {

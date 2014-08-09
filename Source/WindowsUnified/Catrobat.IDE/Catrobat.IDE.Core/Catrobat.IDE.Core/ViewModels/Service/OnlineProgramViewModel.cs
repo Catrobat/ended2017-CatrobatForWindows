@@ -157,7 +157,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
                 ServiceLocator.ProjectImporterService.SetDownloadHeader(programHeader);
                 await ServiceLocator.ProjectImporterService.TryImportWithStatusNotifications();
-
             }
             finally
             {

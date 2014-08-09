@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.UI
 {
     public enum ImageSize {Small, Medium, Large, FullSize}
 
-    public sealed class ImageSizeEntry : ISelectable
+    public sealed class ImageSizeEntry : ISelectable, INotifyPropertyChanged
     {
         private static readonly Dictionary<ImageSize, int> MaxWidthHeights = new Dictionary<ImageSize, int>
         {
@@ -168,9 +168,7 @@ namespace Catrobat.IDE.Core.UI
             set
             {
                 _isSelected = value;
-                ServiceLocator.DispatcherService.RunOnMainThread(()=>
-                    RaisePropertyChanged(() => IsSelected));
-                
+                RaisePropertyChanged(() => IsSelected);
             }
         }
 

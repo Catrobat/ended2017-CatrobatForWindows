@@ -13,7 +13,7 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition />
-      <RowDefinition Height="5"/>
+      <RowDefinition Height="150"/>
     </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" 
@@ -96,6 +96,37 @@
                   Style="{ThemeResource TextSmallStyle}"/>
         </StackPanel>
       </ScrollViewer>
+    </Grid>
+    <Grid Grid.Row="3">
+      <StackPanel
+        Margin="12 0 12 0"
+        VerticalAlignment="Top" 
+        HorizontalAlignment="Stretch">
+        <TextBlock Text="Download-Progress"
+        TextWrapping="WrapWholeWords" 
+        TextAlignment="Center" HorizontalAlignment="Center" 
+        Margin="10 0 10 10"
+        Style="{ThemeResource TextNormalStyle}"/>
+        <ProgressBar Name="ProgressBarDownload" IsIndeterminate="False" Margin="10"/>
+        <StackPanel Orientation="Horizontal">   
+          <Button Name="ButtonStartDownload"
+                  Click="ButtonStartDownload_Click"
+                  Content="Start"
+                  Margin="6">
+          </Button>
+          <Button Name="ButtonPauseDownload"
+                  Click="ButtonPauseDownload_Click"
+                  Content="Pause"
+                  Margin="6">
+          </Button>
+          <Button Name="ButtonCancelDownload"
+                  Click="ButtonCancelDownload_Click"
+                  Content="Cancel"
+                  Margin="0 6 6 6">
+          </Button>
+        </StackPanel>
+      </StackPanel>
+
     </Grid>
   </Grid>
 

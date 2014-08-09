@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetElement()
         {
             var document = SampleLoader.LoadSampleXDocument("Converter/XPathHelperTestInput");
@@ -35,7 +35,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(destination1, foundElement);
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Data")]
         public void GetXPath()
         {
             var document = SampleLoader.LoadSampleXDocument("Converter/XPathHelperTestInput");

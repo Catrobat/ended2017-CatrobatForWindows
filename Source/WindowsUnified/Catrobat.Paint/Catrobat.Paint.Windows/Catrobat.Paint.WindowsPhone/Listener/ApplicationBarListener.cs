@@ -94,6 +94,22 @@ namespace Catrobat.Paint.Phone.Listener
             }
         }
 
+        public void BtnMoveScreenEllipse_OnClick(object sender, RoutedEventArgs e)
+        {
+
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() != ToolType.Move)
+            {
+                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
+                PocketPaintApplication.GetInstance().SwitchTool(ToolType.Move);
+            }
+            else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Move)
+            {
+                if (PocketPaintApplication.GetInstance().ToolWhileMoveTool == null)
+                    return;
+                PocketPaintApplication.GetInstance().SwitchTool(PocketPaintApplication.GetInstance().ToolWhileMoveTool.GetToolType());
+            }
+        }
+
         public void BtnTools_OnClick(object sender, EventArgs e)
         {
             /*

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Tests.Misc;
+using Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,10 +16,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Data")]
         public void GetGlobalVariableListTest()
         {
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
             var project1 = projectgenerator.GenerateProgram();
             var globalVariableList = VariableHelper.GetGlobalVariableList(project1);
 
@@ -28,10 +29,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
                 Assert.AreEqual("GlobalTestVariable" + i, globalVariableList[i].Name);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Data")]
         public void GetLocalVariableListTest()
         {
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
             var project1 = projectgenerator.GenerateProgram();
 
             foreach (var sprite in project1.Sprites)
@@ -42,10 +43,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             }   
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Data")]
         public void DeleteGlobalVariableTest()
         {
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
             var project1 = projectgenerator.GenerateProgram();
             var globalVariableList = VariableHelper.GetGlobalVariableList(project1);
 
@@ -59,10 +60,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
                 Assert.AreEqual("GlobalTestVariable" + i, globalVariableList[i].Name);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Data")]
         public void DeleteLocalVariableTest()
         {
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
             var project1 = projectgenerator.GenerateProgram();
 
             foreach (var sprite in project1.Sprites)
@@ -77,10 +78,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Data")]
         public void AddGlobalVariableTest()
         {
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
             var project1 = projectgenerator.GenerateProgram();
 
             var newUserVariable = new GlobalVariable
@@ -93,10 +94,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.IsTrue(VariableHelper.GetGlobalVariableList(project1).Contains(newUserVariable));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Data")]
         public void AddLocalVariableTest()
         {
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
             var project1 = projectgenerator.GenerateProgram();
 
             foreach (var sprite in project1.Sprites)
@@ -112,10 +113,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Data")]
         public void IsVariableLocalTest()
         {
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
             var project1 = projectgenerator.GenerateProgram();
             var localVariable = project1.Sprites.SelectMany(sprite => sprite.LocalVariables).First();
 
@@ -123,10 +124,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.IsTrue(VariableHelper.IsVariableLocal(project1, localVariable));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Data")]
         public void CreateUniqueGlobalVariableTest()
         {
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
             var project1 = projectgenerator.GenerateProgram();
 
             for (int i = 0; i < 20; i++)
@@ -140,10 +141,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Data")]
         public void CreateUniqueLocalVariableTest()
         {
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
             var project1 = projectgenerator.GenerateProgram();
             var sprite1 = project1.Sprites[0];
 
@@ -158,10 +159,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Data")]
         public void VariableNameExistsTest()
         {
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
             var project1 = projectgenerator.GenerateProgram();
             var existingGlobalVariableName = "GlobalTestVariable1";
             var notExistingGlobalVariableName = "test2";
@@ -180,10 +181,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Data")]
         public void VariableNameExistsCheckSelfTest()
         {
-            ITestProgramGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
             var project1 = projectgenerator.GenerateProgram();
             var globalVariable = VariableHelper.GetGlobalVariableList(project1)[0];
             var sameGlobalVariableName = "GlobalTestVariable0";

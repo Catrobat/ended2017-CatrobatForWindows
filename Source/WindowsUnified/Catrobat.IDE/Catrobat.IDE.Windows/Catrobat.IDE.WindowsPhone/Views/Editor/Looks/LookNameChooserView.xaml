@@ -51,12 +51,9 @@
         SelectionMode="Single"
         ItemsSource="{Binding ImageSizes}" 
         SelectedItem="{Binding SelectedSize, Mode=TwoWay}">
-        <GridView.ItemTemplate>
+        <ListViewBase.ItemTemplate>
           <DataTemplate>
-            <Grid Margin="5" Width="135" Height="115" 
-                  Visibility="{Binding IsVisible, 
-                  Converter={StaticResource BoolVisibilityConverter}}" 
-                  Background="Transparent">
+            <Grid Margin="5" Width="135" Height="115" Background="Transparent">
               <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
@@ -114,7 +111,7 @@
               </Grid>
             </Grid>
           </DataTemplate>
-        </GridView.ItemTemplate>
+        </ListViewBase.ItemTemplate>
       </listsViewControls:SelectableGridView>
     </Grid>
   </Grid>

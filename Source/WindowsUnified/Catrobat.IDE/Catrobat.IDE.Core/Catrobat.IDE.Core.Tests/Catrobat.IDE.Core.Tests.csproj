@@ -89,9 +89,9 @@
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="SampleData\ProgramGenerators\ITestProgramGenerator.cs" />
     <Compile Include="Misc\PlatformInformationHelperTests.cs" />
-    <Compile Include="SampleData\ProgramGenerators\ProjectGeneratorForReferenceHelperTests.cs" />
-    <Compile Include="SampleData\ProgramGenerators\ProjectGeneratorForScriptBrickCollectionTests.cs" />
-    <Compile Include="SampleData\ProgramGenerators\ProjectGeneratorReflection.cs" />
+    <Compile Include="SampleData\ProgramGenerators\ProgramGeneratorForReferenceHelperTests.cs" />
+    <Compile Include="SampleData\ProgramGenerators\ProgramGeneratorForScriptBrickCollectionTests.cs" />
+    <Compile Include="SampleData\ProgramGenerators\ProgramGeneratorReflection.cs" />
     <Compile Include="Misc\Storage\BasePathHelper.cs" />
     <Compile Include="Misc\TestHelper.cs" />
     <Compile Include="Misc\XmlDocumentComparer.cs" />
@@ -112,9 +112,6 @@
     <Compile Include="Services\Storage\ResourcesTest.cs" />
     <Compile Include="Services\Storage\StorageFactoryTest.cs" />
     <Compile Include="Services\Storage\StorageTest.cs" />
-    <Compile Include="Tests\Data\CatrobatContextTests.cs" />
-    <Compile Include="Tests\Data\CopyTests.cs" />
-    <Compile Include="Tests\Data\DataWritingTests.cs" />
     <Compile Include="Tests\Data\DataDeletingTests.cs" />
     <Compile Include="Tests\Data\DataEqualsTests.cs" />
     <Compile Include="Tests\Data\DataReflectionTests.cs" />
@@ -122,11 +119,14 @@
     <Compile Include="Tests\Data\ReferenceHelperTests.cs" />
     <Compile Include="Tests\Data\ScriptBrickCollectionTests.cs" />
     <Compile Include="Tests\Data\VariableHelperTests.cs" />
-    <Compile Include="Tests\Data\VersionConverter091ToWin091PracticalTests.cs" />
-    <Compile Include="Tests\Data\VersionConverter092To091.cs" />
-    <Compile Include="Tests\Data\VersionConverter091ToWin091Tests.cs" />
+    <Compile Include="Tests\Data\VersionConverter\VersionConverter091To092.cs" />
+    <Compile Include="Tests\Data\VersionConverter\VersionConverter091ToWin091PracticalTests.cs" />
+    <Compile Include="Tests\Data\VersionConverter\VersionConverterWin091To091Tests.cs" />
+    <Compile Include="Tests\Data\VersionConverter\VersionConverter092To091.cs" />
+    <Compile Include="Tests\Data\VersionConverter\VersionConverter091ToWin091Tests.cs" />
     <Compile Include="Tests\Data\XPathHelperTests.cs" />
     <Compile Include="Tests\Misc\CloneableTests.cs" />
+    <Compile Include="Tests\Services\Common\ContextServiceTests.cs" />
     <Compile Include="Tests\UI\Converters\BoolPlayButtonStateConverterTests.cs" />
     <Compile Include="Tests\UI\Converters\UnixTimeDateTimeConverterTests.cs" />
     <Compile Include="Tests\UI\Converters\StringVisibilityConverterTests.cs" />
@@ -167,7 +167,7 @@
     <Compile Include="Tests\Misc\FileNameGeneratorTests.cs" />
     <Compile Include="Tests\Misc\LocalizationTests.cs" />
     <Compile Include="Tests\Services\Common\WebCommunicationTests.cs" />
-    <Compile Include="Tests\Services\Common\ZipTests.cs" />
+    <Compile Include="Tests\Services\Common\ZipServiceTests.cs" />
     <Compile Include="Tests\Services\Storage\StorageTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Actions\ScriptBrickCategoryViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Looks\ChangeLookViewModelTests.cs" />
@@ -202,7 +202,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="SampleData\SampleProjects\default.catroid" />
+    <Content Include="SampleData\SampleProjects\default.catroid" />
     <None Include="SampleData\SampleProjects\test.catroid" />
   </ItemGroup>
   <ItemGroup>

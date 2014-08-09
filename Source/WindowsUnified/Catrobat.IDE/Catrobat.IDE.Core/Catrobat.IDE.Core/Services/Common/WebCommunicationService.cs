@@ -100,6 +100,11 @@ namespace Catrobat.IDE.Core.Services.Common
             }
         }
 
+        public async Task DownloadAsyncAlternativ(string downloadUrl, string projectName)
+        {
+            throw new NotImplementedException();
+        }
+
 
         public async Task<JSONStatusResponse> CheckTokenAsync(string username, string token, string language = "en")
         {
@@ -185,7 +190,7 @@ namespace Catrobat.IDE.Core.Services.Common
         }
 
 
-        public async Task<JSONStatusResponse> UploadProjectAsync(string projectTitle, 
+        public async Task<JSONStatusResponse> UploadProjectAsync(string projectTitle,
             string username, string token, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 

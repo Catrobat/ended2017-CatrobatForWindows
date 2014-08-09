@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Collections.Generic;
@@ -51,6 +52,7 @@ namespace Catrobat.IDE.Core.Tests.SampleData
             return await ServiceLocator.ContextService.LoadProgramByName(sampleProjectName);
         }
 
+        [Obsolete("Use ProgramGenerator instead. ", false)]
         public static async Task<XmlProgram> LoadSampleXmlProject(string sampleName, string sampleProjectName)
         {
             var zipService = new ZipService();

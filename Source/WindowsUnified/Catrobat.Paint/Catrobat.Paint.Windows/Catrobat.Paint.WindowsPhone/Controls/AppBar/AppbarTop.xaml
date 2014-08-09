@@ -22,7 +22,25 @@
 
         </coding4FunControls:RoundButton>-->
 
+        <Rectangle  HorizontalAlignment="Left" Height="44" Margin="222,15,0,0" Stroke="Black" VerticalAlignment="Top" Width="53">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
+            </Rectangle.Fill>
+        </Rectangle>
 
+
+
+        <ToggleButton Background="Black"  x:Name="btnSelectedColor" MinWidth="1" Width="53" Margin="222,6,0,4" Height="62" >
+            <ContentControl Width="48" Margin="-10,0,0,0">
+
+            </ContentControl>
+        </ToggleButton>
+
+        <Ellipse x:Name="ellipseTool" StrokeThickness="0" HorizontalAlignment="Left" Height="42" Margin="327,12,0,0" Stroke="Black" VerticalAlignment="Top" Width="42">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_move.png" Stretch="None"/>
+            </Ellipse.Fill>
+        </Ellipse>
 
         <AppBarButton x:Name="btnUndo" Height="72" Margin="15,3,0,-3">
             <AppBarButton.Icon>
@@ -34,15 +52,13 @@
                 <BitmapIcon UriSource="/Assets/ApplicationBar/Dark/appbar.redo.curve.png"/>
             </AppBarButton.Icon>
         </AppBarButton>
+        <Ellipse x:Name="ellipseTool_Copy" Width="25" Height="20" StrokeThickness="0" HorizontalAlignment="Left" Margin="337,24,0,0" Stroke="Black" VerticalAlignment="Top" >
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_brush.png" Stretch="None"/>
+            </Ellipse.Fill>
+        </Ellipse>
 
-        <AppBarButton x:Name="btnSelectedColor" Background="White" Margin="215,3,0,-3" >#
-        </AppBarButton>
 
-        <AppBarButton x:Name="btnMoveScreen"  Margin="315,3,0,-3">
-            <AppBarButton.Icon>
-                <BitmapIcon  UriSource="/Assets/ToolMenu/icon_menu_brush.png"/>
-            </AppBarButton.Icon>
-        </AppBarButton>
 
         <!--<Ellipse x:Name="ellipseTransparence"  HorizontalAlignment="Left" Height="39" Margin="231,15,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" >
             <Ellipse.Fill>
