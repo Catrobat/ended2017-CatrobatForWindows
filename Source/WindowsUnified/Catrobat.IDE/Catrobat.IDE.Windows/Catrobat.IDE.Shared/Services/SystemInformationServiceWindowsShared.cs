@@ -59,7 +59,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             }
         }
 
-        public string CurrentApplicationVersion
+        public string CurrentApplicationBuildNameme
         {
             get
             {

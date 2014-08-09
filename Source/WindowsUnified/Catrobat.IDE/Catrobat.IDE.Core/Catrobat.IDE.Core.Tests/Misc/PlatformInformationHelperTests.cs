@@ -46,7 +46,7 @@ namespace Catrobat.IDE.Core.Tests.Misc
         }
 
 
-        public string CurrentApplicationVersion
+        public string CurrentApplicationBuildNameme
         {
             get
             {

@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
@@ -77,6 +79,8 @@ namespace Catrobat.IDE.Core.Models
                     Sprites = Sprites.Select(sprite => sprites[sprite]).ToList()
                 }
             };
+
+            ServiceLocator.ContextService.UpdateProgramHeader(result);
 
             return result;
         }

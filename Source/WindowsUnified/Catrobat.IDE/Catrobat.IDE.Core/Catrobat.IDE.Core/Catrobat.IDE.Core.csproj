@@ -82,7 +82,7 @@
     <Compile Include="CatrobatContextDesign.cs" />
     <Compile Include="CatrobatObjects\TestEqualityComparer.cs" />
     <Compile Include="Services\Common\ProgramExportService.cs" />
-    <Compile Include="Services\Common\ProgramImporterService.cs" />
+    <Compile Include="Services\Common\ProgramImportService.cs" />
     <Compile Include="Services\IProgramExportService.cs" />
     <Compile Include="StorageConstants.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
@@ -465,7 +465,7 @@
     <Compile Include="Services\INotificationService.cs" />
     <Compile Include="Services\IPictureService.cs" />
     <Compile Include="Services\IPlayerLauncherService.cs" />
-    <Compile Include="Services\IProgramImporterService.cs" />
+    <Compile Include="Services\IProgramImportService.cs" />
     <Compile Include="Services\ISoundRecorderService.cs" />
     <Compile Include="Services\ISystemInformationService.cs" />
     <Compile Include="Services\ServiceLocator.cs" />

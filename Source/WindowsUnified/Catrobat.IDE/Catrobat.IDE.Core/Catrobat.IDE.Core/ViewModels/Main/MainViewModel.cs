@@ -127,7 +127,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             get
             {
                 var name = String.Format(AppResources.Main_ApplicationNameAndVersion,
-                    ServiceLocator.SystemInformationService.CurrentApplicationVersion);
+                    ServiceLocator.SystemInformationService.CurrentApplicationBulidName);
                 return name;
             }
         }

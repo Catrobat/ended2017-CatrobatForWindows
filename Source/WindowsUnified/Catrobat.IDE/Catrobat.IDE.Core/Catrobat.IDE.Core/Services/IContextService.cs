@@ -31,5 +31,7 @@ namespace Catrobat.IDE.Core.Services
         Task<LocalSettings> RestoreLocalSettings();
 
         Task CreateThumbnailsForNewProgram(string programName);
+
+        void UpdateProgramHeader(XmlProgram program);
     }
 }

@@ -18,7 +18,7 @@ using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
-    public class ProgramImporterService : IProgramImporterService
+    public class ProgramImportService : IProgramImportService
     {
         private Stream _projectStream;
         private ExtractProgramResult _extractResult;
@@ -169,8 +169,6 @@ namespace Catrobat.IDE.WindowsShared.Services
                 Path.Combine(StorageConstants.TempProgramImportPath,
                 StorageConstants.ProgramCodePath),
                 uniqueProgramName);
-
-            // TODO: Task set the program's header information to the the device's info
 
             if (_checkResult != null)
                 _checkResult.ProjectHeader.ProjectName = renameResult.NewProjectName;
