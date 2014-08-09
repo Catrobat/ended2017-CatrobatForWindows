@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.CatrobatObjects;
@@ -26,6 +27,7 @@ namespace Catrobat.IDE.WindowsShared.Services
         private OnlineProgramHeader _onlineProjectHeader;
         private XmlProgram _convertedProject;
         private string _programName;
+        private CancellationTokenSource _cancellationTokenSource;
 
         public void SetProjectStream(Stream projectStream)
         {
@@ -158,6 +160,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             var uniqueProgramName = await ServiceLocator.ContextService.
                 FindUniqueProgramName(_programName);
 
+            Debug.WriteLine("Starting with _convertedProject.Save in AcceptTempProject");
             if (_convertedProject != null) // if previour conversion was OK
             {
                 await _convertedProject.Save(Path.Combine(
@@ -173,6 +176,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             if (_checkResult != null)
                 _checkResult.ProjectHeader.ProjectName = renameResult.NewProjectName;
 
+            Debug.WriteLine("Starting with storage.MoveDirectoryAsyn in AcceptTempProject");
             using (var storage = StorageSystem.GetStorage())
             {
                 var newPath = Path.Combine(StorageConstants.ProgramsPath,
@@ -180,7 +184,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                 await storage.MoveDirectoryAsync(StorageConstants.TempProgramImportPath,
                     newPath);
             }
-
+            Debug.WriteLine("Starting with CreateThumbnailsForNewProgram in AcceptTempProject");
             await ServiceLocator.ContextService.
                 CreateThumbnailsForNewProgram(uniqueProgramName);
 
@@ -192,21 +196,14 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public async Task CancelImport()
         {
-            throw new NotImplementedException();
-            // TODO: cancel import
-
-            //_extractResult = null;
-
-            //using (var storage = StorageSystem.GetStorage())
-            //{
-            //    await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportPath);
-            //    await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
-            //}
+            _cancellationTokenSource.Cancel();
         }
 
 
         public async Task TryImportWithStatusNotifications()
         {
+            _cancellationTokenSource = new CancellationTokenSource();
+            Debug.WriteLine("Starting with ExtractProgram");
             var extracionResult = await ServiceLocator.ProjectImporterService.ExtractProgram();
 
             if (extracionResult.Status == ExtractProgramStatus.Error)
@@ -217,7 +214,16 @@ namespace Catrobat.IDE.WindowsShared.Services
                         ToastDisplayDuration.Long);
                 return;
             }
-
+            if(_cancellationTokenSource.Token.IsCancellationRequested == true)
+            {
+                ServiceLocator.NotifictionService.ShowToastNotification(
+                        "Import aborted",
+                        "Import was aborted by a user-interaction.",
+                        ToastDisplayDuration.Long);  // localize
+                return;
+                //_cancellationTokenSource.Token.ThrowIfCancellationRequested();
+            }
+            Debug.WriteLine("Starting with CheckProgram");
             var validateResult = await ServiceLocator.ProjectImporterService.CheckProgram();
 
             var acceptProject = true;
@@ -255,6 +261,17 @@ namespace Catrobat.IDE.WindowsShared.Services
                     throw new ArgumentOutOfRangeException();
             }
 
+            if (_cancellationTokenSource.Token.IsCancellationRequested == true)
+            {
+                ServiceLocator.NotifictionService.ShowToastNotification(
+                        "Import aborted",
+                        "Import was aborted by a user-interaction.",
+                        ToastDisplayDuration.Long);  // localize
+                return;
+                //_cancellationTokenSource.Token.ThrowIfCancellationRequested();
+            }
+
+            Debug.WriteLine("Starting with AcceptTempProject");
             if (acceptProject)
             {
                 await ServiceLocator.ProjectImporterService.AcceptTempProject();
@@ -267,6 +284,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                     AppResources.Import_ProgramAddedText,
                     ToastDisplayDuration.Long);
             }
+            Debug.WriteLine("Finished");
         }
     }
 }

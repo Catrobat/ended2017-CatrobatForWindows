@@ -7,6 +7,7 @@ using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
+using System.Threading.Tasks;
 
 
 namespace Catrobat.IDE.Core.ViewModels.Service
@@ -20,9 +21,9 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _versionLabelText = "";
         private string _viewsLabelText = "";
         private string _downloadsLabelText = "";
-        private Program _currentProgram;
         private readonly object _importLock = new object();
         private bool _isImporting = false;
+        private MessageboxResult _cancelImportCallbackResult;
 
         #endregion
 
@@ -105,6 +106,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 if (_isImporting != value)
                 {
                     _isImporting = value;
+                    CancelDownloadCommand.RaiseCanExecuteChanged();
                     RaisePropertyChanged(() => IsImporting);
                 }
             }
@@ -118,6 +120,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public RelayCommand<OnlineProgramHeader> DownloadCommand { get; private set; }
 
+        public RelayCommand CancelDownloadCommand { get; private set; }
+
         public ICommand ReportCommand { get; private set; }
 
         public ICommand LicenseCommand { get; private set; }
@@ -129,6 +133,11 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private bool DownloadCommand_CanExecute(OnlineProgramHeader dataContext)
         {
             return ButtonDownloadIsEnabled;
+        }
+
+        private bool CancelDownloadCommand_CanExecute()
+        {
+            return IsImporting;
         }
 
         #endregion
@@ -157,7 +166,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     ServiceLocator.NotifictionService.ShowMessageBox(
                         "Wait for other download", 
                         "Please wait while the current program has finished downloading",
-                        (r)=>{/* no action */}, MessageBoxOptions.Ok); // TODO: localize
+                        CancelImportCallback,  MessageBoxOptions.Ok); // TODO: localize
                     return;
                 }
 
@@ -189,6 +198,11 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.PROJECT_LICENSE_URL);
         }
 
+        private async void CancelDownloadAction()
+        {
+            await ServiceLocator.ProjectImporterService.CancelImport();
+        }
+
         #endregion
 
         #region MessageActions
@@ -197,11 +211,24 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public OnlineProgramViewModel()
         {
-            IsImporting = false;
             OnLoadCommand = new RelayCommand<OnlineProgramHeader>(OnLoadAction);
             DownloadCommand = new RelayCommand<OnlineProgramHeader>(DownloadAction, DownloadCommand_CanExecute);
+            CancelDownloadCommand = new RelayCommand(CancelDownloadAction, CancelDownloadCommand_CanExecute);
             ReportCommand = new RelayCommand<OnlineProgramHeader>(ReportAction);
             LicenseCommand = new RelayCommand(LicenseAction);
+            IsImporting = false;
         }
+
+        #region Callbacks
+
+        private void CancelImportCallback(MessageboxResult result)
+        {
+            _cancelImportCallbackResult = result;
+            //if (_cancelImportCallbackResult == MessageboxResult.Cancel)
+            //{
+            //    ServiceLocator.ProjectImporterService.CancelImport();
+            //}
+        }
+        #endregion
     }
 }

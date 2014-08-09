@@ -134,18 +134,31 @@
                 Visibility="{Binding OnlineProgramViewModel.IsImporting, Source={StaticResource Locator}, 
                 Converter={StaticResource BoolVisibilityConverter}}">
       <StackPanel Margin="12 0 12 6"
-                  Background="{ThemeResource AppBarBackgroundBrush}">
-        <StackPanel Height="Auto"
-                    Orientation="Horizontal" 
-                    VerticalAlignment="Center" 
+                  Background="{ThemeResource AppBarBackgroundBrush}"
+                  HorizontalAlignment="Stretch">
+        <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center">
-          <controls:ProcessIcon Margin="0 0 6 0" 
-                            IsProcessing="{Binding OnlineProgramViewModel.IsImporting}" />
-          <TextBlock Foreground="White"
-                     VerticalAlignment="Center" HorizontalAlignment="Center" 
-                     Text="{Binding Resources.Main_OnlineProgramLoading, 
-                     Source={StaticResource LocalizedStrings}}" 
-                     Style="{ThemeResource TextNormalStyle}"/>
+          <StackPanel Height="Auto"
+                      Orientation="Horizontal" 
+                      VerticalAlignment="Center" 
+                      HorizontalAlignment="Center">
+            <controls:ProcessIcon Margin="0 0 6 0" 
+                              IsProcessing="{Binding OnlineProgramViewModel.IsImporting, Source={StaticResource Locator}}" />
+            <TextBlock Foreground="White"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" 
+                       Text="{Binding Resources.Main_OnlineProgramLoading, 
+                       Source={StaticResource LocalizedStrings}}" 
+                       Style="{ThemeResource TextNormalStyle}"/>
+          </StackPanel>
+          <Button Name="ButtonCancelDownload"
+                    Content="Cancel"
+                    Margin="24 0 0 0"
+                    Foreground="{ThemeResource AppBarBackgroundBrush}"
+                    Background="White"
+                    Command="{Binding OnlineProgramViewModel.CancelDownloadCommand, 
+                    Source={StaticResource Locator}}"
+                    HorizontalAlignment="Right">
+          </Button>
         </StackPanel>
       </StackPanel>
     </StackPanel>
