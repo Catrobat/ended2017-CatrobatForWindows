@@ -607,5 +607,21 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
 
         }
+
+        private void LayoutRoot_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            var point = new Point(Convert.ToInt32(e.GetCurrentPoint(PaintingAreaContentPanelGrid).Position.X), Convert.ToInt32(e.GetCurrentPoint(PaintingAreaContentPanelGrid).Position.Y));
+
+            // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
+            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
+            {
+                return;
+            }
+
+            PocketPaintApplication.GetInstance().ToolCurrent.HandleDown(point);
+            PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(point);
+
+            e.Handled = true;
+        }
     }
 }

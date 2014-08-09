@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Catrobat.Paint.Phone.Old.Data;
 using Catrobat.Paint.Phone.Old.Misc;
-using Catrobat.Paint.Phone.Old.Resources;
+//using Catrobat.Paint.Phone.Old.Resources;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Phone.Controls;
@@ -104,9 +104,9 @@ namespace Catrobat.Paint.Phone.Old.ViewModel
         public ICommand BackPressedCommand { get; private set; }
         private void BackPressedExecute(WriteableBitmap wb)
         {
-            MessageBoxResult result = MessageBox.Show(AppResources.SaveChangesToCatrobatMessageContent, 
-                AppResources.SaveChangesToCatrobatMessageTitle, MessageBoxButton.OKCancel);
-
+            //MessageBoxResult result = MessageBox.Show(AppResources.SaveChangesToCatrobatMessageContent, 
+            //    AppResources.SaveChangesToCatrobatMessageTitle, MessageBoxButton.OKCancel);
+            MessageBoxResult result = MessageBoxResult.OK;
             if (result == MessageBoxResult.OK)
             {
                 PaintLauncher.Task.CurrentImage = new WriteableBitmap(wb);
