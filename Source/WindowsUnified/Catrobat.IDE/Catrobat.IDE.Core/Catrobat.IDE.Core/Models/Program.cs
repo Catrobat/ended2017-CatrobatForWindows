@@ -140,7 +140,7 @@ namespace Catrobat.IDE.Core.Models
 
         public async Task Save(string path = null)
         {
-            var xmlProject = new XmlProjectConverter().ConvertBack(this);
+            var xmlProject = new XmlProgramConverter().ConvertBack(this);
             await xmlProject.Save(path);
         }
 

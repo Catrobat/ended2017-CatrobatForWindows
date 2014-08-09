@@ -47,7 +47,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 
             switch (projectHeader.ValidityState)
             {  
-                case LocalProjectState.Damaged:
+                case LocalProgramState.Damaged:
                     ServiceLocator.NotifictionService.ShowMessageBox(
                         AppResources.Main_SelectedProgramNotValidMessage,
                         String.Format(AppResources.Main_SelectedProgramNotValidHeader,
@@ -55,11 +55,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls
                         delegate { /* no action */ }, MessageBoxOptions.Ok);
                     break;
 
-                case LocalProjectState.AppUpdateRequired:
+                case LocalProgramState.AppUpdateRequired:
                     // TODO: show messagebox and offer link to the store
                     break;
 
-                case LocalProjectState.VersionOutdated:
+                case LocalProgramState.VersionOutdated:
                     // TODO: show messagebox and maybe add functionality to repair the project
                     break;
                 default:

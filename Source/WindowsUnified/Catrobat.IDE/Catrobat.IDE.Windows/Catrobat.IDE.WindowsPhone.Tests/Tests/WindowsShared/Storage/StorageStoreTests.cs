@@ -224,7 +224,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
 
             using (var resource = (new ResourceLoaderWindowsShared()).CreateResourceLoader())
             {
-                var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/test.catroid");
+                var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SamplePrograms/test.catroid");
                 await zipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
 
                 using (IStorage storage = new StorageWindowsShared())
@@ -243,7 +243,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
 
             using (var resource = (new ResourceLoaderWindowsShared()).CreateResourceLoader())
             {
-                var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/test.catroid");
+                var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SamplePrograms/test.catroid");
                 await zipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
 
                 var image = storage.LoadImage("TestLoadImage/screenshot.png");

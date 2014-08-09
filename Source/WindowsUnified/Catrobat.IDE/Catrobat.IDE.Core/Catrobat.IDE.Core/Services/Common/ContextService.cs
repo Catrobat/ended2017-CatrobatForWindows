@@ -67,7 +67,20 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public async Task<Program> LoadProgramByName(string programName)
         {
-            return new XmlProjectConverter().Convert(await LoadXmlProgramByName(programName));
+            Program program = null;
+            try
+            {
+                program = new XmlProgramConverter().Convert(await LoadXmlProgramByName(programName));
+            }
+            catch (Exception)
+            {
+                // Program could not be loaded
+                if(Debugger.IsAttached)
+                    Debugger.Break();
+            }
+
+
+            return program;
         }
 
         public async Task<XmlProgram> LoadXmlProgramByName(string programName)
@@ -174,7 +187,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 newProject.ProjectHeader.ProgramName = newProgramName;
                 await newProject.Save();
 
-                return new XmlProjectConverter().Convert(newProject);
+                return new XmlProgramConverter().Convert(newProject);
             }
         }
 

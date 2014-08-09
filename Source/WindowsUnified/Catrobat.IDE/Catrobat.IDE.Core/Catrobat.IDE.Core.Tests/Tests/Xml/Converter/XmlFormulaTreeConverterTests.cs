@@ -97,8 +97,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.Xml.Converter
                 var xml = document.ToString();
 
                 var xmlProject = new XmlProgram(xml);
-                var project = new XmlProjectConverter().Convert(xmlProject);
-                var xmlProject2 = new XmlProjectConverter().ConvertBack(project);
+                var project = new XmlProgramConverter().Convert(xmlProject);
+                var xmlProject2 = new XmlProgramConverter().ConvertBack(project);
 
                 var formulas = xmlProject.SpriteList.Sprites
                     .SelectMany(sprite => sprite.Scripts.Scripts
@@ -183,7 +183,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Xml.Converter
             var xml = document.ToString();
 
             var xmlProject = new XmlProgram(xml);
-            var project = new XmlProjectConverter().Convert(xmlProject);
+            var project = new XmlProgramConverter().Convert(xmlProject);
 
             var sprite = project.Sprites.Single();
             var brick = sprite.Scripts.SelectMany(script => script.Bricks).Single();

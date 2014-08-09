@@ -16,7 +16,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             using (var resourceLoader = factory.CreateResourceLoader())
             {
                 Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestsPhone,
-                                                                  "SampleData/SampleProjects/simple.xml");
+                                                                  "SampleData/SamplePrograms/simple.xml");
                 Assert.IsNotNull(stream);
                 stream.Dispose();
             }

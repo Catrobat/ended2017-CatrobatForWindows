@@ -215,7 +215,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 {
                     ServiceLocator.DispatcherService.RunOnMainThread(() =>
                     {
-                        CurrentProgramHeader.ValidityState = LocalProjectState.Valid;
+                        CurrentProgramHeader.ValidityState = LocalProgramState.Valid;
                     });
 
                     CurrentProgram = newProgram;
@@ -230,7 +230,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 {
                     ServiceLocator.DispatcherService.RunOnMainThread(() =>
                     {
-                        CurrentProgramHeader.ValidityState = LocalProjectState.Damaged;
+                        CurrentProgramHeader.ValidityState = LocalProgramState.Damaged;
                         // TODO: get real ValidityState from "LoadProjectByNameStatic"
 
                         ServiceLocator.NavigationService.NavigateBack(this.GetType());

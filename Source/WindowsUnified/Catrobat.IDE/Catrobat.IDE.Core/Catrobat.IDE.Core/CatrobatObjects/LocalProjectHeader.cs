@@ -7,7 +7,7 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.CatrobatObjects
 {
-    public enum LocalProjectState { Valid, AppUpdateRequired, Damaged, VersionOutdated }
+    public enum LocalProgramState { Valid, AppUpdateRequired, Damaged, VersionOutdated }
 
     [DebuggerDisplay("Name = {Name}")]
     public class LocalProjectHeader : 
@@ -35,8 +35,8 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             }
         }
 
-        private LocalProjectState _validityState = LocalProjectState.Valid;
-        public LocalProjectState ValidityState
+        private LocalProgramState _validityState = LocalProgramState.Valid;
+        public LocalProgramState ValidityState
         {
             get
             {
@@ -54,7 +54,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
         {
             get
             {
-                return _validityState == LocalProjectState.Valid;
+                return _validityState == LocalProgramState.Valid;
             }
         }
 

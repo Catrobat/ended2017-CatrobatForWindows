@@ -208,14 +208,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Storage
                 if (Directory.Exists(basePath))
                     Directory.Delete(basePath, true);
 
-                var sampleProjectsPath = BasePathHelper.GetSampleProjectsPath();
+                var sampleProgramsPath = BasePathHelper.GetSampleProgramsPath();
 
                 Directory.CreateDirectory(storage.BasePath + basePath);
 
                 using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
                 {
                     var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon,
-                                                                      sampleProjectsPath + "test.catroid");
+                                                                      sampleProgramsPath + "test.catroid");
                     await zipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
                     stream.Dispose();
                 }

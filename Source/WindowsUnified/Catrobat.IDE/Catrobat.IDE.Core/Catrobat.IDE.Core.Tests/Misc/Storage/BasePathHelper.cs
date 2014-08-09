@@ -30,10 +30,10 @@ namespace Catrobat.IDE.Core.Tests.Misc.Storage
       return path;
     }
 
-    public static string GetSampleProjectsPath()
+    public static string GetSampleProgramsPath()
     {
       string path = GetSampleDataPath();
-      path += "SampleProjects/";
+      path += "SamplePrograms/";
 
       return path;
     }

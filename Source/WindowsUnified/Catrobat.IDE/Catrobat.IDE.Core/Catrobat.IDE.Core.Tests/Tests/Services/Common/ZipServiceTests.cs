@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
             var zipService = new ZipService();
 
             TestHelper.InitializeAndClearCatrobatContext();
-            const string path = "SampleData/SampleProjects/test.catroid";
+            const string path = "SampleData/SamplePrograms/test.catroid";
 
             using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
@@ -75,7 +75,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
             var zipService = new ZipService();
 
             TestHelper.InitializeAndClearCatrobatContext();
-            const string path = "SampleData/SampleProjects/test.catroid";
+            const string path = "SampleData/SamplePrograms/test.catroid";
 
             using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
