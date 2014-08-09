@@ -59,10 +59,6 @@ namespace Catrobat.IDE.WindowsShared.Services
             }
         }
 
-        public string CurrentApplicationVersion { get { return ""; } } // TODO: find right value
-        public string CurrentApplicationBuildName { get { return ""; } }// TODO: find right value
-        public int CurrentApplicationBulidNumber { get { return 1; } }// TODO: find right value
-
         public string CurrentApplicationBuildNameme
         {
             get
@@ -80,17 +76,17 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public string CurrentApplicationVersion 
         { 
-            get { return "CurrentApplicationVersion";} 
+            get { return "CurrentApplicationVersion";} // TODO: return right value
         }
 
         public string CurrentApplicationBuildName 
         {
-            get { return "CurrentApplicationBuildName"; }
+            get { return "CurrentApplicationBuildName"; } // TODO: return right value
         }
 
         public int CurrentApplicationBulidNumber 
-        { 
-            get { return 1;} 
+        {
+            get { return 1; } // TODO: return right value
         }
     }
 }
