@@ -126,8 +126,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             get
             {
-                var name = String.Format(AppResources.Main_ApplicationNameAndVersion,
-                    ServiceLocator.SystemInformationService.CurrentApplicationBulidName);
+                //var name = String.Format(AppResources.Main_ApplicationNameAndVersion,
+                //    ServiceLocator.SystemInformationService.CurrentApplicationBulidName);
+                var name = "";
                 return name;
             }
         }
@@ -246,10 +247,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             if (_showDownloadMessage)
             {
                 var portbleImage = new PortableImage();
-                await portbleImage.LoadFromResources(ResourceScope.Ide,
-                    "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
+                //await portbleImage.LoadFromResources(ResourceScope.Ide,
+                //    "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
 
-                ServiceLocator.NotifictionService.ShowToastNotification(null,
+                ServiceLocator.NotifictionService.ShowToastNotification("Download started",
                     AppResources.Main_DownloadQueueMessage, ToastDisplayDuration.Short, portbleImage);
 
                 _showDownloadMessage = false;
@@ -257,10 +258,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             if (_showUploadMessage)
             {
                 var portbleImage = new PortableImage();
-                await portbleImage.LoadFromResources(ResourceScope.Ide,
-                    "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
+                //await portbleImage.LoadFromResources(ResourceScope.Ide,
+                //    "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
 
-                ServiceLocator.NotifictionService.ShowToastNotification(null,
+                ServiceLocator.NotifictionService.ShowToastNotification("Upload started",
                     AppResources.Main_UploadQueueMessage, ToastDisplayDuration.Short, portbleImage);
 
                 _showUploadMessage = false;

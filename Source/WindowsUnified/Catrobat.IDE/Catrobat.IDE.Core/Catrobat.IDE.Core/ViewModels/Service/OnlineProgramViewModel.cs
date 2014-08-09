@@ -8,6 +8,7 @@ using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight.Messaging;
 
 
 namespace Catrobat.IDE.Core.ViewModels.Service
@@ -172,6 +173,9 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
                 IsImporting = true;
             }
+            
+            var message = new MessageBase();
+            Messenger.Default.Send(message, ViewModelMessagingToken.DownloadProgramStartedListener);
 
             try
             {
