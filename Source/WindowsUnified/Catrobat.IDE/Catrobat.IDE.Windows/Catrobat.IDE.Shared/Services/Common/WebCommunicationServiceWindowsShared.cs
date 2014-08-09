@@ -21,15 +21,20 @@ using Catrobat.IDE.Core.Services.Storage;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
 
+// TODOs if you acitvate this service:
+//  * copy methods from WebCommunicationService to update this file if there were any changes
+//  * add methods for download-control to the Interface definition
+
 namespace Catrobat.IDE.WindowsShared.Services.Common
 {
     public class WebCommunicationServiceWindowsShared : IWebCommunicationService
     {
         private static int _uploadCounter = 0;
-
         private List<DownloadOperation> _activeDownloadOperationList;
         private CancellationTokenSource _cancellationTokenSource;
-        private Action<DownloadOperation> _progressHandler;
+        private bool _paused;
+
+        public event DownloadProgressUpdatedEventHandler DownloadProgressChanged;
 
         public async Task<List<OnlineProgramHeader>> LoadOnlineProjectsAsync(
             string filterText, int offset, int count,
@@ -84,6 +89,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
         }
 
 
+        //old simple downloader
         public async Task<Stream> DownloadAsync(string downloadUrl, string projectName)
         {
             using (var httpClient = new HttpClient())
@@ -108,11 +114,18 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
             }
         }
 
-        public async Task DownloadAsyncAlternativ(string downloadUrl, string projectName)
+        public void InitDownloads()
         {
-            // TODO to be done somewhere else e.g WebCommunication.InitDownloads();
             _activeDownloadOperationList = new List<DownloadOperation>();
             _cancellationTokenSource = new CancellationTokenSource();
+        }
+
+        public async Task DownloadAsyncAlternativ(string downloadUrl, string projectName)
+        {
+            InitDownloads();
+            downloadUrl = "download/881.catrobat";
+            projectName = "SKYPASCAL";
+            // optionally create a new cancellation token to be able to cancel every download individually
             try
             {
                 Uri downloadSource = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS + downloadUrl);
@@ -130,40 +143,37 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
             }
         }
 
-        private async void ManageDownloadsAsync(DownloadOperation downloadOperation, bool start)
+        public void CancelDownloads()
         {
-            try
-            {
-                _activeDownloadOperationList.Add(downloadOperation);
-                
-                //TODO can a Handler in OnlineProgramView.xaml.cs be used
-                Progress<DownloadOperation> downloadProgressCallback = new Progress<DownloadOperation>(/*ProgressHandler*/); 
-                if (start)
-                {
-                    await downloadOperation.StartAsync().AsTask(_cancellationTokenSource.Token, downloadProgressCallback);
-                }
-                //else
-                //{
-                //    // downlaod was already running on app-start
-                //    await downloadOperation.AttachAsync().AsTask(_cancellationTokenSource.Token, downloadProgressCallback);
-                //}
-                // TODO report that download with ID: downloadOperation.Guid has finished
-            }
-            catch (TaskCanceledException)
-            {
-                // Download Canceled
-            }
-            catch (Exception ex)
-            {
-                // TODO add error Handling
-            }
-            finally
-            {
-                _activeDownloadOperationList.Remove(downloadOperation);
-            }
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource.Dispose();
+            InitDownloads();
         }
 
-
+        public void PauseOrResumeDownloads()
+        {
+            if (!_paused)
+            {
+                foreach (DownloadOperation downloadOperation in _activeDownloadOperationList)
+                {
+                    if (downloadOperation.Progress.Status == BackgroundTransferStatus.Running)
+                    {
+                        downloadOperation.Pause();
+                    }
+                }
+                _paused = true;
+            }
+            else
+            {
+                foreach (DownloadOperation downloadOperation in _activeDownloadOperationList)
+                {
+                    if (downloadOperation.Progress.Status == BackgroundTransferStatus.PausedByApplication)
+                    {
+                        downloadOperation.Resume();
+                    }
+                }
+            }
+        }
 
         public async Task<JSONStatusResponse> CheckTokenAsync(string username, string token, string language = "en")
         {
@@ -464,8 +474,58 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
         }
 
 
-        // TODO Use Helpers from StorageWindowsShared - move to separate Helper-class
         #region Helpers
+        private async void ManageDownloadsAsync(DownloadOperation downloadOperation, bool start)
+        {
+            try
+            {
+                _activeDownloadOperationList.Add(downloadOperation);
+
+                Progress<DownloadOperation> downloadProgressCallback = new Progress<DownloadOperation>(ManageDownloadProgress);
+                if (start)
+                {
+                    await downloadOperation.StartAsync().AsTask(_cancellationTokenSource.Token, downloadProgressCallback);
+                }
+                //else
+                //{
+                //    // downlaod was already running on app-start
+                //    await downloadOperation.AttachAsync().AsTask(_cancellationTokenSource.Token, downloadProgressCallback);
+                //}
+                // TODO report that download with ID: downloadOperation.Guid has finished --> fire an event
+            }
+            catch (TaskCanceledException)
+            {
+                // Download Canceled
+            }
+            catch (Exception ex)
+            {
+                // TODO add error Handling
+            }
+            finally
+            {
+                _activeDownloadOperationList.Remove(downloadOperation);
+            }
+        }
+
+        private void ManageDownloadProgress(DownloadOperation downloadOperation)
+        {
+            string downloadWhoseProgressChanged = downloadOperation.Guid.ToString();
+            var downloadProgressStatus = downloadOperation.Progress.Status;
+
+            int receivedPercentage = 100;
+            double bytesReceived = downloadOperation.Progress.BytesReceived;
+            double bytesLeftToReceive = downloadOperation.Progress.TotalBytesToReceive;
+            if (bytesLeftToReceive > 0)
+            {
+                receivedPercentage = (int)((bytesReceived * 100) / bytesLeftToReceive);
+            }
+            ProgressEventArgs args = new ProgressEventArgs(receivedPercentage, downloadWhoseProgressChanged);
+            DownloadProgressChanged(this, args);
+        }
+        #endregion
+
+        // TODO Use Helpers from StorageWindowsShared - move to separate Helper-class
+        #region Helpers from StorageWindowsShared
         public async Task<StorageFolder> CreateFolderPathAsync(string path)
         {
             if (path == "")

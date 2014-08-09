@@ -21,6 +21,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _viewsLabelText = "";
         private string _downloadsLabelText = "";
         private Program _currentProgram;
+        private readonly object _importLock = new object();
+        private bool _isImporting = false;
 
         #endregion
 
@@ -95,6 +97,19 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
         }
 
+        public bool IsImporting
+        {
+            get { return _isImporting; }
+            set
+            {
+                if (_isImporting != value)
+                {
+                    _isImporting = value;
+                    RaisePropertyChanged(() => IsImporting);
+                }
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -132,13 +147,12 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             ButtonDownloadIsEnabled = true;
         }
 
-        private readonly object _importLock = new object();
-        private bool _isImporting = false;
+        
         private async void DownloadAction(OnlineProgramHeader programHeader)
         {
             lock (_importLock)
             {
-                if (_isImporting)
+                if (IsImporting)
                 {
                     ServiceLocator.NotifictionService.ShowMessageBox(
                         "Wait for other download", 
@@ -147,7 +161,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     return;
                 }
 
-                _isImporting = true;
+                IsImporting = true;
             }
 
             try
@@ -160,7 +174,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
             finally
             {
-                lock (_importLock) { _isImporting = false; }
+                lock (_importLock) { IsImporting = false; }
 
             }
         }
@@ -183,6 +197,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public OnlineProgramViewModel()
         {
+            IsImporting = false;
             OnLoadCommand = new RelayCommand<OnlineProgramHeader>(OnLoadAction);
             DownloadCommand = new RelayCommand<OnlineProgramHeader>(DownloadAction, DownloadCommand_CanExecute);
             ReportCommand = new RelayCommand<OnlineProgramHeader>(ReportAction);

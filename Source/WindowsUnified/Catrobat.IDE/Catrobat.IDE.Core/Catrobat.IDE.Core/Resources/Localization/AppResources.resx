@@ -1281,4 +1281,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_TitleShareProgram" xml:space="preserve">
     <value>SHARE</value>
   </data>
+  <data name="Main_OnlineProgramLoading" xml:space="preserve">
+    <value>downloading...</value>
+  </data>
 </root>

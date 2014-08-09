@@ -45,7 +45,7 @@ namespace Catrobat.IDE.WindowsShared
             ServiceLocator.Register<SoundServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ActionTemplateServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SensorServiceWindowsShared>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<WebCommunicationService>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<WebCommunicationServiceWindowsShared>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ZipService>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ProgramImporterService>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ContextService>(TypeCreationMode.Lazy);

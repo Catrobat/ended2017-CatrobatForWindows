@@ -128,6 +128,7 @@
     <Compile Include="UI\ISelectable.cs" />
     <Compile Include="UI\OnlineProjectsCollection.cs" />
     <Compile Include="UI\PortableUI\PortableFontStyle.cs" />
+    <Compile Include="Utilities\ProgressEventArgs.cs" />
     <Compile Include="ViewModels\Editor\Formula\FormulaEvaluationResult.cs" />
     <Compile Include="Navigation\NavigationObject.cs" />
     <Compile Include="ViewModels\Main\ProgramDetailViewModel.cs" />

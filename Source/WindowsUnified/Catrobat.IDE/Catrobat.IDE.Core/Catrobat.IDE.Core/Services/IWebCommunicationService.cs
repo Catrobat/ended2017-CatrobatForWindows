@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Utilities.JSON;
+using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Core.Utilities;
 
 
 namespace Catrobat.IDE.Core.Services
 {
+    public delegate void DownloadProgressUpdatedEventHandler(object sender, ProgressEventArgs e);
+
     public interface IWebCommunicationService
     {
+        event DownloadProgressUpdatedEventHandler DownloadProgressChanged;
+        
         Task<List<OnlineProgramHeader>> LoadOnlineProjectsAsync(string filterText, int offset, int count, CancellationToken taskCancellationToken);
 
         Task<Stream> DownloadAsync(string downloadUrl, string projectName);
