@@ -54,12 +54,25 @@ namespace Catrobat.IDE.Core.Tests.Misc
             }
         }
 
+        public int CurrentApplicationBulidNumber { get; private set; }
+
         public PortableSolidColorBrush AccentBrush
         {
             get
             {
                 return new PortableSolidColorBrush(0,0,0,0);
             }
+        }
+
+
+        public string CurrentApplicationVersion
+        {
+            get { return ""; }
+        }
+
+        public string CurrentApplicationBuildName
+        {
+            get { return ""; }
         }
     }
 }

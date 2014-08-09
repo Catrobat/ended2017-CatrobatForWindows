@@ -59,6 +59,10 @@ namespace Catrobat.IDE.WindowsShared.Services
             }
         }
 
+        public string CurrentApplicationVersion { get { return ""; } } // TODO: find right value
+        public string CurrentApplicationBuildName { get { return ""; } }// TODO: find right value
+        public int CurrentApplicationBulidNumber { get { return 1; } }// TODO: find right value
+
         public string CurrentApplicationBuildNameme
         {
             get

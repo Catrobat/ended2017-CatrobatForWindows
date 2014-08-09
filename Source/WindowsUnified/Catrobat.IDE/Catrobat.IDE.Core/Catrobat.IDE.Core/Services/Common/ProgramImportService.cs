@@ -282,7 +282,8 @@ namespace Catrobat.IDE.WindowsShared.Services
                 ServiceLocator.NotifictionService.ShowToastNotification(
                     AppResources.Import_ProgramAdded,
                     AppResources.Import_ProgramAddedText,
-                    ToastDisplayDuration.Long);
+                    ToastDisplayDuration.Long,
+                    ToastTag.ImportFinished);
             }
             Debug.WriteLine("Finished");
         }

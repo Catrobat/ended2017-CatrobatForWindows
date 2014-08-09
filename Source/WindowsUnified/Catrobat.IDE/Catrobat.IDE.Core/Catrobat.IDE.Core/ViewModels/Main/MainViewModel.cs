@@ -126,9 +126,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             get
             {
-                //var name = String.Format(AppResources.Main_ApplicationNameAndVersion,
-                //    ServiceLocator.SystemInformationService.CurrentApplicationBulidName);
-                var name = "";
+                var name = String.Format(AppResources.Main_ApplicationNameAndVersion,
+                    ServiceLocator.SystemInformationService.CurrentApplicationVersion);
                 return name;
             }
         }
@@ -250,8 +249,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 //await portbleImage.LoadFromResources(ResourceScope.Ide,
                 //    "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
 
-                ServiceLocator.NotifictionService.ShowToastNotification("Download started",
-                    AppResources.Main_DownloadQueueMessage, ToastDisplayDuration.Short, portbleImage);
+                ServiceLocator.NotifictionService.ShowToastNotification(null,
+                    AppResources.Main_DownloadQueueMessage, ToastDisplayDuration.Short, ToastTag.Default, portbleImage);
 
                 _showDownloadMessage = false;
             }
@@ -261,8 +260,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 //await portbleImage.LoadFromResources(ResourceScope.Ide,
                 //    "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
 
-                ServiceLocator.NotifictionService.ShowToastNotification("Upload started",
-                    AppResources.Main_UploadQueueMessage, ToastDisplayDuration.Short, portbleImage);
+                ServiceLocator.NotifictionService.ShowToastNotification(null,
+                    AppResources.Main_UploadQueueMessage, ToastDisplayDuration.Short, ToastTag.Default, portbleImage);
 
                 _showUploadMessage = false;
             }
@@ -305,6 +304,14 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             });
         }
 
+        private void ToastNotificationActivatedMessageAction(ToastTag tag)
+        {
+            if (tag == ToastTag.ImportFinished)
+            {
+                ServiceLocator.NavigationService.NavigateTo(this.GetType());
+            }
+        }
+
         #endregion
 
         public MainViewModel()
@@ -333,6 +340,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
+
+            Messenger.Default.Register<ToastTag>(this,
+                ViewModelMessagingToken.ToastNotificationActivated, ToastNotificationActivatedMessageAction);
         }
 
         #region MessageBoxCallback
