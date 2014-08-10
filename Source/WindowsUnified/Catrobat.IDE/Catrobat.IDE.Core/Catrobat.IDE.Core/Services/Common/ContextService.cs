@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
@@ -66,7 +67,20 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public async Task<Program> LoadProgramByName(string programName)
         {
-            return new XmlProjectConverter().Convert(await LoadXmlProgramByName(programName));
+            Program program = null;
+            try
+            {
+                program = new XmlProgramConverter().Convert(await LoadXmlProgramByName(programName));
+            }
+            catch (Exception)
+            {
+                // Program could not be loaded
+                if(Debugger.IsAttached)
+                    Debugger.Break();
+            }
+
+
+            return program;
         }
 
         public async Task<XmlProgram> LoadXmlProgramByName(string programName)
@@ -173,7 +187,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 newProject.ProjectHeader.ProgramName = newProgramName;
                 await newProject.Save();
 
-                return new XmlProjectConverter().Convert(newProject);
+                return new XmlProgramConverter().Convert(newProject);
             }
         }
 
@@ -243,6 +257,39 @@ namespace Catrobat.IDE.Core.Services.Common
                 if(Debugger.IsAttached)
                     Debugger.Break();
             }
+        }
+
+        public void UpdateProgramHeader(XmlProgram program)
+        {
+            program.ProjectHeader.ApplicationBuildName = ServiceLocator.
+                SystemInformationService.CurrentApplicationBuildName;
+
+            program.ProjectHeader.ApplicationBuildNumber = ServiceLocator.
+                SystemInformationService.CurrentApplicationBulidNumber;
+
+            program.ProjectHeader.ApplicationName = Constants.ApplicationName;
+
+            program.ProjectHeader.ApplicationVersion = ServiceLocator.
+                SystemInformationService.CurrentApplicationVersion;
+
+            program.ProjectHeader.CatrobatLanguageVersion = Constants.TargetOutputVersion;
+
+            program.ProjectHeader.DeviceName = ServiceLocator.
+                SystemInformationService.DeviceName;
+
+            program.ProjectHeader.Platform = ServiceLocator.
+                SystemInformationService.PlatformName;
+
+            program.ProjectHeader.PlatformVersion = ServiceLocator.
+                SystemInformationService.PlatformVersion; ;
+            
+            // TODO: check if and how the following properties should be set
+            //program.ProjectHeader.DateTimeUpload = "";
+            //program.ProjectHeader.ProgramLicense = "";
+            //program.ProjectHeader.MediaLicense = "";
+            //program.ProjectHeader.ScreenHeight = "";
+            //program.ProjectHeader.ScreenWidth = "";
+            //program.ProjectHeader.Tags = "";
         }
     }
 }

@@ -120,5 +120,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
             var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             return origin.AddSeconds(timestamp);
         }
+
+        public event DownloadProgressUpdatedEventHandler DownloadProgressChanged;
     }
 }

@@ -3,7 +3,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
-using Context = Catrobat.IDE.Core.Xml.Converter.XmlProjectConverter.ConvertBackContext;
+using Context = Catrobat.IDE.Core.Xml.Converter.XmlProgramConverter.ConvertBackContext;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models.Bricks

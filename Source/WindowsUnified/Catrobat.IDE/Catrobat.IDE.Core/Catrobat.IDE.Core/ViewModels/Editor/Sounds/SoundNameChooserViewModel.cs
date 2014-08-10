@@ -122,7 +122,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
             _receivedSelectedSprite = message.Content;
         }
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
+        private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
         }
@@ -141,7 +141,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
                 ViewModelMessagingToken.CurrentProgramChangedListener, 
-                CurrentProjectChangedMessageAction);
+                CurrentProgramChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, 

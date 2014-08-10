@@ -110,7 +110,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
         #region MessageActions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
+        private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProgram = message.Content;
         }
@@ -130,7 +130,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Program>>(this, 
-                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedMessageAction);
+                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Look>>(this, 
                 ViewModelMessagingToken.LookListener, ChangeLookNameMessageAction);
         }

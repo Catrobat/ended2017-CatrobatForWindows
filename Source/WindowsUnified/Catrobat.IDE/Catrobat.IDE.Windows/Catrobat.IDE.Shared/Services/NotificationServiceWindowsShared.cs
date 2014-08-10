@@ -6,8 +6,11 @@ using System.Xml.Linq;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 using Windows.UI.Popups;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Core.ViewModels;
+using GalaSoft.MvvmLight.Messaging;
 using NotificationsExtensions.ToastContent;
 
 namespace Catrobat.IDE.WindowsShared.Services
@@ -20,8 +23,8 @@ namespace Catrobat.IDE.WindowsShared.Services
 
     public class NotificationServiceWindowsShared : INotificationService
     {
-        public void ShowToastNotification(string title, string message, 
-            ToastDisplayDuration displayDuration, PortableImage image = null)
+        public void ShowToastNotification(string title, string message,
+            ToastDisplayDuration displayDuration, ToastTag tag, PortableImage image = null)
         {
             var duration = ToastDuration.Short;
 
@@ -43,30 +46,41 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             templateContent.Audio.Content = ToastAudioContent.Silent;
 
-            const string notShowInNotificationCenterGroup = "NotShowInNC";
+
             var toast = templateContent.CreateNotification();
-            toast.Tag = notShowInNotificationCenterGroup;
+            toast.Tag = tag.ToString();
+            toast.Activated += ToastOnActivated;
+            toast.Dismissed += ToastOnDismissed;
+            toast.Failed += ToastOnFailed;
 
             ServiceLocator.DispatcherService.RunOnMainThread(() =>
-            {
-                ToastNotificationManager.CreateToastNotifier().Show(toast);
-
-                Task.Run(async () =>
-                {
-                    await Task.Delay(new TimeSpan(0, 0, 0, 10));
-
-                    ServiceLocator.DispatcherService.RunOnMainThread(() => 
-                        ToastNotificationManager.History.Remove(notShowInNotificationCenterGroup));
-                });
-            });
-
+                ToastNotificationManager.CreateToastNotifier().Show(toast));
         }
 
-        public void ShowToastNotification(string title, string message, 
-            TimeSpan timeTillHide, PortableImage image = null)
+        private void ToastOnActivated(ToastNotification toastNotification, object args)
         {
-            // TODO: implement me
-            //throw new NotImplementedException();
+            var tagString = toastNotification.Tag;
+            var tagEnum = (ToastTag)Enum.Parse(typeof(ToastTag), tagString);
+            ToastNotificationManager.History.Remove(tagString);
+
+            if (tagEnum != ToastTag.Default)
+            {
+
+                var toastActivatedMessage = new GenericMessage<ToastTag>(tagEnum);
+                Messenger.Default.Send(toastActivatedMessage, ViewModelMessagingToken.ToastNotificationActivated);
+            }
+        }
+
+        private void ToastOnFailed(ToastNotification toastNotification, ToastFailedEventArgs args)
+        {
+            var tagString = toastNotification.Tag;
+            ToastNotificationManager.History.Remove(tagString);
+        }
+
+        private void ToastOnDismissed(ToastNotification toastNotification, ToastDismissedEventArgs args)
+        {
+            var tagString = toastNotification.Tag;
+            ToastNotificationManager.History.Remove(tagString);
         }
 
         //void DisplayTextToastWithStringManipulation(ToastTemplateType templateType)

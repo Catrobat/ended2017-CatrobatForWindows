@@ -66,8 +66,8 @@ namespace Catrobat.IDE.Core.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public static IProgramImporterService ProjectImporterService
-        { get { return GetInstance<IProgramImporterService>(); } }
+        public static IProgramImportService ProjectImporterService
+        { get { return GetInstance<IProgramImportService>(); } }
 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",

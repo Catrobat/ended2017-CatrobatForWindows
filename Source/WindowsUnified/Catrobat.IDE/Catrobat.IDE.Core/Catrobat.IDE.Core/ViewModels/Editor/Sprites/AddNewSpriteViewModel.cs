@@ -89,7 +89,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region Message Actions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
+        private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProject = message.Content;
         }
@@ -102,7 +102,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedMessageAction);
+                ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
         }
 
         private void ResetViewModel()

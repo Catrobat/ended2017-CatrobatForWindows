@@ -15,15 +15,7 @@ namespace Catrobat.IDE.Core.Tests.Services
         public string LastNotificationMessage;
 
         public void ShowToastNotification(string title, string message, 
-            ToastDisplayDuration timeTillHide, PortableImage image = null)
-        {
-            SentToastNotifications++;
-            LastNotificationTitle = title;
-            LastNotificationMessage = message;
-        }
-
-        public void ShowToastNotification(string title, string message, 
-            TimeSpan timeTillHide, PortableImage image = null)
+            ToastDisplayDuration timeTillHide, ToastTag tag = ToastTag.Default, PortableImage image = null)
         {
             SentToastNotifications++;
             LastNotificationTitle = title;
@@ -39,7 +31,5 @@ namespace Catrobat.IDE.Core.Tests.Services
             LastMessageboxOption = options;
             callback.Invoke(NextMessageboxResult);
         }
-
-
     }
 }

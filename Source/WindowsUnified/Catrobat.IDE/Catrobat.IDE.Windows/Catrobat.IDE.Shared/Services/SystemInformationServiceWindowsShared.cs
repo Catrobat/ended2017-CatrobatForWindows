@@ -59,7 +59,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             }
         }
 
-        public string CurrentApplicationVersion
+        public string CurrentApplicationBuildNameme
         {
             get
             {
@@ -72,6 +72,21 @@ namespace Catrobat.IDE.WindowsShared.Services
         public PortableSolidColorBrush AccentBrush
         {
             get { return new PortableSolidColorBrush(255,255,255,255); } // TODO: change this
+        }
+
+        public string CurrentApplicationVersion 
+        { 
+            get { return "CurrentApplicationVersion";} // TODO: return right value
+        }
+
+        public string CurrentApplicationBuildName 
+        {
+            get { return "CurrentApplicationBuildName"; } // TODO: return right value
+        }
+
+        public int CurrentApplicationBulidNumber 
+        {
+            get { return 1; } // TODO: return right value
         }
     }
 }

@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid x:Name="LayoutRoot"  IsHitTestVisible="True"  ManipulationMode="TranslateX, TranslateY" ManipulationStarted="LayoutRoot_ManipulationStarted_1" >
+    <Grid x:Name="LayoutRoot"  IsHitTestVisible="True"   ManipulationMode="TranslateX, TranslateY" ManipulationStarted="LayoutRoot_ManipulationStarted_1" PointerEntered="LayoutRoot_PointerEntered" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -33,7 +33,7 @@
         </Grid>
 
         <Grid x:Name="GridUserControl" Grid.Row="1" >
-                <UserControl x:Name="SliderThicknessControl" Height="auto" Width="auto" Visibility="Visible" VerticalAlignment="Bottom">
+                <UserControl x:Name="SliderThicknessControl" Height="auto" Width="auto" Visibility="Collapsed" VerticalAlignment="Bottom">
                     <Grid x:Name="SliderThicknessGrid" Background="#1F1F1F"  MinHeight="120">
                         <Slider x:Name="SliderThickness" Background="Black" Maximum="50"  Minimum="1" Margin="0,16,140,12"/>
 

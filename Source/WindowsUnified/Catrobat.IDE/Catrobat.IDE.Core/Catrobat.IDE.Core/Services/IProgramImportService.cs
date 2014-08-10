@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
-using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.CatrobatObjects;
 
 namespace Catrobat.IDE.Core.Services
 {
-    public interface IProgramImporterService
+    public interface IProgramImportService
     {
         void SetProjectStream(Stream projectStream);
 

@@ -11,7 +11,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 
 namespace Catrobat.IDE.Core.Xml.Converter
 {
-    public class XmlProjectConverter
+    public class XmlProgramConverter
     {
         #region Covert
 

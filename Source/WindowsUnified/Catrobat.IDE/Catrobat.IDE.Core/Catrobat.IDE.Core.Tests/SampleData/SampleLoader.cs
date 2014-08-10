@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Tests.SampleData
 {
     public static class SampleLoader
     {
-        private static readonly string path = BasePathHelper.GetSampleProjectsPath();
+        private static readonly string path = BasePathHelper.GetSampleProgramsPath();
 
         public static XDocument LoadSampleXDocument(string sampleName)
         {

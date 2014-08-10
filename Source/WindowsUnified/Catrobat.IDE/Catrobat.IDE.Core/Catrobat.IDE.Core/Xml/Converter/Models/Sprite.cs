@@ -4,7 +4,7 @@ using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
-using Context = Catrobat.IDE.Core.Xml.Converter.XmlProjectConverter.ConvertBackContext;
+using Context = Catrobat.IDE.Core.Xml.Converter.XmlProgramConverter.ConvertBackContext;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models

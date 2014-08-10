@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+    xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
     mc:Ignorable="d"
     DataContext="{Binding MainViewModel.SelectedOnlineProgram, Source={StaticResource Locator}}" Loaded="ViewPageBase_Loaded">
 
@@ -13,7 +14,7 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition />
-      <RowDefinition Height="150"/>
+      <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" 
@@ -97,7 +98,8 @@
         </StackPanel>
       </ScrollViewer>
     </Grid>
-    <Grid Grid.Row="3">
+    <!--Xaml-Content for new advanced downloader:-->
+    <!--<Grid Grid.Row="3">
       <StackPanel
         Margin="12 0 12 0"
         VerticalAlignment="Top" 
@@ -107,27 +109,59 @@
         TextAlignment="Center" HorizontalAlignment="Center" 
         Margin="10 0 10 10"
         Style="{ThemeResource TextNormalStyle}"/>
-        <ProgressBar Name="ProgressBarDownload" IsIndeterminate="False" Margin="10"/>
+        <ProgressBar Name="ProgressBarDownload" 
+                     IsIndeterminate="False" 
+                     Margin="10"
+                     Maximum="100"/>
         <StackPanel Orientation="Horizontal">   
           <Button Name="ButtonStartDownload"
-                  Click="ButtonStartDownload_Click"
                   Content="Start"
                   Margin="6">
           </Button>
           <Button Name="ButtonPauseDownload"
-                  Click="ButtonPauseDownload_Click"
                   Content="Pause"
                   Margin="6">
           </Button>
           <Button Name="ButtonCancelDownload"
-                  Click="ButtonCancelDownload_Click"
                   Content="Cancel"
                   Margin="0 6 6 6">
           </Button>
         </StackPanel>
       </StackPanel>
-
-    </Grid>
+    </Grid>-->
+    <!--Xaml-content for old downloader:-->
+    <StackPanel Grid.Row="3"
+                Visibility="{Binding OnlineProgramViewModel.IsImporting, Source={StaticResource Locator}, 
+                Converter={StaticResource BoolVisibilityConverter}}">
+      <StackPanel Margin="12 0 12 6"
+                  Background="{ThemeResource AppBarBackgroundBrush}"
+                  HorizontalAlignment="Stretch">
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+          <StackPanel Height="Auto"
+                      Orientation="Horizontal" 
+                      VerticalAlignment="Center" 
+                      HorizontalAlignment="Center">
+            <controls:ProcessIcon Margin="0 0 6 0" 
+                              IsProcessing="{Binding OnlineProgramViewModel.IsImporting, Source={StaticResource Locator}}" />
+            <TextBlock Foreground="White"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" 
+                       Text="{Binding Resources.Main_OnlineProgramLoading, 
+                       Source={StaticResource LocalizedStrings}}" 
+                       Style="{ThemeResource TextNormalStyle}"/>
+          </StackPanel>
+          <Button Name="ButtonCancelDownload"
+                    Content="Cancel"
+                    Margin="24 0 0 0"
+                    Foreground="{ThemeResource AppBarBackgroundBrush}"
+                    Background="White"
+                    Command="{Binding OnlineProgramViewModel.CancelDownloadCommand, 
+                    Source={StaticResource Locator}}"
+                    HorizontalAlignment="Right">
+          </Button>
+        </StackPanel>
+      </StackPanel>
+    </StackPanel>
   </Grid>
 
   <Page.BottomAppBar>

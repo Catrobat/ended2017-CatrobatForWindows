@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core.Resources
             //{"stick.catrobat", "stick"}
         };
 
-        public async Task LoadSampleProjects()
+        public async Task LoadSampleProgram()
         {
             using (var storage = StorageSystem.GetStorage())
             {
@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Core.Resources
             {
                 var projectFileName = pair.Key;
                 var projectName = pair.Value;
-                var path = string.Format("SampleProjects/{0}", projectFileName);
+                var path = string.Format("SamplePrograms/{0}", projectFileName);
 
                 Stream resourceStream = null;
 
@@ -65,7 +65,7 @@ namespace Catrobat.IDE.Core.Resources
                 }
                 catch (Exception)
                 {
-                    Debugger.Break(); // sample project does not exist: please remove from _sampleProjectNames or add to Core/Resources/SampleProjects
+                    Debugger.Break(); // sample project does not exist: please remove from _sampleProjectNames or add to Core/Resources/SamplePrograms
                 }
                 finally
                 {

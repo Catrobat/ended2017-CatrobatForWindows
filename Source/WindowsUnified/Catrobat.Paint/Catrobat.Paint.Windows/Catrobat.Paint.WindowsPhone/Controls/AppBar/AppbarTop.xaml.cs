@@ -41,8 +41,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                 btnRedo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnRedo_Click;
                 btnSelectedColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColBtnSelectedColor_OnClick;
                 //btnMoveScreen.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreen_OnClick;
-                ellipseTool.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
-                ellipseTool_Copy.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
+                ellipseTool_front.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
+                ellipseTool_behind.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
                 btnUndo.IsEnabled = false;
                 btnRedo.IsEnabled = false;               
                 
@@ -63,24 +63,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
 
         public void ToolChangedHere(ToolBase tool)
         {
-            /* TODO: ImageBrush image_brush = new ImageBrush();
-            ImageBrush image_brush_2 = new ImageBrush();
-            if (PocketPaintApplication.GetInstance().ToolWhileMoveTool != null)
-            {
-                image_brush.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Move));
-                //button.Background = image_brush;
-
-                button.Content = new BitmapImage(GetToolImageUri(ToolType.Brush));
-            }*/
-            BitmapIcon move_icon = new BitmapIcon();
-            move_icon.Height = 20;
-            move_icon.Width = 25;
-
             ImageBrush img_front = new ImageBrush();
             ImageBrush img_behind = new ImageBrush();
             img_behind.ImageSource = new BitmapImage(
                    new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_move.png", UriKind.Absolute));
-           // move_icon.Opacity = 0.2;
+
             switch (tool.GetToolType())
             {
                 case ToolType.Brush:
@@ -115,14 +102,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                     break;
             }
 
-            ellipseTool.Opacity = 0.1;
-            
-            //ellipseTool.Visibility = Visibility.Collapsed;
-            //btnMoveScreen.Icon = move_icon;
-            ellipseTool.Fill = img_behind;
-            ellipseTool_Copy.Fill = img_front;
-            ellipseTool_Copy.Height = 20;
-            ellipseTool_Copy.Width = 25;
+            ellipseTool_behind.Opacity = 0.1;
+            ellipseTool_behind.Fill = img_behind;
+            ellipseTool_front.Fill = img_front;
         }
 
         public void BtnSelectedColorVisible(bool enable)

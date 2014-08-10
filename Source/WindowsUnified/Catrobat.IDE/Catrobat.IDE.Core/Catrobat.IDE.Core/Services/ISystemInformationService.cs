@@ -16,6 +16,10 @@ namespace Catrobat.IDE.Core.Services
 
         string CurrentApplicationVersion { get; }
 
+        string CurrentApplicationBuildName { get; }
+
+        int CurrentApplicationBulidNumber { get; }
+
         PortableSolidColorBrush AccentBrush { get; }
     }
 }

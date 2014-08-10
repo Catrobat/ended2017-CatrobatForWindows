@@ -815,7 +815,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region MessageActions
 
-        private void CurrentProjectChangedMessageAction(GenericMessage<Program> message)
+        private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
             CurrentProgram = message.Content;
         }
@@ -889,7 +889,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedMessageAction);
+                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
 

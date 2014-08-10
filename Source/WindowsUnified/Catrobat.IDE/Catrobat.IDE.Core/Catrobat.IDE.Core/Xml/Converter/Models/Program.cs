@@ -2,11 +2,13 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
-using ContextBase = Catrobat.IDE.Core.Xml.Converter.XmlProjectConverter.ConvertBackContextBase;
-using Context = Catrobat.IDE.Core.Xml.Converter.XmlProjectConverter.ConvertBackContext;
+using ContextBase = Catrobat.IDE.Core.Xml.Converter.XmlProgramConverter.ConvertBackContextBase;
+using Context = Catrobat.IDE.Core.Xml.Converter.XmlProgramConverter.ConvertBackContext;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models
@@ -77,6 +79,8 @@ namespace Catrobat.IDE.Core.Models
                     Sprites = Sprites.Select(sprite => sprites[sprite]).ToList()
                 }
             };
+
+            ServiceLocator.ContextService.UpdateProgramHeader(result);
 
             return result;
         }

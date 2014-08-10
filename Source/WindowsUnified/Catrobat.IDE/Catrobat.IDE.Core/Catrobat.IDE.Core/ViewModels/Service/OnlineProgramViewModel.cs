@@ -7,6 +7,8 @@ using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
+using System.Threading.Tasks;
+using GalaSoft.MvvmLight.Messaging;
 
 
 namespace Catrobat.IDE.Core.ViewModels.Service
@@ -20,7 +22,9 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _versionLabelText = "";
         private string _viewsLabelText = "";
         private string _downloadsLabelText = "";
-        private Program _currentProgram;
+        private readonly object _importLock = new object();
+        private bool _isImporting = false;
+        private MessageboxResult _cancelImportCallbackResult;
 
         #endregion
 
@@ -95,6 +99,20 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
         }
 
+        public bool IsImporting
+        {
+            get { return _isImporting; }
+            set
+            {
+                if (_isImporting != value)
+                {
+                    _isImporting = value;
+                    CancelDownloadCommand.RaiseCanExecuteChanged();
+                    RaisePropertyChanged(() => IsImporting);
+                }
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -102,6 +120,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         public ICommand OnLoadCommand { get; private set; }
 
         public RelayCommand<OnlineProgramHeader> DownloadCommand { get; private set; }
+
+        public RelayCommand CancelDownloadCommand { get; private set; }
 
         public ICommand ReportCommand { get; private set; }
 
@@ -114,6 +134,11 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private bool DownloadCommand_CanExecute(OnlineProgramHeader dataContext)
         {
             return ButtonDownloadIsEnabled;
+        }
+
+        private bool CancelDownloadCommand_CanExecute()
+        {
+            return IsImporting;
         }
 
         #endregion
@@ -132,23 +157,25 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             ButtonDownloadIsEnabled = true;
         }
 
-        private readonly object _importLock = new object();
-        private bool _isImporting = false;
+        
         private async void DownloadAction(OnlineProgramHeader programHeader)
         {
             lock (_importLock)
             {
-                if (_isImporting)
+                if (IsImporting)
                 {
                     ServiceLocator.NotifictionService.ShowMessageBox(
                         "Wait for other download", 
                         "Please wait while the current program has finished downloading",
-                        (r)=>{/* no action */}, MessageBoxOptions.Ok); // TODO: localize
+                        CancelImportCallback,  MessageBoxOptions.Ok); // TODO: localize
                     return;
                 }
 
-                _isImporting = true;
+                IsImporting = true;
             }
+            
+            var message = new MessageBase();
+            Messenger.Default.Send(message, ViewModelMessagingToken.DownloadProgramStartedListener);
 
             try
             {
@@ -160,7 +187,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
             finally
             {
-                lock (_importLock) { _isImporting = false; }
+                lock (_importLock) { IsImporting = false; }
 
             }
         }
@@ -175,6 +202,11 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.PROJECT_LICENSE_URL);
         }
 
+        private async void CancelDownloadAction()
+        {
+            await ServiceLocator.ProjectImporterService.CancelImport();
+        }
+
         #endregion
 
         #region MessageActions
@@ -185,8 +217,22 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         {
             OnLoadCommand = new RelayCommand<OnlineProgramHeader>(OnLoadAction);
             DownloadCommand = new RelayCommand<OnlineProgramHeader>(DownloadAction, DownloadCommand_CanExecute);
+            CancelDownloadCommand = new RelayCommand(CancelDownloadAction, CancelDownloadCommand_CanExecute);
             ReportCommand = new RelayCommand<OnlineProgramHeader>(ReportAction);
             LicenseCommand = new RelayCommand(LicenseAction);
+            IsImporting = false;
         }
+
+        #region Callbacks
+
+        private void CancelImportCallback(MessageboxResult result)
+        {
+            _cancelImportCallbackResult = result;
+            //if (_cancelImportCallbackResult == MessageboxResult.Cancel)
+            //{
+            //    ServiceLocator.ProjectImporterService.CancelImport();
+            //}
+        }
+        #endregion
     }
 }

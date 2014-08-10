@@ -15,12 +15,19 @@ namespace Catrobat.IDE.Core.Services
         Short, Long
     };
 
+    // Important do not use enum names with more than 10 characters
+    public enum ToastTag
+    {
+        ImportFinished,
+        Default
+    };
+
     public interface INotificationService
     {
-        void ShowToastNotification(string title, string message, ToastDisplayDuration timeTillHide, PortableImage image = null);
+        void ShowToastNotification(string title, string message, 
+            ToastDisplayDuration timeTillHide, ToastTag tag = ToastTag.Default, PortableImage image = null);
 
-        void ShowToastNotification(string title, string message, TimeSpan timeTillHide, PortableImage image = null);
-
-        void ShowMessageBox(string title, string message, Action<MessageboxResult> callback, MessageBoxOptions options);
+        void ShowMessageBox(string title, string message, 
+            Action<MessageboxResult> callback, MessageBoxOptions options);
     }
 }

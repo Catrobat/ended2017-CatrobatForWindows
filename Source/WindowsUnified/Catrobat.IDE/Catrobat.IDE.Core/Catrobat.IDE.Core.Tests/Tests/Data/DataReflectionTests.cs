@@ -35,7 +35,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
                 xml1 = storage.ReadTextFile(savePath);
             }
 
-            var project2 = new XmlProjectConverter().Convert(new XmlProgram(xml1));
+            var project2 = new XmlProgramConverter().Convert(new XmlProgram(xml1));
 
             ModelAssert.AreTestEqual(project1, project2);
         }

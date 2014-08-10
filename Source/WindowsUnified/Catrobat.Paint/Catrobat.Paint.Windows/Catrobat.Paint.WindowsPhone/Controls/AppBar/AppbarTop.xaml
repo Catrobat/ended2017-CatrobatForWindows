@@ -36,11 +36,7 @@
             </ContentControl>
         </ToggleButton>
 
-        <Ellipse x:Name="ellipseTool" StrokeThickness="0" HorizontalAlignment="Left" Height="42" Margin="327,12,0,0" Stroke="Black" VerticalAlignment="Top" Width="42">
-            <Ellipse.Fill>
-                <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_move.png" Stretch="None"/>
-            </Ellipse.Fill>
-        </Ellipse>
+
 
         <AppBarButton x:Name="btnUndo" Height="72" Margin="15,3,0,-3">
             <AppBarButton.Icon>
@@ -52,9 +48,14 @@
                 <BitmapIcon UriSource="/Assets/ApplicationBar/Dark/appbar.redo.curve.png"/>
             </AppBarButton.Icon>
         </AppBarButton>
-        <Ellipse x:Name="ellipseTool_Copy" Width="25" Height="20" StrokeThickness="0" HorizontalAlignment="Left" Margin="337,24,0,0" Stroke="Black" VerticalAlignment="Top" >
+        <Ellipse x:Name="ellipseTool_behind" Opacity="0.1" StrokeThickness="0" HorizontalAlignment="Left" Height="50" Margin="310,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="50">
             <Ellipse.Fill>
-                <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_brush.png" Stretch="None"/>
+                <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_move.png" Stretch="Fill"/>
+            </Ellipse.Fill>
+        </Ellipse>
+        <Ellipse x:Name="ellipseTool_front" Width="35" Height="35" StrokeThickness="0" HorizontalAlignment="Left" Margin="317,19,0,0" Stroke="Black" VerticalAlignment="Top" >
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_brush.png" Stretch="Uniform"/>
             </Ellipse.Fill>
         </Ellipse>
 

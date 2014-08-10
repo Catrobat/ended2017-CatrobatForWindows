@@ -246,22 +246,22 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             if (_showDownloadMessage)
             {
                 var portbleImage = new PortableImage();
-                await portbleImage.LoadFromResources(ResourceScope.Ide,
-                    "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
+                //await portbleImage.LoadFromResources(ResourceScope.Ide,
+                //    "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
 
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_DownloadQueueMessage, ToastDisplayDuration.Short, portbleImage);
+                    AppResources.Main_DownloadQueueMessage, ToastDisplayDuration.Short, ToastTag.Default, portbleImage);
 
                 _showDownloadMessage = false;
             }
             if (_showUploadMessage)
             {
                 var portbleImage = new PortableImage();
-                await portbleImage.LoadFromResources(ResourceScope.Ide,
-                    "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
+                //await portbleImage.LoadFromResources(ResourceScope.Ide,
+                //    "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
 
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_UploadQueueMessage, ToastDisplayDuration.Short, portbleImage);
+                    AppResources.Main_UploadQueueMessage, ToastDisplayDuration.Short, ToastTag.Default, portbleImage);
 
                 _showUploadMessage = false;
             }
@@ -304,6 +304,14 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             });
         }
 
+        private void ToastNotificationActivatedMessageAction(ToastTag tag)
+        {
+            if (tag == ToastTag.ImportFinished)
+            {
+                ServiceLocator.NavigationService.NavigateTo(this.GetType());
+            }
+        }
+
         #endregion
 
         public MainViewModel()
@@ -332,6 +340,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
+
+            Messenger.Default.Register<ToastTag>(this,
+                ViewModelMessagingToken.ToastNotificationActivated, ToastNotificationActivatedMessageAction);
         }
 
         #region MessageBoxCallback

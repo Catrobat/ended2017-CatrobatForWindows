@@ -33,6 +33,7 @@
         IsPlayerStartFromTileListener,
         FormulaEvaluated,
         ClearPageCache,
-        ExportStreamChanged
+        ExportStreamChanged,
+        ToastNotificationActivated
     }
 }

@@ -13,9 +13,9 @@
 
 //namespace Catrobat.IDE.Core.Tests.Tests.Xml.Converter
 //{
-//    /// <summary>Tests <see cref="XmlProjectConverter" />. </summary>
+//    /// <summary>Tests <see cref="XmlProgramConverter" />. </summary>
 //    [TestClass]
-//    public class XmlProjectConverterTests
+//    public class XmlProgramConverterTests
 //    {
 //        [ClassInitialize]
 //        public static void TestClassInitialize(TestContext testContext)
@@ -25,7 +25,7 @@
 //        }
 
 //        [TestMethod, TestCategory("Xml.Converter"), TestCategory("ExcludeGated")]
-//        public void TestPocketCodeProjects()
+//        public void TestPocketCodePrograms()
 //        {
 //            var documents = Enumerable.Range(1, 16)
 //                .Select(i => "Converter/091_Win091/PracticalTests/Test" + i + "Input")
@@ -35,19 +35,19 @@
 //                CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", document);
 //                var xml = document.ToString();
 
-//                var project = new XmlProject(xml);
-//                TestConvert(new XmlProjectConverter(), project);
+//                var project = new XmlProgram(xml);
+//                TestConvert(new XmlProgramConverter(), project);
 //            }
 //        }
 
 //        #region Helpers
 
-//        private static void TestConvert(XmlProjectConverter converter, XmlProject project)
+//        private static void TestConvert(XmlProgramConverter converter, XmlProgram project)
 //        {
-//            var tempProject = converter.Convert(project);
-//            ValidProject(tempProject);
+//            var tempProgram = converter.Convert(project);
+//            ValidProgram(tempProgram);
 
-//            var actual = converter.ConvertBack(tempProject);
+//            var actual = converter.ConvertBack(tempProgram);
 
 //            var expectedDocument = project.CreateXML();
 
@@ -64,14 +64,14 @@
 //            Assert.AreEqual(expectedXml, actualXml);
 //        }
 
-//        private static void ValidProject(Project project)
+//        private static void ValidProgram(Program project)
 //        {
 //            foreach (var sprite in project.Sprites)
 //            {
 //                var objects = sprite.Scripts
 //                    .SelectMany(script => Enumerable.Repeat<IBrick>(script, 1)
 //                        .Concat(script.Bricks))
-//                    .SelectMany(brick => Enumerable.Repeat((Model) brick, 1)
+//                    .SelectMany(brick => Enumerable.Repeat((Model)brick, 1)
 //                        .Concat(brick.GetType().GetPropertiesValues<FormulaTree>(brick)
 //                            .SelectMany(tree => tree.AsEnumerable())))
 //                    .ToList();
