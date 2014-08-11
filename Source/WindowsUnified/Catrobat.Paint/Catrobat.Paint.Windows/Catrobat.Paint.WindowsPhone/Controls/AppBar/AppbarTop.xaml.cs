@@ -53,11 +53,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             // System.Diagnostics.Debug.WriteLine("ColorChangedHere called: " + color.Color.ToString());
             if (color.Color != Colors.Transparent)
             {
-                // TODO: BtnSelectedColor.Background = color;
+                btnSelectedColor.Background = color;
             }
             else
             {
-                // TODO: BtnSelectedColor.Background = new SolidColorBrush(Colors.Transparent);
+                btnSelectedColor.Background = new SolidColorBrush(Colors.Transparent);
             }
         }
 
@@ -109,19 +109,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
 
         public void BtnSelectedColorVisible(bool enable)
         {
-            // TODO: BtnSelectedColor.IsEnabled = enable;
-            // TODO: object ellipseTransparence = LayoutRoot.FindName("ellipseTransparence");
-            /* TODO: if(ellipseTransparence != null)
+            btnSelectedColor.IsEnabled = enable;
+            if (enable == true)
             {
-                if (enable == true)
-                {
-                    ((Ellipse)ellipseTransparence).Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    ((Ellipse)ellipseTransparence).Visibility = Visibility.Collapsed;
-                };
-            }*/
+               rectTransparence.Visibility = Visibility.Visible;
+            }
+            else
+            {
+               rectTransparence.Visibility = Visibility.Collapsed;
+            }
         }
 
         private Uri GetToolImageUri(ToolType tooltype)

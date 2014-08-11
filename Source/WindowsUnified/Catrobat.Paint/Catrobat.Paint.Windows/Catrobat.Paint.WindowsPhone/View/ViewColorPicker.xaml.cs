@@ -125,6 +125,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             current_color.A = (byte)(255 * (Convert.ToDouble(tbAlphaValue.Text) / 100));
 
             PocketPaintApplication.GetInstance().PaintData.ColorSelected = new SolidColorBrush(current_color);
+            
             //this.Frame.Navigate(typeof(PaintingAreaView));
             this.Frame.GoBack();
             

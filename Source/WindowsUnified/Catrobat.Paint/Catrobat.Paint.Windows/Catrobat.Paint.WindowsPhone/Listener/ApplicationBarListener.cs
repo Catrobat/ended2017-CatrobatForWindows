@@ -8,6 +8,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
 using Catrobat.Paint.Phone.Command;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Catrobat.IDE.WindowsShared.Common;
 
 namespace Catrobat.Paint.Phone.Listener
 {
@@ -49,9 +51,9 @@ namespace Catrobat.Paint.Phone.Listener
                 PocketPaintApplication.GetInstance().PaintingAreaView.NavigatedTo(typeof(ViewColorPicker));
             }
         }
-        public void BtnThickness_OnClick(object sender, EventArgs e)
+        public void BtnThickness_OnClick(object sender, RoutedEventArgs e)
         {
-             /* if (PocketPaintApplication.GetInstance().PaintingAreaView.getVisibilityOFSliderThicknessControl() == Visibility.Collapsed)
+             if (PocketPaintApplication.GetInstance().PaintingAreaView.getVisibilityOFSliderThicknessControl() == Visibility.Collapsed)
               {
                     PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(Visibility.Visible);
                     PocketPaintApplication.GetInstance().PaintingAreaView.setSliderThicknessControlMargin(new Thickness(0.0, 0.0, 0.0, 0.0));
@@ -60,14 +62,12 @@ namespace Catrobat.Paint.Phone.Listener
               {
                   PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
               }
-            */
         }
 
-        public void BtnBrushThickness_OnClick(object sender, EventArgs e)
+        public void BtnBrushThickness_OnClick(object sender, RoutedEventArgs e)
         {
-            /* TODO:
-            PocketPaintApplication.GetInstance().PaintingAreaView.checkIfThicknessWasEntered();
-            if (PocketPaintApplication.GetInstance().PaintingAreaView.getVisibilityOFThicknessKeyboard() == Visibility.Collapsed)
+           PocketPaintApplication.GetInstance().PaintingAreaView.checkIfThicknessWasEntered();
+           if (PocketPaintApplication.GetInstance().PaintingAreaView.getVisibilityOFThicknessKeyboard() == Visibility.Collapsed)
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.setSliderThicknessControlMargin(new Thickness(0.0, -324.0, 0.0, 287.0));
                 PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFThicknessKeyboard(Visibility.Visible);
@@ -76,7 +76,7 @@ namespace Catrobat.Paint.Phone.Listener
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFThicknessKeyboard(Visibility.Collapsed);
                 PocketPaintApplication.GetInstance().PaintingAreaView.setSliderThicknessControlMargin(new Thickness(0.0, 0.0, 0.0, 0.0));
-            }*/
+            }
         }
         public void BtnMoveScreen_OnClick(object sender, RoutedEventArgs e)
         {
@@ -110,18 +110,32 @@ namespace Catrobat.Paint.Phone.Listener
             }
         }
 
-        public void BtnTools_OnClick(object sender, EventArgs e)
+        public void BtnTools_OnClick(object sender, RoutedEventArgs e)
         {
-            /*
-            var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame;
-            if (phoneApplicationFrame != null)
-            {
-                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
-                phoneApplicationFrame.Navigate(new Uri("/Catrobat.Paint.Phone;component/View/ToolPickerView.xaml", UriKind.RelativeOrAbsolute));
-
-                ToolType tool_type = PocketPaintApplication.GetInstance().ToolCurrent.GetToolType();
-            }*/
+            Frame rootFrame = Window.Current.Content as Frame;
+            
+            if(rootFrame != null)
+            {             
+                rootFrame.Navigate(typeof(ViewToolPicker));
+            }
         }
 
+        public void TriangleButton_OnClick(object sender, RoutedEventArgs e)
+        {
+           PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Triangle;
+           PocketPaintApplication.GetInstance().PaintingAreaView.checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
+        }
+
+        public void RoundButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Round;
+            PocketPaintApplication.GetInstance().PaintingAreaView.checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
+        }
+
+        public void SquareButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Square;
+            PocketPaintApplication.GetInstance().PaintingAreaView.checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
+        }
     }
 }

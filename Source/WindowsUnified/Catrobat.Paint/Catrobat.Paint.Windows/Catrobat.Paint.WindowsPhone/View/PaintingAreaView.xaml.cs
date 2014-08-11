@@ -37,10 +37,21 @@ namespace Catrobat.Paint.WindowsPhone.View
         public PaintingAreaView()
         {
             this.InitializeComponent();
+           
+            
+        }
+
+        /// <summary>
+        /// Wird aufgerufen, wenn diese Seite in einem Frame angezeigt werden soll.
+        /// </summary>
+        /// <param name="e">Ereignisdaten, die beschreiben, wie diese Seite erreicht wurde.
+        /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
             PaintingAreaCanvas = PocketPaintApplication.GetInstance().PaintingAreaCanvas;
-                PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
-            
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
+
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
             PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
@@ -53,6 +64,10 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             Spinner.SpinnerGrid = SpinnerGrid;
             Spinner.SpinnerStoryboard = new Storyboard();
+
+            btnRoundImage.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.RoundButton_OnClick;
+            btnTriangleImage.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.TriangleButton_OnClick;
+            btnSquareImage.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.SquareButton_OnClick;
 
             // TODO:PaintingAreaCheckeredGrid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
             /*PaintingAreaCheckeredGrid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
@@ -72,19 +87,14 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
             createAppBarAndSwitchAppBarContent(current_appbar);
+
+            btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
+            btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
+            btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
+            btnThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnThickness_OnClick;
         }
 
-        /// <summary>
-        /// Wird aufgerufen, wenn diese Seite in einem Frame angezeigt werden soll.
-        /// </summary>
-        /// <param name="e">Ereignisdaten, die beschreiben, wie diese Seite erreicht wurde.
-        /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            
-        }
-        
-        void checkPenLineCap(PenLineCap pen_line_cap)
+        public void checkPenLineCap(PenLineCap pen_line_cap)
         {
             if (pen_line_cap == PenLineCap.Round)
             {
@@ -104,11 +114,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 btnSquareImage.BorderBrush = new SolidColorBrush(Colors.Gray);
                 btnTriangleImage.BorderBrush = new SolidColorBrush(Colors.White);
             }
-        }
-        
-        void PaintData_ToolCurrentChanged(Phone.Tool.ToolBase tool)
-        {
-            throw new NotImplementedException();
         }
 
         public void createAppBarAndSwitchAppBarContent(string type)
@@ -239,7 +244,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             tools_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/menu_tools_.png", UriKind.Absolute);
             app_btnTools.Icon = tools_icon;
             app_btnTools.Label = "Werkzeug";
-            app_btnTools.Click += BtnTools_Click;
+            app_btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
 
             app_btnSave.Label = "Speichern";
             app_btnSaveCopy.Label = "Kopie speichern";
@@ -493,24 +498,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        private void TriangleButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Triangle;
-            checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
-        }
-
-        public void RoundButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Round;
-            checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
-        }
-
-        public void SquareButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Square;
-            checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
-        }
-
         private void SliderThickness_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             if (SliderThickness != null)
@@ -520,8 +507,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PocketPaintApplication.GetInstance().PaintData.ThicknessSelected = Convert.ToInt32(SliderThickness.Value);
             }
         }
-
-        
 
         public Visibility getVisibilityOFSliderThicknessControl()
         {
@@ -564,24 +549,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             return uctrlOwnKeyboard.Visibility;
         }
 
-        
-
-        private void main_grid_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            
-        }
-        
-        private void LayoutRoot_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-
-        }
-        private void BtnTools_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.Frame != null)
-            {
-                this.Frame.Navigate(typeof(ViewToolPicker));
-            }
-        }
 
         private void btnColor_Click(object sender, RoutedEventArgs e)
         {

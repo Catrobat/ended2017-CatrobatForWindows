@@ -44,69 +44,66 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 case "Brush":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
-                    // PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(true);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
                     break;
                 case "Cursor":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Cursor);
-                    // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(false);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Pipette":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Pipette);
-                    // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(false);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Fill":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Fill);
-                    // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(true);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
                     break;
                 case "Stamp":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Stamp);
-                    // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(false);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Rectangle":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
-                    // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(true);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
                     break;
                 case "Ellipse":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Ellipse);
-                    // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(true);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
                     break;
                 case "ImportPicture":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.ImportPng);
-                    // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(false);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Crop":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Crop);
-                    // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(false);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Eraser":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Eraser);
-                    // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(false);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Flip":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Flip);
-                    // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(false);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Move":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Move);
-                    // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(false);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Zoom":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Zoom);
-                    // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(false);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Rotate":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rotate);
-                    // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(false);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Line":
                     PocketPaintApplication.GetInstance().SwitchTool((ToolType.Line));
-                    // TODO: PocketPaintApplication.GetInstance().ApplicationBarTop.BtnSelectedColorVisible(true);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
                     break;
             }
-            if (this.Frame != null)
-            {
-                this.Frame.Navigate(typeof(PaintingAreaView));
-            }
+            this.Frame.GoBack();
         }
     }
 }

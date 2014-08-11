@@ -22,7 +22,7 @@
 
         </coding4FunControls:RoundButton>-->
 
-        <Rectangle  HorizontalAlignment="Left" Height="44" Margin="222,15,0,0" Stroke="Black" VerticalAlignment="Top" Width="53">
+        <Rectangle x:Name="rectTransparence"  HorizontalAlignment="Left" Height="44" Margin="222,15,0,0" Stroke="Black" VerticalAlignment="Top" Width="53">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
             </Rectangle.Fill>
