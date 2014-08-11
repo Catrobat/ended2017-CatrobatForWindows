@@ -4,9 +4,21 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+  xmlns:switchPanel="using:Catrobat.IDE.WindowsPhone.Controls.SwitchPanel"
   NavigationCacheMode="Disabled"
   DataContext="{Binding ProgramDetailViewModel, Source={StaticResource Locator}}">
 
+  <Page.Resources>
+    <Style x:Key="ErrorMessageTextStyle" TargetType="TextBlock">
+      <Setter Property="FontSize" Value="18"/>
+      <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+      <Setter Property="Margin" Value="0 5 0 0"/>
+      <Setter Property="TextAlignment" Value="Justify"/>
+      <Setter Property="Foreground" Value="#FFDD2222"/>
+    </Style>
+  </Page.Resources>
+  
+  
   <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
@@ -14,92 +26,237 @@
     </Grid.RowDefinitions>
 
     <StackPanel Grid.Row="0" Margin="12">
-      <TextBlock Text="{Binding Resources.Main_TitleCurrentProgram, 
-        Source={StaticResource LocalizedStrings}}" 
+      <TextBlock Text="{Binding CurrentProgramHeader.ProjectName, 
+        Mode=OneWay}" 
         Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
     <Grid Grid.Row="1" Margin="12 0 12 18">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="200" />
-        <ColumnDefinition Width="*" />
-      </Grid.ColumnDefinitions>
-      <Grid Width="200" Height="200" VerticalAlignment="Top">
-        <Grid Background="LightGray">
-          <Grid>
-            <ProgressRing Width="120" Height="120" Background="Transparent"
-              IsActive="true" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-          </Grid>
-          <Grid Visibility="{Binding CurrentProgram, 
-            Converter={StaticResource NullVisibilityConverter}}">
-            <Grid Background="LightGray" 
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition />
+      </Grid.RowDefinitions>
+
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="200" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Width="200" Height="200" VerticalAlignment="Top">
+          <Grid >
+            <Grid Visibility="{Binding CurrentProgram, 
+              Converter={StaticResource NullVisibilityConverter}}">
+              <Grid Background="LightGray" 
               Visibility="{Binding CurrentProgram.Screenshot.IsEmpty, 
               Converter={StaticResource BoolVisibilityConverter}}">
-              <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
                 TextAlignment="Center" TextWrapping="Wrap"
                 FontSize="28" Foreground="DarkGray"
                 Text="{Binding Resources.Main_NoScreenshot, 
                 Source={StaticResource LocalizedStrings}}" />
+              </Grid>
+            </Grid>
+            <Image Grid.Column="0" Margin="6"
+              Height="Auto" 
+              Stretch="UniformToFill"
+              VerticalAlignment="Top"
+              HorizontalAlignment="Stretch"
+              Source="{Binding CurrentProgramHeader.Screenshot.ImageSource}" />
+            <Grid Background="#88FFFFFF" 
+              Visibility="{Binding IsActivatingLocalProgram, 
+              Converter={StaticResource BoolVisibilityConverter}}">
+              <ProgressRing Width="120" Height="120" Background="Transparent"
+              IsActive="true" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
           </Grid>
-          <Image Grid.Column="0" Margin="6"
-            Height="Auto" 
-            Stretch="UniformToFill"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Stretch"
-            Source="{Binding CurrentProgram.Screenshot.ImageSource}" />
+        </Grid>
+
+        <Grid Grid.Column="1" Margin="20 20 0 0">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="3*" />
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition />
+          </Grid.RowDefinitions>
+
+
+          <TextBlock Grid.Row="0" Grid.Column="0"
+                     HorizontalAlignment="Right" FontWeight="SemiBold"
+                     Text="{Binding NumberOfSprites}"
+                     Visibility="{Binding IsValid, 
+                     Converter={StaticResource BoolVisibilityConverter}}"
+                     Style="{ThemeResource TextLargerStyle}"/>
+          <TextBlock Grid.Row="0" Grid.Column="0"
+                     HorizontalAlignment="Right"
+                     Text="?" 
+                     Visibility="{Binding IsValid, 
+                     Converter={StaticResource NegativeBoolVisibilityConverter}}"
+                     Style="{ThemeResource TextLargerStyle}"/>
+          <TextBlock Grid.Row="0" Grid.Column="1" Margin="7 0 0 0"
+                     HorizontalAlignment="Left"
+                     Text="{Binding Resources.Main_NumberOfSprites, 
+                     Source={StaticResource LocalizedStrings}}"
+                     Style="{ThemeResource TextLargerStyle}"/>
+
+          <TextBlock Grid.Row="1" Grid.Column="0"
+                     HorizontalAlignment="Right" FontWeight="SemiBold"
+                     Text="{Binding NumberOfActions}"
+                     Visibility="{Binding IsValid, 
+                     Converter={StaticResource BoolVisibilityConverter}}"
+                     Style="{ThemeResource TextLargerStyle}"/>
+          <TextBlock Grid.Row="1" Grid.Column="0"
+                     HorizontalAlignment="Right"
+                     Text="?" 
+                     Visibility="{Binding IsValid, 
+                     Converter={StaticResource NegativeBoolVisibilityConverter}}"
+                     Style="{ThemeResource TextLargerStyle}"/>
+          <TextBlock Grid.Row="1" Grid.Column="1" Margin="7 0 0 0"
+                     HorizontalAlignment="Left"
+                     Text="{Binding Resources.Main_NumberOfActions, 
+                     Source={StaticResource LocalizedStrings}}"
+                     Style="{ThemeResource TextLargerStyle}"/>
+
+          <TextBlock Grid.Row="2" Grid.Column="0"
+                     HorizontalAlignment="Right" FontWeight="SemiBold"
+                     Text="{Binding NumberOfLooks}"
+                     Visibility="{Binding IsValid, 
+                     Converter={StaticResource BoolVisibilityConverter}}"
+                     Style="{ThemeResource TextLargerStyle}"/>
+          <TextBlock Grid.Row="2" Grid.Column="0"
+                     HorizontalAlignment="Right"
+                     Text="?" 
+                     Visibility="{Binding IsValid, 
+                     Converter={StaticResource NegativeBoolVisibilityConverter}}"
+                     Style="{ThemeResource TextNormalStyle}"/>
+          <TextBlock Grid.Row="2" Grid.Column="1" Margin="7 0 0 0"
+                     HorizontalAlignment="Left"
+                     Text="{Binding Resources.Main_NumberOfLooks, 
+                     Source={StaticResource LocalizedStrings}}" 
+                     Style="{ThemeResource TextLargerStyle}"/>
+
+          <TextBlock Grid.Row="3" Grid.Column="0"
+                     HorizontalAlignment="Right" FontWeight="SemiBold"
+                     Text="{Binding NumberOfSounds}" 
+                     Visibility="{Binding IsValid, 
+                     Converter={StaticResource BoolVisibilityConverter}}"
+                     Style="{ThemeResource TextLargerStyle}"/>
+          <TextBlock Grid.Row="3" Grid.Column="0"
+                     HorizontalAlignment="Right"
+                     Text="?" 
+                     Visibility="{Binding IsValid, 
+                     Converter={StaticResource NegativeBoolVisibilityConverter}}"
+                     Style="{ThemeResource TextLargerStyle}"/>
+          <TextBlock Grid.Row="3" Grid.Column="1" Margin="7 0 0 0"
+                     HorizontalAlignment="Left" 
+                     Text="{Binding Resources.Main_NumberOfSounds, 
+                     Source={StaticResource LocalizedStrings}}" 
+                     Style="{ThemeResource TextLargerStyle}"/>
         </Grid>
       </Grid>
-      <ScrollViewer Grid.Column="1">
-        <StackPanel Grid.Column="1" Margin="12 0 6 0">
-          <TextBlock Margin="0 0 0 0" 
-                     Text="{Binding Resources.Main_ProgramName, 
-                     Source={StaticResource LocalizedStrings}}"
-                     TextWrapping="Wrap"
-                     Style="{ThemeResource TextNormalStyle}"/>
-          <TextBlock Text="{Binding CurrentProgramHeader.ProjectName, Mode=OneWay}" 
-                     TextWrapping="Wrap"
-                     Style="{ThemeResource TextSmallStyle}"/>
-          <TextBlock Margin="0 12 0 0" 
+
+      <switchPanel:SwitchPanel Grid.Row="1" ActivePanelValue="{Binding CurrentProgramState}">
+        <switchPanel:SwitchPanel.Items>
+          <switchPanel:SwitchPanelItemCollection>
+            <switchPanel:SwitchPanelItem PanelValue="Valid">
+              <ScrollViewer Margin="20 20 20 0">
+                <StackPanel Margin="12 0 6 0">
+                  <TextBlock Margin="0 12 0 0" 
                      Text="{Binding Resources.Main_ProgramDescription, 
                      Source={StaticResource LocalizedStrings}}" 
                      Style="{ThemeResource TextNormalStyle}"/>
-          <StackPanel Visibility="{Binding CurrentProgram.Description, 
+                  <StackPanel Visibility="{Binding CurrentProgram.Description, 
                       Converter={StaticResource StringVisibilityConverter}}">
-            <TextBlock Text="{Binding Resources.Main_ProgramNoDescription, 
+                    <TextBlock Text="{Binding Resources.Main_ProgramNoDescription, 
                        Source={StaticResource LocalizedStrings}}"
                        TextWrapping="Wrap"
                        Style="{ThemeResource TextSubtileStyle}"/>
-          </StackPanel>
-          <TextBlock Text="{Binding CurrentProgram.Description, Mode=OneWay}" 
+                  </StackPanel>
+                  <TextBlock Text="{Binding CurrentProgram.Description, Mode=OneWay}" 
                      TextWrapping="Wrap"
                      Style="{ThemeResource TextSmallStyle}"/>
-          <!--<TextBlock Margin="0 12 0 0" 
-                     Text="{Binding Resources.Main_OnlineProgramUploaded, 
-                     Source={StaticResource LocalizedStrings}}" 
-                     Style="{ThemeResource TextNormalStyle}"/>
-          <TextBlock x:Name="UploadedLabel" 
-                     Text="{Binding OnlineProgramViewModel.UploadedLabelText, 
-                     Source={StaticResource Locator}}" />
-          <TextBlock Text="{Binding Author}" 
-                     TextWrapping="Wrap"/>
-          <TextBlock x:Name="VersionLabel" 
-                     Text="{Binding OnlineProgramViewModel.VersionLabelText, 
-                     Source={StaticResource Locator}}" 
-                     TextWrapping="Wrap"/>
-          <TextBlock Margin="0 12 0 0"
-                     Text="{Binding Resources.Main_OnlineProgramStatistics, 
-                     Source={StaticResource LocalizedStrings}}" 
-                     Style="{ThemeResource TextNormalStyle}"/>
-          <TextBlock x:Name="ViewsLabel" 
-                     Text="{Binding OnlineProgramViewModel.ViewsLabelText, 
-                     Source={StaticResource Locator}}" 
-                     TextWrapping="Wrap" />
-          <TextBlock x:Name="DownloadsLabel" 
-                     Text="{Binding OnlineProgramViewModel.DownloadsLabelText, 
-                     Source={StaticResource Locator}}" 
-                     TextWrapping="Wrap" />-->
-        </StackPanel>
-      </ScrollViewer>
+                  <!--<TextBlock Margin="0 12 0 0" 
+                                 Text="{Binding Resources.Main_OnlineProgramUploaded, 
+                                 Source={StaticResource LocalizedStrings}}" 
+                                 Style="{ThemeResource TextNormalStyle}"/>
+                      <TextBlock x:Name="UploadedLabel" 
+                                 Text="{Binding OnlineProgramViewModel.UploadedLabelText, 
+                                 Source={StaticResource Locator}}" />
+                      <TextBlock Text="{Binding Author}" 
+                                 TextWrapping="Wrap"/>
+                      <TextBlock x:Name="VersionLabel" 
+                                 Text="{Binding OnlineProgramViewModel.VersionLabelText, 
+                                 Source={StaticResource Locator}}" 
+                                 TextWrapping="Wrap"/>
+                      <TextBlock Margin="0 12 0 0"
+                                 Text="{Binding Resources.Main_OnlineProgramStatistics, 
+                                 Source={StaticResource LocalizedStrings}}" 
+                                 Style="{ThemeResource TextNormalStyle}"/>
+                      <TextBlock x:Name="ViewsLabel" 
+                                 Text="{Binding OnlineProgramViewModel.ViewsLabelText, 
+                                 Source={StaticResource Locator}}" 
+                                 TextWrapping="Wrap" />
+                      <TextBlock x:Name="DownloadsLabel" 
+                                 Text="{Binding OnlineProgramViewModel.DownloadsLabelText, 
+                                 Source={StaticResource Locator}}" 
+                                 TextWrapping="Wrap" />-->
+                </StackPanel>
+              </ScrollViewer>
+            </switchPanel:SwitchPanelItem>
+
+
+            <switchPanel:SwitchPanelItem PanelValue="Damaged">
+              <StackPanel Orientation="Vertical" Margin="20 40 20 0">
+                <TextBlock Text="Sorry, a problem occurred while loading the program."
+                           Style="{StaticResource ErrorMessageTextStyle}"/>
+                <TextBlock Text="In case you obtained this program from pocketcode.org please try to download the program again."
+                Style="{StaticResource ErrorMessageTextStyle}"/>
+                <TextBlock Text="Check if a newer version of the app is available, maybe the problem has already been fixed."
+                           Style="{StaticResource ErrorMessageTextStyle}"/>
+              </StackPanel>
+            </switchPanel:SwitchPanelItem>
+
+            <switchPanel:SwitchPanelItem PanelValue="VersionTooOld">
+              <StackPanel Orientation="Vertical" Margin="20 40 20 0">
+                <TextBlock Text="Sorry, the program was created with an newer version of the app."
+                           Style="{StaticResource ErrorMessageTextStyle}"/>
+                <TextBlock Text="Check if a newer version of the app is available."
+                           Style="{StaticResource ErrorMessageTextStyle}"/>
+              </StackPanel>
+            </switchPanel:SwitchPanelItem>
+
+            <switchPanel:SwitchPanelItem PanelValue="VersionTooNew" Margin="20 40 20 0">
+              <StackPanel Orientation="Vertical">
+                <TextBlock Text="Sorry, the program was created with an old version of the app and it cannot be opend with your version of the app."
+                           Style="{StaticResource ErrorMessageTextStyle}"/>
+                <TextBlock Text="Please try to open the program with the version that was used to create the program."
+                           Style="{StaticResource ErrorMessageTextStyle}"/>
+              </StackPanel>
+            </switchPanel:SwitchPanelItem>
+
+            <switchPanel:SwitchPanelItem PanelValue="ErrorInThisApp" Margin="20 40 20 0">
+              <StackPanel Orientation="Vertical">
+                <TextBlock Text="Sorry, a problem occurred while loading the program."
+                           Style="{StaticResource ErrorMessageTextStyle}"/>
+                <TextBlock Text="Check if a newer version of the app is available, maybe the problem has already been fixed."
+                           Style="{StaticResource ErrorMessageTextStyle}"/>
+              </StackPanel>
+            </switchPanel:SwitchPanelItem>
+
+            <switchPanel:SwitchPanelItem PanelValue="Unknown">
+              <StackPanel>
+                <!--Empty while loading-->
+              </StackPanel>
+            </switchPanel:SwitchPanelItem>
+
+          </switchPanel:SwitchPanelItemCollection>
+        </switchPanel:SwitchPanel.Items>
+      </switchPanel:SwitchPanel>
+
+
     </Grid>
   </Grid>
 

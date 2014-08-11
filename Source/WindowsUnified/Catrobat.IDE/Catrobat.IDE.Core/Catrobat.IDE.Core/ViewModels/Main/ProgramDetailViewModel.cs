@@ -1,4 +1,6 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using System.IO;
+using System.Linq;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.JSON;
@@ -72,16 +74,63 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             set
             {
                 _isActivatingLocalProgram = value;
+            }
+        }
 
-                ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                {
-                    RaisePropertyChanged(() => IsActivatingLocalProgram);
-                    EditCurrentProgramCommand.RaiseCanExecuteChanged();
-                    UploadCurrentProgramCommand.RaiseCanExecuteChanged();
-                    PlayCurrentProgramCommand.RaiseCanExecuteChanged();
-                    ShareLocalProgramCommand.RaiseCanExecuteChanged();
-                    RenameProgramCommand.RaiseCanExecuteChanged();
-                });
+        public ProgramState CurrentProgramState
+        {
+            get
+            {
+                if (CurrentProgramHeader == null) return ProgramState.Unknown;
+
+                return CurrentProgramHeader.ValidityState;
+            }
+        }
+
+        public bool IsValid
+        {
+            get
+            {
+                if (CurrentProgramHeader == null) return false;
+                return !IsActivatingLocalProgram && CurrentProgramHeader.IsValid;
+            }
+        }
+
+        public int NumberOfSprites
+        {
+            get
+            {
+                if (_currentProgram == null)
+                    return 0;
+
+                return _currentProgram.Sprites.Count;
+            }
+        }
+
+        public int NumberOfActions
+        {
+            get
+            {
+                return _currentProgram == null ? 0 :
+                    _currentProgram.Sprites.Sum(sprite => sprite.ActionsCount);
+            }
+        }
+
+        public int NumberOfLooks
+        {
+            get
+            {
+                return _currentProgram == null ? 0 :
+                    _currentProgram.Sprites.Sum(sprite => sprite.Looks.Count);
+            }
+        }
+
+        public int NumberOfSounds
+        {
+            get
+            {
+                return _currentProgram == null ? 0 :
+                    _currentProgram.Sprites.Sum(sprite => sprite.Sounds.Count);
             }
         }
 
@@ -160,6 +209,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.NavigationService.NavigateTo<ProgramSettingsViewModel>();
         }
 
+
+        private bool CommandsCanExecute()
+        {
+            return IsValid;
+        }
+
+
         #endregion
 
         #region Message Actions
@@ -179,17 +235,32 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public ProgramDetailViewModel()
         {
-            EditCurrentProgramCommand = new RelayCommand(EditCurrentProgramAction, () => !IsActivatingLocalProgram);
-            UploadCurrentProgramCommand = new RelayCommand(UploadCurrentProgramAction, () => !IsActivatingLocalProgram);
-            PlayCurrentProgramCommand = new RelayCommand(PlayCurrentProgramAction, () => !IsActivatingLocalProgram);
-            RenameProgramCommand = new RelayCommand(RenameProgramAction, () => !IsActivatingLocalProgram);
-            ShareLocalProgramCommand = new RelayCommand(ShareLocalProgramAction, () => !IsActivatingLocalProgram);
+            EditCurrentProgramCommand = new RelayCommand(EditCurrentProgramAction, CommandsCanExecute);
+            UploadCurrentProgramCommand = new RelayCommand(UploadCurrentProgramAction, CommandsCanExecute);
+            PlayCurrentProgramCommand = new RelayCommand(PlayCurrentProgramAction, CommandsCanExecute);
+            RenameProgramCommand = new RelayCommand(RenameProgramAction, CommandsCanExecute);
+            ShareLocalProgramCommand = new RelayCommand(ShareLocalProgramAction, CommandsCanExecute);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                 ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this,
                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProgramHeaderChangedMessageAction);
+        }
+
+        private void RaisePropertiesChanges()
+        {
+            RaisePropertyChanged(() => CurrentProgramState);
+            RaisePropertyChanged(() => IsValid);
+            RaisePropertyChanged(() => NumberOfSprites);
+            RaisePropertyChanged(() => NumberOfActions);
+            RaisePropertyChanged(() => NumberOfLooks);
+            RaisePropertyChanged(() => NumberOfSounds);
+            RaisePropertyChanged(() => IsActivatingLocalProgram);
+            EditCurrentProgramCommand.RaiseCanExecuteChanged();
+            UploadCurrentProgramCommand.RaiseCanExecuteChanged();
+            PlayCurrentProgramCommand.RaiseCanExecuteChanged();
+            ShareLocalProgramCommand.RaiseCanExecuteChanged();
         }
 
         public async override void NavigateTo()
@@ -203,19 +274,28 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         return;
 
                     IsActivatingLocalProgram = true;
+                    CurrentProgramHeader.ValidityState = ProgramState.Unknown;
+                    RaisePropertiesChanges();
                 }
 
                 if (CurrentProgram != null)
                     await CurrentProgram.Save();
 
-                var newProgram = await ServiceLocator.ContextService.
-                    LoadProgramByName(CurrentProgramHeader.ProjectName);
+                var result = await ServiceLocator.ProgramValidationService.CheckProgram(
+                    Path.Combine(StorageConstants.ProgramsPath, CurrentProgramHeader.ProjectName));
+
+                var newProgram = result.Program;
+
+                CurrentProgramHeader.ValidityState = result.State;
+
+
+                IsActivatingLocalProgram = false;
 
                 if (newProgram != null)
                 {
                     ServiceLocator.DispatcherService.RunOnMainThread(() =>
                     {
-                        CurrentProgramHeader.ValidityState = LocalProgramState.Valid;
+                        CurrentProgramHeader.ValidityState = ProgramState.Valid;
                     });
 
                     CurrentProgram = newProgram;
@@ -230,19 +310,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 {
                     ServiceLocator.DispatcherService.RunOnMainThread(() =>
                     {
-                        CurrentProgramHeader.ValidityState = LocalProgramState.Damaged;
-                        // TODO: get real ValidityState from "LoadProjectByNameStatic"
-
-                        ServiceLocator.NavigationService.NavigateBack(this.GetType());
-
                         CurrentProgram = null;
-                        CurrentProgramHeader = null;
-                        var message = new GenericMessage<LocalProjectHeader>(null);
-                        Messenger.Default.Send(message,
-                            ViewModelMessagingToken.CurrentProgramHeaderChangedListener);
                     });
-
-                    IsActivatingLocalProgram = false;
                 }
             }
             if (_performedExport)
@@ -250,6 +319,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 await ServiceLocator.ProgramExportService.CleanUpExport();
                 _performedExport = false;
             }
+
+            IsActivatingLocalProgram = false;
+
+            RaisePropertiesChanges();
+            
 
             base.NavigateTo();
         }

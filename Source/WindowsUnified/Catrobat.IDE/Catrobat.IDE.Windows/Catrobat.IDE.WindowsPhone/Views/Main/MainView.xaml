@@ -48,15 +48,17 @@
             </Grid>
           </DataTemplate>
         </HubSection.ContentTemplate>
-
       </HubSection>
 
       <HubSection Name="HubSectionOnlinePrograms">
         <HubSection.HeaderTemplate>
           <DataTemplate>
-            <TextBlock Text="{Binding Resources.Main_HeaderOnlinePrograms, 
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="{Binding Resources.Main_HeaderOnlinePrograms, 
                        Source={StaticResource LocalizedStrings}}" 
                        Style="{ThemeResource TextHubHeaderStyle}"/>
+            </StackPanel>
+
           </DataTemplate>
         </HubSection.HeaderTemplate>
         <HubSection.ContentTemplate>

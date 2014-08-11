@@ -154,6 +154,12 @@ namespace Catrobat.IDE.Core.Services
         public static IProgramExportService ProgramExportService
         { get { return GetInstance<IProgramExportService>(); } }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IProgramValidationService ProgramValidationService
+        { get { return GetInstance<IProgramValidationService>(); } }
+
         #endregion
 
         public static ViewModelLocator ViewModelLocator { get; set; }

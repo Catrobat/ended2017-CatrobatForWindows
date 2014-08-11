@@ -83,7 +83,9 @@
     <Compile Include="CatrobatObjects\TestEqualityComparer.cs" />
     <Compile Include="Services\Common\ProgramExportService.cs" />
     <Compile Include="Services\Common\ProgramImportService.cs" />
+    <Compile Include="Services\Common\ProgramValidationService.cs" />
     <Compile Include="Services\IProgramExportService.cs" />
+    <Compile Include="Services\IProgramValidationService.cs" />
     <Compile Include="StorageConstants.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
     <Compile Include="ExtensionMethods\CollectionExtensions.cs" />

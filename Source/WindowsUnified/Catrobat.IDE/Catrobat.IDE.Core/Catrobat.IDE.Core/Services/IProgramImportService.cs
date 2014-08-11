@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.Services
 
         Task<ExtractProgramResult> ExtractProgram();
 
-        Task<CheckProgramImportResult> CheckProgram();
+        Task<CheckProgramResult> CheckProgram();
 
         Task<string> AcceptTempProject();
 
@@ -21,14 +21,6 @@ namespace Catrobat.IDE.Core.Services
         Task TryImportWithStatusNotifications();
     }
 
-
-    public enum ProgramImportStatus { Valid, Damaged, VersionTooOld, VersionTooNew }
-    public class CheckProgramImportResult
-    {
-        public ProgramImportStatus Status { get; set; }
-
-        public LocalProjectHeader ProjectHeader { get; set; }
-    }
 
     public enum ExtractProgramStatus { Success, Error }
     public class ExtractProgramResult

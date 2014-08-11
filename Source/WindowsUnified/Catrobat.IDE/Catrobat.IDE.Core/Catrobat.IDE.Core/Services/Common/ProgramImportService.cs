@@ -23,7 +23,7 @@ namespace Catrobat.IDE.WindowsShared.Services
     {
         private Stream _projectStream;
         private ExtractProgramResult _extractResult;
-        private CheckProgramImportResult _checkResult;
+        private CheckProgramResult _checkResult;
         private OnlineProgramHeader _onlineProjectHeader;
         private XmlProgram _convertedProject;
         private string _programName;
@@ -91,68 +91,74 @@ namespace Catrobat.IDE.WindowsShared.Services
             return _extractResult;
         }
 
-        public async Task<CheckProgramImportResult> CheckProgram()
+        public async Task<CheckProgramResult> CheckProgram()
         {
-            _checkResult = new CheckProgramImportResult();
-            PortableImage projectScreenshot = null;
-
-            using (var storage = StorageSystem.GetStorage())
-            {
-                projectScreenshot =
-                    await storage.LoadImageAsync(Path.Combine(
-                    StorageConstants.TempProgramImportPath, 
-                    StorageConstants.ProgramManualScreenshotPath)) ??
-                    await storage.LoadImageAsync(Path.Combine(
-                    StorageConstants.TempProgramImportPath, 
-                    StorageConstants.ProgramAutomaticScreenshotPath));
-            }
-
-            var projectCodePath = Path.Combine(
+            var programCodePath = Path.Combine(
                 StorageConstants.TempProgramImportPath, StorageConstants.ProgramCodePath);
 
-            var converterResult = await CatrobatVersionConverter.
-                ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion);
+            return await ServiceLocator.ProgramValidationService.CheckProgram(programCodePath);
 
-            if (converterResult.Error != CatrobatVersionConverter.VersionConverterStatus.NoError)
-            {
-                switch (converterResult.Error)
-                {
-                    case CatrobatVersionConverter.VersionConverterStatus.VersionTooNew:
-                        _checkResult.Status = ProgramImportStatus.VersionTooNew;
-                        break;
-                    case CatrobatVersionConverter.VersionConverterStatus.VersionTooOld:
-                        _checkResult.Status = ProgramImportStatus.VersionTooOld;
-                        break;
-                    default:
-                        _checkResult.Status = ProgramImportStatus.Damaged;
-                        break;
-                }
-                return _checkResult;
-            }
 
-            try
-            {
-                _convertedProject = new XmlProgram(converterResult.Xml);
-            }
-            catch (Exception)
-            {
-                _checkResult.Status = ProgramImportStatus.Damaged;
-                _checkResult.ProjectHeader = null;
-                return _checkResult;
-            }
+            //_checkResult = new CheckProgramImportResult();
+            //PortableImage projectScreenshot = null;
 
-            _programName = _onlineProjectHeader != null ? 
-                _onlineProjectHeader.ProjectName : 
-                XmlProgramHelper.GetProgramName(converterResult.Xml);
+            //using (var storage = StorageSystem.GetStorage())
+            //{
+            //    projectScreenshot =
+            //        await storage.LoadImageAsync(Path.Combine(
+            //        StorageConstants.TempProgramImportPath, 
+            //        StorageConstants.ProgramManualScreenshotPath)) ??
+            //        await storage.LoadImageAsync(Path.Combine(
+            //        StorageConstants.TempProgramImportPath, 
+            //        StorageConstants.ProgramAutomaticScreenshotPath));
+            //}
 
-            _checkResult.ProjectHeader = new LocalProjectHeader
-            {
-                Screenshot = projectScreenshot,
-                ProjectName = _programName
-            };
+            //var projectCodePath = Path.Combine(
+            //    StorageConstants.TempProgramImportPath, StorageConstants.ProgramCodePath);
 
-            _checkResult.Status = ProgramImportStatus.Valid;
-            return _checkResult;
+            //var converterResult = await CatrobatVersionConverter.
+            //    ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion);
+
+            //if (converterResult.Error != CatrobatVersionConverter.VersionConverterStatus.NoError)
+            //{
+            //    switch (converterResult.Error)
+            //    {
+            //        case CatrobatVersionConverter.VersionConverterStatus.VersionTooNew:
+            //            _checkResult.Status = ProgramImportStatus.VersionTooNew;
+            //            break;
+            //        case CatrobatVersionConverter.VersionConverterStatus.VersionTooOld:
+            //            _checkResult.Status = ProgramImportStatus.VersionTooOld;
+            //            break;
+            //        default:
+            //            _checkResult.Status = ProgramImportStatus.Damaged;
+            //            break;
+            //    }
+            //    return _checkResult;
+            //}
+
+            //try
+            //{
+            //    _convertedProject = new XmlProgram(converterResult.Xml);
+            //}
+            //catch (Exception)
+            //{
+            //    _checkResult.Status = ProgramImportStatus.Damaged;
+            //    _checkResult.ProjectHeader = null;
+            //    return _checkResult;
+            //}
+
+            //_programName = _onlineProjectHeader != null ? 
+            //    _onlineProjectHeader.ProjectName : 
+            //    XmlProgramHelper.GetProgramName(converterResult.Xml);
+
+            //_checkResult.ProjectHeader = new LocalProjectHeader
+            //{
+            //    Screenshot = projectScreenshot,
+            //    ProjectName = _programName
+            //};
+
+            //_checkResult.Status = ProgramImportStatus.Valid;
+            //return _checkResult;
         }
 
         public async Task<string> AcceptTempProject()
@@ -214,7 +220,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                         ToastDisplayDuration.Long);
                 return;
             }
-            if(_cancellationTokenSource.Token.IsCancellationRequested == true)
+            if (_cancellationTokenSource.Token.IsCancellationRequested == true)
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(
                         "Import aborted",
@@ -228,12 +234,12 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             var acceptProject = true;
 
-            switch (validateResult.Status)
+            switch (validateResult.State)
             {
-                case ProgramImportStatus.Valid:
+                case ProgramState.Valid:
                     acceptProject = true;
                     break;
-                case ProgramImportStatus.Damaged:
+                case ProgramState.Damaged:
                     ServiceLocator.NotifictionService.ShowToastNotification(
                         AppResources.Import_ProgramDamaged,
                         AppResources.Import_ProgramDamagedText,
@@ -241,7 +247,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
                     acceptProject = false;
                     break;
-                case ProgramImportStatus.VersionTooOld:
+                case ProgramState.VersionTooOld:
                     ServiceLocator.NotifictionService.ShowToastNotification(
                         AppResources.Import_ProgramOutdated,
                         AppResources.Import_ProgramOutdatedText,
@@ -249,7 +255,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
                     acceptProject = false;
                     break;
-                case ProgramImportStatus.VersionTooNew:
+                case ProgramState.VersionTooNew:
                     ServiceLocator.NotifictionService.ShowToastNotification(
                         AppResources.Import_AppTooOld,
                         AppResources.Import_AppTooOldText,

@@ -2,13 +2,12 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq.Expressions;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.CatrobatObjects
 {
-    public enum LocalProgramState { Valid, AppUpdateRequired, Damaged, VersionOutdated }
-
     [DebuggerDisplay("Name = {Name}")]
     public class LocalProjectHeader : 
         IComparable<LocalProjectHeader>, INotifyPropertyChanged
@@ -35,8 +34,8 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             }
         }
 
-        private LocalProgramState _validityState = LocalProgramState.Valid;
-        public LocalProgramState ValidityState
+        private ProgramState _validityState = ProgramState.Valid;
+        public ProgramState ValidityState
         {
             get
             {
@@ -54,7 +53,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
         {
             get
             {
-                return _validityState == LocalProgramState.Valid;
+                return _validityState == ProgramState.Valid;
             }
         }
 

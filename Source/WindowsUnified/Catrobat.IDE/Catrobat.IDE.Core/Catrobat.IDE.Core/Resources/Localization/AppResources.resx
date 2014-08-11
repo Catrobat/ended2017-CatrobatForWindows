@@ -600,7 +600,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>My programs</value>
   </data>
   <data name="Main_HeaderOnlinePrograms" xml:space="preserve">
-    <value>Online</value>
+    <value>pocketcode.org</value>
   </data>
   <data name="Main_HeaderSettings" xml:space="preserve">
     <value>settings</value>
@@ -1207,7 +1207,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>In order to be allowed to use Pocket Code and other executables offered by the Catrobat project, you must agree to our Terms of Use and strictly follow them when you use Pocket Code and our other executables. Please see the link below for their precise formulation.</value>
   </data>
   <data name="Main_ProgramDescription" xml:space="preserve">
-    <value>Description:</value>
+    <value>Description</value>
   </data>
   <data name="Main_TitleCurrentProgram" xml:space="preserve">
     <value>ACTIVE PROGRAM</value>
@@ -1283,5 +1283,17 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Main_OnlineProgramLoading" xml:space="preserve">
     <value>downloading...</value>
+  </data>
+  <data name="Main_NumberOfActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Main_NumberOfLooks" xml:space="preserve">
+    <value>Looks</value>
+  </data>
+  <data name="Main_NumberOfSounds" xml:space="preserve">
+    <value>Sounds</value>
+  </data>
+  <data name="Main_NumberOfSprites" xml:space="preserve">
+    <value>Objects</value>
   </data>
 </root>

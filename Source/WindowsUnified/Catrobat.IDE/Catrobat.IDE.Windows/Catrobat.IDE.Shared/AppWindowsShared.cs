@@ -50,6 +50,8 @@ namespace Catrobat.IDE.WindowsShared
             ServiceLocator.Register<ProgramImportService>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ContextService>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ProgramExportService>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ProgramValidationService>(TypeCreationMode.Lazy);
+            
 
             ServiceLocator.ViewModelLocator = new ViewModelLocator();
             ServiceLocator.ViewModelLocator.RegisterViewModels();
