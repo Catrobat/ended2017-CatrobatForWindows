@@ -74,13 +74,20 @@ namespace Catrobat.IDE.Core.Xml
 
         public static string GetProgramName(string programCode)
         {
-            var document = XDocument.Load(new StringReader(programCode));
-            document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
+            try
+            {
+                var document = XDocument.Load(new StringReader(programCode));
+                document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
 
-            var project = document.Element("program");
-            var header = project.Element("header");
-            var programName = header.Element("programName");
-            return programName.Value;
+                var project = document.Element("program");
+                var header = project.Element("header");
+                var programName = header.Element("programName");
+                return programName.Value;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

@@ -56,10 +56,10 @@ namespace Catrobat.Paint.Phone.Tool
             }
             renderTransform.CenterY = 295;
 
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = renderTransform;
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
+            PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.RenderTransform = renderTransform;
+            PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.UpdateLayout();
+            PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateArrange();
+            PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
         }
 
         public void FlipVertical()
@@ -81,10 +81,10 @@ namespace Catrobat.Paint.Phone.Tool
 
             renderTransform.CenterX = 225;
 
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = renderTransform;
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
+            PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.RenderTransform = renderTransform;
+            PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.UpdateLayout();
+            PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateArrange();
+            PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
 
         }
     }

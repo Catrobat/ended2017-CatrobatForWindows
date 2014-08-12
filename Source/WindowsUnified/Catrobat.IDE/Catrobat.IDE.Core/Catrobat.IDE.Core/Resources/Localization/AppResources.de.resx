@@ -979,7 +979,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Design</value>
   </data>
   <data name="Main_HeaderOnlinePrograms" xml:space="preserve">
-    <value>Online</value>
+    <value>pocketcode.org</value>
   </data>
   <data name="Main_ListDesign" xml:space="preserve">
     <value>Design</value>
@@ -1207,7 +1207,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Um Pocket Code, und andere Anwendungen die vom Catrobat-Projekt angeboten werden, nutzen zu dürfen, musst du unseren Nutzungsbedingungen zustimmen. Die Nutzungsbedingungen sind strikt zu befolgen, wenn du Pocket Code oder eine unserer anderen Anwendungen verwendest. Die nachstehenden Links verweisen auf die genauen Formulierungen der Nutzungsbedingungen.</value>
   </data>
   <data name="Main_ProgramDescription" xml:space="preserve">
-    <value>Beschreibung:</value>
+    <value>Beschreibung</value>
   </data>
   <data name="Main_TitleCurrentProgram" xml:space="preserve">
     <value>AKTUELLES PROGRAMM</value>

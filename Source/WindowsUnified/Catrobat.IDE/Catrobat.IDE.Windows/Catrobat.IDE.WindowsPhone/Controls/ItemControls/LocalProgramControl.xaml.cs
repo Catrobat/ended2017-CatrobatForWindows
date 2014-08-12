@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
@@ -45,29 +46,27 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         {
             var projectHeader = (LocalProjectHeader) DataContext;
 
-            switch (projectHeader.ValidityState)
-            {  
-                case LocalProgramState.Damaged:
-                    ServiceLocator.NotifictionService.ShowMessageBox(
-                        AppResources.Main_SelectedProgramNotValidMessage,
-                        String.Format(AppResources.Main_SelectedProgramNotValidHeader,
-                        projectHeader.ProjectName),
-                        delegate { /* no action */ }, MessageBoxOptions.Ok);
-                    break;
-
-                case LocalProgramState.AppUpdateRequired:
-                    // TODO: show messagebox and offer link to the store
-                    break;
-
-                case LocalProgramState.VersionOutdated:
-                    // TODO: show messagebox and maybe add functionality to repair the project
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
             
-           ;
+            //switch (projectHeader.ValidityState)
+            //{
+            //    case LocalProgramState.Damaged:
+            //        ServiceLocator.NotifictionService.ShowMessageBox(
+            //            AppResources.Main_SelectedProgramNotValidMessage,
+            //            String.Format(AppResources.Main_SelectedProgramNotValidHeader,
+            //            projectHeader.ProjectName),
+            //            delegate { /* no action */ }, MessageBoxOptions.Ok);
+            //        break;
+
+            //    case LocalProgramState.AppUpdateRequired:
+            //        // TODO: show messagebox and offer link to the store
+            //        break;
+
+            //    case LocalProgramState.VersionOutdated:
+            //        // TODO: show messagebox and maybe add functionality to repair the project
+            //        break;
+            //    default:
+            //        throw new ArgumentOutOfRangeException();
+            //}
         }
     }
 }

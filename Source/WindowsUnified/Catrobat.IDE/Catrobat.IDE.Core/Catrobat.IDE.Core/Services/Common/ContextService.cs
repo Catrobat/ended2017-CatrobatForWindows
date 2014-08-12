@@ -75,7 +75,7 @@ namespace Catrobat.IDE.Core.Services.Common
             catch (Exception)
             {
                 // Program could not be loaded
-                if(Debugger.IsAttached)
+                if (Debugger.IsAttached)
                     Debugger.Break();
             }
 

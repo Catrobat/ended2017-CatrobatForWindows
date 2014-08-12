@@ -96,9 +96,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\EditorAppBar.xaml.cs">
-      <DependentUpon>EditorAppBar.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ActionsControls\MasterBrick.cs" />
     <Compile Include="Controls\ActionsControls\NormalBrick.cs" />
     <Compile Include="Controls\ItemControls\SoundItemControl.xaml.cs">
@@ -127,6 +124,11 @@
       <DependentUpon>SoundPlayButtonGroup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\FormulaControls\Templates\FormulaTokenTemplateWindowsShared.cs" />
+    <Compile Include="Controls\SwitchPanel\SwitchPanel.xaml.cs">
+      <DependentUpon>SwitchPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SwitchPanel\SwitchPanelItem.cs" />
+    <Compile Include="Controls\SwitchPanel\SwitchPanelItemCollection.cs" />
     <Compile Include="ExtendedSplash.xaml.cs">
       <DependentUpon>ExtendedSplash.xaml</DependentUpon>
     </Compile>
@@ -301,10 +303,6 @@
     <Content Include="Assets\Wide310x150.Scale-240.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\EditorAppBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\ItemControls\SoundItemControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -335,6 +333,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\SoundControls\SoundPlayButtonGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SwitchPanel\SwitchPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
