@@ -17,11 +17,11 @@
           Background="{ThemeResource LooksBrush}"
           HorizontalAlignment="Stretch">
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="90" />
+        <ColumnDefinition Width="100" />
         <ColumnDefinition />
       </Grid.ColumnDefinitions>
       <Image Grid.Column="0" Source="{Binding Image.ImageSource}"
-                   MaxWidth="90" MaxHeight="90" Margin="6 6 0 6"
+                   MaxWidth="90" MaxHeight="80" Margin="6 6 0 6"
                    HorizontalAlignment="Stretch" Stretch="UniformToFill" />
       <Grid Grid.Column="1" Margin="5">
         <TextBlock Grid.Row="0" FontSize="28" Margin="10 5 5 5"

@@ -122,7 +122,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 
         public MultiModeEditorCommandBar()
         {
-            this.RequestedTheme =ElementTheme.Dark;
+            this.RequestedTheme = ElementTheme.Dark;
 
             _playButton = new AppBarButton
             {

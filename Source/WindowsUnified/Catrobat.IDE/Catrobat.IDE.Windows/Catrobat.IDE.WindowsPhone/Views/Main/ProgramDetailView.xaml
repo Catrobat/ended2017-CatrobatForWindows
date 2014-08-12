@@ -17,8 +17,8 @@
       <Setter Property="Foreground" Value="#FFDD2222"/>
     </Style>
   </Page.Resources>
-  
-  
+
+
   <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
@@ -27,30 +27,32 @@
 
     <StackPanel Grid.Row="0" Margin="12">
       <TextBlock Text="{Binding CurrentProgramHeader.ProjectName, 
-        Mode=OneWay}" 
+        Mode=OneWay}" TextWrapping="WrapWholeWords"
         Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
-    <Grid Grid.Row="1" Margin="12 0 12 18">
+    <Grid Grid.Row="1" Margin="6 0 6 18">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
         <RowDefinition />
       </Grid.RowDefinitions>
 
-      <Grid>
+      <Grid Margin="6 0 6 0">
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="200" />
           <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid Width="200" Height="200" VerticalAlignment="Top">
-          <Grid >
-            <Grid Visibility="{Binding CurrentProgram, 
+          <Grid Background="DarkGray" >
+            <Grid Margin="6" 
+              Visibility="{Binding CurrentProgramHeader, 
               Converter={StaticResource NullVisibilityConverter}}">
-              <Grid Background="LightGray" 
-              Visibility="{Binding CurrentProgram.Screenshot.IsEmpty, 
-              Converter={StaticResource BoolVisibilityConverter}}">
+              <Grid Background="#FFDDDDDD"
+                Visibility="{Binding CurrentProgramHeader.Screenshot.IsEmpty, 
+                Converter={StaticResource BoolVisibilityConverter}}">
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
                 TextAlignment="Center" TextWrapping="Wrap"
                 FontSize="28" Foreground="DarkGray"
+                MaxWidth="150"
                 Text="{Binding Resources.Main_NoScreenshot, 
                 Source={StaticResource LocalizedStrings}}" />
               </Grid>
@@ -158,53 +160,37 @@
         </Grid>
       </Grid>
 
-      <switchPanel:SwitchPanel Grid.Row="1" ActivePanelValue="{Binding CurrentProgramState}">
+      <switchPanel:SwitchPanel Grid.Row="1" HorizontalAlignment="Stretch"
+        ActivePanelValue="{Binding CurrentProgramState}">
         <switchPanel:SwitchPanel.Items>
           <switchPanel:SwitchPanelItemCollection>
-            <switchPanel:SwitchPanelItem PanelValue="Valid">
-              <ScrollViewer Margin="20 20 20 0">
-                <StackPanel Margin="12 0 6 0">
-                  <TextBlock Margin="0 12 0 0" 
+            <switchPanel:SwitchPanelItem PanelValue="Valid" HorizontalAlignment="Stretch">
+              <Grid Margin="0 0 0 0">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto"/>
+                  <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Margin="0 6 0 0" 
                      Text="{Binding Resources.Main_ProgramDescription, 
                      Source={StaticResource LocalizedStrings}}" 
-                     Style="{ThemeResource TextNormalStyle}"/>
-                  <StackPanel Visibility="{Binding CurrentProgram.Description, 
+                     Style="{ThemeResource TextLargerStyle}"/>
+                <ScrollViewer Grid.Row="1" Margin="0 0 0 0">
+                  <StackPanel>
+                    <StackPanel Visibility="{Binding CurrentProgram.Description, 
                       Converter={StaticResource StringVisibilityConverter}}">
-                    <TextBlock Text="{Binding Resources.Main_ProgramNoDescription, 
+                      <TextBlock Text="{Binding Resources.Main_ProgramNoDescription, 
                        Source={StaticResource LocalizedStrings}}"
                        TextWrapping="Wrap"
-                       Style="{ThemeResource TextSubtileStyle}"/>
-                  </StackPanel>
-                  <TextBlock Text="{Binding CurrentProgram.Description, Mode=OneWay}" 
+                       Foreground="{ThemeResource TextSubtileBrush}"
+                       Style="{ThemeResource TextNormalStyle}"/>
+                    </StackPanel>
+                    <TextBlock Margin="0 0 7 0"
+                     Text="{Binding CurrentProgram.Description, Mode=OneWay}" 
                      TextWrapping="Wrap"
-                     Style="{ThemeResource TextSmallStyle}"/>
-                  <!--<TextBlock Margin="0 12 0 0" 
-                                 Text="{Binding Resources.Main_OnlineProgramUploaded, 
-                                 Source={StaticResource LocalizedStrings}}" 
-                                 Style="{ThemeResource TextNormalStyle}"/>
-                      <TextBlock x:Name="UploadedLabel" 
-                                 Text="{Binding OnlineProgramViewModel.UploadedLabelText, 
-                                 Source={StaticResource Locator}}" />
-                      <TextBlock Text="{Binding Author}" 
-                                 TextWrapping="Wrap"/>
-                      <TextBlock x:Name="VersionLabel" 
-                                 Text="{Binding OnlineProgramViewModel.VersionLabelText, 
-                                 Source={StaticResource Locator}}" 
-                                 TextWrapping="Wrap"/>
-                      <TextBlock Margin="0 12 0 0"
-                                 Text="{Binding Resources.Main_OnlineProgramStatistics, 
-                                 Source={StaticResource LocalizedStrings}}" 
-                                 Style="{ThemeResource TextNormalStyle}"/>
-                      <TextBlock x:Name="ViewsLabel" 
-                                 Text="{Binding OnlineProgramViewModel.ViewsLabelText, 
-                                 Source={StaticResource Locator}}" 
-                                 TextWrapping="Wrap" />
-                      <TextBlock x:Name="DownloadsLabel" 
-                                 Text="{Binding OnlineProgramViewModel.DownloadsLabelText, 
-                                 Source={StaticResource Locator}}" 
-                                 TextWrapping="Wrap" />-->
-                </StackPanel>
-              </ScrollViewer>
+                     Style="{ThemeResource TextNormalStyle}"/>
+                  </StackPanel>
+                </ScrollViewer>
+              </Grid>
             </switchPanel:SwitchPanelItem>
 
 

@@ -136,6 +136,9 @@ namespace Catrobat.IDE.WindowsPhone
 
         public static async Task InitializationFinished(IActivatedEventArgs e)
         {
+            await ((SystemInformationServiceWindowsShared)ServiceLocator.SystemInformationService).Initialize();
+
+
             var filePickerArgs = e as FileOpenPickerContinuationEventArgs;
             if (filePickerArgs != null)
             {

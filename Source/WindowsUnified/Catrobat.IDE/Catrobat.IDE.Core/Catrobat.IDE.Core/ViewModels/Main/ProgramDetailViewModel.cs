@@ -261,6 +261,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             UploadCurrentProgramCommand.RaiseCanExecuteChanged();
             PlayCurrentProgramCommand.RaiseCanExecuteChanged();
             ShareLocalProgramCommand.RaiseCanExecuteChanged();
+            RenameProgramCommand.RaiseCanExecuteChanged();
         }
 
         public async override void NavigateTo()
