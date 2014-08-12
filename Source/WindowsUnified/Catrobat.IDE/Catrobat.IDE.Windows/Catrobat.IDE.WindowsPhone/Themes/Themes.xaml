@@ -73,6 +73,7 @@
 
       <Style x:Key="TextDoubleTitle2Style" TargetType="TextBlock">
         <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="{ThemeResource TextSubtileBrush}"/>
       </Style>
 
       <!--Text Styles-->

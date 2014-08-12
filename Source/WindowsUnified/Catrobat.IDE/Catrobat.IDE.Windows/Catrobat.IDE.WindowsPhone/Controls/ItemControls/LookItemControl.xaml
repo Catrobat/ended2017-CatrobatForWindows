@@ -21,8 +21,8 @@
         <ColumnDefinition />
       </Grid.ColumnDefinitions>
       <Image Grid.Column="0" Source="{Binding Image.ImageSource}"
-                   MaxWidth="90" MaxHeight="80" Margin="6 6 0 6"
-                   HorizontalAlignment="Stretch" Stretch="UniformToFill" />
+        Margin="5 5 0 5"
+        Stretch="Uniform" />
       <Grid Grid.Column="1" Margin="5">
         <TextBlock Grid.Row="0" FontSize="28" Margin="10 5 5 5"
                 Text="{Binding Name}" TextWrapping="Wrap" MaxLines="2"

@@ -61,18 +61,18 @@
         Header="{Binding Resources.Editor_PivotLooks, 
         Source={StaticResource LocalizedStrings}}">
         <Grid DataContext="{Binding}">
-            <listsViewControls:BindableListView x:Name="ListViewLooks"
+          <listsViewControls:BindableListView x:Name="ListViewLooks"
               HorizontalAlignment="Center"
               ItemsSource="{Binding Looks}"
               BindableSelectedItems="{Binding SelectedLooks, Mode=TwoWay}"
               CanReorderItems="True" AllowDrop="True" SelectionMode="None">
-              <ListViewBase.ItemTemplate>
-                <DataTemplate>
-                  <controls:LookItemControl Look="{Binding}"
+            <ListViewBase.ItemTemplate>
+              <DataTemplate>
+                <controls:LookItemControl Look="{Binding}"
                     Tapped="LookItem_OnTapped" />
-                </DataTemplate>
-              </ListViewBase.ItemTemplate>
-            </listsViewControls:BindableListView>
+              </DataTemplate>
+            </ListViewBase.ItemTemplate>
+          </listsViewControls:BindableListView>
           <TextBlock
             Text ="{Binding Resources.Editor_ClickPlusToAddLook, 
             Source={StaticResource LocalizedStrings}}"
