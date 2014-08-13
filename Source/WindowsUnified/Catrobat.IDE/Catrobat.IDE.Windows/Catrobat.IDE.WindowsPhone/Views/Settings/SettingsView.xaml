@@ -30,8 +30,24 @@
                  Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
 
-    <StackPanel Grid.Row="1" Margin="12">
-      <Button Command="{Binding ShowLanguageSettingsCommand}" 
+    <StackPanel Grid.Row="1" Margin="12 16 12 12">
+      <ListView>
+        <ListViewBase.Items>
+          <StackPanel Tapped="SettingsLanguage_OnTapped" Name="StackPanelSettingsLanguage" Margin="10 0 10 10" >
+            <TextBlock Margin="0 0 10 10" HorizontalAlignment="Left"
+              Text="{Binding Resources.Main_ListLanguage, 
+              Source={StaticResource LocalizedStrings}}" 
+              Style="{ThemeResource TextTitleLargeStyle}"/>
+            <TextBlock Margin="2 -5 10 10" HorizontalAlignment="Left"
+              Text="{Binding CurrentCulture.NativeName}"
+              Foreground="{ThemeResource TextSubtileBrush}"
+              Style="{ThemeResource TextNormalStyle}"/>
+          </StackPanel>
+        </ListViewBase.Items>
+      </ListView>
+      
+      
+      <!--<Button Command="{Binding ShowLanguageSettingsCommand}" 
               BorderThickness="0" HorizontalAlignment="Stretch">
         <Button.Content>
           <StackPanel Name="StackPanelSettingsLanguage" Margin="10 0 10 10" >
@@ -44,7 +60,7 @@
               Style="{ThemeResource TextNormalStyle}"/>
           </StackPanel>
         </Button.Content>
-      </Button>
+      </Button>-->
       <!--<Button Command="{Binding ShowDesignSettingsCommand}" BorderThickness="0">
         <Button.Content>
           <Grid>

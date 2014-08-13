@@ -34,7 +34,10 @@
 
       <SolidColorBrush x:Key="HyperLinkForegroundBrush" Color="{ThemeResource Accent1Color}" />
 
-      
+      <Color x:Key="TextSubtileColor">#FF888888</Color>
+      <SolidColorBrush x:Key="TextSubtileBrush" Color="{ThemeResource TextSubtileColor}" />
+
+
       <!-- Action Brushes -->
       <SolidColorBrush x:Key="SoundsBrush" Color="#FF87778D" />
       <SolidColorBrush x:Key="LooksBrush" Color="#FF6F9263" />
@@ -70,12 +73,13 @@
 
       <Style x:Key="TextDoubleTitle2Style" TargetType="TextBlock">
         <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="{ThemeResource TextSubtileBrush}"/>
       </Style>
 
       <!--Text Styles-->
       <Style x:Key="TextSubtileStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Foreground" Value="LightGray"/>
+        <Setter Property="Foreground" Value="{ ThemeResource TextSubtileBrush }"/>
       </Style>
 
       <Style x:Key="TextSmallStyle" TargetType="TextBlock">
