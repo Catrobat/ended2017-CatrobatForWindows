@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Catrobat.Paint.Phone.Old.Toolkit.Content.Resources {
+namespace Catrobat.Paint.Phone.Old.Resources {
     using System;
     
     
