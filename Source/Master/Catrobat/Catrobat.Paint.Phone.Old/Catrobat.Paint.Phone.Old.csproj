@@ -247,9 +247,7 @@
     <EmbeddedResource Include="Resources\AppResources.qps-ploc.resx" />
     <EmbeddedResource Include="Resources\AppResources.resx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Toolkit.Content\Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />
