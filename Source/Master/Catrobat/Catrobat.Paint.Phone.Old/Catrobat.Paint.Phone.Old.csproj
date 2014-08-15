@@ -161,6 +161,9 @@
     <Compile Include="PaintLauncher.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\AppResources.de.Designer.cs" />
+    <Compile Include="Resources\AppResources.Designer.cs" />
+    <Compile Include="Resources\LocalizedStrings.cs" />
     <Compile Include="ViewModel\ColorPickerViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PaintingAreaViewModel.cs" />
@@ -214,6 +217,8 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Resources\AppResources.de.xlf" />
+    <None Include="Resources\AppResources.qps-ploc.xlf" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Converters\ConverterResources.xaml">
@@ -238,8 +243,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <EmbeddedResource Include="Resources\AppResources.de.resx" />
+    <EmbeddedResource Include="Resources\AppResources.qps-ploc.resx" />
+    <EmbeddedResource Include="Resources\AppResources.resx" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />
