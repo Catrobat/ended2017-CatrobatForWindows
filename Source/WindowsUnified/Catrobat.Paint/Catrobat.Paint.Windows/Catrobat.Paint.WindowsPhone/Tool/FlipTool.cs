@@ -55,7 +55,7 @@ namespace Catrobat.Paint.Phone.Tool
             renderTransform.ScaleX = _scaleX;
             renderTransform.CenterX = DISPLAY_WIDTH_HALF;
 
-            PaintingAreaContenPanelGridSettings(renderTransform);
+            PaintingAreaCanvasSettings(renderTransform);
         }
 
         public void FlipVertical()
@@ -69,7 +69,7 @@ namespace Catrobat.Paint.Phone.Tool
             renderTransform.ScaleY = _scaleY;
             renderTransform.CenterY = DISPLAY_HEIGHT_HALF;
 
-            PaintingAreaContenPanelGridSettings(renderTransform);
+            PaintingAreaCanvasSettings(renderTransform);
         }
 
         public override void ResetDrawingSpace()
@@ -83,15 +83,15 @@ namespace Catrobat.Paint.Phone.Tool
             renderTransform.ScaleY = _scaleY;
             renderTransform.CenterY = DISPLAY_HEIGHT_HALF;
 
-            PaintingAreaContenPanelGridSettings(renderTransform);
+            PaintingAreaCanvasSettings(renderTransform);
         }
 
-        private void PaintingAreaContenPanelGridSettings(ScaleTransform renderTransform)
+        private void PaintingAreaCanvasSettings(ScaleTransform renderTransform)
         {
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = renderTransform;
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = renderTransform;
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.UpdateLayout();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateArrange();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateMeasure();
         }
     }
 }

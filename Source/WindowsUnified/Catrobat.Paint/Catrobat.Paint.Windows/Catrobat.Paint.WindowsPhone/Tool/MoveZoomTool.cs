@@ -78,16 +78,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 System.Diagnostics.Debug.WriteLine("MoveZoomTool Should Not Reach this!");
                 return;
             }
-
-
-
-
-
-            //            System.Diagnostics.Debug.WriteLine("MoveZoomTool Canvas: Actual " + PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight + " " + PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth + " Rendered " + PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Height + " " + PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Width);
-            //            System.Diagnostics.Debug.WriteLine("MoveZoomTool Canvas2: Actual " + PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.ActualHeight + " " + PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.ActualWidth + " Rendered " + PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.RenderSize.Height + " " + PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.RenderSize.Width);
-            //            System.Diagnostics.Debug.WriteLine("MoveZoomTool Grid: Actual " + PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight + " " + PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth + " Rendered " + PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderSize.Height + " " + PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderSize.Width);
-
-
         }
 
         public override void HandleUp(object arg)

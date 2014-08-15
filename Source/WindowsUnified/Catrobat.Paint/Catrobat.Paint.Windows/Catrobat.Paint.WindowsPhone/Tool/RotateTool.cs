@@ -60,11 +60,7 @@ namespace Catrobat.Paint.Phone.Tool
             rotateTransform.Angle = _angle;
             rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Width) / 2;
             rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Height) / 2);
-
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = rotateTransform;
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
+            PaintingAreaCanvasSettings(rotateTransform);
         }
 
         public void RotateLeft()
@@ -82,12 +78,8 @@ namespace Catrobat.Paint.Phone.Tool
             rotateTransform.Angle = _angle;
             rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Width) / 2;
             rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Height) / 2);
-          
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = rotateTransform;
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
 
+            PaintingAreaCanvasSettings(rotateTransform);
             CommandManager.GetInstance().CommitCommand(new RotateCommand(RotateCommand.Direction.Left, _angle));
 
         }
@@ -99,12 +91,17 @@ namespace Catrobat.Paint.Phone.Tool
             rotateTransform.Angle = _angle;
             rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Width) / 2;
             rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Height) / 2);
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = rotateTransform;
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
+            PaintingAreaCanvasSettings(rotateTransform);
 
             CommandManager.GetInstance().CommitCommand(new RotateCommand(RotateCommand.Direction.Right, _angle));
+        }
+
+        private void PaintingAreaCanvasSettings(RotateTransform renderTransform)
+        {
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = renderTransform;
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.UpdateLayout();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateArrange();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateMeasure();
         }
     }
 }
