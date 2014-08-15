@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Catrobat_Player.Player"
+    x:Class="Catrobat_Player.PlayerDirectXPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Catrobat_Player"
@@ -14,7 +14,7 @@
     <Page.BottomAppBar>
         <CommandBar x:Name="PlayerAppBar"  Height="75" VerticalAlignment="Bottom">
             <!--<AppBarButton x:Name="Back" Label="Back" Icon="Back" Click="OnResetButtonClicked"/>   -->
-            <AppBarButton x:Name="Restart" Label="Restart" Icon="Refresh" Click="OnRefreshButtonClicked"/>
+            <AppBarButton x:Name="Restart" Label="Restart" Icon="Refresh" Click="OnRestartButtonClicked"/>
             <AppBarButton x:Name="PausePlay" Label="Pause" Icon="Pause" Click="OnPausePlayButtonClicked"/>
             <AppBarButton x:Name="Screenshot" Label="Screenshot" Icon="Camera" Click="OnScreenshotButtonClicked"/>
             <AppBarButton x:Name="EnableAxes"  Label="Enable Axes"  Icon="Setting"  Click="OnEnableAxisButtonClicked"/>

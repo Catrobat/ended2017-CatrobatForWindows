@@ -36,10 +36,9 @@ App::App()
 
 void App::OnLaunched(_In_ LaunchActivatedEventArgs^ /* args */)
 {
-    m_mainPage = ref new Player();
-	//m_mainPage = ref new Test01();
+    m_playerDirectXPage = ref new PlayerDirectXPage();
 
-    Window::Current->Content = m_mainPage;
+    Window::Current->Content = m_playerDirectXPage;
     Window::Current->Activate();
 }
 
@@ -50,7 +49,7 @@ void App::OnSuspending(
     _In_ SuspendingEventArgs^ args
     )
 {
-    m_mainPage->OnSuspending();
+    m_playerDirectXPage->OnSuspending();
 }
 
 //----------------------------------------------------------------------
@@ -60,7 +59,7 @@ void App::OnResuming(
     _In_ Object^ /* args */
     )
 {
-    m_mainPage->OnResuming();
+    m_playerDirectXPage->OnResuming();
 }
 
 //----------------------------------------------------------------------

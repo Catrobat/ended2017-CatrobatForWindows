@@ -1,27 +1,31 @@
 ﻿#pragma once
 
-#include "Direct3DBase.h"
+//#include "Direct3DBaseRenderer.h"
+#include "Direct3DDeviceResources.h"
 #include "SpriteBatch.h"
 #include "SpriteFont.h"
 #include "Project.h"
 
 #include <wrl/client.h>
 
-ref class Renderer sealed : public Direct3DBase
+ref class InitRenderer
 {
-public:
-	Renderer();
+internal:
+    InitRenderer(const std::shared_ptr<DX::Direct3DDeviceResources>& direct3DDeviceResources);
 
 	// Direct3DBase methods.
-	virtual void CreateDeviceResources() override;
-	virtual void CreateWindowSizeDependentResources() override;
-	virtual void Render() override;
+    //void CreateDeviceDependentResources();
+    //void CreateWindowSizeDependentResources();
+    //void ReleaseDeviceDependentResources();
+    void Render();
 
 	// Method for updating time-dependent objects.
-	void Update(float timeTotal, float timeDelta);
+	//void Update(float timeTotal, float timeDelta);
 
+protected private:
+    // Cached pointer to device resources.
+    std::shared_ptr<DX::Direct3DDeviceResources>     m_direct3DDeviceResources;
 
-private:
 	bool m_loadingComplete;
 	bool m_startup;
 	uint32 m_indexCount;
