@@ -3,6 +3,7 @@ using Catrobat.Paint.Phone.Tool;
 using System;
 using System.Windows;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
@@ -10,7 +11,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
     class MoveZoomTool : ToolBase
     {
         private TransformGroup _transforms;
-
+        private double DISPLAY_HEIGHT_HALF;
+        private double DISPLAY_WIDTH_HALF;
 
         public MoveZoomTool()
         {
@@ -24,6 +26,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             {
                 PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
             }
+
+            DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height - 150.0) / 2.0;
+            DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
         }
         public override void HandleDown(object arg)
         {
@@ -40,18 +45,28 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             if (arg is ScaleTransform)
             {
                 var resize = (ScaleTransform)arg;
-                resize.ScaleX = Math.Round(resize.ScaleX, 1);
-                resize.ScaleY = Math.Round(resize.ScaleY, 1);
+                bool is_scale_allowed = false;
 
-                var fixedaspection = 0.0;
-                PocketPaintApplication.GetInstance().PaintData.min_max_resize = Math.Round(PocketPaintApplication.GetInstance().PaintData.min_max_resize, 1);
-                fixedaspection = resize.ScaleX > resize.ScaleY ? resize.ScaleX : resize.ScaleY;
+                if ((resize.ScaleX > 1.0) && (_transforms.Value.M11 < 28.0))
+                {
+                    is_scale_allowed = true;
+                }
+                else if ((resize.ScaleX < 1.0) && (_transforms.Value.M11 > 0.5))
+                {
+                    is_scale_allowed = true;
+                }
 
-                fixedaspection = Math.Round(fixedaspection, 1);
-                resize.ScaleX = Math.Round(0.0 + fixedaspection, 1);
-                resize.ScaleY = Math.Round(0.0 + fixedaspection, 1);
-                    
-                _transforms.Children.Add(resize);
+                if (is_scale_allowed)
+                {
+                    var fixedaspection = 0.0;
+                    fixedaspection = resize.ScaleX > resize.ScaleY ? resize.ScaleX : resize.ScaleY;
+
+                    resize.ScaleX = Math.Round(0.0 + fixedaspection, 1);
+                    resize.ScaleY = Math.Round(0.0 + fixedaspection, 1);
+                    resize.CenterX = DISPLAY_WIDTH_HALF;
+                    resize.CenterY = DISPLAY_HEIGHT_HALF;
+                    _transforms.Children.Add(resize);
+                }
             }
             else if (arg is TranslateTransform)
             {
