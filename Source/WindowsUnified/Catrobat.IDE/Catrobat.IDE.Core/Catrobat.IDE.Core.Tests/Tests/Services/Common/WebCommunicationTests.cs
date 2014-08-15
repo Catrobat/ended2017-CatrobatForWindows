@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
@@ -32,31 +33,34 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
         [TestMethod, TestCategory("Services"), TestCategory("ExcludeGated")]
         public async Task LoadOnlineProjectsAsyncTest()
         {
-            var webCommunicationService = new WebCommunicationService();
-            string filterText = "";
-            int offset = 0;
-            int count = 5;
-            CancellationTokenSource taskCancellation = new CancellationTokenSource();
-            List<OnlineProgramHeader> projects = await webCommunicationService.LoadOnlineProjectsAsync(filterText, offset, count, taskCancellation.Token);
-            Assert.AreEqual(count, projects.Count);
+            throw new NotImplementedException("Fix code below");
+            //var webCommunicationService = new WebCommunicationService();
+            //string filterText = "";
+            //int offset = 0;
+            //int count = 5;
+            //CancellationTokenSource taskCancellation = new CancellationTokenSource();
+            //List<OnlineProgramHeader> projects = await webCommunicationService.LoadOnlineProjectsAsync(filterText, offset, count, taskCancellation.Token);
+            //Assert.AreEqual(count, projects.Count);
         }
 
         [TestMethod, TestCategory("Services"), TestCategory("ExcludeGated")]
         public async Task AsyncCheckTokenAsyncTest()
         {
-            var webCommunicationService = new WebCommunicationService();
+            throw new NotImplementedException("Fix code below");
+            //var webCommunicationService = new WebCommunicationService();
 
-            JSONStatusResponse statusResponse = await webCommunicationService.CheckTokenAsync(_currentUserName, _currentToken, "de");
-            Assert.AreEqual(StatusCodes.ServerResponseOk, statusResponse.statusCode);
+            //JSONStatusResponse statusResponse = await webCommunicationService.CheckTokenAsync(_currentUserName, _currentToken, "de");
+            //Assert.AreEqual(StatusCodes.ServerResponseOk, statusResponse.statusCode);
         }
 
         [TestMethod, TestCategory("Services"), TestCategory("ExcludeGated")]
         public async Task LoginAsyncTest()
         {
-            var webCommunicationService = new WebCommunicationService();
+            throw new NotImplementedException("Fix code below");
+            //var webCommunicationService = new WebCommunicationService();
 
-            JSONStatusResponse statusResponse = await webCommunicationService.LoginOrRegisterAsync(_currentUserName, _currentUserPassword, _currentUserEmail, "de", "AT");
-            Assert.AreEqual(StatusCodes.ServerResponseOk, statusResponse.statusCode);
+            //JSONStatusResponse statusResponse = await webCommunicationService.LoginOrRegisterAsync(_currentUserName, _currentUserPassword, _currentUserEmail, "de", "AT");
+            //Assert.AreEqual(StatusCodes.ServerResponseOk, statusResponse.statusCode);
         }
     }
 }
