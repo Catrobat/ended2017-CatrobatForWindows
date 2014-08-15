@@ -41,12 +41,14 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
 
+            LayoutRoot.Height = Window.Current.Bounds.Height;
+            LayoutRoot.Width = Window.Current.Bounds.Width;
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
             PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
 
-            PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height - 72;
+            PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height - 144;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
             PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid = PaintingAreaContentPanelGrid;
             PocketPaintApplication.GetInstance().PaintingAreaView = this;
@@ -234,6 +236,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 AppBarButton app_btnHorizontal = new AppBarButton();
                 AppBarButton app_btnVertical = new AppBarButton();
+                AppBarButton app_btnReset = new AppBarButton();
 
                 BitmapIcon horizontal_icon = new BitmapIcon();
                 horizontal_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_flip_horizontal.png", UriKind.Absolute);
@@ -243,14 +246,21 @@ namespace Catrobat.Paint.WindowsPhone.View
                 vertical_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_flip_vertical.png", UriKind.Absolute);
                 app_btnVertical.Icon = vertical_icon;
 
+                BitmapIcon reset_icon = new BitmapIcon();
+                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
+                app_btnReset.Icon = reset_icon;
+
                 app_btnHorizontal.Label = "horizontal";
                 app_btnVertical.Label = "vertikal";
+                app_btnReset.Label = "Ausgangsposition";
 
                 app_btnHorizontal.Click += BtnHorizotal_OnClick;
                 app_btnVertical.Click += BtnVertical_OnClick;
+                app_btnReset.Click += app_btn_reset_Click;
 
                 cmdBar.PrimaryCommands.Add(app_btnHorizontal);
                 cmdBar.PrimaryCommands.Add(app_btnVertical);
+                cmdBar.PrimaryCommands.Add(app_btnReset);
             }
             else
             {
@@ -606,7 +616,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void LayoutRoot_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            var point = new Point(Convert.ToInt32(e.GetCurrentPoint(LayoutRoot).Position.X), Convert.ToInt32(e.GetCurrentPoint(LayoutRoot).Position.Y));
+            var point = new Point(Convert.ToInt32(e.GetCurrentPoint(PaintingAreaContentPanelGrid).Position.X), Convert.ToInt32(e.GetCurrentPoint(PaintingAreaContentPanelGrid).Position.Y));
 
             // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
             if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
