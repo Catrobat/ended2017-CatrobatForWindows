@@ -74,7 +74,12 @@ namespace Catrobat.Paint.Phone
 
         public static PocketPaintApplication GetInstance()
         {
-            return _instance ?? (_instance = new PocketPaintApplication());
+            if(_instance == null)
+            {
+                _instance = new PocketPaintApplication();
+            }
+
+            return _instance;
         }
 
         /// <summary>

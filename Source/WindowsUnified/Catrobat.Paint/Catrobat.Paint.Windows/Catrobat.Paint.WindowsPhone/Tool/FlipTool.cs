@@ -85,7 +85,11 @@ namespace Catrobat.Paint.Phone.Tool
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.UpdateLayout();
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateArrange();
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
+        }
 
+        public override void ResetDrawingSpace()
+        {
+            throw new NotImplementedException();
         }
     }
 }

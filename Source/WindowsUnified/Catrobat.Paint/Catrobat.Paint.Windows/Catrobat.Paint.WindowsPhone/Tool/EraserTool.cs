@@ -163,7 +163,11 @@ namespace Catrobat.Paint.Phone.Tool
             
         }
 
-
+        public override void ResetDrawingSpace()
+        {
+            throw new NotImplementedException();
+        }
+        
         // performance critical... doing some optimizations
         private void DeletePixels(Point a, Point b, bool allPixels = false)
         {

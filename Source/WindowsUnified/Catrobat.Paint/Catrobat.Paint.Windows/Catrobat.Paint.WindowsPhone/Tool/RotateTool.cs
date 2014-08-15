@@ -50,6 +50,23 @@ namespace Catrobat.Paint.Phone.Tool
             
         }
 
+        public override void ResetDrawingSpace()
+        {
+            var rotateTransform = new RotateTransform();
+            _angle = 0;
+
+            rotateTransform.Angle = _angle;
+
+            rotateTransform.Angle = _angle;
+            rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Width) / 2;
+            rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Height) / 2);
+
+            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = rotateTransform;
+            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
+            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
+            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
+        }
+
         public void RotateLeft()
         {
             var rotateTransform = new RotateTransform();

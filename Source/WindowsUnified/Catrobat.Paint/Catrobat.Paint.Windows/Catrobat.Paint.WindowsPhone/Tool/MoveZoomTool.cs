@@ -2,13 +2,14 @@
 using Catrobat.Paint.Phone.Tool;
 using System;
 using System.Windows;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Media;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class MoveZoomTool : ToolBase
     {
-        private readonly TransformGroup _transforms;
+        private TransformGroup _transforms;
 
 
         public MoveZoomTool()
@@ -38,74 +39,19 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             if (arg is ScaleTransform)
             {
-
                 var resize = (ScaleTransform)arg;
                 resize.ScaleX = Math.Round(resize.ScaleX, 1);
                 resize.ScaleY = Math.Round(resize.ScaleY, 1);
-                bool scale_allowed = false;
-                // MessageBox.Show(resize.ScaleX.ToString() + ", " + resize.ScaleY.ToString());
-                //Point point = PocketPaintApplication.GetInstance().PaintData.min_max_resize;
 
                 var fixedaspection = 0.0;
-                double min_max_resize = PocketPaintApplication.GetInstance().PaintData.min_max_resize;
-                double boundary = 5.0;
-                double boundary_zoom_out = -2.5;
-
                 PocketPaintApplication.GetInstance().PaintData.min_max_resize = Math.Round(PocketPaintApplication.GetInstance().PaintData.min_max_resize, 1);
-                //MessageBox.Show(PocketPaintApplication.GetInstance().PaintData.min_max_resize.ToString());
                 fixedaspection = resize.ScaleX > resize.ScaleY ? resize.ScaleX : resize.ScaleY;
 
-                if (fixedaspection > 1.00)
-                {
-
-                    if (min_max_resize < boundary)
-                    {
-                        if (min_max_resize + fixedaspection > boundary)
-                        {
-                            fixedaspection = (boundary - min_max_resize) > 1.0 ?
-                                (boundary - min_max_resize) : 1.0 + (boundary - min_max_resize);
-                            PocketPaintApplication.GetInstance().PaintData.min_max_resize = boundary;
-                        }
-                        else
-                        {
-                            PocketPaintApplication.GetInstance().PaintData.min_max_resize += fixedaspection - 1.0;
-                        }
-                        scale_allowed = true;
-                    }
-                }
-                else
-                {
-                    if (min_max_resize > boundary_zoom_out)
-                    {
-                        double value = (((1 - fixedaspection)) * -1);
-                        if (min_max_resize + value < boundary_zoom_out)
-                        {
-                            double result = ((boundary_zoom_out * -1) - (min_max_resize * -1));
-                            /*fixedaspection =  result < 1.0 ?
-                                (1 - result) : (1.0 + (-boundary_zoom_out - min_max_resize) * -1);*/
-                            fixedaspection = (1 - result);
-                            PocketPaintApplication.GetInstance().PaintData.min_max_resize = boundary_zoom_out;
-                        }
-                        else
-                        {
-                            double merke = (1.0 - fixedaspection);
-                            //double merke_2 = (1.0 + merke);
-                            double merke_3 = merke * -1;
-                            PocketPaintApplication.GetInstance().PaintData.min_max_resize += merke_3;
-                        }
-                        scale_allowed = true;
-                    }
-                }
-
-                if (scale_allowed)
-                {
-                    fixedaspection = Math.Round(fixedaspection, 1);
-                    resize.ScaleX = Math.Round(0.0 + fixedaspection, 1);
-                    resize.ScaleY = Math.Round(0.0 + fixedaspection, 1);
+                fixedaspection = Math.Round(fixedaspection, 1);
+                resize.ScaleX = Math.Round(0.0 + fixedaspection, 1);
+                resize.ScaleY = Math.Round(0.0 + fixedaspection, 1);
                     
-                    _transforms.Children.Add(resize);
-                }
-
+                _transforms.Children.Add(resize);
             }
             else if (arg is TranslateTransform)
             {
@@ -137,6 +83,11 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public override void Draw(object o)
         {
             throw new NotImplementedException();
+        }
+
+        public override void ResetDrawingSpace()
+        {
+            _transforms.Children.Clear();
         }
     }
 }

@@ -5,6 +5,7 @@ using Windows.UI.Xaml.Media;
 using Windows.Graphics;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
+using System;
 
 namespace Catrobat.Paint.Phone.Tool
 {
@@ -49,6 +50,11 @@ namespace Catrobat.Paint.Phone.Tool
         public override void Draw(object o)
         {
 
+        }
+
+        public override void ResetDrawingSpace()
+        {
+            throw new NotImplementedException();
         }
     }
 }

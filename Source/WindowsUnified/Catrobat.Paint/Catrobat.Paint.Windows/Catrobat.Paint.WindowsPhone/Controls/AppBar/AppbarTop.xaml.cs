@@ -157,10 +157,5 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             get { return btnUndo.IsEnabled; }
             set { btnUndo.IsEnabled = value; }
         }
-
-        private void ellipseTool_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-
-        } 
     }
 }
