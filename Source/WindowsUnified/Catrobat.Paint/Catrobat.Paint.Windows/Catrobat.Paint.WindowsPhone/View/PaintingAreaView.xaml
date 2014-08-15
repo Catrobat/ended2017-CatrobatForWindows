@@ -22,7 +22,7 @@
                 </Grid.Background>
 
                 <Canvas x:Name="PaintingAreaCanvasUnderlaying"  Background="Transparent"/>
-                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" >
+                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" ManipulationMode="TranslateX, TranslateY, Rotate, Scale" >
                 </Canvas>
             </Grid>
 

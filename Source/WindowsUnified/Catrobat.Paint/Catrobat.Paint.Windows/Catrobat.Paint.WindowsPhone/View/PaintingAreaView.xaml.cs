@@ -66,10 +66,11 @@ namespace Catrobat.Paint.WindowsPhone.View
             SliderThickness.ValueChanged += SliderThickness_ValueChanged;
             SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
             PocketPaintApplication.GetInstance().AppbarTop.ToolChangedHere(PocketPaintApplication.GetInstance().ToolCurrent);
-            LayoutRoot.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
-            LayoutRoot.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
-            LayoutRoot.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
-            LayoutRoot.ManipulationStarting += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarting;
+            PaintingAreaCanvas.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
+            PaintingAreaCanvas.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
+            PaintingAreaCanvas.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
+            PaintingAreaCanvas.ManipulationStarting += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarting;
+
             if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Brush || 
                 PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Eraser)
             {
@@ -616,7 +617,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void LayoutRoot_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            var point = new Point(Convert.ToInt32(e.GetCurrentPoint(PaintingAreaContentPanelGrid).Position.X), Convert.ToInt32(e.GetCurrentPoint(PaintingAreaContentPanelGrid).Position.Y));
+            var point = new Point(Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.Y));
 
             // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
             if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
