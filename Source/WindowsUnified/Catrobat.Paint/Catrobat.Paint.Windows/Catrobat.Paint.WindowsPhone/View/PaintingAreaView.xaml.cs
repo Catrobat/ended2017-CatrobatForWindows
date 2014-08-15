@@ -246,8 +246,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnHorizontal.Label = "horizontal";
                 app_btnVertical.Label = "vertikal";
 
-                app_btnHorizontal.Click += BtnLeft_OnClick;
-                app_btnVertical.Click += BtnRight_OnClick;
+                app_btnHorizontal.Click += BtnHorizotal_OnClick;
+                app_btnVertical.Click += BtnVertical_OnClick;
 
                 cmdBar.PrimaryCommands.Add(app_btnHorizontal);
                 cmdBar.PrimaryCommands.Add(app_btnVertical);
@@ -618,6 +618,28 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(point);
 
            // e.Handled = true;
+        }
+
+        private void BtnHorizotal_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Flip)
+            {
+                var flipTool = (FlipTool)PocketPaintApplication.GetInstance().ToolCurrent;
+                flipTool.FlipHorizontal();
+            }
+            else
+                return;
+        }
+
+        private void BtnVertical_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Flip)
+            {
+                var flipTool = (FlipTool)PocketPaintApplication.GetInstance().ToolCurrent;
+                flipTool.FlipVertical();
+            }
+            else
+                return;
         }
     }
 }
