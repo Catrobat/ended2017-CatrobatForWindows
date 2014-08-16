@@ -19,9 +19,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CatrobatTexture.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DContentProvider.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)DirectXHelper.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -215,7 +212,6 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)EventController.h">
       <Filter>Input</Filter>
     </ClInclude>
@@ -228,20 +224,20 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ExceptionLogger.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Test01.xaml.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Renderer.h">
-      <Filter>Core\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ProjectRenderer.h">
       <Filter>Core\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerWindowsPhone8Component.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\PlayerDirectXPage.xaml.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerMainComponent.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DDeviceResources.h">
       <Filter>Core\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceResources.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)InitRenderer.h">
       <Filter>Core\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DBase.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DBaseRenderer.h">
       <Filter>Core\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
@@ -256,9 +252,6 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CatrobatTexture.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DContentProvider.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectDaemon.cpp">
@@ -451,7 +444,6 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)EventController.cpp">
       <Filter>Input</Filter>
     </ClCompile>
@@ -464,20 +456,20 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ExceptionLogger.cpp">
       <Filter>Exceptions</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Test01.xaml.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Renderer.cpp">
-      <Filter>Core\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectRenderer.cpp">
       <Filter>Core\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerWindowsPhone8Component.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\PlayerDirectXPage.xaml.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerMainComponent.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DDeviceResources.cpp">
       <Filter>Core\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)DeviceResources.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)InitRenderer.cpp">
       <Filter>Core\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DBase.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DBaseRenderer.cpp">
       <Filter>Core\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
@@ -538,9 +530,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml" />
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml" />
+    <Page Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\PlayerDirectXPage.xaml" />
   </ItemGroup>
 </Project>

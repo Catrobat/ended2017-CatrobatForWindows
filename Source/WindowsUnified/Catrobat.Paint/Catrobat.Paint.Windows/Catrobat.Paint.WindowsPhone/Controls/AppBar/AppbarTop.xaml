@@ -28,15 +28,11 @@
             </Rectangle.Fill>
         </Rectangle>
 
-
-
-        <ToggleButton Background="Black"  x:Name="btnSelectedColor" MinWidth="1" Width="53" Margin="222,6,0,4" Height="62" >
+        <Button Background="Black"  x:Name="btnSelectedColor" MinWidth="1" Width="53" Margin="222,6,0,4" Height="62" >
             <ContentControl Width="48" Margin="-10,0,0,0">
 
             </ContentControl>
-        </ToggleButton>
-
-
+        </Button>
 
         <AppBarButton x:Name="btnUndo" Height="72" Margin="15,3,0,-3">
             <AppBarButton.Icon>
@@ -59,8 +55,6 @@
             </Ellipse.Fill>
         </Ellipse>
 
-
-
         <!--<Ellipse x:Name="ellipseTransparence"  HorizontalAlignment="Left" Height="39" Margin="231,15,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" >
             <Ellipse.Fill>
                 <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
@@ -73,9 +67,7 @@
 
         </coding4FunControls:RoundButton>
         -->
-
     </Grid>
-
 </UserControl>
     
     

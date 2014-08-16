@@ -23,6 +23,8 @@ namespace Catrobat.Paint.Phone.Tool
 
         public abstract void Draw(object o);
 
+        public abstract void ResetDrawingSpace();
+
         public ToolType GetToolType()
         {
             return ToolType;
@@ -30,9 +32,9 @@ namespace Catrobat.Paint.Phone.Tool
 
         protected void ResetCanvas()
         {
-            // needs to be on PaintingAreaView to reset properly
-            // TODO: var currentPage = ((PhoneApplicationFrame)Application.Current.RootVisual).Content;
-            var currentPage = new PaintingAreaView();
+          /*TODO:  // needs to be on PaintingAreaView to reset properly
+            var currentPage = PocketPaintApplication.GetInstance().PaintingAreaView;
+            // var currentPage = new PaintingAreaView();
             if (!(currentPage is PaintingAreaView))
             {
                 NeedToResetCanvas = true;
@@ -43,6 +45,7 @@ namespace Catrobat.Paint.Phone.Tool
             PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
             PocketPaintApplication.GetInstance().SetBitmapAsPaintingAreaCanvasBackground();
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
+         */
         }
 
     }

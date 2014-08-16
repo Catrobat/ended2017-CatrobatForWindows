@@ -128,7 +128,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             
             //this.Frame.Navigate(typeof(PaintingAreaView));
             this.Frame.GoBack();
-            
         }
 
         private void sldSlidersChanged_ValueChanged(object sender, RoutedEventArgs e)

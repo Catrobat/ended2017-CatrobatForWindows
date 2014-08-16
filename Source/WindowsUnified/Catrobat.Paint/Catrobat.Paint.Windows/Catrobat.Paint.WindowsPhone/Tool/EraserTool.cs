@@ -21,8 +21,6 @@ namespace Catrobat.Paint.Phone.Tool
         private Point _lastPoint;
         private Point _startPoint;
         private bool _lastPointSet;
-
-
         private WriteableBitmap _bitmapTemp;
         private readonly Color _colorEmpty = new Color { A = 0x00, B = 0x00, G = 0x00, R = 0x00 };
 
@@ -163,18 +161,26 @@ namespace Catrobat.Paint.Phone.Tool
             
         }
 
-
+        public override void ResetDrawingSpace()
+        {
+            throw new NotImplementedException();
+        }
+        
         // performance critical... doing some optimizations
         private void DeletePixels(Point a, Point b, bool allPixels = false)
         {
             _path.Stroke = new SolidColorBrush(Colors.Black);
             var n = new TranslateTransform();
-            // TODO:_bitmapTemp = new WriteableBitmap(PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying, new TranslateTransform());
+            Point grid_size = new Point();
+            grid_size.X = PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Width;
+            grid_size.Y = PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Height;
+
+            _bitmapTemp = new WriteableBitmap(Convert.ToInt32(grid_size.X), Convert.ToInt32(grid_size.Y));
             
             _path.Stroke = new SolidColorBrush(Colors.Transparent);
             var c = _colorEmpty;
 
-
+        
             // we do not need to walk over the whole bitmap 
             // we build a "clip rectangle" and we just walk over that pixels
             // 
@@ -238,9 +244,10 @@ namespace Catrobat.Paint.Phone.Tool
                 }
 
             }
+            
             // I read that GetBitmapContext gets ride of some overhead and has performance improvements 
             // (but I experienced them as rather low :) )
-            /* TODO: using (_bitmapTemp.GetBitmapContext())
+           /*  using (_bitmapTemp.GetBitmapContext())
             {
                 using (PocketPaintApplication.GetInstance().Bitmap.GetBitmapContext())
                 {
@@ -257,7 +264,7 @@ namespace Catrobat.Paint.Phone.Tool
                 }
             }*/
 
-            // TODO: PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
+            PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
         }
 
     }

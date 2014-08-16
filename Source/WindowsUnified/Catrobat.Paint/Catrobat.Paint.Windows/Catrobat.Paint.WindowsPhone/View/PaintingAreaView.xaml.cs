@@ -1,4 +1,5 @@
-﻿using Catrobat.Paint.Phone;
+﻿using Catrobat.IDE.WindowsShared.Common;
+using Catrobat.Paint.Phone;
 using Catrobat.Paint.Phone.Command;
 using Catrobat.Paint.Phone.Tool;
 using Catrobat.Paint.Phone.Ui;
@@ -37,8 +38,55 @@ namespace Catrobat.Paint.WindowsPhone.View
         public PaintingAreaView()
         {
             this.InitializeComponent();
-           
-            
+
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
+
+            LayoutRoot.Height = Window.Current.Bounds.Height;
+            LayoutRoot.Width = Window.Current.Bounds.Width;
+            PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
+            PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
+            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
+            PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
+
+            PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height - 144;
+            PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
+            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid = PaintingAreaContentPanelGrid;
+            PocketPaintApplication.GetInstance().PaintingAreaView = this;
+
+            Spinner.SpinnerGrid = SpinnerGrid;
+            Spinner.SpinnerStoryboard = new Storyboard();
+
+            PocketPaintApplication.GetInstance().MainGrid = LayoutRoot;
+            UndoRedoActionbarManager.GetInstance().ApplicationBarTop = PocketPaintApplication.GetInstance().AppbarTop;
+
+            btnRoundImage.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.RoundButton_OnClick;
+            btnTriangleImage.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.TriangleButton_OnClick;
+            btnSquareImage.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.SquareButton_OnClick;
+            PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
+            SliderThickness.ValueChanged += SliderThickness_ValueChanged;
+            SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
+            PocketPaintApplication.GetInstance().AppbarTop.ToolChangedHere(PocketPaintApplication.GetInstance().ToolCurrent);
+            PaintingAreaCanvas.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
+            PaintingAreaCanvas.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
+            PaintingAreaCanvas.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
+            PaintingAreaCanvas.ManipulationStarting += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarting;
+
+            if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Brush || 
+                PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Eraser)
+            {
+                LayoutRoot.PointerEntered += LayoutRoot_PointerEntered;
+            }
+            else
+            {
+                LayoutRoot.PointerEntered += null;
+            }
+            btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
+            btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
+            btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
+            btnThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnThickness_OnClick;
+
+            checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
+            createAppBarAndSwitchAppBarContent(current_appbar);        
         }
 
         /// <summary>
@@ -48,50 +96,13 @@ namespace Catrobat.Paint.WindowsPhone.View
         /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
-            PaintingAreaCanvas = PocketPaintApplication.GetInstance().PaintingAreaCanvas;
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
+            
+        }
 
-            PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
-            PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
-            PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
-
-            PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height - 72;
-            PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid = PaintingAreaContentPanelGrid;
-            PocketPaintApplication.GetInstance().PaintingAreaView = this;
-
-            Spinner.SpinnerGrid = SpinnerGrid;
-            Spinner.SpinnerStoryboard = new Storyboard();
-
-            btnRoundImage.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.RoundButton_OnClick;
-            btnTriangleImage.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.TriangleButton_OnClick;
-            btnSquareImage.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.SquareButton_OnClick;
-
-            // TODO:PaintingAreaCheckeredGrid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
-            /*PaintingAreaCheckeredGrid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
-            PaintingAreaCheckeredGrid.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
-            */
-            PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
-            SliderThickness.ValueChanged += SliderThickness_ValueChanged;
-            SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
-            PocketPaintApplication.GetInstance().AppbarTop.ToolChangedHere(PocketPaintApplication.GetInstance().ToolCurrent);
-            LayoutRoot.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
-            LayoutRoot.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
-            LayoutRoot.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
-            LayoutRoot.ManipulationStarting += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarting;
-            PocketPaintApplication.GetInstance().MainGrid = LayoutRoot;
-            UndoRedoActionbarManager.GetInstance().ApplicationBarTop = PocketPaintApplication.GetInstance().AppbarTop;
-
-
-            checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
-            createAppBarAndSwitchAppBarContent(current_appbar);
-
-            btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
-            btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
-            btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
-            btnThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnThickness_OnClick;
+        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+            e.PageState["PaintingAreaCanvasUnderlaying"] = PaintingAreaCanvasUnderlaying.Children;
+            e.PageState["PaintingAreaCanvas"] = PaintingAreaCanvas.Children;
         }
 
         public void checkPenLineCap(PenLineCap pen_line_cap)
@@ -166,6 +177,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 AppBarButton app_btnZoomIn = new AppBarButton();
                 AppBarButton app_btnZoomOut = new AppBarButton();
+                AppBarButton app_btnReset = new AppBarButton();
 
                 BitmapIcon zoom_in_icon = new BitmapIcon();
                 zoom_in_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_zoom_in.png", UriKind.Absolute);
@@ -175,19 +187,27 @@ namespace Catrobat.Paint.WindowsPhone.View
                 zoom_out_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_zoom_out.png", UriKind.Absolute);
                 app_btnZoomOut.Icon = zoom_out_icon;
 
+                BitmapIcon reset_icon = new BitmapIcon();
+                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
+                app_btnReset.Icon = reset_icon;
+
                 app_btnZoomIn.Label = "Vergrößern";
                 app_btnZoomOut.Label = "Verkleinern";
+                app_btnReset.Label = "Ausgangsposition";
 
                 app_btnZoomIn.Click += BtnZoomIn_Click;
                 app_btnZoomOut.Click += BtnZoomOut_Click;
+                app_btnReset.Click += app_btn_reset_Click;
 
                 cmdBar.PrimaryCommands.Add(app_btnZoomIn);
                 cmdBar.PrimaryCommands.Add(app_btnZoomOut);
+                cmdBar.PrimaryCommands.Add(app_btnReset);
             }
             else if("barRotate" == type)
             {
                 AppBarButton app_btnRotate_left = new AppBarButton();
                 AppBarButton app_btnRotate_right = new AppBarButton();
+                AppBarButton app_btnReset = new AppBarButton();
 
                 BitmapIcon rotate_left_icon = new BitmapIcon();
                 rotate_left_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_rotate_left.png", UriKind.Absolute);
@@ -197,19 +217,27 @@ namespace Catrobat.Paint.WindowsPhone.View
                 rotate_right_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_rotate_right.png", UriKind.Absolute);
                 app_btnRotate_right.Icon = rotate_right_icon;
 
+                BitmapIcon reset_icon = new BitmapIcon();
+                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
+                app_btnReset.Icon = reset_icon;
+
                 app_btnRotate_left.Label = "rechts drehen";
                 app_btnRotate_right.Label = "links drehen";
+                app_btnReset.Label = "Ausgangsposition";
 
                 app_btnRotate_left.Click += BtnLeft_OnClick;
                 app_btnRotate_right.Click += BtnRight_OnClick;
+                app_btnReset.Click += app_btn_reset_Click;
 
                 cmdBar.PrimaryCommands.Add(app_btnRotate_left);
                 cmdBar.PrimaryCommands.Add(app_btnRotate_right);
+                cmdBar.PrimaryCommands.Add(app_btnReset);
             }
             else if("barFlip" == type)
             {
                 AppBarButton app_btnHorizontal = new AppBarButton();
                 AppBarButton app_btnVertical = new AppBarButton();
+                AppBarButton app_btnReset = new AppBarButton();
 
                 BitmapIcon horizontal_icon = new BitmapIcon();
                 horizontal_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_flip_horizontal.png", UriKind.Absolute);
@@ -219,14 +247,21 @@ namespace Catrobat.Paint.WindowsPhone.View
                 vertical_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_flip_vertical.png", UriKind.Absolute);
                 app_btnVertical.Icon = vertical_icon;
 
+                BitmapIcon reset_icon = new BitmapIcon();
+                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
+                app_btnReset.Icon = reset_icon;
+
                 app_btnHorizontal.Label = "horizontal";
                 app_btnVertical.Label = "vertikal";
+                app_btnReset.Label = "Ausgangsposition";
 
-                app_btnHorizontal.Click += BtnLeft_OnClick;
-                app_btnVertical.Click += BtnRight_OnClick;
+                app_btnHorizontal.Click += BtnHorizotal_OnClick;
+                app_btnVertical.Click += BtnVertical_OnClick;
+                app_btnReset.Click += app_btn_reset_Click;
 
                 cmdBar.PrimaryCommands.Add(app_btnHorizontal);
                 cmdBar.PrimaryCommands.Add(app_btnVertical);
+                cmdBar.PrimaryCommands.Add(app_btnReset);
             }
             else
             {
@@ -263,6 +298,11 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             BottomAppBar = cmdBar;
             current_appbar = type;
+        }
+
+        void app_btn_reset_Click(object sender, RoutedEventArgs e)
+        {
+            PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ResetDrawingSpace();
         }
 
         private void BtnLeft_OnClick(object sender, RoutedEventArgs e)
@@ -577,7 +617,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void LayoutRoot_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            var point = new Point(Convert.ToInt32(e.GetCurrentPoint(PaintingAreaContentPanelGrid).Position.X), Convert.ToInt32(e.GetCurrentPoint(PaintingAreaContentPanelGrid).Position.Y));
+            var point = new Point(Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.Y));
 
             // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
             if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
@@ -588,7 +628,29 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().ToolCurrent.HandleDown(point);
             PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(point);
 
-            e.Handled = true;
+           // e.Handled = true;
+        }
+
+        private void BtnHorizotal_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Flip)
+            {
+                var flipTool = (FlipTool)PocketPaintApplication.GetInstance().ToolCurrent;
+                flipTool.FlipHorizontal();
+            }
+            else
+                return;
+        }
+
+        private void BtnVertical_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Flip)
+            {
+                var flipTool = (FlipTool)PocketPaintApplication.GetInstance().ToolCurrent;
+                flipTool.FlipVertical();
+            }
+            else
+                return;
         }
     }
 }
