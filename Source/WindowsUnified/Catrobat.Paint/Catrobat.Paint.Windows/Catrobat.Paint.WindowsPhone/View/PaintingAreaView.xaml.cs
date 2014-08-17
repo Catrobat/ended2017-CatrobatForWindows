@@ -233,6 +233,29 @@ namespace Catrobat.Paint.WindowsPhone.View
                 cmdBar.PrimaryCommands.Add(app_btnRotate_right);
                 cmdBar.PrimaryCommands.Add(app_btnReset);
             }
+            else if ("barRectangle" == type)
+            {
+                AppBarButton app_btnBrushThickness = new AppBarButton();
+                AppBarButton app_btnColor = new AppBarButton();
+
+                BitmapIcon thickness_icon = new BitmapIcon();
+                thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
+                app_btnBrushThickness.Icon = thickness_icon;
+
+                BitmapIcon color_icon = new BitmapIcon();
+                color_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_color_palette.png", UriKind.Absolute);
+                app_btnColor.Icon = color_icon;
+
+                app_btnBrushThickness.Label = "Pinselstärke";
+                app_btnColor.Label = "Farbe";
+
+                app_btnBrushThickness.Click += btnThicknessBorder_Click;
+                app_btnColor.Click += btnColor_Click;
+
+                cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
+                cmdBar.PrimaryCommands.Add(app_btnColor);
+
+            }
             else if("barFlip" == type)
             {
                 AppBarButton app_btnHorizontal = new AppBarButton();
@@ -358,32 +381,31 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 case ToolType.Brush:
                 case ToolType.Cursor:
+                case ToolType.Ellipse:
                 case ToolType.Line:
                     createAppBarAndSwitchAppBarContent("barStandard");
                     break;
-
-                case ToolType.Pipette:
-                    createAppBarAndSwitchAppBarContent("barPipette");
+                case ToolType.Crop:
+                    // TODO: ApplicationBar = (IApplicationBar)this.Resources["barCrop"];
                     break;
-
                 case ToolType.Eraser:
                     createAppBarAndSwitchAppBarContent("barEraser");
                     break;
-
+                case ToolType.Flip:
+                    createAppBarAndSwitchAppBarContent("barFlip");
+                    break;
+                case ToolType.Pipette:
+                    createAppBarAndSwitchAppBarContent("barPipette");
+                    break;
                 case ToolType.Move:
                 case ToolType.Zoom:
                     createAppBarAndSwitchAppBarContent("barMove");
                     break;
-
-                case ToolType.Crop:
-                    // TODO: ApplicationBar = (IApplicationBar)this.Resources["barCrop"];
+                case ToolType.Rect:
+                    createAppBarAndSwitchAppBarContent("barRectangle");
                     break;
-
                 case ToolType.Rotate:
                     createAppBarAndSwitchAppBarContent("barRotate");
-                    break;
-                case ToolType.Flip:
-                    createAppBarAndSwitchAppBarContent("barFlip");
                     break;
             }
         }
@@ -569,6 +591,18 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             SliderThicknessControl.Margin = margin;
         }
+        public void setVisibilityOFRectEllUserControl(Visibility visibility)
+        {
+            GridUserControlRectEll.Visibility = visibility;
+        }
+        public void setRectEllUserControlMargin(Thickness margin)
+        {
+            GridUserControlRectEll.Margin = margin;
+        }
+        public Visibility getVisibilityOFRectEllUserControl()
+        {
+            return GridUserControlRectEll.Visibility;
+        }
 
         private void btnBrushThickness_Click(object sender, RoutedEventArgs e)
         {
@@ -607,6 +641,19 @@ namespace Catrobat.Paint.WindowsPhone.View
             else
             {
                 setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
+            }
+        }
+
+        private void btnThicknessBorder_Click(object sender, RoutedEventArgs e)
+        {
+            if (getVisibilityOFRectEllUserControl() == Visibility.Collapsed)
+            {
+                setVisibilityOFRectEllUserControl(Visibility.Visible);
+                setRectEllUserControlMargin(new Thickness(0.0, 0.0, 0.0, 0.0));
+            }
+            else
+            {
+                setVisibilityOFRectEllUserControl(Visibility.Collapsed);
             }
         }
 

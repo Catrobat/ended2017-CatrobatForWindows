@@ -111,27 +111,36 @@
     <Compile Include="Controls\AppBar\AppbarTop.xaml.cs">
       <DependentUpon>AppbarTop.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserControls\ucRecEll.xaml.cs">
+      <DependentUpon>ucRecEll.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Data\PaintData.cs" />
     <Compile Include="Data\StorageIO.cs" />
     <Compile Include="IdeInteraction.cs" />
     <Compile Include="Listener\ApplicationBarListener.cs" />
+    <Compile Include="Listener\clsRecEllUserControlListener.cs" />
     <Compile Include="Listener\PaintingAreaManipulationListener.cs" />
     <Compile Include="Navigation\NavigationObject.cs" />
     <Compile Include="Navigation\NavigationObjectPage.cs" />
     <Compile Include="PocketPaintApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tool\BrushTool.cs" />
+    <Compile Include="Tool\EllipseTool.cs" />
     <Compile Include="Tool\EraserTool.cs" />
     <Compile Include="Tool\FlipTool.cs" />
     <Compile Include="Tool\LineTool.cs" />
     <Compile Include="Tool\MoveZoomTool.cs" />
     <Compile Include="Tool\PipetteTool.cs" />
+    <Compile Include="Tool\RectangleTool.cs" />
     <Compile Include="Tool\RotateTool.cs" />
     <Compile Include="Tool\ToolBase.cs" />
     <Compile Include="Tool\ToolType.cs" />
     <Compile Include="Ui\Spinner.cs" />
     <Compile Include="View\PaintingAreaView.xaml.cs">
       <DependentUpon>PaintingAreaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewBorderColorPicker.xaml.cs">
+      <DependentUpon>ViewBorderColorPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ViewColorPicker.xaml.cs">
       <DependentUpon>ViewColorPicker.xaml</DependentUpon>
@@ -265,9 +274,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\UserControls\ucRecEll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PaintingAreaView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ViewBorderColorPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ViewColorPicker.xaml">
       <SubType>Designer</SubType>

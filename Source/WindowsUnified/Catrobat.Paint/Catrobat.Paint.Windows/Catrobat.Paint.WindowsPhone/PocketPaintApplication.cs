@@ -135,8 +135,17 @@ namespace Catrobat.Paint.Phone
                 case ToolType.Brush:
                     ToolCurrent = new BrushTool(toolType);
                     break;
+                case ToolType.Ellipse:
+                    ToolCurrent = new EllipseTool();
+                    break;
                 case ToolType.Eraser:
                     ToolCurrent = new EraserTool(toolType);
+                    break;
+                case ToolType.Flip:
+                    ToolCurrent = new FlipTool();
+                    break;
+                case ToolType.Line:
+                    ToolCurrent = new LineTool();
                     break;
                 case ToolType.Move:
                 case ToolType.Zoom:
@@ -149,11 +158,8 @@ namespace Catrobat.Paint.Phone
                 case ToolType.Rotate:
                     ToolCurrent = new RotateTool();
                     break;
-                case ToolType.Line:
-                    ToolCurrent = new LineTool();
-                    break;
-                case ToolType.Flip:
-                    ToolCurrent = new FlipTool();
+                case ToolType.Rect:
+                    ToolCurrent = new RectangleTool();
                     break;
                 default:
                     break;
