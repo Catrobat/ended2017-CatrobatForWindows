@@ -158,6 +158,18 @@ namespace Catrobat.Paint.WindowsPhone.View
             
 
             }
+            else if("barEllipse" == type)
+            {
+                AppBarButton app_btnBrushThickness = new AppBarButton();
+
+                BitmapIcon thickness_icon = new BitmapIcon();
+                thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
+                app_btnBrushThickness.Icon = thickness_icon;
+
+                app_btnBrushThickness.Click += btnThicknessBorder_Click;
+
+                cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
+            }
             else if("barEraser" == type)
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
@@ -371,12 +383,14 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 case ToolType.Brush:
                 case ToolType.Cursor:
-                case ToolType.Ellipse:
                 case ToolType.Line:
                     createAppBarAndSwitchAppBarContent("barStandard");
                     break;
                 case ToolType.Crop:
                     // TODO: ApplicationBar = (IApplicationBar)this.Resources["barCrop"];
+                    break;
+                case ToolType.Ellipse:
+                    createAppBarAndSwitchAppBarContent("barEllipse");
                     break;
                 case ToolType.Eraser:
                     createAppBarAndSwitchAppBarContent("barEraser");

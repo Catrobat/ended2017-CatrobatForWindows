@@ -45,7 +45,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             if (PocketPaintApplication.GetInstance().PaintData.ColorSelected != null)
             {
-                Color selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.ColorSelected).Color;
+                Color selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.BorderColorSelected).Color;
 
                 changeValuesOfColourSliders(selected_color.R, selected_color.G, selected_color.B, (byte)fill_color_opacity);
                 changeColorOfBtnSelectedColor(selected_color);

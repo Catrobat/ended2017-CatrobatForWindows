@@ -28,18 +28,19 @@
             </Rectangle.Fill>
         </Rectangle>
         <Rectangle x:Name="rectTransDisplayForeground" Fill="Yellow" Height="50" HorizontalAlignment="Left" Margin="272,69,0,0" Stroke="Black" StrokeThickness="5" VerticalAlignment="Top" Width="85" />
+        <Ellipse x:Name="ellTransDisplayForeground" Fill="Yellow" Height="50" HorizontalAlignment="Left" Margin="272,69,0,0" Stroke="Black" StrokeThickness="5" VerticalAlignment="Top" Visibility="Collapsed" Width="85" />
 
         <Button x:Name="btnSelectedFillColor" Background="Yellow" BorderThickness="1" Height="45" Margin="129,75,0,139" MinHeight="1" MinWidth="1" Width="57" Click="btnSelectedFillColor_Click" />
         <Slider x:Name="sldStrokeThickness" HorizontalAlignment="Left" Margin="119,1,0,0" VerticalAlignment="Top" 
                             Width="229" Height="40" Foreground="White" Maximum="20" ValueChanged="sldSlidersChanged_ValueChanged" Background="Black" LargeChange="1"/>
         <TextBox x:Name="tbHeight" Background="Transparent" BorderThickness="0" Foreground="White" IsHitTestVisible="False" Margin="2,114,297,0"  Text="Höhe:" />
-        <TextBox x:Name="tbHeightValue" Background="Transparent" BorderThickness="2"  FontSize="14" Foreground="White" Height="26" IsHitTestVisible="True" Margin="128,118,214,0" MinHeight="1" MinWidth="1" Text="50" TextAlignment="Center" />
+        <TextBox x:Name="tbHeightValue" Background="Transparent" BorderThickness="2"  FontSize="14" Foreground="White" Height="26" InputScope="Number" IsHitTestVisible="True" Margin="128,118,214,0" MinHeight="1" MinWidth="1" Text="50" TextAlignment="Center" PointerEntered="tbHeightValue_PointerEntered" LostFocus="tbHeightValue_LostFocus" TextChanged="tbHeightValue_TextChanged" />
         <TextBox x:Name="tbFillcolor" Background="Transparent" BorderThickness="0" Foreground="White" IsHitTestVisible="False" Margin="2,78,278,0"  Text="Füllfarbe:" Width="120" />
         <TextBox x:Name="tbStrokeColor" Background="Transparent" BorderThickness="0" Foreground="White" IsHitTestVisible="False" Margin="2,43,278,0"  Text="Randfarbe:" Width="120" />
         <TextBox x:Name="tbStrokeThicknessText" Background="Transparent" BorderThickness="0" Foreground="White" IsHitTestVisible="False" Margin="2,6,278,0"  Text="Randstärke:" Width="120" />
         <TextBox x:Name="tbStrokeThicknessValue" Background="Transparent" BorderThickness="0" Foreground="White" IsHitTestVisible="False" Margin="348,6,10,0" MinWidth="10" TextWrapping="Wrap" Text="5"/>
         <TextBox x:Name="tbWidth" Background="Transparent" BorderThickness="0" Foreground="White" IsHitTestVisible="False" Margin="2,147,297,0" Text="Breite:" />
-        <TextBox x:Name="tbWidthValue" Background="Transparent" BorderThickness="2"  FontSize="14" Foreground="White" Height="26" IsHitTestVisible="True" Margin="129,150,214,0" MinHeight="1" MinWidth="1" Text="85" TextAlignment="Center" PreventKeyboardDisplayOnProgrammaticFocus="True" />
+        <TextBox x:Name="tbWidthValue" Background="Transparent" BorderThickness="2"  FontSize="14" Foreground="White" Height="26" IsHitTestVisible="True" InputScope="Number" Margin="129,150,214,0" MinHeight="1" MinWidth="1" Text="85" TextAlignment="Center" PreventKeyboardDisplayOnProgrammaticFocus="True" PointerEntered="tbWidthValue_PointerEntered" LostFocus="tbWidthValue_LostFocus" TextChanged="tbWidthValue_TextChanged" />
     </Grid>
 </UserControl>
     

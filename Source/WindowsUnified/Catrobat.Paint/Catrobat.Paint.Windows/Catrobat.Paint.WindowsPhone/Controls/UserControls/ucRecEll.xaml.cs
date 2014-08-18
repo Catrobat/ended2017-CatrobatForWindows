@@ -27,6 +27,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
     /// </summary>
     public sealed partial class ucRecEll
     {
+        private int _last_valid_height;
+        private int _last_valid_width;
         public ucRecEll()
         {
             this.InitializeComponent();
@@ -35,6 +37,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().PaintData.BorderColorChanged += ColorStrokeChanged;
             PocketPaintApplication.GetInstance().PaintData.FillColorChanged += ColorFillChanged;
             PocketPaintApplication.GetInstance().BarRecEllShape = this;
+
+            _last_valid_height = Convert.ToInt32(tbHeightValue.Text);
+            _last_valid_width = Convert.ToInt32(tbWidthValue.Text);
+            rectTransDisplayForeground.ManipulationMode = ManipulationModes.All;
         }
 
         private void btnSelectedColor_Click(object sender, RoutedEventArgs e)
@@ -86,12 +92,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public int getHeight()
         {
-            return Convert.ToInt32(tbHeightValue.Text);
+            int return_value = 0;
+            return return_value = tbHeightValue.Text != string.Empty ? Convert.ToInt32(tbHeightValue.Text) : _last_valid_height;
         }
 
         public int getWidth()
         {
-            return Convert.ToInt32(tbWidthValue.Text);
+            int return_value = 0;
+            return return_value = tbWidthValue.Text != string.Empty ? Convert.ToInt32(tbWidthValue.Text) : _last_valid_width;
         }
 
         private void sldSlidersChanged_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
@@ -100,6 +108,48 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             tbStrokeThicknessValue.Text = strokeThickness.ToString();
             PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll = strokeThickness;
             rectTransDisplayForeground.StrokeThickness = strokeThickness;
+        }
+
+        private void tbHeightValue_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            tbHeightValue.Foreground = new SolidColorBrush(Colors.Black);
+        }
+
+        private void tbHeightValue_LostFocus(object sender, RoutedEventArgs e)
+        {
+            tbHeightValue.Foreground = new SolidColorBrush(Colors.White);
+
+            _last_valid_height = tbHeightValue.Text != string.Empty ? Convert.ToInt32(tbHeightValue.Text) : _last_valid_width;
+            tbHeightValue.Text = _last_valid_height.ToString();
+        }
+
+        private void tbWidthValue_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            tbWidthValue.Foreground = new SolidColorBrush(Colors.Black);
+        }
+
+        private void tbWidthValue_LostFocus(object sender, RoutedEventArgs e)
+        {
+            tbWidthValue.Foreground = new SolidColorBrush(Colors.White);
+
+            _last_valid_width = tbWidthValue.Text != string.Empty ? Convert.ToInt32(tbWidthValue.Text) : _last_valid_width;
+            tbWidthValue.Text = _last_valid_width.ToString();
+        }
+
+        private void tbHeightValue_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(tbHeightValue.Text != string.Empty)
+            {
+                rectTransDisplayForeground.Height = Convert.ToDouble(tbHeightValue.Text);
+            }
+        }
+
+        private void tbWidthValue_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(tbWidthValue.Text != string.Empty)
+            { 
+                rectTransDisplayForeground.Width = Convert.ToDouble(tbWidthValue.Text);
+            }
         }
     }
 }
