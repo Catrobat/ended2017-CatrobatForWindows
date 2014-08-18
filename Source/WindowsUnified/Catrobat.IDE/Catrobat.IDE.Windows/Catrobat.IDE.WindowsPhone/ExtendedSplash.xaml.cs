@@ -106,6 +106,8 @@ namespace Catrobat.IDE.WindowsPhone
 
         private async Task RestoreCatrobatStateAsync(ApplicationExecutionState executionState)
         {
+            await ((SystemInformationServiceWindowsShared)ServiceLocator.SystemInformationService).Initialize();
+
             if (ViewModelBase.IsInDesignModeStatic)
                 return;
 
@@ -136,9 +138,6 @@ namespace Catrobat.IDE.WindowsPhone
 
         public static async Task InitializationFinished(IActivatedEventArgs e)
         {
-            await ((SystemInformationServiceWindowsShared)ServiceLocator.SystemInformationService).Initialize();
-
-
             var filePickerArgs = e as FileOpenPickerContinuationEventArgs;
             if (filePickerArgs != null)
             {

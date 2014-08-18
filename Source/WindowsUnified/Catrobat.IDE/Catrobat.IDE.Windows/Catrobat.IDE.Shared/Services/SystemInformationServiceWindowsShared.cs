@@ -29,12 +29,65 @@ namespace Catrobat.IDE.WindowsShared.Services
                 deviceCategory + ", " + processorArchitecture + "]";
         }
 
+        private string _platformName;
+        public string PlatformName
+        {
+            get
+            {
+                return _platformName;
+            }
+            private set
+            {
+                if (value == null)
+                {
+                    _platformName = "unknown";
+                }
+                else
+                {
+                    _platformName = value;
+                }
+            }
+        }
 
-        public string PlatformName { get; private set; }
+        private string _platformVersion;
+        public string PlatformVersion
+        {
+            get
+            {
+                return _platformVersion;
+            }
+            private set
+            {
+                if (value == null)
+                {
+                    _platformVersion = "unknown";
+                }
+                else
+                {
+                    _platformVersion = value;
+                }
+            }
+        }
 
-        public string PlatformVersion { get; private set; }
-
-        public string DeviceName { get; private set; }
+        private string _deviceName;
+        public string DeviceName 
+        { 
+            get
+            {
+                return _deviceName;
+            }
+            private set
+            {
+                if (value == null)
+                {
+                    _deviceName = "unknown";
+                }
+                else
+                {
+                    _deviceName = value;
+                }
+            }
+        }
 
         private int? _screenWidth;
         public int ScreenWidth
