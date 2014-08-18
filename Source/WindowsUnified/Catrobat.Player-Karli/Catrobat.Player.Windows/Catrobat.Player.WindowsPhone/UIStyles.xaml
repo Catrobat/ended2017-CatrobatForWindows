@@ -4,6 +4,7 @@
     xmlns:local="using:Catrobat_Player">
     
     <!-- Phone Version -->
+    <SolidColorBrush x:Key="ActionBrush" Color="#FFdb7100"/>
 
     <!--example code: (begin)
     

@@ -1,7 +1,7 @@
 #pragma once
 
 //#include "pch.h"
-#include "Direct3DDeviceResources.h"
+#include "DeviceResources.h"
 #include "InitRenderer.h"
 #include "ProjectRenderer.h"
 
@@ -19,7 +19,7 @@ namespace Catrobat_Player
     class PlayerMainComponent
     {
     public:
-        PlayerMainComponent(const std::shared_ptr<DX::Direct3DDeviceResources>& direct3DDeviceResources,
+        PlayerMainComponent(const std::shared_ptr<DX::DeviceResources>& deviceResources,
             Windows::UI::Xaml::Controls::CommandBar^ playerAppBar);
         ~PlayerMainComponent();
         void CreateWindowSizeDependentResources();
@@ -28,9 +28,6 @@ namespace Catrobat_Player
         void Suspend();
         void Resume();
         Concurrency::critical_section& GetCriticalSection() { return m_criticalSection; }
-        //virtual void Render() override;
-
-        //Windows::UI::Xaml::Controls::SwapChainPanel^ GetSwapChainPanel() const { return m_swapChainPanel; }
 
         //RequestAdditionalFrameHandler^ RequestAdditionalFrame;
 
@@ -53,9 +50,14 @@ namespace Catrobat_Player
         //HRESULT Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView);
 
     private:
-        std::shared_ptr<DX::Direct3DDeviceResources>    m_direct3DDeviceResources;
+        void Update();
+        bool Render();
+
+        // Cached pointer to device resources.
+        std::shared_ptr<DX::DeviceResources>            m_deviceResources;
         Windows::UI::Xaml::Controls::CommandBar^        m_playerAppBar;
 
+        // Content renderers
         InitRenderer^                                   m_initRenderer;
         ProjectRenderer^                                m_projectRenderer;
 
