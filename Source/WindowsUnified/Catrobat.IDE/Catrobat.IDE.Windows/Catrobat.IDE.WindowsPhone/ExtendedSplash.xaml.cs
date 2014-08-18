@@ -42,7 +42,7 @@ namespace Catrobat.IDE.WindowsPhone
 
             var executionState = e.PreviousExecutionState;
 
-            ExtendedSplashImage.Source = preloadedImage;
+            ImageExtendedSplash.Source = preloadedImage;
 
             Window.Current.SizeChanged += ExtendedSplash_OnResize;
 
@@ -52,7 +52,7 @@ namespace Catrobat.IDE.WindowsPhone
             {
                 _splash.Dismissed += DismissedEventHandler;
                 _splashImageRect = _splash.ImageLocation;
-                //PositionImage();
+                PositionImage();
             }
 
             _rootFrame = new Frame();
@@ -79,15 +79,18 @@ namespace Catrobat.IDE.WindowsPhone
                 await Task.Delay(timeToWait);
 
 
-            Window.Current.Content = _rootFrame;
-            ServiceLocator.NavigationService = new NavigationServiceWindowsShared(_rootFrame);
-            ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
+            //Window.Current.Content = _rootFrame;
+            //ServiceLocator.NavigationService = new NavigationServiceWindowsShared(_rootFrame);
+            //ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
         }
 
         void PositionImage()
         {
-            ExtendedSplashImage.SetValue(Viewbox.HeightProperty, _splashImageRect.Height);
-            ExtendedSplashImage.SetValue(Viewbox.WidthProperty, _splashImageRect.Width);
+            //ImageExtendedSplash.SetValue(Viewbox.HeightProperty, _splashImageRect.Height);
+            //ImageExtendedSplash.SetValue(Viewbox.WidthProperty, _splashImageRect.Width);
+            ImageExtendedSplash.Height = _splashImageRect.Height;
+            ImageExtendedSplash.Width = _splashImageRect.Width;
+
         }
 
         void ExtendedSplash_OnResize(Object sender, WindowSizeChangedEventArgs e)
@@ -98,6 +101,7 @@ namespace Catrobat.IDE.WindowsPhone
                 PositionImage();
             }
         }
+ 
 
         void DismissedEventHandler(SplashScreen sender, object e)
         {
