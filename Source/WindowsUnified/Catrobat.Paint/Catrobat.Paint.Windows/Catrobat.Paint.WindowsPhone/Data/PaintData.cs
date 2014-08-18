@@ -6,8 +6,12 @@ using Catrobat.Paint.Phone.Tool;
 
 namespace Catrobat.Paint.Phone.Data
 {
+    public delegate void BorderColorChangedEventHandler(SolidColorBrush color);
     public delegate void ColorChangedEventHandler(SolidColorBrush color);
+    public delegate void FillColorChangedEventHandler(SolidColorBrush color);
     public delegate void ThicknessChangedEventHandler(int thickness);
+    public delegate void BorderThicknessChangedEventHandler(int border_thickness);
+
     public delegate void CapChangedEventHandler(PenLineCap cap);
     public delegate void ToolCurrentChangedEventHandler(ToolBase tool);
 
@@ -18,18 +22,36 @@ namespace Catrobat.Paint.Phone.Data
     /// </summary>
     public class PaintData
     {
-
-        public event ColorChangedEventHandler ColorChanged;
+        public event BorderColorChangedEventHandler BorderColorChanged;
+        public event ColorChangedEventHandler FillColorChanged;
+        public event FillColorChangedEventHandler ColorChanged;
         public event ThicknessChangedEventHandler ThicknessChanged;
+        public event BorderThicknessChangedEventHandler BorderThicknessChanged;
         public event CapChangedEventHandler CapChanged;
         public event ToolCurrentChangedEventHandler ToolCurrentChanged;
 
+        private static SolidColorBrush _colorBorderSelected = new SolidColorBrush(Colors.Black);
+        private static SolidColorBrush _colorFillSelected = new SolidColorBrush(Colors.Yellow);
         private static SolidColorBrush _colorSelected = new SolidColorBrush(Colors.Black);
+
         private int _thicknessSelected = 20;
+        private int _borderThicknessRecEll = 3;
         private PenLineCap _capSelected = PenLineCap.Round;
         private ToolBase _toolCurrentSelected = new BrushTool();
         public int max_right_left = 0;
         public double min_max_resize = 0.0;
+        
+        public SolidColorBrush BorderColorSelected
+        {
+            get { return _colorBorderSelected;  }
+            set
+            {
+                _colorBorderSelected = value;
+                OnBorderColorChanged(_colorBorderSelected);
+            }
+
+        }
+
         public SolidColorBrush ColorSelected
         {
             get { return _colorSelected; }
@@ -38,6 +60,17 @@ namespace Catrobat.Paint.Phone.Data
                 _colorSelected = value;
                 OnColorChanged(_colorSelected);
             }
+        }
+
+        public SolidColorBrush FillColorSelected
+        {
+            get { return _colorFillSelected; }
+            set
+            {
+                _colorFillSelected = value;
+                OnBorderColorChanged(_colorFillSelected);
+            }
+
         }
 
         public int ThicknessSelected
@@ -50,6 +83,15 @@ namespace Catrobat.Paint.Phone.Data
             }
         }
 
+        public int BorderThicknessRecEll
+        {
+            get { return _borderThicknessRecEll; }
+            set
+            {
+                _borderThicknessRecEll = value;
+                OnThicknessChanged(_borderThicknessRecEll);
+            }
+        }
 
         public PenLineCap CapSelected
         {
@@ -72,11 +114,27 @@ namespace Catrobat.Paint.Phone.Data
             }
         }
 
+        protected virtual void OnBorderColorChanged(SolidColorBrush color)
+        {
+            if (BorderColorChanged != null)
+            {
+                BorderColorChanged(color);
+            }
+        }
+
         protected virtual void OnColorChanged(SolidColorBrush color)
         {
             if (ColorChanged != null)
             {
                 ColorChanged(color);
+            }
+        }
+
+        protected virtual void OnFillColorChanged(SolidColorBrush color)
+        {
+            if (FillColorChanged != null)
+            {
+                FillColorChanged(color);
             }
         }
 
@@ -87,7 +145,13 @@ namespace Catrobat.Paint.Phone.Data
                 ThicknessChanged(thickness);
             }
         }
-
+        protected virtual void OnBorderThicknessChanged(int border_thickness)
+        {
+            if (BorderThicknessChanged != null)
+            {
+                BorderThicknessChanged(border_thickness);
+            }
+        }
 
         protected virtual void OnCapChanged(PenLineCap cap)
         {
