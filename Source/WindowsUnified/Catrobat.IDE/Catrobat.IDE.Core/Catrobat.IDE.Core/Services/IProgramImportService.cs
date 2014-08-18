@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Core.Services
 {
     public interface IProgramImportService
     {
-        void SetProjectStream(Stream projectStream);
+        void SetProgramStream(Stream programStream);
 
         void SetDownloadHeader(OnlineProgramHeader projectHeader);
 

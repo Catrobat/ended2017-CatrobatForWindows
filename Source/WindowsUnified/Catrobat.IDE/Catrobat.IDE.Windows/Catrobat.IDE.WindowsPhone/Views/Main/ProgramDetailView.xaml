@@ -74,8 +74,8 @@
 
         <Grid Grid.Column="1" Margin="20 20 0 0">
           <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5*" />
           </Grid.ColumnDefinitions>
           <Grid.RowDefinitions>
             <RowDefinition Height="30" />
@@ -165,7 +165,7 @@
         <switchPanel:SwitchPanel.Items>
           <switchPanel:SwitchPanelItemCollection>
             <switchPanel:SwitchPanelItem PanelValue="Valid" HorizontalAlignment="Stretch">
-              <Grid Margin="0 0 0 0">
+              <Grid Margin="12">
                 <Grid.RowDefinitions>
                   <RowDefinition Height="Auto"/>
                   <RowDefinition/>

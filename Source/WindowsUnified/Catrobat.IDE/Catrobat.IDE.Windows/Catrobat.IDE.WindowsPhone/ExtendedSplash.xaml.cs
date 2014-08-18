@@ -200,8 +200,8 @@ namespace Catrobat.IDE.WindowsPhone
 
         private static async Task TryAddProgram(Stream programStream)
         {
-            ServiceLocator.ProjectImporterService.SetProjectStream(programStream);
-            await ServiceLocator.ProjectImporterService.TryImportWithStatusNotifications();
+            ServiceLocator.ProgramImportService.SetProgramStream(programStream);
+            await ServiceLocator.ProgramImportService.TryImportWithStatusNotifications();
         }
     }
 }

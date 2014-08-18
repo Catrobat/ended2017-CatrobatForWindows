@@ -182,8 +182,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                     ServiceLocator.NavigationService.NavigateBack<OnlineProgramViewModel>());
 
-                ServiceLocator.ProjectImporterService.SetDownloadHeader(programHeader);
-                await ServiceLocator.ProjectImporterService.TryImportWithStatusNotifications();
+                ServiceLocator.ProgramImportService.SetDownloadHeader(programHeader);
+                await ServiceLocator.ProgramImportService.TryImportWithStatusNotifications();
             }
             finally
             {
@@ -204,7 +204,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private async void CancelDownloadAction()
         {
-            await ServiceLocator.ProjectImporterService.CancelImport();
+            await ServiceLocator.ProgramImportService.CancelImport();
         }
 
         #endregion
@@ -230,7 +230,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             _cancelImportCallbackResult = result;
             //if (_cancelImportCallbackResult == MessageboxResult.Cancel)
             //{
-            //    ServiceLocator.ProjectImporterService.CancelImport();
+            //    ServiceLocator.ProgramImportService.CancelImport();
             //}
         }
         #endregion
