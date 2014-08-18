@@ -26,9 +26,9 @@ namespace Catrobat.Paint.WindowsPhone.View
     /// <summary>
     /// Eine leere Seite, die eigenständig verwendet werden kann oder auf die innerhalb eines Rahmens navigiert werden kann.
     /// </summary>
-    public sealed partial class ViewBorderColorPicker : Page
+    public sealed partial class ViewFillColorPicker : Page
     {
-        public ViewBorderColorPicker()
+        public ViewFillColorPicker()
         {
             this.InitializeComponent();
         }
@@ -40,7 +40,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            SolidColorBrush fill_color = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
+            SolidColorBrush fill_color = PocketPaintApplication.GetInstance().PaintData.FillColorSelected;
             double fill_color_opacity = Convert.ToDouble(fill_color.Color.A);
 
             if (PocketPaintApplication.GetInstance().PaintData.ColorSelected != null)
@@ -123,7 +123,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             current_color.B = ((SolidColorBrush)BtnSelectedColor.Background).Color.B;
             current_color.A = (byte)(255 * (Convert.ToDouble(tbAlphaValue.Text) / 100));
 
-            PocketPaintApplication.GetInstance().PaintData.BorderColorSelected = new SolidColorBrush(current_color);
+            PocketPaintApplication.GetInstance().PaintData.FillColorSelected = new SolidColorBrush(current_color);
             
             //this.Frame.Navigate(typeof(PaintingAreaView));
             this.Frame.GoBack();

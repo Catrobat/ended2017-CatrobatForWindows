@@ -64,11 +64,11 @@ namespace Catrobat.Paint.WindowsPhone.View
                     break;
                 case "Rectangle":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Ellipse":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Ellipse);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "ImportPicture":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.ImportPng);

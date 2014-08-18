@@ -118,6 +118,7 @@ namespace Catrobat.Paint.Phone.Listener
                 Visibility visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(visibility);
                 PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFThicknessKeyboard(visibility);
+                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFRectEllUserControl(visibility);
 
                 rootFrame.Navigate(typeof(ViewToolPicker));
             }

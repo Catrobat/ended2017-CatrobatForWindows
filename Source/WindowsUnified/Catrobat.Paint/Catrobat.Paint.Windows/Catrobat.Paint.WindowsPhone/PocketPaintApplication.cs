@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.Paint.Phone.Tool;
 using Windows.UI.Xaml.Media;
 using Catrobat.Paint.WindowsPhone.Controls.AppBar;
+using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 
 namespace Catrobat.Paint.Phone
 {
@@ -46,6 +47,8 @@ namespace Catrobat.Paint.Phone
 
         private readonly StorageIo _storageIo = new StorageIo();
         public StorageIo StorageIo { get { return _storageIo; } }
+
+        public ucRecEll BarRecEllShape { get; set; }
 
 
         private readonly PaintingAreaManipulationListener _paintingAreaManipulationListener = new PaintingAreaManipulationListener();

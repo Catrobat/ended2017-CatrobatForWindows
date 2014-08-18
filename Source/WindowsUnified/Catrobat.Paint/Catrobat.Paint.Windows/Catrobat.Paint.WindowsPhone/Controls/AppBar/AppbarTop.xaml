@@ -28,11 +28,7 @@
             </Rectangle.Fill>
         </Rectangle>
 
-        <Button Background="Black"  x:Name="btnSelectedColor" MinWidth="1" Width="53" Margin="222,6,0,4" Height="62" >
-            <ContentControl Width="48" Margin="-10,0,0,0">
-
-            </ContentControl>
-        </Button>
+        <Button x:Name="btnSelectedColor" Background="Black" Height="62" Margin="222,6,0,4" MinWidth="1" Width="53" />
 
         <AppBarButton x:Name="btnUndo" Height="72" Margin="15,3,0,-3">
             <AppBarButton.Icon>

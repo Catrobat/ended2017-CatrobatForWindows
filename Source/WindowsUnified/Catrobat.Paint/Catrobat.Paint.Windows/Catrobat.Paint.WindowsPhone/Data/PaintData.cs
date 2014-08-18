@@ -68,7 +68,7 @@ namespace Catrobat.Paint.Phone.Data
             set
             {
                 _colorFillSelected = value;
-                OnBorderColorChanged(_colorFillSelected);
+                OnFillColorChanged(_colorFillSelected);
             }
 
         }

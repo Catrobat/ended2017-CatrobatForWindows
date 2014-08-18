@@ -49,12 +49,12 @@
                         <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_stamp.png" Stretch="None" AlignmentX="Left"></ImageBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="Rectangle" IsEnabled="True" Click="Button_OnClick" Content="Rechteck" HorizontalContentAlignment="Left" FontSize="20" Padding="15,0, 0, 0" HorizontalAlignment="Left" Margin="200,169,0,0" BorderBrush="Transparent" VerticalAlignment="Top" Width="175" Grid.Row="3" Grid.Column="2">
+                <Button x:Name="Rectangle" IsEnabled="True" Click="Button_OnClick" Content="Rechteck" HorizontalContentAlignment="Left" FontSize="20" Padding="45,0, 0, 0" HorizontalAlignment="Left" Margin="200,169,0,0" BorderBrush="Transparent" VerticalAlignment="Top" Width="175">
                     <Button.Background>
                         <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_rectangle.png" Stretch="None" AlignmentX="Left"></ImageBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="Ellipse" IsEnabled="True" Click="Button_OnClick" Content="Kreis/Ellipse" HorizontalContentAlignment="Left" FontSize="20" Padding="15,0, 0, 0" HorizontalAlignment="Left" Margin="3,239,0,0" BorderBrush="Transparent" VerticalAlignment="Top" Width="175" Grid.Row="4" Grid.Column="1">
+                <Button x:Name="Ellipse" IsEnabled="True" Click="Button_OnClick" Content="Kreis/Ellipse" HorizontalContentAlignment="Left" FontSize="20" Padding="45,0, 0, 0" HorizontalAlignment="Left" Margin="3,239,0,0" BorderBrush="Transparent" VerticalAlignment="Top" Width="175" Grid.Row="4" Grid.Column="1">
                     <Button.Background>
                         <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_ellipse.png" Stretch="None" AlignmentX="Left"></ImageBrush>
                     </Button.Background>
