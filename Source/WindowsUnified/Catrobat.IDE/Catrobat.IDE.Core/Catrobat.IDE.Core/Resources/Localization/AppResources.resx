@@ -579,7 +579,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Show memory usage</value>
   </data>
   <data name="Main_DownloadQueueMessage" xml:space="preserve">
-    <value>The program you chose is being downloaded.</value>
+    <value>"{0}" is being downloaded.</value>
   </data>
   <data name="Main_FilterTextBoxHint" xml:space="preserve">
     <value>Find...</value>
@@ -723,7 +723,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Welcome {0}!</value>
   </data>
   <data name="Main_UploadQueueMessage" xml:space="preserve">
-    <value>Your program is being uploaded. This might take a little while, but we'll tell you when it's finished!</value>
+    <value>"{0}" is being uploaded.</value>
   </data>
   <data name="Main_VersionIsNotSupported" xml:space="preserve">
     <value>Program version is not supported.</value>

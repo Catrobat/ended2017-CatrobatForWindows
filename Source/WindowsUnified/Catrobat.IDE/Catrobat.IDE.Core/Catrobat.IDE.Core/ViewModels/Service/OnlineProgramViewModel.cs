@@ -173,8 +173,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
                 IsImporting = true;
             }
-            
-            var message = new MessageBase();
+
+            var message = new GenericMessage<string>(programHeader.ProjectName);
             Messenger.Default.Send(message, ViewModelMessagingToken.DownloadProgramStartedListener);
 
             try

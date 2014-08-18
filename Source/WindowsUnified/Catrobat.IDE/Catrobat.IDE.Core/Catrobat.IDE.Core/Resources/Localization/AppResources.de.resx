@@ -579,7 +579,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Speicherverbrauch anzeigen</value>
   </data>
   <data name="Main_DownloadQueueMessage" xml:space="preserve">
-    <value>Das gewählte Programm wird heruntergeladen. Das kann eine Weile dauern, aber wir sagen dir Bescheid, wenn es da ist!</value>
+    <value>"{0}" wird heruntergeladen.</value>
   </data>
   <data name="Main_FilterTextBoxHint" xml:space="preserve">
     <value>Suchen...</value>
@@ -708,7 +708,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Willkommen {0}!</value>
   </data>
   <data name="Main_UploadQueueMessage" xml:space="preserve">
-    <value>Dein Programm wird hochgeladen. Das kann eine Weile dauern, aber wir sagen dir Bescheid, wenn der Vorgang abgeschlossen ist!</value>
+    <value>"{0}" wird hochgeladen.</value>
   </data>
   <data name="Main_VersionIsNotSupported" xml:space="preserve">
     <value>Die Version des Programms wird von dieser Programmversion nicht unterstützt.</value>
