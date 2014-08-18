@@ -52,7 +52,7 @@ namespace Catrobat.IDE.WindowsPhone
             {
                 _splash.Dismissed += DismissedEventHandler;
                 _splashImageRect = _splash.ImageLocation;
-                PositionImage();
+                //PositionImage();
             }
 
             _rootFrame = new Frame();
@@ -79,9 +79,9 @@ namespace Catrobat.IDE.WindowsPhone
                 await Task.Delay(timeToWait);
 
 
-            //Window.Current.Content = _rootFrame;
-            //ServiceLocator.NavigationService = new NavigationServiceWindowsShared(_rootFrame);
-            //ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
+            Window.Current.Content = _rootFrame;
+            ServiceLocator.NavigationService = new NavigationServiceWindowsShared(_rootFrame);
+            ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
         }
 
         void PositionImage()
@@ -90,7 +90,6 @@ namespace Catrobat.IDE.WindowsPhone
             //ImageExtendedSplash.SetValue(Viewbox.WidthProperty, _splashImageRect.Width);
             ImageExtendedSplash.Height = _splashImageRect.Height;
             ImageExtendedSplash.Width = _splashImageRect.Width;
-
         }
 
         void ExtendedSplash_OnResize(Object sender, WindowSizeChangedEventArgs e)
