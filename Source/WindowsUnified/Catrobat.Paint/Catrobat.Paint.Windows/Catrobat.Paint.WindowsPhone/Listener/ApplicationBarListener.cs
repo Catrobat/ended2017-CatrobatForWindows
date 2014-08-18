@@ -27,11 +27,15 @@ namespace Catrobat.Paint.Phone.Listener
 
         public void BtnColor_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame;
-            // TODO: if (phoneApplicationFrame != null)
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            if (rootFrame != null)
             {
-            // TODO: PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
-            // TODO:    phoneApplicationFrame.Navigate(new Uri("/Catrobat.Paint.Phone;component/View/ColorPickerView.xaml", UriKind.RelativeOrAbsolute));
+                Visibility visibility = Visibility.Collapsed;
+                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
+                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFThicknessKeyboard(visibility);
+
+                rootFrame.Navigate(typeof(ViewColorPicker));
             }
         }
 
@@ -44,12 +48,7 @@ namespace Catrobat.Paint.Phone.Listener
 
         public void BtnColBtnSelectedColor_OnClick(object sender, RoutedEventArgs e)
         {
-            // TODO: var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame;
-            // TODO: if (phoneApplicationFrame != null)
-            {
-                // TODO: PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
-                PocketPaintApplication.GetInstance().PaintingAreaView.NavigatedTo(typeof(ViewColorPicker));
-            }
+
         }
         public void BtnThickness_OnClick(object sender, RoutedEventArgs e)
         {
@@ -115,7 +114,11 @@ namespace Catrobat.Paint.Phone.Listener
             Frame rootFrame = Window.Current.Content as Frame;
             
             if(rootFrame != null)
-            {             
+            {
+                Visibility visibility = Visibility.Collapsed;
+                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(visibility);
+                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFThicknessKeyboard(visibility);
+
                 rootFrame.Navigate(typeof(ViewToolPicker));
             }
         }

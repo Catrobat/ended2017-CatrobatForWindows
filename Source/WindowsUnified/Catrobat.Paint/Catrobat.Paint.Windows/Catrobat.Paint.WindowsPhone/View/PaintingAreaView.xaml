@@ -31,10 +31,10 @@
                 <ucRecEll:ucRecEll></ucRecEll:ucRecEll>
             </Grid>
 
-            <Grid x:Name="GridUserControl" Margin="25,0,-25,0" >
-                <UserControl x:Name="SliderThicknessControl" Height="auto" Width="auto" VerticalAlignment="Bottom" Visibility="Collapsed">
+            <Grid x:Name="GridUserControl" Margin="0,0,-25,0" >
+                <UserControl x:Name="SliderThicknessControl" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="Collapsed" Width="auto">
                     <Grid x:Name="SliderThicknessGrid" Background="#1F1F1F"  MinHeight="120">
-                        <Slider x:Name="SliderThickness" Background="Black" Maximum="50"  Minimum="1" Margin="0,16,140,12"/>
+                        <Slider x:Name="SliderThickness" Background="Black" Maximum="50"  Minimum="1" Margin="10,16,130,12"/>
 
                         <Button x:Name="btnBrushThickness" Content="0" HorizontalAlignment="Stretch" Margin="280,1,12,74" VerticalAlignment="Stretch"/>
 

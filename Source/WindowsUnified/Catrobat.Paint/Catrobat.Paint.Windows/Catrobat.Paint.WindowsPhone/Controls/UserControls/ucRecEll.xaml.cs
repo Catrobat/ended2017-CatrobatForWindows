@@ -44,8 +44,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void sldSliderThickness_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            sldSliderThickness.Background.ToString();
-            sldSliderThickness.Value.ToString(); 
+           //  sldSliderThickness.Background.ToString();
+           //  sldSliderThickness.Value.ToString(); 
         }
     }
 }

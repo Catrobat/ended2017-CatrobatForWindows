@@ -147,7 +147,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnColor.Label = "Farbe";
 
                 app_btnBrushThickness.Click += btnThickness_Click;
-                app_btnColor.Click += btnColor_Click; 
+                app_btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click; 
 
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
                 cmdBar.PrimaryCommands.Add(app_btnColor);
@@ -250,7 +250,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnColor.Label = "Farbe";
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
-                app_btnColor.Click += btnColor_Click;
+                app_btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
 
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
                 cmdBar.PrimaryCommands.Add(app_btnColor);
@@ -623,14 +623,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             return uctrlOwnKeyboard.Visibility;
         }
 
-
-        private void btnColor_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.Frame != null)
-            {
-                this.Frame.Navigate(typeof(ViewColorPicker));
-            }
-        }
         private void btnThickness_Click(object sender, RoutedEventArgs e)
         {
             if (getVisibilityOFSliderThicknessControl() == Visibility.Collapsed)
