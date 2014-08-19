@@ -28,6 +28,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public RectangleTool()
         {
             this.ToolType = ToolType.Rect;
+            PocketPaintApplication.GetInstance().CurrentShape = PocketPaintApplication.GetInstance().BarRecEllShape.RectangleForeground;
         }
         public override void HandleDown(object arg)
         {

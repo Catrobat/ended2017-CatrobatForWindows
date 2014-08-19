@@ -11,6 +11,7 @@ using Catrobat.Paint.Phone.Tool;
 using Windows.UI.Xaml.Media;
 using Catrobat.Paint.WindowsPhone.Controls.AppBar;
 using Catrobat.Paint.WindowsPhone.Controls.UserControls;
+using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.Phone
 {
@@ -44,6 +45,8 @@ namespace Catrobat.Paint.Phone
 
         private readonly PaintData _paintData = new PaintData();
         public PaintData PaintData { get { return _paintData; } }
+
+        public Shape CurrentShape { get; set; }
 
         private readonly StorageIo _storageIo = new StorageIo();
         public StorageIo StorageIo { get { return _storageIo; } }
