@@ -42,7 +42,7 @@ namespace Catrobat.IDE.WindowsPhone
 
             var executionState = e.PreviousExecutionState;
 
-            ExtendedSplashImage.Source = preloadedImage;
+            ImageExtendedSplash.Source = preloadedImage;
 
             Window.Current.SizeChanged += ExtendedSplash_OnResize;
 
@@ -86,8 +86,10 @@ namespace Catrobat.IDE.WindowsPhone
 
         void PositionImage()
         {
-            ExtendedSplashImage.SetValue(Viewbox.HeightProperty, _splashImageRect.Height);
-            ExtendedSplashImage.SetValue(Viewbox.WidthProperty, _splashImageRect.Width);
+            //ImageExtendedSplash.SetValue(Viewbox.HeightProperty, _splashImageRect.Height);
+            //ImageExtendedSplash.SetValue(Viewbox.WidthProperty, _splashImageRect.Width);
+            ImageExtendedSplash.Height = _splashImageRect.Height;
+            ImageExtendedSplash.Width = _splashImageRect.Width;
         }
 
         void ExtendedSplash_OnResize(Object sender, WindowSizeChangedEventArgs e)
@@ -98,6 +100,7 @@ namespace Catrobat.IDE.WindowsPhone
                 PositionImage();
             }
         }
+ 
 
         void DismissedEventHandler(SplashScreen sender, object e)
         {
@@ -106,6 +109,8 @@ namespace Catrobat.IDE.WindowsPhone
 
         private async Task RestoreCatrobatStateAsync(ApplicationExecutionState executionState)
         {
+            await ((SystemInformationServiceWindowsShared)ServiceLocator.SystemInformationService).Initialize();
+
             if (ViewModelBase.IsInDesignModeStatic)
                 return;
 
@@ -136,9 +141,6 @@ namespace Catrobat.IDE.WindowsPhone
 
         public static async Task InitializationFinished(IActivatedEventArgs e)
         {
-            await ((SystemInformationServiceWindowsShared)ServiceLocator.SystemInformationService).Initialize();
-
-
             var filePickerArgs = e as FileOpenPickerContinuationEventArgs;
             if (filePickerArgs != null)
             {
@@ -201,8 +203,8 @@ namespace Catrobat.IDE.WindowsPhone
 
         private static async Task TryAddProgram(Stream programStream)
         {
-            ServiceLocator.ProjectImporterService.SetProjectStream(programStream);
-            await ServiceLocator.ProjectImporterService.TryImportWithStatusNotifications();
+            ServiceLocator.ProgramImportService.SetProgramStream(programStream);
+            await ServiceLocator.ProgramImportService.TryImportWithStatusNotifications();
         }
     }
 }

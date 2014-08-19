@@ -21,6 +21,7 @@ namespace Catrobat_Player
     public:
         PlayerDirectXPage();
 
+        void SetProjectLoading();
         void OnSuspending();
         void OnResuming();
 
@@ -52,7 +53,7 @@ namespace Catrobat_Player
         void OnEnableAxisButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
 
         // Resources used to render the DirectX content in the XAML page background.
-        std::shared_ptr<DX::Direct3DDeviceResources> m_direct3DDeviceResources;
+        std::shared_ptr<DX::DeviceResources> m_deviceResources;
         std::unique_ptr<PlayerMainComponent> m_playerMainComponent;
 
         //bool m_playActive;

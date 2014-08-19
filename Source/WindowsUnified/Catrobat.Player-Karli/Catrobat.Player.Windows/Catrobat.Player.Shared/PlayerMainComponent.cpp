@@ -28,21 +28,22 @@ using namespace Microsoft::WRL;
 using namespace Windows::Graphics::Display;
 using namespace Windows::System::Threading;
 using namespace Platform;
+using namespace concurrency;
 
 namespace Catrobat_Player
 {
     //--------------------------------------------------------------------------------------
 
-    PlayerMainComponent::PlayerMainComponent(const std::shared_ptr<DX::Direct3DDeviceResources>& direct3DDeviceResources,
+    PlayerMainComponent::PlayerMainComponent(const std::shared_ptr<DX::DeviceResources>& deviceResources,
         Windows::UI::Xaml::Controls::CommandBar^ playerAppBar) :
-        m_direct3DDeviceResources(direct3DDeviceResources),
+        m_deviceResources(deviceResources),
         m_playerAppBar(playerAppBar)
     {
         //      ProjectDaemon::Instance()->ReInit();
 
         //m_eventController = EventControllerXaml::Create(m_coreWindow, m_swapChainPanel->Dispatcher);
 
-        m_initRenderer = ref new InitRenderer(m_direct3DDeviceResources);
+        m_initRenderer = ref new InitRenderer(m_deviceResources);
         //m_projectRenderer = ref new ProjectRenderer(m_direct3DDeviceResources);
 
 
@@ -67,54 +68,86 @@ namespace Catrobat_Player
 
     void PlayerMainComponent::StartRenderLoop()
     {
-        // TODO: FIXXME
-
-        while (1)
+        // If the animation render loop is already running then do not start another thread.
+        if (m_renderLoopWorker != nullptr && m_renderLoopWorker->Status == Windows::Foundation::AsyncStatus::Started)
         {
-            m_initRenderer->Render();
+            return;
         }
 
-        // If the animation render loop is already running then do not start another thread.
-        //if (m_renderLoopWorker != nullptr && m_renderLoopWorker->Status == Windows::Foundation::AsyncStatus::Started)
-        //{
-        //    return;
-        //}
-
         // Create a task that will be run on a background thread.
-        //auto workItemHandler = ref new WorkItemHandler([this](IAsyncAction ^ action)
-        //{
-        // Calculate the updated frame and render once per vertical blanking interval.
-        //while (action->Status == Windows::Foundation::AsyncStatus::Started)
-        //{
-        //critical_section::scoped_lock lock(m_criticalSection);
-        //Update();
+        auto workItemHandler = ref new WorkItemHandler([this](IAsyncAction ^ action)
+        {
+            // Calculate the updated frame and render once per vertical blanking interval.
+            while (action->Status == Windows::Foundation::AsyncStatus::Started)
+            {
+                critical_section::scoped_lock lock(m_criticalSection);
+                Update();
+                if (Render())
+                {
+                    m_deviceResources->Present();
+                }
 
-        //m_renderer->Render();
-        //m_deviceResources->Present();
+                //Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
+                //Draw(GetDevice(), GetContext(), nullptr /* GetRenderTargetView() */ );
 
-        //Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
-        //Draw(GetDevice(), GetContext(), nullptr /* GetRenderTargetView() */ );
-
-        //if (!m_haveFocus || (m_updateState == UpdateEngineState::TooSmall))
-        //{
-        //    // The app is in an inactive state so stop rendering
-        //    // This optimizes for power and allows the framework to become more queiecent
-        //    break;
-        //}
-        //    }
-        //});
+                //if (!m_haveFocus || (m_updateState == UpdateEngineState::TooSmall))
+                //{
+                //    // The app is in an inactive state so stop rendering
+                //    // This optimizes for power and allows the framework to become more queiecent
+                //    break;
+                //}
+            }
+        });
 
         // Run task on a dedicated high priority background thread.
-        //m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
+        m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
     }
 
     //--------------------------------------------------------------------------------------
 
     void PlayerMainComponent::StopRenderLoop()
     {
-        // TODO: implement me
+        m_renderLoopWorker->Cancel();
+    }
 
-        //m_renderLoopWorker->Cancel();
+    //--------------------------------------------------------------------------------------
+
+    void PlayerMainComponent::Update()
+    {
+        // TODO implement me
+
+        //// Updates the application state once per frame.
+        //ProcessInput();
+
+        //// Update scene objects.
+        //m_timer.Tick([&]()
+        //{
+        //    // TODO: Replace this with your app's content update functions.
+        //    m_sceneRenderer->Update(m_timer);
+        //    m_fpsTextRenderer->Update(m_timer);
+        //});
+
+
+
+    }
+
+    //--------------------------------------------------------------------------------------
+
+    // Renders the current frame according to the current application state.
+    // Returns true if the frame was rendered and is ready to be displayed.
+    bool PlayerMainComponent::Render()
+    {
+        // Don't try to render anything before the first Update.
+        /*if (m_timer.GetFrameCount() == 0)
+        {
+            return false;
+        }*/
+
+        // Render the scene objects.
+        m_initRenderer->Render();
+        //m_projectRenderer->Render();
+
+        return true;
     }
 
     //--------------------------------------------------------------------------------------

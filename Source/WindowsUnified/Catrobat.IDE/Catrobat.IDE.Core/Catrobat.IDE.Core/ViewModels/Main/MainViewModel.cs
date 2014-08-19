@@ -38,6 +38,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private CatrobatContextBase _context;
         private OnlineProgramsCollection _onlinePrograms;
         private OnlineProgramHeader _selectedOnlineProgram;
+        private string _lastImportedProgram;
+        private string _lastUploadedProgram;
 
         #endregion
 
@@ -241,28 +243,37 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             base.GoBackAction();
         }
 
-        private async void ShowMessagesAction()
+        private void ShowMessagesAction()
         {
+            string notificationString = "";
+            int length = 20;
             if (_showDownloadMessage)
             {
-                var portbleImage = new PortableImage();
+                //var portbleImage = new PortableImage();
                 //await portbleImage.LoadFromResources(ResourceScope.Ide,
                 //    "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
+                if (_lastImportedProgram.Length > length)
+                {
+                    _lastImportedProgram = _lastImportedProgram.Substring(0, length) + "...";
+                }
+                notificationString = String.Format(AppResources.Main_DownloadQueueMessage, _lastImportedProgram);
 
-                ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_DownloadQueueMessage, ToastDisplayDuration.Short, ToastTag.Default, portbleImage);
-
+                ServiceLocator.NotifictionService.ShowToastNotification("",
+                    notificationString, ToastDisplayDuration.Short, ToastTag.Default);
                 _showDownloadMessage = false;
             }
             if (_showUploadMessage)
             {
-                var portbleImage = new PortableImage();
+                //var portbleImage = new PortableImage();
                 //await portbleImage.LoadFromResources(ResourceScope.Ide,
                 //    "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
-
-                ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_UploadQueueMessage, ToastDisplayDuration.Short, ToastTag.Default, portbleImage);
-
+                if (_lastUploadedProgram.Length > length)
+                {
+                    _lastUploadedProgram = _lastUploadedProgram.Substring(0, length) + "...";
+                }
+                notificationString = String.Format(AppResources.Main_UploadQueueMessage, _lastUploadedProgram);
+                ServiceLocator.NotifictionService.ShowToastNotification("",
+                    notificationString, ToastDisplayDuration.Short, ToastTag.Default);
                 _showUploadMessage = false;
             }
         }
@@ -276,14 +287,16 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             await UpdateLocalPrograms();
         }
 
-        private void DownloadProgramStartedMessageAction(MessageBase message)
+        private void DownloadProgramStartedMessageAction(GenericMessage<string> message)
         {
             _showDownloadMessage = true;
+            _lastImportedProgram = message.Content;
         }
 
-        private void UploadProgramStartedMessageAction(MessageBase message)
+        private void UploadProgramStartedMessageAction(GenericMessage<string> message)
         {
             _showUploadMessage = true;
+            _lastUploadedProgram = message.Content;
         }
 
         private void ContextChangedMessageAction(GenericMessage<CatrobatContextBase> message)
@@ -329,10 +342,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             Messenger.Default.Register<MessageBase>(this,
                 ViewModelMessagingToken.LocalProgramsChangedListener, LocalProgramsChangedMessageAction);
 
-            Messenger.Default.Register<MessageBase>(this,
+            Messenger.Default.Register<GenericMessage<string>>(this,
                 ViewModelMessagingToken.DownloadProgramStartedListener, DownloadProgramStartedMessageAction);
 
-            Messenger.Default.Register<MessageBase>(this,
+            Messenger.Default.Register<GenericMessage<string>>(this,
                ViewModelMessagingToken.UploadProgramStartedListener, UploadProgramStartedMessageAction);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,

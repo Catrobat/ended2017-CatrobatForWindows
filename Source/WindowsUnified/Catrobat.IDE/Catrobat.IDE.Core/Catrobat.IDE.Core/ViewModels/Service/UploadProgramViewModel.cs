@@ -116,7 +116,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 ProgramName, Context.CurrentUserName, Context.CurrentToken,
                 ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
-            var message = new MessageBase();
+            var message = new GenericMessage<string>(ProgramName);
             Messenger.Default.Send(message, ViewModelMessagingToken.UploadProgramStartedListener);
 
             this.GoBackAction();

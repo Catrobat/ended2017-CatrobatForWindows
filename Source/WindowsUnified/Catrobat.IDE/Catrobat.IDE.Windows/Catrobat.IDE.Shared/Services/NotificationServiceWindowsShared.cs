@@ -40,8 +40,9 @@ namespace Catrobat.IDE.WindowsShared.Services
                     throw new ArgumentOutOfRangeException("timeTillHide");
             }
 
-            IToastText01 templateContent = ToastContentFactory.CreateToastText01();
-            templateContent.TextBodyWrap.Text = title;
+            IToastText02 templateContent = ToastContentFactory.CreateToastText02();
+            //templateContent.TextHeading.Text = title;
+            templateContent.TextBodyWrap.Text = message;
             templateContent.Duration = duration;
 
             templateContent.Audio.Content = ToastAudioContent.Silent;

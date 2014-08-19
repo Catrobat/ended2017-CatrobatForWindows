@@ -1,5 +1,6 @@
 ﻿using Catrobat.Paint.Phone;
 using Catrobat.Paint.Phone.Tool;
+using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 
@@ -36,8 +38,11 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             var coordinate = (Point)arg;
 
+            int height = PocketPaintApplication.GetInstance().BarRecEllShape.getHeight();
+            int width = PocketPaintApplication.GetInstance().BarRecEllShape.getWidth();
+            
             RectangleGeometry myRectangleGeometry = new RectangleGeometry();
-            myRectangleGeometry.Rect = new Rect(coordinate, new Point(coordinate.X+20, coordinate.Y+20));
+            myRectangleGeometry.Rect = new Rect(coordinate, new Point(coordinate.X+width, coordinate.Y+height));
 
             _path = new Path();
             _path.Fill = PocketPaintApplication.GetInstance().PaintData.FillColorSelected;

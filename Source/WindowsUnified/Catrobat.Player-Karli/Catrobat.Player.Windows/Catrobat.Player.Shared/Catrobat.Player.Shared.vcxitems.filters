@@ -231,13 +231,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)PlayerMainComponent.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DDeviceResources.h">
-      <Filter>Core\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)InitRenderer.h">
       <Filter>Core\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DBaseRenderer.h">
+      <Filter>Core\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceResources.h">
       <Filter>Core\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
@@ -463,13 +463,13 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)PlayerMainComponent.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DDeviceResources.cpp">
-      <Filter>Core\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)InitRenderer.cpp">
       <Filter>Core\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DBaseRenderer.cpp">
+      <Filter>Core\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)DeviceResources.cpp">
       <Filter>Core\Rendering</Filter>
     </ClCompile>
   </ItemGroup>

@@ -78,15 +78,33 @@ using namespace concurrency;
 
         // At this point we have access to the device.
         // We can create the device-dependent resources.
-        m_direct3DDeviceResources = std::make_shared<DX::Direct3DDeviceResources>();
-        m_direct3DDeviceResources->SetSwapChainPanel(PlayerSwapChainPanel);
+        m_deviceResources = std::make_shared<DX::DeviceResources>();
+        m_deviceResources->SetSwapChainPanel(PlayerSwapChainPanel);
 
-        m_playerMainComponent = std::unique_ptr<PlayerMainComponent>(new PlayerMainComponent(m_direct3DDeviceResources, PlayerAppBar));
+        m_playerMainComponent = std::unique_ptr<PlayerMainComponent>(new PlayerMainComponent(m_deviceResources, PlayerAppBar));
+
+        SetProjectLoading(); // FIXXME call this function not here!
         m_playerMainComponent->StartRenderLoop();
 
         //m_main->ProjectName = "Default";
         //m_main->RenderResolution = m_main->NativeResolution;
         //m_main->StartRenderLoop();
+    }
+
+    //----------------------------------------------------------------------
+
+    void PlayerDirectXPage::SetProjectLoading()
+    {
+        // This function may be called from a different thread.
+        // All XAML updates need to occur on the UI thread so dispatch to ensure this is true.
+        Dispatcher->RunAsync(
+            CoreDispatcherPriority::Normal,
+            ref new DispatchedHandler([this]()
+        {
+            Loading->Visibility = ::Visibility::Visible;
+            LoadingProject->IsActive = true;
+        })
+            );
     }
 
     // Window event handlers.
@@ -136,7 +154,7 @@ using namespace concurrency;
     {
         OutputDebugString(L"OnDpiChanged\n");
         critical_section::scoped_lock lock(m_playerMainComponent->GetCriticalSection());
-        m_direct3DDeviceResources->SetDpi(sender->LogicalDpi);
+        m_deviceResources->SetDpi(sender->LogicalDpi);
         m_playerMainComponent->CreateWindowSizeDependentResources();
     }
 
@@ -171,7 +189,7 @@ using namespace concurrency;
     {
         OutputDebugString(L"OnCompositionScaleChanged\n");
         critical_section::scoped_lock lock(m_playerMainComponent->GetCriticalSection());
-        m_direct3DDeviceResources->SetCompositionScale(sender->CompositionScaleX, sender->CompositionScaleY);
+        m_deviceResources->SetCompositionScale(sender->CompositionScaleX, sender->CompositionScaleY);
         m_playerMainComponent->CreateWindowSizeDependentResources();
     }
 
@@ -181,7 +199,7 @@ using namespace concurrency;
     {
         OutputDebugString(L"OnSwapChainPanelSizeChanged\n");
         critical_section::scoped_lock lock(m_playerMainComponent->GetCriticalSection());
-        m_direct3DDeviceResources->SetLogicalSize(e->NewSize);
+        m_deviceResources->SetLogicalSize(e->NewSize);
         m_playerMainComponent->CreateWindowSizeDependentResources();
     }
 

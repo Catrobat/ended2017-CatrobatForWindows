@@ -26,11 +26,21 @@ namespace Catrobat.Paint.WindowsPhone.View
     /// <summary>
     /// Eine leere Seite, die eigenständig verwendet werden kann oder auf die innerhalb eines Rahmens navigiert werden kann.
     /// </summary>
-    public sealed partial class ViewBorderColorPicker : Page
+    public sealed partial class ViewFillColorPicker : Page
     {
-        public ViewBorderColorPicker()
+        public ViewFillColorPicker()
         {
             this.InitializeComponent();
+            SolidColorBrush fill_color = PocketPaintApplication.GetInstance().PaintData.FillColorSelected;
+            double fill_color_opacity = Convert.ToDouble(fill_color.Color.A);
+
+            if (PocketPaintApplication.GetInstance().PaintData.ColorSelected != null)
+            {
+                Color selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.ColorSelected).Color;
+
+                changeValuesOfColourSliders(selected_color.R, selected_color.G, selected_color.B, (byte)fill_color_opacity);
+                changeColorOfBtnSelectedColor(selected_color);
+            }
         }
 
         /// <summary>
@@ -40,12 +50,12 @@ namespace Catrobat.Paint.WindowsPhone.View
         /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            SolidColorBrush fill_color = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
+            SolidColorBrush fill_color = PocketPaintApplication.GetInstance().PaintData.FillColorSelected;
             double fill_color_opacity = Convert.ToDouble(fill_color.Color.A);
 
             if (PocketPaintApplication.GetInstance().PaintData.ColorSelected != null)
             {
-                Color selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.BorderColorSelected).Color;
+                Color selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.FillColorSelected).Color;
 
                 changeValuesOfColourSliders(selected_color.R, selected_color.G, selected_color.B, (byte)fill_color_opacity);
                 changeColorOfBtnSelectedColor(selected_color);
@@ -123,7 +133,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             current_color.B = ((SolidColorBrush)BtnSelectedColor.Background).Color.B;
             current_color.A = (byte)(255 * (Convert.ToDouble(tbAlphaValue.Text) / 100));
 
-            PocketPaintApplication.GetInstance().PaintData.BorderColorSelected = new SolidColorBrush(current_color);
+            PocketPaintApplication.GetInstance().PaintData.FillColorSelected = new SolidColorBrush(current_color);
             
             //this.Frame.Navigate(typeof(PaintingAreaView));
             this.Frame.GoBack();

@@ -22,7 +22,14 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public CultureInfo GetCulture()
         {
-            return new CultureInfo(ApplicationLanguages.PrimaryLanguageOverride);
+            if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride))
+            {
+                return new CultureInfo("en");
+            }
+            else
+            {
+                return new CultureInfo(ApplicationLanguages.PrimaryLanguageOverride);
+            }
         }
 
         public void SetCulture(CultureInfo culture)

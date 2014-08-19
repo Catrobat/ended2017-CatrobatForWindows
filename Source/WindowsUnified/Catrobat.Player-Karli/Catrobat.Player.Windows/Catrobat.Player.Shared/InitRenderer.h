@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 //#include "Direct3DBaseRenderer.h"
-#include "Direct3DDeviceResources.h"
+#include "DeviceResources.h"
 #include "SpriteBatch.h"
 #include "SpriteFont.h"
 #include "Project.h"
@@ -11,20 +11,22 @@
 ref class InitRenderer
 {
 internal:
-    InitRenderer(const std::shared_ptr<DX::Direct3DDeviceResources>& direct3DDeviceResources);
-
-	// Direct3DBase methods.
-    //void CreateDeviceDependentResources();
+    InitRenderer(const std::shared_ptr<DX::DeviceResources>& deviceResources);
+    void CreateDeviceIndependentResources();
+    void CreateDeviceDependentResources();
     //void CreateWindowSizeDependentResources();
-    //void ReleaseDeviceDependentResources();
+    void ReleaseDeviceDependentResources();
     void Render();
 
 	// Method for updating time-dependent objects.
 	//void Update(float timeTotal, float timeDelta);
 
 protected private:
+    void CreateInitText();
+    void RenderInitText();
+
     // Cached pointer to device resources.
-    std::shared_ptr<DX::Direct3DDeviceResources>     m_direct3DDeviceResources;
+    std::shared_ptr<DX::DeviceResources>     m_deviceResources;
 
 	bool m_loadingComplete;
 	bool m_startup;
@@ -36,8 +38,14 @@ protected private:
 
 	// Use this scale if you calculate positions on the screen
 	float m_scale;
-
 	void StartUpTasks();
-    
     bool m_initialized;
+
+    // Resources related to text rendering.
+    std::wstring                                    m_text;
+    Microsoft::WRL::ComPtr<IDWriteTextFormat>		m_textFormat;
+    Microsoft::WRL::ComPtr<IDWriteTextLayout>       m_textLayout;
+    DWRITE_TEXT_METRICS	                            m_textMetrics;
+    Microsoft::WRL::ComPtr<ID2D1DrawingStateBlock>  m_stateBlock;
+    Microsoft::WRL::ComPtr<ID2D1SolidColorBrush>    m_whiteBrush;
 };

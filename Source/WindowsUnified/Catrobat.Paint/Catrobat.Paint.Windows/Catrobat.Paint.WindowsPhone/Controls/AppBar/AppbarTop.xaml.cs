@@ -39,7 +39,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
 
                 btnUndo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnUndo_Click;
                 btnRedo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnRedo_Click;
-                btnSelectedColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColBtnSelectedColor_OnClick;
+                btnSelectedColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
                 //btnMoveScreen.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreen_OnClick;
                 ellipseTool_front.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
                 ellipseTool_behind.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
@@ -73,16 +73,22 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                 case ToolType.Brush:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Brush));                  
                     break;
+                case ToolType.Ellipse:
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Ellipse));
+                    break;
                 case ToolType.Eraser:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Eraser));
+                    break;
+                case ToolType.Flip:
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Flip));
+                    break;
+                case ToolType.Line:
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Line));
                     break;
                 case ToolType.Move:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Move));
                     img_behind.ImageSource = new BitmapImage(
                      GetToolImageUri(PocketPaintApplication.GetInstance().ToolWhileMoveTool.GetToolType()));
-                    break;
-                case ToolType.Zoom:
-                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Zoom));
                     break;
                 case ToolType.Pipette:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Pipette));
@@ -90,11 +96,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                 case ToolType.Rotate:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Rotate));
                     break;
-                case ToolType.Line:
-                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Line));
+                case ToolType.Rect:
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Rect));
                     break;
-                case ToolType.Flip:
-                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Flip));
+                case ToolType.Zoom:
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Zoom));
                     break;
                 default:
                     // TODO: BtnMoveScreen.ImageSource = null;
@@ -126,21 +132,24 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             {
                 case ToolType.Brush:
                     return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_brush.png", UriKind.Absolute);
+                case ToolType.Ellipse:
+                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_ellipse.png", UriKind.Absolute);
                 case ToolType.Eraser:
                     return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_eraser.png", UriKind.Absolute);
-                case ToolType.Move:
-                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_move.png", UriKind.Absolute);
-                case ToolType.Zoom:
-                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_zoom.png", UriKind.Absolute);
-                case ToolType.Pipette:
-                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_pipette.png", UriKind.Absolute);
-                case ToolType.Rotate:
-                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_rotate_left.png", UriKind.Absolute);
-                case ToolType.Line:
-                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_straight_line.png", UriKind.Absolute);
                 case ToolType.Flip:
                     return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_flip_horizontal.png", UriKind.Absolute);
-
+                case ToolType.Line:
+                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_straight_line.png", UriKind.Absolute);
+                case ToolType.Move:
+                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_move.png", UriKind.Absolute);
+                case ToolType.Pipette:
+                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_pipette.png", UriKind.Absolute);
+                case ToolType.Rect:
+                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_rectangle.png", UriKind.Absolute);
+                case ToolType.Rotate:
+                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_rotate_left.png", UriKind.Absolute);
+                case ToolType.Zoom:
+                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_zoom.png", UriKind.Absolute);
                 default:
                     return null;
             }
