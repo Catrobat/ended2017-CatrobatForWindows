@@ -166,6 +166,12 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             _imageThumbnailDefaultMaxWidthHeight = maxWidthHeight;
         }
 
+        public void TryCreateThumbnail(string file)
+        {
+            var task = TryCreateThumbnailAsync(file);
+            task.Wait();
+        }
+
         #endregion
 
         #region Async

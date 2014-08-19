@@ -71,6 +71,11 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
                 return false;
         }
 
+        Stream IStorage.OpenFile(string path, StorageFileMode mode, StorageFileAccess access)
+        {
+            return OpenFile(path, mode, access);
+        }
+
         public string[] GetDirectoryNames(string path)
         {
             path = FormatPath(path);
@@ -356,6 +361,12 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
         {
             throw new NotImplementedException();
         }
+
+        public void TryCreateThumbnail(string file)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
 
