@@ -317,9 +317,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             });
         }
 
-        private void ToastNotificationActivatedMessageAction(ToastTag tag)
+        private void ToastNotificationActivatedMessageAction(GenericMessage<ToastTag> message)
         {
-            if (tag == ToastTag.ImportFinished)
+            if (message.Content == ToastTag.ImportFin)
             {
                 ServiceLocator.NavigationService.NavigateTo(this.GetType());
             }
@@ -354,7 +354,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
 
-            Messenger.Default.Register<ToastTag>(this,
+            Messenger.Default.Register<GenericMessage<ToastTag>>(this,
                 ViewModelMessagingToken.ToastNotificationActivated, ToastNotificationActivatedMessageAction);
         }
 

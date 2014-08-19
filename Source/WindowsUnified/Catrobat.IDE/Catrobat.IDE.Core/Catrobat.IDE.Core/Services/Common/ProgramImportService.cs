@@ -285,7 +285,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                     AppResources.Import_ProgramAdded,
                     /*AppResources.Import_ProgramAddedText,*/
                     ToastDisplayDuration.Long,
-                    ToastTag.ImportFinished);
+                    ToastTag.ImportFin);
             }
             Debug.WriteLine("Finished");
         }

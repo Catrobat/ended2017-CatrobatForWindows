@@ -10,7 +10,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     {
         #region Private Members
 
-        private LocalProgramHeader _selectedProgramHeader;
+        private LocalProgramHeader _currentProgramHeader;
         private string _programName;
         private string _programDescription;
         private Program _currentProgram;
@@ -33,17 +33,17 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        public LocalProgramHeader SelectedProgramHeader
+        public LocalProgramHeader CurrentProgramHeader
         {
-            get { return _selectedProgramHeader; }
+            get { return _currentProgramHeader; }
             set
             {
-                if (value == _selectedProgramHeader)
+                if (value == _currentProgramHeader)
                 {
                     return;
                 }
-                _selectedProgramHeader = value;
-                RaisePropertyChanged(() => SelectedProgramHeader);
+                _currentProgramHeader = value;
+                RaisePropertyChanged(() => CurrentProgramHeader);
             }
         }
 
@@ -93,7 +93,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void SaveAction()
         {
-            if (CurrentProgram.LocalProgramHeader == SelectedProgramHeader)
+            if (CurrentProgram.LocalProgramHeader == CurrentProgramHeader)
             {
                 CurrentProgram.LocalProgramHeader.ProjectName = ProgramName;
                 await CurrentProgram.SetProgramNameAndRenameDirectory(ProgramName);
@@ -101,7 +101,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
             else
             {
-                SelectedProgramHeader.ProjectName = ProgramName;
+                CurrentProgramHeader.ProjectName = ProgramName;
                 await CurrentProgram.SetProgramNameAndRenameDirectory(ProgramName);
                 CurrentProgram.Description = ProgramDescription;
                 await CurrentProgram.Save();
@@ -135,7 +135,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void CurrentProgramHeaderChangedMessageAction(GenericMessage<LocalProgramHeader> message)
         {
-            SelectedProgramHeader = message.Content;
+            CurrentProgramHeader = message.Content;
 
             //SelectedProgram = await CatrobatContext.LoadProgramByNameStatic(SelectedProgramHeader.ProgramName);
         }

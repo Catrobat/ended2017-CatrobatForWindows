@@ -20,17 +20,17 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         #region Properties
 
-        private Program _program;
-        private Program Program
+        private Program _currentProgram;
+        public Program CurrentProgram
         {
-            get { return _program; }
-            set
+            get { return _currentProgram; }
+            private set
             {
-                if (ReferenceEquals(_program, value)) return;
-                _program = value;
-                GlobalVariablesSource = Program == null
+                if (ReferenceEquals(_currentProgram, value)) return;
+                _currentProgram = value;
+                GlobalVariablesSource = CurrentProgram == null
                     ? null
-                    : VariableHelper.GetGlobalVariableList(Program);
+                    : VariableHelper.GetGlobalVariableList(CurrentProgram);
             }
         }
 
@@ -42,9 +42,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             {
                 if (ReferenceEquals(_sprite, value)) return;
                 _sprite = value;
-                LocalVariablesSource = Program == null || Sprite == null
+                LocalVariablesSource = CurrentProgram == null || Sprite == null
                     ? null
-                    : VariableHelper.GetLocalVariableList(Program, Sprite);
+                    : VariableHelper.GetLocalVariableList(CurrentProgram, Sprite);
             }
         }
 
@@ -292,7 +292,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         private void CurrentProgramChangedAction(Program program)
         {
-            Program = program;
+            CurrentProgram = program;
         }
 
         private void CurrentSpriteChangedAction(Sprite sprite)

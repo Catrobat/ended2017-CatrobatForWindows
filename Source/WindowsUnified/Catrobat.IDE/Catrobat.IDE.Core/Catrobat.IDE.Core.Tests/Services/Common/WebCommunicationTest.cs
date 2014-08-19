@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
         }
 
 
-        public async Task<Stream> DownloadAsync(string downloadUrl, string projectName)
+        public async Task<Stream> DownloadAsync(string downloadUrl, string projectName, CancellationToken cancellationToken)
         {
             //TODO return a project as stream
             //return await httpResponse.Content.ReadAsStreamAsync();

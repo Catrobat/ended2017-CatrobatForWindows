@@ -161,6 +161,7 @@
     <Compile Include="Tests\ViewModels\Editor\Sounds\SoundNameChooserViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Main\InformationViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Main\ProgramExportViewModelTests.cs" />
+    <Compile Include="Tests\ViewModels\MessagingForViewModelsTests.cs" />
     <Compile Include="Tests\Xml\Converter\XmlFormulaTreeConverterTests.cs" />
     <Compile Include="Tests\Xml\Converter\XmlProjectConverterTests.cs" />
     <Compile Include="Tests\Misc\FileNameGeneratorTests.cs" />

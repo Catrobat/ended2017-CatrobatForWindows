@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core.Services
     // Important do not use enum names with more than 10 characters
     public enum ToastTag
     {
-        ImportFinished,
+        ImportFin,
         Default
     };
 
