@@ -14,7 +14,7 @@
 #include "pch.h"
 #include "PlayerMainComponent.h"
 //#include "XMLParser.h"
-//#include "ProjectDaemon.h"
+#include "ProjectDaemon.h"
 //#include "ScriptHandler.h"
 //#include "WhenScript.h"
 
@@ -37,17 +37,12 @@ namespace Catrobat_Player
     PlayerMainComponent::PlayerMainComponent(const std::shared_ptr<DX::DeviceResources>& deviceResources,
         Windows::UI::Xaml::Controls::CommandBar^ playerAppBar) :
         m_deviceResources(deviceResources),
-        m_playerAppBar(playerAppBar)
+        m_playerAppBar(playerAppBar),
+        m_initialized(false),
+        m_timer(ref new BasicTimer()),
+        m_projectName(L"Whack a mole") // TODO set project name dynamically
     {
-        //      ProjectDaemon::Instance()->ReInit();
-
-        //m_eventController = EventControllerXaml::Create(m_coreWindow, m_swapChainPanel->Dispatcher);
-
-        m_initRenderer = ref new InitRenderer(m_deviceResources);
-        //m_projectRenderer = ref new ProjectRenderer(m_direct3DDeviceResources);
-
-
-
+        Init();
     }
 
     //--------------------------------------------------------------------------------------
@@ -56,13 +51,6 @@ namespace Catrobat_Player
     {
         //m_initialized = false;
     }
-
-    //--------------------------------------------------------------------------------------
-
-    /*void Direct3DBackground::Render()
-    {
-    StartRenderLoop();
-    }*/
 
     //--------------------------------------------------------------------------------------
 
@@ -112,6 +100,40 @@ namespace Catrobat_Player
 
     //--------------------------------------------------------------------------------------
 
+    void PlayerMainComponent::Init()
+    {
+        if (!m_initialized)
+        {
+            // Update timer
+            m_timer->Update();
+
+            ProjectDaemon::Instance()->ReInit();
+            //m_eventController = EventControllerXaml::Create(m_coreWindow, m_swapChainPanel->Dispatcher);
+
+            //ProjectDaemon::Instance()->
+
+            // Initialize Sound
+            SoundManager::Instance()->Initialize();
+
+            // Initialize Init Renderer
+            m_initRenderer = ref new InitRenderer(m_deviceResources);
+
+            // Initialize Project Renderer
+            m_projectRenderer = ref new ProjectRenderer(m_deviceResources);
+            ProjectDaemon::Instance()->SetupRenderer(m_deviceResources->GetD3DDevice(), m_projectRenderer);
+
+            // Load Project
+            ProjectDaemon::Instance()->OpenProject(m_projectName);
+
+            // Restart timer after render has finished initializing
+            m_timer->Reset();
+
+            m_initialized = true;
+        }
+    }
+
+    //--------------------------------------------------------------------------------------
+
     void PlayerMainComponent::Update()
     {
         // TODO implement me
@@ -126,9 +148,6 @@ namespace Catrobat_Player
         //    m_sceneRenderer->Update(m_timer);
         //    m_fpsTextRenderer->Update(m_timer);
         //});
-
-
-
     }
 
     //--------------------------------------------------------------------------------------

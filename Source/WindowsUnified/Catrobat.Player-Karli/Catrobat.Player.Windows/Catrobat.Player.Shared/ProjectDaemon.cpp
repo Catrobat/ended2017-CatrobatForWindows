@@ -59,18 +59,20 @@ Project *ProjectDaemon::GetProject()
 void ProjectDaemon::OpenProject(Platform::String^ projectName)
 {
     if(projectName->IsEmpty())
-    {
+    {  //              XAudio2.lib
         throw new PlayerException("No project name was specified.");
     }
 
     m_files = new vector<Platform::String^>();
-    auto path = Windows::Storage::ApplicationData::Current->LocalFolder->Path + "/Projects/" + projectName;
+    auto path = Windows::Storage::ApplicationData::Current->LocalFolder->Path + "/Local/Projects/" + projectName;
 
     auto openProjectTask = create_task(Windows::Storage::ApplicationData::Current->LocalFolder->GetFolderFromPathAsync(path))
         .then([this, path](task<StorageFolder^> folderResult)
 	{
 		try
 		{
+            OutputDebugString(L"path");
+
 			Platform::String^ filename = Helper::ConvertStringToPlatformString(Constants::Player::xmlFileName);
 			StorageFolder^ folder = folderResult.get();
 
@@ -89,6 +91,8 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
     {
 		try
 		{
+            OutputDebugString(L"storage file");
+
 			StorageFile^ file = fileResult.get();
 			string pathString = Helper::ConvertPlatformStringToString(file->Path);
 			return pathString;
@@ -103,6 +107,8 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 	{
 		try
 		{
+            OutputDebugString(L"xml begin");
+
 			// Create and load XML
 			XMLParser *xml = new XMLParser();
 			string filePath = filePathResult.get();
@@ -115,6 +121,8 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 			m_renderer->Initialize(m_device);
 			m_finishedLoading = true;
 			free(xml);
+
+            OutputDebugString(L"xml end");
 		}
 		catch (Platform::Exception^ e)
 		{
@@ -126,14 +134,18 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 	{
 		try
 		{
+            OutputDebugString(L"before task get");
 			t.get();
+            OutputDebugString(L"after task get");
 		}
 		catch (BaseException *e)
 		{
+            OutputDebugString(L"base exception");
 			this->AddDebug(Helper::ConvertStringToPlatformString(e->GetErrorMessage()));
 		}
         catch (Platform::Exception ^e)
 		{
+            OutputDebugString(L"platform exception");
 			this->AddDebug(e->Message);
 		}
 	});

@@ -16,7 +16,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ProgressRing x:Name="LoadingProject" Grid.Row="0" Grid.Column="0"
+            <ProgressRing x:Name="LoadingProject" Grid.Row="0" Grid.Column="0" Background="Transparent"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
                       Foreground="{StaticResource ActionBrush}"/>

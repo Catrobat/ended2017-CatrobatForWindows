@@ -4,9 +4,9 @@
 #include "DeviceResources.h"
 #include "InitRenderer.h"
 #include "ProjectRenderer.h"
+#include "BasicTimer.h"
+#include "SoundManager.h"
 
-//#include "BasicTimer.h"
-//#include "SoundManager.h"
 //#include "WhenScript.h"
 //#include "EventControllerXaml.h"
 //#include "Direct3DBase.h"
@@ -16,7 +16,8 @@
 namespace Catrobat_Player
 {
 
-    class PlayerMainComponent
+
+    class PlayerMainComponent 
     {
     public:
         PlayerMainComponent(const std::shared_ptr<DX::DeviceResources>& deviceResources,
@@ -34,7 +35,7 @@ namespace Catrobat_Player
         //Windows::Foundation::Size* WindowBounds;
         //Windows::Foundation::Size* NativeResolution;
         //Windows::Foundation::Size* RenderResolution;
-        //   Platform::String^ ProjectName;
+         //property Platform::String^ ProjectName;
 
         //ID3D11Device1* GetDevice() { return safe_cast<ID3D11Device1*>(m_deviceResources->GetD3DDevice()); }
         //ID3D11DeviceContext1* GetContext() { return safe_cast<ID3D11DeviceContext1*>(m_deviceResources->GetD3DDeviceContext()); }
@@ -50,6 +51,7 @@ namespace Catrobat_Player
         //HRESULT Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView);
 
     private:
+        void Init();
         void Update();
         bool Render();
 
@@ -63,10 +65,11 @@ namespace Catrobat_Player
 
 
         //EventController^								m_eventController;
-        //BasicTimer^                                     m_timer;
+        BasicTimer^                                     m_timer;
         //Windows::Foundation::Rect                       m_originalWindowsBounds;
         //bool                                            m_renderingErrorOccured;
-        //   bool                                            m_initialized;
+        bool                                            m_initialized;
+        Platform::String^                               m_projectName;
 
         Concurrency::critical_section                   m_criticalSection;
         Windows::Foundation::IAsyncAction^              m_renderLoopWorker;

@@ -102,8 +102,8 @@ void InitRenderer::Render()
 {
     if (!m_initialized)
 	{
-		//m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_direct3DDeviceResources->GetD3DDevice()));
-		//m_spriteFont = unique_ptr<SpriteFont>(new SpriteFont(m_d3dDevice.Get(), L"italic.spritefont"));
+		m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_deviceResources->GetD3DDeviceContext()));
+		m_spriteFont = unique_ptr<SpriteFont>(new SpriteFont(m_deviceResources->GetD3DDevice(), L"italic.spritefont"));
 		m_initialized = true;
 	}
 
@@ -129,45 +129,45 @@ void InitRenderer::Render()
 
 	// SpriteBatch for Drawing. Call Draw Methods of the Objects here.
 	// ---------------------------------------------------------------------->
-	//m_spriteBatch->Begin();
-	//{
-	//	vector<string> *errors = ProjectDaemon::Instance()->GetErrorList();
-	//	float offset = 100;
-	//	for (unsigned int index = 0; index < errors->size(); index++)
-	//	{
-	//		string error = errors->at(index);
-	//		if (error.length() > 15)
-	//		{
-	//			istringstream iss(error);
-	//			vector<string> tokens;
-	//			string buffer;
-	//			while (iss >> buffer)
-	//			{
-	//				tokens.push_back(buffer);
-	//			}
+	m_spriteBatch->Begin();
+	{
+		vector<string> *errors = ProjectDaemon::Instance()->GetErrorList();
+		float offset = 100;
+		for (unsigned int index = 0; index < errors->size(); index++)
+		{
+			string error = errors->at(index);
+			if (error.length() > 15)
+			{
+				istringstream iss(error);
+				vector<string> tokens;
+				string buffer;
+				while (iss >> buffer)
+				{
+					tokens.push_back(buffer);
+				}
 
-	//			vector<string> lines;
-	//			string line;
-	//			for each (string token in tokens)
-	//			{
-	//				line += " " + token;
-	//				if (line.length() > 15)
-	//				{
-	//					lines.push_back(line);
-	//					line = "";
-	//				}
-	//			}
+				vector<string> lines;
+				string line;
+				for each (string token in tokens)
+				{
+					line += " " + token;
+					if (line.length() > 15)
+					{
+						lines.push_back(line);
+						line = "";
+					}
+				}
 
-	//			for each (string line in lines)
-	//			{
-	//				std::wstring errorString = std::wstring(line.begin(), line.end());
-	//				const wchar_t* cerrorString = errorString.c_str();
-	//				m_spriteFont->DrawString(m_spriteBatch.get(), cerrorString, XMFLOAT2(10, offset += 100), Colors::Black);
-	//			}
-	//		}
-	//	}
-	//}
-	//m_spriteBatch->End();
+				for each (string line in lines)
+				{
+					std::wstring errorString = std::wstring(line.begin(), line.end());
+					const wchar_t* cerrorString = errorString.c_str();
+					m_spriteFont->DrawString(m_spriteBatch.get(), cerrorString, XMFLOAT2(10, offset += 100), Colors::Black);
+				}
+			}
+		}
+	}
+	m_spriteBatch->End();
 	
 	// ---------------------------------------------------------------------->
 }
