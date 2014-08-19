@@ -39,7 +39,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             _onlineProgramHeader = programHeader;
         }
 
-        public async Task<ExtractProgramResult> ExtractProgram()
+        public async Task<ExtractProgramResult> ExtractProgram(CancellationToken taskCancellationToken)
         {
             _extractResult = new ExtractProgramResult { Status = ExtractProgramStatus.Success };
 
@@ -55,7 +55,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                 if (_onlineProgramHeader != null)
                 {
                     _programStream = await Task.Run(() => ServiceLocator.WebCommunicationService.DownloadAsync(
-                        _onlineProgramHeader.DownloadUrl, _onlineProgramHeader.ProjectName));
+                        _onlineProgramHeader.DownloadUrl, _onlineProgramHeader.ProjectName, taskCancellationToken));
                 }
                 //if (_onlineProgramHeader != null)
                 //{
@@ -205,7 +205,7 @@ namespace Catrobat.IDE.WindowsShared.Services
         {
             _cancellationTokenSource = new CancellationTokenSource();
             Debug.WriteLine("Starting with ExtractProgram");
-            var extracionResult = await ServiceLocator.ProgramImportService.ExtractProgram();
+            var extracionResult = await ServiceLocator.ProgramImportService.ExtractProgram(_cancellationTokenSource.Token);
 
             if (extracionResult.Status == ExtractProgramStatus.Error)
             {
@@ -218,9 +218,9 @@ namespace Catrobat.IDE.WindowsShared.Services
             if (_cancellationTokenSource.Token.IsCancellationRequested == true)
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(
-                        "Import aborted",
-                        "Import was aborted by a user-interaction.",
-                        ToastDisplayDuration.Long);  // localize
+                        AppResources.Import_Canceled,
+                        AppResources.Import_CanceledText,
+                        ToastDisplayDuration.Long);
                 return;
                 //_cancellationTokenSource.Token.ThrowIfCancellationRequested();
             }
@@ -265,9 +265,9 @@ namespace Catrobat.IDE.WindowsShared.Services
             if (_cancellationTokenSource.Token.IsCancellationRequested == true)
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(
-                        "Import aborted",
-                        "Import was aborted by a user-interaction.",
-                        ToastDisplayDuration.Long);  // localize
+                        AppResources.Import_Canceled,
+                        AppResources.Import_CanceledText,
+                        ToastDisplayDuration.Long);
                 return;
                 //_cancellationTokenSource.Token.ThrowIfCancellationRequested();
             }

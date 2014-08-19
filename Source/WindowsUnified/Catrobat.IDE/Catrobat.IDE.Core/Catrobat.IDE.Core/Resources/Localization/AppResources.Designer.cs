@@ -2276,6 +2276,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Import aborted ähnelt.
+        /// </summary>
+        public static string Import_Canceled {
+            get {
+                return ResourceManager.GetString("Import_Canceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Import was aborted by a user-interaction. ähnelt.
+        /// </summary>
+        public static string Import_CanceledText {
+            get {
+                return ResourceManager.GetString("Import_CanceledText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die The catrobat file is damaged. ähnelt.
         /// </summary>
         public static string Import_CatrobatDamagedText {
@@ -2832,6 +2850,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_OnlineProgramAuthor {
             get {
                 return ResourceManager.GetString("Main_OnlineProgramAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please wait unit the current download-progess is completed. ähnelt.
+        /// </summary>
+        public static string Main_OnlineProgramDownloadBusy {
+            get {
+                return ResourceManager.GetString("Main_OnlineProgramDownloadBusy", resourceCulture);
             }
         }
         

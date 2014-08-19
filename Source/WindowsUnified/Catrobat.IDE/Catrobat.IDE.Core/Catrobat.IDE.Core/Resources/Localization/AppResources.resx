@@ -1296,4 +1296,13 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_NumberOfSprites" xml:space="preserve">
     <value>Objects</value>
   </data>
+  <data name="Import_Canceled" xml:space="preserve">
+    <value>Import aborted</value>
+  </data>
+  <data name="Import_CanceledText" xml:space="preserve">
+    <value>Import was aborted by a user-interaction.</value>
+  </data>
+  <data name="Main_OnlineProgramDownloadBusy" xml:space="preserve">
+    <value>Please wait unit the current download-progess is completed.</value>
+  </data>
 </root>

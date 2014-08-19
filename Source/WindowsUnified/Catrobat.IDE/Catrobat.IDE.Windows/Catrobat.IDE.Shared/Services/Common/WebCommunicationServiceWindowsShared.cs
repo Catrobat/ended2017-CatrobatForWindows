@@ -90,7 +90,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
 
 
         //old simple downloader
-        public async Task<Stream> DownloadAsync(string downloadUrl, string programName)
+        public async Task<Stream> DownloadAsync(string downloadUrl, string programName, CancellationToken taskCancellationToken)
         {
             using (var httpClient = new HttpClient())
             {
@@ -98,7 +98,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                 try
                 {
                     // trigger to header-read to avoid timeouts
-                    var httpResponse = await httpClient.GetAsync(downloadUrl/*, HttpCompletionOption.ResponseHeadersRead*/);
+                    var httpResponse = await httpClient.GetAsync(downloadUrl/*, HttpCompletionOption.ResponseHeadersRead*/, taskCancellationToken);
                     httpResponse.EnsureSuccessStatusCode();
 
                     return await httpResponse.Content.ReadAsStreamAsync();

@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
+using System.Threading;
 using Catrobat.IDE.Core.CatrobatObjects;
 
 namespace Catrobat.IDE.Core.Services
@@ -10,7 +11,7 @@ namespace Catrobat.IDE.Core.Services
 
         void SetDownloadHeader(OnlineProgramHeader programHeader);
 
-        Task<ExtractProgramResult> ExtractProgram();
+        Task<ExtractProgramResult> ExtractProgram(CancellationToken taskCancellationToken);
 
         Task<CheckProgramResult> CheckProgram();
 

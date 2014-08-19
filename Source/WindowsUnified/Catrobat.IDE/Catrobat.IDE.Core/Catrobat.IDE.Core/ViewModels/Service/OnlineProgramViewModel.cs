@@ -165,9 +165,9 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 if (IsImporting)
                 {
                     ServiceLocator.NotifictionService.ShowMessageBox(
-                        "Wait for other download", 
-                        "Please wait while the current program has finished downloading",
-                        CancelImportCallback,  MessageBoxOptions.Ok); // TODO: localize
+                        AppResources.Main_OnlineProgramLoading,
+                        AppResources.Main_OnlineProgramDownloadBusy,
+                        CancelImportCallback,  MessageBoxOptions.Ok);
                     return;
                 }
 

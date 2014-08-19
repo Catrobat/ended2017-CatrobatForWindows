@@ -1284,4 +1284,13 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   <data name="Main_OnlineProgramLoading" xml:space="preserve">
     <value>herunterladen...</value>
   </data>
+  <data name="Import_Canceled" xml:space="preserve">
+    <value>Import abgebrochen</value>
+  </data>
+  <data name="Import_CanceledText" xml:space="preserve">
+    <value>Importvorgang wurde durch den User-Eingabe abgebrochen.</value>
+  </data>
+  <data name="Main_OnlineProgramDownloadBusy" xml:space="preserve">
+    <value>Bitte warte bis der aktuelle Download abgeschlossen ist.</value>
+  </data>
 </root>
