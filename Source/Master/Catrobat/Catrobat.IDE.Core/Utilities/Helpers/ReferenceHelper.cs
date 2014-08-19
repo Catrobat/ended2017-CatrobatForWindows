@@ -127,7 +127,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                 {
                     userVariableCount++;
                     if (tempUserVariable == userVariable)
-                        return "../../../../../variables/objectVariableList/entry[" + entryCount +
+                        return "../../../../../../../variables/objectVariableList/entry[" + entryCount +
                                "]/list/userVariable[" + userVariableCount + "]";
                 }
             }
@@ -137,7 +137,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             {
                 count++;
                 if (tempUserVariable == userVariable)
-                    return "../../../../../variables/programVariableList/userVariable[" + count + "]";
+                    return "../../../../../../../variables/programVariableList/userVariable[" + count + "]";
             }
 
             return "";
