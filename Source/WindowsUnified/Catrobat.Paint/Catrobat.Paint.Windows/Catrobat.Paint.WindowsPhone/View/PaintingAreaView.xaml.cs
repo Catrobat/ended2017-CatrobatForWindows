@@ -70,8 +70,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             PaintingAreaCanvas.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
             PaintingAreaCanvas.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
             PaintingAreaCanvas.ManipulationStarting += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarting;
-
-            if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Brush || 
+            PaintingAreaCanvas.PointerPressed += PaintingAreaCanvas_PointerEntered;
+           /* if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Brush || 
                 PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Eraser)
             {
                 LayoutRoot.PointerEntered += LayoutRoot_PointerEntered;
@@ -79,7 +79,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             else
             {
                 LayoutRoot.PointerEntered += null;
-            }
+            }*/
             btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
             btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
             btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
@@ -658,7 +658,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         }
 
-        private void LayoutRoot_PointerEntered(object sender, PointerRoutedEventArgs e)
+        private void PaintingAreaCanvas_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             var point = new Point(Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.Y));
 
