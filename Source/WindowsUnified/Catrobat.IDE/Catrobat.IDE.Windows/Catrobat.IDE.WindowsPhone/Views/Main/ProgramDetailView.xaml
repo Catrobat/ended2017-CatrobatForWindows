@@ -196,38 +196,47 @@
 
             <switchPanel:SwitchPanelItem PanelValue="Damaged">
               <StackPanel Orientation="Vertical" Margin="20 40 20 0">
-                <TextBlock Text="Sorry, a problem occurred while loading the program."
+                <TextBlock Text="{Binding Resources.Import_GeneralError, 
+                           Source={StaticResource LocalizedStrings}}"
                            Style="{StaticResource ErrorMessageTextStyle}"/>
-                <TextBlock Text="In case you obtained this program from pocketcode.org please try to download the program again."
-                Style="{StaticResource ErrorMessageTextStyle}"/>
-                <TextBlock Text="Check if a newer version of the app is available, maybe the problem has already been fixed."
+                <TextBlock Text="{Binding Resources.Import_ReloadAdvise, 
+                           Source={StaticResource LocalizedStrings}}"
+                           Style="{StaticResource ErrorMessageTextStyle}"/>
+                <TextBlock Text="{Binding Resources.Import_AppTooOldAdvise, 
+                           Source={StaticResource LocalizedStrings}}"
                            Style="{StaticResource ErrorMessageTextStyle}"/>
               </StackPanel>
             </switchPanel:SwitchPanelItem>
 
             <switchPanel:SwitchPanelItem PanelValue="VersionTooOld">
               <StackPanel Orientation="Vertical" Margin="20 40 20 0">
-                <TextBlock Text="Sorry, the program was created with an newer version of the app."
-                           Style="{StaticResource ErrorMessageTextStyle}"/>
-                <TextBlock Text="Check if a newer version of the app is available."
+                <TextBlock Text="{Binding Resources.Import_ProgramOutdatedText, 
+                           Source={StaticResource LocalizedStrings}}"
+                           Style="{StaticResource ErrorMessageTextStyle}"/> 
+                <TextBlock Text="{Binding Resources.Import_ProgramOutdatedAdvise, 
+                           Source={StaticResource LocalizedStrings}}"
                            Style="{StaticResource ErrorMessageTextStyle}"/>
               </StackPanel>
             </switchPanel:SwitchPanelItem>
 
             <switchPanel:SwitchPanelItem PanelValue="VersionTooNew" Margin="20 40 20 0">
               <StackPanel Orientation="Vertical">
-                <TextBlock Text="Sorry, the program was created with an old version of the app and it cannot be opend with your version of the app."
+                <TextBlock Text="{Binding Resources.Import_AppTooOld, 
+                           Source={StaticResource LocalizedStrings}}"
                            Style="{StaticResource ErrorMessageTextStyle}"/>
-                <TextBlock Text="Please try to open the program with the version that was used to create the program."
+                <TextBlock Text="{Binding Resources.Import_AppTooOldAdvise, 
+                           Source={StaticResource LocalizedStrings}}"
                            Style="{StaticResource ErrorMessageTextStyle}"/>
               </StackPanel>
             </switchPanel:SwitchPanelItem>
 
             <switchPanel:SwitchPanelItem PanelValue="ErrorInThisApp" Margin="20 40 20 0">
               <StackPanel Orientation="Vertical">
-                <TextBlock Text="Sorry, a problem occurred while loading the program."
+                <TextBlock Text="{Binding Resources.Import_GeneralError, 
+                           Source={StaticResource LocalizedStrings}}"
                            Style="{StaticResource ErrorMessageTextStyle}"/>
-                <TextBlock Text="Check if a newer version of the app is available, maybe the problem has already been fixed."
+                <TextBlock Text="{Binding Resources.Import_AppTooOldAdvise, 
+                           Source={StaticResource LocalizedStrings}}"
                            Style="{StaticResource ErrorMessageTextStyle}"/>
               </StackPanel>
             </switchPanel:SwitchPanelItem>

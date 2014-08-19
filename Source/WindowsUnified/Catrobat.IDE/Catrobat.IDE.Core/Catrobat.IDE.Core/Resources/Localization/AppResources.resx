@@ -1240,7 +1240,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>App version too old</value>
   </data>
   <data name="Import_AppTooOldText" xml:space="preserve">
-    <value>The downloaded program requires a newer version of this App.</value>
+    <value>Sorry, the program requires a newer version of this app.</value>
   </data>
   <data name="Import_CatrobatDamagedText" xml:space="preserve">
     <value>The catrobat file is damaged.</value>
@@ -1261,7 +1261,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Program outdated</value>
   </data>
   <data name="Import_ProgramOutdatedText" xml:space="preserve">
-    <value>Program is too old and cannot be added.</value>
+    <value>Sorry, the program-version is outdated and not supported anymore by this app-version.</value>
   </data>
   <data name="Main_ShareWithOtherApp" xml:space="preserve">
     <value>Share wit an app</value>
@@ -1304,5 +1304,17 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Main_OnlineProgramDownloadBusy" xml:space="preserve">
     <value>Please wait unit the current download-progess is completed.</value>
+  </data>
+  <data name="Import_AppTooOldAdvise" xml:space="preserve">
+    <value>Please check if you have the latest version of this app.</value>
+  </data>
+  <data name="Import_GeneralError" xml:space="preserve">
+    <value>Sorry, a problem occurred while loading the program.</value>
+  </data>
+  <data name="Import_ProgramOutdatedAdvise" xml:space="preserve">
+    <value>You can try to open the program with an app-version that was used to create it.</value>
+  </data>
+  <data name="Import_ReloadAdvise" xml:space="preserve">
+    <value>In case you obtained this program from pocketcode.org please try to download the program again.</value>
   </data>
 </root>

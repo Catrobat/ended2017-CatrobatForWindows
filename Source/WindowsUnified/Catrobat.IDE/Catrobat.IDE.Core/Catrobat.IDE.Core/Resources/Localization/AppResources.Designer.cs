@@ -2267,7 +2267,16 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The downloaded program requires a newer version of this App. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please check if you have the latest version of this app. ähnelt.
+        /// </summary>
+        public static string Import_AppTooOldAdvise {
+            get {
+                return ResourceManager.GetString("Import_AppTooOldAdvise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sorry, the program requires a newer version of this app. ähnelt.
         /// </summary>
         public static string Import_AppTooOldText {
             get {
@@ -2299,6 +2308,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Import_CatrobatDamagedText {
             get {
                 return ResourceManager.GetString("Import_CatrobatDamagedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sorry, a problem occurred while loading the program. ähnelt.
+        /// </summary>
+        public static string Import_GeneralError {
+            get {
+                return ResourceManager.GetString("Import_GeneralError", resourceCulture);
             }
         }
         
@@ -2348,11 +2366,29 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Program is too old and cannot be added. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die You can try to open the program with an app-version that was used to create it. ähnelt.
+        /// </summary>
+        public static string Import_ProgramOutdatedAdvise {
+            get {
+                return ResourceManager.GetString("Import_ProgramOutdatedAdvise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sorry, the program-version is outdated and not supported anymore by this app-version. ähnelt.
         /// </summary>
         public static string Import_ProgramOutdatedText {
             get {
                 return ResourceManager.GetString("Import_ProgramOutdatedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die In case you obtained this program from pocketcode.org please try to download the program again. ähnelt.
+        /// </summary>
+        public static string Import_ReloadAdvise {
+            get {
+                return ResourceManager.GetString("Import_ReloadAdvise", resourceCulture);
             }
         }
         
