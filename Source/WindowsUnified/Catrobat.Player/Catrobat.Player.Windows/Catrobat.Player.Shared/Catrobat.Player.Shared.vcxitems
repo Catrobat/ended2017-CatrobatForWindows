@@ -21,8 +21,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml.cpp">
       <DependentUpon>$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml.cpp">
-      <DependentUpon>$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml</DependentUpon>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\PlayerDirectXPage.xaml.cpp">
+      <DependentUpon>$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\PlayerDirectXPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)AccelerometerProvider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)BaseException.cpp" />
@@ -45,8 +45,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)DDSLoader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)DeviceInformation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)DeviceResources.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DBase.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DContentProvider.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DBaseRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)EventController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ExceptionLogger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ForeverBrick.cpp" />
@@ -68,13 +67,13 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ObjectList.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PlaceAtBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PlayerException.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerWindowsPhone8Component.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerMainComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PlaySoundBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PointToBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Project.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectDaemon.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectRenderer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Renderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)InitRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)RepeatBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Script.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ScriptHandler.cpp" />
@@ -103,8 +102,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml.h">
       <DependentUpon>$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\App.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml.h">
-      <DependentUpon>$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml</DependentUpon>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\PlayerDirectXPage.xaml.h">
+      <DependentUpon>$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\PlayerDirectXPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)AccelerometerProvider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BaseException.h" />
@@ -129,8 +128,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)DDSLoader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DeviceInformation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DeviceResources.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DBase.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DContentProvider.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DBaseRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DirectXHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)EventController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ExceptionLogger.h" />
@@ -157,13 +155,13 @@
     </ClCompile>
     <ClInclude Include="$(MSBuildThisFileDirectory)PlaceAtBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PlayerException.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerWindowsPhone8Component.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerMainComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PlaySoundBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PointToBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ProjectDaemon.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ProjectRenderer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Renderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)InitRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)RepeatBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Script.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ScriptHandler.h" />
@@ -198,8 +196,9 @@
       <FileType>Document</FileType>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\Player.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)..\Catrobat.Player.WindowsPhone\PlayerDirectXPage.xaml">
       <SubType>Designer</SubType>
+      <FileType>Document</FileType>
     </Page>
   </ItemGroup>
 </Project>

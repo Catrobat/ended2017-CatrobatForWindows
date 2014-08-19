@@ -95,4 +95,7 @@
   <ItemGroup>
     <Xml Include="StoreManifest.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\italic.spritefont" />
+  </ItemGroup>
 </Project>

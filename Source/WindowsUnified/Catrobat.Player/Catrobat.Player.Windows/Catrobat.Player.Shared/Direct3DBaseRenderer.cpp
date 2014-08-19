@@ -1,21 +1,21 @@
 ﻿#include "pch.h"
-#include "Direct3DBase.h"
+#include "Direct3DBaseRenderer.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
 using namespace Windows::Foundation;
 
-Direct3DBase::Direct3DBase() { }
+Direct3DBaseRenderer::Direct3DBaseRenderer() { }
 
-void Direct3DBase::Initialize(_In_ ID3D11Device1* device)
+void Direct3DBaseRenderer::Initialize(_In_ ID3D11Device1* device)
 {
 	m_d3dDevice = device;
 	CreateDeviceResources();
 }
 
-void Direct3DBase::CreateDeviceResources() { }
+void Direct3DBaseRenderer::CreateDeviceResources() { }
 
-void Direct3DBase::UpdateDevice(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
+void Direct3DBaseRenderer::UpdateDevice(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
 {
 	m_d3dContext = context;
 	m_renderTargetView = renderTargetView;
@@ -62,7 +62,7 @@ void Direct3DBase::UpdateDevice(_In_ ID3D11Device1* device, _In_ ID3D11DeviceCon
 }
 
 // Allocate all memory resources that depend on the window size.
-void Direct3DBase::CreateWindowSizeDependentResources()
+void Direct3DBaseRenderer::CreateWindowSizeDependentResources()
 {
 	// Create a depth stencil view.
 	CD3D11_TEXTURE2D_DESC depthStencilDesc(
@@ -93,7 +93,7 @@ void Direct3DBase::CreateWindowSizeDependentResources()
 		);
 }
 
-void Direct3DBase::UpdateForWindowSizeChange(float width, float height)
+void Direct3DBaseRenderer::UpdateForWindowSizeChange(float width, float height)
 {
 	m_windowBounds.Width  = width;
 	m_windowBounds.Height = height;

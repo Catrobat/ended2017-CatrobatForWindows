@@ -10,8 +10,7 @@
 #endif
 
 #include "App.g.h"
-#include "Player.xaml.h"
-//#include "Test01.xaml.h"
+#include "PlayerDirectXPage.xaml.h"
 
 namespace Catrobat_Player
 {
@@ -41,7 +40,6 @@ namespace Catrobat_Player
             _In_ Windows::UI::Core::WindowActivatedEventArgs^ args
             );
 
-        Player^ m_mainPage;
-		//Test01^ m_mainPage;
+        PlayerDirectXPage^ m_playerDirectXPage;
     };
 }
