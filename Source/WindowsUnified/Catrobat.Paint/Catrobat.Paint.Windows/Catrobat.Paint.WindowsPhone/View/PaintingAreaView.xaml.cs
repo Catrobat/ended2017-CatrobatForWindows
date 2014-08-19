@@ -256,15 +256,23 @@ namespace Catrobat.Paint.WindowsPhone.View
             else if ("barRectangle" == type)
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
+                AppBarButton app_btnReset = new AppBarButton();
 
                 BitmapIcon thickness_icon = new BitmapIcon();
                 thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
                 app_btnBrushThickness.Icon = thickness_icon;
 
+                BitmapIcon reset_icon = new BitmapIcon();
+                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
+                app_btnReset.Icon = reset_icon;
+
+                app_btnReset.Label = "Ausgangsposition";
+
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
+                app_btnReset.Click += app_btn_reset_Click;
 
+                cmdBar.PrimaryCommands.Add(app_btnReset);
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
-
             }
             else if("barFlip" == type)
             {

@@ -107,7 +107,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetDrawingSpace()
         {
-            throw new NotImplementedException();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
         }
     }
 }
