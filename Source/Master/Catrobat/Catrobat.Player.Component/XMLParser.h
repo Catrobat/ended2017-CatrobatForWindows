@@ -79,7 +79,7 @@ private:
 	FormulaTree*				ParseFormulaTree				(xml_node<> *baseNode);
 
 	void						ParseVariableList				(xml_document<> *doc, Project *project);
-	pair<string, UserVariable*>	ParseUserVariable				(xml_node<> *baseNode);
+	pair<string, UserVariable*>	ParseUserVariable				(const xml_node<> *baseNode);
 	xml_node<>*					EvaluateString					(string query, string input, xml_node<> *node);
 	int							EvaluateIndex					(string *input);
 	void						SetPendingVariables				();
