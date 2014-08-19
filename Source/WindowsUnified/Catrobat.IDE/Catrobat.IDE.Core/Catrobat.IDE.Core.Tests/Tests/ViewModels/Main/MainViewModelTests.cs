@@ -17,7 +17,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
     [TestClass]
     public class OnlineProgramViewModelTests
     {
-        private LocalProjectHeader _currentProgramHeader;
+        private LocalProgramHeader _currentProgramHeader;
 
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         [TestMethod, TestCategory("ViewModels.Main")]
         public void OpenProgramCommandActionTest()
         {
-            Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this,
+            Messenger.Default.Register<GenericMessage<LocalProgramHeader>>(this,
                  ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProgramHeaderChangedMessageAction);
             
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -41,7 +41,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
             navigationService.CurrentView = typeof(MainViewModel);
 
-            var localProgramHeader = new LocalProjectHeader
+            var localProgramHeader = new LocalProgramHeader
             {
                 ProjectName = "TestProgram"
             };
@@ -232,7 +232,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 
 
         #region MessageActions
-        private void CurrentProgramHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
+        private void CurrentProgramHeaderChangedMessageAction(GenericMessage<LocalProgramHeader> message)
         {
             _currentProgramHeader = message.Content;
         }

@@ -112,7 +112,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             //await App.SaveContext(CurrentProgram);
 
             Task<JSONStatusResponse> uploadTask =
-                ServiceLocator.WebCommunicationService.UploadProjectAsync(
+                ServiceLocator.WebCommunicationService.UploadProgramAsync(
                 ProgramName, Context.CurrentUserName, Context.CurrentToken,
                 ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 

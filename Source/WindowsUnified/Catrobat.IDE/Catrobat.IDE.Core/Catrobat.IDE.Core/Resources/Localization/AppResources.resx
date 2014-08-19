@@ -1216,7 +1216,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>No description available.</value>
   </data>
   <data name="Editor_ButtonAdd" xml:space="preserve">
-    <value>Add</value>
+    <value>add</value>
   </data>
   <data name="Main_ReportProgram" xml:space="preserve">
     <value>Report program</value>

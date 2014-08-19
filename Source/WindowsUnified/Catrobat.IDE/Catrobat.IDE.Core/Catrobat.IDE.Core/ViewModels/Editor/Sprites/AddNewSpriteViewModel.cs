@@ -10,7 +10,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         #region Private Members
 
         private string _spriteName;
-        private Program _currentProject;
+        private Program _currentProgram;
 
         #endregion
 
@@ -31,15 +31,15 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        public Program CurrentProject
+        public Program CurrentProgram
         {
-            get { return _currentProject; }
+            get { return _currentProgram; }
             private set
             {
-                _currentProject = value;
+                _currentProgram = value;
 
                 ServiceLocator.DispatcherService.RunOnMainThread(() => 
-                    RaisePropertyChanged(() => CurrentProject));
+                    RaisePropertyChanged(() => CurrentProgram));
             }
         }
 
@@ -67,7 +67,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private void SaveAction()
         {
             var sprite = new Sprite { Name = SpriteName };
-            CurrentProject.Sprites.Add(sprite);
+            CurrentProgram.Sprites.Add(sprite);
 
             ResetViewModel();
             base.GoBackAction();
@@ -91,7 +91,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
-            CurrentProject = message.Content;
+            CurrentProgram = message.Content;
         }
 
         #endregion

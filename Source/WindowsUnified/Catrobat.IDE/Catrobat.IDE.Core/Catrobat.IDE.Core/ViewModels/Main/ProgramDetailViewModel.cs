@@ -48,18 +48,18 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        private LocalProjectHeader _selectedProjectHeader;
-        public LocalProjectHeader CurrentProgramHeader
+        private LocalProgramHeader _selectedProgramHeader;
+        public LocalProgramHeader CurrentProgramHeader
         {
             get
             {
-                return _selectedProjectHeader;
+                return _selectedProgramHeader;
             }
             set
             {
-                if (value == _selectedProjectHeader) return;
+                if (value == _selectedProgramHeader) return;
 
-                _selectedProjectHeader = value;
+                _selectedProgramHeader = value;
                 RaisePropertyChanged(() => CurrentProgramHeader);
             }
         }
@@ -197,7 +197,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             await CurrentProgram.Save();
 
-            //var message = new GenericMessage<LocalProjectHeader>(CurrentProgram.LocalProgramHeader);
+            //var message = new GenericMessage<LocalProgramHeader>(CurrentProgram.LocalProgramHeader);
             //Messenger.Default.Send(message, ViewModelMessagingToken.ShareProgramHeaderListener);
 
             ServiceLocator.NavigationService.NavigateTo<ProgramExportViewModel>();
@@ -220,7 +220,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region Message Actions
 
-        private async void CurrentProgramHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
+        private async void CurrentProgramHeaderChangedMessageAction(GenericMessage<LocalProgramHeader> message)
         {
             CurrentProgramHeader = message.Content;
             //CurrentProgram = await CatrobatContext.LoadProjectByNameStatic(CurrentProgramHeader.ProjectName);
@@ -244,7 +244,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                 ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);
 
-            Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this,
+            Messenger.Default.Register<GenericMessage<LocalProgramHeader>>(this,
                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProgramHeaderChangedMessageAction);
         }
 

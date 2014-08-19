@@ -737,7 +737,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Add ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die add ähnelt.
         /// </summary>
         public static string Editor_ButtonAdd {
             get {

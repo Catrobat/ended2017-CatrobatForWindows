@@ -10,7 +10,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     {
         #region Private Members
 
-        private LocalProjectHeader _selectedProgramHeader;
+        private LocalProgramHeader _selectedProgramHeader;
         private string _programName;
         private string _programDescription;
         private Program _currentProgram;
@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        public LocalProjectHeader SelectedProgramHeader
+        public LocalProgramHeader SelectedProgramHeader
         {
             get { return _selectedProgramHeader; }
             set
@@ -133,7 +133,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             CurrentProgram = message.Content;
         }
 
-        private async void CurrentProgramHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
+        private async void CurrentProgramHeaderChangedMessageAction(GenericMessage<LocalProgramHeader> message)
         {
             SelectedProgramHeader = message.Content;
 
@@ -147,7 +147,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this, 
+            Messenger.Default.Register<GenericMessage<LocalProgramHeader>>(this, 
                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProgramHeaderChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Program>>(this, 
                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);

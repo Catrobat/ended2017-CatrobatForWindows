@@ -8,13 +8,13 @@ namespace Catrobat.IDE.Core.Services
     {
         void SetProgramStream(Stream programStream);
 
-        void SetDownloadHeader(OnlineProgramHeader projectHeader);
+        void SetDownloadHeader(OnlineProgramHeader programHeader);
 
         Task<ExtractProgramResult> ExtractProgram();
 
         Task<CheckProgramResult> CheckProgram();
 
-        Task<string> AcceptTempProject();
+        Task<string> AcceptTempProgram();
 
         Task CancelImport();
 

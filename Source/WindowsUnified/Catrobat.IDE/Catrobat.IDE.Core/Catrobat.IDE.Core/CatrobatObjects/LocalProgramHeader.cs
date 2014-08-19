@@ -9,16 +9,16 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 namespace Catrobat.IDE.Core.CatrobatObjects
 {
     [DebuggerDisplay("Name = {Name}")]
-    public class LocalProjectHeader : 
-        IComparable<LocalProjectHeader>, INotifyPropertyChanged
+    public class LocalProgramHeader : 
+        IComparable<LocalProgramHeader>, INotifyPropertyChanged
     {
-        private string _projectName;
+        private string _programName;
         public string ProjectName
         {
-            get { return _projectName; }
+            get { return _programName; }
             set
             {
-                _projectName = value;
+                _programName = value;
                 RaisePropertyChanged(() => ProjectName);
             }
         }
@@ -59,7 +59,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
 
  
 
-        public int CompareTo(LocalProjectHeader other)
+        public int CompareTo(LocalProgramHeader other)
         {
             return System.String.Compare(ProjectName, other.ProjectName, System.StringComparison.Ordinal);
         }

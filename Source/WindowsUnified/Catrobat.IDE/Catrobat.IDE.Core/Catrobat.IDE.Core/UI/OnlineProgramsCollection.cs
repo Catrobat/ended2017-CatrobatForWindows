@@ -95,9 +95,9 @@ namespace Catrobat.IDE.Core.UI
             }
         }
 
-        public void ClearOnlineProjects()
+        public void ClearOnlinePrograms()
         {
-            // cancel previous uncompleted AsyncLoadOnlineProjects-Tasks
+            // cancel previous uncompleted AsyncLoadOnlinePrograms-Tasks
             if (_downloadTaskCancellation != null)
             {
                 _downloadTaskCancellation.Cancel();
@@ -108,7 +108,7 @@ namespace Catrobat.IDE.Core.UI
             IsLoading = false;
         }
 
-        public async Task<OnlineProgramsLoadingResult> LoadMoreOnlineProjectsAsync(int count, CancellationToken c)
+        public async Task<OnlineProgramsLoadingResult> LoadMoreOnlineProgramsAsync(int count, CancellationToken c)
         {
             if (!IsLoadingEnabled)
                 return new OnlineProgramsLoadingResult {ProgramsCount = 0};
@@ -123,17 +123,17 @@ namespace Catrobat.IDE.Core.UI
             if (IsAutoUpdate == true)
                 offset = 0;
 
-            var projects = await
-                ServiceLocator.WebCommunicationService.LoadOnlineProjectsAsync(
+            var programs = await
+                ServiceLocator.WebCommunicationService.LoadOnlineProgramsAsync(
                 _filterText, offset, count, c);
 
             uint newProgramsCount = 0;
 
             lock (_manipulationLock)
             {
-                if (projects != null)
+                if (programs != null)
                 {
-                    foreach (var header in projects)
+                    foreach (var header in programs)
                     {
                         this.Add(header);
                         newProgramsCount ++;
@@ -150,8 +150,8 @@ namespace Catrobat.IDE.Core.UI
 
         public async Task ResetAndLoadFirstPrograms()
         {
-            ClearOnlineProjects();
-            //await LoadMoreOnlineProjectsAsync(int.Parse(ApplicationResources.API_REQUEST_LIMIT), _downloadTaskCancellation.Token);
+            ClearOnlinePrograms();
+            //await LoadMoreOnlineProgramsAsync(int.Parse(ApplicationResources.API_REQUEST_LIMIT), _downloadTaskCancellation.Token);
         }
 
         #region PropertyChanged

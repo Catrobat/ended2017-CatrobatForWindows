@@ -18,14 +18,14 @@
       </Grid.RowDefinitions>
 
       <Grid Margin="10 10 10 0">
-        <TextBlock Text="{Binding CurrentProject.Name}" 
+        <TextBlock Text="{Binding CurrentProgram.Name}" 
                    Style="{ThemeResource TextTitleNormalStyle}">
         </TextBlock>
       </Grid>
 
       <listsViewControls:BindableListView x:Name="ListViewSprites" Grid.Row="1"
             Margin="0" HorizontalAlignment="Center"
-            ItemsSource="{Binding CurrentProject.Sprites}"
+            ItemsSource="{Binding CurrentProgram.Sprites}"
             BindableSelectedItems="{Binding SelectedSprites, Mode=TwoWay}"
             CanReorderItems="False" AllowDrop="True" SelectionMode="None">
         <ListViewBase.ItemTemplate>
@@ -38,7 +38,7 @@
 
       <TextBlock Grid.Row="1"
         Text ="{Binding Resources.Editor_ClickPlusToAddSprite, Source={StaticResource LocalizedStrings}}"
-        Visibility="{Binding CurrentProject.Sprites.Count, 
+        Visibility="{Binding CurrentProgram.Sprites.Count, 
         Converter={StaticResource NativeIntZeroVisibilityConverter}}"
         Style="{ThemeResource TextNormalStyle}"
         TextWrapping="Wrap"

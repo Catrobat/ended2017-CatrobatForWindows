@@ -36,7 +36,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
 
         public event DownloadProgressUpdatedEventHandler DownloadProgressChanged;
 
-        public async Task<List<OnlineProgramHeader>> LoadOnlineProjectsAsync(
+        public async Task<List<OnlineProgramHeader>> LoadOnlineProgramsAsync(
             string filterText, int offset, int count,
             CancellationToken taskCancellationToken)
         {
@@ -66,12 +66,12 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                     httpResponse.EnsureSuccessStatusCode();
 
                     string jsonResult = await httpResponse.Content.ReadAsStringAsync();
-                    OnlineProgramOverview recent_projects = null;
+                    OnlineProgramOverview recentPrograms = null;
 
-                    //List<OnlineProjectOverview> projects = JsonConvert.DeserializeObject<List<OnlineProjectOverview>>(jsonResult);
-                    recent_projects = await Task.Run(() => JsonConvert.DeserializeObject<OnlineProgramOverview>(jsonResult));
+                    //List<OnlineProgramOverview> programs = JsonConvert.DeserializeObject<List<OnlineProgramOverview>>(jsonResult);
+                    recentPrograms = await Task.Run(() => JsonConvert.DeserializeObject<OnlineProgramOverview>(jsonResult));
 
-                    return recent_projects.CatrobatProjects;
+                    return recentPrograms.CatrobatProjects;
                 }
                 catch (HttpRequestException)
                 {
@@ -90,7 +90,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
 
 
         //old simple downloader
-        public async Task<Stream> DownloadAsync(string downloadUrl, string projectName)
+        public async Task<Stream> DownloadAsync(string downloadUrl, string programName)
         {
             using (var httpClient = new HttpClient())
             {
@@ -120,16 +120,16 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
-        public async Task DownloadAsyncAlternativ(string downloadUrl, string projectName)
+        public async Task DownloadAsyncAlternativ(string downloadUrl, string programName)
         {
             InitDownloads();
             downloadUrl = "download/881.catrobat";
-            projectName = "SKYPASCAL";
+            programName = "SKYPASCAL";
             // optionally create a new cancellation token to be able to cancel every download individually
             try
             {
                 Uri downloadSource = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS + downloadUrl);
-                string downloadDestination = Path.Combine(StorageConstants.TempProgramImportZipPath, projectName + ApplicationResources.EXTENSION);
+                string downloadDestination = Path.Combine(StorageConstants.TempProgramImportZipPath, programName + ApplicationResources.EXTENSION);
 
                 StorageFile destinationFile = await GetFileAsync(downloadDestination); // Mehtods copied from StorageWindowsShared
 
@@ -259,7 +259,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
         }
 
 
-        public async Task<JSONStatusResponse> UploadProjectAsync(string projectTitle,
+        public async Task<JSONStatusResponse> UploadProgramAsync(string programTitle,
             string username, string token, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
@@ -276,15 +276,15 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                     try
                     {
                         // TODO check if file exists - do not rely on try-catch
-                        var stream = await storage.OpenFileAsync(Path.Combine(StorageConstants.TempProgramExportZipPath, projectTitle + ApplicationResources.EXTENSION),
+                        var stream = await storage.OpenFileAsync(Path.Combine(StorageConstants.TempProgramExportZipPath, programTitle + ApplicationResources.EXTENSION),
                             StorageFileMode.Open, StorageFileAccess.Read);
                         var memoryStream = new MemoryStream();
                         await stream.CopyToAsync(memoryStream);
 
-                        var projectData = memoryStream.ToArray();
+                        var programData = memoryStream.ToArray();
 
-                        parameters.Add(new KeyValuePair<string, string>(ApplicationResources.API_PARAM_CHECKSUM, UtilTokenHelper.ToHex(MD5Core.GetHash(projectData))));
-                        string sum = UtilTokenHelper.ToHex(MD5Core.GetHash(projectData));
+                        parameters.Add(new KeyValuePair<string, string>(ApplicationResources.API_PARAM_CHECKSUM, UtilTokenHelper.ToHex(MD5Core.GetHash(programData))));
+                        string sum = UtilTokenHelper.ToHex(MD5Core.GetHash(programData));
 
                         // store parameters as MultipartFormDataContent
                         StringContent content = null;
@@ -295,13 +295,13 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                             postParameters.Add(content, String.Format("\"{0}\"", keyValuePair.Key));
                         }
 
-                        ByteArrayContent fileContent = new ByteArrayContent(projectData);
+                        ByteArrayContent fileContent = new ByteArrayContent(programData);
                         //fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
                         //{
-                        //    FileName = projectTitle + ".catrobat"
+                        //    FileName = programTitle + ".catrobat"
                         //};
                         fileContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/zip");
-                        postParameters.Add(fileContent, String.Format("\"{0}\"", ApplicationResources.API_PARAM_UPLOAD), String.Format("\"{0}\"", projectTitle + ApplicationResources.EXTENSION));
+                        postParameters.Add(fileContent, String.Format("\"{0}\"", ApplicationResources.API_PARAM_UPLOAD), String.Format("\"{0}\"", programTitle + ApplicationResources.EXTENSION));
 
                         _uploadCounter++;
                         using (var httpClient = new HttpClient())
@@ -336,10 +336,10 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
         }
 
 
-        public async Task<JSONStatusResponse> ReportAsInappropriateAsync(string projectId, string flagReason, string language = "en")
+        public async Task<JSONStatusResponse> ReportAsInappropriateAsync(string programId, string flagReason, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_PROJECTID, ((projectId == null) ? "" : projectId)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_PROJECTID, ((programId == null) ? "" : programId)),
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_FLAG_REASON, ((flagReason == null) ? "" : flagReason)),
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
             };

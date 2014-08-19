@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
             var localSettings = new LocalSettings
             {
                 CurrentLanguageString = "de-DE",
-                CurrentProjectName = "DefaultProject",
+                CurrentProgramName = "DefaultProject",
                 CurrentThemeIndex = 1,
                 CurrentToken = "tokentoken",
                 CurrentUserEmail = "e-mail@gmail.com"
@@ -44,7 +44,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
 
             var newLocalSetting = await ServiceLocator.ContextService.RestoreLocalSettings();
             Assert.AreEqual(localSettings.CurrentLanguageString, newLocalSetting.CurrentLanguageString);
-            Assert.AreEqual(localSettings.CurrentProjectName, newLocalSetting.CurrentProjectName);
+            Assert.AreEqual(localSettings.CurrentProgramName, newLocalSetting.CurrentProgramName);
             Assert.AreEqual(localSettings.CurrentThemeIndex, newLocalSetting.CurrentThemeIndex);
             Assert.AreEqual(localSettings.CurrentToken, newLocalSetting.CurrentToken);
             Assert.AreEqual(localSettings.CurrentUserEmail, newLocalSetting.CurrentUserEmail);

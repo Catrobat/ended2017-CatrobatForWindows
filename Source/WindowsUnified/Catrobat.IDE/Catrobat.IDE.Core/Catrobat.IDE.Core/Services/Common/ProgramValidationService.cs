@@ -66,7 +66,7 @@ namespace Catrobat.IDE.Core.Services.Common
             catch (Exception)
             {
                 checkResult.State = ProgramState.Damaged;
-                checkResult.ProjectHeader = null;
+                checkResult.ProgramHeader = null;
                 checkResult.Program = null;
                 return checkResult;
             }
@@ -78,7 +78,7 @@ namespace Catrobat.IDE.Core.Services.Common
             catch (Exception)
             {
                 checkResult.State = ProgramState.ErrorInThisApp;
-                checkResult.ProjectHeader = null;
+                checkResult.ProgramHeader = null;
                 checkResult.Program = null;
                 return checkResult;
             }
@@ -86,7 +86,7 @@ namespace Catrobat.IDE.Core.Services.Common
             if(programName == null)
                 programName = XmlProgramHelper.GetProgramName(converterResult.Xml);
 
-            checkResult.ProjectHeader = new LocalProjectHeader
+            checkResult.ProgramHeader = new LocalProgramHeader
             {
                 Screenshot = projectScreenshot,
                 ProjectName = programName,

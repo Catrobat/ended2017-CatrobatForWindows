@@ -31,7 +31,7 @@ namespace Catrobat.IDE.Core
             }
         }
 
-        public ObservableCollection<LocalProjectHeader> LocalProjects { get; private set; }
+        public ObservableCollection<LocalProgramHeader> LocalProjects { get; private set; }
         public OnlineProgramsCollection OnlineProjects { get; private set; }
 
         #endregion
@@ -45,7 +45,7 @@ namespace Catrobat.IDE.Core
             LocalSettings = new LocalSettings
             {
                 CurrentLanguageString = "en",
-                CurrentProjectName = "DefaultProject",
+                CurrentProgramName = "DefaultProject",
                 CurrentThemeIndex = 0,
                 CurrentToken = "DummyToken",
                 CurrentUserEmail = "dummy@somedomain.com"
@@ -105,21 +105,21 @@ namespace Catrobat.IDE.Core
 
         private void InitLocalProjects()
         {
-            LocalProjects = new ObservableCollection<LocalProjectHeader>();
+            LocalProjects = new ObservableCollection<LocalProgramHeader>();
 
             // TODO: add sample images
 
-            var project1 = new LocalProjectHeader
+            var project1 = new LocalProgramHeader
             {
                 ProjectName = "Local Project 2 with very very very very very long name"
             };
 
-            var project2 = new LocalProjectHeader
+            var project2 = new LocalProgramHeader
             {
                 ProjectName = "Local Project 3"
             };
 
-            var project3 = new LocalProjectHeader
+            var project3 = new LocalProgramHeader
             {
                 ProjectName = "Local Project 4"
             };

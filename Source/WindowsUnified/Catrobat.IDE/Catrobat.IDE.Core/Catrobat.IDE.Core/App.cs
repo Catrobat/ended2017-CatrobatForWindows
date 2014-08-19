@@ -60,7 +60,7 @@ namespace Catrobat.IDE.Core
 
                 var defaultProject = await ServiceLocator.ContextService.
                     RestoreDefaultProgram(AppResources.Main_DefaultProgramName);
-                _context.LocalSettings.CurrentProjectName = defaultProject.Name;
+                _context.LocalSettings.CurrentProgramName = defaultProject.Name;
                 await defaultProject.Save();
             }
 
@@ -110,7 +110,7 @@ namespace Catrobat.IDE.Core
                 _context.LocalSettings.CurrentLanguageString = settingsViewModel.CurrentCulture.Name;
             }
 
-            _context.LocalSettings.CurrentProjectName = currentProject.Name;
+            _context.LocalSettings.CurrentProgramName = currentProject.Name;
 
             // allow viewmodels to save settings
             Messenger.Default.Send(new GenericMessage<LocalSettings>(_context.LocalSettings), ViewModelMessagingToken.SaveSettings);

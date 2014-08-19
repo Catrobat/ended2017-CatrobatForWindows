@@ -12,15 +12,15 @@ namespace Catrobat.IDE.WindowsPhone.Controls
     {
         #region Dependancy properties
 
-        public LocalProjectHeader Project
+        public LocalProgramHeader Project
         {
-            get { return (LocalProjectHeader)GetValue(ProjectProperty); }
+            get { return (LocalProgramHeader)GetValue(ProjectProperty); }
             set { SetValue(ProjectProperty, value); }
         }
 
         public static readonly DependencyProperty ProjectProperty =
             DependencyProperty.Register("Project",
-            typeof(LocalProjectHeader),
+            typeof(LocalProgramHeader),
             typeof(LocalProgramControl),
             new PropertyMetadata(null, ProjectChanged));
 
@@ -44,7 +44,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 
         private void NotValidButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var projectHeader = (LocalProjectHeader) DataContext;
+            var projectHeader = (LocalProgramHeader) DataContext;
 
             
             //switch (projectHeader.ValidityState)

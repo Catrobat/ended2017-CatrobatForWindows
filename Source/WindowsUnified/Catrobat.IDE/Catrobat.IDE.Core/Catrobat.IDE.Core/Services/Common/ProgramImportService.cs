@@ -24,8 +24,8 @@ namespace Catrobat.IDE.WindowsShared.Services
         private Stream _programStream;
         private ExtractProgramResult _extractResult;
         private CheckProgramResult _checkResult;
-        private OnlineProgramHeader _onlineProjectHeader;
-        private XmlProgram _convertedProject;
+        private OnlineProgramHeader _onlineProgramHeader;
+        private XmlProgram _convertedProgram;
         private string _programName;
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -34,9 +34,9 @@ namespace Catrobat.IDE.WindowsShared.Services
             _programStream = programStream;
         }
 
-        public void SetDownloadHeader(OnlineProgramHeader projectHeader)
+        public void SetDownloadHeader(OnlineProgramHeader programHeader)
         {
-            _onlineProjectHeader = projectHeader;
+            _onlineProgramHeader = programHeader;
         }
 
         public async Task<ExtractProgramResult> ExtractProgram()
@@ -45,26 +45,26 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             try
             {
-                if (_programStream == null && _onlineProjectHeader == null)
+                if (_programStream == null && _onlineProgramHeader == null)
                     throw new Exception(
-                        "SetProgramStream or SetDownloadHeader have to be called before calling StartImportProject.");
+                        "SetProgramStream or SetDownloadHeader have to be called before calling StartImportProgram.");
 
-                if (_programStream == null && _onlineProjectHeader == null)
+                if (_programStream == null && _onlineProgramHeader == null)
                     throw new Exception("SetProgramStream and SetDownloadHeader cannot be used together.");
 
-                if (_onlineProjectHeader != null)
+                if (_onlineProgramHeader != null)
                 {
                     _programStream = await Task.Run(() => ServiceLocator.WebCommunicationService.DownloadAsync(
-                        _onlineProjectHeader.DownloadUrl, _onlineProjectHeader.ProjectName));
+                        _onlineProgramHeader.DownloadUrl, _onlineProgramHeader.ProjectName));
                 }
-                //if (_onlineProjectHeader != null)
+                //if (_onlineProgramHeader != null)
                 //{
                 //    await Task.Run(() => ServiceLocator.WebCommunicationService.DownloadAsyncAlternativ(
-                //        _onlineProjectHeader.DownloadUrl, _onlineProjectHeader.ProjectName));
+                //        _onlineProgramHeader.DownloadUrl, _onlineProgramHeader.ProjectName));
                 //}
                 //using (var storage = StorageSystem.GetStorage())
                 //{
-                //    var stream = await storage.OpenFileAsync(Path.Combine(StorageConstants.TempProgramImportZipPath, _onlineProjectHeader.ProjectName + ".catrobat"),
+                //    var stream = await storage.OpenFileAsync(Path.Combine(StorageConstants.TempProgramImportZipPath, _onlineProgramHeader.ProjectName + ".catrobat"),
                 //            StorageFileMode.Open, StorageFileAccess.Read); // TODO move to resources
                 //    await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
                 //       stream, StorageConstants.TempProgramImportPath);
@@ -95,11 +95,11 @@ namespace Catrobat.IDE.WindowsShared.Services
 
 
             //_checkResult = new CheckProgramImportResult();
-            //PortableImage projectScreenshot = null;
+            //PortableImage programScreenshot = null;
 
             //using (var storage = StorageSystem.GetStorage())
             //{
-            //    projectScreenshot =
+            //    programScreenshot =
             //        await storage.LoadImageAsync(Path.Combine(
             //        StorageConstants.TempProgramImportPath, 
             //        StorageConstants.ProgramManualScreenshotPath)) ??
@@ -108,11 +108,11 @@ namespace Catrobat.IDE.WindowsShared.Services
             //        StorageConstants.ProgramAutomaticScreenshotPath));
             //}
 
-            //var projectCodePath = Path.Combine(
+            //var programCodePath = Path.Combine(
             //    StorageConstants.TempProgramImportPath, StorageConstants.ProgramCodePath);
 
             //var converterResult = await CatrobatVersionConverter.
-            //    ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion);
+            //    ConvertToXmlVersion(programCodePath, Constants.TargetIDEVersion);
 
             //if (converterResult.Error != CatrobatVersionConverter.VersionConverterStatus.NoError)
             //{
@@ -133,22 +133,22 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             //try
             //{
-            //    _convertedProject = new XmlProgram(converterResult.Xml);
+            //    _convertedProgram = new XmlProgram(converterResult.Xml);
             //}
             //catch (Exception)
             //{
             //    _checkResult.Status = ProgramImportStatus.Damaged;
-            //    _checkResult.ProjectHeader = null;
+            //    _checkResult.ProgramHeader = null;
             //    return _checkResult;
             //}
 
-            //_programName = _onlineProjectHeader != null ? 
-            //    _onlineProjectHeader.ProjectName : 
+            //_programName = _onlineProgramHeader != null ? 
+            //    _onlineProgramHeader.ProjectName : 
             //    XmlProgramHelper.GetProgramName(converterResult.Xml);
 
-            //_checkResult.ProjectHeader = new LocalProjectHeader
+            //_checkResult.ProjectHeader = new LocalProgramHeader
             //{
-            //    Screenshot = projectScreenshot,
+            //    Screenshot = programScreenshot,
             //    ProjectName = _programName
             //};
 
@@ -156,15 +156,15 @@ namespace Catrobat.IDE.WindowsShared.Services
             //return _checkResult;
         }
 
-        public async Task<string> AcceptTempProject()
+        public async Task<string> AcceptTempProgram()
         {
             var uniqueProgramName = await ServiceLocator.ContextService.
                 FindUniqueProgramName(_programName);
 
-            Debug.WriteLine("Starting with _convertedProject.Save in AcceptTempProject");
-            if (_convertedProject != null) // if previour conversion was OK
+            Debug.WriteLine("Starting with _convertedProgram.Save in AcceptTempProgram");
+            if (_convertedProgram != null) // if previour conversion was OK
             {
-                await _convertedProject.Save(Path.Combine(
+                await _convertedProgram.Save(Path.Combine(
                     StorageConstants.TempProgramImportPath, StorageConstants.ProgramCodePath));
             }
 
@@ -175,9 +175,9 @@ namespace Catrobat.IDE.WindowsShared.Services
                 uniqueProgramName);
 
             if (_checkResult != null)
-                _checkResult.ProjectHeader.ProjectName = renameResult.NewProjectName;
+                _checkResult.ProgramHeader.ProjectName = renameResult.NewProjectName;
 
-            Debug.WriteLine("Starting with storage.MoveDirectoryAsyn in AcceptTempProject");
+            Debug.WriteLine("Starting with storage.MoveDirectoryAsyn in AcceptTempProgram");
             using (var storage = StorageSystem.GetStorage())
             {
                 var newPath = Path.Combine(StorageConstants.ProgramsPath,
@@ -185,7 +185,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                 await storage.MoveDirectoryAsync(StorageConstants.TempProgramImportPath,
                     newPath);
             }
-            Debug.WriteLine("Starting with CreateThumbnailsForNewProgram in AcceptTempProject");
+            Debug.WriteLine("Starting with CreateThumbnailsForNewProgram in AcceptTempProgram");
             await ServiceLocator.ContextService.
                 CreateThumbnailsForNewProgram(uniqueProgramName);
 
@@ -226,13 +226,13 @@ namespace Catrobat.IDE.WindowsShared.Services
             }
             Debug.WriteLine("Starting with CheckProgram");
             var validateResult = await ServiceLocator.ProgramImportService.CheckProgram();
-            _programName = validateResult.ProjectHeader.ProjectName;
-            var acceptProject = true;
+            _programName = validateResult.ProgramHeader.ProjectName;
+            var acceptProgram = true;
 
             switch (validateResult.State)
             {
                 case ProgramState.Valid:
-                    acceptProject = true;
+                    acceptProgram = true;
                     break;
                 case ProgramState.Damaged:
                     ServiceLocator.NotifictionService.ShowToastNotification(
@@ -240,7 +240,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                         AppResources.Import_ProgramDamagedText,
                         ToastDisplayDuration.Long);
 
-                    acceptProject = false;
+                    acceptProgram = false;
                     break;
                 case ProgramState.VersionTooOld:
                     ServiceLocator.NotifictionService.ShowToastNotification(
@@ -248,7 +248,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                         AppResources.Import_ProgramOutdatedText,
                         ToastDisplayDuration.Long);
 
-                    acceptProject = false;
+                    acceptProgram = false;
                     break;
                 case ProgramState.VersionTooNew:
                     ServiceLocator.NotifictionService.ShowToastNotification(
@@ -256,7 +256,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                         AppResources.Import_AppTooOldText,
                         ToastDisplayDuration.Long);
 
-                    acceptProject = true;
+                    acceptProgram = true;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -272,12 +272,12 @@ namespace Catrobat.IDE.WindowsShared.Services
                 //_cancellationTokenSource.Token.ThrowIfCancellationRequested();
             }
 
-            Debug.WriteLine("Starting with AcceptTempProject");
-            if (acceptProject)
+            Debug.WriteLine("Starting with AcceptTempProgram");
+            if (acceptProgram)
             {
-                await ServiceLocator.ProgramImportService.AcceptTempProject();
-                var localProjectsChangedMessage = new MessageBase();
-                Messenger.Default.Send(localProjectsChangedMessage,
+                await ServiceLocator.ProgramImportService.AcceptTempProgram();
+                var localProgramsChangedMessage = new MessageBase();
+                Messenger.Default.Send(localProgramsChangedMessage,
                     ViewModelMessagingToken.LocalProgramsChangedListener);
 
                 ServiceLocator.NotifictionService.ShowToastNotification(

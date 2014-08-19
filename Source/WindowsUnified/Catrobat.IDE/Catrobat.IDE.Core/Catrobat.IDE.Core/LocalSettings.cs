@@ -8,7 +8,7 @@ namespace Catrobat.IDE.Core
     {
         public bool IsInDevelopingMode { get; set; }
 
-        public string CurrentProjectName { get; set; }
+        public string CurrentProgramName { get; set; }
 
         public string CurrentLanguageString { get; set; }
 
