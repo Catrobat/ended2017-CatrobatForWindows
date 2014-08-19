@@ -153,6 +153,10 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         #endregion
 
         #region CommandCanExecute
+        private bool CommandsCanExecute()
+        {
+            return IsValid;
+        }
 
         #endregion
 
@@ -208,14 +212,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             ServiceLocator.NavigationService.NavigateTo<ProgramSettingsViewModel>();
         }
-
-
-        private bool CommandsCanExecute()
-        {
-            return IsValid;
-        }
-
-
         #endregion
 
         #region Message Actions

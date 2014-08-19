@@ -281,8 +281,9 @@ namespace Catrobat.IDE.WindowsShared.Services
                     ViewModelMessagingToken.LocalProgramsChangedListener);
 
                 ServiceLocator.NotifictionService.ShowToastNotification(
+                    "",
                     AppResources.Import_ProgramAdded,
-                    AppResources.Import_ProgramAddedText,
+                    /*AppResources.Import_ProgramAddedText,*/
                     ToastDisplayDuration.Long,
                     ToastTag.ImportFinished);
             }

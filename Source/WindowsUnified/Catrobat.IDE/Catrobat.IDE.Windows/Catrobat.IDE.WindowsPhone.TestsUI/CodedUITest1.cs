@@ -22,7 +22,7 @@ namespace Catrobat.IDE.WindowsPhone.TestsUI
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public void NavigateToLocalProjectHubSectionViaAllHubSectionsUITest()
+        public void NavigateToLocalProgramHubSectionViaAllHubSectionsUITest()
         {
             XamlWindow myXamlWindow = XamlWindow.Launch("{45908950-905F-4A90-867A-03DDC82B656B}:App:45908950-905f-4a90-867a-03ddc82b656b_bcp11qa1rfadr!App");
             var mainHub = this.UIMap.UIPocketCodeIDEWindow.UIMainHubHub;
@@ -34,7 +34,7 @@ namespace Catrobat.IDE.WindowsPhone.TestsUI
         }
 
         [TestMethod, TestCategory("ExcludeGated")]
-        public void NavigateToOnlineProjectHubSectionUITest()
+        public void NavigateToOnlineProgramHubSectionUITest()
         {
             XamlWindow myXamlWindow = XamlWindow.Launch("{45908950-905F-4A90-867A-03DDC82B656B}:App:45908950-905f-4a90-867a-03ddc82b656b_bcp11qa1rfadr!App");
             var mainHub = this.UIMap.UIPocketCodeIDEWindow.UIMainHubHub;

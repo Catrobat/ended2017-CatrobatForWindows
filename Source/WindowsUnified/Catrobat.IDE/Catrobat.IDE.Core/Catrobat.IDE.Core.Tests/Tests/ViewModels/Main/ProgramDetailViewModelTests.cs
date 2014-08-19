@@ -9,6 +9,7 @@ using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.CatrobatObjects;
 using System.Globalization;
 
 namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
@@ -24,15 +25,37 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Lazy);
         }
 
+        [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
+        public void NavigateToTest()
+        {
+            Assert.AreEqual(0, "test not implemented");
+        }
+
         [TestMethod, TestCategory("ViewModels.Main")]
-        public void EditCurrentProjectActionTest()
+        public void EditCurrentProgramActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
             navigationService.CurrentView = typeof(ProgramDetailViewModel);
 
-            var viewModel = new ProgramDetailViewModel();
+            var program = new Program
+            {
+                Name = "TestProgram"
+            };
+            var programHeader = new LocalProgramHeader
+            {
+                ProjectName = "TestProgram"
+            };
+            var viewModel = new ProgramDetailViewModel
+            {
+                CurrentProgram = program
+            };
+
+            var messageContext = new GenericMessage<LocalProgramHeader>(programHeader);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProgramHeaderChangedListener);
+
+            viewModel.NavigateTo();
             viewModel.EditCurrentProgramCommand.Execute(null);
 
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
@@ -86,7 +109,23 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
             navigationService.CurrentView = typeof(ProgramDetailViewModel);
 
-            var viewModel = new ProgramDetailViewModel();
+            var program = new Program
+            {
+                Name = "TestProgram"
+            };
+            var programHeader = new LocalProgramHeader
+            {
+                ProjectName = "TestProgram"
+            };
+            var viewModel = new ProgramDetailViewModel
+            {
+                CurrentProgram = program
+            };
+
+            var messageContext = new GenericMessage<LocalProgramHeader>(programHeader);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProgramHeaderChangedListener);
+
+            viewModel.NavigateTo();
             viewModel.RenameProgramCommand.Execute(null);
 
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);

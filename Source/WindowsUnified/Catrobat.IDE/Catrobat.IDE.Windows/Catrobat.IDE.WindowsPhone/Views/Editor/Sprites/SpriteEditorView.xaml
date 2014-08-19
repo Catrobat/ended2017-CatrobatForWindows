@@ -17,9 +17,10 @@
       <RowDefinition/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
-    <!--<soundControls:SoundPlayButtonGroup x:Name="PlayPauseButtonGroupSounds"
-      Command="{Binding SoundsPlayStateChangedCommand}"
-      Program="{Binding CurrentProgram}" />-->
+    <soundControls:SoundPlayButtonGroup x:Name="PlayPauseButtonGroupSounds"
+      Program="{Binding CurrentProgram}" />
+      <!--Command="{Binding SoundsPlayStateChangedCommand}"-->
+      
 
 
     <Pivot Name="PivotMain" Grid.Row="1" Margin="0 -57 0 0"
