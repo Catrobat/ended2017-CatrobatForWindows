@@ -120,8 +120,9 @@ namespace Catrobat.IDE.WindowsPhone
             {
                 Core.App.SetNativeApp(Application.Current.Resources["App"]
                     as AppWindowsShared);
-                await Core.App.Initialize();
                 ServiceLocator.Register(new DispatcherServiceWindowsShared(Dispatcher));
+                await Core.App.Initialize();
+                //ServiceLocator.Register(new DispatcherServiceWindowsShared(Dispatcher));
 
                 //var width = ServiceLocator.SystemInformationService.ScreenWidth; // preload width
                 //var height = ServiceLocator.SystemInformationService.ScreenHeight; // preload height

@@ -284,7 +284,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void LocalProgramsChangedMessageAction(MessageBase message)
         {
-            await UpdateLocalPrograms();
+            //await UpdateLocalPrograms();
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                UpdateLocalPrograms();
+            });
         }
 
         private void DownloadProgramStartedMessageAction(GenericMessage<string> message)
@@ -533,12 +537,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     }
                 }
 
-                programsToAdd.Sort();
+                //programsToAdd.Sort();
 
-                foreach (var program in programsToAdd)
-                {
-                    _localPrograms.Insert(0, program);
-                }
+
+                //foreach (var program in programsToAdd)
+                //{
+                //    _localPrograms.Insert(0, program);
+                //}
             }
         }
     }

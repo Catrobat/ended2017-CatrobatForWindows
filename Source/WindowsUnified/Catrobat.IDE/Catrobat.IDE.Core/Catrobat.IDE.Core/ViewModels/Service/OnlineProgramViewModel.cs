@@ -183,11 +183,15 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     ServiceLocator.NavigationService.NavigateBack<OnlineProgramViewModel>());
 
                 ServiceLocator.ProgramImportService.SetDownloadHeader(programHeader);
-                await ServiceLocator.ProgramImportService.TryImportWithStatusNotifications();
+                await Task.Run(() => ServiceLocator.ProgramImportService.TryImportWithStatusNotifications()).ConfigureAwait(false);
+                //await ServiceLocator.ProgramImportService.TryImportWithStatusNotifications();
             }
             finally
             {
-                lock (_importLock) { IsImporting = false; }
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    lock (_importLock) { IsImporting = false; }
+                });
 
             }
         }
