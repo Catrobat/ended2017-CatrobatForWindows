@@ -3,10 +3,10 @@
 #include "DirectXHelper.h"
 
 // Helper class that initializes DirectX APIs for 3D rendering.
-ref class Direct3DBase abstract
+ref class Direct3DBaseRenderer abstract
 {
 internal:
-	Direct3DBase();
+    Direct3DBaseRenderer();
 
 	virtual void Initialize(_In_ ID3D11Device1* device);
 	virtual void CreateDeviceResources();

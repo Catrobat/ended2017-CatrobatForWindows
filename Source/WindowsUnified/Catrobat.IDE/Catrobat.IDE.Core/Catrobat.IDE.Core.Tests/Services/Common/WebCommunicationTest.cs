@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
     {
         public int UploadsPending { get; set; }
 
-        public async Task<List<OnlineProgramHeader>> LoadOnlineProjectsAsync(
+        public async Task<List<OnlineProgramHeader>> LoadOnlineProgramsAsync(
             string filterText, int offset, int count,
             CancellationToken taskCancellationToken)
         {
@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
         }
 
 
-        public async Task<Stream> DownloadAsync(string downloadUrl, string projectName)
+        public async Task<Stream> DownloadAsync(string downloadUrl, string projectName, CancellationToken cancellationToken)
         {
             //TODO return a project as stream
             //return await httpResponse.Content.ReadAsStreamAsync();
@@ -62,7 +62,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
             return statusResponse;
         }
 
-        public async Task<JSONStatusResponse> UploadProjectAsync(string projectTitle, 
+        public async Task<JSONStatusResponse> UploadProgramAsync(string projectTitle, 
             string username, string token, string language = "en")
         {
             JSONStatusResponse statusResponse = new JSONStatusResponse

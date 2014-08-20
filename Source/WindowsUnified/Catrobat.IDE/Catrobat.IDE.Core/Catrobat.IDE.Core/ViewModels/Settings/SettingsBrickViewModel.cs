@@ -12,6 +12,16 @@ namespace Catrobat.IDE.Core.ViewModels.Settings
 
         #region Properties
 
+        public CatrobatContextBase Context
+        {
+            get { return _context; }
+            set
+            {
+                _context = value;
+                RaisePropertyChanged(() => Context);
+            }
+        }
+
         public bool IsNxtBricksEnabled
         {
             get { return _context.LocalSettings.IsNxtBricksEnabled; }

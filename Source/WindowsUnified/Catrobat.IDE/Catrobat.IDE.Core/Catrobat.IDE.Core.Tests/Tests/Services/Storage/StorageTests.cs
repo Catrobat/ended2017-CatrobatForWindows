@@ -246,12 +246,12 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Storage
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                var settingsWrite = new LocalSettings { CurrentProjectName = "ProjectName" };
+                var settingsWrite = new LocalSettings { CurrentProgramName = "ProjectName" };
 
                 await storage.WriteSerializableObjectAsync("testobject", settingsWrite);
                 var settingsRead = (LocalSettings)storage.ReadSerializableObject("testobject", settingsWrite.GetType());
 
-                Assert.AreEqual("ProjectName", settingsRead.CurrentProjectName);
+                Assert.AreEqual("ProjectName", settingsRead.CurrentProgramName);
             }
         }
     }

@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private string _deleteProgramName;
         private string _copyProgramName;
         private Program _currentProgram;
-        private ObservableCollection<LocalProjectHeader> _localProjects;
+        private ObservableCollection<LocalProgramHeader> _localPrograms;
         private CatrobatContextBase _context;
         private OnlineProgramsCollection _onlinePrograms;
         private OnlineProgramHeader _selectedOnlineProgram;
@@ -55,7 +55,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 if (Context is CatrobatContextDesign)
                 {
                     var designContext = (CatrobatContextDesign)_context;
-                    LocalProjects = designContext.LocalProjects;
+                    LocalPrograms = designContext.LocalProjects;
                     OnlinePrograms = designContext.OnlineProjects;
                     CurrentProgram = designContext.CurrentProject;
                 }
@@ -82,16 +82,16 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
 
         private bool first = true;
-        public ObservableCollection<LocalProjectHeader> LocalProjects
+        public ObservableCollection<LocalProgramHeader> LocalPrograms
         {
             get
             {
-                return _localProjects;
+                return _localPrograms;
             }
             set
             {
-                _localProjects = value;
-                RaisePropertyChanged(() => LocalProjects);
+                _localPrograms = value;
+                RaisePropertyChanged(() => LocalPrograms);
             }
         }
 
@@ -183,31 +183,31 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         #region Actions
 
-        private void OpenProgramCommandAction(LocalProjectHeader project)
+        private void OpenProgramCommandAction(LocalProgramHeader program)
         {
-            var message = new GenericMessage<LocalProjectHeader>(project);
+            var message = new GenericMessage<LocalProgramHeader>(program);
             Messenger.Default.Send(message,
                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener);
 
             ServiceLocator.NavigationService.NavigateTo<ProgramDetailViewModel>();
         }
 
-        private void DeleteLocalProgramAction(string projectName)
+        private void DeleteLocalProgramAction(string programName)
         {
-            _deleteProgramName = projectName;
+            _deleteProgramName = programName;
 
             ServiceLocator.NotifictionService.ShowMessageBox(
                 AppResources.Main_MainDeleteProgramDialogTitle,
-                String.Format(AppResources.Main_MainDeleteProgramDialogMessage, projectName),
+                String.Format(AppResources.Main_MainDeleteProgramDialogMessage, programName),
                 DeleteProgramMessageCallback, MessageBoxOptions.OkCancel);
         }
 
-        private void CopyLocalProgramAction(string projectName)
+        private void CopyLocalProgramAction(string programName)
         {
-            _copyProgramName = projectName;
+            _copyProgramName = programName;
 
             ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_MainCopyProgramDialogTitle,
-                String.Format(AppResources.Main_MainCopyProgramDialogMessage, projectName), CopyProgramMessageCallback, MessageBoxOptions.OkCancel);
+                String.Format(AppResources.Main_MainCopyProgramDialogMessage, programName), CopyProgramMessageCallback, MessageBoxOptions.OkCancel);
         }
 
         private void CreateNewProgramAction()
@@ -304,7 +304,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             Context = message.Content;
             if (Context is CatrobatContextDesign)
             {
-                LocalProjects = (Context as CatrobatContextDesign).LocalProjects;
+                LocalPrograms = (Context as CatrobatContextDesign).LocalProjects;
                 OnlinePrograms = (Context as CatrobatContextDesign).OnlineProjects;
             }
         }
@@ -317,9 +317,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             });
         }
 
-        private void ToastNotificationActivatedMessageAction(ToastTag tag)
+        private void ToastNotificationActivatedMessageAction(GenericMessage<ToastTag> message)
         {
-            if (tag == ToastTag.ImportFinished)
+            if (message.Content == ToastTag.ImportFin)
             {
                 ServiceLocator.NavigationService.NavigateTo(this.GetType());
             }
@@ -329,7 +329,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public MainViewModel()
         {
-            OpenProgramCommand = new RelayCommand<LocalProjectHeader>(OpenProgramCommandAction);
+            OpenProgramCommand = new RelayCommand<LocalProgramHeader>(OpenProgramCommandAction);
             DeleteLocalProgramCommand = new RelayCommand<string>(DeleteLocalProgramAction);
             CopyLocalProgramCommand = new RelayCommand<string>(CopyLocalProgramAction);
             OnlineProgramTapCommand = new RelayCommand<OnlineProgramHeader>(OnlineProgramTapAction);
@@ -354,7 +354,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
 
-            Messenger.Default.Register<ToastTag>(this,
+            Messenger.Default.Register<GenericMessage<ToastTag>>(this,
                 ViewModelMessagingToken.ToastNotificationActivated, ToastNotificationActivatedMessageAction);
         }
 
@@ -371,7 +371,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 {
                     deleteProgramName = _deleteProgramName;
 
-                    if (_localProjects.All(program =>
+                    if (_localPrograms.All(program =>
                         program.ProjectName != deleteProgramName))
                         return;
 
@@ -389,8 +389,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                 if (CurrentProgram != null && CurrentProgram.Name == deleteProgramName)
                 {
-                    var projectChangedMessage = new GenericMessage<Program>(null);
-                    Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProgramChangedListener);
+                    var programChangedMessage = new GenericMessage<Program>(null);
+                    Messenger.Default.Send(programChangedMessage, ViewModelMessagingToken.CurrentProgramChangedListener);
                 }
 
                 using (var storage = StorageSystem.GetStorage())
@@ -465,81 +465,81 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             if (IsInDesignMode) return;
 
-            if (_localProjects == null)
+            if (_localPrograms == null)
             {
-                _localProjects = new ObservableCollection<LocalProjectHeader>();
+                _localPrograms = new ObservableCollection<LocalProgramHeader>();
             }
 
-            //_localProjects.Clear();
+            //_localPrograms.Clear();
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var projectNames = await storage.GetDirectoryNamesAsync(StorageConstants.ProgramsPath);
+                var programNames = await storage.GetDirectoryNamesAsync(StorageConstants.ProgramsPath);
 
-                //var projects = new List<ProgramDummyHeader>();
+                //var programs = new List<ProgramDummyHeader>();
 
-                var projectsToRemove = new List<LocalProjectHeader>();
+                var programsToRemove = new List<LocalProgramHeader>();
 
-                foreach (var header in _localProjects)
+                foreach (var header in _localPrograms)
                 {
                     var found = false;
-                    foreach (string projectName in projectNames)
-                        if (header.ProjectName == projectName)
+                    foreach (string programName in programNames)
+                        if (header.ProjectName == programName)
                             found = true;
 
                     if (!found)
-                        projectsToRemove.Add(header);
+                        programsToRemove.Add(header);
                 }
 
                 //foreach (var header in _localProjects)
                 //{
-                //    if (header.ProjectName == CurrentProject.ProjectDummyHeader.ProjectName)
-                //        projectsToRemove.Add(header);
+                //    if (header.ProjectName == CurrentProgram.ProjectDummyHeader.ProjectName)
+                //        programsToRemove.Add(header);
                 //}
 
-                foreach (var project in projectsToRemove)
+                foreach (var program in programsToRemove)
                 {
-                    _localProjects.Remove(project);
+                    _localPrograms.Remove(program);
                 }
 
 
-                var projectsToAdd = new List<LocalProjectHeader>();
+                var programsToAdd = new List<LocalProgramHeader>();
 
-                foreach (string projectName in projectNames)
+                foreach (string programName in programNames)
                 {
                     var exists = false;
 
-                    foreach (var header in _localProjects)
+                    foreach (var header in _localPrograms)
                     {
-                        if (header.ProjectName == projectName)
+                        if (header.ProjectName == programName)
                             exists = true;
                     }
 
                     if (!exists)
                     {
                         var manualScreenshotPath = Path.Combine(
-                            StorageConstants.ProgramsPath, projectName, StorageConstants.ProgramManualScreenshotPath);
+                            StorageConstants.ProgramsPath, programName, StorageConstants.ProgramManualScreenshotPath);
                         var automaticProjectScreenshotPath = Path.Combine(
-                            StorageConstants.ProgramsPath, projectName, StorageConstants.ProgramAutomaticScreenshotPath);
+                            StorageConstants.ProgramsPath, programName, StorageConstants.ProgramAutomaticScreenshotPath);
 
-                        var projectScreenshot = new PortableImage();
-                        projectScreenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);
+                        var programScreenshot = new PortableImage();
+                        programScreenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);
 
-                        var projectHeader = new LocalProjectHeader
+                        var programHeader = new LocalProgramHeader
                         {
-                            ProjectName = projectName,
-                            Screenshot = projectScreenshot
+                            ProjectName = programName,
+                            Screenshot = programScreenshot
                         };
 
-                        _localProjects.Insert(0, projectHeader);
+                        _localPrograms.Insert(0, programHeader);
                     }
                 }
 
-                projectsToAdd.Sort();
+                programsToAdd.Sort();
 
-                foreach (var project in projectsToAdd)
+                foreach (var program in programsToAdd)
                 {
-                    _localProjects.Insert(0, project);
+                    _localPrograms.Insert(0, program);
                 }
             }
         }

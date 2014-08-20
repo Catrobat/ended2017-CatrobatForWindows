@@ -11,13 +11,15 @@ using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.Core.ViewModels.Settings;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Tests.SampleData;
+using System;
+using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 {
     [TestClass]
     public class OnlineProgramViewModelTests
     {
-        private LocalProjectHeader _currentProgramHeader;
+        private LocalProgramHeader _currentProgramHeader;
 
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
@@ -33,7 +35,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         [TestMethod, TestCategory("ViewModels.Main")]
         public void OpenProgramCommandActionTest()
         {
-            Messenger.Default.Register<GenericMessage<LocalProjectHeader>>(this,
+            Messenger.Default.Register<GenericMessage<LocalProgramHeader>>(this,
                  ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProgramHeaderChangedMessageAction);
             
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -41,7 +43,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
             navigationService.CurrentView = typeof(MainViewModel);
 
-            var localProgramHeader = new LocalProjectHeader
+            var localProgramHeader = new LocalProgramHeader
             {
                 ProjectName = "TestProgram"
             };
@@ -176,42 +178,42 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Main")]
         public void ShowMessagesActionDownloadMessageTest()
         {
-            // TODO issue with portable-Image
-            Assert.AreEqual(0, "issue with portable-Image");
             var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
             notificationService.SentMessageBoxes = 0;
             notificationService.SentToastNotifications = 0;
 
             var viewModel = new MainViewModel();
-            var messageContext = new MessageBase();
+            string programName = "TestProgram";
+            var messageContext = new GenericMessage<string>(programName);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.DownloadProgramStartedListener);
 
-            //viewModel.ShowMessagesCommand.Execute(null);
+            viewModel.ShowMessagesCommand.Execute(null);
 
             Assert.AreEqual(0, notificationService.SentMessageBoxes);
             Assert.AreEqual(1, notificationService.SentToastNotifications);
+            Assert.AreEqual(String.Format(AppResources.Main_DownloadQueueMessage, programName), notificationService.LastNotificationMessage);
         }
 
         [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
         public void ShowMessagesActionUploadMessageTest()
         {
-            // TODO issue with portable-Image
-            Assert.AreEqual(0, "issue with portable-Image");
             var notificationService = (NotificationServiceTest)ServiceLocator.NotifictionService;
             notificationService.SentMessageBoxes = 0;
             notificationService.SentToastNotifications = 0;
 
             var viewModel = new MainViewModel();
-            var messageContext = new MessageBase();
+            string programName = "TestProgram";
+            var messageContext = new GenericMessage<string>(programName);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.UploadProgramStartedListener);
 
-            //viewModel.ShowMessagesCommand.Execute(null);
+            viewModel.ShowMessagesCommand.Execute(null);
 
             Assert.AreEqual(0, notificationService.SentMessageBoxes);
             Assert.AreEqual(1, notificationService.SentToastNotifications);
+            Assert.AreEqual(String.Format(AppResources.Main_UploadQueueMessage, programName), notificationService.LastNotificationMessage);
         }
 
         [TestMethod, TestCategory("ViewModels.Main")]
@@ -232,7 +234,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 
 
         #region MessageActions
-        private void CurrentProgramHeaderChangedMessageAction(GenericMessage<LocalProjectHeader> message)
+        private void CurrentProgramHeaderChangedMessageAction(GenericMessage<LocalProgramHeader> message)
         {
             _currentProgramHeader = message.Content;
         }

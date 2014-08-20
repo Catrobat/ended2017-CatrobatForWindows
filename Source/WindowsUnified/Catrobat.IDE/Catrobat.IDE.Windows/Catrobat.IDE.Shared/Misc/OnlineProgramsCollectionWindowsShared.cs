@@ -19,12 +19,12 @@ namespace Catrobat.IDE.WindowsShared.Misc
 
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
         {
-            return AsyncInfo.Run((c) => LoadMoreOnlineProjectsPrivateAsync((int)count, c));
+            return AsyncInfo.Run((c) => LoadMoreOnlineProgramsPrivateAsync((int)count, c));
         }
 
-        private async Task<LoadMoreItemsResult> LoadMoreOnlineProjectsPrivateAsync(int count, CancellationToken c)
+        private async Task<LoadMoreItemsResult> LoadMoreOnlineProgramsPrivateAsync(int count, CancellationToken c)
         {
-            var result = await this.LoadMoreOnlineProjectsAsync((int)count, c);
+            var result = await this.LoadMoreOnlineProgramsAsync((int)count, c);
             return new LoadMoreItemsResult {Count = result.ProgramsCount};
         }
 

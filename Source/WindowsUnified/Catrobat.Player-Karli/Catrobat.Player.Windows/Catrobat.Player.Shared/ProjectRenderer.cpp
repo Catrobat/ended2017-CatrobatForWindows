@@ -4,15 +4,19 @@
 #include "PlayerException.h"
 
 #include <exception>
-ProjectRenderer::ProjectRenderer()
+
+using namespace DirectX;
+
+//--------------------------------------------------------------------------------------
+
+ProjectRenderer::ProjectRenderer(const std::shared_ptr<DX::DeviceResources>& deviceResources) :
+    m_Initialized(false),
+    m_deviceResources(deviceResources)
 {
-    m_Initialized = false;
+       
 }
 
-//ProjectRenderer::~ProjectRenderer()
-//{
-//    m_Initialized = false;
-//}
+//--------------------------------------------------------------------------------------
 
 void ProjectRenderer::CreateDeviceResources() 
 {	
@@ -21,10 +25,14 @@ void ProjectRenderer::CreateDeviceResources()
 	//ProjectDaemon::Instance()->GetProject()->LoadTextures(m_d3dDevice.Get());
 }
 
+//--------------------------------------------------------------------------------------
+
 void ProjectRenderer::CreateWindowSizeDependentResources()
 {
 	//Direct3DBase::CreateWindowSizeDependentResources();
 }
+
+//--------------------------------------------------------------------------------------
 
 void ProjectRenderer::Render()
 {
@@ -70,9 +78,13 @@ void ProjectRenderer::Render()
 	//// ---------------------------------------------------------------------->
 }
 
+//--------------------------------------------------------------------------------------
+
 void ProjectRenderer::Update(float timeTotal, float timeDelta)
 {
 }
+
+//--------------------------------------------------------------------------------------
 
 void ProjectRenderer::StartUpTasks()
 {

@@ -3,7 +3,10 @@
 //#include "DDSLoader.h"
 //#include "Interpreter.h"
 //#include "XMLParserFatalException.h"
-//#include "PlayerException.h"
+
+//#include "ScriptHandler.h"
+//#include "WhenScript.h"
+//#include "XMLParser.h"
 //
 //#include <windows.system.threading.h>
 //#include <exception>
@@ -13,12 +16,8 @@
 
 #include "pch.h"
 #include "PlayerMainComponent.h"
-//#include "XMLParser.h"
 #include "ProjectDaemon.h"
-//#include "ScriptHandler.h"
-//#include "WhenScript.h"
-
-//using namespace Catrobat_Player;
+#include "PlayerException.h"
 
 using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
@@ -49,7 +48,7 @@ namespace Catrobat_Player
 
     PlayerMainComponent::~PlayerMainComponent()
     {
-        //m_initialized = false;
+        m_initialized = false;
     }
 
     //--------------------------------------------------------------------------------------
@@ -119,11 +118,12 @@ namespace Catrobat_Player
             m_initRenderer = ref new InitRenderer(m_deviceResources);
 
             // Initialize Project Renderer
+            m_renderingErrorOccured = false;
             m_projectRenderer = ref new ProjectRenderer(m_deviceResources);
             ProjectDaemon::Instance()->SetupRenderer(m_deviceResources->GetD3DDevice(), m_projectRenderer);
 
             // Load Project
-            ProjectDaemon::Instance()->OpenProject(m_projectName);
+            //ProjectDaemon::Instance()->OpenProject(m_projectName);     // TODO fix loading project issue!!
 
             // Restart timer after render has finished initializing
             m_timer->Reset();
@@ -162,9 +162,51 @@ namespace Catrobat_Player
             return false;
         }*/
 
-        // Render the scene objects.
-        m_initRenderer->Render();
-        //m_projectRenderer->Render();
+        if (!ProjectDaemon::Instance()->FinishedLoading() || m_renderingErrorOccured)
+        {
+            // Render Loading Screen
+            //m_renderer->UpdateDevice(device, context, renderTargetView);
+            m_initRenderer->Render();
+        }
+        else
+        {
+            // Render Project
+            try
+            {
+                //m_projectRenderer->UpdateDevice(device, context, renderTargetView);
+            }
+            catch (PlayerException *e)
+            {
+                m_renderingErrorOccured = true;
+                ProjectDaemon::Instance()->AddDebug(L"Error Updating Device.");
+                return false;
+            }
+            catch (Platform::Exception^ e)
+            {
+                m_renderingErrorOccured = true;
+                ProjectDaemon::Instance()->AddDebug(L"Error Updating Device.");
+                return false;
+            }
+
+            try
+            {
+                m_projectRenderer->Render();
+            }
+            catch (PlayerException *e)
+            {
+                m_renderingErrorOccured = true;
+                ProjectDaemon::Instance()->AddDebug(L"Rendering not possible.");
+                return false;
+            }
+            catch (Platform::Exception^ e)
+            {
+                m_renderingErrorOccured = true;
+                ProjectDaemon::Instance()->AddDebug(L"Rendering not possible.");
+                return false;
+            }
+        }
+
+        //RequestAdditionalFrame();  --> remove this call?
 
         return true;
     }

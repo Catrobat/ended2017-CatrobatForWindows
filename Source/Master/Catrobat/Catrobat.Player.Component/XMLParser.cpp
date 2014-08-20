@@ -333,18 +333,18 @@ Project* XMLParser::ParseProjectHeader(xml_document<> *doc)
 
 void XMLParser::ParseObjectList(xml_document<> *doc, ObjectList *objectList)
 {
-    xml_node<> *objectListNode = doc->first_node()->first_node(Constants::XMLParser::Object::ObjectList.c_str());
+	auto objectListNode = doc->first_node()->first_node(Constants::XMLParser::Object::ObjectList.c_str());
 
     if (!objectListNode)
     {
         return;
     }
 
-    xml_node<> *node = objectListNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    while (node)
-    {
-        // TODO: Check if necessary
-        xml_attribute<> *objectReference = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
+	auto node = objectListNode->first_node(Constants::XMLParser::Object::Object.c_str());
+	while (node)
+	{
+		// TODO: Check if necessary
+		auto objectReference = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
 
         if (objectReference)
         {
@@ -370,14 +370,14 @@ void XMLParser::ParseObjectList(xml_document<> *doc, ObjectList *objectList)
 
 Object *XMLParser::ParseObject(xml_node<> *baseNode)
 {
-    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Object::Name.c_str());
+	auto node = baseNode->first_node(Constants::XMLParser::Object::Name.c_str());
 
-    if (!node)
-    {
-        return NULL;
-    }
+	if (!node)
+	{
+		return nullptr;
+	}
 
-    Object *object = new Object(node->value());
+	auto object = new Object(node->value());
 
     node = baseNode->first_node();
     while (node)
@@ -465,9 +465,9 @@ Look *XMLParser::ParseLook(xml_node<> *baseNode)
 
 Script *XMLParser::ParseStartScript(xml_node<> *baseNode, Object *object)
 {
-    StartScript *script = new StartScript(object);
-    ParseBrickList(baseNode, script);
-    return script;
+	auto script = new StartScript(object);
+	ParseBrickList(baseNode, script);
+	return script;
 }
 
 Script *XMLParser::ParseBroadcastScript(xml_node<> *baseNode, Object *object)
@@ -486,15 +486,15 @@ Script *XMLParser::ParseBroadcastScript(xml_node<> *baseNode, Object *object)
 
 Script *XMLParser::ParseWhenScript(xml_node<> *baseNode, Object *object)
 {
-    xml_node<> *actionNode = baseNode->first_node(Constants::XMLParser::Object::Action.c_str());
+	auto actionNode = baseNode->first_node(Constants::XMLParser::Object::Action.c_str());
 
     if (!actionNode)
     {
         throw new XMLParserException("<whenScript><action></whenScript> element missing.");
     }
 
-    WhenScript *script = new WhenScript(actionNode->value(), object);
-    ParseBrickList(baseNode, script);
+	auto script = new WhenScript(actionNode->value(), object);
+	ParseBrickList(baseNode, script);
 
     return script;
 }
@@ -1152,7 +1152,7 @@ Brick *XMLParser::ParsePlaySoundBrick(xml_node<> *baseNode, Script *script)
         throw new XMLParserException("<playSoundBrick><sound></playSoundBrick> element missing.");
     }
 
-    xml_node<> *node = soundInfoNode->first_node(Constants::XMLParser::Brick::FileName.c_str());
+	xml_node<> *node = soundInfoNode->first_node(Constants::XMLParser::Brick::FileName.c_str());
 
     if (!node)
     {
@@ -1174,15 +1174,15 @@ Brick *XMLParser::ParsePlaySoundBrick(xml_node<> *baseNode, Script *script)
 
 Brick *XMLParser::ParseSetVariableBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
+	auto node = baseNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
 
     if (!node)
     {
         throw new XMLParserException("<setVariableBrick><userVariable></setVariableBrick> element missing.");
     }
 
-    xml_node<> *variableNode = node->first_node(Constants::XMLParser::Formula::Name.c_str());
-    string name;
+	auto variableNode = node->first_node(Constants::XMLParser::Formula::Name.c_str());
+	string name;
 
     if (variableNode)
     {
@@ -1197,10 +1197,10 @@ Brick *XMLParser::ParseSetVariableBrick(xml_node<> *baseNode, Script *script)
             throw new XMLParserException("<setVariableBrick><userVariable><reference></userVariable></setVariableBrick> element missing.");
         }
 
-        string reference = referenceAttribute->value();
-        reference = reference + "/";
-        xml_node<> *referencedNode = EvaluateString("/", reference, node); 
-        variableNode = referencedNode->first_node(Constants::XMLParser::Formula::Name.c_str());
+		string reference = referenceAttribute->value();
+		reference = reference + "/";
+		auto referencedNode = EvaluateString("/", reference, node);
+		variableNode = referencedNode->first_node(Constants::XMLParser::Formula::Name.c_str());
 
         if (!variableNode)
         {
@@ -1211,8 +1211,8 @@ Brick *XMLParser::ParseSetVariableBrick(xml_node<> *baseNode, Script *script)
         name = variableNode->value();
     }
 
-    FormulaTree *variableFormula = NULL;
-    node = baseNode->first_node(Constants::XMLParser::Formula::VariableFormula.c_str());
+	FormulaTree *variableFormula = nullptr;
+	node = baseNode->first_node(Constants::XMLParser::Formula::VariableFormula.c_str());
 
     if (!node)
     {
@@ -1379,149 +1379,147 @@ time_t XMLParser::ParseDateTime(string input)
 
 void XMLParser::ParseVariableList(xml_document<> *doc, Project *project)
 {
-    //TODO: error handling
-    try
-    {
-        xml_node<> *baseNode = doc->first_node()->first_node(Constants::XMLParser::Formula::Variables.c_str());
-
-        if (baseNode)
-        {
-            xml_node<> *variableListNode = baseNode->first_node(Constants::XMLParser::Formula::ObjectVariableList.c_str());
-
-            if(variableListNode)
-            {
-                xml_node<> *node = variableListNode->first_node(Constants::XMLParser::Formula::Entry.c_str());
-
-                while (node)
-                {
-                    xml_node<> *objectReferenceNode = node->first_node(Constants::XMLParser::Object::Object.c_str());
-
-                    if (objectReferenceNode)
-                    {
-                        xml_attribute<> *objectReferenceAttribute = objectReferenceNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
-
-                        if (objectReferenceAttribute)
-                        {
-                            string reference = objectReferenceAttribute->value();
-                            reference = reference + "/";
-                            xml_node<> *objectNode = EvaluateString("/", reference, objectReferenceNode);
-
-                            if (objectNode)
-                            {
-                                xml_node<> *nameNode = objectNode->first_node(Constants::XMLParser::Formula::Name.c_str());
-
-                                if (nameNode)
-                                {
-                                    Object *object = project->GetObjectList()->GetObject(nameNode->value());
-                                    xml_node<> *listNode = node->first_node(Constants::XMLParser::Formula::List.c_str());
-
-                                    if (listNode)
-                                    {
-                                        listNode = listNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
-
-                                        while (listNode)
-                                        {
-                                            object->AddVariable(ParseUserVariable(listNode));
-                                            listNode = listNode->next_sibling(Constants::XMLParser::Formula::UserVariable.c_str());
-                                        }
-
-                                        node = node->next_sibling(Constants::XMLParser::Formula::Entry.c_str());
-                                    }
-
-                                    variableListNode = baseNode->first_node(Constants::XMLParser::Formula::ProgramVariableList.c_str());
-
-                                    if (variableListNode)
-                                    {
-                                        node = variableListNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
-
-                                        while (node)
-                                        {
-                                            pair<string, UserVariable*> variable = ParseUserVariable(node);
-
-                                            if(variable.first != "invalid")
-                                            {
-                                                m_project->AddVariable(variable);
-                                            }
-
-                                            node = node->next_sibling(Constants::XMLParser::Formula::UserVariable.c_str());
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else //No variableListNode
-            {
-                throw new XMLParserException("No <objectVariableList> entry present in code.xml"); 
-            }
-        }
-        else//No baseNode
-        {
-            throw new XMLParserException("No <variables> entry present in code.xml"); 
-        }
-    }
-    catch(Platform::Exception^ ex)
-    {
-        throw new XMLParserFatalException(&ex, "Error in ParseVariableList.");
-    }
+	try
+	{
+		auto baseNode = doc->first_node()->first_node(Constants::XMLParser::Formula::Variables.c_str());
+		if (!baseNode)
+		{
+			throw new XMLParserException("No <variables> entry present in code.xml");
+		}
+		ParseGlobalVariables(project, baseNode);
+		ParseObjectVariables(project, baseNode);
+	}
+	catch (...)
+	{
+		//TODO: errorhandling
+	}
 }
 
-pair<string, UserVariable*> XMLParser::ParseUserVariable(xml_node<> *baseNode)
+pair<string, UserVariable*> XMLParser::ParseUserVariable(const xml_node<> *baseNode)
 {
-    xml_node<> *referencedNode = baseNode;
-    xml_attribute<> *referenceAttribute = baseNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
-    string name;
-    UserVariable *variable;
+	auto name = baseNode->value();
+	auto variable = new UserVariable(name, "");
+	return pair<string, UserVariable*>(name, variable);
+}
 
-    if(referenceAttribute)
-    {
-        string reference = referenceAttribute->value();
 
-        xml_node<> *evaluatedReferenceNode = EvaluateString("/", reference, referencedNode);
-        evaluatedReferenceNode = evaluatedReferenceNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
+void XMLParser::ParseGlobalVariables(Project *project, const xml_node<> *baseNode)
+{
+	auto globalListNode = baseNode->first_node(Constants::XMLParser::Formula::ProgramVariableList.c_str());
+	if (!globalListNode)
+	{
+		throw new XMLParserException("No <objectVariableList> entry present in code.xml");
+	}
+	if (globalListNode) //global variables
+	{
+		auto node = globalListNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
+		while (node)
+		{
+			auto nameNode = node->first_node(Constants::XMLParser::Object::Name.c_str());
 
-        xml_node<> *variableNode = evaluatedReferenceNode->first_node(Constants::XMLParser::Formula::Name.c_str());
-        name = variableNode->value();
-        variableNode = evaluatedReferenceNode->first_node(Constants::XMLParser::Formula::Value.c_str());
-        string value = "";
+			if (nameNode)
+			{
+				project->AddVariable(ParseUserVariable(nameNode));
+				node = node->next_sibling(Constants::XMLParser::Formula::UserVariable.c_str());
+			}
+		}
+	}
+}
 
-        if (variableNode)
-        {
-            value = variableNode->value();
-        }
+void XMLParser::ParseObjectVariables(Project *project, const xml_node<> *baseNode)
+{
+	auto variableListNode = baseNode->first_node(Constants::XMLParser::Formula::ObjectVariableList.c_str());
 
-        variable = new UserVariable(name, "");
-    }
-    else
-    {
-        name = "invalid";
-        //throw new XMLParserFatalException("Error parsing user variable");
-    }
+	if (variableListNode) //local variables
+	{
+		auto entryNode = variableListNode->first_node(Constants::XMLParser::Formula::Entry.c_str());
+		while (entryNode)
+		{
+			auto objectReferenceNode = entryNode->first_node(Constants::XMLParser::Object::Object.c_str());
+			if (!objectReferenceNode)
+			{
+				throw new XMLParserException("objectReferenceNode not found in XML.");
+			}
+			auto referenceAttribute = objectReferenceNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
+			if (!referenceAttribute)
+			{
+				throw new XMLParserException("reference attribute not found in XML.");
+			}
+			string objectPath = referenceAttribute->value();
+			objectPath += "/";
+			auto objectNode = EvaluateString("/", objectPath, objectReferenceNode);
+			if (!objectNode)
+			{
+				throw new XMLParserException("object not found in XML.");
+			}
+			auto nameNode = objectNode->first_node(Constants::XMLParser::Formula::Name.c_str());
+			if (!nameNode)
+			{
+				throw new XMLParserException("name node not found in XML.");
+			}
+			auto objectName = project->GetObjectList()->GetObject(nameNode->value());
+			if (!objectName)
+			{
+				throw new XMLParserException("object name not found in XML.");
+			}
+			auto listNode = entryNode->first_node(Constants::XMLParser::Formula::List.c_str());
+			if (!listNode)
+			{
+				throw new XMLParserException("list node not found in XML.");
+			}
 
-    return pair<string, UserVariable*>(name, variable);
+			auto variableNode = listNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
+			if (!listNode)
+			{
+				throw new XMLParserException("variable node not found in XML.");
+			}
+
+			while (variableNode)
+			{
+				auto variableNameNode = variableNode->first_node(Constants::XMLParser::Formula::Name.c_str());
+				if (!variableNameNode)
+				{
+					throw new XMLParserException("variable name node not found in XML.");
+				}
+				auto object = project->GetObjectList()->GetObject(objectName->GetName());
+				if (!object)
+				{
+					throw new XMLParserException("object not found in XML.");
+				}
+				auto variable = ParseUserVariable(variableNameNode);
+				object->AddVariable(variable);
+				variableNode = listNode->next_sibling(Constants::XMLParser::Formula::UserVariable.c_str());
+			}
+			entryNode = variableListNode->next_sibling(Constants::XMLParser::Formula::Entry.c_str());
+		}
+	}
 }
 
 xml_node<> *XMLParser::EvaluateString(string query, string input, xml_node<> *node)
 {
-    size_t characterPos = input.find(query);
-    while (characterPos != string::npos)
-    {
-        string result = input.substr(0, characterPos);
-        if (result == "..")
-        {
-            node = node->parent();
-        }
-        else
-        {
-            int value = EvaluateIndex(&result);
-            node = node->first_node(result.c_str());
-            for (int index = 0; index < value; index ++)
-            {
-                node = node->next_sibling(result.c_str());
-            }
-        }
+	size_t characterPos = input.find(query);
+	while (characterPos != string::npos)
+	{
+		string result = input.substr(0, characterPos);
+		if (result == "..")
+		{
+			node = node->parent();
+		}
+		else
+		{
+			auto value = EvaluateIndex(&result);
+			if (node)
+			{
+				node = node->first_node(result.c_str());
+			}
+
+			//what happens if no node??? -> error
+
+			for (auto index = 0; index < value; index++)
+			{
+				node = node->next_sibling(result.c_str());
+			}
+		}
 
         input.erase(0, characterPos + 1);
         characterPos = input.find(query);
@@ -1534,28 +1532,28 @@ int XMLParser::EvaluateIndex(string *input)
 {
     int result = 0;
     size_t bracketPosBegin = input->find("[");
-    size_t bracketPosEnd = input->find("[");
+    size_t bracketPosEnd = input->find("]");
 
-    if (bracketPosBegin != string::npos && bracketPosEnd != string::npos)
-    {
-        string index = input->substr(bracketPosBegin + 1, bracketPosEnd - 1);
-        input->erase(bracketPosBegin, bracketPosEnd);
-        result = atoi(index.c_str());
+	if (bracketPosBegin != string::npos && bracketPosEnd != string::npos)
+	{
+		string index = input->substr(bracketPosBegin + 1, bracketPosEnd - 1);
+		input->erase(bracketPosBegin, bracketPosEnd);
+		result = atoi(index.c_str());
 
-        if (result > 0)
-        {
-            result--;
-        }
-    }
+		if (result > 0)
+		{
+			result--;
+		}
+	}
 
-    return result;
+	return result;
 }
 
 void XMLParser::SetPendingVariables()
 {
-    for (map<VariableManagementBrick*, string>::iterator it = m_pendingVariables->begin(); it != m_pendingVariables->end(); it++)
-    {
-        it->first->SetVariable(it->first->GetParent()->GetParent()->GetVariable(it->second));
-        it->first->SetVariable(m_project->GetVariable(it->second));
-    }
+	for (map<VariableManagementBrick*, string>::iterator it = m_pendingVariables->begin(); it != m_pendingVariables->end(); it++)
+	{
+		it->first->SetVariable(it->first->GetParent()->GetParent()->GetVariable(it->second));
+		it->first->SetVariable(m_project->GetVariable(it->second));
+	}
 }

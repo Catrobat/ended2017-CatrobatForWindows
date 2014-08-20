@@ -11,21 +11,21 @@ namespace Catrobat.IDE.Core.ViewModels.Editor
     {
         #region Private Members
 
-        private XmlProgram _currentProject;
+        private Program _currentProgram;
 
         #endregion
 
         #region Properties
 
-        public XmlProgram CurrentProject
+        public Program CurrentProgram
         {
-            get { return _currentProject; }
+            get { return _currentProgram; }
             set
             {
-                _currentProject = value;
+                _currentProgram = value;
 
-                ServiceLocator.DispatcherService.RunOnMainThread(() => 
-                    RaisePropertyChanged(() => CurrentProject));
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                    RaisePropertyChanged(() => CurrentProgram));
             }
         }
 
@@ -33,12 +33,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor
 
         #region Commands
 
-       
+
         #endregion
 
         #region CommandCanExecute
 
-        
+
 
         #endregion
 
@@ -53,19 +53,19 @@ namespace Catrobat.IDE.Core.ViewModels.Editor
 
         #region Message Actions
 
-        private void CurrentProjectChangedAction(GenericMessage<XmlProgram> message)
+        private void CurrentProgramChangedAction(GenericMessage<Program> message)
         {
-            CurrentProject = message.Content;
+            CurrentProgram = message.Content;
         }
 
         #endregion
 
         public EditorLoadingViewModel()
         {
-            SkipAndNavigateTo = typeof (SpritesViewModel);
+            SkipAndNavigateTo = typeof(SpritesViewModel);
 
-            Messenger.Default.Register<GenericMessage<XmlProgram>>(this,
-                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedAction);
+            Messenger.Default.Register<GenericMessage<Program>>(this,
+                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedAction);
         }
     }
 }

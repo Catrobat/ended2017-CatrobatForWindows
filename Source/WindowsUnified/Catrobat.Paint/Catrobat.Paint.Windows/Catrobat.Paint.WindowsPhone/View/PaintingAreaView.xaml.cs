@@ -70,8 +70,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             PaintingAreaCanvas.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
             PaintingAreaCanvas.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
             PaintingAreaCanvas.ManipulationStarting += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarting;
-
-            if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Brush || 
+            PaintingAreaCanvas.PointerPressed += PaintingAreaCanvas_PointerEntered;
+           /* if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Brush || 
                 PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Eraser)
             {
                 LayoutRoot.PointerEntered += LayoutRoot_PointerEntered;
@@ -79,7 +79,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             else
             {
                 LayoutRoot.PointerEntered += null;
-            }
+            }*/
             btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
             btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
             btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
@@ -161,13 +161,22 @@ namespace Catrobat.Paint.WindowsPhone.View
             else if("barEllipse" == type)
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
+                AppBarButton app_btnReset = new AppBarButton();
 
                 BitmapIcon thickness_icon = new BitmapIcon();
                 thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
                 app_btnBrushThickness.Icon = thickness_icon;
 
-                app_btnBrushThickness.Click += btnThicknessBorder_Click;
+                BitmapIcon reset_icon = new BitmapIcon();
+                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
+                app_btnReset.Icon = reset_icon;
 
+                app_btnReset.Label = "Ausgangsposition";
+
+                app_btnBrushThickness.Click += btnThicknessBorder_Click;
+                app_btnReset.Click += app_btn_reset_Click;
+
+                cmdBar.PrimaryCommands.Add(app_btnReset);
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
             }
             else if("barEraser" == type)
@@ -183,7 +192,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnBrushThickness.Click += btnThickness_Click;
 
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
-
             }
             else if ("barMove" == type)
             {
@@ -248,15 +256,23 @@ namespace Catrobat.Paint.WindowsPhone.View
             else if ("barRectangle" == type)
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
+                AppBarButton app_btnReset = new AppBarButton();
 
                 BitmapIcon thickness_icon = new BitmapIcon();
                 thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
                 app_btnBrushThickness.Icon = thickness_icon;
 
+                BitmapIcon reset_icon = new BitmapIcon();
+                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
+                app_btnReset.Icon = reset_icon;
+
+                app_btnReset.Label = "Ausgangsposition";
+
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
+                app_btnReset.Click += app_btn_reset_Click;
 
+                cmdBar.PrimaryCommands.Add(app_btnReset);
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
-
             }
             else if("barFlip" == type)
             {
@@ -658,7 +674,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         }
 
-        private void LayoutRoot_PointerEntered(object sender, PointerRoutedEventArgs e)
+        private void PaintingAreaCanvas_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             var point = new Point(Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.Y));
 

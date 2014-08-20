@@ -17,7 +17,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
     {
         #region Private Members
 
-        private Program _currentProject;
+        private Program _currentProgram;
         private Sprite _selectedSprite;
         private int _numberOfObjectsSelected;
         private bool _isSpriteSelecting;
@@ -26,18 +26,18 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region Properties
 
-        public Program CurrentProject
+        public Program CurrentProgram
         {
-            get { return _currentProject; }
+            get { return _currentProgram; }
             private set 
             { 
-                _currentProject = value;
+                _currentProgram = value;
 
                 SelectedSprites = new ObservableCollection<Sprite>();
 
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
-                    RaisePropertyChanged(() => CurrentProject);
+                    RaisePropertyChanged(() => CurrentProgram);
                 });
             }
         }
@@ -202,12 +202,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
             foreach (var sprite in spritesToCopy)
             {
-                var originalIndex = CurrentProject.Sprites.IndexOf(sprite);
+                var originalIndex = CurrentProgram.Sprites.IndexOf(sprite);
 
-                var newSprite = await sprite.CloneAsync(CurrentProject);
+                var newSprite = await sprite.CloneAsync(CurrentProgram);
                 var newIndex = originalIndex + 1;
 
-                CurrentProject.Sprites.Insert(newIndex, newSprite);
+                CurrentProgram.Sprites.Insert(newIndex, newSprite);
             }
         }
 
@@ -229,17 +229,17 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         private void StartPlayerAction()
         {
-           ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject);
+           ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProgram);
         }
 
         private void UndoAction()
         {
-            CurrentProject.Undo();
+            CurrentProgram.Undo();
         }
 
         private void RedoAction()
         {
-            CurrentProject.Redo();
+            CurrentProgram.Redo();
         }
 
         protected override void GoBackAction()
@@ -252,9 +252,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region MessageActions
 
-        private void CurrentProjectChangedAction(GenericMessage<Program> message)
+        private void CurrentProgramChangedAction(GenericMessage<Program> message)
         {
-            CurrentProject = message.Content;
+            CurrentProgram = message.Content;
             SelectedSprites.Clear();
         }
 
@@ -270,10 +270,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
                 foreach (var sprite in spritesToDelete)
                 {
-                    ReferenceHelper.CleanUpSpriteReferences(sprite, CurrentProject);
+                    ReferenceHelper.CleanUpSpriteReferences(sprite, CurrentProgram);
 
-                    CurrentProject.Sprites.Remove(sprite);
-                    sprite.Delete(CurrentProject);
+                    CurrentProgram.Sprites.Remove(sprite);
+                    sprite.Delete(CurrentProgram);
                 }
             }
         }
@@ -297,7 +297,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             SelectedSprites = new ObservableCollection<Sprite>();
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProjectChangedAction);
+                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedAction);
         }
     }
 }

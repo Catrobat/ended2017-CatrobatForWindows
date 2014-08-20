@@ -25,7 +25,8 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
                 return new Dictionary<CatrobatVersionPair, CatrobatVersion>(new CatrobatVersionPair.EqualityComparer())
                 {
                     {new CatrobatVersionPair("0.91", "Win0.91"), new CatrobatVersion091ToWin091()},
-                    {new CatrobatVersionPair("0.92", "0.91"), new CatrobatVersion092To091()}
+                    {new CatrobatVersionPair("0.92", "0.91"), new CatrobatVersion092To091()},
+                    {new CatrobatVersionPair("0.93", "0.92"), new CatrobatVersion093To092()}
                 };
             }
         }
@@ -73,6 +74,33 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
                         }
                     },
 
+                    {
+                        new CatrobatVersionPair("0.93", "Win0.91"),
+
+                        new List<CatrobatVersionPair>
+                        {
+                            new CatrobatVersionPair("0.93", "0.92", false),
+                            new CatrobatVersionPair("0.92", "0.91", false),
+                            new CatrobatVersionPair("0.91", "Win0.91", false),
+                        }
+                    },
+                    {
+                        new CatrobatVersionPair("Win0.91", "0.93"),
+
+                        new List<CatrobatVersionPair>
+                        {
+                            new CatrobatVersionPair("0.91", "Win0.91", true),
+                            new CatrobatVersionPair("0.92", "0.91", true),
+                            new CatrobatVersionPair("0.93", "0.92", true),
+                        }
+                    },
+
+
+
+
+
+
+
 
                     {
                         new CatrobatVersionPair("0.92", "0.91"),
@@ -88,6 +116,23 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
                         new List<CatrobatVersionPair>
                         {
                             new CatrobatVersionPair("0.92", "0.91", true)
+                        }
+                    },
+
+                    {
+                        new CatrobatVersionPair("0.93", "0.92"),
+
+                        new List<CatrobatVersionPair>
+                        {
+                            new CatrobatVersionPair("0.93", "0.92", false)
+                        }
+                    },
+                    {
+                       new CatrobatVersionPair("0.92", "0.93"),
+
+                        new List<CatrobatVersionPair>
+                        {
+                            new CatrobatVersionPair("0.93", "0.92", true)
                         }
                     },
                 };

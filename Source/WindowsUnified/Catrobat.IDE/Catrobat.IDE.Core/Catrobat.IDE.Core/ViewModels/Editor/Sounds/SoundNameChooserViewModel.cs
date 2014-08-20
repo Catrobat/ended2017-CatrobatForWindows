@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
         #region Private Members
 
         private string _soundName = AppResources.Editor_NameOfSound;
-        private Program _currentProject;
+        private Program _currentProgram;
         private Sprite _receivedSelectedSprite;
         private Stream _soundStream;
 
@@ -22,14 +22,14 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 
         #region Properties
 
-        public Program CurrentProject
+        public Program CurrentProgram
         {
-            get { return _currentProject; }
+            get { return _currentProgram; }
             private set { 
-                _currentProject = value; 
+                _currentProgram = value; 
 
                 ServiceLocator.DispatcherService.RunOnMainThread(() => 
-                    RaisePropertyChanged(() => CurrentProject));
+                    RaisePropertyChanged(() => CurrentProgram));
             }
         }
 
@@ -82,7 +82,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
         private async void SaveAction()
         {
             var sound = new Sound(SoundName);
-            var path = Path.Combine(CurrentProject.BasePath, StorageConstants.ProgramSoundsPath, sound.FileName);
+            var path = Path.Combine(CurrentProgram.BasePath, StorageConstants.ProgramSoundsPath, sound.FileName);
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -124,7 +124,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 
         private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
-            CurrentProject = message.Content;
+            CurrentProgram = message.Content;
         }
 
         private void SoundStreamChangedMessageAction(GenericMessage<Stream> message)

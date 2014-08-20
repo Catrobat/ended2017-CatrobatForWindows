@@ -28,7 +28,7 @@
             </Rectangle.Fill>
         </Rectangle>
         <Rectangle x:Name="rectTransDisplayForeground" Fill="Yellow" Height="50" HorizontalAlignment="Left" Margin="272,69,0,0" Stroke="Black" StrokeThickness="5" VerticalAlignment="Top" Width="85" />
-        <Ellipse x:Name="ellTransDisplayForeground" Fill="Yellow" Height="50" HorizontalAlignment="Left" Margin="272,69,0,0" Stroke="Black" StrokeThickness="5" VerticalAlignment="Top" Visibility="Collapsed" Width="85" />
+        <Ellipse x:Name="ellDisplayForeground" Fill="Yellow" Height="50" HorizontalAlignment="Left" Margin="272,69,0,0" Stroke="Black" StrokeThickness="5" VerticalAlignment="Top" Visibility="Collapsed" Width="85" />
 
         <Button x:Name="btnSelectedFillColor" Background="Yellow" BorderThickness="1" Height="45" Margin="129,75,0,139" MinHeight="1" MinWidth="1" Width="57" Click="btnSelectedFillColor_Click" />
         <Slider x:Name="sldStrokeThickness" HorizontalAlignment="Left" Margin="119,1,0,0" VerticalAlignment="Top" 

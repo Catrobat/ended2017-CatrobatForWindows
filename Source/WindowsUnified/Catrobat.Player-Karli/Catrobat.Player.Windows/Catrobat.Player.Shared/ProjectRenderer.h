@@ -7,12 +7,12 @@
 #include "Project.h"
 #include "ProjectRenderer.h"
 #include "VertexTypes.h" 
+#include "DeviceResources.h"
 
 ref class ProjectRenderer
 {
 internal:
-	ProjectRenderer();
-    //~ProjectRenderer();
+    ProjectRenderer(const std::shared_ptr<DX::DeviceResources>& deviceResources);
 
 	// Direct3DBase methods.
 	virtual void CreateDeviceResources();
@@ -27,8 +27,10 @@ internal:
     void Initialize(_In_ ID3D11Device1* device) {/*TODO: implement me*/};
 
 protected private:
-	std::unique_ptr<SpriteBatch> m_spriteBatch;
-	std::unique_ptr<SpriteFont> m_spriteFont; 
-	bool m_Initialized;
+    std::shared_ptr<DX::DeviceResources>         m_deviceResources;
+
+	std::unique_ptr<SpriteBatch>                m_spriteBatch;
+	std::unique_ptr<SpriteFont>                 m_spriteFont; 
+	bool                                        m_Initialized;
 };
 

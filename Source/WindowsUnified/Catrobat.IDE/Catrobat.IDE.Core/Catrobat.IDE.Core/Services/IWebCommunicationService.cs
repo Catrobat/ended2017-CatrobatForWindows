@@ -18,19 +18,19 @@ namespace Catrobat.IDE.Core.Services
     {
         event DownloadProgressUpdatedEventHandler DownloadProgressChanged;
         
-        Task<List<OnlineProgramHeader>> LoadOnlineProjectsAsync(string filterText, int offset, int count, CancellationToken taskCancellationToken);
+        Task<List<OnlineProgramHeader>> LoadOnlineProgramsAsync(string filterText, int offset, int count, CancellationToken taskCancellationToken);
 
-        Task<Stream> DownloadAsync(string downloadUrl, string projectName);
+        Task<Stream> DownloadAsync(string downloadUrl, string programName, CancellationToken taskCancellationToken);
 
-        Task DownloadAsyncAlternativ(string downloadUrl, string projectName);
+        Task DownloadAsyncAlternativ(string downloadUrl, string programName);
 
         Task<JSONStatusResponse> CheckTokenAsync(string username, string token, string language = "en");
 
         Task<JSONStatusResponse> LoginOrRegisterAsync(string username, string password, string userEmail, string language = "en", string country = "AT");
 
-        Task<JSONStatusResponse> UploadProjectAsync(string projectTitle, string username, string token, string language = "en");
+        Task<JSONStatusResponse> UploadProgramAsync(string programTitle, string username, string token, string language = "en");
 
-        Task<JSONStatusResponse> ReportAsInappropriateAsync(string projectId, string flagReason, string language = "en");
+        Task<JSONStatusResponse> ReportAsInappropriateAsync(string programId, string flagReason, string language = "en");
 
         Task<JSONStatusResponse> RecoverPasswordAsync(string recoveryUserData, string language = "en");
 

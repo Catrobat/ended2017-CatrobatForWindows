@@ -236,7 +236,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
         }
 
         [TestMethod, TestCategory("ViewModels.Editor")]
-        public void ProjectSettingsActionTest()
+        public void ProgramSettingsActionTest()
         {
             Messenger.Default.Register<GenericMessage<Program>>(this,
                  ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
@@ -256,7 +256,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             };
             var messageContext = new GenericMessage<Program>(program);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProgramChangedListener);
-            viewModel.ProjectSettingsCommand.Execute(null);
+            viewModel.ProgramSettingsCommand.Execute(null);
 
             Assert.AreEqual("TestProgram", viewModel.CurrentProgram.Name); // message action test
             Assert.AreEqual("TestProgram", _currentProjectHeader.Name);

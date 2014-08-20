@@ -104,7 +104,7 @@
 
   <Button Height="120" HorizontalAlignment="Stretch" Name="ButtonMain" 
     Style="{StaticResource ButtonStyle}" Width="370">
-    <Grid Margin="5 5 5 5" 
+    <Grid Margin="0" 
           VerticalAlignment="Stretch" 
           RequestedTheme="Dark" 
           Background="{ThemeResource Accent2Brush}">

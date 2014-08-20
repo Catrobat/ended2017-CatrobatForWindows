@@ -36,7 +36,7 @@
           <DataTemplate>
             <Grid Margin="0 -26 0 0">
               <GridView Name="ListBoxLocalPrograms" 
-                ItemsSource="{Binding LocalProjects}" 
+                ItemsSource="{Binding LocalPrograms}" 
                 VerticalAlignment="Stretch" 
                 HorizontalAlignment="Stretch">
                 <GridView.ItemTemplate>

@@ -29,19 +29,19 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
         private ImageDimension _dimension;
         private ImageSizeEntry _selectedSize;
         private PortableImage _image;
-        private Program _currentProject;
+        private Program _currentProgram;
 
         #endregion
 
         #region Properties
 
-        public Program CurrentProject
+        public Program CurrentProgram
         {
-            get { return _currentProject; }
+            get { return _currentProgram; }
             private set
             {
-                _currentProject = value;
-                                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProject));
+                _currentProgram = value;
+                                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProgram));
             }
         }
 
@@ -186,7 +186,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
                 Width = SelectedSize.NewWidth
             };
 
-            var look = await LookHelper.Save(Image, LookName, newDimention, CurrentProject.BasePath);
+            var look = await LookHelper.Save(Image, LookName, newDimention, CurrentProgram.BasePath);
 
             ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
@@ -223,7 +223,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
         private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
-            CurrentProject = message.Content;
+            CurrentProgram = message.Content;
         }
 
         private void LookImageReceivedMessageAction(GenericMessage<PortableImage> message)

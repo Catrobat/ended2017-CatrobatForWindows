@@ -274,13 +274,13 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
 
             var settingsWrite = new LocalSettings
             {
-                CurrentProjectName = "ProjectName"
+                CurrentProgramName = "ProjectName"
             };
 
             storage.WriteSerializableObject("testobject", settingsWrite);
             var settingsRead = (LocalSettings)storage.ReadSerializableObject("testobject", settingsWrite.GetType());
 
-            Assert.AreEqual("ProjectName", settingsRead.CurrentProjectName);
+            Assert.AreEqual("ProjectName", settingsRead.CurrentProgramName);
         }
 
         [TestMethod]

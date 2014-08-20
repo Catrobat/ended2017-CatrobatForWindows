@@ -15,7 +15,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Service
         public OnlineProgramView()
         {
             InitializeComponent();
-
             // register event of new download-manager
             //ServiceLocator.WebCommunicationService.DownloadProgressChanged += WebCommunicationService_DownloadProgressChanged;
         }

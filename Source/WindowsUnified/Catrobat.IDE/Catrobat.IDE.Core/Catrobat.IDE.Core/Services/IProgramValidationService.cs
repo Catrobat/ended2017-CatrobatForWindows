@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Core.Services
     {
         public ProgramState State { get; set; }
 
-        public LocalProjectHeader ProjectHeader { get; set; }
+        public LocalProgramHeader ProgramHeader { get; set; }
 
         public Program Program { get; set; }
     }

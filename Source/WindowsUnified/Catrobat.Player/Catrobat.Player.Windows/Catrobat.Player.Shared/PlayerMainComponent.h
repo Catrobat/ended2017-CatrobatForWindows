@@ -11,11 +11,10 @@
 //#include "EventControllerXaml.h"
 //#include "Direct3DBase.h"
 
-//public delegate void RequestAdditionalFrameHandler();
 
 namespace Catrobat_Player
 {
-
+    public delegate void RequestAdditionalFrameHandler();
 
     class PlayerMainComponent 
     {
@@ -30,8 +29,7 @@ namespace Catrobat_Player
         void Resume();
         Concurrency::critical_section& GetCriticalSection() { return m_criticalSection; }
 
-        //RequestAdditionalFrameHandler^ RequestAdditionalFrame;
-
+        // event RequestAdditionalFrameHandler^ RequestAdditionalFrame
         //Windows::Foundation::Size* WindowBounds;
         //Windows::Foundation::Size* NativeResolution;
         //Windows::Foundation::Size* RenderResolution;
@@ -58,16 +56,15 @@ namespace Catrobat_Player
         // Cached pointer to device resources.
         std::shared_ptr<DX::DeviceResources>            m_deviceResources;
         Windows::UI::Xaml::Controls::CommandBar^        m_playerAppBar;
+        //EventController^								m_eventController;
 
         // Content renderers
         InitRenderer^                                   m_initRenderer;
         ProjectRenderer^                                m_projectRenderer;
 
-
-        //EventController^								m_eventController;
         BasicTimer^                                     m_timer;
         //Windows::Foundation::Rect                       m_originalWindowsBounds;
-        //bool                                            m_renderingErrorOccured;
+        bool                                            m_renderingErrorOccured;
         bool                                            m_initialized;
         Platform::String^                               m_projectName;
 

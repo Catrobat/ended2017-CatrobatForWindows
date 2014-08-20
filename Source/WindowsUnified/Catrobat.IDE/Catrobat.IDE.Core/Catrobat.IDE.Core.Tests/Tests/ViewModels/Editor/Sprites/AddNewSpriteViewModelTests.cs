@@ -39,8 +39,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
 
             viewModel.SaveCommand.Execute(null);
 
-            Assert.AreEqual(1, viewModel.CurrentProject.Sprites.Count);
-            Assert.AreEqual("TestNewSpriteName", viewModel.CurrentProject.Sprites[0].Name);
+            Assert.AreEqual(1, viewModel.CurrentProgram.Sprites.Count);
+            Assert.AreEqual("TestNewSpriteName", viewModel.CurrentProgram.Sprites[0].Name);
             Assert.IsNull(viewModel.SpriteName);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
