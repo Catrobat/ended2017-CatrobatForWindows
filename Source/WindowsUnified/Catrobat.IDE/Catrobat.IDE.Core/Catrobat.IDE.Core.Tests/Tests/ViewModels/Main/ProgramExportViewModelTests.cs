@@ -56,7 +56,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
         public void ShareWithOtherAppActionTest()
         {
-            //Assert.AreEqual(0, "Test also share-service.");
+            Assert.AreEqual(0, "Test also share-service.");
             GoBackActionTest();
         }
 

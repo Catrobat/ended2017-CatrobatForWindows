@@ -35,7 +35,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 
             var viewModel = new AddNewProgramViewModel
             {
-                ProgramName = "TestProject",
+                ProgramName = "TestProgram",
                 CreateEmptyProgram = false,
                 CreateTemplateProgram = true
             };
@@ -59,7 +59,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
 
             var viewModel = new AddNewProgramViewModel
             {
-                ProgramName = "TestProject",
+                ProgramName = "TestProgram",
                 CreateEmptyProgram = false,
                 CreateTemplateProgram = true
             };

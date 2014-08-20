@@ -1317,4 +1317,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Import_ReloadAdvise" xml:space="preserve">
     <value>In case you obtained this program from pocketcode.org please try to download the program again.</value>
   </data>
+  <data name="Main_SharePreparation" xml:space="preserve">
+    <value>Preparing data for sharing.</value>
+  </data>
 </root>

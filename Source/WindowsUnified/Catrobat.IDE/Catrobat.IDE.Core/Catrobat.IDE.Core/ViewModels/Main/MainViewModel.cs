@@ -246,7 +246,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private void ShowMessagesAction()
         {
             string notificationString = "";
-            int length = 20;
+            int length = 15;
             if (_showDownloadMessage)
             {
                 //var portbleImage = new PortableImage();
@@ -363,6 +363,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private readonly List<string> _programsToDelete = new List<string>();
         private async void DeleteProgramMessageCallback(MessageboxResult result)
         {
+            _dialogResult = result;
             if (_dialogResult == MessageboxResult.Ok)
             {
                 var deleteProgramName = "";
@@ -383,9 +384,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                 if (deleteProgramName == null)
                     return;
-
-                _dialogResult = result;
-
 
                 if (CurrentProgram != null && CurrentProgram.Name == deleteProgramName)
                 {

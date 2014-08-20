@@ -28,9 +28,9 @@ namespace Catrobat.IDE.Core.Tests.Services
             throw new System.NotImplementedException();
         }
 
-        public Task DrawPictureAsync(Program program = null, Look lookToEdit = null)
+        public async Task DrawPictureAsync(Program program = null, Look lookToEdit = null)
         {
-            throw new System.NotImplementedException();
+            // some work is performed
         }
 
         public void RecievedFiles(System.Collections.Generic.IEnumerable<object> files)

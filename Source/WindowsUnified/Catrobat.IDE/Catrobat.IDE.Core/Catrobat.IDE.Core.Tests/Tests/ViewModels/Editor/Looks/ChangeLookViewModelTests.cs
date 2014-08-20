@@ -17,13 +17,13 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
         public static void TestClassInitialize(TestContext testContext)
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
-            ServiceLocator.Register<PictureServiceTest>(TypeCreationMode.Normal);
-            ServiceLocator.Register<StorageFactoryTest>(TypeCreationMode.Normal);
-            ServiceLocator.Register<StorageTest>(TypeCreationMode.Normal);
-            ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
+            ServiceLocator.UnRegisterAll();
+            ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<PictureServiceTest>(TypeCreationMode.Lazy);;
+            
         }
 
-        [TestMethod, TestCategory("ViewModels.Editor"), TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Editor")]
         public void SaveActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -32,7 +32,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
             navigationService.CurrentView = typeof(ChangeLookViewModel);
 
             var changeLookViewModel = new ChangeLookViewModel();
-            var Look = new Look { Name = "TestLook", FileName = "TestFilename"};
+            var Look = new Look 
+            { Name = "TestLook", 
+                FileName = "TestFilename"
+            };
 
             var messageContext = new GenericMessage<Look>(Look);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.LookListener);
@@ -46,7 +49,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("ViewModels.Editor"), TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Editor")]
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -62,33 +65,38 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        //[TestMethod, TestCategory("ViewModels.Editor"), TestCategory("ExcludeGated")]
-        //public async Task EditLookActionTest()
-        //{
-        //    var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
-        //    navigationService.PageStackCount = 2;
-        //    navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
-        //    navigationService.CurrentView = typeof(ChangeLookViewModel);
+        [TestMethod, TestCategory("ViewModels.Editor")]
+        public void EditLookActionTest()
+        {
+            var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
+            navigationService.PageStackCount = 1;
+            navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
+            navigationService.CurrentView = typeof(ChangeLookViewModel);
 
-        //    var pictureService = (PictureServiceTest)ServiceLocator.PictureService;
-        //    pictureService.NextMethodAction = PictureServiceStatus.Success;
+            var changeLookViewModel = new ChangeLookViewModel();
 
-        //    var changeLookViewModel = new ChangeLookViewModel();
+            var look = new Look 
+            { 
+                Name = "TestLook", 
+                FileName = "TestFilename", 
+                Image = new PortableImage() 
+            };
+            var messageContext = new GenericMessage<Look>(look);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.LookListener);
 
-        //    var look = new Look { Name = "TestLook", FileName = "TestFilename", Image = new PortableImage()};
-        //    var messageContext = new GenericMessage<Look>(look);
-        //    Messenger.Default.Send(messageContext, ViewModelMessagingToken.LookListener);
+            var program = new Program 
+            { 
+                Name = "TestProgram" 
+            };
+            var messageContext2 = new GenericMessage<Program>(program);
+            Messenger.Default.Send(messageContext2, ViewModelMessagingToken.CurrentProgramChangedListener);
 
-        //    var project = new Project { Name = "TestProject" };
-        //    var messageContext2 = new GenericMessage<Project>(project);
-        //    Messenger.Default.Send(messageContext2, ViewModelMessagingToken.CurrentProgramChangedListener);
+            changeLookViewModel.EditLookCommand.Execute(null);
 
-        //    await changeLookViewModel.EditLookCommand.ExecuteAsync(null);
-
-        //    Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
-        //    Assert.AreEqual(null, navigationService.CurrentView);
-        //    Assert.AreEqual(0, navigationService.PageStackCount);
-        //}
+            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
+            Assert.AreEqual(null, navigationService.CurrentView);
+            Assert.AreEqual(0, navigationService.PageStackCount);
+        }
 
         [TestMethod, TestCategory("ViewModels.Editor")]
         public void GoBackActionTest()

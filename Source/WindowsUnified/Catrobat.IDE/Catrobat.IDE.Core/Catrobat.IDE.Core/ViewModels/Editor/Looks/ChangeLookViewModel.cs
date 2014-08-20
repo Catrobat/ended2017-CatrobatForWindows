@@ -61,7 +61,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
         #region Commands
 
-        public AsyncRelayCommand EditLookCommand { get; private set; }
+        public RelayCommand EditLookCommand { get; private set; }
 
         public RelayCommand SaveCommand { get; private set; }
 
@@ -91,7 +91,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
             base.GoBackAction();
         }
 
-        private async Task EditLookAction()
+        //private async Task EditLookAction()
+        private async void EditLookAction()
         {
             await ServiceLocator.PictureService.DrawPictureAsync(
                 CurrentProgram, ReceivedLook);
@@ -125,7 +126,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
         public ChangeLookViewModel()
         {
-            EditLookCommand = new AsyncRelayCommand(EditLookAction, () => { /* no action  */ });
+            //EditLookCommand = new AsyncRelayCommand(EditLookAction, () => { /* no action  */ });
+            EditLookCommand = new RelayCommand(EditLookAction);
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
