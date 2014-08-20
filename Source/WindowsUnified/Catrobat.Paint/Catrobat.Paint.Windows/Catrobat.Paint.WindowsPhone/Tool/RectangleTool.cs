@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
@@ -29,6 +30,15 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             this.ToolType = ToolType.Rect;
             PocketPaintApplication.GetInstance().CurrentShape = PocketPaintApplication.GetInstance().BarRecEllShape.RectangleForeground;
+
+            if (PocketPaintApplication.GetInstance().RecDrawingRectangle != null)
+            {
+                PocketPaintApplication.GetInstance().RecDrawingRectangle.Fill = PocketPaintApplication.GetInstance().PaintData.FillColorSelected;
+                PocketPaintApplication.GetInstance().RecDrawingRectangle.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
+                PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
+            }
+
+
         }
         public override void HandleDown(object arg)
         {
@@ -102,7 +112,28 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void Draw(object o)
         {
-            throw new NotImplementedException();
+            if (!(o is Point))
+            {
+                return;
+            }
+
+            var coordinate = (Point)o;
+
+            int height = PocketPaintApplication.GetInstance().BarRecEllShape.getHeight();
+            int width = PocketPaintApplication.GetInstance().BarRecEllShape.getWidth();
+
+            RectangleGeometry myRectangleGeometry = new RectangleGeometry();
+            myRectangleGeometry.Rect = new Rect(coordinate, new Point(coordinate.X + width, coordinate.Y + height));
+
+            _path = new Path();
+            _path.Fill = PocketPaintApplication.GetInstance().PaintData.FillColorSelected;
+            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
+            _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
+            _path.StrokeEndLineCap = PenLineCap.Square;
+            _path.StrokeStartLineCap = PenLineCap.Square;
+
+            _path.Data = myRectangleGeometry;
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
         }
 
         public override void ResetDrawingSpace()

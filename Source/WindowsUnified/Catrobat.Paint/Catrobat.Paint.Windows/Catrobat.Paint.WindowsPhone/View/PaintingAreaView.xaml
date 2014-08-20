@@ -24,8 +24,10 @@
                 </Grid.Background>
 
                 <Canvas x:Name="PaintingAreaCanvasUnderlaying"  Background="Transparent"/>
-                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" ManipulationMode="TranslateX, TranslateY, Rotate, Scale">
-                </Canvas>
+                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" ManipulationMode="TranslateX, TranslateY, Rotate, Scale" />
+                <Grid Background="#44d3d3d3" Visibility="Visible"></Grid>
+                <Rectangle x:Name="rectDrawRectangle" DoubleTapped="rectDrawRectangle_DoubleTapped" Fill="Blue" Height="50" HorizontalAlignment="Left" ManipulationMode="System" 
+                           Margin="171,263,0,0" PointerMoved="testRectangle_PointerMoved" PointerPressed="testRectangle_PointerPressed" Stroke="Black" VerticalAlignment="Top" Width="50" Visibility="Collapsed" />
             </Grid>
 
             <Grid x:Name="GridUserControlRectEll" VerticalAlignment="Bottom" Visibility="Collapsed" Width="400">
@@ -83,10 +85,15 @@
                 </Image.RenderTransform>
             </Image>
         </Grid>
+        
+        
 
         <StackPanel Grid.Row="0" Canvas.ZIndex="10" VerticalAlignment="Top">
             <controls:AppbarTop x:Name="barRecEll"></controls:AppbarTop>
         </StackPanel>
+        
+        <TextBox x:Name="coordinates" HorizontalAlignment="Left" Margin="87,96,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+
     </Grid>
 
     <Page.BottomAppBar>
