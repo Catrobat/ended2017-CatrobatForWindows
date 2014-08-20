@@ -130,6 +130,7 @@
     <Compile Include="UI\ISelectable.cs" />
     <Compile Include="UI\OnlineProgramsCollection.cs" />
     <Compile Include="UI\PortableUI\PortableFontStyle.cs" />
+    <Compile Include="Utilities\SensorEventArgs.cs" />
     <Compile Include="Utilities\ProgressEventArgs.cs" />
     <Compile Include="ViewModels\Editor\Formula\FormulaEvaluationResult.cs" />
     <Compile Include="Navigation\NavigationObject.cs" />

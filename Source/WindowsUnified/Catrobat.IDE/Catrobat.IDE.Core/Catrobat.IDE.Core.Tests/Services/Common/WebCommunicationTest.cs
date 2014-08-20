@@ -15,6 +15,8 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
     {
         public int UploadsPending { get; set; }
 
+        public event DownloadProgressUpdatedEventHandler DownloadProgressChanged;
+
         public async Task<List<OnlineProgramHeader>> LoadOnlineProgramsAsync(
             string filterText, int offset, int count,
             CancellationToken taskCancellationToken)
@@ -120,7 +122,5 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
             var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             return origin.AddSeconds(timestamp);
         }
-
-        public event DownloadProgressUpdatedEventHandler DownloadProgressChanged;
     }
 }
