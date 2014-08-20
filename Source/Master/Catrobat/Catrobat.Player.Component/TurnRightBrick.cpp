@@ -12,5 +12,8 @@ TurnRightBrick::TurnRightBrick(FormulaTree *rotation, Script *parent) :
 
 void TurnRightBrick::Execute()
 {
-	m_parent->GetParent()->SetRotation(m_parent->GetParent()->GetRotation() + Interpreter::Instance()->EvaluateFormulaToFloat(m_rotation, m_parent->GetParent()));
+	auto rotation = m_parent->GetParent()->GetRotation();
+	rotation += Interpreter::Instance()->EvaluateFormulaToFloat(m_rotation, m_parent->GetParent());
+	rotation = (rotation > 360) ? rotation - 360 : rotation; //rotation not greater than 360
+	m_parent->GetParent()->SetRotation(rotation);
 }
