@@ -31,6 +31,8 @@ namespace Catrobat.Paint.WindowsPhone.View
         public ViewColorPicker()
         {
             this.InitializeComponent();
+            HeaderTemplate.Height = Window.Current.Bounds.Height;
+            piFirstPage.Height = Window.Current.Bounds.Height;
         }
 
         /// <summary>

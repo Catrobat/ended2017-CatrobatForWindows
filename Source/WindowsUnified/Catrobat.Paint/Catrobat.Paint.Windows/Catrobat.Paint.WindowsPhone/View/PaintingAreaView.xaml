@@ -25,7 +25,7 @@
 
                 <Canvas x:Name="PaintingAreaCanvasUnderlaying"  Background="Transparent"/>
                 <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" ManipulationMode="TranslateX, TranslateY, Rotate, Scale" />
-                <Grid Background="#44d3d3d3" Visibility="Collapsed"></Grid>
+                <Grid Background="#44d3d3d3" Visibility="Collapsed" />
                 <Rectangle x:Name="rectDrawRectangle" DoubleTapped="rectDrawRectangle_DoubleTapped" Fill="Blue" Height="50" HorizontalAlignment="Left" ManipulationMode="System" 
                            Margin="171,263,0,0" PointerMoved="testRectangle_PointerMoved" PointerPressed="testRectangle_PointerPressed" Stroke="Black" VerticalAlignment="Top" Width="50" Visibility="Collapsed" />
             </Grid>
@@ -76,6 +76,7 @@
                 </UserControl>
             </Grid>
         </Grid>
+        
         <Grid x:Name="SpinnerGrid" Grid.Row="0" Visibility="Collapsed"  Grid.RowSpan="2"  Margin="12,12,12,12" Background="#FFB6B6B6" Opacity="0.7">
             <Image Grid.Row="0" Height="50" Source="/Assets/Spinner.png" Stretch="Uniform" Width="50" Canvas.ZIndex="100" Margin="10,10">
                 <Image.RenderTransform>
@@ -84,9 +85,7 @@
                          CenterY="25" />
                 </Image.RenderTransform>
             </Image>
-        </Grid>
-        
-        
+        </Grid> 
 
         <StackPanel Grid.Row="0" Canvas.ZIndex="10" VerticalAlignment="Top">
             <controls:AppbarTop x:Name="barRecEll"></controls:AppbarTop>

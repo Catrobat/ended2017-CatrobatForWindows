@@ -62,10 +62,14 @@ namespace Catrobat.Paint.WindowsPhone.View
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Stamp);
                     break;
                 case "Rectangle":
+                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Margin = new Thickness(171, 263, 0, 0);
                     PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
                     break;
                 case "Ellipse":
+                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Margin = new Thickness(171, 263, 0, 0);
+                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Height = 50;
+                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Width = 50;
                     PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Ellipse);
                     break;

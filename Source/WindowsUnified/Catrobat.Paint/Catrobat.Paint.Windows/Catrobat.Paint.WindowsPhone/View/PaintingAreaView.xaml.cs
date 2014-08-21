@@ -40,6 +40,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             this.InitializeComponent();
 
             PocketPaintApplication.GetInstance().RecDrawingRectangle = rectDrawRectangle;
+
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
             
 

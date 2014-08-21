@@ -46,17 +46,17 @@
             </Grid.RowDefinitions>
 
 
-            <Pivot x:Name="HeaderTemplate">
-                <Pivot.HeaderTemplate>
+            <Pivot x:Name="HeaderTemplate" Height="666">
+                <Pivot.HeaderTemplate>  
                     <DataTemplate>
                         <Image x:Name="Palette" Source="{Binding}" Width="60" Margin="0,20,0,0" />
                     </DataTemplate>
                 </Pivot.HeaderTemplate>
 
 
-                <PivotItem Header="/Assets/ColorPicker/icon_color_chooser_tab_palette.png" Margin="12,28,12,3">
+                <PivotItem x:Name="piFirstPage" Header="/Assets/ColorPicker/icon_color_chooser_tab_palette.png" Height="666" Margin="12,28,12,3" VerticalAlignment="Top">
 
-                    <Grid Background="#FF171717" Height="675" VerticalAlignment="Top" Margin="0,0,0,0" >
+                    <Grid Background="#FF171717" VerticalAlignment="Top" Margin="0,0,0,0" >
                         <Button x:Name="Button11" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton11}"  Width="80" Height="65" Margin="-9,20,0,527">
                             <Rectangle  Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton11}" PointerPressed="ColorChangedPredefined"  />
                         </Button>
@@ -156,15 +156,15 @@
                             </Rectangle>
 
                             <Button x:Name="BtnSelectedColor" Click="BtnSelectedColor_OnClick" 
-                            Content="Fertig" Command="{Binding SelectColorDone}" HorizontalAlignment="Left" Margin="0,450,0,0" 
-                            VerticalAlignment="Top" RenderTransformOrigin="-0.208,0.153" Width="400" Height="72" BorderThickness="3"/>
+                            Content="Fertig" Command="{Binding SelectColorDone}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,450,0,0"
+                            RenderTransformOrigin="-0.208,0.153" Width="400" Height="72" BorderThickness="3"/>
                         </Grid>
                     </Grid>
                 </PivotItem>
 
 
-                <PivotItem Header="/Assets/ColorPicker/icon_color_chooser_tab_rgba.png" Background="#FF171717" Margin="12,28,12,33" Visibility="Visible">
-                    <Grid Height="675" PointerEntered="Grid_PointerEntered">
+                <PivotItem x:Name="piSecondPage" Header="/Assets/ColorPicker/icon_color_chooser_tab_rgba.png" Background="#FF171717" Height="500" Margin="12,28,12,33" Visibility="Visible">
+                    <Grid PointerEntered="Grid_PointerEntered">
                         <!-- TODO: ColorPicker <c oding4Fun:ColorPicker ColorChanged="ColorChangedCustom"  HorizontalAlignment="Left" Margin="6,6,0,0" 
                                             Name="Coding4FunColorPicker" VerticalAlignment="Top" Height="322" Width="444"  /> -->
 
@@ -216,17 +216,18 @@
                              Text="%" VerticalAlignment="Top" Width="56" Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
 
-                        <Rectangle x:Name="recTransparenceSlider" Opacity="1" StrokeThickness="0" Margin="0,460,-24,0" 
-                               Width="380" Height="52" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Rectangle x:Name="recTransparenceSlider" Opacity="1" StrokeThickness="0"
+                               Width="375" Height="52" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,10">
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
                             </Rectangle.Fill>
                         </Rectangle>
 
-                        <Button x:Name="BtnSelectedColorSlider" Click="BtnSelectedColor_OnClick" 
-                            Content="Fertig" Command="{Binding SelectColorDone}" HorizontalAlignment="Left" Margin="0,450,0,0" 
-                            VerticalAlignment="Top" RenderTransformOrigin="-0.208,0.153" Width="400" Height="72" BorderThickness="3"/>
-                        <Image x:Name="imgColor" Visibility="Visible" HorizontalAlignment="Left" Height="209" VerticalAlignment="Top" Width="289" Source="/Assets/ColorPicker/color.jpg" Margin="36,10,0,0"/>
+                        <Button x:Name="BtnSelectedColorSlider" Click="BtnSelectedColor_OnClick" Content="Fertig"
+                            Command="{Binding SelectColorDone}" HorizontalAlignment="Left" 
+                            VerticalAlignment="Bottom" MinHeight="1" Width="375" Height="72" BorderThickness="2">
+
+                        </Button>
 
 
                     </Grid>
@@ -237,6 +238,6 @@
                 <Binding Path="ColorPicker" />
             </Grid.DataContext>
         </Grid>
-        <Image HorizontalAlignment="Left" Height="100" Margin="516,373,-216,0" VerticalAlignment="Top" Width="100"/>
+        <Image HorizontalAlignment="Left" Margin="516,373,-216,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Page>
