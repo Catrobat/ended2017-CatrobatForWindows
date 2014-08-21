@@ -36,7 +36,7 @@ namespace Catrobat.Paint.Phone.Data
 
         private int _thicknessSelected = 20;
         private int _borderThicknessRecEll = 3;
-        private PenLineCap _capSelected = PenLineCap.Flat;
+        private PenLineCap _capSelected = PenLineCap.Round;
         private ToolBase _toolCurrentSelected = new BrushTool();
         public int max_right_left = 0;
         public double min_max_resize = 0.0;

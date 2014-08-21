@@ -25,7 +25,7 @@
 
                 <Canvas x:Name="PaintingAreaCanvasUnderlaying"  Background="Transparent"/>
                 <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" ManipulationMode="TranslateX, TranslateY, Rotate, Scale" />
-                <Grid Background="#44d3d3d3" Visibility="Visible"></Grid>
+                <Grid Background="#44d3d3d3" Visibility="Collapsed"></Grid>
                 <Rectangle x:Name="rectDrawRectangle" DoubleTapped="rectDrawRectangle_DoubleTapped" Fill="Blue" Height="50" HorizontalAlignment="Left" ManipulationMode="System" 
                            Margin="171,263,0,0" PointerMoved="testRectangle_PointerMoved" PointerPressed="testRectangle_PointerPressed" Stroke="Black" VerticalAlignment="Top" Width="50" Visibility="Collapsed" />
             </Grid>
