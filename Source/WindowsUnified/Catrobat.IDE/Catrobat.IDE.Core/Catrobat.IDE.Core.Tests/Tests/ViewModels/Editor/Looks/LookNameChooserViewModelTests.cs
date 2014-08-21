@@ -31,6 +31,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
         [TestMethod, TestCategory("ViewModels.Editor"), TestCategory("ExcludeGated")]
         public async Task SaveActionTest()
         {
+            Assert.AreEqual(0, "Test also Look helper - test not fully implemented");
             _imageToSave = null;
             Messenger.Default.Register<GenericMessage<PortableImage>>(this,
                 ViewModelMessagingToken.LookImageToSaveListener, LookImageReceivedMessageAction);
@@ -42,12 +43,19 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
 
             var viewModel = new LookNameChooserViewModel
             {
-                SelectedSize = new ImageSizeEntry {NewHeight = 100, NewWidth = 100},
+                SelectedSize = new ImageSizeEntry 
+                {
+                    NewHeight = 100, 
+                    NewWidth = 100
+                },
                 LookName = "TestLook"
             };
 
-            var project = new Program {Name = "TestProject"};
-            var messageContext = new GenericMessage<Program>(project);
+            var program = new Program 
+            {
+                Name = "TestProgram"
+            };
+            var messageContext = new GenericMessage<Program>(program);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProgramChangedListener);
 
             var sprite = new Sprite();
@@ -57,7 +65,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
             var messageContext3 = new GenericMessage<PortableImage>(new PortableImage());
             Messenger.Default.Send(messageContext3, ViewModelMessagingToken.LookImageListener);
 
-            await viewModel.SaveCommand.ExecuteAsync(null);
+            //await viewModel.SaveCommand.ExecuteAsync(null);
 
             Assert.IsNotNull(_imageToSave);
             Assert.AreEqual(1, sprite.Looks.Count);
@@ -67,7 +75,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("ViewModels.Editor"), TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Editor")]
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -84,7 +92,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Looks
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod, TestCategory("ViewModels.Editor"), TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("ViewModels.Editor")]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

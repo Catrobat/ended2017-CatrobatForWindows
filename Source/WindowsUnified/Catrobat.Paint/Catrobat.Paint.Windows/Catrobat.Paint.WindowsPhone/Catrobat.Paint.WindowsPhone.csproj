@@ -128,6 +128,7 @@
     <Compile Include="Tool\EllipseTool.cs" />
     <Compile Include="Tool\EraserTool.cs" />
     <Compile Include="Tool\FlipTool.cs" />
+    <Compile Include="Tool\ImportTool.cs" />
     <Compile Include="Tool\LineTool.cs" />
     <Compile Include="Tool\MoveZoomTool.cs" />
     <Compile Include="Tool\PipetteTool.cs" />

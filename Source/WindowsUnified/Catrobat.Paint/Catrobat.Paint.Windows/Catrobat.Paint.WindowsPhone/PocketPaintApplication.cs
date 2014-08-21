@@ -53,6 +53,7 @@ namespace Catrobat.Paint.Phone
 
         public ucRecEll BarRecEllShape { get; set; }
 
+        public Rectangle RecDrawingRectangle { get; set; }
 
         private readonly PaintingAreaManipulationListener _paintingAreaManipulationListener = new PaintingAreaManipulationListener();
         internal PaintingAreaManipulationListener PaintingAreaManipulationListener { get { return _paintingAreaManipulationListener; } }

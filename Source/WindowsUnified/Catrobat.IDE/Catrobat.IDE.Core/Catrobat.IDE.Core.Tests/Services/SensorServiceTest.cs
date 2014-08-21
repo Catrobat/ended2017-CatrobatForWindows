@@ -9,6 +9,8 @@ namespace Catrobat.IDE.Core.Tests.Services
         private bool _isRunning = false;
         private readonly Random _random = new Random();
 
+        public event CompassReadingChangedEventHandler CompassReadingChanged;
+
         public void Start()
         {
             _isRunning = true;
@@ -46,6 +48,12 @@ namespace Catrobat.IDE.Core.Tests.Services
         }
 
         public double GetInclinationY()
+        {
+            if (_isRunning) throw new NotImplementedException();
+            return _isRunning ? 0 : 0;
+        }
+
+        public double GetInclinationZ()
         {
             if (_isRunning) throw new NotImplementedException();
             return _isRunning ? 0 : 0;

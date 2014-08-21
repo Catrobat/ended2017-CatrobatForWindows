@@ -1,7 +1,12 @@
-﻿namespace Catrobat.IDE.Core.Services
+﻿using Catrobat.IDE.Core.Utilities;
+
+namespace Catrobat.IDE.Core.Services
 {
+    public delegate void CompassReadingChangedEventHandler(object sender, SensorEventArgs e);
+
     public interface ISensorService
     {
+        event CompassReadingChangedEventHandler CompassReadingChanged;
         void Start();
         void Stop();
 
@@ -11,6 +16,7 @@
         double GetCompass();
         double GetInclinationX();
         double GetInclinationY();
+        double GetInclinationZ();
         double GetLoudness();
     }
 }

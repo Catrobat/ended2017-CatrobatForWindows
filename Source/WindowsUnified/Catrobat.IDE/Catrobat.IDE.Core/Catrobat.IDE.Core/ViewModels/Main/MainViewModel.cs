@@ -246,7 +246,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private void ShowMessagesAction()
         {
             string notificationString = "";
-            int length = 20;
+            int length = 15;
             if (_showDownloadMessage)
             {
                 //var portbleImage = new PortableImage();
@@ -284,7 +284,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void LocalProgramsChangedMessageAction(MessageBase message)
         {
-            await UpdateLocalPrograms();
+            //await UpdateLocalPrograms();
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                UpdateLocalPrograms();
+            });
         }
 
         private void DownloadProgramStartedMessageAction(GenericMessage<string> message)
@@ -363,6 +367,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private readonly List<string> _programsToDelete = new List<string>();
         private async void DeleteProgramMessageCallback(MessageboxResult result)
         {
+            _dialogResult = result;
             if (_dialogResult == MessageboxResult.Ok)
             {
                 var deleteProgramName = "";
@@ -383,9 +388,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
                 if (deleteProgramName == null)
                     return;
-
-                _dialogResult = result;
-
 
                 if (CurrentProgram != null && CurrentProgram.Name == deleteProgramName)
                 {
@@ -535,12 +537,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     }
                 }
 
-                programsToAdd.Sort();
+                //programsToAdd.Sort();
 
-                foreach (var program in programsToAdd)
-                {
-                    _localPrograms.Insert(0, program);
-                }
+
+                //foreach (var program in programsToAdd)
+                //{
+                //    _localPrograms.Insert(0, program);
+                //}
             }
         }
     }

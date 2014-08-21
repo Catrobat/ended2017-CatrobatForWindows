@@ -48,7 +48,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels
         //ThemeChooserListener,
         //DownloadProgramStartedListener,       --tested in MainViewModelTests (private)
         //UploadProgramStartedListener,         --tested in MainViewModelTests (private)
-        //SelectedUserVariableChangedListener,
+        //SelectedUserVariableChangedListener,  --done
         //ShareProgramHeaderListener,
         //CurrentProgramHeaderChangedListener,  --done
         //LookImageListener,
@@ -227,6 +227,13 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels
 
             // Service
             Assert.AreEqual("Radio Fun City", onlineProgramReportViewModel.SelectedOnlineProgram.ProjectName);
+        }
+
+        [TestMethod, TestCategory("ViewModels")]
+        public void SelectedUserVariableChangedTest()
+        {
+
+        
         }
 
         [TestMethod, TestCategory("ViewModels")]

@@ -3214,6 +3214,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Preparing data for sharing. ähnelt.
+        /// </summary>
+        public static string Main_SharePreparation {
+            get {
+                return ResourceManager.GetString("Main_SharePreparation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die share ähnelt.
         /// </summary>
         public static string Main_ShareProgram {

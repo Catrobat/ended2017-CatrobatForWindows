@@ -76,6 +76,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             selected_color.Color = color.Color != Colors.Transparent ? color.Color : Colors.Transparent;
             btnSelectedFillColor.Background = selected_color;
             PocketPaintApplication.GetInstance().CurrentShape.Fill = selected_color;
+            PocketPaintApplication.GetInstance().RecDrawingRectangle.Fill = selected_color;
         }
 
         private void ColorStrokeChanged(SolidColorBrush color)
@@ -83,6 +84,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             SolidColorBrush selected_color = new SolidColorBrush();
             selected_color.Color = color.Color != Colors.Transparent ? color.Color : Colors.Transparent;
             btnSelectedBorderColor.Background = selected_color;
+            PocketPaintApplication.GetInstance().RecDrawingRectangle.Stroke = selected_color;
             PocketPaintApplication.GetInstance().CurrentShape.Stroke = selected_color;
         }
 
@@ -136,6 +138,22 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll = strokeThickness;
 
             PocketPaintApplication.GetInstance().CurrentShape.StrokeThickness = strokeThickness;
+
+            if (PocketPaintApplication.GetInstance().RecDrawingRectangle != null)
+            {
+                PocketPaintApplication.GetInstance().RecDrawingRectangle.StrokeThickness = strokeThickness;
+            }
+
+            if(strokeThickness > 0)
+            {
+                btnSelectedBorderColor.IsEnabled = true;
+                rectTransBorderColor.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                rectTransBorderColor.Visibility = Visibility.Collapsed;
+                btnSelectedBorderColor.IsEnabled = false;
+            }
         }
 
         private void tbHeightValue_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -172,7 +190,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             if(tbHeightValue.Text != string.Empty)
             {
-                PocketPaintApplication.GetInstance().CurrentShape.Height = Convert.ToDouble(tbHeightValue.Text);
+                double height_value = Convert.ToDouble(tbHeightValue.Text);
+                PocketPaintApplication.GetInstance().CurrentShape.Height = height_value;
+                PocketPaintApplication.GetInstance().RecDrawingRectangle.Height = height_value;
             }
         }
 
@@ -184,7 +204,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             if (tbWidthValue.Text != string.Empty)
             {
+                double width_value = Convert.ToDouble(tbWidthValue.Text);
                 PocketPaintApplication.GetInstance().CurrentShape.Width = Convert.ToDouble(tbWidthValue.Text);
+                PocketPaintApplication.GetInstance().RecDrawingRectangle.Width = width_value;
             }
         }
     }

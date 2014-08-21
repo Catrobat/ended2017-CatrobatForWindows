@@ -49,7 +49,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
             this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.CanDeleteProperty, new Binding { Path = new PropertyPath("CanDelete") });
             this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.CanEvaluateProperty, new Binding { Path = new PropertyPath("CanEvaluate") });
             this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.HasErrorProperty, new Binding { Path = new PropertyPath("HasError") });
-            this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.ProjectProperty, new Binding { Path = new PropertyPath("CurrentProject") });
+            this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.ProjectProperty, new Binding { Path = new PropertyPath("CurrentProgram") });
             
             _viewModel.PropertyChanged += ViewModel_OnPropertyChanged;
         }

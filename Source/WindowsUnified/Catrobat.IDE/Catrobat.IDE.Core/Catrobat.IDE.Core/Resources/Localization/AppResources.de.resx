@@ -1305,4 +1305,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   <data name="Import_ReloadAdvise" xml:space="preserve">
     <value>Bitte versuche das Programm evt. nochmals von pocketcode.org herunterzuladen.</value>
   </data>
+  <data name="Main_SharePreparation" xml:space="preserve">
+    <value>Daten werden für den Export vorbereitet.</value>
+  </data>
 </root>

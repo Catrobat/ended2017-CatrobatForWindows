@@ -60,11 +60,12 @@
         VerticalAlignment="Center" 
         HorizontalAlignment="Stretch">
         <ProgressBar IsIndeterminate="True" Margin="10"/>
-        <TextBlock Text="Prepairing program for sharing."
-        TextWrapping="WrapWholeWords" 
-        TextAlignment="Center" HorizontalAlignment="Center" 
-        Margin="10"
-        Style="{ThemeResource TextNormalStyle}"/>
+        <TextBlock Text="{Binding Resources.Main_SharePreparation, 
+                   Source={StaticResource LocalizedStrings}}"
+                   TextWrapping="WrapWholeWords" 
+                   TextAlignment="Center" HorizontalAlignment="Center" 
+                   Margin="10"
+                   Style="{ThemeResource TextNormalStyle}"/>
       </StackPanel>
 
     </Grid>

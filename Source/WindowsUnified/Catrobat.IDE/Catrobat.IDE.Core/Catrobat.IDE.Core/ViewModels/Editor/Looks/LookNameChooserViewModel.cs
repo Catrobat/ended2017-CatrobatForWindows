@@ -202,7 +202,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
         private void CancelAction()
         {
             ServiceLocator.NavigationService.RemoveBackEntry();
-            GoBackAction();
+            this.GoBackAction();
         }
 
 
@@ -260,7 +260,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
         private void InitImageSizes()
         {
-
             //Dimension = new ImageDimension { Width = 0, Height = 0 };
         }
 
