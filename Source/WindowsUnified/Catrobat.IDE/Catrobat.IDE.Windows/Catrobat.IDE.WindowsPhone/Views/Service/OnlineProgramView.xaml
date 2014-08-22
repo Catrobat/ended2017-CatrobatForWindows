@@ -105,7 +105,8 @@
         TextAlignment="Center" HorizontalAlignment="Center" 
         Margin="10 0 10 10"
         Style="{ThemeResource TextNormalStyle}"/>
-        <ProgressBar Name="ProgressBarDownload" 
+        <ProgressBar Name="
+    BarDownload" 
                      IsIndeterminate="False" 
                      Margin="10"
                      Maximum="100"/>
@@ -139,7 +140,7 @@
                       VerticalAlignment="Center" 
                       HorizontalAlignment="Center">
             <controls:ProcessIcon Margin="0 0 6 0"
-                      IsProcessing="{Binding IsImporting}" />
+                      IsProcessing="True" />
             <TextBlock Foreground="White"
                        VerticalAlignment="Center" HorizontalAlignment="Center" 
                        Text="{Binding Resources.Main_OnlineProgramLoading, 
