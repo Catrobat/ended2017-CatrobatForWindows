@@ -22,7 +22,28 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
     {
         private static int _imageThumbnailDefaultMaxWidthHeight = 200;
         private readonly List<Stream> _openedStreams = new List<Stream>();
-        private StorageFolder _baseFolder = ApplicationData.Current.LocalFolder;
+        private StorageFolder _baseFolder;
+
+        public StorageWindowsShared(StorageLocation storageLocation = StorageLocation.Temp)
+        {
+            switch(storageLocation)
+            {
+                case StorageLocation.Local:
+                    _baseFolder = ApplicationData.Current.LocalFolder;
+                    break;
+
+                case StorageLocation.Roaming:
+                    _baseFolder = ApplicationData.Current.RoamingFolder;
+                    break;
+
+                case StorageLocation.Temp:
+                    _baseFolder = ApplicationData.Current.TemporaryFolder;
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException("storagelocation");
+            }
+        }
 
         #region Synchron
 

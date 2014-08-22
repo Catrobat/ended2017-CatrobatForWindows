@@ -6,9 +6,9 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
 {
     public class StorageFactoryWindowsShared : IStorageFactory
     {
-        public IStorage CreateStorage()
+        public IStorage CreateStorage(StorageLocation storageLocation)
         {
-            var storage = new StorageWindowsShared();
+            var storage = new StorageWindowsShared(storageLocation);
 
             var minDimension = Math.Min(ServiceLocator.SystemInformationService.ScreenHeight,
                 ServiceLocator.SystemInformationService.ScreenWidth);
