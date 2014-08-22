@@ -87,7 +87,7 @@ namespace Catrobat.Paint.Phone.Command
 
         private void ReDrawAll()
         {
-                /* PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
+                /* TODO: PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
                 PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Children.Clear();
                 //            WriteableBitmap bitmap;
                 //

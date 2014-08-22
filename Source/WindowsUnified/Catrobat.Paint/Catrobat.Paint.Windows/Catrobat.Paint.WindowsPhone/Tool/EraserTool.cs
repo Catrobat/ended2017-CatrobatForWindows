@@ -247,7 +247,7 @@ namespace Catrobat.Paint.Phone.Tool
             
             // I read that GetBitmapContext gets ride of some overhead and has performance improvements 
             // (but I experienced them as rather low :) )
-           /*  using (_bitmapTemp.GetBitmapContext())
+           /*s using (_bitmapTemp.GetBitmapContext())
             {
                 using (PocketPaintApplication.GetInstance().Bitmap.GetBitmapContext())
                 {

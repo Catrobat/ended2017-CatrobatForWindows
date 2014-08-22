@@ -40,6 +40,8 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void Button_OnClick(object sender, RoutedEventArgs e)
         {
+            PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Collapsed;
+            PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
             switch (((Button)sender).Name)
             {
                 case "Brush":
@@ -48,11 +50,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                     break;
                 case "Cursor":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Cursor);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Pipette":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Pipette);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Fill":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Fill);
@@ -60,43 +60,39 @@ namespace Catrobat.Paint.WindowsPhone.View
                     break;
                 case "Stamp":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Stamp);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Rectangle":
+                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Margin = new Thickness(171, 263, 0, 0);
+                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Ellipse":
+                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Margin = new Thickness(171, 263, 0, 0);
+                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Height = 50;
+                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Width = 50;
+                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Ellipse);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "ImportPicture":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.ImportPng);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Crop":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Crop);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Eraser":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Eraser);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Flip":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Flip);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Move":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Move);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Zoom":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Zoom);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Rotate":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rotate);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                     break;
                 case "Line":
                     PocketPaintApplication.GetInstance().SwitchTool((ToolType.Line));
