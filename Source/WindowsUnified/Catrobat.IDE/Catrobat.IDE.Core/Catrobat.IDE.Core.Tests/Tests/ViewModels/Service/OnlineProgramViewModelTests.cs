@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
 using Catrobat.IDE.Core.Tests.Services.Common;
@@ -6,6 +7,7 @@ using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.ViewModels.Service;
+using Catrobat.IDE.Core.CatrobatObjects;
 using System.Globalization;
 using Catrobat.IDE.Core.Tests.SampleData;
 
@@ -27,11 +29,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         }
 
         [TestMethod, TestCategory("ViewModels.Service")]
-        public void OnLoadActionTest()
+        public void NavigateToTest()
         {
             var onlineProjectHeader = SampleLoader.GetSampleOnlineProjectHeader();
             var viewModel = new OnlineProgramViewModel();
-            viewModel.OnLoadCommand.Execute(onlineProjectHeader);
+            var messageContext = new GenericMessage<OnlineProgramHeader>(onlineProjectHeader);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.SelectedOnlineProgramChangedListener);
+
+            viewModel.NavigateTo();
 
             Assert.AreEqual("07/26/2014 13:54:08 by:", viewModel.UploadedLabelText);
             Assert.AreEqual("(version: 0.9.9)", viewModel.VersionLabelText);

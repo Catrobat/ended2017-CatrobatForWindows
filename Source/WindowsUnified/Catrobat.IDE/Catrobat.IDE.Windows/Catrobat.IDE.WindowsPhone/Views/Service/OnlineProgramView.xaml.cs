@@ -25,9 +25,9 @@ namespace Catrobat.IDE.WindowsPhone.Views.Service
         //    ButtonStartDownload.Content = e.OperationGuid;
         //}
 
-        private void ViewPageBase_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            _viewModel.OnLoadCommand.Execute((OnlineProgramHeader)DataContext);
-        }
+        //private void ViewPageBase_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        //{
+        //    _viewModel.OnLoadCommand.Execute((OnlineProgramHeader)DataContext);
+        //}
     }
 }

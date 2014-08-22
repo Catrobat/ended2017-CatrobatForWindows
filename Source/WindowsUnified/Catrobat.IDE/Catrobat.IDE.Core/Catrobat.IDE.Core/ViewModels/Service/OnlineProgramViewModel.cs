@@ -17,6 +17,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
     {
         #region private Members
 
+        private OnlineProgramHeader _selectedOnlineProgram;
         private bool _buttonDownloadIsEnabled = true;
         private string _uploadedLabelText = "";
         private string _versionLabelText = "";
@@ -29,6 +30,21 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #endregion
 
         #region Properties
+        public OnlineProgramHeader SelectedOnlineProgram
+        {
+            get
+            {
+                return _selectedOnlineProgram;
+            }
+            set
+            {
+                if (ReferenceEquals(_selectedOnlineProgram, value))
+                    return;
+
+                _selectedOnlineProgram = value;
+                RaisePropertyChanged(() => SelectedOnlineProgram);
+            }
+        }
 
         public bool ButtonDownloadIsEnabled
         {
@@ -116,9 +132,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #endregion
 
         #region Commands
-
-        public ICommand OnLoadCommand { get; private set; }
-
         public RelayCommand<OnlineProgramHeader> DownloadCommand { get; private set; }
 
         public RelayCommand CancelDownloadCommand { get; private set; }
@@ -144,19 +157,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #endregion
 
         #region Actions
-
-        private void OnLoadAction(OnlineProgramHeader programHeader)
-        {
-            //var conv = new UnixTimeDateTimeConverter();
-            //object output = conv.Convert((object)Convert.ToDouble(dataContext.Uploaded.Split('.')[0]), null, null, null);
-
-            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramUploadedBy, ServiceLocator.WebCommunicationService.ConvertUnixTimeStamp(Convert.ToDouble(programHeader.Uploaded.Split('.')[0])));
-            VersionLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramVersion, programHeader.Version);
-            ViewsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramViews, programHeader.Views);
-            DownloadsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramDownloads, programHeader.Downloads);
-            ButtonDownloadIsEnabled = true;
-        }
-
         
         private async void DownloadAction(OnlineProgramHeader programHeader)
         {
@@ -184,7 +184,6 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
                 ServiceLocator.ProgramImportService.SetDownloadHeader(programHeader);
                 await Task.Run(() => ServiceLocator.ProgramImportService.TryImportWithStatusNotifications()).ConfigureAwait(false);
-                //await ServiceLocator.ProgramImportService.TryImportWithStatusNotifications();
             }
             finally
             {
@@ -192,11 +191,10 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 {
                     lock (_importLock) { IsImporting = false; }
                 });
-
             }
         }
 
-        private void ReportAction(OnlineProgramHeader onlineProgramHeader)
+        private void ReportAction()
         {
             ServiceLocator.NavigationService.NavigateTo<OnlineProgramReportViewModel>();
         }
@@ -214,17 +212,33 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         #endregion
 
         #region MessageActions
-
+        private void SelectedOnlineProgramChangedMessageAction(GenericMessage<OnlineProgramHeader> message)
+        {
+            SelectedOnlineProgram = message.Content;
+        }
         #endregion
 
         public OnlineProgramViewModel()
         {
-            OnLoadCommand = new RelayCommand<OnlineProgramHeader>(OnLoadAction);
             DownloadCommand = new RelayCommand<OnlineProgramHeader>(DownloadAction, DownloadCommand_CanExecute);
             CancelDownloadCommand = new RelayCommand(CancelDownloadAction, CancelDownloadCommand_CanExecute);
-            ReportCommand = new RelayCommand<OnlineProgramHeader>(ReportAction);
+            ReportCommand = new RelayCommand(ReportAction);
             LicenseCommand = new RelayCommand(LicenseAction);
             IsImporting = false;
+
+            Messenger.Default.Register<GenericMessage<OnlineProgramHeader>>(this,
+               ViewModelMessagingToken.SelectedOnlineProgramChangedListener, SelectedOnlineProgramChangedMessageAction);
+        }
+
+        public override void NavigateTo()
+        {
+            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramUploadedBy, ServiceLocator.WebCommunicationService.ConvertUnixTimeStamp(Convert.ToDouble(_selectedOnlineProgram.Uploaded.Split('.')[0])));
+            VersionLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramVersion, SelectedOnlineProgram.Version);
+            ViewsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramViews, SelectedOnlineProgram.Views);
+            DownloadsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramDownloads, SelectedOnlineProgram.Downloads);
+            ButtonDownloadIsEnabled = true;
+
+            base.NavigateTo();
         }
 
         #region Callbacks
