@@ -1,0 +1,12 @@
+configurations {
+    Configurations { 
+        key : "Configuration";
+        choices : { Release, Debug };
+    };
+    Platforms { 
+        key : "Platform";
+        choices : { Win32, ARM };
+        Win32.aliases : { x86, win32, ia32, 386 };
+        ARM.aliases : { arm, woa };
+    };
+};

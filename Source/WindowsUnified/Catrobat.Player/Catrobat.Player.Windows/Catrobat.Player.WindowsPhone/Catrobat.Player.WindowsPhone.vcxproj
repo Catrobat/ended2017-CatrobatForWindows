@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\directxtk_windowsphone_8_1.2014.07.15.1\build\native\directxtk_windowsphone_8_1.props" Condition="Exists('..\..\packages\directxtk_windowsphone_8_1.2014.07.15.1\build\native\directxtk_windowsphone_8_1.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|ARM">
       <Configuration>Debug</Configuration>
@@ -117,7 +118,9 @@
       <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
-  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="UserMacros">
+    <NuGetPackageImportStamp>5818706d</NuGetPackageImportStamp>
+  </PropertyGroup>
   <ItemGroup>
     <Image Include="Assets\Logo.scale-240.png" />
     <Image Include="Assets\SmallLogo.scale-240.png" />
@@ -147,16 +150,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Catrobat.Player.DirectXTK\DirectXTK_WindowsPhone81.vcxproj">
-      <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
-      <Private>false</Private>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-      <LinkLibraryDependencies>true</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="UIStyles.xaml">
       <DeploymentContent>true</DeploymentContent>
     </Page>
@@ -181,11 +174,20 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">false</ExcludedFromBuild>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</DeploymentContent>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VSINSTALLDIR)\Common7\IDE\Extensions\Microsoft\VsGraphics\ImageContentTask.targets" />
     <Import Project="$(VSINSTALLDIR)\Common7\IDE\Extensions\Microsoft\VsGraphics\MeshContentTask.targets" />
     <Import Project="$(VSINSTALLDIR)\Common7\IDE\Extensions\Microsoft\VsGraphics\ShaderGraphContentTask.targets" />
+    <Import Project="..\..\packages\directxtk_windowsphone_8_1.2014.07.15.1\build\native\directxtk_windowsphone_8_1.targets" Condition="Exists('..\..\packages\directxtk_windowsphone_8_1.2014.07.15.1\build\native\directxtk_windowsphone_8_1.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\directxtk_windowsphone_8_1.2014.07.15.1\build\native\directxtk_windowsphone_8_1.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\directxtk_windowsphone_8_1.2014.07.15.1\build\native\directxtk_windowsphone_8_1.props'))" />
+    <Error Condition="!Exists('..\..\packages\directxtk_windowsphone_8_1.2014.07.15.1\build\native\directxtk_windowsphone_8_1.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\directxtk_windowsphone_8_1.2014.07.15.1\build\native\directxtk_windowsphone_8_1.targets'))" />
+  </Target>
 </Project>

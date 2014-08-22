@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\directxtk_windowsstore_8_1.2014.07.15.1\build\native\directxtk_windowsstore_8_1.props" Condition="Exists('..\..\packages\directxtk_windowsstore_8_1.2014.07.15.1\build\native\directxtk_windowsstore_8_1.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -101,6 +102,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <PackageCertificateKeyFile>Catrobat.Player.Windows_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <NuGetPackageImportStamp>e3a370ca</NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
@@ -209,6 +211,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="Catrobat.Player.Windows_TemporaryKey.pfx" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="DirectXPage.xaml">
@@ -218,20 +221,18 @@
       <DeploymentContent>true</DeploymentContent>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Catrobat.Player.DirectXTK\DirectXTK_Windows81.vcxproj">
-      <Project>{6fd3b346-4a51-4e7c-ac65-4591c4b21137}</Project>
-      <Private>false</Private>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-      <LinkLibraryDependencies>true</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VSINSTALLDIR)\Common7\IDE\Extensions\Microsoft\VsGraphics\ImageContentTask.targets" />
     <Import Project="$(VSINSTALLDIR)\Common7\IDE\Extensions\Microsoft\VsGraphics\MeshContentTask.targets" />
     <Import Project="$(VSINSTALLDIR)\Common7\IDE\Extensions\Microsoft\VsGraphics\ShaderGraphContentTask.targets" />
+    <Import Project="..\..\packages\directxtk_windowsstore_8_1.2014.07.15.1\build\native\directxtk_windowsstore_8_1.targets" Condition="Exists('..\..\packages\directxtk_windowsstore_8_1.2014.07.15.1\build\native\directxtk_windowsstore_8_1.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\directxtk_windowsstore_8_1.2014.07.15.1\build\native\directxtk_windowsstore_8_1.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\directxtk_windowsstore_8_1.2014.07.15.1\build\native\directxtk_windowsstore_8_1.props'))" />
+    <Error Condition="!Exists('..\..\packages\directxtk_windowsstore_8_1.2014.07.15.1\build\native\directxtk_windowsstore_8_1.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\directxtk_windowsstore_8_1.2014.07.15.1\build\native\directxtk_windowsstore_8_1.targets'))" />
+  </Target>
 </Project>
