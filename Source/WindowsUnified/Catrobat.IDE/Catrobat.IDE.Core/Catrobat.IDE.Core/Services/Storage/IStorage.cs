@@ -90,7 +90,7 @@ namespace Catrobat.IDE.Core.Services.Storage
 
         #region Async
 
-        // File manipulation
+        #region File manipulation
 
         Task<string[]> GetFileNamesAsync(string path);
 
@@ -104,8 +104,10 @@ namespace Catrobat.IDE.Core.Services.Storage
 
         Task CopyFileAsync(string sourcePath, string destinationPath);
 
-        
-        // Directory manipulation
+        #endregion
+
+        #region Directory manipulation
+
         Task<string[]> GetDirectoryNamesAsync(string path);
 
         Task<bool> DirectoryExistsAsync(string path);
@@ -119,10 +121,10 @@ namespace Catrobat.IDE.Core.Services.Storage
         Task CopyDirectoryAsync(string sourcePath, string destinationPath);
 
         Task RenameDirectoryAsync(string directoryPath, string newDirectoryName);
-        
 
+        #endregion
 
-        // Specialized reading and writing
+        #region Specialized reading and writing
         Task<object> ReadSerializableObjectAsync(string path, Type type);
 
         Task WriteSerializableObjectAsync(string path, object serializableObject);
@@ -131,9 +133,9 @@ namespace Catrobat.IDE.Core.Services.Storage
 
         Task WriteTextFileAsync(string path, string content);
 
+        #endregion
 
-
-        // Image reading and writing
+        #region Image reading and writing
         Task<PortableImage> LoadImageAsync(string pathToImage);
 
         Task SaveImageAsync(string path, PortableImage image, bool deleteExisting, ImageFormat format);
@@ -143,6 +145,8 @@ namespace Catrobat.IDE.Core.Services.Storage
         Task<PortableImage> LoadImageThumbnailAsync(string pathToImage);
 
         Task TryCreateThumbnailAsync(string file);
+
+        #endregion
 
         #endregion
 
