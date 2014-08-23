@@ -141,6 +141,8 @@
     <Compile Include="ViewModels\Service\UploadProgramNewPasswordViewModel.cs" />
     <Compile Include="ViewModels\Service\OnlineProgramReportViewModel.cs" />
     <Compile Include="ViewModels\Service\UploadProgramForgotPasswordViewModel.cs" />
+    <Compile Include="XmlModelConvertion\Converters\SoundConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\LookConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\SpriteConverter.cs" />
     <Compile Include="XmlModelConvertion\IXmlModelConverter.cs" />
     <Compile Include="XmlModelConvertion\XmlModelConverter.cs" />
