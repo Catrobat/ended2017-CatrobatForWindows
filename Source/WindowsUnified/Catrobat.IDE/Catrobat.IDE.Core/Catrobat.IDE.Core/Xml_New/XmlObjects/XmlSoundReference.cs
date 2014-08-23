@@ -3,7 +3,7 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public class XmlSoundReference : XmlObject
+    public class XmlSoundReference : XmlObjectNode
     {
         private string _reference;
 

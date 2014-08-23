@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
-    public partial class XmlUserVariable : XmlObject
+    public partial class XmlUserVariable : XmlObjectNode
     {
         public string Name { get; set; }
 

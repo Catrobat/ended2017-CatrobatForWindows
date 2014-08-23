@@ -44,7 +44,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
                                        select baseType.GenericTypeArguments[1]).ToList();
 
             var xmlObjectTypes = (from typeInfo in inAssemblies
-                where typeInfo.IsSubclassOf(typeof(XmlObject)) &&
+                where typeInfo.IsSubclassOf(typeof(XmlObjectNode)) &&
                 typeInfo.IsAbstract == false
                 select typeInfo.AsType()).ToList();
 

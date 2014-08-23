@@ -15,7 +15,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public partial class XmlProgram : DataRootObject
+    public partial class XmlProgram : DataObjectRoot
     {
         #region Properties
 
@@ -44,11 +44,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         public XmlProgram(String xmlSource) : base(xmlSource)
         {
             BroadcastMessages = new List<string>();
-            LoadFromXML(xmlSource);
+            LoadFromXml(xmlSource);
         }
 
 
-        protected override sealed void LoadFromXML(string xml)
+        protected override sealed void LoadFromXml(string xml)
         {
             var document = XDocument.Load(new StringReader(xml));
             document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
@@ -64,7 +64,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             LoadBroadcastMessages();
         }
 
-        internal override XDocument CreateXML()
+        internal override XDocument CreateXml()
         {
             var document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
 
@@ -152,7 +152,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             using (var storage = StorageSystem.GetStorage())
             {
                 var writer = new XmlStringWriter();
-                var document = CreateXML();
+                var document = CreateXml();
                 document.Save(writer, SaveOptions.None);
 
                 var xml = writer.GetStringBuilder().ToString();
@@ -164,7 +164,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         public string ToXmlString()
         {
             var writer = new XmlStringWriter();
-            var document = CreateXML();
+            var document = CreateXml();
             document.Save(writer, SaveOptions.None);
             return writer.ToString();
         }

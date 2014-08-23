@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 {
-    public class XmlScriptList : XmlObject
+    public class XmlScriptList : XmlObjectNode
     {
         public List<XmlScript> Scripts { get; set; }
 

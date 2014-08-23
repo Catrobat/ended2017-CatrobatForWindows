@@ -3,7 +3,7 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public class XmlSpriteReference : XmlObject
+    public class XmlSpriteReference : XmlObjectNode
     {
         private string _reference;
 

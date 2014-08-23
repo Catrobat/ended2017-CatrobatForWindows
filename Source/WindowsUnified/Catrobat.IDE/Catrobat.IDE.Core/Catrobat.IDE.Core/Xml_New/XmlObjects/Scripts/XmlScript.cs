@@ -3,7 +3,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 {
-    public abstract partial class XmlScript : XmlObject
+    public abstract partial class XmlScript : XmlObjectNode
     {
         public XmlBrickList Bricks { get; set; }
 

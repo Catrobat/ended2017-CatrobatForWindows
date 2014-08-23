@@ -6,7 +6,7 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public partial class XmlLook : XmlObject
+    public partial class XmlLook : XmlObjectNode
     {
         public string FileName { get; set; }
 

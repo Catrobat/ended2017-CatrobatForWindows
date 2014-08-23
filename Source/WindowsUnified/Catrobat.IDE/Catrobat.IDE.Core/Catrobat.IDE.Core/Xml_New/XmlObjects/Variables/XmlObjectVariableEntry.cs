@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
-    public class XmlObjectVariableEntry : XmlObject
+    public class XmlObjectVariableEntry : XmlObjectNode
     {
         internal XmlSpriteReference XmlSpriteReference { get; set; }
 

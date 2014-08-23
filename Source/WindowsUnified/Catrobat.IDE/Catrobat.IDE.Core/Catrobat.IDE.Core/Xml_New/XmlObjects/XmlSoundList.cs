@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public class XmlSoundList : XmlObject
+    public class XmlSoundList : XmlObjectNode
     {
         public List<XmlSound> Sounds { get; set; }
 

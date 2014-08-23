@@ -3,7 +3,7 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
-    public class XmlLoopEndBrickReference : XmlObject
+    public class XmlLoopEndBrickReference : XmlObjectNode
     {
         private string _reference;
 

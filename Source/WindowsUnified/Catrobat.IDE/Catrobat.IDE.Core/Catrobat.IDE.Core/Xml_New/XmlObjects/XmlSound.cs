@@ -6,7 +6,7 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public partial class XmlSound : XmlObject
+    public partial class XmlSound : XmlObjectNode
     {
         public string FileName { get; set; }
 

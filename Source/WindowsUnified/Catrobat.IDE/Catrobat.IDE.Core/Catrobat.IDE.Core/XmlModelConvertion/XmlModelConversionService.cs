@@ -60,7 +60,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
                     " is already registered.");
         }
 
-        public Model Convert(XmlObject o)
+        public Model Convert(XmlObjectNode o)
         {
             var xmlType = o.GetType();
             var converter = _xmlToModelConverters[xmlType];
@@ -69,7 +69,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
             return _xmlToModelConverters[o.GetType()].Convert(o);
         }
 
-        public XmlObject Convert(Model m)
+        public XmlObjectNode Convert(Model m)
         {
             return _modelToXmlConverters[m.GetType()].Convert(m);
         }

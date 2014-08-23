@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
-    public class XmlVariableList : XmlObject
+    public class XmlVariableList : XmlObjectNode
     {
         public XmlObjectVariableList ObjectVariableList;
 

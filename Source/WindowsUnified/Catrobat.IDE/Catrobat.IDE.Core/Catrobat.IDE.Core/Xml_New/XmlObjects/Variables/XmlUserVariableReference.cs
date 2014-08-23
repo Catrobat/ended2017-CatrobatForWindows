@@ -3,7 +3,7 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
-    public class XmlUserVariableReference : XmlObject
+    public class XmlUserVariableReference : XmlObjectNode
     {
         private string _reference;
 

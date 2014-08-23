@@ -4,7 +4,7 @@ using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public partial class XmlProjectHeader : XmlObject
+    public partial class XmlProjectHeader : XmlObjectNode
     {
         public string ApplicationBuildName { get; set; }
 

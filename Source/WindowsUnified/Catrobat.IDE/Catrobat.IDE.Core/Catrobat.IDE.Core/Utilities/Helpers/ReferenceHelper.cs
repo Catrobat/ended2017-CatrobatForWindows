@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
 {
     public static class ReferenceHelper
     {
-        public static string GetReferenceString(XmlObject referenceObject)
+        public static string GetReferenceString(XmlObjectNode referenceObject)
         {
             if (referenceObject is XmlLookReference)
                 return GetLookReferenceString((referenceObject as XmlLookReference).Look);
@@ -269,7 +269,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
         }
 
 
-        public static XmlObject GetReferenceObject(XmlObject xmlObject, string reference)
+        public static XmlObjectNode GetReferenceObject(XmlObjectNode xmlObject, string reference)
         {
             if (reference == null)
                 return null;
@@ -307,7 +307,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return null;
         }
 
-        private static XmlObject GetLookObject(XmlLookReference xmlLookReference, string reference)
+        private static XmlObjectNode GetLookObject(XmlLookReference xmlLookReference, string reference)
         {
             foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
@@ -333,7 +333,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return null;
         }
 
-        private static XmlObject GetSoundObject(XmlSoundReference xmlSoundReference, string reference)
+        private static XmlObjectNode GetSoundObject(XmlSoundReference xmlSoundReference, string reference)
         {
             foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
@@ -359,7 +359,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return null;
         }
 
-        private static XmlObject GetSpriteObject(string reference)
+        private static XmlObjectNode GetSpriteObject(string reference)
         {
             var count = 0;
             if (reference.EndsWith("]"))
@@ -372,7 +372,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return XmlParserTempProjectHelper.Project.SpriteList.Sprites[count];
         }
 
-        private static XmlObject GetUserVariableObject(XmlUserVariableReference xmlUserVariableReference, string reference)
+        private static XmlObjectNode GetUserVariableObject(XmlUserVariableReference xmlUserVariableReference, string reference)
         {
             var tmpReference = reference;
             var found = false;
@@ -419,7 +419,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return null;
         }
 
-        private static XmlObject GetForeverBrickObject(XmlLoopBeginBrickReference loopBeginBrickReference, string reference)
+        private static XmlObjectNode GetForeverBrickObject(XmlLoopBeginBrickReference loopBeginBrickReference, string reference)
         {
             var foreverBricks = new List<XmlBrick>();
             foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
@@ -448,7 +448,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return null;
         }
 
-        private static XmlObject GetRepeatBrickObject(XmlLoopBeginBrickReference loopBeginBrickReference, string reference)
+        private static XmlObjectNode GetRepeatBrickObject(XmlLoopBeginBrickReference loopBeginBrickReference, string reference)
         {
             var repeatBricks = new List<XmlBrick>();
             foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
@@ -477,7 +477,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return null;
         }
 
-        private static XmlObject GetForeverLoopEndBrickObject(XmlLoopEndBrickReference loopEndBrickReference, string reference)
+        private static XmlObjectNode GetForeverLoopEndBrickObject(XmlLoopEndBrickReference loopEndBrickReference, string reference)
         {
             bool found = false;
             var loopEndBricks = new List<XmlBrick>();
@@ -512,7 +512,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return null;
         }
 
-        private static XmlObject GetRepeatLoopEndBrickObject(XmlLoopEndBrickReference loopEndBrickReference, string reference)
+        private static XmlObjectNode GetRepeatLoopEndBrickObject(XmlLoopEndBrickReference loopEndBrickReference, string reference)
         {
             bool found = false;
             var loopEndBricks = new List<XmlBrick>();
@@ -547,7 +547,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return null;
         }
 
-        private static XmlObject GetIfLogicBeginBrickObject(XmlIfLogicBeginBrickReference ifLogicBeginBrickReference, string reference)
+        private static XmlObjectNode GetIfLogicBeginBrickObject(XmlIfLogicBeginBrickReference ifLogicBeginBrickReference, string reference)
         {
             bool found = false;
             var ifLogicBeginBricks = new List<XmlBrick>();
@@ -588,7 +588,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return null;
         }
 
-        private static XmlObject GetIfLogicElseBrickObject(XmlIfLogicElseBrickReference ifLogicElseBrickReference, string reference)
+        private static XmlObjectNode GetIfLogicElseBrickObject(XmlIfLogicElseBrickReference ifLogicElseBrickReference, string reference)
         {
             bool found = false;
             var ifLogicElseBricks = new List<XmlBrick>();
@@ -629,7 +629,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return null;
         }
 
-        private static XmlObject GetIfLogicEndBrickObject(XmlIfLogicEndBrickReference ifLogicEndBrickReference, string reference)
+        private static XmlObjectNode GetIfLogicEndBrickObject(XmlIfLogicEndBrickReference ifLogicEndBrickReference, string reference)
         {
             bool found = false;
             var ifLogicEndBricks = new List<XmlBrick>();

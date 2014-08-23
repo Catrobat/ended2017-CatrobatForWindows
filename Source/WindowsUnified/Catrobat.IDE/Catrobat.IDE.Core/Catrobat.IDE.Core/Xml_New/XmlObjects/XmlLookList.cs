@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public class XmlLookList : XmlObject
+    public class XmlLookList : XmlObjectNode
     {
         public List<XmlLook> Looks { get; set; }
 

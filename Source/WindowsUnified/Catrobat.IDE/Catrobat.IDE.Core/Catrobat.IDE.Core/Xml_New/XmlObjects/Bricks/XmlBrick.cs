@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
 {
-    public abstract partial class XmlBrick : XmlObject
+    public abstract partial class XmlBrick : XmlObjectNode
     {
         protected XmlBrick() {}
 

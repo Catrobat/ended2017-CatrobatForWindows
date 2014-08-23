@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 {
-    public partial class XmlFormula : XmlObject
+    public partial class XmlFormula : XmlObjectNode
     {
         public XmlFormulaTree FormulaTree { get; set; }
 

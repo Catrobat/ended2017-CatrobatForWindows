@@ -10,19 +10,19 @@ using Catrobat.IDE.Core.Xml.XmlObjects;
 namespace Catrobat.IDE.Core.XmlModelConvertion
 {
     public abstract class XmlModelConverter<TXmlType, TModelType> : IXmlModelConverter
-        where TXmlType : XmlObject 
+        where TXmlType : XmlObjectNode 
         where TModelType : Model
     {
         public abstract TModelType Convert(TXmlType o);
 
         public abstract TXmlType Convert(TModelType m);
 
-        public Model Convert(XmlObject o)
+        public Model Convert(XmlObjectNode o)
         {
             return Convert((TXmlType)o);
         }
 
-        public XmlObject Convert(Model m)
+        public XmlObjectNode Convert(Model m)
         {
             return Convert((TModelType)m);
         }

@@ -9,7 +9,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
 {
-    public class XmlBrickList : XmlObject
+    public class XmlBrickList : XmlObjectNode
     {
         public List<XmlBrick> Bricks { get; set; }
 

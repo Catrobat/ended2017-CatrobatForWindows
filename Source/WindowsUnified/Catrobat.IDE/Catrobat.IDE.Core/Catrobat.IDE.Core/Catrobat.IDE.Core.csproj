@@ -147,6 +147,7 @@
     <Compile Include="XmlModelConvertion\IXmlModelConverter.cs" />
     <Compile Include="XmlModelConvertion\XmlModelConverter.cs" />
     <Compile Include="XmlModelConvertion\XmlModelConversionService.cs" />
+    <Compile Include="Xml_New\XmlObjects\XmlObject.cs" />
     <Compile Include="Xml_Old\Converter\Models\Bricks\AnimatePropertyBrick.cs" />
     <Compile Include="Xml_Old\Converter\Models\Bricks\BroadcastBrick.cs" />
     <Compile Include="Xml_Old\Converter\Models\Bricks\ChangePropertyBrick.cs" />
@@ -330,8 +331,8 @@
     <Compile Include="Xml_New\XmlObjects\XmlLook.cs" />
     <Compile Include="Xml_New\XmlObjects\XmlLookList.cs" />
     <Compile Include="Xml_New\XmlObjects\XmlLookReference.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlObject.cs" />
-    <Compile Include="Xml_New\XmlObjects\DataRootObject.cs" />
+    <Compile Include="Xml_New\XmlObjects\XmlObjectNode.cs" />
+    <Compile Include="Xml_New\XmlObjects\DataObjectRoot.cs" />
     <Compile Include="Xml_New\XmlObjects\Formulas\XmlFormula.cs" />
     <Compile Include="Xml_New\XmlObjects\Formulas\XmlFormulaTree.cs" />
     <Compile Include="CatrobatObjects\OnlineProgramHeader.cs" />

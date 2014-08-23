@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
-    public class XmlObjectVariableList : XmlObject
+    public class XmlObjectVariableList : XmlObjectNode
     {
         public List<XmlObjectVariableEntry> ObjectVariableEntries;
 

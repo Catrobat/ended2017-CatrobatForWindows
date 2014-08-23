@@ -4,7 +4,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public partial class XmlSprite : XmlObject
+    public partial class XmlSprite : XmlObjectNode
     {
         public XmlLookList Looks { get; set; }
 
