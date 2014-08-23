@@ -4,7 +4,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Storage
 {
   public class StorageFactoryTest : IStorageFactory
   {
-    public IStorage CreateStorage()
+    public IStorage CreateStorage(StorageLocation storageLocation = StorageLocation.Temp)
     {
       return new StorageTest();
     }

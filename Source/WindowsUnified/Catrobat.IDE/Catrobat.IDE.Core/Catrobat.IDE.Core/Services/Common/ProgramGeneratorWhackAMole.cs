@@ -31,7 +31,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public async Task<Program> GenerateProgram(string programName, bool writeToDisk)
         {
-            var project = new Program
+            var program = new Program
             {
                 Name = programName, 
                 UploadHeader = new UploadHeader
@@ -44,17 +44,17 @@ namespace Catrobat.IDE.Core.Services.Common
 
             if (writeToDisk)
             {
-                await WriteScreenshotsToDisk(project.BasePath);
-                await WriteLooksToDisk(Path.Combine(project.BasePath, StorageConstants.ProgramLooksPath));
-                await WriteSoundsToDisk(Path.Combine(project.BasePath, StorageConstants.ProgramSoundsPath));
+                await WriteScreenshotsToDisk(program.BasePath);
+                await WriteLooksToDisk(Path.Combine(program.BasePath, StorageConstants.ProgramLooksPath));
+                await WriteSoundsToDisk(Path.Combine(program.BasePath, StorageConstants.ProgramSoundsPath));
             }
 
-            FillSprites(project);
+            FillSprites(program);
 
             if (writeToDisk)
-                await project.Save();
+                await program.Save();
 
-            return project;
+            return program;
         }
 
         private static async Task WriteScreenshotsToDisk(string basePathToScreenshotFiles)
@@ -155,7 +155,7 @@ namespace Catrobat.IDE.Core.Services.Common
         }
 
 
-        private static void FillSprites(Program project)
+        private static void FillSprites(Program program)
         {
             var objectBackground = new Sprite { Name = AppResources.DefaultProgram_Background }; 
             var objectMole1 = new Sprite { Name = AppResources.WhackAMole_Mole + " 1" };
@@ -515,11 +515,11 @@ namespace Catrobat.IDE.Core.Services.Common
 
             #endregion
 
-            project.Sprites.Add(objectBackground);
-            project.Sprites.Add(objectMole1);
-            project.Sprites.Add(objectMole2);
-            project.Sprites.Add(objectMole3);
-            project.Sprites.Add(objectMole4);
+            program.Sprites.Add(objectBackground);
+            program.Sprites.Add(objectMole1);
+            program.Sprites.Add(objectMole2);
+            program.Sprites.Add(objectMole3);
+            program.Sprites.Add(objectMole4);
         }
 
 

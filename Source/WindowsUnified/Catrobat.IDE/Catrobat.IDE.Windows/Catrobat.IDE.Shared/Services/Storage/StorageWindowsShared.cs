@@ -22,6 +22,28 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
     {
         private static int _imageThumbnailDefaultMaxWidthHeight = 200;
         private readonly List<Stream> _openedStreams = new List<Stream>();
+        private StorageFolder _baseFolder;
+
+        public StorageWindowsShared(StorageLocation storageLocation = StorageLocation.Temp)
+        {
+            switch(storageLocation)
+            {
+                case StorageLocation.Local:
+                    _baseFolder = ApplicationData.Current.LocalFolder;
+                    break;
+
+                case StorageLocation.Roaming:
+                    _baseFolder = ApplicationData.Current.RoamingFolder;
+                    break;
+
+                case StorageLocation.Temp:
+                    _baseFolder = ApplicationData.Current.TemporaryFolder;
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException("storagelocation");
+            }
+        }
 
         #region Synchron
 
@@ -146,25 +168,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
         public void WriteSerializableObject(string path, object serializableObject)
         {
             WriteSerializableObjectAsync(path, serializableObject).Wait();
-        }
-
-        public string BasePath
-        {
-            get { return ""; }
-        }
-
-        public void Dispose()
-        {
-            foreach (var stream in _openedStreams)
-            {
-                stream.Dispose();
-            }
-        }
-
-        internal void SetImageMaxThumbnailWidthHeight(int maxWidthHeight)
-        {
-            _imageThumbnailDefaultMaxWidthHeight = maxWidthHeight;
-        }
+        } 
 
         public void TryCreateThumbnail(string file)
         {
@@ -176,15 +180,14 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
 
         #region Async
 
-        public async Task CreateDirectoryAsync(string path)
-        {
-            await CreateFolderPathAsync(path);
-        }
+        #region File manipulation
 
-        public async Task<bool> DirectoryExistsAsync(string path)
+        public async Task<string[]> GetFileNamesAsync(string path)
         {
-            var folder = await GetFolderAsync(path);
-            return folder != null;
+            var rootDirectory = await GetFolderAsync(path);
+            var files = await rootDirectory.GetFilesAsync();
+
+            return files.Select(file => file.Name).ToArray();
         }
 
         public async Task<bool> FileExistsAsync(string path)
@@ -200,6 +203,96 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             }
         }
 
+        public async Task<Stream> OpenFileAsync(string path, StorageFileMode mode, StorageFileAccess access)
+        {
+            var folderPath = Path.GetDirectoryName(path);
+            var fileName = Path.GetFileName(path);
+            var accessMode = FileAccessMode.ReadWrite;
+
+            switch (access)
+            {
+                case StorageFileAccess.Read:
+                    accessMode = FileAccessMode.Read;
+                    break;
+                case StorageFileAccess.ReadWrite:
+                    accessMode = FileAccessMode.ReadWrite;
+                    break;
+                case StorageFileAccess.Write:
+                    accessMode = FileAccessMode.ReadWrite;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("access");
+            }
+            StorageFile file;
+            switch (mode)
+            {
+                case StorageFileMode.Append:
+                case StorageFileMode.Open:
+                case StorageFileMode.OpenOrCreate:
+                case StorageFileMode.Truncate:
+                    file = await GetFileAsync(path, false);
+                    break;
+                case StorageFileMode.Create:
+                case StorageFileMode.CreateNew:
+                    {
+                        try
+                        {
+                            var folder = await CreateFolderPathAsync(folderPath);
+                            //var folder = await GetFolderAsync(folderPath);
+                            file = await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                        break;
+                    }
+                default:
+                    throw new ArgumentOutOfRangeException("mode");
+            }
+
+            if (file == null)
+                return null;
+
+            var stream = await file.OpenAsync(accessMode);
+            _openedStreams.Add(stream.AsStream());
+            return stream.AsStream();
+        }
+        
+        public async Task DeleteFileAsync(string path)
+        {
+            var file = await GetFileAsync(path);
+
+            if (file != null)
+                await file.DeleteAsync();
+        }
+
+        public async Task MoveFileAsync(string sourcePath, string destinationPath)
+        {
+            var file = await GetFileAsync(sourcePath);
+            var destinationFolderPath = Path.GetPathRoot(destinationPath);
+            var destinationFolder = await GetFolderAsync(destinationFolderPath);
+
+            await file.MoveAsync(destinationFolder);
+        }
+
+        public async Task CopyFileAsync(string sourcePath, string destinationPath)
+        {
+            var file = await GetFileAsync(sourcePath, false);
+            // false required - source path does already contain the required folders
+
+            var destinationFolderPath = Path.GetDirectoryName(destinationPath);
+            var destinationFolder = await GetFolderAsync(destinationFolderPath);
+
+            var newFileName = Path.GetFileName(destinationPath);
+
+            await file.CopyAsync(destinationFolder, newFileName, NameCollisionOption.ReplaceExisting);
+        }
+
+        #endregion
+
+        #region Directory manipulation
+
         public async Task<string[]> GetDirectoryNamesAsync(string path)
         {
             var rootDirectory = await GetFolderAsync(path);
@@ -208,12 +301,15 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             return directories.Select(directory => directory.Name).ToArray();
         }
 
-        public async Task<string[]> GetFileNamesAsync(string path)
+        public async Task<bool> DirectoryExistsAsync(string path)
         {
-            var rootDirectory = await GetFolderAsync(path);
-            var files = await rootDirectory.GetFilesAsync();
+            var folder = await GetFolderAsync(path);
+            return folder != null;
+        }
 
-            return files.Select(file => file.Name).ToArray();
+        public async Task CreateDirectoryAsync(string path)
+        {
+            await CreateFolderPathAsync(path);
         }
 
         public async Task DeleteDirectoryAsync(string path)
@@ -237,12 +333,12 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                 await directory.DeleteAsync();
         }
 
-        public async Task DeleteFileAsync(string path)
+        public async Task MoveDirectoryAsync(string sourcePath, string destinationPath)
         {
-            var file = await GetFileAsync(path);
+            await CopyDirectoryAsync(sourcePath, destinationPath);
 
-            if (file != null)
-                await file.DeleteAsync();
+            var directory = await GetFolderAsync(sourcePath);
+            await directory.DeleteAsync();
         }
 
         public async Task CopyDirectoryAsync(string sourcePath, string destinationPath)
@@ -280,103 +376,59 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             }
         }
 
-        public async Task MoveDirectoryAsync(string sourcePath, string destinationPath)
-        {
-            await CopyDirectoryAsync(sourcePath, destinationPath);
-
-            var directory = await GetFolderAsync(sourcePath);
-            await directory.DeleteAsync();
-        }
-
-        public async Task CopyFileAsync(string sourcePath, string destinationPath)
-        {
-            var file = await GetFileAsync(sourcePath, false); 
-            // false required - source path does already contain the required folders
-
-            var destinationFolderPath = Path.GetDirectoryName(destinationPath);
-            var destinationFolder = await GetFolderAsync(destinationFolderPath);
-
-            var newFileName = Path.GetFileName(destinationPath);
-
-            await file.CopyAsync(destinationFolder, newFileName, NameCollisionOption.ReplaceExisting);
-        }
-
-        public async Task MoveFileAsync(string sourcePath, string destinationPath)
-        {
-            var file = await GetFileAsync(sourcePath);
-            var destinationFolderPath = Path.GetPathRoot(destinationPath);
-            var destinationFolder = await GetFolderAsync(destinationFolderPath);
-
-            await file.MoveAsync(destinationFolder);
-        }
-
-        public async Task<Stream> OpenFileAsync(string path, StorageFileMode mode, StorageFileAccess access)
-        {
-            var folderPath = Path.GetDirectoryName(path);
-            var fileName = Path.GetFileName(path);
-
-            var accessMode = FileAccessMode.ReadWrite;
-
-            switch (access)
-            {
-                case StorageFileAccess.Read:
-                    accessMode = FileAccessMode.Read;
-                    break;
-                case StorageFileAccess.ReadWrite:
-                    accessMode = FileAccessMode.ReadWrite;
-                    break;
-                case StorageFileAccess.Write:
-                    accessMode = FileAccessMode.ReadWrite;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException("access");
-            }
-
-
-            StorageFile file;
-
-            switch (mode)
-            {
-                case StorageFileMode.Append:
-                case StorageFileMode.Open:
-                case StorageFileMode.OpenOrCreate:
-                case StorageFileMode.Truncate:
-                    file = await GetFileAsync(path, false);
-                    break;
-                case StorageFileMode.Create:
-                case StorageFileMode.CreateNew:
-                    {
-                        try
-                        {
-                            var folder = await CreateFolderPathAsync(Path.GetDirectoryName(path));
-                            //var folder = await GetFolderAsync(folderPath);
-                            file = await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
-                        }
-                        catch (Exception)
-                        {
-
-                            throw;
-                        }
-                        break;
-                    }
-                default:
-                    throw new ArgumentOutOfRangeException("mode");
-            }
-
-            if (file == null)
-                return null;
-
-            var stream = await file.OpenAsync(accessMode);
-            _openedStreams.Add(stream.AsStream());
-            return stream.AsStream();
-        }
-
         public async Task RenameDirectoryAsync(string directoryPath, string newDirectoryName)
         {
             var directory = await GetFolderAsync(directoryPath);
             await directory.RenameAsync(newDirectoryName);
         }
 
+        #endregion
+
+        #region Specialized reading and writing
+        public async Task<object> ReadSerializableObjectAsync(string path, Type type)
+        {
+            using (var fileStream = await OpenFileAsync(path, StorageFileMode.Open, StorageFileAccess.Read))
+            {
+                var serializer = new DataContractSerializer(type);
+
+                if (fileStream == null)
+                    return null;
+
+                var serializeableObject = serializer.ReadObject(fileStream);
+                fileStream.Dispose();
+                return serializeableObject;
+            }
+        }
+
+        public async Task WriteSerializableObjectAsync(string path, object serializableObject)
+        {
+            using (var fileStream = await OpenFileAsync(path, StorageFileMode.Create, StorageFileAccess.Write))
+            {
+                var serializer = new DataContractSerializer(serializableObject.GetType());
+                serializer.WriteObject(fileStream, serializableObject);
+                fileStream.Dispose();
+            }
+        }
+
+        public async Task<string> ReadTextFileAsync(string path)
+        {
+            var file = await GetFileAsync(path, false);
+
+            if (file == null)
+                return null;
+
+            return await FileIO.ReadTextAsync(file);
+        }
+
+        public async Task WriteTextFileAsync(string path, string content)
+        {
+            var file = await GetFileAsync(path, true);
+            await FileIO.WriteTextAsync(file, content);
+        }
+
+        #endregion
+
+        #region Image reading and writing
         public async Task<PortableImage> LoadImageAsync(string pathToImage)
         {
             if (await FileExistsAsync(pathToImage))
@@ -427,84 +479,6 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                 }
             }
             return null;
-        }
-
-        public async Task<PortableImage> LoadImageThumbnailAsync(string pathToImage)
-        {
-            pathToImage = pathToImage.Replace("\\", "/");
-
-            PortableImage retVal = null;
-            var withoutExtension = Path.GetFileNameWithoutExtension(pathToImage);
-            var imageBasePath = Path.GetDirectoryName(pathToImage);
-
-            if (imageBasePath != null)
-            {
-                var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}",
-                    withoutExtension, StorageConstants.ImageThumbnailExtension));
-
-                if (await FileExistsAsync(thumbnailPath))
-                {
-                    retVal = await LoadImageAsync(thumbnailPath);
-                }
-                else
-                {
-                    var fullSizePortableImage = await LoadImageAsync(pathToImage);
-
-                    if (fullSizePortableImage != null)
-                    {
-                        var thumbnailImage = await ServiceLocator.ImageResizeService.ResizeImage(
-                            fullSizePortableImage, _imageThumbnailDefaultMaxWidthHeight);
-                        retVal = thumbnailImage;
-
-                        await thumbnailImage.WriteAsPng(thumbnailPath);
-                    }
-                }
-            }
-
-            return retVal;
-        }
-
-        public async Task TryCreateThumbnailAsync(string filePath)
-        {
-            var withoutExtension = Path.GetFileNameWithoutExtension(filePath);
-            var imageBasePath = Path.GetDirectoryName(filePath);
-
-            var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}",
-                withoutExtension, StorageConstants.ImageThumbnailExtension));
-
-            //var thumbnailPath = filePath + StorageConstants.ImageThumbnailExtension;
-
-            if (!await FileExistsAsync(thumbnailPath))
-            {
-                var fullSizePortableImage = await LoadImageAsync(filePath);
-
-                if (fullSizePortableImage != null)
-                {
-                    var thumbnailImage = await ServiceLocator.
-                        ImageResizeService.ResizeImage(fullSizePortableImage,
-                        _imageThumbnailDefaultMaxWidthHeight);
-
-                    await thumbnailImage.WriteAsPng(thumbnailPath);
-                }
-            }
-        }
-
-
-        public async Task<PortableImage> CreateThumbnailAsync(PortableImage image, string imagePath)
-        {
-            var thumbnailImage = await ServiceLocator.
-                ImageResizeService.ResizeImage(image,
-                _imageThumbnailDefaultMaxWidthHeight);
-
-            await thumbnailImage.WriteAsPng(imagePath);
-
-            return thumbnailImage;
-        }
-
-        public async Task DeleteImageAsync(string pathToImage)
-        {
-            await DeleteFileAsync(pathToImage);
-            await DeleteFileAsync(pathToImage + StorageConstants.ImageThumbnailExtension);
         }
 
         public async Task SaveImageAsync(string path, PortableImage image, bool deleteExisting, ImageFormat format)
@@ -588,84 +562,133 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             }
         }
 
-        public async Task<string> ReadTextFileAsync(string path)
+        public async Task DeleteImageAsync(string pathToImage)
         {
-            var file = await GetFileAsync(path, false);
-
-            if (file == null)
-                return null;
-
-            return await FileIO.ReadTextAsync(file);
+            await DeleteFileAsync(pathToImage);
+            await DeleteFileAsync(pathToImage + StorageConstants.ImageThumbnailExtension);
         }
 
-        public async Task WriteTextFileAsync(string path, string content)
+        public async Task<PortableImage> LoadImageThumbnailAsync(string pathToImage)
         {
-            var file = await GetFileAsync(path, true);
-            await FileIO.WriteTextAsync(file, content);
-        }
+            pathToImage = pathToImage.Replace("\\", "/");
 
-        public async Task<object> ReadSerializableObjectAsync(string path, Type type)
-        {
-            using (var fileStream = await OpenFileAsync(path, StorageFileMode.Open, StorageFileAccess.Read))
+            PortableImage retVal = null;
+            var withoutExtension = Path.GetFileNameWithoutExtension(pathToImage);
+            var imageBasePath = Path.GetDirectoryName(pathToImage);
+
+            if (imageBasePath != null)
             {
-                var serializer = new DataContractSerializer(type);
+                var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}",
+                    withoutExtension, StorageConstants.ImageThumbnailExtension));
 
-                if (fileStream == null)
-                    return null;
+                if (await FileExistsAsync(thumbnailPath))
+                {
+                    retVal = await LoadImageAsync(thumbnailPath);
+                }
+                else
+                {
+                    var fullSizePortableImage = await LoadImageAsync(pathToImage);
 
-                var serializeableObject = serializer.ReadObject(fileStream);
-                fileStream.Dispose();
-                return serializeableObject;
+                    if (fullSizePortableImage != null)
+                    {
+                        var thumbnailImage = await ServiceLocator.ImageResizeService.ResizeImage(
+                            fullSizePortableImage, _imageThumbnailDefaultMaxWidthHeight);
+                        retVal = thumbnailImage;
+
+                        await thumbnailImage.WriteAsPng(thumbnailPath);
+                    }
+                }
+            }
+
+            return retVal;
+        }
+
+        public async Task TryCreateThumbnailAsync(string filePath)
+        {
+            var withoutExtension = Path.GetFileNameWithoutExtension(filePath);
+            var imageBasePath = Path.GetDirectoryName(filePath);
+
+            var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}",
+                withoutExtension, StorageConstants.ImageThumbnailExtension));
+
+            if (!await FileExistsAsync(thumbnailPath))
+            {
+                var fullSizePortableImage = await LoadImageAsync(filePath);
+
+                if (fullSizePortableImage != null)
+                {
+                    var thumbnailImage = await ServiceLocator.
+                        ImageResizeService.ResizeImage(fullSizePortableImage,
+                        _imageThumbnailDefaultMaxWidthHeight);
+
+                    await thumbnailImage.WriteAsPng(thumbnailPath);
+                }
             }
         }
 
-        public async Task WriteSerializableObjectAsync(string path, object serializableObject)
-        {
-            using (var fileStream = await OpenFileAsync(path, StorageFileMode.Create, StorageFileAccess.Write))
-            {
-                var serializer = new DataContractSerializer(serializableObject.GetType());
-                serializer.WriteObject(fileStream, serializableObject);
-                fileStream.Dispose();
-            }
-        }
+        //public async Task<PortableImage> CreateThumbnailAsync(PortableImage image, string imagePath)
+        //{
+        //    var thumbnailImage = await ServiceLocator.
+        //        ImageResizeService.ResizeImage(image,
+        //        _imageThumbnailDefaultMaxWidthHeight);
 
+        //    await thumbnailImage.WriteAsPng(imagePath);
+
+        //    return thumbnailImage;
+        //}
 
         #endregion
+
+        #endregion
+
+
+        public string BasePath
+        {
+            get { return ""; }
+        }
+
+        public void Dispose()
+        {
+            foreach (var stream in _openedStreams)
+            {
+                stream.Dispose();
+            }
+        }
 
         #region Helpers
 
         public async Task<StorageFolder> CreateFolderPathAsync(string path)
         {
             if (path == "")
-                return ApplicationData.Current.LocalFolder;
+                return _baseFolder;
 
-            var subPath = Path.GetDirectoryName(path);
+            //var subPath = Path.GetDirectoryName(path);
 
-            var parentFolder = await CreateFolderPathAsync(subPath);
+            //var parentFolder = await CreateFolderPathAsync(subPath);
 
-            if (parentFolder == null)
-                return null;
+            //if (parentFolder == null)
+            //    return null;
 
-            var folderName = Path.GetFileName(path);
+            //var folderName = Path.GetFileName(path);
 
-            try
-            {
-                var folder = await parentFolder.GetFolderAsync(folderName);
-                return folder;
-            }
-            catch { }
+            //try
+            //{
+            //    var folder = await parentFolder.GetFolderAsync(folderName);
+            //    return folder;
+            //}
+            //catch { }
 
 
-            var folders = await parentFolder.GetFoldersAsync();
+            //var folders = await parentFolder.GetFoldersAsync();
 
-            foreach (var folder in folders)
-            {
+            //foreach (var folder in folders)
+            //{
 
-            }
+            //}
 
-            await parentFolder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
-            var newFolder = await parentFolder.GetFolderAsync(folderName);
-            return newFolder;
+            //await parentFolder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
+            //var newFolder = await parentFolder.GetFolderAsync(folderName);
+            //return newFolder;
 
             //var subPath = Path.GetDirectoryName(path);
 
@@ -682,27 +705,44 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             //}
 
             //path = subPath;
+            try
+            {
+                var folder = await _baseFolder.CreateFolderAsync(path, CreationCollisionOption.OpenIfExists);
+                return folder;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public async Task<StorageFolder> GetFolderAsync(string path)
         {
-            //await CreateFolderPathAsync(path);
-
             if (path == "")
-                return ApplicationData.Current.LocalFolder;
+                return _baseFolder;
 
-            var subPath = Path.GetDirectoryName(path);
+            //var subPath = Path.GetDirectoryName(path);
 
-            var parentFolder = await GetFolderAsync(subPath);
+            //var parentFolder = await GetFolderAsync(subPath);
 
-            if (parentFolder == null)
-                return null;
+            //if (parentFolder == null)
+            //    return null;
 
-            var folderName = Path.GetFileName(path);
+            //var folderName = Path.GetFileName(path);
+
+            //try
+            //{
+            //    var folder = await parentFolder.GetFolderAsync(folderName);
+            //    return folder;
+            //}
+            //catch (Exception)
+            //{
+            //    return null;
+            //}
 
             try
             {
-                var folder = await parentFolder.GetFolderAsync(folderName);
+                var folder = await _baseFolder.GetFolderAsync(path);
                 return folder;
             }
             catch (Exception)
@@ -730,6 +770,11 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             return await folder.GetFileAsync(fileName);
         }
 
+
+        internal void SetImageMaxThumbnailWidthHeight(int maxWidthHeight)
+        {
+            _imageThumbnailDefaultMaxWidthHeight = maxWidthHeight;
+        }
 
         #endregion
     }

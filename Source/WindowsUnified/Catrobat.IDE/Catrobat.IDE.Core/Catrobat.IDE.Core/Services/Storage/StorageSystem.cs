@@ -2,9 +2,9 @@
 {
     public class StorageSystem
     {
-        public static IStorage GetStorage()
+        public static IStorage GetStorage(StorageLocation storageLocation = StorageLocation.Local)
         {
-            return ServiceLocator.StorageFactory.CreateStorage();
+            return ServiceLocator.StorageFactory.CreateStorage(storageLocation);
         }
     }
 }

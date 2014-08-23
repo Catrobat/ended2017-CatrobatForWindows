@@ -7,7 +7,7 @@
     xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
     xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
     mc:Ignorable="d"
-    DataContext="{Binding MainViewModel.SelectedOnlineProgram, Source={StaticResource Locator}}" Loaded="ViewPageBase_Loaded">
+    DataContext="{Binding OnlineProgramViewModel, Source={StaticResource Locator}}">
 
   <Grid x:Name="LayoutRoot" 
         Background="{ThemeResource AppBackgroundBrush}">
@@ -39,7 +39,7 @@
       <Image Grid.Column="0"
              Width="200" Height="Auto"  
              VerticalAlignment="Top" 
-             Source="{Binding ScreenshotBig}" />
+             Source="{Binding SelectedOnlineProgram.ScreenshotBig}" />
 
       <ScrollViewer Grid.Column="1">
         <StackPanel Grid.Column="1" Margin="12 0 6 0">
@@ -48,21 +48,21 @@
                    Source={StaticResource LocalizedStrings}}"
                    TextWrapping="Wrap"
                    Style="{ThemeResource TextNormalStyle}"/>
-          <TextBlock Text="{Binding ProjectName}" 
+          <TextBlock Text="{Binding SelectedOnlineProgram.ProjectName}" 
                    TextWrapping="Wrap"
                    Style="{ThemeResource TextSmallStyle}"/>
           <TextBlock Margin="0 12 0 0" 
                    Text="{Binding Resources.Main_ProgramDescription, 
                    Source={StaticResource LocalizedStrings}}" 
                    Style="{ThemeResource TextNormalStyle}"/>
-          <StackPanel Visibility="{Binding Description, 
+          <StackPanel Visibility="{Binding SelectedOnlineProgram.Description, 
                     Converter={StaticResource StringVisibilityConverter}}">
             <TextBlock Text="{Binding Resources.Main_ProgramNoDescription, 
                      Source={StaticResource LocalizedStrings}}"
                      TextWrapping="Wrap"
                      Style="{ThemeResource TextSubtileStyle}"/>
           </StackPanel>
-          <TextBlock Text="{Binding Description}" 
+          <TextBlock Text="{Binding SelectedOnlineProgram.Description}" 
                   TextWrapping="Wrap"
                   Style="{ThemeResource TextSmallStyle}"/>
           <TextBlock Margin="0 12 0 0" 
@@ -70,15 +70,13 @@
                   Source={StaticResource LocalizedStrings}}" 
                   Style="{ThemeResource TextNormalStyle}"/>
           <TextBlock x:Name="UploadedLabel" 
-                  Text="{Binding OnlineProgramViewModel.UploadedLabelText, 
-                  Source={StaticResource Locator}}"
+                  Text="{Binding UploadedLabelText}"
                   Style="{ThemeResource TextSmallStyle}"/>
-          <TextBlock Text="{Binding Author}" 
+          <TextBlock Text="{Binding SelectedOnlineProgram.Author}" 
                   TextWrapping="Wrap"
                   Style="{ThemeResource TextSmallStyle}"/>
           <TextBlock x:Name="VersionLabel" 
-                  Text="{Binding OnlineProgramViewModel.VersionLabelText, 
-                  Source={StaticResource Locator}}" 
+                  Text="{Binding VersionLabelText}" 
                   TextWrapping="Wrap"
                   Style="{ThemeResource TextSmallStyle}"/>
           <TextBlock Margin="0 12 0 0"
@@ -86,13 +84,11 @@
                   Source={StaticResource LocalizedStrings}}" 
                   Style="{ThemeResource TextNormalStyle}"/>
           <TextBlock x:Name="ViewsLabel" 
-                  Text="{Binding OnlineProgramViewModel.ViewsLabelText, 
-                  Source={StaticResource Locator}}" 
+                  Text="{Binding ViewsLabelText}" 
                   TextWrapping="Wrap"
                   Style="{ThemeResource TextSmallStyle}"/>
           <TextBlock x:Name="DownloadsLabel" 
-                  Text="{Binding OnlineProgramViewModel.DownloadsLabelText, 
-                  Source={StaticResource Locator}}" 
+                  Text="{Binding DownloadsLabelText}" 
                   TextWrapping="Wrap"
                   Style="{ThemeResource TextSmallStyle}"/>
         </StackPanel>
@@ -109,7 +105,8 @@
         TextAlignment="Center" HorizontalAlignment="Center" 
         Margin="10 0 10 10"
         Style="{ThemeResource TextNormalStyle}"/>
-        <ProgressBar Name="ProgressBarDownload" 
+        <ProgressBar Name="
+    BarDownload" 
                      IsIndeterminate="False" 
                      Margin="10"
                      Maximum="100"/>
@@ -130,8 +127,8 @@
       </StackPanel>
     </Grid>-->
     <!--Xaml-content for old downloader:-->
-    <StackPanel Grid.Row="3"
-                Visibility="{Binding OnlineProgramViewModel.IsImporting, Source={StaticResource Locator}, 
+    <StackPanel Grid.Row="2"
+                Visibility="{Binding IsImporting, 
                 Converter={StaticResource BoolVisibilityConverter}}">
       <StackPanel Margin="12 0 12 6"
                   Background="{ThemeResource AppBarBackgroundBrush}"
@@ -142,9 +139,8 @@
                       Orientation="Horizontal" 
                       VerticalAlignment="Center" 
                       HorizontalAlignment="Center">
-            <controls:ProcessIcon Margin="0 0 6 0" x:Name="ProcessIconDownloadProgress"
-                      IsProcessing="{Binding OnlineProgramViewModel.IsImporting, 
-                      Source={StaticResource Locator}}" />
+            <controls:ProcessIcon Margin="0 0 6 0"
+                      IsProcessing="True" />
             <TextBlock Foreground="White"
                        VerticalAlignment="Center" HorizontalAlignment="Center" 
                        Text="{Binding Resources.Main_OnlineProgramLoading, 
@@ -156,8 +152,7 @@
                     Margin="24 0 0 0"
                     Foreground="{ThemeResource AppBarBackgroundBrush}"
                     Background="White"
-                    Command="{Binding OnlineProgramViewModel.CancelDownloadCommand, 
-                    Source={StaticResource Locator}}"
+                    Command="{Binding CancelDownloadCommand}"
                     HorizontalAlignment="Right">
           </Button>
         </StackPanel>
@@ -171,20 +166,17 @@
         <AppBarButton Icon="Download" 
                       Label="{Binding Resources.Main_OnlineProgramDownloadButton, 
                       Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding OnlineProgramViewModel.DownloadCommand, 
-                      Source={StaticResource Locator}}" 
-                      CommandParameter="{Binding}"/>
+                      Command="{Binding DownloadCommand}" 
+                      CommandParameter="{Binding SelectedOnlineProgram}"/>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
         <AppBarButton Label="{Binding Resources.Main_OnlineProgramReportButton, 
                       Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding OnlineProgramViewModel.ReportCommand, 
-                      Source={StaticResource Locator}}" 
-                      CommandParameter="{Binding}"/>
+                      Command="{Binding ReportCommand}" 
+                      CommandParameter="{Binding SelectedOnlineProgram}"/>
         <AppBarButton Label="{Binding Resources.Main_OnlineProgramLicenseButton, 
                       Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding OnlineProgramViewModel.LicenseCommand, 
-                      Source={StaticResource Locator}}" />
+                      Command="{Binding LicenseCommand}" />
       </CommandBar.SecondaryCommands>
     </CommandBar>
   </Page.BottomAppBar>

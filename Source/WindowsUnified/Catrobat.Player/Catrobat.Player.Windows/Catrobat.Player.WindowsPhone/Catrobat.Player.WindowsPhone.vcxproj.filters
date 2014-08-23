@@ -97,5 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\italic.spritefont" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

@@ -74,8 +74,8 @@
 
         <Grid Grid.Column="1" Margin="20 20 0 0">
           <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
           </Grid.ColumnDefinitions>
           <Grid.RowDefinitions>
             <RowDefinition Height="30" />
@@ -129,11 +129,11 @@
                      Converter={StaticResource BoolVisibilityConverter}}"
                      Style="{ThemeResource TextLargerStyle}"/>
           <TextBlock Grid.Row="2" Grid.Column="0"
-                     HorizontalAlignment="Right"
+                     HorizontalAlignment="Right" 
                      Text="?" 
                      Visibility="{Binding IsValid, 
                      Converter={StaticResource NegativeBoolVisibilityConverter}}"
-                     Style="{ThemeResource TextNormalStyle}"/>
+                     Style="{ThemeResource TextLargerStyle}"/>
           <TextBlock Grid.Row="2" Grid.Column="1" Margin="7 0 0 0"
                      HorizontalAlignment="Left"
                      Text="{Binding Resources.Main_NumberOfLooks, 

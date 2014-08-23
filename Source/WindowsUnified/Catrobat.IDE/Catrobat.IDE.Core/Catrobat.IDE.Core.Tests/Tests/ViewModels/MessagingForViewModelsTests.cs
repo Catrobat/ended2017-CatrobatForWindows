@@ -218,6 +218,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels
         public void SelectedOnlineProgramChangedTest()
         {
             // Service
+            var onlineProgramViewModel = new OnlineProgramViewModel();
             var onlineProgramReportViewModel = new OnlineProgramReportViewModel();
 
             var onlineProjectHeader = SampleLoader.GetSampleOnlineProjectHeader();
@@ -226,6 +227,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.SelectedOnlineProgramChangedListener);
 
             // Service
+            Assert.AreEqual("Radio Fun City", onlineProgramViewModel.SelectedOnlineProgram.ProjectName);
             Assert.AreEqual("Radio Fun City", onlineProgramReportViewModel.SelectedOnlineProgram.ProjectName);
         }
 

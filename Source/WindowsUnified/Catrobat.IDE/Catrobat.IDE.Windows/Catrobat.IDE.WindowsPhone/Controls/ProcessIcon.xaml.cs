@@ -35,6 +35,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         public ProcessIcon()
         {
             InitializeComponent();
+            Loaded += (sender, args) =>  ProcessingStateChanged(IsProcessing);
         }
 
         private void ProcessingStateChanged(bool isProcessing)

@@ -28,10 +28,10 @@ namespace Catrobat.IDE.Core
 
 
         // Program temporary paths
-        public const string TempProgramImportZipPath = "Temp/ImportProgramZip";
-        public const string TempProgramImportPath = "Temp/ImportProgram";
-        public const string TempProgramExportZipPath = "Temp/ExportProgramZip";
-        public const string TempProgramExportPath = "Temp/ExportProgram";
+        public const string TempProgramImportZipPath = "Temp\\ImportProgramZip";
+        public const string TempProgramImportPath = "Temp\\ImportProgram";
+        public const string TempProgramExportZipPath = "Temp\\ExportProgramZip";
+        public const string TempProgramExportPath = "Temp\\ExportProgram";
 
         public static string TempPaintImagePath
         { get { return "Temp/temp" + PaintImageExportFileExtension; } }
@@ -45,7 +45,7 @@ namespace Catrobat.IDE.Core
         public const string ProgramSoundsPath = "sounds";
 
         // other constants
-        public const string LocalSettingsFilePath = "Settings/settings";
+        public const string LocalSettingsFilePath = "Settings\\settings";
         public const string ImageThumbnailExtension = "_thumb.png";
     }
 }
