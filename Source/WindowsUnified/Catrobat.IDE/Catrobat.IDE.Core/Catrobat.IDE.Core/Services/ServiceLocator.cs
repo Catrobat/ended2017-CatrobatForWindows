@@ -6,6 +6,7 @@ using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.XmlModelConvertion;
 
 namespace Catrobat.IDE.Core.Services
 {
@@ -160,6 +161,12 @@ namespace Catrobat.IDE.Core.Services
         public static IProgramValidationService ProgramValidationService
         { get { return GetInstance<IProgramValidationService>(); } }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IXmlModelConversionService XmlModelConversionService
+        { get { return GetInstance<IXmlModelConversionService>(); } }
+        
         #endregion
 
         public static ViewModelLocator ViewModelLocator { get; set; }

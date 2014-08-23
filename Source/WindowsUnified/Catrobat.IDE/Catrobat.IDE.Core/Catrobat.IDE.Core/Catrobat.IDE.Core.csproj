@@ -86,6 +86,7 @@
     <Compile Include="Services\Common\ProgramValidationService.cs" />
     <Compile Include="Services\IProgramExportService.cs" />
     <Compile Include="Services\IProgramValidationService.cs" />
+    <Compile Include="Services\IXmlModelConversionService.cs" />
     <Compile Include="StorageConstants.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
     <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
@@ -143,7 +144,7 @@
     <Compile Include="XmlModelConvertion\Converters\SpriteConverter.cs" />
     <Compile Include="XmlModelConvertion\IXmlModelConverter.cs" />
     <Compile Include="XmlModelConvertion\XmlModelConverter.cs" />
-    <Compile Include="XmlModelConvertion\XmlModelConverterService.cs" />
+    <Compile Include="XmlModelConvertion\XmlModelConversionService.cs" />
     <Compile Include="Xml_Old\Converter\Models\Bricks\AnimatePropertyBrick.cs" />
     <Compile Include="Xml_Old\Converter\Models\Bricks\BroadcastBrick.cs" />
     <Compile Include="Xml_Old\Converter\Models\Bricks\ChangePropertyBrick.cs" />

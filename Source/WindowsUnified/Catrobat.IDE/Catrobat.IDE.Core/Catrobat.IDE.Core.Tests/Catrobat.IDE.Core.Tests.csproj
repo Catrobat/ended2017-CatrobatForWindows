@@ -113,6 +113,7 @@
     <Compile Include="Services\Storage\StorageFactoryTest.cs" />
     <Compile Include="Services\Storage\StorageTest.cs" />
     <Compile Include="Tests\Data\DataDeletingTests.cs" />
+    <Compile Include="Tests\Data\XmlModelConversionTests.cs" />
     <Compile Include="Tests\Data\DataEqualsTests.cs" />
     <Compile Include="Tests\Data\DataReflectionTests.cs" />
     <Compile Include="Tests\Data\ReferenceHelperTests.cs" />
