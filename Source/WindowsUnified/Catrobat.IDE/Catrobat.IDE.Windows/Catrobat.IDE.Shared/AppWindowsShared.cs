@@ -8,6 +8,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.XmlModelConvertion;
 using Catrobat.IDE.WindowsShared.Services;
 using Catrobat.IDE.WindowsShared.Services.Common;
 using Catrobat.IDE.WindowsShared.Services.Storage;
@@ -51,6 +52,7 @@ namespace Catrobat.IDE.WindowsShared
             ServiceLocator.Register<ContextService>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ProgramExportService>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ProgramValidationService>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<XmlModelConversionService>(TypeCreationMode.Normal);
 
             ServiceLocator.ViewModelLocator = new ViewModelLocator();
             ServiceLocator.ViewModelLocator.RegisterViewModels();
