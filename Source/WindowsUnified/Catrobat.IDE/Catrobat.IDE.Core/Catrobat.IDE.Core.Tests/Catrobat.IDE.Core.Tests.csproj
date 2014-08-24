@@ -84,6 +84,7 @@
     <Compile Include="Extensions\EnumerableAssert.cs" />
     <Compile Include="Extensions\MethodInfoExtensions.cs" />
     <Compile Include="Extensions\ModelAssert.cs" />
+    <Compile Include="Extensions\StorageExtensions.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Extensions\ResourceSetExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />

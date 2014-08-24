@@ -3,6 +3,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Tests.Services.Storage;
+using Catrobat.IDE.Core.Tests.Extensions;
 
 namespace Catrobat.IDE.Core.Tests.Misc
 {

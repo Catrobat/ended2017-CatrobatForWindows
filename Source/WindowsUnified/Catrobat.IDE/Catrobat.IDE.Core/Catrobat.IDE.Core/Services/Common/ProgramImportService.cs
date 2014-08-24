@@ -161,7 +161,6 @@ namespace Catrobat.IDE.WindowsShared.Services
             var uniqueProgramName = await ServiceLocator.ContextService.
                 FindUniqueProgramName(_programName);
 
-            Debug.WriteLine("Starting with _convertedProgram.Save in AcceptTempProgram");
             if (_convertedProgram != null) // if previour conversion was OK
             {
                 await _convertedProgram.Save(Path.Combine(
@@ -177,7 +176,6 @@ namespace Catrobat.IDE.WindowsShared.Services
             if (_checkResult != null)
                 _checkResult.ProgramHeader.ProjectName = renameResult.NewProjectName;
 
-            Debug.WriteLine("Starting with storage.MoveDirectoryAsyn in AcceptTempProgram");
             using (var storage = StorageSystem.GetStorage())
             {
                 var newPath = Path.Combine(StorageConstants.ProgramsPath,

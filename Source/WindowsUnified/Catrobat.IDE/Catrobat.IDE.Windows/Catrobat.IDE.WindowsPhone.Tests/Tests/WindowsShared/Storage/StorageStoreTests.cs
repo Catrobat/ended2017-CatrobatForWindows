@@ -229,7 +229,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
 
                 using (IStorage storage = new StorageWindowsShared())
                 {
-                    var image = storage.LoadImage("TestLoadImage/screenshot.png");
+                    var image = await storage.LoadImageAsync("TestLoadImage/screenshot.png");
                     Assert.IsNotNull(image);
                 }
             }
@@ -246,11 +246,11 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
                 var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SamplePrograms/test.catroid");
                 await zipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
 
-                var image = storage.LoadImage("TestLoadImage/screenshot.png");
+                var image = await storage.LoadImageAsync("TestLoadImage/screenshot.png");
 
                 //throw new NotImplementedException("TODO: check next line");
-                storage.SaveImage("TestLoadImage2/screenshot.png", image, true, ImageFormat.Png);
-                var image2 = storage.LoadImage("TestLoadImage2/screenshot.png");
+                await storage.SaveImageAsync("TestLoadImage2/screenshot.png", image, true, ImageFormat.Png);
+                var image2 = await storage.LoadImageAsync("TestLoadImage2/screenshot.png");
 
                 // TODO: Maybe check if pixels are corect?
 
@@ -259,16 +259,17 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
         }
 
         [TestMethod]
-        public void ReadWriteTextFileTest()
+        public async void ReadWriteTextFileTest()
         {
             IStorage storage = new StorageWindowsShared();
 
-            storage.WriteTextFile("test.txt", "test123");
-            Assert.AreEqual("test123", storage.ReadTextFile("test.txt"));
+            await storage.WriteTextFileAsync("test.txt", "test123");
+            var textfile = await storage.ReadTextFileAsync("test.txt");
+            Assert.AreEqual("test123", textfile);
         }
 
         [TestMethod]
-        public void ReadWriteSerializableObjectTest()
+        public async void ReadWriteSerializableObjectTest()
         {
             IStorage storage = new StorageWindowsShared();
 
@@ -277,8 +278,8 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
                 CurrentProgramName = "ProjectName"
             };
 
-            storage.WriteSerializableObject("testobject", settingsWrite);
-            var settingsRead = (LocalSettings)storage.ReadSerializableObject("testobject", settingsWrite.GetType());
+            await storage.WriteSerializableObjectAsync("testobject", settingsWrite);
+            var settingsRead = (LocalSettings) await storage.ReadSerializableObjectAsync("testobject", settingsWrite.GetType());
 
             Assert.AreEqual("ProjectName", settingsRead.CurrentProgramName);
         }
