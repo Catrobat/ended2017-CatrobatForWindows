@@ -7,13 +7,13 @@
     xmlns:models="using:Catrobat.IDE.Core.Models"
     mc:Ignorable="d" RequestedTheme="Light"
     d:DesignHeight="100"
-    d:DesignWidth="360">
+    d:DesignWidth="390">
 
   <Grid x:Name="GridRoot" Height="90" 
     VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
     DataContext="{Binding}"
     d:DataContext="{d:DesignInstance models:Look}">
-    <Grid RequestedTheme="Dark" Margin="0 4 7 4"
+    <Grid RequestedTheme="Dark" Margin="0 4 0 4"
           Background="{ThemeResource LooksBrush}"
           HorizontalAlignment="Stretch">
       <Grid.ColumnDefinitions>

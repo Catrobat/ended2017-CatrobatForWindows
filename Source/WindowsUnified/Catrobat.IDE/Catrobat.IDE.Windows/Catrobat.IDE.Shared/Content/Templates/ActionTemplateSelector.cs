@@ -1,8 +1,8 @@
 ﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Models.Scripts;
+using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls;
 
 namespace Catrobat.IDE.WindowsPhone.IDE.Content.Templates
 {
@@ -66,7 +66,8 @@ namespace Catrobat.IDE.WindowsPhone.IDE.Content.Templates
         public DataTemplate UnknownBrick { get; set; }
         public DataTemplate EmptyDummyBrick { get; set; }
 
-        protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
+
+        public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             var scriptBrick = item as Model;
             if (scriptBrick != null)

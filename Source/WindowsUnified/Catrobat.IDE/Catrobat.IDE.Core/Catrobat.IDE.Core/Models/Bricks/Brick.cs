@@ -90,5 +90,12 @@ namespace Catrobat.IDE.Core.Models.Bricks
             get { return _isAttached; }
             set { _isAttached = value; }
         }
+
+        private bool _isNewAdded = false;
+        public bool IsNewAdded
+        {
+            get { return _isNewAdded; }
+            set { _isNewAdded = value; }
+        }
     }
 }

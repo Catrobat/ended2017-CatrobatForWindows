@@ -13,6 +13,8 @@
         <ResourceDictionary Source="ms-appx:///Controls/FormulaControls/Templates/FormulaTokenTemplates.xaml"/>
         <ResourceDictionary Source="ms-appx:///Themes/Themes.xaml"/>
         <ResourceDictionary Source="ms-appx:///Controls/ListsViewControls/BidableGridViewDefaultTemplate.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Controls/ItemControls/Templates/BrickTemplates.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Controls/ListsViewControls/Templates/CatrobatListViewTemplate.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

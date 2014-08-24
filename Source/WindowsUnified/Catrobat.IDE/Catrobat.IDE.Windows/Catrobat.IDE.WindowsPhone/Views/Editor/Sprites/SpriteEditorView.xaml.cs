@@ -12,6 +12,8 @@ using Windows.UI.Xaml;
 using Catrobat.IDE.WindowsPhone.Controls;
 using Catrobat.IDE.WindowsPhone.Controls.SoundControls;
 using Catrobat.IDE.WindowsShared.Services;
+using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls;
+using System.Collections;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 {
@@ -122,14 +124,15 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         private void MultiModeEditorCommandBar_OnModeChanged(MultiModeEditorCommandBarMode mode)
         {
-            ListViewBase listView = null;
+            CatrobatListView listView = null;
 
             if (PivotMain.SelectedItem == PivotActions)
                 listView = ListViewActions;
-            else if (PivotMain.SelectedItem == PivotLooks)
-                listView = ListViewLooks;
-            else if (PivotMain.SelectedItem == PivotSounds)
-                listView = ListViewSounds;
+            else
+                if (PivotMain.SelectedItem == PivotLooks)
+                    listView = ListViewLooks;    
+                else if (PivotMain.SelectedItem == PivotSounds)
+                    listView = ListViewSounds; 
 
             Debug.Assert(listView != null, "listView != null");
 
@@ -137,15 +140,16 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             {
                 case MultiModeEditorCommandBarMode.Normal:
                     listView.SelectionMode = ListViewSelectionMode.None;
-                    listView.ReorderMode = ListViewReorderMode.Disabled;
+                    //listView.ReorderMode = ListViewReorderMode.Disabled;
+                    (listView.SelectedItems as IList).Clear();
                     break;
                 case MultiModeEditorCommandBarMode.Reorder:
-                    listView.SelectionMode = ListViewSelectionMode.None;
-                    listView.ReorderMode = ListViewReorderMode.Enabled;
+                    //listView.SelectionMode = ListViewSelectionMode.None;
+                    //listView.ReorderMode = ListViewReorderMode.Enabled;
                     break;
                 case MultiModeEditorCommandBarMode.Select:
                     listView.SelectionMode = ListViewSelectionMode.Multiple;
-                    listView.ReorderMode = ListViewReorderMode.Disabled;
+                    //listView.ReorderMode = ListViewReorderMode.Disabled;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("mode");
@@ -154,8 +158,8 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         private void LookItem_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            var isClickEnabled = ListViewLooks.ReorderMode == ListViewReorderMode.Disabled &&
-                                 ListViewLooks.SelectionMode == ListViewSelectionMode.None;
+            var isClickEnabled =/* ListViewLooks.ReorderEnabled == ListViewReorderMode.Disabled &&
+                                 */ListViewLooks.SelectionMode == ListViewSelectionMode.None;
 
             if (isClickEnabled)
                 if( _viewModel.EditLookCommand.CanExecute(((FrameworkElement)sender).DataContext))
@@ -164,7 +168,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         private void SoundItem_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            var isClickEnabled = ListViewSounds.ReorderMode == ListViewReorderMode.Disabled &&
+            var isClickEnabled = /*ListViewSounds.ReorderMode == ListViewReorderMode.Disabled &&*/
                                  ListViewSounds.SelectionMode == ListViewSelectionMode.None;
 
             if (isClickEnabled)
