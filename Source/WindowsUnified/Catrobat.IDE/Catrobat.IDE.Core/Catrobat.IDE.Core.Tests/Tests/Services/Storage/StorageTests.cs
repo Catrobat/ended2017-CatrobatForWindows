@@ -7,6 +7,7 @@ using Catrobat.IDE.Core.Tests.Misc;
 using Catrobat.IDE.Core.Tests.Misc.Storage;
 using Catrobat.IDE.Core.Tests.Services.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Catrobat.IDE.Core.Tests.Extensions;
 
 namespace Catrobat.IDE.Core.Tests.Tests.Services.Storage
 {

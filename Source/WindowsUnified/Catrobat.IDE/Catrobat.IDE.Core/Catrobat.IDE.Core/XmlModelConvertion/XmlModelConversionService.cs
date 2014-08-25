@@ -53,7 +53,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
                 throw new ArgumentException("The converter " + xmlType.Name + 
                     " is already registered.");
 
-            if (!_xmlToModelConverters.ContainsKey(xmlType))
+            if (!_modelToXmlConverters.ContainsKey(xmlType))
                 _modelToXmlConverters[modelType] = converter;
             else
                 throw new ArgumentException("The converter " + modelType.Name +

@@ -128,6 +128,14 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
                 else if (model is Script)
                     _selectedBrick = (model as Script).Clone();
 
+
+                List<Type> multiBrickBricks = new List<Type> {typeof(ForeverBrick), typeof(RepeatBrick), typeof(IfBrick)};
+
+                if (!multiBrickBricks.Contains(_selectedBrick.GetType()))
+                {
+                    (_selectedBrick as Brick).IsNewAdded = true;
+                }
+
                 _receivedScriptBrickCollection.AddScriptBrick(_selectedBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex);
 
                 var foreverBrick = _selectedBrick as ForeverBrick;

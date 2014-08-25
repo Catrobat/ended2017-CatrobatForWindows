@@ -38,7 +38,7 @@
         Margin="0 0 12 12"
         VerticalAlignment="Top"
         Height="690"
-        ItemTemplateSelector="{StaticResource ActionTemplateSelector}"
+        ItemTemplate="{StaticResource ActionTemplateSelectorTemplate}"
         ItemsSource="{Binding BrickCollection}"
         SelectionChanged="reorderListBoxScriptBricks_SelectionChanged"
         ><!--ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"-->

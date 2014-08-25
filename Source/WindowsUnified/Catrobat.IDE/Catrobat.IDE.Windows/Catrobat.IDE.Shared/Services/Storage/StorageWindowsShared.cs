@@ -45,138 +45,153 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             }
         }
 
-        #region Synchron
+        //#region Synchron
 
-        public void CreateDirectory(string path)
-        {
-            CreateDirectoryAsync(path).Wait();
-        }
+        //#region File manipulation
 
-        public bool DirectoryExists(string path)
-        {
-            var task = DirectoryExistsAsync(path);
-            task.Wait();
-            return task.Result;
-        }
+        //public string[] GetFileNames(string path)
+        //{
+        //    var task = GetFileNamesAsync(path);
+        //    task.Wait();
+        //    return task.Result;
+        //}
 
-        public bool FileExists(string path)
-        {
-            var task = FileExistsAsync(path);
-            task.Wait();
-            return task.Result;
-        }
+        //public bool FileExists(string path)
+        //{
+        //    var task = FileExistsAsync(path);
+        //    task.Wait();
+        //    return task.Result;
+        //}
 
-        public string[] GetDirectoryNames(string path)
-        {
-            var task = GetDirectoryNamesAsync(path);
-            task.Wait();
-            return task.Result;
-        }
+        //public Stream OpenFile(string path, StorageFileMode mode, StorageFileAccess access)
+        //{
+        //    var task = OpenFileAsync(path, mode, access);
+        //    task.Wait();
+        //    return task.Result;
+        //}
 
-        public string[] GetFileNames(string path)
-        {
-            var task = GetFileNamesAsync(path);
-            task.Wait();
-            return task.Result;
-        }
+        //public void DeleteFile(string path)
+        //{
+        //    DeleteFileAsync(path).Wait();
+        //}
 
-        public void DeleteDirectory(string path)
-        {
-            DeleteDirectoryAsync(path).Wait();
-        }
+        //public void MoveFile(string sourcePath, string destinationPath)
+        //{
+        //    MoveFileAsync(sourcePath, destinationPath).Wait();
+        //}
 
-        public void DeleteFile(string path)
-        {
-            DeleteFileAsync(path).Wait();
-        }
+        //public void CopyFile(string sourcePath, string destinationPath)
+        //{
+        //    CopyFileAsync(sourcePath, destinationPath).Wait();
+        //}
 
-        public void CopyDirectory(string sourcePath, string destinationPath)
-        {
-            CopyDirectoryAsync(sourcePath, destinationPath).Wait();
-        }
+        //#endregion
 
-        public void MoveDirectory(string sourcePath, string destinationPath)
-        {
-            MoveDirectoryAsync(sourcePath, destinationPath).Wait();
-        }
+        //#region Directory manipulation
 
-        public void CopyFile(string sourcePath, string destinationPath)
-        {
-            CopyFileAsync(sourcePath, destinationPath).Wait();
-        }
+        //public string[] GetDirectoryNames(string path)
+        //{
+        //    var task = GetDirectoryNamesAsync(path);
+        //    task.Wait();
+        //    return task.Result;
+        //}
 
-        public void MoveFile(string sourcePath, string destinationPath)
-        {
-            MoveFileAsync(sourcePath, destinationPath).Wait();
-        }
+        //public bool DirectoryExists(string path)
+        //{
+        //    var task = DirectoryExistsAsync(path);
+        //    task.Wait();
+        //    return task.Result;
+        //}
 
-        public Stream OpenFile(string path, StorageFileMode mode, StorageFileAccess access)
-        {
-            var task = OpenFileAsync(path, mode, access);
-            task.Wait();
-            return task.Result;
-        }
+        //public void CreateDirectory(string path)
+        //{
+        //    CreateDirectoryAsync(path).Wait();
+        //}
 
-        public void RenameDirectory(string directoryPath, string newDirectoryName)
-        {
-            RenameDirectoryAsync(directoryPath, newDirectoryName).Wait();
-        }
+        //public void DeleteDirectory(string path)
+        //{
+        //    DeleteDirectoryAsync(path).Wait();
+        //}
 
-        public PortableImage LoadImage(string pathToImage)
-        {
-            var task = LoadImageAsync(pathToImage);
-            task.Wait();
-            return task.Result;
-        }
+        //public void MoveDirectory(string sourcePath, string destinationPath)
+        //{
+        //    MoveDirectoryAsync(sourcePath, destinationPath).Wait();
+        //}
 
-        public PortableImage LoadImageThumbnail(string pathToImage)
-        {
-            var task = LoadImageThumbnailAsync(pathToImage);
-            task.Wait();
-            return task.Result;
-        }
+        //public void CopyDirectory(string sourcePath, string destinationPath)
+        //{
+        //    CopyDirectoryAsync(sourcePath, destinationPath).Wait();
+        //}
 
-        public void DeleteImage(string pathToImage)
-        {
-            DeleteImageAsync(pathToImage).Wait();
-        }
+        //public void RenameDirectory(string directoryPath, string newDirectoryName)
+        //{
+        //    RenameDirectoryAsync(directoryPath, newDirectoryName).Wait();
+        //}
 
-        public void SaveImage(string path, PortableImage image, bool deleteExisting, ImageFormat format)
-        {
-            SaveImageAsync(path, image, deleteExisting, format).Wait();
-        }
+        //#endregion
 
-        public string ReadTextFile(string path)
-        {
-            var task = ReadTextFileAsync(path);
-            task.Wait();
-            return task.Result;
-        }
+        //#region Specialized reading and writing
 
-        public void WriteTextFile(string path, string content)
-        {
-            WriteTextFileAsync(path, content).Wait();
-        }
+        //public object ReadSerializableObject(string path, Type type)
+        //{
+        //    var task = ReadSerializableObjectAsync(path, type);
+        //    task.Wait();
+        //    return task.Result;
+        //}
 
-        public object ReadSerializableObject(string path, Type type)
-        {
-            var task = ReadSerializableObjectAsync(path, type);
-            task.Wait();
-            return task.Result;
-        }
+        //public void WriteSerializableObject(string path, object serializableObject)
+        //{
+        //    WriteSerializableObjectAsync(path, serializableObject).Wait();
+        //}
 
-        public void WriteSerializableObject(string path, object serializableObject)
-        {
-            WriteSerializableObjectAsync(path, serializableObject).Wait();
-        } 
+        //public string ReadTextFile(string path)
+        //{
+        //    var task = ReadTextFileAsync(path);
+        //    task.Wait();
+        //    return task.Result;
+        //}
 
-        public void TryCreateThumbnail(string file)
-        {
-            var task = TryCreateThumbnailAsync(file);
-            task.Wait();
-        }
+        //public void WriteTextFile(string path, string content)
+        //{
+        //    WriteTextFileAsync(path, content).Wait();
+        //}
 
-        #endregion
+        //#endregion
+
+        //#region Image reading and writing
+        //public PortableImage LoadImage(string pathToImage)
+        //{
+        //    var task = LoadImageAsync(pathToImage);
+        //    task.Wait();
+        //    return task.Result;
+        //}
+
+        //public void SaveImage(string path, PortableImage image, bool deleteExisting, ImageFormat format)
+        //{
+        //    SaveImageAsync(path, image, deleteExisting, format).Wait();
+        //}
+
+        //public void DeleteImage(string pathToImage)
+        //{
+        //    DeleteImageAsync(pathToImage).Wait();
+        //}
+
+        //public PortableImage LoadImageThumbnail(string pathToImage)
+        //{
+        //    var task = LoadImageThumbnailAsync(pathToImage);
+        //    task.Wait();
+        //    return task.Result;
+        //}
+
+        //public void TryCreateThumbnail(string file)
+        //{
+        //    var task = TryCreateThumbnailAsync(file);
+        //    task.Wait();
+        //}
+
+        //#endregion
+
+        //#endregion
 
         #region Async
 
@@ -238,7 +253,6 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                         try
                         {
                             var folder = await CreateFolderPathAsync(folderPath);
-                            //var folder = await GetFolderAsync(folderPath);
                             file = await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
                         }
                         catch (Exception)

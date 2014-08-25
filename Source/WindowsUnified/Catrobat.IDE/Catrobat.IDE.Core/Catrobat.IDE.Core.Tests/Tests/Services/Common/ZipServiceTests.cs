@@ -5,6 +5,7 @@ using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Tests.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Catrobat.IDE.Core.Tests.Extensions;
 
 namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
 {
@@ -35,7 +36,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
                 originalStream.Dispose();
             }
 
-            using (var storage = StorageSystem.GetStorage())
+            using (IStorage storage = StorageSystem.GetStorage())
             {
                 Assert.IsTrue(storage.DirectoryExists("/Projects/TestProject"));
 

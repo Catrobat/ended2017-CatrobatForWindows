@@ -30,63 +30,63 @@ namespace Catrobat.IDE.Core.Services.Storage
 
     public interface IStorage : IDisposable
     {
-        #region Synchron
+        //#region Synchron
 
-        // File manipulation
+        //// File manipulation
 
-        string[] GetFileNames(string path);
+        //string[] GetFileNames(string path);
 
-        bool FileExists(string path);
+        //bool FileExists(string path);
 
-        Stream OpenFile(string path, StorageFileMode mode, StorageFileAccess access);
+        //Stream OpenFile(string path, StorageFileMode mode, StorageFileAccess access);
 
-        void DeleteFile(string path);
+        //void DeleteFile(string path);
 
-        void MoveFile(string sourcePath, string destinationPath);
+        //void MoveFile(string sourcePath, string destinationPath);
 
-        void CopyFile(string sourcePath, string destinationPath);
-
-
-        // Directory manipulation
-        string[] GetDirectoryNames(string path);
-
-        bool DirectoryExists(string path);
-
-        void CreateDirectory(string path);
-
-        void DeleteDirectory(string path);
-
-        void MoveDirectory(string sourcePath, string destinationPath);
-
-        void CopyDirectory(string sourcePath, string destinationPath);
-
-        void RenameDirectory(string directoryPath, string newDirectoryName);
+        //void CopyFile(string sourcePath, string destinationPath);
 
 
+        //// Directory manipulation
+        //string[] GetDirectoryNames(string path);
 
-        // Specialized reading and writing
-        object ReadSerializableObject(string path, Type type);
+        //bool DirectoryExists(string path);
 
-        void WriteSerializableObject(string path, object serializableObject);
+        //void CreateDirectory(string path);
 
-        string ReadTextFile(string path);
+        //void DeleteDirectory(string path);
 
-        void WriteTextFile(string path, string content);
+        //void MoveDirectory(string sourcePath, string destinationPath);
+
+        //void CopyDirectory(string sourcePath, string destinationPath);
+
+        //void RenameDirectory(string directoryPath, string newDirectoryName);
 
 
 
-        // Image reading and writing
-        PortableImage LoadImage(string pathToImage);
+        //// Specialized reading and writing
+        //object ReadSerializableObject(string path, Type type);
 
-        void SaveImage(string path, PortableImage image, bool deleteExisting, ImageFormat format);
+        //void WriteSerializableObject(string path, object serializableObject);
 
-        void DeleteImage(string pathToImage);
+        //string ReadTextFile(string path);
 
-        PortableImage LoadImageThumbnail(string pathToImage);
+        //void WriteTextFile(string path, string content);
 
-        void TryCreateThumbnail(string file);
 
-        #endregion
+
+        //// Image reading and writing
+        //PortableImage LoadImage(string pathToImage);
+
+        //void SaveImage(string path, PortableImage image, bool deleteExisting, ImageFormat format);
+
+        //void DeleteImage(string pathToImage);
+
+        //PortableImage LoadImageThumbnail(string pathToImage);
+
+        //void TryCreateThumbnail(string file);
+
+        //#endregion
 
         #region Async
 

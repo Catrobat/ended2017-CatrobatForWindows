@@ -111,6 +111,7 @@
       <DependentUpon>LargeImageButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ListsViewControls\BindableGridView.cs" />
+    <Compile Include="Controls\ListsViewControls\CatrobatListView.cs" />
     <Compile Include="Controls\ListsViewControls\SelectableGridView.cs" />
     <Compile Include="Controls\ListsViewControls\SelectableListView.cs" />
     <Compile Include="Controls\MultiModeEditorCommandBar.cs" />
@@ -315,11 +316,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\ItemControls\Templates\BrickTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Controls\LargeImageButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ListsViewControls\BidableGridViewDefaultTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Controls\ListsViewControls\Templates\CatrobatListViewTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
