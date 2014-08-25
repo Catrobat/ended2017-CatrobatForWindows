@@ -15,7 +15,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public partial class XmlProgram : DataObjectRoot
+    public partial class XmlProgram : XmlObjectRoot
     {
         #region Properties
 

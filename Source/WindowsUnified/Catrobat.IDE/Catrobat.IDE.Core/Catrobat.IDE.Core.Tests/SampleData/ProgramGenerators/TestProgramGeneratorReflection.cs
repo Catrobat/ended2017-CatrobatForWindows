@@ -14,19 +14,19 @@ using Catrobat.IDE.Core.Tests.Extensions;
 
 namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
 {
-    public class ProgramGeneratorReflection : ITestProgramGenerator
+    public class TestProgramGeneratorReflection : ITestProgramGenerator
     {
         private Random _random;
         private readonly int? _seed;
         private readonly DateTime? _now;
 
-        public ProgramGeneratorReflection()
+        public TestProgramGeneratorReflection()
         {
             _seed = null;
             _now = null;
         }
 
-        public ProgramGeneratorReflection(int seed, DateTime now)
+        public TestProgramGeneratorReflection(int seed, DateTime now)
         {
             _seed = seed;
             _now = now;

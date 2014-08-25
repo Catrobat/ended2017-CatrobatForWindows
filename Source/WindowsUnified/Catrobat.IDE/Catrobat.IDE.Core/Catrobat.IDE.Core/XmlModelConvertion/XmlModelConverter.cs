@@ -17,21 +17,21 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
     {
         protected readonly IXmlModelConversionService Converter;
 
-        protected XmlModelConverter()
+        protected XmlModelConverter(IXmlModelConversionService converter)
         {
-            Converter = ServiceLocator.XmlModelConversionService;
+            Converter = converter;
         }
 
         public abstract TModelType Convert(TXmlType o, XmlModelConvertContext c);
 
         public abstract TXmlType Convert(TModelType m, XmlModelConvertBackContext c);
 
-        public Model Convert(XmlObjectNode o, XmlModelConvertContext c)
+        public Model Convert(XmlObject o, XmlModelConvertContext c)
         {
             return Convert((TXmlType)o, c);
         }
 
-        public XmlObjectNode Convert(Model m, XmlModelConvertBackContext c)
+        public XmlObject Convert(Model m, XmlModelConvertBackContext c)
         {
             return Convert((TModelType)m, c);
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 
@@ -11,6 +12,10 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
 {
     public class LookConverter : XmlModelConverter<XmlLook, Look>
     {
+        public LookConverter(IXmlModelConversionService converter) : base(converter)
+        {
+        }
+
         public override Look Convert(XmlLook o, XmlModelConvertContext c)
         {
             return new Look

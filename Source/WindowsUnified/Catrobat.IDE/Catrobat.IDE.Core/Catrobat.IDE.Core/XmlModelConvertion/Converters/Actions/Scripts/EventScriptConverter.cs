@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Catrobat.IDE.Core.Models.Scripts;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
 
@@ -10,6 +11,8 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Scripts
         XmlModelConverter<XmlWhenScript, EventScript>
         where TEventScript : EventScript
     {
+        public EventScriptConverter(IXmlModelConversionService converter) : base(converter){}
+
         public override EventScript Convert(XmlWhenScript o, XmlModelConvertContext c)
         {
             switch (o.Action)

@@ -15,6 +15,10 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Scripts
         where TXmlScript : XmlScript
         where TScript : Script
     {
+        protected ScriptConverterBase(IXmlModelConversionService converter) : base(converter)
+        {
+        }
+
         public override TScript Convert(TXmlScript o, XmlModelConvertContext c)
         {
             var result = Convert1(o, c);

@@ -339,7 +339,7 @@
     <Compile Include="Xml_New\XmlObjects\XmlLookList.cs" />
     <Compile Include="Xml_New\XmlObjects\XmlLookReference.cs" />
     <Compile Include="Xml_New\XmlObjects\XmlObjectNode.cs" />
-    <Compile Include="Xml_New\XmlObjects\DataObjectRoot.cs" />
+    <Compile Include="Xml_New\XmlObjects\XmlObjectRoot.cs" />
     <Compile Include="Xml_New\XmlObjects\Formulas\XmlFormula.cs" />
     <Compile Include="Xml_New\XmlObjects\Formulas\XmlFormulaTree.cs" />
     <Compile Include="CatrobatObjects\OnlineProgramHeader.cs" />

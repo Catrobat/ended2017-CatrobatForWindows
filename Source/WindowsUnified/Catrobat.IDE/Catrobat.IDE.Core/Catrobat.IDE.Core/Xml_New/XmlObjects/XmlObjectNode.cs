@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public abstract class XmlObjectNode
+    public abstract class XmlObjectNode : XmlObject
     {
         internal abstract void LoadFromXml(XElement xRoot);
 

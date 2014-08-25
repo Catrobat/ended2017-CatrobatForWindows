@@ -1,11 +1,15 @@
 ﻿using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Scripts;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Scripts
 {
     public class BroadcastReceaveScriptConverter : ScriptConverterBase<XmlBroadcastScript, BroadcastReceivedScript>
     {
+        public BroadcastReceaveScriptConverter(IXmlModelConversionService converter) 
+            : base(converter) { }
+
         public override BroadcastReceivedScript Convert1(XmlBroadcastScript o, XmlModelConvertContext c)
         {
             BroadcastMessage message = null;

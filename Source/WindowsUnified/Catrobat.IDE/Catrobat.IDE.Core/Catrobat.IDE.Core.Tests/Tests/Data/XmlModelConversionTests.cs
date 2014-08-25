@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Extensions;
 using Catrobat.IDE.Core.Tests.Misc;
 using Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators;
@@ -21,7 +22,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("XmlModelConversion")]
-        public void CheckIfAllXmlTypsHaveCorrespondingConverters()
+        public void CheckIfAllXmlTypsHaveCorrespondingConvertersTest()
         {
             var assembly = typeof(IXmlModelConverter).GetTypeInfo().Assembly;
             var typesInAssemblies = assembly.DefinedTypes;
@@ -58,6 +59,22 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             foreach (var modelType in modelTypes)
                 Assert.IsTrue(converterModelTypes.Contains(modelType));
+        }
+
+
+        [TestMethod, TestCategory("XmlModelConversion")]
+        public void XmlModelConversionReflectionTest()
+        {
+            var conversionService = new XmlModelConversionService();
+
+            var programGenerator = new TestProgramGeneratorReflection();
+            var program1 = programGenerator.GenerateProgram();
+
+            var xmlProgram = (XmlProgram)conversionService.Convert(program1);
+
+            var program2 = (Program)conversionService.Convert(xmlProgram);
+
+            Assert.AreEqual(program1, program2);
         }
     }
 }

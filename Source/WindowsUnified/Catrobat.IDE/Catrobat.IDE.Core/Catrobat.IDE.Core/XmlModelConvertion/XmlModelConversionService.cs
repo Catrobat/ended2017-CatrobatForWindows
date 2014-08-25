@@ -24,6 +24,8 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
             _xmlToModelConverters = new Dictionary<Type, IXmlModelConverter>();
             _modelToXmlConverters = new Dictionary<Type, IXmlModelConverter>();
 
+            ResetContext();
+
             FindAndRegisterConverters();
         }
 
@@ -36,8 +38,8 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 
             var converterInstances = (from typeInfo in inAssemblies
                 where typeInfo.ImplementedInterfaces.Contains(typeof (IXmlModelConverter)) &&
-                typeInfo.IsAbstract == false
-                select (IXmlModelConverter)Activator.CreateInstance(typeInfo.AsType())).ToList();
+                typeInfo.IsAbstract == false && typeInfo.ContainsGenericParameters == false
+                select (IXmlModelConverter)Activator.CreateInstance(typeInfo.AsType(), this)).ToList();
 
             foreach (var converter in converterInstances)
                 RegisterConverter(converter);
@@ -63,7 +65,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
                     " is already registered.");
         }
 
-        public Model Convert(XmlObjectNode o)
+        public Model Convert(XmlObject o)
         {
             var xmlType = o.GetType();
             var converter = _xmlToModelConverters[xmlType];
@@ -71,7 +73,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
             return _xmlToModelConverters[o.GetType()].Convert(o, _convertContext);
         }
 
-        public XmlObjectNode Convert(Model m)
+        public XmlObject Convert(Model m)
         {
             return _modelToXmlConverters[m.GetType()].Convert(m, _convertBackContext);
         }

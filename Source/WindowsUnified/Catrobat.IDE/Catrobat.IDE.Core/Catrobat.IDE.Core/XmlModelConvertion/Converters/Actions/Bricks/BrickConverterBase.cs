@@ -1,4 +1,5 @@
 ﻿using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
@@ -8,6 +9,10 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
         where TXmlBrick : XmlBrick
         where TBrick : Brick
     {
+        protected BrickConverterBase(IXmlModelConversionService converter) : base(converter)
+        {
+        }
+
         public override TBrick Convert(TXmlBrick o, XmlModelConvertContext c)
         {
             // prevents endless loops

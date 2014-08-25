@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         [TestMethod, TestCategory("Data")]
         public void ScriptBrickEnumeratorTest()
         {
-            ITestProgramGenerator projectGenerator = new ProgramGeneratorForScriptBrickCollectionTests();
+            ITestProgramGenerator projectGenerator = new TestsProgramGeneratorForScriptBrickCollection();
             var project = projectGenerator.GenerateProgram();
 
 
@@ -71,7 +71,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         [TestMethod, TestCategory("Data")]
         public void ScriptBrickCollectionRemoveTest()
         {
-            ITestProgramGenerator projectGenerator = new ProgramGeneratorForScriptBrickCollectionTests();
+            ITestProgramGenerator projectGenerator = new TestsProgramGeneratorForScriptBrickCollection();
             var project = projectGenerator.GenerateProgram();
 
             var sprite = project.Sprites[1];
@@ -125,7 +125,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         [TestMethod, TestCategory("Data")]
         public void ScriptBrickCollectionInsertTest()
         {
-            ITestProgramGenerator projectGenerator = new ProgramGeneratorForScriptBrickCollectionTests();
+            ITestProgramGenerator projectGenerator = new TestsProgramGeneratorForScriptBrickCollection();
             var project = projectGenerator.GenerateProgram();
 
             var sprite = project.Sprites[1];
@@ -172,7 +172,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         [TestMethod, TestCategory("Data")]
         public void ScriptBrickCollectionAddTest()
         {
-            ITestProgramGenerator projectGenerator = new ProgramGeneratorForScriptBrickCollectionTests();
+            ITestProgramGenerator projectGenerator = new TestsProgramGeneratorForScriptBrickCollection();
             var project = projectGenerator.GenerateProgram();
 
             var sprite = project.Sprites[1];
@@ -227,7 +227,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         [TestMethod, TestCategory("Data")]
         public void ScriptBrickCollectionContainsTest()
         {
-            ITestProgramGenerator projectGenerator = new ProgramGeneratorForScriptBrickCollectionTests();
+            ITestProgramGenerator projectGenerator = new TestsProgramGeneratorForScriptBrickCollection();
             var project = projectGenerator.GenerateProgram();
 
             var sprite = project.Sprites[1];
@@ -249,7 +249,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         [TestMethod, TestCategory("Data")]
         public void ScriptBrickCollectionIndexIfTest()
         {
-            ITestProgramGenerator projectGenerator = new ProgramGeneratorForScriptBrickCollectionTests();
+            ITestProgramGenerator projectGenerator = new TestsProgramGeneratorForScriptBrickCollection();
             var project = projectGenerator.GenerateProgram();
 
             var sprite = project.Sprites[1];
@@ -276,7 +276,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         [TestMethod, TestCategory("Data")]
         public void ScriptBrickCollectionAddBrickTest()
         {
-            ITestProgramGenerator projectGenerator = new ProgramGeneratorForScriptBrickCollectionTests();
+            ITestProgramGenerator projectGenerator = new TestsProgramGeneratorForScriptBrickCollection();
             var project = projectGenerator.GenerateProgram();
 
             var sprite = project.Sprites[1];
