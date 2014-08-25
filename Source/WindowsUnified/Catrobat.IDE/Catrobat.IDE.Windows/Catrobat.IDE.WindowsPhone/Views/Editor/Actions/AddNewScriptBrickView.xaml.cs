@@ -26,7 +26,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Actions
 
         private void reorderListBoxScriptBricks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _viewModel.AddNewScriptBrickCommand.Execute(((ListView) sender).SelectedItem as Model);
+            _viewModel.AddNewScriptBrickCommand.Execute(((ListView)sender).SelectedItem as ModelBase);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.CatrobatModels;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Extensions;
 using Catrobat.IDE.Core.Tests.Misc;
@@ -49,16 +50,16 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
                 typeInfo.IsAbstract == false
                 select typeInfo.AsType()).ToList();
 
-            var modelTypes = (from typeInfo in inAssemblies
-                where typeInfo.IsSubclassOf(typeof(Model)) && // TODO: introduce derivied type of Model that is only used for Model classes that have a corresponding XmlObject
-                typeInfo.IsAbstract == false
-                select typeInfo.AsType()).ToList();
-
             foreach (var xmlObjectType in xmlObjectTypes)
                 Assert.IsTrue(converterXmlObjectTypes.Contains(xmlObjectType));
 
-            foreach (var modelType in modelTypes)
-                Assert.IsTrue(converterModelTypes.Contains(modelType));
+            //var modelTypes = (from typeInfo in inAssemblies
+            //    where typeInfo.IsSubclassOf(typeof(CatrobatModel)) &&
+            //    typeInfo.IsAbstract == false
+            //    select typeInfo.AsType()).ToList();
+
+            //foreach (var modelType in modelTypes)
+            //    Assert.IsTrue(converterModelTypes.Contains(modelType));
         }
 
 

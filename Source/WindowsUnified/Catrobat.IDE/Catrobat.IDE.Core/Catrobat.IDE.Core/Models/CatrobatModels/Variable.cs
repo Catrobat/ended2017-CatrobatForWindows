@@ -1,12 +1,13 @@
 ﻿using System.Diagnostics;
 using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Models.CatrobatModels;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 
 namespace Catrobat.IDE.Core.Models
 {
     [DebuggerDisplay("Name = {Name}")]
-    public abstract partial class Variable : Model, ISelectable
+    public abstract partial class Variable : CatrobatModelBase, ISelectable
     {
         #region Properties
 
@@ -32,7 +33,7 @@ namespace Catrobat.IDE.Core.Models
 
         #region Implements ITestEquatable
 
-        protected override bool TestEquals(Model other)
+        protected override bool TestEquals(ModelBase other)
         {
             return base.TestEquals(other) && TestEquals((Variable) other);
         }

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models.CatrobatModels;
 using Catrobat.IDE.Core.Models.Formulas.Tokens;
 
 namespace Catrobat.IDE.Core.Models.Formulas.Tree
 {
-    public abstract partial class FormulaTree : Model, IFormulaToken, ICloneable, ICloneable<CloneSpriteContext>
+    public abstract partial class FormulaTree : CatrobatModelBase, IFormulaToken, ICloneable, ICloneable<CloneSpriteContext>
     {
         public abstract IEnumerable<FormulaTree> Children { get; }
 
@@ -15,7 +16,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
             return other != null && other.GetType() == GetType() && TestEquals((FormulaTree) other);
         }
 
-        protected override bool TestEquals(Model other)
+        protected override bool TestEquals(ModelBase other)
         {
             return base.TestEquals(other) && TestEquals((FormulaTree) other);
         }

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Models.CatrobatModels;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Xml.Converter;
@@ -11,7 +12,7 @@ using System.Collections.ObjectModel;
 namespace Catrobat.IDE.Core.Models
 {
     [DebuggerDisplay("Name = {Name}")]
-    public partial class Program : Model, ITestEquatable<Program>
+    public partial class Program : CatrobatModelBase, ITestEquatable<Program>
     {
         #region Properties
 
@@ -158,7 +159,7 @@ namespace Catrobat.IDE.Core.Models
 
         #region Implements ITestEquatable
 
-        protected override bool TestEquals(Model other)
+        protected override bool TestEquals(ModelBase other)
         {
             return base.TestEquals(other) && TestEquals((Program) other);
         }

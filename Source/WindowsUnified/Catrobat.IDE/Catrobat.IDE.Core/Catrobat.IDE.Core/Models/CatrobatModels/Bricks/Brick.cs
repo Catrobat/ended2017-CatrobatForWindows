@@ -1,15 +1,16 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models.CatrobatModels;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
 
 namespace Catrobat.IDE.Core.Models.Bricks
 {
-    public abstract partial class Brick : Model, IBrick
+    public abstract partial class Brick : CatrobatModelBase, IBrick
     {
 
         #region Implements ITestEquatable
 
-        protected override bool TestEquals(Model other)
+        protected override bool TestEquals(ModelBase other)
         {
             return base.TestEquals(other) && TestEquals((Brick) other);
         }

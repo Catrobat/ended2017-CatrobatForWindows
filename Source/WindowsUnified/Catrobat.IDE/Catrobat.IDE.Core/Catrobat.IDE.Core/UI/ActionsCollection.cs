@@ -31,7 +31,7 @@ namespace Catrobat.IDE.Core.UI
 
         public int LastDeletedIndex { get; private set; }
 
-        public Model PreventIsertOfNext { get; set; }
+        public ModelBase PreventIsertOfNext { get; set; }
 
         public void Update(Sprite selectedSprite)
         {
@@ -39,7 +39,7 @@ namespace Catrobat.IDE.Core.UI
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
-        public void AddScriptBrick(Model scriptBrick, int firstViewIndex, int lastViewIndex)
+        public void AddScriptBrick(ModelBase scriptBrick, int firstViewIndex, int lastViewIndex)
         {
             //if (this.Count == lastViewIndex + 1 && GetAtIndex(lastViewIndex) is Script && )
             //{
@@ -228,7 +228,7 @@ namespace Catrobat.IDE.Core.UI
             get { return false; }
         }
 
-        public bool Remove(Model item)
+        public bool Remove(ModelBase item)
         {
             if (item != null)
             {
@@ -239,7 +239,7 @@ namespace Catrobat.IDE.Core.UI
             return false;
         }
 
-        public IEnumerator<Model> GetEnumerator()
+        public IEnumerator<ModelBase> GetEnumerator()
         {
             return new ScriptBrickIterator(Scripts);
         }

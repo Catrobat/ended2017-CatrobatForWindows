@@ -12,8 +12,8 @@ namespace Catrobat.IDE.Core.Services
     {
         void ResetContext();
 
-        Model Convert(XmlObject o);
+        ModelBase Convert(XmlObject o);
 
-        XmlObject Convert(Model m);
+        XmlObject Convert(ModelBase m);
     }
 }

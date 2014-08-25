@@ -6,8 +6,8 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 {
     public interface IXmlModelConverter
     {
-        Model Convert(XmlObject o, XmlModelConvertContext c);
+        ModelBase Convert(XmlObject o, XmlModelConvertContext c);
 
-        XmlObject Convert(Model m, XmlModelConvertBackContext c);
+        XmlObject Convert(ModelBase m, XmlModelConvertBackContext c);
     }
 }

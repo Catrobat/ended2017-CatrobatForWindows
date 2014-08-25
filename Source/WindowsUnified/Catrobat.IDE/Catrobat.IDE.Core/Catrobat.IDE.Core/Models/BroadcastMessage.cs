@@ -4,7 +4,7 @@ using Catrobat.IDE.Core.UI;
 namespace Catrobat.IDE.Core.Models
 {
     [DebuggerDisplay("Content = {Content}")]
-    public partial class BroadcastMessage : Model, ISelectable
+    public partial class BroadcastMessage  : ModelBase, ISelectable
     {
         #region Properties
 
@@ -30,7 +30,7 @@ namespace Catrobat.IDE.Core.Models
 
         #region Implements ITestEquatable
 
-        protected override bool TestEquals(Model other)
+        protected override bool TestEquals(ModelBase other)
         {
             return base.TestEquals(other) && TestEquals((BroadcastMessage) other);
         }
