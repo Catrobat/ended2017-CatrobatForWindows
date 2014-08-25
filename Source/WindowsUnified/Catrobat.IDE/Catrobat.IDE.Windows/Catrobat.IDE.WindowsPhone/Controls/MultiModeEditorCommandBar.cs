@@ -61,12 +61,13 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 
         private static void TargetTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var that = (d as MultiModeEditorCommandBar);
-            if (that == null) return;
+            var instance = (d as MultiModeEditorCommandBar);
+            if (instance == null) return;
 
             Debug.Assert(e.NewValue != null, "e.NewValue != null");
 
-            that.UpdateAddText((AppBarTargetType)e.NewValue);
+            instance.SetMode(MultiModeEditorCommandBarMode.Normal);
+            instance.UpdateAddText((AppBarTargetType)e.NewValue);
         }
 
         public ICommand NewCommand
@@ -151,9 +152,9 @@ namespace Catrobat.IDE.WindowsPhone.Controls
             };
 
             _selectButton.Click += (sender, args) => 
-                SetModel(MultiModeEditorCommandBarMode.Select);
+                SetMode(MultiModeEditorCommandBarMode.Select);
             _reorderButton.Click += (sender, args) => 
-                SetModel(MultiModeEditorCommandBarMode.Reorder);
+                SetMode(MultiModeEditorCommandBarMode.Reorder);
 
 
             _finishedReorderingButton = new AppBarButton
@@ -163,7 +164,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
             };
 
             _finishedReorderingButton.Click += (sender, args) =>
-                SetModel(MultiModeEditorCommandBarMode.Normal);
+                SetMode(MultiModeEditorCommandBarMode.Normal);
 
             _deleteButton = new AppBarButton
             {
@@ -184,14 +185,14 @@ namespace Catrobat.IDE.WindowsPhone.Controls
             };
 
             _cancelSelectionButton.Click += (sender, args) =>
-                SetModel(MultiModeEditorCommandBarMode.Normal);
+                SetMode(MultiModeEditorCommandBarMode.Normal);
 
 
-            SetModel(MultiModeEditorCommandBarMode.Normal);
+            SetMode(MultiModeEditorCommandBarMode.Normal);
         }
 
 
-        private void SetModel(MultiModeEditorCommandBarMode newMode)
+        private void SetMode(MultiModeEditorCommandBarMode newMode)
         {
             switch (_currentMode)
             {
@@ -218,7 +219,10 @@ namespace Catrobat.IDE.WindowsPhone.Controls
                 case MultiModeEditorCommandBarMode.Normal:
                     PrimaryCommands.Add(_newButton);
                     PrimaryCommands.Add(_selectButton);
-                    PrimaryCommands.Add(_reorderButton);
+
+                    if (TargetType != AppBarTargetType.Action)
+                        PrimaryCommands.Add(_reorderButton);
+                    
                     PrimaryCommands.Add(_playButton);
                     _playButton.IsEnabled = true;
                     break;
