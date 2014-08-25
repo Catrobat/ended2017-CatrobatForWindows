@@ -8,13 +8,14 @@ using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.Core.Tests.Services.Common;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
 {
     [TestClass]
     public class UploadProgramViewModelTests
     {
-        private bool _uploadStarted;
+        private bool _uploadStarted = false;
 
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
@@ -58,11 +59,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         [TestMethod, TestCategory("ViewModels.Service"), TestCategory("ExcludeGated")]
         public void UploadActionTest()
         {
-            //TODO saving of context and renaming of directory not tested
             //TODO check messages for different responses - e.g. wrong token or http-request failed
-            Assert.AreEqual(0, "test not fully implemented");
-
-            Messenger.Default.Register<MessageBase>(this,
+            Assert.AreEqual(0, "test async-command");
+            Messenger.Default.Register<GenericMessage<string>>(this,
                ViewModelMessagingToken.UploadProgramStartedListener, UploadProgramStartedMessageAction);
 
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -90,7 +89,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             var messageContext = new GenericMessage<CatrobatContextBase>(context);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.ContextListener);
 
-            //viewModel.UploadCommand.Execute(null);
+            viewModel.UploadCommand.Execute(null);
 
             Assert.IsTrue(_uploadStarted);
             Assert.AreEqual("", viewModel.ProgramName);
@@ -187,7 +186,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         }
 
         #region MessageActions
-        private void UploadProgramStartedMessageAction(MessageBase message)
+        private void UploadProgramStartedMessageAction(GenericMessage<string> message)
         {
             _uploadStarted = true;
         }

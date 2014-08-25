@@ -13,8 +13,6 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
 {
     public class WebCommunicationTest : IWebCommunicationService
     {
-        public int UploadsPending { get; set; }
-
         public event DownloadProgressUpdatedEventHandler DownloadProgressChanged;
 
         public async Task<List<OnlineProgramHeader>> LoadOnlineProgramsAsync(
@@ -114,7 +112,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
 
         public bool NoUploadsPending()
         {
-            return UploadsPending == 0;
+            return true;
         }
 
         public DateTime ConvertUnixTimeStamp(double timestamp)

@@ -17,13 +17,8 @@ using Newtonsoft.Json;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
-
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
-
-// TODOs if you acitvate this service:
-//  * copy methods from WebCommunicationService to update this file if there were any changes
-//  * add methods for download-control to the Interface definition
 
 namespace Catrobat.IDE.WindowsShared.Services.Common
 {
@@ -524,77 +519,32 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
         }
         #endregion
 
-        // TODO Use Helpers from StorageWindowsShared - move to separate Helper-class
+        // TODO Use Helpers from StorageWindowsShared - move to storage-interface or to Helper-class
         #region Helpers from StorageWindowsShared
+        private StorageFolder _baseFolder = ApplicationData.Current.LocalFolder;
         public async Task<StorageFolder> CreateFolderPathAsync(string path)
         {
             if (path == "")
-                return ApplicationData.Current.LocalFolder;
-
-            var subPath = Path.GetDirectoryName(path);
-
-            var parentFolder = await CreateFolderPathAsync(subPath);
-
-            if (parentFolder == null)
-                return null;
-
-            var folderName = Path.GetFileName(path);
-
+                return _baseFolder;
             try
             {
-                var folder = await parentFolder.GetFolderAsync(folderName);
+                var folder = await _baseFolder.CreateFolderAsync(path, CreationCollisionOption.OpenIfExists);
                 return folder;
             }
-            catch { }
-
-
-            var folders = await parentFolder.GetFoldersAsync();
-
-            foreach (var folder in folders)
+            catch (Exception)
             {
-
+                return null;
             }
-
-            await parentFolder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
-            var newFolder = await parentFolder.GetFolderAsync(folderName);
-            return newFolder;
-
-            //var subPath = Path.GetDirectoryName(path);
-
-            //if (subPath == "")
-            //    return;
-
-            //await CreateFolderPath(subPath);
-
-            //var folder = await GetFolderAsync(subPath);
-            //var fileName = Path.GetFileName(path);
-            //if (folder != null)
-            //{
-            //    folder.CreateFolderAsync(fileName);
-            //}
-
-            //path = subPath;
         }
 
         public async Task<StorageFolder> GetFolderAsync(string path)
         {
-            //await CreateFolderPathAsync(path);
-
             if (path == "")
-                return ApplicationData.Current.LocalFolder;
-
-            var subPath = Path.GetDirectoryName(path);
-
-            var parentFolder = await GetFolderAsync(subPath);
-
-            if (parentFolder == null)
-                return null;
-
-            var folderName = Path.GetFileName(path);
+                return _baseFolder;
 
             try
             {
-                var folder = await parentFolder.GetFolderAsync(folderName);
+                var folder = await _baseFolder.GetFolderAsync(path);
                 return folder;
             }
             catch (Exception)

@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
     public class SpritesEditorViewModelTests
     {
         private Sprite _selectedSprite;
-        private Program _currentProjectHeader; // TODO Program <-> Project-Header issue in Project Settings Action
+        private Program _currentProgramHeader; // TODO Program <-> Project-Header issue in Project Settings Action
 
         [TestInitialize]
         public void TestClassInitialize()
@@ -239,7 +239,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
         public void ProgramSettingsActionTest()
         {
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProjectHeaderChangedMessageAction);
+                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProgramHeaderChangedMessageAction);
 
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
@@ -259,7 +259,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             viewModel.ProgramSettingsCommand.Execute(null);
 
             Assert.AreEqual("TestProgram", viewModel.CurrentProgram.Name); // message action test
-            Assert.AreEqual("TestProgram", _currentProjectHeader.Name);
+            Assert.AreEqual("TestProgram", _currentProgramHeader.Name);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
             Assert.AreEqual(typeof(ProgramSettingsViewModel), navigationService.CurrentView);
             Assert.AreEqual(2, navigationService.PageStackCount);
@@ -316,9 +316,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             _selectedSprite = message.Content;
         }
 
-        private void CurrentProjectHeaderChangedMessageAction(GenericMessage<Program> message)
+        private void CurrentProgramHeaderChangedMessageAction(GenericMessage<Program> message)
         {
-            _currentProjectHeader = message.Content;
+            _currentProgramHeader = message.Content;
         }
         #endregion
     }
