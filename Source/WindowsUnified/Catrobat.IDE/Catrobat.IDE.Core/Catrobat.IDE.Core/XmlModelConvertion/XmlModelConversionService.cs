@@ -13,8 +13,11 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 {
     public class XmlModelConversionService : IXmlModelConversionService
     {
-        private readonly Dictionary<Type, IXmlModelConverter> _xmlToModelConverters;
-        private readonly Dictionary<Type, IXmlModelConverter> _modelToXmlConverters;
+        private Dictionary<Type, IXmlModelConverter> _xmlToModelConverters;
+        private Dictionary<Type, IXmlModelConverter> _modelToXmlConverters;
+
+        private XmlModelConvertContext _convertContext;
+        private XmlModelConvertBackContext _convertBackContext;
 
         public XmlModelConversionService()
         {
@@ -64,14 +67,19 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
         {
             var xmlType = o.GetType();
             var converter = _xmlToModelConverters[xmlType];
-            
 
-            return _xmlToModelConverters[o.GetType()].Convert(o);
+            return _xmlToModelConverters[o.GetType()].Convert(o, _convertContext);
         }
 
         public XmlObjectNode Convert(Model m)
         {
-            return _modelToXmlConverters[m.GetType()].Convert(m);
+            return _modelToXmlConverters[m.GetType()].Convert(m, _convertBackContext);
+        }
+
+        public void ResetContext()
+        {
+            _xmlToModelConverters = new Dictionary<Type, IXmlModelConverter>();
+            _modelToXmlConverters = new Dictionary<Type, IXmlModelConverter>();
         }
     }
 }

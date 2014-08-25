@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
 {
     public class LookConverter : XmlModelConverter<XmlLook, Look>
     {
-        public override Look Convert(XmlLook o)
+        public override Look Convert(XmlLook o, XmlModelConvertContext c)
         {
             return new Look
             {
@@ -19,7 +20,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
             };
         }
 
-        public override XmlLook Convert(Look m)
+        public override XmlLook Convert(Look m, XmlModelConvertBackContext c)
         {
             return new XmlLook
             {

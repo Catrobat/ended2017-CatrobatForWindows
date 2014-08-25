@@ -141,10 +141,17 @@
     <Compile Include="ViewModels\Service\UploadProgramNewPasswordViewModel.cs" />
     <Compile Include="ViewModels\Service\OnlineProgramReportViewModel.cs" />
     <Compile Include="ViewModels\Service\UploadProgramForgotPasswordViewModel.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\BrickConverterBase.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\EventScriptConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\BroadcastReceaveScriptConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\ScriptConverterBase.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\StartScriptConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\SpriteReferenceConverter .cs" />
     <Compile Include="XmlModelConvertion\Converters\SoundConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\LookConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\SpriteConverter.cs" />
     <Compile Include="XmlModelConvertion\IXmlModelConverter.cs" />
+    <Compile Include="XmlModelConvertion\XmlModelConversionContext.cs" />
     <Compile Include="XmlModelConvertion\XmlModelConverter.cs" />
     <Compile Include="XmlModelConvertion\XmlModelConversionService.cs" />
     <Compile Include="Xml_New\XmlObjects\XmlObject.cs" />
@@ -598,6 +605,9 @@
   <ItemGroup>
     <Content Include="Fonts\LiveSymbol.ttf" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="XmlModelConvertion\Converters\Formulas\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
