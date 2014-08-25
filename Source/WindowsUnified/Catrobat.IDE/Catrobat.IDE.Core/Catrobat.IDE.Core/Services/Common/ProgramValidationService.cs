@@ -61,7 +61,7 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 convertedProgram = new XmlProgram(converterResult.Xml);
                 programName = convertedProgram.ProjectHeader.ProgramName;
-                checkResult.Program = convertedProgram.ToModel();
+                //checkResult.Program = convertedProgram.ToModel();
             }
             catch (Exception)
             {

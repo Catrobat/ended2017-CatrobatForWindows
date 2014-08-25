@@ -22,10 +22,7 @@ namespace Catrobat.IDE.WindowsShared.Services
     public class ProgramImportService : IProgramImportService
     {
         private Stream _programStream;
-        private ExtractProgramResult _extractResult;
-        private CheckProgramResult _checkResult;
         private OnlineProgramHeader _onlineProgramHeader;
-        private XmlProgram _convertedProgram;
         private string _programName;
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -37,11 +34,12 @@ namespace Catrobat.IDE.WindowsShared.Services
         public void SetDownloadHeader(OnlineProgramHeader programHeader)
         {
             _onlineProgramHeader = programHeader;
+            _programName = _onlineProgramHeader.ProjectName;
         }
 
         public async Task<ExtractProgramResult> ExtractProgram(CancellationToken taskCancellationToken)
         {
-            _extractResult = new ExtractProgramResult { Status = ExtractProgramStatus.Success };
+            ExtractProgramResult _extractResult = new ExtractProgramResult { Status = ExtractProgramStatus.Success };
 
             try
             {
@@ -65,7 +63,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                 //using (var storage = StorageSystem.GetStorage())
                 //{
                 //    var stream = await storage.OpenFileAsync(Path.Combine(StorageConstants.TempProgramImportZipPath, _onlineProgramHeader.ProjectName + ".catrobat"),
-                //            StorageFileMode.Open, StorageFileAccess.Read); // TODO move to resources
+                //            StorageFileMode.Open, StorageFileAccess.Read); 
                 //    await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
                 //       stream, StorageConstants.TempProgramImportPath);
                 //}
@@ -85,110 +83,33 @@ namespace Catrobat.IDE.WindowsShared.Services
                     await storage.DeleteDirectoryAsync(StorageConstants.TempProgramImportZipPath);
                 }
             }
-
             return _extractResult;
-        }
-
-        public async Task<CheckProgramResult> CheckProgram()
-        {
-            return await ServiceLocator.ProgramValidationService.CheckProgram(StorageConstants.TempProgramImportPath);
-
-
-            //_checkResult = new CheckProgramImportResult();
-            //PortableImage programScreenshot = null;
-
-            //using (var storage = StorageSystem.GetStorage())
-            //{
-            //    programScreenshot =
-            //        await storage.LoadImageAsync(Path.Combine(
-            //        StorageConstants.TempProgramImportPath, 
-            //        StorageConstants.ProgramManualScreenshotPath)) ??
-            //        await storage.LoadImageAsync(Path.Combine(
-            //        StorageConstants.TempProgramImportPath, 
-            //        StorageConstants.ProgramAutomaticScreenshotPath));
-            //}
-
-            //var programCodePath = Path.Combine(
-            //    StorageConstants.TempProgramImportPath, StorageConstants.ProgramCodePath);
-
-            //var converterResult = await CatrobatVersionConverter.
-            //    ConvertToXmlVersion(programCodePath, Constants.TargetIDEVersion);
-
-            //if (converterResult.Error != CatrobatVersionConverter.VersionConverterStatus.NoError)
-            //{
-            //    switch (converterResult.Error)
-            //    {
-            //        case CatrobatVersionConverter.VersionConverterStatus.VersionTooNew:
-            //            _checkResult.Status = ProgramImportStatus.VersionTooNew;
-            //            break;
-            //        case CatrobatVersionConverter.VersionConverterStatus.VersionTooOld:
-            //            _checkResult.Status = ProgramImportStatus.VersionTooOld;
-            //            break;
-            //        default:
-            //            _checkResult.Status = ProgramImportStatus.Damaged;
-            //            break;
-            //    }
-            //    return _checkResult;
-            //}
-
-            //try
-            //{
-            //    _convertedProgram = new XmlProgram(converterResult.Xml);
-            //}
-            //catch (Exception)
-            //{
-            //    _checkResult.Status = ProgramImportStatus.Damaged;
-            //    _checkResult.ProgramHeader = null;
-            //    return _checkResult;
-            //}
-
-            //_programName = _onlineProgramHeader != null ? 
-            //    _onlineProgramHeader.ProjectName : 
-            //    XmlProgramHelper.GetProgramName(converterResult.Xml);
-
-            //_checkResult.ProjectHeader = new LocalProgramHeader
-            //{
-            //    Screenshot = programScreenshot,
-            //    ProjectName = _programName
-            //};
-
-            //_checkResult.Status = ProgramImportStatus.Valid;
-            //return _checkResult;
         }
 
         public async Task<string> AcceptTempProgram()
         {
+            XmlProgramRenamerResult renameResult = new XmlProgramRenamerResult { NewProgramName = _programName };
             var uniqueProgramName = await ServiceLocator.ContextService.
                 FindUniqueProgramName(_programName);
 
-            if (_convertedProgram != null) // if previour conversion was OK
+            if (_programName != uniqueProgramName)
             {
-                await _convertedProgram.Save(Path.Combine(
-                    StorageConstants.TempProgramImportPath, StorageConstants.ProgramCodePath));
+                renameResult = await ServiceLocator.ContextService.RenameProgram(
+                    Path.Combine(StorageConstants.TempProgramImportPath,
+                    StorageConstants.ProgramCodePath),
+                    uniqueProgramName);
             }
-
-            // if previour conversion was not OK
-            var renameResult = await ServiceLocator.ContextService.RenameProgram(
-                Path.Combine(StorageConstants.TempProgramImportPath,
-                StorageConstants.ProgramCodePath),
-                uniqueProgramName);
-
-            if (_checkResult != null)
-                _checkResult.ProgramHeader.ProjectName = renameResult.NewProjectName;
 
             using (var storage = StorageSystem.GetStorage())
             {
                 var newPath = Path.Combine(StorageConstants.ProgramsPath,
-                    renameResult.NewProjectName);
+                    renameResult.NewProgramName);
                 await storage.MoveDirectoryAsync(StorageConstants.TempProgramImportPath,
                     newPath);
             }
             Debug.WriteLine("Starting with CreateThumbnailsForNewProgram in AcceptTempProgram");
             await ServiceLocator.ContextService.
                 CreateThumbnailsForNewProgram(uniqueProgramName);
-
-            _extractResult = null;
-            _checkResult = null;
 
             return uniqueProgramName;
         }
@@ -203,9 +124,9 @@ namespace Catrobat.IDE.WindowsShared.Services
         {
             _cancellationTokenSource = new CancellationTokenSource();
             Debug.WriteLine("Starting with ExtractProgram");
-            var extracionResult = await ServiceLocator.ProgramImportService.ExtractProgram(_cancellationTokenSource.Token);
+            ExtractProgramResult extractionResult = await ServiceLocator.ProgramImportService.ExtractProgram(_cancellationTokenSource.Token);
 
-            if (extracionResult.Status == ExtractProgramStatus.Error)
+            if (extractionResult.Status == ExtractProgramStatus.Error)
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(
                         AppResources.Import_ProgramDamaged,
@@ -219,42 +140,31 @@ namespace Catrobat.IDE.WindowsShared.Services
                         AppResources.Import_Canceled,
                         AppResources.Import_CanceledText,
                         ToastDisplayDuration.Long);
+                CleanUpImport();
                 return;
-                //_cancellationTokenSource.Token.ThrowIfCancellationRequested();
             }
             Debug.WriteLine("Starting with CheckProgram");
-            var validateResult = await ServiceLocator.ProgramImportService.CheckProgram();
-            _programName = validateResult.ProgramHeader.ProjectName;
-            var acceptProgram = true;
+            var validateResult = await ServiceLocator.ProgramValidationService.CheckProgram(StorageConstants.TempProgramImportPath);
 
             switch (validateResult.State)
             {
                 case ProgramState.Valid:
-                    acceptProgram = true;
+                    _programName = validateResult.ProgramHeader.ProjectName;
                     break;
                 case ProgramState.Damaged:
-                    ServiceLocator.NotifictionService.ShowToastNotification(
+                    ServiceLocator.NotifictionService.ShowToastNotification("",
                         AppResources.Import_ProgramDamaged,
-                        AppResources.Import_ProgramDamagedText,
                         ToastDisplayDuration.Long);
-
-                    acceptProgram = false;
                     break;
                 case ProgramState.VersionTooOld:
-                    ServiceLocator.NotifictionService.ShowToastNotification(
+                    ServiceLocator.NotifictionService.ShowToastNotification("",
                         AppResources.Import_ProgramOutdated,
-                        AppResources.Import_ProgramOutdatedText,
                         ToastDisplayDuration.Long);
-
-                    acceptProgram = false;
                     break;
                 case ProgramState.VersionTooNew:
-                    ServiceLocator.NotifictionService.ShowToastNotification(
+                    ServiceLocator.NotifictionService.ShowToastNotification("",
                         AppResources.Import_AppTooOld,
-                        AppResources.Import_AppTooOldText,
                         ToastDisplayDuration.Long);
-
-                    acceptProgram = true;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -266,26 +176,33 @@ namespace Catrobat.IDE.WindowsShared.Services
                         AppResources.Import_Canceled,
                         AppResources.Import_CanceledText,
                         ToastDisplayDuration.Long);
+                CleanUpImport();
                 return;
-                //_cancellationTokenSource.Token.ThrowIfCancellationRequested();
             }
 
             Debug.WriteLine("Starting with AcceptTempProgram");
-            if (acceptProgram)
-            {
-                await ServiceLocator.ProgramImportService.AcceptTempProgram();
-                var localProgramsChangedMessage = new MessageBase();
-                Messenger.Default.Send(localProgramsChangedMessage,
-                    ViewModelMessagingToken.LocalProgramsChangedListener);
+            await ServiceLocator.ProgramImportService.AcceptTempProgram();
+            var localProgramsChangedMessage = new MessageBase();
+            Messenger.Default.Send(localProgramsChangedMessage,
+                ViewModelMessagingToken.LocalProgramsChangedListener);
 
-                ServiceLocator.NotifictionService.ShowToastNotification(
-                    "",
-                    AppResources.Import_ProgramAdded,
-                    /*AppResources.Import_ProgramAddedText,*/
-                    ToastDisplayDuration.Long,
-                    ToastTag.ImportFin);
-            }
+            ServiceLocator.NotifictionService.ShowToastNotification("",
+                AppResources.Import_ProgramAdded,
+                ToastDisplayDuration.Long,
+                ToastTag.ImportFin);
+
             Debug.WriteLine("Finished");
+        }
+
+        private async void CleanUpImport()
+        {
+            using (var storage = StorageSystem.GetStorage())
+            {
+                if (await storage.DirectoryExistsAsync(StorageConstants.TempProgramImportPath))
+                {
+                    await storage.DeleteDirectoryAsync(StorageConstants.TempProgramImportPath);
+                }
+            }
         }
     }
 }

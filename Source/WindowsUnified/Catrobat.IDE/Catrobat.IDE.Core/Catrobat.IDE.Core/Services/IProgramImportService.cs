@@ -13,8 +13,6 @@ namespace Catrobat.IDE.Core.Services
 
         Task<ExtractProgramResult> ExtractProgram(CancellationToken taskCancellationToken);
 
-        Task<CheckProgramResult> CheckProgram();
-
         Task<string> AcceptTempProgram();
 
         Task CancelImport();
