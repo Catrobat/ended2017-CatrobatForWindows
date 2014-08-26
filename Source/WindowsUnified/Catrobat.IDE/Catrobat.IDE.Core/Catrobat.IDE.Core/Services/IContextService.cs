@@ -11,8 +11,8 @@ namespace Catrobat.IDE.Core.Services
 {
     public interface IContextService
     {
-        Task<XmlProjectRenamerResult> RenameProgram(
-            string projectCodeFilePath, string newProjectName);
+        Task<XmlProgramRenamerResult> RenameProgram(
+            string programCodeFilePath, string newProgramName);
 
         Task<string> FindUniqueProgramName(string programName);
 

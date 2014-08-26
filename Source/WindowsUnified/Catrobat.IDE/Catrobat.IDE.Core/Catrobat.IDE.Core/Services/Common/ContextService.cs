@@ -48,7 +48,7 @@ namespace Catrobat.IDE.Core.Services.Common
             }
         }
 
-        public async Task<XmlProjectRenamerResult> RenameProgram(
+        public async Task<XmlProgramRenamerResult> RenameProgram(
          string programCodeFilePath, string newProgramName)
         {
             using (var storage = StorageSystem.GetStorage())
@@ -57,9 +57,9 @@ namespace Catrobat.IDE.Core.Services.Common
                 var result = XmlProgramHelper.RenameProgram(projectCode, newProgramName);
 
                 await storage.WriteTextFileAsync(
-                    programCodeFilePath, result.NewProjectCode);
+                    programCodeFilePath, result.NewProgramCode);
 
-                result.NewProjectName = newProgramName;
+                result.NewProgramName = newProgramName;
 
                 return result;
             }

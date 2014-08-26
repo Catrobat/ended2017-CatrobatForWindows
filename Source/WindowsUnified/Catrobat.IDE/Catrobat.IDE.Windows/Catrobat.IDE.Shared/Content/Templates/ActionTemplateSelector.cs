@@ -69,7 +69,7 @@ namespace Catrobat.IDE.WindowsPhone.IDE.Content.Templates
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            var scriptBrick = item as Model;
+            var scriptBrick = item as ModelBase;
             if (scriptBrick != null)
             {
                 // Scripts

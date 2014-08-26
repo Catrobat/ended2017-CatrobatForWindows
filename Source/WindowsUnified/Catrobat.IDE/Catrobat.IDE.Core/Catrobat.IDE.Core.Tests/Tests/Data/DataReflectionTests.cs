@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         {
             const string savePath = "/ReflectionWriteReadTest1/project.xml";
 
-            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new TestProgramGeneratorReflection();
             var project1 = projectgenerator.GenerateProgram();
 
             await project1.Save(savePath);

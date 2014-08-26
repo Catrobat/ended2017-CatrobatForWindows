@@ -1,6 +1,8 @@
-﻿namespace Catrobat.IDE.Core.Models.Formulas.Tokens
+﻿using Catrobat.IDE.Core.Models.CatrobatModels;
+
+namespace Catrobat.IDE.Core.Models.Formulas.Tokens
 {
-    public abstract partial class FormulaToken : Model, IFormulaToken
+    public abstract partial class FormulaToken : CatrobatModelBase, IFormulaToken
     {
         #region Implements ITestEquatable
 
@@ -9,7 +11,7 @@
             return other != null && other.GetType() == GetType() && TestEquals((FormulaToken) other);
         }
 
-        protected override bool TestEquals(Model other)
+        protected override bool TestEquals(ModelBase other)
         {
             return base.TestEquals(other) && TestEquals((FormulaToken) other);
         }

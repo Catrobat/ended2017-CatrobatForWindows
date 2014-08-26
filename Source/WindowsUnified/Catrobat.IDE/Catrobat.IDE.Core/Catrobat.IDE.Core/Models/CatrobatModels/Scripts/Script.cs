@@ -3,10 +3,11 @@ using System.Linq;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models.Bricks;
+using Catrobat.IDE.Core.Models.CatrobatModels;
 
 namespace Catrobat.IDE.Core.Models.Scripts
 {
-    public abstract partial class Script : Model, IBrick
+    public abstract partial class Script : CatrobatModelBase, IBrick
     {
         #region Properties
 
@@ -22,7 +23,7 @@ namespace Catrobat.IDE.Core.Models.Scripts
 
         #region Implements ITestEquatable
 
-        protected override bool TestEquals(Model other)
+        protected override bool TestEquals(ModelBase other)
         {
             return base.TestEquals(other) && TestEquals((Script) other);
         }

@@ -11,7 +11,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
         #region private Members
 
         private BroadcastMessage _broadcastMessage;
-        private Model _broadcastObject;
+        private ModelBase _broadcastObject;
 
         #endregion
 
@@ -74,7 +74,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
             base.GoBackAction();
         }
 
-        private void ReceiveBroadcastObjectAction(GenericMessage<Model> message)
+        private void ReceiveBroadcastObjectAction(GenericMessage<ModelBase> message)
         {
             _broadcastObject = message.Content;
         }
@@ -98,7 +98,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<Model>>(this, ViewModelMessagingToken.BroadcastObjectListener, ReceiveBroadcastObjectAction);
+            Messenger.Default.Register<GenericMessage<ModelBase>>(this, 
+                ViewModelMessagingToken.BroadcastObjectListener, ReceiveBroadcastObjectAction);
         }
 
         private void ResetViewModel()

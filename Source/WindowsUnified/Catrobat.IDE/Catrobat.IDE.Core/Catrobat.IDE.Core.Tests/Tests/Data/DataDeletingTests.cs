@@ -30,7 +30,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
                     StorageConstants.ProgramsPath, programName));
             }
 
-            ITestProgramGenerator projectgenerator = new ProgramGeneratorReflection();
+            ITestProgramGenerator projectgenerator = new TestProgramGeneratorReflection();
             var project = projectgenerator.GenerateProgram();
             await project.SetProgramNameAndRenameDirectory(programName);
             // TODO: write dummy look files to disk

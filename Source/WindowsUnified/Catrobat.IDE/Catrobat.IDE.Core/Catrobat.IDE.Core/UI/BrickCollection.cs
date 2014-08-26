@@ -3,5 +3,5 @@ using Catrobat.IDE.Core.Models;
 
 namespace Catrobat.IDE.Core.UI
 {
-    public class BrickCollection : ObservableCollection<Model> { }
+    public class BrickCollection : ObservableCollection<ModelBase> { }
 }

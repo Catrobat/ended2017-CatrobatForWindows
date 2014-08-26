@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
 {
-    public class ProgramGeneratorTestSimple : ITestProgramGenerator
+    public class TestProgramGeneratorSimple : ITestProgramGenerator
     {
         public Program GenerateProgram()
         {

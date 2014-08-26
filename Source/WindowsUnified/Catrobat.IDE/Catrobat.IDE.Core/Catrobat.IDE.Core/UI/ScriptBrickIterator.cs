@@ -8,7 +8,7 @@ using Catrobat.IDE.Core.Models.Scripts;
 namespace Catrobat.IDE.Core.UI
 {
     [Obsolete("Replace with Scripts.SelectMany(script => Enumerable.Repeat<Model>(script, 1).Concat(script.Bricks)). ")]
-    public class ScriptBrickIterator : IEnumerator<Model>
+    public class ScriptBrickIterator : IEnumerator<ModelBase>
     {
         private readonly IEnumerator<Script> _scriptEnumerator;
         private IEnumerator<Brick> _brickEnumerator;
@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.UI
             _scriptEnumerator = scripts.GetEnumerator();
         }
 
-        public Model Current
+        public ModelBase Current
         {
             get
             {

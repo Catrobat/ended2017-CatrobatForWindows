@@ -20,17 +20,17 @@ namespace Catrobat.IDE.Core.ExtensionMethods
             return model.ToXmlObject(context, pointerOnly);
         }
 
-        internal static TModel ToModel<TModel>(this IModelConvertible<TModel> xmlObject) where TModel : Model
+        internal static TModel ToModel<TModel>(this IModelConvertible<TModel> xmlObject) where TModel  : ModelBase
         {
             return xmlObject.ToModel();
         }
 
-        internal static TModel ToModel<TModel, TContext>(this IModelConvertible<TModel, TContext> xmlObject, TContext context) where TModel : Model
+        internal static TModel ToModel<TModel, TContext>(this IModelConvertible<TModel, TContext> xmlObject, TContext context) where TModel  : ModelBase
         {
             return xmlObject.ToModel(context);
         }
 
-        internal static TModel ToModel<TModel, TContext>(this IModelConvertibleCyclic<TModel, TContext> xmlObject, TContext context, bool pointerOnly = false) where TModel : Model
+        internal static TModel ToModel<TModel, TContext>(this IModelConvertibleCyclic<TModel, TContext> xmlObject, TContext context, bool pointerOnly = false) where TModel  : ModelBase
         {
             return xmlObject.ToModel(context, pointerOnly);
         }

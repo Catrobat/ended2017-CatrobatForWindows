@@ -23,7 +23,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
 
         private BrickCollection _brickCollection;
         private int _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex;
-        private Model _selectedBrick;
+        private ModelBase _selectedBrick;
         private bool _isAdding;
         private bool _isControlVisible;
         private bool _isLookVisible;
@@ -111,7 +111,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
 
         #region Actions
 
-        private void AddNewScriptBrickAction(Model model)
+        private void AddNewScriptBrickAction(ModelBase model)
         {
             lock (_receivedScriptBrickCollection)
             {
@@ -181,7 +181,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
                     _receivedScriptBrickCollection.AddScriptBrick(endBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 2);
                 }
 
-                var message = new GenericMessage<Model>(_selectedBrick);
+                var message = new GenericMessage<ModelBase>(_selectedBrick);
                 Messenger.Default.Send(message, ViewModelMessagingToken.SelectedBrickListener);
 
 
@@ -252,7 +252,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
 
         public AddNewScriptBrickViewModel()
         {
-            AddNewScriptBrickCommand = new RelayCommand<Model>(AddNewScriptBrickAction);
+            AddNewScriptBrickCommand = new RelayCommand<ModelBase>(AddNewScriptBrickAction);
             OnLoadBrickViewCommand = new RelayCommand(OnLoadBrickViewAction);
 
             Messenger.Default.Register<GenericMessage<List<Object>>>(this, 

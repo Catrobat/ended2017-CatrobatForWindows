@@ -17,57 +17,57 @@ namespace Catrobat.IDE.Core.Xml
 {
     public enum XmlRenameStatus { Success, Error }
 
-    public class XmlProjectRenamerResult
+    public class XmlProgramRenamerResult
     {
         public XmlRenameStatus Status { get; set; }
 
-        public string NewProjectName { get; set; }
+        public string NewProgramName { get; set; }
 
-        public string NewProjectCode { get; set; }
+        public string NewProgramCode { get; set; }
     }
 
     public class XmlProgramHelper
     {
-        public static XmlProjectRenamerResult RenameProgram(
-            string projectCode, string newProjectName)
+        public static XmlProgramRenamerResult RenameProgram(
+            string programCode, string newProgramName)
         {
             try
             {
-                var document = XDocument.Load(new StringReader(projectCode));
+                var document = XDocument.Load(new StringReader(programCode));
                 document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
 
-                var project = document.Element("program");
-                var header = project.Element("header");
+                var program = document.Element("program");
+                var header = program.Element("header");
                 var programName = header.Element("programName");
-                programName.SetValue(newProjectName);
+                programName.SetValue(newProgramName);
 
                 var writer = new XmlStringWriter();
                 document.Save(writer, SaveOptions.None);
-                var newProjectCode = writer.ToString();
+                var newProgramCode = writer.ToString();
 
-                return new XmlProjectRenamerResult
+                return new XmlProgramRenamerResult
                 {
                     Status = XmlRenameStatus.Success,
-                    NewProjectCode = newProjectCode
+                    NewProgramCode = newProgramCode
                 };
             }
             catch (Exception)
             {
-                return new XmlProjectRenamerResult
+                return new XmlProgramRenamerResult
                 {
                     Status = XmlRenameStatus.Error,
-                    NewProjectCode = null
+                    NewProgramCode = null
                 };
             }
         }
 
-        public static string GetProgramVersion(string projectCode)
+        public static string GetProgramVersion(string programCode)
         {
-            var document = XDocument.Load(new StringReader(projectCode));
+            var document = XDocument.Load(new StringReader(programCode));
             document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
 
-            var project = document.Element("program");
-            var header = project.Element("header");
+            var program = document.Element("program");
+            var header = program.Element("header");
             var programName = header.Element("catrobatLanguageVersion");
             return programName.Value;
         }
@@ -79,8 +79,8 @@ namespace Catrobat.IDE.Core.Xml
                 var document = XDocument.Load(new StringReader(programCode));
                 document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
 
-                var project = document.Element("program");
-                var header = project.Element("header");
+                var program = document.Element("program");
+                var header = program.Element("header");
                 var programName = header.Element("programName");
                 return programName.Value;
             }

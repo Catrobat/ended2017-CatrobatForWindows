@@ -13,13 +13,18 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 {
     public class XmlModelConversionService : IXmlModelConversionService
     {
-        private readonly Dictionary<Type, IXmlModelConverter> _xmlToModelConverters;
-        private readonly Dictionary<Type, IXmlModelConverter> _modelToXmlConverters;
+        private Dictionary<Type, IXmlModelConverter> _xmlToModelConverters;
+        private Dictionary<Type, IXmlModelConverter> _modelToXmlConverters;
+
+        private XmlModelConvertContext _convertContext;
+        private XmlModelConvertBackContext _convertBackContext;
 
         public XmlModelConversionService()
         {
             _xmlToModelConverters = new Dictionary<Type, IXmlModelConverter>();
             _modelToXmlConverters = new Dictionary<Type, IXmlModelConverter>();
+
+            ResetContext();
 
             FindAndRegisterConverters();
         }
@@ -33,8 +38,8 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 
             var converterInstances = (from typeInfo in inAssemblies
                 where typeInfo.ImplementedInterfaces.Contains(typeof (IXmlModelConverter)) &&
-                typeInfo.IsAbstract == false
-                select (IXmlModelConverter)Activator.CreateInstance(typeInfo.AsType())).ToList();
+                typeInfo.IsAbstract == false && typeInfo.ContainsGenericParameters == false
+                select (IXmlModelConverter)Activator.CreateInstance(typeInfo.AsType(), this)).ToList();
 
             foreach (var converter in converterInstances)
                 RegisterConverter(converter);
@@ -60,18 +65,23 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
                     " is already registered.");
         }
 
-        public Model Convert(XmlObjectNode o)
+        public ModelBase Convert(XmlObject o)
         {
             var xmlType = o.GetType();
             var converter = _xmlToModelConverters[xmlType];
-            
 
-            return _xmlToModelConverters[o.GetType()].Convert(o);
+            return _xmlToModelConverters[o.GetType()].Convert(o, _convertContext);
         }
 
-        public XmlObjectNode Convert(Model m)
+        public XmlObject Convert(ModelBase m)
         {
-            return _modelToXmlConverters[m.GetType()].Convert(m);
+            return _modelToXmlConverters[m.GetType()].Convert(m, _convertBackContext);
+        }
+
+        public void ResetContext()
+        {
+            _xmlToModelConverters = new Dictionary<Type, IXmlModelConverter>();
+            _modelToXmlConverters = new Dictionary<Type, IXmlModelConverter>();
         }
     }
 }

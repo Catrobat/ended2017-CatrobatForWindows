@@ -48,18 +48,18 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
-        private LocalProgramHeader _selectedProgramHeader;
+        private LocalProgramHeader _currentProgramHeader;
         public LocalProgramHeader CurrentProgramHeader
         {
             get
             {
-                return _selectedProgramHeader;
+                return _currentProgramHeader;
             }
             set
             {
-                if (value == _selectedProgramHeader) return;
+                if (value == _currentProgramHeader) return;
 
-                _selectedProgramHeader = value;
+                _currentProgramHeader = value;
                 RaisePropertyChanged(() => CurrentProgramHeader);
             }
         }

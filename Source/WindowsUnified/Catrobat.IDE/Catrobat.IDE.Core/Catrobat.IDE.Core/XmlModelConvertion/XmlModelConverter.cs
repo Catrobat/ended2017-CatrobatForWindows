@@ -4,27 +4,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion
 {
-    public abstract class XmlModelConverter<TXmlType, TModelType> : IXmlModelConverter
-        where TXmlType : XmlObjectNode 
-        where TModelType : Model
+    public abstract class XmlModelConverter
+        <TXmlType, TModelType> : IXmlModelConverter
+        where TXmlType : XmlObjectNode
+        where TModelType  : ModelBase
     {
-        public abstract TModelType Convert(TXmlType o);
+        protected readonly IXmlModelConversionService Converter;
 
-        public abstract TXmlType Convert(TModelType m);
-
-        public Model Convert(XmlObjectNode o)
+        protected XmlModelConverter(IXmlModelConversionService converter)
         {
-            return Convert((TXmlType)o);
+            Converter = converter;
         }
 
-        public XmlObjectNode Convert(Model m)
+        public abstract TModelType Convert(TXmlType o, XmlModelConvertContext c);
+
+        public abstract TXmlType Convert(TModelType m, XmlModelConvertBackContext c);
+
+        public ModelBase Convert(XmlObject o, XmlModelConvertContext c)
         {
-            return Convert((TModelType)m);
+            return Convert((TXmlType)o, c);
+        }
+
+        public XmlObject Convert(ModelBase m, XmlModelConvertBackContext c)
+        {
+            return Convert((TModelType)m, c);
         }
     }
 }

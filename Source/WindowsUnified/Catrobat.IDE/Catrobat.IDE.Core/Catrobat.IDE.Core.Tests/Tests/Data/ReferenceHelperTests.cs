@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
     [TestClass]
     public class ReferenceHelperTests
     {
-        public static ITestProgramGenerator ProjectGenerator = new ProgramGeneratorForReferenceHelperTests();
+        public static ITestProgramGenerator ProjectGenerator = new TestProgramGeneratorForReferenceHelperTests();
 
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)

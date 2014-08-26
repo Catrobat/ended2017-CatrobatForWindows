@@ -3,13 +3,13 @@ using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public abstract class DataObjectRoot
+    public abstract class XmlObjectRoot : XmlObject
     {
         protected XElement Root;
 
-        protected DataObjectRoot() {}
+        protected XmlObjectRoot() {}
 
-        protected DataObjectRoot(String xml)
+        protected XmlObjectRoot(String xml)
         {
         }
 

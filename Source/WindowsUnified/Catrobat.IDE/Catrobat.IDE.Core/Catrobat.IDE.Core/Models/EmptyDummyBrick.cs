@@ -1,6 +1,9 @@
-﻿namespace Catrobat.IDE.Core.Models
+﻿using System;
+
+namespace Catrobat.IDE.Core.Models
 {
-    public class EmptyDummyBrick : Model
+    [Obsolete("Please do not use!")]
+    public class EmptyDummyBrick  : ModelBase
     {
     }
 }

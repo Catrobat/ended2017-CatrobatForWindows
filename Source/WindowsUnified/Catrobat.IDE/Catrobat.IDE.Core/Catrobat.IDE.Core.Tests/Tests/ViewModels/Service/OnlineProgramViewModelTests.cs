@@ -16,6 +16,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
     [TestClass]
     public class OnlineProgramViewModelTests
     {
+        private bool _downloadStarted = false;
+
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
         {
@@ -49,7 +51,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         public void DownloadActionTest()
         {
             //TODO to be tested
-            Assert.AreEqual(0, "test also ProjectImporter-Service");
+            Assert.AreEqual(0, "test async-command and ProgramImporterService");
+            Messenger.Default.Register<GenericMessage<string>>(this,
+               ViewModelMessagingToken.DownloadProgramStartedListener, DownloadProgramStartedMessageAction);
 
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
@@ -60,7 +64,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             //viewModel.DownloadCommand.Execute(null);
 
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
-            //Assert.AreEqual(typeof(ProgramImportViewModel), navigationService.CurrentView);
+            Assert.AreEqual(typeof(OnlineProgramViewModel), navigationService.CurrentView);
             Assert.AreEqual(1, navigationService.PageStackCount);
         }
 
@@ -111,5 +115,12 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
+
+        #region MessageActions
+        private void DownloadProgramStartedMessageAction(GenericMessage<string> message)
+        {
+            _downloadStarted = true;
+        }
+        #endregion
     }
 }

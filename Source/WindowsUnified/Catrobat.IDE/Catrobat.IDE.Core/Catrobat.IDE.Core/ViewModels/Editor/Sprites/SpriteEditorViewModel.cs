@@ -35,7 +35,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private int _numberOfSoundsSelected;
         private int _numberOfObjectsSelected;
         private ObservableCollection<Look> _selectedLooks;
-        private ObservableCollection<Model> _selectedActions;
+        private ObservableCollection<ModelBase> _selectedActions;
         private ObservableCollection<Sound> _selectedSounds;
         private int _selectedTabIndex;
         private Sound _currentSound;
@@ -199,7 +199,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        public Model SelectedBrick { get; set; }
+        public ModelBase SelectedBrick { get; set; }
 
         public ObservableCollection<BroadcastMessage> BroadcastMessages
         {
@@ -263,7 +263,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        public ObservableCollection<Model> SelectedActions
+        public ObservableCollection<ModelBase> SelectedActions
         {
             get { return _selectedActions; }
             set
@@ -303,7 +303,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             private set;
         }
 
-        public RelayCommand<Model> AddBroadcastMessageCommand
+        public RelayCommand<ModelBase> AddBroadcastMessageCommand
         {
             get;
             private set;
@@ -530,13 +530,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 {
                     if (scriptBrick is Script)
                     {
-                        Model copy = (scriptBrick as Script).Clone();
+                        ModelBase copy = (scriptBrick as Script).Clone();
                         Actions.Insert(Actions.ScriptIndexOf((Script)scriptBrick) + 1, copy);
                     }
 
                     if (scriptBrick is Brick)
                     {
-                        Model copy = (scriptBrick as Brick).Clone();
+                        ModelBase copy = (scriptBrick as Brick).Clone();
                         Actions.Insert(Actions.IndexOf(scriptBrick) + 1, copy);
                     }
                 }
@@ -550,8 +550,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
             foreach (var scriptBrick in SelectedActions)
             {
-                Model beginBrick = null;
-                Model endBrick = null;
+                ModelBase beginBrick = null;
+                ModelBase endBrick = null;
 
                 if (scriptBrick is IfBrick)
                 {
@@ -616,9 +616,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         }
 
 
-        private void AddBroadcastMessageAction(Model broadcastObject)
+        private void AddBroadcastMessageAction(ModelBase broadcastObject)
         {
-            var message = new GenericMessage<Model>(broadcastObject);
+            var message = new GenericMessage<ModelBase>(broadcastObject);
             Messenger.Default.Send(message, ViewModelMessagingToken.BroadcastObjectListener);
 
             ServiceLocator.NavigationService.NavigateTo<NewBroadcastMessageViewModel>();
@@ -834,7 +834,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        private void ReceiveSelectedBrickMessageAction(GenericMessage<Model> message)
+        private void ReceiveSelectedBrickMessageAction(GenericMessage<ModelBase> message)
         {
             SelectedBrick = message.Content;
             RaisePropertyChanged(() => SelectedBrick);
@@ -843,7 +843,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         public SpriteEditorViewModel()
         {
-            SelectedActions = new ObservableCollection<Model>();
+            SelectedActions = new ObservableCollection<ModelBase>();
             SelectedActions.CollectionChanged += SelectedActionsOnCollectionChanged;
             SelectedLooks = new ObservableCollection<Look>();
             SelectedLooks.CollectionChanged += SelectedLooksOnCollectionChanged;
@@ -852,7 +852,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
             RenameSpriteCommand = new RelayCommand(RenameSpriteAction);
 
-            AddBroadcastMessageCommand = new RelayCommand<Model>(AddBroadcastMessageAction);
+            AddBroadcastMessageCommand = new RelayCommand<ModelBase>(AddBroadcastMessageAction);
 
             AddNewScriptBrickCommand = new RelayCommand(AddNewScriptBrickAction);
             CopyScriptBrickCommand = new RelayCommand(CopyScriptBrickAction, CanExecuteCopyActionCommand);
@@ -889,14 +889,18 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
 
             Messenger.Default.Register<GenericMessage<Program>>(this,
-                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
+                 ViewModelMessagingToken.CurrentProgramChangedListener, 
+                 CurrentProgramChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
-                ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
+                ViewModelMessagingToken.CurrentSpriteChangedListener, 
+                CurrentSpriteChangedMessageAction);
 
             Messenger.Default.Register<GenericMessage<BroadcastMessage>>(this,
-                ViewModelMessagingToken.BroadcastMessageListener, ReceiveNewBroadcastMessageAction);
-            Messenger.Default.Register<GenericMessage<Model>>(this,
-                ViewModelMessagingToken.SelectedBrickListener, ReceiveSelectedBrickMessageAction);
+                ViewModelMessagingToken.BroadcastMessageListener, 
+                ReceiveNewBroadcastMessageAction);
+            Messenger.Default.Register<GenericMessage<ModelBase>>(this,
+                ViewModelMessagingToken.SelectedBrickListener, 
+                ReceiveSelectedBrickMessageAction);
         }
 
         private void ScriptBricksCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

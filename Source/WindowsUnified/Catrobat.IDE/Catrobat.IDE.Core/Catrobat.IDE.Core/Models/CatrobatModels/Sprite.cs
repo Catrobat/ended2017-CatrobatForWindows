@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Models.CatrobatModels;
 using Catrobat.IDE.Core.Models.Scripts;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -12,7 +13,7 @@ using Catrobat.IDE.Core.UI;
 namespace Catrobat.IDE.Core.Models
 {
     [DebuggerDisplay("Name = {Name}")]
-    public partial class Sprite : Model, IAsyncCloneable<Program>, ISelectable
+    public partial class Sprite : CatrobatModelBase, IAsyncCloneable<Program>, ISelectable
     {
         #region Properties
 
@@ -159,7 +160,7 @@ namespace Catrobat.IDE.Core.Models
 
         #region Implements TestEquatable
 
-        protected override bool TestEquals(Model other)
+        protected override bool TestEquals(ModelBase other)
         {
             return base.TestEquals(other) && TestEquals((Sprite) other);
         }

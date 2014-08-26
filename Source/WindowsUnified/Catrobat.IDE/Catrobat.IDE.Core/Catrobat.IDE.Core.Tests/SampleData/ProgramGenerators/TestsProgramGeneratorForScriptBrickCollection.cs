@@ -6,7 +6,7 @@ using Catrobat.IDE.Core.Models.Scripts;
 
 namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
 {
-    public class ProgramGeneratorForScriptBrickCollectionTests : ITestProgramGenerator
+    public class TestsProgramGeneratorForScriptBrickCollection : ITestProgramGenerator
     {
         public Program GenerateProgram()
         {

@@ -1,12 +1,13 @@
 using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion
 {
     public interface IXmlModelConverter
     {
-        Model Convert(XmlObjectNode o);
+        ModelBase Convert(XmlObject o, XmlModelConvertContext c);
 
-        XmlObjectNode Convert(Model m);
+        XmlObject Convert(ModelBase m, XmlModelConvertBackContext c);
     }
 }

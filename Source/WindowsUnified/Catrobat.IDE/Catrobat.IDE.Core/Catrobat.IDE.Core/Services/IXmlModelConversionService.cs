@@ -10,8 +10,10 @@ namespace Catrobat.IDE.Core.Services
 {
     public interface IXmlModelConversionService
     {
-        Model Convert(XmlObjectNode o);
+        void ResetContext();
 
-        XmlObjectNode Convert(Model m);
+        ModelBase Convert(XmlObject o);
+
+        XmlObject Convert(ModelBase m);
     }
 }

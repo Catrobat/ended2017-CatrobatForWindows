@@ -8,7 +8,7 @@ using Catrobat.IDE.Core.Tests.Misc;
 
 namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
 {
-    public class ProgramGeneratorForReferenceHelperTests : ITestProgramGenerator
+    public class TestProgramGeneratorForReferenceHelperTests : ITestProgramGenerator
     {
 
         public Program GenerateProgram()

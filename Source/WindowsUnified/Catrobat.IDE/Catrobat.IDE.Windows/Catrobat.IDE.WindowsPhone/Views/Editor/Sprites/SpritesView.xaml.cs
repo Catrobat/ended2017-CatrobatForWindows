@@ -29,6 +29,8 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         {
             var listView = ListViewSprites;
 
+            if (listView == null) return;
+
             switch (mode)
             {
                 case MultiModeEditorCommandBarMode.Normal:

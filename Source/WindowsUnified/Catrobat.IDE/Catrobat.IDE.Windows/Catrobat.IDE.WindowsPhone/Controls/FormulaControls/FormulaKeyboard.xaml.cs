@@ -7,6 +7,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
 using GalaSoft.MvvmLight.Messaging;
+using System;
 
 namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
 {

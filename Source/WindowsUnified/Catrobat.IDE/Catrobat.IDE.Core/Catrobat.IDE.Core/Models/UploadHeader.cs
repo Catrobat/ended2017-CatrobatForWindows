@@ -6,7 +6,7 @@ using Catrobat.IDE.Core.ExtensionMethods;
 namespace Catrobat.IDE.Core.Models
 {
     [DebuggerDisplay("Url = {Url}")]
-    public partial class UploadHeader : Model
+    public partial class UploadHeader  : ModelBase
     {
         #region Properties
 
@@ -71,7 +71,7 @@ namespace Catrobat.IDE.Core.Models
 
         #region Implements ITestEquatable
 
-        protected override bool TestEquals(Model other)
+        protected override bool TestEquals(ModelBase other)
         {
             return base.TestEquals(other) && TestEquals((UploadHeader) other);
         }

@@ -19,6 +19,7 @@ using Catrobat.IDE.Core.Services.Storage;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
+    /*only used to perform tests*/
     public class WebCommunicationService : IWebCommunicationService
     {
         private static int _uploadCounter = 0;
@@ -256,7 +257,7 @@ namespace Catrobat.IDE.Core.Services.Common
                         statusResponse = new JSONStatusResponse();
                         statusResponse.statusCode = StatusCodes.JSONSerializationFailed;
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         statusResponse = new JSONStatusResponse();
                         statusResponse.statusCode = StatusCodes.UnknownError;
