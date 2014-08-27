@@ -76,9 +76,9 @@ namespace Catrobat.IDE.Core.Xml.Converter
             }
         }
 
-        public Program Convert(XmlProgram project)
+        public Program Convert(XmlProgram program)
         {
-            return project == null ? null : project.ToModel();
+            return program == null ? null : program.ToModel();
         }
 
         #endregion

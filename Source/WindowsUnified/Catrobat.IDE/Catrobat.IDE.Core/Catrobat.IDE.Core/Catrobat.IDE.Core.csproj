@@ -143,14 +143,67 @@
     <Compile Include="ViewModels\Service\OnlineProgramReportViewModel.cs" />
     <Compile Include="ViewModels\Service\UploadProgramForgotPasswordViewModel.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\BrickConverterBase.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\ControlFlow\WaitBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\ControlFlow\IfLogicBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\ControlFlow\IfLogicElseBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\ControlFlow\IfLogicEndBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\ControlFlow\RepeatBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\ControlFlow\RepeatEndBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\ControlFlow\ForeverEndBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\ControlFlow\ForeverBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\ControlFlow\BroadcastSendWaitBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\ControlFlow\BroadcastSendBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Looks\NextLookBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Looks\SetLookBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Nxt\ChangeNxtMotorAngleBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Nxt\PlayNxtToneBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Nxt\StopNxtMotorBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Nxt\SetNxtMotorSpeedBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\NoteBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\ChangePositionXBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\ChangePositionYBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\ResetGraphicPropertiesBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\BringToFrontBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\SetPositionBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\HideBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\SetPositionYBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\BounceBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\SetSizeBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\SetRotationBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\LookAtBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\SetBrightnessBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\SetTransparencyBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\ShowBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\SetPositionXBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\MoveBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\TurnLeftBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\TurnRightBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\DecreaseZOrderBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\GlideToBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\ChangeSizeBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\ChangeTransparencyBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Properties\ChangeBrightnessBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Sounds\PlaySoundBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Sounds\StopAllSoundsBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Sounds\SpeakBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Sounds\SetVolumeBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Sounds\ChangeVolumeBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Variables\SetVariableBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Variables\ChangeVariableBrickConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\EventScriptConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\BroadcastReceaveScriptConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\ScriptConverterBase.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\StartScriptConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Formulas\FormulaConverterBase.cs" />
+    <Compile Include="XmlModelConvertion\Converters\GlobalVariableConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\LocalVariableConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\ProgramConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\UploadHeaderConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\SpriteReferenceConverter .cs" />
     <Compile Include="XmlModelConvertion\Converters\SoundConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\LookConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\SpriteConverter.cs" />
+    <Compile Include="XmlModelConvertion\XmlFormulaConverter.cs" />
     <Compile Include="XmlModelConvertion\IXmlModelConverter.cs" />
     <Compile Include="XmlModelConvertion\XmlModelConversionContext.cs" />
     <Compile Include="XmlModelConvertion\XmlModelConverter.cs" />
@@ -607,9 +660,7 @@
     <Content Include="Fonts\LiveSymbol.ttf" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="XmlModelConvertion\Converters\Formulas\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />
