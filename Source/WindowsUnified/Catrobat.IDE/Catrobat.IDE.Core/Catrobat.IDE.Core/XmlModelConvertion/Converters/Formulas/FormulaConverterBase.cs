@@ -9,26 +9,19 @@ using Catrobat.IDE.Core.XmlModelConvertion;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Formulas
 {
-    public abstract class FormulaConverterBase<TXmlScript, TScript> : 
-        XmlModelConverter<TXmlScript, TScript>
-        where TXmlScript : XmlFormula
-        where TScript : FormulaTree
+    public abstract class FormulaConverterBase : XmlModelConverter<XmlFormula, FormulaTree>
     {
         protected FormulaConverterBase(IXmlModelConversionService converter)
             : base(converter) { }
 
-        public override TScript Convert(TXmlScript o, XmlModelConvertContext c)
+        public override FormulaTree Convert(XmlFormula o, XmlModelConvertContext c)
         {
-            //return c.FormulaConverter.Convert(o);
-            return null;
+            return c.FormulaConverter.Convert(o);
         }
 
-        public override TXmlScript Convert(TScript m, XmlModelConvertBackContext c)
+        public override XmlFormula Convert(FormulaTree m, XmlModelConvertBackContext c)
         {
-            var result = Convert1(m, c);
-            return result;
+            return c.FormulaConverter.ConvertBack(m);
         }
-
-        public abstract TXmlScript Convert1(TScript m, XmlModelConvertBackContext c);
     }
 }
