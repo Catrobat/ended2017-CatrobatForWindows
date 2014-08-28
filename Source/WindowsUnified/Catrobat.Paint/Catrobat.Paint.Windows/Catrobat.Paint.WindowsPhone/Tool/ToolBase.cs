@@ -2,6 +2,7 @@
 using Catrobat.Paint.WindowsPhone.View;
 using Windows.UI.Xaml.Controls;
 using Catrobat.Paint.WindowsPhone.Tool;
+using Windows.UI.Xaml;
 
 namespace Catrobat.Paint.Phone.Tool
 {
@@ -32,7 +33,9 @@ namespace Catrobat.Paint.Phone.Tool
 
         protected void ResetCanvas()
         {
-          /*TODO:  // needs to be on PaintingAreaView to reset properly
+            // needs to be on PaintingAreaView to reset properly
+            //var currentPage = ((Frame)Window.Current.Content).CurrentSourcePageType;
+            //var currentPage = ((PhoneApplicationFrame)Application.Current.RootVisual).Content;
             var currentPage = PocketPaintApplication.GetInstance().PaintingAreaView;
             // var currentPage = new PaintingAreaView();
             if (!(currentPage is PaintingAreaView))
@@ -45,7 +48,7 @@ namespace Catrobat.Paint.Phone.Tool
             PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
             PocketPaintApplication.GetInstance().SetBitmapAsPaintingAreaCanvasBackground();
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
-         */
+         
         }
 
     }
