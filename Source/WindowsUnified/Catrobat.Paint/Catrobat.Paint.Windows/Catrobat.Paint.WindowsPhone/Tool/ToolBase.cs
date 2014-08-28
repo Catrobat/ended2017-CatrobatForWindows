@@ -33,21 +33,22 @@ namespace Catrobat.Paint.Phone.Tool
 
         protected void ResetCanvas()
         {
+            var rootFrame = Window.Current.Content as Frame;
+            var rootFrameStr = rootFrame.Content.ToString();
+            var paintingAreaViewStr = PocketPaintApplication.GetInstance().PaintingAreaView.ToString();
             // needs to be on PaintingAreaView to reset properly
-            //var currentPage = ((Frame)Window.Current.Content).CurrentSourcePageType;
             //var currentPage = ((PhoneApplicationFrame)Application.Current.RootVisual).Content;
-            var currentPage = PocketPaintApplication.GetInstance().PaintingAreaView;
-            // var currentPage = new PaintingAreaView();
-            if (!(currentPage is PaintingAreaView))
+            //var currentPage = PocketPaintApplication.GetInstance().PaintingAreaView;
+            if (!(rootFrameStr.Equals(paintingAreaViewStr)))
             {
                 NeedToResetCanvas = true;
                 return;
             }
             NeedToResetCanvas = false;
 
-            PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
-            PocketPaintApplication.GetInstance().SetBitmapAsPaintingAreaCanvasBackground();
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
+            //PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
+            //PocketPaintApplication.GetInstance().SetBitmapAsPaintingAreaCanvasBackground();
+            //PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
          
         }
 

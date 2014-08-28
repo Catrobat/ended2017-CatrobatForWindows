@@ -22,7 +22,10 @@ namespace Catrobat.Paint.Phone.Command
 
         public override bool ReDo()
         {
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(Path);
+            if (!PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Contains(Path))
+            {
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(Path);
+            }
             return true;
         }
 
