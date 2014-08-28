@@ -136,10 +136,6 @@ namespace Catrobat.IDE.WindowsShared.Services
             }
             if (_cancellationTokenSource.Token.IsCancellationRequested == true)
             {
-                ServiceLocator.NotifictionService.ShowToastNotification(
-                        AppResources.Import_Canceled,
-                        AppResources.Import_CanceledText,
-                        ToastDisplayDuration.Long);
                 CleanUpImport();
                 return;
             }
@@ -172,10 +168,6 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             if (_cancellationTokenSource.Token.IsCancellationRequested == true)
             {
-                ServiceLocator.NotifictionService.ShowToastNotification(
-                        AppResources.Import_Canceled,
-                        AppResources.Import_CanceledText,
-                        ToastDisplayDuration.Long);
                 CleanUpImport();
                 return;
             }
@@ -196,6 +188,10 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         private async void CleanUpImport()
         {
+            ServiceLocator.NotifictionService.ShowToastNotification(
+                        AppResources.Import_CanceledText,
+                        AppResources.Import_CanceledText,
+                        ToastDisplayDuration.Long);
             using (var storage = StorageSystem.GetStorage())
             {
                 if (await storage.DirectoryExistsAsync(StorageConstants.TempProgramImportPath))
