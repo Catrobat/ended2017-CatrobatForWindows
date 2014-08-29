@@ -22,6 +22,8 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Catrobat.Paint.WindowsPhone;
 using Catrobat.IDE.WindowsShared.Common;
+using Catrobat.Paint.Phone;
+
 
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227

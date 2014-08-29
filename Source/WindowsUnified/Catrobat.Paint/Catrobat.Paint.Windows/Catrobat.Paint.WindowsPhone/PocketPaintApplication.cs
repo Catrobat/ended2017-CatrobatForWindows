@@ -96,7 +96,13 @@ namespace Catrobat.Paint.Phone
         /// </summary>
         public void SaveAsWriteableBitmapToRam()
         {
-            // TODO: Bitmap = new WriteableBitmap(PaintingAreaCanvas, new TranslateTransform());
+            if (PaintingAreaCanvas.ActualWidth > 0 || PaintingAreaCanvas.ActualHeight > 0)
+            {
+                var h = PaintingAreaCanvas.ActualHeight;
+                var w = PaintingAreaCanvas.ActualWidth;
+                // TODO: 
+                Bitmap = new WriteableBitmap(Convert.ToInt32(w), Convert.ToInt32(h));
+            }
         }
  
 
@@ -115,7 +121,10 @@ namespace Catrobat.Paint.Phone
         public async void SaveAsPng(String filename = null)
         {
             // TODO: var bmp = new WriteableBitmap(PaintingAreaCanvas, new TranslateTransform());
-            
+            var h = PaintingAreaCanvas.ActualHeight;
+            var w = PaintingAreaCanvas.ActualWidth;
+            // TODO: 
+            var bmp = new WriteableBitmap(Convert.ToInt32(w), Convert.ToInt32(h));
 
             if (filename == null)
             {
@@ -123,6 +132,7 @@ namespace Catrobat.Paint.Phone
             }
 
             // TODO: await StorageIo.WriteBitmapToPngMediaLibrary(bmp, filename);
+            await StorageIo.WriteBitmapToPngMediaLibrary(bmp, filename);
 
             UnsavedChangesMade = false;
         }

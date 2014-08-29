@@ -1469,11 +1469,10 @@ void XMLParser::ParseObjectVariables(Project *project, const xml_node<> *baseNod
 			}
 
 			auto variableNode = listNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
-			if (!listNode)
+			if (!variableNode)
 			{
 				throw new XMLParserException("variable node not found in XML.");
 			}
-
 			while (variableNode)
 			{
 				auto variableNameNode = variableNode->first_node(Constants::XMLParser::Formula::Name.c_str());
