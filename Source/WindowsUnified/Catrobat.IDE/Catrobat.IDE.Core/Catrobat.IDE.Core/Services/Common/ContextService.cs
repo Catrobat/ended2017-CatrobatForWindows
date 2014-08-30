@@ -44,7 +44,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 if (counter != 0)
                     programNameUnique = programName + counter;
 
-                return programNameUnique;
+                return programNameUnique.Trim();
             }
         }
 
