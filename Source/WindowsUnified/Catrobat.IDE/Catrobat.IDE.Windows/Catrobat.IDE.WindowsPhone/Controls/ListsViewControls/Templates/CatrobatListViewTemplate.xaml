@@ -36,7 +36,7 @@
                             VerticalScrollBarVisibility="Visible"
                             Background="{TemplateBinding Background}" IsEnabled="True">
                             <!--<Border x:Name="BorderItems">-->
-                            <ItemsPresenter  />
+                            <ItemsPresenter />
                             <!--</Border>-->
 
                         </ScrollViewer>
@@ -109,7 +109,8 @@
                                          Width="70" Height="42"
                                        Background="Transparent"
                                         VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
+                                    HorizontalAlignment="Center"
+                                Visibility="Collapsed">
                             <Path Data="M40,440 L88,440 L88,448 L40,448 z" Fill="{StaticResource PhoneForegroundBrush}" HorizontalAlignment="Left" Height="6" Margin="12,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
                             <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="{StaticResource PhoneForegroundBrush}" HorizontalAlignment="Left" Height="38" Margin="49,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="6" />
                             <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="{StaticResource PhoneForegroundBrush}" HorizontalAlignment="Left" Height="6" Margin="12,32,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
@@ -120,7 +121,8 @@
                                          Width="70" Height="42"
                                        Background="Transparent"
                                         VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
+                                    HorizontalAlignment="Center"
+                                Visibility="Collapsed">
                             <Path Data="M40,440 L88,440 L88,448 L40,448 z" Fill="{StaticResource PhoneForegroundBrush}" HorizontalAlignment="Left" Height="6" Margin="12,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
                             <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="{StaticResource PhoneForegroundBrush}" HorizontalAlignment="Left" Height="38" Margin="49,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="6" />
                             <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="{StaticResource PhoneForegroundBrush}" HorizontalAlignment="Left" Height="6" Margin="12,32,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />

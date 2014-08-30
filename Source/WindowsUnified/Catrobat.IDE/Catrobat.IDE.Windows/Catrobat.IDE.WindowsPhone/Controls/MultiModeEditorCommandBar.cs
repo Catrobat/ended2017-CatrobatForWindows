@@ -220,7 +220,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
                     PrimaryCommands.Add(_newButton);
                     PrimaryCommands.Add(_selectButton);
 
-                    if (TargetType != AppBarTargetType.Action)
+                    if (TargetType == AppBarTargetType.Object)
                         PrimaryCommands.Add(_reorderButton);
                     
                     PrimaryCommands.Add(_playButton);
