@@ -18,6 +18,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private CatrobatContextBase _context;
         private MessageboxResult _missingRecoveryDataCallbackResult;
+        private MessageboxResult _serverSendedCallbackkResult;
         private string _passwordRecoveryData;
         private bool _isSending;
 
@@ -91,6 +92,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
                 if (statusResponse.statusCode == StatusCodes.ServerResponseOk)
                 {
+                    // since 08-2014 this only works on the test-server (https://catroid-test.catrob.at/)
                     string recoveryLink = statusResponse.answer;
                     string hashMarker = "?c=";
                     int position = recoveryLink.LastIndexOf(hashMarker) + hashMarker.Length;
@@ -98,6 +100,11 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     ResetViewModel();
                     ServiceLocator.NavigationService.NavigateTo<UploadProgramNewPasswordViewModel>();
                     ServiceLocator.NavigationService.RemoveBackEntry();
+
+                    // since 08-2014 pocketcode-server sends an email with the recovery hash in it
+                    //ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramRecoverPassword,
+                    //            statusResponse.answer, MissingRecoveryDataCallback, MessageBoxOptions.Ok);
+                    //this.GoBackAction();
                 }
                 else
                 {
@@ -145,6 +152,11 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         }
 
         #region Callbacks
+
+        private void ServerSendedCallback(MessageboxResult result)
+        {
+            _serverSendedCallbackkResult = result;
+        }
 
         private void MissingRecoveryDataCallback(MessageboxResult result)
         {

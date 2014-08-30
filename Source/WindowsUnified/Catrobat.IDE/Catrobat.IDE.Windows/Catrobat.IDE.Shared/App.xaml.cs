@@ -16,6 +16,7 @@ using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Editor.Looks;
 using Catrobat.IDE.Core.ViewModels.Main;
+using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.WindowsPhone;
 using Catrobat.IDE.WindowsPhone.Views.Main;
 using Catrobat.IDE.WindowsShared.Common;
@@ -100,6 +101,10 @@ namespace Catrobat.IDE.WindowsShared
             await statusBar.HideAsync();
 
             await ExtendedSplash.InitializationFinished(e);
+            if (e.Kind == ActivationKind.Protocol)
+            {
+                ServiceLocator.NavigationService.NavigateTo<UploadProgramNewPasswordViewModel>();
+            }
         }
 
         protected override async void OnActivated(IActivatedEventArgs e)

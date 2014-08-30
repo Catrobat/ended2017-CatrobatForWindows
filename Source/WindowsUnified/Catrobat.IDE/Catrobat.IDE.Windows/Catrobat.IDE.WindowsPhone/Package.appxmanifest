@@ -32,6 +32,11 @@
             </SupportedFileTypes>
           </FileTypeAssociation>
         </Extension>
+        <Extension Category="windows.protocol">
+          <Protocol Name="pocketcode">
+            <DisplayName>Pocketcode URI Scheme</DisplayName>
+          </Protocol>
+        </Extension>
       </Extensions>
     </Application>
   </Applications>

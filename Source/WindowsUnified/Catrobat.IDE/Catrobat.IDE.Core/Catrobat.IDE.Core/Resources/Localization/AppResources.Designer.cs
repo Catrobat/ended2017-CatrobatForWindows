@@ -3511,6 +3511,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Recover password ähnelt.
+        /// </summary>
+        public static string Main_UploadProgramRecoverPassword {
+            get {
+                return ResourceManager.GetString("Main_UploadProgramRecoverPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Recovery hash was not found. ähnelt.
         /// </summary>
         public static string Main_UploadProgramRecoveryHashError {
