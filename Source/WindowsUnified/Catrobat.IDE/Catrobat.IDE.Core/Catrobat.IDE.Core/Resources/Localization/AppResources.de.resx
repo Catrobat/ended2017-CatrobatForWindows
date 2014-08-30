@@ -1195,7 +1195,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Passwort erfolgreich geändert.</value>
   </data>
   <data name="Main_OnlineProgramListBoxNoMoreItems" xml:space="preserve">
-    <value>Keine weiteren programme</value>
+    <value>Keine weiteren Programme</value>
   </data>
   <data name="Main_NoScreenshot" xml:space="preserve">
     <value>Kein Screenshot</value>

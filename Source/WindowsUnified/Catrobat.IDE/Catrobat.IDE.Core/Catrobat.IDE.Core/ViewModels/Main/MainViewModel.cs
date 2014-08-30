@@ -284,10 +284,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void LocalProgramsChangedMessageAction(MessageBase message)
         {
-            //await UpdateLocalPrograms();
-            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            ServiceLocator.DispatcherService.RunOnMainThread(async () =>
             {
-                UpdateLocalPrograms();
+                await UpdateLocalPrograms();
             });
         }
 

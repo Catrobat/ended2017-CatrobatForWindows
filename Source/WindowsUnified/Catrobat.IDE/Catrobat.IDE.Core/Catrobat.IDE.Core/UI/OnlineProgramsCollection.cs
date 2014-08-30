@@ -54,6 +54,7 @@ namespace Catrobat.IDE.Core.UI
             {
                 _hasMorePrograms = value;
                 RaisePropertyChanged(() => HasMorePrograms);
+                NoMorePrograms = !_hasMorePrograms && !ErrorOccurred;
             }
         }
 
@@ -83,8 +84,6 @@ namespace Catrobat.IDE.Core.UI
         }
 
         private bool _isAutoUpdate = false;
-
-
         protected bool IsAutoUpdate
         {
             get { return _isAutoUpdate; }
@@ -92,6 +91,29 @@ namespace Catrobat.IDE.Core.UI
             {
                 _isAutoUpdate = value;
                 RaisePropertyChanged(() => IsAutoUpdate);
+            }
+        }
+
+        private bool _errorOccurred = false;
+        public bool ErrorOccurred
+        {
+            get { return _errorOccurred; }
+            set
+            {
+                _errorOccurred = value;
+                RaisePropertyChanged(() => ErrorOccurred);
+                NoMorePrograms = !HasMorePrograms && !_errorOccurred;
+            }
+        }
+
+        private bool _noMorePrograms = false;
+        public bool NoMorePrograms
+        {
+            get { return _noMorePrograms; }
+            set
+            {
+                _noMorePrograms = value;
+                RaisePropertyChanged(() => NoMorePrograms);
             }
         }
 
@@ -116,6 +138,9 @@ namespace Catrobat.IDE.Core.UI
             if(IsLoading)
                 _downloadTaskCancellation.Cancel();
 
+            if (ErrorOccurred)
+                ErrorOccurred = false;
+
             IsLoading = true;
             HasMorePrograms = true;
 
@@ -138,6 +163,10 @@ namespace Catrobat.IDE.Core.UI
                         this.Add(header);
                         newProgramsCount ++;
                     }
+                }
+                else
+                {
+                    ErrorOccurred = true;
                 }
 
                 IsLoading = false;

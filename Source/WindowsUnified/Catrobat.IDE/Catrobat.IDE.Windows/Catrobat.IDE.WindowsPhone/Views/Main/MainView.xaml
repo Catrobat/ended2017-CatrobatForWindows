@@ -157,11 +157,21 @@
                     </StackPanel>
                     <Grid VerticalAlignment="Center" 
                       HorizontalAlignment="Center"
-                      Visibility="{Binding OnlinePrograms.HasMoreItems, 
-                      Converter={StaticResource NegativeBoolVisibilityConverter}}">
+                      Visibility="{Binding OnlinePrograms.NoMorePrograms, 
+                      Converter={StaticResource BoolVisibilityConverter}}">
                       <TextBlock Foreground="White"
                         VerticalAlignment="Center" HorizontalAlignment="Center" 
                         Text="{Binding Resources.Main_OnlineProgramListBoxNoMoreItems, 
+                        Source={StaticResource LocalizedStrings}}" 
+                        Style="{ ThemeResource TextNormalStyle }" />
+                    </Grid>
+                    <Grid VerticalAlignment="Center" 
+                      HorizontalAlignment="Center"
+                      Visibility="{Binding OnlinePrograms.ErrorOccurred, 
+                      Converter={StaticResource BoolVisibilityConverter}}">
+                      <TextBlock Foreground="White"
+                        VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        Text="{Binding Resources.Main_NoInternetConnection, 
                         Source={StaticResource LocalizedStrings}}" 
                         Style="{ ThemeResource TextNormalStyle }" />
                     </Grid>
