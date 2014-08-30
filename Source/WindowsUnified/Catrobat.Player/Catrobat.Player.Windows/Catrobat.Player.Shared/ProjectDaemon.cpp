@@ -64,7 +64,7 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
     }
 
     m_files = new vector<Platform::String^>();
-    auto path = Windows::Storage::ApplicationData::Current->LocalFolder->Path + "/Local/Projects/" + projectName;
+    auto path = Windows::Storage::ApplicationData::Current->LocalFolder->Path + "\\Projects\\" + projectName;
 
     auto openProjectTask = create_task(Windows::Storage::ApplicationData::Current->LocalFolder->GetFolderFromPathAsync(path))
         .then([this, path](task<StorageFolder^> folderResult)
