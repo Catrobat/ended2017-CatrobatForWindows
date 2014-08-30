@@ -81,8 +81,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 
         private async void SaveAction()
         {
+            SoundName = await ServiceLocator.ContextService.ConvertToValidFileName(SoundName);
             var sound = new Sound(SoundName);
-            var path = Path.Combine(CurrentProgram.BasePath, StorageConstants.ProgramSoundsPath, sound.FileName);
+            var path = Path.Combine(CurrentProgram.BasePath, StorageConstants.ProgramSoundsPath, SoundName);
 
             using (var storage = StorageSystem.GetStorage())
             {

@@ -11,10 +11,11 @@ namespace Catrobat.IDE.Core.Services
 {
     public interface IContextService
     {
-        Task<XmlProgramRenamerResult> RenameProgram(
-            string programCodeFilePath, string newProgramName);
+        Task<string> ConvertToValidFileName(string fileName);
 
         Task<string> FindUniqueProgramName(string programName);
+        Task<XmlProgramRenamerResult> RenameProgram(
+            string programCodeFilePath, string newProgramName);
 
         Task<Program> LoadProgramByName(string programName);
 
