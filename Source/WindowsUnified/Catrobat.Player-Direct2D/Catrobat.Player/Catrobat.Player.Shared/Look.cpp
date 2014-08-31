@@ -9,51 +9,51 @@
 using namespace DirectX;
 
 Look::Look(string filename, string name) :
-	m_filename(filename), m_name(name)
+m_filename(filename), m_name(name)
 {
-	m_texture = new CatrobatTexture();
+    m_texture = new CatrobatTexture();
 }
 
 string Look::GetName()
 {
-	return m_name;
+    return m_name;
 }
 
 unsigned int Look::GetWidth()
 {
-	if (m_texture == NULL)
-	{
-		throw new PlayerException("Look::GetWidth called with no texture defined.");
-	}
-	return m_texture->width;
+    if (m_texture == NULL)
+    {
+        throw new PlayerException("Look::GetWidth called with no texture defined.");
+    }
+    return m_texture->width;
 }
 
 unsigned int Look::GetHeight()
 {
-	if (m_texture == NULL)
-	{
-		throw new PlayerException("Look::GetHeight called with no texture defined.");
-	}
-	return m_texture->height;
+    if (m_texture == NULL)
+    {
+        throw new PlayerException("Look::GetHeight called with no texture defined.");
+    }
+    return m_texture->height;
 }
 
 string Look::GetFileName()
 {
-	return m_filename;
+    return m_filename;
 }
 
-void Look::LoadTexture(ID3D11Device* d3dDevice)
+void Look::LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources)
 {
-	TextureDaemon::Instance()->LoadTexture(d3dDevice, &m_texture, m_filename);
+    TextureDaemon::Instance()->LoadTexture(deviceResources, &m_texture, m_filename);
 }
 
 ID3D11ShaderResourceView *Look::GetResourceView()
 {
-	if (m_texture == NULL)
-	{
-		throw new PlayerException("Look::GetResourceView called with no texture defined.");
-	}
-	return m_texture->resourceView;
+    if (m_texture == NULL)
+    {
+        throw new PlayerException("Look::GetResourceView called with no texture defined.");
+    }
+    return m_texture->resourceView;
 }
 
 ID3D11Resource *Look::GetTexture()
@@ -63,4 +63,13 @@ ID3D11Resource *Look::GetTexture()
         throw new PlayerException("Look::GetTexture called with no texture defined.");
     }
     return m_texture->texture;
+}
+
+ID2D1Bitmap *Look::GetBitMap()
+{
+    if (m_texture == NULL)
+    {
+        throw new PlayerException("Look::GetTexture called with no texture defined.");
+    }
+    return m_texture->bitmap;
 }

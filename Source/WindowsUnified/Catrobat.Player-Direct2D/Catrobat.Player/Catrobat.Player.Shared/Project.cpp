@@ -61,19 +61,19 @@ ObjectList *Project::GetObjectList()
 	return m_objectList;
 }
 
-void Project::Render()
+void Project::Render(ID2D1DeviceContext1* deviceContext)
 {
 	for (int i = 0; i < m_objectList->GetSize(); i++)
 	{
-		m_objectList->GetObject(i)->Draw();
+		m_objectList->GetObject(i)->Draw(deviceContext);
 	}
 }
 
-void Project::LoadTextures(ID3D11Device* d3dDevice)
+void Project::LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceResources)
 {
 	for (int i = 0; i < m_objectList->GetSize(); i++)
 	{
-		m_objectList->GetObject(i)->LoadTextures(d3dDevice);
+		m_objectList->GetObject(i)->LoadTextures(deviceResources);
 	}
 }
 

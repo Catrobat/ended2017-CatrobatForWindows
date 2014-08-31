@@ -29,8 +29,8 @@ public:
 	void AddScript(Script *script);
 	void AddSoundInfo(SoundInfo *soundInfo);
 
-	void LoadTextures(ID3D11Device* d3dDevice);
-	void Draw();
+    void LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceResources);
+    void Draw(ID2D1DeviceContext1* deviceContext);
 	void StartUp();
 
 	int GetScriptListSize();

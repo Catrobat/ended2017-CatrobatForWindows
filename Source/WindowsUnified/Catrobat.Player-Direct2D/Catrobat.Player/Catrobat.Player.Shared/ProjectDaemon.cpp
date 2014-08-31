@@ -35,7 +35,6 @@ void ProjectDaemon::ReInit()
 
 ProjectDaemon::ProjectDaemon()
 {
-    m_finishedLoading = false;
     m_projectList = new vector<Platform::String^>();
     m_files = new vector<Platform::String^>();
     m_errorList = new vector<std::string>();
@@ -56,7 +55,7 @@ Project *ProjectDaemon::GetProject()
     return m_project;
 }
 
-void ProjectDaemon::OpenProject(Platform::String^ projectName)
+task<bool> ProjectDaemon::OpenProject(Platform::String^ projectName)
 {
     if(projectName->IsEmpty())
     {
@@ -113,30 +112,15 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 
 			// Initialize Renderer and enable rendering to be started
 			//m_renderer->Initialize(m_device);
-			m_finishedLoading = true;
 			free(xml);
+            return true;
 		}
 		catch (Platform::Exception^ e)
 		{
 			throw new PlayerException(&e, "Not able to open the XML file.");
 		}
 	});
-
-	openProjectTask.then([this](task<void> t)
-	{
-		try
-		{
-			t.get();
-		}
-		catch (BaseException *e)
-		{
-			this->AddDebug(Helper::ConvertStringToPlatformString(e->GetErrorMessage()));
-		}
-        catch (Platform::Exception ^e)
-		{
-			this->AddDebug(e->Message);
-		}
-	});
+    return openProjectTask;
 }
 
 vector<Platform::String^> *ProjectDaemon::GetProjectList()
@@ -176,11 +160,6 @@ vector<Platform::String^> *ProjectDaemon::GetFileList()
 //    m_device = device;
 //    m_renderer = renderer;
 //}
-
-bool ProjectDaemon::FinishedLoading()
-{
-    return m_finishedLoading;
-}
 
 void ProjectDaemon::AddDebug(Platform::String^ info)
 {

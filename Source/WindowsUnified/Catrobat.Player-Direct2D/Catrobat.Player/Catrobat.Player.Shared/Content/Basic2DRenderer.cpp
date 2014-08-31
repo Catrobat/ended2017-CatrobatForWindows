@@ -11,6 +11,7 @@
 Basic2DRenderer::Basic2DRenderer(const std::shared_ptr<DX::DeviceResources>& deviceResources) :
 m_deviceResources(deviceResources)
 {
+    ProjectDaemon::Instance()->GetProject()->StartUp();
     CreateDeviceDependentResources();
 }
 
@@ -20,14 +21,17 @@ void Basic2DRenderer::Update(DX::StepTimer const& timer)
 
 void Basic2DRenderer::Render()
 {
-    if (ProjectDaemon::Instance()->FinishedLoading())
-    {
-        LoadImage();
-    }
+    ID2D1DeviceContext1* deviceContext = m_deviceResources->GetD2DDeviceContext();
+
+    //begin drawing operations, draw bitmap, end drawing
+    deviceContext->BeginDraw();
+    ProjectDaemon::Instance()->GetProject()->Render(deviceContext);
+    deviceContext->EndDraw();
 }
 
 void Basic2DRenderer::CreateDeviceDependentResources()
 {
+    ProjectDaemon::Instance()->GetProject()->LoadTextures(m_deviceResources);
 }
 
 void Basic2DRenderer::ReleaseDeviceDependentResources()

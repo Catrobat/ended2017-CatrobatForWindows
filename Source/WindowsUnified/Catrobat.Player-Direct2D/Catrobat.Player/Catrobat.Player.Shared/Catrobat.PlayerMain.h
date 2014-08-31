@@ -48,5 +48,7 @@ namespace Catrobat_Player
 
 		// Track current input pointer position.
 		float m_pointerLocationX;
+
+        bool m_loadingComplete;
 	};
 }

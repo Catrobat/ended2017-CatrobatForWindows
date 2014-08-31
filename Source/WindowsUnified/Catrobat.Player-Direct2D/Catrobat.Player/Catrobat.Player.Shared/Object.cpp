@@ -68,7 +68,7 @@ Script *Object::GetScript(int index)
     return *it;
 }
 
-void Object::LoadTextures(ID3D11Device* d3dDevice)
+void Object::LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceResources)
 {
     SetTranslation(0.f, 0.f);
 
@@ -78,8 +78,8 @@ void Object::LoadTextures(ID3D11Device* d3dDevice)
 
         if (m_look != NULL)
         {
-            m_look->LoadTexture(d3dDevice);
-            m_origin = XMFLOAT2(((float)m_look->GetWidth()) / 2.0f, ((float)m_look->GetHeight()) / 2.0f);
+            m_look->LoadTexture(deviceResources);
+            m_origin = XMFLOAT2(((float) m_look->GetWidth()) / 2.0f, ((float) m_look->GetHeight()) / 2.0f);
         }
     }
 }
@@ -92,18 +92,19 @@ double radians(float degree)
 /*
 Draw the current look of this object.
 */
-void Object::Draw()
+void Object::Draw(ID2D1DeviceContext1* deviceContext)
 {
     if (m_look == NULL)
     {
         return;
     }
 
-    //if (m_look != NULL)
-    //{
-    //    spriteBatch->Draw(m_look->GetResourceView(), m_position, nullptr,
-    //        Colors::White * m_opacity, (float)radians(m_rotation), m_origin, m_objectScale, SpriteEffects_None, 0.0f);
-    //}
+    deviceContext->SetTransform(D2D1::Matrix3x2F::Identity());
+    deviceContext->Clear(D2D1::ColorF(D2D1::ColorF::White));
+    D2D1_SIZE_F size = m_look->GetBitMap()->GetSize();
+    D2D1_POINT_2F ulc = D2D1::Point2F(100.f, 10.f);
+    deviceContext->DrawBitmap(m_look->GetBitMap(), D2D1::RectF(ulc.x,
+        ulc.y, ulc.x + size.width, ulc.y + size.height));
 }
 
 XMMATRIX Object::GetWorldMatrix()
@@ -171,8 +172,8 @@ Bounds Object::GetBounds()
     {
         bounds.x = m_position.x - currentLook->GetWidth() / 2.0f;
         bounds.y = m_position.y - currentLook->GetHeight() / 2.0f;
-        bounds.width = (float)currentLook->GetWidth();
-        bounds.height = (float)currentLook->GetHeight();
+        bounds.width = (float) currentLook->GetWidth();
+        bounds.height = (float) currentLook->GetHeight();
     }
 
     return bounds;
@@ -312,12 +313,12 @@ bool Object::IsTapPointHitting(ID3D11DeviceContext1* context, ID3D11Device* devi
 
     if (m_opacity > 0)
     {
-        XMVECTOR sourcePosition = XMVectorSet((float)xPosition, (float)yPosition, 0.f, 0.f);
+        XMVECTOR sourcePosition = XMVectorSet((float) xPosition, (float) yPosition, 0.f, 0.f);
         FXMVECTOR scale = XMVectorSet(m_objectScale.x, m_objectScale.x, 0.0f, 0.0f);
         FXMVECTOR rotationOrigin = XMVectorSet(m_position.x, m_position.y, 0.0f, 0.0f);
         FXMVECTOR translation = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
 
-        XMMATRIX matrix = XMMatrixTransformation2D(rotationOrigin, 0.0f, scale, rotationOrigin, (float)radians(m_rotation), translation);
+        XMMATRIX matrix = XMMatrixTransformation2D(rotationOrigin, 0.0f, scale, rotationOrigin, (float) radians(m_rotation), translation);
         XMVECTOR *determinant = nullptr;
         matrix = XMMatrixInverse(determinant, matrix);
         XMVECTOR newPosition = XMVector2TransformCoord(sourcePosition, matrix);
@@ -418,7 +419,7 @@ bool Object::IsTapPointHitting(ID3D11DeviceContext1* context, ID3D11Device* devi
                             {
                                 D3D11_MAPPED_SUBRESOURCE msr;
                                 result = context->Map(pOurStagingTexture, 0, D3D11_MAP_READ, 0, &msr);
-                                BYTE *pixel = (BYTE*)msr.pData;
+                                BYTE *pixel = (BYTE*) msr.pData;
 
                                 if (FAILED(result) || msr.pData == NULL)
                                 {

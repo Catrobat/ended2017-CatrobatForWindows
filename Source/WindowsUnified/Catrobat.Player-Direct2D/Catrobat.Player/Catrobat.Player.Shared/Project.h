@@ -33,8 +33,8 @@ public:
 
 	~Project();
 
-	void								Render			();
-	void								LoadTextures	(ID3D11Device* d3dDevice);
+    void								Render(ID2D1DeviceContext1* deviceContext);
+    void								LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceResources);
 	void								StartUp();
 
 	// Getters for Project Header

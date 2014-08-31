@@ -17,8 +17,7 @@ public:
 	std::vector<Platform::String ^> *GetProjectList();
 	std::vector<Platform::String ^> *GetFileList();
 
-	void OpenProject(Platform::String^ projectName);
-	bool FinishedLoading();
+	Concurrency::task<bool> OpenProject(Platform::String^ projectName);
 
 	//void SetDesiredRenderTargetSize(DrawingSurfaceSizeF *desiredRenderTargetSize);
 	//void SetupRenderer(ID3D11Device1 *device, ProjectRenderer^ renderer);
@@ -32,8 +31,6 @@ private:
 	ProjectDaemon(ProjectDaemon const&);            
     ProjectDaemon& operator=(ProjectDaemon const&); 
 	~ProjectDaemon();
-
-	bool m_finishedLoading;
 
 	static ProjectDaemon *m_instance;
 

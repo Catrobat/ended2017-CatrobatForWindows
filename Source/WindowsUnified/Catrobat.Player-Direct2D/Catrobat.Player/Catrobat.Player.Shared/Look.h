@@ -13,9 +13,10 @@ public:
 	Look(string filename, string name);
 	~Look();
 
-	void LoadTexture(ID3D11Device* d3dDevice);
+    void LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources);
 	ID3D11ShaderResourceView *GetResourceView();
     ID3D11Resource* GetTexture();
+    ID2D1Bitmap* GetBitMap();
 	string GetFileName();
 	string GetName();
 

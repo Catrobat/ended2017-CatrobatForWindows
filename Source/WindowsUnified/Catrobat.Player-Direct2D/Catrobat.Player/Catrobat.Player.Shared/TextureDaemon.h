@@ -1,9 +1,10 @@
 #pragma once
 
+#include "CatrobatTexture.h"
+
 #include <map>
 #include <string>
-#include <D3D11.h>
-#include "CatrobatTexture.h"
+#include <d2d1.h>
 
 //struct CatrobatTexture
 //{
@@ -20,6 +21,7 @@ public:
 	static TextureDaemon *Instance();
 
 	void LoadTexture(ID3D11Device *d3dDevice, CatrobatTexture **texture, std::string textureKey);
+    void LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources, CatrobatTexture** texture, std::string textureKey);
 private:
 	TextureDaemon();
 	~TextureDaemon();
