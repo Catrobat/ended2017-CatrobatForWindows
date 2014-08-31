@@ -15,8 +15,6 @@ public:
     bool IsTracking() { return m_tracking; }
     void TrackingUpdate(float positionX);
 
-    void LoadImage();
-
 private:
     // Cached pointer to device resources.
     std::shared_ptr<DX::DeviceResources> m_deviceResources;
