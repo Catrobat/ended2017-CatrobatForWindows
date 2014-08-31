@@ -108,7 +108,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 switch (statusResponse.statusCode)
                 {
                     case StatusCodes.ServerResponseOk:
-                        GoBackAction();
+                        this.GoBackAction();
                         ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramNewPassword,
                             AppResources.Main_UploadProgramPasswordChangeSucess, PasswordInvalidCallback, MessageBoxOptions.Ok);
                         break;

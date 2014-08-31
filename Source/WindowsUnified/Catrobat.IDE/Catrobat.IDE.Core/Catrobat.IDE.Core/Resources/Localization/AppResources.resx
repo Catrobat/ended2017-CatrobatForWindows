@@ -1320,4 +1320,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Main_SharePreparation" xml:space="preserve">
     <value>Preparing data for sharing.</value>
   </data>
+  <data name="Main_UploadProgramRecoverPassword" xml:space="preserve">
+    <value>Recover password</value>
+  </data>
 </root>

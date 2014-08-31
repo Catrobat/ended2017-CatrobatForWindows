@@ -357,7 +357,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
 
         public async Task CopyDirectoryAsync(string sourcePath, string destinationPath)
         {
-            await CreateFolderPathAsync(destinationPath); // here because the line is not used in GetFolderAsync anymore
+            await CreateFolderPathAsync(destinationPath);
             var directory = await GetFolderAsync(sourcePath);
 
             foreach (var folder in await directory.GetFoldersAsync())

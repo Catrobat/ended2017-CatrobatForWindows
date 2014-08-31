@@ -39,7 +39,7 @@ namespace Catrobat_Player
         m_playerAppBar(playerAppBar),
         m_initialized(false),
         m_timer(ref new BasicTimer()),
-        m_projectName(L"Whack a mole") // TODO set project name dynamically
+        m_projectName(L"compass") // TODO set project name dynamically
     {
         Init();
     }
@@ -123,7 +123,7 @@ namespace Catrobat_Player
             ProjectDaemon::Instance()->SetupRenderer(m_deviceResources->GetD3DDevice(), m_projectRenderer);
 
             // Load Project
-            //ProjectDaemon::Instance()->OpenProject(m_projectName);     // TODO fix loading project issue!!
+            ProjectDaemon::Instance()->OpenProject(m_projectName);
 
             // Restart timer after render has finished initializing
             m_timer->Reset();

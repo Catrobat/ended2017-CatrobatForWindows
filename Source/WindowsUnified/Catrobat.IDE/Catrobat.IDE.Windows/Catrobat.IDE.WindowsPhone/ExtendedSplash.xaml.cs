@@ -6,6 +6,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Main;
+using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.WindowsShared;
 using Catrobat.IDE.WindowsShared.Common;
 using Catrobat.IDE.WindowsShared.Services;
@@ -81,7 +82,15 @@ namespace Catrobat.IDE.WindowsPhone
 
             Window.Current.Content = _rootFrame;
             ServiceLocator.NavigationService = new NavigationServiceWindowsShared(_rootFrame);
-            ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
+
+            if (_activationArguments.Kind == ActivationKind.Protocol)
+            {
+                ServiceLocator.NavigationService.NavigateTo<UploadProgramNewPasswordViewModel>();
+            }
+            else
+            {
+                ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
+            }
         }
 
         void PositionImage()
@@ -197,6 +206,20 @@ namespace Catrobat.IDE.WindowsPhone
                     // TODO: Handle error
                     //var messageDialog1 = new MessageDialog("Cannot read recieved file: " + exc.Message);
                     //messageDialog1.ShowAsync();
+                }
+            }
+
+            if (e.Kind == ActivationKind.Protocol)
+            {
+                ProtocolActivatedEventArgs eventArgs = e as ProtocolActivatedEventArgs;
+
+                string absoluteUri = eventArgs.Uri.AbsoluteUri;
+                if (absoluteUri.Contains("pocketcode:c="))
+                {
+                    int hashIndex = absoluteUri.IndexOf("c=") + 2;
+                    string recoveryHash = absoluteUri.Substring(hashIndex);
+                    // set Hash in Context.LocalSettings.CurrentUserRecoveryHash
+                    // or set in a webcomm.-service
                 }
             }
         }

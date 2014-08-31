@@ -55,6 +55,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
                 _lookName = value;
                 RaisePropertyChanged(() => LookName);
+                SaveCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -168,6 +169,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
         private async Task SaveAction()
         {
+            LookName = await ServiceLocator.ContextService.ConvertToValidFileName(LookName);
             var message = new GenericMessage<PortableImage>(Image);
             Messenger.Default.Send(message, ViewModelMessagingToken.LookImageToSaveListener);
 

@@ -46,7 +46,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             {
                 string userDescription = value;
                 userDescription = Regex.Replace(userDescription, @"<[^>]+>|&nbsp;", "").Trim();
-                _description = Regex.Replace(userDescription, @"(\s)\s+", "$1");
+                _description = Regex.Replace(userDescription, @"(\s)\s+", "$1").Trim();
             }
         }
         public string Uploaded { get; set; }

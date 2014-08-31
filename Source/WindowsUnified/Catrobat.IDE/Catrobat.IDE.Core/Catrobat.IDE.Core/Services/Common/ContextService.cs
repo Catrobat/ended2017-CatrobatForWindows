@@ -12,11 +12,28 @@ using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Xml;
 using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
+using System.Text.RegularExpressions;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
     public class ContextService : IContextService
     {
+        public async Task<string> ConvertToValidFileName(string fileName)
+        {
+            fileName = Regex.Replace(fileName, @"(\s)\s+", "$1").Trim();
+            string invalidFileNameChars = new string(Path.GetInvalidFileNameChars());
+            fileName = Regex.Replace(fileName, @"[" + Regex.Escape(invalidFileNameChars) + "]", "");
+            fileName = Regex.Replace(fileName, @"( *(\.)+)*$", "").Trim();
+            
+            //fileName = Regex.Replace(fileName, @"[^A-Za-z0-9_-]", "");
+
+            if(fileName.Length == 0)
+            {
+                fileName = "DEFAULT";
+            }
+            return fileName;
+        }
+        
         public async Task<string> FindUniqueProgramName(string programName)
         {
             using (var storage = StorageSystem.GetStorage())
@@ -44,7 +61,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 if (counter != 0)
                     programNameUnique = programName + counter;
 
-                return programNameUnique;
+                return programNameUnique.Trim();
             }
         }
 
