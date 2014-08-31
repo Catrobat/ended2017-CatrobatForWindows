@@ -1,0 +1,528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Catrobat.PlayerMain.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)pch.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\DirectXHelper.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\StepTimer.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\DeviceResources.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Content\Sample3DSceneRenderer.h">
+      <Filter>Content</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Content\SampleFpsTextRenderer.h">
+      <Filter>Content</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Constants.h">
+      <Filter>Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)DDSLoader.h">
+      <Filter>Core\DDSConverter</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)lodepng.h">
+      <Filter>Core\DDSConverter</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)lodepng_util.h">
+      <Filter>Core\DDSConverter</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BasicTimer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastMessageListener.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastMessageSender.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastMessageDaemon.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)DirectXHelper.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CatrobatTexture.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DBase.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)TextureDaemon.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ProjectDaemon.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)FormulaTreeException.h">
+      <Filter>Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)FormulaTreeFatalException.h">
+      <Filter>Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerException.h">
+      <Filter>Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserException.h">
+      <Filter>Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserFatalException.h">
+      <Filter>Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserSevereException.h">
+      <Filter>Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BaseException.h">
+      <Filter>Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)AccelerometerProvider.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CompassProvider.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)InclinationProvider.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Interpreter.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LoudnessCapture.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WASAPIAudio.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceInformation.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Helper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml.hpp">
+      <Filter>XMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_iterators.hpp">
+      <Filter>XMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_print.hpp">
+      <Filter>XMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_utils.hpp">
+      <Filter>XMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)XMLParser.h">
+      <Filter>XMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastBrick.h">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ForeverBrick.h">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IfBrick.h">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)RepeatBrick.h">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WaitBrick.h">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChangeGhostEffectByBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChangeSizeByBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CostumeBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)HideBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NextLookBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SetGhostEffectBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SetSizeToBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ShowBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChangeXByBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChangeYByBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)GlideToBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MoveNStepsBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlaceAtBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PointToBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SetXBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SetYBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)TurnLeftBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)TurnRightBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChangeVariableBrick.h">
+      <Filter>Objects\Bricks\Variable</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SetVariableBrick.h">
+      <Filter>Objects\Bricks\Variable</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)VariableManagementBrick.h">
+      <Filter>Objects\Bricks\Variable</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlaySoundBrick.h">
+      <Filter>Objects\Bricks\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ContainerBrick.h">
+      <Filter>Objects\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Brick.h">
+      <Filter>Objects\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastScript.h">
+      <Filter>Objects\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Script.h">
+      <Filter>Objects\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)StartScript.h">
+      <Filter>Objects\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WhenScript.h">
+      <Filter>Objects\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BaseObject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)FormulaTree.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Look.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Object.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ObjectList.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SoundInfo.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)UserVariable.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Content\Basic2DRenderer.h">
+      <Filter>Content</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Catrobat.PlayerMain.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\DeviceResources.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Content\Sample3DSceneRenderer.cpp">
+      <Filter>Content</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Content\SampleFpsTextRenderer.cpp">
+      <Filter>Content</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)DDSLoader.cpp">
+      <Filter>Core\DDSConverter</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)lodepng.cpp">
+      <Filter>Core\DDSConverter</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)lodepng_util.cpp">
+      <Filter>Core\DDSConverter</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageDaemon.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageListener.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageSender.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CatrobatTexture.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DBase.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ProjectDaemon.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TextureDaemon.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)BaseException.cpp">
+      <Filter>Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)FormulaTreeException.cpp">
+      <Filter>Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)FormulaTreeFatalException.cpp">
+      <Filter>Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerException.cpp">
+      <Filter>Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserException.cpp">
+      <Filter>Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserFatalException.cpp">
+      <Filter>Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserSevereException.cpp">
+      <Filter>Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CompassProvider.cpp">
+      <Filter>Formula</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)InclinationProvider.cpp">
+      <Filter>Formula</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Interpreter.cpp">
+      <Filter>Formula</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LoudnessCapture.cpp">
+      <Filter>Formula</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WASAPIAudio.cpp">
+      <Filter>Formula</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)AccelerometerProvider.cpp">
+      <Filter>Formula</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)DeviceInformation.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Helper.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)XMLParser.cpp">
+      <Filter>XMLParser</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ForeverBrick.cpp">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)IfBrick.cpp">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)RepeatBrick.cpp">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WaitBrick.cpp">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastBrick.cpp">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)HideBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NextLookBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SetGhostEffectBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SetSizeToBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ShowBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChangeGhostEffectByBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChangeSizeByBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CostumeBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MoveNStepsBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlaceAtBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)PointToBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SetXBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SetYBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TurnLeftBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TurnRightBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChangeXByBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChangeYByBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)GlideToBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SetVariableBrick.cpp">
+      <Filter>Objects\Bricks\Variable</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)VariableManagementBrick.cpp">
+      <Filter>Objects\Bricks\Variable</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChangeVariableBrick.cpp">
+      <Filter>Objects\Bricks\Variable</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlaySoundBrick.cpp">
+      <Filter>Objects\Bricks\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Brick.cpp">
+      <Filter>Objects\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ContainerBrick.cpp">
+      <Filter>Objects\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Script.cpp">
+      <Filter>Objects\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)StartScript.cpp">
+      <Filter>Objects\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WhenScript.cpp">
+      <Filter>Objects\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastScript.cpp">
+      <Filter>Objects\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Project.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SoundInfo.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)UserVariable.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)BaseObject.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)FormulaTree.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Look.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Object.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ObjectList.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Content\Basic2DRenderer.cpp">
+      <Filter>Content</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Content\SamplePixelShader.hlsl">
+      <Filter>Content</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Content\SampleVertexShader.hlsl">
+      <Filter>Content</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{d5bd5c67-691b-4712-8fb0-e5cc437181a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Content">
+      <UniqueIdentifier>{d8733286-a015-4cfc-ba2f-e17c473d8cda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Constants">
+      <UniqueIdentifier>{7b59d539-50b6-4f3f-9ea0-932cf8815961}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{5ab8dce3-7fea-4a7e-8b49-a8b0bd0a24c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\DDSConverter">
+      <UniqueIdentifier>{5b2eaf4c-6ca5-4641-b445-ad9910978496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exception">
+      <UniqueIdentifier>{4474ddb5-5b89-42cb-bd20-cccf75c00530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Formula">
+      <UniqueIdentifier>{85a2498d-860e-40d1-8da8-2aa64f3880cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{57545596-9233-4156-91cc-ed4f055688ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sounds">
+      <UniqueIdentifier>{9117eb00-2b10-4e10-855f-2730b8d5f9f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XMLParser">
+      <UniqueIdentifier>{f1c35e76-37e7-4c8e-a214-ef28a9c7dc84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{e7fa90e7-9d52-4306-a6be-704aef542510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Bricks">
+      <UniqueIdentifier>{6be97b21-1418-4078-ba40-89fb3d10bee6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Bricks\Control">
+      <UniqueIdentifier>{d4159b27-8f2c-423e-9ab7-f8bac106c034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Bricks\Look">
+      <UniqueIdentifier>{0e5b7790-ddf0-4d03-9898-495d61ef59a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Bricks\Movement">
+      <UniqueIdentifier>{53c8ef9f-b1d6-499f-a387-809b798bb287}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Bricks\Sound">
+      <UniqueIdentifier>{64f72639-d2a5-4d8b-96f9-79a5138988e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Bricks\Variable">
+      <UniqueIdentifier>{c0bd9639-03b1-41b6-b506-575c445d8327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Scripts">
+      <UniqueIdentifier>{591789b7-ac04-46d9-a7b9-1b77a618a3d9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
