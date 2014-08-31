@@ -23,6 +23,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _username;
         private string _password;
         private string _email;
+        private bool _isSending;
 
         #endregion
 
@@ -76,6 +77,19 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
         }
 
+        public bool IsSending
+        {
+            get { return _isSending; }
+            set
+            {
+                if (_isSending != value)
+                {
+                    _isSending = value;
+                    RaisePropertyChanged(() => IsSending);
+                }
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -90,6 +104,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private async void RegisterAction()
         {
+            IsSending = true;
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_email))
             {
                 ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramLoginErrorCaption,
@@ -142,6 +157,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                         break;
                 }
             }
+            IsSending = false;
         }
 
         private void CancelAction()
@@ -169,7 +185,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         {
             RegisterCommand = new RelayCommand(RegisterAction);
             CancelCommand = new RelayCommand(CancelAction);
-
+            IsSending = false;
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedAction);
 

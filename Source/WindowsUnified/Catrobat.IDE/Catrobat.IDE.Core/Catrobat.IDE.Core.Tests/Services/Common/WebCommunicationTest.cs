@@ -13,6 +13,13 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
 {
     public class WebCommunicationTest : IWebCommunicationService
     {
+        public string _recoveryHash;
+
+        public void SetRecoveryHash(string recoveryHash)
+        {
+            _recoveryHash = recoveryHash;
+        }
+        
         public event DownloadProgressUpdatedEventHandler DownloadProgressChanged;
 
         public async Task<List<OnlineProgramHeader>> LoadOnlineProgramsAsync(
@@ -99,7 +106,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
         }
 
         public async Task<JSONStatusResponse> ChangePasswordAsync(string newPassword, 
-            string newPasswortRepeated, string hash, string language = "en")
+            string newPasswortRepeated, string language = "en")
         {
             JSONStatusResponse statusResponse = new JSONStatusResponse
             {

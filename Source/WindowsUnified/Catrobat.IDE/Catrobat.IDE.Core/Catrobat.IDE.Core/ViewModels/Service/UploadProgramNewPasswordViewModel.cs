@@ -5,6 +5,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Utilities.JSON;
+using Catrobat.IDE.Core.ViewModels.Main;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.Windows.Input;
@@ -80,6 +81,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public RelayCommand NewPasswordCommand { get; private set; }
 
+        public RelayCommand CancelCommand { get; private set; }
+
         #endregion
 
         #region CommandCanExecute
@@ -103,7 +106,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
             else
             {
-                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.ChangePasswordAsync(_newPassword, _repeatedPassword, Context.LocalSettings.CurrentUserRecoveryHash, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
+                JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.ChangePasswordAsync(_newPassword, _repeatedPassword, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
 
                 switch (statusResponse.statusCode)
                 {
@@ -140,6 +143,13 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             IsSending = false;
         }
 
+        private void CancelAction()
+        {
+            ResetViewModel();
+            ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
+            ServiceLocator.NavigationService.RemoveBackEntry();
+        }
+
         protected override void GoBackAction()
         {
             ResetViewModel();
@@ -158,6 +168,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         public UploadProgramNewPasswordViewModel()
         {
             NewPasswordCommand = new RelayCommand(NewPasswordAction, NewPasswordCommand_CanExecute);
+            CancelCommand = new RelayCommand(CancelAction);
             IsSending = false;
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,

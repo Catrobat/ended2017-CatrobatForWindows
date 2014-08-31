@@ -4,6 +4,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
 using Catrobat.IDE.Core.Tests.Services.Common;
 using Catrobat.IDE.Core.ViewModels.Service;
+using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.ViewModels;
 using System.Globalization;
 
@@ -27,6 +28,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         public void NewPasswordActionTest()
         {
             //TODO check messages for different responses - e.g. wrong hash or http-request failed
+            //TODO check reading of hash
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
@@ -42,16 +44,6 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
                 NewPassword = "TestPassword",
                 RepeatedPassword = "TestRepeatedPassword"
             };
-            var localSettings = new LocalSettings
-            {
-                CurrentUserRecoveryHash = "TestRecoveryHash"
-            };
-            var context = new CatrobatContext
-            {
-                LocalSettings = localSettings
-            };
-            var messageContext = new GenericMessage<CatrobatContextBase>(context);
-            Messenger.Default.Send(messageContext, ViewModelMessagingToken.ContextListener);
 
             viewModel.NewPasswordCommand.Execute(null);
 
@@ -103,6 +95,27 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.AreEqual(1, notificationService.SentMessageBoxes);
             Assert.AreEqual(0, notificationService.SentToastNotifications);
             Assert.AreEqual("Recovery failed", notificationService.LastNotificationTitle);
+        }
+
+        [TestMethod, TestCategory("ViewModels.Service")]
+        public void CancelActionTest()
+        {
+            var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
+            navigationService.PageStackCount = 1;
+            navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
+            navigationService.CurrentView = typeof(UploadProgramNewPasswordViewModel);
+
+            var viewModel = new UploadProgramNewPasswordViewModel
+            {
+                NewPassword = "TestPassword",
+                RepeatedPassword = "TestRepeatedPassword"
+            };
+            viewModel.CancelCommand.Execute(null);
+
+            Assert.AreEqual("", viewModel.NewPassword);
+            Assert.AreEqual("", viewModel.RepeatedPassword);
+            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
+            Assert.AreEqual(typeof(MainViewModel), navigationService.CurrentView);
         }
 
         [TestMethod, TestCategory("ViewModels.Service")]

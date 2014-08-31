@@ -29,6 +29,12 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
         private CancellationTokenSource _cancellationTokenSource;
         private bool _paused;
 
+        private string _recoveryHash = "";
+        public void SetRecoveryHash(string recoveryHash)
+        {
+            _recoveryHash = recoveryHash;
+        }
+
         public event DownloadProgressUpdatedEventHandler DownloadProgressChanged;
 
         public async Task<List<OnlineProgramHeader>> LoadOnlineProgramsAsync(
@@ -63,7 +69,6 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                     string jsonResult = await httpResponse.Content.ReadAsStringAsync();
                     OnlineProgramOverview recentPrograms = null;
 
-                    //List<OnlineProgramOverview> programs = JsonConvert.DeserializeObject<List<OnlineProgramOverview>>(jsonResult);
                     recentPrograms = await Task.Run(() => JsonConvert.DeserializeObject<OnlineProgramOverview>(jsonResult));
 
                     return recentPrograms.CatrobatProjects;
@@ -291,10 +296,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                         }
 
                         ByteArrayContent fileContent = new ByteArrayContent(programData);
-                        //fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                        //{
-                        //    FileName = programTitle + ".catrobat"
-                        //};
+
                         fileContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/zip");
                         postParameters.Add(fileContent, String.Format("\"{0}\"", ApplicationResources.API_PARAM_UPLOAD), String.Format("\"{0}\"", programTitle + ApplicationResources.EXTENSION));
 
@@ -320,7 +322,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                         statusResponse = new JSONStatusResponse();
                         statusResponse.statusCode = StatusCodes.JSONSerializationFailed;
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         statusResponse = new JSONStatusResponse();
                         statusResponse.statusCode = StatusCodes.UnknownError;
@@ -413,11 +415,10 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
             }
         }
 
-
-        public async Task<JSONStatusResponse> ChangePasswordAsync(string newPassword, string newPasswortRepeated, string hash, string language = "en")
+        public async Task<JSONStatusResponse> ChangePasswordAsync(string newPassword, string newPasswortRepeated, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_HASH, ((hash == null) ? "" : hash)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_HASH, ((_recoveryHash == null) ? "" : _recoveryHash)),
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_NEW_PWD, ((newPassword == null) ? "" : newPassword)),
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_NEW_PWD_REPEAT, ((newPasswortRepeated == null) ? "" : newPasswortRepeated)),
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
