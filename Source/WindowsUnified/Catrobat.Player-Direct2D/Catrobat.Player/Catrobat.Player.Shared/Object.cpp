@@ -102,9 +102,9 @@ void Object::Draw(ID2D1DeviceContext1* deviceContext)
     deviceContext->SetTransform(D2D1::Matrix3x2F::Identity());
     deviceContext->Clear(D2D1::ColorF(D2D1::ColorF::White));
     D2D1_SIZE_F size = m_look->GetBitMap()->GetSize();
-    D2D1_POINT_2F ulc = D2D1::Point2F(100.f, 10.f);
+    D2D1_POINT_2F ulc = D2D1::Point2F(0.f, 0.f);
     deviceContext->DrawBitmap(m_look->GetBitMap(), D2D1::RectF(ulc.x,
-        ulc.y, ulc.x + size.width, ulc.y + size.height));
+        ulc.y, deviceContext->GetSize().width, deviceContext->GetSize().height));
 }
 
 XMMATRIX Object::GetWorldMatrix()

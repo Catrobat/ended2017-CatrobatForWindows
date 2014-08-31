@@ -21,7 +21,7 @@ void Basic2DRenderer::Update(DX::StepTimer const& timer)
 
 void Basic2DRenderer::Render()
 {
-    ID2D1DeviceContext1* deviceContext = m_deviceResources->GetD2DDeviceContext();
+    auto deviceContext = m_deviceResources->GetD2DDeviceContext();
 
     //begin drawing operations, draw bitmap, end drawing
     deviceContext->BeginDraw();

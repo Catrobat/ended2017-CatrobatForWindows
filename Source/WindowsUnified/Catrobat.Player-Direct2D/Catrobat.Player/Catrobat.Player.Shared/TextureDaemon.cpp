@@ -49,7 +49,7 @@ void TextureDaemon::LoadTexture(ID3D11Device *d3dDevice, CatrobatTexture **textu
     {
         //TODO: Check if this needs a copy constructor for already existing textures
         CatrobatTexture *newTexture = new CatrobatTexture();
-        DDSLoader::LoadTexture(d3dDevice, path, &(newTexture->texture), &(newTexture->resourceView), &(newTexture->width), &(newTexture->height));
+        //DDSLoader::LoadTexture(d3dDevice, path, &(newTexture->texture), &(newTexture->resourceView), &(newTexture->width), &(newTexture->height));
         newTexture->fileSize = currentFileSize;
         m_textures->insert(pair<string, CatrobatTexture*>(textureKey, newTexture));
         *texture = newTexture;
@@ -69,10 +69,9 @@ void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& devi
     IWICBitmapDecoder *decoder = NULL;
     IWICBitmapFrameDecode *bitmapSrc = NULL;
     IWICFormatConverter *converter = NULL;
-    ID2D1Bitmap *bitmap = NULL;
 
     //string path is converted to LPCWSTR format
-    std::string path = ProjectDaemon::Instance()->GetProjectPath() + "\\images\\1f9cff7217d4a149801bb9e1beb344cbcb58Image";
+    std::string path = ProjectDaemon::Instance()->GetProjectPath() + "\\images\\" + textureKey;
     std::wstring stemp = std::wstring(path.begin(), path.end());
     LPCWSTR lPath = stemp.c_str();
 
