@@ -8,8 +8,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
     public class NextLookBrickConverter : BrickConverterBase<XmlNextLookBrick, NextLookBrick>
     {
-        public NextLookBrickConverter(IXmlModelConversionService converter)  
-            : base(converter) { }
+        public NextLookBrickConverter() { }
 
         public override NextLookBrick Convert1(XmlNextLookBrick o, XmlModelConvertContext c)
         {

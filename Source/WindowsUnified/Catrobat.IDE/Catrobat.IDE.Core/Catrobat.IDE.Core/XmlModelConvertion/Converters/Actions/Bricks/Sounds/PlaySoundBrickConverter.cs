@@ -8,9 +8,6 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
     public class PlaySoundBrickConverter : BrickConverterBase<XmlPlaySoundBrick, PlaySoundBrick>
     {
-        public PlaySoundBrickConverter(IXmlModelConversionService converter)  
-            : base(converter) { }
-
         public override PlaySoundBrick Convert1(XmlPlaySoundBrick o, XmlModelConvertContext c)
         {
             Sound sound = null;
@@ -23,9 +20,11 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 
         public override XmlPlaySoundBrick Convert1(PlaySoundBrick m, XmlModelConvertBackContext c)
         {
+            var soundConverter = new SoundConverter();
+
             return new XmlPlaySoundBrick
             {
-                Sound = (XmlSound)Converter.Convert(m.Value)
+                Sound = soundConverter.Convert(m.Value, c)
             };
         }
     }

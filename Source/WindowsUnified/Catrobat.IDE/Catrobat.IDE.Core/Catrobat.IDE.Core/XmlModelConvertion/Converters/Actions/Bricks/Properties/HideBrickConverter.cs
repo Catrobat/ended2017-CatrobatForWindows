@@ -8,8 +8,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
     public class HideBrickConverter : BrickConverterBase<XmlHideBrick, HideBrick>
     {
-        public HideBrickConverter(IXmlModelConversionService converter)  
-            : base(converter) { }
+        public HideBrickConverter() { }
 
         public override HideBrick Convert1(XmlHideBrick o, XmlModelConvertContext c)
         {

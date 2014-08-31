@@ -87,7 +87,6 @@
     <Compile Include="Services\Common\ProgramValidationService.cs" />
     <Compile Include="Services\IProgramExportService.cs" />
     <Compile Include="Services\IProgramValidationService.cs" />
-    <Compile Include="Services\IXmlModelConversionService.cs" />
     <Compile Include="StorageConstants.cs" />
     <Compile Include="ExtensionMethods\ObjectExtensions.cs" />
     <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
@@ -194,7 +193,7 @@
     <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\BroadcastReceaveScriptConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\ScriptConverterBase.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\StartScriptConverter.cs" />
-    <Compile Include="XmlModelConvertion\Converters\Formulas\FormulaConverterBase.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Formulas\FormulaConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\GlobalVariableConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\LocalVariableConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\ProgramConverter.cs" />
@@ -203,11 +202,12 @@
     <Compile Include="XmlModelConvertion\Converters\SoundConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\LookConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\SpriteConverter.cs" />
+    <Compile Include="XmlModelConvertion\XmlFormulaConverterContextPair.cs" />
     <Compile Include="XmlModelConvertion\XmlFormulaConverter.cs" />
     <Compile Include="XmlModelConvertion\IXmlModelConverter.cs" />
     <Compile Include="XmlModelConvertion\XmlModelConversionContext.cs" />
+    <Compile Include="XmlModelConvertion\XmlModelConverterCollection.cs" />
     <Compile Include="XmlModelConvertion\XmlModelConverter.cs" />
-    <Compile Include="XmlModelConvertion\XmlModelConversionService.cs" />
     <Compile Include="Xml_New\XmlObjects\XmlObject.cs" />
     <Compile Include="Xml_Old\Converter\Models\Bricks\AnimatePropertyBrick.cs" />
     <Compile Include="Xml_Old\Converter\Models\Bricks\BroadcastBrick.cs" />

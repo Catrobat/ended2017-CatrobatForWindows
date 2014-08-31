@@ -8,8 +8,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
     public class ResetGraphicPropertiesBrickConverter : BrickConverterBase<XmlClearGraphicEffectBrick, ResetGraphicPropertiesBrick>
     {
-        public ResetGraphicPropertiesBrickConverter(IXmlModelConversionService converter)  
-            : base(converter) { }
+        public ResetGraphicPropertiesBrickConverter() { }
 
         public override ResetGraphicPropertiesBrick Convert1(XmlClearGraphicEffectBrick o, XmlModelConvertContext c)
         {

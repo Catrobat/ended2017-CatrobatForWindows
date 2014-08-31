@@ -10,14 +10,13 @@ using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
 using Catrobat.IDE.Core.ExtensionMethods;
 using System.Collections.ObjectModel;
+using Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Scripts;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
 {
     public class SpriteConverter : XmlModelConverter<XmlSprite, Sprite>
     {
-        public SpriteConverter(IXmlModelConversionService converter) : base(converter)
-        {
-        }
+        public SpriteConverter() { }
 
         public override Sprite Convert(XmlSprite o, XmlModelConvertContext c)
         {
@@ -26,6 +25,8 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
 
         public override Sprite Convert(XmlSprite o, XmlModelConvertContext c, bool pointerOnly)
         {
+            var scriptConverterCollection = new XmlModelConverterCollection<IScriptConverter>();
+
             // prevents endless loops
             Sprite result;
             if (!c.Sprites.TryGetValue(o, out result))
@@ -48,7 +49,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
             c.Sprites[o] = result;
             result.Scripts = o.Scripts == null || o.Scripts.Scripts == null
                 ? new ObservableCollection<Script>()
-                : o.Scripts.Scripts.Select(script => (Script)Converter.Convert(script)).ToObservableCollection();
+                : o.Scripts.Scripts.Select(script => (Script)scriptConverterCollection.Convert(script, c)).ToObservableCollection();
             return result;
         }
 
@@ -58,6 +59,8 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
         }
         public override XmlSprite Convert(Sprite m, XmlModelConvertBackContext c, bool pointerOnly)
         {
+            var scriptConverterCollection = new XmlModelConverterCollection<IScriptConverter>();
+
             // prevents endless loops
             XmlSprite result;
             if (!c.Sprites.TryGetValue(m, out result))
@@ -79,7 +82,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
             {
                 Scripts = m.Scripts == null
                     ? new List<XmlScript>()
-                    : m.Scripts.Select(script => (XmlScript)Converter.Convert(script)).ToList()
+                    : m.Scripts.Select(script => (XmlScript)scriptConverterCollection.Convert(script, c)).ToList()
             };
             return result;
         }

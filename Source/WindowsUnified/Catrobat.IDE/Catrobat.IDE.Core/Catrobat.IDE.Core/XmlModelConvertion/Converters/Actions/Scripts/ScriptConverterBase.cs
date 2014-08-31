@@ -7,36 +7,39 @@ using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
+using Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Scripts
 {
-    public abstract class ScriptConverterBase<TXmlScript, TScript> : 
-        XmlModelConverter<TXmlScript, TScript>
+    public interface IScriptConverter : IXmlModelConverter { }
+
+    public abstract class ScriptConverterBase<TXmlScript, TScript> :
+        XmlModelConverter<TXmlScript, TScript>, IScriptConverter
         where TXmlScript : XmlScript
         where TScript : Script
     {
-        protected ScriptConverterBase(IXmlModelConversionService converter) : base(converter)
-        {
-        }
-
         public override TScript Convert(TXmlScript o, XmlModelConvertContext c)
         {
+            var brickConverterCollection = new XmlModelConverterCollection<IBrickConverter>();
+
             var result = Convert1(o, c);
             result.Bricks = o.Bricks == null || o.Bricks.Bricks == null ? null
                 : o.Bricks.Bricks.Select(brick =>
-                  (Brick)Converter.Convert(brick))
+                  (Brick)brickConverterCollection.Convert(brick, c))
                 .ToObservableCollection();
             return result;
         }
 
         public override TXmlScript Convert(TScript m, XmlModelConvertBackContext c)
         {
+            var brickConverterCollection = new XmlModelConverterCollection<IBrickConverter>();
+
             var result = Convert1(m, c);
             result.Bricks = new XmlBrickList
             {
                 Bricks = m.Bricks == null ? new List<XmlBrick>() :
                 m.Bricks.Select(brick =>
-                (XmlBrick)Converter.Convert(brick)).ToList()
+                (XmlBrick)brickConverterCollection.Convert(brick, c)).ToList()
             };
             c.Scripts.Add(m, result);
             return result;

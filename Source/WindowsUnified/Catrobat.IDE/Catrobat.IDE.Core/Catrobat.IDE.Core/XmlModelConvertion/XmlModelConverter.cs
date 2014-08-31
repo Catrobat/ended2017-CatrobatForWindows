@@ -11,16 +11,9 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 {
     public abstract class XmlModelConverter
         <TXmlType, TModelType> : IXmlModelConverter
-        where TXmlType : XmlObjectNode
+        where TXmlType : XmlObject
         where TModelType  : ModelBase
     {
-        protected readonly IXmlModelConversionService Converter;
-
-        protected XmlModelConverter(IXmlModelConversionService converter)
-        {
-            Converter = converter;
-        }
-
         public abstract TModelType Convert(TXmlType o, XmlModelConvertContext c);
 
         public abstract TXmlType Convert(TModelType m, XmlModelConvertBackContext c);

@@ -11,9 +11,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
 {
     public class LookConverter : XmlModelConverter<XmlLook, Look>
     {
-        public LookConverter(IXmlModelConversionService converter) : base(converter)
-        {
-        }
+        public LookConverter() { }
 
         public override Look Convert(XmlLook o, XmlModelConvertContext c)
         {

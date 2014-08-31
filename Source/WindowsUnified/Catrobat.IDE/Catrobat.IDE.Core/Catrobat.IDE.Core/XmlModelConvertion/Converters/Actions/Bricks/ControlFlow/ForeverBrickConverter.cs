@@ -7,22 +7,24 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
     public class ForeverBrickConverter : BrickConverterBase<XmlForeverBrick, ForeverBrick>
     {
-        public ForeverBrickConverter(IXmlModelConversionService converter)  
-            : base(converter) { }
-
         public override ForeverBrick Convert1(XmlForeverBrick o, XmlModelConvertContext c)
         {
+            var loopEndBrickConverter = new RepeatBrickConverter();
+
             var result = new ForeverBrick();
             c.Bricks[o] = result;
-            result.End = o.LoopEndBrick == null ? null : (EndForeverBrick)Converter.Convert(o.LoopEndBrick);
+            result.End = (EndForeverBrick) (o.LoopEndBrick == null ? null : 
+                loopEndBrickConverter.Convert(o.LoopEndBrick, c));
             return result;
         }
 
         public override XmlForeverBrick Convert1(ForeverBrick m, XmlModelConvertBackContext c)
         {
+            var converter = new ForeverEndBrickConverter();
+
             var result = new XmlForeverBrick();
             c.Bricks[m] = result;
-            result.LoopEndBrick = m.End == null ? null : (XmlForeverLoopEndBrick)Converter.Convert(m.End);
+            result.LoopEndBrick = m.End == null ? null : converter.Convert(m.End, c);
             return result;
         }
     }
