@@ -28,7 +28,6 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         public void NewPasswordActionTest()
         {
             //TODO check messages for different responses - e.g. wrong hash or http-request failed
-            //TODO check reading of hash
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;

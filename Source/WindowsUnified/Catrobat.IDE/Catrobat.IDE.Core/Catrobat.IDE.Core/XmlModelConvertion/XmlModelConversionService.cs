@@ -78,6 +78,19 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
             return _modelToXmlConverters[m.GetType()].Convert(m, _convertBackContext);
         }
 
+        public ModelBase Convert(XmlObject o, bool pointerOnly)
+        {
+            var xmlType = o.GetType();
+            var converter = _xmlToModelConverters[xmlType];
+
+            return _xmlToModelConverters[o.GetType()].Convert(o, _convertContext, pointerOnly);
+        }
+
+        public XmlObject Convert(ModelBase m, bool pointerOnly)
+        {
+            return _modelToXmlConverters[m.GetType()].Convert(m, _convertBackContext, pointerOnly);
+        }
+
         public void ResetContext()
         {
             _xmlToModelConverters = new Dictionary<Type, IXmlModelConverter>();

@@ -2,6 +2,7 @@
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 
@@ -16,7 +17,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
         {
             return new LookAtBrick
             {
-                //Target = o.PointedSprite == null ? null : (FormulaTree)Converter.Convert(o.PointedSprite, pointerOnly: true)
+                Target = o.PointedSprite == null ? null : (Sprite)Converter.Convert(o.PointedSprite, pointerOnly: true)
             };
         }
 
@@ -24,7 +25,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
         {
             return new XmlPointToBrick
             {
-                //PointedSprite = m.Target == null ? null : (XmlFormula)Converter.Convert(m.Target, pointerOnly: true)
+                PointedSprite = m.Target == null ? null : (XmlSprite)Converter.Convert(m.Target, pointerOnly: true)
             };
         }
     }

@@ -58,7 +58,6 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             //Assert.AreEqual(typeof(UploadProgramNewPasswordViewModel), navigationService.CurrentView);
             //Assert.AreEqual(1, navigationService.PageStackCount);
 
-            //TODO check setting of hash
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
             navigationService.PageStackCount = 1;
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;

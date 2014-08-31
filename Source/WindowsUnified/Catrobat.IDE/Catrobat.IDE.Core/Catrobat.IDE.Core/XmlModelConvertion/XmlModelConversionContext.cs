@@ -34,9 +34,9 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 
         #endregion
 
-        public XmlModelConvertContextBase(XmlProgram project,
+        public XmlModelConvertContextBase(XmlProgram program,
             ReadOnlyDictionary<XmlUserVariable, GlobalVariable> globalVariables)
-            : base(project, globalVariables)
+            : base(program, globalVariables)
         {
             _broadcastMessages = new Dictionary<string, BroadcastMessage>();
         }
@@ -92,9 +92,9 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
         Script, XmlScript,
         Brick, XmlBrick>
     {
-        public XmlModelConvertBackContextBase(Program project,
+        public XmlModelConvertBackContextBase(Program program,
             ReadOnlyDictionary<GlobalVariable, XmlUserVariable> globalVariables)
-            : base(project, globalVariables)
+            : base(program, globalVariables)
         {
         }
     }
@@ -138,7 +138,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 
     #region Helpers
 
-    public abstract class XmlModelConvertContextBase<TSourceProject,
+    public abstract class XmlModelConvertContextBase<TSourceProgram,
         TSourceGlobalVariable, TTargetGlobalVariable,
         TSourceSprite, TTargetSprite,
         TSourceScript, TTargetScript,
@@ -149,11 +149,11 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
     {
         #region Properties
 
-        private readonly TSourceProject _project;
+        private readonly TSourceProgram _program;
 
-        public TSourceProject Project
+        public TSourceProgram Project
         {
-            get { return _project; }
+            get { return _program; }
         }
 
         private readonly ReadOnlyDictionary<TSourceGlobalVariable, TTargetGlobalVariable> _globalVariables;
@@ -186,10 +186,10 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 
         #endregion
 
-        protected XmlModelConvertContextBase(TSourceProject project,
+        protected XmlModelConvertContextBase(TSourceProgram program,
             ReadOnlyDictionary<TSourceGlobalVariable, TTargetGlobalVariable> globalVariables)
         {
-            _project = project;
+            _program = program;
             _globalVariables = globalVariables;
             _sprites = new Dictionary<TSourceSprite, TTargetSprite>();
             _scripts = new Dictionary<TSourceScript, TTargetScript>();
@@ -198,7 +198,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
     }
 
     public abstract class XmlModelConvertContext<TBaseContext,
-        TSourceProject,
+        TSourceProgram,
         TSourceVariable, TTargetVariable,
         TSourceLocalVariable, TTargetLocalVariable,
         TSourceGlobalVariable, TTargetGlobalVariable,
@@ -209,7 +209,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
         TSourceBrick, TTargetBrick>
         where TBaseContext :
             XmlModelConvertContextBase
-                <TSourceProject, TSourceGlobalVariable, TTargetGlobalVariable, TSourceSprite, TTargetSprite,
+                <TSourceProgram, TSourceGlobalVariable, TTargetGlobalVariable, TSourceSprite, TTargetSprite,
                     TSourceScript, TTargetScript, TSourceBrick, TTargetBrick>
         where TSourceLocalVariable : TSourceVariable
         where TSourceGlobalVariable : TSourceVariable
@@ -223,7 +223,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 
         protected readonly TBaseContext BaseContext;
 
-        public TSourceProject Project
+        public TSourceProgram Program
         {
             get { return BaseContext.Project; }
         }

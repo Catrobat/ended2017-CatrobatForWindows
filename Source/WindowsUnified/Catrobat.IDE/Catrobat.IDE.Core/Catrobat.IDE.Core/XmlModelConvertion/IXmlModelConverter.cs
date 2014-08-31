@@ -9,5 +9,9 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
         ModelBase Convert(XmlObject o, XmlModelConvertContext c);
 
         XmlObject Convert(ModelBase m, XmlModelConvertBackContext c);
+
+        XmlObject Convert(ModelBase m, XmlModelConvertBackContext c, bool pointerOnly);
+
+        ModelBase Convert(XmlObject o, XmlModelConvertContext c, bool pointerOnly);
     }
 }

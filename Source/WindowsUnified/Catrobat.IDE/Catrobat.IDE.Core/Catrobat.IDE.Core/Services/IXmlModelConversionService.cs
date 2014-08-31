@@ -15,5 +15,9 @@ namespace Catrobat.IDE.Core.Services
         ModelBase Convert(XmlObject o);
 
         XmlObject Convert(ModelBase m);
+
+        ModelBase Convert(XmlObject o, bool pointerOnly);
+
+        XmlObject Convert(ModelBase m, bool pointerOnly);
     }
 }

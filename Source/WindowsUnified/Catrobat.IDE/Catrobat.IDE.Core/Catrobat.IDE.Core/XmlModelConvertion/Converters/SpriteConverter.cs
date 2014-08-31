@@ -4,8 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
+using Catrobat.IDE.Core.ExtensionMethods;
+using System.Collections.ObjectModel;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
 {
@@ -17,12 +21,67 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
 
         public override Sprite Convert(XmlSprite o, XmlModelConvertContext c)
         {
-            throw new NotImplementedException("TODO: use code from Xml/Converter/XmlObjects/XmlSprite");
+            return Convert(o, c, false);
+        }
+
+        public override Sprite Convert(XmlSprite o, XmlModelConvertContext c, bool pointerOnly)
+        {
+            // prevents endless loops
+            Sprite result;
+            if (!c.Sprites.TryGetValue(o, out result))
+            {
+                result = new Sprite { Name = o.Name };
+                c.Sprites[o] = result;
+            }
+            if (pointerOnly) return result;
+
+            var localVariables = c.Program.VariableList.ObjectVariableList.ObjectVariableEntries.FirstOrDefault(entry => entry.Sprite == o);
+            result.Looks = c.Looks == null
+                ? new ObservableCollection<Look>()
+                : c.Looks.Values.ToObservableCollection();
+            result.Sounds = c.Sounds == null
+                ? new ObservableCollection<Sound>()
+                : c.Sounds.Values.ToObservableCollection();
+            result.LocalVariables = localVariables == null || localVariables.VariableList == null || localVariables.VariableList.UserVariables == null
+                ? new ObservableCollection<LocalVariable>()
+                : localVariables.VariableList.UserVariables.Select(variable => c.LocalVariables[variable]).ToObservableCollection();
+            c.Sprites[o] = result;
+            result.Scripts = o.Scripts == null || o.Scripts.Scripts == null
+                ? new ObservableCollection<Script>()
+                : o.Scripts.Scripts.Select(script => (Script)Converter.Convert(script)).ToObservableCollection();
+            return result;
         }
 
         public override XmlSprite Convert(Sprite m, XmlModelConvertBackContext c)
         {
-            throw new NotImplementedException("TODO: use code from Xml/Converter/Models/Sprite");
+            return Convert(m, c, false);
+        }
+        public override XmlSprite Convert(Sprite m, XmlModelConvertBackContext c, bool pointerOnly)
+        {
+            // prevents endless loops
+            XmlSprite result;
+            if (!c.Sprites.TryGetValue(m, out result))
+            {
+                result = new XmlSprite { Name = m.Name };
+                c.Sprites[m] = result;
+            }
+            if (pointerOnly) return result;
+
+            result.Looks = new XmlLookList
+            {
+                Looks = c.Looks == null ? new List<XmlLook>() : c.Looks.Values.ToList()
+            };
+            result.Sounds = new XmlSoundList
+            {
+                Sounds = c.Sounds == null ? new List<XmlSound>() : c.Sounds.Values.ToList()
+            };
+            result.Scripts = new XmlScriptList
+            {
+                Scripts = m.Scripts == null
+                    ? new List<XmlScript>()
+                    : m.Scripts.Select(script => (XmlScript)Converter.Convert(script)).ToList()
+            };
+            return result;
         }
     }
 }
