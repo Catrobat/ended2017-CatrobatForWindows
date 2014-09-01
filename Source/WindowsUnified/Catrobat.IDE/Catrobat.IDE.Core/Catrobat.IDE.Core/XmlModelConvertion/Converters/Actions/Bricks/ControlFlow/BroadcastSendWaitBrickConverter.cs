@@ -7,8 +7,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
     public class BroadcastSendWaitBrickConverter : BrickConverterBase<XmlBroadcastWaitBrick, BroadcastSendBlockingBrick>
     {
-        public BroadcastSendWaitBrickConverter(IXmlModelConversionService converter)  
-            : base(converter) { }
+        public BroadcastSendWaitBrickConverter() { }
 
         public override BroadcastSendBlockingBrick Convert1(XmlBroadcastWaitBrick o, XmlModelConvertContext c)
         {

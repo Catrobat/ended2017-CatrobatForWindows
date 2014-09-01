@@ -12,9 +12,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
 {
     public class LocalVariableConverter : XmlModelConverter<XmlUserVariable, LocalVariable>
     {
-        public LocalVariableConverter(IXmlModelConversionService converter) : base(converter)
-        {
-        }
+        public LocalVariableConverter() { }
 
         public override LocalVariable Convert(XmlUserVariable o, XmlModelConvertContext c)
         {

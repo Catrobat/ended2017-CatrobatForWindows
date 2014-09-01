@@ -9,10 +9,9 @@ using Catrobat.IDE.Core.XmlModelConvertion;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Formulas
 {
-    public abstract class FormulaConverterBase : XmlModelConverter<XmlFormula, FormulaTree>
+    public class FormulaConverter : XmlModelConverter<XmlFormula, FormulaTree>
     {
-        protected FormulaConverterBase(IXmlModelConversionService converter)
-            : base(converter) { }
+        public FormulaConverter() { }
 
         public override FormulaTree Convert(XmlFormula o, XmlModelConvertContext c)
         {

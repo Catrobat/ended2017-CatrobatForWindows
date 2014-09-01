@@ -14,9 +14,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
 {
     public class UploadHeaderConverter : XmlModelConverter<XmlProjectHeader, UploadHeader>
     {
-        public UploadHeaderConverter(IXmlModelConversionService converter) : base(converter)
-        {
-        }
+        public UploadHeaderConverter() { }
 
         public override UploadHeader Convert(XmlProjectHeader o, XmlModelConvertContext c)
         {

@@ -7,8 +7,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
     public class NoteBrickConverter : BrickConverterBase<XmlNoteBrick, CommentBrick>
     {
-        public NoteBrickConverter(IXmlModelConversionService converter)  
-            : base(converter) { }
+        public NoteBrickConverter() { }
 
         public override CommentBrick Convert1(XmlNoteBrick o, XmlModelConvertContext c)
         {

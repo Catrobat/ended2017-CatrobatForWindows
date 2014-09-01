@@ -93,18 +93,19 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 if (statusResponse.statusCode == StatusCodes.ServerResponseOk)
                 {
                     // since 08-2014 this only works on the test-server (https://catroid-test.catrob.at/)
-                    string recoveryLink = statusResponse.answer;
-                    string hashMarker = "?c=";
-                    int position = recoveryLink.LastIndexOf(hashMarker) + hashMarker.Length;
-                    Context.LocalSettings.CurrentUserRecoveryHash = recoveryLink.Substring(position, recoveryLink.Length - position);
-                    ResetViewModel();
-                    ServiceLocator.NavigationService.NavigateTo<UploadProgramNewPasswordViewModel>();
-                    ServiceLocator.NavigationService.RemoveBackEntry();
+                    //string recoveryLink = statusResponse.answer;
+                    //string hashMarker = "?c=";
+                    //int position = recoveryLink.LastIndexOf(hashMarker) + hashMarker.Length;
+                    //string recoveryHash = recoveryLink.Substring(position, recoveryLink.Length - position);
+                    //ServiceLocator.WebCommunicationService.SetRecoveryHash(recoveryHash);
+                    //ResetViewModel();
+                    //ServiceLocator.NavigationService.NavigateTo<UploadProgramNewPasswordViewModel>();
+                    //ServiceLocator.NavigationService.RemoveBackEntry();
 
                     // since 08-2014 pocketcode-server sends an email with the recovery hash in it
-                    //ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramRecoverPassword,
-                    //            statusResponse.answer, MissingRecoveryDataCallback, MessageBoxOptions.Ok);
-                    //this.GoBackAction();
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramRecoverPassword,
+                                statusResponse.answer, MissingRecoveryDataCallback, MessageBoxOptions.Ok);
+                    this.GoBackAction();
                 }
                 else
                 {

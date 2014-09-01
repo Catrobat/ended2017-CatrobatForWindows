@@ -34,7 +34,9 @@ namespace Catrobat.IDE.Core.Services
 
         Task<JSONStatusResponse> RecoverPasswordAsync(string recoveryUserData, string language = "en");
 
-        Task<JSONStatusResponse> ChangePasswordAsync(string newPassword, string newPasswortRepeated, string hash, string language = "en");
+        void SetRecoveryHash(string recoveryHash);
+
+        Task<JSONStatusResponse> ChangePasswordAsync(string newPassword, string newPasswortRepeated, string language = "en");
 
         bool NoUploadsPending();
 

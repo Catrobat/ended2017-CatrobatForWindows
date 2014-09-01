@@ -1,14 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Models.CatrobatModels;
-using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Tests.Extensions;
 using Catrobat.IDE.Core.Tests.Misc;
 using Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.XmlModelConvertion;
+using Catrobat.IDE.Core.XmlModelConvertion.Converters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Core.Tests.Tests.Data
@@ -40,10 +37,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
                 where baseType != null
                 select baseType.GenericTypeArguments[0]).ToList();
 
-            var converterModelTypes = (from converterType in converterTypes
-                                       let baseType = converterType.BaseType
-                                       where baseType != null
-                                       select baseType.GenericTypeArguments[1]).ToList();
+
 
             var xmlObjectTypes = (from typeInfo in inAssemblies
                 where typeInfo.IsSubclassOf(typeof(XmlObjectNode)) &&
@@ -52,6 +46,13 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             foreach (var xmlObjectType in xmlObjectTypes)
                 Assert.IsTrue(converterXmlObjectTypes.Contains(xmlObjectType));
+
+
+
+            //var converterModelTypes = (from converterType in converterTypes
+            //                           let baseType = converterType.BaseType
+            //                           where baseType != null
+            //                           select baseType.GenericTypeArguments[1]).ToList();
 
             //var modelTypes = (from typeInfo in inAssemblies
             //    where typeInfo.IsSubclassOf(typeof(CatrobatModel)) &&
@@ -66,14 +67,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         [TestMethod, TestCategory("XmlModelConversion")]
         public void XmlModelConversionReflectionTest()
         {
-            var conversionService = new XmlModelConversionService();
+            var programConverter = new ProgramConverter();
 
             var programGenerator = new TestProgramGeneratorReflection();
             var program1 = programGenerator.GenerateProgram();
 
-            var xmlProgram = (XmlProgram)conversionService.Convert(program1);
+            var xmlProgram = programConverter.Convert(program1);
 
-            var program2 = (Program)conversionService.Convert(xmlProgram);
+            var program2 = programConverter.Convert(xmlProgram);
 
             Assert.AreEqual(program1, program2);
         }

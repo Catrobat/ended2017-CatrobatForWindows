@@ -7,7 +7,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Scripts
 {
     public class StartScriptConverter : ScriptConverterBase<XmlStartScript, StartScript>
     {
-        public StartScriptConverter(IXmlModelConversionService converter) : base(converter) { }
+        public StartScriptConverter() { }
 
         public override StartScript Convert1(XmlStartScript o, XmlModelConvertContext c)
         {

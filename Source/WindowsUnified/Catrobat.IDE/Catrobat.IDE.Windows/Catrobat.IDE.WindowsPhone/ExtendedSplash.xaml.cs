@@ -218,8 +218,7 @@ namespace Catrobat.IDE.WindowsPhone
                 {
                     int hashIndex = absoluteUri.IndexOf("c=") + 2;
                     string recoveryHash = absoluteUri.Substring(hashIndex);
-                    // set Hash in Context.LocalSettings.CurrentUserRecoveryHash
-                    // or set in a webcomm.-service
+                    ServiceLocator.WebCommunicationService.SetRecoveryHash(recoveryHash);
                 }
             }
         }

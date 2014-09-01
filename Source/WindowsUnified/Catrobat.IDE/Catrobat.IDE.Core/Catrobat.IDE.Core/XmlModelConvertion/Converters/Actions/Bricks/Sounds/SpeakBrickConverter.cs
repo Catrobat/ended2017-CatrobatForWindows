@@ -7,8 +7,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
     public class SpeakBrickConverter : BrickConverterBase<XmlSpeakBrick, SpeakBrick>
     {
-        public SpeakBrickConverter(IXmlModelConversionService converter)  
-            : base(converter) { }
+        public SpeakBrickConverter() { }
 
         public override SpeakBrick Convert1(XmlSpeakBrick o, XmlModelConvertContext c)
         {

@@ -7,8 +7,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
     public class StopAllSoundsBrickConverter : BrickConverterBase<XmlStopAllSoundsBrick, StopSoundsBrick>
     {
-        public StopAllSoundsBrickConverter(IXmlModelConversionService converter)  
-            : base(converter) { }
+        public StopAllSoundsBrickConverter() { }
 
         public override StopSoundsBrick Convert1(XmlStopAllSoundsBrick o, XmlModelConvertContext c)
         {

@@ -4,15 +4,14 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
-    public abstract class BrickConverterBase<TXmlBrick, TBrick> : 
-        XmlModelConverter<TXmlBrick, TBrick>
+
+    public interface IBrickConverter : IXmlModelConverter {}
+
+    public abstract class BrickConverterBase<TXmlBrick, TBrick> :
+        XmlModelConverter<TXmlBrick, TBrick>, IBrickConverter
         where TXmlBrick : XmlBrick
         where TBrick : Brick
     {
-        protected BrickConverterBase(IXmlModelConversionService converter) : base(converter)
-        {
-        }
-
         public override TBrick Convert(TXmlBrick o, XmlModelConvertContext c)
         {
             // prevents endless loops

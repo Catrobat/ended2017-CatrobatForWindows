@@ -8,8 +8,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
     public class BringToFrontBrickConverter : BrickConverterBase<XmlComeToFrontBrick, BringToFrontBrick>
     {
-        public BringToFrontBrickConverter(IXmlModelConversionService converter)  
-            : base(converter) { }
+        public BringToFrontBrickConverter() { }
 
         public override BringToFrontBrick Convert1(XmlComeToFrontBrick o, XmlModelConvertContext c)
         {

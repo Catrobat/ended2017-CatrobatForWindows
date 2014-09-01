@@ -11,9 +11,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
 {
     public class SoundConverter : XmlModelConverter<XmlSound, Sound>
     {
-        public SoundConverter(IXmlModelConversionService converter) : base(converter)
-        {
-        }
+        public SoundConverter() { }
 
         public override Sound Convert(XmlSound o, XmlModelConvertContext c)
         {

@@ -8,8 +8,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
     public class BounceBrickConverter : BrickConverterBase<XmlIfOnEdgeBounceBrick, BounceBrick>
     {
-        public BounceBrickConverter(IXmlModelConversionService converter)  
-            : base(converter) { }
+        public BounceBrickConverter() { }
 
         public override BounceBrick Convert1(XmlIfOnEdgeBounceBrick o, XmlModelConvertContext c)
         {

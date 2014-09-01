@@ -8,8 +8,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
     public class StopNxtMotorSpeedBrickConverter : BrickConverterBase<XmlNxtMotorStopBrick, StopNxtMotorBrick>
     {
-        public StopNxtMotorSpeedBrickConverter(IXmlModelConversionService converter)  
-            : base(converter) { }
+        public StopNxtMotorSpeedBrickConverter() { }
 
         public override StopNxtMotorBrick Convert1(XmlNxtMotorStopBrick o, XmlModelConvertContext c)
         {

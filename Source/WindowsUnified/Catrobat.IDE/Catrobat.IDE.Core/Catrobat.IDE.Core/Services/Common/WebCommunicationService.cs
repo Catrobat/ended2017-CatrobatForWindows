@@ -23,6 +23,7 @@ namespace Catrobat.IDE.Core.Services.Common
     public class WebCommunicationService : IWebCommunicationService
     {
         private static int _uploadCounter = 0;
+        private string _recoveryHash = "";
         public event DownloadProgressUpdatedEventHandler DownloadProgressChanged;
         public async Task<List<OnlineProgramHeader>> LoadOnlineProgramsAsync(
             string filterText, int offset, int count,
@@ -350,11 +351,15 @@ namespace Catrobat.IDE.Core.Services.Common
             }
         }
 
+        public void SetRecoveryHash(string recoveryHash)
+        {
+            _recoveryHash = recoveryHash;
+        }
 
-        public async Task<JSONStatusResponse> ChangePasswordAsync(string newPassword, string newPasswortRepeated, string hash, string language = "en")
+        public async Task<JSONStatusResponse> ChangePasswordAsync(string newPassword, string newPasswortRepeated, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_HASH, ((hash == null) ? "" : hash)),
+                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_HASH, ((_recoveryHash == null) ? "" : _recoveryHash)),
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_NEW_PWD, ((newPassword == null) ? "" : newPassword)),
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_NEW_PWD_REPEAT, ((newPasswortRepeated == null) ? "" : newPasswortRepeated)),
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))

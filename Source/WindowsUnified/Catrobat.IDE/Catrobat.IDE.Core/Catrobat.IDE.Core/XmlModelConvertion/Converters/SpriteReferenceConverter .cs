@@ -11,9 +11,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
 {
     public class SpriteReferenceConverter : XmlModelConverter<XmlSpriteReference, Sprite>
     {
-        public SpriteReferenceConverter(IXmlModelConversionService converter) : base(converter)
-        {
-        }
+        public SpriteReferenceConverter() { }
 
         public override Sprite Convert(XmlSpriteReference o, XmlModelConvertContext c)
         {

@@ -12,10 +12,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
 {
     public class GlobalVariableConverter : XmlModelConverter<XmlUserVariable, GlobalVariable>
     {
-        public GlobalVariableConverter(IXmlModelConversionService converter)
-            : base(converter)
-        {
-        }
+        public GlobalVariableConverter() { }
 
         public override GlobalVariable Convert(XmlUserVariable o, XmlModelConvertContext c)
         {

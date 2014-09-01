@@ -11,7 +11,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Scripts
         XmlModelConverter<XmlWhenScript, EventScript>
         where TEventScript : EventScript
     {
-        public EventScriptConverter(IXmlModelConversionService converter) : base(converter){}
+        public EventScriptConverter() { }
 
         public override EventScript Convert(XmlWhenScript o, XmlModelConvertContext c)
         {
