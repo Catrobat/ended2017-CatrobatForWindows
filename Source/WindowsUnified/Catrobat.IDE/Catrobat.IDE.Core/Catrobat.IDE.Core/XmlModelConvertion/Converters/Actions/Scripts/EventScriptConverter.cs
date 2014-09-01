@@ -7,13 +7,12 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Scripts
 {
-    public class EventScriptConverter<TEventScript> :
-        XmlModelConverter<XmlWhenScript, EventScript>
+    public class EventScriptConverter<TEventScript> : ScriptConverterBase<XmlWhenScript, EventScript>
         where TEventScript : EventScript
     {
         public EventScriptConverter() { }
 
-        public override EventScript Convert(XmlWhenScript o, XmlModelConvertContext c)
+        public override EventScript Convert1(XmlWhenScript o, XmlModelConvertContext c)
         {
             switch (o.Action)
             {
@@ -22,7 +21,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Scripts
             }
         }
 
-        public override XmlWhenScript Convert(EventScript m, XmlModelConvertBackContext c)
+        public override XmlWhenScript Convert1(EventScript m, XmlModelConvertBackContext c)
         {
             if (m is TappedScript) 
             {

@@ -189,6 +189,7 @@
     <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Sounds\ChangeVolumeBrickConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Variables\SetVariableBrickConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\Variables\ChangeVariableBrickConverter.cs" />
+    <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\TappedScriptConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\EventScriptConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\BroadcastReceivedScriptConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\ScriptConverterBase.cs" />
