@@ -114,6 +114,15 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.AreEqual(program1.Sprites[0].Scripts.Count, program2.Sprites[0].Scripts.Count);
             Assert.AreEqual(program1.Sprites[0].Scripts[0].Bricks.Count, program2.Sprites[0].Scripts[0].Bricks.Count);
 
+            Assert.AreEqual(program1.Sprites[1].LocalVariables.Count, program2.Sprites[1].LocalVariables.Count);
+            Assert.AreEqual(program1.Sprites[1].LocalVariables[0].Name, program2.Sprites[1].LocalVariables[0].Name);
+            Assert.AreEqual(program1.Sprites[1].Looks.Count, program2.Sprites[1].Looks.Count);
+            Assert.AreEqual(program1.Sprites[1].Looks[0].Name, program2.Sprites[1].Looks[0].Name);
+            Assert.AreEqual(program1.Sprites[1].Sounds.Count, program2.Sprites[1].Sounds.Count);
+            Assert.AreEqual(program1.Sprites[1].Sounds[0].Name, program2.Sprites[1].Sounds[0].Name);
+            Assert.AreEqual(program1.Sprites[1].Scripts.Count, program2.Sprites[1].Scripts.Count);
+            Assert.AreEqual(program1.Sprites[1].Scripts[0].Bricks.Count, program2.Sprites[1].Scripts[0].Bricks.Count);
+
             //Assert.AreEqual(program1, program2);
         }
 
