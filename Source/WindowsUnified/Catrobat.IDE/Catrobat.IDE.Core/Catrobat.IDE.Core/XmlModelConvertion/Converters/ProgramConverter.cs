@@ -9,7 +9,6 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
-using Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Scripts;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
 {
@@ -25,7 +24,6 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
             var localVariableConverter = new VariableConverter<LocalVariable>();
             var globalVariableConverter = new VariableConverter<GlobalVariable>();
             var uploadHeaderConverter = new UploadHeaderConverter();
-            var tets = new BroadcastReceivedScriptConverter();
 
             var localVariables = o.VariableList.ObjectVariableList.ObjectVariableEntries.ToReadOnlyDictionary(
                 keySelector: entry => entry.Sprite,
@@ -64,7 +62,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
                 Description = o.ProjectHeader.Description,
                 UploadHeader = (UploadHeader)uploadHeaderConverter.Convert(o.ProjectHeader, c),
                 GlobalVariables = o.VariableList.ProgramVariableList.UserVariables.Select(variable => globalVariables[variable]).ToObservableCollection(),
-                BroadcastMessages = contextBase.BroadcastMessages.Values.ToObservableCollection(),
+                /*BroadcastMessages = contextBase.BroadcastMessages.Values.ToObservableCollection(),*/
                 Sprites = o.SpriteList.Sprites.Select(sprite => sprites[sprite]).ToObservableCollection()
             };
         }

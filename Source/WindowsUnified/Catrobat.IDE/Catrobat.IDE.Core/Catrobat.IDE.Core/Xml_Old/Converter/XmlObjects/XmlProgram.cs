@@ -52,7 +52,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
                 Description = ProjectHeader.Description,
                 UploadHeader = ProjectHeader.ToModel(),
                 GlobalVariables = VariableList.ProgramVariableList.UserVariables.Select(variable => globalVariables[variable]).ToObservableCollection(),
-                BroadcastMessages = contextBase.BroadcastMessages.Values.ToObservableCollection(),
+                /*BroadcastMessages = contextBase.BroadcastMessages.Values.ToObservableCollection(),*/
                 Sprites = SpriteList.Sprites.Select(sprite => sprites[sprite]).ToObservableCollection()
             };
         }
