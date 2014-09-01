@@ -203,7 +203,6 @@
     <Compile Include="XmlModelConvertion\Converters\SoundConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\LookConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\SpriteConverter.cs" />
-    <Compile Include="XmlModelConvertion\XmlFormulaConverterContextPair.cs" />
     <Compile Include="XmlModelConvertion\XmlFormulaConverter.cs" />
     <Compile Include="XmlModelConvertion\IXmlModelConverter.cs" />
     <Compile Include="XmlModelConvertion\XmlModelConversionContext.cs" />
