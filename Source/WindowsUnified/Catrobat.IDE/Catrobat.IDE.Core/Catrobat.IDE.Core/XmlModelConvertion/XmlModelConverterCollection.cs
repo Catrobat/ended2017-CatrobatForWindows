@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Scripts;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion
 {
@@ -54,10 +55,15 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 
             var inAssemblies = typesInAssemblies as TypeInfo[] ?? typesInAssemblies.ToArray();
 
+            var converterInstances1 = (from typeInfo in inAssemblies
+                                      where typeInfo.ImplementedInterfaces.Contains(typeof(TConverterBase)) &&
+                                      typeInfo.IsAbstract == false /*&& typeInfo.ContainsGenericParameters == false*/
+                                      select typeInfo).ToList();
+
             var converterInstances = (from typeInfo in inAssemblies
-                where typeInfo.ImplementedInterfaces.Contains(typeof(TConverterBase)) &&
-                typeInfo.IsAbstract == false && typeInfo.ContainsGenericParameters == false
-                                      select (TConverterBase)Activator.CreateInstance(typeInfo.AsType(), this)).ToList();
+                                      where typeInfo.ImplementedInterfaces.Contains(typeof(TConverterBase)) &&
+                                      typeInfo.IsAbstract == false /*&& typeInfo.ContainsGenericParameters == false*/
+                                      select (TConverterBase)Activator.CreateInstance(typeInfo.AsType())).ToList();
 
             foreach (var converter in converterInstances)
                 RegisterConverter(converter);

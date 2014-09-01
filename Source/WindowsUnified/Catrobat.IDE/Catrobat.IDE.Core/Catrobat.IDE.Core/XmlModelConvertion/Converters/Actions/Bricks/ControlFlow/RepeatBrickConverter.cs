@@ -13,7 +13,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
         public override RepeatBrick Convert1(XmlRepeatBrick o, XmlModelConvertContext c)
         {
             var formulaConverter = new FormulaConverter();
-            var loopEndBrickConverter = new RepeatBrickConverter();
+            var loopEndBrickConverter = new RepeatEndBrickConverter();
 
             var result = new RepeatBrick
             {
@@ -27,7 +27,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
         public override XmlRepeatBrick Convert1(RepeatBrick m, XmlModelConvertBackContext c)
         {
             var formulaConverter = new FormulaConverter();
-            var loopEndBrickConverter = new RepeatBrickConverter();
+            var loopEndBrickConverter = new RepeatEndBrickConverter();
 
             var result = new XmlRepeatBrick
             {
