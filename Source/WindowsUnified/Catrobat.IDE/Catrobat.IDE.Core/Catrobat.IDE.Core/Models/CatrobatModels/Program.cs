@@ -169,7 +169,7 @@ namespace Catrobat.IDE.Core.Models
             return TestEquals(other);
         }
 
-        protected bool TestEquals(Program other)
+        public bool TestEquals(Program other)
         {
             return
                 string.Equals(_name, other._name) &&
