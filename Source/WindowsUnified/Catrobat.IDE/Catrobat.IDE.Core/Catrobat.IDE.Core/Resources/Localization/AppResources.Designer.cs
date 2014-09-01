@@ -2312,11 +2312,20 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Sorry, a problem occurred while loading the program. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sorry, an error occurred. ähnelt.
         /// </summary>
         public static string Import_GeneralError {
             get {
                 return ResourceManager.GetString("Import_GeneralError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sorry, a problem occurred while loading this program. ähnelt.
+        /// </summary>
+        public static string Import_GeneralErrorText {
+            get {
+                return ResourceManager.GetString("Import_GeneralErrorText", resourceCulture);
             }
         }
         

@@ -1296,8 +1296,8 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   <data name="Import_AppTooOldAdvise" xml:space="preserve">
     <value>Bitte überprüfe ob eine neuere Version dieser App verfügbar ist.</value>
   </data>
-  <data name="Import_GeneralError" xml:space="preserve">
-    <value>Sorry, während dem Ladevorgang ist ein Fehler aufgetreten.</value>
+  <data name="Import_GeneralErrorText" xml:space="preserve">
+    <value>Sorry, während des Ladevorgangs ist ein Fehler aufgetreten.</value>
   </data>
   <data name="Import_ProgramOutdatedAdvise" xml:space="preserve">
     <value>Eventuell lässt sich das Programm mit einer älteren Version dieser App öffnen.</value>
@@ -1310,5 +1310,8 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   </data>
   <data name="Main_UploadProgramRecoverPassword" xml:space="preserve">
     <value>Passwort wiederherstellen</value>
+  </data>
+  <data name="Import_GeneralError" xml:space="preserve">
+    <value>Sorry, ein Fehler ist aufgetreten.</value>
   </data>
 </root>

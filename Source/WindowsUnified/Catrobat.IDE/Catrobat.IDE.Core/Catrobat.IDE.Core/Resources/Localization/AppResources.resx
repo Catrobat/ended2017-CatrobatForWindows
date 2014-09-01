@@ -1308,8 +1308,8 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   <data name="Import_AppTooOldAdvise" xml:space="preserve">
     <value>Please check if you have the latest version of this app.</value>
   </data>
-  <data name="Import_GeneralError" xml:space="preserve">
-    <value>Sorry, a problem occurred while loading the program.</value>
+  <data name="Import_GeneralErrorText" xml:space="preserve">
+    <value>Sorry, a problem occurred while loading this program.</value>
   </data>
   <data name="Import_ProgramOutdatedAdvise" xml:space="preserve">
     <value>You can try to open the program with an app-version that was used to create it.</value>
@@ -1322,5 +1322,8 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Main_UploadProgramRecoverPassword" xml:space="preserve">
     <value>Recover password</value>
+  </data>
+  <data name="Import_GeneralError" xml:space="preserve">
+    <value>Sorry, an error occurred.</value>
   </data>
 </root>

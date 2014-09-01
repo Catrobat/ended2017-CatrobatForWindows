@@ -13,14 +13,14 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
         public override RepeatBrick Convert1(XmlRepeatBrick o, XmlModelConvertContext c)
         {
             var formulaConverter = new FormulaConverter();
-            var loopEndBrickConverter = new RepeatEndBrickConverter();
+            var repeatEndBrickConverter = new RepeatEndBrickConverter();
 
             var result = new RepeatBrick
             {
                 Count = o.TimesToRepeat == null ? null : formulaConverter.Convert(o.TimesToRepeat, c)
             };
             c.Bricks[o] = result;
-            result.End = o.LoopEndBrick == null ? null : (EndRepeatBrick)loopEndBrickConverter.Convert(o.LoopEndBrick, c);
+            result.End = o.LoopEndBrick == null ? null : (EndRepeatBrick)repeatEndBrickConverter.Convert(o.LoopEndBrick, c);
             return result;
         }
 

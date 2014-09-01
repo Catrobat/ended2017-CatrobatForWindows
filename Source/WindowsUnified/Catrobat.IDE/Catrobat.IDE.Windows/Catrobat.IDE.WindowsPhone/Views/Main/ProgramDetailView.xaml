@@ -196,7 +196,7 @@
 
             <switchPanel:SwitchPanelItem PanelValue="Damaged">
               <StackPanel Orientation="Vertical" Margin="20 40 20 0">
-                <TextBlock Text="{Binding Resources.Import_GeneralError, 
+                <TextBlock Text="{Binding Resources.Import_GeneralErrorText, 
                            Source={StaticResource LocalizedStrings}}"
                            Style="{StaticResource ErrorMessageTextStyle}"/>
                 <TextBlock Text="{Binding Resources.Import_ReloadAdvise, 
