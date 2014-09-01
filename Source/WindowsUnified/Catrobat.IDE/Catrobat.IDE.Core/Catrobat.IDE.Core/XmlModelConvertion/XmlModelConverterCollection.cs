@@ -20,6 +20,12 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 
         public XmlModelConverterCollection()
         {
+            if (_xmlToModelConverterCache == null)
+                _xmlToModelConverterCache = new Dictionary<Type, Dictionary<Type, IXmlModelConverter>>();
+
+            if (_modelToXmlConverterCache == null)
+                _modelToXmlConverterCache = new Dictionary<Type, Dictionary<Type, IXmlModelConverter>>();
+
             FindAndRegisterConverters();
         }
 

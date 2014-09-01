@@ -4,7 +4,6 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
-
     public interface IBrickConverter : IXmlModelConverter {}
 
     public abstract class BrickConverterBase<TXmlBrick, TBrick> :

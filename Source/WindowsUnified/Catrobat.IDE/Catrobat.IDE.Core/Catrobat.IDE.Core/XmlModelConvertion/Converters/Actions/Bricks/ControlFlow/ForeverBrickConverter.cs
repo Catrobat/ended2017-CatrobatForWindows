@@ -20,11 +20,11 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 
         public override XmlForeverBrick Convert1(ForeverBrick m, XmlModelConvertBackContext c)
         {
-            var converter = new ForeverEndBrickConverter();
+            var foreverEndBrickConverter = new ForeverEndBrickConverter();
 
             var result = new XmlForeverBrick();
             c.Bricks[m] = result;
-            result.LoopEndBrick = m.End == null ? null : converter.Convert(m.End, c);
+            result.LoopEndBrick = m.End == null ? null : (XmlLoopEndBrick)foreverEndBrickConverter.Convert(m.End, c);
             return result;
         }
     }

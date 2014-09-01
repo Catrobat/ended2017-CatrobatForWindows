@@ -24,8 +24,8 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 
             var result = new XmlForeverLoopEndBrick();
             c.Bricks[m] = result;
-            result.LoopBeginBrick = m.Begin == null ? null : 
-                foreverBrickConverter.Convert(m.Begin, c);
+            result.LoopBeginBrick = m.Begin == null ? null :
+                (XmlForeverBrick)foreverBrickConverter.Convert(m.Begin, c);
             return result;
         }
     }
