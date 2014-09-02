@@ -151,7 +151,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 
         private readonly TSourceProgram _program;
 
-        public TSourceProgram Project
+        public TSourceProgram Program
         {
             get { return _program; }
         }
@@ -225,7 +225,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 
         public TSourceProgram Program
         {
-            get { return BaseContext.Project; }
+            get { return BaseContext.Program; }
         }
 
         private readonly TSourceSprite _sprite;

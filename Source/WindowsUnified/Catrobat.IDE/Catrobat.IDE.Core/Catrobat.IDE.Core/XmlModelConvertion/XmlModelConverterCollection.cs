@@ -20,6 +20,12 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
 
         public XmlModelConverterCollection()
         {
+            if (_xmlToModelConverterCache == null)
+                _xmlToModelConverterCache = new Dictionary<Type, Dictionary<Type, IXmlModelConverter>>();
+
+            if (_modelToXmlConverterCache == null)
+                _modelToXmlConverterCache = new Dictionary<Type, Dictionary<Type, IXmlModelConverter>>();
+
             FindAndRegisterConverters();
         }
 
@@ -51,7 +57,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
             var converterInstances = (from typeInfo in inAssemblies
                 where typeInfo.ImplementedInterfaces.Contains(typeof(TConverterBase)) &&
                 typeInfo.IsAbstract == false && typeInfo.ContainsGenericParameters == false
-                                      select (TConverterBase)Activator.CreateInstance(typeInfo.AsType(), this)).ToList();
+                select (TConverterBase)Activator.CreateInstance(typeInfo.AsType())).ToList();
 
             foreach (var converter in converterInstances)
                 RegisterConverter(converter);

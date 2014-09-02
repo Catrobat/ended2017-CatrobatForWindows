@@ -5,8 +5,10 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Scripts
 {
-    public class BroadcastReceaveScriptConverter : ScriptConverterBase<XmlBroadcastScript, BroadcastReceivedScript>
+    public class BroadcastReceivedScriptConverter : ScriptConverterBase<XmlBroadcastScript, BroadcastReceivedScript>
     {
+        public BroadcastReceivedScriptConverter() { }
+
         public override BroadcastReceivedScript Convert1(XmlBroadcastScript o, XmlModelConvertContext c)
         {
             BroadcastMessage message = null;
@@ -31,8 +33,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Scripts
         {
             return new XmlBroadcastScript
             {
-                ReceivedMessage = m.Message == null ?
-                string.Empty : m.Message.Content
+                ReceivedMessage = m.Message == null ? string.Empty : m.Message.Content
             };
         }
     }

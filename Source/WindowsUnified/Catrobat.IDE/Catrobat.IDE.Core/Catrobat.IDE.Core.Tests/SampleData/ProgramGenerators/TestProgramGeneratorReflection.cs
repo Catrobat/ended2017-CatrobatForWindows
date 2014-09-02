@@ -53,24 +53,24 @@ namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
         public Program GenerateProgram()
         {
             _random = _seed.HasValue ? new Random(_seed.Value) : new Random();
-            var project = new Program
+            var program = new Program
             {
-                Name = "project1",
+                Name = "program1",
                 UploadHeader = new UploadHeader
                 {
                     Uploaded = _now.HasValue ? _now.Value : DateTime.Now,
                     MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
                     ProgramLicense = "http://developer.catrobat.org/agpl_v3",
                     Url = "http://pocketcode.org/details/871",
-                },
+                }/*,
                 BroadcastMessages = new ObservableCollection<BroadcastMessage>
                 {
                     new BroadcastMessage {Content = "Content"}
-                }
+                }*/
             };
 
             var sprites = new ObservableCollection<Sprite>();
-            project.Sprites = sprites;
+            program.Sprites = sprites;
 
             for (var i = 0; i < 2; i++)
             {
@@ -79,16 +79,16 @@ namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
 
             for (var i = 0; i < 6; i++)
             {
-                sprites[i % 2].Looks = new ObservableCollection<Look> {GenerateLook(i, project)};
+                sprites[i % 2].Looks = new ObservableCollection<Look> { GenerateLook(i, program) };
             }
 
             for (var i = 0; i < 6; i++)
             {
-                sprites[i % 2].Sounds = new ObservableCollection<Sound> {GenerateSound(i, project)};
+                sprites[i % 2].Sounds = new ObservableCollection<Sound> { GenerateSound(i, program) };
             }
 
 
-            AddVariables(project);
+            AddVariables(program);
 
 
             foreach (var sprite in sprites)
@@ -96,13 +96,13 @@ namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
                 var scripts = ReflectionHelper.GetInstances<Script>(ExcludedScripts);
                 foreach (var script in scripts)
                 {
-                    FillDummyValues(script, project, sprite);
+                    FillDummyValues(script, program, sprite);
                     sprite.Scripts.Add(script);
 
                     var bricks = ReflectionHelper.GetInstances<Brick>(ExcludedBricks);
                     foreach (var brick in bricks)
                     {
-                        FillDummyValues(brick, project, sprite);
+                        FillDummyValues(brick, program, sprite);
                         script.Bricks.Add(brick);
                     }
                     AddLoopBricks(script.Bricks);
@@ -110,7 +110,32 @@ namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
                 }
             }
 
-            return project;
+            return program;
+        }
+
+        public Program GenerateSimpleProgram()
+        {
+            _random = _seed.HasValue ? new Random(_seed.Value) : new Random();
+            var program = new Program
+            {
+                Name = "program simple",
+                UploadHeader = new UploadHeader
+                {
+                    Uploaded = _now.HasValue ? _now.Value : DateTime.Now,
+                    MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
+                    ProgramLicense = "http://developer.catrobat.org/agpl_v3",
+                    Url = "http://pocketcode.org/details/871",
+                }
+            };
+
+            var sprites = new ObservableCollection<Sprite>();
+            program.Sprites = sprites;
+
+            sprites.Add(new Sprite { Name = "Object" });
+
+            program.GlobalVariables = new ObservableCollection<GlobalVariable>();
+
+            return program;
         }
 
         private void FillDummyValues(object o, Program project, Sprite sprite)
@@ -178,10 +203,10 @@ namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
                     : (Variable)sprite.LocalVariables[_random.Next(sprite.LocalVariables.Count - 1)]; // TODO: use global variables
             }
 
-            if (type == typeof(BroadcastMessage))
-            {
-                return project.BroadcastMessages[_random.Next(project.BroadcastMessages.Count - 1)];
-            }
+            //if (type == typeof(BroadcastMessage))
+            //{
+            //    return project.BroadcastMessages[_random.Next(project.BroadcastMessages.Count - 1)];
+            //}
 
             if (type == typeof(IfBrick))
             {
@@ -250,9 +275,9 @@ namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
             return sound;
         }
 
-        private void AddVariables(Program project)
+        private void AddVariables(Program program)
         {
-            foreach (var sprite in project.Sprites)
+            foreach (var sprite in program.Sprites)
             {
                 sprite.LocalVariables = new ObservableCollection<LocalVariable>
                 {
@@ -263,10 +288,10 @@ namespace Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators
                 };
             }
 
-            project.GlobalVariables = new ObservableCollection<GlobalVariable>();
+            program.GlobalVariables = new ObservableCollection<GlobalVariable>();
             for (var i = 0; i < 3; i++)
             {
-                project.GlobalVariables.Add(new GlobalVariable
+                program.GlobalVariables.Add(new GlobalVariable
                 {
                     Name = "GlobalTestVariable" + i
                 });

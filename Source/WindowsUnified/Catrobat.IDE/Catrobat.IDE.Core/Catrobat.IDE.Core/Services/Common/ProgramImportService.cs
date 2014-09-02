@@ -162,6 +162,16 @@ namespace Catrobat.IDE.WindowsShared.Services
                         AppResources.Import_AppTooOld,
                         ToastDisplayDuration.Long);
                     break;
+                case ProgramState.ErrorInThisApp:
+                    ServiceLocator.NotifictionService.ShowToastNotification("",
+                        AppResources.Import_GeneralError,
+                        ToastDisplayDuration.Long);
+                    break;
+                case ProgramState.Unknown:
+                    ServiceLocator.NotifictionService.ShowToastNotification("",
+                        AppResources.Import_GeneralError,
+                        ToastDisplayDuration.Long);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

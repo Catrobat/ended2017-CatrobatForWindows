@@ -10,22 +10,21 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 
         public override EndRepeatBrick Convert1(XmlRepeatLoopEndBrick o, XmlModelConvertContext c)
         {
-            var converter = new RepeatBrickConverter();
+            var repeatBrickConverter = new RepeatBrickConverter();
 
             var result = new EndRepeatBrick();
             c.Bricks[o] = result;
-            result.Begin = (RepeatBrick) (o.LoopBeginBrick == null ? null : 
-                converter.Convert(o.LoopBeginBrick, c));
+            result.Begin = (RepeatBrick) (o.LoopBeginBrick == null ? null : repeatBrickConverter.Convert(o.LoopBeginBrick, c));
             return result;
         }
 
         public override XmlRepeatLoopEndBrick Convert1(EndRepeatBrick m, XmlModelConvertBackContext c)
         {
-            var converter = new RepeatBrickConverter();
+            var repeatBrickConverter = new RepeatBrickConverter();
 
             var result = new XmlRepeatLoopEndBrick();
             c.Bricks[m] = result;
-            result.LoopBeginBrick = m.Begin == null ? null : converter.Convert(m.Begin, c);
+            result.LoopBeginBrick = m.Begin == null ? null : repeatBrickConverter.Convert(m.Begin, c);
             return result;
         }
     }

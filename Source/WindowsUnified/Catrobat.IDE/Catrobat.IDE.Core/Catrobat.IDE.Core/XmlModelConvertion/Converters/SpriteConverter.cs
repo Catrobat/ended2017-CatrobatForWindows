@@ -23,7 +23,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
             return Convert(o, c, false);
         }
 
-        public override Sprite Convert(XmlSprite o, XmlModelConvertContext c, bool pointerOnly)
+        public Sprite Convert(XmlSprite o, XmlModelConvertContext c, bool pointerOnly)
         {
             var scriptConverterCollection = new XmlModelConverterCollection<IScriptConverter>();
 
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
         {
             return Convert(m, c, false);
         }
-        public override XmlSprite Convert(Sprite m, XmlModelConvertBackContext c, bool pointerOnly)
+        public XmlSprite Convert(Sprite m, XmlModelConvertBackContext c, bool pointerOnly)
         {
             var scriptConverterCollection = new XmlModelConverterCollection<IScriptConverter>();
 
