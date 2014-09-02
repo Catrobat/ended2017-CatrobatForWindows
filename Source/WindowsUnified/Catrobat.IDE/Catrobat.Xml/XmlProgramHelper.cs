@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
-using Catrobat.IDE.Core.ExtensionMethods;
-using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities;
-using Catrobat.IDE.Core.Utilities.Helpers;
-using Catrobat.IDE.Core.Xml.XmlObjects;
-using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 
 namespace Catrobat.IDE.Core.Xml
 {

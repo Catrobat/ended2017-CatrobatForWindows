@@ -1,4 +1,6 @@
 ﻿using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
+using Catrobat.IDE.Core.XmlModelConvertion.Converters;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models.Formulas.Tree
@@ -13,7 +15,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
     {
         protected internal override XmlFormulaTree ToXmlObject2()
         {
-            return XmlFormulaTreeFactory.CreateLocalVariableNode(Variable);
+            var xmlVariableConverter = new VariableConverter<LocalVariable>();
+            var xmlVariable = xmlVariableConverter.Convert(Variable, null);
+            return XmlFormulaTreeFactory.CreateLocalVariableNode(xmlVariable);
         }
     }
 
@@ -21,7 +25,9 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
     {
         protected internal override XmlFormulaTree ToXmlObject2()
         {
-            return XmlFormulaTreeFactory.CreateGlobalVariableNode(Variable);
+            var xmlVariableConverter = new VariableConverter<GlobalVariable>();
+            var xmlVariable = xmlVariableConverter.Convert(Variable, null);
+            return XmlFormulaTreeFactory.CreateGlobalVariableNode(xmlVariable);
         }
     }
 

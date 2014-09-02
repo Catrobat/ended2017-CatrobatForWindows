@@ -81,6 +81,7 @@
     <Compile Include="CatrobatContextBase.cs" />
     <Compile Include="CatrobatContextDesign.cs" />
     <Compile Include="CatrobatObjects\TestEqualityComparer.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Models\CatrobatModels\CatrobatModelBase.cs" />
     <Compile Include="Services\Common\ProgramExportService.cs" />
     <Compile Include="Services\Common\ProgramImportService.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="UI\ISelectable.cs" />
     <Compile Include="UI\OnlineProgramsCollection.cs" />
     <Compile Include="UI\PortableUI\PortableFontStyle.cs" />
+    <Compile Include="Utilities\Helpers\ReferenceCleaner.cs" />
     <Compile Include="Utilities\SensorEventArgs.cs" />
     <Compile Include="Utilities\ProgressEventArgs.cs" />
     <Compile Include="ViewModels\Editor\Formula\FormulaEvaluationResult.cs" />
@@ -209,12 +211,6 @@
     <Compile Include="XmlModelConvertion\XmlModelConversionContext.cs" />
     <Compile Include="XmlModelConvertion\XmlModelConverterCollection.cs" />
     <Compile Include="XmlModelConvertion\XmlModelConverter.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlObject.cs" />
-    <Compile Include="Xml_New\VersionConverter\Versions\CatrobatVersion091ToWin091.cs" />
-    <Compile Include="Xml_New\VersionConverter\Versions\CatrobatVersion093To092.cs" />
-    <Compile Include="Xml_New\XmlProgramHelper.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\XmlBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\XmlBrickList.cs" />
     <Compile Include="CatrobatObjects\IAsyncCloneable.cs" />
     <Compile Include="CatrobatObjects\IObservableCollection.cs" />
     <Compile Include="CatrobatObjects\OnlineProgramOverview.cs" />
@@ -251,80 +247,14 @@
     <Compile Include="Models\CatrobatModels\Formulas\Tree\FormulaNodeBrackets.cs" />
     <Compile Include="Models\CatrobatModels\Formulas\Tree\FormulaNodeSensor.cs" />
     <Compile Include="Models\CatrobatModels\Formulas\Tree\FormulaNodeVariable.cs" />
-    <Compile Include="Xml_New\XmlObjects\Formulas\XmlFormulaTreeFactory.cs" />
     <Compile Include="ExtensionMethods\FormulaTreeExtensions.cs" />
     <Compile Include="ExtensionMethods\ListExtensions.cs" />
     <Compile Include="ExtensionMethods\LinqExtensions.cs" />
     <Compile Include="ExtensionMethods\EnumExtensions.cs" />
     <Compile Include="Models\CatrobatModels\Formulas\Tree\UnaryFormulaTree.cs" />
     <Compile Include="Models\EmptyDummyBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlBroadcastBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlBroadcastWaitBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlChangeBrightnessBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlChangeGhostEffectBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlChangeSizeByNBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Variables\XmlChangeVariableBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Sounds\XmlChangeVolumeByBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlChangeXByBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlChangeYByBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlClearGraphicEffectBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlComeToFrontBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlForeverBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlForeverLoopEndBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlGlideToBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlGoNStepsBackBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlHideBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlIfLogicBeginBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlIfLogicBeginBrickReference.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlIfLogicElseBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlIfLogicElseBrickReference.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlIfLogicEndBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlIfLogicEndBrickReference.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlIfOnEdgeBounceBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlLoopBeginBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlLoopBeginBrickReference.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlLoopEndBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlLoopEndBrickReference.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlMoveNStepsBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Looks\XmlNextLookBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\XmlNoteBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Nxt\XmlNxtMotorActionBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Nxt\XmlNxtMotorStopBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Nxt\XmlNxtMotorTurnAngleBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Nxt\XmlNxtPlayToneBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlPlaceAtBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Sounds\XmlPlaySoundBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlPointInDirectionBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlPointToBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlRepeatBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlRepeatLoopEndBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlSetBrightnessBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Looks\XmlSetLookBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlSetGhostEffectBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlSetSizeToBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Variables\XmlSetVariableBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Sounds\XmlSetVolumeToBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlSetXBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlSetYBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlShowBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Sounds\XmlSpeakBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Sounds\XmlStopAllSoundsBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlTurnLeftBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\Properties\XmlTurnRightBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\Bricks\ControlFlow\XmlWaitBrick.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlLook.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlLookList.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlLookReference.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlObjectNode.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlObjectRoot.cs" />
-    <Compile Include="Xml_New\XmlObjects\Formulas\XmlFormula.cs" />
-    <Compile Include="Xml_New\XmlObjects\Formulas\XmlFormulaTree.cs" />
     <Compile Include="CatrobatObjects\OnlineProgramHeader.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlProgram.cs" />
     <Compile Include="CatrobatObjects\LocalProgramHeader.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlProjectHeader.cs" />
-    <Compile Include="Xml_New\XmlObjects\Scripts\XmlBroadcastScript.cs" />
-    <Compile Include="Xml_New\XmlObjects\Scripts\XmlScript.cs" />
     <Compile Include="ExtensionMethods\RandomExtensions.cs" />
     <Compile Include="Models\CatrobatModels\Look.cs" />
     <Compile Include="Models\CatrobatModels\Scripts\BroadcastReceivedScript.cs" />
@@ -375,13 +305,6 @@
     <Compile Include="Models\CatrobatModels\Formulas\Tree\FormulaTreeFactory.cs" />
     <Compile Include="Formulas\FormulaSerializer.cs" />
     <Compile Include="Formulas\FormulaParser.cs" />
-    <Compile Include="Xml_New\XmlObjects\Variables\XmlObjectVariableEntry.cs" />
-    <Compile Include="Xml_New\XmlObjects\Variables\XmlObjectVariableList.cs" />
-    <Compile Include="Xml_New\XmlObjects\Variables\XmlProgramVariableList.cs" />
-    <Compile Include="Xml_New\XmlObjects\Variables\XmlUserVariable.cs" />
-    <Compile Include="Xml_New\XmlObjects\Variables\XmlUserVariableList.cs" />
-    <Compile Include="Xml_New\XmlObjects\Variables\XmlUserVariableReference.cs" />
-    <Compile Include="Xml_New\XmlObjects\Variables\XmlVariableList.cs" />
     <Compile Include="INativeApp.cs" />
     <Compile Include="Models\CatrobatModels\Program.cs" />
     <Compile Include="Models\CatrobatModels\Sprite.cs" />
@@ -419,16 +342,6 @@
     <Compile Include="UI\PortableUI\PortableVisibility.cs" />
     <Compile Include="UI\ActionsCollection.cs" />
     <Compile Include="UI\ScriptBrickIterator.cs" />
-    <Compile Include="Xml_New\XmlObjects\Scripts\XmlScriptList.cs" />
-    <Compile Include="Xml_New\XmlObjects\Scripts\XmlStartScript.cs" />
-    <Compile Include="Xml_New\XmlObjects\Scripts\XmlWhenScript.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlSound.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlSoundList.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlSoundReference.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlSprite.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlSpriteList.cs" />
-    <Compile Include="Xml_New\XmlObjects\XmlSpriteReference.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="Formulas\Editor\FormulaEditorKey.cs" />
     <Compile Include="LocalSettings.cs" />
@@ -473,28 +386,15 @@
     <Compile Include="UI\ThemeChooser.cs" />
     <Compile Include="UI\VariableConteiner.cs" />
     <Compile Include="Utilities\Helpers\LookHelper.cs" />
-    <Compile Include="Utilities\Helpers\FileNameGenerationHelper.cs" />
     <Compile Include="Utilities\Helpers\LanguageHelper.cs" />
     <Compile Include="Utilities\Helpers\PropertyHelper.cs" />
-    <Compile Include="Utilities\Helpers\ReferenceHelper.cs" />
     <Compile Include="Utilities\Helpers\ReflectionHelper.cs" />
     <Compile Include="Utilities\Helpers\StringFormatHelper.cs" />
     <Compile Include="Utilities\Helpers\VariableHelper.cs" />
     <Compile Include="Utilities\Helpers\WaveHeaderHelper.cs" />
-    <Compile Include="Utilities\Helpers\XmlParserTempProjectHelper.cs" />
-    <Compile Include="Utilities\Helpers\XPathHelper.cs" />
     <Compile Include="Utilities\JSON\JSONStatusResponse.cs" />
     <Compile Include="Utilities\MD5.cs" />
     <Compile Include="Utilities\UtilToken.cs" />
-    <Compile Include="Utilities\XmlStringWriter.cs" />
-    <Compile Include="Xml_New\VersionConverter\CatrobatVersion.cs" />
-    <Compile Include="Xml_New\VersionConverter\CatrobatVersionConverter.cs" />
-    <Compile Include="Xml_New\VersionConverter\CatrobatVersionElementRenameEntry.cs" />
-    <Compile Include="Xml_New\VersionConverter\CatrobatVersionPair.cs" />
-    <Compile Include="Xml_New\VersionConverter\CatrobatVersionPropertyRenameEntry.cs" />
-    <Compile Include="Xml_New\VersionConverter\VersionConverterResult.cs" />
-    <Compile Include="Xml_New\VersionConverter\Versions\CatrobatVersion092To091.cs" />
-    <Compile Include="Utilities\Helpers\XElementExtensions.cs" />
     <Compile Include="ViewModels\AsyncRelayCommand.cs" />
     <Compile Include="ViewModels\Editor\Looks\ChangeLookViewModel.cs" />
     <Compile Include="ViewModels\Editor\Looks\LookNameChooserViewModel.cs" />
@@ -576,7 +476,15 @@
     <Content Include="Fonts\LiveSymbol.ttf" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Catrobat.Xml\Catrobat.Xml.csproj">
+      <Project>{72bd1c16-1242-49a4-995f-428e1a801551}</Project>
+      <Name>Catrobat.Xml</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Xml_New\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />

@@ -26,6 +26,7 @@ namespace Catrobat.IDE.Core.Services.Common
             var checkResult = new CheckProgramResult();
             PortableImage projectScreenshot = null;
             string programName = null;
+            string programCode = null;
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -36,10 +37,14 @@ namespace Catrobat.IDE.Core.Services.Common
                     await storage.LoadImageAsync(Path.Combine(
                     pathToProgramDirectory,
                     StorageConstants.ProgramAutomaticScreenshotPath));
+
+                programCode = await storage.ReadTextFileAsync(pathToProgramCodeFile);
             }
 
+
+
             var converterResult = await CatrobatVersionConverter.
-                ConvertToXmlVersion(pathToProgramCodeFile, Constants.TargetIDEVersion);
+                ConvertToXmlVersion(programCode, XmlConstants.TargetIDEVersion);
 
             if (converterResult.Error != CatrobatVersionConverter.VersionConverterStatus.NoError)
             {

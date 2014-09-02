@@ -1,10 +1,12 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models.CatrobatModels;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.XmlModelConvertion.Converters;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
@@ -141,9 +143,18 @@ namespace Catrobat.IDE.Core.Models
 
         public async Task Save(string path = null)
         {
-            ProgramConverter programConverter = new ProgramConverter();
-            var xmlProject = programConverter.Convert(this);
-            await xmlProject.Save(path);
+            if (path == null)
+                path = Path.Combine(BasePath, StorageConstants.ProgramCodePath);
+
+            var programConverter = new ProgramConverter();
+            var xmlProgram= programConverter.Convert(this);
+
+            var xmlString = xmlProgram.ToXmlString();
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                await storage.WriteTextFileAsync(path, xmlString);
+            }
         }
 
         public void Undo()

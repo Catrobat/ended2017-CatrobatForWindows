@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Xml.Linq;
-using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Services.Storage;
+﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects

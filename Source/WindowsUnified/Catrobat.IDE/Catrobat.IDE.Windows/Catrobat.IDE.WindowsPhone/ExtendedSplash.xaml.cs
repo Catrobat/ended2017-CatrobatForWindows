@@ -182,7 +182,7 @@ namespace Catrobat.IDE.WindowsPhone
                 try
                 {
                     if (activationArgs.Files.Count == 1 &&
-                        Constants.CatrobatFileNames.Contains(
+                        StorageConstants.SupportedCatrobatFileTypes.Contains(
                         Path.GetExtension(activationArgs.Files[0].Name)))
                     {
                         var catrobatFileStream = (await ((StorageFile)activationArgs.Files[0]).

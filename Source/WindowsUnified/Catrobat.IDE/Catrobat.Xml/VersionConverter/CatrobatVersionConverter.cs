@@ -4,8 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Xml.VersionConverter.Versions;
 
@@ -150,7 +148,7 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
             var error = VersionConverterStatus.NoError;
             var versionPair = new CatrobatVersionPair(inputVersion, outputVersion);
 
-            if (double.Parse(inputVersion, NumberStyles.Any) < Constants.MinimumCodeVersion)
+            if (double.Parse(inputVersion, NumberStyles.Any) < XmlConstants.MinimumCodeVersion)
             {
                 return VersionConverterStatus.VersionTooOld;
             }
@@ -212,19 +210,21 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
             return inputVersion;
         }
 
-        public static async Task<VersionConverterResult> ConvertToXmlVersion(string projectCodePath, string targetVersion, bool overwriteProject = false)
+        public static async Task<VersionConverterResult> ConvertToXmlVersion(
+            string projectCode, string targetVersion)
         {
+            // TODO XML: move to IDE.Core
             VersionConverterStatus error;
             var xml = "";
 
-            if (!string.IsNullOrEmpty(projectCodePath))
+            if (!string.IsNullOrEmpty(projectCode))
             {
-                string projectCode;
+                //string projectCode;
 
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    projectCode = await storage.ReadTextFileAsync(projectCodePath);
-                }
+                //using (var storage = StorageSystem.GetStorage())
+                //{
+                //    projectCode = await storage.ReadTextFileAsync(projectCodePath);
+                //}
 
                 if (projectCode != null)
                 {
@@ -233,7 +233,7 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
 
                     var inputVersion = GetInputVersion(document);
 
-                    if (inputVersion == Constants.TargetIDEVersion)
+                    if (inputVersion == XmlConstants.TargetIDEVersion)
                     {
                         return new VersionConverterResult
                         {
@@ -242,7 +242,7 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
                         };
                     }
 
-                    if (double.Parse(inputVersion) < Constants.MinimumCodeVersion)
+                    if (double.Parse(inputVersion) < XmlConstants.MinimumCodeVersion)
                     {
                         return new VersionConverterResult
                         {
@@ -260,20 +260,20 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
                         xml = writer.GetStringBuilder().ToString();
 
 
-                        if (overwriteProject)
-                        {
-                            using (var storage = StorageSystem.GetStorage())
-                            {
-                                try
-                                {
-                                    await storage.WriteTextFileAsync(projectCodePath, xml);
-                                }
-                                catch
-                                {
-                                    error = VersionConverterStatus.ProgramDamaged;
-                                }
-                            }
-                        }
+                        //if (overwriteProject)
+                        //{
+                        //    using (var storage = StorageSystem.GetStorage())
+                        //    {
+                        //        try
+                        //        {
+                        //            await storage.WriteTextFileAsync(projectCodePath, xml);
+                        //        }
+                        //        catch
+                        //        {
+                        //            error = VersionConverterStatus.ProgramDamaged;
+                        //        }
+                        //    }
+                        //}
                     }
                     else
                     {
@@ -287,17 +287,10 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
             }
             else
             {
-                error = VersionConverterStatus.ProgramPathNotValid;
+                error = VersionConverterStatus.ProgramDamaged;
             }
 
             return new VersionConverterResult { Xml = xml, Error = error };
-        }
-
-        public static async Task<VersionConverterResult> ConvertToXmlVersionByProjectName(string projectName, string targetVersion, bool overwriteProject = false)
-        {
-            var projectCodePath = Path.Combine(StorageConstants.ProgramsPath, projectName, StorageConstants.ProgramCodePath);
-            var result = await ConvertToXmlVersion(projectCodePath, targetVersion, overwriteProject);
-            return result;
         }
     }
 }

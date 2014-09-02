@@ -4,8 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
@@ -26,11 +24,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         public XmlSpriteList SpriteList { get; set; }
 
         public XmlVariableList VariableList { get; set; }
-
-        public string BasePath
-        {
-            get { return StorageConstants.ProgramsPath + "/" + ProjectHeader.ProgramName; }
-        }
 
         #endregion
 
@@ -123,42 +116,46 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             }
         }
 
-        public async Task Save(string path = null)
-        {
-            if (path == null)
-            {
-                path = BasePath + "/" + StorageConstants.ProgramCodePath;
-            }
+        //public async Task Save(string path = null)
+        //{
+        //    // TODO XML: move to IDE.Core
 
-            if (Debugger.IsAttached)
-            {
-                await SaveInternal(path);
-            }
-            else
-            {
-                try
-                {
-                    await SaveInternal(path);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Cannot write Project", ex);
-                }
-            }
-        }
+        //    if (path == null)
+        //    {
+        //        path = BasePath + "/" + StorageConstants.ProgramCodePath;
+        //    }
 
-        private async Task SaveInternal(string path)
-        {
-            using (var storage = StorageSystem.GetStorage())
-            {
-                var writer = new XmlStringWriter();
-                var document = CreateXml();
-                document.Save(writer, SaveOptions.None);
+        //    if (Debugger.IsAttached)
+        //    {
+        //        await SaveInternal(path);
+        //    }
+        //    else
+        //    {
+        //        try
+        //        {
+        //            await SaveInternal(path);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception("Cannot write Project", ex);
+        //        }
+        //    }
+        //}
 
-                var xml = writer.GetStringBuilder().ToString();
-                await storage.WriteTextFileAsync(path, xml);
-            }
-        }
+        //private async Task SaveInternal(string path)
+        //{
+        //    // TODO XML: move to IDE.Core
+
+        //    using (var storage = StorageSystem.GetStorage())
+        //    {
+        //        var writer = new XmlStringWriter();
+        //        var document = CreateXml();
+        //        document.Save(writer, SaveOptions.None);
+
+        //        var xml = writer.GetStringBuilder().ToString();
+        //        await storage.WriteTextFileAsync(path, xml);
+        //    }
+        //}
 
 
         public string ToXmlString()

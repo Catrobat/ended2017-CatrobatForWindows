@@ -197,6 +197,10 @@
     <Compile Include="Tests\ViewModels\Settings\SettingsViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Catrobat.Xml\Catrobat.Xml.csproj">
+      <Project>{72bd1c16-1242-49a4-995f-428e1a801551}</Project>
+      <Name>Catrobat.Xml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Catrobat.IDE.Core\Catrobat.IDE.Core.csproj">
       <Project>{bca5086e-499a-4507-aa9b-a55d7e534ef7}</Project>
       <Name>Catrobat.IDE.Core</Name>

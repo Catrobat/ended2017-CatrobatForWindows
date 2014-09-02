@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Xml.Linq;
-using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
@@ -49,7 +48,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             if (isAutoFillProperties)
             {
                 AutoFill();
-                UpdateSystemInformation();
             }
         }
 
@@ -66,19 +64,21 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             UserHandle = "";
         }
 
-        private void UpdateSystemInformation()
-        {
-            ApplicationBuildName = Constants.CurrentAppBuildName;
-            ApplicationBuildNumber = Constants.CurrentAppBuildNumber;
-            ApplicationName = Constants.ApplicationName;
-            ApplicationVersion = Constants.CurrentAppVersion;
-            CatrobatLanguageVersion = Constants.TargetIDEVersion;
-            DeviceName = ServiceLocator.SystemInformationService.DeviceName;
-            Platform = ServiceLocator.SystemInformationService.PlatformName;
-            PlatformVersion = ServiceLocator.SystemInformationService.PlatformVersion;
-            ScreenHeight = ServiceLocator.SystemInformationService.ScreenHeight;
-            ScreenWidth = ServiceLocator.SystemInformationService.ScreenWidth;
-        }
+        //private void UpdateSystemInformation()
+        //{
+        //    // TODO XML:  move to IDE.Core
+
+        //    //ApplicationBuildName = Constants.CurrentAppBuildName;
+        //    //ApplicationBuildNumber = Constants.CurrentAppBuildNumber;
+        //    //ApplicationName = Constants.ApplicationName;
+        //    //ApplicationVersion = Constants.CurrentAppVersion;
+        //    //CatrobatLanguageVersion = Constants.TargetIDEVersion;
+        //    //DeviceName = ServiceLocator.SystemInformationService.DeviceName;
+        //    //Platform = ServiceLocator.SystemInformationService.PlatformName;
+        //    //PlatformVersion = ServiceLocator.SystemInformationService.PlatformVersion;
+        //    //ScreenHeight = ServiceLocator.SystemInformationService.ScreenHeight;
+        //    //ScreenWidth = ServiceLocator.SystemInformationService.ScreenWidth;
+        //}
 
         public XmlProjectHeader(XElement xElement)
         {
@@ -110,8 +110,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override XElement CreateXml()
         {
-            UpdateSystemInformation();
-
             var xProjectHeader = new XElement("header");
 
             xProjectHeader.Add(new XElement("applicationBuildName")

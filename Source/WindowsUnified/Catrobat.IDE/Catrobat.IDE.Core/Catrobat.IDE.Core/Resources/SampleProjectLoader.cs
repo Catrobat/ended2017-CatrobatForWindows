@@ -8,6 +8,7 @@ using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.IDE.Core.XmlModelConvertion.Converters;
 
 namespace Catrobat.IDE.Core.Resources
 {
@@ -29,14 +30,14 @@ namespace Catrobat.IDE.Core.Resources
             {
                 var projectFileName = pair.Key;
                 var projectName = pair.Value;
-                var path = string.Format("SamplePrograms/{0}", projectFileName);
+                var resourcePath = string.Format("SamplePrograms/{0}", projectFileName);
 
                 Stream resourceStream = null;
 
                 try
                 {
                     var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader();
-                    resourceStream = await resourceLoader.OpenResourceStreamAsync(ResourceScope.Resources, path);
+                    resourceStream = await resourceLoader.OpenResourceStreamAsync(ResourceScope.Resources, resourcePath);
                     
 
                     if (resourceStream != null)
@@ -56,10 +57,16 @@ namespace Catrobat.IDE.Core.Resources
                             var textFilePath = Path.Combine(StorageConstants.ProgramsPath, projectName, StorageConstants.ProgramCodePath);
                             var xml = await storage.ReadTextFileAsync(textFilePath);
 
-                            var project = new XmlProgram(xml);
-                            project.ProjectHeader.ProgramName = projectName;
+                            var xmlProgram = new XmlProgram(xml)
+                            {
+                                ProjectHeader = {ProgramName = projectName}
+                            };
 
-                            await project.Save();
+
+                            var path = Path.Combine(StorageConstants.ProgramsPath,
+                                projectFileName, StorageConstants.ProgramCodePath);
+                            var xmlString = xmlProgram.ToXmlString();
+                            await storage.WriteTextFileAsync(path, xmlString);
                         }
                     }
                 }

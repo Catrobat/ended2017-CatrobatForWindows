@@ -1,10 +1,10 @@
 ﻿using System.Globalization;
-using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 {
     /// <remarks> See /catroid/src/org/catrobat/catroid/formulaeditor</remarks>
-    class XmlFormulaTreeFactory
+    public class XmlFormulaTreeFactory
     {
         public static XmlFormulaTree CreateFormulaTree()
         {
@@ -542,15 +542,15 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 
         #region Variables
 
-        public static XmlFormulaTree CreateLocalVariableNode(LocalVariable variable)
+        public static XmlFormulaTree CreateLocalVariableNode(XmlUserVariable variable)
         {
             return CreateVariableNode(variable);
         }
-        public static XmlFormulaTree CreateGlobalVariableNode(GlobalVariable variable)
+        public static XmlFormulaTree CreateGlobalVariableNode(XmlUserVariable variable)
         {
             return CreateVariableNode(variable);
         }
-        private static XmlFormulaTree CreateVariableNode(Variable variable)
+        private static XmlFormulaTree CreateVariableNode(XmlUserVariable variable)
         {
             return new XmlFormulaTree
             {
