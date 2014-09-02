@@ -171,13 +171,20 @@ namespace Catrobat.IDE.Core.Models
 
         public bool TestEquals(Program other)
         {
+            bool equalNames = string.Equals(_name, other._name);
+            bool equalDescriptions = string.Equals(_description, other._description);
+            bool equalBroadcastMessages = CollectionExtensions.TestEquals(_broadcastMessages, other._broadcastMessages);
+            bool equalGlobalVariables = CollectionExtensions.TestEquals(_globalVariables, other._globalVariables);
+            bool equalSprites = CollectionExtensions.TestEquals(_sprites, other._sprites);
+            bool equalUploadHeaders = TestEquals(_uploadHeader, other._uploadHeader);
+
             return
-                string.Equals(_name, other._name) &&
-                string.Equals(_description, other._description) &&
-                CollectionExtensions.TestEquals(_broadcastMessages, other._broadcastMessages) &&
-                CollectionExtensions.TestEquals(_globalVariables, other._globalVariables) &&
-                CollectionExtensions.TestEquals(_sprites, other._sprites) &&
-                TestEquals(_uploadHeader, other._uploadHeader);
+                equalNames &&
+                equalDescriptions &&
+                equalBroadcastMessages &&
+                equalGlobalVariables &&
+                equalSprites &&
+                equalUploadHeaders;
         }
 
         #endregion

@@ -167,11 +167,17 @@ namespace Catrobat.IDE.Core.Models
 
         protected bool TestEquals(Sprite other)
         {
-            return CollectionExtensions.TestEquals(_looks, other._looks) &&
-                CollectionExtensions.TestEquals(_localVariables, other._localVariables) && 
-                string.Equals(_name, other._name) &&
-                CollectionExtensions.TestEquals(_scripts, other._scripts) &&
-                CollectionExtensions.TestEquals(_sounds, other._sounds);
+            bool equalLooks = CollectionExtensions.TestEquals(_looks, other._looks);
+            bool equalLocalVariables = CollectionExtensions.TestEquals(_localVariables, other._localVariables);
+            bool equalNames = string.Equals(_name, other._name);
+            bool equalScripts = CollectionExtensions.TestEquals(_scripts, other._scripts);
+            bool equalSounds = CollectionExtensions.TestEquals(_sounds, other._sounds);
+
+            return equalLooks &&
+                equalLocalVariables &&
+                equalNames &&
+                equalScripts &&
+                equalSounds;
         }
 
         #endregion

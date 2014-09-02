@@ -94,15 +94,6 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             var program2 = programConverter.Convert(xmlProgram);
 
-            //Assert.AreEqual(program1.BasePath, program2.BasePath);
-            //Assert.AreEqual(program1.BroadcastMessages.Count, program2.BroadcastMessages.Count);
-            //Assert.AreEqual(program1.Description, program2.Description);
-            //Assert.AreEqual(program1.GlobalVariables.Count, program2.GlobalVariables.Count);
-            //Assert.AreEqual(program1.Name, program2.Name);
-            //Assert.AreEqual(program1.Sprites.Count, program2.Sprites.Count);
-            //Assert.AreEqual(program1.UploadHeader.Uploaded, program2.UploadHeader.Uploaded);
-            //Assert.AreEqual(program1.UploadHeader.MediaLicense, program2.UploadHeader.MediaLicense);
-
             Assert.IsTrue(program1.TestEquals(program2));
         }
 
@@ -118,37 +109,34 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             var program2 = programConverter.Convert(xmlProgram);
 
+            Assert.AreEqual(program1.BasePath, program2.BasePath);
+            Assert.AreEqual(program1.BroadcastMessages.Count, program2.BroadcastMessages.Count);
+            Assert.AreEqual(program1.Description, program2.Description);
+            Assert.AreEqual(program1.Name, program2.Name);
+            Assert.AreEqual(program1.UploadHeader.Uploaded, program2.UploadHeader.Uploaded);
+            Assert.AreEqual(program1.UploadHeader.MediaLicense, program2.UploadHeader.MediaLicense);
 
-            //Assert.AreEqual(program1.BasePath, program2.BasePath);
-            //Assert.AreEqual(program1.BroadcastMessages.Count, program2.BroadcastMessages.Count);
-            //Assert.AreEqual(program1.Description, program2.Description); 
-            //Assert.AreEqual(program1.Name, program2.Name);
-            //Assert.AreEqual(program1.UploadHeader.Uploaded, program2.UploadHeader.Uploaded);
-            //Assert.AreEqual(program1.UploadHeader.MediaLicense, program2.UploadHeader.MediaLicense);
+            Assert.AreEqual(program1.GlobalVariables.Count, program2.GlobalVariables.Count);
+            Assert.AreEqual(program1.GlobalVariables[0].Name, program2.GlobalVariables[0].Name);
 
-            //Assert.AreEqual(program1.GlobalVariables.Count, program2.GlobalVariables.Count);
-            //Assert.AreEqual(program1.GlobalVariables[0].Name, program2.GlobalVariables[0].Name);
+            Assert.AreEqual(program1.Sprites.Count, program2.Sprites.Count);
+            Assert.AreEqual(program1.Sprites[0].LocalVariables.Count, program2.Sprites[0].LocalVariables.Count);
+            Assert.AreEqual(program1.Sprites[0].LocalVariables[0].Name, program2.Sprites[0].LocalVariables[0].Name);
+            Assert.AreEqual(program1.Sprites[0].Looks.Count, program2.Sprites[0].Looks.Count);
+            Assert.AreEqual(program1.Sprites[0].Looks[0].Name, program2.Sprites[0].Looks[0].Name);
+            Assert.AreEqual(program1.Sprites[0].Sounds.Count, program2.Sprites[0].Sounds.Count);
+            Assert.AreEqual(program1.Sprites[0].Sounds[0].Name, program2.Sprites[0].Sounds[0].Name);
+            Assert.AreEqual(program1.Sprites[0].Scripts.Count, program2.Sprites[0].Scripts.Count);
+            Assert.AreEqual(program1.Sprites[0].Scripts[0].Bricks.Count, program2.Sprites[0].Scripts[0].Bricks.Count);
 
-            //Assert.AreEqual(program1.Sprites.Count, program2.Sprites.Count);
-            //Assert.AreEqual(program1.Sprites[0].LocalVariables.Count, program2.Sprites[0].LocalVariables.Count);
-            //Assert.AreEqual(program1.Sprites[0].LocalVariables[0].Name, program2.Sprites[0].LocalVariables[0].Name);
-            //Assert.AreEqual(program1.Sprites[0].Looks.Count, program2.Sprites[0].Looks.Count);
-            //Assert.AreEqual(program1.Sprites[0].Looks[0].Name, program2.Sprites[0].Looks[0].Name);
-            //Assert.AreEqual(program1.Sprites[0].Sounds.Count, program2.Sprites[0].Sounds.Count);
-            //Assert.AreEqual(program1.Sprites[0].Sounds[0].Name, program2.Sprites[0].Sounds[0].Name);
-            //Assert.AreEqual(program1.Sprites[0].Scripts.Count, program2.Sprites[0].Scripts.Count);
-            //Assert.AreEqual(program1.Sprites[0].Scripts[0].Bricks.Count, program2.Sprites[0].Scripts[0].Bricks.Count);
-
-            //Assert.AreEqual(program1.Sprites[1].LocalVariables.Count, program2.Sprites[1].LocalVariables.Count);
-            //Assert.AreEqual(program1.Sprites[1].LocalVariables[0].Name, program2.Sprites[1].LocalVariables[0].Name);
-            //Assert.AreEqual(program1.Sprites[1].Looks.Count, program2.Sprites[1].Looks.Count);
-            //Assert.AreEqual(program1.Sprites[1].Looks[0].Name, program2.Sprites[1].Looks[0].Name);
-            //Assert.AreEqual(program1.Sprites[1].Sounds.Count, program2.Sprites[1].Sounds.Count);
-            //Assert.AreEqual(program1.Sprites[1].Sounds[0].Name, program2.Sprites[1].Sounds[0].Name);
-            //Assert.AreEqual(program1.Sprites[1].Scripts.Count, program2.Sprites[1].Scripts.Count);
-            //Assert.AreEqual(program1.Sprites[1].Scripts[0].Bricks.Count, program2.Sprites[1].Scripts[0].Bricks.Count);
-
-            //Assert.AreEqual(program1, program2);
+            Assert.AreEqual(program1.Sprites[1].LocalVariables.Count, program2.Sprites[1].LocalVariables.Count);
+            Assert.AreEqual(program1.Sprites[1].LocalVariables[0].Name, program2.Sprites[1].LocalVariables[0].Name);
+            Assert.AreEqual(program1.Sprites[1].Looks.Count, program2.Sprites[1].Looks.Count);
+            Assert.AreEqual(program1.Sprites[1].Looks[0].Name, program2.Sprites[1].Looks[0].Name);
+            Assert.AreEqual(program1.Sprites[1].Sounds.Count, program2.Sprites[1].Sounds.Count);
+            Assert.AreEqual(program1.Sprites[1].Sounds[0].Name, program2.Sprites[1].Sounds[0].Name);
+            Assert.AreEqual(program1.Sprites[1].Scripts.Count, program2.Sprites[1].Scripts.Count);
+            Assert.AreEqual(program1.Sprites[1].Scripts[0].Bricks.Count, program2.Sprites[1].Scripts[0].Bricks.Count);
 
             Assert.IsTrue(program1.TestEquals(program2));
         }

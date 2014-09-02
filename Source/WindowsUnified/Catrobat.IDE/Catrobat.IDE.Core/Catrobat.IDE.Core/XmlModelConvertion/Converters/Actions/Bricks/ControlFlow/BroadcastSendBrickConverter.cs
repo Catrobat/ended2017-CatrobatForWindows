@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
         {
             return new XmlBroadcastBrick
             {
-                BroadcastMessage = m.Message == null ? string.Empty : m.Message.Content
+                BroadcastMessage = m.Message == null ? null : m.Message.Content
             };
         }
     }
