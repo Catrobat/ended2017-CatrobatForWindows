@@ -12,6 +12,7 @@ using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Xml;
 using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.IDE.Core.XmlModelConvertion.Converters;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
@@ -61,7 +62,6 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 convertedProgram = new XmlProgram(converterResult.Xml);
                 programName = convertedProgram.ProjectHeader.ProgramName;
-                //checkResult.Program = convertedProgram.ToModel();
             }
             catch (Exception)
             {
@@ -73,7 +73,8 @@ namespace Catrobat.IDE.Core.Services.Common
 
             try
             {
-                checkResult.Program = convertedProgram.ToModel();
+                ProgramConverter programConverter = new ProgramConverter();
+                checkResult.Program = programConverter.Convert(convertedProgram);
             }
             catch (Exception)
             {

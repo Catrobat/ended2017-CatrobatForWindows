@@ -7,7 +7,8 @@ using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Tests.Extensions;
 using Catrobat.IDE.Core.Tests.Misc;
 using Catrobat.IDE.Core.Tests.SampleData;
-using Catrobat.IDE.Core.Xml.Converter;
+using Catrobat.IDE.Core.XmlModelConvertion.Converters;
+using Catrobat.IDE.Core.XmlModelConvertion;
 using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
@@ -88,6 +89,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.XmlModelConvertion
         [TestMethod, TestCategory("XmlModelConversion"), TestCategory("ExcludeGated")]
         public void TestPocketCodeFormulas()
         {
+            ProgramConverter programConverter = new ProgramConverter();
             var documents = Enumerable.Range(1, 16)
                 .Select(i => "Converter/091_Win091/PracticalTests/Test" + i + "Input")
                 .Select(SampleLoader.LoadSampleXDocument);
@@ -97,8 +99,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.XmlModelConvertion
                 var xml = document.ToString();
 
                 var xmlProject = new XmlProgram(xml);
-                var project = new XmlProgramConverter().Convert(xmlProject);
-                var xmlProject2 = new XmlProgramConverter().ConvertBack(project);
+                var project = programConverter.Convert(xmlProject);
+                var xmlProject2 = programConverter.Convert(project);
 
                 var formulas = xmlProject.SpriteList.Sprites
                     .SelectMany(sprite => sprite.Scripts.Scripts
@@ -115,6 +117,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.XmlModelConvertion
         [TestMethod, TestCategory("XmlModelConversion")]
         public void TestXmlFormulaTreeNodes()
         {
+            ProgramConverter programConverter = new ProgramConverter();
             var localVariable = new LocalVariable
             {
                 Name = "LocalVariable"
@@ -178,12 +181,13 @@ namespace Catrobat.IDE.Core.Tests.Tests.XmlModelConvertion
 
         private void TestConvert<TExpected>(string path)
         {
+            ProgramConverter programConverter = new ProgramConverter();
             var document = SampleLoader.LoadSampleXDocument(path);
             CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", document);
             var xml = document.ToString();
 
             var xmlProject = new XmlProgram(xml);
-            var project = new XmlProgramConverter().Convert(xmlProject);
+            var project = programConverter.Convert(xmlProject);
 
             var sprite = project.Sprites.Single();
             var brick = sprite.Scripts.SelectMany(script => script.Bricks).Single();

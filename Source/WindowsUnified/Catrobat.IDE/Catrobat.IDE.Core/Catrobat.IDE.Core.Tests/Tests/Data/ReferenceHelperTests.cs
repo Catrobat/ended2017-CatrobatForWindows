@@ -61,7 +61,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         [TestMethod, TestCategory("Data")]
         public void GetSpriteObjectTest()
         {
-            var program = CreateProgram().ToModel();
+            ProgramConverter programConverter = new ProgramConverter();
+            XmlProgram xmlProgram = CreateProgram();
+            Program program = programConverter.Convert(xmlProgram);
             var sprite = program.Sprites[1];
             var pointToBrick = sprite.Scripts[0].Bricks[2] as LookAtBrick;
 
