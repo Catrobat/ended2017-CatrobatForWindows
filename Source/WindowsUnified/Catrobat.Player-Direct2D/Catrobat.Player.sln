@@ -17,6 +17,24 @@ Global
 		Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{5930549f-4e41-4571-9cc0-b1cbedd35f60}*SharedItemsImports = 4
 		Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{efac7af6-4fa3-41a1-9632-697e4f3c48ed}*SharedItemsImports = 9
 	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Catrobat.Player\\Catrobat.Player.Shared\\Catrobat.Player.Shared.vcxitems
+		SccProjectTopLevelParentUniqueName1 = Catrobat.Player.sln
+		SccProjectName1 = Catrobat.Player/Catrobat.Player.Shared
+		SccLocalPath1 = Catrobat.Player\\Catrobat.Player.Shared
+		SccProjectUniqueName2 = Catrobat.Player\\Catrobat.Player.Windows\\Catrobat.Player.Windows.vcxproj
+		SccProjectTopLevelParentUniqueName2 = Catrobat.Player.sln
+		SccProjectName2 = Catrobat.Player/Catrobat.Player.Windows
+		SccLocalPath2 = Catrobat.Player\\Catrobat.Player.Windows
+		SccProjectUniqueName3 = Catrobat.Player\\Catrobat.Player.WindowsPhone\\Catrobat.Player.WindowsPhone.vcxproj
+		SccProjectTopLevelParentUniqueName3 = Catrobat.Player.sln
+		SccProjectName3 = Catrobat.Player/Catrobat.Player.WindowsPhone
+		SccLocalPath3 = Catrobat.Player\\Catrobat.Player.WindowsPhone
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
 		Debug|Win32 = Debug|Win32
