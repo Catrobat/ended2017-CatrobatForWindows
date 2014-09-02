@@ -9,7 +9,7 @@ using Catrobat.IDE.Core.XmlModelConvertion.Converters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.Models.CatrobatModels;
 
-namespace Catrobat.IDE.Core.Tests.Tests.Data
+namespace Catrobat.IDE.Core.Tests.Tests.XmlModelConvertion
 {
     [TestClass]
     public class XmlModelConversionTests

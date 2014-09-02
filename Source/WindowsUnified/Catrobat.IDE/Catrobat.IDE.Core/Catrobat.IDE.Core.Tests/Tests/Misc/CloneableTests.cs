@@ -22,9 +22,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
         [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_UpdateLookTest()
         {
-            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
-            var oldSprite = project.Sprites[0];
-            var newSprite = await oldSprite.CloneAsync(project);
+            var program = await SampleLoader.LoadSampleProject("default.catroid", "default");
+            var oldSprite = program.Sprites[0];
+            var newSprite = await oldSprite.CloneAsync(program);
 
             var oldLook = oldSprite.Looks[0];
             var newLook = newSprite.Looks[0];
@@ -41,9 +41,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
         [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_UpdateSoundTest()
         {
-            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
-            var oldSprite = project.Sprites[1];
-            var newSprite = await oldSprite.CloneAsync(project);
+            var program = await SampleLoader.LoadSampleProject("default.catroid", "default");
+            var oldSprite = program.Sprites[1];
+            var newSprite = await oldSprite.CloneAsync(program);
 
             var oldSound = oldSprite.Sounds[0];
             var newSound = newSprite.Sounds[0];
@@ -60,9 +60,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
         [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_CopyVariableOnSpriteCopyTest()
         {
-            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
-            var oldSprite = project.Sprites[0];
-            var newSprite = await oldSprite.CloneAsync(project);
+            var program = await SampleLoader.LoadSampleProject("default.catroid", "default");
+            var oldSprite = program.Sprites[0];
+            var newSprite = await oldSprite.CloneAsync(program);
 
             var oldLocalVariable = oldSprite.LocalVariables[0];
             var newLocalVariable = newSprite.LocalVariables[0];
@@ -76,11 +76,11 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
             Assert.AreSame(newLocalVariable, newBrick1.Variable);
 
 
-            oldSprite = project.Sprites[1];
-            newSprite = await oldSprite.CloneAsync(project);
+            oldSprite = program.Sprites[1];
+            newSprite = await oldSprite.CloneAsync(program);
             Assert.IsNotNull(newSprite);
 
-            var globalVariable = project.GlobalVariables[0];
+            var globalVariable = program.GlobalVariables[0];
 
             var oldBrick2 = oldSprite.Scripts[1].Bricks[5] as ChangeVariableBrick;
             var newBrick2 = newSprite.Scripts[1].Bricks[5] as ChangeVariableBrick;
@@ -94,9 +94,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
         [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_UpdateLoopBeginBrickTest()
         {
-            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
-            var oldSprite = project.Sprites[1];
-            var newSprite = await oldSprite.CloneAsync(project);
+            var program = await SampleLoader.LoadSampleProject("default.catroid", "default");
+            var oldSprite = program.Sprites[1];
+            var newSprite = await oldSprite.CloneAsync(program);
 
             var oldBlockBeginBrick = oldSprite.Scripts[0].Bricks[3] as BlockBeginBrick;
             var newBlockBeginBrick = newSprite.Scripts[0].Bricks[3] as BlockBeginBrick;
@@ -125,9 +125,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
         [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_UpdateBlockEndBrickTest()
         {
-            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
-            var oldSprite = project.Sprites[1];
-            var newSprite = await oldSprite.CloneAsync(project);
+            var program = await SampleLoader.LoadSampleProject("default.catroid", "default");
+            var oldSprite = program.Sprites[1];
+            var newSprite = await oldSprite.CloneAsync(program);
 
             var oldForeverBrick = oldSprite.Scripts[0].Bricks[3] as ForeverBrick;
             var newForeverBrick = newSprite.Scripts[0].Bricks[3] as ForeverBrick;
@@ -156,9 +156,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
         [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_UpdateIfBrickTest()
         {
-            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
-            var oldSprite = project.Sprites[0];
-            var newSprite = await oldSprite.CloneAsync(project);
+            var program = await SampleLoader.LoadSampleProject("default.catroid", "default");
+            var oldSprite = program.Sprites[0];
+            var newSprite = await oldSprite.CloneAsync(program);
 
             var oldIfBrick1 = oldSprite.Scripts[0].Bricks[3] as IfBrick;
             var newIfBrick1 = newSprite.Scripts[0].Bricks[3] as IfBrick;
@@ -204,9 +204,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
         [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_UpdateElseBrickTest()
         {
-            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
-            var oldSprite = project.Sprites[0];
-            var newSprite = await oldSprite.CloneAsync(project);
+            var program = await SampleLoader.LoadSampleProject("default.catroid", "default");
+            var oldSprite = program.Sprites[0];
+            var newSprite = await oldSprite.CloneAsync(program);
 
             var oldElseBrick1 = oldSprite.Scripts[0].Bricks[6] as ElseBrick;
             var newElseBrick1 = newSprite.Scripts[0].Bricks[6] as ElseBrick;
@@ -252,9 +252,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Misc
         [TestMethod, TestCategory("Data")]
         public async Task CloneSprite_UpdateEndIfBrickTest()
         {
-            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
-            var oldSprite = project.Sprites[0];
-            var newSprite = await oldSprite.CloneAsync(project);
+            var program = await SampleLoader.LoadSampleProject("default.catroid", "default");
+            var oldSprite = program.Sprites[0];
+            var newSprite = await oldSprite.CloneAsync(program);
 
             var oldEndIfBrick1 = oldSprite.Scripts[0].Bricks[5] as EndIfBrick;
             var newEndIfBrick1 = newSprite.Scripts[0].Bricks[5] as EndIfBrick;

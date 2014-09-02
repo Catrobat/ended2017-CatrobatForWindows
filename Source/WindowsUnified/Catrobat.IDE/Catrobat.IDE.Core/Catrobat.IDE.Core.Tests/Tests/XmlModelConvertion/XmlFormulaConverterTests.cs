@@ -13,7 +13,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Core.Tests.Tests.Xml.Converter
+namespace Catrobat.IDE.Core.Tests.Tests.XmlModelConvertion
 {
     /// <summary>Tests <see cref="XmlFormulaConverter" />. </summary>
     [TestClass]
@@ -28,7 +28,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Xml.Converter
             TestHelper.InitializeTests();
         }
 
-        [TestMethod, TestCategory("Xml.Converter"), TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("XmlModelConversion"), TestCategory("ExcludeGated")]
         public void TestCatroidNodes()
         {
             const string directory = "FormulaEditor/";
@@ -85,7 +85,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Xml.Converter
             TestConvert<FormulaNodeTrue>(directory + "true");
         }
 
-        [TestMethod, TestCategory("Xml.Converter"), TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("XmlModelConversion"), TestCategory("ExcludeGated")]
         public void TestPocketCodeFormulas()
         {
             var documents = Enumerable.Range(1, 16)
@@ -112,7 +112,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Xml.Converter
             }
         }
 
-        [TestMethod, TestCategory("Xml.Converter")]
+        [TestMethod, TestCategory("XmlModelConversion")]
         public void TestXmlFormulaTreeNodes()
         {
             var localVariable = new LocalVariable
@@ -144,7 +144,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Xml.Converter
                 formulas: formulas);
         }
 
-        [TestMethod, TestCategory("Xml.Converter")]
+        [TestMethod, TestCategory("XmlModelConversion")]
         public void TestFormulaTreeNodes()
         {
             var localVariable = new LocalVariable

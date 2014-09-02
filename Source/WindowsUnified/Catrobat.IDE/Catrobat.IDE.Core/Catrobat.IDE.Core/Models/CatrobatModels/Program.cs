@@ -5,7 +5,7 @@ using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models.CatrobatModels;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.Xml.Converter;
+using Catrobat.IDE.Core.XmlModelConvertion.Converters;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
 
@@ -141,7 +141,8 @@ namespace Catrobat.IDE.Core.Models
 
         public async Task Save(string path = null)
         {
-            var xmlProject = new XmlProgramConverter().ConvertBack(this);
+            ProgramConverter programConverter = new ProgramConverter();
+            var xmlProject = programConverter.Convert(this);
             await xmlProject.Save(path);
         }
 

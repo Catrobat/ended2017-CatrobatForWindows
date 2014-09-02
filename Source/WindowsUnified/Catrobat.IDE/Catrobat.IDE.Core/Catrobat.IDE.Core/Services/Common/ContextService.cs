@@ -10,9 +10,9 @@ using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Xml;
-using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using System.Text.RegularExpressions;
+using Catrobat.IDE.Core.XmlModelConvertion.Converters;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
@@ -87,7 +87,8 @@ namespace Catrobat.IDE.Core.Services.Common
             Program program = null;
             try
             {
-                program = new XmlProgramConverter().Convert(await LoadXmlProgramByName(programName));
+                ProgramConverter programConverter = new ProgramConverter();
+                program = programConverter.Convert(await LoadXmlProgramByName(programName));
             }
             catch (Exception)
             {
@@ -204,7 +205,8 @@ namespace Catrobat.IDE.Core.Services.Common
                 newProject.ProjectHeader.ProgramName = newProgramName;
                 await newProject.Save();
 
-                return new XmlProgramConverter().Convert(newProject);
+                ProgramConverter programConverter = new ProgramConverter();
+                return programConverter.Convert(newProject);
             }
         }
 

@@ -4,10 +4,10 @@ using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.VersionConverter.Versions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Core.Tests.Tests.Data
+namespace Catrobat.IDE.Core.Tests.Tests.Xml.VersionConverter
 {
     [TestClass]
-    public class VersionConverter092To091
+    public class VersionConverter091To092
     {
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod, TestCategory("ExcludeGated")]
+        [TestMethod, TestCategory("Xml.VersionConverter"), TestCategory("ExcludeGated")]
         public void ObjectReferences()
         {
             TestSampleData("Converter/092_091/Test1");
@@ -23,8 +23,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
         private void TestSampleData(string path)
         {
-            var actualDocument = SampleLoader.LoadSampleXDocument(path + "_Input");
-            var expectedDocument = SampleLoader.LoadSampleXDocument(path + "_Output");
+            var actualDocument = SampleLoader.LoadSampleXDocument(path + "_Output");
+            var expectedDocument = SampleLoader.LoadSampleXDocument(path + "_Input");
 
 
             var error = CatrobatVersionConverter.ConvertVersions(

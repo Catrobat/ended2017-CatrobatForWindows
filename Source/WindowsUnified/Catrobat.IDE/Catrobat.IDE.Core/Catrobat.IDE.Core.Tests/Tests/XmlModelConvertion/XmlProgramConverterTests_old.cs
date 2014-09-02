@@ -11,7 +11,7 @@
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 //using Catrobat.IDE.Core.Tests.Extensions;
 
-//namespace Catrobat.IDE.Core.Tests.Tests.Xml.Converter
+//namespace Catrobat.IDE.Core.Tests.Tests.XmlModelConvertion
 //{
 //    /// <summary>Tests <see cref="XmlProgramConverter" />. </summary>
 //    [TestClass]

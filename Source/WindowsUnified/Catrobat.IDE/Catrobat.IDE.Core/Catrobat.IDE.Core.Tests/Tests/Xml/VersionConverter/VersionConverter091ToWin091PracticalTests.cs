@@ -4,7 +4,7 @@ using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Core.Tests.Tests.Data
+namespace Catrobat.IDE.Core.Tests.Tests.Xml.VersionConverter
 {
     [TestClass]
     public class VersionConverter091ToWin091PracticalTests
@@ -17,98 +17,98 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
         #region Examples from PocketCode.com
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode01()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test1Input");
         }
 
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode02()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test2Input");
         }
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode03()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test3Input");
         }
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode04()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test4Input");
         }
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode05()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test5Input");
         }
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode06()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test6Input");
         }
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode07()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test7Input");
         }
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode08()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test8Input");
         }
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode09()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test9Input");
         }
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode10()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test10Input");
         }
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode11()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test11Input");
         }
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode12()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test12Input");
         }
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode13()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test13Input");
         }
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode14()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test14Input");
         }
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode15()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test15Input");
         }
 
-        [TestMethod, TestCategory("Data")]
+        [TestMethod, TestCategory("Xml.VersionConverter")]
         public void PocketCode16()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test16Input");
