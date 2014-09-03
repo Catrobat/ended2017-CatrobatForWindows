@@ -138,10 +138,6 @@ namespace Catrobat.IDE.WindowsShared.Services
             }
             else
             {
-                //throw new NotImplementedException("Create empty image here");
-                // TODO: create empty image with the same dimensions as the devices width and heigt
-
-
                 var imageWidth = ServiceLocator.SystemInformationService.ScreenWidth;
                 var imageHeight = ServiceLocator.SystemInformationService.ScreenHeight;
 
@@ -185,8 +181,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             try
             {
-                bool success = await Windows.System.Launcher.
-                    LaunchFileAsync(file, options);
+                bool success = await Windows.System.Launcher.LaunchFileAsync(file, options);
                 if (success)
                 {
                     // File launch OK
