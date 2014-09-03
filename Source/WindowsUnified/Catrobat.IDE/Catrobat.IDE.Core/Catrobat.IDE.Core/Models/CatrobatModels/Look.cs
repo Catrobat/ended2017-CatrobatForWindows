@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models.CatrobatModels;
@@ -38,7 +39,12 @@ namespace Catrobat.IDE.Core.Models
                     try
                     {
                         _image = new PortableImage();
-                        var fileName = XmlParserTempProjectHelper.Project.BasePath + "/" + StorageConstants.ProgramLooksPath + "/" + _fileName;
+                        var fileName = Path.Combine(StorageConstants.ProgramsPath,
+                            XmlParserTempProjectHelper.Project.ProjectHeader.ProgramName,
+                            StorageConstants.ProgramLooksPath, _fileName);
+                            
+                            //XmlParserTempProjectHelper.Project.BasePath + "/" + 
+                            //StorageConstants.ProgramLooksPath + "/" + _fileName;
                         _image.LoadAsync(fileName, null, false);
 
                         //using (var storage = StorageSystem.GetStorage())

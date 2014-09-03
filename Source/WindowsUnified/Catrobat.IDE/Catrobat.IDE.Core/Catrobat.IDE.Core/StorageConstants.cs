@@ -26,7 +26,6 @@ namespace Catrobat.IDE.Core
             }
         }
 
-
         // Program temporary paths
         public const string TempProgramImportZipPath = "Temp\\ImportProgramZip";
         public const string TempProgramImportPath = "Temp\\ImportProgram";

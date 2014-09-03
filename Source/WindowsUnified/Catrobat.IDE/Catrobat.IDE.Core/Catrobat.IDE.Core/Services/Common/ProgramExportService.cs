@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
             var tempPath = Path.Combine(StorageConstants.TempProgramExportPath, programName);
             var programFolderPath = Path.Combine(StorageConstants.ProgramsPath, programName);
-            var projectCodePath = Path.Combine(tempPath, StorageConstants.ProgramCodePath);
+            var programCodePath = Path.Combine(tempPath, StorageConstants.ProgramCodePath);
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -25,8 +25,10 @@ namespace Catrobat.IDE.Core.Services.Common
 
                 await storage.CopyDirectoryAsync(programFolderPath, tempPath);
 
+                var programCode = await storage.ReadTextFileAsync(programCodePath);
+
                 var converterResult = await CatrobatVersionConverter.
-                ConvertToXmlVersion(projectCodePath, Constants.TargetOutputVersion);
+                ConvertToXmlVersion(programCode, XmlConstants.TargetOutputVersion);
 
                 if (converterResult.Error != CatrobatVersionConverter.VersionConverterStatus.NoError)
                     return null;

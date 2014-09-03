@@ -114,17 +114,17 @@
     <Compile Include="Services\Storage\StorageFactoryTest.cs" />
     <Compile Include="Services\Storage\StorageTest.cs" />
     <Compile Include="Tests\Data\DataDeletingTests.cs" />
-    <Compile Include="Tests\Data\XmlModelConversionTests.cs" />
+    <Compile Include="Tests\XmlModelConvertion\XmlModelConversionTests.cs" />
     <Compile Include="Tests\Data\DataEqualsTests.cs" />
     <Compile Include="Tests\Data\DataReflectionTests.cs" />
     <Compile Include="Tests\Data\ReferenceHelperTests.cs" />
     <Compile Include="Tests\Data\ScriptBrickCollectionTests.cs" />
     <Compile Include="Tests\Data\VariableHelperTests.cs" />
-    <Compile Include="Tests\Data\VersionConverter\VersionConverter091To092.cs" />
-    <Compile Include="Tests\Data\VersionConverter\VersionConverter091ToWin091PracticalTests.cs" />
-    <Compile Include="Tests\Data\VersionConverter\VersionConverterWin091To091Tests.cs" />
-    <Compile Include="Tests\Data\VersionConverter\VersionConverter092To091.cs" />
-    <Compile Include="Tests\Data\VersionConverter\VersionConverter091ToWin091Tests.cs" />
+    <Compile Include="Tests\Xml\VersionConverter\VersionConverter091To092.cs" />
+    <Compile Include="Tests\Xml\VersionConverter\VersionConverter091ToWin091PracticalTests.cs" />
+    <Compile Include="Tests\Xml\VersionConverter\VersionConverterWin091To091Tests.cs" />
+    <Compile Include="Tests\Xml\VersionConverter\VersionConverter092To091.cs" />
+    <Compile Include="Tests\Xml\VersionConverter\VersionConverter091ToWin091Tests.cs" />
     <Compile Include="Tests\Data\XPathHelperTests.cs" />
     <Compile Include="Tests\Misc\CloneableTests.cs" />
     <Compile Include="Tests\Services\Common\ContextServiceTests.cs" />
@@ -164,8 +164,8 @@
     <Compile Include="Tests\ViewModels\Main\InformationViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\Main\ProgramExportViewModelTests.cs" />
     <Compile Include="Tests\ViewModels\MessagingForViewModelsTests.cs" />
-    <Compile Include="Tests\Xml\Converter\XmlFormulaTreeConverterTests.cs" />
-    <Compile Include="Tests\Xml\Converter\XmlProjectConverterTests.cs" />
+    <Compile Include="Tests\XmlModelConvertion\XmlFormulaConverterTests.cs" />
+    <Compile Include="Tests\XmlModelConvertion\XmlProgramConverterTests_old.cs" />
     <Compile Include="Tests\Misc\FileNameGeneratorTests.cs" />
     <Compile Include="Tests\Misc\LocalizationTests.cs" />
     <Compile Include="Tests\Services\Common\WebCommunicationTests.cs" />
@@ -197,6 +197,10 @@
     <Compile Include="Tests\ViewModels\Settings\SettingsViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Catrobat.Xml\Catrobat.Xml.csproj">
+      <Project>{72bd1c16-1242-49a4-995f-428e1a801551}</Project>
+      <Name>Catrobat.Xml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Catrobat.IDE.Core\Catrobat.IDE.Core.csproj">
       <Project>{bca5086e-499a-4507-aa9b-a55d7e534ef7}</Project>
       <Name>Catrobat.IDE.Core</Name>
@@ -309,7 +313,9 @@
     </Content>
     <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Tests\Xml\Converter\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

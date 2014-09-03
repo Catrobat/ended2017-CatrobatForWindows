@@ -11,8 +11,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using Catrobat.IDE.Core.ViewModels.Main;
-using Catrobat.IDE.Core.Xml.VersionConverter;
 using Newtonsoft.Json;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;

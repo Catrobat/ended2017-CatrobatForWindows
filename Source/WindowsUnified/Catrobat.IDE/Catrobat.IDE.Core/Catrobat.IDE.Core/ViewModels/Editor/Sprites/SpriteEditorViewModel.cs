@@ -947,7 +947,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
                 foreach (var look in looksToRemove)
                 {
-                    ReferenceHelper.CleanUpLookReferences(look, SelectedSprite);
+                    ReferenceCleaner.CleanUpLookReferences(look, SelectedSprite);
 
                     await look.Delete(CurrentProgram);
                     Looks.Remove(look);
@@ -963,7 +963,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
                 foreach (var sound in soundsToRemove)
                 {
-                    ReferenceHelper.CleanUpSoundReferences(sound, SelectedSprite);
+                    ReferenceCleaner.CleanUpSoundReferences(sound, SelectedSprite);
 
                     await sound.Delete(CurrentProgram);
                     Sounds.Remove(sound);

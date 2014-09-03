@@ -12,8 +12,6 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
 {
     public class VariableConverter<TVariable> : XmlModelConverter<XmlUserVariable, TVariable> where TVariable : Variable
     {
-        public VariableConverter() { }
-
         public override TVariable Convert(XmlUserVariable o, XmlModelConvertContext c)
         {
             var variable = (TVariable)Activator.CreateInstance(typeof(TVariable));

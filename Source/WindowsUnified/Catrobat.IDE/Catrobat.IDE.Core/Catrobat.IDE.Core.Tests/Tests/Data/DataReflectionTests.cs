@@ -4,7 +4,7 @@ using Catrobat.IDE.Core.Tests.Extensions;
 using Catrobat.IDE.Core.Tests.Misc;
 using Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators;
 using Catrobat.IDE.Core.Tests.Services.Storage;
-using Catrobat.IDE.Core.Xml.Converter;
+using Catrobat.IDE.Core.XmlModelConvertion.Converters;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -35,7 +35,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
                 xml1 = storage.ReadTextFile(savePath);
             }
 
-            var project2 = new XmlProgramConverter().Convert(new XmlProgram(xml1));
+            ProgramConverter programConverter = new ProgramConverter();
+            var project2 = programConverter.Convert(new XmlProgram(xml1));
 
             ModelAssert.AreTestEqual(project1, project2);
         }

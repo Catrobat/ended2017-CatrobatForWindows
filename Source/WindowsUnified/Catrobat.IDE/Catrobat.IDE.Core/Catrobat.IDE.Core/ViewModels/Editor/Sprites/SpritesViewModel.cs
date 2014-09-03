@@ -270,7 +270,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
                 foreach (var sprite in spritesToDelete)
                 {
-                    ReferenceHelper.CleanUpSpriteReferences(sprite, CurrentProgram);
+                    ReferenceCleaner.CleanUpSpriteReferences(sprite, CurrentProgram);
 
                     CurrentProgram.Sprites.Remove(sprite);
                     sprite.Delete(CurrentProgram);

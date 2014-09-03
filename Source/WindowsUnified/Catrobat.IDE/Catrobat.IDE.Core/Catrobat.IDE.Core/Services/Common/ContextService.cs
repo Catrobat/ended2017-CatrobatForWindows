@@ -5,14 +5,16 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Xml;
-using Catrobat.IDE.Core.Xml.Converter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using System.Text.RegularExpressions;
+using Catrobat.IDE.Core.XmlModelConvertion.Converters;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
@@ -87,7 +89,8 @@ namespace Catrobat.IDE.Core.Services.Common
             Program program = null;
             try
             {
-                program = new XmlProgramConverter().Convert(await LoadXmlProgramByName(programName));
+                ProgramConverter programConverter = new ProgramConverter();
+                program = programConverter.Convert(await LoadXmlProgramByName(programName));
             }
             catch (Exception)
             {
@@ -131,7 +134,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 var xml = await storage.ReadTextFileAsync(tempPath);
 
                 var programVersion = XmlProgramHelper.GetProgramVersion(xml);
-                if (programVersion != Constants.TargetIDEVersion)
+                if (programVersion != XmlConstants.TargetIDEVersion)
                 {
                     // this should happen when the app version was outdated when the program was added
                     // TODO: implement me
@@ -200,11 +203,20 @@ namespace Catrobat.IDE.Core.Services.Common
 
                 var tempXmlPath = Path.Combine(destinationPath, StorageConstants.ProgramCodePath);
                 var xml = await storage.ReadTextFileAsync(tempXmlPath);
-                var newProject = new XmlProgram(xml);
-                newProject.ProjectHeader.ProgramName = newProgramName;
-                await newProject.Save();
+                var xmlProgram = new XmlProgram(xml)
+                {
+                    ProjectHeader = {ProgramName = newProgramName}
+                };
 
-                return new XmlProgramConverter().Convert(newProject);
+                var path = Path.Combine(StorageConstants.ProgramsPath, 
+                    newProgramName, StorageConstants.ProgramCodePath);
+                var programConverter = new ProgramConverter();
+                var program = programConverter.Convert(xmlProgram);
+
+                var xmlString = xmlProgram.ToXmlString();
+                await storage.WriteTextFileAsync(path, xmlString);
+                
+                return program;
             }
         }
 
@@ -284,12 +296,12 @@ namespace Catrobat.IDE.Core.Services.Common
             program.ProjectHeader.ApplicationBuildNumber = ServiceLocator.
                 SystemInformationService.CurrentApplicationBulidNumber;
 
-            program.ProjectHeader.ApplicationName = Constants.ApplicationName;
+            program.ProjectHeader.ApplicationName = XmlConstants.ApplicationName;
 
             program.ProjectHeader.ApplicationVersion = ServiceLocator.
                 SystemInformationService.CurrentApplicationVersion;
 
-            program.ProjectHeader.CatrobatLanguageVersion = Constants.TargetOutputVersion;
+            program.ProjectHeader.CatrobatLanguageVersion = XmlConstants.TargetOutputVersion;
 
             program.ProjectHeader.DeviceName = ServiceLocator.
                 SystemInformationService.DeviceName;

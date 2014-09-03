@@ -12,6 +12,7 @@ using Catrobat.IDE.Core.Tests.Misc;
 using Catrobat.IDE.Core.Tests.SampleData;
 using Catrobat.IDE.Core.Tests.SampleData.ProgramGenerators;
 using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.XmlModelConvertion.Converters;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Looks;
@@ -60,7 +61,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         [TestMethod, TestCategory("Data")]
         public void GetSpriteObjectTest()
         {
-            var program = CreateProgram().ToModel();
+            ProgramConverter programConverter = new ProgramConverter();
+            XmlProgram xmlProgram = CreateProgram();
+            Program program = programConverter.Convert(xmlProgram);
             var sprite = program.Sprites[1];
             var pointToBrick = sprite.Scripts[0].Bricks[2] as LookAtBrick;
 
@@ -432,8 +435,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         private static XmlProgram CreateProgram()
         {
             var originalProgram = ProjectGenerator.GenerateProgram();
-            var projectString = originalProgram.ToXmlObject().ToXmlString();
-            return new XmlProgram(projectString);
+            ProgramConverter programConverter = new ProgramConverter();
+            var convertedProgram =  programConverter.Convert(originalProgram);
+            var projectString = convertedProgram.ToXmlString();
+            return new XmlProgram(projectString);  // now XmlProgram includes references
         }
     }
 }

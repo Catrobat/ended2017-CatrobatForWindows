@@ -3,6 +3,8 @@ using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models.CatrobatModels;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
 
+using System.Diagnostics;
+
 namespace Catrobat.IDE.Core.Models.Bricks
 {
     public abstract partial class Brick : CatrobatModelBase, IBrick

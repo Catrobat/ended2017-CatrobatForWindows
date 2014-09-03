@@ -34,13 +34,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{84F329
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Xml", "Catrobat.Xml\Catrobat.Xml.csproj", "{72BD1C16-1242-49A4-995F-428E1A801551}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Catrobat.IDE.Windows\Catrobat.IDE.Shared\Catrobat.IDE.Shared.projitems*{3b531ab1-3f3f-4488-94a2-ba82130af471}*SharedItemsImports = 4
 		Catrobat.IDE.Windows\Catrobat.IDE.Shared\Catrobat.IDE.Shared.projitems*{468b150b-e23c-49f8-bc4c-4d535169fbbc}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 11
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -80,6 +82,10 @@ Global
 		SccProjectTopLevelParentUniqueName9 = Catrobat.IDE.sln
 		SccProjectName9 = Catrobat.IDE.Core/Catrobat.IDE.Core.Tests
 		SccLocalPath9 = Catrobat.IDE.Core\\Catrobat.IDE.Core.Tests
+		SccProjectUniqueName10 = Catrobat.Xml\\Catrobat.Xml.csproj
+		SccProjectTopLevelParentUniqueName10 = Catrobat.IDE.sln
+		SccProjectName10 = Catrobat.Xml
+		SccLocalPath10 = Catrobat.Xml
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -351,6 +357,30 @@ Global
 		{37893166-9D6C-46FB-A2C9-85E31834AEEB}.TFSBuild|Win32.Build.0 = Release|Any CPU
 		{37893166-9D6C-46FB-A2C9-85E31834AEEB}.TFSBuild|x64.ActiveCfg = Release|Any CPU
 		{37893166-9D6C-46FB-A2C9-85E31834AEEB}.TFSBuild|x86.ActiveCfg = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Release|ARM.ActiveCfg = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Release|Win32.ActiveCfg = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Release|x64.ActiveCfg = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.Release|x86.ActiveCfg = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.TFSBuild|Any CPU.ActiveCfg = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.TFSBuild|Any CPU.Build.0 = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.TFSBuild|ARM.ActiveCfg = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.TFSBuild|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.TFSBuild|Mixed Platforms.Build.0 = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.TFSBuild|Win32.ActiveCfg = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.TFSBuild|x64.ActiveCfg = Release|Any CPU
+		{72BD1C16-1242-49A4-995F-428E1A801551}.TFSBuild|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -366,5 +396,6 @@ Global
 		{19EE3B04-3515-477A-9CE0-13ABE8085E5D} = {F54071BB-5865-4810-8B74-884A0990223C}
 		{3A72F13F-4375-462F-92FA-8BFBA06C3933} = {F54071BB-5865-4810-8B74-884A0990223C}
 		{37893166-9D6C-46FB-A2C9-85E31834AEEB} = {31B8308F-3B93-4AE9-99CE-8350D49299F1}
+		{72BD1C16-1242-49A4-995F-428E1A801551} = {F2BEDED6-635B-4953-BE4C-83035FFF76A1}
 	EndGlobalSection
 EndGlobal

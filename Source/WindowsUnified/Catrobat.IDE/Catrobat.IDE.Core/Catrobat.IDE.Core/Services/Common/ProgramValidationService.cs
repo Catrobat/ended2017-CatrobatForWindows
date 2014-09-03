@@ -12,6 +12,7 @@ using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Xml;
 using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
+using Catrobat.IDE.Core.XmlModelConvertion.Converters;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
@@ -25,6 +26,7 @@ namespace Catrobat.IDE.Core.Services.Common
             var checkResult = new CheckProgramResult();
             PortableImage projectScreenshot = null;
             string programName = null;
+            string programCode = null;
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -35,10 +37,14 @@ namespace Catrobat.IDE.Core.Services.Common
                     await storage.LoadImageAsync(Path.Combine(
                     pathToProgramDirectory,
                     StorageConstants.ProgramAutomaticScreenshotPath));
+
+                programCode = await storage.ReadTextFileAsync(pathToProgramCodeFile);
             }
 
+
+
             var converterResult = await CatrobatVersionConverter.
-                ConvertToXmlVersion(pathToProgramCodeFile, Constants.TargetIDEVersion);
+                ConvertToXmlVersion(programCode, XmlConstants.TargetIDEVersion);
 
             if (converterResult.Error != CatrobatVersionConverter.VersionConverterStatus.NoError)
             {
@@ -61,7 +67,6 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 convertedProgram = new XmlProgram(converterResult.Xml);
                 programName = convertedProgram.ProjectHeader.ProgramName;
-                //checkResult.Program = convertedProgram.ToModel();
             }
             catch (Exception)
             {
@@ -73,7 +78,8 @@ namespace Catrobat.IDE.Core.Services.Common
 
             try
             {
-                checkResult.Program = convertedProgram.ToModel();
+                ProgramConverter programConverter = new ProgramConverter();
+                checkResult.Program = programConverter.Convert(convertedProgram);
             }
             catch (Exception)
             {
