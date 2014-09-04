@@ -193,7 +193,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             this.clvw.ItemDragCompletedEvent -= clvw_ItemDragCompletedEvent;
             this.clvw.ItemSelectionChangedEvent -= clvw_ItemSelectionChangedEvent;
 
-            this.clvw = null;
+            //this.clvw = null;
             GC.Collect();
 
         }
