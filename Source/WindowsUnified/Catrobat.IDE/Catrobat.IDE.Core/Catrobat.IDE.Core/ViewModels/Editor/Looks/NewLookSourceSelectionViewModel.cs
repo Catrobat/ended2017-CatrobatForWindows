@@ -35,11 +35,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
         public async Task OpenGalleryAction()
         {
             ServiceLocator.PictureService.ChoosePictureFromLibraryAsync();
-            //var result = await ServiceLocator.PictureService.ChoosePictureFromLibraryAsync();
-            //if (result.Status == PictureServiceStatus.Success)
-            //    PictureSuccess(result.Image);
-            //else if (result.Status == PictureServiceStatus.Error)
-            //    PictureError();
         }
 
         public async Task OpenCameraAction()
@@ -54,18 +49,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
         private async Task OpenPaintAction()
         {
-            await ServiceLocator.PictureService.DrawPictureAsync();
-            //var result = await ServiceLocator.PictureService.DrawPictureAsync();
-
-            //ServiceLocator.DispatcherService.RunOnMainThread(() => 
-            //    ServiceLocator.NavigationService.RemoveBackEntry());
-            
-            //if (result.Status == PictureServiceStatus.Success)
-            //    PictureSuccess(result.Image);
-            //else if (result.Status == PictureServiceStatus.Error)
-            //    PictureError();
-
-            
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                    ServiceLocator.PictureService.DrawPictureAsync());
         }
 
         #endregion

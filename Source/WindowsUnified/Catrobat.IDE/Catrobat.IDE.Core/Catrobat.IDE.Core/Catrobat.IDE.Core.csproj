@@ -263,7 +263,6 @@
     <Compile Include="Models\CatrobatModels\Scripts\EventScript.cs" />
     <Compile Include="Models\CatrobatModels\Sound.cs" />
     <Compile Include="Models\CatrobatModels\Variable.cs" />
-    <Compile Include="Xml_Old\Converter\IModelConvertible.cs" />
     <Compile Include="Xml_Old\Converter\IXmlObjectConvertible.cs" />
     <Compile Include="Xml_Old\Converter\Models\Formulas\Tree\FormulaTree.cs" />
     <Compile Include="Xml_Old\Converter\Models\Formulas\Tree\BinaryFormulaTree.cs" />
@@ -482,9 +481,7 @@
       <Name>Catrobat.Xml</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Xml_New\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />
