@@ -33,9 +33,10 @@ public:
 
 	~Project();
 
-    void								Render(ID2D1DeviceContext1* deviceContext);
+    void								Render(const std::shared_ptr<DX::DeviceResources>& deviceResources);
     void								LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceResources);
-	void								StartUp();
+    void                                SetupWindowSizeDependentResources(const std::shared_ptr<DX::DeviceResources>& deviceResources);
+    void								StartUp();
 
 	// Getters for Project Header
 	int									GetScreenHeight();

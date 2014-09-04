@@ -10,7 +10,7 @@ using namespace Windows::Foundation;
 class BaseObject
 {
 public:
-    virtual void Draw(ID2D1DeviceContext1* deviceContext) = 0;
+    virtual void Draw(const std::shared_ptr<DX::DeviceResources>& deviceResources) = 0;
 
 protected:
 	BaseObject(float scaleX = 1, float scaleY = 1);
