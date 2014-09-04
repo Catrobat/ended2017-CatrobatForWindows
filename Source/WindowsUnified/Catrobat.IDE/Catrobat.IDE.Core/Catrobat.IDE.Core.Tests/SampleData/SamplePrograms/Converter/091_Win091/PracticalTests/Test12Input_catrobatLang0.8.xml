@@ -1,25 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <program>
   <header>
-    <applicationBuildName/>
+    <applicationBuildName></applicationBuildName>
     <applicationBuildNumber>0</applicationBuildNumber>
-    <applicationName>Pocket Code</applicationName>
-    <applicationVersion>0.9.4</applicationVersion>
-    <catrobatLanguageVersion>0.91</catrobatLanguageVersion>
-    <dateTimeUpload/>
+    <applicationName>Catroid</applicationName>
+    <applicationVersion>0.7.0beta</applicationVersion>
+    <catrobatLanguageVersion>0.8</catrobatLanguageVersion>
+    <dateTimeUpload></dateTimeUpload>
     <description>Control the ship by tilting the phone and shoot down as many enemies as possible.</description>
-    <deviceName>B1-710</deviceName>
+    <deviceName>Nexus 4</deviceName>
     <mediaLicense>http://developer.catrobat.org/ccbysa_v3</mediaLicense>
     <platform>Android</platform>
-    <platformVersion>16</platformVersion>
+    <platformVersion>17</platformVersion>
     <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
     <programName>Galaxy War</programName>
-    <remixOf>http://pocketcode.org/details/719</remixOf>
+    <remixOf>https://pocketcode.org/details/719</remixOf>
     <screenHeight>1184</screenHeight>
     <screenWidth>768</screenWidth>
-    <tags/>
-    <url>http://pocketcode.org/details/1011</url>
-    <userHandle>cinekid</userHandle>
+    <tags></tags>
+    <url>http://pocketcode.org/details/719</url>
+    <userHandle>DavidR</userHandle>
   </header>
   <objectList>
     <object>
@@ -29,7 +29,7 @@
           <name>Space_Background_bigger</name>
         </look>
       </lookList>
-      <name>Achtergrond</name>
+      <name>Hintergrund</name>
       <scriptList>
         <startScript>
           <brickList>
@@ -66,10 +66,6 @@
               <object reference="../../../../.."/>
               <broadcastMessage>gameOver</broadcastMessage>
             </broadcastBrick>
-            <noteBrick>
-              <object reference="../../../../.."/>
-              <note>hier commentaar toevoegen …</note>
-            </noteBrick>
             <ifLogicBeginBrick>
               <object reference="../../../../.."/>
               <ifCondition>
@@ -1032,7 +1028,7 @@
             </ifLogicBeginBrick>
             <noteBrick>
               <object reference="../../../../.."/>
-              <note>Place somewhere outside the screen so laserbeam can't hit again.</note>
+              <note>Place somewhere outside the screen so laserbeam can&apos;t hit again.</note>
             </noteBrick>
             <changeVariableBrick>
               <object reference="../../../../.."/>
@@ -1422,7 +1418,7 @@
             </ifLogicBeginBrick>
             <noteBrick>
               <object reference="../../../../.."/>
-              <note>Place somewhere outside the screen so laserbeam can't hit again.</note>
+              <note>Place somewhere outside the screen so laserbeam can&apos;t hit again.</note>
             </noteBrick>
             <changeVariableBrick>
               <object reference="../../../../.."/>
@@ -1812,7 +1808,7 @@
             </ifLogicBeginBrick>
             <noteBrick>
               <object reference="../../../../.."/>
-              <note>Place somewhere outside the screen so laserbeam can't hit again.</note>
+              <note>Place somewhere outside the screen so laserbeam can&apos;t hit again.</note>
             </noteBrick>
             <changeVariableBrick>
               <object reference="../../../../.."/>
@@ -2202,7 +2198,7 @@
             </ifLogicBeginBrick>
             <noteBrick>
               <object reference="../../../../.."/>
-              <note>Place somewhere outside the screen so laserbeam can't hit again.</note>
+              <note>Place somewhere outside the screen so laserbeam can&apos;t hit again.</note>
             </noteBrick>
             <changeVariableBrick>
               <object reference="../../../../.."/>
@@ -2345,15 +2341,11 @@
         <list/>
       </entry>
       <entry>
-        <object reference="../../../../objectList/object[4]"/>
-        <list/>
-      </entry>
-      <entry>
-        <object reference="../../../../objectList/object[3]"/>
-        <list/>
-      </entry>
-      <entry>
         <object reference="../../../../objectList/object[5]"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[4]"/>
         <list/>
       </entry>
       <entry>
@@ -2362,6 +2354,10 @@
       </entry>
       <entry>
         <object reference="../../../../objectList/object[7]"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[3]"/>
         <list/>
       </entry>
     </objectVariableList>

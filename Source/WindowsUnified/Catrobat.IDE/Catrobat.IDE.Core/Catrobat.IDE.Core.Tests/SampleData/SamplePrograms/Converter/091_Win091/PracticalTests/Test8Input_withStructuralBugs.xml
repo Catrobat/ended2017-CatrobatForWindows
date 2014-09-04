@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <program>
   <header>
     <applicationBuildName/>
@@ -424,7 +424,7 @@
             </setSizeToBrick>
             <foreverBrick>
               <object reference="../../../../.."/>
-              <loopEndBrick class="loopEndlessBrick">
+              <loopEndBrick>
                 <object reference="../../../../../.."/>
                 <loopBeginBrick class="foreverBrick" reference="../.."/>
               </loopEndBrick>
@@ -562,7 +562,7 @@
               <object reference="../../../../.."/>
             </hideBrick>
             <ifLogicEndBrick reference="../ifLogicBeginBrick/ifElseBrick/ifEndBrick"/>
-            <loopEndlessBrick reference="../foreverBrick/loopEndBrick"/>
+            <loopEndBrick reference="../foreverBrick/loopEndBrick"/>
           </brickList>
           <object reference="../../.."/>
           <receivedMessage>start</receivedMessage>
@@ -669,7 +669,7 @@
             </setSizeToBrick>
             <foreverBrick>
               <object reference="../../../../.."/>
-              <loopEndBrick class="loopEndlessBrick">
+              <loopEndBrick>
                 <object reference="../../../../../.."/>
                 <loopBeginBrick class="foreverBrick" reference="../.."/>
               </loopEndBrick>
@@ -815,7 +815,7 @@
               <object reference="../../../../.."/>
             </hideBrick>
             <ifLogicEndBrick reference="../ifLogicBeginBrick/ifElseBrick/ifEndBrick"/>
-            <loopEndlessBrick reference="../foreverBrick/loopEndBrick"/>
+            <loopEndBrick reference="../foreverBrick/loopEndBrick"/>
           </brickList>
           <object reference="../../.."/>
           <receivedMessage>start</receivedMessage>
@@ -922,7 +922,7 @@
             </setSizeToBrick>
             <foreverBrick>
               <object reference="../../../../.."/>
-              <loopEndBrick class="loopEndlessBrick">
+              <loopEndBrick>
                 <object reference="../../../../../.."/>
                 <loopBeginBrick class="foreverBrick" reference="../.."/>
               </loopEndBrick>
@@ -1068,7 +1068,7 @@
               <object reference="../../../../.."/>
             </hideBrick>
             <ifLogicEndBrick reference="../ifLogicBeginBrick/ifElseBrick/ifEndBrick"/>
-            <loopEndlessBrick reference="../foreverBrick/loopEndBrick"/>
+            <loopEndBrick reference="../foreverBrick/loopEndBrick"/>
           </brickList>
           <object reference="../../.."/>
           <receivedMessage>start</receivedMessage>

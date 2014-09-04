@@ -208,6 +208,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="SampleData\SamplePrograms\Converter\091_Win091\PracticalTests\Test12Input_catrobatLang0.8.xml" />
+    <Content Include="SampleData\SamplePrograms\Converter\091_Win091\PracticalTests\Test13Input_catrobatLang0.8.xml" />
+    <Content Include="SampleData\SamplePrograms\Converter\091_Win091\PracticalTests\Test8Input_withStructuralBugs.xml" />
     <Content Include="SampleData\SamplePrograms\default.catroid" />
     <None Include="SampleData\SamplePrograms\test.catroid" />
   </ItemGroup>
