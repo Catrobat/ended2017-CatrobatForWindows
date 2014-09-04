@@ -161,10 +161,12 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         {
             var isClickEnabled =/* ListViewLooks.ReorderEnabled == ListViewReorderMode.Disabled &&
                                  */ListViewLooks.SelectionMode == ListViewSelectionMode.None;
-
             if (isClickEnabled)
-                if( _viewModel.EditLookCommand.CanExecute(((FrameworkElement)sender).DataContext))
-                    _viewModel.EditLookCommand.Execute(((FrameworkElement)sender).DataContext);
+            {
+                if (_viewModel.EditLookCommand.CanExecute(((FrameworkElement)e.OriginalSource).DataContext))
+                    _viewModel.EditLookCommand.Execute(((FrameworkElement)e.OriginalSource).DataContext);
+
+            }
         }
 
         private void SoundItem_OnTapped(object sender, TappedRoutedEventArgs e)
@@ -173,8 +175,8 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
                                  ListViewSounds.SelectionMode == ListViewSelectionMode.None;
 
             if (isClickEnabled)
-                if (_viewModel.EditSoundCommand.CanExecute(((FrameworkElement)sender).DataContext))
-                    _viewModel.EditSoundCommand.Execute(((FrameworkElement)sender).DataContext);
+                if (_viewModel.EditSoundCommand.CanExecute(((FrameworkElement)e.OriginalSource).DataContext))
+                    _viewModel.EditSoundCommand.Execute(((FrameworkElement)e.OriginalSource).DataContext);
         }
     }
 }

@@ -570,6 +570,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             _dragCanvas = GetTemplateChild(DragCanvasName) as Canvas;
 
             _dragCanvas.PointerPressed += _dragCanvas_PointerPressed;
+            _dragCanvas.Tapped += _dragCanvas_Tapped;
 
             _manipulationCanvas.PointerReleased += _manipulationCanvas_PointerReleased;
 
@@ -580,6 +581,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
 
             InitReorderableEmptyDummyControl();
+        }
+
+        void _dragCanvas_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            e.Handled = true;
         }
 
         void _manipulationCanvas_ManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
