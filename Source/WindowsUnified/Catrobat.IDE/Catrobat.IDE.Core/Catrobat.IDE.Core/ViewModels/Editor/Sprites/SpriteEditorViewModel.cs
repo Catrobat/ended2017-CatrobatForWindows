@@ -78,7 +78,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
-        // This code does probably not work any more
         public Sprite SelectedSprite
         {
             get

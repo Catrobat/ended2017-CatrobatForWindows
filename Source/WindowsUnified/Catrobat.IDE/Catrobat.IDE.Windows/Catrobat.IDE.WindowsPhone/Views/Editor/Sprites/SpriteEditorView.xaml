@@ -133,7 +133,7 @@
             ItemTemplate="{StaticResource SoundItemControlTemplate}"
             ReorderEnabled="true"                            
             HorizontalAlignment="Center" Width="390" Margin="0"
-            Tapped="SoundItem_OnTapped"
+            RightTapped="SoundItem_OnRightTapped"
               />
                     <TextBlock
               Text ="{Binding Resources.Editor_ClickPlusToAddSound, Source={StaticResource LocalizedStrings}}"

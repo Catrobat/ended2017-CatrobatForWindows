@@ -154,7 +154,7 @@
     <DataTemplate x:Key="SoundItemControlTemplate">
         <controls:SoundItemControl Sound="{Binding}"
                     Group="{Binding ElementName=PlayPauseButtonGroupSounds}"
-                    RightTapped="SoundItem_OnTapped" />
+                    RightTapped="SoundItem_OnRightTapped"/>
     </DataTemplate>
 
 </ResourceDictionary>

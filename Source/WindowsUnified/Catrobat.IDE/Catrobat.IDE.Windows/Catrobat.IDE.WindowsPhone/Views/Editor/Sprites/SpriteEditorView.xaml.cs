@@ -169,7 +169,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             }
         }
 
-        private void SoundItem_OnTapped(object sender, TappedRoutedEventArgs e)
+        private void SoundItem_OnRightTapped(object sender, RightTappedRoutedEventArgs e)
         {
             var isClickEnabled = /*ListViewSounds.ReorderMode == ListViewReorderMode.Disabled &&*/
                                  ListViewSounds.SelectionMode == ListViewSelectionMode.None;
