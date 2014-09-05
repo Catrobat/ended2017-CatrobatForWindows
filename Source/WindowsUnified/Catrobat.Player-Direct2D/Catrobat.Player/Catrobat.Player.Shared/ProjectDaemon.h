@@ -18,9 +18,6 @@ public:
 	std::vector<Platform::String ^> *GetFileList();
 
 	Concurrency::task<bool> OpenProject(Platform::String^ projectName);
-
-	//void SetDesiredRenderTargetSize(DrawingSurfaceSizeF *desiredRenderTargetSize);
-	//void SetupRenderer(ID3D11Device1 *device, ProjectRenderer^ renderer);
 	void ApplyDesiredRenderTargetSizeFromProject();
 
     void AddDebug(Platform::String^ info);
@@ -40,9 +37,7 @@ private:
 	std::vector<Platform::String ^> *m_files;
 	Platform::String^ m_currentFolder;
 
-	//DrawingSurfaceSizeF* m_desiredRenderTargetSize;
 	ID3D11Device1 *m_device;
-	//ProjectRenderer^ m_renderer;
 
 	std::vector<std::string> *m_errorList;
 };

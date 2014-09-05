@@ -16,7 +16,7 @@ m_deviceResources(deviceResources), m_pointerLocationX(0.0f), m_loadingComplete(
     m_deviceResources->RegisterDeviceNotify(this);
 
     // Initialize Project loading and parsing.
-    ProjectDaemon::Instance()->OpenProject("compass").then([this](task<bool> t)
+    ProjectDaemon::Instance()->OpenProject("TestMove").then([this](task<bool> t)
     {
         m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(m_deviceResources));
         m_loadingComplete = true;
@@ -41,7 +41,7 @@ Catrobat_PlayerMain::~Catrobat_PlayerMain()
 void Catrobat_PlayerMain::CreateWindowSizeDependentResources()
 {
     // TODO: Replace this with the size-dependent initialization of your app's content.
-    //m_basic2dRenderer->CreateWindowSizeDependentResources();
+    m_basic2dRenderer->CreateWindowSizeDependentResources();
 }
 
 void Catrobat_PlayerMain::StartRenderLoop()

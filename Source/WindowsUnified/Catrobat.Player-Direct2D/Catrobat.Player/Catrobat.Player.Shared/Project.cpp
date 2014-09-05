@@ -61,11 +61,11 @@ ObjectList *Project::GetObjectList()
 	return m_objectList;
 }
 
-void Project::Render(ID2D1DeviceContext1* deviceContext)
+void Project::Render(const std::shared_ptr<DX::DeviceResources>& deviceResources)
 {
 	for (int i = 0; i < m_objectList->GetSize(); i++)
 	{
-		m_objectList->GetObject(i)->Draw(deviceContext);
+		m_objectList->GetObject(i)->Draw(deviceResources);
 	}
 }
 
@@ -75,6 +75,14 @@ void Project::LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceRes
 	{
 		m_objectList->GetObject(i)->LoadTextures(deviceResources);
 	}
+}
+
+void Project::SetupWindowSizeDependentResources(const std::shared_ptr<DX::DeviceResources>& deviceResources)
+{
+    for (int i = 0; i < m_objectList->GetSize(); i++)
+    {
+        m_objectList->GetObject(i)->SetupWindowSizeDependentResources(deviceResources);
+    }
 }
 
 void Project::StartUp()

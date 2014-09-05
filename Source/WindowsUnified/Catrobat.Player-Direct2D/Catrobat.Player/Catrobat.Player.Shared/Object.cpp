@@ -5,6 +5,8 @@
 
 #include <exception>
 
+using namespace D2D1;
+
 Object::Object(string name) :
 BaseObject(),
 m_name(name),
@@ -72,7 +74,7 @@ void Object::LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceReso
 {
     SetTranslation(0.f, 0.f);
 
-    for (int i = 0; i < GetLookDataListSize(); i++) //TODO: implement dummy texture if there is no texture found
+    for (int i = 0; i < GetLookDataListSize(); i++)
     {
         m_look = GetLook(i);
 
@@ -84,6 +86,19 @@ void Object::LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceReso
     }
 }
 
+void Object::SetupWindowSizeDependentResources(const std::shared_ptr<DX::DeviceResources>& deviceResources)
+{
+    auto deviceContext = deviceResources->GetD2DDeviceContext();
+    m_ratioX = deviceContext->GetSize().width / ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
+    m_ratioY = deviceContext->GetSize().height / ProjectDaemon::Instance()->GetProject()->GetScreenHeight();
+
+    m_renderTargetSize = m_look->GetBitMap()->GetSize();
+    m_renderTargetSize.width *= m_ratioX;
+    m_renderTargetSize.height *= m_ratioY;
+    m_renderTarget = Matrix3x2F::Translation(deviceContext->GetSize().width / 2 - m_renderTargetSize.width / 2,
+        deviceContext->GetSize().height / 2 - m_renderTargetSize.height / 2);
+}
+
 double radians(float degree)
 {
     return degree * 3.14159265 / 180.0f;
@@ -92,31 +107,18 @@ double radians(float degree)
 /*
 Draw the current look of this object.
 */
-void Object::Draw(ID2D1DeviceContext1* deviceContext)
+void Object::Draw(const std::shared_ptr<DX::DeviceResources>& deviceResources)
 {
     if (m_look == NULL)
     {
         return;
     }
 
-    deviceContext->SetTransform(D2D1::Matrix3x2F::Identity());
-    deviceContext->Clear(D2D1::ColorF(D2D1::ColorF::White));
-    D2D1_SIZE_F size = m_look->GetBitMap()->GetSize();
-    D2D1_POINT_2F ulc = D2D1::Point2F(0.f, 0.f);
-    deviceContext->DrawBitmap(m_look->GetBitMap(), D2D1::RectF(ulc.x,
-        ulc.y, deviceContext->GetSize().width, deviceContext->GetSize().height));
-}
-
-XMMATRIX Object::GetWorldMatrix()
-{
-    XMFLOAT2 position;
-    position.x = ProjectDaemon::Instance()->GetProject()->GetScreenWidth() / 2.0f + m_position.x;
-    position.y = ProjectDaemon::Instance()->GetProject()->GetScreenHeight() / 2.0f + m_position.y;
-
-    XMMATRIX translation = XMMatrixTranslation(position.x, position.y, 0.0f);
-    XMMATRIX rotation = XMMatrixRotationZ(m_rotation);
-    XMMATRIX scale = XMMatrixScaling(m_objectScale.x, m_objectScale.y, 1.0f);
-    return translation * rotation * scale;
+    auto deviceContext = deviceResources->GetD2DDeviceContext();
+    deviceContext->Clear(ColorF(ColorF::White));
+    deviceContext->SetTransform(m_transformation * m_renderTarget);
+    deviceContext->DrawBitmap(m_look->GetBitMap(),
+        RectF(0.f, 0.f, m_renderTargetSize.width, m_renderTargetSize.height));
 }
 
 void Object::SetLook(int index)
@@ -203,6 +205,7 @@ void Object::SetTranslation(float x, float y)
 {
     m_translation.x = x;
     m_translation.y = y;
+    m_transformation = Matrix3x2F::Translation(m_translation.x * m_ratioX, m_translation.y * m_ratioY);
 
     //TODO: right positioning
     m_position.x = ProjectDaemon::Instance()->GetProject()->GetScreenWidth() / 2.0f + x;
@@ -213,12 +216,6 @@ void Object::GetTranslation(float &x, float &y)
 {
     x = m_translation.x;
     y = m_translation.y;
-}
-
-void Object::GetPosition(float &x, float &y)
-{
-    x = m_position.x;
-    y = m_position.y;
 }
 
 void Object::SetTransparency(float transparency)

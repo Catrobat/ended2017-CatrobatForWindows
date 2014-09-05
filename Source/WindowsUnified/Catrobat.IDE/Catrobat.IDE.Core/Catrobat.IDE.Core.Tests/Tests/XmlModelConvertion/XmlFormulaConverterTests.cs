@@ -13,6 +13,7 @@ using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics;
 
 namespace Catrobat.IDE.Core.Tests.Tests.XmlModelConvertion
 {
@@ -89,30 +90,58 @@ namespace Catrobat.IDE.Core.Tests.Tests.XmlModelConvertion
         [TestMethod, TestCategory("XmlModelConversion"), TestCategory("ExcludeGated")]
         public void TestPocketCodeFormulas()
         {
-            ProgramConverter programConverter = new ProgramConverter();
+            int count = 0;
+            int failedTests = 0;
+            ProgramConverter programConverter = null;
             var documents = Enumerable.Range(1, 16)
                 .Select(i => "Converter/091_Win091/PracticalTests/Test" + i + "Input")
                 .Select(SampleLoader.LoadSampleXDocument);
             foreach (var document in documents)
             {
-                CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", document);
-                var xml = document.ToString();
+                IEnumerable<XmlFormula> formulas;
+                IEnumerable<XmlFormula> formulas2;
+                count++;
+                try
+                {
+                    CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", document);
+                    var xml = document.ToString();
 
-                var xmlProject = new XmlProgram(xml);
-                var project = programConverter.Convert(xmlProject);
-                var xmlProject2 = programConverter.Convert(project);
+                    var xmlProject = new XmlProgram(xml);
+                    programConverter = new ProgramConverter();
+                    var project = programConverter.Convert(xmlProject);
+                    var xmlProject2 = programConverter.Convert(project);
 
-                var formulas = xmlProject.SpriteList.Sprites
-                    .SelectMany(sprite => sprite.Scripts.Scripts
-                        .SelectMany(script => script.Bricks.Bricks)
-                        .SelectMany(brick => brick.GetType().GetPropertiesValues<XmlFormula>(brick)));
-                var formulas2 = xmlProject2.SpriteList.Sprites
-                    .SelectMany(sprite => sprite.Scripts.Scripts
-                        .SelectMany(script => script.Bricks.Bricks)
-                        .SelectMany(brick => brick.GetType().GetPropertiesValues<XmlFormula>(brick)));
-                EnumerableAssert.AreEqual(formulas, formulas2, new XmlFormulaEqualityComparer());
+                    formulas = xmlProject.SpriteList.Sprites
+                        .SelectMany(sprite => sprite.Scripts.Scripts
+                            .SelectMany(script => script.Bricks.Bricks)
+                            .SelectMany(brick => brick.GetType().GetPropertiesValues<XmlFormula>(brick)));
+                    formulas2 = xmlProject2.SpriteList.Sprites
+                        .SelectMany(sprite => sprite.Scripts.Scripts
+                            .SelectMany(script => script.Bricks.Bricks)
+                            .SelectMany(brick => brick.GetType().GetPropertiesValues<XmlFormula>(brick)));
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(count.ToString() + " failed BEFORE formula comparing");
+                    failedTests++;
+                    continue;
+                }
+                
+                try
+                {
+                    EnumerableAssert.AreEqual(formulas, formulas2, new XmlFormulaEqualityComparer());
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(count.ToString() + " failed AT formula comparing");
+                    failedTests++;
+                    continue;
+                }
+                Debug.WriteLine(count);
             }
+            Assert.AreEqual(0, failedTests);
         }
+
 
         [TestMethod, TestCategory("XmlModelConversion")]
         public void TestXmlFormulaTreeNodes()

@@ -7,6 +7,7 @@ class Basic2DRenderer
 public:
     Basic2DRenderer(const std::shared_ptr<DX::DeviceResources>& deviceResources);
     void CreateDeviceDependentResources();
+    void CreateWindowSizeDependentResources();
     void ReleaseDeviceDependentResources();
     void Update(DX::StepTimer const& timer);
     void Render();

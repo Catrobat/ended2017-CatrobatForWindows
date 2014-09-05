@@ -16,12 +16,12 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         private const double ItemHeightPortrait = 90.0;
         private const double ItemHeightLandscape = 90.0;
 
-        public event TappedEventHandler RightTapped;
+        //public event RightTappedEventHandler RightTapped;
 
         private void RaiseRightTapped()
         {
-            if(RightTapped != null)
-                RightTapped.Invoke(this, new TappedRoutedEventArgs());
+            //if (RightTapped != null)
+            //    RightTapped.Invoke(this, new RightTappedRoutedEventArgs());
         }
 
         #region Dependancy properties
@@ -117,6 +117,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         private void TapGrid_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             RaiseRightTapped();
+            e.Handled = true;
+        }
+
+        private void PlayButton_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
             e.Handled = true;
         }
     }

@@ -94,6 +94,7 @@
             ItemTemplate="{StaticResource LookItemControlTemplate}"
             ReorderEnabled="true"                            
             HorizontalAlignment="Center" Width="390" Margin="0"
+            Tapped="LookItem_OnTapped"
               />
                     <TextBlock
             Text ="{Binding Resources.Editor_ClickPlusToAddLook, 
@@ -132,6 +133,7 @@
             ItemTemplate="{StaticResource SoundItemControlTemplate}"
             ReorderEnabled="true"                            
             HorizontalAlignment="Center" Width="390" Margin="0"
+            RightTapped="SoundItem_OnRightTapped"
               />
                     <TextBlock
               Text ="{Binding Resources.Editor_ClickPlusToAddSound, Source={StaticResource LocalizedStrings}}"
