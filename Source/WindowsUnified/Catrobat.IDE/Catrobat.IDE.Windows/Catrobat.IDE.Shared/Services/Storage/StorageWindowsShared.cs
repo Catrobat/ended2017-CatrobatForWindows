@@ -676,49 +676,6 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             if (path == "")
                 return _baseFolder;
 
-            //var subPath = Path.GetDirectoryName(path);
-
-            //var parentFolder = await CreateFolderPathAsync(subPath);
-
-            //if (parentFolder == null)
-            //    return null;
-
-            //var folderName = Path.GetFileName(path);
-
-            //try
-            //{
-            //    var folder = await parentFolder.GetFolderAsync(folderName);
-            //    return folder;
-            //}
-            //catch { }
-
-
-            //var folders = await parentFolder.GetFoldersAsync();
-
-            //foreach (var folder in folders)
-            //{
-
-            //}
-
-            //await parentFolder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
-            //var newFolder = await parentFolder.GetFolderAsync(folderName);
-            //return newFolder;
-
-            //var subPath = Path.GetDirectoryName(path);
-
-            //if (subPath == "")
-            //    return;
-
-            //await CreateFolderPath(subPath);
-
-            //var folder = await GetFolderAsync(subPath);
-            //var fileName = Path.GetFileName(path);
-            //if (folder != null)
-            //{
-            //    folder.CreateFolderAsync(fileName);
-            //}
-
-            //path = subPath;
             try
             {
                 var folder = await _baseFolder.CreateFolderAsync(path, CreationCollisionOption.OpenIfExists);
@@ -734,25 +691,6 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
         {
             if (path == "")
                 return _baseFolder;
-
-            //var subPath = Path.GetDirectoryName(path);
-
-            //var parentFolder = await GetFolderAsync(subPath);
-
-            //if (parentFolder == null)
-            //    return null;
-
-            //var folderName = Path.GetFileName(path);
-
-            //try
-            //{
-            //    var folder = await parentFolder.GetFolderAsync(folderName);
-            //    return folder;
-            //}
-            //catch (Exception)
-            //{
-            //    return null;
-            //}
 
             try
             {

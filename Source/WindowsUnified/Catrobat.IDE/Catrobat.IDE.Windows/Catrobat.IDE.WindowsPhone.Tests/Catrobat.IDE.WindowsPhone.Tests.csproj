@@ -79,8 +79,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\WindowsShared\Converter\ActiveThemeBrushConverterTests.cs" />
-    <Compile Include="Tests\WindowsShared\Storage\ResourceLoaderStoreTests.cs" />
-    <Compile Include="Tests\WindowsShared\Storage\StorageStoreTests.cs" />
+    <Compile Include="Tests\WindowsShared\Services\Common\WebCommunicationTests.cs" />
+    <Compile Include="Tests\WindowsShared\Services\Storage\ResourceLoaderStoreTests.cs" />
+    <Compile Include="Tests\WindowsShared\Services\Storage\StorageStoreTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

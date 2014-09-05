@@ -26,7 +26,6 @@ namespace Catrobat.IDE.Core.Tests.Tests.XmlModelConvertion
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
         {
-            //  needed for SampleLoader.LoadSampleXDocument
             TestHelper.InitializeTests();
         }
 

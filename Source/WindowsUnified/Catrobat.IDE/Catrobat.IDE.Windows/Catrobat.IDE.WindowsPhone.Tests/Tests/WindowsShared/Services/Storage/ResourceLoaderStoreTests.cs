@@ -3,12 +3,12 @@ using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.WindowsShared.Services.Storage;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
-namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
+namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Services.Storage
 {
     [TestClass]
     public class ResourceLoaderStoreTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void ResourceLoaderTest()
         {
             var factory = new ResourceLoaderWindowsShared();

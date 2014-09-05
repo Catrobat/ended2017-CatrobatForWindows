@@ -168,7 +168,6 @@
     <Compile Include="Tests\XmlModelConvertion\XmlProgramConverterTests_old.cs" />
     <Compile Include="Tests\Misc\FileNameGeneratorTests.cs" />
     <Compile Include="Tests\Misc\LocalizationTests.cs" />
-    <Compile Include="Tests\Services\Common\WebCommunicationTests.cs" />
     <Compile Include="Tests\Services\Common\ZipServiceTests.cs" />
     <Compile Include="Tests\Services\Storage\StorageTests.cs" />
     <Compile Include="Tests\ViewModels\Editor\Actions\ScriptBrickCategoryViewModelTests.cs" />
