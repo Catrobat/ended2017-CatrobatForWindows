@@ -91,14 +91,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.XmlModelConvertion
         {
             int count = 0;
             int failedTests = 0;
+            IEnumerable<XmlFormula> formulas;
+            IEnumerable<XmlFormula> formulas2;
             ProgramConverter programConverter = null;
             var documents = Enumerable.Range(1, 16)
                 .Select(i => "Converter/091_Win091/PracticalTests/Test" + i + "Input")
                 .Select(SampleLoader.LoadSampleXDocument);
             foreach (var document in documents)
             {
-                IEnumerable<XmlFormula> formulas;
-                IEnumerable<XmlFormula> formulas2;
                 count++;
                 try
                 {
