@@ -26,6 +26,11 @@
     <Pivot Name="PivotMain" Grid.Row="1" Margin="0 -57 0 0"
         SelectedIndex="{Binding SelectedPivotIndex, Mode=TwoWay}"
         SelectionChanged="Pivot_OnSelectionChanged">
+      <Pivot.HeaderTemplate>
+        <DataTemplate>
+          <TextBlock FontSize="34" Text="{Binding}"/>
+        </DataTemplate>
+      </Pivot.HeaderTemplate>
       <PivotItem Name="PivotActions" Margin="0 -5 0 0"
         Header="{Binding Resources.Editor_PivotActions, 
         Source={StaticResource LocalizedStrings}}">
