@@ -353,7 +353,6 @@
     </Compile>
     <Compile Include="Resources\Localization\LocalizedStrings.cs" />
     <Compile Include="Resources\SampleProjectLoader.cs" />
-    <Compile Include="Services\Common\WebCommunicationService.cs" />
     <Compile Include="Services\Common\ZipService.cs" />
     <Compile Include="UI\ImageDimension.cs" />
     <Compile Include="UI\PortableUI\PortableBrush.cs" />

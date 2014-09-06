@@ -1,18 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Common;
-using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.Tests.Misc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources;
 using System.Threading;
 using System.Collections.Generic;
+using Catrobat.IDE.WindowsShared.Services.Common;
 
-namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
+namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Services.Storage
 {
     [TestClass]
     public class WebCommunicationTests
@@ -25,7 +22,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
         [ClassInitialize()]
         public static void TestClassInitialize(TestContext testContext)
         {
-            TestHelper.InitializeTests();
+            
         }
 
         // Tests API that is specified in ApplicationResources.API_BASE_ADRESS
@@ -33,7 +30,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
         [TestMethod, TestCategory("Services"), TestCategory("ExcludeGated")]
         public async Task LoadOnlineProjectsAsyncTest()
         {
-            var webCommunicationService = new WebCommunicationService();
+            var webCommunicationService = new WebCommunicationServiceWindowsShared();
             string filterText = "";
             int offset = 0;
             int count = 5;
@@ -45,7 +42,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
         [TestMethod, TestCategory("Services"), TestCategory("ExcludeGated")]
         public async Task AsyncCheckTokenAsyncTest()
         {
-            var webCommunicationService = new WebCommunicationService();
+            var webCommunicationService = new WebCommunicationServiceWindowsShared();
 
             JSONStatusResponse statusResponse = await webCommunicationService.CheckTokenAsync(_currentUserName, _currentToken, "de");
             Assert.AreEqual(StatusCodes.ServerResponseOk, statusResponse.statusCode);
@@ -54,7 +51,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
         [TestMethod, TestCategory("Services"), TestCategory("ExcludeGated")]
         public async Task LoginAsyncTest()
         {
-            var webCommunicationService = new WebCommunicationService();
+            var webCommunicationService = new WebCommunicationServiceWindowsShared();
 
             JSONStatusResponse statusResponse = await webCommunicationService.LoginOrRegisterAsync(_currentUserName, _currentUserPassword, _currentUserEmail, "de", "AT");
             Assert.AreEqual(StatusCodes.ServerResponseOk, statusResponse.statusCode);

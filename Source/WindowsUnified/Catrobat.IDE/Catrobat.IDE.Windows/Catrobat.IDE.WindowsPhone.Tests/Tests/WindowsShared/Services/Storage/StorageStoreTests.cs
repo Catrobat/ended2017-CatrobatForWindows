@@ -7,12 +7,12 @@ using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.WindowsShared.Services.Storage;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
-namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
+namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Services.Storage
 {
     [TestClass]
     public class StorageStoreTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void DeleteDirectoryTest()
         {
             throw new NotImplementedException();
@@ -36,7 +36,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             //}
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void DeleteFileTest()
         {
             throw new NotImplementedException();
@@ -58,7 +58,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             //}
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void CopyDirectoryTest()
         {
             throw new NotImplementedException();
@@ -90,7 +90,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
         }
 
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void MoveDirectoryTest()
         {
             throw new NotImplementedException();
@@ -120,7 +120,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             //}
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void CopyFileTest()
         {
             throw new NotImplementedException();
@@ -140,7 +140,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             //}
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void MoveFileTest()
         {
             throw new NotImplementedException();
@@ -160,7 +160,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             //}
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void OpenFileTest()
         {
             throw new NotImplementedException();
@@ -192,7 +192,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             //}
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public void RenameDirectoryTest()
         {
             throw new NotImplementedException();
@@ -217,7 +217,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             //}
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public async void LoadImageTest()
         {
             var zipService = new ZipService();
@@ -235,7 +235,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public async void SaveImageTest()
         {
             var zipService = new ZipService();
@@ -258,7 +258,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public async void ReadWriteTextFileTest()
         {
             IStorage storage = new StorageWindowsShared();
@@ -268,7 +268,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             Assert.AreEqual("test123", textfile);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public async void ReadWriteSerializableObjectTest()
         {
             IStorage storage = new StorageWindowsShared();
@@ -284,7 +284,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             Assert.AreEqual("ProjectName", settingsRead.CurrentProgramName);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public async void CreateFolderTest()
         {
             const string folderName1 = "StorageStoreTests.CreateFolderTest";
@@ -302,7 +302,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             Assert.IsNotNull(folder3);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public async void GetFolderTest()
         {
             const string folderName1 = "StorageStoreTests.GetFolderTest";
@@ -321,7 +321,7 @@ namespace Catrobat.IDE.WindowsPhone.Tests.Tests.Storage
             var folder3 = await localFolder.GetFolderAsync(folderName3);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Services")]
         public async void GetFileTest()
         {
             IStorage storage = new StorageWindowsShared();

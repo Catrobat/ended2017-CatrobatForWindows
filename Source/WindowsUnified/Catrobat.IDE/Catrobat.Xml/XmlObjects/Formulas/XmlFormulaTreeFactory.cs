@@ -570,7 +570,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
             return new XmlFormulaTree
             {
                 VariableType = "BRACKET",
-                VariableValue = string.Empty, 
+                VariableValue = null, 
                 LeftChild = null,
                 RightChild = child
             };

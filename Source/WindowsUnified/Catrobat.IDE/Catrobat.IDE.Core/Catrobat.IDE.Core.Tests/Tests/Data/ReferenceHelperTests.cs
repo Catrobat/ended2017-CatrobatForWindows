@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
     [TestClass]
     public class ReferenceHelperTests
     {
-        public static ITestProgramGenerator ProjectGenerator = new TestProgramGeneratorForReferenceHelperTests();
+        public static ITestProgramGenerator ProgramGenerator = new TestProgramGeneratorForReferenceHelperTests();
 
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
@@ -434,11 +434,11 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
         private static XmlProgram CreateProgram()
         {
-            var originalProgram = ProjectGenerator.GenerateProgram();
+            var originalProgram = ProgramGenerator.GenerateProgram();
             ProgramConverter programConverter = new ProgramConverter();
             var convertedProgram =  programConverter.Convert(originalProgram);
-            var projectString = convertedProgram.ToXmlString();
-            return new XmlProgram(projectString);  // now XmlProgram includes references
+            var programString = convertedProgram.ToXmlString();
+            return new XmlProgram(programString);  // now XmlProgram includes references
         }
     }
 }
