@@ -1,13 +1,11 @@
 #pragma once
 
-#include "BaseObject.h"
+#include "Object.h"
 #include "FormulaTree.h"
 
 #include <string>
 
-using namespace std;
 class Script;
-
 class Brick
 {
 public:

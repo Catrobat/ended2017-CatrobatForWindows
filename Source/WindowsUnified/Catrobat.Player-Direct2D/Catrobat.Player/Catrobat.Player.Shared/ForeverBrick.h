@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ContainerBrick.h"
-#include "BaseObject.h"
+#include "Object.h"
 #include <list>
 
 class ForeverBrick :
@@ -14,7 +14,7 @@ public:
 	void Execute();
 	void AddBrick(Brick *brick);
 private:
-	list<Brick*> *m_brickList;
+	std::list<Brick*> *m_brickList;
 
 	Brick *GetBrick(int index);
 };

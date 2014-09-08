@@ -2,6 +2,8 @@
 #include "ForeverBrick.h"
 #include "Interpreter.h"
 
+using namespace std;
+
 ForeverBrick::ForeverBrick(Script *parent) :
 	ContainerBrick(TypeOfBrick::ContainerBrick, parent)
 {

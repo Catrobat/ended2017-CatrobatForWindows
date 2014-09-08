@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "PlaySoundBrick.h"
 
+using namespace std;
+
 PlaySoundBrick::PlaySoundBrick(string filename, string name, Script *parent) :
 	Brick(TypeOfBrick::PlaySoundBrick, parent),
 	m_filename(filename), m_name(name)

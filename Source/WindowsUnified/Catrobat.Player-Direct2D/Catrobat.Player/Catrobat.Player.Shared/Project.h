@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BaseObject.h"
+#include "Object.h"
 #include "ObjectList.h"
 #include "UserVariable.h"
 

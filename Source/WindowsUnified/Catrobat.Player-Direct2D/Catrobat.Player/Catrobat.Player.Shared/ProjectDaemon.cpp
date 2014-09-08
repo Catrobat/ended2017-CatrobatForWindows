@@ -15,6 +15,7 @@ using namespace Windows::Storage;
 using namespace Concurrency;
 using namespace Windows::Phone::UI::Input;
 using namespace Windows::Graphics::Display;
+using namespace std;
 
 ProjectDaemon *ProjectDaemon::m_instance = NULL;
 

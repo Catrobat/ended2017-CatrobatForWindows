@@ -20,6 +20,7 @@ enum Inclination {
 	Yaw
 };
 
+class FormulaTree;
 class Interpreter
 {
 private:

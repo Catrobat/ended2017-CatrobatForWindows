@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Script.h"
+#include "Brick.h"
 
 #include <windows.system.threading.h>
 #include <windows.foundation.h>
@@ -11,7 +12,7 @@ using namespace Windows::Foundation;
 Script::Script(TypeOfScript scriptType, Object *parent) :
 m_scriptType(scriptType), m_parent(parent)
 {
-    m_brickList = new list<Brick*>();
+    m_brickList = new std::list<Brick*>();
 }
 
 void Script::AddBrick(Brick *brick)
@@ -19,7 +20,7 @@ void Script::AddBrick(Brick *brick)
     m_brickList->push_back(brick);
 }
 
-void Script::AddSpriteReference(string spriteReference)
+void Script::AddSpriteReference(std::string spriteReference)
 {
     m_spriteReference = spriteReference;
 }
@@ -36,7 +37,7 @@ int Script::GetBrickListSize()
 
 Brick *Script::GetBrick(int index)
 {
-    list<Brick*>::iterator it = m_brickList->begin();
+    std::list<Brick*>::iterator it = m_brickList->begin();
     advance(it, index);
     return *it;
 }
@@ -48,7 +49,7 @@ void Script::Execute()
     {
         for (int i = 0; i < GetBrickListSize(); i++)
         {
-            GetBrick(i)->Execute();
+            this->GetBrick(i)->Execute();
         }
 
         Concurrency::wait(10); //TODO: neccessary?

@@ -7,14 +7,14 @@ class BroadcastScript :
 	public Script
 {
 public:
-	BroadcastScript(string receivedMessage, Object *parent);
+	BroadcastScript(std::string receivedMessage, Object *parent);
 	~BroadcastScript();
 
 	void EvaluateMessage(Platform::String ^message);
 
-	string GetReceivedMessage();
+	std::string GetReceivedMessage();
 
 private:
-	string m_receivedMessage;
+	std::string m_receivedMessage;
 	BroadcastMessageListener ^m_broadcastMessageListener;
 };

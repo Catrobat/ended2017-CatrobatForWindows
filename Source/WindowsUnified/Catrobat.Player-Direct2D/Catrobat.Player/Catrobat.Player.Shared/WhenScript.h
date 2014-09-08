@@ -11,7 +11,7 @@ public:
 		Tapped
 	};
 
-	WhenScript(string action, Object *parent);
+	WhenScript(std::string action, Object *parent);
 	~WhenScript();
 	int GetAction();
 

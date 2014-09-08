@@ -8,7 +8,7 @@
 
 using namespace D2D1;
 
-Object::Object(string name) :
+Object::Object(std::string name) :
 m_name(name),
 m_look(NULL),
 m_opacity(1.f),
@@ -20,10 +20,10 @@ m_ratio(SizeF()),
 m_logicalSize(SizeF()),
 m_renderTargetSize(SizeF())
 {
-    m_lookList = new list<Look*>();
-    m_scripts = new list<Script*>();
-    m_soundInfos = new list<SoundInfo*>();
-    m_variableList = new map<string, UserVariable*>();
+    m_lookList = new std::list<Look*>();
+    m_scripts = new std::list<Script*>();
+    m_soundInfos = new std::list<SoundInfo*>();
+    m_variableList = new std::map<std::string, UserVariable*>();
 }
 
 #pragma region TRANSFORMATION
@@ -111,12 +111,12 @@ void Object::AddSoundInfo(SoundInfo *soundInfo)
 {
     m_soundInfos->push_back(soundInfo);
 }
-void Object::AddVariable(string name, UserVariable* variable)
+void Object::AddVariable(std::string name, UserVariable* variable)
 {
-    m_variableList->insert(pair<string, UserVariable*>(name, variable));
+    m_variableList->insert(std::pair<std::string, UserVariable*>(name, variable));
 }
 
-void Object::AddVariable(pair<string, UserVariable*> variable)
+void Object::AddVariable(std::pair<std::string, UserVariable*> variable)
 {
     m_variableList->insert(variable);
 }
@@ -192,7 +192,7 @@ void Object::Draw(const std::shared_ptr<DX::DeviceResources>& deviceResources)
 #pragma endregion
 
 #pragma region GETTERS
-string Object::GetName()
+std::string Object::GetName()
 {
     return m_name;
 }
@@ -204,14 +204,14 @@ int Object::GetScriptListSize()
 
 Script *Object::GetScript(int index)
 {
-    list<Script*>::iterator it = m_scripts->begin();
+    std::list<Script*>::iterator it = m_scripts->begin();
     advance(it, index);
     return *it;
 }
 
-UserVariable* Object::GetVariable(string name)
+UserVariable* Object::GetVariable(std::string name)
 {
-    map<string, UserVariable*>::iterator searchItem = m_variableList->find(name);
+    std::map<std::string, UserVariable*>::iterator searchItem = m_variableList->find(name);
 
     if (searchItem != m_variableList->end())
     {
@@ -228,7 +228,7 @@ int Object::GetLookDataListSize()
 
 Look *Object::GetLook(int index)
 {
-    list<Look*>::iterator it = m_lookList->begin();
+    std::list<Look*>::iterator it = m_lookList->begin();
     advance(it, index);
 
     if (it != m_lookList->end())
@@ -242,7 +242,7 @@ Look *Object::GetLook(int index)
 int Object::GetLook()
 {
     int i = 0;
-    list<Look*>::iterator it = m_lookList->begin();
+    std::list<Look*>::iterator it = m_lookList->begin();
 
     while ((*it) != m_look)
     {

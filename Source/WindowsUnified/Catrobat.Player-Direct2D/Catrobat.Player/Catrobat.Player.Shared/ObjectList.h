@@ -16,6 +16,6 @@ public:
 	Object *GetObject(std::string name);
 
 private:
-	list<Object*> *m_objects;
+	std::list<Object*> *m_objects;
 };
 

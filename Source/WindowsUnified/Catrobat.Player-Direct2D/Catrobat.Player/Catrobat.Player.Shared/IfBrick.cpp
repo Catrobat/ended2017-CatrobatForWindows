@@ -2,6 +2,8 @@
 #include "IfBrick.h"
 #include "Interpreter.h"
 
+using namespace std;
+
 IfBrick::IfBrick(FormulaTree *condition, Script *parent) :
 	ContainerBrick(TypeOfBrick::ContainerBrick, parent), m_condition(condition)
 {

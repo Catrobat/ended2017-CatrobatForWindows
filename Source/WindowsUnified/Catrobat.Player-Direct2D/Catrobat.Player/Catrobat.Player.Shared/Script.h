@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Brick.h"
-#include "BaseObject.h"
+//#include "Object.h"
+//#include "Brick.h"
 
 #include <list>
 
@@ -10,6 +10,7 @@
 #include <windows.foundation.h>
 
 class Object;
+class Brick;
 class Script
 {
 public:
@@ -36,7 +37,7 @@ public:
 protected:
 	Script(TypeOfScript scriptType, Object *parent);
 
-	list<Brick*> *m_brickList;
+	std::list<Brick*> *m_brickList;
 
 private:
 	Object *m_parent;

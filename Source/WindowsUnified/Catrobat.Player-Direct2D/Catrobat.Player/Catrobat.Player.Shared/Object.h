@@ -2,13 +2,16 @@
 
 #include <string>
 #include <list>
+#include <D3D11.h>
+#include <windows.foundation.h>
 
+//#include "Script.h"
 #include "Look.h"
-#include "Script.h"
 #include "SoundInfo.h"
 #include "UserVariable.h"
 #include "WhenScript.h"
 
+class Script;
 class Object
 {
 public:
@@ -61,9 +64,9 @@ private:
     std::string m_name;
 
     Look *m_look;
-    list<Look*> *m_lookList;
-    list<Script*> *m_scripts;
-    list<SoundInfo*> *m_soundInfos;
+    std::list<Look*> *m_lookList;
+    std::list<Script*> *m_scripts;
+    std::list<SoundInfo*> *m_soundInfos;
     std::map<std::string, UserVariable*> *m_variableList;
     WhenScript* m_whenScript;
 

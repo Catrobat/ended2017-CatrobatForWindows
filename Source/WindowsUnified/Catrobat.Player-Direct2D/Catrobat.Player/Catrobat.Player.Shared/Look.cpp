@@ -7,6 +7,7 @@
 #include <vector>
 
 using namespace DirectX;
+using namespace std;
 
 Look::Look(string filename, string name) :
 m_filename(filename), m_name(name)

@@ -216,9 +216,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WhenScript.h">
       <Filter>Objects\Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BaseObject.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)FormulaTree.h">
       <Filter>Objects</Filter>
     </ClInclude>
@@ -440,9 +437,6 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)UserVariable.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BaseObject.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)FormulaTree.cpp">
