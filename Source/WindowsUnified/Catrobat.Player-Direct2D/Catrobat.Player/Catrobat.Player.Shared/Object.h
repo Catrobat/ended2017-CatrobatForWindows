@@ -81,5 +81,5 @@ private:
 
 private:
     void RecalculateTransformation();
-    double Radians(float degree) { return degree * XM_PI / 180.0f; }
+    static double Radians(float degree) { return degree * XM_PI / 180.0f; }
 };

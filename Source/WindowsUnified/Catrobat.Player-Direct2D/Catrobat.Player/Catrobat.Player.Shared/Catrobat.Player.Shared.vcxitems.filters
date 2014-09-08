@@ -243,9 +243,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Content\Basic2DRenderer.h">
       <Filter>Content</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TransformableObject.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Catrobat.PlayerMain.cpp" />
@@ -462,9 +459,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Content\Basic2DRenderer.cpp">
       <Filter>Content</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TransformableObject.cpp">
-      <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

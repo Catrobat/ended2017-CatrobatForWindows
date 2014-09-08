@@ -1,4 +1,5 @@
-#pragma once#include "script.h"
+#pragma once
+#include "script.h"
 class WhenScript :
 	public Script
 {

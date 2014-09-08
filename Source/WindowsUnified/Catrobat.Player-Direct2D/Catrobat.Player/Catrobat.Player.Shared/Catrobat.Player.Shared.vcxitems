@@ -75,7 +75,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)SoundInfo.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)StartScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TextureDaemon.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)TransformableObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TurnLeftBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TurnRightBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)UserVariable.cpp" />
@@ -165,7 +164,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)SoundInfo.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)StartScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TextureDaemon.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)TransformableObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TurnLeftBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TurnRightBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)UserVariable.h" />
