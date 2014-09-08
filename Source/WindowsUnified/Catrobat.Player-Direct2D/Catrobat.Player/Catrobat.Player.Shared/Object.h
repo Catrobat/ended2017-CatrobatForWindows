@@ -49,6 +49,7 @@ public:
     Look* GetCurrentLook();
 
     void SetTranslation(float x, float y);
+    void TranslateBy(float x, float y);
     void GetTranslation(float &x, float &y);
     Bounds GetBounds();
 

@@ -90,11 +90,12 @@ void Object::SetupWindowSizeDependentResources(const std::shared_ptr<DX::DeviceR
 {
     auto deviceContext = deviceResources->GetD2DDeviceContext();
     m_ratioX = deviceContext->GetSize().width / ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
-    m_ratioY = deviceContext->GetSize().height / ProjectDaemon::Instance()->GetProject()->GetScreenHeight();
+    m_ratioY = deviceContext->GetSize().height / ProjectDaemon::Instance()->GetProject()->GetScreenHeight() * (-1);
 
     m_renderTargetSize = m_look->GetBitMap()->GetSize();
     m_renderTargetSize.width *= m_ratioX;
     m_renderTargetSize.height *= m_ratioY;
+    m_renderTarget = Matrix3x2F::Identity();
     m_renderTarget = Matrix3x2F::Translation(deviceContext->GetSize().width / 2 - m_renderTargetSize.width / 2,
         deviceContext->GetSize().height / 2 - m_renderTargetSize.height / 2);
 }
@@ -208,8 +209,15 @@ void Object::SetTranslation(float x, float y)
     m_transformation = Matrix3x2F::Translation(m_translation.x * m_ratioX, m_translation.y * m_ratioY);
 
     //TODO: right positioning
-    m_position.x = ProjectDaemon::Instance()->GetProject()->GetScreenWidth() / 2.0f + x;
-    m_position.y = ProjectDaemon::Instance()->GetProject()->GetScreenHeight() / 2.0f + y;
+    m_position.x = ProjectDaemon::Instance()->GetProject()->GetScreenWidth() / 2.f + x;
+    m_position.y = ProjectDaemon::Instance()->GetProject()->GetScreenHeight() / 2.f + y;
+}
+
+void Object::TranslateBy(float x, float y)
+{
+    m_translation.x -= x;
+    m_translation.y -= y;
+    m_transformation = Matrix3x2F::Translation(m_translation.x * m_ratioX, m_translation.y * m_ratioY);
 }
 
 void Object::GetTranslation(float &x, float &y)
