@@ -3,6 +3,8 @@
 #include "PlayerException.h"
 #include "DeviceInformation.h"
 
+using namespace Windows::Devices::Sensors;
+
 AccelerometerProvider::AccelerometerProvider()
 {
 	if (DeviceInformation::IsRunningOnDevice() && Init() == true)

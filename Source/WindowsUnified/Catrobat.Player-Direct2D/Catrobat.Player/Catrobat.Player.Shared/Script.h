@@ -2,15 +2,12 @@
 
 #include "Brick.h"
 #include "BaseObject.h"
-#include "pch.h"
 
 #include <list>
 
 #include <windows.system.threading.h>
 #include <ppltasks.h>
 #include <windows.foundation.h>
-
-using namespace std;
 
 class Object;
 class Script
@@ -26,7 +23,7 @@ public:
 	Object *GetParent();
 
 	void AddBrick(Brick *brick);
-	void AddSpriteReference(string spriteReference);
+	void AddSpriteReference(std::string spriteReference);
 
 	void Execute();
 
@@ -44,7 +41,7 @@ protected:
 private:
 	Object *m_parent;
 	TypeOfScript m_scriptType;
-	string m_spriteReference;
+	std::string m_spriteReference;
     void SetIsRunning(bool isRunning);
-    IAsyncAction^ m_threadPoolWorkItem;
+    Windows::Foundation::IAsyncAction^ m_threadPoolWorkItem;
 };

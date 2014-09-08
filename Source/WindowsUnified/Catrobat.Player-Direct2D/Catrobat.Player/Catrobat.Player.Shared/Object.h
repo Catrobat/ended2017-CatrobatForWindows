@@ -9,12 +9,10 @@
 #include "UserVariable.h"
 #include "WhenScript.h"
 
-using namespace std;
-
 class Object
 {
 public:
-    Object(string name);
+    Object(std::string name);
 
 public:
     void SetTranslation(float x, float y);
@@ -45,7 +43,7 @@ public:
     void Draw(const std::shared_ptr<DX::DeviceResources>& deviceResources);
 
 public:
-    string GetName();
+    std::string GetName();
 
     int GetScriptListSize();
     Script *GetScript(int index);
@@ -60,7 +58,7 @@ public:
     WhenScript* GetWhenScript();
 
 private:
-    string m_name;
+    std::string m_name;
 
     Look *m_look;
     list<Look*> *m_lookList;
@@ -81,5 +79,5 @@ private:
 
 private:
     void RecalculateTransformation();
-    static double Radians(float degree) { return degree * XM_PI / 180.0f; }
+	static double Radians(float degree) { return degree * DirectX::XM_PI / 180.0f; }
 };

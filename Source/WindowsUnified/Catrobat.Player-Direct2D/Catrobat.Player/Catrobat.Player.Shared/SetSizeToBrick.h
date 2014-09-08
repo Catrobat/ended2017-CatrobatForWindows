@@ -1,5 +1,7 @@
 #pragma once
+
 #include "Brick.h"
+
 class SetSizeToBrick :
 	public Brick
 {

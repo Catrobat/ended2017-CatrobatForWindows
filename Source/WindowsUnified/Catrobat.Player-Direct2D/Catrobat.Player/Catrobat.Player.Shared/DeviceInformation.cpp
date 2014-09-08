@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "DeviceInformation.h"
 
+using namespace Platform;
+
 String^ DeviceInformation::GetProcessorArchitecture(void)
 {
     SYSTEM_INFO sysInfo;

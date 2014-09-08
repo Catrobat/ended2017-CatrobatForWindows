@@ -1,5 +1,6 @@
 #pragma once
-#include "script.h"
+
+#include "Script.h"
 #include "BroadcastMessageListener.h"
 
 class BroadcastScript :

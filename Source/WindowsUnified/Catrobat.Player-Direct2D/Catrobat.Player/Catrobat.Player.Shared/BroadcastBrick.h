@@ -1,5 +1,6 @@
 #pragma once
-#include "brick.h"
+
+#include "Brick.h"
 
 class BroadcastBrick :
 	public Brick

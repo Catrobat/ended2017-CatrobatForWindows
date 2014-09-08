@@ -4,8 +4,6 @@
 
 #include "Object.h"
 
-using namespace std;
-
 class ObjectList
 {
 public:
@@ -15,7 +13,7 @@ public:
 	void AddObject(Object *object);
 	int GetSize();
 	Object *GetObject(int index);
-	Object *GetObject(string name);
+	Object *GetObject(std::string name);
 
 private:
 	list<Object*> *m_objects;

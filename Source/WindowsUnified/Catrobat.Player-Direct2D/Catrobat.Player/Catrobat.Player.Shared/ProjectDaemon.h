@@ -13,7 +13,7 @@ public:
     void ReInit();
 	void SetProject(Project *project);
 	Project *GetProject();
-	string GetProjectPath();
+	std::string GetProjectPath();
 	std::vector<Platform::String ^> *GetProjectList();
 	std::vector<Platform::String ^> *GetFileList();
 
@@ -32,7 +32,7 @@ private:
 	static ProjectDaemon *m_instance;
 
 	Project *m_project;
-	string m_projectPath;
+	std::string m_projectPath;
 	std::vector<Platform::String ^> *m_projectList;
 	std::vector<Platform::String ^> *m_files;
 	Platform::String^ m_currentFolder;

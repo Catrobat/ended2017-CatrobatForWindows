@@ -1,7 +1,5 @@
 #pragma once
 
-using namespace Windows::Devices::Sensors;
-
 ref class InclinationProvider sealed
 {
 public:
@@ -20,7 +18,7 @@ public:
 
 private:
 
-	Inclinometer^ m_inclinometer;
+	Windows::Devices::Sensors::Inclinometer^ m_inclinometer;
 	bool Init();
 
 	bool m_sensorIsRunningOnDevice;

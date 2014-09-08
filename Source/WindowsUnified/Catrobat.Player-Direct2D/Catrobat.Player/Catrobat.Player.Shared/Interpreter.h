@@ -7,8 +7,6 @@
 #include "AccelerometerProvider.h"
 #include "LoudnessCapture.h"
 
-class FormulaTree;
-
 enum Childs {
     LeftChild, 
     RightChild, 
