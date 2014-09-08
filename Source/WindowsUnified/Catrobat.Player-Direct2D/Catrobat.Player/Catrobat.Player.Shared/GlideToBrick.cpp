@@ -24,7 +24,8 @@ void GlideToBrick::Execute()
 
     for (int i = 0; i < steps; i++)
     {
-        m_parent->GetParent()->TranslateBy(x_movement, y_movement);
+        m_parent->GetParent()->GetTranslation(currentX, currentY);
+        m_parent->GetParent()->SetTranslation(currentX - x_movement, currentY - y_movement);
         Concurrency::wait(20); // 50 Hz
     }
 }

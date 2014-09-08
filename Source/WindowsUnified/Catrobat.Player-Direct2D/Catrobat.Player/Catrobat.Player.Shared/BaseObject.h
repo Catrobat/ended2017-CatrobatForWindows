@@ -15,7 +15,7 @@ public:
 protected:
 	BaseObject(float scaleX = 1, float scaleY = 1);
 
-	XMFLOAT2 m_position;
-    XMFLOAT2 m_translation;
-	XMFLOAT2 m_objectScale;
+	D2D1_POINT_2F m_position;
+    D2D1_POINT_2F m_translation;
+    D2D1_SIZE_F m_objectScale;
 };

@@ -5,6 +5,6 @@ using namespace Windows::Graphics::Display;
 
 BaseObject::BaseObject(float scaleX, float scaleY)
 {
-	m_objectScale.x = scaleX;
-	m_objectScale.y = scaleY;
+	m_objectScale.width = scaleX;
+	m_objectScale.height = scaleY;
 }
