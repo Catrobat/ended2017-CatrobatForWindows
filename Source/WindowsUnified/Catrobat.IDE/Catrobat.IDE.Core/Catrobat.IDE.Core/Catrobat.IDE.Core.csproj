@@ -197,9 +197,7 @@
     <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\ScriptConverterBase.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Scripts\StartScriptConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\Formulas\FormulaConverter.cs" />
-    <Compile Include="XmlModelConvertion\Converters\GlobalVariableConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\VariableConverter.cs" />
-    <Compile Include="XmlModelConvertion\Converters\LocalVariableConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\ProgramConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\UploadHeaderConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\SpriteReferenceConverter .cs" />

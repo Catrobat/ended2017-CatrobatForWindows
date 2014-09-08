@@ -87,7 +87,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
         }
 
 
-        //old simple downloader
+        //old simple portable downloader
         public async Task<Stream> DownloadAsync(string downloadUrl, string programName, CancellationToken taskCancellationToken)
         {
             using (var httpClient = new HttpClient())
@@ -95,8 +95,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                 httpClient.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
                 try
                 {
-                    // trigger to header-read to avoid timeouts
-                    var httpResponse = await httpClient.GetAsync(downloadUrl/*, HttpCompletionOption.ResponseHeadersRead*/, taskCancellationToken);
+                    var httpResponse = await httpClient.GetAsync(downloadUrl, HttpCompletionOption.ResponseContentRead, taskCancellationToken);
                     httpResponse.EnsureSuccessStatusCode();
 
                     return await httpResponse.Content.ReadAsStreamAsync();
@@ -135,9 +134,13 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                 DownloadOperation downloadOperation = backgroundDownloader.CreateDownload(downloadSource, destinationFile);
                 ManageDownloadsAsync(downloadOperation, true);
             }
-            catch (Exception ex) //TODO add error Handling
+            catch (HttpRequestException)
             {
-                //Error
+                //return null;
+            }
+            catch (Exception)
+            {
+                //return null;
             }
         }
 

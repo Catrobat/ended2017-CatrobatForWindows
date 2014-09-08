@@ -50,15 +50,18 @@ namespace Catrobat.IDE.WindowsShared.Services
                 if (_programStream == null && _onlineProgramHeader == null)
                     throw new Exception("SetProgramStream and SetDownloadHeader cannot be used together.");
 
+                // old simple portable downloader
+                var cancellationTokenSource = new CancellationTokenSource();
                 if (_onlineProgramHeader != null)
                 {
                     _programStream = await Task.Run(() => ServiceLocator.WebCommunicationService.DownloadAsync(
-                        _onlineProgramHeader.DownloadUrl, _onlineProgramHeader.ProjectName, taskCancellationToken));
+                        _onlineProgramHeader.DownloadUrl, _onlineProgramHeader.ProjectName, cancellationTokenSource.Token), taskCancellationToken);
                 }
+                // new downloader
                 //if (_onlineProgramHeader != null)
                 //{
                 //    await Task.Run(() => ServiceLocator.WebCommunicationService.DownloadAsyncAlternativ(
-                //        _onlineProgramHeader.DownloadUrl, _onlineProgramHeader.ProjectName));
+                //        _onlineProgramHeader.DownloadUrl, _onlineProgramHeader.ProjectName), taskCancellationToken);
                 //}
                 //using (var storage = StorageSystem.GetStorage())
                 //{
@@ -68,8 +71,11 @@ namespace Catrobat.IDE.WindowsShared.Services
                 //       stream, StorageConstants.TempProgramImportPath);
                 //}
 
-                await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
-                    _programStream, StorageConstants.TempProgramImportPath);
+                if (_cancellationTokenSource.Token.IsCancellationRequested == false)
+                {
+                    await ServiceLocator.ZipService.UnzipCatrobatPackageIntoIsolatedStorage(
+                        _programStream, StorageConstants.TempProgramImportPath);
+                }
             }
             catch (Exception)
             {
@@ -126,6 +132,11 @@ namespace Catrobat.IDE.WindowsShared.Services
             Debug.WriteLine("Starting with ExtractProgram");
             ExtractProgramResult extractionResult = await ServiceLocator.ProgramImportService.ExtractProgram(_cancellationTokenSource.Token);
 
+            if (_cancellationTokenSource.Token.IsCancellationRequested == true)
+            {
+                CleanUpImport();
+                return;
+            }
             if (extractionResult.Status == ExtractProgramStatus.Error)
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(
@@ -134,13 +145,15 @@ namespace Catrobat.IDE.WindowsShared.Services
                         ToastDisplayDuration.Long);
                 return;
             }
+            
+            Debug.WriteLine("Starting with CheckProgram");
+            var validateResult = await ServiceLocator.ProgramValidationService.CheckProgram(StorageConstants.TempProgramImportPath);
+
             if (_cancellationTokenSource.Token.IsCancellationRequested == true)
             {
                 CleanUpImport();
                 return;
             }
-            Debug.WriteLine("Starting with CheckProgram");
-            var validateResult = await ServiceLocator.ProgramValidationService.CheckProgram(StorageConstants.TempProgramImportPath);
 
             switch (validateResult.State)
             {
@@ -174,12 +187,6 @@ namespace Catrobat.IDE.WindowsShared.Services
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
-            }
-
-            if (_cancellationTokenSource.Token.IsCancellationRequested == true)
-            {
-                CleanUpImport();
-                return;
             }
 
             Debug.WriteLine("Starting with AcceptTempProgram");

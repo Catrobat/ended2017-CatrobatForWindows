@@ -2327,10 +2327,6 @@
         <list/>
       </entry>
       <entry>
-        <object reference="../../../../objectList/object[2]/scriptList/broadcastScript[2]/brickList/pointToBrick/pointedObject"/>
-        <list/>
-      </entry>
-      <entry>
         <object reference="../../../../objectList/object[7]"/>
         <list/>
       </entry>
@@ -2348,6 +2344,10 @@
       </entry>
       <entry>
         <object reference="../../../../objectList/object[5]"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[2]/scriptList/broadcastScript[2]/brickList/pointToBrick/pointedObject"/>
         <list/>
       </entry>
       <entry>
