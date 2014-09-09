@@ -1,5 +1,7 @@
 #pragma once
+
 #include "Brick.h"
+
 class NextLookBrick :
 	public Brick
 {

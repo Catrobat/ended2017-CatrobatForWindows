@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Brick.h"
-#include "BaseObject.h"
+#include "Object.h"
 #include <list>
 
 class ContainerBrick :

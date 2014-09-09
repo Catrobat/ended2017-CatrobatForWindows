@@ -1,4 +1,7 @@
-#pragma once#include "script.h"
+#pragma once
+
+#include "Script.h"
+
 class WhenScript :
 	public Script
 {
@@ -8,7 +11,7 @@ public:
 		Tapped
 	};
 
-	WhenScript(string action, Object *parent);
+	WhenScript(std::string action, Object *parent);
 	~WhenScript();
 	int GetAction();
 

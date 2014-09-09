@@ -1,5 +1,7 @@
 #pragma once
+
 #include "Brick.h"
+
 class MoveNStepsBrick :
 	public Brick
 {

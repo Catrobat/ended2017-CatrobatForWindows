@@ -1,5 +1,4 @@
 #pragma once
-using namespace Windows::Devices::Sensors;
 
 class AccelerometerProvider
 {
@@ -12,7 +11,7 @@ public:
 	double GetZ();
 
 private:
-	Accelerometer^ m_accelerometer;
+	Windows::Devices::Sensors::Accelerometer^ m_accelerometer;
 
 	bool Init();
 

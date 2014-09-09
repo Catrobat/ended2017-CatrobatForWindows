@@ -20,7 +20,6 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)AccelerometerProvider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)BaseException.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)BaseObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Brick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageDaemon.cpp" />
@@ -88,7 +87,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserSevereException.cpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)AccelerometerProvider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BaseException.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)BaseObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BasicTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Brick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastBrick.h" />

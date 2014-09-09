@@ -2,144 +2,142 @@
 
 #include <string>
 
-using namespace std;
-
 namespace Constants
 {
     namespace XMLParser
     {
         namespace Header
         {
-            static const string ApplicationBuildName        =       "applicationBuildName";
-            static const string ApplicationBuildNumber      =       "applicationBuildNumber";
-            static const string ApplicationName             =       "applicationName";
-            static const string ApplicationVersion          =       "applicationVersion";
-            static const string CatrobatLanguageVersion     =       "catrobatLanguageVersion";
-            static const string DateTimeUpload              =       "dateTimeUpload";
-            static const string Description                 =       "description";
-            static const string DeviceName                  =       "deviceName";
-            static const string MediaLicense                =       "mediaLicense";
-            static const string Platform                    =       "platform";
-            static const string PlatformVersion             =       "platformVersion";
-            static const string ProgramLicense              =       "programLicense";
-            static const string ProgramName                 =       "programName";
-            static const string RemixOf                     =       "remixOf";
-            static const string ScreenHeight                =       "screenHeight";
-            static const string ScreenWidth                 =       "screenWidth";
-            static const string Tags                        =       "tags";
-            static const string Url                         =       "url";
-            static const string UserHandle                  =       "userHandle";
-            static const string Header                      =       "header";
-            static const string Program                     =       "program";
+            static const std::string ApplicationBuildName        =       "applicationBuildName";
+            static const std::string ApplicationBuildNumber      =       "applicationBuildNumber";
+            static const std::string ApplicationName             =       "applicationName";
+            static const std::string ApplicationVersion          =       "applicationVersion";
+            static const std::string CatrobatLanguageVersion     =       "catrobatLanguageVersion";
+            static const std::string DateTimeUpload              =       "dateTimeUpload";
+            static const std::string Description                 =       "description";
+            static const std::string DeviceName                  =       "deviceName";
+            static const std::string MediaLicense                =       "mediaLicense";
+            static const std::string Platform                    =       "platform";
+            static const std::string PlatformVersion             =       "platformVersion";
+            static const std::string ProgramLicense              =       "programLicense";
+            static const std::string ProgramName                 =       "programName";
+            static const std::string RemixOf                     =       "remixOf";
+            static const std::string ScreenHeight                =       "screenHeight";
+            static const std::string ScreenWidth                 =       "screenWidth";
+            static const std::string Tags                        =       "tags";
+            static const std::string Url                         =       "url";
+            static const std::string UserHandle                  =       "userHandle";
+            static const std::string Header                      =       "header";
+            static const std::string Program                     =       "program";
         };
 
         namespace Object
         {
-            static const string Reference                   =       "reference";
-            static const string Object                      =       "object";
-            static const string Look                        =       "look";
-            static const string BrickList                   =       "brickList";
-            static const string Action                      =       "action";
-            static const string Name                        =       "name";
-            static const string ScriptList                  =       "scriptList";
-            static const string LookList                    =       "lookList";
-            static const string SoundList                   =       "soundList";
-            static const string ObjectList                  =       "objectList";
+            static const std::string Reference                   =       "reference";
+            static const std::string Object                      =       "object";
+            static const std::string Look                        =       "look";
+            static const std::string BrickList                   =       "brickList";
+            static const std::string Action                      =       "action";
+            static const std::string Name                        =       "name";
+            static const std::string ScriptList                  =       "scriptList";
+            static const std::string LookList                    =       "lookList";
+            static const std::string SoundList                   =       "soundList";
+            static const std::string ObjectList                  =       "objectList";
         }
 
         namespace Look
         {
-            static const string FileName                    =       "fileName";
-            static const string Name                        =       "name";
+            static const std::string FileName                    =       "fileName";
+            static const std::string Name                        =       "name";
         }
 
         namespace Formula
         {
-            static const string FormulaTree                 =       "formulaTree";
-            static const string LeftChild                   =       "leftChild";
-            static const string RightChild                  =       "rightChild";
-            static const string Value                       =       "value";
-            static const string Type                        =       "type";
-            static const string Name                        =       "name";
-            static const string UserVariable                =       "userVariable";
-            static const string ProgramVariableList         =       "programVariableList";
-            static const string List                        =       "list";
-            static const string Entry                       =       "entry";
-            static const string Variables                   =       "variables";
-            static const string VariableFormula             =       "variableFormula";
-            static const string ObjectVariableList          =       "objectVariableList";
-            static const string True                        =       "true";
+            static const std::string FormulaTree                 =       "formulaTree";
+            static const std::string LeftChild                   =       "leftChild";
+            static const std::string RightChild                  =       "rightChild";
+            static const std::string Value                       =       "value";
+            static const std::string Type                        =       "type";
+            static const std::string Name                        =       "name";
+            static const std::string UserVariable                =       "userVariable";
+            static const std::string ProgramVariableList         =       "programVariableList";
+            static const std::string List                        =       "list";
+            static const std::string Entry                       =       "entry";
+            static const std::string Variables                   =       "variables";
+            static const std::string VariableFormula             =       "variableFormula";
+            static const std::string ObjectVariableList          =       "objectVariableList";
+            static const std::string True                        =       "true";
         }
 
         namespace Script
         {
-            static const string ReceivedMessage             =       "receivedMessage";            
-            static const string StartScript                 =       "startScript";
-            static const string WhenScript                  =       "whenScript";
-            static const string BroadcastScript             =       "broadcastScript";
+            static const std::string ReceivedMessage             =       "receivedMessage";            
+            static const std::string StartScript                 =       "startScript";
+            static const std::string WhenScript                  =       "whenScript";
+            static const std::string BroadcastScript             =       "broadcastScript";
         }
 
         namespace Brick
         {
-            static const string SetLookBrick                =       "setLookBrick";
-            static const string WaitBrick                   =       "waitBrick";
-            static const string PlaceAtBrick                =       "placeAtBrick";
-            static const string SetGhostEffectBrick         =       "setGhostEffectBrick";
-            static const string PlaySoundBrick              =       "playSoundBrick";
-            static const string GlideToBrick                =       "glideToBrick";
-            static const string BroadcastBrick              =       "broadcastBrick";
-            static const string HideBrick                   =       "hideBrick";
-            static const string ShowBrick                   =       "showBrick";
-            static const string IfLogicBeginBrick           =        "ifLogicBeginBrick";
-            static const string IfLogicElseBrick            =       "ifLogicElseBrick";
-            static const string IfLogicEndBrick             =       "ifLogicEndBrick";
-            static const string ForeverBrick                =       "foreverBrick";
-            static const string LoopEndlessBrick            =       "loopEndlessBrick";
-            static const string RepeatBrick                 =       "repeatBrick";
-            static const string LoopEndBrick                =       "loopEndBrick";
-            static const string SetVariableBrick            =       "setVariableBrick";
-            static const string ChangeVariableBrick         =       "changeVariableBrick";
-            static const string ChangeGhostEffectByNBrick   =       "changeGhostEffectByNBrick";
-            static const string SetSizeToBrick              =       "setSizeToBrick";
-            static const string ChangeSizeByNBrick          =       "changeSizeByNBrick";
-            static const string NextLookBrick               =       "nextLookBrick";
-            static const string SetXBrick                   =       "setXBrick";
-            static const string SetYBrick                   =       "setYBrick";
-            static const string ChangeXByNBrick             =       "changeXByNBrick";
-            static const string ChangeYByNBrick             =       "changeYByNBrick";
-            static const string PointInDirectionBrick       =       "pointInDirectionBrick";
-            static const string TurnLeftBrick               =       "turnLeftBrick";
-            static const string TurnRightBrick              =       "turnRightBrick";
-			static const string MoveNStepsBrick				=		"moveNStepsBrick";
-            static const string ChangeGhostEffect           =       "changeGhostEffect";
-            static const string TimeToWaitInSeconds         =       "timeToWaitInSeconds";
-            static const string Size                        =       "size";
-            static const string XPosition                   =       "xPosition";
-            static const string YPosition                   =       "yPosition";
-            static const string XMovement                   =       "xMovement";
-            static const string YMovement                   =       "yMovement";
-            static const string Degrees                     =       "degrees";
-			static const string Steps						=		"steps";
-            static const string XDestination                =       "xDestination";
-            static const string YDestination                =       "yDestination";
-            static const string DurationInSeconds			=		"durationInSeconds";
-            static const string Transparency                =       "transparency";
-            static const string BroadcastMessage            =       "broadcastMessage";
-            static const string Sound                       =       "sound";
-            static const string FileName                    =       "fileName";
-            static const string Name                        =       "name";
-            static const string TimesToRepeat               =       "timesToRepeat";
-            static const string IfCondition                 =       "ifCondition";
+            static const std::string SetLookBrick                =       "setLookBrick";
+            static const std::string WaitBrick                   =       "waitBrick";
+            static const std::string PlaceAtBrick                =       "placeAtBrick";
+            static const std::string SetGhostEffectBrick         =       "setGhostEffectBrick";
+            static const std::string PlaySoundBrick              =       "playSoundBrick";
+            static const std::string GlideToBrick                =       "glideToBrick";
+            static const std::string BroadcastBrick              =       "broadcastBrick";
+            static const std::string HideBrick                   =       "hideBrick";
+            static const std::string ShowBrick                   =       "showBrick";
+            static const std::string IfLogicBeginBrick           =        "ifLogicBeginBrick";
+            static const std::string IfLogicElseBrick            =       "ifLogicElseBrick";
+            static const std::string IfLogicEndBrick             =       "ifLogicEndBrick";
+            static const std::string ForeverBrick                =       "foreverBrick";
+            static const std::string LoopEndlessBrick            =       "loopEndlessBrick";
+            static const std::string RepeatBrick                 =       "repeatBrick";
+            static const std::string LoopEndBrick                =       "loopEndBrick";
+            static const std::string SetVariableBrick            =       "setVariableBrick";
+            static const std::string ChangeVariableBrick         =       "changeVariableBrick";
+            static const std::string ChangeGhostEffectByNBrick   =       "changeGhostEffectByNBrick";
+            static const std::string SetSizeToBrick              =       "setSizeToBrick";
+            static const std::string ChangeSizeByNBrick          =       "changeSizeByNBrick";
+            static const std::string NextLookBrick               =       "nextLookBrick";
+            static const std::string SetXBrick                   =       "setXBrick";
+            static const std::string SetYBrick                   =       "setYBrick";
+            static const std::string ChangeXByNBrick             =       "changeXByNBrick";
+            static const std::string ChangeYByNBrick             =       "changeYByNBrick";
+            static const std::string PointInDirectionBrick       =       "pointInDirectionBrick";
+            static const std::string TurnLeftBrick               =       "turnLeftBrick";
+            static const std::string TurnRightBrick              =       "turnRightBrick";
+			static const std::string MoveNStepsBrick				=		"moveNStepsBrick";
+            static const std::string ChangeGhostEffect           =       "changeGhostEffect";
+            static const std::string TimeToWaitInSeconds         =       "timeToWaitInSeconds";
+            static const std::string Size                        =       "size";
+            static const std::string XPosition                   =       "xPosition";
+            static const std::string YPosition                   =       "yPosition";
+            static const std::string XMovement                   =       "xMovement";
+            static const std::string YMovement                   =       "yMovement";
+            static const std::string Degrees                     =       "degrees";
+			static const std::string Steps						=		"steps";
+            static const std::string XDestination                =       "xDestination";
+            static const std::string YDestination                =       "yDestination";
+            static const std::string DurationInSeconds			=		"durationInSeconds";
+            static const std::string Transparency                =       "transparency";
+            static const std::string BroadcastMessage            =       "broadcastMessage";
+            static const std::string Sound                       =       "sound";
+            static const std::string FileName                    =       "fileName";
+            static const std::string Name                        =       "name";
+            static const std::string TimesToRepeat               =       "timesToRepeat";
+            static const std::string IfCondition                 =       "ifCondition";
         }
     };
 
     namespace ErrorMessage
     {
-         static const string Missing                        =       " missing";
+         static const std::string Missing                        =       " missing";
     };
 
 	namespace Player
 	{
-		static const string xmlFileName						=		"code.xml";
+		static const std::string xmlFileName						=		"code.xml";
 	};
 };

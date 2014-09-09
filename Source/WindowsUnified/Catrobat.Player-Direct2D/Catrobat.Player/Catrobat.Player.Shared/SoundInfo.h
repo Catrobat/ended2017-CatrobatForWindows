@@ -2,14 +2,12 @@
 
 #include <string>
 
-using namespace std;
-
 class SoundInfo
 {
 public:
-	SoundInfo(string soundInfoReference);
+	SoundInfo(std::string soundInfoReference);
 
 private: 
-	string m_soundInfoReference;
+	std::string m_soundInfoReference;
 };
 

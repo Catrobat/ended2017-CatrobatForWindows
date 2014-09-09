@@ -3,7 +3,7 @@
 #include "Script.h"
 #include "Object.h"
 
-CostumeBrick::CostumeBrick(string costumeDataReference, int index, Script *parent) :
+CostumeBrick::CostumeBrick(std::string costumeDataReference, int index, Script *parent) :
 	Brick(TypeOfBrick::CostumeBrick, parent), m_costumeDataReference(costumeDataReference), m_index(index)
 {
 }

@@ -13,9 +13,6 @@
 #include "UserVariable.h"
 #include "XMLParserException.h"
 
-using namespace std;
-using namespace rapidxml;
-
 class ContainerBrick;
 class XMLParser
 {
@@ -23,71 +20,71 @@ public:
 	XMLParser();
 	~XMLParser();
 
-	Project*					GetProject();
-	bool						LoadXML(string fileName);
+	Project*								GetProject();
+	bool									LoadXML(std::string fileName);
 
 private:
-	Project*					m_project;
+	Project*								m_project;
 
 	// Parser
-	vector<ContainerBrick*> *m_containerStack;	
-	map<VariableManagementBrick*, string> *m_pendingVariables;
+	std::vector<ContainerBrick*> *m_containerStack;	
+	std::map<VariableManagementBrick*, std::string> *m_pendingVariables;
 
-	void						ParseXML						(string xml);
-	Project*					ParseProjectHeader				(xml_document<> *doc);
+	void									ParseXML						(std::string xml);
+	Project*								ParseProjectHeader				(rapidxml::xml_document<> *doc);
 
-	void						ParseObjectList					(xml_document<> *doc, ObjectList *objectList);
-	Object*						ParseObject						(xml_node<> *baseNode);
-	Look*						ParseLook						(xml_node<> *baseNode);
+	void									ParseObjectList					(rapidxml::xml_document<> *doc, ObjectList *objectList);
+	Object*									ParseObject						(rapidxml::xml_node<> *baseNode);
+	Look*									ParseLook						(rapidxml::xml_node<> *baseNode);
 
-	Script*						ParseStartScript				(xml_node<> *baseNode, Object *object);
-	Script*						ParseBroadcastScript			(xml_node<> *baseNode, Object *object);
-	Script*						ParseWhenScript					(xml_node<> *baseNode, Object *object);
+	Script*									ParseStartScript				(rapidxml::xml_node<> *baseNode, Object *object);
+	Script*									ParseBroadcastScript			(rapidxml::xml_node<> *baseNode, Object *object);
+	Script*									ParseWhenScript					(rapidxml::xml_node<> *baseNode, Object *object);
 
-	void						ParseBrickList					(xml_node<> *baseNode, Script *script);
-	Brick*						ParseLookBrick					(xml_node<> *baseNode, Script *script);
-	Brick*						ParseWaitBrick					(xml_node<> *baseNode, Script *script);
-	Brick*						ParsePlaceAtBrick				(xml_node<> *baseNode, Script *script);
-	Brick*						ParseGlideToBrick				(xml_node<> *baseNode, Script *script);
-	Brick*						ParseSetGhostEffectBrick		(xml_node<> *baseNode, Script *script);
-	Brick*						ParsePlaySoundBrick				(xml_node<> *baseNode, Script *script);
-	Brick*						ParseBroadcastBrick				(xml_node<> *baseNode, Script *script);
-	Brick*						ParseHideBrick					(xml_node<> *baseNode, Script *script);
-	Brick*						ParseShowBrick					(xml_node<> *baseNode, Script *script);
-	Brick*						ParseIfLogicBeginBrick			(xml_node<> *baseNode, Script *script);
-	void						ParseIfLogicElseBrick			(xml_node<> *baseNode, Script *script);
-	void						ParseIfLogicEndBrick			(xml_node<> *baseNode, Script *script);
-	Brick*						ParseForeverBrick				(xml_node<> *baseNode, Script *script);
-	void						ParseForeverEndBrick			(xml_node<> *baseNode, Script *script);
-	Brick*						ParseRepeatBrick				(xml_node<> *baseNode, Script *script);
-	void						ParseRepeatEndBrick				(xml_node<> *baseNode, Script *script);
-	Brick*						ParseSetVariableBrick			(xml_node<> *baseNode, Script *script);
-	Brick*						ParseChangeVariableBrick		(xml_node<> *baseNode, Script *script);
-	Brick*						ParseChangeGhostEffectByNBrick	(xml_node<> *baseNode, Script *script);
-	Brick*						ParseSetSizeToBrick				(xml_node<> *baseNode, Script *script);
-	Brick*						ParseChangeSizeByNBrick			(xml_node<> *baseNode, Script *script);
-	Brick*						ParseNextLookBrick				(xml_node<> *baseNode, Script *script);
-	Brick*						ParseSetXBrick					(xml_node<> *baseNode, Script *script);
-	Brick*						ParseSetYBrick					(xml_node<> *baseNode, Script *script);
-	Brick*						ParseChangeXByNBrick			(xml_node<> *baseNode, Script *script);
-	Brick*						ParseChangeYByNBrick			(xml_node<> *baseNode, Script *script);
-	Brick*						ParsePointInDirectionBrick		(xml_node<> *baseNode, Script *script);
-	Brick*						ParseTurnLeftBrick				(xml_node<> *baseNode, Script *script);
-	Brick*						ParseTurnRightBrick				(xml_node<> *baseNode, Script *script);
-	Brick*						ParseMoveNStepsBrick			(xml_node<> *baseNode, Script *script);
+	void									ParseBrickList					(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseLookBrick					(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseWaitBrick					(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParsePlaceAtBrick				(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseGlideToBrick				(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseSetGhostEffectBrick		(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParsePlaySoundBrick				(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseBroadcastBrick				(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseHideBrick					(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseShowBrick					(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseIfLogicBeginBrick			(rapidxml::xml_node<> *baseNode, Script *script);
+	void									ParseIfLogicElseBrick			(rapidxml::xml_node<> *baseNode, Script *script);
+	void									ParseIfLogicEndBrick			(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseForeverBrick				(rapidxml::xml_node<> *baseNode, Script *script);
+	void									ParseForeverEndBrick			(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseRepeatBrick				(rapidxml::xml_node<> *baseNode, Script *script);
+	void									ParseRepeatEndBrick				(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseSetVariableBrick			(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseChangeVariableBrick		(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseChangeGhostEffectByNBrick	(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseSetSizeToBrick				(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseChangeSizeByNBrick			(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseNextLookBrick				(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseSetXBrick					(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseSetYBrick					(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseChangeXByNBrick			(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseChangeYByNBrick			(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParsePointInDirectionBrick		(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseTurnLeftBrick				(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseTurnRightBrick				(rapidxml::xml_node<> *baseNode, Script *script);
+	Brick*									ParseMoveNStepsBrick			(rapidxml::xml_node<> *baseNode, Script *script);
 
-	FormulaTree*				ParseFormulaTree				(xml_node<> *baseNode);
+	FormulaTree*							ParseFormulaTree				(rapidxml::xml_node<> *baseNode);
 
-	void						ParseVariableList				(xml_document<> *doc, Project *project);
-	void						ParseGlobalVariables			(Project *project, const xml_node<> *baseNode);
-	void						ParseObjectVariables			(Project *project, const xml_node<> *baseNode);
-	pair<string, UserVariable*>	ParseUserVariable				(const xml_node<> *baseNode);
-	xml_node<>*					EvaluateString					(string query, string input, xml_node<> *node);
-	int							EvaluateIndex					(string *input);
-	void						SetPendingVariables				();
+	void									ParseVariableList				(rapidxml::xml_document<> *doc, Project *project);
+	void									ParseGlobalVariables			(Project *project, const rapidxml::xml_node<> *baseNode);
+	void									ParseObjectVariables			(Project *project, const rapidxml::xml_node<> *baseNode);
+	std::pair<std::string, UserVariable*>	ParseUserVariable				(const rapidxml::xml_node<> *baseNode);
+	rapidxml::xml_node<>*					EvaluateString					(std::string query, std::string input, rapidxml::xml_node<> *node);
+	int										EvaluateIndex					(std::string *input);
+	void									SetPendingVariables				();
 
 	// Parser Helper Methods
-	bool						ParseBoolean					(std::string input);
-	std::vector<std::string>*	ParseVector						(std::string input);
-	time_t						ParseDateTime					(std::string input);
+	bool									ParseBoolean					(std::string input);
+	std::vector<std::string>*				ParseVector						(std::string input);
+	time_t									ParseDateTime					(std::string input);
 };

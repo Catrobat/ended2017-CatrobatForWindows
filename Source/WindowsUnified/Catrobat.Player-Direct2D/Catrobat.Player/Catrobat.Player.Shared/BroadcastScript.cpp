@@ -2,7 +2,7 @@
 #include "BroadcastScript.h"
 #include "BroadcastMessageDaemon.h"
 
-BroadcastScript::BroadcastScript(string receivedMessage, Object *parent) :
+BroadcastScript::BroadcastScript(std::string receivedMessage, Object *parent) :
 Script(TypeOfScript::BroadcastScript, parent), m_receivedMessage(receivedMessage)
 {
     m_broadcastMessageListener = ref new BroadcastMessageListener();
@@ -10,7 +10,7 @@ Script(TypeOfScript::BroadcastScript, parent), m_receivedMessage(receivedMessage
     BroadcastMessageDaemon::Instance()->Register(m_broadcastMessageListener);
 }
 
-string BroadcastScript::GetReceivedMessage()
+std::string BroadcastScript::GetReceivedMessage()
 {
     return m_receivedMessage;
 }

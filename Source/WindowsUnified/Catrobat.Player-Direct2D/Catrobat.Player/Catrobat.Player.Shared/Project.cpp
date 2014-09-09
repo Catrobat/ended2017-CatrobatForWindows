@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Project.h"
 
+using namespace std;
+
 Project::Project(
 	string								applicationBuildName,
 	int									applicationBuildNumber,

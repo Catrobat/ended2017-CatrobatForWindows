@@ -4,212 +4,33 @@
 #include "PlayerException.h"
 
 #include <exception>
+#include <math.h>
 
 using namespace D2D1;
 
-Object::Object(string name) :
-BaseObject(),
+Object::Object(std::string name) :
 m_name(name),
-m_opacity(1),
-m_rotation(0.0f),
-m_look(NULL)
+m_look(NULL),
+m_opacity(1.f),
+m_rotation(0.f),
+m_translation(Point2F()),
+m_objectScale(SizeF(1.f, 1.f)),
+m_transformation(Matrix3x2F()),
+m_ratio(SizeF()),
+m_logicalSize(SizeF()),
+m_renderTargetSize(SizeF())
 {
-    m_lookList = new list<Look*>();
-    m_scripts = new list<Script*>();
-    m_soundInfos = new list<SoundInfo*>();
-    m_variableList = new map<string, UserVariable*>();
+    m_lookList = new std::list<Look*>();
+    m_scripts = new std::list<Script*>();
+    m_soundInfos = new std::list<SoundInfo*>();
+    m_variableList = new std::map<std::string, UserVariable*>();
 }
 
-void Object::AddLook(Look *lookData)
-{
-    m_lookList->push_back(lookData);
-}
-
-void Object::AddScript(Script *script)
-{
-    m_scripts->push_back(script);
-}
-
-void Object::AddSoundInfo(SoundInfo *soundInfo)
-{
-    m_soundInfos->push_back(soundInfo);
-}
-
-string Object::GetName()
-{
-    return m_name;
-}
-
-int Object::GetScriptListSize()
-{
-    return m_scripts->size();
-}
-
-int Object::GetLookDataListSize()
-{
-    return m_lookList->size();
-}
-
-Look *Object::GetLook(int index)
-{
-    list<Look*>::iterator it = m_lookList->begin();
-    advance(it, index);
-
-    if (it != m_lookList->end())
-    {
-        return *it;
-    }
-
-    return NULL;
-}
-
-Script *Object::GetScript(int index)
-{
-    list<Script*>::iterator it = m_scripts->begin();
-    advance(it, index);
-    return *it;
-}
-
-void Object::LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceResources)
-{
-    SetTranslation(0.f, 0.f);
-
-    for (int i = 0; i < GetLookDataListSize(); i++)
-    {
-        m_look = GetLook(i);
-
-        if (m_look != NULL)
-        {
-            m_look->LoadTexture(deviceResources);
-            m_origin = XMFLOAT2(((float) m_look->GetWidth()) / 2.0f, ((float) m_look->GetHeight()) / 2.0f);
-        }
-    }
-}
-
-void Object::SetupWindowSizeDependentResources(const std::shared_ptr<DX::DeviceResources>& deviceResources)
-{
-    auto deviceContext = deviceResources->GetD2DDeviceContext();
-    m_ratioX = deviceContext->GetSize().width / ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
-    m_ratioY = deviceContext->GetSize().height / ProjectDaemon::Instance()->GetProject()->GetScreenHeight();
-
-    m_renderTargetSize = m_look->GetBitMap()->GetSize();
-    m_renderTargetSize.width *= m_ratioX;
-    m_renderTargetSize.height *= m_ratioY;
-    m_renderTarget = Matrix3x2F::Translation(deviceContext->GetSize().width / 2 - m_renderTargetSize.width / 2,
-        deviceContext->GetSize().height / 2 - m_renderTargetSize.height / 2);
-}
-
-double radians(float degree)
-{
-    return degree * 3.14159265 / 180.0f;
-}
-
-/*
-Draw the current look of this object.
-*/
-void Object::Draw(const std::shared_ptr<DX::DeviceResources>& deviceResources)
-{
-    if (m_look == NULL)
-    {
-        return;
-    }
-
-    auto deviceContext = deviceResources->GetD2DDeviceContext();
-    deviceContext->Clear(ColorF(ColorF::White));
-    deviceContext->SetTransform(m_transformation * m_renderTarget);
-    deviceContext->DrawBitmap(m_look->GetBitMap(),
-        RectF(0.f, 0.f, m_renderTargetSize.width, m_renderTargetSize.height));
-}
-
-void Object::SetLook(int index)
-{
-    m_look = GetLook(index);
-}
-
-int Object::GetLook()
-{
-    int i = 0;
-    list<Look*>::iterator it = m_lookList->begin();
-
-    while ((*it) != m_look)
-    {
-        it++;
-        i++;
-    }
-
-    if (it != m_lookList->end())
-    {
-        return i;
-    }
-
-    return 0;
-}
-
-int Object::GetLookCount()
-{
-    return m_lookList->size();
-}
-
-Look* Object::GetCurrentLook()
-{
-    if (!m_look)
-    {
-        return GetLook(0);
-    }
-
-    return m_look;
-}
-
-Bounds Object::GetBounds()
-{
-    Bounds bounds;
-    bounds.x = 0.0f;
-    bounds.y = 0.0f;
-    bounds.width = 0.0f;
-    bounds.height = 0.0f;
-
-    auto currentLook = GetCurrentLook();
-
-    if (currentLook != NULL)
-    {
-        bounds.x = m_position.x - currentLook->GetWidth() / 2.0f;
-        bounds.y = m_position.y - currentLook->GetHeight() / 2.0f;
-        bounds.width = (float) currentLook->GetWidth();
-        bounds.height = (float) currentLook->GetHeight();
-    }
-
-    return bounds;
-}
-
-//Executes all Startscripts of the object and sets the first look if the
-//costume list is not empty.
-void Object::StartUp()
-{
-    if (m_lookList != NULL && m_lookList->size() > 0)
-    {
-        m_look = m_lookList->front();
-    }
-
-    for (int i = 0; i < GetScriptListSize(); i++)
-    {
-        Script *script = GetScript(i);
-
-        if (script->GetType() == Script::TypeOfScript::StartScript)
-        {
-            script->Execute();
-        }
-    }
-}
-
+#pragma region TRANSFORMATION
 void Object::SetTranslation(float x, float y)
 {
-    m_translation.x = x;
-    m_translation.y = y;
-    m_transformation = Matrix3x2F::Translation(m_translation.x * m_ratioX, m_translation.y * m_ratioY);
-
-    //TODO: right positioning
-    m_position.x = ProjectDaemon::Instance()->GetProject()->GetScreenWidth() / 2.0f + x;
-    m_position.y = ProjectDaemon::Instance()->GetProject()->GetScreenHeight() / 2.0f + y;
+    m_translation = Point2F(x, y);
+    RecalculateTransformation();
 }
 
 void Object::GetTranslation(float &x, float &y)
@@ -245,6 +66,7 @@ float Object::GetTransparency()
 void Object::SetRotation(float rotation)
 {
     m_rotation = rotation;
+    RecalculateTransformation();
 }
 
 float Object::GetRotation()
@@ -252,34 +74,144 @@ float Object::GetRotation()
     return m_rotation;
 }
 
-void Object::SetScale(float scale)
+void Object::SetScale(float x, float y)
 {
-    if (scale < 0.0f)
+    if (x < 0.f)
     {
-        scale = 0.0f;
+        x = 0.f;
+    }
+    if (y < 0.f)
+    {
+        y = 0.f;
     }
 
-    m_objectScale.x = m_objectScale.y = scale / 100.0f;
+    m_objectScale = SizeF(x, y);
+    RecalculateTransformation();
 }
 
-float Object::GetScale()
+void Object::GetScale(float &x, float &y)
 {
-    return m_objectScale.x * 100.0f;
+    x = m_objectScale.width;
+    y = m_objectScale.height;
 }
+#pragma endregion
 
-void Object::AddVariable(string name, UserVariable* variable)
+#pragma region GENERAL
+void Object::AddLook(Look *lookData)
 {
-    m_variableList->insert(pair<string, UserVariable*>(name, variable));
+    m_lookList->push_back(lookData);
 }
 
-void Object::AddVariable(pair<string, UserVariable*> variable)
+void Object::AddScript(Script *script)
+{
+    m_scripts->push_back(script);
+}
+
+void Object::AddSoundInfo(SoundInfo *soundInfo)
+{
+    m_soundInfos->push_back(soundInfo);
+}
+void Object::AddVariable(std::string name, UserVariable* variable)
+{
+    m_variableList->insert(std::pair<std::string, UserVariable*>(name, variable));
+}
+
+void Object::AddVariable(std::pair<std::string, UserVariable*> variable)
 {
     m_variableList->insert(variable);
 }
 
-UserVariable* Object::GetVariable(string name)
+void Object::SetLook(int index)
 {
-    map<string, UserVariable*>::iterator searchItem = m_variableList->find(name);
+    m_look = GetLook(index);
+    RecalculateTransformation();
+}
+
+void Object::SetWhenScript(WhenScript* whenScript)
+{
+    m_whenScript = whenScript;
+}
+#pragma endregion
+
+#pragma region RENDERING
+void Object::LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceResources)
+{
+    SetTranslation(0.f, 0.f);
+
+    for (int i = 0; i < GetLookDataListSize(); i++)
+    {
+        m_look = GetLook(i);
+
+        if (m_look != NULL)
+        {
+            m_look->LoadTexture(deviceResources);
+        }
+    }
+}
+
+void Object::SetupWindowSizeDependentResources(const std::shared_ptr<DX::DeviceResources>& deviceResources)
+{
+    auto deviceContext = deviceResources->GetD2DDeviceContext();
+    m_logicalSize = deviceContext->GetSize();
+    m_ratio.width = m_logicalSize.width / ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
+    m_ratio.height = m_logicalSize.height / ProjectDaemon::Instance()->GetProject()->GetScreenHeight() * (-1);
+    RecalculateTransformation();
+}
+
+void Object::StartUp()
+{
+    if (m_lookList != NULL && m_lookList->size() > 0)
+    {
+        m_look = m_lookList->front();
+    }
+
+    for (int i = 0; i < GetScriptListSize(); i++)
+    {
+        Script *script = GetScript(i);
+
+        if (script->GetType() == Script::TypeOfScript::StartScript)
+        {
+            script->Execute();
+        }
+    }
+}
+
+void Object::Draw(const std::shared_ptr<DX::DeviceResources>& deviceResources)
+{
+    if (m_look == NULL)
+    {
+        return;
+    }
+
+    auto deviceContext = deviceResources->GetD2DDeviceContext();
+    deviceContext->SetTransform(m_transformation);
+    deviceContext->Clear(ColorF(ColorF::White));
+    deviceContext->DrawBitmap(m_look->GetBitMap(),
+        RectF(0.f, 0.f, m_renderTargetSize.width, m_renderTargetSize.height));
+}
+#pragma endregion
+
+#pragma region GETTERS
+std::string Object::GetName()
+{
+    return m_name;
+}
+
+int Object::GetScriptListSize()
+{
+    return m_scripts->size();
+}
+
+Script *Object::GetScript(int index)
+{
+    std::list<Script*>::iterator it = m_scripts->begin();
+    advance(it, index);
+    return *it;
+}
+
+UserVariable* Object::GetVariable(std::string name)
+{
+    std::map<std::string, UserVariable*>::iterator searchItem = m_variableList->find(name);
 
     if (searchItem != m_variableList->end())
     {
@@ -289,9 +221,56 @@ UserVariable* Object::GetVariable(string name)
     return NULL;
 }
 
-void Object::SetWhenScript(WhenScript* whenScript)
+int Object::GetLookDataListSize()
 {
-    m_whenScript = whenScript;
+    return m_lookList->size();
+}
+
+Look *Object::GetLook(int index)
+{
+    std::list<Look*>::iterator it = m_lookList->begin();
+    advance(it, index);
+
+    if (it != m_lookList->end())
+    {
+        return *it;
+    }
+
+    return NULL;
+}
+
+int Object::GetLook()
+{
+    int i = 0;
+    std::list<Look*>::iterator it = m_lookList->begin();
+
+    while ((*it) != m_look)
+    {
+        it++;
+        i++;
+    }
+
+    if (it != m_lookList->end())
+    {
+        return i;
+    }
+
+    return 0;
+}
+
+int Object::GetLookCount()
+{
+    return m_lookList->size();
+}
+
+Look* Object::GetCurrentLook()
+{
+    if (!m_look)
+    {
+        return GetLook(0);
+    }
+
+    return m_look;
 }
 
 WhenScript* Object::GetWhenScript()
@@ -299,160 +278,29 @@ WhenScript* Object::GetWhenScript()
     return m_whenScript;
 }
 
-bool Object::IsTapPointHitting(ID3D11DeviceContext1* context, ID3D11Device* device, double xPosition, double yPosition, double resolutionFactor)
+#pragma endregion
+
+#pragma region INTERNAL
+void Object::RecalculateTransformation()
 {
-    bool isHitting = false;
-
-    auto bounds = GetBounds();
-
-    if (context == NULL || device == NULL)
-        return false;
-
-    if (m_opacity > 0)
+    if (m_look == NULL)
     {
-        XMVECTOR sourcePosition = XMVectorSet((float) xPosition, (float) yPosition, 0.f, 0.f);
-        FXMVECTOR scale = XMVectorSet(m_objectScale.x, m_objectScale.x, 0.0f, 0.0f);
-        FXMVECTOR rotationOrigin = XMVectorSet(m_position.x, m_position.y, 0.0f, 0.0f);
-        FXMVECTOR translation = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
-
-        XMMATRIX matrix = XMMatrixTransformation2D(rotationOrigin, 0.0f, scale, rotationOrigin, (float) radians(m_rotation), translation);
-        XMVECTOR *determinant = nullptr;
-        matrix = XMMatrixInverse(determinant, matrix);
-        XMVECTOR newPosition = XMVector2TransformCoord(sourcePosition, matrix);
-
-        //Store to XMLFLOAT2 because of compatibility issues when switching between ARM and Win32
-        XMFLOAT2 newPos;
-        XMStoreFloat2(&newPos, newPosition);
-
-        //Set the position back because sprites were placed at texture width / 2.0 and texture height / 2.0 before
-        newPos.x -= bounds.x;
-        newPos.y -= bounds.y;
-
-        D3D11_SHADER_RESOURCE_VIEW_DESC pDesc;
-
-        //if (bounds.x <= xNormalized &&
-        //    bounds.y <= yNormalized &&
-        //    (bounds.x + bounds.width) >= xNormalized &&
-        //    (bounds.y + bounds.height) >= yNormalized)
-        //{
-        //    //TODO: Calculate bounding box accordingly to the transformation and check if tap point is in between the borders
-        //}
-        //else
-        {
-            if (m_look->GetResourceView() == NULL)
-            {
-                //TODO: throw exception
-                isHitting = false;
-            }
-            else
-            {
-                m_look->GetResourceView()->GetDesc(&pDesc);
-                ID3D11Texture2D* pOurStagingTexture;
-
-                D3D11_TEXTURE2D_DESC stagingTextureDescription;
-                stagingTextureDescription.Width = 1;
-                stagingTextureDescription.Height = 1;
-                stagingTextureDescription.MipLevels = 1;
-                stagingTextureDescription.ArraySize = 1;
-                stagingTextureDescription.SampleDesc.Count = 1;
-                stagingTextureDescription.SampleDesc.Quality = 0;
-                stagingTextureDescription.Format = pDesc.Format;
-
-                //D3D11_USAGE_STAGING = a resource that supports data transfer (copy) from the GPU to the CPU.
-                stagingTextureDescription.Usage = D3D11_USAGE_STAGING;
-                stagingTextureDescription.BindFlags = 0;
-
-                //D3D11_CPU_ACCESS_READ = The resource is to be mappable so that the CPU can read its contents.
-                //Resources created with this flag cannot be set as either inputs or outputs to the pipeline
-                //and must be created with staging usage.
-                stagingTextureDescription.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
-                stagingTextureDescription.MiscFlags = 0;
-
-                try
-                {
-                    HRESULT result = device->CreateTexture2D(&stagingTextureDescription, NULL, &pOurStagingTexture);
-                    auto currentLook = GetCurrentLook();
-
-                    //TODO: Delete this - is just for debug reasons
-                    float width = currentLook->GetWidth();
-                    float height = currentLook->GetHeight();
-                    //------------------
-
-                    if (FAILED(result) || newPos.x < 0 || newPos.y < 0 || newPos.x + 1 > currentLook->GetWidth() || newPos.y + 1 > currentLook->GetHeight())
-                    {
-                        //TODO: Error handling and check if newPos.x + 1 can't exceed the width and height of the texture
-                        isHitting = false;
-                        if (pOurStagingTexture != NULL)
-                            pOurStagingTexture->Release();
-                    }
-                    else
-                    {
-                        //TODO: Check srcBox size according to texture bounds (see above)
-                        D3D11_BOX srcBox;
-                        srcBox.left = newPos.x;
-                        srcBox.right = srcBox.left + 1;
-                        srcBox.top = newPos.y;
-                        srcBox.bottom = srcBox.top + 1;
-                        srcBox.front = 0;
-                        srcBox.back = 1;
-
-                        if (m_look->GetTexture() == NULL || pOurStagingTexture == NULL)
-                        {
-                            //TODO: Error handling
-                            isHitting = false;
-                            if (pOurStagingTexture != NULL)
-                                pOurStagingTexture->Release();
-                        }
-                        else
-                        {
-                            context->CopySubresourceRegion(pOurStagingTexture, 0, 0, 0, 0, m_look->GetTexture(), 0, &srcBox);
-
-                            if (pOurStagingTexture == NULL)
-                            {
-                                //TODO: Error handling
-                                isHitting = false;
-                            }
-                            else
-                            {
-                                D3D11_MAPPED_SUBRESOURCE msr;
-                                result = context->Map(pOurStagingTexture, 0, D3D11_MAP_READ, 0, &msr);
-                                BYTE *pixel = (BYTE*) msr.pData;
-
-                                if (FAILED(result) || msr.pData == NULL)
-                                {
-                                    //TODO: Error handling
-                                    //auto bla = device->GetDeviceRemovedReason();
-                                    isHitting = false;
-                                    if (pOurStagingTexture != NULL)
-                                        context->Unmap(pOurStagingTexture, 0);
-                                }
-                                else
-                                {
-                                    //TODO: Delete unnecessary rgb pixels. Just keep alpha in release version
-                                    // copy data
-                                    BYTE p1 = pixel[0];
-                                    BYTE p2 = pixel[1];
-                                    BYTE p3 = pixel[2];
-                                    BYTE p4 = pixel[3];
-
-                                    if (pOurStagingTexture != NULL)
-                                        context->Unmap(pOurStagingTexture, 0);
-                                    isHitting = p4 > 0;
-                                }
-
-                                if (pOurStagingTexture != NULL)
-                                    pOurStagingTexture->Release();
-                            }
-                        }
-                    }
-                }
-                catch (exception e)
-                {
-                    //TODO: Error handling
-                }
-            }
-        }
+        return;
     }
+    m_renderTargetSize = m_look->GetBitMap()->GetSize();
+    m_renderTargetSize.width *= m_ratio.width;
+    m_renderTargetSize.height *= m_ratio.height;
+    Matrix3x2F renderTarget = Matrix3x2F::Identity();
+    renderTarget = Matrix3x2F::Translation(m_logicalSize.width / 2 - m_renderTargetSize.width / 2,
+        m_logicalSize.height / 2 - m_renderTargetSize.height / 2);
 
-    return isHitting;
+    Matrix3x2F translation = Matrix3x2F::Translation(m_translation.x * m_ratio.width, m_translation.y * m_ratio.height) * renderTarget;
+    D2D1_POINT_2F origin;
+    origin.x = translation._31 + m_renderTargetSize.width / 2;
+    origin.y = translation._32 + m_renderTargetSize.height / 2;
+
+    m_transformation = translation *
+        Matrix3x2F::Rotation(m_rotation, origin) *
+        Matrix3x2F::Scale(m_objectScale, origin);
 }
+#pragma endregion

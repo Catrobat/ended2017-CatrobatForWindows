@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BaseObject.h"
+#include "Object.h"
 #include "ObjectList.h"
 #include "UserVariable.h"
 
@@ -45,7 +45,7 @@ public:
 	ObjectList*							GetObjectList();
 	UserVariable*						GetVariable(std::string name);
 	void								AddVariable(std::string name, UserVariable *variable);
-	void								AddVariable(std::pair<string, UserVariable*> variable);
+	void								AddVariable(std::pair<std::string, UserVariable*> variable);
 
 
 private:

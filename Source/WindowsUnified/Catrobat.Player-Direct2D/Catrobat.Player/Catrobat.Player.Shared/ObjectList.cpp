@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "ObjectList.h"
 
+using namespace std;
+
 ObjectList::ObjectList()
 {
 	m_objects = new list<Object*>();

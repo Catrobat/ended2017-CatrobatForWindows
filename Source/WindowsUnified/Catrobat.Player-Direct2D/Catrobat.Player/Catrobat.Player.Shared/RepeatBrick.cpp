@@ -2,6 +2,8 @@
 #include "RepeatBrick.h"
 #include "Interpreter.h"
 
+using namespace std;
+
 RepeatBrick::RepeatBrick(FormulaTree *times, Script *parent) :
 	ContainerBrick(TypeOfBrick::ContainerBrick, parent), m_timesToRepeat(times)
 {

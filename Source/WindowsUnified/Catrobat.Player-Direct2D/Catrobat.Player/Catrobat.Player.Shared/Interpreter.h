@@ -7,8 +7,6 @@
 #include "AccelerometerProvider.h"
 #include "LoudnessCapture.h"
 
-class FormulaTree;
-
 enum Childs {
     LeftChild, 
     RightChild, 
@@ -22,6 +20,7 @@ enum Inclination {
 	Yaw
 };
 
+class FormulaTree;
 class Interpreter
 {
 private:

@@ -2,7 +2,7 @@
 #include "SoundInfo.h"
 
 
-SoundInfo::SoundInfo(string soundInfoReference) :
+SoundInfo::SoundInfo(std::string soundInfoReference) :
 	m_soundInfoReference(soundInfoReference)
 {
 }

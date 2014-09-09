@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Brick.h"
-#include "BaseObject.h"
-#include "pch.h"
+//#include "Object.h"
+//#include "Brick.h"
 
 #include <list>
 
@@ -10,9 +9,8 @@
 #include <ppltasks.h>
 #include <windows.foundation.h>
 
-using namespace std;
-
 class Object;
+class Brick;
 class Script
 {
 public:
@@ -26,7 +24,7 @@ public:
 	Object *GetParent();
 
 	void AddBrick(Brick *brick);
-	void AddSpriteReference(string spriteReference);
+	void AddSpriteReference(std::string spriteReference);
 
 	void Execute();
 
@@ -39,12 +37,12 @@ public:
 protected:
 	Script(TypeOfScript scriptType, Object *parent);
 
-	list<Brick*> *m_brickList;
+	std::list<Brick*> *m_brickList;
 
 private:
 	Object *m_parent;
 	TypeOfScript m_scriptType;
-	string m_spriteReference;
+	std::string m_spriteReference;
     void SetIsRunning(bool isRunning);
-    IAsyncAction^ m_threadPoolWorkItem;
+    Windows::Foundation::IAsyncAction^ m_threadPoolWorkItem;
 };

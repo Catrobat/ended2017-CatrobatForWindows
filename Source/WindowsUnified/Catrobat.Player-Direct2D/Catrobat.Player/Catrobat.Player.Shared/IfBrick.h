@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ContainerBrick.h"
-#include "BaseObject.h"
+#include "Object.h"
 #include <list>
 
 enum IfBranchType
@@ -23,8 +23,8 @@ public:
 	void AddBrick(Brick *brick);
 	void SetCurrentAddMode(IfBranchType mode);
 private:
-	list<Brick*> *m_ifList;
-	list<Brick*> *m_elseList;
+	std::list<Brick*> *m_ifList;
+	std::list<Brick*> *m_elseList;
 	FormulaTree *m_condition;
 	IfBranchType m_currentAddMode;
 
