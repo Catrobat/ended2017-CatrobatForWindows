@@ -10,8 +10,15 @@ using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core.UI
 {
+  
+
   public sealed class NullItemCollection : IList
   {
+      private static readonly Look NullLook = new Look {Name = AppResources.Editor_NoLookSelected};
+      private static readonly Sound NullSound = new Sound { Name = AppResources.Editor_NoSoundSelected };
+      private static readonly BroadcastMessage NullBroadcastMessage = new BroadcastMessage { Content = AppResources.Editor_NoMessageSelected };
+      private static readonly Sprite NullSprite = new Sprite {Name = AppResources.Editor_NoSpriteSelected};
+
     public object NullObject { get; set; }
 
     private IList _sourceCollection;
@@ -26,22 +33,22 @@ namespace Catrobat.IDE.Core.UI
         {
           if (_sourceCollection is IList<Look>)
           {
-            NullObject = new Look { Name = AppResources.Editor_NoLookSelected };
+            NullObject = NullLook;
           }
 
           if (_sourceCollection is IList<Sound>)
           {
-            NullObject = new Sound { Name = AppResources.Editor_NoSoundSelected };
+            NullObject = NullSound;
           }
 
           if (_sourceCollection is IList<Sprite>)
           {
-            NullObject = new Sprite { Name = AppResources.Editor_NoSpriteSelected };
+            NullObject = NullSprite;
           }
 
           if (_sourceCollection is IList<BroadcastMessage>)
           {
-              NullObject = new BroadcastMessage { Content = AppResources.Editor_NoMessageSelected };
+              NullObject = NullBroadcastMessage;
           }
         }
       }

@@ -52,6 +52,9 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListPickerControl
             get { return (object)GetValue(SelectedItemProperty); }
             set
             {
+                if (value == NullItem)
+                    value = null;
+
                 SetValue(SelectedItemProperty, value);
             }
         }

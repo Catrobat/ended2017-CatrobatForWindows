@@ -76,10 +76,10 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListPickerControl
         {
             this._navigationHelper.OnNavigatedTo(e);
 
-            _firstSelectionChanged = true;
+            _skipNextSelectionChanged = true;
             ListBoxItems.ItemTemplate = ListPicker.PageItemTemplate;
             ListBoxItems.ItemsSource = null;
-            _firstSelectionChanged = true;
+            _skipNextSelectionChanged = true;
             ListBoxItems.ItemsSource = ListPicker.NullItemCollection;
             ListBoxItems.SelectedItem = ListPicker.GetItemWithNullItem();
 
@@ -93,14 +93,14 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListPickerControl
         }
 
 
-        private bool _firstSelectionChanged = true;
+        private bool _skipNextSelectionChanged = true;
         private static ListPicker _listPicker;
 
         private void ListBoxItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_firstSelectionChanged)
+            if (_skipNextSelectionChanged)
             {
-                _firstSelectionChanged = false;
+                _skipNextSelectionChanged = false;
                 return;
             }
 
