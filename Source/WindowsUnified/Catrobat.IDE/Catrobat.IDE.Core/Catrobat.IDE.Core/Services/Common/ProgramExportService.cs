@@ -91,7 +91,8 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public async Task CancelExport()
         {
-            _cancellationTokenSource.Cancel();
+            if(_cancellationTokenSource != null)
+                _cancellationTokenSource.Cancel();
         }
 
         public async Task CleanUpExport()

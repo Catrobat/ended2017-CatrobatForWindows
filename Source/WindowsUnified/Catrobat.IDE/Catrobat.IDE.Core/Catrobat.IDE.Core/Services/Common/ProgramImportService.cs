@@ -122,7 +122,8 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public async Task CancelImport()
         {
-            _cancellationTokenSource.Cancel();
+            if (_cancellationTokenSource != null)
+                _cancellationTokenSource.Cancel();
         }
 
 

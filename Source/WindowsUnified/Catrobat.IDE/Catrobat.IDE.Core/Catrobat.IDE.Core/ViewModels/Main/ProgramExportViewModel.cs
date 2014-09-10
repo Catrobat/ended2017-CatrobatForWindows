@@ -90,7 +90,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             ServiceLocator.NavigationService.NavigateTo<UploadProgramLoadingViewModel>();
 
-            // Determine which page to open
             JSONStatusResponse statusResponse = 
                 await ServiceLocator.WebCommunicationService.CheckTokenAsync(
                 Context.CurrentUserName, Context.CurrentToken, 
@@ -123,9 +122,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         protected override void GoBackAction()
         {
-            // TODO: cancel export
-            ResetViewModel();
-            base.GoBackAction();
+            if (IsLoading == false)
+            {
+                ResetViewModel();
+                base.GoBackAction();
+            }
         }
 
         #endregion
@@ -161,8 +162,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         public async override void NavigateTo()
         {
             IsLoading = true;
-            // TODO: prevent back navigation, or cancel on navigating back
-
             var programName = CurrentProgram.Name;
 
             string fileName = programName + StorageConstants.SupportedCatrobatFileTypes.ElementAt(0);
@@ -179,6 +178,12 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
 
             IsLoading = false;
+        }
+
+        public async override void NavigateFrom()
+        {
+            await ServiceLocator.ProgramExportService.CleanUpExport();
+            base.NavigateFrom();
         }
 
         private void ResetViewModel()
