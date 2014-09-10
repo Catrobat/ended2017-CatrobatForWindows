@@ -12,31 +12,29 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.Paint.Phone;
+using Windows.Storage.Streams;
 
 namespace Catrobat.Paint.WindowsPhone
 {
     public static class IdeInteraction
     {
-        public const string LocalFileName = "image.catrobat_ide_png";
+        public const string _localFileName = "image.catrobat_ide_png";
 
         public static async Task GotPictureFromIde(IStorageFile file)
         {
-            var fileStream = await file.OpenReadAsync();
+            BitmapImage bitmapImage = new BitmapImage();
 
-            //var localFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(
-            //    LocalFileName, CreationCollisionOption.ReplaceExisting);
-            //var localFileStream = await localFile.OpenAsync(FileAccessMode.ReadWrite);
+            using (IRandomAccessStream fileStream = await file.OpenReadAsync())
+            {
+                await bitmapImage.SetSourceAsync(fileStream);
+            }
 
-            //await fileStream.AsStream().CopyToAsync(localFileStream.AsStream());
-            //await localFileStream.FlushAsync();
+            WriteableBitmap writableBitmap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
 
-            var bitmapImage = new BitmapImage();
-            await bitmapImage.SetSourceAsync(fileStream);
-
-            fileStream.Seek(0);
-            var writableBitmap = new WriteableBitmap(
-                bitmapImage.PixelWidth, bitmapImage.PixelHeight);
-            bitmapImage.SetSourceAsync(fileStream);
+            using (IRandomAccessStream fileStream = await file.OpenReadAsync())
+            {
+                await writableBitmap.SetSourceAsync(fileStream);
+            }
 
             // TODO: edit "writableBitmap" and send it back to 
             // TODO: the IDE by using the following line
@@ -52,19 +50,22 @@ namespace Catrobat.Paint.WindowsPhone
             var imageWidth = image.PixelWidth;
             var imageHeight = image.PixelHeight;
 
-            var localFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(
-                LocalFileName, CreationCollisionOption.ReplaceExisting);
-            var localFileStream = await localFile.OpenAsync(FileAccessMode.ReadWrite);
+            StorageFolder tempFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync("Temp", CreationCollisionOption.OpenIfExists);
+            StorageFile localFile = await tempFolder.CreateFileAsync(_localFileName, CreationCollisionOption.ReplaceExisting);
+            using (IRandomAccessStream localFileStream = await localFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, localFileStream);
+                var pixels = image.PixelBuffer.ToArray();
 
-            var encoder = await BitmapEncoder.CreateAsync(
-              BitmapEncoder.PngEncoderId, localFileStream);
-
-            var pixels = image.PixelBuffer.ToArray();
-
-            encoder.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Straight,
-                (uint)imageWidth, (uint)imageHeight, 96, 96, pixels);
-            await encoder.FlushAsync();
-            localFileStream.Dispose();
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Straight,
+                          (uint)imageWidth,
+                          (uint)imageHeight,
+                          96,
+                          96,
+                          pixels);
+ 
+                await encoder.FlushAsync();
+            }
 
             var options = new Windows.System.LauncherOptions { DisplayApplicationPicker = false };
 

@@ -156,10 +156,10 @@ namespace Catrobat.IDE.WindowsShared.Services
 
                     for (var pixelStart = 0; pixelStart < pixels.Length; pixelStart += 4)
                     {
-                        pixels[pixelStart + 0] = 0x00; // Full transparent
-                        pixels[pixelStart + 1] = 0x00;
-                        pixels[pixelStart + 2] = 0x00;
-                        pixels[pixelStart + 3] = 0x00;
+                        pixels[pixelStart + 0] = 0xAA; // Full transparent: 0x00
+                        pixels[pixelStart + 1] = 0xAA;
+                        pixels[pixelStart + 2] = 0xAA;
+                        pixels[pixelStart + 3] = 0xAA;
                     }
 
                     encoder.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Straight,
@@ -169,9 +169,9 @@ namespace Catrobat.IDE.WindowsShared.Services
             }
 
             var paintTempFolderPath = Path.GetDirectoryName(StorageConstants.TempPaintImagePath);
-            var paintTempFolderName = Path.GetFileName(StorageConstants.TempPaintImagePath);
+            var paintTempFileName = Path.GetFileName(StorageConstants.TempPaintImagePath);
             var paintTempFolder = await localFolder.CreateFolderAsync(paintTempFolderPath, CreationCollisionOption.OpenIfExists);
-            var file = await paintTempFolder.GetFileAsync(paintTempFolderName);
+            var file = await paintTempFolder.GetFileAsync(paintTempFileName);
 
 
             var options = new Windows.System.LauncherOptions
@@ -208,19 +208,22 @@ namespace Catrobat.IDE.WindowsShared.Services
                     ServiceLocator.NavigationService.NavigateTo<NewLookSourceSelectionViewModel>());
             }
 
-            var file = (StorageFile)fileArray[0];
+            StorageFile file = (StorageFile)fileArray[0];
+            //StorageFolder storageFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync("exchange", CreationCollisionOption.OpenIfExists);
+            //file.CopyAsync(storageFolder, "reveicedfrompaint.png", NameCollisionOption.ReplaceExisting);
+
             var fileStream = await file.OpenReadAsync();
             var memoryStream = new MemoryStream();
             fileStream.AsStreamForRead().CopyTo(memoryStream);
             memoryStream.Seek(0, SeekOrigin.Begin);
 
-            var imagetobind = new BitmapImage();
+            BitmapImage imagetobind = new BitmapImage();
             await imagetobind.SetSourceAsync(memoryStream.AsRandomAccessStream());
 
-            var writeableBitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
+            WriteableBitmap writeableBitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
             await writeableBitmap.FromStream(memoryStream.AsRandomAccessStream());
             memoryStream.Seek(0, SeekOrigin.Begin);
-            var portableImage = new PortableImage(writeableBitmap)
+            PortableImage portableImage = new PortableImage(writeableBitmap)
             {
                 Width = writeableBitmap.PixelWidth,
                 Height = writeableBitmap.PixelHeight,

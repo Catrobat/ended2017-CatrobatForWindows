@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core
         public const string TempProgramExportPath = "Temp\\ExportProgram";
 
         public static string TempPaintImagePath
-        { get { return "Temp/temp" + PaintImageExportFileExtension; } }
+        { get { return "Temp\\temp" + PaintImageExportFileExtension; } }
 
         // Program related constants
         public const string ProgramsPath = "Projects";
