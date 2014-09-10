@@ -1264,7 +1264,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Sorry, the program-version is outdated and not supported anymore by this app-version.</value>
   </data>
   <data name="Main_ShareWithOtherApp" xml:space="preserve">
-    <value>Share wit an app</value>
+    <value>Share with an app</value>
   </data>
   <data name="Main_UploadToPocketCodeOrg" xml:space="preserve">
     <value>Upload to pocketcode.org</value>
@@ -1334,5 +1334,8 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Export_CanceledText" xml:space="preserve">
     <value>Export was aborted by a user-interaction.</value>
+  </data>
+  <data name="Export_FileTitle" xml:space="preserve">
+    <value>Share Catrobat file</value>
   </data>
 </root>

@@ -116,8 +116,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void ShareWithOtherAppAction()
         {
-            await ServiceLocator.ShareService.ShareFile(_tempShareFilePath);
-            GoBackAction();
+            await ServiceLocator.ShareService.ShareFile(_tempShareFilePath);   
         }
 
         protected override void GoBackAction()
