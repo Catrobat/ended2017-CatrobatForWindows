@@ -96,6 +96,44 @@ void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& devi
 
     //create usable ID2D1Bitmap from WIC
     deviceContext->CreateBitmapFromWicBitmap(converter, NULL, &(*texture)->bitmap);
+
+    IWICBitmapFrameDecode *pIDecoderFrame = NULL;
+    decoder->GetFrame(0, &pIDecoderFrame);
+
+    IWICBitmap *pIBitmap = NULL;
+    IWICBitmapLock *pILock = NULL;
+
+    UINT uiWidth = (*texture)->bitmap->GetSize().width;
+    UINT uiHeight = (*texture)->bitmap->GetSize().height;
+
+    WICRect rcLock = { 0, 0, uiWidth, uiHeight };
+
+    // Create the bitmap from the image frame.
+    wicFactory->CreateBitmapFromSource(
+        pIDecoderFrame,          // Create a bitmap from the image frame
+        WICBitmapCacheOnDemand,  // Cache metadata when needed
+        &pIBitmap);              // Pointer to the bitmap
+
+    pIBitmap->Lock(&rcLock, WICBitmapLockWrite, &pILock);
+
+    UINT cbBufferSize = 0;
+    BYTE *pv = NULL;
+
+    // Retrieve a pointer to the pixel data.
+    pILock->GetDataPointer(&cbBufferSize, &pv);
+
+
+    vector<vector<int>> alphaMap;
+    for (int r = 0; r < uiHeight; r++)
+    {
+        vector<int> row;
+        for (int c = 0; c < uiWidth; c++)
+        {
+            row.push_back(pv[(r * uiWidth + c) * 4 + 3]);
+        }
+        alphaMap.push_back(row);
+    }
+    (*texture)->alphaMap = alphaMap;
 }
 
 int TextureDaemon::GetFileSize(string path)

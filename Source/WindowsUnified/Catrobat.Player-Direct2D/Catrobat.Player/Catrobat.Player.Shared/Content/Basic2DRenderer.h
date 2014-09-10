@@ -11,10 +11,7 @@ public:
     void ReleaseDeviceDependentResources();
     void Update(DX::StepTimer const& timer);
     void Render();
-    void StartTracking() { m_tracking = true; }
-    void StopTracking() { m_tracking = false; }
-    bool IsTracking() { return m_tracking; }
-    void TrackingUpdate(float positionX);
+    void PointerPressed(D2D1_POINT_2F point);
 
 private:
     // Cached pointer to device resources.

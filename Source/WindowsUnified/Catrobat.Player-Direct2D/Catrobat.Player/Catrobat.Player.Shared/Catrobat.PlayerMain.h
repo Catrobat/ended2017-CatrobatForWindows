@@ -15,10 +15,7 @@ namespace Catrobat_Player
 		Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources);
 		~Catrobat_PlayerMain();
 		void CreateWindowSizeDependentResources();
-		void StartTracking() { m_basic2dRenderer->StartTracking(); }
-		void TrackingUpdate(float positionX) { m_pointerLocationX = positionX; }
-        void StopTracking() { m_basic2dRenderer->StopTracking(); }
-        bool IsTracking() { return m_basic2dRenderer->IsTracking(); }
+        void PointerPressed(D2D1_POINT_2F point) { m_basic2dRenderer->PointerPressed(point); }
 		void StartRenderLoop();
 		void StopRenderLoop();
 		Concurrency::critical_section& GetCriticalSection() { return m_criticalSection; }

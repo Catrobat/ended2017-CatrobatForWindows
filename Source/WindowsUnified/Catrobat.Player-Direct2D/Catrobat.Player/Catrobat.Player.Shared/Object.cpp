@@ -188,6 +188,7 @@ void Object::Draw(const std::shared_ptr<DX::DeviceResources>& deviceResources)
     deviceContext->Clear(ColorF(ColorF::White));
     deviceContext->DrawBitmap(m_look->GetBitMap(),
         RectF(0.f, 0.f, m_renderTargetSize.width, m_renderTargetSize.height));
+
 }
 #pragma endregion
 
@@ -304,3 +305,21 @@ void Object::RecalculateTransformation()
         Matrix3x2F::Scale(m_objectScale, origin);
 }
 #pragma endregion
+
+bool Object::IsObjectHit(D2D1_POINT_2F position)
+{
+    position = Point2F(360.f, 640.f);
+
+    float pressedX = m_ratio.width - m_transformation._31;
+    float pressedY = m_transformation._32 - (position.y - m_renderTargetSize.height);
+    float actualX = pressedX / m_ratio.width;
+    float actualY = pressedY / m_ratio.height;
+    float testX = position.x * m_ratio.width;
+    float testY = position.y * m_ratio.height;
+    m_renderTargetSize;
+    m_transformation;
+    m_translation;
+    float width = m_look->GetWidth();
+    float height = m_look->GetHeight();
+    return true;
+}

@@ -60,6 +60,8 @@ public:
     Look* GetCurrentLook();
     WhenScript* GetWhenScript();
 
+    bool IsObjectHit(D2D1_POINT_2F position);
+
 private:
     std::string m_name;
 
