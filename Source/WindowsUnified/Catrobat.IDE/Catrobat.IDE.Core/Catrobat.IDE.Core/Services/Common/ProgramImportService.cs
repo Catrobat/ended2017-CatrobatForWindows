@@ -134,7 +134,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             if (_cancellationTokenSource.Token.IsCancellationRequested == true)
             {
-                CleanUpImport();
+                await CleanUpImport();
                 return;
             }
             if (extractionResult.Status == ExtractProgramStatus.Error)
@@ -151,7 +151,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             if (_cancellationTokenSource.Token.IsCancellationRequested == true)
             {
-                CleanUpImport();
+                await CleanUpImport();
                 return;
             }
 
@@ -203,7 +203,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             Debug.WriteLine("Finished");
         }
 
-        private async void CleanUpImport()
+        private async Task CleanUpImport()
         {
             ServiceLocator.NotifictionService.ShowToastNotification(
                         AppResources.Import_CanceledText,

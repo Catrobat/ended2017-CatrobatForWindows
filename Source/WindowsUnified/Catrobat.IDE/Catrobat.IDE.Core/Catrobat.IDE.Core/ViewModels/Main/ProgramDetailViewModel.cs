@@ -140,8 +140,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         public RelayCommand EditCurrentProgramCommand { get; private set; }
 
-        public RelayCommand UploadCurrentProgramCommand { get; private set; }
-
         public RelayCommand PlayCurrentProgramCommand { get; private set; }
 
         public RelayCommand PinLocalProgramCommand { get; private set; }
@@ -165,31 +163,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private void EditCurrentProgramAction()
         {
             ServiceLocator.NavigationService.NavigateTo<SpritesViewModel>();
-        }
-
-        private async void UploadCurrentProgramAction()
-        {
-            //ServiceLocator.NavigationService.NavigateTo<UploadProgramLoadingViewModel>();
-
-            //// Determine which page to open
-            //JSONStatusResponse statusResponse = await ServiceLocator.WebCommunicationService.CheckTokenAsync(Context.CurrentUserName, Context.CurrentToken, ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
-
-            //if (statusResponse.statusCode == StatusCodes.ServerResponseOk)
-            //{
-            //    ServiceLocator.DispatcherService.RunOnMainThread(() =>
-            //    {
-            //        ServiceLocator.NavigationService.NavigateTo<UploadProgramViewModel>();
-            //        ServiceLocator.NavigationService.RemoveBackEntry();
-            //    });
-            //}
-            //else
-            //{
-            //    ServiceLocator.DispatcherService.RunOnMainThread(() =>
-            //    {
-            //        ServiceLocator.NavigationService.NavigateTo<UploadProgramLoginViewModel>();
-            //        ServiceLocator.NavigationService.RemoveBackEntry();
-            //    });
-            //}
         }
 
         private void PlayCurrentProgramAction()
@@ -232,7 +205,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         public ProgramDetailViewModel()
         {
             EditCurrentProgramCommand = new RelayCommand(EditCurrentProgramAction, CommandsCanExecute);
-            UploadCurrentProgramCommand = new RelayCommand(UploadCurrentProgramAction, CommandsCanExecute);
             PlayCurrentProgramCommand = new RelayCommand(PlayCurrentProgramAction, CommandsCanExecute);
             RenameProgramCommand = new RelayCommand(RenameProgramAction, CommandsCanExecute);
             ShareLocalProgramCommand = new RelayCommand(ShareLocalProgramAction, CommandsCanExecute);
@@ -254,7 +226,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             RaisePropertyChanged(() => NumberOfSounds);
             RaisePropertyChanged(() => IsActivatingLocalProgram);
             EditCurrentProgramCommand.RaiseCanExecuteChanged();
-            UploadCurrentProgramCommand.RaiseCanExecuteChanged();
             PlayCurrentProgramCommand.RaiseCanExecuteChanged();
             ShareLocalProgramCommand.RaiseCanExecuteChanged();
             RenameProgramCommand.RaiseCanExecuteChanged();

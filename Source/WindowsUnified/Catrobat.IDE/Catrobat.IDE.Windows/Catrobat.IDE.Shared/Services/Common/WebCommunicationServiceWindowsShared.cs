@@ -276,7 +276,6 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                     JSONStatusResponse statusResponse = null;
                     try
                     {
-                        // TODO check if file exists - do not rely on try-catch
                         var stream = await storage.OpenFileAsync(Path.Combine(StorageConstants.TempProgramExportZipPath, programTitle + ApplicationResources.EXTENSION),
                             StorageFileMode.Open, StorageFileAccess.Read);
                         var memoryStream = new MemoryStream();
@@ -311,7 +310,6 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
 
                             statusResponse = JsonConvert.DeserializeObject<JSONStatusResponse>(jsonResult);
                         }
-                        _uploadCounter--;
                     }
                     catch (HttpRequestException)
                     {
@@ -327,6 +325,10 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                     {
                         statusResponse = new JSONStatusResponse();
                         statusResponse.statusCode = StatusCodes.UnknownError;
+                    }
+                    finally
+                    {
+                        _uploadCounter--;
                     }
                     return statusResponse;
                 }

@@ -103,7 +103,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListPickerControl
                 _skipNextSelectionChanged = false;
                 return;
             }
-
+            
             ListPicker.SelectedItem = ListBoxItems.SelectedItem;
             ServiceLocator.NavigationService.NavigateBack(this.GetType());
         }
