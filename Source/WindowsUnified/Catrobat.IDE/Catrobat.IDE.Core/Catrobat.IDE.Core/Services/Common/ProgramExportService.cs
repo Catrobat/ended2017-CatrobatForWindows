@@ -53,7 +53,7 @@ namespace Catrobat.IDE.Core.Services.Common
             _cancellationTokenSource = new CancellationTokenSource();
             JSONStatusResponse statusResponse = await Task.Run(() => 
                 ServiceLocator.WebCommunicationService.UploadProgramAsync(
-                programName, currentUserName, currentToken,
+                programName, currentUserName, currentToken, _cancellationTokenSource.Token,
                 ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName), _cancellationTokenSource.Token);
 
             if (_cancellationTokenSource.Token.IsCancellationRequested == true)
@@ -62,7 +62,6 @@ namespace Catrobat.IDE.Core.Services.Common
                         AppResources.Export_CanceledText,
                         AppResources.Export_CanceledText,
                         ToastDisplayDuration.Long);
-                await CleanUpExport();
                 return;
             }
             switch (statusResponse.statusCode)

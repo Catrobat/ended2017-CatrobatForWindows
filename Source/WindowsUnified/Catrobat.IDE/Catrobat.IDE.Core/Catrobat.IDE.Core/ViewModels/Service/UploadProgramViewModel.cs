@@ -152,9 +152,11 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 var message = new GenericMessage<string>(ProgramName);
                 Messenger.Default.Send(message, ViewModelMessagingToken.UploadProgramStartedListener);
 
+                Task uploadTask = ServiceLocator.ProgramExportService.ExportToPocketCodeOrgWithNotifications(
+                    ProgramName, Context.CurrentUserName, Context.CurrentToken);
+
                 this.GoBackAction();
-                await Task.Run(() => ServiceLocator.ProgramExportService.ExportToPocketCodeOrgWithNotifications(
-                    ProgramName, Context.CurrentUserName, Context.CurrentToken));
+                await Task.Run(() => uploadTask);
             }
             finally
             {

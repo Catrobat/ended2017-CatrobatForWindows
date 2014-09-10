@@ -103,7 +103,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
         }
 
         [TestMethod, TestCategory("ViewModels.Service"), TestCategory("ExcludeGated")]
-        public void UploadActionTest()
+        public void CancelUploadActionTest()
         {
             Assert.AreEqual(0, "test not implemented");
         }

@@ -70,7 +70,7 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
         }
 
         public async Task<JSONStatusResponse> UploadProgramAsync(string projectTitle, 
-            string username, string token, string language = "en")
+            string username, string token, CancellationToken taskCancellationToken, string language = "en")
         {
             JSONStatusResponse statusResponse = new JSONStatusResponse
             {
