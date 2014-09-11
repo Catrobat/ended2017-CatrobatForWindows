@@ -309,6 +309,18 @@
     <Content Include="Controls\FormulaControls\TypeInfos\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeBinaryFunctions\FormulaNodeRandomTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeBinaryFunctions\FormulaNodeMinTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeBinaryFunctions\FormulaNodeMaxTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeInfixOperators\FormulaNodeLessTypeInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -365,6 +377,70 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodePrefixOperators\FormulaNodeNotTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodePrefixOperators\FormulaNodeNegativeSignTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeProperties\FormulaNodeLayerTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeProperties\FormulaNodeTransparencyTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeProperties\FormulaNodeSizeTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeProperties\FormulaNodeRotationTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeProperties\FormulaNodePositionYTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeProperties\FormulaNodePositionXTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeProperties\FormulaNodeBrightnessTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeSensors\FormulaNodeAccelerationYTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeSensors\FormulaNodeAccelerationZTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeSensors\FormulaNodeCompassTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeSensors\FormulaNodeInclinationXTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeSensors\FormulaNodeInclinationYTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeSensors\FormulaNodeLoudnessTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeSensors\FormulaNodeAccelerationXTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeUnaryFunctions\FormulaNodeSqrtTypeInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -410,6 +486,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeUnaryFunctions\FormulaNodeExpTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeVariables\FormulaNodeLocalVariableTypeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\TypeInfos\FormulaNodeVariables\FormulaNodeGlobalVariableTypeInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -681,10 +765,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\FormulaControls\TypeInfos\FormulaNodeBinaryFunctions\" />
-    <Folder Include="Controls\FormulaControls\TypeInfos\FormulaNodePrefixOperators\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

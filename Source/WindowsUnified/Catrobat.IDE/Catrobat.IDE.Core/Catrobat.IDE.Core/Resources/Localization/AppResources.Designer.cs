@@ -2168,7 +2168,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die , ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die . ähnelt.
         /// </summary>
         public static string FormulaKeyboard_DigitSeparator {
             get {
@@ -2231,7 +2231,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ; ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die , ähnelt.
         /// </summary>
         public static string FormulaKeyboard_ParameterSeparator {
             get {
