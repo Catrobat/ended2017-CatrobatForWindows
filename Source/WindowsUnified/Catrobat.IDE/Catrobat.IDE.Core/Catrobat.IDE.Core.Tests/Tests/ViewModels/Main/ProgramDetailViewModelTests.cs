@@ -63,12 +63,6 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
             Assert.AreEqual(2, navigationService.PageStackCount); 
         }
 
-        //[TestMethod, TestCategory("ViewModels.Main")]
-        //public void UploadCurrentProjectActionTest()
-        //{
-        //    // not in use
-        //}
-
         [TestMethod, TestCategory("ViewModels.Main"), TestCategory("ExcludeGated")]
         public void PlayCurrentProjectActionTest()
         {

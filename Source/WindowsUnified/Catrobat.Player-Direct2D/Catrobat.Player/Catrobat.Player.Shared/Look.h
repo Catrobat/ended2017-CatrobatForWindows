@@ -17,6 +17,7 @@ public:
     ID2D1Bitmap* GetBitMap();
 	std::string GetFileName();
 	std::string GetName();
+    int GetPixelAlphaValue(D2D1_POINT_2F position);
 
 	unsigned int GetWidth();
 	unsigned int GetHeight();

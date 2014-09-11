@@ -5,15 +5,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+    xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
     mc:Ignorable="d"
     DataContext="{Binding UploadProgramViewModel, Source={StaticResource Locator}}">
 
-  <Grid x:Name="LayoutRoot" 
-        Background="{ThemeResource AppBackgroundBrush}" 
-        >
+  <Grid x:Name="LayoutRoot" Background="{ThemeResource AppBackgroundBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition />
+      <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" 
@@ -72,6 +72,37 @@
             Source="{Binding CurrentProgram.Screenshot.ImageSource}" />
       </StackPanel>
     </ScrollViewer>
+    <StackPanel Grid.Row="2"
+                Visibility="{Binding IsSending, 
+                Converter={StaticResource BoolVisibilityConverter}}">
+      <StackPanel Margin="12 6 12 6"
+                  Background="{ThemeResource AppBarBackgroundBrush}"
+                  HorizontalAlignment="Stretch">
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+          <StackPanel Height="Auto"
+                      Orientation="Horizontal" 
+                      VerticalAlignment="Center" 
+                      HorizontalAlignment="Center">
+            <controls:ProcessIcon Margin="0 0 6 0"
+                      IsProcessing="{Binding IsSending}" />
+            <TextBlock Foreground="White"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" 
+                       Text="{Binding Resources.Main_Sending, 
+                       Source={StaticResource LocalizedStrings}}" 
+                       Style="{ThemeResource TextNormalStyle}"/>
+          </StackPanel>
+          <Button Name="ButtonCancelUpload"
+                    Content="Cancel"
+                    Margin="24 0 0 0"
+                    Foreground="{ThemeResource AppBarBackgroundBrush}"
+                    Background="White"
+                    Command="{Binding CancelUploadCommand}"
+                    HorizontalAlignment="Right">
+          </Button>
+        </StackPanel>
+      </StackPanel>
+    </StackPanel>
   </Grid>
 
   <Page.BottomAppBar>

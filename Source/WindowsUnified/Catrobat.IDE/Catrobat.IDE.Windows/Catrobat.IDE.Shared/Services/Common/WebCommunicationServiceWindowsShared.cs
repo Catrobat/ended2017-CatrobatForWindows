@@ -261,7 +261,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
 
 
         public async Task<JSONStatusResponse> UploadProgramAsync(string programTitle,
-            string username, string token, string language = "en")
+            string username, string token, CancellationToken taskCancellationToken, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
                 new KeyValuePair<string, string>(ApplicationResources.API_PARAM_USERNAME, ((username == null) ? "" : username)),
@@ -276,16 +276,18 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                     JSONStatusResponse statusResponse = null;
                     try
                     {
-                        // TODO check if file exists - do not rely on try-catch
-                        var stream = await storage.OpenFileAsync(Path.Combine(StorageConstants.TempProgramExportZipPath, programTitle + ApplicationResources.EXTENSION),
-                            StorageFileMode.Open, StorageFileAccess.Read);
-                        var memoryStream = new MemoryStream();
-                        await stream.CopyToAsync(memoryStream);
+                        _uploadCounter++;
+                        byte[] programData;
+                        using (var stream = await storage.OpenFileAsync(Path.Combine(StorageConstants.TempProgramExportZipPath, programTitle + ApplicationResources.EXTENSION),
+                            StorageFileMode.Open, StorageFileAccess.Read))
+                        {
+                            var memoryStream = new MemoryStream();
+                            await stream.CopyToAsync(memoryStream);
 
-                        var programData = memoryStream.ToArray();
+                            programData = memoryStream.ToArray();
+                        }
 
                         parameters.Add(new KeyValuePair<string, string>(ApplicationResources.API_PARAM_CHECKSUM, UtilTokenHelper.ToHex(MD5Core.GetHash(programData))));
-                        string sum = UtilTokenHelper.ToHex(MD5Core.GetHash(programData));
 
                         // store parameters as MultipartFormDataContent
                         StringContent content = null;
@@ -301,17 +303,17 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                         fileContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/zip");
                         postParameters.Add(fileContent, String.Format("\"{0}\"", ApplicationResources.API_PARAM_UPLOAD), String.Format("\"{0}\"", programTitle + ApplicationResources.EXTENSION));
 
-                        _uploadCounter++;
+                        //taskCancellationToken.ThrowIfCancellationRequested();
+                        
                         using (var httpClient = new HttpClient())
                         {
                             httpClient.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
-                            HttpResponseMessage httpResponse = await httpClient.PostAsync(ApplicationResources.API_UPLOAD, postParameters);
+                            HttpResponseMessage httpResponse = await httpClient.PostAsync(ApplicationResources.API_UPLOAD, postParameters, taskCancellationToken);
                             httpResponse.EnsureSuccessStatusCode();
                             string jsonResult = await httpResponse.Content.ReadAsStringAsync();
 
                             statusResponse = JsonConvert.DeserializeObject<JSONStatusResponse>(jsonResult);
                         }
-                        _uploadCounter--;
                     }
                     catch (HttpRequestException)
                     {
@@ -327,6 +329,10 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                     {
                         statusResponse = new JSONStatusResponse();
                         statusResponse.statusCode = StatusCodes.UnknownError;
+                    }
+                    finally
+                    {
+                        _uploadCounter--;
                     }
                     return statusResponse;
                 }

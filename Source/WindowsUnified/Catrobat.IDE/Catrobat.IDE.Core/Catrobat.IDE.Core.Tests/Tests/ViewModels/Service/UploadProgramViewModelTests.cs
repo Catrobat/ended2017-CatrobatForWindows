@@ -102,6 +102,12 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Service
             Assert.IsNull(notificationService.LastNotificationTitle);
         }
 
+        [TestMethod, TestCategory("ViewModels.Service"), TestCategory("ExcludeGated")]
+        public void CancelUploadActionTest()
+        {
+            Assert.AreEqual(0, "test not implemented");
+        }
+
         [TestMethod, TestCategory("ViewModels.Service")]
         public void ChangeUserActionTest()
         {

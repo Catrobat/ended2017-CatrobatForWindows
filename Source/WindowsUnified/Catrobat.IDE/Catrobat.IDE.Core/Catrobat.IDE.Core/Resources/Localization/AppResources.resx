@@ -1264,7 +1264,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Sorry, the program-version is outdated and not supported anymore by this app-version.</value>
   </data>
   <data name="Main_ShareWithOtherApp" xml:space="preserve">
-    <value>Share wit an app</value>
+    <value>Share with an app</value>
   </data>
   <data name="Main_UploadToPocketCodeOrg" xml:space="preserve">
     <value>Upload to pocketcode.org</value>
@@ -1303,7 +1303,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Import was aborted by a user-interaction.</value>
   </data>
   <data name="Main_OnlineProgramDownloadBusy" xml:space="preserve">
-    <value>Please wait unit the current download-progess is completed.</value>
+    <value>Please wait until the current download-task is completed.</value>
   </data>
   <data name="Import_AppTooOldAdvise" xml:space="preserve">
     <value>Please check if you have the latest version of this app.</value>
@@ -1325,5 +1325,17 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Import_GeneralError" xml:space="preserve">
     <value>Sorry, an error occurred.</value>
+  </data>
+  <data name="Export_Busy" xml:space="preserve">
+    <value>Please wait until the current export-task is completed.</value>
+  </data>
+  <data name="Export_Canceled" xml:space="preserve">
+    <value>Export aborted</value>
+  </data>
+  <data name="Export_CanceledText" xml:space="preserve">
+    <value>Export was aborted by a user-interaction.</value>
+  </data>
+  <data name="Export_FileTitle" xml:space="preserve">
+    <value>Share Catrobat file</value>
   </data>
 </root>

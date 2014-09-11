@@ -28,7 +28,7 @@ namespace Catrobat.IDE.Core.Services
 
         Task<JSONStatusResponse> LoginOrRegisterAsync(string username, string password, string userEmail, string language = "en", string country = "AT");
 
-        Task<JSONStatusResponse> UploadProgramAsync(string programTitle, string username, string token, string language = "en");
+        Task<JSONStatusResponse> UploadProgramAsync(string programTitle, string username, string token, CancellationToken taskCancellationToken, string language = "en");
 
         Task<JSONStatusResponse> ReportAsInappropriateAsync(string programId, string flagReason, string language = "en");
 

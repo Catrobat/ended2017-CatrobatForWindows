@@ -74,3 +74,12 @@ ID2D1Bitmap *Look::GetBitMap()
     }
     return m_texture->bitmap;
 }
+
+int Look::GetPixelAlphaValue(D2D1_POINT_2F position)
+{
+    if (m_texture == NULL)
+    {
+        throw new PlayerException("Look::No texture defined.");
+    }
+    return m_texture->alphaMap.at(position.y).at(position.x);
+}

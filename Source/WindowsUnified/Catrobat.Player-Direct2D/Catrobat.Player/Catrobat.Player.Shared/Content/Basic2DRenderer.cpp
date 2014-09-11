@@ -45,10 +45,14 @@ void Basic2DRenderer::ReleaseDeviceDependentResources()
 
 }
 
-void Basic2DRenderer::TrackingUpdate(float positionX)
+void Basic2DRenderer::PointerPressed(D2D1_POINT_2F point)
 {
-    if (m_tracking)
+    ObjectList *objectList = ProjectDaemon::Instance()->GetProject()->GetObjectList();
+    for (int i = 0; i < objectList->GetSize(); i++)
     {
+        if (objectList->GetObject(i)->IsObjectHit(point))
+        {
+            int x = 0;
+        }
     }
 }
-

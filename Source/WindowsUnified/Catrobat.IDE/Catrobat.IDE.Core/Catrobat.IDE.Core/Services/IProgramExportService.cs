@@ -11,6 +11,10 @@ namespace Catrobat.IDE.Core.Services
     {
         Task<Stream> CreateProgramPackageForExport(string programName);
 
+        Task ExportToPocketCodeOrgWithNotifications(string programName, string currentUserName, string currentToken);
+
+        Task CancelExport();
+
         Task CleanUpExport();
     }
 }

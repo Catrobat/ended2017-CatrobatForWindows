@@ -1709,6 +1709,42 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please wait until the current export-task is completed. ähnelt.
+        /// </summary>
+        public static string Export_Busy {
+            get {
+                return ResourceManager.GetString("Export_Busy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Export aborted ähnelt.
+        /// </summary>
+        public static string Export_Canceled {
+            get {
+                return ResourceManager.GetString("Export_Canceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Export was aborted by a user-interaction. ähnelt.
+        /// </summary>
+        public static string Export_CanceledText {
+            get {
+                return ResourceManager.GetString("Export_CanceledText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Share Catrobat file ähnelt.
+        /// </summary>
+        public static string Export_FileTitle {
+            get {
+                return ResourceManager.GetString("Export_FileTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die FALSE ähnelt.
         /// </summary>
         public static string Formula_Constant_False {
@@ -2899,7 +2935,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Please wait unit the current download-progess is completed. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please wait until the current download-task is completed. ähnelt.
         /// </summary>
         public static string Main_OnlineProgramDownloadBusy {
             get {
@@ -3241,7 +3277,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Share wit an app ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Share with an app ähnelt.
         /// </summary>
         public static string Main_ShareWithOtherApp {
             get {

@@ -20,7 +20,9 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         private string _programDescription;
         private CatrobatContextBase _context;
         private Program _currentProgram;
-        private MessageboxResult _uploadErrorCallbackResult;
+        private MessageboxResult _cancelExportCallbackResult;
+        private bool _isSending;
+        private readonly object _exportLock = new object();
 
         #endregion
 
@@ -82,11 +84,27 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             }
         }
 
+        public bool IsSending
+        {
+            get { return _isSending; }
+            set
+            {
+                if (_isSending != value)
+                {
+                    _isSending = value;
+                    CancelUploadCommand.RaiseCanExecuteChanged();
+                    RaisePropertyChanged(() => IsSending);
+                }
+            }
+        }
+
         #endregion
 
         #region Commands
 
         public RelayCommand UploadCommand { get; private set; }
+
+        public RelayCommand CancelUploadCommand { get; private set; }
 
         public RelayCommand CancelCommand { get; private set; }
 
@@ -101,51 +119,57 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             return ProgramName != null && ProgramName.Length >= 2;
         }
 
+        private bool CancelUploadCommand_CanExecute()
+        {
+            return IsSending;
+        }
+
         #endregion
 
         #region Actions
 
         private async void UploadAction()
         {
-            //await CurrentProgram.SetProgramNameAndRenameDirectory(ProgramName);
-            //CurrentProgram.Description = ProgramDescription;
-            //await App.SaveContext(CurrentProgram);
-
-            Task<JSONStatusResponse> uploadTask =
-                ServiceLocator.WebCommunicationService.UploadProgramAsync(
-                ProgramName, Context.CurrentUserName, Context.CurrentToken,
-                ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName);
-
-            var message = new GenericMessage<string>(ProgramName);
-            Messenger.Default.Send(message, ViewModelMessagingToken.UploadProgramStartedListener);
-
-            this.GoBackAction();
-
-            JSONStatusResponse statusResponse = await Task.Run(() => uploadTask);
-
-            switch (statusResponse.statusCode)
+            lock (_exportLock)
             {
-                case StatusCodes.ServerResponseOk:
-                    break;
-
-                case StatusCodes.HTTPRequestFailed:
-                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramErrorCaption,
-                            AppResources.Main_NoInternetConnection, UploadErrorCallback, MessageBoxOptions.Ok);
-                    break;
-
-                default:
-                    string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProgramUndefinedError, statusResponse.statusCode.ToString()) :
-                                           string.Format(AppResources.Main_UploadProgramError, statusResponse.answer);
-                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramErrorCaption,
-                                messageString, UploadErrorCallback, MessageBoxOptions.Ok);
-                    break;
+                if (IsSending)
+                {
+                    ServiceLocator.NotifictionService.ShowMessageBox(
+                        AppResources.Main_Sending,
+                        AppResources.Export_Busy,
+                        CancelExportCallback, MessageBoxOptions.Ok);
+                    return;
+                }
+                IsSending = true;
             }
 
-            if (ServiceLocator.WebCommunicationService.NoUploadsPending())
+            try
             {
-                ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_NoUploadsPending, ToastDisplayDuration.Short);
+                //await CurrentProgram.SetProgramNameAndRenameDirectory(ProgramName);
+                //CurrentProgram.Description = ProgramDescription;
+                //await App.SaveContext(CurrentProgram);
+
+                var message = new GenericMessage<string>(ProgramName);
+                Messenger.Default.Send(message, ViewModelMessagingToken.UploadProgramStartedListener);
+
+                Task uploadTask = ServiceLocator.ProgramExportService.ExportToPocketCodeOrgWithNotifications(
+                    ProgramName, Context.CurrentUserName, Context.CurrentToken);
+
+                this.GoBackAction();
+                await Task.Run(() => uploadTask);
             }
+            finally
+            {
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    lock (_exportLock) { IsSending = false; }
+                });
+            }
+        }
+
+        private async void CancelUploadAction()
+        {
+            await ServiceLocator.ProgramExportService.CancelExport();
         }
 
         private void ChangeUserAction()
@@ -188,8 +212,10 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         public UploadProgramViewModel()
         {
             UploadCommand = new RelayCommand(UploadAction, UploadCommand_CanExecute);
+            CancelUploadCommand = new RelayCommand(CancelUploadAction, CancelUploadCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
             ChangeUserCommand = new RelayCommand(ChangeUserAction);
+            IsSending = false;
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedMessageAction);
@@ -215,9 +241,9 @@ namespace Catrobat.IDE.Core.ViewModels.Service
         }
 
         #region Callbacks
-        private void UploadErrorCallback(MessageboxResult result)
+        private void CancelExportCallback(MessageboxResult result)
         {
-            _uploadErrorCallbackResult = result;
+            _cancelExportCallbackResult = result;
         }
         #endregion
 
