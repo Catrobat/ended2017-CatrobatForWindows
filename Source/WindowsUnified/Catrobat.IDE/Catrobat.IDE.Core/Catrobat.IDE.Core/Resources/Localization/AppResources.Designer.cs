@@ -1520,7 +1520,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die CHANGE LOOK NAME ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die CHANGE LOOK ähnelt.
         /// </summary>
         public static string Editor_TitleChangeLookName {
             get {

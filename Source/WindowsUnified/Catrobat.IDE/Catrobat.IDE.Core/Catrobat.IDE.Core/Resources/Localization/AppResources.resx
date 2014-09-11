@@ -451,7 +451,7 @@
     <value>Object name:</value>
   </data>
   <data name="Editor_TitleChangeLookName" xml:space="preserve">
-    <value>CHANGE LOOK NAME</value>
+    <value>CHANGE LOOK</value>
   </data>
   <data name="Editor_TitleChangeSoundName" xml:space="preserve">
     <value>CHANGE SOUND NAME</value>
