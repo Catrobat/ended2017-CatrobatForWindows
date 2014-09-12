@@ -451,7 +451,7 @@
     <value>Object name:</value>
   </data>
   <data name="Editor_TitleChangeLookName" xml:space="preserve">
-    <value>CHANGE LOOK NAME</value>
+    <value>CHANGE LOOK</value>
   </data>
   <data name="Editor_TitleChangeSoundName" xml:space="preserve">
     <value>CHANGE SOUND NAME</value>
@@ -1087,10 +1087,10 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Press "back" to apply the changes.</value>
   </data>
   <data name="FormulaKeyboard_DigitSeparator" xml:space="preserve">
-    <value>,</value>
+    <value>.</value>
   </data>
   <data name="FormulaKeyboard_ParameterSeparator" xml:space="preserve">
-    <value>;</value>
+    <value>,</value>
   </data>
   <data name="Main_UseTemplateText" xml:space="preserve">
     <value>Use the selected project below as a template for the new project.</value>

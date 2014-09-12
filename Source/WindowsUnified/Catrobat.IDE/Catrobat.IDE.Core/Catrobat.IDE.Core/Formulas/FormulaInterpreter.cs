@@ -25,18 +25,15 @@ namespace Catrobat.IDE.Core.Formulas
         public static FormulaTree Interpret(IList<IFormulaToken> tokens, out ParsingError parsingError)
         {
             // TODO: split to InterpretNumber and InterpretLogic
-
-            // TODO: remove this
-            var sw = new Stopwatch();
-            sw.Start();
+            //var sw = new Stopwatch();
+            //sw.Start();
 
             // interpret tokens
             var instance = new FormulaInterpreter();
             var result = instance.Interpret2(tokens);
             parsingError = instance.ParsingError;
 
-            // TODO: remove this
-            sw.Stop();
+            //sw.Stop();
             // Debug.WriteLine("Interpreter.Interpret needed " + sw.ElapsedMilliseconds + "ms");
 
             return result;
@@ -44,9 +41,8 @@ namespace Catrobat.IDE.Core.Formulas
 
         public static Range Complete(IList<IFormulaToken> tokens, int index)
         {
-            // TODO: remove this
-            var sw = new Stopwatch();
-            sw.Start();
+            //var sw = new Stopwatch();
+            //sw.Start();
 
             // validate input
             if (tokens == null || !(0 <= index && index < tokens.Count)) return Range.Empty(0);
@@ -55,8 +51,7 @@ namespace Catrobat.IDE.Core.Formulas
             var instance = new FormulaInterpreter();
             var result = instance.Complete2(tokens, index);
 
-            // TODO: remove this
-            sw.Stop();
+            //sw.Stop();
             // Debug.WriteLine("Interpreter.CompleteToken needed " + sw.ElapsedMilliseconds + "ms");
 
             return result;

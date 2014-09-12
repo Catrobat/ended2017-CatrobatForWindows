@@ -120,16 +120,19 @@ namespace Catrobat.IDE.WindowsShared.Services
             _program = program;
             _lookToEdit = lookToEdit;
 
-            var localFolder = ApplicationData.Current.LocalFolder;
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+            string paintTempFolderPath = Path.GetDirectoryName(StorageConstants.TempPaintImagePath);
+            string paintTempFileName = Path.GetFileName(StorageConstants.TempPaintImagePath);
+            StorageFolder paintTempFolder = await localFolder.CreateFolderAsync(paintTempFolderPath, CreationCollisionOption.OpenIfExists);
 
             if (program != null && lookToEdit != null)
             {
                 using (var storage = StorageSystem.GetStorage())
-                {
+                {                    
                     if (await storage.FileExistsAsync(StorageConstants.TempPaintImagePath))
                         await storage.DeleteFileAsync(StorageConstants.TempPaintImagePath);
 
-                    var filePath = Path.Combine(program.BasePath,
+                    string filePath = Path.Combine(program.BasePath,
                         StorageConstants.ProgramLooksPath, lookToEdit.FileName);
 
                     await storage.CopyFileAsync(filePath,
@@ -146,13 +149,13 @@ namespace Catrobat.IDE.WindowsShared.Services
                     if (await storage.FileExistsAsync(StorageConstants.TempPaintImagePath))
                         await storage.DeleteFileAsync(StorageConstants.TempPaintImagePath);
 
-                    var stream = await storage.OpenFileAsync(StorageConstants.TempPaintImagePath,
+                    Stream stream = await storage.OpenFileAsync(StorageConstants.TempPaintImagePath,
                         StorageFileMode.Create, StorageFileAccess.Write);
 
-                    var encoder = await BitmapEncoder.CreateAsync(
+                    BitmapEncoder encoder = await BitmapEncoder.CreateAsync(
                         BitmapEncoder.PngEncoderId, stream.AsRandomAccessStream());
 
-                    var pixels = new byte[imageWidth * imageHeight * 4];
+                    Byte[] pixels = new byte[imageWidth * imageHeight * 4];
 
                     for (var pixelStart = 0; pixelStart < pixels.Length; pixelStart += 4)
                     {
@@ -167,12 +170,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                     await encoder.FlushAsync();
                 }
             }
-
-            var paintTempFolderPath = Path.GetDirectoryName(StorageConstants.TempPaintImagePath);
-            var paintTempFileName = Path.GetFileName(StorageConstants.TempPaintImagePath);
-            var paintTempFolder = await localFolder.CreateFolderAsync(paintTempFolderPath, CreationCollisionOption.OpenIfExists);
             var file = await paintTempFolder.GetFileAsync(paintTempFileName);
-
 
             var options = new Windows.System.LauncherOptions
             {
