@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight.Messaging;
+using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.WindowsPhone
 {
@@ -226,6 +227,10 @@ namespace Catrobat.IDE.WindowsPhone
 
         private static async Task TryAddProgram(Stream programStream)
         {
+            ServiceLocator.NotifictionService.ShowToastNotification(
+                        AppResources.Import_started,
+                        AppResources.Import_started,
+                        ToastDisplayDuration.Long);
             ServiceLocator.ProgramImportService.SetProgramStream(programStream);
             await ServiceLocator.ProgramImportService.TryImportWithStatusNotifications();
         }

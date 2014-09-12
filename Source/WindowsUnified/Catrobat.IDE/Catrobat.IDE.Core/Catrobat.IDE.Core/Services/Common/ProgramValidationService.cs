@@ -24,13 +24,13 @@ namespace Catrobat.IDE.Core.Services.Common
 
             XmlProgram convertedProgram = null;
             var checkResult = new CheckProgramResult();
-            PortableImage projectScreenshot = null;
+            PortableImage programScreenshot = null;
             string programName = null;
             string programCode = null;
 
             using (var storage = StorageSystem.GetStorage())
             {
-                projectScreenshot =
+                programScreenshot =
                     await storage.LoadImageAsync(Path.Combine(
                     pathToProgramDirectory,
                     StorageConstants.ProgramManualScreenshotPath)) ??
@@ -38,10 +38,13 @@ namespace Catrobat.IDE.Core.Services.Common
                     pathToProgramDirectory,
                     StorageConstants.ProgramAutomaticScreenshotPath));
 
-                programCode = await storage.ReadTextFileAsync(pathToProgramCodeFile);
+                if (!await storage.FileExistsAsync(pathToProgramCodeFile) || programScreenshot == null)
+                {
+                    checkResult.State = ProgramState.FilesMissing;
+                    return checkResult;
+                }
+                programCode = await storage.ReadTextFileAsync(pathToProgramCodeFile);                
             }
-
-
 
             var converterResult = await CatrobatVersionConverter.
                 ConvertToXmlVersion(programCode, XmlConstants.TargetIDEVersion);
@@ -94,7 +97,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
             checkResult.ProgramHeader = new LocalProgramHeader
             {
-                Screenshot = projectScreenshot,
+                Screenshot = programScreenshot,
                 ProjectName = programName,
             };
 

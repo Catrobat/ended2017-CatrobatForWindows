@@ -25,6 +25,7 @@ namespace Catrobat.IDE.WindowsShared.Services
         private OnlineProgramHeader _onlineProgramHeader;
         private string _programName;
         private CancellationTokenSource _cancellationTokenSource;
+        private MessageboxResult _missingFilesCallbackResult;
 
         public void SetProgramStream(Stream programStream)
         {
@@ -186,6 +187,10 @@ namespace Catrobat.IDE.WindowsShared.Services
                         AppResources.Import_GeneralError,
                         ToastDisplayDuration.Long);
                     break;
+                case ProgramState.FilesMissing:
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Import_Canceled,
+                    AppResources.Import_FilesMissing, MissingFilesCallback, MessageBoxOptions.Ok);
+                    return;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -217,6 +222,12 @@ namespace Catrobat.IDE.WindowsShared.Services
                     await storage.DeleteDirectoryAsync(StorageConstants.TempProgramImportPath);
                 }
             }
+        }
+
+        private async void MissingFilesCallback(MessageboxResult result)
+        {
+            _missingFilesCallbackResult = result;
+            await CleanUpImport();
         }
     }
 }

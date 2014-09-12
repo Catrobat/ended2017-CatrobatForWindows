@@ -1288,7 +1288,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Import abgebrochen</value>
   </data>
   <data name="Import_CanceledText" xml:space="preserve">
-    <value>Importvorgang wurde durch eine User-Eingabe abgebrochen.</value>
+    <value>Importvorgang wurde abgebrochen.</value>
   </data>
   <data name="Main_OnlineProgramDownloadBusy" xml:space="preserve">
     <value>Bitte warte bis der aktuelle Download abgeschlossen ist.</value>
@@ -1325,5 +1325,11 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   </data>
   <data name="Export_FileTitle" xml:space="preserve">
     <value>Teile Catrobat Program</value>
+  </data>
+  <data name="Import_FilesMissing" xml:space="preserve">
+    <value>Das importierte Program enthält nicht die erforderlichen Dateien und Ordner.</value>
+  </data>
+  <data name="Import_started" xml:space="preserve">
+    <value>Import gestartet</value>
   </data>
 </root>
