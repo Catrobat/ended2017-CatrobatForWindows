@@ -38,7 +38,7 @@ namespace Catrobat.IDE.Core.Services.Common
                     pathToProgramDirectory,
                     StorageConstants.ProgramAutomaticScreenshotPath));
 
-                if (!await storage.FileExistsAsync(pathToProgramCodeFile) || programScreenshot == null)
+                if (!await storage.FileExistsAsync(pathToProgramCodeFile))
                 {
                     checkResult.State = ProgramState.FilesMissing;
                     return checkResult;

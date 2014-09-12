@@ -1332,4 +1332,10 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   <data name="Import_started" xml:space="preserve">
     <value>Import gestartet</value>
   </data>
+  <data name="Import_FileNotFound" xml:space="preserve">
+    <value>Datei nicht gefunden</value>
+  </data>
+  <data name="Import_FileNotFoundText" xml:space="preserve">
+    <value>Die Datei wurde leider nicht gefunden. Stattdessen wird eine Standardvorlage verwendet.</value>
+  </data>
 </root>

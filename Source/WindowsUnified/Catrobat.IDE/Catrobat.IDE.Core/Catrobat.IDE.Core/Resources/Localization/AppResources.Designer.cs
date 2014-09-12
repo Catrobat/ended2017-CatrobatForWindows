@@ -2348,6 +2348,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die File not found ähnelt.
+        /// </summary>
+        public static string Import_FileNotFound {
+            get {
+                return ResourceManager.GetString("Import_FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sorry, the requested file could not be found. Instead, a default-file is created. instead. ähnelt.
+        /// </summary>
+        public static string Import_FileNotFoundText {
+            get {
+                return ResourceManager.GetString("Import_FileNotFoundText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die The imported program does not contain all required files and folders. ähnelt.
         /// </summary>
         public static string Import_FilesMissing {
