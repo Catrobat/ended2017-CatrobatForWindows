@@ -9,6 +9,7 @@
     d:DesignWidth="400">
     
     <Grid>
-      <MediaElement Name="MediaElementSound" AutoPlay="False"/>
+      <MediaElement Name="MediaElementSound" 
+                    AutoPlay="False"/>
     </Grid>
 </UserControl>

@@ -120,6 +120,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             _program = program;
             _lookToEdit = lookToEdit;
 
+            //TODO refactor this --> use Storage-service
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
             string paintTempFolderPath = Path.GetDirectoryName(StorageConstants.TempPaintImagePath);
             string paintTempFileName = Path.GetFileName(StorageConstants.TempPaintImagePath);

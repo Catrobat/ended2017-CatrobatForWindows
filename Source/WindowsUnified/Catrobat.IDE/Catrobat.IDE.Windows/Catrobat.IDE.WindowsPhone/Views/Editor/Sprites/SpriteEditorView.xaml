@@ -18,9 +18,7 @@
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
     <soundControls:SoundPlayButtonGroup x:Name="PlayPauseButtonGroupSounds"
-      Program="{Binding CurrentProgram}" />
-      <!--Command="{Binding SoundsPlayStateChangedCommand}"-->
-      
+      Program="{Binding CurrentProgram}" />      
 
 
     <Pivot Name="PivotMain" Grid.Row="1" Margin="0 -57 0 0"
@@ -42,8 +40,7 @@
             ItemTemplateSelector="{StaticResource ActionTemplateSelector}"
             CanReorderItems="True" AllowDrop="True" SelectionMode="None"
              />-->
-<!-- TwoWay notwendig????????????????????????????????????????????  wenn ja überal, wenn nein beim selected löschen-->
-                    <listsViewControls:CatrobatListView x:Name="ListViewActions"
+         <listsViewControls:CatrobatListView x:Name="ListViewActions"
             Visibility="Visible"
             ItemsSource="{Binding Actions}"
             SelectedItems="{Binding SelectedActions}"                                        
