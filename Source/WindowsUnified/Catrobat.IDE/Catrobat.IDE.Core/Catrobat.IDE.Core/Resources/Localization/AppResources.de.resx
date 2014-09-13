@@ -603,13 +603,13 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Sprache</value>
   </data>
   <data name="Main_MainCopyProgramDialogMessage" xml:space="preserve">
-    <value>Sind sie sicher, dass sie das Programm "{0}" kopieren wollen?</value>
+    <value>Sind Sie sicher, dass sie das Programm "{0}" kopieren wollen?</value>
   </data>
   <data name="Main_MainCopyProgramDialogTitle" xml:space="preserve">
     <value>Programm kopieren?</value>
   </data>
   <data name="Main_MainDeleteProgramDialogMessage" xml:space="preserve">
-    <value>Sind sie sicher, dass sie das Programm "{0}" löschen wollen?</value>
+    <value>Sind Sie sicher, dass sie das Programm "{0}" löschen wollen?</value>
   </data>
   <data name="Main_MainDeleteProgramDialogTitle" xml:space="preserve">
     <value>Programm löschen?</value>

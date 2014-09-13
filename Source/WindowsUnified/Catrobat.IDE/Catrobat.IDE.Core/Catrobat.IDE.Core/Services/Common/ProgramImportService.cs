@@ -85,10 +85,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             using (var storage = StorageSystem.GetStorage())
             {
-                if (await storage.DirectoryExistsAsync(StorageConstants.TempProgramImportZipPath))
-                {
-                    await storage.DeleteDirectoryAsync(StorageConstants.TempProgramImportZipPath);
-                }
+                await storage.DeleteDirectoryAsync(StorageConstants.TempProgramImportZipPath);
             }
             return _extractResult;
         }
@@ -217,10 +214,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                         ToastDisplayDuration.Long);
             using (var storage = StorageSystem.GetStorage())
             {
-                if (await storage.DirectoryExistsAsync(StorageConstants.TempProgramImportPath))
-                {
-                    await storage.DeleteDirectoryAsync(StorageConstants.TempProgramImportPath);
-                }
+                await storage.DeleteDirectoryAsync(StorageConstants.TempProgramImportPath);
             }
         }
 

@@ -59,10 +59,7 @@ namespace Catrobat.IDE.Core.Models
 
             using (var storage = StorageSystem.GetStorage())
             {
-                if (await storage.FileExistsAsync(path))
-                {
-                    await storage.DeleteFileAsync(path);
-                }
+                await storage.DeleteFileAsync(path);
             }
         }
 

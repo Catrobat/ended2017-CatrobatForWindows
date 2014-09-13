@@ -26,7 +26,6 @@ namespace Catrobat.IDE.Core.Services.Common
             string invalidFileNameChars = new string(Path.GetInvalidFileNameChars());
             fileName = Regex.Replace(fileName, @"[" + Regex.Escape(invalidFileNameChars) + "]", "");
             fileName = Regex.Replace(fileName, @"( *(\.)+)*$", "").Trim();
-            
             //fileName = Regex.Replace(fileName, @"[^A-Za-z0-9_-]", "");
 
             if(fileName.Length == 0)
@@ -94,12 +93,9 @@ namespace Catrobat.IDE.Core.Services.Common
             }
             catch (Exception)
             {
-                // Program could not be loaded
                 if (Debugger.IsAttached)
                     Debugger.Break();
             }
-
-
             return program;
         }
 
