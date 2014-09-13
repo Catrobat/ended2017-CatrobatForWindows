@@ -1300,7 +1300,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Import aborted</value>
   </data>
   <data name="Import_CanceledText" xml:space="preserve">
-    <value>Import was aborted by a user-interaction.</value>
+    <value>Import was aborted.</value>
   </data>
   <data name="Main_OnlineProgramDownloadBusy" xml:space="preserve">
     <value>Please wait until the current download-task is completed.</value>
@@ -1337,5 +1337,17 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Export_FileTitle" xml:space="preserve">
     <value>Share Catrobat file</value>
+  </data>
+  <data name="Import_FilesMissing" xml:space="preserve">
+    <value>The imported program does not contain all required files and folders.</value>
+  </data>
+  <data name="Import_started" xml:space="preserve">
+    <value>Import started</value>
+  </data>
+  <data name="Import_FileNotFound" xml:space="preserve">
+    <value>File not found</value>
+  </data>
+  <data name="Import_FileNotFoundText" xml:space="preserve">
+    <value>Sorry, the requested file could not be found. Instead, a default-file is created. instead.</value>
   </data>
 </root>

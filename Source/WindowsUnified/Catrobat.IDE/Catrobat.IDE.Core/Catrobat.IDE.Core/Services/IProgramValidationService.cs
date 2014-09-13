@@ -9,7 +9,7 @@ using Catrobat.IDE.Core.Models;
 
 namespace Catrobat.IDE.Core.Services
 {
-    public enum ProgramState { Unknown, Valid, Damaged, VersionTooOld, VersionTooNew, ErrorInThisApp }
+    public enum ProgramState { Unknown, Valid, Damaged, VersionTooOld, VersionTooNew, ErrorInThisApp, FilesMissing }
     public class CheckProgramResult
     {
         public ProgramState State { get; set; }

@@ -135,40 +135,21 @@ namespace Catrobat.IDE.WindowsShared.Services
                     string filePath = Path.Combine(program.BasePath,
                         StorageConstants.ProgramLooksPath, lookToEdit.FileName);
 
-                    await storage.CopyFileAsync(filePath,
-                        StorageConstants.TempPaintImagePath);
+                    if(await storage.FileExistsAsync(filePath))
+                    {
+                        await storage.CopyFileAsync(filePath, StorageConstants.TempPaintImagePath);
+                    }
+                    else
+                    {
+                        //ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Import_FileNotFound,
+                        //AppResources.Import_FileNotFoundText, null, MessageBoxOptions.Ok);
+                        await CreateDefaultImage();
+                    }
                 }
             }
             else
             {
-                var imageWidth = ServiceLocator.SystemInformationService.ScreenWidth;
-                var imageHeight = ServiceLocator.SystemInformationService.ScreenHeight;
-
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    if (await storage.FileExistsAsync(StorageConstants.TempPaintImagePath))
-                        await storage.DeleteFileAsync(StorageConstants.TempPaintImagePath);
-
-                    Stream stream = await storage.OpenFileAsync(StorageConstants.TempPaintImagePath,
-                        StorageFileMode.Create, StorageFileAccess.Write);
-
-                    BitmapEncoder encoder = await BitmapEncoder.CreateAsync(
-                        BitmapEncoder.PngEncoderId, stream.AsRandomAccessStream());
-
-                    Byte[] pixels = new byte[imageWidth * imageHeight * 4];
-
-                    for (var pixelStart = 0; pixelStart < pixels.Length; pixelStart += 4)
-                    {
-                        pixels[pixelStart + 0] = 0xAA; // Full transparent: 0x00
-                        pixels[pixelStart + 1] = 0xAA;
-                        pixels[pixelStart + 2] = 0xAA;
-                        pixels[pixelStart + 3] = 0xAA;
-                    }
-
-                    encoder.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Straight,
-                        (uint)imageWidth, (uint)imageHeight, 96, 96, pixels);
-                    await encoder.FlushAsync();
-                }
+                await CreateDefaultImage();
             }
             var file = await paintTempFolder.GetFileAsync(paintTempFileName);
 
@@ -205,10 +186,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                     ServiceLocator.NavigationService.NavigateTo<NewLookSourceSelectionViewModel>());
             }
-
             StorageFile file = (StorageFile)fileArray[0];
-            //StorageFolder storageFolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync("exchange", CreationCollisionOption.OpenIfExists);
-            //file.CopyAsync(storageFolder, "reveicedfrompaint.png", NameCollisionOption.ReplaceExisting);
 
             var fileStream = await file.OpenReadAsync();
             var memoryStream = new MemoryStream();
@@ -266,6 +244,38 @@ namespace Catrobat.IDE.WindowsShared.Services
                 }
 
                 _lookToEdit = null;
+            }
+        }
+
+        private async Task CreateDefaultImage()
+        {
+            var imageWidth = ServiceLocator.SystemInformationService.ScreenWidth;
+            var imageHeight = ServiceLocator.SystemInformationService.ScreenHeight;
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                if (await storage.FileExistsAsync(StorageConstants.TempPaintImagePath))
+                    await storage.DeleteFileAsync(StorageConstants.TempPaintImagePath);
+
+                Stream stream = await storage.OpenFileAsync(StorageConstants.TempPaintImagePath,
+                    StorageFileMode.Create, StorageFileAccess.Write);
+
+                BitmapEncoder encoder = await BitmapEncoder.CreateAsync(
+                    BitmapEncoder.PngEncoderId, stream.AsRandomAccessStream());
+
+                Byte[] pixels = new byte[imageWidth * imageHeight * 4];
+
+                for (var pixelStart = 0; pixelStart < pixels.Length; pixelStart += 4)
+                {
+                    pixels[pixelStart + 0] = 0xAA; // Full transparent: 0x00
+                    pixels[pixelStart + 1] = 0xAA;
+                    pixels[pixelStart + 2] = 0xAA;
+                    pixels[pixelStart + 3] = 0xAA;
+                }
+
+                encoder.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Straight,
+                    (uint)imageWidth, (uint)imageHeight, 96, 96, pixels);
+                await encoder.FlushAsync();
             }
         }
     }

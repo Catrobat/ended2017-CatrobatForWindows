@@ -2330,7 +2330,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Import was aborted by a user-interaction. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Import was aborted. ähnelt.
         /// </summary>
         public static string Import_CanceledText {
             get {
@@ -2344,6 +2344,33 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Import_CatrobatDamagedText {
             get {
                 return ResourceManager.GetString("Import_CatrobatDamagedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die File not found ähnelt.
+        /// </summary>
+        public static string Import_FileNotFound {
+            get {
+                return ResourceManager.GetString("Import_FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sorry, the requested file could not be found. Instead, a default-file is created. instead. ähnelt.
+        /// </summary>
+        public static string Import_FileNotFoundText {
+            get {
+                return ResourceManager.GetString("Import_FileNotFoundText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The imported program does not contain all required files and folders. ähnelt.
+        /// </summary>
+        public static string Import_FilesMissing {
+            get {
+                return ResourceManager.GetString("Import_FilesMissing", resourceCulture);
             }
         }
         
@@ -2434,6 +2461,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Import_ReloadAdvise {
             get {
                 return ResourceManager.GetString("Import_ReloadAdvise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Import started ähnelt.
+        /// </summary>
+        public static string Import_started {
+            get {
+                return ResourceManager.GetString("Import_started", resourceCulture);
             }
         }
         
