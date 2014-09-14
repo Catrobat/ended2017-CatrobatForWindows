@@ -7,24 +7,12 @@
   xmlns:templates="using:Catrobat.IDE.WindowsPhone.IDE.Content.Templates"
   xmlns:bricksIde="using:Catrobat.IDE.Core.Models.Bricks"
   xmlns:scripts="using:Catrobat.IDE.Core.Models.Scripts"
-  xmlns:listPicker="using:Catrobat.IDE.WindowsPhone.Controls.ListPicker"
   xmlns:listPickerControl="using:Catrobat.IDE.WindowsPhone.Controls.ListPickerControl"
   xmlns:formulaControls="using:Catrobat.IDE.WindowsPhone.Controls.FormulaControls"
   xmlns:actionsControls="using:Catrobat.IDE.WindowsPhone.Controls.ActionsControls"
   mc:Ignorable="d">
 
-  <!--<SolidColorBrush x:Key="SoundsBrush" Color="#FFE035D5" />
-  <SolidColorBrush x:Key="LooksBrush" Color="#FF8A018C" />
-  <SolidColorBrush x:Key="ObjectsBrush" Color="#FF891D1D" />
-
-  <SolidColorBrush x:Key="LooksBrickBrush" Color="#FF8A018C" />
-  <SolidColorBrush x:Key="MotionBrickBrush" Color="#FF2E2BD7" />
-  <SolidColorBrush x:Key="SoundBrickBrush" Color="#FFE035D5" />
-  <SolidColorBrush x:Key="ControlBrickBrush" Color="#FFEBB613" />
-  <SolidColorBrush x:Key="VariableBrickBrush" Color="DarkGreen" />-->
   <SolidColorBrush x:Key="BrickBorderBrush" Color="White" />
-
-  
 
   <Style x:Key="LocalScrollViewerStyle" TargetType="ScrollViewer">
     <Setter Property="Template">
@@ -41,15 +29,16 @@
     </Setter>
   </Style>
 
-  <Style x:Key="ScriptBlockBackground" TargetType="ContentControl">
+  <!--<Style x:Key="ScriptBlockBackground" TargetType="ContentControl">
     <Setter Property="ContentTemplate">
       <Setter.Value>
         <DataTemplate>
-          <Path Data="M6.4880157,148.27588 L6.4880137,108.27587 L14.55194,108.27587 L22.615868,100.27587 L54.871574,100.27587 L62.935497,108.27587 L490.32358,108.27587 L490.32358,148.27588 L62.935497,148.27588 L54.871571,156.27588 L38.743717,156.27588 L30.679794,148.27588 z" Margin="-1.5,-1.5,-1.5,0" Stretch="Fill"  UseLayoutRounding="False" />
+          <Path Data="M6.4880157,148.27588 L6.4880137,108.27587 L14.55194,108.27587 L22.615868,100.27587 L54.871574,100.27587 L62.935497,108.27587 L490.32358,108.27587 L490.32358,148.27588 L62.935497,148.27588 L54.871571,156.27588 L38.743717,156.27588 L30.679794,148.27588 z" 
+                Margin="-1.5,-1.5,-1.5,0" Stretch="Fill"  UseLayoutRounding="False" />
         </DataTemplate>
       </Setter.Value>
     </Setter>
-  </Style>
+  </Style>-->
 
   <DataTemplate x:Key="ListBoxSpriteItem">
     <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Sprite}">
