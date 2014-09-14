@@ -64,26 +64,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls
             instance.PlayButton.Group = (SoundPlayButtonGroup) e.NewValue;
         }
 
-
-        //public ICommand Command
-        //{
-        //    get { return (ICommand)GetValue(CommandProperty); }
-        //    set { SetValue(CommandProperty, value); }
-        //}
-
-        //public static readonly DependencyProperty CommandProperty =
-        //    DependencyProperty.Register("Command",
-        //    typeof(ICommand),
-        //    typeof(LocalProgramControl),
-        //    new PropertyMetadata(null, CommandChanged));
-
-        //private static void CommandChanged(DependencyObject d, 
-        //    DependencyPropertyChangedEventArgs e)
-        //{
-        //    //var instance = d as LocalProgramControl;
-
-        //}
-
         #endregion
 
         public SoundItemControl()

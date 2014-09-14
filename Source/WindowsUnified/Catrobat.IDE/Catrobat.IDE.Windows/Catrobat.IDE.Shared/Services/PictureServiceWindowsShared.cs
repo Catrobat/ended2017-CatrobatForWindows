@@ -120,6 +120,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             _program = program;
             _lookToEdit = lookToEdit;
 
+            //TODO refactor this --> use Storage-service
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
             string paintTempFolderPath = Path.GetDirectoryName(StorageConstants.TempPaintImagePath);
             string paintTempFileName = Path.GetFileName(StorageConstants.TempPaintImagePath);
@@ -128,10 +129,8 @@ namespace Catrobat.IDE.WindowsShared.Services
             if (program != null && lookToEdit != null)
             {
                 using (var storage = StorageSystem.GetStorage())
-                {                    
-                    if (await storage.FileExistsAsync(StorageConstants.TempPaintImagePath))
-                        await storage.DeleteFileAsync(StorageConstants.TempPaintImagePath);
-
+                {
+                    await storage.DeleteFileAsync(StorageConstants.TempPaintImagePath);
                     string filePath = Path.Combine(program.BasePath,
                         StorageConstants.ProgramLooksPath, lookToEdit.FileName);
 
@@ -254,9 +253,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             using (var storage = StorageSystem.GetStorage())
             {
-                if (await storage.FileExistsAsync(StorageConstants.TempPaintImagePath))
-                    await storage.DeleteFileAsync(StorageConstants.TempPaintImagePath);
-
+                await storage.DeleteFileAsync(StorageConstants.TempPaintImagePath);
                 Stream stream = await storage.OpenFileAsync(StorageConstants.TempPaintImagePath,
                     StorageFileMode.Create, StorageFileAccess.Write);
 

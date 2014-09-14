@@ -377,18 +377,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             private set;
         }
 
-        public RelayCommand<Sound> PlaySoundCommand
-        {
-            get;
-            private set;
-        }
-
-        public RelayCommand<Sound> StopSoundCommand
-        {
-            get;
-            private set;
-        }
-
         public RelayCommand StartPlayerCommand
         {
             get;
@@ -424,12 +412,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             get;
             private set;
         }
-
-        //public RelayCommand<PlayPauseCommandArguments> SoundsPlayStateChangedCommand
-        //{
-        //    get;
-        //    private set;
-        //}
 
         public RelayCommand ClearObjectsSelectionCommand
         {
@@ -710,21 +692,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             SelectedSounds.Clear();
         }
 
-        //private async void PlaySoundAction(Sound sound)
-        //{
-        //    if (_currentSound != sound)
-        //        await ServiceLocator.SoundPlayerService.SetSound(sound, CurrentProgram);
-
-        //    _currentSound = sound;
-
-        //    ServiceLocator.SoundPlayerService.Play();
-        //}
-
-        //private void StopSoundAction(Sound sound)
-        //{
-        //    ServiceLocator.SoundPlayerService.Pause();
-        //}
-
         private void StartPlayerAction()
         {
             ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProgram);
@@ -778,32 +745,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 ((BroadcastBrick)attachedObject).Message = null;
             }
         }
-
-        //private void SoundsPlayStateChangedAction(PlayPauseCommandArguments args)
-        //{
-        //    var playedSound = args.ChangedToPlayObject as Sound;
-        //    var pausedSound = args.ChangedToPausedObject as Sound;
-
-        //    ServiceLocator.SoundPlayerService.Clear();
-
-        //    ServiceLocator.SoundPlayerService.SoundFinished += delegate()
-        //    {
-        //        args.CurrentButton.State = PlayPauseButtonState.Pause;
-        //    };
-
-        //    if (pausedSound != null)
-        //        ServiceLocator.SoundPlayerService.Pause();
-
-        //    if (playedSound != null)
-        //    {
-        //        if (_sound != playedSound)
-        //        {
-        //            _sound = playedSound;
-        //            ServiceLocator.SoundPlayerService.SetSound(_sound, CurrentProgram);
-        //        }
-        //        ServiceLocator.SoundPlayerService.Play();
-        //    }
-        //}
 
         protected override void GoBackAction()
         {
@@ -867,8 +808,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             DeleteSoundCommand = new RelayCommand(DeleteSoundAction, CanExecuteDeleteSoundCommand);
             CopySoundCommand = new RelayCommand(CopySoundAction, () => false);
 
-            //PlaySoundCommand = new RelayCommand<Sound>(PlaySoundAction);
-            //StopSoundCommand = new RelayCommand<Sound>(StopSoundAction);
             StartPlayerCommand = new RelayCommand(StartPlayerAction);
             GoToMainViewCommand = new RelayCommand(GoToMainViewAction);
             ProgramSettingsCommand = new RelayCommand(ProgramSettingsAction);
@@ -882,7 +821,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             ClearSoundsSelectionCommand = new RelayCommand(ClearSoundsSelectionAction);
 
             NothingItemHackCommand = new RelayCommand<object>(NothingItemHackAction);
-            //SoundsPlayStateChangedCommand = new RelayCommand<PlayPauseCommandArguments>(SoundsPlayStateChangedAction);
 
             _bricks = new ActionsCollection();
 

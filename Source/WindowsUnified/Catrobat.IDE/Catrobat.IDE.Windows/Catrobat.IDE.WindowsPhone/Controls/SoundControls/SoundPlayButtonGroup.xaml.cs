@@ -11,6 +11,7 @@ using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.WindowsPhone.Controls.SoundControls
 {
@@ -134,8 +135,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.SoundControls
                 Stop();
             }
 
-            if (Command != null)
-                Command.Execute(notification);
+            //if (Command != null)
+            //    Command.Execute(notification);
 
             _isLoading = false;
         }
@@ -153,8 +154,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.SoundControls
                 NewState = newState
             };
 
-            if (Command != null)
-                Command.Execute(notification);
+            //if (Command != null)
+            //    Command.Execute(notification);
         }
 
         # region MediaElement interaction
@@ -192,18 +193,27 @@ namespace Catrobat.IDE.WindowsPhone.Controls.SoundControls
         public async Task SetSound(Sound sound)
         {
             _sound = sound;
-
+            //TODO refactor this --> use Storage-service
             var localFolder = ApplicationData.Current.LocalFolder;
             var projectsFolder = await localFolder.GetFolderAsync(
                 StorageConstants.ProgramsPath);
             var projectFolder = await projectsFolder.GetFolderAsync(
                 Program.Name);
-            var soundsFolder = await projectFolder.GetFolderAsync(
-                StorageConstants.ProgramSoundsPath);
-            var soundFile = await soundsFolder.GetFileAsync(_sound.FileName);
 
-            //_mediaElement.Volume = 0.5;
-            _mediaElement.SetSource(await soundFile.OpenReadAsync(), soundFile.ContentType);
+            try
+            {
+                StorageFolder soundsFolder = await projectFolder.GetFolderAsync(
+                    StorageConstants.ProgramSoundsPath);
+                StorageFile soundFile = await soundsFolder.GetFileAsync(_sound.FileName);
+                _mediaElement.SetSource(await soundFile.OpenReadAsync(), soundFile.ContentType);
+            }
+            catch(Exception)
+            {
+                ServiceLocator.NotifictionService.ShowToastNotification(
+                        AppResources.Import_FileNotFound,
+                        AppResources.Import_FileNotFoundText,
+                        ToastDisplayDuration.Long);
+            }
         }
 
         public void Play()
@@ -235,7 +245,9 @@ namespace Catrobat.IDE.WindowsPhone.Controls.SoundControls
         private void SetMediaElement(MediaElement mediaElement)
         {
             if (_mediaElement != null)
+            {
                 _mediaElement.CurrentStateChanged -= MediaElementOnCurrentStateChanged;
+            }
 
             _mediaElement = mediaElement;
             _mediaElement.CurrentStateChanged += MediaElementOnCurrentStateChanged;

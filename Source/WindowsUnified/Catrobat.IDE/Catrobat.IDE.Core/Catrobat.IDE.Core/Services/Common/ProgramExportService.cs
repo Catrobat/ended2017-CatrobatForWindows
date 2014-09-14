@@ -28,9 +28,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
             using (var storage = StorageSystem.GetStorage())
             {
-                if (await storage.DirectoryExistsAsync(tempPath))
-                    await storage.DeleteDirectoryAsync(tempPath);
-
+                await storage.DeleteDirectoryAsync(tempPath);
                 await storage.CopyDirectoryAsync(programFolderPath, tempPath);
 
                 var programCode = await storage.ReadTextFileAsync(programCodePath);
@@ -99,16 +97,8 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                bool exists = await storage.DirectoryExistsAsync(StorageConstants.TempProgramExportPath);
-                if (exists)
-                {
-                    await storage.DeleteDirectoryAsync(StorageConstants.TempProgramExportPath);
-                }
-                exists = await storage.DirectoryExistsAsync(StorageConstants.TempProgramExportZipPath);
-                if (exists)
-                {
-                    await storage.DeleteDirectoryAsync(StorageConstants.TempProgramExportZipPath);
-                }
+                await storage.DeleteDirectoryAsync(StorageConstants.TempProgramExportPath);
+                await storage.DeleteDirectoryAsync(StorageConstants.TempProgramExportZipPath);
             }
         }
 

@@ -74,8 +74,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //((SoundPlayerServiceWindowsShared) ServiceLocator.SoundPlayerService).
-            //    SetMediaElement(MediaElementSound);
             var playSoundButtonGroup = PlayPauseButtonGroupSounds;
             if (playSoundButtonGroup != null) playSoundButtonGroup.Stop();
 
@@ -84,25 +82,8 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            //ServiceLocator.SoundPlayerService.Clear();
-
             base.OnNavigatedFrom(e);
         }
-
-        //private void PlayPauseButtonSound_OnPlayStateChanged(PlayPauseButton button, 
-        //    PlayPauseButtonState state)
-        //{
-        //    var sound = (Sound)button.DataContext;
-
-        //    if (state == PlayPauseButtonState.Play)
-        //    {
-        //        _viewModel.PlaySoundCommand.Execute(sound);
-        //    }
-        //    else
-        //    {
-        //        _viewModel.StopSoundCommand.Execute(sound);
-        //    }
-        //}
 
         //private void reorderListBoxScriptBricks_Loaded(object sender, RoutedEventArgs e)
         //{

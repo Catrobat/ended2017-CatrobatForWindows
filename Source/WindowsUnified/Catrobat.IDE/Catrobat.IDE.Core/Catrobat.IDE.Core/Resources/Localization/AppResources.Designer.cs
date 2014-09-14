@@ -2357,7 +2357,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Sorry, the requested file could not be found. Instead, a default-file is created. instead. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sorry, the requested file could not be found. ähnelt.
         /// </summary>
         public static string Import_FileNotFoundText {
             get {
