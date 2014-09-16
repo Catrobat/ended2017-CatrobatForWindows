@@ -976,7 +976,7 @@ namespace Catrobat.IDE.Core.Formulas
 
                 // merge with pending tokens (regarding operator order)
                 var nextInfixOperatorToken = nextToken as FormulaNodeInfixOperator;
-                if (nextInfixOperatorToken == null || (pending.Count != 0 && ((IFormulaOperator) pending.Peek()).Order > nextInfixOperatorToken.Order))
+                if (nextInfixOperatorToken == null || (pending.Count != 0 && ((IFormulaOperator) pending.Peek()).Order >= nextInfixOperatorToken.Order))
                 {
                     while (pending.Count != 0)
                     {

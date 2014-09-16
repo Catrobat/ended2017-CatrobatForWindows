@@ -86,7 +86,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
             var yToken = FormulaTokenFactory.CreateDigitToken(y);
             var zToken = FormulaTokenFactory.CreateDigitToken(z);
             var plusToken = FormulaTokenFactory.CreatePlusToken();
+            var minusToken = FormulaTokenFactory.CreateMinusToken();
             var multiplyToken = FormulaTokenFactory.CreateMultiplyToken();
+            var divideToken = FormulaTokenFactory.CreateDivideToken();
             var equalsToken = FormulaTokenFactory.CreateEqualsToken();
             var lessToken = FormulaTokenFactory.CreateLessToken();
             var notToken = FormulaTokenFactory.CreateNotToken();
@@ -94,7 +96,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
             var yNode = FormulaTreeFactory.CreateNumberNode(y);
             var zNode = FormulaTreeFactory.CreateNumberNode(z);
             Func<FormulaTree, FormulaTree, FormulaTree> createAddNode = FormulaTreeFactory.CreateAddNode;
+            Func<FormulaTree, FormulaTree, FormulaTree> createSubtractNode = FormulaTreeFactory.CreateSubtractNode;
             Func<FormulaTree, FormulaTree, FormulaTree> createMultiplyNode = FormulaTreeFactory.CreateMultiplyNode;
+            Func<FormulaTree, FormulaTree, FormulaTree> createDivideNode = FormulaTreeFactory.CreateDivideNode;
             Func<FormulaTree, FormulaTree, FormulaTree> createEqualsNode = FormulaTreeFactory.CreateEqualsNode;
             Func<FormulaTree, FormulaTree, FormulaTree> createLessNode = FormulaTreeFactory.CreateLessNode;
             Func<FormulaTree, FormulaTree> createNotNode = FormulaTreeFactory.CreateNotNode;
@@ -106,8 +110,14 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
                 expected: createAddNode(createMultiplyNode(xNode, yNode), zNode),
                 tokens: new IFormulaToken[] { xToken, multiplyToken, yToken, plusToken, zToken });
             TestInterpret(
-                expected: createAddNode(xNode, createAddNode(yNode, zNode)),
+                expected: createAddNode(createAddNode(xNode, yNode), zNode),
                 tokens: new IFormulaToken[] { xToken, plusToken, yToken, plusToken, zToken });
+            TestInterpret(
+                expected: createAddNode(createSubtractNode(xNode, yNode), zNode),
+                tokens: new IFormulaToken[] { xToken, minusToken, yToken, plusToken, zToken });
+            TestInterpret(
+                expected: createMultiplyNode(createDivideNode(xNode, yNode), zNode),
+                tokens: new IFormulaToken[] { xToken, divideToken, yToken, multiplyToken, zToken });
             TestInterpret(
                 expected: createEqualsNode(createNotNode(xNode), yNode),
                 tokens: new IFormulaToken[] { notToken, xToken, equalsToken, yToken });
@@ -115,7 +125,7 @@ namespace Catrobat.IDE.Core.Tests.Tests.Formulas
                 expected: createEqualsNode(xNode, createNotNode(yNode)),
                 tokens: new IFormulaToken[] { xToken, equalsToken, notToken, yToken });
             TestInterpret(
-                expected: createNotNode(createLessNode(xNode, yNode)),
+                expected: createLessNode(createNotNode(xNode), yNode),
                 tokens: new IFormulaToken[] { notToken, xToken, lessToken, yToken });
             TestInterpret(
                 expected: createLessNode(xNode, createNotNode(yNode)),
