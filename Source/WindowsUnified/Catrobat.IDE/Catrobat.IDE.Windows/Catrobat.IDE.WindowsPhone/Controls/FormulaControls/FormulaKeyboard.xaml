@@ -43,13 +43,13 @@
     </Style>
     <Style x:Key="StyleButtonAdditional" TargetType="Button" BasedOn="{StaticResource StyleButton}">
     </Style>
-    <Style x:Key="StyleButtonEvaluate" TargetType="Button" BasedOn="{StaticResource StyleButton}">
+    <!--<Style x:Key="StyleButtonEvaluate" TargetType="Button" BasedOn="{StaticResource StyleButton}">-->
       <!--<Style.Setters>
         <Setter 
           Property="Background" 
           Value="{ThemeResource Accent1Brush}" />
       </Style.Setters>-->
-    </Style>
+    <!--</Style>-->
 
     <!-- constants -->
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyD0">D0</editor:FormulaEditorKey>

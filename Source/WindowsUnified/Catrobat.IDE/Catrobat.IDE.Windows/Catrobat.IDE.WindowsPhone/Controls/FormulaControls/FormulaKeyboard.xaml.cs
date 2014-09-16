@@ -137,17 +137,17 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
             RaiseKeyPressed(new FormulaKeyEventArgs(data));
         }
 
-        public EvaluatePressed EvaluatePressed;
-        private void RaiseEvaluatePressed()
-        {
-            if (EvaluatePressed != null) EvaluatePressed.Invoke();
-        }
+        //public EvaluatePressed EvaluatePressed;
+        //private void RaiseEvaluatePressed()
+        //{
+        //    if (EvaluatePressed != null) EvaluatePressed.Invoke();
+        //}
 
-        public ShowErrorPressed ShowErrorPressed;
-        private void RaiseShowErrorPressed()
-        {
-            if (ShowErrorPressed != null) ShowErrorPressed.Invoke();
-        }
+        //public ShowErrorPressed ShowErrorPressed;
+        //private void RaiseShowErrorPressed()
+        //{
+        //    if (ShowErrorPressed != null) ShowErrorPressed.Invoke();
+        //}
 
         #endregion
 
@@ -223,14 +223,14 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
             ViewModel.IsAddGlobalVariableButtonVisible = parentVisible && PivotVariables.SelectedItem == PivotItemGlobalVariables;
         }
 
-        private void ButtonEvaluate_OnClick(object sender, RoutedEventArgs e)
-        {
-            RaiseEvaluatePressed();
-        }
+        //private void ButtonEvaluate_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    RaiseEvaluatePressed();
+        //}
 
-        private void ButtonError_OnClick(object sender, RoutedEventArgs e)
-        {
-            RaiseShowErrorPressed();
-        }
+        //private void ButtonError_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    RaiseShowErrorPressed();
+        //}
     }
 }

@@ -25,7 +25,7 @@
         MaxFontSize="70"
         IsAutoFontSize="True"
         Height="340"
-        HorizontalAlignment="Stretch" />
+        HorizontalAlignment="Stretch"/>
     </ScrollViewer>
     <TextBlock Grid.Row="0"
       Text="{Binding Resources.Editor_TypeSomething, 
@@ -69,7 +69,24 @@
       </formulaControls:FormulaKeyboard>
     </Grid>
   </Grid>
-  
+
+
+  <Page.BottomAppBar>
+    <CommandBar RequestedTheme="Dark" Background="{ThemeResource AppBarBackgroundBrush}">
+      <CommandBar.PrimaryCommands>
+        <AppBarButton Icon="Undo" 
+                      Label="{Binding Resources.Editor_Undo, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding UndoCommand}"/>
+        <AppBarButton Icon="Redo" 
+                      Label="{Binding Resources.Editor_Redo, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding RedoCommand}"/>
+      </CommandBar.PrimaryCommands>
+    </CommandBar>
+  </Page.BottomAppBar>
+
+  <!--Old Windows 8 App-Bar:-->
   <!--<phone:PhoneApplicationPage.ApplicationBar>
     <shell:ApplicationBar>
       <shell:ApplicationBarIconButton Text="Undo" IconUri="/Content/Images/LicensedIcons/ModernUIIcons/dark/appbar.undo.png" />

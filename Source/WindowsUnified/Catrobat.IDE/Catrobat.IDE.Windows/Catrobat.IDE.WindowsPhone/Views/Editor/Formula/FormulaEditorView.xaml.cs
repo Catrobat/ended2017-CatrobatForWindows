@@ -27,13 +27,13 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
             //ButtonAddLocalVariable = (ApplicationBarIconButton) ApplicationBar.Buttons[2];
             //ButtonAddGlobalVariable = (ApplicationBarIconButton) ApplicationBar.Buttons[3];
 
-            IsAddLocalVariableButtonVisible = _viewModel.IsAddLocalVariableButtonVisible;
-            IsAddGlobalVariableButtonVisible = _viewModel.IsAddGlobalVariableButtonVisible;
-
+            //IsAddLocalVariableButtonVisible = _viewModel.IsAddLocalVariableButtonVisible;
+            //IsAddGlobalVariableButtonVisible = _viewModel.IsAddGlobalVariableButtonVisible;
+            
             this.FormulaViewerMain.DoubleTap += FormulaViewer_DoubleTap;
             this.FormulaKeyboard.KeyPressed += KeyPressed;
-            this.FormulaKeyboard.EvaluatePressed += EvaluatePressed;
-            this.FormulaKeyboard.ShowErrorPressed += ShowErrorPressed;
+            //this.FormulaKeyboard.EvaluatePressed += EvaluatePressed;
+            //this.FormulaKeyboard.ShowErrorPressed += ShowErrorPressed;
 
             Loaded += FormulaEditorView_OnLoaded;
             Unloaded += FormulaEditorView_OnUnloaded;
@@ -51,12 +51,11 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
             this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.HasErrorProperty, new Binding { Path = new PropertyPath("HasError") });
             this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.ProjectProperty, new Binding { Path = new PropertyPath("CurrentProgram") });
             
-            _viewModel.PropertyChanged += ViewModel_OnPropertyChanged;
+            //_viewModel.PropertyChanged += ViewModel_OnPropertyChanged;
         }
 
         private void FormulaEditorView_OnUnloaded(object sender, RoutedEventArgs e)
         {
-            // XAML bindings are not removed themselves! hopefully this changes in Windows Phone 8.1
             this.FormulaViewerMain.ClearValue(FormulaViewer.TokensProperty);
             this.FormulaViewerMain.ClearValue(FormulaViewer.CaretIndexProperty);
             this.FormulaViewerMain.ClearValue(FormulaViewer.SelectionStartProperty);
@@ -66,61 +65,61 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
             this.FormulaKeyboard.ClearValue(Controls.FormulaControls.FormulaKeyboard.HasErrorProperty);
             this.FormulaKeyboard.ClearValue(Controls.FormulaControls.FormulaKeyboard.ProjectProperty);
 
-            _viewModel.PropertyChanged -= ViewModel_OnPropertyChanged;
+            //_viewModel.PropertyChanged -= ViewModel_OnPropertyChanged;
         }
 
-        private void ViewModel_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "IsAddLocalVariableButtonVisible") IsAddLocalVariableButtonVisible = _viewModel.IsAddLocalVariableButtonVisible;
-            if (e.PropertyName == "IsAddGlobalVariableButtonVisible") IsAddGlobalVariableButtonVisible = _viewModel.IsAddGlobalVariableButtonVisible;
-        }
+        //private void ViewModel_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        //{
+        //    if (e.PropertyName == "IsAddLocalVariableButtonVisible") IsAddLocalVariableButtonVisible = _viewModel.IsAddLocalVariableButtonVisible;
+        //    if (e.PropertyName == "IsAddGlobalVariableButtonVisible") IsAddGlobalVariableButtonVisible = _viewModel.IsAddGlobalVariableButtonVisible;
+        //}
 
         #region Dependency properties
 
-        public static readonly DependencyProperty IsAddLocalVariableButtonVisibleProperty = DependencyProperty.Register(
-            name: "IsAddLocalVariableButtonVisible",
-            propertyType: typeof (bool),
-            ownerType: typeof (FormulaEditorView),
-            typeMetadata: new PropertyMetadata(true, (d, e) => ((FormulaEditorView) d).IsAddLocalVariableButtonVisiblePropertyChanged(e)));
-        public bool IsAddLocalVariableButtonVisible
-        {
-            get { return (bool)GetValue(IsAddLocalVariableButtonVisibleProperty); }
-            set { SetValue(IsAddLocalVariableButtonVisibleProperty, value); }
-        }
-        private void IsAddLocalVariableButtonVisiblePropertyChanged(DependencyPropertyChangedEventArgs e)
-        {
-            //if (((bool) e.NewValue))
-            //{
-            //    ApplicationBar.Buttons.Add(ButtonAddLocalVariable);
-            //}
-            //else
-            //{
-            //    ApplicationBar.Buttons.Remove(ButtonAddLocalVariable);
-            //}
-        }
+        //public static readonly DependencyProperty IsAddLocalVariableButtonVisibleProperty = DependencyProperty.Register(
+        //    name: "IsAddLocalVariableButtonVisible",
+        //    propertyType: typeof (bool),
+        //    ownerType: typeof (FormulaEditorView),
+        //    typeMetadata: new PropertyMetadata(true, (d, e) => ((FormulaEditorView) d).IsAddLocalVariableButtonVisiblePropertyChanged(e)));
+        //public bool IsAddLocalVariableButtonVisible
+        //{
+        //    get { return (bool)GetValue(IsAddLocalVariableButtonVisibleProperty); }
+        //    set { SetValue(IsAddLocalVariableButtonVisibleProperty, value); }
+        //}
+        //private void IsAddLocalVariableButtonVisiblePropertyChanged(DependencyPropertyChangedEventArgs e)
+        //{
+        //    if (((bool)e.NewValue))
+        //    {
+        //        ApplicationBar.Buttons.Add(ButtonAddLocalVariable);
+        //    }
+        //    else
+        //    {
+        //        ApplicationBar.Buttons.Remove(ButtonAddLocalVariable);
+        //    }
+        //}
 
-        public static readonly DependencyProperty IsAddGlobalVariableButtonVisibleProperty = DependencyProperty.Register
-            (
-                name: "IsAddGlobalVariableButtonVisible",
-                propertyType: typeof (bool),
-                ownerType: typeof (FormulaEditorView),
-                typeMetadata: new PropertyMetadata(true, (d, e) => ((FormulaEditorView) d).IsAddGlobalVariableButtonVisiblePropertyChanged(e)));
-        public bool IsAddGlobalVariableButtonVisible
-        {
-            get { return (bool)GetValue(IsAddGlobalVariableButtonVisibleProperty); }
-            set { SetValue(IsAddGlobalVariableButtonVisibleProperty, value); }
-        }
-        private void IsAddGlobalVariableButtonVisiblePropertyChanged(DependencyPropertyChangedEventArgs e)
-        {
-            //if (((bool) e.NewValue))
-            //{
-            //    ApplicationBar.Buttons.Add(ButtonAddGlobalVariable);
-            //}
-            //else
-            //{
-            //    ApplicationBar.Buttons.Remove(ButtonAddGlobalVariable);
-            //}
-        }
+        //public static readonly DependencyProperty IsAddGlobalVariableButtonVisibleProperty = DependencyProperty.Register
+        //    (
+        //        name: "IsAddGlobalVariableButtonVisible",
+        //        propertyType: typeof (bool),
+        //        ownerType: typeof (FormulaEditorView),
+        //        typeMetadata: new PropertyMetadata(true, (d, e) => ((FormulaEditorView) d).IsAddGlobalVariableButtonVisiblePropertyChanged(e)));
+        //public bool IsAddGlobalVariableButtonVisible
+        //{
+        //    get { return (bool)GetValue(IsAddGlobalVariableButtonVisibleProperty); }
+        //    set { SetValue(IsAddGlobalVariableButtonVisibleProperty, value); }
+        //}
+        //private void IsAddGlobalVariableButtonVisiblePropertyChanged(DependencyPropertyChangedEventArgs e)
+        //{
+        //    if (((bool)e.NewValue))
+        //    {
+        //        ApplicationBar.Buttons.Add(ButtonAddGlobalVariable);
+        //    }
+        //    else
+        //    {
+        //        ApplicationBar.Buttons.Remove(ButtonAddGlobalVariable);
+        //    }
+        //}
 
         #endregion
 
@@ -160,15 +159,15 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
             _viewModel.KeyPressedCommand.Execute(e);
         }
 
-        private void EvaluatePressed()
-        {
-            _viewModel.EvaluatePressedCommand.Execute(null);
-        }
+        //private void EvaluatePressed()
+        //{
+        //    _viewModel.EvaluatePressedCommand.Execute(null);
+        //}
 
-        private void ShowErrorPressed()
-        {
-            _viewModel.ShowErrorPressedCommand.Execute(null);
-        }
+        //private void ShowErrorPressed()
+        //{
+        //    _viewModel.ShowErrorPressedCommand.Execute(null);
+        //}
 
         private bool _firstBackPressed = true;
         //protected override void OnBackKeyPress(CancelEventArgs e)

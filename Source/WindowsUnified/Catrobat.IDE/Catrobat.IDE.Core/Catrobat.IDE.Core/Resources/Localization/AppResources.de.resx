@@ -991,7 +991,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>E-Mail:</value>
   </data>
   <data name="Editor_Redo" xml:space="preserve">
-    <value>Wiederherstellen</value>
+    <value>Wiederher- stellen</value>
   </data>
   <data name="Editor_StartSensors" xml:space="preserve">
     <value>Sensoren starten</value>
