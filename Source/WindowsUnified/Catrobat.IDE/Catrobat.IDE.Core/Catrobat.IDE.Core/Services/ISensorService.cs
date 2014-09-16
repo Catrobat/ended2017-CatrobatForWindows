@@ -2,11 +2,11 @@
 
 namespace Catrobat.IDE.Core.Services
 {
-    public delegate void CompassReadingChangedEventHandler(object sender, SensorEventArgs e);
+    public delegate void SensorReadingChangedEventHandler(object sender, SensorEventArgs e);
 
     public interface ISensorService
     {
-        event CompassReadingChangedEventHandler CompassReadingChanged;
+        event SensorReadingChangedEventHandler SensorReadingChanged;
         void Start();
         void Stop();
 

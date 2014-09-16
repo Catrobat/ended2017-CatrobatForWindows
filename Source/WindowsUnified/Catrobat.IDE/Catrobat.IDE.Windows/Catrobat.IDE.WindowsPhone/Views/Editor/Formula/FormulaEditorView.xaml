@@ -83,6 +83,10 @@
                       Source={StaticResource LocalizedStrings}}"
                       Command="{Binding RedoCommand}"/>
       </CommandBar.PrimaryCommands>
+      <CommandBar.SecondaryCommands>
+        <AppBarButton Label="{Binding SensorButtonLabel}"
+                      Command="{Binding SensorCommand}"/>  
+      </CommandBar.SecondaryCommands>
     </CommandBar>
   </Page.BottomAppBar>
 

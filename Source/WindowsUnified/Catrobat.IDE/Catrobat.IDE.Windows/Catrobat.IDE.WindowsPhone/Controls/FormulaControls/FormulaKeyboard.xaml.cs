@@ -164,8 +164,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
 
         private void FormulaChangedMessageAction(FormulaEvaluationResult result)
         {
-            TextBlockEvaluationValue.Text = result.Value ?? "";
-            TextBlockEvaluationError.Text = result.Error ?? "";
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    TextBlockEvaluationValue.Text = result.Value ?? "";
+                    TextBlockEvaluationError.Text = result.Error ?? "";
+                });
         }
 
         #region VisualStateManager

@@ -33,6 +33,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         private Program _currentProgram;
         private readonly FormulaEditor _editor = new FormulaEditor();
         private readonly FormulaKeyboardViewModel _keyboardViewModel;
+        private bool _sensorsAreActive = false;
+        private string _sensorButtonLabel = AppResources.Editor_StartSensors;
         
         #endregion
 
@@ -122,6 +124,32 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             get { return !HasError; }
         }
 
+        public bool SensorsAreActive
+        {
+            get { return _sensorsAreActive; }
+            set
+            {
+                if (_sensorsAreActive != value)
+                {
+                    _sensorsAreActive = value;
+                    ToggleSensorButtonLabel();
+                }
+            }
+        }
+
+        public string SensorButtonLabel
+        {
+            get { return _sensorButtonLabel; }
+            set
+            {
+                if (_sensorButtonLabel != value)
+                {
+                    _sensorButtonLabel = value;
+                    RaisePropertyChanged(() => SensorButtonLabel);
+                }
+            }
+        }
+
         //public bool IsAddLocalVariableButtonVisible
         //{
         //    get { return ServiceLocator.ViewModelLocator.FormulaKeyboardViewModel.IsAddLocalVariableButtonVisible; }
@@ -140,10 +168,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         private void KeyPressedAction(FormulaKeyEventArgs e)
         {
             _editor.HandleKey(e.Data.Key, e.Data.LocalVariable, e.Data.GlobalVariable);
-            SendEvaluation(e.Data.Key, e.Data.LocalVariable, e.Data.GlobalVariable);
+            SendEvaluation(e.Data.LocalVariable, e.Data.GlobalVariable);
         }
 
-        private void SendEvaluation(FormulaEditorKey key, LocalVariable localVariable = null, GlobalVariable globalVariable = null)
+        private void SendEvaluation(LocalVariable localVariable = null, GlobalVariable globalVariable = null)
         {
             FormulaEvaluationResult result;
 
@@ -154,6 +182,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                     Error = AppResources.FormulaInterpreter_Error
                 };
 
+                // FormulaEditorKey key as parameter
                 //if (key != FormulaEditorKey.Delete)
                 //{
                 //    SelectionStart = ParsingError.Index;
@@ -214,16 +243,21 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             _editor.Redo();
         }
 
-        public RelayCommand StartSensorsCommand { get; private set; }
-        private void StartSensorsAction()
+        public RelayCommand SensorCommand { get; private set; }
+        private void SensorAction()
         {
-            ServiceLocator.SensorService.Start();
-        }
-
-        public RelayCommand StopSensorsCommand { get; private set; }
-        private void StopSensorsAction()
-        {
-            ServiceLocator.SensorService.Stop();
+            if (_sensorsAreActive == false)
+            {
+                ServiceLocator.SensorService.Start();
+                SensorsAreActive = true;
+                ServiceLocator.SensorService.SensorReadingChanged += SensorService_SensorReadingChanged;
+            }
+            else
+            {
+                ServiceLocator.SensorService.Stop();
+                ServiceLocator.SensorService.SensorReadingChanged -= SensorService_SensorReadingChanged;
+                SensorsAreActive = false;  
+            }
         }
 
         public RelayCommand<int> CompleteTokenCommand { get; private set; }
@@ -281,8 +315,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             //ShowErrorPressedCommand = new RelayCommand(ShowErrorPressedAction);
             UndoCommand = new RelayCommand(UndoAction, UndoCommand_CanExecute);
             RedoCommand = new RelayCommand(RedoAction, RedoCommand_CanExecute);
-            StartSensorsCommand = new RelayCommand(StartSensorsAction);
-            StopSensorsCommand = new RelayCommand(StopSensorsAction);
+            SensorCommand = new RelayCommand(SensorAction);
             CompleteTokenCommand = new RelayCommand<int>(CompleteTokenAction);
             
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
@@ -318,15 +351,34 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             //    if (e.PropertyName == GetPropertyName(() => _keyboardViewModel.IsAddLocalVariableButtonVisible)) RaisePropertyChanged(() => IsAddLocalVariableButtonVisible);
             //    if (e.PropertyName == GetPropertyName(() => _keyboardViewModel.IsAddGlobalVariableButtonVisible)) RaisePropertyChanged(() => IsAddGlobalVariableButtonVisible);
             //};
+            _sensorsAreActive = false;
         }
 
         public override void Cleanup()
         {
-            StopSensorsCommand.Execute(null);
+            _sensorsAreActive = true;
+            SensorCommand.Execute(null);
             RaiseReset();
             _editor.ResetViewModel();
             _keyboardViewModel.ResetViewModel();
             base.Cleanup();
+        }
+
+        void SensorService_SensorReadingChanged(object sender, Utilities.SensorEventArgs e)
+        {
+            SendEvaluation();
+        }
+
+        void ToggleSensorButtonLabel()
+        {
+            if(_sensorsAreActive)
+            {
+                SensorButtonLabel = AppResources.Editor_StopSensors;
+            }
+            else
+            {
+                SensorButtonLabel = AppResources.Editor_StartSensors;
+            }
         }
     }
 }
