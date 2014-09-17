@@ -14,9 +14,10 @@ namespace Catrobat.IDE.WindowsShared.Services
         private readonly Inclinometer _inclinometer = Inclinometer.GetDefault();
 
         //private readonly Microphone2 _microphone = new Microphone2();
+        private uint _reportIntervall = 200;
 
-        public event CompassReadingChangedEventHandler CompassReadingChanged;
-
+        public event SensorReadingChangedEventHandler SensorReadingChanged;
+        
         public void Start()
         {
             //try { _microphone.Start(); }
@@ -24,7 +25,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             if (_compass != null)
             {
-                uint reportInterval = 100;
+                uint reportInterval = _reportIntervall;
                 if (reportInterval < _compass.MinimumReportInterval)
                 {
                     reportInterval = _compass.MinimumReportInterval; 
@@ -39,7 +40,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             if (_accelerometer != null)
             {
-                uint reportInterval = 100;
+                uint reportInterval = _reportIntervall;
                 if (reportInterval < _accelerometer.MinimumReportInterval)
                 {
                     reportInterval = _accelerometer.MinimumReportInterval;
@@ -54,12 +55,13 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             if (_inclinometer != null)
             {
-                uint reportInterval = 100;
+                uint reportInterval = _reportIntervall;
                 if (reportInterval < _inclinometer.MinimumReportInterval)
                 {
                     reportInterval = _inclinometer.MinimumReportInterval;
                 }
                 _inclinometer.ReportInterval = reportInterval;
+                _inclinometer.ReadingChanged += _inclinometer_ReadingChanged;
             }
             else
             {
@@ -69,10 +71,9 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public void Stop()
         {
-            //_accelerometer.Stop();
-            //_compass.Stop();
-            //_motion.Stop();
-            //_microphone.Stop();
+            _compass.ReadingChanged -= _compass_ReadingChanged;
+            _accelerometer.ReadingChanged -= _accelerometer_ReadingChanged;
+            _inclinometer.ReadingChanged -= _inclinometer_ReadingChanged;
         }
 
         public double GetAccelerationX()
@@ -86,7 +87,6 @@ namespace Catrobat.IDE.WindowsShared.Services
             {
                 return 0.0;
             }
-            //return _accelerometer.IsDataValid ? _accelerometer.CurrentValue.Acceleration.X : 0;
         }
 
         public double GetAccelerationY()
@@ -100,7 +100,6 @@ namespace Catrobat.IDE.WindowsShared.Services
             {
                 return 0.0;
             }
-            //return _accelerometer.IsDataValid ? _accelerometer.CurrentValue.Acceleration.Y : 0;
         }
 
         public double GetAccelerationZ()
@@ -114,7 +113,6 @@ namespace Catrobat.IDE.WindowsShared.Services
             {
                 return 0.0;
             }
-            //return _accelerometer.IsDataValid ? _accelerometer.CurrentValue.Acceleration.Z : 0;
         }
 
         public double GetCompass()
@@ -133,7 +131,6 @@ namespace Catrobat.IDE.WindowsShared.Services
             {
                 return 0.0;
             }
-            //return _compass.IsDataValid ? _compass.CurrentValue.MagneticHeading : 0;
         }
 
         public double GetInclinationX()
@@ -180,24 +177,40 @@ namespace Catrobat.IDE.WindowsShared.Services
         public double GetLoudness()
         {
             return 0.0;
-            //return _microphone.IsDataValid ? _microphone.CurrentValue.Loudness : 0;
         }
 
 
         #region Events
+        // the values in the sensorArgs are currently not used by the FormulaEditorViewModel,
+        // because the FormulaEvaluator uses the Get-Functions to get the current readings
         void _compass_ReadingChanged(Compass sender, CompassReadingChangedEventArgs args)
         {
             CompassReading reading = args.Reading;
             if(reading != null)
             {
                 SensorEventArgs sensorArgs = new SensorEventArgs(reading.HeadingMagneticNorth);
-                CompassReadingChanged(this, sensorArgs);
+                SensorReadingChanged(sender, sensorArgs);
             }
         }
 
         void _accelerometer_ReadingChanged(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
         {
-            throw new NotImplementedException();
+            AccelerometerReading reading = args.Reading;
+            if (reading != null)
+            {
+                SensorEventArgs sensorArgs = new SensorEventArgs(reading.AccelerationX);
+                SensorReadingChanged(sender, sensorArgs);
+            }
+        }
+
+        void _inclinometer_ReadingChanged(Inclinometer sender, InclinometerReadingChangedEventArgs args)
+        {
+            InclinometerReading reading = args.Reading;
+            if (reading != null)
+            {
+                SensorEventArgs sensorArgs = new SensorEventArgs(reading.RollDegrees);
+                SensorReadingChanged(sender, sensorArgs);
+            }
         }
         #endregion
     }

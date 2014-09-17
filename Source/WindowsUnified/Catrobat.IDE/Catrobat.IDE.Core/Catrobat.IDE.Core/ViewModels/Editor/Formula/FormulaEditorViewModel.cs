@@ -33,6 +33,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         private Program _currentProgram;
         private readonly FormulaEditor _editor = new FormulaEditor();
         private readonly FormulaKeyboardViewModel _keyboardViewModel;
+        private bool _sensorsAreActive = false;
+        private string _sensorButtonLabel = AppResources.Editor_StartSensors;
         
         #endregion
 
@@ -44,7 +46,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             private set
             {
                 _currentProgram = value; 
-                                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProgram));
+                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProgram));
             }
         }
 
@@ -122,15 +124,41 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             get { return !HasError; }
         }
 
-        public bool IsAddLocalVariableButtonVisible
+        public bool SensorsAreActive
         {
-            get { return ServiceLocator.ViewModelLocator.FormulaKeyboardViewModel.IsAddLocalVariableButtonVisible; }
+            get { return _sensorsAreActive; }
+            set
+            {
+                if (_sensorsAreActive != value)
+                {
+                    _sensorsAreActive = value;
+                    ToggleSensorButtonLabel();
+                }
+            }
         }
 
-        public bool IsAddGlobalVariableButtonVisible
+        public string SensorButtonLabel
         {
-            get { return ServiceLocator.ViewModelLocator.FormulaKeyboardViewModel.IsAddGlobalVariableButtonVisible; }
+            get { return _sensorButtonLabel; }
+            set
+            {
+                if (_sensorButtonLabel != value)
+                {
+                    _sensorButtonLabel = value;
+                    RaisePropertyChanged(() => SensorButtonLabel);
+                }
+            }
         }
+
+        //public bool IsAddLocalVariableButtonVisible
+        //{
+        //    get { return ServiceLocator.ViewModelLocator.FormulaKeyboardViewModel.IsAddLocalVariableButtonVisible; }
+        //}
+
+        //public bool IsAddGlobalVariableButtonVisible
+        //{
+        //    get { return ServiceLocator.ViewModelLocator.FormulaKeyboardViewModel.IsAddGlobalVariableButtonVisible; }
+        //}
 
         #endregion
 
@@ -140,10 +168,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         private void KeyPressedAction(FormulaKeyEventArgs e)
         {
             _editor.HandleKey(e.Data.Key, e.Data.LocalVariable, e.Data.GlobalVariable);
-            SendEvaluation(e.Data.Key, e.Data.LocalVariable, e.Data.GlobalVariable);
+            SendEvaluation(e.Data.LocalVariable, e.Data.GlobalVariable);
         }
 
-        private void SendEvaluation(FormulaEditorKey key, LocalVariable localVariable = null, GlobalVariable globalVariable = null)
+        private void SendEvaluation(LocalVariable localVariable = null, GlobalVariable globalVariable = null)
         {
             FormulaEvaluationResult result;
 
@@ -154,6 +182,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                     Error = AppResources.FormulaInterpreter_Error
                 };
 
+                // FormulaEditorKey key as parameter
                 //if (key != FormulaEditorKey.Delete)
                 //{
                 //    SelectionStart = ParsingError.Index;
@@ -182,25 +211,25 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         }
 
 
-        public RelayCommand EvaluatePressedCommand { get; private set; }
-        private void EvaluatePressedAction()
-        {
-            var value = FormulaEvaluator.Evaluate(Formula);
-            var message = value == null ? string.Empty : value.ToString();
-            ServiceLocator.NotifictionService.ShowToastNotification(
-                "", message, ToastDisplayDuration.Long);
-        }
+        //public RelayCommand EvaluatePressedCommand { get; private set; }
+        //private void EvaluatePressedAction()
+        //{
+        //    var value = FormulaEvaluator.Evaluate(Formula);
+        //    var message = value == null ? string.Empty : value.ToString();
+        //    ServiceLocator.NotifictionService.ShowToastNotification(
+        //        "", message, ToastDisplayDuration.Long);
+        //}
 
-        public RelayCommand ShowErrorPressedCommand { get; private set; }
-        private void ShowErrorPressedAction()
-        {
-            SelectionStart = ParsingError.Index;
-            SelectionLength = ParsingError.Length;
-            ServiceLocator.NotifictionService.ShowToastNotification(
-                title: "",
-                message: ParsingError.Message,
-                timeTillHide: ToastDisplayDuration.Long);
-        }
+        //public RelayCommand ShowErrorPressedCommand { get; private set; }
+        //private void ShowErrorPressedAction()
+        //{
+        //    SelectionStart = ParsingError.Index;
+        //    SelectionLength = ParsingError.Length;
+        //    ServiceLocator.NotifictionService.ShowToastNotification(
+        //        title: "",
+        //        message: ParsingError.Message,
+        //        timeTillHide: ToastDisplayDuration.Long);
+        //}
 
         public RelayCommand UndoCommand { get; private set; }
         private void UndoAction()
@@ -214,16 +243,21 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             _editor.Redo();
         }
 
-        public RelayCommand StartSensorsCommand { get; private set; }
-        private void StartSensorsAction()
+        public RelayCommand SensorCommand { get; private set; }
+        private void SensorAction()
         {
-            ServiceLocator.SensorService.Start();
-        }
-
-        public RelayCommand StopSensorsCommand { get; private set; }
-        private void StopSensorsAction()
-        {
-            ServiceLocator.SensorService.Stop();
+            if (_sensorsAreActive == false)
+            {
+                ServiceLocator.SensorService.Start();
+                SensorsAreActive = true;
+                ServiceLocator.SensorService.SensorReadingChanged += SensorService_SensorReadingChanged;
+            }
+            else
+            {
+                ServiceLocator.SensorService.Stop();
+                ServiceLocator.SensorService.SensorReadingChanged -= SensorService_SensorReadingChanged;
+                SensorsAreActive = false;  
+            }
         }
 
         public RelayCommand<int> CompleteTokenCommand { get; private set; }
@@ -234,14 +268,28 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             SelectionLength = selection.Length;
         }
 
-        public RelayCommand<FormulaKey> AddLocalVariableCommand
+        //public RelayCommand<FormulaKey> AddLocalVariableCommand
+        //{
+        //    get { return _keyboardViewModel.AddLocalVariableCommand; }
+        //}
+
+        //public RelayCommand<FormulaKey> AddGlobalVariableCommand
+        //{
+        //    get { return _keyboardViewModel.AddGlobalVariableCommand; }
+        //}
+
+        #endregion
+
+        #region CanExceuteCommands
+
+        private bool UndoCommand_CanExecute()
         {
-            get { return _keyboardViewModel.AddLocalVariableCommand; }
+            return CanUndo == true;
         }
 
-        public RelayCommand<FormulaKey> AddGlobalVariableCommand
+        private bool RedoCommand_CanExecute()
         {
-            get { return _keyboardViewModel.AddGlobalVariableCommand; }
+            return CanRedo == true;
         }
 
         #endregion
@@ -263,12 +311,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         public FormulaEditorViewModel()
         {
             KeyPressedCommand = new RelayCommand<FormulaKeyEventArgs>(KeyPressedAction);
-            EvaluatePressedCommand = new RelayCommand(EvaluatePressedAction);
-            ShowErrorPressedCommand = new RelayCommand(ShowErrorPressedAction);
-            UndoCommand = new RelayCommand(UndoAction, () => _editor.CanUndo);
-            RedoCommand = new RelayCommand(RedoAction, () => _editor.CanRedo);
-            StartSensorsCommand = new RelayCommand(StartSensorsAction);
-            StopSensorsCommand = new RelayCommand(StopSensorsAction);
+            //EvaluatePressedCommand = new RelayCommand(EvaluatePressedAction);
+            //ShowErrorPressedCommand = new RelayCommand(ShowErrorPressedAction);
+            UndoCommand = new RelayCommand(UndoAction, UndoCommand_CanExecute);
+            RedoCommand = new RelayCommand(RedoAction, RedoCommand_CanExecute);
+            SensorCommand = new RelayCommand(SensorAction);
             CompleteTokenCommand = new RelayCommand<int>(CompleteTokenAction);
             
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
@@ -282,8 +329,16 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 if (e.PropertyName == GetPropertyName(() => _editor.CaretIndex)) RaisePropertyChanged(() => CaretIndex);
                 if (e.PropertyName == GetPropertyName(() => _editor.SelectionStart)) RaisePropertyChanged(() => SelectionStart);
                 if (e.PropertyName == GetPropertyName(() => _editor.SelectionLength)) RaisePropertyChanged(() => SelectionLength);
-                if (e.PropertyName == GetPropertyName(() => _editor.CanUndo)) RaisePropertyChanged(() => CanUndo);
-                if (e.PropertyName == GetPropertyName(() => _editor.CanRedo)) RaisePropertyChanged(() => CanRedo);
+                if (e.PropertyName == GetPropertyName(() => _editor.CanUndo))
+                {
+                    RaisePropertyChanged(() => CanUndo);
+                    UndoCommand.RaiseCanExecuteChanged();
+                }
+                if (e.PropertyName == GetPropertyName(() => _editor.CanRedo))
+                {
+                    RaisePropertyChanged(() => CanRedo);
+                    RedoCommand.RaiseCanExecuteChanged();
+                }
                 if (e.PropertyName == GetPropertyName(() => _editor.CanDelete)) RaisePropertyChanged(() => CanDelete);
                 if (e.PropertyName == GetPropertyName(() => _editor.HasError)) RaisePropertyChanged(() => HasError);
                 if (e.PropertyName == GetPropertyName(() => _editor.HasError)) RaisePropertyChanged(() => CanEvaluate);
@@ -291,20 +346,39 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             };
 
             _keyboardViewModel = ServiceLocator.ViewModelLocator.FormulaKeyboardViewModel;
-            _keyboardViewModel.PropertyChanged += (sender, e) =>
-            {
-                if (e.PropertyName == GetPropertyName(() => _keyboardViewModel.IsAddLocalVariableButtonVisible)) RaisePropertyChanged(() => IsAddLocalVariableButtonVisible);
-                if (e.PropertyName == GetPropertyName(() => _keyboardViewModel.IsAddGlobalVariableButtonVisible)) RaisePropertyChanged(() => IsAddGlobalVariableButtonVisible);
-            };
+            //_keyboardViewModel.PropertyChanged += (sender, e) =>
+            //{
+            //    if (e.PropertyName == GetPropertyName(() => _keyboardViewModel.IsAddLocalVariableButtonVisible)) RaisePropertyChanged(() => IsAddLocalVariableButtonVisible);
+            //    if (e.PropertyName == GetPropertyName(() => _keyboardViewModel.IsAddGlobalVariableButtonVisible)) RaisePropertyChanged(() => IsAddGlobalVariableButtonVisible);
+            //};
+            _sensorsAreActive = false;
         }
 
         public override void Cleanup()
         {
-            StopSensorsCommand.Execute(null);
+            _sensorsAreActive = true;
+            SensorCommand.Execute(null);
             RaiseReset();
             _editor.ResetViewModel();
             _keyboardViewModel.ResetViewModel();
             base.Cleanup();
+        }
+
+        void SensorService_SensorReadingChanged(object sender, Utilities.SensorEventArgs e)
+        {
+            SendEvaluation();
+        }
+
+        void ToggleSensorButtonLabel()
+        {
+            if(_sensorsAreActive)
+            {
+                SensorButtonLabel = AppResources.Editor_StopSensors;
+            }
+            else
+            {
+                SensorButtonLabel = AppResources.Editor_StartSensors;
+            }
         }
     }
 }
