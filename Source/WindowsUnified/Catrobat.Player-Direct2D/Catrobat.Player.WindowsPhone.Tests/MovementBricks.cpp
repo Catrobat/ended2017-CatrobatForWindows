@@ -5,15 +5,10 @@
 #include "ChangeXByBrick.h"
 #include "ChangeYByBrick.h"
 #include "GlideToBrick.h"
-//#include "MoveNStepsBrick.h"
-//#include "PlaceAtBrick.h"
-//#include "PointToBrick.h"
-//#include "SetXBrick.h"
-//#include "SetYBrick.h"
-//#include "TurnLeftBrick.h"
-//#include "TurnRightBrick.h"
-//#include "FormulaTree.h"
 #include "TestHelper.h"
+#include "PlaceAtBrick.h"
+
+#include <math.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -183,84 +178,102 @@ namespace PlayerWindowsPhone8Test
 			Assert::AreEqual(y, old_y);
         }
 
-		//TEST_METHOD(MovementBricks_GlideToBrick_Variance1)
-  //      {
-  //          m_tree = new FormulaTree("NUMBER", "42");
-  //          m_tree2 = new FormulaTree("NUMBER", "23");
-  //          m_tree3 = new FormulaTree("NUMBER", "3000");
-  //          Brick* brick = new GlideToBrick(m_tree, m_tree2, m_tree3, m_script);
-		//	object->SetPosition(0, 0);
+		TEST_METHOD(MovementBricks_GlideToBrick_Variance1)
+        {
+            m_tree = new FormulaTree("NUMBER", "42");
+            m_tree2 = new FormulaTree("NUMBER", "23");
+            m_tree3 = new FormulaTree("NUMBER", "1");
+            Brick* brick = new GlideToBrick(m_tree, m_tree2, m_tree3, m_script);
+			m_object->SetTranslation(0, 0);
 
-		//	brick->Execute();
+			brick->Execute();
 
-		//	float x = 0;
-		//	float y = 0;
-		//	object->GetPosition(x, y);
+			float x = 0;
+			float y = 0;
+			m_object->GetTranslation(x, y);
 
-		//	Assert::IsTrue(TestHelper::isEqual(x, 42.0f));
-		//	Assert::IsTrue(TestHelper::isEqual(y, 23.0f));
+			auto expected = 42.0f;
+			auto actual = std::round(x);
+			Assert::AreEqual(expected, actual);
 
-		//	// TODO: Measure Time.
-  //      }
+			expected = 23.0f;
+			actual = std::round(y);
+			Assert::AreEqual(expected, actual);
+        }
 
-		//TEST_METHOD(MovementBricks_GlideToBrick_Variance2)
-  //      {
-		//	Object* object = new Object("");
-		//	Script* script = new StartScript(object);
-		//	FormulaTree* tree1 = new FormulaTree("NUMBER", "123");
-		//	FormulaTree* tree2 = new FormulaTree("NUMBER", "456");
-		//	FormulaTree* tree3 = new FormulaTree("NUMBER", "5000");
-		//	Brick* brick = new GlideToBrick("", tree1, tree2, tree3, script);
-		//	object->SetPosition(0, 0);
+		TEST_METHOD(MovementBricks_GlideToBrick_Variance2)
+        {
+			auto object = new Object("");
+			auto script = new StartScript(object);
+			auto tree1 = new FormulaTree("NUMBER", "123");
+			auto tree2 = new FormulaTree("NUMBER", "456");
+			auto tree3 = new FormulaTree("NUMBER", "1");
+			auto brick = new GlideToBrick(tree1, tree2, tree3, script);
+			object->SetTranslation(10, 20);
 
-		//	brick->Execute();
+			brick->Execute();
 
-		//	float x = 0;
-		//	float y = 0;
-		//	object->GetPosition(x, y);
+			auto x = 0.0f;
+			auto y = 0.0f;
+			object->GetTranslation(x, y);
 
-		//	Assert::IsTrue(TestHelper::isEqual(x, 123.0f));
-		//	Assert::IsTrue(TestHelper::isEqual(y, 456.0f));
+			auto expected = 123.0f;
+			auto actual = std::round(x);
+			Assert::AreEqual(expected, actual);
 
-		//	// TODO: Measure Time.
-  //      }
-//
-//		TEST_METHOD(MovementBricks_PlaceAtBrick_Variance1)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree1 = new FormulaTree("NUMBER", "23");
-//			FormulaTree* tree2 = new FormulaTree("NUMBER", "32");
-//			Brick* brick = new PlaceAtBrick("", tree1, tree2, script);
-//
-//			brick->Execute();
-//
-//			float x = 0;
-//			float y = 0;
-//			object->GetPosition(x, y);
-//
-//			Assert::AreEqual(x, 23.0f);
-//			Assert::AreEqual(y, 32.0f);
-//        }
-//
-//		TEST_METHOD(MovementBricks_PlaceAtBrick_Variance2)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree1 = new FormulaTree("NUMBER", "23");
-//			FormulaTree* tree2 = new FormulaTree("NUMBER", "32");
-//			Brick* brick = new PlaceAtBrick("", tree1, tree2, script);
-//
-//			brick->Execute();
-//
-//			float x = 0;
-//			float y = 0;
-//			object->GetPosition(x, y);
-//
-//			Assert::AreEqual(x, 23.0f);
-//			Assert::AreEqual(y, 32.0f);
-//        }
-//
+			expected = 456.0f;
+			actual = std::round(y);
+			Assert::AreEqual(expected, actual);
+        }
+
+		TEST_METHOD(MovementBricks_PlaceAtBrick_Variance1)
+        {
+			Object* object = new Object("");
+			Script* script = new StartScript(object);
+			FormulaTree* tree1 = new FormulaTree("NUMBER", "23");
+			FormulaTree* tree2 = new FormulaTree("NUMBER", "32");
+			Brick* brick = new PlaceAtBrick(tree1, tree2, script);
+
+			brick->Execute();
+
+			float x = 0;
+			float y = 0;
+			object->GetTranslation(x, y);
+
+			auto expected = 23.0f;
+			auto actual = std::round(x);
+
+			Assert::AreEqual(expected, actual);
+
+			expected = 32.0f;
+			actual = std::round(y);
+
+			Assert::AreEqual(expected, actual);
+        }
+
+		TEST_METHOD(MovementBricks_PlaceAtBrick_Variance2)
+        {
+			Object* object = new Object("");
+			Script* script = new StartScript(object);
+			FormulaTree* tree1 = new FormulaTree("NUMBER", "23");
+			FormulaTree* tree2 = new FormulaTree("NUMBER", "32");
+			Brick* brick = new PlaceAtBrick(tree1, tree2, script);
+
+			brick->Execute();
+
+			float x = 0;
+			float y = 0;
+			object->GetTranslation(x, y);
+
+			auto expected = 23.0f;
+			auto actual = std::round(x);
+			Assert::AreEqual(expected, actual);
+
+			expected = 32.0f;
+			actual = std::round(y);
+			Assert::AreEqual(expected, actual);
+        }
+
 //		TEST_METHOD(MovementBricks_PointToBrick_Variance1)
 //        {
 //			Object* object = new Object("");
