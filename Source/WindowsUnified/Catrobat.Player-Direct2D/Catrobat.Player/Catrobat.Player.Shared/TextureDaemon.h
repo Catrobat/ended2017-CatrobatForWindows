@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CatrobatTexture.h"
+#include "Common\DeviceResources.h"
 
 #include <map>
 #include <string>

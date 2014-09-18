@@ -1,6 +1,8 @@
 #pragma once
 
 #include <d2d1.h>
+#include "Common\DeviceResources.h"
+#include "Common\StepTimer.h"
 
 class Basic2DRenderer
 {

@@ -5,7 +5,7 @@
 #include <D3D11.h>
 #include <windows.foundation.h>
 
-//#include "Script.h"
+#include "Common\DeviceResources.h"
 #include "Look.h"
 #include "SoundInfo.h"
 #include "UserVariable.h"
