@@ -35,20 +35,20 @@
             </Grid>
 
             <Grid x:Name="GridUserControl" Margin="0,0,-25,0" >
-                <UserControl x:Name="SliderThicknessControl" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Bottom"  Width="auto" Visibility="Collapsed">
+                <UserControl x:Name="SliderThicknessControl" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Bottom"  Width="auto"  >
                     <Grid x:Name="SliderThicknessGrid" Background="#1F1F1F"  MinHeight="120">
-                        <Slider x:Name="SliderThickness" Background="Black" Maximum="50"  Minimum="1" Margin="10,16,130,12"/>
+                        <Slider x:Name="SliderThickness" Background="Black" Maximum="50" VerticalAlignment="Top" HorizontalAlignment="Left" Minimum="1" Margin="10,16,130,12"/>
 
-                        <Button x:Name="btnBrushThickness" Content="0" HorizontalAlignment="Stretch" Margin="280,1,12,74" VerticalAlignment="Stretch"/>
+                        <Button x:Name="btnBrushThickness" Content="0" HorizontalAlignment="Right" Margin="280,1,12,74" VerticalAlignment="Top"/>
 
-                        <Button x:Name="btnRoundImage" BorderBrush="Yellow" Background="Transparent" BorderThickness="4"  HorizontalAlignment="Left" Height="60" Margin="10,66,0,0" VerticalAlignment="Top" Width="80" >
+                        <Button x:Name="btnRoundImage" BorderBrush="Yellow" Background="Transparent" BorderThickness="4"  HorizontalAlignment="Left" Height="60" Margin="10,66,0,0" VerticalAlignment="Bottom" Width="80" >
                             <Image Source="/Assets/ToolMenu/icon_menu_ellipse.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="30" ></Image>
                         </Button>
-                        <Button x:Name="btnSquareImage" BorderBrush="White" Background="Transparent" BorderThickness="4"  HorizontalAlignment="Left" Height="60" Margin="145,66,0,0" VerticalAlignment="Top" Width="80">
+                        <Button x:Name="btnSquareImage" BorderBrush="White" Background="Transparent" BorderThickness="4"  HorizontalAlignment="Left" Height="60" Margin="145,66,0,0" VerticalAlignment="Bottom" Width="80">
                             <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="30" ></Image>
                         </Button>
 
-                        <Button x:Name="btnTriangleImage" BorderBrush="White" Background="Transparent" BorderThickness="4"  HorizontalAlignment="Left" Height="60" Margin="280,66,0,0" VerticalAlignment="Top" Width="80">
+                        <Button x:Name="btnTriangleImage" BorderBrush="White" Background="Transparent" BorderThickness="4"  HorizontalAlignment="Left" Height="60" Margin="280,66,0,0" VerticalAlignment="Bottom" Width="80">
                             <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="30,-10,0,0" Height="30" Width="30" UseLayoutRounding="False" d:LayoutRounding="Auto" >
                                 <Image.RenderTransform>
                                     <CompositeTransform Rotation="45"/>
