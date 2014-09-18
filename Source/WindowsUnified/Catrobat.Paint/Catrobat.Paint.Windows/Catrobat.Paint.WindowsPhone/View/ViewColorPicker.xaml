@@ -46,7 +46,7 @@
             </Grid.RowDefinitions>
 
 
-            <Pivot x:Name="HeaderTemplate" Height="666" HorizontalAlignment="Left" Width="500">
+            <Pivot x:Name="HeaderTemplate" Height="666" HorizontalAlignment="Left" Width="auto">
                 <Pivot.HeaderTemplate>  
                     <DataTemplate>
                         <Image x:Name="Palette" Source="{Binding}" Width="60" Margin="0,20,0,0" />
@@ -54,7 +54,7 @@
                 </Pivot.HeaderTemplate>
 
 
-                <PivotItem x:Name="piFirstPage" Header="/Assets/ColorPicker/icon_color_chooser_tab_palette.png" Height="666" HorizontalAlignment="Left" Margin="0,0,0,0">
+                <PivotItem x:Name="piFirstPage" Header="/Assets/ColorPicker/icon_color_chooser_tab_palette.png" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,0">
 
                     <Grid Background="#FF171717">
                         <Button x:Name="Button11" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton11}" Height="80" HorizontalAlignment="Left" Margin="0,30,0,0"  Width="90" VerticalAlignment="Top">
@@ -137,13 +137,13 @@
                             </Rectangle>
 
                             <Button x:Name="BtnSelectedColor" BorderThickness="3" Click="BtnSelectedColor_OnClick" Command="{Binding SelectColorDone}" Content="Fertig"
-                                    Height="75" HorizontalAlignment="Left" Margin="25,445,0,0" VerticalAlignment="Top" Width="350" />
+                                    Height="75" HorizontalAlignment="Left" Margin="25,300,0,0" Width="350" />
                         </Grid>
                     </Grid>
                 </PivotItem>
 
 
-                <PivotItem x:Name="piSecondPage" Header="/Assets/ColorPicker/icon_color_chooser_tab_rgba.png" Height="666" HorizontalAlignment="Left" Margin="0,0,0,0">
+                <PivotItem x:Name="piSecondPage" Header="/Assets/ColorPicker/icon_color_chooser_tab_rgba.png" Height="auto" HorizontalAlignment="Left" Margin="0,0,0,0">
                     <Grid PointerEntered="Grid_PointerEntered">
                         
                         <Slider x:Name="sldRed" Foreground="Red" HorizontalAlignment="Left" Margin="81,250,0,0" VerticalAlignment="Top" 
@@ -190,14 +190,14 @@
                              Text="%" VerticalAlignment="Top" Width="56" Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
 
-                        <Rectangle x:Name="recTransparenceSlider" Height="52" HorizontalAlignment="Left" Margin="25,300,0,0" Opacity="1" StrokeThickness="0" Width="350">
+                        <Rectangle x:Name="recTransparenceSlider" Height="52" HorizontalAlignment="Left" Margin="25,400,0,0" Opacity="1" StrokeThickness="0" Width="350">
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
                             </Rectangle.Fill>
                         </Rectangle>
 
                         <Button x:Name="BtnSelectedColorSlider" Click="BtnSelectedColor_OnClick" Command="{Binding SelectColorDone}" Content="Fertig"
-                                    Height="75" HorizontalAlignment="Left" Margin="25,445,0,0" VerticalAlignment="Top" Width="350" >
+                                    Height="75" HorizontalAlignment="Left" Margin="25,400,0,0" Width="350" >
                         </Button>
                     </Grid>
                 </PivotItem>

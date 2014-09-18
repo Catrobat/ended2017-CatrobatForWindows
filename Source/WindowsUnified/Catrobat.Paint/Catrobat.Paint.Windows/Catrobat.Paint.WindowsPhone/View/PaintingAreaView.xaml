@@ -91,7 +91,7 @@
             <controls:AppbarTop x:Name="barRecEll"></controls:AppbarTop>
         </StackPanel>
         
-        <TextBox x:Name="coordinates" HorizontalAlignment="Left" Margin="87,96,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+        <TextBox x:Name="coordinates" HorizontalAlignment="Left" Margin="87,96,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Visibility="Collapsed"/>
 
     </Grid>
 
