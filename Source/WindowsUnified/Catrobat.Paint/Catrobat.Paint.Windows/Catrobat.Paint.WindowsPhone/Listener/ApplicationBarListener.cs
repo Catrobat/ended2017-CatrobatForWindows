@@ -35,6 +35,7 @@ namespace Catrobat.Paint.Phone.Listener
                 PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
                 PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFThicknessKeyboard(visibility);
 
+                PocketPaintApplication.GetInstance().is_border_color = false;
                 rootFrame.Navigate(typeof(ViewColorPicker));
             }
         }

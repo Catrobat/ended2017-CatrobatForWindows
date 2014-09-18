@@ -66,6 +66,7 @@ namespace Catrobat.Paint.Phone
         public const double DEFAULT_DEVICE_WIDTH= 384.0;
         public double size_height_multiplication;
         public double size_width_multiplication;
+        public bool is_border_color = false;
 
         private void CalculateSizeMultiplication()
         {

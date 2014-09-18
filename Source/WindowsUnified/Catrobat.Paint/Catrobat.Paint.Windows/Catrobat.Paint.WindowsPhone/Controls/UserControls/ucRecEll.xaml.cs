@@ -56,7 +56,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             if(rootFrame != null)
             {
-                rootFrame.Navigate(typeof(ViewBorderColorPicker));
+                PocketPaintApplication.GetInstance().is_border_color = true;
+                rootFrame.Navigate(typeof(ViewColorPicker));
             }
         }
 
@@ -66,17 +67,19 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             if (rootFrame != null)
             {
-                rootFrame.Navigate(typeof(ViewFillColorPicker));
+                PocketPaintApplication.GetInstance().is_border_color = false;
+                rootFrame.Navigate(typeof(ViewColorPicker));
             }
         }
 
-        private void ColorFillChanged(SolidColorBrush color)
+        public void ColorFillChanged(SolidColorBrush color)
         {
             SolidColorBrush selected_color = new SolidColorBrush();
             selected_color.Color = color.Color != Colors.Transparent ? color.Color : Colors.Transparent;
             btnSelectedFillColor.Background = selected_color;
-            PocketPaintApplication.GetInstance().CurrentShape.Fill = selected_color;
             PocketPaintApplication.GetInstance().RecDrawingRectangle.Fill = selected_color;
+            RectangleForeground.Fill = selected_color;
+            EllipseForeground.Fill = selected_color;
         }
 
         private void ColorStrokeChanged(SolidColorBrush color)

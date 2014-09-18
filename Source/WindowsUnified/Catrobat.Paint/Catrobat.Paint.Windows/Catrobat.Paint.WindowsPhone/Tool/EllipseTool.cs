@@ -40,7 +40,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             myEllipseGeometry.RadiusY = height / 2;
 
             _path = new Path();
-            _path.Fill = PocketPaintApplication.GetInstance().PaintData.FillColorSelected;
+            _path.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
             _path.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
             _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
             _path.StrokeEndLineCap = PenLineCap.Square;

@@ -140,12 +140,6 @@
     <Compile Include="View\PaintingAreaView.xaml.cs">
       <DependentUpon>PaintingAreaView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ViewFillColorPicker.xaml.cs">
-      <DependentUpon>ViewFillColorPicker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ViewBorderColorPicker.xaml.cs">
-      <DependentUpon>ViewBorderColorPicker.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ViewColorPicker.xaml.cs">
       <DependentUpon>ViewColorPicker.xaml</DependentUpon>
     </Compile>
@@ -285,14 +279,6 @@
     <Page Include="View\PaintingAreaView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ViewFillColorPicker.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ViewBorderColorPicker.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ViewColorPicker.xaml">
       <SubType>Designer</SubType>
