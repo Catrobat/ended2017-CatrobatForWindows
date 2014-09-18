@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Phone.UI.Input;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -44,6 +45,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
             
+            HardwareButtons.BackPressed +=HardwareButtons_BackPressed;
 
             LayoutRoot.Height = Window.Current.Bounds.Height;
             LayoutRoot.Width = Window.Current.Bounds.Width;
@@ -115,6 +117,34 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
             createAppBarAndSwitchAppBarContent(current_appbar);        
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+
+            if (this.Frame.CurrentSourcePageType == typeof(PaintingAreaView))
+            {
+                //MessageDialog md = new MessageDialog("confirm exit?");
+                //List<IUICommand> commands = new List<IUICommand>(2);
+                //UICommand yes = new UICommand("Yes");
+                //UICommand no = new UICommand("No");
+                //commands.Add(yes);
+                //commands.Add(no);
+                //md.Commands.Add(yes);
+                //md.Commands.Add(no);
+                //var test = md.ShowAsync();
+
+            }
+            else if (this.Frame.CurrentSourcePageType == typeof(ViewColorPicker))
+            {
+                e.Handled = true;
+                this.Frame.GoBack();
+            }
+            else if (this.Frame.CurrentSourcePageType == typeof(ViewToolPicker))
+            {
+                e.Handled = true;
+                this.Frame.GoBack();
+            }
         }
 
         /// <summary>

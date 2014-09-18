@@ -8,7 +8,7 @@
     xmlns:controls="using:Catrobat.Paint.WindowsPhone.Controls.AppBar"
     xmlns:ucRecEll="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" NavigationCacheMode="Required">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" NavigationCacheMode="Required" >
 
     <Grid x:Name="LayoutRoot"  IsHitTestVisible="True"   ManipulationMode="TranslateX, TranslateY, Rotate, Scale" ManipulationStarted="LayoutRoot_ManipulationStarted_1">
 
