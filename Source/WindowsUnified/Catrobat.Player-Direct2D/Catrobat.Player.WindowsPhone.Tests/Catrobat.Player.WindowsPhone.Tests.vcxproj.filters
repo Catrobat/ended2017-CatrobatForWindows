@@ -1,11 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="unittest1.cpp" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="BasicArithmeticalOperations.cpp">
+      <Filter>Tests\FormulaTests</Filter>
+    </ClCompile>
+    <ClCompile Include="FormulaFunctionTests.cpp">
+      <Filter>Tests\FormulaTests</Filter>
+    </ClCompile>
+    <ClCompile Include="FormulaTreeTests.cpp">
+      <Filter>Tests\FormulaTests</Filter>
+    </ClCompile>
+    <ClCompile Include="LogicOperations.cpp">
+      <Filter>Tests\FormulaTests</Filter>
+    </ClCompile>
+    <ClCompile Include="TestHelper.cpp" />
+    <ClCompile Include="XMLParserTests.cpp">
+      <Filter>Tests\XMLParserTests</Filter>
+    </ClCompile>
+    <ClCompile Include="Variables.cpp">
+      <Filter>Tests\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="IfLogicBeginBrick.cpp">
+      <Filter>Tests\XMLParserTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementBricks.cpp">
+      <Filter>Tests\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableBricks.cpp">
+      <Filter>Tests\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="LookBricks.cpp">
+      <Filter>Tests\Bricks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="TestHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\SmallLogo.scale-240.png">
@@ -37,5 +68,64 @@
     <Filter Include="Assets">
       <UniqueIdentifier>{d13e4760-0540-46d8-806d-d672c92a1dc4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{58226ec0-36fb-4073-b343-f756be372ca0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\FormulaTests">
+      <UniqueIdentifier>{ce42b4ca-5fb1-4339-831f-e282355842c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\XMLParserTests">
+      <UniqueIdentifier>{28d77bb9-24db-4e59-b2c1-47b2d483fc94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XMLTestFiles">
+      <UniqueIdentifier>{610fc274-5fca-482f-b76a-ba470d657f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Bricks">
+      <UniqueIdentifier>{8b6f22c9-ac74-4bf0-b187-cc7b02d7ce9d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="testFiles\BroadcastTest.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\CompassTest.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\ForeverTest.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\GlobalVariableReferencesTest.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\headerTest.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\IfLogicBeginTest.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\LocalVariableReferencesTest.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\LookReferencesTest.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\ObjectListTest1.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\ObjectListTest2.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\ObjectReferencesTest.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\PointToTest.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\RepeatTest.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\SoundReferencesTest.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
