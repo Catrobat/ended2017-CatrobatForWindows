@@ -88,6 +88,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
             btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
             btnThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnThickness_OnClick;
+            SliderThicknessControl.Width = Window.Current.Bounds.Width;
+            SliderThicknessControl.Height = Window.Current.Bounds.Height * 0.23;
 
             checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
             createAppBarAndSwitchAppBarContent(current_appbar);        
