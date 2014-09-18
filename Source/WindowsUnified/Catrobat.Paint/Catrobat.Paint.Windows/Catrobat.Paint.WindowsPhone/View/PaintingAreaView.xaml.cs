@@ -88,6 +88,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
             btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
             btnThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnThickness_OnClick;
+            
             SliderThicknessControl.Width = Window.Current.Bounds.Width;
             SliderThicknessControl.Height = Window.Current.Bounds.Height * 0.23; //Visibility="Collapsed"
             SliderThicknessGrid.Width = Window.Current.Bounds.Width;
@@ -95,19 +96,22 @@ namespace Catrobat.Paint.WindowsPhone.View
             SliderThickness.Height = SliderThicknessGrid.Height * 0.3;
             SliderThickness.Width = SliderThicknessGrid.Width * 0.6053;
             SliderThickness.Margin = new Thickness(SliderThicknessGrid.Width * 0.03, SliderThicknessGrid.Height * 0.15, 0, 0);
+            
             btnBrushThickness.Height = SliderThicknessGrid.Height * 0.3;
             btnBrushThickness.Width = SliderThicknessGrid.Width * 0.2;
-            btnBrushThickness.Margin = new Thickness(SliderThicknessGrid.Width * 0.03 + SliderThicknessGrid.Width * 0.666, SliderThicknessGrid.Height * 0.05, SliderThicknessGrid.Width * 0.03, 0);
+            btnBrushThickness.Margin = new Thickness(SliderThicknessGrid.Width * 0.03 + SliderThicknessGrid.Width * 0.666, SliderThicknessGrid.Height * 0.13, SliderThicknessGrid.Width * 0.03, 0);
+           
             btnRoundImage.Height = SliderThicknessGrid.Height * 0.3;
             btnRoundImage.Width = SliderThicknessGrid.Width * 0.2;
+            btnRoundImage.Margin = new Thickness(SliderThicknessGrid.Width * 0.03, 0, 0, SliderThicknessGrid.Height * 0.15);
+
             btnSquareImage.Height = SliderThicknessGrid.Height * 0.3;
             btnSquareImage.Width = SliderThicknessGrid.Width * 0.2;
+            btnSquareImage.Margin = new Thickness(SliderThicknessGrid.Width * 0.03 + SliderThicknessGrid.Width * 0.333, 0, 0, SliderThicknessGrid.Height * 0.15);
+            
             btnTriangleImage.Height = SliderThicknessGrid.Height * 0.3;
             btnTriangleImage.Width = SliderThicknessGrid.Width * 0.2;
-            btnRoundImage.Margin    = new Thickness(SliderThicknessGrid.Width * 0.03, 0 , 0, SliderThicknessGrid.Height * 0.15);
-            btnSquareImage.Margin = new Thickness(SliderThicknessGrid.Width * 0.03 + SliderThicknessGrid.Width * 0.333, 0, 0, SliderThicknessGrid.Height * 0.15);
             btnTriangleImage.Margin = new Thickness(SliderThicknessGrid.Width * 0.666 + SliderThicknessGrid.Width * 0.03, 0, 0, SliderThicknessGrid.Height * 0.15);
-            
 
             checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
             createAppBarAndSwitchAppBarContent(current_appbar);        
