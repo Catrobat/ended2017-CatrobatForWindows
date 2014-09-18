@@ -35,6 +35,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         Int32 slider_thickness_textbox_last_value = 1;
         static string current_appbar = "barStandard";
         Point start_point = new Point();
+        Point old_point = new Point();
         public PaintingAreaView()
         {
             this.InitializeComponent();
@@ -690,7 +691,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().ToolCurrent.HandleDown(point);
             PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(point);
 
-           // e.Handled = true;
+            e.Handled = true;
         }
 
         private void BtnHorizotal_OnClick(object sender, RoutedEventArgs e)
@@ -715,12 +716,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 return;
         }
 
-        private void testRectangle_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-            start_point.X = e.Position.X;
-            start_point.Y = e.Position.Y;
-        }
-
         private void testRectangle_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             start_point.X = e.GetCurrentPoint(PaintingAreaCanvas).Position.X;
@@ -729,14 +724,19 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void testRectangle_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
+            
             double bottom = rectDrawRectangle.Margin.Bottom;
             double top = rectDrawRectangle.Margin.Top;
             double left = rectDrawRectangle.Margin.Left;
             double right = rectDrawRectangle.Margin.Right;
             Point current_point = new Point(e.GetCurrentPoint(PaintingAreaCanvas).Position.X, e.GetCurrentPoint(PaintingAreaCanvas).Position.Y);
-            Point distance = new Point(current_point.X - start_point.X, current_point.Y - start_point.Y);
-            rectDrawRectangle.Margin = new Thickness(left + distance.X, top + distance.Y, right, bottom);
-            coordinates.Text = "X: " + (left + current_point.X).ToString() + ", " + (top + current_point.Y).ToString().ToString();
+            if (old_point.X != current_point.X && old_point.Y != current_point.Y)
+            {
+                Point distance = new Point(current_point.X - start_point.X, current_point.Y - start_point.Y);
+                rectDrawRectangle.Margin = new Thickness(left + distance.X, top + distance.Y, right, bottom);
+                coordinates.Text = "X: " + (left + current_point.X).ToString() + ", " + (top + current_point.Y).ToString().ToString();
+                old_point = current_point;
+            }
         }
 
         public Visibility visibilityRecDrawingRectangle
@@ -774,6 +774,12 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             Point coordinatesOfRectangle = new Point(rectDrawRectangle.Margin.Left, rectDrawRectangle.Margin.Top);
             PocketPaintApplication.GetInstance().ToolCurrent.Draw(coordinatesOfRectangle);
+        }
+
+        private void rectDrawRectangle_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            start_point.X = e.GetPosition(PaintingAreaCanvas).X;
+            start_point.Y = e.GetPosition(PaintingAreaCanvas).Y;
         }
     }
 }

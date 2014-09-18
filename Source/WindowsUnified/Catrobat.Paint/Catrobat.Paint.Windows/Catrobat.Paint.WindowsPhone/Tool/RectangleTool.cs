@@ -42,7 +42,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         }
         public override void HandleDown(object arg)
         {
-            if (!(arg is Point))
+            /* if (!(arg is Point))
             {
                 return;
             }
