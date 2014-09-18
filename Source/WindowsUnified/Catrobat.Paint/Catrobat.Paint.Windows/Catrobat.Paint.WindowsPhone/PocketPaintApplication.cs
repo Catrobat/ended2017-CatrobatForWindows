@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Media;
 using Catrobat.Paint.WindowsPhone.Controls.AppBar;
 using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Windows.UI.Xaml.Shapes;
+using Windows.UI.Xaml;
 
 namespace Catrobat.Paint.Phone
 {
@@ -61,6 +62,20 @@ namespace Catrobat.Paint.Phone
         private readonly ApplicationBarListener _applicationBarListener = new ApplicationBarListener();
         internal ApplicationBarListener ApplicationBarListener { get { return _applicationBarListener; } }
 
+        public const double DEFAULT_DEVICE_HEIGHT = 640.0;
+        public const double DEFAULT_DEVICE_WIDTH= 384.0;
+        public double size_height_multiplication;
+        public double size_width_multiplication;
+
+        private void CalculateSizeMultiplication()
+        {
+            var currentDeviceHeight = Window.Current.Bounds.Height;
+            var currentDeviceWidth = Window.Current.Bounds.Width;
+
+            size_height_multiplication = currentDeviceHeight / DEFAULT_DEVICE_HEIGHT;
+            size_width_multiplication = currentDeviceWidth / DEFAULT_DEVICE_WIDTH;
+        }
+
         public ToolBase ToolCurrent
         {
             get { return PaintData.ToolCurrentSelected; }
@@ -76,7 +91,8 @@ namespace Catrobat.Paint.Phone
         {
             UndoRedoActionbarManager.GetInstance();
             CommandManager.GetInstance();
-
+            
+            CalculateSizeMultiplication();
         }
 
         public static PocketPaintApplication GetInstance()

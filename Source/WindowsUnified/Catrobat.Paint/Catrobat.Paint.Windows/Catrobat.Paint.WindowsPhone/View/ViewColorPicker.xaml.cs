@@ -33,6 +33,77 @@ namespace Catrobat.Paint.WindowsPhone.View
             this.InitializeComponent();
             HeaderTemplate.Height = Window.Current.Bounds.Height;
             piFirstPage.Height = Window.Current.Bounds.Height;
+
+            setColorPickerLayout();
+
+            //var box = new MessageDialog(Window.Current.Bounds.Height.ToString());
+            //box.ShowAsync();
+        }
+
+        private void setColorPickerLayout()
+        {
+            var height = PocketPaintApplication.GetInstance().size_height_multiplication;
+            var width = PocketPaintApplication.GetInstance().size_width_multiplication;
+
+            foreach ( Object obj in GrdColorButtons.Children.Concat(GrdColorSlider.Children) )
+            {
+                if ( obj.GetType() == typeof(Button) )
+                {
+                    ((Button)obj).Height *= height;
+                    ((Button)obj).Width *= width;
+
+                    ((Button)obj).Margin = new Thickness(
+                                            ((Button)obj).Margin.Left * width,
+                                            ((Button)obj).Margin.Top * height,
+                                            ((Button)obj).Margin.Right * width,
+                                            ((Button)obj).Margin.Bottom * height);
+
+                    if ( ((Button)obj).Content.GetType() == typeof(Rectangle) )
+                    {
+                        ((Rectangle)(((Button)obj).Content)).Height *= height;
+                        ((Rectangle)(((Button)obj).Content)).Width *= width;
+
+                        ((Rectangle)(((Button)obj).Content)).Margin = new Thickness(
+                                                ((Rectangle)(((Button)obj).Content)).Margin.Left * width,
+                                                ((Rectangle)(((Button)obj).Content)).Margin.Top * height,
+                                                ((Rectangle)(((Button)obj).Content)).Margin.Right * width,
+                                                ((Rectangle)(((Button)obj).Content)).Margin.Bottom * height);
+                    }
+                }
+                else if ( obj.GetType() == typeof(Slider) ) 
+                {
+                    ((Slider)obj).Height *= height;
+                    ((Slider)obj).Width *= width;
+
+                    ((Slider)obj).Margin = new Thickness(
+                                            ((Slider)obj).Margin.Left * width,
+                                            ((Slider)obj).Margin.Top * height,
+                                            ((Slider)obj).Margin.Right * width,
+                                            ((Slider)obj).Margin.Bottom * height);
+                }
+                else if (obj.GetType() == typeof(TextBox))
+                {
+                    ((TextBox)obj).Height *= height;
+                    ((TextBox)obj).Width *= width;
+
+                    ((TextBox)obj).Margin = new Thickness(
+                                            ((TextBox)obj).Margin.Left * width,
+                                            ((TextBox)obj).Margin.Top * height,
+                                            ((TextBox)obj).Margin.Right * width,
+                                            ((TextBox)obj).Margin.Bottom * height);
+                }
+                else if ( obj.GetType() == typeof(Rectangle) )
+                {
+                    ((Rectangle)obj).Height *= height;
+                    ((Rectangle)obj).Width *= width;
+
+                    ((Rectangle)obj).Margin = new Thickness(
+                                            ((Rectangle)obj).Margin.Left * width,
+                                            ((Rectangle)obj).Margin.Top * height,
+                                            ((Rectangle)obj).Margin.Right * width,
+                                            ((Rectangle)obj).Margin.Bottom * height);
+                }
+            }
         }
 
         /// <summary>
