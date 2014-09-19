@@ -9,6 +9,9 @@
 #include "PlaceAtBrick.h"
 #include "PointToBrick.h"
 #include "SetXBrick.h"
+#include "SetYBrick.h"
+#include "TurnLeftBrick.h"
+#include "TurnRightBrick.h"
 
 #include <math.h>
 
@@ -263,8 +266,7 @@ namespace PlayerWindowsPhone8Test
 
 			brick->Execute();
 
-			float x = 0;
-			float y = 0;
+			float x, y;
 			object->GetTranslation(x, y);
 
 			auto expected = 23.0f;
@@ -369,197 +371,205 @@ namespace PlayerWindowsPhone8Test
 			Assert::AreEqual(0.0f, y);
         }
 
-		TEST_METHOD(MovementBricks_SetXBrick_FromOtherPosition)
-		{
-			Object* object = new Object("");
-			Script* script = new StartScript(object);
-			FormulaTree* tree = new FormulaTree("NUMBER", "12.4");
-			Brick* brick = new SetXBrick(tree, script);
+		//TEST_METHOD(MovementBricks_SetXBrick_FromOtherPosition)
+		//{
+		//	Object* object = new Object("");
+		//	Script* script = new StartScript(object);
+		//	FormulaTree* tree = new FormulaTree("NUMBER", "12.4");
+		//	Brick* brick = new SetXBrick(tree, script);
 
-			object->SetTranslation(15.1f, 13.7f);
+		//	auto expectedX = 15.1f;
+		//	auto expectedY = 12.4f;
+
+		//	object->SetTranslation(expectedX, expectedY);
+
+		//	brick->Execute();
+
+		//	float actualX, actualY;
+		//	object->GetTranslation(actualX, actualY);
+
+		//	Assert::AreEqual(expectedX, actualX);
+		//	//Assert::AreEqual(expectedY, actualY);
+		//}
+
+		TEST_METHOD(MovementBricks_SetYBrick)
+        {
+			auto object = new Object("");
+			auto script = new StartScript(object);
+			auto tree = new FormulaTree("NUMBER", "42");
+			auto brick = new SetYBrick(tree, script);
 
 			brick->Execute();
 
-			float x = 0;
-			float y = 0;
-			object->GetTranslation(x, y);
+			float actualX, actualY;
+			object->GetTranslation(actualX, actualY);
 
-			Assert::AreEqual(12.4f, x);
-			Assert::AreEqual(13.7f, y);
-		}
+			auto expectedY = 42.0f;
 
-//		TEST_METHOD(MovementBricks_SetYBrick)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree = new FormulaTree("NUMBER", "42");
-//			Brick* brick = new SetYBrick("", tree, script);
-//
-//			brick->Execute();
-//
-//			float x = 0;
-//			float y = 0;
-//			object->GetPosition(x, y);
-//
-//			Assert::AreEqual(y, 42.0f);
-//        }
-//
-//		TEST_METHOD(MovementBricks_SetYBrick_Negative)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree = new FormulaTree("NUMBER", "-42");
-//			Brick* brick = new SetYBrick("", tree, script);
-//
-//			brick->Execute();
-//
-//			float x = 0;
-//			float y = 0;
-//			object->GetPosition(x, y);
-//
-//			Assert::AreEqual(y, -42.0f);
-//        }
-//
-//		TEST_METHOD(MovementBricks_SetYBrick_Zero)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree = new FormulaTree("NUMBER", "0");
-//			Brick* brick = new SetYBrick("", tree, script);
-//
-//			brick->Execute();
-//
-//			float x = 0;
-//			float y = 0;
-//			object->GetPosition(x, y);
-//
-//			Assert::AreEqual(y, 0.0f);
-//        }
-//
-//		TEST_METHOD(MovementBricks_TurnLeftBrick)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree = new FormulaTree("NUMBER", "42");
-//			Brick* brick = new TurnLeftBrick("", tree, script);
-//			object->SetRotation(0.0f);
-//
-//			brick->Execute();
-//
-//			float r = object->GetRotation();
-//
-//			Assert::AreEqual(r, -42.0f);
-//
-//			brick->Execute();
-//
-//			r = object->GetRotation();
-//
-//			Assert::AreEqual(r, -84.0f);
-//        }
-//
-//		TEST_METHOD(MovementBricks_TurnLeftBrick_Zero)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree = new FormulaTree("NUMBER", "0");
-//			Brick* brick = new TurnLeftBrick("", tree, script);
-//			object->SetRotation(23.0f);
-//
-//			brick->Execute();
-//
-//			float r = object->GetRotation();
-//
-//			Assert::AreEqual(r, 23.0f);
-//
-//			brick->Execute();
-//
-//			r = object->GetRotation();
-//
-//			Assert::AreEqual(r, 23.0f);
-//        }
-//
-//		TEST_METHOD(MovementBricks_TurnLeftBrick_Negative)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree = new FormulaTree("NUMBER", "-42");
-//			Brick* brick = new TurnLeftBrick("", tree, script);
-//			object->SetRotation(0.0f);
-//
-//			brick->Execute();
-//
-//			float r = object->GetRotation();
-//
-//			Assert::AreEqual(r, 42.0f);
-//
-//			brick->Execute();
-//
-//			r = object->GetRotation();
-//
-//			Assert::AreEqual(r, 84.0f);
-//        }
-//
-//		TEST_METHOD(MovementBricks_TurnRightBrick)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree = new FormulaTree("NUMBER", "42");
-//			Brick* brick = new TurnRightBrick("", tree, script);
-//			object->SetRotation(0.0f);
-//
-//			brick->Execute();
-//
-//			float r = object->GetRotation();
-//
-//			Assert::AreEqual(r, 42.0f);
-//
-//			brick->Execute();
-//
-//			r = object->GetRotation();
-//
-//			Assert::AreEqual(r, 84.0f);
-//        }
-//
-//		TEST_METHOD(MovementBricks_TurnRightBrick_Zero)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree = new FormulaTree("NUMBER", "0");
-//			Brick* brick = new TurnRightBrick("", tree, script);
-//			object->SetRotation(23.0f);
-//
-//			brick->Execute();
-//
-//			float r = object->GetRotation();
-//
-//			Assert::AreEqual(r, 23.0f);
-//
-//			brick->Execute();
-//
-//			r = object->GetRotation();
-//
-//			Assert::AreEqual(r, 23.0f);
-//        }
-//
-//		TEST_METHOD(MovementBricks_TurnRightBrick_Negative)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree = new FormulaTree("NUMBER", "-42");
-//			Brick* brick = new TurnRightBrick("", tree, script);
-//			object->SetRotation(0.0f);
-//
-//			brick->Execute();
-//
-//			float r = object->GetRotation();
-//
-//			Assert::AreEqual(r, -42.0f);
-//
-//			brick->Execute();
-//
-//			r = object->GetRotation();
-//
-//			Assert::AreEqual(r, -84.0f);
-//        }
+			Assert::AreEqual(actualY, expectedY);
+        }
+
+		TEST_METHOD(MovementBricks_SetYBrick_Negative)
+        {
+			auto object = new Object("");
+			auto script = new StartScript(object);
+			auto tree = new FormulaTree("NUMBER", "-42");
+			auto brick = new SetYBrick(tree, script);
+
+			brick->Execute();
+
+			float actualX, actualY;
+			object->GetTranslation(actualX, actualY);
+
+			auto expectedY = -42.0f;
+
+			Assert::AreEqual(actualY, expectedY);
+        }
+
+		TEST_METHOD(MovementBricks_SetYBrick_Zero)
+        {
+			auto object = new Object("");
+			auto script = new StartScript(object);
+			auto tree = new FormulaTree("NUMBER", "0");
+			auto brick = new SetYBrick(tree, script);
+
+			brick->Execute();
+
+			float actualX, actualY;
+			object->GetTranslation(actualX, actualY);
+
+			auto expectedY = 0.0f;
+
+			Assert::AreEqual(expectedY, actualY);
+        }
+
+		TEST_METHOD(MovementBricks_TurnLeftBrick)
+        {
+			auto object = new Object("");
+			auto script = new StartScript(object);
+			auto tree = new FormulaTree("NUMBER", "42");
+			auto brick = new TurnLeftBrick(tree, script);
+			object->SetRotation(0.0f);
+
+			brick->Execute();
+
+			auto actual = object->GetRotation();
+			auto expected = 360 - 42.0f;
+
+			Assert::AreEqual(expected, actual);
+
+			brick->Execute();
+
+			actual = object->GetRotation();
+			expected -= 42.0;
+
+			Assert::AreEqual(expected, actual);
+        }
+
+		TEST_METHOD(MovementBricks_TurnLeftBrick_Zero)
+        {
+			auto object = new Object("");
+			auto script = new StartScript(object);
+			auto tree = new FormulaTree("NUMBER", "0");
+			auto brick = new TurnLeftBrick(tree, script);
+			object->SetRotation(23.0f);
+
+			brick->Execute();
+
+			auto actual = object->GetRotation();
+			auto expected = 23.0f;
+
+			Assert::AreEqual(expected, actual);
+
+			brick->Execute();
+
+			actual = object->GetRotation();
+
+			Assert::AreEqual(actual, expected);
+        }
+
+		TEST_METHOD(MovementBricks_TurnLeftBrick_Negative)
+        {
+			auto object = new Object("");
+			auto script = new StartScript(object);
+			auto tree = new FormulaTree("NUMBER", "-42");
+			auto brick = new TurnLeftBrick(tree, script);
+			object->SetRotation(0.0f);
+
+			brick->Execute();
+
+			auto r = object->GetRotation();
+
+			Assert::AreEqual(r, 42.0f);
+
+			brick->Execute();
+
+			r = object->GetRotation();
+
+			Assert::AreEqual(r, 84.0f);
+        }
+
+		TEST_METHOD(MovementBricks_TurnRightBrick)
+        {
+			auto object = new Object("");
+			auto script = new StartScript(object);
+			auto tree = new FormulaTree("NUMBER", "42");
+			auto brick = new TurnRightBrick(tree, script);
+			object->SetRotation(0.0f);
+
+			brick->Execute();
+
+			auto r = object->GetRotation();
+
+			Assert::AreEqual(r, 42.0f);
+
+			brick->Execute();
+
+			r = object->GetRotation();
+
+			Assert::AreEqual(r, 84.0f);
+        }
+
+		TEST_METHOD(MovementBricks_TurnRightBrick_Zero)
+        {
+			auto object = new Object("");
+			auto script = new StartScript(object);
+			auto tree = new FormulaTree("NUMBER", "0");
+			auto brick = new TurnRightBrick(tree, script);
+			object->SetRotation(23.0f);
+
+			brick->Execute();
+
+			auto r = object->GetRotation();
+
+			Assert::AreEqual(r, 23.0f);
+
+			brick->Execute();
+
+			r = object->GetRotation();
+
+			Assert::AreEqual(r, 23.0f);
+        }
+
+		TEST_METHOD(MovementBricks_TurnRightBrick_Negative)
+        {
+			auto object = new Object("");
+			auto script = new StartScript(object);
+			auto tree = new FormulaTree("NUMBER", "-42");
+			auto brick = new TurnRightBrick(tree, script);
+			object->SetRotation(0.0f);
+
+			brick->Execute();
+
+			auto r = object->GetRotation();
+
+			Assert::AreEqual(r, -42.0f);
+
+			brick->Execute();
+
+			r = object->GetRotation();
+
+			Assert::AreEqual(r, -84.0f);
+        }
     };
 }
