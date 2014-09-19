@@ -12,6 +12,7 @@ using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModels;
 using GalaSoft.MvvmLight.Messaging;
 using NotificationsExtensions.ToastContent;
+using Windows.Phone.Devices.Notification;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
@@ -24,7 +25,7 @@ namespace Catrobat.IDE.WindowsShared.Services
     public class NotificationServiceWindowsShared : INotificationService
     {
         public void ShowToastNotification(string title, string message,
-            ToastDisplayDuration displayDuration, ToastTag tag, PortableImage image = null)
+            ToastDisplayDuration displayDuration, ToastTag tag = ToastTag.Default, PortableImage image = null, bool vibrate = false)
         {
             var duration = ToastDuration.Short;
 
@@ -53,6 +54,11 @@ namespace Catrobat.IDE.WindowsShared.Services
             toast.Activated += ToastOnActivated;
             toast.Dismissed += ToastOnDismissed;
             toast.Failed += ToastOnFailed;
+
+            if (vibrate)
+            {
+                VibrationDevice.GetDefault().Vibrate(TimeSpan.FromSeconds(0.5));
+            }
 
             ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 ToastNotificationManager.CreateToastNotifier().Show(toast));
