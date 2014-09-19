@@ -7,6 +7,8 @@
 #include "GlideToBrick.h"
 #include "TestHelper.h"
 #include "PlaceAtBrick.h"
+#include "PointToBrick.h"
+#include "SetXBrick.h"
 
 #include <math.h>
 
@@ -274,96 +276,118 @@ namespace PlayerWindowsPhone8Test
 			Assert::AreEqual(expected, actual);
         }
 
-//		TEST_METHOD(MovementBricks_PointToBrick_Variance1)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree = new FormulaTree("NUMBER", "42");
-//			Brick* brick = new PointToBrick("", tree, script);
-//			object->SetRotation(0.0f);
-//
-//			brick->Execute();
-//
-//			float r = object->GetRotation();
-//
-//			Assert::AreEqual(r, 42.0f);
-//
-//			brick->Execute();
-//
-//			r = object->GetRotation();
-//
-//			Assert::AreEqual(r, 42.0f);
-//        }
-//
-//		TEST_METHOD(MovementBricks_PointToBrick_Variance2)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree = new FormulaTree("NUMBER", "23");
-//			Brick* brick = new PointToBrick("", tree, script);
-//			object->SetRotation(0.0f);
-//
-//			brick->Execute();
-//
-//			float r = object->GetRotation();
-//
-//			Assert::AreEqual(r, 23.0f);
-//
-//			brick->Execute();
-//
-//			r = object->GetRotation();
-//
-//			Assert::AreEqual(r, 23.0f);
-//        }
-//
-//		TEST_METHOD(MovementBricks_SetXBrick)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree = new FormulaTree("NUMBER", "42");
-//			Brick* brick = new SetXBrick("", tree, script);
-//
-//			brick->Execute();
-//
-//			float x = 0;
-//			float y = 0;
-//			object->GetPosition(x, y);
-//
-//			Assert::AreEqual(x, 42.0f);
-//        }
-//
-//		TEST_METHOD(MovementBricks_SetXBrick_Negative)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree = new FormulaTree("NUMBER", "-42");
-//			Brick* brick = new SetXBrick("", tree, script);
-//
-//			brick->Execute();
-//
-//			float x = 0;
-//			float y = 0;
-//			object->GetPosition(x, y);
-//
-//			Assert::AreEqual(x, -42.0f);
-//        }
-//
-//		TEST_METHOD(MovementBricks_SetXBrick_Zero)
-//        {
-//			Object* object = new Object("");
-//			Script* script = new StartScript(object);
-//			FormulaTree* tree = new FormulaTree("NUMBER", "0");
-//			Brick* brick = new SetXBrick("", tree, script);
-//
-//			brick->Execute();
-//
-//			float x = 0;
-//			float y = 0;
-//			object->GetPosition(x, y);
-//
-//			Assert::AreEqual(x, 0.0f);
-//        }
-//
+		TEST_METHOD(MovementBricks_PointToBrick_Variance1)
+        {
+			Object* object = new Object("");
+			Script* script = new StartScript(object);
+			FormulaTree* tree = new FormulaTree("NUMBER", "42");
+			Brick* brick = new PointToBrick(tree, script);
+			object->SetRotation(0.0f);
+
+			brick->Execute();
+
+			float r = object->GetRotation();
+
+			Assert::AreEqual(42.0f, r);
+
+			brick->Execute();
+
+			r = object->GetRotation();
+
+			Assert::AreEqual(42.0f, r);
+        }
+
+		TEST_METHOD(MovementBricks_PointToBrick_Variance2)
+        {
+			Object* object = new Object("");
+			Script* script = new StartScript(object);
+			FormulaTree* tree = new FormulaTree("NUMBER", "23");
+			Brick* brick = new PointToBrick(tree, script);
+			object->SetRotation(0.0f);
+
+			brick->Execute();
+
+			float r = object->GetRotation();
+
+			Assert::AreEqual(23.0f, r);
+
+			brick->Execute();
+
+			r = object->GetRotation();
+
+			Assert::AreEqual(23.0f, r);
+        }
+
+		TEST_METHOD(MovementBricks_SetXBrick)
+        {
+			Object* object = new Object("");
+			Script* script = new StartScript(object);
+			FormulaTree* tree = new FormulaTree("NUMBER", "42");
+			Brick* brick = new SetXBrick(tree, script);
+
+			brick->Execute();
+
+			float x = 0;
+			float y = 0;
+			object->GetTranslation(x, y);
+
+			Assert::AreEqual(42.0f, x);
+			Assert::AreEqual(0.0f, y);
+        }
+
+		TEST_METHOD(MovementBricks_SetXBrick_Negative)
+        {
+			Object* object = new Object("");
+			Script* script = new StartScript(object);
+			FormulaTree* tree = new FormulaTree("NUMBER", "-42");
+			Brick* brick = new SetXBrick(tree, script);
+
+			brick->Execute();
+
+			float x = 0;
+			float y = 0;
+			object->GetTranslation(x, y);
+
+			Assert::AreEqual(-42.0f, x);
+			Assert::AreEqual(0.0f, y);
+        }
+
+		TEST_METHOD(MovementBricks_SetXBrick_Zero)
+        {
+			Object* object = new Object("");
+			Script* script = new StartScript(object);
+			FormulaTree* tree = new FormulaTree("NUMBER", "0");
+			Brick* brick = new SetXBrick(tree, script);
+
+			brick->Execute();
+
+			float x = 0;
+			float y = 0;
+			object->GetTranslation(x, y);
+
+			Assert::AreEqual(0.0f, x);
+			Assert::AreEqual(0.0f, y);
+        }
+
+		TEST_METHOD(MovementBricks_SetXBrick_FromOtherPosition)
+		{
+			Object* object = new Object("");
+			Script* script = new StartScript(object);
+			FormulaTree* tree = new FormulaTree("NUMBER", "12.4");
+			Brick* brick = new SetXBrick(tree, script);
+
+			object->SetTranslation(15.1f, 13.7f);
+
+			brick->Execute();
+
+			float x = 0;
+			float y = 0;
+			object->GetTranslation(x, y);
+
+			Assert::AreEqual(12.4f, x);
+			Assert::AreEqual(13.7f, y);
+		}
+
 //		TEST_METHOD(MovementBricks_SetYBrick)
 //        {
 //			Object* object = new Object("");
