@@ -37,7 +37,6 @@ public:
     void AddVariable(std::string name, UserVariable *variable);
     void AddVariable(std::pair<std::string, UserVariable*> variable);
     void SetLook(int index);
-    void SetWhenScript(WhenScript* whenScript);
 
 public:
     void LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceResources);
@@ -58,7 +57,6 @@ public:
     int GetLook();
     int GetLookCount();
     Look* GetCurrentLook();
-    WhenScript* GetWhenScript();
 
     bool IsObjectHit(D2D1_POINT_2F position);
 
@@ -70,7 +68,6 @@ private:
     std::list<Script*> *m_scripts;
     std::list<SoundInfo*> *m_soundInfos;
     std::map<std::string, UserVariable*> *m_variableList;
-    WhenScript* m_whenScript;
 
 private:
     float m_opacity;

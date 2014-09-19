@@ -127,11 +127,6 @@ void Object::SetLook(int index)
     m_look = GetLook(index);
     RecalculateTransformation();
 }
-
-void Object::SetWhenScript(WhenScript* whenScript)
-{
-    m_whenScript = whenScript;
-}
 #pragma endregion
 
 #pragma region RENDERING
@@ -274,12 +269,6 @@ Look* Object::GetCurrentLook()
 
     return m_look;
 }
-
-WhenScript* Object::GetWhenScript()
-{
-    return m_whenScript;
-}
-
 #pragma endregion
 
 #pragma region INTERNAL
