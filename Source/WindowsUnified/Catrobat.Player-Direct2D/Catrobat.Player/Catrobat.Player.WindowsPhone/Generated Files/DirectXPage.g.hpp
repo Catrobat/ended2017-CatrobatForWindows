@@ -24,10 +24,39 @@ void ::Catrobat_Player::DirectXPage::InitializeComponent()
 
     // Get the SwapChainPanel named 'swapChainPanel'
     swapChainPanel = safe_cast<::Windows::UI::Xaml::Controls::SwapChainPanel^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"swapChainPanel"));
+    // Get the CommandBar named 'PlayerAppBar'
+    PlayerAppBar = safe_cast<::Windows::UI::Xaml::Controls::CommandBar^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"PlayerAppBar"));
+    // Get the AppBarButton named 'Restart'
+    Restart = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Restart"));
+    // Get the AppBarButton named 'Play'
+    Play = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Play"));
+    // Get the AppBarButton named 'Screenshot'
+    Screenshot = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"Screenshot"));
+    // Get the AppBarButton named 'EnableAxes'
+    EnableAxes = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(static_cast<Windows::UI::Xaml::IFrameworkElement^>(this)->FindName(L"EnableAxes"));
 }
 
 void ::Catrobat_Player::DirectXPage::Connect(int connectionId, Platform::Object^ target)
 {
+    switch (connectionId)
+    {
+    case 1:
+        (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Catrobat_Player::DirectXPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&DirectXPage::OnRestartButtonClicked);
+        break;
+    case 2:
+        (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Catrobat_Player::DirectXPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&DirectXPage::OnPlayButtonClicked);
+        break;
+    case 3:
+        (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Catrobat_Player::DirectXPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&DirectXPage::OnScreenshotButtonClicked);
+        break;
+    case 4:
+        (safe_cast<::Windows::UI::Xaml::Controls::Primitives::ButtonBase^>(target))->Click +=
+            ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Catrobat_Player::DirectXPage::*)(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^))&DirectXPage::OnEnableAxisButtonClicked);
+        break;
+    }
     (void)connectionId; // Unused parameter
     (void)target; // Unused parameter
     _contentLoaded = true;

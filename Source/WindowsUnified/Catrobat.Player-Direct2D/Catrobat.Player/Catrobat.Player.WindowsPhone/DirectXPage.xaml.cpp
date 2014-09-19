@@ -168,10 +168,46 @@ void DirectXPage::OnSwapChainPanelSizeChanged(Object^ sender, SizeChangedEventAr
     m_main->CreateWindowSizeDependentResources();
 }
 
-// Uncomment this if using the app bar in your phone application.
-// Called when the app bar button is clicked.
-//void DirectXPage::AppBarButton_Click(Object^ sender, RoutedEventArgs^ e)
-//{
-//	// Use the app bar if it is appropriate for your app. Design the app bar, 
-//	// then fill in event handlers (like this one).
-//}
+//----------------------------------------------------------------------
+
+void DirectXPage::OnRestartButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+{
+    //TODO: implement me
+}
+
+//----------------------------------------------------------------------
+
+void DirectXPage::OnPlayButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+{
+    //TODO: implement me
+
+    //if (m_playActive)
+    //{
+    //    m_playActive = false;
+    //    //m_main->PauseRequested();
+    //    PausePlay->Icon = ref new SymbolIcon(Symbol::Play);
+    //    PausePlay->Label = "Play";
+    //}
+    //else
+    //{
+    //    m_playActive = true;
+    //    //m_main->ContinueRequested();
+    //    PausePlay->Icon = ref new SymbolIcon(Symbol::Pause);
+    //    PausePlay->Label = "Pause";
+    //}
+}
+
+
+//----------------------------------------------------------------------
+
+void DirectXPage::OnScreenshotButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+{
+    //TODO: implement me
+}
+
+//----------------------------------------------------------------------
+
+void DirectXPage::OnEnableAxisButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+{
+    //TODO: implement me
+}

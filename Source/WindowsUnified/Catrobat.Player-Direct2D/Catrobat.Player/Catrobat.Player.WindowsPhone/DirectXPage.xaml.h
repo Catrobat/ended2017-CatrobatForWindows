@@ -37,7 +37,6 @@ namespace Catrobat_Player
 		void OnDisplayContentsInvalidated(Windows::Graphics::Display::DisplayInformation^ sender, Platform::Object^ args);
 
 		// Other event handlers.
-		void AppBarButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void OnCompositionScaleChanged(Windows::UI::Xaml::Controls::SwapChainPanel^ sender, Object^ args);
 		void OnSwapChainPanelSizeChanged(Platform::Object^ sender, Windows::UI::Xaml::SizeChangedEventArgs^ e);
 
@@ -47,6 +46,12 @@ namespace Catrobat_Player
 
 		// Independent input handling functions.
 		void OnPointerPressed(Platform::Object^ sender, Windows::UI::Core::PointerEventArgs^ e);
+
+        // Bottom CommandBar handlers
+        void OnRestartButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
+        void OnPlayButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
+        void OnScreenshotButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
+        void OnEnableAxisButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
 
 		// Resources used to render the DirectX content in the XAML page background.
 		std::shared_ptr<DX::DeviceResources> m_deviceResources;
