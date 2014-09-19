@@ -129,10 +129,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)NextLookBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Object.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ObjectList.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)pch.h" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
-      <PrecompiledHeader>Create</PrecompiledHeader>
-    </ClCompile>
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\DeviceResources.h" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Common\DeviceResources.cpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\DirectXHelper.h" />

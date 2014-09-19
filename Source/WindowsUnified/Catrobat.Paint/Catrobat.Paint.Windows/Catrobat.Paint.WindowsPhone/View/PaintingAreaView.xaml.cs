@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Phone.UI.Input;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -35,6 +36,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         Int32 slider_thickness_textbox_last_value = 1;
         static string current_appbar = "barStandard";
         Point start_point = new Point();
+        Point old_point = new Point();
         public PaintingAreaView()
         {
             this.InitializeComponent();
@@ -43,6 +45,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
             
+            HardwareButtons.BackPressed +=HardwareButtons_BackPressed;
 
             LayoutRoot.Height = Window.Current.Bounds.Height;
             LayoutRoot.Width = Window.Current.Bounds.Width;
@@ -87,9 +90,61 @@ namespace Catrobat.Paint.WindowsPhone.View
             btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
             btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
             btnThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnThickness_OnClick;
+            
+            SliderThicknessControl.Width = Window.Current.Bounds.Width;
+            SliderThicknessControl.Height = Window.Current.Bounds.Height * 0.23; //Visibility="Collapsed"
+            SliderThicknessGrid.Width = Window.Current.Bounds.Width;
+            SliderThicknessGrid.Height = Window.Current.Bounds.Height * 0.23;
+            SliderThickness.Height = SliderThicknessGrid.Height * 0.3;
+            SliderThickness.Width = SliderThicknessGrid.Width * 0.6053;
+            SliderThickness.Margin = new Thickness(SliderThicknessGrid.Width * 0.03, SliderThicknessGrid.Height * 0.15, 0, 0);
+            
+            btnBrushThickness.Height = SliderThicknessGrid.Height * 0.3;
+            btnBrushThickness.Width = SliderThicknessGrid.Width * 0.2;
+            btnBrushThickness.Margin = new Thickness(SliderThicknessGrid.Width * 0.03 + SliderThicknessGrid.Width * 0.666, SliderThicknessGrid.Height * 0.13, SliderThicknessGrid.Width * 0.03, 0);
+           
+            btnRoundImage.Height = SliderThicknessGrid.Height * 0.3;
+            btnRoundImage.Width = SliderThicknessGrid.Width * 0.2;
+            btnRoundImage.Margin = new Thickness(SliderThicknessGrid.Width * 0.03, 0, 0, SliderThicknessGrid.Height * 0.15);
+
+            btnSquareImage.Height = SliderThicknessGrid.Height * 0.3;
+            btnSquareImage.Width = SliderThicknessGrid.Width * 0.2;
+            btnSquareImage.Margin = new Thickness(SliderThicknessGrid.Width * 0.03 + SliderThicknessGrid.Width * 0.333, 0, 0, SliderThicknessGrid.Height * 0.15);
+            
+            btnTriangleImage.Height = SliderThicknessGrid.Height * 0.3;
+            btnTriangleImage.Width = SliderThicknessGrid.Width * 0.2;
+            btnTriangleImage.Margin = new Thickness(SliderThicknessGrid.Width * 0.666 + SliderThicknessGrid.Width * 0.03, 0, 0, SliderThicknessGrid.Height * 0.15);
 
             checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
             createAppBarAndSwitchAppBarContent(current_appbar);        
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+
+            if (this.Frame.CurrentSourcePageType == typeof(PaintingAreaView))
+            {
+                //MessageDialog md = new MessageDialog("confirm exit?");
+                //List<IUICommand> commands = new List<IUICommand>(2);
+                //UICommand yes = new UICommand("Yes");
+                //UICommand no = new UICommand("No");
+                //commands.Add(yes);
+                //commands.Add(no);
+                //md.Commands.Add(yes);
+                //md.Commands.Add(no);
+                //var test = md.ShowAsync();
+
+            }
+            else if (this.Frame.CurrentSourcePageType == typeof(ViewColorPicker))
+            {
+                e.Handled = true;
+                this.Frame.GoBack();
+            }
+            else if (this.Frame.CurrentSourcePageType == typeof(ViewToolPicker))
+            {
+                e.Handled = true;
+                this.Frame.GoBack();
+            }
         }
 
         /// <summary>
@@ -690,7 +745,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().ToolCurrent.HandleDown(point);
             PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(point);
 
-           // e.Handled = true;
+            e.Handled = true;
         }
 
         private void BtnHorizotal_OnClick(object sender, RoutedEventArgs e)
@@ -715,12 +770,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 return;
         }
 
-        private void testRectangle_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-            start_point.X = e.Position.X;
-            start_point.Y = e.Position.Y;
-        }
-
         private void testRectangle_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             start_point.X = e.GetCurrentPoint(PaintingAreaCanvas).Position.X;
@@ -729,14 +778,19 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void testRectangle_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
+            
             double bottom = rectDrawRectangle.Margin.Bottom;
             double top = rectDrawRectangle.Margin.Top;
             double left = rectDrawRectangle.Margin.Left;
             double right = rectDrawRectangle.Margin.Right;
             Point current_point = new Point(e.GetCurrentPoint(PaintingAreaCanvas).Position.X, e.GetCurrentPoint(PaintingAreaCanvas).Position.Y);
-            Point distance = new Point(current_point.X - start_point.X, current_point.Y - start_point.Y);
-            rectDrawRectangle.Margin = new Thickness(left + distance.X, top + distance.Y, right, bottom);
-            coordinates.Text = "X: " + (left + current_point.X).ToString() + ", " + (top + current_point.Y).ToString().ToString();
+            if (old_point.X != current_point.X && old_point.Y != current_point.Y)
+            {
+                Point distance = new Point(current_point.X - start_point.X, current_point.Y - start_point.Y);
+                rectDrawRectangle.Margin = new Thickness(left + distance.X, top + distance.Y, right, bottom);
+                coordinates.Text = "X: " + (left + current_point.X).ToString() + ", " + (top + current_point.Y).ToString().ToString();
+                old_point = current_point;
+            }
         }
 
         public Visibility visibilityRecDrawingRectangle
@@ -774,6 +828,12 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             Point coordinatesOfRectangle = new Point(rectDrawRectangle.Margin.Left, rectDrawRectangle.Margin.Top);
             PocketPaintApplication.GetInstance().ToolCurrent.Draw(coordinatesOfRectangle);
+        }
+
+        private void rectDrawRectangle_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            start_point.X = e.GetPosition(PaintingAreaCanvas).X;
+            start_point.Y = e.GetPosition(PaintingAreaCanvas).Y;
         }
     }
 }

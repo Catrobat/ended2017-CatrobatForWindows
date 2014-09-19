@@ -33,7 +33,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             if (PocketPaintApplication.GetInstance().RecDrawingRectangle != null)
             {
-                PocketPaintApplication.GetInstance().RecDrawingRectangle.Fill = PocketPaintApplication.GetInstance().PaintData.FillColorSelected;
+                PocketPaintApplication.GetInstance().RecDrawingRectangle.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
                 PocketPaintApplication.GetInstance().RecDrawingRectangle.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
                 PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
             }
@@ -42,7 +42,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         }
         public override void HandleDown(object arg)
         {
-            if (!(arg is Point))
+            /* if (!(arg is Point))
             {
                 return;
             }
@@ -126,7 +126,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             myRectangleGeometry.Rect = new Rect(coordinate, new Point(coordinate.X + width, coordinate.Y + height));
 
             _path = new Path();
-            _path.Fill = PocketPaintApplication.GetInstance().PaintData.FillColorSelected;
+            _path.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
             _path.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
             _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
             _path.StrokeEndLineCap = PenLineCap.Square;

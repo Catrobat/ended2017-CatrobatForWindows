@@ -31,8 +31,30 @@ namespace Catrobat.Paint.WindowsPhone.View
         public ViewColorPicker()
         {
             this.InitializeComponent();
+
+            Color selected_color;
+            double color_opacity;
+            if (PocketPaintApplication.GetInstance().is_border_color && PocketPaintApplication.GetInstance().PaintData.BorderColorSelected != null)
+            {
+                selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.BorderColorSelected).Color;
+                color_opacity = Convert.ToDouble(((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.BorderColorSelected).Color.A);
+
+                changeValuesOfColourSliders(selected_color.R, selected_color.G, selected_color.B, (byte)color_opacity);
+                changeColorOfBtnSelectedColor(selected_color);
+            }
+            else if (!PocketPaintApplication.GetInstance().is_border_color && PocketPaintApplication.GetInstance().PaintData.ColorSelected != null)
+            {
+                selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.ColorSelected).Color;
+                color_opacity = Convert.ToDouble(((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.ColorSelected).Color.A);
+
+                changeValuesOfColourSliders(selected_color.R, selected_color.G, selected_color.B, (byte)color_opacity);
+                changeColorOfBtnSelectedColor(selected_color);
+            }
+
             HeaderTemplate.Height = Window.Current.Bounds.Height;
             piFirstPage.Height = Window.Current.Bounds.Height;
+
+            setColorPickerLayout();
         }
 
         /// <summary>
@@ -42,13 +64,30 @@ namespace Catrobat.Paint.WindowsPhone.View
         /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            SolidColorBrush fill_color = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
+            SolidColorBrush fill_color;
+            if (PocketPaintApplication.GetInstance().is_border_color)
+            {
+                fill_color = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
+            }
+            else
+            {
+                fill_color = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
+            }
+
             double fill_color_opacity = Convert.ToDouble(fill_color.Color.A);
 
 
             if (PocketPaintApplication.GetInstance().PaintData.ColorSelected != null)
             {
-                Color selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.ColorSelected).Color;
+                Color selected_color;
+                if (PocketPaintApplication.GetInstance().is_border_color)
+                {
+                    selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.BorderColorSelected).Color;
+                }
+                else
+                {
+                    selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.ColorSelected).Color;
+                }
 
                 changeValuesOfColourSliders(selected_color.R, selected_color.G, selected_color.B, (byte)fill_color_opacity);
                 changeColorOfBtnSelectedColor(selected_color);
@@ -126,9 +165,17 @@ namespace Catrobat.Paint.WindowsPhone.View
             current_color.B = ((SolidColorBrush)BtnSelectedColor.Background).Color.B;
             current_color.A = (byte)(255 * (Convert.ToDouble(tbAlphaValue.Text) / 100));
 
-            PocketPaintApplication.GetInstance().PaintData.ColorSelected = new SolidColorBrush(current_color);
+            if ( PocketPaintApplication.GetInstance().is_border_color )
+            {
+                PocketPaintApplication.GetInstance().PaintData.BorderColorSelected = new SolidColorBrush(current_color);
+            }
+            else
+            {
+                var current_solid_brush = new SolidColorBrush(current_color);
+                PocketPaintApplication.GetInstance().PaintData.ColorSelected = current_solid_brush;
+                PocketPaintApplication.GetInstance().BarRecEllShape.ColorFillChanged(current_solid_brush);
+            }
             
-            //this.Frame.Navigate(typeof(PaintingAreaView));
             this.Frame.GoBack();
         }
 
@@ -188,6 +235,72 @@ namespace Catrobat.Paint.WindowsPhone.View
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {         
 
+        }
+
+        private void setColorPickerLayout()
+        {
+            var height = PocketPaintApplication.GetInstance().size_height_multiplication;
+            var width = PocketPaintApplication.GetInstance().size_width_multiplication;
+
+            foreach (Object obj in GrdColorButtons.Children.Concat(GrdColorSlider.Children))
+            {
+                if (obj.GetType() == typeof(Button))
+                {
+                    ((Button)obj).Height *= height;
+                    ((Button)obj).Width *= width;
+
+                    ((Button)obj).Margin = new Thickness(
+                                            ((Button)obj).Margin.Left * width,
+                                            ((Button)obj).Margin.Top * height,
+                                            ((Button)obj).Margin.Right * width,
+                                            ((Button)obj).Margin.Bottom * height);
+
+                    if (((Button)obj).Content.GetType() == typeof(Rectangle))
+                    {
+                        ((Rectangle)(((Button)obj).Content)).Height *= height;
+                        ((Rectangle)(((Button)obj).Content)).Width *= width;
+
+                        ((Rectangle)(((Button)obj).Content)).Margin = new Thickness(
+                                                ((Rectangle)(((Button)obj).Content)).Margin.Left * width,
+                                                ((Rectangle)(((Button)obj).Content)).Margin.Top * height,
+                                                ((Rectangle)(((Button)obj).Content)).Margin.Right * width,
+                                                ((Rectangle)(((Button)obj).Content)).Margin.Bottom * height);
+                    }
+                }
+                else if (obj.GetType() == typeof(Slider))
+                {
+                    ((Slider)obj).Height *= height;
+                    ((Slider)obj).Width *= width;
+
+                    ((Slider)obj).Margin = new Thickness(
+                                            ((Slider)obj).Margin.Left * width,
+                                            ((Slider)obj).Margin.Top * height,
+                                            ((Slider)obj).Margin.Right * width,
+                                            ((Slider)obj).Margin.Bottom * height);
+                }
+                else if (obj.GetType() == typeof(TextBox))
+                {
+                    ((TextBox)obj).Height *= height;
+                    ((TextBox)obj).Width *= width;
+
+                    ((TextBox)obj).Margin = new Thickness(
+                                            ((TextBox)obj).Margin.Left * width,
+                                            ((TextBox)obj).Margin.Top * height,
+                                            ((TextBox)obj).Margin.Right * width,
+                                            ((TextBox)obj).Margin.Bottom * height);
+                }
+                else if (obj.GetType() == typeof(Rectangle))
+                {
+                    ((Rectangle)obj).Height *= height;
+                    ((Rectangle)obj).Width *= width;
+
+                    ((Rectangle)obj).Margin = new Thickness(
+                                            ((Rectangle)obj).Margin.Left * width,
+                                            ((Rectangle)obj).Margin.Top * height,
+                                            ((Rectangle)obj).Margin.Right * width,
+                                            ((Rectangle)obj).Margin.Bottom * height);
+                }
+            }
         }
 
     }

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+<header>
+    <applicationBuildName/>
+    <applicationBuildNumber>0</applicationBuildNumber>
+    <applicationName>CatroidTest</applicationName>
+    <applicationVersion>testVersion</applicationVersion>
+    <dateTimeUpload/>
+    <description/>
+    <deviceName>TestDevice</deviceName>
+    <mediaLicense>http://developer.catrobat.org/ccbysa_v3</mediaLicense>
+    <platform>TestSystem</platform>
+    <platformVersion>1</platformVersion>
+    <catrobatLanguageVersion>1.0</catrobatLanguageVersion>
+    <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
+    <programName>TestProgram</programName>
+    <remixOf>https://pocketcode.org/details/732</remixOf>
+    <screenHeight>1184</screenHeight>
+    <screenWidth>768</screenWidth>
+    <tags/>
+    <url>http://pocketcode.org/details/732</url>
+    <userHandle>test</userHandle>
+  </header>
+  <objectList>
+    <object>
+      <lookList>
+        <look>
+          <fileName>3BA1586870400E96BE0BB523D5F12E12_Hintergrund</fileName>
+          <name>white</name>
+        </look>
+        <look>
+          <fileName>A0305EC2DCBD2858B836C5029D275DAB_background.png</fileName>
+          <name>logo</name>
+        </look>
+      </lookList>
+      <name>Background</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[2]"/>
+            </setLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>init</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>menu</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>testPic1.png</fileName>
+          <name>testPic1</name>
+        </look>
+        <look>
+          <fileName>testPic2.png</fileName>
+          <name>testPic2</name>
+        </look>
+      </lookList>
+      <name>TestObject1</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>200</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <playSoundBrick>
+              <object reference="../../../../.."/>
+              <sound>
+                <fileName>841245C303F564156CEB1B91FE0ED7A2_send.mp4</fileName>
+                <name>send</name>
+              </sound>
+            </playSoundBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[2]"/>
+            </setLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.5</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>red</receivedMessage>
+        </broadcastScript>
+        <whenScript>
+          <brickList>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>pressed</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <action>Tapped</action>
+        </whenScript>
+        <broadcastScript>
+          <brickList>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>pressed</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+    </object>
+  </objectList>
+</program>
