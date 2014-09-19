@@ -239,6 +239,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Content\Basic2DRenderer.h">
       <Filter>Content</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)OutOfBoundsException.h">
+      <Filter>Exception</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Catrobat.PlayerMain.cpp" />
@@ -451,6 +454,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Content\Basic2DRenderer.cpp">
       <Filter>Content</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)OutOfBoundsException.cpp">
+      <Filter>Exception</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -48,11 +48,12 @@ void Basic2DRenderer::ReleaseDeviceDependentResources()
 void Basic2DRenderer::PointerPressed(D2D1_POINT_2F point)
 {
     ObjectList *objectList = ProjectDaemon::Instance()->GetProject()->GetObjectList();
-    for (int i = 0; i < objectList->GetSize(); i++)
+    for (int i = objectList->GetSize() - 1; i >= 0; i--)
     {
         if (objectList->GetObject(i)->IsObjectHit(point))
         {
             int x = 0;
+            break;
         }
     }
 }

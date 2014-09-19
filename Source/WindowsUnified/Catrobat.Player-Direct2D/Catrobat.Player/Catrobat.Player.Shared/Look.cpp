@@ -3,7 +3,9 @@
 #include "DDSLoader.h"
 #include "ProjectDaemon.h"
 #include "PlayerException.h"
+#include "OutOfBoundsException.h"
 
+#include <math.h>
 #include <vector>
 
 using namespace DirectX;
@@ -81,5 +83,18 @@ int Look::GetPixelAlphaValue(D2D1_POINT_2F position)
     {
         throw new PlayerException("Look::No texture defined.");
     }
-    return m_texture->alphaMap.at(position.y).at(position.x);
+
+    int x = round(position.x);
+    int y = round(position.y);
+
+    if (x < 0 || y < 0)
+    {
+        throw new OutOfBoundsException();
+    }
+    else if (m_texture->alphaMap.size() < y || m_texture->alphaMap.at(y).size() < x)
+    {
+        throw new OutOfBoundsException();
+    }
+    int test = m_texture->alphaMap.at(y).at(x);
+    return test;
 }

@@ -16,7 +16,7 @@ m_deviceResources(deviceResources), m_pointerLocationX(0.0f), m_loadingComplete(
     m_deviceResources->RegisterDeviceNotify(this);
 
     // Initialize Project loading and parsing.
-    ProjectDaemon::Instance()->OpenProject("TestKlick").then([this](task<bool> t)
+    ProjectDaemon::Instance()->OpenProject("testTapp2").then([this](task<bool> t)
     {
         m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(m_deviceResources));
         m_loadingComplete = true;
