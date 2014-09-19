@@ -22,15 +22,15 @@ namespace Catrobat.Paint.Phone.Listener
         
         public void ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
-            //var point = new Point(Convert.ToInt32(e.Position.X), Convert.ToInt32(e.Position.Y));
+            var point = new Point(Convert.ToInt32(e.Position.X), Convert.ToInt32(e.Position.Y));
 
-            //// TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
-            //if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
-            //{
-            //    return;
-            //}
+            // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
+            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
+            {
+                return;
+            }
 
-            //PocketPaintApplication.GetInstance().ToolCurrent.HandleDown(point);
+            PocketPaintApplication.GetInstance().ToolCurrent.HandleDown(point);
         }
 
         public void ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
@@ -83,15 +83,15 @@ namespace Catrobat.Paint.Phone.Listener
 
         public void ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
-            //var point = new Point(Convert.ToInt32(e.Position.X), Convert.ToInt32(e.Position.Y));
+            var point = new Point(Convert.ToInt32(e.Position.X), Convert.ToInt32(e.Position.Y));
 
-            //// TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
-            //if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
-            //{
-            //    return;
-            //}
+            // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
+            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
+            {
+                return;
+            }
 
-            //PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(point);        
+            PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(point);        
         }
 
         public void ResetDrawingSpace()

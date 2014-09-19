@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,7 +28,45 @@ namespace Catrobat.Paint.WindowsPhone.View
         public ViewToolPicker()
         {
             this.InitializeComponent();
+
+            setToolPickerLayout();
+            //MessageDialog msg = new MessageDialog(GrdToolPickerButton.Width.ToString());
+            //msg.ShowAsync();
         }
+
+        private void setToolPickerLayout()
+        {
+            var height = PocketPaintApplication.GetInstance().size_height_multiplication;
+            var width = PocketPaintApplication.GetInstance().size_width_multiplication;
+
+            GrdToolPickerButton.Width = Window.Current.Bounds.Width;
+
+            foreach (Object obj in GrdToolPickerButton.Children)
+            {
+                if (obj.GetType() == typeof(Button))
+                {
+                    ((Button)obj).Height *= height;
+                    ((Button)obj).Width *= width;
+
+                    ((Button)obj).Margin = new Thickness(
+                                            ((Button)obj).Margin.Left * width,
+                                            ((Button)obj).Margin.Top * height,
+                                            ((Button)obj).Margin.Right * width,
+                                            ((Button)obj).Margin.Bottom * height);
+
+                    ((Button)obj).Padding = new Thickness(
+                                            ((Button)obj).Padding.Left * width,
+                                            ((Button)obj).Padding.Top * height,
+                                            ((Button)obj).Padding.Right * width,
+                                            ((Button)obj).Padding.Bottom * height);
+
+                    //((Button)obj).FontSize *= height;
+
+                    
+                }
+            }
+        }
+
 
         /// <summary>
         /// Wird aufgerufen, wenn diese Seite in einem Frame angezeigt werden soll.

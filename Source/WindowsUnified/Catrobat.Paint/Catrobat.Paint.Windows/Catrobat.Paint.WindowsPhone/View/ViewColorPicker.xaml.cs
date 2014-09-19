@@ -241,7 +241,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             var height = PocketPaintApplication.GetInstance().size_height_multiplication;
             var width = PocketPaintApplication.GetInstance().size_width_multiplication;
-
+            
             foreach (Object obj in GrdColorButtons.Children.Concat(GrdColorSlider.Children))
             {
                 if (obj.GetType() == typeof(Button))
