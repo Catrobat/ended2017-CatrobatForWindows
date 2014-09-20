@@ -48,11 +48,24 @@ void Basic2DRenderer::ReleaseDeviceDependentResources()
 void Basic2DRenderer::PointerPressed(D2D1_POINT_2F point)
 {
     ObjectList *objectList = ProjectDaemon::Instance()->GetProject()->GetObjectList();
-    for (int i = 0; i < objectList->GetSize(); i++)
+    for (int i = objectList->GetSize() - 1; i >= 0; i--)
     {
-        if (objectList->GetObject(i)->IsObjectHit(point))
+        Object *object = objectList->GetObject(i);
+        if (object->IsObjectHit(point))
         {
-            int x = 0;
+            for (int scriptIndex = 0; scriptIndex < object->GetScriptListSize(); scriptIndex++)
+            {
+                Script *script = object->GetScript(scriptIndex);
+                if (script->GetType() == Script::TypeOfScript::WhenScript)
+                {
+                    WhenScript *whenScript = ((WhenScript*) script);
+                    if (whenScript->GetAction() == WhenScript::Action::Tapped)
+                    {
+                        whenScript->Execute();
+                    }
+                }
+            }
+            break;
         }
     }
 }

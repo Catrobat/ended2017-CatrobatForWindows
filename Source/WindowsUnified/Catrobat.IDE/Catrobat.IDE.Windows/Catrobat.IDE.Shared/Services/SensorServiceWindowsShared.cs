@@ -4,7 +4,6 @@ using Windows.Devices.Sensors;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities;
 
-
 namespace Catrobat.IDE.WindowsShared.Services
 {
     public class SensorServiceWindowsShared : ISensorService
@@ -20,9 +19,6 @@ namespace Catrobat.IDE.WindowsShared.Services
         
         public void Start()
         {
-            //try { _microphone.Start(); }
-            //catch (Exception) { Debugger.Break(); }
-
             if (_compass != null)
             {
                 uint reportInterval = _reportIntervall;
@@ -78,100 +74,98 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public double GetAccelerationX()
         {
-            AccelerometerReading reading = _accelerometer.GetCurrentReading();
-            if(reading != null)
+            if (_accelerometer != null)
             {
-                return reading.AccelerationX;
+                AccelerometerReading reading = _accelerometer.GetCurrentReading();
+                if (reading != null)
+                {
+                    return reading.AccelerationX;
+                }
             }
-            else
-            {
-                return 0.0;
-            }
+            return 0.0;
         }
 
         public double GetAccelerationY()
         {
-            AccelerometerReading reading = _accelerometer.GetCurrentReading();
-            if (reading != null)
+            if (_accelerometer != null)
             {
-                return reading.AccelerationY;
+                AccelerometerReading reading = _accelerometer.GetCurrentReading();
+                if (reading != null)
+                {
+                    return reading.AccelerationY;
+                }
             }
-            else
-            {
-                return 0.0;
-            }
+            return 0.0;
         }
 
         public double GetAccelerationZ()
         {
-            AccelerometerReading reading = _accelerometer.GetCurrentReading();
-            if (reading != null)
+            if (_accelerometer != null)
             {
-                return reading.AccelerationZ;
+                AccelerometerReading reading = _accelerometer.GetCurrentReading();
+                if (reading != null)
+                {
+                    return reading.AccelerationZ;
+                }
             }
-            else
-            {
-                return 0.0;
-            }
+            return 0.0;
         }
 
         public double GetCompass()
         {
-            CompassReading reading = _compass.GetCurrentReading();
-            if(reading != null)
+            if (_compass != null)
             {
-                //string magneticNorth = String.Format("{0,5:0.00}", reading.HeadingMagneticNorth);
-                //if (reading.HeadingTrueNorth != null)
-                //{
-                //    string trueNorth = String.Format("{0,5:0.00}", reading.HeadingTrueNorth);
-                //}
-                return reading.HeadingMagneticNorth;
+                CompassReading reading = _compass.GetCurrentReading();
+                if (reading != null)
+                {
+                    //string magneticNorth = String.Format("{0,5:0.00}", reading.HeadingMagneticNorth);
+                    //if (reading.HeadingTrueNorth != null)
+                    //{
+                    //    string trueNorth = String.Format("{0,5:0.00}", reading.HeadingTrueNorth);
+                    //}
+                    return reading.HeadingMagneticNorth;
+                }
             }
-            else
-            {
-                return 0.0;
-            }
+            return 0.0;
         }
 
         public double GetInclinationX()
         {
-            InclinometerReading reading = _inclinometer.GetCurrentReading();
-            if (reading != null)
+            if (_inclinometer != null)
             {
-                return reading.PitchDegrees;
+                InclinometerReading reading = _inclinometer.GetCurrentReading();
+                if (reading != null)
+                {
+                    return reading.PitchDegrees;
+                }
             }
-            else
-            {
-                return 0.0;
-            }
-            //return _motion.IsDataValid ? -MathHelper.ToDegrees(_motion.CurrentValue.Attitude.Roll) : 0;
+            return 0.0;
         }
 
         public double GetInclinationY()
         {
-            InclinometerReading reading = _inclinometer.GetCurrentReading();
-            if (reading != null)
+            if (_inclinometer != null)
             {
-                return reading.RollDegrees;
+                InclinometerReading reading = _inclinometer.GetCurrentReading();
+                if (reading != null)
+                {
+                    return reading.RollDegrees;
+                }
             }
-            else
-            {
-                return 0.0;
-            }
-            //return _motion.IsDataValid ? MathHelper.ToDegrees(_motion.CurrentValue.Attitude.Pitch) : 0;
+            return 0.0;
         }
 
          public double GetInclinationZ()
         {
-            InclinometerReading reading = _inclinometer.GetCurrentReading();
-            if (reading != null)
+            if (_inclinometer != null)
             {
-                return reading.YawDegrees;
+                InclinometerReading reading = _inclinometer.GetCurrentReading();
+                if (reading != null)
+                {
+                    return reading.YawDegrees;
+                }
             }
-            else
-            {
-                return 0.0;
-            }
+            return 0.0;
         }
 
         public double GetLoudness()

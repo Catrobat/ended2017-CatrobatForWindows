@@ -277,5 +277,29 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels
             Assert.AreEqual(typeof(MainViewModel), navigationService.CurrentView);
             Assert.AreEqual(2, navigationService.PageStackCount);
         }
+
+
+        [TestMethod, TestCategory("Services")]
+        public void ToastNotificationVibrationActivatedTest()
+        {
+            var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
+            NotificationServiceTest vibraTest = new NotificationServiceTest();
+            vibraTest.ShowToastNotification("test","good vibrations coming", ToastDisplayDuration.Long, ToastTag.Default, null, true);
+            Assert.AreEqual(true,vibraTest.Vibrate);
+
+            navigationService.PageStackCount = 1;
+            navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
+            navigationService.CurrentView = typeof(MainViewModel);
+
+            var mainViewModel = new MainViewModel();
+
+            var tagEnum = ToastTag.ImportFin;
+            var toastActivatedMessage = new GenericMessage<ToastTag>(tagEnum);
+            Messenger.Default.Send(toastActivatedMessage, ViewModelMessagingToken.ToastNotificationActivated);
+
+            Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
+            Assert.AreEqual(typeof(MainViewModel), navigationService.CurrentView);
+            Assert.AreEqual(2, navigationService.PageStackCount);
+        }
     }
 }

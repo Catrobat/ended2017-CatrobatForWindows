@@ -10,16 +10,18 @@ namespace Catrobat.IDE.Core.Tests.Services
         public int SentMessageBoxes { get; set; }
         public MessageboxResult NextMessageboxResult { get; set; }
         public MessageBoxOptions LastMessageboxOption { get; set; }
+        public bool Vibrate { get; set; }
 
         public string LastNotificationTitle;
         public string LastNotificationMessage;
 
-        public void ShowToastNotification(string title, string message, 
-            ToastDisplayDuration timeTillHide, ToastTag tag = ToastTag.Default, PortableImage image = null)
+        public void ShowToastNotification(string title, string message,
+            ToastDisplayDuration timeTillHide, ToastTag tag = ToastTag.Default, PortableImage image = null, bool vibrate = false)
         {
             SentToastNotifications++;
             LastNotificationTitle = title;
             LastNotificationMessage = message;
+            Vibrate = vibrate;
         }
 
         public void ShowMessageBox(string title, string message, 

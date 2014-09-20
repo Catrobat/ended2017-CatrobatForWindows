@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "ProjectDaemon.h"
 #include "PlayerException.h"
+#include "OutOfBoundsException.h"
 
 #include <exception>
 #include <math.h>
@@ -126,11 +127,6 @@ void Object::SetLook(int index)
     m_look = GetLook(index);
     RecalculateTransformation();
 }
-
-void Object::SetWhenScript(WhenScript* whenScript)
-{
-    m_whenScript = whenScript;
-}
 #pragma endregion
 
 #pragma region RENDERING
@@ -185,7 +181,7 @@ void Object::Draw(const std::shared_ptr<DX::DeviceResources>& deviceResources)
 
     auto deviceContext = deviceResources->GetD2DDeviceContext();
     deviceContext->SetTransform(m_transformation);
-    deviceContext->Clear(ColorF(ColorF::White));
+    //deviceContext->Clear(ColorF(ColorF::White));
     deviceContext->DrawBitmap(m_look->GetBitMap(),
         RectF(0.f, 0.f, m_renderTargetSize.width, m_renderTargetSize.height));
 
@@ -273,12 +269,6 @@ Look* Object::GetCurrentLook()
 
     return m_look;
 }
-
-WhenScript* Object::GetWhenScript()
-{
-    return m_whenScript;
-}
-
 #pragma endregion
 
 #pragma region INTERNAL
@@ -308,18 +298,20 @@ void Object::RecalculateTransformation()
 
 bool Object::IsObjectHit(D2D1_POINT_2F position)
 {
-    position = Point2F(360.f, 640.f);
+    if (m_look == NULL)
+    {
+        return false;
+    }
 
-    float pressedX = m_ratio.width - m_transformation._31;
-    float pressedY = m_transformation._32 - (position.y - m_renderTargetSize.height);
-    float actualX = pressedX / m_ratio.width;
-    float actualY = pressedY / m_ratio.height;
-    float testX = position.x * m_ratio.width;
-    float testY = position.y * m_ratio.height;
-    m_renderTargetSize;
-    m_transformation;
-    m_translation;
-    float width = m_look->GetWidth();
-    float height = m_look->GetHeight();
-    return true;
+    position.x = (position.x - m_transformation._31) / m_ratio.width;
+    position.y = m_look->GetHeight() - (position.y - m_transformation._32) / m_ratio.height;
+
+    try
+    {
+        return m_look->GetPixelAlphaValue(position) != 0;
+    }
+    catch (OutOfBoundsException *e)
+    {
+        return false;
+    }
 }

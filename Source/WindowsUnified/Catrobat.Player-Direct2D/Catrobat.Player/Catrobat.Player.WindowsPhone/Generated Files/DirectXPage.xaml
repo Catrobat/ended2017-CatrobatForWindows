@@ -8,18 +8,28 @@
     mc:Ignorable="d">
 
   <SwapChainPanel x:Name="swapChainPanel">
-    <TextBlock Text="Hello from XAML!"
-               HorizontalAlignment="Right"
-               VerticalAlignment="Top"
-               FontSize="30" />
-  </SwapChainPanel>
+        <!-- Loading Project -->
+        <!--<Grid x:Name="Loading" Grid.Row="1" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ProgressRing x:Name="LoadingProject" Grid.Row="0" Grid.Column="0" Background="Transparent"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Foreground="#FFdb7100"/>
+        </Grid>-->
+    </SwapChainPanel>
 
-  <!-- Uncomment this if using the app bar in your phone application.
   <Page.BottomAppBar>
-        <CommandBar>
-            <AppBarButton Icon="Play" AutomationProperties.Name="Sample Button" 
-                            AutomationProperties.AutomationId="SampleAppBarButton" Click="AppBarButton_Click" />
+        <CommandBar x:Name="PlayerAppBar"  Height="75" VerticalAlignment="Bottom" Visibility="Collapsed">
+            <AppBarButton x:ConnectionId='1' x:Name="Restart" Label="Restart" Icon="Refresh"                               />
+            <AppBarButton x:ConnectionId='2' x:Name="Play" Label="Pause" Icon="Play"                            />
+            <AppBarButton x:ConnectionId='3' x:Name="Screenshot" Label="Screenshot" Icon="Camera"                                  />
+            <AppBarButton x:ConnectionId='4' x:Name="EnableAxes"  Label="Enable Axes"  Icon="Setting"                                   />
         </CommandBar>
-    </Page.BottomAppBar>-->
+    </Page.BottomAppBar>
 </Page>
 

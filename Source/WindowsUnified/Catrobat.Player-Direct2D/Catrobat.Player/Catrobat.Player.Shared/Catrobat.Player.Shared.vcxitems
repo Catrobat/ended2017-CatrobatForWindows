@@ -57,6 +57,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)NextLookBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Object.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ObjectList.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)OutOfBoundsException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PlaceAtBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PlayerException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PlaySoundBrick.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Content\Sample3DSceneRenderer.h" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Content\SampleFpsTextRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Content\Sample3DSceneRenderer.cpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)OutOfBoundsException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PlaceAtBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PlayerException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PlaySoundBrick.h" />
