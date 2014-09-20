@@ -29,11 +29,15 @@ namespace Catrobat_Player
 		void StartRenderLoop();
 		void StopRenderLoop();
 		
-        // Event input.
+        // Event input from the user.
         void PointerPressed(D2D1_POINT_2F point) { m_basic2dRenderer->PointerPressed(point); }
         void HardwareBackButtonPressed(
             _In_ Platform::Object^ sender, 
             Windows::Phone::UI::Input::BackPressedEventArgs ^args);
+        void RestartButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
+        void PlayButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
+        void ScreenshotButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
+        void EnableAxisButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
 
 		// IDeviceNotify
 		virtual void OnDeviceLost();

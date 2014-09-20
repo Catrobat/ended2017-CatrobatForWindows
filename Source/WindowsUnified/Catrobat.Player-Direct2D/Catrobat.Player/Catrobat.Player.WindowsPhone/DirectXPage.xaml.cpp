@@ -99,8 +99,8 @@ DirectXPage::~DirectXPage()
     m_coreInput->Dispatcher->StopProcessEvents();
 }
 
-// Saves the current state of the app for suspend and terminate events.
 //----------------------------------------------------------------------
+// Saves the current state of the app for suspend and terminate events.
 
 void DirectXPage::SaveInternalState(IPropertySet^ state)
 {
@@ -113,8 +113,8 @@ void DirectXPage::SaveInternalState(IPropertySet^ state)
     // Put code to save app state here.
 }
 
-// Loads the current state of the app for resume events.
 //----------------------------------------------------------------------
+// Loads the current state of the app for resume events.
 
 void DirectXPage::LoadInternalState(IPropertySet^ state)
 {
@@ -124,8 +124,8 @@ void DirectXPage::LoadInternalState(IPropertySet^ state)
     m_main->StartRenderLoop();
 }
 
-// Window event handlers.
 //----------------------------------------------------------------------
+// Window event handlers.
 
 void DirectXPage::OnVisibilityChanged(CoreWindow^ sender, VisibilityChangedEventArgs^ args)
 {
@@ -140,8 +140,8 @@ void DirectXPage::OnVisibilityChanged(CoreWindow^ sender, VisibilityChangedEvent
     }
 }
 
-// DisplayInformation event handlers.
 //----------------------------------------------------------------------
+// DisplayInformation event handlers.
 
 void DirectXPage::OnDpiChanged(DisplayInformation^ sender, Object^ args)
 {
@@ -203,29 +203,14 @@ void DirectXPage::OnSwapChainPanelSizeChanged(Object^ sender, SizeChangedEventAr
 
 void DirectXPage::OnRestartButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
 {
-    //TODO: implement me
+    m_main->RestartButtonClicked(sender, args);
 }
 
 //----------------------------------------------------------------------
 
 void DirectXPage::OnPlayButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
 {
-    //TODO: implement me
-
-    //if (m_playActive)
-    //{
-    //    m_playActive = false;
-    //    //m_main->PauseRequested();
-    //    PausePlay->Icon = ref new SymbolIcon(Symbol::Play);
-    //    PausePlay->Label = "Play";
-    //}
-    //else
-    //{
-    //    m_playActive = true;
-    //    //m_main->ContinueRequested();
-    //    PausePlay->Icon = ref new SymbolIcon(Symbol::Pause);
-    //    PausePlay->Label = "Pause";
-    //}
+    m_main->PlayButtonClicked(sender, args);
 }
 
 
@@ -233,12 +218,12 @@ void DirectXPage::OnPlayButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedE
 
 void DirectXPage::OnScreenshotButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
 {
-    //TODO: implement me
+    m_main->ScreenshotButtonClicked(sender, args);
 }
 
 //----------------------------------------------------------------------
 
 void DirectXPage::OnEnableAxisButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
 {
-    //TODO: implement me
+    m_main->EnableAxisButtonClicked(sender, args);
 }
