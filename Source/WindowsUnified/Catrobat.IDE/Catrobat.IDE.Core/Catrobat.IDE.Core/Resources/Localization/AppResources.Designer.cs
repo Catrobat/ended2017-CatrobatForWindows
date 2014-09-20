@@ -1988,7 +1988,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Type something.  ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add arguments to the function. ähnelt.
         /// </summary>
         public static string FormulaInterpreter_Brackets_EmptyArgument {
             get {
@@ -1997,7 +1997,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Type something.  ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type something within the brackets. ähnelt.
         /// </summary>
         public static string FormulaInterpreter_Brackets_EmptyParentheses {
             get {
@@ -2015,7 +2015,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Add a comma.  ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add missing arguments to the function. ähnelt.
         /// </summary>
         public static string FormulaInterpreter_Brackets_TooFewArguments {
             get {
@@ -2051,7 +2051,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Add a times sign.  ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add a times sign: e.g. &apos;6*ln(&apos; instead of &apos;6ln(&apos; ähnelt.
         /// </summary>
         public static string FormulaInterpreter_DoubleValue {
             get {
@@ -2123,7 +2123,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Type something.  ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type something at the left side of the operator. ähnelt.
         /// </summary>
         public static string FormulaInterpreter_Operator_LeftEmptyInfixOperator {
             get {
@@ -2132,7 +2132,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Type something.  ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type something at the right side of the operator. ähnelt.
         /// </summary>
         public static string FormulaInterpreter_Operator_RightEmptyInfixOperator {
             get {
