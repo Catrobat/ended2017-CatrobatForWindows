@@ -1276,7 +1276,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Informationen über Catrobat</value>
   </data>
   <data name="FormulaInterpreter_Error" xml:space="preserve">
-    <value>ungültige formel</value>
+    <value>ungültige Formel</value>
   </data>
   <data name="Main_TitleShareProgram" xml:space="preserve">
     <value>TEILEN</value>

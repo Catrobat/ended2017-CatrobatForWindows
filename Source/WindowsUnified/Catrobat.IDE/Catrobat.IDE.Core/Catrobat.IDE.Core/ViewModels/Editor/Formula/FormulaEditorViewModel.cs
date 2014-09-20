@@ -364,6 +364,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             base.Cleanup();
         }
 
+        public override void NavigateTo()
+        {
+            SendEvaluation();
+            base.NavigateTo();
+        }
+
         void SensorService_SensorReadingChanged(object sender, Utilities.SensorEventArgs e)
         {
             SendEvaluation();

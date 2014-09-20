@@ -210,8 +210,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
         {
             var source = (Selector) sender;
             if (source.SelectedItem == null) return;
-            _viewModel.IsAddLocalVariableButtonVisible = false;
-            _viewModel.IsAddGlobalVariableButtonVisible = false;
+            //_viewModel.IsAddLocalVariableButtonVisible = false;
+            //_viewModel.IsAddGlobalVariableButtonVisible = false;
             ShowMain();
             var data = (FormulaKey) source.SelectedItem;
             RaiseKeyPressed(data);
@@ -222,8 +222,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
         private void Pivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var parentVisible = GridMore.Visibility == Visibility.Visible && PivotMore.SelectedItem == PivotItemVariables;
-            ViewModel.IsAddLocalVariableButtonVisible = parentVisible && PivotVariables.SelectedItem == PivotItemLocalVariables;
-            ViewModel.IsAddGlobalVariableButtonVisible = parentVisible && PivotVariables.SelectedItem == PivotItemGlobalVariables;
+            //ViewModel.IsAddLocalVariableButtonVisible = parentVisible && PivotVariables.SelectedItem == PivotItemLocalVariables;
+            //ViewModel.IsAddGlobalVariableButtonVisible = parentVisible && PivotVariables.SelectedItem == PivotItemGlobalVariables;
         }
 
         //private void ButtonEvaluate_OnClick(object sender, RoutedEventArgs e)

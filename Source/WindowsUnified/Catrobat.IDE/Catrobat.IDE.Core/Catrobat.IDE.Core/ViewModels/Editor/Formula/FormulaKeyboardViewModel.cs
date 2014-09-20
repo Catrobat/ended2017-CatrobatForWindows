@@ -159,30 +159,30 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             get { return Favorites == null || Favorites.Count == 0; }
         }
 
-        private bool _isAddLocalVariableButtonVisible;
-        public bool IsAddLocalVariableButtonVisible
-        {
-            get { return _isAddLocalVariableButtonVisible; }
-            set
-            {
-                if (_isAddLocalVariableButtonVisible == value) return;
-                _isAddLocalVariableButtonVisible = value;
-                RaisePropertyChanged(() => IsAddLocalVariableButtonVisible);
-            }
-        }
+        //private bool _isAddLocalVariableButtonVisible;
+        //public bool IsAddLocalVariableButtonVisible
+        //{
+        //    get { return _isAddLocalVariableButtonVisible; }
+        //    set
+        //    {
+        //        if (_isAddLocalVariableButtonVisible == value) return;
+        //        _isAddLocalVariableButtonVisible = value;
+        //        RaisePropertyChanged(() => IsAddLocalVariableButtonVisible);
+        //    }
+        //}
 
-        private bool _isAddGlobalVariableButtonVisible;
+        //private bool _isAddGlobalVariableButtonVisible;
 
-        public bool IsAddGlobalVariableButtonVisible
-        {
-            get { return _isAddGlobalVariableButtonVisible; }
-            set
-            {
-                if (_isAddGlobalVariableButtonVisible == value) return;
-                _isAddGlobalVariableButtonVisible = value;
-                RaisePropertyChanged(() => IsAddGlobalVariableButtonVisible);
-            }
-        }
+        //public bool IsAddGlobalVariableButtonVisible
+        //{
+        //    get { return _isAddGlobalVariableButtonVisible; }
+        //    set
+        //    {
+        //        if (_isAddGlobalVariableButtonVisible == value) return;
+        //        _isAddGlobalVariableButtonVisible = value;
+        //        RaisePropertyChanged(() => IsAddGlobalVariableButtonVisible);
+        //    }
+        //}
 
         #endregion
 
@@ -323,8 +323,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
         internal void ResetViewModel()
         {
-            IsAddLocalVariableButtonVisible = false;
-            IsAddGlobalVariableButtonVisible = false;
+            //IsAddLocalVariableButtonVisible = false;
+            //IsAddGlobalVariableButtonVisible = false;
         }
     }
 }
