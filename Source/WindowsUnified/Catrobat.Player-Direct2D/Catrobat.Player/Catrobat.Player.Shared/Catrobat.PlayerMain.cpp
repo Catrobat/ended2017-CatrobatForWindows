@@ -6,11 +6,15 @@
 using namespace Catrobat_Player;
 using namespace Windows::Foundation;
 using namespace Windows::System::Threading;
+using namespace Windows::Phone::UI::Input;
 using namespace Concurrency;
 
 // Loads and initializes application assets when the application is loaded.
-Catrobat_PlayerMain::Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources) :
-m_deviceResources(deviceResources), m_pointerLocationX(0.0f), m_loadingComplete(false)
+Catrobat_PlayerMain::Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources,
+                                         Windows::UI::Xaml::Controls::CommandBar^ playerAppBar) :
+m_deviceResources(deviceResources), m_pointerLocationX(0.0f), m_loadingComplete(false),
+m_playerAppBar(playerAppBar),
+m_playerState(PlayerState::Init)
 {
     // Register to be notified if the Device is lost or recreated
     m_deviceResources->RegisterDeviceNotify(this);
@@ -67,13 +71,40 @@ void Catrobat_PlayerMain::StartRenderLoop()
         }
     });
 
+    m_playerState = PlayerState::Active;
     // Run task on a dedicated high priority background thread.
     m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
 }
 
 void Catrobat_PlayerMain::StopRenderLoop()
 {
+    m_playerState = PlayerState::Pause;
     m_renderLoopWorker->Cancel();
+}
+
+//----------------------------------------------------------------------
+
+void Catrobat_PlayerMain::HardwareBackButtonPressed(_In_ Platform::Object^ sender, BackPressedEventArgs ^args)
+{
+    if (m_playerState == PlayerState::Active)
+    {
+        // Player is in active play mode, so hitting the hardware back button
+        // will cause the game to pause and show the user the command bar.
+        
+        //m_pausePressed = true;
+        args->Handled = true;
+        m_playerState = PlayerState::Pause;
+        StopRenderLoop();
+        m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Visible;
+    }
+    else
+    {
+        // Player is in pause or init mode, so hitting the hardware back button
+        // will cause the game to terminate and bring the user back to the IDE.
+        
+        // TODO implement this functionality
+        args->Handled = false;
+    }
 }
 
 // Updates the application state once per frame.

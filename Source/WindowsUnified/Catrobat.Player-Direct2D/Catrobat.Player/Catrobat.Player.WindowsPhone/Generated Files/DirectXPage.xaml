@@ -24,7 +24,7 @@
     </SwapChainPanel>
 
   <Page.BottomAppBar>
-        <CommandBar x:Name="PlayerAppBar"  Height="75" VerticalAlignment="Bottom" Visibility="Collapsed">
+        <CommandBar Name="PlayerAppBar" Height="75" VerticalAlignment="Bottom" Visibility="Collapsed">
             <AppBarButton x:ConnectionId='1' x:Name="Restart" Label="Restart" Icon="Refresh"                               />
             <AppBarButton x:ConnectionId='2' x:Name="Play" Label="Pause" Icon="Play"                            />
             <AppBarButton x:ConnectionId='3' x:Name="Screenshot" Label="Screenshot" Icon="Camera"                                  />
