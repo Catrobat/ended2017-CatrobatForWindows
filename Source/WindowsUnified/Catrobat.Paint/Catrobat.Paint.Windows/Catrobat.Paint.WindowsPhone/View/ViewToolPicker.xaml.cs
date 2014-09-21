@@ -30,8 +30,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             this.InitializeComponent();
 
             setToolPickerLayout();
-            //MessageDialog msg = new MessageDialog(GrdToolPickerButton.Width.ToString());
-            //msg.ShowAsync();
+            MessageDialog msg = new MessageDialog(BtnBrush.Width.ToString());
+            msg.ShowAsync();
         }
 
         private void setToolPickerLayout()
@@ -39,9 +39,9 @@ namespace Catrobat.Paint.WindowsPhone.View
             var height = PocketPaintApplication.GetInstance().size_height_multiplication;
             var width = PocketPaintApplication.GetInstance().size_width_multiplication;
 
-            GrdToolPickerButton.Width = Window.Current.Bounds.Width;
-
-            foreach (Object obj in GrdToolPickerButton.Children)
+            GrdToolPickerButtonInner.Width *= width;
+            GrdToolPickerButtonOuter.Width *= width;
+            foreach (Object obj in GrdToolPickerButtonInner.Children)
             {
                 if (obj.GetType() == typeof(Button))
                 {
@@ -60,7 +60,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                                             ((Button)obj).Padding.Right * width,
                                             ((Button)obj).Padding.Bottom * height);
 
-                    //((Button)obj).FontSize *= height;
+                    ((Button)obj).FontSize *= height;
 
                     
                 }
