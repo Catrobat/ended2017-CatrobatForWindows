@@ -44,9 +44,13 @@ namespace Catrobat_Player
 		virtual void OnDeviceRestored();
 
 	private:
+        // Render depending functionality.
 		void ProcessInput();
 		void Update();
 		bool Render();
+
+        // Project depending functionality.
+        void LoadProject(bool reload);
 
 		// Cached pointer to device resources.
 		std::shared_ptr<DX::DeviceResources> m_deviceResources;
@@ -64,6 +68,8 @@ namespace Catrobat_Player
 
 		// Track current input pointer position.
 		float m_pointerLocationX;
+
+        Platform::String^ m_projectName;
 
         bool m_loadingComplete;
 

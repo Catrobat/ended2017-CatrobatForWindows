@@ -14,19 +14,17 @@ using namespace Concurrency;
 
 Catrobat_PlayerMain::Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources,
                                          Windows::UI::Xaml::Controls::CommandBar^ playerAppBar) :
-m_deviceResources(deviceResources), m_pointerLocationX(0.0f), m_loadingComplete(false),
+m_deviceResources(deviceResources), 
+m_pointerLocationX(0.0f),
+m_loadingComplete(false),
 m_playerAppBar(playerAppBar),
-m_playerState(PlayerState::Init)
+m_playerState(PlayerState::Init),
+m_projectName("testTapp2")
 {
     // Register to be notified if the Device is lost or recreated
     m_deviceResources->RegisterDeviceNotify(this);
-
-    // Initialize Project loading and parsing.
-    ProjectDaemon::Instance()->OpenProject("testTapp2").then([this](task<bool> t)
-    {
-        m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(m_deviceResources));
-        m_loadingComplete = true;
-    });
+    
+    LoadProject(false);
     m_fpsTextRenderer = std::unique_ptr<SampleFpsTextRenderer>(new SampleFpsTextRenderer(m_deviceResources));
 
     // TODO: Change the timer settings if you want something other than the default variable timestep mode.
@@ -43,6 +41,19 @@ Catrobat_PlayerMain::~Catrobat_PlayerMain()
 {
     // Deregister device notification
     m_deviceResources->RegisterDeviceNotify(nullptr);
+}
+
+//----------------------------------------------------------------------
+// Initialize Project loading and parsing.
+
+void Catrobat_PlayerMain::LoadProject(bool reload)
+{
+    ProjectDaemon::Instance()->OpenProject(m_projectName).then([this](task<bool> t)
+    {
+        m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(m_deviceResources));
+        m_loadingComplete = true;
+    });
+  
 }
 
 //----------------------------------------------------------------------
@@ -103,6 +114,7 @@ void Catrobat_PlayerMain::HardwareBackButtonPressed(_In_ Platform::Object^ sende
         args->Handled = true;
 
         critical_section::scoped_lock lock(m_criticalSection);
+
         m_playerState = PlayerState::Pause;
         StopRenderLoop();
         m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Visible;
@@ -121,16 +133,25 @@ void Catrobat_PlayerMain::HardwareBackButtonPressed(_In_ Platform::Object^ sende
 
 void Catrobat_PlayerMain::RestartButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
 {
-    // TODO implement me
+    critical_section::scoped_lock lock(m_criticalSection);
+
+    StopRenderLoop();
+    m_playerState = PlayerState::Init;
+
+    m_loadingComplete = false;
+    ProjectDaemon::Instance()->ReInit();
+    LoadProject(true);
+    //m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+    StartRenderLoop();
 }
 
 //----------------------------------------------------------------------
 
 void Catrobat_PlayerMain::PlayButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
 {
-    m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
-
     critical_section::scoped_lock lock(m_criticalSection);
+
+    m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
     m_playerState = PlayerState::Active;
     StartRenderLoop();
 }
@@ -200,7 +221,7 @@ bool Catrobat_PlayerMain::Render()
     context->OMSetRenderTargets(1, targets, m_deviceResources->GetDepthStencilView());
 
     // Clear the back buffer and depth stencil view.
-    context->ClearRenderTargetView(m_deviceResources->GetBackBufferRenderTargetView(), DirectX::Colors::CornflowerBlue);
+    context->ClearRenderTargetView(m_deviceResources->GetBackBufferRenderTargetView(), DirectX::Colors::Brown);
     context->ClearDepthStencilView(m_deviceResources->GetDepthStencilView(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
     // Render the scene objects.
