@@ -82,6 +82,10 @@
                       Label="{Binding Resources.Editor_Redo, 
                       Source={StaticResource LocalizedStrings}}"
                       Command="{Binding RedoCommand}"/>
+        <AppBarButton Icon="Help" 
+                      Label="{Binding Resources.Editor_Help, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding ShowErrorPressedCommand}"/>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
         <AppBarButton Label="{Binding SensorButtonLabel}"

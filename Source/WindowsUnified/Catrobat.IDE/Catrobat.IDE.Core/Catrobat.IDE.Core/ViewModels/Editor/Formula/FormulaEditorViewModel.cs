@@ -177,23 +177,16 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
             if (ParsingError != null)
             {
-                // FormulaEditorKey key as parameter
+                // FormulaEditorKey key as parameter for this function
                 //if (key != FormulaEditorKey.Delete)
                 //{
                 //    SelectionStart = ParsingError.Index;
                 //    SelectionLength = ParsingError.Length;
-                //}
-
-                var errorMessage = ParsingError.Message;
-
+                //}      
                 result = new FormulaEvaluationResult
                 {
-                    Error = errorMessage
+                    Error = AppResources.FormulaInterpreter_Error
                 };
-                //result = new FormulaEvaluationResult
-                //{
-                //    Error = AppResources.FormulaInterpreter_Error
-                //};
             }
             else
             {
@@ -205,35 +198,35 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                     Value = stringValue,
                 };
             }
-
             Messenger.Default.Send(result, ViewModelMessagingToken.FormulaEvaluated);
         }
 
-
-        //public RelayCommand EvaluatePressedCommand { get; private set; }
-        //private void EvaluatePressedAction()
-        //{
-        //    var value = FormulaEvaluator.Evaluate(Formula);
-        //    var message = value == null ? string.Empty : value.ToString();
-        //    ServiceLocator.NotifictionService.ShowToastNotification(
-        //        "", message, ToastDisplayDuration.Long);
-        //}
-
-        //public RelayCommand ShowErrorPressedCommand { get; private set; }
-        //private void ShowErrorPressedAction()
-        //{
-        //    SelectionStart = ParsingError.Index;
-        //    SelectionLength = ParsingError.Length;
-        //    ServiceLocator.NotifictionService.ShowToastNotification(
-        //        title: "",
-        //        message: ParsingError.Message,
-        //        timeTillHide: ToastDisplayDuration.Long);
-        //}
+        public RelayCommand ShowErrorPressedCommand { get; private set; }
+        private void ShowErrorPressedAction()
+        {
+            if (SelectionStart == ParsingError.Index && CaretIndex != ParsingError.Index)
+            {
+                // to move caret to ParsingError.Index after showError --> user moved caret --> showError
+                CaretIndex = ParsingError.Index;
+            }
+            else
+            {
+                SelectionStart = ParsingError.Index;
+            }
+            SelectionLength = ParsingError.Length;
+            var errorMessage = ParsingError.Message;
+            FormulaEvaluationResult result = new FormulaEvaluationResult
+            {
+                Error = errorMessage
+            };
+            Messenger.Default.Send(result, ViewModelMessagingToken.FormulaEvaluated);
+        }
 
         public RelayCommand UndoCommand { get; private set; }
         private void UndoAction()
         {
             _editor.Undo();
+            SendEvaluation();
         }
 
         public RelayCommand RedoCommand { get; private set; }
@@ -291,6 +284,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             return CanRedo == true;
         }
 
+        private bool ShowErrorPressedCommand_CanExecute()
+        {
+            return HasError == true;
+        }
+
         #endregion
 
         #region MessageActions
@@ -310,8 +308,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         public FormulaEditorViewModel()
         {
             KeyPressedCommand = new RelayCommand<FormulaKeyEventArgs>(KeyPressedAction);
-            //EvaluatePressedCommand = new RelayCommand(EvaluatePressedAction);
-            //ShowErrorPressedCommand = new RelayCommand(ShowErrorPressedAction);
+            ShowErrorPressedCommand = new RelayCommand(ShowErrorPressedAction, ShowErrorPressedCommand_CanExecute);
             UndoCommand = new RelayCommand(UndoAction, UndoCommand_CanExecute);
             RedoCommand = new RelayCommand(RedoAction, RedoCommand_CanExecute);
             SensorCommand = new RelayCommand(SensorAction);
@@ -339,7 +336,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                     RedoCommand.RaiseCanExecuteChanged();
                 }
                 if (e.PropertyName == GetPropertyName(() => _editor.CanDelete)) RaisePropertyChanged(() => CanDelete);
-                if (e.PropertyName == GetPropertyName(() => _editor.HasError)) RaisePropertyChanged(() => HasError);
+                if (e.PropertyName == GetPropertyName(() => _editor.HasError))
+                {
+                    RaisePropertyChanged(() => HasError);
+                    ShowErrorPressedCommand.RaiseCanExecuteChanged();
+                }
                 if (e.PropertyName == GetPropertyName(() => _editor.HasError)) RaisePropertyChanged(() => CanEvaluate);
                 if (e.PropertyName == GetPropertyName(() => _editor.ParsingError)) RaisePropertyChanged(() => ParsingError);
             };

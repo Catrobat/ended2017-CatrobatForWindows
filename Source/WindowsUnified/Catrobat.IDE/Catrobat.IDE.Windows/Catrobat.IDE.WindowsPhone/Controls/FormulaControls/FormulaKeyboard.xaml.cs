@@ -25,17 +25,17 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
 
         #region Dependency properties
 
-        public static readonly DependencyProperty ProjectProperty = DependencyProperty.Register(
-            name: "Project",
+        public static readonly DependencyProperty ProgramProperty = DependencyProperty.Register(
+            name: "Program",
             propertyType: typeof(Program),
             ownerType: typeof(FormulaKeyboard),
-            typeMetadata: new PropertyMetadata(null, (d, e) => ((FormulaKeyboard)d).ProjectChanged(e)));
+            typeMetadata: new PropertyMetadata(null, (d, e) => ((FormulaKeyboard)d).ProgramChanged(e)));
         public Program Project
         {
-            get { return (Program) GetValue(ProjectProperty); }
-            set { SetValue(ProjectProperty, value); }
+            get { return (Program)GetValue(ProgramProperty); }
+            set { SetValue(ProgramProperty, value); }
         }
-        private void ProjectChanged(DependencyPropertyChangedEventArgs e)
+        private void ProgramChanged(DependencyPropertyChangedEventArgs e)
         {
         }
 
@@ -143,12 +143,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
         //    if (EvaluatePressed != null) EvaluatePressed.Invoke();
         //}
 
-        //public ShowErrorPressed ShowErrorPressed;
-        //private void RaiseShowErrorPressed()
-        //{
-        //    if (ShowErrorPressed != null) ShowErrorPressed.Invoke();
-        //}
-
         #endregion
 
         public FormulaKeyboard()
@@ -229,11 +223,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
         //private void ButtonEvaluate_OnClick(object sender, RoutedEventArgs e)
         //{
         //    RaiseEvaluatePressed();
-        //}
-
-        //private void ButtonError_OnClick(object sender, RoutedEventArgs e)
-        //{
-        //    RaiseShowErrorPressed();
         //}
     }
 }

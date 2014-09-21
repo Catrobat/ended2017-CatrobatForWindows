@@ -1338,4 +1338,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   <data name="Import_FileNotFoundText" xml:space="preserve">
     <value>Die angegebene Datei wurde leider nicht gefunden.</value>
   </data>
+  <data name="Editor_Help" xml:space="preserve">
+    <value>Fehlerhilfe</value>
+  </data>
 </root>

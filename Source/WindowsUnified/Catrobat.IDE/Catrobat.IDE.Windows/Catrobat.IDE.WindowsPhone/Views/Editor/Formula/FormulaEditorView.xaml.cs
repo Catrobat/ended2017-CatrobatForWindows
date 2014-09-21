@@ -32,8 +32,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
             
             this.FormulaViewerMain.DoubleTap += FormulaViewer_DoubleTap;
             this.FormulaKeyboard.KeyPressed += KeyPressed;
-            //this.FormulaKeyboard.EvaluatePressed += EvaluatePressed;
-            //this.FormulaKeyboard.ShowErrorPressed += ShowErrorPressed;
 
             Loaded += FormulaEditorView_OnLoaded;
             Unloaded += FormulaEditorView_OnUnloaded;
@@ -41,7 +39,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
 
         private void FormulaEditorView_OnLoaded(object sender, RoutedEventArgs e)
         {
-
             this.FormulaViewerMain.SetBinding(FormulaViewer.TokensProperty, new Binding { Path = new PropertyPath("Tokens"), Mode = BindingMode.OneWay });
             this.FormulaViewerMain.SetBinding(FormulaViewer.CaretIndexProperty, new Binding { Path = new PropertyPath("CaretIndex"), Mode = BindingMode.TwoWay });
             this.FormulaViewerMain.SetBinding(FormulaViewer.SelectionStartProperty, new Binding { Path = new PropertyPath("SelectionStart"), Mode = BindingMode.TwoWay });
@@ -49,7 +46,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
             this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.CanDeleteProperty, new Binding { Path = new PropertyPath("CanDelete") });
             this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.CanEvaluateProperty, new Binding { Path = new PropertyPath("CanEvaluate") });
             this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.HasErrorProperty, new Binding { Path = new PropertyPath("HasError") });
-            this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.ProjectProperty, new Binding { Path = new PropertyPath("CurrentProgram") });
+            this.FormulaKeyboard.SetBinding(Controls.FormulaControls.FormulaKeyboard.ProgramProperty, new Binding { Path = new PropertyPath("CurrentProgram") });
             
             //_viewModel.PropertyChanged += ViewModel_OnPropertyChanged;
         }
@@ -63,7 +60,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
             this.FormulaKeyboard.ClearValue(Controls.FormulaControls.FormulaKeyboard.CanDeleteProperty);
             this.FormulaKeyboard.ClearValue(Controls.FormulaControls.FormulaKeyboard.CanEvaluateProperty);
             this.FormulaKeyboard.ClearValue(Controls.FormulaControls.FormulaKeyboard.HasErrorProperty);
-            this.FormulaKeyboard.ClearValue(Controls.FormulaControls.FormulaKeyboard.ProjectProperty);
+            this.FormulaKeyboard.ClearValue(Controls.FormulaControls.FormulaKeyboard.ProgramProperty);
 
             //_viewModel.PropertyChanged -= ViewModel_OnPropertyChanged;
         }
@@ -158,16 +155,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
         {
             _viewModel.KeyPressedCommand.Execute(e);
         }
-
-        //private void EvaluatePressed()
-        //{
-        //    _viewModel.EvaluatePressedCommand.Execute(null);
-        //}
-
-        //private void ShowErrorPressed()
-        //{
-        //    _viewModel.ShowErrorPressedCommand.Execute(null);
-        //}
 
         private bool _firstBackPressed = true;
         //protected override void OnBackKeyPress(CancelEventArgs e)
