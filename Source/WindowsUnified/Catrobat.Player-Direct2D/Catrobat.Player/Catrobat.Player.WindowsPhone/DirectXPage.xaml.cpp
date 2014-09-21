@@ -22,8 +22,11 @@ using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
+using namespace Windows::Phone::UI::Input;
 using namespace concurrency;
 using namespace D2D1;
+
+//----------------------------------------------------------------------
 
 DirectXPage::DirectXPage() :
 m_windowVisible(true),
@@ -54,6 +57,10 @@ m_coreInput(nullptr)
     swapChainPanel->SizeChanged +=
         ref new SizeChangedEventHandler(this, &DirectXPage::OnSwapChainPanelSizeChanged);
 
+    // register hardware back button event
+    HardwareButtons::BackPressed +=
+        ref new EventHandler<BackPressedEventArgs^>(this, &DirectXPage::OnHardwareBackButtonPressed);
+
     // At this point we have access to the device. 
     // We can create the device-dependent resources.
     m_deviceResources = std::make_shared<DX::DeviceResources>();
@@ -79,9 +86,11 @@ m_coreInput(nullptr)
     // Run task on a dedicated high priority background thread.
     m_inputLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
 
-    m_main = std::unique_ptr<Catrobat_PlayerMain>(new Catrobat_PlayerMain(m_deviceResources));
+    m_main = std::unique_ptr<Catrobat_PlayerMain>(new Catrobat_PlayerMain(m_deviceResources, PlayerAppBar));
     m_main->StartRenderLoop();
 }
+
+//----------------------------------------------------------------------
 
 DirectXPage::~DirectXPage()
 {
@@ -90,7 +99,9 @@ DirectXPage::~DirectXPage()
     m_coreInput->Dispatcher->StopProcessEvents();
 }
 
+//----------------------------------------------------------------------
 // Saves the current state of the app for suspend and terminate events.
+
 void DirectXPage::SaveInternalState(IPropertySet^ state)
 {
     critical_section::scoped_lock lock(m_main->GetCriticalSection());
@@ -102,7 +113,9 @@ void DirectXPage::SaveInternalState(IPropertySet^ state)
     // Put code to save app state here.
 }
 
+//----------------------------------------------------------------------
 // Loads the current state of the app for resume events.
+
 void DirectXPage::LoadInternalState(IPropertySet^ state)
 {
     // Put code to load app state here.
@@ -111,6 +124,7 @@ void DirectXPage::LoadInternalState(IPropertySet^ state)
     m_main->StartRenderLoop();
 }
 
+//----------------------------------------------------------------------
 // Window event handlers.
 
 void DirectXPage::OnVisibilityChanged(CoreWindow^ sender, VisibilityChangedEventArgs^ args)
@@ -126,6 +140,7 @@ void DirectXPage::OnVisibilityChanged(CoreWindow^ sender, VisibilityChangedEvent
     }
 }
 
+//----------------------------------------------------------------------
 // DisplayInformation event handlers.
 
 void DirectXPage::OnDpiChanged(DisplayInformation^ sender, Object^ args)
@@ -135,6 +150,8 @@ void DirectXPage::OnDpiChanged(DisplayInformation^ sender, Object^ args)
     m_main->CreateWindowSizeDependentResources();
 }
 
+//----------------------------------------------------------------------
+
 void DirectXPage::OnOrientationChanged(DisplayInformation^ sender, Object^ args)
 {
     critical_section::scoped_lock lock(m_main->GetCriticalSection());
@@ -142,6 +159,7 @@ void DirectXPage::OnOrientationChanged(DisplayInformation^ sender, Object^ args)
     m_main->CreateWindowSizeDependentResources();
 }
 
+//----------------------------------------------------------------------
 
 void DirectXPage::OnDisplayContentsInvalidated(DisplayInformation^ sender, Object^ args)
 {
@@ -149,10 +167,21 @@ void DirectXPage::OnDisplayContentsInvalidated(DisplayInformation^ sender, Objec
     m_deviceResources->ValidateDevice();
 }
 
+//----------------------------------------------------------------------
+
 void DirectXPage::OnPointerPressed(Object^ sender, PointerEventArgs^ e)
 {
     m_main->PointerPressed(Point2F(e->CurrentPoint->Position.X, e->CurrentPoint->Position.Y));
 }
+
+//----------------------------------------------------------------------
+
+void DirectXPage::OnHardwareBackButtonPressed(_In_ Platform::Object^ sender, BackPressedEventArgs ^args)
+{
+    m_main->HardwareBackButtonPressed(sender, args);
+}
+
+//----------------------------------------------------------------------
 
 void DirectXPage::OnCompositionScaleChanged(SwapChainPanel^ sender, Object^ args)
 {
@@ -160,6 +189,8 @@ void DirectXPage::OnCompositionScaleChanged(SwapChainPanel^ sender, Object^ args
     m_deviceResources->SetCompositionScale(sender->CompositionScaleX, sender->CompositionScaleY);
     m_main->CreateWindowSizeDependentResources();
 }
+
+//----------------------------------------------------------------------
 
 void DirectXPage::OnSwapChainPanelSizeChanged(Object^ sender, SizeChangedEventArgs^ e)
 {
@@ -172,29 +203,14 @@ void DirectXPage::OnSwapChainPanelSizeChanged(Object^ sender, SizeChangedEventAr
 
 void DirectXPage::OnRestartButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
 {
-    //TODO: implement me
+    m_main->RestartButtonClicked(sender, args);
 }
 
 //----------------------------------------------------------------------
 
 void DirectXPage::OnPlayButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
 {
-    //TODO: implement me
-
-    //if (m_playActive)
-    //{
-    //    m_playActive = false;
-    //    //m_main->PauseRequested();
-    //    PausePlay->Icon = ref new SymbolIcon(Symbol::Play);
-    //    PausePlay->Label = "Play";
-    //}
-    //else
-    //{
-    //    m_playActive = true;
-    //    //m_main->ContinueRequested();
-    //    PausePlay->Icon = ref new SymbolIcon(Symbol::Pause);
-    //    PausePlay->Label = "Pause";
-    //}
+    m_main->PlayButtonClicked(sender, args);
 }
 
 
@@ -202,12 +218,12 @@ void DirectXPage::OnPlayButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedE
 
 void DirectXPage::OnScreenshotButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
 {
-    //TODO: implement me
+    m_main->ScreenshotButtonClicked(sender, args);
 }
 
 //----------------------------------------------------------------------
 
 void DirectXPage::OnEnableAxisButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
 {
-    //TODO: implement me
+    m_main->EnableAxisButtonClicked(sender, args);
 }

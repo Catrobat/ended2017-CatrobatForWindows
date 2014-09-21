@@ -177,11 +177,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
 
             if (ParsingError != null)
             {
-                result = new FormulaEvaluationResult
-                {
-                    Error = AppResources.FormulaInterpreter_Error
-                };
-
                 // FormulaEditorKey key as parameter
                 //if (key != FormulaEditorKey.Delete)
                 //{
@@ -189,11 +184,15 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 //    SelectionLength = ParsingError.Length;
                 //}
 
-                //var errorMessage = ParsingError.Message;
+                var errorMessage = ParsingError.Message;
 
+                result = new FormulaEvaluationResult
+                {
+                    Error = errorMessage
+                };
                 //result = new FormulaEvaluationResult
                 //{
-                //    Error = errorMessage
+                //    Error = AppResources.FormulaInterpreter_Error
                 //};
             }
             else
@@ -362,6 +361,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             _editor.ResetViewModel();
             _keyboardViewModel.ResetViewModel();
             base.Cleanup();
+        }
+
+        public override void NavigateTo()
+        {
+            SendEvaluation();
+            base.NavigateTo();
         }
 
         void SensorService_SensorReadingChanged(object sender, Utilities.SensorEventArgs e)

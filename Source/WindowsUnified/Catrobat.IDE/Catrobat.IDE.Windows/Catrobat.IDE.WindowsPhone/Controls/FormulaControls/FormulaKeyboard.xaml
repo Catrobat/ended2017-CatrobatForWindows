@@ -309,7 +309,9 @@
         <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Functions, Source={StaticResource LocalizedStrings}}">
           <ListView ItemsSource="{StaticResource KeysFunctions}"  SelectionChanged="ListBox_OnSelectionChanged" />
         </PivotItem>
-        <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Operators, Source={StaticResource LocalizedStrings}}"/>
+        <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Operators, Source={StaticResource LocalizedStrings}}">
+          <ListView ItemsSource="{StaticResource KeysOperators}"  SelectionChanged="ListBox_OnSelectionChanged" />
+        </PivotItem>  
         <PivotItem Margin="5 -5 5 5" Header="{Binding Resources.FormulaKeyboard_Constants, Source={StaticResource LocalizedStrings}}">
           <ListView ItemsSource="{StaticResource KeysConstants}"  SelectionChanged="ListBox_OnSelectionChanged" />
         </PivotItem>

@@ -943,16 +943,16 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Add a comma or times sign.</value>
   </data>
   <data name="FormulaInterpreter_Brackets_EmptyArgument" xml:space="preserve">
-    <value>Type something. </value>
+    <value>Add arguments to the function.</value>
   </data>
   <data name="FormulaInterpreter_Brackets_EmptyParentheses" xml:space="preserve">
-    <value>Type something. </value>
+    <value>Type something within the brackets.</value>
   </data>
   <data name="FormulaInterpreter_Brackets_NonArgumentParameterSeparator" xml:space="preserve">
     <value>Remove the comma. </value>
   </data>
   <data name="FormulaInterpreter_Brackets_TooFewArguments" xml:space="preserve">
-    <value>Add a comma. </value>
+    <value>Add missing arguments to the function.</value>
   </data>
   <data name="FormulaInterpreter_Brackets_TooManyArguments" xml:space="preserve">
     <value>Remove the superfluous argument(s). </value>
@@ -964,7 +964,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Add the missing closing parenthesis. </value>
   </data>
   <data name="FormulaInterpreter_DoubleValue" xml:space="preserve">
-    <value>Add a times sign. </value>
+    <value>Add a times sign: e.g. '6*ln(' instead of '6ln('</value>
   </data>
   <data name="FormulaInterpreter_Function_Empty" xml:space="preserve">
     <value>Add an opening parenthesis.</value>
@@ -985,10 +985,10 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Type something. </value>
   </data>
   <data name="FormulaInterpreter_Operator_LeftEmptyInfixOperator" xml:space="preserve">
-    <value>Type something. </value>
+    <value>Type something at the left side of the operator.</value>
   </data>
   <data name="FormulaInterpreter_Operator_RightEmptyInfixOperator" xml:space="preserve">
-    <value>Type something. </value>
+    <value>Type something at the right side of the operator.</value>
   </data>
   <data name="Editor_Redo" xml:space="preserve">
     <value>Redo</value>

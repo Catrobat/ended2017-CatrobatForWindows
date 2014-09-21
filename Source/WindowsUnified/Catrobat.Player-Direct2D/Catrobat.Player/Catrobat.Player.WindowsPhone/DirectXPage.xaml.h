@@ -46,6 +46,7 @@ namespace Catrobat_Player
 
 		// Independent input handling functions.
 		void OnPointerPressed(Platform::Object^ sender, Windows::UI::Core::PointerEventArgs^ e);
+        void OnHardwareBackButtonPressed(_In_ Platform::Object^ sender, Windows::Phone::UI::Input::BackPressedEventArgs ^args);
 
         // Bottom CommandBar handlers
         void OnRestartButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);

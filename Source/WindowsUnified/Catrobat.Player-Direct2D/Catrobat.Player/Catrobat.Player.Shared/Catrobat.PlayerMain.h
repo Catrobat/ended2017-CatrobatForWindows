@@ -9,16 +9,35 @@
 // Renders Direct2D and 3D content on the screen.
 namespace Catrobat_Player
 {
+    enum class PlayerState
+    {
+        Active,
+        Pause,
+        Init,
+    };
+
 	class Catrobat_PlayerMain : public DX::IDeviceNotify
 	{
 	public:
-		Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources);
+        Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources, 
+                            Windows::UI::Xaml::Controls::CommandBar^ playerAppBar);
 		~Catrobat_PlayerMain();
 		void CreateWindowSizeDependentResources();
-        void PointerPressed(D2D1_POINT_2F point) { m_basic2dRenderer->PointerPressed(point); }
+        Concurrency::critical_section& GetCriticalSection() { return m_criticalSection; }
+        
+        // Render functionality.
 		void StartRenderLoop();
 		void StopRenderLoop();
-		Concurrency::critical_section& GetCriticalSection() { return m_criticalSection; }
+		
+        // Event input from the user.
+        void PointerPressed(D2D1_POINT_2F point) { m_basic2dRenderer->PointerPressed(point); }
+        void HardwareBackButtonPressed(
+            _In_ Platform::Object^ sender, 
+            Windows::Phone::UI::Input::BackPressedEventArgs ^args);
+        void RestartButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
+        void PlayButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
+        void ScreenshotButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
+        void EnableAxisButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
 
 		// IDeviceNotify
 		virtual void OnDeviceLost();
@@ -47,5 +66,11 @@ namespace Catrobat_Player
 		float m_pointerLocationX;
 
         bool m_loadingComplete;
+
+        PlayerState m_playerState;
+
+        Windows::UI::Xaml::Controls::CommandBar^ m_playerAppBar;
 	};
-}
+
+    
+};

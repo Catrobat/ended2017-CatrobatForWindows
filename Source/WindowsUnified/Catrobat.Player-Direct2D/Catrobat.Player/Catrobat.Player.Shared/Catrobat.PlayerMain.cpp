@@ -6,11 +6,17 @@
 using namespace Catrobat_Player;
 using namespace Windows::Foundation;
 using namespace Windows::System::Threading;
+using namespace Windows::Phone::UI::Input;
 using namespace Concurrency;
 
+//----------------------------------------------------------------------
 // Loads and initializes application assets when the application is loaded.
-Catrobat_PlayerMain::Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources) :
-m_deviceResources(deviceResources), m_pointerLocationX(0.0f), m_loadingComplete(false)
+
+Catrobat_PlayerMain::Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources,
+                                         Windows::UI::Xaml::Controls::CommandBar^ playerAppBar) :
+m_deviceResources(deviceResources), m_pointerLocationX(0.0f), m_loadingComplete(false),
+m_playerAppBar(playerAppBar),
+m_playerState(PlayerState::Init)
 {
     // Register to be notified if the Device is lost or recreated
     m_deviceResources->RegisterDeviceNotify(this);
@@ -31,18 +37,24 @@ m_deviceResources(deviceResources), m_pointerLocationX(0.0f), m_loadingComplete(
     */
 }
 
+//----------------------------------------------------------------------
+
 Catrobat_PlayerMain::~Catrobat_PlayerMain()
 {
     // Deregister device notification
     m_deviceResources->RegisterDeviceNotify(nullptr);
 }
 
+//----------------------------------------------------------------------
 // Updates application state when the window size changes (e.g. device orientation change)
+
 void Catrobat_PlayerMain::CreateWindowSizeDependentResources()
 {
     // TODO: Replace this with the size-dependent initialization of your app's content.
     m_basic2dRenderer->CreateWindowSizeDependentResources();
 }
+
+//----------------------------------------------------------------------
 
 void Catrobat_PlayerMain::StartRenderLoop()
 {
@@ -67,16 +79,79 @@ void Catrobat_PlayerMain::StartRenderLoop()
         }
     });
 
+    m_playerState = PlayerState::Active;
     // Run task on a dedicated high priority background thread.
     m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
 }
 
+//----------------------------------------------------------------------
+
 void Catrobat_PlayerMain::StopRenderLoop()
 {
+    m_playerState = PlayerState::Pause;
     m_renderLoopWorker->Cancel();
 }
 
+//----------------------------------------------------------------------
+
+void Catrobat_PlayerMain::HardwareBackButtonPressed(_In_ Platform::Object^ sender, BackPressedEventArgs ^args)
+{
+    if (m_playerState == PlayerState::Active)
+    {
+        // Player is in active play mode, so hitting the hardware back button
+        // will cause the game to pause and show the user the command bar.
+        args->Handled = true;
+
+        critical_section::scoped_lock lock(m_criticalSection);
+        m_playerState = PlayerState::Pause;
+        StopRenderLoop();
+        m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Visible;
+    }
+    else
+    {
+        // Player is in pause or init mode, so hitting the hardware back button
+        // will cause the game to terminate and bring the user back to the IDE.
+        
+        // TODO implement this functionality
+        args->Handled = false;
+    }
+}
+
+//----------------------------------------------------------------------
+
+void Catrobat_PlayerMain::RestartButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+{
+    // TODO implement me
+}
+
+//----------------------------------------------------------------------
+
+void Catrobat_PlayerMain::PlayButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+{
+    m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+
+    critical_section::scoped_lock lock(m_criticalSection);
+    m_playerState = PlayerState::Active;
+    StartRenderLoop();
+}
+
+//----------------------------------------------------------------------
+
+void Catrobat_PlayerMain::ScreenshotButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+{
+    // TODO implement me
+}
+
+//----------------------------------------------------------------------
+
+void Catrobat_PlayerMain::EnableAxisButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+{
+    // TODO implement me
+}
+
+//----------------------------------------------------------------------
 // Updates the application state once per frame.
+ 
 void Catrobat_PlayerMain::Update()
 {
     ProcessInput();
@@ -93,15 +168,19 @@ void Catrobat_PlayerMain::Update()
     });
 }
 
+//----------------------------------------------------------------------
 // Process all input from the user before updating game state
+
 void Catrobat_PlayerMain::ProcessInput()
 {
     // TODO: Add per frame input handling here.
     //m_sceneRenderer->TrackingUpdate(m_pointerLocationX);
 }
 
+//----------------------------------------------------------------------
 // Renders the current frame according to the current application state.
 // Returns true if the frame was rendered and is ready to be displayed.
+
 bool Catrobat_PlayerMain::Render()
 {
     // Don't try to render anything before the first Update.
@@ -135,7 +214,9 @@ bool Catrobat_PlayerMain::Render()
     return true;
 }
 
+//----------------------------------------------------------------------
 // Notifies renderers that device resources need to be released.
+
 void Catrobat_PlayerMain::OnDeviceLost()
 {
     if (m_loadingComplete)
@@ -145,7 +226,10 @@ void Catrobat_PlayerMain::OnDeviceLost()
     m_fpsTextRenderer->ReleaseDeviceDependentResources();
 }
 
+
+//----------------------------------------------------------------------
 // Notifies renderers that device resources may now be recreated.
+
 void Catrobat_PlayerMain::OnDeviceRestored()
 {
     if (m_loadingComplete)

@@ -919,16 +919,16 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Füge einen Beistrich oder ein Malzeichen hinzu. </value>
   </data>
   <data name="FormulaInterpreter_Brackets_EmptyArgument" xml:space="preserve">
-    <value>Schreibe etwas. </value>
+    <value>Füge der Funktion Argumente hinzu.</value>
   </data>
   <data name="FormulaInterpreter_Brackets_EmptyParentheses" xml:space="preserve">
-    <value>Schreibe etwas. </value>
+    <value>Schreibe etwas in die Klammern.</value>
   </data>
   <data name="FormulaInterpreter_Brackets_NonArgumentParameterSeparator" xml:space="preserve">
     <value>Entferne den Strichpunkt. </value>
   </data>
   <data name="FormulaInterpreter_Brackets_TooFewArguments" xml:space="preserve">
-    <value>Füge einen Strichpunkt hinzu. </value>
+    <value>Füge der Funktion fehlende Argumente hinzu.</value>
   </data>
   <data name="FormulaInterpreter_Brackets_TooManyArguments" xml:space="preserve">
     <value>Entferne die überflüssigen Argumente. </value>
@@ -940,7 +940,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Füge die fehlende schließende runde Klammer hinzu. </value>
   </data>
   <data name="FormulaInterpreter_DoubleValue" xml:space="preserve">
-    <value>Füge ein Malzeichen hinzu.</value>
+    <value>Füge ein Malzeichen hinzu: z.B. '6*ln(' statt '6ln('</value>
   </data>
   <data name="FormulaInterpreter_Function_Empty" xml:space="preserve">
     <value>Füge eine öffnende runde Klammer hinzu.</value>
@@ -961,10 +961,10 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Schreibe etwas. </value>
   </data>
   <data name="FormulaInterpreter_Operator_LeftEmptyInfixOperator" xml:space="preserve">
-    <value>Schreibe etwas. </value>
+    <value>Schreibe etwas auf die linke Seite des Operators.</value>
   </data>
   <data name="FormulaInterpreter_Operator_RightEmptyInfixOperator" xml:space="preserve">
-    <value>Schreibe etwas. </value>
+    <value>Schreibe etwas auf die rechte Seite des Operators.</value>
   </data>
   <data name="App_FlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
@@ -1276,7 +1276,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Informationen über Catrobat</value>
   </data>
   <data name="FormulaInterpreter_Error" xml:space="preserve">
-    <value>ungültige formel</value>
+    <value>ungültige Formel</value>
   </data>
   <data name="Main_TitleShareProgram" xml:space="preserve">
     <value>TEILEN</value>

@@ -9,7 +9,7 @@ namespace Catrobat.IDE.Core.Tests.Services
         private bool _isRunning = false;
         private readonly Random _random = new Random();
 
-        public event CompassReadingChangedEventHandler CompassReadingChanged;
+        public event SensorReadingChangedEventHandler SensorReadingChanged;
 
         public void Start()
         {
