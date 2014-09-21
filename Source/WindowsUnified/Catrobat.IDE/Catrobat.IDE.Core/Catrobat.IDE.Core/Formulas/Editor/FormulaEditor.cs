@@ -328,12 +328,23 @@ namespace Catrobat.IDE.Core.Formulas.Editor
 
         private void PushState(Stack<EditorState> stack)
         {
-            stack.Push(new EditorState(Tokens, CaretIndex, SelectionLength));
+            try
+            {
+                stack.Push(new EditorState(Tokens, CaretIndex, SelectionLength));
+            }
+            catch (Exception)
+            { return; }
         }
 
         private void PopState(Stack<EditorState> stack)
         {
-            var state = stack.Pop();
+            EditorState state;
+            try
+            {
+                state = stack.Pop();
+            }
+            catch (Exception)
+            { return; }
             Tokens = state.Tokens == null ? null : new ObservableCollection<IFormulaToken>(state.Tokens);
             CaretIndex = state.CaretIndex;
             SelectionStart = state.SelectionStart;

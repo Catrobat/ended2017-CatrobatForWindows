@@ -233,6 +233,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         private void RedoAction()
         {
             _editor.Redo();
+            SendEvaluation();
         }
 
         public RelayCommand SensorCommand { get; private set; }
