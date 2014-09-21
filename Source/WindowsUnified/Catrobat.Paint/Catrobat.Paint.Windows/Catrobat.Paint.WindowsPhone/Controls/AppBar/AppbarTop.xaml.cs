@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
 
@@ -30,23 +31,74 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
         public AppbarTop()
         {
             this.InitializeComponent();
-            //if (!DesignerProperties.IsInDesignTool)
-            {
-                btnSelectedColor.Background = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
-                PocketPaintApplication.GetInstance().PaintData.ColorChanged += ColorChangedHere;
-                PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
-                PocketPaintApplication.GetInstance().AppbarTop = this;
+            setAppBarTopLayout();
+        }
+        private void setAppBarTopLayout()
+        {
+            double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+            double height_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+            GrdLayoutRoot.Width *= width_multiplicator;
 
-                btnUndo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnUndo_Click;
-                btnRedo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnRedo_Click;
-                btnSelectedColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
-                //btnMoveScreen.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreen_OnClick;
-                ellipseTool_front.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
-                ellipseTool_behind.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
-                btnUndo.IsEnabled = false;
-                btnRedo.IsEnabled = false;               
-                
+            foreach (Object obj in GrdLayoutRoot.Children)
+            {
+                if (obj.GetType() == typeof(AppBarButton))
+                {
+                    ((AppBarButton)obj).Height *= height_multiplicator;
+                    ((AppBarButton)obj).Width *= width_multiplicator;
+
+                    ((AppBarButton)obj).Margin = new Thickness(
+                                            ((AppBarButton)obj).Margin.Left * width_multiplicator,
+                                            ((AppBarButton)obj).Margin.Top * height_multiplicator,
+                                            ((AppBarButton)obj).Margin.Right * width_multiplicator,
+                                            ((AppBarButton)obj).Margin.Bottom * height_multiplicator);
+                }
+                else if (obj.GetType() == typeof(Button))
+                {
+                    ((Button)obj).Height *= height_multiplicator;
+                    ((Button)obj).Width *= width_multiplicator;
+
+                    ((Button)obj).Margin = new Thickness(
+                                            ((Button)obj).Margin.Left * width_multiplicator,
+                                            ((Button)obj).Margin.Top * height_multiplicator,
+                                            ((Button)obj).Margin.Right * width_multiplicator,
+                                            ((Button)obj).Margin.Bottom * height_multiplicator);
+                }
+                else if (obj.GetType() == typeof(Ellipse))
+                {
+                    ((Ellipse)obj).Height *= height_multiplicator;
+                    ((Ellipse)obj).Width *= width_multiplicator;
+
+                    ((Ellipse)obj).Margin = new Thickness(
+                                            ((Ellipse)obj).Margin.Left * width_multiplicator,
+                                            ((Ellipse)obj).Margin.Top * height_multiplicator,
+                                            ((Ellipse)obj).Margin.Right * width_multiplicator,
+                                            ((Ellipse)obj).Margin.Bottom * height_multiplicator);
+                }
+                else if (obj.GetType() == typeof(Rectangle))
+                {
+                    ((Rectangle)obj).Height *= height_multiplicator;
+                    ((Rectangle)obj).Width *= width_multiplicator;
+
+                    ((Rectangle)obj).Margin = new Thickness(
+                                            ((Rectangle)obj).Margin.Left * width_multiplicator,
+                                            ((Rectangle)obj).Margin.Top * height_multiplicator,
+                                            ((Rectangle)obj).Margin.Right * width_multiplicator,
+                                            ((Rectangle)obj).Margin.Bottom * height_multiplicator);
+                }
             }
+            btnSelectedColor.Background = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
+            PocketPaintApplication.GetInstance().PaintData.ColorChanged += ColorChangedHere;
+            PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
+            PocketPaintApplication.GetInstance().AppbarTop = this;
+
+            BtnUndo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnUndo_Click;
+            BtnRedo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnRedo_Click;
+            btnSelectedColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
+            //btnMoveScreen.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreen_OnClick;
+            ellipseTool_front.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
+            ellipseTool_behind.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
+            BtnUndo.IsEnabled = false;
+            BtnRedo.IsEnabled = false;
         }
         private void ColorChangedHere(SolidColorBrush color)
         {
@@ -157,14 +209,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
 
         public bool BtnRedoEnable
         {
-            get { return btnRedo.IsEnabled; }
-            set { btnRedo.IsEnabled = value; }
+            get { return BtnRedo.IsEnabled; }
+            set { BtnRedo.IsEnabled = value; }
         }
 
         public bool BtnUndoEnable
         {
-            get { return btnUndo.IsEnabled; }
-            set { btnUndo.IsEnabled = value; }
+            get { return BtnUndo.IsEnabled; }
+            set { BtnUndo.IsEnabled = value; }
         }
     }
 }

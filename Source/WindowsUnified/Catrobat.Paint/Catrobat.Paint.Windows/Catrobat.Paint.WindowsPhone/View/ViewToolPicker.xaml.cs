@@ -30,8 +30,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             this.InitializeComponent();
 
             setToolPickerLayout();
-            MessageDialog msg = new MessageDialog(BtnBrush.Width.ToString());
-            msg.ShowAsync();
+            //MessageDialog msg = new MessageDialog(BtnBrush.Width.ToString());
+            //msg.ShowAsync();
         }
 
         private void setToolPickerLayout()
