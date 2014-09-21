@@ -48,10 +48,17 @@ Catrobat_PlayerMain::~Catrobat_PlayerMain()
 
 void Catrobat_PlayerMain::LoadProject(bool reload)
 {
-    ProjectDaemon::Instance()->OpenProject(m_projectName).then([this](task<bool> t)
+    ProjectDaemon::Instance()->OpenProject(m_projectName).then([this, reload](task<bool> t)
     {
         m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(m_deviceResources));
         m_loadingComplete = true;
+        m_playerState = PlayerState::Active;
+        if (reload == true)
+        {
+            // Collapsing of command bar here because otherwise a race condition with the function 
+            // 'CreateDeviceDependentResources' in the class'Basic2DRenderer' exists.
+            m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+        }
     });
   
 }
@@ -90,7 +97,6 @@ void Catrobat_PlayerMain::StartRenderLoop()
         }
     });
 
-    m_playerState = PlayerState::Active;
     // Run task on a dedicated high priority background thread.
     m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
 }
@@ -141,7 +147,7 @@ void Catrobat_PlayerMain::RestartButtonClicked(_In_ Platform::Object^ sender, Wi
     m_loadingComplete = false;
     ProjectDaemon::Instance()->ReInit();
     LoadProject(true);
-    //m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+    
     StartRenderLoop();
 }
 
@@ -221,7 +227,7 @@ bool Catrobat_PlayerMain::Render()
     context->OMSetRenderTargets(1, targets, m_deviceResources->GetDepthStencilView());
 
     // Clear the back buffer and depth stencil view.
-    context->ClearRenderTargetView(m_deviceResources->GetBackBufferRenderTargetView(), DirectX::Colors::Brown);
+    context->ClearRenderTargetView(m_deviceResources->GetBackBufferRenderTargetView(), DirectX::Colors::CornflowerBlue);
     context->ClearDepthStencilView(m_deviceResources->GetDepthStencilView(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
     // Render the scene objects.
