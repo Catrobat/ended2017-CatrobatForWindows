@@ -6,7 +6,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ActionsControls
   {
     public NormalBrick()
     {
-      this.DefaultStyleKey = typeof(NormalBrick);
+      //this.DefaultStyleKey = typeof(NormalBrick);
     }
   }
 }

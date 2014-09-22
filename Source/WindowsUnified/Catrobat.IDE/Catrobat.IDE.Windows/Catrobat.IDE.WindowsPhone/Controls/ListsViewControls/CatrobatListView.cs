@@ -180,6 +180,10 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             Clvw.UpdateSelectedItems(this.SelectedItems as IList);
         }
 
+        public delegate void ItemTappedEventHandler(object sender, CatrobatListViewItemEventArgs e);
+
+        public event ItemTappedEventHandler ItemTapped;
+
 
 
         public CatrobatListView()
@@ -188,10 +192,19 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             this.Content = this.Clvw;
             this.Clvw.ItemDragCompletedEvent += clvw_ItemDragCompletedEvent;
             this.Clvw.ItemSelectionChangedEvent += clvw_ItemSelectionChangedEvent;
+            this.Clvw.ItemTapped += Clvw_ItemTapped;
            
             this.Unloaded += CatrobatListView_Unloaded;
             this.SizeChanged += CatrobatListView_SizeChanged;
             this._oldApplicationOrientation = ApplicationView.GetForCurrentView().Orientation;
+        }
+
+        void Clvw_ItemTapped(object sender, CatrobatListViewItemEventArgs e)
+        {
+            if (ItemTapped != null)
+            {
+                ItemTapped(sender, e);
+            }
         }
 
         void CatrobatListView_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -212,10 +225,17 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
         void CatrobatListView_Unloaded(object sender, RoutedEventArgs e)
         {
-            this.ItemsSource.CollectionChanged -= ItemsSource_CollectionChanged;
-            this.SelectedItems.CollectionChanged -= SelectedItems_CollectionChanged;
+            if (ItemsSource != null)
+            {
+                this.ItemsSource.CollectionChanged -= ItemsSource_CollectionChanged;
+            }
+            if (SelectedItems != null)
+            {
+                this.SelectedItems.CollectionChanged -= SelectedItems_CollectionChanged;
+            }
             this.Clvw.ItemDragCompletedEvent -= clvw_ItemDragCompletedEvent;
             this.Clvw.ItemSelectionChangedEvent -= clvw_ItemSelectionChangedEvent;
+            this.Clvw.ItemTapped -= Clvw_ItemTapped;
 
             GC.Collect();
         }
@@ -302,6 +322,10 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         public event CatrobatListViewEventHandler ItemDragCompletedEvent;
 
         public event CatrobatListViewEventHandler ItemSelectionChangedEvent;
+
+        public delegate void CatrobatListViewItemEventHandler(object sender, CatrobatListViewItemEventArgs e);
+
+        public event CatrobatListViewItemEventHandler ItemTapped;
 
         public CatrobatListViewWorker()
         {
@@ -463,8 +487,15 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         }
 
         protected override DependencyObject GetContainerForItemOverride()
+        { 
+            var item  = new CatrobatListViewItem(_verticalItemMargin, _reorderEnabled, this.SelectionMode, _dragging == CatrobatListViewDragStaus.NotDragging);
+            item.Tapped += item_Tapped;
+            return item;
+        }
+
+        void item_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            return new CatrobatListViewItem(_verticalItemMargin, _reorderEnabled, this.SelectionMode, _dragging == CatrobatListViewDragStaus.NotDragging);
+            ItemTapped(this, new CatrobatListViewItemEventArgs((CatrobatListViewItem) sender));
         }
 
         protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
@@ -514,7 +545,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         {
             this._reorderEnabled = value;
 
-            if (this.Items == null)
+            if (this.Items == null || _dragCanvas == null)
             {
                 return;
             }
@@ -530,6 +561,15 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
                     }
                     item.SetReorder(_reorderEnabled);
                 }
+            }
+
+            if (this._reorderEnabled)
+            {
+                _dragCanvas.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                _dragCanvas.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -554,6 +594,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             this.ManipulationDelta += CatrobatListViewWorker_ManipulationDelta;
             this.ManipulationCompleted += CatrobatListViewWorker_ManipulationCompleted;
             this.PointerReleased +=CatrobatListViewWorker_PointerReleased;
+
+            SetReorderEnabled(this._reorderEnabled);
             
             InitReorderableEmptyDummyControl();
         }
@@ -1039,7 +1081,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
                 this.Opacity = 0;
             }
             this.SizeChanged += CatrobatListViewItem_SizeChanged;
-
         }
 
         void CatrobatListViewItem_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -1130,6 +1171,20 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         NotDragging, PrepareDraggin, Dragging
     }
 
+    public class CatrobatListViewItemEventArgs : EventArgs
+    {
+        private readonly CatrobatListViewItem tappedItem;
+
+        public CatrobatListViewItemEventArgs(CatrobatListViewItem _tappeItem)
+        {
+            this.tappedItem = _tappeItem;
+        }
+
+        public CatrobatListViewItem getTappedItem()
+        {
+            return this.tappedItem;
+        }
+    }
     public class CatrobatListViewEventArgs : EventArgs
     {
         private readonly CatrobatListViewEmptyDummyControl _tmpControl;

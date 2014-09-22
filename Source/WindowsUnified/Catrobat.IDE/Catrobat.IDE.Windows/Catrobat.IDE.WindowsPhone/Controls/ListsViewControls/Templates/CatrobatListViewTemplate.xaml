@@ -36,10 +36,7 @@
                             HorizontalScrollBarVisibility="Disabled"
                             VerticalScrollBarVisibility="Visible"
                             Background="{TemplateBinding Background}" IsEnabled="True">
-                            <!--<Border x:Name="BorderItems">-->
                             <ItemsPresenter />
-                            <!--</Border>-->
-
                         </ScrollViewer>
                         <Canvas
                             x:Name="ManipulationCanvas"
@@ -47,9 +44,7 @@
                             Opacity="1"
                             VerticalAlignment="Stretch"
                             HorizontalAlignment="Stretch"
-                            Visibility="Collapsed" Background="#60FFFFFF">
-
-                        </Canvas>
+                            Visibility="Collapsed" Background="#60FFFFFF" />
                         <Canvas
                             x:Name="DragCanvas"
                             Grid.Column="1"
@@ -94,15 +89,13 @@
                         <Canvas Grid.Column="0"
                                 x:Name="ClickPreventerCanvas"
                                 Background="Transparent"
-                                Visibility="Collapsed">
-                        </Canvas>
+                                Visibility="Collapsed" />
                         <Canvas Grid.Column="1"
                                         x:Name="DragHandle"
                                          Width="65" Height="42"
                                        Background="Transparent"
                                         VerticalAlignment="Center"
                                     HorizontalAlignment="Center">
-
                             <Path Data="M40,440 L88,440 L88,448 L40,448 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="12,0,5,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" >
                             </Path>
                             <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="12,16,5,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" >
@@ -153,20 +146,17 @@
 
     <DataTemplate x:Key="LookItemControlTemplate">
         
-        <controls:LookItemControl Look="{Binding}"
-                    Tapped="LookItem_OnTapped"/>
+        <controls:LookItemControl Look="{Binding}" />
     </DataTemplate>
 
     <DataTemplate x:Key="SpriteItemTemplate">
-        <controls:SpriteItemControl Sprite="{Binding}"
-                  Tapped="SpriteItem_OnTapped" />
+        <controls:SpriteItemControl Sprite="{Binding}" />
     </DataTemplate>
 
 
     <DataTemplate x:Key="SoundItemControlTemplate">
         <controls:SoundItemControl Sound="{Binding}"
-                    Group="{Binding ElementName=PlayPauseButtonGroupSounds}"
-                    RightTapped="SoundItem_OnRightTapped"/>
+                    Group="{Binding ElementName=PlayPauseButtonGroupSounds}" />
     </DataTemplate>
 
 </ResourceDictionary>
