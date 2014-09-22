@@ -45,8 +45,8 @@ namespace Catrobat.IDE.Core.Models
                             
                             //XmlParserTempProjectHelper.Project.BasePath + "/" + 
                             //StorageConstants.ProgramLooksPath + "/" + _fileName;
-                        _image.LoadAsync(fileName, null, false);
-
+                        //_image.LoadAsync(fileName, null, false);
+                        _image.ImagePath = fileName;
                         //using (var storage = StorageSystem.GetStorage())
                         //{
                         //    _thumbnail =

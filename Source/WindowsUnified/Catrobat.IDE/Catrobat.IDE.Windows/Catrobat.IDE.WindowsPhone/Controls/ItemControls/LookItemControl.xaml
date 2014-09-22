@@ -20,10 +20,16 @@
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="{Binding Image.ImageSource}"
+            <!--<Image Grid.Column="0" Source="{Binding Image.ImageSource}"
         Margin="5 5 0 5"
-        Stretch="Uniform" />
-            <TextBlock Grid.Row="0" Grid.Column="1" FontSize="28" Margin="10,5,55,5"
+        Stretch="Uniform" />-->
+            <Image Grid.Column="0" Margin="5 5 0 5" Stretch="Uniform">
+              <Image.Source>
+                <BitmapImage DecodePixelHeight="72"
+                             UriSource="{Binding Image.ImageUri}"/>
+              </Image.Source>
+            </Image>
+      <TextBlock Grid.Row="0" Grid.Column="1" FontSize="28" Margin="10,5,55,5"
                 Text="{Binding Name}" TextWrapping="Wrap" MaxLines="2"
                 VerticalAlignment="Center" />
         </Grid>
