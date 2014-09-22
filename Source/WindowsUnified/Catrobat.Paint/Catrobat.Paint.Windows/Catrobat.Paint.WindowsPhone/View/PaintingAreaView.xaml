@@ -58,7 +58,7 @@
                     </Grid>
                 </UserControl>
 
-                <UserControl x:Name="uctrlOwnKeyboard" Height="auto" Width="auto" Margin="0,0,0,0" Visibility="Visible">
+                <UserControl x:Name="uctrlOwnKeyboard" Height="auto" Width="auto" Margin="0,0,0,0" Visibility="Collapsed">
                     <Grid x:Name="grdOwnKeyboard" Background="#1F1F1F"  MinHeight="120" VerticalAlignment="Bottom" Height="298" HorizontalAlignment="Center" Width="400">
                         <Button x:Name="btnValue0" Content="0" HorizontalAlignment="Left" Margin="145,205,0,0" VerticalAlignment="Top" Height="72" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
                         <Button x:Name="btnValue1" Content="1" HorizontalAlignment="Left" Margin="20,-3,0,0" VerticalAlignment="Top" Height="72" Width="100" FontSize="30" Click="ButtonNumbers_Click" />
