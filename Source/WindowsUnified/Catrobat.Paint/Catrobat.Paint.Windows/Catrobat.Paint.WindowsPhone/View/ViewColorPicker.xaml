@@ -123,13 +123,7 @@
                         <Button x:Name="Button54" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton54}" Height="80" Margin="279,306,0,0"  Width="90" VerticalAlignment="Top">
                             <Rectangle x:Name="Rectangle54" Fill="{StaticResource ColorButton54}" Height="65" Margin="-20" Stroke="Black"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
                         </Button>
-                        
 
-                        <!--<Rectangle x:Name="recTransparence" Height="52" HorizontalAlignment="Center" Margin="0,300,0,0" Opacity="1" StrokeThickness="0" Width="350">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
-                            </Rectangle.Fill>
-                        </Rectangle>-->
                         <Button x:Name="BtnSelectedColor" BorderThickness="3" Click="BtnSelectedColor_OnClick"
                                     Height="75" HorizontalAlignment="Center" Margin="0,300,0,0" Padding="0,0,0,0" Width="350">
                             <Grid x:Name="GrdButtonSelectedColor" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350">
@@ -189,13 +183,6 @@
                         <TextBox x:Name="tbPercentCharacter" HorizontalAlignment="Left" Height="63" Margin="346,370,-26,0" TextWrapping="Wrap" 
                              Text="%" VerticalAlignment="Top" Width="56" Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-
-                        <!--<Rectangle x:Name="recTransparenceSlider" Height="52" HorizontalAlignment="Center" Margin="0,400,0,0" Opacity="1" StrokeThickness="0" Width="350">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
-                            </Rectangle.Fill>
-                        </Rectangle>-->
-
                         <Button x:Name="BtnSelectedColorSlider" BorderThickness="3" Click="BtnSelectedColor_OnClick"
                                     Height="75" HorizontalAlignment="Center" Margin="0,400,0,0" Padding="0,0,0,0" Width="350">
                             <Grid x:Name="GrdButtonSelectedColorSlider" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350">
@@ -204,17 +191,6 @@
                                 <TextBox x:Name="TbFertigSlider" Background="Transparent" BorderThickness="0" Foreground="White" Text="Fertig" Visibility="Visible" Width="75" />
                             </Grid>
                         </Button>
-
-                        <!--<Button x:Name="BtnSelectedColorTransp" Command="{Binding SelectColorDone}"
-                                    Height="75" HorizontalAlignment="Center" Margin="0,400,0,0" Width="350">
-                            <Button.Background>
-                                <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
-                            </Button.Background>
-                        </Button>
-
-                        <Button x:Name="BtnSelectedColorSlider" Command="{Binding SelectColorDone}" Content="Fertig"
-                                    Height="75" HorizontalAlignment="Center" Margin="0,400,0,0" Width="350" />-->
-
                     </Grid>
                 </PivotItem>
             </Pivot>

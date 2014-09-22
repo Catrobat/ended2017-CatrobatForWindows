@@ -15,29 +15,32 @@
                 <BitmapIcon UriSource="/Assets/ApplicationBar/Dark/appbar.undo.curve.png" />
             </AppBarButton.Icon>
         </AppBarButton>
+        
         <AppBarButton x:Name="BtnRedo" Margin="97,0,0,0">
             <AppBarButton.Icon>
                 <BitmapIcon UriSource="/Assets/ApplicationBar/Dark/appbar.redo.curve.png"/>
             </AppBarButton.Icon>
         </AppBarButton>
-        <Rectangle x:Name="rectTransparence" Height="38" Margin="2119,0,0,0" Stroke="Black" Width="50">
-            <Rectangle.Fill>
-                <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
-            </Rectangle.Fill>
-        </Rectangle>
 
-        <Button x:Name="btnSelectedColor" Background="Black" Height="60" Margin="219,0,0,0" MinWidth="1" Width="50" />
+        <Button x:Name="BtnSelectedColor" Height="60" Margin="219,0,0,0" MinWidth="1" Width="50" Padding="0">
+            <Grid x:Name="GrdBtnSelectedColor" Height="41" Width="50">
+                <Image x:Name="ImgTransparence"  Height="41" Margin="0" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Visibility="Visible" Width="50" />
+                <Rectangle x:Name="RecSelectedColor" Fill="Black" Height="40" Margin="0" Visibility="Visible" Width="50"/>
+            </Grid>
+        </Button>
 
         <Ellipse x:Name="ellipseTool_behind" Height="38" HorizontalAlignment="Right" Margin="0,0,21,0" Opacity="0.1" VerticalAlignment="Center" Width="38">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_move.png" Stretch="Uniform"/>
             </Ellipse.Fill>
         </Ellipse>
+        
         <Ellipse x:Name="ellipseTool_front" Height="25" HorizontalAlignment="Right" Margin="0,0,27,0" VerticalAlignment="Center" Width="25">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_brush.png" Stretch="Uniform"/>
             </Ellipse.Fill>
         </Ellipse>
+        
         <Ellipse HorizontalAlignment="Right" Height="38" Margin="0,0,21,0" Stroke="White" StrokeThickness="3" VerticalAlignment="Center" Width="38">
         </Ellipse>
     </Grid>
