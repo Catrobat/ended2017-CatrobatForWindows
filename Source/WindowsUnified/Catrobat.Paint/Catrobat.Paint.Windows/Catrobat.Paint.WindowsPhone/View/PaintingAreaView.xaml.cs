@@ -91,6 +91,39 @@ namespace Catrobat.Paint.WindowsPhone.View
             btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
             btnThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnThickness_OnClick;
             
+            setPaintingAreaViewLayout();
+
+            checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
+            createAppBarAndSwitchAppBarContent(current_appbar);        
+        }
+
+        private void setPaintingAreaViewLayout()
+        {
+            double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+            double height_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+
+            uctrlOwnKeyboard.Height *= height_multiplicator;
+            uctrlOwnKeyboard.Width *= width_multiplicator;
+
+            grdOwnKeyboard.Height *= height_multiplicator;
+            grdOwnKeyboard.Width *= width_multiplicator;
+
+            foreach (Object obj in grdOwnKeyboard.Children)
+            {
+                if (obj.GetType() == typeof(Button))
+                {
+                    ((Button)obj).Height *= height_multiplicator;
+                    ((Button)obj).Width *= width_multiplicator;
+
+                    ((Button)obj).Margin = new Thickness(
+                                            ((Button)obj).Margin.Left * width_multiplicator,
+                                            ((Button)obj).Margin.Top * height_multiplicator,
+                                            ((Button)obj).Margin.Right * width_multiplicator,
+                                            ((Button)obj).Margin.Bottom * height_multiplicator);
+                    ((Button)obj).FontSize *= height_multiplicator;
+                }
+            }
+
             SliderThicknessControl.Width = Window.Current.Bounds.Width;
             SliderThicknessControl.Height = Window.Current.Bounds.Height * 0.23; //Visibility="Collapsed"
             SliderThicknessGrid.Width = Window.Current.Bounds.Width;
@@ -98,11 +131,11 @@ namespace Catrobat.Paint.WindowsPhone.View
             SliderThickness.Height = SliderThicknessGrid.Height * 0.3;
             SliderThickness.Width = SliderThicknessGrid.Width * 0.6053;
             SliderThickness.Margin = new Thickness(SliderThicknessGrid.Width * 0.03, SliderThicknessGrid.Height * 0.15, 0, 0);
-            
+
             btnBrushThickness.Height = SliderThicknessGrid.Height * 0.3;
             btnBrushThickness.Width = SliderThicknessGrid.Width * 0.2;
             btnBrushThickness.Margin = new Thickness(SliderThicknessGrid.Width * 0.03 + SliderThicknessGrid.Width * 0.666, SliderThicknessGrid.Height * 0.13, SliderThicknessGrid.Width * 0.03, 0);
-           
+
             btnRoundImage.Height = SliderThicknessGrid.Height * 0.3;
             btnRoundImage.Width = SliderThicknessGrid.Width * 0.2;
             btnRoundImage.Margin = new Thickness(SliderThicknessGrid.Width * 0.03, 0, 0, SliderThicknessGrid.Height * 0.15);
@@ -110,13 +143,10 @@ namespace Catrobat.Paint.WindowsPhone.View
             btnSquareImage.Height = SliderThicknessGrid.Height * 0.3;
             btnSquareImage.Width = SliderThicknessGrid.Width * 0.2;
             btnSquareImage.Margin = new Thickness(SliderThicknessGrid.Width * 0.03 + SliderThicknessGrid.Width * 0.333, 0, 0, SliderThicknessGrid.Height * 0.15);
-            
+
             btnTriangleImage.Height = SliderThicknessGrid.Height * 0.3;
             btnTriangleImage.Width = SliderThicknessGrid.Width * 0.2;
             btnTriangleImage.Margin = new Thickness(SliderThicknessGrid.Width * 0.666 + SliderThicknessGrid.Width * 0.03, 0, 0, SliderThicknessGrid.Height * 0.15);
-
-            checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
-            createAppBarAndSwitchAppBarContent(current_appbar);        
         }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
