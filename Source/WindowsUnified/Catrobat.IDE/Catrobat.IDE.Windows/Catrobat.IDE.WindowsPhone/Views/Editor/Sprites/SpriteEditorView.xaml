@@ -3,52 +3,44 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:models="using:Catrobat.IDE.Core.Models"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   xmlns:soundControls="using:Catrobat.IDE.WindowsPhone.Controls.SoundControls"
-  xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
-  xmlns:listsViewControls="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls"
+   xmlns:listsViewControls="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls"
   mc:Ignorable="d"
   DataContext="{Binding SpriteEditorViewModel, Source={StaticResource Locator}}">
 
-  <Grid Background="{ThemeResource AppBackgroundBrush}">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition/>
-      <RowDefinition Height="Auto"/>
-    </Grid.RowDefinitions>
-    <soundControls:SoundPlayButtonGroup x:Name="PlayPauseButtonGroupSounds"
-      Program="{Binding CurrentProgram}" />      
+    <Grid Background="{ThemeResource AppBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <soundControls:SoundPlayButtonGroup x:Name="PlayPauseButtonGroupSounds"
+      Program="{Binding CurrentProgram}" />
 
 
-    <Pivot Name="PivotMain" Grid.Row="1" Margin="0 -57 0 0"
+        <Pivot Name="PivotMain" Grid.Row="1" Margin="0 -57 0 0"
         SelectedIndex="{Binding SelectedPivotIndex, Mode=TwoWay}"
         SelectionChanged="Pivot_OnSelectionChanged">
-      <Pivot.HeaderTemplate>
-        <DataTemplate>
-          <TextBlock FontSize="34" Text="{Binding}"/>
-        </DataTemplate>
-      </Pivot.HeaderTemplate>
-      <PivotItem Name="PivotActions" Margin="0 -5 0 0"
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock FontSize="34" Text="{Binding}"/>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <PivotItem Name="PivotActions" Margin="0 -5 0 0"
         Header="{Binding Resources.Editor_PivotActions, 
         Source={StaticResource LocalizedStrings}}">
-        <Grid DataContext="{Binding}">
-          <!--<listsViewControls:BindableListView x:Name="ListViewActions"
-            Visibility="Visible"
-            ItemsSource="{Binding Actions}"
-            BindableSelectedItems="{Binding SelectedActions, Mode=TwoWay}"
-            ItemTemplateSelector="{StaticResource ActionTemplateSelector}"
-            CanReorderItems="True" AllowDrop="True" SelectionMode="None"
-             />-->
-         <listsViewControls:CatrobatListView x:Name="ListViewActions"
+                <Grid DataContext="{Binding}">
+                    <listsViewControls:CatrobatListView x:Name="ListViewActions"
             Visibility="Visible"
             ItemsSource="{Binding Actions}"
             SelectedItems="{Binding SelectedActions}"                                        
             ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
             ItemTemplate="{StaticResource ActionTemplateSelectorTemplate}"
             VerticalItemMargin="-10"
-            ReorderEnabled="true"                            
-            HorizontalAlignment="Center" Width="390" Margin="0"
+            ReorderEnabled="true" 
+            HorizontalAlignment="Center"
+            ItemWidthPortrait="380" ItemWidthLandscape="450"
               />
 
 
@@ -60,7 +52,7 @@
                VerticalItemMargin="-10"-->
 
 
-          <TextBlock
+                    <TextBlock
             Text ="{Binding Resources.Editor_ClickPlusToAddAction, 
             Source={StaticResource LocalizedStrings}}"
             Visibility="{Binding IsScirptBricksEmpty, 
@@ -70,33 +62,21 @@
             TextAlignment="Center"
             VerticalAlignment="Center"
             HorizontalAlignment="Center" />
-        </Grid>
-      </PivotItem>
+                </Grid>
+            </PivotItem>
 
-      <PivotItem Name="PivotLooks" Margin="0 -5 0 0"
+            <PivotItem Name="PivotLooks" Margin="0 -5 0 0"
         Header="{Binding Resources.Editor_PivotLooks, 
         Source={StaticResource LocalizedStrings}}">
-        <Grid DataContext="{Binding}">
-          <!--<listsViewControls:BindableListView x:Name="ListViewLooks"
-              HorizontalAlignment="Center"
-              ItemsSource="{Binding Looks}"
-              BindableSelectedItems="{Binding SelectedLooks, Mode=TwoWay}"
-              CanReorderItems="True" AllowDrop="True" SelectionMode="None">
-            <ListViewBase.ItemTemplate>
-              <DataTemplate>
-                <controls:LookItemControl Look="{Binding}"
-                    Tapped="LookItem_OnTapped" />
-              </DataTemplate>
-            </ListViewBase.ItemTemplate>
-          </listsViewControls:BindableListView>-->
+                <Grid DataContext="{Binding}">
                     <listsViewControls:CatrobatListView x:Name="ListViewLooks"
             ItemsSource="{Binding Looks}"
             SelectedItems="{Binding SelectedLooks}"                                        
             ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
-            ItemTemplate="{StaticResource LookItemControlTemplate}"
-            ReorderEnabled="true"                            
-            HorizontalAlignment="Center" Width="390" Margin="0"
-            Tapped="LookItem_OnTapped"
+            ItemTemplate="{StaticResource LookItemControlTemplate}"                 
+            HorizontalAlignment="Center"
+            Tapped="LookItem_OnTapped" ReorderEnabled="True"
+            ItemWidthPortrait="380" ItemWidthLandscape="450"
               />
                     <TextBlock
             Text ="{Binding Resources.Editor_ClickPlusToAddLook, 
@@ -108,34 +88,22 @@
             TextAlignment="Center"
             VerticalAlignment="Center"
             HorizontalAlignment="Center" />
-        </Grid>
-      </PivotItem>
+                </Grid>
+            </PivotItem>
 
-      <PivotItem Name="PivotSounds" Margin="0 -5 0 0"
+            <PivotItem Name="PivotSounds" Margin="0 -5 0 0"
         Header="{Binding Resources.Editor_PivotSounds, 
         Source={StaticResource LocalizedStrings}}">
-        <Grid DataContext="{Binding}">
-          <!--<listsViewControls:BindableListView x:Name="ListViewSounds"
-              HorizontalAlignment="Center"
-              ItemsSource="{Binding Sounds}"
-              BindableSelectedItems="{Binding SelectedSounds, Mode=TwoWay}"
-              CanReorderItems="True" AllowDrop="True" SelectionMode="None">
-            <ListViewBase.ItemTemplate>
-              <DataTemplate>
-                <controls:SoundItemControl Sound="{Binding}"
-                    Group="{Binding ElementName=PlayPauseButtonGroupSounds}"
-                    RightTapped="SoundItem_OnTapped" />
-              </DataTemplate>
-            </ListViewBase.ItemTemplate>
-          </listsViewControls:BindableListView>-->
-            <listsViewControls:CatrobatListView x:Name="ListViewSounds"
+                <Grid DataContext="{Binding}">
+                    <listsViewControls:CatrobatListView x:Name="ListViewSounds"
             ItemsSource="{Binding Sounds}"
             SelectedItems="{Binding SelectedSounds}"                                        
             ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
             ItemTemplate="{StaticResource SoundItemControlTemplate}"
-            ReorderEnabled="true"                            
-            HorizontalAlignment="Center" Width="390" Margin="0"
+            ReorderEnabled="true" 
+            HorizontalAlignment="Center"
             RightTapped="SoundItem_OnRightTapped"
+            ItemWidthPortrait="380" ItemWidthLandscape="450"
               />
                     <TextBlock
               Text ="{Binding Resources.Editor_ClickPlusToAddSound, Source={StaticResource LocalizedStrings}}"
@@ -145,26 +113,26 @@
               TextAlignment="Center"
               VerticalAlignment="Center"
               HorizontalAlignment="Center"/>
-        </Grid>
-      </PivotItem>
-    </Pivot>
+                </Grid>
+            </PivotItem>
+        </Pivot>
 
-    <Grid Grid.Row="0" Margin="12 0 12 12">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition />
-        <ColumnDefinition Width="Auto" />
-      </Grid.ColumnDefinitions>
-      <TextBlock Text="{Binding SelectedSprite.Name}"
+        <Grid Grid.Row="0" Margin="12 0 12 12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{Binding SelectedSprite.Name}"
         Margin="0 6 0 0"
         Grid.Column="0"
         Style="{ThemeResource TextTitleNormalStyle}"/>
-      <HyperlinkButton Grid.Column="1"
+            <HyperlinkButton Grid.Column="1"
         HorizontalAlignment="Right"
         Content="{Binding Resources.Editor_Rename, 
         Source={StaticResource LocalizedStrings}}"
         Command="{Binding RenameSpriteCommand}"
         Style="{ThemeResource HyperLinkNormalStyle}"
         FontSize="22"/>
+        </Grid>
     </Grid>
-  </Grid>
 </views:ViewPageBase>

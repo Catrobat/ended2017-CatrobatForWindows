@@ -26,11 +26,12 @@
         RoundBorderThickness="5" Margin="10 0 0 0"
         Grid.Column="0" Height="70" Width="70"
         RightTapped="PlayButton_RightTapped"/>
-      <Grid Grid.Column="1" Margin="15 5 5 5" Tapped="TapGrid_OnTapped">
+            <Grid Grid.Column="1" Margin="10,5,55,5" Tapped="TapGrid_OnTapped">
         <TextBlock Grid.Row="0" FontSize="28" 
-          TextWrapping="Wrap" MaxLines="2"
-          Text="{Binding Name}" VerticalAlignment="Center" />
+          TextWrapping="Wrap" MaxLines="2" 
+          Text="{Binding Name}" VerticalAlignment="Center"/>
       </Grid>
     </Grid>
-  </Grid>
+        <Path Data="M1,1 L2,1" Stretch="Fill" StrokeThickness="0" Grid.Row="0" />
+    </Grid>
 </UserControl>

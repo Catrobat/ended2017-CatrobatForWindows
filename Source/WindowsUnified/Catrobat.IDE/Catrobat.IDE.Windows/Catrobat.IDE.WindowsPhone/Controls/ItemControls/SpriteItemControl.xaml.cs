@@ -9,11 +9,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 {
     public sealed partial class SpriteItemControl : UserControl
     {
-        private const double ItemWidthPortrait = 365.0;
-        private const double ItemWidthLandscape = 450.0;
-        private const double ItemHeightPortrait = 90.0;
-        private const double ItemHeightLandscape = 90.0;
-
         #region Dependancy properties
 
         public Sprite Sprite
@@ -24,7 +19,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 
         public static readonly DependencyProperty SpriteProperty =
             DependencyProperty.Register("Sprite",
-            typeof(Sprite),
+            typeof(object),
             typeof(SpriteItemControl),
             new PropertyMetadata(null, SpriteChanged));
 
@@ -60,29 +55,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         public SpriteItemControl()
         {
             this.InitializeComponent();
-            Window.Current.SizeChanged += OnSizeChanged;
-            this.LayoutUpdated += (sender, o) => UpdatedSize();
-            UpdatedSize();
-        }
-
-        private void OnSizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
-        {
-            UpdatedSize();
-        }
-
-        private void UpdatedSize()
-        {
-            var currentViewState = ApplicationView.GetForCurrentView().
-                Orientation;
-
-            var newWidth = currentViewState == ApplicationViewOrientation.Landscape ?
-                ItemWidthLandscape : ItemWidthPortrait;
-
-            var newHeight = currentViewState == ApplicationViewOrientation.Landscape ?
-                ItemHeightLandscape : ItemHeightPortrait;
-
-            GridRoot.Width = newWidth;
-            GridRoot.Height = newHeight;
         }
     }
 }
