@@ -211,8 +211,7 @@
           <ColumnDefinition Width="3*"/>
           <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>-->
-        <!--<Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Content="!" Style="{StaticResource StyleButtonEvaluate}" Click ="ButtonError_OnClick" Background="DarkRed" Visibility="{Binding HasError, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />
-        <Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Content="{Binding Resources.Editor_Evaluate, Source={StaticResource LocalizedStrings}}" Style="{StaticResource StyleButtonEvaluate}" Background="{Binding SelectedTheme.AccentColor1.NativeBrush, }" Click ="ButtonEvaluate_OnClick" Visibility="{Binding CanEvaluate, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />-->
+        <!--<Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Content="{Binding Resources.Editor_Evaluate, Source={StaticResource LocalizedStrings}}" Style="{StaticResource StyleButtonEvaluate}" Background="{Binding SelectedTheme.AccentColor1.NativeBrush, }" Click ="ButtonEvaluate_OnClick" Visibility="{Binding CanEvaluate, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />-->
 
         <TextBlock FontSize="28" TextWrapping="Wrap" VerticalAlignment="Center" 
                    HorizontalAlignment="Center" Foreground="SpringGreen"  x:Name="TextBlockEvaluationValue" />

@@ -1007,6 +1007,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error help ähnelt.
+        /// </summary>
+        public static string Editor_Help {
+            get {
+                return ResourceManager.GetString("Editor_Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Image ähnelt.
         /// </summary>
         public static string Editor_Image {

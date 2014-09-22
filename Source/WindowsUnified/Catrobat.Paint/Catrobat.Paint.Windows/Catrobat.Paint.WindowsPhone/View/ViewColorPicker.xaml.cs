@@ -255,6 +255,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                                             ((Button)obj).Margin.Right * width,
                                             ((Button)obj).Margin.Bottom * height);
 
+                    ((Button)obj).FontSize *= height; 
+
                     if (((Button)obj).Content.GetType() == typeof(Rectangle))
                     {
                         ((Rectangle)(((Button)obj).Content)).Height *= height;

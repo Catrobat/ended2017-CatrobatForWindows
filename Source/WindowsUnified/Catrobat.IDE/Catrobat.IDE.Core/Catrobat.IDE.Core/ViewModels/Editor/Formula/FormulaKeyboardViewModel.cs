@@ -318,7 +318,6 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             Messenger.Default.Register<GenericMessage<LocalSettings>>(this, ViewModelMessagingToken.SaveSettings, message => SaveSettingsAction(message.Content));
             Messenger.Default.Register<GenericMessage<Program>>(this, ViewModelMessagingToken.CurrentProgramChangedListener, message => CurrentProgramChangedAction(message.Content));
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, message => CurrentSpriteChangedAction(message.Content));
-
         }
 
         internal void ResetViewModel()

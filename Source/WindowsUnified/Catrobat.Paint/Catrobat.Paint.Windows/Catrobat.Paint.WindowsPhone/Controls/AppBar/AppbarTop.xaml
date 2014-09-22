@@ -9,60 +9,37 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="80" d:DesignWidth="400">
 
-    <Grid x:Name="LayoutRoot" Background="#1F1F1F" Height="72">
-        <!-- TODO:  <Coding4Fun:RoundButton x:Name="BtnUndo" IsEnabled="False"
-        	ImageSource="/Assets/ApplicationBar/Dark/appbar.undo.curve.png"  HorizontalAlignment="Right" Width="100" Height="60" Margin="0,7,370,5"/>
-        <coding4FunControls:RoundButton x:Name="BtnRedo" IsEnabled="False"
-        	ImageSource="/Assets/ApplicationBar/Dark/appbar.redo.curve.png" HorizontalAlignment="Right" Width="100" Height="60" Margin="0,7,250,5"/>
-        <coding4FunControls:RoundButton x:Name="BtnMoveScreen"
-        	ImageSource="/Assets/ToolMenu/icon_menu_brush.png"  HorizontalAlignment="Right" Width="100" Height="60" Margin="0,7,10,5">
-            <coding4FunControls:RoundButton.Background>
-                <ImageBrush Stretch="Fill" ImageSource="/Assets/ToolMenu/icon_menu_move.png" Opacity="0.2"/>
-            </coding4FunControls:RoundButton.Background>
-
-        </coding4FunControls:RoundButton>-->
-
-        <Rectangle x:Name="rectTransparence"  HorizontalAlignment="Left" Height="44" Margin="222,15,0,0" Stroke="Black" VerticalAlignment="Top" Width="53">
+    <Grid x:Name="GrdLayoutRoot" Background="#1F1F1F" Height="60" Width="384">
+        <AppBarButton x:Name="BtnUndo">
+            <AppBarButton.Icon>
+                <BitmapIcon UriSource="/Assets/ApplicationBar/Dark/appbar.undo.curve.png" />
+            </AppBarButton.Icon>
+        </AppBarButton>
+        <AppBarButton x:Name="BtnRedo" Margin="97,0,0,0">
+            <AppBarButton.Icon>
+                <BitmapIcon UriSource="/Assets/ApplicationBar/Dark/appbar.redo.curve.png"/>
+            </AppBarButton.Icon>
+        </AppBarButton>
+        <Rectangle x:Name="rectTransparence" Height="38" Margin="2119,0,0,0" Stroke="Black" Width="50">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
             </Rectangle.Fill>
         </Rectangle>
 
-        <Button x:Name="btnSelectedColor" Background="Black" Height="62" Margin="222,6,0,4" MinWidth="1" Width="53" />
+        <Button x:Name="btnSelectedColor" Background="Black" Height="60" Margin="219,0,0,0" MinWidth="1" Width="50" />
 
-        <AppBarButton x:Name="btnUndo" Height="72" Margin="15,3,0,-3">
-            <AppBarButton.Icon>
-                <BitmapIcon UriSource="/Assets/ApplicationBar/Dark/appbar.undo.curve.png" HorizontalAlignment="Left" Margin="0,0,0,0.333" Width="38"/>
-            </AppBarButton.Icon>
-        </AppBarButton>
-        <AppBarButton x:Name="btnRedo" Margin="115,3,0,-3">
-            <AppBarButton.Icon>
-                <BitmapIcon UriSource="/Assets/ApplicationBar/Dark/appbar.redo.curve.png"/>
-            </AppBarButton.Icon>
-        </AppBarButton>
-        <Ellipse x:Name="ellipseTool_behind" Opacity="0.1" StrokeThickness="0" HorizontalAlignment="Left" Height="50" Margin="310,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="50">
+        <Ellipse x:Name="ellipseTool_behind" Height="38" HorizontalAlignment="Right" Margin="0,0,21,0" Opacity="0.1" VerticalAlignment="Center" Width="38">
             <Ellipse.Fill>
-                <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_move.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_move.png" Stretch="Uniform"/>
             </Ellipse.Fill>
         </Ellipse>
-        <Ellipse x:Name="ellipseTool_front" Width="35" Height="35" StrokeThickness="0" HorizontalAlignment="Left" Margin="317,19,0,0" Stroke="Black" VerticalAlignment="Top" >
+        <Ellipse x:Name="ellipseTool_front" Height="25" HorizontalAlignment="Right" Margin="0,0,27,0" VerticalAlignment="Center" Width="25">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_brush.png" Stretch="Uniform"/>
             </Ellipse.Fill>
         </Ellipse>
-
-        <!--<Ellipse x:Name="ellipseTransparence"  HorizontalAlignment="Left" Height="39" Margin="231,15,0,0" Stroke="Black" VerticalAlignment="Top" Width="40" >
-            <Ellipse.Fill>
-                <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
-            </Ellipse.Fill>
-        </Ellipse>-->
-
-        <!-- TODO:
-        <<coding4FunControls:RoundButton x:Name="BtnSelectedColor" ClickMode="Release" 
-        	  Background="Black" HorizontalAlignment="Right" Width="100" Height="60" Margin="0,6,130,6" Content="" >
-
-        </coding4FunControls:RoundButton>
-        -->
+        <Ellipse HorizontalAlignment="Right" Height="38" Margin="0,0,21,0" Stroke="White" StrokeThickness="3" VerticalAlignment="Center" Width="38">
+        </Ellipse>
     </Grid>
 </UserControl>
     
