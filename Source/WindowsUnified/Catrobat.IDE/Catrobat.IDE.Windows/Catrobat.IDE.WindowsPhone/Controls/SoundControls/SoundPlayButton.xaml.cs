@@ -93,7 +93,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.SoundControls
 
         public static readonly DependencyProperty SoundProperty =
             DependencyProperty.Register("Sound",
-            typeof(Sound),
+            typeof(object),
             typeof(SoundPlayButton),
             new PropertyMetadata(null, SoundChanged));
 

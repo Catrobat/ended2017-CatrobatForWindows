@@ -3,17 +3,11 @@ using System.Diagnostics;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Windows.UI.Xaml;
 using Catrobat.IDE.WindowsPhone.Controls;
-using Catrobat.IDE.WindowsPhone.Controls.SoundControls;
-using Catrobat.IDE.WindowsShared.Services;
 using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls;
-using System.Collections;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 {
@@ -122,16 +116,9 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             {
                 case MultiModeEditorCommandBarMode.Normal:
                     listView.SelectionMode = ListViewSelectionMode.None;
-                    //listView.ReorderMode = ListViewReorderMode.Disabled;
-                    (listView.SelectedItems as IList).Clear();
-                    break;
-                case MultiModeEditorCommandBarMode.Reorder:
-                    //listView.SelectionMode = ListViewSelectionMode.None;
-                    //listView.ReorderMode = ListViewReorderMode.Enabled;
                     break;
                 case MultiModeEditorCommandBarMode.Select:
                     listView.SelectionMode = ListViewSelectionMode.Multiple;
-                    //listView.ReorderMode = ListViewReorderMode.Disabled;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("mode");
@@ -140,8 +127,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         private void LookItem_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            var isClickEnabled =/* ListViewLooks.ReorderEnabled == ListViewReorderMode.Disabled &&
-                                 */ListViewLooks.SelectionMode == ListViewSelectionMode.None;
+            var isClickEnabled = ListViewLooks.SelectionMode == ListViewSelectionMode.None;
             if (isClickEnabled)
             {
                 if (_viewModel.EditLookCommand.CanExecute(((FrameworkElement)e.OriginalSource).DataContext))
@@ -152,8 +138,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         private void SoundItem_OnRightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            var isClickEnabled = /*ListViewSounds.ReorderMode == ListViewReorderMode.Disabled &&*/
-                                 ListViewSounds.SelectionMode == ListViewSelectionMode.None;
+            var isClickEnabled = ListViewSounds.SelectionMode == ListViewSelectionMode.None;
 
             if (isClickEnabled)
                 if (_viewModel.EditSoundCommand.CanExecute(((FrameworkElement)e.OriginalSource).DataContext))

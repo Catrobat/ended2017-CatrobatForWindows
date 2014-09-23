@@ -481,7 +481,8 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                     {
                         Width = bitmapImage.PixelWidth,
                         Height = bitmapImage.PixelHeight,
-                        EncodedData = memoryStream
+                        EncodedData = memoryStream,
+                        ImagePath = pathToImage
                     };
                     return portableImage;
                 }
@@ -579,60 +580,61 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
 
         public async Task<PortableImage> LoadImageThumbnailAsync(string pathToImage)
         {
-            pathToImage = pathToImage.Replace("\\", "/");
+            //pathToImage = pathToImage.Replace("\\", "/");
 
-            PortableImage retVal = null;
-            var withoutExtension = Path.GetFileNameWithoutExtension(pathToImage);
-            var imageBasePath = Path.GetDirectoryName(pathToImage);
+            //PortableImage retVal = null;
+            //var withoutExtension = Path.GetFileNameWithoutExtension(pathToImage);
+            //var imageBasePath = Path.GetDirectoryName(pathToImage);
 
-            if (imageBasePath != null)
-            {
-                var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}",
-                    withoutExtension, StorageConstants.ImageThumbnailExtension));
+            //if (imageBasePath != null)
+            //{
+            //    var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}",
+            //        withoutExtension, StorageConstants.ImageThumbnailExtension));
 
-                if (await FileExistsAsync(thumbnailPath))
-                {
-                    retVal = await LoadImageAsync(thumbnailPath);
-                }
-                else
-                {
-                    var fullSizePortableImage = await LoadImageAsync(pathToImage);
+            //    if (await FileExistsAsync(thumbnailPath))
+            //    {
+            //        retVal = await LoadImageAsync(thumbnailPath);
+            //    }
+            //    else
+            //    {
+            //        var fullSizePortableImage = await LoadImageAsync(pathToImage);
 
-                    if (fullSizePortableImage != null)
-                    {
-                        var thumbnailImage = await ServiceLocator.ImageResizeService.ResizeImage(
-                            fullSizePortableImage, _imageThumbnailDefaultMaxWidthHeight);
-                        retVal = thumbnailImage;
+            //        if (fullSizePortableImage != null)
+            //        {
+            //            var thumbnailImage = await ServiceLocator.ImageResizeService.ResizeImage(
+            //                fullSizePortableImage, _imageThumbnailDefaultMaxWidthHeight);
+            //            retVal = thumbnailImage;
 
-                        await thumbnailImage.WriteAsPng(thumbnailPath);
-                    }
-                }
-            }
+            //            await thumbnailImage.WriteAsPng(thumbnailPath);
+            //        }
+            //    }
+            //}
 
-            return retVal;
+            //return retVal;
+            return null;
         }
 
         public async Task TryCreateThumbnailAsync(string filePath)
         {
-            var withoutExtension = Path.GetFileNameWithoutExtension(filePath);
-            var imageBasePath = Path.GetDirectoryName(filePath);
+            //var withoutExtension = Path.GetFileNameWithoutExtension(filePath);
+            //var imageBasePath = Path.GetDirectoryName(filePath);
 
-            var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}",
-                withoutExtension, StorageConstants.ImageThumbnailExtension));
+            //var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}",
+            //    withoutExtension, StorageConstants.ImageThumbnailExtension));
 
-            if (!await FileExistsAsync(thumbnailPath))
-            {
-                var fullSizePortableImage = await LoadImageAsync(filePath);
+            //if (!await FileExistsAsync(thumbnailPath))
+            //{
+            //    var fullSizePortableImage = await LoadImageAsync(filePath);
 
-                if (fullSizePortableImage != null)
-                {
-                    var thumbnailImage = await ServiceLocator.
-                        ImageResizeService.ResizeImage(fullSizePortableImage,
-                        _imageThumbnailDefaultMaxWidthHeight);
+            //    if (fullSizePortableImage != null)
+            //    {
+            //        var thumbnailImage = await ServiceLocator.
+            //            ImageResizeService.ResizeImage(fullSizePortableImage,
+            //            _imageThumbnailDefaultMaxWidthHeight);
 
-                    await thumbnailImage.WriteAsPng(thumbnailPath);
-                }
-            }
+            //        await thumbnailImage.WriteAsPng(thumbnailPath);
+            //    }
+            //}
         }
 
         //public async Task<PortableImage> CreateThumbnailAsync(PortableImage image, string imagePath)

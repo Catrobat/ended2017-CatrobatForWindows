@@ -7,7 +7,6 @@
   xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
   xmlns:listsViewControls="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls"
   mc:Ignorable="d"
-  NavigationCacheMode="Enabled"
   DataContext="{Binding SpritesViewModel, Source={StaticResource Locator}}">
   <Grid Background="{ThemeResource AppBackgroundBrush}">
     <Grid>
@@ -22,21 +21,16 @@
                    Style="{ThemeResource TextTitleNormalStyle}">
         </TextBlock>
       </Grid>
+        <listsViewControls:CatrobatListView x:Name="ListViewSprites"
+        Grid.Row="1"
+        ItemsSource="{Binding CurrentProgram.Sprites}"
+        SelectedItems="{Binding SelectedSprites}"                                        
+        ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
+        ItemTemplate="{StaticResource SpriteItemTemplate}"                                          
+        HorizontalAlignment="Center" Tapped="SpriteItem_OnTapped"
+            />
 
-      <listsViewControls:BindableListView x:Name="ListViewSprites" Grid.Row="1"
-            Margin="0" HorizontalAlignment="Center"
-            ItemsSource="{Binding CurrentProgram.Sprites}"
-            BindableSelectedItems="{Binding SelectedSprites, Mode=TwoWay}"
-            CanReorderItems="False" AllowDrop="True" SelectionMode="None">
-        <ListViewBase.ItemTemplate>
-          <DataTemplate>
-            <controls:SpriteItemControl Sprite="{Binding}"
-                  Tapped="SpriteItem_OnTapped" />
-          </DataTemplate>
-        </ListViewBase.ItemTemplate>
-      </listsViewControls:BindableListView>
-
-      <TextBlock Grid.Row="1"
+            <TextBlock Grid.Row="1"
         Text ="{Binding Resources.Editor_ClickPlusToAddSprite, Source={StaticResource LocalizedStrings}}"
         Visibility="{Binding CurrentProgram.Sprites.Count, 
         Converter={StaticResource NativeIntZeroVisibilityConverter}}"

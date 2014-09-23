@@ -10,52 +10,63 @@
 
   <Grid x:Name="GridRoot" Height="90" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
     <Grid Background="{ThemeResource ObjectsBrush}"  Margin="0 4 7 4" RequestedTheme="Dark">
-      <Grid.RowDefinitions>
+    <Grid.RowDefinitions>
         <RowDefinition/>
         <RowDefinition/>
-      </Grid.RowDefinitions>
-      <Grid Grid.Row="0">
+    </Grid.RowDefinitions>
+       
+    <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="28"
+        Margin="5,0,55,0" Text="{Binding Name}" />
+
+    <StackPanel Grid.Row="1" Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+        <TextBlock FontSize="16" Margin="0" Text="{Binding ActionsCount}" />
+        <TextBlock FontSize="16" Margin="0" Text="/" />
+        <TextBlock FontSize="16" Margin="0" Text="{Binding Looks.Count}" />
+        <TextBlock FontSize="16" Margin="0" Text="/" />
+        <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Count}" />
+    </StackPanel>
+
+    <Grid Grid.Row="1" Height="40">
+      <Grid Margin="0,0,55,5" HorizontalAlignment="Right" >
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="3*" />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-
-        <StackPanel Grid.Column="0"  Orientation="Horizontal"
-                          VerticalAlignment="Center">
-          <TextBlock VerticalAlignment="Center" FontSize="28"
-                           Margin="5 5 5 5" Text="{Binding Name}" />
-
-          <StackPanel Margin="5 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
-            <TextBlock FontSize="16" Margin="0" Text="{Binding ActionsCount}" />
-            <TextBlock FontSize="16" Margin="0" Text="/" />
-            <TextBlock FontSize="16" Margin="0" Text="{Binding Looks.Count}" />
-            <TextBlock FontSize="16" Margin="0" Text="/" />
-            <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Count}" />
-          </StackPanel>
-        </StackPanel>
-      </Grid>
-      <Grid Grid.Row="1">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto"/>
-          <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="1" Margin="0,0,10,5" HorizontalAlignment="Right" >
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-          </Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="Auto"/>
+       <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+       
+    <!--<Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center"
+        HorizontalAlignment="Center"
+        Source="{Binding Looks[0].Image.ImageSource}" />
+        <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Source="{Binding Looks[1].Image.ImageSource}" />
+        <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Source="{Binding Looks[2].Image.ImageSource}" />-->
           <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       Source="{Binding Looks[0].Image.ImageSource}" />
+            HorizontalAlignment="Center">
+            <Image.Source>
+              <BitmapImage DecodePixelHeight="40"
+                           UriSource="{Binding Looks[0].Image.ImageUri}"/>
+            </Image.Source>
+          </Image>
           <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       Source="{Binding Looks[1].Image.ImageSource}" />
+                    HorizontalAlignment="Center">
+            <Image.Source>
+              <BitmapImage DecodePixelHeight="40"
+                           UriSource="{Binding Looks[1].Image.ImageUri}"/>
+            </Image.Source>
+          </Image>
           <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       Source="{Binding Looks[2].Image.ImageSource}" />
+                    HorizontalAlignment="Center">
+            <Image.Source>
+            <BitmapImage DecodePixelHeight="40"
+                           UriSource="{Binding Looks[2].Image.ImageUri}"/>
+          </Image.Source>
+          </Image>
         </Grid>
       </Grid>
     </Grid>
-  </Grid>
+        <Path Data="M1,1 L2,1" Stretch="Fill" StrokeThickness="0" Grid.Row="0" />
+    </Grid>
 </UserControl>

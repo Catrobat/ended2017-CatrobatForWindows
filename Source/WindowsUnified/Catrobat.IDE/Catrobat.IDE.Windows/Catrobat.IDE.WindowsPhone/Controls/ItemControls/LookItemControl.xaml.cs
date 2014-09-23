@@ -9,12 +9,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 {
     public sealed partial class LookItemControl : UserControl
     {
-        private const double ItemWidthPortrait = 390.0;
-        private const double ItemWidthLandscape = 450.0;
-        private const double ItemHeightPortrait = 90.0;
-        private const double ItemHeightLandscape = 90.0;
-
-        #region Dependancy properties
+       #region Dependancy properties
 
         public Look Look
         {
@@ -24,7 +19,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 
         public static readonly DependencyProperty LookProperty =
             DependencyProperty.Register("Look",
-            typeof(Look),
+            typeof(object),
             typeof(LookItemControl),
             new PropertyMetadata(null, LookChanged));
 
@@ -60,29 +55,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         public LookItemControl()
         {
             this.InitializeComponent();
-            Window.Current.SizeChanged += OnSizeChanged;
-            this.LayoutUpdated += (sender, o) => UpdatedSize();
-            UpdatedSize();
-        }
-
-        private void OnSizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
-        {
-            UpdatedSize();
-        }
-
-        private void UpdatedSize()
-        {
-            var currentViewState = ApplicationView.GetForCurrentView().
-                Orientation;
-
-            var newWidth = currentViewState == ApplicationViewOrientation.Landscape ?
-                ItemWidthLandscape : ItemWidthPortrait;
-
-            var newHeight = currentViewState == ApplicationViewOrientation.Landscape ?
-                ItemHeightLandscape : ItemHeightPortrait;
-
-            GridRoot.Width = newWidth;
-            GridRoot.Height = newHeight;
         }
     }
 }

@@ -31,6 +31,33 @@ namespace Catrobat.IDE.Core.UI.PortableUI
             }
         }
 
+        string _imagePath;
+        public string ImagePath
+        {
+            get { return _imagePath; }
+            set
+            {
+                if (value != null)
+                {
+                    string path = Path.Combine("ms-appdata:///local", value);
+                    _imagePath = path.Replace('\\', '/');
+                    //RaisePropertyChanged(() => ImagePath);
+                    ImageUri = new Uri(_imagePath);
+                }
+            }
+        }
+
+        Uri _imageUri;
+        public Uri ImageUri
+        {
+            get { return _imageUri; }
+            set
+            {
+                _imageUri = value;
+                RaisePropertyChanged(() => ImageUri);
+            }
+        }
+
         public bool IsEmpty
         {
             get { return _isEmpty; }
@@ -95,8 +122,10 @@ namespace Catrobat.IDE.Core.UI.PortableUI
 
         public async void LoadAsync(string uri, string alternativeUri = null, bool loadFullImage = true)
         {
+            loadFullImage = true; // never try to load thumbnails
+            
             IsLoading = true;
-
+            
             using (var storage = StorageSystem.GetStorage())
             {
                 PortableImage image = null;
@@ -129,16 +158,17 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                     EncodedData = image.EncodedData;
                     Width = image.Width;
                     Height = image.Height;
+                    ImageUri = image.ImageUri;
 
                     if (image._nativeImageSource != null)
                     {
                         _nativeImageSource = image._nativeImageSource;
                     }
-                    else
-                    {
-                        _nativeImageSource = await ServiceLocator.ImageSourceConversionService.
-                            ConvertFromEncodedStream(EncodedData, Width, Height);
-                    }
+                    //else
+                    //{
+                    //    _nativeImageSource = await ServiceLocator.ImageSourceConversionService.
+                    //        ConvertFromEncodedStream(EncodedData, Width, Height);
+                    //}
                 }
 
                 _isEmpty = _encodedData == null && _nativeImageSource == null;

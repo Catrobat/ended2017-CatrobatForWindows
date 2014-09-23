@@ -102,27 +102,27 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             if (reference_color <= 128 && (selected_color.A > 5))
             {
-                BtnSelectedColor.Foreground = new SolidColorBrush(Colors.White);
-                BtnSelectedColorSlider.Foreground = new SolidColorBrush(Colors.White);
+                TbFertig.Foreground = new SolidColorBrush(Colors.White);
+                TbFertigSlider.Foreground = new SolidColorBrush(Colors.White);
             }
             else
             {
-                BtnSelectedColor.Foreground = new SolidColorBrush(Colors.Black);
-                BtnSelectedColorSlider.Foreground = new SolidColorBrush(Colors.Black);
+                TbFertig.Foreground = new SolidColorBrush(Colors.Black);
+                TbFertigSlider.Foreground = new SolidColorBrush(Colors.Black);
             }
 
             if (selected_color == Colors.Transparent)
             {
-                BtnSelectedColor.Background = new SolidColorBrush(Colors.Transparent);
-                BtnSelectedColorSlider.Background = new SolidColorBrush(Colors.Transparent);
+                RecSelectedColor.Fill = new SolidColorBrush(Colors.Transparent);
+                RecSelectedColorSlider.Fill = new SolidColorBrush(Colors.Transparent);
 
                 BtnSelectedColor.BorderBrush = new SolidColorBrush(Colors.White);
                 BtnSelectedColorSlider.BorderBrush = new SolidColorBrush(Colors.White);
             }
             else
             {
-                BtnSelectedColor.Background = new SolidColorBrush(selected_color);
-                BtnSelectedColorSlider.Background = new SolidColorBrush(selected_color);
+                RecSelectedColor.Fill = new SolidColorBrush(selected_color);
+                RecSelectedColorSlider.Fill = new SolidColorBrush(selected_color);
             }
         }
 
@@ -160,9 +160,9 @@ namespace Catrobat.Paint.WindowsPhone.View
         private void BtnSelectedColor_OnClick(object sender, RoutedEventArgs e)
         {
             Color current_color = new Color();
-            current_color.R = ((SolidColorBrush)BtnSelectedColor.Background).Color.R;
-            current_color.G = ((SolidColorBrush)BtnSelectedColor.Background).Color.G;
-            current_color.B = ((SolidColorBrush)BtnSelectedColor.Background).Color.B;
+            current_color.R = ((SolidColorBrush)RecSelectedColor.Fill).Color.R;
+            current_color.G = ((SolidColorBrush)RecSelectedColor.Fill).Color.G;
+            current_color.B = ((SolidColorBrush)RecSelectedColor.Fill).Color.B;
             current_color.A = (byte)(255 * (Convert.ToDouble(tbAlphaValue.Text) / 100));
 
             if ( PocketPaintApplication.GetInstance().is_border_color )
@@ -257,7 +257,8 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                     ((Button)obj).FontSize *= height; 
 
-                    if (((Button)obj).Content.GetType() == typeof(Rectangle))
+
+                    if (((Button)obj).Content != null && ((Button)obj).Content.GetType() == typeof(Rectangle))
                     {
                         ((Rectangle)(((Button)obj).Content)).Height *= height;
                         ((Rectangle)(((Button)obj).Content)).Width *= width;
@@ -290,20 +291,63 @@ namespace Catrobat.Paint.WindowsPhone.View
                                             ((TextBox)obj).Margin.Top * height,
                                             ((TextBox)obj).Margin.Right * width,
                                             ((TextBox)obj).Margin.Bottom * height);
-                }
-                else if (obj.GetType() == typeof(Rectangle))
-                {
-                    ((Rectangle)obj).Height *= height;
-                    ((Rectangle)obj).Width *= width;
-
-                    ((Rectangle)obj).Margin = new Thickness(
-                                            ((Rectangle)obj).Margin.Left * width,
-                                            ((Rectangle)obj).Margin.Top * height,
-                                            ((Rectangle)obj).Margin.Right * width,
-                                            ((Rectangle)obj).Margin.Bottom * height);
+                    ((TextBox)obj).FontSize *= height;
                 }
             }
-        }
+            TbFertig.Width *= width;
+            TbFertig.Height *= height;
+            TbFertig.Margin = new Thickness(
+                                        TbFertig.Margin.Left * width,
+                                        TbFertig.Margin.Top * height,
+                                        TbFertig.Margin.Right * width,
+                                        TbFertig.Margin.Bottom * height);
+            TbFertig.FontSize *= height;
 
+            TbFertigSlider.Width *= width;
+            TbFertigSlider.Height *= height;
+            TbFertigSlider.Margin = new Thickness(
+                                        TbFertigSlider.Margin.Left * width,
+                                        TbFertigSlider.Margin.Top * height,
+                                        TbFertigSlider.Margin.Right * width,
+                                        TbFertigSlider.Margin.Bottom * height);
+            TbFertigSlider.FontSize *= height;
+
+            ImgTransparence.Width *= width;
+            ImgTransparence.Height *= height;
+            ImgTransparence.Margin = new Thickness(
+                                        ImgTransparence.Margin.Left * width,
+                                        ImgTransparence.Margin.Top * height,
+                                        ImgTransparence.Margin.Right * width,
+                                        ImgTransparence.Margin.Bottom * height);
+
+            ImgTransparenceSlider.Width *= width;
+            ImgTransparenceSlider.Height *= height;
+            ImgTransparenceSlider.Margin = new Thickness(
+                                        ImgTransparenceSlider.Margin.Left * width,
+                                        ImgTransparenceSlider.Margin.Top * height,
+                                        ImgTransparenceSlider.Margin.Right * width,
+                                        ImgTransparenceSlider.Margin.Bottom * height);
+
+            RecSelectedColor.Width *= width;
+            RecSelectedColor.Height *= height;
+            RecSelectedColor.Margin = new Thickness(
+                                        RecSelectedColor.Margin.Left * width,
+                                        RecSelectedColor.Margin.Top * height,
+                                        RecSelectedColor.Margin.Right * width,
+                                        RecSelectedColor.Margin.Bottom * height);
+
+            RecSelectedColorSlider.Width *= width;
+            RecSelectedColorSlider.Height *= height;
+            RecSelectedColorSlider.Margin = new Thickness(
+                                        RecSelectedColorSlider.Margin.Left * width,
+                                        RecSelectedColorSlider.Margin.Top * height,
+                                        RecSelectedColorSlider.Margin.Right * width,
+                                        RecSelectedColorSlider.Margin.Bottom * height);
+
+            GrdButtonSelectedColor.Height *= height;
+            GrdButtonSelectedColor.Width *= width;
+            GrdButtonSelectedColorSlider.Height *= height;
+            GrdButtonSelectedColorSlider.Width *= width;
+        }
     }
 }

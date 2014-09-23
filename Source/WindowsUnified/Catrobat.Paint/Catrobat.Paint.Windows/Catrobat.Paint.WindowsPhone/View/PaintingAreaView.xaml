@@ -34,7 +34,7 @@
                 <ucRecEll:ucRecEll></ucRecEll:ucRecEll>
             </Grid>
 
-            <Grid x:Name="GridUserControl" Margin="0,0,-25,0" >
+            <Grid x:Name="GridUserControl" Margin="0,0,0,0" >
                 <UserControl x:Name="SliderThicknessControl" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="Collapsed" Width="auto"  >
                     <Grid x:Name="SliderThicknessGrid" Background="#1F1F1F"  MinHeight="120">
                         <Slider x:Name="SliderThickness" Background="Black" Maximum="50" VerticalAlignment="Top" HorizontalAlignment="Left" Minimum="1" Margin="10,16,130,12"/>
@@ -59,7 +59,7 @@
                 </UserControl>
 
                 <UserControl x:Name="uctrlOwnKeyboard" Height="auto" Width="auto" Margin="0,0,0,0" Visibility="Collapsed">
-                    <Grid x:Name="grdOwnKeyboard" Background="#1F1F1F"  MinHeight="120" VerticalAlignment="Bottom" RenderTransformOrigin="0.502,-0.04" Height="298">
+                    <Grid x:Name="grdOwnKeyboard" Background="#1F1F1F"  MinHeight="120" VerticalAlignment="Bottom" Height="298" HorizontalAlignment="Center" Width="400">
                         <Button x:Name="btnValue0" Content="0" HorizontalAlignment="Left" Margin="145,205,0,0" VerticalAlignment="Top" Height="72" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
                         <Button x:Name="btnValue1" Content="1" HorizontalAlignment="Left" Margin="20,-3,0,0" VerticalAlignment="Top" Height="72" Width="100" FontSize="30" Click="ButtonNumbers_Click" />
                         <Button x:Name="btnValue2" Content="2" HorizontalAlignment="Left" Margin="145,-3,0,0" VerticalAlignment="Top" Height="72" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
@@ -70,8 +70,8 @@
                         <Button x:Name="btnValue7" Content="7" HorizontalAlignment="Left" Margin="20,134,0,0" VerticalAlignment="Top" Height="72" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
                         <Button x:Name="btnValue8" Content="8" HorizontalAlignment="Left" Margin="145,134,0,0" VerticalAlignment="Top" Height="72" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
                         <Button x:Name="btnValue9" Content="9" HorizontalAlignment="Left" Margin="270,134,0,0" VerticalAlignment="Top" Height="72" Width="100" FontSize="30" Click="ButtonNumbers_Click"/>
-                        <Button x:Name="btnDeleteNumbers" Content="DEL" HorizontalAlignment="Left" Margin="20,207,0,0" VerticalAlignment="Top" Height="71" Width="65" Click="btnDeleteNumbers_Click"/>
-                        <Button x:Name="btnAccept" Content="Accept" HorizontalAlignment="Left" Margin="270,205,0,0" VerticalAlignment="Top" Height="72" Width="49" Click="btnAccept_Click"/>
+                        <Button x:Name="btnDeleteNumbers" Content="DEL" HorizontalAlignment="Left" Margin="20,207,0,0" VerticalAlignment="Top" Height="72" Width="100" Click="btnDeleteNumbers_Click"/>
+                        <Button x:Name="btnAccept" Content="Accept" HorizontalAlignment="Left" Margin="270,205,0,0" VerticalAlignment="Top" Height="72" Width="100" Click="btnAccept_Click"/>
                     </Grid>
                 </UserControl>
             </Grid>

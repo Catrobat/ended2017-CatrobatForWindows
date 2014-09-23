@@ -1,9 +1,11 @@
-﻿using Catrobat.IDE.Core.Models;
+﻿using Windows.UI.Xaml.Input;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Actions;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Editor.Actions
 {
@@ -24,9 +26,9 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Actions
             _viewModel.OnLoadBrickViewCommand.Execute(null);
         }
 
-        private void reorderListBoxScriptBricks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CatrobatListView_OnItemTapped(object sender, CatrobatListViewItemEventArgs e)
         {
-            _viewModel.AddNewScriptBrickCommand.Execute(((ListView)sender).SelectedItem as ModelBase);
+            _viewModel.AddNewScriptBrickCommand.Execute(e.getTappedItem().Content as ModelBase);
         }
     }
 }
