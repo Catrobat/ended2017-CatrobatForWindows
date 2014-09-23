@@ -486,7 +486,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                     };
                     return portableImage;
                 }
-                catch
+                catch (Exception exc)
                 {
                     return null;
                 }

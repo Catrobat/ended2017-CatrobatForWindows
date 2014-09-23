@@ -26,7 +26,7 @@
         <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Count}" />
     </StackPanel>
 
-    <Grid Grid.Row="1" Height="40">
+    <Grid Grid.Row="1">
       <Grid Margin="0,0,55,5" HorizontalAlignment="Right" >
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="Auto"/>
@@ -44,23 +44,23 @@
                     HorizontalAlignment="Center"
                     Source="{Binding Looks[2].Image.ImageSource}" />-->
           <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center"
-            HorizontalAlignment="Center">
+            HorizontalAlignment="Center" Height="35">
             <Image.Source>
-              <BitmapImage DecodePixelHeight="40"
+              <BitmapImage DecodePixelHeight="35"
                            UriSource="{Binding Looks[0].Image.ImageUri}"/>
             </Image.Source>
           </Image>
           <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
+                 HorizontalAlignment="Center" Height="35">
             <Image.Source>
-              <BitmapImage DecodePixelHeight="40"
+              <BitmapImage DecodePixelHeight="35"
                            UriSource="{Binding Looks[1].Image.ImageUri}"/>
             </Image.Source>
           </Image>
           <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
+                 HorizontalAlignment="Center" Height="35">
             <Image.Source>
-            <BitmapImage DecodePixelHeight="40"
+            <BitmapImage DecodePixelHeight="35"
                            UriSource="{Binding Looks[2].Image.ImageUri}"/>
           </Image.Source>
           </Image>

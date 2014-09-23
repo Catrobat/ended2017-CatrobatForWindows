@@ -59,7 +59,13 @@
 
   <DataTemplate x:Key="ListBoxLookItem">
     <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Look}">
-      <Image Source="{Binding Path=Image.ImageSource}" Width="24" Height="24" />
+      <!--<Image Source="{Binding Path=Image.ImageSource}" Width="24" Height="24" />-->
+      <Image Width="24" Height="24">
+        <Image.Source>
+          <BitmapImage DecodePixelHeight="24"
+                       UriSource="{Binding Image.ImageUri}"/>
+        </Image.Source>
+      </Image>
       <TextBlock Text="{Binding Path=Name}" FontSize="24" Padding="10,0,0,0" 
         Foreground="{Binding IsSelected, 
         Converter={StaticResource SelectedBrushConverter}}"/>
@@ -68,7 +74,13 @@
 
   <DataTemplate x:Key="PageListBoxLookItem">
     <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Look}">
-      <Image Source="{Binding Path=Image.ImageSource}" Width="40" Height="40" />
+      <!--<Image Source="{Binding Path=Image.ImageSource}" Width="40" Height="40" />-->
+      <Image Width="40" Height="40">
+        <Image.Source>
+          <BitmapImage DecodePixelHeight="40"
+                       UriSource="{Binding Image.ImageUri}"/>
+        </Image.Source>
+      </Image>
       <TextBlock Text="{Binding Path=Name}" FontSize="40" Padding="10,0,0,0"
         Foreground="{Binding IsSelected, 
         Converter={StaticResource SelectedBrushConverter}}"/>

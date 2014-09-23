@@ -41,7 +41,6 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                 {
                     string path = Path.Combine("ms-appdata:///local", value);
                     _imagePath = path.Replace('\\', '/');
-                    //RaisePropertyChanged(() => ImagePath);
                     ImageUri = new Uri(_imagePath);
                 }
             }
@@ -122,8 +121,7 @@ namespace Catrobat.IDE.Core.UI.PortableUI
 
         public async void LoadAsync(string uri, string alternativeUri = null, bool loadFullImage = true)
         {
-            loadFullImage = true; // never try to load thumbnails
-            
+            loadFullImage = true; // never load thumbnails     
             IsLoading = true;
             
             using (var storage = StorageSystem.GetStorage())
