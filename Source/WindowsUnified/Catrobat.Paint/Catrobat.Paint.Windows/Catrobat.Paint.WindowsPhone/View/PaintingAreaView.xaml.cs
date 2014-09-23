@@ -33,7 +33,6 @@ namespace Catrobat.Paint.WindowsPhone.View
     /// </summary>
     public sealed partial class PaintingAreaView : Page
     {
-        Int32 slider_thickness_textbox_last_value = 1;
         static string current_appbar = "barStandard";
         Point start_point = new Point();
         Point old_point = new Point();
@@ -65,18 +64,13 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().MainGrid = LayoutRoot;
             UndoRedoActionbarManager.GetInstance().ApplicationBarTop = PocketPaintApplication.GetInstance().AppbarTop;
 
-            btnRoundImage.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.RoundButton_OnClick;
-            btnTriangleImage.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.TriangleButton_OnClick;
-            btnSquareImage.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.SquareButton_OnClick;
             PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
-            SliderThickness.ValueChanged += SliderThickness_ValueChanged;
-            SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
             PocketPaintApplication.GetInstance().AppbarTop.ToolChangedHere(PocketPaintApplication.GetInstance().ToolCurrent);
-            PaintingAreaCanvas.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
+            //PaintingAreaCanvas.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
             PaintingAreaCanvas.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
-            PaintingAreaCanvas.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
-            PaintingAreaCanvas.ManipulationStarting += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarting;
-            // PaintingAreaCanvas.PointerPressed += PaintingAreaCanvas_PointerEntered;
+            //PaintingAreaCanvas.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
+            //PaintingAreaCanvas.ManipulationStarting += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarting;
+            PaintingAreaCanvas.PointerPressed += PaintingAreaCanvas_PointerEntered;
            /* if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Brush || 
                 PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Eraser)
             {
@@ -88,12 +82,11 @@ namespace Catrobat.Paint.WindowsPhone.View
             }*/
             btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
             btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
-            btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
-            btnThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnThickness_OnClick;
+            //btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
+            //btnThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnThickness_OnClick;
             
             setPaintingAreaViewLayout();
 
-            checkPenLineCap(PocketPaintApplication.GetInstance().PaintData.CapSelected);
             createAppBarAndSwitchAppBarContent(current_appbar);        
         }
 
@@ -102,51 +95,13 @@ namespace Catrobat.Paint.WindowsPhone.View
             double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
             double height_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
 
-            uctrlOwnKeyboard.Height *= height_multiplicator;
-            uctrlOwnKeyboard.Width *= width_multiplicator;
-
-            grdOwnKeyboard.Height *= height_multiplicator;
-            grdOwnKeyboard.Width *= width_multiplicator;
-
-            foreach (Object obj in grdOwnKeyboard.Children)
-            {
-                if (obj.GetType() == typeof(Button))
-                {
-                    ((Button)obj).Height *= height_multiplicator;
-                    ((Button)obj).Width *= width_multiplicator;
-
-                    ((Button)obj).Margin = new Thickness(
-                                            ((Button)obj).Margin.Left * width_multiplicator,
-                                            ((Button)obj).Margin.Top * height_multiplicator,
-                                            ((Button)obj).Margin.Right * width_multiplicator,
-                                            ((Button)obj).Margin.Bottom * height_multiplicator);
-                    ((Button)obj).FontSize *= height_multiplicator;
-                }
-            }
-
-            SliderThicknessControl.Width = Window.Current.Bounds.Width;
-            SliderThicknessControl.Height = Window.Current.Bounds.Height * 0.23; //Visibility="Collapsed"
-            SliderThicknessGrid.Width = Window.Current.Bounds.Width;
-            SliderThicknessGrid.Height = Window.Current.Bounds.Height * 0.23;
-            SliderThickness.Height = SliderThicknessGrid.Height * 0.3;
-            SliderThickness.Width = SliderThicknessGrid.Width * 0.6053;
-            SliderThickness.Margin = new Thickness(SliderThicknessGrid.Width * 0.03, SliderThicknessGrid.Height * 0.15, 0, 0);
-
-            btnBrushThickness.Height = SliderThicknessGrid.Height * 0.3;
-            btnBrushThickness.Width = SliderThicknessGrid.Width * 0.2;
-            btnBrushThickness.Margin = new Thickness(SliderThicknessGrid.Width * 0.03 + SliderThicknessGrid.Width * 0.666, SliderThicknessGrid.Height * 0.13, SliderThicknessGrid.Width * 0.03, 0);
-
-            btnRoundImage.Height = SliderThicknessGrid.Height * 0.3;
-            btnRoundImage.Width = SliderThicknessGrid.Width * 0.2;
-            btnRoundImage.Margin = new Thickness(SliderThicknessGrid.Width * 0.03, 0, 0, SliderThicknessGrid.Height * 0.15);
-
-            btnSquareImage.Height = SliderThicknessGrid.Height * 0.3;
-            btnSquareImage.Width = SliderThicknessGrid.Width * 0.2;
-            btnSquareImage.Margin = new Thickness(SliderThicknessGrid.Width * 0.03 + SliderThicknessGrid.Width * 0.333, 0, 0, SliderThicknessGrid.Height * 0.15);
-
-            btnTriangleImage.Height = SliderThicknessGrid.Height * 0.3;
-            btnTriangleImage.Width = SliderThicknessGrid.Width * 0.2;
-            btnTriangleImage.Margin = new Thickness(SliderThicknessGrid.Width * 0.666 + SliderThicknessGrid.Width * 0.03, 0, 0, SliderThicknessGrid.Height * 0.15);
+            GrdThicknessControl.Height *= height_multiplicator;
+            GrdThicknessControl.Width *= width_multiplicator;
+            GrdThicknessControl.Margin = new Thickness(
+                                            GrdThicknessControl.Margin.Left * width_multiplicator,
+                                            GrdThicknessControl.Margin.Top * height_multiplicator,
+                                            GrdThicknessControl.Margin.Right * width_multiplicator,
+                                            GrdThicknessControl.Margin.Bottom * height_multiplicator);
         }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
@@ -191,28 +146,6 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             e.PageState["PaintingAreaCanvasUnderlaying"] = PaintingAreaCanvasUnderlaying.Children;
             e.PageState["PaintingAreaCanvas"] = PaintingAreaCanvas.Children;
-        }
-
-        public void checkPenLineCap(PenLineCap pen_line_cap)
-        {
-            if (pen_line_cap == PenLineCap.Round)
-            {
-                btnRoundImage.BorderBrush = new SolidColorBrush(Colors.White);
-                btnSquareImage.BorderBrush = new SolidColorBrush(Colors.Gray);
-                btnTriangleImage.BorderBrush = new SolidColorBrush(Colors.Gray);
-            }
-            else if (pen_line_cap == PenLineCap.Square)
-            {
-                btnRoundImage.BorderBrush = new SolidColorBrush(Colors.Gray);
-                btnSquareImage.BorderBrush = new SolidColorBrush(Colors.White);
-                btnTriangleImage.BorderBrush = new SolidColorBrush(Colors.Gray);
-            }
-            else
-            {
-                btnRoundImage.BorderBrush = new SolidColorBrush(Colors.Gray);
-                btnSquareImage.BorderBrush = new SolidColorBrush(Colors.Gray);
-                btnTriangleImage.BorderBrush = new SolidColorBrush(Colors.White);
-            }
         }
 
         public void createAppBarAndSwitchAppBarContent(string type)
@@ -518,187 +451,18 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        private void btnAccept_Click(object sender, RoutedEventArgs e)
+        public Visibility GrdThicknessControlVisibility
         {
-            SliderThicknessControl.Margin = new Thickness(0.0, 0.0, 0.0, 0.0);
-
-            checkIfThicknessWasEntered();
-            checkIfValueIsInRange(true);
-            uctrlOwnKeyboard.Visibility = Visibility.Collapsed;
-        }
-
-        private void checkIfValueIsInRange(bool pressed_accept)
-        {
-            
-            if (btnBrushThickness.Content == null)
+            get
             {
-                btnValue0.IsEnabled = true;
-                btnValue1.IsEnabled = true;
-                btnValue2.IsEnabled = true;
-                btnValue3.IsEnabled = true;
-                btnValue4.IsEnabled = true;
-                btnValue5.IsEnabled = true;
-                btnValue6.IsEnabled = true;
-                btnValue7.IsEnabled = true;
-                btnValue8.IsEnabled = true;
-                btnValue9.IsEnabled = true;
-                btnValue0.IsEnabled = false;
+                return GrdThicknessControl.Visibility;
             }
-            else
+            set
             {
-                Int32 input = Convert.ToInt32(btnBrushThickness.Content);
-                if (input > 5 && input < 10)
-                {
-                    btnValue0.IsEnabled = false;
-                    btnValue1.IsEnabled = false;
-                    btnValue2.IsEnabled = false;
-                    btnValue3.IsEnabled = false;
-                    btnValue4.IsEnabled = false;
-                    btnValue5.IsEnabled = false;
-                    btnValue6.IsEnabled = false;
-                    btnValue7.IsEnabled = false;
-                    btnValue8.IsEnabled = false;
-                    btnValue9.IsEnabled = false;
-                }
-                else if (input == 5)
-                {
-                    btnValue0.IsEnabled = true;
-                    btnValue1.IsEnabled = false;
-                    btnValue2.IsEnabled = false;
-                    btnValue3.IsEnabled = false;
-                    btnValue4.IsEnabled = false;
-                    btnValue5.IsEnabled = false;
-                    btnValue6.IsEnabled = false;
-                    btnValue7.IsEnabled = false;
-                    btnValue8.IsEnabled = false;
-                    btnValue9.IsEnabled = false;
-                }
-                else if (input < 5)
-                {
-                    btnValue0.IsEnabled = true;
-                    btnValue1.IsEnabled = true;
-                    btnValue2.IsEnabled = true;
-                    btnValue3.IsEnabled = true;
-                    btnValue4.IsEnabled = true;
-                    btnValue5.IsEnabled = true;
-                    btnValue6.IsEnabled = true;
-                    btnValue7.IsEnabled = true;
-                    btnValue8.IsEnabled = true;
-                    btnValue9.IsEnabled = true;
-                }
-                else
-                {
-                    btnValue0.IsEnabled = false;
-                    btnValue1.IsEnabled = true;
-                    btnValue2.IsEnabled = true;
-                    btnValue3.IsEnabled = true;
-                    btnValue4.IsEnabled = true;
-                    btnValue5.IsEnabled = true;
-                    btnValue6.IsEnabled = true;
-                    btnValue7.IsEnabled = true;
-                    btnValue8.IsEnabled = true;
-                    btnValue9.IsEnabled = true;
-                }
-
-                SliderThickness.Value = Convert.ToDouble(input);
+                GrdThicknessControl.Visibility = value;
             }
         }
 
-        public void checkIfThicknessWasEntered()
-        {
-            if (uctrlOwnKeyboard.Visibility == Visibility.Visible)
-            {
-                string slider_thickness_text_box_value = string.Empty;
-                if(btnBrushThickness.Content != null)
-                {
-                    slider_thickness_text_box_value = btnBrushThickness.Content.ToString();
-                }
-                Int32 slider_thickness_text_box_int_value;
-
-                if (!slider_thickness_text_box_value.Equals(""))
-                {
-                    slider_thickness_text_box_int_value = Convert.ToInt32(slider_thickness_text_box_value);
-
-                    if (!(slider_thickness_text_box_int_value >= 1 && slider_thickness_text_box_int_value <= 50))
-                    {
-                        btnBrushThickness.Content = slider_thickness_textbox_last_value.ToString();
-                    }
-                    else
-                    {
-                        slider_thickness_textbox_last_value = slider_thickness_text_box_int_value;
-                        SliderThickness.Value = slider_thickness_text_box_int_value;
-                    }
-                }
-                else
-                {
-                    btnBrushThickness.Content = slider_thickness_textbox_last_value.ToString();
-                }
-
-                btnBrushThickness.Foreground = new SolidColorBrush(Colors.White);
-            }
-        }
-
-        private void btnDeleteNumbers_Click(object sender, RoutedEventArgs e)
-        {
-            if (btnBrushThickness.Content.ToString() != "" && Convert.ToInt32(btnBrushThickness.Content.ToString()) > 0)
-            {
-                btnBrushThickness.Content = btnBrushThickness.Content.ToString().Remove(btnBrushThickness.Content.ToString().Length - 1);
-            }
-
-            checkIfValueIsInRange(false);
-        }
-
-        private void ButtonNumbers_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = sender as Button;
-            if (button != null)
-            {
-                string get_clicked_button_number = button.Name.Substring(8);
-
-                if (btnBrushThickness.Content == null || btnBrushThickness.Content.ToString().Length < 2)
-                {
-                    btnBrushThickness.Content += get_clicked_button_number;
-                }
-                else if (btnBrushThickness.Content.ToString().Length == 2)
-                {
-                    btnBrushThickness.Content = "";
-                    btnBrushThickness.Content += get_clicked_button_number;
-                }
-                checkIfValueIsInRange(false);
-            }
-        }
-
-        private void SliderThickness_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            if (SliderThickness != null)
-            {
-                btnBrushThickness.Content = Convert.ToInt32(SliderThickness.Value).ToString();
-                slider_thickness_textbox_last_value = Convert.ToInt32(SliderThickness.Value);
-                PocketPaintApplication.GetInstance().PaintData.ThicknessSelected = Convert.ToInt32(SliderThickness.Value);
-            }
-        }
-
-        public Visibility getVisibilityOFSliderThicknessControl()
-        {
-            return SliderThicknessControl.Visibility;
-        }
-
-        public void setVisibilityOFSliderThicknessControl(Visibility visibility)
-        {
-            SliderThicknessControl.Visibility = visibility;
-            if (Visibility.Collapsed == visibility)
-            {
-                setVisibilityOFThicknessKeyboard(visibility);
-            }
-        }
-        public void setVisibilityOFThicknessKeyboard(Visibility visibility)
-        {
-            uctrlOwnKeyboard.Visibility = visibility;
-        }
-        public void setSliderThicknessControlMargin(Thickness margin)
-        {
-            SliderThicknessControl.Margin = margin;
-        }
         public void setVisibilityOFRectEllUserControl(Visibility visibility)
         {
             GridUserControlRectEll.Visibility = visibility;
@@ -712,36 +476,9 @@ namespace Catrobat.Paint.WindowsPhone.View
             return GridUserControlRectEll.Visibility;
         }
 
-        private void btnBrushThickness_Click(object sender, RoutedEventArgs e)
-        {
-            checkIfThicknessWasEntered();
-            if (getVisibilityOFThicknessKeyboard() == Visibility.Collapsed)
-            {
-                setSliderThicknessControlMargin(new Thickness(0.0, -324.0, 0.0, 287.0));
-                setVisibilityOFThicknessKeyboard(Visibility.Visible);
-            }
-            else
-            {
-                setVisibilityOFThicknessKeyboard(Visibility.Collapsed);
-                setSliderThicknessControlMargin(new Thickness(0.0, 0.0, 0.0, 0.0));
-            }
-        }
-        public Visibility getVisibilityOFThicknessKeyboard()
-        {
-            return uctrlOwnKeyboard.Visibility;
-        }
-
         private void btnThickness_Click(object sender, RoutedEventArgs e)
         {
-            if (getVisibilityOFSliderThicknessControl() == Visibility.Collapsed)
-            {
-                setVisibilityOFSliderThicknessControl(Visibility.Visible);
-                setSliderThicknessControlMargin(new Thickness(0.0, 0.0, 0.0, 0.0));
-            }
-            else
-            {
-                setVisibilityOFSliderThicknessControl(Visibility.Collapsed);
-            }
+            GrdThicknessControl.Visibility = GrdThicknessControl.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void btnThicknessBorder_Click(object sender, RoutedEventArgs e)
