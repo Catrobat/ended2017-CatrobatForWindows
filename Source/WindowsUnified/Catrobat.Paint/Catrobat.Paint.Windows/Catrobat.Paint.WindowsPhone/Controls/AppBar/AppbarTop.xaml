@@ -23,8 +23,8 @@
         </AppBarButton>
 
         <Button x:Name="BtnSelectedColor" Height="60" Margin="219,0,0,0" MinWidth="1" Width="50" Padding="0">
-            <Grid x:Name="GrdBtnSelectedColor" Height="41" Width="50">
-                <Image x:Name="ImgTransparence"  Height="41" Margin="0" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Visibility="Visible" Width="50" />
+            <Grid x:Name="GrdBtnSelectedColor" Height="60" VerticalAlignment="Center" Width="50">
+                <Image x:Name="ImgTransparence"  Height="60" Margin="0" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Visibility="Visible" Width="50" />
                 <Rectangle x:Name="RecSelectedColor" Fill="Black" Height="40" Margin="0" Visibility="Visible" Width="50"/>
             </Grid>
         </Button>
