@@ -15,9 +15,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     public class ProgramDetailViewModel : ViewModelBase
     {
         #region Private Members
-
+        private bool _performedExport = false;
         private object _loadingLock = new object();
-
         #endregion
 
         #region Properties
@@ -176,6 +175,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             //Messenger.Default.Send(message, ViewModelMessagingToken.ShareProgramHeaderListener);
 
             ServiceLocator.NavigationService.NavigateTo<ProgramExportViewModel>();
+            _performedExport = true;
         }
 
         private void RenameProgramAction()
@@ -278,6 +278,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         CurrentProgram = null;
                     });
                 }
+            }
+            if (_performedExport)
+            {
+                await ServiceLocator.ProgramExportService.CleanUpExport();
+                _performedExport = false;
             }
             IsActivatingLocalProgram = false;
             RaisePropertiesChanges();          
