@@ -7,6 +7,7 @@ using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
+using System;
 
 namespace Catrobat.IDE.Core.Models
 {
@@ -39,13 +40,17 @@ namespace Catrobat.IDE.Core.Models
                     try
                     {
                         _image = new PortableImage();
-                        var fileName = Path.Combine(StorageConstants.ProgramsPath,
-                            XmlParserTempProjectHelper.Project.ProjectHeader.ProgramName,
-                            StorageConstants.ProgramLooksPath, _fileName);
-                            
+                        string fileName = null;
+                        if (_fileName != null)
+                        {
+                            fileName = Path.Combine(StorageConstants.ProgramsPath,
+                             XmlParserTempProjectHelper.Project.ProjectHeader.ProgramName,
+                             StorageConstants.ProgramLooksPath, _fileName);
+
                             //XmlParserTempProjectHelper.Project.BasePath + "/" + 
                             //StorageConstants.ProgramLooksPath + "/" + _fileName;
-                        //_image.LoadAsync(fileName, null, false);
+                            //_image.LoadAsync(fileName, null, false);
+                        }
                         _image.ImagePath = fileName;
                         //using (var storage = StorageSystem.GetStorage())
                         //{
@@ -54,7 +59,7 @@ namespace Catrobat.IDE.Core.Models
                         //                                   _fileName);
                         //}
                     }
-                    catch
+                    catch (Exception exc)
                     {
                         if (Debugger.IsAttached)
                             Debugger.Break();

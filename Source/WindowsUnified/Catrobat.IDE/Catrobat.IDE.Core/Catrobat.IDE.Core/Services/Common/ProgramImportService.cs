@@ -111,10 +111,6 @@ namespace Catrobat.IDE.WindowsShared.Services
                 await storage.MoveDirectoryAsync(StorageConstants.TempProgramImportPath,
                     newPath);
             }
-            Debug.WriteLine("Starting with CreateThumbnailsForNewProgram in AcceptTempProgram");
-            await ServiceLocator.ContextService.
-                CreateThumbnailsForNewProgram(uniqueProgramName);
-
             return uniqueProgramName;
         }
 

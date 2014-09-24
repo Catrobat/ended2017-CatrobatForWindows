@@ -147,8 +147,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             {
                 await CurrentProgram.Save();
 
-                await ServiceLocator.ContextService.
-                    CreateThumbnailsForNewProgram(CurrentProgram.Name);
+                //await ServiceLocator.ContextService.
+                //    CreateThumbnailsForNewProgram(CurrentProgram.Name);
 
                 var programChangedMessage = new GenericMessage<Program>(CurrentProgram);
                 Messenger.Default.Send(programChangedMessage, ViewModelMessagingToken.CurrentProgramChangedListener);

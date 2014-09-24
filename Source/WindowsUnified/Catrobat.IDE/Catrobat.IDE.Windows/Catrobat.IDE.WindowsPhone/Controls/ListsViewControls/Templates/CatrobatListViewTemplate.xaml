@@ -30,8 +30,13 @@
                             <ColumnDefinition
                                 Width="Auto" />
                         </Grid.ColumnDefinitions>
+                        <ProgressRing x:Name="CatrobatListViewProgressRing" Grid.Column="0" Grid.ColumnSpan="2" 
+                                      Background="Transparent" 
+                                      IsActive="True" Width="40" Height="40" 
+                                    VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Visible"/>
                         <ScrollViewer
                             x:Name="ScrollViewer"
+                             Grid.Column="0"
                             Grid.ColumnSpan="2" 
                             HorizontalScrollBarVisibility="Disabled"
                             VerticalScrollBarVisibility="Visible"

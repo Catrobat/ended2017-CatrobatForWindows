@@ -108,6 +108,9 @@
     <Compile Include="Common\SuspensionManager.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\AppBar\ThicknessControl.xaml.cs">
+      <DependentUpon>ThicknessControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AppBar\AppbarTop.xaml.cs">
       <DependentUpon>AppbarTop.xaml</DependentUpon>
     </Compile>
@@ -268,6 +271,10 @@
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\AppBar\ThicknessControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\AppBar\AppbarTop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

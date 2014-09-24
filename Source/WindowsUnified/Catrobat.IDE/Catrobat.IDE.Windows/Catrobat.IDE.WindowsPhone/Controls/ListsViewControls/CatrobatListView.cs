@@ -1,4 +1,5 @@
-﻿using Windows.UI.ViewManagement;
+﻿using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.UI.PortableUI;
@@ -31,23 +32,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
         public static readonly DependencyProperty ItemsSourceDP = DependencyProperty.Register(
             "ItemsSource", typeof(object), typeof(CatrobatListView),
-            new PropertyMetadata(null, ItemsSourceChanged));
-
-        private static void ItemsSourceChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
-        {
-            ((CatrobatListView)target).OnItemsSourceChanged(e.NewValue);
-        }
-
-        private void OnItemsSourceChanged(object e)
-        {
-            var list = (IList)e;
-            if (list == null)
-            {
-                return;
-            }
-            Clvw.ImportItemsSource(list);
-            ItemsSource.CollectionChanged += ItemsSource_CollectionChanged;
-        }
+            new PropertyMetadata(null));
 
         public DataTemplate ItemTemplate
         {
@@ -184,8 +169,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
         public event ItemTappedEventHandler ItemTapped;
 
-
-
         public CatrobatListView()
         {
             this.Clvw = new CatrobatListViewWorker();
@@ -197,6 +180,27 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             this.Unloaded += CatrobatListView_Unloaded;
             this.SizeChanged += CatrobatListView_SizeChanged;
             this._oldApplicationOrientation = ApplicationView.GetForCurrentView().Orientation;
+            this.Loaded += CatrobatListView_Loaded;
+        }
+
+        void CatrobatListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                Clvw.ImportItemsSource((IList)ItemsSource);
+                ItemsSource.CollectionChanged += ItemsSource_CollectionChanged;
+                Clvw.LayoutUpdated += Clvw_LayoutUpdated;
+            });
+        }
+
+        void Clvw_LayoutUpdated(object sender, object e)
+        {
+            if (Clvw.SelectionMode == ListViewSelectionMode.None)
+            {
+                Clvw.CheckIfNewAddedBrick();
+            }
+            Clvw.LayoutUpdated -= Clvw_LayoutUpdated;
+            Clvw.SetProgessRingVisibility(Visibility.Collapsed);
         }
 
         void Clvw_ItemTapped(object sender, CatrobatListViewItemEventArgs e)
@@ -209,16 +213,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
         void CatrobatListView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var orientation = ApplicationView.GetForCurrentView().
-                Orientation;
-
-            if (orientation == this._oldApplicationOrientation)
-            {
-                return;
-            }
-            this._oldApplicationOrientation = orientation;
-
-            Clvw.SetItemWidth(orientation == ApplicationViewOrientation.Portrait
+            Clvw.SetItemWidth(ApplicationView.GetForCurrentView().Orientation == ApplicationViewOrientation.Portrait
                 ? ItemWidthPortrait
                 : ItemWidthLandscape);
         }
@@ -297,6 +292,9 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         private const string ScrollViewerName = "ScrollViewer";
         private ScrollViewer _scrollViewer;
 
+        private const string ProgressRingName = "CatrobatListViewProgressRing";
+        private ProgressRing _progressRing;
+
         private int _verticalItemMargin;
         private bool _reorderEnabled;
 
@@ -337,17 +335,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             _rearrangeOldYValue = 0;
             this.SelectionMode = ListViewSelectionMode.None;
             this.SelectionChanged += CatrobatListViewWorker_SelectionChanged;
-
-            this.Loaded += CatrobatListViewWorker_Loaded;
         }
 
-        void CatrobatListViewWorker_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (this.SelectionMode == ListViewSelectionMode.None)
-            {
-                CheckIfNewAddedBrick();
-            }
-        }
 
         void CatrobatListViewWorker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -389,7 +378,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
         internal void ImportItemsSource(IList list)
         {
-            this.TransferItemsSource(list);
+            TransferItemsSource(list);
         }
 
         private void TransferItemsSource(IList source)
@@ -421,7 +410,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             }
         }
 
-        private void CheckIfNewAddedBrick()
+        public void CheckIfNewAddedBrick()
         {
             for (int i = Items.Count - 1; i >= 0; i--)
             {
@@ -573,6 +562,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             }
         }
 
+        public void SetProgessRingVisibility(Visibility newVisibility)
+        {
+            _progressRing.Visibility = newVisibility;
+        }
+
         protected override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -580,8 +574,9 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             _scrollViewer = GetTemplateChild(ScrollViewerName) as ScrollViewer;
             _manipulationCanvas = GetTemplateChild(ManipulationCanvasName) as Canvas;
             _dragCanvas = GetTemplateChild(DragCanvasName) as Canvas;
+            _progressRing = GetTemplateChild(ProgressRingName) as ProgressRing;
 
-            if (_dragCanvas == null || _manipulationCanvas == null || _scrollViewer == null)
+            if (_dragCanvas == null || _manipulationCanvas == null || _scrollViewer == null || _progressRing == null)
             {
                 throw new Exception("Container missing in CatrobatListViewWorker");
             }

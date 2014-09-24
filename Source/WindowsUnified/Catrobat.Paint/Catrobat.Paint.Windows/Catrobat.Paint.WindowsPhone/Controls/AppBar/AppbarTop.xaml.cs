@@ -38,6 +38,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
             double height_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
             GrdLayoutRoot.Width *= width_multiplicator;
+            GrdLayoutRoot.Height *= height_multiplicator;
 
             foreach (Object obj in GrdLayoutRoot.Children)
             {
@@ -86,14 +87,34 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                                             ((Rectangle)obj).Margin.Bottom * height_multiplicator);
                 }
             }
-            btnSelectedColor.Background = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
+
+            ImgTransparence.Width *= width_multiplicator;
+            ImgTransparence.Height *= height_multiplicator;
+            ImgTransparence.Margin = new Thickness(
+                                        ImgTransparence.Margin.Left * width_multiplicator,
+                                        ImgTransparence.Margin.Top * height_multiplicator,
+                                        ImgTransparence.Margin.Right * width_multiplicator,
+                                        ImgTransparence.Margin.Bottom * height_multiplicator);
+
+            RecSelectedColor.Width *= width_multiplicator;
+            RecSelectedColor.Height *= height_multiplicator;
+            RecSelectedColor.Margin = new Thickness(
+                                        RecSelectedColor.Margin.Left * width_multiplicator,
+                                        RecSelectedColor.Margin.Top * height_multiplicator,
+                                        RecSelectedColor.Margin.Right * width_multiplicator,
+                                        RecSelectedColor.Margin.Bottom * height_multiplicator);
+
+            GrdBtnSelectedColor.Height *= height_multiplicator;
+            GrdBtnSelectedColor.Width *= width_multiplicator;
+
+            BtnSelectedColor.Background = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
             PocketPaintApplication.GetInstance().PaintData.ColorChanged += ColorChangedHere;
             PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
             PocketPaintApplication.GetInstance().AppbarTop = this;
 
             BtnUndo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnUndo_Click;
             BtnRedo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnRedo_Click;
-            btnSelectedColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
+            BtnSelectedColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
             //btnMoveScreen.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreen_OnClick;
             ellipseTool_front.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
             ellipseTool_behind.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
@@ -102,14 +123,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
         }
         private void ColorChangedHere(SolidColorBrush color)
         {
-            // System.Diagnostics.Debug.WriteLine("ColorChangedHere called: " + color.Color.ToString());
             if (color.Color != Colors.Transparent)
             {
-                btnSelectedColor.Background = color;
+                RecSelectedColor.Fill = color;
             }
             else
             {
-                btnSelectedColor.Background = new SolidColorBrush(Colors.Transparent);
+                RecSelectedColor.Fill = new SolidColorBrush(Colors.Transparent);
             }
         }
 
@@ -167,15 +187,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
 
         public void BtnSelectedColorVisible(bool enable)
         {
-            btnSelectedColor.IsEnabled = enable;
-            if (enable == true)
-            {
-               rectTransparence.Visibility = Visibility.Visible;
-            }
-            else
-            {
-               rectTransparence.Visibility = Visibility.Collapsed;
-            }
+            BtnSelectedColor.IsEnabled = enable;
         }
 
         private Uri GetToolImageUri(ToolType tooltype)

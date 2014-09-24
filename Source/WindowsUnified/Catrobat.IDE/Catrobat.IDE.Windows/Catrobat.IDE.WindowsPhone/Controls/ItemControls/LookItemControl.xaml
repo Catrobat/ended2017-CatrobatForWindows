@@ -23,7 +23,7 @@
             <!--<Image Grid.Column="0" Source="{Binding Image.ImageSource}"
         Margin="5 5 0 5"
         Stretch="Uniform" />-->
-            <Image Grid.Column="0" Margin="5 5 0 5" Stretch="Uniform">
+            <Image Grid.Column="0" Margin="5 5 0 5" Stretch="Uniform" Height="72">
               <Image.Source>
                 <BitmapImage DecodePixelHeight="72"
                              UriSource="{Binding Image.ImageUri}"/>

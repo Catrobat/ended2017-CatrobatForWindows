@@ -175,14 +175,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                   CreateProgramPackageForExport(programName);
                 await programPackageStream.CopyToAsync(tempFileStream);
             }
-
             IsLoading = false;
-        }
-
-        public async override void NavigateFrom()
-        {
-            await ServiceLocator.ProgramExportService.CleanUpExport();
-            base.NavigateFrom();
         }
 
         private void ResetViewModel()
