@@ -31,87 +31,89 @@
                  Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
 
-    <StackPanel Grid.Row="1" Margin="0 0 12 16">
-      <Button BorderThickness="0" HorizontalAlignment="Stretch"
-              Command="{Binding MovementCommand}">
-        <Button.Template>
-          <ControlTemplate>
-            <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" 
-                          BorderBrush="{ThemeResource BrickBorderBrush}" 
-                          Margin="12 0 12 0">
+    <ScrollViewer Grid.Row="1"  Margin="0 0 12 16">
+      <StackPanel >
+          <Button BorderThickness="0" HorizontalAlignment="Stretch"
+                  Command="{Binding MovementCommand}">
+            <Button.Template>
+              <ControlTemplate>
+                <actionsControls:NormalBrick Background="{ThemeResource MotionBrickBrush}" 
+                              BorderBrush="{ThemeResource BrickBorderBrush}" 
+                              Margin="12 0 12 0">
+                  <TextBlock VerticalAlignment="Center" 
+                       Text="{Binding Resources.Brick_CategoryMotion, Source={StaticResource LocalizedStrings}}" 
+                       Margin="12" 
+                       Style="{ThemeResource TextTitleNormalStyle}"/>
+                </actionsControls:NormalBrick>
+              </ControlTemplate>
+            </Button.Template>
+          </Button>
+
+          <Button BorderThickness="0" HorizontalAlignment="Stretch"
+                  Command="{Binding LooksCommand}">
+            <Button.Template>
+              <ControlTemplate>
+                <actionsControls:NormalBrick Grid.Row="1" Background="{ThemeResource LooksBrickBrush}" 
+                              BorderBrush="{ThemeResource BrickBorderBrush}" 
+                              Margin="12 12 12 0">
               <TextBlock VerticalAlignment="Center" 
-                   Text="{Binding Resources.Brick_CategoryMotion, Source={StaticResource LocalizedStrings}}" 
-                   Margin="12" 
-                   Style="{ThemeResource TextTitleNormalStyle}"/>
+                       Text="{Binding Resources.Brick_CategoryLooks, Source={StaticResource LocalizedStrings}}" 
+                       Margin="12" 
+                       Style="{ThemeResource TextTitleNormalStyle}"/>
             </actionsControls:NormalBrick>
-          </ControlTemplate>
-        </Button.Template>
-      </Button>
+              </ControlTemplate>
+            </Button.Template>
+          </Button>
 
-      <Button BorderThickness="0" HorizontalAlignment="Stretch"
-              Command="{Binding LooksCommand}">
-        <Button.Template>
-          <ControlTemplate>
-            <actionsControls:NormalBrick Grid.Row="1" Background="{ThemeResource LooksBrickBrush}" 
-                          BorderBrush="{ThemeResource BrickBorderBrush}" 
-                          Margin="12 12 12 0">
-          <TextBlock VerticalAlignment="Center" 
-                   Text="{Binding Resources.Brick_CategoryLooks, Source={StaticResource LocalizedStrings}}" 
-                   Margin="12" 
-                   Style="{ThemeResource TextTitleNormalStyle}"/>
-        </actionsControls:NormalBrick>
-          </ControlTemplate>
-        </Button.Template>
-      </Button>
+          <Button BorderThickness="0" HorizontalAlignment="Stretch"
+                  Command="{Binding SoundCommand}">
+            <Button.Template>
+              <ControlTemplate>
+                <actionsControls:NormalBrick Grid.Row="2" Background="{ThemeResource SoundBrickBrush}" 
+                              BorderBrush="{ThemeResource BrickBorderBrush}" 
+                              Margin="12 12 12 0">
+              <TextBlock VerticalAlignment="Center" 
+                       Text="{Binding Resources.Brick_CategorySound, Source={StaticResource LocalizedStrings}}" 
+                       Margin="12" 
+                       Style="{ThemeResource TextTitleNormalStyle}"/>
+                </actionsControls:NormalBrick>
+              </ControlTemplate>
+            </Button.Template>
+          </Button>
 
-      <Button BorderThickness="0" HorizontalAlignment="Stretch"
-              Command="{Binding SoundCommand}">
-        <Button.Template>
-          <ControlTemplate>
-            <actionsControls:NormalBrick Grid.Row="2" Background="{ThemeResource SoundBrickBrush}" 
-                          BorderBrush="{ThemeResource BrickBorderBrush}" 
-                          Margin="12 12 12 0">
-          <TextBlock VerticalAlignment="Center" 
-                   Text="{Binding Resources.Brick_CategorySound, Source={StaticResource LocalizedStrings}}" 
-                   Margin="12" 
-                   Style="{ThemeResource TextTitleNormalStyle}"/>
-            </actionsControls:NormalBrick>
-          </ControlTemplate>
-        </Button.Template>
-      </Button>
+          <Button BorderThickness="0" HorizontalAlignment="Stretch"
+                  Command="{Binding ControlCommand}">
+            <Button.Template>
+              <ControlTemplate>
+                <actionsControls:NormalBrick Grid.Row="3" Background="{ThemeResource ControlBrickBrush}" 
+                              BorderBrush="{ThemeResource BrickBorderBrush}" 
+                              Margin="12 12 12 0">
+              <TextBlock VerticalAlignment="Center" 
+                       Text="{Binding Resources.Brick_CategoryControl, Source={StaticResource LocalizedStrings}}" 
+                       Margin="12" 
+                       Style="{ThemeResource TextTitleNormalStyle}"/>
+                </actionsControls:NormalBrick>
+              </ControlTemplate>
+            </Button.Template>
+          </Button>
 
-      <Button BorderThickness="0" HorizontalAlignment="Stretch"
-              Command="{Binding ControlCommand}">
-        <Button.Template>
-          <ControlTemplate>
-            <actionsControls:NormalBrick Grid.Row="3" Background="{ThemeResource ControlBrickBrush}" 
-                          BorderBrush="{ThemeResource BrickBorderBrush}" 
-                          Margin="12 12 12 0">
-          <TextBlock VerticalAlignment="Center" 
-                   Text="{Binding Resources.Brick_CategoryControl, Source={StaticResource LocalizedStrings}}" 
-                   Margin="12" 
-                   Style="{ThemeResource TextTitleNormalStyle}"/>
-            </actionsControls:NormalBrick>
-          </ControlTemplate>
-        </Button.Template>
-      </Button>
-
-      <Button BorderThickness="0" HorizontalAlignment="Stretch"
-              Command="{Binding VariablesCommand}">
-        <Button.Template>
-          <ControlTemplate>
-            <actionsControls:NormalBrick Grid.Row="4" Background="{ThemeResource VariableBrickBrush}" 
-                            BorderBrush="{StaticResource BrickBorderBrush}" 
-                            Margin="12 12 12 0">
-          <TextBlock VerticalAlignment="Center" 
-                     Text="{Binding Resources.Brick_CategoryVariables, Source={StaticResource LocalizedStrings}}" 
-                     Margin="12" 
-                   Style="{ThemeResource TextTitleNormalStyle}"/>
-            </actionsControls:NormalBrick>
-          </ControlTemplate>
-        </Button.Template>
-      </Button>
-    </StackPanel>
-  </Grid>
+          <Button BorderThickness="0" HorizontalAlignment="Stretch"
+                  Command="{Binding VariablesCommand}">
+            <Button.Template>
+              <ControlTemplate>
+                <actionsControls:NormalBrick Grid.Row="4" Background="{ThemeResource VariableBrickBrush}" 
+                                BorderBrush="{StaticResource BrickBorderBrush}" 
+                                Margin="12 12 12 0">
+              <TextBlock VerticalAlignment="Center" 
+                         Text="{Binding Resources.Brick_CategoryVariables, Source={StaticResource LocalizedStrings}}" 
+                         Margin="12" 
+                       Style="{ThemeResource TextTitleNormalStyle}"/>
+                </actionsControls:NormalBrick>
+              </ControlTemplate>
+            </Button.Template>
+          </Button>
+        </StackPanel>
+      </ScrollViewer>
+    </Grid>
 
 </views:ViewPageBase>
