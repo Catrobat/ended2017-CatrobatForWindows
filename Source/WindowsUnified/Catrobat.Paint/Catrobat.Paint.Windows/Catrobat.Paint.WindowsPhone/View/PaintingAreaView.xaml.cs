@@ -414,8 +414,20 @@ namespace Catrobat.Paint.WindowsPhone.View
             this.Frame.Navigate(source_type);
         }
 
-        private void ToolChangedHere(ToolBase tool)
+        public void ToolChangedHere(ToolBase tool)
         {
+            if (tool.GetToolType() == ToolType.Eraser && PocketPaintApplication.GetInstance().isBrushEraser == true)
+            {
+                tool = new BrushTool();
+            }
+            else
+            {
+                if (PocketPaintApplication.GetInstance().isToolPickerUsed)
+                {
+                    PocketPaintApplication.GetInstance().isBrushEraser = false;
+                }
+            }
+
             switch (tool.GetToolType())
             {
                 case ToolType.Brush:

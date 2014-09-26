@@ -142,6 +142,19 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
 
             Visibility currentStateOfGridThicknessControl = PocketPaintApplication.GetInstance().GrdThicknessControlState;
             PocketPaintApplication.GetInstance().PaintingAreaView.GrdThicknessControlVisibility = Visibility.Collapsed;
+
+            if(tool.GetToolType() == ToolType.Eraser && PocketPaintApplication.GetInstance().isBrushEraser == true)
+            {
+                tool = new BrushTool();
+            }
+            else
+            {
+                if (PocketPaintApplication.GetInstance().isToolPickerUsed)
+                {
+                    PocketPaintApplication.GetInstance().isBrushEraser = false;
+                }
+            }
+
             switch (tool.GetToolType())
             {
                 case ToolType.Brush:

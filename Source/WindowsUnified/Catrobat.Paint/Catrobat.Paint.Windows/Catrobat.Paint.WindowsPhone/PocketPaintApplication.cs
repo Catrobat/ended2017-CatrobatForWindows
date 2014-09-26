@@ -23,6 +23,10 @@ namespace Catrobat.Paint.Phone
         private readonly DateTime _dateTimeAppStarted = DateTime.Now;
         public DateTime DateTimeAppStarted { get { return _dateTimeAppStarted; } }
 
+        public Visibility GrdThicknessControlState = Visibility.Collapsed;
+
+        public bool isBrushEraser = false;
+        public bool isToolPickerUsed = true;
         public bool UnsavedChangesMade { get; set; }
 
         public Canvas PaintingAreaCanvas { get; set; }
@@ -32,8 +36,6 @@ namespace Catrobat.Paint.Phone
         public Grid PaintingAreaCheckeredGrid { get; set; }
 
         public Grid PaintingAreaLayoutRoot { get; set; }
-
-        public Visibility GrdThicknessControlState = Visibility.Collapsed;
 
         public PaintingAreaView PaintingAreaView { get; set; }
 
