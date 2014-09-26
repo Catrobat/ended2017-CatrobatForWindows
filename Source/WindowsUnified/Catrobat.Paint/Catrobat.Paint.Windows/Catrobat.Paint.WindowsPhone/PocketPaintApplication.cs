@@ -33,6 +33,8 @@ namespace Catrobat.Paint.Phone
 
         public Grid PaintingAreaLayoutRoot { get; set; }
 
+        public Visibility GrdThicknessControlState = Visibility.Collapsed;
+
         public PaintingAreaView PaintingAreaView { get; set; }
 
         public AppbarTop AppbarTop { get; set; }

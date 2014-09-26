@@ -86,7 +86,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             //btnThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnThickness_OnClick;
             
             setPaintingAreaViewLayout();
-
+            PocketPaintApplication.GetInstance().GrdThicknessControlState = Visibility.Collapsed;
             createAppBarAndSwitchAppBarContent(current_appbar);        
         }
 
@@ -139,7 +139,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            
+            GrdThicknessControlVisibility = PocketPaintApplication.GetInstance().GrdThicknessControlState;
         }
 
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -478,7 +478,10 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void btnThickness_Click(object sender, RoutedEventArgs e)
         {
-            GrdThicknessControl.Visibility = GrdThicknessControl.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            GrdThicknessControlVisibility = GrdThicknessControlVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            Visibility gridThicknessStateInPaintingAreaView = PocketPaintApplication.GetInstance().GrdThicknessControlState;
+            gridThicknessStateInPaintingAreaView = gridThicknessStateInPaintingAreaView == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            PocketPaintApplication.GetInstance().GrdThicknessControlState = gridThicknessStateInPaintingAreaView;
         }
 
         private void btnThicknessBorder_Click(object sender, RoutedEventArgs e)
