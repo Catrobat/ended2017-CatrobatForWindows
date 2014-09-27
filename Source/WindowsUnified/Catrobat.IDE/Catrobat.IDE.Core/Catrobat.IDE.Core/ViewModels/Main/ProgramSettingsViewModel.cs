@@ -93,7 +93,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private async void SaveAction()
         {
-            ProgramName = await ServiceLocator.ContextService.ConvertToValidFileName(ProgramName);
+            string validName = await ServiceLocator.ContextService.ConvertToValidFileName(ProgramName);
+            ProgramName = await ServiceLocator.ContextService.FindUniqueProgramName(validName);
             if (CurrentProgram.LocalProgramHeader == CurrentProgramHeader)
             {
                 CurrentProgram.LocalProgramHeader.ProjectName = ProgramName;

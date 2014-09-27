@@ -131,8 +131,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             if (CurrentProgram != null)
                 await CurrentProgram.Save();
 
-            var uniqueName = await ServiceLocator.ContextService.
-                FindUniqueProgramName(ProgramName);
+            string validName = await ServiceLocator.ContextService.ConvertToValidFileName(ProgramName);
+            string uniqueName = await ServiceLocator.ContextService.FindUniqueProgramName(validName);
 
             if (CreateEmptyProgram)
             {

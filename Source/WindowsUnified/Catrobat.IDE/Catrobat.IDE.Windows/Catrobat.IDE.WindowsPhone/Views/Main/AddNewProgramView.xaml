@@ -22,17 +22,18 @@
         Style="{ThemeResource TextTitleNormalStyle}" />
     </StackPanel>
 
-    <StackPanel Grid.Row="1" Margin="12 0 0 18">
+    <StackPanel Grid.Row="1" Margin="12 0 12 18">
       <StackPanel>
-        <TextBlock Margin="0 6 6 6" 
-          Text="{Binding Resources.Main_ProgramName, 
-          Source={StaticResource LocalizedStrings}}"
-          Style="{ThemeResource TextNormalStyle}" />
-        <TextBox Name="TextBoxProgramName" Margin="0 0 12 0" 
-                 HorizontalAlignment="Stretch" 
-                 TextChanged="TextBoxProgramName_OnTextChanged" 
-                 Text="{Binding Path=ProgramName, 
-                 Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
+        <TextBlock Margin="0 0 0 6" 
+                 Text="{Binding Resources.Main_ProgramName, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Style="{ThemeResource TextNormalStyle}"/>
+        <TextBox Name="TextBoxProgramName" Margin="0 0 0 0" 
+                 HorizontalAlignment="Stretch"
+                 Text="{Binding ProgramName, Mode=TwoWay}"
+                 TextChanged="TextBox_TextChanged"
+                 MaxLength="{Binding Resources.Main_TextBoxLimit, 
+                 Source={StaticResource LocalizedStrings}}"/>
       </StackPanel>
       <StackPanel Margin="0 24 0 0">
         <TextBlock Text="{Binding Resources.Main_SelectProgramCreationOption, 
@@ -42,9 +43,10 @@
                      IsChecked="{Binding CreateEmptyProgram, Mode=TwoWay}">
           <RadioButton.ContentTemplate>
             <DataTemplate>
-              <TextBlock FontSize="20" TextWrapping="Wrap"
+              <TextBlock TextWrapping="Wrap"
                 Text="{Binding Resources.Main_CreateEmptyProgram, 
-                Source={StaticResource LocalizedStrings}}" />
+                Source={StaticResource LocalizedStrings}}"
+                Style="{ThemeResource TextNormalStyle}"/>
             </DataTemplate>
           </RadioButton.ContentTemplate>
         </RadioButton>
@@ -62,18 +64,20 @@
           <RadioButton.ContentTemplate>
             <DataTemplate>
               <TextBlock Text="{Binding Resources.Main_CreateProgramBasedOnTemplate, 
-                Source={StaticResource LocalizedStrings}}" FontSize="20" TextWrapping="Wrap"/>
+                Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"
+                Style="{ThemeResource TextNormalStyle}"/>
             </DataTemplate>
           </RadioButton.ContentTemplate>
         </RadioButton>
       </StackPanel>
-      <ListView Margin="12" IsEnabled="{Binding CreateTemplateProgram}" 
+      <ListView Margin="0 12 0 0" IsEnabled="{Binding CreateTemplateProgram}" 
                ItemsSource="{Binding TemplateOptions}" 
                SelectedItem="{Binding SelectedTemplateOption, Mode=TwoWay}" >
         <ListView.ItemTemplate>
           <DataTemplate>
             <Grid>
-              <TextBlock FontSize="40" Text="{Binding Name}"></TextBlock>
+              <TextBlock Text="{Binding Name}"
+                         Style="{ThemeResource TextLargeStyle}"></TextBlock>
             </Grid>
           </DataTemplate>
         </ListView.ItemTemplate>

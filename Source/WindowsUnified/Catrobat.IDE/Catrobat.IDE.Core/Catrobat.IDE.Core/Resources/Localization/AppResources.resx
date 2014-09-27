@@ -1171,7 +1171,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Pocket Code Source Code License</value>
   </data>
   <data name="Main_TextBoxLimit" xml:space="preserve">
-    <value>60</value>
+    <value>50</value>
   </data>
   <data name="Main_ButtonPasswordRecover" xml:space="preserve">
     <value>recover</value>
@@ -1352,5 +1352,8 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Editor_Help" xml:space="preserve">
     <value>Error help</value>
+  </data>
+  <data name="Main_ProgramNameDuplicate" xml:space="preserve">
+    <value>Program-name is already in use.</value>
   </data>
 </root>

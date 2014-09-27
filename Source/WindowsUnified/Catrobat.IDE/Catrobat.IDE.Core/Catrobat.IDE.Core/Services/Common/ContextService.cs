@@ -62,6 +62,12 @@ namespace Catrobat.IDE.Core.Services.Common
                 if (counter != 0)
                     programNameUnique = programName + counter;
 
+                if(programName != programNameUnique)
+                {
+                    ServiceLocator.NotifictionService.ShowToastNotification("",
+                    AppResources.Main_ProgramNameDuplicate, ToastDisplayDuration.Short, ToastTag.Default);
+                }
+
                 return programNameUnique.Trim();
             }
         }
