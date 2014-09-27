@@ -86,7 +86,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             //btnThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnThickness_OnClick;
             
             setPaintingAreaViewLayout();
-
+            PocketPaintApplication.GetInstance().GrdThicknessControlState = Visibility.Collapsed;
             createAppBarAndSwitchAppBarContent(current_appbar);        
         }
 
@@ -139,7 +139,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            
+            GrdThicknessControlVisibility = PocketPaintApplication.GetInstance().GrdThicknessControlState;
         }
 
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -414,8 +414,20 @@ namespace Catrobat.Paint.WindowsPhone.View
             this.Frame.Navigate(source_type);
         }
 
-        private void ToolChangedHere(ToolBase tool)
+        public void ToolChangedHere(ToolBase tool)
         {
+            if (tool.GetToolType() == ToolType.Eraser && PocketPaintApplication.GetInstance().isBrushEraser == true)
+            {
+                tool = new BrushTool();
+            }
+            else
+            {
+                if (PocketPaintApplication.GetInstance().isToolPickerUsed)
+                {
+                    PocketPaintApplication.GetInstance().isBrushEraser = false;
+                }
+            }
+
             switch (tool.GetToolType())
             {
                 case ToolType.Brush:
@@ -478,7 +490,10 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void btnThickness_Click(object sender, RoutedEventArgs e)
         {
-            GrdThicknessControl.Visibility = GrdThicknessControl.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            GrdThicknessControlVisibility = GrdThicknessControlVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            Visibility gridThicknessStateInPaintingAreaView = PocketPaintApplication.GetInstance().GrdThicknessControlState;
+            gridThicknessStateInPaintingAreaView = gridThicknessStateInPaintingAreaView == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            PocketPaintApplication.GetInstance().GrdThicknessControlState = gridThicknessStateInPaintingAreaView;
         }
 
         private void btnThicknessBorder_Click(object sender, RoutedEventArgs e)

@@ -13,29 +13,29 @@
         <Grid.Resources>
             <ResourceDictionary>
                 <SolidColorBrush x:Key="ColorButton11" Color="Blue"/>
-                <SolidColorBrush x:Key="ColorButton12" Color="#FF006D91"/>
-                <SolidColorBrush x:Key="ColorButton13" Color="#FF16C2F5"/>
-                <SolidColorBrush x:Key="ColorButton14" Color="LightBlue"/>
+                <SolidColorBrush x:Key="ColorButton12" Color="Cyan"/>
+                <SolidColorBrush x:Key="ColorButton13" Color="Green"/>
+                <SolidColorBrush x:Key="ColorButton14" Color="Chartreuse"/>
 
-                <SolidColorBrush x:Key="ColorButton21" Color="Red"/>
-                <SolidColorBrush x:Key="ColorButton22" Color="OrangeRed"/>
-                <SolidColorBrush x:Key="ColorButton23" Color="Orange"/>
-                <SolidColorBrush x:Key="ColorButton24" Color="Yellow"/>
+                <SolidColorBrush x:Key="ColorButton21" Color="Brown"/>
+                <SolidColorBrush x:Key="ColorButton22" Color="Chocolate"/>
+                <SolidColorBrush x:Key="ColorButton23" Color="Khaki"/>
+                <SolidColorBrush x:Key="ColorButton24" Color="Beige"/>
 
-                <SolidColorBrush x:Key="ColorButton31" Color="#FF7C00AA"/>
-                <SolidColorBrush x:Key="ColorButton32" Color="#FFFF0080"/>
-                <SolidColorBrush x:Key="ColorButton33" Color="Magenta"/>
-                <SolidColorBrush x:Key="ColorButton34" Color="#FFFFADFB"/>
+                <SolidColorBrush x:Key="ColorButton31" Color="DarkMagenta"/>
+                <SolidColorBrush x:Key="ColorButton32" Color="DarkOrchid"/>
+                <SolidColorBrush x:Key="ColorButton33" Color="MediumVioletRed"/>
+                <SolidColorBrush x:Key="ColorButton34" Color="Violet"/>
 
-                <SolidColorBrush x:Key="ColorButton41" Color="#FF146C01"/>
-                <SolidColorBrush x:Key="ColorButton42" Color="#FF009C00"/>
-                <SolidColorBrush x:Key="ColorButton43" Color="#FF4E8739"/>
-                <SolidColorBrush x:Key="ColorButton44" Color="#FF8AEA39"/>
+                <SolidColorBrush x:Key="ColorButton41" Color="Red"/>
+                <SolidColorBrush x:Key="ColorButton42" Color="Tomato"/>
+                <SolidColorBrush x:Key="ColorButton43" Color="Orange"/>
+                <SolidColorBrush x:Key="ColorButton44" Color="Yellow"/>
 
                 <SolidColorBrush x:Key="ColorButton51" Color="Black"/>
-                <SolidColorBrush x:Key="ColorButton52" Color="DarkGray"/>
-                <SolidColorBrush x:Key="ColorButton53" Color="LightGray"/>
-                <SolidColorBrush x:Key="ColorButton54" Color="White"/>
+                <SolidColorBrush x:Key="ColorButton52" Color="LightGray"/>
+                <SolidColorBrush x:Key="ColorButton53" Color="White"/>
+                <SolidColorBrush x:Key="ColorButton54" Color="Transparent"/>
             </ResourceDictionary>
         </Grid.Resources>
 
@@ -120,8 +120,11 @@
                         <Button x:Name="Button53" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton53}" Height="80"  Margin="185,306,0,0"  Width="90" VerticalAlignment="Top">
                             <Rectangle x:Name="Rectangle53" Fill="{StaticResource ColorButton53}" Height="65" Margin="-20" Stroke="Black"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
                         </Button>
-                        <Button x:Name="Button54" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton54}" Height="80" Margin="279,306,0,0"  Width="90" VerticalAlignment="Top">
-                            <Rectangle x:Name="Rectangle54" Fill="{StaticResource ColorButton54}" Height="65" Margin="-20" Stroke="Black"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
+                        <Button x:Name="Button54" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton54}" Height="80" Margin="279,306,0,0" Padding="0,-2.0,0,-2.0"  Width="90" VerticalAlignment="Top">
+                            <Grid>
+                                <Image x:Name="ImgPredColorTransp"  Height="65" Margin="0" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Visibility="Visible" Width="90" />
+                                <Rectangle x:Name="Rectangle54" Fill="{StaticResource ColorButton54}" Height="65" Margin="-20" Stroke="Black"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
+                            </Grid>
                         </Button>
 
                         <Button x:Name="BtnSelectedColor" BorderThickness="3" Click="BtnSelectedColor_OnClick"

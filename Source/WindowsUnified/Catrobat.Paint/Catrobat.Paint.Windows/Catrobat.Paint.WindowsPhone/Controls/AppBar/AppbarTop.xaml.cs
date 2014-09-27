@@ -140,10 +140,27 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             img_behind.ImageSource = new BitmapImage(
                    new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_move.png", UriKind.Absolute));
 
+            Visibility currentStateOfGridThicknessControl = PocketPaintApplication.GetInstance().GrdThicknessControlState;
+            PocketPaintApplication.GetInstance().PaintingAreaView.GrdThicknessControlVisibility = Visibility.Collapsed;
+
+            if(tool.GetToolType() == ToolType.Eraser && PocketPaintApplication.GetInstance().isBrushEraser == true)
+            {
+                tool = new BrushTool();
+            }
+            else
+            {
+                if (PocketPaintApplication.GetInstance().isToolPickerUsed)
+                {
+                    PocketPaintApplication.GetInstance().isBrushEraser = false;
+                }
+            }
+
             switch (tool.GetToolType())
             {
                 case ToolType.Brush:
-                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Brush));                  
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Brush));
+                    PocketPaintApplication.GetInstance().PaintingAreaView.GrdThicknessControlVisibility
+                        = currentStateOfGridThicknessControl;
                     break;
                 case ToolType.Ellipse:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Ellipse));
@@ -151,11 +168,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                 case ToolType.Eraser:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Eraser));
                     break;
+                case ToolType.Fill:
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Fill));
+                    PocketPaintApplication.GetInstance().PaintingAreaView.GrdThicknessControlVisibility
+                        = currentStateOfGridThicknessControl;
+                    break;
                 case ToolType.Flip:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Flip));
                     break;
                 case ToolType.Line:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Line));
+                    PocketPaintApplication.GetInstance().PaintingAreaView.GrdThicknessControlVisibility
+                        = currentStateOfGridThicknessControl;
                     break;
                 case ToolType.Move:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Move));

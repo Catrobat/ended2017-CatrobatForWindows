@@ -29,8 +29,8 @@
                 <ucRecEll:ucRecEll></ucRecEll:ucRecEll>
             </Grid>
             
-            <Grid x:Name="GrdThicknessControl" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="384">
-                <controls:ThicknessControl x:Name="CtrlThicknessControl" Visibility="Visible"></controls:ThicknessControl>
+            <Grid x:Name="GrdThicknessControl" Margin="0,0,0,0" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
+                <controls:ThicknessControl x:Name="CtrlThicknessControl"></controls:ThicknessControl>
             </Grid>
 
         </Grid>

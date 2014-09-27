@@ -83,7 +83,7 @@ namespace Catrobat.Paint.Phone.Listener
             {
                 Visibility visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().PaintingAreaView.GrdThicknessControlVisibility = visibility;
-                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOFRectEllUserControl(visibility);
+                //pplication.GetInstance().PaintingAreaView.setVisibilityOFRectEllUserControl(visibility);
 
                 rootFrame.Navigate(typeof(ViewToolPicker));
             }
