@@ -19,7 +19,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public EllipseTool(ToolType toolType = ToolType.Ellipse)
         {
             ToolType = toolType;
-            PocketPaintApplication.GetInstance().CurrentShape = PocketPaintApplication.GetInstance().BarRecEllShape.EllipseForeground;
+            //PocketPaintApplication.GetInstance().CurrentShape = PocketPaintApplication.GetInstance().BarRecEllShape.EllipseForeground;
         }
 
         public override void HandleDown(object arg)

@@ -7,28 +7,29 @@
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="190" d:DesignWidth="400">
+    d:DesignHeight="200" d:DesignWidth="384">
 
-    <Grid x:Name="gridMain" Background="#1F1F1F" Height="190" HorizontalAlignment="Center" VerticalAlignment="Center" Width="384">
-        <Button x:Name="btnSelectedBorderColor" Background="Transparent" BorderThickness="0" Click="btnSelectedColor_Click" Height="30" HorizontalAlignment="Right" Margin="0,50,5,0" MinHeight="1" MinWidth="1" Padding="0,-10,0,-10" VerticalAlignment="Top" Width="160">
+    <Grid x:Name="gridMain" Background="#1F1F1F" Height="200" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="384">
+        <Button x:Name="btnSelectedBorderColor" Background="Transparent" BorderThickness="0" Click="btnSelectedColor_Click" Height="30" HorizontalAlignment="Right"
+                Margin="0,50,5,0" MinHeight="1" MinWidth="1" Padding="0,-9,0,-10" VerticalAlignment="Top" Width="160">
             <Grid x:Name="GrdSelecectedBorderColor" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image x:Name="ImgBorderColor" Height="60" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Width="160" />
                 <Rectangle x:Name="rectBorderColor" Fill="Black" Height="30" Stroke="White" StrokeThickness="4" VerticalAlignment="Top" Width="160" />
             </Grid>
         </Button>
-        <Button x:Name="btnSelectedFillColor" Background="Transparent" BorderThickness="0" Click="btnSelectedColor_Click" Height="30" HorizontalAlignment="Right" Margin="0,85,5,0" MinHeight="1" MinWidth="1" Padding="0,-10,0,-10" VerticalAlignment="Top" Width="160" >
+        <Button x:Name="btnSelectedFillColor" Background="Transparent" BorderThickness="0" Click="btnSelectedFillColor_Click" Height="30" HorizontalAlignment="Right" Margin="0,85,5,0" MinHeight="1" MinWidth="1" Padding="0,-9,0,-10" VerticalAlignment="Top" Width="160" >
             <Grid x:Name="GrdSelectedFillColor" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image x:Name="ImgFillColor" Height="60" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Width="160" />
                 <Rectangle x:Name="rectFillColor" Fill="Black" Height="30" Stroke="White" StrokeThickness="4" VerticalAlignment="Top" Width="160" />
             </Grid>
         </Button>
 
-        <Ellipse x:Name="ellDisplayForeground" Fill="Yellow" Height="50" HorizontalAlignment="Left" Margin="272,69,0,0" Stroke="Black" StrokeThickness="5" VerticalAlignment="Top" Visibility="Collapsed" Width="85" />
+        <!--<Ellipse x:Name="ellDisplayForeground" Fill="Yellow" Height="50" HorizontalAlignment="Left" Margin="272,69,0,0" Stroke="Black" StrokeThickness="5" VerticalAlignment="Top" Visibility="Collapsed" Width="85" />-->
         <Slider x:Name="sldStrokeThickness" Background="Black" Foreground="White" Height="25" HorizontalAlignment="Right" Margin="0,15,45,0" Maximum="20" Padding="0,-10,0,0"  ValueChanged="sldSlidersChanged_ValueChanged" VerticalAlignment="Top" Width="120" />
         <TextBox x:Name="tbHeight" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" LostFocus="tbHeightValue_LostFocus" Margin="5,120,0,0" Padding="-2,0,0,0" Text="Höhe:" />
         <TextBox x:Name="tbFillcolor" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,85,0,0" Padding="-2,0,0,0" Text="Füllfarbe:" Width="120" />
         <TextBox x:Name="tbHeightValue" Background="Transparent" BorderThickness="4"  FontSize="14" Foreground="White" Height="30" HorizontalAlignment="Right" InputScope="Number" IsHitTestVisible="True" Margin="0,120,5,0" MinHeight="1" MinWidth="1" PointerEntered="tbHeightValue_PointerEntered" Text="50" TextAlignment="Center"
-                   TextChanged="tbHeightValue_TextChanged" Width="160" />
+                   TextChanged="tbHeightValue_TextChanged" Width="160" LostFocus="tbHeightValue_LostFocus_1" />
         <TextBox x:Name="tbStrokeColor" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,50,278,0" Padding="-2,0,0,0" Text="Randfarbe:" Width="120" />
         <TextBox x:Name="tbStrokeThicknessText" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,10,0,0" Padding="-2,0,0,0" Text="Randstärke:" Width="120" />
         <TextBox x:Name="tbStrokeThicknessValue" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Right" IsHitTestVisible="False" Margin="0,10,2,0" MinWidth="10" Text="5" Width="38"/>

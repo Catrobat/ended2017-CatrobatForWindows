@@ -25,7 +25,7 @@
                            Margin="171,263,0,0" PointerMoved="testRectangle_PointerMoved"  Stroke="Black"  VerticalAlignment="Top" Width="50" Visibility="Collapsed" PointerPressed="testRectangle_PointerPressed" />
             </Grid>
 
-            <Grid x:Name="GridUserControlRectEll" Height="190" HorizontalAlignment="Center" Margin="0,0,0,8" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
+            <Grid x:Name="GridUserControlRectEll" Height="200" HorizontalAlignment="Center" Margin="0,0,0,8" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <ucRecEll:ucRecEll></ucRecEll:ucRecEll>
             </Grid>
             

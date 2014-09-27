@@ -175,7 +175,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 var current_solid_brush = new SolidColorBrush(current_color);
                 PocketPaintApplication.GetInstance().PaintData.ColorSelected = current_solid_brush;
-                //PocketPaintApplication.GetInstance().BarRecEllShape.ColorFillChanged(current_solid_brush);
+                PocketPaintApplication.GetInstance().BarRecEllShape.ColorFillChanged(current_solid_brush);
             }
 
             // TODO: If selected color is transparence then select the eraser-tool.

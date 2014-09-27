@@ -33,7 +33,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public ucRecEll()
         {
             this.InitializeComponent();
-            ellDisplayForeground.Visibility = Visibility.Collapsed;
 
             tbStrokeThicknessValue.Text = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll.ToString();
             sldStrokeThickness.Value = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
@@ -45,9 +44,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().PaintData.FillColorChanged += ColorFillChanged;
             PocketPaintApplication.GetInstance().BarRecEllShape = this;
             setUcRecEllLayout();
-
-            MessageDialog msg = new MessageDialog(gridMain.Height.ToString());
-            msg.ShowAsync();
         }
 
         private void setUcRecEllLayout()
@@ -104,7 +100,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 else if(obj.GetType() == typeof(Slider))
                 {
                     Slider currentSlider = ((Slider)(obj));
-                    //currentSlider.Height *= heightMultiplicator;
+                    currentSlider.Height *= heightMultiplicator;
                     currentSlider.Width *= widthMultiplicator;
 
                     currentSlider.Margin = new Thickness(
@@ -112,6 +108,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                                             currentSlider.Margin.Top * heightMultiplicator,
                                             currentSlider.Margin.Right * widthMultiplicator,
                                             currentSlider.Margin.Bottom * heightMultiplicator);
+                }
+                else if(obj.GetType() == typeof(Image))
+                {
+                    Image currentImage = ((Image)obj);
+                    currentImage.Height *= heightMultiplicator;
+                    currentImage.Width *= widthMultiplicator;
                 }
             }
         }
@@ -142,39 +144,24 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             SolidColorBrush selected_color = new SolidColorBrush();
             selected_color.Color = color.Color != Colors.Transparent ? color.Color : Colors.Transparent;
-            btnSelectedFillColor.Background = selected_color;
-            PocketPaintApplication.GetInstance().RecDrawingRectangle.Fill = selected_color;
-            RectangleForeground.Fill = selected_color;
-            EllipseForeground.Fill = selected_color;
+            rectFillColor.Fill = selected_color;
         }
 
         private void ColorStrokeChanged(SolidColorBrush color)
         {
             SolidColorBrush selected_color = new SolidColorBrush();
             selected_color.Color = color.Color != Colors.Transparent ? color.Color : Colors.Transparent;
-            btnSelectedBorderColor.Background = selected_color;
-            PocketPaintApplication.GetInstance().RecDrawingRectangle.Stroke = selected_color;
-            PocketPaintApplication.GetInstance().CurrentShape.Stroke = selected_color;
+            rectBorderColor.Fill = selected_color;
         }
 
-        public Ellipse EllipseForeground
+        public void setBorderColor()
         {
-            get 
-            {
-                ellDisplayForeground.Visibility = Visibility.Visible;
-                return ellDisplayForeground; 
-            }
+            rectBorderColor.Fill = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
         }
 
-        private void sldStrokeThickness_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        public void setFillColor()
         {
-           
-        }
-
-        private void sldSliderThickness_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-           //  sldSliderThickness.Background.ToString();
-           //  sldSliderThickness.Value.ToString(); 
+            rectFillColor.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
         }
 
         public int getHeight()
@@ -189,23 +176,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             return return_value = tbWidthValue.Text != string.Empty ? Convert.ToInt32(tbWidthValue.Text) : _last_valid_width;
         }
 
-        public Rectangle RectangleForeground
-        {
-            get 
-            {
-                ellDisplayForeground.Visibility = Visibility.Collapsed;
-                // rectTransDisplayForeground.Visibility = Visibility.Visible;
-                return null; 
-            }
-        }
-
         private void sldSlidersChanged_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             int strokeThickness = (int)sldStrokeThickness.Value;
             tbStrokeThicknessValue.Text = strokeThickness.ToString();
             PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll = strokeThickness;
-
-            // PocketPaintApplication.GetInstance().CurrentShape.StrokeThickness = strokeThickness;
 
             if (PocketPaintApplication.GetInstance().RecDrawingRectangle != null)
             {
@@ -215,11 +190,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if(strokeThickness > 0)
             {
                 btnSelectedBorderColor.IsEnabled = true;
-                //rectTransBorderColor.Visibility = Visibility.Visible;
             }
             else
             {
-                //rectTransBorderColor.Visibility = Visibility.Collapsed;
                 btnSelectedBorderColor.IsEnabled = false;
             }
         }
@@ -259,8 +232,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if(tbHeightValue.Text != string.Empty)
             {
                 double height_value = Convert.ToDouble(tbHeightValue.Text);
-                PocketPaintApplication.GetInstance().CurrentShape.Height = height_value;
-                PocketPaintApplication.GetInstance().RecDrawingRectangle.Height = height_value;
             }
         }
 
@@ -276,6 +247,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 PocketPaintApplication.GetInstance().CurrentShape.Width = Convert.ToDouble(tbWidthValue.Text);
                 PocketPaintApplication.GetInstance().RecDrawingRectangle.Width = width_value;
             }
+        }
+
+        private void tbHeightValue_LostFocus_1(object sender, RoutedEventArgs e)
+        {
+            tbHeightValue.Foreground = new SolidColorBrush(Colors.White);
+
+            _last_valid_width = tbHeightValue.Text != string.Empty ? Convert.ToInt32(tbHeightValue.Text) : _last_valid_width;
+            tbHeightValue.Text = _last_valid_width.ToString();
         }
     }
 }
