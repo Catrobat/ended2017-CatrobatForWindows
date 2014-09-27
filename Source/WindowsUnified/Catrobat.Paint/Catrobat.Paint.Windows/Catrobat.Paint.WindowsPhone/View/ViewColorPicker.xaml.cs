@@ -179,18 +179,21 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
 
             // TODO: If selected color is transparence then select the eraser-tool.
-            if(current_color.A == 0)
+            if (PocketPaintApplication.GetInstance().isBrushTool)
             {
-                PocketPaintApplication.GetInstance().isBrushEraser = true;
-                PocketPaintApplication.GetInstance().SwitchTool(ToolType.Eraser);
-                PocketPaintApplication.GetInstance().isToolPickerUsed = false;
-            }
-            else
-            {
-                PocketPaintApplication.GetInstance().isBrushEraser = false;
-                if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Eraser)
+                if (current_color.A == 0)
                 {
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
+                    PocketPaintApplication.GetInstance().isBrushEraser = true;
+                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Eraser);
+                    PocketPaintApplication.GetInstance().isToolPickerUsed = false;
+                }
+                else
+                {
+                    PocketPaintApplication.GetInstance().isBrushEraser = false;
+                    if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Eraser)
+                    {
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
+                    }
                 }
             }
             

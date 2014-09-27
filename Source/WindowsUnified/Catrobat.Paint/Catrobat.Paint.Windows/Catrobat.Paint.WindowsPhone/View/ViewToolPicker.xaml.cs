@@ -82,6 +82,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Collapsed;
             PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
             PocketPaintApplication.GetInstance().isBrushEraser = false;
+            PocketPaintApplication.GetInstance().isBrushTool = false;
             PocketPaintApplication.GetInstance().isToolPickerUsed = true;
 
             switch (((Button)sender).Name)
@@ -89,6 +90,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 case "BtnBrush":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
                     PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
+                    PocketPaintApplication.GetInstance().isBrushTool = true;
                     break;
                 case "BtnCursor":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Cursor);
