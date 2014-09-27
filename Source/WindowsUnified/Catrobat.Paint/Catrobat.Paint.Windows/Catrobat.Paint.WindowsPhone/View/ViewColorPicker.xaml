@@ -144,16 +144,16 @@
                     <Grid x:Name="GrdColorSlider" PointerEntered="Grid_PointerEntered">
 
                         <Slider x:Name="sldRed" Foreground="Red" Margin="0,250,0,0" VerticalAlignment="Top" 
-                            Width="229" Height="85" Maximum="255" ValueChanged="sldSlidersChanged_ValueChanged" Background="Black"/>
+                            Width="229" Height="40" Maximum="255" ValueChanged="sldSlidersChanged_ValueChanged" Background="Black"/>
 
                         <Slider x:Name="sldGreen" Margin="0,290,0,0" VerticalAlignment="Top" 
-                            Width="229" Height="85" Foreground="#FF23FF00" Maximum="255" ValueChanged="sldSlidersChanged_ValueChanged" Background="Black"/>
+                            Width="229" Height="40" Foreground="#FF23FF00" Maximum="255" ValueChanged="sldSlidersChanged_ValueChanged" Background="Black"/>
 
                         <Slider x:Name="sldBlue" Margin="0,330,0,0" VerticalAlignment="Top" 
-                            Width="229" Height="85" Foreground="#FF0046FF" ValueChanged="sldSlidersChanged_ValueChanged" Maximum="255" Background="Black"/>
+                            Width="229" Height="40" Foreground="#FF0046FF" ValueChanged="sldSlidersChanged_ValueChanged" Maximum="255" Background="Black"/>
 
                         <Slider x:Name="sldAlpha" Margin="0,370,0,0" VerticalAlignment="Top" 
-                            Width="229" Height="85" Foreground="White" Maximum="255" ValueChanged="sldSlidersChanged_ValueChanged" Background="Black"/>
+                            Width="229" Height="40" Foreground="White" Maximum="255" ValueChanged="sldSlidersChanged_ValueChanged" Background="Black"/>
 
                         <TextBox x:Name="tbRedText" HorizontalAlignment="Left" Height="63" Margin="0,254,0,0" TextWrapping="Wrap" Text="Rot" 
                              VerticalAlignment="Top" Width="73" Foreground="Red" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>

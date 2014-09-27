@@ -292,7 +292,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 else if (obj.GetType() == typeof(Slider))
                 {
                     Slider currentSlider = ((Slider)obj);
-                    currentSlider.Height *= height;
                     currentSlider.Width *= width;
 
                     currentSlider.Margin = new Thickness(
