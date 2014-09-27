@@ -80,10 +80,10 @@ namespace Catrobat.IDE.Core.Models
 
         #region Implements IAsyncCloneable
 
-        async Task<object> IAsyncCloneable<Program>.CloneInstance(Program project)
+        async Task<object> IAsyncCloneable<Program>.CloneInstance(Program program)
         {
             var result = new Sound(Name);
-            var directory = project.BasePath + "/" + StorageConstants.ProgramSoundsPath + "/";
+            var directory = program.BasePath + "/" + StorageConstants.ProgramSoundsPath + "/";
             using (var storage = StorageSystem.GetStorage())
             {
                 await storage.CopyFileAsync(directory + FileName, directory + result.FileName);

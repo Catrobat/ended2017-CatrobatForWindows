@@ -13,6 +13,8 @@ namespace Catrobat.IDE.Core.Services
     {
         Task<string> ConvertToValidFileName(string fileName);
 
+        Task<string> FindUniqueName(string requestedName, List<string> nameList);
+
         Task<string> FindUniqueProgramName(string programName);
         Task<XmlProgramRenamerResult> RenameProgram(
             string programCodeFilePath, string newProgramName);

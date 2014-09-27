@@ -101,6 +101,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleData\ProgramGenerators\TestProgramGeneratorSimple.cs" />
     <Compile Include="SampleData\SampleLoader.cs" />
+    <Compile Include="Services\Common\ContextServiceTest.cs" />
     <Compile Include="Services\Common\WebCommunicationTest.cs" />
     <Compile Include="Services\CultureServiceTest.cs" />
     <Compile Include="Services\DispatcherServiceTest.cs" />

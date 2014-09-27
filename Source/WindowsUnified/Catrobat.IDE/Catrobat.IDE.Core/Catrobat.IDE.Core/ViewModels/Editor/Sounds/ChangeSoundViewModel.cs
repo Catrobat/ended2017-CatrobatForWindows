@@ -1,6 +1,8 @@
 ﻿using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Collections.Generic;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 {
@@ -8,6 +10,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
     {
         #region Private Members
 
+        private Sprite _receivedSelectedSprite;
         private Sound _receivedSound;
         private string _soundName;
 
@@ -67,9 +70,19 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 
         #region Actions
 
-        private void SaveAction()
+        private async void SaveAction()
         {
-            ReceivedSound.Name = SoundName;
+            string validName = await ServiceLocator.ContextService.ConvertToValidFileName(SoundName);
+            if (validName != ReceivedSound.Name)
+            {
+                List<string> nameList = new List<string>();
+                foreach (var soundItem in _receivedSelectedSprite.Sounds)
+                {
+                    nameList.Add(soundItem.Name);
+                }
+                SoundName = await ServiceLocator.ContextService.FindUniqueName(validName, nameList);
+                ReceivedSound.Name = SoundName;
+            }
             base.GoBackAction();
         }
 
@@ -92,6 +105,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
         #endregion
 
         #region MessageActions
+        private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
+        {
+            _receivedSelectedSprite = message.Content;
+        }
 
         private void ChangeSoundNameMessageAction(GenericMessage<Sound> message)
         {
@@ -107,7 +124,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<Sound>>(this, ViewModelMessagingToken.SoundNameListener, ChangeSoundNameMessageAction);
+            Messenger.Default.Register<GenericMessage<Sprite>>(this,
+                ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
+            Messenger.Default.Register<GenericMessage<Sound>>(this, 
+                ViewModelMessagingToken.SoundNameListener, ChangeSoundNameMessageAction);
         }
 
         private void ResetViewModel()

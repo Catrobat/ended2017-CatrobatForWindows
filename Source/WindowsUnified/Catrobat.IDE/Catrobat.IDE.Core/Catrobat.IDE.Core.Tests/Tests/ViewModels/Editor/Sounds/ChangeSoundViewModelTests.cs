@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Tests.Services;
+using Catrobat.IDE.Core.Tests.Services.Common;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Sounds;
 using Catrobat.IDE.Core.Models;
@@ -15,6 +16,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sounds
         public static void TestClassInitialize(TestContext testContext)
         {
             ServiceLocator.NavigationService = new NavigationServiceTest();
+            ServiceLocator.UnRegisterAll();
+            ServiceLocator.Register<ContextServiceTest>(TypeCreationMode.Lazy);
         }
 
         [TestMethod, TestCategory("ViewModels.Editor")]
@@ -30,8 +33,18 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sounds
             {
                 Name = "TestSoundName"
             };
-            var messageContext = new GenericMessage<Sound>(sound);
-            Messenger.Default.Send(messageContext, ViewModelMessagingToken.SoundNameListener);
+            var sound2 = new Sound
+            {
+                Name = "TestSoundName2"
+            };
+            var sprite = new Sprite();
+            sprite.Sounds.Add(sound);
+            sprite.Sounds.Add(sound2);
+            var messageContext = new GenericMessage<Sprite>(sprite);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentSpriteChangedListener);
+
+            var messageContext2 = new GenericMessage<Sound>(sound);
+            Messenger.Default.Send(messageContext2, ViewModelMessagingToken.SoundNameListener);
             viewModel.SoundName = "TestNewSoundName";
             viewModel.SaveCommand.Execute(null);
 

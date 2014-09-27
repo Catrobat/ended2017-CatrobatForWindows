@@ -4,6 +4,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
@@ -81,7 +82,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 
         private async void SaveAction()
         {
-            SoundName = await ServiceLocator.ContextService.ConvertToValidFileName(SoundName);
+            string validName = await ServiceLocator.ContextService.ConvertToValidFileName(SoundName);
+            List<string> nameList = new List<string>();
+            foreach(var soundItem in _receivedSelectedSprite.Sounds)
+            {
+                nameList.Add(soundItem.Name);
+            }
+            SoundName = await ServiceLocator.ContextService.FindUniqueName(validName, nameList);
             var sound = new Sound(SoundName);
             var path = Path.Combine(CurrentProgram.BasePath, StorageConstants.ProgramSoundsPath, SoundName);
 
