@@ -132,7 +132,7 @@
                             <Grid x:Name="GrdButtonSelectedColor" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350">
                                 <Image x:Name="ImgTransparence"  Height="60" Margin="0,0,0,0" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Visibility="Visible" Width="350" />
                                 <Rectangle x:Name="RecSelectedColor" Fill="Black" Height="60" Margin="0,0,0,0" Visibility="Visible" Width="350"/>
-                                <TextBox x:Name="TbFertig" Background="Transparent" BorderThickness="0" Foreground="White" Text="Fertig" Visibility="Visible" Width="75" />
+                                <TextBox x:Name="TbFertig" Background="Transparent" BorderThickness="0" Foreground="White" IsHitTestVisible="False" Text="Fertig" Visibility="Visible" Width="75" />
                             </Grid>
                         </Button>
                     </Grid>
@@ -191,7 +191,7 @@
                             <Grid x:Name="GrdButtonSelectedColorSlider" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350">
                                 <Image x:Name="ImgTransparenceSlider"  Height="60" Margin="0,0,0,0" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Visibility="Visible" Width="350" />
                                 <Rectangle x:Name="RecSelectedColorSlider" Fill="Black" Height="60" Margin="0,0,0,0" Visibility="Visible" Width="350"/>
-                                <TextBox x:Name="TbFertigSlider" Background="Transparent" BorderThickness="0" Foreground="White" Text="Fertig" Visibility="Visible" Width="75" />
+                                <TextBox x:Name="TbFertigSlider" Background="Transparent" BorderThickness="0" Foreground="White" IsHitTestVisible="False" Text="Fertig" Visibility="Visible" Width="75" />
                             </Grid>
                         </Button>
                     </Grid>
