@@ -79,11 +79,11 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void Button_OnClick(object sender, RoutedEventArgs e)
         {
-            PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Collapsed;
+            // PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Collapsed;
             PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
             PocketPaintApplication.GetInstance().isBrushEraser = false;
             PocketPaintApplication.GetInstance().isBrushTool = false;
-            PocketPaintApplication.GetInstance().isToolPickerUsed = true;
+            PocketPaintApplication.GetInstance().isToolPickerUsed = true;;
 
             switch (((Button)sender).Name)
             {
@@ -106,7 +106,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Stamp);
                     break;
                 case "BtnRectangle":
-                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Margin = new Thickness(171, 263, 0, 0);
+                    //PocketPaintApplication.GetInstance().RecDrawingRectangle.Margin = new Thickness(171, 263, 0, 0);
                     PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
                     break;

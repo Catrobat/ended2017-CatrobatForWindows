@@ -147,7 +147,6 @@ namespace Catrobat.Paint.WindowsPhone.View
         /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            GrdThicknessControlVisibility = PocketPaintApplication.GetInstance().GrdThicknessControlState;
         }
 
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -436,18 +435,24 @@ namespace Catrobat.Paint.WindowsPhone.View
                 }
             }
 
+            GrdThicknessControlVisibility = Visibility.Collapsed;
+            visibilityGridEllRecControl = Visibility.Collapsed;
+
             switch (tool.GetToolType())
             {
                 case ToolType.Brush:
                 case ToolType.Cursor:
                 case ToolType.Line:
                     createAppBarAndSwitchAppBarContent("barStandard");
+                    GrdThicknessControlVisibility = PocketPaintApplication.GetInstance().GrdThicknessControlState;
                     break;
                 case ToolType.Crop:
                     // TODO: ApplicationBar = (IApplicationBar)this.Resources["barCrop"];
                     break;
                 case ToolType.Ellipse:
+                case ToolType.Rect:
                     createAppBarAndSwitchAppBarContent("barEllipse");
+                    visibilityGridEllRecControl = PocketPaintApplication.GetInstance().GridUcRellRecControlState;
                     break;
                 case ToolType.Eraser:
                     createAppBarAndSwitchAppBarContent("barEraser");
@@ -461,9 +466,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 case ToolType.Move:
                 case ToolType.Zoom:
                     createAppBarAndSwitchAppBarContent("barMove");
-                    break;
-                case ToolType.Rect:
-                    createAppBarAndSwitchAppBarContent("barRectangle");
                     break;
                 case ToolType.Rotate:
                     createAppBarAndSwitchAppBarContent("barRotate");
@@ -483,17 +485,20 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        public void setVisibilityOFRectEllUserControl(Visibility visibility)
+        public Visibility visibilityGridEllRecControl
         {
-            GridUserControlRectEll.Visibility = visibility;
+            get
+            {
+                return GridUserControlRectEll.Visibility;
+            }
+            set
+            {
+                GridUserControlRectEll.Visibility = value;
+            }
         }
         public void setRectEllUserControlMargin(Thickness margin)
         {
             GridUserControlRectEll.Margin = margin;
-        }
-        public Visibility getVisibilityOFRectEllUserControl()
-        {
-            return GridUserControlRectEll.Visibility;
         }
 
         private void btnThickness_Click(object sender, RoutedEventArgs e)
@@ -506,15 +511,16 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void btnThicknessBorder_Click(object sender, RoutedEventArgs e)
         {
-            if (getVisibilityOFRectEllUserControl() == Visibility.Collapsed)
+            if (visibilityGridEllRecControl == Visibility.Collapsed)
             {
-                setVisibilityOFRectEllUserControl(Visibility.Visible);
+                visibilityGridEllRecControl = Visibility.Visible;
                 setRectEllUserControlMargin(new Thickness(0.0, 0.0, 0.0, 0.0));
             }
             else
             {
-                setVisibilityOFRectEllUserControl(Visibility.Collapsed);
+                visibilityGridEllRecControl = Visibility.Collapsed;
             }
+            PocketPaintApplication.GetInstance().GridUcRellRecControlState = visibilityGridEllRecControl;
         }
 
         private void LayoutRoot_ManipulationStarted_1(object sender, ManipulationStartedRoutedEventArgs e)
