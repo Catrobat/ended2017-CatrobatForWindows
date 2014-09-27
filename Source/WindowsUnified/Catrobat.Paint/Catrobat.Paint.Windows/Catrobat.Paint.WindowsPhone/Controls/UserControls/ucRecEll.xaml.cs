@@ -33,9 +33,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public ucRecEll()
         {
             this.InitializeComponent();
-
-            PocketPaintApplication.GetInstance().CurrentShape = rectTransDisplayForeground;
-            rectTransDisplayForeground.Visibility = Visibility.Visible;
             ellDisplayForeground.Visibility = Visibility.Collapsed;
 
             tbStrokeThicknessValue.Text = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll.ToString();
@@ -43,11 +40,80 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             _last_valid_height = Convert.ToInt32(tbHeightValue.Text);
             _last_valid_width = Convert.ToInt32(tbWidthValue.Text);
-            rectTransDisplayForeground.ManipulationMode = ManipulationModes.All;
 
             PocketPaintApplication.GetInstance().PaintData.BorderColorChanged += ColorStrokeChanged;
             PocketPaintApplication.GetInstance().PaintData.FillColorChanged += ColorFillChanged;
             PocketPaintApplication.GetInstance().BarRecEllShape = this;
+            setUcRecEllLayout();
+
+            MessageDialog msg = new MessageDialog(gridMain.Height.ToString());
+            msg.ShowAsync();
+        }
+
+        private void setUcRecEllLayout()
+        {
+            var heightMultiplicator = PocketPaintApplication.GetInstance().size_height_multiplication;
+            var widthMultiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+
+            gridMain.Height *= heightMultiplicator;
+            gridMain.Width *= widthMultiplicator;
+
+            foreach (Object obj in gridMain.Children.Concat(GrdSelecectedBorderColor.Children.Concat(GrdSelectedFillColor.Children)))
+            {
+                if (obj.GetType() == typeof(TextBox))
+                {
+                    TextBox currentTextBox = ((TextBox)obj);
+                    currentTextBox.Height *= heightMultiplicator;
+                    currentTextBox.Width *= widthMultiplicator;
+
+                    currentTextBox.Margin = new Thickness(
+                                            currentTextBox.Margin.Left * widthMultiplicator,
+                                            currentTextBox.Margin.Top * heightMultiplicator,
+                                            currentTextBox.Margin.Right * widthMultiplicator,
+                                            currentTextBox.Margin.Bottom * heightMultiplicator);
+
+                    currentTextBox.FontSize *= heightMultiplicator;
+                }
+                else if (obj.GetType() == typeof(Button))
+                {
+                    Button currentButton = ((Button)obj);
+                    currentButton.Height *= heightMultiplicator;
+                    currentButton.Width *= widthMultiplicator;
+
+                    currentButton.Margin = new Thickness(
+                                            currentButton.Margin.Left * widthMultiplicator,
+                                            currentButton.Margin.Top * heightMultiplicator,
+                                            currentButton.Margin.Right * widthMultiplicator,
+                                            currentButton.Margin.Bottom * heightMultiplicator);
+
+                    currentButton.FontSize *= heightMultiplicator;
+                }
+                else if (obj.GetType() == typeof(Rectangle))
+                {
+                    Rectangle currentRectangle = ((Rectangle)(obj));
+                    currentRectangle.Height *= heightMultiplicator;
+                    currentRectangle.Width *= widthMultiplicator;
+
+                    currentRectangle.Margin = new Thickness(
+                                            currentRectangle.Margin.Left * widthMultiplicator,
+                                            currentRectangle.Margin.Top * heightMultiplicator,
+                                            currentRectangle.Margin.Right * widthMultiplicator,
+                                            currentRectangle.Margin.Bottom * heightMultiplicator);
+
+                }
+                else if(obj.GetType() == typeof(Slider))
+                {
+                    Slider currentSlider = ((Slider)(obj));
+                    //currentSlider.Height *= heightMultiplicator;
+                    currentSlider.Width *= widthMultiplicator;
+
+                    currentSlider.Margin = new Thickness(
+                                            currentSlider.Margin.Left * widthMultiplicator,
+                                            currentSlider.Margin.Top * heightMultiplicator,
+                                            currentSlider.Margin.Right * widthMultiplicator,
+                                            currentSlider.Margin.Bottom * heightMultiplicator);
+                }
+            }
         }
 
         private void btnSelectedColor_Click(object sender, RoutedEventArgs e)
@@ -96,7 +162,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             get 
             {
                 ellDisplayForeground.Visibility = Visibility.Visible;
-                rectTransDisplayForeground.Visibility = Visibility.Collapsed;
                 return ellDisplayForeground; 
             }
         }
@@ -129,8 +194,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             get 
             {
                 ellDisplayForeground.Visibility = Visibility.Collapsed;
-                rectTransDisplayForeground.Visibility = Visibility.Visible;
-                return rectTransDisplayForeground; 
+                // rectTransDisplayForeground.Visibility = Visibility.Visible;
+                return null; 
             }
         }
 
@@ -140,7 +205,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             tbStrokeThicknessValue.Text = strokeThickness.ToString();
             PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll = strokeThickness;
 
-            PocketPaintApplication.GetInstance().CurrentShape.StrokeThickness = strokeThickness;
+            // PocketPaintApplication.GetInstance().CurrentShape.StrokeThickness = strokeThickness;
 
             if (PocketPaintApplication.GetInstance().RecDrawingRectangle != null)
             {
@@ -150,11 +215,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if(strokeThickness > 0)
             {
                 btnSelectedBorderColor.IsEnabled = true;
-                rectTransBorderColor.Visibility = Visibility.Visible;
+                //rectTransBorderColor.Visibility = Visibility.Visible;
             }
             else
             {
-                rectTransBorderColor.Visibility = Visibility.Collapsed;
+                //rectTransBorderColor.Visibility = Visibility.Collapsed;
                 btnSelectedBorderColor.IsEnabled = false;
             }
         }

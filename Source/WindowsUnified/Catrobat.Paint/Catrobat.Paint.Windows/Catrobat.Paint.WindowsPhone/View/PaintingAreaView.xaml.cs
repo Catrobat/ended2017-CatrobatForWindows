@@ -92,16 +92,24 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void setPaintingAreaViewLayout()
         {
-            double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
-            double height_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+            double heightMultiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+            double widthMultiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
 
-            GrdThicknessControl.Height *= height_multiplicator;
-            GrdThicknessControl.Width *= width_multiplicator;
+            GrdThicknessControl.Height *= heightMultiplicator;
+            GrdThicknessControl.Width *= widthMultiplicator;
             GrdThicknessControl.Margin = new Thickness(
-                                            GrdThicknessControl.Margin.Left * width_multiplicator,
-                                            GrdThicknessControl.Margin.Top * height_multiplicator,
-                                            GrdThicknessControl.Margin.Right * width_multiplicator,
-                                            GrdThicknessControl.Margin.Bottom * height_multiplicator);
+                                            GrdThicknessControl.Margin.Left * widthMultiplicator,
+                                            GrdThicknessControl.Margin.Top * heightMultiplicator,
+                                            GrdThicknessControl.Margin.Right * widthMultiplicator,
+                                            GrdThicknessControl.Margin.Bottom * heightMultiplicator);
+
+            GridUserControlRectEll.Height *= heightMultiplicator;
+            GridUserControlRectEll.Width *= widthMultiplicator;
+            GridUserControlRectEll.Margin = new Thickness(
+                                GridUserControlRectEll.Margin.Left * widthMultiplicator,
+                                GridUserControlRectEll.Margin.Top * heightMultiplicator,
+                                GridUserControlRectEll.Margin.Right * widthMultiplicator,
+                                GridUserControlRectEll.Margin.Bottom * heightMultiplicator);
         }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
