@@ -34,12 +34,13 @@ namespace Catrobat.Paint.WindowsPhone.View
     public sealed partial class PaintingAreaView : Page
     {
         static string current_appbar = "barStandard";
+        static int rotateCounter;
         Point start_point = new Point();
         Point old_point = new Point();
         public PaintingAreaView()
         {
             this.InitializeComponent();
-
+            rotateCounter = 0;
             PocketPaintApplication.GetInstance().RecDrawingRectangle = rectDrawRectangle;
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
@@ -190,6 +191,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
+                app_btnReset.Name = "appButtonReset";
 
                 BitmapIcon thickness_icon = new BitmapIcon();
                 thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
@@ -227,6 +229,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnZoomOut = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
 
+                app_btnReset.Name = "appButtonReset";
+
                 BitmapIcon zoom_in_icon = new BitmapIcon();
                 zoom_in_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_zoom_in.png", UriKind.Absolute);
                 app_btnZoomIn.Icon = zoom_in_icon;
@@ -257,6 +261,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnRotate_right = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
 
+                app_btnReset.Name = "appButtonReset";
+                app_btnReset.IsEnabled = false;
                 BitmapIcon rotate_left_icon = new BitmapIcon();
                 rotate_left_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_rotate_left.png", UriKind.Absolute);
                 app_btnRotate_left.Icon = rotate_left_icon;
@@ -286,6 +292,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnBrushThickness = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
 
+                app_btnReset.Name = "appButtonReset";
+
                 BitmapIcon thickness_icon = new BitmapIcon();
                 thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
                 app_btnBrushThickness.Icon = thickness_icon;
@@ -307,6 +315,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnHorizontal = new AppBarButton();
                 AppBarButton app_btnVertical = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
+
+                app_btnReset.Name = "appButtonReset";
 
                 BitmapIcon horizontal_icon = new BitmapIcon();
                 horizontal_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_flip_horizontal.png", UriKind.Absolute);
@@ -371,23 +381,60 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         void app_btn_reset_Click(object sender, RoutedEventArgs e)
         {
+            ((AppBarButton)sender).IsEnabled = false;
+            rotateCounter = 0;
             PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ResetDrawingSpace();
         }
 
         private void BtnLeft_OnClick(object sender, RoutedEventArgs e)
         {
+            enableResetButtonRotate(-1);
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rotate)
             {
                 var rotateTool = (RotateTool)PocketPaintApplication.GetInstance().ToolCurrent;
                 rotateTool.RotateLeft();
             }
             else
+            {
                 return;
+            }
+        }
 
+        private void enableResetButtonRotate(int number)
+        {
+            AppBarButton appBarButtonReset = null;
+            CommandBar commandBar = (CommandBar)BottomAppBar;
+            for (int i = 0; i < commandBar.PrimaryCommands.Count; i++)
+            {
+                appBarButtonReset = (AppBarButton)(commandBar.PrimaryCommands[i]);
+                if (appBarButtonReset.Name == "appButtonReset")
+                {
+                    break;
+                }
+            }
+
+            rotateCounter += number; 
+            if ( rotateCounter < 0 || rotateCounter > 3)
+            {
+                rotateCounter = (rotateCounter < 0) ? 3 : 0;
+            }
+            if (rotateCounter == 0)
+            {
+                if (appBarButtonReset != null)
+                {
+                    appBarButtonReset.IsEnabled = false;
+                }
+            }
+            else
+            {
+                appBarButtonReset.IsEnabled = true;
+            }
         }
 
         private void BtnRight_OnClick(object sender, RoutedEventArgs e)
         {
+            enableResetButtonRotate(1);
+
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rotate)
             {
                 var rotateTool = (RotateTool)PocketPaintApplication.GetInstance().ToolCurrent;
