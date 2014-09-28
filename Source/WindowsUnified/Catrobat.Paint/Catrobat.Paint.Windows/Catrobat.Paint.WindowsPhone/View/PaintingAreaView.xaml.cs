@@ -35,6 +35,8 @@ namespace Catrobat.Paint.WindowsPhone.View
     {
         static string current_appbar = "barStandard";
         static int rotateCounter;
+        static bool flipVertical = false;
+        static bool flipHorizontal = false;
         Point start_point = new Point();
         Point old_point = new Point();
         public PaintingAreaView()
@@ -261,7 +263,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnRotate_right = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
 
-                app_btnReset.Name = "appButtonReset";
+                app_btnReset.Name = "appButtonResetRotate";
                 app_btnReset.IsEnabled = false;
                 BitmapIcon rotate_left_icon = new BitmapIcon();
                 rotate_left_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_rotate_left.png", UriKind.Absolute);
@@ -316,7 +318,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnVertical = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
 
-                app_btnReset.Name = "appButtonReset";
+                app_btnReset.Name = "appButtonResetFlip";
 
                 BitmapIcon horizontal_icon = new BitmapIcon();
                 horizontal_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_flip_horizontal.png", UriKind.Absolute);
@@ -337,6 +339,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnHorizontal.Click += BtnHorizotal_OnClick;
                 app_btnVertical.Click += BtnVertical_OnClick;
                 app_btnReset.Click += app_btn_reset_Click;
+
+                app_btnReset.IsEnabled = flipHorizontal | flipVertical;
 
                 cmdBar.PrimaryCommands.Add(app_btnHorizontal);
                 cmdBar.PrimaryCommands.Add(app_btnVertical);
@@ -400,34 +404,61 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        private void enableResetButtonRotate(int number)
+        private AppBarButton getAppBarResetButton(string toolName)
         {
             AppBarButton appBarButtonReset = null;
             CommandBar commandBar = (CommandBar)BottomAppBar;
             for (int i = 0; i < commandBar.PrimaryCommands.Count; i++)
             {
                 appBarButtonReset = (AppBarButton)(commandBar.PrimaryCommands[i]);
-                if (appBarButtonReset.Name == "appButtonReset")
+                string appBarResetName = ("appButtonReset" + toolName);
+                if (appBarButtonReset.Name == appBarResetName)
                 {
                     break;
                 }
             }
+            return appBarButtonReset;
+        }
 
-            rotateCounter += number; 
-            if ( rotateCounter < 0 || rotateCounter > 3)
+        private void enableResetButtonFlip(bool isFliped)
+        {
+            AppBarButton appBarButtonReset = getAppBarResetButton("Flip");
+
+            if (appBarButtonReset != null)
             {
-                rotateCounter = (rotateCounter < 0) ? 3 : 0;
-            }
-            if (rotateCounter == 0)
-            {
-                if (appBarButtonReset != null)
+                if (isFliped)
+                {
+                    appBarButtonReset.IsEnabled = true;
+                }
+                else
                 {
                     appBarButtonReset.IsEnabled = false;
                 }
             }
-            else
+        }
+
+        private void enableResetButtonRotate(int number)
+        {
+            AppBarButton appBarButtonReset = getAppBarResetButton("Rotate");
+
+            if (appBarButtonReset != null)
             {
-                appBarButtonReset.IsEnabled = true;
+                rotateCounter += number;
+                if (rotateCounter < 0 || rotateCounter > 3)
+                {
+                    rotateCounter = (rotateCounter < 0) ? 3 : 0;
+                }
+                if (rotateCounter == 0)
+                {
+                    if (appBarButtonReset != null)
+                    {
+                        appBarButtonReset.IsEnabled = false;
+                    }
+                }
+                else
+                {
+                    appBarButtonReset.IsEnabled = true;
+                }
             }
         }
 
@@ -593,6 +624,10 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void BtnHorizotal_OnClick(object sender, RoutedEventArgs e)
         {
+            flipHorizontal = !flipHorizontal;
+
+            enableResetButtonFlip(flipHorizontal | flipVertical);
+
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Flip)
             {
                 var flipTool = (FlipTool)PocketPaintApplication.GetInstance().ToolCurrent;
@@ -604,6 +639,14 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void BtnVertical_OnClick(object sender, RoutedEventArgs e)
         {
+            flipVertical = !flipVertical;
+
+            enableResetButtonFlip(flipHorizontal | flipVertical);
+
+            if(!flipVertical && !flipHorizontal)
+            {
+
+            }
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Flip)
             {
                 var flipTool = (FlipTool)PocketPaintApplication.GetInstance().ToolCurrent;
