@@ -96,9 +96,22 @@ namespace Catrobat.Paint.Phone.Tool
             CommandManager.GetInstance().CommitCommand(new RotateCommand(RotateCommand.Direction.Right, _angle));
         }
 
+        private void addRotateTransformToPaintingAreaView(RotateTransform renderTransform)
+        {
+            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform);
+            for (int i = 0; i < transformGroup.Children.Count; i++)
+            {
+                if(transformGroup.Children[i].GetType() == typeof(RotateTransform))
+                {
+                    transformGroup.Children.RemoveAt(i);
+                }
+            }
+            transformGroup.Children.Add(renderTransform);
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = transformGroup;
+        }
         private void PaintingAreaCanvasSettings(RotateTransform renderTransform)
         {
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = renderTransform;
+            addRotateTransformToPaintingAreaView(renderTransform);
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.UpdateLayout();
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateArrange();
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateMeasure();

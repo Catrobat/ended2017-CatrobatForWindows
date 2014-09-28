@@ -74,6 +74,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             //PaintingAreaCanvas.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
             //PaintingAreaCanvas.ManipulationStarting += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarting;
             PaintingAreaCanvas.PointerPressed += PaintingAreaCanvas_PointerEntered;
+            PaintingAreaCanvas.RenderTransform = new TransformGroup();
            /* if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Brush || 
                 PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Eraser)
             {

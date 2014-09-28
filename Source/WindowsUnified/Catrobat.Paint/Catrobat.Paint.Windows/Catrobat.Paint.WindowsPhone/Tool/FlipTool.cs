@@ -86,9 +86,23 @@ namespace Catrobat.Paint.Phone.Tool
             PaintingAreaCanvasSettings(renderTransform);
         }
 
+        private void addFlipTransformToPaintingAreaView(ScaleTransform renderTransform)
+        {
+            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform);
+            for (int i = 0; i < transformGroup.Children.Count; i++)
+            {
+                if (transformGroup.Children[i].GetType() == typeof(ScaleTransform))
+                {
+                    transformGroup.Children.RemoveAt(i);
+                }
+            }
+            transformGroup.Children.Add(renderTransform);
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = transformGroup;
+        }
+
         private void PaintingAreaCanvasSettings(ScaleTransform renderTransform)
         {
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = renderTransform;
+            addFlipTransformToPaintingAreaView(renderTransform);
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.UpdateLayout();
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateArrange();
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateMeasure();
