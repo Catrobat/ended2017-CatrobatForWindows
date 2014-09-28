@@ -19,8 +19,8 @@
             <!--ContentPanel - place additional content here-->
             <Grid x:Name="GrdToolPickerButtonOuter" Grid.Row="1" Margin="0,0,0,0" Grid.Column="0" Width="384">
                 <Grid x:Name="GrdToolPickerButtonInner" HorizontalAlignment="Center" Width="380">
-                    <Button x:Name="BtnBrush" BorderBrush="White" BorderThickness="3" Click="Button_OnClick" Content="Pinsel" FontSize="20" Grid.Column="1" Grid.Row="1" Height="50" HorizontalAlignment="Left" 
-                            HorizontalContentAlignment="Left" Margin="0,24,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnBrush_Holding">
+                    <Button x:Name="BtnBrush" BorderBrush="White" BorderThickness="3" Content="Pinsel" FontSize="20" Grid.Column="1" Grid.Row="1" Height="50" HorizontalAlignment="Left" 
+                            HorizontalContentAlignment="Left" Margin="0,24,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnBrush_Holding" Click="Button_OnClick">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_brush.png" Stretch="Uniform" />
                         </Button.Background>

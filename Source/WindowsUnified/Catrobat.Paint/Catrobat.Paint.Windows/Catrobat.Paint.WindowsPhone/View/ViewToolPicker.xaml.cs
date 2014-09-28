@@ -26,11 +26,13 @@ namespace Catrobat.Paint.WindowsPhone.View
     /// </summary>
     public sealed partial class ViewToolPicker : Page
     {
+        private bool isHolding;
         public ViewToolPicker()
         {
             this.InitializeComponent();
 
             setToolPickerLayout();
+            isHolding = false;
             //MessageDialog msg = new MessageDialog(BtnBrush.Width.ToString());
             //msg.ShowAsync();
         }
@@ -80,232 +82,185 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void Button_OnClick(object sender, RoutedEventArgs e)
         {
-            // PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Collapsed;
-            PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
-            PocketPaintApplication.GetInstance().isBrushEraser = false;
-            PocketPaintApplication.GetInstance().isBrushTool = false;
-            PocketPaintApplication.GetInstance().isToolPickerUsed = true;;
-
-            switch (((Button)sender).Name)
+            if (isHolding)
             {
-                case "BtnBrush":
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
-                    PocketPaintApplication.GetInstance().isBrushTool = true;
-                    break;
-                case "BtnCursor":
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Cursor);
-                    break;
-                case "BtnPipette":
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Pipette);
-                    break;
-                case "BtnFill":
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Fill);
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
-                    break;
-                case "BtnStamp":
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Stamp);
-                    break;
-                case "BtnRectangle":
-                    //PocketPaintApplication.GetInstance().RecDrawingRectangle.Margin = new Thickness(171, 263, 0, 0);
-                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
-                    break;
-                case "BtnEllipse":
-                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Margin = new Thickness(171, 263, 0, 0);
-                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Height = 50;
-                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Width = 50;
-                    PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Ellipse);
-                    break;
-                case "BtnImportPicture":
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.ImportPng);
-                    break;
-                case "BtnCrop":
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Crop);
-                    break;
-                case "BtnEraser":
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Eraser);
-                    break;
-                case "BtnFlip":
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Flip);
-                    break;
-                case "BtnMove":
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Move);
-                    break;
-                case "BtnZoom":
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Zoom);
-                    break;
-                case "BtnRotate":
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rotate);
-                    break;
-                case "BtnLine":
-                    PocketPaintApplication.GetInstance().SwitchTool((ToolType.Line));
-                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
-                    break;
+                isHolding = false;
             }
-
-            Frame frame = this.Frame;
-            if(frame == null)
+            else
             {
-                frame = new Frame();
-            }
+                // PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Collapsed;
+                PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
+                PocketPaintApplication.GetInstance().isBrushEraser = false;
+                PocketPaintApplication.GetInstance().isBrushTool = false;
+                PocketPaintApplication.GetInstance().isToolPickerUsed = true; ;
 
-            frame.Navigate(typeof(PaintingAreaView));
+                switch (((Button)sender).Name)
+                {
+                    case "BtnBrush":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
+                        PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
+                        PocketPaintApplication.GetInstance().isBrushTool = true;
+                        break;
+                    case "BtnCursor":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Cursor);
+                        break;
+                    case "BtnPipette":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Pipette);
+                        break;
+                    case "BtnFill":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Fill);
+                        PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
+                        break;
+                    case "BtnStamp":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Stamp);
+                        break;
+                    case "BtnRectangle":
+                        //PocketPaintApplication.GetInstance().RecDrawingRectangle.Margin = new Thickness(171, 263, 0, 0);
+                        PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
+                        break;
+                    case "BtnEllipse":
+                        PocketPaintApplication.GetInstance().RecDrawingRectangle.Margin = new Thickness(171, 263, 0, 0);
+                        PocketPaintApplication.GetInstance().RecDrawingRectangle.Height = 50;
+                        PocketPaintApplication.GetInstance().RecDrawingRectangle.Width = 50;
+                        PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Ellipse);
+                        break;
+                    case "BtnImportPicture":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.ImportPng);
+                        break;
+                    case "BtnCrop":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Crop);
+                        break;
+                    case "BtnEraser":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Eraser);
+                        break;
+                    case "BtnFlip":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Flip);
+                        break;
+                    case "BtnMove":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Move);
+                        break;
+                    case "BtnZoom":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Zoom);
+                        break;
+                    case "BtnRotate":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rotate);
+                        break;
+                    case "BtnLine":
+                        PocketPaintApplication.GetInstance().SwitchTool((ToolType.Line));
+                        PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
+                        break;
+                }
+
+                Frame frame = this.Frame;
+                if (frame == null)
+                {
+                    frame = new Frame();
+                }
+
+                frame.Navigate(typeof(PaintingAreaView));
+            }
+        }
+
+        private async void showToolMessage(string message)
+        {
+            isHolding = true;
+
+            MessageDialog msg = new MessageDialog(message);
+
+            try
+            {
+                await msg.ShowAsync();
+            }
+            catch (Exception error)
+            {
+
+            }
         }
 
         private void BtnBrush_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Wähle die Farbe und Strichstärke auf der unteren Leiste");
+            showToolMessage("Wähle die Farbe und Strichstärke auf der unteren Leiste.");
         }
+
 
         private void BtnCursorx_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Positioniere den Zeiger wo du zeichnen willst. " + Environment.NewLine 
+            showToolMessage("Positioniere den Zeiger wo du zeichnen willst. " + Environment.NewLine
                 + "Klicke einmal um den Zeichenmodus zu aktivieren. Bewege den Finger um zu zeichnen. " + Environment.NewLine
                 + "Klicke noch einmal um den Zeichenmodus zu deaktivkieren.");
         }
 
         private void BtnPipette_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Klicke auf eine Farbe im Bild um diese Farbe auszuwählen.");
+            showToolMessage("Klicke auf eine Farbe im Bild um diese Farbe auszuwählen.");
         }
 
         private void BtnFill_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Klicke in das Bild um einen Bereich zu füllen.");
+            showToolMessage("Klicke in das Bild um einen Bereich zu füllen.");
         }
 
         private void BtnStamp_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Bewege und verändere das Rechteck bis es über dem Bereich liegt " + Environment.NewLine
+            showToolMessage("Bewege und verändere das Rechteck bis es über dem Bereich liegt " + Environment.NewLine
                 + "den du gerne aufnehmen würdest. Klicke in das Rechteck um den Bereich auszuwählen. Bewege das " + Environment.NewLine
-                + "Rechteck und klicke um zu stempeln.");
+                + "Rechteck und klicke um zu stempeln.");        
         }
 
         private void BtnRectangle_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Bewege und verändere das Rechteck. Klicke um das Rechteck auf das Bild zu zeichnen.");
+            showToolMessage("Bewege und verändere das Rechteck. Klicke um das Rechteck auf das Bild zu zeichnen.");
         }
 
-        private async void BtnEllipse_Holding(object sender, HoldingRoutedEventArgs e)
+        private void BtnEllipse_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Bewege und verändere den Kreis" + Environment.NewLine
+            showToolMessage("Bewege und verändere den Kreis" + Environment.NewLine
                 + "oder forme ihn in eine Ellipse. Klicke um das Ergebnis auf das Bild zu zeichnen");
-            try
-            {
-                await msg.ShowAsync();
-            }
-            catch (Exception error)
-            {
-
-            }
         }
 
-        private async void BtnImportPicture_Holding(object sender, HoldingRoutedEventArgs e)
+        private void BtnImportPicture_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Wähle ein Bild aus der Galerie aus und importiere" + Environment.NewLine
+            showToolMessage("Wähle ein Bild aus der Galerie aus und importiere" + Environment.NewLine
                 + "es in das Stempel Werkzeug");
-
-            try
-            {
-                await msg.ShowAsync();
-            }
-            catch (Exception error)
-            {
-
-            }
         }
 
-        private async void BtnZuschneiden_Holding(object sender, HoldingRoutedEventArgs e)
+        private void BtnZuschneiden_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Bewege und verändere das Rechteck und schneide das Bild zu.");
-
-            try
-            {
-                await msg.ShowAsync();
-            }
-            catch (Exception error)
-            {
-
-            }
+            showToolMessage("Bewege und verändere das Rechteck und schneide das Bild zu.");
         }
 
-        private async void BtnEraser_Holding(object sender, HoldingRoutedEventArgs e)
+        private void BtnEraser_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Radiere Bereiche im Bild.");
-
-            try
-            {
-                await msg.ShowAsync();
-            }
-            catch (Exception error)
-            {
-
-            }
+            showToolMessage("Radiere Bereiche im Bild.");
         }
 
-        private async void BtnFlip_Holding(object sender, HoldingRoutedEventArgs e)
+        private void BtnFlip_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Klicke auf die Symbole auf der unteren Leiste." + Environment.NewLine
+            showToolMessage("Klicke auf die Symbole auf der unteren Leiste." + Environment.NewLine
                 + "um das ganze Bild zu spiegeln.");
-
-            try
-            {
-                await msg.ShowAsync();
-            }
-            catch (Exception error)
-            {
-
-            }
         }
 
-        private async void BtnMove_Holding(object sender, HoldingRoutedEventArgs e)
+        private void BtnMove_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Bewege das Bild mit deinem Finger.");
+            showToolMessage("Bewege das Bild mit deinem Finger.");
         }
 
-        private async void BtnZoom_Holding(object sender, HoldingRoutedEventArgs e)
+        private void BtnZoom_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Klicke auf die Symbole auf der unteren Leiste um das Bild" + Environment.NewLine
+            showToolMessage("Klicke auf die Symbole auf der unteren Leiste um das Bild" + Environment.NewLine
                 + "zu vergrößern oder zu verkleinern.");
-
-            try
-            {
-                await msg.ShowAsync();
-            }
-            catch (Exception error)
-            {
-
-            }
         }
 
-        private async void BtnRotate_Holding(object sender, HoldingRoutedEventArgs e)
+        private void BtnRotate_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Klicke auf die Symbole auf der unteren Leist um das ganze Bild zu drehen.");
-
-            try
-            {
-                await msg.ShowAsync();
-            }
-            catch (Exception error)
-            {
-
-            }
+            showToolMessage("Klicke auf die Symbole auf der unteren Leist um das ganze Bild zu drehen.");
         }
 
-        private async void BtnLine_Holding(object sender, HoldingRoutedEventArgs e)
+        private void BtnLine_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Zeichne eine gerade Linie.");
-
-            try
-            {
-                await msg.ShowAsync();
-            }
-            catch (Exception error)
-            {
-
-            }
+            showToolMessage("Zeichne eine gerade Linie.");
         }
     }
 }
