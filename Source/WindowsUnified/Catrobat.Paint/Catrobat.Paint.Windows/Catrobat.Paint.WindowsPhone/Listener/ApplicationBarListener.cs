@@ -31,8 +31,6 @@ namespace Catrobat.Paint.Phone.Listener
 
             if (rootFrame != null)
             {
-                PocketPaintApplication.GetInstance().PaintingAreaView.GrdThicknessControlVisibility = Visibility.Collapsed;
-
                 PocketPaintApplication.GetInstance().is_border_color = false;
                 rootFrame.Navigate(typeof(ViewColorPicker));
             }
@@ -81,10 +79,6 @@ namespace Catrobat.Paint.Phone.Listener
             
             if(rootFrame != null)
             {
-                Visibility visibility = Visibility.Collapsed;
-                PocketPaintApplication.GetInstance().PaintingAreaView.GrdThicknessControlVisibility = visibility;
-                //pplication.GetInstance().PaintingAreaView.setVisibilityOFRectEllUserControl(visibility);
-
                 rootFrame.Navigate(typeof(ViewToolPicker));
             }
         }

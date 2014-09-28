@@ -4,13 +4,14 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Collections.Generic;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 {
     public class ChangeLookViewModel : ViewModelBase
     {
         #region Private Members
-
+        private Sprite _receivedSelectedSprite;
         #endregion
 
         #region Properties
@@ -22,7 +23,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
             set
             {
                 _currentProgram = value;
-                                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProgram));
+                ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CurrentProgram));
             }
         }
 
@@ -80,9 +81,19 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
         #region Actions
 
-        private void SaveAction()
+        private async void SaveAction()
         {
-            ReceivedLook.Name = LookName;
+            string validName = await ServiceLocator.ContextService.ConvertToValidFileName(LookName);
+            if (validName != ReceivedLook.Name)
+            {
+                List<string> nameList = new List<string>();
+                foreach (var lookItem in _receivedSelectedSprite.Looks)
+                {
+                    nameList.Add(lookItem.Name);
+                }
+                LookName = await ServiceLocator.ContextService.FindUniqueName(validName, nameList);
+                ReceivedLook.Name = LookName;
+            }
             base.GoBackAction();
         }
 
@@ -110,6 +121,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
         #endregion
 
         #region MessageActions
+        private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
+        {
+            _receivedSelectedSprite = message.Content;
+        }
 
         private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
         {
@@ -131,6 +146,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
+            Messenger.Default.Register<GenericMessage<Sprite>>(this,
+                ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
             Messenger.Default.Register<GenericMessage<Program>>(this, 
                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Look>>(this, 

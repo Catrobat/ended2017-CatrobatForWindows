@@ -2,6 +2,7 @@
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Collections.Generic;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 {
@@ -64,8 +65,15 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region Actions
 
-        private void SaveAction()
+        private async void SaveAction()
         {
+            string validName = await ServiceLocator.ContextService.ConvertToValidFileName(SpriteName);
+            List<string> nameList = new List<string>();
+            foreach (var spriteItem in CurrentProgram.Sprites)
+            {
+                nameList.Add(spriteItem.Name);
+            }
+            SpriteName = await ServiceLocator.ContextService.FindUniqueName(validName, nameList);
             var sprite = new Sprite { Name = SpriteName };
             CurrentProgram.Sprites.Add(sprite);
 

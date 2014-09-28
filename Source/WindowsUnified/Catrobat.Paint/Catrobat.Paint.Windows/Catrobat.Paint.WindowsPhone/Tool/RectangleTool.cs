@@ -29,8 +29,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public RectangleTool()
         {
             this.ToolType = ToolType.Rect;
-            PocketPaintApplication.GetInstance().CurrentShape = PocketPaintApplication.GetInstance().BarRecEllShape.RectangleForeground;
-
+            //PocketPaintApplication.GetInstance().CurrentShape = PocketPaintApplication.GetInstance().BarRecEllShape.RectangleForeground;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBorderColor();
+            PocketPaintApplication.GetInstance().BarRecEllShape.setFillColor();
             if (PocketPaintApplication.GetInstance().RecDrawingRectangle != null)
             {
                 PocketPaintApplication.GetInstance().RecDrawingRectangle.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;

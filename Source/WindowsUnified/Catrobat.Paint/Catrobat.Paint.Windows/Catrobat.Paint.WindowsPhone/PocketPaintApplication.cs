@@ -25,7 +25,12 @@ namespace Catrobat.Paint.Phone
 
         public Visibility GrdThicknessControlState = Visibility.Collapsed;
 
+        public Visibility GridUcRellRecControlState = Visibility.Collapsed;
+
         public bool isBrushEraser = false;
+
+        public bool isBrushTool = true;
+
         public bool isToolPickerUsed = true;
         public bool UnsavedChangesMade { get; set; }
 

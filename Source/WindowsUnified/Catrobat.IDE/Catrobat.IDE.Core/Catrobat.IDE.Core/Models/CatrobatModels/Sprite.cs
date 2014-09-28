@@ -184,14 +184,14 @@ namespace Catrobat.IDE.Core.Models
 
         #region Implements IAsyncCloneable
 
-        async Task<object> IAsyncCloneable<Program>.CloneInstance(Program project)
+        async Task<object> IAsyncCloneable<Program>.CloneInstance(Program program)
         {
             var looks = Looks == null ? null : await Looks.ToReadOnlyDictionaryAsync(
-                keySelector: look => look, 
-                elementSelector: look => look.CloneAsync(project));
+                keySelector: look => look,
+                elementSelector: look => look.CloneAsync(program));
             var sounds = Sounds == null ? null : await Sounds.ToReadOnlyDictionaryAsync(
                 keySelector: sound => sound,
-                elementSelector: sound => sound.CloneAsync(project));
+                elementSelector: sound => sound.CloneAsync(program));
             var localVariables = LocalVariables == null ? null : LocalVariables.ToReadOnlyDictionary(
                 keySelector: variable => variable,
                 elementSelector: variable => variable.Clone());

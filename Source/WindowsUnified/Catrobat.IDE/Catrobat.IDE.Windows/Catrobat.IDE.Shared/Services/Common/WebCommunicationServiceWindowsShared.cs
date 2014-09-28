@@ -43,8 +43,6 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
             {
                 //httpClient.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
                 httpClient.BaseAddress = new Uri("https://pocketcode.org/api/");
-                //httpClient.DefaultRequestHeaders.Accept.Clear();
-                //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 try
                 {
                     HttpResponseMessage httpResponse = null;
@@ -303,8 +301,6 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                         fileContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/zip");
                         postParameters.Add(fileContent, String.Format("\"{0}\"", ApplicationResources.API_PARAM_UPLOAD), String.Format("\"{0}\"", programTitle + ApplicationResources.EXTENSION));
 
-                        //taskCancellationToken.ThrowIfCancellationRequested();
-                        
                         using (var httpClient = new HttpClient())
                         {
                             httpClient.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);

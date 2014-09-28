@@ -1171,7 +1171,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Pocket Code Source Code Lizenzen</value>
   </data>
   <data name="Main_TextBoxLimit" xml:space="preserve">
-    <value>60</value>
+    <value>50</value>
   </data>
   <data name="Main_ButtonPasswordRecover" xml:space="preserve">
     <value>Wiederher- stellen</value>
@@ -1340,5 +1340,8 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   </data>
   <data name="Editor_Help" xml:space="preserve">
     <value>Fehlerhilfe</value>
+  </data>
+  <data name="Main_ProgramNameDuplicate" xml:space="preserve">
+    <value>Programmname ist bereits vergeben.</value>
   </data>
 </root>

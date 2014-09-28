@@ -659,7 +659,15 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             {
                 var newLook = await look.CloneAsync(CurrentProgram);
                 if (newLook != null)
+                {
+                    List<string> nameList = new List<string>();
+                    foreach (var lookItem in _selectedSprite.Looks)
+                    {
+                        nameList.Add(lookItem.Name);
+                    }
+                    newLook.Name = await ServiceLocator.ContextService.FindUniqueName(newLook.Name, nameList);
                     Looks.Insert(Looks.IndexOf(look) + 1, newLook);
+                }
             }
         }
 

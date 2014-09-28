@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             fileName = Regex.Replace(fileName, @"(\s)\s+", "$1").Trim();
             string invalidFileNameChars = new string(Path.GetInvalidFileNameChars());
-            fileName = Regex.Replace(fileName, @"[" + Regex.Escape(invalidFileNameChars) + "]", "");
+            fileName = Regex.Replace(fileName, @"[" + Regex.Escape(invalidFileNameChars) + "]", "").Trim();
             fileName = Regex.Replace(fileName, @"( *(\.)+)*$", "").Trim();
             //fileName = Regex.Replace(fileName, @"[^A-Za-z0-9_-]", "");
 
@@ -34,15 +34,41 @@ namespace Catrobat.IDE.Core.Services.Common
             }
             return fileName;
         }
-        
+
+        public async Task<string> FindUniqueName(string requestedName, List<string> nameList)
+        {
+            int counter = 0;
+            string uniqueName = "";
+            string currentName = requestedName;
+            while (counter <= nameList.Count)
+            {
+                if (counter != 0)
+                {
+                    currentName = requestedName + counter;
+                }
+
+                var match = nameList.FirstOrDefault(stringToCheck => stringToCheck.Contains(currentName));
+                if (match == null)
+                    break;
+
+                counter++;
+            }
+            uniqueName = requestedName;
+
+            if (counter != 0)
+                uniqueName = requestedName + counter;
+
+            return uniqueName.Trim();
+        }
+
         public async Task<string> FindUniqueProgramName(string programName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                var counter = 0;
+                int counter = 0;
                 while (true)
                 {
-                    var programPath = Path.Combine(StorageConstants.ProgramsPath,
+                    string programPath = Path.Combine(StorageConstants.ProgramsPath,
                         programName);
 
                     if (counter != 0)
@@ -53,14 +79,19 @@ namespace Catrobat.IDE.Core.Services.Common
 
                     if (!await storage.DirectoryExistsAsync(programPath))
                         break;
-
+                    
                     counter++;
                 }
-
-                var programNameUnique = programName;
+                string programNameUnique = programName;
 
                 if (counter != 0)
                     programNameUnique = programName + counter;
+
+                if(programName != programNameUnique)
+                {
+                    ServiceLocator.NotifictionService.ShowToastNotification("",
+                    AppResources.Main_ProgramNameDuplicate, ToastDisplayDuration.Short, ToastTag.Default);
+                }
 
                 return programNameUnique.Trim();
             }

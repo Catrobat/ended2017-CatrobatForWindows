@@ -4,6 +4,7 @@ using Catrobat.IDE.Core.Tests.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.Core.Models;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
 {
@@ -24,11 +25,25 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Editor.Sprites
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
             navigationService.CurrentView = typeof(ChangeSpriteViewModel);
 
+            Sprite sprite = new Sprite { Name = "TestSpriteName" };
+            Sprite sprite2 = new Sprite { Name = "TestSpriteName2" };
+            
             var viewModel = new ChangeSpriteViewModel
             {
-                SelectedSprite = new Sprite { Name = "TestSpriteName" },
+                SelectedSprite = sprite,
                 SpriteName = "TestNewSpriteName"
             };
+
+            var program = new Program
+            {
+                Name = "TestProgramName",
+                Description = "TestProgramDescription"
+            };
+            program.Sprites.Add(sprite);
+            program.Sprites.Add(sprite2);
+            var messageContext = new GenericMessage<Program>(program);
+            Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProgramChangedListener);
+
             viewModel.SaveCommand.Execute(null);
 
             Assert.AreEqual("TestNewSpriteName", viewModel.SpriteName);

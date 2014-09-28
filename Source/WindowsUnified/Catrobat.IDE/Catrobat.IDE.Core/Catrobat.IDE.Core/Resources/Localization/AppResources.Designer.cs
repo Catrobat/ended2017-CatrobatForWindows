@@ -3142,6 +3142,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Program-name is already in use. ähnelt.
+        /// </summary>
+        public static string Main_ProgramNameDuplicate {
+            get {
+                return ResourceManager.GetString("Main_ProgramNameDuplicate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die No description available. ähnelt.
         /// </summary>
         public static string Main_ProgramNoDescription {
@@ -3349,7 +3358,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die 60 ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die 50 ähnelt.
         /// </summary>
         public static string Main_TextBoxLimit {
             get {

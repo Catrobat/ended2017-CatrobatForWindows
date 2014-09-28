@@ -175,22 +175,25 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 var current_solid_brush = new SolidColorBrush(current_color);
                 PocketPaintApplication.GetInstance().PaintData.ColorSelected = current_solid_brush;
-                //PocketPaintApplication.GetInstance().BarRecEllShape.ColorFillChanged(current_solid_brush);
+                PocketPaintApplication.GetInstance().BarRecEllShape.ColorFillChanged(current_solid_brush);
             }
 
             // TODO: If selected color is transparence then select the eraser-tool.
-            if(current_color.A == 0)
+            if (PocketPaintApplication.GetInstance().isBrushTool)
             {
-                PocketPaintApplication.GetInstance().isBrushEraser = true;
-                PocketPaintApplication.GetInstance().SwitchTool(ToolType.Eraser);
-                PocketPaintApplication.GetInstance().isToolPickerUsed = false;
-            }
-            else
-            {
-                PocketPaintApplication.GetInstance().isBrushEraser = false;
-                if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Eraser)
+                if (current_color.A == 0)
                 {
-                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
+                    PocketPaintApplication.GetInstance().isBrushEraser = true;
+                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Eraser);
+                    PocketPaintApplication.GetInstance().isToolPickerUsed = false;
+                }
+                else
+                {
+                    PocketPaintApplication.GetInstance().isBrushEraser = false;
+                    if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Eraser)
+                    {
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
+                    }
                 }
             }
             
@@ -292,7 +295,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 else if (obj.GetType() == typeof(Slider))
                 {
                     Slider currentSlider = ((Slider)obj);
-                    currentSlider.Height *= height;
                     currentSlider.Width *= width;
 
                     currentSlider.Margin = new Thickness(

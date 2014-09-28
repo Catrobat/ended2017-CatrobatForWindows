@@ -25,11 +25,11 @@
                            Margin="171,263,0,0" PointerMoved="testRectangle_PointerMoved"  Stroke="Black"  VerticalAlignment="Top" Width="50" Visibility="Collapsed" PointerPressed="testRectangle_PointerPressed" />
             </Grid>
 
-            <Grid x:Name="GridUserControlRectEll" VerticalAlignment="Bottom" Visibility="Collapsed" Width="400">
+            <Grid x:Name="GridUserControlRectEll" Height="200" HorizontalAlignment="Center" Margin="0,0,0,8" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <ucRecEll:ucRecEll></ucRecEll:ucRecEll>
             </Grid>
             
-            <Grid x:Name="GrdThicknessControl" Margin="0,0,0,0" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
+            <Grid x:Name="GrdThicknessControl" Height="380" Margin="0,0,0,0" VerticalAlignment="Bottom" Visibility="Visible" Width="384">
                 <controls:ThicknessControl x:Name="CtrlThicknessControl"></controls:ThicknessControl>
             </Grid>
 

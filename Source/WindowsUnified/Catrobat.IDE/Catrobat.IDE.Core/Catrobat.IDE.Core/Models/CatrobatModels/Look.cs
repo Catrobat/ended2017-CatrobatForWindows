@@ -134,17 +134,17 @@ namespace Catrobat.IDE.Core.Models
 
         #region Implements IAsyncCloneable
 
-        async Task<object> IAsyncCloneable<Program>.CloneInstance(Program project)
+        async Task<object> IAsyncCloneable<Program>.CloneInstance(Program program)
         {
             var result = new Look(Name);
-            var directory = project.BasePath + "/" + StorageConstants.ProgramLooksPath + "/";
+            var directory = program.BasePath + "/" + StorageConstants.ProgramLooksPath + "/";
             using (var storage = StorageSystem.GetStorage())
             {
                 await storage.CopyFileAsync(directory + FileName, directory + result.FileName);
             }
             return result;
         }
-
+        
         #endregion
     }
 }

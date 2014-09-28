@@ -32,12 +32,12 @@ namespace Catrobat.IDE.Core.Tests.Tests.ViewModels.Main
         public void NavigateToFullProgramTest()
         {
             var viewModel = new ProgramSettingsViewModel();
-            var project = new Program
+            var program = new Program
             {
                 Name = "TestProgramName",
                 Description = "TestProgramDescription"
             };
-            var messageContext = new GenericMessage<Program>(project);
+            var messageContext = new GenericMessage<Program>(program);
             Messenger.Default.Send(messageContext, ViewModelMessagingToken.CurrentProgramChangedListener);
             viewModel.NavigateTo();
 

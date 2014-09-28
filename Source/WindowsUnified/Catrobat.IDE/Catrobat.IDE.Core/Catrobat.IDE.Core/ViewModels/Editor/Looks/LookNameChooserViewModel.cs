@@ -6,6 +6,7 @@ using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -169,7 +170,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
 
         private async Task SaveAction()
         {
-            LookName = await ServiceLocator.ContextService.ConvertToValidFileName(LookName);
+            string validName = await ServiceLocator.ContextService.ConvertToValidFileName(LookName);
+            List<string> nameList = new List<string>();
+            foreach (var lookItem in _receivedSelectedSprite.Looks)
+            {
+                nameList.Add(lookItem.Name);
+            }
+            LookName = await ServiceLocator.ContextService.FindUniqueName(validName, nameList);
             var message = new GenericMessage<PortableImage>(Image);
             Messenger.Default.Send(message, ViewModelMessagingToken.LookImageToSaveListener);
 

@@ -1,6 +1,8 @@
 ﻿using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Collections.Generic;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 {
@@ -8,6 +10,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
     {
         #region Private Members
 
+        private Program _currentProgram;
         private Sprite _receivedSprite;
         private string _spriteName;
 
@@ -67,9 +70,19 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region Actions
 
-        private void SaveAction()
+        private async void SaveAction()
         {
-            SelectedSprite.Name = SpriteName;
+            string validName = await ServiceLocator.ContextService.ConvertToValidFileName(SpriteName);
+            if (validName != SelectedSprite.Name)
+            {
+                List<string> nameList = new List<string>();
+                foreach (var spriteItem in _currentProgram.Sprites)
+                {
+                    nameList.Add(spriteItem.Name);
+                }
+                SpriteName = await ServiceLocator.ContextService.FindUniqueName(validName, nameList);
+                SelectedSprite.Name = SpriteName;
+            }
 
             ResetViewModel();
             base.GoBackAction();
@@ -91,6 +104,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         #region Message Actions
 
+        private void CurrentProgramChangedMessageAction(GenericMessage<Program> message)
+        {
+            _currentProgram = message.Content;
+        }
+
         private void CurrentSpriteChangedMessageAction(GenericMessage<Sprite> message)
         {
             SelectedSprite = message.Content;
@@ -104,7 +122,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
+            Messenger.Default.Register<GenericMessage<Program>>(this,
+                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
+            Messenger.Default.Register<GenericMessage<Sprite>>(this, 
+                ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
         }
 
         public void ResetViewModel()

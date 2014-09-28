@@ -34,12 +34,13 @@ namespace Catrobat.Paint.WindowsPhone.View
     public sealed partial class PaintingAreaView : Page
     {
         static string current_appbar = "barStandard";
+        static int rotateCounter;
         Point start_point = new Point();
         Point old_point = new Point();
         public PaintingAreaView()
         {
             this.InitializeComponent();
-
+            rotateCounter = 0;
             PocketPaintApplication.GetInstance().RecDrawingRectangle = rectDrawRectangle;
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
@@ -92,16 +93,24 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void setPaintingAreaViewLayout()
         {
-            double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
-            double height_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+            double heightMultiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+            double widthMultiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
 
-            GrdThicknessControl.Height *= height_multiplicator;
-            GrdThicknessControl.Width *= width_multiplicator;
+            GrdThicknessControl.Height *= heightMultiplicator;
+            GrdThicknessControl.Width *= widthMultiplicator;
             GrdThicknessControl.Margin = new Thickness(
-                                            GrdThicknessControl.Margin.Left * width_multiplicator,
-                                            GrdThicknessControl.Margin.Top * height_multiplicator,
-                                            GrdThicknessControl.Margin.Right * width_multiplicator,
-                                            GrdThicknessControl.Margin.Bottom * height_multiplicator);
+                                            GrdThicknessControl.Margin.Left * widthMultiplicator,
+                                            GrdThicknessControl.Margin.Top * heightMultiplicator,
+                                            GrdThicknessControl.Margin.Right * widthMultiplicator,
+                                            GrdThicknessControl.Margin.Bottom * heightMultiplicator);
+
+            GridUserControlRectEll.Height *= heightMultiplicator;
+            GridUserControlRectEll.Width *= widthMultiplicator;
+            GridUserControlRectEll.Margin = new Thickness(
+                                GridUserControlRectEll.Margin.Left * widthMultiplicator,
+                                GridUserControlRectEll.Margin.Top * heightMultiplicator,
+                                GridUserControlRectEll.Margin.Right * widthMultiplicator,
+                                GridUserControlRectEll.Margin.Bottom * heightMultiplicator);
         }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
@@ -139,7 +148,6 @@ namespace Catrobat.Paint.WindowsPhone.View
         /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            GrdThicknessControlVisibility = PocketPaintApplication.GetInstance().GrdThicknessControlState;
         }
 
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -183,6 +191,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
+                app_btnReset.Name = "appButtonReset";
 
                 BitmapIcon thickness_icon = new BitmapIcon();
                 thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
@@ -220,6 +229,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnZoomOut = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
 
+                app_btnReset.Name = "appButtonReset";
+
                 BitmapIcon zoom_in_icon = new BitmapIcon();
                 zoom_in_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_zoom_in.png", UriKind.Absolute);
                 app_btnZoomIn.Icon = zoom_in_icon;
@@ -250,6 +261,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnRotate_right = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
 
+                app_btnReset.Name = "appButtonReset";
+                app_btnReset.IsEnabled = false;
                 BitmapIcon rotate_left_icon = new BitmapIcon();
                 rotate_left_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_rotate_left.png", UriKind.Absolute);
                 app_btnRotate_left.Icon = rotate_left_icon;
@@ -279,6 +292,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnBrushThickness = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
 
+                app_btnReset.Name = "appButtonReset";
+
                 BitmapIcon thickness_icon = new BitmapIcon();
                 thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
                 app_btnBrushThickness.Icon = thickness_icon;
@@ -300,6 +315,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnHorizontal = new AppBarButton();
                 AppBarButton app_btnVertical = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
+
+                app_btnReset.Name = "appButtonReset";
 
                 BitmapIcon horizontal_icon = new BitmapIcon();
                 horizontal_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_flip_horizontal.png", UriKind.Absolute);
@@ -364,23 +381,60 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         void app_btn_reset_Click(object sender, RoutedEventArgs e)
         {
+            ((AppBarButton)sender).IsEnabled = false;
+            rotateCounter = 0;
             PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ResetDrawingSpace();
         }
 
         private void BtnLeft_OnClick(object sender, RoutedEventArgs e)
         {
+            enableResetButtonRotate(-1);
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rotate)
             {
                 var rotateTool = (RotateTool)PocketPaintApplication.GetInstance().ToolCurrent;
                 rotateTool.RotateLeft();
             }
             else
+            {
                 return;
+            }
+        }
 
+        private void enableResetButtonRotate(int number)
+        {
+            AppBarButton appBarButtonReset = null;
+            CommandBar commandBar = (CommandBar)BottomAppBar;
+            for (int i = 0; i < commandBar.PrimaryCommands.Count; i++)
+            {
+                appBarButtonReset = (AppBarButton)(commandBar.PrimaryCommands[i]);
+                if (appBarButtonReset.Name == "appButtonReset")
+                {
+                    break;
+                }
+            }
+
+            rotateCounter += number; 
+            if ( rotateCounter < 0 || rotateCounter > 3)
+            {
+                rotateCounter = (rotateCounter < 0) ? 3 : 0;
+            }
+            if (rotateCounter == 0)
+            {
+                if (appBarButtonReset != null)
+                {
+                    appBarButtonReset.IsEnabled = false;
+                }
+            }
+            else
+            {
+                appBarButtonReset.IsEnabled = true;
+            }
         }
 
         private void BtnRight_OnClick(object sender, RoutedEventArgs e)
         {
+            enableResetButtonRotate(1);
+
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rotate)
             {
                 var rotateTool = (RotateTool)PocketPaintApplication.GetInstance().ToolCurrent;
@@ -428,18 +482,24 @@ namespace Catrobat.Paint.WindowsPhone.View
                 }
             }
 
+            GrdThicknessControlVisibility = Visibility.Collapsed;
+            visibilityGridEllRecControl = Visibility.Collapsed;
+
             switch (tool.GetToolType())
             {
                 case ToolType.Brush:
                 case ToolType.Cursor:
                 case ToolType.Line:
                     createAppBarAndSwitchAppBarContent("barStandard");
+                    GrdThicknessControlVisibility = PocketPaintApplication.GetInstance().GrdThicknessControlState;
                     break;
                 case ToolType.Crop:
                     // TODO: ApplicationBar = (IApplicationBar)this.Resources["barCrop"];
                     break;
                 case ToolType.Ellipse:
+                case ToolType.Rect:
                     createAppBarAndSwitchAppBarContent("barEllipse");
+                    visibilityGridEllRecControl = PocketPaintApplication.GetInstance().GridUcRellRecControlState;
                     break;
                 case ToolType.Eraser:
                     createAppBarAndSwitchAppBarContent("barEraser");
@@ -453,9 +513,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 case ToolType.Move:
                 case ToolType.Zoom:
                     createAppBarAndSwitchAppBarContent("barMove");
-                    break;
-                case ToolType.Rect:
-                    createAppBarAndSwitchAppBarContent("barRectangle");
                     break;
                 case ToolType.Rotate:
                     createAppBarAndSwitchAppBarContent("barRotate");
@@ -475,17 +532,20 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        public void setVisibilityOFRectEllUserControl(Visibility visibility)
+        public Visibility visibilityGridEllRecControl
         {
-            GridUserControlRectEll.Visibility = visibility;
+            get
+            {
+                return GridUserControlRectEll.Visibility;
+            }
+            set
+            {
+                GridUserControlRectEll.Visibility = value;
+            }
         }
         public void setRectEllUserControlMargin(Thickness margin)
         {
             GridUserControlRectEll.Margin = margin;
-        }
-        public Visibility getVisibilityOFRectEllUserControl()
-        {
-            return GridUserControlRectEll.Visibility;
         }
 
         private void btnThickness_Click(object sender, RoutedEventArgs e)
@@ -498,15 +558,16 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void btnThicknessBorder_Click(object sender, RoutedEventArgs e)
         {
-            if (getVisibilityOFRectEllUserControl() == Visibility.Collapsed)
+            if (visibilityGridEllRecControl == Visibility.Collapsed)
             {
-                setVisibilityOFRectEllUserControl(Visibility.Visible);
+                visibilityGridEllRecControl = Visibility.Visible;
                 setRectEllUserControlMargin(new Thickness(0.0, 0.0, 0.0, 0.0));
             }
             else
             {
-                setVisibilityOFRectEllUserControl(Visibility.Collapsed);
+                visibilityGridEllRecControl = Visibility.Collapsed;
             }
+            PocketPaintApplication.GetInstance().GridUcRellRecControlState = visibilityGridEllRecControl;
         }
 
         private void LayoutRoot_ManipulationStarted_1(object sender, ManipulationStartedRoutedEventArgs e)

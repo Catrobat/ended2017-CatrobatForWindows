@@ -205,8 +205,13 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 var originalIndex = CurrentProgram.Sprites.IndexOf(sprite);
 
                 var newSprite = await sprite.CloneAsync(CurrentProgram);
+                List<string> nameList = new List<string>();
+                foreach (var spriteItem in _currentProgram.Sprites)
+                {
+                    nameList.Add(spriteItem.Name);
+                }
+                newSprite.Name = await ServiceLocator.ContextService.FindUniqueName(newSprite.Name, nameList);
                 var newIndex = originalIndex + 1;
-
                 CurrentProgram.Sprites.Insert(newIndex, newSprite);
             }
         }
