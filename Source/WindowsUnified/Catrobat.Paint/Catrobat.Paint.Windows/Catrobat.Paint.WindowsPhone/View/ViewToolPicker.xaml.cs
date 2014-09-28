@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -151,6 +152,160 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
 
             frame.Navigate(typeof(PaintingAreaView));
+        }
+
+        private void BtnBrush_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Wähle die Farbe und Strichstärke auf der unteren Leiste");
+        }
+
+        private void BtnCursorx_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Positioniere den Zeiger wo du zeichnen willst. " + Environment.NewLine 
+                + "Klicke einmal um den Zeichenmodus zu aktivieren. Bewege den Finger um zu zeichnen. " + Environment.NewLine
+                + "Klicke noch einmal um den Zeichenmodus zu deaktivkieren.");
+        }
+
+        private void BtnPipette_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Klicke auf eine Farbe im Bild um diese Farbe auszuwählen.");
+        }
+
+        private void BtnFill_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Klicke in das Bild um einen Bereich zu füllen.");
+        }
+
+        private void BtnStamp_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Bewege und verändere das Rechteck bis es über dem Bereich liegt " + Environment.NewLine
+                + "den du gerne aufnehmen würdest. Klicke in das Rechteck um den Bereich auszuwählen. Bewege das " + Environment.NewLine
+                + "Rechteck und klicke um zu stempeln.");
+        }
+
+        private void BtnRectangle_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Bewege und verändere das Rechteck. Klicke um das Rechteck auf das Bild zu zeichnen.");
+        }
+
+        private async void BtnEllipse_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Bewege und verändere den Kreis" + Environment.NewLine
+                + "oder forme ihn in eine Ellipse. Klicke um das Ergebnis auf das Bild zu zeichnen");
+            try
+            {
+                await msg.ShowAsync();
+            }
+            catch (Exception error)
+            {
+
+            }
+        }
+
+        private async void BtnImportPicture_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Wähle ein Bild aus der Galerie aus und importiere" + Environment.NewLine
+                + "es in das Stempel Werkzeug");
+
+            try
+            {
+                await msg.ShowAsync();
+            }
+            catch (Exception error)
+            {
+
+            }
+        }
+
+        private async void BtnZuschneiden_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Bewege und verändere das Rechteck und schneide das Bild zu.");
+
+            try
+            {
+                await msg.ShowAsync();
+            }
+            catch (Exception error)
+            {
+
+            }
+        }
+
+        private async void BtnEraser_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Radiere Bereiche im Bild.");
+
+            try
+            {
+                await msg.ShowAsync();
+            }
+            catch (Exception error)
+            {
+
+            }
+        }
+
+        private async void BtnFlip_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Klicke auf die Symbole auf der unteren Leiste." + Environment.NewLine
+                + "um das ganze Bild zu spiegeln.");
+
+            try
+            {
+                await msg.ShowAsync();
+            }
+            catch (Exception error)
+            {
+
+            }
+        }
+
+        private async void BtnMove_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Bewege das Bild mit deinem Finger.");
+        }
+
+        private async void BtnZoom_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Klicke auf die Symbole auf der unteren Leiste um das Bild" + Environment.NewLine
+                + "zu vergrößern oder zu verkleinern.");
+
+            try
+            {
+                await msg.ShowAsync();
+            }
+            catch (Exception error)
+            {
+
+            }
+        }
+
+        private async void BtnRotate_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Klicke auf die Symbole auf der unteren Leist um das ganze Bild zu drehen.");
+
+            try
+            {
+                await msg.ShowAsync();
+            }
+            catch (Exception error)
+            {
+
+            }
+        }
+
+        private async void BtnLine_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            MessageDialog msg = new MessageDialog("Zeichne eine gerade Linie.");
+
+            try
+            {
+                await msg.ShowAsync();
+            }
+            catch (Exception error)
+            {
+
+            }
         }
     }
 }
