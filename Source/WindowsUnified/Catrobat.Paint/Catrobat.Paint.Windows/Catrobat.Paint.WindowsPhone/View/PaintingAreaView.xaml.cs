@@ -35,14 +35,18 @@ namespace Catrobat.Paint.WindowsPhone.View
     {
         static string current_appbar = "barStandard";
         static int rotateCounter;
-        static bool flipVertical = false;
-        static bool flipHorizontal = false;
+        static bool flipVertical;
+        static bool flipHorizontal;
+        static int zoomCounter;
         Point start_point = new Point();
         Point old_point = new Point();
         public PaintingAreaView()
         {
             this.InitializeComponent();
             rotateCounter = 0;
+            flipHorizontal = false;
+            flipHorizontal = false;
+            zoomCounter = 0;
             PocketPaintApplication.GetInstance().RecDrawingRectangle = rectDrawRectangle;
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
@@ -232,7 +236,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnZoomOut = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
 
-                app_btnReset.Name = "appButtonReset";
+                app_btnReset.Name = "appButtonResetZoom";
 
                 BitmapIcon zoom_in_icon = new BitmapIcon();
                 zoom_in_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_zoom_in.png", UriKind.Absolute);
@@ -253,6 +257,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnZoomIn.Click += BtnZoomIn_Click;
                 app_btnZoomOut.Click += BtnZoomOut_Click;
                 app_btnReset.Click += app_btn_reset_Click;
+
+                app_btnReset.IsEnabled = zoomCounter == 0 ? false : true;
 
                 cmdBar.PrimaryCommands.Add(app_btnZoomIn);
                 cmdBar.PrimaryCommands.Add(app_btnZoomOut);
@@ -285,6 +291,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnRotate_left.Click += BtnLeft_OnClick;
                 app_btnRotate_right.Click += BtnRight_OnClick;
                 app_btnReset.Click += app_btn_reset_Click;
+
+                app_btnReset.IsEnabled = rotateCounter == 0 ? false : true;
 
                 cmdBar.PrimaryCommands.Add(app_btnRotate_left);
                 cmdBar.PrimaryCommands.Add(app_btnRotate_right);
@@ -386,8 +394,8 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         void app_btn_reset_Click(object sender, RoutedEventArgs e)
         {
-            ((AppBarButton)sender).IsEnabled = false;
-            rotateCounter = 0;
+            //((AppBarButton)sender).IsEnabled = false;
+            //rotateCounter = 0;
             PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ResetDrawingSpace();
         }
 
@@ -476,8 +484,27 @@ namespace Catrobat.Paint.WindowsPhone.View
                 return;
         }
 
+        private void enableResetButtonZoom(int number)
+        {
+            AppBarButton appBarButtonReset = getAppBarResetButton("Zoom");
+
+            if (appBarButtonReset != null)
+            {
+                zoomCounter += number;
+                if (zoomCounter == 0)
+                {
+                    appBarButtonReset.IsEnabled = false;
+                }
+                else
+                {
+                    appBarButtonReset.IsEnabled = true;
+                }
+            }
+        }
+
         void BtnZoomOut_Click(object sender, RoutedEventArgs e)
         {
+            enableResetButtonZoom(-1);
             MoveZoomTool tool = new MoveZoomTool();
             ScaleTransform scaletransform = new ScaleTransform();
             scaletransform.ScaleX = 0.9;
@@ -487,7 +514,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         void BtnZoomIn_Click(object sender, RoutedEventArgs e )
         {
-
+            enableResetButtonZoom(1);
             MoveZoomTool tool = new MoveZoomTool();
             ScaleTransform scaletransform = new ScaleTransform();
             scaletransform.ScaleX = 1.1;
