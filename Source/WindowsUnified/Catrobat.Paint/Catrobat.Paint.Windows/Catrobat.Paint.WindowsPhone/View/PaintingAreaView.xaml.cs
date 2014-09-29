@@ -394,7 +394,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         void app_btn_reset_Click(object sender, RoutedEventArgs e)
         {
-            //((AppBarButton)sender).IsEnabled = false;
+            ((AppBarButton)sender).IsEnabled = false;
             //rotateCounter = 0;
             PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ResetDrawingSpace();
         }
@@ -422,6 +422,22 @@ namespace Catrobat.Paint.WindowsPhone.View
                 appBarButtonReset = (AppBarButton)(commandBar.PrimaryCommands[i]);
                 string appBarResetName = ("appButtonReset" + toolName);
                 if (appBarButtonReset.Name == appBarResetName)
+                {
+                    break;
+                }
+            }
+            return appBarButtonReset;
+        }
+
+        public AppBarButton getAppBarResetButton()
+        {
+            AppBarButton appBarButtonReset = null;
+            CommandBar commandBar = (CommandBar)BottomAppBar;
+            for (int i = 0; i < commandBar.PrimaryCommands.Count; i++)
+            {
+                appBarButtonReset = (AppBarButton)(commandBar.PrimaryCommands[i]);
+                string appBarResetName = ("appButtonReset");
+                if (appBarButtonReset.Name.Contains(appBarResetName))
                 {
                     break;
                 }
