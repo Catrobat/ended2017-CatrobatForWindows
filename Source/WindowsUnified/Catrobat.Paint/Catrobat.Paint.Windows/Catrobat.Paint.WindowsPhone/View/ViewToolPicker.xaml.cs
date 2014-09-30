@@ -233,7 +233,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void BtnEraser_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            showToolMessage("Radiere Bereiche im Bild.");
+            showToolMessage("Lösche wie mit einem Radierer Bereiche des Bildes.");
         }
 
         private void BtnFlip_Holding(object sender, HoldingRoutedEventArgs e)

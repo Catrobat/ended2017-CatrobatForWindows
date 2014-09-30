@@ -17,7 +17,7 @@ namespace Catrobat.Paint.Phone.Listener
     {
         public void ManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
         {
-
+            e.Mode.ToString();
         }
         
         public void ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
@@ -38,28 +38,29 @@ namespace Catrobat.Paint.Phone.Listener
             var point = new Point(Convert.ToInt32(e.Position.X), Convert.ToInt32(e.Position.Y));
 
             // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
-            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled) 
+            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
             {
                 return;
             }
 
 
             object movezoom;
-            /*if (PinchManipulation != null)
+
+            if (e.Delta.Scale != 1.0)
             {
 
                 movezoom = new ScaleTransform();
                 if (e.Delta.Scale > 0)
                 {
                     System.Diagnostics.Debug.WriteLine("Scale " + e.Delta.Scale);
-                     ((ScaleTransform)movezoom).ScaleX *= e.Delta.Scale;
-                     ((ScaleTransform)movezoom).ScaleY *= e.Delta.Scale;
+                    ((ScaleTransform)movezoom).ScaleX *= e.Delta.Scale;
+                    ((ScaleTransform)movezoom).ScaleY *= e.Delta.Scale;
                 }
-            }*/
-            //else
+            }
+            else
             {
                 movezoom = new TranslateTransform();
-                
+
                 ((TranslateTransform)movezoom).X += e.Delta.Translation.X;
                 ((TranslateTransform)movezoom).Y += e.Delta.Translation.Y;
             }
@@ -70,11 +71,11 @@ namespace Catrobat.Paint.Phone.Listener
                 case ToolType.Eraser:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
                     break;
-               case ToolType.Move:
-               case ToolType.Zoom:
+                case ToolType.Move:
+                case ToolType.Zoom:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(movezoom);
                     break;
-               case ToolType.Line:
+                case ToolType.Line:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
                     break;
             }

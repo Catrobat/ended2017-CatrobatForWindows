@@ -4,6 +4,7 @@ using System;
 using System.Windows;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
@@ -72,6 +73,12 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             {
                 var move = (TranslateTransform)arg;
                 _transforms.Children.Add(move);
+
+                AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
+                if(appBarButtonReset != null)
+                {
+                    appBarButtonReset.IsEnabled = true;
+                }
             }
             else
             {

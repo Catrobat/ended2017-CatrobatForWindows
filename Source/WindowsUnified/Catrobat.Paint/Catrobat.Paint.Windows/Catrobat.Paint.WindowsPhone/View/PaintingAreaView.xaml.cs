@@ -1,6 +1,7 @@
 ﻿using Catrobat.IDE.WindowsShared.Common;
 using Catrobat.Paint.Phone;
 using Catrobat.Paint.Phone.Command;
+using Catrobat.Paint.Phone.Listener;
 using Catrobat.Paint.Phone.Tool;
 using Catrobat.Paint.Phone.Ui;
 using Catrobat.Paint.WindowsPhone.Controls.AppBar;
@@ -23,7 +24,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
 
 namespace Catrobat.Paint.WindowsPhone.View
@@ -37,6 +37,8 @@ namespace Catrobat.Paint.WindowsPhone.View
         static int rotateCounter;
         static bool flipVertical;
         static bool flipHorizontal;
+        static bool isPointerEventLoaded;
+        static bool isManipulationEventLoaded;
         static int zoomCounter;
         Point start_point = new Point();
         Point old_point = new Point();
@@ -46,6 +48,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             rotateCounter = 0;
             flipHorizontal = false;
             flipHorizontal = false;
+            isPointerEventLoaded = false;
+            isManipulationEventLoaded = false;
             zoomCounter = 0;
             PocketPaintApplication.GetInstance().RecDrawingRectangle = rectDrawRectangle;
 
@@ -74,10 +78,9 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
             PocketPaintApplication.GetInstance().AppbarTop.ToolChangedHere(PocketPaintApplication.GetInstance().ToolCurrent);
             //PaintingAreaCanvas.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
-            PaintingAreaCanvas.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
+            //PaintingAreaCanvas.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
             //PaintingAreaCanvas.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
             //PaintingAreaCanvas.ManipulationStarting += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarting;
-            PaintingAreaCanvas.PointerPressed += PaintingAreaCanvas_PointerEntered;
             PaintingAreaCanvas.RenderTransform = new TransformGroup();
            /* if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Brush || 
                 PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Eraser)
@@ -166,6 +169,10 @@ namespace Catrobat.Paint.WindowsPhone.View
         public void createAppBarAndSwitchAppBarContent(string type)
         {
             CommandBar cmdBar = new CommandBar();
+
+            loadPointerEvents();
+            unloadManipulationEvents();
+
             if("barStandard" == type)
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
@@ -187,7 +194,6 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
                 cmdBar.PrimaryCommands.Add(app_btnColor);
-           
             }
             else if("barPipette" == type)
             {
@@ -230,7 +236,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
             }
-            else if ("barMove" == type)
+            else if ("barMove" == type || "barZoom" == type)
             {
                 AppBarButton app_btnZoomIn = new AppBarButton();
                 AppBarButton app_btnZoomOut = new AppBarButton();
@@ -263,6 +269,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                 cmdBar.PrimaryCommands.Add(app_btnZoomIn);
                 cmdBar.PrimaryCommands.Add(app_btnZoomOut);
                 cmdBar.PrimaryCommands.Add(app_btnReset);
+
+                unloadPointerEvents();
+                loadManipulationEvents();
             }
             else if("barRotate" == type)
             {
@@ -394,7 +403,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         void app_btn_reset_Click(object sender, RoutedEventArgs e)
         {
-            //((AppBarButton)sender).IsEnabled = false;
+            ((AppBarButton)sender).IsEnabled = false;
             //rotateCounter = 0;
             PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ResetDrawingSpace();
         }
@@ -422,6 +431,22 @@ namespace Catrobat.Paint.WindowsPhone.View
                 appBarButtonReset = (AppBarButton)(commandBar.PrimaryCommands[i]);
                 string appBarResetName = ("appButtonReset" + toolName);
                 if (appBarButtonReset.Name == appBarResetName)
+                {
+                    break;
+                }
+            }
+            return appBarButtonReset;
+        }
+
+        public AppBarButton getAppBarResetButton()
+        {
+            AppBarButton appBarButtonReset = null;
+            CommandBar commandBar = (CommandBar)BottomAppBar;
+            for (int i = 0; i < commandBar.PrimaryCommands.Count; i++)
+            {
+                appBarButtonReset = (AppBarButton)(commandBar.PrimaryCommands[i]);
+                string appBarResetName = ("appButtonReset");
+                if (appBarButtonReset.Name.Contains(appBarResetName))
                 {
                     break;
                 }
@@ -645,6 +670,52 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
 
             PocketPaintApplication.GetInstance().ToolCurrent.HandleDown(point);
+
+            e.Handled = true;
+        }
+
+        void PaintingAreaCanvas_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            var point = new Point(Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.Y));
+
+            // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
+            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
+            {
+                return;
+            }
+            object movezoom;
+            movezoom = new TranslateTransform();
+
+            ((TranslateTransform)movezoom).X += point.X;
+            ((TranslateTransform)movezoom).Y += point.Y;
+            //}
+
+            switch (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType())
+            {
+                case ToolType.Brush:
+                case ToolType.Eraser:
+                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
+                    break;
+                case ToolType.Move:
+                case ToolType.Zoom:
+                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(movezoom);
+                    break;
+                case ToolType.Line:
+                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
+                    break;
+            }
+        }
+
+        void PaintingAreaCanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            var point = new Point(Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.Y));
+
+            // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
+            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
+            {
+                return;
+            }
+
             PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(point);
 
             e.Handled = true;
@@ -748,6 +819,51 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             start_point.X = e.GetPosition(PaintingAreaCanvas).X;
             start_point.Y = e.GetPosition(PaintingAreaCanvas).Y;
+        }
+
+        private void loadManipulationEvents()
+        {
+            if (PocketPaintApplication.GetInstance() != null && !isManipulationEventLoaded)
+            {
+                PaintingAreaManipulationListener currentAbl = PocketPaintApplication.GetInstance().PaintingAreaManipulationListener;
+                PaintingAreaCanvas.ManipulationStarted += currentAbl.ManipulationStarted;
+                PaintingAreaCanvas.ManipulationDelta += currentAbl.ManipulationDelta;
+                PaintingAreaCanvas.ManipulationCompleted += currentAbl.ManipulationCompleted;
+                isManipulationEventLoaded = true;
+            }
+        }
+
+        private void unloadManipulationEvents()
+        {
+            if (PocketPaintApplication.GetInstance() != null && isManipulationEventLoaded)
+            {
+                PaintingAreaManipulationListener currentAbl = PocketPaintApplication.GetInstance().PaintingAreaManipulationListener;
+                PaintingAreaCanvas.ManipulationStarted -= currentAbl.ManipulationStarted;
+                PaintingAreaCanvas.ManipulationDelta -= currentAbl.ManipulationDelta;
+                PaintingAreaCanvas.ManipulationCompleted -= currentAbl.ManipulationCompleted;
+                isManipulationEventLoaded = false;
+            }
+        }
+
+        private void loadPointerEvents()
+        {
+            if (!isPointerEventLoaded)
+            {
+                PaintingAreaCanvas.PointerEntered += PaintingAreaCanvas_PointerEntered;
+                PaintingAreaCanvas.PointerMoved += PaintingAreaCanvas_PointerMoved;
+                PaintingAreaCanvas.PointerReleased += PaintingAreaCanvas_PointerReleased;
+                isPointerEventLoaded = true;
+            }
+        }
+        private void unloadPointerEvents()
+        {
+            if (isPointerEventLoaded)
+            {
+                PaintingAreaCanvas.PointerEntered -= PaintingAreaCanvas_PointerEntered;
+                PaintingAreaCanvas.PointerMoved -= PaintingAreaCanvas_PointerMoved;
+                PaintingAreaCanvas.PointerReleased -= PaintingAreaCanvas_PointerReleased;
+                isPointerEventLoaded = false;
+            }
         }
     }
 }
