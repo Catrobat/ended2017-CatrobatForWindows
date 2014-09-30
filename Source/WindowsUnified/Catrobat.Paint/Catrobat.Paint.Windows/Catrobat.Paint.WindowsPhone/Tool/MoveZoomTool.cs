@@ -19,6 +19,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             ToolType = ToolType.Move;
             ResetCanvas();
+            Grid grid = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid;
             if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform != null)
             {
                 _transforms = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;

@@ -37,6 +37,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         static int rotateCounter;
         static bool flipVertical;
         static bool flipHorizontal;
+        static bool isDoubleTapLoaded;
         static bool isPointerEventLoaded;
         static bool isManipulationEventLoaded;
         static int zoomCounter;
@@ -50,6 +51,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             flipHorizontal = false;
             isPointerEventLoaded = false;
             isManipulationEventLoaded = false;
+            isDoubleTapLoaded = false;
             zoomCounter = 0;
             PocketPaintApplication.GetInstance().RecDrawingRectangle = rectDrawRectangle;
 
@@ -60,8 +62,10 @@ namespace Catrobat.Paint.WindowsPhone.View
             LayoutRoot.Height = Window.Current.Bounds.Height;
             LayoutRoot.Width = Window.Current.Bounds.Width;
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
-            PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
+            //PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
+            PocketPaintApplication.GetInstance().GridCursor = GridCursor;
+            PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
 
             PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height - 144;
@@ -99,6 +103,11 @@ namespace Catrobat.Paint.WindowsPhone.View
             setPaintingAreaViewLayout();
             PocketPaintApplication.GetInstance().GrdThicknessControlState = Visibility.Collapsed;
             createAppBarAndSwitchAppBarContent(current_appbar);        
+        }
+
+        void PaintingAreaCanvas_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            PocketPaintApplication.GetInstance().cursorControl.setCursorLook();
         }
 
         private void setPaintingAreaViewLayout()
@@ -162,7 +171,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            e.PageState["PaintingAreaCanvasUnderlaying"] = PaintingAreaCanvasUnderlaying.Children;
+            //e.PageState["PaintingAreaCanvasUnderlaying"] = PaintingAreaCanvasUnderlaying.Children;
             e.PageState["PaintingAreaCanvas"] = PaintingAreaCanvas.Children;
         }
 
@@ -171,9 +180,10 @@ namespace Catrobat.Paint.WindowsPhone.View
             CommandBar cmdBar = new CommandBar();
 
             loadPointerEvents();
+            unloadDoubleTapEvent();
             unloadManipulationEvents();
 
-            if("barStandard" == type)
+            if("barCursor" == type || "barStandard" == type)
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
                 AppBarButton app_btnColor = new AppBarButton();
@@ -194,6 +204,13 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
                 cmdBar.PrimaryCommands.Add(app_btnColor);
+
+                if("barCursor" == type)
+                {
+                    loadDoubleTapEvent();
+                    loadManipulationEvents();
+                    unloadPointerEvents();
+                }
             }
             else if("barPipette" == type)
             {
@@ -566,6 +583,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 }
             }
 
+            GridCursor.Visibility = Visibility.Collapsed;
             GrdThicknessControlVisibility = Visibility.Collapsed;
             visibilityGridEllRecControl = Visibility.Collapsed;
 
@@ -574,7 +592,15 @@ namespace Catrobat.Paint.WindowsPhone.View
                 case ToolType.Brush:
                 case ToolType.Cursor:
                 case ToolType.Line:
-                    createAppBarAndSwitchAppBarContent("barStandard");
+                    if (tool.GetToolType() == ToolType.Cursor)
+                    {
+                        createAppBarAndSwitchAppBarContent("barCursor");
+                        GridCursor.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        createAppBarAndSwitchAppBarContent("barStandard");
+                    }
                     GrdThicknessControlVisibility = PocketPaintApplication.GetInstance().GrdThicknessControlState;
                     break;
                 case ToolType.Crop:
@@ -696,6 +722,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 case ToolType.Eraser:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
                     break;
+                case ToolType.Cursor:
                 case ToolType.Move:
                 case ToolType.Zoom:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(movezoom);
@@ -821,6 +848,24 @@ namespace Catrobat.Paint.WindowsPhone.View
             start_point.Y = e.GetPosition(PaintingAreaCanvas).Y;
         }
 
+        private void loadDoubleTapEvent()
+        {
+            if (PocketPaintApplication.GetInstance() != null && !isDoubleTapLoaded)
+            {
+                PaintingAreaCanvas.DoubleTapped += PaintingAreaCanvas_DoubleTapped;
+                isDoubleTapLoaded = true;
+            }
+        }
+
+        private void unloadDoubleTapEvent()
+        {
+            if (PocketPaintApplication.GetInstance() != null && isDoubleTapLoaded)
+            {
+                PaintingAreaCanvas.DoubleTapped -= PaintingAreaCanvas_DoubleTapped;
+                isDoubleTapLoaded = false;
+            }
+        }
+
         private void loadManipulationEvents()
         {
             if (PocketPaintApplication.GetInstance() != null && !isManipulationEventLoaded)
@@ -864,6 +909,16 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PaintingAreaCanvas.PointerReleased -= PaintingAreaCanvas_PointerReleased;
                 isPointerEventLoaded = false;
             }
+        }
+
+        private void CursorControl_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+
+        }
+
+        private void CursorControl_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            
         }
     }
 }
