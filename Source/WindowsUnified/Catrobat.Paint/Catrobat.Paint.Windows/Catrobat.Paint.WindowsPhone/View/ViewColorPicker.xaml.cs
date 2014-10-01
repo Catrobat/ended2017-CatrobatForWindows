@@ -199,6 +199,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Cursor)
             {
                 PocketPaintApplication.GetInstance().cursorControl.setCursorColor(current_color);
+                PocketPaintApplication.GetInstance().cursorControl.setDrawingPointColor(current_color);
             }
             
             this.Frame.GoBack();

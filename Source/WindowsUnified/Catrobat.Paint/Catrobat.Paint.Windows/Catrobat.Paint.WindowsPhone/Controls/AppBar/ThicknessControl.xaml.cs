@@ -145,6 +145,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                 BtnBrushThickness.Content = Convert.ToInt32(SliderThickness.Value).ToString();
                 slider_thickness_textbox_last_value = Convert.ToInt32(SliderThickness.Value);
                 PocketPaintApplication.GetInstance().PaintData.ThicknessSelected = Convert.ToInt32(SliderThickness.Value);
+                if (PocketPaintApplication.GetInstance().cursorControl != null)
+                {
+                    PocketPaintApplication.GetInstance().cursorControl.changeCursorsize();
+                }
             }
         }
 
