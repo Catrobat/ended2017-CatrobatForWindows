@@ -33,6 +33,31 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
+        public void changeCursorType(PenLineCap currentPenLineCap)
+        {
+            if (PocketPaintApplication.GetInstance() != null)
+            {
+                if(currentPenLineCap == PenLineCap.Round)
+                {
+                    GridEllipse.Visibility = Visibility.Visible;
+                    GridRectangle.Visibility = Visibility.Collapsed;
+                    GridTriangle.Visibility = Visibility.Collapsed;
+                }
+                else if(currentPenLineCap == PenLineCap.Square)
+                {
+                    GridEllipse.Visibility = Visibility.Collapsed;
+                    GridRectangle.Visibility = Visibility.Visible;
+                    GridTriangle.Visibility = Visibility.Collapsed;
+                }
+                else if(currentPenLineCap == PenLineCap.Triangle)
+                {
+                    GridEllipse.Visibility = Visibility.Collapsed;
+                    GridRectangle.Visibility = Visibility.Collapsed;
+                    GridTriangle.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
         public void changeCursorsize()
         {
             int standardDrawingPoint = 8;
@@ -40,14 +65,29 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             int standardSizeOuter = 20;
             int currentThickness = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
             int newCurrentThicness = currentThickness - 8;
-            int newSizeInnerEllipse = standardSizeInner + newCurrentThicness;
-            int newSizeOuterEllipse = standardSizeOuter + newCurrentThicness;
+            int newSizeInner = standardSizeInner + newCurrentThicness;
+            int newSizeOuter = standardSizeOuter + newCurrentThicness;
+
             ellDrawingPoint.Height = standardDrawingPoint + newCurrentThicness;
             ellDrawingPoint.Width = standardDrawingPoint + newCurrentThicness;
-            ellInner.Height = newSizeInnerEllipse;
-            ellInner.Width = newSizeInnerEllipse;
-            ellOuter.Height = newSizeOuterEllipse;
-            ellOuter.Width = newSizeOuterEllipse;
+            ellInner.Height = newSizeInner;
+            ellInner.Width = newSizeInner;
+            ellOuter.Height = newSizeOuter;
+            ellOuter.Width = newSizeOuter;
+
+            rectDrawingPoint.Height = standardDrawingPoint + newCurrentThicness;
+            rectDrawingPoint.Width = standardDrawingPoint + newCurrentThicness;
+            rectInner.Height = newSizeInner;
+            rectInner.Width = newSizeInner;
+            rectOuter.Height = newSizeOuter;
+            rectOuter.Width = newSizeOuter;
+
+            triangelDrawingPoint.Height = standardDrawingPoint + newCurrentThicness;
+            triangelDrawingPoint.Width = standardDrawingPoint + newCurrentThicness;
+            triangelInner.Height = newSizeInner;
+            triangelInner.Width = newSizeInner;
+            triangelOuter.Height = newSizeOuter;
+            triangelOuter.Width = newSizeOuter;
 
             rectBottom0.Margin = new Thickness(rectBottom0.Margin.Left, rectBottom0.Margin.Top, rectBottom0.Margin.Right, 0 - ((double)newCurrentThicness) / 2);
             rectBottom1.Margin = new Thickness(rectBottom1.Margin.Left, rectBottom1.Margin.Top, rectBottom1.Margin.Right, 7 - ((double)newCurrentThicness) / 2);
@@ -104,6 +144,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if(isDrawing)
             {
                 ellDrawingPoint.Fill = new SolidColorBrush(color);
+                rectDrawingPoint.Fill = new SolidColorBrush(color);
+                triangelDrawingPoint.Fill = new SolidColorBrush(color);
             }
         }
 
@@ -116,6 +158,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             set
             {
                 ellDrawingPoint.Visibility = value;
+                rectDrawingPoint.Visibility = value;
+                triangelDrawingPoint.Visibility = value;
             }
         }
     }

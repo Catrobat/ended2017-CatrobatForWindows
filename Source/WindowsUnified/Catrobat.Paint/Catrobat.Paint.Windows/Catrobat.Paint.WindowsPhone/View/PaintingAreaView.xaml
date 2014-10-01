@@ -37,7 +37,7 @@
             </Grid>
             
             <Grid x:Name="GridCursor" Height="80" Visibility="Collapsed" Width="80">
-                <userControls:CursorControl x:Name="ClCursor" Height="80" HorizontalAlignment="Center" PointerPressed="CursorControl_PointerPressed" PointerMoved="CursorControl_PointerMoved" Margin="0,0,0,0" VerticalAlignment="Center" Width="80"></userControls:CursorControl>
+                <userControls:CursorControl x:Name="ClCursor" Height="80" HorizontalAlignment="Center" IsHitTestVisible="False" PointerPressed="CursorControl_PointerPressed" PointerMoved="CursorControl_PointerMoved" Margin="0,0,0,0" VerticalAlignment="Center" Width="80"></userControls:CursorControl>
             </Grid>
             
 
