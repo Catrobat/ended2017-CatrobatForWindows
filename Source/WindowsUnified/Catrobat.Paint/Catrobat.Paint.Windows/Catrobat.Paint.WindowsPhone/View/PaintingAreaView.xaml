@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Catrobat.Paint.WindowsPhone.Controls.AppBar"
-    xmlns:ucRecEll="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
+    xmlns:userControls="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
+    
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" NavigationCacheMode="Required" >
 
@@ -14,25 +15,31 @@
        
         
         <Grid x:Name="PaintingAreaContentPanelGrid" IsHitTestVisible="True" Width="auto" Height="auto" Grid.Row="1" Margin="0,0,0,0" Background="Transparent" >
-            <Grid x:Name="PaintingAreaCheckeredGrid" IsHitTestVisible="True" Width="auto" Height="auto"  >
+            <Grid x:Name="PaintingAreaCheckeredGrid" Height="auto" IsHitTestVisible="True" Width="auto">
                 <Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
                 </Grid.Background>
 
-                <Canvas x:Name="PaintingAreaCanvasUnderlaying"  Background="Transparent"/>
-                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" ManipulationMode="TranslateX, TranslateY, Scale" />
+                <!--<Canvas x:Name="PaintingAreaCanvasUnderlaying"  Background="Transparent"/>-->
+                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" ManipulationMode="TranslateX, TranslateY, Scale" >
+                </Canvas>
                 <Grid Background="#44d3d3d3" Visibility="Collapsed" />
                 <Rectangle x:Name="rectDrawRectangle" DoubleTapped="rectDrawRectangle_DoubleTapped" Fill="Blue" Height="50" HorizontalAlignment="Left" 
                            Margin="171,263,0,0" PointerMoved="testRectangle_PointerMoved"  Stroke="Black"  VerticalAlignment="Top" Width="50" Visibility="Collapsed" PointerPressed="testRectangle_PointerPressed" />
             </Grid>
 
             <Grid x:Name="GridUserControlRectEll" Height="200" HorizontalAlignment="Center" Margin="0,0,0,8" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
-                <ucRecEll:ucRecEll></ucRecEll:ucRecEll>
+                <userControls:ucRecEll></userControls:ucRecEll>
             </Grid>
             
-            <Grid x:Name="GrdThicknessControl" Height="380" Margin="0,0,0,0" VerticalAlignment="Bottom" Visibility="Visible" Width="384">
+            <Grid x:Name="GrdThicknessControl" Height="380" Margin="0,0,0,0" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <controls:ThicknessControl x:Name="CtrlThicknessControl"></controls:ThicknessControl>
             </Grid>
+            
+            <Grid x:Name="GridCursor" Height="80" Visibility="Collapsed" Width="80">
+                <userControls:CursorControl x:Name="ClCursor" Height="80" HorizontalAlignment="Center" PointerPressed="CursorControl_PointerPressed" PointerMoved="CursorControl_PointerMoved" Margin="0,0,0,0" VerticalAlignment="Center" Width="80"></userControls:CursorControl>
+            </Grid>
+            
 
         </Grid>
         

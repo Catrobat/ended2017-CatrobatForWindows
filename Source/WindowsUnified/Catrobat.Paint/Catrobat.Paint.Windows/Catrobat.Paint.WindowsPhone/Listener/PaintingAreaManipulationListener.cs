@@ -61,8 +61,8 @@ namespace Catrobat.Paint.Phone.Listener
             {
                 movezoom = new TranslateTransform();
 
-                ((TranslateTransform)movezoom).X += e.Delta.Translation.X;
-                ((TranslateTransform)movezoom).Y += e.Delta.Translation.Y;
+                ((TranslateTransform)movezoom).X += e.Delta.Translation.X*100;
+                ((TranslateTransform)movezoom).Y += e.Delta.Translation.Y*100;
             }
 
             switch (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType())
@@ -71,6 +71,7 @@ namespace Catrobat.Paint.Phone.Listener
                 case ToolType.Eraser:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
                     break;
+                case ToolType.Cursor:
                 case ToolType.Move:
                 case ToolType.Zoom:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(movezoom);

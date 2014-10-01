@@ -2492,7 +2492,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Pocket Code Source Code License ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Pocket Code Source Licenses ähnelt.
         /// </summary>
         public static string Main_AboutLicense {
             get {

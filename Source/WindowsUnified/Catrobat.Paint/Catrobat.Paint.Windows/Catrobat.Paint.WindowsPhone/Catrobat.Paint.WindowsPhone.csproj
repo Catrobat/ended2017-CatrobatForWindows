@@ -114,6 +114,9 @@
     <Compile Include="Controls\AppBar\AppbarTop.xaml.cs">
       <DependentUpon>AppbarTop.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserControls\CursorControl.xaml.cs">
+      <DependentUpon>CursorControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserControls\ucRecEll.xaml.cs">
       <DependentUpon>ucRecEll.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,7 @@
     <Compile Include="Navigation\NavigationObjectPage.cs" />
     <Compile Include="PocketPaintApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tool\CursorTool.cs" />
     <Compile Include="Tool\BrushTool.cs" />
     <Compile Include="Tool\EllipseTool.cs" />
     <Compile Include="Tool\EraserTool.cs" />
@@ -276,6 +280,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\AppBar\AppbarTop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserControls\CursorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

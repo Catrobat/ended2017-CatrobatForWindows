@@ -32,7 +32,11 @@ namespace Catrobat.Paint.Phone
         public bool isBrushTool = true;
 
         public bool isToolPickerUsed = true;
+
+        public Grid GridCursor { get; set; }
         public bool UnsavedChangesMade { get; set; }
+
+        public CursorControl cursorControl { get; set; }
 
         public Canvas PaintingAreaCanvas { get; set; }
         // separate layer, for temp manipulation operations
@@ -43,6 +47,8 @@ namespace Catrobat.Paint.Phone
         public Grid PaintingAreaLayoutRoot { get; set; }
 
         public PaintingAreaView PaintingAreaView { get; set; }
+
+        public Page pgPainting { get; set; }
 
         public AppbarTop AppbarTop { get; set; }
 
@@ -177,6 +183,9 @@ namespace Catrobat.Paint.Phone
             {
                 case ToolType.Brush:
                     ToolCurrent = new BrushTool(toolType);
+                    break;
+                case ToolType.Cursor:
+                    ToolCurrent = new CursorTool(toolType);
                     break;
                 case ToolType.Ellipse:
                     ToolCurrent = new EllipseTool();

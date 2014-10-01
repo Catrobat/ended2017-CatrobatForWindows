@@ -1168,7 +1168,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>About Catrobat</value>
   </data>
   <data name="Main_AboutLicense" xml:space="preserve">
-    <value>Pocket Code Source Code License</value>
+    <value>Pocket Code Source Licenses</value>
   </data>
   <data name="Main_TextBoxLimit" xml:space="preserve">
     <value>50</value>
