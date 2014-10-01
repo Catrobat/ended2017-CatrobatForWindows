@@ -112,6 +112,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             GridMain.Width += newCurrentThicness;
         }
 
+        public bool isDrawingActivated()
+        {
+            return isDrawing;
+        }
+
         public void setCursorLook()
         {
             isDrawing = !isDrawing;
