@@ -46,6 +46,8 @@ public:
 
 public:
     std::string GetName();
+    std::map<std::string, UserVariable*>* GetVariableList() { return m_variableList; };
+    std::list<SoundInfo*>* GetSoundInfos() { return m_soundInfos; };
 
     int GetScriptListSize();
     Script *GetScript(int index);

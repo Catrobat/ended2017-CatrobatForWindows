@@ -111,6 +111,9 @@ task<bool> ProjectDaemon::OpenProject(Platform::String^ projectName)
 			// Set Project to be accessed from everywhere
 			SetProject(xml->GetProject());
 
+            // Set Project's initial values for all Objects and UserVariables
+            SetProjectInitialValues();
+
 			// Initialize Renderer and enable rendering to be started
 			//m_renderer->Initialize(m_device);
 			free(xml);
@@ -122,6 +125,40 @@ task<bool> ProjectDaemon::OpenProject(Platform::String^ projectName)
 		}
 	});
     return openProjectTask;
+}
+
+// Store necessary values for every object in a separate (initial) object
+
+void ProjectDaemon::SetProjectInitialValues()
+{
+    //ObjectList* objectList = m_project->GetObjectList();
+    //std::map<std::string, Object*>* objectListInitial = m_project->GetObjectListInitial();
+
+    //for each (Object* object in *(objectList->GetObjects()))
+    //{
+    //    Object* objectInitial = new Object(object->GetName());
+    //    objectInitial->SetTransparency(object->GetTransparency());
+    //    objectInitial->SetRotation(object->GetRotation());
+    //    float x;
+    //    float y;
+    //    object->GetTranslation(x, y);
+    //    objectInitial->SetTranslation(x, y);
+    //    object->GetScale(x, y);
+    //    objectInitial->SetScale(x, y);
+
+    //    for each (std::pair<std::string, UserVariable*> e in *(object->GetVariableList()))
+    //    {
+    //        UserVariable* userVariableInital = new UserVariable(e.second->GetName(), e.second->GetValue());
+    //        objectInitial->AddVariable(e.first, userVariableInital);
+    //    }
+
+    //    objectListInitial->insert(std::pair<std::string, Object*>(object->GetName(), objectListInitial));
+    //}
+}
+
+void ProjectDaemon::RestartProject() 
+{
+            
 }
 
 vector<Platform::String^> *ProjectDaemon::GetProjectList()
