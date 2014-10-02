@@ -31,13 +31,13 @@
             <Grid x:Name="GridUserControlRectEll" Height="200" HorizontalAlignment="Center" Margin="0,0,0,8" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <userControls:ucRecEll></userControls:ucRecEll>
             </Grid>
-            
-            <Grid x:Name="GrdThicknessControl" Height="380" Margin="0,0,0,0" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
-                <controls:ThicknessControl x:Name="CtrlThicknessControl"></controls:ThicknessControl>
-            </Grid>
-            
+
             <Grid x:Name="GridCursor" Height="80" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Collapsed" Width="80">
                 <userControls:CursorControl x:Name="ClCursor" Height="80" HorizontalAlignment="Center" IsHitTestVisible="False" PointerPressed="CursorControl_PointerPressed" PointerMoved="CursorControl_PointerMoved" Margin="0,0,0,0" VerticalAlignment="Center" Width="80"></userControls:CursorControl>
+            </Grid>
+
+            <Grid x:Name="GrdThicknessControl" Height="380" Margin="0,0,0,0" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
+                <controls:ThicknessControl x:Name="CtrlThicknessControl"></controls:ThicknessControl>
             </Grid>
         </Grid>
         
