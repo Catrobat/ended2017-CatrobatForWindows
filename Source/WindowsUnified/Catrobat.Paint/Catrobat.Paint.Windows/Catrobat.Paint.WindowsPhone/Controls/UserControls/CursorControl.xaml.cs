@@ -154,6 +154,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
+        public void setStrokeOfInnerShape(Color color)
+        {
+            ellInner.Stroke = new SolidColorBrush(color);
+            rectInner.Stroke = new SolidColorBrush(color);
+            triangelInner.Stroke = new SolidColorBrush(color);
+        }
+
         public Visibility setVisibilityOfDrawingPoint
         {
             get

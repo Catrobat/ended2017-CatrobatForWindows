@@ -200,13 +200,25 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnColor.Label = "Farbe";
 
                 app_btnBrushThickness.Click += btnThickness_Click;
-                app_btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click; 
+                app_btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
 
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
                 cmdBar.PrimaryCommands.Add(app_btnColor);
 
                 if("barCursor" == type)
                 {
+                    AppBarButton app_btnResetCursor = new AppBarButton();
+                    app_btnResetCursor.Name = "appButtonResetCursor";
+                    app_btnResetCursor.Label = "Cursor-Startposition";
+
+                    BitmapIcon reset_icon = new BitmapIcon();
+                    reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
+                    app_btnResetCursor.Icon = reset_icon;
+
+                    app_btnResetCursor.IsEnabled = false;
+                    app_btnResetCursor.Click += ((CursorTool)PocketPaintApplication.GetInstance().ToolCurrent).app_btnResetCursor_Click;
+
+                    cmdBar.PrimaryCommands.Add(app_btnResetCursor);
                     loadDoubleTapEvent();
                     loadManipulationEvents();
                     unloadPointerEvents();
@@ -439,7 +451,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        private AppBarButton getAppBarResetButton(string toolName)
+        public AppBarButton getAppBarResetButton(string toolName)
         {
             AppBarButton appBarButtonReset = null;
             CommandBar commandBar = (CommandBar)BottomAppBar;

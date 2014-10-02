@@ -30,42 +30,42 @@
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_cursor.png" Stretch="Uniform" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnPipette" BorderBrush="White" Click="Button_OnClick" Content="Pipette" FontSize="20" Grid.Column="1" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="True" Margin="0,99,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnPipette_Holding">
+                    <Button x:Name="BtnPipette" BorderBrush="White" Click="Button_OnClick" Content="Pipette" FontSize="20" Grid.Column="1" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="False" Margin="0,99,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnPipette_Holding">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_pipette.png" Stretch="Uniform" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnFill" BorderBrush="White" Click="Button_OnClick" Content="Füllen" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Left" IsEnabled="True" Margin="0,99,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnFill_Holding">
+                    <Button x:Name="BtnFill" BorderBrush="White" Click="Button_OnClick" Content="Füllen" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Left" IsEnabled="False" Margin="0,99,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnFill_Holding">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_bucket.png"  Stretch="Uniform" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnStamp"  BorderBrush="White" Click="Button_OnClick" Content="Stempel" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="True" Margin="0,174,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnStamp_Holding">
+                    <Button x:Name="BtnStamp"  BorderBrush="White" Click="Button_OnClick" Content="Stempel" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="False" Margin="0,174,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnStamp_Holding">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_stamp.png" Stretch="Uniform" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnRectangle"  BorderBrush="White" Click="Button_OnClick" Content="Rechteck" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Left" IsEnabled="True" Margin="0,174,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnRectangle_Holding">
+                    <Button x:Name="BtnRectangle"  BorderBrush="White" Click="Button_OnClick" Content="Rechteck" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Left" IsEnabled="False" Margin="0,174,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnRectangle_Holding">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_rectangle.png" Stretch="Uniform" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnEllipse"  BorderBrush="White" Click="Button_OnClick" Content="Ellipse" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="True" Margin="0,249,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnEllipse_Holding">
+                    <Button x:Name="BtnEllipse"  BorderBrush="White" Click="Button_OnClick" Content="Ellipse" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="False" Margin="0,249,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnEllipse_Holding">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_ellipse.png" Stretch="Uniform" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnImportPicture"  BorderBrush="White" Click="Button_OnClick" Content="Bild einfügen" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Left" IsEnabled="True" Margin="0,249,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnImportPicture_Holding">
+                    <Button x:Name="BtnImportPicture"  BorderBrush="White" Click="Button_OnClick" Content="Bild einfügen" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Left" IsEnabled="False" Margin="0,249,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnImportPicture_Holding">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_import_image.png" Stretch="Uniform" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnZuschneiden"  BorderBrush="White" Click="Button_OnClick" Content="Zuschneiden" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="True" Margin="0,324,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnZuschneiden_Holding">
+                    <Button x:Name="BtnZuschneiden"  BorderBrush="White" Click="Button_OnClick" Content="Zuschneiden" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="False" Margin="0,324,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnZuschneiden_Holding">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_crop.png" Stretch="Uniform" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnEraser"  BorderBrush="White" Click="Button_OnClick" Content="Radiergummi" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Left" IsEnabled="True" Margin="0,324,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnEraser_Holding">
+                    <Button x:Name="BtnEraser"  BorderBrush="White" Click="Button_OnClick" Content="Radiergummi" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Left" IsEnabled="False" Margin="0,324,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnEraser_Holding">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_eraser.png" Stretch="Uniform" />
                         </Button.Background>
