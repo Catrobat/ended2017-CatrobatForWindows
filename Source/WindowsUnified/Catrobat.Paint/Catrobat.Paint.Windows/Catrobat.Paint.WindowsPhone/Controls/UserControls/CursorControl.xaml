@@ -40,9 +40,32 @@
             <Rectangle x:Name="rectLeft2" Fill="{StaticResource rectColorOdd}" HorizontalAlignment="Left" Height="5" Margin="15,0,0,0" Stroke="{StaticResource rectColorOdd}" StrokeThickness="4" VerticalAlignment="Center" Width="8"/>
             <Rectangle x:Name="rectLeft3" Fill="{StaticResource rectColorEven}" HorizontalAlignment="Left" Height="5" Margin="23,0,0,0" Stroke="{StaticResource rectColorEven}" StrokeThickness="4" VerticalAlignment="Center" Width="8"/>
         </Grid>
-        <Grid>
-            <Ellipse Fill="Transparent" HorizontalAlignment="Center" Height="13" Margin="0,0,0,0" Stroke="DarkGray" StrokeThickness="3" VerticalAlignment="Center" Width="13"/>
-            <Ellipse Fill="Transparent" HorizontalAlignment="Center" Height="20" Margin="0,0,0,0" Stroke="{StaticResource rectColorOdd}" StrokeThickness="4" VerticalAlignment="Center" Width="20"/>
+        <Grid x:Name="GridEllipse" Visibility="Visible">
+            <Ellipse x:Name="ellInner" Fill="Transparent" HorizontalAlignment="Center" Height="13" Margin="0,0,0,0" Stroke="DarkGray" StrokeThickness="3" VerticalAlignment="Center" Width="13"/>
+            <Ellipse x:Name="ellOuter" Fill="Transparent" HorizontalAlignment="Center" Height="20" Margin="0,0,0,0" Stroke="{StaticResource rectColorOdd}" StrokeThickness="4" VerticalAlignment="Center" Width="20"/>
+            <Ellipse x:Name="ellDrawingPoint" Fill="Black" HorizontalAlignment="Center" Height="8" Margin="0,0,0,0"  StrokeThickness="0" VerticalAlignment="Center" Visibility="Collapsed" Width="8"/>
+        </Grid>
+        <Grid x:Name="GridRectangle" Visibility="Collapsed">
+            <Rectangle x:Name="rectInner" Fill="Transparent" HorizontalAlignment="Center" Height="13" Margin="0,0,0,0" Stroke="DarkGray" StrokeThickness="3" VerticalAlignment="Center" Width="13"/>
+            <Rectangle x:Name="rectOuter" Fill="Transparent" HorizontalAlignment="Center" Height="20" Margin="0,0,0,0" Stroke="{StaticResource rectColorOdd}" StrokeThickness="4" VerticalAlignment="Center" Width="20"/>
+            <Rectangle x:Name="rectDrawingPoint" Fill="Black" HorizontalAlignment="Center" Height="8" Margin="0,0,0,0"  StrokeThickness="0" VerticalAlignment="Center" Visibility="Collapsed" Width="8"/>
+        </Grid>
+        <Grid x:Name="GridTriangle" Visibility="Collapsed">
+            <Rectangle x:Name="triangelInner" Fill="Transparent" HorizontalAlignment="Center" Height="13" Margin="0,0,0,0" Stroke="DarkGray" StrokeThickness="3" VerticalAlignment="Center" Width="13" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <CompositeTransform Rotation="-45.0"/>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="triangelOuter" Fill="Transparent" HorizontalAlignment="Center" Height="20" Margin="0,0,0,0" Stroke="{StaticResource rectColorOdd}" StrokeThickness="4" VerticalAlignment="Center" Width="20" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <CompositeTransform Rotation="-45.0"/>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="triangelDrawingPoint" Fill="Black" HorizontalAlignment="Center" Height="8" Margin="0,0,0,0"  StrokeThickness="0" VerticalAlignment="Center" Visibility="Collapsed" Width="8" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <CompositeTransform Rotation="-45.0"/>
+                </Rectangle.RenderTransform>
+            </Rectangle>
         </Grid>
     </Grid>
 </UserControl>

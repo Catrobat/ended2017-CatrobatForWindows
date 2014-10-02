@@ -124,17 +124,27 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             }
         }
 
-        public void TriangleButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var penLineCap = PenLineCap.Triangle;
-            PocketPaintApplication.GetInstance().PaintData.CapSelected = penLineCap;
-            checkPenLineCap(penLineCap);
-        }
-
         public void RoundButton_OnClick(object sender, RoutedEventArgs e)
         {
             var penLineCap = PenLineCap.Round;
             PocketPaintApplication.GetInstance().PaintData.CapSelected = penLineCap;
+            PocketPaintApplication.GetInstance().cursorControl.changeCursorType(penLineCap);
+            checkPenLineCap(penLineCap);
+        }
+
+        public void SquareButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var penLineCap = PenLineCap.Square;
+            PocketPaintApplication.GetInstance().PaintData.CapSelected = penLineCap;
+            PocketPaintApplication.GetInstance().cursorControl.changeCursorType(penLineCap);
+            checkPenLineCap(penLineCap);
+        }
+
+        public void TriangleButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var penLineCap = PenLineCap.Triangle;
+            PocketPaintApplication.GetInstance().PaintData.CapSelected = penLineCap;
+            PocketPaintApplication.GetInstance().cursorControl.changeCursorType(penLineCap);
             checkPenLineCap(penLineCap);
         }
 
@@ -145,14 +155,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                 BtnBrushThickness.Content = Convert.ToInt32(SliderThickness.Value).ToString();
                 slider_thickness_textbox_last_value = Convert.ToInt32(SliderThickness.Value);
                 PocketPaintApplication.GetInstance().PaintData.ThicknessSelected = Convert.ToInt32(SliderThickness.Value);
+                if (PocketPaintApplication.GetInstance().cursorControl != null)
+                {
+                    PocketPaintApplication.GetInstance().cursorControl.changeCursorsize();
+                }
             }
-        }
-
-        public void SquareButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var penLineCap = PenLineCap.Square;
-            PocketPaintApplication.GetInstance().PaintData.CapSelected = penLineCap;
-            checkPenLineCap(penLineCap);
         }
 
         private void ButtonNumbers_Click(object sender, RoutedEventArgs e)

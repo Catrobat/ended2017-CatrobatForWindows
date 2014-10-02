@@ -34,7 +34,7 @@ namespace Catrobat.Paint.Phone.Data
         private static SolidColorBrush _colorFillSelected = new SolidColorBrush(Colors.Yellow);
         private static SolidColorBrush _colorSelected = new SolidColorBrush(Colors.Black);
 
-        private int _thicknessSelected = 20;
+        private int _thicknessSelected = 8;
         private int _borderThicknessRecEll = 3;
         private PenLineCap _capSelected = PenLineCap.Round;
         private ToolBase _toolCurrentSelected = new BrushTool();

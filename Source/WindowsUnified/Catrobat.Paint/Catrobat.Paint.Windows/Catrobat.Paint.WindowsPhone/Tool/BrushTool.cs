@@ -19,15 +19,11 @@ namespace Catrobat.Paint.Phone.Tool
         private Point _lastPoint;
         private bool _lastPointSet;
 
-
-
         public BrushTool(ToolType toolType = ToolType.Brush)
         {
             ToolType = toolType;
         }
 
-
- 
         public override void HandleDown(object arg)
         {
             if (!(arg is Point))
@@ -103,7 +99,6 @@ namespace Catrobat.Paint.Phone.Tool
                 PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
                 _lastPointSet = false;
             }
-            
         }
 
         public override void HandleUp(object arg)
