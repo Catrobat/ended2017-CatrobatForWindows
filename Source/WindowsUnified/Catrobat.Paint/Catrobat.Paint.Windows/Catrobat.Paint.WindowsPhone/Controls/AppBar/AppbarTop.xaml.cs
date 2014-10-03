@@ -116,8 +116,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             BtnRedo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnRedo_Click;
             BtnSelectedColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
             //btnMoveScreen.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreen_OnClick;
-            ellipseTool_front.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
-            ellipseTool_behind.PointerEntered += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
+            BtnToolSelection.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
             BtnUndo.IsEnabled = false;
             BtnRedo.IsEnabled = false;
         }
