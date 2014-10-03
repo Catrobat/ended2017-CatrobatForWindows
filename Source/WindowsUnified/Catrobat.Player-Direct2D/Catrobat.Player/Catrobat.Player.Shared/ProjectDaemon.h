@@ -18,6 +18,7 @@ public:
 	std::vector<Platform::String ^> *GetFileList();
 
 	Concurrency::task<bool> OpenProject(Platform::String^ projectName);
+    void RestartProject();
 	void ApplyDesiredRenderTargetSizeFromProject();
 
     void AddDebug(Platform::String^ info);
@@ -28,6 +29,7 @@ private:
 	ProjectDaemon(ProjectDaemon const&);            
     ProjectDaemon& operator=(ProjectDaemon const&); 
 	~ProjectDaemon();
+    void SetProjectInitialValues();
 
 	static ProjectDaemon *m_instance;
 

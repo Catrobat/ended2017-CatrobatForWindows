@@ -6,6 +6,8 @@ using Windows.UI.Xaml.Media;
 using Windows.Foundation;
 using Catrobat.Paint.WindowsPhone.Tool;
 using Catrobat.Paint.Phone.Command;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 namespace Catrobat.Paint.Phone.Tool
 {
@@ -129,6 +131,18 @@ namespace Catrobat.Paint.Phone.Tool
                 //PocketPaintApplication.GetInstance().PaintingAreaView.setCoordTextbox(PocketPaintApplication.GetInstance().GridCursor.ActualHeight, PocketPaintApplication.GetInstance().GridCursor.ActualWidth);
                 // PocketPaintApplication.GetInstance().PaintingAreaView.setCoordTextbox(_transforms.Value.OffsetX, _transforms.Value.OffsetY);
             }
+
+            if(PocketPaintApplication.GetInstance() != null)
+            {
+                AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
+                if (appBarButtonReset != null)
+                {
+                    if (!appBarButtonReset.IsEnabled)
+                    {
+                        appBarButtonReset.IsEnabled = true;
+                    }
+                }
+            }
         }
 
         public override void HandleUp(object arg)
@@ -161,6 +175,12 @@ namespace Catrobat.Paint.Phone.Tool
                 }
             }
             //CommandManager.GetInstance().CommitCommand(new BrushCommand(_path));
+        }
+
+        public void app_btnResetCursor_Click(object sender, RoutedEventArgs e)
+        {
+            ((AppBarButton)sender).IsEnabled = false;
+            PocketPaintApplication.GetInstance().GridCursor.RenderTransform = _transforms = new TransformGroup();
         }
 
         public override void Draw(object o)

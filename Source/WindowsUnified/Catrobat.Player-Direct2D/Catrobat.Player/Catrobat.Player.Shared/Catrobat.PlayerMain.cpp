@@ -142,15 +142,17 @@ void Catrobat_PlayerMain::RestartButtonClicked(_In_ Platform::Object^ sender, Wi
     critical_section::scoped_lock lock(m_criticalSection);
 
     StopRenderLoop();
-    m_playerState = PlayerState::Init;
+    //m_playerState = PlayerState::Init;
 
-    m_loadingComplete = false;
-    ProjectDaemon::Instance()->ReInit();
-    LoadProject(true);
+    //m_loadingComplete = false;
+    //ProjectDaemon::Instance()->ReInit();
+    //LoadProject(true);
+    ProjectDaemon::Instance()->RestartProject();
     
-    StartRenderLoop();
+    
+    StartRenderLoop();  
 }
-
+                                                  
 //----------------------------------------------------------------------
 
 void Catrobat_PlayerMain::PlayButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)

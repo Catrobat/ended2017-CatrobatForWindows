@@ -23,13 +23,67 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
     public sealed partial class CursorControl : UserControl
     {
         private static bool isDrawing;
+        private double standardDrawingPoint = 8.0;
+        private double standardSizeInner = 13.0;
+        private double standardSizeOuter = 20.0;
+
         public CursorControl()
         {
             this.InitializeComponent();
             isDrawing = false;
+            setCursorControlLayout();
             if(PocketPaintApplication.GetInstance().cursorControl == null)
             {
                 PocketPaintApplication.GetInstance().cursorControl = this;
+            }
+        }
+
+        private void setCursorControlLayout()
+        {
+            double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+            double height_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+
+            standardDrawingPoint *= width_multiplicator;
+            standardSizeInner *= width_multiplicator;
+            standardSizeOuter *= width_multiplicator;
+
+            GridMain.Width *= width_multiplicator;
+            GridMain.Height *= height_multiplicator;
+
+            foreach (Object obj in GridRight.Children.Concat(
+                                        GridLeft.Children.Concat(
+                                            GridBottom.Children.Concat(
+                                                GridTop.Children.Concat(
+                                                    GridEllipse.Children.Concat(
+                                                        GridRectangle.Children.Concat(
+                                                            GridTriangle.Children)))))))
+            {
+                if (obj.GetType() == typeof(Ellipse))
+                {
+                    Ellipse currentEllipse = (Ellipse)obj;
+                    currentEllipse.Height *= height_multiplicator;
+                    currentEllipse.Width *= width_multiplicator;
+                    currentEllipse.StrokeThickness *= height_multiplicator;
+
+                    currentEllipse.Margin = new Thickness(
+                                            currentEllipse.Margin.Left * width_multiplicator,
+                                            currentEllipse.Margin.Top * height_multiplicator,
+                                            currentEllipse.Margin.Right * width_multiplicator,
+                                            currentEllipse.Margin.Bottom * height_multiplicator);
+                }
+                else if (obj.GetType() == typeof(Rectangle))
+                {
+                    Rectangle currentRectangle = (Rectangle)obj;
+                    currentRectangle.Height *= height_multiplicator;
+                    currentRectangle.Width *= width_multiplicator;
+                    currentRectangle.StrokeThickness *= height_multiplicator;
+
+                    currentRectangle.Margin = new Thickness(
+                                            currentRectangle.Margin.Left * width_multiplicator,
+                                            currentRectangle.Margin.Top * height_multiplicator,
+                                            currentRectangle.Margin.Right * width_multiplicator,
+                                            currentRectangle.Margin.Bottom * height_multiplicator);
+                }
             }
         }
 
@@ -60,56 +114,59 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void changeCursorsize()
         {
-            int standardDrawingPoint = 8;
-            int standardSizeInner = 13;
-            int standardSizeOuter = 20;
-            int currentThickness = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
-            int newCurrentThicness = currentThickness - 8;
-            int newSizeInner = standardSizeInner + newCurrentThicness;
-            int newSizeOuter = standardSizeOuter + newCurrentThicness;
+            double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+            double currentThickness = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected * width_multiplicator;
+            double newCurrentThickness = currentThickness - standardDrawingPoint;
+            double newSizeInner = standardSizeInner + newCurrentThickness;
+            double newSizeOuter = standardSizeOuter + newCurrentThickness;
 
-            ellDrawingPoint.Height = standardDrawingPoint + newCurrentThicness;
-            ellDrawingPoint.Width = standardDrawingPoint + newCurrentThicness;
+            GridMain.Height += newCurrentThickness;
+            GridMain.Width += newCurrentThickness;
+
+            ellDrawingPoint.Height = currentThickness;
+            ellDrawingPoint.Width = currentThickness;
             ellInner.Height = newSizeInner;
             ellInner.Width = newSizeInner;
             ellOuter.Height = newSizeOuter;
             ellOuter.Width = newSizeOuter;
 
-            rectDrawingPoint.Height = standardDrawingPoint + newCurrentThicness;
-            rectDrawingPoint.Width = standardDrawingPoint + newCurrentThicness;
+            rectDrawingPoint.Height = currentThickness;
+            rectDrawingPoint.Width = currentThickness;
             rectInner.Height = newSizeInner;
             rectInner.Width = newSizeInner;
             rectOuter.Height = newSizeOuter;
             rectOuter.Width = newSizeOuter;
 
-            triangelDrawingPoint.Height = standardDrawingPoint + newCurrentThicness;
-            triangelDrawingPoint.Width = standardDrawingPoint + newCurrentThicness;
-            triangelInner.Height = newSizeInner;
-            triangelInner.Width = newSizeInner;
-            triangelOuter.Height = newSizeOuter;
-            triangelOuter.Width = newSizeOuter;
+            double drawingPointTri = currentThickness / Math.Sqrt(2.0);
+            double sizeTriIn = newSizeInner / Math.Sqrt(2.0);
+            double sizeTriOut = newSizeOuter / Math.Sqrt(2.0);
 
-            rectBottom0.Margin = new Thickness(rectBottom0.Margin.Left, rectBottom0.Margin.Top, rectBottom0.Margin.Right, 0 - ((double)newCurrentThicness) / 2);
-            rectBottom1.Margin = new Thickness(rectBottom1.Margin.Left, rectBottom1.Margin.Top, rectBottom1.Margin.Right, 7 - ((double)newCurrentThicness) / 2);
-            rectBottom2.Margin = new Thickness(rectBottom2.Margin.Left, rectBottom2.Margin.Top, rectBottom2.Margin.Right, 15 - ((double)newCurrentThicness) / 2);
-            rectBottom3.Margin = new Thickness(rectBottom3.Margin.Left, rectBottom3.Margin.Top, rectBottom3.Margin.Right, 23 - ((double)newCurrentThicness) / 2);
+            triangelDrawingPoint.Height = drawingPointTri;
+            triangelDrawingPoint.Width = drawingPointTri;
+            triangelInner.Height = sizeTriIn;
+            triangelInner.Width = sizeTriIn;
+            triangelOuter.Height = sizeTriOut;
+            triangelOuter.Width = sizeTriOut;
 
-            rectLeft0.Margin = new Thickness(0 - ((double)newCurrentThicness) / 2, 0, 0, 0);
-            rectLeft1.Margin = new Thickness(7 - ((double)newCurrentThicness) / 2, 0, 0, 0);
-            rectLeft2.Margin = new Thickness(15 - ((double)newCurrentThicness) / 2, 0 ,0 ,0);
-            rectLeft3.Margin = new Thickness(23 - ((double)newCurrentThicness) / 2, 0, 0, 0);
+            rectBottom0.Margin = new Thickness(0.0, 0.0, 0.0, 0.0 - ((double)newCurrentThickness) / 2.0);
+            rectBottom1.Margin = new Thickness(0.0, 0.0, 0.0, 8.0 - ((double)newCurrentThickness) / 2.0);
+            rectBottom2.Margin = new Thickness(0.0, 0.0, 0.0, 16.0 - ((double)newCurrentThickness) / 2.0);
+            rectBottom3.Margin = new Thickness(0.0, 0.0, 0.0, 24.0 - ((double)newCurrentThickness) / 2.0);
 
-            rectRight0.Margin = new Thickness(0, 0, 0 - ((double)newCurrentThicness) / 2, 0);
-            rectRight1.Margin = new Thickness(0, 0, 7 - ((double)newCurrentThicness) / 2, 0);
-            rectRight2.Margin = new Thickness(0, 0, 15 - ((double)newCurrentThicness) / 2, 0);
-            rectRight3.Margin = new Thickness(0, 0, 23 - ((double)newCurrentThicness) / 2, 0);
+            rectLeft0.Margin = new Thickness(0.0 - ((double)newCurrentThickness) / 2.0, 0, 0, 0);
+            rectLeft1.Margin = new Thickness(8.0 - ((double)newCurrentThickness) / 2.0, 0, 0, 0);
+            rectLeft2.Margin = new Thickness(16.0 - ((double)newCurrentThickness) / 2.0, 0 ,0 ,0);
+            rectLeft3.Margin = new Thickness(24.0 - ((double)newCurrentThickness) / 2.0, 0, 0, 0);
 
-            rectTop0.Margin = new Thickness(rectTop0.Margin.Left, 0 - ((double)newCurrentThicness) / 2, rectTop0.Margin.Right, rectTop0.Margin.Bottom);
-            rectTop1.Margin = new Thickness(rectTop1.Margin.Left, 7 - ((double)newCurrentThicness) / 2, rectTop1.Margin.Right, rectTop0.Margin.Bottom);
-            rectTop2.Margin = new Thickness(rectTop2.Margin.Left, 15 - ((double)newCurrentThicness) / 2, rectTop2.Margin.Right, rectTop0.Margin.Bottom);
-            rectTop3.Margin = new Thickness(rectTop3.Margin.Left, 23 - ((double)newCurrentThicness) / 2, rectTop3.Margin.Right, rectTop0.Margin.Bottom);
-            GridMain.Height += newCurrentThicness;
-            GridMain.Width += newCurrentThicness;
+            rectRight0.Margin = new Thickness(0.0, 0.0, 0.0 - ((double)newCurrentThickness) / 2.0, 0.0);
+            rectRight1.Margin = new Thickness(0.0, 0.0, 8.0 - ((double)newCurrentThickness) / 2.0, 0.0);
+            rectRight2.Margin = new Thickness(0.0, 0.0, 16.0 - ((double)newCurrentThickness) / 2.0, 0.0);
+            rectRight3.Margin = new Thickness(0.0, 0.0, 24.0 - ((double)newCurrentThickness) / 2.0, 0.0);
+
+            rectTop0.Margin = new Thickness(0.0, 0.0 - ((double)newCurrentThickness) / 2.0, 0.0, 0.0);
+            rectTop1.Margin = new Thickness(0.0, 8.0 - ((double)newCurrentThickness) / 2.0, 0.0, 0.0);
+            rectTop2.Margin = new Thickness(0.0, 16.0 - ((double)newCurrentThickness) / 2.0, 0.0, 0.0);
+            rectTop3.Margin = new Thickness(0.0, 24.0 - ((double)newCurrentThickness) / 2.0, 0.0, 0.0);
         }
 
         public bool isDrawingActivated()
@@ -152,6 +209,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 rectDrawingPoint.Fill = new SolidColorBrush(color);
                 triangelDrawingPoint.Fill = new SolidColorBrush(color);
             }
+        }
+
+        public void setStrokeOfInnerShape(Color color)
+        {
+            ellInner.Stroke = new SolidColorBrush(color);
+            rectInner.Stroke = new SolidColorBrush(color);
+            triangelInner.Stroke = new SolidColorBrush(color);
         }
 
         public Visibility setVisibilityOfDrawingPoint

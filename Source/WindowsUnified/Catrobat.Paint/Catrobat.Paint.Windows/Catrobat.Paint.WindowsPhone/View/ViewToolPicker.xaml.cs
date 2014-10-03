@@ -97,11 +97,12 @@ namespace Catrobat.Paint.WindowsPhone.View
                 switch (((Button)sender).Name)
                 {
                     case "BtnBrush":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
                         PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
                         PocketPaintApplication.GetInstance().isBrushTool = true;
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
                         break;
                     case "BtnCursor":
+                        PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Cursor);
                         break;
                     case "BtnPipette":

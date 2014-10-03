@@ -38,12 +38,15 @@ public:
     void                                SetupWindowSizeDependentResources(const std::shared_ptr<DX::DeviceResources>& deviceResources);
     void								StartUp();
 
-	// Getters for Project Header
-	int									GetScreenHeight();
-	int									GetScreenWidth();
+	// Getters
+	int									    GetScreenHeight();
+	int									    GetScreenWidth();
+	ObjectList*							    GetObjectList();
+    std::map<std::string, Object*>*         GetObjectListInitial();
+	UserVariable*						    GetVariable(std::string name);
+    std::map<std::string, UserVariable*>*   GetVariableListInitial();
 
-	ObjectList*							GetObjectList();
-	UserVariable*						GetVariable(std::string name);
+    // Adders
 	void								AddVariable(std::string name, UserVariable *variable);
 	void								AddVariable(std::pair<std::string, UserVariable*> variable);
 
@@ -72,6 +75,8 @@ private:
 	std::string							m_userHandle;
 
 	ObjectList*							m_objectList;
-	std::map<std::string, UserVariable*>*	m_variableList;
+    std::map<std::string, Object*>*         m_objectListInitial;
+	std::map<std::string, UserVariable*>*   m_variableList;
+    std::map<std::string, UserVariable*>*   m_variableListInitial;
 };
 
