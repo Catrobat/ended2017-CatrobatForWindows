@@ -39,7 +39,9 @@
             <Grid x:Name="GrdThicknessControl" Height="380" Margin="0,0,0,0" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <controls:ThicknessControl x:Name="CtrlThicknessControl"></controls:ThicknessControl>
             </Grid>
+            <!--ONLY FOR TESTING
             <TextBox x:Name="tbTest" HorizontalAlignment="Left" Margin="160,162,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+            -->
         </Grid>
         
         <Grid x:Name="SpinnerGrid" Grid.Row="0" Visibility="Collapsed"  Grid.RowSpan="2"  Margin="12,12,12,12" Background="#FFB6B6B6" Opacity="0.7">

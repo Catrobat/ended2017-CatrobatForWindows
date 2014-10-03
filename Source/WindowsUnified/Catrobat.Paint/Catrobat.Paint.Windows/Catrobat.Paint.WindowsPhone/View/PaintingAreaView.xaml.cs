@@ -216,7 +216,15 @@ namespace Catrobat.Paint.WindowsPhone.View
                     reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
                     app_btnResetCursor.Icon = reset_icon;
 
-                    app_btnResetCursor.IsEnabled = false;
+                    TransformGroup transformGroup = (TransformGroup)GridCursor.RenderTransform;
+                    if (transformGroup.Value.OffsetX != 0.0 || transformGroup.Value.OffsetY != 0.0)
+                    {
+                        app_btnResetCursor.IsEnabled = true;
+                    }
+                    else
+                    {
+                        app_btnResetCursor.IsEnabled = false;
+                    }
                     app_btnResetCursor.Click += ((CursorTool)PocketPaintApplication.GetInstance().ToolCurrent).app_btnResetCursor_Click;
 
                     cmdBar.PrimaryCommands.Add(app_btnResetCursor);
