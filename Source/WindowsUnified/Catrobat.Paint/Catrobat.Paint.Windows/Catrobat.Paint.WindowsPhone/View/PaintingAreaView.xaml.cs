@@ -86,6 +86,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             //PaintingAreaCanvas.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
             //PaintingAreaCanvas.ManipulationStarting += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarting;
             PaintingAreaCanvas.RenderTransform = new TransformGroup();
+            
            /* if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Brush || 
                 PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Eraser)
             {
@@ -931,6 +932,13 @@ namespace Catrobat.Paint.WindowsPhone.View
         private void CursorControl_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
             
+        }
+
+        // ONLY FOR TESTING
+
+        public void changeTbTestboxText(double value1, double value2)
+        {
+            //tbTest.Text = value1.ToString() + ", " + value2.ToString();
         }
     }
 }

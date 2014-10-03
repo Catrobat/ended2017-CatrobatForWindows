@@ -31,6 +31,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height - 150.0) / 2.0;
             DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
+
+            DISPLAY_WIDTH_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0;
+            DISPLAY_HEIGHT_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0;
         }
         public override void HandleDown(object arg)
         {
@@ -68,12 +71,16 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                     resize.CenterX = DISPLAY_WIDTH_HALF;
                     resize.CenterY = DISPLAY_HEIGHT_HALF;
                     _transforms.Children.Add(resize);
+
+                    updateGridCursor(resize);
                 }
             }
             else if (arg is TranslateTransform)
             {
                 var move = (TranslateTransform)arg;
                 _transforms.Children.Add(move);
+
+                updateGridCursor(move);
 
                 AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
                 if(appBarButtonReset != null)
@@ -100,7 +107,41 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetDrawingSpace()
         {
+            updateGridCursor(null);
+
             _transforms.Children.Clear();
+        }
+
+        public void updateGridCursor(Transform currentTransform)
+        {
+            if (PocketPaintApplication.GetInstance().GridCursor.RenderTransform != null)
+            {
+                TransformGroup tranformsGridCursor = PocketPaintApplication.GetInstance().GridCursor.RenderTransform as TransformGroup;
+                if (tranformsGridCursor != null)
+                {
+                    if (currentTransform is ScaleTransform)
+                    {
+                        var currentScale = (ScaleTransform)currentTransform;
+                        currentScale.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0) + tranformsGridCursor.Value.OffsetX;
+                        currentScale.CenterY = (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0) + tranformsGridCursor.Value.OffsetY;
+
+                        //tranformsGridCursor.Children.Add(currentScale);
+                    }
+                    else if (currentTransform is TranslateTransform)
+                    {
+                        var currentTranslate = (TranslateTransform)currentTransform;
+
+                        // tranformsGridCursor.Children.Add(currentTranslate);
+                    }
+                    else if (currentTransform == null)
+                    {
+                        foreach (Transform currentTransformChild in _transforms.Children)
+                        {
+                            //tranformsGridCursor.Children.Remove(currentTransformChild);
+                        }
+                    }
+                }
+            }
         }
     }
 }

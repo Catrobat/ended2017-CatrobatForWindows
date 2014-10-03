@@ -21,24 +21,25 @@
                 </Grid.Background>
 
                 <!--<Canvas x:Name="PaintingAreaCanvasUnderlaying"  Background="Transparent"/>-->
-                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" ManipulationMode="TranslateX, TranslateY, Scale" >
+                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent"  ManipulationMode="TranslateX, TranslateY, Scale" >
                 </Canvas>
                 <Grid Background="#44d3d3d3" Visibility="Collapsed" />
                 <Rectangle x:Name="rectDrawRectangle" DoubleTapped="rectDrawRectangle_DoubleTapped" Fill="Blue" Height="50" HorizontalAlignment="Left" 
                            Margin="171,263,0,0" PointerMoved="testRectangle_PointerMoved"  Stroke="Black"  VerticalAlignment="Top" Width="50" Visibility="Collapsed" PointerPressed="testRectangle_PointerPressed" />
-            </Grid>
 
+                <Grid x:Name="GridCursor" Height="80" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Collapsed" Width="80">
+                    <userControls:CursorControl x:Name="ClCursor" Height="80" HorizontalAlignment="Center" IsHitTestVisible="False" PointerPressed="CursorControl_PointerPressed" PointerMoved="CursorControl_PointerMoved" Margin="0,0,0,0" VerticalAlignment="Center" Width="80"></userControls:CursorControl>
+                </Grid>
+            </Grid>
+            
             <Grid x:Name="GridUserControlRectEll" Height="200" HorizontalAlignment="Center" Margin="0,0,0,8" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <userControls:ucRecEll></userControls:ucRecEll>
-            </Grid>
-
-            <Grid x:Name="GridCursor" Height="80" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Collapsed" Width="80">
-                <userControls:CursorControl x:Name="ClCursor" Height="80" HorizontalAlignment="Center" IsHitTestVisible="False" PointerPressed="CursorControl_PointerPressed" PointerMoved="CursorControl_PointerMoved" Margin="0,0,0,0" VerticalAlignment="Center" Width="80"></userControls:CursorControl>
             </Grid>
 
             <Grid x:Name="GrdThicknessControl" Height="380" Margin="0,0,0,0" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <controls:ThicknessControl x:Name="CtrlThicknessControl"></controls:ThicknessControl>
             </Grid>
+            <TextBox x:Name="tbTest" HorizontalAlignment="Left" Margin="160,162,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
         </Grid>
         
         <Grid x:Name="SpinnerGrid" Grid.Row="0" Visibility="Collapsed"  Grid.RowSpan="2"  Margin="12,12,12,12" Background="#FFB6B6B6" Opacity="0.7">
@@ -49,7 +50,7 @@
                          CenterY="25" />
                 </Image.RenderTransform>
             </Image>
-        </Grid> 
+        </Grid>
 
         <StackPanel Grid.Row="0" Canvas.ZIndex="10" VerticalAlignment="Top">
             <controls:AppbarTop x:Name="barRecEll"></controls:AppbarTop>
