@@ -30,7 +30,7 @@ namespace Catrobat_Player
 		void StopRenderLoop();
 		
         // Event input from the user.
-        void PointerPressed(D2D1_POINT_2F point) { m_basic2dRenderer->PointerPressed(point); }
+        void PointerPressed(D2D1_POINT_2F point);
         void HardwareBackButtonPressed(
             _In_ Platform::Object^ sender, 
             Windows::Phone::UI::Input::BackPressedEventArgs ^args);
@@ -50,7 +50,7 @@ namespace Catrobat_Player
 		bool Render();
 
         // Project depending functionality.
-        void LoadProject(bool reload);
+        void LoadProject();
 
 		// Cached pointer to device resources.
 		std::shared_ptr<DX::DeviceResources> m_deviceResources;

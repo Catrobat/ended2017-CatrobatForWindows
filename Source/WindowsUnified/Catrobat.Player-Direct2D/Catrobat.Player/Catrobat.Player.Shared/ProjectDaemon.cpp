@@ -131,34 +131,77 @@ task<bool> ProjectDaemon::OpenProject(Platform::String^ projectName)
 
 void ProjectDaemon::SetProjectInitialValues()
 {
-    //ObjectList* objectList = m_project->GetObjectList();
-    //std::map<std::string, Object*>* objectListInitial = m_project->GetObjectListInitial();
+    // Object values
+    ObjectList* objectList = m_project->GetObjectList();
+    std::map<std::string, Object*>* objectListInitial = m_project->GetObjectListInitial();
 
-    //for each (Object* object in *(objectList->GetObjects()))
-    //{
-    //    Object* objectInitial = new Object(object->GetName());
-    //    objectInitial->SetTransparency(object->GetTransparency());
-    //    objectInitial->SetRotation(object->GetRotation());
-    //    float x;
-    //    float y;
-    //    object->GetTranslation(x, y);
-    //    objectInitial->SetTranslation(x, y);
-    //    object->GetScale(x, y);
-    //    objectInitial->SetScale(x, y);
+    for each (Object* object in *(objectList->GetObjects()))
+    {
+        Object* objectInitial = new Object(object->GetName());
+        objectInitial->SetTransparency(object->GetTransparency());
+        objectInitial->SetRotation(object->GetRotation());
+        float x;
+        float y;
+        object->GetTranslation(x, y);
+        objectInitial->SetTranslation(x, y);
+        object->GetScale(x, y);
+        objectInitial->SetScale(x, y);
 
-    //    for each (std::pair<std::string, UserVariable*> e in *(object->GetVariableList()))
-    //    {
-    //        UserVariable* userVariableInital = new UserVariable(e.second->GetName(), e.second->GetValue());
-    //        objectInitial->AddVariable(e.first, userVariableInital);
-    //    }
+        for each (std::pair<std::string, UserVariable*> e in *(object->GetVariableList()))
+        {
+            UserVariable* userVariableInital = new UserVariable(e.second->GetName(), e.second->GetValue());
+            objectInitial->AddVariable(e.first, userVariableInital);
+        }
 
-    //    objectListInitial->insert(std::pair<std::string, Object*>(object->GetName(), objectListInitial));
-    //}
+        objectListInitial->insert(std::pair<std::string, Object*>(object->GetName(), objectInitial));
+    }
+
+    // UserVariable values
+    std::map<std::string, UserVariable*>* variableList = m_project->GetVariableList();
+    std::map<std::string, std::string>* variableListValueInitial = m_project->GetVariableListValueInitial();
+
+    for each (std::pair<std::string, UserVariable*> e in *(variableList))
+    {
+        variableListValueInitial->insert(std::pair<std::string, std::string>(e.first, e.second->GetValue()));
+    }
 }
 
 void ProjectDaemon::RestartProject() 
 {
-            
+    // Set Object values to initial state
+    ObjectList* objectList = m_project->GetObjectList();
+    std::map<std::string, Object*>* objectListInitial = m_project->GetObjectListInitial();
+
+    for each (Object* object in *(objectList->GetObjects()))
+    {
+        Object* objectInitial = objectListInitial->at(object->GetName());
+        object->SetTransparency(objectInitial->GetTransparency());
+        object->SetRotation(objectInitial->GetRotation());
+        float x;
+        float y;
+        objectInitial->GetTranslation(x, y);
+        object->SetTranslation(x, y);
+        objectInitial->GetScale(x, y);
+        object->SetScale(x, y);
+
+        for each (std::pair<std::string, UserVariable*> e in *(object->GetVariableList()))
+        {
+            UserVariable* userVariableInital = objectInitial->GetVariable(e.first);       
+            e.second->SetValue(userVariableInital->GetValue());
+        }
+    }
+
+    // Set UserVariable values to initial state
+    std::map<std::string, UserVariable*>* variableList = m_project->GetVariableList();
+    std::map<std::string, std::string>* variableListValueInitial = m_project->GetVariableListValueInitial();
+
+    for each (std::pair<std::string, UserVariable*> e in *(variableList))
+    {
+        std::string userVariableValueInitial = variableListValueInitial->at(e.first);
+        e.second->SetValue(userVariableValueInitial);
+    }
+
+    m_project->StartUp();
 }
 
 vector<Platform::String^> *ProjectDaemon::GetProjectList()

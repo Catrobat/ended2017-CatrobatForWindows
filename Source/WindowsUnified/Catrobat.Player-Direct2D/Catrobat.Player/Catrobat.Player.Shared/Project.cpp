@@ -49,7 +49,7 @@ Project::Project(
 	m_objectList = new ObjectList();
     m_objectListInitial = new map<std::string, Object*>();
 	m_variableList = new map<string, UserVariable*>();
-    m_variableListInitial = new map<std::string, UserVariable*>();
+    m_variableListValueInitial = new map<std::string, std::string>();
 }
 
 //----------------------------------------------------------------------

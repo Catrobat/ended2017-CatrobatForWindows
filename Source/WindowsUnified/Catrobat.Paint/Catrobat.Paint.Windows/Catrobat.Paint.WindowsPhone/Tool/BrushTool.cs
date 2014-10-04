@@ -125,8 +125,6 @@ namespace Catrobat.Paint.Phone.Tool
                 _path.InvalidateArrange();
 
             }
-
-            
             CommandManager.GetInstance().CommitCommand(new BrushCommand(_path));
         }
 

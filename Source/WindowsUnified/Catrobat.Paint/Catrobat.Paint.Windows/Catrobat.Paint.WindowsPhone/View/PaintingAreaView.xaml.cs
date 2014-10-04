@@ -86,6 +86,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             //PaintingAreaCanvas.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
             //PaintingAreaCanvas.ManipulationStarting += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarting;
             PaintingAreaCanvas.RenderTransform = new TransformGroup();
+            
            /* if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Brush || 
                 PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Eraser)
             {
@@ -179,9 +180,9 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             CommandBar cmdBar = new CommandBar();
 
-            loadPointerEvents();
-            unloadDoubleTapEvent();
-            unloadManipulationEvents();
+            //loadPointerEvents();
+            //unloadDoubleTapEvent();
+            //unloadManipulationEvents();
 
             if("barCursor" == type || "barStandard" == type)
             {
@@ -215,7 +216,15 @@ namespace Catrobat.Paint.WindowsPhone.View
                     reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
                     app_btnResetCursor.Icon = reset_icon;
 
-                    app_btnResetCursor.IsEnabled = false;
+                    TransformGroup transformGroup = (TransformGroup)GridCursor.RenderTransform;
+                    if (transformGroup.Value.OffsetX != 0.0 || transformGroup.Value.OffsetY != 0.0)
+                    {
+                        app_btnResetCursor.IsEnabled = true;
+                    }
+                    else
+                    {
+                        app_btnResetCursor.IsEnabled = false;
+                    }
                     app_btnResetCursor.Click += ((CursorTool)PocketPaintApplication.GetInstance().ToolCurrent).app_btnResetCursor_Click;
 
                     cmdBar.PrimaryCommands.Add(app_btnResetCursor);
@@ -931,6 +940,13 @@ namespace Catrobat.Paint.WindowsPhone.View
         private void CursorControl_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
             
+        }
+
+        // ONLY FOR TESTING
+
+        public void changeTbTestboxText(double value1, double value2)
+        {
+            //tbTest.Text = value1.ToString() + ", " + value2.ToString();
         }
     }
 }

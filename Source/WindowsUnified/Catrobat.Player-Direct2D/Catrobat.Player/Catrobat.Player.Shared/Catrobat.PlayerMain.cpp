@@ -24,7 +24,7 @@ m_projectName("testTapp2")
     // Register to be notified if the Device is lost or recreated
     m_deviceResources->RegisterDeviceNotify(this);
     
-    LoadProject(false);
+    LoadProject();
     m_fpsTextRenderer = std::unique_ptr<SampleFpsTextRenderer>(new SampleFpsTextRenderer(m_deviceResources));
 
     // TODO: Change the timer settings if you want something other than the default variable timestep mode.
@@ -46,19 +46,13 @@ Catrobat_PlayerMain::~Catrobat_PlayerMain()
 //----------------------------------------------------------------------
 // Initialize Project loading and parsing.
 
-void Catrobat_PlayerMain::LoadProject(bool reload)
+void Catrobat_PlayerMain::LoadProject()
 {
-    ProjectDaemon::Instance()->OpenProject(m_projectName).then([this, reload](task<bool> t)
+    ProjectDaemon::Instance()->OpenProject(m_projectName).then([this](task<bool> t)
     {
         m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(m_deviceResources));
         m_loadingComplete = true;
         m_playerState = PlayerState::Active;
-        if (reload == true)
-        {
-            // Collapsing of command bar here because otherwise a race condition with the function 
-            // 'CreateDeviceDependentResources' in the class'Basic2DRenderer' exists.
-            m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
-        }
     });
   
 }
@@ -111,6 +105,16 @@ void Catrobat_PlayerMain::StopRenderLoop()
 
 //----------------------------------------------------------------------
 
+void Catrobat_PlayerMain::PointerPressed(D2D1_POINT_2F point)
+{ 
+    if (m_playerState == PlayerState::Active)
+    { 
+        m_basic2dRenderer->PointerPressed(point); 
+    }
+}
+
+//----------------------------------------------------------------------
+
 void Catrobat_PlayerMain::HardwareBackButtonPressed(_In_ Platform::Object^ sender, BackPressedEventArgs ^args)
 {
     if (m_playerState == PlayerState::Active)
@@ -121,8 +125,8 @@ void Catrobat_PlayerMain::HardwareBackButtonPressed(_In_ Platform::Object^ sende
 
         critical_section::scoped_lock lock(m_criticalSection);
 
-        m_playerState = PlayerState::Pause;
         StopRenderLoop();
+        m_playerState = PlayerState::Pause;
         m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Visible;
     }
     else
@@ -140,15 +144,11 @@ void Catrobat_PlayerMain::HardwareBackButtonPressed(_In_ Platform::Object^ sende
 void Catrobat_PlayerMain::RestartButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
 {
     critical_section::scoped_lock lock(m_criticalSection);
+    m_playerState = PlayerState::Init;
 
-    StopRenderLoop();
-    //m_playerState = PlayerState::Init;
-
-    //m_loadingComplete = false;
-    //ProjectDaemon::Instance()->ReInit();
-    //LoadProject(true);
     ProjectDaemon::Instance()->RestartProject();
-    
+    m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+    m_playerState = PlayerState::Active;
     
     StartRenderLoop();  
 }

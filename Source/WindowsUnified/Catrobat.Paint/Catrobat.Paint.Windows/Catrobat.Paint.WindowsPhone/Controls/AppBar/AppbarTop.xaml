@@ -29,20 +29,24 @@
             </Grid>
         </Button>
 
-        <Ellipse x:Name="ellipseTool_behind" Height="38" HorizontalAlignment="Right" Margin="0,0,21,0" Opacity="0.1" VerticalAlignment="Center" Width="38">
-            <Ellipse.Fill>
-                <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_move.png" Stretch="Uniform"/>
-            </Ellipse.Fill>
-        </Ellipse>
-        
-        <Ellipse x:Name="ellipseTool_front" Height="25" HorizontalAlignment="Right" Margin="0,0,27,0" VerticalAlignment="Center" Width="25">
-            <Ellipse.Fill>
-                <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_brush.png" Stretch="Uniform"/>
-            </Ellipse.Fill>
-        </Ellipse>
-        
-        <Ellipse HorizontalAlignment="Right" Height="38" Margin="0,0,21,0" Stroke="White" StrokeThickness="3" VerticalAlignment="Center" Width="38">
-        </Ellipse>
+
+        <Button x:Name="BtnToolSelection" BorderThickness="0"  HorizontalAlignment="Right" Height="38" Margin="0,0,21,0" MinHeight="1" MinWidth="1" Padding="0,-10,0,-10" VerticalAlignment="Center" Width="38">
+            <Grid>
+                <Ellipse HorizontalAlignment="Right" Height="38" Margin="0,0,0,0" Stroke="White" StrokeThickness="3" VerticalAlignment="Center" Width="38">
+                </Ellipse>
+                <Ellipse x:Name="ellipseTool_behind" Height="38" HorizontalAlignment="Right" Margin="0,0,0,0" Opacity="0.1" VerticalAlignment="Center" Width="38">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_move.png" Stretch="Uniform"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <Ellipse x:Name="ellipseTool_front" Height="25" HorizontalAlignment="Right" Margin="0,0,7,0" VerticalAlignment="Center" Width="25">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_brush.png" Stretch="Uniform"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Grid>
+        </Button>
     </Grid>
 </UserControl>
     

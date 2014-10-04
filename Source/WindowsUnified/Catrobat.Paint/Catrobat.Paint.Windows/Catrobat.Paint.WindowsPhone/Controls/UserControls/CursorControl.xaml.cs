@@ -31,7 +31,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             this.InitializeComponent();
             isDrawing = false;
-            setCursorControlLayout();
+            //setCursorControlLayout();
             if(PocketPaintApplication.GetInstance().cursorControl == null)
             {
                 PocketPaintApplication.GetInstance().cursorControl = this;
@@ -114,8 +114,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void changeCursorsize()
         {
-            double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
-            double currentThickness = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected * width_multiplicator;
+            //double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+            double currentThickness = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;// *width_multiplicator;
             double newCurrentThickness = currentThickness - standardDrawingPoint;
             double newSizeInner = standardSizeInner + newCurrentThickness;
             double newSizeOuter = standardSizeOuter + newCurrentThickness;

@@ -117,6 +117,9 @@
     <Compile Include="Controls\UserControls\CursorControl.xaml.cs">
       <DependentUpon>CursorControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserControls\RectangleSelectionControl.xaml.cs">
+      <DependentUpon>RectangleSelectionControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserControls\ucRecEll.xaml.cs">
       <DependentUpon>ucRecEll.xaml</DependentUpon>
     </Compile>
@@ -284,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\UserControls\CursorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserControls\RectangleSelectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
