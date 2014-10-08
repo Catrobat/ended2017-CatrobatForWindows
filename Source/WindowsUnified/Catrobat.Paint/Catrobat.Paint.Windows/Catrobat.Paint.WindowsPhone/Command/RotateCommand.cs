@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Media;
 
-namespace Catrobat.Paint.Phone.Command
+namespace Catrobat.Paint.WindowsPhone.Command
 {
     class RotateCommand : CommandBase
     {

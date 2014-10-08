@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Media;
-using Catrobat.Paint.WindowsPhone.Tool;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
+using Catrobat.Paint.Phone.Command;
+using Catrobat.Paint.WindowsPhone.Tool;
+using Catrobat.Paint.WindowsPhone.Command;
 
 namespace Catrobat.Paint.Phone.Tool
 {
@@ -56,6 +58,7 @@ namespace Catrobat.Paint.Phone.Tool
             renderTransform.CenterX = DISPLAY_WIDTH_HALF;
 
             PaintingAreaCanvasSettings(renderTransform);
+            CommandManager.GetInstance().CommitCommand(new FlipCommand(renderTransform));
         }
 
         public void FlipVertical()
@@ -70,6 +73,7 @@ namespace Catrobat.Paint.Phone.Tool
             renderTransform.CenterY = DISPLAY_HEIGHT_HALF;
 
             PaintingAreaCanvasSettings(renderTransform);
+            CommandManager.GetInstance().CommitCommand(new FlipCommand(renderTransform));
         }
 
         public override void ResetDrawingSpace()
@@ -84,6 +88,7 @@ namespace Catrobat.Paint.Phone.Tool
             renderTransform.CenterY = DISPLAY_HEIGHT_HALF;
 
             PaintingAreaCanvasSettings(renderTransform);
+            CommandManager.GetInstance().CommitCommand(new FlipCommand(renderTransform));
         }
 
         private void addFlipTransformToPaintingAreaView(ScaleTransform renderTransform)
@@ -100,7 +105,7 @@ namespace Catrobat.Paint.Phone.Tool
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = transformGroup;
         }
 
-        private void PaintingAreaCanvasSettings(ScaleTransform renderTransform)
+        public void PaintingAreaCanvasSettings(ScaleTransform renderTransform)
         {
             addFlipTransformToPaintingAreaView(renderTransform);
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.UpdateLayout();

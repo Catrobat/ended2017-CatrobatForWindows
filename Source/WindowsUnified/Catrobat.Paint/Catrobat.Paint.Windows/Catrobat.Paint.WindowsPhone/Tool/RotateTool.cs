@@ -1,11 +1,11 @@
 ﻿using Catrobat.Paint.Phone.Command;
 using Catrobat.Paint.WindowsPhone.Tool;
+using Catrobat.Paint.WindowsPhone.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-// using Catrobat.Paint.Phone.Command;
 using System.Windows;
 using Windows.Graphics.Display;
 using Windows.UI.Popups;

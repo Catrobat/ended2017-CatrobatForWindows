@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Catrobat.Paint.Phone.Ui;
+using Catrobat.Paint.WindowsPhone.Command;
+using Catrobat.Paint.WindowsPhone.Tool;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
-using Catrobat.Paint.Phone.Tool;
-using Catrobat.Paint.Phone.Ui;
-using Windows.UI.Xaml.Media.Imaging;
-using Catrobat.Paint.WindowsPhone.Tool;
-using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Windows;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace Catrobat.Paint.Phone.Command
 {
@@ -15,7 +15,7 @@ namespace Catrobat.Paint.Phone.Command
     public class CommandManager
     {
         private static CommandManager _instance;
-        private readonly LinkedList<CommandBase> _undoCommands;
+        public readonly LinkedList<CommandBase> _undoCommands;
         private readonly LinkedList<CommandBase> _redoCommands;
         //private readonly int MAX_COMMANDS = 12;
         private readonly Dictionary<CommandBase, WriteableBitmap> _commandBitmapDict;
@@ -75,12 +75,21 @@ namespace Catrobat.Paint.Phone.Command
                 var command = _undoCommands.Last.Value;
                 _undoCommands.RemoveLast();
 
-                /*CK: if (command is BrushCommand)
+                if (command is FlipCommand)
                 {
-                    var commandBrushStart = _undoCommands.Last.Value;
-                    _undoCommands.RemoveLast();
-                    _redoCommands.AddLast(commandBrushStart);
-                }*/
+                    var lastFlipCommand = true;
+                    foreach (var undoCommand in _undoCommands)
+                    {
+                        if (undoCommand.GetType() == typeof(FlipCommand))
+                        {
+                            lastFlipCommand = false;
+                            break;
+                        }
+                    }
+
+                    if (lastFlipCommand)
+                        command.UnDo();
+                }
 
                 if (!HasCommands())
                 {

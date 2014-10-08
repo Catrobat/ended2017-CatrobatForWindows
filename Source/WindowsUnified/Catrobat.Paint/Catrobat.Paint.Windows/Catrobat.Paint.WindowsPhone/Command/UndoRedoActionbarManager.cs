@@ -1,7 +1,6 @@
-﻿// TODO: using Catrobat.Paint.Phone.Controls.AppBar;
+﻿using Catrobat.Paint.WindowsPhone.Controls.AppBar;
 
-using Catrobat.Paint.WindowsPhone.Controls.AppBar;
-namespace Catrobat.Paint.Phone.Command
+namespace Catrobat.Paint.WindowsPhone.Command
 {
     //Singleton handling the undo and redo button
     class UndoRedoActionbarManager
