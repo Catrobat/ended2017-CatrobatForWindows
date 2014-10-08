@@ -1,10 +1,4 @@
 ﻿using Catrobat.Paint.Phone;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
 namespace Catrobat.Paint.WindowsPhone.Command
@@ -37,6 +31,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.UpdateLayout();
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateArrange();
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateMeasure();
+
             return true;
         }
 

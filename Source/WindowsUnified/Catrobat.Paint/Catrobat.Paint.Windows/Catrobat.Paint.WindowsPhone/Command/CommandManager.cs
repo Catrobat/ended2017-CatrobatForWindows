@@ -2,11 +2,7 @@
 using Catrobat.Paint.WindowsPhone.Command;
 using Catrobat.Paint.WindowsPhone.Tool;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace Catrobat.Paint.Phone.Command
@@ -75,19 +71,19 @@ namespace Catrobat.Paint.Phone.Command
                 var command = _undoCommands.Last.Value;
                 _undoCommands.RemoveLast();
 
-                if (command is FlipCommand)
+                if (command is FlipCommand || command is RotateCommand)
                 {
-                    var lastFlipCommand = true;
+                    var lastCommand = true;
                     foreach (var undoCommand in _undoCommands)
                     {
-                        if (undoCommand.GetType() == typeof(FlipCommand))
+                        if (undoCommand.GetType() == command.GetType())
                         {
-                            lastFlipCommand = false;
+                            lastCommand = false;
                             break;
                         }
                     }
 
-                    if (lastFlipCommand)
+                    if (lastCommand)
                         command.UnDo();
                 }
 

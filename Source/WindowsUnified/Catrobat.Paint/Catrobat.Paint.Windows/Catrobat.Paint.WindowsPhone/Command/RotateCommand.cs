@@ -1,101 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Catrobat.Paint.Phone;
 using Windows.UI.Xaml.Media;
 
 namespace Catrobat.Paint.WindowsPhone.Command
 {
     class RotateCommand : CommandBase
     {
-        public enum Direction
-        {
-            Left, Right
-        }
+        private RotateTransform _rotateTransform;
 
-        private Direction _direction;
-        private int _angle;
-
-        public RotateCommand(Direction direction, int anlge)
+        public RotateCommand(RotateTransform rotateTransform)
         {
-            _direction = direction;
-            _angle = anlge;
+            _rotateTransform = rotateTransform;
         }
 
         public override bool ReDo()
         {
-            //if (_direction == Direction.Right)
-            //{
-            //    var rotateTransform = new RotateTransform();
-            //    _angle += 90;
-            //    rotateTransform.Angle = _angle;
-            //    rotateTransform.CenterX = 225;
-            //    rotateTransform.CenterY = 295;
-            //    //PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = rotateTransform;
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = rotateTransform;
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
-            //}
-            //else
-            //{
-            //    var rotateTransform = new RotateTransform();
-            //    if (_angle == 0)
-            //    {
-            //        _angle = 270;
-            //    }
-            //    else
-            //    {
-            //        _angle -= 90;
-            //    }
-            //    rotateTransform.Angle = _angle;
-            //    rotateTransform.CenterX = 225;
-            //    rotateTransform.CenterY = 295;
-            //    //PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = rotateTransform;
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = rotateTransform;
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
-            //}
+            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform);
+            for (int i = 0; i < transformGroup.Children.Count; i++)
+            {
+                if (transformGroup.Children[i].GetType() == typeof(RotateTransform))
+                {
+                    transformGroup.Children.RemoveAt(i);
+                }
+            }
+
+            transformGroup.Children.Add(_rotateTransform);
+
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = transformGroup;
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.UpdateLayout();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateArrange();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateMeasure();
+
             return true;
         }
 
         public override bool UnDo()
         {
-            //if (_direction == Direction.Right)
-            //{
-            //    var rotateTransform = new RotateTransform();
-            //    if (_angle == 0)
-            //    {
-            //        _angle = 270;
-            //    }
-            //    else
-            //    {
-            //        _angle -= 90;
-            //    }
-            //    rotateTransform.Angle = _angle;
-            //    rotateTransform.CenterX = 225;
-            //    rotateTransform.CenterY = 295;
-            //    //PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = rotateTransform;
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = rotateTransform;
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
-            //}
-            //else
-            //{
-            //    var rotateTransform = new RotateTransform();
-            //    _angle += 90;
-            //    rotateTransform.Angle = _angle;
-            //    rotateTransform.CenterX = 225;
-            //    rotateTransform.CenterY = 295;
-            //    //PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = rotateTransform;
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = rotateTransform;
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
-            //    PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
-            //}
+            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform);
+            for (int i = 0; i < transformGroup.Children.Count; i++)
+            {
+                if (transformGroup.Children[i].GetType() == typeof(RotateTransform))
+                {
+                    transformGroup.Children.RemoveAt(i);
+                }
+            }
+
+            var defaultRotateTransform = new RotateTransform();
+            defaultRotateTransform.Angle = 0.0;
+            defaultRotateTransform.CenterX = _rotateTransform.CenterX;
+            defaultRotateTransform.CenterY = _rotateTransform.CenterY;
+
+            transformGroup.Children.Add(defaultRotateTransform);
+
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = transformGroup;
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.UpdateLayout();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateArrange();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateMeasure();
+
             return true;
         }
     }

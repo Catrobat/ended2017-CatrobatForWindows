@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows;
+﻿using Catrobat.Paint.Phone.Command;
+using Catrobat.Paint.WindowsPhone.Command;
+using Catrobat.Paint.WindowsPhone.Tool;
+using System;
+using Windows.Foundation;
+using Windows.UI.Xaml.Media;
 // using Catrobat.Paint.Phone.Command;
 using Windows.UI.Xaml.Shapes;
-using Windows.UI.Xaml.Media;
-using Windows.Foundation;
-using Catrobat.Paint.WindowsPhone.Tool;
-using Catrobat.Paint.Phone.Command;
 
 namespace Catrobat.Paint.Phone.Tool
 {
