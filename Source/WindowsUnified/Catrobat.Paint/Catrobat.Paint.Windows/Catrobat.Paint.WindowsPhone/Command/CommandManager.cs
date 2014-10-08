@@ -107,7 +107,7 @@ namespace Catrobat.Paint.Phone.Command
         private void ReDrawAll()
         {
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
-            PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Children.Clear();
+            //PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Children.Clear();
                       
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Background = null;
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();

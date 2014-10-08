@@ -180,9 +180,9 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             CommandBar cmdBar = new CommandBar();
 
-            //loadPointerEvents();
-            //unloadDoubleTapEvent();
-            //unloadManipulationEvents();
+            loadPointerEvents();
+            unloadDoubleTapEvent();
+            unloadManipulationEvents();
 
             if("barCursor" == type || "barStandard" == type)
             {
