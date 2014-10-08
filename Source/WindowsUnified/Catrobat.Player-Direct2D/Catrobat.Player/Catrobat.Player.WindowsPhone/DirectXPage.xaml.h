@@ -51,13 +51,16 @@ namespace Catrobat_Player
         // Bottom CommandBar handlers
         void OnRestartButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
         void OnPlayButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
-        void OnScreenshotButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
+        void OnThumbnailButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
         void OnEnableAxisButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
+        void OnScreenshotButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
+
 
 		// Resources used to render the DirectX content in the XAML page background.
 		std::shared_ptr<DX::DeviceResources> m_deviceResources;
 		std::unique_ptr<Catrobat_PlayerMain> m_main; 
 		bool m_windowVisible;
-	};
+        //void PlayerAppBar_Opened(Platform::Object^ sender, Platform::Object^ e);    
+    };
 }
 

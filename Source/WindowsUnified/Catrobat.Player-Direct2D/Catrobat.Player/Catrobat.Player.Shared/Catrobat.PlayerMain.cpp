@@ -7,6 +7,8 @@ using namespace Catrobat_Player;
 using namespace Windows::Foundation;
 using namespace Windows::System::Threading;
 using namespace Windows::Phone::UI::Input;
+using namespace Windows::UI::Notifications;
+using namespace Windows::Data::Xml::Dom;
 using namespace Concurrency;
 
 //----------------------------------------------------------------------
@@ -165,15 +167,47 @@ void Catrobat_PlayerMain::PlayButtonClicked(_In_ Platform::Object^ sender, Windo
 }
 
 //----------------------------------------------------------------------
+// 
+void Catrobat_PlayerMain::ThumbnailButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+{
+    // TODO get current screen image
+    // TODO save the current image
 
-void Catrobat_PlayerMain::ScreenshotButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+    // Create a template for the toast 
+    ToastTemplateType toastTemplate = ToastTemplateType::ToastText02;
+    XmlDocument^ toastXml = ToastNotificationManager::GetTemplateContent(toastTemplate);
+
+    // 
+    XmlNodeList^ toastTextElements = toastXml->GetElementsByTagName("text");
+    toastTextElements->Item(0)->InnerText = "Successfully set a new thumbnail :)"; // TODO get this string from a multilingual tool/file
+    ToastNotification^ toast = ref new ToastNotification(toastXml);
+    Platform::String^ toastTag = ref new Platform::String(L"Thumbnail"); // TODO check if this should maybe set somewhere in a global variable space??
+    toast->Tag = toastTag; 
+
+    // Show the toast and remove it from the action center
+    int seconds = 1;
+    auto cal = ref new Windows::Globalization::Calendar();
+    cal->AddSeconds(seconds);
+    toast->ExpirationTime = cal->GetDateTime();
+    ToastNotificationManager::CreateToastNotifier()->Show(toast);
+    //ToastNotificationManager::History->Remove(toastTag);
+    
+    critical_section::scoped_lock lock(m_criticalSection);
+    m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+    m_playerState = PlayerState::Active;
+    StartRenderLoop();
+}
+
+//----------------------------------------------------------------------
+
+void Catrobat_PlayerMain::EnableAxisButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
 {
     // TODO implement me
 }
 
 //----------------------------------------------------------------------
 
-void Catrobat_PlayerMain::EnableAxisButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+void Catrobat_PlayerMain::ScreenshotButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
 {
     // TODO implement me
 }

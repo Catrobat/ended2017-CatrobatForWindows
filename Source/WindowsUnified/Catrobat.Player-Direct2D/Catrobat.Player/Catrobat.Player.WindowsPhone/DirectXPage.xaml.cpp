@@ -213,12 +213,11 @@ void DirectXPage::OnPlayButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedE
     m_main->PlayButtonClicked(sender, args);
 }
 
-
 //----------------------------------------------------------------------
 
-void DirectXPage::OnScreenshotButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+void DirectXPage::OnThumbnailButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
 {
-    m_main->ScreenshotButtonClicked(sender, args);
+    m_main->ThumbnailButtonClicked(sender, args);
 }
 
 //----------------------------------------------------------------------
@@ -227,3 +226,16 @@ void DirectXPage::OnEnableAxisButtonClicked(Object^ sender, Windows::UI::Xaml::R
 {
     m_main->EnableAxisButtonClicked(sender, args);
 }
+
+//----------------------------------------------------------------------
+
+void DirectXPage::OnScreenshotButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+{
+    m_main->ScreenshotButtonClicked(sender, args);
+}
+
+
+//void Catrobat_Player::DirectXPage::PlayerAppBar_Opened(Platform::Object^ sender, Platform::Object^ e)
+//{
+//
+//}
