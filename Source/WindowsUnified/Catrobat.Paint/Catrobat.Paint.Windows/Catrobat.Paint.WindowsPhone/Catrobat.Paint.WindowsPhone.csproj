@@ -93,6 +93,7 @@
     <Compile Include="Command\CommandBase.cs" />
     <Compile Include="Command\CommandManager.cs" />
     <Compile Include="Command\EraserCommand.cs" />
+    <Compile Include="Command\FlipCommand.cs" />
     <Compile Include="Command\LineCommand.cs" />
     <Compile Include="Command\RotateCommand.cs" />
     <Compile Include="Command\UndoRedoActionbarManager.cs" />

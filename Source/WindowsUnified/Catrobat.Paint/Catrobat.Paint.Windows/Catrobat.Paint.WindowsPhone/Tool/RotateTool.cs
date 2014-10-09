@@ -1,16 +1,6 @@
 ﻿using Catrobat.Paint.Phone.Command;
+using Catrobat.Paint.WindowsPhone.Command;
 using Catrobat.Paint.WindowsPhone.Tool;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-// using Catrobat.Paint.Phone.Command;
-using System.Windows;
-using Windows.Graphics.Display;
-using Windows.UI.Popups;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
 namespace Catrobat.Paint.Phone.Tool
@@ -61,6 +51,8 @@ namespace Catrobat.Paint.Phone.Tool
             rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Width) / 2;
             rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Height) / 2);
             PaintingAreaCanvasSettings(rotateTransform);
+
+            CommandManager.GetInstance().CommitCommand(new RotateCommand(rotateTransform));
         }
 
         public void RotateLeft()
@@ -78,9 +70,9 @@ namespace Catrobat.Paint.Phone.Tool
             rotateTransform.Angle = _angle;
             rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Width) / 2;
             rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Height) / 2);
-
             PaintingAreaCanvasSettings(rotateTransform);
-            CommandManager.GetInstance().CommitCommand(new RotateCommand(RotateCommand.Direction.Left, _angle));
+
+            CommandManager.GetInstance().CommitCommand(new RotateCommand(rotateTransform));
 
         }
 
@@ -93,7 +85,7 @@ namespace Catrobat.Paint.Phone.Tool
             rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Height) / 2);
             PaintingAreaCanvasSettings(rotateTransform);
 
-            CommandManager.GetInstance().CommitCommand(new RotateCommand(RotateCommand.Direction.Right, _angle));
+            CommandManager.GetInstance().CommitCommand(new RotateCommand(rotateTransform));
         }
 
         private void addRotateTransformToPaintingAreaView(RotateTransform renderTransform)

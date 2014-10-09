@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows;
-using Catrobat.Paint.Phone.Tool;
-using Catrobat.Paint.Phone.Ui;
-using Windows.UI.Xaml.Media.Imaging;
+﻿using Catrobat.Paint.Phone.Ui;
+using Catrobat.Paint.WindowsPhone.Command;
 using Catrobat.Paint.WindowsPhone.Tool;
-using System.ComponentModel;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace Catrobat.Paint.Phone.Command
 {
@@ -15,7 +11,7 @@ namespace Catrobat.Paint.Phone.Command
     public class CommandManager
     {
         private static CommandManager _instance;
-        private readonly LinkedList<CommandBase> _undoCommands;
+        public readonly LinkedList<CommandBase> _undoCommands;
         private readonly LinkedList<CommandBase> _redoCommands;
         //private readonly int MAX_COMMANDS = 12;
         private readonly Dictionary<CommandBase, WriteableBitmap> _commandBitmapDict;
@@ -75,12 +71,21 @@ namespace Catrobat.Paint.Phone.Command
                 var command = _undoCommands.Last.Value;
                 _undoCommands.RemoveLast();
 
-                /*CK: if (command is BrushCommand)
+                if (command is FlipCommand || command is RotateCommand)
                 {
-                    var commandBrushStart = _undoCommands.Last.Value;
-                    _undoCommands.RemoveLast();
-                    _redoCommands.AddLast(commandBrushStart);
-                }*/
+                    var lastCommand = true;
+                    foreach (var undoCommand in _undoCommands)
+                    {
+                        if (undoCommand.GetType() == command.GetType())
+                        {
+                            lastCommand = false;
+                            break;
+                        }
+                    }
+
+                    if (lastCommand)
+                        command.UnDo();
+                }
 
                 if (!HasCommands())
                 {
@@ -107,7 +112,7 @@ namespace Catrobat.Paint.Phone.Command
         private void ReDrawAll()
         {
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
-            PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Children.Clear();
+            //PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Children.Clear();
                       
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Background = null;
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();

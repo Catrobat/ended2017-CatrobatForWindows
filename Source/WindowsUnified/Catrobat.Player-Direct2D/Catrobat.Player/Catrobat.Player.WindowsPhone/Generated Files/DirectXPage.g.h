@@ -36,8 +36,9 @@ namespace Catrobat_Player
         private: ::Windows::UI::Xaml::Controls::CommandBar^ PlayerAppBar;
         private: ::Windows::UI::Xaml::Controls::AppBarButton^ Restart;
         private: ::Windows::UI::Xaml::Controls::AppBarButton^ Play;
-        private: ::Windows::UI::Xaml::Controls::AppBarButton^ Screenshot;
+        private: ::Windows::UI::Xaml::Controls::AppBarButton^ Thumbnail;
         private: ::Windows::UI::Xaml::Controls::AppBarButton^ EnableAxes;
+        private: ::Windows::UI::Xaml::Controls::AppBarButton^ Screenshot;
     };
 }
 

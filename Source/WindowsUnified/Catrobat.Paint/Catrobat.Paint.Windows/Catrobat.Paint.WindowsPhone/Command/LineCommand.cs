@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Catrobat.Paint.Phone;
 using Catrobat.Paint.WindowsPhone.Tool;
 using Windows.UI.Xaml.Shapes;
 
-namespace Catrobat.Paint.Phone.Command
+namespace Catrobat.Paint.WindowsPhone.Command
 {
     class LineCommand : CommandBase
     {

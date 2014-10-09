@@ -1,6 +1,6 @@
 ﻿using Catrobat.Paint.WindowsPhone.Tool;
 
-namespace Catrobat.Paint.Phone.Command
+namespace Catrobat.Paint.WindowsPhone.Command
 {
     public abstract class CommandBase
     {
