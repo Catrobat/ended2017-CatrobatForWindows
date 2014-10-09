@@ -281,11 +281,8 @@ void Object::RecalculateTransformation()
     m_renderTargetSize = m_look->GetBitMap()->GetSize();
     m_renderTargetSize.width *= m_ratio.width;
     m_renderTargetSize.height *= m_ratio.height;
-    Matrix3x2F renderTarget = Matrix3x2F::Identity();
-    renderTarget = Matrix3x2F::Translation(m_logicalSize.width / 2 - m_renderTargetSize.width / 2,
-        m_logicalSize.height / 2 - m_renderTargetSize.height / 2);
 
-    Matrix3x2F translation = Matrix3x2F::Translation(m_translation.x * m_ratio.width, m_translation.y * m_ratio.height) * renderTarget;
+    Matrix3x2F translation = CalculateTranslationMatrix();
     D2D1_POINT_2F origin;
     origin.x = translation._31 + m_renderTargetSize.width / 2;
     origin.y = translation._32 + m_renderTargetSize.height / 2;
@@ -293,6 +290,18 @@ void Object::RecalculateTransformation()
     m_transformation = translation *
         Matrix3x2F::Rotation(m_rotation, origin) *
         Matrix3x2F::Scale(m_objectScale, origin);
+}
+
+Matrix3x2F Object::CalculateTranslationMatrix()
+{
+    m_renderTargetSize = m_look->GetBitMap()->GetSize();
+    m_renderTargetSize.width *= m_ratio.width;
+    m_renderTargetSize.height *= m_ratio.height;
+    Matrix3x2F renderTarget = Matrix3x2F::Identity();
+    renderTarget = Matrix3x2F::Translation(m_logicalSize.width / 2 - m_renderTargetSize.width / 2,
+        m_logicalSize.height / 2 - m_renderTargetSize.height / 2);
+
+    return Matrix3x2F::Translation(m_translation.x * m_ratio.width, m_translation.y * m_ratio.height) * renderTarget;
 }
 #pragma endregion
 
@@ -303,8 +312,21 @@ bool Object::IsObjectHit(D2D1_POINT_2F position)
         return false;
     }
 
-    position.x = (position.x - m_transformation._31) / m_ratio.width;
-    position.y = m_look->GetHeight() - (position.y - m_transformation._32) / m_ratio.height;
+    Matrix3x2F translation = CalculateTranslationMatrix();
+    D2D1_POINT_2F origin;
+    origin.x = m_look->GetWidth() / 2;
+    origin.y = m_look->GetHeight() / 2;
+
+    Matrix3x2F positionInBitMap = translation;
+    positionInBitMap._31 = (position.x - positionInBitMap._31) / m_ratio.width;
+    positionInBitMap._32 = m_look->GetHeight() - (position.y - positionInBitMap._32) / m_ratio.height;
+
+    positionInBitMap = positionInBitMap *
+        Matrix3x2F::Rotation(360 - m_rotation, origin) *
+        Matrix3x2F::Scale(m_objectScale, origin);
+
+    position.x = positionInBitMap._31;
+    position.y = positionInBitMap._32;
 
     try
     {

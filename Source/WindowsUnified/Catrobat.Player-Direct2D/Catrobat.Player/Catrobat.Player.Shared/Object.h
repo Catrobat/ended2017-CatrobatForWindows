@@ -83,5 +83,6 @@ private:
 
 private:
     void RecalculateTransformation();
+    D2D1::Matrix3x2F CalculateTranslationMatrix();
 	static double Radians(float degree) { return degree * DirectX::XM_PI / 180.0f; }
 };
