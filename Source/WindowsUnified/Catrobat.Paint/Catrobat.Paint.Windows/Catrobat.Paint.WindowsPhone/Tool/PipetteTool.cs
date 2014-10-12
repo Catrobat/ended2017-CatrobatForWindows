@@ -3,6 +3,7 @@ using System.Windows;
 using Windows.Foundation;
 using Windows.UI.Xaml.Media;
 using Windows.Graphics;
+using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using System;
@@ -34,8 +35,9 @@ namespace Catrobat.Paint.Phone.Tool
             {
                 return;
             }
-            // TODO: PocketPaintApplication.GetInstance().PaintData.ColorSelected = 
-            //   new SolidColorBrush(PocketPaintApplication.GetInstance().Bitmap.GetPixel((int)coordinate.X, (int)coordinate.Y));         
+
+        //PocketPaintApplication.GetInstance().PaintData.ColorSelected =
+        //  new SolidColorBrush(PocketPaintApplication.GetInstance().Bitmap.);      
         }
 
         public override void HandleMove(object arg)

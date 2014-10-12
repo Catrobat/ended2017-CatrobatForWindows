@@ -10,6 +10,7 @@ using Catrobat.Paint.WindowsPhone.Tool;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Shapes;
+using Windows.UI.Xaml;
 
 namespace Catrobat.Paint.Phone.Listener
 {
@@ -44,26 +45,38 @@ namespace Catrobat.Paint.Phone.Listener
             }
 
 
-            object movezoom;
+            object movezoom = null;
+            RotateTransform rotate = new RotateTransform();
 
-            if (e.Delta.Scale != 1.0)
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
             {
-
-                movezoom = new ScaleTransform();
-                if (e.Delta.Scale > 0)
-                {
-                    System.Diagnostics.Debug.WriteLine("Scale " + e.Delta.Scale);
-                    ((ScaleTransform)movezoom).ScaleX *= e.Delta.Scale;
-                    ((ScaleTransform)movezoom).ScaleY *= e.Delta.Scale;
-                }
+                rotate.CenterX = Window.Current.Bounds.Width / 2.0;
+                rotate.CenterY = (Window.Current.Bounds.Height - 150.0) / 2.0;
+                double result = (((e.Position.X / 384.0) * 360.0) + (e.Position.Y / (Window.Current.Bounds.Height - 150.0)) * 360.0) / 2;
+                rotate.Angle = result;
             }
             else
             {
-                movezoom = new TranslateTransform();
+                if (e.Delta.Scale != 1.0)
+                {
 
-                ((TranslateTransform)movezoom).X += e.Delta.Translation.X;
-                ((TranslateTransform)movezoom).Y += e.Delta.Translation.Y;
+                    movezoom = new ScaleTransform();
+                    if (e.Delta.Scale > 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Scale " + e.Delta.Scale);
+                        ((ScaleTransform)movezoom).ScaleX *= e.Delta.Scale;
+                        ((ScaleTransform)movezoom).ScaleY *= e.Delta.Scale;
+                    }
+                }
+                else
+                {
+                    movezoom = new TranslateTransform();
+
+                    ((TranslateTransform)movezoom).X += e.Delta.Translation.X;
+                    ((TranslateTransform)movezoom).Y += e.Delta.Translation.Y;
+                }
             }
+            
 
             switch (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType())
             {
@@ -81,6 +94,9 @@ namespace Catrobat.Paint.Phone.Listener
                     break;
                 case ToolType.Line:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
+                    break;
+                case ToolType.Rect:
+                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(rotate);
                     break;
             }
         }

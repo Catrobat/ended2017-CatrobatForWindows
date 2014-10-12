@@ -45,7 +45,7 @@
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_stamp.png" Stretch="Uniform" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnRectangle"  BorderBrush="White" Click="Button_OnClick" Content="Rechteck" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Left" IsEnabled="False" Margin="0,174,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnRectangle_Holding">
+                    <Button x:Name="BtnRectangle"  BorderBrush="White" Click="Button_OnClick" Content="Rechteck" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Left" IsEnabled="True" Margin="0,174,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnRectangle_Holding">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_rectangle.png" Stretch="Uniform" />
                         </Button.Background>
