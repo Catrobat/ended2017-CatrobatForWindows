@@ -116,8 +116,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Stamp);
                         break;
                     case "BtnRectangle":
-                        //PocketPaintApplication.GetInstance().RecDrawingRectangle.Margin = new Thickness(171, 263, 0, 0);
-                        PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
                         break;
                     case "BtnEllipse":

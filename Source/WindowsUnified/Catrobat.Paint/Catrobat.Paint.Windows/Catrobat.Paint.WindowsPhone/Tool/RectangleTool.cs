@@ -26,18 +26,35 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         private bool _lastPointSet;
         private LineSegment _lineSegment;
 
+        private TransformGroup _transforms;
+
         public RectangleTool()
         {
             this.ToolType = ToolType.Rect;
             //PocketPaintApplication.GetInstance().CurrentShape = PocketPaintApplication.GetInstance().BarRecEllShape.RectangleForeground;
-            PocketPaintApplication.GetInstance().BarRecEllShape.setBorderColor();
-            PocketPaintApplication.GetInstance().BarRecEllShape.setFillColor();
-            if (PocketPaintApplication.GetInstance().RecDrawingRectangle != null)
+            //PocketPaintApplication.GetInstance().BarRecEllShape.setBorderColor();
+            //PocketPaintApplication.GetInstance().BarRecEllShape.setFillColor();
+            //if (PocketPaintApplication.GetInstance().RecDrawingRectangle != null)
+            //{
+            //    PocketPaintApplication.GetInstance().RecDrawingRectangle.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
+            //    PocketPaintApplication.GetInstance().RecDrawingRectangle.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
+            //    PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
+            //}
+
+            if (PocketPaintApplication.GetInstance() != null && PocketPaintApplication.GetInstance().PaintingAreaView != null)
             {
-                PocketPaintApplication.GetInstance().RecDrawingRectangle.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
-                PocketPaintApplication.GetInstance().RecDrawingRectangle.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
-                PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
+                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOfGridRectangleSelectionControl = Visibility.Visible;
+
+                if (PocketPaintApplication.GetInstance().GridRectangleSelectionControl.RenderTransform != null)
+                {
+                    _transforms = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.RenderTransform as TransformGroup;
+                }
+                if (_transforms == null)
+                {
+                    PocketPaintApplication.GetInstance().GridRectangleSelectionControl.RenderTransform = _transforms = new TransformGroup();
+                }
             }
+
 
 
         }
@@ -103,7 +120,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleMove(object arg)
         {
-            throw new NotImplementedException();
+            //var rotate = (RotateTransform)arg;
+            //_transforms.Children.Add(rotate);
         }
 
         public override void HandleUp(object arg)

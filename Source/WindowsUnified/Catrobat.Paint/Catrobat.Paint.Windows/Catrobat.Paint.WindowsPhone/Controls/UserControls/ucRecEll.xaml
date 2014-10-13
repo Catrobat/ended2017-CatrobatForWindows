@@ -29,14 +29,14 @@
         <TextBox x:Name="tbHeight" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" LostFocus="tbHeightValue_LostFocus" Margin="5,120,0,0" Padding="-2,0,0,0" Text="Höhe:" />
         <TextBox x:Name="tbFillcolor" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,85,0,0" Padding="-2,0,0,0" Text="Füllfarbe:" Width="120" />
         <TextBox x:Name="tbHeightValue" Background="Transparent" BorderBrush="White" BorderThickness="4"  FontSize="14" Foreground="White" Height="30" HorizontalAlignment="Right" InputScope="Number" IsHitTestVisible="True" Margin="0,120,5,0" MinHeight="1" MinWidth="1" PointerEntered="tbHeightValue_PointerEntered" Text="50" TextAlignment="Center"
-                   TextChanged="tbHeightValue_TextChanged" Width="160" LostFocus="tbHeightValue_LostFocus_1" />
+                   TextChanged="tbHeightValue_TextChanged" Width="160" LostFocus="tbHeightValue_LostFocus_1" PointerExited="tbHeightValue_PointerExited" GotFocus="tbHeightValue_GotFocus" />
         <TextBox x:Name="tbStrokeColor" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,50,278,0" Padding="-2,0,0,0" Text="Randfarbe:" Width="120" />
         <TextBox x:Name="tbStrokeThicknessText" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,10,0,0" Padding="-2,0,0,0" Text="Randstärke:" Width="120" />
         <TextBox x:Name="tbStrokeThicknessValue" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Right" IsHitTestVisible="False" Margin="0,10,2,0" MinWidth="10" Text="5" Width="38"/>
         <TextBox x:Name="tbWidth" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,155,0,0" Padding="-2,0,0,0" Text="Breite:" />
         <TextBox x:Name="tbWidthValue" Background="Transparent" BorderBrush="White" BorderThickness="4"  FontSize="14" Foreground="White" Height="30" HorizontalAlignment="Right" IsHitTestVisible="True" InputScope="Number"
                  LostFocus="tbWidthValue_LostFocus" Margin="0,155,5,0" MinHeight="1" MinWidth="1" PreventKeyboardDisplayOnProgrammaticFocus="True" PointerEntered="tbWidthValue_PointerEntered" Text="50"
-                 TextAlignment="Center" TextChanged="tbWidthValue_TextChanged" Width="160" />
+                 TextAlignment="Center" TextChanged="tbWidthValue_TextChanged" Width="160" PointerExited="tbWidthValue_PointerExited" GotFocus="tbWidthValue_GotFocus" />
     </Grid>
 </UserControl>
     

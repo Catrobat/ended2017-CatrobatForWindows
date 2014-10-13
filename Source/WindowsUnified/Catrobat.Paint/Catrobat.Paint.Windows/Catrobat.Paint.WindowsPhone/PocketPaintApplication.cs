@@ -34,6 +34,8 @@ namespace Catrobat.Paint.Phone
         public bool isToolPickerUsed = true;
 
         public Grid GridCursor { get; set; }
+
+        public Grid GridRectangleSelectionControl { get; set; }
         public bool UnsavedChangesMade { get; set; }
 
         public CursorControl cursorControl { get; set; }
@@ -49,6 +51,8 @@ namespace Catrobat.Paint.Phone
         public PaintingAreaView PaintingAreaView { get; set; }
 
         public Page pgPainting { get; set; }
+
+        public RectangleSelectionControl RectangleSelectionControl { get; set; }
 
         public AppbarTop AppbarTop { get; set; }
 
