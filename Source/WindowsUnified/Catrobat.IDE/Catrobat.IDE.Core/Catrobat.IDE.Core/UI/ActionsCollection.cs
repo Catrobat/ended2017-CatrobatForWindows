@@ -410,7 +410,7 @@ namespace Catrobat.IDE.Core.UI
             }
         }
 
-        object IList.this[int index]
+        public object this[int index]
         {
             get { return GetAtIndex(index); }
             set { throw new NotImplementedException(); }

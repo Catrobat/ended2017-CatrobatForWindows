@@ -1,4 +1,5 @@
-﻿using Windows.UI.Core;
+﻿using System.Threading.Tasks;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Models.Scripts;
@@ -10,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.Foundation;
 
 
 namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
@@ -21,8 +23,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             get;
             private set;
         }
-
-        private ApplicationViewOrientation _oldApplicationOrientation;
 
         public INotifyCollectionChanged ItemsSource
         {
@@ -134,6 +134,17 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             set { SetValue(ReorderEnabledDP, value); Clvw.SetReorderEnabled(value); }
         }
 
+        public static readonly DependencyProperty GroupingEnabledDP =
+          DependencyProperty.Register("GroupingEnabled", typeof(int), typeof(CatrobatListView), new PropertyMetadata(true));
+
+        public bool GroupingEnabled
+        {
+            get { return (bool)GetValue(GroupingEnabledDP); }
+            set { SetValue(GroupingEnabledDP, value); Clvw.SetGroupingEnabled(value); }
+        }
+
+
+
         public INotifyCollectionChanged SelectedItems
         {
             get { return (INotifyCollectionChanged)GetValue(SelectedItemsDP); }
@@ -179,7 +190,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
            
             this.Unloaded += CatrobatListView_Unloaded;
             this.SizeChanged += CatrobatListView_SizeChanged;
-            this._oldApplicationOrientation = ApplicationView.GetForCurrentView().Orientation;
             this.Loaded += CatrobatListView_Loaded;
         }
 
@@ -261,22 +271,37 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         void clvw_ItemDragCompletedEvent(object sender, CatrobatListViewEventArgs e)
         {
             this.ItemsSource.CollectionChanged -= ItemsSource_CollectionChanged;
-            DragTransfer(e.GetTmpControl(), e.GetOrignalContent());
+            DragTransfer(e.GetTmpControl(), e.GetOrignalContent(), e.GetGroupedItems());
             this.ItemsSource.CollectionChanged += ItemsSource_CollectionChanged;
         }
 
-        private void DragTransfer(CatrobatListViewEmptyDummyControl tmpControl, CatrobatListViewDragObject originalContent)
+        private void DragTransfer(CatrobatListViewEmptyDummyControl tmpControl, CatrobatListViewDragObject originalContent, IList<object> groupedItems)
         {
             int actSourceIndex = Clvw.Items.IndexOf(tmpControl);
             int actTargetIndex = ((IList)this.ItemsSource).IndexOf(originalContent.Content);
 
-            if (actTargetIndex != -1 && actSourceIndex != actTargetIndex)
+            if (actTargetIndex != -1 && actSourceIndex != actTargetIndex && (groupedItems == null || groupedItems.Count == 0))
+            {
+                ((IList) this.ItemsSource).RemoveAt(actTargetIndex);
+                ((IList) this.ItemsSource).Insert(actSourceIndex, originalContent.Content);
+            }
+            else if (actTargetIndex != -1 && groupedItems != null)
             {
                 ((IList)this.ItemsSource).RemoveAt(actTargetIndex);
+                for (int i = 0; i < groupedItems.Count; i++)
+                {
+                    ((IList)this.ItemsSource).Remove(groupedItems[i]);
+                }
                 ((IList)this.ItemsSource).Insert(actSourceIndex, originalContent.Content);
+                for (int i = 0; i < groupedItems.Count; i++)
+                {
+                    ((IList)this.ItemsSource).Insert(actSourceIndex + 1, groupedItems[i]);
+                    Clvw.Items.Insert(actSourceIndex + 1, groupedItems[i]);
+                }
             }
 
             Clvw.Items[actSourceIndex] = originalContent.Content;
+
         }
     }
 
@@ -297,9 +322,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
         private int _verticalItemMargin;
         private bool _reorderEnabled;
+        public bool GroupingEnabled;
 
         private CatrobatListViewDragStaus _dragging;
         private CatrobatListViewItem _draggingItem;
+        private List<object> _draggingGroupList;
 
         private const double ImageResizeFactor = 0.95;
 
@@ -329,6 +356,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         {
             _verticalItemMargin = 0;
             _reorderEnabled = false;
+            GroupingEnabled = true;
             _dragging = CatrobatListViewDragStaus.NotDragging;
             _draggingItem = null;
             _autoScrollOldYValue = 0;
@@ -340,8 +368,25 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
         void CatrobatListViewWorker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            this.SelectionChanged -= CatrobatListViewWorker_SelectionChanged;
+            for (int i = e.AddedItems.Count-1; i >=0; i--)
+            {
+                CatrobatListViewItem tmpItem = ContainerFromItem(e.AddedItems[i]) as CatrobatListViewItem;
+                if (e.AddedItems[i] is EndForeverBrick ||
+                    e.AddedItems[i] is EndIfBrick ||
+                    e.AddedItems[i] is ElseBrick ||
+                    e.AddedItems[i] is EndRepeatBrick ||
+                    ((e.AddedItems[i] is ForeverBrick || e.AddedItems[i] is IfBrick || e.AddedItems[i] is RepeatBrick || e.AddedItems[i] is Script) && !tmpItem.IsGrouped))
+                {
+                    this.SelectedItems.Remove(e.AddedItems[i]);
+                    e.AddedItems.RemoveAt(i);
+                    
+                }
+            }
+
             UpdateHideIndicators(e.AddedItems, e.RemovedItems);
-            ItemSelectionChangedEvent(this, new CatrobatListViewEventArgs(null, null, e.AddedItems, e.RemovedItems));
+            ItemSelectionChangedEvent(this, new CatrobatListViewEventArgs(null, null, e.AddedItems, e.RemovedItems, null));
+            this.SelectionChanged += CatrobatListViewWorker_SelectionChanged;
         }
 
         private void UpdateHideIndicators(IList<object> addedItems, IList<object> removedItems)
@@ -371,9 +416,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
                 return;
             _tmpDragContentControl = new CatrobatListViewEmptyDummyControl();
             _tmpDragContentControl.Opacity = 0;
-            _tmpDragContentControl.Height = (InactiveItemResizeFactor * _scrollViewer.RenderSize.Height);
-            if (_verticalItemMargin < 0)
-                _tmpDragContentControl.Height -= _verticalItemMargin;
         }
 
         internal void ImportItemsSource(IList list)
@@ -477,15 +519,87 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
         protected override DependencyObject GetContainerForItemOverride()
         { 
-            var item  = new CatrobatListViewItem(_verticalItemMargin, _reorderEnabled, this.SelectionMode, _dragging == CatrobatListViewDragStaus.NotDragging);
+            var item  = new CatrobatListViewItem(_verticalItemMargin, _reorderEnabled, GroupingEnabled, this.SelectionMode, _dragging == CatrobatListViewDragStaus.NotDragging);
             item.Tapped += item_Tapped;
+            item.ItemGroupEvent += item_ItemGroupEvent;
             return item;
         }
 
         void item_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            ItemTapped(this, new CatrobatListViewItemEventArgs((CatrobatListViewItem) sender));
+            ItemTapped(this, new CatrobatListViewItemEventArgs((CatrobatListViewItem)sender));
         }
+
+
+        void item_ItemGroupEvent(object sender, CatrobatListViewEventArgs e)
+        {
+            if (this.SelectedItems.Contains((sender as CatrobatListViewItem).Content))
+            {
+                this.SelectedItems.Remove((sender as CatrobatListViewItem).Content);
+            }
+            GroupItem(sender as CatrobatListViewItem);
+        }
+
+        private void GroupItem(CatrobatListViewItem item)
+        {
+            int startIndex = Items.IndexOf(item.Content);
+            
+            int endIndex = 0;
+            if (item.Content is Script)
+            {
+                endIndex = CalcMaxReorderIndex(startIndex + 1, true);
+                endIndex--;
+            }
+            else
+            {
+                endIndex = GetEndIndexFRI(item.Content);
+            }
+            item.IsGrouped = !item.IsGrouped;
+            
+            ChangeItemsVisibility(startIndex + 1, endIndex);
+        }
+
+        private void ChangeItemsVisibility(int startIndex, int endIndex)
+        {
+            Visibility tmpVisibility = Visibility.Visible;
+            for (int i = startIndex; i <= endIndex; i++)
+            {
+                var item = ContainerFromIndex(i) as CatrobatListViewItem;
+                if (item == null)
+                {
+                    continue;
+                }
+                if (i == startIndex)
+                {
+                    tmpVisibility = item.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+                }
+                if (item.IsGrouped)
+                {
+                    i = GetEndIndexFRI(item.Content);
+                }
+
+                item.Visibility = tmpVisibility;
+            }
+        }
+
+        private int GetEndIndexFRI(object obj)
+        {
+            if (obj is ForeverBrick)
+            {
+                return Items.IndexOf((obj as ForeverBrick).End);
+            }
+            if (obj is RepeatBrick)
+            {
+                return Items.IndexOf((obj as RepeatBrick).End);
+            }
+            if (obj is IfBrick)
+            {
+                return Items.IndexOf((obj as IfBrick).End);
+            }
+
+            return 0;
+        }
+
 
         protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
         {
@@ -591,6 +705,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             this.PointerReleased +=CatrobatListViewWorker_PointerReleased;
 
             SetReorderEnabled(this._reorderEnabled);
+            SetGroupingEnabled(this.GroupingEnabled);
             
             InitReorderableEmptyDummyControl();
         }
@@ -635,7 +750,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             {
                 SetYPositionTo(yPos);
                 Autoscroll(yPos);
-                CheckRearrangeNecessaryFromDelta(yPos - _draggingItem.OrigHeight / 2);
+                CheckRearrangeNecessaryFromDelta(yPos);
             }
         }
 
@@ -643,88 +758,123 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         {
             if (Math.Abs(_rearrangeOldYValue - yVal) >= YDifferenceBeforeRearrange)
             {
+                _rearrangeOldYValue = yVal;
                 RearrangeRolbi(yVal);
             }
         }
 
         private void RearrangeRolbi(double setYTo)
         {
-            _rearrangeOldYValue = setYTo;
-
-            double tmpHeight;
-            double result = CalcViewPort(0, Items.Count);
-
-            if (result == ItemContainerGeneratorError)
-            {
-                return;
-            }
-
-            result -= _scrollViewer.VerticalOffset;
-
-            setYTo += _draggingItem.OrigHeight / 2;
             int actIndex = Items.IndexOf(_tmpDragContentControl);
-
-            int i;
-            for (i = Items.Count - 1; i >= 0 && i > actIndex; i--)
+            CatrobatListViewItem tmpItem;
+            Rect itemsBounds;
+            if (actIndex > 0)
             {
-                tmpHeight = GetActualHeightFromIndex(i);
-                if (tmpHeight == ItemContainerGeneratorError)
+                tmpItem = (this.ContainerFromIndex(actIndex - 1) as CatrobatListViewItem);
+                if (tmpItem == null)
                 {
                     return;
                 }
-                result -= (tmpHeight / 2);
-                if (setYTo >= result + (_verticalItemMargin / 2))
+                if (tmpItem.Visibility == Visibility.Collapsed)
                 {
-                    MoveItem(actIndex + 1, actIndex);
+                    if (tmpItem.Content is EndForeverBrick)
+                    {
+                        tmpItem = ContainerFromItem((tmpItem.Content as EndForeverBrick).Begin) as CatrobatListViewItem;
+                    }
+                    else if (tmpItem.Content is EndIfBrick)
+                    {
+                        tmpItem = ContainerFromItem((tmpItem.Content as EndIfBrick).Begin) as CatrobatListViewItem;
+                    }
+                    else if (tmpItem.Content is EndRepeatBrick)
+                    {
+                        tmpItem = ContainerFromItem((tmpItem.Content as EndRepeatBrick).Begin) as CatrobatListViewItem;
+                    }
+                }
+                itemsBounds =
+                    tmpItem.TransformToVisual(_scrollViewer)
+                        .TransformBounds(new Rect(0.0, 0.0, tmpItem.ActualWidth, tmpItem.ActualHeight));
+
+                if(setYTo < (itemsBounds.Top - _verticalItemMargin) + tmpItem.ActualHeight/2)
+                {
+                    MoveItem(Items.IndexOf(tmpItem.Content)/*actIndex - 1*/, actIndex);
                     return;
                 }
-                
-                result -= (tmpHeight / 2);
             }
-            i--;
-            if (i < 0)
-                return;
 
-            tmpHeight = GetActualHeightFromIndex(actIndex);
-            if (tmpHeight == ItemContainerGeneratorError)
+            tmpItem = (this.ContainerFromIndex(actIndex + 1) as CatrobatListViewItem);
+            if (tmpItem == null)
             {
                 return;
             }
-            result -= tmpHeight;
-            tmpHeight = GetActualHeightFromIndex(i);
-            if (tmpHeight == ItemContainerGeneratorError)
+
+            itemsBounds = tmpItem.TransformToVisual(_scrollViewer).TransformBounds(new Rect(0.0, 0.0, tmpItem.ActualWidth, tmpItem.ActualHeight));
+            if (setYTo > (itemsBounds.Bottom - _verticalItemMargin) - tmpItem.ActualHeight / 2)
             {
+                MoveItem(actIndex + 1, actIndex);
                 return;
             }
-            result -= tmpHeight / 2;
-            if (setYTo <= result + (_verticalItemMargin / 2))
-            {
-                MoveItem(actIndex - 1, actIndex);
-            }
+
         }
 
         private void MoveItem(int to, int from)
         {
-            if(to < _draggingItem.MinReorderIndex || to > _draggingItem.MaxReorderIndex)
+            if(to < _draggingItem.MinReorderIndex || 
+                to > _draggingItem.MaxReorderIndex || 
+                _draggingItem.InvalidReorderIndexes.Contains(to))
             {
                 return;
             }
-            Items.RemoveAt(from);
-            Items.Insert(to, _tmpDragContentControl);
+            {
+                if (to > from)
+                {
+                    var tmpItem = ContainerFromIndex(to) as CatrobatListViewItem;
+
+                    if (tmpItem != null && tmpItem.IsGrouped)
+                    {
+                        for (int i = to + 1; i < Items.Count; i++)
+                        {
+                            tmpItem = ContainerFromIndex(i) as CatrobatListViewItem;
+                            if (tmpItem != null && tmpItem.Visibility == Visibility.Visible)
+                            {
+                                to = i - 1;
+                                break;
+                            }
+                        }
+                    }
+                }
+                Items.RemoveAt(from);
+                Items.Insert(to, _tmpDragContentControl);
+            }
+
+            SetTmpDragContentHeight();
         }
 
-        private double CalcViewPort(int startElement, int elements)
+
+        private int GetEndBrickIndex(Brick obj)
         {
-            double tmpResult = 0;
-            for (int i = startElement; i < startElement + elements && i < Items.Count; i++)
+            if (obj is ForeverBrick)
             {
-                double tmp = GetActualHeightFromIndex(i);
-                if (tmp == ItemContainerGeneratorError)
-                    continue;
-                tmpResult += tmp;
+                return Items.IndexOf((obj as ForeverBrick).End);
+            } 
+            if (obj is IfBrick)
+            {
+                return Items.IndexOf((obj as IfBrick).End);
             }
-            return tmpResult;
+            if (obj is RepeatBrick)
+            {
+                return Items.IndexOf((obj as RepeatBrick).End);
+            }
+            return 0;
         }
+
+        private void SetTmpDragContentHeight()
+        {
+            var tmp = ContainerFromItem(_tmpDragContentControl) as CatrobatListViewItem;
+            tmp.Height = (InactiveItemResizeFactor * _scrollViewer.RenderSize.Height);
+            //if (_verticalItemMargin < 0)
+            //    _tmpDragContentControl.Height -= _verticalItemMargin;
+        }
+
 
         private void Autoscroll(double yVal)
         {
@@ -762,8 +912,16 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
             if (Items.IndexOf(_tmpDragContentControl) != -1)
             {
-                ItemDragCompletedEvent(this, new CatrobatListViewEventArgs(_tmpDragContentControl, _originalDragContent, null, null));
+                ItemDragCompletedEvent(this, new CatrobatListViewEventArgs(_tmpDragContentControl, _originalDragContent, null, null, _draggingGroupList));
+                if (_draggingGroupList != null && _draggingGroupList.Count > 0)
+                {
+                    _draggingGroupList.Clear();
+                    _draggingItem = null;
+                    var tmpItem = ContainerFromItem(_originalDragContent.Content) as CatrobatListViewItem;
+                    GroupItem(tmpItem);
+                }
             }
+
         }
 
         void _dragCanvas_PointerPressed(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
@@ -785,7 +943,13 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             double tmpHeight = 0;
             for (int i = 0; i < Items.Count; i++)
             {
-                tmpHeight += GetActualHeightFromIndex(i);
+                
+                var tmpItem = ContainerFromIndex(i) as CatrobatListViewItem;
+                if (tmpItem == null || tmpItem.Visibility == Visibility.Collapsed)
+                {
+                    continue;
+                }
+                tmpHeight += tmpItem.ActualHeight + _verticalItemMargin;
                 if (tmpHeight + _verticalItemMargin > verticalOffset + yPos)
                 {
                     StartDrag(i, yPos);
@@ -803,11 +967,32 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             _dragging = CatrobatListViewDragStaus.PrepareDraggin;
             _draggingItem = tmpItem;
 
-            MoveValidationCalculation(index);
-
             InitDragContentObject();
 
+            if (_draggingItem.IsGrouped)
+            {
+                InitDragGroupList();
+            }
+
+            MoveValidationCalculation(index);
+
             AddSnapshotToManipulationCanvas(yPos);
+        }
+
+        private void InitDragGroupList()
+        {
+            int lastGroupIndex = GetEndBrickIndex(_originalDragContent.Content as Brick);
+            if (_draggingGroupList != null && _draggingGroupList.Count > 0)
+            {
+                return;
+            }
+            _draggingGroupList = new List<object>();
+
+            for (int i = lastGroupIndex; i > Items.IndexOf(_originalDragContent.Content); i--)
+            {
+                _draggingGroupList.Add(Items[i]);
+                Items.RemoveAt(i);
+            }
         }
 
         private void MoveValidationCalculation(int index)
@@ -816,42 +1001,80 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             _draggingItem.MaxReorderIndex = Items.Count;
             if(Items[index] is Brick)
             {
-                if(Items[index] is ForeverBrick)
+                if (_draggingItem.IsGrouped == false)
                 {
-                    _draggingItem.MinReorderIndex = CalcMinReorderIndex(index);
-                    _draggingItem.MaxReorderIndex = Items.IndexOf((Items[index] as ForeverBrick).End);
-                } else if (Items[index] is EndForeverBrick)
-                {
-                    _draggingItem.MinReorderIndex = Items.IndexOf((Items[index] as EndForeverBrick).Begin);
-                    _draggingItem.MaxReorderIndex = CalcMaxReorderIndex(index);
-                }
-                else if (Items[index] is RepeatBrick)
-                {
-                    _draggingItem.MinReorderIndex = CalcMinReorderIndex(index);
-                    _draggingItem.MaxReorderIndex = Items.IndexOf((Items[index] as RepeatBrick).End);
-                }
-                else if (Items[index] is EndRepeatBrick)
-                {
-                    _draggingItem.MinReorderIndex = Items.IndexOf((Items[index] as EndRepeatBrick).Begin);
-                    _draggingItem.MaxReorderIndex = CalcMaxReorderIndex(index);
-                } else if (Items[index] is IfBrick)
-                {
-                    _draggingItem.MinReorderIndex = CalcMinReorderIndex(index);
-                    _draggingItem.MaxReorderIndex = Items.IndexOf((Items[index] as IfBrick).Else);
-                }
-                else if (Items[index] is ElseBrick)
-                {
-                    _draggingItem.MinReorderIndex = Items.IndexOf((Items[index] as ElseBrick).Begin);
-                    _draggingItem.MaxReorderIndex = Items.IndexOf((Items[index] as ElseBrick).End);
-                }
-                else if (Items[index] is EndIfBrick)
-                {
-                    _draggingItem.MinReorderIndex = Items.IndexOf((Items[index] as EndIfBrick).Else);
-                    _draggingItem.MaxReorderIndex = CalcMaxReorderIndex(index);
+                    if (Items[index] is ForeverBrick)
+                    {
+                        _draggingItem.MinReorderIndex = CalcMinReorderIndex(index);
+                        _draggingItem.MaxReorderIndex = Items.IndexOf((Items[index] as ForeverBrick).End);
+                    }
+                    else if (Items[index] is EndForeverBrick)
+                    {
+                        _draggingItem.MinReorderIndex = Items.IndexOf((Items[index] as EndForeverBrick).Begin);
+                        _draggingItem.MaxReorderIndex = CalcMaxReorderIndex(index);
+                    }
+                    else if (Items[index] is RepeatBrick)
+                    {
+                        _draggingItem.MinReorderIndex = CalcMinReorderIndex(index);
+                        _draggingItem.MaxReorderIndex = Items.IndexOf((Items[index] as RepeatBrick).End);
+                    }
+                    else if (Items[index] is EndRepeatBrick)
+                    {
+                        _draggingItem.MinReorderIndex = Items.IndexOf((Items[index] as EndRepeatBrick).Begin);
+                        _draggingItem.MaxReorderIndex = CalcMaxReorderIndex(index);
+                    }
+                    else if (Items[index] is IfBrick)
+                    {
+                        _draggingItem.MinReorderIndex = CalcMinReorderIndex(index);
+                        _draggingItem.MaxReorderIndex = Items.IndexOf((Items[index] as IfBrick).Else);
+                    }
+                    else if (Items[index] is ElseBrick)
+                    {
+                        _draggingItem.MinReorderIndex = Items.IndexOf((Items[index] as ElseBrick).Begin);
+                        _draggingItem.MaxReorderIndex = Items.IndexOf((Items[index] as ElseBrick).End);
+                    }
+                    else if (Items[index] is EndIfBrick)
+                    {
+                        _draggingItem.MinReorderIndex = Items.IndexOf((Items[index] as EndIfBrick).Else);
+                        _draggingItem.MaxReorderIndex = CalcMaxReorderIndex(index);
+                    }
                 }
 
                 _draggingItem.MinReorderIndex += 1;
                 _draggingItem.MaxReorderIndex -= 1;
+            }
+            CalcInvalidReorderIndexes();
+        }
+
+        private void CalcInvalidReorderIndexes()
+        {
+            _draggingItem.InvalidReorderIndexes = new List<int>();
+
+            for (int i = _draggingItem.MinReorderIndex > 0 ? _draggingItem.MinReorderIndex - 1 : 0;
+                i <= _draggingItem.MaxReorderIndex; i++)
+            {
+                var tmpItem = ContainerFromIndex(i) as CatrobatListViewItem;
+                if (tmpItem != null)
+                {
+                    if (tmpItem.Content is Script && tmpItem.IsGrouped)
+                    {
+                        _draggingItem.InvalidReorderIndexes.Add(i);
+                        for (i++; i <= _draggingItem.MaxReorderIndex; i++)
+                        {
+                            tmpItem = ContainerFromIndex(i) as CatrobatListViewItem;
+                            if (tmpItem != null)
+                            {
+                                _draggingItem.InvalidReorderIndexes.Add(i);
+                                if (tmpItem.Content is Script && tmpItem.IsGrouped == false)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                        continue;
+                    }
+                   
+                }
             }
         }
 
@@ -859,7 +1082,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         {
             for(int i = index; i >= 0; i--)
             {
-                if(Items[i] is Script)
+                if(Items[i] is Script || Items[i] is EndForeverBrick || Items[i] is EndIfBrick || Items[i] is EndRepeatBrick)
                 {
                     return i;
                 }
@@ -867,11 +1090,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             return 0;
         }
 
-        private int CalcMaxReorderIndex(int index)
+        private int CalcMaxReorderIndex(int index, bool forGrouping = false)
         {
             for (int i = index; i < Items.Count; i++)
             {
-                if (Items[i] is Script)
+                if (Items[i] is Script || forGrouping == false && (Items[i] is ForeverBrick || Items[i] is IfBrick || Items[i] is RepeatBrick))
                 {
                     return i;
                 }
@@ -904,7 +1127,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             if (_dragging == CatrobatListViewDragStaus.PrepareDraggin)
             {
                 Items[Items.IndexOf(_originalDragContent.Content)] = _tmpDragContentControl;
-
+                SetTmpDragContentHeight();
                 _manipulationCanvas.Children.Add(tmpItemClone);
                 Canvas.SetLeft(tmpItemClone, ActualWidth - tmpItemClone.Width);
 
@@ -916,12 +1139,13 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
         private CatrobatListViewItem GenerateDraggingItemClone()
         {
-            CatrobatListViewItem tmpItemClone = new CatrobatListViewItem(_verticalItemMargin, this._reorderEnabled, this.SelectionMode);
+            CatrobatListViewItem tmpItemClone = new CatrobatListViewItem(_verticalItemMargin, this._reorderEnabled, this.GroupingEnabled, this.SelectionMode);
             tmpItemClone.Content = _draggingItem.Content;
 
             tmpItemClone.ContentTemplate = this.ItemTemplate;
             tmpItemClone.Style = this.ItemContainerStyle;
             tmpItemClone.Width = ActualWidth * ImageResizeFactor;
+            tmpItemClone.IsGrouped = _draggingItem.IsGrouped;
             return tmpItemClone;
         }
 
@@ -1001,6 +1225,29 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         {
             this.Width = newWidth;
         }
+
+        internal void SetGroupingEnabled(bool value)
+        {
+            this.GroupingEnabled = value;
+
+            if (this.Items == null || _dragCanvas == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < this.Items.Count; i++)
+            {
+                if (!(Items[i] is Script))
+                {
+                    var item = this.ContainerFromIndex(i) as CatrobatListViewItem;
+                    if (item == null)
+                    {
+                        continue;
+                    }
+                    item.SetGrouping(GroupingEnabled);
+                }
+            }
+        }
     }
 
     public class CatrobatListViewItem : ListViewItem
@@ -1017,10 +1264,23 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         private ContentControl _contentContainer;
         private const String ContentContainerName = "ContentContainer";
 
+        private Grid _groupingGrid;
+        private const String GroupingGridName = "GroupingGrid";
+
         private Canvas _clickPreventerCanvas;
         private const String ClickPreventerCanvasName = "ClickPreventerCanvas";
 
+        private Canvas _groupingMinCanvas;
+        private const String GroupingMinCanvasName = "GroupingMinCanvas";
+
+        private Canvas _groupingMaxCanvas;
+        private const String GroupingMaxCanvasName = "GroupingMaxCanvas";
+
+        private ProgressRing _progressRing;
+        private const String ProgressRingName = "CatrobatListViewItemProgressRing";
+
         public bool ReorderEnabled { get; private set; }
+        public bool GroupingEnabled { get; private set; }
         public ListViewSelectionMode SelectionMode;
         private int _verticalItemMargin;
 
@@ -1029,17 +1289,39 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         public int MinReorderIndex { get; set; }
         public int MaxReorderIndex { get; set; }
 
+        public List<int> InvalidReorderIndexes { get; set; } 
+
+        private bool _isGrouped;
+        private bool SelectionEnabled;
+        public bool IsGrouped {
+            get { return _isGrouped; }
+            set
+            {
+                _isGrouped = value;
+                SetGroupingCanvasVisibility();
+            }
+        }
+
+
+
         private readonly bool _visible;
 
-        public CatrobatListViewItem(int verticalItemMargin, bool reorderEnabled, ListViewSelectionMode selectionMode, bool visible = true)
+        public delegate void CatrobatListViewItemEventHandler(object sender, CatrobatListViewEventArgs e);
+        public event CatrobatListViewItemEventHandler ItemGroupEvent;
+
+        public CatrobatListViewItem(int verticalItemMargin, bool reorderEnabled, bool groupingEnabled, ListViewSelectionMode selectionMode, bool visible = true)
         {
             OrigHeight = -1;
             ReorderEnabled = reorderEnabled;
+            GroupingEnabled = groupingEnabled;
             _verticalItemMargin = verticalItemMargin;
             SelectionMode = selectionMode;
             MinReorderIndex = 0;
             MaxReorderIndex = 0;
+            InvalidReorderIndexes = new List<int>();
             _visible = visible;
+            _isGrouped = false;
+            SelectionEnabled = false;
         }
 
 
@@ -1052,9 +1334,14 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             _selectionHandleSelected = GetTemplateChild(SelectionHandleSelectedName) as Canvas;
             _contentContainer = GetTemplateChild(ContentContainerName) as ContentControl;
             _clickPreventerCanvas = GetTemplateChild(ClickPreventerCanvasName) as Canvas;
+            _groupingGrid = GetTemplateChild(GroupingGridName) as Grid;
+            _groupingMaxCanvas = GetTemplateChild(GroupingMaxCanvasName) as Canvas;
+            _groupingMinCanvas = GetTemplateChild(GroupingMinCanvasName) as Canvas;
+            _progressRing = GetTemplateChild(ProgressRingName) as ProgressRing;
 
             if (_dragHandle == null || _selectionHandleSelected == null || _selectionHandleUnselected == null ||
-                _contentContainer == null || _clickPreventerCanvas == null)
+                _contentContainer == null || _clickPreventerCanvas == null || _groupingGrid == null ||
+                _groupingMaxCanvas == null || _groupingMinCanvas == null || _progressRing == null)
             {
                 throw new Exception("Container missing in CatrobatListViewItem");
             }
@@ -1063,7 +1350,14 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             {
                 _selectionHandleUnselected.Margin = new Thickness(0, 22, 0, 0);
                 _selectionHandleSelected.Margin = new Thickness(0, 22, 0, 0);
+                _groupingMaxCanvas.Margin = new Thickness(10, 47, 0, 0);
+                _groupingMinCanvas.Margin = new Thickness(13, 47, 0, 0);
             }
+
+           
+
+            InitGrouping();
+            SetGroupingCanvasVisibility();
 
             SetVerticalMargin(_verticalItemMargin);
             SetReorder(ReorderEnabled);
@@ -1076,6 +1370,73 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
                 this.Opacity = 0;
             }
             this.SizeChanged += CatrobatListViewItem_SizeChanged;
+        }
+
+        private void SetGroupingCanvasVisibility()
+        {
+            if (_groupingMaxCanvas != null)
+            {
+                
+                if (_isGrouped)
+                {
+                    _groupingMinCanvas.Visibility = Visibility.Visible;
+                    _groupingMaxCanvas.Visibility = Visibility.Collapsed;
+                    if (SelectionEnabled)
+                    {
+                        SetUnselected();
+                    }
+                }
+                else
+                {
+                    _groupingMinCanvas.Visibility = Visibility.Collapsed;
+                    _groupingMaxCanvas.Visibility = Visibility.Visible;
+                    if (SelectionEnabled)
+                    {
+                        _selectionHandleUnselected.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+        }
+
+        void _groupingMaxCanvas_LayoutUpdated(object sender, object e)
+        {
+            _groupingMaxCanvas.LayoutUpdated -= _groupingMaxCanvas_LayoutUpdated;
+            _groupingGrid.Tapped += _groupingCanvas_Tapped;
+            _progressRing.Visibility = Visibility.Collapsed;
+        }
+
+        private void InitGrouping()
+        {
+            if (GroupingEnabled && (this.Content is Script || this.Content is ForeverBrick || this.Content is RepeatBrick ||
+                this.Content is IfBrick))
+            {
+                _groupingGrid.Tapped += _groupingCanvas_Tapped;
+                _groupingGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                _groupingGrid.Tapped -= _groupingCanvas_Tapped;
+                _groupingGrid.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        void _groupingCanvas_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            if (ItemGroupEvent != null)
+            {
+                _progressRing.Visibility = Visibility.Visible;
+                _groupingMaxCanvas.Visibility = Visibility.Collapsed;
+                _groupingMinCanvas.Visibility = Visibility.Collapsed;
+                _groupingGrid.Tapped -= _groupingCanvas_Tapped;
+
+                Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                {
+                    await Task.Delay(TimeSpan.FromMilliseconds(1));
+                    ItemGroupEvent(this, null);
+                    _groupingMaxCanvas.LayoutUpdated += _groupingMaxCanvas_LayoutUpdated;
+                });
+            }
+            e.Handled = true;
         }
 
         void CatrobatListViewItem_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -1121,13 +1482,27 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
         internal void EnableSelectionMode()
         {
+            SelectionEnabled = true;
             _dragHandle.Visibility = Visibility.Collapsed;
             _clickPreventerCanvas.Visibility = Visibility.Visible;
+            _contentContainer.Opacity = 0.6;
+
+            if (this.Content is EndForeverBrick ||
+                this.Content is EndIfBrick ||
+                this.Content is ElseBrick ||
+                this.Content is EndRepeatBrick ||
+                ((this.Content is ForeverBrick || this.Content is IfBrick || 
+                this.Content is RepeatBrick || this.Content is Script) 
+                && !this.IsGrouped))
+            {
+                return;
+            }
             SetUnselected();
         }
 
         internal void DissableSelectionMode()
         {
+            SelectionEnabled = false;
             if (this.ReorderEnabled)
             {
                 _dragHandle.Visibility = Visibility.Visible;
@@ -1136,6 +1511,12 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             _selectionHandleSelected.Visibility = Visibility.Collapsed;
             _clickPreventerCanvas.Visibility = Visibility.Collapsed;
             _contentContainer.Opacity = 1;
+        }
+
+        internal void SetGrouping(bool groupingEnabled)
+        {
+            GroupingEnabled = groupingEnabled;
+            InitGrouping();
         }
     }
 
@@ -1168,16 +1549,16 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
     public class CatrobatListViewItemEventArgs : EventArgs
     {
-        private readonly CatrobatListViewItem tappedItem;
+        private readonly CatrobatListViewItem _tappedItem;
 
-        public CatrobatListViewItemEventArgs(CatrobatListViewItem _tappeItem)
+        public CatrobatListViewItemEventArgs(CatrobatListViewItem tappeItem)
         {
-            this.tappedItem = _tappeItem;
+            this._tappedItem = tappeItem;
         }
 
-        public CatrobatListViewItem getTappedItem()
+        public CatrobatListViewItem GetTappedItem()
         {
-            return this.tappedItem;
+            return this._tappedItem;
         }
     }
     public class CatrobatListViewEventArgs : EventArgs
@@ -1186,13 +1567,15 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         private readonly CatrobatListViewDragObject _orignalControl;
         private readonly IList<object> _addedSelectedItems;
         private readonly IList<object> _removedSelectedItems;
+        private readonly IList<object> _groupedItems;
         public CatrobatListViewEventArgs(CatrobatListViewEmptyDummyControl tmpControl, CatrobatListViewDragObject orignalControl,
-            IList<object> addedSelectedItems, IList<object> removedSelectedItems)
+            IList<object> addedSelectedItems, IList<object> removedSelectedItems, IList<object> groupedItems)
         {
             _tmpControl = tmpControl;
             _orignalControl = orignalControl;
             _addedSelectedItems = addedSelectedItems;
             _removedSelectedItems = removedSelectedItems;
+            _groupedItems = groupedItems;
         }
 
         public CatrobatListViewDragObject GetOrignalContent()
@@ -1213,6 +1596,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         public IList<object> GetAddedSelectedItems()
         {
             return _addedSelectedItems;
+        }
+
+        public IList<object> GetGroupedItems()
+        {
+            return _groupedItems;
         }
     }
 }
