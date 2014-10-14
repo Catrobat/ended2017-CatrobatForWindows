@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.ExtensionMethods;
@@ -44,7 +45,63 @@ namespace Catrobat.IDE.Core.Models.Scripts
                 .Select(brick => brick.Clone())
                 .ToObservableCollection();
             result.IsAttached = true;
+
+            combineControlBricks(result.Bricks);
+            
             return result;
+        }
+
+        private void combineControlBricks(ObservableCollection<Brick> bricks)
+        {
+            List<ForeverBrick> beginnForeverBricks = new List<ForeverBrick>();
+            List<RepeatBrick> beginRepeatBricks = new List<RepeatBrick>();
+            List<IfBrick> beginIfBricks = new List<IfBrick>();
+
+
+            for (int i = 0; i < bricks.Count; i++)
+            {
+                if (bricks[i] is ForeverBrick)
+                {
+                    beginnForeverBricks.Add(bricks[i] as ForeverBrick);
+                }
+                else if (bricks[i] is RepeatBrick)
+                {
+                    beginRepeatBricks.Add(bricks[i] as RepeatBrick);
+                }
+                else if (bricks[i] is IfBrick)
+                {
+                    beginIfBricks.Add(bricks[i] as IfBrick);
+                }
+                else if (bricks[i] is EndForeverBrick)
+                {
+                    var tmp = beginnForeverBricks[beginnForeverBricks.Count - 1];
+                    beginnForeverBricks.RemoveAt(beginnForeverBricks.Count - 1);
+                    tmp.End = bricks[i] as EndForeverBrick;
+                    (bricks[i] as EndForeverBrick).Begin = tmp;
+                }
+                else if (bricks[i] is EndRepeatBrick)
+                {
+                    var tmp = beginRepeatBricks[beginRepeatBricks.Count - 1];
+                    beginRepeatBricks.RemoveAt(beginRepeatBricks.Count - 1);
+                    tmp.End = bricks[i] as EndRepeatBrick;
+                    (bricks[i] as EndRepeatBrick).Begin = tmp;
+                }
+                else if (bricks[i] is ElseBrick)
+                {
+                    var tmp = beginIfBricks[beginIfBricks.Count - 1];
+                    tmp.Else = bricks[i] as ElseBrick;
+                    (bricks[i] as ElseBrick).Begin = tmp;
+                }
+                else if (bricks[i] is EndIfBrick)
+                {
+                    var tmp = beginIfBricks[beginIfBricks.Count - 1];
+                    beginIfBricks.RemoveAt(beginIfBricks.Count - 1);
+                    tmp.End = bricks[i] as EndIfBrick;
+                    (bricks[i] as EndIfBrick).Begin = tmp;
+                    tmp.Else.End = bricks[i] as EndIfBrick;
+                    (bricks[i] as EndIfBrick).Else = tmp.Else;
+                }
+            }
         }
 
         object ICloneable<CloneSpriteContext>.CloneInstance(CloneSpriteContext context)
@@ -53,6 +110,9 @@ namespace Catrobat.IDE.Core.Models.Scripts
             result.Bricks = Bricks == null ? null : Bricks
                 .Select(brick => brick.Clone(context))
                 .ToObservableCollection();
+
+            combineControlBricks(result.Bricks);
+
             return result;
         }
 

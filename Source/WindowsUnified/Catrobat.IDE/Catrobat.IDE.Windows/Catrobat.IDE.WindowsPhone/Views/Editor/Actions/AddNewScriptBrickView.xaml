@@ -41,9 +41,9 @@
                 ItemsSource="{Binding BrickCollection}" 
                 ItemTapped="CatrobatListView_OnItemTapped"
                 ReorderEnabled="False"
-                ItemWidthPortrait="380" ItemWidthLandscape="450"
+                GroupingEnabled="False"
+                ItemWidthPortrait="380" ItemWidthLandscape="450" 
             />
-        
         </Grid>
   </Grid>
 </views:ViewPageBase>

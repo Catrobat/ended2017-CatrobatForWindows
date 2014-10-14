@@ -129,7 +129,7 @@
                 <DataTemplate>
                     <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:StartScript}">
                         <actionsControls:MasterBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
-                            <TextBlock VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_WhenProgramStarts, Source={StaticResource LocalizedStrings}}" />
+                            <TextBlock VerticalAlignment="Center" FontSize="24" Margin="30 10 0 10" Text="{Binding Resources.Brick_WhenProgramStarts, Source={StaticResource LocalizedStrings}}" />
                         </actionsControls:MasterBrick>
                     </Grid>
                 </DataTemplate>
@@ -139,7 +139,7 @@
                 <DataTemplate>
                     <Grid Margin="0" d:DataContext="{d:DesignInstance scripts:TappedScript}">
                         <actionsControls:MasterBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
-                            <TextBlock VerticalAlignment="Center" FontSize="24" Margin="10 10 0 10" Text="{Binding Resources.Brick_WhenTapped, Source={StaticResource LocalizedStrings}}" />
+                            <TextBlock VerticalAlignment="Center" FontSize="24" Margin="30 10 0 10" Text="{Binding Resources.Brick_WhenTapped, Source={StaticResource LocalizedStrings}}" />
                         </actionsControls:MasterBrick>
                     </Grid>
                 </DataTemplate>
@@ -156,7 +156,7 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="24" 
-                           Margin="10 10 0 10" Text="{Binding Resources.Brick_WhenIReceive, Source={StaticResource LocalizedStrings}}" />
+                           Margin="30 10 0 10" Text="{Binding Resources.Brick_WhenIReceive, Source={StaticResource LocalizedStrings}}" />
                                 <listPickerControl:ListPicker Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                                      ItemTemplate="{StaticResource ListBoxBroadcastItem}"
                                      PageItemTemplate="{StaticResource PageListBoxBroadcastItem}"
@@ -813,7 +813,7 @@
                         <actionsControls:NormalBrick Background="{ThemeResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
                             <TextBlock VerticalAlignment="Center" 
                          Text="{Binding Resources.Brick_Forever, Source={StaticResource LocalizedStrings}}" 
-                         Margin="10 10 0 10" FontSize="24" />
+                         Margin="30 10 0 10" FontSize="24" />
                         </actionsControls:NormalBrick>
                     </Grid>
                 </DataTemplate>
@@ -897,7 +897,7 @@
 
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Repeat, Source={StaticResource LocalizedStrings}}" 
-                           Margin="10 10 0 10" FontSize="24" />
+                           Margin="30 10 0 10" FontSize="24" />
                                 <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Count, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
                                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 
@@ -986,7 +986,7 @@
 
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                              Text="{Binding Resources.Brick_IfLogicBegin, Source={StaticResource LocalizedStrings}}"
-                             Margin="10 10 0 10" FontSize="24" />
+                             Margin="30 10 0 10" FontSize="24" />
                                 <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Condition, Mode=TwoWay}" 
                                                  IsEnabled="{Binding IsAttached}"/>
                                 <TextBlock Grid.Column="2" VerticalAlignment="Center" 

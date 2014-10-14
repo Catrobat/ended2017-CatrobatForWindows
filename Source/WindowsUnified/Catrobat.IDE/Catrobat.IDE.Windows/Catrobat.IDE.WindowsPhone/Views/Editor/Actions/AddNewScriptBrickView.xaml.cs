@@ -28,7 +28,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Actions
 
         private void CatrobatListView_OnItemTapped(object sender, CatrobatListViewItemEventArgs e)
         {
-            _viewModel.AddNewScriptBrickCommand.Execute(e.getTappedItem().Content as ModelBase);
+            _viewModel.AddNewScriptBrickCommand.Execute(e.GetTappedItem().Content as ModelBase);
         }
     }
 }

@@ -131,7 +131,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
 
                 List<Type> multiBrickBricks = new List<Type> {typeof(ForeverBrick), typeof(RepeatBrick), typeof(IfBrick)};
 
-                if (!multiBrickBricks.Contains(_selectedBrick.GetType()))
+                if (!multiBrickBricks.Contains(_selectedBrick.GetType()) && _selectedBrick is Brick)
                 {
                     (_selectedBrick as Brick).IsNewAdded = true;
                 }
