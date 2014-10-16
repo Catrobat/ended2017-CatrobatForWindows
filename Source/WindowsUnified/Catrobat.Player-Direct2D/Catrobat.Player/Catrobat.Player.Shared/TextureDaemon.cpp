@@ -27,39 +27,6 @@ TextureDaemon::TextureDaemon()
     m_textures = new map<string, CatrobatTexture*>();
 }
 
-
-TextureDaemon::~TextureDaemon()
-{
-}
-
-void TextureDaemon::LoadTexture(ID3D11Device *d3dDevice, CatrobatTexture **texture, string textureKey)
-{
-    map<string, CatrobatTexture*>::iterator existingTexture;
-    existingTexture = m_textures->find(textureKey);
-    string path = ProjectDaemon::Instance()->GetProjectPath() + "/images/" + textureKey;
-    int currentFileSize = GetFileSize(path);
-    int oldFileSize = 0;
-
-    if (existingTexture != m_textures->end() && existingTexture->second != NULL)
-    {
-        oldFileSize = existingTexture->second->fileSize;
-    }
-
-    if (existingTexture == m_textures->end() && currentFileSize != oldFileSize || existingTexture->second == NULL)
-    {
-        //TODO: Check if this needs a copy constructor for already existing textures
-        CatrobatTexture *newTexture = new CatrobatTexture();
-        //DDSLoader::LoadTexture(d3dDevice, path, &(newTexture->texture), &(newTexture->resourceView), &(newTexture->width), &(newTexture->height));
-        newTexture->fileSize = currentFileSize;
-        m_textures->insert(pair<string, CatrobatTexture*>(textureKey, newTexture));
-        *texture = newTexture;
-    }
-    else
-    {
-        *texture = existingTexture->second;
-    }
-}
-
 void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources, CatrobatTexture** texture, std::string textureKey)
 {
     auto deviceContext = deviceResources->GetD2DDeviceContext();
@@ -134,19 +101,5 @@ void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& devi
         alphaMap.push_back(row);
     }
     (*texture)->alphaMap = alphaMap;
-}
-
-int TextureDaemon::GetFileSize(string path)
-{
-    //struct stat filestatus;
-    //int error = stat( path.c_str(), &filestatus );
-    //
-    //if(error != 0)
-    //{
-    //    return 0;
-    //}
-
-    //return filestatus.st_size;
-    return 1;
 }
 
