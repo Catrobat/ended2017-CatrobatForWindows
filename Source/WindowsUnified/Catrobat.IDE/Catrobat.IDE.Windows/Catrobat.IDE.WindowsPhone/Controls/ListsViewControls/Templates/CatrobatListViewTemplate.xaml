@@ -40,7 +40,7 @@
                             Grid.ColumnSpan="2" 
                             HorizontalScrollBarVisibility="Disabled"
                             VerticalScrollBarVisibility="Visible"
-                            Background="{TemplateBinding Background}" IsEnabled="True">
+                            Background="{TemplateBinding Background}" IsEnabled="True" ZoomMode="Disabled">
                             <ItemsPresenter />
                         </ScrollViewer>
                         <Canvas
