@@ -898,7 +898,10 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
         private void ScrollToOffset(double delta)
         {
-            _scrollViewer.ChangeView(null, _scrollViewer.VerticalOffset + delta, null);
+            double tmp = _scrollViewer.VerticalOffset + delta;
+            if (tmp > _scrollViewer.ScrollableHeight)
+                tmp = _scrollViewer.ScrollableHeight;
+            _scrollViewer.ChangeView(null, tmp, null);
         }
 
         private void EndDrag()
