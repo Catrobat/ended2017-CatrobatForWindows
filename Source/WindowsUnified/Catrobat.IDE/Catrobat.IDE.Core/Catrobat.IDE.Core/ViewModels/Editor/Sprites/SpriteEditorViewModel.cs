@@ -505,114 +505,125 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         private void CopyScriptBrickAction()
         {
+            List<ModelBase> alreadyCopied = new List<ModelBase>();
             foreach (var scriptBrick in SelectedActions)
             {
-                if (scriptBrick != null)
+                if (scriptBrick != null && !alreadyCopied.Contains(scriptBrick))
                 {
                     if (scriptBrick is Script)
                     {
                         ModelBase copy = (scriptBrick as Script).Clone();
                         Actions.Insert(Actions.ScriptIndexOf((Script)scriptBrick) + 1, copy);
+                        alreadyCopied.Add(copy);
                     }
 
                     if (scriptBrick is Brick)
                     {
                         List<ModelBase> list = new List<ModelBase>();
-                        CopyBrick(scriptBrick, list);
+                        CopyBrick(scriptBrick, list, alreadyCopied);
                         for (int i = list.Count - 1; i >= 0; i--)
                         {
                             int tmpIndex = Actions.IndexOf(scriptBrick) + list.Count;
+                            if (scriptBrick is BlockBeginBrick)
+                            {
+                                tmpIndex = Actions.IndexOf((scriptBrick as BlockBeginBrick).End) + 1;
+                            }
+                            
                             if (tmpIndex > Actions.Count) tmpIndex = Actions.Count;
                             Actions.Insert(tmpIndex, list[i]);
+                            alreadyCopied.Add(list[i]);
                         }
                     }
                 }
             }
+            SelectedActions.Clear();
         }
 
-        private void CopyBrick(ModelBase scriptBrick, List<ModelBase> list)
+        private void CopyBrick(ModelBase scriptBrick, List<ModelBase> list, List<ModelBase> alreadyCopied)
         {
-            if (scriptBrick is ForeverBrick)
+            if (scriptBrick is BlockBeginBrick && (scriptBrick as BlockBeginBrick).IsGrouped)
             {
-                CopyForeverBrick(scriptBrick as ForeverBrick, list);
+                CopyBlockBrick(scriptBrick as BlockBeginBrick, list, alreadyCopied);
             }
-            else if (scriptBrick is RepeatBrick)
+            else if (scriptBrick is BlockBeginBrick)
             {
-                CopyRepeatBrick(scriptBrick as RepeatBrick, list);
-            }
-            else if (scriptBrick is IfBrick)
-            {
-                CopyIfBrick(scriptBrick as IfBrick, list);
+                CopyBlockBrickNotGrouped(scriptBrick as BlockBeginBrick, list, alreadyCopied);
             }
             else
             {
                 list.Add((scriptBrick as Brick).Clone());
+                alreadyCopied.Add(scriptBrick);
             }
         }
 
-        private void CopyIfBrick(IfBrick scriptBrick, List<ModelBase> list)
+        private void CopyBlockBrickNotGrouped(BlockBeginBrick scriptBrick, List<ModelBase> list, List<ModelBase> alreadyCopied)
         {
-            IfBrick copy = scriptBrick.Clone();
-            ElseBrick copy_else = scriptBrick.Else.Clone();
-            EndIfBrick copy_end = scriptBrick.End.Clone();
-            copy.End = copy_end;
-            copy.Else = copy_else;
-            copy_else.Begin = copy;
-            copy_else.End = copy_end;
-            copy_end.Begin = copy;
-            copy_end.Else = copy_else;
-            list.Add(copy);
+            BlockBeginBrick tmpBlockBeginBrick = scriptBrick.Clone();
+            BlockEndBrick tmpBlockEndBrick = scriptBrick.End.Clone();
+            tmpBlockBeginBrick.End = tmpBlockEndBrick;
+            tmpBlockEndBrick.Begin = tmpBlockBeginBrick;
+            list.Add(tmpBlockBeginBrick);
+            alreadyCopied.Add(scriptBrick);
 
-            for (int i = Actions.IndexOf(scriptBrick) + 1; i < Actions.IndexOf(scriptBrick.End);)
+            for (int i = SelectedActions.IndexOf(scriptBrick) + 1; 
+                i < SelectedActions.IndexOf(scriptBrick.End);)
             {
-                if (Actions[i] is ElseBrick)
+                if (SelectedActions[i] is ElseBrick && scriptBrick is IfBrick)
                 {
-                    list.Add(copy_else);
+                    ElseBrick copyElse = (scriptBrick as IfBrick).Else.Clone();
+                    (tmpBlockBeginBrick as IfBrick).Else = copyElse;
+                    (tmpBlockEndBrick as EndIfBrick).Else = copyElse;
+                    copyElse.Begin = tmpBlockBeginBrick as IfBrick;
+                    copyElse.End = tmpBlockEndBrick as EndIfBrick;
+                    list.Add(copyElse);
+                    alreadyCopied.Add((scriptBrick as IfBrick).Else);
                     i++;
                 }
                 else
                 {
-                    int tmp_count = list.Count;
-                    CopyBrick(Actions[i] as ModelBase, list);
-                    i += (list.Count - tmp_count);
+                    int tmpCount = list.Count;
+                    CopyBrick(SelectedActions[i], list, alreadyCopied);
+                    i += (list.Count - tmpCount);
                 }
-                
             }
-            list.Add(copy_end);
+
+
+            list.Add(tmpBlockEndBrick);
+            alreadyCopied.Add(scriptBrick.End);
         }
 
-        private void CopyRepeatBrick(RepeatBrick scriptBrick, List<ModelBase> list)
+        private void CopyBlockBrick(BlockBeginBrick scriptBrick, List<ModelBase> list, List<ModelBase> alreadyCopied)
         {
-            RepeatBrick copy = scriptBrick.Clone();
-            EndRepeatBrick copy_end = scriptBrick.End.Clone();
-            copy.End = copy_end;
-            copy_end.Begin = copy;
+            BlockBeginBrick copy = scriptBrick.Clone();
+            BlockEndBrick copyEnd = scriptBrick.End.Clone();
+            copy.End = copyEnd;
+            copyEnd.Begin = copy;
+
             list.Add(copy);
+            alreadyCopied.Add(scriptBrick);
 
             for (int i = Actions.IndexOf(scriptBrick) + 1; i < Actions.IndexOf(scriptBrick.End);)
             {
-                int tmp_count = list.Count;
-                CopyBrick(Actions[i] as ModelBase, list);
-                i += (list.Count - tmp_count);
+                if (Actions[i] is ElseBrick && scriptBrick is IfBrick)
+                {
+                    ElseBrick copyElse = (scriptBrick as IfBrick).Else.Clone();
+                    (copy as IfBrick).Else = copyElse;
+                    (copyEnd as EndIfBrick).Else = copyElse;
+                    copyElse.Begin = copy as IfBrick;
+                    copyElse.End = copyEnd as EndIfBrick;
+                    list.Add(copyElse);
+                    alreadyCopied.Add((scriptBrick as IfBrick).Else);
+                    i++;
+                }
+                else
+                {
+                    int tmpCount = list.Count;
+                    CopyBrick(Actions[i] as ModelBase, list, alreadyCopied);
+                    i += (list.Count - tmpCount);
+                }
             }
-            list.Add(copy_end);
-        }
-
-        private void CopyForeverBrick(ForeverBrick scriptBrick, List<ModelBase> list)
-        {
-            ForeverBrick copy = scriptBrick.Clone();
-            EndForeverBrick copy_end = scriptBrick.End.Clone();
-            copy.End = copy_end;
-            copy_end.Begin = copy;
-            list.Add(copy);
-
-            for (int i = Actions.IndexOf(scriptBrick) + 1; i < Actions.IndexOf(scriptBrick.End);)
-            {
-                int tmp_count = list.Count;
-                CopyBrick(Actions[i] as ModelBase, list);
-                i += (list.Count - tmp_count);
-            }
-            list.Add(copy_end);
+            list.Add(copyEnd);
+            alreadyCopied.Add(scriptBrick.End);
         }
 
         private void DeleteScriptBrickAction()
@@ -622,58 +633,24 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
             foreach (var scriptBrick in SelectedActions)
             {
-                ModelBase beginBrick = null;
-                ModelBase endBrick = null;
-
-                if (scriptBrick is IfBrick)
+                if (scriptBrick is Brick)
                 {
-                    beginBrick = scriptBrick;
-                    endBrick = (scriptBrick as IfBrick).End;
-                }
-                else if (scriptBrick is ElseBrick)
-                {
-                    beginBrick = (scriptBrick as ElseBrick).Begin;
-                    endBrick = (scriptBrick as ElseBrick).End;
-                }
-                else if (scriptBrick is EndIfBrick)
-                {
-                    beginBrick = (scriptBrick as EndIfBrick).Begin;
-                    endBrick = scriptBrick;
-                }
-                else if (scriptBrick is BlockBeginBrick)
-                {
-                    beginBrick = scriptBrick;
-                    endBrick = (scriptBrick as BlockBeginBrick).End;
-                }
-                else if (scriptBrick is BlockEndBrick)
-                {
-                    beginBrick = (scriptBrick as BlockEndBrick).Begin;
-                    endBrick = scriptBrick;
-                }
-
-
-                if (scriptBrick is Script && !scriptsToRemove.Contains(scriptBrick as Script))
-                    scriptsToRemove.Add(scriptBrick as Script);
-
-                if (scriptBrick is Brick && !bricksToRemove.Contains(scriptBrick as Brick))
-                    bricksToRemove.Add(scriptBrick as Brick);
-
-                if (beginBrick != null)
-                {
-                    var isToDelete = false;
-                    foreach (var scriptBrickToRemove in Actions)
+                    if (bricksToRemove.Contains((Brick) scriptBrick))
                     {
-                        if (scriptBrickToRemove == beginBrick)
-                            isToDelete = true;
-
-                        if (isToDelete && !bricksToRemove.Contains(scriptBrickToRemove as Brick))
-                        {
-                            bricksToRemove.Add(scriptBrickToRemove as Brick);
-                        }
-
-                        if (scriptBrickToRemove == endBrick)
-                            break;
+                        continue;
                     }
+                    if (scriptBrick is BlockBeginBrick && (scriptBrick as BlockBeginBrick).IsGrouped)
+                    {
+                        DeleteGroupedBlockBrick(scriptBrick as BlockBeginBrick, bricksToRemove);
+                    }
+                    else
+                    {
+                        bricksToRemove.Add(scriptBrick as Brick);
+                    }
+                }
+                else
+                {
+                    scriptsToRemove.Add(scriptBrick as Script);
                 }
             }
 
@@ -685,6 +662,14 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             foreach (var script in scriptsToRemove)
                 Actions.Remove(script);
 
+        }
+
+        private void DeleteGroupedBlockBrick(BlockBeginBrick blockBeginBrick, List<Brick> bricksToRemove)
+        {
+            for (int i = Actions.IndexOf(blockBeginBrick); i <= Actions.IndexOf(blockBeginBrick.End); i++)
+            {
+                bricksToRemove.Add((Brick) Actions[i]);
+            }
         }
 
 

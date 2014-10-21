@@ -79,14 +79,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             base.OnNavigatedFrom(e);
         }
 
-        //private void reorderListBoxScriptBricks_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    if (_viewModel.SelectedBrick != null)
-        //    {
-        //        ReorderListBoxScriptBricks.ScrollIntoView(_viewModel.SelectedBrick);
-        //        _viewModel.SelectedBrick = null;
-        //    }
-        //}
         private void Pivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Contains(PivotActions))
@@ -115,10 +107,10 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             switch (mode)
             {
                 case MultiModeEditorCommandBarMode.Normal:
-                    listView.SelectionMode = ListViewSelectionMode.None;
+                    listView.SelectionEnabled = false;
                     break;
                 case MultiModeEditorCommandBarMode.Select:
-                    listView.SelectionMode = ListViewSelectionMode.Multiple;
+                    listView.SelectionEnabled = true;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("mode");
@@ -127,7 +119,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         private void LookItem_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            var isClickEnabled = ListViewLooks.SelectionMode == ListViewSelectionMode.None;
+            var isClickEnabled = !ListViewLooks.SelectionEnabled;
             if (isClickEnabled)
             {
                 if (_viewModel.EditLookCommand.CanExecute(((FrameworkElement)e.OriginalSource).DataContext))
@@ -138,7 +130,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         private void SoundItem_OnRightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            var isClickEnabled = ListViewSounds.SelectionMode == ListViewSelectionMode.None;
+            var isClickEnabled = !ListViewSounds.SelectionEnabled;
 
             if (isClickEnabled)
                 if (_viewModel.EditSoundCommand.CanExecute(((FrameworkElement)e.OriginalSource).DataContext))

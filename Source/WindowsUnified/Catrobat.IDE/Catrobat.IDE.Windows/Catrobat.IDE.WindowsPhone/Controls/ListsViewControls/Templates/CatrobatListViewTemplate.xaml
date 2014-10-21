@@ -18,6 +18,9 @@
         <Setter 
             Property="Margin"
             Value="10,0,10,0"/>
+        <Setter 
+            Property="SelectionMode"
+            Value="None"/>
         <Setter
             Property="Template">
             <Setter.Value>
@@ -92,10 +95,6 @@
                                     ContentTemplate="{TemplateBinding ContentTemplate}"
                                     Foreground="{TemplateBinding Foreground}"
                                     />
-                        <Canvas Grid.Column="1"
-                                x:Name="ClickPreventerCanvas"
-                                Background="Transparent"
-                                Visibility="Collapsed" />
                         <Grid Grid.Column="0" 
                                 x:Name="GroupingGrid"
                                 Visibility="Collapsed"
@@ -180,6 +179,13 @@
                             </Path>
 
                         </Canvas>
+                        <Canvas Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                x:Name="ClickPreventerCanvas"
+                                Background="Transparent"
+                                Visibility="Collapsed" />
+                        
+                        
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
