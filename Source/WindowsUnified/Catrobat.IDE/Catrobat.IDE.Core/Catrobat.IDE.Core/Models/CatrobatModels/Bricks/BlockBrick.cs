@@ -19,6 +19,13 @@ namespace Catrobat.IDE.Core.Models.Bricks
             set { Set(ref _end, value); }
         }
 
+        private bool _isGrouped;
+        public bool IsGrouped
+        {
+            get { return _isGrouped; }
+            set { _isGrouped = value; }
+        }
+
         #endregion
 
         #region Implements ITestEquatable

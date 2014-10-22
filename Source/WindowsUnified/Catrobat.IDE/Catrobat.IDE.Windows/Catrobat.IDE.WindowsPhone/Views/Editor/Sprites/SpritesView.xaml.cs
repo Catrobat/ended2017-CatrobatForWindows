@@ -30,14 +30,14 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             {
                 case MultiModeEditorCommandBarMode.Normal:
                     listView.ReorderEnabled = false;
-                    listView.SelectionMode = ListViewSelectionMode.None;
+                    listView.SelectionEnabled = false;
                     break;
                 case MultiModeEditorCommandBarMode.Reorder:
-                    listView.SelectionMode = ListViewSelectionMode.None;
+                    listView.SelectionEnabled = false;
                     listView.ReorderEnabled = true;
                     break;
                 case MultiModeEditorCommandBarMode.Select:
-                    listView.SelectionMode = ListViewSelectionMode.Multiple;
+                    listView.SelectionEnabled = true;
                     listView.ReorderEnabled = false;
                     break;
                 default:
@@ -47,8 +47,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         private void SpriteItem_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            var isClickEnabled = /*ListViewSprites.ReorderMode == ListViewReorderMode.Disabled &&*/
-                                 ListViewSprites.SelectionMode == ListViewSelectionMode.None;
+            var isClickEnabled = !ListViewSprites.SelectionEnabled;
 
             if (isClickEnabled)
                 if (_viewModel.EditSpriteCommand.CanExecute(((FrameworkElement)e.OriginalSource).DataContext))
