@@ -22,10 +22,7 @@ TextureDaemon *TextureDaemon::Instance()
     return __instance;
 }
 
-TextureDaemon::TextureDaemon()
-{
-    m_textures = new map<string, CatrobatTexture*>();
-}
+TextureDaemon::TextureDaemon() {}
 
 void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources, CatrobatTexture** texture, std::string textureKey)
 {
