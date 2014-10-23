@@ -17,6 +17,7 @@ private:
 	TextureDaemon();
     ~TextureDaemon();
     TextureDaemon(TextureDaemon &const);
+    TextureDaemon& operator=(TextureDaemon const&);
 
 	static TextureDaemon *__instance;
 };

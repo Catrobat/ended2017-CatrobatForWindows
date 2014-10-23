@@ -17,6 +17,7 @@ using namespace Windows::Phone::UI::Input;
 using namespace Windows::Graphics::Display;
 using namespace std;
 
+#pragma region Singleton
 ProjectDaemon *ProjectDaemon::m_instance = NULL;
 
 ProjectDaemon *ProjectDaemon::Instance()
@@ -29,17 +30,13 @@ ProjectDaemon *ProjectDaemon::Instance()
     return m_instance;
 }
 
-void ProjectDaemon::ReInit()
-{
-    m_instance = new ProjectDaemon();
-}
-
 ProjectDaemon::ProjectDaemon()
 {
     m_projectList = new vector<Platform::String^>();
     m_files = new vector<Platform::String^>();
     m_errorList = new vector<std::string>();
 }
+#pragma endregion
 
 void ProjectDaemon::SetProject(Project *project)
 {
@@ -126,8 +123,6 @@ task<bool> ProjectDaemon::OpenProject(Platform::String^ projectName)
 	});
     return openProjectTask;
 }
-
-// Store necessary values for every object in a separate (initial) object
 
 void ProjectDaemon::SetProjectInitialValues()
 {
@@ -223,24 +218,6 @@ vector<Platform::String^> *ProjectDaemon::GetFileList()
 
     return m_files;
 }
-
-
-//void ProjectDaemon::SetDesiredRenderTargetSize(DrawingSurfaceSizeF *desiredRenderTargetSize)
-//{
-//    m_desiredRenderTargetSize = desiredRenderTargetSize;
-//}
-
-//void ProjectDaemon::ApplyDesiredRenderTargetSizeFromProject()
-//{
-//    m_desiredRenderTargetSize->width = (float) m_project->GetScreenWidth();
-//    m_desiredRenderTargetSize->height = (float) m_project->GetScreenHeight();
-//}
-//
-//void ProjectDaemon::SetupRenderer(ID3D11Device1 *device, ProjectRenderer^ renderer)
-//{
-//    m_device = device;
-//    m_renderer = renderer;
-//}
 
 void ProjectDaemon::AddDebug(Platform::String^ info)
 {
