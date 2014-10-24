@@ -12,8 +12,6 @@ public:
 	~Look();
 
     void LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources);
-	ID3D11ShaderResourceView *GetResourceView();
-    ID3D11Resource* GetTexture();
     ID2D1Bitmap* GetBitMap();
 	std::string GetFileName();
 	std::string GetName();

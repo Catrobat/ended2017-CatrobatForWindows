@@ -22,10 +22,7 @@ TextureDaemon *TextureDaemon::Instance()
     return __instance;
 }
 
-TextureDaemon::TextureDaemon()
-{
-    m_textures = new map<string, CatrobatTexture*>();
-}
+TextureDaemon::TextureDaemon() {}
 
 void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources, CatrobatTexture** texture, std::string textureKey)
 {
@@ -62,7 +59,8 @@ void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& devi
         WICBitmapPaletteTypeCustom);
 
     //create usable ID2D1Bitmap from WIC
-    deviceContext->CreateBitmapFromWicBitmap(converter, NULL, &(*texture)->bitmap);
+    ID2D1Bitmap* bitmap;
+    deviceContext->CreateBitmapFromWicBitmap(converter, NULL, &bitmap);
 
     IWICBitmapFrameDecode *pIDecoderFrame = NULL;
     decoder->GetFrame(0, &pIDecoderFrame);
@@ -70,8 +68,8 @@ void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& devi
     IWICBitmap *pIBitmap = NULL;
     IWICBitmapLock *pILock = NULL;
 
-    UINT uiWidth = (*texture)->bitmap->GetSize().width;
-    UINT uiHeight = (*texture)->bitmap->GetSize().height;
+    UINT uiWidth = bitmap->GetSize().width;
+    UINT uiHeight = bitmap->GetSize().height;
 
     WICRect rcLock = { 0, 0, uiWidth, uiHeight };
 
@@ -100,6 +98,7 @@ void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& devi
         }
         alphaMap.push_back(row);
     }
-    (*texture)->alphaMap = alphaMap;
+    (*texture)->SetAlphaMap(alphaMap);
+    (*texture)->SetBitmap(bitmap);
 }
 

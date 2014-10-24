@@ -28,7 +28,7 @@ unsigned int Look::GetWidth()
     {
         throw new PlayerException("Look::GetWidth called with no texture defined.");
     }
-    return m_texture->bitmap->GetSize().width;
+    return m_texture->GetBitmap()->GetSize().width;
 }
 
 unsigned int Look::GetHeight()
@@ -37,7 +37,7 @@ unsigned int Look::GetHeight()
     {
         throw new PlayerException("Look::GetHeight called with no texture defined.");
     }
-    return m_texture->bitmap->GetSize().height;
+    return m_texture->GetBitmap()->GetSize().height;
 }
 
 string Look::GetFileName()
@@ -50,31 +50,13 @@ void Look::LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResourc
     TextureDaemon::Instance()->LoadTexture(deviceResources, &m_texture, m_filename);
 }
 
-ID3D11ShaderResourceView *Look::GetResourceView()
-{
-    if (m_texture == NULL)
-    {
-        throw new PlayerException("Look::GetResourceView called with no texture defined.");
-    }
-    return m_texture->resourceView;
-}
-
-ID3D11Resource *Look::GetTexture()
-{
-    if (m_texture == NULL)
-    {
-        throw new PlayerException("Look::GetTexture called with no texture defined.");
-    }
-    return m_texture->texture;
-}
-
 ID2D1Bitmap *Look::GetBitMap()
 {
     if (m_texture == NULL)
     {
         throw new PlayerException("Look::GetTexture called with no texture defined.");
     }
-    return m_texture->bitmap;
+    return m_texture->GetBitmap();
 }
 
 int Look::GetPixelAlphaValue(D2D1_POINT_2F position)
@@ -91,10 +73,9 @@ int Look::GetPixelAlphaValue(D2D1_POINT_2F position)
     {
         throw new OutOfBoundsException();
     }
-    else if (m_texture->alphaMap.size() < y || m_texture->alphaMap.at(y).size() < x)
+    else if (m_texture->GetAlphaMap().size() < y || m_texture->GetAlphaMap().at(y).size() < x)
     {
         throw new OutOfBoundsException();
     }
-    int test = m_texture->alphaMap.at(y).at(x);
-    return test;
+    return m_texture->GetAlphaMap().at(y).at(x);
 }

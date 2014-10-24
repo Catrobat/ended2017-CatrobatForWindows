@@ -10,7 +10,6 @@ class ProjectDaemon
 public:
 	static ProjectDaemon *Instance();
     
-    void ReInit();
 	void SetProject(Project *project);
 	Project *GetProject();
 	std::string GetProjectPath();
@@ -33,6 +32,7 @@ private:
 
 	static ProjectDaemon *m_instance;
 
+private:
 	Project *m_project;
 	std::string m_projectPath;
 	std::vector<Platform::String ^> *m_projectList;
