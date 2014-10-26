@@ -454,7 +454,7 @@ Object *XMLParser::ParseObject(xml_node<> *baseNode)
 
 //----------------------------------------------------------------------
 
-Look *XMLParser::ParseLook(xml_node<> *baseNode)
+shared_ptr<Look> XMLParser::ParseLook(xml_node<> *baseNode)
 {
     string filename, name;
     xml_node<> *node;
@@ -475,9 +475,7 @@ Look *XMLParser::ParseLook(xml_node<> *baseNode)
     }
 
     name = node->value();
-
-    Look *look = new Look(filename, name);
-    return look;
+    return shared_ptr<Look>(new Look(filename, name));
 }
 
 //----------------------------------------------------------------------

@@ -35,7 +35,7 @@ private:
 
 	void									ParseObjectList					(rapidxml::xml_document<> *doc, ObjectList *objectList);
 	Object*									ParseObject						(rapidxml::xml_node<> *baseNode);
-	Look*									ParseLook						(rapidxml::xml_node<> *baseNode);
+	std::shared_ptr<Look>					ParseLook						(rapidxml::xml_node<> *baseNode);
 
 	Script*									ParseStartScript				(rapidxml::xml_node<> *baseNode, Object *object);
 	Script*									ParseBroadcastScript			(rapidxml::xml_node<> *baseNode, Object *object);
