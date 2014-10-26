@@ -3,7 +3,7 @@
 #include "Script.h"
 #include "Object.h"
 
-HideBrick::HideBrick(Script *parent) :
+HideBrick::HideBrick(std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::HideBrick, parent)
 {
 }

@@ -14,7 +14,7 @@ class IfBrick :
 	public ContainerBrick
 {
 public:
-	IfBrick(FormulaTree *condition, Script *parent);
+	IfBrick(FormulaTree *condition, std::shared_ptr<Script> parent);
 	~IfBrick(void);
 
 	void Execute();

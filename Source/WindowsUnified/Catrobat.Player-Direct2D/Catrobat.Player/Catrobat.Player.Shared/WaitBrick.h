@@ -7,7 +7,7 @@ class WaitBrick :
 	public Brick
 {
 public:
-	WaitBrick(FormulaTree *timeToWaitInSeconds, Script *parent);
+	WaitBrick(FormulaTree *timeToWaitInSeconds, std::shared_ptr<Script> parent);
 	void Execute();
 private:
 	FormulaTree *m_timeToWaitInSeconds;

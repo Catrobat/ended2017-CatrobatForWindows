@@ -4,7 +4,7 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-PointToBrick::PointToBrick(FormulaTree *rotation, Script *parent) :
+PointToBrick::PointToBrick(FormulaTree *rotation, std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::PointToBrick, parent),
 	m_rotation(rotation)
 {

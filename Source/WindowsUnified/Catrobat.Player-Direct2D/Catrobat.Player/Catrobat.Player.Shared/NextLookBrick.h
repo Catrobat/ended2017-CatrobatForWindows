@@ -6,6 +6,6 @@ class NextLookBrick :
 	public Brick
 {
 public:
-	NextLookBrick(Script *parent);
+	NextLookBrick(std::shared_ptr<Script> parent);
 	void Execute();
 };

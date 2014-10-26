@@ -3,7 +3,7 @@
 #include "FormulaTree.h"
 #include "Helper.h"
 
-ChangeVariableBrick::ChangeVariableBrick(FormulaTree *variableFormula, Script *parent)
+ChangeVariableBrick::ChangeVariableBrick(FormulaTree *variableFormula, std::shared_ptr<Script> parent)
 	: VariableManagementBrick(TypeOfBrick::SetVariableBrick, variableFormula, parent)
 {
 }

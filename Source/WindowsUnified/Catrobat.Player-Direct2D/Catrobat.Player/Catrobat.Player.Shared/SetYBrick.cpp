@@ -4,7 +4,7 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-SetYBrick::SetYBrick(FormulaTree *positionY, Script *parent) :
+SetYBrick::SetYBrick(FormulaTree *positionY,std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::SetYBrick, parent),
 	m_positionY(positionY)
 {

@@ -8,7 +8,7 @@
 #include <ppltasks.h>
 
 
-MoveNStepsBrick::MoveNStepsBrick(FormulaTree *steps, Script *parent) :
+MoveNStepsBrick::MoveNStepsBrick(FormulaTree *steps, std::shared_ptr<Script> parent) :
 Brick(TypeOfBrick::MoveNStepsBrick, parent),
 m_steps(steps)
 {

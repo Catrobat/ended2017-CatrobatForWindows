@@ -8,7 +8,7 @@ class RepeatBrick :
 	public ContainerBrick
 {
 public:
-	RepeatBrick(FormulaTree *times, Script *parent);
+	RepeatBrick(FormulaTree *times, std::shared_ptr<Script> parent);
 	~RepeatBrick(void);
 
 	void Execute();

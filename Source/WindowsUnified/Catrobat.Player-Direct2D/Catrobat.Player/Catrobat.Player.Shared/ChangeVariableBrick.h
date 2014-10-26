@@ -6,7 +6,7 @@ class ChangeVariableBrick
 	: public VariableManagementBrick
 {
 public:
-	ChangeVariableBrick(FormulaTree *variableFormula, Script *parent);
+	ChangeVariableBrick(FormulaTree *variableFormula, std::shared_ptr<Script> parent);
 	void Execute();
 };
 

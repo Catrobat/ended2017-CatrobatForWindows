@@ -4,7 +4,7 @@
 #include <ppltasks.h>
 #include "Interpreter.h"
 
-WaitBrick::WaitBrick(FormulaTree *timeToWaitInSeconds, Script *parent) :
+WaitBrick::WaitBrick(FormulaTree *timeToWaitInSeconds, std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::WaitBrick, parent), m_timeToWaitInSeconds(timeToWaitInSeconds)
 {
 }

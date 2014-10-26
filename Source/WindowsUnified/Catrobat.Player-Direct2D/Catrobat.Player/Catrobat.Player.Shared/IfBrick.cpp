@@ -4,7 +4,7 @@
 
 using namespace std;
 
-IfBrick::IfBrick(FormulaTree *condition, Script *parent) :
+IfBrick::IfBrick(FormulaTree *condition, std::shared_ptr<Script> parent) :
 	ContainerBrick(TypeOfBrick::ContainerBrick, parent), m_condition(condition)
 {
 	m_ifList = new list<Brick*>();

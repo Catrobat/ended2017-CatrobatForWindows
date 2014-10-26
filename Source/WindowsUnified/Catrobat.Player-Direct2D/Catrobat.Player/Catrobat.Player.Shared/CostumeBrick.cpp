@@ -3,12 +3,12 @@
 #include "Script.h"
 #include "Object.h"
 
-CostumeBrick::CostumeBrick(std::string costumeDataReference, int index, Script *parent) :
+CostumeBrick::CostumeBrick(std::string costumeDataReference, int index, std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::CostumeBrick, parent), m_costumeDataReference(costumeDataReference), m_index(index)
 {
 }
 
-CostumeBrick::CostumeBrick(Script *parent) :
+CostumeBrick::CostumeBrick(std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::CostumeBrick, parent), m_index(0)
 {
 }

@@ -2,7 +2,7 @@
 #include "BroadcastBrick.h"
 #include "BroadcastMessageDaemon.h"
 
-BroadcastBrick::BroadcastBrick(std::string broadcastMessage, Script *parent)
+BroadcastBrick::BroadcastBrick(std::string broadcastMessage, std::shared_ptr<Script> parent)
 	: Brick(TypeOfBrick::BroadcastBrick,parent), m_broadcastMessage(broadcastMessage)
 {
 }

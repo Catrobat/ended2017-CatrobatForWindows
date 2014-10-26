@@ -3,7 +3,7 @@
 #include "Script.h"
 #include "Object.h"
 
-NextLookBrick::NextLookBrick(Script *parent) :
+NextLookBrick::NextLookBrick(std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::NextlookBrick, parent)
 {
 }

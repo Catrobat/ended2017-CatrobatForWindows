@@ -6,7 +6,7 @@ class PointToBrick :
 	public Brick
 {
 public:
-	PointToBrick(FormulaTree *rotation, Script *parent);
+	PointToBrick(FormulaTree *rotation, std::shared_ptr<Script> parent);
 	void Execute();
 private:
 	FormulaTree *m_rotation;

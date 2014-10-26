@@ -38,15 +38,15 @@ public:
 		SetVariableBrick
 	};
 
-	Script *GetParent();
+	std::shared_ptr<Script> GetParent();
 
 	virtual void Execute() = 0;
 
 	TypeOfBrick GetBrickType();
 
 protected:
-	Brick(TypeOfBrick brickType, Script *parent);
-	Script *m_parent;
+	Brick(TypeOfBrick brickType, std::shared_ptr<Script> parent);
+	std::shared_ptr<Script> m_parent;
 
 private:
 	TypeOfBrick m_brickType;

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-RepeatBrick::RepeatBrick(FormulaTree *times, Script *parent) :
+RepeatBrick::RepeatBrick(FormulaTree *times, std::shared_ptr<Script> parent) :
 	ContainerBrick(TypeOfBrick::ContainerBrick, parent), m_timesToRepeat(times)
 {
 	m_brickList = new list<Brick*>();

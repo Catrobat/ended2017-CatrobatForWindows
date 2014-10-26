@@ -4,7 +4,7 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-ChangeGhostEffectByBrick::ChangeGhostEffectByBrick(FormulaTree *transparency, Script *parent) :
+ChangeGhostEffectByBrick::ChangeGhostEffectByBrick(FormulaTree *transparency, std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::ChangeGhostEffectByBrick, parent),
 	m_transparency(transparency)
 {

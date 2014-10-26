@@ -4,7 +4,7 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-ChangeXByBrick::ChangeXByBrick(FormulaTree *offsetX, Script *parent) :
+ChangeXByBrick::ChangeXByBrick(FormulaTree *offsetX, std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::ChangeXByBrick, parent),
 	m_offsetX(offsetX)
 {
