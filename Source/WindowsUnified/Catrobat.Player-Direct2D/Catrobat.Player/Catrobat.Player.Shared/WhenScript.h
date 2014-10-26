@@ -12,7 +12,7 @@ public:
 	};
 
 	WhenScript(std::string action, Object *parent);
-	~WhenScript();
+
 	int GetAction();
 
 private:

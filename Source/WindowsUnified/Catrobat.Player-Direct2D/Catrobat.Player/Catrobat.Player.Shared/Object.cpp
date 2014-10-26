@@ -223,6 +223,17 @@ int Object::GetIndexOfCurrentLook()
     }
     return distance(m_lookList.begin(), it);
 }
+
+shared_ptr<Script> Object::GetScript(int index)
+{
+    if (m_scripts.size() > index)
+    {
+        list<shared_ptr<Script>>::iterator it = m_scripts.begin();
+        advance(it, index);
+        return *it;
+    }
+    return nullptr;
+}
 #pragma endregion
 
 #pragma region INTERNAL

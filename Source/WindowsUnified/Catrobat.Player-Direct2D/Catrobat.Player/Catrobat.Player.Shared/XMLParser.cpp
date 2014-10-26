@@ -482,7 +482,7 @@ shared_ptr<Look> XMLParser::ParseLook(xml_node<> *baseNode)
 
 shared_ptr<Script> XMLParser::ParseStartScript(xml_node<> *baseNode, Object *object)
 {
-    shared_ptr<StartScript> script(new shared_ptr<StartScript>(object));
+    shared_ptr<StartScript> script(new StartScript(object));
 	ParseBrickList(baseNode, script);
 	return script;
 }
@@ -498,7 +498,7 @@ shared_ptr<Script> XMLParser::ParseBroadcastScript(xml_node<> *baseNode, Object 
         throw new XMLParserException("<broadcastScript><receivedMessage></broadcastScript> element missing.");
     }
 
-    shared_ptr<BroadcastScript>script(new shared_ptr<BroadcastScript>(messageNode->value(), object));
+    shared_ptr<BroadcastScript>script(new BroadcastScript(messageNode->value(), object));
     ParseBrickList(baseNode, script);
     return script;
 }
@@ -514,7 +514,7 @@ shared_ptr<Script> XMLParser::ParseWhenScript(xml_node<> *baseNode, Object *obje
         throw new XMLParserException("<whenScript><action></whenScript> element missing.");
     }
 
-    shared_ptr<WhenScript>script(new shared_ptr<WhenScript>(actionNode->value(), object));
+    shared_ptr<WhenScript>script(new WhenScript(actionNode->value(), object));
 	ParseBrickList(baseNode, script);
 
     return script;
