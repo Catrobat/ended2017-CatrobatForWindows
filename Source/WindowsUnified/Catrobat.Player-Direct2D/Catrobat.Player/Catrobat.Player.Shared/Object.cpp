@@ -22,7 +22,6 @@ m_ratio(SizeF()),
 m_logicalSize(SizeF()),
 m_renderTargetSize(SizeF())
 {
-    m_scripts = new std::list<Script*>();
     m_soundInfos = new std::list<SoundInfo*>();
     m_variableList = new std::map<std::string, UserVariable*>();
 }
@@ -103,9 +102,9 @@ void Object::AddLook(shared_ptr<Look> lookData)
     m_lookList.push_back(lookData);
 }
 
-void Object::AddScript(Script *script)
+void Object::AddScript(shared_ptr<Script> script)
 {
-    m_scripts->push_back(script);
+    m_scripts.push_back(script);
 }
 
 void Object::AddSoundInfo(SoundInfo *soundInfo)
@@ -158,10 +157,8 @@ void Object::StartUp()
 {
     SetLook(0);
 
-    for (int i = 0; i < GetScriptListSize(); i++)
+    for (auto const& script : m_scripts)
     {
-        Script *script = GetScript(i);
-
         if (script->GetType() == Script::TypeOfScript::StartScript)
         {
             script->Execute();
@@ -193,14 +190,7 @@ std::string Object::GetName()
 
 int Object::GetScriptListSize()
 {
-    return m_scripts->size();
-}
-
-Script *Object::GetScript(int index)
-{
-    std::list<Script*>::iterator it = m_scripts->begin();
-    advance(it, index);
-    return *it;
+    return m_scripts.size();
 }
 
 UserVariable* Object::GetVariable(std::string name)

@@ -32,7 +32,7 @@ public:
 
 public:
     void AddLook(std::shared_ptr<Look> lookData);
-    void AddScript(Script *script);
+    void AddScript(std::shared_ptr<Script> script);
     void AddSoundInfo(SoundInfo *soundInfo);
     void AddVariable(std::string name, UserVariable *variable);
     void AddVariable(std::pair<std::string, UserVariable*> variable);
@@ -50,7 +50,7 @@ public:
     std::list<SoundInfo*>* GetSoundInfos() { return m_soundInfos; };
 
     int GetScriptListSize();
-    Script *GetScript(int index);
+    std::shared_ptr<Script> GetScript(int index);
 
     UserVariable *GetVariable(std::string name);
 
@@ -64,7 +64,7 @@ private:
 
     std::shared_ptr<Look> m_look;
     std::list<std::shared_ptr<Look>> m_lookList;
-    std::list<Script*> *m_scripts;
+    std::list<std::shared_ptr<Script>> m_scripts;
     std::list<SoundInfo*> *m_soundInfos;
     std::map<std::string, UserVariable*> *m_variableList;
 

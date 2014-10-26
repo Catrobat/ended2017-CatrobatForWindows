@@ -47,7 +47,7 @@ using namespace rapidxml;
 
 XMLParser::XMLParser()
 {
-    m_containerStack = new std::vector<ContainerBrick*>();
+    m_containerStack = new vector<ContainerBrick*>();
     m_pendingVariables = new map<VariableManagementBrick*, string>();
 }
 
@@ -480,16 +480,16 @@ shared_ptr<Look> XMLParser::ParseLook(xml_node<> *baseNode)
 
 //----------------------------------------------------------------------
 
-Script *XMLParser::ParseStartScript(xml_node<> *baseNode, Object *object)
+shared_ptr<Script> XMLParser::ParseStartScript(xml_node<> *baseNode, Object *object)
 {
-	auto script = new StartScript(object);
+    shared_ptr<StartScript> script(new shared_ptr<StartScript>(object));
 	ParseBrickList(baseNode, script);
 	return script;
 }
 
 //----------------------------------------------------------------------
 
-Script *XMLParser::ParseBroadcastScript(xml_node<> *baseNode, Object *object)
+shared_ptr<Script> XMLParser::ParseBroadcastScript(xml_node<> *baseNode, Object *object)
 {
     xml_node<> *messageNode = baseNode->first_node(Constants::XMLParser::Script::ReceivedMessage.c_str());
 
@@ -498,14 +498,14 @@ Script *XMLParser::ParseBroadcastScript(xml_node<> *baseNode, Object *object)
         throw new XMLParserException("<broadcastScript><receivedMessage></broadcastScript> element missing.");
     }
 
-    BroadcastScript *script = new BroadcastScript(messageNode->value(), object);
+    shared_ptr<BroadcastScript>script(new shared_ptr<BroadcastScript>(messageNode->value(), object));
     ParseBrickList(baseNode, script);
     return script;
 }
 
 //----------------------------------------------------------------------
 
-Script *XMLParser::ParseWhenScript(xml_node<> *baseNode, Object *object)
+shared_ptr<Script> XMLParser::ParseWhenScript(xml_node<> *baseNode, Object *object)
 {
 	auto actionNode = baseNode->first_node(Constants::XMLParser::Object::Action.c_str());
 
@@ -514,7 +514,7 @@ Script *XMLParser::ParseWhenScript(xml_node<> *baseNode, Object *object)
         throw new XMLParserException("<whenScript><action></whenScript> element missing.");
     }
 
-	auto script = new WhenScript(actionNode->value(), object);
+    shared_ptr<WhenScript>script(new shared_ptr<WhenScript>(actionNode->value(), object));
 	ParseBrickList(baseNode, script);
 
     return script;
@@ -522,7 +522,7 @@ Script *XMLParser::ParseWhenScript(xml_node<> *baseNode, Object *object)
 
 //----------------------------------------------------------------------
 
-void XMLParser::ParseBrickList(xml_node<> *baseNode, Script *script)
+void XMLParser::ParseBrickList(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     auto brickListNode = baseNode->first_node(Constants::XMLParser::Object::BrickList.c_str());
 
@@ -688,7 +688,7 @@ void XMLParser::ParseBrickList(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseLookBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseLookBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *lookNode =  baseNode->first_node(Constants::XMLParser::Object::Look.c_str());
 
@@ -722,21 +722,21 @@ Brick *XMLParser::ParseLookBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseHideBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseHideBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     return new HideBrick(script);
 }
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseShowBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseShowBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     return new ShowBrick(script);
 }
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseIfLogicBeginBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseIfLogicBeginBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     auto node = baseNode->first_node(Constants::XMLParser::Brick::IfCondition.c_str());
 
@@ -760,7 +760,7 @@ Brick *XMLParser::ParseIfLogicBeginBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseForeverBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseForeverBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     auto brick = new ForeverBrick(script);
 
@@ -769,7 +769,7 @@ Brick *XMLParser::ParseForeverBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-void XMLParser::ParseForeverEndBrick(xml_node<> *baseNode, Script *script)
+void XMLParser::ParseForeverEndBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     if (m_containerStack->size() > 0)
     {
@@ -780,7 +780,7 @@ void XMLParser::ParseForeverEndBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseRepeatBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseRepeatBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     auto node = baseNode->first_node(Constants::XMLParser::Brick::TimesToRepeat.c_str());
 
@@ -804,7 +804,7 @@ Brick *XMLParser::ParseRepeatBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-void XMLParser::ParseRepeatEndBrick(xml_node<> *baseNode, Script *script)
+void XMLParser::ParseRepeatEndBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     if (m_containerStack->size() > 0)
     {
@@ -815,7 +815,7 @@ void XMLParser::ParseRepeatEndBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-void XMLParser::ParseIfLogicElseBrick(xml_node<> *baseNode, Script *script)
+void XMLParser::ParseIfLogicElseBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     if (m_containerStack->size() > 0)
     {
@@ -826,7 +826,7 @@ void XMLParser::ParseIfLogicElseBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-void XMLParser::ParseIfLogicEndBrick(xml_node<> *baseNode, Script *script)
+void XMLParser::ParseIfLogicEndBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     if (m_containerStack->size() > 0)
     {
@@ -837,7 +837,7 @@ void XMLParser::ParseIfLogicEndBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseWaitBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseWaitBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::TimeToWaitInSeconds.c_str());
 
@@ -859,7 +859,7 @@ Brick *XMLParser::ParseWaitBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseChangeGhostEffectByNBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseChangeGhostEffectByNBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::ChangeGhostEffect.c_str());
 
@@ -881,7 +881,7 @@ Brick *XMLParser::ParseChangeGhostEffectByNBrick(xml_node<> *baseNode, Script *s
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseSetSizeToBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseSetSizeToBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Size.c_str());
 
@@ -903,7 +903,7 @@ Brick *XMLParser::ParseSetSizeToBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseChangeSizeByNBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseChangeSizeByNBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Size.c_str());
 
@@ -925,7 +925,7 @@ Brick *XMLParser::ParseChangeSizeByNBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseNextLookBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseNextLookBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     //xml_node<> *node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
 
@@ -939,7 +939,7 @@ Brick *XMLParser::ParseNextLookBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseSetXBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseSetXBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::XPosition.c_str());
 
@@ -961,7 +961,7 @@ Brick *XMLParser::ParseSetXBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseSetYBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseSetYBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::YPosition.c_str());
 
@@ -983,7 +983,7 @@ Brick *XMLParser::ParseSetYBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseChangeXByNBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseChangeXByNBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::XMovement.c_str());
 
@@ -1005,7 +1005,7 @@ Brick *XMLParser::ParseChangeXByNBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseChangeYByNBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseChangeYByNBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::YMovement.c_str());
 
@@ -1027,7 +1027,7 @@ Brick *XMLParser::ParseChangeYByNBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParsePointInDirectionBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParsePointInDirectionBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Degrees.c_str());
 
@@ -1049,7 +1049,7 @@ Brick *XMLParser::ParsePointInDirectionBrick(xml_node<> *baseNode, Script *scrip
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseTurnLeftBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseTurnLeftBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Degrees.c_str());
 
@@ -1071,7 +1071,7 @@ Brick *XMLParser::ParseTurnLeftBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseTurnRightBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseTurnRightBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Degrees.c_str());
 
@@ -1093,7 +1093,7 @@ Brick *XMLParser::ParseTurnRightBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParsePlaceAtBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParsePlaceAtBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::XPosition.c_str());
 
@@ -1130,7 +1130,7 @@ Brick *XMLParser::ParsePlaceAtBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseGlideToBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseGlideToBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::XDestination.c_str());
 
@@ -1182,7 +1182,7 @@ Brick *XMLParser::ParseGlideToBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseSetGhostEffectBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Transparency.c_str());
 
@@ -1204,7 +1204,7 @@ Brick *XMLParser::ParseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseBroadcastBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseBroadcastBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::BroadcastMessage.c_str());
 
@@ -1220,7 +1220,7 @@ Brick *XMLParser::ParseBroadcastBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParsePlaySoundBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParsePlaySoundBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *soundInfoNode = baseNode->first_node(Constants::XMLParser::Brick::Sound.c_str());
 
@@ -1251,7 +1251,7 @@ Brick *XMLParser::ParsePlaySoundBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseSetVariableBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseSetVariableBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
 	auto node = baseNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
 
@@ -1312,7 +1312,7 @@ Brick *XMLParser::ParseSetVariableBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseChangeVariableBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseChangeVariableBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
 
@@ -1372,7 +1372,7 @@ Brick *XMLParser::ParseChangeVariableBrick(xml_node<> *baseNode, Script *script)
 
 //----------------------------------------------------------------------
 
-Brick *XMLParser::ParseMoveNStepsBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseMoveNStepsBrick(xml_node<> *baseNode, shared_ptr<Script> script)
 {
 	auto node = baseNode->first_node(Constants::XMLParser::Brick::Steps.c_str());
 

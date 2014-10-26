@@ -8,6 +8,8 @@
 #include <windows.h>
 #include <wincodec.h>
 
+using namespace std;
+
 Basic2DRenderer::Basic2DRenderer(const std::shared_ptr<DX::DeviceResources>& deviceResources) :
 m_deviceResources(deviceResources)
 {
@@ -55,10 +57,10 @@ void Basic2DRenderer::PointerPressed(D2D1_POINT_2F point)
         {
             for (int scriptIndex = 0; scriptIndex < object->GetScriptListSize(); scriptIndex++)
             {
-                Script *script = object->GetScript(scriptIndex);
+                shared_ptr<Script> script = object->GetScript(scriptIndex);
                 if (script->GetType() == Script::TypeOfScript::WhenScript)
                 {
-                    WhenScript *whenScript = ((WhenScript*) script);
+                    shared_ptr<WhenScript> whenScript = dynamic_pointer_cast<WhenScript>(script);
                     if (whenScript->GetAction() == WhenScript::Action::Tapped)
                     {
                         whenScript->Execute();
