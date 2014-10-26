@@ -8,10 +8,11 @@
 #include <math.h>
 
 using namespace D2D1;
+using namespace std;
 
 Object::Object(std::string name) :
 m_name(name),
-m_look(NULL),
+m_look(nullptr),
 m_opacity(1.f),
 m_rotation(0.f),
 m_translation(Point2F()),
@@ -21,7 +22,6 @@ m_ratio(SizeF()),
 m_logicalSize(SizeF()),
 m_renderTargetSize(SizeF())
 {
-    m_lookList = new std::list<Look*>();
     m_scripts = new std::list<Script*>();
     m_soundInfos = new std::list<SoundInfo*>();
     m_variableList = new std::map<std::string, UserVariable*>();
@@ -98,9 +98,9 @@ void Object::GetScale(float &x, float &y)
 #pragma endregion
 
 #pragma region GENERAL
-void Object::AddLook(Look *lookData)
+void Object::AddLook(shared_ptr<Look> lookData)
 {
-    m_lookList->push_back(lookData);
+    m_lookList.push_back(lookData);
 }
 
 void Object::AddScript(Script *script)
@@ -124,8 +124,13 @@ void Object::AddVariable(std::pair<std::string, UserVariable*> variable)
 
 void Object::SetLook(int index)
 {
-    m_look = GetLook(index);
-    RecalculateTransformation();
+    if (m_lookList.size() > index)
+    {
+        list<shared_ptr<Look>>::iterator it = m_lookList.begin();
+        advance(it, index);
+        m_look = *it;
+        RecalculateTransformation();
+    }
 }
 #pragma endregion
 
@@ -134,14 +139,9 @@ void Object::LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceReso
 {
     SetTranslation(0.f, 0.f);
 
-    for (int i = 0; i < GetLookDataListSize(); i++)
+    for (auto const& look : m_lookList)
     {
-        m_look = GetLook(i);
-
-        if (m_look != NULL)
-        {
-            m_look->LoadTexture(deviceResources);
-        }
+        look->LoadTexture(deviceResources);
     }
 }
 
@@ -156,10 +156,7 @@ void Object::SetupWindowSizeDependentResources(const std::shared_ptr<DX::DeviceR
 
 void Object::StartUp()
 {
-    if (m_lookList != NULL && m_lookList->size() > 0)
-    {
-        m_look = m_lookList->front();
-    }
+    SetLook(0);
 
     for (int i = 0; i < GetScriptListSize(); i++)
     {
@@ -218,56 +215,23 @@ UserVariable* Object::GetVariable(std::string name)
     return NULL;
 }
 
-int Object::GetLookDataListSize()
+int Object::GetLookListSize()
 {
-    return m_lookList->size();
+    return m_lookList.size();
 }
 
-Look *Object::GetLook(int index)
+int Object::GetIndexOfCurrentLook()
 {
-    std::list<Look*>::iterator it = m_lookList->begin();
-    advance(it, index);
-
-    if (it != m_lookList->end())
+    list<shared_ptr<Look>>::iterator it = m_lookList.begin();
+    if (it == m_lookList.end())
     {
-        return *it;
+        throw new PlayerException("LookList empty! No current look available.");
     }
-
-    return NULL;
-}
-
-int Object::GetLook()
-{
-    int i = 0;
-    std::list<Look*>::iterator it = m_lookList->begin();
-
     while ((*it) != m_look)
     {
         it++;
-        i++;
     }
-
-    if (it != m_lookList->end())
-    {
-        return i;
-    }
-
-    return 0;
-}
-
-int Object::GetLookCount()
-{
-    return m_lookList->size();
-}
-
-Look* Object::GetCurrentLook()
-{
-    if (!m_look)
-    {
-        return GetLook(0);
-    }
-
-    return m_look;
+    return distance(m_lookList.begin(), it);
 }
 #pragma endregion
 

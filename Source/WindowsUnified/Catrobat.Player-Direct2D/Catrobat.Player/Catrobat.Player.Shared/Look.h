@@ -9,7 +9,6 @@ class Look
 {
 public:
 	Look(std::string filename, std::string name);
-	~Look();
 
     void LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources);
     ID2D1Bitmap* GetBitMap();
