@@ -116,6 +116,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     currentImage.Width *= widthMultiplicator;
                 }
             }
+
+            btnSelectedBorderColor.Background = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
         }
 
         private void btnSelectedColor_Click(object sender, RoutedEventArgs e)
@@ -164,13 +166,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectFillColor.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
         }
 
-        public int getHeight()
+        public double getHeight()
         {
             int return_value = 0;
             return return_value = tbHeightValue.Text != string.Empty ? Convert.ToInt32(tbHeightValue.Text) : _last_valid_height;
         }
 
-        public int getWidth()
+        public double getWidth()
         {
             int return_value = 0;
             return return_value = tbWidthValue.Text != string.Empty ? Convert.ToInt32(tbWidthValue.Text) : _last_valid_width;
@@ -262,7 +264,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             tbHeightValue.Text = _last_valid_width.ToString();
         }
 
-        public int setTbHeightValue
+        public double setTbHeightValue
         {
             get
             {
@@ -274,7 +276,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        public int setTbWidthValue
+        public double setTbWidthValue
         {
             get
             {

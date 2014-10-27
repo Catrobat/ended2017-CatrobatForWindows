@@ -131,18 +131,20 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void Draw(object o)
         {
-            if (!(o is Point))
-            {
-                return;
-            }
+            //if (!(o is Point))
+            //{
+            //    return;
+            //}
 
+           // TransformGroup _transformGroup = (TransformGroup)rectangleToDraw.RenderTransform;
             var coordinate = (Point)o;
 
-            int height = PocketPaintApplication.GetInstance().BarRecEllShape.getHeight();
-            int width = PocketPaintApplication.GetInstance().BarRecEllShape.getWidth();
+            double height = PocketPaintApplication.GetInstance().BarRecEllShape.getHeight();
+            double width = PocketPaintApplication.GetInstance().BarRecEllShape.getWidth();
 
             RectangleGeometry myRectangleGeometry = new RectangleGeometry();
             myRectangleGeometry.Rect = new Rect(coordinate, new Point(coordinate.X + width, coordinate.Y + height));
+            
 
             _path = new Path();
             _path.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
