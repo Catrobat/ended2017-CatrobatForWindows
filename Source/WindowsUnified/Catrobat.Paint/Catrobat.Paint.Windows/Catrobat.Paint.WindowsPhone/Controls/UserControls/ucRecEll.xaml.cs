@@ -307,5 +307,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             tbHeightValue.Foreground = new SolidColorBrush(Colors.Black);
         }
+
+        private void TriangleButton_OnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -7,9 +7,9 @@
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="200" d:DesignWidth="384">
+    d:DesignHeight="240" d:DesignWidth="384">
 
-    <Grid x:Name="gridMain" Background="#1F1F1F" Height="200" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="384">
+    <Grid x:Name="gridMain" Background="#1F1F1F" Height="240" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="384">
         <Button x:Name="btnSelectedBorderColor" Background="Transparent" BorderThickness="0" Click="btnSelectedColor_Click" Height="30" HorizontalAlignment="Right"
                 Margin="0,50,5,0" MinHeight="1" MinWidth="1" Padding="0,-9,0,-10" VerticalAlignment="Top" Width="160">
             <Grid x:Name="GrdSelecectedBorderColor" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -30,6 +30,7 @@
         <TextBox x:Name="tbFillcolor" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,85,0,0" Padding="-2,0,0,0" Text="Füllfarbe:" Width="120" />
         <TextBox x:Name="tbHeightValue" Background="Transparent" BorderBrush="White" BorderThickness="4"  FontSize="14" Foreground="White" Height="30" HorizontalAlignment="Right" InputScope="Number" IsHitTestVisible="True" Margin="0,120,5,0" MinHeight="1" MinWidth="1" PointerEntered="tbHeightValue_PointerEntered" Text="160" TextAlignment="Center"
                    TextChanged="tbHeightValue_TextChanged" Width="160" LostFocus="tbHeightValue_LostFocus_1" PointerExited="tbHeightValue_PointerExited" GotFocus="tbHeightValue_GotFocus" />
+        <TextBox x:Name="tbEdgeType" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,189,0,0" Padding="-2,0,0,0" Text="Kantenart:" />
         <TextBox x:Name="tbStrokeColor" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,50,278,0" Padding="-2,0,0,0" Text="Randfarbe:" Width="120" />
         <TextBox x:Name="tbStrokeThicknessText" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,10,0,0" Padding="-2,0,0,0" Text="Randstärke:" Width="120" />
         <TextBox x:Name="tbStrokeThicknessValue" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Right" IsHitTestVisible="False" Margin="0,10,2,0" MinWidth="10" Text="5" Width="38"/>
@@ -37,6 +38,19 @@
         <TextBox x:Name="tbWidthValue" Background="Transparent" BorderBrush="White" BorderThickness="4"  FontSize="14" Foreground="White" Height="30" HorizontalAlignment="Right" IsHitTestVisible="True" InputScope="Number"
                  LostFocus="tbWidthValue_LostFocus" Margin="0,155,5,0" MinHeight="1" MinWidth="1" PreventKeyboardDisplayOnProgrammaticFocus="True" PointerEntered="tbWidthValue_PointerEntered" Text="160"
                  TextAlignment="Center" TextChanged="tbWidthValue_TextChanged" Width="160" PointerExited="tbWidthValue_PointerExited" GotFocus="tbWidthValue_GotFocus" />
+        <Button x:Name="BtnRoundImage" BorderBrush="White" Background="Transparent" BorderThickness="4" Height="30" HorizontalAlignment="Left" Margin="219,181,0,9" MinHeight="50" MinWidth="1" Width="50" >
+            <Image Source="/Assets/ToolMenu/icon_menu_ellipse.png" Height="25" Width="25" />
+        </Button>
+        <Button x:Name="BtnSquareImage" BorderBrush="Gray" Background="Transparent" BorderThickness="4" Height="30" HorizontalAlignment="Center" Margin="275,181,59,9" MinHeight="50" MinWidth="1" Width="50">
+            <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png" Height="25" Width="25" />
+        </Button>
+        <Button x:Name="BtnTriangleImage" BorderBrush="Gray" Background="Transparent" BorderThickness="4" Height="50" HorizontalAlignment="Right" Margin="0,181,5,9" MinHeight="50" MinWidth="1" Width="50">
+            <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png" Margin="0,-10,-25,0" Height="25" Width="25" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+                <Image.RenderTransform>
+                    <CompositeTransform Rotation="45"/>
+                </Image.RenderTransform>
+            </Image>
+        </Button>
     </Grid>
 </UserControl>
     
