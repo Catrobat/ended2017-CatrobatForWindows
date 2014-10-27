@@ -346,8 +346,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void rectRectangleForMovement_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             var movezoom = new TranslateTransform();
-            ((TranslateTransform)movezoom).X = Math.Round(e.Delta.Translation.X);
-            ((TranslateTransform)movezoom).Y = Math.Round(e.Delta.Translation.Y);;
+            ((TranslateTransform)movezoom).X = e.Delta.Translation.X;
+            ((TranslateTransform)movezoom).Y = e.Delta.Translation.Y;
 
             _transformGridMain.Children.Add(movezoom);
             
