@@ -4,7 +4,7 @@
 
 using namespace std;
 
-ForeverBrick::ForeverBrick(Script *parent) :
+ForeverBrick::ForeverBrick(std::shared_ptr<Script> parent) :
 	ContainerBrick(TypeOfBrick::ContainerBrick, parent)
 {
 	m_brickList = new list<Brick*>();

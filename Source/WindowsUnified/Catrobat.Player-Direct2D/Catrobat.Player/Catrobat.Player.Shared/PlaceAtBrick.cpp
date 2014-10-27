@@ -4,7 +4,7 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-PlaceAtBrick::PlaceAtBrick(FormulaTree *positionX, FormulaTree *positionY, Script *parent) :
+PlaceAtBrick::PlaceAtBrick(FormulaTree *positionX, FormulaTree *positionY, std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::PlaceAtBrick, parent),
 	m_positionX(positionX), m_positionY(positionY)
 {

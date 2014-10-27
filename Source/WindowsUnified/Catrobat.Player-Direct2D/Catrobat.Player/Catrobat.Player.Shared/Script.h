@@ -36,6 +36,7 @@ public:
 
 protected:
 	Script(TypeOfScript scriptType, Object *parent);
+    virtual ~Script() {}
 
 	std::list<Brick*> *m_brickList;
 

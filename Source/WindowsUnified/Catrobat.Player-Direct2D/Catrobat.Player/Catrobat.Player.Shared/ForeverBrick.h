@@ -8,7 +8,7 @@ class ForeverBrick :
 	public ContainerBrick
 {
 public:
-	ForeverBrick(Script *parent);
+	ForeverBrick(std::shared_ptr<Script> parent);
 	~ForeverBrick(void);
 
 	void Execute();

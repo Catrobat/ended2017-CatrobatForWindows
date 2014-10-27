@@ -6,7 +6,7 @@ class TurnLeftBrick :
 	public Brick
 {
 public:
-	TurnLeftBrick(FormulaTree *rotation, Script *parent);
+	TurnLeftBrick(FormulaTree *rotation,std::shared_ptr<Script> parent);
 	void Execute();
 private:
 	FormulaTree *m_rotation;

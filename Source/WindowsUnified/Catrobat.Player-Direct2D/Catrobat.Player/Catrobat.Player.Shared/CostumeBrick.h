@@ -6,8 +6,8 @@ class CostumeBrick :
 	public Brick
 {
 public:
-	CostumeBrick(std::string costumeDataReference, int index, Script *parent);
-	CostumeBrick(Script *parent);
+	CostumeBrick(std::string costumeDataReference, int index, std::shared_ptr<Script> parent);
+	CostumeBrick(std::shared_ptr<Script> parent);
 
 	void Execute();
 	int GetIndex();

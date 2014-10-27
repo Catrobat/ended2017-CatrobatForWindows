@@ -7,5 +7,4 @@ class StartScript :
 {
 public:
 	StartScript(Object *parent);
-	~StartScript();
 };

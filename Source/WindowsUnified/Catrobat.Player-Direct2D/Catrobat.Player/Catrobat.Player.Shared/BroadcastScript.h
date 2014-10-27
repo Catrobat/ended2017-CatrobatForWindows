@@ -8,7 +8,6 @@ class BroadcastScript :
 {
 public:
 	BroadcastScript(std::string receivedMessage, Object *parent);
-	~BroadcastScript();
 
 	void EvaluateMessage(Platform::String ^message);
 

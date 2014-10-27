@@ -6,7 +6,7 @@ class ChangeYByBrick :
 	public Brick
 {
 public:
-	ChangeYByBrick(FormulaTree *offsetY, Script *parent);
+	ChangeYByBrick(FormulaTree *offsetY, std::shared_ptr<Script> parent);
 	void Execute();
 private:
 	FormulaTree *m_offsetY;

@@ -4,7 +4,7 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-SetXBrick::SetXBrick(FormulaTree *positionX, Script *parent) :
+SetXBrick::SetXBrick(FormulaTree *positionX, std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::SetXBrick, parent),
 	m_positionX(positionX)
 {

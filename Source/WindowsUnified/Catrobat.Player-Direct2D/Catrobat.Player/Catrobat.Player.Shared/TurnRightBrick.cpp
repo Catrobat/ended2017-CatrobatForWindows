@@ -4,7 +4,7 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-TurnRightBrick::TurnRightBrick(FormulaTree *rotation, Script *parent) :
+TurnRightBrick::TurnRightBrick(FormulaTree *rotation,std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::TurnRightBrick, parent),
 	m_rotation(rotation)
 {

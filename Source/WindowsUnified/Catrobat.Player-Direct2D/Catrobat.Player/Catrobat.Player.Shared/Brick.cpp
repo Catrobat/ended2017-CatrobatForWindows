@@ -10,7 +10,7 @@
 using namespace Windows::System::Threading;
 using namespace Windows::Foundation;
 
-Brick::Brick(TypeOfBrick brickType, Script *parent) :
+Brick::Brick(TypeOfBrick brickType, std::shared_ptr<Script> parent) :
 	m_brickType(brickType), m_parent(parent)
 {
 }
@@ -20,7 +20,7 @@ Brick::TypeOfBrick Brick::GetBrickType()
 	return m_brickType;
 }
 
-Script *Brick::GetParent()
+std::shared_ptr<Script> Brick::GetParent()
 {
 	return m_parent;
 }

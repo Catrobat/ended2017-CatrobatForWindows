@@ -6,7 +6,7 @@ class ChangeXByBrick :
 	public Brick
 {
 public:
-	ChangeXByBrick(FormulaTree *offsetX, Script *parent);
+	ChangeXByBrick(FormulaTree *offsetX, std::shared_ptr<Script> parent);
 	void Execute();
 private:
 	FormulaTree *m_offsetX;

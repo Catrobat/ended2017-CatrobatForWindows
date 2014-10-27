@@ -52,6 +52,14 @@ Project::Project(
     m_variableListValueInitial = new map<std::string, std::string>();
 }
 
+Project::~Project()
+{
+    for (size_t i = 0; i < m_objectList->GetSize(); i++)
+    {
+        delete m_objectList->GetObject(i);
+    }
+}
+
 //----------------------------------------------------------------------
 
 int Project::GetScreenHeight()

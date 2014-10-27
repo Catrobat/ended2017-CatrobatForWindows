@@ -6,7 +6,7 @@ class SetYBrick :
 	public Brick
 {
 public:
-	SetYBrick(FormulaTree *positionY, Script *parent);
+	SetYBrick(FormulaTree *positionY,std::shared_ptr<Script> parent);
 	void Execute();
 private:
 	FormulaTree *m_positionY;

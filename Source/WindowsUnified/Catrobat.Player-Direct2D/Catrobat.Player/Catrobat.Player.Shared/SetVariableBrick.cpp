@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "SetVariableBrick.h"
 
-SetVariableBrick::SetVariableBrick(FormulaTree *variableFormula, Script *parent)
+SetVariableBrick::SetVariableBrick(FormulaTree *variableFormula,std::shared_ptr<Script> parent)
 	: VariableManagementBrick(TypeOfBrick::SetVariableBrick, variableFormula, parent)
 {
 }

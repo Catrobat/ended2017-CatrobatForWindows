@@ -9,18 +9,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Catrobat.Player.Shared", "C
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Catrobat.Player.WindowsPhone", "Catrobat.Player\Catrobat.Player.WindowsPhone\Catrobat.Player.WindowsPhone.vcxproj", "{60F6BE50-F2E2-4EF5-8A1B-12BFB764BB21}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{95D0AC2A-BBB2-4BE6-ABCA-69ABD1EEA732}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Catrobat.Player.WindowsPhone.Tests", "Catrobat.Player.WindowsPhone.Tests\Catrobat.Player.WindowsPhone.Tests.vcxproj", "{33EFAC86-0136-4470-82DB-31D9FBA66CA4}"
-EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{60f6be50-f2e2-4ef5-8a1b-12bfb764bb21}*SharedItemsImports = 4
 		Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{efac7af6-4fa3-41a1-9632-697e4f3c48ed}*SharedItemsImports = 9
-		Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{33efac86-0136-4470-82db-31d9fba66ca4}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -32,10 +27,6 @@ Global
 		SccProjectTopLevelParentUniqueName2 = Catrobat.Player.sln
 		SccProjectName2 = Catrobat.Player/Catrobat.Player.WindowsPhone
 		SccLocalPath2 = Catrobat.Player\\Catrobat.Player.WindowsPhone
-		SccProjectUniqueName3 = Catrobat.Player.WindowsPhone.Tests\\Catrobat.Player.WindowsPhone.Tests.vcxproj
-		SccProjectTopLevelParentUniqueName3 = Catrobat.Player.sln
-		SccProjectName3 = Catrobat.Player.WindowsPhone.Tests
-		SccLocalPath3 = Catrobat.Player.WindowsPhone.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -60,20 +51,6 @@ Global
 		{60F6BE50-F2E2-4EF5-8A1B-12BFB764BB21}.Release|Win32.Build.0 = Release|Win32
 		{60F6BE50-F2E2-4EF5-8A1B-12BFB764BB21}.Release|Win32.Deploy.0 = Release|Win32
 		{60F6BE50-F2E2-4EF5-8A1B-12BFB764BB21}.Release|x64.ActiveCfg = Release|Win32
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|ARM.ActiveCfg = Debug|ARM
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|ARM.Build.0 = Debug|ARM
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|ARM.Deploy.0 = Debug|ARM
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|Win32.ActiveCfg = Debug|Win32
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|Win32.Build.0 = Debug|Win32
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|Win32.Deploy.0 = Debug|Win32
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|x64.ActiveCfg = Debug|Win32
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|ARM.ActiveCfg = Release|ARM
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|ARM.Build.0 = Release|ARM
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|ARM.Deploy.0 = Release|ARM
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|Win32.ActiveCfg = Release|Win32
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|Win32.Build.0 = Release|Win32
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|Win32.Deploy.0 = Release|Win32
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,7 +58,5 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{EFAC7AF6-4FA3-41A1-9632-697E4F3C48ED} = {1DE611D9-1257-4241-9323-8D005463EA31}
 		{60F6BE50-F2E2-4EF5-8A1B-12BFB764BB21} = {1DE611D9-1257-4241-9323-8D005463EA31}
-		{95D0AC2A-BBB2-4BE6-ABCA-69ABD1EEA732} = {1DE611D9-1257-4241-9323-8D005463EA31}
-		{33EFAC86-0136-4470-82DB-31D9FBA66CA4} = {95D0AC2A-BBB2-4BE6-ABCA-69ABD1EEA732}
 	EndGlobalSection
 EndGlobal

@@ -6,6 +6,6 @@ class HideBrick :
 	public Brick
 {
 public:
-	HideBrick(Script *parent);
+	HideBrick(std::shared_ptr<Script> parent);
 	void Execute();
 };

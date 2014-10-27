@@ -31,8 +31,8 @@ public:
     void GetScale(float &x, float &y);
 
 public:
-    void AddLook(Look *lookData);
-    void AddScript(Script *script);
+    void AddLook(std::shared_ptr<Look> lookData);
+    void AddScript(std::shared_ptr<Script> script);
     void AddSoundInfo(SoundInfo *soundInfo);
     void AddVariable(std::string name, UserVariable *variable);
     void AddVariable(std::pair<std::string, UserVariable*> variable);
@@ -50,24 +50,21 @@ public:
     std::list<SoundInfo*>* GetSoundInfos() { return m_soundInfos; };
 
     int GetScriptListSize();
-    Script *GetScript(int index);
+    std::shared_ptr<Script> GetScript(int index);
 
     UserVariable *GetVariable(std::string name);
 
-    int GetLookDataListSize();
-    Look *GetLook(int index);
-    int GetLook();
-    int GetLookCount();
-    Look* GetCurrentLook();
+    int GetLookListSize();
+    int GetIndexOfCurrentLook();
 
     bool IsObjectHit(D2D1_POINT_2F position);
 
 private:
     std::string m_name;
 
-    Look *m_look;
-    std::list<Look*> *m_lookList;
-    std::list<Script*> *m_scripts;
+    std::shared_ptr<Look> m_look;
+    std::list<std::shared_ptr<Look>> m_lookList;
+    std::list<std::shared_ptr<Script>> m_scripts;
     std::list<SoundInfo*> *m_soundInfos;
     std::map<std::string, UserVariable*> *m_variableList;
 
@@ -84,5 +81,5 @@ private:
 private:
     void RecalculateTransformation();
     D2D1::Matrix3x2F CalculateTranslationMatrix();
-	static double Radians(float degree) { return degree * DirectX::XM_PI / 180.0f; }
+    static double Radians(float degree) { return degree * DirectX::XM_PI / 180.0f; }
 };

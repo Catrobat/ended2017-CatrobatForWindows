@@ -6,7 +6,7 @@ class BroadcastBrick :
 	public Brick
 {
 public:
-	BroadcastBrick(std::string broadcastMessage, Script *parent);
+	BroadcastBrick(std::string broadcastMessage, std::shared_ptr<Script> parent);
 	void Execute();
 
 private:

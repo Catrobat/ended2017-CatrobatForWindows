@@ -6,7 +6,7 @@ class SetSizeToBrick :
 	public Brick
 {
 public:
-	SetSizeToBrick(FormulaTree *scale, Script *parent);
+	SetSizeToBrick(FormulaTree *scale, std::shared_ptr<Script> parent);
 	void Execute();
 private:
 	FormulaTree *m_scale;

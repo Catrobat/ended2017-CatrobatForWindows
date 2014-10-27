@@ -6,7 +6,7 @@ class MoveNStepsBrick :
 	public Brick
 {
 public:
-	MoveNStepsBrick(FormulaTree *steps, Script *parent);
+	MoveNStepsBrick(FormulaTree *steps, std::shared_ptr<Script> parent);
 	virtual ~MoveNStepsBrick();
 	void	Execute();
 

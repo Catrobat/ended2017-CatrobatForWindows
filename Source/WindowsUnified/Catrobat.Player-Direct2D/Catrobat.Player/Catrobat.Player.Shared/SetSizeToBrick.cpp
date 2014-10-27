@@ -4,7 +4,7 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-SetSizeToBrick::SetSizeToBrick(FormulaTree *scale, Script *parent) :
+SetSizeToBrick::SetSizeToBrick(FormulaTree *scale, std::shared_ptr<Script> parent) :
 Brick(TypeOfBrick::SetGhostEffectBrick, parent),
 m_scale(scale)
 {
