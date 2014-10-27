@@ -41,7 +41,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             _last_valid_width = Convert.ToInt32(tbWidthValue.Text);
 
             PocketPaintApplication.GetInstance().PaintData.BorderColorChanged += ColorStrokeChanged;
-            PocketPaintApplication.GetInstance().PaintData.FillColorChanged += ColorFillChanged;
+            PocketPaintApplication.GetInstance().PaintData.ColorChanged += ColorFillChanged;
             PocketPaintApplication.GetInstance().BarRecEllShape = this;
             setUcRecEllLayout();
         }

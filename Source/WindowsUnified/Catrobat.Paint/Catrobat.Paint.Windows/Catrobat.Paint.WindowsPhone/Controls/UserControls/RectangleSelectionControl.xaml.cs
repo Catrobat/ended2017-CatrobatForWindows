@@ -120,7 +120,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             return move;
         }
 
-        public void setSizeOfRecBar(int height, int width)
+        public void setSizeOfRecBar(double height, double width)
         {
 
             PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = height;
@@ -140,7 +140,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 changeHeightOfUiElements(moveY.Y);
                 changeMarginBottomOfUiElements(moveY.Y);
 
-                setSizeOfRecBar((int)rectRectangleToDraw.Height, (int)rectRectangleToDraw.Width);
+                setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
         }
 
@@ -155,7 +155,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                 changeHeightOfUiElements(moveY.Y * -1.0);
                 changeMarginTopOfUiElements(moveY.Y * -1.0);
-                setSizeOfRecBar((int)rectRectangleToDraw.Height, (int)rectRectangleToDraw.Width);
+                setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
         }
 
@@ -179,7 +179,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 changeHeightOfUiElements(moveY.Y);
                 changeMarginBottomOfUiElements(moveY.Y);
 
-                setSizeOfRecBar((int)rectRectangleToDraw.Height, (int)rectRectangleToDraw.Width);
+                setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
         }
 
@@ -195,7 +195,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 changeWidthOfUiElements(moveX.X * -1.0);
                 changeMarginLeftOfUiElements(moveX.X * -1.0);
 
-                setSizeOfRecBar((int)rectRectangleToDraw.Height, (int)rectRectangleToDraw.Width);
+                setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
         }
         
@@ -219,7 +219,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 changeHeightOfUiElements(moveY.Y * -1.0);
                 changeMarginTopOfUiElements(moveY.Y * -1.0);
 
-                setSizeOfRecBar((int)rectRectangleToDraw.Height, (int)rectRectangleToDraw.Width);
+                setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
         }
 
@@ -243,7 +243,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 changeHeightOfUiElements(moveY.Y);
                 changeMarginBottomOfUiElements(moveY.Y);
 
-                setSizeOfRecBar((int)rectRectangleToDraw.Height, (int)rectRectangleToDraw.Width);
+                setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
 
         }
@@ -260,7 +260,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 changeWidthOfUiElements(moveX.X);
                 changeMarginRightOfUiElements(moveX.X);
 
-                setSizeOfRecBar((int)rectRectangleToDraw.Height, (int)rectRectangleToDraw.Width);
+                setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
         }
 
@@ -284,7 +284,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 changeHeightOfUiElements(moveY.Y * -1.0);
                 changeMarginTopOfUiElements(moveY.Y * -1.0);
 
-                setSizeOfRecBar((int)rectRectangleToDraw.Height, (int)rectRectangleToDraw.Width);
+                setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
 
         }
@@ -416,8 +416,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                 changeHeightOfUiElements(move.Y);
                 changeMarginBottomOfUiElements(move.Y);
-                PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = (int)rectRectangleToDraw.Height;
-                PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = (int)rectRectangleToDraw.Width;
+                PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = rectRectangleToDraw.Height;
+                PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = rectRectangleToDraw.Width;
             }
         }
 
@@ -444,15 +444,31 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 _transfomrGridEllipseCenterTop.Children.Add(move2);
                 _transformGridEllipsCenterBottom.Children.Add(move2);
 
-                PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = (int)rectRectangleToDraw.Height;
-                PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = (int)rectRectangleToDraw.Width;
+                PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = rectRectangleToDraw.Height;
+                PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = rectRectangleToDraw.Width;
             }
         }
 
         private void rectRectangleForMovement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            double valueY = -20.0 + rectRectangleToDraw.Margin.Bottom;
-            PocketPaintApplication.GetInstance().ToolCurrent.Draw(new Point(Math.Round(_transformGridMain.Value.OffsetX + Window.Current.Bounds.Width / 2.0 - rectRectangleToDraw.Width / 2.0), Math.Round(_transformGridMain.Value.OffsetY + (Window.Current.Bounds.Height - 150.0) / 2.0 - (rectRectangleToDraw.Height + valueY) / 2.0)));
+            double coordinateX = 0.0;
+            double coordianteY = 0.0;
+            double halfScreenHeight = Window.Current.Bounds.Height / 2.0;
+            double halfScreenWidth = Window.Current.Bounds.Width / 2.0;
+            double offsetX = _transformGridMain.Value.OffsetX;
+            double offsetY = _transformGridMain.Value.OffsetY;
+            double positionX = 0.0;
+            double positionY = 0.0;
+            double valueBottom = -20.0 + rectRectangleToDraw.Margin.Bottom;
+            double valueLeft = -20.0 + rectRectangleToDraw.Margin.Left;
+            double valueRight = -20.0 + rectRectangleToDraw.Margin.Right;
+            double valueTop = -20.0 + rectRectangleToDraw.Margin.Top;
+
+            positionX = (rectRectangleToDraw.Width - valueLeft + valueRight) / 2.0;
+            positionY = (rectRectangleToDraw.Height + valueBottom - valueTop + 144.0) / 2.0;
+            coordinateX = offsetX + halfScreenWidth - positionX;
+            coordianteY = offsetY + halfScreenHeight - positionY;
+            PocketPaintApplication.GetInstance().ToolCurrent.Draw(new Point(coordinateX, coordianteY));
             string test = "string";
         }
     }
