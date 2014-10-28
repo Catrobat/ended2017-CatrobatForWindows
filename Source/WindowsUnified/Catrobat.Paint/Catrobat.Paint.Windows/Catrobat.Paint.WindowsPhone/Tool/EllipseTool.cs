@@ -31,13 +31,13 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             var coordinate = (Point)arg;
 
-            int height = PocketPaintApplication.GetInstance().BarRecEllShape.getHeight();
-            int width = PocketPaintApplication.GetInstance().BarRecEllShape.getWidth();
+            double height = PocketPaintApplication.GetInstance().BarRecEllShape.getHeight();
+            double width = PocketPaintApplication.GetInstance().BarRecEllShape.getWidth();
 
             EllipseGeometry myEllipseGeometry = new EllipseGeometry();
             myEllipseGeometry.Center = new Point(coordinate.X, coordinate.Y);
-            myEllipseGeometry.RadiusX = width / 2;
-            myEllipseGeometry.RadiusY = height / 2;
+            myEllipseGeometry.RadiusX = width / 2.0;
+            myEllipseGeometry.RadiusY = height / 2.0;
 
             _path = new Path();
             _path.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;

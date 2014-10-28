@@ -9,8 +9,8 @@ namespace Catrobat.Paint.Phone.Data
     public delegate void BorderColorChangedEventHandler(SolidColorBrush color);
     public delegate void ColorChangedEventHandler(SolidColorBrush color);
     public delegate void FillColorChangedEventHandler(SolidColorBrush color);
-    public delegate void ThicknessChangedEventHandler(int thickness);
-    public delegate void BorderThicknessChangedEventHandler(int border_thickness);
+    public delegate void ThicknessChangedEventHandler(double thickness);
+    public delegate void BorderThicknessChangedEventHandler(double border_thickness);
 
     public delegate void CapChangedEventHandler(PenLineCap cap);
     public delegate void ToolCurrentChangedEventHandler(ToolBase tool);
@@ -30,12 +30,12 @@ namespace Catrobat.Paint.Phone.Data
         public event CapChangedEventHandler CapChanged;
         public event ToolCurrentChangedEventHandler ToolCurrentChanged;
 
-        private static SolidColorBrush _colorBorderSelected = new SolidColorBrush(Colors.Black);
+        private static SolidColorBrush _colorBorderSelected = new SolidColorBrush(Colors.Gray);
         private static SolidColorBrush _colorFillSelected = new SolidColorBrush(Colors.Yellow);
         private static SolidColorBrush _colorSelected = new SolidColorBrush(Colors.Black);
 
         private int _thicknessSelected = 8;
-        private int _borderThicknessRecEll = 3;
+        private double _borderThicknessRecEll = 3.0;
         private PenLineCap _capSelected = PenLineCap.Round;
         private ToolBase _toolCurrentSelected = new BrushTool();
         public int max_right_left = 0;
@@ -82,7 +82,7 @@ namespace Catrobat.Paint.Phone.Data
             }
         }
 
-        public int BorderThicknessRecEll
+        public double BorderThicknessRecEll
         {
             get { return _borderThicknessRecEll; }
             set
@@ -137,14 +137,14 @@ namespace Catrobat.Paint.Phone.Data
             }
         }
 
-        protected virtual void OnThicknessChanged(int thickness)
+        protected virtual void OnThicknessChanged(double thickness)
         {
             if (ThicknessChanged != null)
             {
                 ThicknessChanged(thickness);
             }
         }
-        protected virtual void OnBorderThicknessChanged(int border_thickness)
+        protected virtual void OnBorderThicknessChanged(double border_thickness)
         {
             if (BorderThicknessChanged != null)
             {

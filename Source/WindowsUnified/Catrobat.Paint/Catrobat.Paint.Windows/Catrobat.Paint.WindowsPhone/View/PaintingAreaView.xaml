@@ -12,7 +12,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" NavigationCacheMode="Required" >
 
     <Grid x:Name="LayoutRoot"  IsHitTestVisible="True" ManipulationStarted="LayoutRoot_ManipulationStarted_1">
-
         <Grid x:Name="PaintingAreaContentPanelGrid" IsHitTestVisible="True" Width="auto" Height="auto" Grid.Row="1" Margin="0,0,0,0" Background="Transparent" >
             <Grid x:Name="PaintingAreaCheckeredGrid" Height="auto" IsHitTestVisible="True" Width="auto">
                 <Grid.Background>
@@ -26,6 +25,7 @@
                 <!--<Rectangle x:Name="rectDrawRectangle" DoubleTapped="rectDrawRectangle_DoubleTapped" Fill="Blue" Height="50" HorizontalAlignment="Left" 
                            Margin="171,263,0,0" PointerMoved="testRectangle_PointerMoved"  Stroke="Black"  VerticalAlignment="Top" Width="50" Visibility="Collapsed" PointerPressed="testRectangle_PointerPressed" />-->
 
+                <!--<Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="160" Stroke="Black" StrokeLineJoin="Round" StrokeThickness="3" VerticalAlignment="Top" Width="160" Margin="87,229,0,0"/>-->
                 <Grid x:Name="GridCursor" Height="80" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Collapsed" Width="80">
                     <userControls:CursorControl x:Name="ClCursor" Height="80" HorizontalAlignment="Center" IsHitTestVisible="False" PointerPressed="CursorControl_PointerPressed" PointerMoved="CursorControl_PointerMoved" Margin="0,0,0,0" VerticalAlignment="Center" Width="80"></userControls:CursorControl>
                 </Grid>
@@ -35,7 +35,7 @@
                 </Grid>
             </Grid>
 
-            <Grid x:Name="GridUserControlRectEll" Height="200" HorizontalAlignment="Center" Margin="0,0,0,8" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
+            <Grid x:Name="GridUserControlRectEll" Height="240" HorizontalAlignment="Center" Margin="0,0,0,8" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <userControls:ucRecEll></userControls:ucRecEll>
             </Grid>
 
@@ -62,7 +62,6 @@
         </StackPanel>
         
         <TextBox x:Name="coordinates" HorizontalAlignment="Left" Margin="87,96,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Visibility="Collapsed"/>
-
     </Grid>
 
     <Page.BottomAppBar>
