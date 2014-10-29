@@ -38,13 +38,13 @@
         <TextBox x:Name="tbWidthValue" Background="Transparent" BorderBrush="White" BorderThickness="4"  FontSize="14" Foreground="White" Height="30" HorizontalAlignment="Right" IsHitTestVisible="True" InputScope="Number"
                  LostFocus="tbWidthValue_LostFocus" Margin="0,155,5,0" MinHeight="1" MinWidth="1" PreventKeyboardDisplayOnProgrammaticFocus="True" PointerEntered="tbWidthValue_PointerEntered" Text="160"
                  TextAlignment="Center" TextChanged="tbWidthValue_TextChanged" Width="160" PointerExited="tbWidthValue_PointerExited" GotFocus="tbWidthValue_GotFocus" />
-        <Button x:Name="BtnRoundImage" BorderBrush="White" Background="Transparent" BorderThickness="4" Height="30" HorizontalAlignment="Left" Margin="219,181,0,9" MinHeight="50" MinWidth="1" Width="50" >
+        <Button x:Name="BtnRound" BorderBrush="Gray" Background="Transparent" BorderThickness="4" Height="30" HorizontalAlignment="Left" Margin="219,181,0,9" MinHeight="50" MinWidth="1" Width="50" Click="BtnRound_Click" >
             <Image Source="/Assets/ToolMenu/icon_menu_ellipse.png" Height="25" Width="25" />
         </Button>
-        <Button x:Name="BtnSquareImage" BorderBrush="Gray" Background="Transparent" BorderThickness="4" Height="30" HorizontalAlignment="Center" Margin="275,181,59,9" MinHeight="50" MinWidth="1" Width="50">
+        <Button x:Name="BtnMiter" BorderBrush="White" Background="Transparent" BorderThickness="4" Height="30" HorizontalAlignment="Center" Margin="275,181,59,9" MinHeight="50" MinWidth="1" Width="50" Click="BtnMiter_Click">
             <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png" Height="25" Width="25" />
         </Button>
-        <Button x:Name="BtnTriangleImage" BorderBrush="Gray" Background="Transparent" BorderThickness="4" Height="50" HorizontalAlignment="Right" Margin="0,181,5,9" MinHeight="50" MinWidth="1" Width="50">
+        <Button x:Name="BtnBevel" BorderBrush="Gray" Background="Transparent" BorderThickness="4" Height="50" HorizontalAlignment="Right" Margin="0,181,5,9" MinHeight="50" MinWidth="1" Width="50" Click="BtnBevel_Click">
             <Image Source="/Assets/ToolMenu/icon_menu_rectangle.png" Margin="0,-10,-25,0" Height="25" Width="25" UseLayoutRounding="False" d:LayoutRounding="Auto" >
                 <Image.RenderTransform>
                     <CompositeTransform Rotation="45"/>

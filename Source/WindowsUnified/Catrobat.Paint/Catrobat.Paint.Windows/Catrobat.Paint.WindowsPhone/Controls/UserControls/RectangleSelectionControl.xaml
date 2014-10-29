@@ -16,7 +16,7 @@
         </Grid.ColumnDefinitions>
         <Grid x:Name="GridRectangle" ManipulationDelta="rectRectangleForMovement_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" Height="230" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <Rectangle x:Name="rectRectangleToDraw" Fill="Black" Height="160" Stroke="Gray"
-                StrokeThickness="3" Margin="20,20,20,20" 
+                StrokeThickness="3" StrokeLineJoin="Miter" Margin="20,20,20,20" 
                 ManipulationMode="TranslateX, TranslateY" Width="160" />
             <Rectangle x:Name="rectRectangleForMovement" Fill="#01FFFFFF" Height="200" Stroke="LightSkyBlue" 
                 StrokeThickness="5" VerticalAlignment="Center" Width="200" DoubleTapped="rectRectangleForMovement_DoubleTapped" />

@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // Die Elementvorlage "Benutzersteuerelement" ist unter http://go.microsoft.com/fwlink/?LinkId=234236 dokumentiert.
 
@@ -470,6 +471,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             coordianteY = offsetY + halfScreenHeight - positionY;
             PocketPaintApplication.GetInstance().ToolCurrent.Draw(new Point(coordinateX, coordianteY));
             string test = "string";
+        }
+        public PenLineJoin strokeLineJoinOfRectangleToDraw
+        {
+            get
+            {
+                return rectRectangleToDraw.StrokeLineJoin;
+            }
+            set
+            {
+                rectRectangleToDraw.StrokeLineJoin = value;
+            }
         }
     }
 }
