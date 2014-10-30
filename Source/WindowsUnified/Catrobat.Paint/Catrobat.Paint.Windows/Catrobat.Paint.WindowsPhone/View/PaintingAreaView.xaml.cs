@@ -422,6 +422,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 return;
             }
             AppBarButton app_btnTools = new AppBarButton();
+            AppBarButton app_btnClearElementsInWorkingSpace = new AppBarButton();
             AppBarButton app_btnSave = new AppBarButton();
             AppBarButton app_btnSaveCopy = new AppBarButton();
             AppBarButton app_btnNewPicture = new AppBarButton();
@@ -435,6 +436,9 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnTools.Label = "Werkzeug";
             app_btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
 
+            app_btnClearElementsInWorkingSpace.Click += app_btnClearElementsInWorkingSpace_Click;
+
+            app_btnClearElementsInWorkingSpace.Label = "Arbeitsfläche löschen";
             app_btnSave.Label = "Speichern";
             app_btnSaveCopy.Label = "Kopie speichern";
             app_btnNewPicture.Label = "New Picture";
@@ -444,6 +448,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             cmdBar.PrimaryCommands.Add(app_btnTools);
 
+            cmdBar.SecondaryCommands.Add(app_btnClearElementsInWorkingSpace);
             cmdBar.SecondaryCommands.Add(app_btnSave);
             cmdBar.SecondaryCommands.Add(app_btnSaveCopy);
             cmdBar.SecondaryCommands.Add(app_btnNewPicture);
@@ -452,6 +457,11 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             BottomAppBar = cmdBar;
             current_appbar = type;
+        }
+
+        void app_btnClearElementsInWorkingSpace_Click(object sender, RoutedEventArgs e)
+        {
+            PaintingAreaCanvas.Children.Clear();
         }
 
         void app_btn_reset_Click(object sender, RoutedEventArgs e)
