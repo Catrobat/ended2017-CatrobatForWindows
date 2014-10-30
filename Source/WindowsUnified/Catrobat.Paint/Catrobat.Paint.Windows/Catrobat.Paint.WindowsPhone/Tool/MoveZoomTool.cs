@@ -81,17 +81,17 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 _transforms.Children.Add(move);
 
                 updateGridCursor(move);
-
-                AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
-                if(appBarButtonReset != null)
-                {
-                    appBarButtonReset.IsEnabled = true;
-                }
             }
             else
             {
                 System.Diagnostics.Debug.WriteLine("MoveZoomTool Should Not Reach this!");
                 return;
+            }
+
+            AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
+            if (appBarButtonReset != null)
+            {
+                appBarButtonReset.IsEnabled = true;
             }
         }
 

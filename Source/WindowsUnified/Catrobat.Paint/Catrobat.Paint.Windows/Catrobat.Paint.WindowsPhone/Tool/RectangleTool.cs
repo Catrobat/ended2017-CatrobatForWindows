@@ -120,8 +120,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleMove(object arg)
         {
-            //var rotate = (RotateTransform)arg;
-            //_transforms.Children.Add(rotate);
+
         }
 
         public override void HandleUp(object arg)
@@ -166,7 +165,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetDrawingSpace()
         {
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
+            PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Clear();
+            PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Add(new RectangleSelectionControl());
         }
     }
 }

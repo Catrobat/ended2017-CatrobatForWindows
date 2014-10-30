@@ -1,4 +1,5 @@
 ﻿using Catrobat.Paint.Phone;
+using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Catrobat.Paint.WindowsPhone.Tool;
 using System;
 using System.Collections.Generic;
@@ -120,14 +121,15 @@ namespace Catrobat.Paint.WindowsPhone.View
                         break;
                     case "BtnRectangle":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
+                        PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Clear();
+                        PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Add(new RectangleSelectionControl());
                         PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = Visibility.Visible;
                         break;
                     case "BtnEllipse":
-                        PocketPaintApplication.GetInstance().RecDrawingRectangle.Margin = new Thickness(171, 263, 0, 0);
-                        PocketPaintApplication.GetInstance().RecDrawingRectangle.Height = 50;
-                        PocketPaintApplication.GetInstance().RecDrawingRectangle.Width = 50;
-                        PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Ellipse);
+                        PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Children.Clear();
+                        PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Children.Add(new EllipseSelectionControl());
+                        PocketPaintApplication.GetInstance().EllipseSelectionControl.Visibility = Visibility.Visible;                       
                         break;
                     case "BtnImportPicture":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.ImportPng);

@@ -34,8 +34,10 @@ namespace Catrobat.Paint.Phone
         public bool isToolPickerUsed = true;
 
         public Grid GridCursor { get; set; }
+        public Grid GridEllipseSelectionControl { get; set; }
 
         public Grid GridRectangleSelectionControl { get; set; }
+
         public bool UnsavedChangesMade { get; set; }
 
         public CursorControl cursorControl { get; set; }

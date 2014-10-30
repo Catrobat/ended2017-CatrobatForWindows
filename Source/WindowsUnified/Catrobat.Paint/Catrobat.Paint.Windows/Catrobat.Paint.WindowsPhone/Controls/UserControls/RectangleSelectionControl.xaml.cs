@@ -23,7 +23,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 {
     public sealed partial class RectangleSelectionControl : UserControl
     {
-        Point startPosition;
         TransformGroup _transformGridEllipsCenterBottom;
         TransformGroup _transfomrGridEllipseCenterTop;
         TransformGroup _transformGridEllipseLeftBottom;
@@ -40,7 +39,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public RectangleSelectionControl()
         {
             this.InitializeComponent();
-            startPosition = new Point(0,0);
+
             GridEllCenterBottom.RenderTransform = _transformGridEllipsCenterBottom = new TransformGroup();
             GridEllCenterTop.RenderTransform = _transfomrGridEllipseCenterTop = new TransformGroup();
             GridEllRightCenter.RenderTransform = _transformGridEllipseRightCenter = new TransformGroup();
@@ -346,16 +345,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectRectangleForMovement_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            var movezoom = new TranslateTransform();
-            ((TranslateTransform)movezoom).X = e.Delta.Translation.X;
-            ((TranslateTransform)movezoom).Y = e.Delta.Translation.Y;
+            var move = new TranslateTransform();
+            ((TranslateTransform)move).X = e.Delta.Translation.X;
+            ((TranslateTransform)move).Y = e.Delta.Translation.Y;
 
-            _transformGridMain.Children.Add(movezoom);
-            
-            movezoom.X = _transformGridMain.Value.OffsetX;
-            movezoom.Y = _transformGridMain.Value.OffsetY;
+            _transformGridMain.Children.Add(move);
+
+            move.X = _transformGridMain.Value.OffsetX;
+            move.Y = _transformGridMain.Value.OffsetY;
             _transformGridMain.Children.Clear();
-            _transformGridMain.Children.Add(movezoom);
+            _transformGridMain.Children.Add(move);
+
+            resetAppBarButtonRectangleSelectionControl(true);
 
         }
 
@@ -393,6 +394,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                 PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = rectRectangleToDraw.Height;
                 PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = rectRectangleToDraw.Width;
+                resetAppBarButtonRectangleSelectionControl(true);
             }
         }
 
@@ -410,6 +412,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 setGridTransformsOfEllipses(moveX2, moveX2, moveX, null, null, null, moveX, moveX);
                 PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = rectRectangleToDraw.Height;
                 PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = rectRectangleToDraw.Width;
+                resetAppBarButtonRectangleSelectionControl(true);
             }
         }
 
@@ -446,31 +449,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        public void resetRectangleSelectionControl()
+        public void resetAppBarButtonRectangleSelectionControl(bool activated)
         {
-            startPosition = new Point(0, 0);
-            GridEllCenterBottom.RenderTransform = _transformGridEllipsCenterBottom = new TransformGroup();
-            GridEllCenterTop.RenderTransform = _transfomrGridEllipseCenterTop = new TransformGroup();
-            GridEllRightCenter.RenderTransform = _transformGridEllipseRightCenter = new TransformGroup();
-            GridEllLeftBottom.RenderTransform = _transformGridEllipseLeftBottom = new TransformGroup();
-            GridEllLeftCenter.RenderTransform = _transformGridEllipseLeftCenter = new TransformGroup();
-            GridEllLeftTop.RenderTransform = _transformGridEllipseLeftTop = new TransformGroup();
-            GridEllRightBottom.RenderTransform = _transformGridEllipseRightBottom = new TransformGroup();
-            GridEllRightTop.RenderTransform = _transformGridEllipseRightTop = new TransformGroup();
-            GridMain.RenderTransform = _transformGridMain = new TransformGroup();
-
-            rectRectangleForMovement.Height = 200.0;
-            rectRectangleForMovement.Margin = new Thickness(20.0, 10.0, 10.0, 20.0);
-            rectRectangleForMovement.Width = 200.0;
-
-            rectRectangleToDraw.Height = 200.0;
-            rectRectangleToDraw.Margin = new Thickness(20.0, 20.0, 20.0, 20.0);
-            rectRectangleToDraw.Width = 200.0;
-
-            setSizeOfRecBar(200.0, 200.0);
-
-            GridMain.Height = 230.0;
-            GridMain.Width = 230.0;
+            AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
+            if (appBarButtonReset != null)
+            {
+                appBarButtonReset.IsEnabled = activated;
+            }
         }
     }
 }

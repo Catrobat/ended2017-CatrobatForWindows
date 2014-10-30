@@ -66,6 +66,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             //PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
             PocketPaintApplication.GetInstance().GridCursor = GridCursor;
+            PocketPaintApplication.GetInstance().GridEllipseSelectionControl = GridEllipseSelectionControl;
             PocketPaintApplication.GetInstance().GridRectangleSelectionControl = GridRectangleSelectionControl;
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
@@ -256,12 +257,16 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnReset.Icon = reset_icon;
 
                 app_btnReset.Label = "Ausgangsposition";
+                app_btnReset.IsEnabled = false;
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnReset.Click += app_btn_reset_Click;
 
                 cmdBar.PrimaryCommands.Add(app_btnReset);
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
+
+                loadManipulationEvents();
+                unloadPointerEvents();
             }
             else if("barEraser" == type)
             {
@@ -364,6 +369,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnReset.Icon = reset_icon;
 
                 app_btnReset.Label = "Ausgangsposition";
+                app_btnReset.IsEnabled = false;
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnReset.Click += app_btn_reset_Click;
