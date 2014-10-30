@@ -211,17 +211,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             tbHeightValue.Foreground = new SolidColorBrush(Colors.Black);
         }
 
+        private void tbWidthValue_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            tbWidthValue.Foreground = new SolidColorBrush(Colors.Black);
+        }
+
         private void tbHeightValue_LostFocus(object sender, RoutedEventArgs e)
         {
             tbHeightValue.Foreground = new SolidColorBrush(Colors.White);
 
-            _last_valid_height = tbHeightValue.Text != string.Empty ? Convert.ToInt32(tbHeightValue.Text) : _last_valid_width;
+            _last_valid_height = tbHeightValue.Text != string.Empty ? Convert.ToInt32(tbHeightValue.Text) : _last_valid_height;
             tbHeightValue.Text = _last_valid_height.ToString();
-        }
-
-        private void tbWidthValue_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            tbWidthValue.Foreground = new SolidColorBrush(Colors.Black);
         }
 
         private void tbWidthValue_LostFocus(object sender, RoutedEventArgs e)
@@ -244,12 +244,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
                 {
                     if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
-                        PocketPaintApplication.GetInstance().RectangleSelectionControl.changeHeightOfDrawingSelection(height_value);
+                        PocketPaintApplication.GetInstance().RectangleSelectionControl.changeHeightOfDrawingSelection(height_value, false);
                 }
                 else
                 {
                     if (PocketPaintApplication.GetInstance().EllipseSelectionControl != null)
-                        PocketPaintApplication.GetInstance().EllipseSelectionControl.changeHeightOfDrawingSelection(height_value);
+                        PocketPaintApplication.GetInstance().EllipseSelectionControl.changeHeightOfDrawingSelection(height_value, false);
                 }
             }
         }
@@ -265,21 +265,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 double width_value = Convert.ToDouble(tbWidthValue.Text);
                 if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
                 {
-                    PocketPaintApplication.GetInstance().RectangleSelectionControl.changeWidthOfDrawingSelection(width_value);
+                    if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
+                        PocketPaintApplication.GetInstance().RectangleSelectionControl.changeWidthOfDrawingSelection(width_value, false);
                 }
                 else
                 {
-                    PocketPaintApplication.GetInstance().EllipseSelectionControl.changeWidthOfDrawingSelection(width_value);
+                    if (PocketPaintApplication.GetInstance().EllipseSelectionControl != null)
+                        PocketPaintApplication.GetInstance().EllipseSelectionControl.changeWidthOfDrawingSelection(width_value, false);
                 }
             }
-        }
-
-        private void tbHeightValue_LostFocus_1(object sender, RoutedEventArgs e)
-        {
-            tbHeightValue.Foreground = new SolidColorBrush(Colors.White);
-
-            _last_valid_width = tbHeightValue.Text != string.Empty ? Convert.ToInt32(tbHeightValue.Text) : _last_valid_width;
-            tbHeightValue.Text = _last_valid_width.ToString();
         }
 
         public double setTbHeightValue
@@ -308,7 +302,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void tbHeightValue_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            tbHeightValue.Foreground = new SolidColorBrush(Colors.White);
+
         }
 
         private void tbWidthValue_PointerExited(object sender, PointerRoutedEventArgs e)

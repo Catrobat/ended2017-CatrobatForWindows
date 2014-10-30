@@ -123,20 +123,28 @@ namespace Catrobat.Paint.WindowsPhone.View
                         break;
                     case "BtnRectangle":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
+                        
                         PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Clear();
                         PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Add(new RectangleSelectionControl());
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = 160.0;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
+
                         PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Visibility = Visibility.Visible;
-                        bool isEnabled = true;
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(isEnabled, isEnabled, isEnabled);
+                        bool enableEdgeTypes = true;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
                         PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
                         break;
                     case "BtnEllipse":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Ellipse);
+                        
                         PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Children.Clear();
                         PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Children.Add(new EllipseSelectionControl());
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = 160.0;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
+
                         PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Visibility = Visibility.Visible;
-                        isEnabled = false;
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(isEnabled, isEnabled, isEnabled);
+                        enableEdgeTypes = false;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
                         PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.Gray);
                         break;
                     case "BtnImportPicture":
