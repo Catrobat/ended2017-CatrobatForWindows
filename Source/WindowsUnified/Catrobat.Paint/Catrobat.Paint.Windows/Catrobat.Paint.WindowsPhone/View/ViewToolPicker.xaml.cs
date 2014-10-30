@@ -126,7 +126,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                         
                         PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Clear();
                         PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Add(new RectangleSelectionControl());
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = 160.0;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = 160.0;
                         PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
 
                         PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Visibility = Visibility.Visible;
@@ -139,7 +139,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                         
                         PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Children.Clear();
                         PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Children.Add(new EllipseSelectionControl());
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = 160.0;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = 160.0;
                         PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
 
                         PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Visibility = Visibility.Visible;

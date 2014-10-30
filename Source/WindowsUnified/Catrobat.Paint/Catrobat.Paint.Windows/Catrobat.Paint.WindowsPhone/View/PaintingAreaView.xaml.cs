@@ -68,6 +68,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().GridCursor = GridCursor;
             PocketPaintApplication.GetInstance().GridEllipseSelectionControl = GridEllipseSelectionControl;
             PocketPaintApplication.GetInstance().GridRectangleSelectionControl = GridRectangleSelectionControl;
+            PocketPaintApplication.GetInstance().GridInputScopeControl = GridInputScopeControl;
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
 

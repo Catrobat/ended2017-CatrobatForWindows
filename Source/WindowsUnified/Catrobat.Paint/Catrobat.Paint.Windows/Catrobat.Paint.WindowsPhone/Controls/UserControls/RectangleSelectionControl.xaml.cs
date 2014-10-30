@@ -125,7 +125,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public void setSizeOfRecBar(double height, double width)
         {
 
-            PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = height;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = height;
 
             PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = width;
         }
@@ -407,7 +407,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 setGridTransformsOfEllipses(moveY, null, moveY2, moveY2, 
                                             moveY, null, moveY, null);
                 if (changeTbValues) {
-                    PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = rectRectangleToDraw.Height;
+                    PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = rectRectangleToDraw.Height;
                     PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = rectRectangleToDraw.Width;
                 }
                 resetAppBarButtonRectangleSelectionControl(true);
@@ -429,7 +429,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                                             null, null, moveX, moveX);
                 if (changeTbValues)
                 {
-                    PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = rectRectangleToDraw.Height;
+                    PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = rectRectangleToDraw.Height;
                     PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = rectRectangleToDraw.Width;
                 }
                 resetAppBarButtonRectangleSelectionControl(true);

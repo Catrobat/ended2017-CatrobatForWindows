@@ -42,6 +42,10 @@
                 <userControls:ucRecEll></userControls:ucRecEll>
             </Grid>
 
+            <Grid x:Name="GridInputScopeControl" Visibility="Collapsed">
+                <userControls:InputScopeControl></userControls:InputScopeControl>
+            </Grid>
+
             <Grid x:Name="GrdThicknessControl" Height="380" Margin="0,0,0,0" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <controls:ThicknessControl x:Name="CtrlThicknessControl"></controls:ThicknessControl>
             </Grid>

@@ -28,24 +28,24 @@
         <Slider x:Name="sldStrokeThickness" Background="Black" Foreground="White" Height="25" HorizontalAlignment="Right" Margin="0,15,45,0" Maximum="20" Padding="0,-10,0,0"  ValueChanged="sldSlidersChanged_ValueChanged" VerticalAlignment="Top" Width="120" />
         <TextBox x:Name="tbFillcolor" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,85,0,0" Padding="-2,0,0,0" Text="Füllfarbe:" Width="120" />
 
-        <TextBox x:Name="tbHeight" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" LostFocus="tbHeightValue_LostFocus" Margin="5,120,0,0" Padding="-2,0,0,0" Text="Höhe:" />
-        <TextBox x:Name="tbHeightValue" Background="Transparent" BorderBrush="White" BorderThickness="4" FontSize="14" 
-                 Foreground="White" Height="30" HorizontalAlignment="Right" IsHitTestVisible="True" InputScope="Number" 
-                 LostFocus="tbHeightValue_LostFocus" Margin="0,120,5,0" MaxLength="3" MinHeight="1" MinWidth="1" 
-                 PointerEntered="tbHeightValue_PointerEntered" PointerExited="tbHeightValue_PointerExited" PreventKeyboardDisplayOnProgrammaticFocus="True" 
-                 Text="160" TextAlignment="Center" TextChanged="tbHeightValue_TextChanged" Width="160" GotFocus="tbHeightValue_GotFocus" />
+        <TextBox x:Name="tbHeight" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" 
+                 IsHitTestVisible="False" Margin="5,120,0,0" Padding="-2,0,0,0" Text="Höhe:" />
+        <Button x:Name="btnHeightValue" Background="Transparent" BorderBrush="White" BorderThickness="4"
+                 Click="btnHeightValue_Click" Content="160" FontSize="14" 
+                 Foreground="White" Height="50" HorizontalAlignment="Right" IsHitTestVisible="True"
+                 Margin="0,30,5,0" MinHeight="1" MinWidth="1" Width="160" />
         
         <TextBox x:Name="tbEdgeType" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,189,0,0" Padding="-2,0,0,0" Text="Kantenart:" />
         <TextBox x:Name="tbStrokeColor" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,50,278,0" Padding="-2,0,0,0" Text="Randfarbe:" Width="120" />
         <TextBox x:Name="tbStrokeThicknessText" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,10,0,0" Padding="-2,0,0,0" Text="Randstärke:" Width="120" />
         <TextBox x:Name="tbStrokeThicknessValue" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Right" IsHitTestVisible="False" Margin="0,10,2,0" MinWidth="10" Text="5" Width="38"/>
         
-        <TextBox x:Name="tbWidth" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="5,155,0,0" Padding="-2,0,0,0" Text="Breite:" />        
-        <TextBox x:Name="tbWidthValue" Background="Transparent" BorderBrush="White" BorderThickness="4" FontSize="14" 
-                 Foreground="White" Height="30" HorizontalAlignment="Right" IsHitTestVisible="True" InputScope="Number" 
-                 LostFocus="tbWidthValue_LostFocus" Margin="0,155,5,0" MaxLength="3" MinHeight="1" MinWidth="1" 
-                 PointerEntered="tbWidthValue_PointerEntered" PointerExited="tbWidthValue_PointerExited" PreventKeyboardDisplayOnProgrammaticFocus="True" 
-                 Text="160" TextAlignment="Center" TextChanged="tbWidthValue_TextChanged" Width="160" GotFocus="tbWidthValue_GotFocus" />
+        <TextBox x:Name="tbWidth" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" 
+                 IsHitTestVisible="False" Margin="5,155,0,0" Padding="-2,0,0,0" Text="Breite:" />        
+        <Button x:Name="btnWidthValue" Background="Transparent" BorderBrush="White" BorderThickness="4" 
+                Click="btnWidthValue_Click" Content="160" FontSize="14" 
+                Foreground="White" Height="50" HorizontalAlignment="Right" IsHitTestVisible="True" 
+                Margin="0,100,5,0" MinHeight="1" MinWidth="1" Width="160" />
         
         <Button x:Name="BtnRound" BorderBrush="Gray" Background="Transparent" BorderThickness="4" Height="30" HorizontalAlignment="Left" Margin="219,181,0,9" MinHeight="50" MinWidth="1" Width="50" Click="BtnRound_Click" >
             <Image Source="/Assets/ToolMenu/icon_menu_ellipse.png" Height="25" Width="25" />

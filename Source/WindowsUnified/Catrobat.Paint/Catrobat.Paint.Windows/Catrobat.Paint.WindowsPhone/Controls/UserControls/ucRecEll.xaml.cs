@@ -37,8 +37,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             tbStrokeThicknessValue.Text = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll.ToString();
             sldStrokeThickness.Value = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
 
-            _last_valid_height = Convert.ToInt32(tbHeightValue.Text);
-            _last_valid_width = Convert.ToInt32(tbWidthValue.Text);
+            _last_valid_height = Convert.ToInt32(btnHeightValue.Content.ToString());
+            _last_valid_width = Convert.ToInt32(btnWidthValue.Content.ToString());
 
             PocketPaintApplication.GetInstance().PaintData.BorderColorChanged += ColorStrokeChanged;
             PocketPaintApplication.GetInstance().PaintData.ColorChanged += ColorFillChanged;
@@ -169,13 +169,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public double getHeight()
         {
             int return_value = 0;
-            return return_value = tbHeightValue.Text != string.Empty ? Convert.ToInt32(tbHeightValue.Text) : _last_valid_height;
+            return return_value = btnHeightValue.Content.ToString() != string.Empty ? Convert.ToInt32(btnHeightValue.Content.ToString()) : _last_valid_height;
         }
 
         public double getWidth()
         {
             int return_value = 0;
-            return return_value = tbWidthValue.Text != string.Empty ? Convert.ToInt32(tbWidthValue.Text) : _last_valid_width;
+            return return_value = btnWidthValue.Content.ToString() != string.Empty ? Convert.ToInt32(btnWidthValue.Content.ToString()) : _last_valid_width;
         }
 
         private void sldSlidersChanged_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
@@ -206,63 +206,65 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void tbHeightValue_PointerEntered(object sender, PointerRoutedEventArgs e)
+        private void btnHeightValue_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            tbHeightValue.Foreground = new SolidColorBrush(Colors.Black);
+            btnHeightValue.Foreground = new SolidColorBrush(Colors.Black);
         }
 
         private void tbWidthValue_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            tbWidthValue.Foreground = new SolidColorBrush(Colors.Black);
+            btnWidthValue.Foreground = new SolidColorBrush(Colors.Black);
         }
 
-        private void tbHeightValue_LostFocus(object sender, RoutedEventArgs e)
+        private void btnHeightValue_LostFocus(object sender, RoutedEventArgs e)
         {
-            tbHeightValue.Foreground = new SolidColorBrush(Colors.White);
+            btnHeightValue.Foreground = new SolidColorBrush(Colors.White);
 
-            _last_valid_height = tbHeightValue.Text != string.Empty ? Convert.ToInt32(tbHeightValue.Text) : _last_valid_height;
-            tbHeightValue.Text = _last_valid_height.ToString();
+            _last_valid_height = btnHeightValue.Content.ToString() != string.Empty ? Convert.ToInt32(btnHeightValue.Content.ToString()) : _last_valid_height;
+            btnHeightValue.Content = _last_valid_height.ToString();
         }
 
         private void tbWidthValue_LostFocus(object sender, RoutedEventArgs e)
         {
-            tbWidthValue.Foreground = new SolidColorBrush(Colors.White);
+            btnWidthValue.Foreground = new SolidColorBrush(Colors.White);
 
-            _last_valid_width = tbWidthValue.Text != string.Empty ? Convert.ToInt32(tbWidthValue.Text) : _last_valid_width;
-            tbWidthValue.Text = _last_valid_width.ToString();
+            _last_valid_width = btnWidthValue.Content.ToString() != string.Empty ? Convert.ToInt32(btnWidthValue.Content.ToString()) : _last_valid_width;
+            btnWidthValue.Content = _last_valid_width.ToString();
         }
 
-        private void tbHeightValue_TextChanged(object sender, TextChangedEventArgs e)
+        private void btnHeightValue_TextChanged(object sender, TextChangedEventArgs e)
         {
-            char[] comma = new char[1];
-            comma[0] = ',';
-            tbHeightValue.Text =  tbHeightValue.Text.Trim(comma);
+            //char[] comma = new char[1];
+            //comma[0] = ',';
+            //btnHeightValue.Text =  btnHeightValue.Text.Trim(comma);
 
-            if (tbHeightValue.Text != string.Empty)
-            {
-                double height_value = Convert.ToDouble(tbHeightValue.Text);
-                if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
-                {
-                    if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
-                        PocketPaintApplication.GetInstance().RectangleSelectionControl.changeHeightOfDrawingSelection(height_value, false);
-                }
-                else
-                {
-                    if (PocketPaintApplication.GetInstance().EllipseSelectionControl != null)
-                        PocketPaintApplication.GetInstance().EllipseSelectionControl.changeHeightOfDrawingSelection(height_value, false);
-                }
-            }
+            //if (btnHeightValue.Text != string.Empty)
+            //{
+            //    double height_value = Convert.ToDouble(btnHeightValue.Text);
+            //    if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
+            //    {
+            //        if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
+            //            PocketPaintApplication.GetInstance().RectangleSelectionControl.changeHeightOfDrawingSelection(height_value, false);
+            //    }
+            //    else
+            //    {
+            //        if (PocketPaintApplication.GetInstance().EllipseSelectionControl != null)
+            //            PocketPaintApplication.GetInstance().EllipseSelectionControl.changeHeightOfDrawingSelection(height_value, false);
+            //    }
+            //}
+            PocketPaintApplication.GetInstance().GridInputScopeControl.Visibility = Visibility.Visible;
+            PocketPaintApplication.GetInstance().InputScopeControl.setTextOfInputValue(btnHeightValue.Content.ToString());
         }
 
         private void tbWidthValue_TextChanged(object sender, TextChangedEventArgs e)
         {
             char[] comma = new char[1];
             comma[0] = ',';
-            tbWidthValue.Text = tbWidthValue.Text.Trim(comma);
+            btnWidthValue.Content = btnWidthValue.Content.ToString().Trim(comma);
 
-            if (tbWidthValue.Text != string.Empty)
+            if (btnWidthValue.Content.ToString() != string.Empty)
             {
-                double width_value = Convert.ToDouble(tbWidthValue.Text);
+                double width_value = Convert.ToDouble(btnWidthValue.Content.ToString());
                 if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
                 {
                     if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
@@ -276,15 +278,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        public double setTbHeightValue
+        public double setContentHeightValue
         {
             get
             {
-                return Convert.ToInt32(tbHeightValue.Text);
+                return Convert.ToInt32(btnHeightValue.Content.ToString());
             }
             set
             {
-                tbHeightValue.Text = value.ToString();
+                btnHeightValue.Content = value.ToString();
             }
         }
 
@@ -292,32 +294,32 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             get
             {
-                return Convert.ToInt32(tbWidthValue.Text);
+                return Convert.ToInt32(btnWidthValue.Content.ToString());
             }
             set
             {
-                tbWidthValue.Text = value.ToString();
+                btnWidthValue.Content = value.ToString();
             }
         }
 
-        private void tbHeightValue_PointerExited(object sender, PointerRoutedEventArgs e)
+        private void btnHeightValue_PointerExited(object sender, PointerRoutedEventArgs e)
         {
 
         }
 
         private void tbWidthValue_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            tbWidthValue.Foreground = new SolidColorBrush(Colors.White);
+            btnWidthValue.Foreground = new SolidColorBrush(Colors.White);
         }
 
         private void tbWidthValue_GotFocus(object sender, RoutedEventArgs e)
         {
-            tbWidthValue.Foreground = new SolidColorBrush(Colors.Black);
+            btnWidthValue.Foreground = new SolidColorBrush(Colors.Black);
         }
 
-        private void tbHeightValue_GotFocus(object sender, RoutedEventArgs e)
+        private void btnHeightValue_GotFocus(object sender, RoutedEventArgs e)
         {
-            tbHeightValue.Foreground = new SolidColorBrush(Colors.Black);
+            btnHeightValue.Foreground = new SolidColorBrush(Colors.Black);
         }
 
         private void TriangleButton_OnClick(object sender, RoutedEventArgs e)
@@ -380,6 +382,20 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public void setForgroundOfLabelEdgeType(Color value)
         {
             tbEdgeType.Foreground = new SolidColorBrush(value);
+        }
+
+        private void btnHeightValue_Click(object sender, RoutedEventArgs e)
+        {
+            PocketPaintApplication.GetInstance().GridInputScopeControl.Visibility = Visibility.Visible;
+            PocketPaintApplication.GetInstance().InputScopeControl.setTextOfInputValue(btnHeightValue.Content.ToString());
+            PocketPaintApplication.GetInstance().InputScopeControl.setCurrentButton = btnHeightValue;
+        }
+
+        private void btnWidthValue_Click(object sender, RoutedEventArgs e)
+        {
+            PocketPaintApplication.GetInstance().GridInputScopeControl.Visibility = Visibility.Visible;
+            PocketPaintApplication.GetInstance().InputScopeControl.setTextOfInputValue(btnWidthValue.Content.ToString());
+            PocketPaintApplication.GetInstance().InputScopeControl.setCurrentButton = btnWidthValue;
         }
     }
 }

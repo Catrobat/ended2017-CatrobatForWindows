@@ -46,6 +46,8 @@ namespace Catrobat.Paint.Phone
         // separate layer, for temp manipulation operations
         public Canvas PaintingAreaCanvasUnderlaying { get; set; }
 
+        public Grid GridInputScopeControl { get; set; }
+
         public Grid PaintingAreaCheckeredGrid { get; set; }
 
         public Grid PaintingAreaLayoutRoot { get; set; }
@@ -57,6 +59,8 @@ namespace Catrobat.Paint.Phone
         public RectangleSelectionControl RectangleSelectionControl { get; set; }
 
         public EllipseSelectionControl EllipseSelectionControl { get; set; }
+
+        public InputScopeControl InputScopeControl { get; set; }
 
         public AppbarTop AppbarTop { get; set; }
 
