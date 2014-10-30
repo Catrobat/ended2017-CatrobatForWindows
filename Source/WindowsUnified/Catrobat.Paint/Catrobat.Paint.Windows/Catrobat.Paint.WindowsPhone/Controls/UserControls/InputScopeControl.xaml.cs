@@ -28,14 +28,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
     /// </summary>
     public sealed partial class InputScopeControl
     {
-        Int32 slider_thickness_textbox_last_value = 1;
         double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
         double height_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+        int lastValue;
         private Button currentButton = null;
         public InputScopeControl()
         {
             this.InitializeComponent();
             PocketPaintApplication.GetInstance().InputScopeControl = this;
+            lastValue = 0;
             setLayout();
         }
 
@@ -102,10 +103,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 {
                     
                     tbInputValue.Text = getTextOfClickedButton;
+                    lastValue = Convert.ToInt32(tbInputValue.Text);
                 }
                 else if(tbInputValue.Text.Length < 3)
                 {
                     tbInputValue.Text += getTextOfClickedButton;
+                    lastValue = Convert.ToInt32(tbInputValue.Text);
                 }
                 
             }
@@ -116,6 +119,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if(tbInputValue.Text.Length > 0)
             {
                 tbInputValue.Text = tbInputValue.Text.Remove(tbInputValue.Text.Length - 1);
+                lastValue = tbInputValue.Text.Length != 0 ? Convert.ToInt32(tbInputValue.Text) : lastValue;
             }
         }
 
@@ -129,6 +133,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().GridInputScopeControl.Visibility = Visibility.Collapsed;
             if (currentButton != null)
             {
+                if(tbInputValue.Text.Length == 0)
+                {
+                    tbInputValue.Text = lastValue.ToString();
+                }
+
                 currentButton.Content = tbInputValue.Text;
                 double currentValue = Convert.ToDouble(tbInputValue.Text);
 

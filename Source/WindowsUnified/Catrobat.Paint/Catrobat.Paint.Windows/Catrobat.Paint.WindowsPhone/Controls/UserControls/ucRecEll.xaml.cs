@@ -156,15 +156,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectBorderColor.Fill = selected_color;
         }
 
-        public void setBorderColor()
-        {
-            rectBorderColor.Fill = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
-        }
-
-        public void setFillColor()
-        {
-            rectFillColor.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
-        }
 
         public double getHeight()
         {
@@ -206,78 +197,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void btnHeightValue_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            btnHeightValue.Foreground = new SolidColorBrush(Colors.Black);
-        }
-
-        private void tbWidthValue_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            btnWidthValue.Foreground = new SolidColorBrush(Colors.Black);
-        }
-
-        private void btnHeightValue_LostFocus(object sender, RoutedEventArgs e)
-        {
-            btnHeightValue.Foreground = new SolidColorBrush(Colors.White);
-
-            _last_valid_height = btnHeightValue.Content.ToString() != string.Empty ? Convert.ToInt32(btnHeightValue.Content.ToString()) : _last_valid_height;
-            btnHeightValue.Content = _last_valid_height.ToString();
-        }
-
-        private void tbWidthValue_LostFocus(object sender, RoutedEventArgs e)
-        {
-            btnWidthValue.Foreground = new SolidColorBrush(Colors.White);
-
-            _last_valid_width = btnWidthValue.Content.ToString() != string.Empty ? Convert.ToInt32(btnWidthValue.Content.ToString()) : _last_valid_width;
-            btnWidthValue.Content = _last_valid_width.ToString();
-        }
-
-        private void btnHeightValue_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //char[] comma = new char[1];
-            //comma[0] = ',';
-            //btnHeightValue.Text =  btnHeightValue.Text.Trim(comma);
-
-            //if (btnHeightValue.Text != string.Empty)
-            //{
-            //    double height_value = Convert.ToDouble(btnHeightValue.Text);
-            //    if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
-            //    {
-            //        if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
-            //            PocketPaintApplication.GetInstance().RectangleSelectionControl.changeHeightOfDrawingSelection(height_value, false);
-            //    }
-            //    else
-            //    {
-            //        if (PocketPaintApplication.GetInstance().EllipseSelectionControl != null)
-            //            PocketPaintApplication.GetInstance().EllipseSelectionControl.changeHeightOfDrawingSelection(height_value, false);
-            //    }
-            //}
-            PocketPaintApplication.GetInstance().GridInputScopeControl.Visibility = Visibility.Visible;
-            PocketPaintApplication.GetInstance().InputScopeControl.setTextOfInputValue(btnHeightValue.Content.ToString());
-        }
-
-        private void tbWidthValue_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            char[] comma = new char[1];
-            comma[0] = ',';
-            btnWidthValue.Content = btnWidthValue.Content.ToString().Trim(comma);
-
-            if (btnWidthValue.Content.ToString() != string.Empty)
-            {
-                double width_value = Convert.ToDouble(btnWidthValue.Content.ToString());
-                if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
-                {
-                    if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
-                        PocketPaintApplication.GetInstance().RectangleSelectionControl.changeWidthOfDrawingSelection(width_value, false);
-                }
-                else
-                {
-                    if (PocketPaintApplication.GetInstance().EllipseSelectionControl != null)
-                        PocketPaintApplication.GetInstance().EllipseSelectionControl.changeWidthOfDrawingSelection(width_value, false);
-                }
-            }
-        }
-
         public double setContentHeightValue
         {
             get
@@ -300,31 +219,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 btnWidthValue.Content = value.ToString();
             }
-        }
-
-        private void btnHeightValue_PointerExited(object sender, PointerRoutedEventArgs e)
-        {
-
-        }
-
-        private void tbWidthValue_PointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            btnWidthValue.Foreground = new SolidColorBrush(Colors.White);
-        }
-
-        private void tbWidthValue_GotFocus(object sender, RoutedEventArgs e)
-        {
-            btnWidthValue.Foreground = new SolidColorBrush(Colors.Black);
-        }
-
-        private void btnHeightValue_GotFocus(object sender, RoutedEventArgs e)
-        {
-            btnHeightValue.Foreground = new SolidColorBrush(Colors.Black);
-        }
-
-        private void TriangleButton_OnClick(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void BtnRound_Click(object sender, RoutedEventArgs e)
