@@ -84,6 +84,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Children.Clear();
             PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Children.Add(new EllipseSelectionControl());
+            PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = 160.0;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
         }
     }
 }
