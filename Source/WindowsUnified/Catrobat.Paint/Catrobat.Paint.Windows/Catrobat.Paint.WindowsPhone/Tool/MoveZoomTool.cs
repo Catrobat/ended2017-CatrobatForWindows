@@ -102,7 +102,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void Draw(object o)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void ResetDrawingSpace()

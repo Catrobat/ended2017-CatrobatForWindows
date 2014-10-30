@@ -49,7 +49,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             GridEllRightBottom.RenderTransform = _transformGridEllipseRightBottom = new TransformGroup();
             GridEllRightTop.RenderTransform = _transformGridEllipseRightTop = new TransformGroup();
             GridMain.RenderTransform = _transformGridMain = new TransformGroup();
-
+            rectRectangleToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
+            rectRectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
+            rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
             PocketPaintApplication.GetInstance().RectangleSelectionControl = this;
         }
         private void _setGridTransformsOfEllipses(TransformGroup transformGroup, TranslateTransform translateTransform)

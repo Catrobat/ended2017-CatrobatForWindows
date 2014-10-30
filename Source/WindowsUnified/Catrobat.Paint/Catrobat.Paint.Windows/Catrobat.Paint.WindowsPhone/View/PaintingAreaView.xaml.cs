@@ -972,5 +972,17 @@ namespace Catrobat.Paint.WindowsPhone.View
                 GridRectangleSelectionControl.Visibility = value;
             }
         }
+
+        public Visibility setVisibilityOfGridEllipseSelectionControl
+        {
+            get
+            {
+                return GridEllipseSelectionControl.Visibility;
+            }
+            set
+            {
+                GridEllipseSelectionControl.Visibility = value;
+            }
+        }
     }
 }

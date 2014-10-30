@@ -186,7 +186,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             if (PocketPaintApplication.GetInstance().BarRecEllShape != null)
             {
-                PocketPaintApplication.GetInstance().RectangleSelectionControl.setStrokeThicknessOfDrawingShape = strokeThickness;
+                if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
+                {
+                    PocketPaintApplication.GetInstance().RectangleSelectionControl.setStrokeThicknessOfDrawingShape = strokeThickness;
+                }
+                else
+                {
+                    PocketPaintApplication.GetInstance().EllipseSelectionControl.setStrokeThicknessOfDrawingShape = strokeThickness;
+                }
             }
 
             if(strokeThickness > 0)
@@ -234,9 +241,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (tbHeightValue.Text != string.Empty)
             {
                 double height_value = Convert.ToDouble(tbHeightValue.Text);
-                if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
+                if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
                 {
-                    PocketPaintApplication.GetInstance().RectangleSelectionControl.changeHeightOfDrawingSelection(height_value);
+                    if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
+                        PocketPaintApplication.GetInstance().RectangleSelectionControl.changeHeightOfDrawingSelection(height_value);
+                }
+                else
+                {
+                    if (PocketPaintApplication.GetInstance().EllipseSelectionControl != null)
+                        PocketPaintApplication.GetInstance().EllipseSelectionControl.changeHeightOfDrawingSelection(height_value);
                 }
             }
         }
@@ -250,9 +263,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (tbWidthValue.Text != string.Empty)
             {
                 double width_value = Convert.ToDouble(tbWidthValue.Text);
-                PocketPaintApplication.GetInstance().RectangleSelectionControl.changeWidthOfDrawingSelection(width_value);
-            //    // PocketPaintApplication.GetInstance().CurrentShape.Width = Convert.ToDouble(tbWidthValue.Text);
-            //    PocketPaintApplication.GetInstance().RecDrawingRectangle.Width = width_value;
+                if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
+                {
+                    PocketPaintApplication.GetInstance().RectangleSelectionControl.changeWidthOfDrawingSelection(width_value);
+                }
+                else
+                {
+                    PocketPaintApplication.GetInstance().EllipseSelectionControl.changeWidthOfDrawingSelection(width_value);
+                }
             }
         }
 
@@ -316,7 +334,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void BtnRound_Click(object sender, RoutedEventArgs e)
         {
             setRectangleEdgeType(Colors.Gray, Colors.Gray, Colors.White);
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Round;
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
+            {
+                PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Round;
+            }
+            else
+            {
+                PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeLineJoinOfEllipseToDraw = PenLineJoin.Round;
+            }
         }
 
         private void setRectangleEdgeType(Color bevel, Color miter, Color round)
@@ -329,13 +354,38 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void BtnMiter_Click(object sender, RoutedEventArgs e)
         {
             setRectangleEdgeType(Colors.Gray, Colors.White, Colors.Gray);
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Miter;
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
+            {
+                PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Miter;
+            }
+            else
+            {
+                PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeLineJoinOfEllipseToDraw = PenLineJoin.Miter;
+            }
         }
 
         private void BtnBevel_Click(object sender, RoutedEventArgs e)
         {
             setRectangleEdgeType(Colors.White, Colors.Gray, Colors.Gray);
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Bevel;
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
+            {
+                PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Bevel;
+            }
+            else
+            {
+                PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeLineJoinOfEllipseToDraw = PenLineJoin.Bevel;
+            }
+        }
+
+        public void setIsEnabledOfEdgeType(bool bevel, bool miter, bool round)
+        {
+            BtnBevel.IsEnabled = bevel;
+            BtnMiter.IsEnabled = miter;
+            BtnRound.IsEnabled = round;
+        }
+        public void setForgroundOfLabelEdgeType(Color value)
+        {
+            tbEdgeType.Foreground = new SolidColorBrush(value);
         }
     }
 }

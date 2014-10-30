@@ -18,8 +18,10 @@
             <Rectangle x:Name="rectRectangleToDraw" Fill="Black" Height="160" Stroke="Gray"
                 StrokeThickness="3" StrokeLineJoin="Miter" Margin="20,20,20,20" 
                 ManipulationMode="TranslateX, TranslateY" Width="160" />
+            
             <Rectangle x:Name="rectRectangleForMovement" Fill="#01FFFFFF" Height="200" Stroke="LightSkyBlue" 
-                StrokeThickness="5" VerticalAlignment="Center" Width="200" DoubleTapped="rectRectangleForMovement_DoubleTapped" Margin="0,0,0,0" />
+                StrokeThickness="5" VerticalAlignment="Center" Width="200" 
+                DoubleTapped="rectRectangleForMovement_DoubleTapped" Margin="0,0,0,0" />
         
         </Grid>
         <Grid x:Name="GridEllCenterBottom" Background="#01FFFFFF" Height="50" HorizontalAlignment="Center" ManipulationDelta="ellCenterBottom_ManipulationDelta_1" 
