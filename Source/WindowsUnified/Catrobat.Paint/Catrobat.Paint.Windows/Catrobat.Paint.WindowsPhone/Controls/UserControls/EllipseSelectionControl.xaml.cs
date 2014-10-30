@@ -36,6 +36,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         const double MIN_ELLIPSE_MOVE_HEIGHT = 50.0;
         const double MIN_ELLIPSE_MOVE_WIDTH = 50.0;
 
+        bool _isModifiedRectangleMovement;
+
         public EllipseSelectionControl()
         {
             this.InitializeComponent();
@@ -55,6 +57,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             ellEllipseToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
 
             PocketPaintApplication.GetInstance().EllipseSelectionControl = this;
+            setIsModifiedRectangleMovement = false;
         }
         private void _setGridTransformsOfEllipses(TransformGroup transformGroup, TranslateTransform translateTransform)
         {
@@ -369,6 +372,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             _transformGridMain.Children.Add(movezoom);
 
             resetAppBarButtonEllipseSelectionControl(true);
+            setIsModifiedRectangleMovement = true;
         }
 
         public void changeColorOfDrawingShape(Color color)
@@ -413,6 +417,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = ellEllipseToDraw.Width;
                 }
                 resetAppBarButtonEllipseSelectionControl(true);
+                setIsModifiedRectangleMovement = true;
             }
         }
 
@@ -436,6 +441,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = ellEllipseToDraw.Width;
                 }
                 resetAppBarButtonEllipseSelectionControl(true);
+                setIsModifiedRectangleMovement = true;
             }
         }
 
@@ -477,6 +483,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (appBarButtonReset != null)
             {
                 appBarButtonReset.IsEnabled = activated;
+            }
+        }
+
+        public bool setIsModifiedRectangleMovement
+        {
+            get
+            {
+                return _isModifiedRectangleMovement;
+            }
+            set
+            {
+                _isModifiedRectangleMovement = value;
             }
         }
     }

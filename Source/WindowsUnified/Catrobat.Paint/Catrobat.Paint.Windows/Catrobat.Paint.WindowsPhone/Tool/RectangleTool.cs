@@ -86,6 +86,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Add(new RectangleSelectionControl());
             PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = 160.0;
             PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.setIsModifiedRectangleMovement = false;
         }
     }
 }

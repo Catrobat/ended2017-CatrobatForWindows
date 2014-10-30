@@ -258,7 +258,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnReset.Icon = reset_icon;
 
                 app_btnReset.Label = "Ausgangsposition";
-                app_btnReset.IsEnabled = false;
+
+
+                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().EllipseSelectionControl.setIsModifiedRectangleMovement ? true : false;
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnReset.Click += app_btn_reset_Click;
@@ -370,7 +372,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnReset.Icon = reset_icon;
 
                 app_btnReset.Label = "Ausgangsposition";
-                app_btnReset.IsEnabled = false;
+                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.setIsModifiedRectangleMovement ? true : false;
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnReset.Click += app_btn_reset_Click;
@@ -641,8 +643,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                     // TODO: ApplicationBar = (IApplicationBar)this.Resources["barCrop"];
                     break;
                 case ToolType.Ellipse:
-                case ToolType.Rect:
-                    createAppBarAndSwitchAppBarContent("barRectangle");
+                    createAppBarAndSwitchAppBarContent("barEllipse");
                     visibilityGridEllRecControl = PocketPaintApplication.GetInstance().GridUcRellRecControlState;
                     break;
                 case ToolType.Eraser:
@@ -651,12 +652,17 @@ namespace Catrobat.Paint.WindowsPhone.View
                 case ToolType.Flip:
                     createAppBarAndSwitchAppBarContent("barFlip");
                     break;
-                case ToolType.Pipette:
-                    createAppBarAndSwitchAppBarContent("barPipette");
-                    break;
+
                 case ToolType.Move:
                 case ToolType.Zoom:
                     createAppBarAndSwitchAppBarContent("barMove");
+                    break;
+                case ToolType.Pipette:
+                    createAppBarAndSwitchAppBarContent("barPipette");
+                    break;
+                case ToolType.Rect:
+                    createAppBarAndSwitchAppBarContent("barRectangle");
+                    visibilityGridEllRecControl = PocketPaintApplication.GetInstance().GridUcRellRecControlState;
                     break;
                 case ToolType.Rotate:
                     createAppBarAndSwitchAppBarContent("barRotate");

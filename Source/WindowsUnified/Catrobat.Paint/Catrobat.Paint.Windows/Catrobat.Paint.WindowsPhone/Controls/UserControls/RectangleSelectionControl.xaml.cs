@@ -35,6 +35,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         const double MIN_RECTANGLE_MOVE_HEIGHT = 50.0;
         const double MIN_RECTANGLE_MOVE_WIDTH = 50.0;
+        bool _isModifiedRectangleMovement;
         
         public RectangleSelectionControl()
         {
@@ -53,6 +54,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectRectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
             rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
             PocketPaintApplication.GetInstance().RectangleSelectionControl = this;
+            setIsModifiedRectangleMovement = false;
         }
         private void _setGridTransformsOfEllipses(TransformGroup transformGroup, TranslateTransform translateTransform)
         {
@@ -367,6 +369,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             _transformGridMain.Children.Add(move);
 
             resetAppBarButtonRectangleSelectionControl(true);
+            setIsModifiedRectangleMovement = true;
 
         }
 
@@ -411,6 +414,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = rectRectangleToDraw.Width;
                 }
                 resetAppBarButtonRectangleSelectionControl(true);
+                setIsModifiedRectangleMovement = true;
             }
         }
 
@@ -433,6 +437,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = rectRectangleToDraw.Width;
                 }
                 resetAppBarButtonRectangleSelectionControl(true);
+                setIsModifiedRectangleMovement = true;
             }
         }
 
@@ -475,6 +480,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (appBarButtonReset != null)
             {
                 appBarButtonReset.IsEnabled = activated;
+            }
+        }
+
+        public bool setIsModifiedRectangleMovement
+        {
+            get
+            {
+                return _isModifiedRectangleMovement;
+            }
+            set
+            {
+                _isModifiedRectangleMovement = value;
             }
         }
     }
