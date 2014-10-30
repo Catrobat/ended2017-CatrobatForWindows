@@ -21,6 +21,8 @@ namespace Catrobat.Paint.Phone.Tool
         private Point _lastPoint;
         private bool _lastPointSet;
         private TransformGroup _transforms;
+        private double height;
+        private double width;
 
 
         public CursorTool(ToolType toolType = ToolType.Cursor)
@@ -47,10 +49,9 @@ namespace Catrobat.Paint.Phone.Tool
                 {
                     return;
                 }
-                double height = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2;
-                double width = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2;
+                setHeightWidth();
+
                 var coordinate = new Point(width + _transforms.Value.OffsetX, height + _transforms.Value.OffsetY);
-                var test = new Point(_transforms.Value.OffsetX, _transforms.Value.OffsetY);
 
                 _path = new Path();
                 _pathGeometry = new PathGeometry();
@@ -92,8 +93,8 @@ namespace Catrobat.Paint.Phone.Tool
             {
                 if (PocketPaintApplication.GetInstance().cursorControl.isDrawingActivated())
                 {
-                    double height = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2;
-                    double width = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2;
+                    setHeightWidth();
+
                     var coordinate = new Point(width + _transforms.Value.OffsetX, height + _transforms.Value.OffsetY);
                     System.Diagnostics.Debug.WriteLine("BrushTool Coord: " + coordinate.X + " " + coordinate.Y);
 
@@ -123,10 +124,9 @@ namespace Catrobat.Paint.Phone.Tool
             else if (arg.GetType() == typeof(TranslateTransform))
             {
                 var move = (TranslateTransform)arg;
-                TranslateTransform movezoom = new TranslateTransform();
-                movezoom.X = move.X;
-                movezoom.Y = move.Y;
-                _transforms.Children.Add(movezoom);
+                _transforms.Children.Add(move);
+
+                //PocketPaintApplication.GetInstance().PaintingAreaView.changeTbTestboxText(_transforms.Value.OffsetX, _transforms.Value.OffsetY);
 
                 //PocketPaintApplication.GetInstance().PaintingAreaView.setCoordTextbox(PocketPaintApplication.GetInstance().GridCursor.ActualHeight, PocketPaintApplication.GetInstance().GridCursor.ActualWidth);
                 // PocketPaintApplication.GetInstance().PaintingAreaView.setCoordTextbox(_transforms.Value.OffsetX, _transforms.Value.OffsetY);
@@ -153,9 +153,8 @@ namespace Catrobat.Paint.Phone.Tool
                 {
                     return;
                 }
+                setHeightWidth();
 
-                double height = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2;
-                double width = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2;
                 var coordinate = new Point(width + _transforms.Value.OffsetX, height + _transforms.Value.OffsetY);
 
                 // only a point/dot is drawn, no movement of finger on screen
@@ -191,6 +190,12 @@ namespace Catrobat.Paint.Phone.Tool
         public override void ResetDrawingSpace()
         {
             throw new NotImplementedException();
+        }
+
+        public void setHeightWidth()
+        {
+            height = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0;
+            width = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0;
         }
     }
 }
