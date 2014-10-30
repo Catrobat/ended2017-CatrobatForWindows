@@ -54,6 +54,8 @@ namespace Catrobat.Paint.Phone
 
         public RectangleSelectionControl RectangleSelectionControl { get; set; }
 
+        public EllipseSelectionControl EllipseSelectionControl { get; set; }
+
         public AppbarTop AppbarTop { get; set; }
 
         // TODO: public Catrobat.Paint.Phone.Controls.AppBar.ApplicationBarTop ApplicationBarTop { get; set; }

@@ -33,6 +33,9 @@
                 <Grid x:Name="GridRectangleSelectionControl" Height="230" Visibility="Collapsed" Width="230">
                     <userControls:RectangleSelectionControl></userControls:RectangleSelectionControl>
                 </Grid>
+                <Grid x:Name="GridEllipseSelectionControl" Height="230" Visibility="Collapsed" Width="230">
+                    <userControls:EllipseSelectionControl></userControls:EllipseSelectionControl>
+                </Grid>
             </Grid>
 
             <Grid x:Name="GridUserControlRectEll" Height="240" HorizontalAlignment="Center" Margin="0,0,0,8" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">

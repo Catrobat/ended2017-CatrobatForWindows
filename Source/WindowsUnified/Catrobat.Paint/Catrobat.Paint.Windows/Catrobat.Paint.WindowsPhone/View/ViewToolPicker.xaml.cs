@@ -93,6 +93,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PocketPaintApplication.GetInstance().isBrushEraser = false;
                 PocketPaintApplication.GetInstance().isBrushTool = false;
                 PocketPaintApplication.GetInstance().isToolPickerUsed = true; ;
+                PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = Visibility.Collapsed;
+                // TODO: RectangleSelctionControl should be reseted if the rectangle-tool is selected.
+                // PocketPaintApplication.GetInstance().RectangleSelectionControl.resetRectangleSelectionControl();
 
                 switch (((Button)sender).Name)
                 {
@@ -117,6 +120,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                         break;
                     case "BtnRectangle":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
+                        PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = Visibility.Visible;
                         break;
                     case "BtnEllipse":
                         PocketPaintApplication.GetInstance().RecDrawingRectangle.Margin = new Thickness(171, 263, 0, 0);

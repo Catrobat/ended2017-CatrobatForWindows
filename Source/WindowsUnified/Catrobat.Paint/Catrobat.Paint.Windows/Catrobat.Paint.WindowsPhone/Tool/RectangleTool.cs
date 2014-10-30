@@ -138,19 +138,25 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
            // TransformGroup _transformGroup = (TransformGroup)rectangleToDraw.RenderTransform;
             var coordinate = (Point)o;
+            coordinate.X += PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
+            coordinate.Y += PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
 
             double height = PocketPaintApplication.GetInstance().BarRecEllShape.getHeight();
             double width = PocketPaintApplication.GetInstance().BarRecEllShape.getWidth();
 
+            height -= 2.0 * PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
+            width -= 2.0 * PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
+
             RectangleGeometry myRectangleGeometry = new RectangleGeometry();
             myRectangleGeometry.Rect = new Rect(coordinate, new Point(coordinate.X + width, coordinate.Y + height));
             
-
-            _path = new Path();
+            
+            Path _path = new Path();
             _path.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
             _path.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
             _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
             _path.StrokeLineJoin = PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw;
+            
             //_path.StrokeEndLineCap = PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw();
             //_path.StrokeStartLineCap = PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw();
 
