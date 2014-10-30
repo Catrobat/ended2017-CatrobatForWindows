@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // Die Elementvorlage "Benutzersteuerelement" ist unter http://go.microsoft.com/fwlink/?LinkId=234236 dokumentiert.
 
@@ -396,26 +397,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public void changeHeightOfDrawingSelection(double newHeight)
         {
             double moveValue = newHeight - rectRectangleToDraw.Height;
-            var move = new TranslateTransform();
-            ((TranslateTransform)move).X = 0.0;
-            ((TranslateTransform)move).Y = moveValue;
+            var moveY = createTranslateTransform(0.0, moveValue);
+
 
             if ((rectRectangleForMovement.Height + moveValue) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
+                setGridTransformsOfEllipses(moveY, null, moveY, moveY, moveY, null, moveY, null);
 
-                _transformGridEllipsCenterBottom.Children.Add(move);
-                _transformGridEllipseLeftBottom.Children.Add(move);
-                _transformGridEllipseRightBottom.Children.Add(move);
-
-                var move2 = new TranslateTransform();
-                ((TranslateTransform)move2).X = 0.0;
-                ((TranslateTransform)move2).Y = moveValue;
-
-                _transformGridEllipseLeftCenter.Children.Add(move2);
-                _transformGridEllipseRightCenter.Children.Add(move2);
-
-                changeHeightOfUiElements(move.Y);
-                changeMarginBottomOfUiElements(move.Y);
                 PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = rectRectangleToDraw.Height;
                 PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = rectRectangleToDraw.Width;
             }
@@ -426,24 +414,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double moveValue = newWidth - rectRectangleToDraw.Width;
             if ((rectRectangleForMovement.Width + moveValue) >= MIN_RECTANGLE_MOVE_WIDTH)
             {
-                var move = new TranslateTransform();
-                ((TranslateTransform)move).X = moveValue;
-                ((TranslateTransform)move).Y = 0.0;
+                var moveX = createTranslateTransform(moveValue, 0.0);
+                var moveX2 = createTranslateTransform(moveValue / 2, 0.0);
 
-                _transformGridEllipseRightTop.Children.Add(move);
-                _transformGridEllipseRightCenter.Children.Add(move);
-                _transformGridEllipseRightBottom.Children.Add(move);
-
-                changeWidthOfUiElements(move.X);
+                changeWidthOfUiElements(moveX.X);
                 changeMarginRightOfUiElements(moveValue);
 
-                var move2 = new TranslateTransform();
-                ((TranslateTransform)move2).X = moveValue / 2;
-                ((TranslateTransform)move2).Y = 0.0;
-
-                _transfomrGridEllipseCenterTop.Children.Add(move2);
-                _transformGridEllipsCenterBottom.Children.Add(move2);
-
+                setGridTransformsOfEllipses(moveX2, moveX2, moveX, null, null, null, moveX, moveX);
                 PocketPaintApplication.GetInstance().BarRecEllShape.setTbHeightValue = rectRectangleToDraw.Height;
                 PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = rectRectangleToDraw.Width;
             }
@@ -469,7 +446,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             coordinateX = offsetX + halfScreenWidth - positionX;
             coordianteY = offsetY + halfScreenHeight - positionY;
             PocketPaintApplication.GetInstance().ToolCurrent.Draw(new Point(coordinateX, coordianteY));
-            string test = "string";
+        }
+        public PenLineJoin strokeLineJoinOfRectangleToDraw
+        {
+            get
+            {
+                return rectRectangleToDraw.StrokeLineJoin;
+            }
+            set
+            {
+                rectRectangleToDraw.StrokeLineJoin = value;
+            }
         }
     }
 }

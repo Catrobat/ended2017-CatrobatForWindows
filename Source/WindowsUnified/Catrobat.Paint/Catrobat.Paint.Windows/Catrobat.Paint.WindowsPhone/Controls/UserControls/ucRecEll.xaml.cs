@@ -312,5 +312,30 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
 
         }
+
+        private void BtnRound_Click(object sender, RoutedEventArgs e)
+        {
+            setRectangleEdgeType(Colors.Gray, Colors.Gray, Colors.White);
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Round;
+        }
+
+        private void setRectangleEdgeType(Color bevel, Color miter, Color round)
+        {
+            BtnBevel.BorderBrush = new SolidColorBrush(bevel);
+            BtnMiter.BorderBrush = new SolidColorBrush(miter);
+            BtnRound.BorderBrush = new SolidColorBrush(round);
+        }
+
+        private void BtnMiter_Click(object sender, RoutedEventArgs e)
+        {
+            setRectangleEdgeType(Colors.Gray, Colors.White, Colors.Gray);
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Miter;
+        }
+
+        private void BtnBevel_Click(object sender, RoutedEventArgs e)
+        {
+            setRectangleEdgeType(Colors.White, Colors.Gray, Colors.Gray);
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Bevel;
+        }
     }
 }

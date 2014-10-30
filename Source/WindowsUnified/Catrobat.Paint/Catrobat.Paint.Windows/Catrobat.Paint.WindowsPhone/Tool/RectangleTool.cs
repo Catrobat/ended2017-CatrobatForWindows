@@ -150,8 +150,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _path.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
             _path.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
             _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
-            _path.StrokeEndLineCap = PenLineCap.Square;
-            _path.StrokeStartLineCap = PenLineCap.Square;
+            _path.StrokeLineJoin = PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw;
+            //_path.StrokeEndLineCap = PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw();
+            //_path.StrokeStartLineCap = PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw();
 
             _path.Data = myRectangleGeometry;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
