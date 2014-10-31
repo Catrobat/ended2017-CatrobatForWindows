@@ -1,0 +1,39 @@
+﻿<Page
+  x:Class="Catrobat_Player.DirectXPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:Catrobat_Player"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d">
+
+  <SwapChainPanel x:Name="swapChainPanel">
+    <!-- Loading Project -->
+    <!--<Grid x:Name="Loading" Grid.Row="1" Visibility="Collapsed">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <ProgressRing x:Name="LoadingProject" Grid.Row="0" Grid.Column="0" Background="Transparent"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Foreground="#FFdb7100"/>
+    </Grid>-->
+  </SwapChainPanel>
+
+  <Page.BottomAppBar>
+    <CommandBar Name="PlayerAppBar" VerticalAlignment="Bottom" Visibility="Collapsed">
+      <CommandBar.PrimaryCommands>
+        <AppBarButton x:Name="Restart" Label="Restart" Icon="Refresh" Click="OnRestartButtonClicked"/>
+        <AppBarButton x:Name="Play" Label="Pause" Icon="Play" Click="OnPlayButtonClicked"/>
+        <AppBarButton x:Name="Thumbnail" Label="Set Thumbnail" Icon="Camera" Click="OnThumbnailButtonClicked"/>
+        <AppBarButton x:Name="EnableAxes"  Label="Enable Axes"  Icon="Setting"  Click="OnEnableAxisButtonClicked"/>
+      </CommandBar.PrimaryCommands>
+      <CommandBar.SecondaryCommands>
+        <AppBarButton x:Name="Screenshot" Label="Take Screenshot" Click="OnScreenshotButtonClicked"/>
+      </CommandBar.SecondaryCommands>
+    </CommandBar>
+  </Page.BottomAppBar>
+</Page>

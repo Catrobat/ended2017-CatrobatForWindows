@@ -34,8 +34,10 @@ namespace Catrobat.Paint.Phone
         public bool isToolPickerUsed = true;
 
         public Grid GridCursor { get; set; }
+        public Grid GridEllipseSelectionControl { get; set; }
 
         public Grid GridRectangleSelectionControl { get; set; }
+
         public bool UnsavedChangesMade { get; set; }
 
         public CursorControl cursorControl { get; set; }
@@ -43,6 +45,8 @@ namespace Catrobat.Paint.Phone
         public Canvas PaintingAreaCanvas { get; set; }
         // separate layer, for temp manipulation operations
         public Canvas PaintingAreaCanvasUnderlaying { get; set; }
+
+        public Grid GridInputScopeControl { get; set; }
 
         public Grid PaintingAreaCheckeredGrid { get; set; }
 
@@ -53,6 +57,10 @@ namespace Catrobat.Paint.Phone
         public Page pgPainting { get; set; }
 
         public RectangleSelectionControl RectangleSelectionControl { get; set; }
+
+        public EllipseSelectionControl EllipseSelectionControl { get; set; }
+
+        public InputScopeControl InputScopeControl { get; set; }
 
         public AppbarTop AppbarTop { get; set; }
 

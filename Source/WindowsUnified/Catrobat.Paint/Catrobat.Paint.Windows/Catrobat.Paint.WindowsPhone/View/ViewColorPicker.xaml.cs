@@ -170,13 +170,27 @@ namespace Catrobat.Paint.WindowsPhone.View
             if ( PocketPaintApplication.GetInstance().is_border_color )
             {
                 PocketPaintApplication.GetInstance().PaintData.BorderColorSelected = new SolidColorBrush(current_color);
-                PocketPaintApplication.GetInstance().RectangleSelectionControl.changeStrokeOfDrawingShape(current_color);
+                if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
+                {
+                    PocketPaintApplication.GetInstance().RectangleSelectionControl.changeStrokeOfDrawingShape(current_color);
+                }
+                else
+                {
+                    PocketPaintApplication.GetInstance().EllipseSelectionControl.changeStrokeOfDrawingShape(current_color);
+                }
             }
             else
             {
                 var current_solid_brush = new SolidColorBrush(current_color);
                 PocketPaintApplication.GetInstance().PaintData.ColorSelected = current_solid_brush;
-                PocketPaintApplication.GetInstance().RectangleSelectionControl.changeColorOfDrawingShape(current_color);
+                if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
+                {
+                    PocketPaintApplication.GetInstance().RectangleSelectionControl.changeColorOfDrawingShape(current_color);
+                }
+                else
+                {
+                    PocketPaintApplication.GetInstance().EllipseSelectionControl.changeColorOfDrawingShape(current_color);
+                }
             }
 
             // TODO: If selected color is transparence then select the eraser-tool.

@@ -66,7 +66,9 @@ namespace Catrobat.Paint.WindowsPhone.View
             //PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
             PocketPaintApplication.GetInstance().GridCursor = GridCursor;
+            PocketPaintApplication.GetInstance().GridEllipseSelectionControl = GridEllipseSelectionControl;
             PocketPaintApplication.GetInstance().GridRectangleSelectionControl = GridRectangleSelectionControl;
+            PocketPaintApplication.GetInstance().GridInputScopeControl = GridInputScopeControl;
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
 
@@ -257,11 +259,17 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 app_btnReset.Label = "Ausgangsposition";
 
+
+                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().EllipseSelectionControl.setIsModifiedRectangleMovement ? true : false;
+
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnReset.Click += app_btn_reset_Click;
 
                 cmdBar.PrimaryCommands.Add(app_btnReset);
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
+
+                loadManipulationEvents();
+                unloadPointerEvents();
             }
             else if("barEraser" == type)
             {
@@ -364,6 +372,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnReset.Icon = reset_icon;
 
                 app_btnReset.Label = "Ausgangsposition";
+                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.setIsModifiedRectangleMovement ? true : false;
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnReset.Click += app_btn_reset_Click;
@@ -413,6 +422,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 return;
             }
             AppBarButton app_btnTools = new AppBarButton();
+            AppBarButton app_btnClearElementsInWorkingSpace = new AppBarButton();
             AppBarButton app_btnSave = new AppBarButton();
             AppBarButton app_btnSaveCopy = new AppBarButton();
             AppBarButton app_btnNewPicture = new AppBarButton();
@@ -426,6 +436,9 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnTools.Label = "Werkzeug";
             app_btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
 
+            app_btnClearElementsInWorkingSpace.Click += app_btnClearElementsInWorkingSpace_Click;
+
+            app_btnClearElementsInWorkingSpace.Label = "Arbeitsfläche löschen";
             app_btnSave.Label = "Speichern";
             app_btnSaveCopy.Label = "Kopie speichern";
             app_btnNewPicture.Label = "New Picture";
@@ -435,6 +448,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             cmdBar.PrimaryCommands.Add(app_btnTools);
 
+            cmdBar.SecondaryCommands.Add(app_btnClearElementsInWorkingSpace);
             cmdBar.SecondaryCommands.Add(app_btnSave);
             cmdBar.SecondaryCommands.Add(app_btnSaveCopy);
             cmdBar.SecondaryCommands.Add(app_btnNewPicture);
@@ -443,6 +457,11 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             BottomAppBar = cmdBar;
             current_appbar = type;
+        }
+
+        void app_btnClearElementsInWorkingSpace_Click(object sender, RoutedEventArgs e)
+        {
+            PaintingAreaCanvas.Children.Clear();
         }
 
         void app_btn_reset_Click(object sender, RoutedEventArgs e)
@@ -634,8 +653,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                     // TODO: ApplicationBar = (IApplicationBar)this.Resources["barCrop"];
                     break;
                 case ToolType.Ellipse:
-                case ToolType.Rect:
-                    createAppBarAndSwitchAppBarContent("barRectangle");
+                    createAppBarAndSwitchAppBarContent("barEllipse");
                     visibilityGridEllRecControl = PocketPaintApplication.GetInstance().GridUcRellRecControlState;
                     break;
                 case ToolType.Eraser:
@@ -644,12 +662,17 @@ namespace Catrobat.Paint.WindowsPhone.View
                 case ToolType.Flip:
                     createAppBarAndSwitchAppBarContent("barFlip");
                     break;
-                case ToolType.Pipette:
-                    createAppBarAndSwitchAppBarContent("barPipette");
-                    break;
+
                 case ToolType.Move:
                 case ToolType.Zoom:
                     createAppBarAndSwitchAppBarContent("barMove");
+                    break;
+                case ToolType.Pipette:
+                    createAppBarAndSwitchAppBarContent("barPipette");
+                    break;
+                case ToolType.Rect:
+                    createAppBarAndSwitchAppBarContent("barRectangle");
+                    visibilityGridEllRecControl = PocketPaintApplication.GetInstance().GridUcRellRecControlState;
                     break;
                 case ToolType.Rotate:
                     createAppBarAndSwitchAppBarContent("barRotate");
@@ -964,6 +987,18 @@ namespace Catrobat.Paint.WindowsPhone.View
             set
             {
                 GridRectangleSelectionControl.Visibility = value;
+            }
+        }
+
+        public Visibility setVisibilityOfGridEllipseSelectionControl
+        {
+            get
+            {
+                return GridEllipseSelectionControl.Visibility;
+            }
+            set
+            {
+                GridEllipseSelectionControl.Visibility = value;
             }
         }
     }

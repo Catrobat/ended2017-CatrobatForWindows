@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)pch.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\DeviceResources.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\DirectXHelper.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\StepTimer.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Content\Basic2DRenderer.h">
+      <Filter>Content</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Content\SampleFpsTextRenderer.h">
+      <Filter>Content</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Content\ShaderStructures.h">
+      <Filter>Content</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)AccelerometerProvider.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BaseException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BasicTimer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Brick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastMessageDaemon.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastMessageListener.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastMessageSender.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Catrobat.PlayerMain.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CatrobatTexture.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChangeGhostEffectByBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChangeSizeByBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChangeVariableBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChangeXByBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ChangeYByBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CompassProvider.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Constants.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ContainerBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CostumeBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DDSLoader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceInformation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Direct3DBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DirectXHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ForeverBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)FormulaTree.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)FormulaTreeException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)FormulaTreeFatalException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GlideToBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Helper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HideBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IfBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)InclinationProvider.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Interpreter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)lodepng.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)lodepng_util.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Look.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LoudnessCapture.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MoveNStepsBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NextLookBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Object.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ObjectList.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)OutOfBoundsException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlaceAtBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlayerException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlaySoundBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PointToBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Project.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ProjectDaemon.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RepeatBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Script.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SetGhostEffectBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SetSizeToBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SetVariableBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SetXBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SetYBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ShowBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SoundInfo.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)StartScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TextureDaemon.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TurnLeftBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TurnRightBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)UserVariable.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)VariableManagementBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WaitBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WASAPIAudio.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WhenScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)XMLParser.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserFatalException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserSevereException.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\DeviceResources.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Content\Basic2DRenderer.cpp">
+      <Filter>Content</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Content\SampleFpsTextRenderer.cpp">
+      <Filter>Content</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)AccelerometerProvider.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)BaseException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Brick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageDaemon.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageListener.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageSender.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Catrobat.PlayerMain.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CatrobatTexture.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChangeGhostEffectByBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChangeSizeByBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChangeVariableBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChangeXByBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ChangeYByBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CompassProvider.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ContainerBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CostumeBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DDSLoader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DeviceInformation.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Direct3DBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ForeverBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)FormulaTree.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)FormulaTreeException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)FormulaTreeFatalException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GlideToBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Helper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)HideBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)IfBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)InclinationProvider.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Interpreter.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)lodepng.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)lodepng_util.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Look.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LoudnessCapture.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MoveNStepsBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NextLookBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Object.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ObjectList.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)OutOfBoundsException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlaceAtBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlayerException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)PlaySoundBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)PointToBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Project.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ProjectDaemon.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)RepeatBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Script.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SetGhostEffectBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SetSizeToBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SetVariableBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SetXBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SetYBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ShowBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SoundInfo.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)StartScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TextureDaemon.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TurnLeftBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TurnRightBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)UserVariable.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)VariableManagementBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WaitBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WASAPIAudio.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WhenScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)XMLParser.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserFatalException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserSevereException.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{b669ae59-3387-44a1-9232-9bcabf5a8a80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Content">
+      <UniqueIdentifier>{d32f619e-7eb7-45a1-a965-4e30d504b10e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -50,7 +50,7 @@
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_rectangle.png" Stretch="Uniform" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnEllipse"  BorderBrush="White" Click="Button_OnClick" Content="Ellipse" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="False" Margin="0,249,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnEllipse_Holding">
+                    <Button x:Name="BtnEllipse"  BorderBrush="White" Click="Button_OnClick" Content="Ellipse" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="True" Margin="0,249,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnEllipse_Holding">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_ellipse.png" Stretch="Uniform" />
                         </Button.Background>

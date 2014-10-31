@@ -1,4 +1,5 @@
 ﻿using Catrobat.Paint.Phone;
+using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Catrobat.Paint.WindowsPhone.Tool;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -93,6 +95,10 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PocketPaintApplication.GetInstance().isBrushEraser = false;
                 PocketPaintApplication.GetInstance().isBrushTool = false;
                 PocketPaintApplication.GetInstance().isToolPickerUsed = true; ;
+                PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Visibility = Visibility.Collapsed;
+                PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Visibility = Visibility.Collapsed;
+                // TODO: RectangleSelctionControl should be reseted if the rectangle-tool is selected.
+                // PocketPaintApplication.GetInstance().RectangleSelectionControl.resetRectangleSelectionControl();
 
                 switch (((Button)sender).Name)
                 {
@@ -117,13 +123,29 @@ namespace Catrobat.Paint.WindowsPhone.View
                         break;
                     case "BtnRectangle":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
+                        
+                        PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Clear();
+                        PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Add(new RectangleSelectionControl());
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = 160.0;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
+
+                        PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Visibility = Visibility.Visible;
+                        bool enableEdgeTypes = true;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
                         break;
                     case "BtnEllipse":
-                        PocketPaintApplication.GetInstance().RecDrawingRectangle.Margin = new Thickness(171, 263, 0, 0);
-                        PocketPaintApplication.GetInstance().RecDrawingRectangle.Height = 50;
-                        PocketPaintApplication.GetInstance().RecDrawingRectangle.Width = 50;
-                        PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Visible;
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Ellipse);
+                        
+                        PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Children.Clear();
+                        PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Children.Add(new EllipseSelectionControl());
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = 160.0;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
+
+                        PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Visibility = Visibility.Visible;
+                        enableEdgeTypes = false;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.Gray);
                         break;
                     case "BtnImportPicture":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.ImportPng);
