@@ -317,6 +317,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             resetAppBarButtonRectangleSelectionControl(true);
             setIsModifiedRectangleMovement = true;
+
+            PocketPaintApplication.GetInstance().BarRecEllShape.updateSldStrokeThickness(Convert.ToInt32(rectRectangleToDraw.Height), Convert.ToInt32(rectRectangleToDraw.Width));
         }
 
         private void changeWidthOfUiElements(double value)
@@ -335,6 +337,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             resetAppBarButtonRectangleSelectionControl(true);
             setIsModifiedRectangleMovement = true;
+
+            PocketPaintApplication.GetInstance().BarRecEllShape.updateSldStrokeThickness(Convert.ToInt32(rectRectangleToDraw.Height), Convert.ToInt32(rectRectangleToDraw.Width));
         }
 
         private void changeMarginBottomOfUiElements(double value)
@@ -422,6 +426,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 resetAppBarButtonRectangleSelectionControl(true);
                 setIsModifiedRectangleMovement = true;
             }
+
+            PocketPaintApplication.GetInstance().BarRecEllShape.updateSldStrokeThickness(Convert.ToInt32(rectRectangleToDraw.Height), Convert.ToInt32(rectRectangleToDraw.Width));
         }
 
         public void changeWidthOfDrawingSelection(double newWidth, bool changeTbValues)
@@ -445,6 +451,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 resetAppBarButtonRectangleSelectionControl(true);
                 setIsModifiedRectangleMovement = true;
             }
+
+            PocketPaintApplication.GetInstance().BarRecEllShape.updateSldStrokeThickness(Convert.ToInt32(rectRectangleToDraw.Height), Convert.ToInt32(rectRectangleToDraw.Width));
         }
 
         private void rectRectangleForMovement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
