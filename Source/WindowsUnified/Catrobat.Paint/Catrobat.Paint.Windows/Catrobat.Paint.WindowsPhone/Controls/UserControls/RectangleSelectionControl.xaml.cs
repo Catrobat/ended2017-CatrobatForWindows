@@ -314,6 +314,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 rectRectangleToDraw.Height = 10.0;
             }
+
+            resetAppBarButtonRectangleSelectionControl(true);
+            setIsModifiedRectangleMovement = true;
         }
 
         private void changeWidthOfUiElements(double value)
@@ -329,6 +332,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 rectRectangleToDraw.Width = 10.0;
             }
+
+            resetAppBarButtonRectangleSelectionControl(true);
+            setIsModifiedRectangleMovement = true;
         }
 
         private void changeMarginBottomOfUiElements(double value)

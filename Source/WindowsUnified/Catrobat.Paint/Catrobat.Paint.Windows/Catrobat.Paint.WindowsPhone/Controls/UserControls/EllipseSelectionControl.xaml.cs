@@ -317,6 +317,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 ellEllipseToDraw.Height = 10.0;
             }
+            resetAppBarButtonEllipseSelectionControl(true);
+            setIsModifiedRectangleMovement = true;
         }
 
         private void changeWidthOfUiElements(double value)
@@ -332,6 +334,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 ellEllipseToDraw.Width = 10.0;
             }
+            resetAppBarButtonEllipseSelectionControl(true);
+            setIsModifiedRectangleMovement = true;
         }
 
         private void changeMarginBottomOfUiElements(double value)
