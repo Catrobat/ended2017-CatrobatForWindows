@@ -174,9 +174,13 @@ namespace Catrobat.Paint.WindowsPhone.View
                 {
                     PocketPaintApplication.GetInstance().RectangleSelectionControl.changeStrokeOfDrawingShape(current_color);
                 }
-                else
+                else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                 {
                     PocketPaintApplication.GetInstance().EllipseSelectionControl.changeStrokeOfDrawingShape(current_color);
+                }
+                else 
+                {
+                    PocketPaintApplication.GetInstance().ImportImageSelectionControl.changeStrokeOfDrawingShape(current_color);
                 }
             }
             else
@@ -187,9 +191,13 @@ namespace Catrobat.Paint.WindowsPhone.View
                 {
                     PocketPaintApplication.GetInstance().RectangleSelectionControl.changeColorOfDrawingShape(current_color);
                 }
-                else
+                else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                 {
                     PocketPaintApplication.GetInstance().EllipseSelectionControl.changeColorOfDrawingShape(current_color);
+                }
+                else 
+                {
+                    PocketPaintApplication.GetInstance().ImportImageSelectionControl.changeColorOfDrawingShape(current_color);
                 }
             }
 

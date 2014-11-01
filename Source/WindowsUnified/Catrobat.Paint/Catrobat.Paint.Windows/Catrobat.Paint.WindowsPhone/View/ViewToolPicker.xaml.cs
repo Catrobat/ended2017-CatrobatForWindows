@@ -153,7 +153,16 @@ namespace Catrobat.Paint.WindowsPhone.View
                         break;
                     case "BtnImportPicture":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.ImportPng);
+
+                        PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Children.Clear();
+                        PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Children.Add(new ImportImageSelectionControl());
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = 160.0;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
+
                         PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = Visibility.Visible;
+                        enableEdgeTypes = true;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
                         break;
                     case "BtnCrop":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Crop);

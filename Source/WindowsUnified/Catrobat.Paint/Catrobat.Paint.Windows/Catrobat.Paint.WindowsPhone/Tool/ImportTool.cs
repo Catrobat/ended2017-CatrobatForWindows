@@ -85,7 +85,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _path.Fill = berriesBrush;
             _path.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
             _path.StrokeThickness = borderThickness;
-            _path.StrokeLineJoin = PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw;
+            _path.StrokeLineJoin = PocketPaintApplication.GetInstance().ImportImageSelectionControl.strokeLineJoinOfRectangleToDraw;
 
             _path.Data = myRectangleGeometry;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
