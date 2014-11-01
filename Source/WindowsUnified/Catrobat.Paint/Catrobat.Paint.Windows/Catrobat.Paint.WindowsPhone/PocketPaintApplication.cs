@@ -38,6 +38,8 @@ namespace Catrobat.Paint.Phone
 
         public Grid GridRectangleSelectionControl { get; set; }
 
+        public Grid GridCutControl { get; set; }
+
         public bool UnsavedChangesMade { get; set; }
 
         public CursorControl cursorControl { get; set; }
@@ -57,6 +59,8 @@ namespace Catrobat.Paint.Phone
         public Page pgPainting { get; set; }
 
         public RectangleSelectionControl RectangleSelectionControl { get; set; }
+
+        public CutControl CutControl { get; set; }
 
         public EllipseSelectionControl EllipseSelectionControl { get; set; }
 
@@ -195,6 +199,9 @@ namespace Catrobat.Paint.Phone
             {
                 case ToolType.Brush:
                     ToolCurrent = new BrushTool(toolType);
+                    break;
+                case ToolType.Crop:
+                    ToolCurrent = new CropTool();
                     break;
                 case ToolType.Cursor:
                     ToolCurrent = new CursorTool(toolType);

@@ -19,7 +19,8 @@
                 </Grid.Background>
 
                 <!--<Canvas x:Name="PaintingAreaCanvasUnderlaying"  Background="Transparent"/>-->
-                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent"  ManipulationMode="TranslateX, TranslateY, Scale" >
+                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent"  ManipulationMode="TranslateX, TranslateY, Rotate, Scale" >
+     
                 </Canvas>
                 <Grid Background="#44d3d3d3" Visibility="Collapsed" />
                 <!--<Rectangle x:Name="rectDrawRectangle" DoubleTapped="rectDrawRectangle_DoubleTapped" Fill="Blue" Height="50" HorizontalAlignment="Left" 
@@ -36,9 +37,13 @@
                 <Grid x:Name="GridEllipseSelectionControl" Height="230" Visibility="Collapsed" Width="230">
                     <userControls:EllipseSelectionControl></userControls:EllipseSelectionControl>
                 </Grid>
+
+                <Grid x:Name="GridCutControl" Height="496" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Width="384">
+                    <userControls:CutControl></userControls:CutControl>
+                </Grid>
             </Grid>
 
-            <Grid x:Name="GridUserControlRectEll" Height="240" HorizontalAlignment="Center" Margin="0,0,0,8" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
+            <Grid x:Name="GridUserControlRectEll" Height="240" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <userControls:ucRecEll></userControls:ucRecEll>
             </Grid>
 
@@ -49,6 +54,7 @@
             <Grid x:Name="GrdThicknessControl" Height="380" Margin="0,0,0,0" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <controls:ThicknessControl x:Name="CtrlThicknessControl"></controls:ThicknessControl>
             </Grid>
+
             <!--ONLY FOR TESTING
             <TextBox x:Name="tbTest" HorizontalAlignment="Left" Margin="160,162,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
             -->
@@ -67,7 +73,7 @@
         <StackPanel Grid.Row="0" Canvas.ZIndex="10" VerticalAlignment="Top">
             <controls:AppbarTop x:Name="barRecEll"></controls:AppbarTop>
         </StackPanel>
-        
+
         <TextBox x:Name="coordinates" HorizontalAlignment="Left" Margin="87,96,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Visibility="Collapsed"/>
     </Grid>
 

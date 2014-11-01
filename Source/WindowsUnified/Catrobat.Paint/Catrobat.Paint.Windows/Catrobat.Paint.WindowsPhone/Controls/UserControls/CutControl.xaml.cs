@@ -21,7 +21,7 @@ using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 {
-    public sealed partial class RectangleSelectionControl : UserControl
+    public sealed partial class CutControl : UserControl
     {
         TransformGroup _transformGridEllipsCenterBottom;
         TransformGroup _transfomrGridEllipseCenterTop;
@@ -33,28 +33,33 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         TransformGroup _transformGridEllipseRightTop;
         TransformGroup _transformGridMain;
 
-        const double MIN_RECTANGLE_MOVE_HEIGHT = 50.0;
-        const double MIN_RECTANGLE_MOVE_WIDTH = 50.0;
+        const double MIN_RECTANGLE_MOVE_HEIGHT = 60.0;
+        const double MIN_RECTANGLE_MOVE_WIDTH = 60.0;
         bool _isModifiedRectangleMovement;
-        
-        public RectangleSelectionControl()
+
+        public CutControl()
         {
             this.InitializeComponent();
 
-            GridEllCenterBottom.RenderTransform = _transformGridEllipsCenterBottom = new TransformGroup();
-            GridEllCenterTop.RenderTransform = _transfomrGridEllipseCenterTop = new TransformGroup();
-            GridEllRightCenter.RenderTransform = _transformGridEllipseRightCenter = new TransformGroup();
-            GridEllLeftBottom.RenderTransform = _transformGridEllipseLeftBottom = new TransformGroup();
-            GridEllLeftCenter.RenderTransform = _transformGridEllipseLeftCenter = new TransformGroup();
-            GridEllLeftTop.RenderTransform = _transformGridEllipseLeftTop = new TransformGroup();
-            GridEllRightBottom.RenderTransform = _transformGridEllipseRightBottom = new TransformGroup();
-            GridEllRightTop.RenderTransform = _transformGridEllipseRightTop = new TransformGroup();
+            GridRectCenterBottom.RenderTransform = _transformGridEllipsCenterBottom = new TransformGroup();
+            GridRectCenterTop.RenderTransform = _transfomrGridEllipseCenterTop = new TransformGroup();
+            GridRectRightCenter.RenderTransform = _transformGridEllipseRightCenter = new TransformGroup();
+            GridRectLeftBottom.RenderTransform = _transformGridEllipseLeftBottom = new TransformGroup();
+            GridRectLeftCenter.RenderTransform = _transformGridEllipseLeftCenter = new TransformGroup();
+            GridRectLeftTop.RenderTransform = _transformGridEllipseLeftTop = new TransformGroup();
+            GridRectRightBottom.RenderTransform = _transformGridEllipseRightBottom = new TransformGroup();
+            GridRectRightTop.RenderTransform = _transformGridEllipseRightTop = new TransformGroup();
             GridMain.RenderTransform = _transformGridMain = new TransformGroup();
             rectRectangleToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
             rectRectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
             rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
-            PocketPaintApplication.GetInstance().RectangleSelectionControl = this;
+            PocketPaintApplication.GetInstance().CutControl = this;
             setIsModifiedRectangleMovement = false;
+
+            if(!hasElementsPaintingAreaViews())
+            {
+                rectRectangleForMovement.Stroke = new SolidColorBrush(Colors.Transparent);
+            }
         }
         private void _setGridTransformsOfEllipses(TransformGroup transformGroup, TranslateTransform translateTransform)
         {
@@ -132,9 +137,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = width;
         }
 
-        private void ellCenterBottom_ManipulationDelta_1(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void rectCenterBottom_ManipulationDelta_1(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectRectangleForMovement.Height + e.Delta.Translation.Y) >= MIN_RECTANGLE_MOVE_HEIGHT)
+            if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Height + e.Delta.Translation.Y) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
                 var moveY = createTranslateTransform(0.0, Math.Round(e.Delta.Translation.Y));
                 var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
@@ -149,9 +154,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void ellCenterTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void rectCenterTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectRectangleForMovement.Height + (e.Delta.Translation.Y * -1)) >= MIN_RECTANGLE_MOVE_HEIGHT)
+            if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Height + (e.Delta.Translation.Y * -1)) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
                 var moveY = createTranslateTransform(0.0, Math.Round(e.Delta.Translation.Y));
                 var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
@@ -165,9 +170,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void ellLeftBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void rectLeftBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectRectangleForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_RECTANGLE_MOVE_WIDTH &&
+            if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_RECTANGLE_MOVE_WIDTH &&
                (rectRectangleForMovement.Height + e.Delta.Translation.Y) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
                 var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
@@ -190,9 +195,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void ellLeftCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void rectLeftCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectRectangleForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_RECTANGLE_MOVE_WIDTH)
+            if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_RECTANGLE_MOVE_WIDTH)
             {
                 var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
                 var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
@@ -207,9 +212,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
         
-        private void ellLeftTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void rectLeftTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectRectangleForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_RECTANGLE_MOVE_WIDTH &&
+            if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_RECTANGLE_MOVE_WIDTH &&
                 (rectRectangleForMovement.Height + (e.Delta.Translation.Y * -1)) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
                 var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
@@ -232,9 +237,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void ellRightBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void rectRightBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectRectangleForMovement.Width + e.Delta.Translation.X) >= MIN_RECTANGLE_MOVE_WIDTH &&
+            if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + e.Delta.Translation.X) >= MIN_RECTANGLE_MOVE_WIDTH &&
                 (rectRectangleForMovement.Height + e.Delta.Translation.Y) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
                 var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
@@ -258,9 +263,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         }
 
-        private void ellRightCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void rectRightCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectRectangleForMovement.Width + e.Delta.Translation.X) >= MIN_RECTANGLE_MOVE_WIDTH)
+            if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + e.Delta.Translation.X) >= MIN_RECTANGLE_MOVE_WIDTH)
             {
                 var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
                 var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
@@ -275,9 +280,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void ellRightTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void rectRightTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectRectangleForMovement.Width + e.Delta.Translation.X) >= MIN_RECTANGLE_MOVE_WIDTH &&
+            if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + e.Delta.Translation.X) >= MIN_RECTANGLE_MOVE_WIDTH &&
                (rectRectangleForMovement.Height + (e.Delta.Translation.Y * -1)) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
                 var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
@@ -526,6 +531,16 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             coordianteY = offsetY + halfScreenHeight - 72.0 + (valueTop - valueBottom) / 2.0;
 
             return new Point(rectRectangleForMovement.Width/2.0, rectRectangleForMovement.Height/2.0);
+        }
+
+        public bool hasElementsPaintingAreaViews()
+        {
+            bool result = false;
+            if (PocketPaintApplication.GetInstance().PaintingAreaCanvas != null)
+            {
+                result = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0 ? true : false;
+            }
+            return false;
         }
     }
 }

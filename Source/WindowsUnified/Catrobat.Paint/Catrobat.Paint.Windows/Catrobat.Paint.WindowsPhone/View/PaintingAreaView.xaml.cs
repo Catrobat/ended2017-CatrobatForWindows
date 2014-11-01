@@ -9,12 +9,15 @@ using Catrobat.Paint.WindowsPhone.Controls.AppBar;
 using Catrobat.Paint.WindowsPhone.Tool;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Phone.UI.Input;
+using Windows.Storage;
+using Windows.Storage.Search;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -69,6 +72,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().GridEllipseSelectionControl = GridEllipseSelectionControl;
             PocketPaintApplication.GetInstance().GridRectangleSelectionControl = GridRectangleSelectionControl;
             PocketPaintApplication.GetInstance().GridInputScopeControl = GridInputScopeControl;
+            PocketPaintApplication.GetInstance().GridCutControl = GridCutControl;
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
 
@@ -175,6 +179,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
         }
 
+
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
             //e.PageState["PaintingAreaCanvasUnderlaying"] = PaintingAreaCanvasUnderlaying.Children;
@@ -237,6 +242,32 @@ namespace Catrobat.Paint.WindowsPhone.View
                     loadManipulationEvents();
                     unloadPointerEvents();
                 }
+            }
+            else if("barCrop" == type)
+            {
+                AppBarButton app_btnCutSelection = new AppBarButton();
+                AppBarButton app_btnReset = new AppBarButton();
+
+                app_btnReset.Name = "appButtonResetCrop";
+
+                BitmapIcon cutPictureIcon = new BitmapIcon();
+                cutPictureIcon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_flip_vertical.png", UriKind.Absolute);
+                app_btnCutSelection.Icon = cutPictureIcon;
+
+                BitmapIcon reset_icon = new BitmapIcon();
+                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
+                app_btnReset.Icon = reset_icon;
+
+                app_btnCutSelection.Label = "schneiden";
+                app_btnReset.Label = "Ausgangsposition";
+
+                app_btnReset.Click += app_btn_reset_Click;
+
+                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().CutControl.setIsModifiedRectangleMovement ? true : false;
+
+                cmdBar.PrimaryCommands.Add(app_btnCutSelection);
+                cmdBar.PrimaryCommands.Add(app_btnReset);
+
             }
             else if("barPipette" == type)
             {
@@ -651,6 +682,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                     break;
                 case ToolType.Crop:
                     // TODO: ApplicationBar = (IApplicationBar)this.Resources["barCrop"];
+                    createAppBarAndSwitchAppBarContent("barCrop");
                     break;
                 case ToolType.Ellipse:
                     createAppBarAndSwitchAppBarContent("barEllipse");

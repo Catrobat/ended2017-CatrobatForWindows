@@ -55,12 +55,12 @@
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_ellipse.png" Stretch="Uniform" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnImportPicture"  BorderBrush="White" Click="Button_OnClick" Content="Bild einfügen" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Left" IsEnabled="False" Margin="0,249,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnImportPicture_Holding">
+                    <Button x:Name="BtnImportPicture"  BorderBrush="White" Click="Button_OnClick" Content="Bild einfügen" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Left" IsEnabled="True" Margin="0,249,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnImportPicture_Holding">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_import_image.png" Stretch="Uniform" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnZuschneiden"  BorderBrush="White" Click="Button_OnClick" Content="Zuschneiden" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="False" Margin="0,324,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnZuschneiden_Holding">
+                    <Button x:Name="BtnCrop"  BorderBrush="White" Click="Button_OnClick" Content="Zuschneiden" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="True" Margin="0,324,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnZuschneiden_Holding">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_crop.png" Stretch="Uniform" />
                         </Button.Background>

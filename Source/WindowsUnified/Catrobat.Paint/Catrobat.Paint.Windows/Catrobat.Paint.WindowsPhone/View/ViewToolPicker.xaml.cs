@@ -97,6 +97,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PocketPaintApplication.GetInstance().isToolPickerUsed = true; ;
                 PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Visibility = Visibility.Collapsed;
+                PocketPaintApplication.GetInstance().GridCutControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridRectangleSelectionControl.IsHitTestVisible = true;
                 PocketPaintApplication.GetInstance().GridEllipseSelectionControl.IsHitTestVisible = true;
                 // TODO: RectangleSelctionControl should be reseted if the rectangle-tool is selected.
@@ -154,6 +155,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                         break;
                     case "BtnCrop":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Crop);
+                        PocketPaintApplication.GetInstance().GridCutControl.Visibility = Visibility.Visible;
+                        PocketPaintApplication.GetInstance().GridCutControl.Children.Clear();
+                        PocketPaintApplication.GetInstance().GridCutControl.Children.Add(new CutControl());
                         break;
                     case "BtnEraser":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Eraser);

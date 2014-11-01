@@ -16,6 +16,9 @@ namespace Catrobat.Paint.Phone.Listener
 {
     class PaintingAreaManipulationListener 
     {
+        Point lastPoint = new Point(0.0, 0.0);
+        int lastAngleValue = 0;
+
         public void ManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
         {
             e.Mode.ToString();
@@ -47,13 +50,41 @@ namespace Catrobat.Paint.Phone.Listener
 
             object movezoom = null;
             RotateTransform rotate = new RotateTransform();
+            rotate.CenterX = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Width / 2.0;
+            rotate.CenterY = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Height / 2.0;
 
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
             {
-                rotate.CenterX = Window.Current.Bounds.Width / 2.0;
-                rotate.CenterY = (Window.Current.Bounds.Height - 150.0) / 2.0;
-                double result = (((e.Position.X / 384.0) * 360.0) + (e.Position.Y / (Window.Current.Bounds.Height - 150.0)) * 360.0) / 2;
-                rotate.Angle = result;
+                // TODO:
+                //int angleValue = 1;
+                //int currentWinkel = (int)((point.X / 384) * 360 + point.Y / (Window.Current.Bounds.Height - 144.0) * 360.0) / 2;
+
+                //if (point.Y < rotate.CenterY && point.X < rotate.CenterX)
+                //{
+                //    int distanceY = (int)Math.Abs(Math.Abs(lastPoint.Y) - Math.Abs(point.Y));
+                //    int distanceX = (int)Math.Abs(Math.Abs(lastPoint.X) - Math.Abs(point.X));
+                //    if(distanceX > distanceY)
+                //    {
+                //        angleValue = -2;
+                //    }
+                //}
+                //else if (point.Y > rotate.CenterY)
+                //{
+                //    if (lastPoint.X < point.X)
+                //    {
+                //        angleValue = -2;
+                //    }
+                //    else if (lastPoint.X > point.X)
+                //    {
+                //        angleValue = 2;
+                //    }
+                //}
+
+                //double result = (((e.Position.X / Window.Current.Bounds.Width) * 360.0) + (e.Position.Y / (Window.Current.Bounds.Height - 150.0)) * 360.0) / 2;
+                //rotate.Angle = angleValue;
+
+                //lastPoint = point;
+                //lastAngleValue = currentWinkel;
             }
             else
             {

@@ -45,7 +45,13 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleMove(object arg)
         {
+            // TODO:
+            //RotateTransform rotateTransform = new RotateTransform();
+            //rotateTransform = (RotateTransform)arg;
+            //_transforms.Children.Add(rotateTransform);
 
+            // _transforms = ((RotateTransform)arg);
+            
         }
 
         public override void HandleUp(object arg)
