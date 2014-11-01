@@ -31,12 +31,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
         double height_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
         int lastValue;
+        int minValue;
         private Button currentButton = null;
         public InputScopeControl()
         {
             this.InitializeComponent();
             PocketPaintApplication.GetInstance().InputScopeControl = this;
             lastValue = 0;
+            minValue = 10;
             setLayout();
         }
 
@@ -112,6 +114,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 }
                 
             }
+
+            checkInputRange();
         }
 
         private void btnDeleteNumbers_Click(object sender, RoutedEventArgs e)
@@ -121,6 +125,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 tbInputValue.Text = tbInputValue.Text.Remove(tbInputValue.Text.Length - 1);
                 lastValue = tbInputValue.Text.Length != 0 ? Convert.ToInt32(tbInputValue.Text) : lastValue;
             }
+
+            checkInputRange();
         }
 
         public void setTextOfInputValue(string text)
@@ -167,6 +173,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                             PocketPaintApplication.GetInstance().EllipseSelectionControl.changeWidthOfDrawingSelection(currentValue, false);
                     }
                 }
+            }
+        }
+
+        public void checkInputRange()
+        {
+            if (tbInputValue.Text.Length == 0 || Convert.ToInt32(tbInputValue.Text) < minValue)
+            {
+                btnAccept.IsEnabled = false;
+            }
+            else
+            {
+                btnAccept.IsEnabled = true;
             }
         }
 

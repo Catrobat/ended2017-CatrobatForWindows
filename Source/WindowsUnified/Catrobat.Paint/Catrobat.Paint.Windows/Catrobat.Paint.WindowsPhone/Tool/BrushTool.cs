@@ -130,12 +130,10 @@ namespace Catrobat.Paint.Phone.Tool
 
         public override void Draw(object o)
         {
-            throw new NotImplementedException();
         }
 
         public override void ResetDrawingSpace()
         {
-            throw new NotImplementedException();
         }
     }
 }

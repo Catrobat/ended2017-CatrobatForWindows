@@ -172,6 +172,22 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void sldSlidersChanged_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             int strokeThickness = (int)sldStrokeThickness.Value;
+
+            //Int32 minValue = Convert.ToInt32(btnWidthValue.Content) > Convert.ToInt32(btnHeightValue.Content) ?
+            //               Convert.ToInt32(btnHeightValue.Content) : Convert.ToInt32(btnWidthValue.Content);
+
+            //if ((2 * strokeThickness) >= minValue)
+            //{
+            //    if (minValue % 2 > 0)
+            //    {
+            //        strokeThickness = (minValue - 1) / 2;
+            //    }
+            //    else
+            //    {
+            //        strokeThickness = (minValue - 2) / 2;
+            //    }
+            //}
+
             tbStrokeThicknessValue.Text = strokeThickness.ToString();
             PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll = strokeThickness;
 
@@ -290,6 +306,33 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().GridInputScopeControl.Visibility = Visibility.Visible;
             PocketPaintApplication.GetInstance().InputScopeControl.setTextOfInputValue(btnWidthValue.Content.ToString());
             PocketPaintApplication.GetInstance().InputScopeControl.setCurrentButton = btnWidthValue;
+        }
+
+        public void updateSldStrokeThickness(int currentWidth, int currentHeight)
+        {
+            int minValue = currentWidth > currentHeight ? currentHeight : currentWidth;
+            int currentStrokeThickness = (int) sldStrokeThickness.Value;
+
+            if (minValue % 2 > 0)
+            {
+                sldStrokeThickness.Maximum = (minValue - 1) / 2;
+            }
+            else
+            {
+                sldStrokeThickness.Maximum = (minValue - 2) / 2;
+            }
+            
+            if ((2 * currentStrokeThickness) >= minValue)
+            {
+                if (minValue % 2 > 0)
+                {
+                    currentStrokeThickness = (minValue - 1) / 2;
+                }
+                else
+                {
+                    currentStrokeThickness = (minValue - 2) / 2;
+                }
+            }
         }
     }
 }

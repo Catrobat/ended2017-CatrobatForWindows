@@ -36,27 +36,6 @@ namespace Catrobat.Paint.Phone.Listener
             }
         }
 
-        public void BtnColBtnSelectedColor_OnClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void BtnMoveScreen_OnClick(object sender, RoutedEventArgs e)
-        {
-            
-            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() != ToolType.Move)
-            {
-                //PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityGrdSliderThickness(Visibility.Collapsed);
-                PocketPaintApplication.GetInstance().SwitchTool(ToolType.Move);
-            }
-            else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Move)
-            {
-                if (PocketPaintApplication.GetInstance().ToolWhileMoveTool == null)
-                    return;
-                PocketPaintApplication.GetInstance().SwitchTool(PocketPaintApplication.GetInstance().ToolWhileMoveTool.GetToolType());
-            }
-        }
-
         public void BtnMoveScreenEllipse_OnClick(object sender, RoutedEventArgs e)
         {
 
@@ -64,12 +43,16 @@ namespace Catrobat.Paint.Phone.Listener
             {
                 //PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityGrdSliderThickness(Visibility.Collapsed);
                 PocketPaintApplication.GetInstance().SwitchTool(ToolType.Move);
+                PocketPaintApplication.GetInstance().GridEllipseSelectionControl.IsHitTestVisible = false;
+                PocketPaintApplication.GetInstance().GridRectangleSelectionControl.IsHitTestVisible = false;
             }
             else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Move)
             {
                 if (PocketPaintApplication.GetInstance().ToolWhileMoveTool == null)
                     return;
                 PocketPaintApplication.GetInstance().SwitchTool(PocketPaintApplication.GetInstance().ToolWhileMoveTool.GetToolType());
+                PocketPaintApplication.GetInstance().GridEllipseSelectionControl.IsHitTestVisible = true;
+                PocketPaintApplication.GetInstance().GridRectangleSelectionControl.IsHitTestVisible = true;
             }
         }
 

@@ -97,6 +97,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PocketPaintApplication.GetInstance().isToolPickerUsed = true; ;
                 PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Visibility = Visibility.Collapsed;
+                PocketPaintApplication.GetInstance().GridRectangleSelectionControl.IsHitTestVisible = true;
+                PocketPaintApplication.GetInstance().GridEllipseSelectionControl.IsHitTestVisible = true;
                 // TODO: RectangleSelctionControl should be reseted if the rectangle-tool is selected.
                 // PocketPaintApplication.GetInstance().RectangleSelectionControl.resetRectangleSelectionControl();
 
