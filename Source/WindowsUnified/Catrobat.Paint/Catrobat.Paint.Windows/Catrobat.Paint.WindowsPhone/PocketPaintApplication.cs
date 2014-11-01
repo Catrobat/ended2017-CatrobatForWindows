@@ -38,6 +38,8 @@ namespace Catrobat.Paint.Phone
 
         public Grid GridRectangleSelectionControl { get; set; }
 
+        public Grid GridImportImageSelectionControl { get; set; }
+
         public Grid GridCutControl { get; set; }
 
         public bool UnsavedChangesMade { get; set; }
@@ -63,6 +65,8 @@ namespace Catrobat.Paint.Phone
         public CutControl CutControl { get; set; }
 
         public EllipseSelectionControl EllipseSelectionControl { get; set; }
+
+        public ImportImageSelectionControl ImportImageSelectionControl { get; set; }
 
         public InputScopeControl InputScopeControl { get; set; }
 
@@ -211,6 +215,9 @@ namespace Catrobat.Paint.Phone
                     break;
                 case ToolType.Eraser:
                     ToolCurrent = new EraserTool(toolType);
+                    break;
+                case ToolType.ImportPng:
+                    ToolCurrent = new ImportTool();
                     break;
                 case ToolType.Flip:
                     ToolCurrent = new FlipTool();

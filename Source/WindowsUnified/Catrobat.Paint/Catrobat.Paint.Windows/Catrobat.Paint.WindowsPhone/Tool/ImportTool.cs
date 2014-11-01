@@ -1,44 +1,103 @@
-﻿using Catrobat.Paint.Phone.Tool;
+﻿using Catrobat.Paint.Phone;
+using Catrobat.Paint.Phone.Tool;
+using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
+using Windows.Foundation;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class ImportTool : ToolBase
     {
+        private TransformGroup _transforms;
+
         public ImportTool()
         {
             this.ToolType = ToolType.ImportPng;
-             
+
+            if (PocketPaintApplication.GetInstance() != null && PocketPaintApplication.GetInstance().PaintingAreaView != null)
+            {
+
+                if (PocketPaintApplication.GetInstance().GridImportImageSelectionControl.RenderTransform != null)
+                {
+                    _transforms = PocketPaintApplication.GetInstance().GridImportImageSelectionControl.RenderTransform as TransformGroup;
+                }
+                if (_transforms == null)
+                {
+                    PocketPaintApplication.GetInstance().GridImportImageSelectionControl.RenderTransform = _transforms = new TransformGroup();
+                }
+            }
         }
 
         public override void HandleDown(object arg)
         {
-            throw new NotImplementedException();
+
         }
 
         public override void HandleMove(object arg)
         {
-            throw new NotImplementedException();
+            // TODO:
+            //RotateTransform rotateTransform = new RotateTransform();
+            //rotateTransform = (RotateTransform)arg;
+            //_transforms.Children.Add(rotateTransform);
+
+            // _transforms = ((RotateTransform)arg);
+
         }
 
         public override void HandleUp(object arg)
         {
-            throw new NotImplementedException();
+
         }
 
         public override void Draw(object o)
         {
-            throw new NotImplementedException();
+            var borderThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
+
+            var coordinate = (Point)o;
+            coordinate.X += borderThickness / 2.0;
+            coordinate.Y += borderThickness / 2.0;
+
+            double height = PocketPaintApplication.GetInstance().BarRecEllShape.getHeight();
+            double width = PocketPaintApplication.GetInstance().BarRecEllShape.getWidth();
+            height -= borderThickness;
+            width -= borderThickness;
+
+            RectangleGeometry myRectangleGeometry = new RectangleGeometry();
+            myRectangleGeometry.Rect = new Rect(coordinate, new Point(coordinate.X + width, coordinate.Y + height));
+
+
+            Path _path = new Path();
+            ImageBrush berriesBrush = new ImageBrush();
+            berriesBrush.ImageSource =
+                new BitmapImage(
+                    new Uri("ms-resource:/Files/Assets/test.jpg", UriKind.Absolute)
+                );
+            _path.Fill = berriesBrush;
+            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
+            _path.StrokeThickness = borderThickness;
+            _path.StrokeLineJoin = PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw;
+
+            _path.Data = myRectangleGeometry;
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
         }
 
         public override void ResetDrawingSpace()
         {
-            throw new NotImplementedException();
+            PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Children.Clear();
+            PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Children.Add(new ImportImageSelectionControl());
+            PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = 160.0;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.setIsModifiedRectangleMovement = false;
         }
     }
 }
