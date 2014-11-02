@@ -47,6 +47,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         static int zoomCounter;
         Point start_point = new Point();
         Point old_point = new Point();
+
         public PaintingAreaView()
         {
             this.InitializeComponent();
@@ -1007,7 +1008,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         public void changeTbTestboxText(double value1, double value2)
         {
-            //tbTest.Text = value1.ToString() + ", " + value2.ToString();
+            tbTest.Text = value1.ToString() + ", " + value2.ToString();
         }
 
         public Visibility setVisibilityOfGridRectangleSelectionControl

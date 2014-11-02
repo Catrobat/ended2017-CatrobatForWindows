@@ -525,7 +525,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             coordinateX = offsetX + halfScreenWidth + (valueLeft - valueRight) / 2.0;
             coordianteY = offsetY + halfScreenHeight - 72.0 + (valueTop - valueBottom) / 2.0;
 
-            return new Point(rectRectangleForMovement.Width/2.0, rectRectangleForMovement.Height/2.0);
+            return new Point(coordinateX, coordianteY);
         }
     }
 }

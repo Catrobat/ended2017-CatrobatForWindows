@@ -52,40 +52,54 @@ namespace Catrobat.Paint.Phone.Listener
             RotateTransform rotate = new RotateTransform();
             rotate.CenterX = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Width / 2.0;
             rotate.CenterY = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Height / 2.0;
+            //rectRectangleForMovement.Width / 2.0, rectRectangleForMovement.Height / 2.0
 
-            double displayCenterX = Window.Current.Bounds.Width / 2.0;
-            double displayCenterY = Window.Current.Bounds.Width / 2.0;
+            Point centerPoint = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCenterPointOfSelectionControl();
 
+            // b
+            double b = point.X - centerPoint.X;
+            // a
+            double a = point.Y - centerPoint.Y;
+            // c
+            double c = Math.Sqrt(a * a + b * b);
+            // angle between A and C or from A to B
+            double angleAB = Math.Asin(a / c);
 
-            if (!(lastPoint.X == 0.0 && lastPoint.Y == 0.0) && 
-                 (lastPoint.X != point.X || lastPoint.Y != point.Y))
-            {
-                if (point.Y < displayCenterY)
-                {
-                    if (point.X < displayCenterX)
-                    {
+            PocketPaintApplication.GetInstance().PaintingAreaView.changeTbTestboxText(angleAB, 0.0);
 
-                    }
-                    else if (point.X > displayCenterX)
-                    {
+            //double displayCenterX = Window.Current.Bounds.Width / 2.0;
+            //double displayCenterY = Window.Current.Bounds.Width / 2.0;
+            //rectRectangleForMovement.Width / 2.0, rectRectangleForMovement.Height / 2.0
 
-                    }
-                }
-                else if (point.Y > displayCenterY)
-                {
-                    if (point.X < displayCenterX)
-                    {
+            //if (!(lastPoint.X == 0.0 && lastPoint.Y == 0.0) && 
+            //     (lastPoint.X != point.X || lastPoint.Y != point.Y))
+            //{
+            //    if (point.Y < displayCenterY)
+            //    {
+            //        if (point.X < displayCenterX)
+            //        {
 
-                    }
-                    else if (point.X > displayCenterX)
-                    {
+            //        }
+            //        else if (point.X > displayCenterX)
+            //        {
 
-                    }
+            //        }
+            //    }
+            //    else if (point.Y > displayCenterY)
+            //    {
+            //        if (point.X < displayCenterX)
+            //        {
 
-                }
-            }
+            //        }
+            //        else if (point.X > displayCenterX)
+            //        {
 
-            lastPoint = point;
+            //        }
+
+            //    }
+            //}
+
+            //lastPoint = point;
 
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
             {
@@ -115,7 +129,7 @@ namespace Catrobat.Paint.Phone.Listener
                 //}
 
                 //double result = (((e.Position.X / Window.Current.Bounds.Width) * 360.0) + (e.Position.Y / (Window.Current.Bounds.Height - 150.0)) * 360.0) / 2;
-                rotate.Angle = angleValue;
+                //rotate.Angle = angleValue;
 
                 //lastPoint = point;
                 //lastAngleValue = currentWinkel;
