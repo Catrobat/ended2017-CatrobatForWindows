@@ -235,6 +235,9 @@
     <Compile Include="Views\Main\InformationView.xaml.cs">
       <DependentUpon>InformationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Main\PlayerView.xaml.cs">
+      <DependentUpon>PlayerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\ProgramExportView.xaml.cs">
       <DependentUpon>ProgramExportView.xaml</DependentUpon>
     </Compile>
@@ -676,6 +679,10 @@
     <Page Include="Views\Main\InformationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\PlayerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\ProgramExportView.xaml">
       <Generator>MSBuild:Compile</Generator>

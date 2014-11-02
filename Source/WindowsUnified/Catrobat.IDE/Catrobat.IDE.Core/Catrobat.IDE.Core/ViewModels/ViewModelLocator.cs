@@ -64,6 +64,7 @@ namespace Catrobat.IDE.Core.ViewModels
                 ServiceLocator.Register<ProgramDetailViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<ProgramExportViewModel>(TypeCreationMode.Normal);
                 ServiceLocator.Register<InformationViewModel>(TypeCreationMode.Normal);
+                ServiceLocator.Register<PlayerViewModel>(TypeCreationMode.Normal);
             }
 
         }
@@ -498,6 +499,17 @@ namespace Catrobat.IDE.Core.ViewModels
             get
             {
                 return ServiceLocator.GetInstance<InformationViewModel>();
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance",
+           "CA1822:MarkMembersAsStatic",
+           Justification = "This non-static member is needed for data binding purposes.")]
+        public PlayerViewModel PlayerViewModel
+        {
+            get
+            {
+                return ServiceLocator.GetInstance<PlayerViewModel>();
             }
         }
 
