@@ -895,7 +895,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         public void changeTbTestboxText(double alpha, double a, double b, double c)
         {
-            tbTest.Text = "alpha: " + alpha.ToString() + "\na: " + a.ToString() + "\nb: " + b.ToString() + "\nc: " + c.ToString();
+            //tbTest.Text = "alpha: " + alpha.ToString() + "\na: " + a.ToString() + "\nb: " + b.ToString() + "\nc: " + c.ToString();
         }
 
         public Visibility setVisibilityOfGridRectangleSelectionControl
