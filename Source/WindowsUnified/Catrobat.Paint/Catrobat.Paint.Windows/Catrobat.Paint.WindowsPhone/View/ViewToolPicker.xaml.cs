@@ -97,7 +97,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PocketPaintApplication.GetInstance().isToolPickerUsed = true; ;
                 PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Visibility = Visibility.Collapsed;
-                PocketPaintApplication.GetInstance().GridCutControl.Visibility = Visibility.Collapsed;
+                PocketPaintApplication.GetInstance().GridCropControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridUcRellRecControlState = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridRectangleSelectionControl.IsHitTestVisible = true;
@@ -167,9 +167,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                         break;
                     case "BtnCrop":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Crop);
-                        PocketPaintApplication.GetInstance().GridCutControl.Visibility = Visibility.Visible;
-                        PocketPaintApplication.GetInstance().GridCutControl.Children.Clear();
-                        PocketPaintApplication.GetInstance().GridCutControl.Children.Add(new CutControl());
+                        PocketPaintApplication.GetInstance().GridCropControl.Visibility = Visibility.Visible;
+                        PocketPaintApplication.GetInstance().GridCropControl.Children.Clear();
+                        PocketPaintApplication.GetInstance().GridCropControl.Children.Add(new CropControl());
                         break;
                     case "BtnEraser":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Eraser);

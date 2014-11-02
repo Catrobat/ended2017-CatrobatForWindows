@@ -53,10 +53,44 @@ namespace Catrobat.Paint.Phone.Listener
             rotate.CenterX = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Width / 2.0;
             rotate.CenterY = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Height / 2.0;
 
+            double displayCenterX = Window.Current.Bounds.Width / 2.0;
+            double displayCenterY = Window.Current.Bounds.Width / 2.0;
+
+
+            if (!(lastPoint.X == 0.0 && lastPoint.Y == 0.0) && 
+                 (lastPoint.X != point.X || lastPoint.Y != point.Y))
+            {
+                if (point.Y < displayCenterY)
+                {
+                    if (point.X < displayCenterX)
+                    {
+
+                    }
+                    else if (point.X > displayCenterX)
+                    {
+
+                    }
+                }
+                else if (point.Y > displayCenterY)
+                {
+                    if (point.X < displayCenterX)
+                    {
+
+                    }
+                    else if (point.X > displayCenterX)
+                    {
+
+                    }
+
+                }
+            }
+
+            lastPoint = point;
+
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
             {
                 // TODO:
-                //int angleValue = 1;
+                int angleValue = 5;
                 //int currentWinkel = (int)((point.X / 384) * 360 + point.Y / (Window.Current.Bounds.Height - 144.0) * 360.0) / 2;
 
                 //if (point.Y < rotate.CenterY && point.X < rotate.CenterX)
@@ -81,7 +115,7 @@ namespace Catrobat.Paint.Phone.Listener
                 //}
 
                 //double result = (((e.Position.X / Window.Current.Bounds.Width) * 360.0) + (e.Position.Y / (Window.Current.Bounds.Height - 150.0)) * 360.0) / 2;
-                //rotate.Angle = angleValue;
+                rotate.Angle = angleValue;
 
                 //lastPoint = point;
                 //lastAngleValue = currentWinkel;

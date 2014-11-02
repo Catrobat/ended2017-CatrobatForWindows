@@ -40,7 +40,7 @@ namespace Catrobat.Paint.Phone
 
         public Grid GridImportImageSelectionControl { get; set; }
 
-        public Grid GridCutControl { get; set; }
+        public Grid GridCropControl { get; set; }
 
         public bool UnsavedChangesMade { get; set; }
 
@@ -62,7 +62,7 @@ namespace Catrobat.Paint.Phone
 
         public RectangleSelectionControl RectangleSelectionControl { get; set; }
 
-        public CutControl CutControl { get; set; }
+        public CropControl CropControl { get; set; }
 
         public EllipseSelectionControl EllipseSelectionControl { get; set; }
 
