@@ -49,23 +49,17 @@ namespace Catrobat.Paint.Phone.Listener
 
 
             object movezoom = null;
-            RotateTransform rotate = new RotateTransform();
-            rotate.CenterX = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Width / 2.0;
-            rotate.CenterY = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Height / 2.0;
-            //rectRectangleForMovement.Width / 2.0, rectRectangleForMovement.Height / 2.0
-
-            Point centerPoint = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCenterPointOfSelectionControl();
+       
 
             // b
-            double b = point.X - centerPoint.X;
+            //double b = point.X - centerPoint.X;
             // a
-            double a = point.Y - centerPoint.Y;
+            //double a = point.Y - centerPoint.Y;
             // c
-            double c = Math.Sqrt(a * a + b * b);
+            //double c = Math.Sqrt(a * a + b * b);
             // angle between A and C or from A to B
-            double angleAB = Math.Asin(a / c);
-
-            PocketPaintApplication.GetInstance().PaintingAreaView.changeTbTestboxText(angleAB, 0.0);
+            //double angleAB = Math.Asin(a / c);
+            //PocketPaintApplication.GetInstance().PaintingAreaView.changeTbTestboxText(angleAB, 0.0);
 
             //double displayCenterX = Window.Current.Bounds.Width / 2.0;
             //double displayCenterY = Window.Current.Bounds.Width / 2.0;
@@ -101,10 +95,34 @@ namespace Catrobat.Paint.Phone.Listener
 
             //lastPoint = point;
 
+            RotateTransform rotate = new RotateTransform();
+
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
             {
+                rotate.CenterX = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Width / 2.0;
+                rotate.CenterY = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Height / 2.0;
+                //rectRectangleForMovement.Width / 2.0, rectRectangleForMovement.Height / 2.0
+
+                Point centerPoint = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCenterPointOfSelectionControl();  
+                
+                if (!(lastPoint.X == 0.0 && lastPoint.Y == 0.0) &&
+                    (lastPoint.X != point.X || lastPoint.Y != point.Y))
+                {
+                    double currentXLength = point.X - centerPoint.X;
+                    double currentYLength = point.Y - centerPoint.Y;
+
+                    double previousXLength = lastPoint.X - centerPoint.X;
+                    double previousYLength = lastPoint.Y - centerPoint.Y;
+
+                    double deltaAngle = (Math.Atan(previousXLength / previousYLength) - Math.Atan(currentXLength / currentYLength));
+                    double rotationAngle = deltaAngle * 180 / Math.PI;
+
+                    rotate.Angle += rotationAngle;
+                }
+                lastPoint = point;
+
                 // TODO:
-                int angleValue = 5;
+                //int angleValue = 5;
                 //int currentWinkel = (int)((point.X / 384) * 360 + point.Y / (Window.Current.Bounds.Height - 144.0) * 360.0) / 2;
 
                 //if (point.Y < rotate.CenterY && point.X < rotate.CenterX)
@@ -175,7 +193,8 @@ namespace Catrobat.Paint.Phone.Listener
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
                     break;
                 case ToolType.Rect:
-                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(rotate);
+                    if (rotate.Angle != 0)
+                        PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(rotate);
                     break;
             }
         }
