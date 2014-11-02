@@ -11,53 +11,63 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" NavigationCacheMode="Required" >
 
-    <Grid x:Name="LayoutRoot"  IsHitTestVisible="True" ManipulationStarted="LayoutRoot_ManipulationStarted_1">
-        <Grid x:Name="PaintingAreaContentPanelGrid" IsHitTestVisible="True" Width="auto" Height="auto" Grid.Row="1" Margin="0,0,0,0" Background="Transparent" >
+    <Grid x:Name="LayoutRoot"  IsHitTestVisible="True">
+        <Grid x:Name="PaintingAreaContentPanelGrid" Background="Transparent" Height="auto" IsHitTestVisible="True" Width="auto">
             <Grid x:Name="PaintingAreaCheckeredGrid" Height="auto" IsHitTestVisible="True" Width="auto">
                 <Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
                 </Grid.Background>
 
-                <!--<Canvas x:Name="PaintingAreaCanvasUnderlaying"  Background="Transparent"/>-->
-                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent"  ManipulationMode="TranslateX, TranslateY, Rotate, Scale" >
+                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent"  ManipulationMode="TranslateX, TranslateY, Scale" />
      
-                </Canvas>
-                <Grid Background="#44d3d3d3" Visibility="Collapsed" />
-                <!--<Rectangle x:Name="rectDrawRectangle" DoubleTapped="rectDrawRectangle_DoubleTapped" Fill="Blue" Height="50" HorizontalAlignment="Left" 
-                           Margin="171,263,0,0" PointerMoved="testRectangle_PointerMoved"  Stroke="Black"  VerticalAlignment="Top" Width="50" Visibility="Collapsed" PointerPressed="testRectangle_PointerPressed" />-->
-
-                <!--<Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="160" Stroke="Black" StrokeLineJoin="Round" StrokeThickness="3" VerticalAlignment="Top" Width="160" Margin="87,229,0,0"/>-->
-                <Grid x:Name="GridCursor" Height="80" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Collapsed" Width="80">
-                    <userControls:CursorControl x:Name="ClCursor" Height="80" HorizontalAlignment="Center" IsHitTestVisible="False" PointerPressed="CursorControl_PointerPressed" PointerMoved="CursorControl_PointerMoved" Margin="0,0,0,0" VerticalAlignment="Center" Width="80"></userControls:CursorControl>
+                <!-- CursorControl -->
+                <Grid x:Name="GridCursor" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                      Visibility="Collapsed" Width="80">
+                    <userControls:CursorControl x:Name="ClCursor" Height="80" HorizontalAlignment="Center" 
+                                                IsHitTestVisible="False" PointerPressed="CursorControl_PointerPressed" 
+                                                Margin="0,0,0,0" VerticalAlignment="Center" Width="80">
+                    </userControls:CursorControl>
                 </Grid>
 
-                <Grid x:Name="GridRectangleSelectionControl" Height="230" Visibility="Collapsed" Width="230">
-                    <userControls:RectangleSelectionControl></userControls:RectangleSelectionControl>
-                </Grid>
+                <!-- EllipseSelectionControl -->
                 <Grid x:Name="GridEllipseSelectionControl" Height="230" Visibility="Collapsed" Width="230">
                     <userControls:EllipseSelectionControl></userControls:EllipseSelectionControl>
                 </Grid>
 
-                <Grid x:Name="GridCutControl" Height="496" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Width="384">
-                    <userControls:CutControl></userControls:CutControl>
+                <!-- ImageSelectionControl -->
+                <Grid x:Name="GridImportImageSelectionControl" Height="230" Visibility="Collapsed" Width="230">
+                    <userControls:ImportImageSelectionControl></userControls:ImportImageSelectionControl>
                 </Grid>
+
+                <!-- RectangleSelectioncontrol -->
+                <Grid x:Name="GridRectangleSelectionControl" Height="230" Visibility="Collapsed" Width="230">
+                    <userControls:RectangleSelectionControl></userControls:RectangleSelectionControl>
+                </Grid>
+                </Grid>
+
+            <!-- Crop-Control -->
+            <Grid x:Name="GridCropControl" Height="496" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Width="384">
+                <userControls:CropControl></userControls:CropControl>
             </Grid>
 
-            <Grid x:Name="GridUserControlRectEll" Height="240" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
+            <!-- app-BarRectEllControl -->
+            <Grid x:Name="GridUserControlRectEll" Height="240" HorizontalAlignment="Center" Margin="0,0,0,0"
+                  VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <userControls:ucRecEll></userControls:ucRecEll>
             </Grid>
 
+            <!-- InputScopeControl -->
             <Grid x:Name="GridInputScopeControl" Visibility="Collapsed">
                 <userControls:InputScopeControl></userControls:InputScopeControl>
             </Grid>
 
+            <!-- Thickness-Controll-Brush-Properties -->
             <Grid x:Name="GrdThicknessControl" Height="380" Margin="0,0,0,0" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <controls:ThicknessControl x:Name="CtrlThicknessControl"></controls:ThicknessControl>
             </Grid>
 
             <!--ONLY FOR TESTING-->
             <TextBox x:Name="tbTest" HorizontalAlignment="Left" Margin="160,162,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
-            
         </Grid>
 
         <Grid x:Name="SpinnerGrid" Grid.Row="0" Visibility="Collapsed"  Grid.RowSpan="2"  Margin="12,12,12,12" Background="#FFB6B6B6" Opacity="0.7">
@@ -73,8 +83,6 @@
         <StackPanel Grid.Row="0" Canvas.ZIndex="10" VerticalAlignment="Top">
             <controls:AppbarTop x:Name="barRecEll"></controls:AppbarTop>
         </StackPanel>
-
-        <TextBox x:Name="coordinates" HorizontalAlignment="Left" Margin="87,96,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Visibility="Collapsed"/>
     </Grid>
 
     <Page.BottomAppBar>

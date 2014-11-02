@@ -527,5 +527,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             return new Point(coordinateX, coordianteY);
         }
+
+        public Point getCenterPointOfRectangleForMovement()
+        {
+            double offsetX = _transformGridMain.Value.OffsetX;
+            double offsetY = _transformGridMain.Value.OffsetY;
+
+            double x = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Width / 2.0 + offsetX;
+            double y = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Height / 2.0 + offsetY;
+            return new Point(x, y);
+        }
     }
 }
