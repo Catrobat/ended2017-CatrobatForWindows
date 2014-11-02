@@ -49,51 +49,6 @@ namespace Catrobat.Paint.Phone.Listener
 
 
             object movezoom = null;
-       
-
-            // b
-            //double b = point.X - centerPoint.X;
-            // a
-            //double a = point.Y - centerPoint.Y;
-            // c
-            //double c = Math.Sqrt(a * a + b * b);
-            // angle between A and C or from A to B
-            //double angleAB = Math.Asin(a / c);
-            //PocketPaintApplication.GetInstance().PaintingAreaView.changeTbTestboxText(angleAB, 0.0);
-
-            //double displayCenterX = Window.Current.Bounds.Width / 2.0;
-            //double displayCenterY = Window.Current.Bounds.Width / 2.0;
-            //rectRectangleForMovement.Width / 2.0, rectRectangleForMovement.Height / 2.0
-
-            //if (!(lastPoint.X == 0.0 && lastPoint.Y == 0.0) && 
-            //     (lastPoint.X != point.X || lastPoint.Y != point.Y))
-            //{
-            //    if (point.Y < displayCenterY)
-            //    {
-            //        if (point.X < displayCenterX)
-            //        {
-
-            //        }
-            //        else if (point.X > displayCenterX)
-            //        {
-
-            //        }
-            //    }
-            //    else if (point.Y > displayCenterY)
-            //    {
-            //        if (point.X < displayCenterX)
-            //        {
-
-            //        }
-            //        else if (point.X > displayCenterX)
-            //        {
-
-            //        }
-
-            //    }
-            //}
-
-            //lastPoint = point;
 
             RotateTransform rotate = new RotateTransform();
 
@@ -120,37 +75,6 @@ namespace Catrobat.Paint.Phone.Listener
                     rotate.Angle += rotationAngle;
                 }
                 lastPoint = point;
-
-                // TODO:
-                //int angleValue = 5;
-                //int currentWinkel = (int)((point.X / 384) * 360 + point.Y / (Window.Current.Bounds.Height - 144.0) * 360.0) / 2;
-
-                //if (point.Y < rotate.CenterY && point.X < rotate.CenterX)
-                //{
-                //    int distanceY = (int)Math.Abs(Math.Abs(lastPoint.Y) - Math.Abs(point.Y));
-                //    int distanceX = (int)Math.Abs(Math.Abs(lastPoint.X) - Math.Abs(point.X));
-                //    if(distanceX > distanceY)
-                //    {
-                //        angleValue = -2;
-                //    }
-                //}
-                //else if (point.Y > rotate.CenterY)
-                //{
-                //    if (lastPoint.X < point.X)
-                //    {
-                //        angleValue = -2;
-                //    }
-                //    else if (lastPoint.X > point.X)
-                //    {
-                //        angleValue = 2;
-                //    }
-                //}
-
-                //double result = (((e.Position.X / Window.Current.Bounds.Width) * 360.0) + (e.Position.Y / (Window.Current.Bounds.Height - 150.0)) * 360.0) / 2;
-                //rotate.Angle = angleValue;
-
-                //lastPoint = point;
-                //lastAngleValue = currentWinkel;
             }
             else
             {
@@ -194,7 +118,7 @@ namespace Catrobat.Paint.Phone.Listener
                     break;
                 case ToolType.Rect:
                     if (rotate.Angle != 0)
-                        PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(rotate);
+                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(rotate);
                     break;
             }
         }
