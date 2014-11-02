@@ -90,10 +90,11 @@ namespace Catrobat.Paint.Phone.Tool
 
         private void addRotateTransformToPaintingAreaView(RotateTransform renderTransform)
         {
+
             TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform);
             for (int i = 0; i < transformGroup.Children.Count; i++)
             {
-                if(transformGroup.Children[i].GetType() == typeof(RotateTransform))
+                if (transformGroup.Children[i].GetType() == typeof(RotateTransform))
                 {
                     transformGroup.Children.RemoveAt(i);
                 }
