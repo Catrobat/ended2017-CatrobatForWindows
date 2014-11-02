@@ -197,9 +197,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 {
                     PocketPaintApplication.GetInstance().RectangleSelectionControl.setStrokeThicknessOfDrawingShape = strokeThickness;
                 }
-                else
+                else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                 {
                     PocketPaintApplication.GetInstance().EllipseSelectionControl.setStrokeThicknessOfDrawingShape = strokeThickness;
+                }
+                else
+                {
+                    PocketPaintApplication.GetInstance().ImportImageSelectionControl.setStrokeThicknessOfDrawingShape = strokeThickness;
                 }
             }
 
@@ -244,9 +248,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Round;
             }
-            else
+            else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
             {
                 PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeLineJoinOfEllipseToDraw = PenLineJoin.Round;
+            }
+            else
+            {
+                PocketPaintApplication.GetInstance().ImportImageSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Round;
             }
         }
 
@@ -264,9 +272,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Miter;
             }
-            else
+            else if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
             {
                 PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeLineJoinOfEllipseToDraw = PenLineJoin.Miter;
+            }
+            else
+            {
+                PocketPaintApplication.GetInstance().ImportImageSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Miter;
             }
         }
 
@@ -277,9 +289,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Bevel;
             }
-            else
+            else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
             {
                 PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeLineJoinOfEllipseToDraw = PenLineJoin.Bevel;
+            }
+            else
+            {
+                PocketPaintApplication.GetInstance().ImportImageSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Bevel;
             }
         }
 

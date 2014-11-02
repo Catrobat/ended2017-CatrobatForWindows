@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 
@@ -21,7 +22,7 @@ using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 {
-    public sealed partial class RectangleSelectionControl : UserControl
+    public sealed partial class ImportImageSelectionControl : UserControl
     {
         TransformGroup _transformGridEllipsCenterBottom;
         TransformGroup _transfomrGridEllipseCenterTop;
@@ -36,8 +37,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         const double MIN_RECTANGLE_MOVE_HEIGHT = 50.0;
         const double MIN_RECTANGLE_MOVE_WIDTH = 50.0;
         bool _isModifiedRectangleMovement;
-        
-        public RectangleSelectionControl()
+
+        public ImportImageSelectionControl()
         {
             this.InitializeComponent();
 
@@ -53,8 +54,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectRectangleToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
             rectRectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
             rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
-            PocketPaintApplication.GetInstance().RectangleSelectionControl = this;
+            PocketPaintApplication.GetInstance().ImportImageSelectionControl = this;
             setIsModifiedRectangleMovement = false;
+
+            ImageBrush fillBrush = new ImageBrush();
+            fillBrush.ImageSource =
+                new BitmapImage(
+                    new Uri("ms-resource:/Files/Assets/test.jpg", UriKind.Absolute)
+                );
+            rectRectangleToDraw.Fill = fillBrush;
         }
         private void _setGridTransformsOfEllipses(TransformGroup transformGroup, TranslateTransform translateTransform)
         {
@@ -526,6 +534,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             coordianteY = offsetY + halfScreenHeight - 72.0 + (valueTop - valueBottom) / 2.0;
 
             return new Point(rectRectangleForMovement.Width/2.0, rectRectangleForMovement.Height/2.0);
+        }
+
+        public ImageSource getImageSource()
+        {
+            return ((ImageBrush)rectRectangleToDraw.Fill).ImageSource;
         }
     }
 }

@@ -121,6 +121,9 @@
     <Compile Include="Controls\UserControls\EllipseSelectionControl.xaml.cs">
       <DependentUpon>EllipseSelectionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserControls\CutControl.xaml.cs">
+      <DependentUpon>CutControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserControls\RectangleSelectionControl.xaml.cs">
       <DependentUpon>RectangleSelectionControl.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,7 @@
     <Compile Include="Tool\EllipseTool.cs" />
     <Compile Include="Tool\EraserTool.cs" />
     <Compile Include="Tool\FlipTool.cs" />
+    <Compile Include="Tool\CropTool.cs" />
     <Compile Include="Tool\ImportTool.cs" />
     <Compile Include="Tool\LineTool.cs" />
     <Compile Include="Tool\MoveZoomTool.cs" />
@@ -298,6 +302,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\UserControls\EllipseSelectionControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\UserControls\CutControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

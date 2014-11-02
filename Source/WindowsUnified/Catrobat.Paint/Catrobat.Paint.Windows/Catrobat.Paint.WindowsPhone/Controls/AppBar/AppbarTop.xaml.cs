@@ -161,6 +161,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                     PocketPaintApplication.GetInstance().PaintingAreaView.GrdThicknessControlVisibility
                         = currentStateOfGridThicknessControl;
                     break;
+                case ToolType.Crop:
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Crop));
+                    PocketPaintApplication.GetInstance().PaintingAreaView.GrdThicknessControlVisibility
+                        = currentStateOfGridThicknessControl;
+                    break;
                 case ToolType.Cursor:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Cursor));
                     break;
@@ -177,6 +182,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                     break;
                 case ToolType.Flip:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Flip));
+                    break;
+                case ToolType.ImportPng:
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.ImportPng));
+                    PocketPaintApplication.GetInstance().PaintingAreaView.GrdThicknessControlVisibility
+                        = currentStateOfGridThicknessControl;
                     break;
                 case ToolType.Line:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Line));
@@ -222,6 +232,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             {
                 case ToolType.Brush:
                     return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_brush.png", UriKind.Absolute);
+                case ToolType.Crop:
+                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_crop.png", UriKind.Absolute);
                 case ToolType.Cursor:
                     return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
                 case ToolType.Ellipse:
@@ -230,6 +242,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                     return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_eraser.png", UriKind.Absolute);
                 case ToolType.Flip:
                     return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_flip_horizontal.png", UriKind.Absolute);
+                case ToolType.ImportPng:
+                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_import_image.png", UriKind.Absolute);
                 case ToolType.Line:
                     return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_straight_line.png", UriKind.Absolute);
                 case ToolType.Move:

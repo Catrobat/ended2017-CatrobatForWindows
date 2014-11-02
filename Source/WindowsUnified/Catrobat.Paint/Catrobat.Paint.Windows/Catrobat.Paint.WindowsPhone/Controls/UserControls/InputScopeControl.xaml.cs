@@ -154,10 +154,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                         if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
                             PocketPaintApplication.GetInstance().RectangleSelectionControl.changeHeightOfDrawingSelection(currentValue, false);
                     }
-                    else
+                    else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                     {
                         if (PocketPaintApplication.GetInstance().EllipseSelectionControl != null)
                             PocketPaintApplication.GetInstance().EllipseSelectionControl.changeHeightOfDrawingSelection(currentValue, false);
+                    }
+                    else
+                    {
+                        if (PocketPaintApplication.GetInstance().ImportImageSelectionControl != null)
+                            PocketPaintApplication.GetInstance().ImportImageSelectionControl.changeHeightOfDrawingSelection(currentValue, false);
                     }
                 }
                 else if (currentButton.Name.Equals("btnWidthValue"))
@@ -167,10 +172,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                         if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
                             PocketPaintApplication.GetInstance().RectangleSelectionControl.changeWidthOfDrawingSelection(currentValue, false);
                     }
-                    else
+                    else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                     {
                         if (PocketPaintApplication.GetInstance().EllipseSelectionControl != null)
                             PocketPaintApplication.GetInstance().EllipseSelectionControl.changeWidthOfDrawingSelection(currentValue, false);
+                    }
+                    else
+                    {
+                        if (PocketPaintApplication.GetInstance().ImportImageSelectionControl != null)
+                            PocketPaintApplication.GetInstance().ImportImageSelectionControl.changeWidthOfDrawingSelection(currentValue, false);
                     }
                 }
             }

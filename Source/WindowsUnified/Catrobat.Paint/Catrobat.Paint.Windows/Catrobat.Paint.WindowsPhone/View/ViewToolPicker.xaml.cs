@@ -97,6 +97,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PocketPaintApplication.GetInstance().isToolPickerUsed = true; ;
                 PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Visibility = Visibility.Collapsed;
+                PocketPaintApplication.GetInstance().GridCutControl.Visibility = Visibility.Collapsed;
+                PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridRectangleSelectionControl.IsHitTestVisible = true;
                 PocketPaintApplication.GetInstance().GridEllipseSelectionControl.IsHitTestVisible = true;
                 // TODO: RectangleSelctionControl should be reseted if the rectangle-tool is selected.
@@ -151,9 +153,22 @@ namespace Catrobat.Paint.WindowsPhone.View
                         break;
                     case "BtnImportPicture":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.ImportPng);
+
+                        PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Children.Clear();
+                        PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Children.Add(new ImportImageSelectionControl());
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = 160.0;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
+
+                        PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = Visibility.Visible;
+                        enableEdgeTypes = true;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
                         break;
                     case "BtnCrop":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Crop);
+                        PocketPaintApplication.GetInstance().GridCutControl.Visibility = Visibility.Visible;
+                        PocketPaintApplication.GetInstance().GridCutControl.Children.Clear();
+                        PocketPaintApplication.GetInstance().GridCutControl.Children.Add(new CutControl());
                         break;
                     case "BtnEraser":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Eraser);
