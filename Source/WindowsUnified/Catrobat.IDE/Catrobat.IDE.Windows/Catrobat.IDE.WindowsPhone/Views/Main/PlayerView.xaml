@@ -13,18 +13,14 @@
 
   <SwapChainPanel x:Name="swapChainPanel">
     <!-- Loading Project -->
-    <!--<Grid x:Name="Loading" Grid.Row="1" Visibility="Collapsed">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*"/>
-      </Grid.ColumnDefinitions>
+    <Grid Grid.Row="0">
       <Grid.RowDefinitions>
-        <RowDefinition Height="*"/>
+        <RowDefinition Height="5*"/>
+        <RowDefinition Height="2*"/>
       </Grid.RowDefinitions>
-      <ProgressRing x:Name="LoadingProject" Grid.Row="0" Grid.Column="0" Background="Transparent"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        Foreground="#FFdb7100"/>
-    </Grid>-->
+      <ProgressRing x:Name="ProgressRingExtendedSplash" Grid.Row="1" Background="Transparent" Margin="0" IsActive="True" Width="40" Height="40" 
+                VerticalAlignment="Top" HorizontalAlignment="Center"/>
+    </Grid>
   </SwapChainPanel>
 
   <Page.BottomAppBar>

@@ -1,11 +1,12 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-//using System;
-//using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 //using System.Linq;
 //using System.Text;
 //using System.Threading.Tasks;
-using System.Windows.Input;    
+using System.Windows.Input;  
+
 
 namespace Catrobat.IDE.Core.ViewModels.Main
 {
@@ -61,11 +62,14 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             // TODO: call appropriate method in PlayerAdapter class
         }
 
-        //protected override void GoBackAction()
-        //{
-        //    if (!IsLaunchFromTile)
-        //        base.GoBackAction();
-        //}
+        protected override void GoBackAction()
+        {
+            // TODO: call appropriate method of PlayerAdapter class
+            if (/* playerAdapterOrHowever.goBackActionOrHowever*/true == true && !IsLaunchFromTile)
+            {
+                base.GoBackAction();
+            }
+        }
 
         #endregion
 

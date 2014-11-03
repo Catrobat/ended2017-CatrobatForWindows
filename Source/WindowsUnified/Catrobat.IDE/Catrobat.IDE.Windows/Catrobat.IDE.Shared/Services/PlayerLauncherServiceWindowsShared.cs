@@ -9,6 +9,7 @@ using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 
+
 namespace Catrobat.IDE.WindowsShared.Services
 {
     public class PlayerLauncherServiceWindowsShared : IPlayerLauncherService
@@ -27,6 +28,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             var options = new Windows.System.LauncherOptions { DisplayApplicationPicker = false };
 
+            //await ShowSplashScreen(ApplicationExecutionState.Running);
             await LaunchPlayer(project.Name, isLaunchedFromTile);
             // TODO: review ...LaunchFileAsync --> seems to be that it never finishes
             bool success = await Windows.System.Launcher.LaunchFileAsync(file, options);
