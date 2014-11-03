@@ -10,10 +10,6 @@
     d:DesignWidth="230" ManipulationMode="All">
 
     <Grid x:Name="GridMain">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="113*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
         <Grid x:Name="GridRectangle" ManipulationDelta="rectRectangleForMovement_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" Height="230" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <Rectangle x:Name="rectRectangleToDraw" Fill="Black" Height="160" Stroke="Gray"
                 StrokeThickness="3" StrokeLineJoin="Miter" Margin="20,20,20,20" 

@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Catrobat.Paint.WindowsPhone.Controls.UserControls.CutControl"
+    x:Class="Catrobat.Paint.WindowsPhone.Controls.UserControls.CropControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"

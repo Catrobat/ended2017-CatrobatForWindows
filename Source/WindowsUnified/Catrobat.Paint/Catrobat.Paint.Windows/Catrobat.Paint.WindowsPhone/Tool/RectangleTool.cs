@@ -11,6 +11,7 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
@@ -46,12 +47,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public override void HandleMove(object arg)
         {
             // TODO:
-            //RotateTransform rotateTransform = new RotateTransform();
-            //rotateTransform = (RotateTransform)arg;
-            //_transforms.Children.Add(rotateTransform);
-
-            // _transforms = ((RotateTransform)arg);
-            
+            RotateTransform rotateTransform = new RotateTransform();
+            rotateTransform = (RotateTransform)arg;
+            _transforms.Children.Add(rotateTransform);            
         }
 
         public override void HandleUp(object arg)
@@ -74,7 +72,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             RectangleGeometry myRectangleGeometry = new RectangleGeometry();
             myRectangleGeometry.Rect = new Rect(coordinate, new Point(coordinate.X + width, coordinate.Y + height));
-            
+
             
             Path _path = new Path();
             _path.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;

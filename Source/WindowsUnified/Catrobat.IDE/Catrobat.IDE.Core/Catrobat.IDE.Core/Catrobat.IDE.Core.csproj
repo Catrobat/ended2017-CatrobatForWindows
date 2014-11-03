@@ -137,6 +137,7 @@
     <Compile Include="Utilities\ProgressEventArgs.cs" />
     <Compile Include="ViewModels\Editor\Formula\FormulaEvaluationResult.cs" />
     <Compile Include="Navigation\NavigationObject.cs" />
+    <Compile Include="ViewModels\Main\PlayerViewModel.cs" />
     <Compile Include="ViewModels\Main\ProgramDetailViewModel.cs" />
     <Compile Include="ViewModels\Main\ProgramExportViewModel.cs" />
     <Compile Include="ViewModels\Main\InformationViewModel.cs" />

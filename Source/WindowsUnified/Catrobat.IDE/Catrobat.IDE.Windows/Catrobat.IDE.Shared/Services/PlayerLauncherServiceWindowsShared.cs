@@ -1,8 +1,11 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Catrobat.IDE.Core.Models;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 
@@ -24,6 +27,8 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             var options = new Windows.System.LauncherOptions { DisplayApplicationPicker = false };
 
+            await LaunchPlayer(project.Name, isLaunchedFromTile);
+            // TODO: review ...LaunchFileAsync --> seems to be that it never finishes
             bool success = await Windows.System.Launcher.LaunchFileAsync(file, options);
             if (success)
             {
@@ -33,12 +38,21 @@ namespace Catrobat.IDE.WindowsShared.Services
             {
                 // File launch failed
             }
+
+           
         }
 
         public async Task LaunchPlayer(string projectName, bool isLaunchedFromTile)
         {
-            // TODO: replace with
+            // TODO: review
 
+            var messageProjectName = new GenericMessage<string>(projectName);
+            Messenger.Default.Send(messageProjectName, ViewModelMessagingToken.PlayerProjectNameListener);
+
+            var messageIsStartFromTile = new GenericMessage<bool>(isLaunchedFromTile);
+            Messenger.Default.Send(messageIsStartFromTile, ViewModelMessagingToken.PlayerIsStartFromTileListener);
+
+            ServiceLocator.NavigationService.NavigateTo<PlayerViewModel>();
         }
     }
 }

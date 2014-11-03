@@ -46,7 +46,6 @@ namespace Catrobat.Paint.WindowsPhone.View
         static bool isManipulationEventLoaded;
         static int zoomCounter;
         Point start_point = new Point();
-        Point old_point = new Point();
         public PaintingAreaView()
         {
             this.InitializeComponent();
@@ -57,22 +56,21 @@ namespace Catrobat.Paint.WindowsPhone.View
             isManipulationEventLoaded = false;
             isDoubleTapLoaded = false;
             zoomCounter = 0;
-            //PocketPaintApplication.GetInstance().RecDrawingRectangle = rectDrawRectangle;
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
-            
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = new TransformGroup();
             HardwareButtons.BackPressed +=HardwareButtons_BackPressed;
 
             LayoutRoot.Height = Window.Current.Bounds.Height;
             LayoutRoot.Width = Window.Current.Bounds.Width;
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
-            //PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
             PocketPaintApplication.GetInstance().GridCursor = GridCursor;
             PocketPaintApplication.GetInstance().GridEllipseSelectionControl = GridEllipseSelectionControl;
             PocketPaintApplication.GetInstance().GridRectangleSelectionControl = GridRectangleSelectionControl;
             PocketPaintApplication.GetInstance().GridInputScopeControl = GridInputScopeControl;
-            PocketPaintApplication.GetInstance().GridCutControl = GridCutControl;
+            PocketPaintApplication.GetInstance().GridCropControl = GridCropControl;
+            PocketPaintApplication.GetInstance().GridImportImageSelectionControl = GridImportImageSelectionControl;
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
 
@@ -89,22 +87,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
             PocketPaintApplication.GetInstance().AppbarTop.ToolChangedHere(PocketPaintApplication.GetInstance().ToolCurrent);
-            //PaintingAreaCanvas.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
-            //PaintingAreaCanvas.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
-            //PaintingAreaCanvas.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
-            //PaintingAreaCanvas.ManipulationStarting += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarting;
-            PaintingAreaCanvas.RenderTransform = new TransformGroup();
 
-            
-           /* if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Brush || 
-                PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Eraser)
-            {
-                LayoutRoot.PointerEntered += LayoutRoot_PointerEntered;
-            }
-            else
-            {
-                LayoutRoot.PointerEntered += null;
-            }*/
             btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
             btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
             //btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
@@ -144,21 +127,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-
-            if (this.Frame.CurrentSourcePageType == typeof(PaintingAreaView))
-            {
-                //MessageDialog md = new MessageDialog("confirm exit?");
-                //List<IUICommand> commands = new List<IUICommand>(2);
-                //UICommand yes = new UICommand("Yes");
-                //UICommand no = new UICommand("No");
-                //commands.Add(yes);
-                //commands.Add(no);
-                //md.Commands.Add(yes);
-                //md.Commands.Add(no);
-                //var test = md.ShowAsync();
-
-            }
-            else if (this.Frame.CurrentSourcePageType == typeof(ViewColorPicker))
+            if (this.Frame.CurrentSourcePageType == typeof(ViewColorPicker))
             {
                 e.Handled = true;
                 this.Frame.GoBack();
@@ -177,14 +146,9 @@ namespace Catrobat.Paint.WindowsPhone.View
         /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+
         }
 
-
-        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        {
-            //e.PageState["PaintingAreaCanvasUnderlaying"] = PaintingAreaCanvasUnderlaying.Children;
-            e.PageState["PaintingAreaCanvas"] = PaintingAreaCanvas.Children;
-        }
 
         public void createAppBarAndSwitchAppBarContent(string type)
         {
@@ -263,7 +227,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 app_btnReset.Click += app_btn_reset_Click;
 
-                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().CutControl.setIsModifiedRectangleMovement ? true : false;
+                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().CropControl.setIsModifiedRectangleMovement ? true : false;
 
                 cmdBar.PrimaryCommands.Add(app_btnCutSelection);
                 cmdBar.PrimaryCommands.Add(app_btnReset);
@@ -387,7 +351,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 cmdBar.PrimaryCommands.Add(app_btnRotate_right);
                 cmdBar.PrimaryCommands.Add(app_btnReset);
             }
-            else if ("barRectangle" == type)
+            else if ("barRectangle" == type || "barImportPng" == type)
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
@@ -498,7 +462,6 @@ namespace Catrobat.Paint.WindowsPhone.View
         void app_btn_reset_Click(object sender, RoutedEventArgs e)
         {
             ((AppBarButton)sender).IsEnabled = false;
-            //rotateCounter = 0;
             PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ResetDrawingSpace();
         }
 
@@ -681,7 +644,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                     GrdThicknessControlVisibility = PocketPaintApplication.GetInstance().GrdThicknessControlState;
                     break;
                 case ToolType.Crop:
-                    // TODO: ApplicationBar = (IApplicationBar)this.Resources["barCrop"];
                     createAppBarAndSwitchAppBarContent("barCrop");
                     break;
                 case ToolType.Ellipse:
@@ -694,7 +656,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                 case ToolType.Flip:
                     createAppBarAndSwitchAppBarContent("barFlip");
                     break;
-
+                case ToolType.ImportPng:
+                    createAppBarAndSwitchAppBarContent("barImportPng");
+                    break;
                 case ToolType.Move:
                 case ToolType.Zoom:
                     createAppBarAndSwitchAppBarContent("barMove");
@@ -760,11 +724,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 visibilityGridEllRecControl = Visibility.Collapsed;
             }
             PocketPaintApplication.GetInstance().GridUcRellRecControlState = visibilityGridEllRecControl;
-        }
-
-        private void LayoutRoot_ManipulationStarted_1(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-
         }
 
         private void PaintingAreaCanvas_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -864,72 +823,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 return;
         }
 
-        private void testRectangle_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            start_point.X = e.GetCurrentPoint(PaintingAreaCanvas).Position.X;
-            start_point.Y = e.GetCurrentPoint(PaintingAreaCanvas).Position.Y;
-        }
-
-        private void testRectangle_PointerMoved(object sender, PointerRoutedEventArgs e)
-        {
-            
-            //double bottom = rectDrawRectangle.Margin.Bottom;
-            //double top = rectDrawRectangle.Margin.Top;
-            //double left = rectDrawRectangle.Margin.Left;
-            //double right = rectDrawRectangle.Margin.Right;
-            //Point current_point = new Point(e.GetCurrentPoint(PaintingAreaCanvas).Position.X, e.GetCurrentPoint(PaintingAreaCanvas).Position.Y);
-            //if (old_point.X != current_point.X && old_point.Y != current_point.Y)
-            //{
-            //    Point distance = new Point(current_point.X - start_point.X, current_point.Y - start_point.Y);
-            //    rectDrawRectangle.Margin = new Thickness(left + distance.X, top + distance.Y, right, bottom);
-            //    coordinates.Text = "X: " + (left + current_point.X).ToString() + ", " + (top + current_point.Y).ToString().ToString();
-            //    old_point = current_point;
-            //}
-        }
-
-        //public Visibility visibilityRecDrawingRectangle
-        //{
-        //    //get
-        //    //{
-        //    //    return rectDrawRectangle.Visibility;
-        //    //}
-        //    //set
-        //    //{
-        //    //    rectDrawRectangle.Visibility = value;
-        //    //}
-        //}
-
-        //public Point coordinatesRecDrawingRectangle
-        //{
-        //    //get
-        //    //{
-        //    //    Point current_coordinate = new Point();
-        //    //    current_coordinate.X = rectDrawRectangle.Margin.Left;
-        //    //    current_coordinate.Y = rectDrawRectangle.Margin.Top;
-
-        //    //    return current_coordinate;
-        //    //}
-        //    //set
-        //    //{
-        //    //    Point current_coordinate = (Point)value;
-        //    //    double right = rectDrawRectangle.Margin.Right;
-        //    //    double bottom = rectDrawRectangle.Margin.Bottom;
-        //    //    rectDrawRectangle.Margin = new Thickness(current_coordinate.X, current_coordinate.Y, right, bottom);
-        //    //}
-        //}
-
-        //private void rectDrawRectangle_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        //{
-        //    Point coordinatesOfRectangle = new Point(rectDrawRectangle.Margin.Left, rectDrawRectangle.Margin.Top);
-        //    PocketPaintApplication.GetInstance().ToolCurrent.Draw(coordinatesOfRectangle);
-        //}
-
-        private void rectDrawRectangle_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            start_point.X = e.GetPosition(PaintingAreaCanvas).X;
-            start_point.Y = e.GetPosition(PaintingAreaCanvas).Y;
-        }
-
         private void loadDoubleTapEvent()
         {
             if (PocketPaintApplication.GetInstance() != null && !isDoubleTapLoaded)
@@ -995,19 +888,14 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void CursorControl_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-
-        }
-
-        private void CursorControl_PointerMoved(object sender, PointerRoutedEventArgs e)
-        {
             
         }
 
         // ONLY FOR TESTING
 
-        public void changeTbTestboxText(double value1, double value2)
+        public void changeTbTestboxText(double alpha, double a, double b, double c)
         {
-            //tbTest.Text = value1.ToString() + ", " + value2.ToString();
+            //tbTest.Text = "alpha: " + alpha.ToString() + "\na: " + a.ToString() + "\nb: " + b.ToString() + "\nc: " + c.ToString();
         }
 
         public Visibility setVisibilityOfGridRectangleSelectionControl

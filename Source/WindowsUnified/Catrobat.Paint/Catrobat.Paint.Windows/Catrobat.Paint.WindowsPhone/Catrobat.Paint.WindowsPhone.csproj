@@ -121,8 +121,11 @@
     <Compile Include="Controls\UserControls\EllipseSelectionControl.xaml.cs">
       <DependentUpon>EllipseSelectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UserControls\CutControl.xaml.cs">
-      <DependentUpon>CutControl.xaml</DependentUpon>
+    <Compile Include="Controls\UserControls\CropControl.xaml.cs">
+      <DependentUpon>CropControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserControls\ImportImageSelectionControl.xaml.cs">
+      <DependentUpon>ImportImageSelectionControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\UserControls\RectangleSelectionControl.xaml.cs">
       <DependentUpon>RectangleSelectionControl.xaml</DependentUpon>
@@ -239,6 +242,7 @@
     <Content Include="Assets\ColorPicker\icon_menu_strokes.png" />
     <Content Include="Assets\ic_launcher.png" />
     <Content Include="Assets\ic_launcher_tile.png" />
+    <Content Include="Assets\test.jpg" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\Spinner.png" />
@@ -305,7 +309,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\UserControls\CutControl.xaml">
+    <Page Include="Controls\UserControls\CropControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\UserControls\ImportImageSelectionControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

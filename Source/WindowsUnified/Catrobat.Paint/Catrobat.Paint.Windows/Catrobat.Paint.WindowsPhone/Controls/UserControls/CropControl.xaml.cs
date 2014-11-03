@@ -21,7 +21,7 @@ using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 {
-    public sealed partial class CutControl : UserControl
+    public sealed partial class CropControl : UserControl
     {
         TransformGroup _transformGridEllipsCenterBottom;
         TransformGroup _transfomrGridEllipseCenterTop;
@@ -37,7 +37,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         const double MIN_RECTANGLE_MOVE_WIDTH = 60.0;
         bool _isModifiedRectangleMovement;
 
-        public CutControl()
+        public CropControl()
         {
             this.InitializeComponent();
 
@@ -53,7 +53,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectRectangleToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
             rectRectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
             rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
-            PocketPaintApplication.GetInstance().CutControl = this;
+            PocketPaintApplication.GetInstance().CropControl = this;
             setIsModifiedRectangleMovement = false;
 
             if(!hasElementsPaintingAreaViews())
@@ -372,20 +372,22 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectRectangleForMovement_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            var move = new TranslateTransform();
-            ((TranslateTransform)move).X = e.Delta.Translation.X;
-            ((TranslateTransform)move).Y = e.Delta.Translation.Y;
+            if (hasElementsPaintingAreaViews())
+            {
+                var move = new TranslateTransform();
+                ((TranslateTransform)move).X = e.Delta.Translation.X;
+                ((TranslateTransform)move).Y = e.Delta.Translation.Y;
 
-            _transformGridMain.Children.Add(move);
+                _transformGridMain.Children.Add(move);
 
-            move.X = _transformGridMain.Value.OffsetX;
-            move.Y = _transformGridMain.Value.OffsetY;
-            _transformGridMain.Children.Clear();
-            _transformGridMain.Children.Add(move);
+                move.X = _transformGridMain.Value.OffsetX;
+                move.Y = _transformGridMain.Value.OffsetY;
+                _transformGridMain.Children.Clear();
+                _transformGridMain.Children.Add(move);
 
-            resetAppBarButtonRectangleSelectionControl(true);
-            setIsModifiedRectangleMovement = true;
-
+                resetAppBarButtonRectangleSelectionControl(true);
+                setIsModifiedRectangleMovement = true;
+            }
         }
 
         public void changeColorOfDrawingShape(Color color)
@@ -540,7 +542,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 result = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0 ? true : false;
             }
-            return false;
+            return result;
         }
     }
 }
