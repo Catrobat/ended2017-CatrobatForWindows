@@ -4,6 +4,7 @@ using System.IO;
 //using System.Linq;
 using System.Threading.Tasks;
 //using System.Runtime.InteropServices.WindowsRuntime;
+using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Main;
 //using Windows.Foundation;
@@ -16,6 +17,7 @@ using Catrobat.IDE.Core.ViewModels.Main;
 //using Windows.UI.Xaml.Media;
 using Windows.Storage;
 using Windows.UI.Xaml;
+using Windows.Foundation.Collections;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Imaging;
@@ -41,37 +43,64 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         {
             InitializeComponent();
 
-            // TODO: call appropriate initialize function of PlayerAdapter class
+            SetSourceOfThumbnail();
             //PlayerAppBar
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
-        {
+        //protected async override void OnNavigatedTo(NavigationEventArgs e)
+        //{
             //_viewModel.ShowMessagesCommand.Execute(null);
 
             //Windows.ApplicationModel.Activation.LaunchActivatedEventArgs
-            //await ShowSplashScreen();
-            base.OnNavigatedTo(e);
-        }
-
-        //private static async Task ShowSplashScreen()
-        //{
-        //    var file = await StorageFile.GetFileFromApplicationUriAsync(
-        //        new Uri("ms-appx:///Assets/SplashScreen.png", UriKind.Absolute));
-        //    var randomAccessStream = await file.OpenReadAsync();
-
-        //    var splashImage = new BitmapImage()
-        //    {
-        //        CreateOptions = BitmapCreateOptions.None
-        //    };
-        //    await splashImage.SetSourceAsync(randomAccessStream);
-
-
-        //    //var extendedSplash = new ExtendedSplash(e.SplashScreen,
-        //    //    e, splashImage);
-        //    //Window.Current.Content = extendedSplash;
-        //    Window.Current.Activate();
+        //    //await ShowSplashScreen();
+        //    base.OnNavigatedTo(e);
         //}
+
+        private async void SetSourceOfThumbnail()
+        {
+            var projectFolder = "ms-appdata:///Local/" + StorageConstants.ProgramsPath + "/" + _viewModel.ProjectName + "/";
+
+            StorageFile file = null;
+            try
+            {
+                var manualScreenshotPath = projectFolder + StorageConstants.ProgramManualScreenshotPath;
+                file = await StorageFile.GetFileFromApplicationUriAsync(
+                        new Uri(manualScreenshotPath, UriKind.Absolute));
+            } 
+            catch (Exception e)
+            {
+                file = null;                
+            }
+
+            if (file == null)
+            {
+                try
+                {
+                    var automaticProjectScreenshotPath = projectFolder + StorageConstants.ProgramAutomaticScreenshotPath;
+                    file = await StorageFile.GetFileFromApplicationUriAsync(
+                            new Uri(automaticProjectScreenshotPath, UriKind.Absolute));
+                }
+                catch (Exception e)
+                {
+                    file = null;
+                }
+            }
+
+            if (file != null)
+            {
+                var randomAccessStream = await file.OpenReadAsync();
+                var playerSplashImage = new BitmapImage()
+                {
+                    CreateOptions = BitmapCreateOptions.None
+                };
+
+                //playerSplashImage.DecodePixelHeight = (int)Window.Current.Bounds.Height;
+                //playerSplashImage.DecodePixelWidth = (int)Window.Current.Bounds.Width;
+
+                await playerSplashImage.SetSourceAsync(randomAccessStream);
+                ImagePlayerLoadSplashScreen.Source = playerSplashImage;
+            }
+        }
 
     }
 }
