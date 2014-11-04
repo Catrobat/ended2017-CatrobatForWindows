@@ -172,22 +172,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void sldSlidersChanged_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             int strokeThickness = (int)sldStrokeThickness.Value;
-
-            //Int32 minValue = Convert.ToInt32(btnWidthValue.Content) > Convert.ToInt32(btnHeightValue.Content) ?
-            //               Convert.ToInt32(btnHeightValue.Content) : Convert.ToInt32(btnWidthValue.Content);
-
-            //if ((2 * strokeThickness) >= minValue)
-            //{
-            //    if (minValue % 2 > 0)
-            //    {
-            //        strokeThickness = (minValue - 1) / 2;
-            //    }
-            //    else
-            //    {
-            //        strokeThickness = (minValue - 2) / 2;
-            //    }
-            //}
-
             tbStrokeThicknessValue.Text = strokeThickness.ToString();
             PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll = strokeThickness;
 

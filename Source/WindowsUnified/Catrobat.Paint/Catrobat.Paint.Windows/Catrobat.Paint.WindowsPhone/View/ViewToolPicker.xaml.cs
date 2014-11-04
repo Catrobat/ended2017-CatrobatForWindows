@@ -96,11 +96,11 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PocketPaintApplication.GetInstance().isBrushTool = false;
                 PocketPaintApplication.GetInstance().isToolPickerUsed = true; ;
                 PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Visibility = Visibility.Collapsed;
-                PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Visibility = Visibility.Collapsed;
+                PocketPaintApplication.GetInstance().UcRectangleSelectionControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridCropControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridUcRellRecControlState = Visibility.Collapsed;
-                PocketPaintApplication.GetInstance().GridRectangleSelectionControl.IsHitTestVisible = true;
+                PocketPaintApplication.GetInstance().UcRectangleSelectionControl.IsHitTestVisible = true;
                 PocketPaintApplication.GetInstance().GridEllipseSelectionControl.IsHitTestVisible = true;
                 // TODO: RectangleSelctionControl should be reseted if the rectangle-tool is selected.
                 // PocketPaintApplication.GetInstance().RectangleSelectionControl.resetRectangleSelectionControl();
@@ -129,12 +129,11 @@ namespace Catrobat.Paint.WindowsPhone.View
                     case "BtnRectangle":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
                         
-                        PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Clear();
-                        PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Add(new RectangleSelectionControl());
+                        PocketPaintApplication.GetInstance().RectangleSelectionControl = new RectangleSelectionControl();
                         PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = 160.0;
                         PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
 
-                        PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Visibility = Visibility.Visible;
+                        PocketPaintApplication.GetInstance().UcRectangleSelectionControl.Visibility = Visibility.Visible;
                         bool enableEdgeTypes = true;
                         PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
                         PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
