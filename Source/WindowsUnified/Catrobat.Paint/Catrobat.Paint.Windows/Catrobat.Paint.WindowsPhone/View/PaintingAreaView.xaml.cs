@@ -67,7 +67,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
             PocketPaintApplication.GetInstance().GridCursor = GridCursor;
             PocketPaintApplication.GetInstance().GridEllipseSelectionControl = GridEllipseSelectionControl;
-            PocketPaintApplication.GetInstance().GridRectangleSelectionControl = GridRectangleSelectionControl;
+            PocketPaintApplication.GetInstance().UcRectangleSelectionControl = ucRectangleSelectionControl;
             PocketPaintApplication.GetInstance().GridInputScopeControl = GridInputScopeControl;
             PocketPaintApplication.GetInstance().GridCropControl = GridCropControl;
             PocketPaintApplication.GetInstance().GridImportImageSelectionControl = GridImportImageSelectionControl;
@@ -898,15 +898,15 @@ namespace Catrobat.Paint.WindowsPhone.View
             //tbTest.Text = "alpha: " + alpha.ToString() + "\na: " + a.ToString() + "\nb: " + b.ToString() + "\nc: " + c.ToString();
         }
 
-        public Visibility setVisibilityOfGridRectangleSelectionControl
+        public Visibility setVisibilityOfUcRectangleSelectionControl
         {
             get
             {
-                return GridRectangleSelectionControl.Visibility;
+                return ucRectangleSelectionControl.Visibility;
             }
             set
             {
-                GridRectangleSelectionControl.Visibility = value;
+                ucRectangleSelectionControl.Visibility = value;
             }
         }
 

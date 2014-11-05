@@ -30,7 +30,8 @@
         </Button>
 
 
-        <Button x:Name="BtnToolSelection" BorderThickness="0"  HorizontalAlignment="Right" Height="38" Margin="0,0,21,0" MinHeight="1" MinWidth="1" Padding="0,-10,0,-10" VerticalAlignment="Center" Width="38">
+        <Button x:Name="BtnToolSelection" BorderThickness="0"  HorizontalAlignment="Right" Height="38" Margin="0,0,21,0" MinHeight="1" MinWidth="1" Padding="0,-
+                ,0,-10" VerticalAlignment="Center" Width="38">
             <Grid>
                 <Ellipse HorizontalAlignment="Right" Height="38" Margin="0,0,0,0" Stroke="White" StrokeThickness="3" VerticalAlignment="Center" Width="38">
                 </Ellipse>

@@ -26,15 +26,15 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             if (PocketPaintApplication.GetInstance() != null && PocketPaintApplication.GetInstance().PaintingAreaView != null)
             {
-                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOfGridRectangleSelectionControl = Visibility.Visible;
+                PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOfUcRectangleSelectionControl = Visibility.Visible;
 
-                if (PocketPaintApplication.GetInstance().GridRectangleSelectionControl.RenderTransform != null)
+                if (PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform != null)
                 {
-                    _transforms = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.RenderTransform as TransformGroup;
+                    _transforms = PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform as TransformGroup;
                 }
                 if (_transforms == null)
                 {
-                    PocketPaintApplication.GetInstance().GridRectangleSelectionControl.RenderTransform = _transforms = new TransformGroup();
+                    PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform = _transforms = new TransformGroup();
                 }
             }
         }
@@ -86,8 +86,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetDrawingSpace()
         {
-            PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Clear();
-            PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Children.Add(new RectangleSelectionControl());
+            PocketPaintApplication.GetInstance().RectangleSelectionControl = new RectangleSelectionControl();
             PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = 160.0;
             PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
             PocketPaintApplication.GetInstance().RectangleSelectionControl.setIsModifiedRectangleMovement = false;

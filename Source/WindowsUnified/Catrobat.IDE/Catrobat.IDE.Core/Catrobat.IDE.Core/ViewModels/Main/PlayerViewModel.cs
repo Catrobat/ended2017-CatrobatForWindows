@@ -14,8 +14,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     {
         #region private Members
 
-        private string _projectName;
-        private bool _isLaunchFromTile;
+        private string _projectName = "";
+        private bool _isLaunchFromTile = false;
 
         #endregion
 

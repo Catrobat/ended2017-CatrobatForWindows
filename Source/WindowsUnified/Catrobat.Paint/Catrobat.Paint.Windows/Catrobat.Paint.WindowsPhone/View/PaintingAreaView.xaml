@@ -40,10 +40,8 @@
                 </Grid>
 
                 <!-- RectangleSelectioncontrol -->
-                <Grid x:Name="GridRectangleSelectionControl" Height="230" Visibility="Collapsed" Width="230">
-                    <userControls:RectangleSelectionControl></userControls:RectangleSelectionControl>
-                </Grid>
-                </Grid>
+                <userControls:RectangleSelectionControl x:Name="ucRectangleSelectionControl" Visibility="Collapsed"></userControls:RectangleSelectionControl>
+            </Grid>
 
             <!-- Crop-Control -->
             <Grid x:Name="GridCropControl" Height="496" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Width="384">

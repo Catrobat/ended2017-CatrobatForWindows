@@ -36,7 +36,7 @@ namespace Catrobat.Paint.Phone
         public Grid GridCursor { get; set; }
         public Grid GridEllipseSelectionControl { get; set; }
 
-        public Grid GridRectangleSelectionControl { get; set; }
+        public RectangleSelectionControl UcRectangleSelectionControl { get; set; }
 
         public Grid GridImportImageSelectionControl { get; set; }
 
