@@ -52,8 +52,8 @@ namespace Catrobat.Paint.Phone.Tool
 
             _path.Stroke = new SolidColorBrush(Colors.Transparent);
             _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.thicknessSelected;
-            _path.StrokeEndLineCap = PocketPaintApplication.GetInstance().PaintData.capSelected;
-            _path.StrokeStartLineCap = PocketPaintApplication.GetInstance().PaintData.capSelected;
+            _path.StrokeEndLineCap = PocketPaintApplication.GetInstance().PaintData.penLineCapSelected;
+            _path.StrokeStartLineCap = PocketPaintApplication.GetInstance().PaintData.penLineCapSelected;
 
             _path.Data = _pathGeometry;
             _pathFigureCollection = new PathFigureCollection();

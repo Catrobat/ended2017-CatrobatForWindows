@@ -7,13 +7,13 @@ using Catrobat.Paint.Phone.Tool;
 namespace Catrobat.Paint.Phone.Data
 {
     public delegate void StrokeColorChangedEventHandler(SolidColorBrush color);
-    public delegate void FillColorChangedEventHandler(SolidColorBrush color);
     public delegate void ColorChangedEventHandler(SolidColorBrush color);
 
     public delegate void ThicknessChangedEventHandler(double thickness);
     public delegate void StrokeThicknessChangedEventHandler(double strokeThickness);
 
-    public delegate void CapChangedEventHandler(PenLineCap cap);
+    public delegate void PenLineCapChangedEventHandler(PenLineCap cap);
+    public delegate void PenLineJoinChangeEventHandler(PenLineJoin join);
     public delegate void ToolCurrentChangedEventHandler(ToolBase tool);
 
 
@@ -24,22 +24,22 @@ namespace Catrobat.Paint.Phone.Data
     public class PaintData
     {
         public event StrokeColorChangedEventHandler strokeColorChanged;
-        public event FillColorChangedEventHandler fillColorChanged;
         public event ColorChangedEventHandler colorChanged;
 
         public event ThicknessChangedEventHandler thicknessChanged;
         public event StrokeThicknessChangedEventHandler strokeThicknessChanged;
 
-        public event CapChangedEventHandler capChanged;
+        public event PenLineCapChangedEventHandler penLineCapChanged;
+        public event PenLineJoinChangeEventHandler penLineJoinChanged;
         public event ToolCurrentChangedEventHandler toolCurrentChanged;
 
         private static SolidColorBrush _strokeColorSelected = new SolidColorBrush(Colors.Gray);
-        private static SolidColorBrush _fillColorSelected = new SolidColorBrush(Colors.Yellow);
         private static SolidColorBrush _colorSelected = new SolidColorBrush(Colors.Black);
 
         private int _thicknessSelected = 8;
-        private double _strokeThicknessRecEll = 3.0;
-        private PenLineCap _capSelected = PenLineCap.Round;
+        private double _strokeThickness = 3.0;
+        private PenLineCap _penLineCapSelected = PenLineCap.Round;
+        private PenLineJoin _penLineJoinSelected = PenLineJoin.Miter;
         private ToolBase _toolCurrentSelected = new BrushTool();
         public int maxRightLeft = 0;
         public double minMaxResize = 0.0;
@@ -64,17 +64,6 @@ namespace Catrobat.Paint.Phone.Data
             }
         }
 
-        public SolidColorBrush fillColorSelected
-        {
-            get { return _fillColorSelected; }
-            set
-            {
-                _fillColorSelected = value;
-                onFillColorChanged(_fillColorSelected);
-            }
-
-        }
-
         public int thicknessSelected
         {
             get { return _thicknessSelected; }
@@ -85,26 +74,35 @@ namespace Catrobat.Paint.Phone.Data
             }
         }
 
-        public double strokeThicknessRecEll
+        public double strokeThickness
         {
-            get { return _strokeThicknessRecEll; }
+            get { return _strokeThickness; }
             set
             {
-                _strokeThicknessRecEll = value;
-                onStrokeThicknessChanged(_strokeThicknessRecEll);
+                _strokeThickness = value;
+                onStrokeThicknessChanged(_strokeThickness);
             }
         }
 
-        public PenLineCap capSelected
+        public PenLineCap penLineCapSelected
         {
-            get { return _capSelected; }
+            get { return _penLineCapSelected; }
             set
             {
-                _capSelected = value;
-                onCapChanged(_capSelected);
+                _penLineCapSelected = value;
+                onPenLineCapChanged(_penLineCapSelected);
             }
         }
 
+        public PenLineJoin penLineJoinSelected
+        {
+            get { return _penLineJoinSelected; }
+            set
+            {
+                _penLineJoinSelected = value;
+                onPenLineJoinChanged(_penLineJoinSelected);
+            }
+        }
         
         public ToolBase toolCurrentSelected
         {
@@ -132,14 +130,6 @@ namespace Catrobat.Paint.Phone.Data
             }
         }
 
-        protected virtual void onFillColorChanged(SolidColorBrush color)
-        {
-            if (fillColorChanged != null)
-            {
-                fillColorChanged(color);
-            }
-        }
-
         protected virtual void onThicknessChanged(double thickness)
         {
             if (thicknessChanged != null)
@@ -155,11 +145,19 @@ namespace Catrobat.Paint.Phone.Data
             }
         }
 
-        protected virtual void onCapChanged(PenLineCap cap)
+        protected virtual void onPenLineCapChanged(PenLineCap cap)
         {
-            if (capChanged != null)
+            if (penLineCapChanged != null)
             {
-                capChanged(cap);
+                penLineCapChanged(cap);
+            }
+        }
+
+        protected virtual void onPenLineJoinChanged(PenLineJoin join)
+        {
+            if (penLineJoinChanged != null)
+            {
+                penLineJoinChanged(join);
             }
         }
 

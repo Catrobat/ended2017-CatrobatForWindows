@@ -128,14 +128,14 @@ namespace Catrobat.Paint.WindowsPhone.View
                         break;
                     case "BtnRectangle":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
-                        
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = 160.0;
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = 160.0;
 
-                        PocketPaintApplication.GetInstance().UcRectangleSelectionControl.Visibility = Visibility.Visible;
                         bool enableEdgeTypes = true;
                         PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
                         PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
+                        
+                        PocketPaintApplication.GetInstance().ToolCurrent.ResetDrawingSpace();
+
+                        PocketPaintApplication.GetInstance().UcRectangleSelectionControl.Visibility = Visibility.Visible;
                         break;
                     case "BtnEllipse":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Ellipse);

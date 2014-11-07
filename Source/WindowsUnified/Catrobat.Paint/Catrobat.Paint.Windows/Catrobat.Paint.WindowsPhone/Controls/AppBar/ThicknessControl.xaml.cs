@@ -127,7 +127,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
         public void RoundButton_OnClick(object sender, RoutedEventArgs e)
         {
             var penLineCap = PenLineCap.Round;
-            PocketPaintApplication.GetInstance().PaintData.capSelected = penLineCap;
+            PocketPaintApplication.GetInstance().PaintData.penLineCapSelected = penLineCap;
             PocketPaintApplication.GetInstance().cursorControl.changeCursorType(penLineCap);
             checkPenLineCap(penLineCap);
         }
@@ -135,7 +135,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
         public void SquareButton_OnClick(object sender, RoutedEventArgs e)
         {
             var penLineCap = PenLineCap.Square;
-            PocketPaintApplication.GetInstance().PaintData.capSelected = penLineCap;
+            PocketPaintApplication.GetInstance().PaintData.penLineCapSelected = penLineCap;
             PocketPaintApplication.GetInstance().cursorControl.changeCursorType(penLineCap);
             checkPenLineCap(penLineCap);
         }
@@ -143,7 +143,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
         public void TriangleButton_OnClick(object sender, RoutedEventArgs e)
         {
             var penLineCap = PenLineCap.Triangle;
-            PocketPaintApplication.GetInstance().PaintData.capSelected = penLineCap;
+            PocketPaintApplication.GetInstance().PaintData.penLineCapSelected = penLineCap;
             PocketPaintApplication.GetInstance().cursorControl.changeCursorType(penLineCap);
             checkPenLineCap(penLineCap);
         }

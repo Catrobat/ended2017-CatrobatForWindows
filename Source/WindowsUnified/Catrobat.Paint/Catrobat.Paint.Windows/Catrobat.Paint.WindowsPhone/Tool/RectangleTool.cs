@@ -63,7 +63,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void Draw(object o)
         {
-            var strokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThicknessRecEll;
+            var strokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
 
             var coordinate = (Point)o;
             coordinate.X += strokeThickness / 2.0;
@@ -90,11 +90,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetDrawingSpace()
         {
-            // TODO: remove double values !!!
-            PocketPaintApplication.GetInstance().RectangleSelectionControl = new RectangleSelectionControl();
-            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = 160.0;
-            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = 160.0;
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement = false;
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.resetRectangleSelectionControl();
         }
     }
 }

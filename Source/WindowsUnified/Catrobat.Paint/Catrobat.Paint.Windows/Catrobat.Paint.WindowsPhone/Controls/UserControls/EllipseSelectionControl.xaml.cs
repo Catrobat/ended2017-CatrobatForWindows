@@ -54,7 +54,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             ellEllipseToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
             ellEllipseToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
-            ellEllipseToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThicknessRecEll;
+            ellEllipseToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
 
             PocketPaintApplication.GetInstance().EllipseSelectionControl = this;
             setIsModifiedRectangleMovement = false;

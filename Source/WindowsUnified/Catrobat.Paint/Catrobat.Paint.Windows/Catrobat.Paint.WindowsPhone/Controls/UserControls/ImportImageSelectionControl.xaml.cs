@@ -53,7 +53,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             GridMain.RenderTransform = _transformGridMain = new TransformGroup();
             rectRectangleToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
             rectRectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
-            rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThicknessRecEll;
+            rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
             PocketPaintApplication.GetInstance().ImportImageSelectionControl = this;
             setIsModifiedRectangleMovement = false;
 

@@ -54,7 +54,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void Draw(object o)
         {
-            var strokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThicknessRecEll;
+            var strokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
 
             var coordinate = (Point)o;
             //coordinate.X += strokeThickness;
