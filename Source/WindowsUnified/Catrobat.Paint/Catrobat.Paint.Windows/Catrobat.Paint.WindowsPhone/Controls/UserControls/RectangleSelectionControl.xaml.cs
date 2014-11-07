@@ -380,7 +380,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public Point getCenterCoordinateOfGridMain()
         {
-            double halfScreenHeight = ((Window.Current.Bounds.Height - PocketPaintApplication.GetInstance().BarStandard.Height) / 2.0);
+            double halfScreenHeight = ((Window.Current.Bounds.Height - PocketPaintApplication.GetInstance().AppbarTop.Height
+                                                                     - PocketPaintApplication.GetInstance().BarStandard.Height) / 2.0);
             double halfScreenWidth = Window.Current.Bounds.Width / 2.0;
 
             double offsetX = _transformGridMain.Value.OffsetX;
