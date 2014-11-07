@@ -129,7 +129,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                     case "BtnRectangle":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
                         
-                        PocketPaintApplication.GetInstance().RectangleSelectionControl = new RectangleSelectionControl();
                         PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = 160.0;
                         PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = 160.0;
 
