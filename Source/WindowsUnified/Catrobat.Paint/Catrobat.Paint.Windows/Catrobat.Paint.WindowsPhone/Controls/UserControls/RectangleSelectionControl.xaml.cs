@@ -465,7 +465,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectRectangleToDraw.Width = _rectangleToDrawSize;
             rectRectangleToDraw.Height = _rectangleToDrawSize;
             rectRectangleForMovement.Width = _rectangleForMovementSize;
-            rectRectangleForMovement.Width = _rectangleForMovementSize;
+            rectRectangleForMovement.Height = _rectangleForMovementSize;
 
             fillOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.colorSelected;
             strokeOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
