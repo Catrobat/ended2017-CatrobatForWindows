@@ -18,24 +18,26 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class RectangleTool : ToolBase
     {
-        private TransformGroup _transforms;
+        private double _lastRotationAngle;
 
         public RectangleTool()
         {
             this.ToolType = ToolType.Rect;
 
+            _lastRotationAngle = 0.0;
+
             if (PocketPaintApplication.GetInstance() != null && PocketPaintApplication.GetInstance().PaintingAreaView != null)
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOfUcRectangleSelectionControl = Visibility.Visible;
 
-                if (PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform != null)
-                {
-                    _transforms = PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform as TransformGroup;
-                }
-                if (_transforms == null)
-                {
-                    PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform = _transforms = new TransformGroup();
-                }
+                //if (PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform != null)
+                //{
+                //    _transforms = PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform as TransformGroup;
+                //}
+                //if (_transforms == null)
+                //{
+                //    PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform = _transforms = new TransformGroup();
+                //}
             }
         }
 
@@ -46,10 +48,12 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleMove(object arg)
         {
-            // TODO:
             RotateTransform rotateTransform = new RotateTransform();
             rotateTransform = (RotateTransform)arg;
-            _transforms.Children.Add(rotateTransform);            
+
+            // TODO: get last rotateTransform and add it
+
+            //PocketPaintApplication.GetInstance().RectangleSelectionControl.addTransformation(rotateTransform);
         }
 
         public override void HandleUp(object arg)
@@ -59,25 +63,25 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void Draw(object o)
         {
-            var borderThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
+            var strokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThicknessRecEll;
 
             var coordinate = (Point)o;
-            coordinate.X += borderThickness / 2.0;
-            coordinate.Y += borderThickness / 2.0;
+            coordinate.X += strokeThickness / 2.0;
+            coordinate.Y += strokeThickness / 2.0;
 
             double height = PocketPaintApplication.GetInstance().BarRecEllShape.getHeight();
             double width = PocketPaintApplication.GetInstance().BarRecEllShape.getWidth();
-            height -= borderThickness;
-            width -= borderThickness;
+            height -= strokeThickness;
+            width -= strokeThickness;
 
             RectangleGeometry myRectangleGeometry = new RectangleGeometry();
             myRectangleGeometry.Rect = new Rect(coordinate, new Point(coordinate.X + width, coordinate.Y + height));
 
             
             Path _path = new Path();
-            _path.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
-            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
-            _path.StrokeThickness = borderThickness;
+            _path.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+            _path.StrokeThickness = strokeThickness;
             _path.StrokeLineJoin = PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw;
 
             _path.Data = myRectangleGeometry;
@@ -86,10 +90,11 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetDrawingSpace()
         {
+            // TODO: remove double values !!!
             PocketPaintApplication.GetInstance().RectangleSelectionControl = new RectangleSelectionControl();
-            PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = 160.0;
-            PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.setIsModifiedRectangleMovement = false;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = 160.0;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = 160.0;
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement = false;
         }
     }
 }

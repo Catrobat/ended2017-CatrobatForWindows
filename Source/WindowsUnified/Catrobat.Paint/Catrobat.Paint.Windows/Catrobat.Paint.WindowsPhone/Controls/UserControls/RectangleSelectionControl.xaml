@@ -11,7 +11,7 @@
 
     <Grid x:Name="GridMain" Background="Orange" Height="230" Width="230">
         <!--<Grid x:Name="GridRectangle" Background="Beige" ManipulationDelta="rectRectangleForMovement_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" Height="230">-->
-            <Rectangle x:Name="rectRectangleToDraw" Fill="Black" Height="160" HorizontalAlignment="Left" Stroke="Gray"
+        <Rectangle x:Name="rectRectangleToDraw" Fill="Black" Height="160" HorizontalAlignment="Left" Stroke="Gray"
                 StrokeThickness="3" StrokeLineJoin="Miter" Margin="35,35,35,35" 
                 ManipulationMode="TranslateX, TranslateY" VerticalAlignment="Top" Width="160" />
 

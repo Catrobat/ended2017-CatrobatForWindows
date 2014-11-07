@@ -39,10 +39,10 @@ namespace Catrobat.Paint.Phone.Tool
             _pathGeometry = new PathGeometry();
             _path.StrokeLineJoin = PenLineJoin.Bevel;
 
-            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
-            _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
-            _path.StrokeEndLineCap = PocketPaintApplication.GetInstance().PaintData.CapSelected;
-            _path.StrokeStartLineCap = PocketPaintApplication.GetInstance().PaintData.CapSelected;
+            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.thicknessSelected;
+            _path.StrokeEndLineCap = PocketPaintApplication.GetInstance().PaintData.capSelected;
+            _path.StrokeStartLineCap = PocketPaintApplication.GetInstance().PaintData.capSelected;
 
             _path.Data = _pathGeometry;
             _pathFigureCollection = new PathFigureCollection();

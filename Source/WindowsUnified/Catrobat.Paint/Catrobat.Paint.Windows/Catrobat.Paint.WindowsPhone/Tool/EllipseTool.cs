@@ -54,16 +54,16 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void Draw(object o)
         {
-            var borderThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
+            var strokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThicknessRecEll;
 
             var coordinate = (Point)o;
-            //coordinate.X += borderThickness;
-            //coordinate.Y += borderThickness;
+            //coordinate.X += strokeThickness;
+            //coordinate.Y += strokeThickness;
 
             double height = PocketPaintApplication.GetInstance().BarRecEllShape.getHeight();
             double width = PocketPaintApplication.GetInstance().BarRecEllShape.getWidth();
-            height -= borderThickness;
-            width -= borderThickness;
+            height -= strokeThickness;
+            width -= strokeThickness;
 
             EllipseGeometry myEllipseGeometry = new EllipseGeometry();
             myEllipseGeometry.Center = new Point(coordinate.X, coordinate.Y);
@@ -71,9 +71,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             myEllipseGeometry.RadiusY = height / 2.0;
 
             Path _path = new Path();
-            _path.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
-            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
-            _path.StrokeThickness = borderThickness;
+            _path.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+            _path.StrokeThickness = strokeThickness;
             _path.StrokeLineJoin = PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeLineJoinOfEllipseToDraw;
 
             _path.Data = myEllipseGeometry;
@@ -84,8 +84,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Children.Clear();
             PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Children.Add(new EllipseSelectionControl());
-            PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = 160.0;
-            PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = 160.0;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = 160.0;
             PocketPaintApplication.GetInstance().EllipseSelectionControl.setIsModifiedRectangleMovement = false;
         }
     }

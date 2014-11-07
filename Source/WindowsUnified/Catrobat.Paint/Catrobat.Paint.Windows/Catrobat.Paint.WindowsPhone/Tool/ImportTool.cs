@@ -61,16 +61,16 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void Draw(object o)
         {
-            var borderThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
+            var strokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThicknessRecEll;
 
             var coordinate = (Point)o;
-            coordinate.X += borderThickness / 2.0;
-            coordinate.Y += borderThickness / 2.0;
+            coordinate.X += strokeThickness / 2.0;
+            coordinate.Y += strokeThickness / 2.0;
 
             double height = PocketPaintApplication.GetInstance().BarRecEllShape.getHeight();
             double width = PocketPaintApplication.GetInstance().BarRecEllShape.getWidth();
-            height -= borderThickness;
-            width -= borderThickness;
+            height -= strokeThickness;
+            width -= strokeThickness;
 
             RectangleGeometry myRectangleGeometry = new RectangleGeometry();
             myRectangleGeometry.Rect = new Rect(coordinate, new Point(coordinate.X + width, coordinate.Y + height));
@@ -83,8 +83,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                     new Uri("ms-resource:/Files/Assets/test.jpg", UriKind.Absolute)
                 );
             _path.Fill = berriesBrush;
-            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
-            _path.StrokeThickness = borderThickness;
+            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+            _path.StrokeThickness = strokeThickness;
             _path.StrokeLineJoin = PocketPaintApplication.GetInstance().ImportImageSelectionControl.strokeLineJoinOfRectangleToDraw;
 
             _path.Data = myRectangleGeometry;
@@ -95,9 +95,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Children.Clear();
             PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Children.Add(new ImportImageSelectionControl());
-            PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = 160.0;
-            PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.setIsModifiedRectangleMovement = false;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = 160.0;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = 160.0;
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement = false;
         }
     }
 }

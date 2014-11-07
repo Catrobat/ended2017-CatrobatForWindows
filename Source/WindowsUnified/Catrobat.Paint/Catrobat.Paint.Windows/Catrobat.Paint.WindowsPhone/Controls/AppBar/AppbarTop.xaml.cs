@@ -107,9 +107,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             GrdBtnSelectedColor.Height *= height_multiplicator;
             GrdBtnSelectedColor.Width *= width_multiplicator;
 
-            BtnSelectedColor.Background = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
-            PocketPaintApplication.GetInstance().PaintData.ColorChanged += ColorChangedHere;
-            PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
+            BtnSelectedColor.Background = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            PocketPaintApplication.GetInstance().PaintData.colorChanged += ColorChangedHere;
+            PocketPaintApplication.GetInstance().PaintData.toolCurrentChanged += ToolChangedHere;
             PocketPaintApplication.GetInstance().AppbarTop = this;
 
             BtnUndo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnUndo_Click;

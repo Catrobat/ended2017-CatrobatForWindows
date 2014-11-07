@@ -72,6 +72,8 @@ namespace Catrobat.Paint.Phone
 
         public AppbarTop AppbarTop { get; set; }
 
+        public CommandBar BarStandard { get; set; }
+
         // TODO: public Catrobat.Paint.Phone.Controls.AppBar.ApplicationBarTop ApplicationBarTop { get; set; }
         public Grid PaintingAreaContentPanelGrid { get; set; }
 
@@ -114,10 +116,10 @@ namespace Catrobat.Paint.Phone
 
         public ToolBase ToolCurrent
         {
-            get { return PaintData.ToolCurrentSelected; }
+            get { return PaintData.toolCurrentSelected; }
             private set
             {
-                PaintData.ToolCurrentSelected = value;
+                PaintData.toolCurrentSelected = value;
             }
         }
         public ToolBase ToolWhileMoveTool { get; private set; }

@@ -36,18 +36,18 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             Color selected_color;
             double color_opacity;
-            if (PocketPaintApplication.GetInstance().is_border_color && PocketPaintApplication.GetInstance().PaintData.BorderColorSelected != null)
+            if (PocketPaintApplication.GetInstance().is_border_color && PocketPaintApplication.GetInstance().PaintData.strokeColorSelected != null)
             {
-                selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.BorderColorSelected).Color;
-                color_opacity = Convert.ToDouble(((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.BorderColorSelected).Color.A);
+                selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.strokeColorSelected).Color;
+                color_opacity = Convert.ToDouble(((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.strokeColorSelected).Color.A);
 
                 changeValuesOfColourSliders(selected_color.R, selected_color.G, selected_color.B, (byte)color_opacity);
                 changeColorOfBtnSelectedColor(selected_color);
             }
-            else if (!PocketPaintApplication.GetInstance().is_border_color && PocketPaintApplication.GetInstance().PaintData.ColorSelected != null)
+            else if (!PocketPaintApplication.GetInstance().is_border_color && PocketPaintApplication.GetInstance().PaintData.colorSelected != null)
             {
-                selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.ColorSelected).Color;
-                color_opacity = Convert.ToDouble(((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.ColorSelected).Color.A);
+                selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.colorSelected).Color;
+                color_opacity = Convert.ToDouble(((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.colorSelected).Color.A);
 
                 changeValuesOfColourSliders(selected_color.R, selected_color.G, selected_color.B, (byte)color_opacity);
                 changeColorOfBtnSelectedColor(selected_color);
@@ -69,26 +69,26 @@ namespace Catrobat.Paint.WindowsPhone.View
             SolidColorBrush fill_color;
             if (PocketPaintApplication.GetInstance().is_border_color)
             {
-                fill_color = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
+                fill_color = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
             }
             else
             {
-                fill_color = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
+                fill_color = PocketPaintApplication.GetInstance().PaintData.colorSelected;
             }
 
             double fill_color_opacity = Convert.ToDouble(fill_color.Color.A);
 
 
-            if (PocketPaintApplication.GetInstance().PaintData.ColorSelected != null)
+            if (PocketPaintApplication.GetInstance().PaintData.colorSelected != null)
             {
                 Color selected_color;
                 if (PocketPaintApplication.GetInstance().is_border_color)
                 {
-                    selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.BorderColorSelected).Color;
+                    selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.strokeColorSelected).Color;
                 }
                 else
                 {
-                    selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.ColorSelected).Color;
+                    selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.colorSelected).Color;
                 }
 
                 changeValuesOfColourSliders(selected_color.R, selected_color.G, selected_color.B, (byte)fill_color_opacity);
@@ -169,10 +169,11 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             if ( PocketPaintApplication.GetInstance().is_border_color )
             {
-                PocketPaintApplication.GetInstance().PaintData.BorderColorSelected = new SolidColorBrush(current_color);
+                var current_solid_brush = new SolidColorBrush(current_color);
+                PocketPaintApplication.GetInstance().PaintData.strokeColorSelected = current_solid_brush;
                 if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
                 {
-                    PocketPaintApplication.GetInstance().RectangleSelectionControl.changeStrokeOfDrawingShape(current_color);
+                    PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeOfRectangleToDraw = current_solid_brush;
                 }
                 else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                 {
@@ -186,10 +187,10 @@ namespace Catrobat.Paint.WindowsPhone.View
             else
             {
                 var current_solid_brush = new SolidColorBrush(current_color);
-                PocketPaintApplication.GetInstance().PaintData.ColorSelected = current_solid_brush;
+                PocketPaintApplication.GetInstance().PaintData.colorSelected = current_solid_brush;
                 if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
                 {
-                    PocketPaintApplication.GetInstance().RectangleSelectionControl.changeColorOfDrawingShape(current_color);
+                    PocketPaintApplication.GetInstance().RectangleSelectionControl.fillOfRectangleToDraw = current_solid_brush;
                 }
                 else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                 {

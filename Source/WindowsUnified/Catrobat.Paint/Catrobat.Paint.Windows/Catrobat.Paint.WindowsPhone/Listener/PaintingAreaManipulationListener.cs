@@ -57,11 +57,11 @@ namespace Catrobat.Paint.Phone.Listener
             {
                 //rotate.CenterX = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Width / 2.0;
                 //rotate.CenterY = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Height / 2.0;
-                Point rotateCenterPoint = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCenterPointOfRectangleForMovement();
+                Point rotateCenterPoint = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCenterOfGridMain();
                 rotate.CenterX = rotateCenterPoint.X;
                 rotate.CenterY = rotateCenterPoint.Y;
 
-                Point centerPoint = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCenterPointOfSelectionControl();  
+                Point centerPoint = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCenterCoordinateOfGridMain();  
                 
                 if (!(lastPoint.X == 0.0 && lastPoint.Y == 0.0) &&
                     (lastPoint.X != point.X || lastPoint.Y != point.Y))
@@ -122,7 +122,7 @@ namespace Catrobat.Paint.Phone.Listener
                 case ToolType.Rect:
                     if (rotate.Angle != 0)
                     {
-                        PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(rotate);
+                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(rotate);
                     }
                     break;
             }

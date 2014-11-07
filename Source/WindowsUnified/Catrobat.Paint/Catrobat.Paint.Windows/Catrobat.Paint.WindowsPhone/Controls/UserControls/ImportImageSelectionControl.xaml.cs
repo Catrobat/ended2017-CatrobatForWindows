@@ -51,9 +51,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             GridEllRightBottom.RenderTransform = _transformGridEllipseRightBottom = new TransformGroup();
             GridEllRightTop.RenderTransform = _transformGridEllipseRightTop = new TransformGroup();
             GridMain.RenderTransform = _transformGridMain = new TransformGroup();
-            rectRectangleToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
-            rectRectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
-            rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
+            rectRectangleToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            rectRectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+            rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThicknessRecEll;
             PocketPaintApplication.GetInstance().ImportImageSelectionControl = this;
             setIsModifiedRectangleMovement = false;
 
@@ -135,9 +135,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public void setSizeOfRecBar(double height, double width)
         {
 
-            PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = height;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = height;
 
-            PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = width;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = width;
         }
 
         private void ellCenterBottom_ManipulationDelta_1(object sender, ManipulationDeltaRoutedEventArgs e)
@@ -428,8 +428,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 setGridTransformsOfEllipses(moveY, null, moveY2, moveY2, 
                                             moveY, null, moveY, null);
                 if (changeTbValues) {
-                    PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = rectRectangleToDraw.Height;
-                    PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = rectRectangleToDraw.Width;
+                    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = rectRectangleToDraw.Height;
+                    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = rectRectangleToDraw.Width;
                 }
                 resetAppBarButtonRectangleSelectionControl(true);
                 setIsModifiedRectangleMovement = true;
@@ -453,8 +453,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                                             null, null, moveX, moveX);
                 if (changeTbValues)
                 {
-                    PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = rectRectangleToDraw.Height;
-                    PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = rectRectangleToDraw.Width;
+                    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = rectRectangleToDraw.Height;
+                    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = rectRectangleToDraw.Width;
                 }
                 resetAppBarButtonRectangleSelectionControl(true);
                 setIsModifiedRectangleMovement = true;
@@ -531,7 +531,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double valueTop = rectRectangleToDraw.Margin.Top;
 
             coordinateX = offsetX + halfScreenWidth + (valueLeft - valueRight) / 2.0;
-            coordianteY = offsetY + halfScreenHeight - 72.0 + (valueTop - valueBottom) / 2.0;
+            coordianteY = offsetY + halfScreenHeight - PocketPaintApplication.GetInstance().BarStandard.Height + (valueTop - valueBottom) / 2.0;
 
             return new Point(rectRectangleForMovement.Width/2.0, rectRectangleForMovement.Height/2.0);
         }
