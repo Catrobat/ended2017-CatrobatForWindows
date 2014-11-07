@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Windows.UI.Core;
+using Windows.UI.Input;
 using Windows.UI.ViewManagement;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Bricks;
@@ -222,7 +223,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
         private void SortSelectedItems()
         {
-            for (int i = 0; i < (SelectedItems as IList).Count-1;)
+            for (int i = 0; i < (SelectedItems as IList).Count - 1; )
             {
                 if ((ItemsSource as IList).IndexOf((SelectedItems as IList)[i + 1]) <
                     (ItemsSource as IList).IndexOf((SelectedItems as IList)[i]))
@@ -408,7 +409,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             {
                 SetItemsSelectedStyle(e.NewItems);
             }
-            else if(e.Action == NotifyCollectionChangedAction.Remove)
+            else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
                 SetItemsSelectedStyle(e.OldItems);
             }
@@ -432,7 +433,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
                     tmpItem.SetUnselected();
                 }
             }
-        } 
+        }
 
         private void AddRemoveSelectedItem(object obj, bool contains)
         {
@@ -549,17 +550,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             item.Tapped += item_Tapped;
             item.ItemGroupEvent += item_ItemGroupEvent;
             item.ItemSelectedEvent += item_ItemSelectedEvent;
-            item.GotFocus += item_GotFocus;
             return item;
         }
-
-        void item_GotFocus(object sender, RoutedEventArgs e)
-        {
-            _scrollViewer.Focus(FocusState.Pointer);
-        }
-
-
-
 
         void item_ItemSelectedEvent(object sender, CatrobatListViewEventArgs e)
         {
@@ -574,7 +566,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
                 if (tmpObj is IfBrick)
                 {
                     AddRemoveSelectedItem((tmpObj as IfBrick).Else, contains);
-                } else if (tmpObj is ElseBrick)
+                }
+                else if (tmpObj is ElseBrick)
                 {
                     AddRemoveSelectedItem((tmpObj as ElseBrick).Begin, contains);
                 }
@@ -592,12 +585,14 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
         void item_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
+            _scrollViewer.Focus(FocusState.Pointer);
             ItemTapped(this, new CatrobatListViewItemEventArgs((CatrobatListViewItem)sender));
         }
 
 
         void item_ItemGroupEvent(object sender, CatrobatListViewEventArgs e)
         {
+            _scrollViewer.Focus(FocusState.Pointer);
             GroupItem(sender as CatrobatListViewItem);
         }
 
@@ -761,7 +756,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
             this.ManipulationDelta += CatrobatListViewWorker_ManipulationDelta;
             this.ManipulationCompleted += CatrobatListViewWorker_ManipulationCompleted;
             this.PointerReleased += CatrobatListViewWorker_PointerReleased;
-            
+
 
 
             SetReorderEnabled(this._reorderEnabled);
@@ -841,7 +836,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
                     {
                         tmpItem = ContainerFromItem((tmpItem.Content as BlockEndBrick).Begin) as CatrobatListViewItem;
                     }
-                    
+
                 }
                 itemsBounds =
                     tmpItem.TransformToVisual(_scrollViewer)
