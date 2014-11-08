@@ -21,40 +21,46 @@ namespace Catrobat.Paint.Phone
         private static PocketPaintApplication _instance;
 
         private readonly DateTime _dateTimeAppStarted = DateTime.Now;
-        public DateTime DateTimeAppStarted { get { return _dateTimeAppStarted; } }
 
         public Visibility GrdThicknessControlState = Visibility.Collapsed;
 
         public Visibility GridUcRellRecControlState = Visibility.Collapsed;
 
+        #region bool-Variables
         public bool isBrushEraser = false;
 
         public bool isBrushTool = true;
 
         public bool isToolPickerUsed = true;
 
-        public Grid GridCursor { get; set; }
-        public Grid GridEllipseSelectionControl { get; set; }
+        public bool UnsavedChangesMade { get; set; }
+        #endregion
 
-        public RectangleSelectionControl UcRectangleSelectionControl { get; set; }
+        #region GridElements
+        public Grid GridCropControl { get; set; }
+
+        public Grid GridCursor { get; set; }
+
+        public Grid GridEllipseSelectionControl { get; set; }
 
         public Grid GridImportImageSelectionControl { get; set; }
 
-        public Grid GridCropControl { get; set; }
+        public Grid GridInputScopeControl { get; set; }
 
-        public bool UnsavedChangesMade { get; set; }
+        public Grid MainGrid { get; set; }
+
+        public Grid PaintingAreaCheckeredGrid { get; set; }
+
+        public Grid PaintingAreaContentPanelGrid { get; set; }
+
+        public Grid PaintingAreaLayoutRoot { get; set; }
+        #endregion
 
         public CursorControl cursorControl { get; set; }
 
         public Canvas PaintingAreaCanvas { get; set; }
         // separate layer, for temp manipulation operations
         public Canvas PaintingAreaCanvasUnderlaying { get; set; }
-
-        public Grid GridInputScopeControl { get; set; }
-
-        public Grid PaintingAreaCheckeredGrid { get; set; }
-
-        public Grid PaintingAreaLayoutRoot { get; set; }
 
         public PaintingAreaView PaintingAreaView { get; set; }
 
@@ -75,16 +81,11 @@ namespace Catrobat.Paint.Phone
         public CommandBar BarStandard { get; set; }
 
         // TODO: public Catrobat.Paint.Phone.Controls.AppBar.ApplicationBarTop ApplicationBarTop { get; set; }
-        public Grid PaintingAreaContentPanelGrid { get; set; }
-
-        public Grid MainGrid { get; set; }
 
         public WriteableBitmap Bitmap { get; private set; }
 
         private readonly PaintData _paintData = new PaintData();
         public PaintData PaintData { get { return _paintData; } }
-
-        public Shape CurrentShape { get; set; }
 
         private readonly StorageIo _storageIo = new StorageIo();
         public StorageIo StorageIo { get { return _storageIo; } }

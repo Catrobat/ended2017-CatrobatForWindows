@@ -19,7 +19,7 @@
                 </Grid.Background>
 
                 <Canvas x:Name="PaintingAreaCanvas" Background="Transparent"  ManipulationMode="TranslateX, TranslateY, Scale" />
-     
+
                 <!-- CursorControl -->
                 <Grid x:Name="GridCursor" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" 
                       Visibility="Collapsed" Width="80">

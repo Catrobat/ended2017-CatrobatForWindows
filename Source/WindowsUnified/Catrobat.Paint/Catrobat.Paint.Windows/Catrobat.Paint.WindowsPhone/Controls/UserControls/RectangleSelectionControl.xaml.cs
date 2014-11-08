@@ -436,9 +436,21 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 // TranslateTransform
                 if (currentTransformation.Rotation == 0.0) 
                 {
-                    currentTransformation.TranslateX += previousCompositeTransform.TranslateX;
-                    currentTransformation.TranslateY += previousCompositeTransform.TranslateY;
+                    //currentTransformation.TranslateX += previousCompositeTransform.TranslateX;
+                    //currentTransformation.TranslateY += previousCompositeTransform.TranslateY;
+                    currentTransformation.TranslateX += _transformGridMain.Value.OffsetX;
+                    currentTransformation.TranslateY += _transformGridMain.Value.OffsetY;
                 }
+                //else
+                //{
+                //    currentTransformation.TranslateX += previousCompositeTransform.TranslateX;
+                //    currentTransformation.TranslateY += previousCompositeTransform.TranslateY;
+                //}
+                //else
+                //{
+                //    currentTransformation.TranslateX += _transformGridMain.Value.OffsetX;
+                //    currentTransformation.TranslateY += _transformGridMain.Value.OffsetY;
+                //}
                 // RotationTransform
                 currentTransformation.Rotation += previousCompositeTransform.Rotation;
                 _transformGridMain.Children.RemoveAt(0);
