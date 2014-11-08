@@ -35,10 +35,16 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleMove(object arg)
         {
-            CompositeTransform rotateTransform = new CompositeTransform();
-            rotateTransform = (CompositeTransform)arg;
+            RotateTransform rotateTransform = new RotateTransform();
+            rotateTransform = (RotateTransform)arg;
 
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.addCompositeTransformation(rotateTransform);
+            RotateTransform lastRotateTransform = PocketPaintApplication.GetInstance().RectangleSelectionControl.getLastRotateTransformation();
+            if (lastRotateTransform.Angle != 0.0)
+            {
+                rotateTransform.Angle += lastRotateTransform.Angle;
+            }
+
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.addTransformation(rotateTransform);
         }
 
         public override void HandleUp(object arg)
@@ -61,17 +67,12 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             RectangleGeometry myRectangleGeometry = new RectangleGeometry();
             myRectangleGeometry.Rect = new Rect(coordinate, new Point(coordinate.X + width, coordinate.Y + height));
-            if (PocketPaintApplication.GetInstance().RectangleSelectionControl.getCurrentCompositeTransform() != null)
-            {
-                CompositeTransform currentCompositeTransform = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCurrentCompositeTransform();
-                
-                CompositeTransform rotateTransform = new CompositeTransform();
-                rotateTransform.CenterX = coordinate.X;
-                rotateTransform.CenterY = coordinate.Y;
-                rotateTransform.Rotation = currentCompositeTransform.Rotation;
 
-                //rotateTransform.TranslateX = (currentCompositeTransform.CenterX - coordinate.X) / 2.0;
-                //rotateTransform.TranslateY = (currentCompositeTransform.CenterY - coordinate.Y) / 2.0;
+            RotateTransform lastRotateTransform = PocketPaintApplication.GetInstance().RectangleSelectionControl.getLastRotateTransformation();
+            if (lastRotateTransform.Angle != 0.0)
+            {
+                lastRotateTransform.CenterX = coordinate.X;
+                lastRotateTransform.CenterY = coordinate.Y;
 
                 //myRectangleGeometry.Transform = rotateTransform;
             }
