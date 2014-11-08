@@ -34,14 +34,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             this.InitializeComponent();
 
-            tbStrokeThicknessValue.Text = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll.ToString();
-            sldStrokeThickness.Value = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
+            tbStrokeThicknessValue.Text = PocketPaintApplication.GetInstance().PaintData.strokeThickness.ToString();
+            sldStrokeThickness.Value = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
 
             _last_valid_height = Convert.ToInt32(btnHeightValue.Content.ToString());
             _last_valid_width = Convert.ToInt32(btnWidthValue.Content.ToString());
 
-            PocketPaintApplication.GetInstance().PaintData.BorderColorChanged += ColorStrokeChanged;
-            PocketPaintApplication.GetInstance().PaintData.ColorChanged += ColorFillChanged;
+            PocketPaintApplication.GetInstance().PaintData.strokeColorChanged += ColorStrokeChanged;
+            PocketPaintApplication.GetInstance().PaintData.colorChanged += ColorFillChanged;
             PocketPaintApplication.GetInstance().BarRecEllShape = this;
             setUcRecEllLayout();
         }
@@ -117,7 +117,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 }
             }
 
-            btnSelectedBorderColor.Background = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
+            btnSelectedBorderColor.Background = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
         }
 
         private void btnSelectedColor_Click(object sender, RoutedEventArgs e)
@@ -173,13 +173,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             int strokeThickness = (int)sldStrokeThickness.Value;
             tbStrokeThicknessValue.Text = strokeThickness.ToString();
-            PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll = strokeThickness;
+            PocketPaintApplication.GetInstance().PaintData.strokeThickness = strokeThickness;
 
             if (PocketPaintApplication.GetInstance().BarRecEllShape != null)
             {
                 if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
                 {
-                    PocketPaintApplication.GetInstance().RectangleSelectionControl.setStrokeThicknessOfDrawingShape = strokeThickness;
+                    PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeThicknessOfRectangleToDraw = strokeThickness;
                 }
                 else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                 {
@@ -201,7 +201,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        public double setContentHeightValue
+        public double setBtnHeightValue
         {
             get
             {
@@ -213,7 +213,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        public double setTbWidthValue
+        public double setBtnWidthValue
         {
             get
             {
@@ -228,13 +228,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void BtnRound_Click(object sender, RoutedEventArgs e)
         {
             setRectangleEdgeType(Colors.Gray, Colors.Gray, Colors.White);
+            PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected = PenLineJoin.Round;
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
             {
-                PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Round;
-            }
-            else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
-            {
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeLineJoinOfEllipseToDraw = PenLineJoin.Round;
+                PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Round; 
             }
             else
             {
@@ -252,13 +249,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void BtnMiter_Click(object sender, RoutedEventArgs e)
         {
             setRectangleEdgeType(Colors.Gray, Colors.White, Colors.Gray);
+            PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected = PenLineJoin.Miter;
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
             {
                 PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Miter;
-            }
-            else if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
-            {
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeLineJoinOfEllipseToDraw = PenLineJoin.Miter;
             }
             else
             {
@@ -269,13 +263,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void BtnBevel_Click(object sender, RoutedEventArgs e)
         {
             setRectangleEdgeType(Colors.White, Colors.Gray, Colors.Gray);
+            PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected = PenLineJoin.Bevel;
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
             {
                 PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw = PenLineJoin.Bevel;
-            }
-            else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
-            {
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeLineJoinOfEllipseToDraw = PenLineJoin.Bevel;
             }
             else
             {
@@ -289,6 +280,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             BtnMiter.IsEnabled = miter;
             BtnRound.IsEnabled = round;
         }
+
         public void setForgroundOfLabelEdgeType(Color value)
         {
             tbEdgeType.Foreground = new SolidColorBrush(value);

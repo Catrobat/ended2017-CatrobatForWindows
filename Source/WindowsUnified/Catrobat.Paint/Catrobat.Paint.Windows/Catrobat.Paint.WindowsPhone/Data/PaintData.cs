@@ -6,13 +6,14 @@ using Catrobat.Paint.Phone.Tool;
 
 namespace Catrobat.Paint.Phone.Data
 {
-    public delegate void BorderColorChangedEventHandler(SolidColorBrush color);
+    public delegate void StrokeColorChangedEventHandler(SolidColorBrush color);
     public delegate void ColorChangedEventHandler(SolidColorBrush color);
-    public delegate void FillColorChangedEventHandler(SolidColorBrush color);
-    public delegate void ThicknessChangedEventHandler(double thickness);
-    public delegate void BorderThicknessChangedEventHandler(double border_thickness);
 
-    public delegate void CapChangedEventHandler(PenLineCap cap);
+    public delegate void ThicknessChangedEventHandler(double thickness);
+    public delegate void StrokeThicknessChangedEventHandler(double strokeThickness);
+
+    public delegate void PenLineCapChangedEventHandler(PenLineCap cap);
+    public delegate void PenLineJoinChangeEventHandler(PenLineJoin join);
     public delegate void ToolCurrentChangedEventHandler(ToolBase tool);
 
 
@@ -22,149 +23,149 @@ namespace Catrobat.Paint.Phone.Data
     /// </summary>
     public class PaintData
     {
-        public event BorderColorChangedEventHandler BorderColorChanged;
-        public event ColorChangedEventHandler FillColorChanged;
-        public event FillColorChangedEventHandler ColorChanged;
-        public event ThicknessChangedEventHandler ThicknessChanged;
-        public event BorderThicknessChangedEventHandler BorderThicknessChanged;
-        public event CapChangedEventHandler CapChanged;
-        public event ToolCurrentChangedEventHandler ToolCurrentChanged;
+        public event StrokeColorChangedEventHandler strokeColorChanged;
+        public event ColorChangedEventHandler colorChanged;
 
-        private static SolidColorBrush _colorBorderSelected = new SolidColorBrush(Colors.Gray);
-        private static SolidColorBrush _colorFillSelected = new SolidColorBrush(Colors.Yellow);
+        public event ThicknessChangedEventHandler thicknessChanged;
+        public event StrokeThicknessChangedEventHandler strokeThicknessChanged;
+
+        public event PenLineCapChangedEventHandler penLineCapChanged;
+        public event PenLineJoinChangeEventHandler penLineJoinChanged;
+        public event ToolCurrentChangedEventHandler toolCurrentChanged;
+
+        private static SolidColorBrush _strokeColorSelected = new SolidColorBrush(Colors.Gray);
         private static SolidColorBrush _colorSelected = new SolidColorBrush(Colors.Black);
 
         private int _thicknessSelected = 8;
-        private double _borderThicknessRecEll = 3.0;
-        private PenLineCap _capSelected = PenLineCap.Round;
+        private double _strokeThickness = 3.0;
+        private PenLineCap _penLineCapSelected = PenLineCap.Round;
+        private PenLineJoin _penLineJoinSelected = PenLineJoin.Miter;
         private ToolBase _toolCurrentSelected = new BrushTool();
-        public int max_right_left = 0;
-        public double min_max_resize = 0.0;
+        public int maxRightLeft = 0;
+        public double minMaxResize = 0.0;
         
-        public SolidColorBrush BorderColorSelected
+        public SolidColorBrush strokeColorSelected
         {
-            get { return _colorBorderSelected;  }
+            get { return _strokeColorSelected;  }
             set
             {
-                _colorBorderSelected = value;
-                OnBorderColorChanged(_colorBorderSelected);
+                _strokeColorSelected = value;
+                onStrokeColorChanged(_strokeColorSelected);
             }
         }
 
-        public SolidColorBrush ColorSelected
+        public SolidColorBrush colorSelected
         {
             get { return _colorSelected; }
             set
             {
                 _colorSelected = value;
-                OnColorChanged(_colorSelected);
+                onColorChanged(_colorSelected);
             }
         }
 
-        public SolidColorBrush FillColorSelected
-        {
-            get { return _colorFillSelected; }
-            set
-            {
-                _colorFillSelected = value;
-                OnFillColorChanged(_colorFillSelected);
-            }
-
-        }
-
-        public int ThicknessSelected
+        public int thicknessSelected
         {
             get { return _thicknessSelected; }
             set
             {
                 _thicknessSelected = value;
-                OnThicknessChanged(_thicknessSelected);
+                onThicknessChanged(_thicknessSelected);
             }
         }
 
-        public double BorderThicknessRecEll
+        public double strokeThickness
         {
-            get { return _borderThicknessRecEll; }
+            get { return _strokeThickness; }
             set
             {
-                _borderThicknessRecEll = value;
-                OnThicknessChanged(_borderThicknessRecEll);
+                _strokeThickness = value;
+                onStrokeThicknessChanged(_strokeThickness);
             }
         }
 
-        public PenLineCap CapSelected
+        public PenLineCap penLineCapSelected
         {
-            get { return _capSelected; }
+            get { return _penLineCapSelected; }
             set
             {
-                _capSelected = value;
-                OnCapChanged(_capSelected);
+                _penLineCapSelected = value;
+                onPenLineCapChanged(_penLineCapSelected);
             }
         }
 
+        public PenLineJoin penLineJoinSelected
+        {
+            get { return _penLineJoinSelected; }
+            set
+            {
+                _penLineJoinSelected = value;
+                onPenLineJoinChanged(_penLineJoinSelected);
+            }
+        }
         
-        public ToolBase ToolCurrentSelected
+        public ToolBase toolCurrentSelected
         {
             get { return _toolCurrentSelected; }
             set
             {
                 _toolCurrentSelected = value;
-                OnToolCurrentChanged(_toolCurrentSelected);
+                onToolCurrentChanged(_toolCurrentSelected);
             }
         }
 
-        protected virtual void OnBorderColorChanged(SolidColorBrush color)
+        protected virtual void onStrokeColorChanged(SolidColorBrush color)
         {
-            if (BorderColorChanged != null)
+            if (strokeColorChanged != null)
             {
-                BorderColorChanged(color);
+                strokeColorChanged(color);
             }
         }
 
-        protected virtual void OnColorChanged(SolidColorBrush color)
+        protected virtual void onColorChanged(SolidColorBrush color)
         {
-            if (ColorChanged != null)
+            if (colorChanged != null)
             {
-                ColorChanged(color);
+                colorChanged(color);
             }
         }
 
-        protected virtual void OnFillColorChanged(SolidColorBrush color)
+        protected virtual void onThicknessChanged(double thickness)
         {
-            if (FillColorChanged != null)
+            if (thicknessChanged != null)
             {
-                FillColorChanged(color);
+                thicknessChanged(thickness);
+            }
+        }
+        protected virtual void onStrokeThicknessChanged(double strokeThickness)
+        {
+            if (strokeThicknessChanged != null)
+            {
+                strokeThicknessChanged(strokeThickness);
             }
         }
 
-        protected virtual void OnThicknessChanged(double thickness)
+        protected virtual void onPenLineCapChanged(PenLineCap cap)
         {
-            if (ThicknessChanged != null)
+            if (penLineCapChanged != null)
             {
-                ThicknessChanged(thickness);
-            }
-        }
-        protected virtual void OnBorderThicknessChanged(double border_thickness)
-        {
-            if (BorderThicknessChanged != null)
-            {
-                BorderThicknessChanged(border_thickness);
+                penLineCapChanged(cap);
             }
         }
 
-        protected virtual void OnCapChanged(PenLineCap cap)
+        protected virtual void onPenLineJoinChanged(PenLineJoin join)
         {
-            if (CapChanged != null)
+            if (penLineJoinChanged != null)
             {
-                CapChanged(cap);
+                penLineJoinChanged(join);
             }
         }
 
-        protected virtual void OnToolCurrentChanged(ToolBase tool)
+        protected virtual void onToolCurrentChanged(ToolBase tool)
         {
-            if (ToolCurrentChanged != null)
+            if (toolCurrentChanged != null)
             {
-                ToolCurrentChanged(tool);
+                toolCurrentChanged(tool);
             }
         }
     }

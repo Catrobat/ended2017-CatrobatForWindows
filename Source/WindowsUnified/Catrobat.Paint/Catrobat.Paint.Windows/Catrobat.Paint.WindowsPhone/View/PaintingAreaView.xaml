@@ -80,7 +80,7 @@
         </Grid>
 
         <StackPanel Grid.Row="0" Canvas.ZIndex="10" VerticalAlignment="Top">
-            <controls:AppbarTop x:Name="barRecEll"></controls:AppbarTop>
+            <controls:AppbarTop x:Name="barRecEll" Height="72px"></controls:AppbarTop>
         </StackPanel>
     </Grid>
 

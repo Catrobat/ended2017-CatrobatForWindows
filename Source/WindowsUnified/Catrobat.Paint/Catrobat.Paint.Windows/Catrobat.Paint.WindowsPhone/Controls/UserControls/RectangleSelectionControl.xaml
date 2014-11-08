@@ -9,11 +9,11 @@
     d:DesignHeight="230"
     d:DesignWidth="230" ManipulationMode="All">
 
-    <Grid x:Name="GridMain" Background="Orange" Height="230" Width="230">
+    <Grid x:Name="GridMain" Height="230" Width="230" Background="Yellow">
         <!--<Grid x:Name="GridRectangle" Background="Beige" ManipulationDelta="rectRectangleForMovement_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" Height="230">-->
-            <Rectangle x:Name="rectRectangleToDraw" Fill="Black" Height="160" HorizontalAlignment="Left" Stroke="Gray"
+        <Rectangle x:Name="rectRectangleToDraw" Fill="Black" Height="160" HorizontalAlignment="Left" Stroke="Gray"
                 StrokeThickness="3" StrokeLineJoin="Miter" Margin="35,35,35,35" 
-                ManipulationMode="TranslateX, TranslateY" VerticalAlignment="Top" Width="160" />
+                 VerticalAlignment="Top" Width="160" />
 
         <Rectangle x:Name="rectRectangleForMovement" Fill="#01FFFFFF" Height="200"
                    ManipulationDelta="rectRectangleForMovement_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" Stroke="LightSkyBlue" 

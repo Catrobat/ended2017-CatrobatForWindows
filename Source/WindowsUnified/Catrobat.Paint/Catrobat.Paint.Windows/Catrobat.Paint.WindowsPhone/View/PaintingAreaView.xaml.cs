@@ -84,8 +84,10 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             PocketPaintApplication.GetInstance().MainGrid = LayoutRoot;
             UndoRedoActionbarManager.GetInstance().ApplicationBarTop = PocketPaintApplication.GetInstance().AppbarTop;
+            
+            PocketPaintApplication.GetInstance().BarStandard = barStandard;
 
-            PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
+            PocketPaintApplication.GetInstance().PaintData.toolCurrentChanged += ToolChangedHere;
             PocketPaintApplication.GetInstance().AppbarTop.ToolChangedHere(PocketPaintApplication.GetInstance().ToolCurrent);
 
             btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
@@ -367,7 +369,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnReset.Icon = reset_icon;
 
                 app_btnReset.Label = "Ausgangsposition";
-                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.setIsModifiedRectangleMovement ? true : false;
+                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnReset.Click += app_btn_reset_Click;

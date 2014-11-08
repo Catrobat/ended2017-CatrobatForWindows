@@ -40,10 +40,10 @@ namespace Catrobat.Paint.Phone.Tool
             _pathSegmentCollection = new PathSegmentCollection();
 
             _path.StrokeLineJoin = PenLineJoin.Round;
-            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
-            _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
-            _path.StrokeStartLineCap = PocketPaintApplication.GetInstance().PaintData.CapSelected;
-            _path.StrokeEndLineCap = PocketPaintApplication.GetInstance().PaintData.CapSelected;
+            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.thicknessSelected;
+            _path.StrokeStartLineCap = PocketPaintApplication.GetInstance().PaintData.penLineCapSelected;
+            _path.StrokeEndLineCap = PocketPaintApplication.GetInstance().PaintData.penLineCapSelected;
 
             _pathFigure.StartPoint = coordinate;
             _pathFigure.Segments = _pathSegmentCollection;

@@ -18,8 +18,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class RectangleTool : ToolBase
     {
-        private TransformGroup _transforms;
-
         public RectangleTool()
         {
             this.ToolType = ToolType.Rect;
@@ -27,15 +25,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             if (PocketPaintApplication.GetInstance() != null && PocketPaintApplication.GetInstance().PaintingAreaView != null)
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOfUcRectangleSelectionControl = Visibility.Visible;
-
-                if (PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform != null)
-                {
-                    _transforms = PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform as TransformGroup;
-                }
-                if (_transforms == null)
-                {
-                    PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform = _transforms = new TransformGroup();
-                }
             }
         }
 
@@ -46,10 +35,10 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleMove(object arg)
         {
-            // TODO:
-            RotateTransform rotateTransform = new RotateTransform();
-            rotateTransform = (RotateTransform)arg;
-            _transforms.Children.Add(rotateTransform);            
+            CompositeTransform rotateTransform = new CompositeTransform();
+            rotateTransform = (CompositeTransform)arg;
+
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.addCompositeTransformation(rotateTransform);
         }
 
         public override void HandleUp(object arg)
@@ -59,37 +48,46 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void Draw(object o)
         {
-            var borderThickness = PocketPaintApplication.GetInstance().PaintData.BorderThicknessRecEll;
+            var strokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
 
             var coordinate = (Point)o;
-            coordinate.X += borderThickness / 2.0;
-            coordinate.Y += borderThickness / 2.0;
+            coordinate.X += strokeThickness / 2.0;
+            coordinate.Y += strokeThickness / 2.0;
 
             double height = PocketPaintApplication.GetInstance().BarRecEllShape.getHeight();
             double width = PocketPaintApplication.GetInstance().BarRecEllShape.getWidth();
-            height -= borderThickness;
-            width -= borderThickness;
+            height -= strokeThickness;
+            width -= strokeThickness;
 
             RectangleGeometry myRectangleGeometry = new RectangleGeometry();
             myRectangleGeometry.Rect = new Rect(coordinate, new Point(coordinate.X + width, coordinate.Y + height));
+            if (PocketPaintApplication.GetInstance().RectangleSelectionControl.getCurrentCompositeTransform() != null)
+            {
+                CompositeTransform currentCompositeTransform = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCurrentCompositeTransform();
+                
+                CompositeTransform rotateTransform = new CompositeTransform();
+                rotateTransform.CenterX = coordinate.X;
+                rotateTransform.CenterY = coordinate.Y;
+                rotateTransform.Rotation = currentCompositeTransform.Rotation;
 
-            
+                //rotateTransform.TranslateX = (currentCompositeTransform.CenterX - coordinate.X) / 2.0;
+                //rotateTransform.TranslateY = (currentCompositeTransform.CenterY - coordinate.Y) / 2.0;
+
+                //myRectangleGeometry.Transform = rotateTransform;
+            }
+
             Path _path = new Path();
-            _path.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
-            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.BorderColorSelected;
-            _path.StrokeThickness = borderThickness;
+            _path.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+            _path.StrokeThickness = strokeThickness;
             _path.StrokeLineJoin = PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw;
-
             _path.Data = myRectangleGeometry;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
         }
 
         public override void ResetDrawingSpace()
         {
-            PocketPaintApplication.GetInstance().RectangleSelectionControl = new RectangleSelectionControl();
-            PocketPaintApplication.GetInstance().BarRecEllShape.setContentHeightValue = 160.0;
-            PocketPaintApplication.GetInstance().BarRecEllShape.setTbWidthValue = 160.0;
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.setIsModifiedRectangleMovement = false;
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.resetRectangleSelectionControl();
         }
     }
 }

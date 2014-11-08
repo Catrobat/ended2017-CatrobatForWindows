@@ -115,7 +115,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public void changeCursorsize()
         {
             //double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
-            double currentThickness = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;// *width_multiplicator;
+            double currentThickness = PocketPaintApplication.GetInstance().PaintData.thicknessSelected;// *width_multiplicator;
             double newCurrentThickness = currentThickness - standardDrawingPoint;
             double newSizeInner = standardSizeInner + newCurrentThickness;
             double newSizeOuter = standardSizeOuter + newCurrentThickness;
@@ -180,7 +180,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             if(isDrawing)
             {
-                Color color = PocketPaintApplication.GetInstance().PaintData.ColorSelected.Color;
+                Color color = PocketPaintApplication.GetInstance().PaintData.colorSelected.Color;
                 rectColorEven.Color = color;
                 setDrawingPointColor(color);
                 setVisibilityOfDrawingPoint = Visibility.Visible;

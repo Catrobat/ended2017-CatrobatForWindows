@@ -16,8 +16,10 @@ namespace Catrobat.Paint.Phone.Tool
         public FlipTool()
         {
             this.ToolType = ToolType.Flip;
+
             this._scaleX = 1;
             this._scaleY = 1;
+
             DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height - 150.0) / 2.0;
             DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
         }
@@ -44,17 +46,17 @@ namespace Catrobat.Paint.Phone.Tool
 
         public void FlipHorizontal()
         {
-            var renderTransform = new ScaleTransform();
+            var scaleTransform = new ScaleTransform();
 
             _scaleY = (_scaleY == 1) ? -1 : 1;
-            renderTransform.ScaleY = _scaleY;
-            renderTransform.CenterY = DISPLAY_HEIGHT_HALF;
+            scaleTransform.ScaleY = _scaleY;
+            scaleTransform.CenterY = DISPLAY_HEIGHT_HALF;
 
-            renderTransform.ScaleX = _scaleX;
-            renderTransform.CenterX = DISPLAY_WIDTH_HALF;
+            scaleTransform.ScaleX = _scaleX;
+            scaleTransform.CenterX = DISPLAY_WIDTH_HALF;
 
-            PaintingAreaCanvasSettings(renderTransform);
-            CommandManager.GetInstance().CommitCommand(new FlipCommand(renderTransform));
+            PaintingAreaCanvasSettings(scaleTransform);
+            CommandManager.GetInstance().CommitCommand(new FlipCommand(scaleTransform));
         }
 
         public void FlipVertical()
@@ -89,9 +91,10 @@ namespace Catrobat.Paint.Phone.Tool
 
         private void addFlipTransformToPaintingAreaView(ScaleTransform renderTransform)
         {
-            Transform transform = PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform;
-            TransformGroup transformGroup = new TransformGroup();
-            transformGroup.Children.Add(transform);
+            //Transform transform = PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform;
+            //TransformGroup transformGroup = new TransformGroup();
+            //transformGroup.Children.Add(transform);
+            TransformGroup transformGroup = PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform as TransformGroup;
             for (int i = 0; i < transformGroup.Children.Count; i++)
             {
                 if (transformGroup.Children[i].GetType() == typeof(ScaleTransform))
