@@ -36,14 +36,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             this.InitializeComponent();
 
-            //if (GridMain.RenderTransform != null)
-            //{
-            //    _transformGridMain = GridMain.RenderTransform as TransformGroup;
-            // }
-            //if (_transformGridMain == null)
-            //{
-                GridMain.RenderTransform = _transformGridMain = new TransformGroup();
-            //}
+            GridMain.RenderTransform = _transformGridMain = new TransformGroup();
             rectRectangleToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
             rectRectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
             rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
@@ -420,42 +413,48 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectRectangleForMovement_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            TranslateTransform move = new TranslateTransform();
-            move.X = _transformGridMain.Value.OffsetX + e.Delta.Translation.X;
-            move.Y = _transformGridMain.Value.OffsetY + e.Delta.Translation.Y;
-            addTransformation(move);
+            CompositeTransform move = new CompositeTransform();
+            move.TranslateX = e.Delta.Translation.X;
+            move.TranslateY = e.Delta.Translation.Y;
+            addCompositeTransformation(move);
+        }
+
+        public void addCompositeTransformation(CompositeTransform currentTransformation)
+        {
+            CompositeTransform compositeTransform = new CompositeTransform();
+
+            for (int i = 0; i < _transformGridMain.Children.Count; i++)
+            {
+                if (_transformGridMain.Children[i].GetType() == currentTransformation.GetType())
+                {
+                    compositeTransform.Rotation = ((CompositeTransform)_transformGridMain.Children[i]).Rotation;
+                    compositeTransform.TranslateX = ((CompositeTransform)_transformGridMain.Children[i]).TranslateX;
+                    compositeTransform.TranslateY = ((CompositeTransform)_transformGridMain.Children[i]).TranslateY;
+                    _transformGridMain.Children.RemoveAt(i);
+                }
+            }
+
+            // TranslateTransform
+            compositeTransform.TranslateX += currentTransformation.TranslateX;
+            compositeTransform.TranslateY += currentTransformation.TranslateY;
+            // RotationTransform
+            compositeTransform.CenterX = currentTransformation.CenterX;
+            compositeTransform.CenterY = currentTransformation.CenterY;
+            compositeTransform.Rotation += currentTransformation.Rotation;
+
+            _transformGridMain.Children.Add(compositeTransform);
 
             resetAppBarButtonRectangleSelectionControl(true);
             isModifiedRectangleMovement = true;
         }
 
-        public void addTransformation(Transform currentTransformation)
-        {
-            for (int i = 0; i < _transformGridMain.Children.Count; i++)
-            {
-                if (_transformGridMain.Children[i].GetType() == currentTransformation.GetType())
-                {
-                    _transformGridMain.Children.RemoveAt(i);
-                }
-            }
-
-            if (currentTransformation.GetType() == typeof(RotateTransform))
-            {
-                //System.Diagnostics.Debug.WriteLine("---------------\noverallRotationAngle = " + ((RotateTransform)currentTransformation).Angle);
-                //System.Diagnostics.Debug.WriteLine("---------------\nlastRotationAngle = " + _lastRotationAngle + "\nnewRotationAngle = " + ((RotateTransform)currentTransformation).Angle);
-                //_lastRotationAngle += ((RotateTransform)currentTransformation).Angle;
-                //System.Diagnostics.Debug.WriteLine("overallRotationAngle = " + _lastRotationAngle);
-                //((RotateTransform)currentTransformation).Angle = _lastRotationAngle % 360.0;
-            }
-
-            _transformGridMain.Children.Add(currentTransformation);
-        }
-
         public void resetRectangleSelectionControl()
         {
+            PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.lastPoint = new Point(0.0, 0.0);
+
             PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = _rectangleToDrawSize;
             PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = _rectangleToDrawSize;
-
+            
             _transformGridMain.Children.Clear();
             GridMain.Margin = new Thickness(0.0, 0.0, 0.0, 0.0);
 

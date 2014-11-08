@@ -18,26 +18,13 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class RectangleTool : ToolBase
     {
-        private double _lastRotationAngle;
-
         public RectangleTool()
         {
             this.ToolType = ToolType.Rect;
 
-            _lastRotationAngle = 0.0;
-
             if (PocketPaintApplication.GetInstance() != null && PocketPaintApplication.GetInstance().PaintingAreaView != null)
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOfUcRectangleSelectionControl = Visibility.Visible;
-
-                //if (PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform != null)
-                //{
-                //    _transforms = PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform as TransformGroup;
-                //}
-                //if (_transforms == null)
-                //{
-                //    PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.RenderTransform = _transforms = new TransformGroup();
-                //}
             }
         }
 
@@ -48,12 +35,12 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleMove(object arg)
         {
-            RotateTransform rotateTransform = new RotateTransform();
-            rotateTransform = (RotateTransform)arg;
+            CompositeTransform rotateTransform = new CompositeTransform();
+            rotateTransform = (CompositeTransform)arg;
 
             // TODO: get last rotateTransform and add it
 
-            //PocketPaintApplication.GetInstance().RectangleSelectionControl.addTransformation(rotateTransform);
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.addCompositeTransformation(rotateTransform);
         }
 
         public override void HandleUp(object arg)

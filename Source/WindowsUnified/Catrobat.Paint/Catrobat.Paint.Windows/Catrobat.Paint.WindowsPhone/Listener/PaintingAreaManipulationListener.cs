@@ -16,8 +16,7 @@ namespace Catrobat.Paint.Phone.Listener
 {
     class PaintingAreaManipulationListener 
     {
-        Point lastPoint = new Point(0.0, 0.0);
-        int lastAngleValue = 0;
+        Point _lastPoint = new Point(0.0, 0.0);
         RotateTransform rotate = new RotateTransform();
 
         public void ManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
@@ -51,12 +50,10 @@ namespace Catrobat.Paint.Phone.Listener
 
             object movezoom = null;
 
-            RotateTransform rotate = new RotateTransform();
+            CompositeTransform rotate = new CompositeTransform();
 
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
             {
-                //rotate.CenterX = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Width / 2.0;
-                //rotate.CenterY = PocketPaintApplication.GetInstance().GridRectangleSelectionControl.Height / 2.0;
                 Point rotateCenterPoint = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCenterOfGridMain();
                 rotate.CenterX = rotateCenterPoint.X;
                 rotate.CenterY = rotateCenterPoint.Y;
@@ -68,14 +65,18 @@ namespace Catrobat.Paint.Phone.Listener
                 {
                     double currentXLength = point.X - centerPoint.X;
                     double currentYLength = point.Y - centerPoint.Y;
+                    double normalCurrentX = currentXLength / (Math.Sqrt(currentXLength * currentXLength + currentYLength * currentYLength));
+                    double normalCurrentY = currentYLength / (Math.Sqrt(currentXLength * currentXLength + currentYLength * currentYLength));
 
                     double previousXLength = lastPoint.X - centerPoint.X;
                     double previousYLength = lastPoint.Y - centerPoint.Y;
+                    double normalPreviousX = previousXLength / (Math.Sqrt(previousXLength * previousXLength + previousYLength * previousYLength));
+                    double normalPreviousY = previousYLength / (Math.Sqrt(previousXLength * previousXLength + previousYLength * previousYLength));
 
-                    double deltaAngle = (Math.Atan(previousXLength / previousYLength) - Math.Atan(currentXLength / currentYLength));
+                    double deltaAngle = (Math.Atan(normalPreviousX / normalPreviousY) - Math.Atan(normalCurrentX / normalCurrentY));
                     double rotationAngle = deltaAngle * 180.0 / Math.PI;
 
-                    rotate.Angle = rotationAngle;
+                    rotate.Rotation = rotationAngle;
                 }
                 lastPoint = point;
             }
@@ -120,9 +121,9 @@ namespace Catrobat.Paint.Phone.Listener
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
                     break;
                 case ToolType.Rect:
-                    if (rotate.Angle != 0)
+                    if (rotate.Rotation != 0.0)
                     {
-                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(rotate);
+                        PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(rotate);
                     }
                     break;
             }
@@ -140,6 +141,18 @@ namespace Catrobat.Paint.Phone.Listener
             }
 
             PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(point);        
+        }
+
+        public Point lastPoint
+        {
+            get
+            {
+                return _lastPoint;
+            }
+            set
+            {
+                _lastPoint = value;
+            }
         }
 
         public void ResetDrawingSpace()
