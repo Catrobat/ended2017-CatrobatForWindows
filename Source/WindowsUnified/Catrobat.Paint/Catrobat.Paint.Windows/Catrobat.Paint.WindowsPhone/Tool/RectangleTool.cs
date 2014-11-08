@@ -38,8 +38,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             CompositeTransform rotateTransform = new CompositeTransform();
             rotateTransform = (CompositeTransform)arg;
 
-            // TODO: get last rotateTransform and add it
-
             PocketPaintApplication.GetInstance().RectangleSelectionControl.addCompositeTransformation(rotateTransform);
         }
 
@@ -63,14 +61,26 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             RectangleGeometry myRectangleGeometry = new RectangleGeometry();
             myRectangleGeometry.Rect = new Rect(coordinate, new Point(coordinate.X + width, coordinate.Y + height));
+            if (PocketPaintApplication.GetInstance().RectangleSelectionControl.getCurrentCompositeTransform() != null)
+            {
+                CompositeTransform currentCompositeTransform = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCurrentCompositeTransform();
+                
+                CompositeTransform rotateTransform = new CompositeTransform();
+                rotateTransform.CenterX = coordinate.X;
+                rotateTransform.CenterY = coordinate.Y;
+                rotateTransform.Rotation = currentCompositeTransform.Rotation;
 
-            
+                //rotateTransform.TranslateX = (currentCompositeTransform.CenterX - coordinate.X) / 2.0;
+                //rotateTransform.TranslateY = (currentCompositeTransform.CenterY - coordinate.Y) / 2.0;
+
+                //myRectangleGeometry.Transform = rotateTransform;
+            }
+
             Path _path = new Path();
             _path.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
             _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
             _path.StrokeThickness = strokeThickness;
             _path.StrokeLineJoin = PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw;
-
             _path.Data = myRectangleGeometry;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
         }

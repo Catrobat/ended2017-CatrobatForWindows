@@ -364,16 +364,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void rectRectangleForMovement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        {
-            Point centerCoordinate = getCenterCoordinateOfGridMain();
-
-            double coordinateX = centerCoordinate.X - (rectRectangleToDraw.Width / 2.0);
-            double coordinateY = centerCoordinate.Y - (rectRectangleToDraw.Height / 2.0);
-
-            PocketPaintApplication.GetInstance().ToolCurrent.Draw(new Point(coordinateX, coordinateY));
-        }
-
         public Point getCenterCoordinateOfGridMain()
         {
             double halfScreenHeight = ((Window.Current.Bounds.Height - PocketPaintApplication.GetInstance().AppbarTop.Height
@@ -413,36 +403,47 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectRectangleForMovement_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            CompositeTransform move = new CompositeTransform();
-            move.TranslateX = e.Delta.Translation.X;
-            move.TranslateY = e.Delta.Translation.Y;
-            addCompositeTransformation(move);
+            CompositeTransform translationTransform = new CompositeTransform();
+            translationTransform.TranslateX = e.Delta.Translation.X;
+            translationTransform.TranslateY = e.Delta.Translation.Y;
+            addCompositeTransformation(translationTransform);
+        }
+
+        private void rectRectangleForMovement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            Point centerCoordinate = getCenterCoordinateOfGridMain();
+
+            double coordinateX = centerCoordinate.X - (rectRectangleToDraw.Width / 2.0);
+            double coordinateY = centerCoordinate.Y - (rectRectangleToDraw.Height / 2.0);
+
+            PocketPaintApplication.GetInstance().ToolCurrent.Draw(new Point(coordinateX, coordinateY));
+        }
+
+        public CompositeTransform getCurrentCompositeTransform()
+        {
+            if (_transformGridMain.Children.Count > 0)
+            {
+                return (CompositeTransform)_transformGridMain.Children[0];
+            }
+            return null;
         }
 
         public void addCompositeTransformation(CompositeTransform currentTransformation)
         {
-            CompositeTransform compositeTransform = new CompositeTransform();
-
-            for (int i = 0; i < _transformGridMain.Children.Count; i++)
+            if (_transformGridMain.Children.Count > 0)
             {
-                if (_transformGridMain.Children[i].GetType() == currentTransformation.GetType())
+                CompositeTransform previousCompositeTransform = (CompositeTransform)_transformGridMain.Children[0];
+                // TranslateTransform
+                if (currentTransformation.Rotation == 0.0) 
                 {
-                    compositeTransform.Rotation = ((CompositeTransform)_transformGridMain.Children[i]).Rotation;
-                    compositeTransform.TranslateX = ((CompositeTransform)_transformGridMain.Children[i]).TranslateX;
-                    compositeTransform.TranslateY = ((CompositeTransform)_transformGridMain.Children[i]).TranslateY;
-                    _transformGridMain.Children.RemoveAt(i);
+                    currentTransformation.TranslateX += previousCompositeTransform.TranslateX;
+                    currentTransformation.TranslateY += previousCompositeTransform.TranslateY;
                 }
+                // RotationTransform
+                currentTransformation.Rotation += previousCompositeTransform.Rotation;
+                _transformGridMain.Children.RemoveAt(0);
             }
-
-            // TranslateTransform
-            compositeTransform.TranslateX += currentTransformation.TranslateX;
-            compositeTransform.TranslateY += currentTransformation.TranslateY;
-            // RotationTransform
-            compositeTransform.CenterX = currentTransformation.CenterX;
-            compositeTransform.CenterY = currentTransformation.CenterY;
-            compositeTransform.Rotation += currentTransformation.Rotation;
-
-            _transformGridMain.Children.Add(compositeTransform);
+            _transformGridMain.Children.Add(currentTransformation);
 
             resetAppBarButtonRectangleSelectionControl(true);
             isModifiedRectangleMovement = true;
