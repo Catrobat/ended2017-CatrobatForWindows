@@ -58,7 +58,8 @@ namespace Catrobat.Paint.Phone.Listener
                 rotate.CenterX = rotateCenterPoint.X;
                 rotate.CenterY = rotateCenterPoint.Y;
 
-                Point centerPoint = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCenterCoordinateOfGridMain();  
+                bool isWithOffset = true;
+                Point centerPoint = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCenterCoordinateOfGridMain(isWithOffset);  
                 
                 if (!(lastPoint.X == 0.0 && lastPoint.Y == 0.0) &&
                     (lastPoint.X != point.X || lastPoint.Y != point.Y))

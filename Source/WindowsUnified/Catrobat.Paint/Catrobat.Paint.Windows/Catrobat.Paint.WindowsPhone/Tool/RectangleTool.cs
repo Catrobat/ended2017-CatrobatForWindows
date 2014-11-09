@@ -83,14 +83,18 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             var strokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
 
+            Rectangle rectangleToDraw = PocketPaintApplication.GetInstance().RectangleSelectionControl.rectangleToDraw;
+
             var coordinate = (Point)o;
             coordinate.X += strokeThickness / 2.0;
             coordinate.Y += strokeThickness / 2.0;
+            coordinate.X -= (rectangleToDraw.Width / 2.0);
+            coordinate.Y -= (rectangleToDraw.Height / 2.0);
 
-            double height = PocketPaintApplication.GetInstance().BarRecEllShape.getHeight();
-            double width = PocketPaintApplication.GetInstance().BarRecEllShape.getWidth();
-            height -= strokeThickness;
+            double width = rectangleToDraw.Width;
+            double height = rectangleToDraw.Height;
             width -= strokeThickness;
+            height -= strokeThickness;
 
             RectangleGeometry myRectangleGeometry = new RectangleGeometry();
             myRectangleGeometry.Rect = new Rect(coordinate, new Point(coordinate.X + width, coordinate.Y + height));
@@ -99,7 +103,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             if (lastRotateTransform != null)
             {
                 RotateTransform rotateTransform = new RotateTransform();
-                rotateTransform.CenterX = coordinate.X  + myRectangleGeometry.Rect.Width / 2.0;
+                rotateTransform.CenterX = coordinate.X + myRectangleGeometry.Rect.Width / 2.0;
                 rotateTransform.CenterY = coordinate.Y + myRectangleGeometry.Rect.Height / 2.0;
                 rotateTransform.Angle = lastRotateTransform.Angle;
 
