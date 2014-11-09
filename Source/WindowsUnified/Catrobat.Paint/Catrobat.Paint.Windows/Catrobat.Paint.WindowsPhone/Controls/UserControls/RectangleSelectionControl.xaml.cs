@@ -376,7 +376,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        public Point getCenterCoordinateOfGridMain(bool isWithOffset)
+        public Point getCenterCoordinateOfGridMain()
         {
             double halfScreenHeight = ((Window.Current.Bounds.Height - PocketPaintApplication.GetInstance().AppbarTop.Height
                                                                      - PocketPaintApplication.GetInstance().BarStandard.Height) / 2.0);
@@ -389,43 +389,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double offsetY;
             if (lastTranslateTransform != null && lastRotateTransform == null)
             {
-                if (isWithOffset)
-                {
-                    offsetX = _transformGridMain.Value.OffsetX;
-                    offsetY = _transformGridMain.Value.OffsetY;
-                }
-                else
-                {
-                    offsetX = lastTranslateTransform.X;
-                    offsetY = lastTranslateTransform.Y;
-                }
-
+                offsetX = lastTranslateTransform.X;
+                offsetY = lastTranslateTransform.Y;
             }
             else if (lastTranslateTransform == null && lastRotateTransform != null)
             {
-                if (isWithOffset)
-                {
-                    offsetX = _transformGridMain.Value.OffsetX;
-                    offsetY = _transformGridMain.Value.OffsetY;
-                }
-                else
-                {
-                    offsetX = 0.0;
-                    offsetY = 0.0;
-                }
+                offsetX = 0.0;
+                offsetY = 0.0;
             }
             else if (lastTranslateTransform != null && lastRotateTransform != null)
             {
-                if (isWithOffset)
-                {
-                    offsetX = _transformGridMain.Value.OffsetX;
-                    offsetY = _transformGridMain.Value.OffsetY;
-                }
-                else
-                {
-                    offsetX = lastTranslateTransform.X;
-                    offsetY = lastTranslateTransform.Y;
-                }
+                offsetX = lastTranslateTransform.X;
+                offsetY = lastTranslateTransform.Y;
             }
             else
             {
@@ -439,13 +414,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double coordinateX = offsetX + halfScreenWidth + (marginOffsetX / 2.0);
             double coordinateY = offsetY + halfScreenHeight + (marginOffsetY / 2.0);
 
-            return new Point(coordinateX, coordinateY);
-        }
-
-        public Point getCenterOfGridMain()
-        {
-            double coordinateX = PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.Width / 2.0;
-            double coordinateY = PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.Height / 2.0;
             return new Point(coordinateX, coordinateY);
         }
         
@@ -493,8 +461,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectRectangleForMovement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            bool isWithOffset = false;
-            Point centerCoordinate = getCenterCoordinateOfGridMain(isWithOffset);
+            Point centerCoordinate = getCenterCoordinateOfGridMain();
 
             PocketPaintApplication.GetInstance().ToolCurrent.Draw(centerCoordinate);
         }
