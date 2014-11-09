@@ -50,7 +50,7 @@ namespace Catrobat.Paint.Phone.Listener
 
             object movezoom = null;
 
-            CompositeTransform rotate = new CompositeTransform();
+            RotateTransform rotate = new RotateTransform();
 
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
             {
@@ -74,9 +74,9 @@ namespace Catrobat.Paint.Phone.Listener
                     double normalPreviousY = previousYLength / (Math.Sqrt(previousXLength * previousXLength + previousYLength * previousYLength));
 
                     double deltaAngle = (Math.Atan(normalPreviousX / normalPreviousY) - Math.Atan(normalCurrentX / normalCurrentY));
-                    double rotationAngle = deltaAngle * 180.0 / Math.PI;
+                    double rotationAngle = deltaAngle * 360.0 / Math.PI;
 
-                    rotate.Rotation = rotationAngle;
+                    rotate.Angle = rotationAngle;
                 }
                 lastPoint = point;
             }
@@ -121,7 +121,7 @@ namespace Catrobat.Paint.Phone.Listener
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
                     break;
                 case ToolType.Rect:
-                    if (rotate.Rotation != 0.0)
+                    if (rotate.Angle != 0.0)
                     {
                         PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(rotate);
                     }
