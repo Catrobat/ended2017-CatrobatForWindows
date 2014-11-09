@@ -404,8 +404,36 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void rectRectangleForMovement_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             TranslateTransform translateTransform = new TranslateTransform();
-            translateTransform.X = e.Delta.Translation.X + _transformGridMain.Value.OffsetX;
-            translateTransform.Y = e.Delta.Translation.Y + _transformGridMain.Value.OffsetY;
+
+            TranslateTransform lastTranslateTransform = getLastTranslateTransformation();
+            RotateTransform lastRotateTransform = getLastRotateTransformation();
+            // 1. Fall: Nur Translation => e.Delta.Translation.X + LastTransform.X
+            if (!(lastTranslateTransform.X == 0.0 && lastTranslateTransform.Y == 0.0) &&
+                lastRotateTransform.Angle == 0.0) 
+            {
+                translateTransform.X = e.Delta.Translation.X + lastTranslateTransform.X;
+                translateTransform.Y = e.Delta.Translation.Y + lastTranslateTransform.Y;
+            }
+            // 2. Fall: Nur Rotationen => nur e.Delta.Translation.X
+            else if ((lastTranslateTransform.X == 0.0 && lastTranslateTransform.Y == 0.0) &&
+                     !(lastRotateTransform.Angle == 0.0))
+            {
+                translateTransform.X = e.Delta.Translation.X;
+                translateTransform.Y = e.Delta.Translation.Y;
+            }
+            // 3. Fall: Translation und Rotationen => e.Delta.Translation.X + LastTransform.X
+            else if (!(lastTranslateTransform.X == 0.0 && lastTranslateTransform.Y == 0.0) &&
+                     !(lastRotateTransform.Angle == 0.0))
+            {
+                translateTransform.X = e.Delta.Translation.X + lastTranslateTransform.X;
+                translateTransform.Y = e.Delta.Translation.Y + lastTranslateTransform.Y;
+            }
+            // 4.Fall: Keine Translation und Rotation
+            else
+            {
+                translateTransform.X = e.Delta.Translation.X;
+                translateTransform.Y = e.Delta.Translation.Y;
+            }
             addTransformation(translateTransform);
         }
 
@@ -417,6 +445,19 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double coordinateY = centerCoordinate.Y - (rectRectangleToDraw.Height / 2.0);
 
             PocketPaintApplication.GetInstance().ToolCurrent.Draw(new Point(coordinateX, coordinateY));
+        }
+
+        public TranslateTransform getLastTranslateTransformation()
+        {
+            for (int i = 0; i < _transformGridMain.Children.Count; i++)
+            {
+                if (_transformGridMain.Children[i].GetType() == typeof(TranslateTransform))
+                {
+                    return (TranslateTransform)_transformGridMain.Children[i];
+                }
+            }
+
+            return new TranslateTransform();
         }
 
         public RotateTransform getLastRotateTransformation()
