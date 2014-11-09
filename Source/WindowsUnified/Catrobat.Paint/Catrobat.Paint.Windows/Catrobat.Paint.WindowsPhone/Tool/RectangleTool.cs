@@ -98,10 +98,12 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             RotateTransform lastRotateTransform = PocketPaintApplication.GetInstance().RectangleSelectionControl.getLastRotateTransformation();
             if (lastRotateTransform != null)
             {
-                lastRotateTransform.CenterX = coordinate.X;
-                lastRotateTransform.CenterY = coordinate.Y;
+                RotateTransform rotateTransform = new RotateTransform();
+                rotateTransform.CenterX = lastRotateTransform.CenterX - (strokeThickness / 2.0);
+                rotateTransform.CenterY = lastRotateTransform.CenterY - (strokeThickness / 2.0);
+                rotateTransform.Angle = lastRotateTransform.Angle;
 
-                //myRectangleGeometry.Transform = rotateTransform;
+                myRectangleGeometry.Transform = rotateTransform;
             }
 
             Path _path = new Path();

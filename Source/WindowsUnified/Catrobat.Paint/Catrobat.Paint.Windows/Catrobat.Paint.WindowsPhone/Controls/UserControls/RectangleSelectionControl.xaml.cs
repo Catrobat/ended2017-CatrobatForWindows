@@ -370,8 +370,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                                                                      - PocketPaintApplication.GetInstance().BarStandard.Height) / 2.0);
             double halfScreenWidth = Window.Current.Bounds.Width / 2.0;
 
-            double offsetX = _transformGridMain.Value.OffsetX;
-            double offsetY = _transformGridMain.Value.OffsetY;
+            double offsetX = 0.0;
+            double offsetY = 0.0;
+
+            TranslateTransform lastTranslateTransform = getLastTranslateTransformation();
+            if (lastTranslateTransform != null)
+            {
+                offsetX = lastTranslateTransform.X;
+                offsetY = lastTranslateTransform.Y;
+            }
 
             double marginOffsetX = GridMain.Margin.Left - GridMain.Margin.Right;
             double marginOffsetY = GridMain.Margin.Top - GridMain.Margin.Bottom;
