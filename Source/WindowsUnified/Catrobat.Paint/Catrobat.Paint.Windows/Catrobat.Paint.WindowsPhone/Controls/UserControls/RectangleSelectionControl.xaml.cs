@@ -407,28 +407,22 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             TranslateTransform lastTranslateTransform = getLastTranslateTransformation();
             RotateTransform lastRotateTransform = getLastRotateTransformation();
-            // 1. Fall: Nur Translation => e.Delta.Translation.X + LastTransform.X
-            if (!(lastTranslateTransform.X == 0.0 && lastTranslateTransform.Y == 0.0) &&
-                lastRotateTransform.Angle == 0.0) 
+
+            if (lastTranslateTransform != null && lastRotateTransform == null) 
             {
                 translateTransform.X = e.Delta.Translation.X + lastTranslateTransform.X;
                 translateTransform.Y = e.Delta.Translation.Y + lastTranslateTransform.Y;
             }
-            // 2. Fall: Nur Rotationen => nur e.Delta.Translation.X
-            else if ((lastTranslateTransform.X == 0.0 && lastTranslateTransform.Y == 0.0) &&
-                     !(lastRotateTransform.Angle == 0.0))
+            else if (lastTranslateTransform == null && lastRotateTransform != null)
             {
                 translateTransform.X = e.Delta.Translation.X;
                 translateTransform.Y = e.Delta.Translation.Y;
             }
-            // 3. Fall: Translation und Rotationen => e.Delta.Translation.X + LastTransform.X
-            else if (!(lastTranslateTransform.X == 0.0 && lastTranslateTransform.Y == 0.0) &&
-                     !(lastRotateTransform.Angle == 0.0))
+            else if (lastTranslateTransform != null && lastRotateTransform != null)
             {
                 translateTransform.X = e.Delta.Translation.X + lastTranslateTransform.X;
                 translateTransform.Y = e.Delta.Translation.Y + lastTranslateTransform.Y;
             }
-            // 4.Fall: Keine Translation und Rotation
             else
             {
                 translateTransform.X = e.Delta.Translation.X;
@@ -457,7 +451,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 }
             }
 
-            return new TranslateTransform();
+            return null;
         }
 
         public RotateTransform getLastRotateTransformation()
@@ -470,7 +464,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 }
             }
 
-            return new RotateTransform();
+            return null;
         }
 
         public void addTransformation(Transform currentTransform)
