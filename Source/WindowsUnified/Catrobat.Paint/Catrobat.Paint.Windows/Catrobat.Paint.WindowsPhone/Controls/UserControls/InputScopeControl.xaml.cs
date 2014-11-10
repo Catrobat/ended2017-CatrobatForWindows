@@ -28,8 +28,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
     /// </summary>
     public sealed partial class InputScopeControl
     {
-        double width_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
-        double height_multiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+        double heightMultiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
+        double widthMultiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
         int lastValue;
         int minValue;
         private Button currentButton = null;
@@ -44,52 +44,52 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void setLayout()
         {
-            GrdLayoutRoot.Width *= width_multiplicator;
-            GrdLayoutRoot.Height *= height_multiplicator;
-            GrdThicknessKeyboard.Width *= width_multiplicator;
-            GrdThicknessKeyboard.Height *= height_multiplicator;
+            GrdLayoutRoot.Width *= widthMultiplicator;
+            GrdLayoutRoot.Height *= heightMultiplicator;
+            GrdThicknessKeyboard.Width *= widthMultiplicator;
+            GrdThicknessKeyboard.Height *= heightMultiplicator;
 
             foreach (Object obj in GrdThicknessKeyboard.Children)
             {
                 if (obj.GetType() == typeof(Button))
                 {
                     Button button = ((Button)obj);
-                    button.Height *= height_multiplicator;
-                    button.Width *= width_multiplicator;
+                    button.Height *= heightMultiplicator;
+                    button.Width *= widthMultiplicator;
 
                     button.Margin = new Thickness(
-                                            button.Margin.Left * width_multiplicator,
-                                            button.Margin.Top * height_multiplicator,
-                                            button.Margin.Right * width_multiplicator,
-                                            button.Margin.Bottom * height_multiplicator);
+                                            button.Margin.Left * widthMultiplicator,
+                                            button.Margin.Top * heightMultiplicator,
+                                            button.Margin.Right * widthMultiplicator,
+                                            button.Margin.Bottom * heightMultiplicator);
 
-                    button.FontSize *= height_multiplicator;
+                    button.FontSize *= heightMultiplicator;
 
                     var buttonContent = ((Button)obj).Content;
                     if (buttonContent != null && buttonContent.GetType() == typeof(Image))
                     {
                         Image contentImage = (Image)buttonContent;
-                        contentImage.Height *= height_multiplicator;
-                        contentImage.Width *= width_multiplicator;
+                        contentImage.Height *= heightMultiplicator;
+                        contentImage.Width *= widthMultiplicator;
 
                         contentImage.Margin = new Thickness(
-                                                contentImage.Margin.Left * width_multiplicator,
-                                                contentImage.Margin.Top * height_multiplicator,
-                                                contentImage.Margin.Right * width_multiplicator,
-                                                contentImage.Margin.Bottom * height_multiplicator);
+                                                contentImage.Margin.Left * widthMultiplicator,
+                                                contentImage.Margin.Top * heightMultiplicator,
+                                                contentImage.Margin.Right * widthMultiplicator,
+                                                contentImage.Margin.Bottom * heightMultiplicator);
                     }
                 }
                 else if (obj.GetType() == typeof(Slider))
                 {
                     Slider slider = (Slider)obj;
-                    slider.Height *= height_multiplicator;
-                    slider.Width *= width_multiplicator;
+                    slider.Height *= heightMultiplicator;
+                    slider.Width *= widthMultiplicator;
 
                     slider.Margin = new Thickness(
-                                            slider.Margin.Left * width_multiplicator,
-                                            slider.Margin.Top * height_multiplicator,
-                                            slider.Margin.Right * width_multiplicator,
-                                            slider.Margin.Bottom * height_multiplicator);
+                                            slider.Margin.Left * widthMultiplicator,
+                                            slider.Margin.Top * heightMultiplicator,
+                                            slider.Margin.Right * widthMultiplicator,
+                                            slider.Margin.Bottom * heightMultiplicator);
                 }
             }
 
@@ -146,6 +146,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                 currentButton.Content = tbInputValue.Text;
                 double currentValue = Convert.ToDouble(tbInputValue.Text);
+                
+                double differenceToGridMain = (PocketPaintApplication.GetInstance().RectangleSelectionControl.rectangleToDraw.Margin.Top * 2.0);
+                currentValue += differenceToGridMain;
 
                 if (currentButton.Name.Equals("btnHeightValue"))
                 {

@@ -101,7 +101,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PocketPaintApplication.GetInstance().GridUcRellRecControlState = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = true;
                 PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;
-
+                bool enableEdgeTypes = false;
                 switch (((Button)sender).Name)
                 {
                     case "BtnBrush":
@@ -109,30 +109,15 @@ namespace Catrobat.Paint.WindowsPhone.View
                         PocketPaintApplication.GetInstance().isBrushTool = true;
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
                         break;
+                    case "BtnCrop":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Crop);
+                        PocketPaintApplication.GetInstance().GridCropControl.Visibility = Visibility.Visible;
+                        PocketPaintApplication.GetInstance().GridCropControl.Children.Clear();
+                        PocketPaintApplication.GetInstance().GridCropControl.Children.Add(new CropControl());
+                        break;
                     case "BtnCursor":
                         PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Cursor);
-                        break;
-                    case "BtnPipette":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Pipette);
-                        break;
-                    case "BtnFill":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Fill);
-                        PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
-                        break;
-                    case "BtnStamp":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Stamp);
-                        break;
-                    case "BtnRectangle":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
-
-                        bool enableEdgeTypes = true;
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
-                        
-                        PocketPaintApplication.GetInstance().ToolCurrent.ResetDrawingSpace();
-
-                        PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = Visibility.Visible;
                         break;
                     case "BtnEllipse":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Ellipse);
@@ -140,10 +125,20 @@ namespace Catrobat.Paint.WindowsPhone.View
                         enableEdgeTypes = false;
                         PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
                         PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
-                        
+
                         PocketPaintApplication.GetInstance().ToolCurrent.ResetDrawingSpace();
 
                         PocketPaintApplication.GetInstance().EllipseSelectionControl.Visibility = Visibility.Visible;
+                        break;
+                    case "BtnEraser":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Eraser);
+                        break;
+                    case "BtnFill":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Fill);
+                        PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
+                        break;
+                    case "BtnFlip":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Flip);
                         break;
                     case "BtnImportPicture":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.ImportPng);
@@ -158,30 +153,35 @@ namespace Catrobat.Paint.WindowsPhone.View
                         PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
                         PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
                         break;
-                    case "BtnCrop":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Crop);
-                        PocketPaintApplication.GetInstance().GridCropControl.Visibility = Visibility.Visible;
-                        PocketPaintApplication.GetInstance().GridCropControl.Children.Clear();
-                        PocketPaintApplication.GetInstance().GridCropControl.Children.Add(new CropControl());
-                        break;
-                    case "BtnEraser":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Eraser);
-                        break;
-                    case "BtnFlip":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Flip);
+                    case "BtnLine":
+                        PocketPaintApplication.GetInstance().SwitchTool((ToolType.Line));
+                        PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
                         break;
                     case "BtnMove":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Move);
                         break;
-                    case "BtnZoom":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Zoom);
+                    case "BtnPipette":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Pipette);
+                        break;
+                    case "BtnRectangle":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
+
+                        enableEdgeTypes = true;
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
+
+                        PocketPaintApplication.GetInstance().ToolCurrent.ResetDrawingSpace();
+
+                        PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = Visibility.Visible;
                         break;
                     case "BtnRotate":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rotate);
                         break;
-                    case "BtnLine":
-                        PocketPaintApplication.GetInstance().SwitchTool((ToolType.Line));
-                        PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
+                    case "BtnStamp":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Stamp);
+                        break;
+                    case "BtnZoom":
+                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Zoom);
                         break;
                 }
 
