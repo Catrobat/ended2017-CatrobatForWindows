@@ -25,7 +25,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
     {
         TransformGroup _transformGridMain;
 
-        double _minGidMainHeight = 80.0;
+        double _minGridMainHeight = 80.0;
         double _minGridMainWidth = 80.0;
         double _gridMainSize = 230.0;
         double _rectangleForMovementSize = 200.0;
@@ -64,7 +64,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             double deltaTranslationY = Math.Round(e.Delta.Translation.Y);
 
-            if ((GridMain.Height + deltaTranslationY) >= _minGidMainHeight)
+            if ((GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
             {
                 var moveY = createTranslateTransform(0.0, deltaTranslationY);
 
@@ -79,7 +79,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             double deltaTranslationY = Math.Round(e.Delta.Translation.Y * -1.0);
 
-            if ((GridMain.Height + deltaTranslationY) >= _minGidMainHeight)
+            if ((GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
             {
                 var moveY = createTranslateTransform(0.0, deltaTranslationY);
 
@@ -94,7 +94,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             double deltaTranslationX = Math.Round(e.Delta.Translation.X * -1.0);
 
-            if ((GridMain.Width + deltaTranslationX) >= _minGidMainHeight)
+            if ((GridMain.Width + deltaTranslationX) >= _minGridMainHeight)
             {
                 var moveX = createTranslateTransform(deltaTranslationX, 0.0);
 
@@ -126,7 +126,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double deltaTranslationY = Math.Round(e.Delta.Translation.Y);
 
             if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth &&
-                (GridMain.Height + deltaTranslationY) >= _minGidMainHeight)
+                (GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
             {
                 var moveX = createTranslateTransform(deltaTranslationX, 0.0);
                 var moveY = createTranslateTransform(0.0, deltaTranslationY);
@@ -147,7 +147,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double deltaTranslationY = Math.Round(e.Delta.Translation.Y);
 
             if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth &&
-                (GridMain.Height + deltaTranslationY) >= _minGidMainHeight)
+                (GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
             {
                 var moveX = createTranslateTransform(deltaTranslationX, 0.0);
                 var moveY = createTranslateTransform(0.0, deltaTranslationY);
@@ -168,7 +168,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double deltaTranslationY = Math.Round(e.Delta.Translation.Y * -1.0);
 
             if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth &&
-                (GridMain.Height + deltaTranslationY) >= _minGidMainHeight)
+                (GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
             {
                 var moveX = createTranslateTransform(deltaTranslationX, 0.0);
                 var moveY = createTranslateTransform(0.0, deltaTranslationY);
@@ -189,7 +189,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double deltaTranslationY = Math.Round(e.Delta.Translation.Y * -1.0);
 
             if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth &&
-                (GridMain.Height + deltaTranslationY) >= _minGidMainHeight)
+                (GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
             {
                 var moveX = createTranslateTransform(deltaTranslationX, 0.0);
                 var moveY = createTranslateTransform(0.0, deltaTranslationY);
@@ -208,7 +208,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             double differenceHeight = newHeight - GridMain.Height;
 
-            if ((GridMain.Height + differenceHeight) >= _minGidMainHeight)
+            if ((GridMain.Height + differenceHeight) >= _minGridMainHeight)
             {
                 var moveY = createTranslateTransform(0.0, differenceHeight);
 

@@ -52,7 +52,8 @@ namespace Catrobat.Paint.Phone.Listener
 
             RotateTransform rotate = new RotateTransform();
 
-            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect
+                || PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Ellipse)
             {
                 Point rotateCenterPoint = new Point();
                 rotateCenterPoint.X = PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.Width / 2.0;
@@ -109,25 +110,35 @@ namespace Catrobat.Paint.Phone.Listener
             switch (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType())
             {
                 case ToolType.Brush:
-                case ToolType.Eraser:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
                     break;
                 case ToolType.Cursor:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(movezoom);
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
                     break;
-                case ToolType.Move:
-                case ToolType.Zoom:
-                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(movezoom);
+                case ToolType.Ellipse:
+                    if (rotate.Angle != 0.0)
+                    {
+                        PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(rotate);
+                    }
+                    break;
+                case ToolType.Eraser:
+                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
                     break;
                 case ToolType.Line:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
+                    break;
+                case ToolType.Move:
+                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(movezoom);
                     break;
                 case ToolType.Rect:
                     if (rotate.Angle != 0.0)
                     {
                         PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(rotate);
                     }
+                    break;
+                case ToolType.Zoom:
+                    PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(movezoom);
                     break;
             }
         }

@@ -66,7 +66,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
             PocketPaintApplication.GetInstance().GridCursor = GridCursor;
-            PocketPaintApplication.GetInstance().GridEllipseSelectionControl = GridEllipseSelectionControl;
+            PocketPaintApplication.GetInstance().EllipseSelectionControl = ucEllipseSelectionControl;
             PocketPaintApplication.GetInstance().RectangleSelectionControl = ucRectangleSelectionControl;
             PocketPaintApplication.GetInstance().GridInputScopeControl = GridInputScopeControl;
             PocketPaintApplication.GetInstance().GridCropControl = GridCropControl;
@@ -244,6 +244,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
+
                 app_btnReset.Name = "appButtonReset";
 
                 BitmapIcon thickness_icon = new BitmapIcon();
@@ -255,9 +256,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnReset.Icon = reset_icon;
 
                 app_btnReset.Label = "Ausgangsposition";
-
-
-                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().EllipseSelectionControl.setIsModifiedRectangleMovement ? true : false;
+                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().EllipseSelectionControl.isModifiedEllipseMovement ? true : false;
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnReset.Click += app_btn_reset_Click;
@@ -912,15 +911,15 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        public Visibility setVisibilityOfGridEllipseSelectionControl
+        public Visibility setVisibilityOfUcEllipseSelectionControl
         {
             get
             {
-                return GridEllipseSelectionControl.Visibility;
+                return ucEllipseSelectionControl.Visibility;
             }
             set
             {
-                GridEllipseSelectionControl.Visibility = value;
+                ucEllipseSelectionControl.Visibility = value;
             }
         }
     }

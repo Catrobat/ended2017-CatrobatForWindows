@@ -95,13 +95,13 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PocketPaintApplication.GetInstance().isBrushEraser = false;
                 PocketPaintApplication.GetInstance().isBrushTool = false;
                 PocketPaintApplication.GetInstance().isToolPickerUsed = true; ;
-                PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Visibility = Visibility.Collapsed;
+                PocketPaintApplication.GetInstance().EllipseSelectionControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridCropControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().GridUcRellRecControlState = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = true;
-                PocketPaintApplication.GetInstance().GridEllipseSelectionControl.IsHitTestVisible = true;
+                PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;
                 // TODO: RectangleSelctionControl should be reseted if the rectangle-tool is selected.
                 // PocketPaintApplication.GetInstance().RectangleSelectionControl.resetRectangleSelectionControl();
 
@@ -139,16 +139,14 @@ namespace Catrobat.Paint.WindowsPhone.View
                         break;
                     case "BtnEllipse":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.Ellipse);
-                        
-                        PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Children.Clear();
-                        PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Children.Add(new EllipseSelectionControl());
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = 160.0;
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = 160.0;
 
-                        PocketPaintApplication.GetInstance().GridEllipseSelectionControl.Visibility = Visibility.Visible;
                         enableEdgeTypes = false;
                         PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.Gray);
+                        PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
+                        
+                        PocketPaintApplication.GetInstance().ToolCurrent.ResetDrawingSpace();
+
+                        PocketPaintApplication.GetInstance().EllipseSelectionControl.Visibility = Visibility.Visible;
                         break;
                     case "BtnImportPicture":
                         PocketPaintApplication.GetInstance().SwitchTool(ToolType.ImportPng);
