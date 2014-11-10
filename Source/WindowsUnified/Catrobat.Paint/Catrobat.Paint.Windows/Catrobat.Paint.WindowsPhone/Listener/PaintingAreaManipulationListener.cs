@@ -54,7 +54,10 @@ namespace Catrobat.Paint.Phone.Listener
 
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
             {
-                Point rotateCenterPoint = PocketPaintApplication.GetInstance().RectangleSelectionControl.getCenterOfGridMain();
+                Point rotateCenterPoint = new Point();
+                rotateCenterPoint.X = PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.Width / 2.0;
+                rotateCenterPoint.Y = PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.Height / 2.0;
+
                 rotate.CenterX = rotateCenterPoint.X;
                 rotate.CenterY = rotateCenterPoint.Y;
 
@@ -74,7 +77,7 @@ namespace Catrobat.Paint.Phone.Listener
                     double normalPreviousY = previousYLength / (Math.Sqrt(previousXLength * previousXLength + previousYLength * previousYLength));
 
                     double deltaAngle = (Math.Atan(normalPreviousX / normalPreviousY) - Math.Atan(normalCurrentX / normalCurrentY));
-                    double rotationAngle = deltaAngle * 360.0 / Math.PI;
+                    double rotationAngle = deltaAngle * 180.0 / Math.PI;
 
                     rotate.Angle = rotationAngle;
                 }

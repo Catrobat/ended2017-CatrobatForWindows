@@ -343,6 +343,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
+        public Rectangle rectangleToDraw
+        {
+            get
+            {
+                return rectRectangleToDraw;
+            }
+            set
+            {
+                rectRectangleToDraw = value;
+            }
+        }
+
         public bool isModifiedRectangleMovement
         {
             get
@@ -370,8 +382,31 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                                                                      - PocketPaintApplication.GetInstance().BarStandard.Height) / 2.0);
             double halfScreenWidth = Window.Current.Bounds.Width / 2.0;
 
-            double offsetX = _transformGridMain.Value.OffsetX;
-            double offsetY = _transformGridMain.Value.OffsetY;
+            TranslateTransform lastTranslateTransform = getLastTranslateTransformation();
+            RotateTransform lastRotateTransform = getLastRotateTransformation();
+
+            double offsetX;
+            double offsetY;
+            if (lastTranslateTransform != null && lastRotateTransform == null)
+            {
+                offsetX = lastTranslateTransform.X;
+                offsetY = lastTranslateTransform.Y;
+            }
+            else if (lastTranslateTransform == null && lastRotateTransform != null)
+            {
+                offsetX = 0.0;
+                offsetY = 0.0;
+            }
+            else if (lastTranslateTransform != null && lastRotateTransform != null)
+            {
+                offsetX = lastTranslateTransform.X;
+                offsetY = lastTranslateTransform.Y;
+            }
+            else
+            {
+                offsetX = 0.0;
+                offsetY = 0.0;
+            }
 
             double marginOffsetX = GridMain.Margin.Left - GridMain.Margin.Right;
             double marginOffsetY = GridMain.Margin.Top - GridMain.Margin.Bottom;
@@ -379,13 +414,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double coordinateX = offsetX + halfScreenWidth + (marginOffsetX / 2.0);
             double coordinateY = offsetY + halfScreenHeight + (marginOffsetY / 2.0);
 
-            return new Point(coordinateX, coordinateY);
-        }
-
-        public Point getCenterOfGridMain()
-        {
-            double coordinateX = PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.Width / 2.0;
-            double coordinateY = PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.Height / 2.0;
             return new Point(coordinateX, coordinateY);
         }
         
@@ -404,8 +432,30 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void rectRectangleForMovement_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             TranslateTransform translateTransform = new TranslateTransform();
-            translateTransform.X = e.Delta.Translation.X + _transformGridMain.Value.OffsetX;
-            translateTransform.Y = e.Delta.Translation.Y + _transformGridMain.Value.OffsetY;
+
+            TranslateTransform lastTranslateTransform = getLastTranslateTransformation();
+            RotateTransform lastRotateTransform = getLastRotateTransformation();
+
+            if (lastTranslateTransform != null && lastRotateTransform == null) 
+            {
+                translateTransform.X = e.Delta.Translation.X + lastTranslateTransform.X;
+                translateTransform.Y = e.Delta.Translation.Y + lastTranslateTransform.Y;
+            }
+            else if (lastTranslateTransform == null && lastRotateTransform != null)
+            {
+                translateTransform.X = e.Delta.Translation.X;
+                translateTransform.Y = e.Delta.Translation.Y;
+            }
+            else if (lastTranslateTransform != null && lastRotateTransform != null)
+            {
+                translateTransform.X = e.Delta.Translation.X + lastTranslateTransform.X;
+                translateTransform.Y = e.Delta.Translation.Y + lastTranslateTransform.Y;
+            }
+            else
+            {
+                translateTransform.X = e.Delta.Translation.X;
+                translateTransform.Y = e.Delta.Translation.Y;
+            }
             addTransformation(translateTransform);
         }
 
@@ -413,10 +463,24 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             Point centerCoordinate = getCenterCoordinateOfGridMain();
 
-            double coordinateX = centerCoordinate.X - (rectRectangleToDraw.Width / 2.0);
-            double coordinateY = centerCoordinate.Y - (rectRectangleToDraw.Height / 2.0);
+            PocketPaintApplication.GetInstance().ToolCurrent.Draw(centerCoordinate);
+        }
 
-            PocketPaintApplication.GetInstance().ToolCurrent.Draw(new Point(coordinateX, coordinateY));
+        public TranslateTransform getLastTranslateTransformation()
+        {
+            for (int i = 0; i < _transformGridMain.Children.Count; i++)
+            {
+                if (_transformGridMain.Children[i].GetType() == typeof(TranslateTransform))
+                {
+                    TranslateTransform translateTransform = new TranslateTransform();
+                    translateTransform.X = ((TranslateTransform)_transformGridMain.Children[i]).X;
+                    translateTransform.Y = ((TranslateTransform)_transformGridMain.Children[i]).Y;
+
+                    return translateTransform;
+                }
+            }
+
+            return null;
         }
 
         public RotateTransform getLastRotateTransformation()
@@ -425,11 +489,16 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 if (_transformGridMain.Children[i].GetType() == typeof(RotateTransform))
                 {
-                    return (RotateTransform) _transformGridMain.Children[i];
+                    RotateTransform rotateTransform = new RotateTransform();
+                    rotateTransform.CenterX = ((RotateTransform)_transformGridMain.Children[i]).CenterX;
+                    rotateTransform.CenterY = ((RotateTransform)_transformGridMain.Children[i]).CenterY;
+                    rotateTransform.Angle = ((RotateTransform)_transformGridMain.Children[i]).Angle;
+
+                    return rotateTransform;
                 }
             }
 
-            return new RotateTransform();
+            return null;
         }
 
         public void addTransformation(Transform currentTransform)
