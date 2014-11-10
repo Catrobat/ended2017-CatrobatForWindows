@@ -43,7 +43,7 @@ namespace Catrobat.Paint.Phone.Listener
             {
                 //PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityGrdSliderThickness(Visibility.Collapsed);
                 PocketPaintApplication.GetInstance().SwitchTool(ToolType.Move);
-                PocketPaintApplication.GetInstance().GridEllipseSelectionControl.IsHitTestVisible = false;
+                PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = false;
                 PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = false;
             }
             else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Move)
@@ -51,7 +51,7 @@ namespace Catrobat.Paint.Phone.Listener
                 if (PocketPaintApplication.GetInstance().ToolWhileMoveTool == null)
                     return;
                 PocketPaintApplication.GetInstance().SwitchTool(PocketPaintApplication.GetInstance().ToolWhileMoveTool.GetToolType());
-                PocketPaintApplication.GetInstance().GridEllipseSelectionControl.IsHitTestVisible = true;
+                PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;
                 PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = true;
             }
         }

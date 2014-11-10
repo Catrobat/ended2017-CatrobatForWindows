@@ -90,7 +90,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
             else
             {
-                // PocketPaintApplication.GetInstance().RecDrawingRectangle.Visibility = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
                 PocketPaintApplication.GetInstance().isBrushEraser = false;
                 PocketPaintApplication.GetInstance().isBrushTool = false;
@@ -102,8 +101,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PocketPaintApplication.GetInstance().GridUcRellRecControlState = Visibility.Collapsed;
                 PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = true;
                 PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;
-                // TODO: RectangleSelctionControl should be reseted if the rectangle-tool is selected.
-                // PocketPaintApplication.GetInstance().RectangleSelectionControl.resetRectangleSelectionControl();
 
                 switch (((Button)sender).Name)
                 {

@@ -105,8 +105,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             if (lastRotateTransform != null)
             {
                 RotateTransform rotateTransform = new RotateTransform();
-                rotateTransform.CenterX = coordinate.X + width / 2.0; ;
-                rotateTransform.CenterY = coordinate.Y + height / 2.0;
+                rotateTransform.CenterX = coordinate.X;
+                rotateTransform.CenterY = coordinate.Y;
                 rotateTransform.Angle = lastRotateTransform.Angle;
 
                 myEllipseGeometry.Transform = rotateTransform;
