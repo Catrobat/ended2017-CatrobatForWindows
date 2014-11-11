@@ -422,7 +422,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 deltaTranslationValue = (e.Delta.Translation.Y * -1.0);
             }
             // 270 < Rotation < 360 || -90 < Rotation < 0
-            if ((270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 360.0) ||
+            else if ((270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 360.0) ||
                 (-90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 0.0))
             {
                 // + deltaTranslationX
@@ -440,7 +440,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     deltaTranslationValue = 0.0;
                 }
             }
-
 
             if ((GridMain.Width + deltaTranslationValue) >= _minGridMainWidth)
             {
