@@ -33,6 +33,8 @@ namespace Catrobat.Paint.Phone
 
         public bool isToolPickerUsed = true;
 
+        public bool isZoomButtonClicked = false;
+
         public bool UnsavedChangesMade { get; set; }
         #endregion
 
