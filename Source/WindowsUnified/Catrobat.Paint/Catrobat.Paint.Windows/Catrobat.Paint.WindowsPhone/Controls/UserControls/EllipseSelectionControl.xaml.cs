@@ -23,99 +23,26 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 {
     public sealed partial class EllipseSelectionControl : UserControl
     {
-        TransformGroup _transformGridEllipsCenterBottom;
-        TransformGroup _transfomrGridEllipseCenterTop;
-        TransformGroup _transformGridEllipseLeftBottom;
-        TransformGroup _transformGridEllipseLeftCenter;
-        TransformGroup _transformGridEllipseLeftTop;
-        TransformGroup _transformGridEllipseRightBottom;
-        TransformGroup _transformGridEllipseRightCenter;
-        TransformGroup _transformGridEllipseRightTop;
         TransformGroup _transformGridMain;
 
-        const double MIN_ELLIPSE_MOVE_HEIGHT = 50.0;
-        const double MIN_ELLIPSE_MOVE_WIDTH = 50.0;
-
-        bool _isModifiedRectangleMovement;
+        double _minGridMainHeight = 80.0;
+        double _minGridMainWidth = 80.0;
+        double _gridMainSize = 230.0;
+        double _rectangleForMovementSize = 200.0;
+        double _ellipseToDrawSize = 160.0;
+        bool _isModifiedEllipseMovement;
 
         public EllipseSelectionControl()
         {
             this.InitializeComponent();
 
-            GridEllCenterBottom.RenderTransform = _transformGridEllipsCenterBottom = new TransformGroup();
-            GridEllCenterTop.RenderTransform = _transfomrGridEllipseCenterTop = new TransformGroup();
-            GridEllRightCenter.RenderTransform = _transformGridEllipseRightCenter = new TransformGroup();
-            GridEllLeftBottom.RenderTransform = _transformGridEllipseLeftBottom = new TransformGroup();
-            GridEllLeftCenter.RenderTransform = _transformGridEllipseLeftCenter = new TransformGroup();
-            GridEllLeftTop.RenderTransform = _transformGridEllipseLeftTop = new TransformGroup();
-            GridEllRightBottom.RenderTransform = _transformGridEllipseRightBottom = new TransformGroup();
-            GridEllRightTop.RenderTransform = _transformGridEllipseRightTop = new TransformGroup();
             GridMain.RenderTransform = _transformGridMain = new TransformGroup();
-
             ellEllipseToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
             ellEllipseToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
             ellEllipseToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
 
             PocketPaintApplication.GetInstance().EllipseSelectionControl = this;
-            setIsModifiedRectangleMovement = false;
-        }
-        private void _setGridTransformsOfEllipses(TransformGroup transformGroup, TranslateTransform translateTransform)
-        {
-            transformGroup.Children.Add(translateTransform);
-            double offsetX = transformGroup.Value.OffsetX;
-            double offsetY = transformGroup.Value.OffsetY;
-
-            transformGroup.Children.Clear();
-
-            var move = new TranslateTransform();
-            move.X = offsetX;
-            move.Y = offsetY;
-
-            transformGroup.Children.Add(move);
-        }
-        private void setGridTransformsOfEllipses(TranslateTransform centerBottom, TranslateTransform centerTop, TranslateTransform rightCenter,
-                                                 TranslateTransform leftCenter, TranslateTransform leftBottom, TranslateTransform leftTop,
-                                                 TranslateTransform rightBottom, TranslateTransform rightTop)
-        {
-            if(centerBottom != null)
-            {
-                _setGridTransformsOfEllipses(_transformGridEllipsCenterBottom, centerBottom);
-            }
-
-            if(centerTop != null)
-            {
-                _setGridTransformsOfEllipses(_transfomrGridEllipseCenterTop, centerTop);
-            }
-
-            if(rightCenter != null)
-            {
-                _setGridTransformsOfEllipses(_transformGridEllipseRightCenter, rightCenter);
-            }
-            
-            if(leftBottom != null)
-            {
-                _setGridTransformsOfEllipses(_transformGridEllipseLeftBottom, leftBottom);
-            }
-
-            if(leftCenter != null)
-            {
-                _setGridTransformsOfEllipses(_transformGridEllipseLeftCenter, leftCenter);
-            }
-
-            if(leftTop != null)
-            {
-                _setGridTransformsOfEllipses(_transformGridEllipseLeftTop, leftTop);
-            }
-
-            if(rightBottom != null)
-            {
-                _setGridTransformsOfEllipses(_transformGridEllipseRightBottom, rightBottom);
-            }
-
-            if(rightTop != null)
-            {
-                _setGridTransformsOfEllipses(_transformGridEllipseRightTop, rightTop);
-            }
+            isModifiedEllipseMovement = false;
         }
 
         private TranslateTransform createTranslateTransform(double x, double y)
@@ -129,24 +56,20 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void setSizeOfRecBar(double height, double width)
         {
-
             PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = height;
-
             PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = width;
         }
 
         private void ellCenterBottom_ManipulationDelta_1(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectEllipseForMovement.Height + e.Delta.Translation.Y) >= MIN_ELLIPSE_MOVE_HEIGHT)
-            {
-                var moveY = createTranslateTransform(0.0, Math.Round(e.Delta.Translation.Y));
-                var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
+            double deltaTranslationY = Math.Round(e.Delta.Translation.Y);
 
-                setGridTransformsOfEllipses(moveY, null, moveY2, moveY2, 
-                                            moveY, null, moveY, null);
+            if ((GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
+            {
+                var moveY = createTranslateTransform(0.0, deltaTranslationY);
 
                 changeHeightOfUiElements(moveY.Y);
-                changeMarginBottomOfUiElements(moveY.Y);
+                changeMarginBottomGridMain(moveY.Y);
 
                 setSizeOfRecBar(ellEllipseToDraw.Height, ellEllipseToDraw.Width);
             }
@@ -154,40 +77,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void ellCenterTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectEllipseForMovement.Height + (e.Delta.Translation.Y * -1)) >= MIN_ELLIPSE_MOVE_HEIGHT)
+            double deltaTranslationY = Math.Round(e.Delta.Translation.Y * -1.0);
+
+            if ((GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
             {
-                var moveY = createTranslateTransform(0.0, Math.Round(e.Delta.Translation.Y));
-                var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
-
-                setGridTransformsOfEllipses(null, moveY, moveY2, moveY2, 
-                                            null, moveY, null, moveY);
-
-                changeHeightOfUiElements(moveY.Y * -1.0);
-                changeMarginTopOfUiElements(moveY.Y * -1.0);
-                setSizeOfRecBar(ellEllipseToDraw.Height, ellEllipseToDraw.Width);
-            }
-        }
-
-        private void ellLeftBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        {
-            if ((rectEllipseForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_ELLIPSE_MOVE_WIDTH &&
-               (rectEllipseForMovement.Height + e.Delta.Translation.Y) >= MIN_ELLIPSE_MOVE_HEIGHT)
-            {
-                var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
-                var moveY = createTranslateTransform(0.0, Math.Round(e.Delta.Translation.Y));
-                var moveXY = createTranslateTransform(moveX.X, moveY.Y);
-                var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
-                var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
-                var moveX2Y = createTranslateTransform(moveX2.X, moveY.Y);
-                var moveXY2 = createTranslateTransform(moveX.X, moveY2.Y);
-                setGridTransformsOfEllipses(moveX2Y, moveX2, moveY2, moveXY2, 
-                                            moveXY, moveX, moveY, null);
-
-                changeWidthOfUiElements(moveX.X * -1);
-                changeMarginLeftOfUiElements(moveX.X * -1);
+                var moveY = createTranslateTransform(0.0, deltaTranslationY);
 
                 changeHeightOfUiElements(moveY.Y);
-                changeMarginBottomOfUiElements(moveY.Y);
+                changeMarginTopGridMain(moveY.Y);
 
                 setSizeOfRecBar(ellEllipseToDraw.Height, ellEllipseToDraw.Width);
             }
@@ -195,41 +92,50 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void ellLeftCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectEllipseForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_ELLIPSE_MOVE_WIDTH)
+            double deltaTranslationX = Math.Round(e.Delta.Translation.X * -1.0);
+
+            if ((GridMain.Width + deltaTranslationX) >= _minGridMainHeight)
             {
-                var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
-                var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
+                var moveX = createTranslateTransform(deltaTranslationX, 0.0);
 
-                setGridTransformsOfEllipses(moveX2, moveX2, null, moveX, 
-                                            moveX, moveX, null, null);
-
-                changeWidthOfUiElements(moveX.X * -1.0);
-                changeMarginLeftOfUiElements(moveX.X * -1.0);
+                changeWidthOfUiElements(moveX.X);
+                changeMarginLeftGridMain(moveX.X);
 
                 setSizeOfRecBar(ellEllipseToDraw.Height, ellEllipseToDraw.Width);
             }
         }
-        
-        private void ellLeftTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+
+        private void ellRightCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectEllipseForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_ELLIPSE_MOVE_WIDTH &&
-                (rectEllipseForMovement.Height + (e.Delta.Translation.Y * -1)) >= MIN_ELLIPSE_MOVE_HEIGHT)
+            double deltaTranslationX = Math.Round(e.Delta.Translation.X);
+
+            if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth)
             {
-                var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
-                var moveY = createTranslateTransform(0.0, Math.Round(e.Delta.Translation.Y));
-                var moveXY = createTranslateTransform(moveX.X, moveY.Y);
-                var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
-                var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
-                var moveX2Y = createTranslateTransform(moveX2.X, moveY.Y);
-                var moveXY2 = createTranslateTransform(moveX.X, moveY2.Y);
-                setGridTransformsOfEllipses(moveX2, moveX2Y, moveY2, moveXY2, 
-                                            moveX, moveXY, null, moveY);
+                var moveX = createTranslateTransform(deltaTranslationX, 0.0);
 
-                changeWidthOfUiElements(moveX.X * -1);
-                changeMarginLeftOfUiElements(moveX.X * -1);
+                changeWidthOfUiElements(moveX.X);
+                changeMarginRightGridMain(moveX.X);
 
-                changeHeightOfUiElements(moveY.Y * -1.0);
-                changeMarginTopOfUiElements(moveY.Y * -1.0);
+                setSizeOfRecBar(ellEllipseToDraw.Height, ellEllipseToDraw.Width);
+            }
+        }
+
+        private void ellLeftBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            double deltaTranslationX = Math.Round(e.Delta.Translation.X * -1.0);
+            double deltaTranslationY = Math.Round(e.Delta.Translation.Y);
+
+            if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth &&
+                (GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
+            {
+                var moveX = createTranslateTransform(deltaTranslationX, 0.0);
+                var moveY = createTranslateTransform(0.0, deltaTranslationY);
+
+                changeWidthOfUiElements(moveX.X);
+                changeHeightOfUiElements(moveY.Y);
+
+                changeMarginLeftGridMain(moveX.X);
+                changeMarginBottomGridMain(moveY.Y);
 
                 setSizeOfRecBar(ellEllipseToDraw.Height, ellEllipseToDraw.Width);
             }
@@ -237,42 +143,41 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void ellRightBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectEllipseForMovement.Width + e.Delta.Translation.X) >= MIN_ELLIPSE_MOVE_WIDTH &&
-                (rectEllipseForMovement.Height + e.Delta.Translation.Y) >= MIN_ELLIPSE_MOVE_HEIGHT)
+            double deltaTranslationX = Math.Round(e.Delta.Translation.X);
+            double deltaTranslationY = Math.Round(e.Delta.Translation.Y);
+
+            if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth &&
+                (GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
             {
-                var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
-                var moveY = createTranslateTransform(0.0, Math.Round(e.Delta.Translation.Y));
-                var moveXY = createTranslateTransform(moveX.X, moveY.Y);
-                var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
-                var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
-                var moveX2Y = createTranslateTransform(moveX2.X, moveY.Y);
-                var moveXY2 = createTranslateTransform(moveX.X, moveY2.Y);
-                setGridTransformsOfEllipses(moveX2Y, moveX2, moveXY2, moveY2, 
-                                            moveY, null, moveXY, moveX);
+                var moveX = createTranslateTransform(deltaTranslationX, 0.0);
+                var moveY = createTranslateTransform(0.0, deltaTranslationY);
 
-                changeMarginRightOfUiElements(moveX.X);
                 changeWidthOfUiElements(moveX.X);
-
                 changeHeightOfUiElements(moveY.Y);
-                changeMarginBottomOfUiElements(moveY.Y);
+
+                changeMarginRightGridMain(moveX.X);
+                changeMarginBottomGridMain(moveY.Y);
 
                 setSizeOfRecBar(ellEllipseToDraw.Height, ellEllipseToDraw.Width);
             }
-
         }
 
-        private void ellRightCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void ellLeftTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectEllipseForMovement.Width + e.Delta.Translation.X) >= MIN_ELLIPSE_MOVE_WIDTH)
-            {
-                var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
-                var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
+            double deltaTranslationX = Math.Round(e.Delta.Translation.X * -1.0);
+            double deltaTranslationY = Math.Round(e.Delta.Translation.Y * -1.0);
 
-                setGridTransformsOfEllipses(moveX2, moveX2, moveX, null, 
-                                            null, null, moveX, moveX);
+            if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth &&
+                (GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
+            {
+                var moveX = createTranslateTransform(deltaTranslationX, 0.0);
+                var moveY = createTranslateTransform(0.0, deltaTranslationY);
 
                 changeWidthOfUiElements(moveX.X);
-                changeMarginRightOfUiElements(moveX.X);
+                changeHeightOfUiElements(moveY.Y);
+
+                changeMarginLeftGridMain(moveX.X);
+                changeMarginTopGridMain(moveY.Y);
 
                 setSizeOfRecBar(ellEllipseToDraw.Height, ellEllipseToDraw.Width);
             }
@@ -280,45 +185,79 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void ellRightTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((rectEllipseForMovement.Width + e.Delta.Translation.X) >= MIN_ELLIPSE_MOVE_WIDTH &&
-               (rectEllipseForMovement.Height + (e.Delta.Translation.Y * -1)) >= MIN_ELLIPSE_MOVE_HEIGHT)
+            double deltaTranslationX = Math.Round(e.Delta.Translation.X);
+            double deltaTranslationY = Math.Round(e.Delta.Translation.Y * -1.0);
+
+            if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth &&
+                (GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
             {
-                var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
-                var moveY = createTranslateTransform(0.0, Math.Round(e.Delta.Translation.Y));
-                var moveXY = createTranslateTransform(moveX.X, moveY.Y);
-                var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
-                var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
-                var moveX2Y = createTranslateTransform(moveX2.X, moveY.Y);
-                var moveXY2 = createTranslateTransform(moveX.X, moveY2.Y);
-                setGridTransformsOfEllipses(moveX2, moveX2Y, moveXY2, moveY2, 
-                                            null, moveY, moveX, moveXY);
+                var moveX = createTranslateTransform(deltaTranslationX, 0.0);
+                var moveY = createTranslateTransform(0.0, deltaTranslationY);
 
-                changeMarginRightOfUiElements(moveX.X);
                 changeWidthOfUiElements(moveX.X);
+                changeHeightOfUiElements(moveY.Y);
 
-                changeHeightOfUiElements(moveY.Y * -1.0);
-                changeMarginTopOfUiElements(moveY.Y * -1.0);
+                changeMarginRightGridMain(moveX.X);
+                changeMarginTopGridMain(moveY.Y);
 
                 setSizeOfRecBar(ellEllipseToDraw.Height, ellEllipseToDraw.Width);
             }
+        }
 
+        public void changeHeightOfDrawingSelection(double newHeight, bool changeBtnValues)
+        {
+            double differenceHeight = newHeight - GridMain.Height;
+
+            if ((GridMain.Height + differenceHeight) >= _minGridMainHeight)
+            {
+                var moveY = createTranslateTransform(0.0, differenceHeight);
+
+                changeHeightOfUiElements(moveY.Y);
+                changeMarginBottomGridMain(moveY.Y);
+
+                if (changeBtnValues)
+                {
+                    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = ellEllipseToDraw.Height;
+                    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = ellEllipseToDraw.Width;
+                }
+                resetAppBarButtonEllipseSelectionControl(true);
+                isModifiedEllipseMovement = true;
+            }
+
+            PocketPaintApplication.GetInstance().BarRecEllShape.updateSldStrokeThickness(Convert.ToInt32(ellEllipseToDraw.Height), Convert.ToInt32(ellEllipseToDraw.Width));
+        }
+
+        public void changeWidthOfDrawingSelection(double newWidth, bool changeBtnValues)
+        {
+            double differenceWidth = newWidth - GridMain.Width;
+
+            if ((GridMain.Width + differenceWidth) >= _minGridMainWidth)
+            {
+                var moveX = createTranslateTransform(differenceWidth, 0.0);
+
+                changeWidthOfUiElements(moveX.X);
+                changeMarginRightGridMain(moveX.X);
+
+                if (changeBtnValues)
+                {
+                    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = ellEllipseToDraw.Height;
+                    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = ellEllipseToDraw.Width;
+                }
+                resetAppBarButtonEllipseSelectionControl(true);
+                isModifiedEllipseMovement = true;
+            }
+
+            PocketPaintApplication.GetInstance().BarRecEllShape.updateSldStrokeThickness(Convert.ToInt32(ellEllipseToDraw.Height), Convert.ToInt32(ellEllipseToDraw.Width));
         }
 
         private void changeHeightOfUiElements(double value)
         {
-
+            GridMain.Height += value;
             rectEllipseForMovement.Height += value;
+            ellEllipseToDraw.Height += value;
 
-            if (ellEllipseToDraw.Height + value >= 10.0)
-            {
-                ellEllipseToDraw.Height += value;
-            }
-            else
-            {
-                ellEllipseToDraw.Height = 10.0;
-            }
             resetAppBarButtonEllipseSelectionControl(true);
-            setIsModifiedRectangleMovement = true;
+            isModifiedEllipseMovement = true;
 
             PocketPaintApplication.GetInstance().BarRecEllShape.updateSldStrokeThickness(Convert.ToInt32(ellEllipseToDraw.Height), Convert.ToInt32(ellEllipseToDraw.Width));
         }
@@ -327,73 +266,60 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             GridMain.Width += value;
             rectEllipseForMovement.Width += value;
+            ellEllipseToDraw.Width += value;
 
-            if (ellEllipseToDraw.Width + value >= 10.0)
-            {
-                ellEllipseToDraw.Width += value;
-            }
-            else
-            {
-                ellEllipseToDraw.Width = 10.0;
-            }
             resetAppBarButtonEllipseSelectionControl(true);
-            setIsModifiedRectangleMovement = true;
+            isModifiedEllipseMovement = true;
 
             PocketPaintApplication.GetInstance().BarRecEllShape.updateSldStrokeThickness(Convert.ToInt32(ellEllipseToDraw.Height), Convert.ToInt32(ellEllipseToDraw.Width));
         }
 
-        private void changeMarginBottomOfUiElements(double value)
+        private void changeMarginTopGridMain(double value)
         {
-            rectEllipseForMovement.Margin = new Thickness(rectEllipseForMovement.Margin.Left, rectEllipseForMovement.Margin.Top, rectEllipseForMovement.Margin.Right, rectEllipseForMovement.Margin.Bottom - value);
-            ellEllipseToDraw.Margin = new Thickness(ellEllipseToDraw.Margin.Left, ellEllipseToDraw.Margin.Top, ellEllipseToDraw.Margin.Right, ellEllipseToDraw.Margin.Bottom - value);
+            GridMain.Margin = new Thickness(GridMain.Margin.Left, GridMain.Margin.Top - value, GridMain.Margin.Right, GridMain.Margin.Bottom);
         }
 
-        private void changeMarginLeftOfUiElements(double value)
+        private void changeMarginBottomGridMain(double value)
         {
-            rectEllipseForMovement.Margin = new Thickness(rectEllipseForMovement.Margin.Left - value, rectEllipseForMovement.Margin.Top, rectEllipseForMovement.Margin.Right, rectEllipseForMovement.Margin.Bottom);
-            ellEllipseToDraw.Margin = new Thickness(ellEllipseToDraw.Margin.Left - value, ellEllipseToDraw.Margin.Top, ellEllipseToDraw.Margin.Right, ellEllipseToDraw.Margin.Bottom);
+            GridMain.Margin = new Thickness(GridMain.Margin.Left, GridMain.Margin.Top, GridMain.Margin.Right, GridMain.Margin.Bottom - value);
         }
 
-        private void changeMarginRightOfUiElements(double value)
+        private void changeMarginLeftGridMain(double value)
         {
-            rectEllipseForMovement.Margin = new Thickness(rectEllipseForMovement.Margin.Left, rectEllipseForMovement.Margin.Top, rectEllipseForMovement.Margin.Right - value, rectEllipseForMovement.Margin.Bottom);
-            ellEllipseToDraw.Margin = new Thickness(ellEllipseToDraw.Margin.Left, ellEllipseToDraw.Margin.Top, ellEllipseToDraw.Margin.Right - value, ellEllipseToDraw.Margin.Bottom);
+            GridMain.Margin = new Thickness(GridMain.Margin.Left - value, GridMain.Margin.Top, GridMain.Margin.Right, GridMain.Margin.Bottom);
         }
 
-        private void changeMarginTopOfUiElements(double value)
+        private void changeMarginRightGridMain(double value)
         {
-            rectEllipseForMovement.Margin = new Thickness(rectEllipseForMovement.Margin.Left, rectEllipseForMovement.Margin.Top - value, rectEllipseForMovement.Margin.Right, rectEllipseForMovement.Margin.Bottom);
-            ellEllipseToDraw.Margin = new Thickness(ellEllipseToDraw.Margin.Left, ellEllipseToDraw.Margin.Top - value, ellEllipseToDraw.Margin.Right, ellEllipseToDraw.Margin.Bottom);
+            GridMain.Margin = new Thickness(GridMain.Margin.Left, GridMain.Margin.Top, GridMain.Margin.Right - value, GridMain.Margin.Bottom);
         }
 
-        private void rectEllipseForMovement_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        public Brush fillOfEllipseToDraw
         {
-            var movezoom = new TranslateTransform();
-            ((TranslateTransform)movezoom).X = e.Delta.Translation.X;
-            ((TranslateTransform)movezoom).Y = e.Delta.Translation.Y;
-
-            _transformGridMain.Children.Add(movezoom);
-            
-            movezoom.X = _transformGridMain.Value.OffsetX;
-            movezoom.Y = _transformGridMain.Value.OffsetY;
-            _transformGridMain.Children.Clear();
-            _transformGridMain.Children.Add(movezoom);
-
-            resetAppBarButtonEllipseSelectionControl(true);
-            setIsModifiedRectangleMovement = true;
+            get
+            {
+                return ellEllipseToDraw.Fill;
+            }
+            set
+            {
+                ellEllipseToDraw.Fill = value;
+            }
         }
 
-        public void changeColorOfDrawingShape(Color color)
+        public Brush strokeOfRectangleToDraw
         {
-            ellEllipseToDraw.Fill = new SolidColorBrush(color);
+            get
+            {
+                return ellEllipseToDraw.Stroke;
+            }
+            set
+            {
+                ellEllipseToDraw.Stroke = value;
+            }
+
         }
 
-        public void changeStrokeOfDrawingShape(Color color)
-        {
-            ellEllipseToDraw.Stroke = new SolidColorBrush(color);
-        }
-
-        public double setStrokeThicknessOfDrawingShape
+        public double strokeThicknessOfEllipseToDraw
         {
             get
             {
@@ -405,79 +331,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        public void changeHeightOfDrawingSelection(double newHeight, bool changeTbValues)
-        {
-            double moveValue = newHeight - ellEllipseToDraw.Height;
-
-            if ((rectEllipseForMovement.Height + moveValue) >= MIN_ELLIPSE_MOVE_HEIGHT)
-            {
-                var moveY = createTranslateTransform(0.0, moveValue);
-                var moveY2 = createTranslateTransform(0.0, moveValue / 2.0);
-
-                changeHeightOfUiElements(moveY.Y);
-                changeMarginBottomOfUiElements(moveValue);
-
-                setGridTransformsOfEllipses(moveY, null, moveY2, moveY2, 
-                                            moveY, null, moveY, null);
-                if (changeTbValues)
-                {
-                    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = ellEllipseToDraw.Height;
-                    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = ellEllipseToDraw.Width;
-                }
-                resetAppBarButtonEllipseSelectionControl(true);
-                setIsModifiedRectangleMovement = true;
-            }
-
-            PocketPaintApplication.GetInstance().BarRecEllShape.updateSldStrokeThickness(Convert.ToInt32(ellEllipseToDraw.Height), Convert.ToInt32(ellEllipseToDraw.Width));
-        }
-
-        public void changeWidthOfDrawingSelection(double newWidth, bool changeTbValues)
-        {
-            double moveValue = newWidth - ellEllipseToDraw.Width;
-
-            if ((rectEllipseForMovement.Width + moveValue) >= MIN_ELLIPSE_MOVE_WIDTH)
-            {
-                var moveX = createTranslateTransform(moveValue, 0.0);
-                var moveX2 = createTranslateTransform(moveValue / 2.0, 0.0);
-
-                changeWidthOfUiElements(moveX.X);
-                changeMarginRightOfUiElements(moveValue);
-
-                setGridTransformsOfEllipses(moveX2, moveX2, moveX, null, 
-                                            null, null, moveX, moveX);
-                if (changeTbValues)
-                {
-                    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = ellEllipseToDraw.Height;
-                    PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = ellEllipseToDraw.Width;
-                }
-                resetAppBarButtonEllipseSelectionControl(true);
-                setIsModifiedRectangleMovement = true;
-            }
-
-            PocketPaintApplication.GetInstance().BarRecEllShape.updateSldStrokeThickness(Convert.ToInt32(ellEllipseToDraw.Height), Convert.ToInt32(ellEllipseToDraw.Width));
-        }
-
-        private void rectEllipseForMovement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        {
-            double coordinateX = 0.0;
-            double coordianteY = 0.0;
-            double halfScreenHeight = Window.Current.Bounds.Height / 2.0;
-            double halfScreenWidth = Window.Current.Bounds.Width / 2.0;
-            double offsetX = _transformGridMain.Value.OffsetX;
-            double offsetY = _transformGridMain.Value.OffsetY;
-            double valueBottom = ellEllipseToDraw.Margin.Bottom;
-            double valueLeft = ellEllipseToDraw.Margin.Left;
-            double valueRight = ellEllipseToDraw.Margin.Right;
-            double valueTop = ellEllipseToDraw.Margin.Top;
-
-            var ellipse = ellEllipseToDraw;
-            var rectangle = rectEllipseForMovement;
-
-            coordinateX = offsetX + halfScreenWidth + (valueLeft - valueRight) / 2.0;
-            coordianteY = offsetY + halfScreenHeight - PocketPaintApplication.GetInstance().BarStandard.Height + (valueTop - valueBottom) / 2.0;
-            PocketPaintApplication.GetInstance().ToolCurrent.Draw(new Point(coordinateX, coordianteY));
-        }
-        public PenLineJoin strokeLineJoinOfEllipseToDraw
+        public PenLineJoin strokeLineJoinOfRectangleToDraw
         {
             get
             {
@@ -489,25 +343,203 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        public void resetAppBarButtonEllipseSelectionControl(bool activated)
+        public Ellipse ellipseToDraw
+        {
+            get
+            {
+                return ellEllipseToDraw;
+            }
+            set
+            {
+                ellEllipseToDraw = value;
+            }
+        }
+
+        public bool isModifiedEllipseMovement
+        {
+            get
+            {
+                return _isModifiedEllipseMovement;
+            }
+            set
+            {
+                _isModifiedEllipseMovement = value;
+            }
+        }
+
+        public void resetAppBarButtonEllipseSelectionControl(bool isActivated)
         {
             AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
             if (appBarButtonReset != null)
             {
-                appBarButtonReset.IsEnabled = activated;
+                appBarButtonReset.IsEnabled = isActivated;
             }
         }
 
-        public bool setIsModifiedRectangleMovement
+        public Point getCenterCoordinateOfGridMain()
+        {
+            double halfScreenHeight = ((Window.Current.Bounds.Height - PocketPaintApplication.GetInstance().AppbarTop.Height
+                                                                     - PocketPaintApplication.GetInstance().BarStandard.Height) / 2.0);
+            double halfScreenWidth = Window.Current.Bounds.Width / 2.0;
+
+            TranslateTransform lastTranslateTransform = getLastTranslateTransformation();
+            RotateTransform lastRotateTransform = getLastRotateTransformation();
+
+            double offsetX;
+            double offsetY;
+            if (lastTranslateTransform != null && lastRotateTransform == null)
+            {
+                offsetX = lastTranslateTransform.X;
+                offsetY = lastTranslateTransform.Y;
+            }
+            else if (lastTranslateTransform == null && lastRotateTransform != null)
+            {
+                offsetX = 0.0;
+                offsetY = 0.0;
+            }
+            else if (lastTranslateTransform != null && lastRotateTransform != null)
+            {
+                offsetX = lastTranslateTransform.X;
+                offsetY = lastTranslateTransform.Y;
+            }
+            else
+            {
+                offsetX = 0.0;
+                offsetY = 0.0;
+            }
+
+            double marginOffsetX = GridMain.Margin.Left - GridMain.Margin.Right;
+            double marginOffsetY = GridMain.Margin.Top - GridMain.Margin.Bottom;
+
+            double coordinateX = offsetX + halfScreenWidth + (marginOffsetX / 2.0);
+            double coordinateY = offsetY + halfScreenHeight + (marginOffsetY / 2.0);
+
+            return new Point(coordinateX, coordinateY);
+        }
+
+        public Grid gridMain
         {
             get
             {
-                return _isModifiedRectangleMovement;
+                return GridMain;
             }
             set
             {
-                _isModifiedRectangleMovement = value;
+                GridMain = value;
             }
+        }
+
+        private void rectEllipseForMovement_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            TranslateTransform translateTransform = new TranslateTransform();
+
+            TranslateTransform lastTranslateTransform = getLastTranslateTransformation();
+            RotateTransform lastRotateTransform = getLastRotateTransformation();
+
+            if (lastTranslateTransform != null && lastRotateTransform == null)
+            {
+                translateTransform.X = e.Delta.Translation.X + lastTranslateTransform.X;
+                translateTransform.Y = e.Delta.Translation.Y + lastTranslateTransform.Y;
+            }
+            else if (lastTranslateTransform == null && lastRotateTransform != null)
+            {
+                translateTransform.X = e.Delta.Translation.X;
+                translateTransform.Y = e.Delta.Translation.Y;
+            }
+            else if (lastTranslateTransform != null && lastRotateTransform != null)
+            {
+                translateTransform.X = e.Delta.Translation.X + lastTranslateTransform.X;
+                translateTransform.Y = e.Delta.Translation.Y + lastTranslateTransform.Y;
+            }
+            else
+            {
+                translateTransform.X = e.Delta.Translation.X;
+                translateTransform.Y = e.Delta.Translation.Y;
+            }
+            addTransformation(translateTransform);
+        }
+
+        private void rectEllipseForMovement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            Point centerCoordinate = getCenterCoordinateOfGridMain();
+
+            PocketPaintApplication.GetInstance().ToolCurrent.Draw(centerCoordinate);
+        }
+
+        public TranslateTransform getLastTranslateTransformation()
+        {
+            for (int i = 0; i < _transformGridMain.Children.Count; i++)
+            {
+                if (_transformGridMain.Children[i].GetType() == typeof(TranslateTransform))
+                {
+                    TranslateTransform translateTransform = new TranslateTransform();
+                    translateTransform.X = ((TranslateTransform)_transformGridMain.Children[i]).X;
+                    translateTransform.Y = ((TranslateTransform)_transformGridMain.Children[i]).Y;
+
+                    return translateTransform;
+                }
+            }
+
+            return null;
+        }
+
+        public RotateTransform getLastRotateTransformation()
+        {
+            for (int i = 0; i < _transformGridMain.Children.Count; i++)
+            {
+                if (_transformGridMain.Children[i].GetType() == typeof(RotateTransform))
+                {
+                    RotateTransform rotateTransform = new RotateTransform();
+                    rotateTransform.CenterX = ((RotateTransform)_transformGridMain.Children[i]).CenterX;
+                    rotateTransform.CenterY = ((RotateTransform)_transformGridMain.Children[i]).CenterY;
+                    rotateTransform.Angle = ((RotateTransform)_transformGridMain.Children[i]).Angle;
+
+                    return rotateTransform;
+                }
+            }
+
+            return null;
+        }
+
+        public void addTransformation(Transform currentTransform)
+        {
+            for (int i = 0; i < _transformGridMain.Children.Count; i++)
+            {
+                if (_transformGridMain.Children[i].GetType() == currentTransform.GetType())
+                {
+                    _transformGridMain.Children.RemoveAt(i);
+                }
+            }
+
+            _transformGridMain.Children.Add(currentTransform);
+
+            resetAppBarButtonEllipseSelectionControl(true);
+            isModifiedEllipseMovement = true;
+        }
+
+        public void resetEllipseSelectionControl()
+        {
+            PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.lastPoint = new Point(0.0, 0.0);
+
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = _ellipseToDrawSize;
+            PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = _ellipseToDrawSize;
+
+            _transformGridMain.Children.Clear();
+            GridMain.Margin = new Thickness(0.0, 0.0, 0.0, 0.0);
+
+            GridMain.Width = _gridMainSize;
+            GridMain.Height = _gridMainSize;
+
+            ellEllipseToDraw.Width = _ellipseToDrawSize;
+            ellEllipseToDraw.Height = _ellipseToDrawSize;
+            rectEllipseForMovement.Width = _rectangleForMovementSize;
+            rectEllipseForMovement.Height = _rectangleForMovementSize;
+
+            fillOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            strokeOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+            strokeThicknessOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
+            // strokeLineJoinOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected;
+            isModifiedEllipseMovement = false;
         }
     }
 }

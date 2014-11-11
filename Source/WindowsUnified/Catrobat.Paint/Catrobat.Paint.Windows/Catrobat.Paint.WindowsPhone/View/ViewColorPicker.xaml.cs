@@ -177,7 +177,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 }
                 else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                 {
-                    PocketPaintApplication.GetInstance().EllipseSelectionControl.changeStrokeOfDrawingShape(current_color);
+                    // PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeOfRectangleToDraw(current_color);
                 }
                 else 
                 {
@@ -194,7 +194,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 }
                 else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                 {
-                    PocketPaintApplication.GetInstance().EllipseSelectionControl.changeColorOfDrawingShape(current_color);
+                    PocketPaintApplication.GetInstance().EllipseSelectionControl.fillOfEllipseToDraw = current_solid_brush;
                 }
                 else 
                 {

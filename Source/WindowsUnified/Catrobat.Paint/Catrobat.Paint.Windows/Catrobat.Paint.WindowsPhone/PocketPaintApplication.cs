@@ -66,11 +66,10 @@ namespace Catrobat.Paint.Phone
 
         public Page pgPainting { get; set; }
 
+        public EllipseSelectionControl EllipseSelectionControl { get; set; }
         public RectangleSelectionControl RectangleSelectionControl { get; set; }
 
         public CropControl CropControl { get; set; }
-
-        public EllipseSelectionControl EllipseSelectionControl { get; set; }
 
         public ImportImageSelectionControl ImportImageSelectionControl { get; set; }
 

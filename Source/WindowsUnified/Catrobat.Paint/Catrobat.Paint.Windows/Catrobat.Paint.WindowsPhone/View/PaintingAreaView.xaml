@@ -29,15 +29,13 @@
                     </userControls:CursorControl>
                 </Grid>
 
-                <!-- EllipseSelectionControl -->
-                <Grid x:Name="GridEllipseSelectionControl" Height="230" Visibility="Collapsed" Width="230">
-                    <userControls:EllipseSelectionControl></userControls:EllipseSelectionControl>
-                </Grid>
-
                 <!-- ImageSelectionControl -->
                 <Grid x:Name="GridImportImageSelectionControl" Height="230" Visibility="Collapsed" Width="230">
                     <userControls:ImportImageSelectionControl></userControls:ImportImageSelectionControl>
                 </Grid>
+
+                <!-- EllipseSelectionControl -->
+                <userControls:EllipseSelectionControl x:Name="ucEllipseSelectionControl" Visibility="Collapsed"></userControls:EllipseSelectionControl>
 
                 <!-- RectangleSelectioncontrol -->
                 <userControls:RectangleSelectionControl x:Name="ucRectangleSelectionControl" Visibility="Collapsed"></userControls:RectangleSelectionControl>
