@@ -26,19 +26,19 @@
 
         <Ellipse x:Name="ellLeftCenter" Fill="LightSkyBlue" Height="25" 
                  HorizontalAlignment="Left" 
-                 ManipulationDelta="changeSize_ManipulationDelta" 
+                 ManipulationDelta="ellLeftCenter_ManipulationDelta" 
                  ManipulationMode="TranslateX, TranslateY" 
                  VerticalAlignment="Center" Width="25" />
 
         <Ellipse x:Name="ellLeftBottom" Fill="LightSkyBlue" Height="25" 
                  HorizontalAlignment="Left" 
-                 ManipulationDelta="changeSize_ManipulationDelta"
+                 ManipulationDelta="ellLeftBottom_ManipulationDelta"
                  ManipulationMode="TranslateX, TranslateY" 
                  VerticalAlignment="Bottom" Width="25" />
 
         <Ellipse x:Name="ellLeftTop" Fill="red" Height="25" 
                  HorizontalAlignment="Left"
-                 ManipulationDelta="changeSize_ManipulationDelta" 
+                 ManipulationDelta="ellLeftTop_ManipulationDelta" 
                  ManipulationMode="TranslateX, TranslateY" 
                  VerticalAlignment="Top" Width="25" />
             
@@ -50,20 +50,20 @@
 
         <Ellipse x:Name="ellRightBottom" Fill="Blue" Height="25" 
                  HorizontalAlignment="Right" 
-                 ManipulationDelta="changeSize_ManipulationDelta"
+                 ManipulationDelta="ellRightBottom_ManipulationDelta"
                  ManipulationMode="TranslateX, TranslateY" 
                  VerticalAlignment="Bottom" Width="25" />
         
         <Ellipse x:Name="ellRightTop" Fill="LightSkyBlue" Height="25" 
                  HorizontalAlignment="Right"
-                 ManipulationDelta="changeSize_ManipulationDelta"
+                 ManipulationDelta="ellRightTop_ManipulationDelta"
                  ManipulationMode="TranslateX, TranslateY"
                  VerticalAlignment="Top" Width="25">
         </Ellipse>
         
         <Ellipse x:Name="ellCenterTop" Fill="LightSkyBlue" Height="25" 
                  HorizontalAlignment="Center"
-                 ManipulationDelta="changeSize_ManipulationDelta"
+                 ManipulationDelta="ellCenterTop_ManipulationDelta"
                  ManipulationMode="TranslateX, TranslateY"
                  VerticalAlignment="Top" Width="25" />
     </Grid>
