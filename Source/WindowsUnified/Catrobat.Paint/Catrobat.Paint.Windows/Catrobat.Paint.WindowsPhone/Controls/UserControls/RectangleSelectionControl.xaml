@@ -44,7 +44,7 @@
             
         <Ellipse x:Name="ellRightCenter" Fill="LightSkyBlue" Height="25" 
                  HorizontalAlignment="Right" 
-                 ManipulationDelta="changeSize_ManipulationDelta" 
+                 ManipulationDelta="ellRightCenter_ManipulationDelta" 
                  ManipulationMode="TranslateX" 
                  VerticalAlignment="Center" Width="25" />
 
