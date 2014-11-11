@@ -47,14 +47,14 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             //PlayerAppBar
         }
 
-        //protected async override void OnNavigatedTo(NavigationEventArgs e)
-        //{
-            //_viewModel.ShowMessagesCommand.Execute(null);
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (_viewModel.IsLaunchFromTile)
+                while (ServiceLocator.NavigationService.CanGoBack)
+                    ServiceLocator.NavigationService.RemoveBackEntry(); ;
 
-            //Windows.ApplicationModel.Activation.LaunchActivatedEventArgs
-        //    //await ShowSplashScreen();
-        //    base.OnNavigatedTo(e);
-        //}
+            base.OnNavigatedTo(e);
+        }
 
         private async void SetSourceOfThumbnail()
         {
@@ -96,7 +96,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
 
                 //playerSplashImage.DecodePixelHeight = (int)Window.Current.Bounds.Height;
                 //playerSplashImage.DecodePixelWidth = (int)Window.Current.Bounds.Width;
-
+                
                 await playerSplashImage.SetSourceAsync(randomAccessStream);
                 ImagePlayerLoadSplashScreen.Source = playerSplashImage;
             }

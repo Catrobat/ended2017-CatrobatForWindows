@@ -28,20 +28,20 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             var options = new Windows.System.LauncherOptions { DisplayApplicationPicker = false };
 
-            //await ShowSplashScreen(ApplicationExecutionState.Running);
+            //await project.Save(); ??? TODO: this was in the previous version of catrobat --> do we need to save the project at this point?
             await LaunchPlayer(project.Name, isLaunchedFromTile);
             // TODO: review ...LaunchFileAsync --> seems to be that it never finishes
-            bool success = await Windows.System.Launcher.LaunchFileAsync(file, options);
-            if (success)
-            {
-                // File launch success
-            }
-            else
-            {
-                // File launch failed
-            }
+            //bool success = await Windows.System.Launcher.LaunchFileAsync(file, options);
+            //if (success)
+            //{
+            //    // File launch success
+            //}
+            //else
+            //{
+            //    // File launch failed
+            //}
 
-           
+            bool test;
         }
 
         public async Task LaunchPlayer(string projectName, bool isLaunchedFromTile)

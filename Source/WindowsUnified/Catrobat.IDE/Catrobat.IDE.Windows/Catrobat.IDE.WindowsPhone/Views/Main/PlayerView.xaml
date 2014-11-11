@@ -14,7 +14,7 @@
   <SwapChainPanel x:Name="swapChainPanel">
     <!-- Loading Project -->
 
-    <Image Source="ms-appx:///Assets/SplashScreen.png" x:Name="ImagePlayerLoadSplashScreen" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill"/>
+    <Image Source="ms-appx:///Assets/SplashScreen.png" x:Name="ImagePlayerLoadSplashScreen" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" Opacity="0.5"/>
 
     <Grid Grid.Row="0">
       <Grid.RowDefinitions>
