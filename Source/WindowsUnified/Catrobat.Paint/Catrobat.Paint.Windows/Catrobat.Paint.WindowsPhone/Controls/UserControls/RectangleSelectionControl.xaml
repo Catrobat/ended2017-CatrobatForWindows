@@ -20,14 +20,14 @@
 
         <Ellipse x:Name="ellCenterBottom" Fill="LightSkyBlue" Height="25" 
                  HorizontalAlignment="Center" 
-                 ManipulationDelta="changeSize_ManipulationDelta" 
-                 ManipulationMode="TranslateY" 
+                 ManipulationDelta="ellCenterBottom_ManipulationDelta" 
+                 ManipulationMode="TranslateX, TranslateY" 
                  VerticalAlignment="Bottom" Width="25" />
 
         <Ellipse x:Name="ellLeftCenter" Fill="LightSkyBlue" Height="25" 
                  HorizontalAlignment="Left" 
                  ManipulationDelta="changeSize_ManipulationDelta" 
-                 ManipulationMode="TranslateX" 
+                 ManipulationMode="TranslateX, TranslateY" 
                  VerticalAlignment="Center" Width="25" />
 
         <Ellipse x:Name="ellLeftBottom" Fill="LightSkyBlue" Height="25" 
@@ -45,7 +45,7 @@
         <Ellipse x:Name="ellRightCenter" Fill="LightSkyBlue" Height="25" 
                  HorizontalAlignment="Right" 
                  ManipulationDelta="ellRightCenter_ManipulationDelta" 
-                 ManipulationMode="TranslateX" 
+                 ManipulationMode="TranslateX, TranslateY" 
                  VerticalAlignment="Center" Width="25" />
 
         <Ellipse x:Name="ellRightBottom" Fill="Blue" Height="25" 
