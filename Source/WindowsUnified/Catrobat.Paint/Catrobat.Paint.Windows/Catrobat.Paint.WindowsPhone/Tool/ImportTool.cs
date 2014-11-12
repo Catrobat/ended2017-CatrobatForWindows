@@ -45,12 +45,19 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleMove(object arg)
         {
-            // TODO:
-            //RotateTransform rotateTransform = new RotateTransform();
-            //rotateTransform = (RotateTransform)arg;
+            RotateTransform rotateTransform = new RotateTransform();
+            rotateTransform = (RotateTransform)arg;
+
+            RotateTransform lastRotateTransform = getLastRotateTransformation();
             //_transforms.Children.Add(rotateTransform);
 
-            // _transforms = ((RotateTransform)arg);
+            if (lastRotateTransform != null)
+            {
+                rotateTransform.Angle += lastRotateTransform.Angle;
+            }
+            addTransformation(rotateTransform);
+
+            //_transforms = ((RotateTransform)arg);
 
         }
 
@@ -98,6 +105,36 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = 160.0;
             PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = 160.0;
             PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement = false;
+        }
+
+        public RotateTransform getLastRotateTransformation()
+        {
+            for (int i = 0; i < _transforms.Children.Count; i++)
+            {
+                if (_transforms.Children[i].GetType() == typeof(RotateTransform))
+                {
+                    RotateTransform rotateTransform = new RotateTransform();
+                    rotateTransform.CenterX = ((RotateTransform)_transforms.Children[i]).CenterX;
+                    rotateTransform.CenterY = ((RotateTransform)_transforms.Children[i]).CenterY;
+                    rotateTransform.Angle = ((RotateTransform)_transforms.Children[i]).Angle;
+
+                    return rotateTransform;
+                }
+            }
+
+            return null;
+        }
+
+        public void addTransformation(Transform currentTransform)
+        {
+            for (int i = 0; i < _transforms.Children.Count; i++)
+            {
+                if (_transforms.Children[i].GetType() == currentTransform.GetType())
+                {
+                    _transforms.Children.RemoveAt(i);
+                }
+            }
+            _transforms.Children.Add(currentTransform);
         }
     }
 }

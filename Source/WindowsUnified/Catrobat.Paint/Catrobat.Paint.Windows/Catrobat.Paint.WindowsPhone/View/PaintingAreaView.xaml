@@ -30,7 +30,7 @@
                 </Grid>
 
                 <!-- ImageSelectionControl -->
-                <Grid x:Name="GridImportImageSelectionControl" Height="230" Visibility="Collapsed" Width="230">
+                <Grid x:Name="GridImportImageSelectionControl" Background="Beige" Height="230" Visibility="Collapsed" Width="230">
                     <userControls:ImportImageSelectionControl></userControls:ImportImageSelectionControl>
                 </Grid>
 
