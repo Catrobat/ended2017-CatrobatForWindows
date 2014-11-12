@@ -60,16 +60,97 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = width;
         }
 
-        private void ellCenterBottom_ManipulationDelta_1(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void ellCenterBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            double deltaTranslationY = Math.Round(e.Delta.Translation.Y);
+            double addToHeight = 0.0;
+            Point deltaTranslation = e.Delta.Translation;
+            RotateTransform lastRotateTransform = getLastRotateTransformation();
 
-            if ((GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
+            if (lastRotateTransform == null)
             {
-                var moveY = createTranslateTransform(0.0, deltaTranslationY);
+                addToHeight = e.Delta.Translation.Y;
+            }
+            else if ((0.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 90.0) ||
+                     (-360.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -270.0))
+            { 
+                if (deltaTranslation.X < 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X >= 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToHeight = 0.0;
+                }
+            }
+            else if (lastRotateTransform.Angle == 90.0 || lastRotateTransform.Angle == -270.0)
+            {
+                addToHeight = (e.Delta.Translation.X * -1.0);
+            }
+            else if ((90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 180.0) ||
+                     (-270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -180.0))
+            {
+                if (deltaTranslation.X < 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X >= 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToHeight = 0.0;
+                }
+            }
+            else if (lastRotateTransform.Angle == 180.0 || lastRotateTransform.Angle == -180.0)
+            {
+                addToHeight = (e.Delta.Translation.Y * -1.0);
+            }
+            else if ((180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 270.0) ||
+                     (-180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -90.0))
+            {
+                if (deltaTranslation.X >= 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X < 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToHeight = 0.0;
+                }
+            }
+            else if (lastRotateTransform.Angle == 270.0 || lastRotateTransform.Angle == -90.0)
+            {
+                addToHeight = (e.Delta.Translation.X);
+            }
+            else if ((270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 360.0) ||
+                     (-90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 0.0))
+            {
+                if (deltaTranslation.X >= 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X < 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToHeight = 0.0;
+                }
+            }
 
-                changeHeightOfUiElements(moveY.Y);
-                changeMarginBottomGridMain(moveY.Y);
+            if ((GridMain.Height + addToHeight) >= _minGridMainHeight)
+            {
+                changeHeightOfUiElements(addToHeight);
+                changeMarginBottomGridMain(addToHeight);
 
                 setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
@@ -77,14 +158,95 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void ellCenterTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            double deltaTranslationY = Math.Round(e.Delta.Translation.Y * -1.0);
+            double addToHeight = 0.0;
+            Point deltaTranslation = e.Delta.Translation;
+            RotateTransform lastRotateTransform = getLastRotateTransformation();
 
-            if ((GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
+            if (lastRotateTransform == null)
             {
-                var moveY = createTranslateTransform(0.0, deltaTranslationY);
+                addToHeight = (e.Delta.Translation.Y * -1.0);
+            }
+            else if ((0.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 90.0) ||
+                     (-360.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -270.0))
+            {
+                if (deltaTranslation.X >= 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X < 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToHeight = 0.0;
+                }
+            }
+            else if (lastRotateTransform.Angle == 90.0 || lastRotateTransform.Angle == -270.0)
+            {
+                addToHeight = (e.Delta.Translation.X);
+            }
+            else if ((90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 180.0) ||
+                     (-270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -180.0))
+            {
+                if (deltaTranslation.X >= 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X < 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToHeight = 0.0;
+                }
+            }
+            else if (lastRotateTransform.Angle == 180.0 || lastRotateTransform.Angle == -180.0)
+            {
+                addToHeight = e.Delta.Translation.Y;
+            }
+            else if ((180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 270.0) ||
+                     (-180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -90.0))
+            {
+                if (deltaTranslation.X < 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X >= 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToHeight = 0.0;
+                }
+            }
+            else if (lastRotateTransform.Angle == 270.0 || lastRotateTransform.Angle == -90.0)
+            {
+                addToHeight = (e.Delta.Translation.X * -1.0);
+            }
+            else if ((270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 360.0) ||
+                     (-90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 0.0))
+            {
+                if (deltaTranslation.X < 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X >= 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToHeight = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToHeight = 0.0;
+                }
+            }
 
-                changeHeightOfUiElements(moveY.Y);
-                changeMarginTopGridMain(moveY.Y);
+            if ((GridMain.Height + addToHeight) >= _minGridMainHeight)
+            {
+                changeHeightOfUiElements(addToHeight);
+                changeMarginTopGridMain(addToHeight);
 
                 setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
@@ -92,14 +254,95 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void ellLeftCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            double deltaTranslationX = Math.Round(e.Delta.Translation.X * -1.0);
+            double addToWidth = 0.0;
+            Point deltaTranslation = e.Delta.Translation;
+            RotateTransform lastRotateTransform = getLastRotateTransformation();
 
-            if ((GridMain.Width + deltaTranslationX) >= _minGridMainHeight)
+            if (lastRotateTransform == null)
             {
-                var moveX = createTranslateTransform(deltaTranslationX, 0.0);
+                addToWidth = (e.Delta.Translation.X * -1.0);
+            }
+            else if ((0.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 90.0) ||
+                     (-360.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -270.0))
+            {
+                if (deltaTranslation.X < 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X >= 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToWidth = 0.0;
+                }
+            }
+            else if (lastRotateTransform.Angle == 90.0 || lastRotateTransform.Angle == -270.0)
+            {
+                addToWidth = (e.Delta.Translation.Y * -1.0);
+            }
+            else if ((90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 180.0) ||
+                     (-270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -180.0))
+            {
+                if (deltaTranslation.X >= 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X < 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToWidth = 0.0;
+                }
+            }
+            else if (lastRotateTransform.Angle == 180.0 || lastRotateTransform.Angle == -180.0)
+            {
+                addToWidth = (e.Delta.Translation.X);
+            }
+            else if ((180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 270.0) ||
+                     (-180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -90.0))
+            {
+                if (deltaTranslation.X >= 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X < 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToWidth = 0.0;
+                }
+            }
+            else if (lastRotateTransform.Angle == 270.0 || lastRotateTransform.Angle == -90.0)
+            {
+                addToWidth = e.Delta.Translation.Y;
+            }
+            else if ((270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 360.0) ||
+                     (-90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 0.0))
+            {  
+                if (deltaTranslation.X < 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X >= 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToWidth = 0.0;
+                }
+            }
 
-                changeWidthOfUiElements(moveX.X);
-                changeMarginLeftGridMain(moveX.X);
+            if ((GridMain.Width + addToWidth) >= _minGridMainHeight)
+            {
+                changeWidthOfUiElements(addToWidth);
+                changeMarginLeftGridMain(addToWidth);
 
                 setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
@@ -107,14 +350,95 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void ellRightCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            double deltaTranslationX = Math.Round(e.Delta.Translation.X);
+            double addToWidth = 0.0;
+            Point deltaTranslation = e.Delta.Translation;
+            RotateTransform lastRotateTransform = getLastRotateTransformation();
 
-            if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth)
+            if (lastRotateTransform == null)
             {
-                var moveX = createTranslateTransform(deltaTranslationX, 0.0);
+                addToWidth = e.Delta.Translation.X;
+            }
+            else if ((0.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 90.0) ||
+                     (-360.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -270.0))
+            {
+                if (deltaTranslation.X >= 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X < 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToWidth = 0.0;
+                }
+            }
+            else if (lastRotateTransform.Angle == 90.0 || lastRotateTransform.Angle == -270.0)
+            {
+                addToWidth = e.Delta.Translation.Y;
+            }
+            else if ((90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 180.0) ||
+                     (-270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -180.0))
+            {    
+                if (deltaTranslation.X < 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X >= 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToWidth = 0.0;
+                }
+            }
+            else if (lastRotateTransform.Angle == 180.0 || lastRotateTransform.Angle == -180.0)
+            {
+                addToWidth = (e.Delta.Translation.X * -1.0);
+            }
+            else if ((180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 270.0) ||
+                     (-180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -90.0))
+            {
+                if (deltaTranslation.X < 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X >= 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToWidth = 0.0;
+                }
+            }
+            else if (lastRotateTransform.Angle == 270.0 || lastRotateTransform.Angle == -90.0)
+            {
+                addToWidth = (e.Delta.Translation.Y * -1.0);
+            }
+            else if ((270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 360.0) ||
+                     (-90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 0.0))
+            {
+                if (deltaTranslation.X >= 0.0 && deltaTranslation.Y < 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y);
+                }
+                else if (deltaTranslation.X < 0.0 && deltaTranslation.Y >= 0.0)
+                {
+                    addToWidth = Math.Sqrt(deltaTranslation.X * deltaTranslation.X + deltaTranslation.Y * deltaTranslation.Y) * -1.0;
+                }
+                else
+                {
+                    addToWidth = 0.0;
+                }
+            }
 
-                changeWidthOfUiElements(moveX.X);
-                changeMarginRightGridMain(moveX.X);
+            if ((GridMain.Width + addToWidth) >= _minGridMainWidth)
+            {
+                changeWidthOfUiElements(addToWidth);
+                changeMarginRightGridMain(addToWidth);
 
                 setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
@@ -122,20 +446,60 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void ellLeftBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            double deltaTranslationX = Math.Round(e.Delta.Translation.X * -1.0);
-            double deltaTranslationY = Math.Round(e.Delta.Translation.Y);
+            double addToWidth = 0.0;
+            double addToHeight = 0.0;
+            Point deltaTranslation = e.Delta.Translation;
+            RotateTransform lastRotateTransform = getLastRotateTransformation();
 
-            if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth &&
-                (GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
+            if (lastRotateTransform == null)
             {
-                var moveX = createTranslateTransform(deltaTranslationX, 0.0);
-                var moveY = createTranslateTransform(0.0, deltaTranslationY);
+                addToWidth = (deltaTranslation.X * -1.0);
+                addToHeight = deltaTranslation.Y;
+            }
+            else if ((0.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 90.0) ||
+                     (-360.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -270.0))
+            {
+                // TODO
+            }
+            else if (lastRotateTransform.Angle == 90.0 || lastRotateTransform.Angle == -270.0)
+            {
+                addToWidth = (deltaTranslation.X * -1.0);
+                addToHeight = (deltaTranslation.Y * -1.0);
+            }
+            else if ((90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 180.0) ||
+                     (-270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -180.0))
+            {
+                // TODO
+            }
+            else if (lastRotateTransform.Angle == 180.0 || lastRotateTransform.Angle == -180.0)
+            {
+                addToWidth = deltaTranslation.X;
+                addToHeight = (deltaTranslation.Y * -1.0);
+            }
+            else if ((180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 270.0) ||
+                     (-180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -90.0))
+            {
+                // TODO
+            }
+            else if (lastRotateTransform.Angle == 270.0 || lastRotateTransform.Angle == -90.0)
+            {
+                addToWidth = deltaTranslation.X;
+                addToHeight = deltaTranslation.Y;
+            }
+            else if ((270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 360.0) ||
+                     (-90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 0.0))
+            {
+                // TODO
+            }
 
-                changeWidthOfUiElements(moveX.X);
-                changeHeightOfUiElements(moveY.Y);
+            if ((GridMain.Width + addToWidth) >= _minGridMainWidth &&
+                (GridMain.Height + addToHeight) >= _minGridMainHeight)
+            {
+                changeWidthOfUiElements(addToWidth);
+                changeHeightOfUiElements(addToHeight);
 
-                changeMarginLeftGridMain(moveX.X);
-                changeMarginBottomGridMain(moveY.Y);
+                changeMarginLeftGridMain(addToWidth);
+                changeMarginBottomGridMain(addToHeight);
 
                 setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
@@ -143,20 +507,60 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void ellRightBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            double deltaTranslationX = Math.Round(e.Delta.Translation.X);
-            double deltaTranslationY = Math.Round(e.Delta.Translation.Y);
+            double addToWidth = 0.0;
+            double addToHeight = 0.0;
+            Point deltaTranslation = e.Delta.Translation;
+            RotateTransform lastRotateTransform = getLastRotateTransformation();
 
-            if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth &&
-                (GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
+            if (lastRotateTransform == null)
             {
-                var moveX = createTranslateTransform(deltaTranslationX, 0.0);
-                var moveY = createTranslateTransform(0.0, deltaTranslationY);
+                addToWidth = deltaTranslation.X;
+                addToHeight = deltaTranslation.Y;
+            }
+            else if ((0.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 90.0) ||
+                     (-360.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -270.0))
+            {
+                // TODO
+            }
+            else if (lastRotateTransform.Angle == 90.0 || lastRotateTransform.Angle == -270.0)
+            {
+                addToWidth = (deltaTranslation.X * -1.0);
+                addToHeight = deltaTranslation.Y;
+            }
+            else if ((90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 180.0) ||
+                     (-270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -180.0))
+            {
+                // TODO
+            }
+            else if (lastRotateTransform.Angle == 180.0 || lastRotateTransform.Angle == -180.0)
+            {
+                addToWidth = (deltaTranslation.X * -1.0);
+                addToHeight = (deltaTranslation.Y * -1.0);
+            }
+            else if ((180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 270.0) ||
+                     (-180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -90.0))
+            {
+                // TODO
+            }
+            else if (lastRotateTransform.Angle == 270.0 || lastRotateTransform.Angle == -90.0)
+            {
+                addToWidth = deltaTranslation.X;
+                addToHeight = (deltaTranslation.Y * -1.0);
+            }
+            else if ((270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 360.0) ||
+                     (-90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 0.0))
+            {
+                // TODO
+            }
 
-                changeWidthOfUiElements(moveX.X);
-                changeHeightOfUiElements(moveY.Y);
+            if ((GridMain.Width + addToWidth) >= _minGridMainWidth &&
+                (GridMain.Height + addToHeight) >= _minGridMainHeight)
+            {
+                changeWidthOfUiElements(addToWidth);
+                changeHeightOfUiElements(addToHeight);
 
-                changeMarginRightGridMain(moveX.X);
-                changeMarginBottomGridMain(moveY.Y);
+                changeMarginRightGridMain(addToWidth);
+                changeMarginBottomGridMain(addToHeight);
 
                 setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
@@ -164,20 +568,60 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void ellLeftTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            double deltaTranslationX = Math.Round(e.Delta.Translation.X * -1.0);
-            double deltaTranslationY = Math.Round(e.Delta.Translation.Y * -1.0);
+            double addToWidth = 0.0;
+            double addToHeight = 0.0;
+            Point deltaTranslation = e.Delta.Translation;
+            RotateTransform lastRotateTransform = getLastRotateTransformation();
 
-            if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth &&
-                (GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
+            if (lastRotateTransform == null)
             {
-                var moveX = createTranslateTransform(deltaTranslationX, 0.0);
-                var moveY = createTranslateTransform(0.0, deltaTranslationY);
+                addToWidth = (deltaTranslation.X * -1.0);
+                addToHeight = (deltaTranslation.Y * -1.0);
+            }
+            else if ((0.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 90.0) ||
+                     (-360.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -270.0))
+            {
+                // TODO
+            }
+            else if (lastRotateTransform.Angle == 90.0 || lastRotateTransform.Angle == -270.0)
+            {
+                addToWidth = deltaTranslation.X;
+                addToHeight = (deltaTranslation.Y * -1.0);
+            }
+            else if ((90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 180.0) ||
+                     (-270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -180.0))
+            {
+                // TODO
+            }
+            else if (lastRotateTransform.Angle == 180.0 || lastRotateTransform.Angle == -180.0)
+            {
+                addToWidth = deltaTranslation.X;
+                addToHeight = deltaTranslation.Y;
+            }
+            else if ((180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 270.0) ||
+                     (-180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -90.0))
+            {
+                // TODO
+            }
+            else if (lastRotateTransform.Angle == 270.0 || lastRotateTransform.Angle == -90.0)
+            {
+                addToWidth = (deltaTranslation.X * -1.0);
+                addToHeight = deltaTranslation.Y;
+            }
+            else if ((270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 360.0) ||
+                     (-90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 0.0))
+            {
+                // TODO
+            }
 
-                changeWidthOfUiElements(moveX.X);
-                changeHeightOfUiElements(moveY.Y);
-                
-                changeMarginLeftGridMain(moveX.X);
-                changeMarginTopGridMain(moveY.Y);
+            if ((GridMain.Width + addToWidth) >= _minGridMainWidth &&
+                (GridMain.Height + addToHeight) >= _minGridMainHeight)
+            {
+                changeWidthOfUiElements(addToWidth);
+                changeHeightOfUiElements(addToHeight);
+
+                changeMarginLeftGridMain(addToWidth);
+                changeMarginTopGridMain(addToHeight);
 
                 setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }
@@ -185,20 +629,60 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void ellRightTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            double deltaTranslationX = Math.Round(e.Delta.Translation.X);
-            double deltaTranslationY = Math.Round(e.Delta.Translation.Y * -1.0);
+            double addToWidth = 0.0;
+            double addToHeight = 0.0;
+            Point deltaTranslation = e.Delta.Translation;
+            RotateTransform lastRotateTransform = getLastRotateTransformation();
 
-            if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth &&
-                (GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
+            if (lastRotateTransform == null)
             {
-                var moveX = createTranslateTransform(deltaTranslationX, 0.0);
-                var moveY = createTranslateTransform(0.0, deltaTranslationY);
+                addToWidth = deltaTranslation.X;
+                addToHeight = (deltaTranslation.Y * -1.0);
+            }
+            else if ((0.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 90.0) ||
+                     (-360.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -270.0))
+            {
+                // TODO
+            }
+            else if (lastRotateTransform.Angle == 90.0 || lastRotateTransform.Angle == -270.0)
+            {
+                addToWidth = deltaTranslation.X;
+                addToHeight = deltaTranslation.Y;
+            }
+            else if ((90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 180.0) ||
+                     (-270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -180.0))
+            {
+                // TODO
+            }
+            else if (lastRotateTransform.Angle == 180.0 || lastRotateTransform.Angle == -180.0)
+            {
+                addToWidth = (deltaTranslation.X * -1.0);
+                addToHeight = deltaTranslation.Y;
+            }
+            else if ((180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 270.0) ||
+                     (-180.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < -90.0))
+            {
+                // TODO
+            }
+            else if (lastRotateTransform.Angle == 270.0 || lastRotateTransform.Angle == -90.0)
+            {
+                addToWidth = (deltaTranslation.X * -1.0);
+                addToHeight = (deltaTranslation.Y * -1.0);
+            }
+            else if ((270.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 360.0) ||
+                     (-90.0 < lastRotateTransform.Angle && lastRotateTransform.Angle < 0.0))
+            {
+                // TODO
+            }
 
-                changeWidthOfUiElements(moveX.X);
-                changeHeightOfUiElements(moveY.Y);
+            if ((GridMain.Width + addToWidth) >= _minGridMainWidth &&
+                (GridMain.Height + addToHeight) >= _minGridMainHeight)
+            {
+                changeWidthOfUiElements(addToWidth);
+                changeHeightOfUiElements(addToHeight);
 
-                changeMarginRightGridMain(moveX.X);
-                changeMarginTopGridMain(moveY.Y);
+                changeMarginRightGridMain(addToWidth);
+                changeMarginTopGridMain(addToHeight);
 
                 setSizeOfRecBar(rectRectangleToDraw.Height, rectRectangleToDraw.Width);
             }

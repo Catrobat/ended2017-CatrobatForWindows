@@ -592,6 +592,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             ScaleTransform scaletransform = new ScaleTransform();
             scaletransform.ScaleX = 0.9;
             scaletransform.ScaleY = 0.9;
+            PocketPaintApplication.GetInstance().isZoomButtonClicked = true;
             tool.HandleMove(scaletransform);
         }
 
@@ -602,6 +603,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             ScaleTransform scaletransform = new ScaleTransform();
             scaletransform.ScaleX = 1.1;
             scaletransform.ScaleY = 1.1;
+            PocketPaintApplication.GetInstance().isZoomButtonClicked = true;
             tool.HandleMove(scaletransform);
         }
 

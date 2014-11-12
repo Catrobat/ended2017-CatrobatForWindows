@@ -18,8 +18,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public MoveZoomTool()
         {
             ToolType = ToolType.Move;
-            ResetCanvas();
-            Grid grid = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid;
+
             if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform != null)
             {
                 _transforms = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
@@ -28,9 +27,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             {
                 PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
             }
-
-            DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height - 150.0) / 2.0;
-            DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
 
             DISPLAY_WIDTH_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0;
             DISPLAY_HEIGHT_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0;
@@ -49,38 +45,60 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             if (arg is ScaleTransform)
             {
-                var resize = (ScaleTransform)arg;
-                bool is_scale_allowed = false;
+                var toScaleValue = (ScaleTransform)arg;
+                bool isScaleAllowed = false;
 
-                if ((resize.ScaleX > 1.0) && (_transforms.Value.M11 < 28.0))
+                if ((toScaleValue.ScaleX > 1.0) && (_transforms.Value.M11 < 28.0))
                 {
-                    is_scale_allowed = true;
+                    isScaleAllowed = true;
                 }
-                else if ((resize.ScaleX < 1.0) && (_transforms.Value.M11 > 0.5))
+                else if ((toScaleValue.ScaleX < 1.0) && (_transforms.Value.M11 > 0.5))
                 {
-                    is_scale_allowed = true;
+                    isScaleAllowed = true;
                 }
 
-                if (is_scale_allowed)
+                if (isScaleAllowed)
                 {
                     var fixedaspection = 0.0;
-                    fixedaspection = resize.ScaleX > resize.ScaleY ? resize.ScaleX : resize.ScaleY;
+                    fixedaspection = toScaleValue.ScaleX > toScaleValue.ScaleY ? toScaleValue.ScaleX : toScaleValue.ScaleY;
 
-                    resize.ScaleX = Math.Round(0.0 + fixedaspection, 1);
-                    resize.ScaleY = Math.Round(0.0 + fixedaspection, 1);
-                    resize.CenterX = DISPLAY_WIDTH_HALF;
-                    resize.CenterY = DISPLAY_HEIGHT_HALF;
-                    _transforms.Children.Add(resize);
+                    toScaleValue.ScaleX = Math.Round(0.0 + fixedaspection, 1);
+                    toScaleValue.ScaleY = Math.Round(0.0 + fixedaspection, 1);
+                    toScaleValue.CenterX = DISPLAY_WIDTH_HALF;
+                    toScaleValue.CenterY = DISPLAY_HEIGHT_HALF;
 
-                    updateGridCursor(resize);
+                    ScaleTransform actualSaleValue = getLastScaleTransformation();
+                    if (actualSaleValue != null)
+                    {
+                        toScaleValue.ScaleX *= actualSaleValue.ScaleX;
+                        toScaleValue.ScaleY *= actualSaleValue.ScaleY;
+                        if (PocketPaintApplication.GetInstance().isZoomButtonClicked)
+                        {
+                            toScaleValue.CenterX = DISPLAY_WIDTH_HALF;
+                            toScaleValue.CenterY = DISPLAY_HEIGHT_HALF;
+                        }
+                        else
+                        {
+                            toScaleValue.CenterX += actualSaleValue.CenterX;
+                            toScaleValue.CenterY += actualSaleValue.CenterY;
+                        }
+                    }
+
+                    addTransformation(toScaleValue);
                 }
             }
             else if (arg is TranslateTransform)
             {
                 var move = (TranslateTransform)arg;
-                _transforms.Children.Add(move);
 
-                updateGridCursor(move);
+                TranslateTransform currentTranslate = getLastTranslateTransformation();
+                if (currentTranslate != null)
+                {
+                    move.X += currentTranslate.X;
+                    move.Y += currentTranslate.Y;
+                }
+
+                addTransformation(move);
             }
             else
             {
@@ -107,41 +125,55 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetDrawingSpace()
         {
-            updateGridCursor(null);
-
             _transforms.Children.Clear();
         }
 
-        public void updateGridCursor(Transform currentTransform)
+        public void addTransformation(Transform currentTransform)
         {
-            if (PocketPaintApplication.GetInstance().GridCursor.RenderTransform != null)
+            for (int i = 0; i < _transforms.Children.Count; i++)
             {
-                TransformGroup tranformsGridCursor = PocketPaintApplication.GetInstance().GridCursor.RenderTransform as TransformGroup;
-                if (tranformsGridCursor != null)
+                if (_transforms.Children[i].GetType() == currentTransform.GetType())
                 {
-                    if (currentTransform is ScaleTransform)
-                    {
-                        var currentScale = (ScaleTransform)currentTransform;
-                        currentScale.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0) + tranformsGridCursor.Value.OffsetX;
-                        currentScale.CenterY = (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0) + tranformsGridCursor.Value.OffsetY;
-
-                        //tranformsGridCursor.Children.Add(currentScale);
-                    }
-                    else if (currentTransform is TranslateTransform)
-                    {
-                        var currentTranslate = (TranslateTransform)currentTransform;
-
-                        // tranformsGridCursor.Children.Add(currentTranslate);
-                    }
-                    else if (currentTransform == null)
-                    {
-                        foreach (Transform currentTransformChild in _transforms.Children)
-                        {
-                            //tranformsGridCursor.Children.Remove(currentTransformChild);
-                        }
-                    }
+                    _transforms.Children.RemoveAt(i);
                 }
             }
+
+            _transforms.Children.Add(currentTransform);
+        }
+
+        public TranslateTransform getLastTranslateTransformation()
+        {
+            for (int i = 0; i < _transforms.Children.Count; i++)
+            {
+                if (_transforms.Children[i].GetType() == typeof(TranslateTransform))
+                {
+                    TranslateTransform translateTransform = new TranslateTransform();
+                    translateTransform.X = ((TranslateTransform)_transforms.Children[i]).X;
+                    translateTransform.Y = ((TranslateTransform)_transforms.Children[i]).Y;
+
+                    return translateTransform;
+                }
+            }
+
+            return null;
+        }
+
+        public ScaleTransform getLastScaleTransformation()
+        {
+            for (int i = 0; i < _transforms.Children.Count; i++)
+            {
+                if (_transforms.Children[i].GetType() == typeof(ScaleTransform))
+                {
+                    ScaleTransform scaleTransform = new ScaleTransform();
+                    scaleTransform.ScaleX = ((ScaleTransform)_transforms.Children[i]).ScaleX;
+                    scaleTransform.ScaleY = ((ScaleTransform)_transforms.Children[i]).ScaleY;
+                    scaleTransform.CenterX = ((ScaleTransform)_transforms.Children[i]).CenterX;
+                    scaleTransform.CenterY = ((ScaleTransform)_transforms.Children[i]).CenterY;
+                    return scaleTransform;
+                }
+            }
+
+            return null;
         }
     }
 }
