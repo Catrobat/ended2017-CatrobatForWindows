@@ -28,15 +28,13 @@ namespace Catrobat.Paint.WindowsPhone.View
     /// </summary>
     public sealed partial class ViewToolPicker : Page
     {
-        private bool isHolding;
+        private bool isOneToolButtonHolding;
         public ViewToolPicker()
         {
             this.InitializeComponent();
 
             setToolPickerLayout();
-            isHolding = false;
-            //MessageDialog msg = new MessageDialog(BtnBrush.Width.ToString());
-            //msg.ShowAsync();
+            isOneToolButtonHolding = false;
         }
 
         private void setToolPickerLayout()
@@ -82,125 +80,136 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
         }
 
+        public void resetControls()
+        {
+            Visibility visibility = Visibility.Collapsed;
+            PocketPaintApplication.GetInstance().EllipseSelectionControl.Visibility = visibility;
+            PocketPaintApplication.GetInstance().GridCropControl.Visibility = visibility;
+            PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = visibility;
+            PocketPaintApplication.GetInstance().GridInputScopeControl.Visibility = visibility;
+            PocketPaintApplication.GetInstance().GridUcRellRecControlState = visibility;
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = visibility;
+
+            PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = true;
+        }
+
         private void Button_OnClick(object sender, RoutedEventArgs e)
         {
-            if (isHolding)
+            if (isOneToolButtonHolding)
             {
-                isHolding = false;
+                isOneToolButtonHolding = false;
             }
             else
             {
-                PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(false);
-                PocketPaintApplication.GetInstance().isBrushEraser = false;
-                PocketPaintApplication.GetInstance().isBrushTool = false;
-                PocketPaintApplication.GetInstance().isToolPickerUsed = true; ;
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.Visibility = Visibility.Collapsed;
-                PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = Visibility.Collapsed;
-                PocketPaintApplication.GetInstance().GridCropControl.Visibility = Visibility.Collapsed;
-                PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = Visibility.Collapsed;
-                PocketPaintApplication.GetInstance().GridUcRellRecControlState = Visibility.Collapsed;
-                PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = true;
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;
-                bool enableEdgeTypes = false;
-                switch (((Button)sender).Name)
+                PocketPaintApplication pocketPaintApplication = PocketPaintApplication.GetInstance();
+                if (pocketPaintApplication != null)
                 {
-                    case "BtnBrush":
-                        PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
-                        PocketPaintApplication.GetInstance().isBrushTool = true;
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
-                        break;
-                    case "BtnCrop":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Crop);
-                        PocketPaintApplication.GetInstance().GridCropControl.Visibility = Visibility.Visible;
-                        PocketPaintApplication.GetInstance().GridCropControl.Children.Clear();
-                        PocketPaintApplication.GetInstance().GridCropControl.Children.Add(new CropControl());
-                        break;
-                    case "BtnCursor":
-                        PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Cursor);
-                        break;
-                    case "BtnEllipse":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Ellipse);
+                    pocketPaintApplication.AppbarTop.BtnSelectedColorVisible(false);
+                    pocketPaintApplication.isBrushEraser = false;
+                    pocketPaintApplication.isBrushTool = false;
+                    pocketPaintApplication.isToolPickerUsed = true;
+                    bool enableEdgeTypes = false;
+                    resetControls();
+                    switch (((Button)sender).Name)
+                    {
+                        case "BtnBrush":
+                            pocketPaintApplication.AppbarTop.BtnSelectedColorVisible(true);
+                            pocketPaintApplication.isBrushTool = true;
+                            pocketPaintApplication.SwitchTool(ToolType.Brush);
+                            break;
+                        case "BtnCrop":
+                            pocketPaintApplication.GridCropControl.Visibility = Visibility.Visible;
+                            pocketPaintApplication.GridCropControl.Children.Clear();
+                            pocketPaintApplication.GridCropControl.Children.Add(new CropControl());
+                            pocketPaintApplication.SwitchTool(ToolType.Crop);
+                            break;
+                        case "BtnCursor":
+                            pocketPaintApplication.AppbarTop.BtnSelectedColorVisible(true);
+                            pocketPaintApplication.SwitchTool(ToolType.Cursor);
+                            break;
+                        case "BtnEllipse":
+                            enableEdgeTypes = false;
+                            pocketPaintApplication.BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
+                            pocketPaintApplication.BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
+                            pocketPaintApplication.ToolCurrent.ResetDrawingSpace();
+                            pocketPaintApplication.EllipseSelectionControl.Visibility = Visibility.Visible;
+                            pocketPaintApplication.SwitchTool(ToolType.Ellipse);
+                            break;
+                        case "BtnEraser":
+                            pocketPaintApplication.SwitchTool(ToolType.Eraser);
+                            break;
+                        case "BtnFill":
+                            pocketPaintApplication.AppbarTop.BtnSelectedColorVisible(true);
+                            pocketPaintApplication.SwitchTool(ToolType.Fill);
+                            break;
+                        case "BtnFlip":
+                            pocketPaintApplication.SwitchTool(ToolType.Flip);
+                            break;
+                        case "BtnImportPicture":
+                            pocketPaintApplication.GridImportImageSelectionControl.Children.Clear();
+                            pocketPaintApplication.GridImportImageSelectionControl.Children.Add(new ImportImageSelectionControl());
+                            pocketPaintApplication.BarRecEllShape.setBtnHeightValue = 160.0;
+                            pocketPaintApplication.BarRecEllShape.setBtnWidthValue = 160.0;
 
-                        enableEdgeTypes = false;
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
-
-                        PocketPaintApplication.GetInstance().ToolCurrent.ResetDrawingSpace();
-
-                        PocketPaintApplication.GetInstance().EllipseSelectionControl.Visibility = Visibility.Visible;
-                        break;
-                    case "BtnEraser":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Eraser);
-                        break;
-                    case "BtnFill":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Fill);
-                        PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
-                        break;
-                    case "BtnFlip":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Flip);
-                        break;
-                    case "BtnImportPicture":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.ImportPng);
-
-                        PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Children.Clear();
-                        PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Children.Add(new ImportImageSelectionControl());
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = 160.0;
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = 160.0;
-
-                        PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = Visibility.Visible;
-                        enableEdgeTypes = true;
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
-                        break;
-                    case "BtnLine":
-                        PocketPaintApplication.GetInstance().SwitchTool((ToolType.Line));
-                        PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
-                        break;
-                    case "BtnMove":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Move);
-                        break;
-                    case "BtnPipette":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Pipette);
-                        break;
-                    case "BtnRectangle":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rect);
-
-                        enableEdgeTypes = true;
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
-                        PocketPaintApplication.GetInstance().BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
-
-                        PocketPaintApplication.GetInstance().ToolCurrent.ResetDrawingSpace();
-
-                        PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = Visibility.Visible;
-                        break;
-                    case "BtnRotate":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rotate);
-                        break;
-                    case "BtnStamp":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Stamp);
-                        break;
-                    case "BtnZoom":
-                        PocketPaintApplication.GetInstance().SwitchTool(ToolType.Zoom);
-                        break;
+                            pocketPaintApplication.GridImportImageSelectionControl.Visibility = Visibility.Visible;
+                            enableEdgeTypes = true;
+                            pocketPaintApplication.BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
+                            pocketPaintApplication.BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
+                            pocketPaintApplication.SwitchTool(ToolType.ImportPng);
+                            break;
+                        case "BtnLine":
+                            pocketPaintApplication.AppbarTop.BtnSelectedColorVisible(true);
+                            pocketPaintApplication.SwitchTool((ToolType.Line));
+                            break;
+                        case "BtnMove":
+                            pocketPaintApplication.SwitchTool(ToolType.Move);
+                            break;
+                        case "BtnPipette":
+                            pocketPaintApplication.SwitchTool(ToolType.Pipette);
+                            break;
+                        case "BtnRectangle":
+                            enableEdgeTypes = true;
+                            pocketPaintApplication.BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
+                            pocketPaintApplication.BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
+                            pocketPaintApplication.ToolCurrent.ResetDrawingSpace();
+                            pocketPaintApplication.RectangleSelectionControl.Visibility = Visibility.Visible;
+                            pocketPaintApplication.SwitchTool(ToolType.Rect);
+                            break;
+                        case "BtnRotate":
+                            pocketPaintApplication.SwitchTool(ToolType.Rotate);
+                            break;
+                        case "BtnStamp":
+                            pocketPaintApplication.SwitchTool(ToolType.Stamp);
+                            break;
+                        case "BtnZoom":
+                            pocketPaintApplication.SwitchTool(ToolType.Zoom);
+                            break;
+                    }
+                    navigateToPaintingAreaView();
                 }
-
-                Frame frame = this.Frame;
-                if (frame == null)
-                {
-                    frame = new Frame();
-                }
-
-                frame.Navigate(typeof(PaintingAreaView));
             }
+        }
+
+        public void navigateToPaintingAreaView()
+        {
+            Frame frame = this.Frame;
+            if (frame == null)
+            {
+                frame = new Frame();
+            }
+
+            frame.Navigate(typeof(PaintingAreaView));
         }
 
         private async void showToolMessage(string message)
         {
-            isHolding = true;
+            isOneToolButtonHolding = true;
 
             MessageDialog msg = new MessageDialog(message);
+            
 
+            // TODO: Aktuell tritt eine Exception auf, da die asynchrone Programmierung nicht korrekt implementiert wurde.
             try
             {
                 await msg.ShowAsync();

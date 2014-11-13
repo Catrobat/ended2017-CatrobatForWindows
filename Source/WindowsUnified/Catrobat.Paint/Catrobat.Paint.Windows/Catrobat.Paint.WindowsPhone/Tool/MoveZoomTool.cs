@@ -18,7 +18,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public MoveZoomTool()
         {
             ToolType = ToolType.Move;
-
+            ResetCanvas();
+            Grid grid = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid;
             if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform != null)
             {
                 _transforms = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
@@ -27,6 +28,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             {
                 PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
             }
+
+            DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height - PocketPaintApplication.GetInstance().AppbarTop.ActualHeight) / 2.0;
+            DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
 
             DISPLAY_WIDTH_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0;
             DISPLAY_HEIGHT_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0;
@@ -38,67 +42,26 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleMove(object arg)
         {
-            if (NeedToResetCanvas)
-            {
-                ResetCanvas();
-            }
-
             if (arg is ScaleTransform)
             {
                 var toScaleValue = (ScaleTransform)arg;
-                bool isScaleAllowed = false;
 
-                if ((toScaleValue.ScaleX > 1.0) && (_transforms.Value.M11 < 28.0))
-                {
-                    isScaleAllowed = true;
-                }
-                else if ((toScaleValue.ScaleX < 1.0) && (_transforms.Value.M11 > 0.5))
-                {
-                    isScaleAllowed = true;
-                }
-
+                bool isScaleAllowed = checkIfScalingAllowed(toScaleValue);
                 if (isScaleAllowed)
                 {
                     var fixedaspection = 0.0;
                     fixedaspection = toScaleValue.ScaleX > toScaleValue.ScaleY ? toScaleValue.ScaleX : toScaleValue.ScaleY;
-
-                    toScaleValue.ScaleX = Math.Round(0.0 + fixedaspection, 1);
-                    toScaleValue.ScaleY = Math.Round(0.0 + fixedaspection, 1);
+                    toScaleValue.ScaleX = fixedaspection;
+                    toScaleValue.ScaleY = fixedaspection;
                     toScaleValue.CenterX = DISPLAY_WIDTH_HALF;
                     toScaleValue.CenterY = DISPLAY_HEIGHT_HALF;
-
-                    ScaleTransform actualSaleValue = getLastScaleTransformation();
-                    if (actualSaleValue != null)
-                    {
-                        toScaleValue.ScaleX *= actualSaleValue.ScaleX;
-                        toScaleValue.ScaleY *= actualSaleValue.ScaleY;
-                        if (PocketPaintApplication.GetInstance().isZoomButtonClicked)
-                        {
-                            toScaleValue.CenterX = DISPLAY_WIDTH_HALF;
-                            toScaleValue.CenterY = DISPLAY_HEIGHT_HALF;
-                        }
-                        else
-                        {
-                            toScaleValue.CenterX += actualSaleValue.CenterX;
-                            toScaleValue.CenterY += actualSaleValue.CenterY;
-                        }
-                    }
-
-                    addTransformation(toScaleValue);
-                }
+                    _transforms.Children.Add(toScaleValue);
             }
+                }
             else if (arg is TranslateTransform)
             {
                 var move = (TranslateTransform)arg;
-
-                TranslateTransform currentTranslate = getLastTranslateTransformation();
-                if (currentTranslate != null)
-                {
-                    move.X += currentTranslate.X;
-                    move.Y += currentTranslate.Y;
-                }
-
-                addTransformation(move);
+                _transforms.Children.Add(move);
             }
             else
             {
@@ -120,7 +83,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void Draw(object o)
         {
-            
+
         }
 
         public override void ResetDrawingSpace()
@@ -128,34 +91,19 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _transforms.Children.Clear();
         }
 
-        public void addTransformation(Transform currentTransform)
+        public bool checkIfScalingAllowed(ScaleTransform toScaleValue)
         {
-            for (int i = 0; i < _transforms.Children.Count; i++)
+            bool isScaleAllowed = false;
+
+            if ((toScaleValue.ScaleX > 1.0) && (_transforms.Value.M11 < 28.0))
             {
-                if (_transforms.Children[i].GetType() == currentTransform.GetType())
-                {
-                    _transforms.Children.RemoveAt(i);
-                }
+                isScaleAllowed = true;
             }
-
-            _transforms.Children.Add(currentTransform);
-        }
-
-        public TranslateTransform getLastTranslateTransformation()
-        {
-            for (int i = 0; i < _transforms.Children.Count; i++)
+            else if ((toScaleValue.ScaleX < 1.0) && (_transforms.Value.M11 > 0.5))
             {
-                if (_transforms.Children[i].GetType() == typeof(TranslateTransform))
-                {
-                    TranslateTransform translateTransform = new TranslateTransform();
-                    translateTransform.X = ((TranslateTransform)_transforms.Children[i]).X;
-                    translateTransform.Y = ((TranslateTransform)_transforms.Children[i]).Y;
-
-                    return translateTransform;
-                }
+                isScaleAllowed = true;
             }
-
-            return null;
+            return isScaleAllowed;
         }
 
         public ScaleTransform getLastScaleTransformation()
@@ -174,6 +122,18 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             }
 
             return null;
+        }
+
+        public void addTransformation(Transform currentTransform)
+        {
+            for (int i = 0; i < _transforms.Children.Count; i++)
+            {
+                if (_transforms.Children[i].GetType() == currentTransform.GetType())
+                {
+                    _transforms.Children.RemoveAt(i);
+                }
+            }
+            _transforms.Children.Add(currentTransform);
         }
     }
 }

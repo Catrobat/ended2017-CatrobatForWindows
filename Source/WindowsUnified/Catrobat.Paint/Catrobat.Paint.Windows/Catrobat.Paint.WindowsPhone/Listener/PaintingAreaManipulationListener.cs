@@ -112,6 +112,37 @@ namespace Catrobat.Paint.Phone.Listener
                 }
                 lastPoint = point;
             }
+            else if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.ImportPng)
+            {
+                rotateCenterPoint.X = PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.Width / 2.0;
+                rotateCenterPoint.Y = PocketPaintApplication.GetInstance().RectangleSelectionControl.gridMain.Height / 2.0;
+
+                rotate.CenterX = rotateCenterPoint.X;
+                rotate.CenterY = rotateCenterPoint.Y;
+
+                Point centerPoint = PocketPaintApplication.GetInstance().ImportImageSelectionControl.getCenterPointOfSelectionControl();
+
+                if (!(lastPoint.X == 0.0 && lastPoint.Y == 0.0) &&
+                    (lastPoint.X != point.X || lastPoint.Y != point.Y))
+                {
+                    double currentXLength = point.X - centerPoint.X;
+                    double currentYLength = point.Y - centerPoint.Y;
+                    double normalCurrentX = currentXLength / (Math.Sqrt(currentXLength * currentXLength + currentYLength * currentYLength));
+                    double normalCurrentY = currentYLength / (Math.Sqrt(currentXLength * currentXLength + currentYLength * currentYLength));
+
+                    double previousXLength = lastPoint.X - centerPoint.X;
+                    double previousYLength = lastPoint.Y - centerPoint.Y;
+                    double normalPreviousX = previousXLength / (Math.Sqrt(previousXLength * previousXLength + previousYLength * previousYLength));
+                    double normalPreviousY = previousYLength / (Math.Sqrt(previousXLength * previousXLength + previousYLength * previousYLength));
+
+                    double deltaAngle = (Math.Atan(normalPreviousX / normalPreviousY) - Math.Atan(normalCurrentX / normalCurrentY));
+                    double rotationAngle = deltaAngle * 360.0 / Math.PI;
+
+                    rotate.Angle = rotationAngle;
+                }
+                lastPoint = point;
+
+            }
             else
             {
                 if (e.Delta.Scale != 1.0)
@@ -152,6 +183,12 @@ namespace Catrobat.Paint.Phone.Listener
                     break;
                 case ToolType.Eraser:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
+                    break;
+                case ToolType.ImportPng:
+                    if (rotate.Angle != 0.0)
+                    {
+                        PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(rotate);
+                    }
                     break;
                 case ToolType.Line:
                     PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);

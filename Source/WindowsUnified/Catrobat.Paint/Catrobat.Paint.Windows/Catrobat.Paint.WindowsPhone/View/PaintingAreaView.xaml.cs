@@ -727,6 +727,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 visibilityGridEllRecControl = Visibility.Collapsed;
             }
             PocketPaintApplication.GetInstance().GridUcRellRecControlState = visibilityGridEllRecControl;
+            PocketPaintApplication.GetInstance().GridInputScopeControl.Visibility = Visibility.Collapsed;
         }
 
         private void PaintingAreaCanvas_PointerEntered(object sender, PointerRoutedEventArgs e)
