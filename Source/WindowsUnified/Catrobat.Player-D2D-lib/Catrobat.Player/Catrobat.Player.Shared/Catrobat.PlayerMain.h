@@ -20,7 +20,8 @@ namespace Catrobat_Player
 	{
 	public:
         Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources, 
-                            Windows::UI::Xaml::Controls::CommandBar^ playerAppBar);
+                            Windows::UI::Xaml::Controls::CommandBar^ playerAppBar,
+                            Platform::String^ projectName);
 		~Catrobat_PlayerMain();
 		void CreateWindowSizeDependentResources();
         Concurrency::critical_section& GetCriticalSection() { return m_criticalSection; }

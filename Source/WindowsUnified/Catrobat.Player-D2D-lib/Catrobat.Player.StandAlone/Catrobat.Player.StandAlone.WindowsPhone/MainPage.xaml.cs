@@ -48,7 +48,7 @@ namespace Catrobat.Player.StandAlone
             // register hardware back button event
             HardwareButtons.BackPressed += OnHardwareBackButtonPressed;
 
-            playerObject.InitPlayer(swapChainPanel, PlayerAppBar);
+            playerObject.InitPlayer(swapChainPanel, PlayerAppBar, "testTapp2");
         }
 
         private void OnRestartButtonClicked(object sender, RoutedEventArgs e)
@@ -72,7 +72,6 @@ namespace Catrobat.Player.StandAlone
         {
             playerObject.ScreenshotButtonClicked(sender, e);
         }
-
 
         private void OnHardwareBackButtonPressed(object sender, BackPressedEventArgs args)
         {

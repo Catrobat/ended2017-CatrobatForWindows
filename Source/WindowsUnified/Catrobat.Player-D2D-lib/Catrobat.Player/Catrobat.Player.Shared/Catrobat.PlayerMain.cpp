@@ -15,13 +15,14 @@ using namespace Concurrency;
 // Loads and initializes application assets when the application is loaded.
 
 Catrobat_PlayerMain::Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources,
-                                         Windows::UI::Xaml::Controls::CommandBar^ playerAppBar) :
+                                         Windows::UI::Xaml::Controls::CommandBar^ playerAppBar,
+                                         Platform::String^ projectName) :
 m_deviceResources(deviceResources), 
 m_pointerLocationX(0.0f),
 m_loadingComplete(false),
 m_playerAppBar(playerAppBar),
 m_playerState(PlayerState::Init),
-m_projectName("testTapp2")
+m_projectName(projectName)
 {
     // Register to be notified if the Device is lost or recreated
     m_deviceResources->RegisterDeviceNotify(this);

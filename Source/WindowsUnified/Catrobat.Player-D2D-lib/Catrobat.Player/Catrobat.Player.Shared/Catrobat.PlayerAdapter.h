@@ -13,13 +13,16 @@ namespace Catrobat_Player
         virtual ~Catrobat_PlayerAdapter();
 
         void InitPlayer(Windows::UI::Xaml::Controls::SwapChainPanel^ swapChainPanel,
-            Windows::UI::Xaml::Controls::CommandBar^ playerAppBar);
+            Windows::UI::Xaml::Controls::CommandBar^ playerAppBar,
+            Platform::String^ projectName);
 
-        // Independent input handling functions.
-        void PointerPressed(Platform::Object^ sender, Windows::UI::Core::PointerEventArgs^ e);
+        void SaveInternalState(Windows::Foundation::Collections::IPropertySet^ state);
+        void LoadInternalState(Windows::Foundation::Collections::IPropertySet^ state);
+
+        // Independent input handling functions - public.
         bool HardwareBackButtonPressed();
 
-        // Bottom CommandBar handlers
+        // Bottom CommandBar handlers.
         void RestartButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
         void PlayButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
         void ThumbnailButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
@@ -28,11 +31,19 @@ namespace Catrobat_Player
 
 
     private:
+        // Window event handlers.
+        void OnVisibilityChanged(Windows::UI::Core::CoreWindow^ sender, Windows::UI::Core::VisibilityChangedEventArgs^ args);
+
+        // DisplayInformation event handlers.
+        void OnDpiChanged(Windows::Graphics::Display::DisplayInformation^ sender, Platform::Object^ args);
+        void OnOrientationChanged(Windows::Graphics::Display::DisplayInformation^ sender, Platform::Object^ args);
+        void OnDisplayContentsInvalidated(Windows::Graphics::Display::DisplayInformation^ sender, Platform::Object^ args);
+
         // Other event handlers.
         void OnCompositionScaleChanged(Windows::UI::Xaml::Controls::SwapChainPanel^ sender, Object^ args);
-        //void OnSwapChainPanelSizeChanged(Object^ sender, SizeChangedEventArgs^ e);
+        void OnSwapChainPanelSizeChanged(Platform::Object^ sender, Windows::UI::Xaml::SizeChangedEventArgs^ e);
 
-        // Independent input handling functions.
+        // Independent input handling functions - private.
         void OnPointerPressed(Platform::Object^ sender, Windows::UI::Core::PointerEventArgs^ e);
 
         // Track our independent input on a background worker thread.
