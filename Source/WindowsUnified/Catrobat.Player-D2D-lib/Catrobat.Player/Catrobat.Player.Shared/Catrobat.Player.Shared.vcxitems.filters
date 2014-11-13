@@ -91,6 +91,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserFatalException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserSevereException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Catrobat.PlayerAdapter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
@@ -173,6 +174,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserFatalException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserSevereException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Catrobat.PlayerAdapter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

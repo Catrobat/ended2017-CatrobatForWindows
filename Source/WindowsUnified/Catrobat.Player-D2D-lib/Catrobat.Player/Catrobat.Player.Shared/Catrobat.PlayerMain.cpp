@@ -117,27 +117,26 @@ void Catrobat_PlayerMain::PointerPressed(D2D1_POINT_2F point)
 
 //----------------------------------------------------------------------
 
-void Catrobat_PlayerMain::HardwareBackButtonPressed(_In_ Platform::Object^ sender, BackPressedEventArgs ^args)
+bool Catrobat_PlayerMain::HardwareBackButtonPressed()
 {
     if (m_playerState == PlayerState::Active)
     {
         // Player is in active play mode, so hitting the hardware back button
-        // will cause the game to pause and show the user the command bar.
-        args->Handled = true;
+        // will cause the game to pause and show the user the command bar --> return false
 
         critical_section::scoped_lock lock(m_criticalSection);
 
         StopRenderLoop();
         m_playerState = PlayerState::Pause;
         m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Visible;
+        return false;
     }
     else
     {
         // Player is in pause or init mode, so hitting the hardware back button
-        // will cause the game to terminate and bring the user back to the IDE.
+        // will cause the player to terminate and bring the user back to the IDE --> return true
         
-        // TODO implement this functionality
-        args->Handled = false;
+        return true;
     }
 }
 

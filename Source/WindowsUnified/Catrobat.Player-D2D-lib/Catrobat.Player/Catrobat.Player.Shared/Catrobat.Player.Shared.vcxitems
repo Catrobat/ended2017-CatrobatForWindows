@@ -27,6 +27,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastMessageListener.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastMessageSender.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)BroadcastScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Catrobat.PlayerAdapter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Catrobat.PlayerMain.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CatrobatTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ChangeGhostEffectByBrick.h" />
@@ -106,6 +107,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageListener.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastMessageSender.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)BroadcastScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Catrobat.PlayerAdapter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Catrobat.PlayerMain.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CatrobatTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ChangeGhostEffectByBrick.cpp" />
