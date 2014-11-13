@@ -25,9 +25,9 @@ namespace Catrobat.Paint.Phone.Tool
         private double width;
 
 
-        public CursorTool(ToolType toolType = ToolType.Cursor)
+        public CursorTool()
         {
-            ToolType = toolType;
+            ToolType = ToolType.Cursor;
 
             if (PocketPaintApplication.GetInstance().GridCursor.RenderTransform != null)
             {
@@ -71,17 +71,15 @@ namespace Catrobat.Paint.Phone.Tool
                 _pathGeometry.Figures = _pathFigureCollection;
                 _lastPoint = coordinate;
                 _path.Data = _pathGeometry;
+
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
 
-                // var transform = PocketPaintApplication.GetInstance().PaintingAreaCanvas.TransformToVisual(PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot);
-                // var absolutePosition = transform.TransformPoint(new Point(0, 0));
-
-                var r = new RectangleGeometry
+                var rectangleGeometry = new RectangleGeometry
                 {
                     Rect = new Rect(0, 0, PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth,
                     PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight)
                 };
-                _path.Clip = r;
+                _path.Clip = rectangleGeometry;
                 _path.InvalidateArrange();
                 _path.InvalidateMeasure();
             }
@@ -125,11 +123,6 @@ namespace Catrobat.Paint.Phone.Tool
             {
                 var move = (TranslateTransform)arg;
                 _transforms.Children.Add(move);
-
-                //PocketPaintApplication.GetInstance().PaintingAreaView.changeTbTestboxText(_transforms.Value.OffsetX, _transforms.Value.OffsetY);
-
-                //PocketPaintApplication.GetInstance().PaintingAreaView.setCoordTextbox(PocketPaintApplication.GetInstance().GridCursor.ActualHeight, PocketPaintApplication.GetInstance().GridCursor.ActualWidth);
-                // PocketPaintApplication.GetInstance().PaintingAreaView.setCoordTextbox(_transforms.Value.OffsetX, _transforms.Value.OffsetY);
             }
 
             if(PocketPaintApplication.GetInstance() != null)

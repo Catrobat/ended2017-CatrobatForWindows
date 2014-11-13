@@ -13,9 +13,9 @@ namespace Catrobat.Paint.Phone.Tool
 {
     class PipetteTool : ToolBase
     {
-        public PipetteTool(ToolType toolType = ToolType.Pipette)
+        public PipetteTool()
         {
-            ToolType = toolType;
+            ToolType = ToolType.Pipette;
             ResetCanvas();
         }
 

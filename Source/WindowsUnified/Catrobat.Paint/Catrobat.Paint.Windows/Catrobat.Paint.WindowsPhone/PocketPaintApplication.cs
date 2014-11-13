@@ -206,19 +206,19 @@ namespace Catrobat.Paint.Phone
             switch (toolType)
             {
                 case ToolType.Brush:
-                    ToolCurrent = new BrushTool(toolType);
+                    ToolCurrent = new BrushTool();
                     break;
                 case ToolType.Crop:
                     ToolCurrent = new CropTool();
                     break;
                 case ToolType.Cursor:
-                    ToolCurrent = new CursorTool(toolType);
+                    ToolCurrent = new CursorTool();
                     break;
                 case ToolType.Ellipse:
                     ToolCurrent = new EllipseTool();
                     break;
                 case ToolType.Eraser:
-                    ToolCurrent = new EraserTool(toolType);
+                    ToolCurrent = new EraserTool();
                     break;
                 case ToolType.ImportPng:
                     ToolCurrent = new ImportTool();
