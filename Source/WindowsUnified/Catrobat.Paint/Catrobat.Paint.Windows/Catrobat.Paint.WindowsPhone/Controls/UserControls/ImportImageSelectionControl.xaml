@@ -15,7 +15,7 @@
                 StrokeThickness="3" StrokeLineJoin="Miter" Margin="20,20,20,20" 
                 ManipulationMode="TranslateX, TranslateY" Width="160" >
                 <Rectangle.Fill>
-                    <ImageBrush ImageSource="ms-resource:/Files/Assets/test.jpg"  />
+                    <ImageBrush ImageSource="/Assets/logoPocketPaint.jpg" />
                 </Rectangle.Fill>
             </Rectangle>
 

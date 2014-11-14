@@ -9,15 +9,16 @@ using Windows.UI.Xaml.Media;
 
 namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 {
-    public sealed partial class InfoBoxControl : UserControl
+    public sealed partial class InfoBoxActionControl : UserControl
     {
-        public InfoBoxControl()
+        public InfoBoxActionControl()
         {
             this.InitializeComponent();
         }
 
         private void setCursorControlLayout()
-        {            
+        {
+            
             double heightMultiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
             double widthMultiplicator = PocketPaintApplication.GetInstance().size_width_multiplication;
 
@@ -37,38 +38,20 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     currentButtonThickness.Right *= heightMultiplicator;
                     currentButtonThickness.Top *= heightMultiplicator;
                     currentButton.BorderThickness = currentButtonThickness;
-
-                    //currentEllipse.Margin = new Thickness(
-                    //                        currentEllipse.Margin.Left * widthMultiplicator,
-                    //                        currentEllipse.Margin.Top * heightMultiplicator,
-                    //                        currentEllipse.Margin.Right * widthMultiplicator,
-                    //                        currentEllipse.Margin.Bottom * heightMultiplicator);
                 }
                 else if (obj.GetType() == typeof(TextBox))
                 {
                     TextBox currentTextbox = (TextBox)obj;
                     currentTextbox.Height *= heightMultiplicator;
                     currentTextbox.Width *= widthMultiplicator;
-
-                    //currentRectangle.Margin = new Thickness(
-                    //                        currentRectangle.Margin.Left * widthMultiplicator,
-                    //                        currentRectangle.Margin.Top * heightMultiplicator,
-                    //                        currentRectangle.Margin.Right * widthMultiplicator,
-                    //                        currentRectangle.Margin.Bottom * heightMultiplicator);
                 }
             }
         }
 
-        private void btnNewDrawingSpace_Click(object sender, RoutedEventArgs e)
+        private void btnOpenGallery_Click(object sender, RoutedEventArgs e)
         {
-            if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0)
-            {
-                messageBoxNewDrawingSpace_Click();
-            }
-            else
-            {
-                resetTools();
-            }    
+            PocketPaintApplication.GetInstance().PaintingAreaView.PickAFileButton_Click(sender, e);
+            PocketPaintApplication.GetInstance().InfoBoxActionControl.Visibility = Visibility.Collapsed;
         }
 
         private void resetTools()

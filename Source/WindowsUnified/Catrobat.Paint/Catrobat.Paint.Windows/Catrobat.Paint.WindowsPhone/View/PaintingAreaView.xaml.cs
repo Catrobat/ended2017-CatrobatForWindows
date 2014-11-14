@@ -1,35 +1,25 @@
-﻿using Catrobat.IDE.WindowsShared.Common;
-using Catrobat.Paint.Phone;
-using Catrobat.Paint.Phone.Command;
+﻿using Catrobat.Paint.Phone;
 using Catrobat.Paint.Phone.Listener;
 using Catrobat.Paint.Phone.Tool;
 using Catrobat.Paint.Phone.Ui;
 using Catrobat.Paint.WindowsPhone.Command;
-using Catrobat.Paint.WindowsPhone.Controls.AppBar;
 using Catrobat.Paint.WindowsPhone.Tool;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Data.Xml.Dom;
+using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
-using Windows.Storage.Search;
+using Windows.Storage.Pickers;
 using Windows.UI;
-using Windows.UI.Popups;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+
+
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
 
 namespace Catrobat.Paint.WindowsPhone.View
@@ -37,8 +27,9 @@ namespace Catrobat.Paint.WindowsPhone.View
     /// <summary>
     /// Eine leere Seite, die eigenständig verwendet werden kann oder auf die innerhalb eines Rahmens navigiert werden kann.
     /// </summary>
-    public sealed partial class PaintingAreaView : Page
+    public sealed partial class PaintingAreaView : Page, IFileOpenPickerContinuable
     {
+        
         static string current_appbar = "barStandard";
         static int rotateCounter;
         static bool flipVertical;
@@ -75,6 +66,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().GridInputScopeControl = GridInputScopeControl;
             PocketPaintApplication.GetInstance().GridCropControl = GridCropControl;
             PocketPaintApplication.GetInstance().GridImportImageSelectionControl = GridImportImageSelectionControl;
+            PocketPaintApplication.GetInstance().InfoBoxActionControl = InfoBoxActionControl;
             PocketPaintApplication.GetInstance().InfoBoxControl = InfoBoxControl;
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
@@ -102,7 +94,40 @@ namespace Catrobat.Paint.WindowsPhone.View
             
             setPaintingAreaViewLayout();
             PocketPaintApplication.GetInstance().GrdThicknessControlState = Visibility.Collapsed;
-            createAppBarAndSwitchAppBarContent(current_appbar);
+            createAppBarAndSwitchAppBarContent(current_appbar);         
+        }
+
+        public async void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
+        {
+            if (args.Files.Count > 0)
+            {
+                StorageFile file = args.Files[0];
+
+                BitmapImage image = new BitmapImage();
+                await image.SetSourceAsync(await file.OpenAsync(FileAccessMode.Read));
+
+                ImageBrush fillBrush = new ImageBrush();
+                fillBrush.ImageSource = image;
+
+                PocketPaintApplication.GetInstance().ImportImageSelectionControl.imageSourceOfRectangleToDraw = fillBrush;
+            }
+            else
+            {
+                // OutputTextBlock.Text = "Operation cancelled.";
+            }
+        }
+
+
+        public void PickAFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.ViewMode = PickerViewMode.Thumbnail;
+            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".jpeg");
+            openPicker.FileTypeFilter.Add(".png");
+
+            openPicker.PickSingleFileAndContinue();          
         }
 
         public async void hideStatusAppBar()
@@ -177,6 +202,18 @@ namespace Catrobat.Paint.WindowsPhone.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
 
+        }
+
+        public async void openFile()
+        {
+                FileOpenPicker openPicker = new FileOpenPicker();
+                openPicker.ViewMode = PickerViewMode.Thumbnail;
+                openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+                openPicker.FileTypeFilter.Add(".jpg");
+                openPicker.FileTypeFilter.Add(".jpeg");
+                openPicker.FileTypeFilter.Add(".png");
+
+                StorageFile file = await openPicker.PickSingleFileAsync();
         }
 
 

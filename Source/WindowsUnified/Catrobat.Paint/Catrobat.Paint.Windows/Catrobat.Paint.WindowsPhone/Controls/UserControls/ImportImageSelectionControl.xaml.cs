@@ -1,22 +1,12 @@
 ﻿using Catrobat.Paint.Phone;
-using Catrobat.Paint.WindowsPhone.Tool;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml.Shapes;
 
 // Die Elementvorlage "Benutzersteuerelement" ist unter http://go.microsoft.com/fwlink/?LinkId=234236 dokumentiert.
 
@@ -60,16 +50,20 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             ImageBrush fillBrush = new ImageBrush();
             fillBrush.ImageSource =
                 new BitmapImage(
-                    new Uri("ms-resource:/Files/Assets/test.jpg", UriKind.Absolute)
+                    new Uri("ms-resource:/Files/Assets/logoPocketPaint.jpg", UriKind.Absolute)
                 );
             rectRectangleToDraw.Fill = fillBrush;
         }
 
-        public ImageBrush setImageSourceOfRectangleToDraw
+        public ImageBrush imageSourceOfRectangleToDraw
         {
             set
             {
                 rectRectangleToDraw.Fill = value;
+            }
+            get
+            {
+                return rectRectangleToDraw.Fill as ImageBrush;
             }
         }
         private void _setGridTransformsOfEllipses(TransformGroup transformGroup, TranslateTransform translateTransform)

@@ -2,19 +2,10 @@
 using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Catrobat.Paint.WindowsPhone.Tool;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
@@ -154,7 +145,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                             pocketPaintApplication.BarRecEllShape.setBtnWidthValue = 160.0;
 
                             pocketPaintApplication.GridImportImageSelectionControl.Visibility = Visibility.Visible;
-                            //pocketPaintApplication.InfoBoxActionControl.Visibility = Visibility.Visible;
+                            pocketPaintApplication.InfoBoxActionControl.Visibility = Visibility.Visible;
                             PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Collapsed;
                             
                             // TODO: Write a function with the following three sentences and put it in the paintingareaview.cs.

@@ -23,6 +23,7 @@ using Windows.UI.Xaml.Navigation;
 using Catrobat.Paint.WindowsPhone;
 using Catrobat.IDE.WindowsShared.Common;
 using Catrobat.Paint.Phone;
+using System.Threading.Tasks;
 
 
 
@@ -37,6 +38,7 @@ namespace Catrobat.Paint
     {
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
+        ContinuationManager continuationManager;
 #endif
 
         /// <summary>
@@ -145,6 +147,75 @@ namespace Catrobat.Paint
             await Catrobat.IDE.WindowsShared.Common.SuspensionManager.SaveAsync();
             deferral.Complete();
         }
+        private Frame CreateRootFrame()
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
+            if (rootFrame == null)
+            {
+                // Create a Frame to act as the navigation context and navigate to the first page
+                rootFrame = new Frame();
+
+                // Set the default language
+                rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
+                // rootFrame.NavigationFailed += OnNavigationFailed;
+
+                // Place the frame in the current Window
+                Window.Current.Content = rootFrame;
+            }
+
+            return rootFrame;
+        }
+
+
+        protected async override void OnActivated(IActivatedEventArgs e)
+        {
+            base.OnActivated(e);
+            continuationManager = new ContinuationManager();
+
+            Frame rootFrame = CreateRootFrame();
+            await RestoreStatusAsync(e.PreviousExecutionState);
+
+
+            var continuationEventArgs = e as IContinuationActivatedEventArgs;
+
+
+            if (rootFrame.Content != null)
+            {
+                rootFrame.Navigate(typeof(PaintingAreaView));
+                if (continuationEventArgs != null)
+                {
+                    continuationManager.Continue(continuationEventArgs, rootFrame);
+                }
+            }
+
+
+
+            Window.Current.Activate();
+
+
+        }
+
+        private async Task RestoreStatusAsync(ApplicationExecutionState previousExecutionState)
+        {
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
+            if (previousExecutionState == ApplicationExecutionState.Terminated)
+            {
+                // Restore the saved session state only when appropriate
+                try
+                {
+                    await SuspensionManager.RestoreAsync();
+                }
+                catch (SuspensionManagerException)
+                {
+                    //Something went wrong restoring state.
+                    //Assume there is no state and continue
+                }
+            }
+        }
 
 
         
@@ -155,7 +226,7 @@ namespace Catrobat.Paint
             {
                 var file = (StorageFile)e.Files[0];
 
-                IdeInteraction.GotPictureFromIde(file);
+                await IdeInteraction.GotPictureFromIde(file);
             }
             catch (Exception exc)
             {
@@ -163,6 +234,7 @@ namespace Catrobat.Paint
                 //var messageDialog2 = new MessageDialog(exc.Message);
                 //messageDialog2.ShowAsync();
             }
+            
 
 
 
@@ -227,5 +299,7 @@ namespace Catrobat.Paint
             // Ensure the current window is active
             Window.Current.Activate();
         }
+
+        public ContinuationManager ContinuationManager { get; private set; }
     }
 }
