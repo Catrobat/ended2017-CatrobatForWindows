@@ -64,6 +64,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 );
             rectRectangleToDraw.Fill = fillBrush;
         }
+
+        public ImageBrush setImageSourceOfRectangleToDraw
+        {
+            set
+            {
+                rectRectangleToDraw.Fill = value;
+            }
+        }
         private void _setGridTransformsOfEllipses(TransformGroup transformGroup, TranslateTransform translateTransform)
         {
             transformGroup.Children.Add(translateTransform);

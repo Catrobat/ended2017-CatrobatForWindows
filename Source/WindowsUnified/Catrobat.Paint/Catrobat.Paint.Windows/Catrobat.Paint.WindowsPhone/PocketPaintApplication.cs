@@ -58,6 +58,7 @@ namespace Catrobat.Paint.Phone
         public Grid PaintingAreaLayoutRoot { get; set; }
         #endregion
 
+        public InfoBoxActionControl InfoBoxActionControl { get; set; }
         public InfoBoxControl InfoBoxControl { get; set; }
 
         public CursorControl cursorControl { get; set; }

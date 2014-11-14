@@ -88,6 +88,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = visibility;
             PocketPaintApplication.GetInstance().GridInputScopeControl.Visibility = visibility;
             PocketPaintApplication.GetInstance().GridUcRellRecControlState = visibility;
+            PocketPaintApplication.GetInstance().InfoBoxActionControl.Visibility = visibility;
             PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = visibility;
 
             PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;
@@ -153,6 +154,14 @@ namespace Catrobat.Paint.WindowsPhone.View
                             pocketPaintApplication.BarRecEllShape.setBtnWidthValue = 160.0;
 
                             pocketPaintApplication.GridImportImageSelectionControl.Visibility = Visibility.Visible;
+                            //pocketPaintApplication.InfoBoxActionControl.Visibility = Visibility.Visible;
+                            PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Collapsed;
+                            
+                            // TODO: Write a function with the following three sentences and put it in the paintingareaview.cs.
+                            // TODO: Implement this functionality
+                            //PocketPaintApplication.GetInstance().PaintingAreaView.BottomAppBar.Visibility = Visibility.Collapsed;
+                            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Background = new SolidColorBrush(Colors.Black);
+                            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Background.Opacity = 0.5;
                             enableEdgeTypes = true;
                             pocketPaintApplication.BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
                             pocketPaintApplication.BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);

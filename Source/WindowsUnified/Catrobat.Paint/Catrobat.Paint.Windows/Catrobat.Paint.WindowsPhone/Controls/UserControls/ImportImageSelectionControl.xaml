@@ -14,9 +14,9 @@
             <Rectangle x:Name="rectRectangleToDraw" Height="160" Stroke="Gray"
                 StrokeThickness="3" StrokeLineJoin="Miter" Margin="20,20,20,20" 
                 ManipulationMode="TranslateX, TranslateY" Width="160" >
-                <!--<Rectangle.Fill>
+                <Rectangle.Fill>
                     <ImageBrush ImageSource="ms-resource:/Files/Assets/test.jpg"  />
-                </Rectangle.Fill>-->
+                </Rectangle.Fill>
             </Rectangle>
 
             <Rectangle x:Name="rectRectangleForMovement" Fill="#01FFFFFF" Height="200" Stroke="LightSkyBlue" 
