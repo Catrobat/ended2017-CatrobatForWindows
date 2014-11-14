@@ -36,6 +36,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{84F329
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Xml", "Catrobat.Xml\Catrobat.Xml.csproj", "{72BD1C16-1242-49A4-995F-428E1A801551}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catrobat.Player.WindowsPhone", "Catrobat.Player.WindowsPhone", "{DC424BD5-BEEF-469A-80BD-8319C0E9A344}"
+	ProjectSection(SolutionItems) = preProject
+		Catrobat.Player.WindowsPhone\Catrobat_Player.dll = Catrobat.Player.WindowsPhone\Catrobat_Player.dll
+		Catrobat.Player.WindowsPhone\Catrobat_Player.winmd = Catrobat.Player.WindowsPhone\Catrobat_Player.winmd
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Catrobat.IDE.Windows\Catrobat.IDE.Shared\Catrobat.IDE.Shared.projitems*{3b531ab1-3f3f-4488-94a2-ba82130af471}*SharedItemsImports = 4
