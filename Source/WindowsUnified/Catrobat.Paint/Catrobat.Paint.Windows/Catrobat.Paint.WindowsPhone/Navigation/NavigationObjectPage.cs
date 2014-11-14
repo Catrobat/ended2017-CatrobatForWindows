@@ -1,5 +1,4 @@
-﻿using Catrobat.IDE.Core.Navigation;
-using Catrobat.Paint.WindowsPhone.Common;
+﻿using Catrobat.Paint.WindowsPhone.Common;
 using Windows.UI.Xaml.Controls;
 
 namespace Catrobat.Paint.WindowsPhone.Navigation
