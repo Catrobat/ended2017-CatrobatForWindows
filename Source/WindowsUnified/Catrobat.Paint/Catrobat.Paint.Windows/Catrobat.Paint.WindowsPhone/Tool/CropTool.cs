@@ -1,12 +1,4 @@
-﻿using Catrobat.Paint.Phone.Tool;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using Catrobat.Paint.Phone;
-using Catrobat.Paint.WindowsPhone.Controls.UserControls;
+﻿using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
 {

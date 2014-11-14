@@ -2,14 +2,13 @@
 using System.IO;
 using System.Threading.Tasks;
 // TODO: using System.Windows.Media.Imaging;
-using Windows.Media;
 using Windows.Storage;
 using Windows.UI.Xaml.Media.Imaging;
 // TODO: using ImageTools;
 // TODO: using ImageTools.IO.Png;
 // TODO: using Microsoft.Xna.Framework.Media;
 
-namespace Catrobat.Paint.Phone.Data
+namespace Catrobat.Paint.WindowsPhone.Data
 {
     public class StorageIo
     {

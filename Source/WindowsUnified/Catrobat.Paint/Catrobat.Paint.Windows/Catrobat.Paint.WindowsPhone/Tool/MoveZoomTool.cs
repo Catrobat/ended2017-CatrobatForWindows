@@ -1,9 +1,4 @@
-﻿using Catrobat.Paint.Phone;
-using Catrobat.Paint.Phone.Tool;
-using System;
-using System.Windows;
-using Windows.UI.Popups;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 

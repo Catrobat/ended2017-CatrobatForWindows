@@ -1,6 +1,4 @@
-﻿
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 
 namespace Catrobat.IDE.Core.Navigation
 {

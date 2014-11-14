@@ -1,5 +1,4 @@
-﻿using Catrobat.Paint.Phone;
-using Catrobat.Paint.WindowsPhone.Tool;
+﻿using Catrobat.Paint.WindowsPhone.Tool;
 using Catrobat.Paint.WindowsPhone.View;
 using System;
 using System.Linq;

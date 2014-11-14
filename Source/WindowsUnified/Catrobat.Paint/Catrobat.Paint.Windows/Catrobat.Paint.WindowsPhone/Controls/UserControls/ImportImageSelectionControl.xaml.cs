@@ -1,5 +1,4 @@
-﻿using Catrobat.Paint.Phone;
-using System;
+﻿using System;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;

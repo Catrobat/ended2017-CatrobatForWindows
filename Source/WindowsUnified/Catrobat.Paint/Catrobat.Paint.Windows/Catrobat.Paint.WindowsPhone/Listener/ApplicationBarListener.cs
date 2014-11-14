@@ -1,17 +1,11 @@
-﻿using System;
-using System.Windows;
-// TODO: using Catrobat.Paint.Phone.Command;
-using Catrobat.Paint.Phone.Tool;
-using Catrobat.Paint.WindowsPhone.View;
+﻿using Catrobat.Paint.WindowsPhone.Command;
 using Catrobat.Paint.WindowsPhone.Tool;
+// TODO: using Catrobat.Paint.Phone.Command;
+using Catrobat.Paint.WindowsPhone.View;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls.Primitives;
-using Catrobat.Paint.Phone.Command;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
-using Catrobat.IDE.WindowsShared.Common;
 
-namespace Catrobat.Paint.Phone.Listener
+namespace Catrobat.Paint.WindowsPhone.Listener
 {
     public class ApplicationBarListener
     {

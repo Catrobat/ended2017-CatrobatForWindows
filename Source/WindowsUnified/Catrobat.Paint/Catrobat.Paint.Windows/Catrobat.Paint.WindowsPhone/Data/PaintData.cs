@@ -1,10 +1,8 @@
-﻿using Windows.Media;
-using System.Windows;
-using Windows.UI.Xaml.Media;
+﻿using Catrobat.Paint.WindowsPhone.Tool;
 using Windows.UI;
-using Catrobat.Paint.Phone.Tool;
+using Windows.UI.Xaml.Media;
 
-namespace Catrobat.Paint.Phone.Data
+namespace Catrobat.Paint.WindowsPhone.Data
 {
     public delegate void StrokeColorChangedEventHandler(SolidColorBrush color);
     public delegate void ColorChangedEventHandler(SolidColorBrush color);

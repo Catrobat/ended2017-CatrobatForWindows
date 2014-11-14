@@ -1,5 +1,4 @@
-﻿using Catrobat.Paint.Phone;
-using Windows.UI.Xaml.Media;
+﻿using Windows.UI.Xaml.Media;
 
 namespace Catrobat.Paint.WindowsPhone.Command
 {

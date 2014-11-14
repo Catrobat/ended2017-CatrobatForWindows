@@ -1,6 +1,4 @@
-﻿using Catrobat.Paint.Phone;
-using Catrobat.Paint.Phone.Tool;
-using Catrobat.Paint.WindowsPhone.Controls.UserControls;
+﻿using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Windows.Foundation;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;

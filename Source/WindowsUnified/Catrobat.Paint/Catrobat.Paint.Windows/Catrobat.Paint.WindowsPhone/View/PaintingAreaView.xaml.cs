@@ -1,9 +1,8 @@
-﻿using Catrobat.Paint.Phone;
-using Catrobat.Paint.Phone.Listener;
-using Catrobat.Paint.Phone.Tool;
-using Catrobat.Paint.Phone.Ui;
-using Catrobat.Paint.WindowsPhone.Command;
+﻿using Catrobat.Paint.WindowsPhone.Command;
+using Catrobat.Paint.WindowsPhone.Common;
+using Catrobat.Paint.WindowsPhone.Listener;
 using Catrobat.Paint.WindowsPhone.Tool;
+using Catrobat.Paint.WindowsPhone.Ui;
 using System;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -18,7 +17,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
 

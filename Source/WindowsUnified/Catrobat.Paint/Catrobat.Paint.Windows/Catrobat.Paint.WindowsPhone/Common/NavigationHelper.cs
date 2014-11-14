@@ -4,7 +4,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Catrobat.IDE.WindowsShared.Common
+namespace Catrobat.Paint.WindowsPhone.Common
 {
     /// <summary>
     /// NavigationHelper aids in navigation between pages.  It provides commands used to 

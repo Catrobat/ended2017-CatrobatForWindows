@@ -1,10 +1,7 @@
-﻿using System.Windows;
-using Catrobat.Paint.WindowsPhone.View;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Catrobat.Paint.WindowsPhone.Tool;
-using Windows.UI.Xaml;
 
-namespace Catrobat.Paint.Phone.Tool
+namespace Catrobat.Paint.WindowsPhone.Tool
 {
     public abstract class ToolBase
     {

@@ -1,18 +1,11 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Input;
-using Catrobat.Paint.Phone.Tool;
-using Catrobat.Paint.Phone.Ui;
-using Windows.UI.Input;
-using Windows.Foundation;
-using Windows.UI.Xaml.Media;
+﻿using Catrobat.Paint.WindowsPhone.Ui;
 using Catrobat.Paint.WindowsPhone.Tool;
+using System;
+using Windows.Foundation;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Popups;
-using Windows.UI.Xaml.Shapes;
-using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 
-namespace Catrobat.Paint.Phone.Listener
+namespace Catrobat.Paint.WindowsPhone.Listener
 {
     class PaintingAreaManipulationListener 
     {

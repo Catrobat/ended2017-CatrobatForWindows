@@ -1,13 +1,10 @@
-﻿using Catrobat.Paint.Phone.Command;
-using Catrobat.Paint.WindowsPhone.Command;
-using Catrobat.Paint.WindowsPhone.Tool;
-using System;
+﻿using Catrobat.Paint.WindowsPhone.Command;
 using Windows.Foundation;
 // TODO: using Catrobat.Paint.Phone.Command;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 
-namespace Catrobat.Paint.Phone.Tool
+namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class BrushTool : ToolBase
     {

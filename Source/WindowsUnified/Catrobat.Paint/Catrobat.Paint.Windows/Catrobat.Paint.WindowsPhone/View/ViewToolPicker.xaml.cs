@@ -1,5 +1,4 @@
-﻿using Catrobat.Paint.Phone;
-using Catrobat.Paint.WindowsPhone.Controls.UserControls;
+﻿using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Catrobat.Paint.WindowsPhone.Tool;
 using System;
 using Windows.UI;

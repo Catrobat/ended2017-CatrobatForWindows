@@ -1,9 +1,8 @@
-﻿using System.Windows;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 
-namespace Catrobat.Paint.Phone.Ui
+namespace Catrobat.Paint.WindowsPhone.Ui
 {
     public static class Spinner
     {
