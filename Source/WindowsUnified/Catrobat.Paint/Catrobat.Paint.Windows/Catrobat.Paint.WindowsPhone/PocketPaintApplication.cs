@@ -58,6 +58,8 @@ namespace Catrobat.Paint.Phone
         public Grid PaintingAreaLayoutRoot { get; set; }
         #endregion
 
+        public InfoBoxControl InfoBoxControl { get; set; }
+
         public CursorControl cursorControl { get; set; }
 
         public Canvas PaintingAreaCanvas { get; set; }
@@ -206,19 +208,19 @@ namespace Catrobat.Paint.Phone
             switch (toolType)
             {
                 case ToolType.Brush:
-                    ToolCurrent = new BrushTool(toolType);
+                    ToolCurrent = new BrushTool();
                     break;
                 case ToolType.Crop:
                     ToolCurrent = new CropTool();
                     break;
                 case ToolType.Cursor:
-                    ToolCurrent = new CursorTool(toolType);
+                    ToolCurrent = new CursorTool();
                     break;
                 case ToolType.Ellipse:
                     ToolCurrent = new EllipseTool();
                     break;
                 case ToolType.Eraser:
-                    ToolCurrent = new EraserTool(toolType);
+                    ToolCurrent = new EraserTool();
                     break;
                 case ToolType.ImportPng:
                     ToolCurrent = new ImportTool();

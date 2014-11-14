@@ -91,9 +91,6 @@ namespace Catrobat.Paint.Phone.Tool
 
         private void addFlipTransformToPaintingAreaView(ScaleTransform renderTransform)
         {
-            //Transform transform = PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform;
-            //TransformGroup transformGroup = new TransformGroup();
-            //transformGroup.Children.Add(transform);
             TransformGroup transformGroup = PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform as TransformGroup;
             for (int i = 0; i < transformGroup.Children.Count; i++)
             {
@@ -104,7 +101,6 @@ namespace Catrobat.Paint.Phone.Tool
             }
             transformGroup.Children.Add(renderTransform);
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = transformGroup;
-
         }
 
         public void PaintingAreaCanvasSettings(ScaleTransform renderTransform)

@@ -15,13 +15,14 @@ using namespace Concurrency;
 // Loads and initializes application assets when the application is loaded.
 
 Catrobat_PlayerMain::Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources,
-                                         Windows::UI::Xaml::Controls::CommandBar^ playerAppBar) :
+                                         Windows::UI::Xaml::Controls::CommandBar^ playerAppBar,
+                                         Platform::String^ projectName) :
 m_deviceResources(deviceResources), 
 m_pointerLocationX(0.0f),
 m_loadingComplete(false),
 m_playerAppBar(playerAppBar),
 m_playerState(PlayerState::Init),
-m_projectName("testTapp2")
+m_projectName(projectName)
 {
     // Register to be notified if the Device is lost or recreated
     m_deviceResources->RegisterDeviceNotify(this);
@@ -117,27 +118,26 @@ void Catrobat_PlayerMain::PointerPressed(D2D1_POINT_2F point)
 
 //----------------------------------------------------------------------
 
-void Catrobat_PlayerMain::HardwareBackButtonPressed(_In_ Platform::Object^ sender, BackPressedEventArgs ^args)
+bool Catrobat_PlayerMain::HardwareBackButtonPressed()
 {
     if (m_playerState == PlayerState::Active)
     {
         // Player is in active play mode, so hitting the hardware back button
-        // will cause the game to pause and show the user the command bar.
-        args->Handled = true;
+        // will cause the game to pause and show the user the command bar --> return false
 
         critical_section::scoped_lock lock(m_criticalSection);
 
         StopRenderLoop();
         m_playerState = PlayerState::Pause;
         m_playerAppBar->Visibility = Windows::UI::Xaml::Visibility::Visible;
+        return false;
     }
     else
     {
         // Player is in pause or init mode, so hitting the hardware back button
-        // will cause the game to terminate and bring the user back to the IDE.
+        // will cause the player to terminate and bring the user back to the IDE --> return true
         
-        // TODO implement this functionality
-        args->Handled = false;
+        return true;
     }
 }
 

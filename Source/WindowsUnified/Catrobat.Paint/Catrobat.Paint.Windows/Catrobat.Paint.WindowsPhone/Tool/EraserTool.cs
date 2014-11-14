@@ -24,9 +24,9 @@ namespace Catrobat.Paint.Phone.Tool
         private WriteableBitmap _bitmapTemp;
         private readonly Color _colorEmpty = new Color { A = 0x00, B = 0x00, G = 0x00, R = 0x00 };
 
-        public EraserTool(ToolType toolType = ToolType.Eraser)
+        public EraserTool()
         {
-            ToolType = toolType;
+            ToolType = ToolType.Eraser;
             ResetCanvas();
         }
 
@@ -69,14 +69,12 @@ namespace Catrobat.Paint.Phone.Tool
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Children.Add(_path);
 
-            //            var transform = PocketPaintApplication.GetInstance().PaintingAreaCanvas.TransformToVisual(PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot);
-            //            var absolutePosition = transform.Transform(new Point(0, 0));
-            var r = new RectangleGeometry
+            var rectangleGeometry = new RectangleGeometry
             {
                 Rect = new Rect(0, 0, PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.ActualWidth,
                 PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.ActualHeight)
             };
-            _path.Clip = r;
+            _path.Clip = rectangleGeometry;
             _path.InvalidateArrange();
             _path.InvalidateMeasure();
 

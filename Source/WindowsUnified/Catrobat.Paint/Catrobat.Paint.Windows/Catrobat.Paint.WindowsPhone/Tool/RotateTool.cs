@@ -10,9 +10,9 @@ namespace Catrobat.Paint.Phone.Tool
         private int _angle;
         private RotateTransform _rotateTransform;
 
-        public RotateTool(ToolType tooltype = ToolType.Rotate)
+        public RotateTool()
         {
-            this.ToolType = tooltype;
+            this.ToolType = ToolType.Rotate;
             _angle = 0;
             _rotateTransform = new RotateTransform();
             PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = _rotateTransform;

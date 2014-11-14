@@ -20,7 +20,8 @@ namespace Catrobat_Player
 	{
 	public:
         Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources, 
-                            Windows::UI::Xaml::Controls::CommandBar^ playerAppBar);
+                            Windows::UI::Xaml::Controls::CommandBar^ playerAppBar,
+                            Platform::String^ projectName);
 		~Catrobat_PlayerMain();
 		void CreateWindowSizeDependentResources();
         Concurrency::critical_section& GetCriticalSection() { return m_criticalSection; }
@@ -31,9 +32,7 @@ namespace Catrobat_Player
 		
         // Event input from the user.
         void PointerPressed(D2D1_POINT_2F point);
-        void HardwareBackButtonPressed(
-            _In_ Platform::Object^ sender, 
-            Windows::Phone::UI::Input::BackPressedEventArgs ^args);
+        bool HardwareBackButtonPressed();
         void RestartButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
         void PlayButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
         void ThumbnailButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);

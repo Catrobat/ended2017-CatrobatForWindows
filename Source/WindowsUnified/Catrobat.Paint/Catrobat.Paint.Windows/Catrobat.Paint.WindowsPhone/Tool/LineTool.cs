@@ -57,14 +57,12 @@ namespace Catrobat.Paint.Phone.Tool
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
 
-            //            var transform = PocketPaintApplication.GetInstance().PaintingAreaCanvas.TransformToVisual(PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot);
-            //            var absolutePosition = transform.Transform(new Point(0, 0));
-            var r = new RectangleGeometry
+            var rectangleGeometry = new RectangleGeometry
             {
                 Rect = new Rect(0, 0, PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth,
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight)
             };
-            _path.Clip = r;
+            _path.Clip = rectangleGeometry;
             _path.InvalidateArrange();
             _path.InvalidateMeasure();
             _lineSegment = new LineSegment();

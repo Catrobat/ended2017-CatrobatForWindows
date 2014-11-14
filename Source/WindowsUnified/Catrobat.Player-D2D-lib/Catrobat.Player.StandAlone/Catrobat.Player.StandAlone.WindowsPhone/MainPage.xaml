@@ -8,7 +8,32 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+  <SwapChainPanel x:Name="swapChainPanel">
+    <!-- Loading Project -->
 
-    </Grid>
+  </SwapChainPanel>
+
+  <Page.BottomAppBar>
+    <CommandBar Name="PlayerAppBar" VerticalAlignment="Bottom" 
+      Visibility="Collapsed">
+      <CommandBar.PrimaryCommands>
+        <AppBarButton Label="restart"
+          Icon="Refresh"
+          Click="OnRestartButtonClicked"/>
+        <AppBarButton Label="pause" 
+          Icon="Play" 
+          Click="OnPlayButtonClicked"/>
+        <AppBarButton Label="set thumbnail" 
+          Icon="Camera"
+          Click="OnThumbnailButtonClicked"/>
+        <AppBarButton Label="Enable Axes"  
+          Icon="Setting"  
+          Click="OnEnableAxisButtonClicked"/>
+      </CommandBar.PrimaryCommands>
+      <CommandBar.SecondaryCommands>
+        <AppBarButton Label="take screenshot" 
+          Click="OnScreenshotButtonClicked"/>
+      </CommandBar.SecondaryCommands>
+    </CommandBar>
+  </Page.BottomAppBar>
 </Page>

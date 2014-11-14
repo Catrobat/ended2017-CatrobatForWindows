@@ -12,6 +12,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Phone.UI.Input;
+
+
+
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,20 +33,53 @@ namespace Catrobat.Player.StandAlone
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
+        //private readonly Catrobat_Player::Catrobat_PlayerMain _testMain = new Catrobat_PlayerMain;
+
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
+
+        //var playerObject = null;
+        private readonly Catrobat_Player.Catrobat_PlayerAdapter playerObject = new Catrobat_Player.Catrobat_PlayerAdapter();
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // TODO: Prepare page for display here.
+            // register hardware back button event
+            HardwareButtons.BackPressed += OnHardwareBackButtonPressed;
 
-            // TODO: If your application contains multiple pages, ensure that you are
-            // handling the hardware Back button by registering for the
-            // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
-            // If you are using the NavigationHelper provided by some templates,
-            // this event is handled for you.
+            playerObject.InitPlayer(swapChainPanel, PlayerAppBar, "testTapp2");
+        }
+
+        private void OnRestartButtonClicked(object sender, RoutedEventArgs e)
+        {
+            playerObject.RestartButtonClicked(sender, e);            
+        }
+
+        private void OnPlayButtonClicked(object sender, RoutedEventArgs e)
+        {
+            playerObject.PlayButtonClicked(sender, e);
+        }
+        private void OnThumbnailButtonClicked(object sender, RoutedEventArgs e)
+        {
+            playerObject.ThumbnailButtonClicked(sender, e);
+        }
+        private void OnEnableAxisButtonClicked(object sender, RoutedEventArgs e)
+        {
+            playerObject.EnableAxisButtonClicked(sender, e);
+        }
+        private void OnScreenshotButtonClicked(object sender, RoutedEventArgs e)
+        {
+            playerObject.ScreenshotButtonClicked(sender, e);
+        }
+
+        private void OnHardwareBackButtonPressed(object sender, BackPressedEventArgs args)
+        {
+            args.Handled = true;
+            if (playerObject.HardwareBackButtonPressed() == true)
+            {
+                Application.Current.Exit();
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Data.Xml.Dom;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Phone.UI.Input;
@@ -20,6 +21,7 @@ using Windows.Storage;
 using Windows.Storage.Search;
 using Windows.UI;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -42,6 +44,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         static bool flipVertical;
         static bool flipHorizontal;
         static bool isDoubleTapLoaded;
+        static bool isFullscreen;
         static bool isPointerEventLoaded;
         static bool isManipulationEventLoaded;
         static int zoomCounter;
@@ -52,9 +55,10 @@ namespace Catrobat.Paint.WindowsPhone.View
             rotateCounter = 0;
             flipHorizontal = false;
             flipHorizontal = false;
+            isDoubleTapLoaded = false;
+            isFullscreen = false;
             isPointerEventLoaded = false;
             isManipulationEventLoaded = false;
-            isDoubleTapLoaded = false;
             zoomCounter = 0;
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
@@ -71,6 +75,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().GridInputScopeControl = GridInputScopeControl;
             PocketPaintApplication.GetInstance().GridCropControl = GridCropControl;
             PocketPaintApplication.GetInstance().GridImportImageSelectionControl = GridImportImageSelectionControl;
+            PocketPaintApplication.GetInstance().InfoBoxControl = InfoBoxControl;
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
 
@@ -97,7 +102,19 @@ namespace Catrobat.Paint.WindowsPhone.View
             
             setPaintingAreaViewLayout();
             PocketPaintApplication.GetInstance().GrdThicknessControlState = Visibility.Collapsed;
-            createAppBarAndSwitchAppBarContent(current_appbar);        
+            createAppBarAndSwitchAppBarContent(current_appbar);
+        }
+
+        public async void hideStatusAppBar()
+        {
+            var statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+            await statusBar.HideAsync();
+        }
+
+        public async void showStatusAppBar()
+        {
+            var statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+            await statusBar.ShowAsync();
         }
 
         void PaintingAreaCanvas_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
@@ -138,6 +155,17 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 e.Handled = true;
                 this.Frame.GoBack();
+            }
+            else if (isFullscreen)
+            {
+                isFullscreen = false;
+
+                PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Visible;
+                this.BottomAppBar.Visibility = Visibility.Visible;
+
+                showStatusAppBar();
+
+                e.Handled = true;
             }
         }
 
@@ -433,11 +461,13 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
 
             app_btnClearElementsInWorkingSpace.Click += app_btnClearElementsInWorkingSpace_Click;
+            app_btnNewPicture.Click += app_btnNewPicture_Click;
+            app_btnFullScreen.Click += app_btnFullScreen_Click;
 
             app_btnClearElementsInWorkingSpace.Label = "Arbeitsfläche löschen";
             app_btnSave.Label = "Speichern";
             app_btnSaveCopy.Label = "Kopie speichern";
-            app_btnNewPicture.Label = "New Picture";
+            app_btnNewPicture.Label = "Neues Bild";
             app_btnLoad.Label = "Laden";
             app_btnFullScreen.Label = "Vollbild";
             app_btnAbout.Label = "Über";
@@ -453,6 +483,48 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             BottomAppBar = cmdBar;
             current_appbar = type;
+        }
+
+        void app_btnNewPicture_Click(object sender, RoutedEventArgs e)
+        {
+            disableToolbarsAndPaintingArea(true);
+        }
+
+        void app_btnFullScreen_Click(object sender, RoutedEventArgs e)
+        {
+            isFullscreen = true;
+
+            PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Collapsed;
+            this.BottomAppBar.Visibility = Visibility.Collapsed;
+
+            hideStatusAppBar();
+        }
+
+
+
+        public void disableToolbarsAndPaintingArea(bool isDisable)
+        {
+            if (isDisable)
+            {
+                PaintingAreaCanvas.IsHitTestVisible = false;
+                PaintingAreaCanvas.Background = new SolidColorBrush(Colors.Black);
+                PaintingAreaCanvas.Background.Opacity = 0.5;
+
+                PocketPaintApplication.GetInstance().InfoBoxControl.Visibility = Visibility.Visible;
+                
+                PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Collapsed;
+                this.BottomAppBar.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PaintingAreaCanvas.IsHitTestVisible = true;
+                PaintingAreaCanvas.Background = new SolidColorBrush(Colors.Transparent);
+                
+                PocketPaintApplication.GetInstance().InfoBoxControl.Visibility = Visibility.Collapsed;
+                
+                PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Visible;
+                this.BottomAppBar.Visibility = Visibility.Visible;
+            }
         }
 
         void app_btnClearElementsInWorkingSpace_Click(object sender, RoutedEventArgs e)
