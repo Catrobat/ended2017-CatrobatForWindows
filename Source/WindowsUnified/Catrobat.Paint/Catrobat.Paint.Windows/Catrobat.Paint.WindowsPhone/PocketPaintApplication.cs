@@ -1,10 +1,8 @@
-﻿using Catrobat.Paint.Phone.Command;
-using Catrobat.Paint.Phone.Data;
-using Catrobat.Paint.Phone.Listener;
-using Catrobat.Paint.Phone.Tool;
-using Catrobat.Paint.WindowsPhone.Command;
+﻿using Catrobat.Paint.WindowsPhone.Command;
 using Catrobat.Paint.WindowsPhone.Controls.AppBar;
 using Catrobat.Paint.WindowsPhone.Controls.UserControls;
+using Catrobat.Paint.WindowsPhone.Data;
+using Catrobat.Paint.WindowsPhone.Listener;
 using Catrobat.Paint.WindowsPhone.Tool;
 using Catrobat.Paint.WindowsPhone.View;
 using System;
@@ -14,7 +12,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
 
-namespace Catrobat.Paint.Phone
+namespace Catrobat.Paint.WindowsPhone
 {
     public class PocketPaintApplication
     {
@@ -58,6 +56,7 @@ namespace Catrobat.Paint.Phone
         public Grid PaintingAreaLayoutRoot { get; set; }
         #endregion
 
+        public InfoBoxActionControl InfoBoxActionControl { get; set; }
         public InfoBoxControl InfoBoxControl { get; set; }
 
         public CursorControl cursorControl { get; set; }

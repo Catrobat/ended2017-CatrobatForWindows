@@ -21,6 +21,9 @@
         <m3:DefaultTile Wide310x150Logo="Assets\Tiles\Wide310x150.png" Square71x71Logo="Assets\Tiles\Square71x71.png">
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\Tiles\SplashScreen.png" />
+        <m3:InitialRotationPreference>
+          <m3:Rotation Preference="portrait" />
+        </m3:InitialRotationPreference>
       </m3:VisualElements>
       <Extensions>
         <Extension Category="windows.fileTypeAssociation">
@@ -38,6 +41,10 @@
     </Application>
   </Applications>
   <Capabilities>
+    <Capability Name="videosLibrary" />
+    <Capability Name="picturesLibrary" />
+    <Capability Name="musicLibrary" />
     <Capability Name="internetClientServer" />
+    <DeviceCapability Name="webcam" />
   </Capabilities>
 </Package>

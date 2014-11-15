@@ -1,17 +1,6 @@
-﻿using Catrobat.Paint.Phone;
-using Catrobat.Paint.Phone.Tool;
-using Catrobat.Paint.WindowsPhone.Controls.UserControls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Windows.Foundation;
-using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
@@ -85,10 +74,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             Path _path = new Path();
             ImageBrush berriesBrush = new ImageBrush();
-            berriesBrush.ImageSource =
-                new BitmapImage(
-                    new Uri("ms-resource:/Files/Assets/test.jpg", UriKind.Absolute)
-                );
+            berriesBrush.ImageSource = PocketPaintApplication.GetInstance().ImportImageSelectionControl.imageSourceOfRectangleToDraw.ImageSource;
             _path.Fill = berriesBrush;
             _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
             _path.StrokeThickness = strokeThickness;

@@ -1,30 +1,15 @@
 ﻿using Catrobat.Paint.WindowsPhone;
+using Catrobat.Paint.WindowsPhone.Common;
 using Catrobat.Paint.WindowsPhone.View;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
-using Windows.Storage.Provider;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-using Catrobat.Paint.WindowsPhone;
-using Catrobat.IDE.WindowsShared.Common;
-using Catrobat.Paint.Phone;
-
-
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -37,6 +22,7 @@ namespace Catrobat.Paint
     {
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
+        ContinuationManager continuationManager;
 #endif
 
         /// <summary>
@@ -142,8 +128,77 @@ namespace Catrobat.Paint
             var deferral = e.SuspendingOperation.GetDeferral();
 
             // TODO: Save application state and stop any background activity
-            await Catrobat.IDE.WindowsShared.Common.SuspensionManager.SaveAsync();
+            await Catrobat.Paint.WindowsPhone.Common.SuspensionManager.SaveAsync();
             deferral.Complete();
+        }
+        private Frame CreateRootFrame()
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
+            if (rootFrame == null)
+            {
+                // Create a Frame to act as the navigation context and navigate to the first page
+                rootFrame = new Frame();
+
+                // Set the default language
+                rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
+                // rootFrame.NavigationFailed += OnNavigationFailed;
+
+                // Place the frame in the current Window
+                Window.Current.Content = rootFrame;
+            }
+
+            return rootFrame;
+        }
+
+
+        protected async override void OnActivated(IActivatedEventArgs e)
+        {
+            base.OnActivated(e);
+            continuationManager = new ContinuationManager();
+
+            Frame rootFrame = CreateRootFrame();
+            await RestoreStatusAsync(e.PreviousExecutionState);
+
+
+            var continuationEventArgs = e as IContinuationActivatedEventArgs;
+
+
+            if (rootFrame.Content != null)
+            {
+                rootFrame.Navigate(typeof(PaintingAreaView));
+                if (continuationEventArgs != null)
+                {
+                    continuationManager.Continue(continuationEventArgs, rootFrame);
+                }
+            }
+
+
+
+            Window.Current.Activate();
+
+
+        }
+
+        private async Task RestoreStatusAsync(ApplicationExecutionState previousExecutionState)
+        {
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
+            if (previousExecutionState == ApplicationExecutionState.Terminated)
+            {
+                // Restore the saved session state only when appropriate
+                try
+                {
+                    await SuspensionManager.RestoreAsync();
+                }
+                catch (SuspensionManagerException)
+                {
+                    //Something went wrong restoring state.
+                    //Assume there is no state and continue
+                }
+            }
         }
 
 
@@ -155,7 +210,7 @@ namespace Catrobat.Paint
             {
                 var file = (StorageFile)e.Files[0];
 
-                IdeInteraction.GotPictureFromIde(file);
+                await IdeInteraction.GotPictureFromIde(file);
             }
             catch (Exception exc)
             {
@@ -163,6 +218,7 @@ namespace Catrobat.Paint
                 //var messageDialog2 = new MessageDialog(exc.Message);
                 //messageDialog2.ShowAsync();
             }
+            
 
 
 
@@ -227,5 +283,7 @@ namespace Catrobat.Paint
             // Ensure the current window is active
             Window.Current.Activate();
         }
+
+        public ContinuationManager ContinuationManager { get; private set; }
     }
 }

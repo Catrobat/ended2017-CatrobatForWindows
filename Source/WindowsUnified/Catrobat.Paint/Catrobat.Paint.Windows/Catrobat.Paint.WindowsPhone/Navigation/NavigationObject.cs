@@ -1,8 +1,6 @@
-﻿
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 
-namespace Catrobat.IDE.Core.Navigation
+namespace Catrobat.Paint.WindowsPhone.Navigation
 {
     public delegate void GoBackRequested();
 

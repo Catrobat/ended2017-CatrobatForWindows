@@ -1,22 +1,12 @@
-﻿using Catrobat.Paint.Phone;
-using Catrobat.Paint.Phone.Data;
+﻿using Catrobat.Paint.WindowsPhone.Tool;
 using Catrobat.Paint.WindowsPhone.View;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
@@ -138,7 +128,16 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (rootFrame != null)
             {
                 PocketPaintApplication.GetInstance().is_border_color = false;
-                rootFrame.Navigate(typeof(ViewColorPicker));
+                
+                if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.ImportPng)
+                {
+                    PocketPaintApplication.GetInstance().PaintingAreaView.visibilityGridEllRecControl = Visibility.Collapsed;
+                    PocketPaintApplication.GetInstance().InfoBoxActionControl.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    rootFrame.Navigate(typeof(ViewColorPicker));
+                }
             }
         }
 

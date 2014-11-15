@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Windows;
-using Windows.UI.Xaml.Shapes;
+using Windows.Foundation;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 // TODO: using Catrobat.Paint.Phone.Command;
 using Windows.UI.Xaml.Media;
-using Windows.Foundation;
-using Catrobat.Paint.WindowsPhone.Tool;
-using Catrobat.Paint.Phone.Command;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml;
+using Windows.UI.Xaml.Shapes;
 
-namespace Catrobat.Paint.Phone.Tool
+namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class CursorTool : ToolBase
     {

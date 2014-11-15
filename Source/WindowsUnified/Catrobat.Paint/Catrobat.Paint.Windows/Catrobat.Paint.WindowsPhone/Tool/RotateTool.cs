@@ -1,9 +1,7 @@
-﻿using Catrobat.Paint.Phone.Command;
-using Catrobat.Paint.WindowsPhone.Command;
-using Catrobat.Paint.WindowsPhone.Tool;
+﻿using Catrobat.Paint.WindowsPhone.Command;
 using Windows.UI.Xaml.Media;
 
-namespace Catrobat.Paint.Phone.Tool
+namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class RotateTool : ToolBase
     {

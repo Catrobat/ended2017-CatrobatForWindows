@@ -1,15 +1,8 @@
 ﻿using Catrobat.Paint.WindowsPhone.Tool;
-using System.Windows;
-using Windows.Foundation;
-using Windows.UI.Xaml.Media;
-using Windows.Graphics;
-using Windows.Graphics.Imaging;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Imaging;
 using System;
-using Windows.UI.Xaml.Shapes;
+using Windows.Foundation;
 
-namespace Catrobat.Paint.Phone.Tool
+namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class PipetteTool : ToolBase
     {

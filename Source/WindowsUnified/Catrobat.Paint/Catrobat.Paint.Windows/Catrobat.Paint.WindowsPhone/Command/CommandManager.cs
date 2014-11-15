@@ -1,11 +1,10 @@
-﻿using Catrobat.Paint.Phone.Ui;
-using Catrobat.Paint.WindowsPhone.Command;
-using Catrobat.Paint.WindowsPhone.Tool;
+﻿using Catrobat.Paint.WindowsPhone.Tool;
+using Catrobat.Paint.WindowsPhone.Ui;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace Catrobat.Paint.Phone.Command
+namespace Catrobat.Paint.WindowsPhone.Command
 {
     //TODO: what has to be synchronized?
     public class CommandManager
