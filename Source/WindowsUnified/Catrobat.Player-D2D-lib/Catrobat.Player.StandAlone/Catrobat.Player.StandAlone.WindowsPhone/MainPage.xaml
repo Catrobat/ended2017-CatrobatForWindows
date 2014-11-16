@@ -10,7 +10,19 @@
 
   <SwapChainPanel x:Name="swapChainPanel">
     <!-- Loading Project -->
-
+    <!--<Image Source="ms-appx:///Assets/SplashScreen.png" x:Name="ImagePlayerLoadSplashScreen" 
+           VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" 
+           Opacity="0.5" />
+    
+    <Grid Grid.Row="0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="5*"/>
+        <RowDefinition Height="2*"/>
+      </Grid.RowDefinitions>
+      <ProgressRing x:Name="ProgressRingExtendedSplash" Grid.Row="1" Background="Transparent" 
+                    Margin="0" IsActive="True" Width="40" Height="40" VerticalAlignment="Top" 
+                    HorizontalAlignment="Center"/>
+    </Grid>-->
   </SwapChainPanel>
 
   <Page.BottomAppBar>

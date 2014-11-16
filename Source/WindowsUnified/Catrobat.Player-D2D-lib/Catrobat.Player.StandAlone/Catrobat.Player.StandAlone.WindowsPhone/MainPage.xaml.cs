@@ -53,24 +53,24 @@ namespace Catrobat.Player.StandAlone
 
         private void OnRestartButtonClicked(object sender, RoutedEventArgs e)
         {
-            playerObject.RestartButtonClicked(sender, e);            
+            playerObject.RestartButtonClicked();            
         }
 
         private void OnPlayButtonClicked(object sender, RoutedEventArgs e)
         {
-            playerObject.PlayButtonClicked(sender, e);
+            playerObject.PlayButtonClicked();
         }
         private void OnThumbnailButtonClicked(object sender, RoutedEventArgs e)
         {
-            playerObject.ThumbnailButtonClicked(sender, e);
+            playerObject.ThumbnailButtonClicked();
         }
         private void OnEnableAxisButtonClicked(object sender, RoutedEventArgs e)
         {
-            playerObject.EnableAxisButtonClicked(sender, e);
+            playerObject.EnableAxisButtonClicked();
         }
         private void OnScreenshotButtonClicked(object sender, RoutedEventArgs e)
         {
-            playerObject.ScreenshotButtonClicked(sender, e);
+            playerObject.ScreenshotButtonClicked();
         }
 
         private void OnHardwareBackButtonPressed(object sender, BackPressedEventArgs args)

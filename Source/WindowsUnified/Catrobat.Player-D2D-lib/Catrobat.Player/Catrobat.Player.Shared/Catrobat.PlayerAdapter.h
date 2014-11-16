@@ -23,12 +23,11 @@ namespace Catrobat_Player
         bool HardwareBackButtonPressed();
 
         // Bottom CommandBar handlers.
-        void RestartButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
-        void PlayButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
-        void ThumbnailButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
-        void EnableAxisButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
-        void ScreenshotButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
-
+        void RestartButtonClicked();
+        void PlayButtonClicked();
+        void ThumbnailButtonClicked();
+        void EnableAxisButtonClicked();
+        void ScreenshotButtonClicked();
 
     private:
         // Window event handlers.
