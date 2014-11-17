@@ -52,22 +52,22 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            SetSourceOfThumbnail();
+            //SetSourceOfThumbnail(); --> TODO it is necessary to change the SplashScreen image instead of setting an image on this XAML page
 
             if (_viewModel.IsLaunchFromTile)
                 while (ServiceLocator.NavigationService.CanGoBack)
-                    ServiceLocator.NavigationService.RemoveBackEntry(); ;
+                    ServiceLocator.NavigationService.RemoveBackEntry();
 
             base.OnNavigatedTo(e);
 
-            // TODO forward the name of the current project
-            _playerObject.InitPlayer(swapChainPanel, PlayerAppBar, "testTapp2");
+            _playerObject.InitPlayer(swapChainPanel, PlayerAppBar, _viewModel.ProjectName);
+            _viewModel.PlayerObject = _playerObject;
 
         }
 
        
 
-        private async void SetSourceOfThumbnail()
+        /*private async void SetSourceOfThumbnail()
         {
             var projectFolder = "ms-appdata:///Local/" + StorageConstants.ProgramsPath + "/" + _viewModel.ProjectName + "/";
 
@@ -111,7 +111,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
                 await playerSplashImage.SetSourceAsync(randomAccessStream);
                 ImagePlayerLoadSplashScreen.Source = playerSplashImage;
             }
-        }
+        } */
 
     }
 }

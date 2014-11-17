@@ -208,36 +208,36 @@ namespace Catrobat_Player
     //----------------------------------------------------------------------
     // Bottom CommandBar handlers
 
-    void Catrobat_PlayerAdapter::RestartButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+    void Catrobat_PlayerAdapter::RestartButtonClicked()
     {
-        m_main->RestartButtonClicked(sender, args);
+        m_main->RestartButtonClicked();
     }
 
     //----------------------------------------------------------------------
 
-    void Catrobat_PlayerAdapter::PlayButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+    void Catrobat_PlayerAdapter::PlayButtonClicked()
     {
-        m_main->PlayButtonClicked(sender, args);
+        m_main->PlayButtonClicked();
     }
 
     //----------------------------------------------------------------------
 
-    void Catrobat_PlayerAdapter::ThumbnailButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+    void Catrobat_PlayerAdapter::ThumbnailButtonClicked()
     {
-        m_main->ThumbnailButtonClicked(sender, args);
+        m_main->ThumbnailButtonClicked();
     }
 
     //----------------------------------------------------------------------
 
-    void Catrobat_PlayerAdapter::EnableAxisButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+    void Catrobat_PlayerAdapter::EnableAxisButtonClicked()
     {
-        m_main->EnableAxisButtonClicked(sender, args);
+        m_main->EnableAxisButtonClicked();
     }
 
     //----------------------------------------------------------------------
 
-    void Catrobat_PlayerAdapter::ScreenshotButtonClicked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+    void Catrobat_PlayerAdapter::ScreenshotButtonClicked()
     {
-        m_main->ScreenshotButtonClicked(sender, args);
+        m_main->ScreenshotButtonClicked();
     }
 };

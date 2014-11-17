@@ -33,11 +33,11 @@ namespace Catrobat_Player
         // Event input from the user.
         void PointerPressed(D2D1_POINT_2F point);
         bool HardwareBackButtonPressed();
-        void RestartButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
-        void PlayButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
-        void ThumbnailButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
-        void EnableAxisButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
-        void ScreenshotButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
+        void RestartButtonClicked();
+        void PlayButtonClicked();
+        void ThumbnailButtonClicked();
+        void EnableAxisButtonClicked();
+        void ScreenshotButtonClicked();
 
 		// IDeviceNotify
 		virtual void OnDeviceLost();

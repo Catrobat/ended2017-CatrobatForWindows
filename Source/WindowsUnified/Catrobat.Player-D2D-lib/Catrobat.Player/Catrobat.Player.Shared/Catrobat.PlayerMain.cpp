@@ -143,7 +143,7 @@ bool Catrobat_PlayerMain::HardwareBackButtonPressed()
 
 //----------------------------------------------------------------------
 
-void Catrobat_PlayerMain::RestartButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+void Catrobat_PlayerMain::RestartButtonClicked()
 {
     critical_section::scoped_lock lock(m_criticalSection);
     m_playerState = PlayerState::Init;
@@ -157,7 +157,7 @@ void Catrobat_PlayerMain::RestartButtonClicked(_In_ Platform::Object^ sender, Wi
                                                   
 //----------------------------------------------------------------------
 
-void Catrobat_PlayerMain::PlayButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+void Catrobat_PlayerMain::PlayButtonClicked()
 {
     critical_section::scoped_lock lock(m_criticalSection);
 
@@ -168,10 +168,10 @@ void Catrobat_PlayerMain::PlayButtonClicked(_In_ Platform::Object^ sender, Windo
 
 //----------------------------------------------------------------------
 // 
-void Catrobat_PlayerMain::ThumbnailButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+void Catrobat_PlayerMain::ThumbnailButtonClicked()
 {
     // TODO get current screen image
-    // TODO save the current image
+    // TODO save the current image --> return true if it worked, or false otherwise
 
     // Create a template for the toast 
     ToastTemplateType toastTemplate = ToastTemplateType::ToastText02;
@@ -200,14 +200,14 @@ void Catrobat_PlayerMain::ThumbnailButtonClicked(_In_ Platform::Object^ sender, 
 
 //----------------------------------------------------------------------
 
-void Catrobat_PlayerMain::EnableAxisButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+void Catrobat_PlayerMain::EnableAxisButtonClicked()
 {
     // TODO implement me
 }
 
 //----------------------------------------------------------------------
 
-void Catrobat_PlayerMain::ScreenshotButtonClicked(_In_ Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args)
+void Catrobat_PlayerMain::ScreenshotButtonClicked()
 {
     // TODO implement me
 }
