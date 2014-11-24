@@ -4,51 +4,53 @@
     xmlns:local="using:Catrobat.IDE.WindowsPhone.Controls.ItemControls.Templates"
     xmlns:actionsControls="using:Catrobat.IDE.WindowsPhone.Controls.ActionsControls">
 
-    <Style TargetType="actionsControls:NormalBrick">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="actionsControls:NormalBrick">
-                    <Grid Margin="0 0 0 0" MinHeight="90">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="10"/>
-                        </Grid.RowDefinitions>
-                        <Path Fill="{Binding Path=Background, RelativeSource={RelativeSource TemplatedParent}}" Data="M7.499753,99.448822 L7.499753,88.390717 L31.628017,88.390717 L40.026104,97.859222 L56.103401,97.859222 L64.028831,88.390717 L488.81161,88.390717 L488.81161,99.448822 z" Stretch="Fill" UseLayoutRounding="False" Grid.Row="0" />
-                        <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M5.9855595,99.75132 L5.9855595,88.390717 L30.512451,88.390717 L37.42955,97.795746 L53.706406,97.795746 L60.338474,88.390717 L490.1813,88.390717 L490.1813,99.710037" Stretch="Fill" UseLayoutRounding="False" StrokeThickness="3"  Margin="-0.031,0,0,-1.531" Grid.Row="0" />
-                        <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource PhoneForegroundBrush}" Grid.Row="1" BorderThickness="3 0 3 0">
-                        </Border>
-                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="0 0 70 0" Grid.Row="1" />
+  <Style TargetType="actionsControls:NormalBrick">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="actionsControls:NormalBrick">
+          <Grid Margin="0 0 0 0" MinHeight="90">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="10"/>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
 
-                        <Path Data="M31.628017,88.390717 L40.026104,97.859222 L56.103401,97.859222 L64.028831,88.390717 z" Stretch="Fill" UseLayoutRounding="False" Margin="18,0,0,1.437" HorizontalAlignment="Left" Width="30" Fill="{TemplateBinding Background}" Grid.Row="2" />
-                        <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M4.4944959,88.390717 L30.512451,88.390717 L37.42955,97.795746 L53.706406,97.795746 L60.338474,88.390717 L491.73557,88.390717" Stretch="Fill" UseLayoutRounding="False" StrokeThickness="3" Margin="-1.5,0,-1.531,-0.063" Grid.Row="2" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
-    <Style TargetType="actionsControls:MasterBrick">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="actionsControls:MasterBrick">
-                    <Grid Margin="0 20 0 0" MinHeight="70" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="10"/>
-                        </Grid.RowDefinitions>
-                        <Path Data="M13.151761,97.795746 L20.068861,88.390717 L53.706406,88.390717 L60.338474,97.795746 z" Stretch="Fill" UseLayoutRounding="False" Fill="{TemplateBinding Background}" Grid.Row="0" Margin="9.029,0,0,-0.063" HorizontalAlignment="Left" Width="42" />
-                        <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M4.4944959,97.795746 L13.151761,97.795746 L20.068861,88.390717 L53.706406,88.390717 L60.338474,97.795746 L491.70383,97.795746" Stretch="Fill" UseLayoutRounding="False"  StrokeThickness="3"  Grid.Row="0" Margin="-1.5,0,-1.5,-0.063" />
-                        <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource PhoneForegroundBrush}" Grid.Row="1" BorderThickness="3 0 3 0">
-                        </Border>
-                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Grid.Row="1" />
+            <Path Data="M0,0 0,10 490,10 490,0 470,0 460,10 440,10 430,0 0,0" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="0" Stroke="{TemplateBinding Background}" StrokeThickness="2"/>
+            <Path Stroke="{TemplateBinding Background}" Data="M0,0 L490,0" Stretch="Fill" UseLayoutRounding="False" Grid.Row="0" Grid.RowSpan="2" StrokeThickness="2" VerticalAlignment="Top" Margin="-1,9,-1,0" />
+            <Path Stroke="#7FFFFFFF" Data="M0,0 429,0 438.25,10 460.5,10 469.75,0 490,0" Stretch="Fill" UseLayoutRounding="False" StrokeThickness="2.5" Grid.Row="0" />
 
-                        <Path Data="M31.628017,88.390717 L40.026104,97.859222 L56.103401,97.859222 L64.028831,88.390717 z" Stretch="Fill" UseLayoutRounding="False" Margin="18,0,0,1.437" HorizontalAlignment="Left" Width="30" Fill="{TemplateBinding Background}" Grid.Row="2" />
-                        <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M4.4944959,88.390717 L30.512451,88.390717 L37.42955,97.795746 L53.706406,97.795746 L60.338474,88.390717 L491.73557,88.390717" Stretch="Fill" UseLayoutRounding="False" StrokeThickness="3" Margin="-1.5,0,-1.531,-0.063" Grid.Row="2" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+            <Border Background="{TemplateBinding Background}" Grid.Row="1" />
+
+            <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="0 0 70 0" Grid.Row="1" />
+            <Path Stroke="{TemplateBinding Background}" Data="M0,80 L490,80" Stretch="Fill" UseLayoutRounding="False" Grid.Row="1" Grid.RowSpan="2" StrokeThickness="4" Margin="1,0,1,8" VerticalAlignment="Bottom"/>
+            <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M490,80 L470,80 L460,90 L439,90 L428,80 L0,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="2" StrokeThickness="2" Margin="0,0,0,0"/>
+
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="actionsControls:MasterBrick">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="actionsControls:MasterBrick">
+          <Grid Margin="0 20 0 0" MinHeight="70" >
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            
+            <Border Background="{TemplateBinding Background}" Grid.Row="0" />
+            <Path Data="M0,0 490,0" Grid.Row="0" Stretch="Fill" Stroke="#7FFFFFFF" StrokeThickness="2.5" VerticalAlignment="Top"/>
+            <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Grid.Row="0" />
+
+            <Path Stroke="{TemplateBinding Background}" Data="M0,80 L490,80" Stretch="Fill" UseLayoutRounding="False" Grid.Row="0" Grid.RowSpan="2" StrokeThickness="4" Margin="1,0,1,8" VerticalAlignment="Bottom"/>
+            <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M490,80 L470,80 L460,90 L439,90 L428,80 L0,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="1" StrokeThickness="2" Margin="0,0,0,0"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 </ResourceDictionary>

@@ -43,11 +43,11 @@
       <SolidColorBrush x:Key="LooksBrush" Color="#FF6F9263" />
       <SolidColorBrush x:Key="ObjectsBrush" Color="#FF891D1D" />
 
-      <SolidColorBrush x:Key="LooksBrickBrush" Color="#FF6F9242" />
-      <SolidColorBrush x:Key="MotionBrickBrush" Color="#FF0091C3" />
-      <SolidColorBrush x:Key="SoundBrickBrush" Color="#FF874D8D" />
-      <SolidColorBrush x:Key="ControlBrickBrush" Color="#FFF29260" />
-      <SolidColorBrush x:Key="VariableBrickBrush" Color="#FFE84F50" />
+      <SolidColorBrush x:Key="LooksBrickBrush" Color="#FF6A9B49" />
+      <SolidColorBrush x:Key="MotionBrickBrush" Color="#FF009EDA" />
+      <SolidColorBrush x:Key="SoundBrickBrush" Color="#FF8351A0" />
+      <SolidColorBrush x:Key="ControlBrickBrush" Color="#FFF79761" />
+      <SolidColorBrush x:Key="VariableBrickBrush" Color="#FFEF4E51" />
 
       <!-- Font Sizes -->
       <!--<system:Double x:Key="FontSizeSmall">12</system:Double>
