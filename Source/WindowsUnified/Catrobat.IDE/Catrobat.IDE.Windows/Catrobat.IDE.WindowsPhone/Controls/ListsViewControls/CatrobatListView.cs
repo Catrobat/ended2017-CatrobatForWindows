@@ -1528,14 +1528,14 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
         {
             _selectionHandleUnselected.Visibility = Visibility.Visible;
             _selectionHandleSelected.Visibility = Visibility.Collapsed;
-            _contentContainer.Opacity = 0.6;
+            _contentContainer.Opacity = 1; //0.6 for transparent
         }
 
         internal void EnableSelectionMode()
         {
             _selectionEnabled = true;
             _dragHandle.Visibility = Visibility.Collapsed;
-            _contentContainer.Opacity = 0.6;
+            _contentContainer.Opacity = 1; //0.6 for transparent
             if (this.Content is Script && !IsGrouped)
             {
                 return;
