@@ -97,6 +97,7 @@
     <Compile Include="Command\LineCommand.cs" />
     <Compile Include="Command\RotateCommand.cs" />
     <Compile Include="Command\UndoRedoActionbarManager.cs" />
+    <Compile Include="Common\ContinuationManager.cs" />
     <Compile Include="Common\NavigationHelper.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -126,6 +127,9 @@
     </Compile>
     <Compile Include="Controls\UserControls\ImportImageSelectionControl.xaml.cs">
       <DependentUpon>ImportImageSelectionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserControls\InfoBoxActionControl.xaml.cs">
+      <DependentUpon>InfoBoxActionControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\UserControls\InfoBoxControl.xaml.cs">
       <DependentUpon>InfoBoxControl.xaml</DependentUpon>
@@ -245,7 +249,6 @@
     <Content Include="Assets\ColorPicker\icon_menu_strokes.png" />
     <Content Include="Assets\ic_launcher.png" />
     <Content Include="Assets\ic_launcher_tile.png" />
-    <Content Include="Assets\test.jpg" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\Spinner.png" />
@@ -317,6 +320,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\UserControls\ImportImageSelectionControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\UserControls\InfoBoxActionControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
