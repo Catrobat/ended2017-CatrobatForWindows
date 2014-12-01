@@ -9,7 +9,7 @@
 
   <Grid>
       <Grid>
-        <Button x:Name="ContentControlSelectedItem" Click="ContentControlSelectedItem_OnClick" HorizontalContentAlignment="Left" Background="Transparent">
+      <Button x:Name="ContentControlSelectedItem" Click="ContentControlSelectedItem_OnClick" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="{StaticResource BrickBorderBrush}" Foreground="{StaticResource BrickForegroundBrush}">
           <!--Selected item will be placed here-->
         </Button>
       </Grid>

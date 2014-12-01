@@ -29,8 +29,11 @@
       <Color x:Key="ProcessIconBackgroundColor">#FF667799</Color>
       <SolidColorBrush x:Key="ProcessIconBackgroundBrush" Color="{ThemeResource ProcessIconBackgroundColor}" />
 
-      <Color x:Key="BrickBorderColor">#FF333355</Color>
+      <Color x:Key="BrickBorderColor">#FFFFFFFF</Color>
       <SolidColorBrush x:Key="BrickBorderBrush" Color="{ThemeResource BrickBorderColor}" />
+
+      <Color x:Key="BrickForegroundColor">#FFFFFFFF</Color>
+      <SolidColorBrush x:Key="BrickForegroundBrush" Color="{ThemeResource BrickForegroundColor}" />
 
       <SolidColorBrush x:Key="HyperLinkForegroundBrush" Color="{ThemeResource Accent1Color}" />
 

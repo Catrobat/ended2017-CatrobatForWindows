@@ -16,13 +16,13 @@
             </Grid.RowDefinitions>
 
 
-            <Path Data="M0,0 0,10 490,10 490,0 470,0 460,10 440,10 430,0 0,0" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="0" Stroke="{TemplateBinding Background}" StrokeThickness="2"/>
+            <Path Data="M0,0 0,10 490,10 490,0 470,0 460,10 440,10 428,0 0,0" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="0" Stroke="{TemplateBinding Background}" StrokeThickness="2"/>
             <Path Stroke="{TemplateBinding Background}" Data="M0,0 L490,0" Stretch="Fill" UseLayoutRounding="False" Grid.Row="0" Grid.RowSpan="2" StrokeThickness="2" VerticalAlignment="Top" Margin="-1,9,-1,0" />
             <Path Stroke="#7FFFFFFF" Data="M0,0 429,0 438.25,10 460.5,10 469.75,0 490,0" Stretch="Fill" UseLayoutRounding="False" StrokeThickness="2.5" Grid.Row="0" />
 
             <Border Background="{TemplateBinding Background}" Grid.Row="1" />
 
-            <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="0 0 70 0" Grid.Row="1" />
+            <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="0 0 60 0" Grid.Row="1" />
             <Path Stroke="{TemplateBinding Background}" Data="M0,80 L490,80" Stretch="Fill" UseLayoutRounding="False" Grid.Row="1" Grid.RowSpan="2" StrokeThickness="4" Margin="1,0,1,8" VerticalAlignment="Bottom"/>
             <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M490,80 L470,80 L460,90 L439,90 L428,80 L0,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="2" StrokeThickness="2" Margin="0,0,0,0"/>
 

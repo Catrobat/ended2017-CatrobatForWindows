@@ -93,7 +93,7 @@
                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                     Content="{TemplateBinding Content}"
                                     ContentTemplate="{TemplateBinding ContentTemplate}"
-                                    Foreground="{TemplateBinding Foreground}"
+                                    Foreground="White"
                                     />
             <Grid Grid.Column="0" 
                                 x:Name="GroupingGrid"

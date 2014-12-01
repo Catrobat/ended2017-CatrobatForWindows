@@ -64,15 +64,15 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
 
             TextBlockVariableName.Text = newVariable.Name;
 
-            if (isSelected)
-            {
-                TextBlockVariableName.Foreground = VariableHelper.IsVariableLocal(viewModel.CurrentProgram, newVariable) ?
-                    new SolidColorBrush(Colors.Black) : new SolidColorBrush(Colors.Gray);
-            }
-            else
-            {
-                TextBlockVariableName.Foreground = new SolidColorBrush(Colors.Red);
-            }
+            //if (isSelected)
+            //{
+            //    TextBlockVariableName.Foreground = VariableHelper.IsVariableLocal(viewModel.CurrentProgram, newVariable) ?
+            //        new SolidColorBrush(Colors.Black) : new SolidColorBrush(Colors.Gray);
+            //}
+            //else
+            //{
+            //    TextBlockVariableName.Foreground = new SolidColorBrush(Colors.Red);
+            //}
         }
 
         public VariableButton()

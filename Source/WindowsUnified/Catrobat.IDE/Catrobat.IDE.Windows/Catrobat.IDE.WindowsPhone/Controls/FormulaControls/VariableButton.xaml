@@ -7,9 +7,9 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="80" d:DesignWidth="200">
 
-  <Button Margin="7 0 7 0" Click="ButtonFormula_OnClick">
+  <Button Margin="7 0 7 0" Click="ButtonFormula_OnClick" BorderBrush="{StaticResource BrickBorderBrush}" Foreground="{StaticResource BrickForegroundBrush}" >
     <Grid>
       <TextBlock Name="TextBlockVariableName" Text="" ></TextBlock>
     </Grid>
   </Button>
-</UserControl>
+</UserControl>   

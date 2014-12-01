@@ -7,7 +7,7 @@
     d:DesignHeight="80" d:DesignWidth="200">
   
   <Grid Margin="6 0 0 0">
-    <Button Click="ButtonFormula_OnClick">
+    <Button Click="ButtonFormula_OnClick" BorderBrush="{StaticResource BrickBorderBrush}" Foreground="{StaticResource BrickForegroundBrush}">
       <Grid>
         <StackPanel>
           <TextBlock x:Name="TextBlockFormula" FontSize="30">
