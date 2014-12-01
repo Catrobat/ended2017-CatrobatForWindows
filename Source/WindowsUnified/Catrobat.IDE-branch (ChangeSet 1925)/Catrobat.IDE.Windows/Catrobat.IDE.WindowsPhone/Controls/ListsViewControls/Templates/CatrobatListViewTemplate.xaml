@@ -1,0 +1,210 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
+    xmlns:catrobatListView="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls">
+
+
+    <Style TargetType="catrobatListView:CatrobatListViewWorker">
+        <Setter
+            Property="HorizontalAlignment"
+            Value="Stretch" />
+        <Setter
+            Property="ScrollViewer.VerticalScrollBarVisibility"
+            Value="Auto" />
+        <Setter
+            Property="Background" 
+            Value="Transparent" />
+        <Setter 
+            Property="Margin"
+            Value="10,0,10,0"/>
+        <Setter 
+            Property="SelectionMode"
+            Value="None"/>
+        <Setter
+            Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                    TargetType="catrobatListView:CatrobatListViewWorker">
+                    <Grid x:Name="ListGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                Width="*" />
+                            <ColumnDefinition
+                                Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ProgressRing x:Name="CatrobatListViewProgressRing" Grid.Column="0" Grid.ColumnSpan="2" 
+                                      Background="Transparent" 
+                                      IsActive="True" Width="40" Height="40" 
+                                    VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Visible"/>
+                        <ScrollViewer
+                            x:Name="ScrollViewer"
+                             Grid.Column="0"
+                            Grid.ColumnSpan="2" 
+                            HorizontalScrollBarVisibility="Disabled"
+                            VerticalScrollBarVisibility="Visible"
+                            Background="{TemplateBinding Background}" IsEnabled="True" ZoomMode="Disabled">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                        <Canvas
+                            x:Name="ManipulationCanvas"
+                            Grid.ColumnSpan="2" Grid.Column="0"
+                            Opacity="1"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            Visibility="Collapsed" Background="#60FFFFFF" />
+                        <Canvas
+                            x:Name="DragCanvas"
+                            Grid.Column="1"
+                            ManipulationMode="All"
+                            Background="Transparent"
+                            Margin="{TemplateBinding Padding}"
+                            VerticalAlignment="Stretch"
+                            Width="65" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <Style x:Key="ReorderableListBoxItemStyleScriptBrick" TargetType="catrobatListView:CatrobatListViewItem">
+        <Setter
+            Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                    TargetType="catrobatListView:CatrobatListViewItem">
+                    <Grid
+                                Background="{TemplateBinding Background}"
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition
+                                        Width="*" />
+                            <ColumnDefinition
+                                        Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ContentControl
+                                    x:Name="ContentContainer"
+                                    Grid.ColumnSpan="3"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Content="{TemplateBinding Content}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    />
+                        <Grid Grid.Column="0" 
+                                x:Name="GroupingGrid"
+                                Visibility="Collapsed"
+                                Background="Transparent"
+                                Width="30">
+                            <Canvas x:Name="GroupingMinCanvas" Margin="13,35,0,0" Visibility="Collapsed">
+                                <Path Fill="White" Stroke="Transparent" 
+                                      Data="M0.5,0.5 L4.5,0.5 L4.5,13.6291 L17.6291,13.6291 L17.6291,17.6291 L0.629122,17.6291 L0.629122,17.5 L0.5,17.5 z"
+                                      Height="18.129" RenderTransformOrigin="0.1379,0.496439" Stretch="Fill" Width="18.129">
+                                    <Path.RenderTransform>
+                                        <CompositeTransform Rotation="-135"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                            </Canvas>
+                            <Canvas x:Name="GroupingMaxCanvas" Margin="10,35,0,0">
+                                <Path Fill="White" Stroke="Transparent" 
+                                      Data="M0.5,0.5 L5.5,0.5 L5.5,12.5203 L17.608,12.5203 L17.608,17.5203 L0.607975,17.5203 L0.607975,17.5 L0.5,17.5 z" 
+                                      Height="15.148" RenderTransformOrigin="0.165673,0.499437" Stretch="Fill" Width="15.222">
+                                    <Path.RenderTransform>
+                                        <CompositeTransform Rotation="-45"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                            </Canvas>
+                            <ProgressRing x:Name="CatrobatListViewItemProgressRing" 
+                                      Background="Transparent" 
+                                      IsActive="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                                    VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed"
+                                          MinWidth="40" MinHeight="40"
+                                          RenderTransformOrigin="0.5,0.5">
+                                <ProgressRing.RenderTransform>
+                                    <CompositeTransform ScaleY="0.5" ScaleX="0.5"/>
+                                </ProgressRing.RenderTransform>
+
+                            </ProgressRing>
+                        </Grid>
+                            
+                        <Canvas Grid.Column="2"
+                                        x:Name="DragHandle"
+                                         Width="65" Height="42"
+                                       Background="Transparent"
+                                        VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <Path Data="M40,440 L88,440 L88,448 L40,448 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="12,0,5,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" >
+                            </Path>
+                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="12,16,5,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" >
+                            </Path>
+                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="12,32,5,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" >
+                            </Path>
+                        </Canvas>
+                        <Canvas Grid.Column="2"
+                                        x:Name="SelectionHandleUnselected"
+                                         Width="65" Height="42"
+                                       Background="Transparent"
+                                        VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                Visibility="Collapsed">
+                            <Path Data="M40,440 L88,440 L88,448 L40,448 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="12,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
+                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="White" HorizontalAlignment="Left" Height="38" Margin="49,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="6" />
+                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="12,32,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
+                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="White" HorizontalAlignment="Left" Height="38" Margin="12,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="6" />
+                        </Canvas>
+                        <Canvas Grid.Column="2"
+                                        x:Name="SelectionHandleSelected"
+                                         Width="65" Height="42"
+                                       Background="Transparent"
+                                        VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                Visibility="Collapsed">
+                            <Path Data="M40,440 L88,440 L88,448 L40,448 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="12,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
+                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="White" HorizontalAlignment="Left" Height="38" Margin="49,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="6" />
+                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="12,32,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="43" />
+                            <Path Data="M40,456 L40,464 L88,464 L88,456 z" Fill="White" HorizontalAlignment="Left" Height="38" Margin="12,0,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="6" />
+                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="18.501,20.916,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="15" RenderTransformOrigin="0.5,0.5" >
+                                <Path.RenderTransform>
+                                    <CompositeTransform Rotation="45"/>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path Data="M40,472 L40,480 L88,480 L88,472 z" Fill="White" HorizontalAlignment="Left" Height="6" Margin="23.999,16.249,0,0" Stretch="Fill" Stroke="Transparent" UseLayoutRounding="False" VerticalAlignment="Top" Width="26" RenderTransformOrigin="0.5,0.5" >
+                                <Path.RenderTransform>
+                                    <CompositeTransform Rotation="-45"/>
+                                </Path.RenderTransform>
+                            </Path>
+
+                        </Canvas>
+                        <Canvas Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                x:Name="ClickPreventerCanvas"
+                                Background="Transparent"
+                                Visibility="Collapsed" />
+                        
+                        
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="LookItemControlTemplate">
+        
+        <controls:LookItemControl Look="{Binding}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="SpriteItemTemplate">
+        <controls:SpriteItemControl Sprite="{Binding}" />
+    </DataTemplate>
+
+
+    <DataTemplate x:Key="SoundItemControlTemplate">
+        <controls:SoundItemControl Sound="{Binding}"
+                    Group="{Binding ElementName=PlayPauseButtonGroupSounds}" />
+    </DataTemplate>
+
+</ResourceDictionary>
