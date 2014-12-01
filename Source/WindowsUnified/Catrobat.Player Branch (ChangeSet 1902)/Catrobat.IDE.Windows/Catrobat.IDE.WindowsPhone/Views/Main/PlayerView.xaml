@@ -1,0 +1,58 @@
+﻿<views:ViewPageBase x:Class="Catrobat.IDE.WindowsPhone.Views.Main.PlayerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+    xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
+    xmlns:controls1="using:WinRTXamlToolkit.Controls"
+    mc:Ignorable="d"
+    NavigationCacheMode="Enabled"
+    Background="{ThemeResource AppBackgroundBrush}"
+    DataContext="{Binding PlayerViewModel, Source={StaticResource Locator}}">
+
+  <SwapChainPanel x:Name="swapChainPanel">
+    <!-- Loading Project -->
+
+    <Image Source="ms-appx:///Assets/SplashScreen.png" x:Name="ImagePlayerLoadSplashScreen" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" Opacity="0.5"/>
+
+    <Grid Grid.Row="0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="5*"/>
+        <RowDefinition Height="2*"/>
+      </Grid.RowDefinitions>
+      <ProgressRing x:Name="ProgressRingExtendedSplash" Grid.Row="1" Background="Transparent" Margin="0" IsActive="True" Width="40" Height="40" 
+                VerticalAlignment="Top" HorizontalAlignment="Center"/>
+    </Grid>
+  </SwapChainPanel>
+
+  <Page.BottomAppBar>
+    <CommandBar Name="PlayerAppBar" VerticalAlignment="Bottom" 
+      Visibility="Collapsed" RequestedTheme="Dark" 
+      Background="{ThemeResource AppBarBackgroundBrush}">
+      <CommandBar.PrimaryCommands>
+        <AppBarButton Icon="Refresh" 
+          Label="restart"
+          Command="{Binding RestartProgramCommand}"/>
+      </CommandBar.PrimaryCommands>
+      <CommandBar.SecondaryCommands>
+        <AppBarButton Label="take screenshot"
+          Command="{Binding TakeScreenshotCommand}"/>
+      </CommandBar.SecondaryCommands>
+    </CommandBar>
+  </Page.BottomAppBar>
+  
+  <!--<Page.BottomAppBar>
+    <CommandBar  >
+      <CommandBar.PrimaryCommands>
+        <AppBarButton x:Name="Restart" Label="Restart" Icon="Refresh" Click="OnRestartButtonClicked"/>
+        <AppBarButton x:Name="Play" Label="Pause" Icon="Play" Click="OnPlayButtonClicked"/>
+        <AppBarButton x:Name="Thumbnail" Label="Set Thumbnail" Icon="Camera" Click="OnThumbnailButtonClicked"/>
+        <AppBarButton x:Name="EnableAxes"  Label="Enable Axes"  Icon="Setting"  Click="OnEnableAxisButtonClicked"/>
+      </CommandBar.PrimaryCommands>
+      <CommandBar.SecondaryCommands>
+        <AppBarButton x:Name="Screenshot" Label="Take Screenshot" Click="OnScreenshotButtonClicked"/>
+      </CommandBar.SecondaryCommands>
+    </CommandBar>-->
+  <!--</Page.BottomAppBar>-->
+</views:ViewPageBase>

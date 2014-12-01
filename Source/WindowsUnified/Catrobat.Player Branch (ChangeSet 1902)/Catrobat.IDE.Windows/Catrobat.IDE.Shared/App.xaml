@@ -1,0 +1,21 @@
+﻿<Application
+  x:Class="Catrobat.IDE.WindowsShared.App"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  RequestedTheme="Light">
+  <Application.Resources>  
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ms-appx:///Resources.xaml" />
+        <ResourceDictionary Source="ms-appx:///Converters/Resources_Converters.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Content/Templates/ActionTemplates.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Content/Templates/ActionAddData.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Controls/FormulaControls/Templates/FormulaTokenTemplates.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Themes/Themes.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Controls/ListsViewControls/BidableGridViewDefaultTemplate.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Controls/ItemControls/Templates/BrickTemplates.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Controls/ListsViewControls/Templates/CatrobatListViewTemplate.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>
