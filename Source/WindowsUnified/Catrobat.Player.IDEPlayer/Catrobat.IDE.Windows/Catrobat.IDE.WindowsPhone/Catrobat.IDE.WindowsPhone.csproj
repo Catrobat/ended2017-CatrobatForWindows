@@ -742,9 +742,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Catrobat_Player, Version=255.255.255.255, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Catrobat.Player.WindowsPhone\Catrobat_Player.winmd</HintPath>
+    <Reference Include="Catrobat_Player">
+      <HintPath>..\..\..\Catrobat.Player-D2D-lib\ARM\Debug\Catrobat.Player.WindowsPhone\Catrobat_Player.winmd</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=4.4.32.26491, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
