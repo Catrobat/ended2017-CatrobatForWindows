@@ -1,0 +1,1227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<program>
+  <header>
+    <applicationBuildName></applicationBuildName>
+    <applicationBuildNumber>0</applicationBuildNumber>
+    <applicationName>Pocket Code</applicationName>
+    <applicationVersion>0.8.4-1691-debug</applicationVersion>
+    <catrobatLanguageVersion>0.8</catrobatLanguageVersion>
+    <dateTimeUpload></dateTimeUpload>
+    <description></description>
+    <deviceName>A200</deviceName>
+    <mediaLicense></mediaLicense>
+    <platform>Android</platform>
+    <platformVersion>15</platformVersion>
+    <programLicense></programLicense>
+    <programName>Project</programName>
+    <remixOf></remixOf>
+    <screenHeight>1232</screenHeight>
+    <screenWidth>800</screenWidth>
+    <tags></tags>
+    <url></url>
+    <userHandle></userHandle>
+  </header>
+  <objectList>
+    <object>
+      <lookList>
+        <look>
+          <fileName>52fb8540d8d751880ab012e26c86e1f5_background.png</fileName>
+          <name>background</name>
+        </look>
+      </lookList>
+      <name>Hintergrund</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>5c8b67f427443c1bb5c50a4aeb007949_sun.png</fileName>
+          <name>sun</name>
+        </look>
+      </lookList>
+      <name>Sun</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>160</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>330</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.3</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>SunDisappeard</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>ClowdOverSun</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>e8b139ca83c443159b464c26d8483bae_cloud.png</fileName>
+          <name>cloud</name>
+        </look>
+        <look>
+          <fileName>c96b5d3adc1d4b199fc76fc518deae86_cloud2.png</fileName>
+          <name>cloud2</name>
+        </look>
+      </lookList>
+      <name>Clowd</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>70</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>600</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>300</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>2.5</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>120</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>320</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>ClowdOverSun</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Start</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[2]"/>
+            </setLookBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>ClowdStartsRaining</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>SunDisappeard</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>cd8435e8bf34b6be6c0fdf700f03e01e_cat.png</fileName>
+          <name>cat</name>
+        </look>
+      </lookList>
+      <name>Catrobat</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>100</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>50</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <whenScript>
+          <brickList>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>Start</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <action>Tapped</action>
+        </whenScript>
+        <broadcastScript>
+          <brickList>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>CatrobatFlyghtIPart1</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>ClowdStartsRaining</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.7</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <repeatBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick>
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="repeatBrick" reference="../.."/>
+              </loopEndBrick>
+              <timesToRepeat>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>30</value>
+                </formulaTree>
+              </timesToRepeat>
+            </repeatBrick>
+            <turnLeftBrick>
+              <object reference="../../../../.."/>
+              <degrees>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1</value>
+                </formulaTree>
+              </degrees>
+            </turnLeftBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <leftChild>
+                    <type>NUMBER</type>
+                    <value>0.5</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>30</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>DIVIDE</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <loopEndBrick reference="../repeatBrick/loopEndBrick"/>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>CatrobatFlyghtPart2</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>CatrobatFlyghtIPart1</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <repeatBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick>
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="repeatBrick" reference="../.."/>
+              </loopEndBrick>
+              <timesToRepeat>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>20</value>
+                </formulaTree>
+              </timesToRepeat>
+            </repeatBrick>
+            <turnLeftBrick>
+              <object reference="../../../../.."/>
+              <degrees>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>5</value>
+                </formulaTree>
+              </degrees>
+            </turnLeftBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <leftChild>
+                    <type>NUMBER</type>
+                    <value>0.4</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>20</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>DIVIDE</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <loopEndBrick reference="../repeatBrick/loopEndBrick"/>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>CatrobatFlyghtPart3</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>CatrobatFlyghtPart2</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.7</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.3</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>100</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>70</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>CatrobatFlyghtIPart1</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.4</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>200</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>CatrobatFlyghtPart2</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.3</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>400</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>100</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>CatrobatFlyghtPart3</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>7fe260ebb6c78fa3f0d6afaffb5a7759_water.png</fileName>
+          <name>water</name>
+        </look>
+      </lookList>
+      <name>Water</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>50</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>320</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>80</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>28226cf909b0e5deb2d275b73a96fbec_rain.png</fileName>
+          <name>rain</name>
+        </look>
+      </lookList>
+      <name>Drop1</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>40</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>300</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>60.0</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <repeatBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick>
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="repeatBrick" reference="../.."/>
+              </loopEndBrick>
+              <timesToRepeat>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>10</value>
+                </formulaTree>
+              </timesToRepeat>
+            </repeatBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <leftChild>
+                    <type>NUMBER</type>
+                    <value>0</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>0.3</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.4</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>40</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>250</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>40</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>350</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <loopEndBrick reference="../repeatBrick/loopEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>ClowdStartsRaining</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>28226cf909b0e5deb2d275b73a96fbec_rain.png</fileName>
+          <name>rain</name>
+        </look>
+      </lookList>
+      <name>Drop2</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>20</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>300</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>60.0</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <repeatBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick>
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="repeatBrick" reference="../.."/>
+              </loopEndBrick>
+              <timesToRepeat>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>10</value>
+                </formulaTree>
+              </timesToRepeat>
+            </repeatBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <leftChild>
+                    <type>NUMBER</type>
+                    <value>0</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>0.3</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.4</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>20</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>250</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>20</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>350</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <loopEndBrick reference="../repeatBrick/loopEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>ClowdStartsRaining</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>28226cf909b0e5deb2d275b73a96fbec_rain.png</fileName>
+          <name>rain</name>
+        </look>
+      </lookList>
+      <name>Drop3</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>100</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>300</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>60.0</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <repeatBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick>
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="repeatBrick" reference="../.."/>
+              </loopEndBrick>
+              <timesToRepeat>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>10</value>
+                </formulaTree>
+              </timesToRepeat>
+            </repeatBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <leftChild>
+                    <type>NUMBER</type>
+                    <value>0</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>0.3</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.4</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>100</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>250</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>100</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>350</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <loopEndBrick reference="../repeatBrick/loopEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>ClowdStartsRaining</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>28226cf909b0e5deb2d275b73a96fbec_rain.png</fileName>
+          <name>rain</name>
+        </look>
+      </lookList>
+      <name>Drop4</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>160</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>300</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>60.0</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <repeatBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick>
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="repeatBrick" reference="../.."/>
+              </loopEndBrick>
+              <timesToRepeat>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>10</value>
+                </formulaTree>
+              </timesToRepeat>
+            </repeatBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <leftChild>
+                    <type>NUMBER</type>
+                    <value>0</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>0.3</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.4</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>160</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>250</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>160</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>350</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <loopEndBrick reference="../repeatBrick/loopEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>ClowdStartsRaining</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>28226cf909b0e5deb2d275b73a96fbec_rain.png</fileName>
+          <name>rain</name>
+        </look>
+      </lookList>
+      <name>Drop5</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>220</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>300</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>60.0</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <repeatBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick>
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="repeatBrick" reference="../.."/>
+              </loopEndBrick>
+              <timesToRepeat>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>10</value>
+                </formulaTree>
+              </timesToRepeat>
+            </repeatBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <leftChild>
+                    <type>NUMBER</type>
+                    <value>0</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>0.3</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.4</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>220</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>250</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>220</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>350</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <loopEndBrick reference="../repeatBrick/loopEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>ClowdStartsRaining</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+  </objectList>
+  <variables>
+    <objectVariableList>
+      <entry>
+        <object reference="../../../../objectList/object[6]"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[4]"/>
+        <list>
+          <userVariable>
+            <name>CatrobatRotation</name>
+          </userVariable>
+        </list>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object"/>
+        <list/>
+      </entry>
+    </objectVariableList>
+    <programVariableList>
+      <userVariable>
+        <name>zufällig von</name>
+      </userVariable>
+      <userVariable>
+        <name>zufällig bis</name>
+      </userVariable>
+    </programVariableList>
+  </variables>
+</program>
