@@ -778,17 +778,12 @@
                                     <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                  <RowDefinition/>
-                  <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" 
+                <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetGhostEffectTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                                <formulaControls:FormulaButton Grid.Column="0" Grid.Row="1" Formula="{Binding Percentage, Mode=TwoWay}" 
+                                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Percentage, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
-                                <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
+                                <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
                             </Grid>
                         </actionsControls:NormalBrick>
                     </Grid>
@@ -805,17 +800,13 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                  <RowDefinition/>
-                  <RowDefinition/>
-                </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" 
+                <TextBlock Grid.Column="0"  VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetBrightnessTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10 10 0 10" FontSize="24" />
-                                <formulaControls:FormulaButton Grid.Column="0" Grid.Row="1" Formula="{Binding Percentage, Mode=TwoWay}" 
+                                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Percentage, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsAttached}"/>
-                                <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
+                                <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10 10 0 10" FontSize="24" />
                             </Grid>
                         </actionsControls:NormalBrick>
                     </Grid>
