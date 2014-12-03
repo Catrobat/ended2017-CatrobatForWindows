@@ -118,6 +118,7 @@
     <Compile Include="Controls\ListsViewControls\CatrobatListView.cs" />
     <Compile Include="Controls\ListsViewControls\SelectableGridView.cs" />
     <Compile Include="Controls\ListsViewControls\SelectableListView.cs" />
+    <Compile Include="Controls\ListsViewControls\Worker\CatrobatListViewWorker.cs" />
     <Compile Include="Controls\MultiModeEditorCommandBar.cs" />
     <Compile Include="Controls\ProcessIcon.xaml.cs">
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
