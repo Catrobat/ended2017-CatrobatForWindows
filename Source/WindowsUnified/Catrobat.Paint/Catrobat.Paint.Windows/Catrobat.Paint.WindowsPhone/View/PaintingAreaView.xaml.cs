@@ -180,11 +180,6 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             GrdThicknessControl.Height *= heightMultiplicator;
             GrdThicknessControl.Width *= widthMultiplicator;
-            //GrdThicknessControl.Margin = new Thickness(
-            //                                GrdThicknessControl.Margin.Left * widthMultiplicator,
-            //                                GrdThicknessControl.Margin.Top * heightMultiplicator,
-            //                                GrdThicknessControl.Margin.Right * widthMultiplicator,
-            //                                GrdThicknessControl.Margin.Bottom * heightMultiplicator);
 
             GridUserControlRectEll.Height *= heightMultiplicator;
             GridUserControlRectEll.Width *= widthMultiplicator;
@@ -213,6 +208,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Visible;
                 this.BottomAppBar.Visibility = Visibility.Visible;
+                setSizeOfPaintingAreaViewCheckered();
 
                 showStatusAppBar();
 
@@ -560,6 +556,16 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Collapsed;
             this.BottomAppBar.Visibility = Visibility.Collapsed;
 
+            TransformGroup _transforms = null;
+            if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform.GetType() == typeof(TransformGroup))
+            {
+                _transforms = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
+            }
+            if (_transforms == null)
+            {
+                PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
+            }
+            _transforms.Children.Clear();
             hideStatusAppBar();
         }
 
