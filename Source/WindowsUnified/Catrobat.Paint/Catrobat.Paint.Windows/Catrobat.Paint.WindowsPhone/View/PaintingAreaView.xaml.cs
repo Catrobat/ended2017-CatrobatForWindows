@@ -69,7 +69,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
 
-            PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height - 144;
+            PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
             PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid = PaintingAreaContentPanelGrid;
             PocketPaintApplication.GetInstance().PaintingAreaView = this;
@@ -92,7 +92,35 @@ namespace Catrobat.Paint.WindowsPhone.View
             
             setPaintingAreaViewLayout();
             PocketPaintApplication.GetInstance().GrdThicknessControlState = Visibility.Collapsed;
-            createAppBarAndSwitchAppBarContent(current_appbar);         
+            createAppBarAndSwitchAppBarContent(current_appbar);
+
+            setSizeOfPaintingAreaViewCheckered();
+        }
+
+        public void setSizeOfPaintingAreaViewCheckered()
+        {
+            TransformGroup _transforms = null;
+            if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform.GetType() == typeof(TransformGroup))
+            {
+                _transforms = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
+            }
+            if (_transforms == null)
+            {
+                PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
+            }
+            var DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
+            var DISPLAY_HEIGHT_HALF = Window.Current.Bounds.Height / 2.0;
+            var toScaleValue = new ScaleTransform();
+            toScaleValue.ScaleX = 0.75;
+            toScaleValue.ScaleY = 0.75;
+            toScaleValue.CenterX = DISPLAY_WIDTH_HALF;
+            toScaleValue.CenterY = DISPLAY_HEIGHT_HALF;
+            _transforms.Children.Add(toScaleValue);
+
+            var toTranslateValue = new TranslateTransform();
+            toTranslateValue.X = 0;
+            toTranslateValue.Y -= 11.0;
+            _transforms.Children.Add(toTranslateValue);
         }
 
         public async void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
@@ -152,11 +180,11 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             GrdThicknessControl.Height *= heightMultiplicator;
             GrdThicknessControl.Width *= widthMultiplicator;
-            GrdThicknessControl.Margin = new Thickness(
-                                            GrdThicknessControl.Margin.Left * widthMultiplicator,
-                                            GrdThicknessControl.Margin.Top * heightMultiplicator,
-                                            GrdThicknessControl.Margin.Right * widthMultiplicator,
-                                            GrdThicknessControl.Margin.Bottom * heightMultiplicator);
+            //GrdThicknessControl.Margin = new Thickness(
+            //                                GrdThicknessControl.Margin.Left * widthMultiplicator,
+            //                                GrdThicknessControl.Margin.Top * heightMultiplicator,
+            //                                GrdThicknessControl.Margin.Right * widthMultiplicator,
+            //                                GrdThicknessControl.Margin.Bottom * heightMultiplicator);
 
             GridUserControlRectEll.Height *= heightMultiplicator;
             GridUserControlRectEll.Width *= widthMultiplicator;

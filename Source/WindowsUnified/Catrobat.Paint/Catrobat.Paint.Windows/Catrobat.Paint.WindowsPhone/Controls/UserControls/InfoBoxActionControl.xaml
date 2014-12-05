@@ -16,7 +16,7 @@
             <Button.Content>
                 <Grid>
                     <Image x:Name="imgGalerie" Height="40" HorizontalAlignment="Left" Source="/Assets/picture.jpg" Width="40"></Image>
-                    <TextBox x:Name="tbGalerie" Foreground="Black" IsReadOnly="True" Margin="60,0,0,0" Text="Galerie" Width="150"></TextBox>
+                    <TextBox x:Name="tbGalerie" Foreground="Black" IsReadOnly="True" Margin="60,0,0,0" Text="Galerie" Width="150" TextChanged="tbGalerie_TextChanged"></TextBox>
                 </Grid>
             </Button.Content>
         </Button>

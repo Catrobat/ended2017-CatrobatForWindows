@@ -97,5 +97,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             resetTools();
         }
+
+        private void tbGalerie_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

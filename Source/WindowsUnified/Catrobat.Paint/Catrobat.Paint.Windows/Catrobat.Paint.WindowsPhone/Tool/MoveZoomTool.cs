@@ -23,8 +23,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
             }
 
-            DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height - PocketPaintApplication.GetInstance().AppbarTop.ActualHeight) / 2.0;
-            DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
+            //DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height - PocketPaintApplication.GetInstance().AppbarTop.ActualHeight) / 2.0;
+            //DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
 
             DISPLAY_WIDTH_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0;
             DISPLAY_HEIGHT_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0;
@@ -83,6 +83,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public override void ResetDrawingSpace()
         {
             _transforms.Children.Clear();
+            PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
         }
 
         public bool checkIfScalingAllowed(ScaleTransform toScaleValue)
