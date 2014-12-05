@@ -83,7 +83,9 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;
             PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = true;
+            PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
         }
+
 
         private void Button_OnClick(object sender, RoutedEventArgs e)
         {
@@ -126,6 +128,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                             pocketPaintApplication.BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
                             pocketPaintApplication.ToolCurrent.ResetDrawingSpace();
                             pocketPaintApplication.EllipseSelectionControl.Visibility = Visibility.Visible;
+                            PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
                             break;
                         case "BtnEraser":
                             pocketPaintApplication.SwitchTool(ToolType.Eraser);
@@ -151,11 +154,11 @@ namespace Catrobat.Paint.WindowsPhone.View
                             // TODO: Write a function with the following three sentences and put it in the paintingareaview.cs.
                             // TODO: Implement this functionality
                             //PocketPaintApplication.GetInstance().PaintingAreaView.BottomAppBar.Visibility = Visibility.Collapsed;
-                            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Background = new SolidColorBrush(Colors.Black);
-                            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Background.Opacity = 0.5;
+                            //PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
                             enableEdgeTypes = true;
                             pocketPaintApplication.BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
                             pocketPaintApplication.BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
+                            PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
                             break;
                         case "BtnLine":
                             pocketPaintApplication.SwitchTool((ToolType.Line));
@@ -174,6 +177,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                             pocketPaintApplication.BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
                             pocketPaintApplication.ToolCurrent.ResetDrawingSpace();
                             pocketPaintApplication.RectangleSelectionControl.Visibility = Visibility.Visible;
+                            PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
                             break;
                         case "BtnRotate":
                             pocketPaintApplication.SwitchTool(ToolType.Rotate);

@@ -542,8 +542,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             if (isDisable)
             {
                 PaintingAreaCanvas.IsHitTestVisible = false;
-                PaintingAreaCanvas.Background = new SolidColorBrush(Colors.Black);
-                PaintingAreaCanvas.Background.Opacity = 0.5;
+                changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
 
                 PocketPaintApplication.GetInstance().InfoBoxControl.Visibility = Visibility.Visible;
                 
@@ -553,7 +552,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             else
             {
                 PaintingAreaCanvas.IsHitTestVisible = true;
-                PaintingAreaCanvas.Background = new SolidColorBrush(Colors.Transparent);
+                changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                 
                 PocketPaintApplication.GetInstance().InfoBoxControl.Visibility = Visibility.Collapsed;
                 
@@ -1031,6 +1030,12 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 ucEllipseSelectionControl.Visibility = value;
             }
+        }
+
+        public void changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Color color, double opacity)
+        {
+            PaintingAreaCanvas.Background = new SolidColorBrush(color);
+            PaintingAreaCanvas.Background.Opacity = opacity;
         }
     }
 }

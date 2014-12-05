@@ -208,7 +208,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             set
             {
-                btnHeightValue.Content = value.ToString();
+                btnHeightValue.Content = Math.Round(value).ToString();
             }
         }
 
@@ -220,7 +220,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             set
             {
-                btnWidthValue.Content = value.ToString();
+                btnWidthValue.Content = Math.Round(value).ToString();
             }
         }
 
