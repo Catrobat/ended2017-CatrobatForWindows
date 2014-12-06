@@ -47,8 +47,8 @@
             </Grid>
 
             <!-- app-BarRectEllControl -->
-            <Grid x:Name="GridUserControlRectEll" Height="240" HorizontalAlignment="Center" Margin="0,0,0,0"
-                  VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
+            <Grid x:Name="GridUserControlRectEll" Height="312" HorizontalAlignment="Center" Margin="0,0,0,72"
+                  VerticalAlignment="Bottom" Visibility="Visible" Width="384">
                 <userControls:ucRecEll></userControls:ucRecEll>
             </Grid>
 
@@ -58,7 +58,7 @@
             </Grid>
 
             <!-- Thickness-Controll-Brush-Properties -->
-            <Grid x:Name="GrdThicknessControl" Height="380" Margin="0,0,0,70" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
+            <Grid x:Name="GrdThicknessControl" Height="380" Margin="0,0,0,72" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <controls:ThicknessControl x:Name="CtrlThicknessControl"></controls:ThicknessControl>
             </Grid>
 
