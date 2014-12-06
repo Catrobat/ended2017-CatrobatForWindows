@@ -295,7 +295,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        public Brush strokeOfRectangleToDraw
+        public Brush strokeOfEllipseToDraw
         {
             get
             {
@@ -525,7 +525,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectEllipseForMovement.Height = _rectangleForMovementSize;
 
             fillOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.colorSelected;
-            strokeOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+            strokeOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
             strokeThicknessOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
             // strokeLineJoinOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected;
             isModifiedEllipseMovement = false;

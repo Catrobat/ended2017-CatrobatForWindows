@@ -97,7 +97,6 @@
     <Compile Include="Command\LineCommand.cs" />
     <Compile Include="Command\RotateCommand.cs" />
     <Compile Include="Command\UndoRedoActionbarManager.cs" />
-    <Compile Include="Common\ContinuationManager.cs" />
     <Compile Include="Common\NavigationHelper.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -110,6 +109,7 @@
     <Compile Include="Common\SuspensionManager.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\ContinuationManager.cs" />
     <Compile Include="Controls\AppBar\ThicknessControl.xaml.cs">
       <DependentUpon>ThicknessControl.xaml</DependentUpon>
     </Compile>
@@ -249,6 +249,8 @@
     <Content Include="Assets\ColorPicker\icon_menu_strokes.png" />
     <Content Include="Assets\ic_launcher.png" />
     <Content Include="Assets\ic_launcher_tile.png" />
+    <Content Include="Assets\picture.jpg" />
+    <Content Include="Assets\logoPocketPaint.jpg" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\Spinner.png" />
@@ -295,6 +297,9 @@
     <Content Include="Assets\transparence.png" />
     <Content Include="Assets\WideLogo.scale-240.png" />
     <Content Include="ReadMe.Coding4Fun.Toolkit.txt" />
+    <Content Include="StoreManifest.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
   </ItemGroup>

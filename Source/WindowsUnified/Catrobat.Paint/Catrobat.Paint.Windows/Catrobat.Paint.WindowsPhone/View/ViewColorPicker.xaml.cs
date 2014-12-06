@@ -161,35 +161,17 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 var current_solid_brush = new SolidColorBrush(current_color);
                 PocketPaintApplication.GetInstance().PaintData.strokeColorSelected = current_solid_brush;
-                if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
-                {
-                    PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeOfRectangleToDraw = current_solid_brush;
-                }
-                else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
-                {
-                    // PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeOfRectangleToDraw(current_color);
-                }
-                else 
-                {
-                    PocketPaintApplication.GetInstance().ImportImageSelectionControl.changeStrokeOfDrawingShape(current_color);
-                }
+                PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeOfRectangleToDraw = current_solid_brush;
+                PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeOfEllipseToDraw = current_solid_brush;
+                PocketPaintApplication.GetInstance().ImportImageSelectionControl.changeStrokeOfDrawingShape(current_color);
             }
             else
             {
                 var current_solid_brush = new SolidColorBrush(current_color);
                 PocketPaintApplication.GetInstance().PaintData.colorSelected = current_solid_brush;
-                if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
-                {
-                    PocketPaintApplication.GetInstance().RectangleSelectionControl.fillOfRectangleToDraw = current_solid_brush;
-                }
-                else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
-                {
-                    PocketPaintApplication.GetInstance().EllipseSelectionControl.fillOfEllipseToDraw = current_solid_brush;
-                }
-                else 
-                {
-                    PocketPaintApplication.GetInstance().ImportImageSelectionControl.changeColorOfDrawingShape(current_color);
-                }
+
+                PocketPaintApplication.GetInstance().RectangleSelectionControl.fillOfRectangleToDraw = current_solid_brush;
+                PocketPaintApplication.GetInstance().EllipseSelectionControl.fillOfEllipseToDraw = current_solid_brush;
             }
 
             // TODO: If selected color is transparence then select the eraser-tool.
