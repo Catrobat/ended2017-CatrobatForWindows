@@ -860,7 +860,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             if (visibilityGridEllRecControl == Visibility.Collapsed)
             {
                 visibilityGridEllRecControl = Visibility.Visible;
-                setRectEllUserControlMargin(new Thickness(0.0, 0.0, 0.0, 0.0));
             }
             else
             {
