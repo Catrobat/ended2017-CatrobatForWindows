@@ -48,7 +48,7 @@
 
             <!-- app-BarRectEllControl -->
             <Grid x:Name="GridUserControlRectEll" Height="312" HorizontalAlignment="Center" Margin="0,0,0,72"
-                  VerticalAlignment="Bottom" Visibility="Visible" Width="384">
+                  VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <userControls:ucRecEll></userControls:ucRecEll>
             </Grid>
 

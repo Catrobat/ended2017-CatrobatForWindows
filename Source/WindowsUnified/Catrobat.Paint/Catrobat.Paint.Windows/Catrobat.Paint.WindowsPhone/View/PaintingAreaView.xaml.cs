@@ -108,9 +108,12 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
             }
+            _transforms.Children.Clear();
+
             var DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
             var DISPLAY_HEIGHT_HALF = Window.Current.Bounds.Height / 2.0;
             var toScaleValue = new ScaleTransform();
+
             toScaleValue.ScaleX = 0.75;
             toScaleValue.ScaleY = 0.75;
             toScaleValue.CenterX = DISPLAY_WIDTH_HALF;
