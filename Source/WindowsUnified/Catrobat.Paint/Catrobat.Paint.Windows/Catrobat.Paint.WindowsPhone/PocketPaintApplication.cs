@@ -29,6 +29,8 @@ namespace Catrobat.Paint.WindowsPhone
 
         public bool isBrushTool = true;
 
+        public bool isLoadPictureClicked = false;
+
         public bool isToolPickerUsed = true;
 
         public bool isZoomButtonClicked = false;
