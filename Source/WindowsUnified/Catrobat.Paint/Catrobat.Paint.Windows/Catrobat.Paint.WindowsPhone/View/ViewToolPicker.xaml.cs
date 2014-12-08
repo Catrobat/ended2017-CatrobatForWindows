@@ -60,7 +60,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-
         /// <summary>
         /// Wird aufgerufen, wenn diese Seite in einem Frame angezeigt werden soll.
         /// </summary>
@@ -149,8 +148,8 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                             pocketPaintApplication.GridImportImageSelectionControl.Visibility = Visibility.Visible;
                             pocketPaintApplication.InfoBoxActionControl.Visibility = Visibility.Visible;
-                            PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Collapsed;
-                            
+                            pocketPaintApplication.AppbarTop.Visibility = Visibility.Collapsed;
+                            pocketPaintApplication.PaintingAreaView.BottomAppBar.Visibility = Visibility.Collapsed;
                             // TODO: Write a function with the following three sentences and put it in the paintingareaview.cs.
                             // TODO: Implement this functionality
                             //PocketPaintApplication.GetInstance().PaintingAreaView.BottomAppBar.Visibility = Visibility.Collapsed;
@@ -158,7 +157,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                             enableEdgeTypes = true;
                             pocketPaintApplication.BarRecEllShape.setIsEnabledOfEdgeType(enableEdgeTypes, enableEdgeTypes, enableEdgeTypes);
                             pocketPaintApplication.BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
-                            PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
+                            pocketPaintApplication.PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
                             break;
                         case "BtnLine":
                             pocketPaintApplication.SwitchTool((ToolType.Line));

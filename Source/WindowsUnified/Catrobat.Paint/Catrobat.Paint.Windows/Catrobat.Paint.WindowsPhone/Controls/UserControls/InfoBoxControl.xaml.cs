@@ -67,7 +67,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             else
             {
                 resetTools();
-            }    
+            }
         }
 
         private void resetTools()
@@ -78,7 +78,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = new TransformGroup();
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = new TransformGroup();
+            PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
+
             PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = new TransformGroup();
 
             PocketPaintApplication.GetInstance().PaintingAreaView.disableToolbarsAndPaintingArea(false);
@@ -113,6 +114,29 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void deleteChanges(IUICommand command)
         {
             resetTools();
+        }
+
+        private async void btnNewPictureFromCamera_Click(object sender, RoutedEventArgs e)
+        {
+            if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0)
+            {
+                var messageDialog = new MessageDialog("Änderungen speichern?", "Neues Bild von Kamera");
+
+                messageDialog.Commands.Add(new UICommand(
+                    "Speichern",
+                    new UICommandInvokedHandler(saveChanges)));
+                messageDialog.Commands.Add(new UICommand(
+                    "Verwerfen",
+                    new UICommandInvokedHandler(deleteChanges)));
+
+                messageDialog.DefaultCommandIndex = 0;
+                messageDialog.CancelCommandIndex = 1;
+
+                await messageDialog.ShowAsync();
+            }
+            else
+            {
+            }
         }
     }
 }
