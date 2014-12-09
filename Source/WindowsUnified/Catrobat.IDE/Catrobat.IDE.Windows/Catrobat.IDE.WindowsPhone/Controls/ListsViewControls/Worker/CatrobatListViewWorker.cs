@@ -16,48 +16,69 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
 {
     internal class CatrobatListViewWorker : ListViewBase
     {
+        #region controls
+
         private const string DragCanvasName = "DragCanvas";
         private Canvas _dragCanvas;
-
         private const string ManipulationCanvasName = "ManipulationCanvas";
         private Canvas _manipulationCanvas;
-
         private const string ScrollViewerName = "ScrollViewer";
         private ScrollViewer _scrollViewer;
-
         private const string ProgressRingName = "CatrobatListViewProgressRing";
         private ProgressRing _progressRing;
 
+        #endregion
+
+        #region constant_values
+
+        private const double ImageResizeFactor = 0.95;
+        private const double InactiveItemResizeFactor = 0.07;
+        private const double AutoScrollOffsetManual = 20;
+        private const int AutoScrollMargin = 20;
+        private const double YDifferenceBeforeRearrange = 10;
+        
+        #endregion
+
+        #region global_helpers
+
         private int _verticalItemMargin;
         private bool _reorderEnabled;
+        private double _autoScrollOldYValue;
+        private double _rearrangeOldYValue;
+
+        #endregion
+
+        #region grouping_variables
+
         public bool GroupingEnabled;
+        private List<object> _draggingGroupList;
+
+        #endregion
+
+        #region dragging_variables
 
         private CatrobatListViewDragStaus _dragging;
         private CatrobatListViewItem _draggingItem;
-        private List<object> _draggingGroupList;
-
-        private const double ImageResizeFactor = 0.95;
-
         private CatrobatListViewDragObject _originalDragContent;
         private CatrobatListViewEmptyDummyControl _tmpDragContentControl;
-        private const double InactiveItemResizeFactor = 0.07;
 
-        private const int AutoScrollMargin = 20;
-        private double _autoScrollOldYValue;
-        private const double AutoScrollOffsetManual = 20;
+        #endregion
 
-        private double _rearrangeOldYValue;
-        private const double YDifferenceBeforeRearrange = 10;
+        #region selection_variables
 
         public ObservableCollection<object> SmartSelectedItems;
         public bool SelectionEnabled;
 
+        #endregion
+
+        #region eventhandler
+
         public delegate void CatrobatListViewEventHandler(object sender, CatrobatListViewEventArgs e);
         public event CatrobatListViewEventHandler ItemDragCompletedEvent;
-
         public delegate void CatrobatListViewItemEventHandler(object sender, CatrobatListViewItemEventArgs e);
-
         public event CatrobatListViewItemEventHandler ItemTapped;
+
+        #endregion
 
         public CatrobatListViewWorker()
         {
@@ -72,6 +93,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
             _rearrangeOldYValue = 0;
             SelectionEnabled = false;
         }
+
+        #region selection
 
         void SmartSelectedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -117,73 +140,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
             }
         }
 
-        private void InitReorderableEmptyDummyControl()
-        {
-            if (_tmpDragContentControl != null)
-                return;
-            _tmpDragContentControl = new CatrobatListViewEmptyDummyControl();
-            _tmpDragContentControl.Opacity = 0;
-        }
-
-        internal void ImportItemsSource(IList list)
-        {
-            TransferItemsSource(list);
-        }
-
-        private void TransferItemsSource(IList source)
-        {
-            if (source == null || Items == null)
-            {
-                return;
-            }
-
-            for (int i = Items.Count - 1; i >= 0; i--)
-            {
-                if (source.Contains(Items[i]) == false)
-                {
-                    Items.RemoveAt(i);
-                }
-            }
-
-            for (int i = 0; i < source.Count; i++)
-            {
-                int tmpTargetIndex = Items.IndexOf(source[i]);
-                if (source[i] != null && tmpTargetIndex != i)
-                {
-                    if (tmpTargetIndex != -1)
-                    {
-                        Items.RemoveAt(Items.IndexOf(source[i]));
-                    }
-                    Items.Insert(i, source[i]);
-                }
-            }
-        }
-
-        public void CheckIfNewAddedBrick()
-        {
-            for (int i = Items.Count - 1; i >= 0; i--)
-            {
-                var tmp = Items[i] as Brick;
-                if (tmp != null && tmp.IsNewAdded)
-                {
-                    tmp.IsNewAdded = false;
-                    double viewport = _scrollViewer.VerticalOffset + this.ActualHeight / 2;
-                    StartDrag(i, viewport);
-                    double tmpHeight = 0;
-                    for (int j = 0; j < Items.Count; j++)
-                    {
-                        tmpHeight += GetActualHeightFromIndex(j);
-                        if (tmpHeight > viewport)
-                        {
-                            MoveItem(j, i);
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-
         private void TransferSelectedItems(IList source)
         {
             if (source == null || SmartSelectedItems == null)
@@ -207,20 +163,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
                 }
             }
 
-        }
-
-        internal void UpdateItemTemplateSelector(DataTemplate itemTemplate)
-        {
-            this.ItemTemplate = itemTemplate;
-        }
-
-        protected override DependencyObject GetContainerForItemOverride()
-        {
-            var item = new CatrobatListViewItem(_verticalItemMargin, _reorderEnabled, GroupingEnabled, SelectionEnabled, _dragging == CatrobatListViewDragStaus.NotDragging);
-            item.Tapped += item_Tapped;
-            item.ItemGroupEvent += item_ItemGroupEvent;
-            item.ItemSelectedEvent += item_ItemSelectedEvent;
-            return item;
         }
 
         void item_ItemSelectedEvent(object sender, CatrobatListViewEventArgs e)
@@ -253,12 +195,45 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
 
         }
 
-        void item_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        internal void UpdateSelectedItems(IList selectedItemsUpdated)
         {
-            _scrollViewer.Focus(FocusState.Pointer);
-            ItemTapped(this, new CatrobatListViewItemEventArgs((CatrobatListViewItem)sender));
+            if (selectedItemsUpdated != null)
+            {
+                TransferSelectedItems(selectedItemsUpdated);
+            }
         }
 
+        internal void SetSelectionMode(bool value)
+        {
+            this.SelectionEnabled = value;
+            if (SelectionEnabled)
+            {
+                this._dragCanvas.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                this._dragCanvas.Visibility = Visibility.Visible;
+            }
+            for (int i = 0; i < this.Items.Count; i++)
+            {
+                var tmp = ContainerFromIndex(i) as CatrobatListViewItem;
+                if (tmp != null)
+                {
+                    if (SelectionEnabled)
+                    {
+                        tmp.EnableSelectionMode();
+                    }
+                    else
+                    {
+                        tmp.DissableSelectionMode();
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region grouping
 
         void item_ItemGroupEvent(object sender, CatrobatListViewEventArgs e)
         {
@@ -288,6 +263,14 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
             item.IsGrouped = !item.IsGrouped;
         }
 
+        private int GetEndBrickIndex(object obj)
+        {
+            if (obj is BlockBeginBrick)
+            {
+                return Items.IndexOf((obj as BlockBeginBrick).End);
+            }
+            return 0;
+        }
         private void ChangeItemsVisibility(int startIndex, int endIndex, bool setSelected)
         {
             Visibility tmpVisibility = Visibility.Visible;
@@ -322,49 +305,55 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
             }
         }
 
-
-
-        protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
+        private void InitDragGroupList()
         {
-            base.PrepareContainerForItemOverride(element, item);
-            var itemContainer = (CatrobatListViewItem)element;
-            itemContainer.ApplyTemplate();
-            if (item is Script)
+            int lastGroupIndex = GetEndBrickIndex(_originalDragContent.Content as Brick);
+            if (_draggingGroupList != null && _draggingGroupList.Count > 0)
             {
-                itemContainer.SetReorder(false);
+                return;
             }
-            else if (item is Brick && _reorderEnabled && SelectionEnabled == false)
+            _draggingGroupList = new List<object>();
+
+            for (int i = lastGroupIndex; i > Items.IndexOf(_originalDragContent.Content); i--)
             {
-                itemContainer.SetReorder(true);
+                _draggingGroupList.Add(Items[i]);
+                Items.RemoveAt(i);
             }
         }
 
-        protected override bool IsItemItsOwnContainerOverride(object item)
+        internal void SetGroupingEnabled(bool value)
         {
-            return item is CatrobatListViewItem;
-        }
+            this.GroupingEnabled = value;
 
-        internal void UpdateItemMargin(int value)
-        {
-            this._verticalItemMargin = value;
-
-            if (this.Items == null)
+            if (this.Items == null || _dragCanvas == null)
             {
                 return;
             }
 
             for (int i = 0; i < this.Items.Count; i++)
             {
-                if (Items[i] is Brick)
+                if (!(Items[i] is Script))
                 {
                     var item = this.ContainerFromIndex(i) as CatrobatListViewItem;
                     if (item == null)
                     {
                         continue;
                     }
-                    item.SetVerticalMargin(_verticalItemMargin);
+                    item.SetGrouping(GroupingEnabled);
                 }
             }
+        }
+
+        #endregion
+
+        #region reordering
+
+        private void InitReorderableEmptyDummyControl()
+        {
+            if (_tmpDragContentControl != null)
+                return;
+            _tmpDragContentControl = new CatrobatListViewEmptyDummyControl();
+            _tmpDragContentControl.Opacity = 0;
         }
 
         internal void SetReorderEnabled(bool value)
@@ -399,76 +388,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
             }
         }
 
-        public void SetProgessRingVisibility(Visibility newVisibility)
-        {
-            _progressRing.Visibility = newVisibility;
-        }
-
-        protected override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            _scrollViewer = GetTemplateChild(ScrollViewerName) as ScrollViewer;
-            _manipulationCanvas = GetTemplateChild(ManipulationCanvasName) as Canvas;
-            _dragCanvas = GetTemplateChild(DragCanvasName) as Canvas;
-            _progressRing = GetTemplateChild(ProgressRingName) as ProgressRing;
-
-            if (_dragCanvas == null || _manipulationCanvas == null || _scrollViewer == null || _progressRing == null)
-            {
-                throw new Exception("Container missing in CatrobatListViewWorker");
-            }
-
-            _dragCanvas.Tapped += _dragCanvas_Tapped;
-            _dragCanvas.RightTapped += _dragCanvas_RightTapped;
-
-
-            _dragCanvas.PointerPressed += _dragCanvas_PointerPressed;
-            this.ManipulationDelta += CatrobatListViewWorker_ManipulationDelta;
-            this.ManipulationCompleted += CatrobatListViewWorker_ManipulationCompleted;
-            this.PointerReleased += CatrobatListViewWorker_PointerReleased;
-
-
-
-            SetReorderEnabled(this._reorderEnabled);
-            SetGroupingEnabled(this.GroupingEnabled);
-
-            InitReorderableEmptyDummyControl();
-        }
-
-        private void CatrobatListViewWorker_PointerReleased(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
-        {
-            EndDrag();
-            e.Handled = true;
-        }
-
-        void CatrobatListViewWorker_ManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
-        {
-            if (e.IsInertial)
-            {
-                e.Complete();
-            }
-            if (_dragging == CatrobatListViewDragStaus.Dragging)
-            {
-                DeltaDrag(e.Position.Y);
-            }
-            e.Handled = true;
-        }
-
-        void CatrobatListViewWorker_ManipulationCompleted(object sender, Windows.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs e)
-        {
-            EndDrag();
-        }
-
-        void _dragCanvas_RightTapped(object sender, Windows.UI.Xaml.Input.RightTappedRoutedEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        void _dragCanvas_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
-        {
-            e.Handled = true;
-        }
-
         private void DeltaDrag(double yPos)
         {
             if (yPos != _autoScrollOldYValue)
@@ -478,6 +397,30 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
                 CheckRearrangeNecessaryFromDelta(yPos);
             }
         }
+
+        private void EndDrag()
+        {
+            if (_dragging == CatrobatListViewDragStaus.NotDragging)
+            {
+                return;
+            }
+            _dragging = CatrobatListViewDragStaus.NotDragging;
+            _manipulationCanvas.Visibility = Visibility.Collapsed;
+
+            if (Items.IndexOf(_tmpDragContentControl) != -1)
+            {
+                ItemDragCompletedEvent(this, new CatrobatListViewEventArgs(_tmpDragContentControl, _originalDragContent, null, null, _draggingGroupList));
+                if (_draggingGroupList != null && _draggingGroupList.Count > 0)
+                {
+                    _draggingGroupList.Clear();
+                    _draggingItem = null;
+                    var tmpItem = ContainerFromItem(_originalDragContent.Content) as CatrobatListViewItem;
+                    GroupItem(tmpItem);
+                }
+            }
+
+        }
+
 
         private void CheckRearrangeNecessaryFromDelta(double yVal)
         {
@@ -571,79 +514,13 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
         }
 
 
-        private int GetEndBrickIndex(object obj)
-        {
-            if (obj is BlockBeginBrick)
-            {
-                return Items.IndexOf((obj as BlockBeginBrick).End);
-            }
-            return 0;
-        }
+
 
         private void SetTmpDragContentHeight()
         {
             var tmp = ContainerFromItem(_tmpDragContentControl) as CatrobatListViewItem;
             tmp.Height = (InactiveItemResizeFactor * _scrollViewer.RenderSize.Height);
         }
-
-
-        private void Autoscroll(double yVal)
-        {
-            double actualPositionPercent = yVal / _scrollViewer.RenderSize.Height * 100;
-            if (actualPositionPercent < AutoScrollMargin)
-            {
-                if (_autoScrollOldYValue >= yVal)
-                {
-                    ScrollToOffset(AutoScrollOffsetManual * -1);
-                }
-            }
-            else if (actualPositionPercent > 100 - AutoScrollMargin)
-            {
-                if (_autoScrollOldYValue <= yVal)
-                {
-                    ScrollToOffset(AutoScrollOffsetManual);
-                }
-            }
-            _autoScrollOldYValue = yVal;
-        }
-
-        private void ScrollToOffset(double delta)
-        {
-            double tmp = _scrollViewer.VerticalOffset + delta;
-            if (tmp > _scrollViewer.ScrollableHeight)
-                tmp = _scrollViewer.ScrollableHeight;
-            _scrollViewer.ChangeView(null, tmp, null);
-        }
-
-        private void EndDrag()
-        {
-            if (_dragging == CatrobatListViewDragStaus.NotDragging)
-            {
-                return;
-            }
-            _dragging = CatrobatListViewDragStaus.NotDragging;
-            _manipulationCanvas.Visibility = Visibility.Collapsed;
-
-            if (Items.IndexOf(_tmpDragContentControl) != -1)
-            {
-                ItemDragCompletedEvent(this, new CatrobatListViewEventArgs(_tmpDragContentControl, _originalDragContent, null, null, _draggingGroupList));
-                if (_draggingGroupList != null && _draggingGroupList.Count > 0)
-                {
-                    _draggingGroupList.Clear();
-                    _draggingItem = null;
-                    var tmpItem = ContainerFromItem(_originalDragContent.Content) as CatrobatListViewItem;
-                    GroupItem(tmpItem);
-                }
-            }
-
-        }
-
-        void _dragCanvas_PointerPressed(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
-        {
-            PrepareStartDrag(e.GetCurrentPoint(_scrollViewer).Position.Y);
-            e.Handled = true;
-        }
-
 
         private void PrepareStartDrag(double yPos)
         {
@@ -694,21 +571,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
             AddSnapshotToManipulationCanvas(yPos);
         }
 
-        private void InitDragGroupList()
-        {
-            int lastGroupIndex = GetEndBrickIndex(_originalDragContent.Content as Brick);
-            if (_draggingGroupList != null && _draggingGroupList.Count > 0)
-            {
-                return;
-            }
-            _draggingGroupList = new List<object>();
-
-            for (int i = lastGroupIndex; i > Items.IndexOf(_originalDragContent.Content); i--)
-            {
-                _draggingGroupList.Add(Items[i]);
-                Items.RemoveAt(i);
-            }
-        }
 
         private void MoveValidationCalculation(int index)
         {
@@ -880,6 +742,256 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
             }
         }
 
+        #endregion
+
+        #region events
+
+        private void CatrobatListViewWorker_PointerReleased(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            EndDrag();
+            e.Handled = true;
+        }
+
+        void CatrobatListViewWorker_ManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
+        {
+            if (e.IsInertial)
+            {
+                e.Complete();
+            }
+            if (_dragging == CatrobatListViewDragStaus.Dragging)
+            {
+                DeltaDrag(e.Position.Y);
+            }
+            e.Handled = true;
+        }
+
+        void CatrobatListViewWorker_ManipulationCompleted(object sender, Windows.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs e)
+        {
+            EndDrag();
+        }
+
+        void _dragCanvas_RightTapped(object sender, Windows.UI.Xaml.Input.RightTappedRoutedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        void _dragCanvas_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        void _dragCanvas_PointerPressed(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            PrepareStartDrag(e.GetCurrentPoint(_scrollViewer).Position.Y);
+            e.Handled = true;
+        }
+
+        void item_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            _scrollViewer.Focus(FocusState.Pointer);
+            ItemTapped(this, new CatrobatListViewItemEventArgs((CatrobatListViewItem)sender));
+        }
+
+
+        #endregion
+
+        #region overrides
+
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            var item = new CatrobatListViewItem(_verticalItemMargin, _reorderEnabled, GroupingEnabled, SelectionEnabled, _dragging == CatrobatListViewDragStaus.NotDragging);
+            item.Tapped += item_Tapped;
+            item.ItemGroupEvent += item_ItemGroupEvent;
+            item.ItemSelectedEvent += item_ItemSelectedEvent;
+            return item;
+        }
+
+        protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
+        {
+            base.PrepareContainerForItemOverride(element, item);
+            var itemContainer = (CatrobatListViewItem)element;
+            itemContainer.ApplyTemplate();
+            if (item is Script)
+            {
+                itemContainer.SetReorder(false);
+            }
+            else if (item is Brick && _reorderEnabled && SelectionEnabled == false)
+            {
+                itemContainer.SetReorder(true);
+            }
+        }
+
+        protected override bool IsItemItsOwnContainerOverride(object item)
+        {
+            return item is CatrobatListViewItem;
+        }
+
+        protected override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            _scrollViewer = GetTemplateChild(ScrollViewerName) as ScrollViewer;
+            _manipulationCanvas = GetTemplateChild(ManipulationCanvasName) as Canvas;
+            _dragCanvas = GetTemplateChild(DragCanvasName) as Canvas;
+            _progressRing = GetTemplateChild(ProgressRingName) as ProgressRing;
+
+            if (_dragCanvas == null || _manipulationCanvas == null || _scrollViewer == null || _progressRing == null)
+            {
+                throw new Exception("Container missing in CatrobatListViewWorker");
+            }
+
+            _dragCanvas.Tapped += _dragCanvas_Tapped;
+            _dragCanvas.RightTapped += _dragCanvas_RightTapped;
+
+
+            _dragCanvas.PointerPressed += _dragCanvas_PointerPressed;
+            this.ManipulationDelta += CatrobatListViewWorker_ManipulationDelta;
+            this.ManipulationCompleted += CatrobatListViewWorker_ManipulationCompleted;
+            this.PointerReleased += CatrobatListViewWorker_PointerReleased;
+
+
+
+            SetReorderEnabled(this._reorderEnabled);
+            SetGroupingEnabled(this.GroupingEnabled);
+
+            InitReorderableEmptyDummyControl();
+        }
+
+
+        #endregion
+
+        #region ListView_properties_imports
+
+        internal void ImportItemsSource(IList list)
+        {
+            TransferItemsSource(list);
+        }
+
+        private void TransferItemsSource(IList source)
+        {
+            if (source == null || Items == null)
+            {
+                return;
+            }
+
+            for (int i = Items.Count - 1; i >= 0; i--)
+            {
+                if (source.Contains(Items[i]) == false)
+                {
+                    Items.RemoveAt(i);
+                }
+            }
+
+            for (int i = 0; i < source.Count; i++)
+            {
+                int tmpTargetIndex = Items.IndexOf(source[i]);
+                if (source[i] != null && tmpTargetIndex != i)
+                {
+                    if (tmpTargetIndex != -1)
+                    {
+                        Items.RemoveAt(Items.IndexOf(source[i]));
+                    }
+                    Items.Insert(i, source[i]);
+                }
+            }
+        }
+
+        public void CheckIfNewAddedBrick()
+        {
+            for (int i = Items.Count - 1; i >= 0; i--)
+            {
+                var tmp = Items[i] as Brick;
+                if (tmp != null && tmp.IsNewAdded)
+                {
+                    tmp.IsNewAdded = false;
+                    double viewport = _scrollViewer.VerticalOffset + this.ActualHeight / 2;
+                    StartDrag(i, viewport);
+                    double tmpHeight = 0;
+                    for (int j = 0; j < Items.Count; j++)
+                    {
+                        tmpHeight += GetActualHeightFromIndex(j);
+                        if (tmpHeight > viewport)
+                        {
+                            MoveItem(j, i);
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        internal void UpdateItemTemplateSelector(DataTemplate itemTemplate)
+        {
+            this.ItemTemplate = itemTemplate;
+        }
+        
+        internal void UpdateItemMargin(int value)
+        {
+            this._verticalItemMargin = value;
+
+            if (this.Items == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < this.Items.Count; i++)
+            {
+                if (Items[i] is Brick)
+                {
+                    var item = this.ContainerFromIndex(i) as CatrobatListViewItem;
+                    if (item == null)
+                    {
+                        continue;
+                    }
+                    item.SetVerticalMargin(_verticalItemMargin);
+                }
+            }
+        }
+
+        internal void SetItemWidth(int newWidth)
+        {
+            this.Width = newWidth;
+        }
+
+        public void SetProgessRingVisibility(Visibility newVisibility)
+        {
+            _progressRing.Visibility = newVisibility;
+        }
+
+        #endregion
+
+        #region help_methods
+        
+        private void Autoscroll(double yVal)
+        {
+            double actualPositionPercent = yVal / _scrollViewer.RenderSize.Height * 100;
+            if (actualPositionPercent < AutoScrollMargin)
+            {
+                if (_autoScrollOldYValue >= yVal)
+                {
+                    ScrollToOffset(AutoScrollOffsetManual * -1);
+                }
+            }
+            else if (actualPositionPercent > 100 - AutoScrollMargin)
+            {
+                if (_autoScrollOldYValue <= yVal)
+                {
+                    ScrollToOffset(AutoScrollOffsetManual);
+                }
+            }
+            _autoScrollOldYValue = yVal;
+        }
+
+        private void ScrollToOffset(double delta)
+        {
+            double tmp = _scrollViewer.VerticalOffset + delta;
+            if (tmp > _scrollViewer.ScrollableHeight)
+                tmp = _scrollViewer.ScrollableHeight;
+            _scrollViewer.ChangeView(null, tmp, null);
+        }
+
+
         private double GetActualHeightFromIndex(int index)
         {
             var item = this.ContainerFromIndex(index) as CatrobatListViewItem;
@@ -890,74 +1002,16 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
             return item.ActualHeight + _verticalItemMargin;
         }
 
+        #endregion
 
-        internal void UpdateSelectedItems(IList selectedItemsUpdated)
-        {
-            if (selectedItemsUpdated != null)
-            {
-                TransferSelectedItems(selectedItemsUpdated);
-            }
-        }
 
-        internal void SetSelectionMode(bool value)
-        {
-            this.SelectionEnabled = value;
-            if (SelectionEnabled)
-            {
-                this._dragCanvas.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                this._dragCanvas.Visibility = Visibility.Visible;
-            }
-            for (int i = 0; i < this.Items.Count; i++)
-            {
-                var tmp = ContainerFromIndex(i) as CatrobatListViewItem;
-                if (tmp != null)
-                {
-                    if (SelectionEnabled)
-                    {
-                        tmp.EnableSelectionMode();
-                    }
-                    else
-                    {
-                        tmp.DissableSelectionMode();
-                    }
-                }
-            }
-        }
-
-        internal void SetItemWidth(int newWidth)
-        {
-            this.Width = newWidth;
-        }
-
-        internal void SetGroupingEnabled(bool value)
-        {
-            this.GroupingEnabled = value;
-
-            if (this.Items == null || _dragCanvas == null)
-            {
-                return;
-            }
-
-            for (int i = 0; i < this.Items.Count; i++)
-            {
-                if (!(Items[i] is Script))
-                {
-                    var item = this.ContainerFromIndex(i) as CatrobatListViewItem;
-                    if (item == null)
-                    {
-                        continue;
-                    }
-                    item.SetGrouping(GroupingEnabled);
-                }
-            }
-        }
     }
 
     public class CatrobatListViewItem : ListViewItem
     {
+
+        #region controls
+
         private Canvas _dragHandle;
         private const String DragHanldeName = "DragHandle";
 
@@ -985,19 +1039,19 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
         private ProgressRing _progressRing;
         private const String ProgressRingName = "CatrobatListViewItemProgressRing";
 
+        #endregion
+
+        #region properties
+
         public bool ReorderEnabled { get; private set; }
         public bool GroupingEnabled { get; private set; }
-        private int _verticalItemMargin;
-
         public double OrigHeight { get; set; }
-
         public int MinReorderIndex { get; set; }
         public int MaxReorderIndex { get; set; }
-
         public List<int> InvalidReorderIndexes { get; set; }
-
+        private readonly bool _visible;
+        private int _verticalItemMargin;
         private bool _isGrouped;
-        private bool _selectionEnabled;
         public bool IsGrouped
         {
             get { return _isGrouped; }
@@ -1021,16 +1075,18 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
                 SetGroupingCanvasVisibility();
             }
         }
+        private bool _selectionEnabled;
 
+        #endregion
 
-
-        private readonly bool _visible;
+        #region eventhandler
 
         public delegate void CatrobatListViewItemEventHandler(object sender, CatrobatListViewEventArgs e);
         public event CatrobatListViewItemEventHandler ItemGroupEvent;
 
         public event CatrobatListViewItemEventHandler ItemSelectedEvent;
 
+        #endregion
 
         public CatrobatListViewItem(int verticalItemMargin, bool reorderEnabled, bool groupingEnabled, bool selectionEnabled, bool visible = true)
         {
@@ -1046,6 +1102,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
             _selectionEnabled = selectionEnabled;
         }
 
+        #region overrides
 
         protected override void OnApplyTemplate()
         {
@@ -1093,6 +1150,9 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
             this._clickPreventerCanvas.Tapped += _clickPreventerCanvas_Tapped;
         }
 
+        #endregion
+
+        #region events
         void _clickPreventerCanvas_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             if (ItemSelectedEvent != null)
@@ -1100,45 +1160,6 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
                 ItemSelectedEvent(this, null);
             }
             e.Handled = true;
-        }
-
-        private void SetGroupingCanvasVisibility()
-        {
-            if (_groupingMaxCanvas != null)
-            {
-
-                if (_isGrouped)
-                {
-                    _groupingMinCanvas.Visibility = Visibility.Visible;
-                    _groupingMaxCanvas.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    _groupingMinCanvas.Visibility = Visibility.Collapsed;
-                    _groupingMaxCanvas.Visibility = Visibility.Visible;
-                }
-            }
-        }
-
-        void _groupingMaxCanvas_LayoutUpdated(object sender, object e)
-        {
-            _groupingMaxCanvas.LayoutUpdated -= _groupingMaxCanvas_LayoutUpdated;
-            _groupingGrid.Tapped += _groupingCanvas_Tapped;
-            _progressRing.Visibility = Visibility.Collapsed;
-        }
-
-        private void InitGrouping()
-        {
-            if (GroupingEnabled && (this.Content is Script || (this.Content is BlockBeginBrick && !(this.Content is ElseBrick))))
-            {
-                _groupingGrid.Tapped += _groupingCanvas_Tapped;
-                _groupingGrid.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                _groupingGrid.Tapped -= _groupingCanvas_Tapped;
-                _groupingGrid.Visibility = Visibility.Collapsed;
-            }
         }
 
         void _groupingCanvas_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
@@ -1168,24 +1189,57 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
             }
         }
 
-        internal void SetVerticalMargin(int verticalMargin)
+        void _groupingMaxCanvas_LayoutUpdated(object sender, object e)
         {
-            _verticalItemMargin = verticalMargin;
-            this.Margin = new Thickness(0, _verticalItemMargin, 0, 0);
+            _groupingMaxCanvas.LayoutUpdated -= _groupingMaxCanvas_LayoutUpdated;
+            _groupingGrid.Tapped += _groupingCanvas_Tapped;
+            _progressRing.Visibility = Visibility.Collapsed;
         }
 
-        internal void SetReorder(bool reorder)
+        #endregion
+
+        #region grouping
+
+        private void SetGroupingCanvasVisibility()
         {
-            ReorderEnabled = reorder;
-            if (ReorderEnabled == false)
+            if (_groupingMaxCanvas != null)
             {
-                _dragHandle.Visibility = Visibility.Collapsed;
+
+                if (_isGrouped)
+                {
+                    _groupingMinCanvas.Visibility = Visibility.Visible;
+                    _groupingMaxCanvas.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    _groupingMinCanvas.Visibility = Visibility.Collapsed;
+                    _groupingMaxCanvas.Visibility = Visibility.Visible;
+                }
+            }
+        }
+        
+        private void InitGrouping()
+        {
+            if (GroupingEnabled && (this.Content is Script || (this.Content is BlockBeginBrick && !(this.Content is ElseBrick))))
+            {
+                _groupingGrid.Tapped += _groupingCanvas_Tapped;
+                _groupingGrid.Visibility = Visibility.Visible;
             }
             else
             {
-                _dragHandle.Visibility = Visibility.Visible;
+                _groupingGrid.Tapped -= _groupingCanvas_Tapped;
+                _groupingGrid.Visibility = Visibility.Collapsed;
             }
         }
+        internal void SetGrouping(bool groupingEnabled)
+        {
+            GroupingEnabled = groupingEnabled;
+            InitGrouping();
+        }
+
+        #endregion
+
+        #region selecting
 
         internal void SetSelected()
         {
@@ -1227,11 +1281,31 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
             _contentContainer.Opacity = 1;
         }
 
-        internal void SetGrouping(bool groupingEnabled)
+        #endregion
+
+        #region misc
+
+        internal void SetVerticalMargin(int verticalMargin)
         {
-            GroupingEnabled = groupingEnabled;
-            InitGrouping();
+            _verticalItemMargin = verticalMargin;
+            this.Margin = new Thickness(0, _verticalItemMargin, 0, 0);
         }
+
+        internal void SetReorder(bool reorder)
+        {
+            ReorderEnabled = reorder;
+            if (ReorderEnabled == false)
+            {
+                _dragHandle.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                _dragHandle.Visibility = Visibility.Visible;
+            }
+        }
+
+        #endregion
+        
     }
 
     public class CatrobatListViewDragObject
