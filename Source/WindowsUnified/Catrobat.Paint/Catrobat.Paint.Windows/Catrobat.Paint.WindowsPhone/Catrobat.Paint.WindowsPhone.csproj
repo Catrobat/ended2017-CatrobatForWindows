@@ -94,6 +94,13 @@
     <Compile Include="Command\CommandManager.cs" />
     <Compile Include="Command\EraserCommand.cs" />
     <Compile Include="Command\FlipCommand.cs" />
+    <Compile Include="Command\EllipseCommand.cs" />
+    <Compile Include="Command\ClearWorkingSpaceCommand.cs" />
+    <Compile Include="Command\ZoomCommand.cs" />
+    <Compile Include="Command\MoveCommand.cs" />
+    <Compile Include="Command\LoadPictureCommand.cs" />
+    <Compile Include="Command\ImportCommand.cs" />
+    <Compile Include="Command\RectangleCommand.cs" />
     <Compile Include="Command\LineCommand.cs" />
     <Compile Include="Command\RotateCommand.cs" />
     <Compile Include="Command\UndoRedoActionbarManager.cs" />

@@ -1,4 +1,5 @@
-﻿using Windows.Foundation;
+﻿using Catrobat.Paint.WindowsPhone.Command;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
@@ -7,10 +8,12 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class RectangleTool : ToolBase
     {
+        private Path _path;
+
         public RectangleTool()
         {
             this.ToolType = ToolType.Rect;
-
+            _path = null;
             if (PocketPaintApplication.GetInstance() != null && PocketPaintApplication.GetInstance().PaintingAreaView != null)
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOfUcRectangleSelectionControl = Visibility.Visible;
@@ -65,7 +68,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleUp(object arg)
         {
-            
         }
 
         public override void Draw(object o)
@@ -99,13 +101,15 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 myRectangleGeometry.Transform = rotateTransform;
             }
 
-            Path _path = new Path();
+            _path = new Path();
             _path.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
             _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
             _path.StrokeThickness = strokeThickness;
             _path.StrokeLineJoin = PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw;
             _path.Data = myRectangleGeometry;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
+
+            CommandManager.GetInstance().CommitCommand(new RectangleCommand(_path)); 
         }
 
         public override void ResetDrawingSpace()

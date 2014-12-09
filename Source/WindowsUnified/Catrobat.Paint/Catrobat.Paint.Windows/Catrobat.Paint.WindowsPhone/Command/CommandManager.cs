@@ -2,6 +2,7 @@
 using Catrobat.Paint.WindowsPhone.Ui;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace Catrobat.Paint.WindowsPhone.Command
@@ -70,7 +71,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
                 var command = _undoCommands.Last.Value;
                 _undoCommands.RemoveLast();
 
-                if (command is FlipCommand || command is RotateCommand)
+                if (command is FlipCommand || command is MoveCommand || command is RotateCommand || command is ZoomCommand)
                 {
                     var lastCommand = true;
                     foreach (var undoCommand in _undoCommands)
@@ -82,8 +83,14 @@ namespace Catrobat.Paint.WindowsPhone.Command
                         }
                     }
 
-                    if (lastCommand)
+                    if (lastCommand || command is MoveCommand || command is ZoomCommand)
+                    {
                         command.UnDo();
+                        //if(command is ZoomCommand)
+                        //{
+                        //    PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
+                        //}
+                    }
                 }
 
                 if (!HasCommands())

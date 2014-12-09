@@ -169,7 +169,6 @@ namespace Catrobat.Paint.WindowsPhone
         {
             var img = bmp ?? Bitmap;
             var bg = new ImageBrush { ImageSource = img };
-
             PaintingAreaCanvas.Background = bg;
         }
 

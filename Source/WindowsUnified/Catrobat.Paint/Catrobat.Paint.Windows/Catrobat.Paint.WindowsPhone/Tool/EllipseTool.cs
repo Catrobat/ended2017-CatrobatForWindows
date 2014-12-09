@@ -1,4 +1,5 @@
-﻿using Windows.Foundation;
+﻿using Catrobat.Paint.WindowsPhone.Command;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
@@ -7,12 +8,13 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class EllipseTool : ToolBase
     {
+        private Path _path;
         private TransformGroup _transforms;
 
         public EllipseTool()
         {
+            _path = null;
             this.ToolType = ToolType.Ellipse;
-
             if (PocketPaintApplication.GetInstance() != null && PocketPaintApplication.GetInstance().PaintingAreaView != null)
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOfUcEllipseSelectionControl = Visibility.Visible;
@@ -103,13 +105,15 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 myEllipseGeometry.Transform = rotateTransform;
             }
 
-            Path _path = new Path();
+            _path = new Path();
             _path.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
             _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
             _path.StrokeThickness = strokeThickness;
             _path.StrokeLineJoin = PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeLineJoinOfRectangleToDraw;
             _path.Data = myEllipseGeometry;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
+
+            CommandManager.GetInstance().CommitCommand(new EllipseCommand(_path)); 
         }
 
         public override void ResetDrawingSpace()

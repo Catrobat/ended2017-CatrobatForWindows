@@ -151,6 +151,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                     _path.Data = myRectangleGeometry;
                     PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
+                    CommandManager.GetInstance().CommitCommand(new LoadPictureCommand(_path));
                     PocketPaintApplication.GetInstance().isLoadPictureClicked = false;
                 }
                 else
@@ -631,7 +632,11 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         void app_btnClearElementsInWorkingSpace_Click(object sender, RoutedEventArgs e)
         {
-            PaintingAreaCanvas.Children.Clear();
+            if (PaintingAreaCanvas.Children.Count != 0)
+            {
+                PaintingAreaCanvas.Children.Clear();
+                CommandManager.GetInstance().CommitCommand(new RectangleCommand(new Path()));
+            }
         }
 
         void app_btn_reset_Click(object sender, RoutedEventArgs e)
@@ -778,7 +783,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             scaletransform.ScaleX = 1.1;
             scaletransform.ScaleY = 1.1;
             PocketPaintApplication.GetInstance().isZoomButtonClicked = true;
-            tool.HandleMove(scaletransform);
+            tool.HandleUp(scaletransform);
         }
 
         public void NavigatedTo(Type source_type)
