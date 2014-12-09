@@ -480,7 +480,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double valueTop = -20.0 + rectRectangleToDraw.Margin.Top;
 
             positionX = (rectRectangleToDraw.Width - valueLeft + valueRight) / 2.0;
-            positionY = (rectRectangleToDraw.Height + valueBottom - valueTop + 144.0) / 2.0;
+            positionY = (rectRectangleToDraw.Height + valueBottom - valueTop) / 2.0;
             coordinateX = offsetX + halfScreenWidth - positionX;
             coordianteY = offsetY + halfScreenHeight - positionY;
             PocketPaintApplication.GetInstance().ToolCurrent.Draw(new Point(coordinateX, coordianteY));

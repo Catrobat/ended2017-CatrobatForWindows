@@ -4,6 +4,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
+
 // Die Elementvorlage "Benutzersteuerelement" ist unter http://go.microsoft.com/fwlink/?LinkId=234236 dokumentiert.
 
 namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
@@ -134,9 +135,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                 await messageDialog.ShowAsync();
             }
-            else
-            {
-            }
+            
         }
     }
 }

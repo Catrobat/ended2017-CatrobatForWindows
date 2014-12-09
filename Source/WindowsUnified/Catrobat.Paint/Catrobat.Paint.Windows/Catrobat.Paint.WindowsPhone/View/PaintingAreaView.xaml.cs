@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
 
@@ -138,7 +139,26 @@ namespace Catrobat.Paint.WindowsPhone.View
                 ImageBrush fillBrush = new ImageBrush();
                 fillBrush.ImageSource = image;
 
-                PocketPaintApplication.GetInstance().ImportImageSelectionControl.imageSourceOfRectangleToDraw = fillBrush;
+                if (PocketPaintApplication.GetInstance().isLoadPictureClicked)
+                {
+                    RectangleGeometry myRectangleGeometry = new RectangleGeometry();
+                    myRectangleGeometry.Rect = new Rect(new Point(0, 0), new Point(Window.Current.Bounds.Width, Window.Current.Bounds.Height));
+
+
+                    Path _path = new Path();
+                    _path.Fill = fillBrush;
+                    _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+
+                    _path.Data = myRectangleGeometry;
+                    PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
+                    PocketPaintApplication.GetInstance().isLoadPictureClicked = false;
+                }
+                else
+                {
+                    PocketPaintApplication.GetInstance().ImportImageSelectionControl.imageSourceOfRectangleToDraw = fillBrush;
+                }
+
+                PocketPaintApplication.GetInstance().PaintingAreaView.disableToolbarsAndPaintingArea(false);
             }
             else
             {
@@ -525,6 +545,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnClearElementsInWorkingSpace.Click += app_btnClearElementsInWorkingSpace_Click;
             app_btnNewPicture.Click += app_btnNewPicture_Click;
             app_btnFullScreen.Click += app_btnFullScreen_Click;
+            app_btnLoad.Click += app_btnLoad_Click;
 
             app_btnClearElementsInWorkingSpace.Label = "Arbeitsfläche löschen";
             app_btnSave.Label = "Speichern";
@@ -545,6 +566,16 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             BottomAppBar = cmdBar;
             current_appbar = type;
+        }
+
+        void app_btnLoad_Click(object sender, RoutedEventArgs e)
+        {
+            PocketPaintApplication pocketPaintApplication = PocketPaintApplication.GetInstance();
+            pocketPaintApplication.InfoBoxActionControl.Visibility = Visibility.Visible;
+            pocketPaintApplication.AppbarTop.Visibility = Visibility.Collapsed;
+            this.BottomAppBar.Visibility = Visibility.Collapsed;
+            changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
+            PocketPaintApplication.GetInstance().isLoadPictureClicked = true;
         }
 
         void app_btnNewPicture_Click(object sender, RoutedEventArgs e)
