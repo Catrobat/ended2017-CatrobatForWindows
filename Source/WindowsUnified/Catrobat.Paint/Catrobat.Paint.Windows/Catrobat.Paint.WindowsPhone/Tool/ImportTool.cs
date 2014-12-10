@@ -1,4 +1,5 @@
-﻿using Catrobat.Paint.WindowsPhone.Controls.UserControls;
+﻿using Catrobat.Paint.WindowsPhone.Command;
+using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Windows.Foundation;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
@@ -7,11 +8,14 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class ImportTool : ToolBase
     {
+        private Path _path;
         private TransformGroup _transforms;
 
         public ImportTool()
         {
+            _path = null;
             this.ToolType = ToolType.ImportPng;
+            _transforms = null;
 
             if (PocketPaintApplication.GetInstance() != null && PocketPaintApplication.GetInstance().PaintingAreaView != null)
             {
@@ -82,6 +86,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             _path.Data = myRectangleGeometry;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
+
+            CommandManager.GetInstance().CommitCommand(new ImportCommand(_path));
         }
 
         public override void ResetDrawingSpace()

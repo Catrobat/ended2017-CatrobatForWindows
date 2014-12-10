@@ -1,4 +1,6 @@
-﻿using Windows.UI.Xaml;
+﻿using Catrobat.Paint.WindowsPhone.Command;
+using Windows.Foundation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
@@ -9,6 +11,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         private TransformGroup _transforms;
         private double DISPLAY_HEIGHT_HALF;
         private double DISPLAY_WIDTH_HALF;
+        Point startMove;
+        Point startScale;
+        private bool isMoving = false;
 
         public MoveZoomTool()
         {
@@ -25,6 +30,11 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             //DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height - PocketPaintApplication.GetInstance().AppbarTop.ActualHeight) / 2.0;
             //DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
+
+            startMove.X = _transforms.Value.OffsetX;
+            startMove.Y = _transforms.Value.OffsetY;
+            startScale.X = _transforms.Value.M11;
+            startScale.Y = _transforms.Value.M22;
 
             DISPLAY_WIDTH_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0;
             DISPLAY_HEIGHT_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0;
@@ -54,8 +64,14 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 }
             else if (arg is TranslateTransform)
             {
-                var move = (TranslateTransform)arg;
+                if(!isMoving)
+                {
+                    startMove.X = _transforms.Value.OffsetX;
+                    startMove.Y = _transforms.Value.OffsetY;
+                }
+                TranslateTransform move = (TranslateTransform)arg;
                 _transforms.Children.Add(move);
+                isMoving = true;
             }
             else
             {
@@ -72,7 +88,39 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleUp(object arg)
         {
+            if (isMoving)
+            {
+                TranslateTransform translateTransformForCommand = new TranslateTransform();
+                translateTransformForCommand.X = _transforms.Value.OffsetX - startMove.X;
+                translateTransformForCommand.Y = _transforms.Value.OffsetY - startMove.Y;
+                CommandManager.GetInstance().CommitCommand(new MoveCommand(translateTransformForCommand));
 
+                TranslateTransform translateTransformForTransformGroup = new TranslateTransform();
+                translateTransformForTransformGroup.X = _transforms.Value.OffsetX - 48.0;
+                translateTransformForTransformGroup.Y = _transforms.Value.OffsetY - 69.0;
+                _transforms.Children.Clear();
+                PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
+                _transforms.Children.Add(translateTransformForTransformGroup);
+                isMoving = false;
+            }
+            else
+            {
+                ScaleTransform translateScaleValueForCommand = new ScaleTransform();
+                translateScaleValueForCommand.ScaleX = _transforms.Value.M11 / startScale.X;
+                translateScaleValueForCommand.ScaleY = _transforms.Value.M22 / startScale.Y;
+                translateScaleValueForCommand.CenterX = DISPLAY_WIDTH_HALF;
+                translateScaleValueForCommand.CenterY = DISPLAY_HEIGHT_HALF;
+                CommandManager.GetInstance().CommitCommand(new ZoomCommand(translateScaleValueForCommand));
+
+                //ScaleTransform scaleTransformForTransformGroup = new ScaleTransform();
+                //scaleTransformForTransformGroup.ScaleX = _transforms.Value.M11 / 0.75;
+                //scaleTransformForTransformGroup.ScaleY = _transforms.Value.M22 / 0.75;
+                //translateScaleValueForCommand.CenterX = DISPLAY_WIDTH_HALF;
+                //translateScaleValueForCommand.CenterY = DISPLAY_HEIGHT_HALF;
+                //_transforms.Children.Clear();
+                //PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
+                //_transforms.Children.Add(scaleTransformForTransformGroup);
+            }
         }
 
         public override void Draw(object o)

@@ -44,8 +44,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _angle = 0;
 
             rotateTransform.Angle = _angle;
-
-            rotateTransform.Angle = _angle;
             rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Width) / 2;
             rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.Height) / 2);
             PaintingAreaCanvasSettings(rotateTransform);
