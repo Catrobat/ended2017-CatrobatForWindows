@@ -4,25 +4,20 @@ namespace Catrobat.Paint.WindowsPhone.Command
 {
     class ZoomCommand : CommandBase
     {
-        private ScaleTransform _scaleTransform;
+        private TransformGroup _transformGroup;
 
-        public ZoomCommand(ScaleTransform scaleTransform)
+        public ZoomCommand(TransformGroup transformGroup)
         {
-            _scaleTransform = scaleTransform;
+            _transformGroup = transformGroup;
         }
 
         public override bool ReDo()
         {
             TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform);
-            //for (int i = 0; i < transformGroup.Children.Count; i++)
-            //{
-            //    if (transformGroup.Children[i].GetType() == typeof(ScaleTransform))
-            //    {
-            //        transformGroup.Children.RemoveAt(i);
-            //    }
-            //}
-
-            transformGroup.Children.Add(_scaleTransform);
+            for (int i = 0; i < _transformGroup.Children.Count; i++)
+            {
+                transformGroup.Children.Add(_transformGroup.Children[i]);
+            }
 
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = transformGroup;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.UpdateLayout();
@@ -36,13 +31,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
         {
             TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform);
 
-            for (int i = 0; i < transformGroup.Children.Count; i++)
-            {
-                if (transformGroup.Children[i].GetType() == typeof(ScaleTransform))
-                {
-                    transformGroup.Children.RemoveAt(i);
-                }
-            }
+            transformGroup.Children.Clear();
 
             double scaleX = transformGroup.Value.M11;
             double scaleY = transformGroup.Value.M22;
@@ -50,13 +39,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
             double DISPLAY_WIDTH_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0;
             double DISPLAY_HEIGHT_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0;
 
-            var defaultScaleTransform = new ScaleTransform();
-            defaultScaleTransform.ScaleX = 1.0 / (scaleX / 0.75);
-            defaultScaleTransform.ScaleY = 1.0 / (scaleY / 0.75);
-            defaultScaleTransform.CenterX = DISPLAY_WIDTH_HALF;
-            defaultScaleTransform.CenterY = DISPLAY_HEIGHT_HALF;
-
-            transformGroup.Children.Add(defaultScaleTransform);
+            PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
 
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = transformGroup;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.UpdateLayout();
