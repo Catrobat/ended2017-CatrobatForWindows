@@ -140,7 +140,6 @@ namespace Catrobat.Paint.WindowsPhone.Listener
             {
                 if (e.Delta.Scale != 1.0)
                 {
-
                     movezoom = new ScaleTransform();
                     if (e.Delta.Scale > 0)
                     {

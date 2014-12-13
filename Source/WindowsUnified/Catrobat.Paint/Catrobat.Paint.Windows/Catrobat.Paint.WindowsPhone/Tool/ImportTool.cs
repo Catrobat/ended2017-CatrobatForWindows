@@ -8,12 +8,10 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class ImportTool : ToolBase
     {
-        private Path _path;
         private TransformGroup _transforms;
 
         public ImportTool()
         {
-            _path = null;
             this.ToolType = ToolType.ImportPng;
             _transforms = null;
 
@@ -86,6 +84,15 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             _path.Data = myRectangleGeometry;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
+
+            var rectangleGeometry = new RectangleGeometry
+            {
+                Rect = new Rect(0, 0, PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth,
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight)
+            };
+            _path.Clip = rectangleGeometry;
+            _path.InvalidateArrange();
+            _path.InvalidateMeasure();
 
             CommandManager.GetInstance().CommitCommand(new ImportCommand(_path));
         }
