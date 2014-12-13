@@ -11,9 +11,10 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         private TransformGroup _transforms;
         private double DISPLAY_HEIGHT_HALF;
         private double DISPLAY_WIDTH_HALF;
-        Point startMove;
-        Point startScale;
-        private bool isMoving = false;
+        private Point startScale;
+        private int numberOfScaleOperations;
+        private Point centerPointForScale;
+        private TransformGroup _tempTransforms;
 
         public MoveZoomTool()
         {
@@ -31,17 +32,19 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             //DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height - PocketPaintApplication.GetInstance().AppbarTop.ActualHeight) / 2.0;
             //DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
 
-            startMove.X = _transforms.Value.OffsetX;
-            startMove.Y = _transforms.Value.OffsetY;
-            startScale.X = _transforms.Value.M11;
-            startScale.Y = _transforms.Value.M22;
-
             DISPLAY_WIDTH_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0;
             DISPLAY_HEIGHT_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0;
+            startScale.X = _transforms.Value.M11;
+            startScale.Y = _transforms.Value.M22;
+            centerPointForScale = new Point();
         }
         public override void HandleDown(object arg)
         {
-
+            startScale.X = _transforms.Value.M11;
+            startScale.Y = _transforms.Value.M22;
+            _tempTransforms = new TransformGroup();
+            //centerPointForScale.X = ((Point)arg).X * _transforms.Value.M11;
+            //centerPointForScale.Y = ((Point)arg).Y * _transforms.Value.M22;
         }
 
         public override void HandleMove(object arg)
@@ -60,18 +63,15 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                     toScaleValue.CenterX = DISPLAY_WIDTH_HALF;
                     toScaleValue.CenterY = DISPLAY_HEIGHT_HALF;
                     _transforms.Children.Add(toScaleValue);
+                    _tempTransforms.Children.Add(toScaleValue);
+                    numberOfScaleOperations++;
             }
                 }
             else if (arg is TranslateTransform)
             {
-                if(!isMoving)
-                {
-                    startMove.X = _transforms.Value.OffsetX;
-                    startMove.Y = _transforms.Value.OffsetY;
-                }
-                TranslateTransform move = (TranslateTransform)arg;
+                var move = (TranslateTransform)arg;
                 _transforms.Children.Add(move);
-                isMoving = true;
+                _tempTransforms.Children.Add(move);
             }
             else
             {
@@ -88,39 +88,37 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleUp(object arg)
         {
-            if (isMoving)
-            {
-                TranslateTransform translateTransformForCommand = new TranslateTransform();
-                translateTransformForCommand.X = _transforms.Value.OffsetX - startMove.X;
-                translateTransformForCommand.Y = _transforms.Value.OffsetY - startMove.Y;
-                CommandManager.GetInstance().CommitCommand(new MoveCommand(translateTransformForCommand));
+            //if (numberOfScaleOperations > 0)
+            //{
+            //    double scaleFactorX = _transforms.Value.M11 / startScale.X;
+            //    double scaleFactorY = _transforms.Value.M22 / startScale.Y;
 
-                TranslateTransform translateTransformForTransformGroup = new TranslateTransform();
-                translateTransformForTransformGroup.X = _transforms.Value.OffsetX - 48.0;
-                translateTransformForTransformGroup.Y = _transforms.Value.OffsetY - 69.0;
-                _transforms.Children.Clear();
-                PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
-                _transforms.Children.Add(translateTransformForTransformGroup);
-                isMoving = false;
-            }
-            else
-            {
-                ScaleTransform translateScaleValueForCommand = new ScaleTransform();
-                translateScaleValueForCommand.ScaleX = _transforms.Value.M11 / startScale.X;
-                translateScaleValueForCommand.ScaleY = _transforms.Value.M22 / startScale.Y;
-                translateScaleValueForCommand.CenterX = DISPLAY_WIDTH_HALF;
-                translateScaleValueForCommand.CenterY = DISPLAY_HEIGHT_HALF;
-                CommandManager.GetInstance().CommitCommand(new ZoomCommand(translateScaleValueForCommand));
+            //    for (int i = _transforms.Children.Count - 1; i >= 0; i--)
+            //    {
+            //        if (numberOfScaleOperations > 0)
+            //        {
+            //            if (_transforms.Children[i].GetType() == typeof(ScaleTransform))
+            //            {
+            //                _transforms.Children.RemoveAt(i);
+            //                numberOfScaleOperations -= 1;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            break;
+            //        }
+            //    }
 
-                //ScaleTransform scaleTransformForTransformGroup = new ScaleTransform();
-                //scaleTransformForTransformGroup.ScaleX = _transforms.Value.M11 / 0.75;
-                //scaleTransformForTransformGroup.ScaleY = _transforms.Value.M22 / 0.75;
-                //translateScaleValueForCommand.CenterX = DISPLAY_WIDTH_HALF;
-                //translateScaleValueForCommand.CenterY = DISPLAY_HEIGHT_HALF;
-                //_transforms.Children.Clear();
-                //PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
-                //_transforms.Children.Add(scaleTransformForTransformGroup);
-            }
+            //    ScaleTransform toScaleTransform = new ScaleTransform();
+            //    toScaleTransform.ScaleX = scaleFactorX;
+            //    toScaleTransform.ScaleY = scaleFactorY;
+            //    toScaleTransform.CenterX = DISPLAY_WIDTH_HALF;
+            //    toScaleTransform.CenterY = DISPLAY_HEIGHT_HALF;
+            //    _transforms.Children.Add(toScaleTransform);
+                CommandManager.GetInstance().CommitCommand(new ZoomCommand(_tempTransforms));
+                numberOfScaleOperations = 0;
+            //}
+
         }
 
         public override void Draw(object o)
