@@ -158,6 +158,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 else
                 {
                     PocketPaintApplication.GetInstance().ImportImageSelectionControl.imageSourceOfRectangleToDraw = fillBrush;
+                    PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
                 }
 
                 PocketPaintApplication.GetInstance().PaintingAreaView.disableToolbarsAndPaintingArea(false);
@@ -246,13 +247,14 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
             else
             {
-                if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() != ToolType.Brush)
+                if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() != ToolType.Brush)
                 {
                     resetControls(Visibility.Collapsed);
+                    changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
                     e.Handled = true;
                 }
-                else if(GrdThicknessControl.Visibility == Visibility.Visible)
+                else if (GrdThicknessControl.Visibility == Visibility.Visible)
                 {
                     GrdThicknessControl.Visibility = Visibility.Collapsed;
                     e.Handled = true;
@@ -689,7 +691,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             if (isDisable)
             {
                 PaintingAreaCanvas.IsHitTestVisible = false;
-                changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
 
                 PocketPaintApplication.GetInstance().InfoBoxControl.Visibility = Visibility.Visible;
                 
@@ -699,7 +700,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             else
             {
                 PaintingAreaCanvas.IsHitTestVisible = true;
-                changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                 
                 PocketPaintApplication.GetInstance().InfoBoxControl.Visibility = Visibility.Collapsed;
                 
@@ -1210,12 +1210,16 @@ namespace Catrobat.Paint.WindowsPhone.View
         public void saveChanges(IUICommand command)
         {
             // TODO save current Image
+            CommandManager.GetInstance().clearAllCommands();
+            UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
         }
 
         public void deleteChanges(IUICommand command)
         {
             // TODO
             resetTools();
+            CommandManager.GetInstance().clearAllCommands();
+            UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
         }
 
         private void btnNewDrawingSpace_Click(object sender, RoutedEventArgs e)
