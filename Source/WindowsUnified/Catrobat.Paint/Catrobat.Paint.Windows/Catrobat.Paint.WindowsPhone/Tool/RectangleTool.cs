@@ -109,6 +109,15 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _path.Data = myRectangleGeometry;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
 
+            var rectangleGeometry = new RectangleGeometry
+            {
+                Rect = new Rect(0, 0, PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth,
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight)
+            };
+            _path.Clip = rectangleGeometry;
+            _path.InvalidateArrange();
+            _path.InvalidateMeasure();
+
             CommandManager.GetInstance().CommitCommand(new RectangleCommand(_path)); 
         }
 

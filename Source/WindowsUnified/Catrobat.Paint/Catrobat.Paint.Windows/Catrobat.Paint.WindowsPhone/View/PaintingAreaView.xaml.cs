@@ -230,16 +230,25 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 isFullscreen = false;
 
-                PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Visible;
-                this.BottomAppBar.Visibility = Visibility.Visible;
+                changeVisibilityOfAppBars(Visibility.Collapsed);
                 setSizeOfPaintingAreaViewCheckered();
 
                 showStatusAppBar();
 
                 e.Handled = true;
             }
+            else if(InfoBoxActionControl.Visibility == Visibility.Visible)
+            {
+                InfoBoxActionControl.Visibility = Visibility.Collapsed;
+                changeVisibilityOfAppBars(Visibility.Visible);
+                e.Handled = true;
+            }
         }
-
+        private void changeVisibilityOfAppBars(Visibility visibility)
+        {
+            appBarTop.Visibility = visibility;
+            BottomAppBar.Visibility = visibility;
+        }
         /// <summary>
         /// Wird aufgerufen, wenn diese Seite in einem Frame angezeigt werden soll.
         /// </summary>
@@ -344,7 +353,43 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 cmdBar.PrimaryCommands.Add(app_btnCutSelection);
                 cmdBar.PrimaryCommands.Add(app_btnReset);
+            }
+            else if("barImportPng" == type)
+            {
+                AppBarButton app_btnBrushThickness = new AppBarButton();
+                AppBarButton app_btnImportPicture = new AppBarButton();
+                AppBarButton app_btnReset = new AppBarButton();
 
+                app_btnReset.Name = "appButtonReset";
+
+                BitmapIcon thickness_icon = new BitmapIcon();
+                thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
+                app_btnBrushThickness.Icon = thickness_icon;
+
+                BitmapIcon reset_icon = new BitmapIcon();
+                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
+                app_btnReset.Icon = reset_icon;
+
+                BitmapIcon importPicture_icon = new BitmapIcon();
+                importPicture_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
+                app_btnImportPicture.Icon = importPicture_icon;
+
+                app_btnBrushThickness.Label = "Einstellungen";
+                app_btnImportPicture.Label = "Bild laden";
+                app_btnReset.Label = "Ausgangsposition";
+
+                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
+
+                app_btnBrushThickness.Click += btnThicknessBorder_Click;
+                app_btnImportPicture.Click += app_btnImportPicture_Click;
+                app_btnReset.Click += app_btn_reset_Click;
+
+                cmdBar.PrimaryCommands.Add(app_btnReset);
+                cmdBar.PrimaryCommands.Add(app_btnImportPicture);
+                cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
+
+                loadManipulationEvents();
+                unloadPointerEvents();
             }
             else if("barPipette" == type)
             {
@@ -463,7 +508,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 cmdBar.PrimaryCommands.Add(app_btnRotate_right);
                 cmdBar.PrimaryCommands.Add(app_btnReset);
             }
-            else if ("barRectangle" == type || "barImportPng" == type)
+            else if ("barRectangle" == type)
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
@@ -567,6 +612,13 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             BottomAppBar = cmdBar;
             current_appbar = type;
+        }
+
+        void app_btnImportPicture_Click(object sender, RoutedEventArgs e)
+        {
+            GridImportImageSelectionControl.Visibility = Visibility.Visible;
+            changeVisibilityOfAppBars(Visibility.Collapsed);
+            InfoBoxActionControl.Visibility = Visibility.Visible;
         }
 
         void app_btnLoad_Click(object sender, RoutedEventArgs e)

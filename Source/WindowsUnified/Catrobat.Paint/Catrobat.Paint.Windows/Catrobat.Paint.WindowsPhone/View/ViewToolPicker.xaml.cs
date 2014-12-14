@@ -54,8 +54,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                                             ((Button)obj).Padding.Bottom * height);
 
                     ((Button)obj).FontSize *= height;
-
-                    
                 }
             }
         }

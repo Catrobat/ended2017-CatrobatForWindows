@@ -12,7 +12,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         private double DISPLAY_HEIGHT_HALF;
         private double DISPLAY_WIDTH_HALF;
         private Point startScale;
-        private int numberOfScaleOperations;
         private Point centerPointForScale;
         private TransformGroup _tempTransforms;
 
@@ -29,9 +28,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
             }
 
-            //DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height - PocketPaintApplication.GetInstance().AppbarTop.ActualHeight) / 2.0;
-            //DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
-
             DISPLAY_WIDTH_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0;
             DISPLAY_HEIGHT_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0;
             startScale.X = _transforms.Value.M11;
@@ -40,11 +36,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         }
         public override void HandleDown(object arg)
         {
-            startScale.X = _transforms.Value.M11;
-            startScale.Y = _transforms.Value.M22;
+            startScale.X = ((Point)arg).X;
+            startScale.Y = ((Point)arg).Y;
             _tempTransforms = new TransformGroup();
-            //centerPointForScale.X = ((Point)arg).X * _transforms.Value.M11;
-            //centerPointForScale.Y = ((Point)arg).Y * _transforms.Value.M22;
         }
 
         public override void HandleMove(object arg)
@@ -60,11 +54,10 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                     fixedaspection = toScaleValue.ScaleX > toScaleValue.ScaleY ? toScaleValue.ScaleX : toScaleValue.ScaleY;
                     toScaleValue.ScaleX = fixedaspection;
                     toScaleValue.ScaleY = fixedaspection;
-                    toScaleValue.CenterX = DISPLAY_WIDTH_HALF;
-                    toScaleValue.CenterY = DISPLAY_HEIGHT_HALF;
+                    toScaleValue.CenterX = startScale.X;
+                    toScaleValue.CenterY = startScale.Y;
                     _transforms.Children.Add(toScaleValue);
                     _tempTransforms.Children.Add(toScaleValue);
-                    numberOfScaleOperations++;
             }
                 }
             else if (arg is TranslateTransform)
@@ -88,37 +81,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleUp(object arg)
         {
-            //if (numberOfScaleOperations > 0)
-            //{
-            //    double scaleFactorX = _transforms.Value.M11 / startScale.X;
-            //    double scaleFactorY = _transforms.Value.M22 / startScale.Y;
-
-            //    for (int i = _transforms.Children.Count - 1; i >= 0; i--)
-            //    {
-            //        if (numberOfScaleOperations > 0)
-            //        {
-            //            if (_transforms.Children[i].GetType() == typeof(ScaleTransform))
-            //            {
-            //                _transforms.Children.RemoveAt(i);
-            //                numberOfScaleOperations -= 1;
-            //            }
-            //        }
-            //        else
-            //        {
-            //            break;
-            //        }
-            //    }
-
-            //    ScaleTransform toScaleTransform = new ScaleTransform();
-            //    toScaleTransform.ScaleX = scaleFactorX;
-            //    toScaleTransform.ScaleY = scaleFactorY;
-            //    toScaleTransform.CenterX = DISPLAY_WIDTH_HALF;
-            //    toScaleTransform.CenterY = DISPLAY_HEIGHT_HALF;
-            //    _transforms.Children.Add(toScaleTransform);
                 CommandManager.GetInstance().CommitCommand(new ZoomCommand(_tempTransforms));
-                numberOfScaleOperations = 0;
-            //}
-
         }
 
         public override void Draw(object o)

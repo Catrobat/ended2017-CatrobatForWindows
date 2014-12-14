@@ -58,9 +58,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _path.Clip = rectangleGeometry;
             _path.InvalidateArrange();
             _path.InvalidateMeasure();
-
-
-            
         }
 
         public override void HandleMove(object arg)
