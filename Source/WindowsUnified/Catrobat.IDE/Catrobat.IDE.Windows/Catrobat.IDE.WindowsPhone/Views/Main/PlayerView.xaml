@@ -14,7 +14,7 @@
   <SwapChainPanel x:Name="swapChainPanel">
     <!-- Loading Project -->
 
-    <Image Source="ms-appx:///Assets/SplashScreen.png" x:Name="ImagePlayerLoadSplashScreen" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" Opacity="0.5"/>
+    <!--<Image Source="ms-appx:///Assets/SplashScreen.png" x:Name="ImagePlayerLoadSplashScreen" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" Opacity="0.5"/>
 
     <Grid Grid.Row="0">
       <Grid.RowDefinitions>
@@ -23,7 +23,7 @@
       </Grid.RowDefinitions>
       <ProgressRing x:Name="ProgressRingExtendedSplash" Grid.Row="1" Background="Transparent" Margin="0" IsActive="True" Width="40" Height="40" 
                 VerticalAlignment="Top" HorizontalAlignment="Center"/>
-    </Grid>
+    </Grid>-->
   </SwapChainPanel>
 
   <Page.BottomAppBar>
@@ -34,6 +34,15 @@
         <AppBarButton Icon="Refresh" 
           Label="restart"
           Command="{Binding RestartProgramCommand}"/>
+        <AppBarButton Icon="Play" 
+          Label="play"
+          Command="{Binding PlayProgramCommand}"/>
+        <AppBarButton Icon="Camera" 
+          Label="set thumbnail"
+          Command="{Binding SetThumbnailCommand}"/>
+        <AppBarButton Icon="Setting" 
+          Label="enable axis"
+          Command="{Binding EnableAxisCommand}"/>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
         <AppBarButton Label="take screenshot"
