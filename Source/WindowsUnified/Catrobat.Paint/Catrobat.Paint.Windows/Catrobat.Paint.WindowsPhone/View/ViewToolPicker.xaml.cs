@@ -1,6 +1,7 @@
 ﻿using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Catrobat.Paint.WindowsPhone.Tool;
 using System;
+using Windows.Phone.UI.Input;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -67,22 +68,6 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
         }
 
-        public void resetControls()
-        {
-            Visibility visibility = Visibility.Collapsed;
-            PocketPaintApplication.GetInstance().EllipseSelectionControl.Visibility = visibility;
-            PocketPaintApplication.GetInstance().GridCropControl.Visibility = visibility;
-            PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = visibility;
-            PocketPaintApplication.GetInstance().GridInputScopeControl.Visibility = visibility;
-            PocketPaintApplication.GetInstance().GridUcRellRecControlState = visibility;
-            PocketPaintApplication.GetInstance().InfoBoxActionControl.Visibility = visibility;
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = visibility;
-
-            PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = true;
-            PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
-        }
-
 
         private void Button_OnClick(object sender, RoutedEventArgs e)
         {
@@ -100,7 +85,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                     pocketPaintApplication.isBrushTool = false;
                     pocketPaintApplication.isToolPickerUsed = true;
                     bool enableEdgeTypes = false;
-                    resetControls();
+                    pocketPaintApplication.PaintingAreaView.resetControls(Visibility.Collapsed);
                     switch (((Button)sender).Name)
                     {
                         case "BtnBrush":
