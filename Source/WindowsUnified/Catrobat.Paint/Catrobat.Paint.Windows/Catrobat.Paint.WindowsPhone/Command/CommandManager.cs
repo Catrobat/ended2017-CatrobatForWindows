@@ -224,6 +224,17 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
         }
 
+        public void clearAllCommands()
+        {
+            _undoCommands.Clear();
+            _redoCommands.Clear();
+            _commandBitmapDict.Clear();
+        }
+
+        public void changeVisibilityOfUndoAndRedAppbarButtons()
+        {
+
+        }
 
         // needs to be dispatched back to UIThread
         // started backgroundworkers to let UIThread show spinner etc. right before calculation starts

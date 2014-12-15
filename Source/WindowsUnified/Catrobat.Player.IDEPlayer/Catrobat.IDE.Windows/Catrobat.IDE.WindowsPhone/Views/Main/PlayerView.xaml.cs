@@ -40,7 +40,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
     {
         private readonly PlayerViewModel _viewModel =
             ServiceLocator.ViewModelLocator.PlayerViewModel;
-        private readonly Catrobat_Player.Catrobat_PlayerAdapter _playerObject = 
+        private Catrobat_Player.Catrobat_PlayerAdapter _playerObject = 
             new Catrobat_Player.Catrobat_PlayerAdapter();
 
         public PlayerView()

@@ -63,77 +63,31 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0)
             {
-                messageBoxNewDrawingSpace_Click();
+                PocketPaintApplication.GetInstance().PaintingAreaView.messageBoxNewDrawingSpace_Click("Neues Bild");
             }
             else
             {
-                resetTools();
+                PocketPaintApplication.GetInstance().PaintingAreaView.resetTools();
             }
-        }
-
-        private void resetTools()
-        {
-            if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0) 
-            {
-                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
-            }
-
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = new TransformGroup();
-            PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
-
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = new TransformGroup();
-
-            PocketPaintApplication.GetInstance().PaintingAreaView.disableToolbarsAndPaintingArea(false);
-        }
-
-        private async void messageBoxNewDrawingSpace_Click()
-        { 
-            // TODO: use dynamic text instead of static text
-
-            var messageDialog = new MessageDialog("Änderungen speichern?", "Neues Bild");
-
-            messageDialog.Commands.Add(new UICommand(
-                "Speichern",
-                new UICommandInvokedHandler(saveChanges)));
-            messageDialog.Commands.Add(new UICommand(
-                "Verwerfen",
-                new UICommandInvokedHandler(deleteChanges)));
-
-            messageDialog.DefaultCommandIndex = 0;
-            messageDialog.CancelCommandIndex = 1;
-
-            await messageDialog.ShowAsync();
         }
 
         private void saveChanges(IUICommand command)
         {
             // TODO save current Image
-            
-            resetTools();
+
+            PocketPaintApplication.GetInstance().PaintingAreaView.resetTools();
         }
 
         private void deleteChanges(IUICommand command)
         {
-            resetTools();
+            PocketPaintApplication.GetInstance().PaintingAreaView.resetTools();
         }
 
-        private async void btnNewPictureFromCamera_Click(object sender, RoutedEventArgs e)
+        private void btnNewPictureFromCamera_Click(object sender, RoutedEventArgs e)
         {
             if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0)
             {
-                var messageDialog = new MessageDialog("Änderungen speichern?", "Neues Bild von Kamera");
-
-                messageDialog.Commands.Add(new UICommand(
-                    "Speichern",
-                    new UICommandInvokedHandler(saveChanges)));
-                messageDialog.Commands.Add(new UICommand(
-                    "Verwerfen",
-                    new UICommandInvokedHandler(deleteChanges)));
-
-                messageDialog.DefaultCommandIndex = 0;
-                messageDialog.CancelCommandIndex = 1;
-
-                await messageDialog.ShowAsync();
+                PocketPaintApplication.GetInstance().PaintingAreaView.messageBoxNewDrawingSpace_Click("Neues Bild von Kamera");
             }
             
         }

@@ -31,7 +31,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             {
                 _playerObject = value;
                 RaisePropertyChanged(() => PlayerObject);
-            }    
+            }
         }
 
         public string ProjectName
@@ -98,7 +98,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             if (PlayerObject.HardwareBackButtonPressed() == true)
             {
-                PlayerObject = null;
+                //PlayerObject = null;
 
                 if (IsLaunchFromTile)
                 {
