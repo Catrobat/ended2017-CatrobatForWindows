@@ -12,7 +12,7 @@ using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Models.Scripts;
 using Catrobat.IDE.Core.UI.PortableUI;
 
-namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker
+namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListViewWorker
 {
     internal class CatrobatListViewWorker : ListViewBase
     {
