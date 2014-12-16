@@ -7,7 +7,7 @@ using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.Worker;
+using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListViewWorker;
 
 namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 {
@@ -15,7 +15,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
     {
 
         #region CatrobatListViewWorker
-        public CatrobatListViewWorker Clvw
+        public CatrobatListViewWorker.CatrobatListViewWorker Clvw
         {
             get;
             private set;
@@ -26,7 +26,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls
 
         public CatrobatListView()
         {
-            this.Clvw = new CatrobatListViewWorker();
+            this.Clvw = new CatrobatListViewWorker.CatrobatListViewWorker();
             this.Content = this.Clvw;
             this.Clvw.ItemDragCompletedEvent += clvw_ItemDragCompletedEvent;
             this.Clvw.ItemTapped += Clvw_ItemTapped;

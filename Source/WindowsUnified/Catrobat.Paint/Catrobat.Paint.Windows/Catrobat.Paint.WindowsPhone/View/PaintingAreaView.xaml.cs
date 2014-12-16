@@ -165,7 +165,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
             else
             {
-                // OutputTextBlock.Text = "Operation cancelled.";
+                changeVisibilityOfAppBars(Visibility.Visible);
             }
         }
 
@@ -232,16 +232,16 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 isFullscreen = false;
 
-                changeVisibilityOfAppBars(Visibility.Collapsed);
+                changeVisibilityOfAppBars(Visibility.Visible);
                 setSizeOfPaintingAreaViewCheckered();
-
                 showStatusAppBar();
 
                 e.Handled = true;
             }
-            else if(InfoBoxActionControl.Visibility == Visibility.Visible)
+            else if(InfoBoxActionControl.Visibility == Visibility.Visible || InfoBoxControl.Visibility == Visibility.Visible)
             {
                 InfoBoxActionControl.Visibility = Visibility.Collapsed;
+                InfoBoxControl.Visibility = Visibility.Collapsed;
                 changeVisibilityOfAppBars(Visibility.Visible);
                 e.Handled = true;
             }
@@ -1211,6 +1211,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             // TODO save current Image
             CommandManager.GetInstance().clearAllCommands();
+            changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
             UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
         }
 
@@ -1219,6 +1220,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             // TODO
             resetTools();
             CommandManager.GetInstance().clearAllCommands();
+            changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
             UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
         }
 

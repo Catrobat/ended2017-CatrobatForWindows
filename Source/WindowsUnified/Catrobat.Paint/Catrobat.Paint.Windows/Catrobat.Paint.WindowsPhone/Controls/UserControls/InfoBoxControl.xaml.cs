@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Catrobat.Paint.WindowsPhone.Tool;
+using System;
+using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -69,6 +71,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.resetTools();
             }
+
+            PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
+            PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
+            PocketPaintApplication.GetInstance().PaintingAreaView.resetControls(Visibility.Collapsed);
         }
 
         private void saveChanges(IUICommand command)
