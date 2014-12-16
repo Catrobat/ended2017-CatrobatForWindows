@@ -5,8 +5,8 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
-    xmlns:CatrobatListView="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls"
-  mc:Ignorable="d"
+    xmlns:catrobatListView="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView"
+    mc:Ignorable="d"
   DataContext="{Binding AddNewScriptBrickViewModel, Source={StaticResource Locator}}">
 
   <Grid x:Name="LayoutRoot" 
@@ -34,7 +34,7 @@
     <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" VerticalAlignment="Top">
 
-            <CatrobatListView:CatrobatListView
+            <catrobatListView:CatrobatListView
                 VerticalAlignment="Top"
                 ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
                 ItemTemplate="{StaticResource ActionTemplateSelectorTemplate}"

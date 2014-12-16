@@ -6,7 +6,8 @@
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   xmlns:soundControls="using:Catrobat.IDE.WindowsPhone.Controls.SoundControls"
    xmlns:listsViewControls="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls"
-  mc:Ignorable="d"
+   xmlns:catrobatListView="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView"
+   mc:Ignorable="d"
   DataContext="{Binding SpriteEditorViewModel, Source={StaticResource Locator}}">
 
     <Grid Background="{ThemeResource AppBackgroundBrush}">
@@ -31,7 +32,7 @@
         Header="{Binding Resources.Editor_PivotActions, 
         Source={StaticResource LocalizedStrings}}">
                 <Grid DataContext="{Binding}">
-                    <listsViewControls:CatrobatListView x:Name="ListViewActions"
+                    <catrobatListView:CatrobatListView x:Name="ListViewActions"
             Visibility="Visible"
             ItemsSource="{Binding Actions}"
             SelectedItems="{Binding SelectedActions}"                                        
@@ -69,7 +70,7 @@
         Header="{Binding Resources.Editor_PivotLooks, 
         Source={StaticResource LocalizedStrings}}">
                 <Grid DataContext="{Binding}">
-                    <listsViewControls:CatrobatListView x:Name="ListViewLooks"
+                    <catrobatListView:CatrobatListView x:Name="ListViewLooks"
             ItemsSource="{Binding Looks}"
             SelectedItems="{Binding SelectedLooks}"                                        
             ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
@@ -95,7 +96,7 @@
         Header="{Binding Resources.Editor_PivotSounds, 
         Source={StaticResource LocalizedStrings}}">
                 <Grid DataContext="{Binding}">
-                    <listsViewControls:CatrobatListView x:Name="ListViewSounds"
+                    <catrobatListView:CatrobatListView x:Name="ListViewSounds"
             ItemsSource="{Binding Sounds}"
             SelectedItems="{Binding SelectedSounds}"                                        
             ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"

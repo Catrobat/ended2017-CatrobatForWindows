@@ -6,7 +6,7 @@ using Catrobat.IDE.Core.ViewModels.Editor.Actions;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls;
-using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListViewWorker;
+using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.CatrobatListViewMisc;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Editor.Actions
 {

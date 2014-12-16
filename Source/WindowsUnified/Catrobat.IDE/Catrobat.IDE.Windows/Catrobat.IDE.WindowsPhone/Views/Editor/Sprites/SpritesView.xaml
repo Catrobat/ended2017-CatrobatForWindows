@@ -5,7 +5,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
   xmlns:controls="using:Catrobat.IDE.WindowsPhone.Controls"
-  xmlns:listsViewControls="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls"
+  xmlns:catrobatListView="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView"
   mc:Ignorable="d"
   DataContext="{Binding SpritesViewModel, Source={StaticResource Locator}}">
   <Grid Background="{ThemeResource AppBackgroundBrush}">
@@ -21,7 +21,7 @@
                    Style="{ThemeResource TextTitleNormalStyle}">
         </TextBlock>
       </Grid>
-        <listsViewControls:CatrobatListView x:Name="ListViewSprites"
+        <catrobatListView:CatrobatListView x:Name="ListViewSprites"
         Grid.Row="1"
         ItemsSource="{Binding CurrentProgram.Sprites}"
         SelectedItems="{Binding SelectedSprites}"                                        

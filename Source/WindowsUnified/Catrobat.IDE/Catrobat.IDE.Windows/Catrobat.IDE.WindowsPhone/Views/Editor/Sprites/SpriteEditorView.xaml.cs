@@ -8,6 +8,7 @@ using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Windows.UI.Xaml;
 using Catrobat.IDE.WindowsPhone.Controls;
 using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls;
+using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 {
