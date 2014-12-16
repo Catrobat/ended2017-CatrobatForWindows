@@ -1217,6 +1217,8 @@ namespace Catrobat.Paint.WindowsPhone.View
         public void saveChanges(IUICommand command)
         {
             // TODO save current Image
+            PocketPaintApplication.GetInstance().SaveAsPng();
+
             CommandManager.GetInstance().clearAllCommands();
             changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
             UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
