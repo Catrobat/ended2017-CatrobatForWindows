@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Windows.Graphics.Imaging;
+using System.Runtime.InteropServices.WindowsRuntime;
 // TODO: using System.Windows.Media.Imaging;
 using Windows.Storage;
 using Windows.UI.Xaml.Media.Imaging;
@@ -59,37 +61,79 @@ namespace Catrobat.Paint.WindowsPhone.Data
         public async Task<bool> WriteBitmapToPngFileIsolatedStorage(WriteableBitmap bitmap, String filenameWithEnding)
         {
 
-            var file = await _pocketPaintFolder.CreateFileAsync(filenameWithEnding,
-            CreationCollisionOption.ReplaceExisting);
+            //var file = await _pocketPaintFolder.CreateFileAsync(filenameWithEnding,
+            //CreationCollisionOption.ReplaceExisting);
 
-            if (file == null)
+            //if (file == null)
+            //{
+            //    return false;
+            //}
+            
+           // var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
+
+            //await bitmap.SetSourceAsync(stream);
+
+            RenderTargetBitmap retarbi = new RenderTargetBitmap();
+            await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvas,
+                                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth,
+                                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight);
+            
+
+            Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
+            var pixels = WindowsRuntimeBufferExtensions.ToArray(buffer);
+
+            StorageFile outputFile = await KnownFolders.PicturesLibrary.CreateFileAsync("myTestFile.png", CreationCollisionOption.ReplaceExisting);
+            using (var writeStream = await outputFile.OpenAsync(FileAccessMode.ReadWrite))
             {
-                return false;
+                var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, writeStream);
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Straight, (uint)retarbi.PixelWidth, (uint)retarbi.PixelHeight, 96, 96, pixels);
+                await encoder.FlushAsync();
+
             }
-
-
             // TODO: var img = bitmap.ToImage();
             // TODO: var encoder = new PngEncoder();
-            using (var s = await file.OpenStreamForWriteAsync())
-            {
-                // TODO: encoder.Encode(img, s);
-               // TODO s.Close();
-            }
+           // using (var s = await file.OpenStreamForWriteAsync())
+           // {
+           //
+           //     // TODO: encoder.Encode(img, s);
+           //    // TODO s.Close();
+           // }
 
 
 
             return true;
         }
 
-        public async Task<bool> WriteBitmapToPngMediaLibrary(WriteableBitmap bitmap, string filenameWithEnding)
+        public async Task<bool> WriteBitmapToPngMediaLibrary(string filename)
         {
-            await WriteBitmapToPngFileIsolatedStorage(bitmap, filenameWithEnding);
- 
-            // TODO: var library = new MediaLibrary();
-            using (var s =  await _pocketPaintFolder.OpenStreamForReadAsync(filenameWithEnding))
+
+            RenderTargetBitmap retarbi = new RenderTargetBitmap();
+            await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvas,
+                                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth,
+                                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight);
+
+            Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
+            var pixels = WindowsRuntimeBufferExtensions.ToArray(buffer);
+
+            StorageFile outputFile = await KnownFolders.PicturesLibrary.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
+            using (var writeStream = await outputFile.OpenAsync(FileAccessMode.ReadWrite))
             {
-                // TODO: var pic = library.SavePicture(filenameWithEnding, s);
+                var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, writeStream);
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Straight, (uint)retarbi.PixelWidth, (uint)retarbi.PixelHeight, 96, 96, pixels);
+                await encoder.FlushAsync();
+
             }
+
+            //await WriteBitmapToPngFileIsolatedStorage(bitmap, filenameWithEnding);
+ 
+            //// TODO: var library = new MediaLibrary();
+
+          
+
+            //using (var s =  await _pocketPaintFolder.OpenStreamForReadAsync(filenameWithEnding))
+            //{
+            //    // TODO: var pic = library.SavePicture(filenameWithEnding, s);
+            //}
 
             return true;
         }

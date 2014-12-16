@@ -1,6 +1,7 @@
 ﻿using Catrobat.Paint.WindowsPhone.Tool;
 using System;
 using Windows.Foundation;
+using Windows.UI.Xaml.Media;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
 {
@@ -15,11 +16,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleDown(object arg)
         {
-            //if (NeedToResetCanvas)
-            //{
-            //    ResetCanvas();
-            //}
-
         }
 
         public override void HandleUp(object arg)
@@ -28,6 +24,11 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             {
                 return;
             }
+            Point coordinates = (Point)arg;
+            
+            //PixelData.PixelData myPixelData = new PixelData.PixelData();
+            //SolidColorBrush brush = myPixelData.GetPixel(PocketPaintApplication.GetInstance().Bitmap, (int)coordinates.X, (int)coordinates.Y);
+            //PocketPaintApplication.GetInstance().PaintData.colorSelected = brush;
 
         //PocketPaintApplication.GetInstance().PaintData.ColorSelected =
         //  new SolidColorBrush(PocketPaintApplication.GetInstance().Bitmap.);      

@@ -225,7 +225,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
             else if (this.Frame.CurrentSourcePageType == typeof(ViewToolPicker))
             {
-                this.Frame.GoBack();              
+                this.Frame.GoBack();
                 e.Handled = true;
             }
             else if (isFullscreen)
@@ -244,7 +244,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 InfoBoxControl.Visibility = Visibility.Collapsed;
                 changeVisibilityOfAppBars(Visibility.Visible);
                 e.Handled = true;
-            }
+        }
             else
             {
                 if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() != ToolType.Brush)
@@ -620,6 +620,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnNewPicture.Click += app_btnNewPicture_Click;
             app_btnFullScreen.Click += app_btnFullScreen_Click;
             app_btnLoad.Click += app_btnLoad_Click;
+            app_btnSave.Click += app_btnSave_Click;
+
 
             app_btnClearElementsInWorkingSpace.Label = "Arbeitsfläche löschen";
             app_btnSave.Label = "Speichern";
@@ -640,6 +642,11 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             BottomAppBar = cmdBar;
             current_appbar = type;
+        }
+
+        void app_btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            PocketPaintApplication.GetInstance().SaveAsPng();
         }
 
         void app_btnImportPicture_Click(object sender, RoutedEventArgs e)
@@ -712,7 +719,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             if (PaintingAreaCanvas.Children.Count != 0)
             {
-                PaintingAreaCanvas.Children.Clear();
+            PaintingAreaCanvas.Children.Clear();
                 CommandManager.GetInstance().CommitCommand(new RectangleCommand(new Path()));
             }
         }

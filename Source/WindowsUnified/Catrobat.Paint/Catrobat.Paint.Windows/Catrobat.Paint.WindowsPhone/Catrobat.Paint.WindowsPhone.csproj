@@ -158,6 +158,7 @@
     <Compile Include="Listener\PaintingAreaManipulationListener.cs" />
     <Compile Include="Navigation\NavigationObject.cs" />
     <Compile Include="Navigation\NavigationObjectPage.cs" />
+    <Compile Include="PixelData\PixelData.cs" />
     <Compile Include="PocketPaintApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tool\CursorTool.cs" />
