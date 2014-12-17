@@ -1,13 +1,11 @@
-﻿using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
-using System;
+﻿using System;
 using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
 using System.Windows.Input;
 
-using Catrobat_Player;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+
+using Catrobat.IDE.Core.Services;
 
 
 namespace Catrobat.IDE.Core.ViewModels.Main
@@ -16,23 +14,12 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     {
         #region private Members
 
-        private Catrobat_PlayerAdapter _playerObject = null;
         private string _projectName = "";
         private bool _isLaunchFromTile = false;
 
         #endregion
 
         #region Properties    
-
-        public Catrobat_PlayerAdapter PlayerObject
-        {
-            get { return _playerObject; }
-            set
-            {
-                _playerObject = value;
-                RaisePropertyChanged(() => PlayerObject);
-            }
-        }
 
         public string ProjectName
         {
@@ -70,39 +57,36 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void RestartProgramAction()
         {
-            PlayerObject.RestartButtonClicked();
+            ServiceLocator.PlayerLauncherService.RestartProgramAction();
         }
 
         private void PlayProgramAction()
         {
-            PlayerObject.PlayButtonClicked();
+            ServiceLocator.PlayerLauncherService.PlayProgramAction();
         }
 
         private void SetThumbnailAction()
         {
-            PlayerObject.ThumbnailButtonClicked();
-
+            ServiceLocator.PlayerLauncherService.SetThumbnailAction();
         }
 
         private void EnableAxisAction()
         {
-            PlayerObject.EnableAxisButtonClicked();
+            ServiceLocator.PlayerLauncherService.SetThumbnailAction();
         }
 
         private void TakeScreenshotAction()
         {
-            PlayerObject.ScreenshotButtonClicked();
+            ServiceLocator.PlayerLauncherService.SetThumbnailAction();
         }
 
         protected override void GoBackAction()
         {
-            if (PlayerObject.HardwareBackButtonPressed() == true)
+            if (ServiceLocator.PlayerLauncherService.HardwareBackButtonPressed() == true)
             {
-                //PlayerObject = null;
-
                 if (IsLaunchFromTile)
                 {
-
+                    // TODO: what to do when the Player has been started from a tile: terminate, terminate with confirmation question or default behavior?
                 }
                 else
                 {
