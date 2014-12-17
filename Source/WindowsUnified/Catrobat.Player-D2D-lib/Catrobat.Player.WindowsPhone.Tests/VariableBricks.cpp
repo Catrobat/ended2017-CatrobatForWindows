@@ -25,7 +25,7 @@ namespace PlayerWindowsPhone8Test
         UserVariable *m_variable;
         FormulaTree *m_formulaTree;
         Object *m_object;
-        StartScript *m_script;
+        std::shared_ptr<StartScript> m_script;
 
         TEST_METHOD_INITIALIZE(TestInitialization)
         {
@@ -33,7 +33,7 @@ namespace PlayerWindowsPhone8Test
             m_variableName = "testVariable";
             m_variable = new UserVariable(m_variableName, m_defaultValue);
             m_object = new Object("TestObject");
-            m_script = new StartScript(m_object);
+            m_script = std::shared_ptr<StartScript>(new StartScript(m_object));
             m_formulaTree = NULL;
         }
 

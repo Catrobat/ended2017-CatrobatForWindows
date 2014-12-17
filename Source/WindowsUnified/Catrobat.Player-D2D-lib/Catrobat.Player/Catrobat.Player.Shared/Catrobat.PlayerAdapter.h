@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Catrobat.PlayerMain.h"
 #include "Common\DeviceResources.h"
 #include "Content\Basic2DRenderer.h"
