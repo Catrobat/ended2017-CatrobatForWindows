@@ -190,7 +190,7 @@ namespace Catrobat.Paint.WindowsPhone
             }
 
             // TODO: await StorageIo.WriteBitmapToPngMediaLibrary(bmp, filename);
-            await StorageIo.WriteBitmapToPngMediaLibrary(bmp, filename);
+            await StorageIo.WriteBitmapToPngMediaLibrary(filename);
 
             UnsavedChangesMade = false;
         }
