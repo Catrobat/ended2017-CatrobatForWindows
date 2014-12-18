@@ -20,6 +20,8 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
+using Windows.UI.Notifications;
+using Windows.Data.Xml.Dom;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
 
@@ -245,6 +247,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 InfoBoxActionControl.Visibility = Visibility.Collapsed;
                 InfoBoxControl.Visibility = Visibility.Collapsed;
                 changeVisibilityOfAppBars(Visibility.Visible);
+                changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                 e.Handled = true;
             }
             else
@@ -660,6 +663,20 @@ namespace Catrobat.Paint.WindowsPhone.View
         void app_btnSave_Click(object sender, RoutedEventArgs e)
         {
             PocketPaintApplication.GetInstance().SaveAsPng();
+            showToastNotification("Bild gespeichert!");
+        }
+
+        public void showToastNotification(string message)
+        {
+            ToastTemplateType toastTemplate = ToastTemplateType.ToastImageAndText01;
+            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
+            XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
+            toastTextElements[0].AppendChild(toastXml.CreateTextNode(message));
+            ToastNotification toast = new ToastNotification(toastXml);
+            ToastNotifier toastNotifier = ToastNotificationManager.CreateToastNotifier();
+
+            toast.ExpirationTime = DateTimeOffset.UtcNow.AddSeconds(1);
+            toastNotifier.Show(toast);
         }
 
         void app_btnImportPicture_Click(object sender, RoutedEventArgs e)
