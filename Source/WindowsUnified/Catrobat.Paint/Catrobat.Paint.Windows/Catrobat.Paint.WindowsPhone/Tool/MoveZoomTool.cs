@@ -93,6 +93,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             _transforms.Children.Clear();
             PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
+            CommandManager.GetInstance().CommitCommand(new ZoomCommand(new TransformGroup()));
         }
 
         public bool checkIfScalingAllowed(ScaleTransform toScaleValue)

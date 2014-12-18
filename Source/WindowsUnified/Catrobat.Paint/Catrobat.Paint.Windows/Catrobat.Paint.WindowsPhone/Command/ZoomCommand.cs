@@ -13,13 +13,21 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
         public override bool ReDo()
         {
-            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform);
-            for (int i = 0; i < _transformGroup.Children.Count; i++)
+            TransformGroup transformGroupWithAllKindOfTransforms = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform);
+            if (_transformGroup.Children.Count == 0)
             {
-                transformGroup.Children.Add(_transformGroup.Children[i]);
+                transformGroupWithAllKindOfTransforms.Children.Clear();
+                PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
+                PocketPaintApplication.GetInstance().PaintingAreaView.setEnableOfAppBarButtonResetZoom(false);
             }
-
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = transformGroup;
+            else
+            {
+                for (int i = 0; i < _transformGroup.Children.Count; i++)
+                {
+                    transformGroupWithAllKindOfTransforms.Children.Add(_transformGroup.Children[i]);
+                }
+            }
+            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = transformGroupWithAllKindOfTransforms;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.UpdateLayout();
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateArrange();
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateMeasure();
@@ -33,11 +41,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
             transformGroup.Children.Clear();
 
-            double scaleX = transformGroup.Value.M11;
-            double scaleY = transformGroup.Value.M22;
-
-            double DISPLAY_WIDTH_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0;
-            double DISPLAY_HEIGHT_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0;
+            PocketPaintApplication.GetInstance().PaintingAreaView.setEnableOfAppBarButtonResetZoom(true);
 
             PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
 
