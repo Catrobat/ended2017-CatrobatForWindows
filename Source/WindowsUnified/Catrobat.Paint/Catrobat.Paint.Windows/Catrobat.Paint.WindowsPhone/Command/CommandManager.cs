@@ -1,5 +1,6 @@
 ﻿using Catrobat.Paint.WindowsPhone.Tool;
 using Catrobat.Paint.WindowsPhone.Ui;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Media;
@@ -234,6 +235,21 @@ namespace Catrobat.Paint.WindowsPhone.Command
         public void changeVisibilityOfUndoAndRedAppbarButtons()
         {
 
+        }
+
+        public bool doesCommandTypeExistInUndoList(Type commandType)
+        {
+            if (commandType != null)
+            {
+                foreach(CommandBase command in _undoCommands)
+                {
+                    if(command.GetType() == commandType)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         // needs to be dispatched back to UIThread

@@ -93,6 +93,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             _transforms.Children.Clear();
             PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
+            // TODO: If you reset the working-space then it should be generated a removecommand
+            // TODO: Write a ResetMoveZoomCommand
             CommandManager.GetInstance().CommitCommand(new ZoomCommand(new TransformGroup()));
         }
 

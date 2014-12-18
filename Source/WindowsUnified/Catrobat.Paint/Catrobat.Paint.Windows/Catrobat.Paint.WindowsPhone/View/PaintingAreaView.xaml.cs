@@ -4,6 +4,7 @@ using Catrobat.Paint.WindowsPhone.Listener;
 using Catrobat.Paint.WindowsPhone.Tool;
 using Catrobat.Paint.WindowsPhone.Ui;
 using System;
+using System.Collections.Generic;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Phone.UI.Input;

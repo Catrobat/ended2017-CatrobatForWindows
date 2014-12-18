@@ -26,6 +26,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
                 {
                     transformGroupWithAllKindOfTransforms.Children.Add(_transformGroup.Children[i]);
                 }
+                PocketPaintApplication.GetInstance().PaintingAreaView.setEnableOfAppBarButtonResetZoom(true);
             }
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = transformGroupWithAllKindOfTransforms;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.UpdateLayout();
@@ -37,11 +38,17 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
         public override bool UnDo()
         {
+            if (CommandManager.GetInstance().doesCommandTypeExistInUndoList(typeof(ZoomCommand)))
+            {
+                PocketPaintApplication.GetInstance().PaintingAreaView.setEnableOfAppBarButtonResetZoom(true);
+            }
+            else
+            {
+                PocketPaintApplication.GetInstance().PaintingAreaView.setEnableOfAppBarButtonResetZoom(false);
+            }
             TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform);
 
             transformGroup.Children.Clear();
-
-            PocketPaintApplication.GetInstance().PaintingAreaView.setEnableOfAppBarButtonResetZoom(true);
 
             PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
 
