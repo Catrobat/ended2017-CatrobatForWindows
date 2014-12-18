@@ -35,6 +35,8 @@ namespace Catrobat.Paint.WindowsPhone
 
         public bool isZoomButtonClicked = false;
 
+        public bool shouldAppClosed = false;
+
         public bool UnsavedChangesMade { get; set; }
         #endregion
 
