@@ -745,10 +745,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Catrobat_Player.x86" Condition="'$(Platform)' == 'x86'">
-      <HintPath>..\..\Catrobat.Player.WindowsPhone\Catrobat_Player.winmd</HintPath>
+      <HintPath>..\..\..\Catrobat.Player-D2D-lib\Debug\Catrobat.Player.WindowsPhone\Catrobat_Player.winmd</HintPath>
     </Reference>
     <Reference Include="Catrobat_Player.ARM" Condition="'$(Platform)' == 'ARM'">
-      <HintPath>..\..\Catrobat.Player.WindowsPhone\ARM\Catrobat_Player.winmd</HintPath>
+      <HintPath>..\..\..\Catrobat.Player-D2D-lib\ARM\Debug\Catrobat.Player.WindowsPhone\Catrobat_Player.winmd</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=4.4.32.26491, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
