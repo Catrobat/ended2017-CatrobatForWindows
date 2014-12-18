@@ -32,16 +32,22 @@ namespace Catrobat_Player
 
     private:
         // Window event handlers.
-        void OnVisibilityChanged(Windows::UI::Core::CoreWindow^ sender, Windows::UI::Core::VisibilityChangedEventArgs^ args);
+        void OnVisibilityChanged(Windows::UI::Core::CoreWindow^ sender, 
+            Windows::UI::Core::VisibilityChangedEventArgs^ args);
 
         // DisplayInformation event handlers.
-        void OnDpiChanged(Windows::Graphics::Display::DisplayInformation^ sender, Platform::Object^ args);
-        void OnOrientationChanged(Windows::Graphics::Display::DisplayInformation^ sender, Platform::Object^ args);
-        void OnDisplayContentsInvalidated(Windows::Graphics::Display::DisplayInformation^ sender, Platform::Object^ args);
+        void OnDpiChanged(Windows::Graphics::Display::DisplayInformation^ sender, 
+            Platform::Object^ args);
+        void OnOrientationChanged(Windows::Graphics::Display::DisplayInformation^ sender, 
+            Platform::Object^ args);
+        void OnDisplayContentsInvalidated(Windows::Graphics::Display::DisplayInformation^ sender, 
+            Platform::Object^ args);
 
         // Other event handlers.
-        void OnCompositionScaleChanged(Windows::UI::Xaml::Controls::SwapChainPanel^ sender, Object^ args);
-        void OnSwapChainPanelSizeChanged(Platform::Object^ sender, Windows::UI::Xaml::SizeChangedEventArgs^ e);
+        void OnCompositionScaleChanged(Windows::UI::Xaml::Controls::SwapChainPanel^ sender, 
+            Object^ args);
+        void OnSwapChainPanelSizeChanged(Platform::Object^ sender, 
+            Windows::UI::Xaml::SizeChangedEventArgs^ e);
 
         // Independent input handling functions - private.
         void OnPointerPressed(Platform::Object^ sender, Windows::UI::Core::PointerEventArgs^ e);
