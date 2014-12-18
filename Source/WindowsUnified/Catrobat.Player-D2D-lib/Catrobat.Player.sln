@@ -15,15 +15,20 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Catrobat.Player.StandAlone.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Player.StandAlone.WindowsPhone", "Catrobat.Player.StandAlone\Catrobat.Player.StandAlone.WindowsPhone\Catrobat.Player.StandAlone.WindowsPhone.csproj", "{C4E11077-73C9-4CB7-8A81-0B64BF5013E9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catrobat.Player.Tests", "Catrobat.Player.Tests", "{4111F969-4676-4B31-893D-AD92EA3B3462}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Catrobat.Player.WindowsPhone.Tests", "Catrobat.Player.WindowsPhone.Tests\Catrobat.Player.WindowsPhone.Tests.vcxproj", "{33EFAC86-0136-4470-82DB-31D9FBA66CA4}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Catrobat.Player.StandAlone\Catrobat.Player.StandAlone.Shared\Catrobat.Player.StandAlone.Shared.projitems*{c4e11077-73c9-4cb7-8a81-0b64bf5013e9}*SharedItemsImports = 4
+		Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{33efac86-0136-4470-82db-31d9fba66ca4}*SharedItemsImports = 4
 		Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{4b55f37f-21d4-40ee-8c6b-7fe0f32f61be}*SharedItemsImports = 9
 		Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{54144ca7-b859-4f79-b682-dad92b4e3353}*SharedItemsImports = 4
 		Catrobat.Player.StandAlone\Catrobat.Player.StandAlone.Shared\Catrobat.Player.StandAlone.Shared.projitems*{d7c8c804-13d0-4046-95ae-aaabf5fd530c}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -47,6 +52,10 @@ Global
 		SccProjectTopLevelParentUniqueName5 = Catrobat.Player.sln
 		SccProjectName5 = Catrobat.Player.StandAlone/Catrobat.Player.StandAlone.WindowsPhone
 		SccLocalPath5 = Catrobat.Player.StandAlone\\Catrobat.Player.StandAlone.WindowsPhone
+		SccProjectUniqueName6 = Catrobat.Player.WindowsPhone.Tests\\Catrobat.Player.WindowsPhone.Tests.vcxproj
+		SccProjectTopLevelParentUniqueName6 = Catrobat.Player.sln
+		SccProjectName6 = Catrobat.Player.WindowsPhone.Tests
+		SccLocalPath6 = Catrobat.Player.WindowsPhone.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,6 +125,34 @@ Global
 		{C4E11077-73C9-4CB7-8A81-0B64BF5013E9}.Release|x86.ActiveCfg = Release|x86
 		{C4E11077-73C9-4CB7-8A81-0B64BF5013E9}.Release|x86.Build.0 = Release|x86
 		{C4E11077-73C9-4CB7-8A81-0B64BF5013E9}.Release|x86.Deploy.0 = Release|x86
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|ARM.ActiveCfg = Debug|ARM
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|ARM.Build.0 = Debug|ARM
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|ARM.Deploy.0 = Debug|ARM
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|Mixed Platforms.Deploy.0 = Debug|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|Win32.Build.0 = Debug|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|Win32.Deploy.0 = Debug|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|x64.ActiveCfg = Debug|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|x86.ActiveCfg = Debug|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|x86.Build.0 = Debug|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Debug|x86.Deploy.0 = Debug|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|Any CPU.ActiveCfg = Release|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|ARM.ActiveCfg = Release|ARM
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|ARM.Build.0 = Release|ARM
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|ARM.Deploy.0 = Release|ARM
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|Mixed Platforms.Deploy.0 = Release|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|Win32.ActiveCfg = Release|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|Win32.Build.0 = Release|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|Win32.Deploy.0 = Release|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|x64.ActiveCfg = Release|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|x86.ActiveCfg = Release|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|x86.Build.0 = Release|Win32
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|x86.Deploy.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,5 +162,6 @@ Global
 		{54144CA7-B859-4F79-B682-DAD92B4E3353} = {9776E7D6-5AF8-417E-AD56-C17D3034C90E}
 		{D7C8C804-13D0-4046-95AE-AAABF5FD530C} = {2F831919-46CC-4BA4-AA1A-E765D3E18097}
 		{C4E11077-73C9-4CB7-8A81-0B64BF5013E9} = {2F831919-46CC-4BA4-AA1A-E765D3E18097}
+		{33EFAC86-0136-4470-82DB-31D9FBA66CA4} = {4111F969-4676-4B31-893D-AD92EA3B3462}
 	EndGlobalSection
 EndGlobal

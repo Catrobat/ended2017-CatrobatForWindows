@@ -8,5 +8,17 @@ namespace Catrobat.IDE.Core.Services
         Task LaunchPlayer(Program project, bool isLaunchedFromTile = false);
 
         Task LaunchPlayer(string projectName, bool isLaunchedFromTile = false);
+
+        void RestartProgramAction();
+
+        void PlayProgramAction();
+
+        void SetThumbnailAction();
+
+        void EnableAxisAction();
+         
+        void TakeScreenshotAction();
+
+        bool HardwareBackButtonPressed();
     }
 }
