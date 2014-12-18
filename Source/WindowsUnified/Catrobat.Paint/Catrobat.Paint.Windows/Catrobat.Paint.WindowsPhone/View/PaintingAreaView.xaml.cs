@@ -872,6 +872,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             scaletransform.ScaleY = 0.9;
             PocketPaintApplication.GetInstance().isZoomButtonClicked = true;
             tool.HandleMove(scaletransform);
+            tool.HandleUp(scaletransform);
         }
 
         void BtnZoomIn_Click(object sender, RoutedEventArgs e )
@@ -882,6 +883,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             scaletransform.ScaleX = 1.1;
             scaletransform.ScaleY = 1.1;
             PocketPaintApplication.GetInstance().isZoomButtonClicked = true;
+            tool.HandleMove(scaletransform);
             tool.HandleUp(scaletransform);
         }
 

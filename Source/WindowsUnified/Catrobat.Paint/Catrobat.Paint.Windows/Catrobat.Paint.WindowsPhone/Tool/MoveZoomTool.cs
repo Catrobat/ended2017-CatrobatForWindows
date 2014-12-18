@@ -30,6 +30,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             DISPLAY_WIDTH_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0;
             DISPLAY_HEIGHT_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0;
+            _tempTransforms = new TransformGroup();
             startScale.X = _transforms.Value.M11;
             startScale.Y = _transforms.Value.M22;
             centerPointForScale = new Point();
@@ -54,8 +55,16 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                     fixedaspection = toScaleValue.ScaleX > toScaleValue.ScaleY ? toScaleValue.ScaleX : toScaleValue.ScaleY;
                     toScaleValue.ScaleX = fixedaspection;
                     toScaleValue.ScaleY = fixedaspection;
-                    toScaleValue.CenterX = startScale.X;
-                    toScaleValue.CenterY = startScale.Y;
+                    if (PocketPaintApplication.GetInstance().isZoomButtonClicked)
+                    {
+                        toScaleValue.CenterX = DISPLAY_WIDTH_HALF;
+                        toScaleValue.CenterY = DISPLAY_HEIGHT_HALF;
+                    }
+                    else
+                    {
+                        toScaleValue.CenterX = startScale.X;
+                        toScaleValue.CenterY = startScale.Y;
+                    }
                     _transforms.Children.Add(toScaleValue);
                     _tempTransforms.Children.Add(toScaleValue);
             }
@@ -81,7 +90,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleUp(object arg)
         {
-                CommandManager.GetInstance().CommitCommand(new ZoomCommand(_tempTransforms));
+            CommandManager.GetInstance().CommitCommand(new ZoomCommand(_tempTransforms));
         }
 
         public override void Draw(object o)
