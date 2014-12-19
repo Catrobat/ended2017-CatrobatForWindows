@@ -18,7 +18,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
             {
                 transformGroupWithAllKindOfTransforms.Children.Clear();
                 PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
-                PocketPaintApplication.GetInstance().PaintingAreaView.setEnableOfAppBarButtonResetZoom(false);
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeEnableOfAppBarButtonResetZoom(false);
             }
             else
             {
@@ -26,7 +26,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
                 {
                     transformGroupWithAllKindOfTransforms.Children.Add(_transformGroup.Children[i]);
                 }
-                PocketPaintApplication.GetInstance().PaintingAreaView.setEnableOfAppBarButtonResetZoom(true);
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeEnableOfAppBarButtonResetZoom(true);
             }
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = transformGroupWithAllKindOfTransforms;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.UpdateLayout();
@@ -40,11 +40,11 @@ namespace Catrobat.Paint.WindowsPhone.Command
         {
             if (CommandManager.GetInstance().doesCommandTypeExistInUndoList(typeof(ZoomCommand)))
             {
-                PocketPaintApplication.GetInstance().PaintingAreaView.setEnableOfAppBarButtonResetZoom(true);
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeEnableOfAppBarButtonResetZoom(true);
             }
             else
             {
-                PocketPaintApplication.GetInstance().PaintingAreaView.setEnableOfAppBarButtonResetZoom(false);
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeEnableOfAppBarButtonResetZoom(false);
             }
             TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform);
 

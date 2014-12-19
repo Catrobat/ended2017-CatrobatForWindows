@@ -12,6 +12,13 @@ namespace Catrobat.Paint.WindowsPhone.Listener
         public void BtnUndo_Click(object sender, RoutedEventArgs e)
         {
             CommandManager.GetInstance().UnDo();
+
+            // TODO: Maybe it would be better to swap out the following code to the paintingarea-file.
+            if(PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count == 0)
+            {
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButon("appBarButtonClearWorkingSpace", false);
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButon("appbarButtonSave", false);
+            }
         }
 
         public void BtnRedo_Click(object sender, RoutedEventArgs e)
