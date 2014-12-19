@@ -65,7 +65,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0)
             {
-                PocketPaintApplication.GetInstance().PaintingAreaView.messageBoxNewDrawingSpace_Click("Neues Bild");
+                PocketPaintApplication.GetInstance().PaintingAreaView.messageBoxNewDrawingSpace_Click("Neues Bild", false);
             }
             else
             {
@@ -93,9 +93,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0)
             {
-                PocketPaintApplication.GetInstance().PaintingAreaView.messageBoxNewDrawingSpace_Click("Neues Bild von Kamera");
-            }
-            
+                PocketPaintApplication.GetInstance().PaintingAreaView.messageBoxNewDrawingSpace_Click("Neues Bild von Kamera",false);
+            } 
         }
     }
 }

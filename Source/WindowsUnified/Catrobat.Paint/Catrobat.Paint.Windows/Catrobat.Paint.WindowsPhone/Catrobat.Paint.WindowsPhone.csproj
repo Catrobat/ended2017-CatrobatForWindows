@@ -96,6 +96,7 @@
     <Compile Include="Command\FlipCommand.cs" />
     <Compile Include="Command\EllipseCommand.cs" />
     <Compile Include="Command\ClearWorkingSpaceCommand.cs" />
+    <Compile Include="Command\RemoveCommand.cs" />
     <Compile Include="Command\ZoomCommand.cs" />
     <Compile Include="Command\MoveCommand.cs" />
     <Compile Include="Command\LoadPictureCommand.cs" />

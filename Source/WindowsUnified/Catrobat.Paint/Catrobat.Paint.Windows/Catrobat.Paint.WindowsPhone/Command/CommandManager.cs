@@ -1,5 +1,6 @@
 ﻿using Catrobat.Paint.WindowsPhone.Tool;
 using Catrobat.Paint.WindowsPhone.Ui;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Media;
@@ -71,7 +72,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
                 var command = _undoCommands.Last.Value;
                 _undoCommands.RemoveLast();
 
-                if (command is FlipCommand || command is MoveCommand || command is RotateCommand || command is ZoomCommand)
+                if (command is FlipCommand || command is MoveCommand || command is RotateCommand || command is RemoveCommand || command is ZoomCommand)
                 {
                     var lastCommand = true;
                     foreach (var undoCommand in _undoCommands)
@@ -83,7 +84,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
                         }
                     }
 
-                    if (lastCommand || command is MoveCommand || command is ZoomCommand)
+                    if (lastCommand || command is MoveCommand || command is ZoomCommand || command is RemoveCommand)
                     {
                         command.UnDo();
                         //if(command is ZoomCommand)
@@ -234,6 +235,21 @@ namespace Catrobat.Paint.WindowsPhone.Command
         public void changeVisibilityOfUndoAndRedAppbarButtons()
         {
 
+        }
+
+        public bool doesCommandTypeExistInUndoList(Type commandType)
+        {
+            if (commandType != null)
+            {
+                foreach(CommandBase command in _undoCommands)
+                {
+                    if(command.GetType() == commandType)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         // needs to be dispatched back to UIThread

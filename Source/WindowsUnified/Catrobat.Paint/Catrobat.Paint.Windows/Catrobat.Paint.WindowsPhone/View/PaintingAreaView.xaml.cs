@@ -4,6 +4,7 @@ using Catrobat.Paint.WindowsPhone.Listener;
 using Catrobat.Paint.WindowsPhone.Tool;
 using Catrobat.Paint.WindowsPhone.Ui;
 using System;
+using System.Collections.Generic;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Phone.UI.Input;
@@ -19,6 +20,8 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
+using Windows.UI.Notifications;
+using Windows.Data.Xml.Dom;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
 
@@ -154,6 +157,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                     PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
                     CommandManager.GetInstance().CommitCommand(new LoadPictureCommand(_path));
                     PocketPaintApplication.GetInstance().isLoadPictureClicked = false;
+                    changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                 }
                 else
                 {
@@ -218,6 +222,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
+            PocketPaintApplication.GetInstance().shouldAppClosed = false;
             if (this.Frame.CurrentSourcePageType == typeof(ViewColorPicker))
             {
                 e.Handled = true;
@@ -225,7 +230,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
             else if (this.Frame.CurrentSourcePageType == typeof(ViewToolPicker))
             {
-                this.Frame.GoBack();
+                this.Frame.GoBack();              
                 e.Handled = true;
             }
             else if (isFullscreen)
@@ -243,8 +248,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                 InfoBoxActionControl.Visibility = Visibility.Collapsed;
                 InfoBoxControl.Visibility = Visibility.Collapsed;
                 changeVisibilityOfAppBars(Visibility.Visible);
+                changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                 e.Handled = true;
-        }
+            }
             else
             {
                 if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() != ToolType.Brush)
@@ -261,12 +267,14 @@ namespace Catrobat.Paint.WindowsPhone.View
                 }
                 else if (PaintingAreaCanvas.Children.Count > 0)
                 {
-                    messageBoxNewDrawingSpace_Click("");
+                    PocketPaintApplication.GetInstance().shouldAppClosed = true;
+                    messageBoxNewDrawingSpace_Click("", true);
                     e.Handled = true;
                 }
                 else
                 {
                     // TODO: Close app.
+                    Application.Current.Exit();
                 }
             }
         }
@@ -622,7 +630,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnLoad.Click += app_btnLoad_Click;
             app_btnSave.Click += app_btnSave_Click;
 
-
             app_btnClearElementsInWorkingSpace.Label = "Arbeitsfläche löschen";
             app_btnSave.Label = "Speichern";
             app_btnSaveCopy.Label = "Kopie speichern";
@@ -644,9 +651,35 @@ namespace Catrobat.Paint.WindowsPhone.View
             current_appbar = type;
         }
 
+        public void setEnableOfAppBarButtonResetZoom(bool isEnabled)
+        {
+            CommandBar cmdBar = (CommandBar)BottomAppBar;
+            for(int i = 0; i < cmdBar.PrimaryCommands.Count; i++)
+            {
+                if (((AppBarButton)cmdBar.PrimaryCommands[i]).Name == "appButtonResetZoom")
+                {
+                    ((AppBarButton)cmdBar.PrimaryCommands[i]).IsEnabled = isEnabled;
+                }
+            }
+        }
+
         void app_btnSave_Click(object sender, RoutedEventArgs e)
         {
             PocketPaintApplication.GetInstance().SaveAsPng();
+            showToastNotification("Bild gespeichert!");
+        }
+
+        public void showToastNotification(string message)
+        {
+            ToastTemplateType toastTemplate = ToastTemplateType.ToastImageAndText01;
+            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
+            XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
+            toastTextElements[0].AppendChild(toastXml.CreateTextNode(message));
+            ToastNotification toast = new ToastNotification(toastXml);
+            ToastNotifier toastNotifier = ToastNotificationManager.CreateToastNotifier();
+
+            toast.ExpirationTime = DateTimeOffset.UtcNow.AddSeconds(1);
+            toastNotifier.Show(toast);
         }
 
         void app_btnImportPicture_Click(object sender, RoutedEventArgs e)
@@ -668,6 +701,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         void app_btnNewPicture_Click(object sender, RoutedEventArgs e)
         {
+            PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
             disableToolbarsAndPaintingArea(true);
         }
 
@@ -719,8 +753,8 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             if (PaintingAreaCanvas.Children.Count != 0)
             {
-            PaintingAreaCanvas.Children.Clear();
-                CommandManager.GetInstance().CommitCommand(new RectangleCommand(new Path()));
+                PaintingAreaCanvas.Children.Clear();
+                CommandManager.GetInstance().CommitCommand(new RemoveCommand());
             }
         }
 
@@ -858,6 +892,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             scaletransform.ScaleY = 0.9;
             PocketPaintApplication.GetInstance().isZoomButtonClicked = true;
             tool.HandleMove(scaletransform);
+            tool.HandleUp(scaletransform);
         }
 
         void BtnZoomIn_Click(object sender, RoutedEventArgs e )
@@ -868,6 +903,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             scaletransform.ScaleX = 1.1;
             scaletransform.ScaleY = 1.1;
             PocketPaintApplication.GetInstance().isZoomButtonClicked = true;
+            tool.HandleMove(scaletransform);
             tool.HandleUp(scaletransform);
         }
 
@@ -1195,7 +1231,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PaintingAreaCanvas.Background.Opacity = opacity;
         }
 
-        public async void messageBoxNewDrawingSpace_Click(string message)
+        public async void messageBoxNewDrawingSpace_Click(string message, bool shouldAppClosed)
         {
             // TODO: use dynamic text instead of static text
 
@@ -1214,30 +1250,58 @@ namespace Catrobat.Paint.WindowsPhone.View
             await messageDialog.ShowAsync();
         }
 
+        private UICommandInvokedHandler deleteChanges()
+        {
+            if (PocketPaintApplication.GetInstance().shouldAppClosed)
+            {
+                Application.Current.Exit();
+            }
+            else
+            {
+                resetTools();
+                CommandManager.GetInstance().clearAllCommands();
+                changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
+                UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
+            }
+
+                return null;
+        }
+
         public void saveChanges(IUICommand command)
         {
-            // TODO save current Image
-            PocketPaintApplication.GetInstance().SaveAsPng();
-
-            CommandManager.GetInstance().clearAllCommands();
-            changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
-            UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
-        }
+            if (PocketPaintApplication.GetInstance().shouldAppClosed)
+            {
+                Application.Current.Exit();
+            }
+            else
+            {
+                PocketPaintApplication.GetInstance().SaveAsPng();
+                CommandManager.GetInstance().clearAllCommands();
+                changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
+                UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
+            }
+       }
 
         public void deleteChanges(IUICommand command)
         {
-            // TODO
-            resetTools();
-            CommandManager.GetInstance().clearAllCommands();
-            changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
-            UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
+            if (PocketPaintApplication.GetInstance().shouldAppClosed)
+            {
+                Application.Current.Exit();
+            }
+            else
+            {
+                resetTools();
+                CommandManager.GetInstance().clearAllCommands();
+                changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
+                UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
+            }
         }
 
         private void btnNewDrawingSpace_Click(object sender, RoutedEventArgs e)
         {
             if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0)
             {
-                messageBoxNewDrawingSpace_Click("Neues Bild");
+                messageBoxNewDrawingSpace_Click("Neues Bild", false);
             }
             else
             {
