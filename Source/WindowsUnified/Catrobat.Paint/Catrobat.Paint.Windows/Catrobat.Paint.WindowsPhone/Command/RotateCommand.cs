@@ -6,11 +6,13 @@ namespace Catrobat.Paint.WindowsPhone.Command
     {
         private TransformGroup _rotateTransformGroup;
         private int _angle = 0;
+        private int _rotationDirection = 0;
 
-        public RotateCommand(TransformGroup rotateTransformGroup, int angle)
+        public RotateCommand(TransformGroup rotateTransformGroup, int angle, int rotationDirection)
         {
             _rotateTransformGroup = rotateTransformGroup;
             _angle = angle;
+            _rotationDirection = rotationDirection;
         }
 
         public override bool ReDo()
@@ -27,7 +29,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateArrange();
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateMeasure();
             PocketPaintApplication.GetInstance().angleForRotation = _angle;
-
+            PocketPaintApplication.GetInstance().PaintingAreaView.enableResetButtonRotate(_rotationDirection);
             return true;
         }
 
@@ -44,6 +46,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
             PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
             PocketPaintApplication.GetInstance().angleForRotation -= _angle;
+            PocketPaintApplication.GetInstance().PaintingAreaView.enableResetButtonRotate(-_rotationDirection);
             return true;
         }
     }

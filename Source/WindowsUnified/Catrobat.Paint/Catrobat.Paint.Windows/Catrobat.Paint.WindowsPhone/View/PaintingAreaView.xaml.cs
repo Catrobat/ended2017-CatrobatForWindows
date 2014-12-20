@@ -769,7 +769,6 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         void app_btn_reset_Click(object sender, RoutedEventArgs e)
         {
-            ((AppBarButton)sender).IsEnabled = false;
             PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ResetDrawingSpace();
         }
 
@@ -836,7 +835,12 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        private void enableResetButtonRotate(int number)
+        public int getRotationCounter()
+        {
+            return rotateCounter;
+        }
+
+        public void enableResetButtonRotate(int number)
         {
             AppBarButton appBarButtonReset = getAppBarResetButton("Rotate");
 

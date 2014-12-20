@@ -50,7 +50,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             rotateTransform.Angle = PocketPaintApplication.GetInstance().angleForRotation;
             rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Width) / 2;
             rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Height) / 2);
-            addTransformsToRotationTransformGroup(rotateTransform, 0);
+            addTransformsToRotationTransformGroup(rotateTransform, 0, PocketPaintApplication.GetInstance().PaintingAreaView.getRotationCounter()*(-1));
+            PocketPaintApplication.GetInstance().PaintingAreaView.enableResetButtonRotate(PocketPaintApplication.GetInstance().PaintingAreaView.getRotationCounter() * (-1));
         }
 
         public void proofBoundariesOfAngle(int angleValue)
@@ -67,14 +68,14 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             }
         }
 
-        public void createRotationTransformAndAddedItToTransformGroup(int angleRotation)
+        public void createRotationTransformAndAddedItToTransformGroup(int angleRotation, int rotationDirection)
         {
             var rotateTransform = new RotateTransform();
             rotateTransform.Angle = PocketPaintApplication.GetInstance().angleForRotation;
             rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth) / 2;
             rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight) / 2);
 
-            addTransformsToRotationTransformGroup(rotateTransform, angleRotation);
+            addTransformsToRotationTransformGroup(rotateTransform, angleRotation, rotationDirection);
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.UpdateLayout();
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateArrange();
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateMeasure();
@@ -84,17 +85,17 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             int angleToRotate = -90;
             proofBoundariesOfAngle(angleToRotate);
-            createRotationTransformAndAddedItToTransformGroup(angleToRotate);
+            createRotationTransformAndAddedItToTransformGroup(angleToRotate, -1);
         }
 
         public void RotateRight()
         {
             int angleToRotate = 90;
             proofBoundariesOfAngle(angleToRotate);
-            createRotationTransformAndAddedItToTransformGroup(angleToRotate);
+            createRotationTransformAndAddedItToTransformGroup(angleToRotate, 1);
         }
 
-        private void addTransformsToRotationTransformGroup(RotateTransform rotateTransform, int angle)
+        private void addTransformsToRotationTransformGroup(RotateTransform rotateTransform, int angle, int rotationDirection)
         {
             double DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
             double DISPLAY_HEIGHT_HALF = Window.Current.Bounds.Height / 2.0;
@@ -130,7 +131,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 _rotationTransformGroup.Children.Add(toTranslateValue);
                 rotationTransformGroupForCommand.Children.Add(toTranslateValue);
             }
-            CommandManager.GetInstance().CommitCommand(new RotateCommand(rotationTransformGroupForCommand, PocketPaintApplication.GetInstance().angleForRotation));
+            CommandManager.GetInstance().CommitCommand(new RotateCommand(rotationTransformGroupForCommand, PocketPaintApplication.GetInstance().angleForRotation, rotationDirection));
         }
     }
 }
