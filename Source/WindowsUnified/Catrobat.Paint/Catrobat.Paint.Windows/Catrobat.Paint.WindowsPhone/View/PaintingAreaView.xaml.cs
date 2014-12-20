@@ -601,6 +601,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 app_btnReset.IsEnabled = flipHorizontal | flipVertical;
 
+
                 cmdBar.PrimaryCommands.Add(app_btnHorizontal);
                 cmdBar.PrimaryCommands.Add(app_btnVertical);
                 cmdBar.PrimaryCommands.Add(app_btnReset);
@@ -617,6 +618,9 @@ namespace Catrobat.Paint.WindowsPhone.View
             AppBarButton app_btnLoad = new AppBarButton();
             AppBarButton app_btnFullScreen = new AppBarButton();
             AppBarButton app_btnAbout = new AppBarButton();
+
+            app_btnClearElementsInWorkingSpace.Name = "appBarButtonClearWorkingSpace";
+            app_btnSave.Name = "appbarButtonSave";
 
             BitmapIcon tools_icon = new BitmapIcon();
             tools_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/menu_tools_.png", UriKind.Absolute);
@@ -647,11 +651,14 @@ namespace Catrobat.Paint.WindowsPhone.View
             cmdBar.SecondaryCommands.Add(app_btnLoad);
             cmdBar.SecondaryCommands.Add(app_btnFullScreen);
 
+            app_btnClearElementsInWorkingSpace.IsEnabled = PaintingAreaCanvas.Children.Count > 0 ? true : false;
+            app_btnSave.IsEnabled = PaintingAreaCanvas.Children.Count > 0 ? true : false;
+
             BottomAppBar = cmdBar;
             current_appbar = type;
         }
 
-        public void setEnableOfAppBarButtonResetZoom(bool isEnabled)
+        public void changeEnableOfAppBarButtonResetZoom(bool isEnabled)
         {
             CommandBar cmdBar = (CommandBar)BottomAppBar;
             for(int i = 0; i < cmdBar.PrimaryCommands.Count; i++)
@@ -754,6 +761,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             if (PaintingAreaCanvas.Children.Count != 0)
             {
                 PaintingAreaCanvas.Children.Clear();
+                changeEnabledOfASecondaryAppbarButon("appBarButtonClearWorkingSpace", false);
+                changeEnabledOfASecondaryAppbarButon("appbarButtonSave", false);
                 CommandManager.GetInstance().CommitCommand(new RemoveCommand());
             }
         }
@@ -1339,5 +1348,40 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
         }
 
+        // TODO: Should not be called right now. There is another methode which is named changeEnabledOfASecondaryAppbarButon
+        // Use this method instead of changeEnabledOfAppbarButtonClearWorkingSpace.
+        public void changeEnabledOfAppbarButtonClearWorkingSpace(bool isEnabled)
+        {
+            CommandBar cmdBar = (CommandBar)BottomAppBar;
+            for (int i = 0; i < cmdBar.SecondaryCommands.Count; i++)
+            {
+                if (((AppBarButton)cmdBar.SecondaryCommands[i]).Name == "appBarButtonClearWorkingSpace")
+                {
+                    ((AppBarButton)cmdBar.SecondaryCommands[i]).IsEnabled = isEnabled;
+                }
+            }
+        }
+
+        public void changeEnabledOfASecondaryAppbarButon(string appBarButtonName, bool isEnabled)
+        {
+            CommandBar cmdBar = (CommandBar)BottomAppBar;
+            for (int i = 0; i < cmdBar.SecondaryCommands.Count; i++)
+            {
+                if (((AppBarButton)cmdBar.SecondaryCommands[i]).Name == appBarButtonName)
+                {
+                    ((AppBarButton)cmdBar.SecondaryCommands[i]).IsEnabled = isEnabled;
+                }
+            }
+        }
+
+        public void addElementToPaintingAreCanvas(Path path)
+        {
+            if(path != null)
+            {
+                PaintingAreaCanvas.Children.Add(path);
+                changeEnabledOfASecondaryAppbarButon("appBarButtonClearWorkingSpace", true);
+                changeEnabledOfASecondaryAppbarButon("appbarButtonSave", true);
+            }
+        }
     }
 }

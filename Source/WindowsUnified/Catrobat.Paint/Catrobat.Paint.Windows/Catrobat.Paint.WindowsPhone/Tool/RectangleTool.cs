@@ -107,7 +107,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _path.StrokeThickness = strokeThickness;
             _path.StrokeLineJoin = PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeLineJoinOfRectangleToDraw;
             _path.Data = myRectangleGeometry;
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
+            PocketPaintApplication.GetInstance().PaintingAreaView.addElementToPaintingAreCanvas(_path);
 
             var rectangleGeometry = new RectangleGeometry
             {

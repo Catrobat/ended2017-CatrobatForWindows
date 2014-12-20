@@ -69,7 +69,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 _lastPoint = coordinate;
                 _path.Data = _pathGeometry;
 
-                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
+                PocketPaintApplication.GetInstance().PaintingAreaView.addElementToPaintingAreCanvas(_path);
 
                 var rectangleGeometry = new RectangleGeometry
                 {

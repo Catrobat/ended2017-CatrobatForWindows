@@ -111,7 +111,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _path.StrokeThickness = strokeThickness;
             _path.StrokeLineJoin = PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeLineJoinOfRectangleToDraw;
             _path.Data = myEllipseGeometry;
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
+            PocketPaintApplication.GetInstance().PaintingAreaView.addElementToPaintingAreCanvas(_path);
 
             var rectangleGeometry = new RectangleGeometry
             {
