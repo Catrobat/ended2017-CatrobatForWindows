@@ -761,8 +761,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             if (PaintingAreaCanvas.Children.Count != 0)
             {
                 PaintingAreaCanvas.Children.Clear();
-                changeEnabledOfASecondaryAppbarButon("appBarButtonClearWorkingSpace", false);
-                changeEnabledOfASecondaryAppbarButon("appbarButtonSave", false);
+                changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", false);
+                changeEnabledOfASecondaryAppbarButton("appbarButtonSave", false);
                 CommandManager.GetInstance().CommitCommand(new RemoveCommand());
             }
         }
@@ -1277,7 +1277,11 @@ namespace Catrobat.Paint.WindowsPhone.View
                 UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
             }
 
-                return null;
+            changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", false);
+            changeEnabledOfASecondaryAppbarButton("appbarButtonSave", false);
+
+            // TODO: return value should not null.
+            return null;
         }
 
         public void saveChanges(IUICommand command)
@@ -1292,6 +1296,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 CommandManager.GetInstance().clearAllCommands();
                 changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                 UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
+                changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", false);
+                changeEnabledOfASecondaryAppbarButton("appbarButtonSave", false);
             }
        }
 
@@ -1307,18 +1313,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 CommandManager.GetInstance().clearAllCommands();
                 changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                 UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
-            }
-        }
-
-        private void btnNewDrawingSpace_Click(object sender, RoutedEventArgs e)
-        {
-            if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0)
-            {
-                messageBoxNewDrawingSpace_Click("Neues Bild", false);
-            }
-            else
-            {
-                resetTools();
+                changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", false);
+                changeEnabledOfASecondaryAppbarButton("appbarButtonSave", false);
             }
         }
 
@@ -1352,21 +1348,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
         }
 
-        // TODO: Should not be called right now. There is another methode which is named changeEnabledOfASecondaryAppbarButon
-        // Use this method instead of changeEnabledOfAppbarButtonClearWorkingSpace.
-        public void changeEnabledOfAppbarButtonClearWorkingSpace(bool isEnabled)
-        {
-            CommandBar cmdBar = (CommandBar)BottomAppBar;
-            for (int i = 0; i < cmdBar.SecondaryCommands.Count; i++)
-            {
-                if (((AppBarButton)cmdBar.SecondaryCommands[i]).Name == "appBarButtonClearWorkingSpace")
-                {
-                    ((AppBarButton)cmdBar.SecondaryCommands[i]).IsEnabled = isEnabled;
-                }
-            }
-        }
-
-        public void changeEnabledOfASecondaryAppbarButon(string appBarButtonName, bool isEnabled)
+        public void changeEnabledOfASecondaryAppbarButton(string appBarButtonName, bool isEnabled)
         {
             CommandBar cmdBar = (CommandBar)BottomAppBar;
             for (int i = 0; i < cmdBar.SecondaryCommands.Count; i++)
@@ -1374,6 +1356,19 @@ namespace Catrobat.Paint.WindowsPhone.View
                 if (((AppBarButton)cmdBar.SecondaryCommands[i]).Name == appBarButtonName)
                 {
                     ((AppBarButton)cmdBar.SecondaryCommands[i]).IsEnabled = isEnabled;
+                    break;
+                }
+            }
+        }
+
+        public void changeEnabledOfAPrimaryAppbarButton(string appBarButtonName, bool isEnabled)
+        {
+            CommandBar cmdBar = (CommandBar)BottomAppBar;
+            for (int i = 0; i < cmdBar.PrimaryCommands.Count; i++)
+            {
+                if (((AppBarButton)cmdBar.PrimaryCommands[i]).Name == appBarButtonName)
+                {
+                    ((AppBarButton)cmdBar.PrimaryCommands[i]).IsEnabled = isEnabled;
                 }
             }
         }
@@ -1383,8 +1378,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             if(path != null)
             {
                 PaintingAreaCanvas.Children.Add(path);
-                changeEnabledOfASecondaryAppbarButon("appBarButtonClearWorkingSpace", true);
-                changeEnabledOfASecondaryAppbarButon("appbarButtonSave", true);
+                changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", true);
+                changeEnabledOfASecondaryAppbarButton("appbarButtonSave", true);
             }
         }
     }

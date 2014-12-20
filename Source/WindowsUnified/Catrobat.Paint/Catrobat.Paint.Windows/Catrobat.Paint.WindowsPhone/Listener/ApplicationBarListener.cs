@@ -16,8 +16,8 @@ namespace Catrobat.Paint.WindowsPhone.Listener
             // TODO: Maybe it would be better to swap out the following code to the paintingarea-file.
             if(PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count == 0)
             {
-                PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButon("appBarButtonClearWorkingSpace", false);
-                PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButon("appbarButtonSave", false);
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", false);
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appbarButtonSave", false);
             }
         }
 

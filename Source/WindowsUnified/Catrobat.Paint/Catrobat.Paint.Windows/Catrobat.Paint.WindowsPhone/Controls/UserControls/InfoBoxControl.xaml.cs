@@ -72,21 +72,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 PocketPaintApplication.GetInstance().PaintingAreaView.resetTools();
             }
 
-            PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
-            PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
-            PocketPaintApplication.GetInstance().PaintingAreaView.resetControls(Visibility.Collapsed);
-        }
-
-        private void saveChanges(IUICommand command)
-        {
-            // TODO save current Image
-
-            PocketPaintApplication.GetInstance().PaintingAreaView.resetTools();
-        }
-
-        private void deleteChanges(IUICommand command)
-        {
-            PocketPaintApplication.GetInstance().PaintingAreaView.resetTools();
+            //PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
+            //PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
+            //PocketPaintApplication.GetInstance().PaintingAreaView.resetControls(Visibility.Collapsed);
         }
 
         private void btnNewPictureFromCamera_Click(object sender, RoutedEventArgs e)
