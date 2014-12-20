@@ -46,7 +46,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
             PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
             PocketPaintApplication.GetInstance().angleForRotation -= _angle;
-            PocketPaintApplication.GetInstance().PaintingAreaView.enableResetButtonRotate(-_rotationDirection);
+            PocketPaintApplication.GetInstance().PaintingAreaView.enableResetButtonRotate(PocketPaintApplication.GetInstance().PaintingAreaView.getRotationCounter() * (-1));
             return true;
         }
     }
