@@ -60,6 +60,7 @@ namespace Catrobat.Paint.WindowsPhone
         public Grid PaintingAreaLayoutRoot { get; set; }
         #endregion
 
+        public int angleForRotation = 0;
         public InfoBoxActionControl InfoBoxActionControl { get; set; }
         public InfoBoxControl InfoBoxControl { get; set; }
 

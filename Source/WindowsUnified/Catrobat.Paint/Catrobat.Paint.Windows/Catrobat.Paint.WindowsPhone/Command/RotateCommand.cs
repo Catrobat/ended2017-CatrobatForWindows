@@ -4,57 +4,49 @@ namespace Catrobat.Paint.WindowsPhone.Command
 {
     class RotateCommand : CommandBase
     {
-        private RotateTransform _rotateTransform;
+        private TransformGroup _rotateTransformGroup;
+        private int _angle = 0;
+        private int _rotationDirection = 0;
 
-        public RotateCommand(RotateTransform rotateTransform)
+        public RotateCommand(TransformGroup rotateTransformGroup, int angle, int rotationDirection)
         {
-            _rotateTransform = rotateTransform;
+            _rotateTransformGroup = rotateTransformGroup;
+            _angle = angle;
+            _rotationDirection = rotationDirection;
         }
 
         public override bool ReDo()
         {
-            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform);
-            for (int i = 0; i < transformGroup.Children.Count; i++)
+            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform);
+            transformGroup.Children.Clear();
+            for (int i = 0; i < _rotateTransformGroup.Children.Count; i++)
             {
-                if (transformGroup.Children[i].GetType() == typeof(RotateTransform))
-                {
-                    transformGroup.Children.RemoveAt(i);
-                }
+                transformGroup.Children.Add(_rotateTransformGroup.Children[i]);
             }
 
-            transformGroup.Children.Add(_rotateTransform);
-
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = transformGroup;
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.UpdateLayout();
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateArrange();
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateMeasure();
-
+            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = transformGroup;
+            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.UpdateLayout();
+            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateArrange();
+            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateMeasure();
+            PocketPaintApplication.GetInstance().angleForRotation = _angle;
+            PocketPaintApplication.GetInstance().PaintingAreaView.enableResetButtonRotate(_rotationDirection);
             return true;
         }
 
         public override bool UnDo()
         {
-            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform);
-            for (int i = 0; i < transformGroup.Children.Count; i++)
-            {
-                if (transformGroup.Children[i].GetType() == typeof(RotateTransform))
-                {
-                    transformGroup.Children.RemoveAt(i);
-                }
-            }
+            TransformGroup paintingAreaCheckeredTransformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform);
 
-            var defaultRotateTransform = new RotateTransform();
-            defaultRotateTransform.Angle = 0.0;
-            defaultRotateTransform.CenterX = _rotateTransform.CenterX;
-            defaultRotateTransform.CenterY = _rotateTransform.CenterY;
+            paintingAreaCheckeredTransformGroup.Children.Clear();
 
-            transformGroup.Children.Add(defaultRotateTransform);
+            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = paintingAreaCheckeredTransformGroup;
+            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.UpdateLayout();
+            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateArrange();
+            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateMeasure();
 
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = transformGroup;
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.UpdateLayout();
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateArrange();
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateMeasure();
-
+            PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
+            PocketPaintApplication.GetInstance().angleForRotation -= _angle;
+            PocketPaintApplication.GetInstance().PaintingAreaView.enableResetButtonRotate(PocketPaintApplication.GetInstance().PaintingAreaView.getRotationCounter() * (-1));
             return true;
         }
     }

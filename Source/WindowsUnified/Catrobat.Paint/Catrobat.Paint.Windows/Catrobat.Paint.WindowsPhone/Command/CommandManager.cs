@@ -84,7 +84,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
                         }
                     }
 
-                    if (lastCommand || command is MoveCommand || command is ZoomCommand || command is RemoveCommand)
+                    if (lastCommand || command is MoveCommand || command is RemoveCommand || command is RotateCommand || command is ZoomCommand) 
                     {
                         command.UnDo();
                         //if(command is ZoomCommand)
