@@ -158,6 +158,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                     CommandManager.GetInstance().CommitCommand(new LoadPictureCommand(_path));
                     PocketPaintApplication.GetInstance().isLoadPictureClicked = false;
                     changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
+                    changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", true);
+                    changeEnabledOfASecondaryAppbarButton("appbarButtonSave", true);
                 }
                 else
                 {
