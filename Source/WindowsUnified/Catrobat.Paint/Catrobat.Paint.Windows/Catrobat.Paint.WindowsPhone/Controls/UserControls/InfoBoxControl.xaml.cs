@@ -5,6 +5,18 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Windows.Media.Capture;
+using Windows.Foundation;
+using Windows.Storage;
+using Windows.Storage.AccessCache;
+using Windows.Storage.Streams;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Navigation;
+using Windows.Media.Capture;
+//using SDKTemplate;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Windows.Media.MediaProperties;
 
 
 // Die Elementvorlage "Benutzersteuerelement" ist unter http://go.microsoft.com/fwlink/?LinkId=234236 dokumentiert.
@@ -13,6 +25,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 {
     public sealed partial class InfoBoxControl : UserControl
     {
+        Windows.Media.Capture.MediaCapture captureManager;
         public InfoBoxControl()
         {
             this.InitializeComponent();
@@ -77,12 +90,76 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             //PocketPaintApplication.GetInstance().PaintingAreaView.resetControls(Visibility.Collapsed);
         }
 
-        private void btnNewPictureFromCamera_Click(object sender, RoutedEventArgs e)
+        async private void btnNewPictureFromCamera_Click(object sender, RoutedEventArgs e)
         {
-            if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0)
-            {
-                PocketPaintApplication.GetInstance().PaintingAreaView.messageBoxNewDrawingSpace_Click("Neues Bild von Kamera",false);
-            } 
+        //    //if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0)
+        //    //{
+        //    //    PocketPaintApplication.GetInstance().PaintingAreaView.messageBoxNewDrawingSpace_Click("Neues Bild von Kamera",false);
+        //    //}
+
+        //    InitCamera_Click(sender, e);
+        //    StartCapturePreview_Click(sender, e);
+
+        //    ImageEncodingProperties imgFormat = ImageEncodingProperties.CreateJpeg();
+
+        //    // create storage file in local app storage
+        //    StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(
+        //        "TestPhoto.jpg",
+        //        CreationCollisionOption.GenerateUniqueName);
+
+        //    // take photo
+        //    await captureManager.CapturePhotoToStorageFileAsync(imgFormat, file);
+
+        //    // Get photo as a BitmapImage
+        //    BitmapImage bmpImage = new BitmapImage(new Uri(file.Path));
+
+        //    // imagePreivew is a <Image> object defined in XAML
+        //    Image image = new Image();
+
+        //    image.Source = bmpImage;
+
+        //    PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
+        //    this.Visibility = Visibility.Collapsed;
         }
+
+        //async private void InitCamera_Click(object sender, RoutedEventArgs e)
+        //{
+        //    captureManager = new MediaCapture();
+        //    await captureManager.InitializeAsync();
+        //}
+
+        //async private void StartCapturePreview_Click(object sender, RoutedEventArgs e)
+        //{
+        //    await captureManager.StartPreviewAsync();
+        //}
+
+        //async private void StopCapturePreview_Click(object sender, RoutedEventArgs e)
+        //{
+        //    await captureManager.StopPreviewAsync();
+        //}
+
+        //async private void CapturePhoto_Click(object sender, RoutedEventArgs e)
+        //{
+        //    ImageEncodingProperties imgFormat = ImageEncodingProperties.CreateJpeg();
+
+        //    // create storage file in local app storage
+        //    StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(
+        //        "TestPhoto.jpg",
+        //        CreationCollisionOption.GenerateUniqueName);
+
+        //    // take photo
+        //    await captureManager.CapturePhotoToStorageFileAsync(imgFormat, file);
+
+        //    // Get photo as a BitmapImage
+        //    BitmapImage bmpImage = new BitmapImage(new Uri(file.Path));
+
+        //    // imagePreivew is a <Image> object defined in XAML
+        //    Image image = new Image();
+
+        //    image.Source = bmpImage;
+
+        //    PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
+        //}
+
     }
 }
