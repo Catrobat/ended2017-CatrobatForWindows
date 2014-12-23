@@ -17,7 +17,9 @@
                 <Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
                 </Grid.Background>
-                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" ManipulationMode="TranslateX, TranslateY, Scale" />
+                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" ManipulationMode="TranslateX, TranslateY, Scale" >
+                    <Image x:Name="imgPictrue" Height="240" Canvas.Left="95" Canvas.Top="188" Width="215"/>
+                </Canvas>
                 <!-- CursorControl -->
                 <Grid x:Name="GridCursor" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" 
                       Visibility="Collapsed" Width="80">
@@ -51,7 +53,7 @@
             </Grid>
 
             <!-- InputScopeControl -->
-            <Grid x:Name="GridInputScopeControl" Visibility="Collapsed">
+            <Grid x:Name="GridInputScopeControl" Margin="0,0,0,72" Visibility="Collapsed">
                 <userControls:InputScopeControl></userControls:InputScopeControl>
             </Grid>
 
@@ -66,7 +68,7 @@
             <TextBox x:Name="tbTest" HorizontalAlignment="Left" Margin="160,162,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
             -->
         </Grid>
-        
+
         <userControls:InfoBoxActionControl x:Name="InfoBoxActionControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"></userControls:InfoBoxActionControl>
         <userControls:InfoBoxControl x:Name="InfoBoxControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"></userControls:InfoBoxControl>
         <Grid x:Name="SpinnerGrid" Grid.Row="0" Visibility="Collapsed"  Grid.RowSpan="2"  Margin="12,12,12,12" Background="#FFB6B6B6" Opacity="0.7">
