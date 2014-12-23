@@ -16,6 +16,7 @@ namespace Catrobat.Paint.WindowsPhone.Listener
             // TODO: Maybe it would be better to swap out the following code to the paintingarea-file.
             if(PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count == 0)
             {
+                // TODO: Write a method in the paintingareaview and do the following lines in this method.
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", false);
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appbarButtonSave", false);
             }
@@ -24,6 +25,12 @@ namespace Catrobat.Paint.WindowsPhone.Listener
         public void BtnRedo_Click(object sender, RoutedEventArgs e)
         {
             CommandManager.GetInstance().ReDo();
+            // TODO: Maybe it would be better to swap out the following code to the paintingarea-file.
+            if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0)
+            {
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", true);
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appbarButtonSave", true);
+            }
         }
 
         public void BtnColor_Click(object sender, RoutedEventArgs e)

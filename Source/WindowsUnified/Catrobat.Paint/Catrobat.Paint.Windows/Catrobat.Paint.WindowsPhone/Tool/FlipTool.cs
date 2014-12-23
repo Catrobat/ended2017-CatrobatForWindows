@@ -18,7 +18,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             this._scaleX = 1;
             this._scaleY = 1;
 
-            DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height - 150.0) / 2.0;
+            DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height) / 2.0;
             DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
         }
 
