@@ -57,16 +57,17 @@ namespace Catrobat.Paint.WindowsPhone.Listener
             {
                 //PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityGrdSliderThickness(Visibility.Collapsed);
                 PocketPaintApplication.GetInstance().SwitchTool(ToolType.Move);
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = false;
-                PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = false;
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeVisibilityOfSelectionsControls(Visibility.Collapsed);
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
             }
             else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Move)
             {
                 if (PocketPaintApplication.GetInstance().ToolWhileMoveTool == null)
                     return;
                 PocketPaintApplication.GetInstance().SwitchTool(PocketPaintApplication.GetInstance().ToolWhileMoveTool.GetToolType());
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;
-                PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = true;
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeVisibilityOfActiveSelectionControl(Visibility.Visible);
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
+                PocketPaintApplication.GetInstance().PaintingAreaView.resetActiveSelectionControl();
             }
         }
 
