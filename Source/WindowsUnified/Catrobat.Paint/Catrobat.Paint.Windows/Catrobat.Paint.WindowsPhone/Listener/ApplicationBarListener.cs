@@ -2,6 +2,7 @@
 using Catrobat.Paint.WindowsPhone.Tool;
 // TODO: using Catrobat.Paint.Phone.Command;
 using Catrobat.Paint.WindowsPhone.View;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -19,6 +20,11 @@ namespace Catrobat.Paint.WindowsPhone.Listener
                 // TODO: Write a method in the paintingareaview and do the following lines in this method.
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", false);
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appbarButtonSave", false);
+            }
+
+            if(PocketPaintApplication.GetInstance().PaintingAreaView.checkIfASelectionControlIsSelected())
+            {
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
             }
         }
 

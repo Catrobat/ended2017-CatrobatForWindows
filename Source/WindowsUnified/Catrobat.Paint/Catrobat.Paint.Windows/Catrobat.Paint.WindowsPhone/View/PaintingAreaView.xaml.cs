@@ -1384,5 +1384,13 @@ namespace Catrobat.Paint.WindowsPhone.View
                 changeEnabledOfASecondaryAppbarButton("appbarButtonSave", true);
             }
         }
+
+        public bool checkIfASelectionControlIsSelected()
+        {
+            bool isSelectionControlSelected = ucEllipseSelectionControl.Visibility == Visibility.Visible
+                || ucRectangleSelectionControl.Visibility == Visibility.Visible
+                || GridImportImageSelectionControl.Visibility == Visibility.Visible;
+            return isSelectionControlSelected;
+        }
     }
 }
