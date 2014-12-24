@@ -2,6 +2,7 @@
 using Catrobat.Paint.WindowsPhone.Tool;
 // TODO: using Catrobat.Paint.Phone.Command;
 using Catrobat.Paint.WindowsPhone.View;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -19,6 +20,11 @@ namespace Catrobat.Paint.WindowsPhone.Listener
                 // TODO: Write a method in the paintingareaview and do the following lines in this method.
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", false);
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appbarButtonSave", false);
+            }
+
+            if(PocketPaintApplication.GetInstance().PaintingAreaView.checkIfASelectionControlIsSelected())
+            {
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
             }
         }
 
@@ -51,16 +57,17 @@ namespace Catrobat.Paint.WindowsPhone.Listener
             {
                 //PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityGrdSliderThickness(Visibility.Collapsed);
                 PocketPaintApplication.GetInstance().SwitchTool(ToolType.Move);
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = false;
-                PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = false;
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeVisibilityOfSelectionsControls(Visibility.Collapsed);
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
             }
             else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Move)
             {
                 if (PocketPaintApplication.GetInstance().ToolWhileMoveTool == null)
                     return;
                 PocketPaintApplication.GetInstance().SwitchTool(PocketPaintApplication.GetInstance().ToolWhileMoveTool.GetToolType());
-                PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;
-                PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = true;
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeVisibilityOfActiveSelectionControl(Visibility.Visible);
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
+                PocketPaintApplication.GetInstance().PaintingAreaView.resetActiveSelectionControl();
             }
         }
 

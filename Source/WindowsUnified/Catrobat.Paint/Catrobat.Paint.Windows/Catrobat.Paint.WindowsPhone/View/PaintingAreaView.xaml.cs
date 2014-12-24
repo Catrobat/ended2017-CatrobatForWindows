@@ -1384,5 +1384,46 @@ namespace Catrobat.Paint.WindowsPhone.View
                 changeEnabledOfASecondaryAppbarButton("appbarButtonSave", true);
             }
         }
+
+        public bool checkIfASelectionControlIsSelected()
+        {
+            bool isSelectionControlSelected = ucEllipseSelectionControl.Visibility == Visibility.Visible
+                || ucRectangleSelectionControl.Visibility == Visibility.Visible
+                || GridImportImageSelectionControl.Visibility == Visibility.Visible;
+            return isSelectionControlSelected;
+        }
+
+        public void changeVisibilityOfSelectionsControls(Visibility visibility)
+        {
+            setVisibilityOfUcEllipseSelectionControl = visibility;
+            setVisibilityOfUcRectangleSelectionControl = visibility;
+            GridImportImageSelectionControl.Visibility = visibility;
+        }
+
+        public void changeVisibilityOfActiveSelectionControl(Visibility visibility)
+        {
+            if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Ellipse)
+            {
+                setVisibilityOfUcEllipseSelectionControl = visibility;
+            }
+            else if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
+            {
+                setVisibilityOfUcRectangleSelectionControl = visibility;
+            }
+            else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.ImportPng)
+            {
+                GridImportImageSelectionControl.Visibility = visibility;
+            }
+        }
+
+        public void resetActiveSelectionControl()
+        {
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Ellipse ||
+                PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.ImportPng ||
+                PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
+            {
+                PocketPaintApplication.GetInstance().ToolCurrent.ResetDrawingSpace();
+            }
+        }
     }
 }
