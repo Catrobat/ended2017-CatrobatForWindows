@@ -47,7 +47,7 @@ namespace Catrobat.IDE.Core.Services.Common
                     currentName = requestedName + counter;
                 }
 
-                var match = nameList.FirstOrDefault(stringToCheck => stringToCheck.Contains(currentName));
+                var match = nameList.FirstOrDefault(stringToCheck => stringToCheck.Equals(currentName));
                 if (match == null)
                     break;
 
