@@ -35,10 +35,21 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         private readonly FormulaKeyboardViewModel _keyboardViewModel;
         private bool _sensorsAreActive = false;
         private string _sensorButtonLabel = AppResources.Editor_StartSensors;
-        
+
         #endregion
 
         #region Properties
+
+        private bool _isFormulaValid;
+        public bool IsFormulaValid
+        {
+            get { return _isFormulaValid; }
+            set
+            {
+                _isFormulaValid = value; 
+                RaisePropertyChanged(()=>IsFormulaValid);
+            }
+        }
 
         public Program CurrentProgram
         {
@@ -253,6 +264,29 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             }
         }
 
+        public RelayCommand SaveCommand { get; private set; }
+        private void SaveAction()
+        {
+            GoBackAction();
+        }
+
+        public RelayCommand CancelCommand { get; private set; }
+        private void CancelAction()
+        {
+            GoBackAction();
+        }
+
+        protected override void GoBackAction()
+        {
+            if (HasError)
+            {
+                while(CanUndo)
+                    UndoAction();
+            }
+
+            base.GoBackAction();
+        }
+
         public RelayCommand<int> CompleteTokenCommand { get; private set; }
         private void CompleteTokenAction(int index)
         {
@@ -314,6 +348,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
             RedoCommand = new RelayCommand(RedoAction, RedoCommand_CanExecute);
             SensorCommand = new RelayCommand(SensorAction);
             CompleteTokenCommand = new RelayCommand<int>(CompleteTokenAction);
+            SaveCommand = new RelayCommand(SaveAction);
+            CancelCommand = new RelayCommand(CancelAction);
             
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Program>>(this, ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);

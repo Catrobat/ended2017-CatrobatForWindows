@@ -86,6 +86,19 @@
                       Label="{Binding Resources.Editor_Help, 
                       Source={StaticResource LocalizedStrings}}"
                       Command="{Binding ShowErrorPressedCommand}"/>
+        
+        <AppBarButton Icon="Cancel" 
+                      Label="{Binding Resources.Editor_Help, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Visibility="{Binding HasError, Converter={StaticResource BoolVisibilityConverter}}"
+                      Command="{Binding CancelCommand}"/>
+        <AppBarButton Icon="Accept" 
+                      Label="{Binding Resources.Editor_Help, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Visibility="{Binding HasError, Converter={StaticResource BoolVisibilityNegativeConverter}}"
+                      Command="{Binding SaveCommand}"/>
+        
+        
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
         <AppBarButton Label="{Binding SensorButtonLabel}"
