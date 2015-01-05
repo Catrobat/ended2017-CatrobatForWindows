@@ -20,6 +20,8 @@ using System.Collections.Specialized;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 {
+    public enum MultiModeEditorCommandBarMode {Normal, Reorder, Select }
+
     public class SpriteEditorViewModel : ViewModelBase
     {
         #region Private Members
@@ -39,10 +41,43 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
         private ObservableCollection<Sound> _selectedSounds;
         private int _selectedTabIndex;
         private Sound _currentSound;
+        private MultiModeEditorCommandBarMode _actionsCommandBarMode;
+        private MultiModeEditorCommandBarMode _looksCommandBarMode;
+        private MultiModeEditorCommandBarMode _soundsCommandBarMode;
 
         #endregion
 
         #region Properties
+
+        public MultiModeEditorCommandBarMode ActionsCommandBarMode
+        {
+            get { return _actionsCommandBarMode; }
+            set
+            {
+                _actionsCommandBarMode = value; 
+                RaisePropertyChanged(()=>ActionsCommandBarMode);
+            }
+        }
+
+        public MultiModeEditorCommandBarMode LooksCommandBarMode
+        {
+            get { return _looksCommandBarMode; }
+            set
+            {
+                _looksCommandBarMode = value;
+                RaisePropertyChanged(() => LooksCommandBarMode);
+            }
+        }
+
+        public MultiModeEditorCommandBarMode SoundsCommandBarMode
+        {
+            get { return _soundsCommandBarMode; }
+            set
+            {
+                _soundsCommandBarMode = value;
+                RaisePropertyChanged(() => SoundsCommandBarMode);
+            }
+        }
 
         public int SelectedTabIndex
         {
@@ -537,6 +572,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 }
             }
             SelectedActions.Clear();
+
+            ActionsCommandBarMode = MultiModeEditorCommandBarMode.Normal;
         }
 
         private void CopyBrick(ModelBase scriptBrick, List<ModelBase> list, List<ModelBase> alreadyCopied)
@@ -662,6 +699,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             foreach (var script in scriptsToRemove)
                 Actions.Remove(script);
 
+            ActionsCommandBarMode = MultiModeEditorCommandBarMode.Normal;
         }
 
         private void DeleteGroupedBlockBrick(BlockBeginBrick blockBeginBrick, List<Brick> bricksToRemove)
@@ -706,11 +744,15 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
             ServiceLocator.NotifictionService.ShowMessageBox(messageHeader,
                 messageContent, DeleteSoundMessageBoxResult, MessageBoxOptions.OkCancel);
+
+            ActionsCommandBarMode = MultiModeEditorCommandBarMode.Normal;
         }
 
         private void CopySoundAction()
         {
             throw new NotImplementedException();
+
+            ActionsCommandBarMode = MultiModeEditorCommandBarMode.Normal;
         }
 
         private void AddNewLookAction()
@@ -745,6 +787,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                     Looks.Insert(Looks.IndexOf(look) + 1, newLook);
                 }
             }
+
+            SelectedLooks.Clear();
+            LooksCommandBarMode = MultiModeEditorCommandBarMode.Normal;
         }
 
         private void DeleteLookAction()
@@ -753,7 +798,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, SelectedLooks.Count, look);
             var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, look);
 
-            ServiceLocator.NotifictionService.ShowMessageBox(messageHeader, messageContent, DeleteLookMessageBoxResult, MessageBoxOptions.OkCancel);
+            ServiceLocator.NotifictionService.ShowMessageBox(messageHeader, messageContent, 
+                DeleteLookMessageBoxResult, MessageBoxOptions.OkCancel);
         }
 
         private void ClearObjectSelectionAction()
@@ -973,6 +1019,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                     await look.Delete(CurrentProgram);
                     Looks.Remove(look);
                 }
+                SelectedLooks.Clear();
+                LooksCommandBarMode = MultiModeEditorCommandBarMode.Normal;
             }
         }
 
@@ -989,10 +1037,12 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                     await sound.Delete(CurrentProgram);
                     Sounds.Remove(sound);
                 }
+
+                SelectedSounds.Clear();
+                SoundsCommandBarMode = MultiModeEditorCommandBarMode.Normal;
             }
         }
-
-
+        
         #endregion
 
     }

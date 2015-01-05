@@ -49,6 +49,7 @@
       CopyCommand="{Binding CopySpriteCommand}"
       DeleteCommand="{Binding DeleteSpriteCommand}"
       PlayCommand="{Binding StartPlayerCommand}"
-      NewCommand="{Binding AddNewSpriteCommand}" />
+      NewCommand="{Binding AddNewSpriteCommand}"
+      Mode="{Binding CommandBarMode, Mode=TwoWay}"/>
   </Page.BottomAppBar>
 </views:ViewPageBase>

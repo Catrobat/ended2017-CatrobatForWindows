@@ -10,29 +10,29 @@
    mc:Ignorable="d"
   DataContext="{Binding SpriteEditorViewModel, Source={StaticResource Locator}}">
 
-    <Grid Background="{ThemeResource AppBackgroundBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <soundControls:SoundPlayButtonGroup x:Name="PlayPauseButtonGroupSounds"
+  <Grid Background="{ThemeResource AppBackgroundBrush}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <soundControls:SoundPlayButtonGroup x:Name="PlayPauseButtonGroupSounds"
       Program="{Binding CurrentProgram}" />
 
 
-        <Pivot Name="PivotMain" Grid.Row="1" Margin="0 -57 0 0"
+    <Pivot Name="PivotMain" Grid.Row="1" Margin="0 -57 0 0"
         SelectedIndex="{Binding SelectedPivotIndex, Mode=TwoWay}"
         SelectionChanged="Pivot_OnSelectionChanged">
-            <Pivot.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock FontSize="34" Text="{Binding}"/>
-                </DataTemplate>
-            </Pivot.HeaderTemplate>
-            <PivotItem Name="PivotActions" Margin="0 -5 0 0"
+      <Pivot.HeaderTemplate>
+        <DataTemplate>
+          <TextBlock FontSize="34" Text="{Binding}"/>
+        </DataTemplate>
+      </Pivot.HeaderTemplate>
+      <PivotItem Name="PivotActions" Margin="0 -5 0 0"
         Header="{Binding Resources.Editor_PivotActions, 
         Source={StaticResource LocalizedStrings}}">
-                <Grid DataContext="{Binding}">
-                    <catrobatListView:CatrobatListView x:Name="ListViewActions"
+        <Grid DataContext="{Binding}">
+          <catrobatListView:CatrobatListView x:Name="ListViewActions"
             Visibility="Visible"
             ItemsSource="{Binding Actions}"
             SelectedItems="{Binding SelectedActions}"                                        
@@ -45,7 +45,7 @@
               />
 
 
-                    <!--  
+          <!--  
                ItemTemplate="{StaticResource ScriptsBrickTemplate}"
                ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}" 
                ItemsSourcePerformance="{Binding ScriptBricks}"
@@ -53,7 +53,7 @@
                VerticalItemMargin="-10"-->
 
 
-                    <TextBlock
+          <TextBlock
             Text ="{Binding Resources.Editor_ClickPlusToAddAction, 
             Source={StaticResource LocalizedStrings}}"
             Visibility="{Binding IsScirptBricksEmpty, 
@@ -63,14 +63,14 @@
             TextAlignment="Center"
             VerticalAlignment="Center"
             HorizontalAlignment="Center" />
-                </Grid>
-            </PivotItem>
+        </Grid>
+      </PivotItem>
 
-            <PivotItem Name="PivotLooks" Margin="0 -5 0 0"
+      <PivotItem Name="PivotLooks" Margin="0 -5 0 0"
         Header="{Binding Resources.Editor_PivotLooks, 
         Source={StaticResource LocalizedStrings}}">
-                <Grid DataContext="{Binding}">
-                    <catrobatListView:CatrobatListView x:Name="ListViewLooks"
+        <Grid DataContext="{Binding}">
+          <catrobatListView:CatrobatListView x:Name="ListViewLooks"
             ItemsSource="{Binding Looks}"
             SelectedItems="{Binding SelectedLooks}"                                        
             ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
@@ -79,7 +79,7 @@
             Tapped="LookItem_OnTapped" ReorderEnabled="True"
             ItemWidthPortrait="380" ItemWidthLandscape="450"
               />
-                    <TextBlock
+          <TextBlock
             Text ="{Binding Resources.Editor_ClickPlusToAddLook, 
             Source={StaticResource LocalizedStrings}}"
             Visibility="{Binding IsLooksEmpty, 
@@ -89,14 +89,14 @@
             TextAlignment="Center"
             VerticalAlignment="Center"
             HorizontalAlignment="Center" />
-                </Grid>
-            </PivotItem>
+        </Grid>
+      </PivotItem>
 
-            <PivotItem Name="PivotSounds" Margin="0 -5 0 0"
+      <PivotItem Name="PivotSounds" Margin="0 -5 0 0"
         Header="{Binding Resources.Editor_PivotSounds, 
         Source={StaticResource LocalizedStrings}}">
-                <Grid DataContext="{Binding}">
-                    <catrobatListView:CatrobatListView x:Name="ListViewSounds"
+        <Grid DataContext="{Binding}">
+          <catrobatListView:CatrobatListView x:Name="ListViewSounds"
             ItemsSource="{Binding Sounds}"
             SelectedItems="{Binding SelectedSounds}"                                        
             ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
@@ -106,7 +106,7 @@
             RightTapped="SoundItem_OnRightTapped"
             ItemWidthPortrait="380" ItemWidthLandscape="450"
               />
-                    <TextBlock
+          <TextBlock
               Text ="{Binding Resources.Editor_ClickPlusToAddSound, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsSoundsEmpty, Converter={StaticResource BoolVisibilityConverter}}"
               Style="{ThemeResource TextLargerStyle}"
@@ -114,26 +114,26 @@
               TextAlignment="Center"
               VerticalAlignment="Center"
               HorizontalAlignment="Center"/>
-                </Grid>
-            </PivotItem>
-        </Pivot>
-
-        <Grid Grid.Row="0" Margin="12 0 12 12">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="{Binding SelectedSprite.Name}"
-        Margin="0 6 0 0"
-        Grid.Column="0"
-        Style="{ThemeResource TextTitleNormalStyle}"/>
-            <HyperlinkButton Grid.Column="1"
-        HorizontalAlignment="Right"
-        Content="{Binding Resources.Editor_Rename, 
-        Source={StaticResource LocalizedStrings}}"
-        Command="{Binding RenameSpriteCommand}"
-        Style="{ThemeResource HyperLinkNormalStyle}"
-        FontSize="22"/>
         </Grid>
+      </PivotItem>
+    </Pivot>
+
+    <Grid Grid.Row="0" Margin="12 0 12 12">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+      <TextBlock Text="{Binding SelectedSprite.Name}"
+              Margin="0 6 0 0"
+              Grid.Column="0"
+              Style="{ThemeResource TextTitleNormalStyle}"/>
+      <HyperlinkButton Grid.Column="1"
+              HorizontalAlignment="Right"
+              Content="{Binding Resources.Editor_Rename, 
+              Source={StaticResource LocalizedStrings}}"
+              Command="{Binding RenameSpriteCommand}"
+              Style="{ThemeResource HyperLinkNormalStyle}"
+              FontSize="22"/>
     </Grid>
+  </Grid>
 </views:ViewPageBase>

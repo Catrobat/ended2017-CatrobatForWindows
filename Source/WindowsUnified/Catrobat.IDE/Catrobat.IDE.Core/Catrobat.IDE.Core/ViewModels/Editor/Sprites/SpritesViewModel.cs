@@ -63,6 +63,17 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
             }
         }
 
+        private MultiModeEditorCommandBarMode _commandBarMode;
+        public MultiModeEditorCommandBarMode CommandBarMode
+        {
+            get { return _commandBarMode; }
+            set
+            {
+                _commandBarMode = value;
+                RaisePropertyChanged(() => CommandBarMode);
+            }
+        }
+
         private void SelectedSpritesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
             EditSpriteCommand.RaiseCanExecuteChanged();
@@ -214,6 +225,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                 var newIndex = originalIndex + 1;
                 CurrentProgram.Sprites.Insert(newIndex, newSprite);
             }
+            SelectedSprites.Clear();
+            CommandBarMode = MultiModeEditorCommandBarMode.Normal;
         }
 
         private void DeleteSpriteAction()
@@ -280,6 +293,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
                     CurrentProgram.Sprites.Remove(sprite);
                     sprite.Delete(CurrentProgram);
                 }
+
+                SelectedSprites.Clear();
+                CommandBarMode = MultiModeEditorCommandBarMode.Normal;
             }
         }
 

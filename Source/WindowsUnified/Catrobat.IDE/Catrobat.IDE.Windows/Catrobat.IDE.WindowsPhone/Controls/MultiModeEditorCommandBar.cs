@@ -8,13 +8,13 @@ using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.WindowsPhone.Controls.ActionsControls;
+using Catrobat.IDE.WindowsShared.Common;
 
 namespace Catrobat.IDE.WindowsPhone.Controls
 {
     public enum AppBarTargetType { Object, Action, Look, Sound }
-
-    public enum MultiModeEditorCommandBarMode {Normal, Reorder, Select }
 
     public delegate void MultiModeEditorCommandBarModeChanged(MultiModeEditorCommandBarMode mode);
 
@@ -23,6 +23,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         #region private members
 
         private MultiModeEditorCommandBarMode _currentMode;
+        private ICommand _deleteCommand;
+        private ICommand _copyCommand;
 
         private readonly AppBarButton _playButton;
 
@@ -49,6 +51,33 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         #endregion
 
         #region dependency properties
+
+        public MultiModeEditorCommandBarMode Mode
+        {
+            get { return (MultiModeEditorCommandBarMode)GetValue(ModeProperty); }
+            set { SetValue(ModeProperty, value); }
+        }
+
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register("Mode",
+            typeof(MultiModeEditorCommandBarMode), typeof(MultiModeEditorCommandBar),
+            new PropertyMetadata(MultiModeEditorCommandBarMode.Normal, ModePropertyChanged));
+
+        private static void ModePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var instance = (d as MultiModeEditorCommandBar);
+            if (instance == null) return;
+            var newMode = (MultiModeEditorCommandBarMode)e.NewValue;
+            var oldMode = (MultiModeEditorCommandBarMode)e.OldValue;
+
+            if (newMode != oldMode)
+                instance.SetMode(newMode);
+        }
+
+
+
+
+
+
 
         public AppBarTargetType TargetType
         {
@@ -92,6 +121,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
             DependencyProperty.Register("DeleteCommand", typeof(ICommand), typeof(MultiModeEditorCommandBar), new PropertyMetadata(null, DeleteCommandChanged));
         private static void DeleteCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            //((MultiModeEditorCommandBar)d)._deleteCommand = e.NewValue as ICommand;
             ((MultiModeEditorCommandBar)d)._deleteButton.Command = e.NewValue as ICommand;
         }
 
@@ -104,6 +134,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
             DependencyProperty.Register("CopyCommand", typeof(ICommand), typeof(MultiModeEditorCommandBar), new PropertyMetadata(null, CopyCommandChanged));
         private static void CopyCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            //((MultiModeEditorCommandBar)d)._copyCommand = e.NewValue as ICommand;
             ((MultiModeEditorCommandBar)d)._copyButton.Command = e.NewValue as ICommand;
         }
 
@@ -171,12 +202,26 @@ namespace Catrobat.IDE.WindowsPhone.Controls
                 Label = AppResources.Editor_ButtonDelete,
                 Icon = new SymbolIcon(Symbol.Delete)
             };
+            //_deleteButton.Command = new RelayCommand(() =>
+            //{
+            //    SetMode(MultiModeEditorCommandBarMode.Normal);
+
+            //    if (_deleteCommand != null)
+            //        _deleteCommand.Execute(null);
+            //});
 
             _copyButton = new AppBarButton
             {
                 Label = AppResources.Editor_ButtonCopy,
                 Icon = new SymbolIcon(Symbol.Copy)
             };
+            //_copyButton.Command = new RelayCommand(() =>
+            //{
+            //    SetMode(MultiModeEditorCommandBarMode.Normal);
+
+            //    if (_copyCommand != null)
+            //        _copyCommand.Execute(null);
+            //});
 
             _cancelSelectionButton = new AppBarButton
             {
@@ -191,7 +236,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
             SetMode(MultiModeEditorCommandBarMode.Normal);
         }
 
-
+        private bool _firstModeChanged = true;
         private void SetMode(MultiModeEditorCommandBarMode newMode)
         {
             switch (_currentMode)
@@ -243,10 +288,12 @@ namespace Catrobat.IDE.WindowsPhone.Controls
             
             _currentMode = newMode;
 
-            if(ModeChanged != null)
+            if (ModeChanged != null)
+            {
+                Mode = newMode;
                 ModeChanged.Invoke(newMode);
+            }  
         }
-
 
         private void UpdateAddText(AppBarTargetType targetType)
         {
