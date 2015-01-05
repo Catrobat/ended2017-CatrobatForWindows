@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.UI.Converters
                 return PortableVisibility.Collapsed;
 
             var visible = (bool) value;
-
+            
             if (parameter != null && (bool) parameter)
             {
                 visible = !(bool) value;
