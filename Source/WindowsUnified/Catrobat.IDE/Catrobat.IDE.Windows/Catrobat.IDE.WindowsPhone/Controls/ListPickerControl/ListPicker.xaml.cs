@@ -43,6 +43,11 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListPickerControl
             if (instance != null)
             {
                 var newObject = dependencyPropertyChangedEventArgs.NewValue ?? instance.NullItem;
+
+                var selectableItem = newObject as ISelectable;
+                if (selectableItem != null)
+                    selectableItem.IsSelected = false;
+
                 instance.ContentControlSelectedItem.Content = newObject;
             }
         }

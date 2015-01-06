@@ -10,14 +10,7 @@
     <Button Click="ButtonFormula_OnClick" BorderBrush="{StaticResource BrickBorderBrush}" Foreground="{StaticResource BrickForegroundBrush}" Margin="0,15,0,1" MinWidth="40">
       <Grid>
         <StackPanel>
-          <TextBlock x:Name="TextBlockFormula" FontSize="30">
-            <!--<TextBlock.Text>
-              <Binding Path="Parent.Formula"
-                       Converter="{StaticResource FormulaStringConverter}"
-                       ElementName="LayoutRoot">
-              </Binding>
-            </TextBlock.Text>-->
-          </TextBlock>
+          <TextBlock x:Name="TextBlockFormula" FontSize="30"/>
         </StackPanel>
         <Grid Name="GridTapPreventer" Background="Transparent"/>
       </Grid>
