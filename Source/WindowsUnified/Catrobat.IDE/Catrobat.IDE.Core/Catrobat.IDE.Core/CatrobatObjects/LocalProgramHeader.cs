@@ -49,6 +49,42 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             }
         }
 
+        private bool _isLoading = false;
+        public bool IsLoading
+        {
+            get
+            {
+                return _isLoading;
+            }
+            set
+            {
+                _isLoading = value;
+
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    RaisePropertyChanged(() => IsLoading);
+                });
+            }
+        }
+
+        private bool _isDeleting = false;
+        public bool IsDeleting
+        {
+            get
+            {
+                return _isDeleting;
+            }
+            set
+            {
+                _isDeleting = value;
+
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    RaisePropertyChanged(() => IsDeleting);
+                });
+            }
+        }
+
         public bool IsValid
         {
             get

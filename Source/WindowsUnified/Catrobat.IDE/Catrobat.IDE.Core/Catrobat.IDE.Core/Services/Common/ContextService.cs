@@ -210,6 +210,64 @@ namespace Catrobat.IDE.Core.Services.Common
             return newProject;
         }
 
+        public async Task<string> CopyProgramPart1(string sourceProgramName)
+        {
+            using (var storage = StorageSystem.GetStorage())
+            {
+                var newProgramName = sourceProgramName;
+                var sourcePath = Path.Combine(StorageConstants.ProgramsPath, sourceProgramName);
+                var destinationPath = Path.Combine(StorageConstants.ProgramsPath, newProgramName);
+
+                var counter = 1;
+                while (await storage.DirectoryExistsAsync(destinationPath))
+                {
+                    newProgramName = newProgramName + counter;
+                    destinationPath = Path.Combine(StorageConstants.ProgramsPath, newProgramName);
+                    counter++;
+                }
+
+                var sourceScreenshotPathManual = Path.Combine(sourcePath, StorageConstants.ProgramManualScreenshotPath);
+                var destinationScreenshotPathManual = Path.Combine(destinationPath, StorageConstants.ProgramManualScreenshotPath);
+                await storage.CopyFileAsync(sourceScreenshotPathManual, destinationScreenshotPathManual);
+
+                var sourceScreenshotPathAutomated = Path.Combine(sourcePath, StorageConstants.ProgramAutomaticScreenshotPath);
+                var destinationScreenshotPathAutomated = Path.Combine(destinationPath, StorageConstants.ProgramAutomaticScreenshotPath);
+                await storage.CopyFileAsync(sourceScreenshotPathAutomated, destinationScreenshotPathAutomated);
+
+                return newProgramName;
+            }
+        }
+
+        public async Task<Program> CopyProgramPart2(string sourceProgramName,
+            string newProgramName)
+        {
+            using (var storage = StorageSystem.GetStorage())
+            {
+                var sourcePath = Path.Combine(StorageConstants.ProgramsPath, sourceProgramName);
+                var destinationPath = Path.Combine(StorageConstants.ProgramsPath, newProgramName);
+
+                await storage.CopyDirectoryAsync(sourcePath, destinationPath);
+
+                var tempXmlPath = Path.Combine(destinationPath, StorageConstants.ProgramCodePath);
+                var xml = await storage.ReadTextFileAsync(tempXmlPath);
+                var xmlProgram = new XmlProgram(xml)
+                {
+                    ProjectHeader = { ProgramName = newProgramName }
+                };
+
+                var path = Path.Combine(StorageConstants.ProgramsPath,
+                    newProgramName, StorageConstants.ProgramCodePath);
+                var programConverter = new ProgramConverter();
+                var program = programConverter.Convert(xmlProgram);
+
+                var xmlString = xmlProgram.ToXmlString();
+                await storage.WriteTextFileAsync(path, xmlString);
+
+                return program;
+            }
+        }
+
+
         public async Task<Program> CopyProgram(string sourceProgramName,
             string newProgramName)
         {

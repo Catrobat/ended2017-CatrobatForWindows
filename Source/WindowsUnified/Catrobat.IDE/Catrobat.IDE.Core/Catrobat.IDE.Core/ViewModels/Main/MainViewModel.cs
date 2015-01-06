@@ -207,7 +207,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             _copyProgramName = programName;
 
             ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_MainCopyProgramDialogTitle,
-                String.Format(AppResources.Main_MainCopyProgramDialogMessage, programName), CopyProgramMessageCallback, MessageBoxOptions.OkCancel);
+                String.Format(AppResources.Main_MainCopyProgramDialogMessage, programName),
+                CopyProgramMessageCallback, MessageBoxOptions.OkCancel);
         }
 
         private void CreateNewProgramAction()
@@ -379,6 +380,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         program.ProjectName != deleteProgramName))
                         return;
 
+                    var programs = _localPrograms.Where(program => program.ProjectName == deleteProgramName);
+
+                    foreach (var program in programs)
+                        program.IsDeleting = true;
+
                     if (_programsToDelete.Contains(deleteProgramName))
                         return;
 
@@ -400,6 +406,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                         StorageConstants.ProgramsPath, _deleteProgramName));
                 }
 
+                await Task.Delay(1000);
+
                 await UpdateLocalPrograms();
 
                 _deleteProgramName = null;
@@ -408,7 +416,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 {
                     _programsToDelete.Remove(deleteProgramName);
                 }
-
             }
 
             //await App.SaveContext(CurrentProgram);
@@ -433,11 +440,25 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 if (CurrentProgram != null && _copyProgramName == CurrentProgram.Name)
                     await CurrentProgram.Save();
 
-                await ServiceLocator.ContextService.CopyProgram(
-                    _copyProgramName, _copyProgramName);
+                var sourceProgramName = _copyProgramName;
+                var destinationProgramName = await ServiceLocator.ContextService.
+                    CopyProgramPart1(_copyProgramName);
 
                 await UpdateLocalPrograms();
                 _copyProgramName = null;
+
+                await ServiceLocator.ContextService.CopyProgramPart2(
+                    sourceProgramName, destinationProgramName);
+
+                await Task.Delay(1000);
+
+                await UpdateLocalPrograms();
+
+                //var program = await ServiceLocator.ContextService.CopyProgramPart2(
+                //    _copyProgramName, updatedProgramName);
+
+                //await UpdateLocalPrograms();
+
             }
 
             lock (_copyLock)
@@ -498,41 +519,56 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 //        programsToRemove.Add(header);
                 //}
 
+
                 foreach (var program in programsToRemove)
                 {
                     _localPrograms.Remove(program);
                 }
 
 
-                var programsToAdd = new List<LocalProgramHeader>();
+
+                //var programsToAdd = new List<LocalProgramHeader>();
 
                 foreach (string programName in programNames)
                 {
-                    var exists = false;
+                    LocalProgramHeader header = null;
 
-                    foreach (var header in _localPrograms)
+                    foreach (var h in _localPrograms)
                     {
-                        if (header.ProjectName == programName)
-                            exists = true;
+                        if (h.ProjectName == programName)
+                            header = h;
                     }
 
-                    if (!exists)
+                    if (header == null)
                     {
                         var manualScreenshotPath = Path.Combine(
                             StorageConstants.ProgramsPath, programName, StorageConstants.ProgramManualScreenshotPath);
                         var automaticProjectScreenshotPath = Path.Combine(
                             StorageConstants.ProgramsPath, programName, StorageConstants.ProgramAutomaticScreenshotPath);
 
+                        var codePath = Path.Combine(StorageConstants.ProgramsPath,
+                            programName, StorageConstants.ProgramCodePath);
+
                         var programScreenshot = new PortableImage();
                         programScreenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);
+
+                        var isLoaded = !await storage.FileExistsAsync(codePath);
 
                         var programHeader = new LocalProgramHeader
                         {
                             ProjectName = programName,
-                            Screenshot = programScreenshot
+                            Screenshot = programScreenshot,
+                            IsLoading = isLoaded
                         };
 
                         _localPrograms.Insert(0, programHeader);
+                    }
+                    else if (header.IsLoading)
+                    {
+                        var codePath = Path.Combine(StorageConstants.ProgramsPath,
+                            programName, StorageConstants.ProgramCodePath);
+                        var isLoaded = !await storage.FileExistsAsync(codePath);
+                        header.IsLoading = isLoaded;
                     }
                 }
 

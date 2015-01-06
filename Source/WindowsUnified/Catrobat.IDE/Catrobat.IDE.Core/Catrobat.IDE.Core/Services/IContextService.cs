@@ -27,6 +27,10 @@ namespace Catrobat.IDE.Core.Services
 
         Task<Program> CreateEmptyProgram(string newProgramName);
 
+        Task<string> CopyProgramPart1(string sourceProgramName);
+
+        Task<Program> CopyProgramPart2(string sourceProgramName, string newProgramName);
+
         Task<Program> CopyProgram(string sourceProgramName, string newProgramName);
 
         Task StoreLocalSettings(LocalSettings localSettings);
