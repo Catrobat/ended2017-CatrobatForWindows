@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
         #region Private Members
 
         private BrickCategory _selectedBrickCategory;
-        private ActionsCollection _receivedScriptBrickCollection;
+        private ActionsCollection _actionsCollection;
 
         private BrickCollection _brickCollection;
         private int _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex;
@@ -113,7 +113,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
 
         private void AddNewScriptBrickAction(ModelBase model)
         {
-            lock (_receivedScriptBrickCollection)
+            lock (_actionsCollection)
             {
                 if (model is EmptyDummyBrick)
                     return;
@@ -136,7 +136,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
                     (_selectedBrick as Brick).IsNewAdded = true;
                 }
 
-                _receivedScriptBrickCollection.AddScriptBrick(_selectedBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex);
+                _actionsCollection.AddScriptBrick(_selectedBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex);
 
                 var foreverBrick = _selectedBrick as ForeverBrick;
                 if (foreverBrick != null)
@@ -147,7 +147,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
                     };
 
                     foreverBrick.End = endBrick;
-                    _receivedScriptBrickCollection.AddScriptBrick(endBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
+                    _actionsCollection.AddScriptBrick(endBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
                 }
 
                 var repeatBrick = _selectedBrick as RepeatBrick;
@@ -159,7 +159,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
                     };
 
                     repeatBrick.End = endBrick;
-                    _receivedScriptBrickCollection.AddScriptBrick(endBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
+                    _actionsCollection.AddScriptBrick(endBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
                 }
 
                 var ifBrick = _selectedBrick as IfBrick;
@@ -177,8 +177,8 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
                     ifBrick.Else = elseBrick;
                     ifBrick.End = endBrick;
 
-                    _receivedScriptBrickCollection.AddScriptBrick(elseBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
-                    _receivedScriptBrickCollection.AddScriptBrick(endBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 2);
+                    _actionsCollection.AddScriptBrick(elseBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
+                    _actionsCollection.AddScriptBrick(endBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 2);
                 }
 
                 var message = new GenericMessage<ModelBase>(_selectedBrick);
@@ -238,7 +238,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Actions
 
         private void ReceiveScriptBrickCollectionMessageAction(GenericMessage<List<Object>> message)
         {
-            _receivedScriptBrickCollection = message.Content[0] as ActionsCollection;
+            _actionsCollection = message.Content[0] as ActionsCollection;
             _firstVisibleScriptBrickIndex = ((PortableListBoxViewPort)message.Content[1]).FirstVisibleIndex;
             _lastVisibleScriptBrickIndex = ((PortableListBoxViewPort)message.Content[1]).LastVisibleIndex;
         }

@@ -111,7 +111,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     ServiceLocator.NavigationService.RemoveBackEntry();
                 });
             }
-            ServiceLocator.NavigationService.RemoveBackEntry();
         }
 
         private async void ShareWithOtherAppAction()
