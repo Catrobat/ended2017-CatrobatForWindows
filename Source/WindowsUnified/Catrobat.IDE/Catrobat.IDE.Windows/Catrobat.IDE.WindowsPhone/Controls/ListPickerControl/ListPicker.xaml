@@ -8,10 +8,10 @@
     d:DesignHeight="80" d:DesignWidth="480">
 
   <Grid>
-      <Grid>
+    <Grid>
       <Button x:Name="ContentControlSelectedItem" Click="ContentControlSelectedItem_OnClick" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="{StaticResource BrickBorderBrush}" Foreground="{StaticResource BrickForegroundBrush}">
-          <!--Selected item will be placed here-->
-        </Button>
-      </Grid>
+        <!--Selected item will be placed here-->
+      </Button>
+    </Grid>
   </Grid>
 </UserControl>

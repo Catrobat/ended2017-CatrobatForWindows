@@ -88,6 +88,17 @@ namespace Catrobat.IDE.Core.Tests.Services.Common
         {
             throw new NotImplementedException();
         }
+
+
+        public Task<string> CopyProgramPart1(string sourceProgramName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Program> CopyProgramPart2(string sourceProgramName, string newProgramName)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

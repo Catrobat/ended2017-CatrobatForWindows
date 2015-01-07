@@ -46,5 +46,8 @@ namespace Catrobat.IDE.Core
         // other constants
         public const string LocalSettingsFilePath = "Settings\\settings";
         public const string ImageThumbnailExtension = "_thumb.png";
+
+        // trace
+        public const string TraceFilePath = "Trace\\trace.txt";
     }
 }

@@ -30,15 +30,20 @@ namespace Catrobat.IDE.WindowsShared
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.UnhandledException += OnUnhandledException;
         }
 
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            ServiceLocator.TraceService.Add(TraceType.Info, "Application launched");
+
             await ShowSplashScreen(e);
         }
 
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
+            ServiceLocator.TraceService.Add(TraceType.Info, "Application suspending");
+
             var deferral = e.SuspendingOperation.GetDeferral();
             var mainViewModel = ServiceLocator.GetInstance<MainViewModel>();
             await Core.App.SaveContext(mainViewModel.CurrentProgram);
@@ -48,6 +53,9 @@ namespace Catrobat.IDE.WindowsShared
 
         private async Task Activated(IActivatedEventArgs e)
         {
+            ServiceLocator.TraceService.Add(TraceType.Info, "Application Activated",
+                "PreviousState = " + e.PreviousExecutionState);
+
             switch (e.PreviousExecutionState)
             {
                 case ApplicationExecutionState.NotRunning:
@@ -115,6 +123,17 @@ namespace Catrobat.IDE.WindowsShared
         protected override async void OnFileActivated(FileActivatedEventArgs e)
         {
             await Activated(e);
+        }
+
+        private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            string stackTrace = null;
+            if(e.Exception != null)
+            stackTrace = e.Exception.StackTrace;
+
+            ServiceLocator.TraceService.Add(TraceType.Error, "Application crashed",
+                e.Message, stackTrace);
+            ServiceLocator.TraceService.SaveLocal();
         }
     }
 }

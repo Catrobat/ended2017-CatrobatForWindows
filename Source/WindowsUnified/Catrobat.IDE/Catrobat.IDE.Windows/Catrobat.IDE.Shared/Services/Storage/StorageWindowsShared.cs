@@ -288,8 +288,13 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
             var destinationFolderPath = Path.GetDirectoryName(destinationPath);
             var destinationFolder = await GetFolderAsync(destinationFolderPath);
 
+            if(destinationFolder == null)
+            {
+                await CreateFolderPathAsync(destinationFolderPath);
+                destinationFolder = await GetFolderAsync(destinationFolderPath);
+            }
+            
             var newFileName = Path.GetFileName(destinationPath);
-
             await file.CopyAsync(destinationFolder, newFileName, NameCollisionOption.ReplaceExisting);
         }
 
