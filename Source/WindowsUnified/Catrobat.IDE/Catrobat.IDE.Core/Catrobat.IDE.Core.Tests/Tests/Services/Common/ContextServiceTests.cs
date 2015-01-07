@@ -12,7 +12,7 @@ using Catrobat.IDE.Core.Tests.Extensions;
 namespace Catrobat.IDE.Core.Tests.Tests.Services.Common
 {
     [TestClass]
-    class ContextServiceTests
+    public class ContextServiceTests
     {
         [ClassInitialize()]
         public static void TestClassInitialize(TestContext testContext)

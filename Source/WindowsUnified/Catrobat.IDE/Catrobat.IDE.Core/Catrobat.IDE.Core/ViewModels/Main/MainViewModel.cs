@@ -437,6 +437,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
             if (_dialogResult == MessageboxResult.Ok)
             {
+                ServiceLocator.TraceService.Add(TraceType.Info, "About to copy local program", 
+                    "Program name: " + _copyProgramName);
+
                 if (CurrentProgram != null && _copyProgramName == CurrentProgram.Name)
                     await CurrentProgram.Save();
 
