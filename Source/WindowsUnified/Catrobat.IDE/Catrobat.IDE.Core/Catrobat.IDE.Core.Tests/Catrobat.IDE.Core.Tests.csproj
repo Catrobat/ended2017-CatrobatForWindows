@@ -115,6 +115,7 @@
     <Compile Include="Services\Storage\ResourcesTest.cs" />
     <Compile Include="Services\Storage\StorageFactoryTest.cs" />
     <Compile Include="Services\Storage\StorageTest.cs" />
+    <Compile Include="Tests\Data\ProgramGeneratorWhackAMoleTests.cs" />
     <Compile Include="Tests\Data\DataDeletingTests.cs" />
     <Compile Include="Tests\Services\Common\TraceServiceTests.cs" />
     <Compile Include="Tests\XmlModelConvertion\XmlModelConversionTests.cs" />

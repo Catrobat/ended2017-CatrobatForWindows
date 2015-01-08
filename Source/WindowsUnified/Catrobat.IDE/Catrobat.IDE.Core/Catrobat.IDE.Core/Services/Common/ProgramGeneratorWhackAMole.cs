@@ -496,7 +496,7 @@ namespace Catrobat.IDE.Core.Services.Common
                     secondChild: FormulaTreeFactory.CreateNumberNode(5));
                 startScriptMole4.Bricks.Add(wait);
             }
-            startScriptMole4.Bricks.Add(startForeverBrick4);
+            startScriptMole4.Bricks.Add(endForeverBrick4);
             objectMole4.Scripts.Add(startScriptMole4);
 
             TappedScript tappedScriptMole4 = new TappedScript();
