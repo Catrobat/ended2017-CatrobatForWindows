@@ -83,6 +83,7 @@
     <Compile Include="CatrobatObjects\TestEqualityComparer.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Models\CatrobatModels\CatrobatModelBase.cs" />
+    <Compile Include="ProgramChecker.cs" />
     <Compile Include="Services\Common\TraceService.cs" />
     <Compile Include="Services\Common\ProgramExportService.cs" />
     <Compile Include="Services\Common\ProgramImportService.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="ViewModels\Service\UploadProgramNewPasswordViewModel.cs" />
     <Compile Include="ViewModels\Service\OnlineProgramReportViewModel.cs" />
     <Compile Include="ViewModels\Service\UploadProgramForgotPasswordViewModel.cs" />
+    <Compile Include="XmlEndForeverBrick.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\BrickConverterBase.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\ControlFlow\WaitBrickConverter.cs" />
     <Compile Include="XmlModelConvertion\Converters\Actions\Bricks\ControlFlow\IfLogicBrickConverter.cs" />
