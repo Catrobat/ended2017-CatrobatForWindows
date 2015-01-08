@@ -25,13 +25,14 @@ namespace Catrobat.IDE.Core.UI
 {
     public class OnlineProgramsLoadingResult
     {
-            public uint ProgramsCount { get; set; }
+        public uint ProgramsCount { get; set; }
     }
 
     public class OnlineProgramsCollection : ObservableCollection<OnlineProgramHeader>
     {
         private CancellationTokenSource _downloadTaskCancellation = new CancellationTokenSource();
         private readonly object _manipulationLock = new object();
+        private Task _checkNetworkConnectionTask;
 
         private string _filterText = "";
         public string FilterText
@@ -78,8 +79,8 @@ namespace Catrobat.IDE.Core.UI
             get { return _isLoadingEnabled; }
             set
             {
-                _isLoadingEnabled = value; 
-                RaisePropertyChanged(()=>IsLoadingEnabled);
+                _isLoadingEnabled = value;
+                RaisePropertyChanged(() => IsLoadingEnabled);
             }
         }
 
@@ -172,6 +173,14 @@ namespace Catrobat.IDE.Core.UI
                 IsLoading = false;
             }
 
+
+            if (ErrorOccurred)
+            {
+                await Task.Delay(3000, c);
+                return await LoadMoreOnlineProgramsAsync(count, c);
+            }
+
+
             HasMorePrograms = count == newProgramsCount;
 
             return new OnlineProgramsLoadingResult {ProgramsCount = newProgramsCount};
@@ -181,6 +190,11 @@ namespace Catrobat.IDE.Core.UI
         {
             ClearOnlinePrograms();
             //await LoadMoreOnlineProgramsAsync(int.Parse(ApplicationResources.API_REQUEST_LIMIT), _downloadTaskCancellation.Token);
+        }
+
+        public OnlineProgramsCollection()
+        {
+
         }
 
         #region PropertyChanged
