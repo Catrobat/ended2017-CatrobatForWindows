@@ -386,7 +386,7 @@ namespace Catrobat.IDE.Core.Services.Common
             program.ProjectHeader.ApplicationVersion = ServiceLocator.
                 SystemInformationService.CurrentApplicationVersion;
 
-            program.ProjectHeader.CatrobatLanguageVersion = XmlConstants.TargetOutputVersion;
+            program.ProjectHeader.CatrobatLanguageVersion = XmlConstants.TargetIDEVersion;
 
             program.ProjectHeader.DeviceName = ServiceLocator.
                 SystemInformationService.DeviceName;

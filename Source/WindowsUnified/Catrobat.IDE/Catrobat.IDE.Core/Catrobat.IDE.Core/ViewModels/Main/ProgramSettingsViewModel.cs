@@ -112,7 +112,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 }
             }
             base.GoBackAction();
-
             await App.SaveContext(CurrentProgram);
         }
 

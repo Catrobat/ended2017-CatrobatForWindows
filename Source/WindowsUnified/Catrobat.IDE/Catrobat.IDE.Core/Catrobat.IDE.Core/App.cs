@@ -1,3 +1,4 @@
+using System;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Resources.Localization;
@@ -62,6 +63,9 @@ namespace Catrobat.IDE.Core
 
                 var defaultProject = await ServiceLocator.ContextService.
                     RestoreDefaultProgram(AppResources.Main_DefaultProgramName);
+
+                ProgramChecker.CheckProgram(defaultProject);
+
                 _context.LocalSettings.CurrentProgramName = defaultProject.Name;
                 await defaultProject.Save();
             }
@@ -96,33 +100,50 @@ namespace Catrobat.IDE.Core
 
         public static async Task SaveContext(Program currentProject)
         {
-            await ServiceLocator.TraceService.SaveLocal();
-
-            if (currentProject == null || _context == null)
-                return;
-
-            var themeChooser = ServiceLocator.ThemeChooser;
-            var settingsViewModel = ServiceLocator.GetInstance<SettingsViewModel>();
-
-            if (themeChooser.SelectedTheme != null)
+            try
             {
-                _context.LocalSettings.CurrentThemeIndex = themeChooser.SelectedThemeIndex;
-            }
+                if (_context == null)
+                    return;
 
-            if (settingsViewModel.CurrentCulture != null)
+                var themeChooser = ServiceLocator.ThemeChooser;
+                var settingsViewModel = ServiceLocator.GetInstance<SettingsViewModel>();
+
+                if (themeChooser.SelectedTheme != null)
+                {
+                    _context.LocalSettings.CurrentThemeIndex = themeChooser.SelectedThemeIndex;
+                }
+
+                if (settingsViewModel.CurrentCulture != null)
+                {
+                    _context.LocalSettings.CurrentLanguageString = settingsViewModel.CurrentCulture.Name;
+                }
+
+                
+
+                if (currentProject == null)
+                {
+                    await ServiceLocator.TraceService.SaveLocal();
+                    return;
+                }
+                    
+
+                _context.LocalSettings.CurrentProgramName = currentProject.Name;
+                await ServiceLocator.ContextService.StoreLocalSettings(_context.LocalSettings);
+                await currentProject.Save();
+
+                // allow viewmodels to save settings // TODO: check if this is awaited
+                Messenger.Default.Send(new GenericMessage<LocalSettings>(_context.LocalSettings), ViewModelMessagingToken.SaveSettings);
+
+                await ServiceLocator.TraceService.SaveLocal();
+            }
+            catch (Exception e)
             {
-                _context.LocalSettings.CurrentLanguageString = settingsViewModel.CurrentCulture.Name;
+
+                throw;
             }
+            //await ServiceLocator.TraceService.SaveLocal();
 
-            _context.LocalSettings.CurrentProgramName = currentProject.Name;
 
-            await ServiceLocator.ContextService.StoreLocalSettings(_context.LocalSettings);
-            await currentProject.Save();
-
-            // allow viewmodels to save settings // TODO: check if this is awaited
-            Messenger.Default.Send(new GenericMessage<LocalSettings>(_context.LocalSettings), ViewModelMessagingToken.SaveSettings);
-
-            await ServiceLocator.TraceService.SaveLocal();
         }
     }
 }

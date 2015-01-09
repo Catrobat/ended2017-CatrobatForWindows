@@ -40,84 +40,92 @@
   </Style>-->
 
   <DataTemplate x:Key="ListBoxSpriteItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Sprite}">
-      <TextBlock Text="{Binding Path=Name}" FontSize="24" 
+    <Grid Margin="5" d:DataContext="{d:DesignInstance models:Sprite}">
+      <TextBlock Text="{Binding Path=Name}" FontSize="24" TextTrimming="CharacterEllipsis"
         Foreground="{Binding IsSelected, 
         Converter={StaticResource SelectedBrushConverter}}"/>
-    </StackPanel>
+    </Grid>
   </DataTemplate>
 
   <DataTemplate x:Key="PageListBoxSpriteItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Sprite}">
-      <TextBlock Text="{Binding Path=Name}" FontSize="40" 
+    <Grid Margin="5" d:DataContext="{d:DesignInstance models:Sprite}">
+      <TextBlock Text="{Binding Path=Name}" FontSize="40" TextTrimming="CharacterEllipsis"
         Foreground="{Binding IsSelected, 
         Converter={StaticResource SelectedBrushConverter}}"/>
-    </StackPanel>
+    </Grid>
   </DataTemplate>
 
 
   <DataTemplate x:Key="ListBoxLookItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Look}">
+    <Grid Margin="5" d:DataContext="{d:DesignInstance models:Look}">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
       <!--<Image Source="{Binding Path=Image.ImageSource}" Width="24" Height="24" />-->
-      <Image Width="24" Height="24">
+      <Image Grid.Column="0" Width="24" Height="24">
         <Image.Source>
           <BitmapImage DecodePixelHeight="24"
                        UriSource="{Binding Image.ImageUri}"/>
         </Image.Source>
       </Image>
-      <TextBlock Text="{Binding Path=Name}" FontSize="24" Padding="10,0,0,0" 
+      <TextBlock Grid.Column="1" Text="{Binding Path=Name}" FontSize="24" Padding="10,0,0,0" TextTrimming="CharacterEllipsis"
         Foreground="{Binding IsSelected, 
         Converter={StaticResource SelectedBrushConverter}}"/>
-    </StackPanel>
+    </Grid>
   </DataTemplate>
 
   <DataTemplate x:Key="PageListBoxLookItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Look}">
+    <Grid Margin="5" d:DataContext="{d:DesignInstance models:Look}">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
       <!--<Image Source="{Binding Path=Image.ImageSource}" Width="40" Height="40" />-->
-      <Image Width="40" Height="40">
+      <Image Width="40" Height="40" Grid.Column="0">
         <Image.Source>
           <BitmapImage DecodePixelHeight="40"
                        UriSource="{Binding Image.ImageUri}"/>
         </Image.Source>
       </Image>
-      <TextBlock Text="{Binding Path=Name}" FontSize="40" Padding="10,0,0,0"
+      <TextBlock Grid.Column="1" Text="{Binding Path=Name}" FontSize="40" Padding="10,0,0,0" TextTrimming="CharacterEllipsis"
         Foreground="{Binding IsSelected, 
         Converter={StaticResource SelectedBrushConverter}}"/>
-    </StackPanel>
+    </Grid>
   </DataTemplate>
 
   
   <DataTemplate x:Key="ListBoxSoundItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Sound}">
-      <TextBlock Text="{Binding Path=Name}" FontSize="24" 
+    <Grid Margin="5" d:DataContext="{d:DesignInstance models:Sound}" >
+      <TextBlock Text="{Binding Path=Name}" FontSize="24" TextTrimming="CharacterEllipsis"
         Foreground="{Binding IsSelected, 
         Converter={StaticResource SelectedBrushConverter}}"/>
-    </StackPanel>
+    </Grid>
   </DataTemplate>
 
   <DataTemplate x:Key="PageListBoxSoundItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:Sound}">
-      <TextBlock Text="{Binding Path=Name}" FontSize="40" 
+    <Grid Margin="5" d:DataContext="{d:DesignInstance models:Sound}">
+      <TextBlock Text="{Binding Path=Name}" FontSize="40" TextTrimming="CharacterEllipsis"
         Foreground="{Binding IsSelected, 
         Converter={StaticResource SelectedBrushConverter}}"/>
-    </StackPanel>
+    </Grid>
   </DataTemplate>
 
 
   <DataTemplate x:Key="ListBoxBroadcastItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:BroadcastMessage}">
-      <TextBlock Text="{Binding Content}" FontSize="24" 
+    <Grid Margin="5" d:DataContext="{d:DesignInstance models:BroadcastMessage}" >
+      <TextBlock Text="{Binding Content}" FontSize="24" TextTrimming="CharacterEllipsis"
         Foreground="{Binding IsSelected, 
         Converter={StaticResource SelectedBrushConverter}}"/>
-    </StackPanel>
+    </Grid>
   </DataTemplate>
 
   <DataTemplate x:Key="PageListBoxBroadcastItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance models:BroadcastMessage}">
-      <TextBlock Text="{Binding Content}"  FontSize="40" 
+    <Grid Margin="5" d:DataContext="{d:DesignInstance models:BroadcastMessage}" >
+      <TextBlock Text="{Binding Content}"  FontSize="40" TextTrimming="CharacterEllipsis"
         Foreground="{Binding IsSelected, 
         Converter={StaticResource SelectedBrushConverter}}"/>
-    </StackPanel>
+    </Grid>
   </DataTemplate>
 
     <DataTemplate x:Key="ActionTemplateSelectorTemplate" >
