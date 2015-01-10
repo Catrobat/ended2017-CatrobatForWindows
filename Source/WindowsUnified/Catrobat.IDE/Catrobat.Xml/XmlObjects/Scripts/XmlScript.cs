@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
@@ -24,6 +25,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 
         private void LoadFromCommonXML(XElement xRoot)
         {
+            XmlParserTempProjectHelper.Script = this;
+
             if (xRoot.Element("brickList") != null)
             {
                 Bricks = new XmlBrickList(xRoot.Element("brickList"));
@@ -36,6 +39,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
         {
             if (Bricks != null)
             {
+                XmlParserTempProjectHelper.Script = this;
+
                 xRoot.Add(Bricks.CreateXml());
             }
         }

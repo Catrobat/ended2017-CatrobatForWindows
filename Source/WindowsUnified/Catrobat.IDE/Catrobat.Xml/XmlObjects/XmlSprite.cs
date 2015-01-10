@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
+using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
@@ -28,6 +29,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override void LoadFromXml(XElement xRoot)
         {
+            XmlParserTempProjectHelper.Sprite = this;
+
             if (xRoot.Element("lookList") != null)
             {
                 Looks = new XmlLookList(xRoot.Element("lookList"));
@@ -47,6 +50,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override XElement CreateXml()
         {
+            XmlParserTempProjectHelper.Sprite = this;
+
             var xRoot = new XElement("object");
 
             if (Looks != null)
@@ -74,10 +79,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override void LoadReference()
         {
-            foreach (var brick in Scripts.Scripts.SelectMany(script => script.Bricks.Bricks))
+            XmlParserTempProjectHelper.Sprite = this;
+
+            foreach(var script in Scripts.Scripts)
             {
-                brick.LoadReference();
+                XmlParserTempProjectHelper.Script = script;
+
+                foreach (var brick in script.Bricks.Bricks)
+                {
+                    brick.LoadReference();
+                }
             }
+
+
         }
     }
 }
