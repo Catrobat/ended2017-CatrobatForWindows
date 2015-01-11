@@ -26,7 +26,8 @@ namespace Catrobat.IDE.WindowsShared.Content.Images.Application
             set { SetValue(ScaleFactorProperty, value); }
         }
 
-        public static readonly DependencyProperty ScaleFactorProperty = DependencyProperty.Register("ScaleFactor", typeof(double), typeof(Logo), new PropertyMetadata(0.0, ScaleFactorChanged));
+        public static readonly DependencyProperty ScaleFactorProperty = 
+            DependencyProperty.Register("ScaleFactor", typeof(double), typeof(Logo), new PropertyMetadata(0.0, ScaleFactorChanged));
 
         private static void ScaleFactorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

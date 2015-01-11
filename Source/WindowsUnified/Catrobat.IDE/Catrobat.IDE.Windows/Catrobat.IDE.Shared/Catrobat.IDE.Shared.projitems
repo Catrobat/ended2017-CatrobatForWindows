@@ -45,6 +45,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Images\Misc\ImageGallery.xaml.cs">
       <DependentUpon>ImageGallery.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Images\Misc\UploadToPocketCodeOrg.xaml.cs">
+      <DependentUpon>UploadToPocketCodeOrg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Templates\ActionTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NamespaceTypeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\NativeConverters\NativeIntZeroVisibilityConverter.cs" />
@@ -110,6 +113,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Images\Misc\ImageGallery.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Images\Misc\UploadToPocketCodeOrg.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Templates\ActionAddData.xaml">
