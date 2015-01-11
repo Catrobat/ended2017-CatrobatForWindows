@@ -11,14 +11,14 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
             get { return LoopEndBrickReference.LoopEndBrick; }
             set
             {
-                if (LoopEndBrickReference == null)
-                {
-                    LoopEndBrickReference = new XmlLoopEndBrickReference();
-                    //if (value is XmlRepeatLoopEndBrick)
-                    //    _loopEndBrickReference.Class = "loopEndBrick";
-                    //else if (value is XmlForeverLoopEndBrick)
-                    //    _loopEndBrickReference.Class = "loopEndlessBrick";
-                }
+                //if (LoopEndBrickReference == null)
+                //{
+                //    LoopEndBrickReference = new XmlLoopEndBrickReference();
+                //    //if (value is XmlRepeatLoopEndBrick)
+                //    //    _loopEndBrickReference.Class = "loopEndBrick";
+                //    //else if (value is XmlForeverLoopEndBrick)
+                //    //    _loopEndBrickReference.Class = "loopEndlessBrick";
+                //}
 
                 if (LoopEndBrickReference == null)
                     LoopEndBrickReference = new XmlLoopEndBrickReference();

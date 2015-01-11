@@ -46,7 +46,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             var document = XDocument.Load(new StringReader(xml));
             document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
 
-            XmlParserTempProjectHelper.Project = this;
+            XmlParserTempProjectHelper.Program = this;
 
             var project = document.Element("program");
             ProjectHeader = new XmlProjectHeader(project.Element("header"));
@@ -61,7 +61,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             var document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
 
-            XmlParserTempProjectHelper.Project = this;
+            XmlParserTempProjectHelper.Program = this;
 
             var xProject = new XElement("program");
             xProject.Add(ProjectHeader.CreateXml());

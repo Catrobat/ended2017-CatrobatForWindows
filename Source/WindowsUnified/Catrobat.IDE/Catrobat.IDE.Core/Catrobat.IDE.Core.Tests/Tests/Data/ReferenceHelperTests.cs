@@ -209,7 +209,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             var lookReference = setLookBrick.XmlLookReference;
 
             Assert.IsNotNull(lookReference);
-
+            XmlParserTempProjectHelper.Program = program;
+            XmlParserTempProjectHelper.Sprite = program.SpriteList.Sprites[0];
+            XmlParserTempProjectHelper.Script = program.SpriteList.Sprites[0].Scripts.Scripts[0];
             var reference = ReferenceHelper.GetReferenceString(lookReference);
 
             Assert.AreEqual("../../../../../lookList/look[1]", reference);
@@ -280,6 +282,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             Assert.IsNotNull(loopBeginBrickReference);
 
+            XmlParserTempProjectHelper.Program = program;
+            XmlParserTempProjectHelper.Sprite = program.SpriteList.Sprites[1];
+            XmlParserTempProjectHelper.Script = program.SpriteList.Sprites[1].Scripts.Scripts[0];
             var reference = ReferenceHelper.GetReferenceString(loopBeginBrickReference);
 
             Assert.AreEqual("../../foreverBrick[1]", reference);
@@ -295,6 +300,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             Assert.IsNotNull(loopBeginBrickReference);
 
+            XmlParserTempProjectHelper.Program = program;
+            XmlParserTempProjectHelper.Sprite = program.SpriteList.Sprites[1];
+            XmlParserTempProjectHelper.Script = program.SpriteList.Sprites[1].Scripts.Scripts[0];
             var reference = ReferenceHelper.GetReferenceString(loopBeginBrickReference);
 
             Assert.AreEqual("../../repeatBrick[1]", reference);
@@ -310,6 +318,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             Assert.IsNotNull(loopEndBrickReference);
 
+            XmlParserTempProjectHelper.Program = program;
+            XmlParserTempProjectHelper.Sprite = program.SpriteList.Sprites[1];
+            XmlParserTempProjectHelper.Script = program.SpriteList.Sprites[1].Scripts.Scripts[0];
             var reference = ReferenceHelper.GetReferenceString(loopEndBrickReference);
 
             Assert.AreEqual("../../loopEndlessBrick[1]", reference);
@@ -325,6 +336,9 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
             Assert.IsNotNull(loopEndBrickReference);
 
+            XmlParserTempProjectHelper.Program = program;
+            XmlParserTempProjectHelper.Sprite = program.SpriteList.Sprites[1];
+            XmlParserTempProjectHelper.Script = program.SpriteList.Sprites[1].Scripts.Scripts[0];
             var reference = ReferenceHelper.GetReferenceString(loopEndBrickReference);
 
             Assert.AreEqual("../../loopEndBrick[1]", reference);
@@ -334,6 +348,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         public void GetIfLogicBeginBrickReferenceStringTest()
         {
             var program = CreateProgram();
+
+            XmlParserTempProjectHelper.Program = program;
+            XmlParserTempProjectHelper.Sprite = program.SpriteList.Sprites[0];
+            XmlParserTempProjectHelper.Script = program.SpriteList.Sprites[0].Scripts.Scripts[0];
 
             var ifLogicElseBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[4] as XmlIfLogicElseBrick;
             Debug.Assert(ifLogicElseBrick != null);
@@ -369,6 +387,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         {
             var program = CreateProgram();
 
+            XmlParserTempProjectHelper.Program = program;
+            XmlParserTempProjectHelper.Sprite = program.SpriteList.Sprites[0];
+            XmlParserTempProjectHelper.Script = program.SpriteList.Sprites[0].Scripts.Scripts[0];
+
             var ifLogicBeginBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[2] as XmlIfLogicBeginBrick;
             Debug.Assert(ifLogicBeginBrick != null);
             var ifLogicElseBrickReference = ifLogicBeginBrick.IfLogicElseBrickReference;
@@ -402,6 +424,10 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
         public void GetIfLogicEndBrickReferenceStringTest()
         {
             var program = CreateProgram();
+
+            XmlParserTempProjectHelper.Program = program;
+            XmlParserTempProjectHelper.Sprite = program.SpriteList.Sprites[0];
+            XmlParserTempProjectHelper.Script = program.SpriteList.Sprites[0].Scripts.Scripts[0];
 
             var ifLogicBeginBrick = program.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[2] as XmlIfLogicBeginBrick;
             Debug.Assert(ifLogicBeginBrick != null);

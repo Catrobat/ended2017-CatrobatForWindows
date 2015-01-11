@@ -48,8 +48,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             var programConverter = new ProgramConverter();
             var xmlProgram = programConverter.Convert(program);
 
-            //CheckProgram(program);
-            //CheckProgram(xmlProgram);
+            CheckProgram(program);
+            CheckProgram(xmlProgram);
 
             var xmlString = xmlProgram.ToXmlString();
 
@@ -59,6 +59,22 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
 
         public void CheckProgram(Program program)
         {
+            var foreverBegin1 = program.Sprites[1].Scripts[0].Bricks.FirstOrDefault(
+            a => a is ForeverBrick) as ForeverBrick;
+            var foreverEnd1 = program.Sprites[1].Scripts[0].Bricks.FirstOrDefault(
+                a => a is EndForeverBrick) as EndForeverBrick;
+
+            var foreverBegin2 = program.Sprites[2].Scripts[0].Bricks.FirstOrDefault(
+                    a => a is ForeverBrick) as ForeverBrick;
+            var foreverEnd2 = program.Sprites[2].Scripts[0].Bricks.FirstOrDefault(
+                a => a is EndForeverBrick) as EndForeverBrick;
+
+            Assert.IsNotNull(foreverBegin1);
+            Assert.IsNotNull(foreverEnd1);
+
+            Assert.IsTrue(foreverBegin1.End != foreverEnd2);
+            Assert.IsTrue(foreverEnd1.Begin != foreverBegin2);
+
             for (var moleIndex = 1; moleIndex < 5; moleIndex++)
             {
                 var foreverBegin = program.Sprites[moleIndex].Scripts[0].Bricks.FirstOrDefault(
@@ -89,8 +105,8 @@ namespace Catrobat.IDE.Core.Tests.Tests.Data
             Assert.IsNotNull(foreverBegin1);
             Assert.IsNotNull(foreverEnd1);
 
-            Assert.IsFalse(foreverBegin1.LoopEndBrick != foreverEnd2);
-            Assert.IsFalse(foreverEnd1.LoopBeginBrick != foreverBegin2);
+            Assert.IsTrue(foreverBegin1.LoopEndBrick != foreverEnd2);
+            Assert.IsTrue(foreverEnd1.LoopBeginBrick != foreverBegin2);
 
 
             for (var moleIndex = 1; moleIndex < 5; moleIndex++)
