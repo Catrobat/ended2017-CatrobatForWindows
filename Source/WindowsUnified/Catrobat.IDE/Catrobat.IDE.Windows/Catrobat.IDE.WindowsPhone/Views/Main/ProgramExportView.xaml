@@ -32,8 +32,7 @@
             Source={StaticResource LocalizedStrings}}" >
             <controls:LargeImageButton.ImageTemplate>
               <DataTemplate>
-                <!-- TODO: add share icon -->
-                <misc:AudioLibrary ScaleFactor="0.17" />
+                <misc:UploadToPocketCodeOrg ScaleFactor="0.8" />
               </DataTemplate>
             </controls:LargeImageButton.ImageTemplate>
           </controls:LargeImageButton>
@@ -44,9 +43,11 @@
           Source={StaticResource LocalizedStrings}}" >
             <controls:LargeImageButton.ImageTemplate>
               <DataTemplate>
-                <!-- TODO: add pocketcode.org icon -->
-                <!--<misc:AudioLibrary ScaleFactor="0.17" />-->
-                <misc:UploadToPocketCodeOrg ScaleFactor="0.8" />
+                <SymbolIcon Symbol="OpenWith">
+                  <IconElement.RenderTransform>
+                    <ScaleTransform CenterX="15" CenterY="15" ScaleX="3" ScaleY="3"></ScaleTransform>
+                  </IconElement.RenderTransform>
+                </SymbolIcon>
               </DataTemplate>
             </controls:LargeImageButton.ImageTemplate>
           </controls:LargeImageButton>
