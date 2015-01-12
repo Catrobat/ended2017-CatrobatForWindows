@@ -65,15 +65,17 @@
                       Label="{Binding Resources.Main_ButtonLogin, 
                       Source={StaticResource LocalizedStrings}}"
                       Command="{Binding LoginCommand}"/>
-        <AppBarButton Icon="Help" 
-                      Label="{Binding Resources.Main_ButtonPasswordForgotten, 
-                      Source={StaticResource LocalizedStrings}}"
-                      Command="{Binding ForgottenCommand}"/>
         <AppBarButton Icon="Add" 
                       Label="{Binding Resources.Main_ButtonRegister, 
                       Source={StaticResource LocalizedStrings}}"
                       Command="{Binding RegisterCommand}"/>
       </CommandBar.PrimaryCommands>
+      <CommandBar.SecondaryCommands>
+        <AppBarButton Icon="Help" 
+                      Label="{Binding Resources.Main_ButtonPasswordForgotten, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding ForgottenCommand}"/>
+      </CommandBar.SecondaryCommands>
     </CommandBar>
   </Page.BottomAppBar>
 </views:ViewPageBase>
