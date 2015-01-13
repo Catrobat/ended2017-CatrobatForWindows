@@ -185,6 +185,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void OpenProgramCommandAction(LocalProgramHeader program)
         {
+            if (program.IsDeleting || program.IsLoading)
+                return;
+
             var message = new GenericMessage<LocalProgramHeader>(program);
             Messenger.Default.Send(message,
                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener);
@@ -370,74 +373,104 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             _dialogResult = result;
             if (_dialogResult == MessageboxResult.Ok)
             {
-                var deleteProgramName = "";
-
-                lock (_programsToDelete)
-                {
-                    deleteProgramName = _deleteProgramName;
-
-                    if (_localPrograms.All(program =>
-                        program.ProjectName != deleteProgramName))
-                        return;
-
-                    var programs = _localPrograms.Where(program => program.ProjectName == deleteProgramName);
-
-                    foreach (var program in programs)
-                        program.IsDeleting = true;
-
-                    if (_programsToDelete.Contains(deleteProgramName))
-                        return;
-
-                    _programsToDelete.Add(deleteProgramName);
-                }
-
-                if (deleteProgramName == null)
-                    return;
-
-                if (CurrentProgram != null && CurrentProgram.Name == deleteProgramName)
-                {
-                    var programChangedMessage = new GenericMessage<Program>(null);
-                    Messenger.Default.Send(programChangedMessage, ViewModelMessagingToken.CurrentProgramChangedListener);
-                }
-
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    await storage.DeleteDirectoryAsync(Path.Combine(
-                        StorageConstants.ProgramsPath, _deleteProgramName));
-                }
-
-                await Task.Delay(1000);
-
-                await UpdateLocalPrograms();
-
-                _deleteProgramName = null;
-
-                lock (_programsToDelete)
-                {
-                    _programsToDelete.Remove(deleteProgramName);
-                }
+                await DeleteProgram(_deleteProgramName);
             }
 
             //await App.SaveContext(CurrentProgram);
         }
 
+        private bool _isDeleting = false;
+
+        private async Task DeleteProgram(string programNameToDelete)
+        {
+            DateTime deleteStartTime;
+
+            lock (_programsToDelete)
+            {
+                if (_localPrograms.All(program =>
+                    program.ProjectName != programNameToDelete))
+                    return;
+
+                var programToDelete = _localPrograms.FirstOrDefault(program =>
+                    program.ProjectName == programNameToDelete);
+
+                if (programToDelete == null ||
+                    _programsToDelete.Contains(programNameToDelete))
+                    return;
+
+                _programsToDelete.Add(programNameToDelete);
+                programToDelete.IsDeleting = true;
+                deleteStartTime = DateTime.UtcNow;
+
+                _programsToDelete.Add(programNameToDelete);
+
+                if (_isDeleting)
+                    return;
+
+                _isDeleting = true;
+            }
+
+            while (true)
+            {
+                List<string> programNames = null;
+                lock (_programsToDelete)
+                {
+                    if (_programsToDelete.Count == 0)
+                    {
+                        _isDeleting = false;
+                        break;
+                    }
+
+                    programNames = new List<string>(_programsToDelete);
+                    _programsToDelete.Clear();
+                }
+
+                foreach (var programName in programNames)
+                {
+                    if (CurrentProgram != null && CurrentProgram.Name == programName)
+                    {
+                        var programChangedMessage = new GenericMessage<Program>(null);
+                        Messenger.Default.Send(programChangedMessage, ViewModelMessagingToken.CurrentProgramChangedListener);
+                    }
+
+                    using (var storage = StorageSystem.GetStorage())
+                    {
+                        await storage.DeleteDirectoryAsync(Path.Combine(
+                            StorageConstants.ProgramsPath, _deleteProgramName));
+                    }
+                }
+
+                var minDeleteTime = new TimeSpan(0, 0, 2);
+                var remainingDeleteTime = minDeleteTime.Subtract(
+                    DateTime.UtcNow.Subtract(deleteStartTime));
+
+                if (remainingDeleteTime > new TimeSpan(0))
+                    await Task.Delay(remainingDeleteTime);
+                await UpdateLocalPrograms();
+            }
+        }
+
         private bool _isCopying = false;
         private readonly object _copyLock = new object();
+
         private async void CopyProgramMessageCallback(MessageboxResult result)
         {
+            DateTime copyStartTime;
+
             lock (_copyLock)
             {
                 if (_isCopying)
                     return;
 
                 _isCopying = true;
+                copyStartTime = DateTime.UtcNow;
             }
 
             _dialogResult = result;
 
             if (_dialogResult == MessageboxResult.Ok)
             {
-                ServiceLocator.TraceService.Add(TraceType.Info, "About to copy local program", 
+                ServiceLocator.TraceService.Add(TraceType.Info, "About to copy local program",
                     "Program name: " + _copyProgramName);
 
                 if (CurrentProgram != null && _copyProgramName == CurrentProgram.Name)
@@ -453,7 +486,12 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 await ServiceLocator.ContextService.CopyProgramPart2(
                     sourceProgramName, destinationProgramName);
 
-                await Task.Delay(1000);
+                var minDeleteTime = new TimeSpan(0, 0, 2);
+                var remainingCopyTime = minDeleteTime.Subtract(
+                    DateTime.UtcNow.Subtract(copyStartTime));
+
+                if (remainingCopyTime > new TimeSpan(0))
+                    await Task.Delay(remainingCopyTime);
 
                 await UpdateLocalPrograms();
 
