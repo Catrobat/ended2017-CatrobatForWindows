@@ -16,8 +16,9 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         public SpritesView()
         {
+            //NavigationCacheMode = NavigationCacheMode.Enabled;
             InitializeComponent();
-            PageCacheMode = NavigationCacheMode.Enabled;
+            
         }
 
         private void MultiModeEditorCommandBar_OnModeChanged(MultiModeEditorCommandBarMode mode)
