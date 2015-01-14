@@ -15,7 +15,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Settings
         public SettingsLanguageView()
         {
             InitializeComponent();
-            PageCacheMode = NavigationCacheMode.Disabled;
+            NavigationCacheMode = NavigationCacheMode.Disabled;
         }
 
         private void Culture_OnTapped(object sender, TappedRoutedEventArgs e)

@@ -25,7 +25,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 
         public SpriteEditorView()
         {
-            PageCacheMode = NavigationCacheMode.Enabled;
+            //NavigationCacheMode = NavigationCacheMode.Enabled;
             InitializeComponent();
 
             CreateCommandBars();

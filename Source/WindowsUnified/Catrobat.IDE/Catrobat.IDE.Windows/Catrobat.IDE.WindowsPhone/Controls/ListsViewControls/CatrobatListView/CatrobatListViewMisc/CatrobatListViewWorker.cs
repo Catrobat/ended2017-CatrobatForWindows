@@ -787,7 +787,9 @@ namespace Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.
         void item_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             _scrollViewer.Focus(FocusState.Pointer);
-            ItemTapped(this, new CatrobatListViewItemEventArgs((CatrobatListViewItem)sender));
+            if(ItemTapped != null)
+                ItemTapped(this, new CatrobatListViewItemEventArgs(
+                    (CatrobatListViewItem)sender));
         }
 
 
