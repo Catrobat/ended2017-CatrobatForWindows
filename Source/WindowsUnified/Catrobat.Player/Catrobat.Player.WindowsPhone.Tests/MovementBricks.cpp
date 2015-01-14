@@ -63,7 +63,7 @@ namespace PlayerWindowsPhone8Test
             Assert::AreEqual(old_y, y);
 
             m_brick->Execute();
-            m_object->SetTranslation(x, y);
+            m_object->GetTranslation(x, y);
 			Assert::AreEqual(old_x + 84, x);
             Assert::AreEqual(old_y, y);
         }
@@ -373,15 +373,17 @@ namespace PlayerWindowsPhone8Test
 
 		TEST_METHOD(MovementBricks_SetXBrick_FromOtherPosition)
 		{
+            auto wrongX = 27.5f;
+            auto expectedX = 15.1f;
+            auto expectedY = 12.4f;
+
 			Object* object = new Object("");
 			auto script = std::shared_ptr<Script>(new StartScript(object));
-			FormulaTree* tree = new FormulaTree("NUMBER", "12.4");
+			FormulaTree* tree = new FormulaTree("NUMBER", 
+                TestHelper::ConvertPlatformStringToString(expectedX.ToString()));
 			Brick* brick = new SetXBrick(tree, script);
 
-			auto expectedX = 15.1f;
-			auto expectedY = 12.4f;
-
-			object->SetTranslation(expectedX, expectedY);
+            object->SetTranslation(wrongX, expectedY);
 
 			brick->Execute();
 
@@ -389,7 +391,7 @@ namespace PlayerWindowsPhone8Test
 			object->GetTranslation(actualX, actualY);
 
 			Assert::AreEqual(expectedX, actualX);
-			//Assert::AreEqual(expectedY, actualY);
+			Assert::AreEqual(expectedY, actualY);
 		}
 
 		TEST_METHOD(MovementBricks_SetYBrick)
