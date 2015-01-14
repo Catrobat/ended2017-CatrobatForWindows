@@ -131,6 +131,11 @@ namespace Catrobat.IDE.Core.Models
             
         }
 
+        ~Program()
+        {
+
+        }
+
         public async Task SetProgramNameAndRenameDirectory(string newProgramName)
         {
             if (newProgramName == Name) 

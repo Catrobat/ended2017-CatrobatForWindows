@@ -375,8 +375,6 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             {
                 await DeleteProgram(_deleteProgramName);
             }
-
-            //await App.SaveContext(CurrentProgram);
         }
 
         private bool _isDeleting = false;
@@ -430,7 +428,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                     if (CurrentProgram != null && CurrentProgram.Name == programName)
                     {
                         var programChangedMessage = new GenericMessage<Program>(null);
-                        Messenger.Default.Send(programChangedMessage, ViewModelMessagingToken.CurrentProgramChangedListener);
+                        Messenger.Default.Send(programChangedMessage, 
+                            ViewModelMessagingToken.CurrentProgramChangedListener);
                     }
 
                     using (var storage = StorageSystem.GetStorage())

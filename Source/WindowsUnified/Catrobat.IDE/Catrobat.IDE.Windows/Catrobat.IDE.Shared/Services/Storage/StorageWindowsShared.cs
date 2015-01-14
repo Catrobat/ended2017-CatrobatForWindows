@@ -474,7 +474,6 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                     var stream = await file.OpenAsync(FileAccessMode.Read);
                     var memoryStream = new MemoryStream();
                     stream.GetInputStreamAt(0).AsStreamForRead().CopyTo(memoryStream);
-
                     stream.Seek(0);
                     bitmapImage.SetSource(stream);
 
@@ -489,6 +488,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Storage
                         EncodedData = memoryStream,
                         ImagePath = pathToImage
                     };
+                    stream.Dispose();
                     return portableImage;
                 }
                 catch (Exception exc)
