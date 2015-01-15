@@ -30,9 +30,9 @@ namespace PlayerWindowsPhone8Test
 			auto formulaTree = new FormulaTree("NUMBER", "100");
             auto brick = new ChangeGhostEffectByBrick(formulaTree, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 1.0f));
+			Assert::AreEqual(object->GetTransparency(), 1.0f);
         }
 
 		TEST_METHOD(LookBricks_ChangeGhostEffectBrick_CheckForZeroPercent)
@@ -42,9 +42,9 @@ namespace PlayerWindowsPhone8Test
 			FormulaTree *formulaTree = new FormulaTree("NUMBER", "0");
             ChangeGhostEffectByBrick *brick = new ChangeGhostEffectByBrick(formulaTree, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
         }
 
 		TEST_METHOD(LookBricks_ChangeGhostEffectBrick_CheckForOverflow)
@@ -54,9 +54,9 @@ namespace PlayerWindowsPhone8Test
 			FormulaTree *formulaTree = new FormulaTree("NUMBER", "300");
 			ChangeGhostEffectByBrick *brick = new ChangeGhostEffectByBrick(formulaTree, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 1.0f));
+			Assert::AreEqual(object->GetTransparency(), 1.0f);
         }
 
 		TEST_METHOD(LookBricks_ChangeGhostEffectBrick_CheckFor50Percent)
@@ -66,9 +66,9 @@ namespace PlayerWindowsPhone8Test
 			FormulaTree *formulaTree = new FormulaTree("NUMBER", "50");
 			ChangeGhostEffectByBrick *brick = new ChangeGhostEffectByBrick(formulaTree, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.5f));
+			Assert::AreEqual(object->GetTransparency(), 0.5f);
         }
 
 		TEST_METHOD(LookBricks_ChangeGhostEffectBrick_CheckForVariousChanges)
@@ -78,17 +78,17 @@ namespace PlayerWindowsPhone8Test
 			FormulaTree *formulaTree = new FormulaTree("NUMBER", "30");
 			ChangeGhostEffectByBrick *brick = new ChangeGhostEffectByBrick(formulaTree, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.3f));
+			Assert::AreEqual(object->GetTransparency(), 0.3f);
 
 			brick = new ChangeGhostEffectByBrick(formulaTree, script);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.7f));
+			Assert::AreEqual(object->GetTransparency(), 0.7f);
 
 			brick = new ChangeGhostEffectByBrick(formulaTree, script);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.6f));
+			Assert::AreEqual(object->GetTransparency(), 0.6f);
         }
 
 		TEST_METHOD(LookBricks_ChangeGhostEffectBrick_CheckForUnderflow)
@@ -98,9 +98,9 @@ namespace PlayerWindowsPhone8Test
 			FormulaTree *formulaTree = new FormulaTree("NUMBER", "-300");
 			ChangeGhostEffectByBrick *brick = new ChangeGhostEffectByBrick(formulaTree, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
         }
 
 		TEST_METHOD(LookBricks_ChangeSizeByBrickTest_CheckForZero)
@@ -113,12 +113,12 @@ namespace PlayerWindowsPhone8Test
             float actualX;
             float actualY;
             object->GetScale(actualX, actualY);
-			Assert::IsTrue(TestHelper::isEqual(actualX, 100.0f));
-            Assert::IsTrue(TestHelper::isEqual(actualY, 100.0f));
+			Assert::AreEqual(actualX, 100.0f);
+            Assert::AreEqual(actualY, 100.0f);
             brick->Execute();
             object->GetScale(actualX, actualY);
-            Assert::IsTrue(TestHelper::isEqual(actualX, 0.0f));
-            Assert::IsTrue(TestHelper::isEqual(actualY, 0.0f));
+            Assert::AreEqual(actualX, 0.0f);
+            Assert::AreEqual(actualY, 0.0f);
         }
 
 		TEST_METHOD(LookBricks_ChangeSizeByBrickTest_CheckForUnderflow)
@@ -131,12 +131,12 @@ namespace PlayerWindowsPhone8Test
             float actualX;
             float actualY;
             object->GetScale(actualX, actualY);
-            Assert::IsTrue(TestHelper::isEqual(actualX, 100.f));
-            Assert::IsTrue(TestHelper::isEqual(actualY, 100.f));
+            Assert::AreEqual(actualX, 100.f);
+            Assert::AreEqual(actualY, 100.f);
 			brick->Execute();
             object->GetScale(actualX, actualY);
-            Assert::IsTrue(TestHelper::isEqual(actualX, 95.f));
-            Assert::IsTrue(TestHelper::isEqual(actualY, 95.f));
+            Assert::AreEqual(actualX, 95.f);
+            Assert::AreEqual(actualY, 95.f);
         }
 
 		TEST_METHOD(LookBricks_ChangeSizeByBrickTest_CheckFor8)
@@ -149,12 +149,12 @@ namespace PlayerWindowsPhone8Test
             float actualX;
             float actualY;
             object->GetScale(actualX, actualY);
-            Assert::IsTrue(TestHelper::isEqual(actualX, 100.f));
-            Assert::IsTrue(TestHelper::isEqual(actualY, 100.f));
+            Assert::AreEqual(actualX, 100.f);
+            Assert::AreEqual(actualY, 100.f);
             brick->Execute();
             object->GetScale(actualX, actualY);
-            Assert::IsTrue(TestHelper::isEqual(actualX, 108.f));
-            Assert::IsTrue(TestHelper::isEqual(actualY, 108.f));
+            Assert::AreEqual(actualX, 108.f);
+            Assert::AreEqual(actualY, 108.f);
         }
 
 		TEST_METHOD(LookBricks_ChangeSizeByBrickTest_CheckFor03)
@@ -167,12 +167,12 @@ namespace PlayerWindowsPhone8Test
             float actualX;
             float actualY;
             object->GetScale(actualX, actualY);
-            Assert::IsTrue(TestHelper::isEqual(actualX, 100.f));
-            Assert::IsTrue(TestHelper::isEqual(actualY, 100.f));
+            Assert::AreEqual(actualX, 100.f);
+            Assert::AreEqual(actualY, 100.f);
             brick->Execute();
             object->GetScale(actualX, actualY);
-            Assert::IsTrue(TestHelper::isEqual(actualX, 99.3f));
-            Assert::IsTrue(TestHelper::isEqual(actualY, 99.3f));
+            Assert::AreEqual(actualX, 99.3f);
+            Assert::AreEqual(actualY, 99.3f);
         }
 
 		TEST_METHOD(LookBricks_ChangeSizeByBrickTest_CheckForVariousChanges)
@@ -184,40 +184,40 @@ namespace PlayerWindowsPhone8Test
             float actualX;
             float actualY;
             object->GetScale(actualX, actualY);
-            Assert::IsTrue(TestHelper::isEqual(actualX, 100.f));
-            Assert::IsTrue(TestHelper::isEqual(actualY, 100.f));
+            Assert::AreEqual(actualX, 100.f);
+            Assert::AreEqual(actualY, 100.f);
             brick->Execute();
             object->GetScale(actualX, actualY);
-            Assert::IsTrue(TestHelper::isEqual(actualX, 100.f));
-            Assert::IsTrue(TestHelper::isEqual(actualY, 100.f));
+            Assert::AreEqual(actualX, 100.f);
+            Assert::AreEqual(actualY, 100.f);
 
 			formulaTree = new FormulaTree("NUMBER", "-5");
 			brick = new ChangeSizeByBrick(formulaTree, script);
 			brick->Execute();
             object->GetScale(actualX, actualY);
-            Assert::IsTrue(TestHelper::isEqual(actualX, 95.f));
-            Assert::IsTrue(TestHelper::isEqual(actualY, 95.f));
+            Assert::AreEqual(actualX, 95.f);
+            Assert::AreEqual(actualY, 95.f);
 
 			formulaTree = new FormulaTree("NUMBER", "3");
 			brick = new ChangeSizeByBrick(formulaTree, script);
 			brick->Execute();
             object->GetScale(actualX, actualY);
-            Assert::IsTrue(TestHelper::isEqual(actualX, 98.f));
-            Assert::IsTrue(TestHelper::isEqual(actualY, 98.f));
+            Assert::AreEqual(actualX, 98.f);
+            Assert::AreEqual(actualY, 98.f);
 
 			formulaTree = new FormulaTree("NUMBER", "-2.8");
 			brick = new ChangeSizeByBrick(formulaTree, script);
 			brick->Execute();
             object->GetScale(actualX, actualY);
-            Assert::IsTrue(TestHelper::isEqual(actualX, 95.2f));
-            Assert::IsTrue(TestHelper::isEqual(actualY, 95.2f));
+            Assert::AreEqual(actualX, 95.2f);
+            Assert::AreEqual(actualY, 95.2f);
 
 			formulaTree = new FormulaTree("NUMBER", "1.9");
 			brick = new ChangeSizeByBrick(formulaTree, script);
 			brick->Execute();
             object->GetScale(actualX, actualY);
-            Assert::IsTrue(TestHelper::isEqual(actualX, 97.1f));
-            Assert::IsTrue(TestHelper::isEqual(actualY, 97.1f));
+            Assert::AreEqual(actualX, 97.1f);
+            Assert::AreEqual(actualY, 97.1f);
         }
 
 		TEST_METHOD(LookBricks_CostumeBrick)
@@ -273,9 +273,9 @@ namespace PlayerWindowsPhone8Test
 			auto script = shared_ptr<Script>(new StartScript(object));
 			HideBrick *brick = new HideBrick(script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 1.0f));
+			Assert::AreEqual(object->GetTransparency(), 1.0f);
         }
 
 		TEST_METHOD(LookBricks_NextLookBrick)
@@ -334,9 +334,9 @@ namespace PlayerWindowsPhone8Test
 			FormulaTree *formulaTree = new FormulaTree("NUMBER", "100");
 			SetGhostEffectBrick *brick = new SetGhostEffectBrick(formulaTree, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 1.0f));
+			Assert::AreEqual(object->GetTransparency(), 1.0f);
         }
 
 		TEST_METHOD(LookBricks_SetGhostEffectBrick_CheckForZeroPercent)
@@ -346,9 +346,9 @@ namespace PlayerWindowsPhone8Test
 			FormulaTree *formulaTree = new FormulaTree("NUMBER", "0");
 			SetGhostEffectBrick *brick = new SetGhostEffectBrick(formulaTree, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
         }
 
 		TEST_METHOD(LookBricks_SetGhostEffectBrick_CheckForOverflow)
@@ -358,9 +358,9 @@ namespace PlayerWindowsPhone8Test
 			FormulaTree *formulaTree = new FormulaTree("NUMBER", "300");
 			SetGhostEffectBrick *brick = new SetGhostEffectBrick(formulaTree, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 1.0f));
+			Assert::AreEqual(object->GetTransparency(), 1.0f);
         }
 
 		TEST_METHOD(LookBricks_SetGhostEffectBrick_CheckFor50Percent)
@@ -370,9 +370,9 @@ namespace PlayerWindowsPhone8Test
 			FormulaTree *formulaTree = new FormulaTree("NUMBER", "50");
 			SetGhostEffectBrick *brick = new SetGhostEffectBrick(formulaTree, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.5f));
+			Assert::AreEqual(object->GetTransparency(), 0.5f);
         }
 
 		TEST_METHOD(LookBricks_SetGhostEffectBrick_CheckForVariousChanges)
@@ -382,19 +382,19 @@ namespace PlayerWindowsPhone8Test
 			FormulaTree *formulaTree = new FormulaTree("NUMBER", "30");
 			SetGhostEffectBrick *brick = new SetGhostEffectBrick(formulaTree, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.3f));
+			Assert::AreEqual(object->GetTransparency(), 0.3f);
 
 			formulaTree = new FormulaTree("NUMBER", "40");
 			brick = new SetGhostEffectBrick(formulaTree, script);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.4f));
+			Assert::AreEqual(object->GetTransparency(), 0.4f);
 
 			formulaTree = new FormulaTree("NUMBER", "-10");
 			brick = new SetGhostEffectBrick(formulaTree, script);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
         }
 
 		TEST_METHOD(LookBricks_SetGhostEffectBrick_CheckForUnderflow)
@@ -404,9 +404,9 @@ namespace PlayerWindowsPhone8Test
 			FormulaTree *formulaTree = new FormulaTree("NUMBER", "-300");
 			SetGhostEffectBrick *brick = new SetGhostEffectBrick(formulaTree, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			Assert::AreEqual(object->GetTransparency(), 0.0f);
         }
 
 		TEST_METHOD(LookBricks_SetSizeToBrick_CheckForZero)
