@@ -1,6 +1,8 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using System.IO;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Storage;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -27,8 +29,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 if (value == _currentProgram)
                     return;
 
-                _currentProgram = value;             
-                ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                _currentProgram = value;
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
                     RaisePropertyChanged(() => CurrentProgram));
             }
         }
@@ -105,14 +107,34 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 }
                 else
                 {
+                    var oldProgramPath = CurrentProgram.BasePath;
                     CurrentProgramHeader.ProjectName = ProgramName;
-                    await CurrentProgram.SetProgramNameAndRenameDirectory(ProgramName);
                     CurrentProgram.Description = ProgramDescription;
                     await CurrentProgram.Save();
+                    
+                    var programChangedMessage1 = new GenericMessage<Program>(null);
+                        Messenger.Default.Send(programChangedMessage1, 
+                            ViewModelMessagingToken.CurrentProgramChangedListener);
+
+                    using (var storage = StorageSystem.GetStorage())
+                    {
+                        await storage.RenameDirectoryAsync(oldProgramPath, ProgramName);
+                    }
+                    
+                    var programChangedMessage2 = new GenericMessage<Program>(null);
+                    Messenger.Default.Send(programChangedMessage2,
+                        ViewModelMessagingToken.CurrentProgramChangedListener);
+
+                    await App.SaveContext(CurrentProgram);
+
+                    var localProgramsChangedMessage = new MessageBase();
+                    Messenger.Default.Send(localProgramsChangedMessage,
+                            ViewModelMessagingToken.LocalProgramsChangedListener);
+
+                    base.GoBackAction();
                 }
             }
-            base.GoBackAction();
-            await App.SaveContext(CurrentProgram);
+
         }
 
         private void CancelAction()
@@ -150,9 +172,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<LocalProgramHeader>>(this, 
+            Messenger.Default.Register<GenericMessage<LocalProgramHeader>>(this,
                 ViewModelMessagingToken.CurrentProgramHeaderChangedListener, CurrentProgramHeaderChangedMessageAction);
-            Messenger.Default.Register<GenericMessage<Program>>(this, 
+            Messenger.Default.Register<GenericMessage<Program>>(this,
                 ViewModelMessagingToken.CurrentProgramChangedListener, CurrentProgramChangedMessageAction);
         }
 
