@@ -212,9 +212,9 @@ namespace PlayerWindowsPhone8Test
             tree->GetRightChild()->SetRightChild(new FormulaTree("NUMBER", "3.5"));
             float expected = 11.7f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            Assert::AreEqual(expected, actual);
         }
-
+		
         TEST_METHOD(Formula_Basic_PLUSwithMINUS_float)
         {
             Interpreter *interpreter = Interpreter::Instance();
@@ -231,7 +231,7 @@ namespace PlayerWindowsPhone8Test
             tree->GetRightChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
             float expected = 10.7f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(Formula_Basic_MINUS_float)
@@ -251,9 +251,9 @@ namespace PlayerWindowsPhone8Test
             tree->SetRightChild(new FormulaTree("OPERATOR", "MINUS"));
             tree->GetRightChild()->SetLeftChild(new FormulaTree("NUMBER", "1.0"));
             tree->GetRightChild()->SetRightChild(new FormulaTree("NUMBER", "3.5"));
-            float expected = 2.7f;
+            float expected = 9.7f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsFalse(TestHelper::isEqual(expected, actual));
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(Formula_Basic_MINUS2_float)
@@ -269,7 +269,7 @@ namespace PlayerWindowsPhone8Test
             tree->SetRightChild(new FormulaTree("NUMBER", "3.5"));
             double expected = 2.7;
             double actual = interpreter->EvaluateFormula(tree, object);
-            //Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            //Assert::AreEqual(expected, actual));
 			Assert::AreEqual(expected, actual);
         }
 
@@ -284,7 +284,7 @@ namespace PlayerWindowsPhone8Test
             tree->SetRightChild(new FormulaTree("NUMBER", "1.5"));
             float expected = 5.7f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(Formula_Basic_MINUSsimple2_float)
@@ -298,7 +298,7 @@ namespace PlayerWindowsPhone8Test
             tree->SetRightChild(new FormulaTree("NUMBER", "10.5"));
             float expected = -3.3f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(Formula_Basic_MINUSwithMINUS_float)
@@ -317,7 +317,7 @@ namespace PlayerWindowsPhone8Test
             tree->GetRightChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));   
             float expected = 3.7f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(Formula_Basic_MULT_float)
@@ -333,7 +333,7 @@ namespace PlayerWindowsPhone8Test
             tree->GetRightChild()->SetRightChild(new FormulaTree("NUMBER", "3.5"));
             float expected = 25.2f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));   
+            Assert::AreEqual(expected, actual);   
         }
 
         TEST_METHOD(Formula_Basic_MULTsimple_float)
@@ -347,7 +347,7 @@ namespace PlayerWindowsPhone8Test
             tree->SetRightChild(new FormulaTree("NUMBER", "3.4"));
             float expected = 24.48f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));  
+            Assert::AreEqual(expected, actual);  
         }
 
         TEST_METHOD(Formula_Basic_MULTwithMINUS_float)
@@ -366,7 +366,7 @@ namespace PlayerWindowsPhone8Test
             tree->GetRightChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));   
             float expected = -25.2f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(Formula_Basic_DIVIDE_float)
@@ -380,7 +380,7 @@ namespace PlayerWindowsPhone8Test
             tree->SetRightChild(new FormulaTree("NUMBER", "2.0"));
             float expected = 3.6f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            //Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            //Assert::AreEqual(expected, actual));
 			Assert::AreEqual(expected, actual);
         }
 
@@ -437,7 +437,7 @@ namespace PlayerWindowsPhone8Test
             tree->SetRightChild(new FormulaTree("NUMBER", "3.0"));
             float expected = 9.261f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(Formula_Basic_POW2_float)
@@ -451,7 +451,7 @@ namespace PlayerWindowsPhone8Test
             tree->SetRightChild(new FormulaTree("NUMBER", "0.0"));
             float expected = 1.0f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(Formula_Basic_POW3_float)
@@ -465,7 +465,7 @@ namespace PlayerWindowsPhone8Test
             tree->SetRightChild(new FormulaTree("NUMBER", "3.4"));
             float expected = 0.0f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(Formula_Basic_POW4_float)
@@ -479,7 +479,7 @@ namespace PlayerWindowsPhone8Test
             tree->SetRightChild(new FormulaTree("NUMBER", "3.4"));
             float expected = 121.18953325391327628525330849374f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(Formula_Basic_BRACKET_int)
@@ -513,7 +513,7 @@ namespace PlayerWindowsPhone8Test
             tree->GetRightChild()->GetRightChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
             float expected = 4.0;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(Formula_Basic_MIXEDwithBracket_float)
@@ -532,8 +532,8 @@ namespace PlayerWindowsPhone8Test
             tree->GetRightChild()->GetRightChild()->GetRightChild()->SetRightChild(new FormulaTree("NUMBER", "2"));
             float expected = 11.0f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            Assert::AreEqual(expected, actual);
         }
-
+		
 	};
 }
