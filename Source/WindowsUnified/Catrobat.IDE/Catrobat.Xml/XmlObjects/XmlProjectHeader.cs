@@ -51,6 +51,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             }
         }
 
+        // TODO: create new ProgramHeader class and move this code to the new class
         private void AutoFill()
         {
             DateTimeUpload = "";
@@ -62,6 +63,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             Tags = "";
             Url = "http://pocketcode.org/details/871";
             UserHandle = "";
+            ScreenWidth = 480;
+            ScreenHeight = 800;
         }
 
         //private void UpdateSystemInformation()

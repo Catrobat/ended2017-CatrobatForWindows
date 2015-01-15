@@ -59,7 +59,7 @@ namespace Catrobat.IDE.Core.Resources
 
                             var xmlProgram = new XmlProgram(xml)
                             {
-                                ProjectHeader = {ProgramName = projectName}
+                                ProgramHeader = {ProgramName = projectName}
                             };
 
 
