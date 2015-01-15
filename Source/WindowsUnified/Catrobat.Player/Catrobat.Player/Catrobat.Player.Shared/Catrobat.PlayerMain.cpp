@@ -263,7 +263,7 @@ bool Catrobat_PlayerMain::Render()
     context->OMSetRenderTargets(1, targets, m_deviceResources->GetDepthStencilView());
 
     // Clear the back buffer and depth stencil view.
-    context->ClearRenderTargetView(m_deviceResources->GetBackBufferRenderTargetView(), DirectX::Colors::CornflowerBlue);
+	context->ClearRenderTargetView(m_deviceResources->GetBackBufferRenderTargetView(), DirectX::Colors::White);
     context->ClearDepthStencilView(m_deviceResources->GetDepthStencilView(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
     // Render the scene objects.
@@ -272,7 +272,7 @@ bool Catrobat_PlayerMain::Render()
     {
         m_basic2dRenderer->Render();
     }
-    m_fpsTextRenderer->Render();
+    //m_fpsTextRenderer->Render();
 
     return true;
 }
