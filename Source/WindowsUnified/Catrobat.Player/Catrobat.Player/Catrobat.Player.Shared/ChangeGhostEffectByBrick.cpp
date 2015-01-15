@@ -12,5 +12,5 @@ ChangeGhostEffectByBrick::ChangeGhostEffectByBrick(FormulaTree *transparency, st
 
 void ChangeGhostEffectByBrick::Execute()
 {
-	m_parent->GetParent()->SetTransparency(m_parent->GetParent()->GetTransparency() + (Interpreter::Instance()->EvaluateFormulaToFloat(m_transparency, GetParent()->GetParent()) / 100.0f));
+	m_parent->GetParent()->SetTransparency(m_parent->GetParent()->GetTransparency() + (Interpreter::Instance()->EvaluateFormulaToFloat(m_transparency, GetParent()->GetParent()) / 100.f));
 }
