@@ -104,24 +104,24 @@ namespace Catrobat.IDE.Core.Models
 
         #region Strange properties
 
-        private LocalProgramHeader _projectDummyHeader;
+        private LocalProgramHeader _localProgramHeader;
         public LocalProgramHeader LocalProgramHeader
         {
             get
             {
-                if (_projectDummyHeader != null)
-                    return _projectDummyHeader;
+                if (_localProgramHeader != null)
+                    return _localProgramHeader;
 
-                _projectDummyHeader = new LocalProgramHeader
+                _localProgramHeader = new LocalProgramHeader
                 {
                     ProjectName = Name, 
                     Screenshot = Screenshot
                 };
 
-                return _projectDummyHeader;
+                return _localProgramHeader;
             }
 
-            set { _projectDummyHeader = value; }
+            set { _localProgramHeader = value; }
         }
 
         #endregion

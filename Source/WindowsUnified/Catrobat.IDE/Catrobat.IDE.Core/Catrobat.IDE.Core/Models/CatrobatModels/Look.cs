@@ -44,7 +44,7 @@ namespace Catrobat.IDE.Core.Models
                         if (_fileName != null)
                         {
                             fileName = Path.Combine(StorageConstants.ProgramsPath,
-                             XmlParserTempProjectHelper.Program.ProjectHeader.ProgramName,
+                             XmlParserTempProjectHelper.Program.ProgramHeader.ProgramName,
                              StorageConstants.ProgramLooksPath, _fileName);
 
                             //XmlParserTempProjectHelper.Project.BasePath + "/" + 

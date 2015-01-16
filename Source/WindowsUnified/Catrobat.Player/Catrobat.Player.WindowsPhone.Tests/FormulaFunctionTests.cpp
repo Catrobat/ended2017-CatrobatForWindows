@@ -14,7 +14,7 @@ namespace PlayerWindowsPhone8Test
     TEST_CLASS(FormulaFunctionTests)
     {
     public:
-
+		
         TEST_METHOD(FunctionTrue)
         {
             Interpreter *interpreter = Interpreter::Instance();
@@ -73,9 +73,9 @@ namespace PlayerWindowsPhone8Test
             FormulaTree *formula = new FormulaTree("FUNCTION", "SIN");
             formula->SetLeftChild(new FormulaTree("NUMBER", "30.0"));
 
-            double expected = 0.5;
-            double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            float expected = (float)0.5;
+            float actual = (float)interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(FunctionCOS1)
@@ -101,7 +101,7 @@ namespace PlayerWindowsPhone8Test
 
             double expected = 0.0;
             double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(FunctionCOS3)
@@ -112,9 +112,9 @@ namespace PlayerWindowsPhone8Test
             FormulaTree *formula = new FormulaTree("FUNCTION", "COS");
             formula->SetLeftChild(new FormulaTree("NUMBER", "60.0"));
 
-            double expected = 0.5;
-            double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            float expected = (float)0.5;
+            float actual = (float)interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(FunctionCOS4)
@@ -125,9 +125,9 @@ namespace PlayerWindowsPhone8Test
             FormulaTree *formula = new FormulaTree("FUNCTION", "COS");
             formula->SetLeftChild(new FormulaTree("NUMBER", "45.0"));
 
-            double expected = 0.707106781;
-            double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            float expected = (float)0.707106781;
+            float actual = (float)interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(FunctionCOS5)
@@ -139,9 +139,9 @@ namespace PlayerWindowsPhone8Test
             formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
             formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "4.0"));
 
-            double expected = 0.99756405;
-            double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            float expected = (float)0.99756405;
+            float actual = (float)interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(FunctionCOS6)
@@ -191,9 +191,9 @@ namespace PlayerWindowsPhone8Test
             FormulaTree *formula = new FormulaTree("FUNCTION", "TAN");
             formula->SetLeftChild(new FormulaTree("NUMBER", "45.0"));
 
-            double expected = 1.0;
-            double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            float expected = (float)1.0;
+            float actual = (float)interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(FunctionLN1)
@@ -217,9 +217,9 @@ namespace PlayerWindowsPhone8Test
             FormulaTree *formula = new FormulaTree("FUNCTION", "LN");
             formula->SetLeftChild(new FormulaTree("NUMBER", "2.0"));
 
-            double expected = 0.693147181;
-            double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            float expected = (float)0.693147181;
+            float actual = (float)interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(FunctionLN3)
@@ -230,9 +230,9 @@ namespace PlayerWindowsPhone8Test
             FormulaTree *formula = new FormulaTree("FUNCTION", "LN");
             formula->SetLeftChild(new FormulaTree("NUMBER", "2.718281828"));
 
-            double expected = 1.0;
-            double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            float expected = (float)1.0;
+            float actual = (float)interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(FunctionLN4)
@@ -282,9 +282,9 @@ namespace PlayerWindowsPhone8Test
             FormulaTree *formula = new FormulaTree("FUNCTION", "LOG");
             formula->SetLeftChild(new FormulaTree("NUMBER", "2.0"));
 
-            double expected = 0.301029996;
-            double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            float expected = (float)0.301029996;
+            float actual = (float)interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(FunctionLOG4)
@@ -349,7 +349,7 @@ namespace PlayerWindowsPhone8Test
 
             double expected = 12.3;
             double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual((float)expected, (float)actual));
+            Assert::AreEqual((float)expected, (float)actual);
         }
 
         TEST_METHOD(FunctionRAND)
@@ -527,9 +527,9 @@ namespace PlayerWindowsPhone8Test
 
             FormulaTree *formula = new FormulaTree("FUNCTION", "PI");
 
-            double expected = 3.141592654;
-            double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            float expected = (float)3.141592654;
+            float actual = (float)interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(FunctionMOD1)
@@ -569,9 +569,9 @@ namespace PlayerWindowsPhone8Test
             formula->SetLeftChild(new FormulaTree("NUMBER", "17.4"));
             formula->SetRightChild(new FormulaTree("NUMBER", "3.0"));
 
-            double expected = 2.4;
-            double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            float expected = (float)2.4;
+            float actual = (float)interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(FunctionMOD4)
@@ -614,9 +614,9 @@ namespace PlayerWindowsPhone8Test
             formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "17.4"));
             formula->SetRightChild(new FormulaTree("NUMBER", "3.0"));
 
-            double expected = 0.6;
-            double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            float expected = (float)0.6;
+            float actual = (float)interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(FunctionMOD7)
@@ -686,7 +686,7 @@ namespace PlayerWindowsPhone8Test
 
             double expected = 30.0;
             double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual((float)expected, (float)actual));
+            Assert::AreEqual((float)expected, (float)actual);
         }
 
         TEST_METHOD(FunctionARCSIN4)
@@ -699,7 +699,7 @@ namespace PlayerWindowsPhone8Test
 
             double expected = 23.57817848;
             double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual((float)expected, (float)actual));
+            Assert::AreEqual((float)expected, (float)actual);
         }
 
         TEST_METHOD(FunctionARCSIN5)
@@ -739,7 +739,7 @@ namespace PlayerWindowsPhone8Test
 
             double expected = 60.0;
             double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual((float)expected, (float)actual));
+            Assert::AreEqual((float)expected, (float)actual);
         }
 
         TEST_METHOD(FunctionARCCOS3)
@@ -766,7 +766,7 @@ namespace PlayerWindowsPhone8Test
 
             double expected = 120.0;
             double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual((float)expected, (float)actual));
+            Assert::AreEqual((float)expected, (float)actual);
         }
 
         TEST_METHOD(FunctionARCCOS5)
@@ -793,7 +793,7 @@ namespace PlayerWindowsPhone8Test
 
             double expected = 66.42182152;
             double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual((float)expected, (float)actual));
+            Assert::AreEqual((float)expected, (float)actual);
         }
 
         TEST_METHOD(FunctionARCTAN1)
@@ -846,7 +846,7 @@ namespace PlayerWindowsPhone8Test
 
             double expected = 26.56505118;
             double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual((float)expected, (float)actual));
+            Assert::AreEqual((float)expected, (float)actual);
         }
 
         TEST_METHOD(FunctionEXP1)
@@ -872,7 +872,7 @@ namespace PlayerWindowsPhone8Test
 
             double expected = 2.718281828;
             double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual((float)expected, (float)actual));
+            Assert::AreEqual((float)expected, (float)actual);
         }
 
         TEST_METHOD(FunctionEXP3)
@@ -885,7 +885,7 @@ namespace PlayerWindowsPhone8Test
 
             double expected = 7.389056099;
             double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual((float)expected, (float)actual));
+            Assert::AreEqual((float)expected, (float)actual);
         }
 
         TEST_METHOD(FunctionEXP4)
@@ -899,7 +899,7 @@ namespace PlayerWindowsPhone8Test
 
             double expected = 0.367879441;
             double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::IsTrue(TestHelper::isEqual((float)expected, (float)actual));
+            Assert::AreEqual((float)expected, (float)actual);
         }
 
         TEST_METHOD(FunctionMAX1)
@@ -1019,6 +1019,6 @@ namespace PlayerWindowsPhone8Test
             double actual = interpreter->EvaluateFormula(formula, object);
             Assert::AreEqual(expected, actual);
         }
-
+		
     };
 }

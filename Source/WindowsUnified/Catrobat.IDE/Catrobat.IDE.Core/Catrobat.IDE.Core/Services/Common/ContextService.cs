@@ -180,7 +180,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public async Task<Program> CreateEmptyProgram(string newProgramName)
         {
-            // TODO: move this code int a ProjectGenerator see ProjectGeneratorWhackAMole
+            // TODO: move this code into a ProjectGenerator see ProjectGeneratorWhackAMole
 
             var newProject = new Program
             {
@@ -252,7 +252,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 var xml = await storage.ReadTextFileAsync(tempXmlPath);
                 var xmlProgram = new XmlProgram(xml)
                 {
-                    ProjectHeader = { ProgramName = newProgramName }
+                    ProgramHeader = { ProgramName = newProgramName }
                 };
 
                 var path = Path.Combine(StorageConstants.ProgramsPath,
@@ -290,7 +290,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 var xml = await storage.ReadTextFileAsync(tempXmlPath);
                 var xmlProgram = new XmlProgram(xml)
                 {
-                    ProjectHeader = {ProgramName = newProgramName}
+                    ProgramHeader = {ProgramName = newProgramName}
                 };
 
                 var path = Path.Combine(StorageConstants.ProgramsPath, 
@@ -375,26 +375,26 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public void UpdateProgramHeader(XmlProgram program)
         {
-            program.ProjectHeader.ApplicationBuildName = ServiceLocator.
+            program.ProgramHeader.ApplicationBuildName = ServiceLocator.
                 SystemInformationService.CurrentApplicationBuildName;
 
-            program.ProjectHeader.ApplicationBuildNumber = ServiceLocator.
+            program.ProgramHeader.ApplicationBuildNumber = ServiceLocator.
                 SystemInformationService.CurrentApplicationBulidNumber;
 
-            program.ProjectHeader.ApplicationName = XmlConstants.ApplicationName;
+            program.ProgramHeader.ApplicationName = XmlConstants.ApplicationName;
 
-            program.ProjectHeader.ApplicationVersion = ServiceLocator.
+            program.ProgramHeader.ApplicationVersion = ServiceLocator.
                 SystemInformationService.CurrentApplicationVersion;
 
-            program.ProjectHeader.CatrobatLanguageVersion = XmlConstants.TargetIDEVersion;
+            program.ProgramHeader.CatrobatLanguageVersion = XmlConstants.TargetIDEVersion;
 
-            program.ProjectHeader.DeviceName = ServiceLocator.
+            program.ProgramHeader.DeviceName = ServiceLocator.
                 SystemInformationService.DeviceName;
 
-            program.ProjectHeader.Platform = ServiceLocator.
+            program.ProgramHeader.Platform = ServiceLocator.
                 SystemInformationService.PlatformName;
 
-            program.ProjectHeader.PlatformVersion = ServiceLocator.
+            program.ProgramHeader.PlatformVersion = ServiceLocator.
                 SystemInformationService.PlatformVersion; ;
             
             // TODO: check if and how the following properties should be set

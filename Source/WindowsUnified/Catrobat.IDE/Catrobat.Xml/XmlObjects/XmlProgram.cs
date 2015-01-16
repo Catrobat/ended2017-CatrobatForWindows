@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         public List<string> BroadcastMessages { get; private set; }
 
-        public XmlProjectHeader ProjectHeader { get; set; }
+        public XmlProjectHeader ProgramHeader { get; set; }
 
         public XmlSpriteList SpriteList { get; set; }
 
@@ -49,7 +49,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             XmlParserTempProjectHelper.Program = this;
 
             var project = document.Element("program");
-            ProjectHeader = new XmlProjectHeader(project.Element("header"));
+            ProgramHeader = new XmlProjectHeader(project.Element("header"));
             SpriteList = new XmlSpriteList(project.Element("objectList"));
             VariableList = new XmlVariableList(project.Element("variables"));
 
@@ -64,7 +64,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             XmlParserTempProjectHelper.Program = this;
 
             var xProject = new XElement("program");
-            xProject.Add(ProjectHeader.CreateXml());
+            xProject.Add(ProgramHeader.CreateXml());
             xProject.Add(SpriteList.CreateXml());
             xProject.Add(VariableList.CreateXml());
             document.Add(xProject);

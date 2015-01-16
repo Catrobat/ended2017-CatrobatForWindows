@@ -58,9 +58,9 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
                 });
             return new Program
             {
-                Name = o.ProjectHeader.ProgramName,
-                Description = o.ProjectHeader.Description,
-                UploadHeader = (UploadHeader)uploadHeaderConverter.Convert(o.ProjectHeader, c),
+                Name = o.ProgramHeader.ProgramName,
+                Description = o.ProgramHeader.Description,
+                UploadHeader = (UploadHeader)uploadHeaderConverter.Convert(o.ProgramHeader, c),
                 GlobalVariables = o.VariableList.ProgramVariableList.UserVariables.Select(variable => globalVariables[variable]).ToObservableCollection(),
                 /*BroadcastMessages = contextBase.BroadcastMessages.Values.ToObservableCollection(),*/
                 Sprites = o.SpriteList.Sprites.Select(sprite => sprites[sprite]).ToObservableCollection()
@@ -112,7 +112,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
             header.Description = m.Description;
             var result = new XmlProgram
             {
-                ProjectHeader = header,
+                ProgramHeader = header,
                 VariableList = new XmlVariableList
                 {
                     ProgramVariableList = new XmlProgramVariableList

@@ -69,7 +69,7 @@ namespace Catrobat.IDE.Core.Services.Common
             try
             {
                 convertedProgram = new XmlProgram(converterResult.Xml);
-                programName = convertedProgram.ProjectHeader.ProgramName;
+                programName = convertedProgram.ProgramHeader.ProgramName;
             }
             catch (Exception)
             {
