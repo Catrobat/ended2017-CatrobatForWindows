@@ -28,6 +28,7 @@
         ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
         ItemTemplate="{StaticResource SpriteItemTemplate}"                                          
         HorizontalAlignment="Center" Tapped="SpriteItem_OnTapped"
+        ItemWidthPortrait="370" ItemWidthLandscape="450"
             />
 
             <TextBlock Grid.Row="1"
