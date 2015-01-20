@@ -30,7 +30,7 @@
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_cursor.png" Stretch="Uniform" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnPipette" BorderBrush="White" Click="Button_OnClick" Content="Pipette" FontSize="20" Grid.Column="1" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="True" Margin="0,99,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnPipette_Holding">
+                    <Button x:Name="BtnPipette" BorderBrush="White" Click="Button_OnClick" Content="Pipette" FontSize="20" Grid.Column="1" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="False" Margin="0,99,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnPipette_Holding">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_pipette.png" Stretch="Uniform" />
                         </Button.Background>
@@ -60,7 +60,7 @@
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_import_image.png" Stretch="Uniform" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnCrop"  BorderBrush="White" Click="Button_OnClick" Content="Zuschneiden" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="True" Margin="0,324,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnZuschneiden_Holding">
+                    <Button x:Name="BtnCrop"  BorderBrush="White" Click="Button_OnClick" Content="Zuschneiden" FontSize="20" Grid.Column="2" Grid.Row="2" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="False" Margin="0,324,0,0" Padding="35,0, 0, 0" VerticalAlignment="Top" Width="187" Holding="BtnZuschneiden_Holding">
                         <Button.Background>
                             <ImageBrush AlignmentX="Left" ImageSource="/Assets/ToolMenu/icon_menu_crop.png" Stretch="Uniform" />
                         </Button.Background>

@@ -26,7 +26,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             }
             Point coordinates = (Point)arg;
             
-            //PixelData.PixelData myPixelData = new PixelData.PixelData();
+            PixelData.PixelData myPixelData = new PixelData.PixelData();
             //SolidColorBrush brush = myPixelData.GetPixel(PocketPaintApplication.GetInstance().Bitmap, (int)coordinates.X, (int)coordinates.Y);
             //PocketPaintApplication.GetInstance().PaintData.colorSelected = brush;
 
