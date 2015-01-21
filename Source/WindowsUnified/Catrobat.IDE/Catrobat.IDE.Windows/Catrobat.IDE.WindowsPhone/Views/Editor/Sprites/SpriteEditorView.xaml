@@ -41,7 +41,7 @@
             VerticalItemMargin="-10"
             ReorderEnabled="true" 
             HorizontalAlignment="Center"
-            ItemWidthPortrait="380" ItemWidthLandscape="450"
+            ItemWidthPortrait="370" ItemWidthLandscape="450"
               />
 
 
@@ -77,7 +77,7 @@
             ItemTemplate="{StaticResource LookItemControlTemplate}"                 
             HorizontalAlignment="Center"
             Tapped="LookItem_OnTapped" ReorderEnabled="True"
-            ItemWidthPortrait="380" ItemWidthLandscape="450"
+            ItemWidthPortrait="370" ItemWidthLandscape="450"
               />
           <TextBlock
             Text ="{Binding Resources.Editor_ClickPlusToAddLook, 
@@ -104,7 +104,7 @@
             ReorderEnabled="true" 
             HorizontalAlignment="Center"
             RightTapped="SoundItem_OnRightTapped"
-            ItemWidthPortrait="380" ItemWidthLandscape="450"
+            ItemWidthPortrait="370" ItemWidthLandscape="450"
               />
           <TextBlock
               Text ="{Binding Resources.Editor_ClickPlusToAddSound, Source={StaticResource LocalizedStrings}}"

@@ -42,7 +42,7 @@
                 ItemTapped="CatrobatListView_OnItemTapped"
                 ReorderEnabled="False"
                 GroupingEnabled="False"
-                ItemWidthPortrait="380" ItemWidthLandscape="450" 
+                ItemWidthPortrait="370" ItemWidthLandscape="450" 
             />
         </Grid>
   </Grid>
