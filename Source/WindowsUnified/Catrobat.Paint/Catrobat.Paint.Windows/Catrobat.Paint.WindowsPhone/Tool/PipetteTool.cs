@@ -18,7 +18,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
         }
 
-        public override void HandleUp(object arg)
+        public async override void HandleUp(object arg)
         {
             if (!(arg is Point))
             {
@@ -27,8 +27,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             Point coordinates = (Point)arg;
             
             PixelData.PixelData myPixelData = new PixelData.PixelData();
-            //SolidColorBrush brush = myPixelData.GetPixel(PocketPaintApplication.GetInstance().Bitmap, (int)coordinates.X, (int)coordinates.Y);
-            //PocketPaintApplication.GetInstance().PaintData.colorSelected = brush;
+            PocketPaintApplication.GetInstance().PaintData.colorSelected = await myPixelData.GetPixel(PocketPaintApplication.GetInstance().Bitmap, (int)coordinates.X, (int)coordinates.Y);
+
 
         //PocketPaintApplication.GetInstance().PaintData.ColorSelected =
         //  new SolidColorBrush(PocketPaintApplication.GetInstance().Bitmap.);      
