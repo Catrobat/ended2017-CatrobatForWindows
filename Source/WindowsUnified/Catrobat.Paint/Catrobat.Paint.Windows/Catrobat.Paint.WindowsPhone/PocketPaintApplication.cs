@@ -87,6 +87,8 @@ namespace Catrobat.Paint.WindowsPhone
 
         public CommandBar BarStandard { get; set; }
 
+        public PhotoControl PhoneControl { get; set; }
+
         // TODO: public Catrobat.Paint.Phone.Controls.AppBar.ApplicationBarTop ApplicationBarTop { get; set; }
 
         public WriteableBitmap Bitmap { get; private set; }

@@ -1,0 +1,33 @@
+﻿<UserControl
+    x:Class="Catrobat.Paint.WindowsPhone.Controls.UserControls.PhotoControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="640"
+    d:DesignWidth="384">
+
+    <Grid>
+        <!--<Grid x:Name="GridPhotoCapture" Height="640" Width="384" Grid.RowSpan="2">
+            --><!--<Rectangle Fill="Red" HorizontalAlignment="Left" Height="585" Stroke="Black" VerticalAlignment="Top" Width="384" Margin="0,0,-1,0"/>--><!--
+            <CaptureElement x:Name="cptElementShowPreview" Height="384" HorizontalAlignment="Left" VerticalAlignment="Top" Width="585" RenderTransformOrigin="0.5,0.5" Margin="-101,98,-100,0" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                <CaptureElement.RenderTransform>
+                    <CompositeTransform Rotation="-90"/>
+                </CaptureElement.RenderTransform>
+            </CaptureElement>-->
+        <Grid x:Name="GridPhotoCapture">
+            <!--<Rectangle Fill="Red" HorizontalAlignment="Left" Height="585" Stroke="Black" VerticalAlignment="Top" Width="384" Margin="0,0,-1,0"/>-->
+            <CaptureElement x:Name="cptElementShowPreview" HorizontalAlignment="Center" Stretch="UniformToFill" VerticalAlignment="Center">
+            </CaptureElement>
+
+        </Grid>
+        <Grid x:Name="GridControls" Background="Black" VerticalAlignment="Bottom" Grid.Row="1">
+            <Button x:Name="btnCancel" Content="Cancel" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="White" Click="btnCancel_Click"/>
+            <Button x:Name="btnTakePhoto" Content="Snap" Foreground="White" HorizontalAlignment="Center" BorderBrush="White" VerticalAlignment="Top" Click="btnTakePhoto_Click"/>
+            <Button x:Name="btnChangeCamera" Content="Wechseln" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="White" Click="btnChangeCamera_Click" />
+        </Grid>
+
+    </Grid>
+</UserControl>

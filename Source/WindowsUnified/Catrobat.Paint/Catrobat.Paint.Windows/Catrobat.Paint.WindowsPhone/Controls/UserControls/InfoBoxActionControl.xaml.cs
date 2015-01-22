@@ -102,5 +102,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
 
         }
+
+        private void btnNewPictureFromCamera_Click(object sender, RoutedEventArgs e)
+        {
+            PocketPaintApplication.GetInstance().InfoBoxActionControl.Visibility = Visibility.Collapsed;
+            PocketPaintApplication.GetInstance().PaintingAreaView.BottomAppBar.Visibility = Visibility.Collapsed;
+            PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Collapsed;
+            PocketPaintApplication.GetInstance().PhoneControl.Visibility = Visibility.Visible;
+            // TODO: Before you activate this line, implement the logic if the app is suspended.
+            // PocketPaintApplication.GetInstance().PhoneControl.initPhotoControl();
+        }
     }
 }

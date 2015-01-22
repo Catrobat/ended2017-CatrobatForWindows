@@ -70,6 +70,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().GridCropControl = GridCropControl;
             PocketPaintApplication.GetInstance().GridImportImageSelectionControl = GridImportImageSelectionControl;
             PocketPaintApplication.GetInstance().InfoBoxActionControl = InfoBoxActionControl;
+            PocketPaintApplication.GetInstance().PhoneControl = ucPhotoControl;
             PocketPaintApplication.GetInstance().InfoBoxControl = InfoBoxControl;
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
@@ -242,7 +243,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 changeVisibilityOfAppBars(Visibility.Visible);
                 setSizeOfPaintingAreaViewCheckered();
                 showStatusAppBar();
-
                 e.Handled = true;
             }
             else if(InfoBoxActionControl.Visibility == Visibility.Visible || InfoBoxControl.Visibility == Visibility.Visible)
@@ -251,6 +251,11 @@ namespace Catrobat.Paint.WindowsPhone.View
                 InfoBoxControl.Visibility = Visibility.Collapsed;
                 changeVisibilityOfAppBars(Visibility.Visible);
                 changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
+                e.Handled = true;
+            }
+            else if(ucPhotoControl.Visibility == Visibility.Visible)
+            {
+                PocketPaintApplication.GetInstance().PhoneControl.closePhoneControl(sender, null);
                 e.Handled = true;
             }
             else

@@ -52,21 +52,24 @@ namespace Catrobat.Paint.WindowsPhone.Listener
 
         public void BtnMoveScreenEllipse_OnClick(object sender, RoutedEventArgs e)
         {
-
-            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() != ToolType.Move)
+            ToolType currentTooltype = PocketPaintApplication.GetInstance().ToolCurrent.GetToolType();
+            if (currentTooltype!= ToolType.Move)
             {
                 //PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityGrdSliderThickness(Visibility.Collapsed);
                 PocketPaintApplication.GetInstance().SwitchTool(ToolType.Move);
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeVisibilityOfSelectionsControls(Visibility.Collapsed);
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
             }
-            else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Move)
+            else if (currentTooltype == ToolType.Move)
             {
                 if (PocketPaintApplication.GetInstance().ToolWhileMoveTool == null)
                     return;
                 PocketPaintApplication.GetInstance().SwitchTool(PocketPaintApplication.GetInstance().ToolWhileMoveTool.GetToolType());
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeVisibilityOfActiveSelectionControl(Visibility.Visible);
-                PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
+                if (currentTooltype == ToolType.Ellipse || currentTooltype == ToolType.ImportPng || currentTooltype == ToolType.Rect)
+                {
+                    PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
+                }
                 PocketPaintApplication.GetInstance().PaintingAreaView.resetActiveSelectionControl();
             }
         }
