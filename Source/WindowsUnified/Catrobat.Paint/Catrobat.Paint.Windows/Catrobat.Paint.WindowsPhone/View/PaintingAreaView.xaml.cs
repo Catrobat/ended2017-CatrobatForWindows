@@ -286,7 +286,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        private void changeVisibilityOfAppBars(Visibility visibility)
+        public void changeVisibilityOfAppBars(Visibility visibility)
         {
             appBarTop.Visibility = visibility;
             BottomAppBar.Visibility = visibility;
