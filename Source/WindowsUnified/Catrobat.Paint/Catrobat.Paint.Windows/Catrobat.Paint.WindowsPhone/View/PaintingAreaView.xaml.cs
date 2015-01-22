@@ -616,7 +616,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             AppBarButton app_btnClearElementsInWorkingSpace = new AppBarButton();
             AppBarButton app_btnSave = new AppBarButton();
             AppBarButton app_btnSaveCopy = new AppBarButton();
-            AppBarButton app_btnNewPicture = new AppBarButton();
             AppBarButton app_btnLoad = new AppBarButton();
             AppBarButton app_btnFullScreen = new AppBarButton();
             AppBarButton app_btnAbout = new AppBarButton();
@@ -631,7 +630,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
 
             app_btnClearElementsInWorkingSpace.Click += app_btnClearElementsInWorkingSpace_Click;
-            app_btnNewPicture.Click += app_btnNewPicture_Click;
             app_btnFullScreen.Click += app_btnFullScreen_Click;
             app_btnLoad.Click += app_btnLoad_Click;
             app_btnSave.Click += app_btnSave_Click;
@@ -639,7 +637,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnClearElementsInWorkingSpace.Label = "Arbeitsfläche löschen";
             app_btnSave.Label = "Speichern";
             app_btnSaveCopy.Label = "Kopie speichern";
-            app_btnNewPicture.Label = "Neues Bild";
             app_btnLoad.Label = "Laden";
             app_btnFullScreen.Label = "Vollbild";
             app_btnAbout.Label = "Über";
@@ -649,7 +646,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             cmdBar.SecondaryCommands.Add(app_btnClearElementsInWorkingSpace);
             cmdBar.SecondaryCommands.Add(app_btnSave);
             cmdBar.SecondaryCommands.Add(app_btnSaveCopy);
-            cmdBar.SecondaryCommands.Add(app_btnNewPicture);
             cmdBar.SecondaryCommands.Add(app_btnLoad);
             cmdBar.SecondaryCommands.Add(app_btnFullScreen);
 
@@ -706,12 +702,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             this.BottomAppBar.Visibility = Visibility.Collapsed;
             changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
             PocketPaintApplication.GetInstance().isLoadPictureClicked = true;
-        }
-
-        void app_btnNewPicture_Click(object sender, RoutedEventArgs e)
-        {
-            PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
-            disableToolbarsAndPaintingArea(true);
         }
 
         void app_btnFullScreen_Click(object sender, RoutedEventArgs e)

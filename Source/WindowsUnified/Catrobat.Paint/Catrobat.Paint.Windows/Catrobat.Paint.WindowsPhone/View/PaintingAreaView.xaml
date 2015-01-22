@@ -106,7 +106,6 @@
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Name="btnSave" Label="Speichern" />
                 <AppBarButton x:Name="btnSaveCopy" Label="Kopie Speichern" />
-                <AppBarButton x:Name="btnNewPicture" Label="Neues Bild" />
                 <AppBarButton x:Name="btnLoad" Label="Laden" />
                 <AppBarButton x:Name="btnFullScreen" Label="Vollbild" />
                 <AppBarButton x:Name="btnAbout" Label="Über" />
