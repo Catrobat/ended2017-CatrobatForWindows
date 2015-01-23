@@ -51,7 +51,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void btnOpenGallery_Click(object sender, RoutedEventArgs e)
         {
             PocketPaintApplication.GetInstance().InfoBoxActionControl.Visibility = Visibility.Collapsed;
-            PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = Visibility.Visible;
+            if (!PocketPaintApplication.GetInstance().isLoadPictureClicked)
+            {
+                PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = Visibility.Visible;
+            }
             PocketPaintApplication.GetInstance().PaintingAreaView.changeVisibilityOfAppBars(Visibility.Visible);
             PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
             PocketPaintApplication.GetInstance().PaintingAreaView.PickAFileButton_Click(sender, e);
@@ -113,8 +116,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().PaintingAreaView.BottomAppBar.Visibility = Visibility.Collapsed;
             PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Collapsed;
             // TODO: Before you activate this line, implement the logic if the app is suspended.
-            PocketPaintApplication.GetInstance().PhoneControl.Visibility = Visibility.Visible;
-            PocketPaintApplication.GetInstance().PhoneControl.initPhotoControl();
+            //PocketPaintApplication.GetInstance().PhoneControl.Visibility = Visibility.Visible;
+            //PocketPaintApplication.GetInstance().PhoneControl.initPhotoControl();
         }
     }
 }

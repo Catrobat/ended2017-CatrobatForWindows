@@ -33,7 +33,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
     {
         Windows.Media.Capture.MediaCapture _photoManager = null;
         MediaCaptureInitializationSettings _mediaCaptureSettings = null;
-        int activeCameraValue = 0;
+        int activeCameraValue = 1;
         bool isPreview = false;
         DeviceInformationCollection _mobileCameras = null;
         public PhotoControl()
@@ -118,7 +118,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             _mediaCaptureSettings.VideoDeviceId = _mobileCameras[activeCamera].Id;
             _mediaCaptureSettings.AudioDeviceId = "";
             _mediaCaptureSettings.StreamingCaptureMode = Windows.Media.Capture.StreamingCaptureMode.AudioAndVideo;
-            _mediaCaptureSettings.PhotoCaptureSource = Windows.Media.Capture.PhotoCaptureSource.Photo;
+            _mediaCaptureSettings.PhotoCaptureSource = Windows.Media.Capture.PhotoCaptureSource.VideoPreview;
         }
 
 
@@ -144,6 +144,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
 
                 _path.Data = myRectangleGeometry;
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
             }
             else

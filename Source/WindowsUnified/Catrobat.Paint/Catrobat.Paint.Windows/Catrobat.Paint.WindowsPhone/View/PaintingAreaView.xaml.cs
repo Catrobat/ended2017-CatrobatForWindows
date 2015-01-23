@@ -146,6 +146,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 if (PocketPaintApplication.GetInstance().isLoadPictureClicked)
                 {
+                    PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
                     RectangleGeometry myRectangleGeometry = new RectangleGeometry();
                     myRectangleGeometry.Rect = new Rect(new Point(0, 0), new Point(Window.Current.Bounds.Width, Window.Current.Bounds.Height));
 
@@ -265,6 +266,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                     resetControls(Visibility.Collapsed);
                     changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
+                    PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
                     e.Handled = true;
                 }
                 else if (GrdThicknessControl.Visibility == Visibility.Visible)
