@@ -33,13 +33,16 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
     {
         Windows.Media.Capture.MediaCapture _photoManager = null;
         MediaCaptureInitializationSettings _mediaCaptureSettings = null;
-        int activeCameraValue = 1;
+        int activeCameraValue = 0;
         bool isPreview = false;
         DeviceInformationCollection _mobileCameras = null;
+        const int BACK_CAMERA = 1;
+        const int FRONT_CAMERA = 0;
         public PhotoControl()
         {
             this.InitializeComponent();
             initDeviceInformationCollection();
+            activeCamera = FRONT_CAMERA;
         }
 
         async public void initDeviceInformationCollection()
@@ -58,8 +61,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             _photoManager = new MediaCapture();
             await _photoManager.InitializeAsync(getMediaCaptureInitializationSettings());
+            _photoManager.SetRecordRotation(VideoRotation.Clockwise90Degrees);
             // Element is in xaml (is needed to show the camera preview).
             cptElementShowPreview.Source = _photoManager;
+            cptElementShowPreview.FlowDirection = activeCamera == FRONT_CAMERA ? 
+                FlowDirection.RightToLeft : FlowDirection.LeftToRight;
             await _photoManager.StartPreviewAsync();
 
             DisplayInformation displayInfo = DisplayInformation.GetForCurrentView();
@@ -72,7 +78,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             if (_photoManager != null)
             {
-                if(activeCamera == 1)
+                if(activeCamera == FRONT_CAMERA)
                 {
                     _photoManager.SetPreviewRotation(VideoRotationLookup(sender.CurrentOrientation, true));
                 }
@@ -129,10 +135,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(
                     "photo.jpg", CreationCollisionOption.ReplaceExisting);
             await _photoManager.CapturePhotoToStorageFileAsync(imgFormat, file);
+            _photoManager.SetRecordRotation(VideoRotation.Clockwise90Degrees);
             ImageBrush fillBrush = new ImageBrush();
 
+            
             BitmapImage image = new BitmapImage();
             image.UriSource = new Uri(file.Path, UriKind.RelativeOrAbsolute);
+            
             fillBrush.ImageSource = image;
             if (PocketPaintApplication.GetInstance().isLoadPictureClicked)
             {
@@ -196,13 +205,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void changeCamera()
         {
-            if (activeCameraValue == 0)
+            if (activeCameraValue == FRONT_CAMERA)
             {
-                activeCameraValue = 1;
+                activeCameraValue = BACK_CAMERA;
             }
             else
             {
-                activeCameraValue = 0;
+                activeCameraValue = FRONT_CAMERA;
             }
         }
     }

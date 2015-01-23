@@ -626,6 +626,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             AppBarButton app_btnLoad = new AppBarButton();
             AppBarButton app_btnFullScreen = new AppBarButton();
             AppBarButton app_btnAbout = new AppBarButton();
+            AppBarButton app_btnNewPicture = new AppBarButton();
 
             app_btnClearElementsInWorkingSpace.Name = "appBarButtonClearWorkingSpace";
             app_btnSave.Name = "appbarButtonSave";
@@ -640,6 +641,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnFullScreen.Click += app_btnFullScreen_Click;
             app_btnLoad.Click += app_btnLoad_Click;
             app_btnSave.Click += app_btnSave_Click;
+            app_btnNewPicture.Click += app_btnNewPicture_Click;
 
             app_btnClearElementsInWorkingSpace.Label = "Arbeitsfläche löschen";
             app_btnSave.Label = "Speichern";
@@ -647,20 +649,35 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnLoad.Label = "Laden";
             app_btnFullScreen.Label = "Vollbild";
             app_btnAbout.Label = "Über";
+            app_btnNewPicture.Label = "Neues Bild";
 
             cmdBar.PrimaryCommands.Add(app_btnTools);
 
             cmdBar.SecondaryCommands.Add(app_btnClearElementsInWorkingSpace);
-            cmdBar.SecondaryCommands.Add(app_btnSave);
-            cmdBar.SecondaryCommands.Add(app_btnSaveCopy);
+            // cmdBar.SecondaryCommands.Add(app_btnSaveCopy);
             cmdBar.SecondaryCommands.Add(app_btnLoad);
+            cmdBar.SecondaryCommands.Add(app_btnSave);
             cmdBar.SecondaryCommands.Add(app_btnFullScreen);
+            cmdBar.SecondaryCommands.Add(app_btnNewPicture);
+            cmdBar.SecondaryCommands.Add(app_btnAbout);
 
             app_btnClearElementsInWorkingSpace.IsEnabled = PaintingAreaCanvas.Children.Count > 0 ? true : false;
             app_btnSave.IsEnabled = PaintingAreaCanvas.Children.Count > 0 ? true : false;
 
             BottomAppBar = cmdBar;
             current_appbar = type;
+        }
+
+        private void app_btnNewPicture_Click(object sender, RoutedEventArgs e)
+        {
+            if (PaintingAreaCanvas.Children.Count > 0)
+            {
+                messageBoxNewDrawingSpace_Click("Neues Bild", false);
+            }
+            else
+            {
+                resetTools();
+            }
         }
 
         public void changeEnableOfAppBarButtonResetZoom(bool isEnabled)
