@@ -134,15 +134,23 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             BitmapImage image = new BitmapImage();
             image.UriSource = new Uri(file.Path, UriKind.RelativeOrAbsolute);
             fillBrush.ImageSource = image;
-            RectangleGeometry myRectangleGeometry = new RectangleGeometry();
-            myRectangleGeometry.Rect = new Rect(new Point(0, 0), new Point(Window.Current.Bounds.Width, Window.Current.Bounds.Height));
+            if (PocketPaintApplication.GetInstance().isLoadPictureClicked)
+            {
+                RectangleGeometry myRectangleGeometry = new RectangleGeometry();
+                myRectangleGeometry.Rect = new Rect(new Point(0, 0), new Point(Window.Current.Bounds.Width, Window.Current.Bounds.Height));
 
-            Path _path = new Path();
-            _path.Fill = fillBrush;
-            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+                Path _path = new Path();
+                _path.Fill = fillBrush;
+                _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
 
-            _path.Data = myRectangleGeometry;
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
+                _path.Data = myRectangleGeometry;
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
+            }
+            else
+            {
+                PocketPaintApplication.GetInstance().ImportImageSelectionControl.imageSourceOfRectangleToDraw = fillBrush;
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
+            }
             closePhoneControl(sender, e);
         }
         public void btnCancel_Click(object sender, RoutedEventArgs e)

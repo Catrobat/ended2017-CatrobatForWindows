@@ -51,7 +51,6 @@
                 <userControls:ucRecEll></userControls:ucRecEll>
             </Grid>
 
-
             <!-- InputScopeControl -->
             <Grid x:Name="GridInputScopeControl" Margin="0,0,0,72" Visibility="Collapsed">
                 <userControls:InputScopeControl></userControls:InputScopeControl>
