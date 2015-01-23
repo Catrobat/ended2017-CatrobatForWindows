@@ -18,7 +18,6 @@
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
                 </Grid.Background>
                 <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" ManipulationMode="TranslateX, TranslateY, Scale" >
-                    <Image x:Name="imgPictrue" Height="240" Canvas.Left="95" Canvas.Top="188" Width="215"/>
                 </Canvas>
                 <!-- CursorControl -->
                 <Grid x:Name="GridCursor" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -52,6 +51,7 @@
                 <userControls:ucRecEll></userControls:ucRecEll>
             </Grid>
 
+
             <!-- InputScopeControl -->
             <Grid x:Name="GridInputScopeControl" Margin="0,0,0,72" Visibility="Collapsed">
                 <userControls:InputScopeControl></userControls:InputScopeControl>
@@ -61,8 +61,6 @@
             <Grid x:Name="GrdThicknessControl" Height="380" Margin="0,0,0,72" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <controls:ThicknessControl x:Name="CtrlThicknessControl"></controls:ThicknessControl>
             </Grid>
-
-
 
             <!--ONLY FOR TESTING
             <TextBox x:Name="tbTest" HorizontalAlignment="Left" Margin="160,162,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
@@ -80,7 +78,7 @@
                 </Image.RenderTransform>
             </Image>
         </Grid>
-
+        <userControls:PhotoControl x:Name="ucPhotoControl" BorderBrush="Red" BorderThickness="2" Margin="0,0,0,20" Visibility="Collapsed"/>
         <StackPanel Margin="0,-5,0,0" VerticalAlignment="Top">
             <controls:AppbarTop x:Name="appBarTop" Height="72px"></controls:AppbarTop>
         </StackPanel>
