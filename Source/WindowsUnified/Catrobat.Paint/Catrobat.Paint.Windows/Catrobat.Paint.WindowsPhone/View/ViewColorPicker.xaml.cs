@@ -23,7 +23,6 @@ namespace Catrobat.Paint.WindowsPhone.View
         public ViewColorPicker()
         {
             this.InitializeComponent();
-
             Color selected_color;
             double color_opacity;
             if (PocketPaintApplication.GetInstance().is_border_color && PocketPaintApplication.GetInstance().PaintData.strokeColorSelected != null)
@@ -142,11 +141,11 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             var colorBrush = new SolidColorBrush(color);
 
-            // TODO: changeValuesOfColourTextboxes(Coding4FunColorPicker.Color.R, Coding4FunColorPicker.Color.G,
-            //    Coding4FunColorPicker.Color.B, (byte)sldAlpha.Value);
+            changeValuesOfColourTextboxes(colorPicker.Color.R, colorPicker.Color.G,
+                colorPicker.Color.B, (byte)sldAlpha.Value);
 
-            // TODO: changeValuesOfColourSliders(Coding4FunColorPicker.Color.R, Coding4FunColorPicker.Color.G,
-            //    Coding4FunColorPicker.Color.B, (byte)sldAlpha.Value);
+            changeValuesOfColourSliders(colorPicker.Color.R, colorPicker.Color.G,
+                colorPicker.Color.B, (byte)sldAlpha.Value);
         }
 
         private void BtnSelectedColor_OnClick(object sender, RoutedEventArgs e)
@@ -224,7 +223,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             new_color.B = blue;
 
             new_color.A = alpha;
-            // TODO: Coding4FunColorPicker.Color = new_color;
+            colorPicker.Color = new_color;
         }
 
         private void changeValuesOfColourTextboxes(byte red, byte green, byte blue, byte alpha)

@@ -35,7 +35,7 @@
 
                 <!-- EllipseSelectionControl -->
                 <userControls:EllipseSelectionControl x:Name="ucEllipseSelectionControl" Visibility="Collapsed"></userControls:EllipseSelectionControl>
-
+                
                 <!-- RectangleSelectioncontrol -->
                 <userControls:RectangleSelectionControl x:Name="ucRectangleSelectionControl" Visibility="Collapsed"></userControls:RectangleSelectionControl>
             </Grid>

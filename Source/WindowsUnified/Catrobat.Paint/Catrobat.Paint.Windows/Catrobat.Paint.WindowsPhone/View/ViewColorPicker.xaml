@@ -5,7 +5,9 @@
     xmlns:local="using:Catrobat.Paint.WindowsPhone.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:userControls="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
     xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    xmlns:Controls="using:Coding4Fun.Toolkit.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" NavigationCacheMode="Required">
 
@@ -52,9 +54,9 @@
 
 
                 <PivotItem x:Name="piFirstPage" Background="#FF171717" Header="/Assets/ColorPicker/icon_color_chooser_tab_palette.png" Margin="0,0,0,0">
-                    
+
                     <Grid x:Name="GrdColorButtons" HorizontalAlignment="Center">
-                        
+
                         <Button x:Name="Button11" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton11}" Height="80" Margin="-3,30,0,0"  Width="90" VerticalAlignment="Top">
                             <Rectangle x:Name="Rectangle11" Fill="{StaticResource ColorButton11}" Height="65" Margin="-20" Stroke="White"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
                         </Button>
@@ -67,7 +69,7 @@
                         <Button x:Name="Button14" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton14}" Height="80"  Margin="279,30,0,0"  Width="90" VerticalAlignment="Top">
                             <Rectangle x:Name="Rectangle14" Fill="{StaticResource ColorButton14}" Height="65" Margin="-20" Stroke="Black"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
                         </Button>
-                        
+
 
                         <Button x:Name="Button21" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton21}" Height="80"  Margin="-3,99,0,0"  Width="90" VerticalAlignment="Top">
                             <Rectangle x:Name="Rectangle21" Fill="{StaticResource ColorButton21}" Height="65" Margin="-20" Stroke="Black"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
@@ -81,7 +83,7 @@
                         <Button x:Name="Button24" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton24}" Height="80"  Margin="279,99,0,0"  Width="90" VerticalAlignment="Top">
                             <Rectangle x:Name="Rectangle24" Fill="{StaticResource ColorButton24}" Height="65" Margin="-20" Stroke="Black"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
                         </Button>
-                        
+
 
                         <Button x:Name="Button31" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton31}" Height="80"  Margin="-3,168,0,0"  Width="90" VerticalAlignment="Top">
                             <Rectangle x:Name="Rectangle31" Fill="{StaticResource ColorButton31}" Height="65" Margin="-20" Stroke="Black"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
@@ -95,7 +97,7 @@
                         <Button x:Name="Button34" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton31}" Height="80"  Margin="279,168,0,0"  Width="90" VerticalAlignment="Top">
                             <Rectangle x:Name="Rectangle34" Fill="{StaticResource ColorButton34}" Height="65" Margin="-20" Stroke="Black"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
                         </Button>
-                        
+
 
                         <Button x:Name="Button41" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton41}" Height="80"  Margin="-3,237,0,0"  Width="90" VerticalAlignment="Top">
                             <Rectangle x:Name="Rectangle41" Fill="{StaticResource ColorButton41}" Height="65" Margin="-20" Stroke="Black"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
@@ -109,7 +111,7 @@
                         <Button x:Name="Button44" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton44}" Height="80"  Margin="279,237,0,0"  Width="90" VerticalAlignment="Top">
                             <Rectangle x:Name="Rectangle44" Fill="{StaticResource ColorButton44}" Height="65" Margin="-20" Stroke="Black"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
                         </Button>
-                        
+
 
                         <Button x:Name="Button51" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton51}" Height="80"  Margin="-3,306,0,0"  Width="90" VerticalAlignment="Top">
                             <Rectangle x:Name="Rectangle51" Fill="{StaticResource ColorButton51}" Height="65" Margin="-20" Stroke="Black"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
@@ -136,54 +138,55 @@
                             </Grid>
                         </Button>
                     </Grid>
-                    
+
                 </PivotItem>
 
 
-                <PivotItem x:Name="piSecondPage" Header="/Assets/ColorPicker/icon_color_chooser_tab_rgba.png" Height="auto" HorizontalAlignment="Center" Margin="0,0,0,0">
+                <PivotItem x:Name="piSecondPage" Header="/Assets/ColorPicker/icon_color_chooser_tab_rgba.png" Height="auto" HorizontalAlignment="Center" UseLayoutRounding="False" Margin="0,0,0,0">
+                    
                     <Grid x:Name="GrdColorSlider" PointerEntered="Grid_PointerEntered">
-
-                        <Slider x:Name="sldRed" Foreground="Red" Margin="0,250,0,0" VerticalAlignment="Top" 
+                        <Controls:ColorPicker x:Name="colorPicker" Height="250" HorizontalAlignment="Center" IsHitTestVisible="True" Margin="0,15,0,0" VerticalAlignment="Top" Width="300" ColorChanged="ColorChangedCustom"></Controls:ColorPicker>
+                        <Slider x:Name="sldRed" Foreground="Red" Margin="73,276,74,0" VerticalAlignment="Top" 
                             Width="229" Height="40" Maximum="255" ValueChanged="sldSlidersChanged_ValueChanged" Background="Black"/>
 
-                        <Slider x:Name="sldGreen" Margin="0,290,0,0" VerticalAlignment="Top" 
+                        <Slider x:Name="sldGreen" Margin="73,316,74,0" VerticalAlignment="Top" 
                             Width="229" Height="40" Foreground="#FF23FF00" Maximum="255" ValueChanged="sldSlidersChanged_ValueChanged" Background="Black"/>
 
-                        <Slider x:Name="sldBlue" Margin="0,330,0,0" VerticalAlignment="Top" 
+                        <Slider x:Name="sldBlue" Margin="73,356,74,0" VerticalAlignment="Top" 
                             Width="229" Height="40" Foreground="#FF0046FF" ValueChanged="sldSlidersChanged_ValueChanged" Maximum="255" Background="Black"/>
 
-                        <Slider x:Name="sldAlpha" Margin="0,370,0,0" VerticalAlignment="Top" 
+                        <Slider x:Name="sldAlpha" Margin="73,396,74,0" VerticalAlignment="Top" 
                             Width="229" Height="40" Foreground="White" Maximum="255" ValueChanged="sldSlidersChanged_ValueChanged" Background="Black"/>
 
-                        <TextBox x:Name="tbRedText" HorizontalAlignment="Left" Height="63" Margin="0,254,0,0" TextWrapping="Wrap" Text="Rot" 
+                        <TextBox x:Name="tbRedText" HorizontalAlignment="Left" Height="63" Margin="0,280,0,0" TextWrapping="Wrap" Text="Rot" 
                              VerticalAlignment="Top" Width="73" Foreground="Red" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-                        <TextBox x:Name="tbBlueText" HorizontalAlignment="Left" Height="63" Margin="-1.578,334.298,0,0" TextWrapping="Wrap" Text="Blau" 
+                        <TextBox x:Name="tbBlueText" HorizontalAlignment="Left" Height="63" Margin="-1.578,360.653,0,0" TextWrapping="Wrap" Text="Blau" 
                              VerticalAlignment="Top" Width="88" Foreground="#FF0046FF" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
                             <TextBox.RenderTransform>
                                 <CompositeTransform SkewX="1.762" TranslateX="0.969"/>
                             </TextBox.RenderTransform>
                         </TextBox>
 
-                        <TextBox x:Name="tbGreenText" HorizontalAlignment="Left" Height="63" Margin="0,292,0,0" TextWrapping="Wrap" Text="Grün" 
+                        <TextBox x:Name="tbGreenText" HorizontalAlignment="Left" Height="63" Margin="0,318,0,0" TextWrapping="Wrap" Text="Grün" 
                              VerticalAlignment="Top" Width="88" Foreground="#FF23FF00" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-                        <TextBox x:Name="tbAlphaValue" HorizontalAlignment="Left" Height="63" Margin="314,370,-35,0" TextWrapping="Wrap" Text="0" 
+                        <TextBox x:Name="tbAlphaValue" HorizontalAlignment="Left" Height="63" Margin="314,396,-35,0" TextWrapping="Wrap" Text="0" 
                              VerticalAlignment="Top" Width="97" Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-                        <TextBox x:Name="tbAlpha" HorizontalAlignment="Left" Height="63" Margin="2,374,0,0" TextWrapping="Wrap" 
+                        <TextBox x:Name="tbAlpha" HorizontalAlignment="Left" Height="63" Margin="2,400,0,0" TextWrapping="Wrap" 
                              Text="Alpha" VerticalAlignment="Top" Width="108" Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-                        <TextBox x:Name="tbBlueValue" HorizontalAlignment="Left" Height="63" Margin="315,330,-36,0" TextWrapping="Wrap" 
+                        <TextBox x:Name="tbBlueValue" HorizontalAlignment="Left" Height="63" Margin="315,356,-36,0" TextWrapping="Wrap" 
                              Text="0" VerticalAlignment="Top" Width="97" Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-                        <TextBox x:Name="tbGreenValue" HorizontalAlignment="Left" Height="63" Margin="314,290,-35,0" TextWrapping="Wrap" 
+                        <TextBox x:Name="tbGreenValue" HorizontalAlignment="Left" Height="63" Margin="314,316,-35,0" TextWrapping="Wrap" 
                              Text="0" VerticalAlignment="Top" Width="97" Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-                        <TextBox x:Name="tbRedValue" HorizontalAlignment="Left" Height="63" Margin="314,250,-35,0" TextWrapping="Wrap" 
+                        <TextBox x:Name="tbRedValue" HorizontalAlignment="Left" Height="63" Margin="314,276,-35,0" TextWrapping="Wrap" 
                              Text="0" VerticalAlignment="Top" Width="97" Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
-                        <TextBox x:Name="tbPercentCharacter" HorizontalAlignment="Left" Height="63" Margin="346,370,-26,0" TextWrapping="Wrap" 
+                        <TextBox x:Name="tbPercentCharacter" HorizontalAlignment="Left" Height="63" Margin="346,396,-26,0" TextWrapping="Wrap" 
                              Text="%" VerticalAlignment="Top" Width="56" Foreground="White" IsHitTestVisible="False" Background="{x:Null}" BorderThickness="0"/>
 
                         <Button x:Name="BtnSelectedColorSlider" BorderThickness="3" Click="BtnSelectedColor_OnClick"
