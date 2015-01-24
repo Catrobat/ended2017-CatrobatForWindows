@@ -35,7 +35,7 @@
 
                 <!-- EllipseSelectionControl -->
                 <userControls:EllipseSelectionControl x:Name="ucEllipseSelectionControl" Visibility="Collapsed"></userControls:EllipseSelectionControl>
-
+                
                 <!-- RectangleSelectioncontrol -->
                 <userControls:RectangleSelectionControl x:Name="ucRectangleSelectionControl" Visibility="Collapsed"></userControls:RectangleSelectionControl>
             </Grid>
@@ -50,7 +50,6 @@
                   VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
                 <userControls:ucRecEll></userControls:ucRecEll>
             </Grid>
-
 
             <!-- InputScopeControl -->
             <Grid x:Name="GridInputScopeControl" Margin="0,0,0,72" Visibility="Collapsed">

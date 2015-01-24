@@ -19,6 +19,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
         {
             if (!PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Contains(Path))
             {
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(Path);
             }
             return true;

@@ -36,10 +36,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         int activeCameraValue = 0;
         bool isPreview = false;
         DeviceInformationCollection _mobileCameras = null;
+        const int BACK_CAMERA = 1;
+        const int FRONT_CAMERA = 0;
         public PhotoControl()
         {
             this.InitializeComponent();
             initDeviceInformationCollection();
+            activeCamera = FRONT_CAMERA;
         }
 
         async public void initDeviceInformationCollection()
@@ -58,8 +61,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             _photoManager = new MediaCapture();
             await _photoManager.InitializeAsync(getMediaCaptureInitializationSettings());
+            _photoManager.SetRecordRotation(VideoRotation.Clockwise90Degrees);
             // Element is in xaml (is needed to show the camera preview).
             cptElementShowPreview.Source = _photoManager;
+            cptElementShowPreview.FlowDirection = activeCamera == FRONT_CAMERA ? 
+                FlowDirection.RightToLeft : FlowDirection.LeftToRight;
             await _photoManager.StartPreviewAsync();
 
             DisplayInformation displayInfo = DisplayInformation.GetForCurrentView();
@@ -72,7 +78,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             if (_photoManager != null)
             {
-                if(activeCamera == 1)
+                if(activeCamera == FRONT_CAMERA)
                 {
                     _photoManager.SetPreviewRotation(VideoRotationLookup(sender.CurrentOrientation, true));
                 }
@@ -118,7 +124,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             _mediaCaptureSettings.VideoDeviceId = _mobileCameras[activeCamera].Id;
             _mediaCaptureSettings.AudioDeviceId = "";
             _mediaCaptureSettings.StreamingCaptureMode = Windows.Media.Capture.StreamingCaptureMode.AudioAndVideo;
-            _mediaCaptureSettings.PhotoCaptureSource = Windows.Media.Capture.PhotoCaptureSource.Photo;
+            _mediaCaptureSettings.PhotoCaptureSource = Windows.Media.Capture.PhotoCaptureSource.VideoPreview;
         }
 
 
@@ -129,20 +135,32 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(
                     "photo.jpg", CreationCollisionOption.ReplaceExisting);
             await _photoManager.CapturePhotoToStorageFileAsync(imgFormat, file);
+            _photoManager.SetRecordRotation(VideoRotation.Clockwise90Degrees);
             ImageBrush fillBrush = new ImageBrush();
 
+            
             BitmapImage image = new BitmapImage();
             image.UriSource = new Uri(file.Path, UriKind.RelativeOrAbsolute);
+            
             fillBrush.ImageSource = image;
-            RectangleGeometry myRectangleGeometry = new RectangleGeometry();
-            myRectangleGeometry.Rect = new Rect(new Point(0, 0), new Point(Window.Current.Bounds.Width, Window.Current.Bounds.Height));
+            if (PocketPaintApplication.GetInstance().isLoadPictureClicked)
+            {
+                RectangleGeometry myRectangleGeometry = new RectangleGeometry();
+                myRectangleGeometry.Rect = new Rect(new Point(0, 0), new Point(Window.Current.Bounds.Width, Window.Current.Bounds.Height));
 
-            Path _path = new Path();
-            _path.Fill = fillBrush;
-            _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+                Path _path = new Path();
+                _path.Fill = fillBrush;
+                _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
 
-            _path.Data = myRectangleGeometry;
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
+                _path.Data = myRectangleGeometry;
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
+            }
+            else
+            {
+                PocketPaintApplication.GetInstance().ImportImageSelectionControl.imageSourceOfRectangleToDraw = fillBrush;
+                PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
+            }
             closePhoneControl(sender, e);
         }
         public void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -187,13 +205,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void changeCamera()
         {
-            if (activeCameraValue == 0)
+            if (activeCameraValue == FRONT_CAMERA)
             {
-                activeCameraValue = 1;
+                activeCameraValue = BACK_CAMERA;
             }
             else
             {
-                activeCameraValue = 0;
+                activeCameraValue = FRONT_CAMERA;
             }
         }
     }

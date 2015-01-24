@@ -124,6 +124,9 @@
     <Compile Include="Controls\AppBar\AppbarTop.xaml.cs">
       <DependentUpon>AppbarTop.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserControls\colorPicker.xaml.cs">
+      <DependentUpon>colorPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserControls\CursorControl.xaml.cs">
       <DependentUpon>CursorControl.xaml</DependentUpon>
     </Compile>
@@ -325,6 +328,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\UserControls\colorPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\UserControls\CursorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -378,7 +385,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="Coding4Fun.Toolkit">
+      <HintPath>..\..\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Coding4Fun.Toolkit.Controls">
+      <HintPath>..\..\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.Controls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
