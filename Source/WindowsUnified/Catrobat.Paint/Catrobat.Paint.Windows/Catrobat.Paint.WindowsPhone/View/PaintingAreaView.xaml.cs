@@ -655,10 +655,10 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             cmdBar.SecondaryCommands.Add(app_btnClearElementsInWorkingSpace);
             // cmdBar.SecondaryCommands.Add(app_btnSaveCopy);
+            cmdBar.SecondaryCommands.Add(app_btnNewPicture);
             cmdBar.SecondaryCommands.Add(app_btnLoad);
             cmdBar.SecondaryCommands.Add(app_btnSave);
             cmdBar.SecondaryCommands.Add(app_btnFullScreen);
-            cmdBar.SecondaryCommands.Add(app_btnNewPicture);
             cmdBar.SecondaryCommands.Add(app_btnAbout);
 
             app_btnClearElementsInWorkingSpace.IsEnabled = PaintingAreaCanvas.Children.Count > 0 ? true : false;

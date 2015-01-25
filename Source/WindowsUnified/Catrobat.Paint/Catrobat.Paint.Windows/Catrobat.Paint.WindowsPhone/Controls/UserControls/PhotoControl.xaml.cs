@@ -214,5 +214,56 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 activeCameraValue = FRONT_CAMERA;
             }
         }
+
+        private void sldBrigthness_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            try
+            {
+                sldBrightness.Value = sldBrightness.Value > 100 ? 100 : sldBrightness.Value;
+                bool succeeded = _photoManager.VideoDeviceController.Brightness.TrySetValue(sldBrightness.Value);
+                if (!succeeded)
+                {
+                    //ShowStatusMessage("Set Brightness failed");
+                }
+                else
+                {
+                    tbBrightnessValue.Text = sldBrightness.Value.ToString();
+                }
+            }
+            catch (Exception exception)
+            {
+                //ShowExceptionMessage(exception);
+            }
+        }
+
+        private void sldContrast_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            try
+            {
+                bool succeeded = _photoManager.VideoDeviceController.Contrast.TrySetValue(sldContrast.Value);
+                if (!succeeded)
+                {
+                    //ShowStatusMessage("Set Brightness failed");
+                }
+                else
+                {
+                    tbContrastValue.Text = sldContrast.Value.ToString();
+                }
+            }
+            catch (Exception exception)
+            {
+                //ShowExceptionMessage(exception);
+            }
+        }
+
+        private void app_btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            GridSettings.Visibility = GridSettings.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        private void btnAccept_Click(object sender, RoutedEventArgs e)
+        {
+            GridSettings.Visibility = GridSettings.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+        }
     }
 }
