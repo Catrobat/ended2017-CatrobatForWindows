@@ -87,17 +87,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.thicknessSelected;
         }
 
-        public void checkPenLineCap(PenLineCap pen_line_cap)
+        public void checkAndSetPenLineCap(PenLineCap penLineCap)
         {
             SolidColorBrush brushGray = new SolidColorBrush(Colors.Gray);
             SolidColorBrush brushWhite = new SolidColorBrush(Colors.White);
-            if (pen_line_cap == PenLineCap.Round)
+            if (penLineCap == PenLineCap.Round)
             {
                 BtnRoundImage.BorderBrush = brushWhite;
                 BtnSquareImage.BorderBrush = brushGray;
                 BtnTriangleImage.BorderBrush = brushGray;
             }
-            else if (pen_line_cap == PenLineCap.Square)
+            else if (penLineCap == PenLineCap.Square)
             {
                 BtnRoundImage.BorderBrush = brushGray;
                 BtnSquareImage.BorderBrush = brushWhite;
@@ -116,7 +116,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             var penLineCap = PenLineCap.Round;
             PocketPaintApplication.GetInstance().PaintData.penLineCapSelected = penLineCap;
             PocketPaintApplication.GetInstance().cursorControl.changeCursorType(penLineCap);
-            checkPenLineCap(penLineCap);
+            checkAndSetPenLineCap(penLineCap);
         }
 
         public void SquareButton_OnClick(object sender, RoutedEventArgs e)
@@ -124,7 +124,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             var penLineCap = PenLineCap.Square;
             PocketPaintApplication.GetInstance().PaintData.penLineCapSelected = penLineCap;
             PocketPaintApplication.GetInstance().cursorControl.changeCursorType(penLineCap);
-            checkPenLineCap(penLineCap);
+            checkAndSetPenLineCap(penLineCap);
+        }
+
+        public void setValueBtnBrushThickness(int value)
+        {
+            BtnBrushThickness.Content = value.ToString();
+        }
+
+        public void setValueSliderThickness(double value)
+        {
+            SliderThickness.Value = value;
         }
 
         public void TriangleButton_OnClick(object sender, RoutedEventArgs e)
@@ -132,7 +142,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             var penLineCap = PenLineCap.Triangle;
             PocketPaintApplication.GetInstance().PaintData.penLineCapSelected = penLineCap;
             PocketPaintApplication.GetInstance().cursorControl.changeCursorType(penLineCap);
-            checkPenLineCap(penLineCap);
+            checkAndSetPenLineCap(penLineCap);
         }
 
         private void SliderThickness_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
