@@ -70,11 +70,13 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().GridInputScopeControl = GridInputScopeControl;
             PocketPaintApplication.GetInstance().GridCropControl = GridCropControl;
             PocketPaintApplication.GetInstance().GridImportImageSelectionControl = GridImportImageSelectionControl;
+            PocketPaintApplication.GetInstance().InfoAboutAndConditionOfUseBox = InfoAboutAndConditionOfUseBox;
             PocketPaintApplication.GetInstance().InfoBoxActionControl = InfoBoxActionControl;
             PocketPaintApplication.GetInstance().PhoneControl = ucPhotoControl;
             PocketPaintApplication.GetInstance().InfoBoxControl = InfoBoxControl;
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
+            PocketPaintApplication.GetInstance().InfoxBasicBox = InfoxBasicBox;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
 
             PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height;
@@ -248,10 +250,17 @@ namespace Catrobat.Paint.WindowsPhone.View
                 showStatusAppBar();
                 e.Handled = true;
             }
-            else if(InfoBoxActionControl.Visibility == Visibility.Visible || InfoBoxControl.Visibility == Visibility.Visible)
+            else if (InfoAboutAndConditionOfUseBox.Visibility == Visibility.Visible
+                    || InfoBoxActionControl.Visibility == Visibility.Visible
+                    || InfoBoxControl.Visibility == Visibility.Visible
+                    || InfoxBasicBox.Visibility == Visibility.Visible
+                    || InfoAboutAndConditionOfUseBox.Visibility == Visibility.Visible)
             {
+                InfoAboutAndConditionOfUseBox.Visibility = Visibility.Collapsed;
                 InfoBoxActionControl.Visibility = Visibility.Collapsed;
                 InfoBoxControl.Visibility = Visibility.Collapsed;
+                InfoxBasicBox.Visibility = Visibility.Collapsed;
+                InfoAboutAndConditionOfUseBox.Visibility = Visibility.Collapsed;
                 changeVisibilityOfAppBars(Visibility.Visible);
                 changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                 e.Handled = true;
@@ -627,7 +636,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             AppBarButton app_btnSaveCopy = new AppBarButton();
             AppBarButton app_btnLoad = new AppBarButton();
             AppBarButton app_btnFullScreen = new AppBarButton();
-            AppBarButton app_btnAbout = new AppBarButton();
+            AppBarButton app_btnMoreInfo = new AppBarButton();
             AppBarButton app_btnNewPicture = new AppBarButton();
 
             app_btnClearElementsInWorkingSpace.Name = "appBarButtonClearWorkingSpace";
@@ -644,13 +653,14 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnLoad.Click += app_btnLoad_Click;
             app_btnSave.Click += app_btnSave_Click;
             app_btnNewPicture.Click += app_btnNewPicture_Click;
+            app_btnMoreInfo.Click += app_btnMoreInfo_Click;
 
             app_btnClearElementsInWorkingSpace.Label = "Arbeitsfläche löschen";
             app_btnSave.Label = "Speichern";
             app_btnSaveCopy.Label = "Kopie speichern";
             app_btnLoad.Label = "Laden";
             app_btnFullScreen.Label = "Vollbild";
-            app_btnAbout.Label = "Über";
+            app_btnMoreInfo.Label = "Mehr";
             app_btnNewPicture.Label = "Neues Bild";
 
             cmdBar.PrimaryCommands.Add(app_btnTools);
@@ -661,13 +671,19 @@ namespace Catrobat.Paint.WindowsPhone.View
             cmdBar.SecondaryCommands.Add(app_btnLoad);
             cmdBar.SecondaryCommands.Add(app_btnSave);
             cmdBar.SecondaryCommands.Add(app_btnFullScreen);
-            cmdBar.SecondaryCommands.Add(app_btnAbout);
+            cmdBar.SecondaryCommands.Add(app_btnMoreInfo);
 
             app_btnClearElementsInWorkingSpace.IsEnabled = PaintingAreaCanvas.Children.Count > 0 ? true : false;
             app_btnSave.IsEnabled = PaintingAreaCanvas.Children.Count > 0 ? true : false;
 
             BottomAppBar = cmdBar;
             current_appbar = type;
+        }
+
+        void app_btnMoreInfo_Click(object sender, RoutedEventArgs e)
+        {
+            InfoAboutAndConditionOfUseBox.Visibility = Visibility.Visible;
+            changeVisibilityOfAppBars(Visibility.Collapsed);
         }
 
         private void app_btnNewPicture_Click(object sender, RoutedEventArgs e)

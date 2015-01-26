@@ -56,6 +56,9 @@ namespace Catrobat.Paint.WindowsPhone
         #endregion
 
         public int angleForRotation = 0;
+
+        public InfoBasicBox InfoxBasicBox { get; set; }
+        public InfoAboutAndConditionOfUseBox InfoAboutAndConditionOfUseBox { get; set; }
         public InfoBoxActionControl InfoBoxActionControl { get; set; }
 
         public InfoBoxControl InfoBoxControl { get; set; }

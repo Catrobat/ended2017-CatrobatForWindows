@@ -36,7 +36,7 @@
 
                 <!-- EllipseSelectionControl -->
                 <userControls:EllipseSelectionControl x:Name="ucEllipseSelectionControl" Visibility="Collapsed"></userControls:EllipseSelectionControl>
-                
+
                 <!-- RectangleSelectioncontrol -->
                 <userControls:RectangleSelectionControl x:Name="ucRectangleSelectionControl" Visibility="Collapsed"></userControls:RectangleSelectionControl>
             </Grid>
@@ -67,8 +67,10 @@
             -->
         </Grid>
 
+        <userControls:InfoBasicBox x:Name="InfoxBasicBox" Visibility="Collapsed"></userControls:InfoBasicBox>
         <userControls:InfoBoxActionControl x:Name="InfoBoxActionControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"></userControls:InfoBoxActionControl>
         <userControls:InfoBoxControl x:Name="InfoBoxControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"></userControls:InfoBoxControl>
+        <userControls:InfoAboutAndConditionOfUseBox x:Name="InfoAboutAndConditionOfUseBox" HorizontalAlignment="Center" Visibility="Collapsed"></userControls:InfoAboutAndConditionOfUseBox>
         <Grid x:Name="SpinnerGrid" Grid.Row="0" Visibility="Collapsed"  Grid.RowSpan="2"  Margin="12,12,12,12" Background="#FFB6B6B6" Opacity="0.7">
             <Image Grid.Row="0" Height="50" Source="/Assets/Spinner.png" Stretch="Uniform" Width="50" Canvas.ZIndex="100" Margin="10,10">
                 <Image.RenderTransform>

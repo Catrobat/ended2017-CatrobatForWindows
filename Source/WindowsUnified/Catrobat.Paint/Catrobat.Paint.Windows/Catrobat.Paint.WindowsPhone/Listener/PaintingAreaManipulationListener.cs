@@ -69,7 +69,7 @@ namespace Catrobat.Paint.WindowsPhone.Listener
                     double normalPreviousY = previousYLength / (Math.Sqrt(previousXLength * previousXLength + previousYLength * previousYLength));
 
                     double deltaAngle = (Math.Atan(normalPreviousX / normalPreviousY) - Math.Atan(normalCurrentX / normalCurrentY));
-                    double rotationAngle = deltaAngle * 180.0 / Math.PI;
+                    double rotationAngle = deltaAngle * 360.0 / Math.PI;
 
                     rotate.Angle = rotationAngle;
                 }
