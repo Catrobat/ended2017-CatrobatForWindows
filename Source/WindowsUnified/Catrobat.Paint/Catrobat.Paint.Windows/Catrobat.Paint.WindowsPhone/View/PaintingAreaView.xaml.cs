@@ -22,6 +22,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
+using Catrobat.Paint.WindowsPhone.Data;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
 
@@ -226,7 +227,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            PocketPaintApplication.GetInstance().shouldAppClosed = false;
+            PocketPaintApplication.GetInstance().shouldAppClosedThroughBackButton = false;
             if (this.Frame.CurrentSourcePageType == typeof(ViewColorPicker))
             {
                 e.Handled = true;
@@ -263,7 +264,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() != ToolType.Brush)
                 {
-                    resetControls(Visibility.Collapsed);
+                    resetControls();
                     changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
                     PocketPaintApplication.GetInstance().AppbarTop.BtnSelectedColorVisible(true);
@@ -276,7 +277,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 }
                 else if (PaintingAreaCanvas.Children.Count > 0)
                 {
-                    PocketPaintApplication.GetInstance().shouldAppClosed = true;
+                    PocketPaintApplication.GetInstance().shouldAppClosedThroughBackButton = true;
                     messageBoxNewDrawingSpace_Click("", true);
                     e.Handled = true;
                 }
@@ -670,13 +671,10 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void app_btnNewPicture_Click(object sender, RoutedEventArgs e)
         {
+            // if the working space is empty no message query should come.
             if (PaintingAreaCanvas.Children.Count > 0)
             {
                 messageBoxNewDrawingSpace_Click("Neues Bild", false);
-            }
-            else
-            {
-                resetTools();
             }
         }
 
@@ -747,8 +745,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             _transforms.Children.Clear();
             hideStatusAppBar();
         }
-
-
 
         public void disableToolbarsAndPaintingArea(bool isDisable)
         {
@@ -1262,8 +1258,6 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         public async void messageBoxNewDrawingSpace_Click(string message, bool shouldAppClosed)
         {
-            // TODO: use dynamic text instead of static text
-
             var messageDialog = new MessageDialog("Änderungen speichern?", message);
 
             messageDialog.Commands.Add(new UICommand(
@@ -1281,16 +1275,13 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private UICommandInvokedHandler deleteChanges()
         {
-            if (PocketPaintApplication.GetInstance().shouldAppClosed)
+            if (PocketPaintApplication.GetInstance().shouldAppClosedThroughBackButton)
             {
                 Application.Current.Exit();
             }
             else
             {
-                resetTools();
-                CommandManager.GetInstance().clearAllCommands();
-                changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
-                UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
+                resetApp();
             }
 
             changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", false);
@@ -1302,7 +1293,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         public void saveChanges(IUICommand command)
         {
-            if (PocketPaintApplication.GetInstance().shouldAppClosed)
+            if (PocketPaintApplication.GetInstance().shouldAppClosedThroughBackButton)
             {
                 Application.Current.Exit();
             }
@@ -1319,7 +1310,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         public void deleteChanges(IUICommand command)
         {
-            if (PocketPaintApplication.GetInstance().shouldAppClosed)
+            if (PocketPaintApplication.GetInstance().shouldAppClosedThroughBackButton)
             {
                 Application.Current.Exit();
             }
@@ -1336,10 +1327,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         public void resetTools()
         {
-            if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0)
-            {
-                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
-            }
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = new TransformGroup();
             PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
@@ -1349,8 +1337,9 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().PaintingAreaView.disableToolbarsAndPaintingArea(false);
         }
 
-        public void resetControls(Visibility visibility)
+        public void resetControls()
         {
+            Visibility visibility = Visibility.Collapsed;
             PocketPaintApplication.GetInstance().EllipseSelectionControl.Visibility = visibility;
             PocketPaintApplication.GetInstance().GridCropControl.Visibility = visibility;
             PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = visibility;
@@ -1358,10 +1347,12 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().GridUcRellRecControlState = visibility;
             PocketPaintApplication.GetInstance().InfoBoxActionControl.Visibility = visibility;
             PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = visibility;
+            CtrlThicknessControl.Visibility = Visibility.Collapsed;
 
-            PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = true;
-            PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
+            // TODO; Die folgenden Code-zeilen gehören in eine eigene Funktion ausgelagert.
+            //PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;
+            //PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = true;
+            // PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
         }
 
         public void changeEnabledOfASecondaryAppbarButton(string appBarButtonName, bool isEnabled)
@@ -1438,6 +1429,25 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 PocketPaintApplication.GetInstance().ToolCurrent.ResetDrawingSpace();
             }
+        }
+
+        public void resetApp()
+        {
+            PaintData paintData = PocketPaintApplication.GetInstance().PaintData;
+            resetControls();
+            PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
+            CommandManager.GetInstance().clearAllCommands();
+            changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
+            UndoRedoActionbarManager.GetInstance().Update(Catrobat.Paint.WindowsPhone.Command.UndoRedoActionbarManager.UndoRedoButtonState.DisableUndo);
+            paintData.colorSelected = new SolidColorBrush(Colors.Black);
+            paintData.strokeColorSelected = new SolidColorBrush(Colors.Gray);
+            paintData.thicknessSelected = 8;
+            paintData.strokeThickness = 3.0;
+
+            PocketPaintApplication.GetInstance().resetBoolVariables(false, true, false, true, false, false);
+            CtrlThicknessControl.setValueBtnBrushThickness(paintData.thicknessSelected);
+            CtrlThicknessControl.setValueSliderThickness(paintData.thicknessSelected);
+            CtrlThicknessControl.checkAndSetPenLineCap(PenLineCap.Round);
         }
     }
 }

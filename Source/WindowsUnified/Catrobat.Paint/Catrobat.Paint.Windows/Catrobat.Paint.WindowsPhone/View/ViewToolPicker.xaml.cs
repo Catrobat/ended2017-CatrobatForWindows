@@ -85,7 +85,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                     pocketPaintApplication.isBrushTool = false;
                     pocketPaintApplication.isToolPickerUsed = true;
                     bool enableEdgeTypes = false;
-                    pocketPaintApplication.PaintingAreaView.resetControls(Visibility.Collapsed);
+                    pocketPaintApplication.PaintingAreaView.resetControls();
                     switch (((Button)sender).Name)
                     {
                         case "BtnBrush":

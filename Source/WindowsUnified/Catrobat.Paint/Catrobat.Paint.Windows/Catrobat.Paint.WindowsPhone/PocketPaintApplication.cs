@@ -26,16 +26,11 @@ namespace Catrobat.Paint.WindowsPhone
 
         #region bool-Variables
         public bool isBrushEraser = false;
-
         public bool isBrushTool = true;
-
         public bool isLoadPictureClicked = false;
-
         public bool isToolPickerUsed = true;
-
         public bool isZoomButtonClicked = false;
-
-        public bool shouldAppClosed = false;
+        public bool shouldAppClosedThroughBackButton = false;
 
         public bool UnsavedChangesMade { get; set; }
         #endregion
@@ -142,6 +137,17 @@ namespace Catrobat.Paint.WindowsPhone
             CommandManager.GetInstance();
             
             CalculateSizeMultiplication();
+        }
+
+        public void resetBoolVariables(bool isBrushEraser, bool isBrushTool, bool isLoadPictureClicked,
+            bool isToolPickerUsed, bool isZoomButtonClicked, bool shouldAppClosedThroughBackButton)
+        {
+            this.isBrushEraser = isBrushEraser;
+            this.isBrushTool = isBrushTool;
+            this.isLoadPictureClicked = isLoadPictureClicked;
+            this.isToolPickerUsed = isToolPickerUsed;
+            this.isZoomButtonClicked = isZoomButtonClicked;
+            this.shouldAppClosedThroughBackButton = shouldAppClosedThroughBackButton;
         }
 
         public static PocketPaintApplication GetInstance()
