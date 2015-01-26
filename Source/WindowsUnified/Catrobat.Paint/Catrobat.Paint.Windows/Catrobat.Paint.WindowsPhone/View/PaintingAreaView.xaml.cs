@@ -74,6 +74,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().PhoneControl = ucPhotoControl;
             PocketPaintApplication.GetInstance().InfoBoxControl = InfoBoxControl;
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
+            PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
 
             PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height;
@@ -1042,14 +1043,8 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void btnThicknessBorder_Click(object sender, RoutedEventArgs e)
         {
-            if (visibilityGridEllRecControl == Visibility.Collapsed)
-            {
-                visibilityGridEllRecControl = Visibility.Visible;
-            }
-            else
-            {
-                visibilityGridEllRecControl = Visibility.Collapsed;
-            }
+            visibilityGridEllRecControl = visibilityGridEllRecControl == Visibility.Collapsed
+                ? Visibility.Visible : Visibility.Collapsed;
             PocketPaintApplication.GetInstance().GridUcRellRecControlState = visibilityGridEllRecControl;
             PocketPaintApplication.GetInstance().GridInputScopeControl.Visibility = Visibility.Collapsed;
         }
@@ -1347,7 +1342,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().GridUcRellRecControlState = visibility;
             PocketPaintApplication.GetInstance().InfoBoxActionControl.Visibility = visibility;
             PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = visibility;
-            CtrlThicknessControl.Visibility = Visibility.Collapsed;
 
             // TODO; Die folgenden Code-zeilen gehören in eine eigene Funktion ausgelagert.
             //PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;

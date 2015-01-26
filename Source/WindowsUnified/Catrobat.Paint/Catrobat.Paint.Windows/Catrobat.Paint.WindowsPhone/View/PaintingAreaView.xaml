@@ -17,6 +17,7 @@
                 <Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
                 </Grid.Background>
+                <Canvas x:Name="PaintingAreaCanvasUnderlaying"  Background="Transparent"/>
                 <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" ManipulationMode="TranslateX, TranslateY, Scale" >
                 </Canvas>
                 <!-- CursorControl -->
