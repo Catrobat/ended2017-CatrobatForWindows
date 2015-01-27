@@ -85,6 +85,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                     pocketPaintApplication.isBrushTool = false;
                     pocketPaintApplication.isToolPickerUsed = true;
                     bool enableEdgeTypes = false;
+                    PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                     pocketPaintApplication.PaintingAreaView.resetControls();
                     switch (((Button)sender).Name)
                     {
