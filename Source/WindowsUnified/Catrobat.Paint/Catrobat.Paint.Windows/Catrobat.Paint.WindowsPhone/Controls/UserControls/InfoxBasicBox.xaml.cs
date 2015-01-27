@@ -59,7 +59,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                                "zu dürfen, müssen Sie / musst Du mit unseren Nutzungsbedingungen einverstanden seind und sie während Ihrer / " +
                                "Deiner Benutzung genau einhalten. Die exakte englische Formulierung unserer Nutzungsbedingungen steht unter dem " +
                                "folgenden Terms of Use and Service Link zur Verfügung.";
-                rtbkLinks.
+                //rtbkLinks.
 
             }
             else if(ABOUT == opt)
