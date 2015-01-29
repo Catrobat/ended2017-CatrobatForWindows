@@ -139,14 +139,14 @@
     <Compile Include="Controls\UserControls\ImportImageSelectionControl.xaml.cs">
       <DependentUpon>ImportImageSelectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UserControls\InfoBoxActionControl - Kopieren.xaml.cs">
-      <DependentUpon>InfoBoxActionControl - Kopieren.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\UserControls\InfoAboutAndConditionOfUseBox.xaml.cs">
       <DependentUpon>InfoAboutAndConditionOfUseBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UserControls\InfoxBasicBox.xaml.cs">
-      <DependentUpon>InfoxBasicBox.xaml</DependentUpon>
+    <Compile Include="Controls\UserControls\InfoBoxActionControl - Kopieren.xaml.cs">
+      <DependentUpon>InfoBoxActionControl - Kopieren.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserControls\InfoxBasicBoxControl.xaml.cs">
+      <DependentUpon>InfoxBasicBoxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\UserControls\InfoBoxControl.xaml.cs">
       <DependentUpon>InfoBoxControl.xaml</DependentUpon>
@@ -354,15 +354,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\UserControls\InfoBoxActionControl - Kopieren.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\UserControls\InfoAboutAndConditionOfUseBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\UserControls\InfoxBasicBox.xaml">
+    <Page Include="Controls\UserControls\InfoBoxActionControl - Kopieren.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserControls\InfoxBasicBoxControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

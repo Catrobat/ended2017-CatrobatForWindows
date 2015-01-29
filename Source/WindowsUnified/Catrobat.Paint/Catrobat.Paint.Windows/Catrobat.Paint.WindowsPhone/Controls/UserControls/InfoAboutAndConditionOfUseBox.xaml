@@ -8,16 +8,17 @@
     mc:Ignorable="d"
     d:DesignWidth="370" Height="161">
 
-    <Grid x:Name="GridMain">
+    <Grid x:Name="GridMain" Height="161" Width="370">
         <Button x:Name="btnConditionOfUse" Background="White" BorderThickness="1"
-                BorderBrush="Black" Click="btnConditionOfUse_Click" Content="Nutzungsbedingungen" Foreground="Black" Height="80" HorizontalAlignment="Left"
+                BorderBrush="Black" Click="btnConditionOfUse_Click" Content="Datenschutzrichtilinien" Foreground="Black" 
+                Height="80" HorizontalAlignment="Left"
                 HorizontalContentAlignment="Left" Margin="0,30,0,0" MinHeight="1" MinWidth="1"
                 VerticalAlignment="Top" Width="370">
         </Button>
         <Button x:Name="btnAbout" Background="White"
                 BorderThickness="1" BorderBrush="Black" Click="btnAbout_Click"
-                Content="Über" Foreground="Black" Height="80"
-                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                Content="Über Pocket Paint ..." Foreground="Black"
+                Height="80" HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 Margin="0,90,0,0" MinHeight="1" VerticalAlignment="Top" Width="370" />
         <Rectangle Fill="Black" HorizontalAlignment="Left" Height="40" Stroke="Black" VerticalAlignment="Top" Width="370"/>
         <TextBox x:Name="tbInformation" Background="Black" BorderThickness="0" BorderBrush="Black"

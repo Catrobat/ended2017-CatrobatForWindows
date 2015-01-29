@@ -76,7 +76,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().InfoBoxControl = InfoBoxControl;
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
-            PocketPaintApplication.GetInstance().InfoxBasicBox = InfoxBasicBox;
+            PocketPaintApplication.GetInstance().InfoxBasicBoxControl = InfoBasicBoxControl;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
 
             PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height;
@@ -253,13 +253,14 @@ namespace Catrobat.Paint.WindowsPhone.View
             else if (InfoAboutAndConditionOfUseBox.Visibility == Visibility.Visible
                     || InfoBoxActionControl.Visibility == Visibility.Visible
                     || InfoBoxControl.Visibility == Visibility.Visible
-                    || InfoxBasicBox.Visibility == Visibility.Visible
+                    || InfoBasicBoxControl.Visibility == Visibility.Visible
                     || InfoAboutAndConditionOfUseBox.Visibility == Visibility.Visible)
             {
+                PaintingAreaCanvas.IsHitTestVisible = true;
                 InfoAboutAndConditionOfUseBox.Visibility = Visibility.Collapsed;
                 InfoBoxActionControl.Visibility = Visibility.Collapsed;
                 InfoBoxControl.Visibility = Visibility.Collapsed;
-                InfoxBasicBox.Visibility = Visibility.Collapsed;
+                InfoBasicBoxControl.Visibility = Visibility.Collapsed;
                 InfoAboutAndConditionOfUseBox.Visibility = Visibility.Collapsed;
                 changeVisibilityOfAppBars(Visibility.Visible);
                 changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
@@ -684,6 +685,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             InfoAboutAndConditionOfUseBox.Visibility = Visibility.Visible;
             changeVisibilityOfAppBars(Visibility.Collapsed);
+            PaintingAreaCanvas.IsHitTestVisible = false;
         }
 
         private void app_btnNewPicture_Click(object sender, RoutedEventArgs e)
