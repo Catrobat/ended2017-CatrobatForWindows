@@ -22,7 +22,6 @@
         </Grid>
         <Rectangle Height="400" Fill="Transparent" Stroke="White" StrokeThickness="3" Width="370" />
         <Grid x:Name="GridLinks" Height="95" Margin="0,255,0,0" VerticalAlignment="Top">
-            <!--<RichTextBlock x:Name="rtbkLinks" />-->
             <HyperlinkButton x:Name="HyperLink1" Background="Transparent" FontSize="16" Foreground="Orange" Height="34"
                              HorizontalAlignment="Center" Margin="35,-30,35,21" NavigateUri="http://www.silverlight.net" Width="300">
                 <Grid>

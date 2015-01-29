@@ -743,6 +743,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             this.BottomAppBar.Visibility = Visibility.Collapsed;
             changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
             PocketPaintApplication.GetInstance().isLoadPictureClicked = true;
+            PaintingAreaCanvas.IsHitTestVisible = false;
         }
 
         void app_btnFullScreen_Click(object sender, RoutedEventArgs e)
