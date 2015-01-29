@@ -211,7 +211,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().InfoxBasicBoxControl.Visibility = Visibility.Collapsed;
             PocketPaintApplication.GetInstance().InfoAboutAndConditionOfUseBox.Visibility = Visibility.Collapsed;
             PocketPaintApplication.GetInstance().PaintingAreaView.changeVisibilityOfAppBars(Visibility.Visible);
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.IsHitTestVisible = false;
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.IsHitTestVisible = true;
         }
     }
 }
