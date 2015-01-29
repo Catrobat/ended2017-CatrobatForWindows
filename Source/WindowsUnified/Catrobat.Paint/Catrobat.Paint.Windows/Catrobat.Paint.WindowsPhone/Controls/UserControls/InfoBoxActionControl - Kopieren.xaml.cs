@@ -58,7 +58,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().PaintingAreaView.changeVisibilityOfAppBars(Visibility.Visible);
             PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
             PocketPaintApplication.GetInstance().PaintingAreaView.PickAFileButton_Click(sender, e);
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.IsHitTestVisible = true;
+            PocketPaintApplication.GetInstance().PaintingAreaView.setActivityOfToolsControls(true);
         }
 
         private void resetTools()
@@ -119,7 +119,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             // TODO: Before you activate this line, implement the logic if the app is suspended.
             PocketPaintApplication.GetInstance().PhoneControl.Visibility = Visibility.Visible;
             PocketPaintApplication.GetInstance().PhoneControl.initPhotoControl();
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.IsHitTestVisible = true;
+            PocketPaintApplication.GetInstance().PaintingAreaView.setActivityOfToolsControls(true);
         }
     }
 }

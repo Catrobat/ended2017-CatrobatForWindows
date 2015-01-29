@@ -256,7 +256,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                     || InfoBasicBoxControl.Visibility == Visibility.Visible
                     || InfoAboutAndConditionOfUseBox.Visibility == Visibility.Visible)
             {
-                PaintingAreaCanvas.IsHitTestVisible = true;
+                setActivityOfToolsControls(true);
+                
                 InfoAboutAndConditionOfUseBox.Visibility = Visibility.Collapsed;
                 InfoBoxActionControl.Visibility = Visibility.Collapsed;
                 InfoBoxControl.Visibility = Visibility.Collapsed;
@@ -300,6 +301,20 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
+        public void setActivityOfToolsControls(bool isActive)
+        {
+            if (isActive)
+            {
+                PaintingAreaCanvas.IsHitTestVisible = true;
+                changeVisibilityOfActiveSelectionControl(Visibility.Visible);
+            }
+            else
+            {
+                PaintingAreaCanvas.IsHitTestVisible = false;
+                changeVisibilityOfSelectionsControls(Visibility.Collapsed);
+            }
+        }
+
         public void changeVisibilityOfAppBars(Visibility visibility)
         {
             appBarTop.Visibility = visibility;
@@ -312,6 +327,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            
         }
 
         public async void openFile()
@@ -685,7 +701,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             InfoAboutAndConditionOfUseBox.Visibility = Visibility.Visible;
             changeVisibilityOfAppBars(Visibility.Collapsed);
-            PaintingAreaCanvas.IsHitTestVisible = false;
+            setActivityOfToolsControls(false);
         }
 
         private void app_btnNewPicture_Click(object sender, RoutedEventArgs e)
@@ -743,7 +759,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             this.BottomAppBar.Visibility = Visibility.Collapsed;
             changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
             PocketPaintApplication.GetInstance().isLoadPictureClicked = true;
-            PaintingAreaCanvas.IsHitTestVisible = false;
+            setActivityOfToolsControls(false);
         }
 
         void app_btnFullScreen_Click(object sender, RoutedEventArgs e)
