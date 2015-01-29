@@ -711,6 +711,10 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 messageBoxNewDrawingSpace_Click("Neues Bild", false);
             }
+            else
+            {
+                resetApp();
+            }
         }
 
         public void changeEnableOfAppBarButtonResetZoom(bool isEnabled)
@@ -1472,7 +1476,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             paintData.strokeColorSelected = new SolidColorBrush(Colors.Gray);
             paintData.thicknessSelected = 8;
             paintData.strokeThickness = 3.0;
-
+            GrdThicknessControl.Visibility = Visibility.Collapsed;
             PocketPaintApplication.GetInstance().resetBoolVariables(false, true, false, true, false, false);
             CtrlThicknessControl.setValueBtnBrushThickness(paintData.thicknessSelected);
             CtrlThicknessControl.setValueSliderThickness(paintData.thicknessSelected);
