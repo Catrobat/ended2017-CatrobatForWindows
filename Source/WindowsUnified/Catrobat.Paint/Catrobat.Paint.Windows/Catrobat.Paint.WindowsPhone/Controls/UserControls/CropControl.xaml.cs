@@ -23,7 +23,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             this.InitializeComponent();
             double mobileDisplayHeight = Window.Current.Bounds.Height;
             double mobileDisplayWidth = Window.Current.Bounds.Width;
-            TransformGroup _transformGridMain = new TransformGroup();
+            _transformGridMain = new TransformGroup();
             GridMain.RenderTransform = _transformGridMain;
             PocketPaintApplication.GetInstance().CropControl = this;
             setIsModifiedRectangleMovement = false;
@@ -46,21 +46,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             //    rectRectangleForMovement.Stroke = new SolidColorBrush(Colors.Transparent);
             //}
         }
-        private void _setGridTransformsOfEllipses(TransformGroup transformGroup, TranslateTransform translateTransform)
-        {
-            transformGroup.Children.Add(translateTransform);
-            double offsetX = transformGroup.Value.OffsetX;
-            double offsetY = transformGroup.Value.OffsetY;
-
-            transformGroup.Children.Clear();
-
-            var move = new TranslateTransform();
-            move.X = offsetX;
-            move.Y = offsetY;
-
-            transformGroup.Children.Add(move);
-        }
-
         private TranslateTransform createTranslateTransform(double x, double y)
         {
             var move = new TranslateTransform();
@@ -248,6 +233,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void changeMarginTopOfUiElements(double value)
         {
             rectRectangleForMovement.Margin = new Thickness(rectRectangleForMovement.Margin.Left, rectRectangleForMovement.Margin.Top - value, rectRectangleForMovement.Margin.Right, rectRectangleForMovement.Margin.Bottom);
+            GridMain.Margin = new Thickness(GridMain.Margin.Left, GridMain.Margin.Top - value, GridMain.Margin.Right, GridMain.Margin.Bottom);
         }
 
         private void rectRectangleForMovement_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
@@ -260,10 +246,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                 _transformGridMain.Children.Add(move);
 
-                move.X = _transformGridMain.Value.OffsetX;
-                move.Y = _transformGridMain.Value.OffsetY;
-                _transformGridMain.Children.Clear();
-                _transformGridMain.Children.Add(move);
+                //move.X = _transformGridMain.Value.OffsetX;
+                //move.Y = _transformGridMain.Value.OffsetY;
+                //_transformGridMain.Children.Clear();
+                //_transformGridMain.Children.Add(move);
 
                 resetAppBarButtonRectangleSelectionControl(true);
                 setIsModifiedRectangleMovement = true;
