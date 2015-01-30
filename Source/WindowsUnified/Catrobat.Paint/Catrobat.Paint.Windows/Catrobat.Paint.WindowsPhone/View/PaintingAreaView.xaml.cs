@@ -68,7 +68,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().EllipseSelectionControl = ucEllipseSelectionControl;
             PocketPaintApplication.GetInstance().RectangleSelectionControl = ucRectangleSelectionControl;
             PocketPaintApplication.GetInstance().GridInputScopeControl = GridInputScopeControl;
-            PocketPaintApplication.GetInstance().GridCropControl = GridCropControl;
             PocketPaintApplication.GetInstance().GridImportImageSelectionControl = GridImportImageSelectionControl;
             PocketPaintApplication.GetInstance().InfoAboutAndConditionOfUseBox = InfoAboutAndConditionOfUseBox;
             PocketPaintApplication.GetInstance().InfoBoxActionControl = InfoBoxActionControl;
@@ -1375,7 +1374,6 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             Visibility visibility = Visibility.Collapsed;
             PocketPaintApplication.GetInstance().EllipseSelectionControl.Visibility = visibility;
-            PocketPaintApplication.GetInstance().GridCropControl.Visibility = visibility;
             PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = visibility;
             PocketPaintApplication.GetInstance().GridInputScopeControl.Visibility = visibility;
             PocketPaintApplication.GetInstance().GridUcRellRecControlState = visibility;

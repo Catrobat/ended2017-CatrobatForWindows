@@ -12,7 +12,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" NavigationCacheMode="Required" >
 
     <Grid x:Name="LayoutRoot" IsHitTestVisible="True">
-        <Grid x:Name="PaintingAreaContentPanelGrid" Background="Transparent" IsHitTestVisible="True">
+        <Grid x:Name="PaintingAreaContentPanelGrid" IsHitTestVisible="True">
             <Grid x:Name="PaintingAreaCheckeredGrid" Height="auto" IsHitTestVisible="True" Width="auto">
                 <Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
@@ -41,10 +41,7 @@
                 <userControls:RectangleSelectionControl x:Name="ucRectangleSelectionControl" Visibility="Collapsed"></userControls:RectangleSelectionControl>
             </Grid>
 
-            <!-- Crop-Control -->
-            <Grid x:Name="GridCropControl" Height="496" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Width="384">
-                <userControls:CropControl></userControls:CropControl>
-            </Grid>
+
 
             <!-- app-BarRectEllControl -->
             <Grid x:Name="GridUserControlRectEll" Height="312" HorizontalAlignment="Center" Margin="0,0,0,72"
@@ -84,6 +81,8 @@
         <StackPanel Margin="0,-5,0,0" VerticalAlignment="Top">
             <controls:AppbarTop x:Name="appBarTop" Height="72px"></controls:AppbarTop>
         </StackPanel>
+        <!-- Crop-Control -->
+        <userControls:CropControl Visibility="Collapsed"></userControls:CropControl>
     </Grid>
 
     <Page.BottomAppBar>

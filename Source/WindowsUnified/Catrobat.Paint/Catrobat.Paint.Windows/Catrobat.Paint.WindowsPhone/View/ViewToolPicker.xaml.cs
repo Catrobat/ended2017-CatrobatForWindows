@@ -96,9 +96,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                             break;
                         case "BtnCrop":
                             pocketPaintApplication.SwitchTool(ToolType.Crop);
-                            pocketPaintApplication.GridCropControl.Visibility = Visibility.Visible;
-                            pocketPaintApplication.GridCropControl.Children.Clear();
-                            pocketPaintApplication.GridCropControl.Children.Add(new CropControl());
+                            //pocketPaintApplication.GridCropControl.Visibility = Visibility.Visible;
+                            //pocketPaintApplication.GridCropControl.Children.Clear();
+                            //pocketPaintApplication.GridCropControl.Children.Add(new CropControl());
                             break;
                         case "BtnCursor":
                             pocketPaintApplication.SwitchTool(ToolType.Cursor);
