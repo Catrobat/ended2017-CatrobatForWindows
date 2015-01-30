@@ -28,23 +28,54 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().CropControl = this;
             setIsModifiedRectangleMovement = false;
 
-            //var toScaleValue = new ScaleTransform();
-
-            //toScaleValue.ScaleX = 0.75;
-            //toScaleValue.ScaleY = 0.75;
-            //toScaleValue.CenterX = 410.0 / 2.0;
-            //toScaleValue.CenterY = 676.66 / 2.0;
-            //_transformGridMain.Children.Add(toScaleValue);
-
-            //var toTranslateValue = new TranslateTransform();
-            //toTranslateValue.X = 0;
-            //toTranslateValue.Y -= 11.0;
-            //_transformGridMain.Children.Add(toTranslateValue);
-
             //if(!hasElementsPaintingAreaViews())
             //{
             //    rectRectangleForMovement.Stroke = new SolidColorBrush(Colors.Transparent);
             //}
+        }
+
+        public void setCropSelection()
+        {
+            TransformGroup paintingAreaCheckeredGridTransformGroup = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
+
+            if(paintingAreaCheckeredGridTransformGroup.Value.M11 > 0.0)
+            {
+                double height = paintingAreaCheckeredGridTransformGroup.Value.M11 * Window.Current.Bounds.Height + 10.0;
+                double width = paintingAreaCheckeredGridTransformGroup.Value.M11 * Window.Current.Bounds.Width + 10.0;
+                GridMain.Height = height;
+                GridMain.Width = width;
+                rectRectangleForMovement.Height = height;
+                rectRectangleForMovement.Width = width;
+                GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - 5,
+                                                paintingAreaCheckeredGridTransformGroup.Value.OffsetY - 5, 0, 0);
+            }
+            else if(paintingAreaCheckeredGridTransformGroup.Value.M11 < 0.0)
+            {
+                double height = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11) * Window.Current.Bounds.Height + 10.0;
+                double width = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11) * Window.Current.Bounds.Width + 10.0;
+                GridMain.Height = height;
+                GridMain.Width = width;
+                rectRectangleForMovement.Height = height;
+                rectRectangleForMovement.Width = width;
+                GridMain.Margin = new Thickness(Window.Current.Bounds.Width - paintingAreaCheckeredGridTransformGroup.Value.OffsetX - 5,
+                                                Window.Current.Bounds.Height - paintingAreaCheckeredGridTransformGroup.Value.OffsetY, 0, 0);
+            }
+            else if(paintingAreaCheckeredGridTransformGroup.Value.M12 > 0.0)
+            {
+                double height = paintingAreaCheckeredGridTransformGroup.Value.M12 * Window.Current.Bounds.Width + 10.0;
+                double width = paintingAreaCheckeredGridTransformGroup.Value.M12 * Window.Current.Bounds.Height + 10.0;
+                GridMain.Height = height;
+                GridMain.Width = width;
+                rectRectangleForMovement.Height = height;
+                rectRectangleForMovement.Width = width;
+                GridMain.Margin = new Thickness(Window.Current.Bounds.Width - paintingAreaCheckeredGridTransformGroup.Value.OffsetX - 5,
+                                                paintingAreaCheckeredGridTransformGroup.Value.OffsetY - 5, 0, 0);
+
+            }
+            else if(paintingAreaCheckeredGridTransformGroup.Value.M12 < 0.0)
+            {
+
+            }
         }
         private TranslateTransform createTranslateTransform(double x, double y)
         {
@@ -199,7 +230,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void changeHeightOfUiElements(double value)
         {
-            rectRectangleForMovement.Height += value;
             GridMain.Height += value;
             resetAppBarButtonRectangleSelectionControl(true);
             setIsModifiedRectangleMovement = true;
