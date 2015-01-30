@@ -28,18 +28,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().CropControl = this;
             setIsModifiedRectangleMovement = false;
 
-            var toScaleValue = new ScaleTransform();
+            //var toScaleValue = new ScaleTransform();
 
-            toScaleValue.ScaleX = 0.75;
-            toScaleValue.ScaleY = 0.75;
-            toScaleValue.CenterX = 410.0 / 2.0;
-            toScaleValue.CenterY = 676.66 / 2.0;
-            _transformGridMain.Children.Add(toScaleValue);
+            //toScaleValue.ScaleX = 0.75;
+            //toScaleValue.ScaleY = 0.75;
+            //toScaleValue.CenterX = 410.0 / 2.0;
+            //toScaleValue.CenterY = 676.66 / 2.0;
+            //_transformGridMain.Children.Add(toScaleValue);
 
-            var toTranslateValue = new TranslateTransform();
-            toTranslateValue.X = 0;
-            toTranslateValue.Y -= 11.0;
-            _transformGridMain.Children.Add(toTranslateValue);
+            //var toTranslateValue = new TranslateTransform();
+            //toTranslateValue.X = 0;
+            //toTranslateValue.Y -= 11.0;
+            //_transformGridMain.Children.Add(toTranslateValue);
 
             //if(!hasElementsPaintingAreaViews())
             //{
@@ -67,7 +67,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Height + e.Delta.Translation.Y) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
-                var moveY = createTranslateTransform(0.0, Math.Round(e.Delta.Translation.Y));
+                var moveY = createTranslateTransform(0.0, e.Delta.Translation.Y);
                 var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
 
                 changeHeightOfUiElements(moveY.Y);
@@ -79,7 +79,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Height + (e.Delta.Translation.Y * -1)) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
-                var moveY = createTranslateTransform(0.0, Math.Round(e.Delta.Translation.Y));
+                var moveY = createTranslateTransform(0.0, e.Delta.Translation.Y);
                 var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
 
                 changeHeightOfUiElements(moveY.Y * -1.0);
@@ -92,8 +92,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_RECTANGLE_MOVE_WIDTH &&
                (rectRectangleForMovement.Height + e.Delta.Translation.Y) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
-                var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
-                var moveY = createTranslateTransform(0.0, Math.Round(e.Delta.Translation.Y));
+                var moveX = createTranslateTransform((e.Delta.Translation.X), 0.0);
+                var moveY = createTranslateTransform(0.0, (e.Delta.Translation.Y));
                 var moveXY = createTranslateTransform(moveX.X, moveY.Y);
                 var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
                 var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
@@ -112,7 +112,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_RECTANGLE_MOVE_WIDTH)
             {
-                var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
+                var moveX = createTranslateTransform((e.Delta.Translation.X), 0.0);
                 var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
 
                 changeWidthOfUiElements(moveX.X * -1.0);
@@ -125,8 +125,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_RECTANGLE_MOVE_WIDTH &&
                 (rectRectangleForMovement.Height + (e.Delta.Translation.Y * -1)) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
-                var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
-                var moveY = createTranslateTransform(0.0, Math.Round(e.Delta.Translation.Y));
+                var moveX = createTranslateTransform((e.Delta.Translation.X), 0.0);
+                var moveY = createTranslateTransform(0.0, (e.Delta.Translation.Y));
                 var moveXY = createTranslateTransform(moveX.X, moveY.Y);
                 var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
                 var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
@@ -146,8 +146,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + e.Delta.Translation.X) >= MIN_RECTANGLE_MOVE_WIDTH &&
                 (rectRectangleForMovement.Height + e.Delta.Translation.Y) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
-                var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
-                var moveY = createTranslateTransform(0.0, Math.Round(e.Delta.Translation.Y));
+                var moveX = createTranslateTransform((e.Delta.Translation.X), 0.0);
+                var moveY = createTranslateTransform(0.0, (e.Delta.Translation.Y));
                 var moveXY = createTranslateTransform(moveX.X, moveY.Y);
                 var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
                 var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
@@ -167,7 +167,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + e.Delta.Translation.X) >= MIN_RECTANGLE_MOVE_WIDTH)
             {
-                var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
+                var moveX = createTranslateTransform((e.Delta.Translation.X), 0.0);
                 var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
 
                 changeWidthOfUiElements(moveX.X);
@@ -180,8 +180,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + e.Delta.Translation.X) >= MIN_RECTANGLE_MOVE_WIDTH &&
                (rectRectangleForMovement.Height + (e.Delta.Translation.Y * -1)) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
-                var moveX = createTranslateTransform(Math.Round(e.Delta.Translation.X), 0.0);
-                var moveY = createTranslateTransform(0.0, Math.Round(e.Delta.Translation.Y));
+                var moveX = createTranslateTransform((e.Delta.Translation.X), 0.0);
+                var moveY = createTranslateTransform(0.0, (e.Delta.Translation.Y));
                 var moveXY = createTranslateTransform(moveX.X, moveY.Y);
                 var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
                 var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
@@ -199,7 +199,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void changeHeightOfUiElements(double value)
         {
-
             rectRectangleForMovement.Height += value;
 
             resetAppBarButtonRectangleSelectionControl(true);
@@ -208,7 +207,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void changeWidthOfUiElements(double value)
         {
-            GridMain.Width += value;
+            //GridMain.Width += value;
             rectRectangleForMovement.Width += value;
 
             resetAppBarButtonRectangleSelectionControl(true);
@@ -233,7 +232,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void changeMarginTopOfUiElements(double value)
         {
             rectRectangleForMovement.Margin = new Thickness(rectRectangleForMovement.Margin.Left, rectRectangleForMovement.Margin.Top - value, rectRectangleForMovement.Margin.Right, rectRectangleForMovement.Margin.Bottom);
-            GridMain.Margin = new Thickness(GridMain.Margin.Left, GridMain.Margin.Top - value, GridMain.Margin.Right, GridMain.Margin.Bottom);
         }
 
         private void rectRectangleForMovement_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
