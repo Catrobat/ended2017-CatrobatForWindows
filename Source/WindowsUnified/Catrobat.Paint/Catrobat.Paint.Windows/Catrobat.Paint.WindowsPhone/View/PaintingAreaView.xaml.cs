@@ -76,7 +76,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().InfoBoxControl = InfoBoxControl;
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
-            PocketPaintApplication.GetInstance().InfoxBasicBox = InfoxBasicBox;
+            PocketPaintApplication.GetInstance().InfoxBasicBoxControl = InfoBasicBoxControl;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
 
             PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height;
@@ -253,13 +253,15 @@ namespace Catrobat.Paint.WindowsPhone.View
             else if (InfoAboutAndConditionOfUseBox.Visibility == Visibility.Visible
                     || InfoBoxActionControl.Visibility == Visibility.Visible
                     || InfoBoxControl.Visibility == Visibility.Visible
-                    || InfoxBasicBox.Visibility == Visibility.Visible
+                    || InfoBasicBoxControl.Visibility == Visibility.Visible
                     || InfoAboutAndConditionOfUseBox.Visibility == Visibility.Visible)
             {
+                setActivityOfToolsControls(true);
+                
                 InfoAboutAndConditionOfUseBox.Visibility = Visibility.Collapsed;
                 InfoBoxActionControl.Visibility = Visibility.Collapsed;
                 InfoBoxControl.Visibility = Visibility.Collapsed;
-                InfoxBasicBox.Visibility = Visibility.Collapsed;
+                InfoBasicBoxControl.Visibility = Visibility.Collapsed;
                 InfoAboutAndConditionOfUseBox.Visibility = Visibility.Collapsed;
                 changeVisibilityOfAppBars(Visibility.Visible);
                 changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
@@ -299,6 +301,20 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
+        public void setActivityOfToolsControls(bool isActive)
+        {
+            if (isActive)
+            {
+                PaintingAreaCanvas.IsHitTestVisible = true;
+                changeVisibilityOfActiveSelectionControl(Visibility.Visible);
+            }
+            else
+            {
+                PaintingAreaCanvas.IsHitTestVisible = false;
+                changeVisibilityOfSelectionsControls(Visibility.Collapsed);
+            }
+        }
+
         public void changeVisibilityOfAppBars(Visibility visibility)
         {
             appBarTop.Visibility = visibility;
@@ -311,6 +327,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         /// Dieser Parameter wird normalerweise zum Konfigurieren der Seite verwendet.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            
         }
 
         public async void openFile()
@@ -684,6 +701,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             InfoAboutAndConditionOfUseBox.Visibility = Visibility.Visible;
             changeVisibilityOfAppBars(Visibility.Collapsed);
+            setActivityOfToolsControls(false);
         }
 
         private void app_btnNewPicture_Click(object sender, RoutedEventArgs e)
@@ -692,6 +710,10 @@ namespace Catrobat.Paint.WindowsPhone.View
             if (PaintingAreaCanvas.Children.Count > 0)
             {
                 messageBoxNewDrawingSpace_Click("Neues Bild", false);
+            }
+            else
+            {
+                resetApp();
             }
         }
 
@@ -741,6 +763,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             this.BottomAppBar.Visibility = Visibility.Collapsed;
             changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
             PocketPaintApplication.GetInstance().isLoadPictureClicked = true;
+            setActivityOfToolsControls(false);
         }
 
         void app_btnFullScreen_Click(object sender, RoutedEventArgs e)
@@ -1453,7 +1476,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             paintData.strokeColorSelected = new SolidColorBrush(Colors.Gray);
             paintData.thicknessSelected = 8;
             paintData.strokeThickness = 3.0;
-
+            GrdThicknessControl.Visibility = Visibility.Collapsed;
             PocketPaintApplication.GetInstance().resetBoolVariables(false, true, false, true, false, false);
             CtrlThicknessControl.setValueBtnBrushThickness(paintData.thicknessSelected);
             CtrlThicknessControl.setValueSliderThickness(paintData.thicknessSelected);

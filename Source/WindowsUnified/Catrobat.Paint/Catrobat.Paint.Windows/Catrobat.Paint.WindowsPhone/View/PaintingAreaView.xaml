@@ -67,7 +67,7 @@
             -->
         </Grid>
 
-        <userControls:InfoBasicBox x:Name="InfoxBasicBox" Visibility="Collapsed"></userControls:InfoBasicBox>
+        <userControls:InfoBasicBoxControl x:Name="InfoBasicBoxControl" Visibility="Collapsed"></userControls:InfoBasicBoxControl>
         <userControls:InfoBoxActionControl x:Name="InfoBoxActionControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"></userControls:InfoBoxActionControl>
         <userControls:InfoBoxControl x:Name="InfoBoxControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"></userControls:InfoBoxControl>
         <userControls:InfoAboutAndConditionOfUseBox x:Name="InfoAboutAndConditionOfUseBox" HorizontalAlignment="Center" Visibility="Collapsed"></userControls:InfoAboutAndConditionOfUseBox>
