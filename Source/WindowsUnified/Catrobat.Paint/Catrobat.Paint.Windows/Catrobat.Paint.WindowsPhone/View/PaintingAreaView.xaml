@@ -39,9 +39,9 @@
 
                 <!-- RectangleSelectioncontrol -->
                 <userControls:RectangleSelectionControl x:Name="ucRectangleSelectionControl" Visibility="Collapsed"></userControls:RectangleSelectionControl>
+
+                
             </Grid>
-
-
 
             <!-- app-BarRectEllControl -->
             <Grid x:Name="GridUserControlRectEll" Height="312" HorizontalAlignment="Center" Margin="0,0,0,72"
@@ -64,6 +64,9 @@
             -->
         </Grid>
 
+        <!-- Crop-Control -->
+        <userControls:CropControl x:Name="ctrlCropControl" Visibility="Collapsed"></userControls:CropControl>
+
         <userControls:InfoBasicBoxControl x:Name="InfoBasicBoxControl" Visibility="Collapsed"></userControls:InfoBasicBoxControl>
         <userControls:InfoBoxActionControl x:Name="InfoBoxActionControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"></userControls:InfoBoxActionControl>
         <userControls:InfoBoxControl x:Name="InfoBoxControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"></userControls:InfoBoxControl>
@@ -81,8 +84,6 @@
         <StackPanel Margin="0,-5,0,0" VerticalAlignment="Top">
             <controls:AppbarTop x:Name="appBarTop" Height="72px"></controls:AppbarTop>
         </StackPanel>
-        <!-- Crop-Control -->
-        <userControls:CropControl Visibility="Collapsed"></userControls:CropControl>
     </Grid>
 
     <Page.BottomAppBar>

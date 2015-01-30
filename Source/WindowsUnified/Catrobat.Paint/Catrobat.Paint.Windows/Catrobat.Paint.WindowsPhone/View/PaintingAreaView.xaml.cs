@@ -65,6 +65,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
             PocketPaintApplication.GetInstance().GridCursor = GridCursor;
+            PocketPaintApplication.GetInstance().CropControl = ctrlCropControl;
             PocketPaintApplication.GetInstance().EllipseSelectionControl = ucEllipseSelectionControl;
             PocketPaintApplication.GetInstance().RectangleSelectionControl = ucRectangleSelectionControl;
             PocketPaintApplication.GetInstance().GridInputScopeControl = GridInputScopeControl;
@@ -76,7 +77,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
             PocketPaintApplication.GetInstance().InfoxBasicBoxControl = InfoBasicBoxControl;
-            PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
 
             PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
@@ -1379,6 +1379,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().GridUcRellRecControlState = visibility;
             PocketPaintApplication.GetInstance().InfoBoxActionControl.Visibility = visibility;
             PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = visibility;
+            PocketPaintApplication.GetInstance().CropControl.Visibility = visibility;
 
             // TODO; Die folgenden Code-zeilen gehören in eine eigene Funktion ausgelagert.
             //PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;

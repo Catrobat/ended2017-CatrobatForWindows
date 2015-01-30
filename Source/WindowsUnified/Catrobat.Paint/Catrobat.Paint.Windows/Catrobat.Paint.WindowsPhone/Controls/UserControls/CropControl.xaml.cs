@@ -200,14 +200,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void changeHeightOfUiElements(double value)
         {
             rectRectangleForMovement.Height += value;
-
+            GridMain.Height += value;
             resetAppBarButtonRectangleSelectionControl(true);
             setIsModifiedRectangleMovement = true;
         }
 
         private void changeWidthOfUiElements(double value)
         {
-            //GridMain.Width += value;
+            GridMain.Width += value;
             rectRectangleForMovement.Width += value;
 
             resetAppBarButtonRectangleSelectionControl(true);
@@ -216,22 +216,26 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void changeMarginBottomOfUiElements(double value)
         {
-            rectRectangleForMovement.Margin = new Thickness(rectRectangleForMovement.Margin.Left, rectRectangleForMovement.Margin.Top, rectRectangleForMovement.Margin.Right, rectRectangleForMovement.Margin.Bottom - value);
+            GridMain.Margin = new Thickness(GridMain.Margin.Left, GridMain.Margin.Top, 
+                GridMain.Margin.Right, GridMain.Margin.Bottom - value);
         }
 
         private void changeMarginLeftOfUiElements(double value)
         {
-            rectRectangleForMovement.Margin = new Thickness(rectRectangleForMovement.Margin.Left - value, rectRectangleForMovement.Margin.Top, rectRectangleForMovement.Margin.Right, rectRectangleForMovement.Margin.Bottom);
+            GridMain.Margin = new Thickness(GridMain.Margin.Left - value, GridMain.Margin.Top, 
+                GridMain.Margin.Right, GridMain.Margin.Bottom);
         }
 
         private void changeMarginRightOfUiElements(double value)
         {
-            rectRectangleForMovement.Margin = new Thickness(rectRectangleForMovement.Margin.Left, rectRectangleForMovement.Margin.Top, rectRectangleForMovement.Margin.Right - value, rectRectangleForMovement.Margin.Bottom);
+            GridMain.Margin = new Thickness(GridMain.Margin.Left, GridMain.Margin.Top, 
+                GridMain.Margin.Right - value, GridMain.Margin.Bottom);
         }
 
         private void changeMarginTopOfUiElements(double value)
         {
-            rectRectangleForMovement.Margin = new Thickness(rectRectangleForMovement.Margin.Left, rectRectangleForMovement.Margin.Top - value, rectRectangleForMovement.Margin.Right, rectRectangleForMovement.Margin.Bottom);
+            GridMain.Margin = new Thickness(GridMain.Margin.Left, GridMain.Margin.Top - value,
+                GridMain.Margin.Right, GridMain.Margin.Bottom);
         }
 
         private void rectRectangleForMovement_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
