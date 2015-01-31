@@ -53,7 +53,7 @@ namespace Catrobat.Paint.WindowsPhone.Listener
         public void BtnMoveScreenEllipse_OnClick(object sender, RoutedEventArgs e)
         {
             ToolType currentTooltype = PocketPaintApplication.GetInstance().ToolCurrent.GetToolType();
-            if (currentTooltype!= ToolType.Move)
+            if (currentTooltype != ToolType.Move)
             {
                 //PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityGrdSliderThickness(Visibility.Collapsed);
                 PocketPaintApplication.GetInstance().SwitchTool(ToolType.Move);
