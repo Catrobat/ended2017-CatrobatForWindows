@@ -1,4 +1,5 @@
 ﻿using Catrobat.Paint.WindowsPhone.Command;
+using System;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -111,11 +112,11 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             bool isScaleAllowed = false;
 
-            if ((toScaleValue.ScaleX > 1.0) && (_transforms.Value.M11 < 28.0))
+            if ((toScaleValue.ScaleX > 1.0) && ((Math.Abs(_transforms.Value.M11) < 10.0) && (Math.Abs(_transforms.Value.M12) < 10.0)))
             {
                 isScaleAllowed = true;
             }
-            else if ((toScaleValue.ScaleX < 1.0) && (_transforms.Value.M11 > 0.5))
+            else if ((toScaleValue.ScaleX < 1.0) && ((Math.Abs(_transforms.Value.M11) > 0.5) || Math.Abs(_transforms.Value.M12) > 0.5))
             {
                 isScaleAllowed = true;
             }
