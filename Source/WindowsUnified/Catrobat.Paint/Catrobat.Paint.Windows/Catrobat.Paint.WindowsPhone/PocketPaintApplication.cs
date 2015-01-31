@@ -63,6 +63,7 @@ namespace Catrobat.Paint.WindowsPhone
 
         public InfoBoxControl InfoBoxControl { get; set; }
 
+        public CropControl CropControl { get; set; }
         public CursorControl cursorControl { get; set; }
 
         public Canvas PaintingAreaCanvas { get; set; }
@@ -75,8 +76,6 @@ namespace Catrobat.Paint.WindowsPhone
 
         public EllipseSelectionControl EllipseSelectionControl { get; set; }
         public RectangleSelectionControl RectangleSelectionControl { get; set; }
-
-        public CropControl CropControl { get; set; }
 
         public ImportImageSelectionControl ImportImageSelectionControl { get; set; }
 

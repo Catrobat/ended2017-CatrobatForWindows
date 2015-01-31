@@ -127,14 +127,14 @@
     <Compile Include="Controls\UserControls\colorPicker.xaml.cs">
       <DependentUpon>colorPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserControls\CropControl.xaml.cs">
+      <DependentUpon>CropControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserControls\CursorControl.xaml.cs">
       <DependentUpon>CursorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\UserControls\EllipseSelectionControl.xaml.cs">
       <DependentUpon>EllipseSelectionControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\UserControls\CropControl.xaml.cs">
-      <DependentUpon>CropControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\UserControls\ImportImageSelectionControl.xaml.cs">
       <DependentUpon>ImportImageSelectionControl.xaml</DependentUpon>
@@ -338,15 +338,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\UserControls\CropControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\UserControls\CursorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\UserControls\EllipseSelectionControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\UserControls\CropControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
