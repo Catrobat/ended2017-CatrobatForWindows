@@ -17,12 +17,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         const double MIN_RECTANGLE_MOVE_HEIGHT = 60.0;
         const double MIN_RECTANGLE_MOVE_WIDTH = 60.0;
         bool _isModifiedRectangleMovement;
+        double mobileDisplayHeight = 0.0;
+        double mobileDisplayWidth = 0.0;
 
         public CropControl()
         {
             this.InitializeComponent();
-            double mobileDisplayHeight = Window.Current.Bounds.Height;
-            double mobileDisplayWidth = Window.Current.Bounds.Width;
+            mobileDisplayHeight = Window.Current.Bounds.Height;
+            mobileDisplayWidth = Window.Current.Bounds.Width;
             _transformGridMain = new TransformGroup();
             GridMain.RenderTransform = _transformGridMain;
             PocketPaintApplication.GetInstance().CropControl = this;
@@ -34,48 +36,73 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             //}
         }
 
+        public void setMainGridSize(double height, double width)
+        {
+            GridMain.Height = height;
+            GridMain.Width = width;
+        }
+
+        public void setRectangleForMovementSize(double height, double width)
+        {
+            rectRectangleForMovement.Height = height;
+            rectRectangleForMovement.Width = width;
+        }
+
         public void setCropSelection()
         {
             TransformGroup paintingAreaCheckeredGridTransformGroup = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
-
+            // TODO: Besseren Namen finden. Das Selection-Control soll die Arbeitsfläche einschließen und nicht darauf liegen. Daher wird
+            // dieser Wert mit 10 verwendet. Anschließend wird dann die Margin Left und Top, um 5 verringert.
+            double offsetSize = 10.0;
+            double offsetMargin = 5.0;
+            double heightCropControl = 0.0;
+            double widthCropControl = 0.0;
             if(paintingAreaCheckeredGridTransformGroup.Value.M11 > 0.0)
             {
-                double height = paintingAreaCheckeredGridTransformGroup.Value.M11 * Window.Current.Bounds.Height + 10.0;
-                double width = paintingAreaCheckeredGridTransformGroup.Value.M11 * Window.Current.Bounds.Width + 10.0;
-                GridMain.Height = height;
-                GridMain.Width = width;
-                rectRectangleForMovement.Height = height;
-                rectRectangleForMovement.Width = width;
-                GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - 5,
-                                                paintingAreaCheckeredGridTransformGroup.Value.OffsetY - 5, 0, 0);
+                heightCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * mobileDisplayHeight + offsetSize;
+                widthCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * mobileDisplayWidth + offsetSize;
+                GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin,
+                                                paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin, 0, 0);
             }
             else if(paintingAreaCheckeredGridTransformGroup.Value.M11 < 0.0)
             {
-                double height = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11) * Window.Current.Bounds.Height + 10.0;
-                double width = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11) * Window.Current.Bounds.Width + 10.0;
-                GridMain.Height = height;
-                GridMain.Width = width;
-                rectRectangleForMovement.Height = height;
-                rectRectangleForMovement.Width = width;
-                GridMain.Margin = new Thickness(Window.Current.Bounds.Width - paintingAreaCheckeredGridTransformGroup.Value.OffsetX - 5,
-                                                Window.Current.Bounds.Height - paintingAreaCheckeredGridTransformGroup.Value.OffsetY, 0, 0);
+                heightCropControl = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11) * mobileDisplayHeight + offsetSize;
+                widthCropControl = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11) * mobileDisplayWidth + offsetSize;
+                double workingSpaceHeight = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11) * mobileDisplayHeight;
+                double workingSpaceWidth = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11) * mobileDisplayWidth;
+                double positionXRightBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
+                double positionXLeftBottomCornerWorkingSpace = positionXRightBottomCornerWorkingSpace - workingSpaceWidth;
+                double positionYRigthBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
+                double positionYRightTopCornerWorkingSpace = positionYRigthBottomCornerWorkingSpace - workingSpaceHeight;
+                GridMain.Margin = new Thickness(positionXLeftBottomCornerWorkingSpace - offsetMargin,
+                                                positionYRightTopCornerWorkingSpace - offsetMargin, 0, 0);
             }
             else if(paintingAreaCheckeredGridTransformGroup.Value.M12 > 0.0)
             {
-                double height = paintingAreaCheckeredGridTransformGroup.Value.M12 * Window.Current.Bounds.Width + 10.0;
-                double width = paintingAreaCheckeredGridTransformGroup.Value.M12 * Window.Current.Bounds.Height + 10.0;
-                GridMain.Height = height;
-                GridMain.Width = width;
-                rectRectangleForMovement.Height = height;
-                rectRectangleForMovement.Width = width;
-                GridMain.Margin = new Thickness(Window.Current.Bounds.Width - paintingAreaCheckeredGridTransformGroup.Value.OffsetX - 5,
-                                                paintingAreaCheckeredGridTransformGroup.Value.OffsetY - 5, 0, 0);
+                heightCropControl = paintingAreaCheckeredGridTransformGroup.Value.M12 * mobileDisplayWidth + offsetSize;
+                widthCropControl = paintingAreaCheckeredGridTransformGroup.Value.M12 * mobileDisplayHeight + offsetSize;
+                double workingSpaceHeight = paintingAreaCheckeredGridTransformGroup.Value.M12 * mobileDisplayWidth;
+                double workingSpaceWidth = paintingAreaCheckeredGridTransformGroup.Value.M12 * mobileDisplayHeight;
+                double positionXRightTopCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
+                double positionXLeftTopCornerWorkingSpace = positionXRightTopCornerWorkingSpace - workingSpaceWidth;
+                GridMain.Margin = new Thickness(positionXLeftTopCornerWorkingSpace - offsetMargin,
+                                                paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin, 0, 0);
 
             }
             else if(paintingAreaCheckeredGridTransformGroup.Value.M12 < 0.0)
             {
-
+                heightCropControl = paintingAreaCheckeredGridTransformGroup.Value.M21 * mobileDisplayWidth + offsetSize;
+                widthCropControl = paintingAreaCheckeredGridTransformGroup.Value.M21 * mobileDisplayHeight + offsetSize;
+                double workingSpaceHeight = paintingAreaCheckeredGridTransformGroup.Value.M21 * mobileDisplayWidth;
+                double workingSpaceWidth = paintingAreaCheckeredGridTransformGroup.Value.M21 * mobileDisplayHeight;
+                double positionYLeftBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
+                double positionYLeftTopCornerWorkingSpace = positionYLeftBottomCornerWorkingSpace - workingSpaceHeight;
+                GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin,
+                                                positionYLeftTopCornerWorkingSpace - offsetMargin, 0, 0);
             }
+
+            setMainGridSize(heightCropControl, widthCropControl);
+            setRectangleForMovementSize(heightCropControl, widthCropControl);
         }
         private TranslateTransform createTranslateTransform(double x, double y)
         {
@@ -99,7 +126,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Height + e.Delta.Translation.Y) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
                 var moveY = createTranslateTransform(0.0, e.Delta.Translation.Y);
-                var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
 
                 changeHeightOfUiElements(moveY.Y);
                 changeMarginBottomOfUiElements(moveY.Y);
@@ -231,6 +257,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void changeHeightOfUiElements(double value)
         {
             GridMain.Height += value;
+            rectRectangleForMovement.Height += value;
             resetAppBarButtonRectangleSelectionControl(true);
             setIsModifiedRectangleMovement = true;
         }
@@ -292,8 +319,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             double coordinateX = 0.0;
             double coordianteY = 0.0;
-            double halfScreenHeight = Window.Current.Bounds.Height / 2.0;
-            double halfScreenWidth = Window.Current.Bounds.Width / 2.0;
+            double halfScreenHeight = mobileDisplayHeight / 2.0;
+            double halfScreenWidth = mobileDisplayWidth / 2.0;
             double offsetX = _transformGridMain.Value.OffsetX;
             double offsetY = _transformGridMain.Value.OffsetY;
             double positionX = 0.0;
