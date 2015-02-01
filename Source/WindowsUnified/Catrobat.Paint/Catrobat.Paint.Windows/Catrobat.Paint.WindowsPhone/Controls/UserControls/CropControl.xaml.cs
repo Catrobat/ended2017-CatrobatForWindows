@@ -101,16 +101,52 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             else if(paintingAreaCheckeredGridTransformGroup.Value.M11 < 0.0)
             {
-                heightCropControl = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11) * mobileDisplayHeight + offsetSize;
-                widthCropControl = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11) * mobileDisplayWidth + offsetSize;
-                double workingSpaceHeight = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11) * mobileDisplayHeight;
-                double workingSpaceWidth = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11) * mobileDisplayWidth;
-                double positionXRightBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
-                double positionXLeftBottomCornerWorkingSpace = positionXRightBottomCornerWorkingSpace - workingSpaceWidth;
-                double positionYRigthBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
-                double positionYRightTopCornerWorkingSpace = positionYRigthBottomCornerWorkingSpace - workingSpaceHeight;
-                GridMain.Margin = new Thickness(positionXLeftBottomCornerWorkingSpace - offsetMargin,
-                                                positionYRightTopCornerWorkingSpace - offsetMargin, 0, 0);
+                scaleValue = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11);
+
+                // Attention: Working space is rotated 180°
+                double leftX = PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth;
+                double rightX = 0;
+                double bottomY = 0;
+                double topY = PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight;
+                if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count != 0)
+                {
+                    for (int indexHeight = 0; indexHeight < mobileDisplayHeight; indexHeight++)
+                    {
+                        for (int indexWidth = 0; indexWidth < mobileDisplayWidth; indexWidth++)
+                        {
+                            SolidColorBrush brush = pixelData.getPixelFromCanvas(indexWidth, indexHeight);
+                            if (brush.Color.A != 0x00)
+                            {
+                                leftX = indexWidth < leftX ? indexWidth : leftX;
+                                topY = indexHeight < topY ? indexHeight : topY;
+                                rightX = indexWidth > rightX ? indexWidth : rightX;
+                                bottomY = indexHeight > bottomY ? indexHeight : bottomY;
+                            }
+                        }
+                    }
+                    heightCropControl = (bottomY - topY) * scaleValue + offsetSize;
+                    widthCropControl = (rightX - leftX) * scaleValue + offsetSize;
+                    //GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin + ((Window.Current.Bounds.Width - rightX) * scaleValue),
+                    //                           paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin + ((Window.Current.Bounds.Height - bottomY) * scaleValue), 0, 0);
+                    double workingSpaceHeight = scaleValue * mobileDisplayHeight;
+                    double workingSpaceWidth = scaleValue * mobileDisplayWidth;
+                    double positionXRightBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
+                    double positionXLeftBottomCornerWorkingSpace = positionXRightBottomCornerWorkingSpace - workingSpaceWidth;
+                    double positionYRigthBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
+                    double positionYRightTopCornerWorkingSpace = positionYRigthBottomCornerWorkingSpace - workingSpaceHeight;
+                    GridMain.Margin = new Thickness(positionXLeftBottomCornerWorkingSpace - offsetMargin + ((Window.Current.Bounds.Width - rightX) * scaleValue),
+                                                positionYRightTopCornerWorkingSpace - offsetMargin + ((Window.Current.Bounds.Height - bottomY) * scaleValue), 0, 0);
+                }
+                //heightCropControl = scaleValue * mobileDisplayHeight + offsetSize;
+                //widthCropControl = scaleValue * mobileDisplayWidth + offsetSize;
+                //double workingSpaceHeight = scaleValue * mobileDisplayHeight;
+                //double workingSpaceWidth = scaleValue * mobileDisplayWidth;
+                //double positionXRightBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
+                //double positionXLeftBottomCornerWorkingSpace = positionXRightBottomCornerWorkingSpace - workingSpaceWidth;
+                //double positionYRigthBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
+                //double positionYRightTopCornerWorkingSpace = positionYRigthBottomCornerWorkingSpace - workingSpaceHeight;
+                //GridMain.Margin = new Thickness(positionXLeftBottomCornerWorkingSpace - offsetMargin,
+                //                                positionYRightTopCornerWorkingSpace - offsetMargin, 0, 0);
 
             }
             else if(paintingAreaCheckeredGridTransformGroup.Value.M12 > 0.0)
