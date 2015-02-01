@@ -112,6 +112,7 @@ namespace Catrobat.Paint.WindowsPhone
         public double size_height_multiplication;
         public double size_width_multiplication;
         public bool is_border_color = false;
+        public ProgressRing ProgressRing { get; set; }
 
         private void CalculateSizeMultiplication()
         {
@@ -197,7 +198,6 @@ namespace Catrobat.Paint.WindowsPhone
             var w = PaintingAreaCanvas.ActualWidth;
             // TODO: 
             var bmp = new WriteableBitmap(Convert.ToInt32(w), Convert.ToInt32(h));
-
             if (filename == null)
             {
                 filename = DateTime.Now.ToString("d-M-yyyy_HH-mm-ss") + ".png";

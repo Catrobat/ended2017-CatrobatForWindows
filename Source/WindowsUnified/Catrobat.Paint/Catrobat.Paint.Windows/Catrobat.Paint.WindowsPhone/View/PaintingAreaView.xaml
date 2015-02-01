@@ -43,6 +43,7 @@
                 
             </Grid>
 
+            
             <!-- app-BarRectEllControl -->
             <Grid x:Name="GridUserControlRectEll" Height="312" HorizontalAlignment="Center" Margin="0,0,0,72"
                   VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
@@ -67,6 +68,7 @@
         <!-- Crop-Control -->
         <userControls:CropControl x:Name="ctrlCropControl" Visibility="Collapsed"></userControls:CropControl>
 
+        
         <userControls:InfoBasicBoxControl x:Name="InfoBasicBoxControl" Visibility="Collapsed"></userControls:InfoBasicBoxControl>
         <userControls:InfoBoxActionControl x:Name="InfoBoxActionControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"></userControls:InfoBoxActionControl>
         <userControls:InfoBoxControl x:Name="InfoBoxControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"></userControls:InfoBoxControl>
@@ -84,6 +86,9 @@
         <StackPanel Margin="0,-5,0,0" VerticalAlignment="Top">
             <controls:AppbarTop x:Name="appBarTop" Height="72px"></controls:AppbarTop>
         </StackPanel>
+
+        <!-- Loading-->
+        <ProgressRing x:Name="progressRing" Height="80" IsActive="False" Width="80"/>
     </Grid>
 
     <Page.BottomAppBar>

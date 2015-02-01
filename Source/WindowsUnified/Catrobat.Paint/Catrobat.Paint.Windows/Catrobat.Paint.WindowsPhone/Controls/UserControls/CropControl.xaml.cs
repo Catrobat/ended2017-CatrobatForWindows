@@ -48,8 +48,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectRectangleForMovement.Width = width;
         }
 
-        public void setCropSelection()
+        async public void setCropSelection()
         {
+            PocketPaintApplication.GetInstance().ProgressRing.IsActive = true;
+            PixelData.PixelData pixelData = new PixelData.PixelData();
+            await pixelData.preparePaintingAreaCanvasPixel();
             TransformGroup paintingAreaCheckeredGridTransformGroup = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
             // TODO: Besseren Namen finden. Das Selection-Control soll die Arbeitsfläche einschließen und nicht darauf liegen. Daher wird
             // dieser Wert mit 10 verwendet. Anschließend wird dann die Margin Left und Top, um 5 verringert.
@@ -57,12 +60,44 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double offsetMargin = 5.0;
             double heightCropControl = 0.0;
             double widthCropControl = 0.0;
+            double scaleValue = 0.0;
             if(paintingAreaCheckeredGridTransformGroup.Value.M11 > 0.0)
             {
-                heightCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * mobileDisplayHeight + offsetSize;
-                widthCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * mobileDisplayWidth + offsetSize;
-                GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin,
+                // Calculate the position from crop selection in connection with the working space respectively with the drawing
+                // in the working space. In other words the crop selection should be adapted on the drawing in the working space.
+                double leftX = PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth;
+                double rightX = 0;
+                double bottomY = 0;
+                double topY = PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight;
+                if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count != 0)
+                {
+                    for (int indexHeight = 0; indexHeight < mobileDisplayHeight; indexHeight++)
+                    {
+                        for (int indexWidth = 0; indexWidth < mobileDisplayWidth; indexWidth++)
+                        {
+                            SolidColorBrush brush = pixelData.getPixelFromCanvas(indexWidth, indexHeight);
+                            if (brush.Color.A != 0x00)
+                            {
+                                leftX = indexWidth < leftX ? indexWidth : leftX;
+                                topY = indexHeight < topY ? indexHeight : topY;
+                                rightX = indexWidth > rightX ? indexWidth : rightX;
+                                bottomY = indexHeight > bottomY ? indexHeight : bottomY;
+                            }
+                        }
+                    }
+                    scaleValue = paintingAreaCheckeredGridTransformGroup.Value.M11;
+                    heightCropControl = (bottomY - topY) * scaleValue + offsetSize;
+                    widthCropControl = (rightX - leftX) * scaleValue + offsetSize;
+                    GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin + (leftX * scaleValue),
+                                               paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin + (topY * scaleValue), 0, 0);
+                }
+                else
+                {
+                    heightCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * mobileDisplayHeight + offsetSize;
+                    widthCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * mobileDisplayWidth + offsetSize;
+                    GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin,
                                                 paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin, 0, 0);
+                }
             }
             else if(paintingAreaCheckeredGridTransformGroup.Value.M11 < 0.0)
             {
@@ -76,6 +111,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 double positionYRightTopCornerWorkingSpace = positionYRigthBottomCornerWorkingSpace - workingSpaceHeight;
                 GridMain.Margin = new Thickness(positionXLeftBottomCornerWorkingSpace - offsetMargin,
                                                 positionYRightTopCornerWorkingSpace - offsetMargin, 0, 0);
+
             }
             else if(paintingAreaCheckeredGridTransformGroup.Value.M12 > 0.0)
             {
@@ -100,7 +136,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin,
                                                 positionYLeftTopCornerWorkingSpace - offsetMargin, 0, 0);
             }
-
+            PocketPaintApplication.GetInstance().ProgressRing.IsActive = false;
             setMainGridSize(heightCropControl, widthCropControl);
             setRectangleForMovementSize(heightCropControl, widthCropControl);
         }
@@ -317,14 +353,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectRectangleForMovement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            double coordinateX = 0.0;
-            double coordianteY = 0.0;
-            double halfScreenHeight = mobileDisplayHeight / 2.0;
-            double halfScreenWidth = mobileDisplayWidth / 2.0;
-            double offsetX = _transformGridMain.Value.OffsetX;
-            double offsetY = _transformGridMain.Value.OffsetY;
-            double positionX = 0.0;
-            double positionY = 0.0;
+            PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(new Point());
         }
 
         public void resetAppBarButtonRectangleSelectionControl(bool activated)
