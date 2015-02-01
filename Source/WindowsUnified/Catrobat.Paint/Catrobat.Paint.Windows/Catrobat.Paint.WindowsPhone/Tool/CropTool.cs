@@ -32,8 +32,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetDrawingSpace()
         {
-            PocketPaintApplication.GetInstance().GridCropControl.Children.Clear();
-            PocketPaintApplication.GetInstance().GridCropControl.Children.Add(new CropControl());
+            PocketPaintApplication.GetInstance().CropControl.setCropSelection();
             PocketPaintApplication.GetInstance().CropControl.setIsModifiedRectangleMovement = false;
         }
     }

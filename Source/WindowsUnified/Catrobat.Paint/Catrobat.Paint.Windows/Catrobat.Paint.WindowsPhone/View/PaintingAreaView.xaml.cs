@@ -1435,29 +1435,36 @@ namespace Catrobat.Paint.WindowsPhone.View
             setVisibilityOfUcEllipseSelectionControl = visibility;
             setVisibilityOfUcRectangleSelectionControl = visibility;
             GridImportImageSelectionControl.Visibility = visibility;
+            ctrlCropControl.Visibility = visibility;
         }
 
         public void changeVisibilityOfActiveSelectionControl(Visibility visibility)
         {
-            if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Ellipse)
+            if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Crop)
+            {
+                ctrlCropControl.Visibility = visibility;
+            }
+            else if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Ellipse)
             {
                 setVisibilityOfUcEllipseSelectionControl = visibility;
-            }
-            else if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
-            {
-                setVisibilityOfUcRectangleSelectionControl = visibility;
             }
             else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.ImportPng)
             {
                 GridImportImageSelectionControl.Visibility = visibility;
             }
+            else if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
+            {
+                setVisibilityOfUcRectangleSelectionControl = visibility;
+            }
         }
 
         public void resetActiveSelectionControl()
         {
-            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Ellipse ||
-                PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.ImportPng ||
-                PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Crop
+                || PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Ellipse
+                || PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.ImportPng
+                || PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect
+                )
             {
                 PocketPaintApplication.GetInstance().ToolCurrent.ResetDrawingSpace();
             }
