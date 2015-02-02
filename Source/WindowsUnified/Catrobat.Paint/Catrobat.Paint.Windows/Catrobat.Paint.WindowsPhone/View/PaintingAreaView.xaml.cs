@@ -77,6 +77,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
             PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
             PocketPaintApplication.GetInstance().InfoxBasicBoxControl = InfoBasicBoxControl;
+            PocketPaintApplication.GetInstance().ProgressRing = progressRing;
 
             PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height;
             PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;

@@ -21,10 +21,15 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         //private SolidColorBrush ColorBrush;
         private int X;
         private int Y;
+        private byte[] pixelsCanvas;
+        private int pixelHeightCanvas;
+        private int pixelWidthCanvas;
 
         public PixelData()
         {
-
+            pixelsCanvas = null;
+            pixelHeightCanvas = 0;
+            pixelWidthCanvas = 0;
         }
 
         public async Task<SolidColorBrush> GetPixel(WriteableBitmap bitmap, int x, int y)
@@ -52,7 +57,7 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
 
             Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
             var pixels = WindowsRuntimeBufferExtensions.ToArray(buffer);
-
+            
             var width = retarbi.PixelWidth;
             var height = retarbi.PixelHeight;
 
@@ -75,8 +80,48 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             var B = pixels[intValue];
 
             return new SolidColorBrush(Windows.UI.Color.FromArgb(a, r,g,B));
+        }
+
+        async public Task<int> preparePaintingAreaCanvasPixel()
+        {
+            RenderTargetBitmap retarbi = new RenderTargetBitmap();
+            await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvas,
+                                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth,
+                                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight);
+
+            Windows.Storage.Streams.IBuffer buffer = await(retarbi.GetPixelsAsync());
+            pixelsCanvas = WindowsRuntimeBufferExtensions.ToArray(buffer);
+            pixelHeightCanvas = retarbi.PixelHeight;
+            pixelWidthCanvas = retarbi.PixelWidth;
+            return 0;
+        }
+
+        public SolidColorBrush getPixelFromCanvas(int x, int y)
+        {
+            double NormfactorX = (double)pixelWidthCanvas / (double)PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
+            double NormfactorY = (double)pixelHeightCanvas / (double)PocketPaintApplication.GetInstance().Bitmap.PixelHeight;
+
+            double doubleY = ((double)y) * NormfactorY;
+            double doubleX = ((double)x) * NormfactorX;
+
+            int intX = (int)Math.Round(doubleX, 0);
+            int intY = (int)Math.Round(doubleY, 0);
+
+            int intTemp = intY * pixelWidthCanvas;
+            int intXTemp = intTemp + intX;
+            int intValue = intXTemp * 4;
+
+            var a = pixelsCanvas[intValue + 3];
+            var r = pixelsCanvas[intValue + 2];
+            var g = pixelsCanvas[intValue + 1];
+            var B = pixelsCanvas[intValue];
+
+            return new SolidColorBrush(Windows.UI.Color.FromArgb(a, r, g, B));
       
         }
+        
+
+
 
         private async Task<string> SaveAsPng()
         {
