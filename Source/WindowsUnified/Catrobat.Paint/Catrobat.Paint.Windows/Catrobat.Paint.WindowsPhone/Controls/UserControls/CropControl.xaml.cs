@@ -20,6 +20,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         double mobileDisplayHeight = 0.0;
         double mobileDisplayWidth = 0.0;
 
+        double limitLeft = 0.0;
+        double limitRight = 0.0;
+        double limitBottom = 0.0;
+        double limitTop = 0.0;
+
+        double scaleValue = 0.0;
+
         public CropControl()
         {
             this.InitializeComponent();
@@ -48,6 +55,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectRectangleForMovement.Width = width;
         }
 
+        // TODO: Refactor the setCropSelection function.
+
         async public void setCropSelection()
         {
             PocketPaintApplication.GetInstance().ProgressRing.IsActive = true;
@@ -60,7 +69,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double offsetMargin = 5.0;
             double heightCropControl = 0.0;
             double widthCropControl = 0.0;
-            double scaleValue = 0.0;
+            scaleValue = 0.0;
             if(paintingAreaCheckeredGridTransformGroup.Value.M11 > 0.0)
             {
                 // Calculate the position from crop selection in connection with the working space respectively with the drawing
@@ -96,14 +105,19 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     heightCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * mobileDisplayHeight + offsetSize;
                     widthCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * mobileDisplayWidth + offsetSize;
                     GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin,
-                                                paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin, 0, 0);
+                                                    paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin, 0, 0);
                 }
+                limitLeft = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin;
+                limitTop = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
+                // TODO: Explain the following line.
+                limitBottom = limitTop + (mobileDisplayHeight * scaleValue) + offsetMargin * 2;
+                limitRight = limitLeft + (mobileDisplayWidth * scaleValue) + offsetMargin * 2;
             }
             else if(paintingAreaCheckeredGridTransformGroup.Value.M11 < 0.0)
             {
                 scaleValue = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11);
 
-                // Attention: Working space is rotated 90°
+                // Attention: Working space is rotated 180°
                 double leftX = PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth;
                 double rightX = 0;
                 double bottomY = 0;
@@ -150,13 +164,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     GridMain.Margin = new Thickness(positionXLeftBottomCornerWorkingSpace - offsetMargin,
                                                     positionYRightTopCornerWorkingSpace - offsetMargin, 0, 0);
                 }
+                limitRight = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + offsetMargin;
+                limitBottom = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + offsetMargin;
+                // TODO: Explain the following line.
+                limitTop = limitBottom - (mobileDisplayHeight * scaleValue) - offsetMargin * 2;
+                limitLeft = limitRight - (mobileDisplayWidth * scaleValue) - offsetMargin * 2;
 
             }
             else if(paintingAreaCheckeredGridTransformGroup.Value.M12 > 0.0)
             {
                 scaleValue = paintingAreaCheckeredGridTransformGroup.Value.M12;
 
-                // Attention: Working space is rotated 180°
+                // Attention: Working space is rotated 90°
                 double leftX = PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth;
                 double rightX = 0;
                 double bottomY = 0;
@@ -197,7 +216,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     GridMain.Margin = new Thickness(positionXLeftTopCornerWorkingSpace - offsetMargin,
                                                     paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin, 0, 0);
                 }
-
+                //limitLeft = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - (mobileDisplayHeight * scaleValue) - offsetMargin;
+                limitTop = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
+                limitBottom = limitTop + (mobileDisplayWidth * scaleValue) + offsetMargin * 2;
+                limitRight = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + offsetMargin;
+                limitLeft = limitRight - (mobileDisplayHeight * scaleValue) - offsetMargin * 2;
             }
             else if(paintingAreaCheckeredGridTransformGroup.Value.M12 < 0.0)
             {
@@ -244,7 +267,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin,
                                                     positionYLeftTopCornerWorkingSpace - offsetMargin, 0, 0);
                 }
-            }
+
+                limitBottom = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + offsetMargin;
+                limitTop = limitBottom - (mobileDisplayWidth * scaleValue) - offsetMargin * 2;
+                limitLeft = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin;
+                limitRight = limitLeft + (mobileDisplayHeight * scaleValue) + offsetMargin * 2;          }
             PocketPaintApplication.GetInstance().ProgressRing.IsActive = false;
             setMainGridSize(heightCropControl, widthCropControl);
             setRectangleForMovementSize(heightCropControl, widthCropControl);
@@ -272,8 +299,16 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 var moveY = createTranslateTransform(0.0, e.Delta.Translation.Y);
 
-                changeHeightOfUiElements(moveY.Y);
-                changeMarginBottomOfUiElements(moveY.Y);
+                //double maxHeightOfCropSelection = mobileDisplayHeight + 5.0 - GridMain.Margin.Top - (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup).Value.OffsetY;
+
+                //if (rectRectangleForMovement.Height + moveY.Y <= maxHeightOfCropSelection)
+                //{
+                //    changeHeightOfUiElements(moveY.Y);
+                //    changeMarginBottomOfUiElements(moveY.Y);
+                //}
+                double sizeValueToAdd = (GridMain.Margin.Top + rectRectangleForMovement.Height + moveY.Y) > limitBottom ? 0.0 : moveY.Y;
+                changeHeightOfUiElements(sizeValueToAdd);
+                changeMarginBottomOfUiElements(sizeValueToAdd);
             }
         }
 
@@ -282,10 +317,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Height + (e.Delta.Translation.Y * -1)) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
                 var moveY = createTranslateTransform(0.0, e.Delta.Translation.Y);
-                var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
-
-                changeHeightOfUiElements(moveY.Y * -1.0);
-                changeMarginTopOfUiElements(moveY.Y * -1.0);
+                moveY.Y *= -1.0;
+                double sizeValueToAdd = (GridMain.Margin.Top - moveY.Y) < limitTop ? 0.0 : moveY.Y;
+                changeHeightOfUiElements(sizeValueToAdd);
+                changeMarginTopOfUiElements(sizeValueToAdd);
             }
         }
 
@@ -315,10 +350,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_RECTANGLE_MOVE_WIDTH)
             {
                 var moveX = createTranslateTransform((e.Delta.Translation.X), 0.0);
-                var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
 
-                changeWidthOfUiElements(moveX.X * -1.0);
-                changeMarginLeftOfUiElements(moveX.X * -1.0);
+                moveX.X *= -1.0;
+                double sizeValueToAdd = (GridMain.Margin.Left - moveX.X) < limitLeft ? 0.0 : moveX.X;
+                changeWidthOfUiElements(sizeValueToAdd);
+                changeMarginLeftOfUiElements(sizeValueToAdd);
             }
         }
         
@@ -370,10 +406,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + e.Delta.Translation.X) >= MIN_RECTANGLE_MOVE_WIDTH)
             {
                 var moveX = createTranslateTransform((e.Delta.Translation.X), 0.0);
-                var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
 
-                changeWidthOfUiElements(moveX.X);
-                changeMarginRightOfUiElements(moveX.X);
+                // TODO: Create a global const variable for margin offset.
+                double maxWidthOfCropSelection = mobileDisplayWidth + 5.0 - GridMain.Margin.Left - (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup).Value.OffsetX;
+                double sizeValueToAdd = (GridMain.Margin.Left + rectRectangleForMovement.Width + moveX.X) > limitRight ? 0.0 : moveX.X;
+                changeWidthOfUiElements(sizeValueToAdd);
+                changeMarginRightOfUiElements(sizeValueToAdd);
             }
         }
 
