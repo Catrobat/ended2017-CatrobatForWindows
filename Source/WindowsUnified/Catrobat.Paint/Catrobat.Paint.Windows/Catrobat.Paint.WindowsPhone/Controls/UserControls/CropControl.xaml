@@ -40,7 +40,7 @@
         </Grid>
         <Grid x:Name="GridRectRightBottom" Background="#01FFFFFF" Height="50" HorizontalAlignment="Right" ManipulationDelta="rectRightBottom_ManipulationDelta"
                 ManipulationMode="TranslateX, TranslateY" Margin="0,0,-20,-19" VerticalAlignment="Bottom" Width="50">
-            <Rectangle x:Name="rectRightBottomHorz" Fill="Gray" Height="5" Margin="-20,6,0,0" Width="30" />
+            <Rectangle x:Name="rectRightBottomHorz" Fill="Gray" Height="5" Margin="-20,7,0,0" Width="30" />
             <Rectangle x:Name="rectRightBottomVert" Fill="Gray" Height="30" Margin="5,-20,0,0" Width="5" />
         </Grid>
         <Grid x:Name="GridRectRightTop" Background="#01FFFFFF" Height="50" HorizontalAlignment="Right"
