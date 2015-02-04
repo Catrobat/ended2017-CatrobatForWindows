@@ -15,7 +15,7 @@
         <Grid x:Name="GridRectLeftTop" Background="#01FFFFFF" HorizontalAlignment="Left" Height="50" ManipulationDelta="rectLeftTop_ManipulationDelta"
               ManipulationMode="TranslateX, TranslateY" Margin="-5,-7.6,0,0" VerticalAlignment="Top" Width="50">
             <Rectangle x:Name="rectLeftTopHorz" Fill="Gray" Height="5" Margin="0,-30,10,0" Width="30" />
-            <Rectangle x:Name="rectLeftTopVert" Fill="Red" Height="30" Margin="0,-4,35,0" Width="5" />
+            <Rectangle x:Name="rectLeftTopVert" Fill="Gray" Height="30" Margin="0,-4,35,0" Width="5" />
         </Grid>
 
         <Grid x:Name="GridRectCenterBottom" Background="#01FFFFFF" Height="50" HorizontalAlignment="Center" ManipulationDelta="rectCenterBottom_ManipulationDelta_1" 
@@ -40,7 +40,7 @@
         </Grid>
         <Grid x:Name="GridRectRightBottom" Background="#01FFFFFF" Height="50" HorizontalAlignment="Right" ManipulationDelta="rectRightBottom_ManipulationDelta"
                 ManipulationMode="TranslateX, TranslateY" Margin="0,0,-20,-19" VerticalAlignment="Bottom" Width="50">
-            <Rectangle x:Name="rectRightBottomHorz" Fill="Gray" Height="5" Margin="-20,6,0,0" Width="30" />
+            <Rectangle x:Name="rectRightBottomHorz" Fill="Gray" Height="5" Margin="-20,7,0,0" Width="30" />
             <Rectangle x:Name="rectRightBottomVert" Fill="Gray" Height="30" Margin="5,-20,0,0" Width="5" />
         </Grid>
         <Grid x:Name="GridRectRightTop" Background="#01FFFFFF" Height="50" HorizontalAlignment="Right"

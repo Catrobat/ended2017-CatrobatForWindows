@@ -20,6 +20,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         double mobileDisplayHeight = 0.0;
         double mobileDisplayWidth = 0.0;
 
+        double limitLeft = 0.0;
+        double limitRight = 0.0;
+        double limitBottom = 0.0;
+        double limitTop = 0.0;
+
+        double scaleValue = 0.0;
+
         public CropControl()
         {
             this.InitializeComponent();
@@ -48,8 +55,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectRectangleForMovement.Width = width;
         }
 
+        // TODO: Refactor the setCropSelection function.
+
         async public void setCropSelection()
         {
+            _transformGridMain.Children.Clear();
+            GridMain.Margin = new Thickness(-5, -5, 0, 0);
             PocketPaintApplication.GetInstance().ProgressRing.IsActive = true;
             PixelData.PixelData pixelData = new PixelData.PixelData();
             await pixelData.preparePaintingAreaCanvasPixel();
@@ -60,7 +71,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double offsetMargin = 5.0;
             double heightCropControl = 0.0;
             double widthCropControl = 0.0;
-            double scaleValue = 0.0;
+            scaleValue = 0.0;
             if(paintingAreaCheckeredGridTransformGroup.Value.M11 > 0.0)
             {
                 // Calculate the position from crop selection in connection with the working space respectively with the drawing
@@ -88,22 +99,33 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     scaleValue = paintingAreaCheckeredGridTransformGroup.Value.M11;
                     heightCropControl = (bottomY - topY) * scaleValue + offsetSize;
                     widthCropControl = (rightX - leftX) * scaleValue + offsetSize;
-                    GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin + (leftX * scaleValue),
-                                               paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin + (topY * scaleValue), 0, 0);
+
+                    TranslateTransform moveCropControl = new TranslateTransform();
+                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + (leftX * scaleValue);
+                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + (topY * scaleValue);
+                    _transformGridMain.Children.Add(moveCropControl);
                 }
                 else
                 {
                     heightCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * mobileDisplayHeight + offsetSize;
                     widthCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * mobileDisplayWidth + offsetSize;
-                    GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin,
-                                                paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin, 0, 0);
+
+                    TranslateTransform moveCropControl = new TranslateTransform();
+                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin;
+                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
+                    _transformGridMain.Children.Add(moveCropControl);
                 }
+                limitLeft = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin;
+                limitTop = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
+                // TODO: Explain the following line.
+                limitBottom = limitTop + (mobileDisplayHeight * scaleValue) + offsetMargin * 2;
+                limitRight = limitLeft + (mobileDisplayWidth * scaleValue) + offsetMargin * 2;
             }
             else if(paintingAreaCheckeredGridTransformGroup.Value.M11 < 0.0)
             {
                 scaleValue = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11);
 
-                // Attention: Working space is rotated 90°
+                // Attention: Working space is rotated 180°
                 double leftX = PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth;
                 double rightX = 0;
                 double bottomY = 0;
@@ -132,8 +154,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     double positionXLeftBottomCornerWorkingSpace = positionXRightBottomCornerWorkingSpace - workingSpaceWidth;
                     double positionYRigthBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
                     double positionYRightTopCornerWorkingSpace = positionYRigthBottomCornerWorkingSpace - workingSpaceHeight;
-                    GridMain.Margin = new Thickness(positionXLeftBottomCornerWorkingSpace - offsetMargin + ((Window.Current.Bounds.Width - rightX) * scaleValue),
-                                                positionYRightTopCornerWorkingSpace - offsetMargin + ((Window.Current.Bounds.Height - bottomY) * scaleValue), 0, 0);
+
+                    TranslateTransform moveCropControl = new TranslateTransform();
+                    moveCropControl.X = positionXLeftBottomCornerWorkingSpace - offsetMargin + ((Window.Current.Bounds.Width - rightX) * scaleValue);
+                    moveCropControl.Y = positionYRightTopCornerWorkingSpace - offsetMargin + ((Window.Current.Bounds.Height - bottomY) * scaleValue);
+                    _transformGridMain.Children.Add(moveCropControl);
                 }
                 else
                 {
@@ -147,16 +172,24 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     double positionXLeftBottomCornerWorkingSpace = positionXRightBottomCornerWorkingSpace - workingSpaceWidth;
                     double positionYRigthBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
                     double positionYRightTopCornerWorkingSpace = positionYRigthBottomCornerWorkingSpace - workingSpaceHeight;
-                    GridMain.Margin = new Thickness(positionXLeftBottomCornerWorkingSpace - offsetMargin,
-                                                    positionYRightTopCornerWorkingSpace - offsetMargin, 0, 0);
+
+                    TranslateTransform moveCropControl = new TranslateTransform();
+                    moveCropControl.X = positionXLeftBottomCornerWorkingSpace - offsetMargin;
+                    moveCropControl.Y = positionYRightTopCornerWorkingSpace - offsetMargin;
+                    _transformGridMain.Children.Add(moveCropControl);
                 }
+                limitRight = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + offsetMargin;
+                limitBottom = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + offsetMargin;
+                // TODO: Explain the following line.
+                limitTop = limitBottom - (mobileDisplayHeight * scaleValue) - offsetMargin * 2;
+                limitLeft = limitRight - (mobileDisplayWidth * scaleValue) - offsetMargin * 2;
 
             }
             else if(paintingAreaCheckeredGridTransformGroup.Value.M12 > 0.0)
             {
                 scaleValue = paintingAreaCheckeredGridTransformGroup.Value.M12;
 
-                // Attention: Working space is rotated 180°
+                // Attention: Working space is rotated 90°
                 double leftX = PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth;
                 double rightX = 0;
                 double bottomY = 0;
@@ -183,8 +216,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     double workingSpaceWidth = scaleValue * mobileDisplayHeight;
                     double positionXRightTopCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
                     double positionXLeftTopCornerWorkingSpace = positionXRightTopCornerWorkingSpace - workingSpaceWidth;
-                    GridMain.Margin = new Thickness(positionXLeftTopCornerWorkingSpace - offsetMargin + (mobileDisplayHeight - bottomY) * scaleValue,
-                                                    paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin + (leftX * scaleValue), 0, 0);
+
+                    TranslateTransform moveCropControl = new TranslateTransform();
+                    moveCropControl.X = positionXLeftTopCornerWorkingSpace - offsetMargin + (mobileDisplayHeight - bottomY) * scaleValue;
+                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin + (leftX * scaleValue);
+                    _transformGridMain.Children.Add(moveCropControl);
                 }
                 else
                 {
@@ -194,10 +230,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     double workingSpaceWidth = scaleValue * mobileDisplayHeight;
                     double positionXRightTopCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
                     double positionXLeftTopCornerWorkingSpace = positionXRightTopCornerWorkingSpace - workingSpaceWidth;
-                    GridMain.Margin = new Thickness(positionXLeftTopCornerWorkingSpace - offsetMargin,
-                                                    paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin, 0, 0);
-                }
 
+                    TranslateTransform moveCropControl = new TranslateTransform();
+                    moveCropControl.X = positionXLeftTopCornerWorkingSpace - offsetMargin;
+                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
+                    _transformGridMain.Children.Add(moveCropControl);
+                }
+                //limitLeft = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - (mobileDisplayHeight * scaleValue) - offsetMargin;
+                limitTop = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
+                limitBottom = limitTop + (mobileDisplayWidth * scaleValue) + offsetMargin * 2;
+                limitRight = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + offsetMargin;
+                limitLeft = limitRight - (mobileDisplayHeight * scaleValue) - offsetMargin * 2;
             }
             else if(paintingAreaCheckeredGridTransformGroup.Value.M12 < 0.0)
             {
@@ -230,8 +273,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     double workingSpaceWidth = scaleValue * mobileDisplayHeight;
                     double positionYLeftBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
                     double positionYLeftTopCornerWorkingSpace = positionYLeftBottomCornerWorkingSpace - workingSpaceHeight;
-                    GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin + (topY * scaleValue),
-                                                    positionYLeftTopCornerWorkingSpace - offsetMargin + ((mobileDisplayWidth - rightX) * scaleValue), 0, 0);
+
+                    TranslateTransform moveCropControl = new TranslateTransform();
+                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin + (topY * scaleValue);
+                    moveCropControl.Y = positionYLeftTopCornerWorkingSpace - offsetMargin + ((mobileDisplayWidth - rightX) * scaleValue);
+                    _transformGridMain.Children.Add(moveCropControl);
                 }
                 else
                 {
@@ -243,8 +289,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     double positionYLeftTopCornerWorkingSpace = positionYLeftBottomCornerWorkingSpace - workingSpaceHeight;
                     GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin,
                                                     positionYLeftTopCornerWorkingSpace - offsetMargin, 0, 0);
+
+                    TranslateTransform moveCropControl = new TranslateTransform();
+                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin;
+                    moveCropControl.Y = positionYLeftTopCornerWorkingSpace - offsetMargin;
+                    _transformGridMain.Children.Add(moveCropControl);
                 }
-            }
+
+                limitBottom = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + offsetMargin;
+                limitTop = limitBottom - (mobileDisplayWidth * scaleValue) - offsetMargin * 2;
+                limitLeft = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin;
+                limitRight = limitLeft + (mobileDisplayHeight * scaleValue) + offsetMargin * 2;          }
             PocketPaintApplication.GetInstance().ProgressRing.IsActive = false;
             setMainGridSize(heightCropControl, widthCropControl);
             setRectangleForMovementSize(heightCropControl, widthCropControl);
@@ -272,8 +327,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 var moveY = createTranslateTransform(0.0, e.Delta.Translation.Y);
 
-                changeHeightOfUiElements(moveY.Y);
-                changeMarginBottomOfUiElements(moveY.Y);
+                double sizeValueToAdd = (GridMain.Margin.Top + _transformGridMain.Value.OffsetY + rectRectangleForMovement.Height + moveY.Y) > limitBottom ? 0.0 : moveY.Y;
+                changeHeightOfUiElements(sizeValueToAdd);
+                changeMarginBottomOfUiElements(sizeValueToAdd);
             }
         }
 
@@ -282,10 +338,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Height + (e.Delta.Translation.Y * -1)) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
                 var moveY = createTranslateTransform(0.0, e.Delta.Translation.Y);
-                var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
-
-                changeHeightOfUiElements(moveY.Y * -1.0);
-                changeMarginTopOfUiElements(moveY.Y * -1.0);
+                moveY.Y *= -1.0;
+                double sizeValueToAdd = (GridMain.Margin.Top + _transformGridMain.Value.OffsetY - moveY.Y) < limitTop ? 0.0 : moveY.Y;
+                changeHeightOfUiElements(sizeValueToAdd);
+                changeMarginTopOfUiElements(sizeValueToAdd);
             }
         }
 
@@ -294,19 +350,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_RECTANGLE_MOVE_WIDTH &&
                (rectRectangleForMovement.Height + e.Delta.Translation.Y) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
-                var moveX = createTranslateTransform((e.Delta.Translation.X), 0.0);
+                var moveX = createTranslateTransform((e.Delta.Translation.X *-1.0), 0.0);
                 var moveY = createTranslateTransform(0.0, (e.Delta.Translation.Y));
-                var moveXY = createTranslateTransform(moveX.X, moveY.Y);
-                var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
-                var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
-                var moveX2Y = createTranslateTransform(moveX2.X, moveY.Y);
-                var moveXY2 = createTranslateTransform(moveX.X, moveY2.Y);
 
-                changeWidthOfUiElements(moveX.X * -1);
-                changeMarginLeftOfUiElements(moveX.X * -1);
+                // left
+                double sizeValueToAddLeft = (GridMain.Margin.Left + _transformGridMain.Value.OffsetX - moveX.X) < limitLeft ? 0.0 : moveX.X;
+                changeWidthOfUiElements(sizeValueToAddLeft);
+                changeMarginLeftOfUiElements(sizeValueToAddLeft);
 
-                changeHeightOfUiElements(moveY.Y);
-                changeMarginBottomOfUiElements(moveY.Y);
+                // bottom
+                double sizeValueToAddBottom = (GridMain.Margin.Top + _transformGridMain.Value.OffsetY + rectRectangleForMovement.Height + moveY.Y) > limitBottom ? 0.0 : moveY.Y;
+                changeHeightOfUiElements(sizeValueToAddBottom);
+                changeMarginBottomOfUiElements(sizeValueToAddBottom);
             }
         }
 
@@ -315,10 +370,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_RECTANGLE_MOVE_WIDTH)
             {
                 var moveX = createTranslateTransform((e.Delta.Translation.X), 0.0);
-                var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
-
-                changeWidthOfUiElements(moveX.X * -1.0);
-                changeMarginLeftOfUiElements(moveX.X * -1.0);
+                moveX.X *= -1.0;
+                double sizeValueToAdd = (GridMain.Margin.Left + _transformGridMain.Value.OffsetX - moveX.X) < limitLeft ? 0.0 : moveX.X;
+                changeWidthOfUiElements(sizeValueToAdd); 
+                changeMarginLeftOfUiElements(sizeValueToAdd);
             }
         }
         
@@ -327,19 +382,19 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + (e.Delta.Translation.X * -1)) >= MIN_RECTANGLE_MOVE_WIDTH &&
                 (rectRectangleForMovement.Height + (e.Delta.Translation.Y * -1)) >= MIN_RECTANGLE_MOVE_HEIGHT)
             {
+                // left
                 var moveX = createTranslateTransform((e.Delta.Translation.X), 0.0);
+                moveX.X *= -1.0;
+                double sizeValueToAddLeft = (GridMain.Margin.Left + _transformGridMain.Value.OffsetX - moveX.X) < limitLeft ? 0.0 : moveX.X;
+                changeWidthOfUiElements(sizeValueToAddLeft);
+                changeMarginLeftOfUiElements(sizeValueToAddLeft);
+
+                // top
                 var moveY = createTranslateTransform(0.0, (e.Delta.Translation.Y));
-                var moveXY = createTranslateTransform(moveX.X, moveY.Y);
-                var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
-                var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
-                var moveX2Y = createTranslateTransform(moveX2.X, moveY.Y);
-                var moveXY2 = createTranslateTransform(moveX.X, moveY2.Y);
-
-                changeWidthOfUiElements(moveX.X * -1);
-                changeMarginLeftOfUiElements(moveX.X * -1);
-
-                changeHeightOfUiElements(moveY.Y * -1.0);
-                changeMarginTopOfUiElements(moveY.Y * -1.0);
+                moveY.Y *= -1;
+                double sizeValueToAddTop = (GridMain.Margin.Top + _transformGridMain.Value.OffsetY - moveY.Y) < limitTop ? 0.0 : moveY.Y;
+                changeHeightOfUiElements(sizeValueToAddTop);
+                changeMarginTopOfUiElements(sizeValueToAddTop);
             }
         }
 
@@ -350,17 +405,16 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 var moveX = createTranslateTransform((e.Delta.Translation.X), 0.0);
                 var moveY = createTranslateTransform(0.0, (e.Delta.Translation.Y));
-                var moveXY = createTranslateTransform(moveX.X, moveY.Y);
-                var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
-                var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
-                var moveX2Y = createTranslateTransform(moveX2.X, moveY.Y);
-                var moveXY2 = createTranslateTransform(moveX.X, moveY2.Y);
 
-                changeMarginRightOfUiElements(moveX.X);
-                changeWidthOfUiElements(moveX.X);
+                // right
+                double sizeValueToAddRight = (GridMain.Margin.Left + _transformGridMain.Value.OffsetX + rectRectangleForMovement.Width + moveX.X) > limitRight ? 0.0 : moveX.X;
+                changeWidthOfUiElements(sizeValueToAddRight);
+                changeMarginRightOfUiElements(sizeValueToAddRight);
 
-                changeHeightOfUiElements(moveY.Y);
-                changeMarginBottomOfUiElements(moveY.Y);
+                // bottom
+                double sizeValueToAddBottom = (GridMain.Margin.Top + _transformGridMain.Value.OffsetY + rectRectangleForMovement.Height + moveY.Y) > limitBottom ? 0.0 : moveY.Y;
+                changeHeightOfUiElements(sizeValueToAddBottom);
+                changeMarginBottomOfUiElements(sizeValueToAddBottom);
             }
 
         }
@@ -370,10 +424,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (hasElementsPaintingAreaViews() && (rectRectangleForMovement.Width + e.Delta.Translation.X) >= MIN_RECTANGLE_MOVE_WIDTH)
             {
                 var moveX = createTranslateTransform((e.Delta.Translation.X), 0.0);
-                var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
 
-                changeWidthOfUiElements(moveX.X);
-                changeMarginRightOfUiElements(moveX.X);
+                double sizeValueToAdd = (GridMain.Margin.Left + _transformGridMain.Value.OffsetX + rectRectangleForMovement.Width + moveX.X) > limitRight ? 0.0 : moveX.X;
+                changeWidthOfUiElements(sizeValueToAdd);
+                changeMarginRightOfUiElements(sizeValueToAdd);
             }
         }
 
@@ -384,17 +438,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 var moveX = createTranslateTransform((e.Delta.Translation.X), 0.0);
                 var moveY = createTranslateTransform(0.0, (e.Delta.Translation.Y));
-                var moveXY = createTranslateTransform(moveX.X, moveY.Y);
-                var moveX2 = createTranslateTransform(moveX.X / 2.0, 0.0);
-                var moveY2 = createTranslateTransform(0.0, moveY.Y / 2.0);
-                var moveX2Y = createTranslateTransform(moveX2.X, moveY.Y);
-                var moveXY2 = createTranslateTransform(moveX.X, moveY2.Y);
 
-                changeMarginRightOfUiElements(moveX.X);
-                changeWidthOfUiElements(moveX.X);
+                // right
+                double sizeValueToAddRight = (GridMain.Margin.Left + _transformGridMain.Value.OffsetX + rectRectangleForMovement.Width + moveX.X) > limitRight ? 0.0 : moveX.X;
+                changeWidthOfUiElements(sizeValueToAddRight);
+                changeMarginRightOfUiElements(sizeValueToAddRight);
 
-                changeHeightOfUiElements(moveY.Y * -1.0);
-                changeMarginTopOfUiElements(moveY.Y * -1.0);
+                // top
+                moveY.Y *= -1.0;
+                double sizeValueToAddTop = (GridMain.Margin.Top + _transformGridMain.Value.OffsetY - moveY.Y) < limitTop ? 0.0 : moveY.Y;
+                changeHeightOfUiElements(sizeValueToAddTop);
+                changeMarginTopOfUiElements(sizeValueToAddTop);
             }
 
         }
@@ -445,9 +499,32 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             if (hasElementsPaintingAreaViews())
             {
                 var move = new TranslateTransform();
+
+
+                //((TranslateTransform)move).X = e.Delta.Translation.X;
                 ((TranslateTransform)move).X = e.Delta.Translation.X;
                 ((TranslateTransform)move).Y = e.Delta.Translation.Y;
+                if(move.X < 0)
+                {
+                    move.X = (GridMain.Margin.Left + _transformGridMain.Value.OffsetX + move.X ) < limitLeft ? 0.0 : move.X;
+                }
+                else
+                {
+                    move.X = (GridMain.Margin.Left + _transformGridMain.Value.OffsetX + rectRectangleForMovement.Width + move.X) > limitRight ? 0.0 : move.X;
+                }
 
+                if (move.Y < 0)
+                {
+                    move.Y = (GridMain.Margin.Top + _transformGridMain.Value.OffsetY + move.Y) < limitTop ? 0.0 : move.Y;
+                }
+                else
+                {
+                    move.Y = (GridMain.Margin.Top + _transformGridMain.Value.OffsetY + rectRectangleForMovement.Height + move.Y) > limitBottom ? 0.0 : move.Y;
+                }
+                
+                
+
+                
                 _transformGridMain.Children.Add(move);
 
                 //move.X = _transformGridMain.Value.OffsetX;
