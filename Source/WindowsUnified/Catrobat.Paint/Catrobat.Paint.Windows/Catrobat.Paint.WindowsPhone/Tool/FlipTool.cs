@@ -7,16 +7,17 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 {
     class FlipTool : ToolBase
     {
-        private int _scaleX;
-        private int _scaleY;
+        private int _flipX;
+        private int _flipY;
         private double DISPLAY_HEIGHT_HALF;
         private double DISPLAY_WIDTH_HALF;
+
         public FlipTool()
         {
             this.ToolType = ToolType.Flip;
 
-            this._scaleX = 1;
-            this._scaleY = 1;
+            this._flipX = 1;
+            this._flipY = 1;
 
             DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height) / 2.0;
             DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
@@ -44,43 +45,66 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public void FlipHorizontal()
         {
-            var scaleTransform = new ScaleTransform();
+            var flipTransform = new ScaleTransform();
 
-            _scaleY = (_scaleY == 1) ? -1 : 1;
-            scaleTransform.ScaleY = _scaleY;
-            scaleTransform.CenterY = DISPLAY_HEIGHT_HALF;
+            if (PocketPaintApplication.GetInstance().angleForRotation == 90
+                || PocketPaintApplication.GetInstance().angleForRotation == 270)
+            {
 
-            scaleTransform.ScaleX = _scaleX;
-            scaleTransform.CenterX = DISPLAY_WIDTH_HALF;
+                _flipY *= -1;
+            }
+            else
+            {
+                _flipX *= -1;
 
-            PaintingAreaCanvasSettings(scaleTransform);
-            CommandManager.GetInstance().CommitCommand(new FlipCommand(scaleTransform));
+            }
+
+
+            flipTransform.CenterX = DISPLAY_WIDTH_HALF;
+            flipTransform.CenterY = DISPLAY_HEIGHT_HALF;
+
+            flipTransform.ScaleX = _flipX;
+            flipTransform.ScaleY = _flipY;
+
+            PaintingAreaCanvasSettings(flipTransform);
+            CommandManager.GetInstance().CommitCommand(new FlipCommand(flipTransform));
         }
 
         public void FlipVertical()
         {
-            var renderTransform = new ScaleTransform();
+            var flipTransform = new ScaleTransform();
 
-            _scaleX = (_scaleX == 1) ? -1 : 1;
-            renderTransform.ScaleX = _scaleX;
-            renderTransform.CenterX = DISPLAY_WIDTH_HALF;
+            if(PocketPaintApplication.GetInstance().angleForRotation == 90
+                || PocketPaintApplication.GetInstance().angleForRotation == 270)
+            {
 
-            renderTransform.ScaleY = _scaleY;
-            renderTransform.CenterY = DISPLAY_HEIGHT_HALF;
+                _flipX *= -1;
+            }
+            else
+            {
+                _flipY *= -1;
 
-            PaintingAreaCanvasSettings(renderTransform);
-            CommandManager.GetInstance().CommitCommand(new FlipCommand(renderTransform));
+            }
+
+            flipTransform.CenterY = DISPLAY_HEIGHT_HALF;
+            flipTransform.CenterX = DISPLAY_WIDTH_HALF;
+
+            flipTransform.ScaleY = _flipY;
+            flipTransform.ScaleX = _flipX;
+
+            PaintingAreaCanvasSettings(flipTransform);
+            CommandManager.GetInstance().CommitCommand(new FlipCommand(flipTransform));
         }
 
         public override void ResetDrawingSpace()
         {
-            _scaleX = 1;
-            _scaleY = 1;
+            _flipX = 1;
+            _flipY = 1;
 
             var renderTransform = new ScaleTransform();
-            renderTransform.ScaleX = _scaleX;
+            renderTransform.ScaleX = _flipX;
             renderTransform.CenterX = DISPLAY_WIDTH_HALF;
-            renderTransform.ScaleY = _scaleY;
+            renderTransform.ScaleY = _flipY;
             renderTransform.CenterY = DISPLAY_HEIGHT_HALF;
 
             PaintingAreaCanvasSettings(renderTransform);
