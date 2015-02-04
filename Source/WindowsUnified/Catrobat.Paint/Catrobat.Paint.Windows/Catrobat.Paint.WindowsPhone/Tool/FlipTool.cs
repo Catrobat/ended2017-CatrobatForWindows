@@ -16,8 +16,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             this.ToolType = ToolType.Flip;
 
-            this._flipX = 1;
-            this._flipY = 1;
+            this._flipX = PocketPaintApplication.GetInstance().flipX;
+            this._flipY = PocketPaintApplication.GetInstance().flipY;
 
             DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height) / 2.0;
             DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
@@ -66,6 +66,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             flipTransform.ScaleX = _flipX;
             flipTransform.ScaleY = _flipY;
 
+            PocketPaintApplication.GetInstance().flipX = this._flipX;
+            PocketPaintApplication.GetInstance().flipY = this._flipY;
+
             PaintingAreaCanvasSettings(flipTransform);
             CommandManager.GetInstance().CommitCommand(new FlipCommand(flipTransform));
         }
@@ -92,6 +95,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             flipTransform.ScaleY = _flipY;
             flipTransform.ScaleX = _flipX;
 
+            PocketPaintApplication.GetInstance().flipX = this._flipX;
+            PocketPaintApplication.GetInstance().flipY = this._flipY;
+
             PaintingAreaCanvasSettings(flipTransform);
             CommandManager.GetInstance().CommitCommand(new FlipCommand(flipTransform));
         }
@@ -106,6 +112,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             renderTransform.CenterX = DISPLAY_WIDTH_HALF;
             renderTransform.ScaleY = _flipY;
             renderTransform.CenterY = DISPLAY_HEIGHT_HALF;
+
+            PocketPaintApplication.GetInstance().flipX = this._flipX;
+            PocketPaintApplication.GetInstance().flipY = this._flipY;
 
             PaintingAreaCanvasSettings(renderTransform);
             CommandManager.GetInstance().CommitCommand(new FlipCommand(renderTransform));
