@@ -156,8 +156,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     double positionYRightTopCornerWorkingSpace = positionYRigthBottomCornerWorkingSpace - workingSpaceHeight;
 
                     TranslateTransform moveCropControl = new TranslateTransform();
-                    moveCropControl.X = positionXLeftBottomCornerWorkingSpace - offsetMargin + ((Window.Current.Bounds.Width - rightX) * scaleValue);
-                    moveCropControl.Y = positionYRightTopCornerWorkingSpace - offsetMargin + ((Window.Current.Bounds.Height - bottomY) * scaleValue);
+                    moveCropControl.X = positionXLeftBottomCornerWorkingSpace  + ((Window.Current.Bounds.Width - rightX) * scaleValue);
+                    moveCropControl.Y = positionYRightTopCornerWorkingSpace + ((Window.Current.Bounds.Height - bottomY) * scaleValue);
                     _transformGridMain.Children.Add(moveCropControl);
                 }
                 else
@@ -218,8 +218,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     double positionXLeftTopCornerWorkingSpace = positionXRightTopCornerWorkingSpace - workingSpaceWidth;
 
                     TranslateTransform moveCropControl = new TranslateTransform();
-                    moveCropControl.X = positionXLeftTopCornerWorkingSpace - offsetMargin + (mobileDisplayHeight - bottomY) * scaleValue;
-                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin + (leftX * scaleValue);
+                    moveCropControl.X = positionXLeftTopCornerWorkingSpace  + (mobileDisplayHeight - bottomY) * scaleValue;
+                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + (leftX * scaleValue);
                     _transformGridMain.Children.Add(moveCropControl);
                 }
                 else
@@ -275,8 +275,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     double positionYLeftTopCornerWorkingSpace = positionYLeftBottomCornerWorkingSpace - workingSpaceHeight;
 
                     TranslateTransform moveCropControl = new TranslateTransform();
-                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin + (topY * scaleValue);
-                    moveCropControl.Y = positionYLeftTopCornerWorkingSpace - offsetMargin + ((mobileDisplayWidth - rightX) * scaleValue);
+                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX  + (topY * scaleValue);
+                    moveCropControl.Y = positionYLeftTopCornerWorkingSpace  + ((mobileDisplayWidth - rightX) * scaleValue);
                     _transformGridMain.Children.Add(moveCropControl);
                 }
                 else
