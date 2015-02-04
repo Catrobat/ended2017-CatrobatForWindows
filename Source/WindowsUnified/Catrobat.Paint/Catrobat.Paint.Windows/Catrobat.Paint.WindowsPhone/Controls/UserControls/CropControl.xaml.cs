@@ -59,6 +59,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         async public void setCropSelection()
         {
+            TransformGroup transform = (PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform as TransformGroup);
             _transformGridMain.Children.Clear();
             GridMain.Margin = new Thickness(-5, -5, 0, 0);
             PocketPaintApplication.GetInstance().ProgressRing.IsActive = true;
@@ -96,13 +97,33 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                             }
                         }
                     }
+
                     scaleValue = paintingAreaCheckeredGridTransformGroup.Value.M11;
                     heightCropControl = (bottomY - topY) * scaleValue + offsetSize;
                     widthCropControl = (rightX - leftX) * scaleValue + offsetSize;
 
                     TranslateTransform moveCropControl = new TranslateTransform();
-                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + (leftX * scaleValue);
-                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + (topY * scaleValue);
+
+                    // (M11 == -1.0) means that working space is mirrored horizontally. 
+                    if ((PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform as TransformGroup).Value.M11 == -1.0)
+                    {
+                        moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + ((mobileDisplayWidth - rightX) * scaleValue);
+                    }
+                    else
+                    {
+                        moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + (leftX * scaleValue);
+                    }
+
+                    // (M22 == -1.0) means that working space is mirrored vertically. 
+                    if ((PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform as TransformGroup).Value.M22 == -1.0)
+                    {
+                        moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + ((mobileDisplayHeight - bottomY) * scaleValue);
+                    }
+                    else
+                    {
+                        moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + (topY * scaleValue);
+                    }
+
                     _transformGridMain.Children.Add(moveCropControl);
                 }
                 else
@@ -156,8 +177,26 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     double positionYRightTopCornerWorkingSpace = positionYRigthBottomCornerWorkingSpace - workingSpaceHeight;
 
                     TranslateTransform moveCropControl = new TranslateTransform();
-                    moveCropControl.X = positionXLeftBottomCornerWorkingSpace  + ((Window.Current.Bounds.Width - rightX) * scaleValue);
-                    moveCropControl.Y = positionYRightTopCornerWorkingSpace + ((Window.Current.Bounds.Height - bottomY) * scaleValue);
+                    // (M11 == -1.0) means that working space is mirrored horizontally. 
+                    if ((PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform as TransformGroup).Value.M11 == -1.0)
+                    {
+                        moveCropControl.X = positionXLeftBottomCornerWorkingSpace + (leftX * scaleValue);
+                    }
+                    else
+                    {
+                        moveCropControl.X = positionXLeftBottomCornerWorkingSpace + ((mobileDisplayWidth - rightX) * scaleValue);
+                    }
+
+                    // (M22 == -1.0) means that working space is mirrored vertically. 
+                    if ((PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform as TransformGroup).Value.M22 == -1.0)
+                    {
+                        moveCropControl.Y = positionYRightTopCornerWorkingSpace + (topY * scaleValue);
+                    }
+                    else
+                    {
+                        moveCropControl.Y = positionYRightTopCornerWorkingSpace + ((mobileDisplayHeight - bottomY) * scaleValue);
+                    }
+
                     _transformGridMain.Children.Add(moveCropControl);
                 }
                 else
@@ -218,9 +257,28 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     double positionXLeftTopCornerWorkingSpace = positionXRightTopCornerWorkingSpace - workingSpaceWidth;
 
                     TranslateTransform moveCropControl = new TranslateTransform();
-                    moveCropControl.X = positionXLeftTopCornerWorkingSpace  + (mobileDisplayHeight - bottomY) * scaleValue;
-                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + (leftX * scaleValue);
+                    // (M11 == -1.0) means that working space is flipped horizontally. 
+                    if ((PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform as TransformGroup).Value.M22 == -1.0)
+                    {
+                        moveCropControl.X = positionXLeftTopCornerWorkingSpace + (topY * scaleValue);
+                    }
+                    else
+                    {
+                        moveCropControl.X = positionXLeftTopCornerWorkingSpace + ((mobileDisplayHeight - bottomY) * scaleValue);
+                    }
+
+                    // (M22 == -1.0) means that working space is flipped vertically. 
+                    if ((PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform as TransformGroup).Value.M11 == -1.0)
+                    {
+                        moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + ((mobileDisplayWidth - rightX) * scaleValue);
+                    }
+                    else
+                    {
+                        moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + (leftX * scaleValue);
+                    }
+
                     _transformGridMain.Children.Add(moveCropControl);
+
                 }
                 else
                 {
@@ -275,8 +333,26 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     double positionYLeftTopCornerWorkingSpace = positionYLeftBottomCornerWorkingSpace - workingSpaceHeight;
 
                     TranslateTransform moveCropControl = new TranslateTransform();
-                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX  + (topY * scaleValue);
-                    moveCropControl.Y = positionYLeftTopCornerWorkingSpace  + ((mobileDisplayWidth - rightX) * scaleValue);
+                    // (M11 == -1.0) means that working space is flipped horizontally. 
+                    if ((PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform as TransformGroup).Value.M22 == -1.0)
+                    {
+                        moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + ((mobileDisplayHeight - bottomY) * scaleValue);
+                    }
+                    else
+                    {
+                        moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + (topY * scaleValue);
+                    }
+
+                    // (M22 == -1.0) means that working space is flipped vertically. 
+                    if ((PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform as TransformGroup).Value.M11 == -1.0)
+                    {
+                        moveCropControl.Y = positionYLeftTopCornerWorkingSpace + (leftX * scaleValue);
+                    }
+                    else
+                    {
+                        moveCropControl.Y = positionYLeftTopCornerWorkingSpace + ((mobileDisplayWidth - rightX) * scaleValue);
+                    }
+
                     _transformGridMain.Children.Add(moveCropControl);
                 }
                 else
