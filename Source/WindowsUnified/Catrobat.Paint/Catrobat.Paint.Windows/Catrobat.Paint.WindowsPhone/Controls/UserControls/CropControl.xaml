@@ -8,7 +8,7 @@
     mc:Ignorable="d" Height="676" Width="410">
     <Grid x:Name="GridMain" Height="676" HorizontalAlignment="Left" Margin="-5,-5,0,0" VerticalAlignment="Top" Width="410">
         <Grid x:Name="GridRectangle" HorizontalAlignment="Left" ManipulationDelta="rectRectangleForMovement_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" VerticalAlignment="Top">
-            <Rectangle x:Name="rectRectangleForMovement" Fill="#01FFFFFF" Height="676" HorizontalAlignment="Left" Margin="0,0,0,0" Stroke="LightSkyBlue" 
+            <Rectangle x:Name="rectRectangleForMovement" Fill="Transparent" Height="676" HorizontalAlignment="Left" Margin="0,0,0,0" Stroke="CornflowerBlue" 
                 StrokeThickness="5" VerticalAlignment="Top" 
                 DoubleTapped="rectRectangleForMovement_DoubleTapped" Width="410"/>
         </Grid>
