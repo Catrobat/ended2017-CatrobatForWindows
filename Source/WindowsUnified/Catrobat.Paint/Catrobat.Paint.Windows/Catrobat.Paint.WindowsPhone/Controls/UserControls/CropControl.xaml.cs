@@ -132,9 +132,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     widthCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * mobileDisplayWidth + offsetSize;
 
                     TranslateTransform moveCropControl = new TranslateTransform();
-                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin;
-                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
+                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
+                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
                     _transformGridMain.Children.Add(moveCropControl);
+                    rectRectangleForMovement.Stroke = new SolidColorBrush(Colors.Transparent);
                 }
                 limitLeft = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin;
                 limitTop = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
@@ -213,9 +214,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     double positionYRightTopCornerWorkingSpace = positionYRigthBottomCornerWorkingSpace - workingSpaceHeight;
 
                     TranslateTransform moveCropControl = new TranslateTransform();
-                    moveCropControl.X = positionXLeftBottomCornerWorkingSpace - offsetMargin;
-                    moveCropControl.Y = positionYRightTopCornerWorkingSpace - offsetMargin;
+                    moveCropControl.X = positionXLeftBottomCornerWorkingSpace;
+                    moveCropControl.Y = positionYRightTopCornerWorkingSpace;
                     _transformGridMain.Children.Add(moveCropControl);
+                    rectRectangleForMovement.Stroke = new SolidColorBrush(Colors.Transparent);
                 }
                 limitRight = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + offsetMargin;
                 limitBottom = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + offsetMargin;
@@ -286,13 +288,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     widthCropControl = scaleValue * mobileDisplayHeight + offsetSize;
                     double workingSpaceHeight = scaleValue * mobileDisplayWidth;
                     double workingSpaceWidth = scaleValue * mobileDisplayHeight;
-                    double positionXRightTopCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
+                    double positionXRightTopCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;                   
                     double positionXLeftTopCornerWorkingSpace = positionXRightTopCornerWorkingSpace - workingSpaceWidth;
 
                     TranslateTransform moveCropControl = new TranslateTransform();
-                    moveCropControl.X = positionXLeftTopCornerWorkingSpace - offsetMargin;
-                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
+                    moveCropControl.X = positionXLeftTopCornerWorkingSpace;
+                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
                     _transformGridMain.Children.Add(moveCropControl);
+                    rectRectangleForMovement.Stroke = new SolidColorBrush(Colors.Transparent);
                 }
                 //limitLeft = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - (mobileDisplayHeight * scaleValue) - offsetMargin;
                 limitTop = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
@@ -363,19 +366,19 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     double workingSpaceWidth = paintingAreaCheckeredGridTransformGroup.Value.M21 * mobileDisplayHeight;
                     double positionYLeftBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
                     double positionYLeftTopCornerWorkingSpace = positionYLeftBottomCornerWorkingSpace - workingSpaceHeight;
-                    GridMain.Margin = new Thickness(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin,
-                                                    positionYLeftTopCornerWorkingSpace - offsetMargin, 0, 0);
 
                     TranslateTransform moveCropControl = new TranslateTransform();
-                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin;
-                    moveCropControl.Y = positionYLeftTopCornerWorkingSpace - offsetMargin;
+                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
+                    moveCropControl.Y = positionYLeftTopCornerWorkingSpace;
                     _transformGridMain.Children.Add(moveCropControl);
+                    rectRectangleForMovement.Stroke = new SolidColorBrush(Colors.Transparent);
                 }
 
                 limitBottom = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + offsetMargin;
                 limitTop = limitBottom - (mobileDisplayWidth * scaleValue) - offsetMargin * 2;
                 limitLeft = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin;
-                limitRight = limitLeft + (mobileDisplayHeight * scaleValue) + offsetMargin * 2;          }
+                limitRight = limitLeft + (mobileDisplayHeight * scaleValue) + offsetMargin * 2;
+            }
             PocketPaintApplication.GetInstance().ProgressRing.IsActive = false;
             setMainGridSize(heightCropControl, widthCropControl);
             setRectangleForMovementSize(heightCropControl, widthCropControl);
