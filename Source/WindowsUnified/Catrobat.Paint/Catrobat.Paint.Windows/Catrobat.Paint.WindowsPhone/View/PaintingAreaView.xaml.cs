@@ -403,27 +403,26 @@ namespace Catrobat.Paint.WindowsPhone.View
             else if("barCrop" == type)
             {
                 AppBarButton app_btnCutSelection = new AppBarButton();
-                AppBarButton app_btnReset = new AppBarButton();
-
-                app_btnReset.Name = "appButtonResetCrop";
+                AppBarButton app_btnResetSelection = new AppBarButton();
+                app_btnResetSelection.Name = "appButtonResetCrop";
 
                 BitmapIcon cutPictureIcon = new BitmapIcon();
-                cutPictureIcon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_flip_vertical.png", UriKind.Absolute);
+                cutPictureIcon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_crop_cut.png", UriKind.Absolute);
                 app_btnCutSelection.Icon = cutPictureIcon;
 
                 BitmapIcon reset_icon = new BitmapIcon();
-                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
-                app_btnReset.Icon = reset_icon;
+                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_crop_adjust.png", UriKind.Absolute);
+                app_btnResetSelection.Icon = reset_icon;
 
                 app_btnCutSelection.Label = "schneiden";
-                app_btnReset.Label = "Ausgangsposition";
+                app_btnResetSelection.Label = "Ausgangsposition";
 
-                app_btnReset.Click += app_btn_reset_Click;
+                app_btnResetSelection.Click += app_btn_reset_Click;
 
-                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().CropControl.setIsModifiedRectangleMovement ? true : false;
+                app_btnResetSelection.IsEnabled = PocketPaintApplication.GetInstance().CropControl.setIsModifiedRectangleMovement ? true : false;
 
+                cmdBar.PrimaryCommands.Add(app_btnResetSelection);
                 cmdBar.PrimaryCommands.Add(app_btnCutSelection);
-                cmdBar.PrimaryCommands.Add(app_btnReset);
             }
             else if("barImportPng" == type)
             {
