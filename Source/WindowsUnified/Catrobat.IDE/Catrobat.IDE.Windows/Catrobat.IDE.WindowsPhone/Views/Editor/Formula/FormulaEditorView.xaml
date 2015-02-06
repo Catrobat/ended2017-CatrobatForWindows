@@ -10,13 +10,17 @@
   DataContext="{Binding FormulaEditorViewModel, Source={StaticResource Locator}}">
 
   <Grid Background="{ThemeResource AppBackgroundBrush}">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="*" />
-      <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
-    <ScrollViewer Grid.Row="0">
-      <!-- UserControl Bindings are set in code-behind -->
-      <formulaControls:FormulaViewer
+
+
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0">
+            <!-- UserControl Bindings are set in code-behind -->
+            <formulaControls:FormulaViewer
         x:Name="FormulaViewerMain"
         CharactersInOneLineNormalFontSize="15"
         LinesNormalFontSize="5"
@@ -26,8 +30,8 @@
         IsAutoFontSize="True"
         Height="340"
         HorizontalAlignment="Stretch"/>
-    </ScrollViewer>
-    <TextBlock Grid.Row="0"
+        </ScrollViewer>
+        <TextBlock Grid.Row="0"
       Text="{Binding Resources.Editor_TypeSomething, 
       Source={StaticResource LocalizedStrings}}"
       Visibility="{Binding IsTokensEmpty, Converter={StaticResource BoolVisibilityConverter}}"
@@ -36,38 +40,69 @@
       TextAlignment="Center"
       VerticalAlignment="Center"
       HorizontalAlignment="Center" />
-    <Grid Grid.Row="1">
-      <!-- UserControl Bindings are set in code-behind -->
-      <formulaControls:FormulaKeyboard x:Name="FormulaKeyboard" Height="320">
-        <formulaControls:FormulaKeyboard.RenderTransform>
-          <TranslateTransform X="0" Y="500" x:Name="Translation" />
-        </formulaControls:FormulaKeyboard.RenderTransform>
-        <formulaControls:FormulaKeyboard.Resources>
-          <Storyboard x:Name="EnterTransition">
-            <DoubleAnimation
+        <Grid Grid.Row="1">
+            <!-- UserControl Bindings are set in code-behind -->
+            <formulaControls:FormulaKeyboard x:Name="FormulaKeyboard" Height="320">
+                <formulaControls:FormulaKeyboard.RenderTransform>
+                    <TranslateTransform X="0" Y="500" x:Name="Translation" />
+                </formulaControls:FormulaKeyboard.RenderTransform>
+                <formulaControls:FormulaKeyboard.Resources>
+                    <Storyboard x:Name="EnterTransition">
+                        <DoubleAnimation
               Storyboard.TargetName="Translation"
               Storyboard.TargetProperty="Y"
               To="0"
               Duration="0:0:0.3" >
-              <DoubleAnimation.EasingFunction>
-                <QuadraticEase EasingMode="EaseOut"/>
-              </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-          </Storyboard>
-          <Storyboard x:Name="ExitTransition">
-            <DoubleAnimation
+                            <DoubleAnimation.EasingFunction>
+                                <QuadraticEase EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                    <Storyboard x:Name="ExitTransition">
+                        <DoubleAnimation
               Storyboard.TargetName="Translation"
               Storyboard.TargetProperty="Y"
               To="500"
               Duration="0:0:0.3" >
-              <DoubleAnimation.EasingFunction>
-                <QuadraticEase EasingMode="EaseIn"/>
-              </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-          </Storyboard>
-        </formulaControls:FormulaKeyboard.Resources>
-      </formulaControls:FormulaKeyboard>
-    </Grid>
+                            <DoubleAnimation.EasingFunction>
+                                <QuadraticEase EasingMode="EaseIn"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </formulaControls:FormulaKeyboard.Resources>
+            </formulaControls:FormulaKeyboard>
+        </Grid>
+
+
+
+        <!-- Task 589, code taken from source:
+      http://msdn.microsoft.com/en-us/library/windows/apps/dn495655.aspx -->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ApplicationViewStates">
+
+                <VisualState x:Name="Landscape">
+
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames
+                            Storyboard.TargetName ="FormulaKeyboard"
+                            Storyboard.TargetProperty =" Height">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="220"/>
+                        </ObjectAnimationUsingKeyFrames>
+
+                    </Storyboard>
+                    
+                </VisualState>
+
+                <VisualState x:Name="Portrait">
+                    
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+      
+                    
+                    
   </Grid>
 
 

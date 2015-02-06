@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.Resources.Localization;
+﻿using Windows.UI.ViewManagement;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Formula;
@@ -35,6 +36,19 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
 
             Loaded += FormulaEditorView_OnLoaded;
             Unloaded += FormulaEditorView_OnUnloaded;
+            Window.Current.SizeChanged += CurrentOnSizeChanged;
+        }
+
+        private void CurrentOnSizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        {
+            // Task 589, code taken from source: http://msdn.microsoft.com/en-us/library/windows/apps/dn495655.aspx
+            // Get the new view state
+            // Add: using Windows.UI.ViewManagement;
+            string CurrentViewState = ApplicationView.GetForCurrentView().Orientation.ToString();
+
+            // Trigger the Visual State Manager
+            VisualStateManager.GoToState(this, CurrentViewState, true);
+        
         }
 
         private void FormulaEditorView_OnLoaded(object sender, RoutedEventArgs e)
