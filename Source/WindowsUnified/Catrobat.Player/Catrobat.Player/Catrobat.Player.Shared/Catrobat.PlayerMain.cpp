@@ -14,16 +14,27 @@ using namespace Concurrency;
 using namespace Platform;
 using namespace Catrobat_Player;
 
+using namespace Windows::UI::Xaml;
+using namespace Windows::UI::Xaml::Controls::Primitives;
+using namespace Windows::UI::Xaml::Data;
+using namespace Windows::UI::Xaml::Input;
+using namespace Windows::UI::Xaml::Media;
+using namespace Windows::UI::Xaml::Navigation;
+
 //--------------------------------------------------------------------------------------------------
 // Loads and initializes application assets when the application is loaded.
 
 Catrobat_PlayerMain::Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& 
                                          deviceResources, CommandBar^ playerAppBar, 
+                                         AppBarButton^ playerBtnAxis, Grid^ playerGridAxis,
                                          String^ projectName) :
 m_deviceResources(deviceResources), 
 m_pointerLocationX(0.0f),
 m_loadingComplete(false),
+m_axisOn(false),
 m_playerAppBar(playerAppBar),
+m_playerBtnAxis(playerBtnAxis),
+m_playerGridAxis(playerGridAxis),
 m_playerState(PlayerState::Init),
 m_projectName(projectName)
 {
@@ -165,7 +176,7 @@ void Catrobat_PlayerMain::RestartButtonClicked()
                                                   
 //--------------------------------------------------------------------------------------------------
 
-void Catrobat_PlayerMain::PlayButtonClicked()
+void Catrobat_PlayerMain::ResumeButtonClicked()
 {
     critical_section::scoped_lock lock(m_criticalSection);
 
@@ -211,9 +222,23 @@ void Catrobat_PlayerMain::ThumbnailButtonClicked()
 
 //--------------------------------------------------------------------------------------------------
 
-void Catrobat_PlayerMain::EnableAxisButtonClicked()
+void Catrobat_PlayerMain::AxisButtonClicked()
 {
-    // TODO implement me
+    //(m_playerAppBar PrimaryCommands[3] as AppBarButton).Label = "another test";
+    //ICommandBarElement^ axisButton = m_playerAppBar->PrimaryCommands->(3);
+    
+    if (m_axisOn)
+    {
+        m_playerGridAxis->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+        m_playerBtnAxis->Label = "axis on";
+        m_axisOn = false;
+    }
+    else
+    {
+        m_playerGridAxis->Visibility = Windows::UI::Xaml::Visibility::Visible;
+        m_playerBtnAxis->Label = "axis off";
+        m_axisOn = true;
+    }
 }
 
 //--------------------------------------------------------------------------------------------------
