@@ -16,6 +16,8 @@ class Object
 {
 public:
     Object(std::string name);
+    // Constructor for Objects to store initial values
+    Object(); 
 
 public:
     void SetTranslation(float x, float y);

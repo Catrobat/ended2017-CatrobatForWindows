@@ -3,20 +3,23 @@
 #include "Common\DirectXHelper.h"
 #include "ProjectDaemon.h"
 
-using namespace Catrobat_Player;
 using namespace Windows::Foundation;
 using namespace Windows::System::Threading;
 using namespace Windows::Phone::UI::Input;
 using namespace Windows::UI::Notifications;
+using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::Data::Xml::Dom;
-using namespace Concurrency;
 
-//----------------------------------------------------------------------
+using namespace Concurrency;
+using namespace Platform;
+using namespace Catrobat_Player;
+
+//--------------------------------------------------------------------------------------------------
 // Loads and initializes application assets when the application is loaded.
 
-Catrobat_PlayerMain::Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources,
-                                         Windows::UI::Xaml::Controls::CommandBar^ playerAppBar,
-                                         Platform::String^ projectName) :
+Catrobat_PlayerMain::Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& 
+                                         deviceResources, CommandBar^ playerAppBar, 
+                                         String^ projectName) :
 m_deviceResources(deviceResources), 
 m_pointerLocationX(0.0f),
 m_loadingComplete(false),
@@ -28,17 +31,18 @@ m_projectName(projectName)
     m_deviceResources->RegisterDeviceNotify(this);
     
     LoadProject();
-    m_fpsTextRenderer = std::unique_ptr<SampleFpsTextRenderer>(new SampleFpsTextRenderer(m_deviceResources));
+    m_fpsTextRenderer = std::unique_ptr<SampleFpsTextRenderer>(new SampleFpsTextRenderer(
+        m_deviceResources));
 
-    // TODO: Change the timer settings if you want something other than the default variable timestep mode.
-    // e.g. for 60 FPS fixed timestep update logic, call:
+    // TODO: Change the timer settings if you want something other than the default variable 
+    // timestep mode. e.g. for 60 FPS fixed timestep update logic, call:
     /*
     m_timer.SetFixedTimeStep(true);
     m_timer.SetTargetElapsedSeconds(1.0 / 60);
     */
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 Catrobat_PlayerMain::~Catrobat_PlayerMain()
 {
@@ -46,21 +50,22 @@ Catrobat_PlayerMain::~Catrobat_PlayerMain()
     m_deviceResources->RegisterDeviceNotify(nullptr);
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Initialize Project loading and parsing.
 
 void Catrobat_PlayerMain::LoadProject()
 {
     ProjectDaemon::Instance()->OpenProject(m_projectName).then([this](task<bool> t)
     {
-        m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(m_deviceResources));
+        m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(
+            m_deviceResources));
         m_loadingComplete = true;
         m_playerState = PlayerState::Active;
     });
   
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Updates application state when the window size changes (e.g. device orientation change)
 
 void Catrobat_PlayerMain::CreateWindowSizeDependentResources()
@@ -69,18 +74,20 @@ void Catrobat_PlayerMain::CreateWindowSizeDependentResources()
     m_basic2dRenderer->CreateWindowSizeDependentResources();
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void Catrobat_PlayerMain::StartRenderLoop()
 {
     // If the animation render loop is already running then do not start another thread.
-    if (m_renderLoopWorker != nullptr && m_renderLoopWorker->Status == Windows::Foundation::AsyncStatus::Started)
+    if (m_renderLoopWorker != nullptr && m_renderLoopWorker->Status == 
+        Windows::Foundation::AsyncStatus::Started)
     {
         return;
     }
 
     // Create a task that will be run on a background thread.
-    auto workItemHandler = ref new WorkItemHandler([this](Windows::Foundation::IAsyncAction ^ action)
+    auto workItemHandler = ref new WorkItemHandler([this](
+        Windows::Foundation::IAsyncAction ^ action)
     {
         // Calculate the updated frame and render once per vertical blanking interval.
         while (action->Status == Windows::Foundation::AsyncStatus::Started)
@@ -95,10 +102,11 @@ void Catrobat_PlayerMain::StartRenderLoop()
     });
 
     // Run task on a dedicated high priority background thread.
-    m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
+    m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, 
+        WorkItemOptions::TimeSliced);
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void Catrobat_PlayerMain::StopRenderLoop()
 {
@@ -106,7 +114,7 @@ void Catrobat_PlayerMain::StopRenderLoop()
     m_renderLoopWorker->Cancel();
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void Catrobat_PlayerMain::PointerPressed(D2D1_POINT_2F point)
 { 
@@ -116,7 +124,7 @@ void Catrobat_PlayerMain::PointerPressed(D2D1_POINT_2F point)
     }
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 bool Catrobat_PlayerMain::HardwareBackButtonPressed()
 {
@@ -141,7 +149,7 @@ bool Catrobat_PlayerMain::HardwareBackButtonPressed()
     }
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void Catrobat_PlayerMain::RestartButtonClicked()
 {
@@ -155,7 +163,7 @@ void Catrobat_PlayerMain::RestartButtonClicked()
     StartRenderLoop();  
 }
                                                   
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void Catrobat_PlayerMain::PlayButtonClicked()
 {
@@ -166,7 +174,7 @@ void Catrobat_PlayerMain::PlayButtonClicked()
     StartRenderLoop();
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // 
 void Catrobat_PlayerMain::ThumbnailButtonClicked()
 {
@@ -179,9 +187,12 @@ void Catrobat_PlayerMain::ThumbnailButtonClicked()
 
     // 
     XmlNodeList^ toastTextElements = toastXml->GetElementsByTagName("text");
-    toastTextElements->Item(0)->InnerText = "Successfully set a new thumbnail :)"; // TODO get this string from a multilingual tool/file
+    // TODO get this string from a multilingual tool/file or switch it completely to the IDE
+    toastTextElements->Item(0)->InnerText = "Successfully set a new thumbnail :)"; 
     ToastNotification^ toast = ref new ToastNotification(toastXml);
-    Platform::String^ toastTag = ref new Platform::String(L"Thumbnail"); // TODO check if this should maybe set somewhere in a global variable space??
+    // TODO check if this should maybe set somewhere in a global variable space?? or switch it 
+    // completely to the IDE
+    Platform::String^ toastTag = ref new Platform::String(L"Thumbnail"); 
     toast->Tag = toastTag; 
 
     // Show the toast and remove it from the action center
@@ -198,21 +209,21 @@ void Catrobat_PlayerMain::ThumbnailButtonClicked()
     StartRenderLoop();
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void Catrobat_PlayerMain::EnableAxisButtonClicked()
 {
     // TODO implement me
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void Catrobat_PlayerMain::ScreenshotButtonClicked()
 {
     // TODO implement me
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Updates the application state once per frame.
  
 void Catrobat_PlayerMain::Update()
@@ -231,7 +242,7 @@ void Catrobat_PlayerMain::Update()
     });
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Process all input from the user before updating game state
 
 void Catrobat_PlayerMain::ProcessInput()
@@ -240,7 +251,7 @@ void Catrobat_PlayerMain::ProcessInput()
     //m_sceneRenderer->TrackingUpdate(m_pointerLocationX);
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Renders the current frame according to the current application state.
 // Returns true if the frame was rendered and is ready to be displayed.
 
@@ -259,7 +270,7 @@ bool Catrobat_PlayerMain::Render()
     context->RSSetViewports(1, &viewport);
 
     // Reset render targets to the screen.
-    ID3D11RenderTargetView *const targets[1] = { m_deviceResources->GetBackBufferRenderTargetView() };
+    ID3D11RenderTargetView *const targets[1] = {m_deviceResources->GetBackBufferRenderTargetView()};
     context->OMSetRenderTargets(1, targets, m_deviceResources->GetDepthStencilView());
 
     // Clear the back buffer and depth stencil view.
@@ -277,7 +288,7 @@ bool Catrobat_PlayerMain::Render()
     return true;
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Notifies renderers that device resources need to be released.
 
 void Catrobat_PlayerMain::OnDeviceLost()
@@ -290,7 +301,7 @@ void Catrobat_PlayerMain::OnDeviceLost()
 }
 
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 // Notifies renderers that device resources may now be recreated.
 
 void Catrobat_PlayerMain::OnDeviceRestored()
