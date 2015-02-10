@@ -119,8 +119,6 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             return new SolidColorBrush(Windows.UI.Color.FromArgb(a, r, g, B));
       
         }
-        
-
 
 
         private async Task<string> SaveAsPng()
