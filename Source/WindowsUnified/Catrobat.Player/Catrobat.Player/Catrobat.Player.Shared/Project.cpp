@@ -47,7 +47,7 @@ Project::Project(
 	m_userHandle						(userHandle)
 {
 	m_objectList = new ObjectList();
-    m_objectListInitial = new map<std::string, Object*>();
+    m_objectListInitial = new ObjectList();
 	m_variableList = new map<string, UserVariable*>();
     m_variableListValueInitial = new map<std::string, std::string>();
 }
@@ -58,6 +58,13 @@ Project::~Project()
     {
         delete m_objectList->GetObject(i);
     }
+    //delete m_objectList;
+
+    for (size_t i = 0; i < m_objectListInitial->GetSize(); i++)
+    {
+        delete m_objectListInitial->GetObject(i);
+    }
+    //delete m_objectListInitial;
 }
 
 //----------------------------------------------------------------------
@@ -79,6 +86,12 @@ int	Project::GetScreenWidth()
 ObjectList *Project::GetObjectList()
 {
 	return m_objectList;
+}
+
+//----------------------------------------------------------------------
+ObjectList *Project::GetObjectListInitial()
+{ 
+    return m_objectListInitial; 
 }
 
 //----------------------------------------------------------------------

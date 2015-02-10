@@ -8,7 +8,9 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-  <SwapChainPanel x:Name="swapChainPanel">
+  
+  <Grid>
+    <SwapChainPanel x:Name="swapChainPanel">
     <!-- Loading Project -->
     <!--<Image Source="ms-appx:///Assets/SplashScreen.png" x:Name="ImagePlayerLoadSplashScreen" 
            VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" 
@@ -23,8 +25,24 @@
                     Margin="0" IsActive="True" Width="40" Height="40" VerticalAlignment="Top" 
                     HorizontalAlignment="Center"/>
     </Grid>-->
-  </SwapChainPanel>
-
+    
+    
+    
+    </SwapChainPanel>
+    <Grid x:Name="GridAxis" Visibility="Collapsed">
+      <Line Stroke="Red" 
+            StrokeThickness="3"
+            Stretch="Fill"
+            Y1="0"
+            Y2="1" />
+      <Line Stroke="Red" 
+            StrokeThickness="3"
+            Stretch="Fill"
+            X1="0"
+            X2="1"/>
+    </Grid>
+  </Grid>
+  
   <Page.BottomAppBar>
     <CommandBar Name="PlayerAppBar" VerticalAlignment="Bottom" 
       Visibility="Collapsed">
@@ -32,15 +50,19 @@
         <AppBarButton Label="restart"
           Icon="Refresh"
           Click="OnRestartButtonClicked"/>
-        <AppBarButton Label="pause" 
+        <AppBarButton Label="resume" 
           Icon="Play" 
-          Click="OnPlayButtonClicked"/>
+          Click="OnResumeButtonClicked"/>
         <AppBarButton Label="set thumbnail" 
           Icon="Camera"
           Click="OnThumbnailButtonClicked"/>
-        <AppBarButton Label="Enable Axes"  
-          Icon="Setting"  
-          Click="OnEnableAxisButtonClicked"/>
+        <AppBarButton Label="axis on" 
+                      Click="OnAxisButtonClicked"
+                      x:Name="BtnAxis">
+          <AppBarButton.Icon>
+            <BitmapIcon UriSource="ms-appx:///Assets/AxisIcon-48.png"/>
+          </AppBarButton.Icon>
+        </AppBarButton>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
         <AppBarButton Label="take screenshot" 
@@ -48,4 +70,5 @@
       </CommandBar.SecondaryCommands>
     </CommandBar>
   </Page.BottomAppBar>
+
 </Page>

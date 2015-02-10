@@ -48,7 +48,7 @@ namespace Catrobat.Player.StandAlone
             // register hardware back button event
             HardwareButtons.BackPressed += OnHardwareBackButtonPressed;
 
-            playerObject.InitPlayer(swapChainPanel, PlayerAppBar, "testTapp2");
+            playerObject.InitPlayer(swapChainPanel, PlayerAppBar, BtnAxis, GridAxis, "testTapp2");
         }
 
         private void OnRestartButtonClicked(object sender, RoutedEventArgs e)
@@ -56,17 +56,17 @@ namespace Catrobat.Player.StandAlone
             playerObject.RestartButtonClicked();            
         }
 
-        private void OnPlayButtonClicked(object sender, RoutedEventArgs e)
+        private void OnResumeButtonClicked(object sender, RoutedEventArgs e)
         {
-            playerObject.PlayButtonClicked();
+            playerObject.ResumeButtonClicked();
         }
         private void OnThumbnailButtonClicked(object sender, RoutedEventArgs e)
         {
             playerObject.ThumbnailButtonClicked();
         }
-        private void OnEnableAxisButtonClicked(object sender, RoutedEventArgs e)
+        private void OnAxisButtonClicked(object sender, RoutedEventArgs e)
         {
-            playerObject.EnableAxisButtonClicked();
+            playerObject.AxisButtonClicked();
         }
         private void OnScreenshotButtonClicked(object sender, RoutedEventArgs e)
         {

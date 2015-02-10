@@ -42,7 +42,7 @@ public:
     int									    GetScreenHeight();
     int									    GetScreenWidth();
     ObjectList*							    GetObjectList();
-    std::map<std::string, Object*>*         GetObjectListInitial() { return m_objectListInitial; };
+    ObjectList*                             GetObjectListInitial();
     UserVariable*						    GetVariable(std::string name);
     std::map<std::string, UserVariable*>*   GetVariableList() { return m_variableList; };
     std::map<std::string, std::string>*     GetVariableListValueInitial() { return m_variableListValueInitial; };
@@ -75,7 +75,7 @@ private:
 	std::string							m_userHandle;
 
 	ObjectList*							    m_objectList;
-    std::map<std::string, Object*>*         m_objectListInitial;
+    ObjectList*                             m_objectListInitial;
 	std::map<std::string, UserVariable*>*   m_variableList;
     std::map<std::string, std::string>*     m_variableListValueInitial;
 };

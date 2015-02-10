@@ -128,11 +128,13 @@ void ProjectDaemon::SetProjectInitialValues()
 {
     // Object values
     ObjectList* objectList = m_project->GetObjectList();
-    std::map<std::string, Object*>* objectListInitial = m_project->GetObjectListInitial();
+    ObjectList* objectListInitial = m_project->GetObjectListInitial();
 
-    for each (Object* object in *(objectList->GetObjects()))
+    for (int i = 0; i < objectList->GetSize(); i++)
     {
-        Object* objectInitial = new Object(object->GetName());
+        Object* object = objectList->GetObject(i);
+        Object* objectInitial = new Object();
+
         objectInitial->SetTransparency(object->GetTransparency());
         objectInitial->SetRotation(object->GetRotation());
         float x;
@@ -148,8 +150,8 @@ void ProjectDaemon::SetProjectInitialValues()
             objectInitial->AddVariable(e.first, userVariableInital);
         }
 
-        objectListInitial->insert(std::pair<std::string, Object*>(object->GetName(), objectInitial));
-    }
+        objectListInitial->AddObject(objectInitial);
+    } 
 
     // UserVariable values
     std::map<std::string, UserVariable*>* variableList = m_project->GetVariableList();
@@ -165,11 +167,13 @@ void ProjectDaemon::RestartProject()
 {
     // Set Object values to initial state
     ObjectList* objectList = m_project->GetObjectList();
-    std::map<std::string, Object*>* objectListInitial = m_project->GetObjectListInitial();
+    ObjectList* objectListInitial = m_project->GetObjectListInitial();
 
-    for each (Object* object in *(objectList->GetObjects()))
+    for (int i = 0; i < objectList->GetSize(); i++)
     {
-        Object* objectInitial = objectListInitial->at(object->GetName());
+        Object* object = objectList->GetObject(i);
+        Object* objectInitial = objectListInitial->GetObject(i);
+
         object->SetTransparency(objectInitial->GetTransparency());
         object->SetRotation(objectInitial->GetRotation());
         float x;

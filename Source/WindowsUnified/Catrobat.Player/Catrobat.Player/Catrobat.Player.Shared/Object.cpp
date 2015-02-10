@@ -26,6 +26,12 @@ m_renderTargetSize(SizeF())
     m_variableList = new std::map<std::string, UserVariable*>();
 }
 
+Object::Object() 
+{
+    m_soundInfos = new std::list<SoundInfo*>();
+    m_variableList = new std::map<std::string, UserVariable*>();
+}
+
 #pragma region TRANSFORMATION
 void Object::SetTranslation(float x, float y)
 {

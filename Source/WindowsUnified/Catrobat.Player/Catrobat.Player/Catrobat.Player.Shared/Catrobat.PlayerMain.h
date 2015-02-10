@@ -21,6 +21,8 @@ namespace Catrobat_Player
 	public:
         Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources, 
                             Windows::UI::Xaml::Controls::CommandBar^ playerAppBar,
+                            Windows::UI::Xaml::Controls::AppBarButton^ playerBtnAxis,
+                            Windows::UI::Xaml::Controls::Grid^ playerGridAxis,
                             Platform::String^ projectName);
 		~Catrobat_PlayerMain();
 		void CreateWindowSizeDependentResources();
@@ -34,9 +36,9 @@ namespace Catrobat_Player
         void PointerPressed(D2D1_POINT_2F point);
         bool HardwareBackButtonPressed();
         void RestartButtonClicked();
-        void PlayButtonClicked();
+        void ResumeButtonClicked();
         void ThumbnailButtonClicked();
-        void EnableAxisButtonClicked();
+        void AxisButtonClicked();
         void ScreenshotButtonClicked();
 
 		// IDeviceNotify
@@ -72,10 +74,12 @@ namespace Catrobat_Player
         Platform::String^ m_projectName;
 
         bool m_loadingComplete;
-
+        bool m_axisOn;
         PlayerState m_playerState;
 
         Windows::UI::Xaml::Controls::CommandBar^ m_playerAppBar;
+        Windows::UI::Xaml::Controls::AppBarButton^ m_playerBtnAxis;
+        Windows::UI::Xaml::Controls::Grid^ m_playerGridAxis;
 	};
 
     

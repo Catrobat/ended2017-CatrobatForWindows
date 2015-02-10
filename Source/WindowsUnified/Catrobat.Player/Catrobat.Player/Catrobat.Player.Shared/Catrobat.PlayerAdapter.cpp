@@ -44,7 +44,8 @@ namespace Catrobat_Player
     //----------------------------------------------------------------------------------------------
 
     void Catrobat_PlayerAdapter::InitPlayer(SwapChainPanel^ swapChainPanel, 
-        CommandBar^ playerAppBar, String^ projectName)
+        CommandBar^ playerAppBar, AppBarButton^ playerBtnAxis, Grid^ playerGridAxis,
+        String^ projectName)
     {
 
         // Register event handlers for page lifecycle.
@@ -104,7 +105,7 @@ namespace Catrobat_Player
             WorkItemOptions::TimeSliced); 
 
         m_main = std::unique_ptr<Catrobat_PlayerMain>(new Catrobat_PlayerMain(m_deviceResources, 
-            playerAppBar, projectName));
+            playerAppBar, playerBtnAxis, playerGridAxis, projectName));
         m_main->StartRenderLoop();
     }
 
@@ -232,9 +233,9 @@ namespace Catrobat_Player
 
     //----------------------------------------------------------------------------------------------
 
-    void Catrobat_PlayerAdapter::PlayButtonClicked()
+    void Catrobat_PlayerAdapter::ResumeButtonClicked()
     {
-        m_main->PlayButtonClicked();
+        m_main->ResumeButtonClicked();
     }
 
     //----------------------------------------------------------------------------------------------
@@ -246,9 +247,9 @@ namespace Catrobat_Player
 
     //----------------------------------------------------------------------------------------------
 
-    void Catrobat_PlayerAdapter::EnableAxisButtonClicked()
+    void Catrobat_PlayerAdapter::AxisButtonClicked()
     {
-        m_main->EnableAxisButtonClicked();
+        m_main->AxisButtonClicked();
     }
 
     //--------------------------------------------------------------------------

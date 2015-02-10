@@ -15,6 +15,8 @@ namespace Catrobat_Player
 
         void InitPlayer(Windows::UI::Xaml::Controls::SwapChainPanel^ swapChainPanel,
             Windows::UI::Xaml::Controls::CommandBar^ playerAppBar,
+            Windows::UI::Xaml::Controls::AppBarButton^ playerBtnAxis,
+            Windows::UI::Xaml::Controls::Grid^ playerGridAxis,
             Platform::String^ projectName);
 
         void SaveInternalState(Windows::Foundation::Collections::IPropertySet^ state);
@@ -25,9 +27,9 @@ namespace Catrobat_Player
 
         // Bottom CommandBar handlers.
         void RestartButtonClicked();
-        void PlayButtonClicked();
+        void ResumeButtonClicked();
         void ThumbnailButtonClicked();
-        void EnableAxisButtonClicked();
+        void AxisButtonClicked();
         void ScreenshotButtonClicked();
 
     private:
