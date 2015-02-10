@@ -57,75 +57,89 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectRectangleForMovement.Width = width;
         }
 
-        private Point getExtremeLeftAndTopCoordinate(double initLeft, double initTop)
+        private Point getExtremeLeftAndTopCoordinate(double initLeft, double initTop, 
+                                                     ref bool foundLeftPixel, ref int xCoordinateOfExtremeTop)
         {
             Point extremePoint = new Point(initLeft, initTop);
+            foundLeftPixel = false;
 
             // left pixel
             for (int indexWidth = 0; indexWidth < (int)mobileDisplayWidth; indexWidth++)
-            {
                 for (int indexHeight = 0; indexHeight < (int)mobileDisplayHeight; indexHeight++)
                 {
                     SolidColorBrush brush = pixelData.getPixelFromCanvas(indexWidth, indexHeight);
                     if (brush.Color.A != 0x00)
                     {
                         extremePoint.X = indexWidth;
-                        indexHeight = (int)mobileDisplayHeight;
+                        foundLeftPixel = true;
+
+                        // found extreme point --> set break conditions
                         indexWidth = (int)mobileDisplayWidth;
+                        indexHeight = (int)mobileDisplayHeight;
                     }
-                }
             }
 
             // top pixel
-            for (int indexHeight = 0; indexHeight < (int)mobileDisplayHeight; indexHeight++)
-            {
-                for (int indexWidth = 0; indexWidth < mobileDisplayWidth; indexWidth++)
-                {
-                    SolidColorBrush brush = pixelData.getPixelFromCanvas(indexWidth, indexHeight);
-                    if (brush.Color.A != 0x00)
+            if (foundLeftPixel == true)
+                for (int indexHeight = 0; indexHeight < (int)mobileDisplayHeight; indexHeight++)
+                    for (int indexWidth = (int)mobileDisplayWidth - 1; indexWidth >= (int)extremePoint.X; indexWidth--)
                     {
-                        extremePoint.Y = indexHeight;
-                        indexHeight = (int)mobileDisplayHeight;
-                        indexWidth = (int)mobileDisplayWidth;
+                        SolidColorBrush brush = pixelData.getPixelFromCanvas(indexWidth, indexHeight);
+                        if (brush.Color.A != 0x00)
+                        {
+                            extremePoint.Y = indexHeight;
+                            xCoordinateOfExtremeTop = indexWidth;
+
+                            // found extreme point --> set break conditions
+                            indexHeight = (int)mobileDisplayHeight;
+                            indexWidth = 0;
+                        }
                     }
-                }
-            }
+
             return extremePoint;
         }
 
-        private Point getExtremeRightAndBottomCoordinate(double initRight, double initBottom)
+        private Point getExtremeRightAndBottomCoordinate(double initRight, double initBottom, 
+                                                         Point extremeLeftAndTopCoordinate, bool foundLeftPixel,
+                                                         int xCoordinateOfExtremeTop)
         {
             Point extremePoint = new Point(initRight, initBottom);
 
-            // right pixel
-            for (int indexWidth = (int)mobileDisplayWidth - 1; indexWidth >= 0; indexWidth--)
+            if (foundLeftPixel == true)
             {
-                for (int indexHeight = 0; indexHeight < (int)mobileDisplayHeight; indexHeight++)
-                {
-                    SolidColorBrush brush = pixelData.getPixelFromCanvas(indexWidth, indexHeight);
-                    if (brush.Color.A != 0x00)
+                // right pixel
+                int yCoordinateOfExtremeRight = 0;
+                for (int indexWidth = (int)mobileDisplayWidth - 1; indexWidth >= xCoordinateOfExtremeTop; indexWidth--)
+                    for (int indexHeight = (int)mobileDisplayHeight - 1; indexHeight >= extremeLeftAndTopCoordinate.Y ; indexHeight--)
                     {
-                        extremePoint.X= indexWidth;
-                        indexHeight = (int)mobileDisplayHeight;
-                        indexWidth = 0;
-                    }
+                        SolidColorBrush brush = pixelData.getPixelFromCanvas(indexWidth, indexHeight);
+                        if (brush.Color.A != 0x00)
+                        {
+                            extremePoint.X = indexWidth;
+                            yCoordinateOfExtremeRight = indexHeight;
+
+                            // found extreme point --> set break conditions
+                            indexWidth = 0;
+                            indexHeight = 0;
+                        }
                 }
+
+                // bottom pixel
+                for (int indexHeight = (int)mobileDisplayHeight - 1; indexHeight >= yCoordinateOfExtremeRight; indexHeight--)
+                    for (int indexWidth = (int)extremePoint.X; indexWidth >= (int)extremeLeftAndTopCoordinate.X; indexWidth--)
+                    {
+                        SolidColorBrush brush = pixelData.getPixelFromCanvas(indexWidth, indexHeight);
+                        if (brush.Color.A != 0x00)
+                        {
+                            extremePoint.Y = indexHeight;
+
+                            // found extreme point --> set break conditions
+                            indexHeight = 0;
+                            indexWidth = 0;
+                        }
+                    }
             }
 
-            // bottom pixel
-            for (int indexHeight = (int)mobileDisplayHeight - 1; indexHeight >= 0; indexHeight--)
-            {
-                for (int indexWidth = 0; indexWidth < (int)mobileDisplayWidth; indexWidth++)
-                {
-                    SolidColorBrush brush = pixelData.getPixelFromCanvas(indexWidth, indexHeight);
-                    if (brush.Color.A != 0x00)
-                    {
-                        extremePoint.Y = indexHeight;
-                        indexHeight = 0;
-                        indexWidth = (int)mobileDisplayWidth;
-                    }
-                }
-            }
             return extremePoint;
         }
 
@@ -158,9 +172,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                 if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count != 0)
                 {
+                    bool foundLeftPixel = false;
+                    int xCoordinateOfExtremeTop = 0;
+                    extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y, 
+                                                                                 ref foundLeftPixel, ref xCoordinateOfExtremeTop);
+                    extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
+                                                                                         extremeLeftAndTopCoordinate, foundLeftPixel, xCoordinateOfExtremeTop);
 
-                    extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y);
-                    extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y);
                     scaleValue = paintingAreaCheckeredGridTransformGroup.Value.M11;
                     heightCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValue + offsetSize;
                     widthCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValue + offsetSize;
@@ -215,8 +233,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                 if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count != 0)
                 {
-                    extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y);
-                    extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y);
+                    bool foundLeftPixel = false;
+                    int xCoordinateOfExtremeTop = 0;
+                    extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y,
+                                                                                 ref foundLeftPixel, ref xCoordinateOfExtremeTop);
+                    extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
+                                                                                         extremeLeftAndTopCoordinate, foundLeftPixel, xCoordinateOfExtremeTop);
 
                     heightCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValue + offsetSize;
                     widthCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValue + offsetSize;
@@ -285,8 +307,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 Point extremeRightAndBottomCoordinate = new Point(0.0, 0.0);
                 if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count != 0)
                 {
-                    extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y);
-                    extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y);
+                    bool foundLeftPixel = false;
+                    int xCoordinateOfExtremeTop = 0;
+                    extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y,
+                                                                                 ref foundLeftPixel, ref xCoordinateOfExtremeTop);
+                    extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
+                                                                                         extremeLeftAndTopCoordinate, foundLeftPixel, xCoordinateOfExtremeTop);
+
                     heightCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValue + offsetSize;
                     widthCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValue + offsetSize;
 
@@ -349,8 +376,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                 if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count != 0)
                 {
-                    extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y);
-                    extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y);
+                    bool foundLeftPixel = false;
+                    int xCoordinateOfExtremeTop = 0;
+                    extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y,
+                                                                                 ref foundLeftPixel, ref xCoordinateOfExtremeTop);
+                    extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
+                                                                                         extremeLeftAndTopCoordinate, foundLeftPixel, xCoordinateOfExtremeTop);
 
                     heightCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValue + offsetSize;
                     widthCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValue + offsetSize;
