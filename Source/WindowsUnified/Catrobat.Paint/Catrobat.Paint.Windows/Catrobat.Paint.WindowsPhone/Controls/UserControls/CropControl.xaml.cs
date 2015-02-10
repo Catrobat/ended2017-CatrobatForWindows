@@ -67,8 +67,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             for (int indexWidth = 0; indexWidth < (int)mobileDisplayWidth; indexWidth++)
                 for (int indexHeight = 0; indexHeight < (int)mobileDisplayHeight; indexHeight++)
                 {
-                    SolidColorBrush brush = pixelData.getPixelFromCanvas(indexWidth, indexHeight);
-                    if (brush.Color.A != 0x00)
+                    if (pixelData.getPixelAlphaFromCanvas(indexWidth, indexHeight) != 0x00)
                     {
                         extremePoint.X = indexWidth;
                         foundLeftPixel = true;
@@ -84,8 +83,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 for (int indexHeight = 0; indexHeight < (int)mobileDisplayHeight; indexHeight++)
                     for (int indexWidth = (int)mobileDisplayWidth - 1; indexWidth >= (int)extremePoint.X; indexWidth--)
                     {
-                        SolidColorBrush brush = pixelData.getPixelFromCanvas(indexWidth, indexHeight);
-                        if (brush.Color.A != 0x00)
+                        if (pixelData.getPixelAlphaFromCanvas(indexWidth, indexHeight) != 0x00)
                         {
                             extremePoint.Y = indexHeight;
                             xCoordinateOfExtremeTop = indexWidth;
@@ -112,8 +110,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 for (int indexWidth = (int)mobileDisplayWidth - 1; indexWidth >= xCoordinateOfExtremeTop; indexWidth--)
                     for (int indexHeight = (int)mobileDisplayHeight - 1; indexHeight >= extremeLeftAndTopCoordinate.Y ; indexHeight--)
                     {
-                        SolidColorBrush brush = pixelData.getPixelFromCanvas(indexWidth, indexHeight);
-                        if (brush.Color.A != 0x00)
+                        if (pixelData.getPixelAlphaFromCanvas(indexWidth, indexHeight) != 0x00)
                         {
                             extremePoint.X = indexWidth;
                             yCoordinateOfExtremeRight = indexHeight;
@@ -128,8 +125,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 for (int indexHeight = (int)mobileDisplayHeight - 1; indexHeight >= yCoordinateOfExtremeRight; indexHeight--)
                     for (int indexWidth = (int)extremePoint.X; indexWidth >= (int)extremeLeftAndTopCoordinate.X; indexWidth--)
                     {
-                        SolidColorBrush brush = pixelData.getPixelFromCanvas(indexWidth, indexHeight);
-                        if (brush.Color.A != 0x00)
+                        if (pixelData.getPixelAlphaFromCanvas(indexWidth, indexHeight) != 0x00)
                         {
                             extremePoint.Y = indexHeight;
 

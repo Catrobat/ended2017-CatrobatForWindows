@@ -120,6 +120,25 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
       
         }
 
+        public Byte getPixelAlphaFromCanvas(int x, int y)
+        {
+            double NormfactorX = (double)pixelWidthCanvas / (double)PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
+            double NormfactorY = (double)pixelHeightCanvas / (double)PocketPaintApplication.GetInstance().Bitmap.PixelHeight;
+
+            double doubleY = ((double)y) * NormfactorY;
+            double doubleX = ((double)x) * NormfactorX;
+
+            int intX = (int)Math.Round(doubleX, 0);
+            int intY = (int)Math.Round(doubleY, 0);
+
+            int intTemp = intY * pixelWidthCanvas;
+            int intXTemp = intTemp + intX;
+            int intValue = intXTemp * 4;
+
+            return pixelsCanvas[intValue + 3];
+
+        }
+
 
         private async Task<string> SaveAsPng()
         {
