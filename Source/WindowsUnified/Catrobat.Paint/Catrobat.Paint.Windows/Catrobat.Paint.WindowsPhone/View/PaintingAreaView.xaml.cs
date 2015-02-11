@@ -122,6 +122,8 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             PaintingAreaCheckeredGrid.Height = height;
             PaintingAreaCheckeredGrid.Width = width;
+            PaintingAreaCheckeredGrid.HorizontalAlignment = HorizontalAlignment.Left;
+            PaintingAreaCheckeredGrid.VerticalAlignment = VerticalAlignment.Top;
 
             //var DISPLAY_WIDTH_HALF = width / 2.0;
             //var DISPLAY_HEIGHT_HALF = height / 2.0;
@@ -137,9 +139,14 @@ namespace Catrobat.Paint.WindowsPhone.View
             double moveValueToOffsetY = (Window.Current.Bounds.Height - PaintingAreaCheckeredGrid.Height * toScaleValue.ScaleY) / 2.0;
 
             var toTranslateValue = new TranslateTransform();
-            toTranslateValue.X = 0;
-            toTranslateValue.Y -= 11.0;
+            toTranslateValue.X -= _transforms.Value.OffsetX;
+            toTranslateValue.Y -= _transforms.Value.OffsetY;
             _transforms.Children.Add(toTranslateValue);
+
+            var toTranslateValue2 = new TranslateTransform();
+            toTranslateValue2.X = moveValueToOffsetX;
+            toTranslateValue2.Y = moveValueToOffsetY - 11.0;
+            _transforms.Children.Add(toTranslateValue2);
         }
 
         public void setSizeOfPaintingAreaViewCheckered()

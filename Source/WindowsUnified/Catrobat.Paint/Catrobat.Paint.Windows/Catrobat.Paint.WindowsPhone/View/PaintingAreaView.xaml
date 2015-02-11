@@ -13,7 +13,7 @@
 
     <Grid x:Name="LayoutRoot" IsHitTestVisible="True">
         <Grid x:Name="PaintingAreaContentPanelGrid" IsHitTestVisible="True">
-            <Grid x:Name="PaintingAreaCheckeredGrid" Height="auto" IsHitTestVisible="True" Width="auto">
+            <Grid x:Name="PaintingAreaCheckeredGrid" Height="300" IsHitTestVisible="True" Width="300">
                 <Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
                 </Grid.Background>
