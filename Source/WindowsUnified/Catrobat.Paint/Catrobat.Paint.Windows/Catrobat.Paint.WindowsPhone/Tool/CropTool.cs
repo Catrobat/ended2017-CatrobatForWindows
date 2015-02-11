@@ -195,7 +195,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             //StorageFile storageFile = await KnownFolders.CameraRoll.GetFileAsync("WP_20150208_009.jpg");
 
-            string filename = DateTime.Now.ToString("karlidavidtest") + ".png";
+
+            string filename = ("karlidavidtest") + ".png";
             //IsBitmapStored = await PocketPaintApplication.GetInstance().StorageIo.WriteBitmapToPngMediaLibrary(bmp, filename);
             await PocketPaintApplication.GetInstance().StorageIo.WriteBitmapToPngMediaLibrary(filename);
             StorageFile storageFile = await KnownFolders.PicturesLibrary.GetFileAsync(filename);
@@ -256,7 +257,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
-                // PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered(WB.PixelHeight, WB.PixelWidth);
+                PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered(WB.PixelHeight, WB.PixelWidth);
+                PocketPaintApplication.GetInstance().CropControl.setCropSelection();
             }
             return null;
         }
