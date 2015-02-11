@@ -7,10 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Height="676" Width="410">
     <Grid x:Name="GridMain" Height="676" HorizontalAlignment="Left" Margin="-5,-5,0,0" VerticalAlignment="Top" Width="410">
-        <Grid x:Name="GridRectangle" HorizontalAlignment="Left" ManipulationDelta="rectRectangleForMovement_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" VerticalAlignment="Top">
-            <Rectangle x:Name="rectRectangleForMovement" Fill="Transparent" Height="676" HorizontalAlignment="Left" Margin="0,0,0,0" Stroke="CornflowerBlue" 
+        <Grid x:Name="GridRectangle" HorizontalAlignment="Left" ManipulationDelta="rectRectangleCropSelection_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" VerticalAlignment="Top">
+            <Rectangle x:Name="rectRectangleCropSelection" Fill="Transparent" Height="676" HorizontalAlignment="Left" Margin="0,0,0,0" Stroke="CornflowerBlue" 
                 StrokeThickness="5" VerticalAlignment="Top" 
-                DoubleTapped="rectRectangleForMovement_DoubleTapped" Width="410"/>
+                DoubleTapped="rectRectangleCropSelection_DoubleTapped" Width="410"/>
         </Grid>
         <Grid x:Name="GridRectLeftTop" Background="#01FFFFFF" HorizontalAlignment="Left" Height="50" ManipulationDelta="rectLeftTop_ManipulationDelta"
               ManipulationMode="TranslateX, TranslateY" Margin="-5,-7.6,0,0" VerticalAlignment="Top" Width="50">

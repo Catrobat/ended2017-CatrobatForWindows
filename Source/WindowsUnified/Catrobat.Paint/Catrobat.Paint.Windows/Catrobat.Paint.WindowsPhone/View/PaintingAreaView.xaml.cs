@@ -107,6 +107,38 @@ namespace Catrobat.Paint.WindowsPhone.View
             setSizeOfPaintingAreaViewCheckered();
         }
 
+        public void setSizeOfPaintingAreaViewCheckered(int height, int width)
+        {
+            TransformGroup _transforms = null;
+            if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform.GetType() == typeof(TransformGroup))
+            {
+                _transforms = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
+            }
+            if (_transforms == null)
+            {
+                PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
+            }
+            _transforms.Children.Clear();
+
+            PaintingAreaCheckeredGrid.Height = height;
+            PaintingAreaCheckeredGrid.Width = width;
+
+            var DISPLAY_WIDTH_HALF = width / 2.0;
+            var DISPLAY_HEIGHT_HALF = height / 2.0;
+            var toScaleValue = new ScaleTransform();
+
+            toScaleValue.ScaleX = 0.75;
+            toScaleValue.ScaleY = 0.75;
+            toScaleValue.CenterX = DISPLAY_WIDTH_HALF;
+            toScaleValue.CenterY = DISPLAY_HEIGHT_HALF;
+            _transforms.Children.Add(toScaleValue);
+
+            var toTranslateValue = new TranslateTransform();
+            toTranslateValue.X = 0;
+            toTranslateValue.Y -= 11.0;
+            _transforms.Children.Add(toTranslateValue);
+        }
+
         public void setSizeOfPaintingAreaViewCheckered()
         {
             TransformGroup _transforms = null;
