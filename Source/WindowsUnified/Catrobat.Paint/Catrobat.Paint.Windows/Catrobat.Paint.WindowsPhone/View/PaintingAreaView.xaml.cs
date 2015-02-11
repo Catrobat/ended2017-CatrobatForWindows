@@ -814,6 +814,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PaintingAreaCanvas.Children.Clear();
                 changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", false);
                 changeEnabledOfASecondaryAppbarButton("appbarButtonSave", false);
+                PocketPaintApplication.GetInstance().CropControl.setCropSelection();
                 CommandManager.GetInstance().CommitCommand(new RemoveCommand());
             }
         }
