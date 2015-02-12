@@ -60,9 +60,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.PlayerLauncherService.RestartProgramAction();
         }
 
-        private void PlayProgramAction()
+        private void ResumeProgramAction()
         {
-            ServiceLocator.PlayerLauncherService.PlayProgramAction();
+            ServiceLocator.PlayerLauncherService.ResumeProgramAction();
         }
 
         private void SetThumbnailAction()
@@ -70,14 +70,14 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.PlayerLauncherService.SetThumbnailAction();
         }
 
-        private void EnableAxisAction()
+        private void AxisAction()
         {
-            ServiceLocator.PlayerLauncherService.SetThumbnailAction();
+            ServiceLocator.PlayerLauncherService.AxisAction();
         }
 
         private void TakeScreenshotAction()
         {
-            ServiceLocator.PlayerLauncherService.SetThumbnailAction();
+            ServiceLocator.PlayerLauncherService.TakeScreenshotAction();
         }
 
         protected override void GoBackAction()
@@ -114,9 +114,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         public PlayerViewModel()
         {
             RestartProgramCommand = new RelayCommand(RestartProgramAction);
-            PlayProgramCommand = new RelayCommand(PlayProgramAction);
+            PlayProgramCommand = new RelayCommand(ResumeProgramAction);
             SetThumbnailCommand = new RelayCommand(SetThumbnailAction);
-            EnableAxisCommand = new RelayCommand(EnableAxisAction);
+            EnableAxisCommand = new RelayCommand(AxisAction);
             TakeScreenshotCommand = new RelayCommand(TakeScreenshotAction);
 
             Messenger.Default.Register<GenericMessage<string>>(this,
