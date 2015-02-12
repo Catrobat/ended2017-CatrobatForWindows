@@ -33,8 +33,9 @@ m_playerState(PlayerState::Init)
     // Get the CommandBar from the Player's XAML page
     m_playerAppBar = (CommandBar^) playerPage->BottomAppBar;
 
-    // Get the Grid which contains the Axis from the Player's XAML page
+    // Get the Grid which contains the axis from the Player's XAML page & set the axis' values
     m_playerGridAxis = (Grid^) VisualTreeHelper::GetChild(playerPage->Content, 1);
+    SetAxisValues();
 
     // TODO: Change the timer settings if you want something other than the default variable 
     // timestep mode. e.g. for 60 FPS fixed timestep update logic, call:
@@ -43,21 +44,6 @@ m_playerState(PlayerState::Init)
     m_timer.SetTargetElapsedSeconds(1.0 / 60);
     */
 }
-
-/*
-DependencyObject gridAxis = VisualTreeHelper.GetChild((DependencyObject)PageTest.Content, 1);
-(gridAxis as Grid).Visibility = Visibility.Visible;
-
-
-DependencyObject test = VisualTreeHelper.GetChild((DependencyObject)PageTest.BottomAppBar,0);
-int count = VisualTreeHelper.GetChildrenCount(test);
-Debug.WriteLine(test.GetType().ToString());
-Debug.WriteLine(count);
-
-((PageTest.BottomAppBar as CommandBar).PrimaryCommands[3] as AppBarButton).Label = "testiii";
-
-
-Debug.WriteLine(test.GetType().ToString());*/
 
 //--------------------------------------------------------------------------------------------------
 
@@ -80,6 +66,21 @@ void Catrobat_PlayerMain::LoadProject(Platform::String^ projectName)
         m_playerState = PlayerState::Active;
     });
   
+}
+
+//--------------------------------------------------------------------------------------------------
+void Catrobat_PlayerMain::SetAxisValues()
+{
+    int backgroundHeight = 800; // TODO look at Catroid if here are really the values of the background used?!?
+    int backgroundWidth = 480;
+
+    // horizontal values
+    ((TextBlock^)m_playerGridAxis->Children->GetAt(3))->Text = "-" + (backgroundWidth / 2).ToString();
+    ((TextBlock^)m_playerGridAxis->Children->GetAt(4))->Text = (backgroundWidth / 2).ToString();
+
+    // vertical values
+    ((TextBlock^)m_playerGridAxis->Children->GetAt(5))->Text = (backgroundHeight / 2).ToString();
+    ((TextBlock^)m_playerGridAxis->Children->GetAt(6))->Text = "-" + (backgroundHeight / 2).ToString();
 }
 
 //--------------------------------------------------------------------------------------------------

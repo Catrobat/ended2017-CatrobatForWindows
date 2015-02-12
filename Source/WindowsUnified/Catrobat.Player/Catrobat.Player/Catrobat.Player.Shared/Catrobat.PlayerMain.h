@@ -50,6 +50,7 @@ namespace Catrobat_Player
 
         // Project depending functionality
         void LoadProject(Platform::String^ projectName);
+        void SetAxisValues();
 
     private:
 		// Cached pointer to device resources

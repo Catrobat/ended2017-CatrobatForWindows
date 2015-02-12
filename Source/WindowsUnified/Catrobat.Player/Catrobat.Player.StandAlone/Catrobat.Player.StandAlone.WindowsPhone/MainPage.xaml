@@ -11,6 +11,10 @@
 
   
   <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition x:Name="mainRow" Height="*"/>
+    </Grid.RowDefinitions>
+
     <SwapChainPanel>
     <!-- Loading Project -->
     <!--<Image Source="ms-appx:///Assets/SplashScreen.png" x:Name="ImagePlayerLoadSplashScreen" 
@@ -30,17 +34,51 @@
     
     
     </SwapChainPanel>
-    <Grid Visibility="Collapsed">
+    <!-- Grid for axis functionality -->
+    <Grid Visibility="Visible">
+      <!-- Vertical line -->
       <Line Stroke="Red" 
-            StrokeThickness="3"
+            StrokeThickness="2"
             Stretch="Fill"
             Y1="0"
             Y2="1" />
+      <!-- Horizontal line -->
       <Line Stroke="Red" 
-            StrokeThickness="3"
+            StrokeThickness="2"
             Stretch="Fill"
             X1="0"
             X2="1"/>
+      
+      <TextBlock HorizontalAlignment="Center" 
+                 VerticalAlignment="Center"
+                 Text="0" 
+                 FontSize="16"
+                 Foreground="Red" 
+                 Margin="25,25,0,0" />
+      <TextBlock HorizontalAlignment="Left" 
+                 VerticalAlignment="Center"
+                 Text="-240" 
+                 FontSize="16"
+                 Foreground="Red" 
+                 Margin="5,25,0,0" />
+      <TextBlock HorizontalAlignment="Right" 
+                 VerticalAlignment="Center"
+                 Text="240" 
+                 FontSize="16"
+                 Foreground="Red" 
+                 Margin="0,25,5,0" />
+      <TextBlock HorizontalAlignment="Center" 
+                 VerticalAlignment="Top"
+                 Text="400" 
+                 FontSize="16"
+                 Foreground="Red" 
+                 Margin="25,1,0,0" />
+      <TextBlock HorizontalAlignment="Center" 
+                 VerticalAlignment="Bottom"
+                 Text="-400" 
+                 FontSize="16"
+                 Foreground="Red" 
+                 Margin="25,0,0,0" />
     </Grid>
   </Grid>
   

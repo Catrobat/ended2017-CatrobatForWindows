@@ -29,6 +29,13 @@ namespace Catrobat.Player.StandAlone
     {
         public MainPage()
         {
+
+            this.Loaded += (s, e) =>
+            {
+                mainRow.MaxHeight = mainRow.ActualHeight;
+                mainRow.Height = new GridLength(mainRow.ActualHeight, GridUnitType.Pixel);             
+            };
+
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
