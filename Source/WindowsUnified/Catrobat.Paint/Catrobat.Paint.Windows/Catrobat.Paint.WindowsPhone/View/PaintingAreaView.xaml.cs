@@ -107,7 +107,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             setSizeOfPaintingAreaViewCheckered();
         }
 
-        public void setSizeOfPaintingAreaViewCheckered()
+        public void setSizeOfPaintingAreaViewCheckered(int height, int width)
         {
             TransformGroup _transforms = null;
             if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform.GetType() == typeof(TransformGroup))
@@ -120,8 +120,55 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
             _transforms.Children.Clear();
 
-            var DISPLAY_WIDTH_HALF = Window.Current.Bounds.Width / 2.0;
-            var DISPLAY_HEIGHT_HALF = Window.Current.Bounds.Height / 2.0;
+            PaintingAreaCheckeredGrid.Height = height;
+            PaintingAreaCheckeredGrid.Width = width;
+            PaintingAreaCheckeredGrid.HorizontalAlignment = HorizontalAlignment.Left;
+            PaintingAreaCheckeredGrid.VerticalAlignment = VerticalAlignment.Top;
+
+            //var DISPLAY_WIDTH_HALF = width / 2.0;
+            //var DISPLAY_HEIGHT_HALF = height / 2.0;
+            var toScaleValue = new ScaleTransform();
+
+            toScaleValue.ScaleX = 0.75;
+            toScaleValue.ScaleY = 0.75;
+            toScaleValue.CenterX = width / 2.0;
+            toScaleValue.CenterY = height / 2.0;
+            _transforms.Children.Add(toScaleValue);
+
+            double moveValueToOffsetX = (Window.Current.Bounds.Width - PaintingAreaCheckeredGrid.Width * toScaleValue.ScaleX) / 2.0;
+            double moveValueToOffsetY = (Window.Current.Bounds.Height - PaintingAreaCheckeredGrid.Height * toScaleValue.ScaleY) / 2.0;
+
+            var toTranslateValue = new TranslateTransform();
+            toTranslateValue.X -= _transforms.Value.OffsetX;
+            toTranslateValue.Y -= _transforms.Value.OffsetY;
+            _transforms.Children.Add(toTranslateValue);
+
+            var toTranslateValue2 = new TranslateTransform();
+            toTranslateValue2.X = moveValueToOffsetX;
+            toTranslateValue2.Y = moveValueToOffsetY - 11.0;
+            _transforms.Children.Add(toTranslateValue2);
+        }
+
+        public void setSizeOfPaintingAreaViewCheckered()
+        {
+
+            PaintingAreaCheckeredGrid.Height = Window.Current.Bounds.Height;
+            PaintingAreaCheckeredGrid.Width = Window.Current.Bounds.Width;
+            //PaintingAreaCanvas.Height = 200;
+            //PaintingAreaCanvas.Width = 200;
+            TransformGroup _transforms = null;
+            if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform.GetType() == typeof(TransformGroup))
+            {
+                _transforms = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
+            }
+            if (_transforms == null)
+            {
+                PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
+            }
+            _transforms.Children.Clear();
+
+            var DISPLAY_WIDTH_HALF = (Window.Current.Bounds.Width / 2.0);
+            var DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height / 2.0);
             var toScaleValue = new ScaleTransform();
 
             toScaleValue.ScaleX = 0.75;
@@ -130,10 +177,19 @@ namespace Catrobat.Paint.WindowsPhone.View
             toScaleValue.CenterY = DISPLAY_HEIGHT_HALF;
             _transforms.Children.Add(toScaleValue);
 
+            double moveValueToOffsetX = (Window.Current.Bounds.Width - PaintingAreaCheckeredGrid.Width * toScaleValue.ScaleX) / 2.0; ;
+            double moveValueToOffsetY = (Window.Current.Bounds.Height - PaintingAreaCheckeredGrid.Height * toScaleValue.ScaleY) / 2.0;
+
             var toTranslateValue = new TranslateTransform();
-            toTranslateValue.X = 0;
-            toTranslateValue.Y -= 11.0;
+            toTranslateValue.X -= _transforms.Value.OffsetX;
+            toTranslateValue.Y -= _transforms.Value.OffsetY;
             _transforms.Children.Add(toTranslateValue);
+
+            var toTranslateValue2 = new TranslateTransform();
+            toTranslateValue2.X = moveValueToOffsetX;
+            toTranslateValue2.Y = moveValueToOffsetY -11.0;
+            _transforms.Children.Add(toTranslateValue2);
+
         }
 
         public async void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)

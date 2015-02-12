@@ -114,7 +114,6 @@ namespace Catrobat.Paint.WindowsPhone.Data
 
             Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
             var pixels = WindowsRuntimeBufferExtensions.ToArray(buffer);
-
             StorageFile outputFile = await KnownFolders.PicturesLibrary.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
             using (var writeStream = await outputFile.OpenAsync(FileAccessMode.ReadWrite))
             {

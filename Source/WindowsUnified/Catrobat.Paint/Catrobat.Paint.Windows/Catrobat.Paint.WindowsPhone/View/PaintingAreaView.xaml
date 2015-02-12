@@ -13,7 +13,7 @@
 
     <Grid x:Name="LayoutRoot" IsHitTestVisible="True">
         <Grid x:Name="PaintingAreaContentPanelGrid" IsHitTestVisible="True">
-            <Grid x:Name="PaintingAreaCheckeredGrid" Height="auto" IsHitTestVisible="True" Width="auto">
+            <Grid x:Name="PaintingAreaCheckeredGrid" Height="300" IsHitTestVisible="True" Width="300">
                 <Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
                 </Grid.Background>
@@ -40,10 +40,9 @@
                 <!-- RectangleSelectioncontrol -->
                 <userControls:RectangleSelectionControl x:Name="ucRectangleSelectionControl" Visibility="Collapsed"></userControls:RectangleSelectionControl>
 
-                
             </Grid>
 
-            
+
             <!-- app-BarRectEllControl -->
             <Grid x:Name="GridUserControlRectEll" Height="312" HorizontalAlignment="Center" Margin="0,0,0,72"
                   VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
@@ -68,7 +67,7 @@
         <!-- Crop-Control -->
         <userControls:CropControl x:Name="ctrlCropControl" Visibility="Collapsed"></userControls:CropControl>
 
-        
+
         <userControls:InfoBasicBoxControl x:Name="InfoBasicBoxControl" Visibility="Collapsed"></userControls:InfoBasicBoxControl>
         <userControls:InfoBoxActionControl x:Name="InfoBoxActionControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"></userControls:InfoBoxActionControl>
         <userControls:InfoBoxControl x:Name="InfoBoxControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"></userControls:InfoBoxControl>
