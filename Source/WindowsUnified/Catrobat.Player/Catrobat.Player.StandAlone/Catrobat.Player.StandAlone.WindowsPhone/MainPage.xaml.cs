@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Phone.UI.Input;
+using System.Diagnostics;
 
 
 
@@ -28,6 +29,13 @@ namespace Catrobat.Player.StandAlone
     {
         public MainPage()
         {
+
+            this.Loaded += (s, e) =>
+            {
+                mainRow.MaxHeight = mainRow.ActualHeight;
+                mainRow.Height = new GridLength(mainRow.ActualHeight, GridUnitType.Pixel);             
+            };
+
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
@@ -45,15 +53,15 @@ namespace Catrobat.Player.StandAlone
         private readonly Catrobat_Player.Catrobat_PlayerAdapter playerObject = new Catrobat_Player.Catrobat_PlayerAdapter();
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // register hardware back button event
+            // Register hardware back button event
             HardwareButtons.BackPressed += OnHardwareBackButtonPressed;
 
-            playerObject.InitPlayer(swapChainPanel, PlayerAppBar, BtnAxis, GridAxis, "testTapp2");
+            playerObject.InitPlayer(PlayerPage, "testTapp2");
         }
 
         private void OnRestartButtonClicked(object sender, RoutedEventArgs e)
         {
-            playerObject.RestartButtonClicked();            
+            playerObject.RestartButtonClicked();        
         }
 
         private void OnResumeButtonClicked(object sender, RoutedEventArgs e)

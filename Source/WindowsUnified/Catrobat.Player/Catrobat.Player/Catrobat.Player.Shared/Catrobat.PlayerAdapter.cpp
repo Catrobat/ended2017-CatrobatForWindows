@@ -1,20 +1,16 @@
 #include "pch.h"
 #include "Catrobat.PlayerAdapter.h"
 
-using namespace Windows::Foundation;
-using namespace Windows::Foundation::Collections;
-using namespace Windows::Graphics::Display;
-using namespace Windows::System::Threading;
 using namespace Windows::UI::Core;
-using namespace Windows::UI::Input;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
-using namespace Windows::UI::Xaml::Controls::Primitives;
 using namespace Windows::UI::Xaml::Data;
-using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
-using namespace Windows::UI::Xaml::Navigation;
+using namespace Windows::Foundation;
+using namespace Windows::Foundation::Collections;
 using namespace Windows::Phone::UI::Input;
+using namespace Windows::Graphics::Display;
+using namespace Windows::System::Threading;
 
 using namespace concurrency;
 using namespace D2D1;
@@ -35,7 +31,7 @@ namespace Catrobat_Player
 
     Catrobat_PlayerAdapter::~Catrobat_PlayerAdapter()
     {
-        // Stop rendering and processing events on destruction.
+        // Stop rendering and processing events on destruction
         critical_section::scoped_lock lock(m_main->GetCriticalSection());
         m_main->StopRenderLoop();
         m_coreInput->Dispatcher->StopProcessEvents();
@@ -43,12 +39,14 @@ namespace Catrobat_Player
     
     //----------------------------------------------------------------------------------------------
 
-    void Catrobat_PlayerAdapter::InitPlayer(SwapChainPanel^ swapChainPanel, 
-        CommandBar^ playerAppBar, AppBarButton^ playerBtnAxis, Grid^ playerGridAxis,
-        String^ projectName)
+    void Catrobat_PlayerAdapter::InitPlayer(Page^ playerPage, String^ projectName)
     {
 
-        // Register event handlers for page lifecycle.
+        // Get the SwapChainPanel of the XAML page
+        SwapChainPanel^ swapChainPanel = (SwapChainPanel^) VisualTreeHelper::GetChild(
+            playerPage->Content, 0);
+
+        // Register event handlers for page lifecycle
         CoreWindow^ window = Window::Current->CoreWindow;
 
         window->VisibilityChanged += 
@@ -92,25 +90,25 @@ namespace Catrobat_Player
                 CoreInputDeviceTypes::Pen
                 );
 
-            // Register for pointer events, which will be raised on the background thread.
+            // Register for pointer events, which will be raised on the background thread
             m_coreInput->PointerPressed += ref new TypedEventHandler<Object^, PointerEventArgs^>
                 (this, &Catrobat_PlayerAdapter::OnPointerPressed);
 
-            // Begin processing input messages as they're delivered.
+            // Begin processing input messages as they're delivered
             m_coreInput->Dispatcher->ProcessEvents(CoreProcessEventsOption::ProcessUntilQuit);
         });
 
-        // Run task on a dedicated high priority background thread.
+        // Run task on a dedicated high priority background thread
         m_inputLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, 
             WorkItemOptions::TimeSliced); 
 
         m_main = std::unique_ptr<Catrobat_PlayerMain>(new Catrobat_PlayerMain(m_deviceResources, 
-            playerAppBar, playerBtnAxis, playerGridAxis, projectName));
+            playerPage, projectName));
         m_main->StartRenderLoop();
     }
 
     //----------------------------------------------------------------------------------------------
-    // Saves the current state of the app for suspend and terminate events.
+    // Saves the current state of the app for suspend and terminate events
 
     void Catrobat_PlayerAdapter::SaveInternalState(IPropertySet^ state)
     {
@@ -119,18 +117,18 @@ namespace Catrobat_Player
         critical_section::scoped_lock lock(m_main->GetCriticalSection());
         m_deviceResources->Trim();
 
-        // Stop rendering when the app is suspended.
+        // Stop rendering when the app is suspended
         m_main->StopRenderLoop();
 
-        // TODO Put code to save app state here.
+        // TODO Put code to save app state here
     }
 
     //----------------------------------------------------------------------------------------------
-    // Loads the current state of the app for resume events.
+    // Loads the current state of the app for resume events
 
     void Catrobat_PlayerAdapter::LoadInternalState(IPropertySet^ state)
     {
-        // TODO Put code to load app state here.
+        // TODO Put code to load app state here
 
         // TODO review, especially check state handling --> maybe create a function for this inside
         // the main class of the player
@@ -140,7 +138,7 @@ namespace Catrobat_Player
     }
 
     //----------------------------------------------------------------------------------------------
-    // Window event handlers.
+    // Window event handlers
 
     void Catrobat_PlayerAdapter::OnVisibilityChanged(CoreWindow^ sender, 
         VisibilityChangedEventArgs^ args)
@@ -159,7 +157,7 @@ namespace Catrobat_Player
     }
 
     //----------------------------------------------------------------------------------------------
-    // DisplayInformation event handlers.
+    // DisplayInformation event handlers
 
     void Catrobat_PlayerAdapter::OnDpiChanged(DisplayInformation^ sender, Object^ args)
     {
@@ -187,7 +185,7 @@ namespace Catrobat_Player
     }
 
     //----------------------------------------------------------------------------------------------
-    // Other event handlers.
+    // Other event handlers
 
     void Catrobat_PlayerAdapter::OnCompositionScaleChanged(SwapChainPanel^ sender, Object^ args)
     {
@@ -209,7 +207,7 @@ namespace Catrobat_Player
     }
 
     //----------------------------------------------------------------------------------------------
-    // Independent input handling functions.
+    // Independent input handling functions
 
     bool Catrobat_PlayerAdapter::HardwareBackButtonPressed()
     {

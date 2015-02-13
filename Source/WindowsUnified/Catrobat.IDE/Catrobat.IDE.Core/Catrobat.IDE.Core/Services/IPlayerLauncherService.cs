@@ -11,11 +11,11 @@ namespace Catrobat.IDE.Core.Services
 
         void RestartProgramAction();
 
-        void PlayProgramAction();
+        void ResumeProgramAction();
 
         void SetThumbnailAction();
 
-        void EnableAxisAction();
+        void AxisAction();
          
         void TakeScreenshotAction();
 

@@ -72,11 +72,11 @@ namespace Catrobat.IDE.WindowsShared.Services
             }
         }
 
-        public void PlayProgramAction()
+        public void ResumeProgramAction()
         {
             if (PlayerObject != null)
             {
-                PlayerObject.PlayButtonClicked();
+                PlayerObject.ResumeButtonClicked();
             }
         }
 
@@ -88,11 +88,11 @@ namespace Catrobat.IDE.WindowsShared.Services
             }
         }
 
-        public void EnableAxisAction()
+        public void AxisAction()
         {
             if (PlayerObject != null)
             {
-                PlayerObject.EnableAxisButtonClicked();
+                PlayerObject.AxisButtonClicked();
             }
         }
 

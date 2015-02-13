@@ -2,11 +2,10 @@
 
 #include "Common\StepTimer.h"
 #include "Common\DeviceResources.h"
-//#include "Content\Sample3DSceneRenderer.h"
 #include "Content\SampleFpsTextRenderer.h"
 #include "Content\Basic2DRenderer.h"
 
-// Renders Direct2D and 3D content on the screen.
+// Renders Direct2D (and 3D) content on the screen
 namespace Catrobat_Player
 {
     enum class PlayerState
@@ -20,19 +19,17 @@ namespace Catrobat_Player
 	{
 	public:
         Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources, 
-                            Windows::UI::Xaml::Controls::CommandBar^ playerAppBar,
-                            Windows::UI::Xaml::Controls::AppBarButton^ playerBtnAxis,
-                            Windows::UI::Xaml::Controls::Grid^ playerGridAxis,
+                            Windows::UI::Xaml::Controls::Page^ playerPage, 
                             Platform::String^ projectName);
 		~Catrobat_PlayerMain();
 		void CreateWindowSizeDependentResources();
         Concurrency::critical_section& GetCriticalSection() { return m_criticalSection; }
         
-        // Render functionality.
+        // Render functionality
 		void StartRenderLoop();
 		void StopRenderLoop();
 		
-        // Event input from the user.
+        // Event input from the user
         void PointerPressed(D2D1_POINT_2F point);
         bool HardwareBackButtonPressed();
         void RestartButtonClicked();
@@ -46,18 +43,20 @@ namespace Catrobat_Player
 		virtual void OnDeviceRestored();
 
 	private:
-        // Render depending functionality.
+        // Render depending functionality
 		void ProcessInput();
 		void Update();
 		bool Render();
 
-        // Project depending functionality.
-        void LoadProject();
+        // Project depending functionality
+        void LoadProject(Platform::String^ projectName);
+        void SetAxisValues();
 
-		// Cached pointer to device resources.
+    private:
+		// Cached pointer to device resources
 		std::shared_ptr<DX::DeviceResources> m_deviceResources;
 
-		// TODO: Replace with your own content renderers.
+		// TODO: Replace with your own content renderers
 		//std::unique_ptr<Sample3DSceneRenderer> m_sceneRenderer;
 		std::unique_ptr<SampleFpsTextRenderer> m_fpsTextRenderer;
         std::unique_ptr<Basic2DRenderer> m_basic2dRenderer;
@@ -65,22 +64,17 @@ namespace Catrobat_Player
 		Windows::Foundation::IAsyncAction^ m_renderLoopWorker;
 		Concurrency::critical_section m_criticalSection;
 
-		// Rendering loop timer.
+		// Rendering loop timer
 		DX::StepTimer m_timer;
 
-		// Track current input pointer position.
+		// Track current input pointer position
 		float m_pointerLocationX;
 
-        Platform::String^ m_projectName;
-
+        // Project dependenging member variables
+        Windows::UI::Xaml::Controls::CommandBar^ m_playerAppBar;
+        Windows::UI::Xaml::Controls::Grid^ m_playerGridAxis;
+        PlayerState m_playerState;
         bool m_loadingComplete;
         bool m_axisOn;
-        PlayerState m_playerState;
-
-        Windows::UI::Xaml::Controls::CommandBar^ m_playerAppBar;
-        Windows::UI::Xaml::Controls::AppBarButton^ m_playerBtnAxis;
-        Windows::UI::Xaml::Controls::Grid^ m_playerGridAxis;
 	};
-
-    
 };
