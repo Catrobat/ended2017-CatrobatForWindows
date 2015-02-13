@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Phone.UI.Input;
 using System.Diagnostics;
+using Windows.Graphics.Display;
 
 
 
@@ -30,6 +31,8 @@ namespace Catrobat.Player.StandAlone
         public MainPage()
         {
 
+            // Grid for page's content acquires hereby the whole height 
+            // & is not compressed when the CommandBar fires up
             this.Loaded += (s, e) =>
             {
                 mainRow.MaxHeight = mainRow.ActualHeight;
@@ -56,6 +59,7 @@ namespace Catrobat.Player.StandAlone
             // Register hardware back button event
             HardwareButtons.BackPressed += OnHardwareBackButtonPressed;
 
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
             playerObject.InitPlayer(PlayerPage, "testTapp2");
         }
 

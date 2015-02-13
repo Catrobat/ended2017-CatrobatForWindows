@@ -74,13 +74,13 @@ void Catrobat_PlayerMain::SetAxisValues()
     int backgroundHeight = 800; // TODO look at Catroid if here are really the values of the background used?!?
     int backgroundWidth = 480;
 
-    // horizontal values
-    ((TextBlock^)m_playerGridAxis->Children->GetAt(3))->Text = "-" + (backgroundWidth / 2).ToString();
-    ((TextBlock^)m_playerGridAxis->Children->GetAt(4))->Text = (backgroundWidth / 2).ToString();
+    //// horizontal values
+    //((TextBlock^)m_playerGridAxis->Children->GetAt(3))->Text = "-" + (backgroundWidth / 2).ToString();
+    //((TextBlock^)m_playerGridAxis->Children->GetAt(4))->Text = (backgroundWidth / 2).ToString();
 
-    // vertical values
-    ((TextBlock^)m_playerGridAxis->Children->GetAt(5))->Text = (backgroundHeight / 2).ToString();
-    ((TextBlock^)m_playerGridAxis->Children->GetAt(6))->Text = "-" + (backgroundHeight / 2).ToString();
+    //// vertical values
+    //((TextBlock^)m_playerGridAxis->Children->GetAt(5))->Text = (backgroundHeight / 2).ToString();
+    //((TextBlock^)m_playerGridAxis->Children->GetAt(6))->Text = "-" + (backgroundHeight / 2).ToString();
 }
 
 //--------------------------------------------------------------------------------------------------
