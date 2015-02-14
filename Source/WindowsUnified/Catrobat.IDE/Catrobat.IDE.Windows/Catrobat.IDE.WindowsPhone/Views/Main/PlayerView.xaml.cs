@@ -30,7 +30,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
 
         public PlayerView()
         {
-            // Grid for page's content acquires hereby the whole height 
+            // Grid for PLayer's content acquires hereby the whole height 
             // & is not compressed when the CommandBar fires up
             this.Loaded += (s, e) =>
             {
