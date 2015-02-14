@@ -717,12 +717,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public int getRectangleCropSelectionHeight()
         {
-            return (int)((rectRectangleCropSelection.Height - 10.0) / scaleValue);
+            return (int)(Math.Ceiling((Math.Ceiling(rectRectangleCropSelection.Height) - 10.0) / scaleValue));
         }
 
         public int getRectangleCropSelectionWidth()
         {
-            return (int)((rectRectangleCropSelection.Width - 10.0) / scaleValue);
+            return (int)Math.Ceiling(((Math.Ceiling(rectRectangleCropSelection.Width) - 10.0) / scaleValue));
         }
 
         public Point getLeftTopCoordinateRectangleCropSelection()
