@@ -29,6 +29,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         PixelData.PixelData pixelData = new PixelData.PixelData();
 
+        Point leftTopNullPointCropSelection;
+
         public CropControl()
         {
             this.InitializeComponent();
@@ -38,6 +40,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             GridMain.RenderTransform = _transformGridMain;
             PocketPaintApplication.GetInstance().CropControl = this;
             setIsModifiedRectangleMovement = false;
+            leftTopNullPointCropSelection = new Point(48.0, 69.0);
 
             //if(!hasElementsPaintingAreaViews())
             //{
@@ -224,6 +227,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
                     _transformGridMain.Children.Add(moveCropControl);
                 }
+
+                setLeftTopNullPointCropSelection(_transformGridMain.Value.OffsetX, _transformGridMain.Value.OffsetY);
                 limitLeft = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin;
                 limitTop = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
                 // TODO: Explain the following line.
@@ -727,7 +732,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public Point getLeftTopCoordinateRectangleCropSelection()
         {
-            return new Point((_transformGridMain.Value.OffsetX + 5.0 + GridMain.Margin.Left - 48.0) / 0.75, (_transformGridMain.Value.OffsetY + 5.0 + GridMain.Margin.Top - 69.0) / 0.75);
+            return new Point((_transformGridMain.Value.OffsetX + 5.0 + GridMain.Margin.Left - leftTopNullPointCropSelection.X) / 0.75, (_transformGridMain.Value.OffsetY + 5.0 + GridMain.Margin.Top - leftTopNullPointCropSelection.Y) / 0.75);
+        }
+
+        public void setLeftTopNullPointCropSelection(double x, double y)
+        {
+            leftTopNullPointCropSelection = new Point(x, y);
+        }
+
+        public Point getLeftTopNullPointCropSelection()
+        {
+            return leftTopNullPointCropSelection;
         }
     }
 }

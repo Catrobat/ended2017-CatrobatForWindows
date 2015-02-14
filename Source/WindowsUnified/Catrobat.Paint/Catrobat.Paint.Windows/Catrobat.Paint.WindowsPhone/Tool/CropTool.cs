@@ -215,8 +215,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 BitmapEncoder encoder = await BitmapEncoder.CreateForTranscodingAsync(mrAccessStream, decoder);
 
                 //// convert the bitmap to a 400px by 600px bitmap
-                encoder.BitmapTransform.ScaledHeight = (uint)Window.Current.Bounds.Height;
-                encoder.BitmapTransform.ScaledWidth = (uint)Window.Current.Bounds.Width;
+                encoder.BitmapTransform.ScaledHeight = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Height;
+                encoder.BitmapTransform.ScaledWidth = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Width;
 
                 BitmapBounds bounds = new BitmapBounds();
                 bounds.Height = (uint)height;
