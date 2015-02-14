@@ -5,20 +5,19 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 using Windows.Storage;
 using Windows.UI.Xaml;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.ViewManagement;
 using Windows.Graphics.Display;
+using Windows.Foundation.Collections;
 using Windows.ApplicationModel.Activation;
 
+using Catrobat_Player;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.WindowsShared.Services;
-using Catrobat_Player;
-using Windows.UI.ViewManagement;
-
 
 namespace Catrobat.IDE.WindowsPhone.Views.Main
 {
@@ -36,7 +35,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             this.Loaded += (s, e) =>
             {
                 mainRow.MaxHeight = mainRow.ActualHeight;
-                //mainRow.MaxHeight = Windows.UI.Xaml.Window.Current.Bounds.Height;
                 mainRow.Height = new GridLength(mainRow.ActualHeight, GridUnitType.Pixel);
             };
 
@@ -47,13 +45,15 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //SetSourceOfThumbnail(); --> TODO it is necessary to change the SplashScreen image instead of setting an image on this XAML page
-             
+
             if (_viewModel.IsLaunchFromTile)
                 while (ServiceLocator.NavigationService.CanGoBack)
                     ServiceLocator.NavigationService.RemoveBackEntry();
 
             _playerObject.InitPlayer(PlayerPage, _viewModel.ProjectName);
             PlayerLauncherServiceWindowsShared.SetPlayerObject(_playerObject);
+
+            Window.Current.Activate();
 
             // Portrait only for the Player for now
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
