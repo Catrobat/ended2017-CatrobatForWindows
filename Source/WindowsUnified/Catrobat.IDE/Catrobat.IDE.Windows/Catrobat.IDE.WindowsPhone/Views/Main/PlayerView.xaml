@@ -13,12 +13,12 @@
     Background="{ThemeResource AppBackgroundBrush}"
     DataContext="{Binding PlayerViewModel, Source={StaticResource Locator}}">
 
-  <Grid>
+  <Grid Margin="0,0,0,-60">
     <Grid.RowDefinitions>
       <RowDefinition x:Name="mainRow" Height="*"/>
     </Grid.RowDefinitions>
 
-    <SwapChainPanel>
+    <SwapChainPanel Margin="0,0,0,60">
       <!-- Loading Project -->
       <!--<Image Source="ms-appx:///Assets/SplashScreen.png" x:Name="ImagePlayerLoadSplashScreen" 
            VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" 
@@ -38,7 +38,7 @@
 
     </SwapChainPanel>
     <!-- Grid for axis functionality -->
-    <Grid Visibility="Collapsed">
+    <Grid Visibility="Collapsed" Margin="0,0,0,60">
       <!-- Vertical line -->
       <Line Stroke="Red" 
             StrokeThickness="3"
@@ -105,7 +105,7 @@
 
   <Page.BottomAppBar>
     <CommandBar VerticalAlignment="Bottom" 
-      Visibility="Collapsed" RequestedTheme="Dark" 
+      Visibility="Collapsed" Opacity="0.8"
       Background="{ThemeResource AppBarBackgroundBrush}">
       <CommandBar.PrimaryCommands>
         <AppBarButton Icon="Refresh" 

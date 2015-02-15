@@ -31,12 +31,12 @@ namespace Catrobat.Player.StandAlone
         public MainPage()
         {
 
-            // Grid for page's content acquires hereby the whole height 
+            // Grid for Player's content acquires hereby the whole height 
             // & is not compressed when the CommandBar fires up
             this.Loaded += (s, e) =>
             {
                 mainRow.MaxHeight = mainRow.ActualHeight;
-                mainRow.Height = new GridLength(mainRow.ActualHeight, GridUnitType.Pixel);             
+                mainRow.Height = new GridLength(mainRow.ActualHeight, GridUnitType.Pixel);
             };
 
             this.InitializeComponent();

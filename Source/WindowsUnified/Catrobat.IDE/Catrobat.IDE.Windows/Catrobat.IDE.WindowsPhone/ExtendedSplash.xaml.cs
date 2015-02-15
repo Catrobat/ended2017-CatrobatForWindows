@@ -62,6 +62,17 @@ namespace Catrobat.IDE.WindowsPhone
             RestoreStateAsync(executionState);
         }
 
+        public ExtendedSplash(ImageSource preloadedImage)
+        {
+            // Constructor for only showing a SplashScreen image; e.g. when starting the Player
+
+            InitializeComponent();
+
+            ImageExtendedSplash.Source = preloadedImage;
+
+            Window.Current.SizeChanged += ExtendedSplash_OnResize;
+        }
+
         async void RestoreStateAsync(ApplicationExecutionState executionState)
         {
             DateTime beforLoading = DateTime.UtcNow;

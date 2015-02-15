@@ -9,15 +9,15 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-  
-  <Grid>
+
+  <Grid Margin="0,0,0,-60">
     <Grid.RowDefinitions>
       <RowDefinition x:Name="mainRow" Height="*"/>
     </Grid.RowDefinitions>
 
-    <SwapChainPanel>
-    <!-- Loading Project -->
-    <!--<Image Source="ms-appx:///Assets/SplashScreen.png" x:Name="ImagePlayerLoadSplashScreen" 
+    <SwapChainPanel Margin="0,0,0,60">
+      <!-- Loading Project -->
+      <!--<Image Source="ms-appx:///Assets/SplashScreen.png" x:Name="ImagePlayerLoadSplashScreen" 
            VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" 
            Opacity="0.5" />
     
@@ -30,12 +30,12 @@
                     Margin="0" IsActive="True" Width="40" Height="40" VerticalAlignment="Top" 
                     HorizontalAlignment="Center"/>
     </Grid>-->
-    
-    
-    
+
+
+
     </SwapChainPanel>
     <!-- Grid for axis functionality -->
-    <Grid Visibility="Collapsed">
+    <Grid Visibility="Collapsed" Margin="0,0,0,60">
       <!-- Vertical line -->
       <Line Stroke="Red" 
             StrokeThickness="3"
@@ -56,7 +56,7 @@
           <ColumnDefinition Width="*" />
           <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        
+
         <TextBlock HorizontalAlignment="Left" 
                    VerticalAlignment="Center"
                    Grid.Column="1"           
@@ -99,10 +99,11 @@
       </Grid>
     </Grid>
   </Grid>
-  
+
   <Page.BottomAppBar>
     <CommandBar VerticalAlignment="Bottom" 
-      Visibility="Collapsed">
+                Visibility="Collapsed"
+                Opacity="0.8" >
       <CommandBar.PrimaryCommands>
         <AppBarButton Label="restart"
           Icon="Refresh"

@@ -85,9 +85,7 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         async public Task<int> preparePaintingAreaCanvasPixel()
         {
             RenderTargetBitmap retarbi = new RenderTargetBitmap();
-            await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvas,
-                                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth,
-                                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight);
+            await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvas);
 
             Windows.Storage.Streams.IBuffer buffer = await(retarbi.GetPixelsAsync());
             pixelsCanvas = WindowsRuntimeBufferExtensions.ToArray(buffer);

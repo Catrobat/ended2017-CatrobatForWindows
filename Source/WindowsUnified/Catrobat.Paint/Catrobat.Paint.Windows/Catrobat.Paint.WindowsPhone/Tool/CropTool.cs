@@ -219,8 +219,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 encoder.BitmapTransform.ScaledWidth = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Width;
 
                 BitmapBounds bounds = new BitmapBounds();
-                bounds.Height = (uint)height-1;
-                bounds.Width = (uint)width-1;
+                bounds.Height = (uint)height;
+                bounds.Width = (uint)width;
                 bounds.X = (uint)xOffset;
                 bounds.Y = (uint)yOffset;
                 encoder.BitmapTransform.Bounds = bounds;
@@ -242,6 +242,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
                 Image image = new Image();
                 image.Source = WB;
+                image.Height = WB.PixelHeight;
+                image.Width = WB.PixelWidth;
                 //await WB.SetSourceAsync(await storageFile.OpenAsync(FileAccessMode.Read));
 
                 //BitmapImage image = new BitmapImage();
@@ -258,6 +260,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
                 PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered(WB.PixelHeight, WB.PixelWidth);
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = WB.PixelHeight;
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = WB.PixelWidth;
                 PocketPaintApplication.GetInstance().CropControl.setCropSelection();
             }
             return null;
