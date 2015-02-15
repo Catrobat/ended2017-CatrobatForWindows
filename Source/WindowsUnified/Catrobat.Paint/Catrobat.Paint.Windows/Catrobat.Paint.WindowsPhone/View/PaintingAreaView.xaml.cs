@@ -105,6 +105,10 @@ namespace Catrobat.Paint.WindowsPhone.View
             createAppBarAndSwitchAppBarContent(current_appbar);
 
             setSizeOfPaintingAreaViewCheckered();
+
+            // TODO: Refactor the following code.
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = Window.Current.Bounds.Height;
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = Window.Current.Bounds.Width;
         }
 
         public void setSizeOfPaintingAreaViewCheckered(int height, int width)
@@ -208,7 +212,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 {
                     PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
                     RectangleGeometry myRectangleGeometry = new RectangleGeometry();
-                    myRectangleGeometry.Rect = new Rect(new Point(0, 0), new Point(Window.Current.Bounds.Width, Window.Current.Bounds.Height));
+                    myRectangleGeometry.Rect = new Rect(new Point(0, 0), new Point(PaintingAreaCanvas.Width, PaintingAreaCanvas.Height));
 
 
                     Path _path = new Path();

@@ -214,7 +214,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 InMemoryRandomAccessStream mrAccessStream = new InMemoryRandomAccessStream();
                 BitmapEncoder encoder = await BitmapEncoder.CreateForTranscodingAsync(mrAccessStream, decoder);
 
-                //// convert the bitmap to a 400px by 600px bitmap
                 encoder.BitmapTransform.ScaledHeight = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Height;
                 encoder.BitmapTransform.ScaledWidth = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Width;
 
@@ -237,17 +236,25 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 }
 
                 // render the stream to the screen
-                WriteableBitmap WB = new WriteableBitmap(width, height);
-                WB.SetSource(mrAccessStream);
+                //WriteableBitmap WB = new WriteableBitmap(width, height);
+                //WB.SetSource(mrAccessStream);
 
-                Image image = new Image();
-                image.Source = WB;
-                image.Height = WB.PixelHeight;
-                image.Width = WB.PixelWidth;
+                //Image image = new Image();
+                //image.Source = WB;
+                //image.Height = WB.PixelHeight;
+                //image.Width = WB.PixelWidth;
                 //await WB.SetSourceAsync(await storageFile.OpenAsync(FileAccessMode.Read));
 
-                //BitmapImage image = new BitmapImage();
-                //image.SetSource(mrAccessStream);
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.SetSource(mrAccessStream);
+                bitmapImage.DecodePixelHeight = (int)height;
+                bitmapImage.DecodePixelWidth = (int)width;
+
+                Image image = new Image();
+                image.Source = bitmapImage;
+                image.Height = bitmapImage.PixelHeight;
+                image.Width = bitmapImage.PixelWidth;
+                //await WB.SetSourceAsync(await storageFile.OpenAsync(FileAccessMode.Read));
 
                 // Create file in Pictures library and write jpeg to it
                 //var outputFile = await KnownFolders.CameraRoll.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
@@ -259,9 +266,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
-                PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered(WB.PixelHeight, WB.PixelWidth);
-                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = WB.PixelHeight;
-                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = WB.PixelWidth;
+                PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered(bitmapImage.PixelHeight, bitmapImage.PixelWidth);
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = bitmapImage.PixelHeight;
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = bitmapImage.PixelWidth;
                 PocketPaintApplication.GetInstance().CropControl.setCropSelection();
             }
             return null;

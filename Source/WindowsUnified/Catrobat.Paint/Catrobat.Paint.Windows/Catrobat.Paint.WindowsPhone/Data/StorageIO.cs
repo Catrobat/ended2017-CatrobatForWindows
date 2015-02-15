@@ -6,6 +6,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 // TODO: using System.Windows.Media.Imaging;
 using Windows.Storage;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.Foundation;
+using Windows.UI.Xaml.Controls;
 // TODO: using ImageTools;
 // TODO: using ImageTools.IO.Png;
 // TODO: using Microsoft.Xna.Framework.Media;
@@ -106,11 +108,16 @@ namespace Catrobat.Paint.WindowsPhone.Data
 
         public async Task<bool> WriteBitmapToPngMediaLibrary(string filename)
         {
+            Canvas tempCanvas = PocketPaintApplication.GetInstance().PaintingAreaCanvas;
+            Size canvasSize = tempCanvas.RenderSize;
+            Point defaultPoint = tempCanvas.RenderTransformOrigin;
+
+            tempCanvas.Measure(canvasSize);
+            tempCanvas.UpdateLayout();
+            tempCanvas.Arrange(new Rect(defaultPoint, canvasSize));
 
             RenderTargetBitmap retarbi = new RenderTargetBitmap();
-            await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvas,
-                                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth,
-                                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight);
+            await retarbi.RenderAsync(tempCanvas);
 
             Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
             var pixels = WindowsRuntimeBufferExtensions.ToArray(buffer);
@@ -123,6 +130,7 @@ namespace Catrobat.Paint.WindowsPhone.Data
 
             }
 
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas = tempCanvas;
             //await WriteBitmapToPngFileIsolatedStorage(bitmap, filenameWithEnding);
  
             //// TODO: var library = new MediaLibrary();
