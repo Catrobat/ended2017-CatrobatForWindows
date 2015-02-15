@@ -770,10 +770,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 messageBoxNewDrawingSpace_Click("Neues Bild", false);
             }
-            else
-            {
-                resetApp();
-            }
+            resetApp();
         }
 
         public void changeEnableOfAppBarButtonResetZoom(bool isEnabled)
@@ -1534,6 +1531,9 @@ namespace Catrobat.Paint.WindowsPhone.View
         public void resetApp()
         {
             PaintData paintData = PocketPaintApplication.GetInstance().PaintData;
+            PaintingAreaCanvas.Height = Window.Current.Bounds.Height;
+            PaintingAreaCanvas.Width = Window.Current.Bounds.Width;
+            setSizeOfPaintingAreaViewCheckered();
             resetControls();
             PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
             CommandManager.GetInstance().clearAllCommands();

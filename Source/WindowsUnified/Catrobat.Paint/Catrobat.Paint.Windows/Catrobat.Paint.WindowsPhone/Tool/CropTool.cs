@@ -218,8 +218,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 encoder.BitmapTransform.ScaledWidth = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Width;
 
                 BitmapBounds bounds = new BitmapBounds();
-                bounds.Height = (uint)height;
-                bounds.Width = (uint)width;
+                bounds.Height = (uint)height - 1;
+                bounds.Width = (uint)width - 1;
                 bounds.X = (uint)xOffset;
                 bounds.Y = (uint)yOffset;
                 encoder.BitmapTransform.Bounds = bounds;
