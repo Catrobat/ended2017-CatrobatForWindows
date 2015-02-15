@@ -42,6 +42,14 @@ namespace Catrobat_Player
 		virtual void OnDeviceLost();
 		virtual void OnDeviceRestored();
 
+        // Template to get a child of a XAML page
+        template <class T>
+        static T^ FindChildControl(
+            Windows::UI::Xaml::DependencyObject^ control,
+            const wchar_t* childName);
+
+        static bool TestStatic() { return true; };
+
 	private:
         // Render depending functionality
 		void ProcessInput();
@@ -72,9 +80,18 @@ namespace Catrobat_Player
 
         // Project dependenging member variables
         Windows::UI::Xaml::Controls::CommandBar^ m_playerAppBar;
+        Windows::UI::Xaml::Controls::AppBarButton^ m_btnAxis;
         Windows::UI::Xaml::Controls::Grid^ m_playerGridAxis;
         PlayerState m_playerState;
         bool m_loadingComplete;
         bool m_axisOn;
+
+        // Constants of the Player's XAML page
+        const int m_btnAxisPosition = 3;
+        const wchar_t* m_playerGridAxisXAMLName         = L"PlayerGridAxis";
+        const wchar_t* m_playerGridAxisXRightXAMLName   = L"PlayerGridAxisXRight";
+        const wchar_t* m_playerGridAxisXLeftXAMLName    = L"PlayerGridAxisXLeft";
+        const wchar_t* m_playerGridAxisYTopXAMLName     = L"PlayerGridAxisYTop";
+        const wchar_t* m_playerGridAxisYBottomXAMLName  = L"PlayerGridAxisYBottom";
 	};
 };
