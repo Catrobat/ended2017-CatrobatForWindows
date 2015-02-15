@@ -62,6 +62,6 @@ namespace Catrobat_Player
         bool m_windowVisible;
 
         // Constants of the Player's XAML page
-        const wchar_t* m_playerSwapChainPanelXAMLName = L"PlayerSwapChainPanel";
+        const wchar_t* m_playerSwapChainPanelXAMLName = L"SwapChainPanel";
     };
 };

@@ -22,7 +22,7 @@ namespace Catrobat_Player
         m_pointerLocationX(0.0f),
         m_loadingComplete(false),
         m_axisOn(false),
-        m_playerState(PlayerState::Init)
+        m_state(PlayerState::Init)
     {
         // Register to be notified if the Device is lost or recreated
         m_deviceResources->RegisterDeviceNotify(this);
@@ -32,14 +32,14 @@ namespace Catrobat_Player
             m_deviceResources));
 
         // Get the CommandBar from the Player's XAML page
-        m_playerAppBar = (CommandBar^)playerPage->BottomAppBar;
+        m_appBar = (CommandBar^)playerPage->BottomAppBar;
 
         // Get the axis button from the CommandBar
-        m_btnAxis = (AppBarButton^)m_playerAppBar->PrimaryCommands->GetAt(m_btnAxisPosition);
+        m_btnAxis = (AppBarButton^)m_appBar->PrimaryCommands->GetAt(m_btnAxisPosition);
 
         // Get the Grid which contains the axis from the Player's XAML page & set the axis' values
-        m_playerGridAxis = FindChildControl<Grid>((DependencyObject^)playerPage->Content, 
-                                                  m_playerGridAxisXAMLName);
+        m_gridAxis = FindChildControl<Grid>((DependencyObject^)playerPage->Content, 
+                                                  m_gridAxisXAMLName);
         SetAxisValues();
 
         // TODO: Change the timer settings if you want something other than the default variable 
@@ -68,7 +68,7 @@ namespace Catrobat_Player
             m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(
                 m_deviceResources));
             m_loadingComplete = true;
-            m_playerState = PlayerState::Active;
+            m_state = PlayerState::Active;
         });
 
     }
@@ -76,16 +76,20 @@ namespace Catrobat_Player
     //--------------------------------------------------------------------------------------------------
     void Catrobat_PlayerMain::SetAxisValues()
     {
-        int backgroundHeight = 800; // TODO look at Catroid if here are really the values of the background used?!?
+        int backgroundHeight = 800; // TODO look at Catroid which values are used here?!?
         int backgroundWidth = 480;
 
-        //// horizontal values
-        //((TextBlock^)m_playerGridAxis->Children->GetAt(3))->Text = "-" + (backgroundWidth / 2).ToString();
-        //((TextBlock^)m_playerGridAxis->Children->GetAt(4))->Text = (backgroundWidth / 2).ToString();
+        // horizontal values
+        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, m_gridAxisXLeftXAMLName))
+            ->Text = "-" + (backgroundWidth / 2).ToString();
+        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, m_gridAxisXRightXAMLName))
+            ->Text = (backgroundWidth / 2).ToString();
 
-        //// vertical values
-        //((TextBlock^)m_playerGridAxis->Children->GetAt(5))->Text = (backgroundHeight / 2).ToString();
-        //((TextBlock^)m_playerGridAxis->Children->GetAt(6))->Text = "-" + (backgroundHeight / 2).ToString();
+        // vertical values
+        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, m_gridAxisYTopXAMLName))
+            ->Text = (backgroundHeight / 2).ToString();
+        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, m_gridAxisYBottomXAMLName))
+            ->Text = "-" + (backgroundHeight / 2).ToString();
     }
 
     //--------------------------------------------------------------------------------------------------
@@ -133,7 +137,7 @@ namespace Catrobat_Player
 
     void Catrobat_PlayerMain::StopRenderLoop()
     {
-        m_playerState = PlayerState::Pause;
+        m_state = PlayerState::Pause;
         m_renderLoopWorker->Cancel();
     }
 
@@ -141,7 +145,7 @@ namespace Catrobat_Player
 
     void Catrobat_PlayerMain::PointerPressed(D2D1_POINT_2F point)
     {
-        if (m_playerState == PlayerState::Active)
+        if (m_state == PlayerState::Active)
         {
             m_basic2dRenderer->PointerPressed(point);
         }
@@ -151,7 +155,7 @@ namespace Catrobat_Player
 
     bool Catrobat_PlayerMain::HardwareBackButtonPressed()
     {
-        if (m_playerState == PlayerState::Active)
+        if (m_state == PlayerState::Active)
         {
             // Player is in active play mode, so hitting the hardware back button
             // will cause the game to pause and show the user the command bar --> return false
@@ -159,8 +163,8 @@ namespace Catrobat_Player
             critical_section::scoped_lock lock(m_criticalSection);
 
             StopRenderLoop();
-            m_playerState = PlayerState::Pause;
-            m_playerAppBar->Visibility = Visibility::Visible;
+            m_state = PlayerState::Pause;
+            m_appBar->Visibility = Visibility::Visible;
             return false;
         }
         else
@@ -177,11 +181,11 @@ namespace Catrobat_Player
     void Catrobat_PlayerMain::RestartButtonClicked()
     {
         critical_section::scoped_lock lock(m_criticalSection);
-        m_playerState = PlayerState::Init;
+        m_state = PlayerState::Init;
 
         ProjectDaemon::Instance()->RestartProject();
-        m_playerAppBar->Visibility = Visibility::Collapsed;
-        m_playerState = PlayerState::Active;
+        m_appBar->Visibility = Visibility::Collapsed;
+        m_state = PlayerState::Active;
 
         StartRenderLoop();
     }
@@ -192,8 +196,8 @@ namespace Catrobat_Player
     {
         critical_section::scoped_lock lock(m_criticalSection);
 
-        m_playerAppBar->Visibility = Visibility::Collapsed;
-        m_playerState = PlayerState::Active;
+        m_appBar->Visibility = Visibility::Collapsed;
+        m_state = PlayerState::Active;
         StartRenderLoop();
     }
 
@@ -236,13 +240,13 @@ namespace Catrobat_Player
     {
         if (m_axisOn)
         {
-            m_playerGridAxis->Visibility = Visibility::Collapsed;
+            m_gridAxis->Visibility = Visibility::Collapsed;
             m_btnAxis->Label = "axis on";
             m_axisOn = false;
         }
         else
         {
-            m_playerGridAxis->Visibility = Visibility::Visible;
+            m_gridAxis->Visibility = Visibility::Visible;
             m_btnAxis->Label = "axis off";
             m_axisOn = true;
         }
@@ -352,27 +356,26 @@ namespace Catrobat_Player
     static T^ Catrobat_PlayerMain::FindChildControl(DependencyObject^ control,
                                                     const wchar_t* childName)
     {
+        if (control == nullptr || childName == nullptr)
+            return nullptr;
+
         int amountOfChildren = VisualTreeHelper::GetChildrenCount(control);
         for (int i = 0; i < amountOfChildren; i++)
         {
-            DependencyObject^ child = VisualTreeHelper::GetChild(control, i);
-
-            FrameworkElement^ fEle;
+            DependencyObject^ child = nullptr;
             T^ tEle;
+
             try
             {
-                fEle = (FrameworkElement^)child;
-                if (fEle == nullptr || fEle->Name == nullptr)
-                    return nullptr;
+                child = VisualTreeHelper::GetChild(control, i);
                 tEle = (T^)child;
-                String^ test = fEle->Name;
             }
-            catch (InvalidCastException ^e)
+            catch (Exception ^e)
             {
                 tEle = nullptr;
             }
 
-            if (tEle != nullptr && wcscmp(fEle->Name->Data(), childName) == 0)
+            if (tEle != nullptr && tEle->Name != nullptr && wcscmp(tEle->Name->Data(), childName) == 0)
             {
                 // Found control
                 return tEle;

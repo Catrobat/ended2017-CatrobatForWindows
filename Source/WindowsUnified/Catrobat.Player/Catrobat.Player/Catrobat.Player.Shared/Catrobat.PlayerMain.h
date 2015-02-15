@@ -79,19 +79,19 @@ namespace Catrobat_Player
 		float m_pointerLocationX;
 
         // Project dependenging member variables
-        Windows::UI::Xaml::Controls::CommandBar^ m_playerAppBar;
+        Windows::UI::Xaml::Controls::CommandBar^ m_appBar;
         Windows::UI::Xaml::Controls::AppBarButton^ m_btnAxis;
-        Windows::UI::Xaml::Controls::Grid^ m_playerGridAxis;
-        PlayerState m_playerState;
+        Windows::UI::Xaml::Controls::Grid^ m_gridAxis;
+        PlayerState m_state;
         bool m_loadingComplete;
         bool m_axisOn;
 
         // Constants of the Player's XAML page
         const int m_btnAxisPosition = 3;
-        const wchar_t* m_playerGridAxisXAMLName         = L"PlayerGridAxis";
-        const wchar_t* m_playerGridAxisXRightXAMLName   = L"PlayerGridAxisXRight";
-        const wchar_t* m_playerGridAxisXLeftXAMLName    = L"PlayerGridAxisXLeft";
-        const wchar_t* m_playerGridAxisYTopXAMLName     = L"PlayerGridAxisYTop";
-        const wchar_t* m_playerGridAxisYBottomXAMLName  = L"PlayerGridAxisYBottom";
+        const wchar_t* m_gridAxisXAMLName         = L"GridAxis";
+        const wchar_t* m_gridAxisXRightXAMLName   = L"GridAxisXRight";
+        const wchar_t* m_gridAxisXLeftXAMLName    = L"GridAxisXLeft";
+        const wchar_t* m_gridAxisYTopXAMLName     = L"GridAxisYTop";
+        const wchar_t* m_gridAxisYBottomXAMLName  = L"GridAxisYBottom";
 	};
 };
