@@ -51,6 +51,7 @@ namespace Catrobat_Player
         // Independent input handling functions - private
         void OnPointerPressed(Platform::Object^ sender, Windows::UI::Core::PointerEventArgs^ e);
 
+    private:
         // Track our independent input on a background worker thread
         Windows::Foundation::IAsyncAction^ m_inputLoopWorker;
         Windows::UI::Core::CoreIndependentInputSource^ m_coreInput;
@@ -59,5 +60,8 @@ namespace Catrobat_Player
         std::shared_ptr<DX::DeviceResources> m_deviceResources;
         std::unique_ptr<Catrobat_PlayerMain> m_main;
         bool m_windowVisible;
+
+        // Constants of the Player's XAML page
+        const wchar_t* m_playerSwapChainPanelXAMLName = L"SwapChainPanel";
     };
 };

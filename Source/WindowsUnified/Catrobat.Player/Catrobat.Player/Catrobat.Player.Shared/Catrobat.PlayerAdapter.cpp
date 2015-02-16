@@ -36,15 +36,15 @@ namespace Catrobat_Player
         m_main->StopRenderLoop();
         m_coreInput->Dispatcher->StopProcessEvents();
     }
-    
+
     //----------------------------------------------------------------------------------------------
 
     void Catrobat_PlayerAdapter::InitPlayer(Page^ playerPage, String^ projectName)
     {
 
         // Get the SwapChainPanel of the XAML page
-        SwapChainPanel^ swapChainPanel = (SwapChainPanel^) VisualTreeHelper::GetChild(
-            playerPage->Content, 0);
+        SwapChainPanel^ swapChainPanel = Catrobat_PlayerMain::FindChildControl<SwapChainPanel>(
+            (DependencyObject^)playerPage->Content, m_playerSwapChainPanelXAMLName);
 
         // Register event handlers for page lifecycle
         CoreWindow^ window = Window::Current->CoreWindow;
@@ -256,4 +256,5 @@ namespace Catrobat_Player
     {
         m_main->ScreenshotButtonClicked();
     }
+ 
 };

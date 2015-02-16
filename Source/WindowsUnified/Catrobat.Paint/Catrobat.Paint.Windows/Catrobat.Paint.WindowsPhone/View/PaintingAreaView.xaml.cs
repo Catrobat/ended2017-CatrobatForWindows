@@ -105,6 +105,10 @@ namespace Catrobat.Paint.WindowsPhone.View
             createAppBarAndSwitchAppBarContent(current_appbar);
 
             setSizeOfPaintingAreaViewCheckered();
+
+            // TODO: Refactor the following code.
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = Window.Current.Bounds.Height;
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = Window.Current.Bounds.Width;
         }
 
         public void setSizeOfPaintingAreaViewCheckered(int height, int width)
@@ -208,7 +212,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 {
                     PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
                     RectangleGeometry myRectangleGeometry = new RectangleGeometry();
-                    myRectangleGeometry.Rect = new Rect(new Point(0, 0), new Point(Window.Current.Bounds.Width, Window.Current.Bounds.Height));
+                    myRectangleGeometry.Rect = new Rect(new Point(0, 0), new Point(PaintingAreaCanvas.Width, PaintingAreaCanvas.Height));
 
 
                     Path _path = new Path();
@@ -766,10 +770,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 messageBoxNewDrawingSpace_Click("Neues Bild", false);
             }
-            else
-            {
-                resetApp();
-            }
+            resetApp();
         }
 
         public void changeEnableOfAppBarButtonResetZoom(bool isEnabled)
@@ -1530,6 +1531,9 @@ namespace Catrobat.Paint.WindowsPhone.View
         public void resetApp()
         {
             PaintData paintData = PocketPaintApplication.GetInstance().PaintData;
+            PaintingAreaCanvas.Height = Window.Current.Bounds.Height;
+            PaintingAreaCanvas.Width = Window.Current.Bounds.Width;
+            setSizeOfPaintingAreaViewCheckered();
             resetControls();
             PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
             CommandManager.GetInstance().clearAllCommands();

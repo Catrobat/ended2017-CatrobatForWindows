@@ -27,7 +27,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             Point coordinates = (Point)arg;
             
             PixelData.PixelData myPixelData = new PixelData.PixelData();
-            PocketPaintApplication.GetInstance().PaintData.colorSelected = await myPixelData.GetPixel(PocketPaintApplication.GetInstance().Bitmap, 0, 0);
+            PocketPaintApplication.GetInstance().PaintData.colorSelected = await myPixelData.GetPixel(PocketPaintApplication.GetInstance().Bitmap, (int)coordinates.X, (int)coordinates.Y);
 
 
         //PocketPaintApplication.GetInstance().PaintData.ColorSelected =

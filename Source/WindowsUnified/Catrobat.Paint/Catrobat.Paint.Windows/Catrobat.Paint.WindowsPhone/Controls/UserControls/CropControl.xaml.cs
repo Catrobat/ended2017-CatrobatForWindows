@@ -66,12 +66,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             Point extremePoint = new Point(initLeft, initTop);
             foundLeftPixel = false;
 
-            double paintingAreaCheckeredGridHeight = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Height;
-            double paintingAreaCheckeredGridWidth = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Width;
+            double paintingAreaCanvasHeight = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height;
+            double paintingAreaCanvasWidth = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width;
 
             // left pixel
-            for (int indexWidth = 0; indexWidth < (int)paintingAreaCheckeredGridWidth; indexWidth++)
-                for (int indexHeight = 0; indexHeight < (int)paintingAreaCheckeredGridHeight; indexHeight++)
+            for (int indexWidth = 0; indexWidth < (int)paintingAreaCanvasWidth; indexWidth++)
+                for (int indexHeight = 0; indexHeight < (int)paintingAreaCanvasHeight; indexHeight++)
                 {
                     if (pixelData.getPixelAlphaFromCanvas(indexWidth, indexHeight) != 0x00)
                     {
@@ -79,15 +79,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                         foundLeftPixel = true;
 
                         // found extreme point --> set break conditions
-                        indexWidth = (int)paintingAreaCheckeredGridWidth;
-                        indexHeight = (int)paintingAreaCheckeredGridHeight;
+                        indexWidth = (int)paintingAreaCanvasWidth;
+                        indexHeight = (int)paintingAreaCanvasHeight;
                     }
             }
 
             // top pixel
             if (foundLeftPixel == true)
-                for (int indexHeight = 0; indexHeight < (int)paintingAreaCheckeredGridHeight; indexHeight++)
-                    for (int indexWidth = (int)paintingAreaCheckeredGridWidth - 1; indexWidth >= (int)extremePoint.X; indexWidth--)
+                for (int indexHeight = 0; indexHeight < (int)paintingAreaCanvasHeight; indexHeight++)
+                    for (int indexWidth = (int)paintingAreaCanvasWidth - 1; indexWidth >= (int)extremePoint.X; indexWidth--)
                     {
                         if (pixelData.getPixelAlphaFromCanvas(indexWidth, indexHeight) != 0x00)
                         {
@@ -95,7 +95,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                             xCoordinateOfExtremeTop = indexWidth;
 
                             // found extreme point --> set break conditions
-                            indexHeight = (int)paintingAreaCheckeredGridHeight;
+                            indexHeight = (int)paintingAreaCanvasHeight;
                             indexWidth = 0;
                         }
                     }
@@ -107,8 +107,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                                                          Point extremeLeftAndTopCoordinate, bool foundLeftPixel,
                                                          int xCoordinateOfExtremeTop)
         {
-            double paintingAreaCheckeredGridHeight = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Height;
-            double paintingAreaCheckeredGridWidth = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Width;
+            double paintingAreaCanvasHeight = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height;
+            double paintingAreaCanvasWidth = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width;
 
             Point extremePoint = new Point(initRight, initBottom);
 
@@ -116,8 +116,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 // right pixel
                 int yCoordinateOfExtremeRight = 0;
-                for (int indexWidth = (int)paintingAreaCheckeredGridWidth - 1; indexWidth >= xCoordinateOfExtremeTop; indexWidth--)
-                    for (int indexHeight = (int)paintingAreaCheckeredGridHeight - 1; indexHeight >= extremeLeftAndTopCoordinate.Y; indexHeight--)
+                for (int indexWidth = (int)paintingAreaCanvasWidth - 1; indexWidth >= xCoordinateOfExtremeTop; indexWidth--)
+                    for (int indexHeight = (int)paintingAreaCanvasHeight - 1; indexHeight >= extremeLeftAndTopCoordinate.Y; indexHeight--)
                     {
                         if (pixelData.getPixelAlphaFromCanvas(indexWidth, indexHeight) != 0x00)
                         {
@@ -132,7 +132,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 }
 
                 // bottom pixel
-                for (int indexHeight = (int)paintingAreaCheckeredGridHeight - 1; indexHeight >= yCoordinateOfExtremeRight; indexHeight--)
+                for (int indexHeight = (int)paintingAreaCanvasHeight - 1; indexHeight >= yCoordinateOfExtremeRight; indexHeight--)
                     for (int indexWidth = (int)extremePoint.X; indexWidth >= (int)extremeLeftAndTopCoordinate.X; indexWidth--)
                     {
                         if (pixelData.getPixelAlphaFromCanvas(indexWidth, indexHeight) != 0x00)
@@ -732,7 +732,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public Point getLeftTopCoordinateRectangleCropSelection()
         {
-            return new Point((_transformGridMain.Value.OffsetX + 5.0 + GridMain.Margin.Left - leftTopNullPointCropSelection.X) / 0.75, (_transformGridMain.Value.OffsetY + 5.0 + GridMain.Margin.Top - leftTopNullPointCropSelection.Y) / 0.75);
+            return new Point((Math.Ceiling(_transformGridMain.Value.OffsetX + 5.0 + GridMain.Margin.Left - leftTopNullPointCropSelection.X) / 0.75), Math.Ceiling((_transformGridMain.Value.OffsetY + 5.0 + GridMain.Margin.Top - leftTopNullPointCropSelection.Y) / 0.75));
         }
 
         public void setLeftTopNullPointCropSelection(double x, double y)

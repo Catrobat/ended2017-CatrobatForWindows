@@ -53,7 +53,8 @@ namespace Catrobat.Player.StandAlone
         /// This parameter is typically used to configure the page.</param>
 
         //var playerObject = null;
-        private readonly Catrobat_Player.Catrobat_PlayerAdapter playerObject = new Catrobat_Player.Catrobat_PlayerAdapter();
+        private readonly Catrobat_Player.Catrobat_PlayerAdapter playerObject =
+            new Catrobat_Player.Catrobat_PlayerAdapter();
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Register hardware back button event
@@ -65,7 +66,7 @@ namespace Catrobat.Player.StandAlone
 
         private void OnRestartButtonClicked(object sender, RoutedEventArgs e)
         {
-            playerObject.RestartButtonClicked();        
+            playerObject.RestartButtonClicked();
         }
 
         private void OnResumeButtonClicked(object sender, RoutedEventArgs e)

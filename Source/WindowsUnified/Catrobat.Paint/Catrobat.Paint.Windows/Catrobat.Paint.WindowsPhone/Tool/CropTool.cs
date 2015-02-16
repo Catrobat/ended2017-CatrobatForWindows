@@ -39,7 +39,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             int height = PocketPaintApplication.GetInstance().CropControl.getRectangleCropSelectionHeight();
             int width = PocketPaintApplication.GetInstance().CropControl.getRectangleCropSelectionWidth();
             Point leftTopRectangleCropSelection = PocketPaintApplication.GetInstance().CropControl.getLeftTopCoordinateRectangleCropSelection();
-            await CropImage(null, (int)leftTopRectangleCropSelection.X, (int)leftTopRectangleCropSelection.Y, width, height);
+            await CropImage((int)leftTopRectangleCropSelection.X, (int)leftTopRectangleCropSelection.Y, width, height);
         }
 
         public override void Draw(object o)
@@ -189,80 +189,71 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         //    PocketPaintApplication.GetInstance().ImageTest.Source = cropBmp;
         //    return cropBmp;
         //}
-        async private static Task<WriteableBitmap> CropImage(WriteableBitmap source,
-                                                    int xOffset, int yOffset,
-                                                    int width, int height)
+        async public static Task<WriteableBitmap> CropImage(int xOffset, int yOffset,
+                                            int width, int height)
         {
-            //StorageFile storageFile = await KnownFolders.CameraRoll.GetFileAsync("WP_20150208_009.jpg");
-
-
-            string filename = ("karlidavidtest") + ".png";
-            //IsBitmapStored = await PocketPaintApplication.GetInstance().StorageIo.WriteBitmapToPngMediaLibrary(bmp, filename);
-            await PocketPaintApplication.GetInstance().StorageIo.WriteBitmapToPngMediaLibrary(filename);
-            StorageFile storageFile = await KnownFolders.PicturesLibrary.GetFileAsync(filename);
-            //StorageFile file = await Windows.Storage.StorageFile.GetFileFromPathAsync("C:\\Data\\Users\\Public\\Pictures\\Camera Roll\\WP_20150208_006.jpg");
-            //Stream stream = await storageFile.OpenStreamForReadAsync();
-            Stream stream = await storageFile.OpenStreamForReadAsync(); ;
-            using (var memStream = new MemoryStream())
+            if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count != 0)
             {
-                await stream.CopyToAsync(memStream);
-                memStream.Position = 0;
+                //StorageFile storageFile = await KnownFolders.CameraRoll.GetFileAsync("WP_20150208_009.jpg");
 
-                BitmapDecoder decoder = await BitmapDecoder.CreateAsync(memStream.AsRandomAccessStream());
-
+                string filename = ("karlidavidtest") + ".png";
+                //IsBitmapStored = await PocketPaintApplication.GetInstance().StorageIo.WriteBitmapToPngMediaLibrary(bmp, filename);
+                await PocketPaintApplication.GetInstance().StorageIo.WriteBitmapToPngMediaLibrary(filename);
+                StorageFile storageFile = await KnownFolders.PicturesLibrary.GetFileAsync(filename);
                 // create a new stream and encoder for the new image
                 InMemoryRandomAccessStream mrAccessStream = new InMemoryRandomAccessStream();
-                BitmapEncoder encoder = await BitmapEncoder.CreateForTranscodingAsync(mrAccessStream, decoder);
 
-                //// convert the bitmap to a 400px by 600px bitmap
-                encoder.BitmapTransform.ScaledHeight = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Height;
-                encoder.BitmapTransform.ScaledWidth = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Width;
-
-                BitmapBounds bounds = new BitmapBounds();
-                bounds.Height = (uint)height;
-                bounds.Width = (uint)width;
-                bounds.X = (uint)xOffset;
-                bounds.Y = (uint)yOffset;
-                encoder.BitmapTransform.Bounds = bounds;
-
-
-                // write out to the stream
-                try
+                //StorageFile file = await Windows.Storage.StorageFile.GetFileFromPathAsync("C:\\Data\\Users\\Public\\Pictures\\Camera Roll\\WP_20150208_006.jpg");
+                //Stream stream = await storageFile.OpenStreamForReadAsync();
+                Stream stream = await storageFile.OpenStreamForReadAsync(); ;
+                using (var memStream = new MemoryStream())
                 {
-                    await encoder.FlushAsync();
-                }
-                catch (Exception ex)
-                {
-                    string s = ex.ToString();
-                }
+                    await stream.CopyToAsync(memStream);
+                    memStream.Position = 0;
 
-                // render the stream to the screen
-                WriteableBitmap WB = new WriteableBitmap(width, height);
-                WB.SetSource(mrAccessStream);
+                    BitmapDecoder decoder = await BitmapDecoder.CreateAsync(memStream.AsRandomAccessStream());
+
+
+                    BitmapEncoder encoder = await BitmapEncoder.CreateForTranscodingAsync(mrAccessStream, decoder);
+
+                    encoder.BitmapTransform.ScaledHeight = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Height;
+                    encoder.BitmapTransform.ScaledWidth = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Width;
+
+                    BitmapBounds bounds = new BitmapBounds();
+                    bounds.Height = (uint)height - 1;
+                    bounds.Width = (uint)width - 1;
+                    bounds.X = (uint)xOffset;
+                    bounds.Y = (uint)yOffset;
+                    encoder.BitmapTransform.Bounds = bounds;
+
+
+                    // write out to the stream
+                    try
+                    {
+                        await encoder.FlushAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        string s = ex.ToString();
+                    }
+                }
+                //render the stream to the screen
+                WriteableBitmap wbCroppedBitmap = new WriteableBitmap(width, height);
+                wbCroppedBitmap.SetSource(mrAccessStream);
 
                 Image image = new Image();
-                image.Source = WB;
-                image.Height = WB.PixelHeight;
-                image.Width = WB.PixelWidth;
-                //await WB.SetSourceAsync(await storageFile.OpenAsync(FileAccessMode.Read));
-
-                //BitmapImage image = new BitmapImage();
-                //image.SetSource(mrAccessStream);
-
-                // Create file in Pictures library and write jpeg to it
-                //var outputFile = await KnownFolders.CameraRoll.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
-                //using (var writeStream = await outputFile.OpenAsync(FileAccessMode.ReadWrite))
-                //{
-                //    await EncodeWriteableBitmap(WB, writeStream, BitmapEncoder.JpegEncoderId);
-                //}
-                // PocketPaintApplication.GetInstance().ImageTest.Source = WB;
+                image.Source = wbCroppedBitmap;
+                image.Height = wbCroppedBitmap.PixelHeight;
+                image.Width = wbCroppedBitmap.PixelWidth;
 
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
-                PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered(WB.PixelHeight, WB.PixelWidth);
-                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = WB.PixelHeight;
-                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = WB.PixelWidth;
+                PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered(wbCroppedBitmap.PixelHeight, wbCroppedBitmap.PixelWidth);
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = wbCroppedBitmap.PixelHeight;
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = wbCroppedBitmap.PixelWidth;
                 PocketPaintApplication.GetInstance().CropControl.setCropSelection();
+
+                return wbCroppedBitmap;
             }
             return null;
         }

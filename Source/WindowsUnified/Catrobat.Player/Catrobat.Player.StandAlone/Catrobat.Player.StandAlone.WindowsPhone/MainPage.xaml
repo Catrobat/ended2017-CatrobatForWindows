@@ -15,27 +15,13 @@
       <RowDefinition x:Name="mainRow" Height="*"/>
     </Grid.RowDefinitions>
 
-    <SwapChainPanel Margin="0,0,0,60">
-      <!-- Loading Project -->
-      <!--<Image Source="ms-appx:///Assets/SplashScreen.png" x:Name="ImagePlayerLoadSplashScreen" 
-           VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" 
-           Opacity="0.5" />
-    
-    <Grid Grid.Row="0">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="5*"/>
-        <RowDefinition Height="2*"/>
-      </Grid.RowDefinitions>
-      <ProgressRing x:Name="ProgressRingExtendedSplash" Grid.Row="1" Background="Transparent" 
-                    Margin="0" IsActive="True" Width="40" Height="40" VerticalAlignment="Top" 
-                    HorizontalAlignment="Center"/>
-    </Grid>-->
+    <SwapChainPanel x:Name="SwapChainPanel" 
+                    Margin="0,0,0,60"/>
 
-
-
-    </SwapChainPanel>
     <!-- Grid for axis functionality -->
-    <Grid Visibility="Collapsed" Margin="0,0,0,60">
+    <Grid x:Name="GridAxis" 
+          Visibility="Collapsed" 
+          Margin="0,0,0,60">
       <!-- Vertical line -->
       <Line Stroke="Red" 
             StrokeThickness="3"
@@ -65,7 +51,8 @@
                    FontWeight="Bold"
                    Foreground="Red" 
                    Margin="5,25,0,0" />
-        <TextBlock HorizontalAlignment="Right" 
+        <TextBlock x:Name="GridAxisXRight"
+                   HorizontalAlignment="Right" 
                    VerticalAlignment="Center"
                    Grid.Column="1"
                    Text="000" 
@@ -73,14 +60,16 @@
                    FontWeight="Bold"
                    Foreground="Red" 
                    Margin="0,25,5,0" />
-        <TextBlock HorizontalAlignment="Left" 
+        <TextBlock x:Name="GridAxisXLeft"
+                   HorizontalAlignment="Left" 
                    VerticalAlignment="Center"
                    Text="-000" 
                    FontSize="16"
                    FontWeight="Bold"
                    Foreground="Red" 
                    Margin="5,25,0,0" />
-        <TextBlock HorizontalAlignment="Left" 
+        <TextBlock x:Name="GridAxisYTop"
+                   HorizontalAlignment="Left" 
                    VerticalAlignment="Top"
                    Grid.Column="1"
                    Text="000" 
@@ -88,7 +77,8 @@
                    FontWeight="Bold"
                    Foreground="Red" 
                    Margin="5,2,0,0" />
-        <TextBlock HorizontalAlignment="Left" 
+        <TextBlock x:Name="GridAxisYBottom"
+                   HorizontalAlignment="Left" 
                    VerticalAlignment="Bottom"
                    Grid.Column="1"
                    Text="-000" 
