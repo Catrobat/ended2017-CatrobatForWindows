@@ -27,20 +27,9 @@ namespace Catrobat_Player
         // Register to be notified if the Device is lost or recreated
         m_deviceResources->RegisterDeviceNotify(this);
 
-        LoadProject(projectName);
+        LoadProject(projectName, playerPage);
         m_fpsTextRenderer = std::unique_ptr<SampleFpsTextRenderer>(new SampleFpsTextRenderer(
             m_deviceResources));
-
-        // Get the CommandBar from the Player's XAML page
-        m_appBar = (CommandBar^)playerPage->BottomAppBar;
-
-        // Get the axis button from the CommandBar
-        m_btnAxis = (AppBarButton^)m_appBar->PrimaryCommands->GetAt(m_btnAxisPosition);
-
-        // Get the Grid which contains the axis from the Player's XAML page & set the axis' values
-        m_gridAxis = FindChildControl<Grid>((DependencyObject^)playerPage->Content, 
-                                                  m_gridAxisXAMLName);
-        SetAxisValues();
 
         // TODO: Change the timer settings if you want something other than the default variable 
         // timestep mode. e.g. for 60 FPS fixed timestep update logic, call:
@@ -61,12 +50,13 @@ namespace Catrobat_Player
     //--------------------------------------------------------------------------------------------------
     // Initialize Project loading and parsing
 
-    void Catrobat_PlayerMain::LoadProject(Platform::String^ projectName)
+    void Catrobat_PlayerMain::LoadProject(String^ projectName, Page^ playerPage)
     {
-        ProjectDaemon::Instance()->OpenProject(projectName).then([this](task<bool> t)
+        ProjectDaemon::Instance()->OpenProject(projectName).then([this,playerPage](task<bool> t)
         {
             m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(
                 m_deviceResources));
+            ProcessXamlPageContent(playerPage);                                  
             m_loadingComplete = true;
             m_state = PlayerState::Active;
         });
@@ -74,22 +64,32 @@ namespace Catrobat_Player
     }
 
     //--------------------------------------------------------------------------------------------------
-    void Catrobat_PlayerMain::SetAxisValues()
+    void Catrobat_PlayerMain::ProcessXamlPageContent(Page^ playerPage)
     {
-        int backgroundHeight = 800; // TODO look at Catroid which values are used here?!?
-        int backgroundWidth = 480;
+        // Get the CommandBar from the Player's XAML page
+        m_appBar = (CommandBar^)playerPage->BottomAppBar;
+
+        // Get the axis button from the CommandBar
+        m_btnAxis = (AppBarButton^)m_appBar->PrimaryCommands->GetAt(m_btnAxisPosition);
+
+        // Get the Grid which contains the axes from the Player's XAML page & set the axes' values
+        m_gridAxis = FindChildControl<Grid>((DependencyObject^)playerPage->Content,
+            m_gridAxisXAMLName);
+
+        int projectScreenHeight = ProjectDaemon::Instance()->GetProject()->GetScreenHeight();
+        int projectScreendWidth = ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
 
         // horizontal values
         (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, m_gridAxisXLeftXAMLName))
-            ->Text = "-" + (backgroundWidth / 2).ToString();
+            ->Text = "-" + (projectScreendWidth / 2).ToString();
         (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, m_gridAxisXRightXAMLName))
-            ->Text = (backgroundWidth / 2).ToString();
+            ->Text = (projectScreendWidth / 2).ToString();
 
         // vertical values
         (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, m_gridAxisYTopXAMLName))
-            ->Text = (backgroundHeight / 2).ToString();
+            ->Text = (projectScreenHeight / 2).ToString();
         (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, m_gridAxisYBottomXAMLName))
-            ->Text = "-" + (backgroundHeight / 2).ToString();
+            ->Text = "-" + (projectScreenHeight / 2).ToString();
     }
 
     //--------------------------------------------------------------------------------------------------

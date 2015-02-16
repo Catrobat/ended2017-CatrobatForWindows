@@ -57,8 +57,9 @@ namespace Catrobat_Player
 		bool Render();
 
         // Project depending functionality
-        void LoadProject(Platform::String^ projectName);
-        void SetAxisValues();
+        void LoadProject(Platform::String^ projectName, 
+                         Windows::UI::Xaml::Controls::Page^ playerPage);
+        void ProcessXamlPageContent(Windows::UI::Xaml::Controls::Page^ playerPage);
 
     private:
 		// Cached pointer to device resources
