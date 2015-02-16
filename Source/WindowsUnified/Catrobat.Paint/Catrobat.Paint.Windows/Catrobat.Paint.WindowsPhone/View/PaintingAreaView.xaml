@@ -12,13 +12,13 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" NavigationCacheMode="Required" >
 
     <Grid x:Name="LayoutRoot" IsHitTestVisible="True">
-        <Grid x:Name="PaintingAreaContentPanelGrid" Background="LightBlue" IsHitTestVisible="True">
+        <Grid x:Name="PaintingAreaContentPanelGrid" IsHitTestVisible="True">
             <Grid x:Name="PaintingAreaCheckeredGrid" IsHitTestVisible="True">
                 <Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
                 </Grid.Background>
-                <Canvas x:Name="PaintingAreaCanvasUnderlaying"  />
-                <Canvas x:Name="PaintingAreaCanvas" Background="#5FD7CCCC" ManipulationMode="TranslateX, TranslateY, Scale" >
+                <Canvas x:Name="PaintingAreaCanvasUnderlaying" ManipulationMode="TranslateX, TranslateY, Scale" />
+                <Canvas x:Name="PaintingAreaCanvas" Background="#5FD7CCCC" ManipulationMode="TranslateX, TranslateY, Scale">
                 </Canvas>
                 <!-- CursorControl -->
                 <Grid x:Name="GridCursor" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" 

@@ -52,6 +52,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             GridMain.Height = height;
             GridMain.Width = width;
+
+            GridRectCenterTop.Width = width * 0.3648;
+            rectCenterTop.Width = width * 0.3125;
+
+            GridRectCenterBottom.Width = width * 0.3648;
+            rectCenterBottom.Width = width * 0.3125;
         }
 
         public void setRectangleForMovementSize(double height, double width)
@@ -613,6 +619,22 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             GridMain.Width += value;
             rectRectangleCropSelection.Width += value;
 
+            double addValueToTouchGrid = value / 2.0;
+            if ((rectCenterTop.Width + addValueToTouchGrid) < 5.0 || (rectCenterTop.Width + addValueToTouchGrid) > 120.0)
+            {
+                //GridRectCenterTop.Width = 25.0;
+                //rectCenterTop.Width = 5.0;
+                string test = "test";
+            }
+            else
+            {
+                GridRectCenterTop.Width += addValueToTouchGrid;
+                rectCenterTop.Width += addValueToTouchGrid;
+
+                GridRectCenterBottom.Width += addValueToTouchGrid;
+                rectCenterBottom.Width += addValueToTouchGrid;
+            }
+            
             resetAppBarButtonRectangleSelectionControl(true);
             setIsModifiedRectangleMovement = true;
         }
