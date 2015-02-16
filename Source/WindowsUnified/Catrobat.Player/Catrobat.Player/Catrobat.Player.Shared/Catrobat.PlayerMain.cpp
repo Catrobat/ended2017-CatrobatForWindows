@@ -2,6 +2,7 @@
 #include "Catrobat.PlayerMain.h"
 #include "Common\DirectXHelper.h"
 #include "ProjectDaemon.h"
+#include "Constants.h"
 
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Media;
@@ -70,25 +71,30 @@ namespace Catrobat_Player
         m_appBar = (CommandBar^)playerPage->BottomAppBar;
 
         // Get the axis button from the CommandBar
-        m_btnAxis = (AppBarButton^)m_appBar->PrimaryCommands->GetAt(m_btnAxisPosition);
+        m_btnAxis = (AppBarButton^)m_appBar->PrimaryCommands->GetAt(
+            Constants::Player::XamlPage::BtnAxisPosition);
 
         // Get the Grid which contains the axes from the Player's XAML page & set the axes' values
         m_gridAxis = FindChildControl<Grid>((DependencyObject^)playerPage->Content,
-            m_gridAxisXAMLName);
+            Constants::Player::XamlPage::GridAxisName);
 
         int projectScreenHeight = ProjectDaemon::Instance()->GetProject()->GetScreenHeight();
         int projectScreendWidth = ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
 
         // horizontal values
-        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, m_gridAxisXLeftXAMLName))
+        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, 
+            Constants::Player::XamlPage::GridAxisXLeftName))
             ->Text = "-" + (projectScreendWidth / 2).ToString();
-        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, m_gridAxisXRightXAMLName))
+        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, 
+            Constants::Player::XamlPage::GridAxisXRightName))
             ->Text = (projectScreendWidth / 2).ToString();
 
         // vertical values
-        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, m_gridAxisYTopXAMLName))
+        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, 
+            Constants::Player::XamlPage::GridAxisYTopName))
             ->Text = (projectScreenHeight / 2).ToString();
-        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, m_gridAxisYBottomXAMLName))
+        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, 
+            Constants::Player::XamlPage::GridAxisYBottomName))
             ->Text = "-" + (projectScreenHeight / 2).ToString();
     }
 

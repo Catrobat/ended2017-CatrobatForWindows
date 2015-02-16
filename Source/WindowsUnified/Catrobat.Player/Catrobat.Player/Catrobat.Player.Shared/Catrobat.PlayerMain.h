@@ -86,13 +86,5 @@ namespace Catrobat_Player
         PlayerState m_state;
         bool m_loadingComplete;
         bool m_axisOn;
-
-        // Constants of the Player's XAML page
-        const int m_btnAxisPosition = 3;
-        const wchar_t* m_gridAxisXAMLName         = L"GridAxis";
-        const wchar_t* m_gridAxisXRightXAMLName   = L"GridAxisXRight";
-        const wchar_t* m_gridAxisXLeftXAMLName    = L"GridAxisXLeft";
-        const wchar_t* m_gridAxisYTopXAMLName     = L"GridAxisYTop";
-        const wchar_t* m_gridAxisYBottomXAMLName  = L"GridAxisYBottom";
 	};
 };

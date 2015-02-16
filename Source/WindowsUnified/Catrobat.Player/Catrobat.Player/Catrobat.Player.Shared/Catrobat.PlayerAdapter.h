@@ -60,8 +60,5 @@ namespace Catrobat_Player
         std::shared_ptr<DX::DeviceResources> m_deviceResources;
         std::unique_ptr<Catrobat_PlayerMain> m_main;
         bool m_windowVisible;
-
-        // Constants of the Player's XAML page
-        const wchar_t* m_playerSwapChainPanelXAMLName = L"SwapChainPanel";
     };
 };

@@ -68,7 +68,7 @@ task<bool> ProjectDaemon::OpenProject(Platform::String^ projectName)
 	{
 		try
 		{
-			Platform::String^ filename = Helper::ConvertStringToPlatformString(Constants::Player::xmlFileName);
+            Platform::String^ filename = Helper::ConvertStringToPlatformString(Constants::Player::XmlFile::FileName);
 			StorageFolder^ folder = folderResult.get();
 
 			// If the path exists, make it available within the project
@@ -92,7 +92,7 @@ task<bool> ProjectDaemon::OpenProject(Platform::String^ projectName)
 		}
         catch (Platform::Exception^ e)
 		{
-			throw new PlayerException(&e, "Specified file could not be found [" + Constants::Player::xmlFileName + "].");
+			throw new PlayerException(&e, "Specified file could not be found [" + Constants::Player::XmlFile::FileName + "].");
 		}
 
     }, task_continuation_context::use_current())
