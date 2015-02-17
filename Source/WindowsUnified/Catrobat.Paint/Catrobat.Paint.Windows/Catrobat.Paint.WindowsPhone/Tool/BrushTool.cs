@@ -27,7 +27,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             {
                 return;
             }
-
             var coordinate = (Point)arg;
 
             _path = new Path();

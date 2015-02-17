@@ -57,8 +57,9 @@ namespace Catrobat_Player
 		bool Render();
 
         // Project depending functionality
-        void LoadProject(Platform::String^ projectName);
-        void SetAxisValues();
+        void LoadProject(Platform::String^ projectName, 
+                         Windows::UI::Xaml::Controls::Page^ playerPage);
+        void ProcessXamlPageContent(Windows::UI::Xaml::Controls::Page^ playerPage);
 
     private:
 		// Cached pointer to device resources
@@ -85,13 +86,5 @@ namespace Catrobat_Player
         PlayerState m_state;
         bool m_loadingComplete;
         bool m_axisOn;
-
-        // Constants of the Player's XAML page
-        const int m_btnAxisPosition = 3;
-        const wchar_t* m_gridAxisXAMLName         = L"GridAxis";
-        const wchar_t* m_gridAxisXRightXAMLName   = L"GridAxisXRight";
-        const wchar_t* m_gridAxisXLeftXAMLName    = L"GridAxisXLeft";
-        const wchar_t* m_gridAxisYTopXAMLName     = L"GridAxisYTop";
-        const wchar_t* m_gridAxisYBottomXAMLName  = L"GridAxisYBottom";
 	};
 };

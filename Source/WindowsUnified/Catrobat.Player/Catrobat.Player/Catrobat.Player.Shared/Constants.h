@@ -88,7 +88,7 @@ namespace Constants
             static const std::string BroadcastBrick              =       "broadcastBrick";
             static const std::string HideBrick                   =       "hideBrick";
             static const std::string ShowBrick                   =       "showBrick";
-            static const std::string IfLogicBeginBrick           =        "ifLogicBeginBrick";
+            static const std::string IfLogicBeginBrick           =       "ifLogicBeginBrick";
             static const std::string IfLogicElseBrick            =       "ifLogicElseBrick";
             static const std::string IfLogicEndBrick             =       "ifLogicEndBrick";
             static const std::string ForeverBrick                =       "foreverBrick";
@@ -108,7 +108,7 @@ namespace Constants
             static const std::string PointInDirectionBrick       =       "pointInDirectionBrick";
             static const std::string TurnLeftBrick               =       "turnLeftBrick";
             static const std::string TurnRightBrick              =       "turnRightBrick";
-			static const std::string MoveNStepsBrick				=		"moveNStepsBrick";
+			static const std::string MoveNStepsBrick			 =		 "moveNStepsBrick";
             static const std::string ChangeGhostEffect           =       "changeGhostEffect";
             static const std::string TimeToWaitInSeconds         =       "timeToWaitInSeconds";
             static const std::string Size                        =       "size";
@@ -117,10 +117,10 @@ namespace Constants
             static const std::string XMovement                   =       "xMovement";
             static const std::string YMovement                   =       "yMovement";
             static const std::string Degrees                     =       "degrees";
-			static const std::string Steps						=		"steps";
+			static const std::string Steps						 =		 "steps";
             static const std::string XDestination                =       "xDestination";
             static const std::string YDestination                =       "yDestination";
-            static const std::string DurationInSeconds			=		"durationInSeconds";
+            static const std::string DurationInSeconds			 =		 "durationInSeconds";
             static const std::string Transparency                =       "transparency";
             static const std::string BroadcastMessage            =       "broadcastMessage";
             static const std::string Sound                       =       "sound";
@@ -138,6 +138,20 @@ namespace Constants
 
 	namespace Player
 	{
-		static const std::string xmlFileName						=		"code.xml";
+        namespace XmlFile
+        {
+            static const std::string FileName                    =       "code.xml";
+        }
+
+        namespace XamlPage
+        {
+            static const int      BtnAxisPosition                =       3;
+            static const wchar_t* GridAxisName                   =       L"GridAxis";
+            static const wchar_t* GridAxisXRightName             =       L"GridAxisXRight";
+            static const wchar_t* GridAxisXLeftName              =       L"GridAxisXLeft";
+            static const wchar_t* GridAxisYTopName               =       L"GridAxisYTop";
+            static const wchar_t* GridAxisYBottomName            =       L"GridAxisYBottom";
+            static const wchar_t* SwapChainPanelName             =       L"SwapChainPanel";
+        }
 	};
 };

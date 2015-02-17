@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Catrobat.PlayerAdapter.h"
+#include "Constants.h"
 
 using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml;
@@ -44,7 +45,8 @@ namespace Catrobat_Player
 
         // Get the SwapChainPanel of the XAML page
         SwapChainPanel^ swapChainPanel = Catrobat_PlayerMain::FindChildControl<SwapChainPanel>(
-            (DependencyObject^)playerPage->Content, m_playerSwapChainPanelXAMLName);
+            (DependencyObject^)playerPage->Content, 
+            Constants::Player::XamlPage::SwapChainPanelName);
 
         // Register event handlers for page lifecycle
         CoreWindow^ window = Window::Current->CoreWindow;

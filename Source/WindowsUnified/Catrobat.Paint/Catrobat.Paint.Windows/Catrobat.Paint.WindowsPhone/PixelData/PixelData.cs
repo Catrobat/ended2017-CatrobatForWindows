@@ -9,6 +9,9 @@ using Windows.Storage;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.IO;
+using Windows.Storage.Streams;
+using Windows.UI.Xaml.Controls;
 
 namespace Catrobat.Paint.WindowsPhone.PixelData
 {
@@ -22,6 +25,7 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         private int X;
         private int Y;
         private byte[] pixelsCanvas;
+        private byte[] pixelsCanvasEraser;
         private int pixelHeightCanvas;
         private int pixelWidthCanvas;
 
@@ -94,6 +98,20 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             return 0;
         }
 
+        async public Task<int> preparePaintingAreaCanvasForEraser()
+        {
+            RenderTargetBitmap retarbi = new RenderTargetBitmap();
+            await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying,
+                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Width,
+                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Height);
+
+            Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
+            pixelsCanvasEraser = WindowsRuntimeBufferExtensions.ToArray(buffer);
+            pixelHeightCanvas = retarbi.PixelHeight;
+            pixelWidthCanvas = retarbi.PixelWidth;
+            return 0;
+        }
+
         public SolidColorBrush getPixelFromCanvas(int x, int y)
         {
             double NormfactorX = (double)pixelWidthCanvas / (double)PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
@@ -134,8 +152,110 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             int intValue = intXTemp * 4;
 
             return pixelsCanvas[intValue + 3];
-
         }
+
+        public Byte getPixelAlphaFromCanvasEraser(int x, int y)
+        {
+            double NormfactorX = (double)pixelWidthCanvas / (double)PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
+            double NormfactorY = (double)pixelHeightCanvas / (double)PocketPaintApplication.GetInstance().Bitmap.PixelHeight;
+
+            double doubleY = ((double)y) * NormfactorY;
+            double doubleX = ((double)x) * NormfactorX;
+
+            int intX = (int)Math.Round(doubleX, 0);
+            int intY = (int)Math.Round(doubleY, 0);
+
+            int intTemp = intY * pixelWidthCanvas;
+            int intXTemp = intTemp + intX;
+            int intValue = intXTemp * 4;
+
+            return pixelsCanvasEraser[intValue + 3];
+        }
+
+        public void setPixelColor(int x, int y)
+        {
+            double NormfactorX = (double)pixelWidthCanvas / (double)PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
+            double NormfactorY = (double)pixelHeightCanvas / (double)PocketPaintApplication.GetInstance().Bitmap.PixelHeight;
+
+            double doubleY = ((double)y) * NormfactorY;
+            double doubleX = ((double)x) * NormfactorX;
+
+            int intX = (int)Math.Round(doubleX, 0);
+            int intY = (int)Math.Round(doubleY, 0);
+
+            int intTemp = intY * pixelWidthCanvas;
+            int intXTemp = intTemp + intX;
+            int intValue = intXTemp * 4;
+
+            pixelsCanvas[intValue + 3] = 0;
+        }
+
+
+        async public void changedPixelToCanvas()
+        {
+            StorageFile outputFile = await KnownFolders.PicturesLibrary.CreateFileAsync("myTestFile.png", CreationCollisionOption.ReplaceExisting);
+            using (var writeStream = await outputFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, writeStream);
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Straight, (uint)pixelWidthCanvas, (uint)pixelHeightCanvas, 96, 96, pixelsCanvas);
+                await encoder.FlushAsync();
+            }
+                string filename = "myTestFile" + ".png";
+                
+                await PocketPaintApplication.GetInstance().StorageIo.WriteBitmapToPngMediaLibrary(filename);
+                StorageFile storageFile = await KnownFolders.PicturesLibrary.GetFileAsync(filename);
+                InMemoryRandomAccessStream mrAccessStream = new InMemoryRandomAccessStream();
+
+                Stream stream = await storageFile.OpenStreamForReadAsync(); ;
+                using (var memStream = new MemoryStream())
+                {
+                    await stream.CopyToAsync(memStream);
+                    memStream.Position = 0;
+
+                    BitmapDecoder decoder = await BitmapDecoder.CreateAsync(memStream.AsRandomAccessStream());
+                    BitmapEncoder encoder = await BitmapEncoder.CreateForTranscodingAsync(mrAccessStream, decoder);
+
+                    // write out to the stream
+                    try
+                    {
+                        await encoder.FlushAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        string s = ex.ToString();
+                    }
+                }
+                //render the stream to the screen
+                WriteableBitmap wbCroppedBitmap = new WriteableBitmap(
+                    (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width,
+                    (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height);
+                wbCroppedBitmap.SetSource(mrAccessStream);
+
+                Image image = new Image();
+                image.Source = wbCroppedBitmap;
+                image.Height = wbCroppedBitmap.PixelHeight;
+                image.Width = wbCroppedBitmap.PixelWidth;
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
+        }
+
+        //public Byte getPixelAlphaFromCanvas(int x, int y)
+        //{
+        //    double NormfactorX = (double)pixelWidthCanvas / (double)PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
+        //    double NormfactorY = (double)pixelHeightCanvas / (double)PocketPaintApplication.GetInstance().Bitmap.PixelHeight;
+
+        //    double doubleY = ((double)y) * NormfactorY;
+        //    double doubleX = ((double)x) * NormfactorX;
+
+        //    int intX = (int)Math.Round(doubleX, 0);
+        //    int intY = (int)Math.Round(doubleY, 0);
+
+        //    int intTemp = intY * pixelWidthCanvas;
+        //    int intXTemp = intTemp + intX;
+        //    int intValue = intXTemp * 4;
+
+        //    return pixelsCanvas[intValue + 3];
+        //}
 
 
         private async Task<string> SaveAsPng()
