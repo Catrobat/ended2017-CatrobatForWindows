@@ -52,11 +52,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().CropControl = this;
             setIsModifiedRectangleMovement = false;
             leftTopNullPointCropSelection = new Point(48.0, 69.0);
-
-            //if(!hasElementsPaintingAreaViews())
-            //{
-            //    rectRectangleCropSelection.Stroke = new SolidColorBrush(Colors.Transparent);
-            //}
         }
 
         public void setControlSize(double height, double width)
@@ -733,13 +728,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectRectangleCropSelection.Height += value;
 
             double addValueToTouchGrid = value / 4.0;
-            if ((rectLeftCenter.Height + addValueToTouchGrid) < 5.0 || (rectLeftCenter.Height + addValueToTouchGrid) > 120.0)
-            {
-                //GridRectCenterTop.Width = 25.0;
-                //rectCenterTop.Width = 5.0;
-                string test = "test";
-            }
-            else
+            if ((rectLeftCenter.Height + addValueToTouchGrid) >= 5.0 || (rectLeftCenter.Height + addValueToTouchGrid) <= 120.0)
             {
                 GridRectLeftCenter.Height += addValueToTouchGrid;
                 rectLeftCenter.Height += addValueToTouchGrid;
@@ -748,10 +737,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 rectRightCenter.Height += addValueToTouchGrid;
             }
 
-            if((rectLeftBottomVert.Height + addValueToTouchGrid) < 5.0 || (rectLeftBottomVert.Height + addValueToTouchGrid) > 30.0)
-            { }
-            else
+            if((rectLeftBottomVert.Height + addValueToTouchGrid) >= 5.0 || (rectLeftBottomVert.Height + addValueToTouchGrid) <= 30.0)
             {
+                // TODO:
                 //GridRectLeftBottom.Height += addValueToTouchGrid;
                 //GridRectLeftTop.Height += addValueToTouchGrid;
                 //GridRectRightBottom.Height += addValueToTouchGrid;
@@ -772,13 +760,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectRectangleCropSelection.Width += value;
 
             double addValueToTouchGrid = value / 4.0;
-            if ((rectCenterTop.Width + addValueToTouchGrid) < 5.0 || (rectCenterTop.Width + addValueToTouchGrid) > 120.0)
-            {
-                //GridRectCenterTop.Width = 25.0;
-                //rectCenterTop.Width = 5.0;
-                string test = "test";
-            }
-            else
+            if ((rectCenterTop.Width + addValueToTouchGrid) >= 5.0 || (rectCenterTop.Width + addValueToTouchGrid) <= 120.0)
             {
                 GridRectCenterTop.Width += addValueToTouchGrid;
                 rectCenterTop.Width += addValueToTouchGrid;
@@ -787,10 +769,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 rectCenterBottom.Width += addValueToTouchGrid;
             }
 
-            if ((rectRightBottomHorz.Width + addValueToTouchGrid) < 5.0 || (rectRightBottomHorz.Width + addValueToTouchGrid) > 30.0)
-            { }
-            else
+            if ((rectRightBottomHorz.Width + addValueToTouchGrid) >= 5.0 || (rectRightBottomHorz.Width + addValueToTouchGrid) <= 30.0)
             {
+                // TODO:
                 //GridRectLeftBottom.Width += addValueToTouchGrid;
                 //GridRectLeftTop.Width += addValueToTouchGrid;
                 //GridRectRightBottom.Width += addValueToTouchGrid;
@@ -857,10 +838,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 {
                     move.Y = (GridMain.Margin.Top + _transformGridMain.Value.OffsetY + rectRectangleCropSelection.Height + move.Y) > limitBottom ? 0.0 : move.Y;
                 }
-                
-                
-
-                
                 _transformGridMain.Children.Add(move);
 
                 //move.X = _transformGridMain.Value.OffsetX;

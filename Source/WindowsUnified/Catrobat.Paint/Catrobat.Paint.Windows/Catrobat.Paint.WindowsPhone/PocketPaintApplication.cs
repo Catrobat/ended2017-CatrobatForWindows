@@ -67,6 +67,8 @@ namespace Catrobat.Paint.WindowsPhone
         public InfoBoxControl InfoBoxControl { get; set; }
 
         public CropControl CropControl { get; set; }
+
+        public StampControl StampControl { get; set; }
         public CursorControl cursorControl { get; set; }
 
         public Canvas PaintingAreaCanvas { get; set; }
@@ -261,6 +263,9 @@ namespace Catrobat.Paint.WindowsPhone
                     break;
                 case ToolType.Rect:
                     ToolCurrent = new RectangleTool();
+                    break;
+                case ToolType.Stamp:
+                    ToolCurrent = new StampTool();
                     break;
                 default:
                     break;

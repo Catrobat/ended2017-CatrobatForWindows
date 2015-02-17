@@ -66,6 +66,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
             PocketPaintApplication.GetInstance().GridCursor = GridCursor;
             PocketPaintApplication.GetInstance().CropControl = ctrlCropControl;
+            PocketPaintApplication.GetInstance().StampControl = ctrlStampControl;
             PocketPaintApplication.GetInstance().EllipseSelectionControl = ucEllipseSelectionControl;
             PocketPaintApplication.GetInstance().RectangleSelectionControl = ucRectangleSelectionControl;
             PocketPaintApplication.GetInstance().GridInputScopeControl = GridInputScopeControl;
@@ -702,6 +703,41 @@ namespace Catrobat.Paint.WindowsPhone.View
                 cmdBar.PrimaryCommands.Add(app_btnVertical);
                 cmdBar.PrimaryCommands.Add(app_btnReset);
             }
+            else if("barStamp" == type)
+            {
+                AppBarButton app_btnStampCopy = new AppBarButton();
+                AppBarButton app_btnStampClear = new AppBarButton();
+                AppBarButton app_btnStampPaste = new AppBarButton();
+                AppBarButton app_btnResetSelection = new AppBarButton();
+
+                app_btnResetSelection.Name = "appButtonResetStamp";
+
+                BitmapIcon stampCopyIcon = new BitmapIcon();
+                stampCopyIcon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_stamp_copy.png", UriKind.Absolute);
+                app_btnStampCopy.Icon = stampCopyIcon;
+
+                BitmapIcon stampClearIcon = new BitmapIcon();
+                stampClearIcon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_stamp_clear.png", UriKind.Absolute);
+                app_btnStampClear.Icon = stampClearIcon;
+
+                BitmapIcon stampPasteIcon = new BitmapIcon();
+                stampPasteIcon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_stamp_paste.png", UriKind.Absolute);
+                app_btnStampPaste.Icon = stampPasteIcon;
+
+                BitmapIcon resetSelectionIcon = new BitmapIcon();
+                resetSelectionIcon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
+                app_btnResetSelection.Icon = resetSelectionIcon;
+
+                // TODO: Sinnvolle Beschreibungen festlegen.
+                // app_btnClearStampedSelection.Label = "";
+                // app_btnResetSelection.Label = "";
+                // app_btnStampSelection.Label = "";
+                // app_btnStamp.Label = "";
+
+                cmdBar.PrimaryCommands.Add(app_btnStampCopy);
+                cmdBar.PrimaryCommands.Add(app_btnStampClear);
+                cmdBar.PrimaryCommands.Add(app_btnResetSelection);
+            }
             else
             {
                 return;
@@ -1097,6 +1133,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                     break;
                 case ToolType.Rotate:
                     createAppBarAndSwitchAppBarContent("barRotate");
+                    break;
+                case ToolType.Stamp:
+                    createAppBarAndSwitchAppBarContent("barStamp");
                     break;
             }
         }
