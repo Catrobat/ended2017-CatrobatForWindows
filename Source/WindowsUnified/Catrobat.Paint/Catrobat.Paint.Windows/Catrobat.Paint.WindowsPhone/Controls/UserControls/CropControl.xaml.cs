@@ -14,8 +14,19 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
     {
         TransformGroup _transformGridMain;
 
+        const double MAX_VERTICAL_CORNER_RECTANGLE_HEIGHT = 30.0;
+        const double MAX_HORIZONTAL_CORNER_RECTANGLE_WIDTH = 30.0;
+        const double MAX_HORIZONTAL_CENTER_RECTANGLE_WIDTH = 120.0;
+        const double MAX_VERTICAL_CENTER_RECTANGLE_HEIGHT = 120.0;
+        const double MAX_GRID_HEIGHT = 140.0;
+        const double MIN_CORNER_RECTANGLE_HEIGHT = 5.0;
+        const double MIN_HORIZONTAL_CENTER_RECTANGLE_WIDTH = 120.0;
+        const double MIN_HORIZONTAL_CORNER_RECTANGLE_WIDTH = 5.0;
+        const double MIN_VERTICAL_CENTER_RECTANGLE_HEIGHT = 5.0;
         const double MIN_RECTANGLE_MOVE_HEIGHT = 60.0;
         const double MIN_RECTANGLE_MOVE_WIDTH = 60.0;
+        const double MULTIPLICATION_FACTOR_GRID_SIZE = 0.3648;
+        const double MULTiPLICATION_FACTOR_RECTANGLE_SIZE = 0.3125;
         bool _isModifiedRectangleMovement;
         double mobileDisplayHeight = 0.0;
         double mobileDisplayWidth = 0.0;
@@ -48,16 +59,130 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             //}
         }
 
-        public void setMainGridSize(double height, double width)
+        public void setControlSize(double height, double width)
         {
             GridMain.Height = height;
             GridMain.Width = width;
 
-            GridRectCenterTop.Width = width * 0.3648;
-            rectCenterTop.Width = width * 0.3125;
+            // Grid-Height:
+            double calculatedGridHeight = (height * 0.3648);
+            // TODO: GridRectLeftBottom.Height = (height * 0.1302) > 50.0 ? 50.0 : (height * 0.1302);
+            GridRectLeftCenter.Height = calculatedGridHeight > MAX_GRID_HEIGHT ? MAX_GRID_HEIGHT : calculatedGridHeight;
+            // TODO: GridRectLeftTop.Height = (height * 0.1302) > 50.0 ? 50.0 : (height * 0.1302);
+            // TODO: GridRectRightBottom.Height = (height * 0.1302) > 50.0 ? 50.0 : (height * 0.1302);
+            // TODO: GridRectRightTop.Height = (height * 0.1302) > 50.0 ? 50.0 : (height * 0.1302);
+            GridRectRightCenter.Height = calculatedGridHeight > MAX_GRID_HEIGHT ? MAX_GRID_HEIGHT : calculatedGridHeight;
 
+            // Grid-Width
             GridRectCenterBottom.Width = width * 0.3648;
-            rectCenterBottom.Width = width * 0.3125;
+            GridRectCenterTop.Width = width * 0.3648;
+
+            // Rectangle-Height
+            // 0.3125
+            double calculatedCenterRectangleHeight = (height * 0.2);
+            double calculatedCornerRectangleHeight = (height * 0.0781);
+
+            setHeightOfVerticalCornerRectangles(calculatedCornerRectangleHeight);
+            setHeightOfVerticalCenterRectangles(calculatedCenterRectangleHeight);
+
+            rectLeftTopVert.Margin = new Thickness(rectLeftTopVert.Margin.Left, rectLeftTopVert.Margin.Top,
+                                                      rectLeftTopVert.Margin.Right,
+                                                      rectLeftTopVert.Margin.Bottom + (calculatedCornerRectangleHeight));
+
+            // Rectangle-Width
+            double calcualtedHorizontalCenterRectangleWidth = (width * 0.2);
+            double calcualtedCornerRectangleWidth = (Width * 0.0781);
+
+            setWidthOfHorizontalCenterRectangles(calcualtedHorizontalCenterRectangleWidth);
+            setWidthOfHorizontalCornerRectangles(calcualtedCornerRectangleWidth);
+        }
+
+        public void setHeightOfVerticalCornerRectangles(double newValue)
+        {
+            if (newValue > MAX_VERTICAL_CORNER_RECTANGLE_HEIGHT)
+            {
+                rectLeftBottomVert.Height = MAX_VERTICAL_CORNER_RECTANGLE_HEIGHT;
+                rectLeftTopVert.Height = MAX_VERTICAL_CORNER_RECTANGLE_HEIGHT;
+                rectRightBottomVert.Height = MAX_VERTICAL_CORNER_RECTANGLE_HEIGHT;
+                rectRightTopVert.Height = MAX_VERTICAL_CORNER_RECTANGLE_HEIGHT;
+            }
+            else if (newValue < MIN_CORNER_RECTANGLE_HEIGHT)
+            {
+                rectLeftBottomVert.Height = MIN_CORNER_RECTANGLE_HEIGHT;
+                rectLeftTopVert.Height = MIN_CORNER_RECTANGLE_HEIGHT;
+                rectRightBottomVert.Height = MIN_CORNER_RECTANGLE_HEIGHT;
+                rectRightTopVert.Height = MIN_CORNER_RECTANGLE_HEIGHT;
+            }
+            else
+            {
+                rectLeftBottomVert.Height = newValue;
+                rectLeftTopVert.Height = newValue;
+                rectRightBottomVert.Height = newValue;
+                rectRightTopVert.Height = newValue;
+            }
+        }
+
+        private void setHeightOfVerticalCenterRectangles(double newValue)
+        {
+            if (newValue > MAX_VERTICAL_CENTER_RECTANGLE_HEIGHT)
+            {
+                rectLeftCenter.Height = MAX_VERTICAL_CENTER_RECTANGLE_HEIGHT;
+                rectRightCenter.Height = MAX_VERTICAL_CENTER_RECTANGLE_HEIGHT;
+            }
+            else if (newValue < MIN_VERTICAL_CENTER_RECTANGLE_HEIGHT)
+            {
+                rectLeftCenter.Height = MIN_VERTICAL_CENTER_RECTANGLE_HEIGHT;
+                rectRightCenter.Height = MIN_VERTICAL_CENTER_RECTANGLE_HEIGHT;
+            }
+            else
+            {
+                rectLeftCenter.Height = newValue;
+                rectRightCenter.Height = newValue;
+            }
+        }
+
+        private void setWidthOfHorizontalCenterRectangles(double newValue)
+        {
+            if(newValue > MAX_HORIZONTAL_CENTER_RECTANGLE_WIDTH)
+            {
+                rectCenterTop.Width = MAX_HORIZONTAL_CENTER_RECTANGLE_WIDTH;
+                rectCenterBottom.Width = MAX_HORIZONTAL_CENTER_RECTANGLE_WIDTH;
+            }
+            else if (newValue < MIN_HORIZONTAL_CENTER_RECTANGLE_WIDTH)
+            {
+                rectCenterTop.Width = MIN_HORIZONTAL_CENTER_RECTANGLE_WIDTH;
+                rectCenterBottom.Width = MIN_HORIZONTAL_CENTER_RECTANGLE_WIDTH;
+            }
+            else
+            {
+                rectCenterTop.Width = newValue;
+                rectCenterBottom.Width = newValue;
+            }
+        }
+
+        public void setWidthOfHorizontalCornerRectangles(double newValue)
+        {
+            if (newValue > MAX_HORIZONTAL_CORNER_RECTANGLE_WIDTH)
+            {
+                rectLeftBottomHorz.Width = MAX_HORIZONTAL_CENTER_RECTANGLE_WIDTH;
+                rectLeftTopHorz.Width = MAX_HORIZONTAL_CENTER_RECTANGLE_WIDTH;
+                rectRightBottomHorz.Width = MAX_HORIZONTAL_CENTER_RECTANGLE_WIDTH;
+                rectRightTopHorz.Width = MAX_HORIZONTAL_CENTER_RECTANGLE_WIDTH;
+            }
+            else if(newValue < MIN_HORIZONTAL_CORNER_RECTANGLE_WIDTH)
+            {
+                rectLeftBottomHorz.Width = MIN_HORIZONTAL_CENTER_RECTANGLE_WIDTH;
+                rectLeftTopHorz.Width = MIN_HORIZONTAL_CENTER_RECTANGLE_WIDTH;
+                rectRightBottomHorz.Width = MIN_HORIZONTAL_CENTER_RECTANGLE_WIDTH;
+                rectRightTopHorz.Width = MIN_HORIZONTAL_CENTER_RECTANGLE_WIDTH;
+            }
+            else
+            {
+                rectLeftBottomHorz.Width = newValue;
+                rectLeftTopHorz.Width = newValue;
+                rectRightBottomHorz.Width = newValue;
+                rectRightTopHorz.Width = newValue;
+            }
         }
 
         public void setRectangleForMovementSize(double height, double width)
@@ -452,7 +577,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 limitRight = limitLeft + (paintingAreaCheckeredGridHeight * scaleValue) + offsetMargin * 2;
             }
             PocketPaintApplication.GetInstance().ProgressRing.IsActive = false;
-            setMainGridSize(heightCropControl, widthCropControl);
+            setControlSize(heightCropControl, widthCropControl);
             setRectangleForMovementSize(heightCropControl, widthCropControl);
 
             GridMain.Visibility = Visibility.Visible;
@@ -610,6 +735,37 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             GridMain.Height += value;
             rectRectangleCropSelection.Height += value;
+
+            double addValueToTouchGrid = value / 4.0;
+            if ((rectLeftCenter.Height + addValueToTouchGrid) < 5.0 || (rectLeftCenter.Height + addValueToTouchGrid) > 120.0)
+            {
+                //GridRectCenterTop.Width = 25.0;
+                //rectCenterTop.Width = 5.0;
+                string test = "test";
+            }
+            else
+            {
+                GridRectLeftCenter.Height += addValueToTouchGrid;
+                rectLeftCenter.Height += addValueToTouchGrid;
+
+                GridRectRightCenter.Height += addValueToTouchGrid;
+                rectRightCenter.Height += addValueToTouchGrid;
+            }
+
+            if((rectLeftBottomVert.Height + addValueToTouchGrid) < 5.0 || (rectLeftBottomVert.Height + addValueToTouchGrid) > 30.0)
+            { }
+            else
+            {
+                //GridRectLeftBottom.Height += addValueToTouchGrid;
+                //GridRectLeftTop.Height += addValueToTouchGrid;
+                //GridRectRightBottom.Height += addValueToTouchGrid;
+                //GridRectRightTop.Height += addValueToTouchGrid;
+                rectLeftBottomVert.Height += addValueToTouchGrid;
+                rectRightBottomVert.Height += addValueToTouchGrid;
+                rectRightTopVert.Height += addValueToTouchGrid;
+                rectLeftTopVert.Height += addValueToTouchGrid;
+            }
+
             resetAppBarButtonRectangleSelectionControl(true);
             setIsModifiedRectangleMovement = true;
         }
@@ -619,7 +775,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             GridMain.Width += value;
             rectRectangleCropSelection.Width += value;
 
-            double addValueToTouchGrid = value / 2.0;
+            double addValueToTouchGrid = value / 4.0;
             if ((rectCenterTop.Width + addValueToTouchGrid) < 5.0 || (rectCenterTop.Width + addValueToTouchGrid) > 120.0)
             {
                 //GridRectCenterTop.Width = 25.0;
@@ -634,7 +790,22 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 GridRectCenterBottom.Width += addValueToTouchGrid;
                 rectCenterBottom.Width += addValueToTouchGrid;
             }
-            
+
+            if ((rectRightBottomHorz.Width + addValueToTouchGrid) < 5.0 || (rectRightBottomHorz.Width + addValueToTouchGrid) > 30.0)
+            { }
+            else
+            {
+                //GridRectLeftBottom.Width += addValueToTouchGrid;
+                //GridRectLeftTop.Width += addValueToTouchGrid;
+                //GridRectRightBottom.Width += addValueToTouchGrid;
+                //GridRectRightTop.Width += addValueToTouchGrid;
+
+                rectLeftBottomHorz.Width += addValueToTouchGrid;
+                rectRightBottomHorz.Width += addValueToTouchGrid;
+                rectRightTopHorz.Width += addValueToTouchGrid;
+                rectLeftTopHorz.Width += addValueToTouchGrid;
+            }
+
             resetAppBarButtonRectangleSelectionControl(true);
             setIsModifiedRectangleMovement = true;
         }
