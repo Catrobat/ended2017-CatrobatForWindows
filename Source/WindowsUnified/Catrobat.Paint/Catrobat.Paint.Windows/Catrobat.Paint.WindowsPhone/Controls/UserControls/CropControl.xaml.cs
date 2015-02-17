@@ -85,10 +85,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             setHeightOfVerticalCornerRectangles(calculatedCornerRectangleHeight);
             setHeightOfVerticalCenterRectangles(calculatedCenterRectangleHeight);
 
-            rectLeftTopVert.Margin = new Thickness(rectLeftTopVert.Margin.Left, rectLeftTopVert.Margin.Top,
-                                                      rectLeftTopVert.Margin.Right,
-                                                      rectLeftTopVert.Margin.Bottom + (calculatedCornerRectangleHeight));
-
             // Rectangle-Width
             double calcualtedHorizontalCenterRectangleWidth = (width * 0.2);
             double calcualtedCornerRectangleWidth = (Width * 0.0781);
