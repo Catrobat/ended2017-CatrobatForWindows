@@ -195,6 +195,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                 case ToolType.Rotate:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Rotate));
                     break;
+                case ToolType.Stamp:
+                    img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Stamp));
+                    break;
                 case ToolType.Zoom:
                     img_front.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Zoom));
                     break;
@@ -240,6 +243,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                     return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_pipette.png", UriKind.Absolute);
                 case ToolType.Rect:
                     return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_rectangle.png", UriKind.Absolute);
+                case ToolType.Stamp:
+                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_stamp.png", UriKind.Absolute);
                 case ToolType.Rotate:
                     return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_rotate_left.png", UriKind.Absolute);
                 case ToolType.Zoom:

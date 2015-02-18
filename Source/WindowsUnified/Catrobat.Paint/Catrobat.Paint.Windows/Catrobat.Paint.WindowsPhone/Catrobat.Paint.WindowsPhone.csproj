@@ -127,6 +127,9 @@
     <Compile Include="Controls\UserControls\colorPicker.xaml.cs">
       <DependentUpon>colorPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserControls\StampControl.xaml.cs">
+      <DependentUpon>StampControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserControls\CropControl.xaml.cs">
       <DependentUpon>CropControl.xaml</DependentUpon>
     </Compile>
@@ -174,6 +177,7 @@
     <Compile Include="PixelData\PixelData.cs" />
     <Compile Include="PocketPaintApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tool\StampTool.cs" />
     <Compile Include="Tool\CursorTool.cs" />
     <Compile Include="Tool\BrushTool.cs" />
     <Compile Include="Tool\EllipseTool.cs" />
@@ -251,6 +255,10 @@
     <Content Include="Assets\AppBar\icon_menu_flip_horizontal.png" />
     <Content Include="Assets\AppBar\icon_menu_rotate_left.png" />
     <Content Include="Assets\AppBar\icon_menu_rotate_right.png" />
+    <Content Include="Assets\AppBar\icon_menu_stamp.png" />
+    <Content Include="Assets\AppBar\icon_menu_stamp_clear.png" />
+    <Content Include="Assets\AppBar\icon_menu_stamp_copy.png" />
+    <Content Include="Assets\AppBar\icon_menu_stamp_paste.png" />
     <Content Include="Assets\AppBar\icon_zoom_in.png" />
     <Content Include="Assets\AppBar\icon_zoom_out.png" />
     <Content Include="Assets\AppBar\menu_tools.png" />
@@ -337,6 +345,10 @@
     <Page Include="Controls\UserControls\colorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserControls\StampControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\UserControls\CropControl.xaml">
       <Generator>MSBuild:Compile</Generator>
