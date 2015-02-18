@@ -728,6 +728,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 resetSelectionIcon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
                 app_btnResetSelection.Icon = resetSelectionIcon;
 
+                app_btnResetSelection.Click += app_btn_reset_Click;
                 // TODO: Sinnvolle Beschreibungen festlegen.
                 // app_btnClearStampedSelection.Label = "";
                 // app_btnResetSelection.Label = "";

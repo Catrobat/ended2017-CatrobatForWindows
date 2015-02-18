@@ -45,6 +45,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void ResetDrawingSpace()
         {
+            PocketPaintApplication.GetInstance().StampControl.setControlPosition();
         }
     }
 }
