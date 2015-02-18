@@ -918,6 +918,8 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Collapsed;
             this.BottomAppBar.Visibility = Visibility.Collapsed;
+            GrdThicknessControlVisibility = Visibility.Collapsed;
+            GridUserControlRectEll.Visibility = Visibility.Collapsed;
 
             TransformGroup _transforms = null;
             if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform.GetType() == typeof(TransformGroup))
