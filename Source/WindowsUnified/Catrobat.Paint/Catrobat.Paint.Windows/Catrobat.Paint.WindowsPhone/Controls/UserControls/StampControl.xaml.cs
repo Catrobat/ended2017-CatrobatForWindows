@@ -509,7 +509,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void setSourceImageStamp(ImageSource imageSource)
         {
-            imgStampedImage.Source = null;
             imgStampedImage.Source = imageSource;
         }
 

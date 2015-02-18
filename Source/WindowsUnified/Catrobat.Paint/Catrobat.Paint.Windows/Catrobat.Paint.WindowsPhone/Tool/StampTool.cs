@@ -97,7 +97,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public void stampClear()
         {
-            PocketPaintApplication.GetInstance().StampControl.setSourceImageStamp(new WriteableBitmap(200, 200));
+            PocketPaintApplication.GetInstance().StampControl.setSourceImageStamp(null);
         }
 
         public void stampPaste()

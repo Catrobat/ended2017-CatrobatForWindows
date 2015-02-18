@@ -822,6 +822,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                     currentAppBarButton.Visibility = Visibility.Collapsed;
                 }
             }
+
+            ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).stampClear();
         }
 
         void app_btnStampCopy_Click(object sender, RoutedEventArgs e)
