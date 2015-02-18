@@ -53,6 +53,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void setControlPosition()
         {
+            GridMain.Margin = new Thickness(0.0, 0.0, 0.0, 0.0);
             _transformGridMain.Children.Clear();
             TransformGroup paintingAreaCheckeredGridTransformGroup = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
             double scaleValue = paintingAreaCheckeredGridTransformGroup.Value.M11;
@@ -449,20 +450,20 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 ((TranslateTransform)move).Y = e.Delta.Translation.Y;
                 if(move.X < 0)
                 {
-                    // TODO: move.X = (GridMain.Margin.Left + _transformGridMain.Value.OffsetX + move.X ) < limitLeft ? 0.0 : move.X;
+                    move.X = (GridMain.Margin.Left + _transformGridMain.Value.OffsetX + move.X ) < limitLeft ? 0.0 : move.X;
                 }
                 else
                 {
-                    // TODO: move.X = (GridMain.Margin.Left + _transformGridMain.Value.OffsetX + rectRectangleCropSelection.Width + move.X) > limitRight ? 0.0 : move.X;
+                    move.X = (GridMain.Margin.Left + _transformGridMain.Value.OffsetX + rectRectangleCropSelection.Width + move.X) > limitRight ? 0.0 : move.X;
                 }
 
                 if (move.Y < 0)
                 {
-                    // TODO: move.Y = (GridMain.Margin.Top + _transformGridMain.Value.OffsetY + move.Y) < limitTop ? 0.0 : move.Y;
+                    move.Y = (GridMain.Margin.Top + _transformGridMain.Value.OffsetY + move.Y) < limitTop ? 0.0 : move.Y;
                 }
                 else
                 {
-                    // TODO: move.Y = (GridMain.Margin.Top + _transformGridMain.Value.OffsetY + rectRectangleCropSelection.Height + move.Y) > limitBottom ? 0.0 : move.Y;
+                    move.Y = (GridMain.Margin.Top + _transformGridMain.Value.OffsetY + rectRectangleCropSelection.Height + move.Y) > limitBottom ? 0.0 : move.Y;
                 }
                 _transformGridMain.Children.Add(move);
 
