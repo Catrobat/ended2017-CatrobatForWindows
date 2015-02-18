@@ -46,7 +46,7 @@ namespace Catrobat_Player
         // Get the SwapChainPanel of the XAML page
         SwapChainPanel^ swapChainPanel = Catrobat_PlayerMain::FindChildControl<SwapChainPanel>(
             (DependencyObject^)playerPage->Content, 
-            Constants::Player::XamlPage::SwapChainPanelName);
+            Constants::XAMLPage::SwapChainPanelName);
 
         // Register event handlers for page lifecycle
         CoreWindow^ window = Window::Current->CoreWindow;

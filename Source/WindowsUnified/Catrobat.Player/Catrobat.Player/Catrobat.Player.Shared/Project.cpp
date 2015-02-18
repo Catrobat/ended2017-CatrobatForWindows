@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "Project.h"
+#include "Constants.h"
 
 using namespace std;
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 Project::Project(
 	string								applicationBuildName,
@@ -52,6 +53,8 @@ Project::Project(
     m_variableListValueInitial = new map<std::string, std::string>();
 }
 
+//--------------------------------------------------------------------------------------------------
+
 Project::~Project()
 {
     for (size_t i = 0; i < m_objectList->GetSize(); i++)
@@ -67,34 +70,34 @@ Project::~Project()
     //delete m_objectListInitial;
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 int Project::GetScreenHeight()
 {
 	return m_screenHeight;
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 int	Project::GetScreenWidth()
 {
 	return m_screenWidth;
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 ObjectList *Project::GetObjectList()
 {
 	return m_objectList;
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 ObjectList *Project::GetObjectListInitial()
 { 
     return m_objectListInitial; 
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void Project::Render(const std::shared_ptr<DX::DeviceResources>& deviceResources)
 {
@@ -104,7 +107,7 @@ void Project::Render(const std::shared_ptr<DX::DeviceResources>& deviceResources
 	}
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void Project::LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceResources)
 {
@@ -114,9 +117,10 @@ void Project::LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceRes
 	}
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-void Project::SetupWindowSizeDependentResources(const std::shared_ptr<DX::DeviceResources>& deviceResources)
+void Project::SetupWindowSizeDependentResources(
+    const std::shared_ptr<DX::DeviceResources>& deviceResources)
 {
     for (int i = 0; i < m_objectList->GetSize(); i++)
     {
@@ -124,7 +128,18 @@ void Project::SetupWindowSizeDependentResources(const std::shared_ptr<DX::Device
     }
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+
+void Project::CheckProjectScreenSize()
+{
+    if (m_screenHeight == 0 || m_screenWidth == 0)
+    {
+        m_screenHeight = Constants::XMLParser::Header::ProjectScreenHeightDefault;
+        m_screenWidth = Constants::XMLParser::Header::ProjectScreenWidthDefault;
+    }
+}
+
+//--------------------------------------------------------------------------------------------------
 
 void Project::StartUp()
 {	
@@ -134,7 +149,7 @@ void Project::StartUp()
 	}
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 UserVariable *Project::GetVariable(std::string name)
 {
@@ -144,14 +159,14 @@ UserVariable *Project::GetVariable(std::string name)
 	return NULL;
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void Project::AddVariable(std::string name, UserVariable *variable)
 {
 	m_variableList->insert(pair<string, UserVariable*>(name, variable));
 }
 
-//----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void Project::AddVariable(std::pair<string, UserVariable*> variable)
 {

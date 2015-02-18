@@ -72,29 +72,29 @@ namespace Catrobat_Player
 
         // Get the axis button from the CommandBar
         m_btnAxis = (AppBarButton^)m_appBar->PrimaryCommands->GetAt(
-            Constants::Player::XamlPage::BtnAxisPosition);
+            Constants::XAMLPage::BtnAxisPosition);
 
         // Get the Grid which contains the axes from the Player's XAML page & set the axes' values
         m_gridAxis = FindChildControl<Grid>((DependencyObject^)playerPage->Content,
-            Constants::Player::XamlPage::GridAxisName);
+            Constants::XAMLPage::GridAxisName);
 
         int projectScreenHeight = ProjectDaemon::Instance()->GetProject()->GetScreenHeight();
         int projectScreendWidth = ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
 
         // horizontal values
         (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, 
-            Constants::Player::XamlPage::GridAxisXLeftName))
+            Constants::XAMLPage::GridAxisXLeftName))
             ->Text = "-" + (projectScreendWidth / 2).ToString();
         (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, 
-            Constants::Player::XamlPage::GridAxisXRightName))
+            Constants::XAMLPage::GridAxisXRightName))
             ->Text = (projectScreendWidth / 2).ToString();
 
         // vertical values
         (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, 
-            Constants::Player::XamlPage::GridAxisYTopName))
+            Constants::XAMLPage::GridAxisYTopName))
             ->Text = (projectScreenHeight / 2).ToString();
         (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, 
-            Constants::Player::XamlPage::GridAxisYBottomName))
+            Constants::XAMLPage::GridAxisYBottomName))
             ->Text = "-" + (projectScreenHeight / 2).ToString();
     }
 

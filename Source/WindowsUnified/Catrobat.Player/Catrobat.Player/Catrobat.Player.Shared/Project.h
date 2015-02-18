@@ -36,6 +36,7 @@ public:
     void								Render(const std::shared_ptr<DX::DeviceResources>& deviceResources);
     void								LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceResources);
     void                                SetupWindowSizeDependentResources(const std::shared_ptr<DX::DeviceResources>& deviceResources);
+    void                                CheckProjectScreenSize();
     void								StartUp();
 
     // Getters
