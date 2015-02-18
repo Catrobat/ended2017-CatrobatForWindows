@@ -40,7 +40,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         PixelData.PixelData pixelData = new PixelData.PixelData();
 
-        Point leftTopNullPointCropSelection;
+        Point leftTopNullPointStampSelection;
 
         public StampControl()
         {
@@ -48,6 +48,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             _transformGridMain = new TransformGroup();
             GridMain.RenderTransform = _transformGridMain;
             setIsModifiedRectangleMovement = false;
+            leftTopNullPointStampSelection = new Point(0.0, 0.0);
         }
 
 
@@ -75,6 +76,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             limitTop = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
             limitBottom = limitTop + (paintingAreaCheckeredGridHeight * scaleValue) + offsetSize;
             limitRight = limitLeft + (paintingAreaCheckeredGridWidth * scaleValue) + offsetSize;
+
+            leftTopNullPointStampSelection = new Point(_transformGridMain.Value.OffsetX + 5.0, _transformGridMain.Value.OffsetY + 5.0);
         }
 
         public void setControlSize(double height, double width)
@@ -508,6 +511,27 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             imgStampedImage.Source = null;
             imgStampedImage.Source = imageSource;
+        }
+
+        public Point getLeftTopPointOfStampedSelection()
+        {
+            return new Point(_transformGridMain.Value.OffsetX + 5.0 - leftTopNullPointStampSelection.X,
+                             _transformGridMain.Value.OffsetY + 5.0 - leftTopNullPointStampSelection.Y);
+        }
+
+        public double getHeightOfStampedSelection()
+        {
+            return GridMain.Height - 10.0;
+        }
+
+        public double getWidthOfStampedSelection()
+        {
+            return GridMain.Width - 10.0;
+        }
+
+        public ImageSource getImageSourceStampedImage()
+        {
+            return imgStampedImage.Source;
         }
     }
 }

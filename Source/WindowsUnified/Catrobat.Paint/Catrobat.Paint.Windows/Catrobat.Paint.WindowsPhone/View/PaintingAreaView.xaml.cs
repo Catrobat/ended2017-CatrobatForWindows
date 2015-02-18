@@ -731,9 +731,10 @@ namespace Catrobat.Paint.WindowsPhone.View
                 resetSelectionIcon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
                 app_btnResetSelection.Icon = resetSelectionIcon;
 
-                app_btnResetSelection.Click += app_btn_reset_Click;
-                app_btnStampCopy.Click += app_btnStampCopy_Click;
                 app_btnStampClear.Click += app_btnStampClear_Click;
+                app_btnStampCopy.Click += app_btnStampCopy_Click;
+                app_btnStampPaste.Click += app_btnStampPaste_Click;
+                app_btnResetSelection.Click += app_btn_reset_Click;
                 // TODO: Sinnvolle Beschreibungen festlegen.
                 // app_btnClearStampedSelection.Label = "";
                 // app_btnResetSelection.Label = "";
@@ -798,6 +799,11 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             BottomAppBar = cmdBar;
             current_appbar = type;
+        }
+
+        void app_btnStampPaste_Click(object sender, RoutedEventArgs e)
+        {
+            ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).stampPaste();
         }
 
         void app_btnStampClear_Click(object sender, RoutedEventArgs e)

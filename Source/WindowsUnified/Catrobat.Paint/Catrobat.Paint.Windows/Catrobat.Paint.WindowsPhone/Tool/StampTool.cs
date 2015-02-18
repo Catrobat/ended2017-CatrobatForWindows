@@ -45,10 +45,13 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         async public void stampCopy()
         {
-            double heightStampControl = 200.0;
-            double widthStampControl = 200.0;
-            double xOffsetStampControl = 0.0;
-            double yOffsetStampControl = 0.0;
+            double heightStampControl = PocketPaintApplication.GetInstance().StampControl.getHeightOfStampedSelection();
+            double widthStampControl = PocketPaintApplication.GetInstance().StampControl.getWidthOfStampedSelection();
+
+            Point leftTopPointStampSelection = PocketPaintApplication.GetInstance().StampControl.getLeftTopPointOfStampedSelection();
+            double xOffsetStampControl = leftTopPointStampSelection.X;
+            double yOffsetStampControl = leftTopPointStampSelection.Y;
+
             string filename = ("stamp") + ".png";
             await PocketPaintApplication.GetInstance().StorageIo.WriteBitmapToPngMediaLibrary(filename);
             StorageFile storageFile = await KnownFolders.PicturesLibrary.GetFileAsync(filename);
@@ -95,6 +98,22 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public void stampClear()
         {
             PocketPaintApplication.GetInstance().StampControl.setSourceImageStamp(new WriteableBitmap(200, 200));
+        }
+
+        public void stampPaste()
+        {
+            double heightStampControl = PocketPaintApplication.GetInstance().StampControl.getHeightOfStampedSelection();
+            double widthStampControl = PocketPaintApplication.GetInstance().StampControl.getWidthOfStampedSelection();
+
+            Point leftTopPointStampSelection = PocketPaintApplication.GetInstance().StampControl.getLeftTopPointOfStampedSelection();
+            double xOffsetStampControl = leftTopPointStampSelection.X;
+            double yOffsetStampControl = leftTopPointStampSelection.Y;
+
+            Image img = new Image();
+            img.Source = PocketPaintApplication.GetInstance().StampControl.getImageSourceStampedImage();
+            Canvas.SetTop(img, yOffsetStampControl);
+            Canvas.SetLeft(img, xOffsetStampControl);
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(img);
         }
 
         public override void ResetDrawingSpace()

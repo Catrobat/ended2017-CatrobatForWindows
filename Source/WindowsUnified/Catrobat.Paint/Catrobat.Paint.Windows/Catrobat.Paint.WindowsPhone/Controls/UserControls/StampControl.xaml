@@ -12,8 +12,9 @@
                 StrokeThickness="5" VerticalAlignment="Bottom" 
                 DoubleTapped="rectRectangleCropSelection_DoubleTapped" Width="192"/>
         </Grid>
-        <Grid x:Name="GridStampedImage" Background="#0FCCCCCC" ManipulationDelta="rectRectangleCropSelection_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" VerticalAlignment="Top">
-            <Image x:Name="imgStampedImage" Height="320" Margin="0,0,0,0" Width="182"></Image>
+        <Grid x:Name="GridStampedImage" Background="#0FCCCCCC" HorizontalAlignment="Left" ManipulationDelta="rectRectangleCropSelection_ManipulationDelta"
+              ManipulationMode="TranslateX, TranslateY" Margin="5.0,0.0,0.0,0.0" VerticalAlignment="Top">
+            <Image x:Name="imgStampedImage" Height="320" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="182"></Image>
         </Grid>
         <Grid x:Name="GridRectLeftTop" Background="Transparent" HorizontalAlignment="Left" Height="50" ManipulationDelta="rectLeftTop_ManipulationDelta"
               ManipulationMode="TranslateX, TranslateY" Margin="-20.0,-20.0,0,0" VerticalAlignment="Top" Width="50">
