@@ -273,7 +273,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
 
         // TODO: Refactor the setCropSelection function.
-
         async public void setCropSelection()
         {
             GridMain.Visibility = Visibility.Collapsed;

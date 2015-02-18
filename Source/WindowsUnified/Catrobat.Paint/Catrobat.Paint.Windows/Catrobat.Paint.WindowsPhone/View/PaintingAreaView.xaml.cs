@@ -44,6 +44,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         static bool isManipulationEventLoaded;
         static int zoomCounter;
         Point start_point = new Point();
+
         public PaintingAreaView()
         {
             this.InitializeComponent();

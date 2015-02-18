@@ -42,6 +42,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         Point leftTopNullPointStampSelection;
 
+        double originalHeightStampedImage = 0.0;
+        double originalWidthStampedImage = 0.0;
+
         public StampControl()
         {
             this.InitializeComponent();
@@ -49,6 +52,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             GridMain.RenderTransform = _transformGridMain;
             setIsModifiedRectangleMovement = false;
             leftTopNullPointStampSelection = new Point(0.0, 0.0);
+            setSourceImageStamp(null);
         }
 
 
@@ -514,23 +518,41 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public Point getLeftTopPointOfStampedSelection()
         {
-            return new Point(_transformGridMain.Value.OffsetX + 5.0 - leftTopNullPointStampSelection.X,
-                             _transformGridMain.Value.OffsetY + 5.0 - leftTopNullPointStampSelection.Y);
+            return new Point((Math.Ceiling(_transformGridMain.Value.OffsetX + 5.0 + GridMain.Margin.Left - leftTopNullPointStampSelection.X) / 0.75),
+                              Math.Ceiling((_transformGridMain.Value.OffsetY + 5.0 + GridMain.Margin.Top - leftTopNullPointStampSelection.Y) / 0.75));
         }
 
         public double getHeightOfStampedSelection()
         {
-            return GridMain.Height - 10.0;
+            // TODO: Get current scale value by paintingareacheckeredgrid
+            return (GridMain.Height - 10.0) / 0.75;
         }
 
         public double getWidthOfStampedSelection()
         {
-            return GridMain.Width - 10.0;
+            // TODO: Get current scale value by paintingareacheckeredgrid
+            return (GridMain.Width - 10.0) / 0.75;
         }
 
         public ImageSource getImageSourceStampedImage()
         {
             return imgStampedImage.Source;
+        }
+
+        public void setOriginalSizeOfStampedImage(double height, double width)
+        {
+            originalHeightStampedImage = height;
+            originalWidthStampedImage = height;
+        }
+
+        public double getOriginalHeightOfStampedImage()
+        {
+            return originalHeightStampedImage;
+        }
+
+        public double getOriginalWidthOfStampedImage()
+        {
+            return originalWidthStampedImage;
         }
     }
 }

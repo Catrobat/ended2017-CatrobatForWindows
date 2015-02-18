@@ -48,6 +48,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             double heightStampControl = PocketPaintApplication.GetInstance().StampControl.getHeightOfStampedSelection();
             double widthStampControl = PocketPaintApplication.GetInstance().StampControl.getWidthOfStampedSelection();
 
+            PocketPaintApplication.GetInstance().StampControl.setOriginalSizeOfStampedImage(heightStampControl, widthStampControl);
+
             Point leftTopPointStampSelection = PocketPaintApplication.GetInstance().StampControl.getLeftTopPointOfStampedSelection();
             double xOffsetStampControl = leftTopPointStampSelection.X;
             double yOffsetStampControl = leftTopPointStampSelection.Y;
@@ -66,6 +68,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
                     BitmapDecoder decoder = await BitmapDecoder.CreateAsync(memStream.AsRandomAccessStream());
                     BitmapEncoder encoder = await BitmapEncoder.CreateForTranscodingAsync(mrAccessStream, decoder);
+
+                    encoder.BitmapTransform.ScaledHeight = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Height;
+                    encoder.BitmapTransform.ScaledWidth = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Width;
 
                     encoder.BitmapTransform.ScaledHeight = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Height;
                     encoder.BitmapTransform.ScaledWidth = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Width;
@@ -111,6 +116,10 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             Image img = new Image();
             img.Source = PocketPaintApplication.GetInstance().StampControl.getImageSourceStampedImage();
+
+            WriteableBitmap originalWb = (WriteableBitmap)img.Source;
+            //Task<WriteableBitmap> wb = ResizeImage(originalWb, (uint)PocketPaintApplication.GetInstance().StampControl.getOriginalWidthOfStampedImage(),
+            //    (uint)PocketPaintApplication.GetInstance().StampControl.getOriginalHeightOfStampedImage());
             Canvas.SetTop(img, yOffsetStampControl);
             Canvas.SetLeft(img, xOffsetStampControl);
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(img);
