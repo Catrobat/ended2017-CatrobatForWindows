@@ -355,6 +355,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             GridMain.Height += value;
             rectRectangleCropSelection.Height += value;
+            imgStampedImage.Height += value;
 
             double addValueToTouchGrid = value / 4.0;
             if ((rectLeftCenter.Height + addValueToTouchGrid) >= 5.0 || (rectLeftCenter.Height + addValueToTouchGrid) <= 120.0)
@@ -387,6 +388,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             GridMain.Width += value;
             rectRectangleCropSelection.Width += value;
+            imgStampedImage.Width += value;
 
             double addValueToTouchGrid = value / 4.0;
             if ((rectCenterTop.Width + addValueToTouchGrid) >= 5.0 || (rectCenterTop.Width + addValueToTouchGrid) <= 120.0)
@@ -500,6 +502,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 _isModifiedRectangleMovement = value;
             }
+        }
+
+        public void setSourceImageStamp(ImageSource imageSource)
+        {
+            imgStampedImage.Source = null;
+            imgStampedImage.Source = imageSource;
         }
     }
 }
