@@ -6,8 +6,13 @@ namespace Constants
 {
     namespace XMLParser
     {
+
+        static const std::string FileName                        =       "code.xml";
+
         namespace Header
         {
+            static const int         ProjectScreenWidthDefault   =       1280;
+            static const int         ProjectScreenHeightDefault  =       768;
             static const std::string ApplicationBuildName        =       "applicationBuildName";
             static const std::string ApplicationBuildNumber      =       "applicationBuildNumber";
             static const std::string ApplicationName             =       "applicationName";
@@ -136,22 +141,14 @@ namespace Constants
          static const std::string Missing                        =       " missing";
     };
 
-	namespace Player
+    namespace XAMLPage
 	{
-        namespace XmlFile
-        {
-            static const std::string FileName                    =       "code.xml";
-        }
-
-        namespace XamlPage
-        {
-            static const int      BtnAxisPosition                =       3;
-            static const wchar_t* GridAxisName                   =       L"GridAxis";
-            static const wchar_t* GridAxisXRightName             =       L"GridAxisXRight";
-            static const wchar_t* GridAxisXLeftName              =       L"GridAxisXLeft";
-            static const wchar_t* GridAxisYTopName               =       L"GridAxisYTop";
-            static const wchar_t* GridAxisYBottomName            =       L"GridAxisYBottom";
-            static const wchar_t* SwapChainPanelName             =       L"SwapChainPanel";
-        }
+        static const int      BtnAxisPosition                    =       3;
+        static const wchar_t* GridAxisName                       =       L"GridAxis";
+        static const wchar_t* GridAxisXRightName                 =       L"GridAxisXRight";
+        static const wchar_t* GridAxisXLeftName                  =       L"GridAxisXLeft";
+        static const wchar_t* GridAxisYTopName                   =       L"GridAxisYTop";
+        static const wchar_t* GridAxisYBottomName                =       L"GridAxisYBottom";
+        static const wchar_t* SwapChainPanelName                 =       L"SwapChainPanel";
 	};
 };

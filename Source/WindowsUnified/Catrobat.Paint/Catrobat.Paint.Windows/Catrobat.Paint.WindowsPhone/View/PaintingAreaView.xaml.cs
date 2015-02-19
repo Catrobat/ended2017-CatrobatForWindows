@@ -44,6 +44,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         static bool isManipulationEventLoaded;
         static int zoomCounter;
         Point start_point = new Point();
+
         public PaintingAreaView()
         {
             this.InitializeComponent();
@@ -716,25 +717,34 @@ namespace Catrobat.Paint.WindowsPhone.View
                 stampCopyIcon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_stamp_copy.png", UriKind.Absolute);
                 app_btnStampCopy.Icon = stampCopyIcon;
 
+                app_btnStampCopy.Name = "appBtnStampCopy";
+                app_btnStampPaste.Name = "appBtnStampPaste";
+
                 BitmapIcon stampClearIcon = new BitmapIcon();
                 stampClearIcon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_stamp_clear.png", UriKind.Absolute);
                 app_btnStampClear.Icon = stampClearIcon;
 
                 BitmapIcon stampPasteIcon = new BitmapIcon();
-                stampPasteIcon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_stamp_paste.png", UriKind.Absolute);
+                stampPasteIcon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_stamp_paste.png", UriKind.Absolute);
                 app_btnStampPaste.Icon = stampPasteIcon;
 
                 BitmapIcon resetSelectionIcon = new BitmapIcon();
                 resetSelectionIcon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
                 app_btnResetSelection.Icon = resetSelectionIcon;
 
+                app_btnStampClear.Click += app_btnStampClear_Click;
+                app_btnStampCopy.Click += app_btnStampCopy_Click;
+                app_btnStampPaste.Click += app_btnStampPaste_Click;
+                app_btnResetSelection.Click += app_btn_reset_Click;
                 // TODO: Sinnvolle Beschreibungen festlegen.
                 // app_btnClearStampedSelection.Label = "";
                 // app_btnResetSelection.Label = "";
                 // app_btnStampSelection.Label = "";
                 // app_btnStamp.Label = "";
 
+                app_btnStampPaste.Visibility = Visibility.Collapsed;
                 cmdBar.PrimaryCommands.Add(app_btnStampCopy);
+                cmdBar.PrimaryCommands.Add(app_btnStampPaste);
                 cmdBar.PrimaryCommands.Add(app_btnStampClear);
                 cmdBar.PrimaryCommands.Add(app_btnResetSelection);
             }
@@ -790,6 +800,50 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             BottomAppBar = cmdBar;
             current_appbar = type;
+        }
+
+        void app_btnStampPaste_Click(object sender, RoutedEventArgs e)
+        {
+            ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).stampPaste();
+        }
+
+        void app_btnStampClear_Click(object sender, RoutedEventArgs e)
+        {
+            CommandBar cmdBar = (CommandBar)BottomAppBar;
+
+            for (int appBarButtonIndex = 0; appBarButtonIndex < cmdBar.PrimaryCommands.Count; appBarButtonIndex++)
+            {
+                AppBarButton currentAppBarButton = ((AppBarButton)(cmdBar.PrimaryCommands[appBarButtonIndex]));
+                if (currentAppBarButton.Name == "appBtnStampCopy")
+                {
+                    currentAppBarButton.Visibility = Visibility.Visible;
+                }
+                else if (currentAppBarButton.Name == "appBtnStampPaste")
+                {
+                    currentAppBarButton.Visibility = Visibility.Collapsed;
+                }
+            }
+
+            ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).stampClear();
+        }
+
+        void app_btnStampCopy_Click(object sender, RoutedEventArgs e)
+        {
+            ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).stampCopy();
+            CommandBar cmdBar = (CommandBar)BottomAppBar;
+            
+            for(int appBarButtonIndex = 0; appBarButtonIndex < cmdBar.PrimaryCommands.Count; appBarButtonIndex++)
+            {
+                AppBarButton currentAppBarButton = ((AppBarButton)(cmdBar.PrimaryCommands[appBarButtonIndex]));
+                if (currentAppBarButton.Name == "appBtnStampCopy")
+                {
+                    currentAppBarButton.Visibility = Visibility.Collapsed;
+                }
+                else if(currentAppBarButton.Name == "appBtnStampPaste")
+                {
+                    currentAppBarButton.Visibility = Visibility.Visible;
+                }
+            }
         }
 
         void app_btnMoreInfo_Click(object sender, RoutedEventArgs e)
@@ -864,6 +918,8 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Collapsed;
             this.BottomAppBar.Visibility = Visibility.Collapsed;
+            GrdThicknessControlVisibility = Visibility.Collapsed;
+            GridUserControlRectEll.Visibility = Visibility.Collapsed;
 
             TransformGroup _transforms = null;
             if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform.GetType() == typeof(TransformGroup))
@@ -1477,6 +1533,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().InfoBoxActionControl.Visibility = visibility;
             PocketPaintApplication.GetInstance().RectangleSelectionControl.Visibility = visibility;
             PocketPaintApplication.GetInstance().CropControl.Visibility = visibility;
+            PocketPaintApplication.GetInstance().StampControl.Visibility = visibility;
 
             // TODO; Die folgenden Code-zeilen gehören in eine eigene Funktion ausgelagert.
             //PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;

@@ -252,6 +252,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                     PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = wbCroppedBitmap.PixelWidth;
                     PocketPaintApplication.GetInstance().CropControl.setCropSelection();
 
+                    PocketPaintApplication.GetInstance().StampControl.setSourceImageStamp(wbCroppedBitmap);
                     return wbCroppedBitmap;
                 }
             }
