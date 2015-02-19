@@ -27,16 +27,16 @@
           Margin="0,0,0,60">
       <!-- Vertical line -->
       <Line Stroke="Red" 
-            StrokeThickness="3"
+            StrokeThickness="2"
             Stretch="Fill"
-            Margin="0,-1.5,0,-1.5"
+            Margin="0,-1,0,-1"
             Y1="0"
             Y2="1" />
       <!-- Horizontal line -->
       <Line Stroke="Red" 
-            StrokeThickness="3"
+            StrokeThickness="2"
             Stretch="Fill"
-            Margin="-1.5,0,-1.5,0"
+            Margin="-1,0,-1,0"
             X1="0"
             X2="1" />
 
@@ -50,7 +50,7 @@
                    VerticalAlignment="Center"
                    Grid.Column="1"           
                    Text="0" 
-                   FontSize="16"
+                   FontSize="14"
                    FontWeight="Bold"
                    Foreground="Red" 
                    Margin="5,25,0,0" />
@@ -59,7 +59,7 @@
                    VerticalAlignment="Center"
                    Grid.Column="1"
                    Text="000" 
-                   FontSize="16"
+                   FontSize="14"
                    FontWeight="Bold"
                    Foreground="Red" 
                    Margin="0,25,5,0" />
@@ -67,7 +67,7 @@
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Center"
                    Text="-000" 
-                   FontSize="16"
+                   FontSize="14"
                    FontWeight="Bold"
                    Foreground="Red" 
                    Margin="5,25,0,0" />
@@ -76,7 +76,7 @@
                    VerticalAlignment="Top"
                    Grid.Column="1"
                    Text="000" 
-                   FontSize="16"
+                   FontSize="14"
                    FontWeight="Bold"
                    Foreground="Red" 
                    Margin="5,2,0,0" />
@@ -85,7 +85,7 @@
                    VerticalAlignment="Bottom"
                    Grid.Column="1"
                    Text="-000" 
-                   FontSize="16"
+                   FontSize="14"
                    FontWeight="Bold"
                    Foreground="Red" 
                    Margin="5,0,0,0" />
@@ -120,18 +120,4 @@
       </CommandBar.SecondaryCommands>
     </CommandBar>
   </Page.BottomAppBar>
-  
-  <!--<Page.BottomAppBar>
-    <CommandBar  >
-      <CommandBar.PrimaryCommands>
-        <AppBarButton x:Name="Restart" Label="Restart" Icon="Refresh" Click="OnRestartButtonClicked"/>
-        <AppBarButton x:Name="Play" Label="Pause" Icon="Play" Click="OnPlayButtonClicked"/>
-        <AppBarButton x:Name="Thumbnail" Label="Set Thumbnail" Icon="Camera" Click="OnThumbnailButtonClicked"/>
-        <AppBarButton x:Name="EnableAxes"  Label="Enable Axes"  Icon="Setting"  Click="OnEnableAxisButtonClicked"/>
-      </CommandBar.PrimaryCommands>
-      <CommandBar.SecondaryCommands>
-        <AppBarButton x:Name="Screenshot" Label="Take Screenshot" Click="OnScreenshotButtonClicked"/>
-      </CommandBar.SecondaryCommands>
-    </CommandBar>-->
-  <!--</Page.BottomAppBar>-->
 </views:ViewPageBase>
