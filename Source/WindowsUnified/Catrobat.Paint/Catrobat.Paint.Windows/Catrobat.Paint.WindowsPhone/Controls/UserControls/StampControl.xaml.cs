@@ -36,7 +36,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         double limitBottom = 0.0;
         double limitTop = 0.0;
 
-        double scaleValue = 0.0;
+        double scaleValueWorkingSpace = 0.0;
 
         PixelData.PixelData pixelData = new PixelData.PixelData();
 
@@ -55,31 +55,146 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             setSourceImageStamp(null);
         }
 
-
-        public void setControlPosition()
+        private Point getExtremeLeftAndTopCoordinate(double initLeft, double initTop,
+                                             ref bool foundLeftPixel, ref int xCoordinateOfExtremeTop)
         {
-            GridMain.Margin = new Thickness(0.0, 0.0, 0.0, 0.0);
+            Point extremePoint = new Point(initLeft, initTop);
+            foundLeftPixel = false;
+
+            double paintingAreaCanvasHeight = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height;
+            double paintingAreaCanvasWidth = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width;
+
+            // left pixel
+            for (int indexWidth = 0; indexWidth < (int)paintingAreaCanvasWidth; indexWidth++)
+                for (int indexHeight = 0; indexHeight < (int)paintingAreaCanvasHeight; indexHeight++)
+                {
+                    if (pixelData.getPixelAlphaFromCanvas(indexWidth, indexHeight) != 0x00)
+                    {
+                        extremePoint.X = indexWidth;
+                        foundLeftPixel = true;
+
+                        // found extreme point --> set break conditions
+                        indexWidth = (int)paintingAreaCanvasWidth;
+                        indexHeight = (int)paintingAreaCanvasHeight;
+                    }
+                }
+
+            // top pixel
+            if (foundLeftPixel == true)
+                for (int indexHeight = 0; indexHeight < (int)paintingAreaCanvasHeight; indexHeight++)
+                    for (int indexWidth = (int)paintingAreaCanvasWidth - 1; indexWidth >= (int)extremePoint.X; indexWidth--)
+                    {
+                        if (pixelData.getPixelAlphaFromCanvas(indexWidth, indexHeight) != 0x00)
+                        {
+                            extremePoint.Y = indexHeight;
+                            xCoordinateOfExtremeTop = indexWidth;
+
+                            // found extreme point --> set break conditions
+                            indexHeight = (int)paintingAreaCanvasHeight;
+                            indexWidth = 0;
+                        }
+                    }
+
+            return extremePoint;
+        }
+
+        private Point getExtremeRightAndBottomCoordinate(double initRight, double initBottom,
+                                                         Point extremeLeftAndTopCoordinate, bool foundLeftPixel,
+                                                         int xCoordinateOfExtremeTop)
+        {
+            double paintingAreaCanvasHeight = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height;
+            double paintingAreaCanvasWidth = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width;
+
+            Point extremePoint = new Point(initRight, initBottom);
+
+            if (foundLeftPixel == true)
+            {
+                // right pixel
+                int yCoordinateOfExtremeRight = 0;
+                for (int indexWidth = (int)paintingAreaCanvasWidth - 1; indexWidth >= xCoordinateOfExtremeTop; indexWidth--)
+                    for (int indexHeight = (int)paintingAreaCanvasHeight - 1; indexHeight >= extremeLeftAndTopCoordinate.Y; indexHeight--)
+                    {
+                        if (pixelData.getPixelAlphaFromCanvas(indexWidth, indexHeight) != 0x00)
+                        {
+                            extremePoint.X = indexWidth;
+                            yCoordinateOfExtremeRight = indexHeight;
+
+                            // found extreme point --> set break conditions
+                            indexWidth = 0;
+                            indexHeight = 0;
+
+                        }
+                    }
+
+                // bottom pixel
+                for (int indexHeight = (int)paintingAreaCanvasHeight - 1; indexHeight >= yCoordinateOfExtremeRight; indexHeight--)
+                    for (int indexWidth = (int)extremePoint.X; indexWidth >= (int)extremeLeftAndTopCoordinate.X; indexWidth--)
+                    {
+                        if (pixelData.getPixelAlphaFromCanvas(indexWidth, indexHeight) != 0x00)
+                        {
+                            extremePoint.Y = indexHeight;
+
+                            // found extreme point --> set break conditions
+                            indexHeight = 0;
+                            indexWidth = 0;
+                        }
+                    }
+            }
+
+            return extremePoint;
+        }
+
+
+        async public void setControlPosition()
+        {
+            await pixelData.preparePaintingAreaCanvasPixel();
+            GridMain.Margin = new Thickness(-5.0, -5.0, 0.0, 0.0);
             _transformGridMain.Children.Clear();
+
             TransformGroup paintingAreaCheckeredGridTransformGroup = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
-            double scaleValue = paintingAreaCheckeredGridTransformGroup.Value.M11;
+            scaleValueWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.M11;
+
             double offsetSize = 10.0;
             double paintingAreaCheckeredGridHeight = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Height;
             double paintingAreaCheckeredGridWidth = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Width;
             
-            double heightCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * paintingAreaCheckeredGridHeight + offsetSize;
-            double widthCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * paintingAreaCheckeredGridWidth + offsetSize;
-
-            setControlSize(heightCropControl, widthCropControl);
+            double heightCropControl = 0.0;
+            double widthCropControl = 0.0;
             double offsetMargin = 5.0;
+
             TranslateTransform moveCropControl = new TranslateTransform();
-            moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin;
-            moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
+            if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count != 0)
+            {
+                Point extremeLeftAndTopCoordinate = new Point(0.0, 0.0);
+                Point extremeRightAndBottomCoordinate = new Point(paintingAreaCheckeredGridWidth - 1.0, paintingAreaCheckeredGridHeight - 1.0);
+                bool foundLeftPixel = false;
+                int xCoordinateOfExtremeTop = 0;
+                extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y,
+                                                                             ref foundLeftPixel, ref xCoordinateOfExtremeTop);
+                extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
+                                                                                     extremeLeftAndTopCoordinate, foundLeftPixel, xCoordinateOfExtremeTop);
+                heightCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValueWorkingSpace + offsetSize;
+                widthCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValueWorkingSpace + offsetSize;
+                setControlSize(heightCropControl, widthCropControl);
+
+                moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + (extremeLeftAndTopCoordinate.X * scaleValueWorkingSpace);
+                moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + (extremeLeftAndTopCoordinate.Y * scaleValueWorkingSpace);
+            }
+            else
+            {
+                heightCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * paintingAreaCheckeredGridHeight + offsetSize;
+                widthCropControl = paintingAreaCheckeredGridTransformGroup.Value.M11 * paintingAreaCheckeredGridWidth + offsetSize;
+
+                moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin;
+                moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
+                setControlSize(heightCropControl, widthCropControl);
+            }
             _transformGridMain.Children.Add(moveCropControl);
 
             limitLeft = paintingAreaCheckeredGridTransformGroup.Value.OffsetX - offsetMargin;
             limitTop = paintingAreaCheckeredGridTransformGroup.Value.OffsetY - offsetMargin;
-            limitBottom = limitTop + (paintingAreaCheckeredGridHeight * scaleValue) + offsetSize;
-            limitRight = limitLeft + (paintingAreaCheckeredGridWidth * scaleValue) + offsetSize;
+            limitBottom = limitTop + (paintingAreaCheckeredGridHeight * scaleValueWorkingSpace) + offsetSize;
+            limitRight = limitLeft + (paintingAreaCheckeredGridWidth * scaleValueWorkingSpace) + offsetSize;
 
             leftTopNullPointStampSelection = new Point(_transformGridMain.Value.OffsetX + 5.0, _transformGridMain.Value.OffsetY + 5.0);
         }
