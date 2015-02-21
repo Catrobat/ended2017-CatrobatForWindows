@@ -38,7 +38,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             int height = PocketPaintApplication.GetInstance().CropControl.getRectangleCropSelectionHeight();
             int width = PocketPaintApplication.GetInstance().CropControl.getRectangleCropSelectionWidth();
             Point leftTopRectangleCropSelection = PocketPaintApplication.GetInstance().CropControl.getLeftTopCoordinateRectangleCropSelection();
-            await CropImage((int)leftTopRectangleCropSelection.X, (int)leftTopRectangleCropSelection.Y, width, height);
+            CropImage((int)leftTopRectangleCropSelection.X, (int)leftTopRectangleCropSelection.Y, width, height);
         }
 
         public override void Draw(object o)
@@ -52,7 +52,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             PocketPaintApplication.GetInstance().CropControl.setIsModifiedRectangleMovement = false;
         }
 
-        async public static Task<WriteableBitmap> CropImage(int xOffset, int yOffset,
+        async public static void CropImage(int xOffset, int yOffset,
                                             int width, int height)
         {
             if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count != 0)
@@ -75,11 +75,15 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                         encoder.BitmapTransform.ScaledHeight = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Height;
                         encoder.BitmapTransform.ScaledWidth = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Width;
 
+                        uint canvasHeight = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height;
+                        uint canvasWidth = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width;
                         BitmapBounds bounds = new BitmapBounds();
                         bounds.Height = (uint)height;
                         bounds.Width = (uint)width;
-                        bounds.X = (uint)xOffset;
-                        bounds.Y = (uint)yOffset;
+                        uint uwidth = (uint)width;
+                        bounds.X = ((uint)width + (uint)xOffset) > canvasWidth ? canvasWidth - uwidth : (uint)xOffset;
+                        uint uheight = (uint)height;
+                        bounds.Y = ((uint)height + (uint)yOffset) > canvasHeight ? canvasHeight - uheight : (uint)yOffset;
                         encoder.BitmapTransform.Bounds = bounds;
 
 
@@ -90,7 +94,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                         }
                         catch (Exception ex)
                         {
-                            string s = ex.ToString();
+                            CropImage(xOffset, yOffset, width, height);
                         }
                     }
                     //render the stream to the screen
@@ -110,10 +114,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                     PocketPaintApplication.GetInstance().CropControl.setCropSelection();
 
                     PocketPaintApplication.GetInstance().StampControl.setSourceImageStamp(wbCroppedBitmap);
-                    return wbCroppedBitmap;
                 }
             }
-            return null;
         }
 
         private static async Task EncodeWriteableBitmap(WriteableBitmap bmp, IRandomAccessStream writeStream, Guid encoderId)
