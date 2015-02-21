@@ -296,8 +296,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             currentPaintApplication.ProgressRing.IsActive = true;
             await pixelData.preparePaintingAreaCanvasPixel();
             TransformGroup paintingAreaCheckeredGridTransformGroup = currentPaintApplication.PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
-            leftTopNullPointCropSelection = new Point(paintingAreaCheckeredGridTransformGroup.Value.OffsetX,
-                                                      paintingAreaCheckeredGridTransformGroup.Value.OffsetY);
 
             rectRectangleCropSelection.Stroke = currentPaintApplication.PaintingAreaCanvas.Children.Count == 0 ? new SolidColorBrush(Colors.Transparent) : new SolidColorBrush(Colors.CornflowerBlue);
             bool isWorkingSpaceNotRotated = paintingAreaCheckeredGridTransformGroup.Value.M11 > 0.0;
@@ -362,7 +360,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
                 }
                 setLimitsForMovableControlBorder(0);
-                setLeftTopNullPointCropSelection(_transformGridMain.Value.OffsetX, _transformGridMain.Value.OffsetY);
+                //setLeftTopNullPointCropSelection(_transformGridMain.Value.OffsetX, _transformGridMain.Value.OffsetY);
+                setLeftTopNullPointCropSelection(paintingAreaCheckeredGridTransformGroup.Value.OffsetX,
+                                             paintingAreaCheckeredGridTransformGroup.Value.OffsetY);
             }
             else if(isWorkingSpaceRotated180Degree)
             {
