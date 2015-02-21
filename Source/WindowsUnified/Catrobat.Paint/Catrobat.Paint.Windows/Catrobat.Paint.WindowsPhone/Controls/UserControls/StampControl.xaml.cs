@@ -148,7 +148,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         async public void setControlPosition()
         {
             await pixelData.preparePaintingAreaCanvasPixel();
-            GridMain.Margin = new Thickness(-5.0, -5.0, 0.0, 0.0);
+            GridMain.Margin = new Thickness(0.0, 0.0, 0.0, 0.0);
             _transformGridMain.Children.Clear();
 
             TransformGroup paintingAreaCheckeredGridTransformGroup = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
@@ -177,8 +177,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 widthCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValueWorkingSpace + offsetSize;
                 setControlSize(heightCropControl, widthCropControl);
 
-                moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + (extremeLeftAndTopCoordinate.X * scaleValueWorkingSpace);
-                moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + (extremeLeftAndTopCoordinate.Y * scaleValueWorkingSpace);
+                moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + (extremeLeftAndTopCoordinate.X * scaleValueWorkingSpace - offsetMargin);
+                moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + (extremeLeftAndTopCoordinate.Y * scaleValueWorkingSpace - offsetMargin);
             }
             else
             {
@@ -196,15 +196,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             limitBottom = limitTop + (paintingAreaCheckeredGridHeight * scaleValueWorkingSpace) + offsetSize;
             limitRight = limitLeft + (paintingAreaCheckeredGridWidth * scaleValueWorkingSpace) + offsetSize;
 
-            leftTopNullPointStampSelection = new Point(_transformGridMain.Value.OffsetX + 5.0, _transformGridMain.Value.OffsetY + 5.0);
+            leftTopNullPointStampSelection = new Point(_transformGridMain.Value.OffsetX, _transformGridMain.Value.OffsetY);
         }
 
         public void setControlSize(double height, double width)
         {
             GridMain.Height = height;
             GridMain.Width = width;
-            imgStampedImage.Height = height;
-            imgStampedImage.Width = width;
+            imgStampedImage.Height = height - 10.0;
+            imgStampedImage.Width = width - 10.0;
             rectRectangleCropSelection.Height = height;
             rectRectangleCropSelection.Width = width;
             this.Height = height;
@@ -633,8 +633,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public Point getLeftTopPointOfStampedSelection()
         {
-            return new Point((Math.Ceiling(_transformGridMain.Value.OffsetX + 5.0 + GridMain.Margin.Left - leftTopNullPointStampSelection.X) / 0.75),
-                              Math.Ceiling((_transformGridMain.Value.OffsetY + 5.0 + GridMain.Margin.Top - leftTopNullPointStampSelection.Y) / 0.75));
+            return new Point((Math.Ceiling(_transformGridMain.Value.OffsetX + GridMain.Margin.Left -48.0 +5.0) / 0.75),
+                              Math.Ceiling((_transformGridMain.Value.OffsetY + GridMain.Margin.Top - 69.0 +5.0) / 0.75));
         }
 
         public double getHeightOfStampedSelection()

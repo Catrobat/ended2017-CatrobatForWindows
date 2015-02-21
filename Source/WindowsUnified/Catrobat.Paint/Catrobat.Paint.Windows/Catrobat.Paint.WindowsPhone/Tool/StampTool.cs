@@ -78,8 +78,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                     BitmapBounds bounds = new BitmapBounds();
                     bounds.Height = (uint)heightStampControl;
                     bounds.Width = (uint)widthStampControl;
-                    bounds.X = (uint)xOffsetStampControl;
-                    bounds.Y = (uint)yOffsetStampControl;
+                    bounds.X = (uint)(xOffsetStampControl);
+                    bounds.Y = (uint)(yOffsetStampControl);
                     encoder.BitmapTransform.Bounds = bounds;
 
                     // write out to the stream
@@ -115,6 +115,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             double yOffsetStampControl = leftTopPointStampSelection.Y;
 
             Image img = new Image();
+            
             img.Source = PocketPaintApplication.GetInstance().StampControl.getImageSourceStampedImage();
 
             WriteableBitmap originalWb = (WriteableBitmap)img.Source;
