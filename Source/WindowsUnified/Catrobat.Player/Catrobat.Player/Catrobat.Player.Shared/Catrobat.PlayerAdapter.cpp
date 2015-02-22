@@ -247,9 +247,9 @@ namespace Catrobat_Player
 
     //----------------------------------------------------------------------------------------------
 
-    void Catrobat_PlayerAdapter::AxesButtonClicked()
+    void Catrobat_PlayerAdapter::AxesButtonClicked(bool showAxes, Platform::String^ label)
     {
-        m_main->AxesButtonClicked();
+        m_main->AxesButtonClicked(showAxes, label);
     }
 
     //--------------------------------------------------------------------------

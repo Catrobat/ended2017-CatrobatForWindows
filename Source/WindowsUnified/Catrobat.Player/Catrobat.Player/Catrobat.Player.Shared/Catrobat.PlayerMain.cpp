@@ -242,17 +242,17 @@ namespace Catrobat_Player
 
     //----------------------------------------------------------------------------------------------
 
-    void Catrobat_PlayerMain::AxesButtonClicked()
+    void Catrobat_PlayerMain::AxesButtonClicked(bool showAxes, Platform::String^ label)
     {
-        if (m_gridAxes->Visibility == Visibility::Visible)
+        if (showAxes == true)
         {
-            m_gridAxes->Visibility = Visibility::Collapsed;
-            m_btnAxes->Label = "axes on";
+            m_gridAxes->Visibility = Visibility::Visible;
+            m_btnAxes->Label = label;
         }
         else
         {
-            m_gridAxes->Visibility = Visibility::Visible;
-            m_btnAxes->Label = "axes off";
+            m_gridAxes->Visibility = Visibility::Collapsed;
+            m_btnAxes->Label = label;
         }
     }
 

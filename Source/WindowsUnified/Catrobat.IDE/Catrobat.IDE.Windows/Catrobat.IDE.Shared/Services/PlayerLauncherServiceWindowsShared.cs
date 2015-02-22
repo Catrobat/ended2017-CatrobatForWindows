@@ -165,11 +165,11 @@ namespace Catrobat.IDE.WindowsShared.Services
             }
         }
 
-        public void AxesAction()
+        public void AxesAction(bool showAxes, string label)
         {
             if (PlayerObject != null)
             {
-                PlayerObject.AxesButtonClicked();
+                PlayerObject.AxesButtonClicked(showAxes, label);
             }
         }
 

@@ -64,7 +64,14 @@ namespace Catrobat.Player.StandAlone
         }
         private void OnAxesButtonClicked(object sender, RoutedEventArgs e)
         {
-            playerObject.AxesButtonClicked();
+            if (GridAxes.Visibility == Visibility.Visible)
+            {
+                playerObject.AxesButtonClicked(false, "axes on");
+            }
+            else
+            {
+                playerObject.AxesButtonClicked(true, "axes off");
+            }
         }
         private void OnScreenshotButtonClicked(object sender, RoutedEventArgs e)
         {

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Input;
-
+using System.Collections.Generic;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-
 using Catrobat.IDE.Core.Services;
 
 
@@ -16,6 +14,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private string _programName = "";
         private bool _isLaunchFromTile = false;
+        private bool _axesVisible = false;
 
         #endregion
 
@@ -38,6 +37,16 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             {
                 _isLaunchFromTile = value;
                 RaisePropertyChanged(() => IsLaunchFromTile);
+            }
+        }
+
+        public bool AxesVisible
+        {
+            get { return _axesVisible; }
+            set
+            {
+                _axesVisible = value;
+                RaisePropertyChanged(() => AxesVisible);
             }
         }
 
@@ -72,7 +81,18 @@ namespace Catrobat.IDE.Core.ViewModels.Main
 
         private void AxesAction()
         {
-            ServiceLocator.PlayerLauncherService.AxesAction();
+            if (_axesVisible)
+            {
+                ServiceLocator.PlayerLauncherService.AxesAction(false, 
+                    Resources.Localization.AppResources.Player_AppBarButton_AxesOn);
+                _axesVisible = false;
+            }
+            else
+            {
+                ServiceLocator.PlayerLauncherService.AxesAction(true,
+                      Resources.Localization.AppResources.Player_AppBarButton_AxesOff);
+                _axesVisible = true;
+            }
         }
 
         private void TakeScreenshotAction()

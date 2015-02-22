@@ -1360,6 +1360,6 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Screenshot erstellen</value>
   </data>
   <data name="Player_AppBarButton_Thumbnail" xml:space="preserve">
-    <value>Miniaturbild</value>
+    <value>Minibild</value>
   </data>
 </root>
