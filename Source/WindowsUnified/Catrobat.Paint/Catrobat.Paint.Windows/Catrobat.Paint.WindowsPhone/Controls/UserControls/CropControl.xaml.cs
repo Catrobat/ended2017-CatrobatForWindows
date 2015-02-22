@@ -214,7 +214,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                         indexHeight = (int)paintingAreaCanvasHeight;
                     }
             }
-
             // top pixel
             if (foundLeftPixel == true)
                 for (int indexHeight = 0; indexHeight < (int)paintingAreaCanvasHeight; indexHeight++)
@@ -230,7 +229,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                             indexWidth = 0;
                         }
                     }
-
             return extremePoint;
         }
 
@@ -258,10 +256,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                             // found extreme point --> set break conditions
                             indexWidth = 0;
                             indexHeight = 0;
-
                         }
                 }
-
                 // bottom pixel
                 for (int indexHeight = (int)paintingAreaCanvasHeight - 1; indexHeight >= yCoordinateOfExtremeRight; indexHeight--)
                     for (int indexWidth = (int)extremePoint.X; indexWidth >= (int)extremeLeftAndTopCoordinate.X; indexWidth--)
@@ -276,11 +272,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                         }
                     }
             }
-
             return extremePoint;
         }
 
-        private void _calculateCropControlPositionWithoutRotating(double borderWidthOfCropControl, double scaleValueWorkingSpace, bool isWorkingSpaceFlippedHorizontally, bool isWorkingSpaceFlippedVertically)
+        private void _calculateAndSetCropControlPositionWithoutRotating(double doubleBorderWidthValue, double scaleValueWorkingSpace, bool isWorkingSpaceFlippedHorizontally, bool isWorkingSpaceFlippedVertically)
         {
             PocketPaintApplication currentPaintApplication = PocketPaintApplication.GetInstance();
             if (currentPaintApplication == null)
@@ -306,8 +301,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
                                                                                      extremeLeftAndTopCoordinate, foundLeftPixel, xCoordinateOfExtremeTop);
 
-                heightCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValueWorkingSpace + borderWidthOfCropControl;
-                widthCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValueWorkingSpace + borderWidthOfCropControl;
+                heightCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValueWorkingSpace + doubleBorderWidthValue;
+                widthCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValueWorkingSpace + doubleBorderWidthValue;
 
                 if (isWorkingSpaceFlippedHorizontally)
                 {
@@ -329,8 +324,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             else
             {
-                heightCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight + borderWidthOfCropControl;
-                widthCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth + borderWidthOfCropControl;
+                heightCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight + doubleBorderWidthValue;
+                widthCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth + doubleBorderWidthValue;
 
                 moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
                 moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
@@ -338,6 +333,208 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             setLimitsForMovableControlBorder(0);
             setLeftTopNullPointCropSelection(paintingAreaCheckeredGridTransformGroup.Value.OffsetX,
                                          paintingAreaCheckeredGridTransformGroup.Value.OffsetY);
+            setCropControlPosition(heightCropControl, widthCropControl, moveCropControl);
+        }
+
+        private void _calculateAndSetCropControlPositionWith90DegreeRotation(double doubleBorderWidthValue, double scaleValueWorkingSpace, bool isWorkingSpaceFlippedHorizontally, bool isWorkingSpaceFlippedVertically)
+        {
+            PocketPaintApplication currentPaintApplication = PocketPaintApplication.GetInstance();
+            if (currentPaintApplication == null)
+            {
+                return;
+            }
+            TranslateTransform moveCropControl = new TranslateTransform();
+            TransformGroup transform = (currentPaintApplication.PaintingAreaCanvas.RenderTransform as TransformGroup);
+            TransformGroup paintingAreaCheckeredGridTransformGroup = currentPaintApplication.PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
+            double paintingAreaCheckeredGridHeight = currentPaintApplication.PaintingAreaCheckeredGrid.Height;
+            double paintingAreaCheckeredGridWidth = currentPaintApplication.PaintingAreaCheckeredGrid.Width;
+            Point extremeLeftAndTopCoordinate = new Point(paintingAreaCheckeredGridWidth - 1.0, paintingAreaCheckeredGridHeight - 1.0);
+            Point extremeRightAndBottomCoordinate = new Point(0.0, 0.0);
+
+            if (currentPaintApplication.PaintingAreaCanvas.Children.Count != 0)
+            {
+                bool foundLeftPixel = false;
+                int xCoordinateOfExtremeTop = 0;
+                extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y,
+                                                                             ref foundLeftPixel, ref xCoordinateOfExtremeTop);
+                extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
+                                                                                     extremeLeftAndTopCoordinate, foundLeftPixel, xCoordinateOfExtremeTop);
+
+                heightCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValueWorkingSpace + doubleBorderWidthValue;
+                widthCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValueWorkingSpace + doubleBorderWidthValue;
+
+                double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
+                double workingSpaceWidth = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight;
+                double positionXRightTopCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
+                double positionXLeftTopCornerWorkingSpace = positionXRightTopCornerWorkingSpace - workingSpaceWidth;
+
+                if (isWorkingSpaceFlippedHorizontally)
+                {
+                    moveCropControl.X = positionXLeftTopCornerWorkingSpace + (extremeLeftAndTopCoordinate.Y * scaleValueWorkingSpace);
+                }
+                else
+                {
+                    moveCropControl.X = positionXLeftTopCornerWorkingSpace + ((paintingAreaCheckeredGridHeight - extremeRightAndBottomCoordinate.Y) * scaleValueWorkingSpace);
+                }
+
+                if (isWorkingSpaceFlippedVertically)
+                {
+                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + ((paintingAreaCheckeredGridWidth - extremeRightAndBottomCoordinate.X) * scaleValueWorkingSpace);
+                }
+                else
+                {
+                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + (extremeLeftAndTopCoordinate.X * scaleValueWorkingSpace);
+                }
+            }
+            else
+            {
+                heightCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth + doubleBorderWidthValue;
+                widthCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight + doubleBorderWidthValue;
+                double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
+                double workingSpaceWidth = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight;
+                double positionXRightTopCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
+                double positionXLeftTopCornerWorkingSpace = positionXRightTopCornerWorkingSpace - workingSpaceWidth;
+
+                moveCropControl.X = positionXLeftTopCornerWorkingSpace;
+                moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
+            }
+            setLimitsForMovableControlBorder(90);
+            setCropControlPosition(heightCropControl, widthCropControl, moveCropControl);
+        }
+
+        private void _calculateAndSetCropControlPositionWith180DegreeRotation(double doubleBorderWidthValue, double scaleValueWorkingSpace, bool isWorkingSpaceFlippedHorizontally, bool isWorkingSpaceFlippedVertically)
+        {
+            PocketPaintApplication currentPaintApplication = PocketPaintApplication.GetInstance();
+            if (currentPaintApplication == null)
+            {
+                return;
+            }
+            TranslateTransform moveCropControl = new TranslateTransform();
+            TransformGroup transform = (currentPaintApplication.PaintingAreaCanvas.RenderTransform as TransformGroup);
+            TransformGroup paintingAreaCheckeredGridTransformGroup = currentPaintApplication.PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
+            double paintingAreaCheckeredGridHeight = currentPaintApplication.PaintingAreaCheckeredGrid.Height;
+            double paintingAreaCheckeredGridWidth = currentPaintApplication.PaintingAreaCheckeredGrid.Width;
+
+            Point extremeLeftAndTopCoordinate = new Point(paintingAreaCheckeredGridWidth - 1.0, 0.0);
+            Point extremeRightAndBottomCoordinate = new Point(0.0, paintingAreaCheckeredGridHeight - 1.0);
+
+            if (currentPaintApplication.PaintingAreaCanvas.Children.Count != 0)
+            {
+                bool foundLeftPixel = false;
+                int xCoordinateOfExtremeTop = 0;
+                extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y,
+                                                                             ref foundLeftPixel, ref xCoordinateOfExtremeTop);
+                extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
+                                                                                     extremeLeftAndTopCoordinate, foundLeftPixel, xCoordinateOfExtremeTop);
+
+                heightCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValueWorkingSpace + doubleBorderWidthValue;
+                widthCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValueWorkingSpace + doubleBorderWidthValue;
+
+                double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight;
+                double workingSpaceWidth = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
+                double positionXRightBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
+                double positionXLeftBottomCornerWorkingSpace = positionXRightBottomCornerWorkingSpace - workingSpaceWidth;
+                double positionYRigthBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
+                double positionYRightTopCornerWorkingSpace = positionYRigthBottomCornerWorkingSpace - workingSpaceHeight;
+
+                if (isWorkingSpaceFlippedHorizontally)
+                {
+                    moveCropControl.X = positionXLeftBottomCornerWorkingSpace + (extremeLeftAndTopCoordinate.X * scaleValueWorkingSpace);
+                }
+                else
+                {
+                    moveCropControl.X = positionXLeftBottomCornerWorkingSpace + ((paintingAreaCheckeredGridWidth - extremeRightAndBottomCoordinate.X) * scaleValueWorkingSpace);
+                }
+
+                if (isWorkingSpaceFlippedVertically)
+                {
+                    moveCropControl.Y = positionYRightTopCornerWorkingSpace + (extremeLeftAndTopCoordinate.Y * scaleValueWorkingSpace);
+                }
+                else
+                {
+                    moveCropControl.Y = positionYRightTopCornerWorkingSpace + ((paintingAreaCheckeredGridHeight - extremeRightAndBottomCoordinate.Y) * scaleValueWorkingSpace);
+                }
+            }
+            else
+            {
+                heightCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight + doubleBorderWidthValue;
+                widthCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth + doubleBorderWidthValue;
+                double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight;
+                double workingSpaceWidth = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
+                double positionXRightBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
+                double positionXLeftBottomCornerWorkingSpace = positionXRightBottomCornerWorkingSpace - workingSpaceWidth;
+                double positionYRigthBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
+                double positionYRightTopCornerWorkingSpace = positionYRigthBottomCornerWorkingSpace - workingSpaceHeight;
+                moveCropControl.X = positionXLeftBottomCornerWorkingSpace;
+                moveCropControl.Y = positionYRightTopCornerWorkingSpace;
+            }
+            setLimitsForMovableControlBorder(180);
+            setCropControlPosition(heightCropControl, widthCropControl, moveCropControl);
+        }
+
+        private void _calculateAndSetCropControlPositionWith270DegreeRotation(double doubleBorderWidthValue, double scaleValueWorkingSpace, bool isWorkingSpaceFlippedHorizontally, bool isWorkingSpaceFlippedVertically)
+        {
+            PocketPaintApplication currentPaintApplication = PocketPaintApplication.GetInstance();
+            if (currentPaintApplication == null)
+            {
+                return;
+            }
+            TranslateTransform moveCropControl = new TranslateTransform();
+            TransformGroup transform = (currentPaintApplication.PaintingAreaCanvas.RenderTransform as TransformGroup);
+            TransformGroup paintingAreaCheckeredGridTransformGroup = currentPaintApplication.PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
+            double paintingAreaCheckeredGridHeight = currentPaintApplication.PaintingAreaCheckeredGrid.Height;
+            double paintingAreaCheckeredGridWidth = currentPaintApplication.PaintingAreaCheckeredGrid.Width;
+
+            Point extremeLeftAndTopCoordinate = new Point(paintingAreaCheckeredGridWidth - 1.0, paintingAreaCheckeredGridHeight - 1.0);
+            Point extremeRightAndBottomCoordinate = new Point(0.0, 0.0);
+
+            if (currentPaintApplication.PaintingAreaCanvas.Children.Count != 0)
+            {
+                bool foundLeftPixel = false;
+                int xCoordinateOfExtremeTop = 0;
+                extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y,
+                                                                             ref foundLeftPixel, ref xCoordinateOfExtremeTop);
+                extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
+                                                                                     extremeLeftAndTopCoordinate, foundLeftPixel, xCoordinateOfExtremeTop);
+
+                heightCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValueWorkingSpace + doubleBorderWidthValue;
+                widthCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValueWorkingSpace + doubleBorderWidthValue;
+                double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
+                double workingSpaceWidth = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight;
+                double positionYLeftBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
+                double positionYLeftTopCornerWorkingSpace = positionYLeftBottomCornerWorkingSpace - workingSpaceHeight;
+
+                if (isWorkingSpaceFlippedHorizontally)
+                {
+                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + ((paintingAreaCheckeredGridHeight - extremeRightAndBottomCoordinate.Y) * scaleValueWorkingSpace);
+                }
+                else
+                {
+                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + (extremeLeftAndTopCoordinate.Y * scaleValueWorkingSpace);
+                }
+
+                if (isWorkingSpaceFlippedVertically)
+                {
+                    moveCropControl.Y = positionYLeftTopCornerWorkingSpace + (extremeLeftAndTopCoordinate.X * scaleValueWorkingSpace);
+                }
+                else
+                {
+                    moveCropControl.Y = positionYLeftTopCornerWorkingSpace + ((paintingAreaCheckeredGridWidth - extremeRightAndBottomCoordinate.X) * scaleValueWorkingSpace);
+                }
+            }
+            else
+            {
+                heightCropControl = paintingAreaCheckeredGridTransformGroup.Value.M21 * paintingAreaCheckeredGridWidth + doubleBorderWidthValue;
+                widthCropControl = paintingAreaCheckeredGridTransformGroup.Value.M21 * paintingAreaCheckeredGridHeight + doubleBorderWidthValue;
+                double workingSpaceHeight = paintingAreaCheckeredGridTransformGroup.Value.M21 * paintingAreaCheckeredGridWidth;
+                double workingSpaceWidth = paintingAreaCheckeredGridTransformGroup.Value.M21 * paintingAreaCheckeredGridHeight;
+                double positionYLeftBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
+                double positionYLeftTopCornerWorkingSpace = positionYLeftBottomCornerWorkingSpace - workingSpaceHeight;
+
+                moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
+                moveCropControl.Y = positionYLeftTopCornerWorkingSpace;
+            }
+            setLimitsForMovableControlBorder(270);
             setCropControlPosition(heightCropControl, widthCropControl, moveCropControl);
         }
 
@@ -360,7 +557,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             currentPaintApplication.ProgressRing.IsActive = true;
             await pixelData.preparePaintingAreaCanvasPixel();
 
-            TransformGroup transform = (currentPaintApplication.PaintingAreaCanvas.RenderTransform as TransformGroup);
             TransformGroup paintingAreaCheckeredGridTransformGroup = currentPaintApplication.PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
             // Das Selection-Control soll die Zeichnung einschließen und nicht darauf liegen. Daher wird
             // dieser Wert mit 10 verwendet. Anschließend wird dann die Margin Left und Top, um 5 verringert.
@@ -376,195 +572,29 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             bool isWorkingSpaceRotated270Degree = paintingAreaCheckeredGridTransformGroup.Value.M12 < 0.0;
             bool isWorkingSpaceFlippedHorizontally = paintingAreaCheckeredGridTransformGroup.Value.M11 == -1.0;
             bool isWorkingSpaceFlippedVertically = paintingAreaCheckeredGridTransformGroup.Value.M22 == -1.0;
-            
-            scaleValueWorkingSpace = 0.0;
 
-            double paintingAreaCheckeredGridHeight = currentPaintApplication.PaintingAreaCheckeredGrid.Height;
-            double paintingAreaCheckeredGridWidth = currentPaintApplication.PaintingAreaCheckeredGrid.Width;
-            TranslateTransform moveCropControl = new TranslateTransform();
             if(isWorkingSpaceNotRotated)
             {
                 scaleValueWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.M11;
-                _calculateCropControlPositionWithoutRotating(doubleBorderWidthValue, scaleValueWorkingSpace, isWorkingSpaceFlippedHorizontally, isWorkingSpaceFlippedVertically);
+                _calculateAndSetCropControlPositionWithoutRotating(doubleBorderWidthValue, scaleValueWorkingSpace, isWorkingSpaceFlippedHorizontally, isWorkingSpaceFlippedVertically);
+            }
+            else if (isWorkingSpaceRotated90Degree)
+            {
+                // Attention: Working space is rotated 90°
+                scaleValueWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.M12;
+                _calculateAndSetCropControlPositionWith90DegreeRotation(doubleBorderWidthValue, scaleValueWorkingSpace, isWorkingSpaceFlippedHorizontally, isWorkingSpaceFlippedVertically);
             }
             else if(isWorkingSpaceRotated180Degree)
             {
-                scaleValueWorkingSpace = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11);
-
                 // Attention: Working space is rotated 180°
-                Point extremeLeftAndTopCoordinate = new Point(paintingAreaCheckeredGridWidth - 1.0, 0.0);
-                Point extremeRightAndBottomCoordinate = new Point(0.0, paintingAreaCheckeredGridHeight - 1.0);
-
-                if (currentPaintApplication.PaintingAreaCanvas.Children.Count != 0)
-                {
-                    bool foundLeftPixel = false;
-                    int xCoordinateOfExtremeTop = 0;
-                    extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y,
-                                                                                 ref foundLeftPixel, ref xCoordinateOfExtremeTop);
-                    extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
-                                                                                         extremeLeftAndTopCoordinate, foundLeftPixel, xCoordinateOfExtremeTop);
-
-                    heightCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValueWorkingSpace + doubleBorderWidthValue;
-                    widthCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValueWorkingSpace + doubleBorderWidthValue;
-
-                    double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight;
-                    double workingSpaceWidth = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
-                    double positionXRightBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
-                    double positionXLeftBottomCornerWorkingSpace = positionXRightBottomCornerWorkingSpace - workingSpaceWidth;
-                    double positionYRigthBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
-                    double positionYRightTopCornerWorkingSpace = positionYRigthBottomCornerWorkingSpace - workingSpaceHeight;
-
-                    if (isWorkingSpaceFlippedHorizontally)
-                    {
-                        moveCropControl.X = positionXLeftBottomCornerWorkingSpace + (extremeLeftAndTopCoordinate.X * scaleValueWorkingSpace);
-                    }
-                    else
-                    {
-                        moveCropControl.X = positionXLeftBottomCornerWorkingSpace + ((paintingAreaCheckeredGridWidth - extremeRightAndBottomCoordinate.X) * scaleValueWorkingSpace);
-                    }
-
-                    if (isWorkingSpaceFlippedVertically)
-                    {
-                        moveCropControl.Y = positionYRightTopCornerWorkingSpace + (extremeLeftAndTopCoordinate.Y * scaleValueWorkingSpace);
-                    }
-                    else
-                    {
-                        moveCropControl.Y = positionYRightTopCornerWorkingSpace + ((paintingAreaCheckeredGridHeight - extremeRightAndBottomCoordinate.Y) * scaleValueWorkingSpace);
-                    }
-                }
-                else
-                {
-                    heightCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight + doubleBorderWidthValue;
-                    widthCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth + doubleBorderWidthValue;
-                    double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight;
-                    double workingSpaceWidth = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
-                    double positionXRightBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
-                    double positionXLeftBottomCornerWorkingSpace = positionXRightBottomCornerWorkingSpace - workingSpaceWidth;
-                    double positionYRigthBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
-                    double positionYRightTopCornerWorkingSpace = positionYRigthBottomCornerWorkingSpace - workingSpaceHeight;
-                    moveCropControl.X = positionXLeftBottomCornerWorkingSpace;
-                    moveCropControl.Y = positionYRightTopCornerWorkingSpace;
-                    _transformGridMain.Children.Add(moveCropControl);
-                }
-                setLimitsForMovableControlBorder(180);
-            }
-            else if(isWorkingSpaceRotated90Degree)
-            {
-                scaleValueWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.M12;
-
-                // Attention: Working space is rotated 90°
-                Point extremeLeftAndTopCoordinate = new Point(paintingAreaCheckeredGridWidth - 1.0, paintingAreaCheckeredGridHeight - 1.0);
-                Point extremeRightAndBottomCoordinate = new Point(0.0, 0.0);
-                if (currentPaintApplication.PaintingAreaCanvas.Children.Count != 0)
-                {
-                    bool foundLeftPixel = false;
-                    int xCoordinateOfExtremeTop = 0;
-                    extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y,
-                                                                                 ref foundLeftPixel, ref xCoordinateOfExtremeTop);
-                    extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
-                                                                                         extremeLeftAndTopCoordinate, foundLeftPixel, xCoordinateOfExtremeTop);
-
-                    heightCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValueWorkingSpace + doubleBorderWidthValue;
-                    widthCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValueWorkingSpace + doubleBorderWidthValue;
-
-                    double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
-                    double workingSpaceWidth = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight;
-                    double positionXRightTopCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
-                    double positionXLeftTopCornerWorkingSpace = positionXRightTopCornerWorkingSpace - workingSpaceWidth;
-
-                    if (isWorkingSpaceFlippedHorizontally)
-                    {
-                        moveCropControl.X = positionXLeftTopCornerWorkingSpace + (extremeLeftAndTopCoordinate.Y * scaleValueWorkingSpace);
-                    }
-                    else
-                    {
-                        moveCropControl.X = positionXLeftTopCornerWorkingSpace + ((paintingAreaCheckeredGridHeight - extremeRightAndBottomCoordinate.Y) * scaleValueWorkingSpace);
-                    }
-
-                    if (isWorkingSpaceFlippedVertically)
-                    {
-                        moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + ((paintingAreaCheckeredGridWidth - extremeRightAndBottomCoordinate.X) * scaleValueWorkingSpace);
-                    }
-                    else
-                    {
-                        moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY + (extremeLeftAndTopCoordinate.X * scaleValueWorkingSpace);
-                    }
-
-                    _transformGridMain.Children.Add(moveCropControl);
-                }
-                else
-                {
-                    heightCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth + doubleBorderWidthValue;
-                    widthCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight + doubleBorderWidthValue;
-                    double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
-                    double workingSpaceWidth = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight;
-                    double positionXRightTopCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;                   
-                    double positionXLeftTopCornerWorkingSpace = positionXRightTopCornerWorkingSpace - workingSpaceWidth;
-
-                    moveCropControl.X = positionXLeftTopCornerWorkingSpace;
-                    moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
-                    _transformGridMain.Children.Add(moveCropControl);
-                }
-                setLimitsForMovableControlBorder(90);
+                scaleValueWorkingSpace = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11);
+                _calculateAndSetCropControlPositionWith180DegreeRotation(doubleBorderWidthValue, scaleValueWorkingSpace, isWorkingSpaceFlippedHorizontally, isWorkingSpaceFlippedVertically);
             }
             else if(isWorkingSpaceRotated270Degree)
             {
                 scaleValueWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.M21;
-
                 // Attention: Working space is rotated 270°
-                Point extremeLeftAndTopCoordinate = new Point(paintingAreaCheckeredGridWidth - 1.0, paintingAreaCheckeredGridHeight - 1.0);
-                Point extremeRightAndBottomCoordinate = new Point(0.0, 0.0);
-
-                if (currentPaintApplication.PaintingAreaCanvas.Children.Count != 0)
-                {
-                    bool foundLeftPixel = false;
-                    int xCoordinateOfExtremeTop = 0;
-                    extremeLeftAndTopCoordinate = getExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y,
-                                                                                 ref foundLeftPixel, ref xCoordinateOfExtremeTop);
-                    extremeRightAndBottomCoordinate = getExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
-                                                                                         extremeLeftAndTopCoordinate, foundLeftPixel, xCoordinateOfExtremeTop);
-
-                    heightCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValueWorkingSpace + doubleBorderWidthValue;
-                    widthCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValueWorkingSpace + doubleBorderWidthValue;
-                    double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
-                    double workingSpaceWidth = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight;
-                    double positionYLeftBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
-                    double positionYLeftTopCornerWorkingSpace = positionYLeftBottomCornerWorkingSpace - workingSpaceHeight;
-
-                    if (isWorkingSpaceFlippedHorizontally)
-                    {
-                        moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + ((paintingAreaCheckeredGridHeight - extremeRightAndBottomCoordinate.Y) * scaleValueWorkingSpace);
-                    }
-                    else
-                    {
-                        moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX + (extremeLeftAndTopCoordinate.Y * scaleValueWorkingSpace);
-                    }
-
-                    if (isWorkingSpaceFlippedVertically)
-                    {
-                        moveCropControl.Y = positionYLeftTopCornerWorkingSpace + (extremeLeftAndTopCoordinate.X * scaleValueWorkingSpace);
-                    }
-                    else
-                    {
-                        moveCropControl.Y = positionYLeftTopCornerWorkingSpace + ((paintingAreaCheckeredGridWidth - extremeRightAndBottomCoordinate.X) * scaleValueWorkingSpace);
-                    }
-
-                    _transformGridMain.Children.Add(moveCropControl);
-                }
-                else
-                {
-                    heightCropControl = paintingAreaCheckeredGridTransformGroup.Value.M21 * paintingAreaCheckeredGridWidth + doubleBorderWidthValue;
-                    widthCropControl = paintingAreaCheckeredGridTransformGroup.Value.M21 * paintingAreaCheckeredGridHeight + doubleBorderWidthValue;
-                    double workingSpaceHeight = paintingAreaCheckeredGridTransformGroup.Value.M21 * paintingAreaCheckeredGridWidth;
-                    double workingSpaceWidth = paintingAreaCheckeredGridTransformGroup.Value.M21 * paintingAreaCheckeredGridHeight;
-                    double positionYLeftBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
-                    double positionYLeftTopCornerWorkingSpace = positionYLeftBottomCornerWorkingSpace - workingSpaceHeight;
-
-                    moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
-                    moveCropControl.Y = positionYLeftTopCornerWorkingSpace;
-                    _transformGridMain.Children.Add(moveCropControl);
-                }
-                setLimitsForMovableControlBorder(270);
+                _calculateAndSetCropControlPositionWith270DegreeRotation(doubleBorderWidthValue, scaleValueWorkingSpace, isWorkingSpaceFlippedHorizontally, isWorkingSpaceFlippedVertically);
             }
             currentPaintApplication.ProgressRing.IsActive = false;
         }
