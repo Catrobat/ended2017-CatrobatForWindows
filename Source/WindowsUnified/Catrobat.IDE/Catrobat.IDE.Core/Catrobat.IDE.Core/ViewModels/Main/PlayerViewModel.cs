@@ -14,20 +14,20 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     {
         #region private Members
 
-        private string _projectName = "";
+        private string _programName = "";
         private bool _isLaunchFromTile = false;
 
         #endregion
 
         #region Properties    
 
-        public string ProjectName
+        public string ProgramName
         {
-            get { return _projectName; }
+            get { return _programName; }
             set
             {
-                _projectName = value;
-                RaisePropertyChanged(() => ProjectName);
+                _programName = value;
+                RaisePropertyChanged(() => ProgramName);
             }
         }
 
@@ -48,7 +48,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         public ICommand RestartProgramCommand { get; private set; }
         public ICommand PlayProgramCommand { get; private set; }
         public ICommand SetThumbnailCommand { get; private set; }
-        public ICommand EnableAxisCommand { get; private set; }
+        public ICommand EnableAxesCommand { get; private set; }
         public ICommand TakeScreenshotCommand { get; private set; }
 
         #endregion
@@ -70,9 +70,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.PlayerLauncherService.SetThumbnailAction();
         }
 
-        private void AxisAction()
+        private void AxesAction()
         {
-            ServiceLocator.PlayerLauncherService.AxisAction();
+            ServiceLocator.PlayerLauncherService.AxesAction();
         }
 
         private void TakeScreenshotAction()
@@ -104,9 +104,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             IsLaunchFromTile = message.Content;
         }
 
-        private void ProjectNameMessageAction(GenericMessage<string> message)
+        private void ProgramNameMessageAction(GenericMessage<string> message)
         {
-            ProjectName = message.Content;
+            ProgramName = message.Content;
         }
 
         #endregion
@@ -116,11 +116,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             RestartProgramCommand = new RelayCommand(RestartProgramAction);
             PlayProgramCommand = new RelayCommand(ResumeProgramAction);
             SetThumbnailCommand = new RelayCommand(SetThumbnailAction);
-            EnableAxisCommand = new RelayCommand(AxisAction);
+            EnableAxesCommand = new RelayCommand(AxesAction);
             TakeScreenshotCommand = new RelayCommand(TakeScreenshotAction);
 
             Messenger.Default.Register<GenericMessage<string>>(this,
-                ViewModelMessagingToken.PlayerProgramNameListener, ProjectNameMessageAction);
+                ViewModelMessagingToken.PlayerProgramNameListener, ProgramNameMessageAction);
 
             Messenger.Default.Register<GenericMessage<bool>>(this,
                  ViewModelMessagingToken.PlayerIsStartFromTileListener, IsStartFromTileMessageAction);

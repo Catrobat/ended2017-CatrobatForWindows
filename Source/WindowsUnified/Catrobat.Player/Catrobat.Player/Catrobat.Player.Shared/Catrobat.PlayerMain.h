@@ -35,7 +35,7 @@ namespace Catrobat_Player
         void RestartButtonClicked();
         void ResumeButtonClicked();
         void ThumbnailButtonClicked();
-        void AxisButtonClicked();
+        void AxesButtonClicked();
         void ScreenshotButtonClicked();
 
 		// IDeviceNotify
@@ -81,10 +81,9 @@ namespace Catrobat_Player
 
         // Project dependenging member variables
         Windows::UI::Xaml::Controls::CommandBar^ m_appBar;
-        Windows::UI::Xaml::Controls::AppBarButton^ m_btnAxis;
-        Windows::UI::Xaml::Controls::Grid^ m_gridAxis;
+        Windows::UI::Xaml::Controls::AppBarButton^ m_btnAxes;
+        Windows::UI::Xaml::Controls::Grid^ m_gridAxes;
         PlayerState m_state;
         bool m_loadingComplete;
-        bool m_axisOn;
 	};
 };

@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Services
 
         void SetThumbnailAction();
 
-        void AxisAction();
+        void AxesAction();
          
         void TakeScreenshotAction();
 

@@ -38,7 +38,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
             //await project.Save(); ??? TODO: this was in the previous version of catrobat --> do we need to save the project at this point?
             await LaunchPlayer(program.Name, isLaunchedFromTile);
-            // TODO: manage closing of the Player 
+            // TODO: manage closing/relaunching of the Player 
             // TODO: review ...LaunchFileAsync (1 line underneath) --> seems to be that it never finishes
             //bool success = await Windows.System.Launcher.LaunchFileAsync(file, options);
             //if (success)
@@ -165,11 +165,11 @@ namespace Catrobat.IDE.WindowsShared.Services
             }
         }
 
-        public void AxisAction()
+        public void AxesAction()
         {
             if (PlayerObject != null)
             {
-                PlayerObject.AxisButtonClicked();
+                PlayerObject.AxesButtonClicked();
             }
         }
 

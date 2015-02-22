@@ -48,7 +48,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
                 while (ServiceLocator.NavigationService.CanGoBack)
                     ServiceLocator.NavigationService.RemoveBackEntry();
 
-            _playerObject.InitPlayer(PlayerPage, _viewModel.ProjectName);
+            _playerObject.InitPlayer(PlayerPage, _viewModel.ProgramName);
             PlayerLauncherServiceWindowsShared.SetPlayerObject(_playerObject);
 
             Window.Current.Activate();

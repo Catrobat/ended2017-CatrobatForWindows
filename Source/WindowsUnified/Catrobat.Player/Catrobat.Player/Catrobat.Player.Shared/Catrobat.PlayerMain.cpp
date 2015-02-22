@@ -8,21 +8,20 @@ using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::System::Threading;
-
 using namespace Concurrency;
 using namespace Platform;
 
 namespace Catrobat_Player
 {
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     // Loads and initializes application assets when the application is loaded
 
-    Catrobat_PlayerMain::Catrobat_PlayerMain(const std::shared_ptr<DX::DeviceResources>& deviceResources,
-        Page^ playerPage, String^ projectName) :
+    Catrobat_PlayerMain::Catrobat_PlayerMain(
+            const std::shared_ptr<DX::DeviceResources>& deviceResources,
+            Page^ playerPage, String^ projectName) :
         m_deviceResources(deviceResources),
         m_pointerLocationX(0.0f),
         m_loadingComplete(false),
-        m_axisOn(false),
         m_state(PlayerState::Init)
     {
         // Register to be notified if the Device is lost or recreated
@@ -40,7 +39,7 @@ namespace Catrobat_Player
         */
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
     Catrobat_PlayerMain::~Catrobat_PlayerMain()
     {
@@ -48,7 +47,7 @@ namespace Catrobat_Player
         m_deviceResources->RegisterDeviceNotify(nullptr);
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     // Initialize Project loading and parsing
 
     void Catrobat_PlayerMain::LoadProject(String^ projectName, Page^ playerPage)
@@ -64,41 +63,41 @@ namespace Catrobat_Player
 
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     void Catrobat_PlayerMain::ProcessXamlPageContent(Page^ playerPage)
     {
         // Get the CommandBar from the Player's XAML page
         m_appBar = (CommandBar^)playerPage->BottomAppBar;
 
         // Get the axis button from the CommandBar
-        m_btnAxis = (AppBarButton^)m_appBar->PrimaryCommands->GetAt(
+        m_btnAxes = (AppBarButton^)m_appBar->PrimaryCommands->GetAt(
             Constants::XAMLPage::BtnAxisPosition);
 
         // Get the Grid which contains the axes from the Player's XAML page & set the axes' values
-        m_gridAxis = FindChildControl<Grid>((DependencyObject^)playerPage->Content,
-            Constants::XAMLPage::GridAxisName);
+        m_gridAxes = FindChildControl<Grid>((DependencyObject^)playerPage->Content,
+            Constants::XAMLPage::GridAxesName);
 
         int projectScreenHeight = ProjectDaemon::Instance()->GetProject()->GetScreenHeight();
         int projectScreendWidth = ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
 
         // horizontal values
-        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, 
-            Constants::XAMLPage::GridAxisXLeftName))
-            ->Text = "-" + (projectScreendWidth / 2).ToString();
-        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, 
-            Constants::XAMLPage::GridAxisXRightName))
-            ->Text = (projectScreendWidth / 2).ToString();
+        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxes,
+            Constants::XAMLPage::GridAxesXLeftName))
+                ->Text = "-" + (projectScreendWidth / 2).ToString();
+        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxes,
+            Constants::XAMLPage::GridAxesXRightName))
+                ->Text = (projectScreendWidth / 2).ToString();
 
         // vertical values
-        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, 
-            Constants::XAMLPage::GridAxisYTopName))
-            ->Text = (projectScreenHeight / 2).ToString();
-        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxis, 
-            Constants::XAMLPage::GridAxisYBottomName))
-            ->Text = "-" + (projectScreenHeight / 2).ToString();
+        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxes,
+            Constants::XAMLPage::GridAxesYTopName))
+                ->Text = (projectScreenHeight / 2).ToString();
+        (FindChildControl<TextBlock>((DependencyObject^)m_gridAxes,
+            Constants::XAMLPage::GridAxesYBottomName))
+                ->Text = "-" + (projectScreenHeight / 2).ToString();
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     // Updates application state when the window size changes (e.g. device orientation change)
 
     void Catrobat_PlayerMain::CreateWindowSizeDependentResources()
@@ -107,7 +106,7 @@ namespace Catrobat_Player
         m_basic2dRenderer->CreateWindowSizeDependentResources();
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
     void Catrobat_PlayerMain::StartRenderLoop()
     {
@@ -139,7 +138,7 @@ namespace Catrobat_Player
             WorkItemOptions::TimeSliced);
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
     void Catrobat_PlayerMain::StopRenderLoop()
     {
@@ -147,7 +146,7 @@ namespace Catrobat_Player
         m_renderLoopWorker->Cancel();
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
     void Catrobat_PlayerMain::PointerPressed(D2D1_POINT_2F point)
     {
@@ -157,7 +156,7 @@ namespace Catrobat_Player
         }
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
     bool Catrobat_PlayerMain::HardwareBackButtonPressed()
     {
@@ -182,7 +181,7 @@ namespace Catrobat_Player
         }
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
     void Catrobat_PlayerMain::RestartButtonClicked()
     {
@@ -196,7 +195,7 @@ namespace Catrobat_Player
         StartRenderLoop();
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
     void Catrobat_PlayerMain::ResumeButtonClicked()
     {
@@ -207,15 +206,16 @@ namespace Catrobat_Player
         StartRenderLoop();
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     // 
     void Catrobat_PlayerMain::ThumbnailButtonClicked()
     {
-        // TODO implement me
-        /*
-        // TODO get current screen image
-        // TODO save the current image (--> return true if it worked, or false otherwise)
+        // TODO implement me: get current screen image 
+        //                    --> save the current image as "manual_screenshot.png" in the 
+        //                        program's applicationf folder 
+        //                    --> notify the user, if it was successful
 
+        /*
         // Create a template for the toast
         ToastTemplateType toastTemplate = ToastTemplateType::ToastText02;
         XmlDocument^ toastXml = ToastNotificationManager::GetTemplateContent(toastTemplate);
@@ -240,32 +240,31 @@ namespace Catrobat_Player
         */
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
-    void Catrobat_PlayerMain::AxisButtonClicked()
+    void Catrobat_PlayerMain::AxesButtonClicked()
     {
-        if (m_axisOn)
+        if (m_gridAxes->Visibility == Visibility::Visible)
         {
-            m_gridAxis->Visibility = Visibility::Collapsed;
-            m_btnAxis->Label = "axis on";
-            m_axisOn = false;
+            m_gridAxes->Visibility = Visibility::Collapsed;
+            m_btnAxes->Label = "axes on";
         }
         else
         {
-            m_gridAxis->Visibility = Visibility::Visible;
-            m_btnAxis->Label = "axis off";
-            m_axisOn = true;
+            m_gridAxes->Visibility = Visibility::Visible;
+            m_btnAxes->Label = "axes off";
         }
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
     void Catrobat_PlayerMain::ScreenshotButtonClicked()
     {
-        // TODO implement me
+        // TODO implement me: copy the current screen image to the phone's screenshot picture folder
+        //                    & notify the user with a toast, if it was succesful
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     // Updates the application state once per frame
 
     void Catrobat_PlayerMain::Update()
@@ -284,7 +283,7 @@ namespace Catrobat_Player
         });
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     // Process all input from the user before updating game state
 
     void Catrobat_PlayerMain::ProcessInput()
@@ -293,7 +292,7 @@ namespace Catrobat_Player
         //m_sceneRenderer->TrackingUpdate(m_pointerLocationX);
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     // Renders the current frame according to the current application state.
     // Returns true if the frame was rendered and is ready to be displayed.
 
@@ -312,12 +311,17 @@ namespace Catrobat_Player
         context->RSSetViewports(1, &viewport);
 
         // Reset render targets to the screen
-        ID3D11RenderTargetView *const targets[1] = { m_deviceResources->GetBackBufferRenderTargetView() };
+        ID3D11RenderTargetView *const targets[1] = 
+            { m_deviceResources->GetBackBufferRenderTargetView() };
         context->OMSetRenderTargets(1, targets, m_deviceResources->GetDepthStencilView());
 
         // Clear the back buffer and depth stencil view
-        context->ClearRenderTargetView(m_deviceResources->GetBackBufferRenderTargetView(), DirectX::Colors::White);
-        context->ClearDepthStencilView(m_deviceResources->GetDepthStencilView(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+        context->ClearRenderTargetView(m_deviceResources->GetBackBufferRenderTargetView(), 
+                                       DirectX::Colors::White);
+        context->ClearDepthStencilView(m_deviceResources->GetDepthStencilView(), 
+                                       D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 
+                                       1.0f, 
+                                       0);
 
         // Render the scene objects
         // TODO: Replace this with your app's content rendering functions
@@ -330,7 +334,7 @@ namespace Catrobat_Player
         return true;
     }
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     // Notifies renderers that device resources need to be released
 
     void Catrobat_PlayerMain::OnDeviceLost()
@@ -343,7 +347,7 @@ namespace Catrobat_Player
     }
 
 
-    //--------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     // Notifies renderers that device resources may now be recreated
 
     void Catrobat_PlayerMain::OnDeviceRestored()
@@ -381,7 +385,8 @@ namespace Catrobat_Player
                 tEle = nullptr;
             }
 
-            if (tEle != nullptr && tEle->Name != nullptr && wcscmp(tEle->Name->Data(), childName) == 0)
+            if (tEle != nullptr && tEle->Name != nullptr 
+                && wcscmp(tEle->Name->Data(), childName) == 0)
             {
                 // Found control
                 return tEle;
