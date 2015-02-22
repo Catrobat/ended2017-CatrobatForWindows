@@ -120,7 +120,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             TakeScreenshotCommand = new RelayCommand(TakeScreenshotAction);
 
             Messenger.Default.Register<GenericMessage<string>>(this,
-                ViewModelMessagingToken.PlayerProjectNameListener, ProjectNameMessageAction);
+                ViewModelMessagingToken.PlayerProgramNameListener, ProjectNameMessageAction);
 
             Messenger.Default.Register<GenericMessage<bool>>(this,
                  ViewModelMessagingToken.PlayerIsStartFromTileListener, IsStartFromTileMessageAction);

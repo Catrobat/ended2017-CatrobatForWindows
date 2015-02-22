@@ -26,7 +26,7 @@
         LookImageToSaveListener,
         ScriptBrickCategoryListener,
         SoundStreamListener,
-        PlayerProjectNameListener,
+        PlayerProgramNameListener,
         PlayerIsStartFromTileListener,
         FormulaEvaluated,
         ClearPageCache,

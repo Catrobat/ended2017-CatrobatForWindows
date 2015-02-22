@@ -62,13 +62,14 @@ namespace Catrobat.IDE.WindowsPhone
             RestoreStateAsync(executionState);
         }
 
-        public ExtendedSplash(ImageSource preloadedImage)
+        public ExtendedSplash(ImageSource preloadedImage, double opacity = 1)
         {
             // Constructor for only showing a SplashScreen image; e.g. when starting the Player
 
             InitializeComponent();
 
             ImageExtendedSplash.Source = preloadedImage;
+            ImageExtendedSplash.Opacity = opacity;
 
             Window.Current.SizeChanged += ExtendedSplash_OnResize;
         }
