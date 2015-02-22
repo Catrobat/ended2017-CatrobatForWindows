@@ -1644,6 +1644,10 @@ namespace Catrobat.Paint.WindowsPhone.View
             CtrlThicknessControl.setValueBtnBrushThickness(paintData.thicknessSelected);
             CtrlThicknessControl.setValueSliderThickness(paintData.thicknessSelected);
             CtrlThicknessControl.checkAndSetPenLineCap(PenLineCap.Round);
+
+            PocketPaintApplication.GetInstance().angleForRotation = 0;
+            PocketPaintApplication.GetInstance().flipX = 1;
+            PocketPaintApplication.GetInstance().flipY = 1;
         }
     }
 }
