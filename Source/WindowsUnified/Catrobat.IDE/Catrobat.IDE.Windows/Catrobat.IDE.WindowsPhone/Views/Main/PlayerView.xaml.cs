@@ -44,8 +44,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //SetSourceOfThumbnail(); --> TODO it is necessary to change the SplashScreen image instead of setting an image on this XAML page
-
             if (_viewModel.IsLaunchFromTile)
                 while (ServiceLocator.NavigationService.CanGoBack)
                     ServiceLocator.NavigationService.RemoveBackEntry();
@@ -69,52 +67,5 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
 
             base.OnNavigatingFrom(e);
         }
-
-        /*private async void SetSourceOfThumbnail()
-        {
-            var projectFolder = "ms-appdata:///Local/" + StorageConstants.ProgramsPath + "/" + _viewModel.ProjectName + "/";
-
-            StorageFile file = null;
-            try
-            {
-                var manualScreenshotPath = projectFolder + StorageConstants.ProgramManualScreenshotPath;
-                file = await StorageFile.GetFileFromApplicationUriAsync(
-                        new Uri(manualScreenshotPath, UriKind.Absolute));
-            } 
-            catch (Exception e)
-            {
-                file = null;                
-            }
-
-            if (file == null)
-            {
-                try
-                {
-                    var automaticProjectScreenshotPath = projectFolder + StorageConstants.ProgramAutomaticScreenshotPath;
-                    file = await StorageFile.GetFileFromApplicationUriAsync(
-                            new Uri(automaticProjectScreenshotPath, UriKind.Absolute));
-                }
-                catch (Exception e)
-                {
-                    file = null;
-                }
-            }
-
-            if (file != null)
-            {
-                var randomAccessStream = await file.OpenReadAsync();
-                var playerSplashImage = new BitmapImage()
-                {
-                    CreateOptions = BitmapCreateOptions.None
-                };
-
-                //playerSplashImage.DecodePixelHeight = (int)Window.Current.Bounds.Height;
-                //playerSplashImage.DecodePixelWidth = (int)Window.Current.Bounds.Width;
-                
-                await playerSplashImage.SetSourceAsync(randomAccessStream);
-                ImagePlayerLoadSplashScreen.Source = playerSplashImage;
-            }
-        } */
-
     }
 }

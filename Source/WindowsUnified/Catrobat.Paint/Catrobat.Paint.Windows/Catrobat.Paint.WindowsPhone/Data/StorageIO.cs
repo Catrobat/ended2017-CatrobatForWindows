@@ -109,16 +109,16 @@ namespace Catrobat.Paint.WindowsPhone.Data
 
         public async Task<bool> WriteBitmapToPngMediaLibrary(string filename)
         {
-            Canvas tempCanvas = PocketPaintApplication.GetInstance().PaintingAreaCanvas;
-            Size canvasSize = tempCanvas.RenderSize;
-            Point defaultPoint = tempCanvas.RenderTransformOrigin;
+            //Canvas tempCanvas = PocketPaintApplication.GetInstance().PaintingAreaCanvas;
+            //Size canvasSize = tempCanvas.RenderSize;
+            //Point defaultPoint = tempCanvas.RenderTransformOrigin;
 
-            tempCanvas.Measure(canvasSize);
-            tempCanvas.UpdateLayout();
-            tempCanvas.Arrange(new Rect(defaultPoint, canvasSize));
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Measure(PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize);
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.UpdateLayout();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Arrange(new Rect(new Point(0, 0), PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize));
 
             RenderTargetBitmap retarbi = new RenderTargetBitmap();
-            await retarbi.RenderAsync(tempCanvas);
+            await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvas);
 
             Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
             var pixels = await retarbi.GetPixelsAsync();
@@ -127,7 +127,7 @@ namespace Catrobat.Paint.WindowsPhone.Data
             {
                 var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, writeStream);
                 encoder.SetPixelData(BitmapPixelFormat.Bgra8,
-                    BitmapAlphaMode.Premultiplied,
+                    BitmapAlphaMode.Straight,
                     (uint)retarbi.PixelWidth,
                     (uint)retarbi.PixelHeight,
                     DisplayInformation.GetForCurrentView().LogicalDpi,
@@ -136,19 +136,6 @@ namespace Catrobat.Paint.WindowsPhone.Data
                 await encoder.FlushAsync();
 
             }
-
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas = tempCanvas;
-            //await WriteBitmapToPngFileIsolatedStorage(bitmap, filenameWithEnding);
-
-            //// TODO: var library = new MediaLibrary();
-
-
-
-            //using (var s =  await _pocketPaintFolder.OpenStreamForReadAsync(filenameWithEnding))
-            //{
-            //    // TODO: var pic = library.SavePicture(filenameWithEnding, s);
-            //}
-
             return true;
         }
 

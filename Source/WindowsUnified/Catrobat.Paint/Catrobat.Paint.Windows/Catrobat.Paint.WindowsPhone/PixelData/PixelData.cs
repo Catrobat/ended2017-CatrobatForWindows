@@ -138,8 +138,8 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
 
         public Byte getPixelAlphaFromCanvas(int x, int y)
         {
-            double NormfactorX = (double)pixelWidthCanvas / (double)PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
-            double NormfactorY = (double)pixelHeightCanvas / (double)PocketPaintApplication.GetInstance().Bitmap.PixelHeight;
+            double NormfactorX = (double)pixelWidthCanvas / (double)PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width;
+            double NormfactorY = (double)pixelHeightCanvas / (double)PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height;
 
             double doubleY = ((double)y) * NormfactorY;
             double doubleX = ((double)x) * NormfactorX;
