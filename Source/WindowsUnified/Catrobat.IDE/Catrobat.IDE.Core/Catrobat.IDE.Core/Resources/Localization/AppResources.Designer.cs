@@ -3745,6 +3745,60 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to axes off.
+        /// </summary>
+        public static string Player_AppBarButton_AxesOff {
+            get {
+                return ResourceManager.GetString("Player_AppBarButton_AxesOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to axes on.
+        /// </summary>
+        public static string Player_AppBarButton_AxesOn {
+            get {
+                return ResourceManager.GetString("Player_AppBarButton_AxesOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to restart.
+        /// </summary>
+        public static string Player_AppBarButton_Restart {
+            get {
+                return ResourceManager.GetString("Player_AppBarButton_Restart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to resume.
+        /// </summary>
+        public static string Player_AppBarButton_Resume {
+            get {
+                return ResourceManager.GetString("Player_AppBarButton_Resume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to take screenshot.
+        /// </summary>
+        public static string Player_AppBarButton_TakeScreenshot {
+            get {
+                return ResourceManager.GetString("Player_AppBarButton_TakeScreenshot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to thumbnail.
+        /// </summary>
+        public static string Player_AppBarButton_Thumbnail {
+            get {
+                return ResourceManager.GetString("Player_AppBarButton_Thumbnail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to dizzy mole.
         /// </summary>
         public static string WhackAMole_DizzyMole {

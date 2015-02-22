@@ -100,15 +100,19 @@
       <CommandBar.PrimaryCommands>
         <!-- TODO: use strings from the resource tool for AppBarButton names -->
         <AppBarButton Icon="Refresh" 
-          Label="restart" 
+          Label="{Binding Resources.Player_AppBarButton_Restart, 
+                  Source={StaticResource LocalizedStrings}}" 
           Command="{Binding RestartProgramCommand}"/>
         <AppBarButton Icon="Play" 
-          Label="resume"
+          Label="{Binding Resources.Player_AppBarButton_Resume, 
+                  Source={StaticResource LocalizedStrings}}" 
           Command="{Binding PlayProgramCommand}"/>
         <AppBarButton Icon="Camera" 
-          Label="set thumbnail"
+          Label="{Binding Resources.Player_AppBarButton_Thumbnail, 
+                  Source={StaticResource LocalizedStrings}}" 
           Command="{Binding SetThumbnailCommand}"/>
-        <AppBarButton Label="axes on"
+        <AppBarButton Label="{Binding Resources.Player_AppBarButton_AxesOn, 
+                              Source={StaticResource LocalizedStrings}}" 
           Command="{Binding EnableAxesCommand}">
           <AppBarButton.Icon>
             <BitmapIcon UriSource="ms-appx:///Assets/AxisIcon-48.png"/>
@@ -116,7 +120,8 @@
         </AppBarButton>
       </CommandBar.PrimaryCommands>
       <CommandBar.SecondaryCommands>
-        <AppBarButton Label="take screenshot"
+        <AppBarButton Label="{Binding Resources.Player_AppBarButton_TakeScreenshot, 
+                              Source={StaticResource LocalizedStrings}}" 
           Command="{Binding TakeScreenshotCommand}"/>
       </CommandBar.SecondaryCommands>
     </CommandBar>

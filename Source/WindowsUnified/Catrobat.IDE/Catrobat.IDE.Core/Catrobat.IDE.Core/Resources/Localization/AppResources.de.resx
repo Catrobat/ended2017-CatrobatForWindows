@@ -1344,4 +1344,22 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   <data name="Main_ProgramNameDuplicate" xml:space="preserve">
     <value>Programmname ist bereits vergeben.</value>
   </data>
+  <data name="Player_AppBarButton_AxesOff" xml:space="preserve">
+    <value>Achsen Aus</value>
+  </data>
+  <data name="Player_AppBarButton_AxesOn" xml:space="preserve">
+    <value>Achsein Ein</value>
+  </data>
+  <data name="Player_AppBarButton_Restart" xml:space="preserve">
+    <value>Neu starten</value>
+  </data>
+  <data name="Player_AppBarButton_Resume" xml:space="preserve">
+    <value>Fortsetzen</value>
+  </data>
+  <data name="Player_AppBarButton_TakeScreenshot" xml:space="preserve">
+    <value>Screenshot erstellen</value>
+  </data>
+  <data name="Player_AppBarButton_Thumbnail" xml:space="preserve">
+    <value>Miniaturbild</value>
+  </data>
 </root>
