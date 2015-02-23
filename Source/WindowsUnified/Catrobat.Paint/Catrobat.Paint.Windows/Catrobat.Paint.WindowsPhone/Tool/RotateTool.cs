@@ -94,6 +94,11 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             proofBoundariesOfAngle(angleToRotate);
             createRotationTransformAndAddedItToTransformGroup(angleToRotate, 1);
         }
+        public void RotateRight(int angleToRotate)
+        {
+            proofBoundariesOfAngle(angleToRotate);
+            createRotationTransformAndAddedItToTransformGroup(angleToRotate, 1);
+        }
 
         private void addTransformsToRotationTransformGroup(RotateTransform rotateTransform, int angle, int rotationDirection)
         {
