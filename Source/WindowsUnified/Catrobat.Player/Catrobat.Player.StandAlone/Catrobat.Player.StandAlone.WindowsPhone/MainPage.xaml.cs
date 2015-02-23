@@ -1,23 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Phone.UI.Input;
-using System.Diagnostics;
 using Windows.Graphics.Display;
-
-
-
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -77,14 +62,22 @@ namespace Catrobat.Player.StandAlone
         {
             playerObject.ThumbnailButtonClicked();
         }
-        private void OnAxisButtonClicked(object sender, RoutedEventArgs e)
+        private void OnAxesButtonClicked(object sender, RoutedEventArgs e)
         {
-            playerObject.AxisButtonClicked();
+            if (GridAxes.Visibility == Visibility.Visible)
+            {
+                playerObject.AxesButtonClicked(false, "axes on");
+            }
+            else
+            {
+                playerObject.AxesButtonClicked(true, "axes off");
+            }
         }
         private void OnScreenshotButtonClicked(object sender, RoutedEventArgs e)
         {
             playerObject.ScreenshotButtonClicked();
         }
+
 
         private void OnHardwareBackButtonPressed(object sender, BackPressedEventArgs args)
         {

@@ -94,7 +94,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                         }
                         catch (Exception ex)
                         {
-                            CropImage(xOffset, yOffset, width, height);
+                            string test = ex.ToString();
                         }
                     }
                     //render the stream to the screen

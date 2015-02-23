@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Input;
-
+using System.Collections.Generic;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-
 using Catrobat.IDE.Core.Services;
 
 
@@ -14,20 +12,21 @@ namespace Catrobat.IDE.Core.ViewModels.Main
     {
         #region private Members
 
-        private string _projectName = "";
+        private string _programName = "";
         private bool _isLaunchFromTile = false;
+        private bool _axesVisible = false;
 
         #endregion
 
         #region Properties    
 
-        public string ProjectName
+        public string ProgramName
         {
-            get { return _projectName; }
+            get { return _programName; }
             set
             {
-                _projectName = value;
-                RaisePropertyChanged(() => ProjectName);
+                _programName = value;
+                RaisePropertyChanged(() => ProgramName);
             }
         }
 
@@ -41,6 +40,16 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             }
         }
 
+        public bool AxesVisible
+        {
+            get { return _axesVisible; }
+            set
+            {
+                _axesVisible = value;
+                RaisePropertyChanged(() => AxesVisible);
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -48,7 +57,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         public ICommand RestartProgramCommand { get; private set; }
         public ICommand PlayProgramCommand { get; private set; }
         public ICommand SetThumbnailCommand { get; private set; }
-        public ICommand EnableAxisCommand { get; private set; }
+        public ICommand EnableAxesCommand { get; private set; }
         public ICommand TakeScreenshotCommand { get; private set; }
 
         #endregion
@@ -70,9 +79,20 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             ServiceLocator.PlayerLauncherService.SetThumbnailAction();
         }
 
-        private void AxisAction()
+        private void AxesAction()
         {
-            ServiceLocator.PlayerLauncherService.AxisAction();
+            if (_axesVisible)
+            {
+                ServiceLocator.PlayerLauncherService.AxesAction(false, 
+                    Resources.Localization.AppResources.Player_AppBarButton_AxesOn);
+                _axesVisible = false;
+            }
+            else
+            {
+                ServiceLocator.PlayerLauncherService.AxesAction(true,
+                      Resources.Localization.AppResources.Player_AppBarButton_AxesOff);
+                _axesVisible = true;
+            }
         }
 
         private void TakeScreenshotAction()
@@ -104,9 +124,9 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             IsLaunchFromTile = message.Content;
         }
 
-        private void ProjectNameMessageAction(GenericMessage<string> message)
+        private void ProgramNameMessageAction(GenericMessage<string> message)
         {
-            ProjectName = message.Content;
+            ProgramName = message.Content;
         }
 
         #endregion
@@ -116,11 +136,11 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             RestartProgramCommand = new RelayCommand(RestartProgramAction);
             PlayProgramCommand = new RelayCommand(ResumeProgramAction);
             SetThumbnailCommand = new RelayCommand(SetThumbnailAction);
-            EnableAxisCommand = new RelayCommand(AxisAction);
+            EnableAxesCommand = new RelayCommand(AxesAction);
             TakeScreenshotCommand = new RelayCommand(TakeScreenshotAction);
 
             Messenger.Default.Register<GenericMessage<string>>(this,
-                ViewModelMessagingToken.PlayerProjectNameListener, ProjectNameMessageAction);
+                ViewModelMessagingToken.PlayerProgramNameListener, ProgramNameMessageAction);
 
             Messenger.Default.Register<GenericMessage<bool>>(this,
                  ViewModelMessagingToken.PlayerIsStartFromTileListener, IsStartFromTileMessageAction);

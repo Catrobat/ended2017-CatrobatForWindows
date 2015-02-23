@@ -26,7 +26,7 @@ namespace Catrobat_Player
         void RestartButtonClicked();
         void ResumeButtonClicked();
         void ThumbnailButtonClicked();
-        void AxisButtonClicked();
+        void AxesButtonClicked(bool showAxes, Platform::String^ label);
         void ScreenshotButtonClicked();
 
     private:

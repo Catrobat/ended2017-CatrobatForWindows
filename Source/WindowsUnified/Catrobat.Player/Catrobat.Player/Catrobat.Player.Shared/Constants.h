@@ -144,11 +144,11 @@ namespace Constants
     namespace XAMLPage
 	{
         static const int      BtnAxisPosition                    =       3;
-        static const wchar_t* GridAxisName                       =       L"GridAxis";
-        static const wchar_t* GridAxisXRightName                 =       L"GridAxisXRight";
-        static const wchar_t* GridAxisXLeftName                  =       L"GridAxisXLeft";
-        static const wchar_t* GridAxisYTopName                   =       L"GridAxisYTop";
-        static const wchar_t* GridAxisYBottomName                =       L"GridAxisYBottom";
+        static const wchar_t* GridAxesName                       =       L"GridAxes";
+        static const wchar_t* GridAxesXRightName                 =       L"GridAxesXRight";
+        static const wchar_t* GridAxesXLeftName                  =       L"GridAxesXLeft";
+        static const wchar_t* GridAxesYTopName                   =       L"GridAxesYTop";
+        static const wchar_t* GridAxesYBottomName                =       L"GridAxesYBottom";
         static const wchar_t* SwapChainPanelName                 =       L"SwapChainPanel";
 	};
 };

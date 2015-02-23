@@ -5,9 +5,9 @@ namespace Catrobat.IDE.Core.Services
 {
     public interface IPlayerLauncherService
     {
-        Task LaunchPlayer(Program project, bool isLaunchedFromTile = false);
+        Task LaunchPlayer(Program program, bool isLaunchedFromTile = false);
 
-        Task LaunchPlayer(string projectName, bool isLaunchedFromTile = false);
+        Task LaunchPlayer(string programName, bool isLaunchedFromTile = false);
 
         void RestartProgramAction();
 
@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Services
 
         void SetThumbnailAction();
 
-        void AxisAction();
+        void AxesAction(bool showAxes, string label);
          
         void TakeScreenshotAction();
 

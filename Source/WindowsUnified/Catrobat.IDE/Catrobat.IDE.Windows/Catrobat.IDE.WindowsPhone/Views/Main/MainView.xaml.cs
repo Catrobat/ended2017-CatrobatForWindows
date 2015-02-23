@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Threading;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Main;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.IDE.WindowsShared.Misc;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-using Catrobat.IDE.WindowsShared.Misc;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Main
 {
