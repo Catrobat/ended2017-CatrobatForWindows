@@ -32,11 +32,11 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             
         }
 
-        async public override void HandleUp(object arg)
+        public override void HandleUp(object arg)
         
         {
-            int height = PocketPaintApplication.GetInstance().CropControl.getRectangleCropSelectionHeight();
-            int width = PocketPaintApplication.GetInstance().CropControl.getRectangleCropSelectionWidth();
+            int height = (int)Math.Ceiling(PocketPaintApplication.GetInstance().CropControl.getRectangleCropSelectionHeight());
+            int width = (int)Math.Ceiling(PocketPaintApplication.GetInstance().CropControl.getRectangleCropSelectionWidth());
             Point leftTopRectangleCropSelection = PocketPaintApplication.GetInstance().CropControl.getLeftTopCoordinateRectangleCropSelection();
             CropImage((int)leftTopRectangleCropSelection.X, (int)leftTopRectangleCropSelection.Y, width, height);
         }
@@ -106,8 +106,12 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                     image.Height = wbCroppedBitmap.PixelHeight;
                     image.Width = wbCroppedBitmap.PixelWidth;
 
-                    PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
-                    PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
+                    if ((height + yOffset != (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height)
+                        || (width + xOffset != (int)PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width))
+                    {
+                        PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
+                        PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
+                    }
                     PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered(wbCroppedBitmap.PixelHeight, wbCroppedBitmap.PixelWidth);
                     PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = wbCroppedBitmap.PixelHeight;
                     PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = wbCroppedBitmap.PixelWidth;
