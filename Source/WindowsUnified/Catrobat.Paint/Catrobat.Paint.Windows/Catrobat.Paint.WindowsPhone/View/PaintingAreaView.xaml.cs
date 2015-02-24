@@ -139,6 +139,20 @@ namespace Catrobat.Paint.WindowsPhone.View
             toScaleValue.ScaleY = 0.75;
             toScaleValue.CenterX = width / 2.0;
             toScaleValue.CenterY = height / 2.0;
+            var rotateTransform = new RotateTransform();
+            if (PocketPaintApplication.GetInstance().angleForRotation != 0)
+            {
+                if (PocketPaintApplication.GetInstance().angleForRotation != 90
+                    || PocketPaintApplication.GetInstance().angleForRotation != 270)
+                {
+                    toScaleValue.ScaleX *= toScaleValue.ScaleX;
+                    toScaleValue.ScaleY *= toScaleValue.ScaleY;
+                }
+                
+                rotateTransform.Angle = PocketPaintApplication.GetInstance().angleForRotation;
+                rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Width) / 2;
+                rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Height) / 2);
+            }
             _transforms.Children.Add(toScaleValue);
 
             double moveValueToOffsetX = (Window.Current.Bounds.Width - PaintingAreaCheckeredGrid.Width * toScaleValue.ScaleX) / 2.0;
@@ -153,6 +167,14 @@ namespace Catrobat.Paint.WindowsPhone.View
             toTranslateValue2.X = moveValueToOffsetX;
             toTranslateValue2.Y = moveValueToOffsetY - 11.0;
             _transforms.Children.Add(toTranslateValue2);
+
+            if(PocketPaintApplication.GetInstance().angleForRotation != 0)
+            {
+                RotateTool rotateTool = new RotateTool();
+
+                // es soll der aktuelle Rotationswert verwendet werden.
+                rotateTool.RotateRight(0);
+            }
         }
 
         public void setSizeOfPaintingAreaViewCheckered()

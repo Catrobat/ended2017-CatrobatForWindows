@@ -18,7 +18,7 @@
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
                 </Grid.Background>
                 <Canvas x:Name="PaintingAreaCanvasUnderlaying" ManipulationMode="TranslateX, TranslateY, Scale" />
-                <Canvas x:Name="PaintingAreaCanvas" Background="#5FD7CCCC" ManipulationMode="TranslateX, TranslateY, Scale">
+                <Canvas x:Name="PaintingAreaCanvas" Background="#5FD7CCCC" HorizontalAlignment="Left" ManipulationMode="TranslateX, TranslateY, Scale" VerticalAlignment="Top">
                 </Canvas>
                 <!-- CursorControl -->
                 <Grid x:Name="GridCursor" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" 
