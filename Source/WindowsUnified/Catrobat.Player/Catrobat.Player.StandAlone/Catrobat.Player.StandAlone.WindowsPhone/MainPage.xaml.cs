@@ -46,7 +46,7 @@ namespace Catrobat.Player.StandAlone
             HardwareButtons.BackPressed += OnHardwareBackButtonPressed;
 
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
-            playerObject.InitPlayer(PlayerPage, "testTapp2");
+            playerObject.InitPlayer(PlayerPage, "testalphavalue");
         }
 
         private void OnRestartButtonClicked(object sender, RoutedEventArgs e)

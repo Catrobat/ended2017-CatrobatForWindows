@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catrobat.Player.Tests", "Ca
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Catrobat.Player.WindowsPhone.Tests", "Catrobat.Player.WindowsPhone.Tests\Catrobat.Player.WindowsPhone.Tests.vcxproj", "{33EFAC86-0136-4470-82DB-31D9FBA66CA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Player.WindowsPhone.UITests", "Catrobat.Player.WindowsPhone.UITests\Catrobat.Player.WindowsPhone.UITests.csproj", "{3DD89A78-783E-4D9B-9DE7-66301FD49946}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Catrobat.Player.StandAlone\Catrobat.Player.StandAlone.Shared\Catrobat.Player.StandAlone.Shared.projitems*{c4e11077-73c9-4cb7-8a81-0b64bf5013e9}*SharedItemsImports = 4
@@ -153,6 +155,22 @@ Global
 		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|x86.ActiveCfg = Release|Win32
 		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|x86.Build.0 = Release|Win32
 		{33EFAC86-0136-4470-82DB-31D9FBA66CA4}.Release|x86.Deploy.0 = Release|Win32
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Release|ARM.ActiveCfg = Release|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Release|Win32.ActiveCfg = Release|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Release|x64.ActiveCfg = Release|Any CPU
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -163,5 +181,6 @@ Global
 		{D7C8C804-13D0-4046-95AE-AAABF5FD530C} = {2F831919-46CC-4BA4-AA1A-E765D3E18097}
 		{C4E11077-73C9-4CB7-8A81-0B64BF5013E9} = {2F831919-46CC-4BA4-AA1A-E765D3E18097}
 		{33EFAC86-0136-4470-82DB-31D9FBA66CA4} = {4111F969-4676-4B31-893D-AD92EA3B3462}
+		{3DD89A78-783E-4D9B-9DE7-66301FD49946} = {4111F969-4676-4B31-893D-AD92EA3B3462}
 	EndGlobalSection
 EndGlobal
