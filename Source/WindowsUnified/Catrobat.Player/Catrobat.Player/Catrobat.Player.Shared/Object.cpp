@@ -285,8 +285,8 @@ bool Object::IsObjectHit(D2D1_POINT_2F position)
 
     Matrix3x2F translation = CalculateTranslationMatrix();
     D2D1_POINT_2F origin;
-    origin.x = m_look->GetWidth() / 2;
-    origin.y = m_look->GetHeight() / 2;
+    origin.x = (float)m_look->GetWidth() / 2;
+    origin.y = (float)m_look->GetHeight() / 2;
 
     Matrix3x2F positionInBitMap = translation;
     positionInBitMap._31 = (position.x - positionInBitMap._31) / m_ratio.width;
@@ -299,12 +299,5 @@ bool Object::IsObjectHit(D2D1_POINT_2F position)
     position.x = positionInBitMap._31;
     position.y = positionInBitMap._32;
 
-    try
-    {
-        return m_look->GetPixelAlphaValue(position) != 0;
-    }
-    catch (OutOfBoundsException *e)
-    {
-        return false;
-    }
+    return m_look->GetPixelAlphaValue(position) != 0;
 }

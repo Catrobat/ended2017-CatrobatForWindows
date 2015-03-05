@@ -24,7 +24,7 @@ TextureDaemon *TextureDaemon::Instance()
 
 TextureDaemon::TextureDaemon() {}
 
-void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources, CatrobatTexture** texture, std::string textureKey)
+void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources, CatrobatTexture* texture, std::string textureKey)
 {
     auto deviceContext = deviceResources->GetD2DDeviceContext();
 
@@ -68,8 +68,8 @@ void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& devi
     IWICBitmap *pIBitmap = NULL;
     IWICBitmapLock *pILock = NULL;
 
-    UINT uiWidth = bitmap->GetSize().width;
-    UINT uiHeight = bitmap->GetSize().height;
+    UINT uiWidth = (UINT)bitmap->GetSize().width;
+    UINT uiHeight = (UINT)bitmap->GetSize().height;
 
     WICRect rcLock = { 0, 0, uiWidth, uiHeight };
 
@@ -87,18 +87,33 @@ void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& devi
     // Retrieve a pointer to the pixel data.
     pILock->GetDataPointer(&cbBufferSize, &pv);
 
-
     vector<vector<int>> alphaMap;
-    for (int r = 0; r < uiHeight; r++)
-    {
-        vector<int> row;
-        for (int c = 0; c < uiWidth; c++)
-        {
-            row.push_back(pv[(r * uiWidth + c) * 4 + 3]);
-        }
-        alphaMap.push_back(row);
-    }
-    (*texture)->SetAlphaMap(alphaMap);
-    (*texture)->SetBitmap(bitmap);
+
+	if (cbBufferSize == uiHeight*uiWidth * 4)
+	{
+		for (UINT r = 0; r < uiHeight; r++)
+		{
+			vector<int> row;
+			for (UINT c = 0; c < uiWidth; c++)
+			{
+				row.push_back(pv[(r * uiWidth + c) * 4 + 3]);
+			}
+			alphaMap.push_back(row);
+		}
+	}
+	else
+	{
+		for (UINT r = 0; r < uiHeight; r++)
+		{
+			vector<int> row;
+			for (UINT c = 0; c < uiWidth; c++)
+			{
+				row.push_back(255);
+			}
+			alphaMap.push_back(row);
+		}
+	}
+    (texture)->SetAlphaMap(alphaMap);
+    (texture)->SetBitmap(bitmap);
 }
 
