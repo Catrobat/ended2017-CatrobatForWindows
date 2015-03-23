@@ -235,6 +235,9 @@ namespace Catrobat.Paint.WindowsPhone
                 case ToolType.Cursor:
                     ToolCurrent = new CursorTool();
                     break;
+                case ToolType.Fill:
+                    ToolCurrent = new FillTool();
+                    break;
                 case ToolType.Ellipse:
                     ToolCurrent = new EllipseTool();
                     break;

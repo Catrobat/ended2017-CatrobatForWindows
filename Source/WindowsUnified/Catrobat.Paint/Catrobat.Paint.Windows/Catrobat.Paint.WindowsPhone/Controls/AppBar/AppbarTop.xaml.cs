@@ -227,6 +227,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                     return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_crop.png", UriKind.Absolute);
                 case ToolType.Cursor:
                     return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
+                case ToolType.Fill:
+                    return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_bucket.png", UriKind.Absolute);
                 case ToolType.Ellipse:
                     return new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_ellipse.png", UriKind.Absolute);
                 case ToolType.Eraser:

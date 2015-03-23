@@ -177,6 +177,7 @@
     <Compile Include="PixelData\PixelData.cs" />
     <Compile Include="PocketPaintApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tool\FillTool.cs" />
     <Compile Include="Tool\StampTool.cs" />
     <Compile Include="Tool\CursorTool.cs" />
     <Compile Include="Tool\BrushTool.cs" />
