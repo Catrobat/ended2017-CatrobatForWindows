@@ -31,8 +31,13 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 Point coordinates = (Point)arg;
                 PixelData.PixelData PixelData = new PixelData.PixelData();
                 await PixelData.preparePaintingAreaCanvasPixel();
-                if (await PixelData.FloodFill(coordinates, PocketPaintApplication.GetInstance().PaintData.colorSelected) == false)
+                Catrobat.Paint.WindowsPhone.Ui.Spinner.StartSpinning();
+                if (PixelData.FloodFill(coordinates, PocketPaintApplication.GetInstance().PaintData.colorSelected) == false)
+                {
+                    Catrobat.Paint.WindowsPhone.Ui.Spinner.StopSpinning();
                     return;
+                }
+                Catrobat.Paint.WindowsPhone.Ui.Spinner.StopSpinning();
                 await PixelData.PixelBufferToBitmap();
             }
             catch (Exception)

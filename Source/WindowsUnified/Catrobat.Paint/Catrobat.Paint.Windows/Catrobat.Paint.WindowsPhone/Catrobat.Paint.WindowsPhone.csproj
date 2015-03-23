@@ -93,6 +93,7 @@
     <Compile Include="Command\CommandBase.cs" />
     <Compile Include="Command\CommandManager.cs" />
     <Compile Include="Command\EraserCommand.cs" />
+    <Compile Include="Command\FillCommand.cs" />
     <Compile Include="Command\FlipCommand.cs" />
     <Compile Include="Command\EllipseCommand.cs" />
     <Compile Include="Command\ClearWorkingSpaceCommand.cs" />
