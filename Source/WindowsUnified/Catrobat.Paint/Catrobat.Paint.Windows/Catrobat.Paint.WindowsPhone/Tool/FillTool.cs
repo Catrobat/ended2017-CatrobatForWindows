@@ -13,7 +13,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
     {
         public FillTool()
         {
-            ToolType = ToolType.Fill;        
+            ToolType = ToolType.Fill;    
         }
         public override void HandleDown(object arg)
         {
@@ -22,15 +22,23 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public async override void HandleUp(object arg)
         {
-            if (!(arg is Point))
+            try
+            {
+                if (!(arg is Point))
+                {
+                    return;
+                }
+                Point coordinates = (Point)arg;
+                PixelData.PixelData PixelData = new PixelData.PixelData();
+                await PixelData.preparePaintingAreaCanvasPixel();
+                if (await PixelData.FloodFill(coordinates, PocketPaintApplication.GetInstance().PaintData.colorSelected) == false)
+                    return;
+                await PixelData.PixelBufferToBitmap();
+            }
+            catch (Exception)
             {
                 return;
             }
-            Point coordinates = (Point)arg;
-            PixelData.PixelData PixelData = new PixelData.PixelData();
-            await PixelData.preparePaintingAreaCanvasPixel();
-            PixelData.FloodFill(coordinates, PocketPaintApplication.GetInstance().PaintData.colorSelected);
-            await PixelData.PixelBufferToBitmap();
         }
 
         public override void HandleMove(object arg)

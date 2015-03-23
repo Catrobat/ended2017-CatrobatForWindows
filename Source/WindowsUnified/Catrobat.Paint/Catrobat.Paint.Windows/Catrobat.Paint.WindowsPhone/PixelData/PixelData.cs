@@ -34,10 +34,6 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         public int BitmapWidth;
         public int pixelHeightCanvas;
         public int pixelWidthCanvas;
-        private byte[] pixelsBitmap;
-        int modCounterHeigth;
-        int modCounterWidth;
-
 
         #region Contructor
         public PixelData()
@@ -163,7 +159,7 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             return 0;
         }
 
-        public void FloodFill(Point p, SolidColorBrush color)
+        public async Task<bool> FloodFill(Point p, SolidColorBrush color)
         {
             try
             {
@@ -172,13 +168,16 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
                 BitmapWidth = PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
                 p = ConvertCoordinates(p);
                 string oldColor = getPixelFromCanvas(p);
+                if (oldColor == newColor)
+                    return false;
+
                 Stack<Point> list = new Stack<Point>();
                 list.Push(p);
                 while (list.Count > 0)
                 {
                     var p2 = list.Pop();
                     SetPixel(p2, newColor);
-                    if (p2.X > 0)
+                    if (p2.X > 1)
                     {
                         if (getPixelFromCanvas(new Point(p2.X - 1, p2.Y)) == oldColor)
                             list.Push(new Point(p2.X - 1, p2.Y));
@@ -188,7 +187,7 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
                         if (getPixelFromCanvas(new Point(p2.X + 1, p2.Y)) == oldColor)
                             list.Push(new Point(p2.X + 1, p2.Y));
                     }
-                    if (p2.Y > 0)
+                    if (p2.Y > 1)
                     {
                         if (getPixelFromCanvas(new Point(p2.X, p2.Y - 1)) == oldColor)
                             list.Push(new Point(p2.X, p2.Y - 1));
@@ -200,35 +199,38 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
                     }
 
                 }
+                return true;
             }
             catch (Exception)
             {
-
-                throw;
+                return false;
             }
         }
+
         public void SetPixel(Point p, string color)
         {
-            //double NormfactorX = (double)pixelWidthCanvas / BitmapWidth;
-            //double NormfactorY = (double)pixelHeightCanvas / BitmapHeight;
-            //
-            //double doubleY = ((double)point.Y) * NormfactorY;
-            //double doubleX = ((double)point.X) * NormfactorX;
-            //
-            //int intX = (int)Math.Round(doubleX, 0);
-            //int intY = (int)Math.Round(doubleY, 0);
+            int intTemp;
+            int intXTemp;
+            int intValue;
+            try
+            {
+                intTemp = ((int)p.Y - 1) * pixelWidthCanvas;
+                intXTemp = intTemp + ((int)p.X - 1);
+                 intValue = intXTemp * 4;
 
-            int intTemp = (int)p.Y * pixelWidthCanvas;
-            int intXTemp = intTemp + (int)p.X;
-            int intValue = intXTemp * 4;
+                var argb = color.Split('_');
 
-            var argb = color.Split('_');
-
-            pixelsCanvas[intValue + 3] = Convert.ToByte(argb[0]);
-            pixelsCanvas[intValue + 2] = Convert.ToByte(argb[1]);
-            pixelsCanvas[intValue + 1] = Convert.ToByte(argb[2]);
-            pixelsCanvas[intValue] = Convert.ToByte(argb[3]);
+                pixelsCanvas[intValue + 3] = Convert.ToByte(argb[0]);
+                pixelsCanvas[intValue + 2] = Convert.ToByte(argb[1]);
+                pixelsCanvas[intValue + 1] = Convert.ToByte(argb[2]);
+                pixelsCanvas[intValue] = Convert.ToByte(argb[3]);
+            }
+            catch (Exception)
+            {
+                return;
+            }
         }
+        
         public async Task<bool> PixelBufferToBitmap()
         {
             try
@@ -264,22 +266,16 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
 
         public string getPixelFromCanvas(Point p)
         {
+            int intTemp;
+            int intXTemp;
+            int intValue;
             try
             {
                 if (pixelsCanvas != null)
                 {
-                    //double NormfactorX = (double)pixelWidthCanvas / BitmapWidth;
-                    //double NormfactorY = (double)pixelHeightCanvas / BitmapHeight;
-                    //
-                    //double doubleY = (p.Y) * NormfactorY;
-                    //double doubleX = (p.X) * NormfactorX;
-                    //
-                    //int intX = (int)Math.Round(doubleX, 0);
-                    //int intY = (int)Math.Round(doubleY, 0);
-
-                    int intTemp = (int)p.Y * pixelWidthCanvas;
-                    int intXTemp = intTemp + (int)p.X;
-                    int intValue = intXTemp * 4;
+                    intTemp = ((int)p.Y - 1) * pixelWidthCanvas;
+                    intXTemp = intTemp + ((int)p.X - 1);
+                    intValue = intXTemp * 4;
 
                     var a = pixelsCanvas[intValue + 3];
                     var r = pixelsCanvas[intValue + 2];

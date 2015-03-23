@@ -157,7 +157,7 @@ namespace Catrobat.Paint
         protected async override void OnActivated(IActivatedEventArgs e)
         {
             base.OnActivated(e);
-            continuationManager = new ContinuationManager();
+            //continuationManager = new ContinuationManager();
 
             Frame rootFrame = CreateRootFrame();
             await RestoreStatusAsync(e.PreviousExecutionState);
@@ -171,7 +171,7 @@ namespace Catrobat.Paint
                 rootFrame.Navigate(typeof(PaintingAreaView));
                 if (continuationEventArgs != null)
                 {
-                    continuationManager.Continue(continuationEventArgs, rootFrame);
+                    //continuationManager.Continue(continuationEventArgs, rootFrame);
                 }
             }
 
