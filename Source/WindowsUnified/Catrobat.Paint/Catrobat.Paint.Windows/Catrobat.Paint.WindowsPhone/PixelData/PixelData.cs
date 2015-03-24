@@ -30,8 +30,8 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         private int Y;
         private byte[] pixelsCanvas;
         private byte[] pixelsCanvasEraser;
-        public int BitmapHeight;
-        public int BitmapWidth;
+        //public int BitmapHeight;
+        //public int BitmapWidth;
         public int pixelHeightCanvas;
         public int pixelWidthCanvas;
 
@@ -90,26 +90,23 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         #endregion
 
         #region FillTool
-        private byte[] ConvertArray()
+        public byte[] ConvertArray(byte[] pixles, int width, int height)
         {
             try
             {
-                if (pixelsCanvas != null)
+                if (pixles != null)
                 {
                     byte[] PixelsBitmap = new byte[PocketPaintApplication.GetInstance().Bitmap.PixelHeight *
                                                    PocketPaintApplication.GetInstance().Bitmap.PixelWidth *
                                                    4];
 
-                    double NormfactorX = BitmapWidth / (double)pixelWidthCanvas;
-                    double NormfactorY = BitmapHeight / (double)pixelHeightCanvas;
+                    double NormfactorX = PocketPaintApplication.GetInstance().Bitmap.PixelWidth / (double)width;
+                    double NormfactorY = PocketPaintApplication.GetInstance().Bitmap.PixelHeight / (double)height;
 
-                    for (int i = 0; i < pixelHeightCanvas; i++)
+                    for (int i = 0; i < height; i++)
                     {
-                        for (int j = 0; j < pixelWidthCanvas; j++)
+                        for (int j = 0; j < width; j++)
                         {
-                            int o;
-                            if(j == 479)
-                                 o = 13;
 
                             double doubleY = i * NormfactorY;
                             double doubleX = j * NormfactorX;
@@ -121,14 +118,14 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
                             int intXTemp = intTemp + intX;
                             int intValue = intXTemp * 4;
 
-                            int intTempCanvas = i * pixelWidthCanvas;
+                            int intTempCanvas = i * width;
                             int intXTempCanvas = intTempCanvas + j;
                             int intValueCanvas = intXTempCanvas * 4;
 
-                            PixelsBitmap[intValue] = pixelsCanvas[intValueCanvas];
-                            PixelsBitmap[intValue + 1] = pixelsCanvas[intValueCanvas + 1];
-                            PixelsBitmap[intValue + 2] = pixelsCanvas[intValueCanvas + 2];
-                            PixelsBitmap[intValue + 3] = pixelsCanvas[intValueCanvas + 3];
+                            PixelsBitmap[intValue] = pixles[intValueCanvas];
+                            PixelsBitmap[intValue + 1] = pixles[intValueCanvas + 1];
+                            PixelsBitmap[intValue + 2] = pixles[intValueCanvas + 2];
+                            PixelsBitmap[intValue + 3] = pixles[intValueCanvas + 3];
 
                         }
                     }
@@ -159,13 +156,15 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             return 0;
         }
 
-        public async Task<bool> FloodFill(Point p, SolidColorBrush color)
+        public bool FloodFill(Point p, SolidColorBrush color)
         {
             try
             {
                 string newColor = ColorToString(color);
-                BitmapHeight = PocketPaintApplication.GetInstance().Bitmap.PixelHeight;
-                BitmapWidth = PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
+                if (PocketPaintApplication.GetInstance().Bitmap == null)
+                {
+                    PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
+                }
                 p = ConvertCoordinates(p);
                 string oldColor = getPixelFromCanvas(p);
                 if (oldColor == newColor)
@@ -235,8 +234,8 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         {
             try
             {
-                pixelsCanvas = ConvertArray();                
-                var wbCroppedBitmap = new WriteableBitmap(BitmapWidth, BitmapHeight);
+                pixelsCanvas = ConvertArray(pixelsCanvas, pixelWidthCanvas, pixelHeightCanvas);                
+                var wbCroppedBitmap = new WriteableBitmap(PocketPaintApplication.GetInstance().Bitmap.PixelWidth, PocketPaintApplication.GetInstance().Bitmap.PixelHeight);
                 await wbCroppedBitmap.PixelBuffer.AsStream().WriteAsync(pixelsCanvas, 0, pixelsCanvas.Length);
                 
                 Image image = new Image();
@@ -257,8 +256,8 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
 
         private Point ConvertCoordinates(Point oldPoint)
         {
-            double NormfactorX = (double)pixelWidthCanvas / BitmapWidth;
-            double NormfactorY = (double)pixelHeightCanvas / BitmapHeight;
+            double NormfactorX = (double)pixelWidthCanvas / PocketPaintApplication.GetInstance().Bitmap.PixelWidth;
+            double NormfactorY = (double)pixelHeightCanvas / PocketPaintApplication.GetInstance().Bitmap.PixelHeight;
             double doubleY = (oldPoint.Y) * NormfactorY;
             double doubleX = (oldPoint.X) * NormfactorX;
             return new Point(Math.Round(doubleX, 0), Math.Round(doubleY, 0));

@@ -547,10 +547,25 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
             else if("barPipette" == type)
             {
-            
 
             }
-            else if("barEllipse" == type)
+            else if ("barFill" == type)
+            {
+
+                AppBarButton app_btnColor = new AppBarButton();
+
+                BitmapIcon color_icon = new BitmapIcon();
+                color_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_color_palette.png", UriKind.Absolute);
+                app_btnColor.Icon = color_icon;
+
+                app_btnColor.Label = "Farbe";
+
+                app_btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
+
+                cmdBar.PrimaryCommands.Add(app_btnColor);
+            }
+
+            else if ("barEllipse" == type)
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
                 AppBarButton app_btnReset = new AppBarButton();
@@ -578,14 +593,14 @@ namespace Catrobat.Paint.WindowsPhone.View
                 loadManipulationEvents();
                 unloadPointerEvents();
             }
-            else if("barEraser" == type)
+            else if ("barEraser" == type)
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
 
                 BitmapIcon thickness_icon = new BitmapIcon();
                 thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
                 app_btnBrushThickness.Icon = thickness_icon;
-               
+
                 app_btnBrushThickness.Label = "Pinselstärke";
 
                 app_btnBrushThickness.Click += btnThickness_Click;
@@ -629,7 +644,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 unloadPointerEvents();
                 loadManipulationEvents();
             }
-            else if("barRotate" == type)
+            else if ("barRotate" == type)
             {
                 AppBarButton app_btnRotate_left = new AppBarButton();
                 AppBarButton app_btnRotate_right = new AppBarButton();
@@ -640,7 +655,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 BitmapIcon rotate_left_icon = new BitmapIcon();
                 rotate_left_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_rotate_left.png", UriKind.Absolute);
                 app_btnRotate_left.Icon = rotate_left_icon;
-                
+
                 BitmapIcon rotate_right_icon = new BitmapIcon();
                 rotate_right_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_rotate_right.png", UriKind.Absolute);
                 app_btnRotate_right.Icon = rotate_right_icon;
@@ -691,7 +706,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 loadManipulationEvents();
                 unloadPointerEvents();
             }
-            else if("barFlip" == type)
+            else if ("barFlip" == type)
             {
                 AppBarButton app_btnHorizontal = new AppBarButton();
                 AppBarButton app_btnVertical = new AppBarButton();
@@ -726,7 +741,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 cmdBar.PrimaryCommands.Add(app_btnVertical);
                 cmdBar.PrimaryCommands.Add(app_btnReset);
             }
-            else if("barStamp" == type)
+            else if ("barStamp" == type)
             {
                 AppBarButton app_btnStampCopy = new AppBarButton();
                 AppBarButton app_btnStampClear = new AppBarButton();
@@ -1191,6 +1206,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                     break;
                 case ToolType.Eraser:
                     createAppBarAndSwitchAppBarContent("barEraser");
+                    break;
+                case ToolType.Fill:
+                    createAppBarAndSwitchAppBarContent("barFill");
                     break;
                 case ToolType.Flip:
                     createAppBarAndSwitchAppBarContent("barFlip");
