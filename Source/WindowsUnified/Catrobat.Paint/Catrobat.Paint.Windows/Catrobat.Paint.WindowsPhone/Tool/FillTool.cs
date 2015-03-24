@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Catrobat.Paint.WindowsPhone.Command;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,16 +30,18 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                     return;
                 }
                 Point coordinates = (Point)arg;
-                PixelData.PixelData PixelData = new PixelData.PixelData();
-                await PixelData.preparePaintingAreaCanvasPixel();
+                PixelData.PixelData pixelData = new PixelData.PixelData();
+                await pixelData.preparePaintingAreaCanvasPixel();
                 Catrobat.Paint.WindowsPhone.Ui.Spinner.StartSpinning();
-                if (PixelData.FloodFill(coordinates, PocketPaintApplication.GetInstance().PaintData.colorSelected) == false)
+                if (pixelData.FloodFill(coordinates, PocketPaintApplication.GetInstance().PaintData.colorSelected) == false)
                 {
                     Catrobat.Paint.WindowsPhone.Ui.Spinner.StopSpinning();
                     return;
                 }
                 Catrobat.Paint.WindowsPhone.Ui.Spinner.StopSpinning();
-                await PixelData.PixelBufferToBitmap();
+                await pixelData.PixelBufferToBitmap();
+                CommandManager.GetInstance().CommitCommand(new FillCommand(pixelData));
+
             }
             catch (Exception)
             {

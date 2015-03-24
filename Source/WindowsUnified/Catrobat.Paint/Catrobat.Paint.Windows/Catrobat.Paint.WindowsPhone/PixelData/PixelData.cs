@@ -28,7 +28,8 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         public String ReturnString;
         private int X;
         private int Y;
-        private byte[] pixelsCanvas;
+        public byte[] pixelsCanvas;
+        public byte[] oldPixles;
         private byte[] pixelsCanvasEraser;
         //public int BitmapHeight;
         //public int BitmapWidth;
@@ -150,6 +151,7 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
 
             Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
             pixelsCanvas = WindowsRuntimeBufferExtensions.ToArray(buffer);
+            oldPixles = WindowsRuntimeBufferExtensions.ToArray(buffer);
             this.pixelHeightCanvas = retarbi.PixelHeight;
             this.pixelWidthCanvas = retarbi.PixelWidth;
             ColorBrush = new SolidColorBrush();
@@ -234,9 +236,9 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         {
             try
             {
-                pixelsCanvas = ConvertArray(pixelsCanvas, pixelWidthCanvas, pixelHeightCanvas);                
+                var bitmapPixels = ConvertArray(pixelsCanvas, pixelWidthCanvas, pixelHeightCanvas);                
                 var wbCroppedBitmap = new WriteableBitmap(PocketPaintApplication.GetInstance().Bitmap.PixelWidth, PocketPaintApplication.GetInstance().Bitmap.PixelHeight);
-                await wbCroppedBitmap.PixelBuffer.AsStream().WriteAsync(pixelsCanvas, 0, pixelsCanvas.Length);
+                await wbCroppedBitmap.PixelBuffer.AsStream().WriteAsync(bitmapPixels, 0, bitmapPixels.Length);
                 
                 Image image = new Image();
                 image.Source = wbCroppedBitmap;
