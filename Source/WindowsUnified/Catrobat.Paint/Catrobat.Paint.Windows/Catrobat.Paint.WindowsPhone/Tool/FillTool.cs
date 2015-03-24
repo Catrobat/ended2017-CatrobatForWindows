@@ -33,7 +33,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 PixelData.PixelData pixelData = new PixelData.PixelData();
                 await pixelData.preparePaintingAreaCanvasPixel();
                 Catrobat.Paint.WindowsPhone.Ui.Spinner.StartSpinning();
-                if (pixelData.FloodFill(coordinates, PocketPaintApplication.GetInstance().PaintData.colorSelected) == false)
+                if (pixelData.FloodFill4(coordinates, PocketPaintApplication.GetInstance().PaintData.colorSelected) == false)
                 {
                     Catrobat.Paint.WindowsPhone.Ui.Spinner.StopSpinning();
                     return;

@@ -158,7 +158,7 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             return 0;
         }
 
-        public bool FloodFill(Point p, SolidColorBrush color)
+        public bool FloodFill4(Point p, SolidColorBrush color)
         {
             try
             {
@@ -180,23 +180,101 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
                     SetPixel(p2, newColor);
                     if (p2.X > 1)
                     {
+                        if (ComparePixelsColorForFloddFill(new Point(p2.X - 1, p2.Y),oldColor))
+                            list.Push(new Point(p2.X - 1, p2.Y));
+                    }
+                    if (p2.X < pixelWidthCanvas)
+                    {
+                        if (ComparePixelsColorForFloddFill(new Point(p2.X + 1, p2.Y), oldColor))
+                            list.Push(new Point(p2.X + 1, p2.Y));
+                    }
+                    if (p2.Y > 1)
+                    {
+                        if (ComparePixelsColorForFloddFill(new Point(p2.X, p2.Y - 1),oldColor))
+                            list.Push(new Point(p2.X, p2.Y - 1));
+                    }
+                    if (p2.Y < pixelHeightCanvas)
+                    {
+                        if (ComparePixelsColorForFloddFill(new Point(p2.X, p2.Y + 1), oldColor))
+                            list.Push(new Point(p2.X, p2.Y + 1));
+                    }
+
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool FloodFill8(Point p, SolidColorBrush color)
+        {
+            try
+            {
+                string newColor = ColorToString(color);
+                if (PocketPaintApplication.GetInstance().Bitmap == null)
+                {
+                    PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
+                }
+                p = ConvertCoordinates(p);
+                string oldColor = getPixelFromCanvas(p);
+                if (oldColor == newColor)
+                    return false;
+
+                Stack<Point> list = new Stack<Point>();
+                list.Push(p);
+                while (list.Count > 0)
+                {
+                    var p2 = list.Pop();
+                    SetPixel(p2, newColor);
+                    //left
+                    if (p2.X > 1)
+                    {
                         if (getPixelFromCanvas(new Point(p2.X - 1, p2.Y)) == oldColor)
                             list.Push(new Point(p2.X - 1, p2.Y));
                     }
+                    //right
                     if (p2.X < pixelWidthCanvas)
                     {
                         if (getPixelFromCanvas(new Point(p2.X + 1, p2.Y)) == oldColor)
                             list.Push(new Point(p2.X + 1, p2.Y));
                     }
+                    //above
                     if (p2.Y > 1)
                     {
                         if (getPixelFromCanvas(new Point(p2.X, p2.Y - 1)) == oldColor)
                             list.Push(new Point(p2.X, p2.Y - 1));
                     }
+                    //below
                     if (p2.Y < pixelHeightCanvas)
                     {
                         if (getPixelFromCanvas(new Point(p2.X, p2.Y + 1)) == oldColor)
                             list.Push(new Point(p2.X, p2.Y + 1));
+                    }
+                    //left-above
+                    if (p2.X > 1 && p2.Y > 1)
+                    {
+                        if (getPixelFromCanvas(new Point(p2.X - 1, p2.Y - 1)) == oldColor)
+                            list.Push(new Point(p2.X - 1, p2.Y - 1));
+                    }
+                    //right-below
+                    if (p2.X > 1 && p2.Y < pixelHeightCanvas)
+                    {
+                        if (getPixelFromCanvas(new Point(p2.X - 1, p2.Y + 1)) == oldColor)
+                            list.Push(new Point(p2.X - 1, p2.Y + 1));
+                    }
+                    //right-above
+                    if (p2.Y > 1 && p2.X < pixelWidthCanvas)
+                    {
+                        if (getPixelFromCanvas(new Point(p2.X + 1 , p2.Y - 1)) == oldColor)
+                            list.Push(new Point(p2.X + 1, p2.Y - 1));
+                    }
+                    //right-below
+                    if (p2.X < pixelWidthCanvas && p2.Y < pixelHeightCanvas)
+                    {
+                        if (getPixelFromCanvas(new Point(p2.X + 1, p2.Y + 1)) == oldColor)
+                            list.Push(new Point(p2.X + 1, p2.Y + 1));
                     }
 
                 }
@@ -287,6 +365,49 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
                 }
                 else
                     return null;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        public bool ComparePixelsColorForFloddFill(Point p, string oldColor)
+        {
+            int intTemp;
+            int intXTemp;
+            int intValue;
+            try
+            {
+                if (pixelsCanvas != null)
+                {
+                    intTemp = ((int)p.Y - 1) * pixelWidthCanvas;
+                    intXTemp = intTemp + ((int)p.X - 1);
+                    intValue = intXTemp * 4;
+
+                    oldColor.Split('_');
+                    var aO = oldColor.Split('_')[0];
+                    var rO = oldColor.Split('_')[1];
+                    var gO = oldColor.Split('_')[2];
+                    var bO = oldColor.Split('_')[3];
+                    var a = pixelsCanvas[intValue + 3];
+                    var r = pixelsCanvas[intValue + 2];
+                    var g = pixelsCanvas[intValue + 1];
+                    var b = pixelsCanvas[intValue];
+                    if (Math.Abs(Convert.ToInt16(aO) - (int)a) > 70)
+                        return false;
+                    if (Math.Abs(Convert.ToInt16(rO) - (int)r) > 70)
+                        return false;
+                    if (Math.Abs(Convert.ToInt16(gO) - (int)g) > 70)
+                        return false;
+                    if (Math.Abs(Convert.ToInt16(bO) - (int)b) > 70)
+                        return false;
+
+                    return true;
+                }
+                else
+                    return false;
 
             }
             catch (Exception)
