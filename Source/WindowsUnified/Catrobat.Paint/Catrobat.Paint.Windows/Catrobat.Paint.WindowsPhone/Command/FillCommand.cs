@@ -24,23 +24,22 @@ namespace Catrobat.Paint.WindowsPhone.Command
         private byte[] _newCanvas { get; set; }
         private int _width;
         private int _height;
-        private PixelData.PixelData _pD;
-        public FillCommand(byte[] oldCanvas, byte[] newCanvas, int width, int height)
+        private PixelData.PixelData _pD { get; set; }
+        public FillCommand(PixelData.PixelData pD)
         {
             ToolType = ToolType.Fill;
-            _oldCanvas = oldCanvas;
-            _newCanvas = newCanvas;
-            _width = width;
-            _height = height;
-            _pD = new PixelData.PixelData();
-
+            _oldCanvas = pD.oldPixles;
+            _newCanvas = pD.pixelsCanvas;
+            _width = pD.pixelHeightCanvas;
+            _height = pD.pixelWidthCanvas;
+            _pD = pD;
         }
 
         public override bool ReDo()
         {
             try
             {
-                PerformUndo();
+                //PerformRedo();
             }
             catch (Exception)
             {
@@ -53,7 +52,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
         {
             try
             {
-                PerformUndo();
+                //PerformUndo();
             }
             catch (Exception)
             {
