@@ -1,2 +1,0 @@
-﻿These file solves a well-known dependency-property Bug (see TFS-Bug Nr. 570):
-ensures that Binding in FormulaButton works (enables internal conversion from e.g. FormulaNodeAdd to base-class FormulaTree during Binding-process)
