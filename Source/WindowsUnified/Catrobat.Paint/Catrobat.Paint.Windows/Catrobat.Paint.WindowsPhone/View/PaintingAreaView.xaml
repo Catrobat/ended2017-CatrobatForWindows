@@ -65,7 +65,7 @@
         </Grid>
 
         <!-- Crop-Control -->
-        <userControls:CropControl x:Name="ctrlCropControl" Visibility="Collapsed"></userControls:CropControl>
+        <userControls:CropControl x:Name="ctrlCropControl" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"></userControls:CropControl>
 
         <!-- Stamp-Control -->
         <userControls:StampControl x:Name="ctrlStampControl" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"></userControls:StampControl>

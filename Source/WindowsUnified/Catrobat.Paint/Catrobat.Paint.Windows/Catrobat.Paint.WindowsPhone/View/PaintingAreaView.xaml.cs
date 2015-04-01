@@ -208,14 +208,13 @@ namespace Catrobat.Paint.WindowsPhone.View
             double moveValueToOffsetX = (Window.Current.Bounds.Width - PaintingAreaCheckeredGrid.Width * toScaleValue.ScaleX) / 2.0; ;
             double moveValueToOffsetY = (Window.Current.Bounds.Height - PaintingAreaCheckeredGrid.Height * toScaleValue.ScaleY) / 2.0;
 
-            var toTranslateValue = new TranslateTransform();
-            toTranslateValue.X -= _transforms.Value.OffsetX;
-            toTranslateValue.Y -= _transforms.Value.OffsetY;
-            _transforms.Children.Add(toTranslateValue);
+            //var toTranslateValue = new TranslateTransform();
+            //toTranslateValue.X -= _transforms.Value.OffsetX;
+            //toTranslateValue.Y -= _transforms.Value.OffsetY;
+            //_transforms.Children.Add(toTranslateValue);
 
             var toTranslateValue2 = new TranslateTransform();
-            toTranslateValue2.X = moveValueToOffsetX;
-            toTranslateValue2.Y = moveValueToOffsetY -11.0;
+            toTranslateValue2.Y -= 11.0;
             _transforms.Children.Add(toTranslateValue2);
 
         }
