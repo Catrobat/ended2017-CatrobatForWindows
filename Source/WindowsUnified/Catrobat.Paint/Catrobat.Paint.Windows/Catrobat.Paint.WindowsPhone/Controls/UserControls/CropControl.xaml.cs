@@ -329,8 +329,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             else
             {
-                heightCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight + doubleBorderWidthValue;
-                widthCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth + doubleBorderWidthValue;
+                heightCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight + offsetMargin * 2;
+                widthCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth + offsetMargin * 2;
 
                 moveCropControl.X = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
                 moveCropControl.Y = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
@@ -547,9 +547,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void setCropControlPosition(double cropControlHeight, double cropControlWidth, TranslateTransform moveValue)
         {
-            _transformGridMain.Children.Add(moveValue);
             setControlSize(cropControlHeight, cropControlWidth);
             setRectangleForMovementSize(cropControlHeight, cropControlWidth);
+            _transformGridMain.Children.Add(moveValue);
         }
 
         // TODO: Refactor the setCropSelection function.
@@ -570,7 +570,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             double doubleBorderWidthValue = offsetMargin * 2.0;
 
             _transformGridMain.Children.Clear();
-            GridMain.Margin = new Thickness(-5, -5, 0, 0);
+            GridMain.Margin = new Thickness(-5.0, -5.0, 0.0, 0.0);
 
             rectRectangleCropSelection.Stroke = currentPaintApplication.PaintingAreaCanvas.Children.Count == 0 ? new SolidColorBrush(Colors.Transparent) : new SolidColorBrush(Colors.CornflowerBlue);
             bool isWorkingSpaceNotRotated = paintingAreaCheckeredGridTransformGroup.Value.M11 > 0.0;
