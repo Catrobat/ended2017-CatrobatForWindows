@@ -97,7 +97,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                         case "BtnCrop":
                             pocketPaintApplication.SwitchTool(ToolType.Crop);
                             pocketPaintApplication.CropControl.Visibility = Visibility;
-                            pocketPaintApplication.CropControl.setCropSelection();
+                            pocketPaintApplication.CropControl.SetCropSelection();
                             //pocketPaintApplication.GridCropControl.Visibility = Visibility.Visible;
                             //pocketPaintApplication.GridCropControl.Children.Clear();
                             //pocketPaintApplication.GridCropControl.Children.Add(new CropControl());
@@ -197,7 +197,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             isOneToolButtonHolding = true;
 
             MessageDialog msg = new MessageDialog(message);
-            
+
 
             // TODO: Aktuell tritt eine Exception auf, da die asynchrone Programmierung nicht korrekt implementiert wurde.
             try
@@ -237,7 +237,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             showToolMessage("Bewege und verändere das Rechteck bis es über dem Bereich liegt " + Environment.NewLine
                 + "den du gerne aufnehmen würdest. Klicke in das Rechteck um den Bereich auszuwählen. Bewege das " + Environment.NewLine
-                + "Rechteck und klicke um zu stempeln.");        
+                + "Rechteck und klicke um zu stempeln.");
         }
 
         private void BtnRectangle_Holding(object sender, HoldingRoutedEventArgs e)

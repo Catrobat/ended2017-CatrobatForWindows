@@ -24,29 +24,28 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleDown(object arg)
         {
-            
+
         }
 
         public override void HandleMove(object arg)
         {
-            
+
         }
 
         public override void HandleUp(object arg)
-        
         {
             PocketPaintApplication.GetInstance().CropControl.CropImage();
         }
 
         public override void Draw(object o)
         {
-            
+
         }
 
         public override void ResetDrawingSpace()
         {
-            PocketPaintApplication.GetInstance().CropControl.setCropSelection();
-            PocketPaintApplication.GetInstance().CropControl.setIsModifiedRectangleMovement = false;
+            PocketPaintApplication.GetInstance().CropControl.SetCropSelection();
+            PocketPaintApplication.GetInstance().CropControl.SetIsModifiedRectangleMovement = false;
         }
     }
 }
