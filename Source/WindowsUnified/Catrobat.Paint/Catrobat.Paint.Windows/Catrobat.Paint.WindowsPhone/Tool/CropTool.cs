@@ -34,6 +34,11 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleUp(object arg)
         {
+            CropImage();
+        }
+
+        public void CropImage()
+        {
             PocketPaintApplication.GetInstance().CropControl.CropImage();
         }
 
