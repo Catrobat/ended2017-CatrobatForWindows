@@ -30,11 +30,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         const double MinVerticalCenterRectangleHeight = 5.0;
         const double MinRectangleMoveHeight = 60.0;
         const double MinRectangleMoveWidth = 60.0;
-        const double MultiplicationFactorGridSize = 0.3648;
-        const double MultiPlicationFactorRectangleSize = 0.3125;
         bool _isModifiedRectangleMovement;
-        double _mobileDisplayHeight = 0.0;
-        double _mobileDisplayWidth = 0.0;
 
         double _limitLeft = 0.0;
         double _limitRight = 0.0;
@@ -54,8 +50,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         public CropControl()
         {
             InitializeComponent();
-            _mobileDisplayHeight = Window.Current.Bounds.Height;
-            _mobileDisplayWidth = Window.Current.Bounds.Width;
             _transformGridMain = new TransformGroup();
             GridMain.RenderTransform = _transformGridMain;
             PocketPaintApplication.GetInstance().CropControl = this;
@@ -288,7 +282,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 return;
             }
             TranslateTransform translateTransformMovableCropSelection = new TranslateTransform();
-            TransformGroup transformGroupPaintingAreaCanvas = (currentPaintApplication.PaintingAreaCanvas.RenderTransform as TransformGroup);
             TransformGroup transformGroupPaintingAreaCheckeredGrid = currentPaintApplication.PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
             double paintingAreaCheckeredGridHeight = currentPaintApplication.PaintingAreaCheckeredGrid.Height;
             double paintingAreaCheckeredGridWidth = currentPaintApplication.PaintingAreaCheckeredGrid.Width;
@@ -349,7 +342,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 return;
             }
             TranslateTransform moveCropControl = new TranslateTransform();
-            TransformGroup transform = (currentPaintApplication.PaintingAreaCanvas.RenderTransform as TransformGroup);
             TransformGroup paintingAreaCheckeredGridTransformGroup = currentPaintApplication.PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
             double paintingAreaCheckeredGridHeight = currentPaintApplication.PaintingAreaCheckeredGrid.Height;
             double paintingAreaCheckeredGridWidth = currentPaintApplication.PaintingAreaCheckeredGrid.Width;
@@ -368,7 +360,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 _heightCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
                 _widthCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
 
-                double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
                 double workingSpaceWidth = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight;
                 double positionXRightTopCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
                 double positionXLeftTopCornerWorkingSpace = positionXRightTopCornerWorkingSpace - workingSpaceWidth;
@@ -395,7 +386,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 _heightCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth + doubleBorderWidthValue;
                 _widthCropControl = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight + doubleBorderWidthValue;
-                double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
                 double workingSpaceWidth = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight;
                 double positionXRightTopCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetX;
                 double positionXLeftTopCornerWorkingSpace = positionXRightTopCornerWorkingSpace - workingSpaceWidth;
@@ -417,7 +407,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 return;
             }
             TranslateTransform moveCropControl = new TranslateTransform();
-            TransformGroup transform = (currentPaintApplication.PaintingAreaCanvas.RenderTransform as TransformGroup);
             TransformGroup paintingAreaCheckeredGridTransformGroup = currentPaintApplication.PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
             double paintingAreaCheckeredGridHeight = currentPaintApplication.PaintingAreaCheckeredGrid.Height;
             double paintingAreaCheckeredGridWidth = currentPaintApplication.PaintingAreaCheckeredGrid.Width;
@@ -487,7 +476,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 return;
             }
             TranslateTransform moveCropControl = new TranslateTransform();
-            TransformGroup transform = (currentPaintApplication.PaintingAreaCanvas.RenderTransform as TransformGroup);
             TransformGroup paintingAreaCheckeredGridTransformGroup = currentPaintApplication.PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
             double paintingAreaCheckeredGridHeight = currentPaintApplication.PaintingAreaCheckeredGrid.Height;
             double paintingAreaCheckeredGridWidth = currentPaintApplication.PaintingAreaCheckeredGrid.Width;
@@ -507,7 +495,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 _heightCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValueWorkingSpace + doubleBorderWidthValue;
                 _widthCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValueWorkingSpace + doubleBorderWidthValue;
                 double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
-                double workingSpaceWidth = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight;
                 double positionYLeftBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
                 double positionYLeftTopCornerWorkingSpace = positionYLeftBottomCornerWorkingSpace - workingSpaceHeight;
 
@@ -534,7 +521,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 _heightCropControl = paintingAreaCheckeredGridTransformGroup.Value.M21 * paintingAreaCheckeredGridWidth + doubleBorderWidthValue;
                 _widthCropControl = paintingAreaCheckeredGridTransformGroup.Value.M21 * paintingAreaCheckeredGridHeight + doubleBorderWidthValue;
                 double workingSpaceHeight = paintingAreaCheckeredGridTransformGroup.Value.M21 * paintingAreaCheckeredGridWidth;
-                double workingSpaceWidth = paintingAreaCheckeredGridTransformGroup.Value.M21 * paintingAreaCheckeredGridHeight;
                 double positionYLeftBottomCornerWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.OffsetY;
                 double positionYLeftTopCornerWorkingSpace = positionYLeftBottomCornerWorkingSpace - workingSpaceHeight;
 
@@ -968,9 +954,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             TransformGroup paintingAreaCheckeredGridTransformGroup = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
             bool isWorkingSpaceNotRotated = paintingAreaCheckeredGridTransformGroup.Value.M11 > 0.0;
-            bool isWorkingSpaceRotated90Degree = paintingAreaCheckeredGridTransformGroup.Value.M12 > 0.0;
-            bool isWorkingSpaceRotated180Degree = paintingAreaCheckeredGridTransformGroup.Value.M11 < 0.0;
-            bool isWorkingSpaceRotated270Degree = paintingAreaCheckeredGridTransformGroup.Value.M12 < 0.0;
             if (isWorkingSpaceNotRotated)
             {
                 return new Point((Math.Ceiling(_transformGridMain.Value.OffsetX + 5.0 + GridMain.Margin.Left - _leftTopNullPointCropSelection.X) / 0.75), Math.Ceiling((_transformGridMain.Value.OffsetY + 5.0 + GridMain.Margin.Top - _leftTopNullPointCropSelection.Y) / 0.75));
@@ -997,8 +980,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             TransformGroup paintingAreaCheckeredGridTransformGroup = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
             bool isWorkingSpaceNotRotated = paintingAreaCheckeredGridTransformGroup.Value.M11 > 0.0;
             bool isWorkingSpaceRotated90Degree = paintingAreaCheckeredGridTransformGroup.Value.M12 > 0.0;
-            bool isWorkingSpaceRotated180Degree = paintingAreaCheckeredGridTransformGroup.Value.M11 < 0.0;
-            bool isWorkingSpaceRotated270Degree = paintingAreaCheckeredGridTransformGroup.Value.M12 < 0.0;
 
             int height = (int)Math.Ceiling(GetRectangleCropSelectionHeight());
             int width = (int)Math.Ceiling(GetRectangleCropSelectionWidth());
@@ -1050,8 +1031,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             TransformGroup paintingAreaCheckeredGridTransformGroup = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
             bool isWorkingSpaceNotRotated = paintingAreaCheckeredGridTransformGroup.Value.M11 > 0.0;
             bool isWorkingSpaceRotated90Degree = paintingAreaCheckeredGridTransformGroup.Value.M12 > 0.0;
-            bool isWorkingSpaceRotated180Degree = paintingAreaCheckeredGridTransformGroup.Value.M11 < 0.0;
-            bool isWorkingSpaceRotated270Degree = paintingAreaCheckeredGridTransformGroup.Value.M12 < 0.0;
 
             WriteableBitmap wbCroppedBitmap = null;
             if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count != 0)
@@ -1108,7 +1087,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                         }
                         catch (Exception ex)
                         {
-                            string test = ex.ToString();
                         }
                         wbCroppedBitmap.SetSource(mrAccessStream);
                         AddWriteableBitmapToCanvas(wbCroppedBitmap);
