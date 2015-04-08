@@ -485,27 +485,28 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
             else if("barCrop" == type)
             {
-                AppBarButton app_btnCutSelection = new AppBarButton();
+                AppBarButton app_btnCropImage = new AppBarButton();
                 AppBarButton app_btnResetSelection = new AppBarButton();
                 app_btnResetSelection.Name = "appButtonResetCrop";
 
                 BitmapIcon cutPictureIcon = new BitmapIcon();
                 cutPictureIcon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_crop_cut.png", UriKind.Absolute);
-                app_btnCutSelection.Icon = cutPictureIcon;
+                app_btnCropImage.Icon = cutPictureIcon;
 
                 BitmapIcon reset_icon = new BitmapIcon();
                 reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_crop_adjust.png", UriKind.Absolute);
                 app_btnResetSelection.Icon = reset_icon;
 
-                app_btnCutSelection.Label = "schneiden";
+                app_btnCropImage.Label = "schneiden";
                 app_btnResetSelection.Label = "Ausgangsposition";
 
                 app_btnResetSelection.Click += app_btn_reset_Click;
+                app_btnCropImage.Click += app_btnCropImage_Click;
 
                 app_btnResetSelection.IsEnabled = PocketPaintApplication.GetInstance().CropControl.SetIsModifiedRectangleMovement ? true : false;
 
                 cmdBar.PrimaryCommands.Add(app_btnResetSelection);
-                cmdBar.PrimaryCommands.Add(app_btnCutSelection);
+                cmdBar.PrimaryCommands.Add(app_btnCropImage);
             }
             else if("barImportPng" == type)
             {
@@ -836,6 +837,11 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             BottomAppBar = cmdBar;
             current_appbar = type;
+        }
+
+        void app_btnCropImage_Click(object sender, RoutedEventArgs e)
+        {
+            ((CropTool)PocketPaintApplication.GetInstance().ToolCurrent).CropImage();
         }
 
         void app_btnStampPaste_Click(object sender, RoutedEventArgs e)
