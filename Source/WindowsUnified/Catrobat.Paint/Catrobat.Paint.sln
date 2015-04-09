@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.WindowsPhone
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BD538556-21A1-4665-8C9D-FA3118C62304}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.WindowsPhone.Tests", "Catrobat.Paint.Windows\Catrobat.Paint.WindowsPhone.Tests\Catrobat.Paint.WindowsPhone.Tests.csproj", "{189FED25-76AD-42C7-8C2F-B7D8AA73324D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.WindowsPhone.TestsUI", "Catrobat.Paint.Windows\Catrobat.Paint.WindowsPhone.TestsUI\Catrobat.Paint.WindowsPhone.TestsUI.csproj", "{FAED07FD-3ECC-4459-986A-04D72416234C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.WindowsPhone.Tests", "Catrobat.Paint.Windows\Catrobat.Paint.WindowsPhone.Tests\Catrobat.Paint.WindowsPhone.Tests.csproj", "{278F2075-609F-4B5B-899C-DD084326567A}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -37,22 +37,24 @@ Global
 		SccProjectTopLevelParentUniqueName3 = Catrobat.Paint.sln
 		SccProjectName3 = Catrobat.Paint.Windows/Catrobat.Paint.WindowsPhone
 		SccLocalPath3 = Catrobat.Paint.Windows\\Catrobat.Paint.WindowsPhone
-		SccProjectUniqueName4 = Catrobat.Paint.Windows\\Catrobat.Paint.WindowsPhone.Tests\\Catrobat.Paint.WindowsPhone.Tests.csproj
+		SccProjectUniqueName4 = Catrobat.Paint.Windows\\Catrobat.Paint.WindowsPhone.TestsUI\\Catrobat.Paint.WindowsPhone.TestsUI.csproj
 		SccProjectTopLevelParentUniqueName4 = Catrobat.Paint.sln
-		SccProjectName4 = Catrobat.Paint.Windows/Catrobat.Paint.WindowsPhone.Tests
-		SccLocalPath4 = Catrobat.Paint.Windows\\Catrobat.Paint.WindowsPhone.Tests
-		SccProjectUniqueName5 = Catrobat.Paint.Windows\\Catrobat.Paint.WindowsPhone.TestsUI\\Catrobat.Paint.WindowsPhone.TestsUI.csproj
+		SccProjectName4 = Catrobat.Paint.Windows/Catrobat.Paint.WindowsPhone.TestsUI
+		SccLocalPath4 = Catrobat.Paint.Windows\\Catrobat.Paint.WindowsPhone.TestsUI
+		SccProjectUniqueName5 = Catrobat.Paint.Windows\\Catrobat.Paint.WindowsPhone.Tests\\Catrobat.Paint.WindowsPhone.Tests.csproj
 		SccProjectTopLevelParentUniqueName5 = Catrobat.Paint.sln
-		SccProjectName5 = Catrobat.Paint.Windows/Catrobat.Paint.WindowsPhone.TestsUI
-		SccLocalPath5 = Catrobat.Paint.Windows\\Catrobat.Paint.WindowsPhone.TestsUI
+		SccProjectName5 = Catrobat.Paint.Windows/Catrobat.Paint.WindowsPhone.Tests
+		SccLocalPath5 = Catrobat.Paint.Windows\\Catrobat.Paint.WindowsPhone.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
 		Release|ARM = Release|ARM
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
@@ -63,6 +65,9 @@ Global
 		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Debug|ARM.ActiveCfg = Debug|ARM
 		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Debug|ARM.Build.0 = Debug|ARM
 		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Debug|ARM.Deploy.0 = Debug|ARM
+		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
 		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Debug|x86.ActiveCfg = Debug|x86
 		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Debug|x86.Build.0 = Debug|x86
@@ -73,44 +78,49 @@ Global
 		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Release|ARM.ActiveCfg = Release|ARM
 		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Release|ARM.Build.0 = Release|ARM
 		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Release|ARM.Deploy.0 = Release|ARM
+		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Release|Mixed Platforms.Build.0 = Release|x86
+		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Release|Mixed Platforms.Deploy.0 = Release|x86
 		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Release|x64.ActiveCfg = Release|Any CPU
 		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Release|x86.ActiveCfg = Release|x86
 		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Release|x86.Build.0 = Release|x86
 		{680185AC-CE56-45F2-B4EA-C6F94ADAB887}.Release|x86.Deploy.0 = Release|x86
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Debug|ARM.ActiveCfg = Debug|ARM
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Debug|ARM.Build.0 = Debug|ARM
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Debug|ARM.Deploy.0 = Debug|ARM
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Debug|x64.ActiveCfg = Debug|x64
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Debug|x64.Build.0 = Debug|x64
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Debug|x64.Deploy.0 = Debug|x64
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Debug|x86.ActiveCfg = Debug|x86
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Debug|x86.Build.0 = Debug|x86
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Debug|x86.Deploy.0 = Debug|x86
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Release|ARM.ActiveCfg = Release|ARM
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Release|ARM.Build.0 = Release|ARM
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Release|ARM.Deploy.0 = Release|ARM
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Release|x64.ActiveCfg = Release|x64
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Release|x64.Build.0 = Release|x64
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Release|x64.Deploy.0 = Release|x64
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Release|x86.ActiveCfg = Release|x86
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Release|x86.Build.0 = Release|x86
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D}.Release|x86.Deploy.0 = Release|x86
 		{FAED07FD-3ECC-4459-986A-04D72416234C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FAED07FD-3ECC-4459-986A-04D72416234C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAED07FD-3ECC-4459-986A-04D72416234C}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FAED07FD-3ECC-4459-986A-04D72416234C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FAED07FD-3ECC-4459-986A-04D72416234C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{FAED07FD-3ECC-4459-986A-04D72416234C}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{FAED07FD-3ECC-4459-986A-04D72416234C}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{FAED07FD-3ECC-4459-986A-04D72416234C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAED07FD-3ECC-4459-986A-04D72416234C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FAED07FD-3ECC-4459-986A-04D72416234C}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FAED07FD-3ECC-4459-986A-04D72416234C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FAED07FD-3ECC-4459-986A-04D72416234C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FAED07FD-3ECC-4459-986A-04D72416234C}.Release|x64.ActiveCfg = Release|Any CPU
 		{FAED07FD-3ECC-4459-986A-04D72416234C}.Release|x86.ActiveCfg = Release|Any CPU
+		{278F2075-609F-4B5B-899C-DD084326567A}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Debug|ARM.ActiveCfg = Debug|ARM
+		{278F2075-609F-4B5B-899C-DD084326567A}.Debug|ARM.Build.0 = Debug|ARM
+		{278F2075-609F-4B5B-899C-DD084326567A}.Debug|ARM.Deploy.0 = Debug|ARM
+		{278F2075-609F-4B5B-899C-DD084326567A}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Debug|x64.ActiveCfg = Debug|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Debug|x86.ActiveCfg = Debug|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Debug|x86.Build.0 = Debug|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Debug|x86.Deploy.0 = Debug|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Release|Any CPU.ActiveCfg = Release|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Release|ARM.ActiveCfg = Release|ARM
+		{278F2075-609F-4B5B-899C-DD084326567A}.Release|ARM.Build.0 = Release|ARM
+		{278F2075-609F-4B5B-899C-DD084326567A}.Release|ARM.Deploy.0 = Release|ARM
+		{278F2075-609F-4B5B-899C-DD084326567A}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Release|Mixed Platforms.Build.0 = Release|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Release|Mixed Platforms.Deploy.0 = Release|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Release|x64.ActiveCfg = Release|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Release|x86.ActiveCfg = Release|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Release|x86.Build.0 = Release|x86
+		{278F2075-609F-4B5B-899C-DD084326567A}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,7 +129,7 @@ Global
 		{4F1F10F4-5C60-45B2-B406-CDB2C6C27D92} = {00BF5AB2-A2E9-4C7C-8ED4-67A527C9B593}
 		{680185AC-CE56-45F2-B4EA-C6F94ADAB887} = {00BF5AB2-A2E9-4C7C-8ED4-67A527C9B593}
 		{BD538556-21A1-4665-8C9D-FA3118C62304} = {00BF5AB2-A2E9-4C7C-8ED4-67A527C9B593}
-		{189FED25-76AD-42C7-8C2F-B7D8AA73324D} = {BD538556-21A1-4665-8C9D-FA3118C62304}
 		{FAED07FD-3ECC-4459-986A-04D72416234C} = {BD538556-21A1-4665-8C9D-FA3118C62304}
+		{278F2075-609F-4B5B-899C-DD084326567A} = {BD538556-21A1-4665-8C9D-FA3118C62304}
 	EndGlobalSection
 EndGlobal
