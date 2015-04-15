@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<program>
+  <header>
+    <applicationBuildName/>
+    <applicationBuildNumber>0</applicationBuildNumber>
+    <applicationName>Pocket Code</applicationName>
+    <applicationVersion>0.9.3</applicationVersion>
+    <catrobatLanguageVersion>0.91</catrobatLanguageVersion>
+    <dateTimeUpload/>
+    <description>A functional dice. Tap it to "roll it".
+
+New background- and diceskin.
+New sounds.
+Compatible with latest version.</description>
+    <deviceName>Nexus 7</deviceName>
+    <mediaLicense>http://developer.catrobat.org/ccbysa_v3</mediaLicense>
+    <platform>Android</platform>
+    <platformVersion>18</platformVersion>
+    <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
+    <programName>VCTapdice 3 Reskinned</programName>
+    <remixOf/>
+    <screenHeight>1205</screenHeight>
+    <screenWidth>800</screenWidth>
+    <tags/>
+    <url>http://pocketcode.org/details/991</url>
+    <userHandle>VCT</userHandle>
+  </header>
+  <objectList>
+    <object>
+      <lookList />
+      <name>Hintergrund</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <ifLogicBeginBrick>
+              <ifCondition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </ifCondition>
+              <ifElseBrick reference="../../ifLogicElseBrick[1]" />
+              <ifEndBrick reference="../../ifLogicEndBrick[1]" />
+            </ifLogicBeginBrick>
+            <ifLogicElseBrick>
+              <ifBeginBrick reference="../../ifLogicBeginBrick[1]" />
+              <ifEndBrick reference="../../ifLogicEndBrick[1]" />
+            </ifLogicElseBrick>
+            <ifLogicEndBrick>
+              <ifBeginBrick reference="../../ifLogicBeginBrick[1]" />
+              <ifElseBrick reference="../../ifLogicElseBrick[1]" />
+            </ifLogicEndBrick>
+          </brickList>
+        </startScript>
+      </scriptList>
+      <soundList />
+    </object>
+  </objectList>
+  <variables>
+    <objectVariableList />
+    <programVariableList />
+
+  </variables>
+</program>

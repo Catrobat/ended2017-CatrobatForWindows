@@ -1,0 +1,132 @@
+﻿<views:ViewPageBase
+    x:Class="Catrobat.IDE.WindowsPhone.Views.Editor.Looks.LookNameChooserView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:Catrobat.IDE.WindowsPhone.Views"
+    xmlns:listsViewControls="using:Catrobat.IDE.WindowsPhone.Controls.ListsViewControls"
+    xmlns:nativeConverters="using:Catrobat.IDE.WindowsShared.Converters.NativeConverters"
+    DataContext="{Binding LookNameChooserViewModel, Source={StaticResource Locator}}">
+  
+  <Grid Background="{ThemeResource AppBackgroundBrush}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    
+    <StackPanel Margin="12">
+
+      <TextBlock Text="{Binding Resources.Editor_TitleChooseLookName, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Margin="0 0 0 0" 
+                 Style="{ThemeResource TextTitleNormalStyle}"/>
+    </StackPanel>
+    <StackPanel Grid.Row="1" Margin="12 0 12 18">
+      <TextBlock Margin="0 0 0 6" 
+                 Text="{Binding Resources.Editor_LookName, 
+                 Source={StaticResource LocalizedStrings}}" 
+                 Style="{ThemeResource TextNormalStyle}"/>
+      <TextBox Margin="0 0 0 0"
+               HorizontalAlignment="Stretch"
+               Name="TextBoxLookName"
+               Text="{Binding LookName, Mode=TwoWay}" 
+               TextChanged="TextBoxLookName_OnTextChanged" 
+               MaxLength="{Binding Resources.Main_TextBoxLimit, 
+               Source={StaticResource LocalizedStrings}}"/>
+    </StackPanel>
+
+    <Grid Grid.Row="2" Margin="12,0,12,0">
+      <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      <TextBlock Grid.Row="0" Margin="12 0 12 0" 
+                 Text="{Binding Resources.Editor_ResizeImage, 
+                 Source={StaticResource LocalizedStrings}}"
+                 Style="{ThemeResource TextSmallStyle}"/>
+      <listsViewControls:SelectableGridView Grid.Row="1"  Margin="30 0 30 0" 
+        SelectionMode="Single"
+        ItemsSource="{Binding ImageSizes}" 
+        SelectedItem="{Binding SelectedSize, Mode=TwoWay}">
+        <ListViewBase.ItemTemplate>
+          <DataTemplate>
+            <Grid Margin="5" Width="135" Height="115" Background="Transparent">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+              </Grid.RowDefinitions>
+              <TextBlock Name="TextBlockHeader"  Grid.Row="0" Text="{Binding SizeName}"
+                Foreground="{Binding IsSelected, 
+                Converter={StaticResource SelectedBrushConverter}}"      
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                FontSize="20" Margin="5 0 33 0"/>
+              <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="3*"/>
+                  <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="3*"/>
+                  <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Grid.Column="0" Grid.Row="0" Margin="7 7 0 0" 
+                  Fill="{ThemeResource Accent1Brush}"></Rectangle>
+
+                <StackPanel Grid.Row="0" Grid.Column="0" 
+                            RequestedTheme="Dark"
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Center" 
+                            Margin="6 0 0 0" Orientation="Horizontal">
+                  <TextBlock Text="{Binding Percentage}" 
+                             FontSize="27" Margin="0 0 2 0"></TextBlock>
+                  <TextBlock Text="%" FontSize="27"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" 
+                            HorizontalAlignment="Center">
+                  <TextBlock
+                    VerticalAlignment="Center" 
+                    TextAlignment="Center" 
+                    Text="{Binding NewWidth, Converter={StaticResource IntPixelConverter}}" 
+                    Style="{ThemeResource TextNormalStyle}" Margin="0 0 3 0" />
+                </StackPanel>
+
+                <Grid Grid.Column="1" Grid.Row="0">
+                  <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                  </Grid.RowDefinitions>
+                  <TextBlock Grid.Row="1" FontSize="16"
+                    Text="{Binding NewHeight, Converter={StaticResource IntPixelConverter}}" 
+                    Margin="-0.25,24,0.25,-33" >
+                    <TextBlock.RenderTransform>
+                      <CompositeTransform Rotation="-90"/>
+                    </TextBlock.RenderTransform>
+                  </TextBlock>
+                </Grid>
+              </Grid>
+            </Grid>
+          </DataTemplate>
+        </ListViewBase.ItemTemplate>
+      </listsViewControls:SelectableGridView>
+    </Grid>
+  </Grid>
+  <Page.BottomAppBar>
+    <CommandBar RequestedTheme="Dark" Background="{ThemeResource AppBarBackgroundBrush}">
+      <CommandBar.PrimaryCommands>
+        <AppBarButton Icon="Save" 
+                      Label="{Binding Resources.Editor_ButtonSave, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding SaveCommand}"/>
+        <AppBarButton Icon="Cancel" 
+                      Label="{Binding Resources.Editor_ButtonCancel, 
+                      Source={StaticResource LocalizedStrings}}"
+                      Command="{Binding CancelCommand}"/>
+      </CommandBar.PrimaryCommands>
+    </CommandBar>
+  </Page.BottomAppBar>
+</views:ViewPageBase>
