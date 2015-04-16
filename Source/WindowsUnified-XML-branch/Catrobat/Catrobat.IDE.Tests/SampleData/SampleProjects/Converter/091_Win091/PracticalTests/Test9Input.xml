@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+  <header>
+    <applicationBuildName/>
+    <applicationBuildNumber>0</applicationBuildNumber>
+    <applicationName>Pocket Code</applicationName>
+    <applicationVersion>0.9.3</applicationVersion>
+    <catrobatLanguageVersion>0.91</catrobatLanguageVersion>
+    <dateTimeUpload/>
+    <description>Only for SFI. Only download if you know why.</description>
+    <deviceName>Nexus 7</deviceName>
+    <mediaLicense>http://developer.catrobat.org/ccbysa_v3</mediaLicense>
+    <platform>Android</platform>
+    <platformVersion>18</platformVersion>
+    <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
+    <programName>X-Cards CoinApp</programName>
+    <remixOf/>
+    <screenHeight>1205</screenHeight>
+    <screenWidth>800</screenWidth>
+    <tags/>
+    <url>http://pocketcode.org/details/990</url>
+    <userHandle>VCT</userHandle>
+  </header>
+  <objectList>
+    <object>
+      <lookList>
+        <look>
+          <fileName>3a4215f6b83b8329837321f962d6e5a4_Aussehen.png</fileName>
+          <name>Aussehen</name>
+        </look>
+      </lookList>
+      <name>Hintergrund</name>
+      <scriptList/>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>b665fc6e1a4a1d86282d61f0c27acbf1_Aussehen.png</fileName>
+          <name>1</name>
+        </look>
+        <look>
+          <fileName>bc1bd3b87acfa05dbce46c60a4e8d1e8_Aussehen.png</fileName>
+          <name>2</name>
+        </look>
+        <look>
+          <fileName>4fac073e53c82194d7d274899479c58b_Aussehen.png</fileName>
+          <name>3</name>
+        </look>
+      </lookList>
+      <name>Coinobject</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[2]"/>
+            </setLookBrick>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable>
+                <name>dings</name>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <type>USER_VARIABLE</type>
+                  <value>dangs</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <whenScript>
+          <brickList>
+            <changeVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable reference="../../../../startScript/brickList/setVariableBrick/userVariable"/>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1</value>
+                </formulaTree>
+              </variableFormula>
+            </changeVariableBrick>
+            <changeVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable>
+                <name>dangs</name>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1</value>
+                </formulaTree>
+              </variableFormula>
+            </changeVariableBrick>
+            <ifLogicBeginBrick>
+              <object reference="../../../../.."/>
+              <ifCondition>
+                <formulaTree>
+                  <leftChild>
+                    <type>USER_VARIABLE</type>
+                    <value>dings</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>6</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>EQUAL</value>
+                </formulaTree>
+              </ifCondition>
+              <ifElseBrick>
+                <object reference="../../../../../.."/>
+                <ifBeginBrick reference="../.."/>
+                <ifEndBrick>
+                  <object reference="../../../../../../.."/>
+                  <ifBeginBrick reference="../../.."/>
+                  <ifElseBrick reference="../.."/>
+                </ifEndBrick>
+              </ifElseBrick>
+              <ifEndBrick reference="../ifElseBrick/ifEndBrick"/>
+            </ifLogicBeginBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[3]"/>
+            </setLookBrick>
+            <ifLogicElseBrick reference="../ifLogicBeginBrick/ifElseBrick"/>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[2]"/>
+            </setLookBrick>
+            <ifLogicEndBrick reference="../ifLogicBeginBrick/ifElseBrick/ifEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+          <action>Tapped</action>
+        </whenScript>
+      </scriptList>
+      <soundList/>
+    </object>
+  </objectList>
+  <variables>
+    <objectVariableList>
+      <entry>
+        <object reference="../../../../objectList/object[2]"/>
+        <list/>
+      </entry>
+    </objectVariableList>
+    <programVariableList>
+      <userVariable reference="../../../objectList/object[2]/scriptList/startScript/brickList/setVariableBrick/userVariable"/>
+      <userVariable reference="../../../objectList/object[2]/scriptList/whenScript/brickList/changeVariableBrick[2]/userVariable"/>
+    </programVariableList>
+  </variables>
+</program>

@@ -1,0 +1,1264 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+  <header>
+    <applicationBuildName/>
+    <applicationBuildNumber>0</applicationBuildNumber>
+    <applicationName>Pocket Code</applicationName>
+    <applicationVersion>0.9.4</applicationVersion>
+    <catrobatLanguageVersion>0.91</catrobatLanguageVersion>
+    <dateTimeUpload/>
+    <description/>
+    <deviceName>GT-S6500</deviceName>
+    <mediaLicense>http://developer.catrobat.org/ccbysa_v3</mediaLicense>
+    <platform>Android</platform>
+    <platformVersion>10</platformVersion>
+    <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
+    <programName>Timer</programName>
+    <remixOf/>
+    <screenHeight>800</screenHeight>
+    <screenWidth>480</screenWidth>
+    <tags/>
+    <url>http://pocketcode.org/details/1003</url>
+    <userHandle>lucius1202</userHandle>
+  </header>
+  <objectList>
+    <object>
+      <lookList>
+        <look>
+          <fileName>a4b01106ca78ce45d10c1e8578caba6f_Timer-1.png</fileName>
+          <name>Timer-1</name>
+        </look>
+      </lookList>
+      <name>Background</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>135</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>start</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable>
+                <name>secondi totali </name>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.0</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>start</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>cbd9c32cbc4dcf7fc560dce4764ed9da_0-small.png</fileName>
+          <name>0-small</name>
+        </look>
+        <look>
+          <fileName>142558d6b69dbc5c80ed441d0f075620_1-small.png</fileName>
+          <name>1-small</name>
+        </look>
+        <look>
+          <fileName>340392820b47edcee2cc7611eaab0e4c_2-small.png</fileName>
+          <name>2-small</name>
+        </look>
+        <look>
+          <fileName>684a4e58e4a2ea4405728257c189eaa8_3-small.png</fileName>
+          <name>3-small</name>
+        </look>
+        <look>
+          <fileName>e8a412c137065d7f86d45cff4ce5d563_4-small.png</fileName>
+          <name>4-small</name>
+        </look>
+        <look>
+          <fileName>31d52f07e93015a6bdeafb44cbd9a229_5-small.png</fileName>
+          <name>5-small</name>
+        </look>
+        <look>
+          <fileName>83c7a08e172cd8a3e1436cbe8461605f_6-small.png</fileName>
+          <name>6-small</name>
+        </look>
+        <look>
+          <fileName>42a2d3c0dce53e407c22a9d7f56638e1_7-small.png</fileName>
+          <name>7-small</name>
+        </look>
+        <look>
+          <fileName>aa1d882afb764e2718d7c3fee1566e59_8-small.png</fileName>
+          <name>8-small</name>
+        </look>
+        <look>
+          <fileName>d8cc4106150df7c352841829cb07a114_9-small.png</fileName>
+          <name>9-small</name>
+        </look>
+      </lookList>
+      <name>min dec</name>
+      <scriptList>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>20</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>120</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>310</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable>
+                <name>costume </name>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>start</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <ifLogicBeginBrick>
+              <object reference="../../../../.."/>
+              <ifCondition>
+                <formulaTree>
+                  <leftChild>
+                    <type>USER_VARIABLE</type>
+                    <value>costume </value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>10</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>SMALLER_THAN</value>
+                </formulaTree>
+              </ifCondition>
+              <ifElseBrick>
+                <object reference="../../../../../.."/>
+                <ifBeginBrick reference="../.."/>
+                <ifEndBrick>
+                  <object reference="../../../../../../.."/>
+                  <ifBeginBrick reference="../../.."/>
+                  <ifElseBrick reference="../.."/>
+                </ifEndBrick>
+              </ifElseBrick>
+              <ifEndBrick reference="../ifElseBrick/ifEndBrick"/>
+            </ifLogicBeginBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <changeVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable reference="../../../../broadcastScript/brickList/setVariableBrick/userVariable"/>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1</value>
+                </formulaTree>
+              </variableFormula>
+            </changeVariableBrick>
+            <ifLogicElseBrick reference="../ifLogicBeginBrick/ifElseBrick"/>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>start</broadcastMessage>
+            </broadcastBrick>
+            <ifLogicEndBrick reference="../ifLogicBeginBrick/ifElseBrick/ifEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>+10min</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>cbd9c32cbc4dcf7fc560dce4764ed9da_0-small.png</fileName>
+          <name>0-small</name>
+        </look>
+        <look>
+          <fileName>142558d6b69dbc5c80ed441d0f075620_1-small.png</fileName>
+          <name>1-small</name>
+        </look>
+        <look>
+          <fileName>340392820b47edcee2cc7611eaab0e4c_2-small.png</fileName>
+          <name>2-small</name>
+        </look>
+        <look>
+          <fileName>684a4e58e4a2ea4405728257c189eaa8_3-small.png</fileName>
+          <name>3-small</name>
+        </look>
+        <look>
+          <fileName>e8a412c137065d7f86d45cff4ce5d563_4-small.png</fileName>
+          <name>4-small</name>
+        </look>
+        <look>
+          <fileName>31d52f07e93015a6bdeafb44cbd9a229_5-small.png</fileName>
+          <name>5-small</name>
+        </look>
+        <look>
+          <fileName>83c7a08e172cd8a3e1436cbe8461605f_6-small.png</fileName>
+          <name>6-small</name>
+        </look>
+        <look>
+          <fileName>42a2d3c0dce53e407c22a9d7f56638e1_7-small.png</fileName>
+          <name>7-small</name>
+        </look>
+        <look>
+          <fileName>aa1d882afb764e2718d7c3fee1566e59_8-small.png</fileName>
+          <name>8-small</name>
+        </look>
+        <look>
+          <fileName>d8cc4106150df7c352841829cb07a114_9-small.png</fileName>
+          <name>9-small</name>
+        </look>
+      </lookList>
+      <name>min uni</name>
+      <scriptList>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>20</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>50</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>310</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable>
+                <name>costume </name>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.0</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>start</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <ifLogicBeginBrick>
+              <object reference="../../../../.."/>
+              <ifCondition>
+                <formulaTree>
+                  <leftChild>
+                    <type>USER_VARIABLE</type>
+                    <value>costume </value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>9</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>SMALLER_THAN</value>
+                </formulaTree>
+              </ifCondition>
+              <ifElseBrick>
+                <object reference="../../../../../.."/>
+                <ifBeginBrick reference="../.."/>
+                <ifEndBrick>
+                  <object reference="../../../../../../.."/>
+                  <ifBeginBrick reference="../../.."/>
+                  <ifElseBrick reference="../.."/>
+                </ifEndBrick>
+              </ifElseBrick>
+              <ifEndBrick reference="../ifElseBrick/ifEndBrick"/>
+            </ifLogicBeginBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <changeVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable reference="../../../../broadcastScript/brickList/setVariableBrick/userVariable"/>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1</value>
+                </formulaTree>
+              </variableFormula>
+            </changeVariableBrick>
+            <ifLogicElseBrick reference="../ifLogicBeginBrick/ifElseBrick"/>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>+10min</broadcastMessage>
+            </broadcastBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable reference="../../../../broadcastScript/brickList/setVariableBrick/userVariable"/>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+            <ifLogicEndBrick reference="../ifLogicBeginBrick/ifElseBrick/ifEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>+1min</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>cbd9c32cbc4dcf7fc560dce4764ed9da_0-small.png</fileName>
+          <name>0-small</name>
+        </look>
+        <look>
+          <fileName>142558d6b69dbc5c80ed441d0f075620_1-small.png</fileName>
+          <name>1-small</name>
+        </look>
+        <look>
+          <fileName>340392820b47edcee2cc7611eaab0e4c_2-small.png</fileName>
+          <name>2-small</name>
+        </look>
+        <look>
+          <fileName>684a4e58e4a2ea4405728257c189eaa8_3-small.png</fileName>
+          <name>3-small</name>
+        </look>
+        <look>
+          <fileName>e8a412c137065d7f86d45cff4ce5d563_4-small.png</fileName>
+          <name>4-small</name>
+        </look>
+        <look>
+          <fileName>31d52f07e93015a6bdeafb44cbd9a229_5-small.png</fileName>
+          <name>5-small</name>
+        </look>
+      </lookList>
+      <name>sec dec</name>
+      <scriptList>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>20</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>50</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>310</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable>
+                <name>costume </name>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>start</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <ifLogicBeginBrick>
+              <object reference="../../../../.."/>
+              <ifCondition>
+                <formulaTree>
+                  <leftChild>
+                    <type>USER_VARIABLE</type>
+                    <value>costume2</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>5</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>SMALLER_THAN</value>
+                </formulaTree>
+              </ifCondition>
+              <ifElseBrick>
+                <object reference="../../../../../.."/>
+                <ifBeginBrick reference="../.."/>
+                <ifEndBrick>
+                  <object reference="../../../../../../.."/>
+                  <ifBeginBrick reference="../../.."/>
+                  <ifElseBrick reference="../.."/>
+                </ifEndBrick>
+              </ifElseBrick>
+              <ifEndBrick reference="../ifElseBrick/ifEndBrick"/>
+            </ifLogicBeginBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <changeVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable>
+                <name>costume2</name>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1</value>
+                </formulaTree>
+              </variableFormula>
+            </changeVariableBrick>
+            <ifLogicElseBrick reference="../ifLogicBeginBrick/ifElseBrick"/>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>+1min</broadcastMessage>
+            </broadcastBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable reference="../../changeVariableBrick/userVariable"/>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.0</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+            <ifLogicEndBrick reference="../ifLogicBeginBrick/ifElseBrick/ifEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>+10sec</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>cbd9c32cbc4dcf7fc560dce4764ed9da_0-small.png</fileName>
+          <name>0-small</name>
+        </look>
+        <look>
+          <fileName>142558d6b69dbc5c80ed441d0f075620_1-small.png</fileName>
+          <name>1-small</name>
+        </look>
+        <look>
+          <fileName>340392820b47edcee2cc7611eaab0e4c_2-small.png</fileName>
+          <name>2-small</name>
+        </look>
+        <look>
+          <fileName>684a4e58e4a2ea4405728257c189eaa8_3-small.png</fileName>
+          <name>3-small</name>
+        </look>
+        <look>
+          <fileName>e8a412c137065d7f86d45cff4ce5d563_4-small.png</fileName>
+          <name>4-small</name>
+        </look>
+        <look>
+          <fileName>31d52f07e93015a6bdeafb44cbd9a229_5-small.png</fileName>
+          <name>5-small</name>
+        </look>
+        <look>
+          <fileName>83c7a08e172cd8a3e1436cbe8461605f_6-small.png</fileName>
+          <name>6-small</name>
+        </look>
+        <look>
+          <fileName>42a2d3c0dce53e407c22a9d7f56638e1_7-small.png</fileName>
+          <name>7-small</name>
+        </look>
+        <look>
+          <fileName>aa1d882afb764e2718d7c3fee1566e59_8-small.png</fileName>
+          <name>8-small</name>
+        </look>
+        <look>
+          <fileName>d8cc4106150df7c352841829cb07a114_9-small.png</fileName>
+          <name>9-small</name>
+        </look>
+      </lookList>
+      <name>sec 0</name>
+      <scriptList>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>20</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>120</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>310</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>start</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>58da32be712cc3bfc7ffed64d3430b7b_10 Min-1.png</fileName>
+          <name>10 Min-1</name>
+        </look>
+      </lookList>
+      <name>10min</name>
+      <scriptList>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>100</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>100</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>start</receivedMessage>
+        </broadcastScript>
+        <whenScript>
+          <brickList>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>+10min</broadcastMessage>
+            </broadcastBrick>
+            <changeVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable reference="../../../../../../object/scriptList/broadcastScript/brickList/setVariableBrick/userVariable"/>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>600</value>
+                </formulaTree>
+              </variableFormula>
+            </changeVariableBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <action>Tapped</action>
+        </whenScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>65b9155dac21e6b2d488b36fcef91b94_10 Min.png</fileName>
+          <name>10 Min</name>
+        </look>
+      </lookList>
+      <name>1min</name>
+      <scriptList>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>100</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>start</receivedMessage>
+        </broadcastScript>
+        <whenScript>
+          <brickList>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>+1min</broadcastMessage>
+            </broadcastBrick>
+            <changeVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable reference="../../../../../../object/scriptList/broadcastScript/brickList/setVariableBrick/userVariable"/>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>60</value>
+                </formulaTree>
+              </variableFormula>
+            </changeVariableBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <action>Tapped</action>
+        </whenScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>fc0c4229e81f67c741e4212e4d2ceba4_10 Min-2.png</fileName>
+          <name>10 Min-2</name>
+        </look>
+      </lookList>
+      <name>10sec</name>
+      <scriptList>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>100</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>100</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>start</receivedMessage>
+        </broadcastScript>
+        <whenScript>
+          <brickList>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>+10sec</broadcastMessage>
+            </broadcastBrick>
+            <changeVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable reference="../../../../../../object/scriptList/broadcastScript/brickList/setVariableBrick/userVariable"/>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>10</value>
+                </formulaTree>
+              </variableFormula>
+            </changeVariableBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <action>Tapped</action>
+        </whenScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>11c6045f6522408361c9fc34cd2427cc_10 Min-3.png</fileName>
+          <name>10 Min-3</name>
+        </look>
+      </lookList>
+      <name>go</name>
+      <scriptList>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>100</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>210</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>start</receivedMessage>
+        </broadcastScript>
+        <whenScript>
+          <brickList>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>macchina</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <action>Tapped</action>
+        </whenScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>cab254fee1ccd416f5a4f90a9d195e49_10 Min-4.png</fileName>
+          <name>10 Min-4</name>
+        </look>
+      </lookList>
+      <name>X</name>
+      <scriptList>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>100</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>300</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>start</receivedMessage>
+        </broadcastScript>
+        <whenScript>
+          <brickList>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>start</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <action>Tapped</action>
+        </whenScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>6508b3d20df2e2d50b76ceb4a3693152_macchinina 3-small.png</fileName>
+          <name>macchinina 3-small</name>
+        </look>
+      </lookList>
+      <name>macchinina</name>
+      <scriptList>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>20</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>163</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>335</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <pointInDirectionBrick>
+              <object reference="../../../../.."/>
+              <degrees>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </degrees>
+            </pointInDirectionBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>start</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable>
+                <name>ciclo</name>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <type>SENSOR</type>
+                  <value>OBJECT_Y</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+            <repeatBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick>
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="repeatBrick" reference="../.."/>
+              </loopEndBrick>
+              <timesToRepeat>
+                <formulaTree>
+                  <type>USER_VARIABLE</type>
+                  <value>secondi totali </value>
+                </formulaTree>
+              </timesToRepeat>
+            </repeatBrick>
+            <changeVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable reference="../../setVariableBrick/userVariable"/>
+              <variableFormula>
+                <formulaTree>
+                  <leftChild>
+                    <type>NUMBER</type>
+                    <value>475</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>USER_VARIABLE</type>
+                    <value>secondi totali </value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>DIVIDE</value>
+                </formulaTree>
+              </variableFormula>
+            </changeVariableBrick>
+            <ifLogicBeginBrick>
+              <object reference="../../../../.."/>
+              <ifCondition>
+                <formulaTree>
+                  <leftChild>
+                    <type>USER_VARIABLE</type>
+                    <value>costume </value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>0</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>EQUAL</value>
+                </formulaTree>
+              </ifCondition>
+              <ifElseBrick>
+                <object reference="../../../../../.."/>
+                <ifBeginBrick reference="../.."/>
+                <ifEndBrick>
+                  <object reference="../../../../../../.."/>
+                  <ifBeginBrick reference="../../.."/>
+                  <ifElseBrick reference="../.."/>
+                </ifEndBrick>
+              </ifElseBrick>
+              <ifEndBrick reference="../ifElseBrick/ifEndBrick"/>
+            </ifLogicBeginBrick>
+            <playSoundBrick>
+              <object reference="../../../../.."/>
+              <sound>
+                <fileName>a0e16e3f5bcd058d662952bfe49ff4bc_clock.mp3</fileName>
+                <name>clock</name>
+              </sound>
+            </playSoundBrick>
+            <ifLogicElseBrick reference="../ifLogicBeginBrick/ifElseBrick"/>
+            <ifLogicEndBrick reference="../ifLogicBeginBrick/ifElseBrick/ifEndBrick"/>
+            <setYBrick>
+              <object reference="../../../../.."/>
+              <yPosition>
+                <formulaTree>
+                  <type>USER_VARIABLE</type>
+                  <value>ciclo</value>
+                </formulaTree>
+              </yPosition>
+            </setYBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <stopAllSoundsBrick>
+              <object reference="../../../../.."/>
+            </stopAllSoundsBrick>
+            <loopEndBrick reference="../repeatBrick/loopEndBrick"/>
+            <stopAllSoundsBrick>
+              <object reference="../../../../.."/>
+            </stopAllSoundsBrick>
+            <playSoundBrick>
+              <object reference="../../../../.."/>
+              <sound>
+                <fileName>2f12fae22fac5ef1ac1707e3d6824731_Bell.wav</fileName>
+                <name>Bell</name>
+              </sound>
+            </playSoundBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>macchina</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList>
+        <sound reference="../../scriptList/broadcastScript[2]/brickList/playSoundBrick[2]/sound"/>
+        <sound reference="../../scriptList/broadcastScript[2]/brickList/playSoundBrick/sound"/>
+      </soundList>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>b2cf98c4fabb73398f5b572885c20b80_nota 2-small.png</fileName>
+          <name>nota 2-small</name>
+        </look>
+        <look>
+          <fileName>048a70a8866521a078a147bf64034048_nota 3-small.png</fileName>
+          <name>nota 3-small</name>
+        </look>
+      </lookList>
+      <name>suono</name>
+      <scriptList>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>20</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>55</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>260</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable reference="../../../../../../object[4]/scriptList/broadcastScript/brickList/setVariableBrick/userVariable"/>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.0</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>start</receivedMessage>
+        </broadcastScript>
+        <whenScript>
+          <brickList>
+            <ifLogicBeginBrick>
+              <object reference="../../../../.."/>
+              <ifCondition>
+                <formulaTree>
+                  <leftChild>
+                    <type>USER_VARIABLE</type>
+                    <value>costume </value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>1</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>EQUAL</value>
+                </formulaTree>
+              </ifCondition>
+              <ifElseBrick>
+                <object reference="../../../../../.."/>
+                <ifBeginBrick reference="../.."/>
+                <ifEndBrick>
+                  <object reference="../../../../../../.."/>
+                  <ifBeginBrick reference="../../.."/>
+                  <ifElseBrick reference="../.."/>
+                </ifEndBrick>
+              </ifElseBrick>
+              <ifEndBrick reference="../ifElseBrick/ifEndBrick"/>
+            </ifLogicBeginBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <changeVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable reference="../../../../../../object[4]/scriptList/broadcastScript/brickList/setVariableBrick/userVariable"/>
+              <variableFormula>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>1</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </variableFormula>
+            </changeVariableBrick>
+            <ifLogicElseBrick reference="../ifLogicBeginBrick/ifElseBrick"/>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <changeVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable reference="../../../../../../object[4]/scriptList/broadcastScript/brickList/setVariableBrick/userVariable"/>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1</value>
+                </formulaTree>
+              </variableFormula>
+            </changeVariableBrick>
+            <ifLogicEndBrick reference="../ifLogicBeginBrick/ifElseBrick/ifEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+          <action>Tapped</action>
+        </whenScript>
+      </scriptList>
+      <soundList/>
+    </object>
+  </objectList>
+  <variables>
+    <objectVariableList>
+      <entry>
+        <object reference="../../../../objectList/object"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[6]"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[12]"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[8]"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[7]"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[2]"/>
+        <list>
+          <userVariable reference="../../../../../objectList/object[2]/scriptList/broadcastScript/brickList/setVariableBrick/userVariable"/>
+        </list>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[4]"/>
+        <list>
+          <userVariable reference="../../../../../objectList/object[4]/scriptList/broadcastScript[2]/brickList/changeVariableBrick/userVariable"/>
+        </list>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[3]"/>
+        <list>
+          <userVariable reference="../../../../../objectList/object[3]/scriptList/broadcastScript/brickList/setVariableBrick/userVariable"/>
+        </list>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[11]"/>
+        <list>
+          <userVariable reference="../../../../../objectList/object[11]/scriptList/broadcastScript[2]/brickList/setVariableBrick/userVariable"/>
+        </list>
+      </entry>
+    </objectVariableList>
+    <programVariableList>
+      <userVariable reference="../../../objectList/object/scriptList/broadcastScript/brickList/setVariableBrick/userVariable"/>
+      <userVariable reference="../../../objectList/object[4]/scriptList/broadcastScript/brickList/setVariableBrick/userVariable"/>
+    </programVariableList>
+  </variables>
+</program>

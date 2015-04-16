@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
+  <DefaultLanguage xmlns="" code="en-US"/>
+  <App xmlns="" ProductID="{c0ced763-9e71-4ca7-9def-ce037453ad52}" Title="PlayerWindowsPhone8Test" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="PlayerWindowsPhone8Test author" Description="Simple Direct3D application" Publisher="PlayerWindowsPhone8Test" PublisherID="{f9df2d5c-6983-4c89-ba6e-563e52b0f0e2}">
+    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
+    <Capabilities>
+      <Capability Name="ID_CAP_NETWORKING"/>
+      <Capability Name="ID_CAP_MEDIALIB_AUDIO"/>
+      <Capability Name="ID_CAP_MEDIALIB_PLAYBACK"/>
+      <Capability Name="ID_CAP_SENSORS"/>
+      <Capability Name="ID_CAP_WEBBROWSERCOMPONENT"/>
+    </Capabilities>
+    <Tasks>
+      <DefaultTask  Name ="_default" NavigationPage="MainPage.xaml"/>
+    </Tasks>
+    <Tokens>
+      <PrimaryToken TokenID="PlayerWindowsPhone8TestToken" TaskName="_default">
+        <TemplateFlip>
+          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <Count>0</Count>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
+          <Title>PlayerWindowsPhone8Test</Title>
+          <BackContent></BackContent>
+          <BackBackgroundImageURI></BackBackgroundImageURI>
+          <BackTitle></BackTitle>
+          <DeviceLockImageURI></DeviceLockImageURI>
+          <HasLarge></HasLarge>
+        </TemplateFlip>
+      </PrimaryToken>
+    </Tokens>
+    <ActivatableClasses>
+      <InProcessServer>
+        <Path>vstest_executionengine_platformbridge.dll</Path>
+        <ActivatableClass ActivatableClassId="vstest_executionengine_platformbridge.ServiceMain" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="vstest_executionengine_platformbridge.MessageTransmitter" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="vstest_executionengine_platformbridge.NativeMethods" ThreadingModel="both" />
+      </InProcessServer>
+      <InProcessServer>
+        <Path>CppUnitTestFramework_Executor_WindowsPhone.dll</Path>
+        <ActivatableClass ActivatableClassId="CppUnitTestFramework_Executor_WindowsPhone.TestResult" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CppUnitTestFramework_Executor_WindowsPhone.CppTestCase" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CppUnitTestFramework_Executor_WindowsPhone.CTestRunner" ThreadingModel="both" />
+      </InProcessServer>
+    </ActivatableClasses>
+    <ScreenResolutions>
+      <ScreenResolution Name="ID_RESOLUTION_WVGA" />
+      <ScreenResolution Name="ID_RESOLUTION_WXGA" />
+      <ScreenResolution Name="ID_RESOLUTION_HD720P" />
+    </ScreenResolutions>
+  </App>
+</Deployment>

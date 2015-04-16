@@ -1,0 +1,121 @@
+﻿<Page
+    x:Name="PlayerPage"
+    x:Class="Catrobat.Player.StandAlone.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Catrobat.Player.StandAlone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
+  <Grid Margin="0,0,0,-60">
+    <Grid.RowDefinitions>
+      <RowDefinition x:Name="mainRow" Height="*"/>
+    </Grid.RowDefinitions>
+
+    <SwapChainPanel x:Name="SwapChainPanel" 
+                    Margin="0,0,0,60"/>
+
+    <!-- Grid for axis functionality -->
+    <Grid x:Name="GridAxes" 
+          Visibility="Collapsed" 
+          Margin="0,0,0,60">
+      <!-- Vertical line -->
+      <Line Stroke="Red" 
+            StrokeThickness="2"
+            Stretch="Fill"
+            Margin="0,-1,0,-1"
+            Y1="0"
+            Y2="1" />
+      <!-- Horizontal line -->
+      <Line Stroke="Red" 
+            StrokeThickness="2"
+            Stretch="Fill"
+            Margin="-1,0,-1,0"
+            X1="0"
+            X2="1" />
+
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock HorizontalAlignment="Left" 
+                   VerticalAlignment="Center"
+                   Grid.Column="1"           
+                   Text="0" 
+                   FontSize="14"
+                   FontWeight="Bold"
+                   Foreground="Red" 
+                   Margin="5,25,0,0" />
+        <TextBlock x:Name="GridAxesXRight"
+                   HorizontalAlignment="Right" 
+                   VerticalAlignment="Center"
+                   Grid.Column="1"
+                   Text="000" 
+                   FontSize="14"
+                   FontWeight="Bold"
+                   Foreground="Red" 
+                   Margin="0,25,5,0" />
+        <TextBlock x:Name="GridAxesXLeft"
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Center"
+                   Text="-000" 
+                   FontSize="14"
+                   FontWeight="Bold"
+                   Foreground="Red" 
+                   Margin="5,25,0,0" />
+        <TextBlock x:Name="GridAxesYTop"
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Top"
+                   Grid.Column="1"
+                   Text="000" 
+                   FontSize="14"
+                   FontWeight="Bold"
+                   Foreground="Red" 
+                   Margin="5,2,0,0" />
+        <TextBlock x:Name="GridAxesYBottom"
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Bottom"
+                   Grid.Column="1"
+                   Text="-000" 
+                   FontSize="14"
+                   FontWeight="Bold"
+                   Foreground="Red" 
+                   Margin="5,0,0,0" />
+      </Grid>
+    </Grid>
+  </Grid>
+
+  <Page.BottomAppBar>
+    <CommandBar VerticalAlignment="Bottom" 
+                Visibility="Collapsed"
+                Opacity="0.8" >
+      <CommandBar.PrimaryCommands>
+        <AppBarButton Label="restart"
+          Icon="Refresh"
+          Click="OnRestartButtonClicked"/>
+        <AppBarButton Label="resume" 
+          Icon="Play" 
+          Click="OnResumeButtonClicked"/>
+        <AppBarButton Label="set thumbnail" 
+          Icon="Camera"
+          Click="OnThumbnailButtonClicked"/>
+        <AppBarButton Label="axes on" 
+                      Click="OnAxesButtonClicked">
+          <AppBarButton.Icon>
+            <BitmapIcon UriSource="ms-appx:///Assets/AxisIcon-48.png"/>
+          </AppBarButton.Icon>
+        </AppBarButton>
+      </CommandBar.PrimaryCommands>
+      <CommandBar.SecondaryCommands>
+        <AppBarButton Label="take screenshot" 
+          Click="OnScreenshotButtonClicked"/>
+      </CommandBar.SecondaryCommands>
+    </CommandBar>
+  </Page.BottomAppBar>
+
+</Page>
