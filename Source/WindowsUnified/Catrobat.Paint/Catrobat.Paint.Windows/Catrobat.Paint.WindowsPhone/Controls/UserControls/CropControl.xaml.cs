@@ -990,7 +990,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             return (rectRectangleCropSelection.Width - 10.0) / _scaleValueWorkingSpace;
         }
 
-        public Point GetLeftTopCoordinateRectangleCropSelection()
+        public Point GetLeftTopCoordinateOfCropSelection()
         {
             TransformGroup paintingAreaCheckeredGridTransformGroup = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
             bool isWorkingSpaceNotRotated = paintingAreaCheckeredGridTransformGroup != null && paintingAreaCheckeredGridTransformGroup.Value.M11 > 0.0;
@@ -1023,7 +1023,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             int height = (int)Math.Ceiling(GetRectangleCropSelectionHeight());
             int width = (int)Math.Ceiling(GetRectangleCropSelectionWidth());
-            Point leftTopRectangleCropSelection = GetLeftTopCoordinateRectangleCropSelection();
+            Point leftTopRectangleCropSelection = GetLeftTopCoordinateOfCropSelection();
 
             Image image = new Image();
 
@@ -1062,80 +1062,82 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         async public void CropImage()
         {
-            Point leftTopRectangleCropSelection = GetLeftTopCoordinateRectangleCropSelection();
-            double xOffset = leftTopRectangleCropSelection.X;
-            double yOffset = leftTopRectangleCropSelection.Y;
-            int height = (int)Math.Ceiling(PocketPaintApplication.GetInstance().CropControl.GetRectangleCropSelectionHeight());
-            int width = (int)Math.Ceiling(PocketPaintApplication.GetInstance().CropControl.GetRectangleCropSelectionWidth());
-
+            // needs a little bit more storage but the performance is also little bit better.
+            PocketPaintApplication currentApplication = PocketPaintApplication.GetInstance();
             TransformGroup paintingAreaCheckeredGridTransformGroup = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
-            bool isWorkingSpaceNotRotated = paintingAreaCheckeredGridTransformGroup != null && paintingAreaCheckeredGridTransformGroup.Value.M11 > 0.0;
-            bool isWorkingSpaceRotated90Degree = paintingAreaCheckeredGridTransformGroup != null && paintingAreaCheckeredGridTransformGroup.Value.M12 > 0.0;
+            bool isSomethingDrawnOnWorkingSpace = currentApplication.PaintingAreaCanvas.Children.Count != 0;
+            if (currentApplication == null || paintingAreaCheckeredGridTransformGroup == null || !isSomethingDrawnOnWorkingSpace)
+            {
+                return;
+            }
+            Point currentLeftTopCoordinateOfCropSelection = GetLeftTopCoordinateOfCropSelection();
+            int heightOfCropSelection = (int)Math.Ceiling(currentApplication.CropControl.GetRectangleCropSelectionHeight());
+            int widthOfCropSelection = (int)Math.Ceiling(currentApplication.CropControl.GetRectangleCropSelectionWidth());
+            
+            bool isWorkingSpaceNotRotated = paintingAreaCheckeredGridTransformGroup.Value.M11 > 0.0;
+            bool isWorkingSpaceRotated90Degree = paintingAreaCheckeredGridTransformGroup.Value.M12 > 0.0;
 
             WriteableBitmap wbCroppedBitmap = null;
-            if (PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count != 0)
+          
+            string filename = ("karlidavidtest") + ".png";
+            await currentApplication.StorageIo.WriteBitmapToPngMediaLibrary(filename);
+            StorageFile sfSavedPictureFromWorkingSpace = await KnownFolders.PicturesLibrary.GetFileAsync(filename);
+            InMemoryRandomAccessStream mrAccessStream = new InMemoryRandomAccessStream();
+
+            using (Stream streamOfSavedPictureFromWorkingSpace = await sfSavedPictureFromWorkingSpace.OpenStreamForReadAsync())
             {
-                string filename = ("karlidavidtest") + ".png";
-                await PocketPaintApplication.GetInstance().StorageIo.WriteBitmapToPngMediaLibrary(filename);
-                StorageFile storageFile = await KnownFolders.PicturesLibrary.GetFileAsync(filename);
-                InMemoryRandomAccessStream mrAccessStream = new InMemoryRandomAccessStream();
-
-                using (Stream stream = await storageFile.OpenStreamForReadAsync())
+                using (var memStream = new MemoryStream())
                 {
-                    using (var memStream = new MemoryStream())
+                    await streamOfSavedPictureFromWorkingSpace.CopyToAsync(memStream);
+                    memStream.Position = 0;
+
+                    BitmapDecoder bitmapDecoder = await BitmapDecoder.CreateAsync(memStream.AsRandomAccessStream());
+                    BitmapEncoder bitmapEncoder = await BitmapEncoder.CreateForTranscodingAsync(mrAccessStream, bitmapDecoder);
+
+                    bitmapEncoder.BitmapTransform.ScaledHeight = (uint)currentApplication.PaintingAreaCanvas.RenderSize.Height;
+                    bitmapEncoder.BitmapTransform.ScaledWidth = (uint)currentApplication.PaintingAreaCanvas.RenderSize.Width;
+
+                    uint canvasHeight = (uint)currentApplication.PaintingAreaCanvas.Height;
+                    uint canvasWidth = (uint)currentApplication.PaintingAreaCanvas.Width;
+                    BitmapBounds bitmapBoundsOfDrawing = new BitmapBounds();
+
+                    if (isWorkingSpaceNotRotated)
                     {
-                        await stream.CopyToAsync(memStream);
-                        memStream.Position = 0;
-
-                        BitmapDecoder bitmapDecoder = await BitmapDecoder.CreateAsync(memStream.AsRandomAccessStream());
-                        BitmapEncoder bitmapEncoder = await BitmapEncoder.CreateForTranscodingAsync(mrAccessStream, bitmapDecoder);
-
-                        bitmapEncoder.BitmapTransform.ScaledHeight = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Height;
-                        bitmapEncoder.BitmapTransform.ScaledWidth = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderSize.Width;
-
-                        uint canvasHeight = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height;
-                        uint canvasWidth = (uint)PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width;
-                        BitmapBounds bitmapBoundsOfDrawing = new BitmapBounds();
-
-                        if (isWorkingSpaceNotRotated)
-                        {
-                            // bitmapBounds starts with index zero. So we have to substract the height and width with one.
-                            bitmapBoundsOfDrawing.Height = (uint)height - 1;
-                            bitmapBoundsOfDrawing.Width = (uint)width - 1;
-                            uint uwidth = (uint)width;
-                            bitmapBoundsOfDrawing.X = ((uint)width + (uint)xOffset) > canvasWidth ? canvasWidth - uwidth : (uint)xOffset;
-                            uint uheight = (uint)height;
-                            bitmapBoundsOfDrawing.Y = ((uint)height + (uint)yOffset) > canvasHeight ? canvasHeight - uheight : (uint)yOffset;
-                            wbCroppedBitmap = new WriteableBitmap(width, height);
-                        }
-                        else if (isWorkingSpaceRotated90Degree)
-                        {
-                            bitmapBoundsOfDrawing.Height = (uint)width;
-                            bitmapBoundsOfDrawing.Width = (uint)height;
-                            uint uwidth = (uint)width;
-                            bitmapBoundsOfDrawing.X = ((uint)width + (uint)xOffset) > canvasHeight ? canvasHeight - uwidth : (uint)xOffset;
-                            uint uheight = (uint)height;
-                            bitmapBoundsOfDrawing.Y = ((uint)height + (uint)yOffset) > canvasWidth ? canvasWidth - uheight : (uint)yOffset;
-                            wbCroppedBitmap = new WriteableBitmap(height, width);
-                        }
-                        bitmapEncoder.BitmapTransform.Bounds = bitmapBoundsOfDrawing;
-
-                        // write out to the stream
-                        try
-                        {
-                            await bitmapEncoder.FlushAsync();
-                        }
-                        catch (Exception ex)
-                        {
-                            // ignored
-                        }
-                        if (wbCroppedBitmap != null)
-                        {
-                            wbCroppedBitmap.SetSource(mrAccessStream);
-                            AddWriteableBitmapToCanvas(wbCroppedBitmap);
-                        }
+                        // bitmapBounds starts with index zero. So we have to substract the height and width with value one.
+                        bitmapBoundsOfDrawing.Height = (uint)heightOfCropSelection - 1;
+                        bitmapBoundsOfDrawing.Width = (uint)widthOfCropSelection - 1;
+                        uint uwidthOfCropSelection = (uint)widthOfCropSelection;
+                        uint uheightOfCropSelection = (uint)heightOfCropSelection;
+                        bitmapBoundsOfDrawing.X = (uwidthOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.X) > canvasWidth ? canvasWidth - uwidthOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.X;
+                        bitmapBoundsOfDrawing.Y = ((uint)heightOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.Y) > canvasHeight ? canvasHeight - uheightOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.Y;
+                        wbCroppedBitmap = new WriteableBitmap(widthOfCropSelection, heightOfCropSelection);
                     }
-                    //render the stream to the screen
+                    else if (isWorkingSpaceRotated90Degree)
+                    {
+                        bitmapBoundsOfDrawing.Height = (uint)widthOfCropSelection - 1;
+                        bitmapBoundsOfDrawing.Width = (uint)heightOfCropSelection - 1;
+                        uint uwidthOfCropSelection = (uint)widthOfCropSelection;
+                        uint uheightOfCropSelection = (uint)heightOfCropSelection;
+                        bitmapBoundsOfDrawing.X = ((uint)widthOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.X) > canvasHeight ? canvasHeight - uwidthOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.X;
+                        bitmapBoundsOfDrawing.Y = ((uint)heightOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.Y) > canvasWidth ? canvasWidth - uheightOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.Y;
+                        wbCroppedBitmap = new WriteableBitmap(heightOfCropSelection, widthOfCropSelection);
+                    }
+                    bitmapEncoder.BitmapTransform.Bounds = bitmapBoundsOfDrawing;
+
+                    // write out to the stream
+                    try
+                    {
+                        await bitmapEncoder.FlushAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        // ignored
+                    }
+                    if (wbCroppedBitmap != null)
+                    {
+                        wbCroppedBitmap.SetSource(mrAccessStream);
+                        AddWriteableBitmapToCanvas(wbCroppedBitmap);
+                    }
                 }
             }
         }
