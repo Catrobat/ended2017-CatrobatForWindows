@@ -1142,9 +1142,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                         bitmapBoundsOfDrawing.Width = (uint)heightOfCropSelection - 1;
                         uint uwidthOfCropSelection = (uint)widthOfCropSelection;
                         uint uheightOfCropSelection = (uint)heightOfCropSelection;
-                        bitmapBoundsOfDrawing.X = ((uint)widthOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.X) > canvasHeight ? canvasHeight - uwidthOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.X;
-                        bitmapBoundsOfDrawing.Y = ((uint)heightOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.Y) > canvasWidth ? canvasWidth - uheightOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.Y;
-                        wbCroppedBitmap = new WriteableBitmap(heightOfCropSelection, widthOfCropSelection);
+                        bitmapBoundsOfDrawing.X = ((uint)heightOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.X) > canvasWidth ? canvasWidth - uwidthOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.X;
+                        bitmapBoundsOfDrawing.Y = ((uint)widthOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.Y) > canvasHeight ? canvasHeight - uwidthOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.Y;
+                        wbCroppedBitmap = new WriteableBitmap(widthOfCropSelection, heightOfCropSelection);
                     }
                     bitmapEncoder.BitmapTransform.Bounds = bitmapBoundsOfDrawing;
 
