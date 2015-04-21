@@ -489,6 +489,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 }
             }
             SetLimitsForMovableControlBorder(180);
+            SetLeftTopNullPointCropSelection(paintingAreaCheckeredGridTransformGroup.Value.OffsetX - PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width * scaleValueWorkingSpace,
+                    paintingAreaCheckeredGridTransformGroup.Value.OffsetY - currentPaintApplication.PaintingAreaCanvas.Height * _scaleValueWorkingSpace);
             SetCropControlPosition(_heightCropControl, _widthCropControl, moveCropControl);
         }
 
@@ -1003,6 +1005,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             bool isWorkingSpaceNotRotated = tgPaintingAreaCheckeredGrid.Value.M11 > 0.0;
             bool isWorkingSpaceRotated90Degree = tgPaintingAreaCheckeredGrid.Value.M12 > 0.0;
+            bool isWorkingSpaceRotated180Degree = tgPaintingAreaCheckeredGrid.Value.M11 < 0.0;
             bool isWorkingSpaceRotated270Degree = tgPaintingAreaCheckeredGrid.Value.M12 < 0.0;
             
             if (isWorkingSpaceNotRotated)
@@ -1013,6 +1016,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 double offsetY = GridMain.Margin.Right / _scaleValueWorkingSpace;
                 return new Point((_transformGridMain.Value.OffsetY + 5.0 + GridMain.Margin.Top - _leftTopNullPointCropSelection.Y) / _scaleValueWorkingSpace, offsetY);
+            }
+            else if (isWorkingSpaceRotated180Degree)
+            {
+                double offsetY = GridMain.Margin.Right / _scaleValueWorkingSpace;
+                return new Point((Math.Ceiling(_transformGridMain.Value.OffsetX + GridMain.Margin.Right - _leftTopNullPointCropSelection.X) / 0.75), Math.Ceiling((_transformGridMain.Value.OffsetY + GridMain.Margin.Bottom - _leftTopNullPointCropSelection.Y) / 0.75));
             }
             else if(isWorkingSpaceRotated270Degree)
             {
@@ -1040,6 +1048,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             TransformGroup tgPaintingAreaCheckeredGrid = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
             bool isWorkingSpaceNotRotated = tgPaintingAreaCheckeredGrid != null && tgPaintingAreaCheckeredGrid.Value.M11 > 0.0;
             bool isWorkingSpaceRotated90Degree = tgPaintingAreaCheckeredGrid != null && tgPaintingAreaCheckeredGrid.Value.M12 > 0.0;
+            bool isWorkingSpaceRotated180Degree = tgPaintingAreaCheckeredGrid.Value.M11 < 0.0;
             bool isWorkingSpaceRotated270Degree = tgPaintingAreaCheckeredGrid.Value.M12 < 0.0;
             int height = (int)Math.Ceiling(GetRectangleCropSelectionHeight());
             int width = (int)Math.Ceiling(GetRectangleCropSelectionWidth());
@@ -1074,6 +1083,22 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered(writeableBitmapToAdd.PixelHeight, writeableBitmapToAdd.PixelWidth);
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = writeableBitmapToAdd.PixelHeight;
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = writeableBitmapToAdd.PixelWidth;
+                PocketPaintApplication.GetInstance().CropControl.SetCropSelection();
+            }
+            else if (isWorkingSpaceRotated180Degree)
+            {
+                int heigthOfcroppedWorkingSpacePicture = writeableBitmapToAdd.PixelHeight;
+                int widthOfcroppedWorkingSpacePicture = writeableBitmapToAdd.PixelWidth;
+                image.Source = writeableBitmapToAdd;
+                image.Height = heigthOfcroppedWorkingSpacePicture;
+                image.Width = widthOfcroppedWorkingSpacePicture;
+
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
+
+                PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered(heigthOfcroppedWorkingSpacePicture, widthOfcroppedWorkingSpacePicture);
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = heigthOfcroppedWorkingSpacePicture;
+                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = widthOfcroppedWorkingSpacePicture;
                 PocketPaintApplication.GetInstance().CropControl.SetCropSelection();
             }
             else if (isWorkingSpaceRotated270Degree)
@@ -1134,6 +1159,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             bool isWorkingSpaceNotRotated = tgPaintingAreaCheckeredGrid.Value.M11 > 0.0;
             bool isWorkingSpaceRotated90Degree = tgPaintingAreaCheckeredGrid.Value.M12 > 0.0;
+            bool isWorkingSpaceRotated180Degree = tgPaintingAreaCheckeredGrid.Value.M11 < 0.0;
             bool isWorkingSpaceRotated270Degree = tgPaintingAreaCheckeredGrid.Value.M12 < 0.0;
 
             WriteableBitmap wbCroppedBitmap = null;
@@ -1179,6 +1205,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                         uint uheightOfCropSelection = (uint)heightOfCropSelection;
                         bitmapBoundsOfDrawing.X = ((uint)heightOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.X) > canvasWidth ? canvasWidth - uheightOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.X;
                         bitmapBoundsOfDrawing.Y = ((uint)widthOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.Y) > canvasHeight ? canvasHeight - uwidthOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.Y;
+                        wbCroppedBitmap = new WriteableBitmap(widthOfCropSelection, heightOfCropSelection);
+                    }
+                    if (isWorkingSpaceRotated180Degree)
+                    {
+                        // bitmapBounds starts with index zero. So we have to substract the height and width with value one.
+                        bitmapBoundsOfDrawing.Height = (uint)heightOfCropSelection - 1;
+                        bitmapBoundsOfDrawing.Width = (uint)widthOfCropSelection - 1;
+                        uint uwidthOfCropSelection = (uint)widthOfCropSelection;
+                        uint uheightOfCropSelection = (uint)heightOfCropSelection;
+                        bitmapBoundsOfDrawing.X = (uwidthOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.X) > canvasWidth ? canvasWidth - uwidthOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.X;
+                        bitmapBoundsOfDrawing.Y = ((uint)heightOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.Y) > canvasHeight ? canvasHeight - uheightOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.Y;
                         wbCroppedBitmap = new WriteableBitmap(widthOfCropSelection, heightOfCropSelection);
                     }
                     else if (isWorkingSpaceRotated270Degree)
