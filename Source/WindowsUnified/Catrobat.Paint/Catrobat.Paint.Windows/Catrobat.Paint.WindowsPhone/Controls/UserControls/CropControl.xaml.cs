@@ -1014,8 +1014,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             else if (isWorkingSpaceRotated90Degree)
             {
-                double offsetY = GridMain.Margin.Right / _scaleValueWorkingSpace;
-                return new Point((_transformGridMain.Value.OffsetY + 5.0 + GridMain.Margin.Top - _leftTopNullPointCropSelection.Y) / _scaleValueWorkingSpace, offsetY);
+                double offsetY = (tgPaintingAreaCheckeredGrid.Value.OffsetX - (_transformGridMain.Value.OffsetX - 10.0 + _widthCropControl) + GridMain.Margin.Right) / _scaleValueWorkingSpace;
+                return new Point((tgPaintingAreaCheckeredGrid.Value.OffsetY  - _transformGridMain.Value.OffsetY + 5.0 + GridMain.Margin.Top) / _scaleValueWorkingSpace, offsetY);
             }
             else if (isWorkingSpaceRotated180Degree)
             {
