@@ -441,8 +441,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 extremeRightAndBottomCoordinate = GetExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
                                                                                      extremeLeftAndTopCoordinate, foundLeftPixel, xCoordinateOfExtremeTop);
 
-                _heightCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValueWorkingSpace + doubleBorderWidthValue;
-                _widthCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValueWorkingSpace + doubleBorderWidthValue;
+                _heightCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y +1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
+                _widthCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
 
                 double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridHeight;
                 double workingSpaceWidth = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
@@ -468,7 +468,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     }
                     else
                     {
-                        moveCropControl.Y = positionYRightTopCornerWorkingSpace + ((paintingAreaCheckeredGridHeight - extremeRightAndBottomCoordinate.Y) * scaleValueWorkingSpace);
+                        moveCropControl.Y = positionYRightTopCornerWorkingSpace + (((int)paintingAreaCheckeredGridHeight - (extremeRightAndBottomCoordinate.Y + 1.0)) * scaleValueWorkingSpace);
                     }
                 }
             }
@@ -1019,8 +1019,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             else if (isWorkingSpaceRotated180Degree)
             {
-                double offsetY = GridMain.Margin.Right / _scaleValueWorkingSpace;
-                return new Point((Math.Ceiling(_transformGridMain.Value.OffsetX + GridMain.Margin.Right - _leftTopNullPointCropSelection.X) / 0.75), Math.Ceiling((_transformGridMain.Value.OffsetY + GridMain.Margin.Bottom - _leftTopNullPointCropSelection.Y) / 0.75));
+                double offsetY = (tgPaintingAreaCheckeredGrid.Value.OffsetY - (_transformGridMain.Value.OffsetY + _heightCropControl -10) + GridMain.Margin.Bottom) / _scaleValueWorkingSpace;
+                return new Point((Math.Ceiling(tgPaintingAreaCheckeredGrid.Value.OffsetX - (_transformGridMain.Value.OffsetX + _widthCropControl-10) + GridMain.Margin.Right) / 0.75), Math.Ceiling((_transformGridMain.Value.OffsetY + GridMain.Margin.Bottom - _leftTopNullPointCropSelection.Y) / 0.75));
             }
             else if(isWorkingSpaceRotated270Degree)
             {
@@ -1124,12 +1124,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             int widthOfCropSelection = 0;
             bool isWorkingSpaceNotRotated = tgPaintingAreaCheckeredGrid.Value.M11 > 0.0;
             bool isWorkingSpaceRotated90Degree = tgPaintingAreaCheckeredGrid.Value.M12 > 0.0;
+            bool isWorkingSpaceRotated180Degree = tgPaintingAreaCheckeredGrid.Value.M11 < 0.0;
             bool isWorkingSpaceRotated270Degree = tgPaintingAreaCheckeredGrid.Value.M12 < 0.0;
 
-            heightOfCropSelection = isWorkingSpaceNotRotated ? (int)Math.Ceiling(currentApplication.CropControl.GetRectangleCropSelectionHeight())
+            heightOfCropSelection = isWorkingSpaceNotRotated || isWorkingSpaceRotated180Degree ? (int)Math.Ceiling(currentApplication.CropControl.GetRectangleCropSelectionHeight())
                                                              : (int)Math.Ceiling(currentApplication.CropControl.GetRectangleCropSelectionWidth());
 
-            widthOfCropSelection = isWorkingSpaceNotRotated ? (int)Math.Ceiling(currentApplication.CropControl.GetRectangleCropSelectionWidth())
+            widthOfCropSelection = isWorkingSpaceNotRotated || isWorkingSpaceRotated180Degree ? (int)Math.Ceiling(currentApplication.CropControl.GetRectangleCropSelectionWidth())
                                                             : (int)Math.Ceiling(currentApplication.CropControl.GetRectangleCropSelectionHeight());
 
             if ((heightOfCropSelection != (int)currentApplication.PaintingAreaCanvas.Height)
