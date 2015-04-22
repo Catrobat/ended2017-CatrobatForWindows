@@ -518,8 +518,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 extremeRightAndBottomCoordinate = GetExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
                                                                                      extremeLeftAndTopCoordinate, foundLeftPixel, xCoordinateOfExtremeTop);
 
-                _heightCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X) * scaleValueWorkingSpace + doubleBorderWidthValue;
-                _widthCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y) * scaleValueWorkingSpace + doubleBorderWidthValue;
+                _heightCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
+                _widthCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
                 double workingSpaceHeight = scaleValueWorkingSpace * paintingAreaCheckeredGridWidth;
                 if (paintingAreaCheckeredGridTransformGroup != null)
                 {
@@ -1024,8 +1024,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             else if(isWorkingSpaceRotated270Degree)
             {
-                double offsetY = (GridMain.Margin.Left + 5.0) / _scaleValueWorkingSpace;
-                return new Point((_transformGridMain.Value.OffsetY + GridMain.Margin.Bottom - _leftTopNullPointCropSelection.Y) / _scaleValueWorkingSpace, offsetY);
+                double offsetY = (_transformGridMain.Value.OffsetX - tgPaintingAreaCheckeredGrid.Value.OffsetX + 5.0 + GridMain.Margin.Left) / _scaleValueWorkingSpace;
+                return new Point(((_transformGridMain.Value.OffsetY + _heightCropControl - 10) - tgPaintingAreaCheckeredGrid.Value.OffsetY + GridMain.Margin.Bottom) / _scaleValueWorkingSpace, offsetY);
             }
             else
             {
