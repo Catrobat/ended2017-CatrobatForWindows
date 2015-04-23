@@ -45,9 +45,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public override void ResetDrawingSpace()
         {
             var rotateTransform = new RotateTransform();
-            PocketPaintApplication.GetInstance().angleForRotation = 0;
+            PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation = 0;
 
-            rotateTransform.Angle = PocketPaintApplication.GetInstance().angleForRotation;
+            rotateTransform.Angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation;
             rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Width) / 2;
             rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Height) / 2);
             addTransformsToRotationTransformGroup(rotateTransform, 0, PocketPaintApplication.GetInstance().PaintingAreaView.getRotationCounter()*(-1));
@@ -56,22 +56,22 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public void proofBoundariesOfAngle(int angleValue)
         {
-            PocketPaintApplication.GetInstance().angleForRotation += angleValue;
+            PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation += angleValue;
 
-            if (PocketPaintApplication.GetInstance().angleForRotation == 360)
+            if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation == 360)
             {
-                PocketPaintApplication.GetInstance().angleForRotation = 0;
+                PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation = 0;
             }
-            else if (PocketPaintApplication.GetInstance().angleForRotation == -90)
+            else if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation == -90)
             {
-                PocketPaintApplication.GetInstance().angleForRotation = 270;
+                PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation = 270;
             }
         }
 
         public void createRotationTransformAndAddedItToTransformGroup(int angleRotation, int rotationDirection)
         {
             var rotateTransform = new RotateTransform();
-            rotateTransform.Angle = PocketPaintApplication.GetInstance().angleForRotation;
+            rotateTransform.Angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation;
             rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth) / 2;
             rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight) / 2);
 
@@ -118,7 +118,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _rotationTransformGroup.Children.Add(scaleTransform);
             rotationTransformGroupForCommand.Children.Add(scaleTransform);
 
-            if (PocketPaintApplication.GetInstance().angleForRotation == 90 || PocketPaintApplication.GetInstance().angleForRotation == 270)
+            if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation == 90 || PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation == 270)
             {
                 scaleTransform = new ScaleTransform();
                 scaleTransform.ScaleX = 0.75;
@@ -136,7 +136,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 _rotationTransformGroup.Children.Add(toTranslateValue);
                 rotationTransformGroupForCommand.Children.Add(toTranslateValue);
             }
-            CommandManager.GetInstance().CommitCommand(new RotateCommand(rotationTransformGroupForCommand, PocketPaintApplication.GetInstance().angleForRotation, rotationDirection));
+            CommandManager.GetInstance().CommitCommand(new RotateCommand(rotationTransformGroupForCommand, PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation, rotationDirection));
         }
     }
 }

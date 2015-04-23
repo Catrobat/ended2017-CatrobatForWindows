@@ -140,16 +140,16 @@ namespace Catrobat.Paint.WindowsPhone.View
             toScaleValue.CenterX = width / 2.0;
             toScaleValue.CenterY = height / 2.0;
             var rotateTransform = new RotateTransform();
-            if (PocketPaintApplication.GetInstance().angleForRotation != 0)
+            if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation != 0)
             {
-                if (PocketPaintApplication.GetInstance().angleForRotation != 90
-                    || PocketPaintApplication.GetInstance().angleForRotation != 270)
+                if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation != 90
+                    || PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation != 270)
                 {
                     toScaleValue.ScaleX *= toScaleValue.ScaleX;
                     toScaleValue.ScaleY *= toScaleValue.ScaleY;
                 }
 
-                rotateTransform.Angle = PocketPaintApplication.GetInstance().angleForRotation;
+                rotateTransform.Angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation;
                 rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Width) / 2;
                 rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Height) / 2);
             }
@@ -168,7 +168,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             toTranslateValue2.Y = moveValueToOffsetY - 11.0;
             _transforms.Children.Add(toTranslateValue2);
 
-            if(PocketPaintApplication.GetInstance().angleForRotation != 0)
+            if(PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation != 0)
             {
                 RotateTool rotateTool = new RotateTool();
 
@@ -1690,7 +1690,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             CtrlThicknessControl.setValueSliderThickness(paintData.thicknessSelected);
             CtrlThicknessControl.checkAndSetPenLineCap(PenLineCap.Round);
 
-            PocketPaintApplication.GetInstance().angleForRotation = 0;
+            PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation = 0;
             PocketPaintApplication.GetInstance().flipX = 1;
             PocketPaintApplication.GetInstance().flipY = 1;
         }

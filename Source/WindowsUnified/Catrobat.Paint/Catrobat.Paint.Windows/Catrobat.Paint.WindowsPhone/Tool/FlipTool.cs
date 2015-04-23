@@ -47,8 +47,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             var flipTransform = new ScaleTransform();
 
-            if (PocketPaintApplication.GetInstance().angleForRotation == 90
-                || PocketPaintApplication.GetInstance().angleForRotation == 270)
+            if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation == 90
+                || PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation == 270)
             {
 
                 _flipY *= -1;
@@ -77,8 +77,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             var flipTransform = new ScaleTransform();
 
-            if(PocketPaintApplication.GetInstance().angleForRotation == 90
-                || PocketPaintApplication.GetInstance().angleForRotation == 270)
+            if(PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation == 90
+                || PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation == 270)
             {
 
                 _flipX *= -1;
