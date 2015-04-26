@@ -572,24 +572,24 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             bool isWorkingSpaceFlippedHorizontally = paintingAreaCheckeredGridTransformGroup != null && paintingAreaCheckeredGridTransformGroup.Value.M11 == -1.0;
             bool isWorkingSpaceFlippedVertically = paintingAreaCheckeredGridTransformGroup != null && paintingAreaCheckeredGridTransformGroup.Value.M22 == -1.0;
 
-            if (currentPaintApplication.angularDegreeOfWorkingsSpaceRotation == 0)
+            if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 0)
             {
                 _scaleValueWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.M11;
                 _calculateAndSetCropControlPositionWithoutRotating(doubleBorderWidthValue, _scaleValueWorkingSpace, isWorkingSpaceFlippedHorizontally, isWorkingSpaceFlippedVertically);
             }
-            else if (currentPaintApplication.angularDegreeOfWorkingsSpaceRotation == 90)
+            else if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 90)
             {
                 // Attention: Working space is rotated 90°
                 _scaleValueWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.M12;
                 _calculateAndSetCropControlPositionWith90DegreeRotation(doubleBorderWidthValue, _scaleValueWorkingSpace, isWorkingSpaceFlippedHorizontally, isWorkingSpaceFlippedVertically);
             }
-            else if (currentPaintApplication.angularDegreeOfWorkingsSpaceRotation == 180)
+            else if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 180)
             {
                 // Attention: Working space is rotated 180°
                 _scaleValueWorkingSpace = Math.Abs(paintingAreaCheckeredGridTransformGroup.Value.M11);
                 _calculateAndSetCropControlPositionWith180DegreeRotation(doubleBorderWidthValue, _scaleValueWorkingSpace, isWorkingSpaceFlippedHorizontally, isWorkingSpaceFlippedVertically);
             }
-            else if (currentPaintApplication.angularDegreeOfWorkingsSpaceRotation == 270)
+            else if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 270)
             {
                 _scaleValueWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.M21;
                 // Attention: Working space is rotated 270°
@@ -959,25 +959,25 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
 
             double doubleMargin = 10.0;
-            if (currentPaintApplication.angularDegreeOfWorkingsSpaceRotation == 0)
+            if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 0)
             {
                 double offsetX = ((_transformGridMain.Value.OffsetX + 5.0 + GridMain.Margin.Left) - tgPaintingAreaCheckeredGrid.Value.OffsetX) / 0.75;
                 double offsetY = ((_transformGridMain.Value.OffsetY + 5.0 + GridMain.Margin.Top) - tgPaintingAreaCheckeredGrid.Value.OffsetY) / 0.75;
                 return new Point(Math.Ceiling(offsetX), Math.Ceiling(offsetY));
             }
-            else if (currentPaintApplication.angularDegreeOfWorkingsSpaceRotation == 90)
+            else if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 90)
             {
                 double offsetX = (_transformGridMain.Value.OffsetY + 5.0 + GridMain.Margin.Top - tgPaintingAreaCheckeredGrid.Value.OffsetY) / _scaleValueWorkingSpace;
                 double offsetY = (tgPaintingAreaCheckeredGrid.Value.OffsetX - (_transformGridMain.Value.OffsetX - doubleMargin + _widthCropControl) + GridMain.Margin.Right) / _scaleValueWorkingSpace;
                 return new Point(offsetX, offsetY);
             }
-            else if (currentPaintApplication.angularDegreeOfWorkingsSpaceRotation == 180)
+            else if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 180)
             {
                 double offsetX = (tgPaintingAreaCheckeredGrid.Value.OffsetX - (_transformGridMain.Value.OffsetX + _widthCropControl - doubleMargin) + GridMain.Margin.Right) / 0.75;
                 double offsetY = (tgPaintingAreaCheckeredGrid.Value.OffsetY - (_transformGridMain.Value.OffsetY + _heightCropControl - doubleMargin) + GridMain.Margin.Bottom) / _scaleValueWorkingSpace;
                 return new Point(Math.Ceiling(offsetX), Math.Ceiling(offsetY));
             }
-            else if (currentPaintApplication.angularDegreeOfWorkingsSpaceRotation == 270)
+            else if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 270)
             {
                 double offsetX = (tgPaintingAreaCheckeredGrid.Value.OffsetY + GridMain.Margin.Bottom - (_transformGridMain.Value.OffsetY + _heightCropControl - doubleMargin)) / _scaleValueWorkingSpace;
                 double offsetY = (_transformGridMain.Value.OffsetX - tgPaintingAreaCheckeredGrid.Value.OffsetX + 5.0 + GridMain.Margin.Left) / _scaleValueWorkingSpace;
@@ -1010,7 +1010,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             Image image = new Image();
 
-            if (currentPaintApplication.angularDegreeOfWorkingsSpaceRotation == 0)
+            if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 0)
             {
                     int heightOfcroppedWorkingSpacePicture = writeableBitmapToAdd.PixelHeight;
                     int widthOfcroppedWorkingSpacePicture = writeableBitmapToAdd.PixelWidth;
@@ -1020,9 +1020,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                     addImageToPaintingAreaCanvas(image);
                     currentPaintApplication.PaintingAreaView.setSizeOfPaintingAreaViewCheckered(heightOfcroppedWorkingSpacePicture, widthOfcroppedWorkingSpacePicture);
+                    currentPaintApplication.PaintingAreaView.alignPositionOfPaintingAreaCheckered();
                     setSizeOfPaintingAreaCanvas(heightOfcroppedWorkingSpacePicture, widthOfcroppedWorkingSpacePicture);
             }
-            else if (currentPaintApplication.angularDegreeOfWorkingsSpaceRotation == 90)
+            else if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 90)
             {
                 image.Source = writeableBitmapToAdd;
                 image.Height = writeableBitmapToAdd.PixelHeight;
@@ -1030,9 +1031,10 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                 addImageToPaintingAreaCanvas(image);
                 currentPaintApplication.PaintingAreaView.setSizeOfPaintingAreaViewCheckered(writeableBitmapToAdd.PixelHeight, writeableBitmapToAdd.PixelWidth);
+                currentPaintApplication.PaintingAreaView.alignPositionOfPaintingAreaCheckered();
                 setSizeOfPaintingAreaCanvas(writeableBitmapToAdd.PixelHeight, writeableBitmapToAdd.PixelWidth);
             }
-            else if (currentPaintApplication.angularDegreeOfWorkingsSpaceRotation == 180)
+            else if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 180)
             {
                 int heigthOfcroppedWorkingSpacePicture = writeableBitmapToAdd.PixelHeight;
                 int widthOfcroppedWorkingSpacePicture = writeableBitmapToAdd.PixelWidth;
@@ -1041,10 +1043,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 image.Width = widthOfcroppedWorkingSpacePicture;
 
                 addImageToPaintingAreaCanvas(image);
-                currentPaintApplication.PaintingAreaView.setSizeOfPaintingAreaViewCheckered(heigthOfcroppedWorkingSpacePicture, widthOfcroppedWorkingSpacePicture);
+                currentPaintApplication.PaintingAreaView.setSizeOfPaintingAreaViewCheckered(writeableBitmapToAdd.PixelHeight, writeableBitmapToAdd.PixelWidth);
+                currentPaintApplication.PaintingAreaView.alignPositionOfPaintingAreaCheckered();
                 setSizeOfPaintingAreaCanvas(heigthOfcroppedWorkingSpacePicture, widthOfcroppedWorkingSpacePicture);
             }
-            else if (currentPaintApplication.angularDegreeOfWorkingsSpaceRotation == 270)
+            else if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 270)
             {
                 image.Source = writeableBitmapToAdd;
                 image.Height = writeableBitmapToAdd.PixelHeight;
@@ -1052,6 +1055,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                 addImageToPaintingAreaCanvas(image);
                 currentPaintApplication.PaintingAreaView.setSizeOfPaintingAreaViewCheckered(writeableBitmapToAdd.PixelHeight, writeableBitmapToAdd.PixelWidth);
+                currentPaintApplication.PaintingAreaView.alignPositionOfPaintingAreaCheckered();
                 setSizeOfPaintingAreaCanvas(writeableBitmapToAdd.PixelHeight, writeableBitmapToAdd.PixelWidth);
             }
             currentPaintApplication.CropControl.SetCropSelection();
@@ -1123,7 +1127,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     uint canvasWidth = (uint)currentApplication.PaintingAreaCanvas.Width;
                     BitmapBounds bitmapBoundsOfDrawing = new BitmapBounds();
 
-                    if (currentApplication.angularDegreeOfWorkingsSpaceRotation == 0)
+                    if (currentApplication.angularDegreeOfWorkingSpaceRotation == 0)
                     {
                         // bitmapBounds starts with index zero. So we have to substract the height and width with value one.
                         bitmapBoundsOfDrawing.Height = (uint)heightOfCropSelection - 1;
@@ -1134,7 +1138,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                         bitmapBoundsOfDrawing.Y = ((uint)heightOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.Y) > canvasHeight ? canvasHeight - uheightOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.Y;
                         wbCroppedBitmap = new WriteableBitmap(widthOfCropSelection, heightOfCropSelection);
                     }
-                    else if (currentApplication.angularDegreeOfWorkingsSpaceRotation == 90)
+                    else if (currentApplication.angularDegreeOfWorkingSpaceRotation == 90)
                     {
                         bitmapBoundsOfDrawing.Height = (uint)widthOfCropSelection - 1;
                         bitmapBoundsOfDrawing.Width = (uint)heightOfCropSelection - 1;
@@ -1144,7 +1148,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                         bitmapBoundsOfDrawing.Y = ((uint)widthOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.Y) > canvasHeight ? canvasHeight - uwidthOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.Y;
                         wbCroppedBitmap = new WriteableBitmap(widthOfCropSelection, heightOfCropSelection);
                     }
-                    if (currentApplication.angularDegreeOfWorkingsSpaceRotation == 180)
+                    if (currentApplication.angularDegreeOfWorkingSpaceRotation == 180)
                     {
                         // bitmapBounds starts with index zero. So we have to substract the height and width with value one.
                         bitmapBoundsOfDrawing.Height = (uint)heightOfCropSelection - 1;
@@ -1155,7 +1159,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                         bitmapBoundsOfDrawing.Y = ((uint)heightOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.Y) > canvasHeight ? canvasHeight - uheightOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.Y;
                         wbCroppedBitmap = new WriteableBitmap(widthOfCropSelection, heightOfCropSelection);
                     }
-                    else if (currentApplication.angularDegreeOfWorkingsSpaceRotation == 270)
+                    else if (currentApplication.angularDegreeOfWorkingSpaceRotation == 270)
                     {
                         bitmapBoundsOfDrawing.Height = (uint)widthOfCropSelection - 1;
                         bitmapBoundsOfDrawing.Width = (uint)heightOfCropSelection - 1;

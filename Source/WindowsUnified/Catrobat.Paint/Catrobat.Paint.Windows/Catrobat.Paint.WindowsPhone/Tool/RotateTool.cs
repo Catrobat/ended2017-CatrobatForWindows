@@ -45,9 +45,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public override void ResetDrawingSpace()
         {
             var rotateTransform = new RotateTransform();
-            PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation = 0;
+            PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation = 0;
 
-            rotateTransform.Angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation;
+            rotateTransform.Angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
             rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Width) / 2;
             rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Height) / 2);
             addTransformsToRotationTransformGroup(rotateTransform, 0, PocketPaintApplication.GetInstance().PaintingAreaView.getRotationCounter()*(-1));
@@ -56,22 +56,22 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public void proofBoundariesOfAngle(int angleValue)
         {
-            PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation += angleValue;
+            PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation += angleValue;
 
-            if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation == 360)
+            if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation == 360)
             {
-                PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation = 0;
+                PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation = 0;
             }
-            else if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation == -90)
+            else if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation == -90)
             {
-                PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation = 270;
+                PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation = 270;
             }
         }
 
         public void createRotationTransformAndAddedItToTransformGroup(int angleRotation, int rotationDirection)
         {
             var rotateTransform = new RotateTransform();
-            rotateTransform.Angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation;
+            rotateTransform.Angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
             rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth) / 2;
             rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight) / 2);
 
@@ -118,7 +118,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _rotationTransformGroup.Children.Add(scaleTransform);
             rotationTransformGroupForCommand.Children.Add(scaleTransform);
 
-            if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation == 90 || PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation == 270)
+            if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation == 90 || PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation == 270)
             {
                 scaleTransform = new ScaleTransform();
                 scaleTransform.ScaleX = 0.75;
@@ -136,7 +136,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 _rotationTransformGroup.Children.Add(toTranslateValue);
                 rotationTransformGroupForCommand.Children.Add(toTranslateValue);
             }
-            CommandManager.GetInstance().CommitCommand(new RotateCommand(rotationTransformGroupForCommand, PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation, rotationDirection));
+            CommandManager.GetInstance().CommitCommand(new RotateCommand(rotationTransformGroupForCommand, PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation, rotationDirection));
         }
     }
 }
