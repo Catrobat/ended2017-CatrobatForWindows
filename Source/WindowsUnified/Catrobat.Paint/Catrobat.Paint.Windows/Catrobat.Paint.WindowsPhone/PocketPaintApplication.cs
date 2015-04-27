@@ -55,7 +55,7 @@ namespace Catrobat.Paint.WindowsPhone
         public Grid PaintingAreaLayoutRoot { get; set; }
         #endregion
 
-        public int angularDegreeOfWorkingsSpaceRotation = 0;
+        public int angularDegreeOfWorkingSpaceRotation = 0;
 
         public int flipX = 1;
         public int flipY = 1;

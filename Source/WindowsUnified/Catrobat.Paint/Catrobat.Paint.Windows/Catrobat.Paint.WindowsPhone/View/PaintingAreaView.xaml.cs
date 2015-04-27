@@ -115,66 +115,79 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         public void setSizeOfPaintingAreaViewCheckered(int height, int width)
         {
-            TransformGroup _transforms = null;
-            if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform.GetType() == typeof(TransformGroup))
-            {
-                _transforms = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
-            }
-            if (_transforms == null)
-            {
-                PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
-            }
-            _transforms.Children.Clear();
-
             PaintingAreaCheckeredGrid.Height = height;
             PaintingAreaCheckeredGrid.Width = width;
+        }
+
+        public void alignPositionOfPaintingAreaCheckered()
+        {
+            TransformGroup tgPaintingAreaCheckeredGrid = null;
+            if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform.GetType() == typeof(TransformGroup))
+            {
+                tgPaintingAreaCheckeredGrid = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
+            }
+            if (tgPaintingAreaCheckeredGrid == null)
+            {
+                PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = new TransformGroup();
+                tgPaintingAreaCheckeredGrid = new TransformGroup();
+            }
+            tgPaintingAreaCheckeredGrid.Children.Clear();
+
             PaintingAreaCheckeredGrid.HorizontalAlignment = HorizontalAlignment.Left;
             PaintingAreaCheckeredGrid.VerticalAlignment = VerticalAlignment.Top;
 
-            //var DISPLAY_WIDTH_HALF = width / 2.0;
-            //var DISPLAY_HEIGHT_HALF = height / 2.0;
             var toScaleValue = new ScaleTransform();
 
             toScaleValue.ScaleX = 0.75;
             toScaleValue.ScaleY = 0.75;
-            toScaleValue.CenterX = width / 2.0;
-            toScaleValue.CenterY = height / 2.0;
-            var rotateTransform = new RotateTransform();
-            if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation != 0)
+            toScaleValue.CenterX = PaintingAreaCheckeredGrid.Width / 2.0;
+            toScaleValue.CenterY = PaintingAreaCheckeredGrid.Height / 2.0;
+
+            int angularDegreeOfWorkingSpaceRotation = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
+            if (angularDegreeOfWorkingSpaceRotation != 0 && angularDegreeOfWorkingSpaceRotation != 180)
             {
-                if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation != 90
-                    || PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation != 270)
-                {
-                    toScaleValue.ScaleX *= toScaleValue.ScaleX;
-                    toScaleValue.ScaleY *= toScaleValue.ScaleY;
-                }
-
-                rotateTransform.Angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation;
-                rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Width) / 2;
-                rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Height) / 2);
+                toScaleValue.ScaleX *= toScaleValue.ScaleX;
+                toScaleValue.ScaleY *= toScaleValue.ScaleY;
             }
-            _transforms.Children.Add(toScaleValue);
 
-            double moveValueToOffsetX = (Window.Current.Bounds.Width - PaintingAreaCheckeredGrid.Width * toScaleValue.ScaleX) / 2.0;
-            double moveValueToOffsetY = (Window.Current.Bounds.Height - PaintingAreaCheckeredGrid.Height * toScaleValue.ScaleY) / 2.0;
-
-            var toTranslateValue = new TranslateTransform();
-            toTranslateValue.X -= _transforms.Value.OffsetX;
-            toTranslateValue.Y -= _transforms.Value.OffsetY;
-            _transforms.Children.Add(toTranslateValue);
-
-            var toTranslateValue2 = new TranslateTransform();
-            toTranslateValue2.X = moveValueToOffsetX;
-            toTranslateValue2.Y = moveValueToOffsetY - 11.0;
-            _transforms.Children.Add(toTranslateValue2);
-
-            if(PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation != 0)
+            tgPaintingAreaCheckeredGrid.Children.Add(toScaleValue);
+            if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation != 0)
             {
                 RotateTool rotateTool = new RotateTool();
 
                 // es soll der aktuelle Rotationswert verwendet werden.
                 rotateTool.RotateRight(0);
             }
+
+            double moveValueToOffsetX = (Window.Current.Bounds.Width - PaintingAreaCheckeredGrid.Width * toScaleValue.ScaleX) / 2.0;
+            double moveValueToOffsetY = (Window.Current.Bounds.Height - PaintingAreaCheckeredGrid.Height * toScaleValue.ScaleY) / 2.0;
+
+            if (angularDegreeOfWorkingSpaceRotation == 90)
+            {
+                moveValueToOffsetX = PaintingAreaCheckeredGrid.Height * toScaleValue.ScaleX + (Window.Current.Bounds.Width - PaintingAreaCheckeredGrid.Height * toScaleValue.ScaleY) / 2.0;
+                moveValueToOffsetY = (Window.Current.Bounds.Height - PaintingAreaCheckeredGrid.Width * toScaleValue.ScaleX) / 2.0;
+
+            }
+            else if (angularDegreeOfWorkingSpaceRotation == 180)
+            {
+                moveValueToOffsetX = PaintingAreaCheckeredGrid.Width * toScaleValue.ScaleX + moveValueToOffsetX;
+                moveValueToOffsetY = PaintingAreaCheckeredGrid.Height * toScaleValue.ScaleY + moveValueToOffsetY;
+            }
+            else if (angularDegreeOfWorkingSpaceRotation == 270)
+            {
+                moveValueToOffsetX = (Window.Current.Bounds.Width - PaintingAreaCheckeredGrid.Height * toScaleValue.ScaleY) / 2.0;
+                moveValueToOffsetY = PaintingAreaCheckeredGrid.Width * toScaleValue.ScaleY + (Window.Current.Bounds.Height - PaintingAreaCheckeredGrid.Width * toScaleValue.ScaleX) / 2.0;
+            }
+
+            var tfTranslateToNullPoint = new TranslateTransform();
+            tfTranslateToNullPoint.X -= tgPaintingAreaCheckeredGrid.Value.OffsetX;
+            tfTranslateToNullPoint.Y -= tgPaintingAreaCheckeredGrid.Value.OffsetY;
+            tgPaintingAreaCheckeredGrid.Children.Add(tfTranslateToNullPoint);
+
+            var tfCenterWorkingSpace = new TranslateTransform();
+            tfCenterWorkingSpace.X = moveValueToOffsetX;
+            tfCenterWorkingSpace.Y = moveValueToOffsetY;
+            tgPaintingAreaCheckeredGrid.Children.Add(tfCenterWorkingSpace);
         }
 
         public void setSizeOfPaintingAreaViewCheckered()
@@ -182,8 +195,6 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             PaintingAreaCheckeredGrid.Height = Window.Current.Bounds.Height;
             PaintingAreaCheckeredGrid.Width = Window.Current.Bounds.Width;
-            //PaintingAreaCanvas.Height = 200;
-            //PaintingAreaCanvas.Width = 200;
             TransformGroup _transforms = null;
             if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform.GetType() == typeof(TransformGroup))
             {
@@ -207,11 +218,6 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             double moveValueToOffsetX = (Window.Current.Bounds.Width - PaintingAreaCheckeredGrid.Width * toScaleValue.ScaleX) / 2.0; ;
             double moveValueToOffsetY = (Window.Current.Bounds.Height - PaintingAreaCheckeredGrid.Height * toScaleValue.ScaleY) / 2.0;
-
-            //var toTranslateValue = new TranslateTransform();
-            //toTranslateValue.X -= _transforms.Value.OffsetX;
-            //toTranslateValue.Y -= _transforms.Value.OffsetY;
-            //_transforms.Children.Add(toTranslateValue);
 
             var toTranslateValue2 = new TranslateTransform();
             toTranslateValue2.Y -= 11.0;
@@ -1690,7 +1696,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             CtrlThicknessControl.setValueSliderThickness(paintData.thicknessSelected);
             CtrlThicknessControl.checkAndSetPenLineCap(PenLineCap.Round);
 
-            PocketPaintApplication.GetInstance().angularDegreeOfWorkingsSpaceRotation = 0;
+            PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation = 0;
             PocketPaintApplication.GetInstance().flipX = 1;
             PocketPaintApplication.GetInstance().flipY = 1;
         }
