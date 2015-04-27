@@ -151,12 +151,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             GridMain.Margin = new Thickness(0.0, 0.0, 0.0, 0.0);
             _transformGridMain.Children.Clear();
 
-            TransformGroup paintingAreaCheckeredGridTransformGroup = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
+            TransformGroup paintingAreaCheckeredGridTransformGroup = PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform as TransformGroup;
             scaleValueWorkingSpace = paintingAreaCheckeredGridTransformGroup.Value.M11;
 
             double offsetSize = 10.0;
-            double paintingAreaCheckeredGridHeight = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Height;
-            double paintingAreaCheckeredGridWidth = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Width;
+            double paintingAreaCheckeredGridHeight = PocketPaintApplication.GetInstance().GridWorkingSpace.Height;
+            double paintingAreaCheckeredGridWidth = PocketPaintApplication.GetInstance().GridWorkingSpace.Width;
             
             double heightCropControl = 0.0;
             double widthCropControl = 0.0;

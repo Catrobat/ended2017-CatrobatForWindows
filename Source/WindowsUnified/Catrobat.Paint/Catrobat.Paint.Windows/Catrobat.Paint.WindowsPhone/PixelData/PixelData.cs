@@ -432,9 +432,9 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         async public Task<int> preparePaintingAreaCanvasForEraser()
         {
             RenderTargetBitmap retarbi = new RenderTargetBitmap();
-            await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying,
-                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Width,
-                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Height);
+            //await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying,
+            //    (int)PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Width,
+            //    (int)PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Height);
 
             Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
             pixelsCanvasEraser = WindowsRuntimeBufferExtensions.ToArray(buffer);

@@ -17,17 +17,17 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
         public override bool ReDo()
         {
-            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform);
+            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform);
             transformGroup.Children.Clear();
             for (int i = 0; i < _rotateTransformGroup.Children.Count; i++)
             {
                 transformGroup.Children.Add(_rotateTransformGroup.Children[i]);
             }
 
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = transformGroup;
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.UpdateLayout();
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateArrange();
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateMeasure();
+            PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform = transformGroup;
+            PocketPaintApplication.GetInstance().GridWorkingSpace.UpdateLayout();
+            PocketPaintApplication.GetInstance().GridWorkingSpace.InvalidateArrange();
+            PocketPaintApplication.GetInstance().GridWorkingSpace.InvalidateMeasure();
             PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation = _angle;
             PocketPaintApplication.GetInstance().PaintingAreaView.enableResetButtonRotate(_rotationDirection);
             return true;
@@ -35,16 +35,16 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
         public override bool UnDo()
         {
-            TransformGroup paintingAreaCheckeredTransformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform);
+            TransformGroup paintingAreaCheckeredTransformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform);
 
             paintingAreaCheckeredTransformGroup.Children.Clear();
 
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = paintingAreaCheckeredTransformGroup;
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.UpdateLayout();
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateArrange();
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateMeasure();
+            PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform = paintingAreaCheckeredTransformGroup;
+            PocketPaintApplication.GetInstance().GridWorkingSpace.UpdateLayout();
+            PocketPaintApplication.GetInstance().GridWorkingSpace.InvalidateArrange();
+            PocketPaintApplication.GetInstance().GridWorkingSpace.InvalidateMeasure();
 
-            PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
+            PocketPaintApplication.GetInstance().PaintingAreaView.alignPositionOfGridWorkingSpace();
             PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation -= _angle;
             PocketPaintApplication.GetInstance().PaintingAreaView.enableResetButtonRotate(PocketPaintApplication.GetInstance().PaintingAreaView.getRotationCounter() * (-1));
             return true;
