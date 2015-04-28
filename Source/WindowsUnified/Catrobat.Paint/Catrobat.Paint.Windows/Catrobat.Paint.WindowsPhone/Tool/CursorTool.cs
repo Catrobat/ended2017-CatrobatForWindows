@@ -184,8 +184,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public void setHeightWidth()
         {
-            height = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0;
-            width = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0;
+            height = PocketPaintApplication.GetInstance().GridWorkingSpace.ActualHeight / 2.0;
+            width = PocketPaintApplication.GetInstance().GridWorkingSpace.ActualWidth / 2.0;
         }
     }
 }

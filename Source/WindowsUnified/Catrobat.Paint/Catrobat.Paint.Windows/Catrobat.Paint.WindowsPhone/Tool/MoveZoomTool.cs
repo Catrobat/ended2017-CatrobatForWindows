@@ -20,17 +20,17 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             ToolType = ToolType.Move;
             ResetCanvas();
-            if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform.GetType() == typeof(TransformGroup))
+            if (PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform.GetType() == typeof(TransformGroup))
             {
-                _transforms = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
+                _transforms = PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform as TransformGroup;
             }
             if (_transforms == null)
             {
-                PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
+                PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform = _transforms = new TransformGroup();
             }
 
-            DISPLAY_WIDTH_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualWidth / 2.0;
-            DISPLAY_HEIGHT_HALF = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.ActualHeight / 2.0;
+            DISPLAY_WIDTH_HALF = PocketPaintApplication.GetInstance().GridWorkingSpace.ActualWidth / 2.0;
+            DISPLAY_HEIGHT_HALF = PocketPaintApplication.GetInstance().GridWorkingSpace.ActualHeight / 2.0;
             _tempTransforms = new TransformGroup();
             startScale.X = _transforms.Value.M11;
             startScale.Y = _transforms.Value.M22;
@@ -102,7 +102,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public override void ResetDrawingSpace()
         {
             _transforms.Children.Clear();
-            PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
+            PocketPaintApplication.GetInstance().PaintingAreaView.alignPositionOfGridWorkingSpace();
             // TODO: If you reset the working-space then it should be generated a removecommand
             // TODO: Write a ResetMoveZoomCommand
             CommandManager.GetInstance().CommitCommand(new ZoomCommand(new TransformGroup()));

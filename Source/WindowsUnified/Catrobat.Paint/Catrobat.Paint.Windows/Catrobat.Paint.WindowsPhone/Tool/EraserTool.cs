@@ -50,7 +50,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _pathGeometry.Figures = _pathFigureCollection;
             _lastPoint = coordinate;
             _path.Data = _pathGeometry;
-            PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Children.Add(_path);
+            //PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Children.Add(_path);
 
             var rectangleGeometry = new RectangleGeometry
             {
@@ -136,16 +136,16 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             PixelData.PixelData pixelData = new PixelData.PixelData();
             await pixelData.preparePaintingAreaCanvasPixel();
             await pixelData.preparePaintingAreaCanvasForEraser();
-          for(int colCounter = 0; colCounter < PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.ActualHeight; colCounter++)
-          {
-              for(int rowCounter = 0; rowCounter < PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.ActualWidth; rowCounter++)
-              {
-                  if(pixelData.getPixelAlphaFromCanvasEraser(rowCounter, colCounter) != 0)
-                  {
-                      pixelData.setPixelColor(rowCounter, colCounter);
-                  }
-              }
-          }
+            //for(int colCounter = 0; colCounter < PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.ActualHeight; colCounter++)
+            //{
+            //    for(int rowCounter = 0; rowCounter < PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.ActualWidth; rowCounter++)
+            //    {
+            //        if(pixelData.getPixelAlphaFromCanvasEraser(rowCounter, colCounter) != 0)
+            //        {
+            //            pixelData.setPixelColor(rowCounter, colCounter);
+            //        }
+            //    }
+            //}
           pixelData.changedPixelToCanvas();
         }
 

@@ -13,7 +13,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
         public override bool ReDo()
         {
-            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform);
+            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform);
             //for (int i = 0; i < transformGroup.Children.Count; i++)
             //{
             //    if (transformGroup.Children[i].GetType() == typeof(TranslateTransform))
@@ -24,17 +24,17 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
             transformGroup.Children.Add(_translateTransform);
 
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = transformGroup;
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.UpdateLayout();
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateArrange();
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateMeasure();
+            PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform = transformGroup;
+            PocketPaintApplication.GetInstance().GridWorkingSpace.UpdateLayout();
+            PocketPaintApplication.GetInstance().GridWorkingSpace.InvalidateArrange();
+            PocketPaintApplication.GetInstance().GridWorkingSpace.InvalidateMeasure();
 
             return true;
         }
 
         public override bool UnDo()
         {
-            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform);
+            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform);
 
             for (int i = 0; i < transformGroup.Children.Count; i++)
             {
@@ -53,10 +53,10 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
             transformGroup.Children.Add(defaultTranslateTransform);
 
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = transformGroup;
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.UpdateLayout();
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateArrange();
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.InvalidateMeasure();
+            PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform = transformGroup;
+            PocketPaintApplication.GetInstance().GridWorkingSpace.UpdateLayout();
+            PocketPaintApplication.GetInstance().GridWorkingSpace.InvalidateArrange();
+            PocketPaintApplication.GetInstance().GridWorkingSpace.InvalidateMeasure();
 
             return true;
         }

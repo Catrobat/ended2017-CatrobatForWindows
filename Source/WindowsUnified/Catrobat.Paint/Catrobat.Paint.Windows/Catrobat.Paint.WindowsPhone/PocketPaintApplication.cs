@@ -48,9 +48,7 @@ namespace Catrobat.Paint.WindowsPhone
 
         public Grid MainGrid { get; set; }
 
-        public Grid PaintingAreaCheckeredGrid { get; set; }
-
-        public Grid PaintingAreaContentPanelGrid { get; set; }
+        public Grid GridWorkingSpace { get; set; }
 
         public Grid PaintingAreaLayoutRoot { get; set; }
         #endregion
@@ -73,7 +71,6 @@ namespace Catrobat.Paint.WindowsPhone
 
         public Canvas PaintingAreaCanvas { get; set; }
         // separate layer, for temp manipulation operations
-        public Canvas PaintingAreaCanvasUnderlaying { get; set; }
 
         public PaintingAreaView PaintingAreaView { get; set; }
 

@@ -69,9 +69,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = new TransformGroup();
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = new TransformGroup();
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = new TransformGroup();
-
+            PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform = new TransformGroup();
             PocketPaintApplication.GetInstance().PaintingAreaView.disableToolbarsAndPaintingArea(false);
         }
 
