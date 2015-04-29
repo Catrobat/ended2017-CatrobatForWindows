@@ -72,7 +72,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
                 var command = _undoCommands.Last.Value;
                 _undoCommands.RemoveLast();
 
-                if (command is FlipCommand || command is MoveCommand || command is RotateCommand || command is RemoveCommand || command is ZoomCommand)
+                if (command is CropCommand || command is FlipCommand || command is MoveCommand || command is RotateCommand || command is RemoveCommand || command is ZoomCommand)
                 {
                     var lastCommand = true;
                     foreach (var undoCommand in _undoCommands)
@@ -84,7 +84,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
                         }
                     }
 
-                    if (lastCommand || command is MoveCommand || command is RemoveCommand || command is RotateCommand || command is ZoomCommand) 
+                    if (lastCommand || command is CropCommand || command is MoveCommand || command is RemoveCommand || command is RotateCommand || command is ZoomCommand) 
                     {
                         command.UnDo();
                         //if(command is ZoomCommand)

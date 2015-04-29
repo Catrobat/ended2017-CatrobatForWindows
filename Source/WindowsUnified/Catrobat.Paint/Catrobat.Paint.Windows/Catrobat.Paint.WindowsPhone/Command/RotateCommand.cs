@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Media;
+﻿using Catrobat.Paint.WindowsPhone.Tool;
+using Windows.UI.Xaml.Media;
 
 namespace Catrobat.Paint.WindowsPhone.Command
 {
@@ -10,6 +11,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
         public RotateCommand(TransformGroup rotateTransformGroup, int angle, int rotationDirection)
         {
+            ToolType = ToolType.Rotate;
             _rotateTransformGroup = rotateTransformGroup;
             _angle = angle;
             _rotationDirection = rotationDirection;

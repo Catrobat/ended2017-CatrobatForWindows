@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Catrobat.Paint.WindowsPhone.Command;
+using System;
 using System.IO;
 using Windows.Foundation;
 using Windows.Graphics.Imaging;
@@ -320,16 +321,16 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 }
                 else
                 {
-                        ttfMoveCropControl.X = tgPaintingAreaCheckeredGrid.Value.OffsetX + (extremeLeftAndTopCoordinate.X * scaleValueWorkingSpace);
+                    ttfMoveCropControl.X = tgPaintingAreaCheckeredGrid.Value.OffsetX + (extremeLeftAndTopCoordinate.X * scaleValueWorkingSpace);
                 }
 
                 if (isWorkingSpaceFlippedVertically)
                 {
-                        ttfMoveCropControl.Y = tgPaintingAreaCheckeredGrid.Value.OffsetY + ((heightOfpaintingAreaCheckeredGrid - extremeRightAndBottomCoordinate.Y) * scaleValueWorkingSpace);
+                    ttfMoveCropControl.Y = tgPaintingAreaCheckeredGrid.Value.OffsetY + ((heightOfpaintingAreaCheckeredGrid - extremeRightAndBottomCoordinate.Y) * scaleValueWorkingSpace);
                 }
                 else
                 {
-                        ttfMoveCropControl.Y = tgPaintingAreaCheckeredGrid.Value.OffsetY + (extremeLeftAndTopCoordinate.Y * scaleValueWorkingSpace);
+                    ttfMoveCropControl.Y = tgPaintingAreaCheckeredGrid.Value.OffsetY + (extremeLeftAndTopCoordinate.Y * scaleValueWorkingSpace);
                 }
             }
             else
@@ -436,7 +437,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 extremeRightAndBottomCoordinate = GetExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
                                                                                      extremeLeftAndTopCoordinate, isFoundLeftMostDrawnPixel, xCoordinateOfExtremeTop);
 
-                _heightCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y +1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
+                _heightCropControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
                 _widthCropControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
 
                 double heightOfWorkingSpace = scaleValueWorkingSpace * heightPaintingAreaCheckeredGrid;
@@ -620,9 +621,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             else if (rotatedValue == 90)
             {
-                 _limitTop = tgPaintingAreaCheckeredGrid.Value.OffsetY - _offsetMargin;
-                 _limitBottom = _limitTop + (paintingAreaCheckeredGridWidth * _scaleValueWorkingSpace) + _offsetMargin * 2;
-                 _limitRight = tgPaintingAreaCheckeredGrid.Value.OffsetX + _offsetMargin;
+                _limitTop = tgPaintingAreaCheckeredGrid.Value.OffsetY - _offsetMargin;
+                _limitBottom = _limitTop + (paintingAreaCheckeredGridWidth * _scaleValueWorkingSpace) + _offsetMargin * 2;
+                _limitRight = tgPaintingAreaCheckeredGrid.Value.OffsetX + _offsetMargin;
                 _limitLeft = _limitRight - (paintingAreaCheckeredGridHeight * _scaleValueWorkingSpace) - _offsetMargin * 2;
             }
             else if (rotatedValue == 180)
@@ -643,7 +644,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private TranslateTransform CreateTranslateTransform(double x, double y)
         {
-            TranslateTransform move = new TranslateTransform {X = x, Y = y};
+            TranslateTransform move = new TranslateTransform { X = x, Y = y };
 
             return move;
         }
@@ -961,7 +962,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             TransformGroup tgPaintingAreaCheckeredGrid = PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform as TransformGroup;
             PocketPaintApplication currentPaintApplication = PocketPaintApplication.GetInstance();
-            if(currentPaintApplication == null || tgPaintingAreaCheckeredGrid == null)
+            if (currentPaintApplication == null || tgPaintingAreaCheckeredGrid == null)
             {
                 // TODO: raise Exception
                 return new Point(0.0, 0.0);
@@ -1021,16 +1022,16 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 0)
             {
-                    int heightOfcroppedWorkingSpacePicture = writeableBitmapToAdd.PixelHeight;
-                    int widthOfcroppedWorkingSpacePicture = writeableBitmapToAdd.PixelWidth;
-                    image.Source = writeableBitmapToAdd;
-                    image.Height = heightOfcroppedWorkingSpacePicture;
-                    image.Width = widthOfcroppedWorkingSpacePicture;
+                int heightOfcroppedWorkingSpacePicture = writeableBitmapToAdd.PixelHeight;
+                int widthOfcroppedWorkingSpacePicture = writeableBitmapToAdd.PixelWidth;
+                image.Source = writeableBitmapToAdd;
+                image.Height = heightOfcroppedWorkingSpacePicture;
+                image.Width = widthOfcroppedWorkingSpacePicture;
 
-                    addImageToPaintingAreaCanvas(image);
-                    currentPaintApplication.PaintingAreaView.setSizeOfPaintingAreaViewCheckered(heightOfcroppedWorkingSpacePicture, widthOfcroppedWorkingSpacePicture);
-                    currentPaintApplication.PaintingAreaView.alignPositionOfGridWorkingSpace(null);
-                    setSizeOfPaintingAreaCanvas(heightOfcroppedWorkingSpacePicture, widthOfcroppedWorkingSpacePicture);
+                addImageToPaintingAreaCanvas(image);
+                currentPaintApplication.PaintingAreaView.setSizeOfPaintingAreaViewCheckered(heightOfcroppedWorkingSpacePicture, widthOfcroppedWorkingSpacePicture);
+                currentPaintApplication.PaintingAreaView.alignPositionOfGridWorkingSpace(null);
+                setSizeOfPaintingAreaCanvas(heightOfcroppedWorkingSpacePicture, widthOfcroppedWorkingSpacePicture);
             }
             else if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 90)
             {
@@ -1113,7 +1114,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             int widthOfCropSelection = (int)currentApplication.CropControl.GetWidthOfRectangleCropSelection();
 
             WriteableBitmap wbCroppedBitmap = null;
-          
+
             string filename = ("karlidavidtest") + ".png";
             await currentApplication.StorageIo.WriteBitmapToPngMediaLibrary(filename);
             StorageFile sfSavedPictureFromWorkingSpace = await KnownFolders.PicturesLibrary.GetFileAsync(filename);
@@ -1178,6 +1179,60 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                         bitmapBoundsOfDrawing.Y = ((uint)widthOfCropSelection + (uint)currentLeftTopCoordinateOfCropSelection.Y) > canvasHeight ? canvasHeight - uwidthOfCropSelection : (uint)currentLeftTopCoordinateOfCropSelection.Y;
                         wbCroppedBitmap = new WriteableBitmap(widthOfCropSelection, heightOfCropSelection);
                     }
+                    CommandManager.GetInstance().CommitCommand(new CropCommand(bitmapBoundsOfDrawing.X, bitmapBoundsOfDrawing.Y, (uint)(heightOfCropSelection - 1), (uint)(widthOfCropSelection - 1)));
+                    bitmapEncoder.BitmapTransform.Bounds = bitmapBoundsOfDrawing;
+
+                    // write out to the stream
+                    try
+                    {
+                        await bitmapEncoder.FlushAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        // ignored
+                    }
+                    if (wbCroppedBitmap != null)
+                    {
+                        wbCroppedBitmap.SetSource(mrAccessStream);
+                        AddWriteableBitmapToCanvas(wbCroppedBitmap, currentApplication);
+                    }
+                }
+            }
+        }
+
+        async public void CropImageForCropCommand(uint offsetX, uint offsetY, uint height, uint width)
+        {
+            // needs a little bit more storage but the performance is also little bit better.
+            PocketPaintApplication currentApplication = PocketPaintApplication.GetInstance();
+            TransformGroup tgPaintingAreaCheckeredGrid = PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform as TransformGroup;
+
+            WriteableBitmap wbCroppedBitmap = null;
+
+            string filename = ("karlidavidtest") + ".png";
+            await currentApplication.StorageIo.WriteBitmapToPngMediaLibrary(filename);
+            StorageFile sfSavedPictureFromWorkingSpace = await KnownFolders.PicturesLibrary.GetFileAsync(filename);
+            InMemoryRandomAccessStream mrAccessStream = new InMemoryRandomAccessStream();
+
+            using (Stream streamOfSavedPictureFromWorkingSpace = await sfSavedPictureFromWorkingSpace.OpenStreamForReadAsync())
+            {
+                using (var memStream = new MemoryStream())
+                {
+                    await streamOfSavedPictureFromWorkingSpace.CopyToAsync(memStream);
+                    memStream.Position = 0;
+
+                    BitmapDecoder bitmapDecoder = await BitmapDecoder.CreateAsync(memStream.AsRandomAccessStream());
+                    BitmapEncoder bitmapEncoder = await BitmapEncoder.CreateForTranscodingAsync(mrAccessStream, bitmapDecoder);
+
+                    bitmapEncoder.BitmapTransform.ScaledHeight = (uint)currentApplication.PaintingAreaCanvas.RenderSize.Height;
+                    bitmapEncoder.BitmapTransform.ScaledWidth = (uint)currentApplication.PaintingAreaCanvas.RenderSize.Width;
+
+                    BitmapBounds bitmapBoundsOfDrawing = new BitmapBounds();
+                    bitmapBoundsOfDrawing.Height = height;
+                    bitmapBoundsOfDrawing.Width = width;
+                    bitmapBoundsOfDrawing.X = offsetX;
+                    bitmapBoundsOfDrawing.Y = offsetY;
+                    wbCroppedBitmap = new WriteableBitmap((int)width, (int)height);
+                    
                     bitmapEncoder.BitmapTransform.Bounds = bitmapBoundsOfDrawing;
 
                     // write out to the stream
