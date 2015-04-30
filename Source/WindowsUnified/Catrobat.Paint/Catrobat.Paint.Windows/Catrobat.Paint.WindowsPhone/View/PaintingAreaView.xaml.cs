@@ -103,7 +103,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             createAppBarAndSwitchAppBarContent(current_appbar);
 
             setSizeOfPaintingAreaViewCheckered((int)Window.Current.Bounds.Height, (int)Window.Current.Bounds.Width);
-            alignPositionOfGridWorkingSpace();
+            alignPositionOfGridWorkingSpace(null);
 
             // TODO: Refactor the following code.
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = Window.Current.Bounds.Height;
@@ -116,7 +116,98 @@ namespace Catrobat.Paint.WindowsPhone.View
             GridWorkingSpace.Width = width;
         }
 
-        public void alignPositionOfGridWorkingSpace()
+        public void alignPositionOfGridWorkingSpace(RotateTransform rtRotation)
+        {
+            TransformGroup tgGridWorkingSpace = getGridWorkingSpaceTransformGroup();
+            int angularDegreeOfWorkingSpaceRotation = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
+            if (tgGridWorkingSpace == null)
+            {
+                return;
+            }
+            tgGridWorkingSpace.Children.Clear();
+
+            if (rtRotation == null)
+            {
+                rtRotation = CreateRotateTransform(angularDegreeOfWorkingSpaceRotation, new Point(GridWorkingSpace.Width / 2.0, GridWorkingSpace.Height / 2.0));
+            }
+            tgGridWorkingSpace.Children.Add(rtRotation);
+
+            GridWorkingSpace.HorizontalAlignment = HorizontalAlignment.Left;
+            GridWorkingSpace.VerticalAlignment = VerticalAlignment.Top;
+
+            var toScaleValue = new ScaleTransform();
+
+            toScaleValue.ScaleX = 0.70;
+            toScaleValue.ScaleY = 0.70;
+            toScaleValue.CenterX = GridWorkingSpace.Width / 2.0;
+            toScaleValue.CenterY = GridWorkingSpace.Height / 2.0;
+            if (angularDegreeOfWorkingSpaceRotation == 90 || angularDegreeOfWorkingSpaceRotation == 270)
+            {
+                toScaleValue.ScaleX = 0.5625;
+                toScaleValue.ScaleY = 0.5625;
+            }
+
+            tgGridWorkingSpace.Children.Add(toScaleValue);
+
+            TranslateTransform tfLeftTopCornerOfGridWorkingSpaceToNullPoint = new TranslateTransform();
+            TranslateTransform tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = new TranslateTransform();
+            TranslateTransform tfMiddlePointOfGridWorkingSpaceToGlobalMiddlePoint = new TranslateTransform();
+            tfLeftTopCornerOfGridWorkingSpaceToNullPoint = CreateTranslateTransform(tgGridWorkingSpace.Value.OffsetX * (-1), tgGridWorkingSpace.Value.OffsetY *(-1));
+            if (angularDegreeOfWorkingSpaceRotation == 0)
+            {
+                tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform(((GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX) * (-1),
+                                                                                            ((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY) * (-1));
+            }
+            else if (angularDegreeOfWorkingSpaceRotation == 90)
+            {
+                tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY,
+                                                                                            ((GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX) * (-1));
+            }
+            else if (angularDegreeOfWorkingSpaceRotation == 180)
+            {
+                tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform((GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX,
+                                                                                            ((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY));
+            }
+            else if (angularDegreeOfWorkingSpaceRotation == 270)
+            {
+                tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform(((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY) *(-1),
+                                                                            (GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX);
+            }
+            tfMiddlePointOfGridWorkingSpaceToGlobalMiddlePoint = CreateTranslateTransform((Window.Current.Bounds.Width / 2.0), (Window.Current.Bounds.Height / 2.0));
+
+            AddTranslateTransformToGridWorkingSpaceTransformGroup(tfLeftTopCornerOfGridWorkingSpaceToNullPoint);
+            AddTranslateTransformToGridWorkingSpaceTransformGroup(tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint);
+            AddTranslateTransformToGridWorkingSpaceTransformGroup(tfMiddlePointOfGridWorkingSpaceToGlobalMiddlePoint);
+        }
+
+        public TranslateTransform CreateTranslateTransform(double translateX, double translateY)
+        {
+            TranslateTransform translateTransform = new TranslateTransform();
+            translateTransform.X = translateX;
+            translateTransform.Y = translateY;
+            return translateTransform;
+        }
+
+        public RotateTransform CreateRotateTransform(int angle, Point rotationCenter)
+        {
+            RotateTransform rotateTransform = new RotateTransform();
+            rotateTransform.Angle = angle;
+            rotateTransform.CenterX = rotationCenter.X;
+            rotateTransform.CenterY = rotationCenter.Y;
+            return rotateTransform;
+        }
+
+        public void AddTranslateTransformToGridWorkingSpaceTransformGroup(TranslateTransform translateTransform)
+        {
+            TransformGroup tgGridWorkingSpace = getGridWorkingSpaceTransformGroup();
+            if(tgGridWorkingSpace == null)
+            {
+                return;
+            }
+            tgGridWorkingSpace.Children.Add(translateTransform);
+        }
+
+        public TransformGroup getGridWorkingSpaceTransformGroup()
         {
             TransformGroup tgGridWorkingSpace = null;
             if (PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform.GetType() == typeof(TransformGroup))
@@ -128,99 +219,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                 tgGridWorkingSpace = new TransformGroup();
                 PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform = tgGridWorkingSpace;
             }
-            tgGridWorkingSpace.Children.Clear();
 
-            GridWorkingSpace.HorizontalAlignment = HorizontalAlignment.Left;
-            GridWorkingSpace.VerticalAlignment = VerticalAlignment.Top;
-
-            var toScaleValue = new ScaleTransform();
-
-            toScaleValue.ScaleX = 0.70;
-            toScaleValue.ScaleY = 0.70;
-            toScaleValue.CenterX = GridWorkingSpace.Width / 2.0;
-            toScaleValue.CenterY = GridWorkingSpace.Height / 2.0;
-
-            int angularDegreeOfWorkingSpaceRotation = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
-            if (angularDegreeOfWorkingSpaceRotation != 0 && angularDegreeOfWorkingSpaceRotation != 180)
-            {
-                toScaleValue.ScaleX = 0.5625;
-                toScaleValue.ScaleY = 0.5625;
-            }
-
-            tgGridWorkingSpace.Children.Add(toScaleValue);
-            if (PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation != 0)
-            {
-                RotateTool rotateTool = new RotateTool();
-
-                // es soll der aktuelle Rotationswert verwendet werden.
-                rotateTool.RotateRight(0);
-            }
-
-            double moveValueToOffsetX = (Window.Current.Bounds.Width - GridWorkingSpace.Width * toScaleValue.ScaleX) / 2.0;
-            double moveValueToOffsetY = (Window.Current.Bounds.Height - GridWorkingSpace.Height * toScaleValue.ScaleY) / 2.0;
-
-            if (angularDegreeOfWorkingSpaceRotation == 90)
-            {
-                moveValueToOffsetX = GridWorkingSpace.Height * toScaleValue.ScaleX + (Window.Current.Bounds.Width - GridWorkingSpace.Height * toScaleValue.ScaleY) / 2.0;
-                moveValueToOffsetY = (Window.Current.Bounds.Height - GridWorkingSpace.Width * toScaleValue.ScaleX) / 2.0;
-
-            }
-            else if (angularDegreeOfWorkingSpaceRotation == 180)
-            {
-                moveValueToOffsetX = GridWorkingSpace.Width * toScaleValue.ScaleX + moveValueToOffsetX;
-                moveValueToOffsetY = GridWorkingSpace.Height * toScaleValue.ScaleY + moveValueToOffsetY;
-            }
-            else if (angularDegreeOfWorkingSpaceRotation == 270)
-            {
-                moveValueToOffsetX = (Window.Current.Bounds.Width - GridWorkingSpace.Height * toScaleValue.ScaleY) / 2.0;
-                moveValueToOffsetY = GridWorkingSpace.Width * toScaleValue.ScaleY + (Window.Current.Bounds.Height - GridWorkingSpace.Width * toScaleValue.ScaleX) / 2.0;
-            }
-
-            var tfTranslateToNullPoint = new TranslateTransform();
-            tfTranslateToNullPoint.X -= tgGridWorkingSpace.Value.OffsetX;
-            tfTranslateToNullPoint.Y -= tgGridWorkingSpace.Value.OffsetY;
-            tgGridWorkingSpace.Children.Add(tfTranslateToNullPoint);
-
-            var tfCenterWorkingSpace = new TranslateTransform();
-            tfCenterWorkingSpace.X = moveValueToOffsetX;
-            tfCenterWorkingSpace.Y = moveValueToOffsetY;
-            tgGridWorkingSpace.Children.Add(tfCenterWorkingSpace);
+            return tgGridWorkingSpace;
         }
-
-        //public void setSizeOfGridWorkingSpace()
-        //{
-
-        //    GridWorkingSpace.Height = Window.Current.Bounds.Height;
-        //    GridWorkingSpace.Width = Window.Current.Bounds.Width;
-        //    TransformGroup tgGridWorkingSpace = null;
-        //    if (PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform.GetType() == typeof(TransformGroup))
-        //    {
-        //        tgGridWorkingSpace = PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform as TransformGroup;
-        //    }
-        //    if (tgGridWorkingSpace == null)
-        //    {
-        //        PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform = tgGridWorkingSpace = new TransformGroup();
-        //    }
-        //    tgGridWorkingSpace.Children.Clear();
-
-        //    var DISPLAY_WIDTH_HALF = (Window.Current.Bounds.Width / 2.0);
-        //    var DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height / 2.0);
-        //    var toScaleValue = new ScaleTransform();
-
-        //    toScaleValue.ScaleX = 0.75;
-        //    toScaleValue.ScaleY = 0.75;
-        //    toScaleValue.CenterX = DISPLAY_WIDTH_HALF;
-        //    toScaleValue.CenterY = DISPLAY_HEIGHT_HALF;
-        //    tgGridWorkingSpace.Children.Add(toScaleValue);
-
-        //    double moveValueToOffsetX = (Window.Current.Bounds.Width - GridWorkingSpace.Width * toScaleValue.ScaleX) / 2.0; ;
-        //    double moveValueToOffsetY = (Window.Current.Bounds.Height - GridWorkingSpace.Height * toScaleValue.ScaleY) / 2.0;
-
-        //    var toTranslateValue2 = new TranslateTransform();
-        //    toTranslateValue2.Y -= 11.0;
-        //    tgGridWorkingSpace.Children.Add(toTranslateValue2);
-
-        //}
 
         public async void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
         {
@@ -332,7 +333,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 isFullscreen = false;
 
                 changeVisibilityOfAppBars(Visibility.Visible);
-                alignPositionOfGridWorkingSpace();
+                alignPositionOfGridWorkingSpace(null);
                 showStatusAppBar();
                 e.Handled = true;
             }
@@ -1563,7 +1564,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = new TransformGroup();
-            PocketPaintApplication.GetInstance().PaintingAreaView.alignPositionOfGridWorkingSpace();
+            PocketPaintApplication.GetInstance().PaintingAreaView.alignPositionOfGridWorkingSpace(null);
             PocketPaintApplication.GetInstance().PaintingAreaView.disableToolbarsAndPaintingArea(false);
         }
 
@@ -1673,7 +1674,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PaintData paintData = PocketPaintApplication.GetInstance().PaintData;
             PaintingAreaCanvas.Height = Window.Current.Bounds.Height;
             PaintingAreaCanvas.Width = Window.Current.Bounds.Width;
-            alignPositionOfGridWorkingSpace();
+            alignPositionOfGridWorkingSpace(null);
             resetControls();
             PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
             CommandManager.GetInstance().clearAllCommands();

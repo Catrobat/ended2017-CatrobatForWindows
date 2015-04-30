@@ -17,7 +17,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
             if (_transformGroup.Children.Count == 0)
             {
                 transformGroupWithAllKindOfTransforms.Children.Clear();
-                PocketPaintApplication.GetInstance().PaintingAreaView.alignPositionOfGridWorkingSpace();
+                PocketPaintApplication.GetInstance().PaintingAreaView.alignPositionOfGridWorkingSpace(null);
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeEnableOfAppBarButtonResetZoom(false);
             }
             else
@@ -50,7 +50,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
             transformGroup.Children.Clear();
 
-            PocketPaintApplication.GetInstance().PaintingAreaView.alignPositionOfGridWorkingSpace();
+            PocketPaintApplication.GetInstance().PaintingAreaView.alignPositionOfGridWorkingSpace(null);
 
             PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform = transformGroup;
             PocketPaintApplication.GetInstance().GridWorkingSpace.UpdateLayout();

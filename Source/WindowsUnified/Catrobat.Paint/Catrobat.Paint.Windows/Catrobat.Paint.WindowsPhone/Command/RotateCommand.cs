@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Media;
+﻿using Catrobat.Paint.WindowsPhone.Tool;
+using Windows.UI.Xaml.Media;
 
 namespace Catrobat.Paint.WindowsPhone.Command
 {
@@ -10,6 +11,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
         public RotateCommand(TransformGroup rotateTransformGroup, int angle, int rotationDirection)
         {
+            ToolType = ToolType.Rotate;
             _rotateTransformGroup = rotateTransformGroup;
             _angle = angle;
             _rotationDirection = rotationDirection;
@@ -17,18 +19,18 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
         public override bool ReDo()
         {
-            TransformGroup transformGroup = ((TransformGroup)PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform);
-            transformGroup.Children.Clear();
+            TransformGroup tgGridWorkingSpace = ((TransformGroup)PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform);
+            tgGridWorkingSpace.Children.Clear();
             for (int i = 0; i < _rotateTransformGroup.Children.Count; i++)
             {
-                transformGroup.Children.Add(_rotateTransformGroup.Children[i]);
+                tgGridWorkingSpace.Children.Add(_rotateTransformGroup.Children[i]);
             }
 
-            PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform = transformGroup;
+            PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation = _angle;
+            PocketPaintApplication.GetInstance().PaintingAreaView.alignPositionOfGridWorkingSpace(null);
             PocketPaintApplication.GetInstance().GridWorkingSpace.UpdateLayout();
             PocketPaintApplication.GetInstance().GridWorkingSpace.InvalidateArrange();
             PocketPaintApplication.GetInstance().GridWorkingSpace.InvalidateMeasure();
-            PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation = _angle;
             PocketPaintApplication.GetInstance().PaintingAreaView.enableResetButtonRotate(_rotationDirection);
             return true;
         }
@@ -44,8 +46,8 @@ namespace Catrobat.Paint.WindowsPhone.Command
             PocketPaintApplication.GetInstance().GridWorkingSpace.InvalidateArrange();
             PocketPaintApplication.GetInstance().GridWorkingSpace.InvalidateMeasure();
 
-            PocketPaintApplication.GetInstance().PaintingAreaView.alignPositionOfGridWorkingSpace();
             PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation -= _angle;
+            PocketPaintApplication.GetInstance().PaintingAreaView.alignPositionOfGridWorkingSpace(null);
             PocketPaintApplication.GetInstance().PaintingAreaView.enableResetButtonRotate(PocketPaintApplication.GetInstance().PaintingAreaView.getRotationCounter() * (-1));
             return true;
         }
