@@ -12,6 +12,7 @@
                 StrokeThickness="5" VerticalAlignment="Bottom" 
                 DoubleTapped="rectRectangleStampSelection_DoubleTapped" Width="384"/>
             <Image x:Name="imgStampedImage" Margin="0,0,0,0" Stretch="Fill" />
+
         </Grid>
         <Grid x:Name="GridRectLeftTop" Background="Transparent" HorizontalAlignment="Left" Height="50" ManipulationDelta="rectLeftTop_ManipulationDelta"
               ManipulationMode="TranslateX, TranslateY" Margin="-20.0,-20.0,0,0" VerticalAlignment="Top" Width="50">
