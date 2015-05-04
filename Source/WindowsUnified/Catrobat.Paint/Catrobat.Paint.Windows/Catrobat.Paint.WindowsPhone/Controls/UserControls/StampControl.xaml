@@ -5,16 +5,14 @@
     xmlns:local="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Height="330" Width="192">
-    <Grid x:Name="GridMain" Height="330" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="192">
-        <Grid x:Name="GridRectangle" HorizontalAlignment="Left">
-            <Rectangle x:Name="rectRectangleCropSelection" Fill="Transparent" Height="330" HorizontalAlignment="Left" Margin="0,0,0,0" Stroke="CornflowerBlue" 
+    mc:Ignorable="d" Height="660" Width="384">
+    <Grid x:Name="GridMain" Height="660" HorizontalAlignment="Left" Margin="-5,-5,0,0" VerticalAlignment="Top" Width="384">
+        <Grid x:Name="GridRectangle" HorizontalAlignment="Left" ManipulationDelta="rectRectangleStampSelection_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" VerticalAlignment="Top">
+            <Rectangle x:Name="rectRectangleStampSelection" Fill="Transparent" Height="660" HorizontalAlignment="Left" Margin="0,0,0,0" Stroke="CornflowerBlue" 
                 StrokeThickness="5" VerticalAlignment="Bottom" 
-                DoubleTapped="rectRectangleCropSelection_DoubleTapped" Width="192"/>
-        </Grid>
-        <Grid x:Name="GridStampedImage" Background="#0FCCCCCC" HorizontalAlignment="Left" ManipulationDelta="rectRectangleCropSelection_ManipulationDelta"
-              ManipulationMode="TranslateX, TranslateY" Margin="0.0,0.0,0.0,0.0" VerticalAlignment="Top">
-            <Image x:Name="imgStampedImage" Height="320" HorizontalAlignment="Left" Margin="5,5,0,0" Stretch="Fill" VerticalAlignment="Top" Width="182"></Image>
+                DoubleTapped="rectRectangleStampSelection_DoubleTapped" Width="384"/>
+            <Image x:Name="imgStampedImage" Margin="0,0,0,0" Stretch="Fill" />
+
         </Grid>
         <Grid x:Name="GridRectLeftTop" Background="Transparent" HorizontalAlignment="Left" Height="50" ManipulationDelta="rectLeftTop_ManipulationDelta"
               ManipulationMode="TranslateX, TranslateY" Margin="-20.0,-20.0,0,0" VerticalAlignment="Top" Width="50">
@@ -55,7 +53,7 @@
         </Grid>
         <Grid x:Name="GridRectCenterTop" Background="Transparent" Height="50" HorizontalAlignment="Center" ManipulationDelta="rectCenterTop_ManipulationDelta"
                 ManipulationMode="TranslateY" Margin="0,-30,0,0" VerticalAlignment="Top" Width="140">
-            <Rectangle x:Name="rectCenterTop" Fill="Gray" Height="5" Margin="0,15,0,0" Width="60" />
+            <Rectangle x:Name="rectCenterTop" Fill="Gray" Height="5" Margin="0,15,0,0" Width="120" />
         </Grid>
     </Grid>
 </UserControl>

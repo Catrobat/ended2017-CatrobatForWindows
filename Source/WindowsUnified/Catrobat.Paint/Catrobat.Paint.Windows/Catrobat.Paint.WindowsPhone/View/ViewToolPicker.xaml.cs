@@ -169,7 +169,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                             break;
                         case "BtnStamp":
                             pocketPaintApplication.SwitchTool(ToolType.Stamp);
-                            PocketPaintApplication.GetInstance().StampControl.setControlPosition();
+                            PocketPaintApplication.GetInstance().StampControl.SetStampSelection();
                             pocketPaintApplication.StampControl.Visibility = Visibility;
                             break;
                         case "BtnZoom":
