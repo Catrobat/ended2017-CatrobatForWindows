@@ -48,8 +48,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         Point _leftTopNullPointCropSelection;
 
-        double heightOfRectangle = 0.0;
-        double widthOfRectangle = 0.0;
+        double _heightOfRectangle = 0.0;
+        double _widthOfRectangle = 0.0;
 
         public CropControl()
         {
@@ -64,8 +64,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             _heightCropControl = 0.0;
             _widthCropControl = 0.0;
             _scaleValueWorkingSpace = 0.0;
-            heightOfRectangle = rectRectangleCropSelection.Height;
-            widthOfRectangle = rectRectangleCropSelection.Width;
+            _heightOfRectangle = rectRectangleCropSelection.Height;
+            _widthOfRectangle = rectRectangleCropSelection.Width;
         }
 
         public void SetControlSize(double height, double width)
@@ -192,8 +192,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void SetRectangleForMovementSize(double height, double width)
         {
-            heightOfRectangle = height;
-            widthOfRectangle = width;
+            _heightOfRectangle = height;
+            _widthOfRectangle = width;
             rectRectangleCropSelection.Height = height;
             rectRectangleCropSelection.Width = width;
         }
@@ -784,7 +784,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void ChangeHeightOfUiElements(double value)
         {
             GridMain.Height += value;
-            heightOfRectangle += value;
+            _heightOfRectangle += value;
             rectRectangleCropSelection.Height += value;
 
             double addValueToTouchGrid = value / 4.0;
@@ -818,7 +818,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void ChangeWidthOfUiElements(double value)
         {
             GridMain.Width += value;
-            widthOfRectangle += value;
+            _widthOfRectangle += value;
             rectRectangleCropSelection.Width += value;
 
             double addValueToTouchGrid = value / 4.0;
@@ -950,12 +950,12 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public double GetHeightOfRectangleCropSelection()
         {
-            return (heightOfRectangle - 10.0) / _scaleValueWorkingSpace;
+            return (_heightOfRectangle - 10.0) / _scaleValueWorkingSpace;
         }
 
         public double GetWidthOfRectangleCropSelection()
         {
-            return (widthOfRectangle - 10.0) / _scaleValueWorkingSpace;
+            return (_widthOfRectangle - 10.0) / _scaleValueWorkingSpace;
         }
 
         public Point GetXYOffsetBetweenPaintingAreaAndCropControlSelection()
