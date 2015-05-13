@@ -45,6 +45,7 @@
   </Grid>
   <Page.BottomAppBar>
     <controls:MultiModeEditorCommandBar RequestedTheme="Dark"
+      Background="{ThemeResource AppBarBackgroundBrush}"                   
       ModeChanged="MultiModeEditorCommandBar_OnModeChanged"
       TargetType="Object"
       CopyCommand="{Binding CopySpriteCommand}"
