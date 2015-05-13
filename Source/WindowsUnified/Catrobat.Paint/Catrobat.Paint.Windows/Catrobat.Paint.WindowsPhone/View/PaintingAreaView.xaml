@@ -89,7 +89,7 @@
     </Grid>
 
     <Page.BottomAppBar>
-        <CommandBar x:Name="barStandard" Height="72px" Visibility="Visible">
+        <CommandBar x:Name="barStandard" Height="72px" Visibility="Visible" Background="#ff19a5b8">
             <AppBarButton x:Name="btnThickness" Label="Pinselstärke">
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="/Assets/ColorPicker/icon_menu_strokes.png"/>
