@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.WindowsPhone.Controls.ActionsControls;
@@ -155,6 +157,9 @@ namespace Catrobat.IDE.WindowsPhone.Controls
         public MultiModeEditorCommandBar()
         {
             this.RequestedTheme = ElementTheme.Dark;
+            SolidColorBrush appBarBackgroundBrush = new SolidColorBrush();
+            appBarBackgroundBrush.Color = Color.FromArgb(255, 25, 165, 184);
+            this.Background = appBarBackgroundBrush;
 
             _playButton = new AppBarButton
             {

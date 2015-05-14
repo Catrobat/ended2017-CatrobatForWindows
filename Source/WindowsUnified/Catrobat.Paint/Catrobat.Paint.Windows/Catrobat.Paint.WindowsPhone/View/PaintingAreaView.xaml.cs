@@ -433,6 +433,9 @@ namespace Catrobat.Paint.WindowsPhone.View
         public void createAppBarAndSwitchAppBarContent(string type)
         {
             CommandBar cmdBar = new CommandBar();
+            SolidColorBrush appBarBackgroundColor = new SolidColorBrush();
+            appBarBackgroundColor.Color = Color.FromArgb(255, 25, 165, 184);
+            cmdBar.Background = appBarBackgroundColor;
 
             loadPointerEvents();
             unloadDoubleTapEvent();
