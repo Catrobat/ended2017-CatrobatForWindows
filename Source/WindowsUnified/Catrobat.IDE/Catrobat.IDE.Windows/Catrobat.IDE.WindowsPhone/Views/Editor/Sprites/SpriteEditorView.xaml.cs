@@ -40,7 +40,14 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
             CatrobatListView view = this.FindName("ListViewActions") as CatrobatListView;
             view.ItemWidthLandscape = (int)height;
             view.ItemWidthPortrait = (int)width;
-            
+
+            view = this.FindName("ListViewLooks") as CatrobatListView;
+            view.ItemWidthLandscape = (int)height;
+            view.ItemWidthPortrait = (int)width;
+
+            view = this.FindName("ListViewSounds") as CatrobatListView;
+            view.ItemWidthLandscape = (int)height;
+            view.ItemWidthPortrait = (int)width;
             CreateCommandBars();
 
             BottomAppBar = _commandBarActions;
