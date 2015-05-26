@@ -21,7 +21,7 @@
                    Style="{ThemeResource TextTitleNormalStyle}">
         </TextBlock>
       </Grid>
-        <catrobatListView:CatrobatListView x:Name="ListViewSprites"
+        <!-- original <catrobatListView:CatrobatListView x:Name="ListViewSprites"
         Grid.Row="1"
         ItemsSource="{Binding CurrentProgram.Sprites}"
         SelectedItems="{Binding SelectedSprites}"                                        
@@ -29,6 +29,15 @@
         ItemTemplate="{StaticResource SpriteItemTemplate}"                                          
         HorizontalAlignment="Center" Tapped="SpriteItem_OnTapped"
         ItemWidthPortrait="370" ItemWidthLandscape="450"
+            />-->
+            <catrobatListView:CatrobatListView x:Name="ListViewSprites"
+        Grid.Row="1"
+        ItemsSource="{Binding CurrentProgram.Sprites}"
+        SelectedItems="{Binding SelectedSprites}"                                        
+        ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
+        ItemTemplate="{StaticResource SpriteItemTemplate}"                                          
+        HorizontalAlignment="Center" Tapped="SpriteItem_OnTapped"
+        ItemWidthPortrait="0" ItemWidthLandscape="0"
             />
 
             <TextBlock Grid.Row="1"

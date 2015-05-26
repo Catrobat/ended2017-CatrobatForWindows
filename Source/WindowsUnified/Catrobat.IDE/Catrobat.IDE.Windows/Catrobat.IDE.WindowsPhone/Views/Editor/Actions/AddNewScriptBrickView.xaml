@@ -34,7 +34,7 @@
     <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" VerticalAlignment="Top">
 
-            <catrobatListView:CatrobatListView
+            <!-- original <catrobatListView:CatrobatListView
                 VerticalAlignment="Top"
                 ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
                 ItemTemplate="{StaticResource ActionTemplateSelectorTemplate}"
@@ -43,6 +43,16 @@
                 ReorderEnabled="False"
                 GroupingEnabled="False"
                 ItemWidthPortrait="370" ItemWidthLandscape="450" 
+            />-->
+            <catrobatListView:CatrobatListView
+                VerticalAlignment="Top"
+                ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
+                ItemTemplate="{StaticResource ActionTemplateSelectorTemplate}"
+                ItemsSource="{Binding BrickCollection}" 
+                ItemTapped="CatrobatListView_OnItemTapped"
+                ReorderEnabled="False"
+                GroupingEnabled="False"
+                ItemWidthPortrait="0" ItemWidthLandscape="0" 
             />
         </Grid>
   </Grid>
