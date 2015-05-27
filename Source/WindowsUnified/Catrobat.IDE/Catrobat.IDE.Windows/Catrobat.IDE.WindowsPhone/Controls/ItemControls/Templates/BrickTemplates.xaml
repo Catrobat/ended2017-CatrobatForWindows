@@ -17,7 +17,7 @@
 
                         <!-- header with grooving -->
                         <!-- original <Path Data="M0,0 0,10 490,10 490,0 470,0 460,10 440,10 428,0 0,0" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="0" Stroke="{TemplateBinding Background}" StrokeThickness="2"/>-->
-                        <Path Data="M0,0 0,11 490,11 490,0 473,0 468,11 430,11 425,0 0,0" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="0" Stroke="{TemplateBinding Background}" StrokeThickness="2"/> 
+                        <Path Data="M0,0 425,0 430,10 468,10 473,0 490,0 490,10 0,10 0,0" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="0" Stroke="{TemplateBinding Background}" StrokeThickness="2" Margin="0,2,0,0" /> 
 
                         <!-- header single dark line 3d effect -->
                         <!-- original <Path Stroke="{TemplateBinding Background}" Data="M0,0 L490,0" Stretch="Fill" UseLayoutRounding="False" Grid.Row="0" Grid.RowSpan="2" StrokeThickness="2" VerticalAlignment="Top" Margin="-1,9,-1,0" />-->
@@ -25,7 +25,7 @@
 
                         <!-- header colored line only for first/above brick -->
                         <!-- original <Path Stroke="#7FFFFFFF" Data="M0,0 429,0 438.25,10 460.5,10 469.75,0 490,0" Stretch="Fill" UseLayoutRounding="False" StrokeThickness="2.5" Grid.Row="0" />-->
-                        <Path Stroke="#7FFFFFFF" Data="M0,0 425,0 430,11 468,11 472,0 490,0" Stretch="Fill" UseLayoutRounding="False" StrokeThickness="2.5" Grid.Row="0" />
+                        <Path Stroke="#7FFFFFFF" Data="M0,0 425,0 430,11 468,11 473,0 490,0" Stretch="Fill" UseLayoutRounding="False" StrokeThickness="2.5" Grid.Row="0" Margin="0,2,0,0"  />
 
                         <!-- border brick-body colored background -->
                         <!-- original <Border Background="{TemplateBinding Background}" Grid.Row="1" /> -->
@@ -41,7 +41,7 @@
 
                         <!-- black underline with colored-filled grooving -->
                         <!-- original <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M490,80 L470,80 L460,90 L439,90 L428,80 L0,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="2" StrokeThickness="2" Margin="0,0,0,0"/>-->
-                        <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M490,80 L473,80 L468,90 L430,90 L425,80 L0,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="2" StrokeThickness="2" Margin="0,0,0,0"/>
+                        <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M0,80 426,80 431,90 467,90 472,80 490,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="2" StrokeThickness="2" Margin="0,0,0,2"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -69,7 +69,7 @@
                         <Path Stroke="{TemplateBinding Background}" Data="M0,80 L490,80" Stretch="Fill" UseLayoutRounding="False" Grid.Row="0" Grid.RowSpan="2" StrokeThickness="4" Margin="1,0,1,8" VerticalAlignment="Bottom"/>
 
                         <!-- original <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M490,80 L470,80 L460,90 L439,90 L428,80 L0,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="1" StrokeThickness="2" Margin="0,0,0,0"/>-->
-                        <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M490,80 L473,80 L468,90 L430,90 L425,80 L0,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="1" StrokeThickness="2" Margin="0,0,0,0"/>
+                        <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M0,80 426,80 431,90 467,90 472,80 490,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="1" StrokeThickness="2" Margin="0,0,0,2"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
