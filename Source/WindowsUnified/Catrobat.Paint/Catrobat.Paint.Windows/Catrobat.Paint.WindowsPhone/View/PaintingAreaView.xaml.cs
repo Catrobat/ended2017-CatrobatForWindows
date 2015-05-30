@@ -248,7 +248,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                     _path.Data = myRectangleGeometry;
                     PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
-                    CommandManager.GetInstance().CommitCommand(new LoadPictureCommand(_path));
+                    // CommandManager.GetInstance().CommitCommand(new LoadPictureCommand(_path));
                     PocketPaintApplication.GetInstance().isLoadPictureClicked = false;
                     changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                     changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", true);
