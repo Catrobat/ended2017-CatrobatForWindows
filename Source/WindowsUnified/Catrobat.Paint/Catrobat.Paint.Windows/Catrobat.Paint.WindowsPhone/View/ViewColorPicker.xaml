@@ -131,79 +131,87 @@
                         <Rectangle x:Name="Rectangle54" Fill="{StaticResource ColorButton54}" Height="65" Margin="-20" Stroke="Black"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
                     </Grid>
                 </Button>
-
-                <Button x:Name="BtnSelectedColor" BorderThickness="3" Click="BtnSelectedColor_OnClick"
-                            Height="75" HorizontalAlignment="Center" Margin="0,400,0,0" Padding="0,0,0,0" Width="350">
-                    <Grid x:Name="GrdButtonSelectedColor" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350">
-                        <Image x:Name="ImgTransparence"  Height="60" Margin="0,0,0,0" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Visibility="Visible" Width="350" />
-                        <Rectangle x:Name="RecSelectedColor" Fill="Black" Height="60" Margin="0,0,0,0" Visibility="Visible" Width="350"/>
-                        <TextBox x:Name="TbFertig" Background="Transparent" BorderThickness="0" Foreground="White" IsHitTestVisible="False" Text="Fertig" Visibility="Visible" Width="75" />
-                    </Grid>
-                </Button>
             </Grid>
             <!--______________________________________________-->
             <!-- GridColorSlider                              -->
             <!--______________________________________________-->
             <Grid x:Name="GridColorSlider" PointerEntered="Grid_PointerEntered" Visibility="Collapsed">
-                <Controls:ColorPicker x:Name="colorPicker" ColorChanged="ColorChangedCustom" Height="235" HorizontalAlignment="Center" IsHitTestVisible="True"
-                        Margin="20,108,20,0" VerticalAlignment="Top" Width="360"></Controls:ColorPicker>
-                <Slider x:Name="sldRed" Background="Black" Foreground="Red" Height="40" Maximum="255" Margin="-15,360,0,0"
+                <Controls:ColorPicker x:Name="colorPicker" ColorChanged="ColorChangedCustom" Height="186" HorizontalAlignment="Center" IsHitTestVisible="True"
+                        Margin="20,108,25,0" VerticalAlignment="Top" Width="355"></Controls:ColorPicker>
+                <Slider x:Name="sldRed" Background="Black" Foreground="Red" Height="40" Maximum="255" Margin="-15,326,0,0"
                         ValueChanged="sldSlidersChanged_ValueChanged" VerticalAlignment="Top" Width="215"/>
 
-                <Slider x:Name="sldGreen" Background="Black" Foreground="#FF23FF00" Height="40" Margin="-15,400,0,0" Maximum="255"
+                <Slider x:Name="sldGreen" Background="Black" Foreground="#FF23FF00" Height="40" Margin="-15,366,0,0" Maximum="255"
                         ValueChanged="sldSlidersChanged_ValueChanged" VerticalAlignment="Top" Width="215"/>
 
-                <Slider x:Name="sldBlue" Background="Black" Foreground="#FF0046FF" Height="40" Margin="-15,440,0,0" Maximum="255"
+                <Slider x:Name="sldBlue" Background="Black" Foreground="#FF0046FF" Height="40" Margin="-15,406,0,0" Maximum="255"
                         ValueChanged="sldSlidersChanged_ValueChanged" VerticalAlignment="Top" Width="215"/>
 
-                <Slider x:Name="sldAlpha" Background="Black" Foreground="White" Height="40" Margin="-15,480,0,0" Maximum="255" 
+                <Slider x:Name="sldAlpha" Background="Black" Foreground="White" Height="40" Margin="-15,446,0,0" Maximum="255" 
                         ValueChanged="sldSlidersChanged_ValueChanged" VerticalAlignment="Top" Width="215"/>
 
                 <TextBox x:Name="tbRedText" Background="{x:Null}" BorderThickness="0" Foreground="Red" Height="63" HorizontalAlignment="Left"
-                         IsHitTestVisible="False" Margin="0,364,0,0" Text="Rot" TextWrapping="Wrap" 
+                         IsHitTestVisible="False" Margin="0,330,0,0" Text="Rot" TextWrapping="Wrap" 
                          VerticalAlignment="Top" Width="73"/>
 
                 <TextBox x:Name="tbBlueText" Background="{x:Null}" BorderThickness="0" Foreground="#FF0046FF" Height="63" HorizontalAlignment="Left"
-                         IsHitTestVisible="False" Margin="0,444,0,0" Text="Blau" TextWrapping="Wrap" 
+                         IsHitTestVisible="False" Margin="0,410,0,0" Text="Blau" TextWrapping="Wrap" 
                          VerticalAlignment="Top" Width="88" >
                 </TextBox>
 
                 <TextBox x:Name="tbGreenText" Background="{x:Null}" BorderThickness="0" Foreground="#FF23FF00" Height="63" HorizontalAlignment="Left"
-                         IsHitTestVisible="False" Margin="0,402,0,0" Text="Grün" TextWrapping="Wrap" 
+                         IsHitTestVisible="False" Margin="0,368,0,0" Text="Grün" TextWrapping="Wrap" 
                          VerticalAlignment="Top" Width="88"/>
 
-                <TextBox x:Name="tbAlphaValue" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="63" HorizontalAlignment="Left"
-                         IsHitTestVisible="False" Margin="314,480,0,0" TextWrapping="Wrap" Text="0" 
-                         VerticalAlignment="Top" Width="97"/>
+                <TextBox x:Name="tbAlphaValue" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="43" HorizontalAlignment="Left"
+                         IsHitTestVisible="False" Margin="314,446,0,0" TextWrapping="Wrap" Text="0" 
+                         VerticalAlignment="Top" Width="47"/>
 
-                <TextBox x:Name="tbAlpha" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="63" HorizontalAlignment="Left"
-                         IsHitTestVisible="False" Margin="0,484,0,0" Text="Alpha" TextWrapping="Wrap"
-                         VerticalAlignment="Top" Width="108"/>
+                <TextBox x:Name="tbAlpha" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="39" HorizontalAlignment="Left"
+                         IsHitTestVisible="False" Margin="0,450,0,0" Text="Alpha" TextWrapping="Wrap"
+                         VerticalAlignment="Top" Width="73"/>
+
+                <TextBox x:Name="tbArgb" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="39" HorizontalAlignment="Left"
+                         IsHitTestVisible="False" Margin="0,492,0,0" Text="ARGB" TextWrapping="Wrap"
+                         VerticalAlignment="Top" Width="73"/>
+
+                <TextBox x:Name="tbArgbValue" Background="White" BorderThickness="0" Foreground="Black" Height="31" HorizontalAlignment="Left"
+                         IsReadOnly="True" Margin="85,491,0,0" Text="#00000000" TextWrapping="Wrap"
+                         VerticalAlignment="Top" Width="130"/>
 
                 <TextBox x:Name="tbBlueValue" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="63" HorizontalAlignment="Left"
-                         IsHitTestVisible="False" Margin="315,440,0,0" Text="0" TextWrapping="Wrap"
+                         IsHitTestVisible="False" Margin="315,406,-12,0" Text="0" TextWrapping="Wrap"
                          VerticalAlignment="Top" Width="97"/>
 
                 <TextBox x:Name="tbGreenValue" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="63" HorizontalAlignment="Left"
-                         IsHitTestVisible="False" Margin="314,400,0,0" Text="0" TextWrapping="Wrap" 
+                         IsHitTestVisible="False" Margin="314,366,-11,0" Text="0" TextWrapping="Wrap" 
                          VerticalAlignment="Top" Width="97"/>
 
                 <TextBox x:Name="tbRedValue" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="63" HorizontalAlignment="Left"
-                         IsHitTestVisible="False" Margin="314,360,0,0" Text="0" TextWrapping="Wrap"
+                         IsHitTestVisible="False" Margin="314,326,-11,0" Text="0" TextWrapping="Wrap"
                          VerticalAlignment="Top" Width="97"/>
 
                 <TextBox x:Name="tbPercentCharacter" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="63" HorizontalAlignment="Left"
-                         IsHitTestVisible="False" Margin="346,480,0,0" Text="%" TextWrapping="Wrap" VerticalAlignment="Top" Width="56"/>
+                         IsHitTestVisible="False" Margin="346,446,-2,0" Text="%" TextWrapping="Wrap" VerticalAlignment="Top" Width="56"/>
 
-                <Button x:Name="BtnSelectedColorSlider" BorderThickness="3" Click="BtnSelectedColor_OnClick"
-                                Height="75" HorizontalAlignment="Center" Margin="0,500,0,0" Padding="0,0,0,0" Width="350">
+                <!--<Button x:Name="BtnSelectedColorSlider" BorderThickness="3" Click="BtnSelectedColor_OnClick"
+                                Height="75" HorizontalAlignment="Center" Margin="0,530,0,0" Padding="0,0,0,0" Width="350">
                     <Grid x:Name="GrdButtonSelectedColorSlider" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350">
                         <Image x:Name="ImgTransparenceSlider"  Height="60" Margin="0,0,0,0" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Visibility="Visible" Width="350" />
                         <Rectangle x:Name="RecSelectedColorSlider" Fill="Black" Height="60" Margin="0,0,0,0" Visibility="Visible" Width="350"/>
                         <TextBox x:Name="TbFertigSlider" Background="Transparent" BorderThickness="0" Foreground="White" IsHitTestVisible="False" Text="Fertig" Visibility="Visible" Width="75" />
                     </Grid>
-                </Button>
+                </Button>-->
             </Grid>
+
+            <Button x:Name="BtnSelectedColor" BorderThickness="3" Click="BtnSelectedColor_OnClick"
+                            Height="75" HorizontalAlignment="Center" Margin="0,520,0,0" Padding="0,0,0,0" Width="350">
+                <Grid x:Name="GrdButtonSelectedColor" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350">
+                    <Image x:Name="ImgTransparence"  Height="60" Margin="0,0,0,0" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Visibility="Visible" Width="350" />
+                    <Rectangle x:Name="RecSelectedColor" Fill="Black" Height="60" Margin="0,0,0,0" Visibility="Visible" Width="350"/>
+                    <TextBox x:Name="TbFertig" Background="Transparent" BorderThickness="0" Foreground="White" IsHitTestVisible="False" Text="Fertig" Visibility="Visible" Width="75" />
+                </Grid>
+            </Button>
             <Grid.DataContext>
                 <Binding Path="ColorPicker" />
             </Grid.DataContext>
