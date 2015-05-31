@@ -21,6 +21,7 @@ using Windows.UI.Xaml.Shapes;
 using Windows.UI;
 using Windows.Storage.Streams;
 using Windows.Graphics.Display;
+using Catrobat.Paint.WindowsPhone.Command;
 
 // Die Elementvorlage "Benutzersteuerelement" ist unter http://go.microsoft.com/fwlink/?LinkId=234236 dokumentiert.
 
@@ -155,6 +156,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 _path.Data = myRectangleGeometry;
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
+                CommandManager.GetInstance().CommitCommand(new LoadPictureCommand(_path));
             }
             else
             {

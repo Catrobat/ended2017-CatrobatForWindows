@@ -89,6 +89,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\CursorCommand.cs" />
     <Compile Include="Command\StampCommand.cs" />
     <Compile Include="Command\CropCommand.cs" />
     <Compile Include="Command\BrushCommand.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Catrobat.Paint.WindowsPhone.Command;
+using System;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -122,7 +123,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 _transforms.Children.Add(move);
             }
 
-            if(PocketPaintApplication.GetInstance() != null)
+            if (PocketPaintApplication.GetInstance() != null)
             {
                 AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
                 if (appBarButtonReset != null)
@@ -162,8 +163,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                     _path.InvalidateArrange();
 
                 }
+                CommandManager.GetInstance().CommitCommand(new CursorCommand(_path));
             }
-            //CommandManager.GetInstance().CommitCommand(new BrushCommand(_path));
         }
 
         public void app_btnResetCursor_Click(object sender, RoutedEventArgs e)
