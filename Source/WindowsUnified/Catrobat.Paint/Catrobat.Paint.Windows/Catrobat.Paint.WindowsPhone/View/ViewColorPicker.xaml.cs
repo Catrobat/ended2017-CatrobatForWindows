@@ -95,26 +95,20 @@ namespace Catrobat.Paint.WindowsPhone.View
             if (reference_color <= 128 && (selected_color.A > 5))
             {
                 TbFertig.Foreground = new SolidColorBrush(Colors.White);
-                TbFertigSlider.Foreground = new SolidColorBrush(Colors.White);
             }
             else
             {
                 TbFertig.Foreground = new SolidColorBrush(Colors.Black);
-                TbFertigSlider.Foreground = new SolidColorBrush(Colors.Black);
             }
 
             if (selected_color == Colors.Transparent)
             {
                 RecSelectedColor.Fill = new SolidColorBrush(Colors.Transparent);
-                RecSelectedColorSlider.Fill = new SolidColorBrush(Colors.Transparent);
-
                 BtnSelectedColor.BorderBrush = new SolidColorBrush(Colors.White);
-                BtnSelectedColorSlider.BorderBrush = new SolidColorBrush(Colors.White);
             }
             else
             {
                 RecSelectedColor.Fill = new SolidColorBrush(selected_color);
-                RecSelectedColorSlider.Fill = new SolidColorBrush(selected_color);
             }
         }
 
@@ -127,10 +121,10 @@ namespace Catrobat.Paint.WindowsPhone.View
             //}
             //else
             //{
-                colorBrush = (SolidColorBrush)((Rectangle)sender).Fill;
-                Color color = colorBrush.Color;
-                color.A = colorBrush.Color.A;
-                colorBrush = new SolidColorBrush(color);
+            colorBrush = (SolidColorBrush)((Rectangle)sender).Fill;
+            Color color = colorBrush.Color;
+            color.A = colorBrush.Color.A;
+            colorBrush = new SolidColorBrush(color);
             //}
 
             changeValuesOfColourTextboxes(colorBrush.Color.R, colorBrush.Color.G, colorBrush.Color.B, colorBrush.Color.A);
@@ -149,6 +143,21 @@ namespace Catrobat.Paint.WindowsPhone.View
                 colorPicker.Color.B, (byte)sldAlpha.Value);
         }
 
+        private void ArgbHexValueToArgbTextbox()
+        {
+            string argbHex = "#";
+            string hexValueAlpha = ((int)sldAlpha.Value).ToString("X");
+            argbHex = hexValueAlpha.Length == 1 ? argbHex + "0" + hexValueAlpha : argbHex + hexValueAlpha;
+            string hexValueRed = ((int)sldRed.Value).ToString("X");
+            argbHex = hexValueRed.Length == 1 ? argbHex + "0" + hexValueRed : argbHex + hexValueRed;
+            string hexValueGreen = ((int)sldGreen.Value).ToString("X");
+            argbHex = hexValueGreen.Length == 1 ? argbHex + "0" + hexValueGreen : argbHex + hexValueGreen;
+            string hexValueBlue = ((int)sldBlue.Value).ToString("X");
+            argbHex = hexValueBlue.Length == 1 ? argbHex + "0" + hexValueBlue : argbHex + hexValueBlue;
+            tbArgbValue.Text = argbHex;
+
+        }
+
         private void BtnSelectedColor_OnClick(object sender, RoutedEventArgs e)
         {
             Color current_color = new Color();
@@ -157,7 +166,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             current_color.B = ((SolidColorBrush)RecSelectedColor.Fill).Color.B;
             current_color.A = (byte)(255 * (Convert.ToDouble(tbAlphaValue.Text) / 100));
 
-            if ( PocketPaintApplication.GetInstance().is_border_color )
+            if (PocketPaintApplication.GetInstance().is_border_color)
             {
                 var current_solid_brush = new SolidColorBrush(current_color);
                 PocketPaintApplication.GetInstance().PaintData.strokeColorSelected = current_solid_brush;
@@ -192,12 +201,12 @@ namespace Catrobat.Paint.WindowsPhone.View
                     }
                 }
             }
-            if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Cursor)
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Cursor)
             {
                 PocketPaintApplication.GetInstance().cursorControl.setCursorColor(current_color);
                 PocketPaintApplication.GetInstance().cursorControl.setDrawingPointColor(current_color);
             }
-            
+
             this.Frame.GoBack();
         }
 
@@ -214,6 +223,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             changeColorOfBtnSelectedColor(color);
             changeColorOfCoding4FunColorPicker((byte)sldRed.Value, (byte)sldGreen.Value,
                 (byte)sldBlue.Value, (byte)sldAlpha.Value);
+            ArgbHexValueToArgbTextbox();
         }
 
         private void changeColorOfCoding4FunColorPicker(byte red, byte green, byte blue, byte alpha)
@@ -246,16 +256,16 @@ namespace Catrobat.Paint.WindowsPhone.View
         private void Rectangle_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             BitmapImage image = new BitmapImage(new Uri("ms-resource:/File/Assets/ColorPicker/color.jpg"));
-            BitmapImage bitmapImage = (BitmapImage)image;           
+            BitmapImage bitmapImage = (BitmapImage)image;
         }
 
         private void Rectangle_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            
+
         }
 
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {         
+        {
 
         }
 
@@ -263,7 +273,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             var height = PocketPaintApplication.GetInstance().size_height_multiplication;
             var width = PocketPaintApplication.GetInstance().size_width_multiplication;
-            
+
             foreach (Object obj in GridColorButtons.Children.Concat(GridColorSlider.Children))
             {
                 if (obj.GetType() == typeof(Button))
@@ -293,7 +303,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                                                 currentRectangle.Margin.Bottom * height);
                     }
                 }
-                else if(obj.GetType() == typeof(ColorPicker))
+                else if (obj.GetType() == typeof(ColorPicker))
                 {
                     ColorPicker colorPicker = ((ColorPicker)obj);
                     colorPicker.Height *= height;
@@ -331,8 +341,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
             GrdButtonSelectedColor.Height *= height;
             GrdButtonSelectedColor.Width *= width;
-            GrdButtonSelectedColorSlider.Height *= height;
-            GrdButtonSelectedColorSlider.Width *= width;
 
             ImgPredColorTransp.Height *= height;
             ImgPredColorTransp.Width *= width;
@@ -345,14 +353,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                                         ImgTransparence.Margin.Right * width,
                                         ImgTransparence.Margin.Bottom * height);
 
-            ImgTransparenceSlider.Height *= height;
-            ImgTransparenceSlider.Width *= width;
-            ImgTransparenceSlider.Margin = new Thickness(
-                                        ImgTransparenceSlider.Margin.Left * width,
-                                        ImgTransparenceSlider.Margin.Top * height,
-                                        ImgTransparenceSlider.Margin.Right * width,
-                                        ImgTransparenceSlider.Margin.Bottom * height);
-
             RecSelectedColor.Height *= height;
             RecSelectedColor.Width *= width;
             RecSelectedColor.Margin = new Thickness(
@@ -360,14 +360,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                                         RecSelectedColor.Margin.Top * height,
                                         RecSelectedColor.Margin.Right * width,
                                         RecSelectedColor.Margin.Bottom * height);
-
-            RecSelectedColorSlider.Height *= height;
-            RecSelectedColorSlider.Width *= width;
-            RecSelectedColorSlider.Margin = new Thickness(
-                                        RecSelectedColorSlider.Margin.Left * width,
-                                        RecSelectedColorSlider.Margin.Top * height,
-                                        RecSelectedColorSlider.Margin.Right * width,
-                                        RecSelectedColorSlider.Margin.Bottom * height);
 
             TbFertig.Height *= height;
             TbFertig.Width *= width;
@@ -377,15 +369,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                                         TbFertig.Margin.Right * width,
                                         TbFertig.Margin.Bottom * height);
             TbFertig.FontSize *= height;
-
-            TbFertigSlider.Height *= height;
-            TbFertigSlider.Width *= width;
-            TbFertigSlider.Margin = new Thickness(
-                                        TbFertigSlider.Margin.Left * width,
-                                        TbFertigSlider.Margin.Top * height,
-                                        TbFertigSlider.Margin.Right * width,
-                                        TbFertigSlider.Margin.Bottom * height);
-            TbFertigSlider.FontSize *= height;
         }
 
         private void btnPredefinedColors_Click(object sender, RoutedEventArgs e)
