@@ -8,7 +8,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="actionsControls:NormalBrick">
-                    <Grid Margin="0 0 0 0" MinHeight="90">
+                    <Grid Margin="0 0 0 4" MinHeight="90">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="10"/>
                             <RowDefinition Height="*"/>
@@ -17,15 +17,15 @@
 
                         <!-- header with grooving -->
                         <!-- original <Path Data="M0,0 0,10 490,10 490,0 470,0 460,10 440,10 428,0 0,0" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="0" Stroke="{TemplateBinding Background}" StrokeThickness="2"/>-->
-                        <Path Data="M0,0 425,0 430,10 468,10 473,0 490,0 490,10 0,10 0,0" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="0" Stroke="{TemplateBinding Background}" StrokeThickness="2" Margin="0,2,0,0" /> 
+                        <Path Data="M0,0 425,0 430,10 468,10 473,0 490,0 490,10 0,10 0,0" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="0" Stroke="{TemplateBinding Background}" StrokeThickness="2" Margin="0,0,0,0" /> 
 
-                        <!-- header single dark line 3d effect -->
+                        <!-- useless?? header single dark line 3d effect, fill white line by dragging -->
                         <!-- original <Path Stroke="{TemplateBinding Background}" Data="M0,0 L490,0" Stretch="Fill" UseLayoutRounding="False" Grid.Row="0" Grid.RowSpan="2" StrokeThickness="2" VerticalAlignment="Top" Margin="-1,9,-1,0" />-->
                         <Path Stroke="{TemplateBinding Background}" Data="M0,0 L490,0" Stretch="Fill" UseLayoutRounding="False" Grid.Row="0" Grid.RowSpan="2" StrokeThickness="2" VerticalAlignment="Top" Margin="-1,9,-1,0" />
 
-                        <!-- header colored line only for first/above brick -->
+                        <!-- header grooving 3d effect -->
                         <!-- original <Path Stroke="#7FFFFFFF" Data="M0,0 429,0 438.25,10 460.5,10 469.75,0 490,0" Stretch="Fill" UseLayoutRounding="False" StrokeThickness="2.5" Grid.Row="0" />-->
-                        <Path Stroke="#7FFFFFFF" Data="M0,0 425,0 430,11 468,11 473,0 490,0" Stretch="Fill" UseLayoutRounding="False" StrokeThickness="2.5" Grid.Row="0" Margin="0,2,0,0"  />
+                        <Path Stroke="#7FFFFFFF" Data="M0,0 425,0 430,11 468,11 473,0 490,0" Stretch="Fill" UseLayoutRounding="False" StrokeThickness="2.5" Grid.Row="0" Margin="0,0,0,0" />
 
                         <!-- border brick-body colored background -->
                         <!-- original <Border Background="{TemplateBinding Background}" Grid.Row="1" /> -->
@@ -38,10 +38,12 @@
                         <!-- single colored line under body -->
                         <!-- original <Path Stroke="{TemplateBinding Background}" Data="M0,80 L490,80" Stretch="Fill" UseLayoutRounding="False" Grid.Row="1" Grid.RowSpan="2" StrokeThickness="4" Margin="1,0,1,8" VerticalAlignment="Bottom"/>-->
                         <Path Stroke="{TemplateBinding Background}" Data="M0,80 L490,80" Stretch="Fill" UseLayoutRounding="False" Grid.Row="1" Grid.RowSpan="2" StrokeThickness="4" Margin="1,0,1,8" VerticalAlignment="Bottom"/>
-
+                        
                         <!-- black underline with colored-filled grooving -->
                         <!-- original <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M490,80 L470,80 L460,90 L439,90 L428,80 L0,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="2" StrokeThickness="2" Margin="0,0,0,0"/>-->
-                        <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M0,80 426,80 431,90 467,90 472,80 490,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="2" StrokeThickness="2" Margin="0,0,0,2"/>
+                        <Path Stroke="{TemplateBinding Background}" Data="M0,80 428,80 433,87 465,87 470,80 490,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="2" StrokeThickness="2" Margin="0,0,0,0"/>
+
+                        <Path Stroke="DarkGray" Data="M0,80 427,80 432,90 466,90 471,80 490,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="2" StrokeThickness="2" Margin="0,1,0,0"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -52,7 +54,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="actionsControls:MasterBrick">
-                    <Grid Margin="0 20 0 0" MinHeight="70" >
+                    <Grid Margin="0 20 0 4" MinHeight="70" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="10"/>
@@ -69,7 +71,9 @@
                         <Path Stroke="{TemplateBinding Background}" Data="M0,80 L490,80" Stretch="Fill" UseLayoutRounding="False" Grid.Row="0" Grid.RowSpan="2" StrokeThickness="4" Margin="1,0,1,8" VerticalAlignment="Bottom"/>
 
                         <!-- original <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M490,80 L470,80 L460,90 L439,90 L428,80 L0,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="1" StrokeThickness="2" Margin="0,0,0,0"/>-->
-                        <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M0,80 426,80 431,90 467,90 472,80 490,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="1" StrokeThickness="2" Margin="0,0,0,2"/>
+                        <Path Stroke="{TemplateBinding Background}" Data="M0,80 428,80 433,87 465,87 470,80 490,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="1" StrokeThickness="2" Margin="0,0,0,0"/>
+
+                        <Path Stroke="DarkGray" Data="M0,80 427,80 432,90 466,90 471,80 490,80" Stretch="Fill" Fill="{TemplateBinding Background}" UseLayoutRounding="False" Grid.Row="1" StrokeThickness="2" Margin="0,1,0,0"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
