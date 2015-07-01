@@ -136,6 +136,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public override void ResetDrawingSpace()
         {
             PocketPaintApplication.GetInstance().StampControl.SetStampSelection();
+            PocketPaintApplication.GetInstance().StampControl.resetCurrentCopiedSelection();
+            PocketPaintApplication.GetInstance().PaintingAreaView.app_btnStampClear_Click(new object(), new RoutedEventArgs());
         }
     }
 }
