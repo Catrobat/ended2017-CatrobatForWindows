@@ -103,7 +103,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Children.Add(new ImportImageSelectionControl());
             PocketPaintApplication.GetInstance().BarRecEllShape.setBtnHeightValue = 160.0;
             PocketPaintApplication.GetInstance().BarRecEllShape.setBtnWidthValue = 160.0;
-            PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement = false;
+            // TODO: David PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement = false;
         }
 
         public RotateTransform getLastRotateTransformation()

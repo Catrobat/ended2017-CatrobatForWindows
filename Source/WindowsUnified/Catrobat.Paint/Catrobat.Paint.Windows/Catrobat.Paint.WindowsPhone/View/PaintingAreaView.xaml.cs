@@ -539,7 +539,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnImportPicture.Label = "Bild laden";
                 app_btnReset.Label = "Ausgangsposition";
 
-                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
+                // TODO: David app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnImportPicture.Click += app_btnImportPicture_Click;
@@ -702,7 +702,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 app_btnBrushThickness.Label = "Einstellungen";
                 app_btnReset.Label = "Ausgangsposition";
-                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
+                // TODO: David app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnReset.Click += app_btn_reset_Click;

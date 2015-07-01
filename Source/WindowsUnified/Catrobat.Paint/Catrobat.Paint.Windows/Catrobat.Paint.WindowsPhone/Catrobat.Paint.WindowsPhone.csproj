@@ -131,6 +131,9 @@
     <Compile Include="Controls\UserControls\colorPicker.xaml.cs">
       <DependentUpon>colorPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserControls\RectangleSelectionControlOld.xaml.cs">
+      <DependentUpon>RectangleSelectionControlOld.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserControls\StampControl.xaml.cs">
       <DependentUpon>StampControl.xaml</DependentUpon>
     </Compile>
@@ -182,6 +185,7 @@
     <Compile Include="PocketPaintApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tool\FillTool.cs" />
+    <Compile Include="Tool\RectangleTool.cs" />
     <Compile Include="Tool\StampTool.cs" />
     <Compile Include="Tool\CursorTool.cs" />
     <Compile Include="Tool\BrushTool.cs" />
@@ -193,7 +197,7 @@
     <Compile Include="Tool\LineTool.cs" />
     <Compile Include="Tool\MoveZoomTool.cs" />
     <Compile Include="Tool\PipetteTool.cs" />
-    <Compile Include="Tool\RectangleTool.cs" />
+    <Compile Include="Tool\RectangleTool_old.cs" />
     <Compile Include="Tool\RotateTool.cs" />
     <Compile Include="Tool\ToolBase.cs" />
     <Compile Include="Tool\ToolType.cs" />
@@ -350,6 +354,10 @@
     <Page Include="Controls\UserControls\colorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserControls\RectangleSelectionControlOld.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\UserControls\StampControl.xaml">
       <Generator>MSBuild:Compile</Generator>
