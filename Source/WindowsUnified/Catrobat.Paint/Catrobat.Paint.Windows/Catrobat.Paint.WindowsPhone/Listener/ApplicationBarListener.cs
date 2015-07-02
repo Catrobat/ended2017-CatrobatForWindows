@@ -26,6 +26,7 @@ namespace Catrobat.Paint.WindowsPhone.Listener
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
             }
+            PocketPaintApplication.GetInstance().PaintingAreaView.checkAndUpdateStampAppBarButtons();
         }
 
         public void BtnRedo_Click(object sender, RoutedEventArgs e)
@@ -37,6 +38,7 @@ namespace Catrobat.Paint.WindowsPhone.Listener
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", true);
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appbarButtonSave", true);
             }
+            PocketPaintApplication.GetInstance().PaintingAreaView.checkAndUpdateStampAppBarButtons();
         }
 
         public void BtnColor_Click(object sender, RoutedEventArgs e)
