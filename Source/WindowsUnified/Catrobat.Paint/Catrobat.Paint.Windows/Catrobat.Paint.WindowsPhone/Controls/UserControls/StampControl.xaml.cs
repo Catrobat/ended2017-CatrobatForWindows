@@ -672,7 +672,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectCenterBottom_ManipulationDelta_1(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Height + e.Delta.Translation.Y) >= MinRectangleMoveHeight)
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Height + e.Delta.Translation.Y) >= MinRectangleMoveHeight)
             {
                 var moveY = CreateTranslateTransform(0.0, e.Delta.Translation.Y);
 
@@ -684,7 +684,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectCenterTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Height + (e.Delta.Translation.Y * -1)) >= MinRectangleMoveHeight)
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Height + (e.Delta.Translation.Y * -1)) >= MinRectangleMoveHeight)
             {
                 var moveY = CreateTranslateTransform(0.0, e.Delta.Translation.Y);
                 moveY.Y *= -1.0;
@@ -696,7 +696,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectLeftBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Width + (e.Delta.Translation.X * -1)) >= MinRectangleMoveWidth &&
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Width + (e.Delta.Translation.X * -1)) >= MinRectangleMoveWidth &&
                (rectRectangleStampSelection.Height + e.Delta.Translation.Y) >= MinRectangleMoveHeight)
             {
                 var moveX = CreateTranslateTransform((e.Delta.Translation.X * -1.0), 0.0);
@@ -716,7 +716,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectLeftCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Width + (e.Delta.Translation.X * -1)) >= MinRectangleMoveWidth)
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Width + (e.Delta.Translation.X * -1)) >= MinRectangleMoveWidth)
             {
                 var moveX = CreateTranslateTransform((e.Delta.Translation.X), 0.0);
                 moveX.X *= -1.0;
@@ -728,7 +728,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectLeftTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Width + (e.Delta.Translation.X * -1)) >= MinRectangleMoveWidth &&
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Width + (e.Delta.Translation.X * -1)) >= MinRectangleMoveWidth &&
                 (rectRectangleStampSelection.Height + (e.Delta.Translation.Y * -1)) >= MinRectangleMoveHeight)
             {
                 // left
@@ -749,7 +749,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectRightBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Width + e.Delta.Translation.X) >= MinRectangleMoveWidth &&
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Width + e.Delta.Translation.X) >= MinRectangleMoveWidth &&
                 (rectRectangleStampSelection.Height + e.Delta.Translation.Y) >= MinRectangleMoveHeight)
             {
                 var moveX = CreateTranslateTransform((e.Delta.Translation.X), 0.0);
@@ -770,7 +770,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectRightCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Width + e.Delta.Translation.X) >= MinRectangleMoveWidth)
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Width + e.Delta.Translation.X) >= MinRectangleMoveWidth)
             {
                 var moveX = CreateTranslateTransform((e.Delta.Translation.X), 0.0);
 
@@ -782,7 +782,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectRightTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Width + e.Delta.Translation.X) >= MinRectangleMoveWidth &&
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Width + e.Delta.Translation.X) >= MinRectangleMoveWidth &&
                (rectRectangleStampSelection.Height + (e.Delta.Translation.Y * -1)) >= MinRectangleMoveHeight)
             {
                 var moveX = CreateTranslateTransform((e.Delta.Translation.X), 0.0);
@@ -895,9 +895,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 GridMain.Margin.Right, GridMain.Margin.Bottom);
         }
 
+        private bool IsStampControlMovable()
+        {
+            if(HasPaintingAreaCanvasElements() || PocketPaintApplication.GetInstance().PaintingAreaView.isAppBarButtonSelected("appBtnStampCopy"))
+            {
+                return true;
+            }
+            return false;
+        }
+
         private void rectRectangleStampSelection_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews())
+            if (IsStampControlMovable())
             {
                 var move = new TranslateTransform();
                 move.X = e.Delta.Translation.X;
@@ -959,7 +968,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        public bool HasElementsPaintingAreaViews()
+        // TODO: Move the following code in the paintingareaview
+
+        public bool HasPaintingAreaCanvasElements()
         {
             bool result = false;
             if (PocketPaintApplication.GetInstance().PaintingAreaCanvas != null)

@@ -429,9 +429,11 @@ namespace Catrobat.Paint.WindowsPhone.View
             StorageFile file = await openPicker.PickSingleFileAsync();
         }
 
+        // if there is no object on the paintingareaview and no copy of the workingspace is selected in the stamp tool then reset
+        // the stampbarbuttons
         public void checkAndUpdateStampAppBarButtons()
         {
-            if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Stamp)
+            if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Stamp && !isAppBarButtonSelected("appBtnStampCopy"))
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.createAppBarAndSwitchAppBarContent("barStamp");
             }
@@ -865,6 +867,21 @@ namespace Catrobat.Paint.WindowsPhone.View
         void app_btnStampPaste_Click(object sender, RoutedEventArgs e)
         {
             ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).stampPaste();
+        }
+
+        public bool isAppBarButtonSelected(string nameOfAppbarbutton)
+        {
+            CommandBar cmdBar = (CommandBar)BottomAppBar;
+
+            for (int appBarButtonIndex = 0; appBarButtonIndex < cmdBar.PrimaryCommands.Count; appBarButtonIndex++)
+            {
+                AppBarButton currentAppBarButton = ((AppBarButton)(cmdBar.PrimaryCommands[appBarButtonIndex]));
+                if(currentAppBarButton.Name == "appBtnStampCopy")
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void app_btnStampClear_Click(object sender, RoutedEventArgs e)
@@ -1643,7 +1660,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        public bool checkIfASelectionControlIsSelected()
+        public bool isASelectionControlSelected()
         {
             bool isSelectionControlSelected = ucEllipseSelectionControl.Visibility == Visibility.Visible
                 || ucRectangleSelectionControl.Visibility == Visibility.Visible
