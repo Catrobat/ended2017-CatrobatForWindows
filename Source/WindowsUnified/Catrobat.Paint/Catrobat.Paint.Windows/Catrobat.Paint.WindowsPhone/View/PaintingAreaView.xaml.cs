@@ -797,8 +797,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnStampPaste.Label = "Stempeln";
                 app_btnResetSelection.Label = "Tool zurücksetzen";
 
-                app_btnStampCopy.IsEnabled = PaintingAreaCanvas.Children.Count > 0 ? true : false;
-                app_btnStampClear.IsEnabled = PaintingAreaCanvas.Children.Count > 0 ? true : false;
+                app_btnStampClear.IsEnabled = false;
                 app_btnStampPaste.Visibility = Visibility.Collapsed;
                 cmdBar.PrimaryCommands.Add(app_btnStampCopy);
                 cmdBar.PrimaryCommands.Add(app_btnStampPaste);

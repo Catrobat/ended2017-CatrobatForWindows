@@ -597,7 +597,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             _transformGridMain.Children.Clear();
             GridMain.Margin = new Thickness(-5.0, -5.0, 0.0, 0.0);
 
-            rectRectangleStampSelection.Stroke = currentPaintApplication.PaintingAreaCanvas.Children.Count == 0 ? new SolidColorBrush(Colors.Transparent) : new SolidColorBrush(Colors.CornflowerBlue);
             bool isWorkingSpaceFlippedHorizontally = paintingAreaCheckeredGridTransformGroup != null && paintingAreaCheckeredGridTransformGroup.Value.M11 == -1.0;
             bool isWorkingSpaceFlippedVertically = paintingAreaCheckeredGridTransformGroup != null && paintingAreaCheckeredGridTransformGroup.Value.M22 == -1.0;
 
@@ -624,6 +623,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 // Attention: Working space is rotated 270°
                 _calculateAndSetStampControlPositionWith270DegreeRotation(doubleBorderWidthValue, _scaleValueWorkingSpace, isWorkingSpaceFlippedHorizontally, isWorkingSpaceFlippedVertically);
             }
+
+            currentPaintApplication.StampControl.Visibility = Visibility.Visible;
             currentPaintApplication.ProgressRing.IsActive = false;
         }
 
