@@ -22,7 +22,7 @@ namespace Catrobat.Paint.WindowsPhone.Listener
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appbarButtonSave", false);
             }
 
-            if(PocketPaintApplication.GetInstance().PaintingAreaView.checkIfASelectionControlIsSelected())
+            if(PocketPaintApplication.GetInstance().PaintingAreaView.isASelectionControlSelected())
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
             }

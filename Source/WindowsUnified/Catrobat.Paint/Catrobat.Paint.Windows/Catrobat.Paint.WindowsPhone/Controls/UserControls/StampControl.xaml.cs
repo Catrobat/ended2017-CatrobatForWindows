@@ -247,7 +247,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             double paintingAreaCanvasHeight = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height;
             double paintingAreaCanvasWidth = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width;
-
             Point extremePoint = new Point(initRight, initBottom);
 
             if (foundLeftPixel)
@@ -278,12 +277,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                             // found extreme point --> set break conditions
                             indexHeight = 0;
                             indexWidth = 0;
+                            foundLeftPixel = true;
                         }
                     }
             }
             return extremePoint;
         }
 
+        // TODO: David Refactor the following function.
         private void _calculateAndSetStampControlPositionWithoutRotating(double doubleBorderWidthValue, double scaleValueWorkingSpace, bool isWorkingSpaceFlippedHorizontally, bool isWorkingSpaceFlippedVertically)
         {
             PocketPaintApplication currentPaintApplication = PocketPaintApplication.GetInstance();
@@ -303,10 +304,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             Point extremeRightAndBottomCoordinate = new Point(widthOfPaintingAreaCheckeredGrid - 1.0, heightOfpaintingAreaCheckeredGrid - 1.0);
 
             bool isThereSomethingDrawn = currentPaintApplication.PaintingAreaCanvas.Children.Count != 0;
-
+            bool isFoundLeftMostDrawnPixel = false;
             if (isThereSomethingDrawn)
             {
-                bool isFoundLeftMostDrawnPixel = false;
                 int extremeCoordinateOfTop = 0;
                 extremeLeftAndTopCoordinate = GetExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y,
                                                                              ref isFoundLeftMostDrawnPixel, ref extremeCoordinateOfTop);
@@ -335,7 +335,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     ttfMoveStampControl.Y = tgPaintingAreaCheckeredGrid.Value.OffsetY + (extremeLeftAndTopCoordinate.Y * scaleValueWorkingSpace);
                 }
             }
-            else
+            if (!isThereSomethingDrawn || isFoundLeftMostDrawnPixel)
             {
                 _heightStampControl = scaleValueWorkingSpace * heightOfpaintingAreaCheckeredGrid + _offsetMargin * 2;
                 _widthStampControl = scaleValueWorkingSpace * widthOfPaintingAreaCheckeredGrid + _offsetMargin * 2;
@@ -347,6 +347,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             SetStampControlPosition(_heightStampControl, _widthStampControl, ttfMoveStampControl);
         }
 
+        // TODO: David Refactor the following function.
         private void _calculateAndSetStampControlPositionWith90DegreeRotation(double doubleBorderWidthValue, double scaleValueWorkingSpace, bool isWorkingSpaceFlippedHorizontally, bool isWorkingSpaceFlippedVertically)
         {
             PocketPaintApplication currentPaintApplication = PocketPaintApplication.GetInstance();
@@ -362,18 +363,24 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             Point extremeRightAndBottomCoordinate = new Point(0.0, 0.0);
 
             bool isThereSomethingDrawn = currentPaintApplication.PaintingAreaCanvas.Children.Count != 0;
-
+            bool isFoundLeftMostDrawnPixel = false;
             if (isThereSomethingDrawn)
             {
-                bool isFoundLeftMostDrawnPixel = false;
+                // TODO: David create a function for the following code.
                 int xCoordinateOfExtremeTop = 0;
                 extremeLeftAndTopCoordinate = GetExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y,
                                                                              ref isFoundLeftMostDrawnPixel, ref xCoordinateOfExtremeTop);
                 extremeRightAndBottomCoordinate = GetExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
                                                                                      extremeLeftAndTopCoordinate, isFoundLeftMostDrawnPixel, xCoordinateOfExtremeTop);
-
-                _heightStampControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
-                _widthStampControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
+            }
+            // There are three possibilities:
+            // - the workingspace is empty => isFoundLeftMostDrawnPixel = false
+            // - the workingspace has elements but there are only transparence elements => isFoundLeftMostDrawnPixel = false
+            // - the workingspace has elements with colors => isFoundLeftMostDrawnPixel = true
+            if (isFoundLeftMostDrawnPixel)
+            {
+                _heightStampControl = (Math.Abs(extremeRightAndBottomCoordinate.X - (extremeLeftAndTopCoordinate.X + 1.0))) * scaleValueWorkingSpace + doubleBorderWidthValue;
+                _widthStampControl = (Math.Abs(extremeRightAndBottomCoordinate.Y - (extremeLeftAndTopCoordinate.Y + 1.0))) * scaleValueWorkingSpace + doubleBorderWidthValue;
 
                 double workingSpaceWidth = scaleValueWorkingSpace * heightPaintingAreaCheckeredGrid;
                 double positionXRightTopCornerWorkingSpace = tgPaintingAreaCheckeredGrid.Value.OffsetX;
@@ -413,6 +420,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             SetStampControlPosition(_heightStampControl, _widthStampControl, ttfMoveStampControl);
         }
 
+        // TODO: David Refactor the following function.
         private void _calculateAndSetStampControlPositionWith180DegreeRotation(double doubleBorderWidthValue, double scaleValueWorkingSpace, bool isWorkingSpaceFlippedHorizontally, bool isWorkingSpaceFlippedVertically)
         {
             PocketPaintApplication currentPaintApplication = PocketPaintApplication.GetInstance();
@@ -429,16 +437,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             Point extremeRightAndBottomCoordinate = new Point(0.0, heightPaintingAreaCheckeredGrid - 1.0);
 
             bool isThereSomethingDrawn = currentPaintApplication.PaintingAreaCanvas.Children.Count != 0;
-
+            bool isFoundLeftMostDrawnPixel = false;
             if (isThereSomethingDrawn)
             {
-                bool isFoundLeftMostDrawnPixel = false;
                 int xCoordinateOfExtremeTop = 0;
                 extremeLeftAndTopCoordinate = GetExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y,
                                                                              ref isFoundLeftMostDrawnPixel, ref xCoordinateOfExtremeTop);
                 extremeRightAndBottomCoordinate = GetExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
                                                                                      extremeLeftAndTopCoordinate, isFoundLeftMostDrawnPixel, xCoordinateOfExtremeTop);
+            }
 
+            if(isFoundLeftMostDrawnPixel)
+            {
                 _heightStampControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
                 _widthStampControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
 
@@ -486,6 +496,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             SetStampControlPosition(_heightStampControl, _widthStampControl, ttfMoveStampControl);
         }
 
+        // TODO: David Refactor the following function.
         private void _calculateAndSetStampControlPositionWith270DegreeRotation(double doubleBorderWidthValue, double scaleValueWorkingSpace, bool isWorkingSpaceFlippedHorizontally, bool isWorkingSpaceFlippedVertically)
         {
             PocketPaintApplication currentPaintApplication = PocketPaintApplication.GetInstance();
@@ -502,16 +513,17 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             Point extremeRightAndBottomCoordinate = new Point(0.0, 0.0);
 
             bool isThereSomethingDrawn = currentPaintApplication.PaintingAreaCanvas.Children.Count != 0;
-
+            bool isFoundLeftMostDrawnPixel = false;
             if (isThereSomethingDrawn)
             {
-                bool isFoundLeftMostDrawnPixel = false;
                 int xCoordinateOfExtremeTop = 0;
                 extremeLeftAndTopCoordinate = GetExtremeLeftAndTopCoordinate(extremeLeftAndTopCoordinate.X, extremeLeftAndTopCoordinate.Y,
                                                                              ref isFoundLeftMostDrawnPixel, ref xCoordinateOfExtremeTop);
                 extremeRightAndBottomCoordinate = GetExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
                                                                                      extremeLeftAndTopCoordinate, isFoundLeftMostDrawnPixel, xCoordinateOfExtremeTop);
-
+            }
+            if(isFoundLeftMostDrawnPixel)
+            {
                 _heightStampControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
                 _widthStampControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
                 double workingSpaceHeight = scaleValueWorkingSpace * widthOfPaintingAreaCheckeredGrid;
@@ -597,7 +609,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             _transformGridMain.Children.Clear();
             GridMain.Margin = new Thickness(-5.0, -5.0, 0.0, 0.0);
 
-            rectRectangleStampSelection.Stroke = currentPaintApplication.PaintingAreaCanvas.Children.Count == 0 ? new SolidColorBrush(Colors.Transparent) : new SolidColorBrush(Colors.CornflowerBlue);
             bool isWorkingSpaceFlippedHorizontally = paintingAreaCheckeredGridTransformGroup != null && paintingAreaCheckeredGridTransformGroup.Value.M11 == -1.0;
             bool isWorkingSpaceFlippedVertically = paintingAreaCheckeredGridTransformGroup != null && paintingAreaCheckeredGridTransformGroup.Value.M22 == -1.0;
 
@@ -624,6 +635,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 // Attention: Working space is rotated 270°
                 _calculateAndSetStampControlPositionWith270DegreeRotation(doubleBorderWidthValue, _scaleValueWorkingSpace, isWorkingSpaceFlippedHorizontally, isWorkingSpaceFlippedVertically);
             }
+
+            currentPaintApplication.StampControl.Visibility = Visibility.Visible;
             currentPaintApplication.ProgressRing.IsActive = false;
         }
 
@@ -672,7 +685,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectCenterBottom_ManipulationDelta_1(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Height + e.Delta.Translation.Y) >= MinRectangleMoveHeight)
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Height + e.Delta.Translation.Y) >= MinRectangleMoveHeight)
             {
                 var moveY = CreateTranslateTransform(0.0, e.Delta.Translation.Y);
 
@@ -684,7 +697,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectCenterTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Height + (e.Delta.Translation.Y * -1)) >= MinRectangleMoveHeight)
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Height + (e.Delta.Translation.Y * -1)) >= MinRectangleMoveHeight)
             {
                 var moveY = CreateTranslateTransform(0.0, e.Delta.Translation.Y);
                 moveY.Y *= -1.0;
@@ -696,7 +709,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectLeftBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Width + (e.Delta.Translation.X * -1)) >= MinRectangleMoveWidth &&
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Width + (e.Delta.Translation.X * -1)) >= MinRectangleMoveWidth &&
                (rectRectangleStampSelection.Height + e.Delta.Translation.Y) >= MinRectangleMoveHeight)
             {
                 var moveX = CreateTranslateTransform((e.Delta.Translation.X * -1.0), 0.0);
@@ -716,7 +729,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectLeftCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Width + (e.Delta.Translation.X * -1)) >= MinRectangleMoveWidth)
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Width + (e.Delta.Translation.X * -1)) >= MinRectangleMoveWidth)
             {
                 var moveX = CreateTranslateTransform((e.Delta.Translation.X), 0.0);
                 moveX.X *= -1.0;
@@ -728,7 +741,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectLeftTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Width + (e.Delta.Translation.X * -1)) >= MinRectangleMoveWidth &&
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Width + (e.Delta.Translation.X * -1)) >= MinRectangleMoveWidth &&
                 (rectRectangleStampSelection.Height + (e.Delta.Translation.Y * -1)) >= MinRectangleMoveHeight)
             {
                 // left
@@ -749,7 +762,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectRightBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Width + e.Delta.Translation.X) >= MinRectangleMoveWidth &&
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Width + e.Delta.Translation.X) >= MinRectangleMoveWidth &&
                 (rectRectangleStampSelection.Height + e.Delta.Translation.Y) >= MinRectangleMoveHeight)
             {
                 var moveX = CreateTranslateTransform((e.Delta.Translation.X), 0.0);
@@ -770,7 +783,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectRightCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Width + e.Delta.Translation.X) >= MinRectangleMoveWidth)
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Width + e.Delta.Translation.X) >= MinRectangleMoveWidth)
             {
                 var moveX = CreateTranslateTransform((e.Delta.Translation.X), 0.0);
 
@@ -782,7 +795,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectRightTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews() && (rectRectangleStampSelection.Width + e.Delta.Translation.X) >= MinRectangleMoveWidth &&
+            if (IsStampControlMovable() && (rectRectangleStampSelection.Width + e.Delta.Translation.X) >= MinRectangleMoveWidth &&
                (rectRectangleStampSelection.Height + (e.Delta.Translation.Y * -1)) >= MinRectangleMoveHeight)
             {
                 var moveX = CreateTranslateTransform((e.Delta.Translation.X), 0.0);
@@ -895,9 +908,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 GridMain.Margin.Right, GridMain.Margin.Bottom);
         }
 
+        private bool IsStampControlMovable()
+        {
+            if(HasPaintingAreaCanvasElements() || PocketPaintApplication.GetInstance().PaintingAreaView.isAppBarButtonSelected("appBtnStampCopy"))
+            {
+                return true;
+            }
+            return false;
+        }
+
         private void rectRectangleStampSelection_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (HasElementsPaintingAreaViews())
+            if (IsStampControlMovable())
             {
                 var move = new TranslateTransform();
                 move.X = e.Delta.Translation.X;
@@ -959,7 +981,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        public bool HasElementsPaintingAreaViews()
+        // TODO: Move the following code in the paintingareaview
+
+        public bool HasPaintingAreaCanvasElements()
         {
             bool result = false;
             if (PocketPaintApplication.GetInstance().PaintingAreaCanvas != null)
@@ -1030,91 +1054,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = height;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = width;
-        }
-
-        public void AddWriteableBitmapToCanvas(WriteableBitmap writeableBitmapToAdd, PocketPaintApplication currentPaintApplication)
-        {
-            TransformGroup tgPaintingAreaCheckeredGrid = PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform as TransformGroup;
-            int height = (int)Math.Ceiling(GetHeightOfRectangleStampSelection());
-            int width = (int)Math.Ceiling(GetWidthOfRectangleStampSelection());
-            Point leftTopRectangleStampSelection = GetXYOffsetBetweenPaintingAreaAndStampControlSelection();
-
-            Image image = new Image();
-
-            if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 0)
-            {
-                int heightOfStamppedWorkingSpacePicture = writeableBitmapToAdd.PixelHeight;
-                int widthOfStamppedWorkingSpacePicture = writeableBitmapToAdd.PixelWidth;
-                image.Source = writeableBitmapToAdd;
-                image.Height = heightOfStamppedWorkingSpacePicture;
-                image.Width = widthOfStamppedWorkingSpacePicture;
-
-                addImageToPaintingAreaCanvas(image);
-                currentPaintApplication.PaintingAreaView.setSizeOfPaintingAreaViewCheckered(heightOfStamppedWorkingSpacePicture, widthOfStamppedWorkingSpacePicture);
-                currentPaintApplication.PaintingAreaView.alignPositionOfGridWorkingSpace(null);
-                setSizeOfPaintingAreaCanvas(heightOfStamppedWorkingSpacePicture, widthOfStamppedWorkingSpacePicture);
-            }
-            else if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 90)
-            {
-                image.Source = writeableBitmapToAdd;
-                image.Height = writeableBitmapToAdd.PixelHeight;
-                image.Width = writeableBitmapToAdd.PixelWidth;
-
-                addImageToPaintingAreaCanvas(image);
-                currentPaintApplication.PaintingAreaView.setSizeOfPaintingAreaViewCheckered(writeableBitmapToAdd.PixelHeight, writeableBitmapToAdd.PixelWidth);
-                currentPaintApplication.PaintingAreaView.alignPositionOfGridWorkingSpace(null);
-                setSizeOfPaintingAreaCanvas(writeableBitmapToAdd.PixelHeight, writeableBitmapToAdd.PixelWidth);
-            }
-            else if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 180)
-            {
-                int heigthOfStampedWorkingSpacePicture = writeableBitmapToAdd.PixelHeight;
-                int widthOfStampedWorkingSpacePicture = writeableBitmapToAdd.PixelWidth;
-                image.Source = writeableBitmapToAdd;
-                image.Height = heigthOfStampedWorkingSpacePicture;
-                image.Width = widthOfStampedWorkingSpacePicture;
-
-                addImageToPaintingAreaCanvas(image);
-                currentPaintApplication.PaintingAreaView.setSizeOfPaintingAreaViewCheckered(writeableBitmapToAdd.PixelHeight, writeableBitmapToAdd.PixelWidth);
-                currentPaintApplication.PaintingAreaView.alignPositionOfGridWorkingSpace(null);
-                setSizeOfPaintingAreaCanvas(heigthOfStampedWorkingSpacePicture, widthOfStampedWorkingSpacePicture);
-            }
-            else if (currentPaintApplication.angularDegreeOfWorkingSpaceRotation == 270)
-            {
-                image.Source = writeableBitmapToAdd;
-                image.Height = writeableBitmapToAdd.PixelHeight;
-                image.Width = writeableBitmapToAdd.PixelWidth;
-
-                addImageToPaintingAreaCanvas(image);
-                currentPaintApplication.PaintingAreaView.setSizeOfPaintingAreaViewCheckered(writeableBitmapToAdd.PixelHeight, writeableBitmapToAdd.PixelWidth);
-                currentPaintApplication.PaintingAreaView.alignPositionOfGridWorkingSpace(null);
-                setSizeOfPaintingAreaCanvas(writeableBitmapToAdd.PixelHeight, writeableBitmapToAdd.PixelWidth);
-            }
-            currentPaintApplication.StampControl.SetStampSelection();
-        }
-
-        private bool CheckIfStampSelctionIsChanged(PocketPaintApplication currentApplication, TransformGroup tgPaintingAreaCheckeredGrid)
-        {
-            bool result = false;
-            Point currentLeftTopCoordinateOfStampSelection = GetXYOffsetBetweenPaintingAreaAndStampControlSelection();
-            int heightOfStampSelection = 0;
-            int widthOfStampSelection = 0;
-            bool isWorkingSpaceNotRotated = tgPaintingAreaCheckeredGrid.Value.M11 > 0.0;
-            bool isWorkingSpaceRotated90Degree = tgPaintingAreaCheckeredGrid.Value.M12 > 0.0;
-            bool isWorkingSpaceRotated180Degree = tgPaintingAreaCheckeredGrid.Value.M11 < 0.0;
-            bool isWorkingSpaceRotated270Degree = tgPaintingAreaCheckeredGrid.Value.M12 < 0.0;
-
-            heightOfStampSelection = isWorkingSpaceNotRotated || isWorkingSpaceRotated180Degree ? (int)(currentApplication.StampControl.GetHeightOfRectangleStampSelection())
-                                                             : (int)Math.Ceiling(currentApplication.StampControl.GetWidthOfRectangleStampSelection());
-
-            widthOfStampSelection = isWorkingSpaceNotRotated || isWorkingSpaceRotated180Degree ? (int)(currentApplication.StampControl.GetWidthOfRectangleStampSelection())
-                                                            : (int)(currentApplication.StampControl.GetHeightOfRectangleStampSelection());
-
-            if ((heightOfStampSelection != (int)currentApplication.PaintingAreaCanvas.Height)
-                    || (widthOfStampSelection != (int)currentApplication.PaintingAreaCanvas.Width))
-            {
-                result = true;
-            }
-            return result;
         }
 
         public ImageSource getImageSourceStampedImage()
