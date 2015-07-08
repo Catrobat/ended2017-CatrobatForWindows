@@ -173,8 +173,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 rectLeftBottomHorz.Width = MaxHorizontalCenterRectangleWidth;
                 rectLeftTopHorz.Width = MaxHorizontalCenterRectangleWidth;
-                rectRightBottomHorz.Width = MaxHorizontalCenterRectangleWidth;
-                rectRightTopHorz.Width = MaxHorizontalCenterRectangleWidth;
+                //rectRightBottomHorz.Width = MaxHorizontalCenterRectangleWidth;
+                //rectRightTopHorz.Width = MaxHorizontalCenterRectangleWidth;
             }
             else if (newValue < MinHorizontalCornerRectangleWidth)
             {
