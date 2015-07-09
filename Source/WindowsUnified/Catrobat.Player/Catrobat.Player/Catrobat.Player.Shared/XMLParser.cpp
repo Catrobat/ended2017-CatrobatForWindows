@@ -253,11 +253,11 @@ Project* XMLParser::ParseProjectHeader(xml_document<> *doc)
     }
     platformVersion = atoi(projectInformationNode->value());
 
-    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::PlatformVersion.c_str());
+	projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ProgramLicense.c_str());
 
     if (!projectInformationNode)
     {
-        throw new XMLParserFatalException (Constants::XMLParser::Header::PlatformVersion + Constants::ErrorMessage::Missing);
+		throw new XMLParserFatalException(Constants::XMLParser::Header::ProgramLicense + Constants::ErrorMessage::Missing);
     }
     programLicense = projectInformationNode->value();
 
