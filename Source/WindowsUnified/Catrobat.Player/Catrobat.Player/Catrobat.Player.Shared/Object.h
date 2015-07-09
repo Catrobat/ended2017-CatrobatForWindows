@@ -17,7 +17,7 @@ class Object
 public:
     Object(std::string name);
     // Constructor for Objects to store initial values
-    Object(); 
+    Object();
 
 public:
     void SetTranslation(float x, float y);
@@ -36,8 +36,7 @@ public:
     void AddLook(std::shared_ptr<Look> lookData);
     void AddScript(std::shared_ptr<Script> script);
     void AddSoundInfo(SoundInfo *soundInfo);
-    void AddVariable(std::string name, UserVariable *variable);
-    void AddVariable(std::pair<std::string, UserVariable*> variable);
+    void AddVariable(std::pair<std::string, std::shared_ptr<UserVariable> > variable);
     void SetLook(int index);
 
 public:
@@ -48,13 +47,13 @@ public:
 
 public:
     std::string GetName();
-    std::map<std::string, UserVariable*>* GetVariableList() { return m_variableList; };
+    std::map<std::string, std::shared_ptr<UserVariable>> GetVariableList() { return m_variableList; };
     std::list<SoundInfo*>* GetSoundInfos() { return m_soundInfos; };
 
     int GetScriptListSize();
     std::shared_ptr<Script> GetScript(int index);
 
-    UserVariable *GetVariable(std::string name);
+    std::shared_ptr<UserVariable> GetVariable(std::string name);
 
     int GetLookListSize();
     int GetIndexOfCurrentLook();
@@ -65,10 +64,10 @@ private:
     std::string m_name;
 
     std::shared_ptr<Look> m_look;
-    std::list<std::shared_ptr<Look>> m_lookList;
-    std::list<std::shared_ptr<Script>> m_scripts;
+    std::list<std::shared_ptr<Look> > m_lookList;
+    std::list<std::shared_ptr<Script> > m_scripts;
     std::list<SoundInfo*> *m_soundInfos;
-    std::map<std::string, UserVariable*> *m_variableList;
+    std::map<std::string, std::shared_ptr<UserVariable> > m_variableList;
 
 private:
     float m_opacity;

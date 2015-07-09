@@ -1490,11 +1490,11 @@ void XMLParser::ParseVariableList(xml_document<> *doc, Project *project)
 
 //----------------------------------------------------------------------
 
-pair<string, UserVariable*> XMLParser::ParseUserVariable(const xml_node<> *baseNode)
+pair<string, shared_ptr<UserVariable> > XMLParser::ParseUserVariable(const xml_node<> *baseNode)
 {
 	auto name = baseNode->value();
-	auto variable = new UserVariable(name, "");
-	return pair<string, UserVariable*>(name, variable);
+    return pair<string, shared_ptr<UserVariable> >
+        (name, shared_ptr<UserVariable>(new UserVariable(name, "")));
 }
 
 //----------------------------------------------------------------------

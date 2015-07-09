@@ -49,13 +49,13 @@ void Look::LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResourc
     TextureDaemon::Instance()->LoadTexture(deviceResources, move(m_texture), m_filename);
 }
 
-ID2D1Bitmap *Look::GetBitMap()
+shared_ptr<ID2D1Bitmap> Look::GetBitMap()
 {
     if (m_texture == NULL)
     {
         throw new PlayerException("Look::GetTexture called with no texture defined.");
     }
-    return m_texture->GetBitmap().get();
+    return m_texture->GetBitmap();
 }
 
 int Look::GetPixelAlphaValue(D2D1_POINT_2F position)

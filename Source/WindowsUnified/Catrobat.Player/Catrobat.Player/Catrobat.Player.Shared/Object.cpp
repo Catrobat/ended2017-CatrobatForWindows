@@ -22,14 +22,14 @@ m_ratio(SizeF()),
 m_logicalSize(SizeF()),
 m_renderTargetSize(SizeF())
 {
-    m_soundInfos = new std::list<SoundInfo*>();
-    m_variableList = new std::map<std::string, UserVariable*>();
+    m_soundInfos = new list<SoundInfo*>();
+    //m_variableList(map<string, shared_ptr<UserVariable> >());
 }
 
-Object::Object() 
+Object::Object()
 {
     m_soundInfos = new std::list<SoundInfo*>();
-    m_variableList = new std::map<std::string, UserVariable*>();
+    //m_variableList(map<string, shared_ptr<UserVariable> >());
 }
 
 #pragma region TRANSFORMATION
@@ -117,14 +117,10 @@ void Object::AddSoundInfo(SoundInfo *soundInfo)
 {
     m_soundInfos->push_back(soundInfo);
 }
-void Object::AddVariable(std::string name, UserVariable* variable)
-{
-    m_variableList->insert(std::pair<std::string, UserVariable*>(name, variable));
-}
 
-void Object::AddVariable(std::pair<std::string, UserVariable*> variable)
+void Object::AddVariable(std::pair<std::string, shared_ptr<UserVariable> > variable)
 {
-    m_variableList->insert(variable);
+    m_variableList.insert(variable);
 }
 
 void Object::SetLook(int index)
@@ -182,7 +178,7 @@ void Object::Draw(const std::shared_ptr<DX::DeviceResources>& deviceResources)
     auto deviceContext = deviceResources->GetD2DDeviceContext();
     deviceContext->SetTransform(m_transformation);
     //deviceContext->Clear(ColorF(ColorF::White));
-    deviceContext->DrawBitmap(m_look->GetBitMap(),
+    deviceContext->DrawBitmap(m_look->GetBitMap().get(),
         RectF(0.f, 0.f, m_renderTargetSize.width, m_renderTargetSize.height));
 
 }
@@ -199,11 +195,11 @@ int Object::GetScriptListSize()
     return m_scripts.size();
 }
 
-UserVariable* Object::GetVariable(std::string name)
+shared_ptr<UserVariable> Object::GetVariable(std::string name)
 {
-    std::map<std::string, UserVariable*>::iterator searchItem = m_variableList->find(name);
+    map<string, shared_ptr<UserVariable> >::iterator searchItem = m_variableList.find(name);
 
-    if (searchItem != m_variableList->end())
+    if (searchItem != m_variableList.end())
     {
         return searchItem->second;
     }
@@ -285,8 +281,8 @@ bool Object::IsObjectHit(D2D1_POINT_2F position)
 
     Matrix3x2F translation = CalculateTranslationMatrix();
     D2D1_POINT_2F origin;
-    origin.x = (float)m_look->GetWidth() / 2;
-    origin.y = (float)m_look->GetHeight() / 2;
+    origin.x = (float) m_look->GetWidth() / 2;
+    origin.y = (float) m_look->GetHeight() / 2;
 
     Matrix3x2F positionInBitMap = translation;
     positionInBitMap._31 = (position.x - positionInBitMap._31) / m_ratio.width;
