@@ -173,8 +173,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 rectLeftBottomHorz.Width = MaxHorizontalCenterRectangleWidth;
                 rectLeftTopHorz.Width = MaxHorizontalCenterRectangleWidth;
-                rectRightBottomHorz.Width = MaxHorizontalCenterRectangleWidth;
-                rectRightTopHorz.Width = MaxHorizontalCenterRectangleWidth;
+                //rectRightBottomHorz.Width = MaxHorizontalCenterRectangleWidth;
+                //rectRightTopHorz.Width = MaxHorizontalCenterRectangleWidth;
             }
             else if (newValue < MinHorizontalCornerRectangleWidth)
             {
@@ -335,7 +335,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     ttfMoveStampControl.Y = tgPaintingAreaCheckeredGrid.Value.OffsetY + (extremeLeftAndTopCoordinate.Y * scaleValueWorkingSpace);
                 }
             }
-            if (!isThereSomethingDrawn || isFoundLeftMostDrawnPixel)
+            // TODO: David Rename this variable or use another one.
+            if (!isFoundLeftMostDrawnPixel)
             {
                 _heightStampControl = scaleValueWorkingSpace * heightOfpaintingAreaCheckeredGrid + _offsetMargin * 2;
                 _widthStampControl = scaleValueWorkingSpace * widthOfPaintingAreaCheckeredGrid + _offsetMargin * 2;
@@ -377,7 +378,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             // - the workingspace is empty => isFoundLeftMostDrawnPixel = false
             // - the workingspace has elements but there are only transparence elements => isFoundLeftMostDrawnPixel = false
             // - the workingspace has elements with colors => isFoundLeftMostDrawnPixel = true
-            if (isFoundLeftMostDrawnPixel)
+            if (!isFoundLeftMostDrawnPixel)
             {
                 _heightStampControl = (Math.Abs(extremeRightAndBottomCoordinate.X - (extremeLeftAndTopCoordinate.X + 1.0))) * scaleValueWorkingSpace + doubleBorderWidthValue;
                 _widthStampControl = (Math.Abs(extremeRightAndBottomCoordinate.Y - (extremeLeftAndTopCoordinate.Y + 1.0))) * scaleValueWorkingSpace + doubleBorderWidthValue;
@@ -447,7 +448,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                                                                                      extremeLeftAndTopCoordinate, isFoundLeftMostDrawnPixel, xCoordinateOfExtremeTop);
             }
 
-            if(isFoundLeftMostDrawnPixel)
+            if(!isFoundLeftMostDrawnPixel)
             {
                 _heightStampControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
                 _widthStampControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
@@ -522,7 +523,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 extremeRightAndBottomCoordinate = GetExtremeRightAndBottomCoordinate(extremeRightAndBottomCoordinate.X, extremeRightAndBottomCoordinate.Y,
                                                                                      extremeLeftAndTopCoordinate, isFoundLeftMostDrawnPixel, xCoordinateOfExtremeTop);
             }
-            if(isFoundLeftMostDrawnPixel)
+            if(!isFoundLeftMostDrawnPixel)
             {
                 _heightStampControl = (extremeRightAndBottomCoordinate.X - extremeLeftAndTopCoordinate.X + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;
                 _widthStampControl = (extremeRightAndBottomCoordinate.Y - extremeLeftAndTopCoordinate.Y + 1.0) * scaleValueWorkingSpace + doubleBorderWidthValue;

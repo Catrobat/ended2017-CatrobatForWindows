@@ -1659,6 +1659,18 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
+        public void addElementToPaintingAreCanvas(Image image, int xCoordinate, int yCoordinate)
+        {
+            if (image != null)
+            {
+                Canvas.SetLeft(image, xCoordinate);
+                Canvas.SetTop(image, yCoordinate);
+                PaintingAreaCanvas.Children.Add(image);
+                changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", true);
+                changeEnabledOfASecondaryAppbarButton("appbarButtonSave", true);
+            }
+        }
+
         public bool isASelectionControlSelected()
         {
             bool isSelectionControlSelected = ucEllipseSelectionControl.Visibility == Visibility.Visible

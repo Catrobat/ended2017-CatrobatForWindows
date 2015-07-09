@@ -94,7 +94,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 //render the stream to the screen
                 WriteableBitmap wbCroppedBitmap = new WriteableBitmap((int)widthStampControl, (int)heightStampControl);
                 wbCroppedBitmap.SetSource(mrAccessStream);
-
                 PocketPaintApplication.GetInstance().StampControl.setSourceImageStamp(wbCroppedBitmap);
             }
         }
@@ -120,9 +119,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             stampedImage.Width = widthStampControl - 10.0;
             stampedImage.Stretch = Stretch.Fill;
 
-            Canvas.SetTop(stampedImage, yCoordinateOnWorkingSpace);
-            Canvas.SetLeft(stampedImage, xCoordinateOnWorkingSpace);
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(stampedImage);
+            PocketPaintApplication.GetInstance().PaintingAreaView.addElementToPaintingAreCanvas(stampedImage, (int)(xCoordinateOnWorkingSpace + 5.0), (int)(yCoordinateOnWorkingSpace + 5.0));
             CommandManager.GetInstance().CommitCommand(new StampCommand((uint)xCoordinateOnWorkingSpace, (uint)yCoordinateOnWorkingSpace, stampedImage));
         }
 
