@@ -49,8 +49,6 @@ Project::Project(
 {
 	m_objectList = new ObjectList();
     m_objectListInitial = new ObjectList();
-	m_variableList = new map<string, UserVariable*>();
-    m_variableListValueInitial = new map<std::string, std::string>();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -151,26 +149,26 @@ void Project::StartUp()
 
 //--------------------------------------------------------------------------------------------------
 
-UserVariable *Project::GetVariable(std::string name)
+shared_ptr<UserVariable> Project::GetVariable(std::string name)
 {
-	map<string, UserVariable*>::iterator searchItem = m_variableList->find(name);
-	if (searchItem != m_variableList->end())
+	map<string, shared_ptr<UserVariable >>::iterator searchItem = m_variableList.find(name);
+	if (searchItem != m_variableList.end())
 		return searchItem->second;
 	return NULL;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void Project::AddVariable(std::string name, UserVariable *variable)
+void Project::AddVariable(std::string name, shared_ptr<UserVariable> variable)
 {
-	m_variableList->insert(pair<string, UserVariable*>(name, variable));
+	m_variableList.insert(pair<string,shared_ptr<UserVariable> >(name, variable));
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void Project::AddVariable(std::pair<string, UserVariable*> variable)
+void Project::AddVariable(std::pair<string, shared_ptr<UserVariable> > variable)
 {
-	m_variableList->insert(variable);
+	m_variableList.insert(variable);
 }
 
 

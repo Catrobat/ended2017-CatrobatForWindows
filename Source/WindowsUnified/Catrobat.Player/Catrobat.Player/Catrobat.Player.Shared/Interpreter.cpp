@@ -49,7 +49,7 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
     case USER_VARIABLE:
         {
             string varName = tree->Value();
-            UserVariable *var = object->GetVariable(varName);
+            shared_ptr<UserVariable> var = object->GetVariable(varName);
             if (var)
                 return atof(var->GetValue().c_str());
             var = ProjectDaemon::Instance()->GetProject()->GetVariable(varName);

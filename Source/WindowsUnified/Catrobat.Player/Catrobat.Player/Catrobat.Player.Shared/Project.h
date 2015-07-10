@@ -44,13 +44,13 @@ public:
     int									    GetScreenWidth();
     ObjectList*							    GetObjectList();
     ObjectList*                             GetObjectListInitial();
-    UserVariable*						    GetVariable(std::string name);
-    std::map<std::string, UserVariable*>*   GetVariableList() { return m_variableList; };
-    std::map<std::string, std::string>*     GetVariableListValueInitial() { return m_variableListValueInitial; };
+    std::shared_ptr<UserVariable>						    GetVariable(std::string name);
+    std::map<std::string, std::shared_ptr<UserVariable> >   GetVariableList() { return m_variableList; };
+    std::map<std::string, std::string>     GetVariableListValueInitial() { return m_variableListValueInitial; };
 
     // Adders
-	void								AddVariable(std::string name, UserVariable *variable);
-	void								AddVariable(std::pair<std::string, UserVariable*> variable);
+	void								AddVariable(std::string name, std::shared_ptr<UserVariable> variable);
+    void								AddVariable(std::pair<std::string, std::shared_ptr<UserVariable> > variable);
 
 private:
 
@@ -77,7 +77,7 @@ private:
 
 	ObjectList*							    m_objectList;
     ObjectList*                             m_objectListInitial;
-	std::map<std::string, UserVariable*>*   m_variableList;
-    std::map<std::string, std::string>*     m_variableListValueInitial;
+	std::map<std::string, std::shared_ptr<UserVariable> >   m_variableList;
+    std::map<std::string, std::string>     m_variableListValueInitial;
 };
 

@@ -3,18 +3,12 @@
 
 using namespace std;
 
-CatrobatTexture::CatrobatTexture()
+CatrobatTexture::CatrobatTexture(std::vector < std::vector<int> > alphaMap, ID2D1Bitmap *bitmap)
+    : m_bitmap(bitmap), m_alphaMap(alphaMap)
 {
-    m_bitmap = nullptr;
 }
 
-CatrobatTexture::~CatrobatTexture()
-{
-    delete m_bitmap;
-    m_bitmap = nullptr;
-}
-
-ID2D1Bitmap* CatrobatTexture::GetBitmap()
+shared_ptr<ID2D1Bitmap> CatrobatTexture::GetBitmap()
 {
     return m_bitmap;
 }
@@ -22,14 +16,4 @@ ID2D1Bitmap* CatrobatTexture::GetBitmap()
 vector < vector<int> > CatrobatTexture::GetAlphaMap()
 {
     return m_alphaMap;
-}
-
-void CatrobatTexture::SetBitmap(ID2D1Bitmap* bitmap)
-{
-    m_bitmap = bitmap;
-}
-
-void CatrobatTexture::SetAlphaMap(vector < vector<int> > alphaMap)
-{
-    m_alphaMap = alphaMap;
 }

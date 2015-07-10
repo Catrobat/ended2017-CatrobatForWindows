@@ -78,7 +78,7 @@ private:
 	void									ParseVariableList				(rapidxml::xml_document<> *doc, Project *project);
 	void									ParseGlobalVariables			(Project *project, const rapidxml::xml_node<> *baseNode);
 	void									ParseObjectVariables			(Project *project, const rapidxml::xml_node<> *baseNode);
-	std::pair<std::string, UserVariable*>	ParseUserVariable				(const rapidxml::xml_node<> *baseNode);
+	std::pair<std::string, std::shared_ptr<UserVariable> >	ParseUserVariable				(const rapidxml::xml_node<> *baseNode);
 	rapidxml::xml_node<>*					EvaluateString					(std::string query, std::string input, rapidxml::xml_node<> *node);
 	int										EvaluateIndex					(std::string *input);
 	void									SetPendingVariables				();

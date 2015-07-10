@@ -11,9 +11,9 @@ public:
 	VariableManagementBrick(TypeOfBrick brickType, FormulaTree *variableFormula, std::shared_ptr<Script> parent);
 	virtual void Execute() = 0;
 
-	void SetVariable(UserVariable *variable);
+    void SetVariable(std::shared_ptr<UserVariable> variable);
 
 protected:
-	UserVariable *m_variable;
+	std::shared_ptr<UserVariable> m_variable;
 	FormulaTree *m_variableFormula;
 };

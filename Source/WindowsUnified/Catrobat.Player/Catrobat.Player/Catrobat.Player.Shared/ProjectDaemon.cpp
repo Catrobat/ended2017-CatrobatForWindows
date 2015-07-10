@@ -55,7 +55,7 @@ Project *ProjectDaemon::GetProject()
 
 task<bool> ProjectDaemon::OpenProject(Platform::String^ projectName)
 {
-    if(projectName->IsEmpty())
+    if (projectName->IsEmpty())
     {
         throw new PlayerException("No project name was specified.");
     }
@@ -65,64 +65,64 @@ task<bool> ProjectDaemon::OpenProject(Platform::String^ projectName)
 
     auto openProjectTask = create_task(Windows::Storage::ApplicationData::Current->LocalFolder->GetFolderFromPathAsync(path))
         .then([this, path](task<StorageFolder^> folderResult)
-	{
-		try
-		{
+    {
+        try
+        {
             Platform::String^ filename = Helper::ConvertStringToPlatformString(Constants::XMLParser::FileName);
-			StorageFolder^ folder = folderResult.get();
+            StorageFolder^ folder = folderResult.get();
 
-			// If the path exists, make it available within the project
-			m_projectPath = Helper::ConvertPlatformStringToString(path);
+            // If the path exists, make it available within the project
+            m_projectPath = Helper::ConvertPlatformStringToString(path);
 
-			return folder->GetFileAsync(filename);
-		}
-		catch (Platform::Exception^ e)
-		{
-			throw new PlayerException(&e, "Specified Path could not be found [" + Helper::ConvertPlatformStringToString(path) + "].");
-		}
+            return folder->GetFileAsync(filename);
+        }
+        catch (Platform::Exception^ e)
+        {
+            throw new PlayerException(&e, "Specified Path could not be found [" + Helper::ConvertPlatformStringToString(path) + "].");
+        }
 
     }, task_continuation_context::use_current())
         .then([this](task<StorageFile^> fileResult)
     {
-		try
-		{
-			StorageFile^ file = fileResult.get();
-			string pathString = Helper::ConvertPlatformStringToString(file->Path);
-			return pathString;
-		}
+        try
+        {
+            StorageFile^ file = fileResult.get();
+            string pathString = Helper::ConvertPlatformStringToString(file->Path);
+            return pathString;
+        }
         catch (Platform::Exception^ e)
-		{
+        {
             throw new PlayerException(&e, "Specified file could not be found [" + Constants::XMLParser::FileName + "].");
-		}
+        }
 
     }, task_continuation_context::use_current())
-		.then([this](task<string> filePathResult)
-	{
-		try
-		{
-			// Create and load XML
-			XMLParser *xml = new XMLParser();
-			string filePath = filePathResult.get();
-			xml->LoadXML(filePath);
+        .then([this](task<string> filePathResult)
+    {
+        try
+        {
+            // Create and load XML
+            XMLParser *xml = new XMLParser();
+            string filePath = filePathResult.get();
+            xml->LoadXML(filePath);
 
-			// Set Project to be accessed from everywhere
-			SetProject(xml->GetProject());
+            // Set Project to be accessed from everywhere
+            SetProject(xml->GetProject());
 
             m_project->CheckProjectScreenSize();
 
             // Set Project's initial values for all Objects and UserVariables
             SetProjectInitialValues();
 
-			// Initialize Renderer and enable rendering to be started
-			//m_renderer->Initialize(m_device);
-			free(xml);
+            // Initialize Renderer and enable rendering to be started
+            //m_renderer->Initialize(m_device);
+            free(xml);
             return true;
-		}
-		catch (Platform::Exception^ e)
-		{
-			throw new PlayerException(&e, "Not able to open the XML file.");
-		}
-	});
+        }
+        catch (Platform::Exception^ e)
+        {
+            throw new PlayerException(&e, "Not able to open the XML file.");
+        }
+    });
     return openProjectTask;
 }
 
@@ -146,26 +146,26 @@ void ProjectDaemon::SetProjectInitialValues()
         object->GetScale(x, y);
         objectInitial->SetScale(x, y);
 
-        for each (std::pair<std::string, UserVariable*> e in *(object->GetVariableList()))
+        for each (std::pair<std::string, shared_ptr<UserVariable> > e in (object->GetVariableList()))
         {
-            UserVariable* userVariableInital = new UserVariable(e.second->GetName(), e.second->GetValue());
-            objectInitial->AddVariable(e.first, userVariableInital);
+            shared_ptr<UserVariable>userVariableInital(new UserVariable(e.second->GetName(), e.second->GetValue()));
+            objectInitial->AddVariable(pair<string, shared_ptr<UserVariable> >(e.first, userVariableInital));
         }
 
         objectListInitial->AddObject(objectInitial);
-    } 
+    }
 
     // UserVariable values
-    std::map<std::string, UserVariable*>* variableList = m_project->GetVariableList();
-    std::map<std::string, std::string>* variableListValueInitial = m_project->GetVariableListValueInitial();
+    map<string, shared_ptr<UserVariable> > variableList = m_project->GetVariableList();
+    map<string, string> variableListValueInitial = m_project->GetVariableListValueInitial();
 
-    for each (std::pair<std::string, UserVariable*> e in *(variableList))
+    for each (std::pair<std::string, shared_ptr<UserVariable> > e in (variableList))
     {
-        variableListValueInitial->insert(std::pair<std::string, std::string>(e.first, e.second->GetValue()));
+        variableListValueInitial.insert(pair<string, string>(e.first, e.second->GetValue()));
     }
 }
 
-void ProjectDaemon::RestartProject() 
+void ProjectDaemon::RestartProject()
 {
     // Set Object values to initial state
     ObjectList* objectList = m_project->GetObjectList();
@@ -185,20 +185,20 @@ void ProjectDaemon::RestartProject()
         objectInitial->GetScale(x, y);
         object->SetScale(x, y);
 
-        for each (std::pair<std::string, UserVariable*> e in *(object->GetVariableList()))
+        for each (pair<string, shared_ptr<UserVariable> > e in (object->GetVariableList()))
         {
-            UserVariable* userVariableInital = objectInitial->GetVariable(e.first);       
+            shared_ptr<UserVariable> userVariableInital = objectInitial->GetVariable(e.first);
             e.second->SetValue(userVariableInital->GetValue());
         }
     }
 
     // Set UserVariable values to initial state
-    std::map<std::string, UserVariable*>* variableList = m_project->GetVariableList();
-    std::map<std::string, std::string>* variableListValueInitial = m_project->GetVariableListValueInitial();
+    map<string, shared_ptr<UserVariable> > variableList = m_project->GetVariableList();
+    map<string, string> variableListValueInitial = m_project->GetVariableListValueInitial();
 
-    for each (std::pair<std::string, UserVariable*> e in *(variableList))
+    for each (pair<string, shared_ptr<UserVariable> > e in (variableList))
     {
-        std::string userVariableValueInitial = variableListValueInitial->at(e.first);
+        string userVariableValueInitial = variableListValueInitial.at(e.first);
         e.second->SetValue(userVariableValueInitial);
     }
 
@@ -207,7 +207,7 @@ void ProjectDaemon::RestartProject()
 
 vector<Platform::String^> *ProjectDaemon::GetProjectList()
 {
-    if(m_projectList == NULL || m_projectList->size() == 0)
+    if (m_projectList == NULL || m_projectList->size() == 0)
     {
         throw new PlayerException("Error getting project list. Look to the log file for further information.");
     }
@@ -217,7 +217,7 @@ vector<Platform::String^> *ProjectDaemon::GetProjectList()
 
 vector<Platform::String^> *ProjectDaemon::GetFileList()
 {
-    if(m_files == NULL || m_files->size() == 0)
+    if (m_files == NULL || m_files->size() == 0)
     {
         throw new PlayerException("Error getting file list. Look to the log file for further information.");
     }
