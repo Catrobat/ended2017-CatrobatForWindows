@@ -48,6 +48,28 @@ public:
     std::map<std::string, std::shared_ptr<UserVariable> >   GetVariableList() { return m_variableList; };
     std::map<std::string, std::string>     GetVariableListValueInitial() { return m_variableListValueInitial; };
 
+	//For HeaderTest
+	std::string								GetApplicationBuildName(){ return m_applicationBuildName; }
+	int										GetApplicationBuildNumber(){ return m_applicationBuildNumber; }
+	std::string								GetApplicationName(){ return m_applicationName; }
+
+	std::string								GetApplicationVersion(){ return m_applicationVersion; }
+	std::string								GetCatrobatLanguageVersion(){return m_catrobatLanguageVersion; }
+	time_t									GetDateTimeUpload(){return m_dateTimeUpload; }
+	std::string								GetDescription(){return m_description; }
+	std::string								GetDeviceName(){return m_deviceName; }
+	std::string								GetMediaLicense(){return m_mediaLicense; }
+	std::string								GetPlatform(){return m_platform; }
+	int										GetPlatformVersion(){return m_platformVersion; }
+	std::string								GetProgramLicense(){return m_programLicense; }
+	std::string								GetProgramName(){return m_programName; }
+	std::string								GetRemixOf(){ return m_remixOf; }
+	std::vector<std::string>*				GetTags(){ return m_tags; }
+	std::string								GetUrl(){ return m_url; }
+	std::string								GetUserHandle(){ return m_userHandle; }
+	//end for HeaderTest
+
+
     // Adders
 	void								AddVariable(std::string name, std::shared_ptr<UserVariable> variable);
     void								AddVariable(std::pair<std::string, std::shared_ptr<UserVariable> > variable);
