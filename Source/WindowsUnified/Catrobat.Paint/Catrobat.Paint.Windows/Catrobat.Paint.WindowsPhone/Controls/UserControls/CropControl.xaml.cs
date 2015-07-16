@@ -127,7 +127,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void SetHeightOfVerticalCenterRectangles(double newValue)
+        public void SetHeightOfVerticalCenterRectangles(double newValue)
         {
             if (newValue > MaxVerticalCenterRectangleHeight)
             {
@@ -146,7 +146,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
-        private void SetWidthOfHorizontalCenterRectangles(double newValue)
+        public void SetWidthOfHorizontalCenterRectangles(double newValue)
         {
             if (newValue > MaxHorizontalCenterRectangleWidth)
             {
