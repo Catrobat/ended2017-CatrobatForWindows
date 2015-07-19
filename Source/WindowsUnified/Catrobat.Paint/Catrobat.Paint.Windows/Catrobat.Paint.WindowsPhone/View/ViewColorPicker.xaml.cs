@@ -24,6 +24,8 @@ namespace Catrobat.Paint.WindowsPhone.View
         public ViewColorPicker()
         {
             this.InitializeComponent();
+            PocketPaintApplication.GetInstance().ViewColorPicker = this;
+            PocketPaintApplication.GetInstance().InputHexValueControl = ctrlInputHexValueSelectionControl;
             Color selected_color;
             double color_opacity;
             if (PocketPaintApplication.GetInstance().is_border_color && PocketPaintApplication.GetInstance().PaintData.strokeColorSelected != null)
@@ -86,7 +88,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        private void changeColorOfBtnSelectedColor(Color color)
+        public void changeColorOfBtnSelectedColor(Color color)
         {
             Color selected_color = color;
 
@@ -112,7 +114,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        private void ColorChangedPredefined(object sender, RoutedEventArgs routedEventArgs)
+        public void ColorChangedPredefined(object sender, RoutedEventArgs routedEventArgs)
         {
             var colorBrush = new SolidColorBrush(Colors.Black);
             //if ((((Rectangle)sender).Fill) is ImageBrush)
@@ -145,7 +147,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void ArgbHexValueToArgbTextbox()
         {
-            string argbHex = "#";
+            string argbHex = "";
             string hexValueAlpha = ((int)sldAlpha.Value).ToString("X");
             argbHex = hexValueAlpha.Length == 1 ? argbHex + "0" + hexValueAlpha : argbHex + hexValueAlpha;
             string hexValueRed = ((int)sldRed.Value).ToString("X");
@@ -226,7 +228,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             ArgbHexValueToArgbTextbox();
         }
 
-        private void changeColorOfCoding4FunColorPicker(byte red, byte green, byte blue, byte alpha)
+        public void changeColorOfCoding4FunColorPicker(byte red, byte green, byte blue, byte alpha)
         {
             Color new_color = new Color();
             new_color.R = red;
@@ -237,7 +239,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             colorPicker.Color = new_color;
         }
 
-        private void changeValuesOfColourTextboxes(byte red, byte green, byte blue, byte alpha)
+        public void changeValuesOfColourTextboxes(byte red, byte green, byte blue, byte alpha)
         {
             tbRedValue.Text = red.ToString();
             tbBlueValue.Text = blue.ToString();
@@ -245,7 +247,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             tbAlphaValue.Text = ((Int32)((Double)(alpha) / 2.55)).ToString();
         }
 
-        private void changeValuesOfColourSliders(byte red, byte green, byte blue, byte alpha)
+        public void changeValuesOfColourSliders(byte red, byte green, byte blue, byte alpha)
         {
             sldRed.Value = ((double)red);
             sldGreen.Value = ((double)green);
@@ -381,6 +383,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             changeVisibilityOfGridSelection(Visibility.Collapsed, Visibility.Visible);
             changeStrokeOfRectSelection(Colors.Black, Colors.White);
+            ctrlInputHexValueSelectionControl.Visibility = Visibility.Collapsed;
         }
 
         private void changeVisibilityOfGridSelection(Visibility predefinedColors, Visibility userDefinedColors)
@@ -393,6 +396,12 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             rectPredefinedColors.Stroke = new SolidColorBrush(strokeForPredefinedColor);
             rectUserDefinedColors.Stroke = new SolidColorBrush(strokeForUserDefinedColor);
+        }
+
+        private void btnChangeHexValue_Click(object sender, RoutedEventArgs e)
+        {
+            PocketPaintApplication.GetInstance().InputHexValueControl.setInputHexValueTextbox(tbArgbValue.Text.Substring(2,6));
+            ctrlInputHexValueSelectionControl.Visibility = Visibility.Visible;
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Catrobat.Paint.WindowsPhone
     public class PocketPaintApplication
     {
         private static PocketPaintApplication _instance;
+        public ViewColorPicker ViewColorPicker = null;
 
         private readonly DateTime _dateTimeAppStarted = DateTime.Now;
 
@@ -52,6 +53,8 @@ namespace Catrobat.Paint.WindowsPhone
 
         public Grid PaintingAreaLayoutRoot { get; set; }
         #endregion
+
+        public InputHexValueControl InputHexValueControl = null;
 
         public int angularDegreeOfWorkingSpaceRotation = 0;
 
