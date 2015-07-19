@@ -17,8 +17,6 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Actions
         private readonly AddNewScriptBrickViewModel _viewModel = 
             ServiceLocator.ViewModelLocator.AddNewScriptBrickViewModel;
 
-        
-
         public AddNewScriptBrickView()
         {
             InitializeComponent();
@@ -29,8 +27,12 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Actions
             double width = bounds.Width * 0.95;
 
             CatrobatListView view = this.FindName("Top") as CatrobatListView;
-            view.ItemWidthLandscape = (int)height;
-            view.ItemWidthPortrait = (int)width;
+
+            if (view != null)
+            {
+                view.ItemWidthLandscape = (int)height;
+                view.ItemWidthPortrait = (int)width;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
