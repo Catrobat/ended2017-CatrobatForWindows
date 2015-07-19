@@ -1685,6 +1685,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             setVisibilityOfUcRectangleSelectionControl = visibility;
             GridImportImageSelectionControl.Visibility = visibility;
             ctrlCropControl.Visibility = visibility;
+            ctrlStampControl.Visibility = visibility;
         }
 
         public void changeVisibilityOfActiveSelectionControl(Visibility visibility)
@@ -1705,6 +1706,10 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 setVisibilityOfUcRectangleSelectionControl = visibility;
             }
+            else if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Stamp)
+            {
+                ctrlStampControl.Visibility = visibility;
+            }
         }
 
         public void resetActiveSelectionControl()
@@ -1713,6 +1718,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 || PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Ellipse
                 || PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.ImportPng
                 || PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect
+                || PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Stamp
                 )
             {
                 PocketPaintApplication.GetInstance().ToolCurrent.ResetDrawingSpace();

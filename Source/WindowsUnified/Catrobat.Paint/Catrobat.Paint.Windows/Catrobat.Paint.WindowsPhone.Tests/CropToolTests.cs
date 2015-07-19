@@ -5,6 +5,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Microsoft.VisualStudio.TestPlatform.NativeUnitTestWizards;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.System.Threading;
