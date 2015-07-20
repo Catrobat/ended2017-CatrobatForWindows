@@ -58,10 +58,10 @@
         </Grid>
 
         <!-- Thickness-Control-Brush-Properties -->
-        <Grid x:Name="GrdThicknessControl" Height="380" HorizontalAlignment="Center" Margin="0,0,0,72" VerticalAlignment="Bottom" Visibility="Visible" Width="384">
+        <Grid x:Name="GrdThicknessControl" Height="380" HorizontalAlignment="Center" Margin="0,0,0,72" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
             <controls:ThicknessControl x:Name="CtrlThicknessControl"></controls:ThicknessControl>
         </Grid>
-
+        
         <!-- Crop-Control -->
         <userControls:CropControl x:Name="ctrlCropControl" Visibility="Collapsed"></userControls:CropControl>
 

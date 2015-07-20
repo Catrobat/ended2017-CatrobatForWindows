@@ -131,6 +131,9 @@
     <Compile Include="Controls\UserControls\colorPicker.xaml.cs">
       <DependentUpon>colorPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserControls\InputHexValueControl.xaml.cs">
+      <DependentUpon>InputHexValueControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserControls\RectangleSelectionControlOld.xaml.cs">
       <DependentUpon>RectangleSelectionControlOld.xaml</DependentUpon>
     </Compile>
@@ -354,6 +357,10 @@
     <Page Include="Controls\UserControls\colorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserControls\InputHexValueControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\UserControls\RectangleSelectionControlOld.xaml">
       <Generator>MSBuild:Compile</Generator>

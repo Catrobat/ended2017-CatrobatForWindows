@@ -59,7 +59,7 @@
             <!--______________________________________________-->
             <!-- GridColorButtons                              -->
             <!--______________________________________________-->
-            <Grid x:Name="GridColorButtons" HorizontalAlignment="Center" Margin="0,100,0,0" Visibility="Visible">
+            <Grid x:Name="GridColorButtons" HorizontalAlignment="Center" Margin="0,100,0,0" Visibility="Collapsed">
                 <Button x:Name="Button11" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton11}" Height="80" Margin="-3,30,0,0"  Width="90" VerticalAlignment="Top">
                     <Rectangle x:Name="Rectangle11" Fill="{StaticResource ColorButton11}" Height="65" Margin="-20" Stroke="White"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
                 </Button>
@@ -135,7 +135,7 @@
             <!--______________________________________________-->
             <!-- GridColorSlider                              -->
             <!--______________________________________________-->
-            <Grid x:Name="GridColorSlider" PointerEntered="Grid_PointerEntered" Visibility="Collapsed">
+            <Grid x:Name="GridColorSlider" PointerEntered="Grid_PointerEntered" Visibility="Visible">
                 <Controls:ColorPicker x:Name="colorPicker" ColorChanged="ColorChangedCustom" Height="186" HorizontalAlignment="Center" IsHitTestVisible="True"
                         Margin="20,108,25,0" VerticalAlignment="Top" Width="355"></Controls:ColorPicker>
                 <Slider x:Name="sldRed" Background="Black" Foreground="Red" Height="40" Maximum="255" Margin="-15,326,0,0"
@@ -176,8 +176,9 @@
                          VerticalAlignment="Top" Width="73"/>
 
                 <TextBox x:Name="tbArgbValue" Background="White" BorderThickness="0" Foreground="Black" Height="31" HorizontalAlignment="Left"
-                         IsReadOnly="True" Margin="85,491,0,0" Text="#00000000" TextWrapping="Wrap"
+                         IsReadOnly="True" Margin="85,491,0,0" Text="00000000" TextWrapping="Wrap"
                          VerticalAlignment="Top" Width="130"/>
+                <TextBox Background="Transparent" BorderBrush="Transparent" Foreground="White" Text="#" Margin="61,489,309,0" MinHeight="1" MinWidth="1" />
 
                 <TextBox x:Name="tbBlueValue" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="63" HorizontalAlignment="Left"
                          IsHitTestVisible="False" Margin="315,406,-12,0" Text="0" TextWrapping="Wrap"
@@ -190,7 +191,11 @@
                 <TextBox x:Name="tbRedValue" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="63" HorizontalAlignment="Left"
                          IsHitTestVisible="False" Margin="314,326,-11,0" Text="0" TextWrapping="Wrap"
                          VerticalAlignment="Top" Width="97"/>
-
+                <Button x:Name="btnChangeHexValue" Background="Transparent" BorderBrush="Transparent" BorderThickness="4" Content="Ändern" Margin="216,500,0,82" Click="btnChangeHexValue_Click" Height="44">
+                    <Button.RenderTransform>
+                        <CompositeTransform ScaleY="0.7" ScaleX="0.7"/>
+                    </Button.RenderTransform>
+                </Button>
                 <TextBox x:Name="tbPercentCharacter" Background="{x:Null}" BorderThickness="0" Foreground="White" Height="63" HorizontalAlignment="Left"
                          IsHitTestVisible="False" Margin="346,446,-2,0" Text="%" TextWrapping="Wrap" VerticalAlignment="Top" Width="56"/>
 
@@ -202,6 +207,7 @@
                         <TextBox x:Name="TbFertigSlider" Background="Transparent" BorderThickness="0" Foreground="White" IsHitTestVisible="False" Text="Fertig" Visibility="Visible" Width="75" />
                     </Grid>
                 </Button>-->
+
             </Grid>
 
             <Button x:Name="BtnSelectedColor" BorderThickness="3" Click="BtnSelectedColor_OnClick"
@@ -212,6 +218,7 @@
                     <TextBox x:Name="TbFertig" Background="Transparent" BorderThickness="0" Foreground="White" IsHitTestVisible="False" Text="Fertig" Visibility="Visible" Width="75" />
                 </Grid>
             </Button>
+            <userControls:InputHexValueControl x:Name="ctrlInputHexValueSelectionControl" Margin="-18,328,-12,-1" Visibility="Collapsed"/>
             <Grid.DataContext>
                 <Binding Path="ColorPicker" />
             </Grid.DataContext>
