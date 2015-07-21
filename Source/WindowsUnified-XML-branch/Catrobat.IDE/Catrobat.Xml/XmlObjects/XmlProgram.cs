@@ -48,10 +48,14 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
             XmlParserTempProjectHelper.Program = this;
 
-            var project = document.Element("program");
-            ProgramHeader = new XmlProjectHeader(project.Element("header"));
-            SpriteList = new XmlSpriteList(project.Element("objectList"));
-            VariableList = new XmlVariableList(project.Element("variables"));
+            //var project = document.Element("program");
+            //ProgramHeader = new XmlProjectHeader(project.Element("header"));
+            //SpriteList = new XmlSpriteList(project.Element("objectList"));
+            //VariableList = new XmlVariableList(project.Element("variables"));
+            var project = document.Element(XmlConstants.Program);
+            ProgramHeader = new XmlProjectHeader(project.Element(XmlConstants.Header));
+            SpriteList = new XmlSpriteList(project.Element(XmlConstants.ObjectList));
+            VariableList = new XmlVariableList(project.Element(XmlConstants.Variables));
 
             LoadReference();
             LoadBroadcastMessages();
@@ -63,7 +67,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
             XmlParserTempProjectHelper.Program = this;
 
-            var xProject = new XElement("program");
+            //var xProject = new XElement("program");
+            var xProject = new XElement(XmlConstants.Program);
             xProject.Add(ProgramHeader.CreateXml());
             xProject.Add(SpriteList.CreateXml());
             xProject.Add(VariableList.CreateXml());

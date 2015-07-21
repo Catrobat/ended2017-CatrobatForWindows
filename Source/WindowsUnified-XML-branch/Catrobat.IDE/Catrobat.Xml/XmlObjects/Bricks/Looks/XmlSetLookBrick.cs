@@ -38,15 +38,21 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Looks
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element("look") != null)
+            //if (xRoot.Element("look") != null)
+            if (xRoot.Element(XmlConstants.Look) != null)
             {
-                XmlLookReference = new XmlLookReference(xRoot.Element("look"));
+                //XmlLookReference = new XmlLookReference(xRoot.Element("look"));
+                XmlLookReference = new XmlLookReference(xRoot.Element(XmlConstants.Look));
             }
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("setLookBrick");
+            //var xRoot = new XElement("setLookBrick");
+            //var xRoot = new XElement("brick");
+            //xRoot.SetAttributeValue("type", "setLookBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlSetLookBrickType);
 
             if (XmlLookReference != null)
             {

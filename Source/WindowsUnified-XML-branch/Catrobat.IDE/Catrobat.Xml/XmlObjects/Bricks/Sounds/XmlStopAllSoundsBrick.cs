@@ -12,7 +12,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("stopAllSoundsBrick");
+            //var xRoot = new XElement("stopAllSoundsBrick");
+            //var xRoot = new XElement("brick");
+            //xRoot.SetAttributeValue("type", "stopAllSoundsBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlStopAllSoundsBrickType);
 
             //CreateCommonXML(xRoot);
 

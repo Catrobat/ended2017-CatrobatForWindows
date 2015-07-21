@@ -39,15 +39,21 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element("sound") != null)
+            //if (xRoot.Element("sound") != null)
+            if (xRoot.Element(XmlConstants.Sound) != null)
             {
-                XmlSoundReference = new XmlSoundReference(xRoot.Element("sound"));
+                //XmlSoundReference = new XmlSoundReference(xRoot.Element("sound"));
+                XmlSoundReference = new XmlSoundReference(xRoot.Element(XmlConstants.Sound));
             }
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("playSoundBrick");
+            //var xRoot = new XElement("playSoundBrick");
+            //var xRoot = new XElement("brick");
+            //xRoot.SetAttributeValue("type", "playSoundBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlPlaySoundBrickType);
 
             if (XmlSoundReference != null)
             {

@@ -13,14 +13,20 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            ChangeBrightness = new XmlFormula(xRoot.Element("changeBrightness"));
+            //ChangeBrightness = new XmlFormula(xRoot.Element("changeBrightness"));
+            ChangeBrightness = new XmlFormula(xRoot.Element(XmlConstants.ChangeBrightness));
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("changeBrightnessByNBrick");
+            //var xRoot = new XElement("changeBrightnessByNBrick");
+            //var xRoot = new XElement("brick");
+            //xRoot.SetAttributeValue("type", "changeBrightnessByNBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlChangeBrightnessBrickType);
 
-            var xVariable = new XElement("changeBrightness");
+            //var xVariable = new XElement("changeBrightness");
+            var xVariable = new XElement(XmlConstants.ChangeBrightness);
             xVariable.Add(ChangeBrightness.CreateXml());
             xRoot.Add(xVariable);
 

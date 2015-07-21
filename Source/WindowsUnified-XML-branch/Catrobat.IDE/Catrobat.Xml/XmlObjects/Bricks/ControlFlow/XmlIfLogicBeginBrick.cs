@@ -81,8 +81,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("ifLogicBeginBrick");
+            //var xRoot = new XElement("ifLogicBeginBrick");
+            var xRoot = new XElement("brick");
+            xRoot.SetAttributeValue("type", "ifLogicBeginBrick");
 
+            //Anstelle von einem <ifCondition>-Tag wird in der 093 ein formula element mit category="IF_CONDITION" verwendet
             if (IfCondition != null)
             {
                 var xVariable1 = new XElement("ifCondition");

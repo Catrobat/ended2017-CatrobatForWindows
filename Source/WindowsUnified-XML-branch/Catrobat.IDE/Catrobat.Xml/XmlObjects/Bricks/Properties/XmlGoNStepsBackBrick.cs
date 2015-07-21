@@ -17,14 +17,20 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            Steps = new XmlFormula(xRoot.Element("steps"));
+            //Steps = new XmlFormula(xRoot.Element("steps"));
+            Steps = new XmlFormula(xRoot.Element(XmlConstants.Steps));
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("goNStepsBackBrick");
+            //var xRoot = new XElement("goNStepsBackBrick");
+            //var xRoot = new XElement("brick");
+            //xRoot.SetAttributeValue("type", "goNStepsBackBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlGoNStepsBackBrickType);
 
-            var xVariable = new XElement("steps");
+            //var xVariable = new XElement("steps");
+            var xVariable = new XElement(XmlConstants.Steps);
             xVariable.Add(Steps.CreateXml());
             xRoot.Add(xVariable);
 

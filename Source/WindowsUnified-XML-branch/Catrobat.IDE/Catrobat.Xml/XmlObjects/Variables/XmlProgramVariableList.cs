@@ -31,7 +31,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("programVariableList");
+            //var xRoot = new XElement("programVariableList");
+            var xRoot = new XElement(XmlConstants.XmlProgramVariableListType);
 
             foreach (XmlUserVariable userVariable in UserVariables)
             {
