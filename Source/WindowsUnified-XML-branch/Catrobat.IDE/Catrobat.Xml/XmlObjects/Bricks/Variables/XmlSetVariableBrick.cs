@@ -42,21 +42,16 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            //if (xRoot.Element("userVariable") != null)
-            //    UserVariableReference = new XmlUserVariableReference(xRoot.Element("userVariable"));
             if (xRoot.Element(XmlConstants.UserVariable) != null)
                 UserVariableReference = new XmlUserVariableReference(xRoot.Element(XmlConstants.UserVariable));
 
-            //if (xRoot.Element("variableFormula") != null)
-            
-            //    VariableFormula = new XmlFormula(xRoot.Element("variableFormula"));
-            // sollte wenn fertig wieder in ein new XmlFormula umgebaut werden!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+           // TODO: sollte wenn fertig wieder in ein new XmlFormula umgebaut werden!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             if (xRoot.Element("formulaList") != null)
             {
                 var formulaList = xRoot.Element("formulaList");
                 if (formulaList.Element("formula") != null)
                 {
-                    //toDo: Wird das zu einer Liste, oder anders lösen?
+                    //TODO: Wird das zu einer Liste, oder anders lösen?
                     VariableFormula = new XmlFormula(xRoot.Element("formula"));
                 }
             }
@@ -66,9 +61,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 
         internal override XElement CreateXml()
         {
-            //var xRoot = new XElement("setVariableBrick");
-            //var xRoot = new XElement("brick");
-            //xRoot.SetAttributeValue("type", "setVariableBrick");
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlSetVariableBrickType);
 
@@ -78,7 +70,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
             //var xVariable2 = new XElement("variableFormula");
             //xVariable2.Add(VariableFormula.CreateXml());
             //xRoot.Add(xVariable2);
-            //Eigentliche funktion wurde auskommentiert
+            //TODO: Eigentliche funktion wurde auskommentiert
             //xRoot.Add(VariableFormula.CreateXml("variableForumla"));
             //xRoot.Add(VariableFormula.CreateXml(XmlConstants.Variable));
             return xRoot;

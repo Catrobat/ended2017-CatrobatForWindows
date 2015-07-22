@@ -63,7 +63,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             Tags = "";
             Url = "http://pocketcode.org/details/871";
             UserHandle = "";
-            ScreenWidth = 768;//1080; // TODO: change this! just for Lumia 1020 device
+            ScreenWidth = 768;//1080; // TODO: change this! just for Lumia 1020 device  -- assigned to patrick
             ScreenHeight = 1280;// 1920;//; // TODO: change this! just for Lumia 1020 device
         }
 
@@ -90,25 +90,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            //ApplicationBuildName = xRoot.Element("applicationBuildName").Value;
-            //ApplicationBuildNumber = int.Parse(xRoot.Element("applicationBuildNumber").Value, CultureInfo.InvariantCulture);
-            //ApplicationName = xRoot.Element("applicationName").Value;
-            //ApplicationVersion = xRoot.Element("applicationVersion").Value;
-            //CatrobatLanguageVersion = xRoot.Element("catrobatLanguageVersion").Value;
-            //DateTimeUpload = xRoot.Element("dateTimeUpload").Value;
-            //Description = xRoot.Element("description").Value;
-            //DeviceName = xRoot.Element("deviceName").Value;
-            //MediaLicense = xRoot.Element("mediaLicense").Value;
-            //Platform = xRoot.Element("platform").Value;
-            //PlatformVersion = xRoot.Element("platformVersion").Value;
-            //ProgramLicense = xRoot.Element("programLicense").Value;
-            //ProgramName = xRoot.Element("programName").Value;
-            //RemixOf = xRoot.Element("remixOf").Value;
-            //ScreenHeight = int.Parse(xRoot.Ele ment("screenHeight").Value, CultureInfo.InvariantCulture);
-            //ScreenWidth = int.Parse(xRoot.Element("screenWidth").Value, CultureInfo.InvariantCulture);
-            //Tags = xRoot.Element("tags").Value;
-            //Url = xRoot.Element("url").Value;
-            //UserHandle = xRoot.Element("userHandle").Value;
             ApplicationBuildName = xRoot.Element(XmlConstants.ApplicationBuildName).Value;
             ApplicationBuildNumber = int.Parse(xRoot.Element(XmlConstants.ApplicationBuildNumber).Value, CultureInfo.InvariantCulture);
             ApplicationName = xRoot.Element(XmlConstants.ApplicationNameText).Value;
@@ -132,118 +113,98 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override XElement CreateXml()
         {
-            //var xProjectHeader = new XElement("header");
             var xProjectHeader = new XElement(XmlConstants.Header);
 
-            //xProjectHeader.Add(new XElement("applicationBuildName")
             xProjectHeader.Add(new XElement(XmlConstants.ApplicationBuildName)
                 {
                     Value = ApplicationBuildName
                 });
 
-            //xProjectHeader.Add(new XElement("applicationBuildNumber")
             xProjectHeader.Add(new XElement(XmlConstants.ApplicationBuildNumber)
                 {
                     Value = ApplicationBuildNumber.ToString(CultureInfo.InvariantCulture)
                 });
 
-            //xProjectHeader.Add(new XElement("applicationName")
             xProjectHeader.Add(new XElement(XmlConstants.ApplicationNameText)
                 {
                     Value = ApplicationName
                 });
 
-            //xProjectHeader.Add(new XElement("applicationVersion")
             xProjectHeader.Add(new XElement(XmlConstants.ApplicationVersion)
                 {
                     Value = ApplicationVersion
                 });
 
-            //xProjectHeader.Add(new XElement("catrobatLanguageVersion")
             xProjectHeader.Add(new XElement(XmlConstants.CatrobatLanguageVersion)
                 {
                     Value = CatrobatLanguageVersion
                 });
 
-            //xProjectHeader.Add(new XElement("dateTimeUpload")
             xProjectHeader.Add(new XElement(XmlConstants.DateTimeUpload)
                 {
                     Value = DateTimeUpload
                 });
 
-            //xProjectHeader.Add(new XElement("description")
             xProjectHeader.Add(new XElement(XmlConstants.Description)
                 {
                     Value = Description
                 });
 
-            //xProjectHeader.Add(new XElement("deviceName")
             xProjectHeader.Add(new XElement(XmlConstants.DeviceName)
                 {
                     Value = DeviceName
                 });
 
-            //xProjectHeader.Add(new XElement("mediaLicense")
             xProjectHeader.Add(new XElement(XmlConstants.MediaLicense)
                 {
                     Value = MediaLicense
                 });
 
-            //xProjectHeader.Add(new XElement("platform")
             xProjectHeader.Add(new XElement(XmlConstants.Platform)
                 {
                     Value = Platform
                 });
 
-            //xProjectHeader.Add(new XElement("platformVersion")
             xProjectHeader.Add(new XElement(XmlConstants.PlatformVersion)
                 {
                     Value = PlatformVersion
                 });
 
-            //xProjectHeader.Add(new XElement("programLicense")
             xProjectHeader.Add(new XElement(XmlConstants.ProgramLicense)
                 {
                     Value = ProgramLicense
                 });
 
-            //xProjectHeader.Add(new XElement("programName")
             xProjectHeader.Add(new XElement(XmlConstants.ProgramName)
                 {
                     Value = ProgramName
                 });
 
-            //xProjectHeader.Add(new XElement("remixOf")
             xProjectHeader.Add(new XElement(XmlConstants.RemixOf)
                 {
                     Value = RemixOf
                 });
 
-            //xProjectHeader.Add(new XElement("screenHeight")
             xProjectHeader.Add(new XElement(XmlConstants.ScreenHeight)
                 {
                     Value = ScreenHeight.ToString(CultureInfo.InvariantCulture)
                 });
 
-            //xProjectHeader.Add(new XElement("screenWidth")
             xProjectHeader.Add(new XElement(XmlConstants.ScreenWidth)
                 {
                     Value = ScreenWidth.ToString(CultureInfo.InvariantCulture)
                 });
 
-            //xProjectHeader.Add(new XElement("tags")
             xProjectHeader.Add(new XElement(XmlConstants.Tags)
                 {
                     Value = Tags
                 });
 
-            //xProjectHeader.Add(new XElement("url")
             xProjectHeader.Add(new XElement(XmlConstants.Url)
                 {
                     Value = Url
                 });
 
-            //xProjectHeader.Add(new XElement("userHandle")
             xProjectHeader.Add(new XElement(XmlConstants.userHandle)
                 {
                     Value = UserHandle

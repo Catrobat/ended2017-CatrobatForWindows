@@ -21,15 +21,12 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            //ObjectVariableList = new XmlObjectVariableList(xRoot.Element("objectVariableList"));
-            //ProgramVariableList = new XmlProgramVariableList(xRoot.Element("programVariableList"));
             ObjectVariableList = new XmlObjectVariableList(xRoot.Element(XmlConstants.XmlObjectVariableListType));
             ProgramVariableList = new XmlProgramVariableList(xRoot.Element(XmlConstants.XmlProgramVariableListType));
         }
 
         internal override XElement CreateXml()
         {
-            //var xRoot = new XElement("variables");
             var xRoot = new XElement(XmlConstants.Variables);
             xRoot.Add(ObjectVariableList.CreateXml());
             xRoot.Add(ProgramVariableList.CreateXml());
