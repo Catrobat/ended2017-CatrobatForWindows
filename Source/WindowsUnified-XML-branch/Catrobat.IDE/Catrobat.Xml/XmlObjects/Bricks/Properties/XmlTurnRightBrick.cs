@@ -13,14 +13,20 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            Degrees = new XmlFormula(xRoot.Element("degrees"));
+            //Degrees = new XmlFormula(xRoot.Element("degrees"));
+            Degrees = new XmlFormula(xRoot.Element(XmlConstants.TurnRightDegrees));
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("turnRightBrick");
+            //var xRoot = new XElement("turnRightBrick");
+            //var xRoot = new XElement("brick");
+            //xRoot.SetAttributeValue("type", "turnRightBrich");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlTurnRightBrickType);
 
-            var xVariable = new XElement("degrees");
+            //var xVariable = new XElement("degrees");
+            var xVariable = new XElement(XmlConstants.TurnRightDegrees);
             xVariable.Add(Degrees.CreateXml());
             xRoot.Add(xVariable);
 

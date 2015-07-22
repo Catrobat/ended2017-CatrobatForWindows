@@ -22,15 +22,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
         {
             foreach (XElement element in xRoot.Elements())
             {
-                switch (element.Name.LocalName)
+                //switch (element.Name.LocalName)
+                switch (element.Attribute(XmlConstants.Type).Value.ToString())
                 {
-                    case "startScript":
+                    //case "StartScript":
+                    case XmlConstants.XmlStartScriptType:
                         Scripts.Add(new XmlStartScript(element));
                         break;
-                    case "whenScript":
+                    //case "whenScript":
+                    case XmlConstants.XmlWhenScriptType:
                         Scripts.Add(new XmlWhenScript(element));
                         break;
-                    case "broadcastScript":
+                    //case "broadcastScript":
+                    case XmlConstants.XmlBroadcastScriptType:
                         Scripts.Add(new XmlBroadcastScript(element));
                         break;
                 }
@@ -39,7 +43,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("scriptList");
+            //var xRoot = new XElement("scriptList");
+            var xRoot = new XElement(XmlConstants.ScriptList);
 
             foreach (XmlScript script in Scripts)
             {

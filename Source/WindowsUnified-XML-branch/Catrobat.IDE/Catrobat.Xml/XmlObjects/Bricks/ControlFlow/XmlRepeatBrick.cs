@@ -13,16 +13,21 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            TimesToRepeat = new XmlFormula(xRoot.Element("timesToRepeat"));
+            //TimesToRepeat = new XmlFormula(xRoot.Element("timesToRepeat"));
+            TimesToRepeat = new XmlFormula(xRoot.Element(XmlConstants.TimesToRepeat));
             base.LoadFromCommonXML(xRoot);
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("repeatBrick");
+            //var xRoot = new XElement("repeatBrick");
+            //var xRoot = new XElement("brick");
+            //xRoot.SetAttributeValue("type", "repeatBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Brick, XmlConstants.XmlRepeatBrickType);
             base.CreateCommonXML(xRoot);
 
-            var xVariable = new XElement("timesToRepeat");
+            var xVariable = new XElement(XmlConstants.TimesToRepeat);
             xVariable.Add(TimesToRepeat.CreateXml());
             xRoot.Add(xVariable);
 

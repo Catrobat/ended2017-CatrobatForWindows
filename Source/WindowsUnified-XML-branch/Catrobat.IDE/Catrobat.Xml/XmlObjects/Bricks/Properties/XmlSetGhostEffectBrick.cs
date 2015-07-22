@@ -13,14 +13,20 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            Transparency = new XmlFormula(xRoot.Element("transparency"));
+            //Transparency = new XmlFormula(xRoot.Element("transparency"));
+            Transparency = new XmlFormula(xRoot.Element(XmlConstants.Transparency));
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("setGhostEffectBrick");
+            //var xRoot = new XElement("setGhostEffectBrick");
+            //var xRoot = new XElement("brick");
+            //xRoot.SetAttributeValue("type", "setGhostEffectBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlSetGhostEffectBrickType);
 
-            var xVariable = new XElement("transparency");
+            //var xVariable = new XElement("transparency");
+            var xVariable = new XElement(XmlConstants.Transparency);
             xVariable.Add(Transparency.CreateXml());
             xRoot.Add(xVariable);
 

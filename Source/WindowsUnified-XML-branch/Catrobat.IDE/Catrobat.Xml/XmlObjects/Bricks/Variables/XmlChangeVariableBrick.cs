@@ -40,21 +40,30 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element("userVariable") != null)
-                UserVariableReference = new XmlUserVariableReference(xRoot.Element("userVariable"));
+            //if (xRoot.Element("userVariable") != null)
+            //    UserVariableReference = new XmlUserVariableReference(xRoot.Element("userVariable"));
+            if (xRoot.Element(XmlConstants.UserVariable) != null)
+                UserVariableReference = new XmlUserVariableReference(xRoot.Element(XmlConstants.UserVariable));
 
-            if (xRoot.Element("variableFormula") != null)
-                VariableFormula = new XmlFormula(xRoot.Element("variableFormula"));
+            //if (xRoot.Element("variableFormula") != null)
+            //    VariableFormula = new XmlFormula(xRoot.Element("variableFormula"));
+            if (xRoot.Element(XmlConstants.VariableChange) != null)
+                VariableFormula = new XmlFormula(xRoot.Element(XmlConstants.VariableChange));
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("changeVariableBrick");
+            //var xRoot = new XElement("changeVariableBrick");
+            //var xRoot = new XElement("brick");
+            //xRoot.SetAttributeValue("type", "changeVariableBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlChangeVariableBrickType);
 
             if(UserVariableReference != null)
                 xRoot.Add(UserVariableReference.CreateXml());
 
-            var xFormula = new XElement("variableFormula");
+            //var xFormula = new XElement("variableFormula");
+            var xFormula = new XElement(XmlConstants.VariableChange);
             xFormula.Add(VariableFormula.CreateXml());
             xRoot.Add(xFormula);
 

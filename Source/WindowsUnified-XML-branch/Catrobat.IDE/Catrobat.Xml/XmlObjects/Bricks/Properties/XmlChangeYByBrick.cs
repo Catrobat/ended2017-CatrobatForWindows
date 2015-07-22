@@ -13,14 +13,20 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            YMovement = new XmlFormula(xRoot.Element("yMovement"));
+            //YMovement = new XmlFormula(xRoot.Element("yMovement"));
+            YMovement = new XmlFormula(xRoot.Element(XmlConstants.YPositionChange));
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("changeYByNBrick");
+            //var xRoot = new XElement("changeYByNBrick");
+            //var xRoot = new XElement("brick");
+            //xRoot.SetAttributeValue("type", "changeYByNBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlChangeYByBrickType);
 
-            var xVariable = new XElement("yMovement");
+            //var xVariable = new XElement("yMovement");
+            var xVariable = new XElement(XmlConstants.YPositionChange);
             xVariable.Add(YMovement.CreateXml());
             xRoot.Add(xVariable);
 

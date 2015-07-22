@@ -112,6 +112,7 @@
     <Compile Include="XmlObjects\Bricks\XmlBrickList.cs" />
     <Compile Include="XmlObjects\Bricks\XmlNoteBrick.cs" />
     <Compile Include="XmlObjects\Formulas\XmlFormula.cs" />
+    <Compile Include="XmlObjects\Formulas\XmlFormulaList.cs" />
     <Compile Include="XmlObjects\Formulas\XmlFormulaTree.cs" />
     <Compile Include="XmlObjects\Formulas\XmlFormulaTreeFactory.cs" />
     <Compile Include="XmlObjects\Scripts\XmlBroadcastScript.cs" />

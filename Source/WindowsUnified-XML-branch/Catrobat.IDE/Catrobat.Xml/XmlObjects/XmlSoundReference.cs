@@ -20,16 +20,18 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            _reference = xRoot.Attribute("reference").Value;
+            //_reference = xRoot.Attribute("reference").Value;
+            _reference = xRoot.Attribute(XmlConstants.Reference).Value;
             //Sound = ReferenceHelper.GetReferenceObject(this, _reference) as Sound;
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("sound");
+            //var xRoot = new XElement("sound");
+            var xRoot = new XElement(XmlConstants.Sound);
 
-            xRoot.Add(new XAttribute("reference", ReferenceHelper.GetReferenceString(this)));
-
+            //xRoot.Add(new XAttribute("reference", ReferenceHelper.GetReferenceString(this)));
+            xRoot.Add(new XAttribute(XmlConstants.Reference, ReferenceHelper.GetReferenceString(this)));
             return xRoot;
         }
 

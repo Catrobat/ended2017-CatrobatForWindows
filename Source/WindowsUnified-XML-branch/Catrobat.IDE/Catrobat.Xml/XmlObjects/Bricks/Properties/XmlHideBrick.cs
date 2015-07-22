@@ -12,7 +12,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("hideBrick");
+            //var xRoot = new XElement("hideBrick");
+            //var xRoot = new XElement("brick");
+            //xRoot.SetAttributeValue("type", "hideBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlHideBrickType);
 
             //CreateCommonXML(xRoot);
 

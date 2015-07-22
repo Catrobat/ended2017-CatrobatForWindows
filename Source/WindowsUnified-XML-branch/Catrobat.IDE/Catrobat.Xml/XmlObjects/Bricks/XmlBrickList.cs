@@ -28,69 +28,70 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
         {
             foreach (XElement element in xRoot.Elements())
             {
-                switch (element.Name.LocalName)
+                //switch (element.Name.LocalName)
+                switch(element.Attribute(XmlConstants.Type).Value.ToString())
                 {
-                    case "broadcastBrick":
+                    case XmlConstants.XmlBroadcastBrickType://"broadcastBrick":
                         Bricks.Add(new XmlBroadcastBrick());
                         break;
 
-                    case "broadcastWaitBrick":
+                    case XmlConstants.XmlBroadcastWaitBrickType://"broadcastWaitBrick":
                         Bricks.Add(new XmlBroadcastWaitBrick());
                         break;
 
-                    case "changeBrightnessByNBrick":
+                    case XmlConstants.XmlChangeBrightnessBrickType://"changeBrightnessByNBrick":
                         Bricks.Add(new XmlChangeBrightnessBrick());
                         break;
 
-                    case "changeGhostEffectByNBrick":
+                    case XmlConstants.XmlChangeGhostEffectBrickType://"changeGhostEffectByNBrick":
                         Bricks.Add(new XmlChangeGhostEffectBrick());
                         break;
 
-                    case "changeSizeByNBrick":
+                    case XmlConstants.XmlChangeSizeByNBrickType://"changeSizeByNBrick":
                         Bricks.Add(new XmlChangeSizeByNBrick());
                         break;
 
-                    case "changeVariableBrick":
+                    case XmlConstants.XmlChangeVariableBrickType://"changeVariableBrick":
                         Bricks.Add(new XmlChangeVariableBrick());
                         break;
 
-                    case "changeVolumeByNBrick":
+                    case XmlConstants.XmlChangeVolumeByBricksType://"changeVolumeByNBrick":
                         Bricks.Add(new XmlChangeVolumeByBrick());
                         break;
 
-                    case "changeXByNBrick":
+                    case XmlConstants.XmlChangeXByBrickType://"changeXByNBrick":
                         Bricks.Add(new XmlChangeXByBrick());
                         break;
 
-                    case "changeYByNBrick":
+                    case XmlConstants.XmlChangeYByBrickType://"changeYByNBrick":
                         Bricks.Add(new XmlChangeYByBrick());
                         break;
 
-                    case "clearGraphicEffectBrick":
+                    case XmlConstants.XmlClearGraphicEffectBrickType://"clearGraphicEffectBrick":
                         Bricks.Add(new XmlClearGraphicEffectBrick());
                         break;
 
-                    case "comeToFrontBrick":
+                    case XmlConstants.XmlComeToFrontBrickType://"comeToFrontBrick":
                         Bricks.Add(new XmlComeToFrontBrick());
                         break;
 
-                    case "foreverBrick":
+                    case XmlConstants.XmlForeverBrickType://"foreverBrick":
                         Bricks.Add(new XmlForeverBrick());
                         break;
 
-                    case "loopEndlessBrick":
+                    case XmlConstants.XmlLoopEndlessBrickType://"loopEndlessBrick":
                         Bricks.Add(new XmlForeverLoopEndBrick());
                         break;
 
-                    case "glideToBrick":
+                    case XmlConstants.XmlGlideToBrickType://"glideToBrick":
                         Bricks.Add(new XmlGlideToBrick());
                         break;
 
-                    case "goNStepsBackBrick":
+                    case XmlConstants.XmlGoNStepsBackBrickType://"goNStepsBackBrick":
                         Bricks.Add(new XmlGoNStepsBackBrick());
                         break;
 
-                    case "hideBrick":
+                    case XmlConstants.XmlHideBrickType://"hideBrick":
                         Bricks.Add(new XmlHideBrick());
                         break;
 
@@ -126,95 +127,95 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
                         Bricks.Add(new XmlNxtPlayToneBrick());
                         break;
 
-                    case "moveNStepsBrick":
+                    case XmlConstants.XmlMoveNStepsBrickType://"moveNStepsBrick":
                         Bricks.Add(new XmlMoveNStepsBrick());
                         break;
 
-                    case "nextLookBrick":
+                    case XmlConstants.XmlNextLookBrickType://"nextLookBrick":
                         Bricks.Add(new XmlNextLookBrick());
                         break;
 
-                    case "noteBrick":
+                    case XmlConstants.XmlNoteBrickType://"noteBrick":
                         Bricks.Add(new XmlNoteBrick());
                         break;
 
-                    case "placeAtBrick":
+                    case XmlConstants.XmlPlaceAtBrickType://"placeAtBrick":
                         Bricks.Add(new XmlPlaceAtBrick());
                         break;
 
-                    case "playSoundBrick":
+                    case XmlConstants.XmlPlaySoundBrickType://"playSoundBrick":
                         Bricks.Add(new XmlPlaySoundBrick());
                         break;
 
-                    case "pointInDirectionBrick":
+                    case XmlConstants.XmlPointInDirectionBrickType://"pointInDirectionBrick":
                         Bricks.Add(new XmlPointInDirectionBrick());
                         break;
 
-                    case "pointToBrick":
+                    case XmlConstants.XmlPointToBrickType://"pointToBrick":
                         Bricks.Add(new XmlPointToBrick());
                         break;
 
-                    case "repeatBrick":
+                    case XmlConstants.XmlRepeatBrickType://"repeatBrick":
                         Bricks.Add(new XmlRepeatBrick());
                         break;
 
-                    case "loopEndBrick":
+                    case XmlConstants.XmlRepeatLoopEndBrickType://"loopEndBrick":
                         Bricks.Add(new XmlRepeatLoopEndBrick());
                         break;
 
-                    case "setBrightnessBrick":
+                    case XmlConstants.XmlSetBrightnessBrickType://"setBrightnessBrick":
                         Bricks.Add(new XmlSetBrightnessBrick());
                         break;
 
-                    case "setLookBrick":
+                    case XmlConstants.XmlSetLookBrickType://"setLookBrick":
                         Bricks.Add(new XmlSetLookBrick());
                         break;
 
-                    case "setGhostEffectBrick":
+                    case XmlConstants.XmlSetGhostEffectBrickType://"setGhostEffectBrick":
                         Bricks.Add(new XmlSetGhostEffectBrick());
                         break;
 
-                    case "setSizeToBrick":
+                    case XmlConstants.XmlSetSizeToBrickType://"setSizeToBrick":
                         Bricks.Add(new XmlSetSizeToBrick());
                         break;
 
-                    case "setVariableBrick":
+                    case XmlConstants.XmlSetVariableBrickType://"setVariableBrick":
                         Bricks.Add(new XmlSetVariableBrick());
                         break;
 
-                    case "setVolumeToBrick":
+                    case XmlConstants.XmlSetVolumeToBrickType://"setVolumeToBrick":
                         Bricks.Add(new XmlSetVolumeToBrick());
                         break;
 
-                    case "setXBrick":
+                    case XmlConstants.XmlSetXBrickType://"setXBrick":
                         Bricks.Add(new XmlSetXBrick());
                         break;
 
-                    case "setYBrick":
+                    case XmlConstants.XmlSetYBrickType://"setYBrick":
                         Bricks.Add(new XmlSetYBrick());
                         break;
 
-                    case "showBrick":
+                    case XmlConstants.XmlShowBrickType://"showBrick":
                         Bricks.Add(new XmlShowBrick());
                         break;
 
-                    case "speakBrick":
+                    case XmlConstants.XmlSpeakBrickType://"speakBrick":
                         Bricks.Add(new XmlSpeakBrick());
                         break;
 
-                    case "stopAllSoundsBrick":
+                    case XmlConstants.XmlStopAllSoundsBrickType://"stopAllSoundsBrick":
                         Bricks.Add(new XmlStopAllSoundsBrick());
                         break;
 
-                    case "turnLeftBrick":
+                    case XmlConstants.XmlTurnLeftBrickType://"turnLeftBrick":
                         Bricks.Add(new XmlTurnLeftBrick());
                         break;
 
-                    case "turnRightBrick":
+                    case XmlConstants.XmlTurnRightBrickType://"turnRightBrick":
                         Bricks.Add(new XmlTurnRightBrick());
                         break;
 
-                    case "waitBrick":
+                    case XmlConstants.XmlWaitBrickType://"waitBrick":
                         Bricks.Add(new XmlWaitBrick());
                         break;
 
@@ -234,7 +235,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("brickList");
+            //var xRoot = new XElement("brickList");
+            var xRoot = new XElement(XmlConstants.BrickList);
 
             foreach (XmlBrick brick in Bricks)
             {
