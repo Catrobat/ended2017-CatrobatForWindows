@@ -25,7 +25,7 @@ unsigned int Look::GetWidth()
 {
     if (m_texture == NULL)
     {
-        throw new PlayerException("Look::GetWidth called with no texture defined.");
+        throw PlayerException("Look::GetWidth called with no texture defined.");
     }
     return (unsigned int) m_texture->GetBitmap()->GetSize().width;
 }
@@ -34,7 +34,7 @@ unsigned int Look::GetHeight()
 {
     if (m_texture == NULL)
     {
-        throw new PlayerException("Look::GetHeight called with no texture defined.");
+        throw PlayerException("Look::GetHeight called with no texture defined.");
     }
     return (unsigned int) m_texture->GetBitmap()->GetSize().height;
 }

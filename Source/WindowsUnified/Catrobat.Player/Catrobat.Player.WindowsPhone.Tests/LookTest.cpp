@@ -28,6 +28,7 @@ namespace CatrobatPlayerWindowsPhoneTests
 			Assert::AreEqual(expected, look->GetFileName());
 			expected = "background";
 			Assert::AreEqual(expected, look->GetName());
+			Assert::IsTrue(look->GetAlphaMap().empty());
 		}
 
 		TEST_METHOD(SetAlphaMap)
@@ -87,6 +88,35 @@ namespace CatrobatPlayerWindowsPhoneTests
 			Assert::AreEqual((std::string)"Look::GetTexture called with no texture defined.", errorMsg);
 		}
 
+		TEST_METHOD(GetWidth_Exception)
+		{
+			std::shared_ptr<Look> look = std::shared_ptr<Look>(new Look("noFile", "nothing"));
+			std::string errorMsg;
+			try
+			{
+				look->GetWidth();
+			}
+			catch (PlayerException e)
+			{
+				errorMsg = e.GetErrorMessage();
+			}
+			Assert::AreEqual((std::string)"Look::GetWidth called with no texture defined.", errorMsg);
+		}
+
+		TEST_METHOD(GetHeight_Exception)
+		{
+			std::shared_ptr<Look> look = std::shared_ptr<Look>(new Look("noFile", "nothing"));
+			std::string errorMsg;
+			try
+			{
+				look->GetHeight();
+			}
+			catch (PlayerException e)
+			{
+				errorMsg = e.GetErrorMessage();
+			}
+			Assert::AreEqual((std::string)"Look::GetHeight called with no texture defined.", errorMsg);
+		}
 
 	};
 }
