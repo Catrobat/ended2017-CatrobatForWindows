@@ -23,7 +23,7 @@ Project::Project(
 	string								remixOf,
 	int									screenHeight,
 	int									screenWidth,
-	vector<string>*						tags,
+	vector<string>						tags,
 	string								url,
 	string								userHandle
 	) :
@@ -47,25 +47,6 @@ Project::Project(
 	m_url								(url),
 	m_userHandle						(userHandle)
 {
-	m_objectList = new ObjectList();
-    m_objectListInitial = new ObjectList();
-}
-
-//--------------------------------------------------------------------------------------------------
-
-Project::~Project()
-{
-    for (size_t i = 0; i < m_objectList->GetSize(); i++)
-    {
-        delete m_objectList->GetObject(i);
-    }
-    //delete m_objectList;
-
-    for (size_t i = 0; i < m_objectListInitial->GetSize(); i++)
-    {
-        delete m_objectListInitial->GetObject(i);
-    }
-    //delete m_objectListInitial;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -84,45 +65,45 @@ int	Project::GetScreenWidth()
 
 //--------------------------------------------------------------------------------------------------
 
-ObjectList *Project::GetObjectList()
+std::map<std::string, std::shared_ptr<Object> >	 Project::GetObjectList()
 {
 	return m_objectList;
 }
 
 //--------------------------------------------------------------------------------------------------
-ObjectList *Project::GetObjectListInitial()
+std::map<std::string, std::shared_ptr<Object> >	 Project::GetObjectListInitial()
 { 
     return m_objectListInitial; 
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void Project::Render(const std::shared_ptr<DX::DeviceResources>& deviceResources)
+void Project::Render(const shared_ptr<DX::DeviceResources>& deviceResources)
 {
-	for (int i = 0; i < m_objectList->GetSize(); i++)
-	{
-		m_objectList->GetObject(i)->Draw(deviceResources);
-	}
+    for each (pair<string, shared_ptr<Object>> obj in m_objectList)
+    {
+        obj.second->Draw(deviceResources);
+    }
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void Project::LoadTextures(const std::shared_ptr<DX::DeviceResources>& deviceResources)
+void Project::LoadTextures(const shared_ptr<DX::DeviceResources>& deviceResources)
 {
-	for (int i = 0; i < m_objectList->GetSize(); i++)
-	{
-		m_objectList->GetObject(i)->LoadTextures(deviceResources);
-	}
+    for each (pair<string, shared_ptr<Object>> obj in m_objectList)
+    {
+        obj.second->LoadTextures(deviceResources);
+    }
 }
 
 //--------------------------------------------------------------------------------------------------
 
 void Project::SetupWindowSizeDependentResources(
-    const std::shared_ptr<DX::DeviceResources>& deviceResources)
+    const shared_ptr<DX::DeviceResources>& deviceResources)
 {
-    for (int i = 0; i < m_objectList->GetSize(); i++)
+    for each (pair<string, shared_ptr<Object>> obj in m_objectList)
     {
-        m_objectList->GetObject(i)->SetupWindowSizeDependentResources(deviceResources);
+        obj.second->SetupWindowSizeDependentResources(deviceResources);
     }
 }
 
@@ -141,15 +122,15 @@ void Project::CheckProjectScreenSize()
 
 void Project::StartUp()
 {	
-	for (int i = 0; i < m_objectList->GetSize(); i++)
-	{
-		m_objectList->GetObject(i)->StartUp();
-	}
+    for each (pair<string, shared_ptr<Object>> obj in m_objectList)
+    {
+        obj.second->StartUp();
+    }
 }
 
 //--------------------------------------------------------------------------------------------------
 
-shared_ptr<UserVariable> Project::GetVariable(std::string name)
+shared_ptr<UserVariable> Project::GetVariable(string name)
 {
 	map<string, shared_ptr<UserVariable >>::iterator searchItem = m_variableList.find(name);
 	if (searchItem != m_variableList.end())
@@ -169,6 +150,13 @@ void Project::AddVariable(std::string name, shared_ptr<UserVariable> variable)
 void Project::AddVariable(std::pair<string, shared_ptr<UserVariable> > variable)
 {
 	m_variableList.insert(variable);
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void Project::AddObject(std::pair<string, shared_ptr<Object> > object)
+{
+	m_objectList.insert(object);
 }
 
 

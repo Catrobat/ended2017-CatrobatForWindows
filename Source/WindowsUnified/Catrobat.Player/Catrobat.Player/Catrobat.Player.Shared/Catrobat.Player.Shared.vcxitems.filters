@@ -118,9 +118,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Object.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ObjectList.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
       <Filter>Objects</Filter>
     </ClInclude>
@@ -345,9 +342,6 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Object.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ObjectList.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Project.cpp">

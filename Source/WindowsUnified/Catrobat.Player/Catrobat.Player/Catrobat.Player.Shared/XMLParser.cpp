@@ -116,7 +116,7 @@ void XMLParser::ParseXML(string xml)
     doc.parse<0>(temp);
 
     m_project = ParseProjectHeader(&doc);
-    ParseObjectList(&doc, m_project->GetObjectList());
+    ParseObjectList(&doc);
 
     ParseVariableList(&doc, m_project);
     SetPendingVariables();
@@ -158,7 +158,7 @@ Project* XMLParser::ParseProjectHeader(xml_document<> *doc)
     string					remixOf;
     int						screenHeight;
     int						screenWidth;
-    vector<string>*			tags;
+    vector<string>			tags;
     string					url;
     string					userHandle;
 
@@ -344,7 +344,7 @@ Project* XMLParser::ParseProjectHeader(xml_document<> *doc)
 
 //----------------------------------------------------------------------
 
-void XMLParser::ParseObjectList(xml_document<> *doc, ObjectList *objectList)
+void XMLParser::ParseObjectList(xml_document<> *doc)
 {
 	auto objectListNode = doc->first_node()->first_node(Constants::XMLParser::Object::ObjectList.c_str());
 
@@ -369,12 +369,13 @@ void XMLParser::ParseObjectList(xml_document<> *doc, ObjectList *objectList)
 
             if (nameNode)
             {
-                objectList->AddObject(objectList->GetObject(nameNode->value()));
+                //objectList->AddObject(objectList->GetObject(nameNode->value()));
             }
         }
         else
         {
-            objectList->AddObject(ParseObject(node));
+            auto object = ParseObject(node);
+			m_project->AddObject(pair<string, shared_ptr<Object> >(object->GetName(), object));
         }
 
         node = node->next_sibling(Constants::XMLParser::Object::Object.c_str());
@@ -383,7 +384,7 @@ void XMLParser::ParseObjectList(xml_document<> *doc, ObjectList *objectList)
                         
 //----------------------------------------------------------------------
 
-Object *XMLParser::ParseObject(xml_node<> *baseNode)
+shared_ptr<Object> XMLParser::ParseObject(xml_node<> *baseNode)
 {
 	auto node = baseNode->first_node(Constants::XMLParser::Object::Name.c_str());
 
@@ -392,7 +393,7 @@ Object *XMLParser::ParseObject(xml_node<> *baseNode)
 		return nullptr;
 	}
 
-	auto object = new Object(node->value());
+    shared_ptr<Object> object(new Object(node->value()));
 
     node = baseNode->first_node();
     while (node)
@@ -480,7 +481,7 @@ shared_ptr<Look> XMLParser::ParseLook(xml_node<> *baseNode)
 
 //----------------------------------------------------------------------
 
-shared_ptr<Script> XMLParser::ParseStartScript(xml_node<> *baseNode, Object *object)
+shared_ptr<Script> XMLParser::ParseStartScript(xml_node<> *baseNode, shared_ptr<Object> object)
 {
     shared_ptr<StartScript> script(new StartScript(object));
 	ParseBrickList(baseNode, script);
@@ -489,7 +490,7 @@ shared_ptr<Script> XMLParser::ParseStartScript(xml_node<> *baseNode, Object *obj
 
 //----------------------------------------------------------------------
 
-shared_ptr<Script> XMLParser::ParseBroadcastScript(xml_node<> *baseNode, Object *object)
+shared_ptr<Script> XMLParser::ParseBroadcastScript(xml_node<> *baseNode, std::shared_ptr<Object> object)
 {
     xml_node<> *messageNode = baseNode->first_node(Constants::XMLParser::Script::ReceivedMessage.c_str());
 
@@ -505,7 +506,7 @@ shared_ptr<Script> XMLParser::ParseBroadcastScript(xml_node<> *baseNode, Object 
 
 //----------------------------------------------------------------------
 
-shared_ptr<Script> XMLParser::ParseWhenScript(xml_node<> *baseNode, Object *object)
+shared_ptr<Script> XMLParser::ParseWhenScript(xml_node<> *baseNode, std::shared_ptr<Object> object)
 {
 	auto actionNode = baseNode->first_node(Constants::XMLParser::Object::Action.c_str());
 
@@ -1454,9 +1455,9 @@ bool XMLParser::ParseBoolean(string input)
 
 //----------------------------------------------------------------------
 
-vector<string> *XMLParser::ParseVector(string input)
+vector<string> XMLParser::ParseVector(string input)
 {
-    return new vector<string>();
+    return vector<string>();
 }
 
 //----------------------------------------------------------------------
@@ -1555,10 +1556,10 @@ void XMLParser::ParseObjectVariables(Project *project, const xml_node<> *baseNod
 			{
 				throw new XMLParserException("name node not found in XML.");
 			}
-			auto objectName = project->GetObjectList()->GetObject(nameNode->value());
-			if (!objectName)
+            auto object = project->GetObjectList().find(nameNode->value());
+            if (object != project->GetObjectList().end())
 			{
-				throw new XMLParserException("object name not found in XML.");
+				throw new XMLParserException("object not found in XML.");
 			}
 			auto listNode = entryNode->first_node(Constants::XMLParser::Formula::List.c_str());
 			if (!listNode)
@@ -1578,13 +1579,8 @@ void XMLParser::ParseObjectVariables(Project *project, const xml_node<> *baseNod
 				{
 					throw new XMLParserException("variable name node not found in XML.");
 				}
-				auto object = project->GetObjectList()->GetObject(objectName->GetName());
-				if (!object)
-				{
-					throw new XMLParserException("object not found in XML.");
-				}
 				auto variable = ParseUserVariable(variableNameNode);
-				object->AddVariable(variable);
+				object->second->AddVariable(variable);
 				variableNode = listNode->next_sibling(Constants::XMLParser::Formula::UserVariable.c_str());
 			}
 			entryNode = variableListNode->next_sibling(Constants::XMLParser::Formula::Entry.c_str());

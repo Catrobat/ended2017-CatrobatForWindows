@@ -20,7 +20,7 @@ namespace PlayerWindowsPhone8Test
 			Assert::IsTrue(success);
 
             Project *project = parser->GetProject();
-			Assert::AreEqual(project->GetObjectList()->GetSize(), 1);
+            Assert::AreEqual(project->GetObjectList().size(), size_t(1));
         }
     };
 }

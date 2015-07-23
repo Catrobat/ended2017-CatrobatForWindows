@@ -49,25 +49,23 @@ void Basic2DRenderer::ReleaseDeviceDependentResources()
 
 void Basic2DRenderer::PointerPressed(D2D1_POINT_2F point)
 {
-    ObjectList *objectList = ProjectDaemon::Instance()->GetProject()->GetObjectList();
-    for (int i = objectList->GetSize() - 1; i >= 0; i--)
-    {
-        Object *object = objectList->GetObject(i);
-        if (object->IsObjectHit(point))
-        {
-            for (int scriptIndex = 0; scriptIndex < object->GetScriptListSize(); scriptIndex++)
-            {
-                shared_ptr<Script> script = object->GetScript(scriptIndex);
-                if (script->GetType() == Script::TypeOfScript::WhenScript)
-                {
-                    shared_ptr<WhenScript> whenScript = dynamic_pointer_cast<WhenScript>(script);
-                    if (whenScript->GetAction() == WhenScript::Action::Tapped)
-                    {
-                        whenScript->Execute();
-                    }
-                }
-            }
-            break;
-        }
-    }
+	for each (pair<string, shared_ptr<Object>> var in ProjectDaemon::Instance()->GetProject()->GetObjectList())
+	{
+		if (var.second->IsObjectHit(point))
+		{
+			for (int scriptIndex = 0; scriptIndex < var.second->GetScriptListSize(); scriptIndex++)
+			{
+				shared_ptr<Script> script = var.second->GetScript(scriptIndex);
+				if (script->GetType() == Script::TypeOfScript::WhenScript)
+				{
+					shared_ptr<WhenScript> whenScript = dynamic_pointer_cast<WhenScript>(script);
+					if (whenScript->GetAction() == WhenScript::Action::Tapped)
+					{
+						whenScript->Execute();
+					}
+				}
+			}
+			break;
+		}
+	}
 }

@@ -8,8 +8,9 @@
 
 using namespace Windows::System::Threading;
 using namespace Windows::Foundation;
+using namespace std;
 
-Script::Script(TypeOfScript scriptType, Object *parent) :
+Script::Script(TypeOfScript scriptType, shared_ptr<Object> parent) :
 m_scriptType(scriptType), m_parent(parent)
 {
     m_brickList = new std::list<Brick*>();
@@ -58,7 +59,7 @@ void Script::Execute()
     m_threadPoolWorkItem = ThreadPool::RunAsync(workItem);
 }
 
-Object *Script::GetParent()
+shared_ptr<Object> Script::GetParent()
 {
     return m_parent;
 }

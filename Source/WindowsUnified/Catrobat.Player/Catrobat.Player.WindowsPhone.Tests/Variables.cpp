@@ -38,7 +38,7 @@ namespace PlayerWindowsPhone8Test
         string					m_remixOf;
         int						m_screenHeight;
         int						m_screenWidth;
-        vector<string>*			m_tags;
+        vector<string>			m_tags;
         string					m_url;
         string					m_userHandle;
 
@@ -65,13 +65,13 @@ namespace PlayerWindowsPhone8Test
             m_remixOf                   = "remixOfTestProject";
             m_screenHeight              = 100;
             m_screenWidth               = 200;
-            m_tags                      = new vector<string>();
+            m_tags                      = vector<string>();
             m_url                       = "testProjectURL";
             m_userHandle                = "testProjectUserHandle";
 
             time(&m_dateTimeUpload);
-            m_tags->push_back("testProjectTag1");
-            m_tags->push_back("testProjectTag2");
+            m_tags.push_back("testProjectTag1");
+            m_tags.push_back("testProjectTag2");
 
             #pragma endregion
 

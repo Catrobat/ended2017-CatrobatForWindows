@@ -4,7 +4,6 @@
 #include <rapidxml\rapidxml.hpp>
 
 #include "Project.h"
-#include "ObjectList.h"
 #include "Object.h"
 #include "Look.h"
 #include "Brick.h"
@@ -33,13 +32,13 @@ private:
 	void									ParseXML						(std::string xml);
 	Project*								ParseProjectHeader				(rapidxml::xml_document<> *doc);
 
-	void									ParseObjectList					(rapidxml::xml_document<> *doc, ObjectList *objectList);
-	Object*									ParseObject						(rapidxml::xml_node<> *baseNode);
+	void									ParseObjectList					(rapidxml::xml_document<> *doc);
+	std::shared_ptr<Object>					ParseObject						(rapidxml::xml_node<> *baseNode);
 	std::shared_ptr<Look>					ParseLook						(rapidxml::xml_node<> *baseNode);
 
-	std::shared_ptr<Script>					ParseStartScript				(rapidxml::xml_node<> *baseNode, Object *object);
-    std::shared_ptr<Script>					ParseBroadcastScript            (rapidxml::xml_node<> *baseNode, Object *object);
-    std::shared_ptr<Script>				    ParseWhenScript                 (rapidxml::xml_node<> *baseNode, Object *object);
+	std::shared_ptr<Script>					ParseStartScript				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Object> object);
+    std::shared_ptr<Script>					ParseBroadcastScript            (rapidxml::xml_node<> *baseNode, std::shared_ptr<Object> object);
+    std::shared_ptr<Script>				    ParseWhenScript                 (rapidxml::xml_node<> *baseNode, std::shared_ptr<Object> object);
 
 	void									ParseBrickList					(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
     Brick*									ParseLookBrick                  (rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
@@ -85,6 +84,6 @@ private:
 
 	// Parser Helper Methods
 	bool									ParseBoolean					(std::string input);
-	std::vector<std::string>*				ParseVector						(std::string input);
+	std::vector<std::string>				ParseVector						(std::string input);
 	time_t									ParseDateTime					(std::string input);
 };
