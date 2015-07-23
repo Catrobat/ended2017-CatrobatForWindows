@@ -241,6 +241,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_utils.hpp">
       <Filter>XMLParser</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ObjectList.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
@@ -455,6 +456,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParser.cpp">
       <Filter>XMLParser</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ObjectList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

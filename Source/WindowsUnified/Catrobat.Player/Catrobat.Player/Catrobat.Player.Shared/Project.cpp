@@ -160,3 +160,9 @@ void Project::AddObject(std::pair<string, shared_ptr<Object> > object)
 }
 
 
+std::string Project::GetProgramName() 
+{ 
+	return m_programName; 
+}
+
+

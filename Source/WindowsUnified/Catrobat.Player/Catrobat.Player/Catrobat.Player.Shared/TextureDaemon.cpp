@@ -37,6 +37,14 @@ void TextureDaemon::LoadTexture(const shared_ptr<DX::DeviceResources>& deviceRes
 
     //string path is converted to LPCWSTR format
     std::string path = ProjectDaemon::Instance()->GetProjectPath() + "\\images\\" + textureKey;
+
+#if _WINRT_DLL
+	// Code for Catrobat.Player.WindowsPhone
+#elif PSAPI_VERSION
+	// Code for Catrobat.Player.WindowsPhone.Tests
+	path = textureKey;
+#endif
+
     std::wstring stemp = std::wstring(path.begin(), path.end());
     LPCWSTR lPath = stemp.c_str();
 

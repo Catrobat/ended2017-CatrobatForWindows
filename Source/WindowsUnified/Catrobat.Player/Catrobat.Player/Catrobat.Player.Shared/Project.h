@@ -39,6 +39,8 @@ public:
     // Getters
     int									    GetScreenHeight();
     int									    GetScreenWidth();
+	std::string								GetProgramName();
+	std::string								GetCatrobatLanguageVersion() { return m_catrobatLanguageVersion;  }
     std::map<std::string, std::shared_ptr<Object> >		GetObjectList();
     std::map<std::string, std::shared_ptr<Object> >	     GetObjectListInitial();
     std::shared_ptr<UserVariable>						    GetVariable(std::string name);
@@ -51,7 +53,6 @@ public:
 	std::string								GetApplicationName(){ return m_applicationName; }
 
 	std::string								GetApplicationVersion(){ return m_applicationVersion; }
-	std::string								GetCatrobatLanguageVersion(){return m_catrobatLanguageVersion; }
 	time_t									GetDateTimeUpload(){return m_dateTimeUpload; }
 	std::string								GetDescription(){return m_description; }
 	std::string								GetDeviceName(){return m_deviceName; }
@@ -59,7 +60,6 @@ public:
 	std::string								GetPlatform(){return m_platform; }
 	int										GetPlatformVersion(){return m_platformVersion; }
 	std::string								GetProgramLicense(){return m_programLicense; }
-	std::string								GetProgramName(){return m_programName; }
 	std::string								GetRemixOf(){ return m_remixOf; }
 	std::vector<std::string>				GetTags(){ return m_tags; }
 	std::string								GetUrl(){ return m_url; }

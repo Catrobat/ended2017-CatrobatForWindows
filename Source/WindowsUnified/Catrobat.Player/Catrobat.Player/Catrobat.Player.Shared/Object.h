@@ -58,6 +58,8 @@ public:
     int GetLookListSize();
     int GetIndexOfCurrentLook();
 
+	std::shared_ptr<Look> GetCurrentLook() { return m_look; };
+
     bool IsObjectHit(D2D1_POINT_2F position);
 
 private:
