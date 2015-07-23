@@ -65,16 +65,18 @@ int Look::GetPixelAlphaValue(D2D1_POINT_2F position)
         throw new PlayerException("Look::No texture defined.");
     }
 
+	std::vector<std::vector<int> > map = m_texture->GetAlphaMap();
+
     int x = (int) round(position.x);
     int y = (int) round(position.y);
 
     if (x < 0 || y < 0)
     {
-        throw new OutOfBoundsException();
+		return 0;
     }
     else if (m_texture->GetAlphaMap().size() < y || m_texture->GetAlphaMap().at(y).size() < x)
     {
-        throw new OutOfBoundsException();
+		return 0;
     }
     return m_texture->GetAlphaMap().at(y).at(x);
 }
