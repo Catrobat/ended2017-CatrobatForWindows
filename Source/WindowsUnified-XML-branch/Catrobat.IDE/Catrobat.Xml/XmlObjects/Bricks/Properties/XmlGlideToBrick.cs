@@ -17,9 +17,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            //DurationInSeconds = new XmlFormula(xRoot.Element("durationInSeconds"));
-            //XDestination = new XmlFormula(xRoot.Element("xDestination"));
-            //YDestination = new XmlFormula(xRoot.Element("yDestination"));
             DurationInSeconds = new XmlFormula(xRoot.Element(XmlConstants.DurationInSeconds));
             XDestination = new XmlFormula(xRoot.Element(XmlConstants.XDestination));
             YDestination = new XmlFormula(xRoot.Element(XmlConstants.YDestination));
@@ -27,23 +24,17 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override XElement CreateXml()
         {
-            //var xRoot = new XElement("glideToBrick");
-            //var xRoot = new XElement("brick");
-            //xRoot.SetAttributeValue("type", "glideToBrick");
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlGlideToBrickType);
 
-            //var xVariable1 = new XElement("yDestination");
             var xVariable1 = new XElement(XmlConstants.YDestination);
             xVariable1.Add(YDestination.CreateXml());
             xRoot.Add(xVariable1);
 
-            //var xVariable2 = new XElement("xDestination");
             var xVariable2 = new XElement(XmlConstants.XDestination);
             xVariable2.Add(XDestination.CreateXml());
             xRoot.Add(xVariable2);
 
-            //var xVariable3 = new XElement("durationInSeconds");
             var xVariable3 = new XElement(XmlConstants.DurationInSeconds);
             xVariable3.Add(DurationInSeconds.CreateXml());
             xRoot.Add(xVariable3);

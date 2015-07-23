@@ -15,11 +15,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override XElement CreateXml()
         {
-            //var xRoot = new XElement("oreverBrick");
             var xRoot = new XElement(XmlConstants.Brick);
-            //var xRoot = new XElement("brick");
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlForeverBrickType);
-            //xRoot.SetAttributeValue("type", "ForeverBrick");
             base.CreateCommonXML(xRoot);
 
             return xRoot;

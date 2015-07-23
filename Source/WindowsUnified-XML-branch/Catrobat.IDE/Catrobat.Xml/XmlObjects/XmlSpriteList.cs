@@ -21,14 +21,12 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            //foreach (XElement xSprite in xRoot.Elements("object"))
             foreach (XElement xSprite in xRoot.Elements(XmlConstants.Object))
             {
                 Sprites.Add(new XmlSprite());
             }
 
             var enumerator = Sprites.GetEnumerator();
-            //foreach (XElement xSprite in xRoot.Elements("object"))
             foreach (XElement xSprite in xRoot.Elements(XmlConstants.Object))
             {
                 enumerator.MoveNext();
@@ -38,7 +36,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override XElement CreateXml()
         {
-            //var xRoot = new XElement("objectList");
             var xRoot = new XElement(XmlConstants.ObjectList);
 
             foreach (XmlSprite sprite in Sprites)

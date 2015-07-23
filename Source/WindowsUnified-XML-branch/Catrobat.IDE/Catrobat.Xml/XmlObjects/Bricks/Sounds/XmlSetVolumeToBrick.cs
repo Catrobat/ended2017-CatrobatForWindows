@@ -13,19 +13,14 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            //Volume = new XmlFormula(xRoot.Element("volume"));
             Volume = new XmlFormula(xRoot.Element(XmlConstants.Volume));
         }
 
         internal override XElement CreateXml()
         {
-            //var xRoot = new XElement("setVolumeToBrick");
-            //var xRoot = new XElement("brick");
-            //xRoot.SetAttributeValue("type", "setVolumeToBrick");
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlSetVolumeToBrickType);
 
-            //var xVariable = new XElement("volume");
             var xVariable = new XElement(XmlConstants.Volume);
             xVariable.Add(Volume.CreateXml());
             xRoot.Add(xVariable);

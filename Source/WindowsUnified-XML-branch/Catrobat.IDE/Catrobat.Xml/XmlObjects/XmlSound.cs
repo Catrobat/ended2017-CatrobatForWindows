@@ -24,21 +24,16 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            //FileName = xRoot.Element("fileName").Value;
-            //Name = xRoot.Element("name").Value;
             FileName = xRoot.Element(XmlConstants.FileName).Value;
             Name = xRoot.Element(XmlConstants.Name).Value;
         }
 
         internal override XElement CreateXml()
         {
-            //var xRoot = new XElement("sound");
             var xRoot = new XElement(XmlConstants.Sound);
 
-            //xRoot.Add(new XElement("fileName", FileName));
             xRoot.Add(new XElement(XmlConstants.FileName, FileName));
 
-            //xRoot.Add(new XElement("name", Name));
             xRoot.Add(new XElement(XmlConstants.Name, Name));
 
             return xRoot;

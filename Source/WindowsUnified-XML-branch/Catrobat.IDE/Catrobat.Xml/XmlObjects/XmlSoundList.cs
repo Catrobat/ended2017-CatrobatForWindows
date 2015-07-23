@@ -29,7 +29,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override XElement CreateXml()
         {
-            //var xRoot = new XElement("soundList");
             var xRoot = new XElement(XmlConstants.XmlSoundList);
 
             foreach (XmlSound sound in Sounds)

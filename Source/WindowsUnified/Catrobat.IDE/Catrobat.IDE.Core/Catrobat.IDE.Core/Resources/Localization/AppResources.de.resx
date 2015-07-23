@@ -271,10 +271,10 @@
     <value>Wenn angetippt</value>
   </data>
   <data name="Editor_ActionPlural" xml:space="preserve">
-    <value>Aktionen</value>
+    <value>Skripten</value>
   </data>
   <data name="Editor_ActionSingular" xml:space="preserve">
-    <value>Aktion</value>
+    <value>Skript</value>
   </data>
   <data name="Editor_BroadcastMessage" xml:space="preserve">
     <value>Nachricht</value>
@@ -286,7 +286,7 @@
     <value>Neues Objekt</value>
   </data>
   <data name="Editor_ButtonAddScript" xml:space="preserve">
-    <value>Neue Aktion</value>
+    <value>Neues Skript</value>
   </data>
   <data name="Editor_ButtonAddSound" xml:space="preserve">
     <value>Neuer Klang</value>
@@ -403,7 +403,7 @@
     <value>Objekt</value>
   </data>
   <data name="Editor_PivotActions" xml:space="preserve">
-    <value>Aktionen</value>
+    <value>Skripten</value>
   </data>
   <data name="Editor_PivotLooks" xml:space="preserve">
     <value>Aussehen</value>
@@ -478,7 +478,7 @@
     <value>KLANGNAMEN WÄHLEN</value>
   </data>
   <data name="Editor_TitleNewAction" xml:space="preserve">
-    <value>NEUE AKTION</value>
+    <value>NEUES SKRIPT</value>
   </data>
   <data name="Editor_TitleNewBroadcastMessage" xml:space="preserve">
     <value>NEUE NACHRICHT</value>
@@ -850,7 +850,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Erneut auf "zurück" um die App zu schließen?</value>
   </data>
   <data name="Editor_ClickPlusToAddAction" xml:space="preserve">
-    <value>Tippe auf '+' um eine neue Aktion hinzuzufügen.</value>
+    <value>Tippe auf '+' um eine neues Skript hinzuzufügen.</value>
   </data>
   <data name="Editor_ClickPlusToAddLook" xml:space="preserve">
     <value>Tippe auf '+' um ein neues Aussehen hinzuzufügen.</value>

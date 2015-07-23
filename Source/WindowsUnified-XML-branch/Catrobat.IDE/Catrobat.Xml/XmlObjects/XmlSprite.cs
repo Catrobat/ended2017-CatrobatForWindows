@@ -31,27 +31,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             XmlParserTempProjectHelper.Sprite = this;
 
-            //if (xRoot.Element("lookList") != null)
             if (xRoot.Element(XmlConstants.XmlLookListType) != null)
             {
-                //Looks = new XmlLookList(xRoot.Element("lookList"));
-                Looks = new XmlLookList(xRoot.Element(XmlConstants.XmlLookListType));
+                 Looks = new XmlLookList(xRoot.Element(XmlConstants.XmlLookListType));
             }
 
-            //Name = xRoot.Element("name").Value;
-            //Name = xRoot.Attribute("name").Value;
             Name = xRoot.Attribute(XmlConstants.Name).Value;
 
-            //if (xRoot.Element("soundList") != null)
             if (xRoot.Element(XmlConstants.XmlSoundList) != null)
             {
-                //Sounds = new XmlSoundList(xRoot.Element("soundList"));
                 Sounds = new XmlSoundList(xRoot.Element(XmlConstants.XmlSoundList));
             }
-            //if (xRoot.Element("scriptList") != null)
             if (xRoot.Element(XmlConstants.ScriptList) != null)
             {
-                //Scripts = new XmlScriptList(xRoot.Element("scriptList"));
                 Scripts = new XmlScriptList(xRoot.Element(XmlConstants.ScriptList));
             }
         }
@@ -60,8 +52,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             XmlParserTempProjectHelper.Sprite = this;
 
-            //var xRoot = new XElement("object");
-            //xRoot.SetAttributeValue("name", Name.ToString());
             var xRoot = new XElement(XmlConstants.Object);
             xRoot.SetAttributeValue(XmlConstants.Name, Name.ToString());
 

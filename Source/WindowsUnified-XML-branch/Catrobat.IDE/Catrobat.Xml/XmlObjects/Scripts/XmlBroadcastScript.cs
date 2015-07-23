@@ -12,24 +12,20 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            //if (xRoot.Element("receivedMessage") != null)
             if (xRoot.Element(XmlConstants.ReceivedMessage) != null)
             {
-                //ReceivedMessage = xRoot.Element("receivedMessage").Value;
                 ReceivedMessage = xRoot.Element(XmlConstants.ReceivedMessage).Value;
             }
         }
 
         internal override XElement CreateXml()
         {
-            //var xRoot = new XElement("broadcastScript");
             var xRoot = new XElement(XmlConstants.XmlBroadcastScriptType);
 
             CreateCommonXML(xRoot);
 
             if (ReceivedMessage != null)
             {
-                //xRoot.Add(new XElement("receivedMessage")
                 xRoot.Add(new XElement(XmlConstants.ReceivedMessage)
                 {
                     Value = ReceivedMessage
