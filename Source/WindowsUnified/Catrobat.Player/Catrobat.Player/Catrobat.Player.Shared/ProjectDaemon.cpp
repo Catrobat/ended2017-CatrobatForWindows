@@ -128,81 +128,107 @@ task<bool> ProjectDaemon::OpenProject(Platform::String^ projectName)
 
 void ProjectDaemon::SetProjectInitialValues()
 {
-    // Object values
-    ObjectList* objectList = m_project->GetObjectList();
-    ObjectList* objectListInitial = m_project->GetObjectListInitial();
+	//map<string, shared_ptr<Object>> objects = m_project->GetObjectList();
+	//map<string, shared_ptr<Object>> initialObjects = m_project->GetObjectListInitial();
+	//for each (pair<string, shared_ptr<Object>> var in objects)
+	//{
+	//	shared_ptr<Object> initial(new Object(var.first));
+	//	initial->SetTransparency(var.second->GetTransparency());
+	//	initial->SetRotation(var.second->GetRotation());
+	//	float x, y;
+	//	var.second->GetTranslation(x, y);
+	//	initial->SetTranslation(x, y);
+	//	var.second->GetScale(x, y);
+	//	initial->SetScale(x, y);
 
-    for (int i = 0; i < objectList->GetSize(); i++)
-    {
-        Object* object = objectList->GetObject(i);
-        Object* objectInitial = new Object();
+	//	for each (std::pair<std::string, shared_ptr<UserVariable> > e in (object->GetVariableList()))
+	//	{
+	//		shared_ptr<UserVariable>userVariableInital(new UserVariable(e.second->GetName(), e.second->GetValue()));
+	//		objectInitial->AddVariable(pair<string, shared_ptr<UserVariable> >(e.first, userVariableInital));
+	//	}
+	//	initialObjects.insert(pair<string, shared_ptr<Object>>(initial->GetName(), initial));
+	//}
 
-        objectInitial->SetTransparency(object->GetTransparency());
-        objectInitial->SetRotation(object->GetRotation());
-        float x;
-        float y;
-        object->GetTranslation(x, y);
-        objectInitial->SetTranslation(x, y);
-        object->GetScale(x, y);
-        objectInitial->SetScale(x, y);
+	//// Object values
+ //   ObjectList* objectList = m_project->GetObjectList();
+ //   ObjectList* objectListInitial = m_project->GetObjectListInitial();
 
-        for each (std::pair<std::string, shared_ptr<UserVariable> > e in (object->GetVariableList()))
-        {
-            shared_ptr<UserVariable>userVariableInital(new UserVariable(e.second->GetName(), e.second->GetValue()));
-            objectInitial->AddVariable(pair<string, shared_ptr<UserVariable> >(e.first, userVariableInital));
-        }
+ //   for (int i = 0; i < objectList->GetSize(); i++)
+ //   {
+ //       Object* object = objectList->GetObject(i);
+ //       Object* objectInitial = new Object();
 
-        objectListInitial->AddObject(objectInitial);
-    }
+ //       objectInitial->SetTransparency(object->GetTransparency());
+ //       objectInitial->SetRotation(object->GetRotation());
+ //       float x;
+ //       float y;
+ //       object->GetTranslation(x, y);
+ //       objectInitial->SetTranslation(x, y);
+ //       object->GetScale(x, y);
+ //       objectInitial->SetScale(x, y);
 
-    // UserVariable values
-    map<string, shared_ptr<UserVariable> > variableList = m_project->GetVariableList();
-    map<string, string> variableListValueInitial = m_project->GetVariableListValueInitial();
+ //       for each (std::pair<std::string, shared_ptr<UserVariable> > e in (object->GetVariableList()))
+ //       {
+ //           shared_ptr<UserVariable>userVariableInital(new UserVariable(e.second->GetName(), e.second->GetValue()));
+ //           objectInitial->AddVariable(pair<string, shared_ptr<UserVariable> >(e.first, userVariableInital));
+ //       }
 
-    for each (std::pair<std::string, shared_ptr<UserVariable> > e in (variableList))
-    {
-        variableListValueInitial.insert(pair<string, string>(e.first, e.second->GetValue()));
-    }
+ //       objectListInitial->AddObject(objectInitial);
+ //   }
+
+ //   // UserVariable values
+ //   map<string, shared_ptr<UserVariable> > variableList = m_project->GetVariableList();
+ //   map<string, string> variableListValueInitial = m_project->GetVariableListValueInitial();
+
+ //   for each (std::pair<std::string, shared_ptr<UserVariable> > e in (variableList))
+ //   {
+ //       variableListValueInitial.insert(pair<string, string>(e.first, e.second->GetValue()));
+ //   }
 }
 
 void ProjectDaemon::RestartProject()
 {
-    // Set Object values to initial state
-    ObjectList* objectList = m_project->GetObjectList();
-    ObjectList* objectListInitial = m_project->GetObjectListInitial();
+ //   // Set Object values to initial state
+	//map<string, shared_ptr<Object>> objects = m_project->GetObjectList();
+	//map<string, shared_ptr<Object>> objectsInitial = m_project->GetObjectListInitial();
 
-    for (int i = 0; i < objectList->GetSize(); i++)
-    {
-        Object* object = objectList->GetObject(i);
-        Object* objectInitial = objectListInitial->GetObject(i);
+	//for each (pair<string, shared_ptr<Object>> var in objects)
+	//{
 
-        object->SetTransparency(objectInitial->GetTransparency());
-        object->SetRotation(objectInitial->GetRotation());
-        float x;
-        float y;
-        objectInitial->GetTranslation(x, y);
-        object->SetTranslation(x, y);
-        objectInitial->GetScale(x, y);
-        object->SetScale(x, y);
+	//}
 
-        for each (pair<string, shared_ptr<UserVariable> > e in (object->GetVariableList()))
-        {
-            shared_ptr<UserVariable> userVariableInital = objectInitial->GetVariable(e.first);
-            e.second->SetValue(userVariableInital->GetValue());
-        }
-    }
+ //   for (int i = 0; i < objectList->GetSize(); i++)
+ //   {
+ //       Object* object = objectList->GetObject(i);
+ //       Object* objectInitial = objectListInitial->GetObject(i);
 
-    // Set UserVariable values to initial state
-    map<string, shared_ptr<UserVariable> > variableList = m_project->GetVariableList();
-    map<string, string> variableListValueInitial = m_project->GetVariableListValueInitial();
+ //       object->SetTransparency(objectInitial->GetTransparency());
+ //       object->SetRotation(objectInitial->GetRotation());
+ //       float x;
+ //       float y;
+ //       objectInitial->GetTranslation(x, y);
+ //       object->SetTranslation(x, y);
+ //       objectInitial->GetScale(x, y);
+ //       object->SetScale(x, y);
 
-    for each (pair<string, shared_ptr<UserVariable> > e in (variableList))
-    {
-        string userVariableValueInitial = variableListValueInitial.at(e.first);
-        e.second->SetValue(userVariableValueInitial);
-    }
+ //       for each (pair<string, shared_ptr<UserVariable> > e in (object->GetVariableList()))
+ //       {
+ //           shared_ptr<UserVariable> userVariableInital = objectInitial->GetVariable(e.first);
+ //           e.second->SetValue(userVariableInital->GetValue());
+ //       }
+ //   }
 
-    m_project->StartUp();
+ //   // Set UserVariable values to initial state
+ //   map<string, shared_ptr<UserVariable> > variableList = m_project->GetVariableList();
+ //   map<string, string> variableListValueInitial = m_project->GetVariableListValueInitial();
+
+ //   for each (pair<string, shared_ptr<UserVariable> > e in (variableList))
+ //   {
+ //       string userVariableValueInitial = variableListValueInitial.at(e.first);
+ //       e.second->SetValue(userVariableValueInitial);
+ //   }
+
+ //   m_project->StartUp();
 }
 
 vector<Platform::String^> *ProjectDaemon::GetProjectList()

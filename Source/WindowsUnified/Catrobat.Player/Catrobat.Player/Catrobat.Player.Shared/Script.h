@@ -21,7 +21,7 @@ public:
 		WhenScript
 	};
 
-	Object *GetParent();
+	std::shared_ptr<Object> GetParent();
 
 	void AddBrick(Brick *brick);
 	void AddSpriteReference(std::string spriteReference);
@@ -35,13 +35,13 @@ public:
     bool IsRunning();
 
 protected:
-	Script(TypeOfScript scriptType, Object *parent);
+	Script(TypeOfScript scriptType, std::shared_ptr<Object> parent);
     virtual ~Script() {}
 
 	std::list<Brick*> *m_brickList;
 
 private:
-	Object *m_parent;
+	std::shared_ptr<Object> m_parent;
 	TypeOfScript m_scriptType;
 	std::string m_spriteReference;
     void SetIsRunning(bool isRunning);

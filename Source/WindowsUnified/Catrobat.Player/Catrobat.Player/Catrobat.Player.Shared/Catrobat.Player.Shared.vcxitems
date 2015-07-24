@@ -66,7 +66,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MoveNStepsBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NextLookBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Object.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)ObjectList.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)OutOfBoundsException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)pch.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PlaceAtBrick.h" />
@@ -145,7 +144,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MoveNStepsBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NextLookBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Object.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)ObjectList.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OutOfBoundsException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

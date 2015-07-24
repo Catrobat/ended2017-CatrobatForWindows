@@ -15,7 +15,7 @@ public:
     std::string GetFileName();
     std::string GetName();
     int GetPixelAlphaValue(D2D1_POINT_2F position);
-
+	
     unsigned int GetWidth();
     unsigned int GetHeight();
 
@@ -23,4 +23,13 @@ private:
     std::unique_ptr<CatrobatTexture> m_texture;
     std::string m_filename;
     std::string m_name;
+	std::vector<std::vector<int>> m_alphamap;
+
+#if PSAPI_VERSION
+// Code for Catrobat.Player.WindowsPhone.Tests
+public: 
+	void SetAlphaMap(std::vector<std::vector<int>> aMap);
+	std::vector<std::vector<int>> GetAlphaMap() { return m_alphamap; };
+#endif
+
 };

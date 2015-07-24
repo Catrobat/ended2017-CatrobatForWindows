@@ -7,7 +7,7 @@ class BroadcastScript :
 	public Script
 {
 public:
-	BroadcastScript(std::string receivedMessage, Object *parent);
+	BroadcastScript(std::string receivedMessage, std::shared_ptr<Object> parent);
 
 	void EvaluateMessage(Platform::String ^message);
 

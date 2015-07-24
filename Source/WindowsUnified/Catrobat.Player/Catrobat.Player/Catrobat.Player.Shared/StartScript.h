@@ -6,5 +6,5 @@ class StartScript :
 	public Script
 {
 public:
-	StartScript(Object *parent);
+	StartScript(std::shared_ptr<Object> parent);
 };

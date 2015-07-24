@@ -2,7 +2,9 @@
 #include "BroadcastScript.h"
 #include "BroadcastMessageDaemon.h"
 
-BroadcastScript::BroadcastScript(std::string receivedMessage, Object *parent) :
+using namespace std;
+
+BroadcastScript::BroadcastScript(std::string receivedMessage, shared_ptr<Object> parent) :
 Script(TypeOfScript::BroadcastScript, parent), m_receivedMessage(receivedMessage)
 {
     m_broadcastMessageListener = ref new BroadcastMessageListener();

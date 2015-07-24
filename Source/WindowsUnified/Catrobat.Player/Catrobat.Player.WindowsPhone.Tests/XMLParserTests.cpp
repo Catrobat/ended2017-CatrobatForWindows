@@ -39,7 +39,7 @@ namespace PlayerWindowsPhone8Test
 			Assert::IsTrue(success);
 
             Project *project = parser->GetProject();
-			Assert::AreEqual(project->GetObjectList()->GetSize(), 2);
+			Assert::AreEqual(project->GetObjectList().size(), size_t(2));
 		}
 
 		TEST_METHOD(XMLParserTests_ObjectList)
@@ -49,7 +49,7 @@ namespace PlayerWindowsPhone8Test
 			Assert::IsTrue(success);
 
             Project *project = parser->GetProject();
-			Assert::AreEqual(project->GetObjectList()->GetSize(), 30);
+			Assert::AreEqual(project->GetObjectList().size(), size_t(30));
 		}
 
 		TEST_METHOD(XMLParserTests_BroadcastTest)
@@ -59,7 +59,7 @@ namespace PlayerWindowsPhone8Test
 			Assert::IsTrue(success);
 
             Project *project = parser->GetProject();
-			Assert::AreEqual(project->GetObjectList()->GetSize(), 2);
+			Assert::AreEqual(project->GetObjectList().size(), size_t(2));
 		}
 	};
 }

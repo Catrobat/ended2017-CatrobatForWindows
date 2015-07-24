@@ -118,9 +118,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Object.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ObjectList.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
       <Filter>Objects</Filter>
     </ClInclude>
@@ -244,6 +241,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_utils.hpp">
       <Filter>XMLParser</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ObjectList.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
@@ -345,9 +343,6 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Object.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ObjectList.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Project.cpp">
@@ -461,6 +456,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParser.cpp">
       <Filter>XMLParser</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ObjectList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

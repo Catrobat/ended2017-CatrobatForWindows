@@ -11,7 +11,7 @@ public:
 		Tapped
 	};
 
-	WhenScript(std::string action, Object *parent);
+	WhenScript(std::string action, std::shared_ptr<Object> parent);
 
 	int GetAction();
 

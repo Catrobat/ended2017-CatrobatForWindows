@@ -6,8 +6,9 @@
 
 using namespace Windows::System::Threading;
 using namespace Windows::Foundation;
+using namespace std;
 
-WhenScript::WhenScript(std::string action, Object *parent) :
+WhenScript::WhenScript(std::string action, shared_ptr<Object> parent) :
 	Script(TypeOfScript::WhenScript, parent)
 {
     if (action == "Tapped")
