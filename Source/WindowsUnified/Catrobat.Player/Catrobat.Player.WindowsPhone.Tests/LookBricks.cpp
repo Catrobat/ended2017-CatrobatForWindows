@@ -460,8 +460,8 @@ namespace PlayerWindowsPhone8Test
 
 			brick->Execute();
 			object->GetScale(actualX, actualY);
-			Assert::AreEqual(actualX, 8.f, EPSILON);
-			Assert::AreEqual(actualY, 8.f, EPSILON);
+			Assert::AreEqual(actualX, 0.08f, EPSILON);
+			Assert::AreEqual(actualY, 0.08f, EPSILON);
 		}
 
 		TEST_METHOD(LookBricks_SetSizeToBrick_CheckFor03)
@@ -479,8 +479,8 @@ namespace PlayerWindowsPhone8Test
 
 			brick->Execute();
 			object->GetScale(actualX, actualY);
-			Assert::AreEqual(actualX, 0.3f, EPSILON);
-			Assert::AreEqual(actualY, 0.3f, EPSILON);
+			Assert::AreEqual(actualX, 0.003f, EPSILON);
+			Assert::AreEqual(actualY, 0.003f, EPSILON);
 		}
 
 		TEST_METHOD(LookBricks_SetSizeToBrick_CheckForVariousChanges)
@@ -498,8 +498,8 @@ namespace PlayerWindowsPhone8Test
 
 			brick->Execute();
 			object->GetScale(actualX, actualY);
-			Assert::AreEqual(actualX, 100.f, EPSILON);
-			Assert::AreEqual(actualY, 100.f, EPSILON);
+			Assert::AreEqual(actualX, 1.f, EPSILON);
+			Assert::AreEqual(actualY, 1.f, EPSILON);
 
 			formulaTree = new FormulaTree("NUMBER", "-50");
 			brick = new SetSizeToBrick(formulaTree, script);
@@ -514,24 +514,24 @@ namespace PlayerWindowsPhone8Test
 
 			brick->Execute();
 			object->GetScale(actualX, actualY);
-			Assert::AreEqual(actualX, 30.f, EPSILON);
-			Assert::AreEqual(actualY, 30.f, EPSILON);
+			Assert::AreEqual(actualX, 0.3f, EPSILON);
+			Assert::AreEqual(actualY, 0.3f, EPSILON);
 
 			formulaTree = new FormulaTree("NUMBER", "20.8");
 			brick = new SetSizeToBrick(formulaTree, script);
 
 			brick->Execute();
 			object->GetScale(actualX, actualY);
-			Assert::AreEqual(actualX, 20.8f, EPSILON);
-			Assert::AreEqual(actualY, 20.8f, EPSILON);
+			Assert::AreEqual(actualX, 0.208f, EPSILON);
+			Assert::AreEqual(actualY, 0.208f, EPSILON);
 
 			formulaTree = new FormulaTree("NUMBER", "130.9");
 			brick = new SetSizeToBrick(formulaTree, script);
 
 			brick->Execute();
 			object->GetScale(actualX, actualY);
-			Assert::AreEqual(actualX, 130.9f, EPSILON);
-			Assert::AreEqual(actualY, 130.9f, EPSILON);
+			Assert::AreEqual(actualX, 1.309f, EPSILON);
+			Assert::AreEqual(actualY, 1.309f, EPSILON);
 		}
 
 		TEST_METHOD(LookBricks_ShowBrick)

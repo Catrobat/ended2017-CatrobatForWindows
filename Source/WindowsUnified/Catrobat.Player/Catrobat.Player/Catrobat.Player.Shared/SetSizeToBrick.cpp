@@ -12,6 +12,6 @@ m_scale(scale)
 
 void SetSizeToBrick::Execute()
 {
-    float scale = Interpreter::Instance()->EvaluateFormulaToFloat(m_scale, m_parent->GetParent());
+    float scale = Interpreter::Instance()->EvaluateFormulaToFloat(m_scale, m_parent->GetParent()) / 100;
     m_parent->GetParent()->SetScale(scale, scale);
 }

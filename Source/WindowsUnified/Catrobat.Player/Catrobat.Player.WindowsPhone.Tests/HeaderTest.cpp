@@ -201,7 +201,7 @@ namespace PlayerWindowsPhone8Test
 
 			Project *project = parser->GetProject();
 			std::vector<std::string> tags = std::vector<std::string>();
-			Assert::IsTrue(*(project->GetTags()) == tags);
+			Assert::IsTrue((project->GetTags()) == tags);
 		}
 
 		TEST_METHOD(Header_Url)
