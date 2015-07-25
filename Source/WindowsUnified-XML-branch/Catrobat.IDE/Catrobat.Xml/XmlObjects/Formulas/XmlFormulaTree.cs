@@ -23,10 +23,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if(xRoot.Element(XmlConstants.LeftChild)) != null)
+            if(xRoot.Element(XmlConstants.LeftChild) != null)
                 LeftChild = new XmlFormulaTree(xRoot.Element(XmlConstants.LeftChild));
-            if (xRoot.Element(XmlConstants.RightChild)) != null)
-                RightChild = new XmlFormulaTree(xRoot.Element(XmlConstants.RightChild)));
+            if (xRoot.Element(XmlConstants.RightChild) != null)
+                RightChild = new XmlFormulaTree(xRoot.Element(XmlConstants.RightChild));
 
             if (xRoot.Element(XmlConstants.Type) != null)
             VariableType = xRoot.Element(XmlConstants.Type).Value;
@@ -39,13 +39,13 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
             var xRoot = new XElement(XmlConstants.Formula);
 
             if(LeftChild != null)
-                xRoot.Add(LeftChild.CreateXML(XmlConstants.LeftChild)));
+                xRoot.Add(LeftChild.CreateXML(XmlConstants.LeftChild));
             if(RightChild != null)
-                xRoot.Add(RightChild.CreateXML(XmlConstants.RightChild)));
+                xRoot.Add(RightChild.CreateXML(XmlConstants.RightChild));
             if(VariableType != null)
-                xRoot.Add(new XElement(XmlConstants.Type), VariableType));
+                xRoot.Add(new XElement(XmlConstants.Type), VariableType);
             if(VariableValue != null)
-                xRoot.Add(new XElement(XmlConstants.Value), VariableValue));
+                xRoot.Add(new XElement(XmlConstants.Value), VariableValue);
 
             return xRoot;
         }
