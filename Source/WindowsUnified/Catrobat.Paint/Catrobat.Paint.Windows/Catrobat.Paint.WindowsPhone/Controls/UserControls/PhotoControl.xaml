@@ -47,7 +47,7 @@
         <Grid x:Name="GridControls" Background="#1F1F1F" VerticalAlignment="Bottom" Grid.Row="1">
             <AppBarButton x:Name="app_btnCancel" BorderBrush="White" Click="btnCancel_Click" Content="Cancel" Foreground="White" HorizontalAlignment="Left" Icon="Cancel" Label="Cancel" VerticalAlignment="Top"></AppBarButton>
             <AppBarButton x:Name="app_btnTakePhoto" BorderBrush="White" Click="btnTakePhoto_Click" Content="Snap" Foreground="White" HorizontalAlignment="Left" Icon="Camera" Label="Take photo" Margin="101,0,0,0" VerticalAlignment="Top"></AppBarButton>
-            <AppBarButton x:Name="app_btnbtnChangeCamera" BorderBrush="White" Click="btnChangeCamera_Click" Content="change Camera" Foreground="White" HorizontalAlignment="Left" Label="Change Camera" Margin="202,0,0,0" VerticalAlignment="Top"></AppBarButton>
+            <AppBarButton x:Name="app_btnbtnChangeCamera" BorderBrush="White" Click="btnChangeCamera_Click" Content="change Camera" Foreground="White" HorizontalAlignment="Left" Icon="RotateCamera" Label="Change Camera" Margin="202,0,0,0" VerticalAlignment="Top"></AppBarButton>
             <AppBarButton x:Name="app_btnSettings" BorderBrush="White" Click="app_btnSettings_Click" Content="Settings" Foreground="White" HorizontalAlignment="Left" Icon="More" Label="Settings" Margin="303,0,0,0" VerticalAlignment="Top"></AppBarButton>
             <!--<Button x:Name="btnCancel" Content="Cancel" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="White" Click="btnCancel_Click"/>-->
             <!--<Button x:Name="btnTakePhoto" Content="Snap" Foreground="White" HorizontalAlignment="Center" BorderBrush="White" VerticalAlignment="Top" Click="btnTakePhoto_Click"/>-->
