@@ -23,29 +23,29 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if(xRoot.Element("leftChild") != null)
-                LeftChild = new XmlFormulaTree(xRoot.Element("leftChild"));
-            if (xRoot.Element("rightChild") != null)
-                RightChild = new XmlFormulaTree(xRoot.Element("rightChild"));
+            if(xRoot.Element(XmlConstants.LeftChild) != null)
+                LeftChild = new XmlFormulaTree(xRoot.Element(XmlConstants.LeftChild));
+            if (xRoot.Element(XmlConstants.RightChild) != null)
+                RightChild = new XmlFormulaTree(xRoot.Element(XmlConstants.RightChild));
 
-            if (xRoot.Element("type") != null)
-            VariableType = xRoot.Element("type").Value;
-            if (xRoot.Element("value") != null)
-            VariableValue = xRoot.Element("value").Value;
+            if (xRoot.Element(XmlConstants.Type) != null)
+            VariableType = xRoot.Element(XmlConstants.Type).Value;
+            if (xRoot.Element(XmlConstants.Value) != null)
+            VariableValue = xRoot.Element(XmlConstants.Value).Value;
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("formulaTree");
+            var xRoot = new XElement(XmlConstants.Formula);
 
             if(LeftChild != null)
-                xRoot.Add(LeftChild.CreateXML("leftChild"));
+                xRoot.Add(LeftChild.CreateXML(XmlConstants.LeftChild));
             if(RightChild != null)
-                xRoot.Add(RightChild.CreateXML("rightChild"));
+                xRoot.Add(RightChild.CreateXML(XmlConstants.RightChild));
             if(VariableType != null)
-                xRoot.Add(new XElement("type", VariableType));
+                xRoot.Add(new XElement(XmlConstants.Type), VariableType);
             if(VariableValue != null)
-                xRoot.Add(new XElement("value", VariableValue));
+                xRoot.Add(new XElement(XmlConstants.Value), VariableValue);
 
             return xRoot;
         }
@@ -55,13 +55,13 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
             var xRoot = new XElement(childName);
 
             if (LeftChild != null)
-                xRoot.Add(LeftChild.CreateXML("leftChild"));
+                xRoot.Add(LeftChild.CreateXML(XmlConstants.LeftChild));
             if (RightChild != null)
-                xRoot.Add(RightChild.CreateXML("rightChild"));
+                xRoot.Add(RightChild.CreateXML(XmlConstants.RightChild));
             if (VariableType != null)
-                xRoot.Add(new XElement("type", VariableType));
+                xRoot.Add(new XElement(XmlConstants.Type, VariableType));
             if (VariableValue != null)
-                xRoot.Add(new XElement("value", VariableValue));
+                xRoot.Add(new XElement(XmlConstants.Value, VariableValue));
 
             return xRoot;
         }
