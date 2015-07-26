@@ -19,11 +19,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         internal override XElement CreateXml()
         {
             var xRoot = new XElement(XmlConstants.Brick);
-            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlChangeSizeByNBrickType);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlChangeSizeByNBrickType);                
 
-            var xVariable = new XElement(XmlConstants.SizeChange);
-            xVariable.Add(Size.CreateXml());
-            xRoot.Add(xVariable);
+            var xElement = Size.CreateXml();
+            xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.SizeChange);
+            xRoot.Add(xElement);
 
             return xRoot;
         }
