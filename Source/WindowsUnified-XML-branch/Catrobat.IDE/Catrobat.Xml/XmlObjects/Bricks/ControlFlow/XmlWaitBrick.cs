@@ -21,10 +21,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlWaitBrickType);
             
-            var xVariable = new XElement(XmlConstants.TimeToWaitInSeconds);
-
-            xVariable.Add(TimeToWaitInSeconds.CreateXml());
-            xRoot.Add(xVariable);
+            var xElement = TimeToWaitInSeconds.CreateXml();
+            xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.TimeToWaitInSeconds);
+            xRoot.Add(xElement);
 
             return xRoot;
         }

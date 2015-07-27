@@ -21,9 +21,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
            var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlChangeGhostEffectBrickType);
 
-            var xVariable = new XElement(XmlConstants.ChangeGhostEffect);
-            xVariable.Add(ChangeGhostEffect.CreateXml());
-            xRoot.Add(xVariable);
+            var xElement = ChangeGhostEffect.CreateXml();
+            xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.ChangeGhostEffect);
+            xRoot.Add(xElement);
 
             return xRoot;
         }

@@ -23,9 +23,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
             xRoot.SetAttributeValue(XmlConstants.Brick, XmlConstants.XmlRepeatBrickType);
             base.CreateCommonXML(xRoot);
 
-            var xVariable = new XElement(XmlConstants.TimesToRepeat);
-            xVariable.Add(TimesToRepeat.CreateXml());
-            xRoot.Add(xVariable);
+            var xElement = TimesToRepeat.CreateXml();
+            xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.TimesToRepeat);
+            xRoot.Add(xElement);
 
             return xRoot;
         }
