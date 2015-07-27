@@ -25,9 +25,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlSetBrightnessBrickType);
 
-            var xVariable = new XElement(XmlConstants.Brightness);
-            xVariable.Add(Brightness.CreateXml());
-            xRoot.Add(xVariable);
+            var xElement = Brightness.CreateXml();
+            xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.Brightness);
+            xRoot.Add(xElement);
 
             return xRoot;
         }
