@@ -29,15 +29,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
             var xElementY = YDestination.CreateXml();
             xElementY.SetAttributeValue(XmlConstants.Category, XmlConstants.YDestination);
-            xRoot.Add(xElementY);
             
             var xElementX = XDestination.CreateXml();
             xElementX.SetAttributeValue(XmlConstants.Category, XmlConstants.XDestination);
-            xRoot.Add(xElementX);
-            
+
             var xElementDuration = DurationInSeconds.CreateXml();
             xElementDuration.SetAttributeValue(XmlConstants.Category, XmlConstants.DurationInSeconds);
-            xRoot.Add(xElementDuration);
+
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElementY);
+            xFormulalist.Add(xElementX);
+            xFormulalist.Add(xElementDuration);
+
+            xRoot.Add(xFormulalist);
 
             
 

@@ -24,13 +24,17 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlPlaceAtBrickType);
 
-            var xElement1 = YPosition.CreateXml();
-            xElement1.SetAttributeValue(XmlConstants.Category, XmlConstants.YPosition);
-            xRoot.Add(xElement1);
+            var xElementY = YPosition.CreateXml();
+            xElementY.SetAttributeValue(XmlConstants.Category, XmlConstants.YPosition);
 
-            var xElement2 = XPosition.CreateXml();
-            xElement2.SetAttributeValue(XmlConstants.Category, XmlConstants.XPosition);
-            xRoot.Add(xElement2);
+            var xElementX = XPosition.CreateXml();
+            xElementX.SetAttributeValue(XmlConstants.Category, XmlConstants.XPosition);
+
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElementY);
+            xFormulalist.Add(xElementX);
+
+            xRoot.Add(xFormulalist);
 
             
 

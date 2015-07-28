@@ -22,10 +22,14 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Brick, XmlConstants.XmlRepeatBrickType);
             base.CreateCommonXML(xRoot);
-
+            
             var xElement = TimesToRepeat.CreateXml();
             xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.TimesToRepeat);
-            xRoot.Add(xElement);
+
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElement);
+            
+            xRoot.Add(xFormulalist);
 
             return xRoot;
         }
