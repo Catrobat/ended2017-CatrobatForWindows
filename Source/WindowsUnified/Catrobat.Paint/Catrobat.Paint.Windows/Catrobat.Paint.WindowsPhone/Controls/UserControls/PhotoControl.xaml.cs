@@ -196,6 +196,16 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         async private void btnChangeCamera_Click(object sender, RoutedEventArgs e)
         {
+            AppBarButton button = sender as AppBarButton;
+            if(button != null)
+            {
+                BitmapIcon icon = new BitmapIcon();
+                icon.UriSource = activeCamera != FRONT_CAMERA ?
+                    new Uri("ms-appx:///Assets/AppBar/BackCam.png") :
+                    new Uri("ms-appx:///Assets/AppBar/FrontCam.png");
+                button.Icon = icon;
+            }
+
             if (isPreview)
             {
                 await _photoManager.StopPreviewAsync();

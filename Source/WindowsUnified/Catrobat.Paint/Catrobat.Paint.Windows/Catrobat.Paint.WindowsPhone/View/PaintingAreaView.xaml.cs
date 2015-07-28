@@ -23,6 +23,7 @@ using Windows.UI.Xaml.Shapes;
 using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
 using Catrobat.Paint.WindowsPhone.Data;
+using Windows.ApplicationModel.Core;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
 
@@ -31,7 +32,7 @@ namespace Catrobat.Paint.WindowsPhone.View
     /// <summary>
     /// Eine leere Seite, die eigenständig verwendet werden kann oder auf die innerhalb eines Rahmens navigiert werden kann.
     /// </summary>
-    public sealed partial class PaintingAreaView : Page, IFileOpenPickerContinuable
+    public sealed partial class PaintingAreaView : Page
     {
 
         static string current_appbar = "barStandard";
@@ -44,6 +45,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         static bool isManipulationEventLoaded;
         static int zoomCounter;
         Point start_point = new Point();
+        CoreApplicationView view;
 
         public PaintingAreaView()
         {
@@ -108,6 +110,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             // TODO: Refactor the following code.
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = Window.Current.Bounds.Height;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = Window.Current.Bounds.Width;
+            view = CoreApplication.GetCurrentView();
         }
 
         public void setSizeOfPaintingAreaViewCheckered(int height, int width)
@@ -223,10 +226,14 @@ namespace Catrobat.Paint.WindowsPhone.View
             return tgGridWorkingSpace;
         }
 
-        public async void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
+        public async void ContinueFileOpenPicker(CoreApplicationView sender, IActivatedEventArgs args1)
         {
+            FileOpenPickerContinuationEventArgs args = args1 as FileOpenPickerContinuationEventArgs;
+
             if (args.Files.Count > 0)
             {
+                view.Activated -= ContinueFileOpenPicker;
+
                 StorageFile file = args.Files[0];
 
                 BitmapImage image = new BitmapImage();
@@ -279,6 +286,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             openPicker.FileTypeFilter.Add(".png");
 
             openPicker.PickSingleFileAndContinue();
+            view.Activated += ContinueFileOpenPicker;
         }
 
         public async void hideStatusAppBar()

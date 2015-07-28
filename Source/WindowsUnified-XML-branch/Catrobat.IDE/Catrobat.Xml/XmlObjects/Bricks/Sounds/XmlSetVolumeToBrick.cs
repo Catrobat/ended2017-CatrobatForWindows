@@ -21,9 +21,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlSetVolumeToBrickType);
 
-            var xVariable = new XElement(XmlConstants.Volume);
-            xVariable.Add(Volume.CreateXml());
-            xRoot.Add(xVariable);
+            var xElement = Volume.CreateXml();
+            xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.Volume);
+            xRoot.Add(xElement);
 
             return xRoot;
         }

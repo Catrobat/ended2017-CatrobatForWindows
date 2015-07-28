@@ -176,6 +176,7 @@
     <Compile Include="Controls\UserControls\ucRecEll.xaml.cs">
       <DependentUpon>ucRecEll.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\Converters.cs" />
     <Compile Include="Data\PaintData.cs" />
     <Compile Include="Data\StorageIO.cs" />
     <Compile Include="IdeInteraction.cs" />
@@ -223,6 +224,7 @@
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\AppBar\add.png" />
+    <Content Include="Assets\AppBar\BackCam.png" />
     <Content Include="Assets\AppBar\dark\add.png" />
     <Content Include="Assets\AppBar\dark\appbar.add.rest.png" />
     <Content Include="Assets\AppBar\dark\appbar.back.rest.png" />
@@ -261,6 +263,7 @@
     <Content Include="Assets\AppBar\dark\DarkIcons.dll" />
     <Content Include="Assets\AppBar\empty.png" />
     <Content Include="Assets\AppBar\feature.settings.png" />
+    <Content Include="Assets\AppBar\FrontCam.png" />
     <Content Include="Assets\AppBar\icon_menu_crop_adjust.png" />
     <Content Include="Assets\AppBar\icon_menu_crop_cut.png" />
     <Content Include="Assets\AppBar\icon_menu_flip_vertical.png" />

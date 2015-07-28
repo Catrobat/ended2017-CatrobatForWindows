@@ -21,9 +21,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlMoveNStepsBrickType);
 
-            var xVariable = new XElement(XmlConstants.Steps);
-            xVariable.Add(Steps.CreateXml());
-            xRoot.Add(xVariable);
+            //TODO: erschreckend ähnlich zu GoNStepsBack-
+            var xElement = Steps.CreateXml();
+            xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.Steps);
+            xRoot.Add(xElement);
 
             return xRoot;
         }

@@ -5,7 +5,6 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Microsoft.VisualStudio.TestPlatform.NativeUnitTestWizards;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.System.Threading;
@@ -14,6 +13,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Shapes;
 using Catrobat.Paint.WindowsPhone.Tool;
 using Catrobat.Paint.WindowsPhone.View;
+using Windows.UI.Xaml.Media;
 
 namespace Catrobat.Paint.WindowsPhone.Tests
 {
@@ -44,13 +44,6 @@ namespace Catrobat.Paint.WindowsPhone.Tests
         {
             sut = null;
             app = null;
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void AddWriteableBitmapToCanvasTest()
-        {
-            Assert.Fail();
         }
 
         [TestMethod]
@@ -823,150 +816,183 @@ namespace Catrobat.Paint.WindowsPhone.Tests
             });
         }
 
+        [TestMethod]
+        [TestCategory("SetCropControlPosition")]
+        public async Task SetCropControlPositionTest()
+        {
+            await ExecuteOnUIThread(() =>
+            {
+                var height = 470;
+                var width = 290;
+                TranslateTransform trans = new TranslateTransform();
+                trans.X = 60;
+                trans.Y = 100;
+
+                sut.SetCropControlPosition(height, width, trans);
+                Grid grid = sut.Content as Grid;
+                if (grid != null)
+                {
+                    Assert.AreEqual(grid.Width, width);
+                    Assert.AreEqual(grid.Height, height);
+
+                    foreach (var uiElement1 in grid.Children)
+                    {
+                        var uiElement = (Grid)uiElement1;
+                        foreach (var rectangle in uiElement.Children)
+                        {
+                            var child = (Rectangle)rectangle;
+                            switch (child.Name)
+                            {
+                                case "rectRectangleCropSelection":
+                                    Assert.AreEqual(child.Height, height);
+                                    Assert.AreEqual(child.Width, width);
+
+                                    break;
+                                default:
+                                    continue;
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        [TestMethod]
+        [TestCategory("SetCropControlPosition")]
+        public async Task SetCropControlPositionMaxValueTest()
+        {
+            await ExecuteOnUIThread(() =>
+            {
+                TranslateTransform trans = new TranslateTransform();
+                trans.X = 60;
+                trans.Y = 100;
+
+                Assert.ThrowsException<ArgumentException>(() =>
+                    sut.SetCropControlPosition(double.MaxValue, double.MaxValue, trans));
+
+            });
+        }
+
+        [TestMethod]
+        [TestCategory("SetCropControlPosition")]
+        public async Task SetCropControlPositionMinValueTest()
+        {
+            await ExecuteOnUIThread(() =>
+            {
+                TranslateTransform trans = new TranslateTransform();
+                trans.X = 60;
+                trans.Y = 100;
+
+                Assert.ThrowsException<ArgumentException>(() =>
+                sut.SetCropControlPosition(double.MinValue, double.MinValue, trans));
+
+            });
+        }
+
+        [TestMethod]
+        [TestCategory("SetCropControlPosition")]
+        public async Task SetCropControlPositionTransNullTest()
+        {
+            await ExecuteOnUIThread(() =>
+            {
+                Assert.ThrowsException<ArgumentException>(() =>
+                sut.SetCropControlPosition(470, 290, null));
+
+            });
+        }
+
+        [TestMethod]
+        [TestCategory("ResetAppBarButtonRectangleSelectionControl")]
+        public async Task ResetAppBarButtonRectangleSelectionControlTrueTest()
+        {
+            await ExecuteOnUIThread(() =>
+            {
+                bool value = true;
+                sut.ResetAppBarButtonRectangleSelectionControl(value);
+                AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
+
+                Assert.AreEqual(appBarButtonReset.IsEnabled, value);
+                
+
+            });
+        }
+
+        [TestMethod]
+        [TestCategory("ResetAppBarButtonRectangleSelectionControl")]
+        public async Task ResetAppBarButtonRectangleSelectionControlFalseTest()
+        {
+            await ExecuteOnUIThread(() =>
+            {
+                bool value = false;
+                sut.ResetAppBarButtonRectangleSelectionControl(value);
+                AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
+
+                Assert.AreEqual(appBarButtonReset.IsEnabled, value);
+                
+            });
+        }
+
+        [TestMethod]
+        [TestCategory("GetHeightOfRectangleCropSelection")]
+        public async Task GetHeightOfRectangleCropSelectionInfinityTest()
+        {
+            await ExecuteOnUIThread(() =>
+            {
+                double value = sut.GetHeightOfRectangleCropSelection();
+                Assert.AreEqual(Double.IsInfinity(value), true);
+            });
+        }
 
         [TestMethod]
         [TestCategory("GetWidthOfRectangleCropSelection")]
-        [Ignore]
-        public async Task GetWidthOfRectangleCropSelectionTest()
+        public async Task GetWidthOfRectangleCropSelectionInfinityTest()
         {
-            await ExecuteOnUIThread(() =>
-            {
-                
-            if (app != null)
-            {
-                app.AppbarTop.BtnSelectedColorVisible(false);
-                app.isBrushEraser = false;
-                app.isBrushTool = false;
-                app.isToolPickerUsed = true;
-                PocketPaintApplication.GetInstance()
-                    .PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
-                app.PaintingAreaView.resetControls();
-
-                app.SwitchTool(ToolType.Crop);
-                app.CropControl.Visibility = Visibility.Visible;
-                app.CropControl.SetCropSelection();
-            }
-
-            });
-
-            await Task.Delay(TimeSpan.FromSeconds(7));
-
             await ExecuteOnUIThread(() =>
             {
                 double value = sut.GetWidthOfRectangleCropSelection();
-                var maingrid = sut.Content as Grid;
-                double val = value;
-
+                Assert.AreEqual(Double.IsInfinity(value), true);
             });
         }
 
         [TestMethod]
-        [Ignore]
-
-        public void ChangeHeightOfUiElementsTest()
+        [TestCategory("HasElementsPaintingAreaViews")]
+        public async Task HasElementsPaintingAreaViewsTest()
         {
-            Assert.Fail();
+            await ExecuteOnUIThread(() =>
+            {
+                bool result = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0;
+
+                bool value = sut.HasElementsPaintingAreaViews();
+                Assert.AreEqual(value, result);
+            });
         }
 
         [TestMethod]
-        [Ignore]
-
-        public void ChangeMarginBottomOfUiElementsTest()
+        [TestCategory("HasElementsPaintingAreaViews")]
+        public async Task HasElementsPaintingAreaViewsNotTest()
         {
-            Assert.Fail();
+            await ExecuteOnUIThread(() =>
+            {
+                bool result = !(PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Count > 0);
+
+                bool value = sut.HasElementsPaintingAreaViews();
+                Assert.AreNotEqual(value, result);
+            });
         }
 
         [TestMethod]
-        [Ignore]
-        public void ChangeMarginLeftOfUiElementsTest()
+        [TestCategory("GetXYOffsetBetweenPaintingAreaAndCropControlSelection")]
+        public async Task GetXYOffsetBetweenPaintingAreaAndCropControlSelectionTest()
         {
-            Assert.Fail();
+            await ExecuteOnUIThread(() =>
+            {
+                Point value = new Point(0.0, 0.0);
+                value = sut.GetXYOffsetBetweenPaintingAreaAndCropControlSelection();
+                Assert.AreNotEqual(value, null);
+                Assert.AreNotEqual(value.X, 0.0);
+                Assert.AreNotEqual(value.Y, 0.0);
+            });
         }
-
-        [TestMethod]
-        [Ignore]
-        public void ChangeMarginRightOfUiElementsTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void ChangeMarginTopOfUiElementsTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void rectRectangleCropSelection_ManipulationDeltaTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void rectRectangleCropSelection_DoubleTappedTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void ResetAppBarButtonRectangleSelectionControlTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void HasElementsPaintingAreaViewsTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void GetRectangleCropSelectionHeightTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void GetRectangleCropSelectionWidthTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void GetLeftTopCoordinateRectangleCropSelectionTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void SetLeftTopNullPointCropSelectionTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void GetLeftTopNullPointCropSelectionTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void CropImageTest()
-        {
-            Assert.Fail();
-        }
-
 
         public IAsyncAction ExecuteOnUIThread(DispatchedHandler action)
         {

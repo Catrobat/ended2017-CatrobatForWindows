@@ -27,17 +27,17 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlGlideToBrickType);
 
-            var xVariable1 = new XElement(XmlConstants.YDestination);
-            xVariable1.Add(YDestination.CreateXml());
-            xRoot.Add(xVariable1);
-
-            var xVariable2 = new XElement(XmlConstants.XDestination);
-            xVariable2.Add(XDestination.CreateXml());
-            xRoot.Add(xVariable2);
-
-            var xVariable3 = new XElement(XmlConstants.DurationInSeconds);
-            xVariable3.Add(DurationInSeconds.CreateXml());
-            xRoot.Add(xVariable3);
+            var xElementY = YDestination.CreateXml();
+            xElementY.SetAttributeValue(XmlConstants.Category, XmlConstants.YDestination);
+            xRoot.Add(xElementY);
+            
+            var xElementX = XDestination.CreateXml();
+            xElementX.SetAttributeValue(XmlConstants.Category, XmlConstants.XDestination);
+            xRoot.Add(xElementX);
+            
+            var xElementDuration = DurationInSeconds.CreateXml();
+            xElementDuration.SetAttributeValue(XmlConstants.Category, XmlConstants.DurationInSeconds);
+            xRoot.Add(xElementDuration);
 
             
 

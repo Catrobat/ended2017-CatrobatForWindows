@@ -55,9 +55,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
             if(UserVariableReference != null)
                 xRoot.Add(UserVariableReference.CreateXml());
 
-            var xFormula = new XElement(XmlConstants.VariableChange);
-            xFormula.Add(VariableFormula.CreateXml());
-            xRoot.Add(xFormula);
+            var xElement = VariableFormula.CreateXml();
+            xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.VariableChange);
+            xRoot.Add(xElement);
 
             return xRoot;
         }
