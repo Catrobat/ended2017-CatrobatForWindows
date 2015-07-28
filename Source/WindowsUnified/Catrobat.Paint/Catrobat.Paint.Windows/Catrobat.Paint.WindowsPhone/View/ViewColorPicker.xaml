@@ -59,7 +59,7 @@
             <!--______________________________________________-->
             <!-- GridColorButtons                              -->
             <!--______________________________________________-->
-            <Grid x:Name="GridColorButtons" HorizontalAlignment="Center" Margin="0,100,0,0" Visibility="Collapsed">
+            <Grid x:Name="GridColorButtons" HorizontalAlignment="Center" Margin="0,100,0,0" Visibility="Visible">
                 <Button x:Name="Button11" BorderThickness="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton11}" Height="80" Margin="-3,30,0,0"  Width="90" VerticalAlignment="Top">
                     <Rectangle x:Name="Rectangle11" Fill="{StaticResource ColorButton11}" Height="65" Margin="-20" Stroke="White"  StrokeThickness="0" PointerPressed="ColorChangedPredefined" Width="90" />
                 </Button>
@@ -135,7 +135,7 @@
             <!--______________________________________________-->
             <!-- GridColorSlider                              -->
             <!--______________________________________________-->
-            <Grid x:Name="GridColorSlider" PointerEntered="Grid_PointerEntered" Visibility="Visible">
+            <Grid x:Name="GridColorSlider" PointerEntered="Grid_PointerEntered" Visibility="Collapsed">
                 <Controls:ColorPicker x:Name="colorPicker" ColorChanged="ColorChangedCustom" Height="186" HorizontalAlignment="Center" IsHitTestVisible="True"
                         Margin="20,108,25,0" VerticalAlignment="Top" Width="355"></Controls:ColorPicker>
                 <Slider x:Name="sldRed" Background="Black" Foreground="Red" Height="40" Maximum="255" Margin="-15,326,0,0"
