@@ -1204,7 +1204,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         void BtnZoomIn_Click(object sender, RoutedEventArgs e )
         {
             enableResetButtonZoom(1);
-            MoveZoomTool tool = new MoveZoomTool();
+            MoveZoomTool tool = (MoveZoomTool)PocketPaintApplication.GetInstance().ToolCurrent;
             ScaleTransform scaletransform = new ScaleTransform();
             scaletransform.ScaleX = 1.1;
             scaletransform.ScaleY = 1.1;

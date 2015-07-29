@@ -23,7 +23,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
             var xElement = Transparency.CreateXml();
             xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.Transparency);
-            xRoot.Add(xElement);
+
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElement);
+
+            xRoot.Add(xFormulalist);
 
             return xRoot;
         }

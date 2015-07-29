@@ -23,7 +23,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 
             var xElement = Volume.CreateXml();
             xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.Volume);
-            xRoot.Add(xElement);
+
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElement);
+
+            xRoot.Add(xFormulalist);
 
             return xRoot;
         }

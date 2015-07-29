@@ -23,7 +23,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
             
             var xElement = TimeToWaitInSeconds.CreateXml();
             xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.TimeToWaitInSeconds);
-            xRoot.Add(xElement);
+
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElement);
+
+            xRoot.Add(xFormulalist);
 
             return xRoot;
         }

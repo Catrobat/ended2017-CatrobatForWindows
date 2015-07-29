@@ -27,7 +27,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             
             var xElement = Steps.CreateXml();
             xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.Steps);
-            xRoot.Add(xElement);
+
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElement);
+
+            xRoot.Add(xFormulalist);
 
             return xRoot;
         }
