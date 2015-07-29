@@ -176,7 +176,6 @@
     <Compile Include="Controls\UserControls\ucRecEll.xaml.cs">
       <DependentUpon>ucRecEll.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\Converters.cs" />
     <Compile Include="Data\PaintData.cs" />
     <Compile Include="Data\StorageIO.cs" />
     <Compile Include="IdeInteraction.cs" />
@@ -441,6 +440,9 @@
     <Reference Include="Coding4Fun.Toolkit.Controls">
       <HintPath>..\..\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
