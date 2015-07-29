@@ -375,7 +375,10 @@ void XMLParser::ParseObjectList(xml_document<> *doc)
         else
         {
             auto object = ParseObject(node);
-			m_project->AddObject(pair<string, shared_ptr<Object> >(object->GetName(), object));
+			if (object != nullptr)
+			{
+				m_project->AddObject(pair<string, shared_ptr<Object> >(object->GetName(), object));
+			}
         }
 
         node = node->next_sibling(Constants::XMLParser::Object::Object.c_str());
