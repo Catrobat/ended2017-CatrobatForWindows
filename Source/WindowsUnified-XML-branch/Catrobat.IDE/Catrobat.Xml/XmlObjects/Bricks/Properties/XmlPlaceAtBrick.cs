@@ -1,5 +1,7 @@
 ﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
@@ -15,8 +17,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            XPosition = new XmlFormula(xRoot.Element(XmlConstants.XPosition));
-            YPosition = new XmlFormula(xRoot.Element(XmlConstants.YPosition));
+            IEnumerable<XElement> XElemensWhichShouldOnlyBeOne =
+                from el in xRoot.Elements(XmlConstants.Formula)
+                where (string)el.Attribute(XmlConstants.Category) == XmlConstants.YPosition
+                select el;
+            foreach (XElement el in XElemensWhichShouldOnlyBeOne)
+                XPosition = new XmlFormula(el); //i know its not cute - but it is safe!
+
+            XElemensWhichShouldOnlyBeOne =
+                from el in xRoot.Elements(XmlConstants.Formula)
+                where (string)el.Attribute(XmlConstants.Category) == XmlConstants.YPosition
+                select el;
+            foreach (XElement el in XElemensWhichShouldOnlyBeOne)
+                YPosition = new XmlFormula(el); //i know its not cute - but it is safe!
         }
 
         internal override XElement CreateXml()
