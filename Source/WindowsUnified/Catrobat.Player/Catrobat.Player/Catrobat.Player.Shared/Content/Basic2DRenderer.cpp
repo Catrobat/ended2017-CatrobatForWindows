@@ -49,13 +49,16 @@ void Basic2DRenderer::ReleaseDeviceDependentResources()
 
 void Basic2DRenderer::PointerPressed(D2D1_POINT_2F point)
 {
-	for each (pair<string, shared_ptr<Object>> var in ProjectDaemon::Instance()->GetProject()->GetObjectList())
+	map<string, shared_ptr<Object>> :: reverse_iterator var;
+	map<string, shared_ptr<Object>> objects = ProjectDaemon::Instance()->GetProject()->GetObjectList();
+
+	for (var = objects.rbegin(); var != objects.rend(); var++ )
 	{
-		if (var.second->IsObjectHit(point))
+		if (var->second->IsObjectHit(point))
 		{
-			for (int scriptIndex = 0; scriptIndex < var.second->GetScriptListSize(); scriptIndex++)
+			for (int scriptIndex = 0; scriptIndex < var->second->GetScriptListSize(); scriptIndex++)
 			{
-				shared_ptr<Script> script = var.second->GetScript(scriptIndex);
+				shared_ptr<Script> script = var->second->GetScript(scriptIndex);
 				if (script->GetType() == Script::TypeOfScript::WhenScript)
 				{
 					shared_ptr<WhenScript> whenScript = dynamic_pointer_cast<WhenScript>(script);
