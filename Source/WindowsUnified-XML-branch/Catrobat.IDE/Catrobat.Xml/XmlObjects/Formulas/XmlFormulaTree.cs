@@ -4,6 +4,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 {
     public partial class XmlFormulaTree : XmlObjectNode
     {
+
         public XmlFormulaTree LeftChild { get; set; }
 
         public XmlFormulaTree RightChild { get; set; }
@@ -42,10 +43,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
                 xRoot.Add(LeftChild.CreateXML(XmlConstants.LeftChild));
             if(RightChild != null)
                 xRoot.Add(RightChild.CreateXML(XmlConstants.RightChild));
-            if(VariableType != null)
-                xRoot.Add(new XElement(XmlConstants.Type), VariableType);
+            if (VariableType != null)
+            {
+                var variableTypeElement = new XElement(XmlConstants.Type);
+                variableTypeElement.Value = VariableType;
+                xRoot.Add(variableTypeElement);
+            }
             if(VariableValue != null)
-                xRoot.Add(new XElement(XmlConstants.Value), VariableValue);
+            {
+                var variableValueElement = new XElement(XmlConstants.Value);
+                variableValueElement.Value = VariableValue;
+                xRoot.Add(variableValueElement);
+            }
+                
 
             return xRoot;
         }

@@ -124,10 +124,13 @@ namespace Catrobat.IDE.Core
         public const string XmlBroadcastWaitBrickType = "BroadcastWaitBrick";
         public const string XmlForeverBrickType = "ForeverBrick";
         public const string XmlLoopEndlessBrickType = "LoopEndlessBrick";
-        
-        //Alle If Blöcke? Wie werden die genau zusammen gebaut?
 
-        //loop wie is da der aufbau??
+        public const string XmlIfLogicBeginBrick = "IfLogicBeginBrick";
+        public const string XmlIfLogicElseBrick = "IfLogicElseBrick";
+        public const string XmlIfLogicEndBrick = "IfLogicEndBrick";
+
+        //public const string XmlLoopBeginBrick = "ForeverBrick";
+        
 
         public const string XmlRepeatBrickType = "RepeatBrick";
         public const string XmlRepeatLoopEndBrickType = "LoopEndBrick";
