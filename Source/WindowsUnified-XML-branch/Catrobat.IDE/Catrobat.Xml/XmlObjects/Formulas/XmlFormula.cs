@@ -17,7 +17,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element(XmlConstants.Formula) != null)
+            //TODO: notwendig? oder doch nur  if (xRoot.Element(XmlConstants.Formula) != null)
+            if (xRoot.Element(XmlConstants.FormulaList).Element(XmlConstants.Formula) != null)
             {
                 FormulaTree = new XmlFormulaTree(xRoot.Element(XmlConstants.Formula));
             }
