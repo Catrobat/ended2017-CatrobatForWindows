@@ -1,5 +1,7 @@
 ﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
@@ -13,7 +15,17 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            Steps = new XmlFormula(xRoot.Element(XmlConstants.Steps));
+            IEnumerable<XElement> elements = xRoot.Element(XmlConstants.FormulaList).Elements();
+            //@michael funktioniert an sich aber meine vermutung von gestern, dass dann new XmlFormula nimmer pfeifen
+            //könnt weils ned a formula element mit category sondern ws. noch an altes xelement des xposition heißt
+            //und drunter an alten formulatree erwartet scheint sich als richtig herrauszustellen
+            foreach (XElement xElement in elements)
+            {
+                if (xElement.Attribute(XmlConstants.Category).Value == XmlConstants.Steps)
+                    Steps = new XmlFormula(xElement);
+
+            }
+            //Steps = new XmlFormula(xRoot.Element(XmlConstants.Steps));
         }
 
         internal override XElement CreateXml()
@@ -23,7 +35,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
             var xElement = Steps.CreateXml();
             xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.Steps);
-            xRoot.Add(xElement);
 
             var xFormulalist = new XElement(XmlConstants.FormulaList);
             xFormulalist.Add(xElement);

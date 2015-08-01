@@ -18,9 +18,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
         internal override void LoadFromXml(XElement xRoot)
         {
             //TODO: notwendig? oder doch nur  if (xRoot.Element(XmlConstants.Formula) != null)
-            if (xRoot.Element(XmlConstants.FormulaList).Element(XmlConstants.Formula) != null)
+            
+            //if (xRoot.Element(XmlConstants.Formula) != null)
+            if (xRoot.Name.LocalName == XmlConstants.Formula)
             {
-                FormulaTree = new XmlFormulaTree(xRoot.Element(XmlConstants.Formula));
+                FormulaTree = new XmlFormulaTree(xRoot);//.Element(XmlConstants.Formula));
             }
         }
 
