@@ -17,18 +17,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            IEnumerable<XElement> elements = xRoot.Element(XmlConstants.FormulaList).Elements();
-            //@michael funktioniert an sich aber meine vermutung von gestern, dass dann new XmlFormula nimmer pfeifen
-            //könnt weils ned a formula element mit category sondern ws. noch an altes xelement des xposition heißt
-            //und drunter an alten formulatree erwartet scheint sich als richtig herrauszustellen
-            foreach (XElement xElement in elements)
+            if (xRoot != null)
             {
-                if (xElement.Attribute(XmlConstants.Category).Value == XmlConstants.XPosition)
-                    XPosition = new XmlFormula(xElement);
-                else if (xElement.Attribute(XmlConstants.Category).Value == XmlConstants.YPosition)
-                    YPosition = new XmlFormula(xElement);
-                
+                IEnumerable<XElement> elements = xRoot.Element(XmlConstants.FormulaList).Elements();
+                foreach (XElement xElement in elements)
+                {
+                    if (xElement.Attribute(XmlConstants.Category).Value == XmlConstants.XPosition)
+                        XPosition = new XmlFormula(xElement);
+                    else if (xElement.Attribute(XmlConstants.Category).Value == XmlConstants.YPosition)
+                        YPosition = new XmlFormula(xElement);
+
+                }
             }
+            
 
              //XPosition = new XmlFormula(e.Element());
             //YPosition = new XmlFormula(xRoot.Element(XmlConstants.YPosition));
