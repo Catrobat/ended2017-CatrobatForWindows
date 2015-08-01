@@ -39,7 +39,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element(XmlConstants.Sound) != null)
+            if (xRoot  != null && xRoot.Element(XmlConstants.Sound) != null)
             {
                 XmlSoundReference = new XmlSoundReference(xRoot.Element(XmlConstants.Sound));
             }

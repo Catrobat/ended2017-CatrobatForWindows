@@ -13,7 +13,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            Volume = new XmlFormula(xRoot.Element(XmlConstants.Volume));
+            if (xRoot != null)
+            {
+                Volume = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.Volume);
+            }
         }
 
         internal override XElement CreateXml()

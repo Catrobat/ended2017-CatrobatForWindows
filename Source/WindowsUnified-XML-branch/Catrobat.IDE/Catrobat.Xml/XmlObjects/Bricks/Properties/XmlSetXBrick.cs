@@ -13,7 +13,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            XPosition = new XmlFormula(xRoot.Element(XmlConstants.XPosition));
+            if (xRoot != null)
+            {
+                XPosition = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.XPosition);
+            }
         }
 
         internal override XElement CreateXml()

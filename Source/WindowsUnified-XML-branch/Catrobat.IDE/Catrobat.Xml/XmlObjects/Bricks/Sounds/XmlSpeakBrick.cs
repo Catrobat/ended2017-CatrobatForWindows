@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element(XmlConstants.Text) != null)
+            if (xRoot != null && xRoot.Element(XmlConstants.Text) != null)
             {
                 Text = xRoot.Element(XmlConstants.Text).Value;
             }

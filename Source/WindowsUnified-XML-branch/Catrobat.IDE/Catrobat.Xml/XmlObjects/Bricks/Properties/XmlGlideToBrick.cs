@@ -17,9 +17,12 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            DurationInSeconds = new XmlFormula(xRoot.Element(XmlConstants.DurationInSeconds));
-            XDestination = new XmlFormula(xRoot.Element(XmlConstants.XDestination));
-            YDestination = new XmlFormula(xRoot.Element(XmlConstants.YDestination));
+            if (xRoot != null)
+            {
+                DurationInSeconds = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.DurationInSeconds);
+                XDestination = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.XDestination);
+                YDestination = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.YDestination);
+            }
         }
 
         internal override XElement CreateXml()

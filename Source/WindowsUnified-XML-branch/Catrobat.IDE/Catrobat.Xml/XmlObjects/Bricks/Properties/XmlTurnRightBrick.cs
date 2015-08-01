@@ -13,7 +13,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            Degrees = new XmlFormula(xRoot.Element(XmlConstants.TurnRightDegrees));
+            if (xRoot != null)
+            {
+                Degrees = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.TurnRightDegrees);
+            }
         }
 
         internal override XElement CreateXml()
