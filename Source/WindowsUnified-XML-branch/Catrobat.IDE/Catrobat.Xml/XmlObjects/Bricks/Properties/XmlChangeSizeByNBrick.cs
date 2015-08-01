@@ -1,7 +1,5 @@
 ﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
@@ -15,19 +13,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-
             if (xRoot != null)
             {
-                IEnumerable<XElement> elements = xRoot.Element(XmlConstants.FormulaList).Elements();
-                foreach (XElement xElement in elements)
-                {
-                    if (xElement.Attribute(XmlConstants.Category).Value == XmlConstants.SizeChange)
-                        Size = new XmlFormula(xElement);
-
-                }
-                //Size = new XmlFormula(xRoot.Element(XmlConstants.SizeChange));
+                Size = XmlFormulaListFactory.getFormula(xRoot, XmlConstants.SizeChange);
             }
-            
         }
 
         internal override XElement CreateXml()

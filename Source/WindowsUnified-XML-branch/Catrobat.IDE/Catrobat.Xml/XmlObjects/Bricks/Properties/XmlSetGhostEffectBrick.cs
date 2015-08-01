@@ -13,7 +13,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            Transparency = new XmlFormula(xRoot.Element(XmlConstants.Transparency));
+            if (xRoot != null)
+            {
+                Transparency = XmlFormulaListFactory.getFormula(xRoot, XmlConstants.Transparency);
+            }
         }
 
         internal override XElement CreateXml()

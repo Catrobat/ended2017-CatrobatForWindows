@@ -1,7 +1,5 @@
 ﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
@@ -17,16 +15,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         {
             if (xRoot != null)
             {
-                IEnumerable<XElement> elements = xRoot.Element(XmlConstants.FormulaList).Elements();
-                foreach (XElement xElement in elements)
-                {
-                    if (xElement.Attribute(XmlConstants.Category).Value == XmlConstants.ChangeGhostEffect)
-                        ChangeGhostEffect = new XmlFormula(xElement);
-
-                }
-                //ChangeGhostEffect = new XmlFormula(xRoot.Element(XmlConstants.ChangeGhostEffect));
+                ChangeGhostEffect = XmlFormulaListFactory.getFormula(xRoot, XmlConstants.ChangeGhostEffect);
             }
-            
         }
 
         internal override XElement CreateXml()

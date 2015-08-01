@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
-using System.Collections.Generic;
-using System.Linq;
+//using System.Collections.Generic;
+//using System.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
@@ -19,15 +19,18 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         {
             if (xRoot != null)
             {
-                IEnumerable<XElement> elements = xRoot.Element(XmlConstants.FormulaList).Elements();
-                foreach (XElement xElement in elements)
-                {
-                    if (xElement.Attribute(XmlConstants.Category).Value == XmlConstants.XPosition)
-                        XPosition = new XmlFormula(xElement);
-                    else if (xElement.Attribute(XmlConstants.Category).Value == XmlConstants.YPosition)
-                        YPosition = new XmlFormula(xElement);
+                YPosition = XmlFormulaListFactory.getFormula(xRoot, XmlConstants.YPosition);
+                XPosition = XmlFormulaListFactory.getFormula(xRoot, XmlConstants.XPosition);
+                //IEnumerable<XElement> elements = xRoot.Element(XmlConstants.FormulaList).Elements();
+                //foreach (XElement xElement in elements)
+                //{
+                //    if (xElement.Attribute(XmlConstants.Category).Value == XmlConstants.XPosition)
+                //        XPosition = new XmlFormula(xElement);
+                //    else if (xElement.Attribute(XmlConstants.Category).Value == XmlConstants.YPosition)
+                //        YPosition = new XmlFormula(xElement);
 
-                }
+                //}
+                
             }
             
 

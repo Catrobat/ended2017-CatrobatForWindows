@@ -17,7 +17,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            Brightness = new XmlFormula(xRoot.Element(XmlConstants.Brightness));
+            if (xRoot != null)
+            {
+                Brightness = XmlFormulaListFactory.getFormula(xRoot, XmlConstants.Brightness);
+            }
         }
 
         internal override XElement CreateXml()
