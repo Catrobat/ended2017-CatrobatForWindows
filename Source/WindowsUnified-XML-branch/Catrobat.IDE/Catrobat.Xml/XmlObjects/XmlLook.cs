@@ -25,7 +25,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         internal override void LoadFromXml(XElement xRoot)
         {
             FileName = xRoot.Element(XmlConstants.FileName).Value;
-            Name = xRoot.Element(XmlConstants.Name).Value;
+            Name = xRoot.Attribute(XmlConstants.Name).Value;
+            
         }
 
         internal override XElement CreateXml()
