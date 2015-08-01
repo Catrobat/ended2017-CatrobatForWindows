@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         {
             if (xRoot != null)
             {
-                Transparency = XmlFormulaListFactory.getFormula(xRoot, XmlConstants.Transparency);
+                Transparency = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.Transparency);
             }
         }
 

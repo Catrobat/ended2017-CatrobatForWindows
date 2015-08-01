@@ -19,8 +19,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         {
             if (xRoot != null)
             {
-                YPosition = XmlFormulaListFactory.getFormula(xRoot, XmlConstants.YPosition);
-                XPosition = XmlFormulaListFactory.getFormula(xRoot, XmlConstants.XPosition);
+                YPosition = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.YPosition);
+                XPosition = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.XPosition);
                 //IEnumerable<XElement> elements = xRoot.Element(XmlConstants.FormulaList).Elements();
                 //foreach (XElement xElement in elements)
                 //{

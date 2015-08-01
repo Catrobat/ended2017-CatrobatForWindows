@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         {
             if (xRoot != null)
             {
-                Brightness = XmlFormulaListFactory.getFormula(xRoot, XmlConstants.Brightness);
+                Brightness = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.Brightness);
             }
         }
 

@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         {
             if (xRoot != null)
             {
-                Steps = XmlFormulaListFactory.getFormula(xRoot, XmlConstants.Steps);
+                Steps = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.Steps);
             }
         }
 
