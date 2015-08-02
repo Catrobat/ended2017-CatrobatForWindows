@@ -20,7 +20,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            _reference = xRoot.Attribute(XmlConstants.Reference).Value;
+            if (xRoot != null)
+            {
+                _reference = xRoot.Attribute(XmlConstants.Reference).Value;
+            }
             //Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as Sprite;
         }
 

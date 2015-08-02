@@ -39,8 +39,12 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element(XmlConstants.PointedObject) != null)
-                PointedXmlSpriteReference = new XmlSpriteReference(xRoot.Element(XmlConstants.PointedObject));
+            if (xRoot != null && xRoot.Attribute(XmlConstants.Type).Value == XmlConstants.XmlPointToBrickType)
+            {
+                PointedXmlSpriteReference = new XmlSpriteReference(xRoot.Element(XmlConstants.Object));//.Element(XmlConstants.XmlPointToBrickType));
+            }
+            //if (xRoot.Element(XmlConstants.PointedObject) != null)
+            //    PointedXmlSpriteReference = new XmlSpriteReference(xRoot.Element(XmlConstants.PointedObject));
         }
 
         internal override XElement CreateXml()

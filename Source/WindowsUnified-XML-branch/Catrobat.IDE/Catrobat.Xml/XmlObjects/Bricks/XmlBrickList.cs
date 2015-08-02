@@ -107,7 +107,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
                         Bricks.Add(new XmlIfLogicEndBrick());
                         break;
 
-                    case "ifOnEdgeBounceBrick":
+                    case "IfOnEdgeBounceBrick":
                         Bricks.Add(new XmlIfOnEdgeBounceBrick());
                         break;
 

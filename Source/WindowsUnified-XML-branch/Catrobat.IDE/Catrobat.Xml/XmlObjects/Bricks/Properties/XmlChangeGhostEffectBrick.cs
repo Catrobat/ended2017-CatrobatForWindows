@@ -13,7 +13,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            ChangeGhostEffect = new XmlFormula(xRoot.Element(XmlConstants.ChangeGhostEffect));
+            if (xRoot != null)
+            {
+                ChangeGhostEffect = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.ChangeGhostEffect);
+            }
         }
 
         internal override XElement CreateXml()

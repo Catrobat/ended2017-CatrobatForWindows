@@ -20,10 +20,14 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
             //TODO: notwendig? oder doch nur  if (xRoot.Element(XmlConstants.Formula) != null)
             
             //if (xRoot.Element(XmlConstants.Formula) != null)
-            if (xRoot.Name.LocalName == XmlConstants.Formula)
+            if (xRoot != null)
             {
-                FormulaTree = new XmlFormulaTree(xRoot);//.Element(XmlConstants.Formula));
+                if (xRoot.Name.LocalName == XmlConstants.Formula)
+                {
+                    FormulaTree = new XmlFormulaTree(xRoot);//.Element(XmlConstants.Formula));
+                }
             }
+            
         }
 
         internal override XElement CreateXml()
