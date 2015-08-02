@@ -40,6 +40,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 
         internal override void LoadFromXml(XElement xRoot)
         {
+            //TODO: needs references etc.
             if (xRoot.Element(XmlConstants.UserVariable) != null)
                 UserVariableReference = new XmlUserVariableReference(xRoot.Element(XmlConstants.UserVariable));
 
