@@ -583,6 +583,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 
 
         public static XmlFormula getFormula(XElement xRoot, String formulaCategory)
+
+            //TODO: aufrufe durch neuen formulakonstruktor ersetzen
         {
             if (xRoot != null && formulaCategory != "")
             {
