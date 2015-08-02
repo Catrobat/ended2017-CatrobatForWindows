@@ -581,24 +581,5 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 
         #endregion
 
-
-        public static XmlFormula getFormula(XElement xRoot, String formulaCategory)
-
-            //TODO: aufrufe durch neuen formulakonstruktor ersetzen
-        {
-            if (xRoot != null && formulaCategory != "")
-            {
-                IEnumerable<XElement> elements = xRoot.Element(XmlConstants.FormulaList).Elements();
-                foreach (XElement xElement in elements)
-                {
-                    //toDO: überprüfung wenn nur 1 formula element ist, keine schleife!!!
-                    if (xElement.Attribute(XmlConstants.Category).Value == formulaCategory)
-                    {
-                        return new XmlFormula(xElement);
-                    }
-                }
-            }
-            return null;
-        }
     }
 }

@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         {
             if (xRoot != null)
             {
-                Size = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.Size);
+                Size = XmlFormula(xRoot, XmlConstants.Size);
             }
             
         }

@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         {
             if (xRoot != null)
             {
-                Degrees = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.TurnLeftDegrees);
+                Degrees = XmlFormula(xRoot, XmlConstants.TurnLeftDegrees);
             }
         }
 

@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
         {
             if (xRoot != null)
             {
-                Volume = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.Volume);
+                Volume = XmlFormula(xRoot, XmlConstants.Volume);
             }
         }
 
