@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element(XmlConstants.ReceivedMessage) != null)
+            if (xRoot != null && xRoot.Element(XmlConstants.ReceivedMessage) != null)
             {
                 ReceivedMessage = xRoot.Element(XmlConstants.ReceivedMessage).Value;
             }

@@ -42,21 +42,23 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element(XmlConstants.UserVariable) != null)
-                UserVariableReference = new XmlUserVariableReference(xRoot.Element(XmlConstants.UserVariable));
-
-           // TODO: sollte wenn fertig wieder in ein new XmlFormula umgebaut werden!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            if (xRoot.Element("formulaList") != null)
+            if (xRoot != null)
             {
-                var formulaList = xRoot.Element("formulaList");
-                if (formulaList.Element("formula") != null)
+                if (xRoot.Element(XmlConstants.UserVariable) != null)
+                    UserVariableReference = new XmlUserVariableReference(xRoot.Element(XmlConstants.UserVariable));
+
+                // TODO: sollte wenn fertig wieder in ein new XmlFormula umgebaut werden!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                if (xRoot.Element("formulaList") != null)
                 {
-                    //TODO: Wird das zu einer Liste, oder anders lösen?
-                    VariableFormula = new XmlFormula(xRoot.Element("formula"));
+                    var formulaList = xRoot.Element("formulaList");
+                    if (formulaList.Element("formula") != null)
+                    {
+                        //TODO: Wird das zu einer Liste, oder anders lösen?
+                        VariableFormula = new XmlFormula(xRoot.Element("formula"));
+                    }
                 }
+                // bis hier her!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             }
-            // bis hier her!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                
         }
 
         internal override XElement CreateXml()

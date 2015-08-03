@@ -20,19 +20,22 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            foreach (XElement element in xRoot.Elements())
+            if (xRoot != null)
             {
-                switch (element.Attribute(XmlConstants.Type).Value.ToString())
+                foreach (XElement element in xRoot.Elements())
                 {
-                    case XmlConstants.XmlStartScriptType:
-                        Scripts.Add(new XmlStartScript(element));
-                        break;
-                    case XmlConstants.XmlWhenScriptType:
-                        Scripts.Add(new XmlWhenScript(element));
-                        break;
-                    case XmlConstants.XmlBroadcastScriptType:
-                        Scripts.Add(new XmlBroadcastScript(element));
-                        break;
+                    switch (element.Attribute(XmlConstants.Type).Value.ToString())
+                    {
+                        case XmlConstants.XmlStartScriptType:
+                            Scripts.Add(new XmlStartScript(element));
+                            break;
+                        case XmlConstants.XmlWhenScriptType:
+                            Scripts.Add(new XmlWhenScript(element));
+                            break;
+                        case XmlConstants.XmlBroadcastScriptType:
+                            Scripts.Add(new XmlBroadcastScript(element));
+                            break;
+                    }
                 }
             }
         }

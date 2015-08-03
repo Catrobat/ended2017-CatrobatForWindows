@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element(XmlConstants.Note) != null)
+            if (xRoot != null && xRoot.Element(XmlConstants.Note) != null)
             {
                 Note = xRoot.Element(XmlConstants.Note).Value;
             }
