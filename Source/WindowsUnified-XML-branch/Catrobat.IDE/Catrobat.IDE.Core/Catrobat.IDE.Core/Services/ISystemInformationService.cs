@@ -14,6 +14,8 @@ namespace Catrobat.IDE.Core.Services
 
         int ScreenHeight { get; }
 
+        int ScaleFactor { get; }
+
         string CurrentApplicationVersion { get; }
 
         string CurrentApplicationBuildName { get; }
