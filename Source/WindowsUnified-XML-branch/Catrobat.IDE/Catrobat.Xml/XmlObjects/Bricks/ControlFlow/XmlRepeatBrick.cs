@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         internal override XElement CreateXml()
         {
             var xRoot = new XElement(XmlConstants.Brick);
-            xRoot.SetAttributeValue(XmlConstants.Brick, XmlConstants.XmlRepeatBrickType);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlRepeatBrickType);
             base.CreateCommonXML(xRoot);
             
             var xElement = TimesToRepeat.CreateXml();
