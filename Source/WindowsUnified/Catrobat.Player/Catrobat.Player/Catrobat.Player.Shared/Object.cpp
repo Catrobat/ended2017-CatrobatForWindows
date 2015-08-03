@@ -150,6 +150,10 @@ void Object::SetupWindowSizeDependentResources(const std::shared_ptr<DX::DeviceR
 {
     auto deviceContext = deviceResources->GetD2DDeviceContext();
     m_logicalSize = deviceContext->GetSize();
+
+	int screen_width = ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
+	int screen_height = ProjectDaemon::Instance()->GetProject()->GetScreenHeight();
+
     m_ratio.width = m_logicalSize.width / ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
     m_ratio.height = m_logicalSize.height / ProjectDaemon::Instance()->GetProject()->GetScreenHeight() * (-1);
     RecalculateTransformation();
@@ -178,8 +182,10 @@ void Object::Draw(const std::shared_ptr<DX::DeviceResources>& deviceResources)
     auto deviceContext = deviceResources->GetD2DDeviceContext();
     deviceContext->SetTransform(m_transformation);
     //deviceContext->Clear(ColorF(ColorF::White));
+	//unsigned look_height = m_look->GetHeight();
+	//unsigned look_width = m_look->GetWidth();
     deviceContext->DrawBitmap(m_look->GetBitMap().get(),
-        RectF(0.f, 0.f, m_renderTargetSize.width, m_renderTargetSize.height));
+        RectF(0.f, 0.f, m_renderTargetSize.width, m_renderTargetSize.height), m_opacity);
 
 }
 #pragma endregion
@@ -285,8 +291,8 @@ bool Object::IsObjectHit(D2D1_POINT_2F position)
     origin.y = (float) m_look->GetHeight() / 2;
 
     Matrix3x2F positionInBitMap = translation;
-    positionInBitMap._31 = (position.x - positionInBitMap._31) / m_ratio.width;
-    positionInBitMap._32 = m_look->GetHeight() - (position.y - positionInBitMap._32) / m_ratio.height;
+	positionInBitMap._31 = (position.x - positionInBitMap._31) / m_ratio.width;
+	positionInBitMap._32 = m_look->GetHeight() - (position.y - positionInBitMap._32) / m_ratio.height;
 
     positionInBitMap = positionInBitMap *
         Matrix3x2F::Rotation(360 - m_rotation, origin) *
