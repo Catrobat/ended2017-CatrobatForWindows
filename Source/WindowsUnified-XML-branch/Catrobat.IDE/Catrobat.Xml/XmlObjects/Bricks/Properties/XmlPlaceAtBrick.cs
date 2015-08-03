@@ -19,37 +19,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         {
             if (xRoot != null)
             {
-                YPosition = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.YPosition);
-                XPosition = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.XPosition);
-                //IEnumerable<XElement> elements = xRoot.Element(XmlConstants.FormulaList).Elements();
-                //foreach (XElement xElement in elements)
-                //{
-                //    if (xElement.Attribute(XmlConstants.Category).Value == XmlConstants.XPosition)
-                //        XPosition = new XmlFormula(xElement);
-                //    else if (xElement.Attribute(XmlConstants.Category).Value == XmlConstants.YPosition)
-                //        YPosition = new XmlFormula(xElement);
-
-                //}
-                
+                YPosition = new XmlFormula(xRoot, XmlConstants.YPosition);
+                XPosition = new XmlFormula(xRoot, XmlConstants.XPosition);           
             }
-            
-
-             //XPosition = new XmlFormula(e.Element());
-            //YPosition = new XmlFormula(xRoot.Element(XmlConstants.YPosition));
-            
-            /*IEnumerable<XElement> XElemensWhichShouldOnlyBeOne =
-                from el in xRoot.Elements(XmlConstants.Formula)
-                where (string)el.Attribute(XmlConstants.Category) == XmlConstants.YPosition
-                select el;
-            foreach (XElement el in XElemensWhichShouldOnlyBeOne)
-                XPosition = new XmlFormula(el); //i know its not cute - but it is safe!
-
-            XElemensWhichShouldOnlyBeOne =
-                from el in xRoot.Elements(XmlConstants.Formula)
-                where (string)el.Attribute(XmlConstants.Category) == XmlConstants.YPosition
-                select el;
-            foreach (XElement el in XElemensWhichShouldOnlyBeOne)
-                YPosition = new XmlFormula(el); //i know its not cute - but it is safe!*/
         }
 
         internal override XElement CreateXml()

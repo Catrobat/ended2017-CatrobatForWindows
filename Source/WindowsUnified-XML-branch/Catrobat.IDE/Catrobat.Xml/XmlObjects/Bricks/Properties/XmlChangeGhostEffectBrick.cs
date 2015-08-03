@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         {
             if (xRoot != null)
             {
-                ChangeGhostEffect = XmlFormulaTreeFactory.getFormula(xRoot, XmlConstants.ChangeGhostEffect);
+                ChangeGhostEffect = XmlFormula(xRoot, XmlConstants.ChangeGhostEffect);
             }
         }
 
