@@ -19,9 +19,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         {
             if (xRoot != null)
             {
-                DurationInSeconds = XmlFormula(xRoot, XmlConstants.DurationInSeconds);
-                XDestination = XmlFormula(xRoot, XmlConstants.XDestination);
-                YDestination = XmlFormula(xRoot, XmlConstants.YDestination);
+                DurationInSeconds = new XmlFormula(xRoot, XmlConstants.DurationInSeconds);
+                XDestination = new XmlFormula(xRoot, XmlConstants.XDestination);
+                YDestination = new XmlFormula(xRoot, XmlConstants.YDestination);
             }
         }
 

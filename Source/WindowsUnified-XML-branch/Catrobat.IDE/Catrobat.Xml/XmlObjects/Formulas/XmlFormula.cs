@@ -2,8 +2,6 @@
 using System;
 using System.Globalization;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
-using System.Xml.Linq;
-using System;
 using System.Collections.Generic;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
