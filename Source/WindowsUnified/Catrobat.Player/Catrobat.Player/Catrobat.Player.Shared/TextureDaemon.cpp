@@ -9,6 +9,7 @@
 #include <wincodec.h>
 
 using namespace std;
+using namespace Microsoft::WRL;
 
 TextureDaemon *TextureDaemon::__instance = NULL;
 
@@ -24,8 +25,7 @@ TextureDaemon *TextureDaemon::Instance()
 
 TextureDaemon::TextureDaemon() {}
 
-void TextureDaemon::LoadTexture(const shared_ptr<DX::DeviceResources>& deviceResources,
-    unique_ptr<CatrobatTexture> &texture, string textureKey)
+unique_ptr<CatrobatTexture> TextureDaemon::LoadTexture(const shared_ptr<DX::DeviceResources>& deviceResources, string textureKey)
 {
     auto deviceContext = deviceResources->GetD2DDeviceContext();
 
@@ -68,8 +68,8 @@ void TextureDaemon::LoadTexture(const shared_ptr<DX::DeviceResources>& deviceRes
         WICBitmapPaletteTypeCustom);
 
     //create usable ID2D1Bitmap from WIC
-    ID2D1Bitmap* bitmap;
-    deviceContext->CreateBitmapFromWicBitmap(converter, NULL, &bitmap);
+	ComPtr<ID2D1Bitmap> bitmap;
+    deviceContext->CreateBitmapFromWicBitmap(converter, NULL, bitmap.GetAddressOf());
 
     IWICBitmapFrameDecode *pIDecoderFrame = NULL;
     decoder->GetFrame(0, &pIDecoderFrame);
@@ -123,7 +123,6 @@ void TextureDaemon::LoadTexture(const shared_ptr<DX::DeviceResources>& deviceRes
         }
     }
 
-    unique_ptr<CatrobatTexture>temp(new CatrobatTexture(alphaMap, bitmap));
-    texture = move(temp);
+	return make_unique<CatrobatTexture>(alphaMap, bitmap);
 }
 

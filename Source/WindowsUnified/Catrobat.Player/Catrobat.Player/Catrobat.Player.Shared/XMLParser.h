@@ -19,18 +19,18 @@ public:
 	XMLParser();
 	~XMLParser();
 
-	Project*								GetProject();
+	std::unique_ptr<Project>								GetProject();
 	bool									LoadXML(std::string fileName);
 
 private:
-	Project*								m_project;
+	std::unique_ptr<Project>								m_project;
 
 	// Parser
 	std::vector<ContainerBrick*> *m_containerStack;	
 	std::map<VariableManagementBrick*, std::string> *m_pendingVariables;
 
 	void									ParseXML						(std::string xml);
-	Project*								ParseProjectHeader				(rapidxml::xml_document<> *doc);
+	Project									ParseProjectHeader				(rapidxml::xml_document<> *doc);
 
 	void									ParseObjectList					(rapidxml::xml_document<> *doc);
 	std::shared_ptr<Object>					ParseObject						(rapidxml::xml_node<> *baseNode);
@@ -74,9 +74,9 @@ private:
 
 	FormulaTree*							ParseFormulaTree				(rapidxml::xml_node<> *baseNode);
 
-	void									ParseVariableList				(rapidxml::xml_document<> *doc, Project *project);
-	void									ParseGlobalVariables			(Project *project, const rapidxml::xml_node<> *baseNode);
-	void									ParseObjectVariables			(Project *project, const rapidxml::xml_node<> *baseNode);
+	void									ParseVariableList				(rapidxml::xml_document<> *doc);
+	void									ParseGlobalVariables			(const rapidxml::xml_node<> *baseNode);
+	void									ParseObjectVariables			(const rapidxml::xml_node<> *baseNode);
 	std::pair<std::string, std::shared_ptr<UserVariable> >	ParseUserVariable				(const rapidxml::xml_node<> *baseNode);
 	rapidxml::xml_node<>*					EvaluateString					(std::string query, std::string input, rapidxml::xml_node<> *node);
 	int										EvaluateIndex					(std::string *input);

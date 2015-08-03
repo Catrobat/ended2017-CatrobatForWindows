@@ -11,7 +11,7 @@ public:
     Look(std::string filename, std::string name);
 
     void LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources);
-    std::shared_ptr<ID2D1Bitmap> GetBitMap();
+	Microsoft::WRL::ComPtr<ID2D1Bitmap> GetBitMap();
     std::string GetFileName();
     std::string GetName();
     int GetPixelAlphaValue(D2D1_POINT_2F position);

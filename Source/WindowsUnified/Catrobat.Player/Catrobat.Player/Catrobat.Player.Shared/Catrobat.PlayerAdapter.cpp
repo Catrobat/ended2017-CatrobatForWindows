@@ -106,7 +106,6 @@ namespace Catrobat_Player
 
         m_main = std::unique_ptr<Catrobat_PlayerMain>(new Catrobat_PlayerMain(m_deviceResources, 
             playerPage, projectName));
-        m_main->StartRenderLoop();
     }
 
     //----------------------------------------------------------------------------------------------

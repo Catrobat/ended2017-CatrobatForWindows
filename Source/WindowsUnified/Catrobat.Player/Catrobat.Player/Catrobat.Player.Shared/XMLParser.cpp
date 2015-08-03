@@ -102,9 +102,9 @@ bool XMLParser::LoadXML(string fileName)
 
 //----------------------------------------------------------------------
 
-Project *XMLParser::GetProject()
+unique_ptr<Project> XMLParser::GetProject()
 {
-    return m_project;
+    return move(m_project);
 }
 
 //----------------------------------------------------------------------
@@ -115,16 +115,16 @@ void XMLParser::ParseXML(string xml)
     char *temp = (char*) xml.c_str();
     doc.parse<0>(temp);
 
-    m_project = ParseProjectHeader(&doc);
+	m_project = make_unique<Project>(ParseProjectHeader(&doc));
     ParseObjectList(&doc);
 
-    ParseVariableList(&doc, m_project);
+    ParseVariableList(&doc);
     SetPendingVariables();
 }
 
 //----------------------------------------------------------------------
 
-Project* XMLParser::ParseProjectHeader(xml_document<> *doc)
+Project XMLParser::ParseProjectHeader(xml_document<> *doc)
 {
     xml_node<> *baseNode = doc->first_node(Constants::XMLParser::Header::Program.c_str());
 
@@ -319,7 +319,7 @@ Project* XMLParser::ParseProjectHeader(xml_document<> *doc)
 
 #pragma endregion
 
-    return new Project(
+    return Project(
         applicationBuildName, 
         applicationBuildNumber, 
         applicationName, 
@@ -1474,7 +1474,7 @@ time_t XMLParser::ParseDateTime(string input)
 
 //----------------------------------------------------------------------
 
-void XMLParser::ParseVariableList(xml_document<> *doc, Project *project)
+void XMLParser::ParseVariableList(xml_document<> *doc)
 {
 	try
 	{
@@ -1483,8 +1483,8 @@ void XMLParser::ParseVariableList(xml_document<> *doc, Project *project)
 		{
 			throw new XMLParserException("No <variables> entry present in code.xml");
 		}
-		ParseGlobalVariables(project, baseNode);
-		ParseObjectVariables(project, baseNode);
+		ParseGlobalVariables(baseNode);
+		ParseObjectVariables(baseNode);
 	}
 	catch (...)
 	{
@@ -1503,7 +1503,7 @@ pair<string, shared_ptr<UserVariable> > XMLParser::ParseUserVariable(const xml_n
 
 //----------------------------------------------------------------------
 
-void XMLParser::ParseGlobalVariables(Project *project, const xml_node<> *baseNode)
+void XMLParser::ParseGlobalVariables(const xml_node<> *baseNode)
 {
 	auto globalListNode = baseNode->first_node(Constants::XMLParser::Formula::ProgramVariableList.c_str());
 	if (!globalListNode)
@@ -1519,7 +1519,7 @@ void XMLParser::ParseGlobalVariables(Project *project, const xml_node<> *baseNod
 
 			if (nameNode)
 			{
-				project->AddVariable(ParseUserVariable(nameNode));
+				m_project->AddVariable(ParseUserVariable(nameNode));
 				node = node->next_sibling(Constants::XMLParser::Formula::UserVariable.c_str());
 			}
 		}
@@ -1528,7 +1528,7 @@ void XMLParser::ParseGlobalVariables(Project *project, const xml_node<> *baseNod
 
 //----------------------------------------------------------------------
 
-void XMLParser::ParseObjectVariables(Project *project, const xml_node<> *baseNode)
+void XMLParser::ParseObjectVariables(const xml_node<> *baseNode)
 {
 	auto variableListNode = baseNode->first_node(Constants::XMLParser::Formula::ObjectVariableList.c_str());
 
@@ -1559,8 +1559,8 @@ void XMLParser::ParseObjectVariables(Project *project, const xml_node<> *baseNod
 			{
 				throw new XMLParserException("name node not found in XML.");
 			}
-            auto object = project->GetObjectList().find(nameNode->value());
-            if (object != project->GetObjectList().end())
+            auto object = m_project->GetObjectList().find(nameNode->value());
+            if (object != m_project->GetObjectList().end())
 			{
 				throw new XMLParserException("object not found in XML.");
 			}
