@@ -7,10 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Height="670" Width="394">
     <Grid x:Name="GridMain" Height="670" HorizontalAlignment="Left" Margin="-5,-5,0,0" VerticalAlignment="Top" Width="394">
-        <Grid x:Name="GridRectangle" HorizontalAlignment="Left" ManipulationDelta="rectRectangleStampSelection_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" VerticalAlignment="Top">
+        <Grid x:Name="GridRectangle" DoubleTapped="rectRectangleStampSelection_DoubleTapped" HorizontalAlignment="Left" ManipulationDelta="rectRectangleStampSelection_ManipulationDelta" ManipulationMode="TranslateX, TranslateY" VerticalAlignment="Top">
             <Rectangle x:Name="rectRectangleStampSelection" Fill="Transparent" Height="670" HorizontalAlignment="Left" Margin="0,0,0,0" Stroke="CornflowerBlue" 
                 StrokeThickness="5" VerticalAlignment="Bottom" 
-                DoubleTapped="rectRectangleStampSelection_DoubleTapped" Width="394"/>
+                Width="394"/>
             <Image x:Name="imgStampedImage" Margin="5,5,5,5" Stretch="Fill" />
 
         </Grid>
