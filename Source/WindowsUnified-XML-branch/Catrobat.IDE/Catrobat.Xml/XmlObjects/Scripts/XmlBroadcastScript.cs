@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element(XmlConstants.ReceivedMessage) != null)
+            if (xRoot != null && xRoot.Element(XmlConstants.ReceivedMessage) != null)
             {
                 ReceivedMessage = xRoot.Element(XmlConstants.ReceivedMessage).Value;
             }
@@ -20,7 +20,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement(XmlConstants.XmlBroadcastScriptType);
+            var xRoot = new XElement(XmlConstants.Script);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlBroadcastScriptType);
 
             CreateCommonXML(xRoot);
 

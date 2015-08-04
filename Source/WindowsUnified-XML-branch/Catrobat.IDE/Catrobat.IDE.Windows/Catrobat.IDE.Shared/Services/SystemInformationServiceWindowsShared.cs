@@ -6,6 +6,7 @@ using Windows.Devices.Enumeration.Pnp;
 using Windows.System;
 using Windows.System.Profile;
 using Windows.UI.Xaml;
+using Windows.Graphics.Display;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.WindowsShared.Services.Windows8Util;
@@ -110,6 +111,18 @@ namespace Catrobat.IDE.WindowsShared.Services
                     _screenHeight = (int)Window.Current.Bounds.Height;
 
                 return _screenHeight.Value;
+            }
+        }
+
+        private int? _scaleFactor;
+        public int ScaleFactor
+        {
+            get
+            {
+                if (_scaleFactor == null)
+                    _scaleFactor = (int)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel; ;
+
+                return _scaleFactor.Value;
             }
         }
 

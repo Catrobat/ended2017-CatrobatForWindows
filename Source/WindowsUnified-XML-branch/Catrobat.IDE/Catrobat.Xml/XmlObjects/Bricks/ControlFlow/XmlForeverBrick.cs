@@ -10,7 +10,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            base.LoadFromCommonXML(xRoot);
+            if (xRoot != null)
+            {
+                base.LoadFromCommonXML(xRoot);
+            }
+            
         }
 
         internal override XElement CreateXml()

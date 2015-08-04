@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element(XmlConstants.BroadcastMessage) != null)
+            if (xRoot != null && xRoot.Element(XmlConstants.BroadcastMessage) != null)
             {
                 BroadcastMessage = xRoot.Element(XmlConstants.BroadcastMessage).Value;
             }

@@ -39,7 +39,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element(XmlConstants.Action) != null)
+            if (xRoot != null && xRoot.Element(XmlConstants.Action) != null)
             {
                 _action = xRoot.Element(XmlConstants.Action).Value;
             }
@@ -47,7 +47,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement(XmlConstants.XmlWhenScriptType);
+            var xRoot = new XElement(XmlConstants.Script);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlWhenScriptType);
 
             CreateCommonXML(xRoot);
 

@@ -10,6 +10,7 @@
 
 using namespace DirectX;
 using namespace std;
+using namespace Microsoft::WRL;
 
 Look::Look(string filename, string name) :
 m_filename(filename), m_name(name)
@@ -46,11 +47,11 @@ string Look::GetFileName()
 
 void Look::LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources)
 {
-    TextureDaemon::Instance()->LoadTexture(deviceResources, move(m_texture), m_filename);
+	m_texture = move(TextureDaemon::Instance()->LoadTexture(deviceResources, m_filename));
 	m_alphamap = m_texture->GetAlphaMap();
 }
 
-shared_ptr<ID2D1Bitmap> Look::GetBitMap()
+ComPtr<ID2D1Bitmap> Look::GetBitMap()
 {
     if (m_texture == NULL)
     {

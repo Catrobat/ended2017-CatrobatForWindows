@@ -8,6 +8,7 @@ class Basic2DRenderer
 {
 public:
     Basic2DRenderer(const std::shared_ptr<DX::DeviceResources>& deviceResources);
+	void Initialize();
     void CreateDeviceDependentResources();
     void CreateWindowSizeDependentResources();
     void ReleaseDeviceDependentResources();

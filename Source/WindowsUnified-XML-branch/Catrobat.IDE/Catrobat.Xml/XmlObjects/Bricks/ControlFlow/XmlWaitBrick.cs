@@ -13,7 +13,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            TimeToWaitInSeconds = new XmlFormula(xRoot.Element(XmlConstants.TimeToWaitInSeconds));
+            if (xRoot != null)
+            {
+                TimeToWaitInSeconds = new XmlFormula(xRoot.Element(XmlConstants.TimeToWaitInSeconds));
+            }
         }
 
         internal override XElement CreateXml()

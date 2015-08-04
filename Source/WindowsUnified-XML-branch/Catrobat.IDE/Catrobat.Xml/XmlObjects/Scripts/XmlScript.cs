@@ -27,7 +27,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
         {
             XmlParserTempProjectHelper.Script = this;
 
-            if (xRoot.Element(XmlConstants.BrickList) != null)
+            if (xRoot != null && xRoot.Element(XmlConstants.BrickList) != null)
             {
                 Bricks = new XmlBrickList(xRoot.Element(XmlConstants.BrickList));
             }

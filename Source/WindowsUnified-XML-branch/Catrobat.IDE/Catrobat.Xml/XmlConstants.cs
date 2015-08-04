@@ -129,6 +129,8 @@ namespace Catrobat.IDE.Core
         public const string XmlIfLogicElseBrick = "IfLogicElseBrick";
         public const string XmlIfLogicEndBrick = "IfLogicEndBrick";
 
+        public const string XmlIFCONDITION = "IF_CONDITION";
+
         //public const string XmlLoopBeginBrick = "ForeverBrick";
         
 

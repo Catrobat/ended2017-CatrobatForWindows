@@ -11,8 +11,7 @@ class TextureDaemon
 {
 public:
 	static TextureDaemon *Instance();
-    void LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources, 
-        std::unique_ptr<CatrobatTexture> &texture, std::string textureKey);
+    std::unique_ptr<CatrobatTexture> LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources, std::string textureKey);
 
 private:
 	TextureDaemon();

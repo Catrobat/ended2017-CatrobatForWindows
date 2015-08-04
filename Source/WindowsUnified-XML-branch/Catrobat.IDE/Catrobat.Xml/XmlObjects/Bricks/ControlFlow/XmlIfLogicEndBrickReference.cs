@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("ifEndBrick");
+            var xRoot = new XElement(XmlConstants.XmlIfLogicEndBrick);
 
             xRoot.Add(new XAttribute("reference", ReferenceHelper.GetReferenceString(this)));
 

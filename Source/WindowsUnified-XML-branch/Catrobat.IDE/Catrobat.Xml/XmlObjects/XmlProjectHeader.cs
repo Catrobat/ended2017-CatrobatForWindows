@@ -63,8 +63,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             Tags = "";
             Url = "http://pocketcode.org/details/871";
             UserHandle = "";
-            ScreenWidth = 768;//1080; // TODO: change this! just for Lumia 1020 device  -- assigned to patrick
-            ScreenHeight = 1280;// 1920;//; // TODO: change this! just for Lumia 1020 device
         }
 
         //private void UpdateSystemInformation()

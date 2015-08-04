@@ -150,6 +150,10 @@ void Object::SetupWindowSizeDependentResources(const std::shared_ptr<DX::DeviceR
 {
     auto deviceContext = deviceResources->GetD2DDeviceContext();
     m_logicalSize = deviceContext->GetSize();
+
+	int screen_width = ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
+	int screen_height = ProjectDaemon::Instance()->GetProject()->GetScreenHeight();
+
     m_ratio.width = m_logicalSize.width / ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
     m_ratio.height = m_logicalSize.height / ProjectDaemon::Instance()->GetProject()->GetScreenHeight() * (-1);
     RecalculateTransformation();
@@ -177,9 +181,8 @@ void Object::Draw(const std::shared_ptr<DX::DeviceResources>& deviceResources)
 
     auto deviceContext = deviceResources->GetD2DDeviceContext();
     deviceContext->SetTransform(m_transformation);
-    //deviceContext->Clear(ColorF(ColorF::White));
-    deviceContext->DrawBitmap(m_look->GetBitMap().get(),
-        RectF(0.f, 0.f, m_renderTargetSize.width, m_renderTargetSize.height));
+    deviceContext->DrawBitmap(m_look->GetBitMap().Get(),
+        RectF(0.f, 0.f, m_renderTargetSize.width, m_renderTargetSize.height), m_opacity);
 
 }
 #pragma endregion

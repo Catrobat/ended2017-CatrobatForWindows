@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
         {
             if (xRoot != null)
             {
-                XMovement = XmlFormula(xRoot, XmlConstants.XPositionChange);
+                XMovement = new XmlFormula(xRoot, XmlConstants.XPositionChange);
             }
         }
 
