@@ -1,4 +1,5 @@
 ﻿using Catrobat.Paint.WindowsPhone.Command;
+using Catrobat.Paint.WindowsPhone.Tool;
 using System;
 using System.IO;
 using Windows.Foundation;
@@ -958,7 +959,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectRectangleStampSelection_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(new Point());
+            ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).stampPaste();
         }
 
         public void ResetAppBarButtonRectangleSelectionControl(bool activated)
