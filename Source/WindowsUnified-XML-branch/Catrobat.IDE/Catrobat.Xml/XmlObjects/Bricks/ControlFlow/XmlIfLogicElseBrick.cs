@@ -62,6 +62,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override void LoadFromXml(XElement xRoot)
         {
+            /* welcome to v93 
             if (xRoot.Element("ifBeginBrick") != null)
             {
                 IfLogicBeginBrickReference = new XmlIfLogicBeginBrickReference(xRoot.Element("ifBeginBrick"));
@@ -69,16 +70,20 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
             if (xRoot.Element("ifEndBrick") != null)
             {
                 IfLogicEndBrickReference = new XmlIfLogicEndBrickReference(xRoot.Element("ifEndBrick"));
-            }
+            }*/
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("ifLogicElseBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlIfLogicElseBrick);
 
+            /* welcome to v93
+            
                 xRoot.Add(IfLogicBeginBrickReference.CreateXml());
 
-                xRoot.Add(IfLogicEndBrickReference.CreateXml());
+                xRoot.Add(IfLogicEndBrickReference.CreateXml()); 
+            */
 
             return xRoot;
         }
