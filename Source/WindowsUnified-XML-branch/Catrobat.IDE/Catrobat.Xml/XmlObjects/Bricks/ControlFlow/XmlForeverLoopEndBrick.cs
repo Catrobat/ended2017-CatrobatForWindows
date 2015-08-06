@@ -20,7 +20,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlLoopEndlessBrickType);
-            base.CreateCommonXML(xRoot);
+            
+            //base.CreateCommonXML(xRoot);
 
             return xRoot;
         }
