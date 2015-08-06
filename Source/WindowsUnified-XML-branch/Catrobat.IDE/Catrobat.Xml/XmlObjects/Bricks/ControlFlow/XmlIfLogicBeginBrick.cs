@@ -96,11 +96,13 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
                 var xFormulalist = new XElement(XmlConstants.FormulaList);
                 xFormulalist.Add(xElement);
+
+                xRoot.Add(xFormulalist);
             }
 
                 //xRoot.Add(IfLogicElseBrickReference.CreateXml());
 
-                xRoot.Add(IfLogicEndBrickReference.CreateXml());
+                //xRoot.Add(IfLogicEndBrickReference.CreateXml());
 
             return xRoot;
         }
