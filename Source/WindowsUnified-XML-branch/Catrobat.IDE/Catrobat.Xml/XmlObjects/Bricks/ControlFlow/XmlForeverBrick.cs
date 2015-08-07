@@ -13,7 +13,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
             if (xRoot != null)
             {
                 base.LoadFromCommonXML(xRoot);
-            }
+             }
             
         }
 
@@ -21,7 +21,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlForeverBrickType);
-            base.CreateCommonXML(xRoot);
+            
+            //base.CreateCommonXML(xRoot);
 
             return xRoot;
         }

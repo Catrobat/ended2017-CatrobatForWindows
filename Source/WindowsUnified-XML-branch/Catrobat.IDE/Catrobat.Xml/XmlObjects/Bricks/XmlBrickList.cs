@@ -94,20 +94,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
                         Bricks.Add(new XmlHideBrick());
                         break;
 
-                //TODO: constants?
-                    case "ifLogicBeginBrick":
+                    case XmlConstants.XmlIfLogicBeginBrick:
                         Bricks.Add(new XmlIfLogicBeginBrick());
                         break;
 
-                    case "ifLogicElseBrick":
+                    case XmlConstants.XmlIfLogicElseBrick:
                         Bricks.Add(new XmlIfLogicElseBrick());
                         break;
 
-                    case "ifLogicEndBrick":
+                    case XmlConstants.XmlIfLogicEndBrick:
                         Bricks.Add(new XmlIfLogicEndBrick());
                         break;
 
-                    case "IfOnEdgeBounceBrick":
+                    case XmlConstants.XmlIfOnEdgeBounceBrickType:
                         Bricks.Add(new XmlIfOnEdgeBounceBrick());
                         break;
 
