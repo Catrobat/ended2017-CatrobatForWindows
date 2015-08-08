@@ -2,6 +2,7 @@
 using System;
 using Windows.Foundation;
 using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 // TODO: using Catrobat.Paint.Phone.Command;
@@ -50,7 +51,12 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _pathGeometry.Figures = _pathFigureCollection;
             _lastPoint = coordinate;
             _path.Data = _pathGeometry;
-            //PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Children.Add(_path);
+            //PocketPaintApplication.GetInstance().PaintingAreaView.addElementToPaintingAreCanvas(_path);
+
+            /*foreach (UIElement elem in PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children)
+            {
+
+            }*/
 
             var rectangleGeometry = new RectangleGeometry
             {
@@ -58,6 +64,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight)
             };
             _path.Clip = rectangleGeometry;
+
             _path.InvalidateArrange();
             _path.InvalidateMeasure();
         }
@@ -70,7 +77,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             }
 
             var coordinate = (Point)arg;
-            System.Diagnostics.Debug.WriteLine("CropTool Coord: " + coordinate.X + " " + coordinate.Y);
+
+            System.Diagnostics.Debug.WriteLine("EraserTool Coord: " + coordinate.X + " " + coordinate.Y);
 
             if (!_lastPointSet)
             {
@@ -88,7 +96,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
                 _pathSegmentCollection.Add(qbs);
 
-
+                //DeletePixels(coordinate);
                 PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
                 _lastPointSet = false;
             }
@@ -113,11 +121,10 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 };
 
                 _pathSegmentCollection.Add(qbs);
-
+                //DeletePixels(coordinate);
                 PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
                 _path.InvalidateArrange();
-
-                DeletePixels();
+                DeletePixels(null);
             }
         }
 
@@ -131,7 +138,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         }
         
         // performance critical... doing some optimizations
-        async private void DeletePixels()
+        async private void DeletePixels(Point p1)
         {
             PixelData.PixelData pixelData = new PixelData.PixelData();
             await pixelData.preparePaintingAreaCanvasPixel();
@@ -146,7 +153,12 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             //        }
             //    }
             //}
-          pixelData.changedPixelToCanvas();
+            pixelData.changedPixelToCanvas();
+
+
+            /*pixelData.SetPixel(p1, pixelData.RGBToString(1, 255, 255, 255));
+
+            await pixelData.PixelBufferToBitmap();*/
         }
 
     }
