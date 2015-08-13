@@ -437,7 +437,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                         if (brick is XmlLoopEndBrick)
                         {
                             var loopEndBrick = brick as XmlLoopEndBrick;
-                            if (loopEndBrick.LoopBeginBrickReference == loopBeginBrickReference)
+                            /*if (loopEndBrick.LoopBeginBrickReference == loopBeginBrickReference)
                             {
                                 var count = 0;
                                 if (reference.EndsWith("]"))
@@ -448,7 +448,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                                     count = Int32.Parse(reference) - 1;
                                 }
                                 return foreverBricks[count];
-                            }
+                            }*/
                         }
                     }
             return null;
@@ -468,7 +468,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                         if (brick is XmlLoopEndBrick)
                         {
                             var loopEndBrick = brick as XmlLoopEndBrick;
-                            if (loopEndBrick.LoopBeginBrickReference == loopBeginBrickReference)
+                            /*if (loopEndBrick.LoopBeginBrickReference == loopBeginBrickReference)
                             {
                                 var count = 0;
                                 if (reference.EndsWith("]"))
@@ -479,7 +479,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                                     count = Int32.Parse(reference) - 1;
                                 }
                                 return repeatBricks[count];
-                            }
+                            }*/
                         }
                     }
             return null;
@@ -499,8 +499,8 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                         if (brick is XmlForeverBrick)
                         {
                             var foreverBrick = brick as XmlForeverBrick;
-                            if (foreverBrick.LoopEndBrickReference == loopEndBrickReference)
-                                found = true;
+                            /*if (foreverBrick.LoopEndBrickReference == loopEndBrickReference)
+                                found = true;*/
                         }
                         if (brick is XmlForeverLoopEndBrick)
                             loopEndBricks.Add(brick);
@@ -535,8 +535,8 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                         if (brick is XmlRepeatBrick)
                         {
                             var repeatBrick = brick as XmlRepeatBrick;
-                            if (repeatBrick.LoopEndBrickReference == loopEndBrickReference)
-                                found = true;
+                            /*if (repeatBrick.LoopEndBrickReference == loopEndBrickReference)
+                                found = true;*/
                         }
                         if (brick is XmlRepeatLoopEndBrick)
                             loopEndBricks.Add(brick);
@@ -806,17 +806,17 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
 
         private static void UpdateLoopBeginBrickReference(XmlSprite oldSprite, XmlSprite newSprite, int scriptCount, int brickCount)
         {
-            var oldLoopBeginBrickReference = (oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlLoopEndBrick).LoopBeginBrickReference;
-            var newLoopBeginBrickReference = (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlLoopEndBrick).LoopBeginBrickReference;
+            //var oldLoopBeginBrickReference = (oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlLoopEndBrick).LoopBeginBrickReference;
+            //var newLoopBeginBrickReference = (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlLoopEndBrick).LoopBeginBrickReference;
 
             var count = 0;
             foreach (var brick in oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks)
             {
-                if (brick == oldLoopBeginBrickReference.LoopBeginBrick)
+                /*if (brick == oldLoopBeginBrickReference.LoopBeginBrick)
                 {
                     newLoopBeginBrickReference.LoopBeginBrick = newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[count] as XmlLoopBeginBrick;
                     return;
-                }
+                }*/
                 count++;
             }
         }
@@ -829,27 +829,22 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             var oldBrick = oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount];
             if (oldBrick is XmlForeverBrick)
             {
-                oldLoopEndBrickReference = (oldBrick as XmlForeverBrick).LoopEndBrickReference;
-                newLoopEndBrickReference =
+                //oldLoopEndBrickReference = (oldBrick as XmlForeverBrick).LoopEndBrickReference;
+                /*newLoopEndBrickReference =
                     (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlForeverBrick)
-                        .LoopEndBrickReference;
+                        .LoopEndBrickReference;*/
             }
             else
             {
-                oldLoopEndBrickReference = (oldBrick as XmlRepeatBrick).LoopEndBrickReference;
-                newLoopEndBrickReference =
+               //oldLoopEndBrickReference = (oldBrick as XmlRepeatBrick).LoopEndBrickReference;
+                /* newLoopEndBrickReference =
                     (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlRepeatBrick)
-                        .LoopEndBrickReference;
+                        .LoopEndBrickReference;*/
             }
 
             var count = 0;
             foreach (var brick in oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks)
             {
-                if (brick == oldLoopEndBrickReference.LoopEndBrick)
-                {
-                    newLoopEndBrickReference.LoopEndBrick = newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[count] as XmlLoopEndBrick;
-                    return;
-                }
                 count++;
             }
         }
