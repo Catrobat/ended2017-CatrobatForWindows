@@ -15,9 +15,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             if (xRoot != null)
             {
-                //TODO: LoadFromCommonXML needs references etc.
                 TimesToRepeat = new XmlFormula(xRoot.Element(XmlConstants.TimesToRepeat));
-                base.LoadFromCommonXML(xRoot);
             }
         }
 
