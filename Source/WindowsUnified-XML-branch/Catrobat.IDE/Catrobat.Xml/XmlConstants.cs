@@ -23,9 +23,9 @@ namespace Catrobat.IDE.Core
 
         public const double MinimumCodeVersion = 0.91;
 
-        public const string TargetIDEVersion = "Win0.93";//"Win0.91";
+        public const string TargetIDEVersion = "0.93";//"Win0.91";
 
-        public const string TargetOutputVersion = "0.92";
+        public const string TargetOutputVersion = "0.93"; //Win0.92
 
         #endregion
 
@@ -212,7 +212,7 @@ namespace Catrobat.IDE.Core
         public const string XmlChangeVariableBrickType = "ChangeVariableBrick";
         public const string UserVariable = "userVariable";
 
-        public const string XmlSetVariableBrickType = "setVariableBrick";
+        public const string XmlSetVariableBrickType = "SetVariableBrick";
 
         #endregion
 
