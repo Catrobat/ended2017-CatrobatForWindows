@@ -124,7 +124,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 //DeletePixels(coordinate);
                 PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
                 _path.InvalidateArrange();
-                DeletePixels(null);
+                DeletePixels();
             }
         }
 
@@ -138,7 +138,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         }
         
         // performance critical... doing some optimizations
-        async private void DeletePixels(Point p1)
+        async private void DeletePixels()
         {
             PixelData.PixelData pixelData = new PixelData.PixelData();
             await pixelData.preparePaintingAreaCanvasPixel();
