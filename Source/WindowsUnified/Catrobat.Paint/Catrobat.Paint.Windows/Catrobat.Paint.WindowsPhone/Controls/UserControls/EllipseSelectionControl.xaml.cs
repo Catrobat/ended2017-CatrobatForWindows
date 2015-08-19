@@ -424,25 +424,48 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             TranslateTransform lastTranslateTransform = getLastTranslateTransformation();
             RotateTransform lastRotateTransform = getLastRotateTransformation();
 
+            double xVal = 0.0;
+            double yVal = 0.0;
+
+            switch (PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation)
+            {
+                case 0:
+                    xVal = e.Delta.Translation.X;
+                    yVal = e.Delta.Translation.Y;
+                    break;
+                case 90:
+                    xVal = e.Delta.Translation.Y;
+                    yVal = -e.Delta.Translation.X;
+                    break;
+                case 180:
+                    xVal = -e.Delta.Translation.X;
+                    yVal = -e.Delta.Translation.Y;
+                    break;
+                case 270:
+                    xVal = -e.Delta.Translation.Y;
+                    yVal = e.Delta.Translation.X;
+                    break;
+            }
+
             if (lastTranslateTransform != null && lastRotateTransform == null)
             {
-                translateTransform.X = e.Delta.Translation.X + lastTranslateTransform.X;
-                translateTransform.Y = e.Delta.Translation.Y + lastTranslateTransform.Y;
+                    translateTransform.X = xVal + lastTranslateTransform.X;
+                    translateTransform.Y = yVal + lastTranslateTransform.Y;               
             }
             else if (lastTranslateTransform == null && lastRotateTransform != null)
             {
-                translateTransform.X = e.Delta.Translation.X;
-                translateTransform.Y = e.Delta.Translation.Y;
+                translateTransform.X = xVal;
+                translateTransform.Y = yVal;
             }
             else if (lastTranslateTransform != null && lastRotateTransform != null)
             {
-                translateTransform.X = e.Delta.Translation.X + lastTranslateTransform.X;
-                translateTransform.Y = e.Delta.Translation.Y + lastTranslateTransform.Y;
+                translateTransform.X = xVal + lastTranslateTransform.X;
+                translateTransform.Y = yVal + lastTranslateTransform.Y;
             }
             else
             {
-                translateTransform.X = e.Delta.Translation.X;
-                translateTransform.Y = e.Delta.Translation.Y;
+                    translateTransform.X = xVal;
+                    translateTransform.Y = yVal;               
             }
             addTransformation(translateTransform);
         }
