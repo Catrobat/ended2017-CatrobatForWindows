@@ -42,12 +42,15 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
         {
             if (xRoot != null)
             {
-                //TODO: needs references etc.
-                if (xRoot.Element(XmlConstants.UserVariable) != null)
-                    UserVariableReference = new XmlUserVariableReference(xRoot.Element(XmlConstants.UserVariable));
+                //TODO: needs references etc. -done?
 
-                if (xRoot.Element(XmlConstants.VariableChange) != null)
-                    VariableFormula = new XmlFormula(xRoot.Element(XmlConstants.VariableChange));
+                if (xRoot != null)
+                {
+                    VariableFormula = new XmlFormula(xRoot, XmlConstants.VariableChange);
+
+                    if (xRoot.Element(XmlConstants.UserVariable) != null)
+                        UserVariableReference = new XmlUserVariableReference(xRoot.Element(XmlConstants.UserVariable));
+                }
             }
         }
 
