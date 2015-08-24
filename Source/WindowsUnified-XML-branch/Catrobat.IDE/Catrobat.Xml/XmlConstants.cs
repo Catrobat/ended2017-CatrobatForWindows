@@ -81,7 +81,7 @@ namespace Catrobat.IDE.Core
         public const string Note = "NOTE"; //note
 
 
-        public const string VariableFormula = "variableFormula";
+        public const string VariableFormula = "VARIABLE";
         public const string FormulaList = "formulaList"; //new list containing the new formula type v91->v93
         public const string Formula = "formula"; //old formulatree - attention there was also a useless formulaclass which just called formula tree v91->v93
         public const string Category = "category";

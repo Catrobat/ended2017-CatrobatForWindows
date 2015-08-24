@@ -44,9 +44,12 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
         {
             if (xRoot != null)
             {
+                VariableFormula = new XmlFormula(xRoot, XmlConstants.Variable);
+
                 if (xRoot.Element(XmlConstants.UserVariable) != null)
                     UserVariableReference = new XmlUserVariableReference(xRoot.Element(XmlConstants.UserVariable));
 
+                /*
                 // TODO: sollte wenn fertig wieder in ein new XmlFormula umgebaut werden!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 if (xRoot.Element("formulaList") != null)
                 {
@@ -58,6 +61,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
                     }
                 }
                 // bis hier her!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                 * */
             }
         }
 
@@ -75,6 +79,15 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
             //TODO: Eigentliche funktion wurde auskommentiert
             //xRoot.Add(VariableFormula.CreateXml("variableForumla"));
             //xRoot.Add(VariableFormula.CreateXml(XmlConstants.Variable));
+
+            var xElement = VariableFormula.CreateXml();
+            xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.VariableFormula);
+
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElement);
+
+            xRoot.Add(xFormulalist);
+
             return xRoot;
         }
 
