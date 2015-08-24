@@ -16,6 +16,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 
         public XmlFormula(XElement xElement)
         {
+            //TODO: - old only "used" by NXT bricks
             LoadFromXml(xElement);
         }
 
@@ -24,14 +25,24 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
             if (xRoot != null && formulaCategory != String.Empty)
             {
                 IEnumerable<XElement> elements = xRoot.Element(XmlConstants.FormulaList).Elements();
+
+                XElement buffer = null;
+
                 foreach (XElement xElement in elements)
                 {
-                    //TODO: überprüfung wenn nur 1 formula element ist, keine schleife!!!
-                    if (xElement.Attribute(XmlConstants.Category).Value == formulaCategory)
+                    if (buffer != null) //to enshure, that only the first element is taken - which should be the only one
                     {
-                        LoadFromXml(xElement);
+                        buffer = null;
+                        break;
+                    }
+
+                    else if (xElement.Attribute(XmlConstants.Category).Value == formulaCategory)
+                    {
+                        buffer = xElement;
                     }
                 }
+
+                LoadFromXml(buffer); //to enshure, that only the first element is taken - which should be the only one
             }
         }
 
