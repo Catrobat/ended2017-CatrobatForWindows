@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             if (xRoot != null)
             {
-                TimesToRepeat = new XmlFormula(xRoot.Element(XmlConstants.TimesToRepeat));
+                TimesToRepeat = new XmlFormula(xRoot, XmlConstants.TimesToRepeat);
             }
         }
 

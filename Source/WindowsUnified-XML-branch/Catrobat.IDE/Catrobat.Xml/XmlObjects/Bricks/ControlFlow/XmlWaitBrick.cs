@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
         {
             if (xRoot != null)
             {
-                TimeToWaitInSeconds = new XmlFormula(xRoot,XmlConstants.TimeToWaitInSeconds);
+                TimeToWaitInSeconds = new XmlFormula(xRoot, XmlConstants.TimeToWaitInSeconds);
             }
         }
 

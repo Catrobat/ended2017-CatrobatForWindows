@@ -65,9 +65,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element(XmlConstants.XmlIfLogicBeginBrick) != null)
+            if (xRoot != null)
             {
-                IfCondition = new XmlFormula(xRoot.Element(XmlConstants.XmlIfLogicBeginBrick));
+                IfCondition = new XmlFormula(xRoot, XmlConstants.XmlIFCONDITION);
             }
             /*if (xRoot.Element("ifElseBrick") != null)
             {

@@ -44,20 +44,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
         {
             if (xRoot != null)
             {
+                VariableFormula = new XmlFormula(xRoot, XmlConstants.Variable);
+
                 if (xRoot.Element(XmlConstants.UserVariable) != null)
                     UserVariableReference = new XmlUserVariableReference(xRoot.Element(XmlConstants.UserVariable));
-
-                // TODO: sollte wenn fertig wieder in ein new XmlFormula umgebaut werden!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                if (xRoot.Element("formulaList") != null)
-                {
-                    var formulaList = xRoot.Element("formulaList");
-                    if (formulaList.Element("formula") != null)
-                    {
-                        //TODO: Wird das zu einer Liste, oder anders lösen?
-                        VariableFormula = new XmlFormula(xRoot.Element("formula"));
-                    }
-                }
-                // bis hier her!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             }
         }
 
@@ -69,12 +59,19 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
             if(UserVariableReference != null)
                 xRoot.Add(UserVariableReference.CreateXml());
 
-            //var xVariable2 = new XElement("variableFormula");
-            //xVariable2.Add(VariableFormula.CreateXml());
-            //xRoot.Add(xVariable2);
-            //TODO: Eigentliche funktion wurde auskommentiert
-            //xRoot.Add(VariableFormula.CreateXml("variableForumla"));
-            //xRoot.Add(VariableFormula.CreateXml(XmlConstants.Variable));
+            var xElement = VariableFormula.CreateXml();
+            xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.Variable);
+
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElement);
+
+            xRoot.Add(xFormulalist);
+
+            /*TODO: add     <inUserBrick>false</inUserBrick>
+                            <userVariable>random to</userVariable>
+             * and delete/change reference
+             * here or mabyesomewhere else but for this brick
+            */
             return xRoot;
         }
 
