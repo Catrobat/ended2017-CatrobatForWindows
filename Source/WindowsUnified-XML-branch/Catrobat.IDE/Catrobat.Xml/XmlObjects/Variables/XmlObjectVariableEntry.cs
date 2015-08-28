@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(XmlSpriteReference != null && XmlSpriteReference.Sprite == null)
                 XmlSpriteReference.LoadReference();

@@ -60,7 +60,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (XmlSoundReference != null)
                 XmlSoundReference.LoadReference();

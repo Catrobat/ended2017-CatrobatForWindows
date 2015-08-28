@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(Sprite == null)
                 Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as XmlSprite;

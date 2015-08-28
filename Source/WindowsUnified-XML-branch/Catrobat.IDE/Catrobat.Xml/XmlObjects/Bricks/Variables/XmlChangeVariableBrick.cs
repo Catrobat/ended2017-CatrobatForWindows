@@ -73,7 +73,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (UserVariableReference != null)
                 UserVariableReference.LoadReference();

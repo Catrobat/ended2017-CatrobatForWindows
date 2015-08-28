@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Looks
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(XmlLookReference != null)
             XmlLookReference.LoadReference();

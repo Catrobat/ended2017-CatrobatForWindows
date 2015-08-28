@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (Size != null)
                 Size.LoadReference();
