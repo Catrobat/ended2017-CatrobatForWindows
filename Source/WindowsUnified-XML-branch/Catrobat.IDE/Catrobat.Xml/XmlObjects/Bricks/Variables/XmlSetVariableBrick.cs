@@ -6,31 +6,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 {
     public partial class XmlSetVariableBrick : XmlBrick
     {
-        internal XmlUserVariableReference UserVariableReference { get; set; }
-
-        public XmlUserVariable UserVariable
-        {
-            get
-            {
-                if (UserVariableReference == null)
-                    return null;
-
-                return UserVariableReference.UserVariable;
-            }
-            set
-            {
-                if (UserVariableReference == null)
-                    UserVariableReference = new XmlUserVariableReference();
-
-                if (UserVariableReference.UserVariable == value)
-                    return;
-
-                UserVariableReference.UserVariable = value;
-
-                if (value == null)
-                    UserVariableReference = null;
-            }
-        }
+        public XmlUserVariable UserVariable { get; set; }
 
         public XmlFormula VariableFormula { get; set; }
 
@@ -47,7 +23,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
                 VariableFormula = new XmlFormula(xRoot, XmlConstants.Variable);
 
                 if (xRoot.Element(XmlConstants.UserVariable) != null)
-                    UserVariableReference = new XmlUserVariableReference(xRoot.Element(XmlConstants.UserVariable));
+                    UserVariable = new XmlUserVariable(xRoot.Element(XmlConstants.UserVariable));
             }
         }
 
@@ -55,9 +31,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
         {
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlSetVariableBrickType);
-
-            if(UserVariableReference != null)
-                xRoot.Add(UserVariableReference.CreateXml());
 
             var xElement = VariableFormula.CreateXml();
             xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.Variable);
@@ -67,20 +40,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 
             xRoot.Add(xFormulalist);
 
-            /*TODO: add     <inUserBrick>false</inUserBrick>
-                            <userVariable>random to</userVariable>
-             * and delete/change reference
-             * here or mabyesomewhere else but for this brick
-            */
+            xRoot.Add(UserVariable.CreateXml());
+
             return xRoot;
         }
 
-        internal override void LoadReference()
-        {
-            if(UserVariableReference != null)
-                UserVariableReference.LoadReference();
-            if(VariableFormula != null)
-                VariableFormula.LoadReference();
-        }
     }
 }

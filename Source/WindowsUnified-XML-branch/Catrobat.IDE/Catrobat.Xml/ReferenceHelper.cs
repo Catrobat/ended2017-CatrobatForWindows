@@ -422,8 +422,8 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
 
             foreach (var script in sprite.Scripts.Scripts)
                 foreach (var brick in script.Bricks.Bricks)
-                    if (brick is XmlSetVariableBrick || brick is XmlChangeVariableBrick)
-                        if (brick is XmlSetVariableBrick && (brick as XmlSetVariableBrick).UserVariableReference == xmlUserVariableReference ||
+                    if (/*brick is XmlSetVariableBrick ||*/ brick is XmlChangeVariableBrick)
+                        if (/*brick is XmlSetVariableBrick && (brick as XmlSetVariableBrick).UserVariableReference == xmlUserVariableReference ||*/
                             brick is XmlChangeVariableBrick && (brick as XmlChangeVariableBrick).UserVariableReference == xmlUserVariableReference)
                         {
                             found = true;
@@ -801,20 +801,20 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             XmlUserVariableReference newVariableReference;
 
             var oldBrick = oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount];
-            if (oldBrick is XmlChangeVariableBrick)
-            {
+            /*if (oldBrick is XmlChangeVariableBrick)
+            {*/
                 oldVariableReference = (oldBrick as XmlChangeVariableBrick).UserVariableReference;
                 newVariableReference =
                     (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlChangeVariableBrick)
                         .UserVariableReference;
-            }
+            /*}
             else
             {
                 oldVariableReference = (oldBrick as XmlSetVariableBrick).UserVariableReference;
                 newVariableReference =
                     (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlSetVariableBrick)
                         .UserVariableReference;
-            }
+            }*/
 
             var entries = XmlParserTempProjectHelper.Program.VariableList.ObjectVariableList.ObjectVariableEntries;
             foreach (var oldEntry in entries)

@@ -15,14 +15,12 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            Name = xRoot.Element(XmlConstants.Name).Value;
+            Name = xRoot.Value;
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement(XmlConstants.UserVariable);
-
-            xRoot.Add(new XElement(XmlConstants.Name, Name));
+            var xRoot = new XElement(XmlConstants.UserVariable, Name);
 
             return xRoot;
         }
