@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Nxt
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (Speed != null)
                 Speed.LoadReference();

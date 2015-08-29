@@ -39,7 +39,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             foreach(var entry in ObjectVariableEntries)
                 entry.LoadReference();

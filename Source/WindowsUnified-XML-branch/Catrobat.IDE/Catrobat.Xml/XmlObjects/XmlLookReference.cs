@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(Look == null)
                 Look = ReferenceHelper.GetReferenceObject(this, _reference) as XmlLook;

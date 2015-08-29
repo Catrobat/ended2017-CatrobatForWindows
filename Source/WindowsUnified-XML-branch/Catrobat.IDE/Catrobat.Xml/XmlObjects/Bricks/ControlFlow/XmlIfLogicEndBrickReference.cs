@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(IfLogicEndBrick == null)
                 IfLogicEndBrick = ReferenceHelper.GetReferenceObject(this, _reference) as XmlIfLogicEndBrick;

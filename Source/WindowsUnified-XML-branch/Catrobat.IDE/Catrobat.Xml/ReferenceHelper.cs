@@ -149,12 +149,12 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             }
 
             var count = 0;
-            foreach (var tempUserVariable in XmlParserTempProjectHelper.Program.VariableList.ProgramVariableList.UserVariables)
+            foreach (var tempUserVariableReference in XmlParserTempProjectHelper.Program.VariableList.ProgramVariableList.UserVariableReferences)
             {
                 count++;
-                if ((tempUserVariable == userVariable) && (count == 1))
+                if ((tempUserVariableReference.UserVariable == userVariable) && (count == 1))
                     return "../../../../../../../variables/programVariableList/userVariable";
-                else if (tempUserVariable == userVariable)
+                else if (tempUserVariableReference.UserVariable == userVariable)
                     return "../../../../../../../variables/programVariableList/userVariable[" + count + "]";
             }
 
@@ -442,7 +442,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                 //TODO: create constants
                 if (reference.Contains("programVariableList"))
                 {
-                    return XmlParserTempProjectHelper.Program.VariableList.ProgramVariableList.UserVariables[count];
+                    return XmlParserTempProjectHelper.Program.VariableList.ProgramVariableList.UserVariableReferences[count];
                 }
                 if (reference.Contains("objectVariableList"))
                 {

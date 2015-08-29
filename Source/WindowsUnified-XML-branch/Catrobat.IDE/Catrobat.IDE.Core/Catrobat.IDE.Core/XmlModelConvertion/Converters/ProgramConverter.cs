@@ -30,7 +30,11 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
                 elementSelector: entry => entry.VariableList.UserVariables.ToReadOnlyDictionary(
                     keySelector: variable => variable,
                     elementSelector: variable => (LocalVariable)localVariableConverter.Convert(variable, c)));
-            var globalVariables = o.VariableList.ProgramVariableList.UserVariables.ToReadOnlyDictionary(
+
+            List<XmlUserVariable> globalVariablesBuffer = new List<XmlUserVariable>();
+            foreach(var variableReference in o.VariableList.ProgramVariableList.UserVariableReferences)
+                globalVariablesBuffer.Add(variableReference.UserVariable);
+            var globalVariables = globalVariablesBuffer.ToReadOnlyDictionary(
                 keySelector: variable => variable,
                 elementSelector: variable => (GlobalVariable)globalVariableConverter.Convert(variable, c));
             var contextBase = new XmlModelConvertContextBase(o, globalVariables);
@@ -61,7 +65,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
                 Name = o.ProgramHeader.ProgramName,
                 Description = o.ProgramHeader.Description,
                 UploadHeader = (UploadHeader)uploadHeaderConverter.Convert(o.ProgramHeader, c),
-                GlobalVariables = o.VariableList.ProgramVariableList.UserVariables.Select(variable => globalVariables[variable]).ToObservableCollection(),
+                GlobalVariables = globalVariablesBuffer.Select(variable => globalVariables[variable]).ToObservableCollection(),
                 /*BroadcastMessages = contextBase.BroadcastMessages.Values.ToObservableCollection(),*/
                 Sprites = o.SpriteList.Sprites.Select(sprite => sprites[sprite]).ToObservableCollection()
             };
@@ -110,6 +114,19 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
             var header = (XmlProjectHeader)uploadHeaderConverter.Convert(m.UploadHeader, c);
             header.ProgramName = m.Name;
             header.Description = m.Description;
+
+            List<XmlUserVariableReference> UserVariableReferencesBuffer = new List<XmlUserVariableReference>();
+            if (m.GlobalVariables != null)
+            {
+                List<XmlUserVariable> UserVariables = m.GlobalVariables.Select(variable => globalVariables[variable]).ToList();
+                foreach (var userVariable in UserVariables)
+	            {
+                    XmlUserVariableReference userVariableReference = new XmlUserVariableReference();
+                    userVariableReference.UserVariable = userVariable;
+                    userVariableReference.LoadReference();
+		            UserVariableReferencesBuffer.Add(userVariableReference);
+	            }
+            }
             var result = new XmlProgram
             {
                 ProgramHeader = header,
@@ -117,7 +134,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
                 {
                     ProgramVariableList = new XmlProgramVariableList
                     {
-                        UserVariables = m.GlobalVariables == null ? new List<XmlUserVariable>() : m.GlobalVariables.Select(variable => globalVariables[variable]).ToList()
+                        UserVariableReferences = UserVariableReferencesBuffer
                     },
                     ObjectVariableList = new XmlObjectVariableList
                     {
