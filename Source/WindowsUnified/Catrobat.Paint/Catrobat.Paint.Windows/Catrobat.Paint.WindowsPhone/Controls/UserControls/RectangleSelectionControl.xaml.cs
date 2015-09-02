@@ -360,6 +360,13 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             rectRectangleToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
             rectRectangleToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
             // strokeLineJoinOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected;
+            RotateTransform rotate = new RotateTransform();
+            var angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
+            rotate.Angle = -angle;
+            rotate.CenterX = GridMainSelection.Width / 2.0;
+            rotate.CenterY = GridMainSelection.Height / 2.0;
+            addTransformation(rotate);
+
             isModifiedRectangleMovement = false;
         }
     }
