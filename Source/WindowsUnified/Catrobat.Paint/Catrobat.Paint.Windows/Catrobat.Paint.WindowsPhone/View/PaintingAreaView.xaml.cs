@@ -720,7 +720,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 app_btnBrushThickness.Label = "Einstellungen";
                 app_btnReset.Label = "Ausgangsposition";
-                // TODO: David app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
+                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnReset.Click += app_btn_reset_Click;

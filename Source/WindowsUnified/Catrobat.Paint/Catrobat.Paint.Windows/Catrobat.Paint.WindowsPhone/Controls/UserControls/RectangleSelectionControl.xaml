@@ -14,7 +14,8 @@
                 StrokeThickness="3" StrokeLineJoin="Miter" Margin="35,35,35,35" 
                  VerticalAlignment="Top" Width="160" />
 
-        <Rectangle x:Name="rectRectangleForMovement" Fill="#01FFFFFF" Height="200"
+        <Rectangle x:Name="rectRectangleForMovement" Fill="#01FFFFFF" Height="200" 
+                   DoubleTapped="rectEllipseForMovement_DoubleTapped" ManipulationDelta="rectEllipseForMovement_ManipulationDelta"
                    ManipulationMode="TranslateX, TranslateY" Margin="15,15,15,15"
                    Stroke="LightSkyBlue" StrokeThickness="5" Width="200" />
 

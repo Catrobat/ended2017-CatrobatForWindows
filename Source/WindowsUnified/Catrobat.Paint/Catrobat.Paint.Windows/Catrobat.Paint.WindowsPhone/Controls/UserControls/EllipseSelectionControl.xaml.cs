@@ -37,8 +37,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private TranslateTransform createTranslateTransform(double x, double y)
         {
             var move = new TranslateTransform();
-            ((TranslateTransform)move).X = x;
-            ((TranslateTransform)move).Y = y;
+            move.X = x;
+            move.Y = y;
 
             return move;
         }
