@@ -271,7 +271,7 @@
     <value>Wenn angetippt</value>
   </data>
   <data name="Editor_ActionPlural" xml:space="preserve">
-    <value>Skripten</value>
+    <value>Skripte</value>
   </data>
   <data name="Editor_ActionSingular" xml:space="preserve">
     <value>Skript</value>
@@ -403,7 +403,7 @@
     <value>Objekt</value>
   </data>
   <data name="Editor_PivotActions" xml:space="preserve">
-    <value>Skripten</value>
+    <value>Skripte</value>
   </data>
   <data name="Editor_PivotLooks" xml:space="preserve">
     <value>Aussehen</value>
