@@ -67,9 +67,20 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public void Stop()
         {
-            _compass.ReadingChanged -= _compass_ReadingChanged;
-            _accelerometer.ReadingChanged -= _accelerometer_ReadingChanged;
-            _inclinometer.ReadingChanged -= _inclinometer_ReadingChanged;
+            if (_compass != null)
+            {
+                _compass.ReadingChanged -= _compass_ReadingChanged;
+            }
+
+            if (_accelerometer != null)
+            {
+                _accelerometer.ReadingChanged -= _accelerometer_ReadingChanged;
+            }
+
+            if (_inclinometer != null)
+            {
+                _inclinometer.ReadingChanged -= _inclinometer_ReadingChanged;
+            }
         }
 
         public double GetAccelerationX()
