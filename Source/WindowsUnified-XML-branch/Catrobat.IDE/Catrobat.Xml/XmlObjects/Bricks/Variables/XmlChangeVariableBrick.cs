@@ -43,6 +43,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
             if (xRoot != null)
             {
                 //TODO: needs references etc. -done?
+                // -- änderungen zwecks änderungen an XmlUserVariableReference allgemein
 
                 if (xRoot != null)
                 {

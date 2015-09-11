@@ -21,6 +21,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
         internal override void LoadFromXml(XElement xRoot)
         {
             _reference = xRoot.Attribute(XmlConstants.Reference).Value;
+            UserVariable = new XmlUserVariable { Name = "something_dirty" };
         }
 
         internal override XElement CreateXml()
