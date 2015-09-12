@@ -1087,10 +1087,10 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
     <value>Verwende den "Back-Button" um die Änderungen zu übernehmen.</value>
   </data>
   <data name="FormulaKeyboard_DigitSeparator" xml:space="preserve">
-    <value>.</value>
+    <value>,</value>
   </data>
   <data name="FormulaKeyboard_ParameterSeparator" xml:space="preserve">
-    <value>,</value>
+    <value>;</value>
   </data>
   <data name="Main_UseTemplateText" xml:space="preserve">
     <value>Eines der unten aufgelisteten Programme als Vorlage verwenden.</value>
