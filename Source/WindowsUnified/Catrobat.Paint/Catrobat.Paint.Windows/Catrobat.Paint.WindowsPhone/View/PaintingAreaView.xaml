@@ -37,10 +37,14 @@
                 <!-- EllipseSelectionControl -->
                 <userControls:EllipseSelectionControl x:Name="ucEllipseSelectionControl" Visibility="Collapsed"></userControls:EllipseSelectionControl>
 
-                <!-- RectangleSelectioncontrol -->
-                <userControls:RectangleSelectionControl x:Name="ucRectangleSelectionControl" Visibility="Collapsed"></userControls:RectangleSelectionControl>
+
 
             </Grid>
+            <!-- RectangleSelectioncontrol -->
+
+            <userControls:RectangleSelectionControl x:Name="ucRectangleSelectionControl" HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center" Visibility="Collapsed"></userControls:RectangleSelectionControl>
+
             <!--ONLY FOR TESTING
             <TextBox x:Name="tbTest" HorizontalAlignment="Left" Margin="160,162,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
             -->
@@ -61,7 +65,7 @@
         <Grid x:Name="GrdThicknessControl" Height="380" HorizontalAlignment="Center" Margin="0,0,0,72" VerticalAlignment="Bottom" Visibility="Collapsed" Width="384">
             <controls:ThicknessControl x:Name="CtrlThicknessControl"></controls:ThicknessControl>
         </Grid>
-        
+
         <!-- Crop-Control -->
         <userControls:CropControl x:Name="ctrlCropControl" Visibility="Collapsed"></userControls:CropControl>
 

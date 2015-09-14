@@ -66,9 +66,11 @@ namespace Catrobat.Paint.WindowsPhone.Listener
             {
                 if (PocketPaintApplication.GetInstance().ToolWhileMoveTool == null)
                     return;
-                PocketPaintApplication.GetInstance().SwitchTool(PocketPaintApplication.GetInstance().ToolWhileMoveTool.GetToolType());
+
+                ToolType newSelectedTooltype = PocketPaintApplication.GetInstance().ToolWhileMoveTool.GetToolType();
+                PocketPaintApplication.GetInstance().SwitchTool(newSelectedTooltype);
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeVisibilityOfActiveSelectionControl(Visibility.Visible);
-                if (currentTooltype == ToolType.Ellipse || currentTooltype == ToolType.ImportPng || currentTooltype == ToolType.Rect)
+                if (newSelectedTooltype == ToolType.Ellipse || newSelectedTooltype == ToolType.ImportPng || newSelectedTooltype == ToolType.Rect)
                 {
                     PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
                 }

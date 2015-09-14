@@ -437,6 +437,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 rectangleToDraw.Height = value;
             }
+            
         }
 
         public void setWidthOfSelection(double width)
