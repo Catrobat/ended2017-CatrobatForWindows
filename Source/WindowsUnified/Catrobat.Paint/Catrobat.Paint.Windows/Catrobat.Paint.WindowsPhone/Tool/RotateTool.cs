@@ -24,18 +24,14 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public override void HandleDown(object arg)
         {
-           
         }
 
         public override void HandleMove(object arg)
         {
-            
         }
 
         public override void HandleUp(object arg)
         {
-          
-
         }
 
         public override void Draw(object o)
