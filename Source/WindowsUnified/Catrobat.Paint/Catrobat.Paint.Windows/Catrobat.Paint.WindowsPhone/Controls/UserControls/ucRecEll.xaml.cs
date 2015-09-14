@@ -179,7 +179,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             {
                 if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
                 {
-                    // PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeThicknessOfRectangleToDraw = strokeThickness;
+                    PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeThicknessOfRectangleToDraw = strokeThickness;
                 }
                 else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                 {

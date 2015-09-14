@@ -136,7 +136,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     {
                         if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
                         {
-                            //PocketPaintApplication.GetInstance().RectangleSelectionControl.setHeightOfSelection(currentValue);
+                            PocketPaintApplication.GetInstance().RectangleSelectionControl.setHeightOfSelection(currentValue);
                         }
                     }
                     else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
@@ -156,7 +156,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     {
                         if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
                         {
-                            // PocketPaintApplication.GetInstance().RectangleSelectionControl.setWidthOfSelection(currentValue);
+                            PocketPaintApplication.GetInstance().RectangleSelectionControl.setWidthOfSelection(currentValue);
                         }
                     }
                     else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
