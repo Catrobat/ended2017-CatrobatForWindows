@@ -305,7 +305,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectEllipseForMovement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            Point centerCoordinate = getCenterCoordinateOfGridMain();
             var coord = e.GetPosition(PocketPaintApplication.GetInstance().GridWorkingSpace);
             var coord2 = e.GetPosition(rectangleToDraw);
 
