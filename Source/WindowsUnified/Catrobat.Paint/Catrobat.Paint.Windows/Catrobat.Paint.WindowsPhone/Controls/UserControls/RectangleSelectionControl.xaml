@@ -5,6 +5,7 @@
     xmlns:local="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:userControls="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
     mc:Ignorable="d"
     d:DesignHeight="230"
     d:DesignWidth="230" ManipulationMode="All">
@@ -19,53 +20,139 @@
                    ManipulationMode="TranslateX, TranslateY" Margin="15,15,15,15"
                    Stroke="LightSkyBlue" StrokeThickness="5" Width="200" />
 
-        <Ellipse x:Name="ellCenterBottom" Fill="LightSkyBlue" Height="25" 
-                 HorizontalAlignment="Center" 
-                 ManipulationDelta="ellCenterBottom_ManipulationDelta" 
-                 ManipulationMode="TranslateX, TranslateY" 
-                 VerticalAlignment="Bottom" Width="25" />
-
-        <Ellipse x:Name="ellLeftCenter" Fill="LightSkyBlue" Height="25" 
-                 HorizontalAlignment="Left" 
-                 ManipulationDelta="ellLeftCenter_ManipulationDelta" 
-                 ManipulationMode="TranslateX, TranslateY" 
-                 VerticalAlignment="Top" Width="25" Margin="0,102,0,0" />
-
-        <Ellipse x:Name="ellLeftBottom" Fill="LightSkyBlue" Height="25" 
-                 HorizontalAlignment="Left" 
-                 ManipulationDelta="ellLeftBottom_ManipulationDelta"
-                 ManipulationMode="TranslateX, TranslateY" 
-                 VerticalAlignment="Bottom" Width="25" />
-
-        <Ellipse x:Name="ellLeftTop" Fill="red" Height="25" 
-                 HorizontalAlignment="Left"
-                 ManipulationDelta="ellLeftTop_ManipulationDelta" 
-                 ManipulationMode="TranslateX, TranslateY" 
-                 VerticalAlignment="Top" Width="25" />
-
-        <Ellipse x:Name="ellRightCenter" Fill="LightSkyBlue" Height="25" 
-                 HorizontalAlignment="Right" 
-                 ManipulationDelta="ellRightCenter_ManipulationDelta" 
-                 ManipulationMode="TranslateX, TranslateY" 
-                 VerticalAlignment="Bottom" Width="25" Margin="0,0,0,103" />
-
-        <Ellipse x:Name="ellRightBottom" Fill="Blue" Height="25" 
-                 HorizontalAlignment="Right" 
-                 ManipulationDelta="ellRightBottom_ManipulationDelta"
-                 ManipulationMode="TranslateX, TranslateY" 
-                 VerticalAlignment="Bottom" Width="25" />
-
-        <Ellipse x:Name="ellRightTop" Fill="LightSkyBlue" Height="25" 
-                 HorizontalAlignment="Right"
-                 ManipulationDelta="ellRightTop_ManipulationDelta"
-                 ManipulationMode="TranslateX, TranslateY"
-                 VerticalAlignment="Top" Width="25">
+        <Ellipse
+            x:Name="ellCenterBottom"     
+            Fill="LightSkyBlue"
+            Height="30"
+            HorizontalAlignment="Center"
+            ManipulationDelta="ellCenterBottom_ManipulationDelta" 
+            ManipulationMode="TranslateX, TranslateY" 
+            Margin="0,0,0,5"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="Fill"
+            Stroke="Transparent"
+            VerticalAlignment="Bottom"
+            Width="30"  UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.Clip>
+                <RectangleGeometry Rect="0,15,30,30"/>
+            </Ellipse.Clip>
         </Ellipse>
 
-        <Ellipse x:Name="ellCenterTop" Fill="LightSkyBlue" Height="25" 
-                 HorizontalAlignment="Center"
-                 ManipulationDelta="ellCenterTop_ManipulationDelta"
-                 ManipulationMode="TranslateX, TranslateY"
-                 VerticalAlignment="Top" Width="25" />
+        <Ellipse
+            x:Name="ellLeftCenter"     
+            Fill="LightSkyBlue"
+            Height="30"
+            HorizontalAlignment="Left"
+            ManipulationDelta="ellLeftCenter_ManipulationDelta" 
+            ManipulationMode="TranslateX, TranslateY" 
+            Margin="5,0,0,0"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="Fill"
+            Stroke="Transparent"
+            VerticalAlignment="Center"
+            Width="30"  UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+            <CompositeTransform Rotation="450"/>
+            </Ellipse.RenderTransform>
+            <Ellipse.Clip>
+            <RectangleGeometry Rect="0,15,30,30"/>
+            </Ellipse.Clip>
+        </Ellipse>
+
+        <userControls:clippedEllipse
+            x:Name="ucEllLeftBottom"
+            HorizontalAlignment="Left"
+            ManipulationDelta="ellLeftBottom_ManipulationDelta"
+            ManipulationMode="TranslateX, TranslateY"
+            Margin="5,0,0,-5"
+            RenderTransformOrigin="0.5,0.5"
+            VerticalAlignment="Bottom"
+            Width="40" >
+        </userControls:clippedEllipse>
+
+
+        <userControls:clippedEllipse
+            x:Name="ucEllLeftTop"
+            HorizontalAlignment="Left"
+            ManipulationDelta="ellLeftTop_ManipulationDelta"
+            ManipulationMode="TranslateX, TranslateY"
+            Margin="-5,5,0,0"
+            RenderTransformOrigin="0.5,0.5"
+            VerticalAlignment="Top"
+            Width="40" >
+            <userControls:clippedEllipse.RenderTransform>
+                <CompositeTransform Rotation="90"/>
+            </userControls:clippedEllipse.RenderTransform>
+        </userControls:clippedEllipse>
+
+        <Ellipse
+            x:Name="ellRightCenter"     
+            Fill="LightSkyBlue"
+            Height="30"
+            HorizontalAlignment="Right"
+            ManipulationDelta="ellRightCenter_ManipulationDelta" 
+            ManipulationMode="TranslateX, TranslateY" 
+            Margin="0,0,5,0"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="Fill"
+            Stroke="Transparent"
+            VerticalAlignment="Center"
+            Width="30"  UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="270"/>
+            </Ellipse.RenderTransform>
+            <Ellipse.Clip>
+                <RectangleGeometry Rect="0,15,30,30"/>
+            </Ellipse.Clip>
+        </Ellipse>
+
+        <userControls:clippedEllipse
+            x:Name="ucEllRightBottom"
+            HorizontalAlignment="Right"
+            ManipulationDelta="ellRightBottom_ManipulationDelta"
+            ManipulationMode="TranslateX, TranslateY"
+            Margin="0,0,-5,5"
+            RenderTransformOrigin="0.5,0.5"
+            VerticalAlignment="Bottom"
+            Width="40" >
+            <userControls:clippedEllipse.RenderTransform>
+                <CompositeTransform Rotation="270"/>
+            </userControls:clippedEllipse.RenderTransform>
+        </userControls:clippedEllipse>
+
+        <userControls:clippedEllipse
+            x:Name="ucEllRightTop"
+            HorizontalAlignment="Right"
+            ManipulationDelta="ellRightTop_ManipulationDelta"
+            ManipulationMode="TranslateX, TranslateY"
+            Margin="0,-5,5,0"
+            RenderTransformOrigin="0.5,0.5"
+            VerticalAlignment="Top"
+            Width="40" >
+            <userControls:clippedEllipse.RenderTransform>
+                <CompositeTransform Rotation="180"/>
+            </userControls:clippedEllipse.RenderTransform>
+        </userControls:clippedEllipse>
+
+        <Ellipse
+            x:Name="ellCenterTop"     
+            Fill="LightSkyBlue"
+            Height="30"
+            HorizontalAlignment="Center"
+            ManipulationDelta="ellCenterTop_ManipulationDelta" 
+            ManipulationMode="TranslateX, TranslateY" 
+            Margin="0,5,0,0"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="Fill"
+            Stroke="Transparent"
+            VerticalAlignment="Top"
+            Width="30"  UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform Rotation="180"/>
+            </Ellipse.RenderTransform>
+            <Ellipse.Clip>
+                <RectangleGeometry Rect="0,15,30,30"/>
+            </Ellipse.Clip>
+        </Ellipse>
     </Grid>
 </UserControl>

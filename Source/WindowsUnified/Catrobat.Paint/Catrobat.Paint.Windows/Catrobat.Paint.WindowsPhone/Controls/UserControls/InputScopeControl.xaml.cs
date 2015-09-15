@@ -129,9 +129,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                 currentButton.Content = tbInputValue.Text;
                 double currentValue = Convert.ToDouble(tbInputValue.Text);
-                
-                // TODO: David double differenceToGridMain = (PocketPaintApplication.GetInstance().RectangleSelectionControl.rectangleToDraw.Margin.Top * 2.0);
-                // TODO: David currentValue += differenceToGridMain;
 
                 if (currentButton.Name.Equals("btnHeightValue"))
                 {
@@ -139,7 +136,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     {
                         if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
                         {
-                            // TODO: David PocketPaintApplication.GetInstance().RectangleSelectionControl.changeHeightOfDrawingSelection(currentValue, false);
+                            PocketPaintApplication.GetInstance().RectangleSelectionControl.setHeightOfSelection(currentValue);
                         }
                     }
                     else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
@@ -159,7 +156,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     {
                         if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
                         {
-                            // TODO: David PocketPaintApplication.GetInstance().RectangleSelectionControl.changeWidthOfDrawingSelection(currentValue, false);
+                            PocketPaintApplication.GetInstance().RectangleSelectionControl.setWidthOfSelection(currentValue);
                         }
                     }
                     else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
