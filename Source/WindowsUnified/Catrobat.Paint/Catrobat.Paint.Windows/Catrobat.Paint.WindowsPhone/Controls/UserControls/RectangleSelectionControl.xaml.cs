@@ -55,6 +55,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
+        public Rectangle rectangleForMovement
+        {
+            get
+            {
+                return rectRectangleForMovement;
+            }
+            set
+            {
+                rectRectangleForMovement = value;
+            }
+        }
+
         public PenLineJoin strokeLineJoinOfRectangleToDraw
         {
             get
@@ -294,8 +306,44 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private void rectEllipseForMovement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             Point centerCoordinate = getCenterCoordinateOfGridMain();
-            PocketPaintApplication.GetInstance().ToolCurrent.Draw(centerCoordinate);
+            var coord = e.GetPosition(PocketPaintApplication.GetInstance().GridWorkingSpace);
+            var coord2 = e.GetPosition(rectangleToDraw);
+
+            var angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
+
+            switch(angle)
+            {
+                case 0:
+                    coord.X -= coord2.X;
+                    coord.Y -= coord2.Y;
+                    coord.X += (rectangleToDraw.Width / 2);
+                    coord.Y += (rectangleToDraw.Height / 2);
+                    break;
+                case 90:
+                    coord.X -= coord2.Y;
+                    coord.Y -= (rectangleToDraw.Width - coord2.X);
+                    coord.X += (rectangleToDraw.Width / 2);
+                    coord.Y += (rectangleToDraw.Height / 2);
+                    break;
+                case 180:
+                    coord.X += coord2.X;
+                    coord.Y += coord2.Y;
+                    coord.X -= (rectangleToDraw.Width / 2);
+                    coord.Y -= (rectangleToDraw.Height / 2);
+                    break;
+                case 270:
+                    coord.X -= (rectangleToDraw.Height - coord2.Y);
+                    coord.Y -= coord2.X;
+                    coord.X += (rectangleToDraw.Width / 2);
+                    coord.Y += (rectangleToDraw.Height / 2);
+                    break;
+            }
+            
+
+            
+            PocketPaintApplication.GetInstance().ToolCurrent.Draw(coord);
         }
+
 
         public Point getCenterCoordinateOfGridMain()
         {
