@@ -46,8 +46,24 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             height -= strokeThickness;
 
             Rect rect = new Rect();
-            rect.Width = width;
-            rect.Height = height;
+
+            var angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
+
+            switch (angle)
+            {
+                case 0:
+                case 180:
+                    rect.Width = width;
+                    rect.Height = height;
+                    break;
+                case 90:
+                case 270:
+                    rect.Width = height;
+                    rect.Height = width;
+                    break;
+            }
+
+            
             rect.X = coordinate.X - width / 2.0;
             rect.Y = coordinate.Y - height / 2.0;
 

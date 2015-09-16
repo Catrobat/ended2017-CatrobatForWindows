@@ -55,6 +55,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
         }
 
+        public Rectangle rectangleForMovement
+        {
+            get
+            {
+                return rectRectangleForMovement;
+            }
+            set
+            {
+                rectRectangleForMovement = value;
+            }
+        }
+
         public PenLineJoin strokeLineJoinOfRectangleToDraw
         {
             get
@@ -265,28 +277,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             TranslateTransform lastTranslateTransform = getLastTranslateTransformation();
             RotateTransform lastRotateTransform = getLastRotateTransformation();
 
-            double xVal = 0.0;
-            double yVal = 0.0;
-
-            switch (PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation)
-            {
-                case 0:
-                    xVal = e.Delta.Translation.X;
-                    yVal = e.Delta.Translation.Y;
-                    break;
-                case 90:
-                    xVal = e.Delta.Translation.Y;
-                    yVal = -e.Delta.Translation.X;
-                    break;
-                case 180:
-                    xVal = -e.Delta.Translation.X;
-                    yVal = -e.Delta.Translation.Y;
-                    break;
-                case 270:
-                    xVal = -e.Delta.Translation.Y;
-                    yVal = e.Delta.Translation.X;
-                    break;
-            }
+            double xVal = e.Delta.Translation.X;
+            double yVal = e.Delta.Translation.Y;           
 
             if (lastTranslateTransform != null && lastRotateTransform == null)
             {
@@ -313,9 +305,44 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void rectEllipseForMovement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            Point centerCoordinate = getCenterCoordinateOfGridMain();
-            PocketPaintApplication.GetInstance().ToolCurrent.Draw(centerCoordinate);
+            var coord = e.GetPosition(PocketPaintApplication.GetInstance().GridWorkingSpace);
+            var coord2 = e.GetPosition(rectangleToDraw);
+
+            var angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
+
+            switch(angle)
+            {
+                case 0:
+                    coord.X -= coord2.X;
+                    coord.Y -= coord2.Y;
+                    coord.X += (rectangleToDraw.Width / 2);
+                    coord.Y += (rectangleToDraw.Height / 2);
+                    break;
+                case 90:
+                    coord.X -= coord2.Y;
+                    coord.Y -= (rectangleToDraw.Width - coord2.X);
+                    coord.X += (rectangleToDraw.Width / 2);
+                    coord.Y += (rectangleToDraw.Height / 2);
+                    break;
+                case 180:
+                    coord.X += coord2.X;
+                    coord.Y += coord2.Y;
+                    coord.X -= (rectangleToDraw.Width / 2);
+                    coord.Y -= (rectangleToDraw.Height / 2);
+                    break;
+                case 270:
+                    coord.X -= (rectangleToDraw.Height - coord2.Y);
+                    coord.Y -= coord2.X;
+                    coord.X += (rectangleToDraw.Width / 2);
+                    coord.Y += (rectangleToDraw.Height / 2);
+                    break;
+            }
+            
+
+            
+            PocketPaintApplication.GetInstance().ToolCurrent.Draw(coord);
         }
+
 
         public Point getCenterCoordinateOfGridMain()
         {
@@ -491,9 +518,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             RotateTransform rotate = new RotateTransform();
             var angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
             rotate.Angle = -angle;
-            rotate.CenterX = GridMainSelection.Width / 2.0;
-            rotate.CenterY = GridMainSelection.Height / 2.0;
-            addTransformation(rotate);
+            Point point = new Point(0.5, 0.5);
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.RenderTransformOrigin = point;
+            PocketPaintApplication.GetInstance().RectangleSelectionControl.RenderTransform = rotate;
 
             isModifiedRectangleMovement = false;
         }
