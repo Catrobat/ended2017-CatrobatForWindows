@@ -2926,6 +2926,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not every feature is supported by the current device..
+        /// </summary>
+        public static string Main_NotAllFeaturesSupported {
+            get {
+                return ResourceManager.GetString("Main_NotAllFeaturesSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All uploads finished..
         /// </summary>
         public static string Main_NoUploadsPending {

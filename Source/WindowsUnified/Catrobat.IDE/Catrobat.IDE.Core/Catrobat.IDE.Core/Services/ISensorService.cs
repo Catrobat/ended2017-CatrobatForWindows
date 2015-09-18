@@ -7,8 +7,15 @@ namespace Catrobat.IDE.Core.Services
     public interface ISensorService
     {
         event SensorReadingChangedEventHandler SensorReadingChanged;
+
+        bool CheckSensors();
+
         void Start();
         void Stop();
+
+        bool IsAccelarationEnabled();
+        bool IsCompassEnabled();
+        bool IsInclinationEnabled();
 
         double GetAccelerationX();
         double GetAccelerationY();

@@ -31,6 +31,8 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
             //statusBar.BackgroundOpacity = 1;
             //statusBar.ProgressIndicator.Text = "My cool app";
             //statusBar.ProgressIndicator.ShowAsync();
+
+            ServiceLocator.SensorService.CheckSensors();
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
