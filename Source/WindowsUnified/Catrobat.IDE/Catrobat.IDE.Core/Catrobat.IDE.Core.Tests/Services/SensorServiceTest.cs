@@ -11,6 +11,26 @@ namespace Catrobat.IDE.Core.Tests.Services
 
         public event SensorReadingChangedEventHandler SensorReadingChanged;
 
+        public bool CheckSensors()
+        {
+            return true;
+        }
+
+        public bool IsAccelarationEnabled()
+        {
+            return true;
+        }
+
+        public bool IsCompassEnabled()
+        {
+            return true;
+        }
+
+        public bool IsInclinationEnabled()
+        {
+            return true;
+        }
+
         public void Start()
         {
             _isRunning = true;
