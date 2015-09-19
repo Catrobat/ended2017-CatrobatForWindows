@@ -208,9 +208,53 @@ namespace Catrobat.IDE.WindowsPhone.Controls.FormulaControls
             //_viewModel.IsAddGlobalVariableButtonVisible = false;
             ShowMain();
             var data = (FormulaKey) source.SelectedItem;
+
+            if(!CheckSensorKeys(data))
+            {
+                return;
+            }
+
             RaiseKeyPressed(data);
             _viewModel.KeyPressedCommand.Execute(data);
             source.SelectedItem = null;
+        }
+
+        private bool CheckSensorKeys(FormulaKey key)
+        {
+            if(key.Key.Equals(FormulaEditorKey.AccelerationX) ||
+                key.Key.Equals(FormulaEditorKey.AccelerationY) ||
+                key.Key.Equals(FormulaEditorKey.AccelerationZ))
+            {
+                if(!ServiceLocator.SensorService.IsAccelarationEnabled())
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
+            if(key.Key.Equals(FormulaEditorKey.Compass))
+            {
+                if(!ServiceLocator.SensorService.IsCompassEnabled())
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
+            if(key.Key.Equals(FormulaEditorKey.InclinationX) ||
+                key.Key.Equals(FormulaEditorKey.InclinationY))
+            {
+                if(!ServiceLocator.SensorService.IsInclinationEnabled())
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
+            return true;
         }
 
         private void Pivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

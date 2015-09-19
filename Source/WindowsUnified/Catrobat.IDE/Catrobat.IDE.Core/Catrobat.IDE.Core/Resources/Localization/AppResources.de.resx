@@ -1362,4 +1362,7 @@ Der Quellcode von Pocket Code steht hauptsächlich unter der GNU AGPL v3 Lizenz.
   <data name="Player_AppBarButton_Thumbnail" xml:space="preserve">
     <value>Minibild</value>
   </data>
+  <data name="Main_NotAllFeaturesSupported" xml:space="preserve">
+    <value>Das Gerät unterstützt nicht alle Features.</value>
+  </data>
 </root>
