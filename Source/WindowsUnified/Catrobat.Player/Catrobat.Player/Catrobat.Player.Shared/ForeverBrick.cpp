@@ -7,38 +7,25 @@ using namespace std;
 ForeverBrick::ForeverBrick(std::shared_ptr<Script> parent) :
 	ContainerBrick(TypeOfBrick::ContainerBrick, parent)
 {
-	m_brickList = new list<Brick*>();
 }
 
 
-ForeverBrick::~ForeverBrick(void)
+ForeverBrick::~ForeverBrick()
 {
-	delete m_brickList;
 }
 
 void ForeverBrick::Execute()
 {
-	// Synchronously execute all subsequent blocks
-	unsigned int i = 0;
-	while (m_brickList->size() > 0)
+	while (true)
 	{
-		GetBrick(i)->Execute();
-		i++;
-		if (i >= m_brickList->size())
+		for each (auto &brick in m_brickList)
 		{
-			i = 0; // Reset counter
+			brick->Execute();
 		}
 	}
 }
 
-void ForeverBrick::AddBrick(Brick *brick)
+void ForeverBrick::AddBrick(unique_ptr<Brick> brick)
 {
-	m_brickList->push_back(brick);
-}
-
-Brick *ForeverBrick::GetBrick(int index)
-{		
-	list<Brick*>::iterator it = m_brickList->begin();
-	advance(it, index);
-	return *it;
+	m_brickList.push_back(move(brick));
 }

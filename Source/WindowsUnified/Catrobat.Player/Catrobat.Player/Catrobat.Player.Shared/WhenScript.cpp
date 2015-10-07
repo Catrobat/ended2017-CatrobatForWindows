@@ -17,6 +17,10 @@ WhenScript::WhenScript(std::string action, shared_ptr<Object> parent) :
     }
 }
 
+WhenScript::~WhenScript()
+{
+}
+
 int WhenScript::GetAction()
 {
 	return m_action;

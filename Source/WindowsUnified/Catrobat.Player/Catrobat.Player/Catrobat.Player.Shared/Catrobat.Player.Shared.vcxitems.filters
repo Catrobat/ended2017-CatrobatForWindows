@@ -226,21 +226,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WhenScript.h">
       <Filter>Objects\Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)XMLParser.h">
-      <Filter>XMLParser</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml.hpp">
-      <Filter>XMLParser</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_iterators.hpp">
-      <Filter>XMLParser</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_print.hpp">
-      <Filter>XMLParser</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_utils.hpp">
-      <Filter>XMLParser</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
@@ -452,9 +437,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WhenScript.cpp">
       <Filter>Objects\Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)XMLParser.cpp">
-      <Filter>XMLParser</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -507,9 +489,6 @@
     </Filter>
     <Filter Include="Sounds">
       <UniqueIdentifier>{10681dc4-9e75-45a8-a90d-b6905fc55dd3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="XMLParser">
-      <UniqueIdentifier>{1149dfaf-5c28-40bc-af17-0c727ccd7c98}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

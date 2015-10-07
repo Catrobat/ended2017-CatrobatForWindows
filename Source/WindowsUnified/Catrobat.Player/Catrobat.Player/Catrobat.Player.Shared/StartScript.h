@@ -7,4 +7,5 @@ class StartScript :
 {
 public:
 	StartScript(std::shared_ptr<Object> parent);
+	~StartScript();
 };

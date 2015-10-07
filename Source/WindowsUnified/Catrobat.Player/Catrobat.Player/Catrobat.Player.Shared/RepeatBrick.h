@@ -9,14 +9,12 @@ class RepeatBrick :
 {
 public:
 	RepeatBrick(FormulaTree *times, std::shared_ptr<Script> parent);
-	~RepeatBrick(void);
+	~RepeatBrick();
 
 	void Execute();
-	void AddBrick(Brick *brick);
+	void AddBrick(std::unique_ptr<Brick> brick);
 private:
-	std::list<Brick*> *m_brickList;
-
-	Brick *GetBrick(int index);
+	std::list<std::unique_ptr<Brick>> m_brickList;
 	FormulaTree *m_timesToRepeat;
 };
 

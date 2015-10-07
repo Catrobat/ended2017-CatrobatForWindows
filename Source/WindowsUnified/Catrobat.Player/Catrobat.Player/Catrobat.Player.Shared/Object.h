@@ -47,7 +47,6 @@ public:
 
 public:
     std::string GetName();
-    std::map<std::string, std::shared_ptr<UserVariable>> GetVariableList() { return m_variableList; };
     std::list<SoundInfo*>* GetSoundInfos() { return m_soundInfos; };
 
     int GetScriptListSize();

@@ -12,6 +12,7 @@ public:
 	};
 
 	WhenScript(std::string action, std::shared_ptr<Object> parent);
+	~WhenScript();
 
 	int GetAction();
 
