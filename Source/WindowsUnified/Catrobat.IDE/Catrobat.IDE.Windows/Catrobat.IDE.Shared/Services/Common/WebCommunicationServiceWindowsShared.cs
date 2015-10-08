@@ -42,7 +42,9 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
             using (var httpClient = new HttpClient())
             {
                 //httpClient.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
-                httpClient.BaseAddress = new Uri("https://pocketcode.org/api/");
+                //testserver: use for uploads for TDD: https://catroid-test.catrob.at/pocketcode/api/
+                //old: httpClient.BaseAddress = new Uri("https://pocketcode.org/api/");
+                httpClient.BaseAddress = new Uri("https://share.catrob.at/pocketcode/api/");
                 try
                 {
                     HttpResponseMessage httpResponse = null;

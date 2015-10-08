@@ -21,27 +21,22 @@ public:
 		WhenScript
 	};
 
-	std::shared_ptr<Object> GetParent();
+	virtual std::shared_ptr<Object> GetParent();
 
-	void AddBrick(Brick *brick);
+	void AddBrick(std::unique_ptr<Brick> brick);
 	void AddSpriteReference(std::string spriteReference);
 
 	void Execute();
-
-	int GetBrickListSize();
-	Brick *GetBrick(int index);
-
 	TypeOfScript GetType();
     bool IsRunning();
 
 protected:
 	Script(TypeOfScript scriptType, std::shared_ptr<Object> parent);
-    virtual ~Script() {}
-
-	std::list<Brick*> *m_brickList;
+	~Script();
 
 private:
 	std::shared_ptr<Object> m_parent;
+	std::list<std::unique_ptr<Brick>> m_bricks;
 	TypeOfScript m_scriptType;
 	std::string m_spriteReference;
     void SetIsRunning(bool isRunning);

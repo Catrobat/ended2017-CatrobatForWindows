@@ -12,6 +12,10 @@ Script(TypeOfScript::BroadcastScript, parent), m_receivedMessage(receivedMessage
     BroadcastMessageDaemon::Instance()->Register(m_broadcastMessageListener);
 }
 
+BroadcastScript::~BroadcastScript()
+{
+}
+
 std::string BroadcastScript::GetReceivedMessage()
 {
     return m_receivedMessage;

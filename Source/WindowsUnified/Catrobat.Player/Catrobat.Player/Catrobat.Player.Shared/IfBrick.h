@@ -15,20 +15,15 @@ class IfBrick :
 {
 public:
 	IfBrick(FormulaTree *condition, std::shared_ptr<Script> parent);
-	~IfBrick(void);
+	~IfBrick();
 
 	void Execute();
-	void AddIfBrick(Brick *brick);
-	void AddElseBrick(Brick *brick);
-	void AddBrick(Brick *brick);
+	void AddBrick(std::unique_ptr<Brick> brick);
 	void SetCurrentAddMode(IfBranchType mode);
 private:
-	std::list<Brick*> *m_ifList;
-	std::list<Brick*> *m_elseList;
+	std::list<std::unique_ptr<Brick>> m_ifList;
+	std::list<std::unique_ptr<Brick>> m_elseList;
 	FormulaTree *m_condition;
 	IfBranchType m_currentAddMode;
-
-	Brick *GetIfBrick(int index);
-	Brick *GetElseBrick(int index);
 };
 

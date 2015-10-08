@@ -26,8 +26,8 @@ private:
 	std::unique_ptr<Project>								m_project;
 
 	// Parser
-	std::vector<ContainerBrick*> *m_containerStack;	
-	std::map<VariableManagementBrick*, std::string> *m_pendingVariables;
+	std::vector<std::unique_ptr<ContainerBrick>> m_containerStack;	
+	std::map<std::unique_ptr<VariableManagementBrick>, std::string> m_pendingVariables;
 
 	void									ParseXML						(std::string xml);
 	Project									ParseProjectHeader				(rapidxml::xml_document<> *doc);
@@ -41,36 +41,36 @@ private:
     std::shared_ptr<Script>				    ParseWhenScript                 (rapidxml::xml_node<> *baseNode, std::shared_ptr<Object> object);
 
 	void									ParseBrickList					(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-    Brick*									ParseLookBrick                  (rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-    Brick*									ParseWaitBrick                  (rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-    Brick*									ParsePlaceAtBrick               (rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseGlideToBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseSetGhostEffectBrick		(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParsePlaySoundBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseBroadcastBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseHideBrick					(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseShowBrick					(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseIfLogicBeginBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+    std::unique_ptr<Brick>					ParseLookBrick                  (rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseWaitBrick                  (rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParsePlaceAtBrick               (rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseGlideToBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseSetGhostEffectBrick		(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParsePlaySoundBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseBroadcastBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseHideBrick					(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseShowBrick					(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseIfLogicBeginBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
 	void									ParseIfLogicElseBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
 	void									ParseIfLogicEndBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseForeverBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseForeverBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
 	void									ParseForeverEndBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseRepeatBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseRepeatBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
 	void									ParseRepeatEndBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseSetVariableBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseChangeVariableBrick		(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseChangeGhostEffectByNBrick	(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseSetSizeToBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseChangeSizeByNBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseNextLookBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseSetXBrick					(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseSetYBrick					(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseChangeXByNBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseChangeYByNBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParsePointInDirectionBrick		(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseTurnLeftBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseTurnRightBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
-	Brick*									ParseMoveNStepsBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseSetVariableBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseChangeVariableBrick		(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseChangeGhostEffectByNBrick	(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseSetSizeToBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseChangeSizeByNBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseNextLookBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseSetXBrick					(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseSetYBrick					(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseChangeXByNBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseChangeYByNBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParsePointInDirectionBrick		(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseTurnLeftBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseTurnRightBrick				(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
+	std::unique_ptr<Brick>									ParseMoveNStepsBrick			(rapidxml::xml_node<> *baseNode, std::shared_ptr<Script> script);
 
 	FormulaTree*							ParseFormulaTree				(rapidxml::xml_node<> *baseNode);
 

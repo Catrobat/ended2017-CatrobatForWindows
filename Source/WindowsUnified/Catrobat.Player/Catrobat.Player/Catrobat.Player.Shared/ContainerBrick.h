@@ -11,7 +11,7 @@ public:
 	ContainerBrick(TypeOfBrick brickType, std::shared_ptr<Script> parent);
 
 	virtual void Execute() = 0;
-	virtual void AddBrick(Brick *brick) = 0;
+	virtual void AddBrick(std::unique_ptr<Brick> brick) = 0;
 private:
 };
 

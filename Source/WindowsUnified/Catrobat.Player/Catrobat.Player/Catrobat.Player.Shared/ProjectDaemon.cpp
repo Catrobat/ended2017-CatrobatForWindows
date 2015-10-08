@@ -69,11 +69,8 @@ task<bool> ProjectDaemon::OpenProject(Platform::String^ projectName)
 		try
 		{
 			// Create and load XML
-			XMLParser parser;
-			string filePath = t.get();
-			parser.LoadXML(filePath);
 
-			m_project = parser.GetProject();
+			m_project = make_unique<Project>();
 			m_projectName = projectName;
 
 			m_project->CheckProjectScreenSize();

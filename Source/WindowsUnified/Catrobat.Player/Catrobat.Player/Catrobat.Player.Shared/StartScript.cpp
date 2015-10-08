@@ -13,3 +13,7 @@ StartScript::StartScript(shared_ptr<Object> parent) :
 	Script(TypeOfScript::StartScript, parent)
 {
 }
+
+StartScript::~StartScript()
+{
+}

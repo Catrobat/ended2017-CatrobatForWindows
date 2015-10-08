@@ -55,11 +55,11 @@ namespace Catrobat_Player
 		{
 			if (t.get())
 			{
-				m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(
+		/*		m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(
 					m_deviceResources));
 				ProcessXamlPageContent(playerPage);
 				m_state = PlayerState::Active;
-				StartRenderLoop();
+				StartRenderLoop();*/
 			}
 		});
 	}
@@ -111,6 +111,7 @@ namespace Catrobat_Player
 
 	void Catrobat_PlayerMain::StartRenderLoop()
 	{
+		return;
 		// If the animation render loop is already running then do not start another thread
 		if (m_renderLoopWorker != nullptr && m_renderLoopWorker->Status ==
 			Windows::Foundation::AsyncStatus::Started)

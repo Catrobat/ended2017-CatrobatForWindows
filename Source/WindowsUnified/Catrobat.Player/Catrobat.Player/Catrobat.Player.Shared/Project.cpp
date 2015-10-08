@@ -49,6 +49,12 @@ Project::Project(
 {
 }
 
+Project::Project()
+{
+	m_screenWidth = 600;
+	m_screenHeight = 800;
+}
+
 Project::~Project()
 {
 }
@@ -72,12 +78,6 @@ int	Project::GetScreenWidth()
 std::map<std::string, std::shared_ptr<Object> >	 Project::GetObjectList()
 {
 	return m_objectList;
-}
-
-//--------------------------------------------------------------------------------------------------
-std::map<std::string, std::shared_ptr<Object> >	 Project::GetObjectListInitial()
-{ 
-    return m_objectListInitial; 
 }
 
 //--------------------------------------------------------------------------------------------------

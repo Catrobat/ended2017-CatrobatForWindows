@@ -74,10 +74,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)PointToBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ProjectDaemon.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_iterators.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_print.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_utils.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)RepeatBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Script.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SetGhostEffectBrick.h" />
@@ -96,7 +92,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WaitBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WASAPIAudio.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WhenScript.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)XMLParser.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserFatalException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserSevereException.h" />
@@ -172,7 +167,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WaitBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WASAPIAudio.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WhenScript.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)XMLParser.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserFatalException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserSevereException.cpp" />

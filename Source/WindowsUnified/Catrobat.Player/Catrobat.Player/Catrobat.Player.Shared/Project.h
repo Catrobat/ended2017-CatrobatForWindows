@@ -30,6 +30,8 @@ public:
 		std::string							userHandle
 		);
 
+	Project();
+
 	~Project();
 
 	void								Render(const std::shared_ptr<DX::DeviceResources>& deviceResources);
@@ -44,10 +46,7 @@ public:
 	std::string								GetProgramName();
 	std::string								GetCatrobatLanguageVersion() { return m_catrobatLanguageVersion; }
 	std::map<std::string, std::shared_ptr<Object> >		GetObjectList();
-	std::map<std::string, std::shared_ptr<Object> >	     GetObjectListInitial();
 	std::shared_ptr<UserVariable>						    GetVariable(std::string name);
-	std::map<std::string, std::shared_ptr<UserVariable> >   GetVariableList() { return m_variableList; };
-	std::map<std::string, std::string>     GetVariableListValueInitial() { return m_variableListValueInitial; };
 
 	//For HeaderTest
 	std::string								GetApplicationBuildName() { return m_applicationBuildName; }
