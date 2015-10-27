@@ -3,6 +3,9 @@ using System.Diagnostics;
 using Windows.Devices.Sensors;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities;
+using Windows.Media.Capture;
+using Windows.Storage;
+using Windows.Media.MediaProperties;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
@@ -11,16 +14,22 @@ namespace Catrobat.IDE.WindowsShared.Services
         private readonly Accelerometer _accelerometer = Accelerometer.GetDefault();
         private readonly Compass _compass = Compass.GetDefault();
         private readonly Inclinometer _inclinometer = Inclinometer.GetDefault();
+        private readonly MediaCapture _mediacapture = new MediaCapture();
+        //private readonly Microphone _microphone = Microphone.Default; 
+        private StorageFile _storageFile;
 
         private bool _accelerometerEnabled;
         private bool _compassEnabled;
         private bool _inclinometerEnabled;
+        private bool _microphoneEnabled;
 
         private bool _accelerometerChecked;
         private bool _compassChecked;
         private bool _inclinometerChecked;
+        private bool _microphoneChecked;
 
-        //private readonly Microphone2 _microphone = new Microphone2();
+        private double _loudnessValue;
+
         private uint _reportIntervall = 200;
 
         public event SensorReadingChangedEventHandler SensorReadingChanged;
@@ -30,6 +39,22 @@ namespace Catrobat.IDE.WindowsShared.Services
             _accelerometerEnabled = true;
             _compassEnabled = true;
             _inclinometerEnabled = true;
+            _microphoneEnabled = true;
+            _loudnessValue = 0;
+
+            this.InitializeAudioRecording();
+        }
+
+        public async void InitializeAudioRecording()
+        {
+            var settings = new MediaCaptureInitializationSettings();
+            settings.StreamingCaptureMode = StreamingCaptureMode.Audio;
+            settings.MediaCategory = MediaCategory.Other;
+            settings.AudioProcessing = Windows.Media.AudioProcessing.Default;
+
+            await _mediacapture.InitializeAsync(settings);
+
+            //_mediacapture.RecordLimitationExceeded += new RecordLimitationExceededEventHandler(RecordLimitationExceeded);
         }
 
         public bool CheckSensors()
@@ -40,6 +65,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             _accelerometerChecked = false;
             _compassChecked = false;
             _inclinometerChecked = false;
+            _microphoneChecked = false;
 
             uint reportIntervall = _reportIntervall;
             _reportIntervall = 1;
@@ -47,10 +73,33 @@ namespace Catrobat.IDE.WindowsShared.Services
             CheckAccelaration();
             CheckCompass();
             CheckInclinometer();
+            CheckMicrophone();
 
             _reportIntervall = reportIntervall;
 
-            return _accelerometerEnabled && _compassEnabled && _inclinometerEnabled;
+            return _accelerometerEnabled && _compassEnabled && _inclinometerEnabled && _microphoneEnabled;
+        }
+
+        private void CheckMicrophone()
+        {
+            //_microphoneChecked = false;
+
+            //if(_microphone != null)
+            //{
+            //    try
+            //    {
+            //        _microphone.Start();
+            //        _microphone.Stop();
+            //    }
+            //    catch(Exception)
+            //    {
+            //        _microphoneEnabled = false;
+            //    }
+            //}
+            //else
+            //{
+            //    _microphoneEnabled = false;
+            //}
         }
 
         private void CheckAccelaration()
@@ -146,7 +195,12 @@ namespace Catrobat.IDE.WindowsShared.Services
             return _inclinometerEnabled;
         }
 
-        public void Start()
+        public bool IsMicrophoneEnabled()
+        {
+            return _microphoneEnabled;
+        }
+
+        public async void Start()
         {
             if (_compass != null && _compassEnabled)
             {
@@ -186,9 +240,22 @@ namespace Catrobat.IDE.WindowsShared.Services
                 _inclinometer.ReportInterval = reportInterval;
                 _inclinometer.ReadingChanged += _inclinometer_ReadingChanged;
             }
+
+            if(_mediacapture != null)
+            {
+                _storageFile = await KnownFolders.VideosLibrary.CreateFileAsync("test", CreationCollisionOption.GenerateUniqueName);
+                MediaEncodingProfile profile = MediaEncodingProfile.CreateM4a(AudioEncodingQuality.Auto);
+
+                await _mediacapture.StartRecordToStorageFileAsync(profile, _storageFile);
+            }
+
+            //if(_microphone != null && _microphoneEnabled)
+            //{
+            //    _microphone.Start();
+            //}
         }
 
-        public void Stop()
+        public async void Stop()
         {
             if (_compass != null)
             {
@@ -204,6 +271,25 @@ namespace Catrobat.IDE.WindowsShared.Services
             {
                 _inclinometer.ReadingChanged -= _inclinometer_ReadingChanged;
             }
+
+            if (_mediacapture != null)
+            {
+                try
+                {
+                    await _mediacapture.StopRecordAsync();
+                    var properties = _storageFile.Properties;
+
+                }
+                catch(Exception ex)
+                {
+                    // TODO: handle exception
+                }
+            }
+
+            //if(_microphone != null)
+            //{
+            //    _microphone.Stop();
+            //}
         }
 
         public double GetAccelerationX()
@@ -318,7 +404,7 @@ namespace Catrobat.IDE.WindowsShared.Services
 
         public double GetLoudness()
         {
-            return 0.0;
+            return _loudnessValue;
         }
 
 
