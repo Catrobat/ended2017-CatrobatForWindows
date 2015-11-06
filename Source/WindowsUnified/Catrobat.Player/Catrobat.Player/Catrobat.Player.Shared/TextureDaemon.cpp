@@ -10,6 +10,7 @@
 
 using namespace std;
 using namespace Microsoft::WRL;
+using namespace ProjectStructure;
 
 TextureDaemon *TextureDaemon::__instance = NULL;
 

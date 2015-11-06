@@ -12,6 +12,7 @@
 
 using namespace std;
 using namespace Windows::Devices::Sensors;
+using namespace ProjectStructure;
 
 Interpreter *Interpreter::__instance = nullptr;
 

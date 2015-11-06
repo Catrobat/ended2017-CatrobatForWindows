@@ -10,6 +10,8 @@ using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::System::Threading;
 using namespace Concurrency;
 using namespace Platform;
+using namespace ProjectStructure;
+using namespace Catrobat_Player::NativeComponent;
 
 namespace Catrobat_Player
 {
@@ -51,49 +53,46 @@ namespace Catrobat_Player
 
 	void Catrobat_PlayerMain::LoadProject(String^ projectName, Page^ playerPage)
 	{
-		ProjectDaemon::Instance()->OpenProject(projectName).then([this, playerPage](task<bool> t)
+		if (ProjectDaemon::Instance()->CreateNativeProject())
 		{
-			if (t.get())
-			{
-		/*		m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(
-					m_deviceResources));
-				ProcessXamlPageContent(playerPage);
-				m_state = PlayerState::Active;
-				StartRenderLoop();*/
-			}
-		});
+					m_basic2dRenderer = std::unique_ptr<Basic2DRenderer>(new Basic2DRenderer(
+						m_deviceResources));
+					ProcessXamlPageContent(playerPage);
+					m_state = PlayerState::Active;
+					StartRenderLoop();
+		}
 	}
 
 	//----------------------------------------------------------------------------------------------
 	void Catrobat_PlayerMain::ProcessXamlPageContent(Page^ playerPage)
 	{
 		// Get the CommandBar from the Player's XAML page
-		m_appBar = (CommandBar^) playerPage->BottomAppBar;
+		m_appBar = (CommandBar^)playerPage->BottomAppBar;
 
 		// Get the axis button from the CommandBar
-		m_btnAxes = (AppBarButton^) m_appBar->PrimaryCommands->GetAt(
+		m_btnAxes = (AppBarButton^)m_appBar->PrimaryCommands->GetAt(
 			Constants::XAMLPage::BtnAxisPosition);
 
 		// Get the Grid which contains the axes from the Player's XAML page & set the axes' values
-		m_gridAxes = FindChildControl<Grid>((DependencyObject^) playerPage->Content,
+		m_gridAxes = FindChildControl<Grid>((DependencyObject^)playerPage->Content,
 			Constants::XAMLPage::GridAxesName);
 
 		int projectScreenHeight = ProjectDaemon::Instance()->GetProject()->GetScreenHeight();
 		int projectScreendWidth = ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
 
 		// horizontal values
-		(FindChildControl<TextBlock>((DependencyObject^) m_gridAxes,
+		(FindChildControl<TextBlock>((DependencyObject^)m_gridAxes,
 			Constants::XAMLPage::GridAxesXLeftName))
 			->Text = "-" + (projectScreendWidth / 2).ToString();
-		(FindChildControl<TextBlock>((DependencyObject^) m_gridAxes,
+		(FindChildControl<TextBlock>((DependencyObject^)m_gridAxes,
 			Constants::XAMLPage::GridAxesXRightName))
 			->Text = (projectScreendWidth / 2).ToString();
 
 		// vertical values
-		(FindChildControl<TextBlock>((DependencyObject^) m_gridAxes,
+		(FindChildControl<TextBlock>((DependencyObject^)m_gridAxes,
 			Constants::XAMLPage::GridAxesYTopName))
 			->Text = (projectScreenHeight / 2).ToString();
-		(FindChildControl<TextBlock>((DependencyObject^) m_gridAxes,
+		(FindChildControl<TextBlock>((DependencyObject^)m_gridAxes,
 			Constants::XAMLPage::GridAxesYBottomName))
 			->Text = "-" + (projectScreenHeight / 2).ToString();
 	}
@@ -188,17 +187,17 @@ namespace Catrobat_Player
 	{
 		critical_section::scoped_lock lock(m_criticalSection);
 
-		ProjectDaemon::Instance()->RestartProject().then([this](task<bool> t)
-		{
-			if (t.get())
-			{
-				m_basic2dRenderer->Initialize();
-				CreateWindowSizeDependentResources();
-				m_appBar->Visibility = Visibility::Collapsed;
-				m_state = PlayerState::Active;
-				StartRenderLoop();
-			}
-		});
+		//ProjectDaemon::Instance()->RestartProject().then([this](task<bool> t)
+		//{
+		//	if (t.get())
+		//	{
+		//		m_basic2dRenderer->Initialize();
+		//		CreateWindowSizeDependentResources();
+		//		m_appBar->Visibility = Visibility::Collapsed;
+		//		m_state = PlayerState::Active;
+		//		StartRenderLoop();
+		//	}
+		//});
 	}
 
 	//----------------------------------------------------------------------------------------------
@@ -368,7 +367,7 @@ namespace Catrobat_Player
 			try
 			{
 				child = VisualTreeHelper::GetChild(control, i);
-				tEle = (T^) child;
+				tEle = (T^)child;
 			}
 			catch (Exception ^e)
 			{

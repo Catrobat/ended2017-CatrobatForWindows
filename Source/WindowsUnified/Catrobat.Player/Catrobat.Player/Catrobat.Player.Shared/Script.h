@@ -31,11 +31,11 @@ public:
     bool IsRunning();
 
 protected:
-	Script(TypeOfScript scriptType, std::shared_ptr<Object> parent);
+	Script(TypeOfScript scriptType, Object* parent);
 	~Script();
 
 private:
-	std::shared_ptr<Object> m_parent;
+	Object* m_parent;
 	std::list<std::unique_ptr<Brick>> m_bricks;
 	TypeOfScript m_scriptType;
 	std::string m_spriteReference;
