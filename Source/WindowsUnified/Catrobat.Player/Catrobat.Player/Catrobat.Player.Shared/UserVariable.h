@@ -1,10 +1,12 @@
 #pragma once
 
 #include <string>
+#include "IUserVariable.h"
 
 class UserVariable
 {
 public:
+	UserVariable(Catrobat_Player::NativeComponent::IUserVariable^ userVariable);
 	UserVariable(std::string name, std::string value);
 	UserVariable(std::pair<std::string, std::string> variable);
 

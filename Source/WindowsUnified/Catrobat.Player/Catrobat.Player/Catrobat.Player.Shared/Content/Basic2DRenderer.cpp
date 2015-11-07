@@ -9,6 +9,7 @@
 #include <wincodec.h>
 
 using namespace std;
+using namespace ProjectStructure;
 
 Basic2DRenderer::Basic2DRenderer(const std::shared_ptr<DX::DeviceResources>& deviceResources) :
 	m_deviceResources(deviceResources)

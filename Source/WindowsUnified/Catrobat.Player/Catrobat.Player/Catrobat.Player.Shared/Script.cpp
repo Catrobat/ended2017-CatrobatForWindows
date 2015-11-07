@@ -10,7 +10,7 @@ using namespace Windows::System::Threading;
 using namespace Windows::Foundation;
 using namespace std;
 
-Script::Script(TypeOfScript scriptType, shared_ptr<Object> parent) :
+Script::Script(TypeOfScript scriptType, Object* parent) :
 	m_scriptType(scriptType), m_parent(parent)
 {
 }
@@ -51,7 +51,7 @@ void Script::Execute()
 
 shared_ptr<Object> Script::GetParent()
 {
-	return m_parent;
+	return nullptr;
 }
 
 bool Script::IsRunning()

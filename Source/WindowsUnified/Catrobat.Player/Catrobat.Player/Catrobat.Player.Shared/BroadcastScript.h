@@ -2,12 +2,13 @@
 
 #include "Script.h"
 #include "BroadcastMessageListener.h"
+#include "IBroadcastScript.h"
 
 class BroadcastScript :
 	public Script
 {
 public:
-	BroadcastScript(std::string receivedMessage, std::shared_ptr<Object> parent);
+	BroadcastScript(Catrobat_Player::NativeComponent::IBroadcastScript^ script, Object* parent);
 	~BroadcastScript();
 
 	void EvaluateMessage(Platform::String ^message);

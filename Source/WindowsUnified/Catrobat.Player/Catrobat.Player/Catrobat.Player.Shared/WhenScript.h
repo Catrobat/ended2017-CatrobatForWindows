@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Script.h"
+#include "IWhenScript.h"
 
 class WhenScript :
 	public Script
@@ -11,7 +12,7 @@ public:
 		Tapped
 	};
 
-	WhenScript(std::string action, std::shared_ptr<Object> parent);
+	WhenScript(Catrobat_Player::NativeComponent::IWhenScript^ whenScript, Object* parent);
 	~WhenScript();
 
 	int GetAction();

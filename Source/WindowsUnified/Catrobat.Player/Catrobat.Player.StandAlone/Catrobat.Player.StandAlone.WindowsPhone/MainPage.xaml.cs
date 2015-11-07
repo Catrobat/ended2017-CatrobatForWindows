@@ -3,6 +3,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Phone.UI.Input;
 using Windows.Graphics.Display;
+using Catrobat.Player.StandAlone.Parser;
+using Catrobat.Player.StandAlone.Objects;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -44,8 +46,12 @@ namespace Catrobat.Player.StandAlone
         {
             // Register hardware back button event
             HardwareButtons.BackPressed += OnHardwareBackButtonPressed;
-
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
+
+            XMLParser parser = new XMLParser();
+            Project project = parser.FakeParsing();
+            project.PersistProjectStructure();
+
             playerObject.InitPlayer(PlayerPage, "testalphavalue");
         }
 

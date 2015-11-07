@@ -4,14 +4,14 @@
 #include <algorithm>
 #include <limits.h>
 
-std::string Helper::ConvertPlatformStringToString(Platform::String^ input)
+std::string Helper::StdString(Platform::String^ input)
 {
-    std::wstring foo(input->Begin());
-    std::string res(foo.begin(), foo.end());
-	return res;
+    std::wstring origin(input->Begin());
+    std::string result(origin.begin(), origin.end());
+	return result;
 }
 
-Platform::String^ Helper::ConvertStringToPlatformString(std::string input)
+Platform::String^ Helper::PlatformString(std::string input)
 {
     std::string s_str = std::string(input);
     std::wstring wid_str = std::wstring(s_str.begin(), s_str.end());

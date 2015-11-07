@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "ProjectDaemon.h"
-#include "XMLParser.h"
 #include "Helper.h"
 #include "XMLParserFatalException.h"
 #include "PlayerException.h"
 #include "Constants.h"
+
 #include <ppltasks.h>
 
 using namespace Microsoft::WRL;
@@ -16,6 +16,7 @@ using namespace Concurrency;
 using namespace Windows::Phone::UI::Input;
 using namespace Windows::Graphics::Display;
 using namespace std;
+using namespace ProjectStructure;
 
 #pragma region Singleton
 ProjectDaemon *ProjectDaemon::m_instance = NULL;
@@ -35,6 +36,12 @@ ProjectDaemon::ProjectDaemon()
 }
 #pragma endregion
 
+Catrobat_Player::NativeComponent::IProject^ ProjectDaemon::CSProject;
+void ProjectDaemon::SetProject(Catrobat_Player::NativeComponent::IProject^ project)
+{
+	CSProject = project;
+}
+
 string ProjectDaemon::GetProjectPath()
 {
 	return m_projectPath;
@@ -45,46 +52,28 @@ unique_ptr<Project> const & ProjectDaemon::GetProject()
 	return m_project;
 }
 
-task<bool> ProjectDaemon::OpenProject(Platform::String^ projectName)
+bool ProjectDaemon::CreateNativeProject()
 {
-	auto path = Windows::Storage::ApplicationData::Current->LocalFolder->Path + "\\Projects\\" + projectName;
-
-	return create_task(Windows::Storage::ApplicationData::Current->LocalFolder->GetFolderFromPathAsync(path))
-		.then([this, path, projectName](StorageFolder^ folder)
+	try
 	{
-		Platform::String^ filename = Helper::ConvertStringToPlatformString(Constants::XMLParser::FileName);
-
-		// If the path exists, make it available within the project
-		m_projectPath = Helper::ConvertPlatformStringToString(path);
-
-		return folder->GetFileAsync(filename);
-
-	}, task_continuation_context::use_current())
-		.then([this, projectName](StorageFile^ file)
-	{
-		return Helper::ConvertPlatformStringToString(file->Path);
-	}, task_continuation_context::use_current())
-		.then([this, projectName](task<string> t)
-	{
-		try
+		if (CSProject != nullptr)
 		{
-			// Create and load XML
-
-			m_project = make_unique<Project>();
-			m_projectName = projectName;
-
+			m_project = make_unique<Project>(CSProject);
 			m_project->CheckProjectScreenSize();
+			if (m_project == nullptr) return false;
 			return true;
 		}
-		catch (Platform::Exception^ e)
-		{
-			return false;
-		}
-	});
+		return false;
+	}
+	catch (Platform::Exception^ e)
+	{
+		return false;
+	}
 }
 
-task<bool> ProjectDaemon::RestartProject()
+bool ProjectDaemon::RestartProject()
 {
 	m_project.reset();
-	return	OpenProject(m_projectName);
+	return true;
+	//return	OpenProject(m_projectName);
 }

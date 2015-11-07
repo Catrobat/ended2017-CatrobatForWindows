@@ -3,136 +3,85 @@
 #include "Constants.h"
 
 using namespace std;
+using namespace ProjectStructure;
+using namespace Catrobat_Player::NativeComponent;
 
-//--------------------------------------------------------------------------------------------------
 
-Project::Project(
-	string								applicationBuildName,
-	int									applicationBuildNumber,
-	string								applicationName,
-	string								applicationVersion,
-	string								catrobatLanguageVersion,
-	time_t								dateTimeUpload,
-	string								description,
-	string								deviceName,
-	string								mediaLicense,
-	string								platform,
-	int									platformVersion,
-	string								programLicense,
-	string								programName,
-	string								remixOf,
-	int									screenHeight,
-	int									screenWidth,
-	vector<string>						tags,
-	string								url,
-	string								userHandle
-	) :
-	m_applicationBuildName				(applicationBuildName),
-	m_applicationBuildNumber			(applicationBuildNumber),
-	m_applicationName					(applicationName),
-	m_applicationVersion				(applicationVersion),
-	m_catrobatLanguageVersion			(catrobatLanguageVersion),
-	m_dateTimeUpload					(dateTimeUpload),
-	m_description						(description),
-	m_deviceName						(deviceName),
-	m_mediaLicense						(mediaLicense),
-	m_platform							(platform),
-	m_platformVersion					(platformVersion),
-	m_programLicense					(programLicense),
-	m_programName						(programName),
-	m_remixOf							(remixOf),
-	m_screenHeight						(screenHeight),
-	m_screenWidth						(screenWidth),	
-	m_tags								(tags),
-	m_url								(url),
-	m_userHandle						(userHandle)
+Project::Project(IProject^ project) :
+	m_applicationBuildName(Helper::StdString(project->ApplicationBuildName)),
+	m_applicationBuildNumber(project->ApplicationBuildNumber),
+	m_applicationName(Helper::StdString(project->ApplicationName)),
+	m_applicationVersion(Helper::StdString(project->ApplicationVersion)),
+	m_catrobatLanguageVersion(Helper::StdString(project->CatrobatLanguageVersion)),
+	m_dateTimeUpload(project->DateTimeUpload),
+	m_description(Helper::StdString(project->Description)),
+	m_deviceName(Helper::StdString(project->DeviceName)),
+	m_mediaLicense(Helper::StdString(project->MediaLicense)),
+	m_platform(Helper::StdString(project->TargetPlatform)),
+	m_platformVersion(project->PlatformVersion),
+	m_programLicense(Helper::StdString(project->ProgramLicense)),
+	m_programName(Helper::StdString(project->ProgramName)),
+	m_remixOf(Helper::StdString(project->RemixOf)),
+	m_screenHeight(project->ScreenHeight),
+	m_screenWidth(project->ScreenWidth),
+	m_url(Helper::StdString(project->Url)),
+	m_userHandle(Helper::StdString(project->UserHandle))
 {
-}
-
-Project::Project()
-{
-	m_screenWidth = 600;
-	m_screenHeight = 800;
+	for each (Platform::String^ tag in project->Tags)
+	{
+		m_tags.push_back(Helper::StdString(tag));
+	}
+	for each (Catrobat_Player::NativeComponent::IObject^ object in project->Objects)
+	{
+		m_objectList.insert(std::pair<std::string, std::shared_ptr<Object> >(Helper::StdString(object->Name), make_shared<Object>(object)));
+	}
 }
 
 Project::~Project()
 {
 }
 
-//--------------------------------------------------------------------------------------------------
-
-int Project::GetScreenHeight()
+void Project::CheckProjectScreenSize()
 {
-	return m_screenHeight;
+	if (m_screenHeight == 0 || m_screenWidth == 0)
+	{
+		m_screenHeight = Constants::XMLParser::Header::ProjectScreenHeightDefault;
+		m_screenWidth = Constants::XMLParser::Header::ProjectScreenWidthDefault;
+	}
 }
 
-//--------------------------------------------------------------------------------------------------
-
-int	Project::GetScreenWidth()
+void Project::SetupWindowSizeDependentResources(
+	const shared_ptr<DX::DeviceResources>& deviceResources)
 {
-	return m_screenWidth;
+	for each (pair<string, shared_ptr<Object>> obj in m_objectList)
+	{
+		obj.second->SetupWindowSizeDependentResources(deviceResources);
+	}
 }
-
-//--------------------------------------------------------------------------------------------------
-
-std::map<std::string, std::shared_ptr<Object> >	 Project::GetObjectList()
-{
-	return m_objectList;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void Project::Render(const shared_ptr<DX::DeviceResources>& deviceResources)
-{
-    for each (pair<string, shared_ptr<Object>> obj in m_objectList)
-    {
-        obj.second->Draw(deviceResources);
-    }
-}
-
-//--------------------------------------------------------------------------------------------------
 
 void Project::LoadTextures(const shared_ptr<DX::DeviceResources>& deviceResources)
 {
-    for each (pair<string, shared_ptr<Object>> obj in m_objectList)
-    {
-        obj.second->LoadTextures(deviceResources);
-    }
+	for each (pair<string, shared_ptr<Object>> obj in m_objectList)
+	{
+		obj.second->LoadTextures(deviceResources);
+	}
 }
-
-//--------------------------------------------------------------------------------------------------
-
-void Project::SetupWindowSizeDependentResources(
-    const shared_ptr<DX::DeviceResources>& deviceResources)
-{
-    for each (pair<string, shared_ptr<Object>> obj in m_objectList)
-    {
-        obj.second->SetupWindowSizeDependentResources(deviceResources);
-    }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void Project::CheckProjectScreenSize()
-{
-    if (m_screenHeight == 0 || m_screenWidth == 0)
-    {
-        m_screenHeight = Constants::XMLParser::Header::ProjectScreenHeightDefault;
-        m_screenWidth = Constants::XMLParser::Header::ProjectScreenWidthDefault;
-    }
-}
-
-//--------------------------------------------------------------------------------------------------
 
 void Project::StartUp()
-{	
-    for each (pair<string, shared_ptr<Object>> obj in m_objectList)
-    {
-        obj.second->StartUp();
-    }
+{
+	for each (pair<string, shared_ptr<Object>> obj in m_objectList)
+	{
+		obj.second->StartUp();
+	}
 }
 
-//--------------------------------------------------------------------------------------------------
+void Project::Render(const shared_ptr<DX::DeviceResources>& deviceResources)
+{
+	for each (pair<string, shared_ptr<Object>> obj in m_objectList)
+	{
+		obj.second->Draw(deviceResources);
+	}
+}
 
 shared_ptr<UserVariable> Project::GetVariable(string name)
 {
@@ -141,32 +90,4 @@ shared_ptr<UserVariable> Project::GetVariable(string name)
 		return searchItem->second;
 	return NULL;
 }
-
-//--------------------------------------------------------------------------------------------------
-
-void Project::AddVariable(std::string name, shared_ptr<UserVariable> variable)
-{
-	m_variableList.insert(pair<string,shared_ptr<UserVariable> >(name, variable));
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void Project::AddVariable(std::pair<string, shared_ptr<UserVariable> > variable)
-{
-	m_variableList.insert(variable);
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void Project::AddObject(std::pair<string, shared_ptr<Object> > object)
-{
-	m_objectList.insert(object);
-}
-
-
-std::string Project::GetProgramName() 
-{ 
-	return m_programName; 
-}
-
 
