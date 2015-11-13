@@ -59,7 +59,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override XDocument CreateXml()
         {
-            var document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
+            XmlParserTempProjectHelper.Document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
 
             XmlParserTempProjectHelper.Program = this;
 
@@ -67,9 +67,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             xProject.Add(ProgramHeader.CreateXml());
             xProject.Add(SpriteList.CreateXml());
             xProject.Add(VariableList.CreateXml());
-            document.Add(xProject);
+            XmlParserTempProjectHelper.Document.Add(xProject);
 
-            return document;
+            return XmlParserTempProjectHelper.Document;
         }
 
         internal void LoadReference()

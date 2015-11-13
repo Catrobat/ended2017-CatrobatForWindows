@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
@@ -6,7 +7,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
     {
         public string Name { get; set; }
 
-        public XmlUserVariable() {}
+        public XmlUserVariable() 
+        {
+            XmlParserTempProjectHelper.currentVariableNum++;
+        }
 
         public XmlUserVariable(XElement xElement)
         {

@@ -35,6 +35,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
             var xElement = VariableFormula.CreateXml();
             xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.Variable);
 
+
+
             var xFormulalist = new XElement(XmlConstants.FormulaList);
             xFormulalist.Add(xElement);
 
