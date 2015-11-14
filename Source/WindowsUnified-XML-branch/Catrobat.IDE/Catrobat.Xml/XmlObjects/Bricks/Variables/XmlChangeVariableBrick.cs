@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
+using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
 {
@@ -59,6 +60,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables
         {
             var xRoot = new XElement(XmlConstants.Brick);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlChangeVariableBrickType);
+
+            XmlParserTempProjectHelper.currentBrickNum++;
+            XmlParserTempProjectHelper.currentVariableNum = 0;
 
             if(UserVariableReference != null)
                 xRoot.Add(UserVariableReference.CreateXml());

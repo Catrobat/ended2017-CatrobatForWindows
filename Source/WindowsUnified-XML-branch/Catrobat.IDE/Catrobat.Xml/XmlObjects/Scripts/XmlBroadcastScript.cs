@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 {
@@ -22,6 +23,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
         {
             var xRoot = new XElement(XmlConstants.Script);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlBroadcastScriptType);
+
+            XmlParserTempProjectHelper.currentScriptNum++;
+            XmlParserTempProjectHelper.currentBrickNum = 0;
+            XmlParserTempProjectHelper.currentVariableNum = 0;
 
             CreateCommonXML(xRoot);
 

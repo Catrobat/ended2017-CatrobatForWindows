@@ -9,6 +9,9 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
+using System.Text;
+using System.Xml.Linq;
+using System.Xml;
 
 namespace Catrobat.IDE.Core.Utilities.Helpers
 {
@@ -981,6 +984,51 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                 }
                 count++;
             }
+        }
+
+        static string GetXPath(XElement node)
+        {
+            StringBuilder builder = new StringBuilder();
+            while (node != null)
+            {
+                switch (node.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        int index = GetElementIndex(node);
+                        builder.Insert(0, "/" + node.Name + "[" + index + "]");
+                        node = node.Parent;
+                        break;
+                    case XmlNodeType.Document:
+                        return builder.ToString();
+                    default:
+                        throw new ArgumentException("Only elements and attributes are supported");
+                }
+            }
+            throw new ArgumentException("Node was not in a document");
+        } 
+
+        static int GetElementIndex(XElement element)
+        {
+            XNode parentNode = element.Parent;
+            if (parentNode is XDocument)
+            {
+                return 1;
+            }
+            XElement parent = (XElement)parentNode;
+            int index = 1;
+
+            foreach (XElement candidate in parent.Elements())
+            {
+                if (candidate is XElement && candidate.Name == element.Name)
+                {
+                    if (candidate == element)
+                    {
+                        return index;
+                    }
+                    index++;
+                }
+            }
+            throw new ArgumentException("Couldn't find element within parent");
         }
     }
 }
