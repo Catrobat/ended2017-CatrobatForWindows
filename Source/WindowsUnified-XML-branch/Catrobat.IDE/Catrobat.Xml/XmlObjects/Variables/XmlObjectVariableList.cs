@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
@@ -28,6 +29,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
         internal override XElement CreateXml()
         {
+            XmlParserTempProjectHelper.inObjectVarList = true;
             var xRoot = new XElement(XmlConstants.XmlObjectVariableListType);
 
             foreach (XmlObjectVariableEntry entry in ObjectVariableEntries)
@@ -36,6 +38,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
                     xRoot.Add(entry.CreateXml());
             }
 
+            XmlParserTempProjectHelper.inObjectVarList = false;
             return xRoot;
         }
 

@@ -127,8 +127,21 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
         private static string GetVariableReferenceString(XmlUserVariableReference xmlUserVariableReference)
         {
             XmlUserVariable var = xmlUserVariableReference.UserVariable;
+            if(XmlParserTempProjectHelper.inObjectVarList)
+                return GetStepDownString(5) + XmlConstants.ObjectList + "/"
+                    + XmlConstants.Object + GetReferenceNumeration(var.ObjectNum) + "/"
+                    + XmlConstants.Script + GetReferenceNumeration(var.ScriptNum) + "/"
+                    + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
+                    + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
 
-            if (xmlUserVariableReference.UserVariable.ObjectNum != XmlParserTempProjectHelper.currentObjectNum)
+            else if (XmlParserTempProjectHelper.inProgramVarList)
+                return GetStepDownString(3) + XmlConstants.ObjectList + "/"
+                    + XmlConstants.Object + GetReferenceNumeration(var.ObjectNum) + "/"
+                    + XmlConstants.Script + GetReferenceNumeration(var.ScriptNum) + "/"
+                    + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
+                    + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
+
+            else if (xmlUserVariableReference.UserVariable.ObjectNum != XmlParserTempProjectHelper.currentObjectNum)
                 return GetStepDownString(6) + XmlConstants.Object + GetReferenceNumeration(var.ObjectNum) + "/"
                     + XmlConstants.Script + GetReferenceNumeration(var.ScriptNum) + "/"
                     + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
@@ -147,44 +160,6 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                 return GetStepDownString(1) + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
             else
                 return "the ReferenceHelper is not working properly!"; 
-            
-            /*
-            var userVariable = xmlUserVariableReference.UserVariable;
-            var entryCount = 0;
-            foreach (var entry in XmlParserTempProjectHelper.Program.VariableList.ObjectVariableList.ObjectVariableEntries)
-            {
-                entryCount++;
-                var userVariableCount = 0;
-                foreach (var tempUserVariable in entry.VariableList.UserVariables)
-                {
-                    userVariableCount++;
-                    if(( tempUserVariable == userVariable  ) && (entryCount == 1) && (userVariableCount == 1))
-                        return "../../../../../../../variables/objectVariableList/entry/list/userVariable";
-
-                    else if ((tempUserVariable == userVariable) && (entryCount == 1))
-                            return "../../../../../../../variables/objectVariableList/entry/list/userVariable[" + userVariableCount + "]";
-
-                    else if ((tempUserVariable == userVariable) && (userVariableCount == 1))
-                            return "../../../../../../../variables/objectVariableList/entry[" + entryCount +
-                                    "]/list/userVariable";
-
-                    else if (tempUserVariable == userVariable)
-                            return "../../../../../../../variables/objectVariableList/entry[" + entryCount +
-                                    "]/list/userVariable[" + userVariableCount + "]";
-                }
-            }
-
-            var count = 0;
-            foreach (var tempUserVariableReference in XmlParserTempProjectHelper.Program.VariableList.ProgramVariableList.UserVariableReferences)
-            {
-                count++;
-                if ((tempUserVariableReference.UserVariable == userVariable) && (count == 1))
-                    return "../../../../../../../variables/programVariableList/userVariable";
-                else if (tempUserVariableReference.UserVariable == userVariable)
-                    return "../../../../../../../variables/programVariableList/userVariable[" + count + "]";
-            }
-
-            return "";*/
         }
 
         private static string GetReferenceNumeration(uint number)

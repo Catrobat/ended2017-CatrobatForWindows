@@ -16,12 +16,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
         public XmlUserVariable() 
         {
-            XmlParserTempProjectHelper.currentVariableNum++;
             Set = false;
-            ObjectNum = XmlParserTempProjectHelper.currentObjectNum;
-            ScriptNum = XmlParserTempProjectHelper.currentScriptNum;
-            BrickNum = XmlParserTempProjectHelper.currentBrickNum;
-            VariableNum = XmlParserTempProjectHelper.currentVariableNum;
+
         }
 
         public XmlUserVariable(XElement xElement)
@@ -42,6 +38,13 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
             {
                 xRoot = new XElement(XmlConstants.UserVariable, Name);
                 Set = true;
+                XmlParserTempProjectHelper.currentVariableNum++;
+
+                ObjectNum = XmlParserTempProjectHelper.currentObjectNum;
+                ScriptNum = XmlParserTempProjectHelper.currentScriptNum;
+                BrickNum = XmlParserTempProjectHelper.currentBrickNum;
+                VariableNum = XmlParserTempProjectHelper.currentVariableNum;
+
             }
             else if(Set)
             {
