@@ -74,6 +74,7 @@ namespace Catrobat.Paint.WindowsPhone
 
         public Canvas PaintingAreaCanvas { get; set; }
         // separate layer, for temp manipulation operations
+        public Canvas EraserCanvas { get; set; }
 
         public PaintingAreaView PaintingAreaView { get; set; }
 
