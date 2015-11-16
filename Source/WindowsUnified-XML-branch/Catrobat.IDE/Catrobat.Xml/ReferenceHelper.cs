@@ -126,6 +126,29 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
 
         private static string GetVariableReferenceString(XmlUserVariableReference xmlUserVariableReference)
         {
+            XmlUserVariable var = xmlUserVariableReference.UserVariable;
+
+            if (xmlUserVariableReference.UserVariable.ObjectNum != XmlParserTempProjectHelper.currentObjectNum)
+                return GetStepDownString(6) + XmlConstants.Object + GetReferenceNumeration(var.ObjectNum) + "/"
+                    + XmlConstants.Script + GetReferenceNumeration(var.ScriptNum) + "/"
+                    + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
+                    + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
+
+            else if (xmlUserVariableReference.UserVariable.ScriptNum != XmlParserTempProjectHelper.currentScriptNum)
+                return GetStepDownString(4) + XmlConstants.Script + GetReferenceNumeration(var.ScriptNum) + "/"
+                    + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
+                    + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
+
+            else if (xmlUserVariableReference.UserVariable.BrickNum != XmlParserTempProjectHelper.currentBrickNum)
+                return GetStepDownString(2) + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
+                    + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
+
+            else if (xmlUserVariableReference.UserVariable.VariableNum != XmlParserTempProjectHelper.currentVariableNum)
+                return GetStepDownString(1) + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
+            else
+                return "the ReferenceHelper is not working properly!"; 
+            
+            /*
             var userVariable = xmlUserVariableReference.UserVariable;
             var entryCount = 0;
             foreach (var entry in XmlParserTempProjectHelper.Program.VariableList.ObjectVariableList.ObjectVariableEntries)
@@ -161,7 +184,25 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                     return "../../../../../../../variables/programVariableList/userVariable[" + count + "]";
             }
 
-            return "";
+            return "";*/
+        }
+
+        private static string GetReferenceNumeration(uint number)
+        {
+            if (number == 1)
+                return String.Empty;
+            else
+                return "[" + number.ToString() + "]";
+        }
+
+        private static string GetStepDownString(int steps)
+        {
+            string str = String.Empty;
+            for(int i = 1; i <= steps; i++)
+            {
+                str += "../";
+            }
+            return str;
         }
 
         private static string GetForeverBrickReferenceString(XmlLoopBeginBrick loopBeginBrick)

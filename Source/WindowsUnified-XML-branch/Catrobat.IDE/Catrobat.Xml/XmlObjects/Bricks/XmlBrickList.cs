@@ -6,6 +6,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Nxt;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Sounds;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;
+using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
 {
@@ -238,6 +239,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
 
             foreach (XmlBrick brick in Bricks)
             {
+                XmlParserTempProjectHelper.currentBrickNum++;
+                XmlParserTempProjectHelper.currentVariableNum = 0;
                 xRoot.Add(brick.CreateXml());
             }
 

@@ -59,6 +59,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override XDocument CreateXml()
         {
+            XmlParserTempProjectHelper.currentObjectNum = 0;
+            XmlParserTempProjectHelper.currentScriptNum = 0;
+            XmlParserTempProjectHelper.currentBrickNum = 0;
+            XmlParserTempProjectHelper.currentVariableNum = 0;
+
             XmlParserTempProjectHelper.Document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
 
             XmlParserTempProjectHelper.Program = this;
