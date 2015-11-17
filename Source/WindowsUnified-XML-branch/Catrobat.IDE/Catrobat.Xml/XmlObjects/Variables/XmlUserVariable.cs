@@ -7,9 +7,17 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
     {
         public string Name { get; set; }
 
+        public bool Set { get; set; }
+
+        public uint ObjectNum { get; set; }
+        public uint ScriptNum { get; set; }
+        public uint BrickNum { get; set; }
+        public uint VariableNum { get; set; }
+
         public XmlUserVariable() 
         {
-            XmlParserTempProjectHelper.currentVariableNum++;
+            Set = false;
+
         }
 
         public XmlUserVariable(XElement xElement)
@@ -24,7 +32,29 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement(XmlConstants.UserVariable, Name);
+            XElement xRoot;
+
+            if (Set == false)
+            {
+                xRoot = new XElement(XmlConstants.UserVariable, Name);
+                Set = true;
+                XmlParserTempProjectHelper.currentVariableNum++;
+
+                ObjectNum = XmlParserTempProjectHelper.currentObjectNum;
+                ScriptNum = XmlParserTempProjectHelper.currentScriptNum;
+                BrickNum = XmlParserTempProjectHelper.currentBrickNum;
+                VariableNum = XmlParserTempProjectHelper.currentVariableNum;
+
+            }
+            else if(Set)
+            {
+                XmlUserVariableReference userVariableReference = new XmlUserVariableReference();
+                userVariableReference.UserVariable = this;
+                userVariableReference.LoadReference();
+                xRoot = userVariableReference.CreateXml();
+            }
+            else
+                xRoot = new XElement("XmlUserVarialbe.cs Error");
 
             return xRoot;
         }

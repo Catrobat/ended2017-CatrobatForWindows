@@ -24,6 +24,9 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
         public static uint currentBrickNum = 0;
         public static uint currentVariableNum = 0;
 
+        public static bool inObjectVarList = false;
+        public static bool inProgramVarList = false;
+
         #endregion
 
     }

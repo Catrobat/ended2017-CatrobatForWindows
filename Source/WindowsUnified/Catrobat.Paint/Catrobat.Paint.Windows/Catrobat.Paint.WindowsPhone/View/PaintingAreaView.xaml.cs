@@ -60,6 +60,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             zoomCounter = 0;
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
+            PocketPaintApplication.GetInstance().EraserCanvas = EraserCanvas;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = new TransformGroup();
             HardwareButtons.BackPressed +=HardwareButtons_BackPressed;
             PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation = 0;
@@ -1662,6 +1663,18 @@ namespace Catrobat.Paint.WindowsPhone.View
             if(path != null)
             {
                 PaintingAreaCanvas.Children.Add(path);
+                changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", true);
+                changeEnabledOfASecondaryAppbarButton("appbarButtonSave", true);
+            }
+        }
+
+        public void addElementToEraserCanvas(Path path)
+        {
+            if (path != null)
+            {
+                EraserCanvas.Children.Clear();
+                EraserCanvas.Visibility = Visibility.Visible;
+                EraserCanvas.Children.Add(path);
                 changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", true);
                 changeEnabledOfASecondaryAppbarButton("appbarButtonSave", true);
             }

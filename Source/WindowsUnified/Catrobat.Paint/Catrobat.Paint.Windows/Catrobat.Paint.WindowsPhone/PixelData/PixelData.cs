@@ -295,6 +295,7 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             int intTemp;
             int intXTemp;
             int intValue;
+
             try
             {
                 intTemp = ((int)p.Y) * pixelWidthCanvas;
@@ -303,14 +304,15 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
 
                 var argb = color.Split('_');
 
-                //pixelsCanvas[intValue + 3] = Convert.ToByte(argb[0]);
-                //pixelsCanvas[intValue + 2] = Convert.ToByte(argb[1]);
-                //pixelsCanvas[intValue + 1] = Convert.ToByte(argb[2]);
-                //pixelsCanvas[intValue] = Convert.ToByte(argb[3]);
-                pixelsCanvas[intValue + 3] = Convert.ToByte(0x00);
-                pixelsCanvas[intValue + 2] = Convert.ToByte(0x00);
-                pixelsCanvas[intValue + 1] = Convert.ToByte(0x00);
-                pixelsCanvas[intValue] = Convert.ToByte(0x00);
+                if (intValue + 3 <= pixelsCanvas.Length)
+                {
+                    pixelsCanvas[intValue + 3] = Convert.ToByte(argb[0]);
+                    pixelsCanvas[intValue + 2] = Convert.ToByte(argb[1]);
+                    pixelsCanvas[intValue + 1] = Convert.ToByte(argb[2]);
+                    pixelsCanvas[intValue] = Convert.ToByte(argb[3]);
+                }
+                else
+                    return -1;
 
                 // PocketPaintApplication.GetInstance().PaintingAreaCanvas
                 
@@ -322,6 +324,36 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             {
                 return -1;
             }
+        }
+
+        public List<Point> GetWhitePixels()
+        {
+            byte ff = Convert.ToByte(0xff);
+
+            List<Point> results = new List<Point>();
+            var canvas = PocketPaintApplication.GetInstance().EraserCanvas;
+            if (canvas != null)
+            {
+                for (int x = 0; x < pixelWidthCanvas; x++)
+                {
+                    for (int y = 0; y < pixelHeightCanvas; y++)
+                    {
+                        int Temp = y * pixelWidthCanvas;
+                        int XTemp = Temp + x;
+                        int Value = XTemp * 4;
+
+                        if (pixelsCanvas[Value] == ff &&
+                        pixelsCanvas[Value + 1] == ff &&
+                        pixelsCanvas[Value + 2] == ff &&
+                        pixelsCanvas[Value + 3] == ff)
+                        {
+                            results.Add(new Point(x, y));
+                        }
+                    }
+                }
+            }
+
+            return results;
         }
 
         public async Task<Image> BufferToImage()
@@ -502,16 +534,19 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         async public Task<int> preparePaintingAreaCanvasForEraser()
         {
             RenderTargetBitmap retarbi = new RenderTargetBitmap();
-            //await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying,
-            //    (int)PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Width,
-            //    (int)PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Height);
+            Canvas eraserCanvas = PocketPaintApplication.GetInstance().EraserCanvas;
+            try
+            {
+                await retarbi.RenderAsync(eraserCanvas);
 
-            //await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvas);
-
-            Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
-            pixelsCanvasEraser = WindowsRuntimeBufferExtensions.ToArray(buffer);
-            pixelHeightCanvas = retarbi.PixelHeight;
-            pixelWidthCanvas = retarbi.PixelWidth;
+                Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
+                pixelsCanvas = WindowsRuntimeBufferExtensions.ToArray(buffer);
+                //Rectangle rectangle = (Rectangle)canvas.Children[0];
+                this.pixelHeightCanvas = retarbi.PixelHeight;
+                this.pixelWidthCanvas = retarbi.PixelWidth;
+            }
+            catch { }
+            ColorBrush = new SolidColorBrush();
             return 0;
         }
 
@@ -635,5 +670,13 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         //    return pixelsCanvas[intValue + 3];
         //}
 
+
+        public void SetPixel(List<Point> points, string c)
+        {
+            foreach(var point in points)
+            {
+                SetPixel(point, c);
+            }
+        }
     }
 }

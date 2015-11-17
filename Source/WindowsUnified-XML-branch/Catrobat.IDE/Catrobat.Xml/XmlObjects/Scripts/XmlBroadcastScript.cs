@@ -24,10 +24,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
             var xRoot = new XElement(XmlConstants.Script);
             xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlBroadcastScriptType);
 
-            XmlParserTempProjectHelper.currentScriptNum++;
-            XmlParserTempProjectHelper.currentBrickNum = 0;
-            XmlParserTempProjectHelper.currentVariableNum = 0;
-
             CreateCommonXML(xRoot);
 
             if (ReceivedMessage != null)

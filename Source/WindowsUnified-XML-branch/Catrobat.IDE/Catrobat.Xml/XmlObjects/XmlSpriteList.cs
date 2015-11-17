@@ -40,11 +40,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
             foreach (XmlSprite sprite in Sprites)
             {
-                xRoot.Add(sprite.CreateXml());
                 XmlParserTempProjectHelper.currentObjectNum++;
                 XmlParserTempProjectHelper.currentScriptNum = 0;
                 XmlParserTempProjectHelper.currentBrickNum = 0;
                 XmlParserTempProjectHelper.currentVariableNum = 0;
+                xRoot.Add(sprite.CreateXml());
 
             }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 {
@@ -46,6 +47,9 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 
             foreach (XmlScript script in Scripts)
             {
+                XmlParserTempProjectHelper.currentScriptNum++;
+                XmlParserTempProjectHelper.currentBrickNum = 0;
+                XmlParserTempProjectHelper.currentVariableNum = 0;
                 xRoot.Add(script.CreateXml());
             }
 
