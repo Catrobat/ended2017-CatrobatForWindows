@@ -9,6 +9,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
         public XmlUserVariable UserVariable { get; set; }
 
+        public XElement _xRoot { get; set; }
+
         public XmlUserVariableReference()
         {
         }
@@ -21,7 +23,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
         internal override void LoadFromXml(XElement xRoot)
         {
             _reference = xRoot.Attribute(XmlConstants.Reference).Value;
-            UserVariable = new XmlUserVariable { Name = "something_dirty" };
+            _xRoot = xRoot;
+            UserVariable = ReferenceHelper.GetReferenceObject(this, _reference) as XmlUserVariable;
         }
 
         internal override XElement CreateXml()
@@ -34,10 +37,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
         }
 
         public override void LoadReference()
-        {
+        {//TODO: think about it
             if(UserVariable == null)
                 UserVariable = ReferenceHelper.GetReferenceObject(this, _reference) as XmlUserVariable;
-            if (string.IsNullOrEmpty(_reference))
+            if (string.IsNullOrEmpty(_reference)) 
                 _reference = ReferenceHelper.GetReferenceString(this);
         }
     }

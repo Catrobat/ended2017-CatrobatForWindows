@@ -433,49 +433,40 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
 
         private static XmlObjectNode GetUserVariableObject(XmlUserVariableReference xmlUserVariableReference, string reference)
         {
-            var tmpReference = reference;
-            var found = false;
-            var count = 0;
+            XElement currentElement = xmlUserVariableReference._xRoot;
+            string[] array = reference.Split(new char[] { '/'}, StringSplitOptions.RemoveEmptyEntries);
 
-            var sprite = XmlParserTempProjectHelper.Sprite;
+            var matchQuery = from word in array
+                             where word.ToLowerInvariant() == ".."
+                             select word;
 
-            foreach (var script in sprite.Scripts.Scripts)
-                foreach (var brick in script.Bricks.Bricks)
-                    if (/*brick is XmlSetVariableBrick ||*/ brick is XmlChangeVariableBrick)
-                        if (/*brick is XmlSetVariableBrick && (brick as XmlSetVariableBrick).UserVariableReference == xmlUserVariableReference ||*/
-                            brick is XmlChangeVariableBrick && (brick as XmlChangeVariableBrick).UserVariableReference == xmlUserVariableReference)
-                        {
-                            found = true;
-                            if (tmpReference.EndsWith("]"))
-                            {
-                                var splittetReference = tmpReference.Split('[');
-                                tmpReference = tmpReference.Split('[')[splittetReference.Count() - 1];
-                                tmpReference = tmpReference.Split(']')[0];
-                                count = Int32.Parse(tmpReference) - 1;
-                            }
-                            break;
-                        }
+            int stepsDown = matchQuery.Count();
 
-            if (found)
+            for(int i=0; i < stepsDown; i++)
             {
-                //TODO: create constants
-                if (reference.Contains("programVariableList"))
-                {
-                    return XmlParserTempProjectHelper.Program.VariableList.ProgramVariableList.UserVariableReferences[count];
-                }
-                if (reference.Contains("objectVariableList"))
-                {
-                    var entries = XmlParserTempProjectHelper.Program.VariableList.ObjectVariableList.ObjectVariableEntries;
-                    foreach (var entry in entries)
-                    {
-                        if (entry.Sprite == sprite)
-                            return entry.VariableList.UserVariables[count];
-                    }
-                }
+                currentElement = currentElement.Parent;
             }
 
+            for(int i=stepsDown-1; i<array.Length; i++)
+            {
+                //TODO: throws exception
+                currentElement = currentElement.Elements(array[i].Split('[')[0]).ElementAt(GetElementNumber(array[i]));
+            }
 
-            return null;
+            return new XmlUserVariable(currentElement);
+        }
+
+        private static int GetElementNumber(string element)
+        {
+            if (element.EndsWith("]"))
+            {
+                var splittetReference = element.Split('[');
+                element = element.Split('[')[splittetReference.Count() - 1];
+                element = element.Split(']')[0];
+                return Int32.Parse(element) - 1;
+            }
+            else
+                return 0;
         }
 
         private static XmlObjectNode GetForeverBrickObject(XmlLoopBeginBrickReference loopBeginBrickReference, string reference)
