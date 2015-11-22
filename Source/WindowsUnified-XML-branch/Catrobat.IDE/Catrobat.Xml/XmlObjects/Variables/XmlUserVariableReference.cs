@@ -5,7 +5,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
     public class XmlUserVariableReference : XmlObjectNode
     {
-        private string _reference;
+        public string _reference;
 
         public XmlUserVariable UserVariable { get; set; }
 

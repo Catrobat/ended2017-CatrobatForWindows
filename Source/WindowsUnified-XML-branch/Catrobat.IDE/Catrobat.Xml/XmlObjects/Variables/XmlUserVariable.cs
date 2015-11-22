@@ -27,7 +27,13 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            Name = xRoot.Value;
+            if(xRoot.HasAttribute(XmlConstants.Reference))
+            {
+                XmlUserVariableReference bufferReference = new XmlUserVariableReference(xRoot);            
+                Name = bufferReference.UserVariable.Name;
+            }
+            else
+                Name = xRoot.Value;
         }
 
         internal override XElement CreateXml()
