@@ -221,6 +221,9 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
     {
         #region Properties
 
+        //TODO: part of a dirty hack
+        public Dictionary<TSourceVariable, TTargetVariable> variables { get; set; }
+
         protected readonly TBaseContext BaseContext;
 
         public TSourceProgram Program
@@ -297,7 +300,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion
             _looks = looks;
             _sounds = sounds;
             _localVariables = localVariables;
-            var variables = new Dictionary<TSourceVariable, TTargetVariable>();
+            variables = new Dictionary<TSourceVariable, TTargetVariable>();
             foreach (var entry in GlobalVariables) variables[entry.Key] = entry.Value;
             foreach (var entry in LocalVariables) variables[entry.Key] = entry.Value;
             _variables = new ReadOnlyDictionary<TSourceVariable, TTargetVariable>(variables);

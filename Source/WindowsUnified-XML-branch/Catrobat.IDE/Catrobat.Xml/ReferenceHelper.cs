@@ -130,21 +130,26 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             if(XmlParserTempProjectHelper.inObjectVarList)
                 return GetStepDownString(5) + XmlConstants.ObjectList + "/"
                     + XmlConstants.Object + GetReferenceNumeration(var.ObjectNum) + "/"
+                    + XmlConstants.ScriptList + "/"
                     + XmlConstants.Script + GetReferenceNumeration(var.ScriptNum) + "/"
+                    + XmlConstants.BrickList + "/"
                     + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
                     + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
 
             else if (XmlParserTempProjectHelper.inProgramVarList)
                 return GetStepDownString(3) + XmlConstants.ObjectList + "/"
                     + XmlConstants.Object + GetReferenceNumeration(var.ObjectNum) + "/"
+                    + XmlConstants.ScriptList + "/"
                     + XmlConstants.Script + GetReferenceNumeration(var.ScriptNum) + "/"
+                    + XmlConstants.BrickList + "/"
                     + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
                     + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
 
             else if (xmlUserVariableReference.UserVariable.ObjectNum != XmlParserTempProjectHelper.currentObjectNum)
                 return GetStepDownString(6) + XmlConstants.Object + GetReferenceNumeration(var.ObjectNum) + "/"
+                    + XmlConstants.ScriptList + "/"
                     + XmlConstants.Script + GetReferenceNumeration(var.ScriptNum) + "/"
-                    + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
+                    + XmlConstants.BrickList + "/" + XmlConstants.Brick + GetReferenceNumeration(var.BrickNum) + "/"
                     + XmlConstants.UserVariable + GetReferenceNumeration(var.VariableNum);
 
             else if (xmlUserVariableReference.UserVariable.ScriptNum != XmlParserTempProjectHelper.currentScriptNum)
@@ -447,10 +452,13 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                 currentElement = currentElement.Parent;
             }
 
-            for(int i=stepsDown-1; i<array.Length; i++)
+            for(int i=stepsDown; i<array.Length; i++)
             {
                 //TODO: throws exception
-                currentElement = currentElement.Elements(array[i].Split('[')[0]).ElementAt(GetElementNumber(array[i]));
+                string type = array[i].Split('[')[0];
+                int number = GetElementNumber(array[i]);
+
+                currentElement = currentElement.Elements(type).ElementAt(number);
             }
 
             return new XmlUserVariable(currentElement);
