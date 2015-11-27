@@ -38,6 +38,7 @@ namespace Catrobat.IDE.Core.Models
             set { Set(ref _tags, value); }
         }
 
+        //TODO: didnt worked properly on 27.11.2015 on the xml branch
         private DateTime? _uploaded;
         public DateTime? Uploaded
         {
