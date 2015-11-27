@@ -227,28 +227,28 @@
       <Filter>Objects\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)IProject.h">
-      <Filter>Objects\Interface</Filter>
+      <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)IObject.h">
-      <Filter>Objects\Interface</Filter>
+      <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)NativeWrapper.h">
-      <Filter>Objects\Interface</Filter>
+      <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ILook.h">
-      <Filter>Objects\Interface</Filter>
+      <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)IUserVariable.h">
-      <Filter>Objects\Interface</Filter>
+      <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)IStartScript.h">
-      <Filter>Objects\Interface</Filter>
+      <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)IWhenScript.h">
-      <Filter>Objects\Interface</Filter>
+      <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)IBroadcastScript.h">
-      <Filter>Objects\Interface</Filter>
+      <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -462,7 +462,7 @@
       <Filter>Objects\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)NativeWrapper.cpp">
-      <Filter>Objects\Interface</Filter>
+      <Filter>NativeComponent\Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -517,7 +517,10 @@
     <Filter Include="Sounds">
       <UniqueIdentifier>{10681dc4-9e75-45a8-a90d-b6905fc55dd3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\Interface">
+    <Filter Include="NativeComponent">
+      <UniqueIdentifier>{f0b0ad34-fad6-4601-9d6e-f2c49175e4a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NativeComponent\Interface">
       <UniqueIdentifier>{9526212e-40da-4755-9a0e-0707a23d8b50}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
