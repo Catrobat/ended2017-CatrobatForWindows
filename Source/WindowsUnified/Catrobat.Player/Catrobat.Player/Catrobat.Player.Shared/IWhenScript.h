@@ -8,8 +8,7 @@ namespace Catrobat_Player
 		public interface class IWhenScript
 		{
 		public:
-			virtual property Platform::String^ Name;
-			// TODO: Maybe enum here?
+			//TODO: Maybe enum here?
 			virtual property Platform::String^ Action;
 		};
 	}
