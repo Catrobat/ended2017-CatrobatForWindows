@@ -10,7 +10,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		ContainerBrick(TypeOfBrick brickType, std::shared_ptr<Script> parent);
+		ContainerBrick(TypeOfBrick brickType, Script* parent);
 
 		virtual void Execute() = 0;
 		virtual void AddBrick(std::unique_ptr<Brick> brick) = 0;

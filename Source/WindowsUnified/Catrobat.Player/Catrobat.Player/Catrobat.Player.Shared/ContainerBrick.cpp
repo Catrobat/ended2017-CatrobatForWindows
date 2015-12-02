@@ -4,7 +4,7 @@
 
 using namespace ProjectStructure;
 
-ContainerBrick::ContainerBrick(TypeOfBrick brickType, std::shared_ptr<Script>parent) :
+ContainerBrick::ContainerBrick(TypeOfBrick brickType, Script* parent) :
 	Brick(brickType, parent)
 {
 }

@@ -5,7 +5,7 @@
 
 using namespace ProjectStructure;
 
-ChangeVariableBrick::ChangeVariableBrick(FormulaTree *variableFormula, std::shared_ptr<Script> parent)
+ChangeVariableBrick::ChangeVariableBrick(FormulaTree *variableFormula, Script* parent)
 	: VariableManagementBrick(TypeOfBrick::SetVariableBrick, variableFormula, parent)
 {
 }

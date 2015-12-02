@@ -9,7 +9,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		WaitBrick(FormulaTree *timeToWaitInSeconds, std::shared_ptr<Script> parent);
+		WaitBrick(FormulaTree *timeToWaitInSeconds, Script* parent);
 		void Execute();
 	private:
 		FormulaTree *m_timeToWaitInSeconds;

@@ -4,7 +4,7 @@
 
 using namespace ProjectStructure;
 
-BroadcastBrick::BroadcastBrick(std::string broadcastMessage, std::shared_ptr<Script> parent)
+BroadcastBrick::BroadcastBrick(std::string broadcastMessage, Script* parent)
 	: Brick(TypeOfBrick::BroadcastBrick, parent), m_broadcastMessage(broadcastMessage)
 {
 }

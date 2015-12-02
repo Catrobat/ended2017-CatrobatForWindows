@@ -8,7 +8,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		SetSizeToBrick(FormulaTree *scale, std::shared_ptr<Script> parent);
+		SetSizeToBrick(FormulaTree *scale, Script* parent);
 		void Execute();
 	private:
 		FormulaTree *m_scale;

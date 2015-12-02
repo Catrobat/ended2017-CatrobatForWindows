@@ -16,7 +16,7 @@ namespace ProjectStructure
 		public ContainerBrick
 	{
 	public:
-		IfBrick(FormulaTree *condition, std::shared_ptr<Script> parent);
+		IfBrick(FormulaTree *condition, Script* parent);
 		~IfBrick();
 
 		void Execute();

@@ -3,13 +3,16 @@
 #include "Script.h"
 #include "Object.h"
 #include "Interpreter.h"
+#include "Helper.h"
 
 using namespace ProjectStructure;
 
-TurnRightBrick::TurnRightBrick(FormulaTree *rotation,std::shared_ptr<Script> parent) :
-	Brick(TypeOfBrick::TurnRightBrick, parent),
-	m_rotation(rotation)
+TurnRightBrick::TurnRightBrick(Catrobat_Player::NativeComponent::ITurnRightBrick^ brick, Script* parent) :
+	Brick(TypeOfBrick::TurnRightBrick, parent)
+	//m_rotation(rotation)
 {
+	// TODO: This is only test code
+	m_rotation = new FormulaTree("NUMBER", Helper::StdString(brick->Rotation.ToString()));
 }
 
 void TurnRightBrick::Execute()

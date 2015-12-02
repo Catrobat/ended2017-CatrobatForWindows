@@ -6,7 +6,7 @@
 
 using namespace ProjectStructure;
 
-TurnLeftBrick::TurnLeftBrick(FormulaTree *rotation,std::shared_ptr<Script> parent) :
+TurnLeftBrick::TurnLeftBrick(FormulaTree *rotation,Script* parent) :
 	Brick(TypeOfBrick::TurnLeftBrick, parent),
 	m_rotation(rotation)
 {

@@ -8,7 +8,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		PlaySoundBrick(std::string filename, std::string name, std::shared_ptr<Script> parent);
+		PlaySoundBrick(std::string filename, std::string name, Script* parent);
 		void Execute();
 	private:
 		std::string m_filename;

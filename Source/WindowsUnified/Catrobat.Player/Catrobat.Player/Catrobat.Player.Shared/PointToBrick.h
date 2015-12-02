@@ -8,7 +8,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		PointToBrick(FormulaTree *rotation, std::shared_ptr<Script> parent);
+		PointToBrick(FormulaTree *rotation, Script* parent);
 		void Execute();
 	private:
 		FormulaTree *m_rotation;

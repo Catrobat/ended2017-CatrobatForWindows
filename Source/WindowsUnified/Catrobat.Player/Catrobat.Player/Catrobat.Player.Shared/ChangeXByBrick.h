@@ -8,7 +8,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		ChangeXByBrick(FormulaTree *offsetX, std::shared_ptr<Script> parent);
+		ChangeXByBrick(FormulaTree *offsetX, Script* parent);
 		void Execute();
 	private:
 		FormulaTree *m_offsetX;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Brick.h"
+#include "ITurnRightBrick.h"
 
 namespace ProjectStructure
 {
@@ -8,7 +9,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		TurnRightBrick(FormulaTree *rotation, std::shared_ptr<Script> parent);
+		TurnRightBrick(Catrobat_Player::NativeComponent::ITurnRightBrick^ brick, Script* parent);
 		void Execute();
 	private:
 		FormulaTree *m_rotation;

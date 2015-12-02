@@ -10,7 +10,7 @@ namespace ProjectStructure
 		public ContainerBrick
 	{
 	public:
-		ForeverBrick(std::shared_ptr<Script> parent);
+		ForeverBrick(Script* parent);
 		~ForeverBrick();
 
 		void Execute();

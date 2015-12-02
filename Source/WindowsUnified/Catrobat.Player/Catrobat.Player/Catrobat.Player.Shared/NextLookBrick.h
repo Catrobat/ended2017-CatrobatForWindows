@@ -8,7 +8,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		NextLookBrick(std::shared_ptr<Script> parent);
+		NextLookBrick(Script* parent);
 		void Execute();
 	};
 

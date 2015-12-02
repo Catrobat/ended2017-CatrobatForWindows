@@ -4,7 +4,7 @@
 using namespace std;
 using namespace ProjectStructure;
 
-VariableManagementBrick::VariableManagementBrick(TypeOfBrick brickType, FormulaTree *variableFormula, std::shared_ptr<Script> parent) :
+VariableManagementBrick::VariableManagementBrick(TypeOfBrick brickType, FormulaTree *variableFormula, Script* parent) :
 	Brick(brickType, parent), m_variableFormula(variableFormula)
 {
 }

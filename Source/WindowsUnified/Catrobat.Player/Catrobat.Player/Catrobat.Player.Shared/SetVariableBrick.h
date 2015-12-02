@@ -8,7 +8,7 @@ namespace ProjectStructure
 		: public VariableManagementBrick
 	{
 	public:
-		SetVariableBrick(FormulaTree *variableFormula, std::shared_ptr<Script> parent);
+		SetVariableBrick(FormulaTree *variableFormula, Script* parent);
 		void Execute();
 	};
 }

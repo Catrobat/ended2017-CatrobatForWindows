@@ -8,7 +8,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		ChangeGhostEffectByBrick(FormulaTree *transparency, std::shared_ptr<Script> parent);
+		ChangeGhostEffectByBrick(FormulaTree *transparency, Script* parent);
 		void Execute();
 	private:
 		FormulaTree *m_transparency;

@@ -9,7 +9,7 @@
 
 using namespace ProjectStructure;
 
-MoveNStepsBrick::MoveNStepsBrick(FormulaTree *steps, std::shared_ptr<Script> parent) :
+MoveNStepsBrick::MoveNStepsBrick(FormulaTree *steps, Script* parent) :
 	Brick(TypeOfBrick::MoveNStepsBrick, parent),
 	m_steps(steps)
 {

@@ -6,7 +6,7 @@
 
 using namespace ProjectStructure;
 
-WaitBrick::WaitBrick(FormulaTree *timeToWaitInSeconds, std::shared_ptr<Script> parent) :
+WaitBrick::WaitBrick(FormulaTree *timeToWaitInSeconds, Script* parent) :
 	Brick(TypeOfBrick::WaitBrick, parent), m_timeToWaitInSeconds(timeToWaitInSeconds)
 {
 }

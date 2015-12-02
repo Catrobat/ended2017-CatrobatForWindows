@@ -5,12 +5,12 @@
 
 using namespace ProjectStructure;
 
-CostumeBrick::CostumeBrick(std::string costumeDataReference, int index, std::shared_ptr<Script> parent) :
+CostumeBrick::CostumeBrick(std::string costumeDataReference, int index, Script* parent) :
 	Brick(TypeOfBrick::CostumeBrick, parent), m_costumeDataReference(costumeDataReference), m_index(index)
 {
 }
 
-CostumeBrick::CostumeBrick(std::shared_ptr<Script> parent) :
+CostumeBrick::CostumeBrick(Script* parent) :
 	Brick(TypeOfBrick::CostumeBrick, parent), m_index(0)
 {
 }

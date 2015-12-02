@@ -6,7 +6,7 @@
 
 using namespace ProjectStructure;
 
-ChangeYByBrick::ChangeYByBrick(FormulaTree *offsetY, std::shared_ptr<Script> parent) :
+ChangeYByBrick::ChangeYByBrick(FormulaTree *offsetY, Script* parent) :
 	Brick(TypeOfBrick::ChangeYByBrick, parent),
 	m_offsetY(offsetY)
 {

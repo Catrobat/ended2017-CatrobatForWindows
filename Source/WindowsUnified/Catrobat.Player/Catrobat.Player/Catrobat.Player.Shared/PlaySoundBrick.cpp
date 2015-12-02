@@ -4,7 +4,7 @@
 using namespace std;
 using namespace ProjectStructure;
 
-PlaySoundBrick::PlaySoundBrick(string filename, string name, std::shared_ptr<Script>parent) :
+PlaySoundBrick::PlaySoundBrick(string filename, string name, Script* parent) :
 	Brick(TypeOfBrick::PlaySoundBrick, parent),
 	m_filename(filename), m_name(name)
 {

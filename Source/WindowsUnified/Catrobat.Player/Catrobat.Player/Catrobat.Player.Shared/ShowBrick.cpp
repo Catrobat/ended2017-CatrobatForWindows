@@ -5,7 +5,7 @@
 
 using namespace ProjectStructure;
 
-ShowBrick::ShowBrick(std::shared_ptr<Script> parent) :
+ShowBrick::ShowBrick(Script* parent) :
 	Brick(TypeOfBrick::ShowBrick, parent)
 {
 }

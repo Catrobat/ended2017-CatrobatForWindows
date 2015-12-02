@@ -10,7 +10,7 @@ namespace ProjectStructure
 		public ContainerBrick
 	{
 	public:
-		RepeatBrick(FormulaTree *times, std::shared_ptr<Script> parent);
+		RepeatBrick(FormulaTree *times, Script* parent);
 		~RepeatBrick();
 
 		void Execute();

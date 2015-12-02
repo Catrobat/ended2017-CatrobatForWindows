@@ -5,7 +5,7 @@
 
 using namespace ProjectStructure;
 
-NextLookBrick::NextLookBrick(std::shared_ptr<Script> parent) :
+NextLookBrick::NextLookBrick(Script* parent) :
 	Brick(TypeOfBrick::NextlookBrick, parent)
 {
 }

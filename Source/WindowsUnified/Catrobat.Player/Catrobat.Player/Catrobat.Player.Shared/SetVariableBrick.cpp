@@ -3,14 +3,14 @@
 
 using namespace ProjectStructure;
 
-SetVariableBrick::SetVariableBrick(FormulaTree *variableFormula,std::shared_ptr<Script> parent)
+SetVariableBrick::SetVariableBrick(FormulaTree *variableFormula, Script* parent)
 	: VariableManagementBrick(TypeOfBrick::SetVariableBrick, variableFormula, parent)
 {
 }
 
 void SetVariableBrick::Execute()
 {
-    // TODO: typecheck and logic
+	// TODO: typecheck and logic
 	m_variable->SetValue(m_variableFormula->Value());
 }
 

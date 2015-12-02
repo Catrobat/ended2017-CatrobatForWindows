@@ -6,7 +6,7 @@
 
 using namespace ProjectStructure;
 
-ChangeGhostEffectByBrick::ChangeGhostEffectByBrick(FormulaTree *transparency, std::shared_ptr<Script> parent) :
+ChangeGhostEffectByBrick::ChangeGhostEffectByBrick(FormulaTree *transparency, Script* parent) :
 	Brick(TypeOfBrick::ChangeGhostEffectByBrick, parent),
 	m_transparency(transparency)
 {

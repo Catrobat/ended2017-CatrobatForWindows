@@ -8,7 +8,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		ShowBrick(std::shared_ptr<Script> parent);
+		ShowBrick(Script* parent);
 		void Execute();
 	};
 }

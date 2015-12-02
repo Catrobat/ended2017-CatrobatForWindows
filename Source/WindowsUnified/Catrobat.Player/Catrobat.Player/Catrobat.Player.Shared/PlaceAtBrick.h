@@ -8,7 +8,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		PlaceAtBrick(FormulaTree *positionX, FormulaTree *positionY, std::shared_ptr<Script> parent);
+		PlaceAtBrick(FormulaTree *positionX, FormulaTree *positionY, Script* parent);
 		void Execute();
 	private:
 		FormulaTree *m_positionX;

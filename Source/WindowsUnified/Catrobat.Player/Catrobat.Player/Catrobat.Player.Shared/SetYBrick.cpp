@@ -6,7 +6,7 @@
 
 using namespace ProjectStructure;
 
-SetYBrick::SetYBrick(FormulaTree *positionY, std::shared_ptr<Script> parent) :
+SetYBrick::SetYBrick(FormulaTree *positionY, Script* parent) :
 	Brick(TypeOfBrick::SetYBrick, parent),
 	m_positionY(positionY)
 {

@@ -10,7 +10,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		VariableManagementBrick(TypeOfBrick brickType, FormulaTree *variableFormula, std::shared_ptr<Script> parent);
+		VariableManagementBrick(TypeOfBrick brickType, FormulaTree *variableFormula, Script* parent);
 		virtual void Execute() = 0;
 
 		void SetVariable(std::shared_ptr<UserVariable> variable);

@@ -6,7 +6,7 @@
 
 using namespace ProjectStructure;
 
-ChangeSizeByBrick::ChangeSizeByBrick(FormulaTree *scale, std::shared_ptr<Script> parent) :
+ChangeSizeByBrick::ChangeSizeByBrick(FormulaTree *scale, Script* parent) :
 	Brick(TypeOfBrick::SetGhostEffectBrick, parent),
 	m_scale(scale)
 {

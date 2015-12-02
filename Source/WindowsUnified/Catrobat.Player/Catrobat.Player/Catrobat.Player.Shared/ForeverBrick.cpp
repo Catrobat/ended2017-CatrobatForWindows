@@ -5,7 +5,7 @@
 using namespace std;
 using namespace ProjectStructure;
 
-ForeverBrick::ForeverBrick(std::shared_ptr<Script> parent) :
+ForeverBrick::ForeverBrick(Script* parent) :
 	ContainerBrick(TypeOfBrick::ContainerBrick, parent)
 {
 }

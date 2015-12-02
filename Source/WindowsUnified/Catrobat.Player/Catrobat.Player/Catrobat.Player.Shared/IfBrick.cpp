@@ -5,7 +5,7 @@
 using namespace std;
 using namespace ProjectStructure;
 
-IfBrick::IfBrick(FormulaTree *condition, std::shared_ptr<Script> parent) :
+IfBrick::IfBrick(FormulaTree *condition, Script* parent) :
 	ContainerBrick(TypeOfBrick::ContainerBrick, parent), m_condition(condition)
 {
 	m_currentAddMode = IfBranchType::If;

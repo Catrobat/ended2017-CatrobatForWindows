@@ -8,7 +8,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		BroadcastBrick(std::string broadcastMessage, std::shared_ptr<Script> parent);
+		BroadcastBrick(std::string broadcastMessage, Script* parent);
 		void Execute();
 
 	private:

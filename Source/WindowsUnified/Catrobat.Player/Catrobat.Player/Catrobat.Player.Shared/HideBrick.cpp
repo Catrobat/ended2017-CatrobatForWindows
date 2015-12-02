@@ -5,7 +5,7 @@
 
 using namespace ProjectStructure;
 
-HideBrick::HideBrick(std::shared_ptr<Script> parent) :
+HideBrick::HideBrick(Script* parent) :
 	Brick(TypeOfBrick::HideBrick, parent)
 {
 }

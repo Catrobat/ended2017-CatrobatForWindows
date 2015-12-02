@@ -6,7 +6,7 @@
 
 using namespace ProjectStructure;
 
-ChangeXByBrick::ChangeXByBrick(FormulaTree *offsetX, std::shared_ptr<Script> parent) :
+ChangeXByBrick::ChangeXByBrick(FormulaTree *offsetX, Script* parent) :
 	Brick(TypeOfBrick::ChangeXByBrick, parent),
 	m_offsetX(offsetX)
 {
