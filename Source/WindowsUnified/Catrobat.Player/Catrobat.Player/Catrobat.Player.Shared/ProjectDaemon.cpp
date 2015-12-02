@@ -74,6 +74,5 @@ bool ProjectDaemon::CreateNativeProject()
 bool ProjectDaemon::RestartProject()
 {
 	m_project.reset();
-	return true;
-	//return	OpenProject(m_projectName);
+	return CreateNativeProject();
 }
