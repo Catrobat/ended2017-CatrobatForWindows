@@ -22,12 +22,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Objects\Look.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Objects\Object.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Objects\Project.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Objects\StartScript.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Objects\UserVariable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Objects\WhenScript.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\XMLParser.cs" />
   </ItemGroup>
 </Project>
