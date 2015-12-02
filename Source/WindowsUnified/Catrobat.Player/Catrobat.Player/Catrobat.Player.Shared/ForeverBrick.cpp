@@ -3,6 +3,7 @@
 #include "Interpreter.h"
 
 using namespace std;
+using namespace ProjectStructure;
 
 ForeverBrick::ForeverBrick(std::shared_ptr<Script> parent) :
 	ContainerBrick(TypeOfBrick::ContainerBrick, parent)

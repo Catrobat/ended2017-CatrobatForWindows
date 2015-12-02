@@ -4,6 +4,8 @@
 #include "Object.h"
 #include "Interpreter.h"
 
+using namespace ProjectStructure;
+
 ChangeGhostEffectByBrick::ChangeGhostEffectByBrick(FormulaTree *transparency, std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::ChangeGhostEffectByBrick, parent),
 	m_transparency(transparency)

@@ -3,20 +3,23 @@
 #include "Script.h"
 #include "IWhenScript.h"
 
-class WhenScript :
-	public Script
+namespace ProjectStructure
 {
-public:
-	enum Action 
+	class WhenScript :
+		public Script
 	{
-		Tapped
+	public:
+		enum Action
+		{
+			Tapped
+		};
+
+		WhenScript(Catrobat_Player::NativeComponent::IWhenScript^ whenScript, Object* parent);
+		~WhenScript();
+
+		int GetAction();
+
+	private:
+		int m_action;
 	};
-
-	WhenScript(Catrobat_Player::NativeComponent::IWhenScript^ whenScript, Object* parent);
-	~WhenScript();
-
-	int GetAction();
-
-private:
-	int m_action;
-};
+}

@@ -4,6 +4,8 @@
 #include "Object.h"
 #include "Interpreter.h"
 
+using namespace ProjectStructure;
+
 SetXBrick::SetXBrick(FormulaTree *positionX, std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::SetXBrick, parent),
 	m_positionX(positionX)
@@ -13,6 +15,6 @@ SetXBrick::SetXBrick(FormulaTree *positionX, std::shared_ptr<Script> parent) :
 void SetXBrick::Execute()
 {
 	float currentX, currentY;
-    m_parent->GetParent()->GetTranslation(currentX, currentY);
-    m_parent->GetParent()->SetTranslation(Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX, m_parent->GetParent()), currentY);
+	m_parent->GetParent()->GetTranslation(currentX, currentY);
+	m_parent->GetParent()->SetTranslation(Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX, m_parent->GetParent()), currentY);
 }

@@ -4,6 +4,8 @@
 #include "Object.h"
 #include "Interpreter.h"
 
+using namespace ProjectStructure;
+
 ChangeXByBrick::ChangeXByBrick(FormulaTree *offsetX, std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::ChangeXByBrick, parent),
 	m_offsetX(offsetX)

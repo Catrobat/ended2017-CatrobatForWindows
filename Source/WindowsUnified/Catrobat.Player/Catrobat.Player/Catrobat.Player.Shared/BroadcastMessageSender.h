@@ -1,14 +1,17 @@
 #pragma once
 
-ref class BroadcastMessageSender;
-delegate void BroadcastMessageEventHandler(BroadcastMessageSender^ sender, Platform::String ^message);
-
-ref class BroadcastMessageSender sealed
+namespace Core
 {
-public:
-	BroadcastMessageSender();
+	ref class BroadcastMessageSender;
+	delegate void BroadcastMessageEventHandler(BroadcastMessageSender^ sender, Platform::String ^message);
 
-	event BroadcastMessageEventHandler^ Broadcast;
+	ref class BroadcastMessageSender sealed
+	{
+	public:
+		BroadcastMessageSender();
 
-	void SendBroadcastMessage(Platform::String ^message);
-};
+		event BroadcastMessageEventHandler^ Broadcast;
+
+		void SendBroadcastMessage(Platform::String ^message);
+	};
+}

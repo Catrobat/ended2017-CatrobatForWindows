@@ -3,6 +3,7 @@
 #include "Interpreter.h"
 
 using namespace std;
+using namespace ProjectStructure;
 
 IfBrick::IfBrick(FormulaTree *condition, std::shared_ptr<Script> parent) :
 	ContainerBrick(TypeOfBrick::ContainerBrick, parent), m_condition(condition)

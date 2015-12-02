@@ -2,6 +2,7 @@
 #include "PlaySoundBrick.h"
 
 using namespace std;
+using namespace ProjectStructure;
 
 PlaySoundBrick::PlaySoundBrick(string filename, string name, std::shared_ptr<Script>parent) :
 	Brick(TypeOfBrick::PlaySoundBrick, parent),

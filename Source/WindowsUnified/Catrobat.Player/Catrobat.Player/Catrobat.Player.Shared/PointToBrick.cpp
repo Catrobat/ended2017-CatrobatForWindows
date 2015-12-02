@@ -4,6 +4,8 @@
 #include "Object.h"
 #include "Interpreter.h"
 
+using namespace ProjectStructure;
+
 PointToBrick::PointToBrick(FormulaTree *rotation, std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::PointToBrick, parent),
 	m_rotation(rotation)

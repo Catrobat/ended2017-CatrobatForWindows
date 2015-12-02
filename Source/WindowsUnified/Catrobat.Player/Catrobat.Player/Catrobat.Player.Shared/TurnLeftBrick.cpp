@@ -4,6 +4,8 @@
 #include "Object.h"
 #include "Interpreter.h"
 
+using namespace ProjectStructure;
+
 TurnLeftBrick::TurnLeftBrick(FormulaTree *rotation,std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::TurnLeftBrick, parent),
 	m_rotation(rotation)

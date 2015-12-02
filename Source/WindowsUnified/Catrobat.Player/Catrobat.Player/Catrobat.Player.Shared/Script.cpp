@@ -9,6 +9,7 @@
 using namespace Windows::System::Threading;
 using namespace Windows::Foundation;
 using namespace std;
+using namespace ProjectStructure;
 
 Script::Script(TypeOfScript scriptType, Object* parent) :
 	m_scriptType(scriptType), m_parent(parent)

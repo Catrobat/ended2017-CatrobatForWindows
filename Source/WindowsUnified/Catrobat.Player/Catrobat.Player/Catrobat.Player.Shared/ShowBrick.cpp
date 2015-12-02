@@ -3,6 +3,8 @@
 #include "Script.h"
 #include "Object.h"
 
+using namespace ProjectStructure;
+
 ShowBrick::ShowBrick(std::shared_ptr<Script> parent) :
 	Brick(TypeOfBrick::ShowBrick, parent)
 {

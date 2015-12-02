@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "BroadcastMessageSender.h"
 
-BroadcastMessageSender::BroadcastMessageSender() { }
+using namespace Core;
+
+BroadcastMessageSender::BroadcastMessageSender() {}
 
 void BroadcastMessageSender::SendBroadcastMessage(Platform::String ^message)
 {

@@ -2,10 +2,14 @@
 
 #include "Brick.h"
 
-class NextLookBrick :
-	public Brick
+namespace ProjectStructure
 {
-public:
-	NextLookBrick(std::shared_ptr<Script> parent);
-	void Execute();
-};
+	class NextLookBrick :
+		public Brick
+	{
+	public:
+		NextLookBrick(std::shared_ptr<Script> parent);
+		void Execute();
+	};
+
+}

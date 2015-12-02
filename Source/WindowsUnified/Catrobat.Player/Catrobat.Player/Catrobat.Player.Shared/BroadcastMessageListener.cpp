@@ -2,6 +2,8 @@
 #include "BroadcastMessageListener.h"
 #include "BroadcastScript.h"
 
+using namespace Core;
+
 BroadcastMessageListener::BroadcastMessageListener()
 {
 }
@@ -13,5 +15,5 @@ void BroadcastMessageListener::HandleBroadcastMessage(BroadcastMessageSender^ me
 
 void BroadcastMessageListener::SetScript(int script)
 {
-	m_script = (BroadcastScript *) script;
+	m_script = (ProjectStructure::BroadcastScript *) script;
 }
