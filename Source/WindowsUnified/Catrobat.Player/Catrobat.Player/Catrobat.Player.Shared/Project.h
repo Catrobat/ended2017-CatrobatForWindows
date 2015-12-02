@@ -29,8 +29,6 @@ namespace ProjectStructure
 	private:
 		std::unique_ptr<Header> m_header;
 		std::map<std::string, std::shared_ptr<Object> > m_objectList;
-		std::map<std::string, std::shared_ptr<Object> > m_objectListInitial;
 		std::map<std::string, std::shared_ptr<UserVariable> > m_variableList;
-		std::map<std::string, std::string> m_variableListValueInitial;
 	};
 }
