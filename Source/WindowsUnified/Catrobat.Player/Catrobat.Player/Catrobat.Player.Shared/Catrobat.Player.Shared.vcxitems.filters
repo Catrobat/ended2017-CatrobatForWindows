@@ -250,6 +250,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)IBroadcastScript.h">
       <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Header.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IHeader.h">
+      <Filter>NativeComponent\Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
@@ -464,6 +468,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)NativeWrapper.cpp">
       <Filter>NativeComponent\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Header.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

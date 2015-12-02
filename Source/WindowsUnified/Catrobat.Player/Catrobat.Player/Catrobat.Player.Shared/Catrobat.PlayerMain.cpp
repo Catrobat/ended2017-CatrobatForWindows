@@ -77,8 +77,8 @@ namespace Catrobat_Player
 		m_gridAxes = FindChildControl<Grid>((DependencyObject^)playerPage->Content,
 			Constants::XAMLPage::GridAxesName);
 
-		int projectScreenHeight = ProjectDaemon::Instance()->GetProject()->GetScreenHeight();
-		int projectScreendWidth = ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
+		int projectScreenHeight = ProjectDaemon::Instance()->GetProject()->GetHeader()->GetScreenHeight();
+		int projectScreendWidth = ProjectDaemon::Instance()->GetProject()->GetHeader()->GetScreenWidth();
 
 		// horizontal values
 		(FindChildControl<TextBlock>((DependencyObject^)m_gridAxes,

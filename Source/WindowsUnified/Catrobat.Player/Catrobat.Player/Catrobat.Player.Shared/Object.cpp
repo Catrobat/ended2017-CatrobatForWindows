@@ -182,11 +182,11 @@ void Object::SetupWindowSizeDependentResources(const std::shared_ptr<DX::DeviceR
 	auto deviceContext = deviceResources->GetD2DDeviceContext();
 	m_logicalSize = deviceContext->GetSize();
 
-	int screen_width = ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
-	int screen_height = ProjectDaemon::Instance()->GetProject()->GetScreenHeight();
+	int screen_width = ProjectDaemon::Instance()->GetProject()->GetHeader()->GetScreenWidth();
+	int screen_height = ProjectDaemon::Instance()->GetProject()->GetHeader()->GetScreenHeight();
 
-	m_ratio.width = m_logicalSize.width / ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
-	m_ratio.height = m_logicalSize.height / ProjectDaemon::Instance()->GetProject()->GetScreenHeight() * (-1);
+	m_ratio.width = m_logicalSize.width / ProjectDaemon::Instance()->GetProject()->GetHeader()->GetScreenWidth();
+	m_ratio.height = m_logicalSize.height / ProjectDaemon::Instance()->GetProject()->GetHeader()->GetScreenHeight() * (-1);
 	RecalculateTransformation();
 }
 
