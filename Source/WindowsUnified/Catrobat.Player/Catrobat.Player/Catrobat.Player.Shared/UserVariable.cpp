@@ -2,6 +2,7 @@
 #include "UserVariable.h"
 
 using namespace std;
+using namespace ProjectStructure;
 
 
 UserVariable::UserVariable(Catrobat_Player::NativeComponent::IUserVariable^ userVariable)

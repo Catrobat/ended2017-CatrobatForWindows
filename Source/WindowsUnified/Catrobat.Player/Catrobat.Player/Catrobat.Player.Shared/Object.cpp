@@ -45,10 +45,10 @@ Object::Object(Catrobat_Player::NativeComponent::IObject^ object) :
 		m_scripts.push_back(std::shared_ptr<Script>(make_shared<BroadcastScript>(script, this)));
 	}
 
-	//for each (Catrobat_Player::NativeComponent::IUserVariable^ userVariable in object->UserVariables)
-	//{
-	//	m_variableList.insert(std::pair<std::string, std::shared_ptr<UserVariable>>(Helper::StdString(userVariable->Name), make_shared<UserVariable>(userVariable)));
-	//}
+	for each (Catrobat_Player::NativeComponent::IUserVariable^ userVariable in object->UserVariables)
+	{
+		m_variableList.insert(std::pair<std::string, std::shared_ptr<UserVariable>>(Helper::StdString(userVariable->Name), make_shared<UserVariable>(userVariable)));
+	}
 
 	// TODO: SoundInfos
 }
