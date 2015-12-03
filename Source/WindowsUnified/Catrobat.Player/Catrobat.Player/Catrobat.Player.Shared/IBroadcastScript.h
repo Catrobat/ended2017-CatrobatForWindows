@@ -6,7 +6,7 @@ namespace Catrobat_Player
 {
 	namespace NativeComponent
 	{
-		public interface class IBroadcastScript :IScript
+		public interface class IBroadcastScript :public IScript
 		{
 		public:
 			virtual property Platform::String^ Name;

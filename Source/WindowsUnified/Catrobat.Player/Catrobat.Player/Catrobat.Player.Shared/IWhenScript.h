@@ -6,7 +6,7 @@ namespace Catrobat_Player
 {
 	namespace NativeComponent
 	{
-		public interface class IWhenScript : IScript
+		public interface class IWhenScript : public IScript
 		{
 		public:
 			//TODO: Maybe enum here?
