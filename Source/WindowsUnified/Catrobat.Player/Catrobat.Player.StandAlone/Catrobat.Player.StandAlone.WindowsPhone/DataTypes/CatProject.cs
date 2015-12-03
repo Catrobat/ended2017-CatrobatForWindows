@@ -24,6 +24,7 @@ namespace Catrobat.Player.StandAlone.DataTypes
         [XmlElement("header")]
         public Header Header { get; set; }
 
+        [XmlIgnore]
         IList<IObject> IProject.Objects
         {
             get { return Objects.Cast<IObject>().ToList(); }
@@ -37,6 +38,7 @@ namespace Catrobat.Player.StandAlone.DataTypes
             set { }
         }
 
+        [XmlIgnore]
         IHeader IProject.Header
         {
             get { return Header; }
@@ -50,7 +52,7 @@ namespace Catrobat.Player.StandAlone.DataTypes
     }
 
     [XmlType("object")]
-    public class Object
+    public class Object : IObject
     {
         List<Look> _looks = new List<Look>();
         List<BaseScript> _script = new List<BaseScript>();
@@ -73,10 +75,80 @@ namespace Catrobat.Player.StandAlone.DataTypes
             get { return _script; }
             set { _script = value; }
         }
+
+        [XmlIgnore]
+        public IList<IUserVariable> UserVariables
+        {
+            get
+            {
+                return null;
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        [XmlIgnore]
+        public IList<IBroadcastScript> BroadcastScripts
+        {
+            get
+            {
+                return new List<IBroadcastScript>();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        [XmlIgnore]
+        public IList<IWhenScript> WhenScripts
+        {
+            get
+            {
+                return Scripts.Cast<IWhenScript>().ToList();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        [XmlIgnore]
+        public IList<IStartScript> StartScripts
+        {
+            get
+            {
+                return new List<IStartScript>();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        [XmlIgnore]
+        IList<ILook> IObject.Looks
+        {
+            get
+            {
+                return Looks.Cast<ILook>().ToList();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 
     [XmlType("look")]
-    public class Look
+    public class Look : ILook
     {
         [XmlElement("fileName")]
         public string FileName { get; set; }
@@ -88,176 +160,107 @@ namespace Catrobat.Player.StandAlone.DataTypes
     [XmlType("header")]
     public class Header : IHeader
     {
+        [XmlIgnore]
         public string ApplicationBuildName
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return string.Empty; }
+            set { }
         }
 
+        [XmlIgnore]
         public int ApplicationBuildNumber
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return 0; }
+            set { }
         }
 
+        [XmlElement("applicationName")]
         public string ApplicationName
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get; set;
 
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
+        [XmlIgnore]
         public string ApplicationVersion
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return string.Empty; }
+            set { }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
+        [XmlIgnore]
         public string CatrobatLanguageVersion
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return string.Empty; }
+            set { }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
+        [XmlIgnore]
         public long DateTimeUpload
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return 0; }
+            set { }
         }
 
+        [XmlIgnore]
         public string Description
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return string.Empty; }
+            set { }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
+        [XmlIgnore]
         public string DeviceName
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return string.Empty; }
+            set { }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
+        [XmlIgnore]
         public string MediaLicense
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return string.Empty; }
+            set { }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
+        [XmlIgnore]
         public string Name
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return string.Empty; }
+            set { }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
+        [XmlIgnore]
         public int PlatformVersion
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return 0; }
+            set { }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
+        [XmlIgnore]
         public string ProgramLicense
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return string.Empty; }
+            set { }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
         [XmlElement("programName")]
         public string ProgramName { get; set; }
 
+        [XmlIgnore]
         public string RemixOf
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return string.Empty; }
+            set { }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
         [XmlElement("screenHeight")]
@@ -271,7 +274,7 @@ namespace Catrobat.Player.StandAlone.DataTypes
         {
             get
             {
-                throw new NotImplementedException();
+                return new List<string>() { "test" };
             }
 
             set
@@ -282,41 +285,23 @@ namespace Catrobat.Player.StandAlone.DataTypes
 
         public string TargetPlatform
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return string.Empty; }
+            set { }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
         public string Url
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return string.Empty; }
+            set { }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
         public string UserHandle
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return string.Empty; }
+            set { }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 
