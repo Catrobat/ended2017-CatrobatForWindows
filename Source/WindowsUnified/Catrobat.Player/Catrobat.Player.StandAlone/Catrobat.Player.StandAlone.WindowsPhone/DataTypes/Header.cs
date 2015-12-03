@@ -39,8 +39,9 @@ namespace Catrobat.Player.StandAlone.DataTypes
         [XmlElement("mediaLicense")]
         public string MediaLicense { get; set; }
 
+        // TODO: 
         [XmlElement("name")]
-        public string Name { get; set; }
+        public string Name { get { return string.Empty; } set { } }
 
         [XmlElement("platformVersion")]
         public int PlatformVersion { get; set; }
@@ -75,8 +76,9 @@ namespace Catrobat.Player.StandAlone.DataTypes
             }
         }
 
+        // TODO: 
         [XmlElement("targetPlatform")]
-        public string TargetPlatform { get; set; }
+        public string TargetPlatform { get { return string.Empty; } set { } }
 
         [XmlElement("url")]
         public string Url { get; set; }

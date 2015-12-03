@@ -44,7 +44,7 @@ namespace Catrobat.Player.StandAlone.DataTypes
         [XmlIgnore]
         public IList<IUserVariable> UserVariables
         {
-            get { return null; }
+            get { return new List<IUserVariable>(); }
             set { throw new NotImplementedException(); }
         }
 
