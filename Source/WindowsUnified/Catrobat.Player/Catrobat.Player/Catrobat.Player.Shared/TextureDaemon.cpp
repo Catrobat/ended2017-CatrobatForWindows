@@ -37,7 +37,7 @@ unique_ptr<CatrobatTexture> TextureDaemon::LoadTexture(const shared_ptr<DX::Devi
     IWICFormatConverter *converter = NULL;
 
     //string path is converted to LPCWSTR format
-    std::string path = ProjectDaemon::Instance()->GetProjectPath() + "\\images\\" + textureKey;
+	std::string path = ProjectDaemon::Instance()->GetProjectPath() + "\\images\\" + textureKey;
 
 #if _WINRT_DLL
 	// Code for Catrobat.Player.WindowsPhone

@@ -44,6 +44,7 @@ void ProjectDaemon::SetProject(Catrobat_Player::NativeComponent::IProject^ proje
 
 string ProjectDaemon::GetProjectPath()
 {
+
 	return m_projectPath;
 }
 
@@ -59,8 +60,9 @@ bool ProjectDaemon::CreateNativeProject()
 		if (CSProject != nullptr)
 		{
 			m_project = make_unique<Project>(CSProject);
-			m_project->CheckProjectScreenSize();
 			if (m_project == nullptr) return false;
+			m_projectPath = Helper::StdString(Windows::Storage::ApplicationData::Current->LocalFolder->Path) +
+				"\\Projects\\" + m_project->GetHeader()->GetProgramName();
 			return true;
 		}
 		return false;

@@ -259,6 +259,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ITurnRightBrick.h">
       <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
