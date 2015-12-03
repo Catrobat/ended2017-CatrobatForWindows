@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Catrobat.PlayerMain.h"
 namespace Catrobat_Player
 {
 	namespace NativeComponent

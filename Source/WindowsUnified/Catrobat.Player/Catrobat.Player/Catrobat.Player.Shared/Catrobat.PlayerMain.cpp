@@ -98,7 +98,6 @@ namespace Catrobat_Player
 
 	void Catrobat_PlayerMain::StartRenderLoop()
 	{
-		return;
 		// If the animation render loop is already running then do not start another thread
 		if (m_renderLoopWorker != nullptr && m_renderLoopWorker->Status ==
 			Windows::Foundation::AsyncStatus::Started)

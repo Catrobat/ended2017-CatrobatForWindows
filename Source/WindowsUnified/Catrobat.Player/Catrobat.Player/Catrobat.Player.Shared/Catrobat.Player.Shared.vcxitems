@@ -65,6 +65,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Interpreter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IProject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IStartScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ITurnRightBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IUserVariable.h" />

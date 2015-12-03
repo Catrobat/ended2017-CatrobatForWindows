@@ -2,7 +2,6 @@
 
 #include "collection.h"
 
-#include "Catrobat.PlayerMain.h"
 #include "IObject.h"
 #include "IHeader.h"
 

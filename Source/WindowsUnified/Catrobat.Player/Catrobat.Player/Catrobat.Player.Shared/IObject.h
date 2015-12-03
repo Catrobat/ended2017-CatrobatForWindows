@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Catrobat.PlayerMain.h"
 #include "ILook.h"
 #include "IUserVariable.h"
 #include "IStartScript.h"

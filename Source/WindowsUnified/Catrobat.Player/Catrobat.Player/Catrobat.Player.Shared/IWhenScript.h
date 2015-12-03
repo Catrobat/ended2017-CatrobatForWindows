@@ -1,11 +1,12 @@
 #pragma once
 
-#include "Catrobat.PlayerMain.h"
+#include "IScript.h"
+
 namespace Catrobat_Player
 {
 	namespace NativeComponent
 	{
-		public interface class IWhenScript
+		public interface class IWhenScript : IScript
 		{
 		public:
 			//TODO: Maybe enum here?

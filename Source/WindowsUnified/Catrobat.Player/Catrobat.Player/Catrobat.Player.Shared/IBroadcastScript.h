@@ -1,11 +1,12 @@
 #pragma once
 
-#include "Catrobat.PlayerMain.h"
+#include "IScript.h"
+
 namespace Catrobat_Player
 {
 	namespace NativeComponent
 	{
-		public interface class IBroadcastScript
+		public interface class IBroadcastScript :IScript
 		{
 		public:
 			virtual property Platform::String^ Name;
