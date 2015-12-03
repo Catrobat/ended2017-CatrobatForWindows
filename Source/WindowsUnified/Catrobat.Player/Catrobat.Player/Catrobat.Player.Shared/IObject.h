@@ -15,9 +15,7 @@ namespace Catrobat_Player
 		public:
 			virtual property Platform::String^ Name;
 			virtual property Windows::Foundation::Collections::IVector<ILook^>^ Looks;
-			virtual property Windows::Foundation::Collections::IVector<IStartScript^>^ StartScripts;
-			virtual property Windows::Foundation::Collections::IVector<IWhenScript^>^ WhenScripts;
-			virtual property Windows::Foundation::Collections::IVector<IBroadcastScript^>^ BroadcastScripts;
+			virtual property Windows::Foundation::Collections::IVector<IScript^>^ Scripts;
 			virtual property Windows::Foundation::Collections::IVector<IUserVariable^>^ UserVariables;
 		};
 	}
