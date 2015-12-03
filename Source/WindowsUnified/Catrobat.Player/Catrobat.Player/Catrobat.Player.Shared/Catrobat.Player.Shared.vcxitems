@@ -57,6 +57,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Helper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HideBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IBroadcastScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IfBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IHeader.h" />

@@ -1,10 +1,8 @@
 #pragma once
 
-//#include "Object.h"
-//#include "Brick.h"
+#include "IScript.h"
 
 #include <list>
-
 #include <windows.system.threading.h>
 #include <ppltasks.h>
 #include <windows.foundation.h>
@@ -33,7 +31,7 @@ namespace ProjectStructure
 		bool IsRunning();
 
 	protected:
-		Script(TypeOfScript scriptType, Object* parent);
+		Script(TypeOfScript scriptType, Object* parent, Catrobat_Player::NativeComponent::IScript^ script);
 		~Script();
 
 	private:

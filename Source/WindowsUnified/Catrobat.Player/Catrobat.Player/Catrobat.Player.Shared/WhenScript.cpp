@@ -11,7 +11,7 @@ using namespace std;
 using namespace ProjectStructure;
 
 WhenScript::WhenScript(Catrobat_Player::NativeComponent::IWhenScript^ script, Object* parent) :
-	Script(TypeOfScript::WhenScript, parent)
+	Script(TypeOfScript::WhenScript, parent, script)
 {
 	if (Helper::StdString(script->Action) == "Tapped")
 	{
