@@ -31,11 +31,11 @@ public:
     ~Interpreter(void);
     static Interpreter *Instance();
 
-    double EvaluateFormula(FormulaTree *tree, std::shared_ptr<ProjectStructure::Object> object);
+    double EvaluateFormula(FormulaTree *tree, ProjectStructure::Object* object);
 
-    int EvaluateFormulaToInt(FormulaTree *tree, std::shared_ptr<ProjectStructure::Object> object);
-    float EvaluateFormulaToFloat(FormulaTree *tree, std::shared_ptr<ProjectStructure::Object> object);
-    bool EvaluateFormulaToBool(FormulaTree *tree, std::shared_ptr<ProjectStructure::Object> object);
+    int EvaluateFormulaToInt(FormulaTree *tree, ProjectStructure::Object* object);
+    float EvaluateFormulaToFloat(FormulaTree *tree, ProjectStructure::Object* object);
+    bool EvaluateFormulaToBool(FormulaTree *tree, ProjectStructure::Object* object);
 
     void ReadAcceleration();
     float ReadCompass();
@@ -47,9 +47,9 @@ private:
     //Windows::Devices::Sensors::AccelerometerReading^ m_accReading;
 
     // HelperFunctions
-    double InterpretOperator(FormulaTree *tree, std::shared_ptr<ProjectStructure::Object> object);
-    double InterpretFunction(FormulaTree *tree, std::shared_ptr<ProjectStructure::Object> object);
-	double InterpretSensor(FormulaTree *tree, std::shared_ptr<ProjectStructure::Object> object);
+    double InterpretOperator(FormulaTree *tree, ProjectStructure::Object* object);
+    double InterpretFunction(FormulaTree *tree, ProjectStructure::Object* object);
+	double InterpretSensor(FormulaTree *tree, ProjectStructure::Object* object);
     bool TestChilds(FormulaTree *tree, Childs childs);
     double CalculateMax(double value1, double value2);
     double CalculateMin(double value1, double value2);

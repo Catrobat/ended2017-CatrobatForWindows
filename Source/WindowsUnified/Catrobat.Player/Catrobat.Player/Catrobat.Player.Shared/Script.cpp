@@ -61,9 +61,9 @@ void Script::Execute()
 	m_threadPoolWorkItem = ThreadPool::RunAsync(workItem);
 }
 
-shared_ptr<Object> Script::GetParent()
+Object* Script::GetParent()
 {
-	return nullptr;
+	return m_parent;
 }
 
 bool Script::IsRunning()

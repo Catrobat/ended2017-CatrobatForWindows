@@ -21,7 +21,7 @@ namespace ProjectStructure
 			WhenScript
 		};
 
-		virtual std::shared_ptr<Object> GetParent();
+		virtual Object* GetParent();
 
 		void AddBrick(std::unique_ptr<Brick> brick);
 		void AddSpriteReference(std::string spriteReference);

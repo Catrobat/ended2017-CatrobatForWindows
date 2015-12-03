@@ -27,8 +27,8 @@ namespace Catrobat_Player
 		m_deviceResources->RegisterDeviceNotify(this);
 
 		LoadProject(projectName, playerPage);
-		m_fpsTextRenderer = std::unique_ptr<SampleFpsTextRenderer>(new SampleFpsTextRenderer(
-			m_deviceResources));
+	/*	m_fpsTextRenderer = std::unique_ptr<SampleFpsTextRenderer>(new SampleFpsTextRenderer(
+			m_deviceResources));*/
 
 		// TODO: Change the timer settings if you want something other than the default variable 
 		// timestep mode. e.g. for 60 FPS fixed timestep update logic, call:
@@ -245,7 +245,7 @@ namespace Catrobat_Player
 		m_timer.Tick([&]()
 		{
 			m_basic2dRenderer->Update(m_timer);
-			m_fpsTextRenderer->Update(m_timer);
+			//m_fpsTextRenderer->Update(m_timer);
 		});
 	}
 
@@ -294,14 +294,14 @@ namespace Catrobat_Player
 	void Catrobat_PlayerMain::OnDeviceLost()
 	{
 		m_basic2dRenderer->ReleaseDeviceDependentResources();
-		m_fpsTextRenderer->ReleaseDeviceDependentResources();
+		//m_fpsTextRenderer->ReleaseDeviceDependentResources();
 	}
 
 	/// Notifies renderers that device resources may now be recreated
 	void Catrobat_PlayerMain::OnDeviceRestored()
 	{
 		m_basic2dRenderer->CreateDeviceDependentResources();
-		m_fpsTextRenderer->CreateDeviceDependentResources();
+		//m_fpsTextRenderer->CreateDeviceDependentResources();
 		CreateWindowSizeDependentResources();
 	}
 
