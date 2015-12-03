@@ -91,7 +91,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTypes\CatProject.cs" />
+    <Compile Include="DataTypes\BaseScript.cs" />
+    <Compile Include="DataTypes\Brick.cs" />
+    <Compile Include="DataTypes\Program.cs" />
+    <Compile Include="DataTypes\Header.cs" />
+    <Compile Include="DataTypes\Look.cs" />
+    <Compile Include="DataTypes\Object.cs" />
+    <Compile Include="DataTypes\TurnRightBrick.cs" />
+    <Compile Include="DataTypes\WhenScript.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

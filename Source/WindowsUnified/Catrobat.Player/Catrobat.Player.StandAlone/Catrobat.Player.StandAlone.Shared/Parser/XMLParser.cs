@@ -11,15 +11,15 @@ namespace Catrobat.Player.StandAlone.Parser
 {
     public class XMLParser
     {
-        public async Task<CatProject> FakeParsing()
+        public async Task<DataTypes.Program> FakeParsing()
         {
             var t = await Windows.Storage.ApplicationData.Current.LocalFolder.GetFileAsync("projects\\testalphavalue\\code.xml");
-            XmlSerializer serializer = new XmlSerializer(typeof(CatProject));
+            XmlSerializer serializer = new XmlSerializer(typeof(DataTypes.Program));
 
-            CatProject result = null;
+            DataTypes.Program result = null;
             using (StreamReader reader = new StreamReader(await t.OpenStreamForReadAsync()))
             {
-                result = (CatProject)serializer.Deserialize(reader);
+                result = (DataTypes.Program)serializer.Deserialize(reader);
             }
 
             return result;

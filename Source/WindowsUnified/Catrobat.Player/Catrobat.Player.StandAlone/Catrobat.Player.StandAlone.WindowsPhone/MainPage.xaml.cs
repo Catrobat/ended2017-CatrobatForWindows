@@ -49,7 +49,7 @@ namespace Catrobat.Player.StandAlone
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
 
             XMLParser parser = new XMLParser();
-            CatProject project = await parser.FakeParsing();
+            DataTypes.Program project = await parser.FakeParsing();
             project.PersistProjectStructure();
 
             playerObject.InitPlayer(PlayerPage, "testalphavalue");
