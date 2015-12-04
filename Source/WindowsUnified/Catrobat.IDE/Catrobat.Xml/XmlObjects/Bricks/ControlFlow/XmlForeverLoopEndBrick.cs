@@ -10,13 +10,18 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            base.LoadFromCommonXML(xRoot);
+            if(xRoot != null)
+            {
+                base.LoadFromCommonXML(xRoot);
+            }
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("loopEndlessBrick");
-            base.CreateCommonXML(xRoot);
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlLoopEndlessBrickType);
+            
+            //base.CreateCommonXML(xRoot);
 
             return xRoot;
         }

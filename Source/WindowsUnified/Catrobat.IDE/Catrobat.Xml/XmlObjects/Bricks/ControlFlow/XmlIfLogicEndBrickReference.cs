@@ -3,6 +3,7 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
+    //TODO:do we still need it?
     public class XmlIfLogicEndBrickReference : XmlObjectNode
     {
         private string _reference;
@@ -25,14 +26,14 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("ifEndBrick");
+            var xRoot = new XElement(XmlConstants.XmlIfLogicEndBrick);
 
             xRoot.Add(new XAttribute("reference", ReferenceHelper.GetReferenceString(this)));
 
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(IfLogicEndBrick == null)
                 IfLogicEndBrick = ReferenceHelper.GetReferenceObject(this, _reference) as XmlIfLogicEndBrick;

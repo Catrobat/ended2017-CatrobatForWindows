@@ -12,7 +12,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("startScript");
+            var xRoot = new XElement(XmlConstants.Script);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlStartScriptType);
 
             CreateCommonXML(xRoot);
 

@@ -42,14 +42,14 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("loopEndBrick");
-            //xRoot.Add(new XAttribute("class", _classField));
+            var xRoot = new XElement("brick");
+            xRoot.SetAttributeValue("type", "loopEndBrick");
             xRoot.Add(new XAttribute("reference", ReferenceHelper.GetReferenceString(this)));
 
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(LoopEndBrick == null)
                 LoopEndBrick = ReferenceHelper.GetReferenceObject(this, _reference) as XmlLoopEndBrick;

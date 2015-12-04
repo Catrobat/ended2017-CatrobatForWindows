@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
@@ -6,7 +7,18 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
     {
         public string Name { get; set; }
 
-        public XmlUserVariable() {}
+        public bool Set { get; set; }
+
+        public uint ObjectNum { get; set; }
+        public uint ScriptNum { get; set; }
+        public uint BrickNum { get; set; }
+        public uint VariableNum { get; set; }
+
+        public XmlUserVariable() 
+        {
+            Set = false;
+
+        }
 
         public XmlUserVariable(XElement xElement)
         {
@@ -15,14 +27,40 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            Name = xRoot.Element("name").Value;
+            if(xRoot.HasAttribute(XmlConstants.Reference))
+            {
+                XmlUserVariableReference bufferReference = new XmlUserVariableReference(xRoot);            
+                Name = bufferReference.UserVariable.Name;
+            }
+            else
+                Name = xRoot.Value;
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("userVariable");
+            XElement xRoot;
 
-            xRoot.Add(new XElement("name", Name));
+            if (Set == false)
+            {
+                xRoot = new XElement(XmlConstants.UserVariable, Name);
+                Set = true;
+                XmlParserTempProjectHelper.currentVariableNum++;
+
+                ObjectNum = XmlParserTempProjectHelper.currentObjectNum;
+                ScriptNum = XmlParserTempProjectHelper.currentScriptNum;
+                BrickNum = XmlParserTempProjectHelper.currentBrickNum;
+                VariableNum = XmlParserTempProjectHelper.currentVariableNum;
+
+            }
+            else if(Set)
+            {
+                XmlUserVariableReference userVariableReference = new XmlUserVariableReference();
+                userVariableReference.UserVariable = this;
+                userVariableReference.LoadReference();
+                xRoot = userVariableReference.CreateXml();
+            }
+            else
+                xRoot = new XElement("XmlUserVarialbe.cs Error");
 
             return xRoot;
         }

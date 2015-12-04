@@ -8,7 +8,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal abstract XElement CreateXml();
 
-        internal virtual void LoadReference()
+        public virtual void LoadReference()
         {
         }
     }

@@ -395,7 +395,15 @@ namespace Catrobat.IDE.Core.Services.Common
                 SystemInformationService.PlatformName;
 
             program.ProgramHeader.PlatformVersion = ServiceLocator.
-                SystemInformationService.PlatformVersion; ;
+                SystemInformationService.PlatformVersion;
+
+            program.ProgramHeader.ScreenWidth = ServiceLocator.
+                SystemInformationService.ScreenWidth * ServiceLocator.
+                SystemInformationService.ScaleFactor;
+
+            program.ProgramHeader.ScreenHeight = ServiceLocator.
+                SystemInformationService.ScreenHeight * ServiceLocator.
+                SystemInformationService.ScaleFactor;
             
             // TODO: check if and how the following properties should be set
             //program.ProjectHeader.DateTimeUpload = "";

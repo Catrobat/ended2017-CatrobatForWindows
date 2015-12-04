@@ -43,13 +43,13 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            XmlSpriteReference = new XmlSpriteReference(xRoot.Element("object"));
-            VariableList = new XmlUserVariableList(xRoot.Element("list"));
+            XmlSpriteReference = new XmlSpriteReference(xRoot.Element(XmlConstants.Object));
+            VariableList = new XmlUserVariableList(xRoot.Element(XmlConstants.List));
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("entry");
+            var xRoot = new XElement(XmlConstants.Entry);
 
             xRoot.Add(XmlSpriteReference.CreateXml());
             xRoot.Add(VariableList.CreateXml());
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(XmlSpriteReference != null && XmlSpriteReference.Sprite == null)
                 XmlSpriteReference.LoadReference();

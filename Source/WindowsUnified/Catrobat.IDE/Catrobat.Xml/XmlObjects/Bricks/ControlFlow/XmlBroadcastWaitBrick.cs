@@ -12,19 +12,20 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element("broadcastMessage") != null)
+            if (xRoot != null && xRoot.Element(XmlConstants.BroadcastMessage) != null)
             {
-                BroadcastMessage = xRoot.Element("broadcastMessage").Value;
+                BroadcastMessage = xRoot.Element(XmlConstants.BroadcastMessage).Value;
             }
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("broadcastWaitBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlBroadcastWaitBrickType);
 
             if (BroadcastMessage != null)
             {
-                xRoot.Add(new XElement("broadcastMessage")
+                xRoot.Add(new XElement(XmlConstants.BroadcastMessage)
                 {
                     Value = BroadcastMessage
                 });
