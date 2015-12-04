@@ -23,6 +23,7 @@ using Windows.UI.Xaml.Shapes;
 using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
 using Catrobat.Paint.WindowsPhone.Data;
+using Windows.ApplicationModel.Core;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
 
@@ -31,7 +32,7 @@ namespace Catrobat.Paint.WindowsPhone.View
     /// <summary>
     /// Eine leere Seite, die eigenständig verwendet werden kann oder auf die innerhalb eines Rahmens navigiert werden kann.
     /// </summary>
-    public sealed partial class PaintingAreaView : Page, IFileOpenPickerContinuable
+    public sealed partial class PaintingAreaView : Page
     {
 
         static string current_appbar = "barStandard";
@@ -44,6 +45,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         static bool isManipulationEventLoaded;
         static int zoomCounter;
         Point start_point = new Point();
+        CoreApplicationView view;
 
         public PaintingAreaView()
         {
@@ -58,13 +60,15 @@ namespace Catrobat.Paint.WindowsPhone.View
             zoomCounter = 0;
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
+            PocketPaintApplication.GetInstance().EraserCanvas = EraserCanvas;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = new TransformGroup();
             HardwareButtons.BackPressed +=HardwareButtons_BackPressed;
+            PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation = 0;
 
             LayoutRoot.Height = Window.Current.Bounds.Height;
             LayoutRoot.Width = Window.Current.Bounds.Width;
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
-            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
+            PocketPaintApplication.GetInstance().GridWorkingSpace = GridWorkingSpace;
             PocketPaintApplication.GetInstance().GridCursor = GridCursor;
             PocketPaintApplication.GetInstance().CropControl = ctrlCropControl;
             PocketPaintApplication.GetInstance().StampControl = ctrlStampControl;
@@ -77,13 +81,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().PhoneControl = ucPhotoControl;
             PocketPaintApplication.GetInstance().InfoBoxControl = InfoBoxControl;
             PocketPaintApplication.GetInstance().pgPainting = pgPainting;
-            PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
             PocketPaintApplication.GetInstance().InfoxBasicBoxControl = InfoBasicBoxControl;
             PocketPaintApplication.GetInstance().ProgressRing = progressRing;
-
-            PaintingAreaContentPanelGrid.Height = Window.Current.Bounds.Height;
-            PaintingAreaContentPanelGrid.Width = Window.Current.Bounds.Width;
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid = PaintingAreaContentPanelGrid;
             PocketPaintApplication.GetInstance().PaintingAreaView = this;
 
             Spinner.SpinnerGrid = SpinnerGrid;
@@ -106,123 +105,136 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().GrdThicknessControlState = Visibility.Collapsed;
             createAppBarAndSwitchAppBarContent(current_appbar);
 
-            setSizeOfPaintingAreaViewCheckered();
+            setSizeOfPaintingAreaViewCheckered((int)Window.Current.Bounds.Height, (int)Window.Current.Bounds.Width);
+            alignPositionOfGridWorkingSpace(null);
 
             // TODO: Refactor the following code.
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = Window.Current.Bounds.Height;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = Window.Current.Bounds.Width;
+            view = CoreApplication.GetCurrentView();
         }
 
         public void setSizeOfPaintingAreaViewCheckered(int height, int width)
         {
-            TransformGroup _transforms = null;
-            if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform.GetType() == typeof(TransformGroup))
-            {
-                _transforms = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
-            }
-            if (_transforms == null)
-            {
-                PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
-            }
-            _transforms.Children.Clear();
-
-            PaintingAreaCheckeredGrid.Height = height;
-            PaintingAreaCheckeredGrid.Width = width;
-            PaintingAreaCheckeredGrid.HorizontalAlignment = HorizontalAlignment.Left;
-            PaintingAreaCheckeredGrid.VerticalAlignment = VerticalAlignment.Top;
-
-            //var DISPLAY_WIDTH_HALF = width / 2.0;
-            //var DISPLAY_HEIGHT_HALF = height / 2.0;
-            var toScaleValue = new ScaleTransform();
-
-            toScaleValue.ScaleX = 0.75;
-            toScaleValue.ScaleY = 0.75;
-            toScaleValue.CenterX = width / 2.0;
-            toScaleValue.CenterY = height / 2.0;
-            var rotateTransform = new RotateTransform();
-            if (PocketPaintApplication.GetInstance().angleForRotation != 0)
-            {
-                if (PocketPaintApplication.GetInstance().angleForRotation != 90
-                    || PocketPaintApplication.GetInstance().angleForRotation != 270)
-                {
-                    toScaleValue.ScaleX *= toScaleValue.ScaleX;
-                    toScaleValue.ScaleY *= toScaleValue.ScaleY;
-                }
-
-                rotateTransform.Angle = PocketPaintApplication.GetInstance().angleForRotation;
-                rotateTransform.CenterX = (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Width) / 2;
-                rotateTransform.CenterY = ((PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.Height) / 2);
-            }
-            _transforms.Children.Add(toScaleValue);
-
-            double moveValueToOffsetX = (Window.Current.Bounds.Width - PaintingAreaCheckeredGrid.Width * toScaleValue.ScaleX) / 2.0;
-            double moveValueToOffsetY = (Window.Current.Bounds.Height - PaintingAreaCheckeredGrid.Height * toScaleValue.ScaleY) / 2.0;
-
-            var toTranslateValue = new TranslateTransform();
-            toTranslateValue.X -= _transforms.Value.OffsetX;
-            toTranslateValue.Y -= _transforms.Value.OffsetY;
-            _transforms.Children.Add(toTranslateValue);
-
-            var toTranslateValue2 = new TranslateTransform();
-            toTranslateValue2.X = moveValueToOffsetX;
-            toTranslateValue2.Y = moveValueToOffsetY - 11.0;
-            _transforms.Children.Add(toTranslateValue2);
-
-            if(PocketPaintApplication.GetInstance().angleForRotation != 0)
-            {
-                RotateTool rotateTool = new RotateTool();
-
-                // es soll der aktuelle Rotationswert verwendet werden.
-                rotateTool.RotateRight(0);
-            }
+            GridWorkingSpace.Height = height;
+            GridWorkingSpace.Width = width;
         }
 
-        public void setSizeOfPaintingAreaViewCheckered()
+        public void alignPositionOfGridWorkingSpace(RotateTransform rtRotation)
         {
-
-            PaintingAreaCheckeredGrid.Height = Window.Current.Bounds.Height;
-            PaintingAreaCheckeredGrid.Width = Window.Current.Bounds.Width;
-            //PaintingAreaCanvas.Height = 200;
-            //PaintingAreaCanvas.Width = 200;
-            TransformGroup _transforms = null;
-            if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform.GetType() == typeof(TransformGroup))
+            TransformGroup tgGridWorkingSpace = getGridWorkingSpaceTransformGroup();
+            int angularDegreeOfWorkingSpaceRotation = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
+            if (tgGridWorkingSpace == null)
             {
-                _transforms = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
+                return;
             }
-            if (_transforms == null)
-            {
-                PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
-            }
-            _transforms.Children.Clear();
+            tgGridWorkingSpace.Children.Clear();
 
-            var DISPLAY_WIDTH_HALF = (Window.Current.Bounds.Width / 2.0);
-            var DISPLAY_HEIGHT_HALF = (Window.Current.Bounds.Height / 2.0);
+            if (rtRotation == null)
+            {
+                rtRotation = CreateRotateTransform(angularDegreeOfWorkingSpaceRotation, new Point(GridWorkingSpace.Width / 2.0, GridWorkingSpace.Height / 2.0));
+            }
+            tgGridWorkingSpace.Children.Add(rtRotation);
+
+            GridWorkingSpace.HorizontalAlignment = HorizontalAlignment.Left;
+            GridWorkingSpace.VerticalAlignment = VerticalAlignment.Top;
+
             var toScaleValue = new ScaleTransform();
 
-            toScaleValue.ScaleX = 0.75;
-            toScaleValue.ScaleY = 0.75;
-            toScaleValue.CenterX = DISPLAY_WIDTH_HALF;
-            toScaleValue.CenterY = DISPLAY_HEIGHT_HALF;
-            _transforms.Children.Add(toScaleValue);
+            toScaleValue.ScaleX = 0.70;
+            toScaleValue.ScaleY = 0.70;
+            toScaleValue.CenterX = GridWorkingSpace.Width / 2.0;
+            toScaleValue.CenterY = GridWorkingSpace.Height / 2.0;
+            if (angularDegreeOfWorkingSpaceRotation == 90 || angularDegreeOfWorkingSpaceRotation == 270)
+            {
+                toScaleValue.ScaleX = 0.5625;
+                toScaleValue.ScaleY = 0.5625;
+            }
 
-            double moveValueToOffsetX = (Window.Current.Bounds.Width - PaintingAreaCheckeredGrid.Width * toScaleValue.ScaleX) / 2.0; ;
-            double moveValueToOffsetY = (Window.Current.Bounds.Height - PaintingAreaCheckeredGrid.Height * toScaleValue.ScaleY) / 2.0;
+            tgGridWorkingSpace.Children.Add(toScaleValue);
 
-            //var toTranslateValue = new TranslateTransform();
-            //toTranslateValue.X -= _transforms.Value.OffsetX;
-            //toTranslateValue.Y -= _transforms.Value.OffsetY;
-            //_transforms.Children.Add(toTranslateValue);
+            TranslateTransform tfLeftTopCornerOfGridWorkingSpaceToNullPoint = new TranslateTransform();
+            TranslateTransform tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = new TranslateTransform();
+            TranslateTransform tfMiddlePointOfGridWorkingSpaceToGlobalMiddlePoint = new TranslateTransform();
+            tfLeftTopCornerOfGridWorkingSpaceToNullPoint = CreateTranslateTransform(tgGridWorkingSpace.Value.OffsetX * (-1), tgGridWorkingSpace.Value.OffsetY *(-1));
+            if (angularDegreeOfWorkingSpaceRotation == 0)
+            {
+                tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform(((GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX) * (-1),
+                                                                                            ((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY) * (-1));
+            }
+            else if (angularDegreeOfWorkingSpaceRotation == 90)
+            {
+                tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY,
+                                                                                            ((GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX) * (-1));
+            }
+            else if (angularDegreeOfWorkingSpaceRotation == 180)
+            {
+                tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform((GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX,
+                                                                                            ((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY));
+            }
+            else if (angularDegreeOfWorkingSpaceRotation == 270)
+            {
+                tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform(((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY) *(-1),
+                                                                            (GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX);
+            }
+            tfMiddlePointOfGridWorkingSpaceToGlobalMiddlePoint = CreateTranslateTransform((Window.Current.Bounds.Width / 2.0), (Window.Current.Bounds.Height / 2.0));
 
-            var toTranslateValue2 = new TranslateTransform();
-            toTranslateValue2.Y -= 11.0;
-            _transforms.Children.Add(toTranslateValue2);
-
+            AddTranslateTransformToGridWorkingSpaceTransformGroup(tfLeftTopCornerOfGridWorkingSpaceToNullPoint);
+            AddTranslateTransformToGridWorkingSpaceTransformGroup(tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint);
+            AddTranslateTransformToGridWorkingSpaceTransformGroup(tfMiddlePointOfGridWorkingSpaceToGlobalMiddlePoint);
         }
 
-        public async void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
+        public TranslateTransform CreateTranslateTransform(double translateX, double translateY)
         {
+            TranslateTransform translateTransform = new TranslateTransform();
+            translateTransform.X = translateX;
+            translateTransform.Y = translateY;
+            return translateTransform;
+        }
+
+        public RotateTransform CreateRotateTransform(int angle, Point rotationCenter)
+        {
+            RotateTransform rotateTransform = new RotateTransform();
+            rotateTransform.Angle = angle;
+            rotateTransform.CenterX = rotationCenter.X;
+            rotateTransform.CenterY = rotationCenter.Y;
+            return rotateTransform;
+        }
+
+        public void AddTranslateTransformToGridWorkingSpaceTransformGroup(TranslateTransform translateTransform)
+        {
+            TransformGroup tgGridWorkingSpace = getGridWorkingSpaceTransformGroup();
+            if(tgGridWorkingSpace == null)
+            {
+                return;
+            }
+            tgGridWorkingSpace.Children.Add(translateTransform);
+        }
+
+        public TransformGroup getGridWorkingSpaceTransformGroup()
+        {
+            TransformGroup tgGridWorkingSpace = null;
+            if (PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform.GetType() == typeof(TransformGroup))
+            {
+                tgGridWorkingSpace = PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform as TransformGroup;
+            }
+            if (tgGridWorkingSpace == null)
+            {
+                tgGridWorkingSpace = new TransformGroup();
+                PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform = tgGridWorkingSpace;
+            }
+
+            return tgGridWorkingSpace;
+        }
+
+        public async void ContinueFileOpenPicker(CoreApplicationView sender, IActivatedEventArgs args1)
+        {
+            FileOpenPickerContinuationEventArgs args = args1 as FileOpenPickerContinuationEventArgs;
+
             if (args.Files.Count > 0)
             {
+                view.Activated -= ContinueFileOpenPicker;
+
                 StorageFile file = args.Files[0];
 
                 BitmapImage image = new BitmapImage();
@@ -275,6 +287,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             openPicker.FileTypeFilter.Add(".png");
 
             openPicker.PickSingleFileAndContinue();
+            view.Activated += ContinueFileOpenPicker;
         }
 
         public async void hideStatusAppBar()
@@ -329,7 +342,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 isFullscreen = false;
 
                 changeVisibilityOfAppBars(Visibility.Visible);
-                setSizeOfPaintingAreaViewCheckered();
+                alignPositionOfGridWorkingSpace(null);
                 showStatusAppBar();
                 e.Handled = true;
             }
@@ -425,10 +438,23 @@ namespace Catrobat.Paint.WindowsPhone.View
             StorageFile file = await openPicker.PickSingleFileAsync();
         }
 
+        // if there is no object on the paintingareaview and no copy of the workingspace is selected in the stamp tool then reset
+        // the stampbarbuttons
+        public void checkAndUpdateStampAppBarButtons()
+        {
+            if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Stamp && !isAppBarButtonSelected("appBtnStampCopy"))
+            {
+                PocketPaintApplication.GetInstance().PaintingAreaView.createAppBarAndSwitchAppBarContent("barStamp");
+            }
+        }
+
 
         public void createAppBarAndSwitchAppBarContent(string type)
         {
             CommandBar cmdBar = new CommandBar();
+            SolidColorBrush appBarBackgroundColor = new SolidColorBrush();
+            appBarBackgroundColor.Color = Color.FromArgb(255, 25, 165, 184);
+            cmdBar.Background = appBarBackgroundColor;
 
             loadPointerEvents();
             unloadDoubleTapEvent();
@@ -532,7 +558,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnImportPicture.Label = "Bild laden";
                 app_btnReset.Label = "Ausgangsposition";
 
-                app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
+                // TODO: David app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnImportPicture.Click += app_btnImportPicture_Click;
@@ -756,6 +782,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 app_btnStampCopy.Name = "appBtnStampCopy";
                 app_btnStampPaste.Name = "appBtnStampPaste";
+                app_btnStampClear.Name = "appBtnStampReset";
 
                 BitmapIcon stampClearIcon = new BitmapIcon();
                 stampClearIcon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_stamp_clear.png", UriKind.Absolute);
@@ -773,12 +800,13 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnStampCopy.Click += app_btnStampCopy_Click;
                 app_btnStampPaste.Click += app_btnStampPaste_Click;
                 app_btnResetSelection.Click += app_btn_reset_Click;
-                // TODO: Sinnvolle Beschreibungen festlegen.
-                // app_btnClearStampedSelection.Label = "";
-                // app_btnResetSelection.Label = "";
-                // app_btnStampSelection.Label = "";
-                // app_btnStamp.Label = "";
 
+                app_btnStampClear.Label = "Auswahl zurücksetzen";
+                app_btnStampCopy.Label = "Auswahl merken";
+                app_btnStampPaste.Label = "Stempeln";
+                app_btnResetSelection.Label = "Tool zurücksetzen";
+
+                app_btnStampClear.IsEnabled = false;
                 app_btnStampPaste.Visibility = Visibility.Collapsed;
                 cmdBar.PrimaryCommands.Add(app_btnStampCopy);
                 cmdBar.PrimaryCommands.Add(app_btnStampPaste);
@@ -849,7 +877,22 @@ namespace Catrobat.Paint.WindowsPhone.View
             ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).stampPaste();
         }
 
-        void app_btnStampClear_Click(object sender, RoutedEventArgs e)
+        public bool isAppBarButtonSelected(string nameOfAppbarbutton)
+        {
+            CommandBar cmdBar = (CommandBar)BottomAppBar;
+
+            for (int appBarButtonIndex = 0; appBarButtonIndex < cmdBar.PrimaryCommands.Count; appBarButtonIndex++)
+            {
+                AppBarButton currentAppBarButton = ((AppBarButton)(cmdBar.PrimaryCommands[appBarButtonIndex]));
+                if(currentAppBarButton.Name == "appBtnStampCopy")
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void app_btnStampClear_Click(object sender, RoutedEventArgs e)
         {
             CommandBar cmdBar = (CommandBar)BottomAppBar;
 
@@ -863,6 +906,10 @@ namespace Catrobat.Paint.WindowsPhone.View
                 else if (currentAppBarButton.Name == "appBtnStampPaste")
                 {
                     currentAppBarButton.Visibility = Visibility.Collapsed;
+                }
+                else if(currentAppBarButton.Name == "appBtnStampReset")
+                {
+                    currentAppBarButton.IsEnabled = false;
                 }
             }
 
@@ -884,6 +931,10 @@ namespace Catrobat.Paint.WindowsPhone.View
                 else if(currentAppBarButton.Name == "appBtnStampPaste")
                 {
                     currentAppBarButton.Visibility = Visibility.Visible;
+                }
+                else if (currentAppBarButton.Name == "appBtnStampReset")
+                {
+                    currentAppBarButton.IsEnabled = true;
                 }
             }
         }
@@ -964,13 +1015,13 @@ namespace Catrobat.Paint.WindowsPhone.View
             GridUserControlRectEll.Visibility = Visibility.Collapsed;
 
             TransformGroup _transforms = null;
-            if (PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform.GetType() == typeof(TransformGroup))
+            if (PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform.GetType() == typeof(TransformGroup))
             {
-                _transforms = PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform as TransformGroup;
+                _transforms = PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform as TransformGroup;
             }
             if (_transforms == null)
             {
-                PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid.RenderTransform = _transforms = new TransformGroup();
+                PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform = _transforms = new TransformGroup();
             }
             _transforms.Children.Clear();
             hideStatusAppBar();
@@ -1154,7 +1205,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         void BtnZoomIn_Click(object sender, RoutedEventArgs e )
         {
             enableResetButtonZoom(1);
-            MoveZoomTool tool = new MoveZoomTool();
+            MoveZoomTool tool = (MoveZoomTool)PocketPaintApplication.GetInstance().ToolCurrent;
             ScaleTransform scaletransform = new ScaleTransform();
             scaletransform.ScaleX = 1.1;
             scaletransform.ScaleY = 1.1;
@@ -1559,12 +1610,8 @@ namespace Catrobat.Paint.WindowsPhone.View
         public void resetTools()
         {
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
-
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = new TransformGroup();
-            PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
-
-            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = new TransformGroup();
-
+            PocketPaintApplication.GetInstance().PaintingAreaView.alignPositionOfGridWorkingSpace(null);
             PocketPaintApplication.GetInstance().PaintingAreaView.disableToolbarsAndPaintingArea(false);
         }
 
@@ -1621,7 +1668,31 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        public bool checkIfASelectionControlIsSelected()
+        public void addElementToEraserCanvas(Path path)
+        {
+            if (path != null)
+            {
+                EraserCanvas.Children.Clear();
+                EraserCanvas.Visibility = Visibility.Visible;
+                EraserCanvas.Children.Add(path);
+                changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", true);
+                changeEnabledOfASecondaryAppbarButton("appbarButtonSave", true);
+            }
+        }
+
+        public void addElementToPaintingAreCanvas(Image image, int xCoordinate, int yCoordinate)
+        {
+            if (image != null)
+            {
+                Canvas.SetLeft(image, xCoordinate);
+                Canvas.SetTop(image, yCoordinate);
+                PaintingAreaCanvas.Children.Add(image);
+                changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", true);
+                changeEnabledOfASecondaryAppbarButton("appbarButtonSave", true);
+            }
+        }
+
+        public bool isASelectionControlSelected()
         {
             bool isSelectionControlSelected = ucEllipseSelectionControl.Visibility == Visibility.Visible
                 || ucRectangleSelectionControl.Visibility == Visibility.Visible
@@ -1635,6 +1706,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             setVisibilityOfUcRectangleSelectionControl = visibility;
             GridImportImageSelectionControl.Visibility = visibility;
             ctrlCropControl.Visibility = visibility;
+            ctrlStampControl.Visibility = visibility;
         }
 
         public void changeVisibilityOfActiveSelectionControl(Visibility visibility)
@@ -1655,6 +1727,10 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 setVisibilityOfUcRectangleSelectionControl = visibility;
             }
+            else if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Stamp)
+            {
+                ctrlStampControl.Visibility = visibility;
+            }
         }
 
         public void resetActiveSelectionControl()
@@ -1663,6 +1739,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 || PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Ellipse
                 || PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.ImportPng
                 || PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect
+                || PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Stamp
                 )
             {
                 PocketPaintApplication.GetInstance().ToolCurrent.ResetDrawingSpace();
@@ -1674,7 +1751,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PaintData paintData = PocketPaintApplication.GetInstance().PaintData;
             PaintingAreaCanvas.Height = Window.Current.Bounds.Height;
             PaintingAreaCanvas.Width = Window.Current.Bounds.Width;
-            setSizeOfPaintingAreaViewCheckered();
+            alignPositionOfGridWorkingSpace(null);
             resetControls();
             PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
             CommandManager.GetInstance().clearAllCommands();
@@ -1690,7 +1767,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             CtrlThicknessControl.setValueSliderThickness(paintData.thicknessSelected);
             CtrlThicknessControl.checkAndSetPenLineCap(PenLineCap.Round);
 
-            PocketPaintApplication.GetInstance().angleForRotation = 0;
+            PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation = 0;
             PocketPaintApplication.GetInstance().flipX = 1;
             PocketPaintApplication.GetInstance().flipY = 1;
         }

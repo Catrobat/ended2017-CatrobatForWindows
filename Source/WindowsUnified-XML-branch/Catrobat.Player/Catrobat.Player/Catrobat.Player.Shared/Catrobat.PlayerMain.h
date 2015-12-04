@@ -84,6 +84,5 @@ namespace Catrobat_Player
         Windows::UI::Xaml::Controls::AppBarButton^ m_btnAxes;
         Windows::UI::Xaml::Controls::Grid^ m_gridAxes;
         PlayerState m_state;
-        bool m_loadingComplete;
 	};
 };

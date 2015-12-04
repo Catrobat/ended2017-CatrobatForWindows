@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Reflection;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
@@ -15,19 +16,38 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 {
     public partial class SpriteEditorView
     {
-        private readonly SpriteEditorViewModel _viewModel = 
+        private double itemWidthPortrait;
+        private double itemWidthLandscape;
+
+        private readonly SpriteEditorViewModel _viewModel =
             ServiceLocator.ViewModelLocator.SpriteEditorViewModel;
 
         private MultiModeEditorCommandBar _commandBarActions;
         private MultiModeEditorCommandBar _commandBarLooks;
         private MultiModeEditorCommandBar _commandBarSounds;
 
-
         public SpriteEditorView()
         {
             //NavigationCacheMode = NavigationCacheMode.Enabled;
+
             InitializeComponent();
 
+            var bounds = Window.Current.Bounds;
+
+            double height = bounds.Height * 0.88;
+            double width = bounds.Width * 0.95;
+
+            CatrobatListView view = this.FindName("ListViewActions") as CatrobatListView;
+            view.ItemWidthLandscape = (int)height;
+            view.ItemWidthPortrait = (int)width;
+
+            view = this.FindName("ListViewLooks") as CatrobatListView;
+            view.ItemWidthLandscape = (int)height;
+            view.ItemWidthPortrait = (int)width;
+
+            view = this.FindName("ListViewSounds") as CatrobatListView;
+            view.ItemWidthLandscape = (int)height;
+            view.ItemWidthPortrait = (int)width;
             CreateCommandBars();
 
             BottomAppBar = _commandBarActions;
@@ -46,7 +66,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
                 DataContext = _viewModel
             };
             _commandBarActions.ModeChanged += MultiModeEditorCommandBar_OnModeChanged;
-            _commandBarActions.SetBinding(MultiModeEditorCommandBar.ModeProperty, 
+            _commandBarActions.SetBinding(MultiModeEditorCommandBar.ModeProperty,
                 new Binding { Path = new PropertyPath("ActionsCommandBarMode"), Mode = BindingMode.TwoWay });
 
 
@@ -61,8 +81,8 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
                 DataContext = _viewModel
             };
             _commandBarLooks.ModeChanged += MultiModeEditorCommandBar_OnModeChanged;
-            _commandBarLooks.SetBinding(MultiModeEditorCommandBar.ModeProperty, 
-                new Binding {  Path = new PropertyPath("LooksCommandBarMode"), Mode = BindingMode.TwoWay });
+            _commandBarLooks.SetBinding(MultiModeEditorCommandBar.ModeProperty,
+                new Binding { Path = new PropertyPath("LooksCommandBarMode"), Mode = BindingMode.TwoWay });
 
             _commandBarSounds = new MultiModeEditorCommandBar
             {
@@ -74,8 +94,8 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
                 DataContext = _viewModel
             };
             _commandBarSounds.ModeChanged += MultiModeEditorCommandBar_OnModeChanged;
-            _commandBarSounds.SetBinding(MultiModeEditorCommandBar.ModeProperty, 
-                new Binding {  Path = new PropertyPath("SoundsCommandBarMode"), Mode = BindingMode.TwoWay});
+            _commandBarSounds.SetBinding(MultiModeEditorCommandBar.ModeProperty,
+                new Binding { Path = new PropertyPath("SoundsCommandBarMode"), Mode = BindingMode.TwoWay });
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -110,7 +130,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
                 listView = ListViewActions;
             else
                 if (PivotMain.SelectedItem == PivotLooks)
-                    listView = ListViewLooks;    
+                    listView = ListViewLooks;
                 else if (PivotMain.SelectedItem == PivotSounds)
                     listView = ListViewSounds;
 

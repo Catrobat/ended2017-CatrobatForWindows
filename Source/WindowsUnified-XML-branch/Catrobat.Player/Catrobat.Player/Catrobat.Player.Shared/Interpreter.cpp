@@ -12,6 +12,7 @@
 
 using namespace std;
 using namespace Windows::Devices::Sensors;
+using namespace ProjectStructure;
 
 Interpreter *Interpreter::__instance = nullptr;
 
@@ -21,7 +22,7 @@ Interpreter *Interpreter::Instance()
         __instance = new Interpreter();
     return __instance;
 }
-
+// TODO: How to handle Object* here
 Interpreter::Interpreter()
 {
 	m_accelerometerProvider = new AccelerometerProvider();
@@ -37,7 +38,7 @@ Interpreter::~Interpreter()
 	delete m_compassProvider;
 }
 
-double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
+double Interpreter::EvaluateFormula(FormulaTree *tree, Object* object)
 {
     Type type = tree->GetType();
     switch (type)
@@ -49,7 +50,7 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
     case USER_VARIABLE:
         {
             string varName = tree->Value();
-            UserVariable *var = object->GetVariable(varName);
+            shared_ptr<UserVariable> var = object->GetVariable(varName);
             if (var)
                 return atof(var->GetValue().c_str());
             var = ProjectDaemon::Instance()->GetProject()->GetVariable(varName);
@@ -73,17 +74,17 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
     throw "Exception in Interpreter.cpp: No such type available";
 }
 
-int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
+int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object* object)
 {
     return static_cast<int>(this->EvaluateFormula(tree, object));
 }
 
-float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
+float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object* object)
 {
     return static_cast<float>(this->EvaluateFormula(tree, object));
 }
 
-bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree, Object *object)
+bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree, Object* object)
 {
     double result = this->EvaluateFormula(tree, object);
 
@@ -114,7 +115,7 @@ float Interpreter::ReadInclination(Inclination inclinationType)
 	}
 }
 
-double Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
+double Interpreter::InterpretOperator(FormulaTree *tree, Object* object)
 {
     FormulaTree *leftChild = tree->GetLeftChild();
     auto leftValue = 0.0;
@@ -203,7 +204,7 @@ double Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
     return returnValue;
 }
 
-double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
+double Interpreter::InterpretFunction(FormulaTree *tree, Object* object)
 {
     double returnValue = 0.0;
     FormulaTree *leftChild = tree->GetLeftChild();
@@ -312,7 +313,7 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
     return returnValue;
 }
 
-double Interpreter::InterpretSensor(FormulaTree *tree, Object *object)
+double Interpreter::InterpretSensor(FormulaTree *tree, Object* object)
 {
 	double returnValue = 0;
 

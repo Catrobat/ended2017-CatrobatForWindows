@@ -4,14 +4,16 @@
 #include "Object.h"
 #include <list>
 
-class ContainerBrick :
-	public Brick
+namespace ProjectStructure
 {
-public:
-	ContainerBrick(TypeOfBrick brickType, std::shared_ptr<Script> parent);
+	class ContainerBrick :
+		public Brick
+	{
+	public:
+		ContainerBrick(TypeOfBrick brickType, Script* parent);
 
-	virtual void Execute() = 0;
-	virtual void AddBrick(Brick *brick) = 0;
-private:
-};
-
+		virtual void Execute() = 0;
+		virtual void AddBrick(std::unique_ptr<Brick> brick) = 0;
+	private:
+	};
+}

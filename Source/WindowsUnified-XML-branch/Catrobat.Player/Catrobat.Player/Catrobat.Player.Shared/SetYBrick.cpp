@@ -4,7 +4,9 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-SetYBrick::SetYBrick(FormulaTree *positionY,std::shared_ptr<Script> parent) :
+using namespace ProjectStructure;
+
+SetYBrick::SetYBrick(FormulaTree *positionY, Script* parent) :
 	Brick(TypeOfBrick::SetYBrick, parent),
 	m_positionY(positionY)
 {
@@ -13,7 +15,7 @@ SetYBrick::SetYBrick(FormulaTree *positionY,std::shared_ptr<Script> parent) :
 void SetYBrick::Execute()
 {
 	float currentX, currentY;
-    m_parent->GetParent()->GetTranslation(currentX, currentY);
-    auto newYPosition = Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY, m_parent->GetParent());
-    m_parent->GetParent()->SetTranslation(currentX, newYPosition);
+	m_parent->GetParent()->GetTranslation(currentX, currentY);
+	auto newYPosition = Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY, m_parent->GetParent());
+	m_parent->GetParent()->SetTranslation(currentX, newYPosition);
 }

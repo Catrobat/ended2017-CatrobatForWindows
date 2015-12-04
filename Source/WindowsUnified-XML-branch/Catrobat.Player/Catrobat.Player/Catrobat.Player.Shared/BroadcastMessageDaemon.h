@@ -2,18 +2,20 @@
 #include "BroadcastMessageSender.h"
 #include "BroadcastMessageListener.h"
 
-class BroadcastMessageDaemon
+namespace Core
 {
-public:
-	static BroadcastMessageDaemon *Instance();
-	void Register(BroadcastMessageListener ^listener);
+	class BroadcastMessageDaemon
+	{
+	public:
+		static BroadcastMessageDaemon *Instance();
+		void Register(BroadcastMessageListener ^listener);
 
-private:
-	BroadcastMessageDaemon();
-	
-	static BroadcastMessageDaemon *__instance;
+	private:
+		BroadcastMessageDaemon();
 
-public:
-	BroadcastMessageSender ^m_broadcastMessageSender;
-};
+		static BroadcastMessageDaemon *__instance;
 
+	public:
+		BroadcastMessageSender ^m_broadcastMessageSender;
+	};
+}

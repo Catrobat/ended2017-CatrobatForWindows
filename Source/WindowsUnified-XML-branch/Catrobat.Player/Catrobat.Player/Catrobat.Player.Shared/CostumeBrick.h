@@ -2,16 +2,19 @@
 
 #include "Brick.h"
 
-class CostumeBrick :
-	public Brick
+namespace ProjectStructure
 {
-public:
-	CostumeBrick(std::string costumeDataReference, int index, std::shared_ptr<Script> parent);
-	CostumeBrick(std::shared_ptr<Script> parent);
+	class CostumeBrick :
+		public Brick
+	{
+	public:
+		CostumeBrick(std::string costumeDataReference, int index, Script* parent);
+		CostumeBrick(Script* parent);
 
-	void Execute();
-	int GetIndex();
-private:
-	std::string m_costumeDataReference;
-	int m_index;
-};
+		void Execute();
+		int GetIndex();
+	private:
+		std::string m_costumeDataReference;
+		int m_index;
+	};
+}

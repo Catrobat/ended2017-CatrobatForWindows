@@ -14,6 +14,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation;
 using Windows.UI.Xaml.Shapes;
+using Windows.UI;
 
 namespace Catrobat.Paint.WindowsPhone.PixelData
 {
@@ -147,10 +148,13 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         async public Task<int> preparePaintingAreaCanvasPixel()
         {
             RenderTargetBitmap retarbi = new RenderTargetBitmap();
-            await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvas);
+            Canvas canvas = PocketPaintApplication.GetInstance().PaintingAreaCanvas;
+            await retarbi.RenderAsync(canvas);
 
             Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
             pixelsCanvas = WindowsRuntimeBufferExtensions.ToArray(buffer);
+            //Rectangle rectangle = (Rectangle)canvas.Children[0];
+            pixelsCanvasEraser = WindowsRuntimeBufferExtensions.ToArray(buffer);
             oldPixles = WindowsRuntimeBufferExtensions.ToArray(buffer);
             this.pixelHeightCanvas = retarbi.PixelHeight;
             this.pixelWidthCanvas = retarbi.PixelWidth;
@@ -286,29 +290,111 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             }
         }
 
-        public void SetPixel(Point p, string color)
+        public int SetPixel(Point p, string color)
         {
             int intTemp;
             int intXTemp;
             int intValue;
+
             try
             {
-                intTemp = ((int)p.Y - 1) * pixelWidthCanvas;
-                intXTemp = intTemp + ((int)p.X - 1);
-                 intValue = intXTemp * 4;
+                intTemp = ((int)p.Y) * pixelWidthCanvas;
+                intXTemp = intTemp + ((int)p.X);
+                intValue = intXTemp * 4;
 
                 var argb = color.Split('_');
 
-                pixelsCanvas[intValue + 3] = Convert.ToByte(argb[0]);
-                pixelsCanvas[intValue + 2] = Convert.ToByte(argb[1]);
-                pixelsCanvas[intValue + 1] = Convert.ToByte(argb[2]);
-                pixelsCanvas[intValue] = Convert.ToByte(argb[3]);
+                if (intValue + 3 <= pixelsCanvas.Length)
+                {
+                    pixelsCanvas[intValue + 3] = Convert.ToByte(argb[0]);
+                    pixelsCanvas[intValue + 2] = Convert.ToByte(argb[1]);
+                    pixelsCanvas[intValue + 1] = Convert.ToByte(argb[2]);
+                    pixelsCanvas[intValue] = Convert.ToByte(argb[3]);
+                }
+                else
+                    return -1;
+
+                // PocketPaintApplication.GetInstance().PaintingAreaCanvas
+                
+                //Rectangle rectangle = new Rectangle();
+                return 0;
+                
             }
             catch (Exception)
             {
-                return;
+                return -1;
             }
         }
+
+        public List<Point> GetWhitePixels()
+        {
+            byte ff = Convert.ToByte(0xff);
+
+            List<Point> results = new List<Point>();
+            var canvas = PocketPaintApplication.GetInstance().EraserCanvas;
+            if (canvas != null)
+            {
+                for (int x = 0; x < pixelWidthCanvas; x++)
+                {
+                    for (int y = 0; y < pixelHeightCanvas; y++)
+                    {
+                        int Temp = y * pixelWidthCanvas;
+                        int XTemp = Temp + x;
+                        int Value = XTemp * 4;
+
+                        if (pixelsCanvas[Value] == ff &&
+                        pixelsCanvas[Value + 1] == ff &&
+                        pixelsCanvas[Value + 2] == ff &&
+                        pixelsCanvas[Value + 3] == ff)
+                        {
+                            results.Add(new Point(x, y));
+                        }
+                    }
+                }
+            }
+
+            return results;
+        }
+
+        public async Task<Image> BufferToImage()
+        {
+            RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap();
+            WriteableBitmap wb = new WriteableBitmap(pixelWidthCanvas, pixelHeightCanvas);
+
+            await wb.PixelBuffer.AsStream().WriteAsync(pixelsCanvas, 0, pixelsCanvas.Length);
+
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
+            Image image = new Image();
+            image.Stretch = Stretch.Uniform;
+            image.Source = wb;
+            image.Height = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height;
+            image.Width = PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width;
+            return image;
+        }
+
+        //public void SetPixel(Point p, string color)
+        //{
+        //    int intTemp;
+        //    int intXTemp;
+        //    int intValue;
+        //    try
+        //    {
+        //        intTemp = ((int)p.Y - 1) * pixelWidthCanvas;
+        //        intXTemp = intTemp + ((int)p.X - 1);
+        //         intValue = intXTemp * 4;
+
+        //        var argb = color.Split('_');
+
+        //        pixelsCanvas[intValue + 3] = Convert.ToByte(argb[0]);
+        //        pixelsCanvas[intValue + 2] = Convert.ToByte(argb[1]);
+        //        pixelsCanvas[intValue + 1] = Convert.ToByte(argb[2]);
+        //        pixelsCanvas[intValue] = Convert.ToByte(argb[3]);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return;
+        //    }
+        //}
         
         public async Task<bool> PixelBufferToBitmap()
         {
@@ -341,6 +427,22 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             double doubleY = (oldPoint.Y) * NormfactorY;
             double doubleX = (oldPoint.X) * NormfactorX;
             return new Point(Math.Round(doubleX, 0), Math.Round(doubleY, 0));
+        }
+
+        public string getPixelFromCanvas(uint x, uint y)
+        {
+            string result = "";
+            if(pixelsCanvas != null)
+            {
+                uint temp = Convert.ToUInt32(this.pixelWidthCanvas * y);
+                uint indexOfSearchedPixel = (temp + x) * 4;
+                var a = pixelsCanvas[indexOfSearchedPixel + 3];
+                var r = pixelsCanvas[indexOfSearchedPixel + 2];
+                var g = pixelsCanvas[indexOfSearchedPixel + 1];
+                var b = pixelsCanvas[indexOfSearchedPixel];
+                result = RGBToString(a, r, g, b);
+            }
+            return result;
         }
 
         public string getPixelFromCanvas(Point p)
@@ -432,14 +534,19 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         async public Task<int> preparePaintingAreaCanvasForEraser()
         {
             RenderTargetBitmap retarbi = new RenderTargetBitmap();
-            await retarbi.RenderAsync(PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying,
-                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Width,
-                (int)PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Height);
+            Canvas eraserCanvas = PocketPaintApplication.GetInstance().EraserCanvas;
+            try
+            {
+                await retarbi.RenderAsync(eraserCanvas);
 
-            Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
-            pixelsCanvasEraser = WindowsRuntimeBufferExtensions.ToArray(buffer);
-            pixelHeightCanvas = retarbi.PixelHeight;
-            pixelWidthCanvas = retarbi.PixelWidth;
+                Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
+                pixelsCanvas = WindowsRuntimeBufferExtensions.ToArray(buffer);
+                //Rectangle rectangle = (Rectangle)canvas.Children[0];
+                this.pixelHeightCanvas = retarbi.PixelHeight;
+                this.pixelWidthCanvas = retarbi.PixelWidth;
+            }
+            catch { }
+            ColorBrush = new SolidColorBrush();
             return 0;
         }
 
@@ -563,5 +670,13 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         //    return pixelsCanvas[intValue + 3];
         //}
 
+
+        public void SetPixel(List<Point> points, string c)
+        {
+            foreach(var point in points)
+            {
+                SetPixel(point, c);
+            }
+        }
     }
 }

@@ -153,6 +153,7 @@
     <ClCompile Include="IfLogicBeginBrick.cpp" />
     <ClCompile Include="LogicOperations.cpp" />
     <ClCompile Include="LookBricks.cpp" />
+    <ClCompile Include="LookTest.cpp" />
     <ClCompile Include="MovementBricks.cpp" />
     <ClCompile Include="TestHelper.cpp" />
     <ClCompile Include="pch.cpp">
@@ -167,6 +168,7 @@
     <SDKReference Include="TestPlatform, Version=12.0" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="Mole.xml" />
     <Xml Include="testFiles\BroadcastTest.xml" />
     <Xml Include="testFiles\CompassTest.xml" />
     <Xml Include="testFiles\ForeverTest.xml" />

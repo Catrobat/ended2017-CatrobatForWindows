@@ -118,9 +118,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Object.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ObjectList.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
       <Filter>Objects</Filter>
     </ClInclude>
@@ -229,21 +226,41 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WhenScript.h">
       <Filter>Objects\Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)XMLParser.h">
-      <Filter>XMLParser</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IProject.h">
+      <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml.hpp">
-      <Filter>XMLParser</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IObject.h">
+      <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_iterators.hpp">
-      <Filter>XMLParser</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ILook.h">
+      <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_print.hpp">
-      <Filter>XMLParser</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IUserVariable.h">
+      <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_utils.hpp">
-      <Filter>XMLParser</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IStartScript.h">
+      <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IWhenScript.h">
+      <Filter>NativeComponent\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IBroadcastScript.h">
+      <Filter>NativeComponent\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IHeader.h">
+      <Filter>NativeComponent\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NativeWrapper.h">
+      <Filter>NativeComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ITurnRightBrick.h">
+      <Filter>NativeComponent\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
@@ -345,9 +362,6 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Object.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ObjectList.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Project.cpp">
@@ -458,8 +472,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WhenScript.cpp">
       <Filter>Objects\Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)XMLParser.cpp">
-      <Filter>XMLParser</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NativeWrapper.cpp">
+      <Filter>NativeComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Header.cpp">
+      <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -514,8 +531,11 @@
     <Filter Include="Sounds">
       <UniqueIdentifier>{10681dc4-9e75-45a8-a90d-b6905fc55dd3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="XMLParser">
-      <UniqueIdentifier>{1149dfaf-5c28-40bc-af17-0c727ccd7c98}</UniqueIdentifier>
+    <Filter Include="NativeComponent">
+      <UniqueIdentifier>{f0b0ad34-fad6-4601-9d6e-f2c49175e4a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NativeComponent\Interface">
+      <UniqueIdentifier>{9526212e-40da-4755-9a0e-0707a23d8b50}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

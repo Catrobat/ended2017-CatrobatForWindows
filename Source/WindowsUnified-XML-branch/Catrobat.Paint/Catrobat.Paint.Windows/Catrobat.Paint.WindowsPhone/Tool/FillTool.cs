@@ -30,6 +30,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                     return;
                 }
                 Point coordinates = (Point)arg;
+                PocketPaintApplication.GetInstance().ProgressRing.IsActive = true;
                 PixelData.PixelData pixelData = new PixelData.PixelData();
                 await pixelData.preparePaintingAreaCanvasPixel();
                 Catrobat.Paint.WindowsPhone.Ui.Spinner.StartSpinning();
@@ -40,6 +41,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 }
                 Catrobat.Paint.WindowsPhone.Ui.Spinner.StopSpinning();
                 await pixelData.PixelBufferToBitmap();
+                PocketPaintApplication.GetInstance().ProgressRing.IsActive = false;
                 CommandManager.GetInstance().CommitCommand(new FillCommand(pixelData));
 
             }

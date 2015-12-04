@@ -7,10 +7,11 @@
 #include <windows.h>
 #include <ppltasks.h>
 
+using namespace ProjectStructure;
 
-MoveNStepsBrick::MoveNStepsBrick(FormulaTree *steps, std::shared_ptr<Script> parent) :
-Brick(TypeOfBrick::MoveNStepsBrick, parent),
-m_steps(steps)
+MoveNStepsBrick::MoveNStepsBrick(FormulaTree *steps, Script* parent) :
+	Brick(TypeOfBrick::MoveNStepsBrick, parent),
+	m_steps(steps)
 {
 }
 
@@ -31,14 +32,14 @@ void MoveNStepsBrick::Execute()
 void MoveNStepsBrick::CalculateNewCoordinates(float &x, float &y)
 {
 	auto steps = Interpreter::Instance()->EvaluateFormula(m_steps, m_parent->GetParent());
-	
-	if(!steps)
+
+	if (!steps)
 	{
 		return;
 	}
 
 	auto rotation = static_cast<int>(m_parent->GetParent()->GetRotation()) % 360;
-	
+
 	//case of negative rotation
 	rotation = rotation < 0 ? 360 - rotation : rotation;
 
@@ -46,7 +47,7 @@ void MoveNStepsBrick::CalculateNewCoordinates(float &x, float &y)
 	auto gamma = 90;
 	auto beta = static_cast<int>(rotation) % 90;
 	auto alpha = abs(gamma - beta);
-	
+
 	auto c = 1.0f;
 	auto a = c / gamma * alpha;
 	auto b = c / gamma * beta;

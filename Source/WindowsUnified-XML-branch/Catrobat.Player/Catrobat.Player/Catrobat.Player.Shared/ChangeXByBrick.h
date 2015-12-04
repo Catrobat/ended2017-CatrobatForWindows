@@ -2,12 +2,16 @@
 
 #include "Brick.h"
 
-class ChangeXByBrick :
-	public Brick
+namespace ProjectStructure
 {
-public:
-	ChangeXByBrick(FormulaTree *offsetX, std::shared_ptr<Script> parent);
-	void Execute();
-private:
-	FormulaTree *m_offsetX;
-};
+	class ChangeXByBrick :
+		public Brick
+	{
+	public:
+		ChangeXByBrick(FormulaTree *offsetX, Script* parent);
+		void Execute();
+	private:
+		FormulaTree *m_offsetX;
+	};
+
+}

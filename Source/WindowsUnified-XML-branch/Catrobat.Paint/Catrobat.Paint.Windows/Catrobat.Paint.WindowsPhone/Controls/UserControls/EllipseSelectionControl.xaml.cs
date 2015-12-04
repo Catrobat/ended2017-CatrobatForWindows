@@ -29,7 +29,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             ellEllipseToDraw.Fill = PocketPaintApplication.GetInstance().PaintData.colorSelected;
             ellEllipseToDraw.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
             ellEllipseToDraw.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
-
+            
             PocketPaintApplication.GetInstance().EllipseSelectionControl = this;
             isModifiedEllipseMovement = false;
         }
@@ -37,8 +37,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         private TranslateTransform createTranslateTransform(double x, double y)
         {
             var move = new TranslateTransform();
-            ((TranslateTransform)move).X = x;
-            ((TranslateTransform)move).Y = y;
+            move.X = x;
+            move.Y = y;
 
             return move;
         }
@@ -66,7 +66,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void ellCenterTop_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            double deltaTranslationY = Math.Round(e.Delta.Translation.Y * -1.0);
+            double deltaTranslationY = Math.Round(-e.Delta.Translation.Y);
 
             if ((GridMain.Height + deltaTranslationY) >= _minGridMainHeight)
             {
@@ -81,32 +81,32 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void ellLeftCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            double deltaTranslationX = Math.Round(e.Delta.Translation.X * -1.0);
+                double deltaTranslationX = Math.Round(e.Delta.Translation.X * -1.0);
 
-            if ((GridMain.Width + deltaTranslationX) >= _minGridMainHeight)
-            {
-                var moveX = createTranslateTransform(deltaTranslationX, 0.0);
+                if ((GridMain.Width + deltaTranslationX) >= _minGridMainHeight)
+                {
+                    var moveX = createTranslateTransform(deltaTranslationX, 0.0);
 
-                changeWidthOfUiElements(moveX.X);
-                changeMarginLeftGridMain(moveX.X);
+                    changeWidthOfUiElements(moveX.X);
+                    changeMarginLeftGridMain(moveX.X);
 
-                setSizeOfRecBar(ellEllipseToDraw.Height, ellEllipseToDraw.Width);
-            }
+                    setSizeOfRecBar(ellEllipseToDraw.Height, ellEllipseToDraw.Width);
+                }
         }
 
         private void ellRightCenter_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            double deltaTranslationX = Math.Round(e.Delta.Translation.X);
+                double deltaTranslationX = Math.Round(e.Delta.Translation.X);
 
-            if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth)
-            {
-                var moveX = createTranslateTransform(deltaTranslationX, 0.0);
+                if ((GridMain.Width + deltaTranslationX) >= _minGridMainWidth)
+                {
+                    var moveX = createTranslateTransform(deltaTranslationX, 0.0);
 
-                changeWidthOfUiElements(moveX.X);
-                changeMarginRightGridMain(moveX.X);
+                    changeWidthOfUiElements(moveX.X);
+                    changeMarginRightGridMain(moveX.X);
 
-                setSizeOfRecBar(ellEllipseToDraw.Height, ellEllipseToDraw.Width);
-            }
+                    setSizeOfRecBar(ellEllipseToDraw.Height, ellEllipseToDraw.Width);
+                }
         }
 
         private void ellLeftBottom_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
@@ -358,7 +358,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public void resetAppBarButtonEllipseSelectionControl(bool isActivated)
         {
-            AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton();
+            AppBarButton appBarButtonReset = PocketPaintApplication.GetInstance().PaintingAreaView != null ? 
+                PocketPaintApplication.GetInstance().PaintingAreaView.getAppBarResetButton() : null;
             if (appBarButtonReset != null)
             {
                 appBarButtonReset.IsEnabled = isActivated;
@@ -424,25 +425,28 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             TranslateTransform lastTranslateTransform = getLastTranslateTransformation();
             RotateTransform lastRotateTransform = getLastRotateTransformation();
 
+            double xVal = e.Delta.Translation.X;
+            double yVal = e.Delta.Translation.Y;
+
             if (lastTranslateTransform != null && lastRotateTransform == null)
             {
-                translateTransform.X = e.Delta.Translation.X + lastTranslateTransform.X;
-                translateTransform.Y = e.Delta.Translation.Y + lastTranslateTransform.Y;
+                    translateTransform.X = xVal + lastTranslateTransform.X;
+                    translateTransform.Y = yVal + lastTranslateTransform.Y;               
             }
             else if (lastTranslateTransform == null && lastRotateTransform != null)
             {
-                translateTransform.X = e.Delta.Translation.X;
-                translateTransform.Y = e.Delta.Translation.Y;
+                translateTransform.X = xVal;
+                translateTransform.Y = yVal;
             }
             else if (lastTranslateTransform != null && lastRotateTransform != null)
             {
-                translateTransform.X = e.Delta.Translation.X + lastTranslateTransform.X;
-                translateTransform.Y = e.Delta.Translation.Y + lastTranslateTransform.Y;
+                translateTransform.X = xVal + lastTranslateTransform.X;
+                translateTransform.Y = yVal + lastTranslateTransform.Y;
             }
             else
             {
-                translateTransform.X = e.Delta.Translation.X;
-                translateTransform.Y = e.Delta.Translation.Y;
+                    translateTransform.X = xVal;
+                    translateTransform.Y = yVal;               
             }
             addTransformation(translateTransform);
         }
@@ -527,6 +531,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             strokeOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
             strokeThicknessOfEllipseToDraw = PocketPaintApplication.GetInstance().PaintData.strokeThickness;
             // strokeLineJoinOfRectangleToDraw = PocketPaintApplication.GetInstance().PaintData.penLineJoinSelected;
+
+            RotateTransform rotate = new RotateTransform();
+            var angle = PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation;
+            rotate.Angle = -angle;
+            Point point = new Point(0.5, 0.5);
+            PocketPaintApplication.GetInstance().EllipseSelectionControl.RenderTransformOrigin = point;
+            PocketPaintApplication.GetInstance().EllipseSelectionControl.RenderTransform = rotate;
+
             isModifiedEllipseMovement = false;
         }
     }

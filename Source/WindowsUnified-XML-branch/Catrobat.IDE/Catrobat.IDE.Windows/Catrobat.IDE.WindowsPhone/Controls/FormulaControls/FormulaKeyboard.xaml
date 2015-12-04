@@ -200,7 +200,7 @@
     </Style>
   </UserControl.Resources>
 
-  <Grid Background="{ThemeResource AppBarBackgroundBrush}">
+  <Grid Background="{ThemeResource FormulaBackgroundBrush}">
     <Grid Grid.Row="0" Name="GridMain" Margin="0 8 0 0" Visibility="Collapsed">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>

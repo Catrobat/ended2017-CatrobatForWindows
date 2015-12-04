@@ -30,10 +30,10 @@
                  Style="{ThemeResource TextTitleNormalStyle}"/>
     </StackPanel>
 
-    <StackPanel Grid.Row="1" Margin="12 16 12 12">
+    <StackPanel Tapped="SettingsLanguage_OnTapped" Grid.Row="1" Margin="12 16 12 12">
       <ListView>
         <ListViewBase.Items>
-          <StackPanel Tapped="SettingsLanguage_OnTapped" Name="StackPanelSettingsLanguage" Margin="10 0 10 10" >
+          <StackPanel Name="StackPanelSettingsLanguage" Margin="10 0 10 10" >
             <TextBlock Margin="0 0 10 10" HorizontalAlignment="Left"
               Text="{Binding Resources.Main_ListLanguage, 
               Source={StaticResource LocalizedStrings}}" 

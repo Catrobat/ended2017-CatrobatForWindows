@@ -20,8 +20,11 @@
       <Color x:Key="AppBackgroundColor">#FFFFFFFF</Color>
       <SolidColorBrush x:Key="AppBackgroundBrush" Color="{ThemeResource AppBackgroundColor}" />
 
-      <Color x:Key="AppBarBackgroundColor">#FF111111</Color>
+      <Color x:Key="AppBarBackgroundColor">#FF19a5b8</Color>
       <SolidColorBrush x:Key="AppBarBackgroundBrush" Color="{ThemeResource AppBarBackgroundColor}" />
+
+      <Color x:Key="FormulaBackgroundColor">#FF000000</Color>
+      <SolidColorBrush x:Key="FormulaBackgroundBrush" Color="{ThemeResource FormulaBackgroundColor}" />
 
       <Color x:Key="OnlineProgramsBackgroundColor">#FF99AACC</Color>
       <SolidColorBrush x:Key="OnlineProgramsBackgroundBrush" Color="{ThemeResource OnlineProgramsBackgroundColor}" />

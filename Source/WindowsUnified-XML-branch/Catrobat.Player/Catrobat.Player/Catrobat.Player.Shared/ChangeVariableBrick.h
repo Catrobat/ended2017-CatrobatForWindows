@@ -2,11 +2,13 @@
 
 #include "VariableManagementBrick.h"
 
-class ChangeVariableBrick
-	: public VariableManagementBrick
+namespace ProjectStructure
 {
-public:
-	ChangeVariableBrick(FormulaTree *variableFormula, std::shared_ptr<Script> parent);
-	void Execute();
-};
-
+	class ChangeVariableBrick
+		: public VariableManagementBrick
+	{
+	public:
+		ChangeVariableBrick(FormulaTree *variableFormula, Script* parent);
+		void Execute();
+	};
+}

@@ -9,8 +9,9 @@
 
 using namespace Windows::System::Threading;
 using namespace Windows::Foundation;
+using namespace ProjectStructure;
 
-Brick::Brick(TypeOfBrick brickType, std::shared_ptr<Script> parent) :
+Brick::Brick(TypeOfBrick brickType, Script* parent) :
 	m_brickType(brickType), m_parent(parent)
 {
 }
@@ -20,7 +21,7 @@ Brick::TypeOfBrick Brick::GetBrickType()
 	return m_brickType;
 }
 
-std::shared_ptr<Script> Brick::GetParent()
+Script* Brick::GetParent()
 {
 	return m_parent;
 }

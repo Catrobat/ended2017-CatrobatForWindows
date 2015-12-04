@@ -1,17 +1,23 @@
 #pragma once
 #include "BroadcastMessageSender.h"
+#include "BroadcastScript.h"
 
-class BroadcastScript;
-
-ref class BroadcastMessageListener sealed
+// TODO: What namespace should we use here?
+namespace ProjectStructure
 {
-public:
-	BroadcastMessageListener();
-	void HandleBroadcastMessage(BroadcastMessageSender^ mc, Platform::String^ msg);
-	void SetScript(int script);
+	class BroadcastScript;
+}
+namespace Core
+{
+	ref class BroadcastMessageListener sealed
+	{
+	public:
+		BroadcastMessageListener();
+		void HandleBroadcastMessage(BroadcastMessageSender^ mc, Platform::String^ msg);
+		void SetScript(int script);
 
-private:
-	BroadcastMessageSender ^m_broadcastMessageSender;
-	BroadcastScript *m_script;
-};
-
+	private:
+		BroadcastMessageSender ^m_broadcastMessageSender;
+		ProjectStructure::BroadcastScript *m_script;
+	};
+}

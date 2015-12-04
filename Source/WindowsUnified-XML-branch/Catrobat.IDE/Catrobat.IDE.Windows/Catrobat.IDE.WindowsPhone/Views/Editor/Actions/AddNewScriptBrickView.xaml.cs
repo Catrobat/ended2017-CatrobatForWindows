@@ -7,6 +7,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls;
 using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView.CatrobatListViewMisc;
+using Windows.UI.Xaml;
+using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Editor.Actions
 {
@@ -15,11 +17,22 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Actions
         private readonly AddNewScriptBrickViewModel _viewModel = 
             ServiceLocator.ViewModelLocator.AddNewScriptBrickViewModel;
 
-        
-
         public AddNewScriptBrickView()
         {
             InitializeComponent();
+
+            var bounds = Window.Current.Bounds;
+
+            double height = bounds.Height * 0.88;
+            double width = bounds.Width * 0.95;
+
+            CatrobatListView view = this.FindName("Top") as CatrobatListView;
+
+            if (view != null)
+            {
+                view.ItemWidthLandscape = (int)height;
+                view.ItemWidthPortrait = (int)width;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

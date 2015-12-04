@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Navigation;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
 using Catrobat.IDE.WindowsPhone.Controls;
+using Catrobat.IDE.WindowsPhone.Controls.ListsViewControls.CatrobatListView;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
 {
@@ -18,6 +19,15 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Sprites
         {
             //NavigationCacheMode = NavigationCacheMode.Enabled;
             InitializeComponent();
+
+            var bounds = Window.Current.Bounds;
+
+            double height = bounds.Height * 0.88;
+            double width = bounds.Width * 0.95;
+
+            CatrobatListView view = this.FindName("ListViewSprites") as CatrobatListView;
+            view.ItemWidthLandscape = (int)height;
+            view.ItemWidthPortrait = (int)width;
             
         }
 

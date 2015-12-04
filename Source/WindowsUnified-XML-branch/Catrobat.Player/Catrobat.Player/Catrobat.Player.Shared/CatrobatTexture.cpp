@@ -2,34 +2,24 @@
 #include "CatrobatTexture.h"
 
 using namespace std;
+using namespace Microsoft::WRL;
 
-CatrobatTexture::CatrobatTexture()
+CatrobatTexture::CatrobatTexture(vector < vector<int> > alphaMap, ComPtr<ID2D1Bitmap> bitmap)
+	: m_bitmap(move(bitmap)), m_alphaMap(alphaMap)
 {
-    m_bitmap = nullptr;
 }
 
 CatrobatTexture::~CatrobatTexture()
 {
-    delete m_bitmap;
-    m_bitmap = nullptr;
+	m_bitmap.Reset();
 }
 
-ID2D1Bitmap* CatrobatTexture::GetBitmap()
+ComPtr<ID2D1Bitmap> CatrobatTexture::GetBitmap()
 {
-    return m_bitmap;
+	return m_bitmap;
 }
 
 vector < vector<int> > CatrobatTexture::GetAlphaMap()
 {
-    return m_alphaMap;
-}
-
-void CatrobatTexture::SetBitmap(ID2D1Bitmap* bitmap)
-{
-    m_bitmap = bitmap;
-}
-
-void CatrobatTexture::SetAlphaMap(vector < vector<int> > alphaMap)
-{
-    m_alphaMap = alphaMap;
+	return m_alphaMap;
 }

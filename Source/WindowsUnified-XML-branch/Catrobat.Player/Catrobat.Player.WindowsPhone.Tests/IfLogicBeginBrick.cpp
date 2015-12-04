@@ -19,8 +19,8 @@ namespace PlayerWindowsPhone8Test
             bool success = parser->LoadXML("TestFiles/IfLogicBeginTest.xml");
 			Assert::IsTrue(success);
 
-            Project *project = parser->GetProject();
-			Assert::AreEqual(project->GetObjectList()->GetSize(), 1);
+			std::unique_ptr<Project> project = parser->GetProject();
+            Assert::AreEqual(project->GetObjectList().size(), size_t(1));
         }
     };
 }

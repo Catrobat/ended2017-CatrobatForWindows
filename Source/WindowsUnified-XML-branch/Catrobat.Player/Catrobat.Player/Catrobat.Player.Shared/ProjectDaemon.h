@@ -1,46 +1,40 @@
 #pragma once
 
 #include "Project.h"
-#include "XMLParser.h"
 
 #include <vector>
 
-class ProjectDaemon
+namespace ProjectStructure
 {
-public:
-	static ProjectDaemon *Instance();
-    
-	void SetProject(Project *project);
-	Project *GetProject();
-	std::string GetProjectPath();
-	std::vector<Platform::String ^> *GetProjectList();
-	std::vector<Platform::String ^> *GetFileList();
+	class ProjectDaemon
+	{
+	public:
+		static ProjectDaemon *Instance();
+		static void SetProject(Catrobat_Player::NativeComponent::IProject^ project);
 
-	Concurrency::task<bool> OpenProject(Platform::String^ projectName);
-    void RestartProject();
-	void ApplyDesiredRenderTargetSizeFromProject();
+		std::unique_ptr<ProjectStructure::Project> const & GetProject();
+		std::string GetProjectPath();
 
-    void AddDebug(Platform::String^ info);
-	std::vector<std::string> *GetErrorList();
+		bool CreateNativeProject();
+		bool RestartProject();
+		void ApplyDesiredRenderTargetSizeFromProject();
 
-private:
-	ProjectDaemon();
-	ProjectDaemon(ProjectDaemon const&);            
-    ProjectDaemon& operator=(ProjectDaemon const&); 
-	~ProjectDaemon();
-    void SetProjectInitialValues();
+	private:
+		ProjectDaemon();
+		ProjectDaemon(ProjectDaemon const&);
+		ProjectDaemon& operator=(ProjectDaemon const&);
+		~ProjectDaemon();
 
-	static ProjectDaemon *m_instance;
+		static ProjectDaemon *m_instance;
 
-private:
-	Project *m_project;
-	std::string m_projectPath;
-	std::vector<Platform::String ^> *m_projectList;
-	std::vector<Platform::String ^> *m_files;
-	Platform::String^ m_currentFolder;
+	private:
+		static Catrobat_Player::NativeComponent::IProject^ CSProject;
 
-	ID3D11Device1 *m_device;
+		Platform::String^ m_projectName;
+		std::unique_ptr<ProjectStructure::Project> m_project;
+		std::string m_projectPath;
+		Platform::String^ m_currentFolder;
 
-	std::vector<std::string> *m_errorList;
-};
-
+		ID3D11Device1 *m_device;
+	};
+}

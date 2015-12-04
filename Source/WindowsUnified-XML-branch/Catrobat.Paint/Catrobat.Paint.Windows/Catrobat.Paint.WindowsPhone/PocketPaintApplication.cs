@@ -17,6 +17,7 @@ namespace Catrobat.Paint.WindowsPhone
     public class PocketPaintApplication
     {
         private static PocketPaintApplication _instance;
+        public ViewColorPicker ViewColorPicker = null;
 
         private readonly DateTime _dateTimeAppStarted = DateTime.Now;
 
@@ -48,14 +49,14 @@ namespace Catrobat.Paint.WindowsPhone
 
         public Grid MainGrid { get; set; }
 
-        public Grid PaintingAreaCheckeredGrid { get; set; }
-
-        public Grid PaintingAreaContentPanelGrid { get; set; }
+        public Grid GridWorkingSpace { get; set; }
 
         public Grid PaintingAreaLayoutRoot { get; set; }
         #endregion
 
-        public int angleForRotation = 0;
+        public InputHexValueControl InputHexValueControl = null;
+
+        public int angularDegreeOfWorkingSpaceRotation = 0;
 
         public int flipX = 1;
         public int flipY = 1;
@@ -73,7 +74,7 @@ namespace Catrobat.Paint.WindowsPhone
 
         public Canvas PaintingAreaCanvas { get; set; }
         // separate layer, for temp manipulation operations
-        public Canvas PaintingAreaCanvasUnderlaying { get; set; }
+        public Canvas EraserCanvas { get; set; }
 
         public PaintingAreaView PaintingAreaView { get; set; }
 

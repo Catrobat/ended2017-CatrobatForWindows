@@ -9,6 +9,8 @@
 #include <wincodec.h>
 
 using namespace std;
+using namespace Microsoft::WRL;
+using namespace ProjectStructure;
 
 TextureDaemon *TextureDaemon::__instance = NULL;
 
@@ -24,7 +26,7 @@ TextureDaemon *TextureDaemon::Instance()
 
 TextureDaemon::TextureDaemon() {}
 
-void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& deviceResources, CatrobatTexture* texture, std::string textureKey)
+unique_ptr<CatrobatTexture> TextureDaemon::LoadTexture(const shared_ptr<DX::DeviceResources>& deviceResources, string textureKey)
 {
     auto deviceContext = deviceResources->GetD2DDeviceContext();
 
@@ -35,7 +37,15 @@ void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& devi
     IWICFormatConverter *converter = NULL;
 
     //string path is converted to LPCWSTR format
-    std::string path = ProjectDaemon::Instance()->GetProjectPath() + "\\images\\" + textureKey;
+	std::string path = ProjectDaemon::Instance()->GetProjectPath() + "\\images\\" + textureKey;
+
+#if _WINRT_DLL
+	// Code for Catrobat.Player.WindowsPhone
+#elif PSAPI_VERSION
+	// Code for Catrobat.Player.WindowsPhone.Tests
+	path = textureKey;
+#endif
+
     std::wstring stemp = std::wstring(path.begin(), path.end());
     LPCWSTR lPath = stemp.c_str();
 
@@ -59,8 +69,8 @@ void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& devi
         WICBitmapPaletteTypeCustom);
 
     //create usable ID2D1Bitmap from WIC
-    ID2D1Bitmap* bitmap;
-    deviceContext->CreateBitmapFromWicBitmap(converter, NULL, &bitmap);
+	ComPtr<ID2D1Bitmap> bitmap;
+    deviceContext->CreateBitmapFromWicBitmap(converter, NULL, bitmap.GetAddressOf());
 
     IWICBitmapFrameDecode *pIDecoderFrame = NULL;
     decoder->GetFrame(0, &pIDecoderFrame);
@@ -68,8 +78,8 @@ void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& devi
     IWICBitmap *pIBitmap = NULL;
     IWICBitmapLock *pILock = NULL;
 
-    UINT uiWidth = (UINT)bitmap->GetSize().width;
-    UINT uiHeight = (UINT)bitmap->GetSize().height;
+    UINT uiWidth = (UINT) bitmap->GetSize().width;
+    UINT uiHeight = (UINT) bitmap->GetSize().height;
 
     WICRect rcLock = { 0, 0, uiWidth, uiHeight };
 
@@ -89,31 +99,31 @@ void TextureDaemon::LoadTexture(const std::shared_ptr<DX::DeviceResources>& devi
 
     vector<vector<int>> alphaMap;
 
-	if (cbBufferSize == uiHeight*uiWidth * 4)
-	{
-		for (UINT r = 0; r < uiHeight; r++)
-		{
-			vector<int> row;
-			for (UINT c = 0; c < uiWidth; c++)
-			{
-				row.push_back(pv[(r * uiWidth + c) * 4 + 3]);
-			}
-			alphaMap.push_back(row);
-		}
-	}
-	else
-	{
-		for (UINT r = 0; r < uiHeight; r++)
-		{
-			vector<int> row;
-			for (UINT c = 0; c < uiWidth; c++)
-			{
-				row.push_back(255);
-			}
-			alphaMap.push_back(row);
-		}
-	}
-    (texture)->SetAlphaMap(alphaMap);
-    (texture)->SetBitmap(bitmap);
+    if (cbBufferSize == uiHeight*uiWidth * 4)
+    {
+        for (UINT r = 0; r < uiHeight; r++)
+        {
+            vector<int> row;
+            for (UINT c = 0; c < uiWidth; c++)
+            {
+                row.push_back(pv[(r * uiWidth + c) * 4 + 3]);
+            }
+            alphaMap.push_back(row);
+        }
+    }
+    else
+    {
+        for (UINT r = 0; r < uiHeight; r++)
+        {
+            vector<int> row;
+            for (UINT c = 0; c < uiWidth; c++)
+            {
+                row.push_back(255);
+            }
+            alphaMap.push_back(row);
+        }
+    }
+
+	return make_unique<CatrobatTexture>(alphaMap, bitmap);
 }
 

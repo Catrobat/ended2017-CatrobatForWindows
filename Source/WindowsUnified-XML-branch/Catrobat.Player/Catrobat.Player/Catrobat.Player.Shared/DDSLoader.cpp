@@ -149,7 +149,7 @@ void DDSLoader::LoadTexture(ID3D11Device* d3dDevice, string filename, ID3D11Reso
 		}
 	default:
 		{
-			throw new PlayerException("LoadPNG Error. Error code: " + Helper::ConvertPlatformStringToString(error.ToString()));
+			throw new PlayerException("LoadPNG Error. Error code: " + Helper::StdString(error.ToString()));
 			break;
 		}
 		break;

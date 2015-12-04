@@ -5,49 +5,52 @@
 
 #include <string>
 
-class Script;
-class Brick
+namespace ProjectStructure
 {
-public:
-	enum TypeOfBrick
+	class Script;
+	class Brick
 	{
-		CostumeBrick,
-		WaitBrick,
-		PlaceAtBrick,
-		SetGhostEffectBrick,
-		PlaySoundBrick,
-		TurnLeftBrick,
-		ForeverBrick,
-		HideBrick,
-		ShowBrick,
-		SetSizeToBrick,
-		ChangeSizeByBrick,
-		TurnRightBrick,
-		SetXBrick,
-		SetYBrick,
-		ChangeXByBrick,
-		ChangeYByBrick,
-		GlideToBrick,
-		MoveNStepsBrick,
-		PointToBrick,
-		BroadcastBrick,
-		IfBrick,
-		ContainerBrick,
-		ChangeGhostEffectByBrick,
-		NextlookBrick,
-		SetVariableBrick
+	public:
+		enum TypeOfBrick
+		{
+			CostumeBrick,
+			WaitBrick,
+			PlaceAtBrick,
+			SetGhostEffectBrick,
+			PlaySoundBrick,
+			TurnLeftBrick,
+			ForeverBrick,
+			HideBrick,
+			ShowBrick,
+			SetSizeToBrick,
+			ChangeSizeByBrick,
+			TurnRightBrick,
+			SetXBrick,
+			SetYBrick,
+			ChangeXByBrick,
+			ChangeYByBrick,
+			GlideToBrick,
+			MoveNStepsBrick,
+			PointToBrick,
+			BroadcastBrick,
+			IfBrick,
+			ContainerBrick,
+			ChangeGhostEffectByBrick,
+			NextlookBrick,
+			SetVariableBrick
+		};
+
+		Script* GetParent();
+
+		virtual void Execute() = 0;
+
+		TypeOfBrick GetBrickType();
+
+	protected:
+		Brick(TypeOfBrick brickType, Script* parent);
+		Script* m_parent;
+
+	private:
+		TypeOfBrick m_brickType;
 	};
-
-	std::shared_ptr<Script> GetParent();
-
-	virtual void Execute() = 0;
-
-	TypeOfBrick GetBrickType();
-
-protected:
-	Brick(TypeOfBrick brickType, std::shared_ptr<Script> parent);
-	std::shared_ptr<Script> m_parent;
-
-private:
-	TypeOfBrick m_brickType;
-};
+}

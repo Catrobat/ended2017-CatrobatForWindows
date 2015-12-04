@@ -27,8 +27,10 @@ Compatible with latest version.</description>
   </header>
   <objectList>
     <object>
+      <name>Object 1</name>
     </object>
     <object>
+      <name>Object 2</name>
     </object>
   </objectList>
 </program>

@@ -4,6 +4,7 @@ using Windows.UI.Xaml;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.ViewModels.Main;
+using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Main
 {
@@ -15,8 +16,19 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
         public ProgramDetailView()
         {
             InitializeComponent();
-
+            CheckSensors();
             //base._viewModel.PropertyChanged += ViewModelOnPropertyChanged;
+        }
+
+        private void CheckSensors()
+        {
+            bool allSensorsWorking = ServiceLocator.SensorService.CheckSensors();
+
+            if (!allSensorsWorking)
+            {
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_MessageBoxInformation, 
+                    AppResources.Main_NotAllFeaturesSupported, delegate { /* no action */ }, MessageBoxOptions.Ok);
+            }
         }
 
         //private void ViewModelOnPropertyChanged(object sender, 
