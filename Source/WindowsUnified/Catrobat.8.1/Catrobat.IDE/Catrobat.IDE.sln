@@ -1,0 +1,110 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catrobat.IDE", "Catrobat.IDE", "{968F9045-3F25-4600-AD93-56A9C00B5146}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Catrobat.IDE.Shared", "Catrobat.IDE\Catrobat.IDE.Shared\Catrobat.IDE.Shared.shproj", "{1D5E805D-F506-45AB-A7F2-A2F644B0D022}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.IDE.Windows", "Catrobat.IDE\Catrobat.IDE.Windows\Catrobat.IDE.Windows.csproj", "{9A47764F-9FD5-4466-AE24-F6A314BFD007}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.IDE.WindowsPhone", "Catrobat.IDE\Catrobat.IDE.WindowsPhone\Catrobat.IDE.WindowsPhone.csproj", "{F563DDC4-1779-404E-B664-07913DB16DAC}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Catrobat.IDE\Catrobat.IDE.Shared\Catrobat.IDE.Shared.projitems*{f563ddc4-1779-404e-b664-07913db16dac}*SharedItemsImports = 4
+		Catrobat.IDE\Catrobat.IDE.Shared\Catrobat.IDE.Shared.projitems*{9a47764f-9fd5-4466-ae24-f6a314bfd007}*SharedItemsImports = 4
+		Catrobat.IDE\Catrobat.IDE.Shared\Catrobat.IDE.Shared.projitems*{1d5e805d-f506-45ab-a7f2-a2f644b0d022}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Debug|ARM.ActiveCfg = Debug|ARM
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Debug|ARM.Build.0 = Debug|ARM
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Debug|ARM.Deploy.0 = Debug|ARM
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Debug|x64.ActiveCfg = Debug|x64
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Debug|x64.Build.0 = Debug|x64
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Debug|x64.Deploy.0 = Debug|x64
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Debug|x86.ActiveCfg = Debug|x86
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Debug|x86.Build.0 = Debug|x86
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Debug|x86.Deploy.0 = Debug|x86
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Release|ARM.ActiveCfg = Release|ARM
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Release|ARM.Build.0 = Release|ARM
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Release|ARM.Deploy.0 = Release|ARM
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Release|x64.ActiveCfg = Release|x64
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Release|x64.Build.0 = Release|x64
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Release|x64.Deploy.0 = Release|x64
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Release|x86.ActiveCfg = Release|x86
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Release|x86.Build.0 = Release|x86
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007}.Release|x86.Deploy.0 = Release|x86
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Debug|ARM.Build.0 = Debug|ARM
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Debug|ARM.Deploy.0 = Debug|ARM
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Debug|x64.Build.0 = Debug|Any CPU
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Debug|x64.Deploy.0 = Debug|Any CPU
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Debug|x86.ActiveCfg = Debug|x86
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Debug|x86.Build.0 = Debug|x86
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Debug|x86.Deploy.0 = Debug|x86
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Release|ARM.ActiveCfg = Release|ARM
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Release|ARM.Build.0 = Release|ARM
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Release|ARM.Deploy.0 = Release|ARM
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Release|x64.ActiveCfg = Release|Any CPU
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Release|x64.Build.0 = Release|Any CPU
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Release|x64.Deploy.0 = Release|Any CPU
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Release|x86.ActiveCfg = Release|x86
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Release|x86.Build.0 = Release|x86
+		{F563DDC4-1779-404E-B664-07913DB16DAC}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1D5E805D-F506-45AB-A7F2-A2F644B0D022} = {968F9045-3F25-4600-AD93-56A9C00B5146}
+		{9A47764F-9FD5-4466-AE24-F6A314BFD007} = {968F9045-3F25-4600-AD93-56A9C00B5146}
+		{F563DDC4-1779-404E-B664-07913DB16DAC} = {968F9045-3F25-4600-AD93-56A9C00B5146}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Catrobat.IDE\\Catrobat.IDE.Shared\\Catrobat.IDE.Shared.projitems
+		SccProjectTopLevelParentUniqueName1 = Catrobat.IDE.sln
+		SccProjectName1 = Catrobat.IDE/Catrobat.IDE.Shared
+		SccLocalPath1 = Catrobat.IDE\\Catrobat.IDE.Shared
+		SccProjectUniqueName2 = Catrobat.IDE\\Catrobat.IDE.Shared\\Catrobat.IDE.Shared.shproj
+		SccProjectTopLevelParentUniqueName2 = Catrobat.IDE.sln
+		SccProjectName2 = Catrobat.IDE/Catrobat.IDE.Shared
+		SccLocalPath2 = Catrobat.IDE\\Catrobat.IDE.Shared
+		SccProjectUniqueName3 = Catrobat.IDE\\Catrobat.IDE.Windows\\Catrobat.IDE.Windows.csproj
+		SccProjectTopLevelParentUniqueName3 = Catrobat.IDE.sln
+		SccProjectName3 = Catrobat.IDE/Catrobat.IDE.Windows
+		SccLocalPath3 = Catrobat.IDE\\Catrobat.IDE.Windows
+		SccProjectUniqueName4 = Catrobat.IDE\\Catrobat.IDE.WindowsPhone\\Catrobat.IDE.WindowsPhone.csproj
+		SccProjectTopLevelParentUniqueName4 = Catrobat.IDE.sln
+		SccProjectName4 = Catrobat.IDE/Catrobat.IDE.WindowsPhone
+		SccLocalPath4 = Catrobat.IDE\\Catrobat.IDE.WindowsPhone
+	EndGlobalSection
+EndGlobal
