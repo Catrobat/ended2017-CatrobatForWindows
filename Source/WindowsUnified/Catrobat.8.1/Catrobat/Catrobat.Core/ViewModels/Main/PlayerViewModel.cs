@@ -82,13 +82,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             if (_axesVisible)
             {
                 ServiceLocator.PlayerLauncherService.AxesAction(false, 
-                    AppResources.Player_AppBarButton_AxesOn);
+                    AppResourcesHelper.Get("Player_AppBarButton_AxesOn"));
                 _axesVisible = false;
             }
             else
             {
                 ServiceLocator.PlayerLauncherService.AxesAction(true,
-                      AppResources.Player_AppBarButton_AxesOff);
+                      AppResourcesHelper.Get("Player_AppBarButton_AxesOff"));
                 _axesVisible = true;
             }
         }

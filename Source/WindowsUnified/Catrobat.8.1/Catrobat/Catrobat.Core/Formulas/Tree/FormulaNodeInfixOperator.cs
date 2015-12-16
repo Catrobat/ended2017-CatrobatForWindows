@@ -348,7 +348,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Operator_And;
+            return AppResourcesHelper.Get("Formula_Operator_And");
         }
 
         public override bool IsNumber()
@@ -383,7 +383,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Operator_Or;
+            return AppResourcesHelper.Get("Formula_Operator_Or");
         }
 
         public override bool IsNumber()
@@ -413,7 +413,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Operator_Mod;
+            return AppResourcesHelper.Get("Formula_Operator_Mod");
         }
 
         public override bool IsNumber()

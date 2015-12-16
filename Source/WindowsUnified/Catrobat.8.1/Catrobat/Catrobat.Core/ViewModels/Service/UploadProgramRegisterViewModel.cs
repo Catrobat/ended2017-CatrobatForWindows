@@ -105,8 +105,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             IsSending = true;
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_email))
             {
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramLoginErrorCaption,
-                    AppResources.Main_UploadProgramMissingLoginData, MissingLoginDataCallback, MessageBoxOptions.Ok);
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramLoginErrorCaption"),
+                    AppResourcesHelper.Get("Main_UploadProgramMissingLoginData"), MissingLoginDataCallback, MessageBoxOptions.Ok);
             }
             else
             {
@@ -133,24 +133,24 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                         break;
 
                     case StatusCodes.ServerResponseRegisterOk:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramRegistrationSucessful,
-                            string.Format(AppResources.Main_UploadProgramWelcome, _username), RegistrationSuccessfulCallback, MessageBoxOptions.Ok);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramRegistrationSucessful"),
+                            string.Format(AppResourcesHelper.Get("Main_UploadProgramWelcome"), _username), RegistrationSuccessfulCallback, MessageBoxOptions.Ok);
                         break;
 
                     case StatusCodes.ServerResponseLoginFailed:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramLoginErrorCaption,
-                            AppResources.Main_UploadProgramRegisterExistingUser, WrongLoginDataCallback, MessageBoxOptions.Ok);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramLoginErrorCaption"),
+                            AppResourcesHelper.Get("Main_UploadProgramRegisterExistingUser"), WrongLoginDataCallback, MessageBoxOptions.Ok);
                         break;
 
                     case StatusCodes.HTTPRequestFailed:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramLoginErrorCaption,
-                            AppResources.Main_NoInternetConnection, WrongLoginDataCallback, MessageBoxOptions.Ok);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramLoginErrorCaption"),
+                            AppResourcesHelper.Get("Main_NoInternetConnection"), WrongLoginDataCallback, MessageBoxOptions.Ok);
                         break;
 
                     default:
-                        string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProgramUndefinedError, statusResponse.statusCode.ToString()) :
-                                                string.Format(AppResources.Main_UploadProgramLoginError, statusResponse.answer);
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramLoginErrorCaption,
+                        string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResourcesHelper.Get("Main_UploadProgramUndefinedError"), statusResponse.statusCode.ToString()) :
+                                                string.Format(AppResourcesHelper.Get("Main_UploadProgramLoginError"), statusResponse.answer);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramLoginErrorCaption"),
                             messageString, WrongLoginDataCallback, MessageBoxOptions.Ok);
                         break;
                 }

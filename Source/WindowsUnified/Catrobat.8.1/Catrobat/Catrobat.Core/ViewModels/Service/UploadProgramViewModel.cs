@@ -130,8 +130,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 if (IsSending)
                 {
                     ServiceLocator.NotifictionService.ShowMessageBox(
-                        AppResources.Main_Sending,
-                        AppResources.Export_Busy,
+                        AppResourcesHelper.Get("Main_Sending"),
+                        AppResourcesHelper.Get("Export_Busy"),
                         CancelExportCallback, MessageBoxOptions.Ok);
                     return;
                 }

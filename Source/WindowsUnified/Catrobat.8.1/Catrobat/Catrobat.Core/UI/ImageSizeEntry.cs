@@ -145,13 +145,13 @@ namespace Catrobat.IDE.Core.UI
                 switch (Size)
                 {
                     case ImageSize.Small:
-                        return AppResources.Editor_ImageSizeSmall;
+                        return AppResourcesHelper.Get("Editor_ImageSizeSmall");
                     case ImageSize.Medium:
-                        return AppResources.Editor_ImageSizeMedium;
+                        return AppResourcesHelper.Get("Editor_ImageSizeMedium");
                     case ImageSize.Large:
-                        return AppResources.Editor_ImageSizeLarge;
+                        return AppResourcesHelper.Get("Editor_ImageSizeLarge");
                     case ImageSize.FullSize:
-                        return AppResources.Editor_ImageSizeFullSize;
+                        return AppResourcesHelper.Get("Editor_ImageSizeFullSize");
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

@@ -216,16 +216,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplicationResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Localization\AppResources.de.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AppResources.de.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Localization\AppResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AppResources.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Resources\Localization\AppResourcesHelper.cs" />
     <Compile Include="Resources\Localization\LocalizedStrings.cs" />
     <Compile Include="Resources\SampleProjectLoader.cs" />
     <Compile Include="Services\Common\ContextService.cs" />
@@ -490,23 +481,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <PRIResource Include="Resources\Localization\AppResources.resw" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ApplicationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Localization\AppResources.de.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.de.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Localization\AppResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">

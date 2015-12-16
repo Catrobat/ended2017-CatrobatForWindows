@@ -209,8 +209,8 @@ namespace Catrobat.IDE.WindowsPhone.Controls.SoundControls
             catch(Exception)
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(
-                        AppResources.Import_FileNotFound,
-                        AppResources.Import_FileNotFoundText,
+                        AppResourcesHelper.Get("Import_FileNotFound"),
+                        AppResourcesHelper.Get("Import_FileNotFoundText"),
                         ToastDisplayDuration.Long);
             }
         }

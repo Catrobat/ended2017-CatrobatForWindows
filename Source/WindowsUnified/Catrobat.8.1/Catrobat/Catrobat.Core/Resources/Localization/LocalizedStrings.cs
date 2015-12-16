@@ -8,15 +8,15 @@ namespace Catrobat.IDE.Core.Resources.Localization
 {
     public class LocalizedStrings : INotifyPropertyChanged
     {
-        private static readonly AppResources ResourcesField = new AppResources();
+        //private static readonly AppResources ResourcesField = new AppResources();
 
-        public AppResources Resources
-        {
-            get
-            {
-                return ResourcesField;
-            }
-        }
+        //public AppResources Resources
+        //{
+        //    get
+        //    {
+        //        return ResourcesField;
+        //    }
+        //}
 
         #region INotifyPropertyChanged region
         public event PropertyChangedEventHandler PropertyChanged;

@@ -27,8 +27,8 @@ namespace Catrobat.IDE.WindowsPhone.Views.Main
 
             if (!allSensorsWorking)
             {
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_MessageBoxInformation, 
-                    AppResources.Main_NotAllFeaturesSupported, delegate { /* no action */ }, MessageBoxOptions.Ok);
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_MessageBoxInformation"), 
+                    AppResourcesHelper.Get("Main_NotAllFeaturesSupported"), delegate { /* no action */ }, MessageBoxOptions.Ok);
             }
         }
 

@@ -276,7 +276,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Looks
         {
             InitImageSizes();
 
-            //LookName = AppResources.Editor_Image;
+            //LookName = AppResourcesHelper.Get("Editor_Image;
 
             //InitImageSizes();
             //_builder = null;

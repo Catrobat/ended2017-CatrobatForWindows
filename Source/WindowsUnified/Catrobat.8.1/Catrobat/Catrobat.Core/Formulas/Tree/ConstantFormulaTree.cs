@@ -148,7 +148,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Constant_True;
+            return AppResourcesHelper.Get("Formula_Constant_True");
         }
 
         public override bool IsNumber()
@@ -171,7 +171,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Constant_False;
+            return AppResourcesHelper.Get("Formula_Constant_False");
         }
 
         public override bool IsNumber()

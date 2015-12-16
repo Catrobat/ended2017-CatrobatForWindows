@@ -87,7 +87,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 if(programName != programNameUnique)
                 {
                     ServiceLocator.NotifictionService.ShowToastNotification("",
-                    AppResources.Main_ProgramNameDuplicate, ToastDisplayDuration.Short, ToastTag.Default);
+                    AppResourcesHelper.Get("Main_ProgramNameDuplicate"), ToastDisplayDuration.Short, ToastTag.Default);
                 }
 
                 return programNameUnique.Trim();
@@ -172,7 +172,7 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             IProgramGenerator projectGenerator = new ProgramGeneratorWhackAMole();
 
-            return await projectGenerator.GenerateProgram(AppResources.Main_DefaultProgramName, true);
+            return await projectGenerator.GenerateProgram(AppResourcesHelper.Get("Main_DefaultProgramName"), true);
         }
 
         public async Task<Program> CreateEmptyProgram(string newProgramName)

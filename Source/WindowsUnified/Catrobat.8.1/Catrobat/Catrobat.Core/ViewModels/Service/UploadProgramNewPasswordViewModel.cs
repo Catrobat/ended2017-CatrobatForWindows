@@ -95,8 +95,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             IsSending = true;
             if (string.IsNullOrEmpty(_newPassword) || string.IsNullOrEmpty(_repeatedPassword))
             {
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
-                    AppResources.Main_UploadProgramMissingPassword, MissingPasswordDataCallback, MessageBoxOptions.Ok);
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramPasswordRecoveryErrorCaption"),
+                    AppResourcesHelper.Get("Main_UploadProgramMissingPassword"), MissingPasswordDataCallback, MessageBoxOptions.Ok);
             }
             else
             {
@@ -106,30 +106,30 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 {
                     case StatusCodes.ServerResponseOk:
                         this.GoBackAction();
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramNewPassword,
-                            AppResources.Main_UploadProgramPasswordChangeSucess, PasswordInvalidCallback, MessageBoxOptions.Ok);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramNewPassword"),
+                            AppResourcesHelper.Get("Main_UploadProgramPasswordChangeSucess"), PasswordInvalidCallback, MessageBoxOptions.Ok);
                         break;
 
                     // because of typing-error in server-message
                     case StatusCodes.ServerResponseRecoveryHashNotFound:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
-                            AppResources.Main_UploadProgramRecoveryHashError, RecoveryHashNotFoundCallback, MessageBoxOptions.Ok);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramPasswordRecoveryErrorCaption"),
+                            AppResourcesHelper.Get("Main_UploadProgramRecoveryHashError"), RecoveryHashNotFoundCallback, MessageBoxOptions.Ok);
                         break;
 
                     // may be checked locally
                     case StatusCodes.ServerResponsePasswordMatchFailed:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
-                            AppResources.Main_UploadProgramRecoveryPasswordMatchError, PasswordInvalidCallback, MessageBoxOptions.Ok);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramPasswordRecoveryErrorCaption"),
+                            AppResourcesHelper.Get("Main_UploadProgramRecoveryPasswordMatchError"), PasswordInvalidCallback, MessageBoxOptions.Ok);
                         break;
 
                     case StatusCodes.HTTPRequestFailed:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
-                            AppResources.Main_NoInternetConnection, MissingPasswordDataCallback, MessageBoxOptions.Ok);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramPasswordRecoveryErrorCaption"),
+                            AppResourcesHelper.Get("Main_NoInternetConnection"), MissingPasswordDataCallback, MessageBoxOptions.Ok);
                         break;
 
                     default:
-                        string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProgramUndefinedError, statusResponse.statusCode.ToString()) : statusResponse.answer;
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
+                        string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResourcesHelper.Get("Main_UploadProgramUndefinedError"), statusResponse.statusCode.ToString()) : statusResponse.answer;
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramPasswordRecoveryErrorCaption"),
                             messageString, MissingPasswordDataCallback, MessageBoxOptions.Ok);
                         break;
                 }

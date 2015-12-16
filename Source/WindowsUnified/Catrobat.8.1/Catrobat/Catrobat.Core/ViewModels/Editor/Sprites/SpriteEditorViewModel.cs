@@ -737,9 +737,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         private void DeleteSoundAction()
         {
-            var sound = SelectedSounds.Count == 1 ? AppResources.Editor_SoundSingular : AppResources.Editor_SoundPlural;
-            var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, SelectedSounds.Count, sound);
-            var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, sound);
+            var sound = SelectedSounds.Count == 1 ? AppResourcesHelper.Get("Editor_SoundSingular") : AppResourcesHelper.Get("Editor_SoundPlural");
+            var messageContent = String.Format(AppResourcesHelper.Get("Editor_MessageBoxDeleteText"), SelectedSounds.Count, sound);
+            var messageHeader = String.Format(AppResourcesHelper.Get("Editor_MessageBoxDeleteHeader"), sound);
 
             ServiceLocator.NotifictionService.ShowMessageBox(messageHeader,
                 messageContent, DeleteSoundMessageBoxResult, MessageBoxOptions.OkCancel);
@@ -793,9 +793,9 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 
         private void DeleteLookAction()
         {
-            var look = SelectedLooks.Count == 1 ? AppResources.Editor_LookSingular : AppResources.Editor_LookPlural;
-            var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, SelectedLooks.Count, look);
-            var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, look);
+            var look = SelectedLooks.Count == 1 ? AppResourcesHelper.Get("Editor_LookSingular") : AppResourcesHelper.Get("Editor_LookPlural");
+            var messageContent = String.Format(AppResourcesHelper.Get("Editor_MessageBoxDeleteText"), SelectedLooks.Count, look);
+            var messageHeader = String.Format(AppResourcesHelper.Get("Editor_MessageBoxDeleteHeader"), look);
 
             ServiceLocator.NotifictionService.ShowMessageBox(messageHeader, messageContent, 
                 DeleteLookMessageBoxResult, MessageBoxOptions.OkCancel);

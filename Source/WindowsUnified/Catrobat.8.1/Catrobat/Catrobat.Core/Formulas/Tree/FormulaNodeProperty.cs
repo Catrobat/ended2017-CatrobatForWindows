@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Property_Brightness;
+            return AppResourcesHelper.Get("Formula_Property_Brightness");
         }
     }
 
@@ -52,7 +52,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Property_Layer;
+            return AppResourcesHelper.Get("Formula_Property_Layer");
         }
     }
 
@@ -71,7 +71,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Property_Transparency;
+            return AppResourcesHelper.Get("Formula_Property_Transparency");
         }
     }
 
@@ -90,7 +90,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Property_PositionX;
+            return AppResourcesHelper.Get("Formula_Property_PositionX");
         }
     }
 
@@ -109,7 +109,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Property_PositionY;
+            return AppResourcesHelper.Get("Formula_Property_PositionY");
         }
     }
 
@@ -128,7 +128,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Property_Rotation;
+            return AppResourcesHelper.Get("Formula_Property_Rotation");
         }
     }
 
@@ -147,7 +147,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Property_Size;
+            return AppResourcesHelper.Get("Formula_Property_Size");
         }
     }
 

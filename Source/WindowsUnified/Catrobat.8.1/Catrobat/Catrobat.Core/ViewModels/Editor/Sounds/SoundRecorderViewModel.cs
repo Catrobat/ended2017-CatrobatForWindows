@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
 using Catrobat.Core.Resources.Localization;
+using Windows.ApplicationModel.Resources;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 {
@@ -368,10 +369,10 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 
         private void UpdateTextProperties()
         {
-            var recordButtonHeaderRecord = AppResources.Editor_RecorderRecord;
-            var recordButtonHeaderStop = AppResources.Editor_RecorderStop;
-            var recordButtonTextRecord = AppResources.Editor_RecorderStart;
-            var recordButtonTextStop = AppResources.Editor_RecorderStop;
+            var recordButtonHeaderRecord = AppResourcesHelper.Get("Editor_RecorderRecord");
+            var recordButtonHeaderStop = AppResourcesHelper.Get("Editor_RecorderStop");
+            var recordButtonTextRecord = AppResourcesHelper.Get("Editor_RecorderStart");
+            var recordButtonTextStop = AppResourcesHelper.Get("Editor_RecorderStop");
 
             if (IsRecording)
             {

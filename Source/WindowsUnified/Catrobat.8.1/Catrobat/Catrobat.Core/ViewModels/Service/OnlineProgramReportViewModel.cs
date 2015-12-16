@@ -97,8 +97,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             IsSending = true;
             if (string.IsNullOrEmpty(_reason))
             {
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_ReportErrorCaption,
-                    AppResources.Main_ReportMissingData, MissingReportDataCallback, MessageBoxOptions.Ok);
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_ReportErrorCaption"),
+                    AppResourcesHelper.Get("Main_ReportMissingData"), MissingReportDataCallback, MessageBoxOptions.Ok);
             }
             else
             {
@@ -107,20 +107,20 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 switch (statusResponse.statusCode)
                 {
                     case StatusCodes.ServerResponseOk:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_ReportProgram,
-                            AppResources.Main_ReportContribution, ReportSuccessfullCallback, MessageBoxOptions.Ok);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_ReportProgram"),
+                            AppResourcesHelper.Get("Main_ReportContribution"), ReportSuccessfullCallback, MessageBoxOptions.Ok);
                         GoBackAction();
                         break;
 
                     case StatusCodes.HTTPRequestFailed:
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_ReportErrorCaption,
-                            AppResources.Main_NoInternetConnection, MissingReportDataCallback, MessageBoxOptions.Ok);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_ReportErrorCaption"),
+                            AppResourcesHelper.Get("Main_NoInternetConnection"), MissingReportDataCallback, MessageBoxOptions.Ok);
                         break;
 
                     default:
-                        string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProgramUndefinedError, statusResponse.statusCode.ToString()) :
-                                                string.Format(AppResources.Main_ReportError, statusResponse.answer);
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_ReportErrorCaption,
+                        string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResourcesHelper.Get("Main_UploadProgramUndefinedError"), statusResponse.statusCode.ToString()) :
+                                                string.Format(AppResourcesHelper.Get("Main_ReportError"), statusResponse.answer);
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_ReportErrorCaption"),
                             messageString, MissingReportDataCallback, MessageBoxOptions.Ok);
                         break;
                 }

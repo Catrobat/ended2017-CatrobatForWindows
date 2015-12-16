@@ -231,7 +231,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Function_Abs;
+            return AppResourcesHelper.Get("Formula_Function_Abs");
         }
     }
 
@@ -249,7 +249,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Function_Sqrt;
+            return AppResourcesHelper.Get("Formula_Function_Sqrt");
         }
     }
 
@@ -267,7 +267,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Function_Round;
+            return AppResourcesHelper.Get("Formula_Function_Round");
         }
     }
 

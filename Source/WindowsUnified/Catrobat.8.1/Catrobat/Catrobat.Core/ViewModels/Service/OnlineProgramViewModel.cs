@@ -163,8 +163,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                 if (IsImporting)
                 {
                     ServiceLocator.NotifictionService.ShowMessageBox(
-                        AppResources.Main_OnlineProgramLoading,
-                        AppResources.Main_OnlineProgramDownloadBusy,
+                        AppResourcesHelper.Get("Main_OnlineProgramLoading"),
+                        AppResourcesHelper.Get("Main_OnlineProgramDownloadBusy"),
                         CancelImportCallback,  MessageBoxOptions.Ok);
                     return;
                 }
@@ -230,10 +230,10 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         public override void NavigateTo()
         {
-            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramUploadedBy, ServiceLocator.WebCommunicationService.ConvertUnixTimeStamp(Convert.ToDouble(_selectedOnlineProgram.Uploaded.Split('.')[0])));
-            VersionLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramVersion, SelectedOnlineProgram.Version);
-            ViewsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramViews, SelectedOnlineProgram.Views);
-            DownloadsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProgramDownloads, SelectedOnlineProgram.Downloads);
+            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResourcesHelper.Get("Main_OnlineProgramUploadedBy"), ServiceLocator.WebCommunicationService.ConvertUnixTimeStamp(Convert.ToDouble(_selectedOnlineProgram.Uploaded.Split('.')[0])));
+            VersionLabelText = String.Format(CultureInfo.InvariantCulture, AppResourcesHelper.Get("Main_OnlineProgramVersion"), SelectedOnlineProgram.Version);
+            ViewsLabelText = String.Format(CultureInfo.InvariantCulture, AppResourcesHelper.Get("Main_OnlineProgramViews"), SelectedOnlineProgram.Views);
+            DownloadsLabelText = String.Format(CultureInfo.InvariantCulture, AppResourcesHelper.Get("Main_OnlineProgramDownloads"), SelectedOnlineProgram.Downloads);
             ButtonDownloadIsEnabled = true;
 
             base.NavigateTo();

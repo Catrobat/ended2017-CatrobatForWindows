@@ -157,16 +157,16 @@ namespace Catrobat.IDE.Core.Services.Common
 
         private static void FillSprites(Program program)
         {
-            var objectBackground = new Sprite { Name = AppResources.DefaultProgram_Background }; 
-            var objectMole1 = new Sprite { Name = AppResources.WhackAMole_Mole + " 1" };
-            var objectMole2 = new Sprite { Name = AppResources.WhackAMole_Mole + " 2" };
-            var objectMole3 = new Sprite { Name = AppResources.WhackAMole_Mole + " 3" };
-            var objectMole4 = new Sprite { Name = AppResources.WhackAMole_Mole + " 4" };
+            var objectBackground = new Sprite { Name = AppResourcesHelper.Get("DefaultProgram_Background") }; 
+            var objectMole1 = new Sprite { Name = AppResourcesHelper.Get("WhackAMole_Mole") + " 1" };
+            var objectMole2 = new Sprite { Name = AppResourcesHelper.Get("WhackAMole_Mole") + " 2" };
+            var objectMole3 = new Sprite { Name = AppResourcesHelper.Get("WhackAMole_Mole") + " 3" };
+            var objectMole4 = new Sprite { Name = AppResourcesHelper.Get("WhackAMole_Mole") + " 4" };
 
             #region Background
 
-            objectBackground.Looks.Add(new Look { Name = AppResources.DefaultProgram_Background, FileName = LookFileNameBackground });
-            objectBackground.Looks.Add(new Look { Name = AppResources.DefaultProgram_Background + "End", FileName = LookFileNameBackgroundFinished });
+            objectBackground.Looks.Add(new Look { Name = AppResourcesHelper.Get("DefaultProgram_Background"), FileName = LookFileNameBackground });
+            objectBackground.Looks.Add(new Look { Name = AppResourcesHelper.Get("DefaultProgram_Background") + "End", FileName = LookFileNameBackgroundFinished });
 
             StartScript startScriptBackground = new StartScript();
             {
@@ -185,9 +185,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             #region mole1
 
-            objectMole1.Looks.Add(new Look { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
-            objectMole1.Looks.Add(new Look { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
-            objectMole1.Looks.Add(new Look { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
+            objectMole1.Looks.Add(new Look { Name = AppResourcesHelper.Get("WhackAMole_MovingMole"), FileName = LookFileNameMole1 });
+            objectMole1.Looks.Add(new Look { Name = AppResourcesHelper.Get("WhackAMole_DizzyMole"), FileName = LookFileNameMole2 });
+            objectMole1.Looks.Add(new Look { Name = AppResourcesHelper.Get("WhackAMole_Mole"), FileName = LookFileNameMole3 });
 
             StartScript startScriptMole1 = new StartScript();
             {
@@ -268,9 +268,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             #region mole2
 
-            objectMole2.Looks.Add(new Look { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
-            objectMole2.Looks.Add(new Look { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
-            objectMole2.Looks.Add(new Look { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
+            objectMole2.Looks.Add(new Look { Name = AppResourcesHelper.Get("WhackAMole_MovingMole"), FileName = LookFileNameMole1 });
+            objectMole2.Looks.Add(new Look { Name = AppResourcesHelper.Get("WhackAMole_DizzyMole"), FileName = LookFileNameMole2 });
+            objectMole2.Looks.Add(new Look { Name = AppResourcesHelper.Get("WhackAMole_Mole"), FileName = LookFileNameMole3 });
 
             StartScript startScriptMole2 = new StartScript();
             {
@@ -351,9 +351,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             #region mole3
 
-            objectMole3.Looks.Add(new Look { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
-            objectMole3.Looks.Add(new Look { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
-            objectMole3.Looks.Add(new Look { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
+            objectMole3.Looks.Add(new Look { Name = AppResourcesHelper.Get("WhackAMole_MovingMole"), FileName = LookFileNameMole1 });
+            objectMole3.Looks.Add(new Look { Name = AppResourcesHelper.Get("WhackAMole_DizzyMole"), FileName = LookFileNameMole2 });
+            objectMole3.Looks.Add(new Look { Name = AppResourcesHelper.Get("WhackAMole_Mole"), FileName = LookFileNameMole3 });
 
             StartScript startScriptMole3 = new StartScript();
             {
@@ -434,9 +434,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             #region mole4
 
-            objectMole4.Looks.Add(new Look { Name = AppResources.WhackAMole_MovingMole, FileName = LookFileNameMole1 });
-            objectMole4.Looks.Add(new Look { Name = AppResources.WhackAMole_DizzyMole, FileName = LookFileNameMole2 });
-            objectMole4.Looks.Add(new Look { Name = AppResources.WhackAMole_Mole, FileName = LookFileNameMole3 });
+            objectMole4.Looks.Add(new Look { Name = AppResourcesHelper.Get("WhackAMole_MovingMole"), FileName = LookFileNameMole1 });
+            objectMole4.Looks.Add(new Look { Name = AppResourcesHelper.Get("WhackAMole_DizzyMole"), FileName = LookFileNameMole2 });
+            objectMole4.Looks.Add(new Look { Name = AppResourcesHelper.Get("WhackAMole_Mole"), FileName = LookFileNameMole3 });
 
             StartScript startScriptMole4 = new StartScript();
             {
@@ -525,7 +525,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
         public string GetProgramDefaultName()
         {
-            return AppResources.Main_WhackAMoleName;
+            return AppResourcesHelper.Get("Main_WhackAMoleName");
         }
 
         public int GetOrderId()

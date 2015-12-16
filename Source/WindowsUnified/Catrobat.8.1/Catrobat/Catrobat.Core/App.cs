@@ -61,7 +61,7 @@ namespace Catrobat.IDE.Core
                 _context.LocalSettings = new LocalSettings();
 
                 var defaultProject = await ServiceLocator.ContextService.
-                    RestoreDefaultProgram(AppResources.Main_DefaultProgramName);
+                    RestoreDefaultProgram(AppResourcesHelper.Get("Main_DefaultProgramName"));
 
                 ProgramChecker.CheckProgram(defaultProject);
 

@@ -130,8 +130,8 @@ namespace Catrobat.IDE.WindowsShared.Services
             if (extractionResult.Status == ExtractProgramStatus.Error)
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(
-                        AppResources.Import_ProgramDamaged,
-                        AppResources.Import_CatrobatDamagedText,
+                        AppResourcesHelper.Get("Import_ProgramDamaged"),
+                        AppResourcesHelper.Get("Import_CatrobatDamagedText"),
                         ToastDisplayDuration.Long);
                 return;
             }
@@ -152,32 +152,32 @@ namespace Catrobat.IDE.WindowsShared.Services
                     break;
                 case ProgramState.Damaged:
                     ServiceLocator.NotifictionService.ShowToastNotification("",
-                        AppResources.Import_ProgramDamaged,
+                        AppResourcesHelper.Get("Import_ProgramDamaged"),
                         ToastDisplayDuration.Long);
                     break;
                 case ProgramState.VersionTooOld:
                     ServiceLocator.NotifictionService.ShowToastNotification("",
-                        AppResources.Import_ProgramOutdated,
+                        AppResourcesHelper.Get("Import_ProgramOutdated"),
                         ToastDisplayDuration.Long);
                     break;
                 case ProgramState.VersionTooNew:
                     ServiceLocator.NotifictionService.ShowToastNotification("",
-                        AppResources.Import_AppTooOld,
+                        AppResourcesHelper.Get("Import_AppTooOld"),
                         ToastDisplayDuration.Long);
                     break;
                 case ProgramState.ErrorInThisApp:
                     ServiceLocator.NotifictionService.ShowToastNotification("",
-                        AppResources.Import_GeneralError,
+                        AppResourcesHelper.Get("Import_GeneralError"),
                         ToastDisplayDuration.Long);
                     break;
                 case ProgramState.Unknown:
                     ServiceLocator.NotifictionService.ShowToastNotification("",
-                        AppResources.Import_GeneralError,
+                        AppResourcesHelper.Get("Import_GeneralError"),
                         ToastDisplayDuration.Long);
                     break;
                 case ProgramState.FilesMissing:
-                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Import_Canceled,
-                    AppResources.Import_FilesMissing, MissingFilesCallback, MessageBoxOptions.Ok);
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Import_Canceled"),
+                    AppResourcesHelper.Get("Import_FilesMissing"), MissingFilesCallback, MessageBoxOptions.Ok);
                     return;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -190,7 +190,7 @@ namespace Catrobat.IDE.WindowsShared.Services
                 ViewModelMessagingToken.LocalProgramsChangedListener);
 
             ServiceLocator.NotifictionService.ShowToastNotification("",
-                AppResources.Import_ProgramAdded,
+                AppResourcesHelper.Get("Import_ProgramAdded"),
                 ToastDisplayDuration.Long,
                 ToastTag.ImportFin);
 
@@ -200,8 +200,8 @@ namespace Catrobat.IDE.WindowsShared.Services
         private async Task CleanUpImport()
         {
             ServiceLocator.NotifictionService.ShowToastNotification(
-                        AppResources.Import_CanceledText,
-                        AppResources.Import_CanceledText,
+                        AppResourcesHelper.Get("Import_CanceledText"),
+                        AppResourcesHelper.Get("Import_CanceledText"),
                         ToastDisplayDuration.Long);
             using (var storage = StorageSystem.GetStorage())
             {

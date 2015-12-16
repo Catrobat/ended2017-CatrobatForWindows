@@ -71,7 +71,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Operator_Not;
+            return AppResourcesHelper.Get("Formula_Operator_Not");
         }
 
         public override bool IsNumber()

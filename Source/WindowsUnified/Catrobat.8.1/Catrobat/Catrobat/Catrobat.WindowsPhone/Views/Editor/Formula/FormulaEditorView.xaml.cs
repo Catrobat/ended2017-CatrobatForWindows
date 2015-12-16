@@ -181,7 +181,7 @@ namespace Catrobat.IDE.WindowsPhone.Views.Editor.Formula
         //        var timeToAct = TimeSpan.FromSeconds(1);
         //        ServiceLocator.NotifictionService.ShowToastNotification(
         //            title: "",
-        //            message: AppResources.Editor_ReallyDismissFormula,
+        //            message: AppResourcesHelper.Get("Editor_ReallyDismissFormula,
         //            timeTillHide: timeToAct);
         //        Task.Run(async () =>
         //        {

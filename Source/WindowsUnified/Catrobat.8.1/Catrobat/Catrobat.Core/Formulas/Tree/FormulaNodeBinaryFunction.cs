@@ -81,7 +81,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Function_Min;
+            return AppResourcesHelper.Get("Formula_Function_Min");
         }
     }
 
@@ -99,7 +99,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Function_Max;
+            return AppResourcesHelper.Get("Formula_Function_Max");
         }
     }
 
@@ -144,7 +144,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Function_Random;
+            return AppResourcesHelper.Get("Formula_Function_Random");
         }
     }
 

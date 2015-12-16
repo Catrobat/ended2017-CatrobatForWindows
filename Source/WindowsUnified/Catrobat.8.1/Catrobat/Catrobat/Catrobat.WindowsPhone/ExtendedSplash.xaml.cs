@@ -239,8 +239,8 @@ namespace Catrobat.IDE.WindowsPhone
         private static async Task TryAddProgram(Stream programStream)
         {
             ServiceLocator.NotifictionService.ShowToastNotification(
-                        AppResources.Import_started,
-                        AppResources.Import_started,
+                        AppResourcesHelper.Get("Import_started"),
+                        AppResourcesHelper.Get("Import_started"),
                         ToastDisplayDuration.Long);
             ServiceLocator.ProgramImportService.SetProgramStream(programStream);
             await ServiceLocator.ProgramImportService.TryImportWithStatusNotifications();

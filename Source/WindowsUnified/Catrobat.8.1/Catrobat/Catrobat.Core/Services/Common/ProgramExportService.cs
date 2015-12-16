@@ -53,8 +53,8 @@ namespace Catrobat.IDE.Core.Services.Common
             if (_cancellationTokenSource.Token.IsCancellationRequested == true)
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(
-                        AppResources.Export_CanceledText,
-                        AppResources.Export_CanceledText,
+                        AppResourcesHelper.Get("Export_CanceledText"),
+                        AppResourcesHelper.Get("Export_CanceledText"),
                         ToastDisplayDuration.Long);
                 return;
             }
@@ -64,14 +64,14 @@ namespace Catrobat.IDE.Core.Services.Common
                     break;
 
                 case StatusCodes.HTTPRequestFailed:
-                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramErrorCaption,
-                            AppResources.Main_NoInternetConnection, UploadErrorCallback, MessageBoxOptions.Ok);
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramErrorCaption"),
+                            AppResourcesHelper.Get("Main_NoInternetConnection"), UploadErrorCallback, MessageBoxOptions.Ok);
                     break;
 
                 default:
-                    string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProgramUndefinedError, statusResponse.statusCode.ToString()) :
-                                           string.Format(AppResources.Main_UploadProgramError, statusResponse.answer);
-                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramErrorCaption,
+                    string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResourcesHelper.Get("Main_UploadProgramUndefinedError"), statusResponse.statusCode.ToString()) :
+                                           string.Format(AppResourcesHelper.Get("Main_UploadProgramError"), statusResponse.answer);
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramErrorCaption"),
                                 messageString, UploadErrorCallback, MessageBoxOptions.Ok);
                     break;
             }
@@ -79,7 +79,7 @@ namespace Catrobat.IDE.Core.Services.Common
             if (ServiceLocator.WebCommunicationService.NoUploadsPending())
             {
                 ServiceLocator.NotifictionService.ShowToastNotification(null,
-                    AppResources.Main_NoUploadsPending, ToastDisplayDuration.Short);
+                    AppResourcesHelper.Get("Main_NoUploadsPending"), ToastDisplayDuration.Short);
             }
         }
 

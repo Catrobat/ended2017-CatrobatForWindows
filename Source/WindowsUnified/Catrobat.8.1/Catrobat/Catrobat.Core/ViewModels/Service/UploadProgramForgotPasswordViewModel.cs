@@ -77,8 +77,8 @@ namespace Catrobat.IDE.Core.ViewModels.Service
             IsSending = true;
             if (string.IsNullOrEmpty(_passwordRecoveryData))
             {
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
-                    AppResources.Main_UploadProgramMissingRecoveryData, MissingRecoveryDataCallback, MessageBoxOptions.Ok);
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramPasswordRecoveryErrorCaption"),
+                    AppResourcesHelper.Get("Main_UploadProgramMissingRecoveryData"), MissingRecoveryDataCallback, MessageBoxOptions.Ok);
             }
             else
             {
@@ -97,7 +97,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     //ServiceLocator.NavigationService.RemoveBackEntry();
 
                     // since 08-2014 pocketcode-server sends an email with the recovery hash in it
-                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramRecoverPassword,
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramRecoverPassword"),
                                 statusResponse.answer, MissingRecoveryDataCallback, MessageBoxOptions.Ok);
                     this.GoBackAction();
                 }
@@ -106,14 +106,14 @@ namespace Catrobat.IDE.Core.ViewModels.Service
                     switch (statusResponse.statusCode)
                     {
                         case StatusCodes.HTTPRequestFailed:
-                            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
-                                AppResources.Main_NoInternetConnection, MissingRecoveryDataCallback, MessageBoxOptions.Ok);
+                            ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramPasswordRecoveryErrorCaption"),
+                                AppResourcesHelper.Get("Main_NoInternetConnection"), MissingRecoveryDataCallback, MessageBoxOptions.Ok);
                             break;
 
                         default:
-                            string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResources.Main_UploadProgramUndefinedError, statusResponse.statusCode.ToString()) :
-                                                    string.Format(AppResources.Main_UploadProgramLoginError, statusResponse.answer);
-                            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProgramPasswordRecoveryErrorCaption,
+                            string messageString = string.IsNullOrEmpty(statusResponse.answer) ? string.Format(AppResourcesHelper.Get("Main_UploadProgramUndefinedError"), statusResponse.statusCode.ToString()) :
+                                                    string.Format(AppResourcesHelper.Get("Main_UploadProgramLoginError"), statusResponse.answer);
+                            ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_UploadProgramPasswordRecoveryErrorCaption"),
                                 messageString, MissingRecoveryDataCallback, MessageBoxOptions.Ok);
                             break;
                     }

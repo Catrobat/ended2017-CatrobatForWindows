@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         private readonly FormulaEditor _editor = new FormulaEditor();
         private readonly FormulaKeyboardViewModel _keyboardViewModel;
         private bool _sensorsAreActive = false;
-        private string _sensorButtonLabel = AppResources.Editor_StartSensors;
+        private string _sensorButtonLabel = AppResourcesHelper.Get("Editor_StartSensors");
 
         #endregion
 
@@ -196,7 +196,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
                 //}      
                 result = new FormulaEvaluationResult
                 {
-                    Error = AppResources.FormulaInterpreter_Error
+                    Error = AppResourcesHelper.Get("FormulaInterpreter_Error")
                 };
             }
             else
@@ -416,11 +416,11 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         {
             if(_sensorsAreActive)
             {
-                SensorButtonLabel = AppResources.Editor_StopSensors;
+                SensorButtonLabel = AppResourcesHelper.Get("Editor_StopSensors");
             }
             else
             {
-                SensorButtonLabel = AppResources.Editor_StartSensors;
+                SensorButtonLabel = AppResourcesHelper.Get("Editor_StartSensors");
             }
         }
     }

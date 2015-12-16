@@ -14,10 +14,10 @@ namespace Catrobat.IDE.Core.UI
 
     public sealed class NullItemCollection : IList
   {
-      private static readonly Look NullLook = new Look {Name = AppResources.Editor_NoLookSelected};
-      private static readonly Sound NullSound = new Sound { Name = AppResources.Editor_NoSoundSelected };
-      private static readonly BroadcastMessage NullBroadcastMessage = new BroadcastMessage { Content = AppResources.Editor_NoMessageSelected };
-      private static readonly Sprite NullSprite = new Sprite {Name = AppResources.Editor_NoSpriteSelected};
+      private static readonly Look NullLook = new Look {Name = AppResourcesHelper.Get("Editor_NoLookSelected") };
+      private static readonly Sound NullSound = new Sound { Name = AppResourcesHelper.Get("Editor_NoSoundSelected") };
+      private static readonly BroadcastMessage NullBroadcastMessage = new BroadcastMessage { Content = AppResourcesHelper.Get("Editor_NoMessageSelected") };
+      private static readonly Sprite NullSprite = new Sprite {Name = AppResourcesHelper.Get("Editor_NoSpriteSelected") };
 
     public object NullObject { get; set; }
 

@@ -140,8 +140,8 @@ namespace Catrobat.IDE.WindowsShared.Services
                     }
                     else
                     {
-                        //ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Import_FileNotFound,
-                        //AppResources.Import_FileNotFoundText, null, MessageBoxOptions.Ok);
+                        //ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Import_FileNotFound,
+                        //AppResourcesHelper.Get("Import_FileNotFoundText, null, MessageBoxOptions.Ok);
                         await CreateDefaultImage();
                     }
                 }
@@ -217,8 +217,8 @@ namespace Catrobat.IDE.WindowsShared.Services
                 }
                 else
                 {
-                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Editor_MessageBoxWrongImageFormatHeader,
-                        AppResources.Editor_MessageBoxWrongImageFormatText, delegate { /* no action */ }, MessageBoxOptions.Ok);
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Editor_MessageBoxWrongImageFormatHeader"),
+                        AppResourcesHelper.Get("Editor_MessageBoxWrongImageFormatText"), delegate { /* no action */ }, MessageBoxOptions.Ok);
                 }
             }
             else

@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.UI.Converters
             if (value != null)
                 return value;
 
-            return new GlobalVariable {Name = AppResources.Editor_NoVariableSelected};
+            return new GlobalVariable {Name = AppResourcesHelper.Get("Editor_NoVariableSelected") };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

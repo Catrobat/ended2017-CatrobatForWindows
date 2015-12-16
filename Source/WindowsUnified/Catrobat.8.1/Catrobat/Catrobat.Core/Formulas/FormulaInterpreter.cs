@@ -64,7 +64,7 @@ namespace Catrobat.IDE.Core.Formulas
             // valid tokens
             if (tokens == null)
             {
-                SetParsingError(null, AppResources.FormulaInterpreter_NullOrEmpty);
+                SetParsingError(null, AppResourcesHelper.Get("FormulaInterpreter_NullOrEmpty"));
                 return null;
             }
 
@@ -85,7 +85,7 @@ namespace Catrobat.IDE.Core.Formulas
             {
                 SetParsingError(
                     source: Range.FromLength(0, tokens.Count), 
-                    message: AppResources.FormulaInterpreter_NullOrEmpty);
+                    message: AppResourcesHelper.Get("FormulaInterpreter_NullOrEmpty"));
                 return null;
             }
 
@@ -100,19 +100,19 @@ namespace Catrobat.IDE.Core.Formulas
                 {
                     SetParsingError(
                         source: nextParenthesis, 
-                        message: AppResources.FormulaInterpreter_Brackets_UnmatchedClosingParenthesis);
+                        message: AppResourcesHelper.Get("FormulaInterpreter_Brackets_UnmatchedClosingParenthesis"));
                 }
                 else if (nextToken is FormulaTokenParameterSeparator)
                 {
                     SetParsingError(
                         source: nextToken,
-                        message: AppResources.FormulaInterpreter_Brackets_NonArgumentParameterSeparator);
+                        message: AppResourcesHelper.Get("FormulaInterpreter_Brackets_NonArgumentParameterSeparator"));
                 }
                 else
                 {
                     SetParsingError(
                         source: Range.Empty(GetOrigin(formula).End),
-                        message: AppResources.FormulaInterpreter_DoubleValue);
+                        message: AppResourcesHelper.Get("FormulaInterpreter_DoubleValue"));
                 }
                 return null;
             }
@@ -252,7 +252,7 @@ namespace Catrobat.IDE.Core.Formulas
                 {
                     if (containsDecimalSeparator)
                     {
-                        SetParsingError(numberToken, AppResources.FormulaInterpreter_Number_DoubleDecimalSeparator);
+                        SetParsingError(numberToken, AppResourcesHelper.Get("FormulaInterpreter_Number_DoubleDecimalSeparator"));
                         yield break;
                     }
                     numberTokens.Add(numberToken);
@@ -271,7 +271,7 @@ namespace Catrobat.IDE.Core.Formulas
                 {
                     if (containsDecimalSeparator)
                     {
-                        SetParsingError(numberTokens[0], AppResources.FormulaInterpreter_Number_SingleDecimalSeparator);
+                        SetParsingError(numberTokens[0], AppResourcesHelper.Get("FormulaInterpreter_Number_SingleDecimalSeparator"));
                         yield break;
                     }
                     commonToken = (FormulaTree) numberTokens[0];
@@ -282,7 +282,7 @@ namespace Catrobat.IDE.Core.Formulas
                     double value;
                     if (!double.TryParse(sbValue.ToString(), NumberStyles.Number, CultureInfo.InvariantCulture, out value))
                     {
-                        SetParsingError(GetOrigin(numberTokens), AppResources.FormulaInterpreter_Number_Overflow);
+                        SetParsingError(GetOrigin(numberTokens), AppResourcesHelper.Get("FormulaInterpreter_Number_Overflow"));
                         yield break;
                     }
                     commonToken = FormulaTreeFactory.CreateNumberNode(value);
@@ -428,11 +428,11 @@ namespace Catrobat.IDE.Core.Formulas
                         {
                             if (previousToken is IFormulaFunction)
                             {
-                                SetParsingError(Range.Empty(GetOrigin(parenthesisToken).Start), AppResources.FormulaInterpreter_Function_Empty);
+                                SetParsingError(Range.Empty(GetOrigin(parenthesisToken).Start), AppResourcesHelper.Get("FormulaInterpreter_Function_Empty"));
                             }
                             else
                             {
-                                SetParsingError(parenthesisToken, AppResources.FormulaInterpreter_Brackets_UnmatchedClosingParenthesis);
+                                SetParsingError(parenthesisToken, AppResourcesHelper.Get("FormulaInterpreter_Brackets_UnmatchedClosingParenthesis"));
                             }
                             yield break;
                         }
@@ -461,7 +461,7 @@ namespace Catrobat.IDE.Core.Formulas
                     {
                         SetParsingError(
                             source: Range.Empty(GetOrigin(parenthesesTokens.Peek().Last()).End),
-                            message: AppResources.FormulaInterpreter_Brackets_UnmatchedOpeningParenthesis);
+                            message: AppResourcesHelper.Get("FormulaInterpreter_Brackets_UnmatchedOpeningParenthesis"));
                         yield break;
                     }
                     continue;
@@ -586,14 +586,14 @@ namespace Catrobat.IDE.Core.Formulas
                 {
                     SetParsingError(
                         source: Range.Empty(GetOrigin(parenthesesTokens.First()).End),
-                        message: AppResources.FormulaInterpreter_Brackets_EmptyArgument);
+                        message: AppResourcesHelper.Get("FormulaInterpreter_Brackets_EmptyArgument"));
                     return;
                 }
                 if (parameters.Count < parametersCount)
                 {
                     SetParsingError(
                         source: Range.Empty(GetOrigin(parenthesesTokens.Last()).Start),
-                        message: AppResources.FormulaInterpreter_Brackets_TooFewArguments);
+                        message: AppResourcesHelper.Get("FormulaInterpreter_Brackets_TooFewArguments"));
                     return;
                 }
                 var parametersRange = GetOrigin(parameters);
@@ -605,13 +605,13 @@ namespace Catrobat.IDE.Core.Formulas
                     {
                         SetParsingError(
                             source: Range.FromLength(parametersRange.End, GetOrigin(children).Length - parametersRange.Length),
-                            message: AppResources.FormulaInterpreter_Brackets_TooManyArguments);
+                            message: AppResourcesHelper.Get("FormulaInterpreter_Brackets_TooManyArguments"));
                     }
                     else
                     {
                         SetParsingError(
                             source: Range.Empty(parametersRange.End),
-                            message: AppResources.FormulaInterpreter_Brackets_ArgumentDoubleValue);
+                            message: AppResourcesHelper.Get("FormulaInterpreter_Brackets_ArgumentDoubleValue"));
                     }
                     return;
                 }
@@ -646,7 +646,7 @@ namespace Catrobat.IDE.Core.Formulas
                 {
                     SetParsingError(
                         source: Range.Empty(GetOrigin(parenthesesTokens.Last()).Start),
-                        message: AppResources.FormulaInterpreter_Brackets_EmptyParentheses);
+                        message: AppResourcesHelper.Get("FormulaInterpreter_Brackets_EmptyParentheses"));
                     return;
                 }
                 var childRange = GetOrigin(child);
@@ -654,7 +654,7 @@ namespace Catrobat.IDE.Core.Formulas
                 {
                     SetParsingError(
                         source: Range.Empty(childRange.End),
-                        message: AppResources.FormulaInterpreter_DoubleValue);
+                        message: AppResourcesHelper.Get("FormulaInterpreter_DoubleValue"));
                     return;
                 }
 
@@ -703,7 +703,7 @@ namespace Catrobat.IDE.Core.Formulas
                     {
                         SetParsingError(
                             source: Range.Empty(GetOrigin(token).Start),
-                            message: AppResources.FormulaInterpreter_Brackets_EmptyArgument);
+                            message: AppResourcesHelper.Get("FormulaInterpreter_Brackets_EmptyArgument"));
                         yield break;
                     }
                     expectSeparator = false;
@@ -717,7 +717,7 @@ namespace Catrobat.IDE.Core.Formulas
                     {
                         SetParsingError(
                             source: Range.Empty(GetOrigin(token).Start), 
-                            message: AppResources.FormulaInterpreter_Brackets_ArgumentDoubleValue);
+                            message: AppResourcesHelper.Get("FormulaInterpreter_Brackets_ArgumentDoubleValue"));
                         yield break;
                     }
                     yield return token;
@@ -730,7 +730,7 @@ namespace Catrobat.IDE.Core.Formulas
                 {
                     SetParsingError(
                         source: Range.Empty(GetOrigin(previousToken).End), 
-                        message: AppResources.FormulaInterpreter_Brackets_EmptyArgument);
+                        message: AppResourcesHelper.Get("FormulaInterpreter_Brackets_EmptyArgument"));
                     yield break;
                 }
             }
@@ -745,7 +745,7 @@ namespace Catrobat.IDE.Core.Formulas
             {
                 if (token is FormulaTokenParameterSeparator)
                 {
-                    SetParsingError(token, AppResources.FormulaInterpreter_Brackets_NonArgumentParameterSeparator);
+                    SetParsingError(token, AppResourcesHelper.Get("FormulaInterpreter_Brackets_NonArgumentParameterSeparator"));
                     yield break;
                 }
                 yield return token;
@@ -774,7 +774,7 @@ namespace Catrobat.IDE.Core.Formulas
                     {
                         SetParsingError(
                             source: Range.Empty(GetOrigin(previousToken).End), 
-                            message: AppResources.FormulaInterpreter_Function_Empty);
+                            message: AppResourcesHelper.Get("FormulaInterpreter_Function_Empty"));
                         yield break;
                     }
 
@@ -956,7 +956,7 @@ namespace Catrobat.IDE.Core.Formulas
                     {
                         SetParsingError(
                             source: Range.Empty(GetOrigin(token2).Start),
-                            message: AppResources.FormulaInterpreter_Operator_LeftEmptyInfixOperator);
+                            message: AppResourcesHelper.Get("FormulaInterpreter_Operator_LeftEmptyInfixOperator"));
                         yield break;
                     }
                     if (nextToken == null || nextToken is FormulaTokenParameterSeparator || nextToken is FormulaNodeInfixOperator)
@@ -964,8 +964,8 @@ namespace Catrobat.IDE.Core.Formulas
                         SetParsingError(
                             source: Range.Empty(GetOrigin(token2).End),
                             message: operatorToken is FormulaNodePrefixOperator
-                                ? AppResources.FormulaInterpreter_Operator_EmptyPrefixOperator
-                                : AppResources.FormulaInterpreter_Operator_RightEmptyInfixOperator);
+                                ? AppResourcesHelper.Get("FormulaInterpreter_Operator_EmptyPrefixOperator")
+                                : AppResourcesHelper.Get("FormulaInterpreter_Operator_RightEmptyInfixOperator"));
                         yield break;
                     }
 

@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Sensor_AccelerationX;
+            return AppResourcesHelper.Get("Formula_Sensor_AccelerationX");
         }
     }
 
@@ -51,7 +51,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Sensor_AccelerationY;
+            return AppResourcesHelper.Get("Formula_Sensor_AccelerationY");
         }
     }
 
@@ -69,7 +69,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Sensor_AccelerationZ;
+            return AppResourcesHelper.Get("Formula_Sensor_AccelerationZ");
         }
     }
     
@@ -87,7 +87,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Sensor_Compass;
+            return AppResourcesHelper.Get("Formula_Sensor_Compass");
         }
     }
 
@@ -105,7 +105,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Sensor_InclinationX;
+            return AppResourcesHelper.Get("Formula_Sensor_InclinationX");
         }
     }
 
@@ -123,7 +123,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Sensor_InclinationY;
+            return AppResourcesHelper.Get("Formula_Sensor_InclinationY");
         }
     }
 
@@ -141,7 +141,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.Tree
 
         public override string Serialize()
         {
-            return AppResources.Formula_Sensor_Loudness;
+            return AppResourcesHelper.Get("Formula_Sensor_Loudness");
         }
     }
 

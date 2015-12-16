@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
     {
         #region Private Members
 
-        private string _soundName = AppResources.Editor_NameOfSound;
+        private string _soundName = AppResourcesHelper.Get("Editor_NameOfSound");
         private Program _currentProgram;
         private Sprite _receivedSelectedSprite;
         private Stream _soundStream;

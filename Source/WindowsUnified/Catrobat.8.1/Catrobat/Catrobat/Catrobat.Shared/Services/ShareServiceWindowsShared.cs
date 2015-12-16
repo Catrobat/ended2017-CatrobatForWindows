@@ -29,7 +29,7 @@ namespace Catrobat.IDE.WindowsShared.Services
             DataRequestedEventArgs e)
         {
             var request = e.Request;
-            request.Data.Properties.Title = AppResources.Export_FileTitle;
+            request.Data.Properties.Title = AppResourcesHelper.Get("Export_FileTitle");
             request.Data.Properties.Description = ApplicationResources.CATROBAT_URL;
             var deferral = request.GetDeferral();
 

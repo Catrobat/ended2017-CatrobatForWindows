@@ -157,7 +157,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 
             _playButton = new AppBarButton
             {
-                Label = AppResources.Editor_ButtonPlayProgram,
+                Label = AppResourcesHelper.Get("Editor_ButtonPlayProgram"),
                 Icon = new SymbolIcon(Symbol.Play)
             };
 
@@ -169,13 +169,13 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 
             _selectButton = new AppBarButton
             {
-                Label = AppResources.Editor_ButtonSelect,
+                Label = AppResourcesHelper.Get("Editor_ButtonSelect"),
                 Icon = new SymbolIcon(Symbol.SelectAll)
             };
 
             _reorderButton = new AppBarButton
             {
-                Label = AppResources.Editor_ButtonStartReordering,
+                Label = AppResourcesHelper.Get("Editor_ButtonStartReordering"),
                 //Icon = new SymbolIcon(Symbol.Bullets)
                 //Icon = new SymbolIcon(Symbol.ShowResults)
                 Icon = new SymbolIcon(Symbol.Sort)
@@ -189,7 +189,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 
             _finishedReorderingButton = new AppBarButton
             {
-                Label = AppResources.Editor_ButtonFinishedReordering,
+                Label = AppResourcesHelper.Get("Editor_ButtonFinishedReordering"),
                 Icon = new SymbolIcon(Symbol.Accept)
             };
 
@@ -198,7 +198,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 
             _deleteButton = new AppBarButton
             {
-                Label = AppResources.Editor_ButtonDelete,
+                Label = AppResourcesHelper.Get("Editor_ButtonDelete"),
                 Icon = new SymbolIcon(Symbol.Delete)
             };
             //_deleteButton.Command = new RelayCommand(() =>
@@ -211,7 +211,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 
             _copyButton = new AppBarButton
             {
-                Label = AppResources.Editor_ButtonCopy,
+                Label = AppResourcesHelper.Get("Editor_ButtonCopy"),
                 Icon = new SymbolIcon(Symbol.Copy)
             };
             //_copyButton.Command = new RelayCommand(() =>
@@ -224,7 +224,7 @@ namespace Catrobat.IDE.WindowsPhone.Controls
 
             _cancelSelectionButton = new AppBarButton
             {
-                Label = AppResources.Editor_ButtonClearSelection,
+                Label = AppResourcesHelper.Get("Editor_ButtonClearSelection"),
                 Icon = new SymbolIcon(Symbol.ClearSelection)
             };
 
@@ -301,19 +301,19 @@ namespace Catrobat.IDE.WindowsPhone.Controls
             switch (targetType)
             {
                 case AppBarTargetType.Object:
-                    text = AppResources.Editor_ButtonAddObject;
+                    text = AppResourcesHelper.Get("Editor_ButtonAddObject");
                     break;
 
                 case AppBarTargetType.Action:
-                    text = AppResources.Editor_ButtonAddScript;
+                    text = AppResourcesHelper.Get("Editor_ButtonAddScript");
                     break;
 
                 case AppBarTargetType.Look:
-                    text = AppResources.Editor_ButtonAddLook;
+                    text = AppResourcesHelper.Get("Editor_ButtonAddLook");
                     break;
 
                 case AppBarTargetType.Sound:
-                    text = AppResources.Editor_ButtonAddSound;
+                    text = AppResourcesHelper.Get("Editor_ButtonAddSound");
                     break;
             }
 

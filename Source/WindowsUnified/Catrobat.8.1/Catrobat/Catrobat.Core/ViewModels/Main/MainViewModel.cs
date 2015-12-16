@@ -125,7 +125,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             get
             {
-                var name = String.Format(AppResources.Main_ApplicationNameAndVersion,
+                var name = String.Format(AppResourcesHelper.Get("Main_ApplicationNameAndVersion"),
                     ServiceLocator.SystemInformationService.CurrentApplicationVersion);
                 return name;
             }
@@ -197,8 +197,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             _deleteProgramName = programName;
 
             ServiceLocator.NotifictionService.ShowMessageBox(
-                AppResources.Main_MainDeleteProgramDialogTitle,
-                String.Format(AppResources.Main_MainDeleteProgramDialogMessage, programName),
+                AppResourcesHelper.Get("Main_MainDeleteProgramDialogTitle"),
+                String.Format(AppResourcesHelper.Get("Main_MainDeleteProgramDialogMessage"), programName),
                 DeleteProgramMessageCallback, MessageBoxOptions.OkCancel);
         }
 
@@ -206,8 +206,8 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         {
             _copyProgramName = programName;
 
-            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_MainCopyProgramDialogTitle,
-                String.Format(AppResources.Main_MainCopyProgramDialogMessage, programName),
+            ServiceLocator.NotifictionService.ShowMessageBox(AppResourcesHelper.Get("Main_MainCopyProgramDialogTitle"),
+                String.Format(AppResourcesHelper.Get("Main_MainCopyProgramDialogMessage"), programName),
                 CopyProgramMessageCallback, MessageBoxOptions.OkCancel);
         }
 
@@ -257,7 +257,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 {
                     _lastImportedProgram = _lastImportedProgram.Substring(0, length) + "...";
                 }
-                notificationString = String.Format(AppResources.Main_DownloadQueueMessage, _lastImportedProgram);
+                notificationString = String.Format(AppResourcesHelper.Get("Main_DownloadQueueMessage"), _lastImportedProgram);
 
                 ServiceLocator.NotifictionService.ShowToastNotification("",
                     notificationString, ToastDisplayDuration.Short, ToastTag.Default);
@@ -272,7 +272,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
                 {
                     _lastUploadedProgram = _lastUploadedProgram.Substring(0, length) + "...";
                 }
-                notificationString = String.Format(AppResources.Main_UploadQueueMessage, _lastUploadedProgram);
+                notificationString = String.Format(AppResourcesHelper.Get("Main_UploadQueueMessage"), _lastUploadedProgram);
                 ServiceLocator.NotifictionService.ShowToastNotification("",
                     notificationString, ToastDisplayDuration.Short, ToastTag.Default);
                 _showUploadMessage = false;
