@@ -1,139 +1,139 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.UI.Core;
+using Windows.UI.Popups;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using Catrobat_Player.NativeComponent;
+using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModels.Editor.Looks;
+using Catrobat.IDE.Core.ViewModels.Main;
+using Catrobat.IDE.Core.ViewModels.Service;
+using Catrobat.IDE.WindowsPhone;
+using Catrobat.IDE.WindowsPhone.Views.Main;
+using Catrobat.IDE.WindowsShared.Common;
+using GalaSoft.MvvmLight.Threading;
 
-// The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
-
-namespace Catrobat
+namespace Catrobat.IDE.WindowsShared
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
-    public sealed partial class App : Application
+    sealed partial class App : Application
     {
-#if WINDOWS_PHONE_APP
-        private TransitionCollection transitions;
-#endif
-
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += this.OnSuspending;
-            NativeWrapper.SetProject(null);
+            this.Suspending += OnSuspending;
+            this.UnhandledException += OnUnhandledException;
         }
 
-        /// <summary>
-        /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used when the application is launched to open a specific file, to display
-        /// search results, and so forth.
-        /// </summary>
-        /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
+            ServiceLocator.TraceService.Add(TraceType.Info, "Application launched");
+
+            await ShowSplashScreen(e);
+        }
+
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
+        {
+            ServiceLocator.TraceService.Add(TraceType.Info, "Application suspending");
+
+            var deferral = e.SuspendingOperation.GetDeferral();
+            var mainViewModel = ServiceLocator.GetInstance<MainViewModel>();
+            await Core.App.SaveContext(mainViewModel.CurrentProgram);
+            await SuspensionManager.SaveAsync();
+            deferral.Complete();
+        }
+
+        private async Task Activated(IActivatedEventArgs e)
+        {
+            ServiceLocator.TraceService.Add(TraceType.Info, "Application Activated",
+                "PreviousState = " + e.PreviousExecutionState);
+
+            switch (e.PreviousExecutionState)
             {
-                this.DebugSettings.EnableFrameRateCounter = true;
+                case ApplicationExecutionState.NotRunning:
+                    await ShowSplashScreen(e);
+                    break;
+                case ApplicationExecutionState.Running:
+                    await SkipSplashScreen(e);
+                    break;
+                case ApplicationExecutionState.Suspended:
+                    await SkipSplashScreen(e);
+                    break;
+                case ApplicationExecutionState.Terminated:
+                    await ShowSplashScreen(e);
+                    break;
+                case ApplicationExecutionState.ClosedByUser:
+                    await ShowSplashScreen(e);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-#endif
+        }
 
-            Frame rootFrame = Window.Current.Content as Frame;
 
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active
-            if (rootFrame == null)
+        private static async Task ShowSplashScreen(IActivatedEventArgs e)
+        {
+            StatusBar statusBar = StatusBar.GetForCurrentView();
+            await statusBar.HideAsync();
+
+            var file = await StorageFile.GetFileFromApplicationUriAsync(
+                new Uri("ms-appx:///Assets/SplashScreen.png", UriKind.Absolute));
+            var randomAccessStream = await file.OpenReadAsync();
+
+            var splashImage = new BitmapImage()
             {
-                // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
+                CreateOptions = BitmapCreateOptions.None
+            };
+            await splashImage.SetSourceAsync(randomAccessStream);
 
-                // TODO: change this value to a cache size that is appropriate for your application
-                rootFrame.CacheSize = 1;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    // TODO: Load state from previously suspended application
-                }
+            var extendedSplash = new ExtendedSplash(e.SplashScreen,
+                e, splashImage);
+            Window.Current.Content = extendedSplash;
 
-                // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
-            }
-
-            if (rootFrame.Content == null)
-            {
-#if WINDOWS_PHONE_APP
-                // Removes the turnstile navigation for startup.
-                if (rootFrame.ContentTransitions != null)
-                {
-                    this.transitions = new TransitionCollection();
-                    foreach (var c in rootFrame.ContentTransitions)
-                    {
-                        this.transitions.Add(c);
-                    }
-                }
-
-                rootFrame.ContentTransitions = null;
-                rootFrame.Navigated += this.RootFrame_FirstNavigated;
-#endif
-
-                // When the navigation stack isn't restored navigate to the first page,
-                // configuring the new page by passing required information as a navigation
-                // parameter
-                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
-                {
-                    throw new Exception("Failed to create initial page");
-                }
-            }
-
-            // Ensure the current window is active
             Window.Current.Activate();
         }
 
-#if WINDOWS_PHONE_APP
-        /// <summary>
-        /// Restores the content transitions after the app has launched.
-        /// </summary>
-        /// <param name="sender">The object where the handler is attached.</param>
-        /// <param name="e">Details about the navigation event.</param>
-        private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
+
+        private static async Task SkipSplashScreen(IActivatedEventArgs e)
         {
-            var rootFrame = sender as Frame;
-            rootFrame.ContentTransitions = this.transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
-            rootFrame.Navigated -= this.RootFrame_FirstNavigated;
+            StatusBar statusBar = StatusBar.GetForCurrentView();
+            await statusBar.HideAsync();
+
+            await ExtendedSplash.InitializationFinished(e);
+            if (e.Kind == ActivationKind.Protocol)
+            {
+                ServiceLocator.NavigationService.NavigateTo<UploadProgramNewPasswordViewModel>();
+            }
         }
-#endif
 
-        /// <summary>
-        /// Invoked when application execution is being suspended.  Application state is saved
-        /// without knowing whether the application will be terminated or resumed with the contents
-        /// of memory still intact.
-        /// </summary>
-        /// <param name="sender">The source of the suspend request.</param>
-        /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        protected override async void OnActivated(IActivatedEventArgs e)
         {
-            var deferral = e.SuspendingOperation.GetDeferral();
+            await Activated(e);
+        }
 
-            // TODO: Save application state and stop any background activity
-            deferral.Complete();
+        protected override async void OnFileActivated(FileActivatedEventArgs e)
+        {
+            await Activated(e);
+        }
+
+        private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            string stackTrace = null;
+            if (e.Exception != null)
+                stackTrace = e.Exception.StackTrace;
+
+            ServiceLocator.TraceService.Add(TraceType.Error, "Application crashed",
+                e.Message, stackTrace);
+            ServiceLocator.TraceService.SaveLocal();
         }
     }
 }
