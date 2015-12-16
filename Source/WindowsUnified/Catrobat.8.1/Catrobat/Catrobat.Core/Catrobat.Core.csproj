@@ -492,22 +492,22 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="Resources\ApplicationResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+    <EmbeddedResource Include="Resources\ApplicationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationResources.Designer.cs</LastGenOutput>
-    </PRIResource>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="Resources\Localization\AppResources.de.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+    <EmbeddedResource Include="Resources\Localization\AppResources.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.de.Designer.cs</LastGenOutput>
-    </PRIResource>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="Resources\Localization\AppResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+    <EmbeddedResource Include="Resources\Localization\AppResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
-    </PRIResource>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

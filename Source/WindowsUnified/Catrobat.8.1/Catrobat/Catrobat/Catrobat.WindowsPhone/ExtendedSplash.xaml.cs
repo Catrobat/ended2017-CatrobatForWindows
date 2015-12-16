@@ -19,8 +19,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using GalaSoft.MvvmLight.Messaging;
-using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.WindowsPhone
 {

@@ -5,6 +5,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.WindowsPhone.Views.Main
 {

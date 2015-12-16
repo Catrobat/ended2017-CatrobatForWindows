@@ -1,9 +1,9 @@
 ﻿using Catrobat.IDE.Core.ViewModels.Editor.Formula;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Formulas.Editor;
 using System;
 using System.Globalization;
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core.UI.Converters
 {

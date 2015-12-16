@@ -2,14 +2,12 @@
 using System.Globalization;
 using System.Windows.Input;
 using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Resources;
-using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Messaging;
-
+using Catrobat.Core.Resources;
 
 namespace Catrobat.IDE.Core.ViewModels.Service
 {

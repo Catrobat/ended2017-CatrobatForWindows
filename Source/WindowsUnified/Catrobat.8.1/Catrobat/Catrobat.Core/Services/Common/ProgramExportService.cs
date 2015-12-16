@@ -5,7 +5,7 @@ using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Xml.VersionConverter;
 using System.Threading;
 using Catrobat.IDE.Core.Utilities.JSON;
-using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core.Services.Common
 {

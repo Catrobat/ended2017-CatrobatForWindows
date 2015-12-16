@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Globalization;
-using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Common;
-using Catrobat.IDE.Core.Resources.Localization;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core.ViewModels.Service
 {

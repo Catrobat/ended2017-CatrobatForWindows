@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.ViewModels.Editor.Sprites;
-using Catrobat.IDE.WindowsPhone.Controls.ActionsControls;
-using Catrobat.IDE.WindowsShared.Common;
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.WindowsPhone.Controls
 {

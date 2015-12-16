@@ -1,10 +1,8 @@
-﻿using System;
-using System.Windows.Input;
-using System.Collections.Generic;
+﻿using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Catrobat.IDE.Core.Services;
-
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core.ViewModels.Main
 {
@@ -84,13 +82,13 @@ namespace Catrobat.IDE.Core.ViewModels.Main
             if (_axesVisible)
             {
                 ServiceLocator.PlayerLauncherService.AxesAction(false, 
-                    Resources.Localization.AppResources.Player_AppBarButton_AxesOn);
+                    AppResources.Player_AppBarButton_AxesOn);
                 _axesVisible = false;
             }
             else
             {
                 ServiceLocator.PlayerLauncherService.AxesAction(true,
-                      Resources.Localization.AppResources.Player_AppBarButton_AxesOff);
+                      AppResources.Player_AppBarButton_AxesOff);
                 _axesVisible = true;
             }
         }

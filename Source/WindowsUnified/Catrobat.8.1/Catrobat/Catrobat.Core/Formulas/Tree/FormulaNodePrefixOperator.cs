@@ -1,6 +1,6 @@
-﻿using Catrobat.IDE.Core.Formulas;
+﻿using Catrobat.Core.Resources.Localization;
+using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.Tokens;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using System.Collections.Generic;
 using System.Linq;

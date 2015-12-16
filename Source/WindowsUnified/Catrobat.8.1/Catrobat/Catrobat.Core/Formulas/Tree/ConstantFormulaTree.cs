@@ -4,8 +4,8 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using Catrobat.IDE.Core.Models.Formulas.Tokens;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
+using Catrobat.Core.Resources.Localization;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.Models.Formulas.Tree

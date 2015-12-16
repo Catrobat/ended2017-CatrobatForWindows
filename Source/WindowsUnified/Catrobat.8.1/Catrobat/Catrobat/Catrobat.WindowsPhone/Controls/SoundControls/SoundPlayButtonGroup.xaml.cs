@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Storage;
@@ -11,7 +10,7 @@ using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.WindowsPhone.Controls.SoundControls
 {

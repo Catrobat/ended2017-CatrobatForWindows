@@ -2,7 +2,6 @@
 using System.Linq;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;
@@ -10,6 +9,7 @@ using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Sprites
 {

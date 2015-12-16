@@ -1,8 +1,8 @@
-﻿using Catrobat.IDE.Core.Models;
+﻿using Catrobat.Core.Resources.Localization;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Bricks;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
 using Catrobat.IDE.Core.Models.Scripts;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
 using System.Collections.Generic;
 using System.IO;

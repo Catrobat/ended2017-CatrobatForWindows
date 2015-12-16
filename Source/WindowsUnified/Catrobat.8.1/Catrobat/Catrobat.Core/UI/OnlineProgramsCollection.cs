@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Resources;
+using Catrobat.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;

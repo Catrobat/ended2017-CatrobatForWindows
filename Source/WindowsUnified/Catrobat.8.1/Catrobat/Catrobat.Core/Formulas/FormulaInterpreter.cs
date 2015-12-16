@@ -1,11 +1,10 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.Core.Resources.Localization;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models.Formulas.Tokens;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
-using Catrobat.IDE.Core.Resources.Localization;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;

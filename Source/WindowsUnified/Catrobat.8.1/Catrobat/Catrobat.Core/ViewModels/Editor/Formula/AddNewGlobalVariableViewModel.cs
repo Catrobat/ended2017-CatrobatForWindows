@@ -1,5 +1,5 @@
-﻿using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Resources.Localization;
+﻿using Catrobat.Core.Resources.Localization;
+using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;

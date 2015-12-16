@@ -3,7 +3,7 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
-using Catrobat.IDE.Core.Resources;
+using Catrobat.Core.Resources.Localization;
 using WinRTXamlToolkit.Controls;
 
 namespace Catrobat.IDE.WindowsShared.Converters.NativeConverters

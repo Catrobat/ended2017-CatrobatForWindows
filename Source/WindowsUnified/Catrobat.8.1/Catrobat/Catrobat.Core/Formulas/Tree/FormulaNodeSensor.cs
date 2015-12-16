@@ -1,5 +1,5 @@
-﻿using Catrobat.IDE.Core.Models.Formulas.Tokens;
-using Catrobat.IDE.Core.Resources.Localization;
+﻿using Catrobat.Core.Resources.Localization;
+using Catrobat.IDE.Core.Models.Formulas.Tokens;
 using Catrobat.IDE.Core.Services;
 
 // ReSharper disable once CheckNamespace

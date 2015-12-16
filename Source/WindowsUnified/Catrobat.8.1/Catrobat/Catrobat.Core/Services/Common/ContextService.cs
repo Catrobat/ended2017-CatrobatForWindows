@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Xml;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using System.Text.RegularExpressions;
 using Catrobat.IDE.Core.XmlModelConvertion.Converters;
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core.Services.Common
 {

@@ -1,26 +1,16 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Windows.Storage;
-using Windows.UI.Core;
-using Windows.UI.Popups;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
-using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.ViewModels.Editor.Looks;
 using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Core.ViewModels.Service;
 using Catrobat.IDE.WindowsPhone;
-using Catrobat.IDE.WindowsPhone.Views.Main;
 using Catrobat.IDE.WindowsShared.Common;
-using GalaSoft.MvvmLight.Threading;
 
 namespace Catrobat.IDE.WindowsShared
 {

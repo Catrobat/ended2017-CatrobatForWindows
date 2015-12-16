@@ -1,7 +1,5 @@
 using System;
 using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Resources;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModels;
@@ -10,6 +8,7 @@ using GalaSoft.MvvmLight.Messaging;
 using System.Globalization;
 using System.Threading.Tasks;
 using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core
 {

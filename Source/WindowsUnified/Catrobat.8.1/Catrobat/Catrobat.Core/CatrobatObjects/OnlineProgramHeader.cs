@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using Catrobat.IDE.Core.Resources;
+using Catrobat.Core.Resources;
 
 namespace Catrobat.IDE.Core.CatrobatObjects
 {

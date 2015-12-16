@@ -1,9 +1,9 @@
-﻿using Catrobat.IDE.Core.Formulas;
+﻿using Catrobat.Core.Resources.Localization;
+using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Formulas.Editor;
 using Catrobat.IDE.Core.Models;
 using Catrobat.IDE.Core.Models.Formulas.Tokens;
 using Catrobat.IDE.Core.Models.Formulas.Tree;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;

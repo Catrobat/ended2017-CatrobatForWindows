@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using Catrobat.IDE.Core.Utilities;
-using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.Resources;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
@@ -17,6 +15,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
+using Catrobat.Core.Resources;
 
 namespace Catrobat.IDE.WindowsShared.Services.Common
 {

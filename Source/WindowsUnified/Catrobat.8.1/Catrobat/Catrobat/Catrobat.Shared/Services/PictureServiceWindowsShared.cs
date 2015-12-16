@@ -10,13 +10,13 @@ using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModels;
 using Catrobat.IDE.Core.ViewModels.Editor.Looks;
 using GalaSoft.MvvmLight.Messaging;
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {

@@ -6,13 +6,13 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.Models;
-using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core.UI
 {
-  
 
-  public sealed class NullItemCollection : IList
+
+    public sealed class NullItemCollection : IList
   {
       private static readonly Look NullLook = new Look {Name = AppResources.Editor_NoLookSelected};
       private static readonly Sound NullSound = new Sound { Name = AppResources.Editor_NoSoundSelected };

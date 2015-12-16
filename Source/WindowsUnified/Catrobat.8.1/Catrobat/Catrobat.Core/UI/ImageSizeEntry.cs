@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using Catrobat.IDE.Core.Annotations;
-using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core.UI
 {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
+using Catrobat.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Core.ViewModels.Editor.Sounds
 {

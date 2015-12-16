@@ -1,20 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
-using Windows.ApplicationModel;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.Foundation;
 using Windows.Storage;
-using Windows.Storage.Streams;
-using Catrobat.IDE.Core;
-using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Common;
-using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Core.Resources;
+using Catrobat.Core.Resources.Localization;
+using Catrobat.Core.Resources;
 
 namespace Catrobat.IDE.WindowsShared.Services
 {
