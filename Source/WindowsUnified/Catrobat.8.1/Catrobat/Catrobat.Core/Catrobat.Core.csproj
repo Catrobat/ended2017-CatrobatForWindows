@@ -211,26 +211,6 @@
     <Compile Include="ProgramChecker.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\ApplicationResources.Designer.cs" />
-    <Compile Include="Resources\ApplicationResources1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ApplicationResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Localization\AppResources.de.Designer.cs" />
-    <Compile Include="Resources\Localization\AppResources.de1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AppResources.de.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Localization\AppResources.Designer.cs" />
-    <Compile Include="Resources\Localization\AppResources1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AppResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Localization\LocalizedStrings.cs" />
-    <Compile Include="Resources\SampleProjectLoader.cs" />
     <Compile Include="Services\Common\ContextService.cs" />
     <Compile Include="Services\Common\ProgramExportService.cs" />
     <Compile Include="Services\Common\ProgramGeneratorWhackAMole.cs" />
@@ -456,20 +436,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Fonts\LiveSymbol.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ApplicationResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ApplicationResources1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Localization\AppResources.de.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.de1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Localization\AppResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="XmlNew\VersionConverter\Versions\" />
