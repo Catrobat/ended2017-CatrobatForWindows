@@ -84,9 +84,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -110,6 +107,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Catrobat_Player.x86" Condition="'$(Platform)' == 'x86'">
+      <HintPath>..\..\Debug\Catrobat.Player.WindowsPhone\Catrobat_Player.winmd</HintPath>
+    </Reference>
+    <!--     <Reference Include="Catrobat_Player.ARM" Condition="'$(Platform)' == 'ARM'">
+      <HintPath>..\..\..\Catrobat.Player\ARM\Debug\Catrobat.Player.WindowsPhone\Catrobat_Player.winmd</HintPath>
+    </Reference> -->
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Catrobat.Xml\Catrobat.Xml.csproj">
+      <Project>{5a97f09e-beb2-48ee-bec2-bedea5a4145d}</Project>
+      <Name>Catrobat.Xml</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
