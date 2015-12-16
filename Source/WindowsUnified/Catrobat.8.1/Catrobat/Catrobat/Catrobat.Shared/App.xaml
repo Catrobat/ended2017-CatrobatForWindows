@@ -19,7 +19,7 @@
         <ResourceDictionary Source="ms-appx:///Controls/ItemControls/Templates/BrickTemplates.xaml">
         </ResourceDictionary>
         <ResourceDictionary Source="ms-appx:///Controls/ListsViewControls/Templates/CatrobatListViewTemplate.xaml">
-          <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="using:Catrobat.ViewModel" />
+            <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="using:Catrobat.IDE.Core.ViewModels" />
         </ResourceDictionary>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
