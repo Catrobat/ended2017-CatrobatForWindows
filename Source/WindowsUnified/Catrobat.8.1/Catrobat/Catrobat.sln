@@ -24,6 +24,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Catrobat.Player.Shared", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Xml", "Catrobat.Xml\Catrobat.Xml.csproj", "{5A97F09E-BEB2-48EE-BEC2-BEDEA5A4145D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Core", "Catrobat.Core\Catrobat.Core.csproj", "{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{5b843f1b-d685-479a-87e4-008e794c91d9}*SharedItemsImports = 4
@@ -133,6 +135,22 @@ Global
 		{5A97F09E-BEB2-48EE-BEC2-BEDEA5A4145D}.Release|x64.Build.0 = Release|Any CPU
 		{5A97F09E-BEB2-48EE-BEC2-BEDEA5A4145D}.Release|x86.ActiveCfg = Release|x86
 		{5A97F09E-BEB2-48EE-BEC2-BEDEA5A4145D}.Release|x86.Build.0 = Release|x86
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Debug|ARM.ActiveCfg = Debug|ARM
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Debug|ARM.Build.0 = Debug|ARM
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Debug|x64.Build.0 = Debug|Any CPU
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Debug|x86.ActiveCfg = Debug|x86
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Debug|x86.Build.0 = Debug|x86
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Release|ARM.ActiveCfg = Release|ARM
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Release|ARM.Build.0 = Release|ARM
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Release|x64.ActiveCfg = Release|Any CPU
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Release|x64.Build.0 = Release|Any CPU
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Release|x86.ActiveCfg = Release|x86
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -146,9 +164,10 @@ Global
 		{5B843F1B-D685-479A-87E4-008E794C91D9} = {F09D2740-B2B4-4EE7-9649-CE02D67ED61C}
 		{4B55F37F-21D4-40EE-8C6B-7FE0F32F61BE} = {F09D2740-B2B4-4EE7-9649-CE02D67ED61C}
 		{5A97F09E-BEB2-48EE-BEC2-BEDEA5A4145D} = {F4DC1FC7-F8C6-4531-A637-B99E4D3B6D9D}
+		{E2E83DD3-7C09-4AAE-B8F6-357C0DA2317E} = {F4DC1FC7-F8C6-4531-A637-B99E4D3B6D9D}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
+		SccNumberOfProjects = 10
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -184,5 +203,9 @@ Global
 		SccProjectTopLevelParentUniqueName8 = Catrobat.sln
 		SccProjectName8 = Catrobat.Xml
 		SccLocalPath8 = Catrobat.Xml
+		SccProjectUniqueName9 = Catrobat.Core\\Catrobat.Core.csproj
+		SccProjectTopLevelParentUniqueName9 = Catrobat.sln
+		SccProjectName9 = Catrobat.Core
+		SccLocalPath9 = Catrobat.Core
 	EndGlobalSection
 EndGlobal
