@@ -31,6 +31,7 @@ Global
 		Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{5b843f1b-d685-479a-87e4-008e794c91d9}*SharedItemsImports = 4
 		Catrobat\Catrobat.Shared\Catrobat.Shared.projitems*{ec31c574-6a2a-4056-bd46-4b58891acd8b}*SharedItemsImports = 13
 		Catrobat\Catrobat.Shared\Catrobat.Shared.projitems*{720ab86f-0a3c-4d2a-a6ed-8f76c1d1a263}*SharedItemsImports = 4
+		Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{4b55f37f-21d4-40ee-8c6b-7fe0f32f61be}*SharedItemsImports = 9
 		Catrobat.Player\Catrobat.Player.Shared\Catrobat.Player.Shared.vcxitems*{54144ca7-b859-4f79-b682-dad92b4e3353}*SharedItemsImports = 4
 		Catrobat\Catrobat.Shared\Catrobat.Shared.projitems*{fbb3118e-1a31-47fa-bf90-bc92c3e1ba4a}*SharedItemsImports = 4
 	EndGlobalSection
