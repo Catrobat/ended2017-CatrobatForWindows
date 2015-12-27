@@ -189,7 +189,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             await pixelDataEraser.preparePaintingAreaCanvasForEraser();
             points = pixelDataEraser.GetWhitePixels();
             pixelData.SetPixel(points, "0_0_0_0");
-            PocketPaintApplication.GetInstance().EraserCanvas.Visibility = Visibility.Collapsed;
+            // PocketPaintApplication.GetInstance().EraserCanvas.Visibility = Visibility.Collapsed;
             PocketPaintApplication.GetInstance().EraserCanvas.Children.Clear();
             var image = await pixelData.BufferToImage();
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);

@@ -42,7 +42,6 @@ namespace Catrobat.Paint.WindowsPhone.View
         static bool isDoubleTapLoaded;
         static bool isFullscreen;
         static bool isPointerEventLoaded;
-        static bool isManipulationEventLoaded;
         static int zoomCounter;
         Point start_point = new Point();
         CoreApplicationView view;
@@ -56,7 +55,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             isDoubleTapLoaded = false;
             isFullscreen = false;
             isPointerEventLoaded = false;
-            isManipulationEventLoaded = false;
             zoomCounter = 0;
 
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
@@ -84,6 +82,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().InfoxBasicBoxControl = InfoBasicBoxControl;
             PocketPaintApplication.GetInstance().ProgressRing = progressRing;
             PocketPaintApplication.GetInstance().PaintingAreaView = this;
+            loadManipulationEraserCanvasEvents();
 
             Spinner.SpinnerGrid = SpinnerGrid;
             Spinner.SpinnerStoryboard = new Storyboard();
@@ -448,6 +447,13 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
+        private BitmapIcon bitmapIconFrom(string iconNameWithExtension)
+        {
+            BitmapIcon bitmapIcon = new BitmapIcon();
+            bitmapIcon.UriSource = new Uri("ms-resource:/Files/Assets/Icons/" + iconNameWithExtension, UriKind.Absolute);
+            return bitmapIcon;
+        }
+
 
         public void createAppBarAndSwitchAppBarContent(string type)
         {
@@ -458,20 +464,15 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             loadPointerEvents();
             unloadDoubleTapEvent();
-            unloadManipulationEvents();
+            unloadManipulationPaintingAreaCanvasEvents();
 
             if("barCursor" == type || "barStandard" == type)
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
                 AppBarButton app_btnColor = new AppBarButton();
 
-                BitmapIcon thickness_icon = new BitmapIcon();
-                thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
-                app_btnBrushThickness.Icon = thickness_icon;
-
-                BitmapIcon color_icon = new BitmapIcon();
-                color_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_color_palette.png", UriKind.Absolute);
-                app_btnColor.Icon = color_icon;
+                app_btnBrushThickness.Icon = bitmapIconFrom("icon_menu_strokes.png");
+                app_btnColor.Icon = bitmapIconFrom("icon_menu_color_palette.png");
 
                 app_btnBrushThickness.Label = "Pinselstärke";
                 app_btnColor.Label = "Farbe";
@@ -488,9 +489,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                     app_btnResetCursor.Name = "appButtonResetCursor";
                     app_btnResetCursor.Label = "Cursor-Startposition";
 
-                    BitmapIcon reset_icon = new BitmapIcon();
-                    reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
-                    app_btnResetCursor.Icon = reset_icon;
+                    app_btnResetCursor.Icon = bitmapIconFrom("icon_menu_cursor.png");
 
                     TransformGroup transformGroup = (TransformGroup)GridCursor.RenderTransform;
                     if (transformGroup.Value.OffsetX != 0.0 || transformGroup.Value.OffsetY != 0.0)
@@ -505,7 +504,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                     cmdBar.PrimaryCommands.Add(app_btnResetCursor);
                     loadDoubleTapEvent();
-                    loadManipulationEvents();
+                    loadManipulationPaintingAreaCanvasEvents();
                     unloadPointerEvents();
                 }
             }
@@ -515,13 +514,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnResetSelection = new AppBarButton();
                 app_btnResetSelection.Name = "appButtonResetCrop";
 
-                BitmapIcon cutPictureIcon = new BitmapIcon();
-                cutPictureIcon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_crop_cut.png", UriKind.Absolute);
-                app_btnCropImage.Icon = cutPictureIcon;
-
-                BitmapIcon reset_icon = new BitmapIcon();
-                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_crop_adjust.png", UriKind.Absolute);
-                app_btnResetSelection.Icon = reset_icon;
+                app_btnCropImage.Icon = bitmapIconFrom("icon_menu_crop_cut.png");
+                app_btnResetSelection.Icon = bitmapIconFrom("icon_menu_crop_adjust.png");
 
                 app_btnCropImage.Label = "schneiden";
                 app_btnResetSelection.Label = "Ausgangsposition";
@@ -542,17 +536,9 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 app_btnReset.Name = "appButtonReset";
 
-                BitmapIcon thickness_icon = new BitmapIcon();
-                thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
-                app_btnBrushThickness.Icon = thickness_icon;
-
-                BitmapIcon reset_icon = new BitmapIcon();
-                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
-                app_btnReset.Icon = reset_icon;
-
-                BitmapIcon importPicture_icon = new BitmapIcon();
-                importPicture_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
-                app_btnImportPicture.Icon = importPicture_icon;
+                app_btnBrushThickness.Icon = bitmapIconFrom("icon_menu_strokes.png");
+                app_btnReset.Icon = bitmapIconFrom("icon_menu_cursor.png");
+                app_btnImportPicture.Icon = bitmapIconFrom("icon_menu_cursor.png");
 
                 app_btnBrushThickness.Label = "Einstellungen";
                 app_btnImportPicture.Label = "Bild laden";
@@ -568,7 +554,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 cmdBar.PrimaryCommands.Add(app_btnImportPicture);
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
 
-                loadManipulationEvents();
+                loadManipulationPaintingAreaCanvasEvents();
                 unloadPointerEvents();
             }
             else if("barPipette" == type)
@@ -580,9 +566,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 AppBarButton app_btnColor = new AppBarButton();
 
-                BitmapIcon color_icon = new BitmapIcon();
-                color_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_color_palette.png", UriKind.Absolute);
-                app_btnColor.Icon = color_icon;
+                app_btnColor.Icon = bitmapIconFrom("icon_menu_color_palette.png");
 
                 app_btnColor.Label = "Farbe";
 
@@ -598,13 +582,8 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 app_btnReset.Name = "appButtonReset";
 
-                BitmapIcon thickness_icon = new BitmapIcon();
-                thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
-                app_btnBrushThickness.Icon = thickness_icon;
-
-                BitmapIcon reset_icon = new BitmapIcon();
-                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
-                app_btnReset.Icon = reset_icon;
+                app_btnBrushThickness.Icon = bitmapIconFrom("icon_menu_strokes.png");
+                app_btnReset.Icon = bitmapIconFrom("icon_menu_cursor.png");
 
                 app_btnBrushThickness.Label = "Einstellungen";
                 app_btnReset.Label = "Ausgangsposition";
@@ -616,22 +595,21 @@ namespace Catrobat.Paint.WindowsPhone.View
                 cmdBar.PrimaryCommands.Add(app_btnReset);
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
 
-                loadManipulationEvents();
+                loadManipulationPaintingAreaCanvasEvents();
                 unloadPointerEvents();
             }
             else if ("barEraser" == type)
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
 
-                BitmapIcon thickness_icon = new BitmapIcon();
-                thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
-                app_btnBrushThickness.Icon = thickness_icon;
+                app_btnBrushThickness.Icon = bitmapIconFrom("icon_menu_cursor.png");
 
                 app_btnBrushThickness.Label = "Pinselstärke";
 
                 app_btnBrushThickness.Click += btnThickness_Click;
 
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
+                unloadManipulationPaintingAreaCanvasEvents();
             }
             else if ("barMove" == type || "barZoom" == type)
             {
@@ -640,18 +618,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnReset = new AppBarButton();
 
                 app_btnReset.Name = "appButtonResetZoom";
-
-                BitmapIcon zoom_in_icon = new BitmapIcon();
-                zoom_in_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_zoom_in.png", UriKind.Absolute);
-                app_btnZoomIn.Icon = zoom_in_icon;
-
-                BitmapIcon zoom_out_icon = new BitmapIcon();
-                zoom_out_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_zoom_out.png", UriKind.Absolute);
-                app_btnZoomOut.Icon = zoom_out_icon;
-
-                BitmapIcon reset_icon = new BitmapIcon();
-                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
-                app_btnReset.Icon = reset_icon;
+                app_btnZoomIn.Icon = bitmapIconFrom("icon_zoom_in.png");
+                app_btnZoomOut.Icon = bitmapIconFrom("icon_zoom_out.png");
+                app_btnReset.Icon = bitmapIconFrom("icon_menu_cursor.png");
 
                 app_btnZoomIn.Label = "Vergrößern";
                 app_btnZoomOut.Label = "Verkleinern";
@@ -668,7 +637,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 cmdBar.PrimaryCommands.Add(app_btnReset);
 
                 unloadPointerEvents();
-                loadManipulationEvents();
+                loadManipulationPaintingAreaCanvasEvents();
             }
             else if ("barRotate" == type)
             {
@@ -678,17 +647,9 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 app_btnReset.Name = "appButtonResetRotate";
                 app_btnReset.IsEnabled = false;
-                BitmapIcon rotate_left_icon = new BitmapIcon();
-                rotate_left_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_rotate_left.png", UriKind.Absolute);
-                app_btnRotate_left.Icon = rotate_left_icon;
-
-                BitmapIcon rotate_right_icon = new BitmapIcon();
-                rotate_right_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_rotate_right.png", UriKind.Absolute);
-                app_btnRotate_right.Icon = rotate_right_icon;
-
-                BitmapIcon reset_icon = new BitmapIcon();
-                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
-                app_btnReset.Icon = reset_icon;
+                app_btnRotate_left.Icon = bitmapIconFrom("icon_menu_rotate_left.png");
+                app_btnRotate_right.Icon = bitmapIconFrom("icon_menu_rotate_right.png");
+                app_btnReset.Icon = bitmapIconFrom("icon_menu_cursor.png");
 
                 app_btnReset.Label = "Ausgangsposition";
                 app_btnRotate_left.Label = "Rechts drehen";
@@ -710,14 +671,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnReset = new AppBarButton();
 
                 app_btnReset.Name = "appButtonReset";
-
-                BitmapIcon thickness_icon = new BitmapIcon();
-                thickness_icon.UriSource = new Uri("ms-resource:/Files/Assets/ColorPicker/icon_menu_strokes.png", UriKind.Absolute);
-                app_btnBrushThickness.Icon = thickness_icon;
-
-                BitmapIcon reset_icon = new BitmapIcon();
-                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
-                app_btnReset.Icon = reset_icon;
+                app_btnBrushThickness.Icon = bitmapIconFrom("icon_menu_strokes.png");
+                app_btnReset.Icon = bitmapIconFrom("icon_menu_cursor.png");
 
                 app_btnBrushThickness.Label = "Einstellungen";
                 app_btnReset.Label = "Ausgangsposition";
@@ -729,7 +684,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 cmdBar.PrimaryCommands.Add(app_btnReset);
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
 
-                loadManipulationEvents();
+                loadManipulationPaintingAreaCanvasEvents();
                 unloadPointerEvents();
             }
             else if ("barFlip" == type)
@@ -739,18 +694,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                 AppBarButton app_btnReset = new AppBarButton();
 
                 app_btnReset.Name = "appButtonResetFlip";
-
-                BitmapIcon horizontal_icon = new BitmapIcon();
-                horizontal_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_flip_horizontal.png", UriKind.Absolute);
-                app_btnHorizontal.Icon = horizontal_icon;
-
-                BitmapIcon vertical_icon = new BitmapIcon();
-                vertical_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_flip_vertical.png", UriKind.Absolute);
-                app_btnVertical.Icon = vertical_icon;
-
-                BitmapIcon reset_icon = new BitmapIcon();
-                reset_icon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
-                app_btnReset.Icon = reset_icon;
+                app_btnHorizontal.Icon = bitmapIconFrom("icon_menu_flip_horizontal.png");
+                app_btnVertical.Icon = bitmapIconFrom("icon_menu_flip_vertical.png");
+                app_btnReset.Icon = bitmapIconFrom("icon_menu_cursor.png");
 
                 app_btnHorizontal.Label = "Horizontal";
                 app_btnReset.Label = "Ausgangsposition";
@@ -776,25 +722,16 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 app_btnResetSelection.Name = "appButtonResetStamp";
 
-                BitmapIcon stampCopyIcon = new BitmapIcon();
-                stampCopyIcon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_stamp_copy.png", UriKind.Absolute);
-                app_btnStampCopy.Icon = stampCopyIcon;
+                app_btnStampCopy.Icon = bitmapIconFrom("icon_menu_stamp_copy.png");
 
                 app_btnStampCopy.Name = "appBtnStampCopy";
                 app_btnStampPaste.Name = "appBtnStampPaste";
                 app_btnStampClear.Name = "appBtnStampReset";
 
-                BitmapIcon stampClearIcon = new BitmapIcon();
-                stampClearIcon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_stamp_clear.png", UriKind.Absolute);
-                app_btnStampClear.Icon = stampClearIcon;
 
-                BitmapIcon stampPasteIcon = new BitmapIcon();
-                stampPasteIcon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/icon_menu_stamp_paste.png", UriKind.Absolute);
-                app_btnStampPaste.Icon = stampPasteIcon;
-
-                BitmapIcon resetSelectionIcon = new BitmapIcon();
-                resetSelectionIcon.UriSource = new Uri("ms-resource:/Files/Assets/ToolMenu/icon_menu_cursor.png", UriKind.Absolute);
-                app_btnResetSelection.Icon = resetSelectionIcon;
+                app_btnStampClear.Icon = bitmapIconFrom("icon_menu_stamp_clear.png");
+                app_btnStampPaste.Icon = bitmapIconFrom("icon_menu_stamp_paste.png");
+                app_btnResetSelection.Icon = bitmapIconFrom("icon_menu_cursor.png");
 
                 app_btnStampClear.Click += app_btnStampClear_Click;
                 app_btnStampCopy.Click += app_btnStampCopy_Click;
@@ -829,9 +766,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnClearElementsInWorkingSpace.Name = "appBarButtonClearWorkingSpace";
             app_btnSave.Name = "appbarButtonSave";
 
-            BitmapIcon tools_icon = new BitmapIcon();
-            tools_icon.UriSource = new Uri("ms-resource:/Files/Assets/AppBar/menu_tools_.png", UriKind.Absolute);
-            app_btnTools.Icon = tools_icon;
+            app_btnTools.Icon = bitmapIconFrom("icon_menu_tools.png");
             app_btnTools.Label = "Werkzeug";
             app_btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
 
@@ -1451,27 +1386,52 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
         }
 
-        private void loadManipulationEvents()
+        private void loadManipulationPaintingAreaCanvasEvents()
         {
-            if (PocketPaintApplication.GetInstance() != null && !isManipulationEventLoaded)
+            if (PocketPaintApplication.GetInstance() != null)
             {
                 PaintingAreaManipulationListener currentAbl = PocketPaintApplication.GetInstance().PaintingAreaManipulationListener;
+                // PaintingAreaCanvas
                 PaintingAreaCanvas.ManipulationStarted += currentAbl.ManipulationStarted;
                 PaintingAreaCanvas.ManipulationDelta += currentAbl.ManipulationDelta;
                 PaintingAreaCanvas.ManipulationCompleted += currentAbl.ManipulationCompleted;
-                isManipulationEventLoaded = true;
             }
         }
 
-        private void unloadManipulationEvents()
+
+        private void loadManipulationEraserCanvasEvents()
         {
-            if (PocketPaintApplication.GetInstance() != null && isManipulationEventLoaded)
+            if (PocketPaintApplication.GetInstance() != null)
+            {
+                PaintingAreaManipulationListener currentAbl = PocketPaintApplication.GetInstance().PaintingAreaManipulationListener;
+                EraserCanvas.ManipulationStarted += currentAbl.ManipulationStarted;
+                EraserCanvas.ManipulationDelta += currentAbl.ManipulationDelta;
+                EraserCanvas.ManipulationCompleted += currentAbl.ManipulationCompleted;
+
+                EraserCanvas.PointerEntered += PaintingAreaCanvas_PointerEntered;
+                EraserCanvas.PointerMoved += PaintingAreaCanvas_PointerMoved;
+                EraserCanvas.PointerReleased += PaintingAreaCanvas_PointerReleased;
+            }
+        }
+
+        private void unloadManipulationPaintingAreaCanvasEvents()
+        {
+            if (PocketPaintApplication.GetInstance() != null)
             {
                 PaintingAreaManipulationListener currentAbl = PocketPaintApplication.GetInstance().PaintingAreaManipulationListener;
                 PaintingAreaCanvas.ManipulationStarted -= currentAbl.ManipulationStarted;
                 PaintingAreaCanvas.ManipulationDelta -= currentAbl.ManipulationDelta;
                 PaintingAreaCanvas.ManipulationCompleted -= currentAbl.ManipulationCompleted;
-                isManipulationEventLoaded = false;
+            }
+        }
+        private void unloadManipulationEraserCanvasEvents()
+        {
+            if (PocketPaintApplication.GetInstance() != null)
+            {
+                PaintingAreaManipulationListener currentAbl = PocketPaintApplication.GetInstance().PaintingAreaManipulationListener;
+                EraserCanvas.ManipulationStarted -= currentAbl.ManipulationStarted;
+                EraserCanvas.ManipulationDelta -= currentAbl.ManipulationDelta;
+                EraserCanvas.ManipulationCompleted -= currentAbl.ManipulationCompleted;
             }
         }
 

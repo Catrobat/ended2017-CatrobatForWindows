@@ -17,23 +17,25 @@
                 <Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
                 </Grid.Background>
-        
-        <Canvas x:Name="PaintingAreaCanvasUnderlaying" ManipulationMode="TranslateX, TranslateY, Scale" />
-        <Canvas>
-        <Canvas x:Name="EraserCanvas" 
-                        Width="{Binding ElementName=PaintingAreaCanvas, Path=Width}" 
-                        Height="{Binding ElementName=PaintingAreaCanvas, Path=Height}"                
-                        Background="Transparent" 
-                        Visibility="Collapsed" 
-                        HorizontalAlignment="Left" 
-                        VerticalAlignment="Top"
-                        ManipulationMode="TranslateX, TranslateY, Scale"/>
-        <Canvas x:Name="PaintingAreaCanvas" Background="#5FD7CCCC" HorizontalAlignment="Left" ManipulationMode="TranslateX, TranslateY, Scale" VerticalAlignment="Top">
-          </Canvas>
-        </Canvas>
+
+                <Canvas x:Name="PaintingAreaCanvas"
+                        Background="#5FD7CCCC" 
+                        HorizontalAlignment="Left"
+                        ManipulationMode="TranslateX, TranslateY, Scale"
+                        VerticalAlignment="Top"/>
 
 
-        <!-- CursorControl -->
+                <Canvas x:Name="EraserCanvas" 
+                            Width="{Binding ElementName=PaintingAreaCanvas, Path=Width}" 
+                            Height="{Binding ElementName=PaintingAreaCanvas, Path=Height}"                
+                            Background="Transparent" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Top"
+                            Visibility="Collapsed"
+                            ManipulationMode="TranslateX, TranslateY, Scale"/>
+
+
+                <!-- CursorControl -->
                 <Grid x:Name="GridCursor" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" 
                       Visibility="Collapsed" Width="80">
                     <userControls:CursorControl x:Name="ClCursor" Height="80" HorizontalAlignment="Center" 
