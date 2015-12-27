@@ -7,7 +7,6 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-// TODO: using Catrobat.Paint.Phone.Command;
 using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
@@ -25,13 +24,11 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         private PixelData.PixelData pixelDataEraser;
         private PixelData.PixelData pixelData;
 
-
         public EraserTool()
         {
             ToolType = ToolType.Eraser;
             points = new List<Point>();
             pixelData = new PixelData.PixelData();
-            
         }
 
         async public override void HandleDown(object arg)
@@ -43,7 +40,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             await pixelData.preparePaintingAreaCanvasPixel();
             pixelDataEraser = new PixelData.PixelData();
-
 
             var coordinate = (Point)arg;
 
@@ -75,21 +71,10 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _path.Clip = rectangleGeometry;
             _path.InvalidateArrange();
             _path.InvalidateMeasure();
-
-            //var rectangleGeometry = new RectangleGeometry
-            //{
-            //    Rect = new Rect(0, 0, PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth,
-            //    PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight)
-            //};
-            //_path.Clip = rectangleGeometry;
-
-            //_path.InvalidateArrange();
-            //_path.InvalidateMeasure();
         }
 
-        async public override void HandleMove(object arg)
+        public override void HandleMove(object arg)
         {
-
             if (!(arg is Point))
             {
                 return;
@@ -110,56 +95,12 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                     Point1 = _lastPoint,
                     Point2 = coordinate
                 };
-
-
-                /*var list = GetPointsOnLine((int)_lastPoint.X, (int)_lastPoint.Y, (int)coordinate.X, (int)coordinate.Y);
-
-                List<Point> yolo = new List<Point>();
-                Debug.WriteLine(coordinate.ToString() + " " + _lastPoint.ToString());
-                foreach (var item in list)
-                {
-                    Debug.WriteLine(item.ToString());
-                    yolo.Add(item);
-                }
-                
-
-                List<Point> temp = null;
-                temp = AddPointRange(yolo,20);
-
-                foreach (var item in temp)
-                {
-                    yolo.Add(item);
-                }
-
-                data.SetPixel(yolo, "0_0_0_0");
-                yolo.Clear();*/
-
                 _pathSegmentCollection.Add(qbs);
-
 
                 PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
                 _lastPointSet = false;
             }
-            /*await pixelDataEraser.preparePaintingAreaCanvasForEraser();
-            points = pixelDataEraser.GetWhitePixels();*/
-            
-
-/*
-            PixelData.PixelData pixelData = new PixelData.PixelData();
-            await pixelData.preparePaintingAreaCanvasPixel();
-
-
-            var pixelCanvas = pixelData.pixelsCanvas;
-
-
-            pixelData.SetPixel(coordinate, "");
-            
-
-            var image = await pixelData.BufferToImage();
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);*/
-
         }
-
 
         async public override void HandleUp(object arg)
         {
@@ -182,14 +123,11 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
                 PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
                 _path.InvalidateArrange();
-
             }
 
-            //DeletePointFromPaintingAreaCanvas();
             await pixelDataEraser.preparePaintingAreaCanvasForEraser();
             points = pixelDataEraser.GetWhitePixels();
             pixelData.SetPixel(points, "0_0_0_0");
-            // PocketPaintApplication.GetInstance().EraserCanvas.Visibility = Visibility.Collapsed;
             PocketPaintApplication.GetInstance().EraserCanvas.Children.Clear();
             var image = await pixelData.BufferToImage();
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
