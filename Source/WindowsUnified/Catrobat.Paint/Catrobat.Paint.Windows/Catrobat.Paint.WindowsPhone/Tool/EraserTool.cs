@@ -29,6 +29,26 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             ToolType = ToolType.Eraser;
             points = new List<Point>();
             pixelData = new PixelData.PixelData();
+            initPathInstances();
+            initPathStrokeSettings();
+        }
+
+        private void initPathInstances()
+        {
+            _path = new Path();
+            _pathGeometry = new PathGeometry();
+            _pathFigureCollection = new PathFigureCollection();
+            _pathFigure = new PathFigure();
+            _pathSegmentCollection = new PathSegmentCollection();
+        }
+
+        private void initPathStrokeSettings()
+        {
+            _path.StrokeLineJoin = PenLineJoin.Round;
+            _path.Stroke = new SolidColorBrush(Color.FromArgb(0xff,0xff,0xff,0xff));
+            _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.thicknessSelected;
+            _path.StrokeStartLineCap = PocketPaintApplication.GetInstance().PaintData.penLineCapSelected;
+            _path.StrokeEndLineCap = PocketPaintApplication.GetInstance().PaintData.penLineCapSelected;
         }
 
         async public override void HandleDown(object arg)
@@ -37,23 +57,12 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             {
                 return;
             }
-
+            var coordinate = (Point)arg;
             await pixelData.preparePaintingAreaCanvasPixel();
             pixelDataEraser = new PixelData.PixelData();
 
-            var coordinate = (Point)arg;
-
-            _path = new Path();
-            _pathGeometry = new PathGeometry();
-            _pathFigureCollection = new PathFigureCollection();
-            _pathFigure = new PathFigure();
-            _pathSegmentCollection = new PathSegmentCollection();
-
-            _path.StrokeLineJoin = PenLineJoin.Round;
-            _path.Stroke = new SolidColorBrush(Color.FromArgb(0xff,0xff,0xff,0xff));
-            _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.thicknessSelected;
-            _path.StrokeStartLineCap = PocketPaintApplication.GetInstance().PaintData.penLineCapSelected;
-            _path.StrokeEndLineCap = PocketPaintApplication.GetInstance().PaintData.penLineCapSelected;
+            initPathInstances();
+            initPathStrokeSettings();
 
             _pathFigure.StartPoint = coordinate;
             _pathFigure.Segments = _pathSegmentCollection;
@@ -61,6 +70,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _pathGeometry.Figures = _pathFigureCollection;
             _lastPoint = coordinate;
             _path.Data = _pathGeometry;
+
             PocketPaintApplication.GetInstance().PaintingAreaView.addElementToEraserCanvas(_path);
 
             var rectangleGeometry = new RectangleGeometry
