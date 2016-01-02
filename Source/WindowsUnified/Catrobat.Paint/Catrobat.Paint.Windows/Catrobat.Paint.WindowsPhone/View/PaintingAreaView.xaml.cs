@@ -24,6 +24,7 @@ using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
 using Catrobat.Paint.WindowsPhone.Data;
 using Windows.ApplicationModel.Core;
+using Catrobat.Paint.WindowsPhone.Converters;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
 
@@ -1261,6 +1262,13 @@ namespace Catrobat.Paint.WindowsPhone.View
             Visibility gridThicknessStateInPaintingAreaView = PocketPaintApplication.GetInstance().GrdThicknessControlState;
             gridThicknessStateInPaintingAreaView = gridThicknessStateInPaintingAreaView == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
             PocketPaintApplication.GetInstance().GrdThicknessControlState = gridThicknessStateInPaintingAreaView;
+
+            ToolSettingsTextConverter textConv = new ToolSettingsTextConverter();
+            ((AppBarButton)sender).Label = (string)textConv.Convert(GrdThicknessControlVisibility, null, null, string.Empty);
+
+            ToolSettingsIconConverter iconConv = new ToolSettingsIconConverter();
+            var icon = ((AppBarButton)sender).Icon as BitmapIcon;
+            icon.UriSource = (Uri)iconConv.Convert(GrdThicknessControlVisibility, null, null, string.Empty);
         }
 
         private void btnThicknessBorder_Click(object sender, RoutedEventArgs e)
