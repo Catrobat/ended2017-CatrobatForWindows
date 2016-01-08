@@ -211,7 +211,17 @@
     <Compile Include="ProgramChecker.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\ApplicationResources.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationResources.resw</DependentUpon>
+    </Compile>
     <Compile Include="Resources\ApplicationResourcesHelper.cs" />
+    <Compile Include="Resources\Localization\AppResources.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resw</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Localization\AppResourcesHelper.cs" />
     <Compile Include="Resources\Localization\LocalizedStrings.cs" />
     <Compile Include="Resources\SampleProjectLoader.cs" />
@@ -477,8 +487,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <PRIResource Include="Resources\ApplicationResources.resw" />
-    <PRIResource Include="Resources\Localization\AppResources.resw" />
+    <PRIResource Include="Resources\ApplicationResources.resw">
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationResources.cs</LastGenOutput>
+    </PRIResource>
+    <PRIResource Include="Resources\Localization\AppResources.resw">
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.cs</LastGenOutput>
+    </PRIResource>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
