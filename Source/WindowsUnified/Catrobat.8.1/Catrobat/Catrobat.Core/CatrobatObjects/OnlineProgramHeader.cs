@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             }
             set 
             {
-                _screenshotBig = ApplicationResources.POCEKTCODE_BASE_ADDRESS + value;
+                _screenshotBig = ApplicationResourcesHelper.Get("POCEKTCODE_BASE_ADDRESS") + value;
             }
         }
         public string ScreenshotSmall 
@@ -32,7 +32,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             }
             set
             {
-                _screenshotSmall = ApplicationResources.POCEKTCODE_BASE_ADDRESS + value;
+                _screenshotSmall = ApplicationResourcesHelper.Get("POCEKTCODE_BASE_ADDRESS") + value;
             } 
         }
         public string Author { get; set; }

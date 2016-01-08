@@ -189,7 +189,7 @@ namespace Catrobat.IDE.Core.UI
         public async Task ResetAndLoadFirstPrograms()
         {
             ClearOnlinePrograms();
-            //await LoadMoreOnlineProgramsAsync(int.Parse(ApplicationResources.API_REQUEST_LIMIT), _downloadTaskCancellation.Token);
+            //await LoadMoreOnlineProgramsAsync(int.Parse(ApplicationResourcesHelper.Get("API_REQUEST_LIMIT), _downloadTaskCancellation.Token);
         }
 
         public OnlineProgramsCollection()

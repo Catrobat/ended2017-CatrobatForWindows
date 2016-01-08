@@ -30,7 +30,7 @@ namespace Catrobat.IDE.WindowsShared.Services
         {
             var request = e.Request;
             request.Data.Properties.Title = AppResourcesHelper.Get("Export_FileTitle");
-            request.Data.Properties.Description = ApplicationResources.CATROBAT_URL;
+            request.Data.Properties.Description = ApplicationResourcesHelper.Get("CATROBAT_URL");
             var deferral = request.GetDeferral();
 
             try

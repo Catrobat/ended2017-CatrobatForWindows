@@ -199,7 +199,7 @@ namespace Catrobat.IDE.Core.ViewModels.Service
 
         private void LicenseAction()
         {
-            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.PROJECT_LICENSE_URL);
+            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResourcesHelper.Get("PROJECT_LICENSE_URL"));
         }
 
         private async void CancelDownloadAction()

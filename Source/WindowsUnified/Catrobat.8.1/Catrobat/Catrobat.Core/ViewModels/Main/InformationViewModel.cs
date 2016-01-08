@@ -21,14 +21,14 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private void LicenseAction()
         {
             ServiceLocator.NavigationService.NavigateToWebPage(
-                ApplicationResources.CATROBAT_LICENSES_URL);
+                ApplicationResourcesHelper.Get("CATROBAT_LICENSES_URL"));
         }
 
         public ICommand TouCommand { get; private set; }
         private void TouAction()
         {
             ServiceLocator.NavigationService.NavigateToWebPage(
-                ApplicationResources.CATROBAT_TOU_URL);
+                ApplicationResourcesHelper.Get("CATROBAT_TOU_URL"));
         }
 
         #endregion

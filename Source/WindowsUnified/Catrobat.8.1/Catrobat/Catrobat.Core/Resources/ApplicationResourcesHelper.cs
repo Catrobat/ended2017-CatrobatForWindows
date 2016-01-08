@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.ApplicationModel.Resources.Core;
 
-namespace Catrobat.Core.Resources.Localization
+namespace Catrobat.Core.Resources
 {
-    public static class AppResourcesHelper
+    public static class ApplicationResourcesHelper
     {
         public static string Get(string value)
         {
-            var map = ResourceManager.Current.MainResourceMap.GetSubtree("Catrobat.Core/AppResources");
+            var map = ResourceManager.Current.MainResourceMap.GetSubtree("Catrobat.Core/ApplicationResourcesHelper");
             return map.GetValue(value).ValueAsString;
         }
     }

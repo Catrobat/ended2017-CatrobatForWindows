@@ -230,7 +230,7 @@ namespace Catrobat.IDE.Core.ViewModels.Main
         private void AboutAction()
         {
             ServiceLocator.NavigationService.NavigateToWebPage(
-                ApplicationResources.CATROBAT_URL);
+                ApplicationResourcesHelper.Get("CATROBAT_URL"));
         }
 
         private void LicenseAction()

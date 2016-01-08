@@ -40,7 +40,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
         {
             using (var httpClient = new HttpClient())
             {
-                //httpClient.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
+                //httpClient.BaseAddress = new Uri(ApplicationResourcesHelper.Get("API_BASE_ADDRESS);
                 //testserver: use for uploads for TDD: https://catroid-test.catrob.at/pocketcode/api/
                 //old: httpClient.BaseAddress = new Uri("https://pocketcode.org/api/");
                 httpClient.BaseAddress = new Uri("https://share.catrob.at/pocketcode/api/");
@@ -51,14 +51,14 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                     if (filterText == "")
                     {
                         httpResponse = await httpClient.GetAsync(
-                            String.Format(ApplicationResources.API_RECENT_PROJECTS,
+                            String.Format(ApplicationResourcesHelper.Get("API_RECENT_PROJECTS"),
                             count, offset), taskCancellationToken);
                     }
                     else
                     {
                         string encoded_filter_text = WebUtility.UrlEncode(filterText);
                         httpResponse = await httpClient.GetAsync(String.Format(
-                            ApplicationResources.API_SEARCH_PROJECTS, encoded_filter_text,
+                            ApplicationResourcesHelper.Get("API_SEARCH_PROJECTS"), encoded_filter_text,
                             count, offset), taskCancellationToken);
                     }
                     httpResponse.EnsureSuccessStatusCode();
@@ -91,7 +91,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
         {
             using (var httpClient = new HttpClient())
             {
-                httpClient.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                httpClient.BaseAddress = new Uri(ApplicationResourcesHelper.Get("POCEKTCODE_BASE_ADDRESS"));
                 try
                 {
                     var httpResponse = await httpClient.GetAsync(downloadUrl, HttpCompletionOption.ResponseContentRead, taskCancellationToken);
@@ -124,8 +124,8 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
             // optionally create a new cancellation token to be able to cancel every download individually
             try
             {
-                Uri downloadSource = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS + downloadUrl);
-                string downloadDestination = Path.Combine(StorageConstants.TempProgramImportZipPath, programName + ApplicationResources.EXTENSION);
+                Uri downloadSource = new Uri(ApplicationResourcesHelper.Get("POCEKTCODE_BASE_ADDRESS") + downloadUrl);
+                string downloadDestination = Path.Combine(StorageConstants.TempProgramImportZipPath, programName + ApplicationResourcesHelper.Get("EXTENSION"));
 
                 StorageFile destinationFile = await GetFileAsync(downloadDestination); // Mehtods copied from StorageWindowsShared
 
@@ -178,19 +178,19 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
         public async Task<JSONStatusResponse> CheckTokenAsync(string username, string token, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_USERNAME, ((username == null) ? "" : username)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_TOKEN, ((token == null) ? "" : token)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_USERNAME"), ((username == null) ? "" : username)),
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_TOKEN"), ((token == null) ? "" : token)),
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_LANGUAGE"), ((language == null) ? "" : language))
             };
 
             HttpContent postParameters = new FormUrlEncodedContent(parameters);
             using (var httpClient = new HttpClient())
             {
-                httpClient.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
+                httpClient.BaseAddress = new Uri(ApplicationResourcesHelper.Get("API_BASE_ADDRESS"));
                 JSONStatusResponse statusResponse = null;
                 try
                 {
-                    HttpResponseMessage httpResponse = await httpClient.PostAsync(ApplicationResources.API_CHECK_TOKEN, postParameters);
+                    HttpResponseMessage httpResponse = await httpClient.PostAsync(ApplicationResourcesHelper.Get("API_CHECK_TOKEN"), postParameters);
                     httpResponse.EnsureSuccessStatusCode();
 
                     string jsonResult = await httpResponse.Content.ReadAsStringAsync();
@@ -219,21 +219,21 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                 string language = "en", string country = "AT")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_REG_USERNAME, ((username == null) ? "" : username)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_REG_PASSWORD, ((password == null) ? "" : password)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_REG_EMAIL, ((userEmail == null) ? "" : userEmail)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_REG_COUNTRY, ((country == null) ? "" : country)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_REG_USERNAME"), ((username == null) ? "" : username)),
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_REG_PASSWORD"), ((password == null) ? "" : password)),
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_REG_EMAIL"), ((userEmail == null) ? "" : userEmail)),
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_REG_COUNTRY"), ((country == null) ? "" : country)),
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_LANGUAGE"), ((language == null) ? "" : language))
             };
 
             HttpContent postParameters = new FormUrlEncodedContent(parameters);
             using (var httpClient = new HttpClient())
             {
-                httpClient.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
+                httpClient.BaseAddress = new Uri(ApplicationResourcesHelper.Get("API_BASE_ADDRESS"));
                 JSONStatusResponse statusResponse = null;
                 try
                 {
-                    HttpResponseMessage httpResponse = await httpClient.PostAsync(ApplicationResources.API_LOGIN_REGISTER, postParameters);
+                    HttpResponseMessage httpResponse = await httpClient.PostAsync(ApplicationResourcesHelper.Get("API_LOGIN_REGISTER"), postParameters);
                     httpResponse.EnsureSuccessStatusCode();
 
                     string jsonResult = await httpResponse.Content.ReadAsStringAsync();
@@ -263,9 +263,9 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
             string username, string token, CancellationToken taskCancellationToken, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_USERNAME, ((username == null) ? "" : username)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_TOKEN, ((token == null) ? "" : token)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_USERNAME"), ((username == null) ? "" : username)),
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_TOKEN"), ((token == null) ? "" : token)),
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_LANGUAGE"), ((language == null) ? "" : language))
             };
 
             using (var postParameters = new MultipartFormDataContent())
@@ -277,7 +277,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                     {
                         _uploadCounter++;
                         byte[] programData;
-                        using (var stream = await storage.OpenFileAsync(Path.Combine(StorageConstants.TempProgramExportZipPath, programTitle + ApplicationResources.EXTENSION),
+                        using (var stream = await storage.OpenFileAsync(Path.Combine(StorageConstants.TempProgramExportZipPath, programTitle + ApplicationResourcesHelper.Get("EXTENSION")),
                             StorageFileMode.Open, StorageFileAccess.Read))
                         {
                             var memoryStream = new MemoryStream();
@@ -286,7 +286,7 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                             programData = memoryStream.ToArray();
                         }
 
-                        parameters.Add(new KeyValuePair<string, string>(ApplicationResources.API_PARAM_CHECKSUM, UtilTokenHelper.ToHex(MD5Core.GetHash(programData))));
+                        parameters.Add(new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_CHECKSUM"), UtilTokenHelper.ToHex(MD5Core.GetHash(programData))));
 
                         // store parameters as MultipartFormDataContent
                         StringContent content = null;
@@ -300,12 +300,12 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
                         ByteArrayContent fileContent = new ByteArrayContent(programData);
 
                         fileContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/zip");
-                        postParameters.Add(fileContent, String.Format("\"{0}\"", ApplicationResources.API_PARAM_UPLOAD), String.Format("\"{0}\"", programTitle + ApplicationResources.EXTENSION));
+                        postParameters.Add(fileContent, String.Format("\"{0}\"", ApplicationResourcesHelper.Get("API_PARAM_UPLOAD")), String.Format("\"{0}\"", programTitle + ApplicationResourcesHelper.Get("EXTENSION")));
 
                         using (var httpClient = new HttpClient())
                         {
-                            httpClient.BaseAddress = new Uri(ApplicationResources.API_BASE_ADDRESS);
-                            HttpResponseMessage httpResponse = await httpClient.PostAsync(ApplicationResources.API_UPLOAD, postParameters, taskCancellationToken);
+                            httpClient.BaseAddress = new Uri(ApplicationResourcesHelper.Get("API_BASE_ADDRESS"));
+                            HttpResponseMessage httpResponse = await httpClient.PostAsync(ApplicationResourcesHelper.Get("API_UPLOAD"), postParameters, taskCancellationToken);
                             httpResponse.EnsureSuccessStatusCode();
                             string jsonResult = await httpResponse.Content.ReadAsStringAsync();
 
@@ -340,20 +340,20 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
         public async Task<JSONStatusResponse> ReportAsInappropriateAsync(string programId, string flagReason, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_PROJECTID, ((programId == null) ? "" : programId)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_FLAG_REASON, ((flagReason == null) ? "" : flagReason)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_PROJECTID"), ((programId == null) ? "" : programId)),
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_FLAG_REASON"), ((flagReason == null) ? "" : flagReason)),
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_LANGUAGE"), ((language == null) ? "" : language))
             };
 
             HttpContent postParameters = new FormUrlEncodedContent(parameters);
             using (var httpClient = new HttpClient())
             {
-                //httpClient.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                //httpClient.BaseAddress = new Uri(ApplicationResourcesHelper.Get("POCEKTCODE_BASE_ADDRESS);
                 httpClient.BaseAddress = new Uri("https://catroid-test.catrob.at");
                 JSONStatusResponse statusResponse = null;
                 try
                 {
-                    HttpResponseMessage httpResponse = await httpClient.PostAsync(ApplicationResources.CATROWEB_REPORT_AS_INAPPROPRIATE, postParameters);
+                    HttpResponseMessage httpResponse = await httpClient.PostAsync(ApplicationResourcesHelper.Get("CATROWEB_REPORT_AS_INAPPROPRIATE"), postParameters);
                     httpResponse.EnsureSuccessStatusCode();
 
                     string jsonResult = await httpResponse.Content.ReadAsStringAsync();
@@ -382,19 +382,19 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
         public async Task<JSONStatusResponse> RecoverPasswordAsync(string recoveryUserData, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_RECOVER_PWD, ((recoveryUserData == null) ? "" : recoveryUserData)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_RECOVER_PWD"), ((recoveryUserData == null) ? "" : recoveryUserData)),
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_LANGUAGE"), ((language == null) ? "" : language))
             };
 
             HttpContent postParameters = new FormUrlEncodedContent(parameters);
             using (var httpClient = new HttpClient())
             {
-                //httpClient.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                //httpClient.BaseAddress = new Uri(ApplicationResourcesHelper.Get("POCEKTCODE_BASE_ADDRESS);
                 httpClient.BaseAddress = new Uri("https://catroid-test.catrob.at");
                 JSONStatusResponse statusResponse = null;
                 try
                 {
-                    HttpResponseMessage httpResponse = await httpClient.PostAsync(ApplicationResources.CATROWEB_RECOVER_PWD, postParameters);
+                    HttpResponseMessage httpResponse = await httpClient.PostAsync(ApplicationResourcesHelper.Get("CATROWEB_RECOVER_PWD"), postParameters);
                     httpResponse.EnsureSuccessStatusCode();
 
                     string jsonResult = await httpResponse.Content.ReadAsStringAsync();
@@ -422,21 +422,21 @@ namespace Catrobat.IDE.WindowsShared.Services.Common
         public async Task<JSONStatusResponse> ChangePasswordAsync(string newPassword, string newPasswortRepeated, string language = "en")
         {
             var parameters = new List<KeyValuePair<string, string>>() { 
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_HASH, ((_recoveryHash == null) ? "" : _recoveryHash)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_NEW_PWD, ((newPassword == null) ? "" : newPassword)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_NEW_PWD_REPEAT, ((newPasswortRepeated == null) ? "" : newPasswortRepeated)),
-                new KeyValuePair<string, string>(ApplicationResources.API_PARAM_LANGUAGE, ((language == null) ? "" : language))
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_HASH"), ((_recoveryHash == null) ? "" : _recoveryHash)),
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_NEW_PWD"), ((newPassword == null) ? "" : newPassword)),
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_NEW_PWD_REPEAT"), ((newPasswortRepeated == null) ? "" : newPasswortRepeated)),
+                new KeyValuePair<string, string>(ApplicationResourcesHelper.Get("API_PARAM_LANGUAGE"), ((language == null) ? "" : language))
             };
 
             HttpContent postParameters = new FormUrlEncodedContent(parameters);
             using (var httpClient = new HttpClient())
             {
-                //httpClient.BaseAddress = new Uri(ApplicationResources.POCEKTCODE_BASE_ADDRESS);
+                //httpClient.BaseAddress = new Uri(ApplicationResourcesHelper.Get("POCEKTCODE_BASE_ADDRESS);
                 httpClient.BaseAddress = new Uri("https://catroid-test.catrob.at");
                 JSONStatusResponse statusResponse = null;
                 try
                 {
-                    HttpResponseMessage httpResponse = await httpClient.PostAsync(ApplicationResources.CATROWEB_CHANGE_PWD, postParameters);
+                    HttpResponseMessage httpResponse = await httpClient.PostAsync(ApplicationResourcesHelper.Get("CATROWEB_CHANGE_PWD"), postParameters);
                     httpResponse.EnsureSuccessStatusCode();
 
                     string jsonResult = await httpResponse.Content.ReadAsStringAsync();
