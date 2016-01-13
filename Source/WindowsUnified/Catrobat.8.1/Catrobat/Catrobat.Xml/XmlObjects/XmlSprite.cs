@@ -5,6 +5,7 @@ using System.Xml.Linq;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
 using Catrobat_Player.NativeComponent;
+using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
@@ -13,7 +14,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         #region NativeInterface
         public IList<IUserVariable> UserVariables
         {
-            get { return UserVariables.Cast<IUserVariable>().ToList(); }
+            get { return Variables.UserVariables.Cast<IUserVariable>().ToList(); }
             set { }
         }
 
@@ -29,6 +30,11 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             set { }
         }
         #endregion
+
+        /// <summary>
+        /// WTF the xml has the object variables in a global list ...
+        /// </summary>
+        public XmlUserVariableList Variables { get; set; }
 
         public XmlLookList Looks { get; set; }
 
