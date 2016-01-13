@@ -52,18 +52,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             }
         }
 
-        public IHeader Header
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        IHeader IProject.ProgramHeader { get { return ProgramHeader; } set { } }
 
         #endregion
 
@@ -116,7 +105,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             VariableList.LoadReference();
             SpriteList.LoadReference();
-        }          
+        }
 
         internal void LoadBroadcastMessages()
         {

@@ -109,7 +109,6 @@
     <Compile Include="CatrobatObjects\ReferenceEqualityComparer.cs" />
     <Compile Include="CatrobatObjects\SerializableTuple.cs" />
     <Compile Include="CatrobatObjects\TestEqualityComparer.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ExtensionMethods\CloneableExtensions.cs" />
     <Compile Include="ExtensionMethods\CollectionExtensions.cs" />

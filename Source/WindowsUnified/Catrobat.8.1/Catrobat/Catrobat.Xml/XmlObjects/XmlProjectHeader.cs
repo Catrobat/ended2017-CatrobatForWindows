@@ -1,9 +1,12 @@
-﻿using System.Globalization;
+﻿using Catrobat_Player.NativeComponent;
+using System.Globalization;
 using System.Xml.Linq;
+using System;
+using System.Collections.Generic;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public partial class XmlProjectHeader : XmlObjectNode
+    public partial class XmlProjectHeader : XmlObjectNode, IHeader
     {
         public string ApplicationBuildName { get; set; }
 
@@ -42,6 +45,71 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         public string Url { get; set; }
 
         public string UserHandle { get; set; }
+
+        IList<string> IHeader.Tags
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        int IHeader.PlatformVersion
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string TargetPlatform
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        long IHeader.DateTimeUpload
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public XmlProjectHeader(bool isAutoFillProperties = true)
         {
@@ -116,99 +184,99 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             var xProjectHeader = new XElement("header");
 
             xProjectHeader.Add(new XElement("applicationBuildName")
-                {
-                    Value = ApplicationBuildName
-                });
+            {
+                Value = ApplicationBuildName
+            });
 
             xProjectHeader.Add(new XElement("applicationBuildNumber")
-                {
-                    Value = ApplicationBuildNumber.ToString(CultureInfo.InvariantCulture)
-                });
+            {
+                Value = ApplicationBuildNumber.ToString(CultureInfo.InvariantCulture)
+            });
 
             xProjectHeader.Add(new XElement("applicationName")
-                {
-                    Value = ApplicationName
-                });
+            {
+                Value = ApplicationName
+            });
 
             xProjectHeader.Add(new XElement("applicationVersion")
-                {
-                    Value = ApplicationVersion
-                });
+            {
+                Value = ApplicationVersion
+            });
 
             xProjectHeader.Add(new XElement("catrobatLanguageVersion")
-                {
-                    Value = CatrobatLanguageVersion
-                });
+            {
+                Value = CatrobatLanguageVersion
+            });
 
             xProjectHeader.Add(new XElement("dateTimeUpload")
-                {
-                    Value = DateTimeUpload
-                });
+            {
+                Value = DateTimeUpload
+            });
 
             xProjectHeader.Add(new XElement("description")
-                {
-                    Value = Description
-                });
+            {
+                Value = Description
+            });
 
             xProjectHeader.Add(new XElement("deviceName")
-                {
-                    Value = DeviceName
-                });
+            {
+                Value = DeviceName
+            });
 
             xProjectHeader.Add(new XElement("mediaLicense")
-                {
-                    Value = MediaLicense
-                });
+            {
+                Value = MediaLicense
+            });
 
             xProjectHeader.Add(new XElement("platform")
-                {
-                    Value = Platform
-                });
+            {
+                Value = Platform
+            });
 
             xProjectHeader.Add(new XElement("platformVersion")
-                {
-                    Value = PlatformVersion
-                });
+            {
+                Value = PlatformVersion
+            });
 
             xProjectHeader.Add(new XElement("programLicense")
-                {
-                    Value = ProgramLicense
-                });
+            {
+                Value = ProgramLicense
+            });
 
             xProjectHeader.Add(new XElement("programName")
-                {
-                    Value = ProgramName
-                });
+            {
+                Value = ProgramName
+            });
 
             xProjectHeader.Add(new XElement("remixOf")
-                {
-                    Value = RemixOf
-                });
+            {
+                Value = RemixOf
+            });
 
             xProjectHeader.Add(new XElement("screenHeight")
-                {
-                    Value = ScreenHeight.ToString(CultureInfo.InvariantCulture)
-                });
+            {
+                Value = ScreenHeight.ToString(CultureInfo.InvariantCulture)
+            });
 
             xProjectHeader.Add(new XElement("screenWidth")
-                {
-                    Value = ScreenWidth.ToString(CultureInfo.InvariantCulture)
-                });
+            {
+                Value = ScreenWidth.ToString(CultureInfo.InvariantCulture)
+            });
 
             xProjectHeader.Add(new XElement("tags")
-                {
-                    Value = Tags
-                });
+            {
+                Value = Tags
+            });
 
             xProjectHeader.Add(new XElement("url")
-                {
-                    Value = Url
-                });
+            {
+                Value = Url
+            });
 
             xProjectHeader.Add(new XElement("userHandle")
-                {
-                    Value = UserHandle
-                });
+            {
+                Value = UserHandle
+            });
 
             return xProjectHeader;
         }
