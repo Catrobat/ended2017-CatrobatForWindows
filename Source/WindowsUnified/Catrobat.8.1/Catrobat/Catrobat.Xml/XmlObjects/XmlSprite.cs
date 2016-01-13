@@ -14,7 +14,12 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         #region NativeInterface
         public IList<IUserVariable> UserVariables
         {
-            get { return Variables.UserVariables.Cast<IUserVariable>().ToList(); }
+            get {
+                if (Variables != null)
+                    return Variables.UserVariables.Cast<IUserVariable>().ToList();
+                else
+                    return new List<IUserVariable>();
+            }
             set { }
         }
 

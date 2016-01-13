@@ -138,11 +138,6 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
                     Sprites = m.Sprites.Select(sprite => sprites[sprite]).ToList()
                 }
             };
-            if (result.VariableList.ObjectVariableList.ObjectVariableEntries != null)
-                foreach (var r in result.VariableList.ObjectVariableList.ObjectVariableEntries)
-                {
-                    r.Sprite.Variables = r.VariableList;
-                }
 
             ServiceLocator.ContextService.UpdateProgramHeader(result);
 

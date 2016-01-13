@@ -69,6 +69,10 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             SpriteList = new XmlSpriteList(project.Element("objectList"));
             VariableList = new XmlVariableList(project.Element("variables"));
 
+            foreach (var a in VariableList.ObjectVariableList.ObjectVariableEntries)
+            {
+                a.Sprite.Variables = a.VariableList;
+            }
             LoadReference();
             LoadBroadcastMessages();
         }
