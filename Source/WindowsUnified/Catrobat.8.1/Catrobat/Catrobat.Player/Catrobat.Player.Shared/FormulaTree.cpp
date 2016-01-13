@@ -6,7 +6,9 @@ using namespace std;
 
 FormulaTree::FormulaTree(Catrobat_Player::NativeComponent::IFormulaTree^ formulaTree) :
 	m_value(Helper::StdString(formulaTree->Value)),
-	m_type((Type) formulaTree->Type)
+	m_type((Type) formulaTree->Type),
+	m_leftChild(make_shared<FormulaTree>(formulaTree->LeftChild)),
+	m_rightChild(make_shared<FormulaTree>(formulaTree->RightChild))
 {
 	if (m_type == Type::OPERATOR)
 	{
@@ -123,24 +125,14 @@ FormulaTree::FormulaTree(Catrobat_Player::NativeComponent::IFormulaTree^ formula
 	}
 }
 
-void FormulaTree::SetLeftChild(FormulaTree *leftChild)
-{
-	m_leftChild = leftChild;
-}
-
-void FormulaTree::SetRightChild(FormulaTree *rightChild)
-{
-	m_rightChild = rightChild;
-}
-
 FormulaTree *FormulaTree::GetLeftChild()
 {
-	return this->m_leftChild;
+	return this->m_leftChild.get();
 }
 
 FormulaTree *FormulaTree::GetRightChild()
 {
-	return this->m_rightChild;
+	return this->m_rightChild.get();
 }
 
 Type FormulaTree::GetType()
