@@ -8,8 +8,6 @@ namespace Catrobat_Player
 	{
 		public interface class IStartScript : public IScript
 		{
-		public:
-			virtual property Platform::String^ Name;
 		};
 	}
 }

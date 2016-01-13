@@ -6,18 +6,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 {
     public partial class XmlStartScript : XmlScript, IStartScript
     {
-        public string Name
-        {
-            get
-            {
-                return "bla";
-            }
-
-            set
-            {
-            }
-        }
-
         public XmlStartScript() {}
 
         public XmlStartScript(XElement xElement) : base(xElement) {}
