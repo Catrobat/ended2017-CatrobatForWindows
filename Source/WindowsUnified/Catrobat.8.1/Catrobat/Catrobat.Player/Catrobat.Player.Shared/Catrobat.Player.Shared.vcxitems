@@ -67,6 +67,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)IBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IBroadcastScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IfBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IFormulaTree.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IHeader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ILook.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)InclinationProvider.h" />
