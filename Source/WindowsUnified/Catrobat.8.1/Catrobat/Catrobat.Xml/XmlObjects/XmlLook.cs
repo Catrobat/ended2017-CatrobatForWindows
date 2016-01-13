@@ -1,9 +1,10 @@
 ﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public partial class XmlLook : XmlObjectNode
+    public partial class XmlLook : XmlObjectNode, ILook
     {
         public string FileName { get; set; }
 

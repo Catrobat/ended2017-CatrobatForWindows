@@ -1,8 +1,9 @@
-﻿using System.Xml.Linq;
+﻿using Catrobat_Player.NativeComponent;
+using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks
 {
-    public abstract partial class XmlBrick : XmlObjectNode
+    public abstract partial class XmlBrick : XmlObjectNode, IBrick
     {
         protected XmlBrick() {}
 

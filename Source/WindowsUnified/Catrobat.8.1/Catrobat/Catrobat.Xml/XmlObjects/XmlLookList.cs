@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Catrobat_Player.NativeComponent;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {

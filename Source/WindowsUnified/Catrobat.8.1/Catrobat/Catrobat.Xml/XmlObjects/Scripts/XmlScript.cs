@@ -1,12 +1,22 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
+using Catrobat_Player.NativeComponent;
+using System.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
 {
-    public abstract partial class XmlScript : XmlObjectNode
+    public abstract partial class XmlScript : XmlObjectNode, IScript
     {
         public XmlBrickList Bricks { get; set; }
+
+        IList<IBrick> IScript.Bricks
+        {
+            get { return Bricks.Bricks.Cast<IBrick>().ToList(); }
+            set { }
+        }
 
         protected XmlScript()
         {
@@ -20,7 +30,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Scripts
             LoadFromCommonXML(xElement);
             LoadFromXml(xElement);
         }
-        
+
         internal abstract override void LoadFromXml(XElement xRoot);
 
         private void LoadFromCommonXML(XElement xRoot)

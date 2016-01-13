@@ -29,26 +29,14 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         public IList<IObject> Objects
         {
-            get
-            {
-                return SpriteList.Sprites.Cast<IObject>().ToList();
-            }
-
-            set
-            {
-            }
+            get { return SpriteList.Sprites.Cast<IObject>().ToList(); }
+            set { }
         }
 
         public IList<IUserVariable> Variables
         {
-            get
-            {
-                return VariableList.ProgramVariableList.UserVariables.Cast<IUserVariable>().ToList();
-            }
-
-            set
-            {
-            }
+            get { return VariableList.ProgramVariableList.UserVariables.Cast<IUserVariable>().ToList(); }
+            set { }
         }
 
         IHeader IProject.Header { get { return ProgramHeader; } set { } }
