@@ -31,7 +31,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             get
             {
-                return SpriteList.Sprites.Cast<IObject>() as IList<IObject>;
+                return SpriteList.Sprites.Cast<IObject>().ToList();
             }
 
             set
@@ -43,7 +43,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             get
             {
-                return VariableList.ProgramVariableList.UserVariables.Cast<IUserVariable>() as IList<IUserVariable>;
+                return VariableList.ProgramVariableList.UserVariables.Cast<IUserVariable>().ToList();
             }
 
             set

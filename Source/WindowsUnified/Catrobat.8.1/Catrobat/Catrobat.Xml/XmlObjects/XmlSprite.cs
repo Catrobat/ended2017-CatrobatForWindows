@@ -1,12 +1,35 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public partial class XmlSprite : XmlObjectNode
+    public partial class XmlSprite : XmlObjectNode, IObject
     {
+        #region NativeInterface
+        public IList<IUserVariable> UserVariables
+        {
+            get { return UserVariables.Cast<IUserVariable>().ToList(); }
+            set { }
+        }
+
+        IList<IScript> IObject.Scripts
+        {
+            get { return Scripts.Scripts.Cast<IScript>().ToList(); }
+            set { }
+        }
+
+        IList<ILook> IObject.Looks
+        {
+            get { return Looks.Looks.Cast<ILook>().ToList(); }
+            set { }
+        }
+        #endregion
+
         public XmlLookList Looks { get; set; }
 
         public string Name { get; set; }
@@ -81,7 +104,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             XmlParserTempProjectHelper.Sprite = this;
 
-            foreach(var script in Scripts.Scripts)
+            foreach (var script in Scripts.Scripts)
             {
                 XmlParserTempProjectHelper.Script = script;
 
