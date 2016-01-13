@@ -2,6 +2,7 @@
 
 #include "Brick.h"
 #include "FormulaTree.h"
+#include "IWaitBrick.h"
 
 namespace ProjectStructure
 {
@@ -9,9 +10,9 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		WaitBrick(FormulaTree *timeToWaitInSeconds, Script* parent);
+		WaitBrick(Catrobat_Player::NativeComponent::IWaitBrick^ brick, Script* parent);
 		void Execute();
 	private:
-		FormulaTree *m_timeToWaitInSeconds;
+		std::shared_ptr<FormulaTree> m_timeToWaitInSeconds;
 	};
 }

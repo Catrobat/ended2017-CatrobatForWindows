@@ -271,6 +271,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ISetSizeToBrick.h">
       <Filter>NativeComponent\Interface\Bricks</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IWaitBrick.h">
+      <Filter>NativeComponent\Interface\Bricks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">

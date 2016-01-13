@@ -79,6 +79,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)IStartScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ITurnRightBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IUserVariable.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IWaitBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IWhenScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)lodepng.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)lodepng_util.h" />

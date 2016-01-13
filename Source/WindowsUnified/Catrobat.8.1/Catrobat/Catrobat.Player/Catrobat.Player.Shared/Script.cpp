@@ -5,6 +5,8 @@
 #include "TurnRightBrick.h"
 #include "ISetSizeToBrick.h"
 #include "SetSizeToBrick.h"
+#include "IWaitBrick.h"
+#include "WaitBrick.h"
 
 #include <windows.system.threading.h>
 #include <windows.foundation.h>
@@ -31,6 +33,13 @@ Script::Script(TypeOfScript scriptType, Object* parent, Catrobat_Player::NativeC
 		if (setSizeToBrick)
 		{
 			m_bricks.push_back(std::unique_ptr<Brick>(make_unique<SetSizeToBrick>(setSizeToBrick, this)));
+			continue;
+		}
+
+		auto waitBrick = dynamic_cast<Catrobat_Player::NativeComponent::IWaitBrick^>(brick);
+		if (waitBrick)
+		{
+			m_bricks.push_back(std::unique_ptr<Brick>(make_unique<WaitBrick>(waitBrick, this)));
 			continue;
 		}
 	}
