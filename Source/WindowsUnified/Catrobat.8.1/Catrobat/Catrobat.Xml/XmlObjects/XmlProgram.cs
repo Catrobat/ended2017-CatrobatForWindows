@@ -11,6 +11,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
 using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 using Catrobat_Player.NativeComponent;
+using System.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
@@ -30,29 +31,27 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         {
             get
             {
-                throw new NotImplementedException();
+                return SpriteList.Sprites.Cast<IObject>() as IList<IObject>;
             }
 
             set
             {
-                throw new NotImplementedException();
             }
         }
 
-        public IList<IObject> Variables
+        public IList<IUserVariable> Variables
         {
             get
             {
-                throw new NotImplementedException();
+                return VariableList.ProgramVariableList.UserVariables.Cast<IUserVariable>() as IList<IUserVariable>;
             }
 
             set
             {
-                throw new NotImplementedException();
             }
         }
 
-        IHeader IProject.ProgramHeader { get { return ProgramHeader; } set { } }
+        IHeader IProject.Header { get { return ProgramHeader; } set { } }
 
         #endregion
 

@@ -1,8 +1,9 @@
-﻿using System.Xml.Linq;
+﻿using Catrobat_Player.NativeComponent;
+using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
-    public partial class XmlUserVariable : XmlObjectNode
+    public partial class XmlUserVariable : XmlObjectNode, IUserVariable
     {
         public string Name { get; set; }
 
