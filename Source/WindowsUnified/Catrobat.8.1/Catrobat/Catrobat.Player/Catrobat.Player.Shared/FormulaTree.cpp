@@ -5,11 +5,30 @@
 using namespace std;
 
 FormulaTree::FormulaTree(Catrobat_Player::NativeComponent::IFormulaTree^ formulaTree) :
-	m_value(Helper::StdString(formulaTree->Value)),
-	m_type((Type) formulaTree->Type),
-	m_leftChild(make_shared<FormulaTree>(formulaTree->LeftChild)),
-	m_rightChild(make_shared<FormulaTree>(formulaTree->RightChild))
+	m_value(Helper::StdString(formulaTree->VariableValue))
 {
+	if (formulaTree->LeftChild)
+	{
+		m_leftChild = make_shared<FormulaTree>(formulaTree->LeftChild);
+	}
+	if (formulaTree->RightChild)
+	{
+		m_rightChild = make_shared<FormulaTree>(formulaTree->RightChild);
+	}
+
+	if (formulaTree->VariableType == "NUMBER")
+		m_type = Type::NUMBER;
+	else if (formulaTree->VariableType == "OPERATOR")
+		m_type = Type::OPERATOR;
+	else if (formulaTree->VariableType == "USER_VARIABLE")
+		m_type = Type::USER_VARIABLE;
+	else if (formulaTree->VariableType == "BRACKET")
+		m_type = Type::BRACKET;
+	else if (formulaTree->VariableType == "FUNCTION")
+		m_type = Type::FUNCTION;
+	else if (formulaTree->VariableType == "SENSOR")
+		m_type = Type::SENSOR;
+
 	if (m_type == Type::OPERATOR)
 	{
 		if (m_value == "PLUS")

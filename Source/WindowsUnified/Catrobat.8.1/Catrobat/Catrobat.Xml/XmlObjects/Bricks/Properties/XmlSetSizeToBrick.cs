@@ -1,15 +1,25 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 {
-    public partial class XmlSetSizeToBrick : XmlBrick
+    public partial class XmlSetSizeToBrick : XmlBrick, ISetSizeToBrick
     {
         public XmlFormula Size { get; set; }
 
-        public XmlSetSizeToBrick() {}
+        public IFormulaTree Scale
+        {
+            get { return Size.FormulaTree; }
+            set
+            {
+            }
+        }
 
-        public XmlSetSizeToBrick(XElement xElement) : base(xElement) {}
+        public XmlSetSizeToBrick() { }
+
+        public XmlSetSizeToBrick(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXml(XElement xRoot)
         {

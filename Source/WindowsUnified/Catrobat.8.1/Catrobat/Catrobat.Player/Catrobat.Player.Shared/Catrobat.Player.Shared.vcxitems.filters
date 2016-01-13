@@ -265,6 +265,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ITurnRightBrick.h">
       <Filter>NativeComponent\Interface\Bricks</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IFormulaTree.h">
+      <Filter>NativeComponent\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ISetSizeToBrick.h">
+      <Filter>NativeComponent\Interface\Bricks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">

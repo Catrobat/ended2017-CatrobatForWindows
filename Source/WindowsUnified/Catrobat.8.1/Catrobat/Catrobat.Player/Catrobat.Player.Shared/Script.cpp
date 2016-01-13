@@ -3,6 +3,8 @@
 #include "Brick.h"
 #include "ITurnRightBrick.h"
 #include "TurnRightBrick.h"
+#include "ISetSizeToBrick.h"
+#include "SetSizeToBrick.h"
 
 #include <windows.system.threading.h>
 #include <windows.foundation.h>
@@ -22,6 +24,13 @@ Script::Script(TypeOfScript scriptType, Object* parent, Catrobat_Player::NativeC
 		if (turnRightBrick)
 		{
 			m_bricks.push_back(std::unique_ptr<Brick>(make_unique<TurnRightBrick>(turnRightBrick, this)));
+			continue;
+		}
+
+		auto setSizeToBrick = dynamic_cast<Catrobat_Player::NativeComponent::ISetSizeToBrick^>(brick);
+		if (setSizeToBrick)
+		{
+			m_bricks.push_back(std::unique_ptr<Brick>(make_unique<SetSizeToBrick>(setSizeToBrick, this)));
 			continue;
 		}
 	}

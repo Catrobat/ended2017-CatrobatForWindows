@@ -1,8 +1,10 @@
-﻿using System.Xml.Linq;
+﻿using Catrobat_Player.NativeComponent;
+using System.Xml.Linq;
+using System;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 {
-    public partial class XmlFormulaTree : XmlObjectNode
+    public partial class XmlFormulaTree : XmlObjectNode, IFormulaTree
     {
         public XmlFormulaTree LeftChild { get; set; }
 
@@ -11,6 +13,18 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
         public string VariableType { get; set; }
 
         public string VariableValue { get; set; }
+
+        IFormulaTree IFormulaTree.LeftChild
+        {
+            get { return LeftChild; }
+            set { }
+        }
+
+        IFormulaTree IFormulaTree.RightChild
+        {
+            get { return RightChild; }
+            set { }
+        }
 
         public XmlFormulaTree()
         {
@@ -23,28 +37,28 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if(xRoot.Element("leftChild") != null)
+            if (xRoot.Element("leftChild") != null)
                 LeftChild = new XmlFormulaTree(xRoot.Element("leftChild"));
             if (xRoot.Element("rightChild") != null)
                 RightChild = new XmlFormulaTree(xRoot.Element("rightChild"));
 
             if (xRoot.Element("type") != null)
-            VariableType = xRoot.Element("type").Value;
+                VariableType = xRoot.Element("type").Value;
             if (xRoot.Element("value") != null)
-            VariableValue = xRoot.Element("value").Value;
+                VariableValue = xRoot.Element("value").Value;
         }
 
         internal override XElement CreateXml()
         {
             var xRoot = new XElement("formulaTree");
 
-            if(LeftChild != null)
+            if (LeftChild != null)
                 xRoot.Add(LeftChild.CreateXML("leftChild"));
-            if(RightChild != null)
+            if (RightChild != null)
                 xRoot.Add(RightChild.CreateXML("rightChild"));
-            if(VariableType != null)
+            if (VariableType != null)
                 xRoot.Add(new XElement("type", VariableType));
-            if(VariableValue != null)
+            if (VariableValue != null)
                 xRoot.Add(new XElement("value", VariableValue));
 
             return xRoot;
