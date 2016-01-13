@@ -11,24 +11,21 @@ Header::Header(Catrobat_Player::NativeComponent::IHeader^ header) :
 	m_applicationName(Helper::StdString(header->ApplicationName)),
 	m_applicationVersion(Helper::StdString(header->ApplicationVersion)),
 	m_catrobatLanguageVersion(Helper::StdString(header->CatrobatLanguageVersion)),
-	m_dateTimeUpload(header->DateTimeUpload),
+	m_dateTimeUpload(Helper::StdString(header->DateTimeUpload)),
 	m_description(Helper::StdString(header->Description)),
 	m_deviceName(Helper::StdString(header->DeviceName)),
 	m_mediaLicense(Helper::StdString(header->MediaLicense)),
 	m_platform(Helper::StdString(header->TargetPlatform)),
-	m_platformVersion(header->PlatformVersion),
+	m_platformVersion(Helper::StdString(header->PlatformVersion)),
 	m_programLicense(Helper::StdString(header->ProgramLicense)),
 	m_programName(Helper::StdString(header->ProgramName)),
 	m_remixOf(Helper::StdString(header->RemixOf)),
 	m_screenHeight(header->ScreenHeight),
 	m_screenWidth(header->ScreenWidth),
+	m_tags(Helper::StdString(header->Tags)),
 	m_url(Helper::StdString(header->Url)),
 	m_userHandle(Helper::StdString(header->UserHandle))
 {
-	for each (Platform::String^ tag in header->Tags)
-	{
-		m_tags.push_back(Helper::StdString(tag));
-	}
 }
 
 

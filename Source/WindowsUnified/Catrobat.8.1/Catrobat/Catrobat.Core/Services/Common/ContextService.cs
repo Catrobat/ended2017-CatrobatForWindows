@@ -388,7 +388,7 @@ namespace Catrobat.IDE.Core.Services.Common
             program.ProgramHeader.DeviceName = ServiceLocator.
                 SystemInformationService.DeviceName;
 
-            program.ProgramHeader.Platform = ServiceLocator.
+            program.ProgramHeader.TargetPlatform = ServiceLocator.
                 SystemInformationService.PlatformName;
 
             program.ProgramHeader.PlatformVersion = ServiceLocator.

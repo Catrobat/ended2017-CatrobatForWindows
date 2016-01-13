@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         public string MediaLicense { get; set; }
 
-        public string Platform { get; set; }
+        public string TargetPlatform { get; set; }
 
         public string PlatformVersion { get; set; }
 
@@ -45,71 +45,6 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         public string Url { get; set; }
 
         public string UserHandle { get; set; }
-
-        IList<string> IHeader.Tags
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        int IHeader.PlatformVersion
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string TargetPlatform
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        long IHeader.DateTimeUpload
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
 
         public XmlProjectHeader(bool isAutoFillProperties = true)
         {
@@ -167,7 +102,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
             Description = xRoot.Element("description").Value;
             DeviceName = xRoot.Element("deviceName").Value;
             MediaLicense = xRoot.Element("mediaLicense").Value;
-            Platform = xRoot.Element("platform").Value;
+            TargetPlatform = xRoot.Element("platform").Value;
             PlatformVersion = xRoot.Element("platformVersion").Value;
             ProgramLicense = xRoot.Element("programLicense").Value;
             ProgramName = xRoot.Element("programName").Value;
@@ -230,7 +165,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
             xProjectHeader.Add(new XElement("platform")
             {
-                Value = Platform
+                Value = TargetPlatform
             });
 
             xProjectHeader.Add(new XElement("platformVersion")
