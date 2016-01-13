@@ -256,11 +256,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ITurnRightBrick.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)IScript.h">
       <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)IBrick.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)IScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IBrick.h">
+      <Filter>NativeComponent\Interface\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ITurnRightBrick.h">
+      <Filter>NativeComponent\Interface\Bricks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
@@ -536,6 +540,9 @@
     </Filter>
     <Filter Include="NativeComponent\Interface">
       <UniqueIdentifier>{9526212e-40da-4755-9a0e-0707a23d8b50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NativeComponent\Interface\Bricks">
+      <UniqueIdentifier>{c87ce243-a674-4eba-a35d-2d8af590531a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
