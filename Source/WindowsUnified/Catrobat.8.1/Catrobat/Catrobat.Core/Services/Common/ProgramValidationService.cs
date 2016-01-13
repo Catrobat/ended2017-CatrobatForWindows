@@ -13,6 +13,7 @@ using Catrobat.IDE.Core.Xml;
 using Catrobat.IDE.Core.Xml.VersionConverter;
 using Catrobat.IDE.Core.Xml.XmlObjects;
 using Catrobat.IDE.Core.XmlModelConvertion.Converters;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
@@ -43,7 +44,7 @@ namespace Catrobat.IDE.Core.Services.Common
                     checkResult.State = ProgramState.FilesMissing;
                     return checkResult;
                 }
-                programCode = await storage.ReadTextFileAsync(pathToProgramCodeFile);                
+                programCode = await storage.ReadTextFileAsync(pathToProgramCodeFile);
             }
 
             var converterResult = await CatrobatVersionConverter.
@@ -83,6 +84,7 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 ProgramConverter programConverter = new ProgramConverter();
                 checkResult.Program = programConverter.Convert(convertedProgram);
+                NativeWrapper.SetProject(convertedProgram);
             }
             catch (Exception)
             {
@@ -92,7 +94,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 return checkResult;
             }
 
-            if(programName == null)
+            if (programName == null)
                 programName = XmlProgramHelper.GetProgramName(converterResult.Xml);
 
             checkResult.ProgramHeader = new LocalProgramHeader

@@ -84,6 +84,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <ProjectReference Include="..\Catrobat.Player\Catrobat.Player.WindowsPhone\Catrobat.Player.WindowsPhone.vcxproj">
+      <Project>{54144ca7-b859-4f79-b682-dad92b4e3353}</Project>
+      <Name>Catrobat.Player.WindowsPhone</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Catrobat.Xml\Catrobat.Xml.csproj">
       <Project>{5a97f09e-beb2-48ee-bec2-bedea5a4145d}</Project>
       <Name>Catrobat.Xml</Name>

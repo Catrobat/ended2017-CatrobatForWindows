@@ -10,10 +10,11 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Bricks;
 using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow;
 using Catrobat.IDE.Core.Xml.XmlObjects.Scripts;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
+using Catrobat_Player.NativeComponent;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects
 {
-    public partial class XmlProgram : XmlObjectRoot
+    public partial class XmlProgram : XmlObjectRoot, IProject
     {
         #region Properties
 
@@ -24,6 +25,45 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         public XmlSpriteList SpriteList { get; set; }
 
         public XmlVariableList VariableList { get; set; }
+
+        public IList<IObject> Objects
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public IList<IObject> Variables
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public IHeader Header
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         #endregion
 
