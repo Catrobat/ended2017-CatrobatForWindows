@@ -1,5 +1,7 @@
 #pragma once
 
+#include "IFormulaTree.h"
+
 #include <string>
 #include <map>
 
@@ -78,7 +80,7 @@ enum Sensor
 class FormulaTree
 {
 public:
-	FormulaTree(std::string type, std::string value);
+	FormulaTree(Catrobat_Player::NativeComponent::IFormulaTree^ formulaTree);
 
 	void SetLeftChild(FormulaTree *leftChild);
 	void SetRightChild(FormulaTree *rightChild);

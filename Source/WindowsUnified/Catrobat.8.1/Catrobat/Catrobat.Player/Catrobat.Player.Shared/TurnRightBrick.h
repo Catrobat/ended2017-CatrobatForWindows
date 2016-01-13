@@ -12,6 +12,6 @@ namespace ProjectStructure
 		TurnRightBrick(Catrobat_Player::NativeComponent::ITurnRightBrick^ brick, Script* parent);
 		void Execute();
 	private:
-		FormulaTree *m_rotation;
+		std::shared_ptr<FormulaTree> m_rotation;
 	};
 }

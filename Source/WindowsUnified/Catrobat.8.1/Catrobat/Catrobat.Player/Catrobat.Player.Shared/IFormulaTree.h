@@ -10,7 +10,7 @@ namespace Catrobat_Player
 			virtual property IFormulaTree^ RightChild;
 			virtual property IFormulaTree^ LeftChild;
 			virtual property int Type;
-			virtual property Platform::String Value;
+			virtual property Platform::String^ Value;
 			virtual property int Operator;
 			virtual property int Function;
 			virtual property int Sensor;

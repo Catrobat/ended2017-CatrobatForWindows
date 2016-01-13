@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IBrick.h"
+#include "IFormulaTree.h"
 
 namespace Catrobat_Player
 {
@@ -9,7 +10,7 @@ namespace Catrobat_Player
 		public interface class ITurnRightBrick : public IBrick
 		{
 		public:
-			virtual property int Rotation;
+			virtual property IFormulaTree^ Rotation;
 		};
 	}
 }
