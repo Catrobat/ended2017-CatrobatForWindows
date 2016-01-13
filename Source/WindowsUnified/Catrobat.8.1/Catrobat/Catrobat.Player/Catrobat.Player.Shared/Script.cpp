@@ -7,6 +7,8 @@
 #include "SetSizeToBrick.h"
 #include "IWaitBrick.h"
 #include "WaitBrick.h"
+#include "IBroadcastBrick.h"
+#include "BroadcastBrick.h"
 
 #include <windows.system.threading.h>
 #include <windows.foundation.h>

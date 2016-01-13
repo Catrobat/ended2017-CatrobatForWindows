@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
-    public partial class XmlBroadcastBrick : XmlBrick
+    public partial class XmlBroadcastBrick : XmlBrick , Catrobat_Player.NativeComponent.IBroadcastBrick
     {
         public string BroadcastMessage { get; set; }
 
