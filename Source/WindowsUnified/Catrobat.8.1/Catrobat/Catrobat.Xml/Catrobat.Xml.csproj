@@ -189,9 +189,10 @@
     <Compile Include="XPathHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Catrobat_Player.x86" Condition="'$(Platform)' == 'x86'">
-      <HintPath>..\Debug\Catrobat.Player.WindowsPhone\Catrobat_Player.winmd</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Catrobat.Player\Catrobat.Player.WindowsPhone\Catrobat.Player.WindowsPhone.vcxproj">
+      <Project>{54144ca7-b859-4f79-b682-dad92b4e3353}</Project>
+      <Name>Catrobat.Player.WindowsPhone</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
