@@ -5,16 +5,18 @@
 #include "Interpreter.h"
 
 using namespace ProjectStructure;
+using namespace std;
 
-PlaceAtBrick::PlaceAtBrick(FormulaTree *positionX, FormulaTree *positionY, Script* parent) :
+PlaceAtBrick::PlaceAtBrick(Catrobat_Player::NativeComponent::IPlaceAtBrick^ brick, Script* parent) :
 	Brick(TypeOfBrick::PlaceAtBrick, parent),
-	m_positionX(positionX), m_positionY(positionY)
+	m_positionX(make_shared<FormulaTree>(brick->PositionX)),
+	m_positionY(make_shared<FormulaTree>(brick->PositionY))
 {
 }
 
 void PlaceAtBrick::Execute()
 {
-	auto xPosition = Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX, m_parent->GetParent());
-	auto yPosition = Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY, m_parent->GetParent());
+	auto xPosition = Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX.get(), m_parent->GetParent());
+	auto yPosition = Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY.get(), m_parent->GetParent());
 	m_parent->GetParent()->SetTranslation(xPosition, yPosition);
 }

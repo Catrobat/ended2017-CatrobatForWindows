@@ -1,6 +1,7 @@
 #pragma once
 
 #include "VariableManagementBrick.h"
+#include "IChangeVariableBrick.h"
 
 namespace ProjectStructure
 {
@@ -8,7 +9,7 @@ namespace ProjectStructure
 		: public VariableManagementBrick
 	{
 	public:
-		ChangeVariableBrick(FormulaTree *variableFormula, Script* parent);
+		ChangeVariableBrick(Catrobat_Player::NativeComponent::IChangeVariableBrick^ brick, Script* parent);
 		void Execute();
 	};
 }

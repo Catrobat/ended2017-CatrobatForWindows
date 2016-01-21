@@ -5,8 +5,8 @@
 
 using namespace ProjectStructure;
 
-ChangeVariableBrick::ChangeVariableBrick(FormulaTree *variableFormula, Script* parent)
-	: VariableManagementBrick(TypeOfBrick::SetVariableBrick, variableFormula, parent)
+ChangeVariableBrick::ChangeVariableBrick(Catrobat_Player::NativeComponent::IChangeVariableBrick^ brick, Script* parent)
+	: VariableManagementBrick(TypeOfBrick::SetVariableBrick, brick, parent)
 {
 }
 

@@ -2,6 +2,7 @@
 
 #include "Brick.h"
 #include "FormulaTree.h"
+#include "IChangeSizeByBrick.h"
 
 namespace ProjectStructure
 {
@@ -9,10 +10,10 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		ChangeSizeByBrick(FormulaTree *scale, Script* parent);
+		ChangeSizeByBrick(Catrobat_Player::NativeComponent::IChangeSizeByBrick^ brick, Script* parent);
 		void Execute();
 	private:
-		FormulaTree *m_scale;
+		std::shared_ptr<FormulaTree> m_scale;
 	};
 
 }

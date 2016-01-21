@@ -4,15 +4,9 @@
 using namespace std;
 using namespace ProjectStructure;
 
-VariableManagementBrick::VariableManagementBrick(TypeOfBrick brickType, FormulaTree *variableFormula, Script* parent) :
-	Brick(brickType, parent), m_variableFormula(variableFormula)
+VariableManagementBrick::VariableManagementBrick(TypeOfBrick brickType, Catrobat_Player::NativeComponent::IVariableManagementBrick^ brick, Script* parent) :
+	Brick(brickType, parent),
+	m_variableFormula(make_shared<FormulaTree>(brick->VariableFormula)),
+	m_variable(make_shared<UserVariable>(brick->Variable))
 {
-}
-
-void VariableManagementBrick::SetVariable(shared_ptr<UserVariable> variable)
-{
-	if (variable != NULL)
-	{
-		m_variable = variable;
-	}
 }

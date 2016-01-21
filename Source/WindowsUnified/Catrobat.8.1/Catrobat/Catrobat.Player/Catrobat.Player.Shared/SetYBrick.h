@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Brick.h"
+#include "ISetYBrick.h"
 
 namespace ProjectStructure
 {
@@ -8,9 +9,9 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		SetYBrick(FormulaTree *positionY, Script* parent);
+		SetYBrick(Catrobat_Player::NativeComponent::ISetYBrick^ brick, Script* parent);
 		void Execute();
 	private:
-		FormulaTree *m_positionY;
+		std::shared_ptr<FormulaTree> m_positionY;
 	};
 }

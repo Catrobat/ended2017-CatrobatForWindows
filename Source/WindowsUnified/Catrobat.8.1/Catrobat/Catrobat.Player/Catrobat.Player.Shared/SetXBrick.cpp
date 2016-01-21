@@ -5,10 +5,11 @@
 #include "Interpreter.h"
 
 using namespace ProjectStructure;
+using namespace std;
 
-SetXBrick::SetXBrick(FormulaTree *positionX, Script* parent) :
+SetXBrick::SetXBrick(Catrobat_Player::NativeComponent::ISetXBrick^ brick, Script* parent) :
 	Brick(TypeOfBrick::SetXBrick, parent),
-	m_positionX(positionX)
+	m_positionX(make_shared<FormulaTree>(brick->PositionX))
 {
 }
 
@@ -16,5 +17,5 @@ void SetXBrick::Execute()
 {
 	float currentX, currentY;
 	m_parent->GetParent()->GetTranslation(currentX, currentY);
-	m_parent->GetParent()->SetTranslation(Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX, m_parent->GetParent()), currentY);
+	m_parent->GetParent()->SetTranslation(Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX.get(), m_parent->GetParent()), currentY);
 }

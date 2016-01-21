@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Brick.h"
+#include "IPointToBrick.h"
 
 namespace ProjectStructure
 {
@@ -8,9 +9,9 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		PointToBrick(FormulaTree *rotation, Script* parent);
+		PointToBrick(Catrobat_Player::NativeComponent::IPointToBrick^ brick, Script* parent);
 		void Execute();
 	private:
-		FormulaTree *m_rotation;
+		std::shared_ptr<FormulaTree> m_rotation;
 	};
 }

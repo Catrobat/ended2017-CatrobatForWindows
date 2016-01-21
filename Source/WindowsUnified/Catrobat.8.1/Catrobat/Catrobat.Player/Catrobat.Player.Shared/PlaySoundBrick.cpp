@@ -1,12 +1,14 @@
 #include "pch.h"
 #include "PlaySoundBrick.h"
+#include "Helper.h"
 
 using namespace std;
 using namespace ProjectStructure;
 
-PlaySoundBrick::PlaySoundBrick(string filename, string name, Script* parent) :
+PlaySoundBrick::PlaySoundBrick(Catrobat_Player::NativeComponent::IPlaySoundBrick^ brick, Script* parent) :
 	Brick(TypeOfBrick::PlaySoundBrick, parent),
-	m_filename(filename), m_name(name)
+	m_filename(Helper::StdString(brick->FileName)),
+	m_name(Helper::StdString(brick->Name))
 {
 }
 

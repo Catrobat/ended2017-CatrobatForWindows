@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Brick.h"
+#include "IPlaceAtBrick.h"
 
 namespace ProjectStructure
 {
@@ -8,10 +9,10 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		PlaceAtBrick(FormulaTree *positionX, FormulaTree *positionY, Script* parent);
+		PlaceAtBrick(Catrobat_Player::NativeComponent::IPlaceAtBrick^ brick, Script* parent);
 		void Execute();
 	private:
-		FormulaTree *m_positionX;
-		FormulaTree *m_positionY;
+		std::shared_ptr<FormulaTree> m_positionX;
+		std::shared_ptr<FormulaTree> m_positionY;
 	};
 }

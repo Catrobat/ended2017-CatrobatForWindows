@@ -1,11 +1,12 @@
 #include "pch.h"
 #include "BroadcastBrick.h"
 #include "BroadcastMessageDaemon.h"
+#include "Helper.h"
 
 using namespace ProjectStructure;
 
-BroadcastBrick::BroadcastBrick(std::string broadcastMessage, Script* parent)
-	: Brick(TypeOfBrick::BroadcastBrick, parent), m_broadcastMessage(broadcastMessage)
+BroadcastBrick::BroadcastBrick(Catrobat_Player::NativeComponent::IBroadcastBrick^ brick, Script* parent)
+	: Brick(TypeOfBrick::BroadcastBrick, parent), m_broadcastMessage(Helper::StdString(brick->BroadcastMessage))
 {
 }
 

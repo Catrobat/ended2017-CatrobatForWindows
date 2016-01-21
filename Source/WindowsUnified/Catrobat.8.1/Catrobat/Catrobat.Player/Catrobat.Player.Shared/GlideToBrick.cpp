@@ -3,26 +3,29 @@
 #include "Script.h"
 #include "Object.h"
 #include "Interpreter.h"
+
 #include <windows.h>
 #include <ppltasks.h>
 
 using namespace ProjectStructure;
+using namespace std;
 
-GlideToBrick::GlideToBrick(FormulaTree *xDestination, FormulaTree *yDestination, FormulaTree *duration, Script* parent) :
+GlideToBrick::GlideToBrick(Catrobat_Player::NativeComponent::IGLideToBrick^ brick, Script* parent) :
 	Brick(TypeOfBrick::GlideToBrick, parent),
-	m_xDestination(xDestination), m_yDestination(yDestination),
-	m_duration(duration)
+	m_xDestination(make_shared<FormulaTree>(brick->DestinationX)),
+	m_yDestination(make_shared<FormulaTree>(brick->DestinationY)),
+	m_duration(make_shared<FormulaTree>(brick->Duration))
 {
 }
 
 void GlideToBrick::Execute()
 {
-	float steps = Interpreter::Instance()->EvaluateFormulaToFloat(m_duration, m_parent->GetParent()) / 0.02f; // 50 Hz
+	float steps = Interpreter::Instance()->EvaluateFormulaToFloat(m_duration.get(), m_parent->GetParent()) / 0.02f; // 50 Hz
 
 	float currentX, currentY;
 	m_parent->GetParent()->GetTranslation(currentX, currentY);
-	float x_movement = (currentX - Interpreter::Instance()->EvaluateFormulaToFloat(m_xDestination, m_parent->GetParent())) / steps;
-	float y_movement = (currentY - Interpreter::Instance()->EvaluateFormulaToFloat(m_yDestination, m_parent->GetParent())) / steps;
+	float x_movement = (currentX - Interpreter::Instance()->EvaluateFormulaToFloat(m_xDestination.get(), m_parent->GetParent())) / steps;
+	float y_movement = (currentY - Interpreter::Instance()->EvaluateFormulaToFloat(m_yDestination.get(), m_parent->GetParent())) / steps;
 
 	for (int i = 0; i < steps; i++)
 	{

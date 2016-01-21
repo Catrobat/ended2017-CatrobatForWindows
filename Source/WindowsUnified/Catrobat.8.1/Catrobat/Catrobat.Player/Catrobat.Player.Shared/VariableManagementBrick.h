@@ -3,6 +3,7 @@
 #include "Brick.h"
 #include "UserVariable.h"
 #include "FormulaTree.h"
+#include "IVariableManagementBrick.h"
 
 namespace ProjectStructure
 {
@@ -10,13 +11,11 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		VariableManagementBrick(TypeOfBrick brickType, FormulaTree *variableFormula, Script* parent);
+		VariableManagementBrick(TypeOfBrick brickType, Catrobat_Player::NativeComponent::IVariableManagementBrick^ brick, Script* parent);
 		virtual void Execute() = 0;
-
-		void SetVariable(std::shared_ptr<UserVariable> variable);
 
 	protected:
 		std::shared_ptr<UserVariable> m_variable;
-		FormulaTree *m_variableFormula;
+		std::shared_ptr<FormulaTree> m_variableFormula;
 	};
 }

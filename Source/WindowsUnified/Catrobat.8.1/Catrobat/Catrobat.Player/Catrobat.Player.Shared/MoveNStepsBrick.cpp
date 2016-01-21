@@ -8,10 +8,11 @@
 #include <ppltasks.h>
 
 using namespace ProjectStructure;
+using namespace std;
 
-MoveNStepsBrick::MoveNStepsBrick(FormulaTree *steps, Script* parent) :
+MoveNStepsBrick::MoveNStepsBrick(Catrobat_Player::NativeComponent::IMoveNStepsBrick^ brick, Script* parent) :
 	Brick(TypeOfBrick::MoveNStepsBrick, parent),
-	m_steps(steps)
+	m_steps(make_shared<FormulaTree>(brick->Steps))
 {
 }
 
@@ -31,7 +32,7 @@ void MoveNStepsBrick::Execute()
 
 void MoveNStepsBrick::CalculateNewCoordinates(float &x, float &y)
 {
-	auto steps = Interpreter::Instance()->EvaluateFormula(m_steps, m_parent->GetParent());
+	auto steps = Interpreter::Instance()->EvaluateFormula(m_steps.get(), m_parent->GetParent());
 
 	if (!steps)
 	{

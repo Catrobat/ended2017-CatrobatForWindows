@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Brick.h"
+#include "IGlideBrick.h"
 
 namespace ProjectStructure
 {
@@ -8,11 +9,11 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		GlideToBrick(FormulaTree *xDestination, FormulaTree *yDestination, FormulaTree *duration, Script* parent);
+		GlideToBrick(Catrobat_Player::NativeComponent::IGLideToBrick^ brick, Script* parent);
 		void Execute();
 	private:
-		FormulaTree *m_xDestination;
-		FormulaTree *m_yDestination;
-		FormulaTree *m_duration;
+		std::shared_ptr<FormulaTree> m_xDestination;
+		std::shared_ptr<FormulaTree> m_yDestination;
+		std::shared_ptr<FormulaTree> m_duration;
 	};
 }

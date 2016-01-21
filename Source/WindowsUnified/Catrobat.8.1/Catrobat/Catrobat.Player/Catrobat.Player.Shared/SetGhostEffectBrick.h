@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Brick.h"
+#include "ISetGhostEffectBrick.h"
 
 namespace ProjectStructure
 {
@@ -8,9 +9,9 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		SetGhostEffectBrick(FormulaTree *transparency, Script* parent);
+		SetGhostEffectBrick(Catrobat_Player::NativeComponent::ISetGhostEffectBrick^ brick, Script* parent);
 		void Execute();
 	private:
-		FormulaTree *m_transparency;
+		std::shared_ptr<FormulaTree> m_transparency;
 	};
 }

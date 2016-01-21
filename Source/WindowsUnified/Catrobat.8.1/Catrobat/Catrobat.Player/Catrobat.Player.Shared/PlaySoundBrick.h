@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Brick.h"
+#include "IPlaySoundBrick.h"
 
 namespace ProjectStructure
 {
@@ -8,7 +9,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		PlaySoundBrick(std::string filename, std::string name, Script* parent);
+		PlaySoundBrick(Catrobat_Player::NativeComponent::IPlaySoundBrick^ brick, Script* parent);
 		void Execute();
 	private:
 		std::string m_filename;

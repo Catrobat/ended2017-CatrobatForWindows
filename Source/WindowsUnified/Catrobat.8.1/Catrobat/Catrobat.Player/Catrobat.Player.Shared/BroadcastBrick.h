@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Brick.h"
+#include "IBroadcastBrick.h"
 
 namespace ProjectStructure
 {
@@ -8,7 +9,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		BroadcastBrick(std::string broadcastMessage, Script* parent);
+		BroadcastBrick(Catrobat_Player::NativeComponent::IBroadcastBrick^ brick, Script* parent);
 		void Execute();
 
 	private:

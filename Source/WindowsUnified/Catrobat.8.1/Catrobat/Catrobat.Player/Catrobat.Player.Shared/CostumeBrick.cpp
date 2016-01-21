@@ -2,11 +2,14 @@
 #include "CostumeBrick.h"
 #include "Script.h"
 #include "Object.h"
+#include "Helper.h"
 
 using namespace ProjectStructure;
 
-CostumeBrick::CostumeBrick(std::string costumeDataReference, int index, Script* parent) :
-	Brick(TypeOfBrick::CostumeBrick, parent), m_costumeDataReference(costumeDataReference), m_index(index)
+CostumeBrick::CostumeBrick(Catrobat_Player::NativeComponent::ICostumeBrick^ brick, Script* parent) :
+	Brick(TypeOfBrick::CostumeBrick, parent),
+	m_costumeDataReference(Helper::StdString(brick->CostumeDataReference)),
+	m_index(brick->Index)
 {
 }
 

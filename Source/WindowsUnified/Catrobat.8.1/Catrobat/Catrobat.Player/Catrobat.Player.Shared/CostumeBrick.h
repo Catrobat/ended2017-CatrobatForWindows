@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Brick.h"
+#include "ICostumeBrick.h"
 
 namespace ProjectStructure
 {
@@ -8,7 +9,7 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		CostumeBrick(std::string costumeDataReference, int index, Script* parent);
+		CostumeBrick(Catrobat_Player::NativeComponent::ICostumeBrick^ brick, Script* parent);
 		CostumeBrick(Script* parent);
 
 		void Execute();

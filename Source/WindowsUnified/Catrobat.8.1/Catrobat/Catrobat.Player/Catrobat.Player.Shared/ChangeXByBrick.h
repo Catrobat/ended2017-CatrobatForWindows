@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Brick.h"
+#include "IChangeXByBrick.h"
 
 namespace ProjectStructure
 {
@@ -8,10 +9,10 @@ namespace ProjectStructure
 		public Brick
 	{
 	public:
-		ChangeXByBrick(FormulaTree *offsetX, Script* parent);
+		ChangeXByBrick(Catrobat_Player::NativeComponent::IChangeXByBrick^ brick, Script* parent);
 		void Execute();
 	private:
-		FormulaTree *m_offsetX;
+		std::shared_ptr<FormulaTree> m_offsetX;
 	};
 
 }
