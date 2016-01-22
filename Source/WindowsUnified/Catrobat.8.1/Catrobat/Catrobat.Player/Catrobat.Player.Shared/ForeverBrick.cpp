@@ -5,8 +5,8 @@
 using namespace std;
 using namespace ProjectStructure;
 
-ForeverBrick::ForeverBrick(Script* parent) :
-	ContainerBrick(TypeOfBrick::ContainerBrick, parent)
+ForeverBrick::ForeverBrick(Catrobat_Player::NativeComponent::IForeverBrick^ brick, Script* parent) :
+	ContainerBrick(TypeOfBrick::ContainerBrick, brick, parent)
 {
 }
 
@@ -24,9 +24,4 @@ void ForeverBrick::Execute()
 			brick->Execute();
 		}
 	}
-}
-
-void ForeverBrick::AddBrick(unique_ptr<Brick> brick)
-{
-	m_brickList.push_back(move(brick));
 }

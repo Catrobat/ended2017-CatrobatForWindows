@@ -5,12 +5,11 @@
 using namespace std;
 using namespace ProjectStructure;
 
-IfBrick::IfBrick(FormulaTree *condition, Script* parent) :
-	ContainerBrick(TypeOfBrick::ContainerBrick, parent), m_condition(condition)
+IfBrick::IfBrick(Catrobat_Player::NativeComponent::IIfBrick^ brick, Script* parent) :
+	ContainerBrick(TypeOfBrick::ContainerBrick, brick, parent),
+	m_condition(make_shared<FormulaTree>(brick->Condition))
 {
-	m_currentAddMode = IfBranchType::If;
 }
-
 
 IfBrick::~IfBrick()
 {
@@ -19,35 +18,21 @@ IfBrick::~IfBrick()
 void IfBrick::Execute()
 {
 	// Synchronously execute all subsequent blocks
-	if (Interpreter::Instance()->EvaluateFormulaToBool(m_condition, GetParent()->GetParent()))
-	{
-		for each (auto &brick in m_ifList)
-		{
-			brick->Execute();
-		}
-	}
-	else
-	{
-		for each (auto &brick in m_elseList)
-		{
-			brick->Execute();
-		}
-	}
-}
 
-void IfBrick::AddBrick(unique_ptr<Brick> brick)
-{
-	if (m_currentAddMode == IfBranchType::If)
-	{
-		m_ifList.push_back(move(brick));
-	}
-	else
-	{
-		m_elseList.push_back(move(brick));
-	}
-}
+	// TODO: Use the same list.
 
-void IfBrick::SetCurrentAddMode(IfBranchType mode)
-{
-	m_currentAddMode = mode;
+	//if (Interpreter::Instance()->EvaluateFormulaToBool(m_condition.get(), GetParent()->GetParent()))
+	//{
+	//	for each (auto &brick in m_brickList)
+	//	{
+	//		brick->Execute();
+	//	}
+	//}
+	//else
+	//{
+	//	for each (auto &brick in m_elseList)
+	//	{
+	//		brick->Execute();
+	//	}
+	//}
 }

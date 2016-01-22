@@ -1,16 +1,15 @@
 #pragma once
 
-#include "IBrick.h"
+#include "IContainerBrick.h"
 #include "IFormulaTree.h"
 
 namespace Catrobat_Player
 {
 	namespace NativeComponent
 	{
-		public interface class IRepeatBrick : public IBrick
+		public interface class IRepeatBrick : public IContainerBrick
 		{
 		public:
-			virtual property Windows::Foundation::Collections::IVector<IBrick^>^ Bricks;
 			virtual property IFormulaTree^ TimesToRepeat;
 		};
 	}

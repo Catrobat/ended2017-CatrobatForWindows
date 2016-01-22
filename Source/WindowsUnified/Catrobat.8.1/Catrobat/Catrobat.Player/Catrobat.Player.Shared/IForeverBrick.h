@@ -1,16 +1,14 @@
 #pragma once
 
-#include "IBrick.h"
+#include "IContainerBrick.h"
 #include "IFormulaTree.h"
 
 namespace Catrobat_Player
 {
 	namespace NativeComponent
 	{
-		public interface class IForeverBrick : public IBrick
+		public interface class IForeverBrick : public IContainerBrick
 		{
-		public:
-			virtual property Windows::Foundation::Collections::IVector<IBrick^>^ Bricks;
 		};
 	}
 }

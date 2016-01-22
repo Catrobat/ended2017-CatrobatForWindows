@@ -2,6 +2,8 @@
 
 #include "ContainerBrick.h"
 #include "Object.h"
+#include "IForeverBrick.h"
+
 #include <list>
 
 namespace ProjectStructure
@@ -10,12 +12,10 @@ namespace ProjectStructure
 		public ContainerBrick
 	{
 	public:
-		ForeverBrick(Script* parent);
+		ForeverBrick(Catrobat_Player::NativeComponent::IForeverBrick^ brick, Script* parent);
 		~ForeverBrick();
 
 		void Execute();
-		void AddBrick(std::unique_ptr<Brick> brick);
 	private:
-		std::list<std::unique_ptr<Brick>> m_brickList;
 	};
 }

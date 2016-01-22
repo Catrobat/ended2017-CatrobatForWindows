@@ -10,6 +10,7 @@ namespace Catrobat_Player
 	{
 		public interface class IContainerBrick : public IBrick
 		{
+			virtual property Windows::Foundation::Collections::IVector<IBrick^>^ Bricks;
 		};
 	}
 }

@@ -2,6 +2,8 @@
 
 #include "ContainerBrick.h"
 #include "Object.h"
+#include "IIfBrick.h"
+
 #include <list>
 
 namespace ProjectStructure
@@ -16,16 +18,11 @@ namespace ProjectStructure
 		public ContainerBrick
 	{
 	public:
-		IfBrick(FormulaTree *condition, Script* parent);
+		IfBrick(Catrobat_Player::NativeComponent::IIfBrick^ brick, Script* parent);
 		~IfBrick();
 
 		void Execute();
-		void AddBrick(std::unique_ptr<Brick> brick);
-		void SetCurrentAddMode(IfBranchType mode);
 	private:
-		std::list<std::unique_ptr<Brick>> m_ifList;
-		std::list<std::unique_ptr<Brick>> m_elseList;
-		FormulaTree *m_condition;
-		IfBranchType m_currentAddMode;
+		std::shared_ptr<FormulaTree> m_condition;
 	};
 }

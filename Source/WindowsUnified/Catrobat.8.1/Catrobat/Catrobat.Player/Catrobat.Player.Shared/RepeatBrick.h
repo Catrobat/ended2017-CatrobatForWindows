@@ -2,6 +2,8 @@
 
 #include "ContainerBrick.h"
 #include "Object.h"
+#include "IRepeatBrick.h"
+
 #include <list>
 
 namespace ProjectStructure
@@ -10,13 +12,11 @@ namespace ProjectStructure
 		public ContainerBrick
 	{
 	public:
-		RepeatBrick(FormulaTree *times, Script* parent);
+		RepeatBrick(Catrobat_Player::NativeComponent::IRepeatBrick^ brick, Script* parent);
 		~RepeatBrick();
 
 		void Execute();
-		void AddBrick(std::unique_ptr<Brick> brick);
 	private:
-		std::list<std::unique_ptr<Brick>> m_brickList;
-		FormulaTree *m_timesToRepeat;
+		std::shared_ptr<FormulaTree> m_timesToRepeat;
 	};
 }

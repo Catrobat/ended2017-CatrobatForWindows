@@ -5,11 +5,11 @@
 using namespace std;
 using namespace ProjectStructure;
 
-RepeatBrick::RepeatBrick(FormulaTree *times, Script* parent) :
-	ContainerBrick(TypeOfBrick::ContainerBrick, parent), m_timesToRepeat(times)
+RepeatBrick::RepeatBrick(Catrobat_Player::NativeComponent::IRepeatBrick^ brick, Script* parent) :
+	ContainerBrick(TypeOfBrick::ContainerBrick, brick, parent),
+	m_timesToRepeat(make_shared<FormulaTree>(brick->TimesToRepeat))
 {
 }
-
 
 RepeatBrick::~RepeatBrick()
 {
@@ -18,7 +18,7 @@ RepeatBrick::~RepeatBrick()
 void RepeatBrick::Execute()
 {
 	int global = 0;
-	int times = Interpreter::Instance()->EvaluateFormulaToInt(m_timesToRepeat, GetParent()->GetParent());
+	int times = Interpreter::Instance()->EvaluateFormulaToInt(m_timesToRepeat.get(), GetParent()->GetParent());
 
 	while (global < times)
 	{
@@ -29,9 +29,4 @@ void RepeatBrick::Execute()
 		global++;
 		Concurrency::wait(20);
 	}
-}
-
-void RepeatBrick::AddBrick(unique_ptr<Brick> brick)
-{
-	m_brickList.push_back(move(brick));
 }
