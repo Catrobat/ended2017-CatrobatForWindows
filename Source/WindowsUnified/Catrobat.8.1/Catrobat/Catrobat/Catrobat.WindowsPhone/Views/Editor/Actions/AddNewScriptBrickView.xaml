@@ -45,6 +45,7 @@
                 ItemWidthPortrait="370" ItemWidthLandscape="450" 
             />-->
             <catrobatListView:CatrobatListView
+                Name="Top"
                 VerticalAlignment="Top"
                 ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
                 ItemTemplate="{StaticResource ActionTemplateSelectorTemplate}"
@@ -52,7 +53,7 @@
                 ItemTapped="CatrobatListView_OnItemTapped"
                 ReorderEnabled="False"
                 GroupingEnabled="False"
-                ItemWidthPortrait="0" ItemWidthLandscape="0" 
+                ItemWidthPortrait="370" ItemWidthLandscape="450" 
             />
         </Grid>
   </Grid>
