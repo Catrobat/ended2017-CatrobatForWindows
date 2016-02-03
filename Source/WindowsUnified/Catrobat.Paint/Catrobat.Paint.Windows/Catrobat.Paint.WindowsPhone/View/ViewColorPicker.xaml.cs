@@ -181,7 +181,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 var current_solid_brush = new SolidColorBrush(current_color);
                 PocketPaintApplication.GetInstance().PaintData.colorSelected = current_solid_brush;
 
-                // TODO: David PocketPaintApplication.GetInstance().RectangleSelectionControl.fillOfRectangleToDraw = current_solid_brush;
+                PocketPaintApplication.GetInstance().RectangleSelectionControl.fillOfRectangleToDraw = current_solid_brush;
                 PocketPaintApplication.GetInstance().EllipseSelectionControl.fillOfEllipseToDraw = current_solid_brush;
             }
 

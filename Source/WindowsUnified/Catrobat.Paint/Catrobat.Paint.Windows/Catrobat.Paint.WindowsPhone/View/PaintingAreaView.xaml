@@ -10,7 +10,7 @@
     
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" NavigationCacheMode="Required" >
-
+  
     <Grid x:Name="LayoutRoot" IsHitTestVisible="True">
         <Grid x:Name="GridWorkingSpace" IsHitTestVisible="True">
             <Grid x:Name="PaintingAreaCheckeredGrid" IsHitTestVisible="True">
@@ -116,16 +116,23 @@
                     <BitmapIcon UriSource="/Assets/ColorPicker/icon_menu_strokes.png"/>
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton x:Name="btnColor" Label="Farbe">
-                <AppBarButton.Icon>
-                    <BitmapIcon UriSource="/Assets/ColorPicker/icon_menu_color_palette.png"/>
-                </AppBarButton.Icon>
-            </AppBarButton>
-            <AppBarButton x:Name="btnTools" Label="Werkzeuge">
+      <AppBarButton x:Name="btnColor" Label="Farbe">
+        <AppBarButton.Icon>
+          <BitmapIcon UriSource="/Assets/ColorPicker/icon_menu_color_palette.png"/>
+        </AppBarButton.Icon>
+      </AppBarButton>
+
+      <!-- <Button x:Name="BtnSelectedColor" Height="60" Margin="219,0,0,0" MinWidth="1" Width="50" Padding="0">
+        <Grid x:Name="GrdBtnSelectedColor" Height="60" VerticalAlignment="Center" Width="50">
+          <Image x:Name="ImgTransparence"  Height="60" Margin="0" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Visibility="Visible" Width="50" />
+          <Rectangle x:Name="RecSelectedColor" Fill="Black" Height="60" Margin="0" Visibility="Visible" Width="50"/>
+        </Grid>
+      </Button>-->
+      <!--<AppBarButton x:Name="btnTools" Label="Werkzeuge">
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="/Assets/AppBar/menu_tools_.png"/>
                 </AppBarButton.Icon>
-            </AppBarButton>
+            </AppBarButton>-->
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Name="btnSave" Label="Speichern" />
                 <AppBarButton x:Name="btnSaveCopy" Label="Kopie Speichern" />
