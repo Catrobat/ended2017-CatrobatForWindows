@@ -97,7 +97,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().AppbarTop.ToolChangedHere(PocketPaintApplication.GetInstance().ToolCurrent);
 
             //btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
-            btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
+            //btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
             //btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
             //btnThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnThickness_OnClick;
 
@@ -475,11 +475,11 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnBrushThickness.Click += btnThickness_Click;
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
 
-                AppBarButton app_btnColor = new AppBarButton();
+                /*AppBarButton app_btnColor = new AppBarButton();
                 app_btnColor.Icon = bitmapIconFrom("icon_menu_color_palette.png");
                 app_btnColor.Label = "Farbe";
                 app_btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
-                cmdBar.PrimaryCommands.Add(app_btnColor);
+                cmdBar.PrimaryCommands.Add(app_btnColor);*/
 
                 if("barCursor" == type)
                 {
@@ -562,7 +562,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             else if ("barFill" == type)
             {
 
-                AppBarButton app_btnColor = new AppBarButton();
+                /*AppBarButton app_btnColor = new AppBarButton();
 
                 app_btnColor.Icon = bitmapIconFrom("icon_menu_color_palette.png");
 
@@ -570,7 +570,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 app_btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
 
-                cmdBar.PrimaryCommands.Add(app_btnColor);
+                cmdBar.PrimaryCommands.Add(app_btnColor);*/
             }
 
             else if ("barEllipse" == type)

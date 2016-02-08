@@ -76,7 +76,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
                 }
             }
 
-            /*ImgTransparence.Width *= width_multiplicator;
+            ImgTransparence.Width *= width_multiplicator;
             ImgTransparence.Height *= height_multiplicator;
             ImgTransparence.Margin = new Thickness(
                                         ImgTransparence.Margin.Left * width_multiplicator,
@@ -95,8 +95,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             GrdBtnSelectedColor.Height *= height_multiplicator;
             GrdBtnSelectedColor.Width *= width_multiplicator;
 
-            BtnSelectedColor.Background = PocketPaintApplication.GetInstance().PaintData.colorSelected;*/
-            //PocketPaintApplication.GetInstance().PaintData.colorChanged += ColorChangedHere;
+            BtnSelectedColor.Background = PocketPaintApplication.GetInstance().PaintData.colorSelected;
+            PocketPaintApplication.GetInstance().PaintData.colorChanged += ColorChangedHere;
             PocketPaintApplication.GetInstance().PaintData.toolCurrentChanged += ToolChangedHere;
             this.GrdLayoutRoot.Background = new SolidColorBrush(Color.FromArgb(255, 25, 165, 184));
             PocketPaintApplication.GetInstance().AppbarTop = this;
@@ -105,13 +105,14 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             BtnUndo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnUndo_Click;
             BtnRedo.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnRedo_Click;
             BtnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
-            //BtnSelectedColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
+            BtnSelectedColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
             //btnMoveScreen.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreen_OnClick;
             BtnToolSelection.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnMoveScreenEllipse_OnClick;
             BtnUndo.IsEnabled = false;
             BtnRedo.IsEnabled = false;
         }
-        /*private void ColorChangedHere(SolidColorBrush color)
+
+        private void ColorChangedHere(SolidColorBrush color)
         {
             if (color.Color != Colors.Transparent)
             {
@@ -121,7 +122,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
             {
                 RecSelectedColor.Fill = new SolidColorBrush(Colors.Transparent);
             }
-        }*/
+        }
 
         public void ToolChangedHere(ToolBase tool)
         {
@@ -217,7 +218,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.AppBar
 
         public void BtnSelectedColorVisible(bool enable)
         {
-            //BtnSelectedColor.IsEnabled = enable;
+            BtnSelectedColor.IsEnabled = enable;
         }
 
         private Uri GetToolImageUri(ToolType tooltype)

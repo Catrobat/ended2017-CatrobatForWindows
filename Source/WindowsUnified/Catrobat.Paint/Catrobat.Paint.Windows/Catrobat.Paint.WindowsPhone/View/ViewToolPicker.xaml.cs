@@ -113,6 +113,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                             pocketPaintApplication.BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
                             pocketPaintApplication.ToolCurrent.ResetDrawingSpace();
                             pocketPaintApplication.EllipseSelectionControl.Visibility = Visibility.Visible;
+                            pocketPaintApplication.AppbarTop.BtnSelectedColorVisible(true);
                             PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
                             break;
                         case "BtnEraser":
@@ -162,6 +163,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                             pocketPaintApplication.BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
                             pocketPaintApplication.ToolCurrent.ResetDrawingSpace();
                             pocketPaintApplication.RectangleSelectionControl.Visibility = Visibility.Visible;
+                            pocketPaintApplication.AppbarTop.BtnSelectedColorVisible(true);
                             PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
                             break;
                         case "BtnRotate":
