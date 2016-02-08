@@ -1428,15 +1428,52 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             if (PocketPaintApplication.GetInstance() != null)
             {
-                PaintingAreaManipulationListener currentAbl = PocketPaintApplication.GetInstance().PaintingAreaManipulationListener;
-                EraserCanvas.ManipulationStarted += currentAbl.ManipulationStarted;
-                EraserCanvas.ManipulationDelta += currentAbl.ManipulationDelta;
-                EraserCanvas.ManipulationCompleted += currentAbl.ManipulationCompleted;
-
-                EraserCanvas.PointerEntered += PaintingAreaCanvas_PointerEntered;
-                EraserCanvas.PointerMoved += PaintingAreaCanvas_PointerMoved;
-                EraserCanvas.PointerReleased += PaintingAreaCanvas_PointerReleased;
+                EraserCanvas.PointerEntered += EraserCanvas_PointerEntered;
+                EraserCanvas.PointerMoved += EraserCanvas_PointerMoved;
+                EraserCanvas.PointerReleased += EraserCanvas_PointerReleased;
             }
+        }
+
+        void EraserCanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            var point = new Point(Convert.ToInt32(e.GetCurrentPoint(EraserCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(EraserCanvas).Position.Y));
+
+            // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
+            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
+            {
+                return;
+            }
+
+            PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(point);
+
+            e.Handled = true;
+        }
+
+        private void EraserCanvas_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            var point = new Point(Convert.ToInt32(e.GetCurrentPoint(EraserCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(EraserCanvas).Position.Y));
+
+            // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
+            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
+            {
+                return;
+            }
+            PocketPaintApplication.GetInstance().ToolCurrent.HandleMove(point);
+        }
+
+        private void EraserCanvas_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            var point = new Point(Convert.ToInt32(e.GetCurrentPoint(EraserCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(EraserCanvas).Position.Y));
+
+            // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
+            if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
+            {
+                return;
+            }
+
+            PocketPaintApplication.GetInstance().ToolCurrent.HandleDown(point);
+
+            e.Handled = true;
         }
 
         private void unloadManipulationPaintingAreaCanvasEvents()
@@ -1447,16 +1484,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PaintingAreaCanvas.ManipulationStarted -= currentAbl.ManipulationStarted;
                 PaintingAreaCanvas.ManipulationDelta -= currentAbl.ManipulationDelta;
                 PaintingAreaCanvas.ManipulationCompleted -= currentAbl.ManipulationCompleted;
-            }
-        }
-        private void unloadManipulationEraserCanvasEvents()
-        {
-            if (PocketPaintApplication.GetInstance() != null)
-            {
-                PaintingAreaManipulationListener currentAbl = PocketPaintApplication.GetInstance().PaintingAreaManipulationListener;
-                EraserCanvas.ManipulationStarted -= currentAbl.ManipulationStarted;
-                EraserCanvas.ManipulationDelta -= currentAbl.ManipulationDelta;
-                EraserCanvas.ManipulationCompleted -= currentAbl.ManipulationCompleted;
             }
         }
 

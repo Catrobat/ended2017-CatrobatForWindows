@@ -26,24 +26,12 @@ namespace Catrobat.Paint.WindowsPhone.Command
             _redoCommands = new LinkedList<CommandBase>();
             _commandBitmapDict = new Dictionary<CommandBase, WriteableBitmap>();
 
-            /* TODO: 
-            _backgroundWorkerUndo.WorkerReportsProgress = false;
-            _backgroundWorkerUndo.WorkerSupportsCancellation = false;
-            _backgroundWorkerUndo.DoWork += BackgroundWorkerUndoDoWork;
-            _backgroundWorkerUndo.RunWorkerCompleted += BackgroundWorkerUndoRunWorkerCompleted;
-
-            _backgroundWorkerRedo.WorkerReportsProgress = false;
-            _backgroundWorkerRedo.WorkerSupportsCancellation = false;
-            _backgroundWorkerRedo.DoWork += BackgroundWorkerRedoDoWork;
-            _backgroundWorkerRedo.RunWorkerCompleted += BackgroundWorkerUndoRunWorkerCompleted;
-            */
         }
 
         public static CommandManager GetInstance()
         {
             return _instance ?? (_instance = new CommandManager());
         }
-
 
         public bool HasCommands()
         {
@@ -62,11 +50,6 @@ namespace Catrobat.Paint.WindowsPhone.Command
             System.Diagnostics.Debug.WriteLine("--UNDO--");
             if (HasCommands())
             {
-                /* TODO: if (_backgroundWorkerUndo.IsBusy || _backgroundWorkerRedo.IsBusy)
-                {
-                    return;
-                }
-                */
                 Spinner.StartSpinning();
 
                 var command = _undoCommands.Last.Value;
@@ -87,10 +70,6 @@ namespace Catrobat.Paint.WindowsPhone.Command
                     if (lastCommand || command is CropCommand || command is MoveCommand || command is RemoveCommand || command is RotateCommand || command is ZoomCommand) 
                     {
                         command.UnDo();
-                        //if(command is ZoomCommand)
-                        //{
-                        //    PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
-                        //}
                     }
                 }
 
@@ -101,31 +80,24 @@ namespace Catrobat.Paint.WindowsPhone.Command
                 _redoCommands.AddLast(command);
                 UndoRedoActionbarManager.GetInstance().Update(UndoRedoActionbarManager.UndoRedoButtonState.EnableRedo);
 
-
-                // TODO: _backgroundWorkerUndo.RunWorkerAsync(); //
                 DoUnDo();
             }
         }
 
         private void DoUnDo()
         {
-            //await Task.Run(delegate()
-            //{
-                ReDrawAll();
-            //});
+            ReDrawAll();
             Spinner.StopSpinning();
         }
 
         private void ReDrawAll()
         {
-            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
-            //PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Children.Clear();
-                      
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();     
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Background = null;
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
             PocketPaintApplication.GetInstance().SaveAsWriteableBitmapToRam();
             PocketPaintApplication.GetInstance().SetBitmapAsPaintingAreaCanvasBackground();
-            
+
             foreach (var command in _undoCommands)
             {
                 command.ReDo();
@@ -138,23 +110,12 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
             if (HasNext())
             {
-                /* TODO: if (_backgroundWorkerRedo.IsBusy || _backgroundWorkerUndo.IsBusy)
-                {
-                    return;
-                }*/
-
                 Spinner.StartSpinning();
 
                 var command = _redoCommands.Last.Value;
                 _redoCommands.RemoveLast();
 
                 var redoCommandsList = new List<CommandBase>();
-                /*if (command is BrushCommand)
-                {
-                    var commandBrushEnd = _redoCommands.Last.Value;
-                    _redoCommands.RemoveLast();
-                    redoCommandsList.Add(commandBrushEnd);
-                }*/
 
                 if (!HasNext())
                 {
@@ -164,26 +125,17 @@ namespace Catrobat.Paint.WindowsPhone.Command
                 UndoRedoActionbarManager.GetInstance().Update(UndoRedoActionbarManager.UndoRedoButtonState.EnableUndo);
 
                 redoCommandsList.Add(command);
-                // TODO: _backgroundWorkerRedo.RunWorkerAsync(command);
                 DoReDo(redoCommandsList);
             }
         }
 
         private void DoReDo(List<CommandBase> redoCommandsList)
         {
-            //await Task.Run(delegate()
-            //{
-                foreach (var currentCommand in redoCommandsList)
-                {
-                    currentCommand.ReDo();
-                }
-            //});
+            foreach (var currentCommand in redoCommandsList)
+            {
+                currentCommand.ReDo();
+            }
             Spinner.StopSpinning();
-        }
-
-        public int GetNumberOfCommands()
-        {
-            return _undoCommands.Count;
         }
 
         public void CommitCommand(CommandBase command)
@@ -202,9 +154,6 @@ namespace Catrobat.Paint.WindowsPhone.Command
                 UndoRedoActionbarManager.GetInstance().Update(UndoRedoActionbarManager.UndoRedoButtonState.DisableRedo);
             }
 
-
-            // need a Bitmap to undo/redo special command
-            ;
             if (_undoCommands.Count != 0 && command is EraserCommand)
             {
                 var c = _undoCommands.Last();
@@ -216,13 +165,11 @@ namespace Catrobat.Paint.WindowsPhone.Command
                     var h = PocketPaintApplication.GetInstance().Bitmap.PixelHeight;
                     _commandBitmapDict.Add(command, new WriteableBitmap(w, h));
                 }
-
             }
 
             _undoCommands.AddLast(command);
             UndoRedoActionbarManager.GetInstance().Update(UndoRedoActionbarManager.UndoRedoButtonState.EnableUndo);
             PocketPaintApplication.GetInstance().UnsavedChangesMade = true;
-
         }
 
         public void clearAllCommands()
@@ -232,10 +179,6 @@ namespace Catrobat.Paint.WindowsPhone.Command
             _commandBitmapDict.Clear();
         }
 
-        public void changeVisibilityOfUndoAndRedAppbarButtons()
-        {
-
-        }
 
         public bool doesCommandTypeExistInUndoList(Type commandType)
         {
@@ -251,31 +194,5 @@ namespace Catrobat.Paint.WindowsPhone.Command
             }
             return false;
         }
-
-        // needs to be dispatched back to UIThread
-        // started backgroundworkers to let UIThread show spinner etc. right before calculation starts
-        // TODO: 
-
-        /* TODO:
-        private void BackgroundWorkerUndoDoWork(object sender, DoWorkEventArgs e)
-        {
-            Deployment.Current.Dispatcher.BeginInvoke(ReDrawAll);
-        }
-        private void BackgroundWorkerRedoDoWork(object sender, DoWorkEventArgs e)
-        {
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                var command = e.Argument as CommandBase;
-                if (command != null)
-                {
-                    command.ReDo();
-                }
-            });
-        }
-        
-        private void BackgroundWorkerUndoRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            Spinner.StopSpinning();
-        }*/
     }
 }

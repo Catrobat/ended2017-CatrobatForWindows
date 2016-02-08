@@ -329,8 +329,9 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
         public List<Point> GetWhitePixels()
         {
             byte ff = Convert.ToByte(0xff);
-
             List<Point> results = new List<Point>();
+
+            // TODO: An Philipp: Wofür wird hier die canvas-Variable benötigt?
             var canvas = PocketPaintApplication.GetInstance().EraserCanvas;
             if (canvas != null)
             {
@@ -342,19 +343,48 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
                         int XTemp = Temp + x;
                         int Value = XTemp * 4;
 
-                        if (pixelsCanvas[Value] == ff &&
-                        pixelsCanvas[Value + 1] == ff &&
-                        pixelsCanvas[Value + 2] == ff &&
-                        pixelsCanvas[Value + 3] == ff)
+                        if (pixelsCanvasEraser[Value] == ff &&
+                        pixelsCanvasEraser[Value + 1] == ff &&
+                        pixelsCanvasEraser[Value + 2] == ff &&
+                        pixelsCanvasEraser[Value + 3] == ff)
                         {
                             results.Add(new Point(x, y));
                         }
                     }
                 }
             }
-
             return results;
         }
+
+        public Dictionary<Point, byte[]> GetDataPointsWithColor()
+        {
+            byte ff = Convert.ToByte(0xff);
+            List<Point> results = new List<Point>();
+            Dictionary<Point, byte[]> pointToColorByteArray = new Dictionary<Point, byte[]>();
+            for (int x = 0; x < pixelWidthCanvas; x++)
+            {
+                for (int y = 0; y < pixelHeightCanvas; y++)
+                {
+                    int Temp = y * pixelWidthCanvas;
+                    int XTemp = Temp + x;
+                    int Value = XTemp * 4;
+
+                    if (pixelsCanvasEraser[Value] == ff &&
+                    pixelsCanvasEraser[Value + 1] == ff &&
+                    pixelsCanvasEraser[Value + 2] == ff &&
+                    pixelsCanvasEraser[Value + 3] == ff)
+                    {
+                        byte[] colorByteArray = new byte[4];
+                        colorByteArray[0] = pixelsCanvasEraser[Value];
+                        colorByteArray[1] = pixelsCanvasEraser[Value + 1];
+                        colorByteArray[2] = pixelsCanvasEraser[Value + 2];
+                        colorByteArray[3] = pixelsCanvasEraser[Value + 3];
+                        // pointToColorByteArray.Add(new Point(x, y));
+                    }
+                }
+            }
+            return pointToColorByteArray;
+         }
 
         public async Task<Image> BufferToImage()
         {
@@ -540,7 +570,7 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
                 await retarbi.RenderAsync(eraserCanvas);
 
                 Windows.Storage.Streams.IBuffer buffer = await (retarbi.GetPixelsAsync());
-                pixelsCanvas = WindowsRuntimeBufferExtensions.ToArray(buffer);
+                pixelsCanvasEraser = WindowsRuntimeBufferExtensions.ToArray(buffer);
                 //Rectangle rectangle = (Rectangle)canvas.Children[0];
                 this.pixelHeightCanvas = retarbi.PixelHeight;
                 this.pixelWidthCanvas = retarbi.PixelWidth;
