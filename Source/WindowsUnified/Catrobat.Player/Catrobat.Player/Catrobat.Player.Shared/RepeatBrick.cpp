@@ -3,8 +3,9 @@
 #include "Interpreter.h"
 
 using namespace std;
+using namespace ProjectStructure;
 
-RepeatBrick::RepeatBrick(FormulaTree *times, std::shared_ptr<Script> parent) :
+RepeatBrick::RepeatBrick(FormulaTree *times, Script* parent) :
 	ContainerBrick(TypeOfBrick::ContainerBrick, parent), m_timesToRepeat(times)
 {
 }

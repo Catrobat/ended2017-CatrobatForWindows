@@ -3,6 +3,7 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 {
+    //TODO:do we still need it?
     public class XmlIfLogicBeginBrickReference : XmlObjectNode
     {
         private string _reference;
@@ -32,7 +33,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if(IfLogicBeginBrick == null)
                 IfLogicBeginBrick = ReferenceHelper.GetReferenceObject(this, _reference) as XmlIfLogicBeginBrick;

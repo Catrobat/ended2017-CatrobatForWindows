@@ -3,7 +3,9 @@
 #include "Script.h"
 #include "Object.h"
 
-HideBrick::HideBrick(std::shared_ptr<Script> parent) :
+using namespace ProjectStructure;
+
+HideBrick::HideBrick(Script* parent) :
 	Brick(TypeOfBrick::HideBrick, parent)
 {
 }

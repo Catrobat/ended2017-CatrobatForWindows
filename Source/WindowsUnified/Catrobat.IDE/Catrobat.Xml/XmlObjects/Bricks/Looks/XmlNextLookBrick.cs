@@ -12,7 +12,8 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Looks
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("nextLookBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlNextLookBrickType);
 
             //CreateCommonXML(xRoot);
 

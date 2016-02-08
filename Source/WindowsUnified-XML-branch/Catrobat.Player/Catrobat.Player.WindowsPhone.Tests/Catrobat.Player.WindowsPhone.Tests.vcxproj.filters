@@ -33,6 +33,9 @@
     <ClCompile Include="LookBricks.cpp">
       <Filter>Tests\Bricks</Filter>
     </ClCompile>
+    <ClCompile Include="LookTest.cpp">
+      <Filter>Tests\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -77,11 +80,14 @@
     <Filter Include="Tests\XMLParserTests">
       <UniqueIdentifier>{28d77bb9-24db-4e59-b2c1-47b2d483fc94}</UniqueIdentifier>
     </Filter>
-    <Filter Include="XMLTestFiles">
-      <UniqueIdentifier>{610fc274-5fca-482f-b76a-ba470d657f28}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tests\Bricks">
       <UniqueIdentifier>{8b6f22c9-ac74-4bf0-b187-cc7b02d7ce9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Objects">
+      <UniqueIdentifier>{222f3543-660c-4f83-acfb-c79545e83fa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XMLTestFiles">
+      <UniqueIdentifier>{610fc274-5fca-482f-b76a-ba470d657f28}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +131,9 @@
       <Filter>XMLTestFiles</Filter>
     </Xml>
     <Xml Include="testFiles\SoundReferencesTest.xml">
+      <Filter>XMLTestFiles</Filter>
+    </Xml>
+    <Xml Include="Mole.xml">
       <Filter>XMLTestFiles</Filter>
     </Xml>
   </ItemGroup>

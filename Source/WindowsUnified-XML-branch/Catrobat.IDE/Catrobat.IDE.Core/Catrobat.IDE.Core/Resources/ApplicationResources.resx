@@ -179,7 +179,8 @@
     <value>upload/upload.json</value>
   </data>
   <data name="POCEKTCODE_BASE_ADDRESS" xml:space="preserve">
-    <value>https://pocketcode.org/</value>
+    <!--old link <value>https://pocketcode.org/</value>-->
+    <value>https://share.catrob.at/</value>
   </data>
   <data name="API_PARAM_FLAG_REASON" xml:space="preserve">
     <value>flagReason</value>

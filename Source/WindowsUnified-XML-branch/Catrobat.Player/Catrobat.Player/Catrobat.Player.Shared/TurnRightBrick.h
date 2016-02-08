@@ -1,13 +1,17 @@
 #pragma once
 
 #include "Brick.h"
+#include "ITurnRightBrick.h"
 
-class TurnRightBrick :
-	public Brick
+namespace ProjectStructure
 {
-public:
-	TurnRightBrick(FormulaTree *rotation, std::shared_ptr<Script> parent);
-	void Execute();
-private:
-	FormulaTree *m_rotation;
-};
+	class TurnRightBrick :
+		public Brick
+	{
+	public:
+		TurnRightBrick(Catrobat_Player::NativeComponent::ITurnRightBrick^ brick, Script* parent);
+		void Execute();
+	private:
+		FormulaTree *m_rotation;
+	};
+}

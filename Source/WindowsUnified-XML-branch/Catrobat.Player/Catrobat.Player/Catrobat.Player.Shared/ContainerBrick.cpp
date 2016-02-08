@@ -2,7 +2,9 @@
 #include "ContainerBrick.h"
 #include "Interpreter.h"
 
-ContainerBrick::ContainerBrick(TypeOfBrick brickType, std::shared_ptr<Script>parent) :
+using namespace ProjectStructure;
+
+ContainerBrick::ContainerBrick(TypeOfBrick brickType, Script* parent) :
 	Brick(brickType, parent)
 {
 }

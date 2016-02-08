@@ -22,10 +22,11 @@ namespace Catrobat.Paint.WindowsPhone.Listener
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appbarButtonSave", false);
             }
 
-            if(PocketPaintApplication.GetInstance().PaintingAreaView.checkIfASelectionControlIsSelected())
+            if(PocketPaintApplication.GetInstance().PaintingAreaView.isASelectionControlSelected())
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
             }
+            PocketPaintApplication.GetInstance().PaintingAreaView.checkAndUpdateStampAppBarButtons();
         }
 
         public void BtnRedo_Click(object sender, RoutedEventArgs e)
@@ -37,6 +38,7 @@ namespace Catrobat.Paint.WindowsPhone.Listener
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", true);
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeEnabledOfASecondaryAppbarButton("appbarButtonSave", true);
             }
+            PocketPaintApplication.GetInstance().PaintingAreaView.checkAndUpdateStampAppBarButtons();
         }
 
         public void BtnColor_Click(object sender, RoutedEventArgs e)
@@ -64,9 +66,11 @@ namespace Catrobat.Paint.WindowsPhone.Listener
             {
                 if (PocketPaintApplication.GetInstance().ToolWhileMoveTool == null)
                     return;
-                PocketPaintApplication.GetInstance().SwitchTool(PocketPaintApplication.GetInstance().ToolWhileMoveTool.GetToolType());
+
+                ToolType newSelectedTooltype = PocketPaintApplication.GetInstance().ToolWhileMoveTool.GetToolType();
+                PocketPaintApplication.GetInstance().SwitchTool(newSelectedTooltype);
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeVisibilityOfActiveSelectionControl(Visibility.Visible);
-                if (currentTooltype == ToolType.Ellipse || currentTooltype == ToolType.ImportPng || currentTooltype == ToolType.Rect)
+                if (newSelectedTooltype == ToolType.Ellipse || newSelectedTooltype == ToolType.ImportPng || newSelectedTooltype == ToolType.Rect)
                 {
                     PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
                 }

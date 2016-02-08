@@ -19,7 +19,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
         public override bool UnDo()
         {
-            PocketPaintApplication.GetInstance().PaintingAreaView.setSizeOfPaintingAreaViewCheckered();
+            PocketPaintApplication.GetInstance().PaintingAreaView.alignPositionOfGridWorkingSpace(null);
             return true;
         }
     }

@@ -744,9 +744,11 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                 var brickCount = 0;
                 foreach (var brick in script.Bricks.Bricks)
                 {
-                    if (brick is XmlChangeVariableBrick || brick is XmlSetVariableBrick)
+
+                    /* //TODO outdated? if (brick is XmlChangeVariableBrick || brick is XmlSetVariableBrick)
                         UpdateVariableReference(oldSprite, newSprite, scriptCount, brickCount);
-                    else if (brick is XmlSetLookBrick)
+                    else */
+                    if (brick is XmlSetLookBrick)
                         UpdateLookReference(oldSprite, newSprite, scriptCount, brickCount);
                     else if (brick is XmlForeverBrick || brick is XmlRepeatBrick)
                         UpdateLoopEndBrickReference(oldSprite, newSprite, scriptCount, brickCount);
@@ -813,7 +815,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             }
         }
 
-        private static void UpdateVariableReference(XmlSprite oldSprite, XmlSprite newSprite, int scriptCount, int brickCount)
+        /* //TODO outdated? private static void UpdateVariableReference(XmlSprite oldSprite, XmlSprite newSprite, int scriptCount, int brickCount)
         {
             XmlUserVariableReference oldVariableReference;
             XmlUserVariableReference newVariableReference;
@@ -821,10 +823,10 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             var oldBrick = oldSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount];
             /*if (oldBrick is XmlChangeVariableBrick)
             {*/
-                oldVariableReference = (oldBrick as XmlChangeVariableBrick).UserVariableReference;
+                /*oldVariableReference = (oldBrick as XmlChangeVariableBrick).UserVariableReference;
                 newVariableReference =
                     (newSprite.Scripts.Scripts[scriptCount].Bricks.Bricks[brickCount] as XmlChangeVariableBrick)
-                        .UserVariableReference;
+                        .UserVariableReference;*/
             /*}
             else
             {
@@ -834,6 +836,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                         .UserVariableReference;
             }*/
 
+        /*
             var entries = XmlParserTempProjectHelper.Program.VariableList.ObjectVariableList.ObjectVariableEntries;
             foreach (var oldEntry in entries)
                 if (oldEntry.Sprite == oldSprite)
@@ -855,7 +858,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                         variableCount++;
                     }
                 }
-        }
+        }*/
 
         private static void UpdateLoopBeginBrickReference(XmlSprite oldSprite, XmlSprite newSprite, int scriptCount, int brickCount)
         {

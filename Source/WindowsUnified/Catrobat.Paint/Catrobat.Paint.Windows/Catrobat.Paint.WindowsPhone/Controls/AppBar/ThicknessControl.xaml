@@ -10,7 +10,7 @@
     d:DesignHeight="380" d:DesignWidth="384">
 
     <Grid x:Name="GrdLayoutRoot" Background="#1F1F1F" MinHeight="1" VerticalAlignment="Bottom" Width="384">
-        <Grid x:Name="GrdSliderThickness" Margin="0,0,0,0" >
+        <Grid x:Name="GrdSliderThickness" Margin="0,0,0,10" >
             <Grid x:Name="GrdSlider" VerticalAlignment="Top">
                 <Slider x:Name="SliderThickness" Background="White" Height="50" HorizontalAlignment="Left" Margin="10,13,0,2" Maximum="50" Minimum="1" ValueChanged="SliderThickness_ValueChanged" Width="232" />
                 <Button x:Name="BtnBrushThickness" BorderThickness="4" Content="0" Height="60" HorizontalAlignment="Right" Margin="0,5,10,0" MinWidth="1" Width="100" Click="BtnBrushThickness_Click"/>

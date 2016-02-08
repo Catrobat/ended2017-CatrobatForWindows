@@ -6,6 +6,7 @@ using Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Variables;
 using Catrobat.IDE.Core.Xml.XmlObjects.Formulas;
 using Catrobat.IDE.Core.Xml.XmlObjects.Variables;
 using Catrobat.IDE.Core.XmlModelConvertion.Converters.Formulas;
+using Catrobat.IDE.Core.XmlModelConvertion;
 
 namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
 {
@@ -16,9 +17,20 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
         public override SetVariableBrick Convert1(XmlSetVariableBrick o, XmlModelConvertContext c)
         {
             var formulaConverter = new FormulaConverter();
-
             Variable variable = null;
-            if (o.UserVariable != null) c.Variables.TryGetValue(o.UserVariable, out variable);
+            //TODO: part of dirty hack:
+            if (o.UserVariable != null)
+                foreach(var entry in c.variables)
+                {
+                    if (entry.Key.Name == o.UserVariable.Name)
+                    {
+                        variable = entry.Value;
+                        break;
+                    }
+                }
+            //maybe its necessary to override .Equals() for the class as it got more properties now
+
+            //old undirty version //if (o.UserVariable != null) c.Variables.TryGetValue(o.UserVariable, out variable);
             return new SetVariableBrick
             {
                 Variable = variable,

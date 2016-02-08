@@ -27,64 +27,94 @@ Compatible with latest version.</description>
   </header>
   <objectList>
     <object>
+      <name>Object 1</name>
     </object>
 	  <object>
+      <name>Object 2</name>
       </object>
 	  <object>
+      <name>Object 3</name>
       </object>
 	  <object>
+      <name>Object 4</name>
       </object>
 	  <object>
+      <name>Object 5</name>
       </object>
 	  <object>
+      <name>Object 6</name>
       </object>
 	  <object>
+      <name>Object 7</name>
       </object>
 	  <object>
+      <name>Object 8</name>
       </object>
 	  <object>
+      <name>Object 9</name>
       </object>
 	  <object>
+      <name>Object 10</name>
       </object>
 	  <object>
+      <name>Object 11</name>
       </object>
 	  <object>
+      <name>Object 12</name>
       </object>
 	  <object>
+      <name>Object 13</name>
       </object>
 	  <object>
+      <name>Object 14</name>
       </object>
 	  <object>
+      <name>Object 15</name>
       </object>
 	  <object>
+      <name>Object 16</name>
       </object>
 	  <object>
+      <name>Object 17</name>
       </object>
 	  <object>
+      <name>Object 18</name>
       </object>
 	  <object>
+      <name>Object 19</name>
       </object>
 	  <object>
+      <name>Object 20</name>
       </object>
 	  <object>
+      <name>Object 21</name>
       </object>
 	  <object>
+      <name>Object 22</name>
       </object>
 	  <object>
+      <name>Object 23</name>
       </object>
 	  <object>
+      <name>Object 24</name>
       </object>
 	  <object>
+      <name>Object 25</name>
       </object>
 	  <object>
+      <name>Object 26</name>
       </object>
 	  <object>
+      <name>Object 127</name>
     </object>
     <object>
+      <name>Object 28</name>
     </object>
     <object>
+      <name>Object 29</name>
     </object>
     <object>
+      <name>Object 30</name>
     </object>
   </objectList>
 </program>

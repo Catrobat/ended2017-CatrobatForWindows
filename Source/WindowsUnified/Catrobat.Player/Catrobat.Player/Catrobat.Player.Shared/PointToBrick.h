@@ -2,12 +2,15 @@
 
 #include "Brick.h"
 
-class PointToBrick :
-	public Brick
+namespace ProjectStructure
 {
-public:
-	PointToBrick(FormulaTree *rotation, std::shared_ptr<Script> parent);
-	void Execute();
-private:
-	FormulaTree *m_rotation;
-};
+	class PointToBrick :
+		public Brick
+	{
+	public:
+		PointToBrick(FormulaTree *rotation, Script* parent);
+		void Execute();
+	private:
+		FormulaTree *m_rotation;
+	};
+}

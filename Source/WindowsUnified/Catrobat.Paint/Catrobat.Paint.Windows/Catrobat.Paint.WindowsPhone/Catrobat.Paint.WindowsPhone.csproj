@@ -179,6 +179,7 @@
     <Compile Include="Controls\UserControls\ucRecEll.xaml.cs">
       <DependentUpon>ucRecEll.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\Converters.cs" />
     <Compile Include="Data\PaintData.cs" />
     <Compile Include="Data\StorageIO.cs" />
     <Compile Include="IdeInteraction.cs" />
@@ -293,6 +294,35 @@
     <Content Include="Assets\ColorPicker\icon_color_chooser_tab_rgba.png" />
     <Content Include="Assets\ColorPicker\icon_menu_color_palette.png" />
     <Content Include="Assets\ColorPicker\icon_menu_strokes.png" />
+    <Content Include="Assets\Icons\icon_color_chooser_tab_palette.png" />
+    <Content Include="Assets\Icons\icon_color_chooser_tab_rgba.png" />
+    <Content Include="Assets\Icons\icon_menu_brush.png" />
+    <Content Include="Assets\Icons\icon_menu_bucket.png" />
+    <Content Include="Assets\Icons\icon_menu_color_palette.png" />
+    <Content Include="Assets\Icons\icon_menu_crop.png" />
+    <Content Include="Assets\Icons\icon_menu_crop_adjust.png" />
+    <Content Include="Assets\Icons\icon_menu_crop_cut.png" />
+    <Content Include="Assets\Icons\icon_menu_cursor.png" />
+    <Content Include="Assets\Icons\icon_menu_ellipse.png" />
+    <Content Include="Assets\Icons\icon_menu_eraser.png" />
+    <Content Include="Assets\Icons\icon_menu_flip_horizontal.png" />
+    <Content Include="Assets\Icons\icon_menu_flip_vertical.png" />
+    <Content Include="Assets\Icons\icon_menu_import_image.png" />
+    <Content Include="Assets\Icons\icon_menu_move.png" />
+    <Content Include="Assets\Icons\icon_menu_pipette.png" />
+    <Content Include="Assets\Icons\icon_menu_rectangle.png" />
+    <Content Include="Assets\Icons\icon_menu_rotate_left.png" />
+    <Content Include="Assets\Icons\icon_menu_rotate_right.png" />
+    <Content Include="Assets\Icons\icon_menu_stamp.png" />
+    <Content Include="Assets\Icons\icon_menu_stamp_clear.png" />
+    <Content Include="Assets\Icons\icon_menu_stamp_copy.png" />
+    <Content Include="Assets\Icons\icon_menu_stamp_paste.png" />
+    <Content Include="Assets\Icons\icon_menu_straight_line.png" />
+    <Content Include="Assets\Icons\icon_menu_strokes.png" />
+    <Content Include="Assets\Icons\icon_menu_zoom.png" />
+    <Content Include="Assets\Icons\icon_zoom_in.png" />
+    <Content Include="Assets\Icons\icon_zoom_out.png" />
+    <Content Include="Assets\Icons\icon_menu_tools.png" />
     <Content Include="Assets\ic_launcher.png" />
     <Content Include="Assets\ic_launcher_tile.png" />
     <Content Include="Assets\InfoBoxAction\wp_camera.jpg" />
@@ -448,9 +478,7 @@
       <HintPath>..\..\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

@@ -33,6 +33,12 @@ namespace Catrobat.Paint
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+            this.UnhandledException += App_UnhandledException;
+        }
+
+        void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            throw new Exception(e.Message);
         }
 
         /// <summary>
@@ -48,8 +54,8 @@ namespace Catrobat.Paint
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
-#endif
-
+#endif 
+       
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,

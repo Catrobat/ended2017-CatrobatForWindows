@@ -1,7 +1,10 @@
 ﻿using Catrobat.Paint.WindowsPhone.Command;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Windows.Foundation;
 using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 // TODO: using Catrobat.Paint.Phone.Command;
@@ -18,18 +21,30 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         private PathSegmentCollection _pathSegmentCollection;
         private Point _lastPoint;
         private bool _lastPointSet;
+        private List<Point> points;
+        private PixelData.PixelData pixelDataEraser;
+        private PixelData.PixelData pixelData;
+
 
         public EraserTool()
         {
             ToolType = ToolType.Eraser;
+            points = new List<Point>();
+            pixelData = new PixelData.PixelData();
+            
         }
 
-        public override void HandleDown(object arg)
+        async public override void HandleDown(object arg)
         {
             if (!(arg is Point))
             {
                 return;
             }
+
+            await pixelData.preparePaintingAreaCanvasPixel();
+            pixelDataEraser = new PixelData.PixelData();
+
+
             var coordinate = (Point)arg;
 
             _path = new Path();
@@ -39,7 +54,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _pathSegmentCollection = new PathSegmentCollection();
 
             _path.StrokeLineJoin = PenLineJoin.Round;
-            _path.Stroke = new SolidColorBrush(Color.FromArgb(1,255,255,255));
+            _path.Stroke = new SolidColorBrush(Color.FromArgb(0xff,0xff,0xff,0xff));
             _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.thicknessSelected;
             _path.StrokeStartLineCap = PocketPaintApplication.GetInstance().PaintData.penLineCapSelected;
             _path.StrokeEndLineCap = PocketPaintApplication.GetInstance().PaintData.penLineCapSelected;
@@ -50,7 +65,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _pathGeometry.Figures = _pathFigureCollection;
             _lastPoint = coordinate;
             _path.Data = _pathGeometry;
-            PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.Children.Add(_path);
+            PocketPaintApplication.GetInstance().PaintingAreaView.addElementToEraserCanvas(_path);
 
             var rectangleGeometry = new RectangleGeometry
             {
@@ -60,17 +75,27 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             _path.Clip = rectangleGeometry;
             _path.InvalidateArrange();
             _path.InvalidateMeasure();
+
+            //var rectangleGeometry = new RectangleGeometry
+            //{
+            //    Rect = new Rect(0, 0, PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualWidth,
+            //    PocketPaintApplication.GetInstance().PaintingAreaCanvas.ActualHeight)
+            //};
+            //_path.Clip = rectangleGeometry;
+
+            //_path.InvalidateArrange();
+            //_path.InvalidateMeasure();
         }
 
-        public override void HandleMove(object arg)
+        async public override void HandleMove(object arg)
         {
+
             if (!(arg is Point))
             {
                 return;
             }
 
             var coordinate = (Point)arg;
-            System.Diagnostics.Debug.WriteLine("CropTool Coord: " + coordinate.X + " " + coordinate.Y);
 
             if (!_lastPointSet)
             {
@@ -86,15 +111,57 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                     Point2 = coordinate
                 };
 
+
+                /*var list = GetPointsOnLine((int)_lastPoint.X, (int)_lastPoint.Y, (int)coordinate.X, (int)coordinate.Y);
+
+                List<Point> yolo = new List<Point>();
+                Debug.WriteLine(coordinate.ToString() + " " + _lastPoint.ToString());
+                foreach (var item in list)
+                {
+                    Debug.WriteLine(item.ToString());
+                    yolo.Add(item);
+                }
+                
+
+                List<Point> temp = null;
+                temp = AddPointRange(yolo,20);
+
+                foreach (var item in temp)
+                {
+                    yolo.Add(item);
+                }
+
+                data.SetPixel(yolo, "0_0_0_0");
+                yolo.Clear();*/
+
                 _pathSegmentCollection.Add(qbs);
 
 
                 PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
                 _lastPointSet = false;
             }
+            /*await pixelDataEraser.preparePaintingAreaCanvasForEraser();
+            points = pixelDataEraser.GetWhitePixels();*/
+            
+
+/*
+            PixelData.PixelData pixelData = new PixelData.PixelData();
+            await pixelData.preparePaintingAreaCanvasPixel();
+
+
+            var pixelCanvas = pixelData.pixelsCanvas;
+
+
+            pixelData.SetPixel(coordinate, "");
+            
+
+            var image = await pixelData.BufferToImage();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);*/
+
         }
 
-        public override void HandleUp(object arg)
+
+        async public override void HandleUp(object arg)
         {
             if (!(arg is Point))
             {
@@ -103,7 +170,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             var coordinate = (Point)arg;
 
-            // only a point/dot is drawn, no movement of finger on screen
             if (_lastPoint.Equals(coordinate))
             {
                 var qbs = new QuadraticBezierSegment
@@ -117,8 +183,18 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot.InvalidateMeasure();
                 _path.InvalidateArrange();
 
-                DeletePixels();
             }
+
+            //DeletePointFromPaintingAreaCanvas();
+            await pixelDataEraser.preparePaintingAreaCanvasForEraser();
+            points = pixelDataEraser.GetWhitePixels();
+            pixelData.SetPixel(points, "0_0_0_0");
+            PocketPaintApplication.GetInstance().EraserCanvas.Visibility = Visibility.Collapsed;
+            PocketPaintApplication.GetInstance().EraserCanvas.Children.Clear();
+            var image = await pixelData.BufferToImage();
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
+
+            CommandManager.GetInstance().CommitCommand(new EraserCommand(_path));
         }
 
         public override void Draw(object o)
@@ -131,23 +207,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         }
         
         // performance critical... doing some optimizations
-        async private void DeletePixels()
-        {
-            PixelData.PixelData pixelData = new PixelData.PixelData();
-            await pixelData.preparePaintingAreaCanvasPixel();
-            await pixelData.preparePaintingAreaCanvasForEraser();
-          for(int colCounter = 0; colCounter < PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.ActualHeight; colCounter++)
-          {
-              for(int rowCounter = 0; rowCounter < PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying.ActualWidth; rowCounter++)
-              {
-                  if(pixelData.getPixelAlphaFromCanvasEraser(rowCounter, colCounter) != 0)
-                  {
-                      pixelData.setPixelColor(rowCounter, colCounter);
-                  }
-              }
-          }
-          pixelData.changedPixelToCanvas();
-        }
 
     }
 }

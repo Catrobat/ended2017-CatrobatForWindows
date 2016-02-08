@@ -45,6 +45,15 @@ namespace Catrobat.IDE.Core.Tests.Misc
             }
         }
 
+        public int ScaleFactor
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
+
 
         public string CurrentApplicationBuildNameme
         {

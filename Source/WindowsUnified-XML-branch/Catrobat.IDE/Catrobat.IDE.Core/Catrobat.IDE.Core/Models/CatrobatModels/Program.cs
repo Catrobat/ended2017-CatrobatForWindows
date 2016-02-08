@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.Models
         public ObservableCollection<BroadcastMessage> BroadcastMessages
         {
             get { return _broadcastMessages; }
-            private set { Set(ref _broadcastMessages, value); }
+            set { Set(ref _broadcastMessages, value); }
         }
 
         public string BasePath

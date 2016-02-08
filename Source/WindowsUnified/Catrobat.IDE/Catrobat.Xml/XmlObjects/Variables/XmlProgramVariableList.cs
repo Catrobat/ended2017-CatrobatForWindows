@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 {
     public class XmlProgramVariableList : XmlObjectNode
     {
-        public List<XmlUserVariable> UserVariables;
+        public List<XmlUserVariableReference> UserVariableReferences;
 
         public XmlProgramVariableList()
         {
-            UserVariables = new List<XmlUserVariable>();
+            UserVariableReferences = new List<XmlUserVariableReference>();
         }
 
         public XmlProgramVariableList(XElement xElement)
         {
-            UserVariables = new List<XmlUserVariable>();
+            UserVariableReferences = new List<XmlUserVariableReference>();
             LoadFromXml(xElement);
         }
 
@@ -25,19 +26,21 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Variables
 
             foreach (XElement element in xRoot.Elements())
             {
-                UserVariables.Add(new XmlUserVariable(element));
+                UserVariableReferences.Add(new XmlUserVariableReference(element));
             }
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("programVariableList");
+            XmlParserTempProjectHelper.inProgramVarList = true;
+            var xRoot = new XElement(XmlConstants.XmlProgramVariableListType);
 
-            foreach (XmlUserVariable userVariable in UserVariables)
+            foreach (XmlUserVariableReference userVariableReference in UserVariableReferences)
             {
-                xRoot.Add(userVariable.CreateXml());
+                xRoot.Add(userVariableReference.CreateXml());
             }
 
+            XmlParserTempProjectHelper.inProgramVarList = false;
             return xRoot;
         }
     }

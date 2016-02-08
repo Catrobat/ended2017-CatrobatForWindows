@@ -54,11 +54,23 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)FormulaTreeException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)FormulaTreeFatalException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)GlideToBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Header.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Helper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HideBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IBroadcastScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IfBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IHeader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ILook.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)InclinationProvider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Interpreter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IProject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IStartScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ITurnRightBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IUserVariable.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IWhenScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)lodepng.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)lodepng_util.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Look.h" />
@@ -66,7 +78,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MoveNStepsBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NextLookBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Object.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)ObjectList.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)OutOfBoundsException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)pch.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PlaceAtBrick.h" />
@@ -75,10 +86,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)PointToBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ProjectDaemon.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_iterators.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_print.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)rapidxml\rapidxml_utils.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)RepeatBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Script.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SetGhostEffectBrick.h" />
@@ -97,10 +104,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WaitBrick.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WASAPIAudio.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WhenScript.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)XMLParser.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserFatalException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)XMLParserSevereException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NativeWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)AccelerometerProvider.cpp" />
@@ -133,6 +140,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)FormulaTreeException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FormulaTreeFatalException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)GlideToBrick.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Header.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Helper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)HideBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)IfBrick.cpp" />
@@ -145,7 +153,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MoveNStepsBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NextLookBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Object.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)ObjectList.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OutOfBoundsException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -174,10 +181,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WaitBrick.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WASAPIAudio.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WhenScript.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)XMLParser.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserFatalException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)XMLParserSevereException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NativeWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectCapability Include="SourceItemsFromImports" />

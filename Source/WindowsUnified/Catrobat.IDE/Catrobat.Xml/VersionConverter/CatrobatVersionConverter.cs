@@ -195,11 +195,14 @@ namespace Catrobat.IDE.Core.Xml.VersionConverter
         private static string GetInputVersion(XDocument document)
         {
             var inputVersion = "";
-            var program = document.Element("program");
+            //var program = document.Element("program");
+            var program = document.Element(XmlConstants.Program);
 
-            if (program != null && program.Element("header") != null)
+            //if (program != null && program.Element("header") != null)
+            if (program != null && program.Element(XmlConstants.Header) != null)
             {
-                var languageVersion = program.Element("header").Element("catrobatLanguageVersion");
+                //var languageVersion = program.Element("header").Element("catrobatLanguageVersion");
+                var languageVersion = program.Element(XmlConstants.Header).Element(XmlConstants.CatrobatLanguageVersion);
 
                 if (languageVersion != null)
                 {

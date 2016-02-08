@@ -4,18 +4,25 @@
 #include "BroadcastMessageListener.h"
 #include "IBroadcastScript.h"
 
-class BroadcastScript :
-	public Script
+namespace Core
 {
-public:
-	BroadcastScript(Catrobat_Player::NativeComponent::IBroadcastScript^ script, Object* parent);
-	~BroadcastScript();
+	ref class BroadcastMessageListener;
+}
+namespace ProjectStructure
+{
+	class BroadcastScript :
+		public Script
+	{
+	public:
+		BroadcastScript(Catrobat_Player::NativeComponent::IBroadcastScript^ script, Object* parent);
+		~BroadcastScript();
 
-	void EvaluateMessage(Platform::String ^message);
+		void EvaluateMessage(Platform::String ^message);
 
-	std::string GetReceivedMessage();
+		std::string GetReceivedMessage();
 
-private:
-	std::string m_receivedMessage;
-	BroadcastMessageListener ^m_broadcastMessageListener;
-};
+	private:
+		std::string m_receivedMessage;
+		Core::BroadcastMessageListener^ m_broadcastMessageListener;
+	};
+}

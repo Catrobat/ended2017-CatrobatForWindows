@@ -4,31 +4,28 @@
 #include "Object.h"
 #include <list>
 
-enum IfBranchType
+namespace ProjectStructure
 {
-	If,
-	Else
-};
+	enum IfBranchType
+	{
+		If,
+		Else
+	};
 
-class IfBrick :
-	public ContainerBrick
-{
-public:
-	IfBrick(FormulaTree *condition, std::shared_ptr<Script> parent);
-	~IfBrick(void);
+	class IfBrick :
+		public ContainerBrick
+	{
+	public:
+		IfBrick(FormulaTree *condition, Script* parent);
+		~IfBrick();
 
-	void Execute();
-	void AddIfBrick(Brick *brick);
-	void AddElseBrick(Brick *brick);
-	void AddBrick(Brick *brick);
-	void SetCurrentAddMode(IfBranchType mode);
-private:
-	std::list<Brick*> *m_ifList;
-	std::list<Brick*> *m_elseList;
-	FormulaTree *m_condition;
-	IfBranchType m_currentAddMode;
-
-	Brick *GetIfBrick(int index);
-	Brick *GetElseBrick(int index);
-};
-
+		void Execute();
+		void AddBrick(std::unique_ptr<Brick> brick);
+		void SetCurrentAddMode(IfBranchType mode);
+	private:
+		std::list<std::unique_ptr<Brick>> m_ifList;
+		std::list<std::unique_ptr<Brick>> m_elseList;
+		FormulaTree *m_condition;
+		IfBranchType m_currentAddMode;
+	};
+}

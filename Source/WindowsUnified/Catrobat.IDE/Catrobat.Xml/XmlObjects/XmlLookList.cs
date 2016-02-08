@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
         internal override void LoadFromXml(XElement xRoot)
         {
             Looks = new List<XmlLook>();
-            foreach (var element in xRoot.Elements("look"))
+           foreach (var element in xRoot.Elements(XmlConstants.Look))
             {
                 Looks.Add(new XmlLook(element));
             }
@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("lookList");
+            var xRoot = new XElement(XmlConstants.XmlLookListType);
 
             foreach (XmlLook look in Looks)
             {

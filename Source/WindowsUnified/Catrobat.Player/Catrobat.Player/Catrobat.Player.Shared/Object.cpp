@@ -30,19 +30,26 @@ Object::Object(Catrobat_Player::NativeComponent::IObject^ object) :
 		m_lookList.push_back(std::shared_ptr<Look>(make_shared<Look>(look)));
 	}
 
-	for each (Catrobat_Player::NativeComponent::IStartScript^ script in object->StartScripts)
+	for each (Catrobat_Player::NativeComponent::IScript^ script in object->Scripts)
 	{
-		m_scripts.push_back(std::shared_ptr<Script>(make_shared<StartScript>(script, this)));
-	}
-
-	for each (Catrobat_Player::NativeComponent::IWhenScript^ script in object->WhenScripts)
-	{
-		m_scripts.push_back(std::shared_ptr<Script>(make_shared<WhenScript>(script, this)));
-	}
-
-	for each (Catrobat_Player::NativeComponent::IBroadcastScript^ script in object->BroadcastScripts)
-	{
-		m_scripts.push_back(std::shared_ptr<Script>(make_shared<BroadcastScript>(script, this)));
+		auto startScript = dynamic_cast<Catrobat_Player::NativeComponent::IStartScript^>(script);
+		if (startScript)
+		{
+			m_scripts.push_back(std::shared_ptr<Script>(make_shared<StartScript>(startScript, this)));
+			continue;
+		}
+		auto whenScript = dynamic_cast<Catrobat_Player::NativeComponent::IWhenScript^>(script);
+		if (whenScript)
+		{
+			m_scripts.push_back(std::shared_ptr<Script>(make_shared<WhenScript>(whenScript, this)));
+			continue;
+		}
+		auto broadcastScript = dynamic_cast<Catrobat_Player::NativeComponent::IBroadcastScript^>(script);
+		if (broadcastScript)
+		{
+			m_scripts.push_back(std::shared_ptr<Script>(make_shared<BroadcastScript>(broadcastScript, this)));
+			continue;
+		}
 	}
 
 	for each (Catrobat_Player::NativeComponent::IUserVariable^ userVariable in object->UserVariables)
@@ -148,8 +155,8 @@ bool Object::IsObjectHit(D2D1_POINT_2F position)
 
 	Matrix3x2F translation = CalculateTranslationMatrix();
 	D2D1_POINT_2F origin;
-	origin.x = (float)m_look->GetWidth() / 2;
-	origin.y = (float)m_look->GetHeight() / 2;
+	origin.x = (float) m_look->GetWidth() / 2;
+	origin.y = (float) m_look->GetHeight() / 2;
 
 	Matrix3x2F positionInBitMap = translation;
 	positionInBitMap._31 = (position.x - positionInBitMap._31) / m_ratio.width;
@@ -182,11 +189,11 @@ void Object::SetupWindowSizeDependentResources(const std::shared_ptr<DX::DeviceR
 	auto deviceContext = deviceResources->GetD2DDeviceContext();
 	m_logicalSize = deviceContext->GetSize();
 
-	int screen_width = ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
-	int screen_height = ProjectDaemon::Instance()->GetProject()->GetScreenHeight();
+	int screen_width = ProjectDaemon::Instance()->GetProject()->GetHeader()->GetScreenWidth();
+	int screen_height = ProjectDaemon::Instance()->GetProject()->GetHeader()->GetScreenHeight();
 
-	m_ratio.width = m_logicalSize.width / ProjectDaemon::Instance()->GetProject()->GetScreenWidth();
-	m_ratio.height = m_logicalSize.height / ProjectDaemon::Instance()->GetProject()->GetScreenHeight() * (-1);
+	m_ratio.width = m_logicalSize.width / ProjectDaemon::Instance()->GetProject()->GetHeader()->GetScreenWidth();
+	m_ratio.height = m_logicalSize.height / ProjectDaemon::Instance()->GetProject()->GetHeader()->GetScreenHeight() * (-1);
 	RecalculateTransformation();
 }
 

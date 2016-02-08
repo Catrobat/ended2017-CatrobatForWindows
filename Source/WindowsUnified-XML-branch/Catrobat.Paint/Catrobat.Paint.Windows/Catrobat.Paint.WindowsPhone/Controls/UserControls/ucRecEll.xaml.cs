@@ -326,5 +326,11 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 }
             }
         }
+
+        public void setSizeOfRecBar(double height, double width)
+        {
+            setBtnHeightValue =  height;
+            setBtnWidthValue = width;
+        }
     }
 }

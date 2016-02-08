@@ -129,16 +129,15 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
                 currentButton.Content = tbInputValue.Text;
                 double currentValue = Convert.ToDouble(tbInputValue.Text);
-                
-                double differenceToGridMain = (PocketPaintApplication.GetInstance().RectangleSelectionControl.rectangleToDraw.Margin.Top * 2.0);
-                currentValue += differenceToGridMain;
 
                 if (currentButton.Name.Equals("btnHeightValue"))
                 {
                     if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
                     {
                         if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
-                            PocketPaintApplication.GetInstance().RectangleSelectionControl.changeHeightOfDrawingSelection(currentValue, false);
+                        {
+                            PocketPaintApplication.GetInstance().RectangleSelectionControl.setHeightOfSelection(currentValue);
+                        }
                     }
                     else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                     {
@@ -156,7 +155,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Rect)
                     {
                         if (PocketPaintApplication.GetInstance().RectangleSelectionControl != null)
-                            PocketPaintApplication.GetInstance().RectangleSelectionControl.changeWidthOfDrawingSelection(currentValue, false);
+                        {
+                            PocketPaintApplication.GetInstance().RectangleSelectionControl.setWidthOfSelection(currentValue);
+                        }
                     }
                     else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == Tool.ToolType.Ellipse)
                     {

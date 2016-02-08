@@ -4,14 +4,15 @@
 #include "Helper.h"
 
 using namespace std;
+using namespace ProjectStructure;
 
 BroadcastScript::BroadcastScript(Catrobat_Player::NativeComponent::IBroadcastScript^ script, Object* parent) :
-	Script(TypeOfScript::BroadcastScript, parent),
+	Script(TypeOfScript::BroadcastScript, parent, script),
 	m_receivedMessage(Helper::StdString(script->ReceivedMessage))
 {
-	m_broadcastMessageListener = ref new BroadcastMessageListener();
+	m_broadcastMessageListener = ref new Core::BroadcastMessageListener();
 	m_broadcastMessageListener->SetScript((int)(&(*this)));
-	BroadcastMessageDaemon::Instance()->Register(m_broadcastMessageListener);
+	Core::BroadcastMessageDaemon::Instance()->Register(m_broadcastMessageListener);
 }
 
 BroadcastScript::~BroadcastScript()

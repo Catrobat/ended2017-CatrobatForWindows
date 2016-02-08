@@ -22,15 +22,20 @@
             </AppBarButton.Icon>
         </AppBarButton>
 
-        <Button x:Name="BtnSelectedColor" Height="60" Margin="219,0,0,0" MinWidth="1" Width="50" Padding="0">
+        <!--<Button x:Name="BtnSelectedColor" Height="60" Margin="219,0,0,0" MinWidth="1" Width="50" Padding="0">
             <Grid x:Name="GrdBtnSelectedColor" Height="60" VerticalAlignment="Center" Width="50">
                 <Image x:Name="ImgTransparence"  Height="60" Margin="0" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Visibility="Visible" Width="50" />
                 <Rectangle x:Name="RecSelectedColor" Fill="Black" Height="60" Margin="0" Visibility="Visible" Width="50"/>
             </Grid>
-        </Button>
+        </Button>-->
+    <AppBarButton x:Name="BtnTools" Margin="219,0,0,0">
+      <AppBarButton.Icon>
+        <BitmapIcon UriSource="/Assets/AppBar/menu_tools_.png"/>
+      </AppBarButton.Icon>
+    </AppBarButton>
 
 
-        <Button x:Name="BtnToolSelection" BorderThickness="0"  HorizontalAlignment="Right" Height="38" Margin="0,0,21,0" MinHeight="1" MinWidth="1" Padding="0,-10,0,-10" VerticalAlignment="Center" Width="38">
+    <Button x:Name="BtnToolSelection" BorderThickness="0"  HorizontalAlignment="Right" Height="38" Margin="0,0,21,0" MinHeight="1" MinWidth="1" Padding="0,-10,0,-10" VerticalAlignment="Center" Width="38">
             <Grid>
                 <Ellipse HorizontalAlignment="Right" Height="38" Margin="0,0,0,0" Stroke="White" StrokeThickness="3" VerticalAlignment="Center" Width="38">
                 </Ellipse>

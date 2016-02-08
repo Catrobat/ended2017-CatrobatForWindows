@@ -66,7 +66,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters
                 Description = o.ProgramHeader.Description,
                 UploadHeader = (UploadHeader)uploadHeaderConverter.Convert(o.ProgramHeader, c),
                 GlobalVariables = globalVariablesBuffer.Select(variable => globalVariables[variable]).ToObservableCollection(),
-                /*BroadcastMessages = contextBase.BroadcastMessages.Values.ToObservableCollection(),*/
+                BroadcastMessages = contextBase.BroadcastMessages.Values.ToObservableCollection(),
                 Sprites = o.SpriteList.Sprites.Select(sprite => sprites[sprite]).ToObservableCollection()
             };
         }

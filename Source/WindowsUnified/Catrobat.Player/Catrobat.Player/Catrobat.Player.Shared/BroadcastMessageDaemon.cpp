@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "BroadcastMessageDaemon.h"
 
+using namespace Core;
+
 BroadcastMessageDaemon *BroadcastMessageDaemon::__instance = NULL;
 
 BroadcastMessageDaemon::BroadcastMessageDaemon()
@@ -10,10 +12,10 @@ BroadcastMessageDaemon::BroadcastMessageDaemon()
 
 BroadcastMessageDaemon *BroadcastMessageDaemon::Instance()
 {
-    if (!__instance)
-    {
-        __instance = new BroadcastMessageDaemon();
-    }
+	if (!__instance)
+	{
+		__instance = new BroadcastMessageDaemon();
+	}
 
 	return __instance;
 }

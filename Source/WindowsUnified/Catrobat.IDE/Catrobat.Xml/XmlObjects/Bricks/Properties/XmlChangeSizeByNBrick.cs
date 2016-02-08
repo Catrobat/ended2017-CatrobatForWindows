@@ -13,21 +13,29 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.Properties
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            Size = new XmlFormula(xRoot.Element("size"));
+            if (xRoot != null)
+            {
+                Size = new XmlFormula(xRoot, XmlConstants.SizeChange);
+            }
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("changeSizeByNBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlChangeSizeByNBrickType);                
 
-            var xVariable = new XElement("size");
-            xVariable.Add(Size.CreateXml());
-            xRoot.Add(xVariable);
+            var xElement = Size.CreateXml();
+            xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.SizeChange);
+
+            var xFormulalist = new XElement(XmlConstants.FormulaList);
+            xFormulalist.Add(xElement);
+
+            xRoot.Add(xFormulalist);
 
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (Size != null)
                 Size.LoadReference();

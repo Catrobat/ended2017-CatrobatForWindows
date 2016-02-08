@@ -232,9 +232,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)IObject.h">
       <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)NativeWrapper.h">
-      <Filter>NativeComponent\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ILook.h">
       <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
@@ -250,6 +247,20 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)IBroadcastScript.h">
       <Filter>NativeComponent\Interface</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IHeader.h">
+      <Filter>NativeComponent\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NativeWrapper.h">
+      <Filter>NativeComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Header.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ITurnRightBrick.h">
+      <Filter>NativeComponent\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IBrick.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
@@ -462,7 +473,10 @@
       <Filter>Objects\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)NativeWrapper.cpp">
-      <Filter>NativeComponent\Interface</Filter>
+      <Filter>NativeComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Header.cpp">
+      <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

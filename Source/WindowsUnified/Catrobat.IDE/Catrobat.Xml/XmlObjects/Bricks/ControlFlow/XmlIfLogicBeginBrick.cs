@@ -65,39 +65,49 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Bricks.ControlFlow
 
         internal override void LoadFromXml(XElement xRoot)
         {
-            if (xRoot.Element("ifCondition") != null)
+            if (xRoot != null)
             {
-                IfCondition = new XmlFormula(xRoot.Element("ifCondition"));
+                IfCondition = new XmlFormula(xRoot, XmlConstants.XmlIFCONDITION);
             }
-            if (xRoot.Element("ifElseBrick") != null)
+            /*if (xRoot.Element("ifElseBrick") != null)
             {
                 IfLogicElseBrickReference = new XmlIfLogicElseBrickReference(xRoot.Element("ifElseBrick"));
             }
             if (xRoot.Element("ifEndBrick") != null)
             {
                 IfLogicEndBrickReference = new XmlIfLogicEndBrickReference(xRoot.Element("ifEndBrick"));
-            }
+            }*/
         }
 
         internal override XElement CreateXml()
         {
-            var xRoot = new XElement("ifLogicBeginBrick");
+            var xRoot = new XElement(XmlConstants.Brick);
+            xRoot.SetAttributeValue(XmlConstants.Type, XmlConstants.XmlIfLogicBeginBrick);
 
+            //TODO: Anstelle von einem <ifCondition>-Tag wird in der 093 ein formula element mit category="IF_CONDITION" verwendet
             if (IfCondition != null)
             {
-                var xVariable1 = new XElement("ifCondition");
+                /*var xVariable1 = new XElement(XmlConstants.XmlIfLogicBeginBrick);
                 xVariable1.Add(IfCondition.CreateXml());
-                xRoot.Add(xVariable1);
+                xRoot.Add(xVariable1);*/
+
+                var xElement = IfCondition.CreateXml();
+                xElement.SetAttributeValue(XmlConstants.Category, XmlConstants.XmlIFCONDITION);
+
+                var xFormulalist = new XElement(XmlConstants.FormulaList);
+                xFormulalist.Add(xElement);
+
+                xRoot.Add(xFormulalist);
             }
 
-                xRoot.Add(IfLogicElseBrickReference.CreateXml());
+                //xRoot.Add(IfLogicElseBrickReference.CreateXml());
 
-                xRoot.Add(IfLogicEndBrickReference.CreateXml());
+                //xRoot.Add(IfLogicEndBrickReference.CreateXml());
 
             return xRoot;
         }
 
-        internal override void LoadReference()
+        public override void LoadReference()
         {
             if (IfLogicElseBrickReference != null)
                 IfLogicElseBrickReference.LoadReference();

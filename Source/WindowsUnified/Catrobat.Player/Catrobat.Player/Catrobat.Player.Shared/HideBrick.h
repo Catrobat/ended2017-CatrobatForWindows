@@ -2,10 +2,13 @@
 
 #include "Brick.h"
 
-class HideBrick :
-	public Brick
+namespace ProjectStructure
 {
-public:
-	HideBrick(std::shared_ptr<Script> parent);
-	void Execute();
-};
+	class HideBrick :
+		public Brick
+	{
+	public:
+		HideBrick(Script* parent);
+		void Execute();
+	};
+}

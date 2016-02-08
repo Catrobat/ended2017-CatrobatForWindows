@@ -231,15 +231,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             try
             {
-                sldBrightness.Value = sldBrightness.Value > 100 ? 100 : sldBrightness.Value;
-                bool succeeded = _photoManager.VideoDeviceController.Brightness.TrySetValue(sldBrightness.Value);
-                if (!succeeded)
+                if (sldBrightness != null)
                 {
-                    //ShowStatusMessage("Set Brightness failed");
-                }
-                else
-                {
-                    tbBrightnessValue.Text = sldBrightness.Value.ToString();
+                    sldBrightness.Value = sldBrightness.Value > 100 ? 100 : sldBrightness.Value;
+                    bool succeeded = _photoManager.VideoDeviceController.Brightness.TrySetValue(sldBrightness.Value);
+                    if (!succeeded)
+                    {
+                        //ShowStatusMessage("Set Brightness failed");
+                    }
+                    else
+                    {
+                        tbBrightnessValue.Text = sldBrightness.Value.ToString();
+                    }
                 }
             }
             catch (Exception exception)

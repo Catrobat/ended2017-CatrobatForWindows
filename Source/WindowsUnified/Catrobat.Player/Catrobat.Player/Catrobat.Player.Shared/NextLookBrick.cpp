@@ -3,13 +3,15 @@
 #include "Script.h"
 #include "Object.h"
 
-NextLookBrick::NextLookBrick(std::shared_ptr<Script> parent) :
+using namespace ProjectStructure;
+
+NextLookBrick::NextLookBrick(Script* parent) :
 	Brick(TypeOfBrick::NextlookBrick, parent)
 {
 }
 
 void NextLookBrick::Execute()
-{	
+{
 	int next = m_parent->GetParent()->GetIndexOfCurrentLook() + 1;
 	if (next >= m_parent->GetParent()->GetLookListSize())
 	{

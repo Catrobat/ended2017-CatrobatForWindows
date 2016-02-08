@@ -27,7 +27,7 @@ namespace PlayerWindowsPhone8Test
             Concurrency::wait(1000);
 			Assert::IsTrue(success);
 
-            Project *project = parser->GetProject();
+            std::unique_ptr<Project> project = parser->GetProject();
             Assert::AreEqual(project->GetScreenHeight(), 1205);
             Assert::AreEqual(project->GetScreenWidth(), 800);
 		}
@@ -38,8 +38,8 @@ namespace PlayerWindowsPhone8Test
 			bool success = parser->LoadXML("TestFiles/ObjectListTest1.xml");
 			Assert::IsTrue(success);
 
-            Project *project = parser->GetProject();
-			Assert::AreEqual(project->GetObjectList()->GetSize(), 2);
+			std::unique_ptr<Project> project = parser->GetProject();
+			Assert::AreEqual(project->GetObjectList().size(), size_t(2));
 		}
 
 		TEST_METHOD(XMLParserTests_ObjectList)
@@ -48,8 +48,8 @@ namespace PlayerWindowsPhone8Test
 			bool success = parser->LoadXML("TestFiles/ObjectListTest2.xml");
 			Assert::IsTrue(success);
 
-            Project *project = parser->GetProject();
-			Assert::AreEqual(project->GetObjectList()->GetSize(), 30);
+			std::unique_ptr<Project> project = parser->GetProject();
+			Assert::AreEqual(project->GetObjectList().size(), size_t(30));
 		}
 
 		TEST_METHOD(XMLParserTests_BroadcastTest)
@@ -58,8 +58,8 @@ namespace PlayerWindowsPhone8Test
 			bool success = parser->LoadXML("TestFiles/BroadcastTest.xml");
 			Assert::IsTrue(success);
 
-            Project *project = parser->GetProject();
-			Assert::AreEqual(project->GetObjectList()->GetSize(), 2);
+			std::unique_ptr<Project> project = parser->GetProject();
+			Assert::AreEqual(project->GetObjectList().size(), size_t(2));
 		}
 	};
 }

@@ -91,6 +91,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTypes\BaseScript.cs" />
+    <Compile Include="DataTypes\Brick.cs" />
+    <Compile Include="DataTypes\Program.cs" />
+    <Compile Include="DataTypes\Header.cs" />
+    <Compile Include="DataTypes\Look.cs" />
+    <Compile Include="DataTypes\Object.cs" />
+    <Compile Include="DataTypes\TurnRightBrick.cs" />
+    <Compile Include="DataTypes\WhenScript.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -120,6 +128,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Objects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
+      <Name>Behaviors SDK %28XAML%29</Name>
+    </SDKReference>
+    <SDKReference Include="Microsoft.VCLibs, Version=12.0">
+      <Name>Microsoft Visual C++ 2013 Runtime Package for Windows Phone</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

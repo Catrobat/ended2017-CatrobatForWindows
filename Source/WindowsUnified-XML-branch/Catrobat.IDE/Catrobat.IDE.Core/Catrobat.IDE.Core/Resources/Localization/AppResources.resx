@@ -271,10 +271,10 @@
     <value>when tapped</value>
   </data>
   <data name="Editor_ActionPlural" xml:space="preserve">
-    <value>actions</value>
+    <value>scripts</value>
   </data>
   <data name="Editor_ActionSingular" xml:space="preserve">
-    <value>action</value>
+    <value>script</value>
   </data>
   <data name="Editor_BroadcastMessage" xml:space="preserve">
     <value>Broadcast message</value>
@@ -286,7 +286,7 @@
     <value>new object</value>
   </data>
   <data name="Editor_ButtonAddScript" xml:space="preserve">
-    <value>new action</value>
+    <value>new script</value>
   </data>
   <data name="Editor_ButtonAddSound" xml:space="preserve">
     <value>new sound</value>
@@ -403,7 +403,7 @@
     <value>object</value>
   </data>
   <data name="Editor_PivotActions" xml:space="preserve">
-    <value>Actions</value>
+    <value>Scripts</value>
   </data>
   <data name="Editor_PivotLooks" xml:space="preserve">
     <value>Looks</value>
@@ -475,7 +475,7 @@
     <value>CHOOSE SOUND NAME</value>
   </data>
   <data name="Editor_TitleNewAction" xml:space="preserve">
-    <value>NEW ACTION</value>
+    <value>NEW SCRIPT</value>
   </data>
   <data name="Editor_TitleNewBroadcastMessage" xml:space="preserve">
     <value>NEW BROADCAST MESSAGE</value>
@@ -868,7 +868,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>Press "back" again to close the app?</value>
   </data>
   <data name="Editor_ClickPlusToAddAction" xml:space="preserve">
-    <value>Tap '+' to add a new action.</value>
+    <value>Tap '+' to add a new script.</value>
   </data>
   <data name="Editor_ClickPlusToAddLook" xml:space="preserve">
     <value>Tap '+' to add a new look.</value>
@@ -1285,7 +1285,7 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
     <value>downloading...</value>
   </data>
   <data name="Main_NumberOfActions" xml:space="preserve">
-    <value>Actions</value>
+    <value>Scripts</value>
   </data>
   <data name="Main_NumberOfLooks" xml:space="preserve">
     <value>Looks</value>
@@ -1373,5 +1373,8 @@ The source code of Pocket Code is mainly licensed under the GNU AGPL v3 License.
   </data>
   <data name="Player_AppBarButton_Thumbnail" xml:space="preserve">
     <value>thumbnail</value>
+  </data>
+  <data name="Main_NotAllFeaturesSupported" xml:space="preserve">
+    <value>Not every feature is supported by the current device.</value>
   </data>
 </root>

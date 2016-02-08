@@ -79,6 +79,7 @@ namespace Catrobat.IDE.Core
         public const string TurnLeftDegrees = "TURN_LEFT_DEGREES"; //degrees
         public const string TurnRightDegrees = "TURN_RIGHT_DEGREES";//degrees
         public const string Note = "NOTE"; //note
+        public const string Speak = "SPEAK"; //speak
 
 
         public const string FormulaList = "formulaList"; //new list containing the new formula type v91->v93
@@ -199,7 +200,7 @@ namespace Catrobat.IDE.Core
 
         public const string XmlSetVolumeToBrickType = "SetVolumeToBrick";
 
-        public const string XmlSpeakBrickType = "SpeackBrick";
+        public const string XmlSpeakBrickType = "SpeakBrick";
         public const string Text = "text";
 
         public const string XmlStopAllSoundsBrickType = "StopAllSoundsBrick";

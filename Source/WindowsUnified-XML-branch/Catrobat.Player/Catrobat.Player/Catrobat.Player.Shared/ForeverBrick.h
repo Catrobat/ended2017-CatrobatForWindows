@@ -4,18 +4,18 @@
 #include "Object.h"
 #include <list>
 
-class ForeverBrick :
-	public ContainerBrick
+namespace ProjectStructure
 {
-public:
-	ForeverBrick(std::shared_ptr<Script> parent);
-	~ForeverBrick(void);
+	class ForeverBrick :
+		public ContainerBrick
+	{
+	public:
+		ForeverBrick(Script* parent);
+		~ForeverBrick();
 
-	void Execute();
-	void AddBrick(Brick *brick);
-private:
-	std::list<Brick*> *m_brickList;
-
-	Brick *GetBrick(int index);
-};
-
+		void Execute();
+		void AddBrick(std::unique_ptr<Brick> brick);
+	private:
+		std::list<std::unique_ptr<Brick>> m_brickList;
+	};
+}

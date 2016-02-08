@@ -28,7 +28,7 @@ namespace Catrobat.IDE.Core.XmlModelConvertion.Converters.Actions.Bricks
                         break;
                     }
                 }
-            //shouldnt be necessary
+            //maybe its necessary to override .Equals() for the class as it got more properties now
 
             //old undirty version //if (o.UserVariable != null) c.Variables.TryGetValue(o.UserVariable, out variable);
             return new SetVariableBrick
