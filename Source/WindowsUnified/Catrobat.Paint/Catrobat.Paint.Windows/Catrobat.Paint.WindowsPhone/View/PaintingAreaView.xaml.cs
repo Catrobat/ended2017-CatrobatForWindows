@@ -425,18 +425,6 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         }
 
-        public async void openFile()
-        {
-            FileOpenPicker openPicker = new FileOpenPicker();
-            openPicker.ViewMode = PickerViewMode.Thumbnail;
-            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            openPicker.FileTypeFilter.Add(".jpg");
-            openPicker.FileTypeFilter.Add(".jpeg");
-            openPicker.FileTypeFilter.Add(".png");
-
-            StorageFile file = await openPicker.PickSingleFileAsync();
-        }
-
         // if there is no object on the paintingareaview and no copy of the workingspace is selected in the stamp tool then reset
         // the stampbarbuttons
         public void checkAndUpdateStampAppBarButtons()
@@ -473,12 +461,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnBrushThickness.Label = "Pinselstärke";
                 app_btnBrushThickness.Click += btnThickness_Click;
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
-
-                /*AppBarButton app_btnColor = new AppBarButton();
-                app_btnColor.Icon = bitmapIconFrom("icon_menu_color_palette.png");
-                app_btnColor.Label = "Farbe";
-                app_btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
-                cmdBar.PrimaryCommands.Add(app_btnColor);*/
 
                 if("barCursor" == type)
                 {
@@ -560,7 +542,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
             else if ("barFill" == type)
             {
-
+                // TODO:
                 /*AppBarButton app_btnColor = new AppBarButton();
 
                 app_btnColor.Icon = bitmapIconFrom("icon_menu_color_palette.png");
@@ -774,10 +756,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnClearElementsInWorkingSpace.Name = "appBarButtonClearWorkingSpace";
             app_btnSave.Name = "appbarButtonSave";
 
-            /*app_btnTools.Icon = bitmapIconFrom("icon_menu_tools.png");
-            app_btnTools.Label = "Werkzeug";
-            app_btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;*/
-
             app_btnClearElementsInWorkingSpace.Click += app_btnClearElementsInWorkingSpace_Click;
             app_btnFullScreen.Click += app_btnFullScreen_Click;
             app_btnLoad.Click += app_btnLoad_Click;
@@ -793,10 +771,8 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnMoreInfo.Label = "Mehr";
             app_btnNewPicture.Label = "Neues Bild";
 
-            //cmdBar.PrimaryCommands.Add(app_btnSelectedColor);
 
             cmdBar.SecondaryCommands.Add(app_btnClearElementsInWorkingSpace);
-            // cmdBar.SecondaryCommands.Add(app_btnSaveCopy);
             cmdBar.SecondaryCommands.Add(app_btnNewPicture);
             cmdBar.SecondaryCommands.Add(app_btnLoad);
             cmdBar.SecondaryCommands.Add(app_btnSave);
@@ -1164,11 +1140,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             }          
         }
 
-        public void NavigatedTo(Type source_type)
-        {
-            this.Frame.Navigate(source_type);
-        }
-
         public void ToolChangedHere(ToolBase tool)
         {
             if (tool.GetToolType() == ToolType.Eraser && PocketPaintApplication.GetInstance().isBrushEraser == true)
@@ -1512,13 +1483,6 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         }
 
-        // ONLY FOR TESTING
-
-        public void changeTbTestboxText(double alpha, double a, double b, double c)
-        {
-            //tbTest.Text = "alpha: " + alpha.ToString() + "\na: " + a.ToString() + "\nb: " + b.ToString() + "\nc: " + c.ToString();
-        }
-
         public Visibility setVisibilityOfUcRectangleSelectionControl
         {
             get
@@ -1561,27 +1525,8 @@ namespace Catrobat.Paint.WindowsPhone.View
                 new UICommandInvokedHandler(deleteChanges)));
 
             messageDialog.DefaultCommandIndex = 0;
-            // messageDialog.CancelCommandIndex = 1;
 
             await messageDialog.ShowAsync();
-        }
-
-        private UICommandInvokedHandler deleteChanges()
-        {
-            if (PocketPaintApplication.GetInstance().shouldAppClosedThroughBackButton)
-            {
-                Application.Current.Exit();
-            }
-            else
-            {
-                resetApp();
-            }
-
-            changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", false);
-            changeEnabledOfASecondaryAppbarButton("appbarButtonSave", false);
-
-            // TODO: return value should not null.
-            return null;
         }
 
         public void saveChanges(IUICommand command)
@@ -1653,18 +1598,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 {
                     ((AppBarButton)cmdBar.SecondaryCommands[i]).IsEnabled = isEnabled;
                     break;
-                }
-            }
-        }
-
-        public void changeEnabledOfAPrimaryAppbarButton(string appBarButtonName, bool isEnabled)
-        {
-            CommandBar cmdBar = (CommandBar)BottomAppBar;
-            for (int i = 0; i < cmdBar.PrimaryCommands.Count; i++)
-            {
-                if (((AppBarButton)cmdBar.PrimaryCommands[i]).Name == appBarButtonName)
-                {
-                    ((AppBarButton)cmdBar.PrimaryCommands[i]).IsEnabled = isEnabled;
                 }
             }
         }
