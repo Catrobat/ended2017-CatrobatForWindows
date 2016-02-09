@@ -606,7 +606,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
 
-                app_btnBrushThickness.Icon = bitmapIconFrom("icon_menu_cursor.png");
+                app_btnBrushThickness.Icon = bitmapIconFrom("icon_menu_strokes.png");
 
                 app_btnBrushThickness.Label = "Pinselstärke";
 
