@@ -17,8 +17,7 @@ namespace Catrobat.Paint.WindowsPhone.Command
 
         public override bool ReDo()
         {
-            var e = new EraserTool();
-            e.Draw(_points);
+            PocketPaintApplication.GetInstance().ToolCurrent.Draw(_points);
             return true;
         }
 
