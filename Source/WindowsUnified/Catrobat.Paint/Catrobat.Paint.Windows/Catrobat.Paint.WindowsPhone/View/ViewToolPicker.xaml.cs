@@ -1,6 +1,8 @@
 ﻿using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Catrobat.Paint.WindowsPhone.Tool;
 using System;
+using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Phone.UI.Input;
 using Windows.UI;
 using Windows.UI.Popups;
@@ -20,6 +22,7 @@ namespace Catrobat.Paint.WindowsPhone.View
     public sealed partial class ViewToolPicker : Page
     {
         private bool isOneToolButtonHolding;
+        private static IAsyncOperation<IUICommand> asyncCommand = null;
         public ViewToolPicker()
         {
             this.InitializeComponent();
@@ -196,18 +199,15 @@ namespace Catrobat.Paint.WindowsPhone.View
         private async void showToolMessage(string message)
         {
             isOneToolButtonHolding = true;
-
-            MessageDialog msg = new MessageDialog(message);
-
-
-            // TODO: Aktuell tritt eine Exception auf, da die asynchrone Programmierung nicht korrekt implementiert wurde.
-            try
+            MessageDialog messageDialog = new MessageDialog(message);
+            if (asyncCommand != null)
             {
-                await msg.ShowAsync();
+                asyncCommand.Cancel();
+                asyncCommand = null;
             }
-            catch (Exception exception)
+            else
             {
-                System.Diagnostics.Debug.WriteLine(exception.StackTrace);
+                asyncCommand = messageDialog.ShowAsync();
             }
         }
 
