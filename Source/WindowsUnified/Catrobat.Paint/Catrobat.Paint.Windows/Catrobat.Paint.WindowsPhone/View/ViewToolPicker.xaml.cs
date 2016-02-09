@@ -196,7 +196,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             frame.Navigate(typeof(PaintingAreaView));
         }
 
-        private async void showToolMessage(string message)
+        private void showToolMessage(string message)
         {
             isOneToolButtonHolding = true;
             MessageDialog messageDialog = new MessageDialog(message);
