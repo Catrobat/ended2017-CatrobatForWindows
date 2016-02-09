@@ -1187,9 +1187,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     {
                         await bitmapEncoder.FlushAsync();
                     }
-                    catch (Exception ex)
+                    catch (Exception exception)
                     {
-                        // ignored
+                        System.Diagnostics.Debug.WriteLine(exception.StackTrace);
                     }
                     if (wbCroppedBitmap != null)
                     {
@@ -1240,9 +1240,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                     {
                         await bitmapEncoder.FlushAsync();
                     }
-                    catch (Exception ex)
+                    catch (Exception exception)
                     {
-                        // ignored
+                        System.Diagnostics.Debug.WriteLine(exception.StackTrace);
                     }
                     if (wbCroppedBitmap != null)
                     {

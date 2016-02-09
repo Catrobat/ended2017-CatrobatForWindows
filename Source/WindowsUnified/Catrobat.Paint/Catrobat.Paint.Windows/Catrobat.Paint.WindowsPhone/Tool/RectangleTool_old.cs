@@ -6,14 +6,15 @@ using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
 {
+    // Dient nur als Nachlagewerk
     class RectangleToolOld : ToolBase
     {
-        private Path _path;
+        // private Path _path;
 
         public RectangleToolOld()
         {
             this.ToolType = ToolType.Rect;
-            _path = null;
+            // _path = null;
             if (PocketPaintApplication.GetInstance() != null && PocketPaintApplication.GetInstance().PaintingAreaView != null)
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.setVisibilityOfUcRectangleSelectionControl = Visibility.Visible;

@@ -44,7 +44,6 @@ namespace Catrobat.Paint.WindowsPhone.View
         static bool isFullscreen;
         static bool isPointerEventLoaded;
         static int zoomCounter;
-        Point start_point = new Point();
         CoreApplicationView view;
 
         public PaintingAreaView()
@@ -1159,9 +1158,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                 tool.HandleMove(scaletransform);                 
                 tool.HandleUp(scaletransform);                
             }
-            catch(Exception ex)
+            catch(Exception exception)
             {
-                
+                System.Diagnostics.Debug.WriteLine(exception.StackTrace);
             }          
         }
 

@@ -63,7 +63,7 @@ namespace Catrobat.Paint.WindowsPhone
 
             var options = new Windows.System.LauncherOptions { DisplayApplicationPicker = false };
 
-            Window.Current.Dispatcher.RunAsync(CoreDispatcherPriority.High, async () =>
+            await Window.Current.Dispatcher.RunAsync(CoreDispatcherPriority.High, async () =>
             {
                 bool success = await Windows.System.Launcher.LaunchFileAsync(localFile, options);
                 if (success)

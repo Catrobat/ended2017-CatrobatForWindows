@@ -205,9 +205,9 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 await msg.ShowAsync();
             }
-            catch (Exception error)
+            catch (Exception exception)
             {
-
+                System.Diagnostics.Debug.WriteLine(exception.StackTrace);
             }
         }
 

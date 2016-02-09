@@ -14,7 +14,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         private PathFigure _pathFigure;
         private PathSegmentCollection _pathSegmentCollection;
         private Point _lastPoint;
-        private bool _lastPointSet;
         private LineSegment _lineSegment;
 
         public LineTool()

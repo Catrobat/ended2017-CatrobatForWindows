@@ -14,7 +14,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         private double DISPLAY_HEIGHT_HALF;
         private double DISPLAY_WIDTH_HALF;
         private Point startScale;
-        private Point centerPointForScale;
         private TransformGroup _tempTransforms;
 
         public MoveZoomTool(bool zoom = true)
@@ -35,10 +34,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
             DISPLAY_WIDTH_HALF = PocketPaintApplication.GetInstance().GridWorkingSpace.ActualWidth / 2.0;
             DISPLAY_HEIGHT_HALF = PocketPaintApplication.GetInstance().GridWorkingSpace.ActualHeight / 2.0;
-            _tempTransforms = new TransformGroup();
             startScale.X = _transforms.Value.M11;
-            startScale.Y = _transforms.Value.M22;
-            centerPointForScale = new Point();          
+            startScale.Y = _transforms.Value.M22;       
         }
         public override void HandleDown(object arg)
         {

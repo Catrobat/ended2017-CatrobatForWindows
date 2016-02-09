@@ -90,18 +90,21 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             //await captureManager.InitializeAsync();
         }
 
-        async private void StartCapturePreview_Click(object sender, RoutedEventArgs e)
+        // TODO: Implement the following method
+        /*async private void StartCapturePreview_Click(object sender, RoutedEventArgs e)
         {
             //capturePreview.Source = captureManager;
             //await captureManager.StartPreviewAsync();
-        }
+        }*/
 
-        async private void StopCapturePreview_Click(object sender, RoutedEventArgs e)
+        // TODO: Implement the following method
+        /*async private void StopCapturePreview_Click(object sender, RoutedEventArgs e)
         {
             // await captureManager.StopPreviewAsync();
-        }
+        }*/
 
-        async private void CapturePhoto_Click(object sender, RoutedEventArgs e)
+        // TODO: Implement the following method
+        /*async private void CapturePhoto_Click(object sender, RoutedEventArgs e)
         {
             //ImageEncodingProperties imgFormat = ImageEncodingProperties.CreateJpeg();
 
@@ -120,6 +123,6 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             //PocketPaintApplication.GetInstance().GridImportImageSelectionControl.Visibility = Visibility.Visible;
             ////PocketPaintApplication.GetInstance().ImportImageSelectionControl;
             ////imagePreivew.Source = bmpImage;
-        }
+        }*/
     }
 }
