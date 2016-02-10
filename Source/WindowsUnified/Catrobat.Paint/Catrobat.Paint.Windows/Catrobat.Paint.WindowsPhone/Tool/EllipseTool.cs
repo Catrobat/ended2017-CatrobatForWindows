@@ -9,7 +9,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
     class EllipseTool : ToolBase
     {
         private Path _path;
-        private TransformGroup _transforms;
 
         public EllipseTool()
         {

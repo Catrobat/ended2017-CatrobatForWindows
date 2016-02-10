@@ -31,8 +31,9 @@ namespace Catrobat.Paint.WindowsPhone.Command
                 stampTool.stampPaste(_xCoordinateOnWorkingSpace, _yCoordinateOnWorkingSpace, _stampedImage);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
+                System.Diagnostics.Debug.WriteLine(exception.StackTrace);
                 return false;
             }
         }

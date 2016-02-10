@@ -1,6 +1,8 @@
 ﻿using Catrobat.Paint.WindowsPhone.Controls.UserControls;
 using Catrobat.Paint.WindowsPhone.Tool;
 using System;
+using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Phone.UI.Input;
 using Windows.UI;
 using Windows.UI.Popups;
@@ -20,6 +22,7 @@ namespace Catrobat.Paint.WindowsPhone.View
     public sealed partial class ViewToolPicker : Page
     {
         private bool isOneToolButtonHolding;
+        private static IAsyncOperation<IUICommand> asyncCommand = null;
         public ViewToolPicker()
         {
             this.InitializeComponent();
@@ -113,6 +116,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                             pocketPaintApplication.BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
                             pocketPaintApplication.ToolCurrent.ResetDrawingSpace();
                             pocketPaintApplication.EllipseSelectionControl.Visibility = Visibility.Visible;
+                            pocketPaintApplication.AppbarTop.BtnSelectedColorVisible(true);
                             PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
                             break;
                         case "BtnEraser":
@@ -162,6 +166,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                             pocketPaintApplication.BarRecEllShape.setForgroundOfLabelEdgeType(Colors.White);
                             pocketPaintApplication.ToolCurrent.ResetDrawingSpace();
                             pocketPaintApplication.RectangleSelectionControl.Visibility = Visibility.Visible;
+                            pocketPaintApplication.AppbarTop.BtnSelectedColorVisible(true);
                             PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
                             break;
                         case "BtnRotate":
@@ -191,21 +196,18 @@ namespace Catrobat.Paint.WindowsPhone.View
             frame.Navigate(typeof(PaintingAreaView));
         }
 
-        private async void showToolMessage(string message)
+        private void showToolMessage(string message)
         {
             isOneToolButtonHolding = true;
-
-            MessageDialog msg = new MessageDialog(message);
-
-
-            // TODO: Aktuell tritt eine Exception auf, da die asynchrone Programmierung nicht korrekt implementiert wurde.
-            try
+            MessageDialog messageDialog = new MessageDialog(message);
+            if (asyncCommand != null)
             {
-                await msg.ShowAsync();
+                asyncCommand.Cancel();
+                asyncCommand = null;
             }
-            catch (Exception error)
+            else
             {
-
+                asyncCommand = messageDialog.ShowAsync();
             }
         }
 

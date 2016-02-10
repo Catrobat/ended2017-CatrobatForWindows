@@ -22,7 +22,6 @@ namespace Catrobat.Paint
     {
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
-        ContinuationManager continuationManager;
 #endif
 
         /// <summary>
@@ -47,7 +46,7 @@ namespace Catrobat.Paint
         /// search results, and so forth.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected async override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
@@ -218,26 +217,18 @@ namespace Catrobat.Paint
 
                 await IdeInteraction.GotPictureFromIde(file);
             }
-            catch (Exception exc)
+            catch (Exception exception)
             {
-                // TODO: show uesful message
-                //var messageDialog2 = new MessageDialog(exc.Message);
-                //messageDialog2.ShowAsync();
+                System.Diagnostics.Debug.WriteLine(exception.StackTrace);
             }
             
 
-
-
-
-
-
-
-#if DEBUG
+            #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
-#endif
+            #endif
 
             Frame rootFrame = Window.Current.Content as Frame;
 

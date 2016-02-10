@@ -247,7 +247,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             catch (Exception exception)
             {
-                //ShowExceptionMessage(exception);
+                System.Diagnostics.Debug.WriteLine(exception.StackTrace);
             }
         }
 
@@ -267,7 +267,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             }
             catch (Exception exception)
             {
-                //ShowExceptionMessage(exception);
+                System.Diagnostics.Debug.WriteLine(exception.StackTrace);
             }
         }
 
