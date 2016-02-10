@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
@@ -10,7 +6,6 @@ namespace Catrobat.Paint.WindowsPhone.Converters
 {
     public class CameraIconConverter : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             int cam = (int)value;
@@ -32,14 +27,13 @@ namespace Catrobat.Paint.WindowsPhone.Converters
 
     public class ToolSettingsIconConverter : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-                Visibility vis = (Visibility)value;
-                if (vis == Visibility.Visible)
-                    return new Uri("ms-appx:/Assets/AppBar/dark/appbar.cancel.rest.png");
-                else
-                    return new Uri("ms-appx:/Assets/ColorPicker/icon_menu_strokes.png");
+            Visibility vis = (Visibility)value;
+            if (vis == Visibility.Visible)
+                return new Uri("ms-appx:/Assets/AppBar/dark/appbar.cancel.rest.png");
+            else
+                return new Uri("ms-appx:/Assets/ColorPicker/icon_menu_strokes.png");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -50,7 +44,6 @@ namespace Catrobat.Paint.WindowsPhone.Converters
 
     public class ToolSettingsTextConverter : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             Visibility vis = (Visibility)value;

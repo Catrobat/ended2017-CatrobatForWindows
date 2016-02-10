@@ -1,10 +1,8 @@
 ﻿using Catrobat.Paint.WindowsPhone.Command;
-using Catrobat.Paint.WindowsPhone.Common;
 using Catrobat.Paint.WindowsPhone.Listener;
 using Catrobat.Paint.WindowsPhone.Tool;
 using Catrobat.Paint.WindowsPhone.Ui;
 using System;
-using System.Collections.Generic;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Phone.UI.Input;
@@ -27,7 +25,6 @@ using Windows.ApplicationModel.Core;
 using Catrobat.Paint.WindowsPhone.Converters;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkID=390556 dokumentiert.
-
 namespace Catrobat.Paint.WindowsPhone.View
 {
     /// <summary>
@@ -35,7 +32,6 @@ namespace Catrobat.Paint.WindowsPhone.View
     /// </summary>
     public sealed partial class PaintingAreaView : Page
     {
-
         static string current_appbar = "barStandard";
         static int rotateCounter;
         static bool flipVertical;
@@ -60,7 +56,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
             PocketPaintApplication.GetInstance().EraserCanvas = EraserCanvas;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = new TransformGroup();
-            HardwareButtons.BackPressed +=HardwareButtons_BackPressed;
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation = 0;
 
             LayoutRoot.Height = Window.Current.Bounds.Height;
@@ -95,11 +91,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().PaintData.toolCurrentChanged += ToolChangedHere;
             PocketPaintApplication.GetInstance().AppbarTop.ToolChangedHere(PocketPaintApplication.GetInstance().ToolCurrent);
 
-            //btnTools.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnTools_OnClick;
-            //btnColor.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
-            //btnBrushThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnBrushThickness_OnClick;
-            //btnThickness.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnThickness_OnClick;
-
             setPaintingAreaViewLayout();
             PocketPaintApplication.GetInstance().GrdThicknessControlState = Visibility.Collapsed;
             createAppBarAndSwitchAppBarContent(current_appbar);
@@ -107,7 +98,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             setSizeOfPaintingAreaViewCheckered((int)Window.Current.Bounds.Height, (int)Window.Current.Bounds.Width);
             alignPositionOfGridWorkingSpace(null);
 
-            // TODO: Refactor the following code.
+            //TODO: Refactor the following code.
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = Window.Current.Bounds.Height;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = Window.Current.Bounds.Width;
             view = CoreApplication.GetCurrentView();
@@ -155,7 +146,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             TranslateTransform tfLeftTopCornerOfGridWorkingSpaceToNullPoint = new TranslateTransform();
             TranslateTransform tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = new TranslateTransform();
             TranslateTransform tfMiddlePointOfGridWorkingSpaceToGlobalMiddlePoint = new TranslateTransform();
-            tfLeftTopCornerOfGridWorkingSpaceToNullPoint = CreateTranslateTransform(tgGridWorkingSpace.Value.OffsetX * (-1), tgGridWorkingSpace.Value.OffsetY *(-1));
+            tfLeftTopCornerOfGridWorkingSpaceToNullPoint = CreateTranslateTransform(tgGridWorkingSpace.Value.OffsetX * (-1), tgGridWorkingSpace.Value.OffsetY * (-1));
             if (angularDegreeOfWorkingSpaceRotation == 0)
             {
                 tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform(((GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX) * (-1),
@@ -173,7 +164,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
             else if (angularDegreeOfWorkingSpaceRotation == 270)
             {
-                tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform(((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY) *(-1),
+                tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform(((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY) * (-1),
                                                                             (GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX);
             }
             tfMiddlePointOfGridWorkingSpaceToGlobalMiddlePoint = CreateTranslateTransform((Window.Current.Bounds.Width / 2.0), (Window.Current.Bounds.Height / 2.0));
@@ -203,7 +194,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         public void AddTranslateTransformToGridWorkingSpaceTransformGroup(TranslateTransform translateTransform)
         {
             TransformGroup tgGridWorkingSpace = getGridWorkingSpaceTransformGroup();
-            if(tgGridWorkingSpace == null)
+            if (tgGridWorkingSpace == null)
             {
                 return;
             }
@@ -274,7 +265,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 changeVisibilityOfAppBars(Visibility.Visible);
             }
         }
-
 
         public void PickAFileButton_Click(object sender, RoutedEventArgs e)
         {
@@ -362,7 +352,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                 e.Handled = true;
             }
-            else if(ucPhotoControl.Visibility == Visibility.Visible)
+            else if (ucPhotoControl.Visibility == Visibility.Visible)
             {
                 PocketPaintApplication.GetInstance().PhoneControl.closePhoneControl(sender, null);
                 e.Handled = true;
@@ -390,7 +380,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 }
                 else
                 {
-                    // TODO: Close app.
+                    //TODO: Close app.
                     Application.Current.Exit();
                 }
             }
@@ -429,7 +419,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         // the stampbarbuttons
         public void checkAndUpdateStampAppBarButtons()
         {
-            if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Stamp && !isAppBarButtonSelected("appBtnStampCopy"))
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Stamp && !isAppBarButtonSelected("appBtnStampCopy"))
             {
                 PocketPaintApplication.GetInstance().PaintingAreaView.createAppBarAndSwitchAppBarContent("barStamp");
             }
@@ -442,7 +432,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             return bitmapIcon;
         }
 
-
         public void createAppBarAndSwitchAppBarContent(string type)
         {
             CommandBar cmdBar = new CommandBar();
@@ -454,7 +443,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             unloadDoubleTapEvent();
             unloadManipulationPaintingAreaCanvasEvents();
 
-            if("barCursor" == type || "barStandard" == type)
+            if ("barCursor" == type || "barStandard" == type)
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
                 app_btnBrushThickness.Icon = bitmapIconFrom("icon_menu_strokes.png");
@@ -462,7 +451,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnBrushThickness.Click += btnThickness_Click;
                 cmdBar.PrimaryCommands.Add(app_btnBrushThickness);
 
-                if("barCursor" == type)
+                if ("barCursor" == type)
                 {
                     AppBarButton app_btnResetCursor = new AppBarButton();
                     app_btnResetCursor.Name = "appButtonResetCursor";
@@ -487,7 +476,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                     unloadPointerEvents();
                 }
             }
-            else if("barCrop" == type)
+            else if ("barCrop" == type)
             {
                 AppBarButton app_btnCropImage = new AppBarButton();
                 AppBarButton app_btnResetSelection = new AppBarButton();
@@ -507,7 +496,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 cmdBar.PrimaryCommands.Add(app_btnResetSelection);
                 cmdBar.PrimaryCommands.Add(app_btnCropImage);
             }
-            else if("barImportPng" == type)
+            else if ("barImportPng" == type)
             {
                 AppBarButton app_btnBrushThickness = new AppBarButton();
                 AppBarButton app_btnImportPicture = new AppBarButton();
@@ -523,7 +512,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnImportPicture.Label = "Bild laden";
                 app_btnReset.Label = "Ausgangsposition";
 
-                // TODO: David app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
+                //TODO: David app_btnReset.IsEnabled = PocketPaintApplication.GetInstance().RectangleSelectionControl.isModifiedRectangleMovement ? true : false;
 
                 app_btnBrushThickness.Click += btnThicknessBorder_Click;
                 app_btnImportPicture.Click += app_btnImportPicture_Click;
@@ -536,9 +525,9 @@ namespace Catrobat.Paint.WindowsPhone.View
                 loadManipulationPaintingAreaCanvasEvents();
                 unloadPointerEvents();
             }
-            else if("barPipette" == type)
+            else if ("barPipette" == type)
             {
-
+                //TODO: Empty?
             }
             else if ("barFill" == type)
             {
@@ -617,7 +606,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnReset.Icon = bitmapIconFrom("icon_menu_cursor.png");
                 app_btnReset.Label = "Ausgangsposition";
                 app_btnReset.Click += app_btn_reset_Click;
-                app_btnReset.IsEnabled = zoomCounter == 0 ? false : true;              
+                app_btnReset.IsEnabled = zoomCounter == 0 ? false : true;
                 cmdBar.PrimaryCommands.Add(app_btnReset);
 
                 unloadPointerEvents();
@@ -698,7 +687,6 @@ namespace Catrobat.Paint.WindowsPhone.View
 
                 app_btnReset.IsEnabled = flipHorizontal | flipVertical;
 
-
                 cmdBar.PrimaryCommands.Add(app_btnHorizontal);
                 cmdBar.PrimaryCommands.Add(app_btnVertical);
                 cmdBar.PrimaryCommands.Add(app_btnReset);
@@ -717,7 +705,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnStampCopy.Name = "appBtnStampCopy";
                 app_btnStampPaste.Name = "appBtnStampPaste";
                 app_btnStampClear.Name = "appBtnStampReset";
-
 
                 app_btnStampClear.Icon = bitmapIconFrom("icon_menu_stamp_clear.png");
                 app_btnStampPaste.Icon = bitmapIconFrom("icon_menu_stamp_paste.png");
@@ -771,7 +758,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             app_btnMoreInfo.Label = "Mehr";
             app_btnNewPicture.Label = "Neues Bild";
 
-
             cmdBar.SecondaryCommands.Add(app_btnClearElementsInWorkingSpace);
             cmdBar.SecondaryCommands.Add(app_btnNewPicture);
             cmdBar.SecondaryCommands.Add(app_btnLoad);
@@ -803,7 +789,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             for (int appBarButtonIndex = 0; appBarButtonIndex < cmdBar.PrimaryCommands.Count; appBarButtonIndex++)
             {
                 AppBarButton currentAppBarButton = ((AppBarButton)(cmdBar.PrimaryCommands[appBarButtonIndex]));
-                if(currentAppBarButton.Name == "appBtnStampCopy")
+                if (currentAppBarButton.Name == "appBtnStampCopy")
                 {
                     return true;
                 }
@@ -826,7 +812,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 {
                     currentAppBarButton.Visibility = Visibility.Collapsed;
                 }
-                else if(currentAppBarButton.Name == "appBtnStampReset")
+                else if (currentAppBarButton.Name == "appBtnStampReset")
                 {
                     currentAppBarButton.IsEnabled = false;
                 }
@@ -840,14 +826,14 @@ namespace Catrobat.Paint.WindowsPhone.View
             ((StampTool)PocketPaintApplication.GetInstance().ToolCurrent).stampCopy();
             CommandBar cmdBar = (CommandBar)BottomAppBar;
 
-            for(int appBarButtonIndex = 0; appBarButtonIndex < cmdBar.PrimaryCommands.Count; appBarButtonIndex++)
+            for (int appBarButtonIndex = 0; appBarButtonIndex < cmdBar.PrimaryCommands.Count; appBarButtonIndex++)
             {
                 AppBarButton currentAppBarButton = ((AppBarButton)(cmdBar.PrimaryCommands[appBarButtonIndex]));
                 if (currentAppBarButton.Name == "appBtnStampCopy")
                 {
                     currentAppBarButton.Visibility = Visibility.Collapsed;
                 }
-                else if(currentAppBarButton.Name == "appBtnStampPaste")
+                else if (currentAppBarButton.Name == "appBtnStampPaste")
                 {
                     currentAppBarButton.Visibility = Visibility.Visible;
                 }
@@ -878,7 +864,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         public void changeEnableOfAppBarButtonResetZoom(bool isEnabled)
         {
             CommandBar cmdBar = (CommandBar)BottomAppBar;
-            for(int i = 0; i < cmdBar.PrimaryCommands.Count; i++)
+            for (int i = 0; i < cmdBar.PrimaryCommands.Count; i++)
             {
                 if (((AppBarButton)cmdBar.PrimaryCommands[i]).Name == "appButtonResetZoom")
                 {
@@ -1111,17 +1097,17 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         void BtnZoomOut_Click(object sender, RoutedEventArgs e)
         {
-                enableResetButtonZoom(-1);
-                MoveZoomTool tool = new MoveZoomTool();
-                ScaleTransform scaletransform = new ScaleTransform();
-                scaletransform.ScaleX = 0.9;
-                scaletransform.ScaleY = 0.9;
-                PocketPaintApplication.GetInstance().isZoomButtonClicked = true;
-                tool.HandleMove(scaletransform);
-                tool.HandleUp(scaletransform);          
+            enableResetButtonZoom(-1);
+            MoveZoomTool tool = new MoveZoomTool();
+            ScaleTransform scaletransform = new ScaleTransform();
+            scaletransform.ScaleX = 0.9;
+            scaletransform.ScaleY = 0.9;
+            PocketPaintApplication.GetInstance().isZoomButtonClicked = true;
+            tool.HandleMove(scaletransform);
+            tool.HandleUp(scaletransform);
         }
-        
-        void BtnZoomIn_Click(object sender, RoutedEventArgs e )
+
+        void BtnZoomIn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1131,13 +1117,13 @@ namespace Catrobat.Paint.WindowsPhone.View
                 scaletransform.ScaleX = 1.1;
                 scaletransform.ScaleY = 1.1;
                 PocketPaintApplication.GetInstance().isZoomButtonClicked = true;
-                tool.HandleMove(scaletransform);                 
-                tool.HandleUp(scaletransform);                
+                tool.HandleMove(scaletransform);
+                tool.HandleUp(scaletransform);
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 System.Diagnostics.Debug.WriteLine(exception.StackTrace);
-            }          
+            }
         }
 
         public void ToolChangedHere(ToolBase tool)
@@ -1270,7 +1256,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             var point = new Point(Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.Y));
 
-            // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
+            //TODO: some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
             if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
             {
                 return;
@@ -1285,7 +1271,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             var point = new Point(Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.Y));
 
-            // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
+            //TODO: some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
             if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
             {
                 return;
@@ -1295,7 +1281,6 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             ((TranslateTransform)movezoom).X += point.X;
             ((TranslateTransform)movezoom).Y += point.Y;
-            //}
 
             switch (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType())
             {
@@ -1318,7 +1303,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             var point = new Point(Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(PaintingAreaCanvas).Position.Y));
 
-            // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
+            //TODO: some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
             if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
             {
                 return;
@@ -1350,7 +1335,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             enableResetButtonFlip(flipHorizontal | flipVertical);
 
-            if(!flipVertical && !flipHorizontal)
+            if (!flipVertical && !flipHorizontal)
             {
 
             }
@@ -1408,7 +1393,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             var point = new Point(Convert.ToInt32(e.GetCurrentPoint(EraserCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(EraserCanvas).Position.Y));
 
-            // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
+            //TODO: some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
             if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
             {
                 return;
@@ -1423,7 +1408,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             var point = new Point(Convert.ToInt32(e.GetCurrentPoint(EraserCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(EraserCanvas).Position.Y));
 
-            // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
+            //TODO: some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
             if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
             {
                 return;
@@ -1435,7 +1420,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             var point = new Point(Convert.ToInt32(e.GetCurrentPoint(EraserCanvas).Position.X), Convert.ToInt32(e.GetCurrentPoint(EraserCanvas).Position.Y));
 
-            // TODO some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
+            //TODO: some bubbling? issue here, fast multiple applicationbartop undos result in triggering this event
             if (point.X < 0 || point.Y < 0 || Spinner.SpinnerActive || e.Handled)
             {
                 return;
@@ -1480,7 +1465,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         private void CursorControl_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-
+            //TODO: Empty?
         }
 
         public Visibility setVisibilityOfUcRectangleSelectionControl
@@ -1583,7 +1568,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             PocketPaintApplication.GetInstance().CropControl.Visibility = visibility;
             PocketPaintApplication.GetInstance().StampControl.Visibility = visibility;
 
-            // TODO; Die folgenden Code-zeilen gehören in eine eigene Funktion ausgelagert.
+            //TODO: Die folgenden Code-zeilen gehören in eine eigene Funktion ausgelagert.
             //PocketPaintApplication.GetInstance().EllipseSelectionControl.IsHitTestVisible = true;
             //PocketPaintApplication.GetInstance().RectangleSelectionControl.IsHitTestVisible = true;
             // PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
@@ -1604,7 +1589,7 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         public void addElementToPaintingAreCanvas(Path path)
         {
-            if(path != null)
+            if (path != null)
             {
                 PaintingAreaCanvas.Children.Add(path);
                 changeEnabledOfASecondaryAppbarButton("appBarButtonClearWorkingSpace", true);
@@ -1655,11 +1640,11 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         public void changeVisibilityOfActiveSelectionControl(Visibility visibility)
         {
-            if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Crop)
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Crop)
             {
                 ctrlCropControl.Visibility = visibility;
             }
-            else if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Ellipse)
+            else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Ellipse)
             {
                 setVisibilityOfUcEllipseSelectionControl = visibility;
             }
@@ -1667,11 +1652,11 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 GridImportImageSelectionControl.Visibility = visibility;
             }
-            else if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
+            else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rect)
             {
                 setVisibilityOfUcRectangleSelectionControl = visibility;
             }
-            else if(PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Stamp)
+            else if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Stamp)
             {
                 ctrlStampControl.Visibility = visibility;
             }
