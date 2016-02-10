@@ -7,10 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Catrobat.Paint.WindowsPhone.Controls.AppBar"
     xmlns:userControls="using:Catrobat.Paint.WindowsPhone.Controls.UserControls"
-    
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" NavigationCacheMode="Required" >
-  
+
     <Grid x:Name="LayoutRoot" IsHitTestVisible="True">
         <Grid x:Name="GridWorkingSpace" IsHitTestVisible="True">
             <Grid x:Name="PaintingAreaCheckeredGrid" IsHitTestVisible="True">
@@ -24,7 +23,6 @@
                         ManipulationMode="TranslateX, TranslateY, Scale"
                         VerticalAlignment="Top"/>
 
-
                 <Canvas x:Name="EraserCanvas" 
                             Width="{Binding ElementName=PaintingAreaCanvas, Path=Width}" 
                             Height="{Binding ElementName=PaintingAreaCanvas, Path=Height}"                
@@ -33,7 +31,6 @@
                             VerticalAlignment="Top"
                             Visibility="Collapsed"
                             ManipulationMode="TranslateX, TranslateY, Scale"/>
-
 
                 <!-- CursorControl -->
                 <Grid x:Name="GridCursor" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -51,9 +48,6 @@
 
                 <!-- EllipseSelectionControl -->
                 <userControls:EllipseSelectionControl x:Name="ucEllipseSelectionControl" Visibility="Collapsed"></userControls:EllipseSelectionControl>
-
-
-
             </Grid>
             <!-- RectangleSelectioncontrol -->
 
@@ -86,7 +80,6 @@
 
         <!-- Stamp-Control -->
         <userControls:StampControl x:Name="ctrlStampControl" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"></userControls:StampControl>
-
         <userControls:InfoBasicBoxControl x:Name="InfoBasicBoxControl" Visibility="Collapsed"></userControls:InfoBasicBoxControl>
         <userControls:InfoBoxActionControl x:Name="InfoBoxActionControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"></userControls:InfoBoxActionControl>
         <userControls:InfoBoxControl x:Name="InfoBoxControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"></userControls:InfoBoxControl>
@@ -116,23 +109,11 @@
                     <BitmapIcon UriSource="/Assets/ColorPicker/icon_menu_strokes.png"/>
                 </AppBarButton.Icon>
             </AppBarButton>
-      <AppBarButton x:Name="btnColor" Label="Farbe">
-        <AppBarButton.Icon>
-          <BitmapIcon UriSource="/Assets/ColorPicker/icon_menu_color_palette.png"/>
-        </AppBarButton.Icon>
-      </AppBarButton>
-
-      <!-- <Button x:Name="BtnSelectedColor" Height="60" Margin="219,0,0,0" MinWidth="1" Width="50" Padding="0">
-        <Grid x:Name="GrdBtnSelectedColor" Height="60" VerticalAlignment="Center" Width="50">
-          <Image x:Name="ImgTransparence"  Height="60" Margin="0" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Visibility="Visible" Width="50" />
-          <Rectangle x:Name="RecSelectedColor" Fill="Black" Height="60" Margin="0" Visibility="Visible" Width="50"/>
-        </Grid>
-      </Button>-->
-      <!--<AppBarButton x:Name="btnTools" Label="Werkzeuge">
+            <AppBarButton x:Name="btnColor" Label="Farbe">
                 <AppBarButton.Icon>
-                    <BitmapIcon UriSource="/Assets/AppBar/menu_tools_.png"/>
+                    <BitmapIcon UriSource="/Assets/ColorPicker/icon_menu_color_palette.png"/>
                 </AppBarButton.Icon>
-            </AppBarButton>-->
+            </AppBarButton>
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Name="btnSave" Label="Speichern" />
                 <AppBarButton x:Name="btnSaveCopy" Label="Kopie Speichern" />
