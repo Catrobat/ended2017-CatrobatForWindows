@@ -1,16 +1,15 @@
 ﻿using Catrobat.Paint.WindowsPhone.Command;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Windows.Foundation;
 using Windows.UI;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
 
 namespace Catrobat.Paint.WindowsPhone.Tool
 {
+    //TODO: performance critical... doing some optimizations
+
     class EraserTool : ToolBase
     {
         private Path _path;
@@ -46,7 +45,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         private void initPathStrokeSettings()
         {
             _path.StrokeLineJoin = PenLineJoin.Round;
-            _path.Stroke = new SolidColorBrush(Color.FromArgb(0xff,0xff,0xff,0xff));
+            _path.Stroke = new SolidColorBrush(Color.FromArgb(0xff, 0xff, 0xff, 0xff));
             _path.StrokeThickness = PocketPaintApplication.GetInstance().PaintData.thicknessSelected;
             _path.StrokeStartLineCap = PocketPaintApplication.GetInstance().PaintData.penLineCapSelected;
             _path.StrokeEndLineCap = PocketPaintApplication.GetInstance().PaintData.penLineCapSelected;
@@ -162,8 +161,5 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             throw new NotImplementedException();
         }
-        
-        // performance critical... doing some optimizations
-
     }
 }
