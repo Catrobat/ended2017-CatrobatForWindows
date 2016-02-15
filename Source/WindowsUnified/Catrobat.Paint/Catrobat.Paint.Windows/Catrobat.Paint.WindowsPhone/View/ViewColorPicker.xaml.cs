@@ -44,10 +44,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 changeValuesOfColourSliders(selected_color.R, selected_color.G, selected_color.B, (byte)color_opacity);
                 changeColorOfBtnSelectedColor(selected_color);
             }
-
-            //HeaderTemplate.Height = Window.Current.Bounds.Height;
-            //piFirstPage.Height = Window.Current.Bounds.Height;
-
             setColorPickerLayout();
         }
 
@@ -157,7 +153,6 @@ namespace Catrobat.Paint.WindowsPhone.View
             string hexValueBlue = ((int)sldBlue.Value).ToString("X");
             argbHex = hexValueBlue.Length == 1 ? argbHex + "0" + hexValueBlue : argbHex + hexValueBlue;
             tbArgbValue.Text = argbHex;
-
         }
 
         private void BtnSelectedColor_OnClick(object sender, RoutedEventArgs e)
@@ -172,7 +167,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             {
                 var current_solid_brush = new SolidColorBrush(current_color);
                 PocketPaintApplication.GetInstance().PaintData.strokeColorSelected = current_solid_brush;
-                // TODO: David PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeOfRectangleToDraw = current_solid_brush;
+                PocketPaintApplication.GetInstance().RectangleSelectionControl.strokeOfRectangleToDraw = current_solid_brush;
                 PocketPaintApplication.GetInstance().EllipseSelectionControl.strokeOfEllipseToDraw = current_solid_brush;
                 PocketPaintApplication.GetInstance().ImportImageSelectionControl.changeStrokeOfDrawingShape(current_color);
             }
@@ -185,7 +180,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PocketPaintApplication.GetInstance().EllipseSelectionControl.fillOfEllipseToDraw = current_solid_brush;
             }
 
-            // TODO: If selected color is transparence then select the eraser-tool.
             if (PocketPaintApplication.GetInstance().isBrushTool)
             {
                 if (current_color.A == 0)
@@ -208,7 +202,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                 PocketPaintApplication.GetInstance().cursorControl.setCursorColor(current_color);
                 PocketPaintApplication.GetInstance().cursorControl.setDrawingPointColor(current_color);
             }
-
             this.Frame.GoBack();
         }
 
@@ -259,11 +252,6 @@ namespace Catrobat.Paint.WindowsPhone.View
         {
             BitmapImage image = new BitmapImage(new Uri("ms-resource:/File/Assets/ColorPicker/color.jpg"));
             BitmapImage bitmapImage = (BitmapImage)image;
-        }
-
-        private void Rectangle_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-
         }
 
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
