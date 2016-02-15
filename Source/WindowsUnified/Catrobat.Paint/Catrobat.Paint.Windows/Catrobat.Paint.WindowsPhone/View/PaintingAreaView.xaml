@@ -13,9 +13,11 @@
     <Grid x:Name="LayoutRoot" IsHitTestVisible="True">
         <Grid x:Name="GridWorkingSpace" IsHitTestVisible="True">
             <Grid x:Name="PaintingAreaCheckeredGrid" IsHitTestVisible="True">
-                <Grid.Background>
+                <!--<Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
-                </Grid.Background>
+                </Grid.Background>-->
+
+                <Canvas x:Name="CheckeredCanvas"></Canvas>
 
                 <Canvas x:Name="PaintingAreaCanvas"
                         Background="#5FD7CCCC" 
@@ -53,10 +55,6 @@
 
             <userControls:RectangleSelectionControl x:Name="ucRectangleSelectionControl" HorizontalAlignment="Center"
                                                    VerticalAlignment="Center" Visibility="Collapsed"></userControls:RectangleSelectionControl>
-
-            <!--ONLY FOR TESTING
-            <TextBox x:Name="tbTest" HorizontalAlignment="Left" Margin="160,162,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
-            -->
         </Grid>
 
         <!-- app-BarRectEllControl -->
