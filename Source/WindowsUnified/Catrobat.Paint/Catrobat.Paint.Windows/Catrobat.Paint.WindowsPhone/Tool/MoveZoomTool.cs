@@ -31,7 +31,7 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             {
                 PocketPaintApplication.GetInstance().GridWorkingSpace.RenderTransform = _transforms = new TransformGroup();
             }
-
+            _tempTransforms = new TransformGroup();
             DISPLAY_WIDTH_HALF = PocketPaintApplication.GetInstance().GridWorkingSpace.ActualWidth / 2.0;
             DISPLAY_HEIGHT_HALF = PocketPaintApplication.GetInstance().GridWorkingSpace.ActualHeight / 2.0;
             startScale.X = _transforms.Value.M11;
@@ -41,7 +41,6 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             startScale.X = ((Point)arg).X;
             startScale.Y = ((Point)arg).Y;
-            _tempTransforms = new TransformGroup();
         }
 
         public override void HandleMove(object arg)

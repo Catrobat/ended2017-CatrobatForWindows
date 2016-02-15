@@ -97,11 +97,47 @@ namespace Catrobat.Paint.WindowsPhone.View
 
             setSizeOfPaintingAreaViewCheckered((int)Window.Current.Bounds.Height, (int)Window.Current.Bounds.Width);
             alignPositionOfGridWorkingSpace(null);
-
-            //TODO: Refactor the following code.
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height = Window.Current.Bounds.Height;
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width = Window.Current.Bounds.Width;
             view = CoreApplication.GetCurrentView();
+            drawCheckeredBackgroundInCheckeredCanvas(9);
+        }
+
+        public void drawCheckeredBackgroundInCheckeredCanvas(uint sizeOfBoxes)
+        {
+            uint sizeOfBoxesToDraw = sizeOfBoxes;
+            Rectangle rectToDraw = null;
+            for (int x = 0; x < Math.Floor(Window.Current.Bounds.Width / sizeOfBoxesToDraw) + 1; x++)
+            {
+                for (int y = 0; y < Math.Floor(Window.Current.Bounds.Height / sizeOfBoxesToDraw) + 1; y++)
+                {
+                    rectToDraw = new Rectangle();
+                    if ((x + y) % 2 == 0)
+                    {
+                        rectToDraw.Fill = new SolidColorBrush(Colors.White);
+                    }
+                    else
+                    {
+                        rectToDraw.Fill = new SolidColorBrush(Colors.Gray);
+                    }
+                    double yCoordToDraw = Window.Current.Bounds.Height - (y * sizeOfBoxesToDraw);
+                    if (yCoordToDraw >= 0)
+                    {
+                        rectToDraw.Height = yCoordToDraw < sizeOfBoxesToDraw ?
+                            yCoordToDraw : sizeOfBoxesToDraw;
+                    }
+                    double xCoordToDraw = Window.Current.Bounds.Width - (x * sizeOfBoxesToDraw);
+                    if (xCoordToDraw >= 0)
+                    {
+                        rectToDraw.Width = xCoordToDraw < sizeOfBoxesToDraw ?
+                            xCoordToDraw : sizeOfBoxesToDraw;
+                    }
+
+                    Canvas.SetLeft(rectToDraw, x * sizeOfBoxesToDraw);
+                    Canvas.SetTop(rectToDraw, y * sizeOfBoxesToDraw);
+                    CheckeredCanvas.Children.Add(rectToDraw);
+                }
+            }
         }
 
         public void setSizeOfPaintingAreaViewCheckered(int height, int width)
@@ -146,7 +182,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             TranslateTransform tfLeftTopCornerOfGridWorkingSpaceToNullPoint = new TranslateTransform();
             TranslateTransform tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = new TranslateTransform();
             TranslateTransform tfMiddlePointOfGridWorkingSpaceToGlobalMiddlePoint = new TranslateTransform();
-            tfLeftTopCornerOfGridWorkingSpaceToNullPoint = CreateTranslateTransform(tgGridWorkingSpace.Value.OffsetX * (-1), tgGridWorkingSpace.Value.OffsetY * (-1));
+            tfLeftTopCornerOfGridWorkingSpaceToNullPoint = CreateTranslateTransform(tgGridWorkingSpace.Value.OffsetX * (-1), tgGridWorkingSpace.Value.OffsetY *(-1));
             if (angularDegreeOfWorkingSpaceRotation == 0)
             {
                 tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform(((GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX) * (-1),
@@ -164,7 +200,7 @@ namespace Catrobat.Paint.WindowsPhone.View
             }
             else if (angularDegreeOfWorkingSpaceRotation == 270)
             {
-                tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform(((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY) * (-1),
+                tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform(((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY) *(-1),
                                                                             (GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX);
             }
             tfMiddlePointOfGridWorkingSpaceToGlobalMiddlePoint = CreateTranslateTransform((Window.Current.Bounds.Width / 2.0), (Window.Current.Bounds.Height / 2.0));
@@ -194,7 +230,7 @@ namespace Catrobat.Paint.WindowsPhone.View
         public void AddTranslateTransformToGridWorkingSpaceTransformGroup(TranslateTransform translateTransform)
         {
             TransformGroup tgGridWorkingSpace = getGridWorkingSpaceTransformGroup();
-            if (tgGridWorkingSpace == null)
+            if(tgGridWorkingSpace == null)
             {
                 return;
             }
@@ -606,7 +642,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                 app_btnReset.Icon = bitmapIconFrom("icon_menu_cursor.png");
                 app_btnReset.Label = "Ausgangsposition";
                 app_btnReset.Click += app_btn_reset_Click;
-                app_btnReset.IsEnabled = zoomCounter == 0 ? false : true;
+                app_btnReset.IsEnabled = zoomCounter == 0 ? false : true;              
                 cmdBar.PrimaryCommands.Add(app_btnReset);
 
                 unloadPointerEvents();
@@ -1097,16 +1133,16 @@ namespace Catrobat.Paint.WindowsPhone.View
 
         void BtnZoomOut_Click(object sender, RoutedEventArgs e)
         {
-            enableResetButtonZoom(-1);
-            MoveZoomTool tool = new MoveZoomTool();
-            ScaleTransform scaletransform = new ScaleTransform();
-            scaletransform.ScaleX = 0.9;
-            scaletransform.ScaleY = 0.9;
-            PocketPaintApplication.GetInstance().isZoomButtonClicked = true;
-            tool.HandleMove(scaletransform);
-            tool.HandleUp(scaletransform);
+                enableResetButtonZoom(-1);
+                MoveZoomTool tool = new MoveZoomTool();
+                ScaleTransform scaletransform = new ScaleTransform();
+                scaletransform.ScaleX = 0.9;
+                scaletransform.ScaleY = 0.9;
+                PocketPaintApplication.GetInstance().isZoomButtonClicked = true;
+                tool.HandleMove(scaletransform);
+                tool.HandleUp(scaletransform);          
         }
-
+        
         void BtnZoomIn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1117,13 +1153,13 @@ namespace Catrobat.Paint.WindowsPhone.View
                 scaletransform.ScaleX = 1.1;
                 scaletransform.ScaleY = 1.1;
                 PocketPaintApplication.GetInstance().isZoomButtonClicked = true;
-                tool.HandleMove(scaletransform);
-                tool.HandleUp(scaletransform);
+                tool.HandleMove(scaletransform);                 
+                tool.HandleUp(scaletransform);                
             }
             catch (Exception exception)
             {
                 System.Diagnostics.Debug.WriteLine(exception.StackTrace);
-            }
+            }          
         }
 
         public void ToolChangedHere(ToolBase tool)
