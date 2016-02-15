@@ -364,13 +364,13 @@ namespace Catrobat.Paint.WindowsPhone.View
         private void btnPredefinedColors_Click(object sender, RoutedEventArgs e)
         {
             changeVisibilityOfGridSelection(Visibility.Visible, Visibility.Collapsed);
-            changeStrokeOfRectSelection(Colors.White, Colors.Black);
+            changeStrokeOfRectSelection(Colors.Gray, Colors.White);
         }
 
         private void btnUserDefinedColors_Click(object sender, RoutedEventArgs e)
         {
             changeVisibilityOfGridSelection(Visibility.Collapsed, Visibility.Visible);
-            changeStrokeOfRectSelection(Colors.Black, Colors.White);
+            changeStrokeOfRectSelection(Colors.White, Colors.Gray);
             ctrlInputHexValueSelectionControl.Visibility = Visibility.Collapsed;
         }
 
