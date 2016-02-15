@@ -41,7 +41,7 @@
             </ResourceDictionary>
         </Grid.Resources>
 
-        <Grid x:Name="LayoutRoot" Background="#1F1F1F">
+        <Grid x:Name="LayoutRoot" Background="#E8E8E8">
             <Grid x:Name="GridHeader" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Button x:Name="btnPredefinedColors" BorderThickness="0" Height="80" Width="90" Click="btnPredefinedColors_Click">
                     <Grid>
@@ -51,8 +51,8 @@
                 </Button>
                 <Button x:Name="btnUserDefinedColors" BorderThickness="0" Height="80" Margin="120,0,0,0" Width="90" Click="btnUserDefinedColors_Click">
                     <Grid>
-                        <Image x:Name="ImgUserDefinedColors" Height="65" Margin="0" Source="/Assets/ColorPicker/icon_color_chooser_tab_rgba.png" Stretch="None" Visibility="Visible" Width="90" />
-                        <Rectangle x:Name="rectUserDefinedColors" StrokeThickness="3" Height="65" Margin="-20" Stroke="Black"  Width="90" />
+                        <Image x:Name="ImgUserDefinedColors" Height="65" Margin="0" Source="/Assets/ColorPicker/icon_color_chooser_tab_rgba_light_theme.png" Stretch="None" Visibility="Visible" Width="90" />
+                        <Rectangle x:Name="rectUserDefinedColors" StrokeThickness="3" Height="65" Margin="-20" Stroke="Gray"  Width="90" RequestedTheme="Light" />
                     </Grid>
                 </Button>
             </Grid>
@@ -210,9 +210,9 @@
 
             </Grid>
 
-            <Button x:Name="BtnSelectedColor" BorderThickness="3" Click="BtnSelectedColor_OnClick"
+            <Button x:Name="BtnSelectedColor" BorderBrush="Gray" BorderThickness="3" Click="BtnSelectedColor_OnClick"
                             Height="75" HorizontalAlignment="Center" Margin="0,520,0,0" Padding="0,0,0,0" Width="350">
-                <Grid x:Name="GrdButtonSelectedColor" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350">
+                <Grid x:Name="GrdButtonSelectedColor"  Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350">
                     <Image x:Name="ImgTransparence"  Height="60" Margin="0,0,0,0" Source="/Assets/checkeredbgWXGA.png" Stretch="None" Visibility="Visible" Width="350" />
                     <Rectangle x:Name="RecSelectedColor" Fill="Black" Height="60" Margin="0,0,0,0" Visibility="Visible" Width="350"/>
                     <TextBox x:Name="TbFertig" Background="Transparent" BorderThickness="0" Foreground="White" IsHitTestVisible="False" Text="Fertig" Visibility="Visible" Width="75" />
