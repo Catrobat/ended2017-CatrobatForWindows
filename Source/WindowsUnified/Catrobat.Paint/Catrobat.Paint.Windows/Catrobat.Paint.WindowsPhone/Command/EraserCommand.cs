@@ -14,7 +14,6 @@ namespace Catrobat.Paint.WindowsPhone.Command
             _points = points;
         }
 
-
         public override bool ReDo()
         {
             PocketPaintApplication.GetInstance().ToolCurrent.Draw(_points);

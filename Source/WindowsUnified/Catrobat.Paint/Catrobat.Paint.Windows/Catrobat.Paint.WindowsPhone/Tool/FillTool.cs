@@ -21,20 +21,26 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         }
 
-        public async override void HandleUp(object arg)
+        public override void HandleUp(object arg)
+        {
+            if (!(arg is Point))
+            {
+                return;
+            }
+            Point coordinate = (Point)arg;
+            fillSpace(coordinate);
+            CommandManager.GetInstance().CommitCommand(new FillCommand(coordinate));
+        }
+
+        async public void fillSpace(Point coordinate)
         {
             try
             {
-                if (!(arg is Point))
-                {
-                    return;
-                }
-                Point coordinates = (Point)arg;
                 PocketPaintApplication.GetInstance().ProgressRing.IsActive = true;
                 PixelData.PixelData pixelData = new PixelData.PixelData();
                 await pixelData.preparePaintingAreaCanvasPixel();
                 Catrobat.Paint.WindowsPhone.Ui.Spinner.StartSpinning();
-                if (pixelData.FloodFill4(coordinates, PocketPaintApplication.GetInstance().PaintData.colorSelected) == false)
+                if (pixelData.FloodFill4(coordinate, PocketPaintApplication.GetInstance().PaintData.colorSelected) == false)
                 {
                     Catrobat.Paint.WindowsPhone.Ui.Spinner.StopSpinning();
                     return;
@@ -42,12 +48,10 @@ namespace Catrobat.Paint.WindowsPhone.Tool
                 Catrobat.Paint.WindowsPhone.Ui.Spinner.StopSpinning();
                 await pixelData.PixelBufferToBitmap();
                 PocketPaintApplication.GetInstance().ProgressRing.IsActive = false;
-                CommandManager.GetInstance().CommitCommand(new FillCommand(pixelData));
-
             }
-            catch (Exception)
+            catch(Exception exception)
             {
-                return;
+                System.Diagnostics.Debug.WriteLine(exception.StackTrace);
             }
         }
 
@@ -56,9 +60,14 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             
         }
 
-        public override void Draw(object o)
+        public override void Draw(object obj)
         {
-            
+            if (!(obj is Point))
+            {
+                return;
+            }
+            Point coordinate = (Point)obj;
+            fillSpace(coordinate);
         }
 
         public override void ResetDrawingSpace()
