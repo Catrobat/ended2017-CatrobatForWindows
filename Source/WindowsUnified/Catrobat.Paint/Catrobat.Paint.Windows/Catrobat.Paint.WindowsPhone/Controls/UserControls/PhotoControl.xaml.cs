@@ -32,7 +32,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public sealed partial class PhotoControl : UserControl
     {
-        Windows.Media.Capture.MediaCapture _photoManager = null;
+        Windows.Media.Capture.MediaCapture _captureManager = null;
         MediaCaptureInitializationSettings _mediaCaptureSettings = null;
         int activeCameraValue = 0;
         bool isPreview = false;
@@ -55,19 +55,19 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             setMediaCaptureInitializationSettings();
             // reset all properties if photoManager contains an object.
-            if(_photoManager != null)
+            if (_captureManager != null)
             {
-                _photoManager.Dispose();
-                _photoManager = null;
+                _captureManager.Dispose();
+                _captureManager = null;
             }
-            _photoManager = new MediaCapture();
-            await _photoManager.InitializeAsync(getMediaCaptureInitializationSettings());
-            _photoManager.SetRecordRotation(VideoRotation.Clockwise90Degrees);
+            _captureManager = new MediaCapture();
+            await _captureManager.InitializeAsync(getMediaCaptureInitializationSettings());
+            _captureManager.SetRecordRotation(VideoRotation.Clockwise90Degrees);
             // Element is in xaml (is needed to show the camera preview).
-            cptElementShowPreview.Source = _photoManager;
-            cptElementShowPreview.FlowDirection = activeCamera == FRONT_CAMERA ? 
+            cptElementShowPreview.Source = _captureManager;
+            cptElementShowPreview.FlowDirection = activeCamera == FRONT_CAMERA ?
                 FlowDirection.RightToLeft : FlowDirection.LeftToRight;
-            await _photoManager.StartPreviewAsync();
+            await _captureManager.StartPreviewAsync();
 
             DisplayInformation displayInfo = DisplayInformation.GetForCurrentView();
             displayInfo.OrientationChanged += DisplayInfo_OrientationChanged;
@@ -77,18 +77,18 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         private void DisplayInfo_OrientationChanged(DisplayInformation sender, object args)
         {
-            if (_photoManager != null)
+            if (_captureManager != null)
             {
-                if(activeCamera == FRONT_CAMERA)
+                if (activeCamera == FRONT_CAMERA)
                 {
-                    _photoManager.SetPreviewRotation(VideoRotationLookup(sender.CurrentOrientation, true));
+                    _captureManager.SetPreviewRotation(VideoRotationLookup(sender.CurrentOrientation, true));
                 }
                 else
                 {
-                    _photoManager.SetPreviewRotation(VideoRotationLookup(sender.CurrentOrientation, false));
+                    _captureManager.SetPreviewRotation(VideoRotationLookup(sender.CurrentOrientation, false));
                 }
                 var rotation = VideoRotationLookup(sender.CurrentOrientation, false);
-                _photoManager.SetRecordRotation(rotation);
+                _captureManager.SetRecordRotation(rotation);
             }
         }
 
@@ -116,7 +116,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
         public MediaCaptureInitializationSettings getMediaCaptureInitializationSettings()
         {
-                return _mediaCaptureSettings;
+            return _mediaCaptureSettings;
         }
 
         public void setMediaCaptureInitializationSettings()
@@ -132,35 +132,59 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         async private void btnTakePhoto_Click(object sender, RoutedEventArgs e)
         {
             ImageEncodingProperties imgFormat = ImageEncodingProperties.CreateJpeg();
-            // a file for photo saving
-            StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(
-                    "photo.jpg", CreationCollisionOption.ReplaceExisting);
-            await _photoManager.CapturePhotoToStorageFileAsync(imgFormat, file);
-            _photoManager.SetRecordRotation(VideoRotation.Clockwise90Degrees);
-            ImageBrush fillBrush = new ImageBrush();
 
-            
-            BitmapImage image = new BitmapImage();
-            image.UriSource = new Uri(file.Path, UriKind.RelativeOrAbsolute);
-            
-            fillBrush.ImageSource = image;
+            // TODO: If option replace existing is selected then the replacement
+            // doesnt work
+            StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(
+                    "photo.jpg", CreationCollisionOption.GenerateUniqueName);
+            await _captureManager.CapturePhotoToStorageFileAsync(imgFormat, file);
+
+            ImageBrush imageBrush = new ImageBrush();
+
+            BitmapImage biCapturedPhoto = new BitmapImage();
+            biCapturedPhoto.UriSource = new Uri(file.Path, UriKind.RelativeOrAbsolute);
+
+            imageBrush.ImageSource = biCapturedPhoto;
             if (PocketPaintApplication.GetInstance().isLoadPictureClicked)
             {
                 RectangleGeometry myRectangleGeometry = new RectangleGeometry();
-                myRectangleGeometry.Rect = new Rect(new Point(0, 0), new Point(Window.Current.Bounds.Width, Window.Current.Bounds.Height));
+                myRectangleGeometry.Rect = new Rect(new Point(0, 0), new Point(Window.Current.Bounds.Height, Window.Current.Bounds.Width));
 
+                RotateTransform rotate = new RotateTransform();
+                ScaleTransform scaleTranssform = new ScaleTransform();
+                TransformGroup transformGroup = new TransformGroup();
                 Path _path = new Path();
-                _path.Fill = fillBrush;
-                _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
 
+                // HACK: Is needed to align the captured photo.
+                if (activeCamera == FRONT_CAMERA)
+                {
+                    rotate.Angle = -90;
+                    scaleTranssform.ScaleX = -1;
+                    Canvas.SetLeft(_path, PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width);
+                    Canvas.SetTop(_path, PocketPaintApplication.GetInstance().PaintingAreaCanvas.Height);
+                
+                    transformGroup.Children.Add(rotate);
+                    transformGroup.Children.Add(scaleTranssform);
+                }
+                else
+                {
+                    rotate.Angle = 90;
+                    transformGroup.Children.Add(rotate);
+                    Canvas.SetLeft(_path, PocketPaintApplication.GetInstance().PaintingAreaCanvas.Width);
+                }
+
+                _path.Fill = imageBrush;
+                _path.Stroke = PocketPaintApplication.GetInstance().PaintData.strokeColorSelected;
+                _path.RenderTransform = transformGroup;
                 _path.Data = myRectangleGeometry;
+
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
                 PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(_path);
                 CommandManager.GetInstance().CommitCommand(new LoadPictureCommand(_path));
             }
             else
             {
-                PocketPaintApplication.GetInstance().ImportImageSelectionControl.imageSourceOfRectangleToDraw = fillBrush;
+                PocketPaintApplication.GetInstance().ImportImageSelectionControl.imageSourceOfRectangleToDraw = imageBrush;
                 PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Black, 0.5);
             }
             closePhoneControl(sender, e);
@@ -177,9 +201,8 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
             PocketPaintApplication.GetInstance().PaintingAreaView.BottomAppBar.Visibility = Visibility.Visible;
             PocketPaintApplication.GetInstance().AppbarTop.Visibility = Visibility.Visible;
 
-            //await _photoManager.StopPreviewAsync();
-            _photoManager.Dispose();
-            _photoManager = null;
+            _captureManager.Dispose();
+            _captureManager = null;
         }
 
         public int activeCamera
@@ -197,7 +220,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         async private void btnChangeCamera_Click(object sender, RoutedEventArgs e)
         {
             AppBarButton button = sender as AppBarButton;
-            if(button != null)
+            if (button != null)
             {
                 BitmapIcon icon = new BitmapIcon();
                 icon.UriSource = activeCamera != FRONT_CAMERA ?
@@ -208,9 +231,9 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
 
             if (isPreview)
             {
-                await _photoManager.StopPreviewAsync();
+                await _captureManager.StopPreviewAsync();
             }
-            _photoManager.Dispose();
+            _captureManager.Dispose();
             changeCamera();
             initPhotoControl();
         }
@@ -234,7 +257,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
                 if (sldBrightness != null)
                 {
                     sldBrightness.Value = sldBrightness.Value > 100 ? 100 : sldBrightness.Value;
-                    bool succeeded = _photoManager.VideoDeviceController.Brightness.TrySetValue(sldBrightness.Value);
+                    bool succeeded = _captureManager.VideoDeviceController.Brightness.TrySetValue(sldBrightness.Value);
                     if (!succeeded)
                     {
                         //ShowStatusMessage("Set Brightness failed");
@@ -255,7 +278,7 @@ namespace Catrobat.Paint.WindowsPhone.Controls.UserControls
         {
             try
             {
-                bool succeeded = _photoManager.VideoDeviceController.Contrast.TrySetValue(sldContrast.Value);
+                bool succeeded = _captureManager.VideoDeviceController.Contrast.TrySetValue(sldContrast.Value);
                 if (!succeeded)
                 {
                     //ShowStatusMessage("Set Brightness failed");
