@@ -278,35 +278,27 @@ namespace Catrobat.Paint.WindowsPhone.PixelData
             }
         }
 
-        public int SetPixel(Point p, string color)
+        public void SetPixel(Point p, string color)
         {
             int intTemp;
             int intXTemp;
             int intValue;
-
             try
             {
-                intTemp = ((int)p.Y) * pixelWidthCanvas;
-                intXTemp = intTemp + ((int)p.X);
+                intTemp = ((int)p.Y - 1) * pixelWidthCanvas;
+                intXTemp = intTemp + ((int)p.X - 1);
                 intValue = intXTemp * 4;
 
                 var argb = color.Split('_');
 
-                if (intValue + 3 <= pixelsCanvas.Length)
-                {
-                    pixelsCanvas[intValue + 3] = Convert.ToByte(argb[0]);
-                    pixelsCanvas[intValue + 2] = Convert.ToByte(argb[1]);
-                    pixelsCanvas[intValue + 1] = Convert.ToByte(argb[2]);
-                    pixelsCanvas[intValue] = Convert.ToByte(argb[3]);
-                }
-                else
-                    return -1;
-
-                return 0;
+                pixelsCanvas[intValue + 3] = Convert.ToByte(argb[0]);
+                pixelsCanvas[intValue + 2] = Convert.ToByte(argb[1]);
+                pixelsCanvas[intValue + 1] = Convert.ToByte(argb[2]);
+                pixelsCanvas[intValue] = Convert.ToByte(argb[3]);
             }
             catch (Exception)
             {
-                return -1;
+                return;
             }
         }
 
