@@ -20,88 +20,22 @@ namespace Catrobat.Paint.WindowsPhone.Command
 {
     class FillCommand : CommandBase
     {
-        private byte[] _oldCanvas { get; set; }
-        private byte[] _newCanvas { get; set; }
-        private int _width;
-        private int _height;
-        private PixelData.PixelData _pD { get; set; }
-        public FillCommand(PixelData.PixelData pD)
+        Point _coordinate;
+        public FillCommand(Point coordinate)
         {
             ToolType = ToolType.Fill;
-            _oldCanvas = pD.oldPixles;
-            _newCanvas = pD.pixelsCanvas;
-            _width = pD.pixelHeightCanvas;
-            _height = pD.pixelWidthCanvas;
-            _pD = pD;
+            _coordinate = coordinate;
         }
 
         public override bool ReDo()
         {
-            try
-            {
-                //PerformRedo();
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            PocketPaintApplication.GetInstance().ToolCurrent.Draw(_coordinate);
             return true;
         }
 
         public  override bool UnDo()
         {
-            try
-            {
-                //PerformUndo();
-            }
-            catch (Exception)
-            {
-                return false;
-            }
             return true;
-        }
-
-        public async void PerformUndo() 
-        {
-            try
-            {
-                _oldCanvas = _pD.ConvertArray(_oldCanvas, _width, _height);
-                var wbCroppedBitmap = new WriteableBitmap(PocketPaintApplication.GetInstance().Bitmap.PixelWidth, PocketPaintApplication.GetInstance().Bitmap.PixelHeight);
-                await wbCroppedBitmap.PixelBuffer.AsStream().WriteAsync(_oldCanvas, 0, _oldCanvas.Length);
-
-                Image image = new Image();
-                image.Source = wbCroppedBitmap;
-                image.Height = wbCroppedBitmap.PixelHeight;
-                image.Width = wbCroppedBitmap.PixelWidth;
-                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
-                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
-                return;
-            }
-            catch (Exception)
-            {
-                return;
-            }
-        }
-        public async void PerformRedo()
-        {
-            try
-            {
-                _newCanvas = _pD.ConvertArray(_newCanvas, _width, _height);
-                var wbCroppedBitmap = new WriteableBitmap(PocketPaintApplication.GetInstance().Bitmap.PixelWidth, PocketPaintApplication.GetInstance().Bitmap.PixelHeight);
-                await wbCroppedBitmap.PixelBuffer.AsStream().WriteAsync(_newCanvas, 0, _newCanvas.Length);
-
-                Image image = new Image();
-                image.Source = wbCroppedBitmap;
-                image.Height = wbCroppedBitmap.PixelHeight;
-                image.Width = wbCroppedBitmap.PixelWidth;
-                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Clear();
-                PocketPaintApplication.GetInstance().PaintingAreaCanvas.Children.Add(image);
-                return;
-            }
-            catch (Exception)
-            {
-                return;
-            }
         }
     }
 }
