@@ -125,5 +125,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public override void ResetDrawingSpace()
         {
         }
+
+        public override void ResetUsedElements()
+        {
+        }
     }
 }

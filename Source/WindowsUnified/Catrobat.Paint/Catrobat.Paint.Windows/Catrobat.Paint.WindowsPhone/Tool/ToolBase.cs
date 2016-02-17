@@ -23,6 +23,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         public abstract void ResetDrawingSpace();
 
+        public abstract void ResetUsedElements();
+
         public ToolType GetToolType()
         {
             return ToolType;

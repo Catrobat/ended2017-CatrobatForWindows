@@ -225,6 +225,11 @@ namespace Catrobat.Paint.WindowsPhone
             }
             ToolWhileMoveTool = null;
 
+            if(ToolCurrent != null)
+            {
+                ToolCurrent.ResetUsedElements();
+            }
+
             switch (toolType)
             {
                 case ToolType.Brush:

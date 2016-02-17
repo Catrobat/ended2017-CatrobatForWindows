@@ -183,25 +183,31 @@ namespace Catrobat.Paint.WindowsPhone.View
             TranslateTransform tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = new TranslateTransform();
             TranslateTransform tfMiddlePointOfGridWorkingSpaceToGlobalMiddlePoint = new TranslateTransform();
             tfLeftTopCornerOfGridWorkingSpaceToNullPoint = CreateTranslateTransform(tgGridWorkingSpace.Value.OffsetX * (-1), tgGridWorkingSpace.Value.OffsetY *(-1));
+
+            double offsetToCenterWorkingSpace = 0;
             if (angularDegreeOfWorkingSpaceRotation == 0)
             {
+                offsetToCenterWorkingSpace = 11;
                 tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform(((GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX) * (-1),
-                                                                                            ((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY) * (-1));
+                                                                                            ((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY) * (-1) - offsetToCenterWorkingSpace);
             }
             else if (angularDegreeOfWorkingSpaceRotation == 90)
             {
+                offsetToCenterWorkingSpace = 5.5;
                 tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY,
-                                                                                            ((GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX) * (-1));
+                                                                                            ((GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX) * (-1) - 5.5);
             }
             else if (angularDegreeOfWorkingSpaceRotation == 180)
             {
+                offsetToCenterWorkingSpace = 11;
                 tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform((GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX,
-                                                                                            ((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY));
+                                                                                            ((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY) - offsetToCenterWorkingSpace);
             }
             else if (angularDegreeOfWorkingSpaceRotation == 270)
             {
+                offsetToCenterWorkingSpace = 5.5;
                 tfMiddlePointOfGridWorkingSpaceToGlobalNullPoint = CreateTranslateTransform(((GridWorkingSpace.Height / 2.0) * toScaleValue.ScaleY) *(-1),
-                                                                            (GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX);
+                                                                            (GridWorkingSpace.Width / 2.0) * toScaleValue.ScaleX - offsetToCenterWorkingSpace);
             }
             tfMiddlePointOfGridWorkingSpaceToGlobalMiddlePoint = CreateTranslateTransform((Window.Current.Bounds.Width / 2.0), (Window.Current.Bounds.Height / 2.0));
 

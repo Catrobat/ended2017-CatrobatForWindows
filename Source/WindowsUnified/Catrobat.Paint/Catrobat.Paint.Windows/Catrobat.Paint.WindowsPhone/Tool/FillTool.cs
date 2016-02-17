@@ -75,5 +75,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
 
         }
 
+        public override void ResetUsedElements()
+        {
+        }
+
     }
 }

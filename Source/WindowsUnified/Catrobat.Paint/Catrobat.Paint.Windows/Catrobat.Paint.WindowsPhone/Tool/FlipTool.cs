@@ -141,5 +141,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateArrange();
             PocketPaintApplication.GetInstance().PaintingAreaCanvas.InvalidateMeasure();
         }
+
+        public override void ResetUsedElements()
+        {
+        }
     }
 }

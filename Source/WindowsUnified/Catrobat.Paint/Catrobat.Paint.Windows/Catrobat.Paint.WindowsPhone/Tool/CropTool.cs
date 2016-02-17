@@ -52,5 +52,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             PocketPaintApplication.GetInstance().CropControl.SetCropSelection();
             PocketPaintApplication.GetInstance().CropControl.SetIsModifiedRectangleMovement = false;
         }
+
+        public override void ResetUsedElements()
+        {
+        }
     }
 }

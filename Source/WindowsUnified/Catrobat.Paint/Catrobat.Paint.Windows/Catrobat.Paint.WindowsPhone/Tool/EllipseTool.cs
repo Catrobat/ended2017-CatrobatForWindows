@@ -128,5 +128,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             PocketPaintApplication.GetInstance().EllipseSelectionControl.resetEllipseSelectionControl();
         }
+
+        public override void ResetUsedElements()
+        {
+        }
     }
 }

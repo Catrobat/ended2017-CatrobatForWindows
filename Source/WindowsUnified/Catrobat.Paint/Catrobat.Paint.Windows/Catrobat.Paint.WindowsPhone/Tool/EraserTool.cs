@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Windows.Foundation;
 using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 
@@ -160,6 +161,11 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         public override void ResetDrawingSpace()
         {
             throw new NotImplementedException();
+        }
+
+        public override void ResetUsedElements()
+        {
+            PocketPaintApplication.GetInstance().EraserCanvas.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -90,6 +90,7 @@ namespace Catrobat.Paint.WindowsPhone.View
                     bool enableEdgeTypes = false;
                     PocketPaintApplication.GetInstance().PaintingAreaView.changeBackgroundColorAndOpacityOfPaintingAreaCanvas(Colors.Transparent, 1.0);
                     pocketPaintApplication.PaintingAreaView.resetControls();
+
                     switch (((Button)sender).Name)
                     {
                         case "BtnBrush":
@@ -101,9 +102,6 @@ namespace Catrobat.Paint.WindowsPhone.View
                             pocketPaintApplication.SwitchTool(ToolType.Crop);
                             pocketPaintApplication.CropControl.Visibility = Visibility;
                             pocketPaintApplication.CropControl.SetCropSelection();
-                            //pocketPaintApplication.GridCropControl.Visibility = Visibility.Visible;
-                            //pocketPaintApplication.GridCropControl.Children.Clear();
-                            //pocketPaintApplication.GridCropControl.Children.Add(new CropControl());
                             break;
                         case "BtnCursor":
                             pocketPaintApplication.SwitchTool(ToolType.Cursor);
