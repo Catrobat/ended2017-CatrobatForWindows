@@ -188,5 +188,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             height = PocketPaintApplication.GetInstance().GridWorkingSpace.ActualHeight / 2.0;
             width = PocketPaintApplication.GetInstance().GridWorkingSpace.ActualWidth / 2.0;
         }
+
+        public override void ResetUsedElements()
+        {
+        }
     }
 }

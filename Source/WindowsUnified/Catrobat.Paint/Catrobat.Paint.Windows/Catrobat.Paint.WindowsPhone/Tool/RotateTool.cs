@@ -91,5 +91,8 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             rotationTransformGroupForCommand.Children.Add(rotateTransform);
             CommandManager.GetInstance().CommitCommand(new RotateCommand(rotationTransformGroupForCommand, PocketPaintApplication.GetInstance().angularDegreeOfWorkingSpaceRotation, rotationDirection));
         }
+        public override void ResetUsedElements()
+        {
+        }
     }
 }

@@ -48,5 +48,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             throw new NotImplementedException();
         }
+
+        public override void ResetUsedElements()
+        {
+        }
     }
 }

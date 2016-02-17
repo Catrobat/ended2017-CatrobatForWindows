@@ -126,5 +126,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
         {
             //PocketPaintApplication.GetInstance().RectangleSelectionControl.resetRectangleSelectionControl();
         }
+
+        public override void ResetUsedElements()
+        {
+        }
     }
 }

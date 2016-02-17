@@ -198,5 +198,9 @@ namespace Catrobat.Paint.WindowsPhone.Tool
             }
             _transforms.Children.Add(currentTransform);
         }
+
+        public override void ResetUsedElements()
+        {
+        }
     }
 }
