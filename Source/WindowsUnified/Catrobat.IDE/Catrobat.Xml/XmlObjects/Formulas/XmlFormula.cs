@@ -31,10 +31,7 @@ namespace Catrobat.IDE.Core.Xml.XmlObjects.Formulas
                 foreach (XElement xElement in elements)
                 {
                     if (buffer != null) //to enshure, that only the first element is taken - which should be the only one
-                    {
-                        buffer = null;
                         break;
-                    }
 
                     else if (xElement.Attribute(XmlConstants.Category).Value == formulaCategory)
                     {
